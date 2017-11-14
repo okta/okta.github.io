@@ -1,0 +1,972 @@
+<!doctype html>
+<!--[if lt IE 7 ]> <html class="ie6 no-flexbox"> <![endif]-->
+<!--[if IE 7 ]>    <html class="ie7 no-flexbox"> <![endif]-->
+<!--[if IE 8 ]>    <html class="ie8 no-flexbox"> <![endif]-->
+<!--[if IE 9 ]>    <html class="ie9 no-flexbox"> <![endif]-->
+<!--[if IE 10 ]>    <html class="ie10 no-flexbox"> <![endif]-->
+<!--[if (gt IE 10)|!(IE)]><!--> <html class="modern wf-loading" lang="en"> <!--<![endif]-->
+  <head>
+  <script>
+    var searchDomain = 'https://developer.okta.com';
+    var isProduction = window.location.hostname === 'developer.okta.com';
+    if (isProduction) {
+      // TypeKit
+      (function(d) {
+        var config = {
+          kitId: 'jff5neq',
+          scriptTimeout: 3000,
+          async: true
+        },
+        h=d.documentElement,t=setTimeout(function(){h.className=h.className.replace(/bwf-loadingb/g,"")+" wf-inactive";},config.scriptTimeout),tk=d.createElement("script"),f=false,s=d.getElementsByTagName("script")[0],a;h.className+=" wf-loading";tk.src='https://use.typekit.net/'+config.kitId+'.js';tk.async=true;tk.onload=tk.onreadystatechange=function(){a=this.readyState;if(f||a&&a!="complete"&&a!="loaded")return;f=true;clearTimeout(t);try{Typekit.load(config)}catch(e){}};s.parentNode.insertBefore(tk,s)
+      })(document);
+
+      // Google analytics
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+              (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+              m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+      ga('create', 'UA-15777010-3', 'auto');
+      ga('send', 'pageview');
+
+      // START Google Tag Manager
+      (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+      new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+      j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+      '//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+      })(window,document,'script','dataLayer','GTM-TJ45R6');
+      // END Google Tag Manager
+    }
+	</script>
+  <meta charset="utf-8">
+  <meta http-equiv="x-ua-compatible" content="IE=edge,chrome=1">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+ 	
+
+  <link type="text/css" rel="stylesheet" href="https://developer.okta.com/sites/all/themes/developer/css/master.css" media="all" />
+  <meta class="swiftype" name="title" data-type="string" content="Build an Ionic App with User Authentication | Okta Developer" />
+  <meta class="swiftype" name="summary" data-type="string" content="With Okta and OpenID Connect (OIDC) you can easily integrate authentication into an Ionic application, and never have to build it yourself again. OIDC allows..." />
+
+  <link type="text/css" rel="stylesheet" href="/assets/animate-ec43d72c3ed45e08a460b8a2966d8dba6006aebfa0530935c3973fa493a8771f.css">
+  <link type="text/css" rel="stylesheet" href="/assets/okta-a96df4c9d48b78b618e1d541f46f7137d73d40653571e020c1ad59edd7915c60.css">
+  
+  
+  <title>Build an Ionic App with User Authentication | Okta Developer</title>
+  <meta name="description" content="With Okta and OpenID Connect (OIDC) you can easily integrate authentication into an Ionic application, and never have to build it yourself again. OIDC allows...">
+  <link rel="canonical" href="https://developer.okta.com/blog/2017/08/22/build-an-ionic-app-with-user-authentication"  data-proofer-ignore>
+  <link rel="alternate" type="application/rss+xml" title="Okta Developer" href="https://developer.okta.com/feed.xml"><!-- GA -->
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+  <link rel="manifest" href="/manifest.json">
+  <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#21313a">
+  <meta name="theme-color" content="#ffffff">
+</head>
+
+  
+    <body id="blog">
+	
+
+
+
+
+<header class="Header is-fixed">
+
+  <div class="Wrap">
+
+    <a class="Logo" href="https://developer.okta.com">
+      <svg version="1.1" id="OktaLogo" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 431.9 151.4" style="enable-background:new 0 0 431.9 151.4;" xml:space="preserve"><g><g><g><path d="M102.2,41.4c-21,0-38.1,17.1-38.1,38.1s17.1,38.1,38.1,38.1s38.1-17.1,38.1-38.1l0,0C140.3,58.5,123.2,41.4,102.2,41.4z M102.2,98.5c-10.5,0-19-8.5-19-19s8.5-19,19-19s19,8.5,19,19c0.1,10.5-8.4,19-18.9,19.1C102.3,98.6,102.2,98.6,102.2,98.5L102.2,98.5z"/><path d="M169.1,92.3c0-1.9,1.5-3.4,3.4-3.4c0.9,0,1.8,0.4,2.4,1c9.5,9.7,25.3,26.3,25.4,26.4c0.4,0.5,0.8,0.8,1.4,0.9l1.6,0.2h17.2c1.8,0,3.3-1.4,3.4-3.2c0-0.8-0.3-1.5-0.8-2.2l-28.6-29.2l-1.5-1.5c-3.2-3.9-2.9-5.4,0.8-9.3l22.6-25.1c1.1-1.4,0.8-3.5-0.6-4.6c-0.6-0.4-1.3-0.7-2-0.7h-17c-0.6,0.2-1.1,0.5-1.5,0.9L175,64.4c-1.3,1.4-3.4,1.5-4.8,0.2c-0.7-0.6-1.1-1.5-1.1-2.5V18.9c0-1.7-1.3-3-3-3c-0.1,0-0.2,0-0.3,0h-12.7c-2.2,0-3.3,1.5-3.3,2.8v95.8c0,2.2,1.8,2.8,3.3,2.8h12.7c1.7,0.1,3.2-1.2,3.3-2.9c0,0,0,0,0,0V92.3z"/><path d="M273,114l-1.4-12.8c-0.2-1.7-1.7-2.9-3.4-2.7c0,0,0,0-0.1,0l-2.9,0.2c-10.1,0-18.5-7.9-19-18c0-0.3,0-0.7,0-1V64.2c-0.1-2,1.5-3.6,3.5-3.7c0,0,0,0,0,0h17c1.7-0.1,3.1-1.5,3-3.2c0,0,0-0.1,0-0.1v-12c0-2.3-1.5-3.6-2.8-3.6h-17.1c-1.9,0.1-3.5-1.5-3.6-3.4c0,0,0,0,0,0V18.9c-0.1-1.7-1.5-3.1-3.2-3c0,0-0.1,0-0.1,0h-12.7c-1.6-0.1-3,1.1-3.1,2.7c0,0.1,0,0.1,0,0.2c0,0,0,61.7,0,62c0.5,21,17.9,37.6,38.9,37c1.4,0,2.9-0.2,4.3-0.3C272,117.2,273.2,115.7,273,114z"/></g><path d="M364.7,98c-10.8,0-12.4-3.8-12.4-18.3l0,0V44.8c0-1.8-1.4-3.2-3.2-3.2c0,0-0.1,0-0.1,0h-12.8c-1.8,0-3.2,1.4-3.3,3.2v1.6C314.6,36,291.3,42.5,281,60.8c-10.4,18.3-3.9,41.6,14.4,51.9c14,7.9,31.4,6.2,43.5-4.2c3.6,5.5,9.3,9.1,18.3,9.1c1.5,0,9.7,0.3,9.7-3.5v-13.6C367,99.2,366,98.1,364.7,98z M314.2,98.6c-10.5,0-19-8.5-19-19s8.5-19,19-19s19,8.5,19,19l0,0C333.2,90.1,324.7,98.6,314.2,98.6z"/></g><path d="M19.4,74c2.2-1.9,4.1-4.1,5.7-6.6c3.5-5.3,5.4-11.5,5.2-17.9V27c0-4.9,0.9-8.4,2.7-10.5c1.8-2.1,4.8-3,9.2-3h12.6c1.2,0,2.1-0.9,2.2-2.1l0,0V2.2C57,1,56,0,54.8,0c0,0,0,0,0,0H41.5c-7.8,0-12.9,2.1-18,7.6s-7.1,12.3-7.1,21.7v14.2c0,2.2-0.1,4-0.2,5.7v2.2c-0.5,3.2-1.8,6.2-3.6,8.9C9.4,64.7,5.1,70.9,0.9,74l0,0l-0.3,0.3l0,0l-0.2,0.3H0.2v0.3l0,0c-0.1,0.3-0.1,0.7,0,1l0,0v0.3h0.1l0.2,0.3l0,0l0.3,0.3l0,0c4.2,3.1,8.5,9.3,11.3,13.7c1.8,2.7,3.1,5.7,3.6,8.9v2.2c0.1,1.6,0.2,3.5,0.2,5.7v14.3c0,9.4,2.4,16.7,7.1,21.7s10.2,7.6,18,7.6h13.8c1.2,0,2.2-1,2.2-2.2V140l0,0c0-1.2-1-2.2-2.2-2.2H42.2c-4.4,0-7.5-1-9.2-3s-2.7-5.6-2.7-10.5v-22.4c0.2-6.4-1.7-12.6-5.2-17.9c-1.6-2.5-3.5-4.7-5.7-6.6l0,0c-0.9-0.7-1.1-2-0.4-2.9C19.2,74.3,19.3,74.2,19.4,74L19.4,74z"/><path d="M412.5,74c-2.2-1.9-4.1-4.1-5.7-6.6c-3.5-5.3-5.4-11.5-5.2-17.9V27c0-4.9-0.9-8.4-2.7-10.5s-4.8-3-9.2-3h-12.6c-1.2,0-2.2-1-2.2-2.2c0,0,0,0,0,0l0,0V2.2c0-1.2,1-2.2,2.2-2.2c0,0,0,0,0,0h13.4c7.8,0,12.9,2.1,18,7.6s7.1,12.3,7.1,21.7v14.2c0,2.2,0.1,4,0.2,5.7v2.2c0.5,3.2,1.8,6.2,3.6,8.9c2.8,4.5,7.1,10.7,11.3,13.7l0,0l0.3,0.3l0,0l0.2,0.3h0.1v0.3l0,0c0.1,0.3,0.1,0.7,0,1l0,0v0.3h-0.1l-0.2,0.3l0,0l-0.3,0.3l0,0c-4.2,3.1-8.5,9.3-11.3,13.7c-1.8,2.7-3.1,5.7-3.6,8.9v2.2c-0.1,1.6-0.2,3.5-0.2,5.7v14.3c0,9.4-2.4,16.7-7.1,21.7s-10.2,7.6-18,7.6h-13.4c-1.2,0-2.2-1-2.2-2.2c0,0,0,0,0,0V140l0,0c0-1.2,1-2.2,2.2-2.2l0,0h12.7c4.4,0,7.5-1,9.2-3s2.7-5.6,2.7-10.5v-22.4c-0.2-6.3,1.6-12.6,5.1-17.9c1.6-2.5,3.5-4.7,5.7-6.6l0,0c0.9-0.7,1.1-2,0.4-2.9C412.7,74.3,412.6,74.2,412.5,74L412.5,74z"/></g></svg>
+    </a>
+
+    <nav class="Header-nav PrimaryNav">
+      <ul class="menu">
+        <li class="first leaf">
+          <a href="https://developer.okta.com/product/">Product</a>
+        </li>
+        <li class="leaf">
+          <a href="https://developer.okta.com/pricing/">Pricing</a>
+        </li>
+        <li class="leaf">
+          <a href="/blog/" class="active">Blog</a>
+        </li>
+        <li class="leaf">
+          <a href="/documentation/">Docs</a>
+        </li>
+        <li class="last expanded">
+          <span class="nolink">Support</span>
+          <ul class="menu">
+            <li class="first leaf"><a href="https://devforum.okta.com/">Okta Developer Forums</a></li>
+            <li class="last leaf"><a href="mailto:developers@okta.com">developers@okta.com</a></li>
+          </ul>
+        </li>
+      </ul>
+      <a class="PrimaryNav-toggle" href="#">
+        <svg width="20px" height="20px" viewBox="0 0 20 20" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+            <g class="MenuIcon" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="round">
+                <path d="M1,16 L19,16" class="MenuIcon-line1" stroke="#FFFFFF" stroke-width="2"></path>
+                <path d="M1,4 L19,4" class="MenuIcon-line2" stroke="#FFFFFF" stroke-width="2"></path>
+                <path d="M1,10 L19,10" class="MenuIcon-line3" stroke="#FFFFFF" stroke-width="2"></path>
+                <path d="M1,10 L19,10" class="MenuIcon-line4" stroke="#FFFFFF" stroke-width="2"></path>
+            </g>
+        </svg>
+        <svg class="CloseIcon" width="16px" height="16px" viewBox="0 0 16 16" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+          <g id="ALl-Boards" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+            <g id="Desktop" transform="translate(-915.000000, -235.000000)" fill="#FFFFFF">
+              <g id="Search-bar-Active" transform="translate(30.000000, 26.000000)">
+                <polygon id="Icon/Cross" points="901 210.6 899.4 209 893 215.4 886.6 209 885 210.6 891.4 217 885 223.4 886.6 225 893 218.6 899.4 225 901 223.4 894.6 217"></polygon>
+              </g>
+            </g>
+          </g>
+        </svg>
+      </a>
+
+      <div class="PrimaryNav-cta">
+        <a target="_blank" rel="noopener noreferrer" href="https://login.okta.com/?SAMLRequest=fc%2B7CsJAEAXQXvAflu1NNJUMeZBGELTx1a%2FrYILJTtyZGD%2FfSBRiYzlw77lMnD3rSj3Qc0ku0YtgrhU6S5fSXRN9PKxmS52l00nMpq6iBvJWCrfDe4ss6vStRe9aDzmGIZfo1jsgwyWDMzUyiIV9vt1AH4XGk5ClSvewUgMNa%2BYW%2FVj5jxhm9NLP67QQaSAMu64L6CYmsFSHlnzT4ZlLwTgcL6Sf8%2FeX9AU%3Dhttps://login.okta.com/?SAMLRequest=fc%2B7CsJAEAXQXvAflu1NNJUMeZBGELTx1a%2FrYILJTtyZGD%2FfSBRiYzlw77lMnD3rSj3Qc0ku0YtgrhU6S5fSXRN9PKxmS52l00nMpq6iBvJWCrfDe4ss6vStRe9aDzmGIZfo1jsgwyWDMzUyiIV9vt1AH4XGk5ClSvewUgMNa%2BYW%2FVj5jxhm9NLP67QQaSAMu64L6CYmsFSHlnzT4ZlLwTgcL6Sf8%2FeX9AU%3D" class="Button--redOutline">Login</a>
+        <a href="https://developer.okta.com/signup/" class="Button--red">Sign up</a>
+      </div>
+
+      <a class="SearchIcon" href="#"></a>
+      <form id="form_search" class="SearchBar Formisimo_clocked_69929" method="get" action="https://developer.okta.com/search/" name="form_search" __bizdiag="-784164280" __biza="WJ__">
+        <input type="text" name="stq" autocomplete="off" id="st-search-input-auto" class="st-search-input" placeholder="Search">
+        <input type="submit" name="submit" value="GO">
+      </form>
+
+    </nav>
+
+  </div>
+
+</header>
+
+	<div class="page-content">
+		
+
+
+
+
+
+
+<section class="Blog is-single">
+		
+	<div class="Blog-social">
+		
+		<a href="https://github.com/mraible" target="_blank"><i class="fa fa-github"></i></a>
+		
+		
+		<a href="https://twitter.com/mraible" target="_blank"><i class="fa fa-twitter"></i></a>
+		
+		
+		
+		<a href="http://raibledesigns.com" target="_blank"><i class="fa fa-external-link"></i></a>
+		
+	</div>
+	
+	
+
+<article class="BlogPost">
+	
+	<header class="BlogPost-header">
+	
+		<time class="BlogPost-date" datetime="2017-08-22">August 22, 2017</time>
+		
+		<h1 class="BlogPost-title">
+			
+			Build an Ionic App with User Authentication
+			
+		</h1>
+		
+		<div class="BlogPost-attribution">
+			
+				<img src="/assets/avatar-matt_raible-9974af6192eb1753b7137c8fff0a2c6e6bb9736a2517986cb5cc50bb040e83d4.jpg" alt="avatar-matt_raible.jpg" class="BlogPost-avatar">
+			
+			<span class="BlogPost-author">Matt Raible</span>
+		</div>
+	
+	</header>
+	
+	<div class="BlogPost-content">
+		
+	<p>With Okta and OpenID Connect (OIDC) you can easily integrate authentication into an Ionic application, and never have to build it yourself again. OIDC allows you to authenticate directly against the <a href="/">Okta API</a>, and this article shows you how to do just that in an Ionic application. I’ll demo how to log in with OIDC redirect, using Okta’s Auth SDK, and using OAuth with Cordova’s in-app browser; user registration is omitted as the feature is still under active development.</p>
+
+<h2 id="why-ionic">Why Ionic?</h2>
+
+<p>Ionic is an open source mobile SDK for developing native and progressive web applications. It leverages Angular and <a href="https://cordova.apache.org/">Apache Cordova</a> to allow you to build mobile apps with HTML, CSS, and JavaScript. Apache Cordova embeds the HTML code inside a native WebView on the device, using a foreign function interface to access the native resources of it. You might’ve heard of <a href="http://phonegap.com/">PhoneGap</a> - this is Adobe’s commercial version of Cordova.</p>
+
+<p>Cordova and PhoneGap allow you to target multiple platforms (e.g. Android and iOS) with one codebase. Not only that, but the apps look like native apps and perform just as well. If you need to tap into native features that aren’t available in web technologies, there are a number of native plugins. <a href="https://ionicframework.com/docs/native/">Ionic Native</a> is a curated set of these plugins.</p>
+
+<p>I first started using Ionic in late 2013. The project I was working on was developing a native application, but wanted to build several screens of the application with HTML so web developers could author them. I <a href="https://raibledesigns.com/rd/entry/developing_an_ios_native_app">wrote about my experience in March 2014</a>. I enjoyed working with it and found that porting an existing app to use it was more about modifying HTML and tweaking CSS.</p>
+
+<p>Ionic 2 was <a href="http://blog.ionic.io/announcing-ionic-2-0-0-final/">released in January</a>, making it possible to develop Ionic applications with Angular. Ionic 3 was <a href="http://blog.ionic.io/ionic-3-0-has-arrived/">released in April</a>, allowing development with Angular 4.</p>
+
+<p><strong>NOTE:</strong> “Angular” is the common name for Angular 2+. AngularJS is the common name for the 1.x versions. The reason for #ItsJustAngular is Angular 4 was released in March 2017. See <a href="http://angularjs.blogspot.com/2017/01/branding-guidelines-for-angular-and.html">Branding Guidelines for Angular and AngularJS</a> for more information.</p>
+
+<p>This article will show you how to build a simple Ionic application and add user authentication to it. Most applications require authentication, so they know who the user is. Once an app knows who you are, it can save your data and better personalization features.</p>
+
+<h2 id="get-started-with-ionic">Get Started with Ionic</h2>
+<p>To set up your environment to develop with Ionic, complete the following steps:</p>
+
+<ol>
+  <li>Install <a href="https://nodejs.org">Node.js</a></li>
+  <li>Install Ionic and Cordova using npm: <code class="highlighter-rouge">npm install -g cordova ionic</code></li>
+</ol>
+
+<h2 id="create-an-ionic-application">Create an Ionic Application</h2>
+<p>From a terminal window, create a new application using the following command:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>ionic start ionic-auth
+</code></pre>
+</div>
+
+<p>You will be prompted to select a starter project and optionally link your app to your Ionic Dashboard. For this tutorial, choose the <strong>tabs</strong> starter project and do not connect the app to your Ionic Dashboard.</p>
+
+<p>Project creation may take a minute or two to complete, depending on your internet connection speed. Run the commands below to start your Ionic application.</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>cd ionic-auth
+ionic serve
+</code></pre>
+</div>
+
+<p>This command will open your default browser on http://localhost:8100. You can use Chrome’s device toolbar to see what the application will look like on an iPhone 6.</p>
+
+<p><img src="/assets/blog/ionic-authentication/welcome-to-ionic-2de4557f99caa03e895380b0627547e82d8b7a365301745c231d8be9ccde9738.png" alt="Welcome to Ionic" /></p>
+
+<p>One slick feature of Ionic’s <code class="highlighter-rouge">serve</code> command is it shows compilation errors in the browser, rather than in the (sometimes hidden) developer console. For example, if you give an invalid type to the <code class="highlighter-rouge">rootPage</code> variable in <code class="highlighter-rouge">app.component.ts</code>, you’ll see an error like the one below.</p>
+
+<p><img src="/assets/blog/ionic-authentication/typescript-error-8cae045f9dcd9160d3ed4ae07aeed07845a858d2db1360bc156142f789ac161d.png" alt="TypeScript Error" /></p>
+
+<h2 id="add-user-authentication">Add User Authentication</h2>
+<p>Ionic Cloud offers a free <a href="https://docs.ionic.io/services/auth/">Auth</a> service. It allows authentication with an email and password, as well as social providers like Facebook, Google, and Twitter. It provides several classes you can use to build authentication in its <code class="highlighter-rouge">@ionic/cloud-angular</code> dependency. It even has support <a href="https://docs.ionic.io/services/auth/custom-auth.html">custom authentication</a>, but it “requires your own server to handle authentication” and will be decommissioned on January 31, 2018.</p>
+
+<p>While there aren’t many current tutorials on using this service, there are a few from last year.</p>
+
+<ul>
+  <li>Simon Reimler’s <a href="https://devdactic.com/login-ionic-2/">Simple Ionic 2 Login with Angular 2</a></li>
+  <li>Raymond Camden’s <a href="https://www.raymondcamden.com/2016/11/04/an-example-of-the-ionic-auth-service-with-ionic-2">An example of the Ionic Auth service with Ionic 2</a></li>
+  <li>Josh Morony’s <a href="https://www.joshmorony.com/using-json-web-tokens-jwt-for-custom-authentication-in-ionic-2-part-2/">Using JSON Web Tokens (JWT) for Custom Authentication in Ionic 2: Part 2</a></li>
+</ul>
+
+<p>You might notice that both tutorials require quite a bit of code. Also, there doesn’t seem to be a lot of documentation on how you can verify user credentials from the Auth service in a backend service.</p>
+
+<p><a name="create-open-id-connect-app"></a></p>
+<h2 id="create-an-openid-connect-app-in-okta">Create an OpenID Connect App in Okta</h2>
+
+<p>OpenID Connect (OIDC) builds on top of the OAuth 2.0 protocol. It allows clients to verify the identity of the user and obtain their basic profile information. To integrate Okta’s Identity Platform for user authentication, you’ll first need to:</p>
+
+<ul>
+  <li><a href="https://developer.okta.com/signup/">Register</a> and create an OIDC application</li>
+  <li>Log in to your Okta account and navigate to <strong>Applications &gt; Add Application</strong></li>
+  <li>Select <strong>SPA</strong> and click <strong>Next</strong></li>
+  <li>Give your application a name (e.g. “Ionic OIDC”)</li>
+  <li>Change the <strong>Base URI</strong> and <strong>Login redirect URI</strong> to <code class="highlighter-rouge">http://localhost:8100</code> and click <strong>Done</strong>. You should see settings like the following:</li>
+</ul>
+
+<p><img src="/assets/blog/ionic-authentication/oidc-settings-46747e5e9af164cf56d05f055a659520252558872d9319cadd831d5e7104b990.png" alt="Okta OIDC Settings" width="800" /></p>
+
+<h2 id="create-a-login-page">Create a Login Page</h2>
+
+<p>To make a login page for authentication, create <code class="highlighter-rouge">src/pages/login/login.ts</code> and <code class="highlighter-rouge">src/pages/login/login.html</code>. In <code class="highlighter-rouge">login.html</code>, add a form with username and password fields.</p>
+
+<div class="language-html highlighter-rouge"><pre class="highlight"><code><span class="nt">&lt;ion-header&gt;</span>
+  <span class="nt">&lt;ion-navbar&gt;</span>
+    <span class="nt">&lt;ion-title&gt;</span>
+      Login
+    <span class="nt">&lt;/ion-title&gt;</span>
+  <span class="nt">&lt;/ion-navbar&gt;</span>
+<span class="nt">&lt;/ion-header&gt;</span>
+<span class="nt">&lt;ion-content</span> <span class="na">padding</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;form</span> <span class="err">#</span><span class="na">loginForm=</span><span class="s">"ngForm"</span> <span class="err">(</span><span class="na">ngSubmit</span><span class="err">)="</span><span class="na">login</span><span class="err">()"</span> <span class="na">autocomplete=</span><span class="s">"off"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;ion-row&gt;</span>
+      <span class="nt">&lt;ion-col&gt;</span>
+        <span class="nt">&lt;ion-list</span> <span class="na">inset</span><span class="nt">&gt;</span>
+          <span class="nt">&lt;ion-item&gt;</span>
+            <span class="nt">&lt;ion-input</span> <span class="na">placeholder=</span><span class="s">"Email"</span> <span class="na">name=</span><span class="s">"username"</span> <span class="na">id=</span><span class="s">"loginField"</span>
+                       <span class="na">type=</span><span class="s">"text"</span> <span class="na">required</span> <span class="err">[(</span><span class="na">ngModel</span><span class="err">)]="</span><span class="na">username</span><span class="err">"</span> <span class="err">#</span><span class="na">email</span><span class="nt">&gt;&lt;/ion-input&gt;</span>
+          <span class="nt">&lt;/ion-item&gt;</span>
+          <span class="nt">&lt;ion-item&gt;</span>
+            <span class="nt">&lt;ion-input</span> <span class="na">placeholder=</span><span class="s">"Password"</span> <span class="na">name=</span><span class="s">"password"</span> <span class="na">id=</span><span class="s">"passwordField"</span>
+                       <span class="na">type=</span><span class="s">"password"</span> <span class="na">required</span> <span class="err">[(</span><span class="na">ngModel</span><span class="err">)]="</span><span class="na">password</span><span class="err">"</span><span class="nt">&gt;&lt;/ion-input&gt;</span>
+          <span class="nt">&lt;/ion-item&gt;</span>
+        <span class="nt">&lt;/ion-list&gt;</span>
+      <span class="nt">&lt;/ion-col&gt;</span>
+    <span class="nt">&lt;/ion-row&gt;</span>
+    <span class="nt">&lt;ion-row&gt;</span>
+      <span class="nt">&lt;ion-col&gt;</span>
+        <span class="nt">&lt;div</span> <span class="err">*</span><span class="na">ngIf=</span><span class="s">"error"</span> <span class="na">class=</span><span class="s">"alert alert-danger"</span><span class="nt">&gt;</span>{{error}}<span class="nt">&lt;/div&gt;</span>
+        <span class="nt">&lt;button</span> <span class="na">ion-button</span> <span class="na">class=</span><span class="s">"submit-btn"</span> <span class="na">full</span> <span class="na">type=</span><span class="s">"submit"</span>
+                <span class="err">[</span><span class="na">disabled</span><span class="err">]="!</span><span class="na">loginForm</span><span class="err">.</span><span class="na">form</span><span class="err">.</span><span class="na">valid</span><span class="err">"</span><span class="nt">&gt;</span>Login
+        <span class="nt">&lt;/button&gt;</span>
+      <span class="nt">&lt;/ion-col&gt;</span>
+    <span class="nt">&lt;/ion-row&gt;</span>
+  <span class="nt">&lt;/form&gt;</span>
+<span class="nt">&lt;/ion-content&gt;</span>
+</code></pre>
+</div>
+
+<p>You can leverage a couple of open source libraries to perform the actual authentication. The first one is <a href="https://github.com/manfredsteyer">Manfred Steyer’s</a> <a href="https://github.com/manfredsteyer/angular-oauth2-oidc">angular-oauth2-oidc</a>. This library allows you to interact with identity and access tokens easily. The second is the <a href="/code/javascript/okta_auth_sdk">Okta Auth SDK</a>. <a href="/blog/2017/06/21/what-the-heck-is-oauth">OAuth is not an authentication protocol</a>, but OIDC is. Why is it necessary to add Okta’s authentication library then? Because OIDC authentication works via redirect (when using in a SPA) and I’d rather perform authentication without redirecting to Okta.</p>
+
+<p>Install <code class="highlighter-rouge">angular-oauth2-oidc</code> and the Okta Auth SDK using npm.</p>
+
+<div class="language-bash highlighter-rouge"><pre class="highlight"><code>npm install angular-oauth2-oidc@1.0.20 @okta/okta-auth-js --save
+</code></pre>
+</div>
+
+<p>In <code class="highlighter-rouge">src/pages/login/login.ts</code>, add the basic structure of the <code class="highlighter-rouge">LoginPage</code> class and a constructor that configures your OIDC settings with the <code class="highlighter-rouge">OAuthService</code> from angular-oauth2-oidc. You will need to replace “[client-id]” with the Client ID from your Okta OIDC settings and “[dev-id]” with your account’s correct URI.</p>
+
+<div class="language-typescript highlighter-rouge"><pre class="highlight"><code><span class="k">import</span> <span class="p">{</span> <span class="nx">Component</span><span class="p">,</span> <span class="nx">ViewChild</span> <span class="p">}</span> <span class="k">from</span> <span class="s1">'@angular/core'</span><span class="p">;</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">NavController</span> <span class="p">}</span> <span class="k">from</span> <span class="s1">'ionic-angular'</span><span class="p">;</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">OAuthService</span> <span class="p">}</span> <span class="k">from</span> <span class="s1">'angular-oauth2-oidc'</span><span class="p">;</span>
+<span class="k">import</span> <span class="nx">OktaAuth</span> <span class="k">from</span> <span class="s1">'@okta/okta-auth-js'</span><span class="p">;</span>
+
+<span class="err">@</span><span class="nx">Component</span><span class="p">({</span>
+  <span class="na">selector</span><span class="p">:</span> <span class="s1">'page-login'</span><span class="p">,</span>
+  <span class="na">templateUrl</span><span class="p">:</span> <span class="s1">'login.html'</span>
+<span class="p">})</span>
+<span class="k">export</span> <span class="kr">class</span> <span class="nx">LoginPage</span> <span class="p">{</span>
+  <span class="err">@</span><span class="nx">ViewChild</span><span class="p">(</span><span class="s1">'email'</span><span class="p">)</span> <span class="nx">email</span><span class="err">:</span> <span class="kr">any</span><span class="p">;</span>
+  <span class="k">private</span> <span class="nx">username</span><span class="err">:</span> <span class="kr">string</span><span class="p">;</span>
+  <span class="k">private</span> <span class="nx">password</span><span class="err">:</span> <span class="kr">string</span><span class="p">;</span>
+  <span class="k">private</span> <span class="nx">error</span><span class="err">:</span> <span class="kr">string</span><span class="p">;</span>
+
+  <span class="kd">constructor</span><span class="p">(</span><span class="k">private</span> <span class="nx">navCtrl</span><span class="err">:</span> <span class="nx">NavController</span><span class="p">,</span> <span class="k">private</span> <span class="nx">oauthService</span><span class="err">:</span> <span class="nx">OAuthService</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">oauthService</span><span class="p">.</span><span class="nx">redirectUri</span> <span class="o">=</span> <span class="nb">window</span><span class="p">.</span><span class="nx">location</span><span class="p">.</span><span class="nx">origin</span><span class="p">;</span>
+    <span class="nx">oauthService</span><span class="p">.</span><span class="nx">clientId</span> <span class="o">=</span> <span class="s1">'[client-id]'</span><span class="p">;</span>
+    <span class="nx">oauthService</span><span class="p">.</span><span class="nx">scope</span> <span class="o">=</span> <span class="s1">'openid profile email'</span><span class="p">;</span>
+    <span class="nx">oauthService</span><span class="p">.</span><span class="nx">issuer</span> <span class="o">=</span> <span class="s1">'https://dev-[dev-id].oktapreview.com/oauth2/default'</span><span class="p">;</span>
+  <span class="p">}</span>
+
+  <span class="nx">ionViewDidLoad</span><span class="p">()</span><span class="err">:</span> <span class="k">void</span> <span class="p">{</span>
+    <span class="nx">setTimeout</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+      <span class="k">this</span><span class="p">.</span><span class="nx">email</span><span class="p">.</span><span class="nx">setFocus</span><span class="p">();</span>
+    <span class="p">},</span> <span class="mi">500</span><span class="p">);</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre>
+</div>
+
+<p>Modify <code class="highlighter-rouge">src/app/app.component.ts</code> to check to see if the user is logged in. If they’re not, set the <code class="highlighter-rouge">LoginPage</code> as the rootPage.</p>
+
+<div class="language-typescript highlighter-rouge"><pre class="highlight"><code><span class="k">import</span> <span class="p">{</span> <span class="nx">Component</span> <span class="p">}</span> <span class="k">from</span> <span class="s1">'@angular/core'</span><span class="p">;</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">Platform</span> <span class="p">}</span> <span class="k">from</span> <span class="s1">'ionic-angular'</span><span class="p">;</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">StatusBar</span> <span class="p">}</span> <span class="k">from</span> <span class="s1">'@ionic-native/status-bar'</span><span class="p">;</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">SplashScreen</span> <span class="p">}</span> <span class="k">from</span> <span class="s1">'@ionic-native/splash-screen'</span><span class="p">;</span>
+
+<span class="k">import</span> <span class="p">{</span> <span class="nx">TabsPage</span> <span class="p">}</span> <span class="k">from</span> <span class="s1">'../pages/tabs/tabs'</span><span class="p">;</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">OAuthService</span> <span class="p">}</span> <span class="k">from</span> <span class="s1">'angular-oauth2-oidc'</span><span class="p">;</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">LoginPage</span> <span class="p">}</span> <span class="k">from</span> <span class="s1">'../pages/login/login'</span><span class="p">;</span>
+
+<span class="err">@</span><span class="nx">Component</span><span class="p">({</span>
+  <span class="na">templateUrl</span><span class="p">:</span> <span class="s1">'app.html'</span>
+<span class="p">})</span>
+<span class="k">export</span> <span class="kr">class</span> <span class="nx">MyApp</span> <span class="p">{</span>
+  <span class="nl">rootPage</span><span class="p">:</span> <span class="kr">any</span> <span class="o">=</span> <span class="nx">TabsPage</span><span class="p">;</span>
+
+  <span class="kd">constructor</span><span class="p">(</span><span class="nx">platform</span><span class="err">:</span> <span class="nx">Platform</span><span class="p">,</span> <span class="nx">statusBar</span><span class="err">:</span> <span class="nx">StatusBar</span><span class="p">,</span> <span class="nx">splashScreen</span><span class="err">:</span> <span class="nx">SplashScreen</span><span class="p">,</span>
+              <span class="nx">oauthService</span><span class="err">:</span> <span class="nx">OAuthService</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nx">oauthService</span><span class="p">.</span><span class="nx">hasValidIdToken</span><span class="p">())</span> <span class="p">{</span>
+      <span class="k">this</span><span class="p">.</span><span class="nx">rootPage</span> <span class="o">=</span> <span class="nx">TabsPage</span><span class="p">;</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+      <span class="k">this</span><span class="p">.</span><span class="nx">rootPage</span> <span class="o">=</span> <span class="nx">LoginPage</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="nx">platform</span><span class="p">.</span><span class="nx">ready</span><span class="p">().</span><span class="nx">then</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+      <span class="nx">statusBar</span><span class="p">.</span><span class="nx">styleDefault</span><span class="p">();</span>
+      <span class="nx">splashScreen</span><span class="p">.</span><span class="nx">hide</span><span class="p">();</span>
+    <span class="p">});</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre>
+</div>
+
+<p>Update <code class="highlighter-rouge">src/app/app.module.ts</code> to add <code class="highlighter-rouge">LoginPage</code> to its <code class="highlighter-rouge">declarations</code> and <code class="highlighter-rouge">entryComponents</code>. You’ll also need to add <code class="highlighter-rouge">OAuthService</code> to its <code class="highlighter-rouge">providers</code>.</p>
+
+<div class="language-typescript highlighter-rouge"><pre class="highlight"><code><span class="k">import</span> <span class="p">{</span> <span class="nx">LoginPage</span> <span class="p">}</span> <span class="k">from</span> <span class="s1">'../pages/login/login'</span><span class="p">;</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">OAuthService</span> <span class="p">}</span> <span class="k">from</span> <span class="s1">'angular-oauth2-oidc'</span><span class="p">;</span>
+
+<span class="err">@</span><span class="nx">NgModule</span><span class="p">({</span>
+  <span class="na">declarations</span><span class="p">:</span> <span class="p">[</span>
+    <span class="p">...</span>
+    <span class="nx">LoginPage</span>
+  <span class="p">],</span>
+  <span class="p">...</span>
+  <span class="na">entryComponents</span><span class="p">:</span> <span class="p">[</span>
+    <span class="p">...</span>
+    <span class="nx">LoginPage</span>
+  <span class="p">],</span>
+  <span class="na">providers</span><span class="p">:</span> <span class="p">[</span>
+    <span class="nx">OAuthService</span><span class="p">,</span>
+    <span class="p">...</span>
+  <span class="p">]</span>
+<span class="p">})</span>
+</code></pre>
+</div>
+
+<p>Run <code class="highlighter-rouge">ionic serve</code> to make sure the <code class="highlighter-rouge">LoginPage</code> is displayed when the app first loads. You’ll see the following error when the app tries to load:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>No provider for Http!
+</code></pre>
+</div>
+
+<p>This error happens because <code class="highlighter-rouge">OAuthService</code> has a dependency on Angular’s <code class="highlighter-rouge">Http</code>, but it hasn’t been imported into your project. Add <code class="highlighter-rouge">HttpModule</code> as an import in <code class="highlighter-rouge">src/app/app.module.ts</code>.</p>
+
+<div class="language-typescript highlighter-rouge"><pre class="highlight"><code><span class="k">import</span> <span class="p">{</span> <span class="nx">HttpModule</span> <span class="p">}</span> <span class="k">from</span> <span class="s1">'@angular/http'</span><span class="p">;</span>
+
+<span class="err">@</span><span class="nx">NgModule</span><span class="p">({</span>
+  <span class="p">...</span>
+  <span class="na">imports</span><span class="p">:</span> <span class="p">[</span>
+    <span class="nx">BrowserModule</span><span class="p">,</span>
+    <span class="nx">HttpModule</span><span class="p">,</span>
+    <span class="nx">IonicModule</span><span class="p">.</span><span class="nx">forRoot</span><span class="p">(</span><span class="nx">MyApp</span><span class="p">)</span>
+  <span class="p">],</span>
+  <span class="p">...</span>
+<span class="p">})</span>
+</code></pre>
+</div>
+
+<p>Now the login screen should load. You can use Chrome’s Device Toolbar to see what it’ll look like on an iPhone 6.</p>
+
+<p><img src="/assets/blog/ionic-authentication/login-page-3091baa708880a862442451fddb4d2e746ac4b7dad9a77db1b6099b8b28e8261.png" alt="Login Page" /></p>
+
+<p>Add a <code class="highlighter-rouge">login()</code> method in <code class="highlighter-rouge">src/app/pages/login/login.ts</code> that uses the Okta Auth SDK to 1) login and 2) exchange the session token for an identity and access token. An <a href="https://openid.net/specs/openid-connect-core-1_0.html#IDToken">ID token</a> is similar to an identity card, in standard JWT format, signed by the OpenID Provider. Access tokens are part of the OAuth specification. An access token can be a JWT. They are used to access protected resources, often by setting them as an <code class="highlighter-rouge">Authentication</code> header when making a request.</p>
+
+<div class="language-typescript highlighter-rouge"><pre class="highlight"><code><span class="k">import</span> <span class="p">{</span> <span class="nx">TabsPage</span> <span class="p">}</span> <span class="k">from</span> <span class="s1">'../tabs/tabs'</span><span class="p">;</span>
+<span class="p">...</span>
+<span class="nx">login</span><span class="p">()</span><span class="err">:</span> <span class="k">void</span> <span class="p">{</span>
+  <span class="k">this</span><span class="p">.</span><span class="nx">oauthService</span><span class="p">.</span><span class="nx">createAndSaveNonce</span><span class="p">().</span><span class="nx">then</span><span class="p">(</span><span class="nx">nonce</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="kd">const</span> <span class="nx">authClient</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">OktaAuth</span><span class="p">({</span>
+      <span class="na">clientId</span><span class="p">:</span> <span class="k">this</span><span class="p">.</span><span class="nx">oauthService</span><span class="p">.</span><span class="nx">clientId</span><span class="p">,</span>
+      <span class="na">redirectUri</span><span class="p">:</span> <span class="k">this</span><span class="p">.</span><span class="nx">oauthService</span><span class="p">.</span><span class="nx">redirectUri</span><span class="p">,</span>
+      <span class="na">url</span><span class="p">:</span> <span class="s1">'https://dev-[dev-id].oktapreview.com'</span><span class="p">,</span>
+      <span class="na">issuer</span><span class="p">:</span> <span class="k">this</span><span class="p">.</span><span class="nx">oauthService</span><span class="p">.</span><span class="nx">issuer</span>
+    <span class="p">});</span>
+    <span class="k">return</span> <span class="nx">authClient</span><span class="p">.</span><span class="nx">signIn</span><span class="p">({</span>
+      <span class="na">username</span><span class="p">:</span> <span class="k">this</span><span class="p">.</span><span class="nx">username</span><span class="p">,</span>
+      <span class="na">password</span><span class="p">:</span> <span class="k">this</span><span class="p">.</span><span class="nx">password</span>
+    <span class="p">}).</span><span class="nx">then</span><span class="p">((</span><span class="nx">response</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+      <span class="k">if</span> <span class="p">(</span><span class="nx">response</span><span class="p">.</span><span class="nx">status</span> <span class="o">===</span> <span class="s1">'SUCCESS'</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="nx">authClient</span><span class="p">.</span><span class="nx">token</span><span class="p">.</span><span class="nx">getWithoutPrompt</span><span class="p">({</span>
+          <span class="na">nonce</span><span class="p">:</span> <span class="nx">nonce</span><span class="p">,</span>
+          <span class="na">responseType</span><span class="p">:</span> <span class="p">[</span><span class="s1">'id_token'</span><span class="p">,</span> <span class="s1">'token'</span><span class="p">],</span>
+          <span class="na">sessionToken</span><span class="p">:</span> <span class="nx">response</span><span class="p">.</span><span class="nx">sessionToken</span><span class="p">,</span>
+          <span class="na">scopes</span><span class="p">:</span> <span class="k">this</span><span class="p">.</span><span class="nx">oauthService</span><span class="p">.</span><span class="nx">scope</span><span class="p">.</span><span class="nx">split</span><span class="p">(</span><span class="s1">' '</span><span class="p">)</span>
+        <span class="p">})</span>
+          <span class="p">.</span><span class="nx">then</span><span class="p">((</span><span class="nx">tokens</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+            <span class="c1">// oauthService.processIdToken doesn't set an access token</span>
+            <span class="c1">// set it manually so oauthService.authorizationHeader() works</span>
+            <span class="nx">localStorage</span><span class="p">.</span><span class="nx">setItem</span><span class="p">(</span><span class="s1">'access_token'</span><span class="p">,</span> <span class="nx">tokens</span><span class="p">[</span><span class="mi">1</span><span class="p">].</span><span class="nx">accessToken</span><span class="p">);</span>
+            <span class="k">this</span><span class="p">.</span><span class="nx">oauthService</span><span class="p">.</span><span class="nx">processIdToken</span><span class="p">(</span><span class="nx">tokens</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="nx">idToken</span><span class="p">,</span> <span class="nx">tokens</span><span class="p">[</span><span class="mi">1</span><span class="p">].</span><span class="nx">accessToken</span><span class="p">);</span>
+            <span class="k">this</span><span class="p">.</span><span class="nx">navCtrl</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="nx">TabsPage</span><span class="p">);</span>
+          <span class="p">});</span>
+      <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+        <span class="k">throw</span> <span class="k">new</span> <span class="nb">Error</span><span class="p">(</span><span class="s1">'We cannot handle the '</span> <span class="o">+</span> <span class="nx">response</span><span class="p">.</span><span class="nx">status</span> <span class="o">+</span> <span class="s1">' status'</span><span class="p">);</span>
+      <span class="p">}</span>
+    <span class="p">}).</span><span class="nx">fail</span><span class="p">((</span><span class="nx">error</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+      <span class="nx">console</span><span class="p">.</span><span class="nx">error</span><span class="p">(</span><span class="nx">error</span><span class="p">);</span>
+      <span class="k">this</span><span class="p">.</span><span class="nx">error</span> <span class="o">=</span> <span class="nx">error</span><span class="p">.</span><span class="nx">message</span><span class="p">;</span>
+    <span class="p">});</span>
+  <span class="p">});</span>
+<span class="p">}</span>
+</code></pre>
+</div>
+
+<p>You want an identity token so you can have more information about the user. You want an access token so you can use it to access protected APIs that require a Bearer token. For example, in <a href="/blog/2017/06/13/add-authentication-angular-pwa">Adding Authentication to Your Angular PWA</a>, there’s a <code class="highlighter-rouge">BeerService</code> that sends an access token when it makes an API request.</p>
+
+<div class="language-typescript highlighter-rouge"><pre class="highlight"><code><span class="k">import</span> <span class="p">{</span> <span class="nx">Injectable</span> <span class="p">}</span> <span class="k">from</span> <span class="s1">'@angular/core'</span><span class="p">;</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">Http</span><span class="p">,</span> <span class="nx">Response</span><span class="p">,</span> <span class="nx">Headers</span><span class="p">,</span> <span class="nx">RequestOptions</span> <span class="p">}</span> <span class="k">from</span> <span class="s1">'@angular/http'</span><span class="p">;</span>
+<span class="k">import</span> <span class="s1">'rxjs/add/operator/map'</span><span class="p">;</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">Observable</span> <span class="p">}</span> <span class="k">from</span> <span class="s1">'rxjs'</span><span class="p">;</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">OAuthService</span> <span class="p">}</span> <span class="k">from</span> <span class="s1">'angular-oauth2-oidc'</span><span class="p">;</span>
+
+<span class="err">@</span><span class="nx">Injectable</span><span class="p">()</span>
+<span class="k">export</span> <span class="kr">class</span> <span class="nx">BeerService</span> <span class="p">{</span>
+
+  <span class="kd">constructor</span><span class="p">(</span><span class="k">private</span> <span class="nx">http</span><span class="err">:</span> <span class="nx">Http</span><span class="p">,</span> <span class="k">private</span> <span class="nx">oauthService</span><span class="err">:</span> <span class="nx">OAuthService</span><span class="p">)</span> <span class="p">{</span>
+  <span class="p">}</span>
+
+  <span class="nx">getAll</span><span class="p">()</span><span class="err">:</span> <span class="nx">Observable</span><span class="o">&lt;</span><span class="kr">any</span><span class="o">&gt;</span> <span class="p">{</span>
+    <span class="kd">const</span> <span class="na">headers</span><span class="p">:</span> <span class="nx">Headers</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Headers</span><span class="p">();</span>
+    <span class="nx">headers</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="s1">'Authorization'</span><span class="p">,</span> <span class="k">this</span><span class="p">.</span><span class="nx">oauthService</span><span class="p">.</span><span class="nx">authorizationHeader</span><span class="p">());</span>
+
+    <span class="kd">let</span> <span class="nx">options</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">RequestOptions</span><span class="p">({</span> <span class="na">headers</span><span class="p">:</span> <span class="nx">headers</span> <span class="p">});</span>
+
+    <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">http</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">'http://localhost:8080/good-beers'</span><span class="p">,</span> <span class="nx">options</span><span class="p">)</span>
+      <span class="p">.</span><span class="nx">map</span><span class="p">((</span><span class="na">response</span><span class="p">:</span> <span class="nx">Response</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="nx">response</span><span class="p">.</span><span class="nx">json</span><span class="p">());</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre>
+</div>
+
+<p>You can (optionally), pretty up the login screen by adding a logo above the form. Download <a href="https://www.okta.com/sites/all/themes/Okta/images/blog/Logos/Okta_Logo_BrightBlue_Medium.png">this image</a>, copy it to <code class="highlighter-rouge">src/assets/image/okta.png</code>, and add the following above the <code class="highlighter-rouge">&lt;form&gt;</code> tag in <code class="highlighter-rouge">login.html</code>.</p>
+
+<div class="language-html highlighter-rouge"><pre class="highlight"><code><span class="nt">&lt;ion-row&gt;</span>
+  <span class="nt">&lt;ion-col</span> <span class="na">text-center</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;img</span> <span class="na">src=</span><span class="s">"assets/image/okta.png"</span> <span class="na">width=</span><span class="s">"300"</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;/ion-col&gt;</span>
+<span class="nt">&lt;/ion-row&gt;</span>
+</code></pre>
+</div>
+
+<p>When you sign in, there’s not much proof on the UI. Add a “Logout” button in the top right corner of the home screen. Replace the <code class="highlighter-rouge">&lt;ion-header&gt;</code> in <code class="highlighter-rouge">src/pages/home/home.html</code> with the HTML below.</p>
+
+<div class="language-html highlighter-rouge"><pre class="highlight"><code><span class="nt">&lt;ion-header&gt;</span>
+  <span class="nt">&lt;ion-navbar&gt;</span>
+    <span class="nt">&lt;ion-title&gt;</span>Home<span class="nt">&lt;/ion-title&gt;</span>
+    <span class="nt">&lt;ion-buttons</span> <span class="na">end</span><span class="nt">&gt;</span>
+      <span class="nt">&lt;button</span> <span class="na">ion-button</span> <span class="err">(</span><span class="na">click</span><span class="err">)="</span><span class="na">logout</span><span class="err">()"</span><span class="nt">&gt;</span>
+        Logout
+      <span class="nt">&lt;/button&gt;</span>
+    <span class="nt">&lt;/ion-buttons&gt;</span>
+  <span class="nt">&lt;/ion-navbar&gt;</span>
+<span class="nt">&lt;/ion-header&gt;</span>
+</code></pre>
+</div>
+
+<p>In <code class="highlighter-rouge">src/pages/home/home.ts</code>, add a <code class="highlighter-rouge">logout()</code> method, as well as methods to get a name and claims from the identity token. Claims in an ID token are bits of information about the issuer, the user, intended audience, expiration date, and issue date. You can see the <a href="https://openid.net/specs/openid-connect-core-1_0.html#IDToken">standard claims in the OIDC spec</a>.</p>
+
+<div class="language-typescript highlighter-rouge"><pre class="highlight"><code><span class="k">import</span> <span class="p">{</span> <span class="nx">Component</span> <span class="p">}</span> <span class="k">from</span> <span class="s1">'@angular/core'</span><span class="p">;</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">NavController</span><span class="p">,</span> <span class="nx">App</span> <span class="p">}</span> <span class="k">from</span> <span class="s1">'ionic-angular'</span><span class="p">;</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">LoginPage</span> <span class="p">}</span> <span class="k">from</span> <span class="s1">'../login/login'</span><span class="p">;</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">OAuthService</span> <span class="p">}</span> <span class="k">from</span> <span class="s1">'angular-oauth2-oidc'</span><span class="p">;</span>
+
+<span class="err">@</span><span class="nx">Component</span><span class="p">({</span>
+  <span class="na">selector</span><span class="p">:</span> <span class="s1">'page-home'</span><span class="p">,</span>
+  <span class="na">templateUrl</span><span class="p">:</span> <span class="s1">'home.html'</span>
+<span class="p">})</span>
+<span class="k">export</span> <span class="kr">class</span> <span class="nx">HomePage</span> <span class="p">{</span>
+
+  <span class="kd">constructor</span><span class="p">(</span><span class="k">public</span> <span class="nx">app</span><span class="err">:</span> <span class="nx">App</span><span class="p">,</span> <span class="k">public</span> <span class="nx">navCtrl</span><span class="err">:</span> <span class="nx">NavController</span><span class="p">,</span> <span class="k">public</span> <span class="nx">oauthService</span><span class="err">:</span> <span class="nx">OAuthService</span><span class="p">)</span> <span class="p">{</span>
+  <span class="p">}</span>
+
+  <span class="nx">logout</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">oauthService</span><span class="p">.</span><span class="nx">logOut</span><span class="p">();</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">app</span><span class="p">.</span><span class="nx">getRootNav</span><span class="p">().</span><span class="nx">setRoot</span><span class="p">(</span><span class="nx">LoginPage</span><span class="p">);</span>
+  <span class="p">}</span>
+
+  <span class="nx">get</span> <span class="nx">givenName</span><span class="p">()</span> <span class="p">{</span>
+    <span class="kd">const</span> <span class="nx">claims</span><span class="err">:</span> <span class="kr">any</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">oauthService</span><span class="p">.</span><span class="nx">getIdentityClaims</span><span class="p">();</span>
+    <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">claims</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">return</span> <span class="kc">null</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="nx">claims</span><span class="p">.</span><span class="nx">name</span><span class="p">;</span>
+  <span class="p">}</span>
+
+  <span class="nx">get</span> <span class="nx">claims</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">oauthService</span><span class="p">.</span><span class="nx">getIdentityClaims</span><span class="p">();</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre>
+</div>
+
+<p>To display this information on the home tab, add the following HTML just after the second paragraph in <code class="highlighter-rouge">src/app/home/home.html</code>.</p>
+
+<div class="language-html highlighter-rouge"><pre class="highlight"><code><span class="nt">&lt;div</span> <span class="err">*</span><span class="na">ngIf=</span><span class="s">"givenName"</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;hr&gt;</span>
+  <span class="nt">&lt;p&gt;</span>You are logged in as: <span class="nt">&lt;b&gt;</span>{{ givenName }}<span class="nt">&lt;/b&gt;&lt;/p&gt;</span>
+  <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"claims"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;strong&gt;</span>Claims from Identity Token JWT:<span class="nt">&lt;/strong&gt;</span>
+    <span class="nt">&lt;pre&gt;</span>{{claims | json}}<span class="nt">&lt;/pre&gt;</span>
+  <span class="nt">&lt;/div&gt;</span>
+<span class="nt">&lt;/div&gt;</span>
+</code></pre>
+</div>
+
+<p>Update <code class="highlighter-rouge">src/app/home/home.scss</code> to add some CSS to make the raw JSON look a bit better.</p>
+
+<div class="language-scss highlighter-rouge"><pre class="highlight"><code><span class="nt">page-home</span> <span class="p">{</span>
+  <span class="nc">.claims</span> <span class="p">{</span>
+    <span class="nt">pre</span> <span class="p">{</span>
+      <span class="nl">color</span><span class="p">:</span> <span class="no">green</span><span class="p">;</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+  <span class="nt">pre</span> <span class="p">{</span>
+    <span class="nl">border</span><span class="p">:</span> <span class="m">1px</span> <span class="nb">solid</span> <span class="no">silver</span><span class="p">;</span>
+    <span class="nl">background</span><span class="p">:</span> <span class="mh">#eee</span><span class="p">;</span>
+    <span class="nl">padding</span><span class="p">:</span> <span class="m">10px</span><span class="p">;</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre>
+</div>
+
+<p>Now you should see your name and claims information displayed when you log in.</p>
+
+<p><img src="/assets/blog/ionic-authentication/home-claims-daf6b5729a3b77345b2cc1e9bf9e3077e32b1cafce795fa4e0b8c06f2de4b411.png" alt="Home claims" /></p>
+
+<p>You should also be able to log out and see the login screen with its logo.</p>
+
+<p><img src="/assets/blog/ionic-authentication/login-with-logo-86d82c28b9a0f1e915acd561cc811fa930cc0c009163d20dfd135e7c55a40803.png" alt="Login with logo" /></p>
+
+<h2 id="deploy-to-a-mobile-device">Deploy to a Mobile Device</h2>
+
+<p>It’s pretty cool that you’re able to develop mobile apps with Ionic in your browser. However, it’s nice to see the fruits of your labor and validate how awesome your app looks on a phone. It does look and behave like a native app!</p>
+
+<p>To see how your application will look on different devices you can run <code class="highlighter-rouge">ionic serve --lab</code>. The <code class="highlighter-rouge">--lab</code> flag opens a page in your browser that lets you see how your app will display on various devices.</p>
+
+<p><img src="/assets/blog/ionic-authentication/ionic-labs-af72a6964445850e20e953512d6891e76e3d847194036cc478721fadf8480ff3.png" alt="Ionic labs" /></p>
+
+<p>The <code class="highlighter-rouge">LoginPage</code> tries to auto-focus onto the <code class="highlighter-rouge">email</code> field when it loads. To auto-activate the keyboard you’ll need to tell Cordova it’s OK to display the keyboard without user interaction. You can do this by adding the following to <code class="highlighter-rouge">config.xml</code> in the root directory.</p>
+
+<div class="language-xml highlighter-rouge"><pre class="highlight"><code><span class="nt">&lt;preference</span> <span class="na">name=</span><span class="s">"KeyboardDisplayRequiresUserAction"</span> <span class="na">value=</span><span class="s">"false"</span> <span class="nt">/&gt;</span>
+</code></pre>
+</div>
+<h3 id="ios">iOS</h3>
+
+<p>To emulate or deploy to an iOS device, you’ll need a Mac and a fresh installation of <a href="https://developer.apple.com/xcode/">Xcode</a>. If you’d like to build iOS apps on Windows, Ionic offers an <a href="http://ionic.io/cloud#packaging">Ionic Package</a> service.</p>
+
+<p><strong>Make sure to open Xcode to complete the installation.</strong> Then run <code class="highlighter-rouge">ionic cordova emulate ios</code> to open your app in Simulator.</p>
+
+<p>You may encounter an error like the following:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>** BUILD SUCCEEDED **
+
+Error: Cannot read property 'replace' of undefined
+
+[ERROR] An error occurred while running cordova emulate ios (exit code 1).
+</code></pre>
+</div>
+
+<p>This is a <a href="">known issue</a> and can be solved by running the following commands:</p>
+
+<div class="language-bash highlighter-rouge"><pre class="highlight"><code><span class="nb">cd </span>platforms/ios/cordova <span class="o">&amp;&amp;</span> npm install ios-sim
+</code></pre>
+</div>
+
+<p><strong>TIP:</strong> The biggest problem I found when running the app in Simulator was that it was difficult to get the keyboard to pop up. To workaround this, I used <strong>Hardware</strong> &gt; <strong>Keyboard</strong> &gt; <strong>Toggle Software Keyboard</strong> when I needed to type text in a field.</p>
+
+<p>If you enter your credentials on the login screen you’ll notice nothing happens. Open Safari and navigate to <strong>Develop</strong> &gt; <strong>Simulator</strong> &gt; MyApp / <strong>Login</strong>, and you’ll see that eventually, an error shows up in the console. If you don’t see a Develop menu, review the steps in <a href="https://developer.apple.com/library/content/documentation/IDEs/Conceptual/iOS_Simulator_Guide/GettingStartedwithiOSSimulator/GettingStartedwithiOSSimulator.html">this article</a> to enable it.</p>
+
+<p><img src="/assets/blog/ionic-authentication/webinspector-error-e0926c559701d4b55e965af97dd0dea9e59f4575c3c09e788e15cecc0dc93cc4.png" alt="Web Inspector Error" /></p>
+
+<p>If you use the Network tab, you can see that only one network request is made (to <code class="highlighter-rouge">/authn</code>), which is different than the two requests (to <code class="highlighter-rouge">/authn</code> and <code class="highlighter-rouge">/authorize</code>) that are made when running in a browser.</p>
+
+<p><img src="/assets/blog/ionic-authentication/devtools-network-requests-f8f4f42856ce9d831c7b99ce7044753b3b97c79a2fcbb25af619b20d95dae1a0.png" alt="DevTools Network Requests" /></p>
+
+<p>I believe this doesn’t work when the app is packaged with Cordova because it’s making a request to the server with an embedded iframe that then posts back to the current window using postMessage. It seems that Ionic/Cordova doesn’t support this flow (yet). To work around this issue, you can talk directly to Okta’s OAuth service using an in-app browser that’s provided by Cordova. <a href="https://twitter.com/nraboy">Nic Raboy</a> shows how to do this with Facebook in <a href="https://www.thepolyglotdeveloper.com/2016/01/using-an-oauth-2-0-service-within-an-ionic-2-mobile-app/">Using An OAuth 2.0 Service Within An Ionic 2 Mobile App</a>.</p>
+
+<p>Install the <a href="https://cordova.apache.org/docs/en/latest/reference/cordova-plugin-inappbrowser/">Cordova In-App Browser plugin</a> using the following command:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>ionic cordova plugin add cordova-plugin-inappbrowser
+</code></pre>
+</div>
+
+<p>Open <code class="highlighter-rouge">src/app/pages/login/login.html</code> and wrap the <code class="highlighter-rouge">&lt;form&gt;</code> with a <code class="highlighter-rouge">&lt;div&gt;</code> that only shows this login form when running in a browser. Add a new <code class="highlighter-rouge">&lt;div&gt;</code> that is displayed when running in an emulator or on a device.</p>
+
+<div class="language-html highlighter-rouge"><pre class="highlight"><code><span class="nt">&lt;ion-content</span> <span class="na">padding</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;ion-row&gt;</span>
+   <span class="c">&lt;!-- optional logo --&gt;</span>
+  <span class="nt">&lt;/ion-row&gt;</span>
+  <span class="nt">&lt;div</span> <span class="na">showWhen=</span><span class="s">"core"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;form&gt;</span>
+     ...
+    <span class="nt">&lt;/form&gt;</span>
+  <span class="nt">&lt;/div&gt;</span>
+  <span class="nt">&lt;div</span> <span class="na">hideWhen=</span><span class="s">"core"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;button</span> <span class="na">ion-button</span> <span class="na">full</span> <span class="err">(</span><span class="na">click</span><span class="err">)="</span><span class="na">redirectLogin</span><span class="err">()"</span><span class="nt">&gt;</span>Login with Okta<span class="nt">&lt;/button&gt;</span>
+  <span class="nt">&lt;/div&gt;</span>
+<span class="nt">&lt;/ion-content&gt;</span>
+</code></pre>
+</div>
+
+<p>Open <code class="highlighter-rouge">src/pages/login/login.ts</code> and add a reference to <code class="highlighter-rouge">window</code> just below the imports.</p>
+
+<div class="language-typescript highlighter-rouge"><pre class="highlight"><code><span class="kr">declare</span> <span class="kd">const</span> <span class="nb">window</span><span class="err">:</span> <span class="kr">any</span><span class="p">;</span>
+</code></pre>
+</div>
+
+<p>Then add the methods below to facilitate logging in with OAuth.</p>
+
+<div class="language-typescript highlighter-rouge"><pre class="highlight"><code><span class="nx">redirectLogin</span><span class="p">()</span> <span class="p">{</span>
+  <span class="k">this</span><span class="p">.</span><span class="nx">oktaLogin</span><span class="p">().</span><span class="nx">then</span><span class="p">(</span><span class="nx">success</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="nx">localStorage</span><span class="p">.</span><span class="nx">setItem</span><span class="p">(</span><span class="s1">'access_token'</span><span class="p">,</span> <span class="nx">success</span><span class="p">.</span><span class="nx">access_token</span><span class="p">);</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">oauthService</span><span class="p">.</span><span class="nx">processIdToken</span><span class="p">(</span><span class="nx">success</span><span class="p">.</span><span class="nx">id_token</span><span class="p">,</span> <span class="nx">success</span><span class="p">.</span><span class="nx">access_token</span><span class="p">);</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">navCtrl</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="nx">TabsPage</span><span class="p">);</span>
+  <span class="p">},</span> <span class="p">(</span><span class="nx">error</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">error</span> <span class="o">=</span> <span class="nx">error</span><span class="p">;</span>
+  <span class="p">});</span>
+<span class="p">}</span>
+
+<span class="nx">oktaLogin</span><span class="p">():</span> <span class="nb">Promise</span><span class="o">&lt;</span><span class="kr">any</span><span class="o">&gt;</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">oauthService</span><span class="p">.</span><span class="nx">createAndSaveNonce</span><span class="p">().</span><span class="nx">then</span><span class="p">(</span><span class="nx">nonce</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="kd">let</span> <span class="na">state</span><span class="p">:</span> <span class="kr">string</span> <span class="o">=</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">floor</span><span class="p">(</span><span class="nb">Math</span><span class="p">.</span><span class="nx">random</span><span class="p">()</span> <span class="o">*</span> <span class="mi">1000000000</span><span class="p">).</span><span class="nx">toString</span><span class="p">();</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nb">window</span><span class="p">.</span><span class="nx">crypto</span><span class="p">)</span> <span class="p">{</span>
+      <span class="kd">const</span> <span class="nx">array</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Uint32Array</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
+      <span class="nb">window</span><span class="p">.</span><span class="nx">crypto</span><span class="p">.</span><span class="nx">getRandomValues</span><span class="p">(</span><span class="nx">array</span><span class="p">);</span>
+      <span class="nx">state</span> <span class="o">=</span> <span class="nx">array</span><span class="p">.</span><span class="nx">join</span><span class="p">().</span><span class="nx">toString</span><span class="p">();</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="k">new</span> <span class="nb">Promise</span><span class="p">((</span><span class="nx">resolve</span><span class="p">,</span> <span class="nx">reject</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+      <span class="kd">const</span> <span class="nx">oauthUrl</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">buildOAuthUrl</span><span class="p">(</span><span class="nx">state</span><span class="p">,</span> <span class="nx">nonce</span><span class="p">);</span>
+      <span class="kd">const</span> <span class="nx">browser</span> <span class="o">=</span> <span class="nb">window</span><span class="p">.</span><span class="nx">cordova</span><span class="p">.</span><span class="nx">InAppBrowser</span><span class="p">.</span><span class="nx">open</span><span class="p">(</span><span class="nx">oauthUrl</span><span class="p">,</span> <span class="s1">'_blank'</span><span class="p">,</span>
+        <span class="s1">'location=no,clearsessioncache=yes,clearcache=yes'</span><span class="p">);</span>
+      <span class="nx">browser</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s1">'loadstart'</span><span class="p">,</span> <span class="p">(</span><span class="nx">event</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="p">((</span><span class="nx">event</span><span class="p">.</span><span class="nx">url</span><span class="p">).</span><span class="nx">indexOf</span><span class="p">(</span><span class="s1">'http://localhost:8100'</span><span class="p">)</span> <span class="o">===</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+          <span class="nx">browser</span><span class="p">.</span><span class="nx">removeEventListener</span><span class="p">(</span><span class="s1">'exit'</span><span class="p">,</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{});</span>
+          <span class="nx">browser</span><span class="p">.</span><span class="nx">close</span><span class="p">();</span>
+          <span class="kd">const</span> <span class="nx">responseParameters</span> <span class="o">=</span> <span class="p">((</span><span class="nx">event</span><span class="p">.</span><span class="nx">url</span><span class="p">).</span><span class="nx">split</span><span class="p">(</span><span class="s1">'#'</span><span class="p">)[</span><span class="mi">1</span><span class="p">]).</span><span class="nx">split</span><span class="p">(</span><span class="s1">'&amp;'</span><span class="p">);</span>
+          <span class="kd">const</span> <span class="nx">parsedResponse</span> <span class="o">=</span> <span class="p">{};</span>
+          <span class="k">for</span> <span class="p">(</span><span class="kd">let</span> <span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="nx">responseParameters</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+            <span class="nx">parsedResponse</span><span class="p">[</span><span class="nx">responseParameters</span><span class="p">[</span><span class="nx">i</span><span class="p">].</span><span class="nx">split</span><span class="p">(</span><span class="s1">'='</span><span class="p">)[</span><span class="mi">0</span><span class="p">]]</span> <span class="o">=</span>
+              <span class="nx">responseParameters</span><span class="p">[</span><span class="nx">i</span><span class="p">].</span><span class="nx">split</span><span class="p">(</span><span class="s1">'='</span><span class="p">)[</span><span class="mi">1</span><span class="p">];</span>
+          <span class="p">}</span>
+          <span class="kd">const</span> <span class="nx">defaultError</span> <span class="o">=</span> <span class="s1">'Problem authenticating with Okta'</span><span class="p">;</span>
+          <span class="k">if</span> <span class="p">(</span><span class="nx">parsedResponse</span><span class="p">[</span><span class="s1">'state'</span><span class="p">]</span> <span class="o">!==</span> <span class="nx">state</span><span class="p">)</span> <span class="p">{</span>
+            <span class="nx">reject</span><span class="p">(</span><span class="nx">defaultError</span><span class="p">);</span>
+          <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="nx">parsedResponse</span><span class="p">[</span><span class="s1">'access_token'</span><span class="p">]</span> <span class="o">!==</span> <span class="kc">undefined</span> <span class="o">&amp;&amp;</span>
+            <span class="nx">parsedResponse</span><span class="p">[</span><span class="s1">'access_token'</span><span class="p">]</span> <span class="o">!==</span> <span class="kc">null</span><span class="p">)</span> <span class="p">{</span>
+            <span class="nx">resolve</span><span class="p">(</span><span class="nx">parsedResponse</span><span class="p">);</span>
+          <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+            <span class="nx">reject</span><span class="p">(</span><span class="nx">defaultError</span><span class="p">);</span>
+          <span class="p">}</span>
+        <span class="p">}</span>
+      <span class="p">});</span>
+      <span class="nx">browser</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s1">'exit'</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">event</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">reject</span><span class="p">(</span><span class="s1">'The Okta sign in flow was canceled'</span><span class="p">);</span>
+      <span class="p">});</span>
+    <span class="p">});</span>
+  <span class="p">});</span>
+<span class="p">}</span>
+
+<span class="nx">buildOAuthUrl</span><span class="p">(</span><span class="nx">state</span><span class="p">,</span> <span class="nx">nonce</span><span class="p">):</span> <span class="kr">string</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">oauthService</span><span class="p">.</span><span class="nx">issuer</span> <span class="o">+</span> <span class="s1">'/v1/authorize?'</span> <span class="o">+</span>
+      <span class="s1">'client_id='</span> <span class="o">+</span> <span class="k">this</span><span class="p">.</span><span class="nx">oauthService</span><span class="p">.</span><span class="nx">clientId</span> <span class="o">+</span> <span class="s1">'&amp;'</span> <span class="o">+</span>
+      <span class="s1">'redirect_uri='</span> <span class="o">+</span> <span class="k">this</span><span class="p">.</span><span class="nx">oauthService</span><span class="p">.</span><span class="nx">redirectUri</span> <span class="o">+</span> <span class="s1">'&amp;'</span> <span class="o">+</span>
+      <span class="s1">'response_type=id_token%20token&amp;'</span> <span class="o">+</span>
+      <span class="s1">'scope='</span> <span class="o">+</span> <span class="nb">encodeURI</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">oauthService</span><span class="p">.</span><span class="nx">scope</span><span class="p">)</span> <span class="o">+</span> <span class="s1">'&amp;'</span> <span class="o">+</span>
+      <span class="s1">'state='</span> <span class="o">+</span> <span class="nx">state</span> <span class="o">+</span> <span class="s1">'&amp;nonce='</span> <span class="o">+</span> <span class="nx">nonce</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre>
+</div>
+
+<p>Change the <code class="highlighter-rouge">redirectUri</code> that’s set in the constructor to hard-code <code class="highlighter-rouge">http://localhost:8100</code>. If you skip this step <code class="highlighter-rouge">window.location.origin</code> will result in a <code class="highlighter-rouge">file://</code> origin being sent when the app is running on a device. By making it a known URL, we can look for it with the in-app browser on the “loadstart” event.</p>
+
+<div class="language-typescript highlighter-rouge"><pre class="highlight"><code><span class="kd">constructor</span><span class="p">(</span><span class="k">private</span> <span class="nx">navCtrl</span><span class="err">:</span> <span class="nx">NavController</span><span class="p">,</span> <span class="k">private</span> <span class="nx">oauthService</span><span class="err">:</span> <span class="nx">OAuthService</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nx">oauthService</span><span class="p">.</span><span class="nx">redirectUri</span> <span class="o">=</span> <span class="s1">'http://localhost:8100'</span><span class="p">;</span>
+  <span class="p">...</span>
+<span class="p">}</span>
+</code></pre>
+</div>
+
+<p>You’ll have to re-deploy your app to your phone after making these changes.</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>ionic cordova emulate ios
+</code></pre>
+</div>
+
+<p>Now you should be able to log in by clicking on the “Login with Okta” button and entering valid credentials.</p>
+
+<table>
+  <tbody>
+    <tr>
+      <td><a href="/assets/blog/ionic-authentication/emulator-login-c4b218091f6549081c063e2eb71af4b1bcf371d49cffd109d3f77e6019ec85ce.png"><img src="/assets/blog/ionic-authentication/emulator-login-c4b218091f6549081c063e2eb71af4b1bcf371d49cffd109d3f77e6019ec85ce.png" alt="Emulator Login" width="280" /></a></td>
+      <td><a href="/assets/blog/ionic-authentication/emulator-okta-login-03521c0da232257989de99fe3c41e81f1c822d1397d4b5e2e8a5371b21aef085.png"><img src="/assets/blog/ionic-authentication/emulator-okta-login-03521c0da232257989de99fe3c41e81f1c822d1397d4b5e2e8a5371b21aef085.png" alt="Emulator Okta Login" width="280" /></a></td>
+      <td><a href="/assets/blog/ionic-authentication/emulator-home-935f74e0cd70e31bcf49f782c0b1371c8ad1af4d44f6da3002a91cbf42a95d55.png"><img src="/assets/blog/ionic-authentication/emulator-home-935f74e0cd70e31bcf49f782c0b1371c8ad1af4d44f6da3002a91cbf42a95d55.png" alt="Emulator Home" width="280" /></a></td>
+    </tr>
+  </tbody>
+</table>
+
+<p>The nice thing about using this technique is the Okta login screen has Remember Me and Forgot Password support, so you don’t need to code those yourself.</p>
+
+<p>To deploy the app to an iPhone, start by plugging one into your computer. Then run the following commands to build the app and run it on your device.</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>ionic cordova run ios
+</code></pre>
+</div>
+
+<p>This command will likely fail if you haven’t previously set up code signing for your application.</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>Signing for "MyApp" requires a development team. Select a development team in the project editor.
+Code signing is required for product type 'Application' in SDK 'iOS 10.3'
+</code></pre>
+</div>
+
+<p>Open your project in Xcode using the command below.</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>open platforms/ios/MyApp.xcodeproj
+</code></pre>
+</div>
+
+<p><a href="http://ionicframework.com/docs/intro/deploying/#ios-devices">Ionic’s deployment documentation</a> provides instructions to solve this issue.</p>
+
+<p>Select your phone as the target in Xcode and click the play button to run your app. The first time you do this, Xcode may spin for a while with a “Processing symbol files” message at the top.</p>
+
+<p>Once you’ve configured your phone, computer, and Apple ID, you should be able to open the app and log in. Below is how it looks on my iPhone.</p>
+
+<table>
+  <tbody>
+    <tr>
+      <td><a href="/assets/blog/ionic-authentication/iphone-login-5f731e6ba21115febd9c4c21ba802c636370a5eeb9d9e3b47812bb64171c1efb.png"><img src="/assets/blog/ionic-authentication/iphone-login-5f731e6ba21115febd9c4c21ba802c636370a5eeb9d9e3b47812bb64171c1efb.png" alt="iPhone Login" width="280" /></a></td>
+      <td><a href="/assets/blog/ionic-authentication/iphone-okta-login-920b0eb85c7865bb6e822e471c4ff5655050ac7342832bbb21cf9a928516dfc0.png"><img src="/assets/blog/ionic-authentication/iphone-okta-login-920b0eb85c7865bb6e822e471c4ff5655050ac7342832bbb21cf9a928516dfc0.png" alt="iPhone Okta Login" width="280" /></a></td>
+      <td><a href="/assets/blog/ionic-authentication/iphone-home-f50201f8cc12ab535ee9583a23990c218cc9a23b50bba61302ae708ae9dd8d47.png"><img src="/assets/blog/ionic-authentication/iphone-home-f50201f8cc12ab535ee9583a23990c218cc9a23b50bba61302ae708ae9dd8d47.png" alt="iPhone Home" width="280" /></a></td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="android">Android</h3>
+
+<p>To emulate or deploy to an Android device, you’ll first need to install <a href="https://developer.android.com/studio/index.html">Android Studio</a>. As part of the install, it will show you where it installed the Android SDK. Set this path as an ANDROID_HOME environment variable. On a Mac, it should be <code class="highlighter-rouge">~/Library/Android/sdk/</code>.</p>
+
+<p><strong>If you’ve just installed Android Studio, make sure to open it to complete the installation.</strong></p>
+
+<p>To deploy to the Android emulator, run <code class="highlighter-rouge">ionic cordova emulate android</code>. This command will install Android support and print out instructions about how to create an emulator image.</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>Error: No emulator images (avds) found.
+1. Download desired System Image by running:
+/Users/mraible/Library/Android/sdk/tools/android sdk
+2. Create an AVD by running: /Users/mraible/Library/Android/sdk/tools/android avd
+HINT: For a faster emulator, use an Intel System Image and install the HAXM device driver
+</code></pre>
+</div>
+
+<p>Run the first suggestion and download your desired system image. Then run the second command and created an AVD (Android Virtual Device) with the following settings:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>AVD Name: TestPhone
+Device: Nexus 5
+Target: Android 7.1.1
+CPU/ABI: Google APIs Intel Axom (x86_64)
+Skin: Skin with dynamic hardware controls
+</code></pre>
+</div>
+
+<p><strong>WARNING:</strong> These instructions won’t work with version 2.3.2 of Android Studio on Mac. When you try to run the first command, it’ll say the following:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>*************************************************************************
+The "android" command is deprecated.
+For manual SDK, AVD, and project management, please use Android Studio.
+For command-line tools, use tools/bin/sdkmanager and tools/bin/avdmanager
+*************************************************************************
+</code></pre>
+</div>
+
+<p>To solve this problem, open Android Studio, select “Open an existing Android Studio project” and select the <code class="highlighter-rouge">ionic-auth/platforms/android</code> directory. If prompted to upgrade, choose “OK”, then proceed to create a new AVD as <a href="https://developer.android.com/studio/run/managing-avds.html#createavd">described in Android Studio’s documentation</a>.</p>
+
+<p>After performing these steps, you should be able to run <code class="highlighter-rouge">ionic cordova emulate android</code> and see your app running in the AVD.</p>
+
+<table>
+  <tbody>
+    <tr>
+      <td><a href="/assets/blog/ionic-authentication/android-login-a0363756fc25a974e87668bc0900acb783f7eec80a1b83b0c5de0a5016004f94.png"><img src="/assets/blog/ionic-authentication/android-login-a0363756fc25a974e87668bc0900acb783f7eec80a1b83b0c5de0a5016004f94.png" alt="Android Login" width="280" /></a></td>
+      <td><a href="/assets/blog/ionic-authentication/android-okta-login-bb57b05d91580c165352d0f21d2da0415827601a25720ec2121f269ae20618ae.png"><img src="/assets/blog/ionic-authentication/android-okta-login-bb57b05d91580c165352d0f21d2da0415827601a25720ec2121f269ae20618ae.png" alt="Android Okta Login" width="280" /></a></td>
+      <td><a href="/assets/blog/ionic-authentication/android-home-9438a0b8324d932abc0dcece445af75c8009350e683bb46d526baaa614e1de13.png"><img src="/assets/blog/ionic-authentication/android-home-9438a0b8324d932abc0dcece445af75c8009350e683bb46d526baaa614e1de13.png" alt="Android Home" width="280" /></a></td>
+    </tr>
+  </tbody>
+</table>
+
+<p><strong>NOTE</strong>: If you get an application error that says “The connection to the server was unsuccessful. (<code class="highlighter-rouge">file:///android/www/index.html</code>)”, add the following line to <code class="highlighter-rouge">config.xml</code>. This line sets the default timeout to 60 seconds (default is 20). Thanks to the <a href="http://stackoverflow.com/a/31377846">Stack Overflow community</a> for this solution.</p>
+
+<div class="language-xml highlighter-rouge"><pre class="highlight"><code><span class="nt">&lt;preference</span> <span class="na">name=</span><span class="s">"loadUrlTimeoutValue"</span> <span class="na">value=</span><span class="s">"60000"</span><span class="nt">/&gt;</span>
+</code></pre>
+</div>
+
+<h2 id="pwas-with-ionic">PWAs with Ionic</h2>
+<p>Ionic ships with support for creating progressive web apps (PWAs). This means you can deploy your Ionic app as a web app (rather than a mobile app) and make it run offline in <a href="http://caniuse.com/#feat=serviceworkers">browsers that support service workers</a>.</p>
+
+<p>You can see how to enable service workers and make your app into a PWA by reading the <a href="/blog/2017/05/17/develop-a-mobile-app-with-ionic-and-spring-boot#pwas-with-ionic">PWAs section</a> of <a href="/blog/2017/05/17/develop-a-mobile-app-with-ionic-and-spring-boot">how to develop a mobile app with Ionic and Spring Boot</a>. A PWA is a web application that can be “installed” on your system. It works offline when you don’t have an internet connection, leveraging data cached during your last interactions with the app. Adding PWA features can make your apps load a lot faster, creating happy users. To learn more about PWAs, see <a href="/blog/2017/07/20/the-ultimate-guide-to-progressive-web-applications">The Ultimate Guide to Progressive Web Applications</a>.</p>
+
+<p>Ionic has invested heavily in supporting PWAs. You can read more about why in <a href="http://blog.ionic.io/what-progressive-web-apps-can-do-for-you/">
+What Progressive Web Apps can do for you</a>.</p>
+
+<h2 id="learn-more">Learn More</h2>
+
+<p>I hope you’ve enjoyed this tour of Ionic, Angular, and Okta. I like how Ionic takes your web development skills up a notch and allows you to create mobile applications that look and behave natively and perform swiftly.</p>
+
+<p>You can see the complete source code for this project <a href="https://github.com/oktadeveloper/okta-ionic-auth-example">on GitHub</a>. Please contact me on Twitter <a href="https://twitter.com/mraible">@mraible</a> or on <a href="https://devforum.okta.com/">Okta’s Developer Forums</a> if you have any questions.</p>
+
+<p>To learn more about Ionic, Angular, or Okta, please see the following resources:</p>
+
+<ul>
+  <li><a href="/blog/2017/06/13/add-authentication-angular-pwa">Adding Authentication to your Angular PWA</a></li>
+  <li><a href="/blog/2017/05/17/develop-a-mobile-app-with-ionic-and-spring-boot">Tutorial: Develop a Mobile App With Ionic and Spring Boot</a></li>
+  <li><a href="/blog/2017/05/09/progressive-web-applications-with-angular-and-spring-boot">Build Your First Progressive Web Application with Angular and Spring Boot</a></li>
+</ul>
+
+
+	</div>
+	
+</article>
+
+		
+</section>
+
+		
+	</div><footer class="Footer">
+    <div class="Wrap">
+
+        <div class="Row">
+
+            <div class="Column--3 Column--medium-6 Column--xSmall-12">
+
+                <a class="Logo" href="https://www.okta.com/" target="_blank" rel="noopener noreferrer">
+                    <img src="https://developer.okta.com/sites/all/themes/developer/images/logo-footer.png" alt="Okta">
+                    Visit okta.com
+                </a>
+
+            </div>
+
+            <div class="Column--3 Column--medium-12 Column--xSmall-12">
+
+                <h4>Social</h4>
+                <ul class="Footer-links Footer-links--social">
+                    <li><a class="Footer-links--github" target="_blank" rel="noopener noreferrer" href="http://github.com/oktadeveloper">Github</a></li>
+                    <li><a class="Footer-links--twitter" target="_blank" rel="noopener noreferrer" href="http://twitter.com/OktaDev">Twitter</a></li>
+                    <li><a class="Footer-links--forum" target="_blank" rel="noopener noreferrer" href="https://devforum.okta.com/">Forum</a></li>
+                    <li><a class="Footer-links--rss" target="_blank" rel="noopener noreferrer" href="http://feeds.feedburner.com/OktaBlog">RSS Blog</a></li>
+                </ul>
+            </div>
+
+            <div class="Column--3 Column--medium-6 Column--small-12">
+                <h4>More Info</h4>
+                <ul class="Footer-links">
+                    <li><a target="_blank" href="https://developer.okta.com/integrate-with-okta/">Integrate with Okta</a></li>
+                    <li><a href="/blog/">Blog</a></li>
+                    <li><a href="/docs/platform-release-notes/platform-release-notes.html">Release Notes</a></li>
+                    <li><a href="/3rd_party_notices/">3rd Party Notices</a></li>
+                </ul>
+            </div>
+
+            <div class="Column--3 Column--medium-6 Column--small-12">
+                <h4>Contact &amp; Legal</h4>
+                <ul class="Footer-links">
+                    <li><a href="https://developer.okta.com/contact/">Contact Sales</a></li>
+                    <li><a target="_blank" rel="noopener noreferrer" href="mailto:developers@okta.com">Contact Support</a></li>
+                    <li><a href="https://developer.okta.com/terms/">Terms &amp; Conditions</a></li>
+                    <li><a href="https://developer.okta.com/privacy/">Privacy Policy</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</footer>
+
+    <script type="text/javascript" src="/assets/master-0365dd27cf276cb2a15c0a43906ca592538204cf1ad4557547bf4e50609b411e.js"></script>
+    <script type="text/javascript" src="/assets/myOkta-911cbafbbe079b7a5522d9cbe15bd2a5f44e1582531e88393934bec69f97696b.js"></script>
+    
+    
+    
+    
+      <script type="text/javascript" src="/assets/blog-6e32dad27404131cc8630a5282264bed2ab4c08c91ac86fa496b75c53aa4f681.js"></script>
+    
+
+  <!-- START Post Footer -->
+  
+  <!-- START Google Tag Manager -->
+  <!-- https://support.google.com/tagmanager/answer/6103696?hl=en -->
+  <noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-TJ45R6" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+  <!-- END Google Tag Manager -->
+  <!-- START Google Remarketing Tag -->
+  <script type="text/javascript">
+    /* <![CDATA[ */
+    var google_conversion_id = 1006913831;
+    var google_custom_params = window.google_tag_params;
+    var google_remarketing_only = true;
+    /* ]]> */
+  </script>
+  <div style="display:none;"><script type="text/javascript" src="//www.googleadservices.com/pagead/conversion.js"></script></div>
+  <noscript><div style="display:inline;"><img height="1" width="1" style="border-style:none;" alt="" src="//googleads.g.doubleclick.net/pagead/viewthroughconversion/1006913831/?value=0&amp;guid=ON&amp;script=0"></div></noscript>
+  <!-- END Google Remarketing Tag -->
+  <!-- START Crazy Egg Tracking -->
+  <script type="text/javascript">
+    setTimeout(function(){var a=document.createElement("script");
+    var b=document.getElementsByTagName("script")[0];
+    a.src=document.location.protocol+"//script.crazyegg.com/pages/scripts/0021/9333.js?"+Math.floor(new Date().getTime()/3600000);
+    a.async=true;a.type="text/javascript";b.parentNode.insertBefore(a,b)}, 1);
+  </script>
+  <!-- END Crazy Egg Tracking -->
+
+  <!-- END Post Footer -->
+</body>
+</html>

@@ -1,0 +1,1755 @@
+<!DOCTYPE html>
+<html class="no-js" lang="en" dir="ltr">
+<head>
+  <script>
+    var searchDomain = 'https://developer.okta.com';
+    var isProduction = window.location.hostname === 'developer.okta.com';
+    if (isProduction) {
+      // TypeKit
+      (function(d) {
+        var config = {
+          kitId: 'jff5neq',
+          scriptTimeout: 3000,
+          async: true
+        },
+        h=d.documentElement,t=setTimeout(function(){h.className=h.className.replace(/bwf-loadingb/g,"")+" wf-inactive";},config.scriptTimeout),tk=d.createElement("script"),f=false,s=d.getElementsByTagName("script")[0],a;h.className+=" wf-loading";tk.src='https://use.typekit.net/'+config.kitId+'.js';tk.async=true;tk.onload=tk.onreadystatechange=function(){a=this.readyState;if(f||a&&a!="complete"&&a!="loaded")return;f=true;clearTimeout(t);try{Typekit.load(config)}catch(e){}};s.parentNode.insertBefore(tk,s)
+      })(document);
+
+      // Google analytics
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+              (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+              m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+      ga('create', 'UA-15777010-3', 'auto');
+      ga('send', 'pageview');
+
+      // START Google Tag Manager
+      (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+      new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+      j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+      '//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+      })(window,document,'script','dataLayer','GTM-TJ45R6');
+      // END Google Tag Manager
+    }
+	</script>
+  <meta charset="utf-8">
+  <meta http-equiv="x-ua-compatible" content="IE=edge,chrome=1">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+ 	
+
+  <link type="text/css" rel="stylesheet" href="https://developer.okta.com/sites/all/themes/developer/css/master.css" media="all" />
+  <meta class="swiftype" name="title" data-type="string" content="Events | Okta Developer" />
+  <meta class="swiftype" name="summary" data-type="string" content="Events API" />
+
+  <link type="text/css" rel="stylesheet" href="/assets/animate-ec43d72c3ed45e08a460b8a2966d8dba6006aebfa0530935c3973fa493a8771f.css">
+  <link type="text/css" rel="stylesheet" href="/assets/okta-a96df4c9d48b78b618e1d541f46f7137d73d40653571e020c1ad59edd7915c60.css">
+  
+  
+  <title>Events | Okta Developer</title>
+  <meta name="description" content="Events API">
+  <link rel="canonical" href="https://developer.okta.com/docs/api/resources/events.html"  data-proofer-ignore>
+  <link rel="alternate" type="application/rss+xml" title="Okta Developer" href="https://developer.okta.com/feed.xml"><!-- GA -->
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+  <link rel="manifest" href="/manifest.json">
+  <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#21313a">
+  <meta name="theme-color" content="#ffffff">
+</head>
+
+<body>
+  <div class="Page events Page--docs-page">
+    <!-- START Header -->
+    
+
+
+
+
+<header class="Header is-fixed">
+
+  <div class="Wrap">
+
+    <a class="Logo" href="https://developer.okta.com">
+      <svg version="1.1" id="OktaLogo" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 431.9 151.4" style="enable-background:new 0 0 431.9 151.4;" xml:space="preserve"><g><g><g><path d="M102.2,41.4c-21,0-38.1,17.1-38.1,38.1s17.1,38.1,38.1,38.1s38.1-17.1,38.1-38.1l0,0C140.3,58.5,123.2,41.4,102.2,41.4z M102.2,98.5c-10.5,0-19-8.5-19-19s8.5-19,19-19s19,8.5,19,19c0.1,10.5-8.4,19-18.9,19.1C102.3,98.6,102.2,98.6,102.2,98.5L102.2,98.5z"/><path d="M169.1,92.3c0-1.9,1.5-3.4,3.4-3.4c0.9,0,1.8,0.4,2.4,1c9.5,9.7,25.3,26.3,25.4,26.4c0.4,0.5,0.8,0.8,1.4,0.9l1.6,0.2h17.2c1.8,0,3.3-1.4,3.4-3.2c0-0.8-0.3-1.5-0.8-2.2l-28.6-29.2l-1.5-1.5c-3.2-3.9-2.9-5.4,0.8-9.3l22.6-25.1c1.1-1.4,0.8-3.5-0.6-4.6c-0.6-0.4-1.3-0.7-2-0.7h-17c-0.6,0.2-1.1,0.5-1.5,0.9L175,64.4c-1.3,1.4-3.4,1.5-4.8,0.2c-0.7-0.6-1.1-1.5-1.1-2.5V18.9c0-1.7-1.3-3-3-3c-0.1,0-0.2,0-0.3,0h-12.7c-2.2,0-3.3,1.5-3.3,2.8v95.8c0,2.2,1.8,2.8,3.3,2.8h12.7c1.7,0.1,3.2-1.2,3.3-2.9c0,0,0,0,0,0V92.3z"/><path d="M273,114l-1.4-12.8c-0.2-1.7-1.7-2.9-3.4-2.7c0,0,0,0-0.1,0l-2.9,0.2c-10.1,0-18.5-7.9-19-18c0-0.3,0-0.7,0-1V64.2c-0.1-2,1.5-3.6,3.5-3.7c0,0,0,0,0,0h17c1.7-0.1,3.1-1.5,3-3.2c0,0,0-0.1,0-0.1v-12c0-2.3-1.5-3.6-2.8-3.6h-17.1c-1.9,0.1-3.5-1.5-3.6-3.4c0,0,0,0,0,0V18.9c-0.1-1.7-1.5-3.1-3.2-3c0,0-0.1,0-0.1,0h-12.7c-1.6-0.1-3,1.1-3.1,2.7c0,0.1,0,0.1,0,0.2c0,0,0,61.7,0,62c0.5,21,17.9,37.6,38.9,37c1.4,0,2.9-0.2,4.3-0.3C272,117.2,273.2,115.7,273,114z"/></g><path d="M364.7,98c-10.8,0-12.4-3.8-12.4-18.3l0,0V44.8c0-1.8-1.4-3.2-3.2-3.2c0,0-0.1,0-0.1,0h-12.8c-1.8,0-3.2,1.4-3.3,3.2v1.6C314.6,36,291.3,42.5,281,60.8c-10.4,18.3-3.9,41.6,14.4,51.9c14,7.9,31.4,6.2,43.5-4.2c3.6,5.5,9.3,9.1,18.3,9.1c1.5,0,9.7,0.3,9.7-3.5v-13.6C367,99.2,366,98.1,364.7,98z M314.2,98.6c-10.5,0-19-8.5-19-19s8.5-19,19-19s19,8.5,19,19l0,0C333.2,90.1,324.7,98.6,314.2,98.6z"/></g><path d="M19.4,74c2.2-1.9,4.1-4.1,5.7-6.6c3.5-5.3,5.4-11.5,5.2-17.9V27c0-4.9,0.9-8.4,2.7-10.5c1.8-2.1,4.8-3,9.2-3h12.6c1.2,0,2.1-0.9,2.2-2.1l0,0V2.2C57,1,56,0,54.8,0c0,0,0,0,0,0H41.5c-7.8,0-12.9,2.1-18,7.6s-7.1,12.3-7.1,21.7v14.2c0,2.2-0.1,4-0.2,5.7v2.2c-0.5,3.2-1.8,6.2-3.6,8.9C9.4,64.7,5.1,70.9,0.9,74l0,0l-0.3,0.3l0,0l-0.2,0.3H0.2v0.3l0,0c-0.1,0.3-0.1,0.7,0,1l0,0v0.3h0.1l0.2,0.3l0,0l0.3,0.3l0,0c4.2,3.1,8.5,9.3,11.3,13.7c1.8,2.7,3.1,5.7,3.6,8.9v2.2c0.1,1.6,0.2,3.5,0.2,5.7v14.3c0,9.4,2.4,16.7,7.1,21.7s10.2,7.6,18,7.6h13.8c1.2,0,2.2-1,2.2-2.2V140l0,0c0-1.2-1-2.2-2.2-2.2H42.2c-4.4,0-7.5-1-9.2-3s-2.7-5.6-2.7-10.5v-22.4c0.2-6.4-1.7-12.6-5.2-17.9c-1.6-2.5-3.5-4.7-5.7-6.6l0,0c-0.9-0.7-1.1-2-0.4-2.9C19.2,74.3,19.3,74.2,19.4,74L19.4,74z"/><path d="M412.5,74c-2.2-1.9-4.1-4.1-5.7-6.6c-3.5-5.3-5.4-11.5-5.2-17.9V27c0-4.9-0.9-8.4-2.7-10.5s-4.8-3-9.2-3h-12.6c-1.2,0-2.2-1-2.2-2.2c0,0,0,0,0,0l0,0V2.2c0-1.2,1-2.2,2.2-2.2c0,0,0,0,0,0h13.4c7.8,0,12.9,2.1,18,7.6s7.1,12.3,7.1,21.7v14.2c0,2.2,0.1,4,0.2,5.7v2.2c0.5,3.2,1.8,6.2,3.6,8.9c2.8,4.5,7.1,10.7,11.3,13.7l0,0l0.3,0.3l0,0l0.2,0.3h0.1v0.3l0,0c0.1,0.3,0.1,0.7,0,1l0,0v0.3h-0.1l-0.2,0.3l0,0l-0.3,0.3l0,0c-4.2,3.1-8.5,9.3-11.3,13.7c-1.8,2.7-3.1,5.7-3.6,8.9v2.2c-0.1,1.6-0.2,3.5-0.2,5.7v14.3c0,9.4-2.4,16.7-7.1,21.7s-10.2,7.6-18,7.6h-13.4c-1.2,0-2.2-1-2.2-2.2c0,0,0,0,0,0V140l0,0c0-1.2,1-2.2,2.2-2.2l0,0h12.7c4.4,0,7.5-1,9.2-3s2.7-5.6,2.7-10.5v-22.4c-0.2-6.3,1.6-12.6,5.1-17.9c1.6-2.5,3.5-4.7,5.7-6.6l0,0c0.9-0.7,1.1-2,0.4-2.9C412.7,74.3,412.6,74.2,412.5,74L412.5,74z"/></g></svg>
+    </a>
+
+    <nav class="Header-nav PrimaryNav">
+      <ul class="menu">
+        <li class="first leaf">
+          <a href="https://developer.okta.com/product/">Product</a>
+        </li>
+        <li class="leaf">
+          <a href="https://developer.okta.com/pricing/">Pricing</a>
+        </li>
+        <li class="leaf">
+          <a href="/blog/">Blog</a>
+        </li>
+        <li class="leaf">
+          <a href="/documentation/" class="active">Docs</a>
+        </li>
+        <li class="last expanded">
+          <span class="nolink">Support</span>
+          <ul class="menu">
+            <li class="first leaf"><a href="https://devforum.okta.com/">Okta Developer Forums</a></li>
+            <li class="last leaf"><a href="mailto:developers@okta.com">developers@okta.com</a></li>
+          </ul>
+        </li>
+      </ul>
+      <a class="PrimaryNav-toggle" href="#">
+        <svg width="20px" height="20px" viewBox="0 0 20 20" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+            <g class="MenuIcon" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="round">
+                <path d="M1,16 L19,16" class="MenuIcon-line1" stroke="#FFFFFF" stroke-width="2"></path>
+                <path d="M1,4 L19,4" class="MenuIcon-line2" stroke="#FFFFFF" stroke-width="2"></path>
+                <path d="M1,10 L19,10" class="MenuIcon-line3" stroke="#FFFFFF" stroke-width="2"></path>
+                <path d="M1,10 L19,10" class="MenuIcon-line4" stroke="#FFFFFF" stroke-width="2"></path>
+            </g>
+        </svg>
+        <svg class="CloseIcon" width="16px" height="16px" viewBox="0 0 16 16" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+          <g id="ALl-Boards" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+            <g id="Desktop" transform="translate(-915.000000, -235.000000)" fill="#FFFFFF">
+              <g id="Search-bar-Active" transform="translate(30.000000, 26.000000)">
+                <polygon id="Icon/Cross" points="901 210.6 899.4 209 893 215.4 886.6 209 885 210.6 891.4 217 885 223.4 886.6 225 893 218.6 899.4 225 901 223.4 894.6 217"></polygon>
+              </g>
+            </g>
+          </g>
+        </svg>
+      </a>
+
+      <div class="PrimaryNav-cta">
+        <a target="_blank" rel="noopener noreferrer" href="https://login.okta.com/?SAMLRequest=fc%2B7CsJAEAXQXvAflu1NNJUMeZBGELTx1a%2FrYILJTtyZGD%2FfSBRiYzlw77lMnD3rSj3Qc0ku0YtgrhU6S5fSXRN9PKxmS52l00nMpq6iBvJWCrfDe4ss6vStRe9aDzmGIZfo1jsgwyWDMzUyiIV9vt1AH4XGk5ClSvewUgMNa%2BYW%2FVj5jxhm9NLP67QQaSAMu64L6CYmsFSHlnzT4ZlLwTgcL6Sf8%2FeX9AU%3Dhttps://login.okta.com/?SAMLRequest=fc%2B7CsJAEAXQXvAflu1NNJUMeZBGELTx1a%2FrYILJTtyZGD%2FfSBRiYzlw77lMnD3rSj3Qc0ku0YtgrhU6S5fSXRN9PKxmS52l00nMpq6iBvJWCrfDe4ss6vStRe9aDzmGIZfo1jsgwyWDMzUyiIV9vt1AH4XGk5ClSvewUgMNa%2BYW%2FVj5jxhm9NLP67QQaSAMu64L6CYmsFSHlnzT4ZlLwTgcL6Sf8%2FeX9AU%3D" class="Button--redOutline">Login</a>
+        <a href="https://developer.okta.com/signup/" class="Button--red">Sign up</a>
+      </div>
+
+      <a class="SearchIcon" href="#"></a>
+      <form id="form_search" class="SearchBar Formisimo_clocked_69929" method="get" action="https://developer.okta.com/search/" name="form_search" __bizdiag="-784164280" __biza="WJ__">
+        <input type="text" name="stq" autocomplete="off" id="st-search-input-auto" class="st-search-input" placeholder="Search">
+        <input type="submit" name="submit" value="GO">
+      </form>
+
+    </nav>
+
+  </div>
+
+</header>
+
+    <!-- END Header -->
+     <!-- START Page Center w/Sub Nav & Content -->
+    <section class="PageContent DynamicSidebar has-tableOfContents">
+      <!-- START Fixed sidebar --><aside class="Sidebar">
+  <h2 class="Sidebar-location Sidebar-toggle h6">Navigation</h2>
+  <div class="Sidebar-close Sidebar-toggle"></div>
+  <div>
+    <h3 class="Sidebar-title"><a href = "/authentication-guide/">Authentication Guide</a></h3>
+    <ul class="Sidebar-nav">
+      <li>
+        <a href = "/authentication-guide/auth-overview/">OAuth 2.0 Overview</a>
+        
+      </li>
+      <li>
+        <a href = "/authentication-guide/implementing-authentication/">Implementing OAuth 2.0</a>
+        
+      </li>
+      <li>
+      <a href = "/authentication-guide/social-login/">Social Login</a>
+      
+      </li>
+      <li>
+      <a href = "/authentication-guide/saml-login/">SAML Login</a>
+      
+      </li>
+      <li>
+      <a href = "/authentication-guide/tokens/">Working With Tokens</a>
+      
+      </li>
+      <!--
+      <li>
+      <a href = "/authentication-guide/custom-login/">Customizing Login</a>
+      
+      </li>
+    -->
+    </ul>
+
+    <h3 class="Sidebar-title">Use Cases</h3>
+    <ul class="Sidebar-nav">
+      <li>
+        <a href="/use_cases/authentication/">Authentication</a>
+      </li>
+      <li>
+        <a href="/use_cases/mfa/">Multi-Factor Authentication</a>
+      </li>
+      <li>
+        <a href="/use_cases/api_access_management/">API Access Management</a>
+      </li>
+      <li>
+        <a href="/use_cases/integrate_with_okta/">Integrate with Okta</a>
+      </li>
+    </ul>
+
+    <h3 class="Sidebar-title">Reference</h3>
+    <ul class="Sidebar-nav">
+      <li>
+        <a href="/docs/api/getting_started/api_test_client.html">Getting Started</a>
+      </li>
+      <li>
+        <a href="/docs/api/resources/authn.html">Authentication Reference</a>
+        <ul id="Sidebar_References" class="Sidebar-hide">
+          <li><a href="/docs/api/resources/authn.html">Authentication</a></li>
+          <li><a href="/docs/api/resources/oauth2.html">OAuth 2.0</a></li>
+          <li><a href="/docs/api/resources/oidc.html">OpenID Connect</a></li>
+          <li><a href="/docs/api/resources/sessions.html">Sessions</a></li>
+        </ul>
+      </li>
+      <li>
+        <a href="/docs/api/resources/apps.html">API Reference</a>
+        <ul id="Sidebar_Resources" class="Sidebar-hide">
+          <li><a href="/docs/api/resources/apps.html">Apps</a></li>
+          <li class="is-active"><a href="/docs/api/resources/events.html">Events</a></li>
+          <li><a href="/docs/api/resources/oauth-clients.html">Dynamic Client Registration</a></li>
+          <li><a href="/docs/api/resources/factors.html">Factors</a></li>
+          <li><a href="/docs/api/resources/groups.html">Groups</a></li>
+          <li><a href="/docs/api/resources/idps.html">Identity Providers</a></li>
+          <li><a href="/docs/api/resources/policy.html">Policy</a></li>
+          <li><a href="/docs/api/resources/roles.html">Admin Roles</a></li>
+          <li><a href="/docs/api/resources/schemas.html">Schemas</a></li>
+          <li><a href="/docs/api/resources/system_log.html">System Log (Beta)</a></li>
+          <li><a href="/docs/api/resources/templates.html">Templates</a></li>
+          <li><a href="/docs/api/resources/users.html">Users</a></li>
+          <li><a href="/docs/api/resources/zones.html">Zones</a></li>
+        </ul>
+      </li>
+      <li>
+        <a href="/reference/error_codes/">Error Codes</a>
+      </li>
+      <li>
+        <a href="/reference/okta_expression_language/">Okta Expression Language</a>
+      </li>
+      <li>
+        <a href="/docs/platform-release-notes/platform-release-notes.html">Okta API Release Notes</a>
+      </li>
+    </ul>
+
+    <h3 class="Sidebar-title">Standards</h3>
+    <ul class="Sidebar-nav">
+      
+      
+      
+      <li>
+        <a href="/standards/OAuth/">OAuth 2.0 and Okta</a>
+      </li>
+      
+      
+      <li>
+        <a href="/standards/OIDC/">OpenID Connect and Okta</a>
+      </li>
+      
+      
+      <li>
+        <a href="/standards/SAML/">SAML</a>
+      </li>
+      
+      
+      
+      
+      <li>
+        <a href="/standards/SCIM/">SCIM Provisioning with Lifecycle Management</a>
+      </li>
+      
+    </ul>
+
+    <script>
+      if (document.querySelectorAll("#Sidebar_Resources .is-active").length) {
+        document.getElementById('Sidebar_Resources').classList.remove('Sidebar-hide');
+      }
+
+      if (document.querySelectorAll("#Sidebar_References .is-active").length) {
+        document.getElementById('Sidebar_References').classList.remove('Sidebar-hide');
+      }
+    </script>
+  </div>
+</aside>
+<!-- END Fixed sidebar -->
+      <!-- START Page Content -->
+      <div class="PageContent-main" id="docs-body">
+        <a id="edit-link" href="https://github.com/okta/okta.github.io/edit/source/_source/_docs/api/resources/events.md" data-proofer-ignore>Edit Page</a>
+      <h1 id="events-api">Events API</h1>
+
+<p>The Okta Events API provides read access to your organization’s system log. <a href="https://support.okta.com/help/Documentation/Knowledge_Article/Exporting-Okta-Log-Data">Export event data</a> as a batch job from your organization to another system for reporting or analysis.</p>
+
+<blockquote>
+  <p>The new beta <a href="/docs/api/resources/system_log.html">System Log API</a> will eventually replace the Events API and contains much more <a href="/docs/api/resources/system_log.html#log-objects">structured data</a>.</p>
+</blockquote>
+
+<h2 id="getting-started">Getting Started</h2>
+
+<p>Explore the Events API: <a href="https://app.getpostman.com/run-collection/f990a71f061a7a16d0bf"><img src="https://run.pstmn.io/button.svg" alt="Run in Postman" /></a></p>
+
+<h2 id="data-retention">Data Retention</h2>
+
+<p>Log data older than 90 days is not returned, in accordance with Okta’s <a href="https://support.okta.com/help/Documentation/Knowledge_Article/Okta-Data-Retention-Policy">Data Retention Policy</a>.</p>
+
+<h2 id="event-operations">Event Operations</h2>
+
+<h3 class="api api-operation" id="list-events">List Events</h3>
+
+<p><span class="api-uri-template api-uri-get"><span class="api-label">GET</span> /api/v1/events</span></p>
+
+<p>Fetches a list of events from your Okta organization system log</p>
+
+<h5 class="api api-request api-request-params" id="request-parameters">Request Parameters</h5>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: left">Parameter</th>
+      <th style="text-align: left">Description</th>
+      <th style="text-align: left">Param Type</th>
+      <th style="text-align: left">DataType</th>
+      <th style="text-align: left">Required</th>
+      <th style="text-align: left">Default</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left">limit</td>
+      <td style="text-align: left">Specifies the number of results to page</td>
+      <td style="text-align: left">Query</td>
+      <td style="text-align: left">Number</td>
+      <td style="text-align: left">FALSE</td>
+      <td style="text-align: left">1000</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">startDate</td>
+      <td style="text-align: left">Specifies the timestamp to list events after</td>
+      <td style="text-align: left">Query</td>
+      <td style="text-align: left">Date</td>
+      <td style="text-align: left">FALSE</td>
+      <td style="text-align: left"> </td>
+    </tr>
+    <tr>
+      <td style="text-align: left">filter</td>
+      <td style="text-align: left">  <a href="/docs/api/getting_started/design_principles.html#filtering">Filter expression</a> for events</td>
+      <td style="text-align: left">Query</td>
+      <td style="text-align: left">String</td>
+      <td style="text-align: left">FALSE</td>
+      <td style="text-align: left"> </td>
+    </tr>
+    <tr>
+      <td style="text-align: left">after</td>
+      <td style="text-align: left">Specifies the pagination cursor for the next page of events</td>
+      <td style="text-align: left">Query</td>
+      <td style="text-align: left">String</td>
+      <td style="text-align: left">FALSE</td>
+      <td style="text-align: left"> </td>
+    </tr>
+  </tbody>
+</table>
+
+<p>Parameter Details</p>
+
+<ul>
+  <li>Treat the <code class="highlighter-rouge">after</code> cursor as an opaque value as its contents are subject to change without notice. Obtain it through the <code class="highlighter-rouge">next</code> link relation. See <a href="/docs/api/getting_started/design_principles.html#pagination">Pagination</a> for more details on link relations.</li>
+  <li><code class="highlighter-rouge">startDate</code> and <code class="highlighter-rouge">filter</code> query parameters are mutually exclusive and cannot be used together in the same request.</li>
+  <li><code class="highlighter-rouge">startDate</code> and <code class="highlighter-rouge">after</code> query parameters are mutually exclusive and cannot be used together in the same request.</li>
+  <li><code class="highlighter-rouge">startDate</code> defaults to 1 hour ago when <code class="highlighter-rouge">filter</code>, <code class="highlighter-rouge">after</code> and <code class="highlighter-rouge">startDate</code> query parameters are omitted.</li>
+  <li><code class="highlighter-rouge">limit</code> can be no larger than 1000</li>
+</ul>
+
+<h6 id="reliable-ingestion">Reliable Ingestion</h6>
+
+<p>The most reliable method to ingest all events from Okta is to use a <a href="/docs/api/getting_started/design_principles.html#pagination">pagination</a> cursor via the <code class="highlighter-rouge">after</code> parameter. This will ensure that events are not skipped or duplicated due to the lack of timestamp precision.</p>
+
+<p>The general sequence of steps to leverage the <code class="highlighter-rouge">after</code> parameter:</p>
+
+<ol>
+  <li>Issue an initial request using <code class="highlighter-rouge">startDate</code> with a value set to some date in the last 90 days</li>
+  <li>Retrieve the next page of events through the <a href="/docs/api/getting_started/design_principles.html#link-header"><code class="highlighter-rouge">Link</code> response header</a> value with the <code class="highlighter-rouge">next</code> link relation</li>
+  <li>Optionally include a <code class="highlighter-rouge">filter</code> parameter to narrow the returned results</li>
+  <li>Issue the paginated request</li>
+  <li>Retrieve the next page of events through the <code class="highlighter-rouge">Link</code> response header value with the <code class="highlighter-rouge">next</code> link relation</li>
+  <li>Pause and repeat the previous step</li>
+</ol>
+
+<p>Note that if no data is returned, this typically indicates you have caught up with the event stream. To avoid issues with <a href="/docs/api/getting_started/design_principles.html#rate-limiting">rate limiting</a>, ensure your polling frequency is sufficiently long.</p>
+
+<h6 id="filters">Filters</h6>
+
+<p>The following expressions are supported for events with the <code class="highlighter-rouge">filter</code> query parameter:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: left">Filter</th>
+      <th style="text-align: left">Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left"><code class="highlighter-rouge">action.objectType eq ":actionType"</code></td>
+      <td style="text-align: left">Events that have a specific   <a href="#action-objecttypes">action objectType</a></td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><code class="highlighter-rouge">target.objectType eq ":objectType"</code></td>
+      <td style="text-align: left">Events published with a specific   <a href="#actor-and-target-objecttypes">target objectType</a></td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><code class="highlighter-rouge">target.id eq ":id"</code></td>
+      <td style="text-align: left">Events published with a specific target id</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><code class="highlighter-rouge">published lt "yyyy-MM-dd'T'HH:mm:ss.SSSZ"</code></td>
+      <td style="text-align: left">Events published before a specific datetime</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><code class="highlighter-rouge">published eq "yyyy-MM-dd'T'HH:mm:ss.SSSZ"</code></td>
+      <td style="text-align: left">Events published updated at a specific datetime</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><code class="highlighter-rouge">published gt "yyyy-MM-dd'T'HH:mm:ss.SSSZ"</code></td>
+      <td style="text-align: left">Events published updated after a specific datetime</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>See <a href="/docs/api/getting_started/design_principles.html#filtering">Filtering</a> for more information on expressions.</p>
+
+<blockquote>
+  <p>Note: All filters must be <a href="http://en.wikipedia.org/wiki/Percent-encoding">URL encoded</a> where <code class="highlighter-rouge">filter=published gt "2017-10-01T00:00:00.000Z"</code> is encoded as <code class="highlighter-rouge">filter=published%20gt%20%222017-10-01T00:00:00.000Z%22</code>.</p>
+</blockquote>
+
+<p><strong>Filter Examples</strong></p>
+
+<p>Events published after 10/01/2017</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>filter=published gt "2017-10-01T00:00:00.000Z"
+</code></pre>
+</div>
+
+<p>Events published for a target user</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>filter=target.id eq "00uxc78lMKUMVIHLTAXY"
+</code></pre>
+</div>
+
+<p>Failed login events published after 10/01/2017</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>filter=published gt "2017-10-01T00:00:00.000Z" and action.objectType eq "core.user_auth.login_failed"
+</code></pre>
+</div>
+
+<p>Events published after 10/01/2017 for a target user and application</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>filter=published gt "2017-10-01T00:00:00.000Z" and target.id eq "00uxc78lMKUMVIHLTAXY" and target.id eq "0oabe82gnXOFVCDUMVAK"
+</code></pre>
+</div>
+
+<p>App SSO events for a target user and application</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>filter=action.objectType eq "app.auth.sso" and target.id eq "00uxc78lMKUMVIHLTAXY" and target.id eq "0oabe82gnXOFVCDUMVAK"
+</code></pre>
+</div>
+
+<p>Note that using <code class="highlighter-rouge">filter</code> with a value of <code class="highlighter-rouge">published gt "2017-10-01T00:00:00.000Z"</code> and <code class="highlighter-rouge">startDate</code> with a value of <code class="highlighter-rouge">2017-10-01T00:00:00.000Z</code> work the same way. The following two API calls:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>startDate=2017-10-01T00:00:00.000Z
+
+filter=published gt "2017-10-01T00:00:00.000Z"
+</code></pre>
+</div>
+
+<p>return the same results. Since <code class="highlighter-rouge">filter</code> and <code class="highlighter-rouge">startDate</code> are <a href="#request-parameters">mutually exclusive</a>, <code class="highlighter-rouge">filter</code> must be used to simultaneously specify both time and additional filter criteria.</p>
+
+<h5 class="api api-response api-response-params" id="response-parameters">Response Parameters</h5>
+
+<p>Array of <a href="#event-model">Events</a></p>
+
+<h5 class="api api-request api-request-example" id="request-example">Request Example</h5>
+
+<div class="language-sh highlighter-rouge"><pre class="highlight"><code>curl -v -X GET <span class="se">\</span>
+-H <span class="s2">"Accept: application/json"</span> <span class="se">\</span>
+-H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
+-H <span class="s2">"Authorization: SSWS </span><span class="k">${</span><span class="nv">api_token</span><span class="k">}</span><span class="s2">"</span> <span class="se">\</span>
+<span class="s2">"<span class="okta-preview-domain">https://{yourOktaDomain}.com</span>/api/v1/events?startDate=2013-07-15T16%3A00%3A00.000Z</span><span class="se">\&amp;</span><span class="s2">limit=3"</span>
+</code></pre>
+</div>
+
+<h5 class="api api-response api-response-example" id="response-example">Response Example</h5>
+
+<div class="language-http highlighter-rouge"><pre class="highlight"><code><span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">200</span> <span class="ne">OK</span>
+<span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/json</span>
+<span class="na">Link</span><span class="p">:</span> <span class="s">&lt;<span class="okta-preview-domain">https://{yourOktaDomain}.com</span>/api/v1/events?startDate=2017-09-15T16%3A00%3A00.000Z&amp;limit=3&gt;; rel="self"</span>
+<span class="na">Link</span><span class="p">:</span> <span class="s">&lt;<span class="okta-preview-domain">https://{yourOktaDomain}.com</span>/api/v1/events?after=tevZxTo4IyHR9yUHIFdU0-f0w1373905100000&amp;limit=3&gt;; rel="next"</span>
+
+<span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"eventId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"tev8hc_KK9NRzKe2WtdvVQIOg1784845263000"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"published"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-11-19T07:14:23.000Z"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"action"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="nt">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"App activated"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"categories"</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w">
+            </span><span class="nt">"objectType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"app.generic.config.app_activated"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"requestUri"</span><span class="p">:</span><span class="w"> </span><span class="s2">"/api/v1/apps/0oadxaKUTKAXSXUZYJHC/lifecycle/activate"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="nt">"actors"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+            </span><span class="p">{</span><span class="w">
+                </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"00upgyMVOKIYORVNYUUM"</span><span class="p">,</span><span class="w">
+                </span><span class="nt">"displayName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Adam Malkovich"</span><span class="p">,</span><span class="w">
+                </span><span class="nt">"login"</span><span class="p">:</span><span class="w"> </span><span class="s2">"adam.malkovich@example.com"</span><span class="p">,</span><span class="w">
+                </span><span class="nt">"objectType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"User"</span><span class="w">
+            </span><span class="p">},</span><span class="w">
+            </span><span class="p">{</span><span class="w">
+                </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_8_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/31.0.1650.57 Safari/537.36"</span><span class="p">,</span><span class="w">
+                </span><span class="nt">"displayName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"CHROME"</span><span class="p">,</span><span class="w">
+                </span><span class="nt">"ipAddress"</span><span class="p">:</span><span class="w"> </span><span class="s2">"192.168.1.100"</span><span class="p">,</span><span class="w">
+                </span><span class="nt">"objectType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Client"</span><span class="w">
+            </span><span class="p">}</span><span class="w">
+        </span><span class="p">],</span><span class="w">
+        </span><span class="nt">"targets"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+            </span><span class="p">{</span><span class="w">
+                </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0oadxaKUTKAXSXUZYJHC"</span><span class="p">,</span><span class="w">
+                </span><span class="nt">"displayName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Salesforce.com"</span><span class="p">,</span><span class="w">
+                </span><span class="nt">"objectType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"AppInstance"</span><span class="w">
+            </span><span class="p">}</span><span class="w">
+        </span><span class="p">]</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"eventId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"tevaEByjeq-QZW-utKgDVVvng1784847185000"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"published"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-11-19T07:46:25.000Z"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"action"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="nt">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Sign-in successful"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"categories"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+                </span><span class="s2">"Sign-in Success"</span><span class="w">
+            </span><span class="p">],</span><span class="w">
+            </span><span class="nt">"objectType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"core.user_auth.login_success"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"requestUri"</span><span class="p">:</span><span class="w"> </span><span class="s2">"/login/do-login"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="nt">"actors"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+            </span><span class="p">{</span><span class="w">
+                </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"00ubgaSARVOQDIOXMORI"</span><span class="p">,</span><span class="w">
+                </span><span class="nt">"displayName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Samus Aran"</span><span class="p">,</span><span class="w">
+                </span><span class="nt">"login"</span><span class="p">:</span><span class="w"> </span><span class="s2">"samus.aran@example.com"</span><span class="p">,</span><span class="w">
+                </span><span class="nt">"objectType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"User"</span><span class="w">
+            </span><span class="p">},</span><span class="w">
+            </span><span class="p">{</span><span class="w">
+                </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_8_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/31.0.1650.57 Safari/537.36"</span><span class="p">,</span><span class="w">
+                </span><span class="nt">"displayName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"CHROME"</span><span class="p">,</span><span class="w">
+                </span><span class="nt">"ipAddress"</span><span class="p">:</span><span class="w"> </span><span class="s2">"10.10.10.10"</span><span class="p">,</span><span class="w">
+                </span><span class="nt">"objectType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Client"</span><span class="w">
+            </span><span class="p">}</span><span class="w">
+        </span><span class="p">],</span><span class="w">
+        </span><span class="nt">"targets"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+            </span><span class="p">{</span><span class="w">
+                </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"00ubgaSARVOQDIOXMORI"</span><span class="p">,</span><span class="w">
+                </span><span class="nt">"displayName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Samus Aran"</span><span class="p">,</span><span class="w">
+                </span><span class="nt">"login"</span><span class="p">:</span><span class="w"> </span><span class="s2">"samus.aran@example.com"</span><span class="p">,</span><span class="w">
+                </span><span class="nt">"objectType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"User"</span><span class="w">
+            </span><span class="p">}</span><span class="w">
+        </span><span class="p">]</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"eventId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"tevR26HuMJMSkWsKBUcQ65Raw1784847190000"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"published"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-11-19T07:46:30.000Z"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"action"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="nt">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"User performed single sign on to app"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"categories"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+                </span><span class="s2">"Application Access"</span><span class="w">
+            </span><span class="p">],</span><span class="w">
+            </span><span class="nt">"objectType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"app.auth.sso"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"requestUri"</span><span class="p">:</span><span class="w"> </span><span class="s2">"/app/salesforce/kdx9PWYBPEOBAUNVRBHK/sso/saml"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="nt">"actors"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+            </span><span class="p">{</span><span class="w">
+                </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"00ubgaSARVOQDIOXMORI"</span><span class="p">,</span><span class="w">
+                </span><span class="nt">"displayName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Samus Aran"</span><span class="p">,</span><span class="w">
+                </span><span class="nt">"login"</span><span class="p">:</span><span class="w"> </span><span class="s2">"samus.aran@example.com"</span><span class="p">,</span><span class="w">
+                </span><span class="nt">"objectType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"User"</span><span class="w">
+            </span><span class="p">},</span><span class="w">
+            </span><span class="p">{</span><span class="w">
+                </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_8_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/31.0.1650.57 Safari/537.36"</span><span class="p">,</span><span class="w">
+                </span><span class="nt">"displayName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"CHROME"</span><span class="p">,</span><span class="w">
+                </span><span class="nt">"ipAddress"</span><span class="p">:</span><span class="w"> </span><span class="s2">"10.10.10.10"</span><span class="p">,</span><span class="w">
+                </span><span class="nt">"objectType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Client"</span><span class="w">
+            </span><span class="p">}</span><span class="w">
+        </span><span class="p">],</span><span class="w">
+        </span><span class="nt">"targets"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+            </span><span class="p">{</span><span class="w">
+                </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"00ubgaSARVOQDIOXMORI"</span><span class="p">,</span><span class="w">
+                </span><span class="nt">"displayName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Samus Aran"</span><span class="p">,</span><span class="w">
+                </span><span class="nt">"login"</span><span class="p">:</span><span class="w"> </span><span class="s2">"samus.aran@example.com"</span><span class="p">,</span><span class="w">
+                </span><span class="nt">"objectType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"User"</span><span class="w">
+            </span><span class="p">},</span><span class="w">
+            </span><span class="p">{</span><span class="w">
+                </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0oadxaKUTKAXSXUZYJHC"</span><span class="p">,</span><span class="w">
+                </span><span class="nt">"displayName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Salesforce.com"</span><span class="p">,</span><span class="w">
+                </span><span class="nt">"objectType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"AppInstance"</span><span class="w">
+            </span><span class="p">}</span><span class="w">
+        </span><span class="p">]</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+</span><span class="p">]</span><span class="w">
+</span></code></pre>
+</div>
+
+<h2 id="event-model">Event Model</h2>
+
+<p>Every organization has a system log that maintains a history of actions performed by users.  The Event model describes a single action that was performed by a set of actors for a set of targets.</p>
+
+<h3 id="example">Example</h3>
+
+<div class="language-json highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
+   </span><span class="nt">"eventId"</span><span class="p">:</span><span class="s2">"tevGr2BhQTMR72OiBGvKXTp2Q1799593071000"</span><span class="p">,</span><span class="w">
+   </span><span class="nt">"published"</span><span class="p">:</span><span class="s2">"2017-09-08T23:51:11.000Z"</span><span class="p">,</span><span class="w">
+   </span><span class="nt">"requestId"</span><span class="p">:</span><span class="s2">"req8U_MHmEbSai_0I4RopTnfA"</span><span class="p">,</span><span class="w">
+   </span><span class="nt">"sessionId"</span><span class="p">:</span><span class="s2">"000cWiYg47QSFyk1YjE6cDcEg"</span><span class="p">,</span><span class="w">
+   </span><span class="nt">"action"</span><span class="p">:{</span><span class="w">
+      </span><span class="nt">"message"</span><span class="p">:</span><span class="s2">"Okta user created"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"categories"</span><span class="p">:[</span><span class="w">
+         </span><span class="s2">"User Creation"</span><span class="w">
+      </span><span class="p">],</span><span class="w">
+      </span><span class="nt">"objectType"</span><span class="p">:</span><span class="s2">"core.user.config.user_creation.success"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"requestUri"</span><span class="p">:</span><span class="s2">"Background"</span><span class="w">
+   </span><span class="p">},</span><span class="w">
+   </span><span class="nt">"actors"</span><span class="p">:[</span><span class="w">
+      </span><span class="p">{</span><span class="w">
+         </span><span class="nt">"id"</span><span class="p">:</span><span class="s2">"00ue1aWYUCUFFKXLXELW"</span><span class="p">,</span><span class="w">
+         </span><span class="nt">"displayName"</span><span class="p">:</span><span class="s2">"Add-Min O'Cloudy Tud"</span><span class="p">,</span><span class="w">
+         </span><span class="nt">"login"</span><span class="p">:</span><span class="s2">"administrator1@clouditude.net"</span><span class="p">,</span><span class="w">
+         </span><span class="nt">"objectType"</span><span class="p">:</span><span class="s2">"User"</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="p">{</span><span class="w">
+         </span><span class="nt">"id"</span><span class="p">:</span><span class="s2">"Jakarta Commons-HttpClient/3.1"</span><span class="p">,</span><span class="w">
+         </span><span class="nt">"displayName"</span><span class="p">:</span><span class="s2">"UNKNOWN"</span><span class="p">,</span><span class="w">
+         </span><span class="nt">"ipAddress"</span><span class="p">:</span><span class="s2">""</span><span class="p">,</span><span class="w">
+         </span><span class="nt">"objectType"</span><span class="p">:</span><span class="s2">"Client"</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+   </span><span class="p">],</span><span class="w">
+   </span><span class="nt">"targets"</span><span class="p">:[</span><span class="w">
+      </span><span class="p">{</span><span class="w">
+         </span><span class="nt">"id"</span><span class="p">:</span><span class="s2">"00ue1gAKBMCSWHRZYDJS"</span><span class="p">,</span><span class="w">
+         </span><span class="nt">"displayName"</span><span class="p">:</span><span class="s2">"Inca-Louise O'Rain Dum"</span><span class="p">,</span><span class="w">
+         </span><span class="nt">"login"</span><span class="p">:</span><span class="s2">"inca@clouditude.net"</span><span class="p">,</span><span class="w">
+         </span><span class="nt">"objectType"</span><span class="p">:</span><span class="s2">"User"</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+   </span><span class="p">]</span><span class="w">
+
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+</div>
+
+<h3 id="attributes">Attributes</h3>
+
+<p>The Event model is read only, with a fixed set of attributes:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: left">Property</th>
+      <th style="text-align: left">Description</th>
+      <th style="text-align: left">DataType</th>
+      <th style="text-align: left">Nullable</th>
+      <th style="text-align: left">Unique</th>
+      <th style="text-align: left">Readonly</th>
+      <th style="text-align: left">MinLength</th>
+      <th style="text-align: left">MaxLength</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left">eventId</td>
+      <td style="text-align: left">Unique key for event</td>
+      <td style="text-align: left">String</td>
+      <td style="text-align: left">FALSE</td>
+      <td style="text-align: left">TRUE</td>
+      <td style="text-align: left">TRUE</td>
+      <td style="text-align: left"> </td>
+      <td style="text-align: left"> </td>
+    </tr>
+    <tr>
+      <td style="text-align: left">published</td>
+      <td style="text-align: left">Timestamp when event was published</td>
+      <td style="text-align: left">Date</td>
+      <td style="text-align: left">FALSE</td>
+      <td style="text-align: left">TRUE</td>
+      <td style="text-align: left">TRUE</td>
+      <td style="text-align: left">1</td>
+      <td style="text-align: left">255</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">requestId</td>
+      <td style="text-align: left">Identifies the request</td>
+      <td style="text-align: left">String</td>
+      <td style="text-align: left">TRUE</td>
+      <td style="text-align: left">FALSE</td>
+      <td style="text-align: left">TRUE</td>
+      <td style="text-align: left">1</td>
+      <td style="text-align: left">50</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">sessionId</td>
+      <td style="text-align: left">Session in which the event occurred</td>
+      <td style="text-align: left">String</td>
+      <td style="text-align: left">TRUE</td>
+      <td style="text-align: left">FALSE</td>
+      <td style="text-align: left">TRUE</td>
+      <td style="text-align: left"> </td>
+      <td style="text-align: left"> </td>
+    </tr>
+    <tr>
+      <td style="text-align: left">action</td>
+      <td style="text-align: left">Identifies the action that the event describes</td>
+      <td style="text-align: left">  <a href="#action-object">Action Object</a></td>
+      <td style="text-align: left">FALSE</td>
+      <td style="text-align: left">FALSE</td>
+      <td style="text-align: left">TRUE</td>
+      <td style="text-align: left"> </td>
+      <td style="text-align: left"> </td>
+    </tr>
+    <tr>
+      <td style="text-align: left">actors</td>
+      <td style="text-align: left">Describes zero or more entities that performed the action</td>
+      <td style="text-align: left">Array of   <a href="#actor-object">Actor Object</a></td>
+      <td style="text-align: left">FALSE</td>
+      <td style="text-align: left">FALSE</td>
+      <td style="text-align: left">TRUE</td>
+      <td style="text-align: left"> </td>
+      <td style="text-align: left"> </td>
+    </tr>
+    <tr>
+      <td style="text-align: left">targets</td>
+      <td style="text-align: left">Describes zero or more entities that the action was performed against</td>
+      <td style="text-align: left">Array of   <a href="#target-object">Target Object</a></td>
+      <td style="text-align: left">TRUE</td>
+      <td style="text-align: left">FALSE</td>
+      <td style="text-align: left">TRUE</td>
+      <td style="text-align: left"> </td>
+      <td style="text-align: left"> </td>
+    </tr>
+    <tr>
+      <td style="text-align: left">_links</td>
+      <td style="text-align: left">discoverable resources related to the event</td>
+      <td style="text-align: left">  <a href="http://tools.ietf.org/html/draft-kelly-json-hal-06">JSON HAL</a></td>
+      <td style="text-align: left">TRUE</td>
+      <td style="text-align: left">FALSE</td>
+      <td style="text-align: left">TRUE</td>
+      <td style="text-align: left"> </td>
+      <td style="text-align: left"> </td>
+    </tr>
+    <tr>
+      <td style="text-align: left">_embedded</td>
+      <td style="text-align: left">embedded resources related to the event</td>
+      <td style="text-align: left">  <a href="http://tools.ietf.org/html/draft-kelly-json-hal-06">JSON HAL</a></td>
+      <td style="text-align: left">TRUE</td>
+      <td style="text-align: left">FALSE</td>
+      <td style="text-align: left">TRUE</td>
+      <td style="text-align: left"> </td>
+      <td style="text-align: left"> </td>
+    </tr>
+  </tbody>
+</table>
+
+<p>Property Details</p>
+
+<ul>
+  <li>The actor and/or target of an event is dependent on the action performed. Not all events have an actor or target.</li>
+  <li>The <code class="highlighter-rouge">sessionId</code> can identify multiple requests.  A single <code class="highlighter-rouge">requestId</code> can identify multiple events.  Use the <code class="highlighter-rouge">sessionId</code> to link events and requests that occurred in the same session.</li>
+</ul>
+
+<h3 id="action-object">Action Object</h3>
+
+<p>Describes an activity performed by a user, app, client, or other entity (actor) on a target:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: left">Property</th>
+      <th style="text-align: left">Description</th>
+      <th style="text-align: left">DataType</th>
+      <th style="text-align: left">Nullable</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left">message</td>
+      <td style="text-align: left">Description of an action</td>
+      <td style="text-align: left">String</td>
+      <td style="text-align: left">FALSE</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">categories</td>
+      <td style="text-align: left">  <a href="#action-categories">Categories</a> for an action</td>
+      <td style="text-align: left">Array of String</td>
+      <td style="text-align: left">FALSE</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">objectType</td>
+      <td style="text-align: left">Identifies the   <a href="#action-objecttypes">unique type</a> of an action</td>
+      <td style="text-align: left">String</td>
+      <td style="text-align: left">FALSE</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">requestUri</td>
+      <td style="text-align: left">Uri of the request that generated the event.</td>
+      <td style="text-align: left">String</td>
+      <td style="text-align: left">TRUE</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>Actions that do not define any categories will have a zero element array value.</p>
+
+<div class="language-json highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
+    </span><span class="nt">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"User performed single sign on to app"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"categories"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="s2">"Application Access"</span><span class="w">
+    </span><span class="p">],</span><span class="w">
+    </span><span class="nt">"objectType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"app.auth.sso"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"requestUri"</span><span class="p">:</span><span class="w"> </span><span class="s2">"/app/salesforce/kdx9PWYBPEOBAUNVRBHK/sso/saml"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+</div>
+
+<h4 id="action-categories">Action Categories</h4>
+
+<p>Categories for an action:</p>
+
+<ul>
+  <li>Application Assignment</li>
+  <li>Application Access</li>
+  <li>Active Directory Agent</li>
+  <li>User Creation</li>
+  <li>User Activation</li>
+  <li>User Deactivation</li>
+  <li>User Locked Out</li>
+  <li>Sign-in Failure</li>
+  <li>Sign-in Success</li>
+  <li>Suspicious Activity</li>
+  <li>Application Imports (Summary)</li>
+  <li>Application Imports (Detailed)</li>
+  <li>SMS Messages</li>
+</ul>
+
+<blockquote>
+  <p>Note: Additional categories may be added in the future without versioning.</p>
+</blockquote>
+
+<h4 id="action-objecttypes">Action ObjectTypes</h4>
+
+<p>The action <code class="highlighter-rouge">objectType</code> identifies the unique action performed.</p>
+
+<h5 id="application-authentication">Application Authentication</h5>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: left">ObjectType</th>
+      <th style="text-align: left">Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left">app.auth.sso</td>
+      <td style="text-align: left">Event occurred during SSO</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">app.auth.delegated.outbound</td>
+      <td style="text-align: left">Event occurred during outbound delegated authentication</td>
+    </tr>
+  </tbody>
+</table>
+
+<h5 id="application-user-management">Application User Management</h5>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: left">ObjectType</th>
+      <th style="text-align: left">Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left">app.user_management.push_password_update</td>
+      <td style="text-align: left">Update user’s password in application</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">app.user_management.push_profile_success</td>
+      <td style="text-align: left">Successfully created or updated user’s profile in application</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">app.user_management.push_profile_failure</td>
+      <td style="text-align: left">Failed to create or update user’s profile in application</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">app.user_management.push_new_user</td>
+      <td style="text-align: left">Create new user in application</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">app.user_management.push_pending_user</td>
+      <td style="text-align: left">Queue update of user for application</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">app.user_management.provision_user</td>
+      <td style="text-align: left">Created or updated user from application</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">app.user_management.provision_user_failed</td>
+      <td style="text-align: left">Failed to create or update user from application</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">app.user_management.importing_profile</td>
+      <td style="text-align: left">Create or update user’s profile from application</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">app.user_management.update_from_master_failed</td>
+      <td style="text-align: left">Failed to master user’s profile from application</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">app.user_management.verified_user_with_thirdparty</td>
+      <td style="text-align: left">Verified user against application</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">app.user_management.updating_api_credentials_for_password_change</td>
+      <td style="text-align: left">Updating API credentials due to  API admin user password change</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">app.user_management.activate_user</td>
+      <td style="text-align: left">Activate user in application</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">app.user_management.deactivate_user</td>
+      <td style="text-align: left">Deactivate user in application</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">app.user_management.reactivate_user</td>
+      <td style="text-align: left">Reactivate user in application</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">app.user_management.provision_user.user_inactive</td>
+      <td style="text-align: left">Attempt to provision a user to an inactive account, and cannot reactivate</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">app.user_management.deactivate_user.api_account</td>
+      <td style="text-align: left">Deactivate API user in application</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">app.user_management.deprovision_task_complete</td>
+      <td style="text-align: left">Deprovisioning task has been marked complete (automatically or manually)</td>
+    </tr>
+  </tbody>
+</table>
+
+<h5 id="application-group-management">Application Group Management</h5>
+
+<table class="table table-word-break">
+  <thead>
+    <tr>
+      <th style="text-align: left">ObjectType</th>
+      <th style="text-align: left">Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left">app.user_management.user_group_import.upsert_success</td>
+      <td style="text-align: left">Successfully created or updated group from application</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">app.user_management.user_group_import.delete_success</td>
+      <td style="text-align: left">Successfully removed imported group that was deleted from application</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">app.user_management.app_group_member_import.insert_success</td>
+      <td style="text-align: left">Update group memmbership  an AppGroupUserMember from an import succeeded</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">app.user_management.app_group_member_import.delete_success</td>
+      <td style="text-align: left">Deleting an AppGroupUserMember from an import succeeded</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">app.user_management.app_group_group_member_import.insert_success</td>
+      <td style="text-align: left">Upserting an ResolvedAppGroupMember from an import succeeded</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">app.user_management.app_group_group_member_import.delete_success</td>
+      <td style="text-align: left">Deleting an ResolvedAppGroupMember from an import succeeded</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">app.user_management.grouppush.mapping.created.from.rule</td>
+      <td style="text-align: left">A new mapping has been created from a rule</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">app.user_management.grouppush.mapping.created.from.rule.error.duplicate</td>
+      <td style="text-align: left">A new mapping from a rule was attempted to be created, but it turned out to be a dupe</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">app.user_management.grouppush.mapping.created.from.rule.warning.duplicate.name</td>
+      <td style="text-align: left">A new mapping from a rule was not created due to a duplicate group name</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">app.user_management.grouppush.mapping.created.from.rule.warning.duplicate.name.tobecreated</td>
+      <td style="text-align: left">A new mapping from a rule was not created due to another mapping will be created that has the same user group name</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">app.user_management.grouppush.mapping.created.from.rule.warning.upsertGroup.duplicate.name</td>
+      <td style="text-align: left">Create or update of source group triggered mapping rule re-evaluation preventing a new application group mapping due to a duplicate group name</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">app.user_management.grouppush.mapping.created.from.rule.error.validation</td>
+      <td style="text-align: left">Failed to create new application group mapping due to a validation error</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">app.user_management.grouppush.mapping.created.from.rule.errors</td>
+      <td style="text-align: left">Failed to create new application group mapping due to an error</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">app.user_management.grouppush.mapping.deactivated.source.group.renamed</td>
+      <td style="text-align: left">Successfully deactivate target application group when source group was renamed</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">app.user_management.grouppush.mapping.deactivated.source.group.renamed.failed</td>
+      <td style="text-align: left">Failed to deactivate target application group when source group was renamed</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">app.user_management.grouppush.mapping.app.group.renamed</td>
+      <td style="text-align: left">Successfully renamed target application group when source group was renamed</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">app.user_management.grouppush.mapping.app.group.renamed.failed</td>
+      <td style="text-align: left">Failed to rename target application group when source group was renamed</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">app.user_management.grouppush.mapping.and.groups.deleted.rule.deleted</td>
+      <td style="text-align: left">An existing mapping and its target groups have been deleted because a mapping rule was deleted</td>
+    </tr>
+  </tbody>
+</table>
+
+<h5 id="delegated-authentication">Delegated Authentication</h5>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: left">ObjectType</th>
+      <th style="text-align: left">Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left">app.inbound_del_auth.failure.not_supported</td>
+      <td style="text-align: left">Application doesn’t support delauth</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">app.inbound_del_auth.failure.instance_not_found</td>
+      <td style="text-align: left">Couldn’t find delauth app instance</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">app.inbound_del_auth.failure.invalid_request.could_not_parse_credentials</td>
+      <td style="text-align: left">Couldn’t parse credentials in delauth request</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">app.inbound_del_auth.failure.account_not_found</td>
+      <td style="text-align: left">Inbound delauth account not found</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">app.inbound_del_auth.failure.invalid_login_credentials</td>
+      <td style="text-align: left">Inbound delauth, invalid login credentials</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">app.inbound_del_auth.login_success</td>
+      <td style="text-align: left">Successful delauth login</td>
+    </tr>
+  </tbody>
+</table>
+
+<h5 id="rich-client-authentication">Rich Client Authentication</h5>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: left">ObjectType</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left">app.rich_client.instance_not_found</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">app.rich_client.account_not_found</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">app.rich_client.multiple_accounts_found</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">app.rich_client.login_failure</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">app.rich_client.login_success</td>
+    </tr>
+  </tbody>
+</table>
+
+<h5 id="admin-appplication">Admin Appplication</h5>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: left">ObjectType</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left">app.admin.sso.no_response</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">app.admin.sso.bad_response</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">app.admin.sso.orgapp.notfound</td>
+    </tr>
+  </tbody>
+</table>
+
+<h5 id="applications">Applications</h5>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: left">ObjectType</th>
+      <th style="text-align: left">Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left">app.generic.provision.assign_user_to_app</td>
+      <td style="text-align: left">Assign external user to internal Okta user</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">app.generic.provision.deactivate_user_from_app</td>
+      <td style="text-align: left">Deactivate external user to internal Okta user</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">app.generic.config.app_activated</td>
+      <td style="text-align: left">Application has been activated</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">app.generic.config.app_deactivated</td>
+      <td style="text-align: left">Application has been deactivated</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">app.generic.import.provisioning_data</td>
+      <td style="text-align: left">Imported data used for provisioning</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">app.generic.import.import_user</td>
+      <td style="text-align: left">Started user import</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">app.generic.config.app_updated</td>
+      <td style="text-align: left">Application config has been updated</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">app.generic.import.new_user</td>
+      <td style="text-align: left">Application has imported a new user</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">app.generic.import.user_update</td>
+      <td style="text-align: left">Application has updated an exsiting user</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">app.generic.config.app_username_update</td>
+      <td style="text-align: left">User credentials for an application have been updated</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">app.generic.config.app_password_update</td>
+      <td style="text-align: left">User credentials for an application have been updated</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">app.generic.import.user_delete</td>
+      <td style="text-align: left">Application has deleted user</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">app.generic.import.started</td>
+      <td style="text-align: left"> </td>
+    </tr>
+    <tr>
+      <td style="text-align: left">app.generic.import.complete</td>
+      <td style="text-align: left"> </td>
+    </tr>
+    <tr>
+      <td style="text-align: left">app.generic.import.user_match.complete</td>
+      <td style="text-align: left"> </td>
+    </tr>
+    <tr>
+      <td style="text-align: left">app.generic.import.details.add_custom_object</td>
+      <td style="text-align: left"> </td>
+    </tr>
+    <tr>
+      <td style="text-align: left">app.generic.import.details.update_custom_object</td>
+      <td style="text-align: left"> </td>
+    </tr>
+    <tr>
+      <td style="text-align: left">app.generic.import.details.delete_custom_object</td>
+      <td style="text-align: left"> </td>
+    </tr>
+    <tr>
+      <td style="text-align: left">app.generic.import.details.add_user</td>
+      <td style="text-align: left"> </td>
+    </tr>
+    <tr>
+      <td style="text-align: left">app.generic.import.details.update_user</td>
+      <td style="text-align: left"> </td>
+    </tr>
+    <tr>
+      <td style="text-align: left">app.generic.import.details.delete_user</td>
+      <td style="text-align: left"> </td>
+    </tr>
+    <tr>
+      <td style="text-align: left">app.generic.import.details.add_group</td>
+      <td style="text-align: left"> </td>
+    </tr>
+    <tr>
+      <td style="text-align: left">app.generic.import.details.update_group</td>
+      <td style="text-align: left"> </td>
+    </tr>
+    <tr>
+      <td style="text-align: left">app.generic.import.details.delete_group</td>
+      <td style="text-align: left"> </td>
+    </tr>
+    <tr>
+      <td style="text-align: left">app.generic.import.summary.custom_object</td>
+      <td style="text-align: left"> </td>
+    </tr>
+    <tr>
+      <td style="text-align: left">app.generic.import.summary.user</td>
+      <td style="text-align: left"> </td>
+    </tr>
+    <tr>
+      <td style="text-align: left">app.generic.import.summary.group</td>
+      <td style="text-align: left"> </td>
+    </tr>
+    <tr>
+      <td style="text-align: left">app.generic.import.summary.group_membership</td>
+      <td style="text-align: left"> </td>
+    </tr>
+  </tbody>
+</table>
+
+<h5 id="credential-recovery">Credential Recovery</h5>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: left">ObjectType</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left">app.generic.reversibility.credentials.recover</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">app.generic.reversibility.personal.app.recovery</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">app.generic.reversibility.individual.app.recovery</td>
+    </tr>
+  </tbody>
+</table>
+
+<h5 id="application-instance">Application Instance</h5>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: left">ObjectType</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left">app.app_instance.change</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">app.app_instance.logo_update</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">app.app_instance.logo_reset</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">app.app_instance.outbound_delauth_enabled</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">app.app_instance.outbound_delauth_disabled</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">app.app_instance.config-error</td>
+    </tr>
+  </tbody>
+</table>
+
+<h5 id="user-authentication">User Authentication</h5>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: left">ObjectType</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left">core.user_auth.login_failed</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">core.user_auth.login_success</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">core.user_auth.logout_success</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">core.user_auth.account_locked</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">core.user_auth.session_expired</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">core.user_auth.mfa_bypass_attempted</td>
+    </tr>
+  </tbody>
+</table>
+
+<h5 id="user-mfa-authentication">User MFA Authentication</h5>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: left">ObjectType</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left">core.user.sms.message_sent.factor</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">core.user.sms.message_sent.verify</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">core.user.sms.message_sent.forgotpw</td>
+    </tr>
+  </tbody>
+</table>
+
+<h5 id="user-radius-authentication">User RADIUS Authentication</h5>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: left">ObjectType</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left">core.user_auth.radius.login.succeeded</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">core.user_auth.radius.login.failed</td>
+    </tr>
+  </tbody>
+</table>
+
+<h5 id="user-status">User Status</h5>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: left">ObjectType</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left">core.user.config.password_update.success</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">core.user.config.password_update.failure</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">core.user.config.user_activated</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">core.user.config.user_deactivated”</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">core.user.config.user_status.password_reset</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">core.user.config.user_creation.success</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">core.user.config.user_creation.failure</td>
+    </tr>
+  </tbody>
+</table>
+
+<h5 id="user-impersonation">User Impersonation</h5>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: left">ObjectType</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left">core.user.impersonation.session.initiated</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">core.user.impersonation.session.ended</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">core.user.impersonation.grant.enabled</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">core.user.impersonation.grant.extended</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">core.user.impersonation.grant.revoked</td>
+    </tr>
+  </tbody>
+</table>
+
+<h5 id="group-administrator-roles">Group Administrator Roles</h5>
+
+<table>
+  <thead>
+    <tr>
+      <th>ObjectType</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>core.user.admin_privilege.granted</td>
+    </tr>
+    <tr>
+      <td>core.user.admin_privilege.revoked</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="actor-object">Actor Object</h3>
+
+<p>Describes the user, app, client, or other entity (actor) who performed an action on a target:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: left">Property</th>
+      <th style="text-align: left">Description</th>
+      <th style="text-align: left">DataType</th>
+      <th style="text-align: left">Nullable</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left">id</td>
+      <td style="text-align: left">Unique key for actor</td>
+      <td style="text-align: left">String</td>
+      <td style="text-align: left">FALSE</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">displayName</td>
+      <td style="text-align: left">Name of actor used for display purposes</td>
+      <td style="text-align: left">String</td>
+      <td style="text-align: left">TRUE</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">objectType</td>
+      <td style="text-align: left">      <a href="#user-objecttype">User</a> or       <a href="#client-objecttype">Client</a></td>
+      <td style="text-align: left">String</td>
+      <td style="text-align: left">FALSE</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>The schema of an actor is dependent on the actor’s <code class="highlighter-rouge">objectType</code>.</p>
+
+<h3 id="target-object">Target Object</h3>
+
+<p>The entity upon which an actor performs an action. Targets may be anything, even a login token:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: left">Property</th>
+      <th style="text-align: left">Description</th>
+      <th style="text-align: left">DataType</th>
+      <th style="text-align: left">Nullable</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left">id</td>
+      <td style="text-align: left">Unique key for target</td>
+      <td style="text-align: left">String</td>
+      <td style="text-align: left">FALSE</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">displayName</td>
+      <td style="text-align: left">Name of target used for display purposes</td>
+      <td style="text-align: left">String</td>
+      <td style="text-align: left">TRUE</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">objectType</td>
+      <td style="text-align: left">    <a href="#user-objecttype">User</a> or     <a href="#appinstance-objecttype">AppInstance</a></td>
+      <td style="text-align: left">String</td>
+      <td style="text-align: left">FALSE</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>The schema of a target is dependent on the actor’s <code class="highlighter-rouge">objectType</code></p>
+
+<h3 id="actor-and-target-objecttypes">Actor and Target ObjectTypes</h3>
+
+<h4 id="user-objecttype">User ObjectType</h4>
+
+<p>A denormalized reference to a <a href="users.html#user-model">User</a>:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: left">Property</th>
+      <th style="text-align: left">Description</th>
+      <th style="text-align: left">DataType</th>
+      <th style="text-align: left">Nullable</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left">id</td>
+      <td style="text-align: left">Unique key for     <a href="users.html#user-model">user</a></td>
+      <td style="text-align: left">String</td>
+      <td style="text-align: left">FALSE</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">displayName</td>
+      <td style="text-align: left">    <a href="users.html#profile-object">User’s</a> first and last name</td>
+      <td style="text-align: left">String</td>
+      <td style="text-align: left">TRUE</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">login</td>
+      <td style="text-align: left">Unique login for     <a href="users.html#user-model">user</a></td>
+      <td style="text-align: left">String</td>
+      <td style="text-align: left">TRUE</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">objectType</td>
+      <td style="text-align: left">Type of object</td>
+      <td style="text-align: left"><code class="highlighter-rouge">User</code></td>
+      <td style="text-align: left">FALSE</td>
+    </tr>
+  </tbody>
+</table>
+
+<div class="language-json highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
+    </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"00u3gjksoiRGRAZHLSYV"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"displayName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Jon Stewart"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"login"</span><span class="p">:</span><span class="w"> </span><span class="s2">"jon@example.com"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"objectType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"User"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+</div>
+
+<p>The user can be retrieved by <code class="highlighter-rouge">id</code> with the <a href="users.html#get-user-with-id">User API</a>.</p>
+
+<h4 id="appinstance-objecttype">AppInstance ObjectType</h4>
+
+<p>Describes an application:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: left">Property</th>
+      <th style="text-align: left">Description</th>
+      <th style="text-align: left">DataType</th>
+      <th style="text-align: left">Nullable</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left">id</td>
+      <td style="text-align: left">Unique key for    <a href="apps.html#application-model">app</a></td>
+      <td style="text-align: left">String</td>
+      <td style="text-align: left">FALSE</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">displayName</td>
+      <td style="text-align: left">   <a href="apps.html#application-model">App’s</a> label</td>
+      <td style="text-align: left">String</td>
+      <td style="text-align: left">TRUE</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">objectType</td>
+      <td style="text-align: left">Type of object</td>
+      <td style="text-align: left"><code class="highlighter-rouge">AppInstance</code></td>
+      <td style="text-align: left">FALSE</td>
+    </tr>
+  </tbody>
+</table>
+
+<div class="language-json highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
+    </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0oab5cZEHFHXHGRNRRNL"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"displayName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Zendesk"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"objectType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"AppInstance"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+</div>
+
+<p>The app can be retrieved by <code class="highlighter-rouge">id</code> with the <a href="apps.html#get-application">Apps API</a>.</p>
+
+<h4 id="client-objecttype">Client ObjectType</h4>
+
+<p>Describes a client such as a browser:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: left">Property</th>
+      <th style="text-align: left">Description</th>
+      <th style="text-align: left">DataType</th>
+      <th style="text-align: left">Nullable</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left">id</td>
+      <td style="text-align: left">User agent of client</td>
+      <td style="text-align: left">String</td>
+      <td style="text-align: left">FALSE</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">displayName</td>
+      <td style="text-align: left">Name of client</td>
+      <td style="text-align: left">String</td>
+      <td style="text-align: left">TRUE</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">ipAddress</td>
+      <td style="text-align: left">IP Address of client</td>
+      <td style="text-align: left">String</td>
+      <td style="text-align: left">TRUE</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">objectType</td>
+      <td style="text-align: left">Type of object</td>
+      <td style="text-align: left"><code class="highlighter-rouge">Client</code></td>
+      <td style="text-align: left">FALSE</td>
+    </tr>
+  </tbody>
+</table>
+
+<div class="language-json highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
+    </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_8_4) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/29.0.1547.65 Safari/537.36"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"displayName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"CHROME"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"ipAddress"</span><span class="p">:</span><span class="w"> </span><span class="s2">"127.0.0.1"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"objectType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Client"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+</div>
+
+      </div>
+      <div class="TableOfContents TableOfContentsPreload">
+        <div class="TableOfContents-item is-level1">
+          <script>
+                  document.write(document.title.split('|')[0].trim());
+          </script>
+        </div>
+        <div class="TableOfContentsLoader"></div>
+      </div><!-- END Page Content -->
+    </section><!-- END Page Center w/Sub Nav & Content -->
+
+    <!-- START Footer -->
+    <footer class="Footer">
+    <div class="Wrap">
+
+        <div class="Row">
+
+            <div class="Column--3 Column--medium-6 Column--xSmall-12">
+
+                <a class="Logo" href="https://www.okta.com/" target="_blank" rel="noopener noreferrer">
+                    <img src="https://developer.okta.com/sites/all/themes/developer/images/logo-footer.png" alt="Okta">
+                    Visit okta.com
+                </a>
+
+            </div>
+
+            <div class="Column--3 Column--medium-12 Column--xSmall-12">
+
+                <h4>Social</h4>
+                <ul class="Footer-links Footer-links--social">
+                    <li><a class="Footer-links--github" target="_blank" rel="noopener noreferrer" href="http://github.com/oktadeveloper">Github</a></li>
+                    <li><a class="Footer-links--twitter" target="_blank" rel="noopener noreferrer" href="http://twitter.com/OktaDev">Twitter</a></li>
+                    <li><a class="Footer-links--forum" target="_blank" rel="noopener noreferrer" href="https://devforum.okta.com/">Forum</a></li>
+                    <li><a class="Footer-links--rss" target="_blank" rel="noopener noreferrer" href="http://feeds.feedburner.com/OktaBlog">RSS Blog</a></li>
+                </ul>
+            </div>
+
+            <div class="Column--3 Column--medium-6 Column--small-12">
+                <h4>More Info</h4>
+                <ul class="Footer-links">
+                    <li><a target="_blank" href="https://developer.okta.com/integrate-with-okta/">Integrate with Okta</a></li>
+                    <li><a href="/blog/">Blog</a></li>
+                    <li><a href="/docs/platform-release-notes/platform-release-notes.html">Release Notes</a></li>
+                    <li><a href="/3rd_party_notices/">3rd Party Notices</a></li>
+                </ul>
+            </div>
+
+            <div class="Column--3 Column--medium-6 Column--small-12">
+                <h4>Contact &amp; Legal</h4>
+                <ul class="Footer-links">
+                    <li><a href="https://developer.okta.com/contact/">Contact Sales</a></li>
+                    <li><a target="_blank" rel="noopener noreferrer" href="mailto:developers@okta.com">Contact Support</a></li>
+                    <li><a href="https://developer.okta.com/terms/">Terms &amp; Conditions</a></li>
+                    <li><a href="https://developer.okta.com/privacy/">Privacy Policy</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</footer>
+
+    <script type="text/javascript" src="/assets/master-0365dd27cf276cb2a15c0a43906ca592538204cf1ad4557547bf4e50609b411e.js"></script>
+    <script type="text/javascript" src="/assets/myOkta-911cbafbbe079b7a5522d9cbe15bd2a5f44e1582531e88393934bec69f97696b.js"></script>
+    
+    
+    
+    
+      <script type="text/javascript" src="/assets/docs-0af8e0751a2375ff1b4d8e8ddf6a1b7ffd864bd473116861d71f541c4859329e.js"></script>
+    
+
+    <!-- END Footer -->
+  </div>
+  <!-- START Post Footer -->
+  
+  <!-- START Google Tag Manager -->
+  <!-- https://support.google.com/tagmanager/answer/6103696?hl=en -->
+  <noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-TJ45R6" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+  <!-- END Google Tag Manager -->
+  <!-- START Google Remarketing Tag -->
+  <script type="text/javascript">
+    /* <![CDATA[ */
+    var google_conversion_id = 1006913831;
+    var google_custom_params = window.google_tag_params;
+    var google_remarketing_only = true;
+    /* ]]> */
+  </script>
+  <div style="display:none;"><script type="text/javascript" src="//www.googleadservices.com/pagead/conversion.js"></script></div>
+  <noscript><div style="display:inline;"><img height="1" width="1" style="border-style:none;" alt="" src="//googleads.g.doubleclick.net/pagead/viewthroughconversion/1006913831/?value=0&amp;guid=ON&amp;script=0"></div></noscript>
+  <!-- END Google Remarketing Tag -->
+  <!-- START Crazy Egg Tracking -->
+  <script type="text/javascript">
+    setTimeout(function(){var a=document.createElement("script");
+    var b=document.getElementsByTagName("script")[0];
+    a.src=document.location.protocol+"//script.crazyegg.com/pages/scripts/0021/9333.js?"+Math.floor(new Date().getTime()/3600000);
+    a.async=true;a.type="text/javascript";b.parentNode.insertBefore(a,b)}, 1);
+  </script>
+  <!-- END Crazy Egg Tracking -->
+
+  <!-- END Post Footer -->
+</body>
+</html>

@@ -1,0 +1,698 @@
+<!DOCTYPE html>
+<html class="no-js" lang="en" dir="ltr">
+<head>
+  <script>
+    var searchDomain = 'https://developer.okta.com';
+    var isProduction = window.location.hostname === 'developer.okta.com';
+    if (isProduction) {
+      // TypeKit
+      (function(d) {
+        var config = {
+          kitId: 'jff5neq',
+          scriptTimeout: 3000,
+          async: true
+        },
+        h=d.documentElement,t=setTimeout(function(){h.className=h.className.replace(/bwf-loadingb/g,"")+" wf-inactive";},config.scriptTimeout),tk=d.createElement("script"),f=false,s=d.getElementsByTagName("script")[0],a;h.className+=" wf-loading";tk.src='https://use.typekit.net/'+config.kitId+'.js';tk.async=true;tk.onload=tk.onreadystatechange=function(){a=this.readyState;if(f||a&&a!="complete"&&a!="loaded")return;f=true;clearTimeout(t);try{Typekit.load(config)}catch(e){}};s.parentNode.insertBefore(tk,s)
+      })(document);
+
+      // Google analytics
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+              (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+              m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+      ga('create', 'UA-15777010-3', 'auto');
+      ga('send', 'pageview');
+
+      // START Google Tag Manager
+      (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+      new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+      j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+      '//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+      })(window,document,'script','dataLayer','GTM-TJ45R6');
+      // END Google Tag Manager
+    }
+	</script>
+  <meta charset="utf-8">
+  <meta http-equiv="x-ua-compatible" content="IE=edge,chrome=1">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+ 	
+
+  <link type="text/css" rel="stylesheet" href="https://developer.okta.com/sites/all/themes/developer/css/master.css" media="all" />
+  <meta class="swiftype" name="title" data-type="string" content="Customizing Your Authorization Server | Okta Developer" />
+  <meta class="swiftype" name="summary" data-type="string" content="How to set up a custom authorization server in Okta" />
+
+  <link type="text/css" rel="stylesheet" href="/assets/animate-ec43d72c3ed45e08a460b8a2966d8dba6006aebfa0530935c3973fa493a8771f.css">
+  <link type="text/css" rel="stylesheet" href="/assets/okta-a96df4c9d48b78b618e1d541f46f7137d73d40653571e020c1ad59edd7915c60.css">
+  
+  
+  <title>Customizing Your Authorization Server | Okta Developer</title>
+  <meta name="description" content="How to set up a custom authorization server in Okta">
+  <link rel="canonical" href="https://developer.okta.com/authentication-guide/implementing-authentication/set-up-authz-server.html"  data-proofer-ignore>
+  <link rel="alternate" type="application/rss+xml" title="Okta Developer" href="https://developer.okta.com/feed.xml"><!-- GA -->
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+  <link rel="manifest" href="/manifest.json">
+  <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#21313a">
+  <meta name="theme-color" content="#ffffff">
+</head>
+
+<body>
+  <div class="Page customizing-your-authorization-server Page--docs-page">
+    <!-- START Header -->
+    
+
+
+
+
+<header class="Header is-fixed">
+
+  <div class="Wrap">
+
+    <a class="Logo" href="https://developer.okta.com">
+      <svg version="1.1" id="OktaLogo" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 431.9 151.4" style="enable-background:new 0 0 431.9 151.4;" xml:space="preserve"><g><g><g><path d="M102.2,41.4c-21,0-38.1,17.1-38.1,38.1s17.1,38.1,38.1,38.1s38.1-17.1,38.1-38.1l0,0C140.3,58.5,123.2,41.4,102.2,41.4z M102.2,98.5c-10.5,0-19-8.5-19-19s8.5-19,19-19s19,8.5,19,19c0.1,10.5-8.4,19-18.9,19.1C102.3,98.6,102.2,98.6,102.2,98.5L102.2,98.5z"/><path d="M169.1,92.3c0-1.9,1.5-3.4,3.4-3.4c0.9,0,1.8,0.4,2.4,1c9.5,9.7,25.3,26.3,25.4,26.4c0.4,0.5,0.8,0.8,1.4,0.9l1.6,0.2h17.2c1.8,0,3.3-1.4,3.4-3.2c0-0.8-0.3-1.5-0.8-2.2l-28.6-29.2l-1.5-1.5c-3.2-3.9-2.9-5.4,0.8-9.3l22.6-25.1c1.1-1.4,0.8-3.5-0.6-4.6c-0.6-0.4-1.3-0.7-2-0.7h-17c-0.6,0.2-1.1,0.5-1.5,0.9L175,64.4c-1.3,1.4-3.4,1.5-4.8,0.2c-0.7-0.6-1.1-1.5-1.1-2.5V18.9c0-1.7-1.3-3-3-3c-0.1,0-0.2,0-0.3,0h-12.7c-2.2,0-3.3,1.5-3.3,2.8v95.8c0,2.2,1.8,2.8,3.3,2.8h12.7c1.7,0.1,3.2-1.2,3.3-2.9c0,0,0,0,0,0V92.3z"/><path d="M273,114l-1.4-12.8c-0.2-1.7-1.7-2.9-3.4-2.7c0,0,0,0-0.1,0l-2.9,0.2c-10.1,0-18.5-7.9-19-18c0-0.3,0-0.7,0-1V64.2c-0.1-2,1.5-3.6,3.5-3.7c0,0,0,0,0,0h17c1.7-0.1,3.1-1.5,3-3.2c0,0,0-0.1,0-0.1v-12c0-2.3-1.5-3.6-2.8-3.6h-17.1c-1.9,0.1-3.5-1.5-3.6-3.4c0,0,0,0,0,0V18.9c-0.1-1.7-1.5-3.1-3.2-3c0,0-0.1,0-0.1,0h-12.7c-1.6-0.1-3,1.1-3.1,2.7c0,0.1,0,0.1,0,0.2c0,0,0,61.7,0,62c0.5,21,17.9,37.6,38.9,37c1.4,0,2.9-0.2,4.3-0.3C272,117.2,273.2,115.7,273,114z"/></g><path d="M364.7,98c-10.8,0-12.4-3.8-12.4-18.3l0,0V44.8c0-1.8-1.4-3.2-3.2-3.2c0,0-0.1,0-0.1,0h-12.8c-1.8,0-3.2,1.4-3.3,3.2v1.6C314.6,36,291.3,42.5,281,60.8c-10.4,18.3-3.9,41.6,14.4,51.9c14,7.9,31.4,6.2,43.5-4.2c3.6,5.5,9.3,9.1,18.3,9.1c1.5,0,9.7,0.3,9.7-3.5v-13.6C367,99.2,366,98.1,364.7,98z M314.2,98.6c-10.5,0-19-8.5-19-19s8.5-19,19-19s19,8.5,19,19l0,0C333.2,90.1,324.7,98.6,314.2,98.6z"/></g><path d="M19.4,74c2.2-1.9,4.1-4.1,5.7-6.6c3.5-5.3,5.4-11.5,5.2-17.9V27c0-4.9,0.9-8.4,2.7-10.5c1.8-2.1,4.8-3,9.2-3h12.6c1.2,0,2.1-0.9,2.2-2.1l0,0V2.2C57,1,56,0,54.8,0c0,0,0,0,0,0H41.5c-7.8,0-12.9,2.1-18,7.6s-7.1,12.3-7.1,21.7v14.2c0,2.2-0.1,4-0.2,5.7v2.2c-0.5,3.2-1.8,6.2-3.6,8.9C9.4,64.7,5.1,70.9,0.9,74l0,0l-0.3,0.3l0,0l-0.2,0.3H0.2v0.3l0,0c-0.1,0.3-0.1,0.7,0,1l0,0v0.3h0.1l0.2,0.3l0,0l0.3,0.3l0,0c4.2,3.1,8.5,9.3,11.3,13.7c1.8,2.7,3.1,5.7,3.6,8.9v2.2c0.1,1.6,0.2,3.5,0.2,5.7v14.3c0,9.4,2.4,16.7,7.1,21.7s10.2,7.6,18,7.6h13.8c1.2,0,2.2-1,2.2-2.2V140l0,0c0-1.2-1-2.2-2.2-2.2H42.2c-4.4,0-7.5-1-9.2-3s-2.7-5.6-2.7-10.5v-22.4c0.2-6.4-1.7-12.6-5.2-17.9c-1.6-2.5-3.5-4.7-5.7-6.6l0,0c-0.9-0.7-1.1-2-0.4-2.9C19.2,74.3,19.3,74.2,19.4,74L19.4,74z"/><path d="M412.5,74c-2.2-1.9-4.1-4.1-5.7-6.6c-3.5-5.3-5.4-11.5-5.2-17.9V27c0-4.9-0.9-8.4-2.7-10.5s-4.8-3-9.2-3h-12.6c-1.2,0-2.2-1-2.2-2.2c0,0,0,0,0,0l0,0V2.2c0-1.2,1-2.2,2.2-2.2c0,0,0,0,0,0h13.4c7.8,0,12.9,2.1,18,7.6s7.1,12.3,7.1,21.7v14.2c0,2.2,0.1,4,0.2,5.7v2.2c0.5,3.2,1.8,6.2,3.6,8.9c2.8,4.5,7.1,10.7,11.3,13.7l0,0l0.3,0.3l0,0l0.2,0.3h0.1v0.3l0,0c0.1,0.3,0.1,0.7,0,1l0,0v0.3h-0.1l-0.2,0.3l0,0l-0.3,0.3l0,0c-4.2,3.1-8.5,9.3-11.3,13.7c-1.8,2.7-3.1,5.7-3.6,8.9v2.2c-0.1,1.6-0.2,3.5-0.2,5.7v14.3c0,9.4-2.4,16.7-7.1,21.7s-10.2,7.6-18,7.6h-13.4c-1.2,0-2.2-1-2.2-2.2c0,0,0,0,0,0V140l0,0c0-1.2,1-2.2,2.2-2.2l0,0h12.7c4.4,0,7.5-1,9.2-3s2.7-5.6,2.7-10.5v-22.4c-0.2-6.3,1.6-12.6,5.1-17.9c1.6-2.5,3.5-4.7,5.7-6.6l0,0c0.9-0.7,1.1-2,0.4-2.9C412.7,74.3,412.6,74.2,412.5,74L412.5,74z"/></g></svg>
+    </a>
+
+    <nav class="Header-nav PrimaryNav">
+      <ul class="menu">
+        <li class="first leaf">
+          <a href="https://developer.okta.com/product/">Product</a>
+        </li>
+        <li class="leaf">
+          <a href="https://developer.okta.com/pricing/">Pricing</a>
+        </li>
+        <li class="leaf">
+          <a href="/blog/">Blog</a>
+        </li>
+        <li class="leaf">
+          <a href="/documentation/">Docs</a>
+        </li>
+        <li class="last expanded">
+          <span class="nolink">Support</span>
+          <ul class="menu">
+            <li class="first leaf"><a href="https://devforum.okta.com/">Okta Developer Forums</a></li>
+            <li class="last leaf"><a href="mailto:developers@okta.com">developers@okta.com</a></li>
+          </ul>
+        </li>
+      </ul>
+      <a class="PrimaryNav-toggle" href="#">
+        <svg width="20px" height="20px" viewBox="0 0 20 20" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+            <g class="MenuIcon" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="round">
+                <path d="M1,16 L19,16" class="MenuIcon-line1" stroke="#FFFFFF" stroke-width="2"></path>
+                <path d="M1,4 L19,4" class="MenuIcon-line2" stroke="#FFFFFF" stroke-width="2"></path>
+                <path d="M1,10 L19,10" class="MenuIcon-line3" stroke="#FFFFFF" stroke-width="2"></path>
+                <path d="M1,10 L19,10" class="MenuIcon-line4" stroke="#FFFFFF" stroke-width="2"></path>
+            </g>
+        </svg>
+        <svg class="CloseIcon" width="16px" height="16px" viewBox="0 0 16 16" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+          <g id="ALl-Boards" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+            <g id="Desktop" transform="translate(-915.000000, -235.000000)" fill="#FFFFFF">
+              <g id="Search-bar-Active" transform="translate(30.000000, 26.000000)">
+                <polygon id="Icon/Cross" points="901 210.6 899.4 209 893 215.4 886.6 209 885 210.6 891.4 217 885 223.4 886.6 225 893 218.6 899.4 225 901 223.4 894.6 217"></polygon>
+              </g>
+            </g>
+          </g>
+        </svg>
+      </a>
+
+      <div class="PrimaryNav-cta">
+        <a target="_blank" rel="noopener noreferrer" href="https://login.okta.com/?SAMLRequest=fc%2B7CsJAEAXQXvAflu1NNJUMeZBGELTx1a%2FrYILJTtyZGD%2FfSBRiYzlw77lMnD3rSj3Qc0ku0YtgrhU6S5fSXRN9PKxmS52l00nMpq6iBvJWCrfDe4ss6vStRe9aDzmGIZfo1jsgwyWDMzUyiIV9vt1AH4XGk5ClSvewUgMNa%2BYW%2FVj5jxhm9NLP67QQaSAMu64L6CYmsFSHlnzT4ZlLwTgcL6Sf8%2FeX9AU%3Dhttps://login.okta.com/?SAMLRequest=fc%2B7CsJAEAXQXvAflu1NNJUMeZBGELTx1a%2FrYILJTtyZGD%2FfSBRiYzlw77lMnD3rSj3Qc0ku0YtgrhU6S5fSXRN9PKxmS52l00nMpq6iBvJWCrfDe4ss6vStRe9aDzmGIZfo1jsgwyWDMzUyiIV9vt1AH4XGk5ClSvewUgMNa%2BYW%2FVj5jxhm9NLP67QQaSAMu64L6CYmsFSHlnzT4ZlLwTgcL6Sf8%2FeX9AU%3D" class="Button--redOutline">Login</a>
+        <a href="https://developer.okta.com/signup/" class="Button--red">Sign up</a>
+      </div>
+
+      <a class="SearchIcon" href="#"></a>
+      <form id="form_search" class="SearchBar Formisimo_clocked_69929" method="get" action="https://developer.okta.com/search/" name="form_search" __bizdiag="-784164280" __biza="WJ__">
+        <input type="text" name="stq" autocomplete="off" id="st-search-input-auto" class="st-search-input" placeholder="Search">
+        <input type="submit" name="submit" value="GO">
+      </form>
+
+    </nav>
+
+  </div>
+
+</header>
+
+    <!-- END Header -->
+     <!-- START Page Center w/Sub Nav & Content -->
+    <section class="PageContent DynamicSidebar has-tableOfContents">
+      <!-- START Fixed sidebar --><aside class="Sidebar">
+  <h2 class="Sidebar-location Sidebar-toggle h6">Navigation</h2>
+  <div class="Sidebar-close Sidebar-toggle"></div>
+  <div>
+    <h3 class="Sidebar-title"><a href = "/authentication-guide/">Authentication Guide</a></h3>
+    <ul class="Sidebar-nav">
+      <li>
+        <a href = "/authentication-guide/auth-overview/">OAuth 2.0 Overview</a>
+        
+      </li>
+      <li class="is-active">
+        <a href = "/authentication-guide/implementing-authentication/">Implementing OAuth 2.0</a>
+        
+          <ul>
+            
+              
+                <li>
+                  <a href="/authentication-guide/implementing-authentication/auth-code.html">Authorization Code Flow</a>
+                </li>
+            
+              
+                <li>
+                  <a href="/authentication-guide/implementing-authentication/auth-code-pkce.html">Authorization Code Flow with PKCE</a>
+                </li>
+            
+              
+                <li>
+                  <a href="/authentication-guide/implementing-authentication/client-creds.html">Client Credentials Flow</a>
+                </li>
+            
+              
+                <li>
+                  <a href="/authentication-guide/implementing-authentication/implicit.html">Implicit Flow</a>
+                </li>
+            
+              
+              
+                <li>
+                  <a href="/authentication-guide/implementing-authentication/password.html">Resource Owner Password Flow</a>
+                </li>
+            
+              
+                <li class="is-active">
+                  <a href="/authentication-guide/implementing-authentication/set-up-authz-server.html">Customizing Your Authorization Server</a>
+                </li>
+            
+          </ul>
+        
+      </li>
+      <li>
+      <a href = "/authentication-guide/social-login/">Social Login</a>
+      
+      </li>
+      <li>
+      <a href = "/authentication-guide/saml-login/">SAML Login</a>
+      
+      </li>
+      <li>
+      <a href = "/authentication-guide/tokens/">Working With Tokens</a>
+      
+      </li>
+      <!--
+      <li>
+      <a href = "/authentication-guide/custom-login/">Customizing Login</a>
+      
+      </li>
+    -->
+    </ul>
+
+    <h3 class="Sidebar-title">Use Cases</h3>
+    <ul class="Sidebar-nav">
+      <li>
+        <a href="/use_cases/authentication/">Authentication</a>
+      </li>
+      <li>
+        <a href="/use_cases/mfa/">Multi-Factor Authentication</a>
+      </li>
+      <li>
+        <a href="/use_cases/api_access_management/">API Access Management</a>
+      </li>
+      <li>
+        <a href="/use_cases/integrate_with_okta/">Integrate with Okta</a>
+      </li>
+    </ul>
+
+    <h3 class="Sidebar-title">Reference</h3>
+    <ul class="Sidebar-nav">
+      <li>
+        <a href="/docs/api/getting_started/api_test_client.html">Getting Started</a>
+      </li>
+      <li>
+        <a href="/docs/api/resources/authn.html">Authentication Reference</a>
+      </li>
+      <li>
+        <a href="/docs/api/resources/apps.html">API Reference</a>
+      </li>
+      <li>
+        <a href="/reference/error_codes/">Error Codes</a>
+      </li>
+      <li>
+        <a href="/reference/okta_expression_language/">Okta Expression Language</a>
+      </li>
+      <li>
+        <a href="/docs/platform-release-notes/platform-release-notes.html">Okta API Release Notes</a>
+      </li>
+    </ul>
+
+    <h3 class="Sidebar-title">Standards</h3>
+    <ul class="Sidebar-nav">
+      
+      
+      
+      <li>
+        <a href="/standards/OAuth/">OAuth 2.0 and Okta</a>
+      </li>
+      
+      
+      <li>
+        <a href="/standards/OIDC/">OpenID Connect and Okta</a>
+      </li>
+      
+      
+      <li>
+        <a href="/standards/SAML/">SAML</a>
+      </li>
+      
+      
+      
+      
+      <li>
+        <a href="/standards/SCIM/">SCIM Provisioning with Lifecycle Management</a>
+      </li>
+      
+    </ul>
+
+    <script>
+      if (document.querySelectorAll("#Sidebar_Resources .is-active").length) {
+        document.getElementById('Sidebar_Resources').classList.remove('Sidebar-hide');
+      }
+
+      if (document.querySelectorAll("#Sidebar_References .is-active").length) {
+        document.getElementById('Sidebar_References').classList.remove('Sidebar-hide');
+      }
+    </script>
+  </div>
+</aside>
+<!-- END Fixed sidebar -->
+      <!-- START Page Content -->
+      <div class="PageContent-main" id="docs-body">
+        <a id="edit-link" href="https://github.com/okta/okta.github.io/edit/source/_source/_authentication-guide/implementing-authentication/set-up-authz-server.md" data-proofer-ignore>Edit Page</a>
+      <h1 id="overview">Overview</h1>
+
+<p>Okta allows you to create multiple custom OAuth 2.0 authorization servers which can be used to protect your own resource servers. Within each authorization server you can define your own OAuth 2.0 scopes, claims, and access policies.</p>
+
+<p>If you have an <a href="https://developer.okta.com/signup/">Okta Developer Edition</a> account, you already have a custom Authorization Server created for you, called “default”. For simple use cases the default Authorization Server should suffice. If your application has requirements, such as additional scopes, customizing rules for when to grant scopes, or you need additional authorization servers with different scopes and claims, then this chapter is for you.</p>
+
+<p>If you only need one Authorization Server, but you’d like to know more about customizing it, you can skip ahead and find out how to:</p>
+
+<ul>
+  <li><a href="#create-access-policies">Create Access Policies</a></li>
+  <li><a href="#create-rules-for-each-access-policy">Create Rules for your Access Policies</a></li>
+  <li><a href="#create-scopes-optional">Create Scopes</a></li>
+  <li><a href="#create-claims-optional">Create Claims</a></li>
+  <li><a href="#test-your-authorization-server-configuration">Test your Authorization Server</a></li>
+</ul>
+
+<blockquote>
+  <p>NOTE: For a high-level explanation of OAuth 2.0 and OpenID Connect see our <a href="/authentication-guide/auth-overview/">OAuth 2.0 Overview</a>.</p>
+</blockquote>
+
+<h2 id="create-an-authorization-server">Create an Authorization Server</h2>
+
+<blockquote>
+  <p>NOTE: If you have an <a href="https://developer.okta.com/signup/">Okta Developer Edition</a> account, you can skip this step because you already have a custom Authorization Server created for you, called “default”. The <code class="highlighter-rouge"><span class="p">{</span><span class="err">authorizationServerId</span><span class="p">}</span></code> for the default server is <code class="highlighter-rouge">default</code>.</p>
+</blockquote>
+
+<ol>
+  <li>
+    <p>In the Okta Developer Dashboard, navigate to <strong>API &gt; Authorization Servers</strong>.
+<img src="/assets/okta-admin-auth-server-toolbar-dev-2f18a63c5bb09161847ad882fbab2ad78c85515eec4062d3636a6653ba181f6c.png" alt="Authorization Server" /></p>
+  </li>
+  <li>
+    <p>Choose <strong>Add Authorization Server</strong> and supply the requested information.</p>
+
+    <ul>
+      <li><strong>Name</strong></li>
+      <li><strong>Audience:</strong> URI for the OAuth 2.0 resource server that consumes the access tokens. Use an absolute path such as <code class="highlighter-rouge">https://api.example.com/pets</code>.
+This value is used as the default <a href="https://tools.ietf.org/html/rfc7519#section-4.1.3">audience</a> for access tokens.</li>
+      <li><strong>Description</strong></li>
+    </ul>
+  </li>
+</ol>
+
+<p>When complete, your Authorization Server’s <strong>Settings</strong> tab displays the information that you provided and allows you to edit it.
+<img src="/assets/auth_server2-839d3486c777b77ca22f2a5d308e5f799deb631d920ca0925d69d3d8ba7dba53.png" alt="Add Authorization Server" width="640px" /></p>
+
+<p>Once the Authorization Server is created you can also edit the Signing Key Rotation setting. You can find out more about Okta’s signing keys by reading about <a href="/authentication-guide/tokens/validating-access-tokens.html#what-to-check-when-validating-an-access-token">token validation</a>.</p>
+
+<h2 id="create-access-policies">Create Access Policies</h2>
+
+<p>Access policies are containers for rules. Each access policy applies to a particular OpenID Connect application, and the rules it contains define different access and refresh token lifetimes depending on the nature of the token request.</p>
+
+<ol>
+  <li>In the Okta Developer Dashboard, navigate to <strong>API &gt; Authorization Servers</strong>.</li>
+  <li>Choose the name of an Authorization Server.</li>
+  <li>Choose <strong>Access Policies &gt; Add Policy</strong>
+ <img src="/assets/access_policy1-7bad7daa819a2904caacb41ef8f0e69fe54a83943331bbe4e6dad9175b322a4c.png" alt="Add Access Policy" width="640px" /></li>
+  <li>Provide the requested information:
+    <ul>
+      <li><strong>Name</strong></li>
+      <li><strong>Description</strong></li>
+      <li>Assign to <strong>All clients</strong>, or select <strong>The following clients:</strong> and enter the name of the Okta OpenID Connect applications covered by this access policy. This field will auto-complete the names of your OpenID Connect applications as you type.
+ <img src="/assets/access_policy2-f92d5d54db0a5020bf674529ead8a4328c50a14498897ff235c5e09e21a07245.png" alt="Access Policy Configuration" width="640px" /></li>
+    </ul>
+  </li>
+</ol>
+
+<p>While in the Access Policy list, you can:</p>
+<ul>
+  <li>Set access policies to be active or deactivate them for testing or debugging purposes.</li>
+  <li>Reorder any policies you create using drag-n-drop.
+  <img src="/assets/access_policy3-5d8ee78d2b36b0217a4817df198f2f5fa4a047cf41bb1a561a44000f00fbff53.png" alt="Access Policy List" width="640px" /></li>
+</ul>
+
+<p>Polices are evaluated in priority order, as are the rules in a policy.
+The first policy and rule that matches the client request is applied and no further rule or policy processing occurs. If a client matches no policies, the authentication attempt will fail and an error will be returned.</p>
+
+<h2 id="create-rules-for-each-access-policy">Create Rules for Each Access Policy</h2>
+
+<p>Rules define particular token lifetimes for a given combination of grant type, user, and scope. They are evaluated in priority order, and once a matching rule is found no other rules are evaluated. If no matching rule is found, then the authorization request fails.</p>
+
+<ol>
+  <li>In the Okta Developer Dashboard, navigate to <strong>API &gt; Authorization Servers</strong>.</li>
+  <li>Choose the name of an authorization server, and select <strong>Access Policies</strong>.</li>
+  <li>Choose the name of an access policy, and select <strong>Add Rule</strong>.
+ <img src="/assets/rule1-67f591048027abffc3b2a50646b2871393c9f0e99981bfc9e36f31277f563492.png" alt="Add Rule" width="640px" /></li>
+  <li>Enter the requested information:
+    <ul>
+      <li><strong>Rule Name</strong></li>
+      <li><strong>IF Grant type is:</strong> Select one or more OAuth 2.0 grant types.</li>
+      <li><strong>AND User is:</strong> Select whether there’s no user (client credentials flow), or a user assigned to a client that’s assigned to this rule’s policy, or a user assigned to one or more groups that you specify or a list of users that you specify.</li>
+      <li><strong>AND Requested these scopes:</strong> Choose the scopes (any scopes, or a list that you specify) that can be requested by the user as part of the rule conditions.</li>
+      <li><strong>THEN Access token lifetime is:</strong> Choose the length of time before an access token expires.</li>
+      <li><strong>THEN Refresh token lifetime is:</strong> Choose the length of time before a refresh token expires.</li>
+    </ul>
+  </li>
+  <li>Choose <strong>Create Rule</strong> to save the rule.
+ <img src="/assets/rule2-f49350a1eac09284c9a26e376596991e0d5cb88eac59a6f84accdd7234f3aa13.png" alt="Rules List" width="640px" /></li>
+</ol>
+
+<p>While in the Rules list for an access policy, you can:</p>
+
+<ul>
+  <li>Set a rule to be inactive for testing or debugging.</li>
+  <li>Reorder rules. Rules are evaluated in priority order, so the first rule in the first policy that matches the client request is applied and no further processing occurs.</li>
+</ul>
+
+<blockquote>
+  <p>Note: Service applications (client credentials flow) have no user. If you use this flow, make sure you have at least one rule that specifies the condition <strong>No user</strong>.</p>
+</blockquote>
+
+<h3 id="rule-usage">Rule Usage</h3>
+
+<p>Access policy rules are whitelists. If you want to create granular rules, you must first ensure that you have no rules that match “any” of something (for example “Any user”). You can then create specific rules for each specific use case that you do want to support. For example, if you wanted to ensure that only Admin users using the implicit flow were granted access, then you would create a rule specifying that if:</p>
+
+<ul>
+  <li>a request is made using the <code class="highlighter-rouge">implicit</code> grant type, and</li>
+  <li>the user is a member of the <code class="highlighter-rouge">admin</code> group, and</li>
+  <li>any scope is specified</li>
+</ul>
+
+<p>Then the access token that is granted will have a lifetime of, for example, 1 hour.</p>
+
+<p>Rules can also be used to restrict grant types, users, or scopes. For example, you could prevent the use of all scopes other than <code class="highlighter-rouge">openid</code> and <code class="highlighter-rouge">offline_access</code> by only creating rules that specifically mention those two scopes. This means you would have to:</p>
+
+<ol>
+  <li>Not create any rules that match “Any scopes”, and</li>
+  <li>Ensure that all of your rules only match to the <code class="highlighter-rouge">openid</code> and/or <code class="highlighter-rouge">offline_access</code> scopes.</li>
+</ol>
+
+<p>Any request that is sent with a different scope will not match any rules and will consequently fail.</p>
+
+<p>At this point you can keep reading to find out how to create custom scopes and claims, or proceed immediately to <a href="#test-your-authorization-server-configuration">Testing your Authorization Server</a>.</p>
+
+<h2 id="create-scopes-optional">Create Scopes (Optional)</h2>
+
+<p>Scopes specify what access privileges are being requested as part of the authorization. For example, the <code class="highlighter-rouge">email</code> scope requests access to the user’s email address. There are certain reserved scopes that are created with any Okta authorization server, which are listed <a href="/standards/OIDC/index.html#scopes">here</a>.</p>
+
+<p>If you need scopes in addition to the reserved scopes provided, you can create them. Custom scopes can have corresponding claims that tie them to some sort of user information.</p>
+
+<ol>
+  <li>In the Okta Developer Dashboard, navigate to <strong>API &gt; Authorization Servers</strong>.</li>
+  <li>
+    <p>Choose the name of the Authorization Server to display, and then select <strong>Scopes</strong>.
+<img src="/assets/scope1-6dc3ae8c21e3b8b770dd23f9393ab24e729163d7f965d89560b9013832d5f420.png" alt="Add Scopes" width="800px" /></p>
+  </li>
+  <li>Choose <strong>Scopes &gt; Add Scope</strong>, and provide a name and description, then choose <strong>Create</strong> to save the scope.
+<img src="/assets/scope2-bd068de0f47389b197cb1992fddca6c6ce6ebfbbc1d9784dba5043a9f0897618.png" alt="View Scopes" width="800px" /></li>
+</ol>
+
+<p>These scopes are referenced by the <strong>Claims</strong> dialog.</p>
+
+<p>If you set a scope as “Default”, then it will be included by default in any tokens that are created. Depending on which flow you are using, it might also allow you to exclude the <code class="highlighter-rouge">scope</code> parameter from your token request.</p>
+
+<h2 id="create-claims-optional">Create Claims (Optional)</h2>
+
+<p>Tokens contain claims that are statements about the subject, for example name, role, or email address.</p>
+
+<p>Create ID Token claims for OpenID Connect, or access tokens for OAuth 2.0:</p>
+
+<ol>
+  <li>In the Okta Developer Dashboard, navigate to <strong>API &gt; Authorization Servers</strong>.</li>
+  <li>Choose the name of the Authorization Server to display, and choose <strong>Claims</strong>.
+<img src="/assets/claims1-a1bd8fc8c14a13018cfaddef2e7f0d87820edc3785f1605b005addf648f32c9d.png" alt="Choose Claims" width="800px" />
+ Okta provides a default subject claim. You can edit the mapping, or create your own claims.</li>
+  <li>
+    <p>Choose <strong>Add Claim</strong> and provide the requested information.
+<img src="/assets/claim-5f4f8ef4754717e7f0d7580e2f182a709dd061e96678c6f9ddf14dfed733f6ed.png" alt="Edit Claims" width="800px" /></p>
+
+    <ul>
+      <li><strong>Name</strong></li>
+      <li><strong>Include in token type</strong>: Choose Access Token (OAuth 2.0) or ID Token (OpenID Connect). If you choose ID Token, you can also choose if the claim should be included only when requested, or always.</li>
+      <li><strong>Value type</strong>: Choose whether you’ll define the claim by a group filter or by an <strong>Expression</strong> written in Okta Expression Language.
+        <ul>
+          <li><strong>Mapping</strong>: This option displays if you chose <strong>Expression</strong> in the previous field. Add the mapping here using <a href="/reference/okta_expression_language/">Okta’s Expression Language</a>, for example <code class="highlighter-rouge">appuser.username</code>.
+Be sure to check that your expression returns the results expected–the expression isn’t validated here.</li>
+          <li><strong>Filter</strong>: This option displays if you chose <strong>Groups</strong> in the previous field. Use it to add a group filter. If you leave it blank, all users are specified for this claim.</li>
+        </ul>
+      </li>
+      <li><strong>Disable claim</strong>: Check this option if you want to temporarily disable the claim for testing or debugging.</li>
+      <li><strong>Include in</strong>: Specify whether the claim is valid for any scope, or select the scopes for which it is valid.</li>
+    </ul>
+  </li>
+</ol>
+
+<p>While in the Claims list, you can:</p>
+
+<ul>
+  <li>Sort claims by type.</li>
+  <li>
+    <p>Delete claims you’ve created, or disable claims for testing or debugging purposes.</p>
+
+    <p><img src="/assets/claims2-d5a8773bfc78c06f275cdebb3d6045cbbeb1a4d6f578dd36b0a408e608d0aed8.png" alt="Claims List" width="640px" /></p>
+  </li>
+</ul>
+
+<h2 id="test-your-authorization-server-configuration">Test Your Authorization Server Configuration</h2>
+
+<p>Once you have followed the above instructions to set-up and/or customize your Authorization Server, you can test it by sending any one of the API calls that returns OAuth 2.0 and/or OpenID Connect tokens.</p>
+
+<blockquote>
+  <p>NOTE: The <code class="highlighter-rouge"><span class="p">{</span><span class="err">authorizationServerId</span><span class="p">}</span></code> for the default server is <code class="highlighter-rouge">default</code>.</p>
+</blockquote>
+
+<p>A full description of Okta’s relevant APIs can be found here: <a href="/docs/api/resources/oauth2.html#authorization-operations">OAuth 2.0 Authorization Operations</a>.</p>
+
+<p>We have included here a few things that you can try to ensure that your Authorization Server is functioning as expected.</p>
+
+<blockquote>
+  <p>Note: This is not meant to be an exhaustive testing reference, but only to show some examples.</p>
+</blockquote>
+
+<h3 id="openid-connect-configuration">OpenID Connect Configuration</h3>
+
+<p>To verify that your server was created and has the expected configuration values, you can send an API request to the Server’s OpenID Connect Metadata URI: <code class="highlighter-rouge"><span class="okta-preview-domain">https://{yourOktaDomain}.com</span>/oauth2/{authorizationServerId}/.well-known/openid-configuration</code> using an HTTP client or by typing the URI inside of a browser. This will return information about the OpenID configuration of your Authorization Server, though it does not currently return any custom scopes or claims that you might have created.</p>
+
+<p>For more information on this endpoint, see here: <a href="/docs/api/resources/oauth2.html#retrieve-authorization-server-openid-connect-metadata">Retrieve Authorization Server OpenID Connect Metadata</a>.</p>
+
+<h3 id="custom-scopes-and-claims">Custom Scopes and Claims</h3>
+
+<p>You can retrieve a list of all scopes for your Authorization Server, including custom ones, using this endpoint:</p>
+
+<p><code class="highlighter-rouge">/api/v1/authorizationServers/{authorizationServerId}/scopes</code></p>
+
+<p>For more information on this endpoint, see here: <a href="/docs/api/resources/oauth2.html#get-all-scopes">Get all scopes</a>.</p>
+
+<p>If you created any custom claims, the easiest way to confirm that they have been successfully added is to use this endpoint:</p>
+
+<p><code class="highlighter-rouge">/api/v1/authorizationServers/{authorizationServerId}/claims</code></p>
+
+<p>For more information on this endpoint, see here: <a href="/docs/api/resources/oauth2.html#get-all-claims">Get all claims</a>.</p>
+
+<h3 id="testing-an-openid-connect-flow">Testing an OpenID Connect Flow</h3>
+
+<p>To test your Authorization Server more thoroughly, you can try a full authentication flow which returns an ID Token. To do this, you will need a client Application in Okta with at least one User assigned to it.</p>
+
+<p>For more information you can read about:</p>
+<ul>
+  <li><a href="https://help.okta.com/en/prev/Content/Topics/Apps/Apps_App_Integration_Wizard.htm">The OpenID Connect Application Wizard</a></li>
+  <li><a href="https://support.okta.com/help/Documentation/Knowledge_Article/27418177-Using-the-Okta-Applications-Page#Assigning">How to assign a User to an Application</a></li>
+</ul>
+
+<p>You will need the following values from your Okta OpenID Connect application, both of which can be found on your Application’s General tab:</p>
+
+<ul>
+  <li>Client ID</li>
+  <li>A valid Redirect URI</li>
+</ul>
+
+<p>Once you have an OpenID Connect Application set-up, and a User assigned to it you can try the authentication flow.</p>
+
+<p>First, you will need your Authorization Server’s Authorization Endpoint, which you can retrieve using the Server’s Metadata URI: <code class="highlighter-rouge"><span class="okta-preview-domain">https://{yourOktaDomain}.com</span>/oauth2/:authorizationServerId/.well-known/openid-configuration</code>. It will look like this:</p>
+
+<p><code class="highlighter-rouge"><span class="okta-preview-domain">https://{yourOktaDomain}.com</span>/oauth2/{authorizationServerId}/v1/authorize</code></p>
+
+<p>To this you will need to add the following URL query parameters:</p>
+
+<ul>
+  <li>Your OpenID Connect Application’s <code class="highlighter-rouge">client_id</code> and <code class="highlighter-rouge">redirect_uri</code></li>
+  <li>A <code class="highlighter-rouge">scope</code>, which for the purposes of this test will be <code class="highlighter-rouge">openid</code> and <code class="highlighter-rouge">profile</code></li>
+  <li>A <code class="highlighter-rouge">response_mode</code> which you can set to <code class="highlighter-rouge">fragment</code></li>
+  <li>(Optionally) <code class="highlighter-rouge">state</code> and <code class="highlighter-rouge">nonce</code> values</li>
+</ul>
+
+<p>All of the values are fully documented here: <a href="/docs/api/resources/oauth2.html#obtain-an-authorization-grant-from-a-user">Obtain an Authorization Grant from a User</a>.</p>
+
+<p>The resulting URL would look like this:</p>
+
+<p><code class="highlighter-rouge"><span class="okta-preview-domain">https://{yourOktaDomain}.com</span>/oauth2/{authorizationServerId}/v1/authorize?client_id=examplefa39J4jXdcCwWA&amp;response_type=id_token&amp;response_mode=fragment&amp;scope=openid%20profile&amp;redirect_uri=https%3A%2F%2FyourRedirectUriHere.com&amp;state=WM6D&amp;nonce=YsG76jo</code></p>
+
+<p>If you paste this into your browser you are redirected to the sign-in page for your Okta org, with a URL that looks like this:</p>
+
+<p><code class="highlighter-rouge"><span class="okta-preview-domain">https://{yourOktaDomain}.com</span>/login/login.htm?fromURI=%2Foauth2%2Fv1%2Fauthorize%2Fredirect%3Fokta_key%aKeyValueWillBeHere</code></p>
+
+<p>Here you enter in the credentials for a user who is mapped to your Open ID Connect Application and you will be directed to the <code class="highlighter-rouge">redirect_uri</code> that you specified along with an ID Token, and any state that you included as well:</p>
+
+<p><code class="highlighter-rouge">https://yourRedirectUriHere.com/#id_token=eyJhbGciOiJSUzI1NiIsImtpZCI6ImluZUdjZVQ4SzB1SnZyWGVUX082WnZLQlB2RFowO[...]z7UvPoMEIjuBTH-zNkTS5T8mGbY8y7532VeWKA&amp;state=WM6D</code></p>
+
+<p>To check the returned ID Token you can copy the value and paste it into your JWT decoder of choice (for example <a href="https://jsonwebtoken.io">https://jsonwebtoken.io</a>). There you can check the payload to confirm that it contains all of the claims that you are expecting, including custom ones. If you specified a <code class="highlighter-rouge">nonce</code> you will also find it there:</p>
+
+<div class="language-json highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
+ </span><span class="nt">"sub"</span><span class="p">:</span><span class="w"> </span><span class="s2">"00uawpa4r4Zybz9On0h7"</span><span class="p">,</span><span class="w">
+ </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"John Smith"</span><span class="p">,</span><span class="w">
+ </span><span class="nt">"locale"</span><span class="p">:</span><span class="w"> </span><span class="s2">"en-US"</span><span class="p">,</span><span class="w">
+ </span><span class="nt">"ver"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+ </span><span class="nt">"iss"</span><span class="p">:</span><span class="w"> </span><span class="s2">"<span class="okta-preview-domain">https://{yourOktaDomain}.com</span>/oauth2/{authorizationServerId}"</span><span class="p">,</span><span class="w">
+ </span><span class="nt">"aud"</span><span class="p">:</span><span class="w"> </span><span class="s2">"fa39J40exampleXdcCwWA"</span><span class="p">,</span><span class="w">
+ </span><span class="nt">"iat"</span><span class="p">:</span><span class="w"> </span><span class="mi">1498328175</span><span class="p">,</span><span class="w">
+ </span><span class="nt">"exp"</span><span class="p">:</span><span class="w"> </span><span class="mi">1498331912</span><span class="p">,</span><span class="w">
+ </span><span class="nt">"jti"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ID.fL39TTtvfBQoyHVkrbaqy9hWooqGOOgWau1W_y-KNyY"</span><span class="p">,</span><span class="w">
+ </span><span class="nt">"amr"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+  </span><span class="s2">"pwd"</span><span class="w">
+ </span><span class="p">],</span><span class="w">
+ </span><span class="nt">"idp"</span><span class="p">:</span><span class="w"> </span><span class="s2">"examplefz3q4Yd3Zk70h7"</span><span class="p">,</span><span class="w">
+ </span><span class="nt">"nonce"</span><span class="p">:</span><span class="w"> </span><span class="s2">"YsG76jo"</span><span class="p">,</span><span class="w">
+ </span><span class="nt">"preferred_username"</span><span class="p">:</span><span class="w"> </span><span class="s2">"john@example.com"</span><span class="p">,</span><span class="w">
+ </span><span class="nt">"given_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"John"</span><span class="p">,</span><span class="w">
+ </span><span class="nt">"family_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Smith"</span><span class="p">,</span><span class="w">
+ </span><span class="nt">"zoneinfo"</span><span class="p">:</span><span class="w"> </span><span class="s2">"America/Los_Angeles"</span><span class="p">,</span><span class="w">
+ </span><span class="nt">"updated_at"</span><span class="p">:</span><span class="w"> </span><span class="mi">1498155598</span><span class="p">,</span><span class="w">
+ </span><span class="nt">"auth_time"</span><span class="p">:</span><span class="w"> </span><span class="mi">1498328174</span><span class="p">,</span><span class="w">
+ </span><span class="nt">"preferred_honorific"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Commodore"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+</div>
+
+<p>In this example we see the <code class="highlighter-rouge">nonce</code> with value <code class="highlighter-rouge">YsG76jo</code> and the custom claim <code class="highlighter-rouge">preferred_honorific</code> with value <code class="highlighter-rouge">Commodore</code>.</p>
+
+<p>At this point you have set-up your Authorization Server and confirmed that it is working!</p>
+
+      </div>
+      <div class="TableOfContents TableOfContentsPreload">
+        <div class="TableOfContents-item is-level1">
+          <script>
+                  document.write(document.title.split('|')[0].trim());
+          </script>
+        </div>
+        <div class="TableOfContentsLoader"></div>
+      </div><!-- END Page Content -->
+    </section><!-- END Page Center w/Sub Nav & Content -->
+
+    <!-- START Footer -->
+    <footer class="Footer">
+    <div class="Wrap">
+
+        <div class="Row">
+
+            <div class="Column--3 Column--medium-6 Column--xSmall-12">
+
+                <a class="Logo" href="https://www.okta.com/" target="_blank" rel="noopener noreferrer">
+                    <img src="https://developer.okta.com/sites/all/themes/developer/images/logo-footer.png" alt="Okta">
+                    Visit okta.com
+                </a>
+
+            </div>
+
+            <div class="Column--3 Column--medium-12 Column--xSmall-12">
+
+                <h4>Social</h4>
+                <ul class="Footer-links Footer-links--social">
+                    <li><a class="Footer-links--github" target="_blank" rel="noopener noreferrer" href="http://github.com/oktadeveloper">Github</a></li>
+                    <li><a class="Footer-links--twitter" target="_blank" rel="noopener noreferrer" href="http://twitter.com/OktaDev">Twitter</a></li>
+                    <li><a class="Footer-links--forum" target="_blank" rel="noopener noreferrer" href="https://devforum.okta.com/">Forum</a></li>
+                    <li><a class="Footer-links--rss" target="_blank" rel="noopener noreferrer" href="http://feeds.feedburner.com/OktaBlog">RSS Blog</a></li>
+                </ul>
+            </div>
+
+            <div class="Column--3 Column--medium-6 Column--small-12">
+                <h4>More Info</h4>
+                <ul class="Footer-links">
+                    <li><a target="_blank" href="https://developer.okta.com/integrate-with-okta/">Integrate with Okta</a></li>
+                    <li><a href="/blog/">Blog</a></li>
+                    <li><a href="/docs/platform-release-notes/platform-release-notes.html">Release Notes</a></li>
+                    <li><a href="/3rd_party_notices/">3rd Party Notices</a></li>
+                </ul>
+            </div>
+
+            <div class="Column--3 Column--medium-6 Column--small-12">
+                <h4>Contact &amp; Legal</h4>
+                <ul class="Footer-links">
+                    <li><a href="https://developer.okta.com/contact/">Contact Sales</a></li>
+                    <li><a target="_blank" rel="noopener noreferrer" href="mailto:developers@okta.com">Contact Support</a></li>
+                    <li><a href="https://developer.okta.com/terms/">Terms &amp; Conditions</a></li>
+                    <li><a href="https://developer.okta.com/privacy/">Privacy Policy</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</footer>
+
+    <script type="text/javascript" src="/assets/master-0365dd27cf276cb2a15c0a43906ca592538204cf1ad4557547bf4e50609b411e.js"></script>
+    <script type="text/javascript" src="/assets/myOkta-911cbafbbe079b7a5522d9cbe15bd2a5f44e1582531e88393934bec69f97696b.js"></script>
+    
+    
+    
+    
+      <script type="text/javascript" src="/assets/docs-0af8e0751a2375ff1b4d8e8ddf6a1b7ffd864bd473116861d71f541c4859329e.js"></script>
+    
+
+    <!-- END Footer -->
+  </div>
+  <!-- START Post Footer -->
+  
+  <!-- START Google Tag Manager -->
+  <!-- https://support.google.com/tagmanager/answer/6103696?hl=en -->
+  <noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-TJ45R6" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+  <!-- END Google Tag Manager -->
+  <!-- START Google Remarketing Tag -->
+  <script type="text/javascript">
+    /* <![CDATA[ */
+    var google_conversion_id = 1006913831;
+    var google_custom_params = window.google_tag_params;
+    var google_remarketing_only = true;
+    /* ]]> */
+  </script>
+  <div style="display:none;"><script type="text/javascript" src="//www.googleadservices.com/pagead/conversion.js"></script></div>
+  <noscript><div style="display:inline;"><img height="1" width="1" style="border-style:none;" alt="" src="//googleads.g.doubleclick.net/pagead/viewthroughconversion/1006913831/?value=0&amp;guid=ON&amp;script=0"></div></noscript>
+  <!-- END Google Remarketing Tag -->
+  <!-- START Crazy Egg Tracking -->
+  <script type="text/javascript">
+    setTimeout(function(){var a=document.createElement("script");
+    var b=document.getElementsByTagName("script")[0];
+    a.src=document.location.protocol+"//script.crazyegg.com/pages/scripts/0021/9333.js?"+Math.floor(new Date().getTime()/3600000);
+    a.async=true;a.type="text/javascript";b.parentNode.insertBefore(a,b)}, 1);
+  </script>
+  <!-- END Crazy Egg Tracking -->
+
+  <!-- END Post Footer -->
+</body>
+</html>

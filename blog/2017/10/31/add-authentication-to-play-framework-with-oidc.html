@@ -1,0 +1,715 @@
+<!doctype html>
+<!--[if lt IE 7 ]> <html class="ie6 no-flexbox"> <![endif]-->
+<!--[if IE 7 ]>    <html class="ie7 no-flexbox"> <![endif]-->
+<!--[if IE 8 ]>    <html class="ie8 no-flexbox"> <![endif]-->
+<!--[if IE 9 ]>    <html class="ie9 no-flexbox"> <![endif]-->
+<!--[if IE 10 ]>    <html class="ie10 no-flexbox"> <![endif]-->
+<!--[if (gt IE 10)|!(IE)]><!--> <html class="modern wf-loading" lang="en"> <!--<![endif]-->
+  <head>
+  <script>
+    var searchDomain = 'https://developer.okta.com';
+    var isProduction = window.location.hostname === 'developer.okta.com';
+    if (isProduction) {
+      // TypeKit
+      (function(d) {
+        var config = {
+          kitId: 'jff5neq',
+          scriptTimeout: 3000,
+          async: true
+        },
+        h=d.documentElement,t=setTimeout(function(){h.className=h.className.replace(/bwf-loadingb/g,"")+" wf-inactive";},config.scriptTimeout),tk=d.createElement("script"),f=false,s=d.getElementsByTagName("script")[0],a;h.className+=" wf-loading";tk.src='https://use.typekit.net/'+config.kitId+'.js';tk.async=true;tk.onload=tk.onreadystatechange=function(){a=this.readyState;if(f||a&&a!="complete"&&a!="loaded")return;f=true;clearTimeout(t);try{Typekit.load(config)}catch(e){}};s.parentNode.insertBefore(tk,s)
+      })(document);
+
+      // Google analytics
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+              (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+              m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+      ga('create', 'UA-15777010-3', 'auto');
+      ga('send', 'pageview');
+
+      // START Google Tag Manager
+      (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+      new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+      j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+      '//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+      })(window,document,'script','dataLayer','GTM-TJ45R6');
+      // END Google Tag Manager
+    }
+	</script>
+  <meta charset="utf-8">
+  <meta http-equiv="x-ua-compatible" content="IE=edge,chrome=1">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+ 	
+
+  <link type="text/css" rel="stylesheet" href="https://developer.okta.com/sites/all/themes/developer/css/master.css" media="all" />
+  <meta class="swiftype" name="title" data-type="string" content="Add Authentication to Play Framework with OIDC and Okta | Okta Developer" />
+  <meta class="swiftype" name="summary" data-type="string" content="I’ve fallen in love with Play Framework in the past, but then found a more attractive framework in Spring Boot. I fell in love partly because Play was new an..." />
+
+  <link type="text/css" rel="stylesheet" href="/assets/animate-ec43d72c3ed45e08a460b8a2966d8dba6006aebfa0530935c3973fa493a8771f.css">
+  <link type="text/css" rel="stylesheet" href="/assets/okta-a96df4c9d48b78b618e1d541f46f7137d73d40653571e020c1ad59edd7915c60.css">
+  
+  
+  <title>Add Authentication to Play Framework with OIDC and Okta | Okta Developer</title>
+  <meta name="description" content="I’ve fallen in love with Play Framework in the past, but then found a more attractive framework in Spring Boot. I fell in love partly because Play was new an...">
+  <link rel="canonical" href="https://developer.okta.com/blog/2017/10/31/add-authentication-to-play-framework-with-oidc"  data-proofer-ignore>
+  <link rel="alternate" type="application/rss+xml" title="Okta Developer" href="https://developer.okta.com/feed.xml"><!-- GA -->
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+  <link rel="manifest" href="/manifest.json">
+  <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#21313a">
+  <meta name="theme-color" content="#ffffff">
+</head>
+
+  
+    <body id="blog">
+	
+
+
+
+
+<header class="Header is-fixed">
+
+  <div class="Wrap">
+
+    <a class="Logo" href="https://developer.okta.com">
+      <svg version="1.1" id="OktaLogo" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 431.9 151.4" style="enable-background:new 0 0 431.9 151.4;" xml:space="preserve"><g><g><g><path d="M102.2,41.4c-21,0-38.1,17.1-38.1,38.1s17.1,38.1,38.1,38.1s38.1-17.1,38.1-38.1l0,0C140.3,58.5,123.2,41.4,102.2,41.4z M102.2,98.5c-10.5,0-19-8.5-19-19s8.5-19,19-19s19,8.5,19,19c0.1,10.5-8.4,19-18.9,19.1C102.3,98.6,102.2,98.6,102.2,98.5L102.2,98.5z"/><path d="M169.1,92.3c0-1.9,1.5-3.4,3.4-3.4c0.9,0,1.8,0.4,2.4,1c9.5,9.7,25.3,26.3,25.4,26.4c0.4,0.5,0.8,0.8,1.4,0.9l1.6,0.2h17.2c1.8,0,3.3-1.4,3.4-3.2c0-0.8-0.3-1.5-0.8-2.2l-28.6-29.2l-1.5-1.5c-3.2-3.9-2.9-5.4,0.8-9.3l22.6-25.1c1.1-1.4,0.8-3.5-0.6-4.6c-0.6-0.4-1.3-0.7-2-0.7h-17c-0.6,0.2-1.1,0.5-1.5,0.9L175,64.4c-1.3,1.4-3.4,1.5-4.8,0.2c-0.7-0.6-1.1-1.5-1.1-2.5V18.9c0-1.7-1.3-3-3-3c-0.1,0-0.2,0-0.3,0h-12.7c-2.2,0-3.3,1.5-3.3,2.8v95.8c0,2.2,1.8,2.8,3.3,2.8h12.7c1.7,0.1,3.2-1.2,3.3-2.9c0,0,0,0,0,0V92.3z"/><path d="M273,114l-1.4-12.8c-0.2-1.7-1.7-2.9-3.4-2.7c0,0,0,0-0.1,0l-2.9,0.2c-10.1,0-18.5-7.9-19-18c0-0.3,0-0.7,0-1V64.2c-0.1-2,1.5-3.6,3.5-3.7c0,0,0,0,0,0h17c1.7-0.1,3.1-1.5,3-3.2c0,0,0-0.1,0-0.1v-12c0-2.3-1.5-3.6-2.8-3.6h-17.1c-1.9,0.1-3.5-1.5-3.6-3.4c0,0,0,0,0,0V18.9c-0.1-1.7-1.5-3.1-3.2-3c0,0-0.1,0-0.1,0h-12.7c-1.6-0.1-3,1.1-3.1,2.7c0,0.1,0,0.1,0,0.2c0,0,0,61.7,0,62c0.5,21,17.9,37.6,38.9,37c1.4,0,2.9-0.2,4.3-0.3C272,117.2,273.2,115.7,273,114z"/></g><path d="M364.7,98c-10.8,0-12.4-3.8-12.4-18.3l0,0V44.8c0-1.8-1.4-3.2-3.2-3.2c0,0-0.1,0-0.1,0h-12.8c-1.8,0-3.2,1.4-3.3,3.2v1.6C314.6,36,291.3,42.5,281,60.8c-10.4,18.3-3.9,41.6,14.4,51.9c14,7.9,31.4,6.2,43.5-4.2c3.6,5.5,9.3,9.1,18.3,9.1c1.5,0,9.7,0.3,9.7-3.5v-13.6C367,99.2,366,98.1,364.7,98z M314.2,98.6c-10.5,0-19-8.5-19-19s8.5-19,19-19s19,8.5,19,19l0,0C333.2,90.1,324.7,98.6,314.2,98.6z"/></g><path d="M19.4,74c2.2-1.9,4.1-4.1,5.7-6.6c3.5-5.3,5.4-11.5,5.2-17.9V27c0-4.9,0.9-8.4,2.7-10.5c1.8-2.1,4.8-3,9.2-3h12.6c1.2,0,2.1-0.9,2.2-2.1l0,0V2.2C57,1,56,0,54.8,0c0,0,0,0,0,0H41.5c-7.8,0-12.9,2.1-18,7.6s-7.1,12.3-7.1,21.7v14.2c0,2.2-0.1,4-0.2,5.7v2.2c-0.5,3.2-1.8,6.2-3.6,8.9C9.4,64.7,5.1,70.9,0.9,74l0,0l-0.3,0.3l0,0l-0.2,0.3H0.2v0.3l0,0c-0.1,0.3-0.1,0.7,0,1l0,0v0.3h0.1l0.2,0.3l0,0l0.3,0.3l0,0c4.2,3.1,8.5,9.3,11.3,13.7c1.8,2.7,3.1,5.7,3.6,8.9v2.2c0.1,1.6,0.2,3.5,0.2,5.7v14.3c0,9.4,2.4,16.7,7.1,21.7s10.2,7.6,18,7.6h13.8c1.2,0,2.2-1,2.2-2.2V140l0,0c0-1.2-1-2.2-2.2-2.2H42.2c-4.4,0-7.5-1-9.2-3s-2.7-5.6-2.7-10.5v-22.4c0.2-6.4-1.7-12.6-5.2-17.9c-1.6-2.5-3.5-4.7-5.7-6.6l0,0c-0.9-0.7-1.1-2-0.4-2.9C19.2,74.3,19.3,74.2,19.4,74L19.4,74z"/><path d="M412.5,74c-2.2-1.9-4.1-4.1-5.7-6.6c-3.5-5.3-5.4-11.5-5.2-17.9V27c0-4.9-0.9-8.4-2.7-10.5s-4.8-3-9.2-3h-12.6c-1.2,0-2.2-1-2.2-2.2c0,0,0,0,0,0l0,0V2.2c0-1.2,1-2.2,2.2-2.2c0,0,0,0,0,0h13.4c7.8,0,12.9,2.1,18,7.6s7.1,12.3,7.1,21.7v14.2c0,2.2,0.1,4,0.2,5.7v2.2c0.5,3.2,1.8,6.2,3.6,8.9c2.8,4.5,7.1,10.7,11.3,13.7l0,0l0.3,0.3l0,0l0.2,0.3h0.1v0.3l0,0c0.1,0.3,0.1,0.7,0,1l0,0v0.3h-0.1l-0.2,0.3l0,0l-0.3,0.3l0,0c-4.2,3.1-8.5,9.3-11.3,13.7c-1.8,2.7-3.1,5.7-3.6,8.9v2.2c-0.1,1.6-0.2,3.5-0.2,5.7v14.3c0,9.4-2.4,16.7-7.1,21.7s-10.2,7.6-18,7.6h-13.4c-1.2,0-2.2-1-2.2-2.2c0,0,0,0,0,0V140l0,0c0-1.2,1-2.2,2.2-2.2l0,0h12.7c4.4,0,7.5-1,9.2-3s2.7-5.6,2.7-10.5v-22.4c-0.2-6.3,1.6-12.6,5.1-17.9c1.6-2.5,3.5-4.7,5.7-6.6l0,0c0.9-0.7,1.1-2,0.4-2.9C412.7,74.3,412.6,74.2,412.5,74L412.5,74z"/></g></svg>
+    </a>
+
+    <nav class="Header-nav PrimaryNav">
+      <ul class="menu">
+        <li class="first leaf">
+          <a href="https://developer.okta.com/product/">Product</a>
+        </li>
+        <li class="leaf">
+          <a href="https://developer.okta.com/pricing/">Pricing</a>
+        </li>
+        <li class="leaf">
+          <a href="/blog/" class="active">Blog</a>
+        </li>
+        <li class="leaf">
+          <a href="/documentation/">Docs</a>
+        </li>
+        <li class="last expanded">
+          <span class="nolink">Support</span>
+          <ul class="menu">
+            <li class="first leaf"><a href="https://devforum.okta.com/">Okta Developer Forums</a></li>
+            <li class="last leaf"><a href="mailto:developers@okta.com">developers@okta.com</a></li>
+          </ul>
+        </li>
+      </ul>
+      <a class="PrimaryNav-toggle" href="#">
+        <svg width="20px" height="20px" viewBox="0 0 20 20" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+            <g class="MenuIcon" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="round">
+                <path d="M1,16 L19,16" class="MenuIcon-line1" stroke="#FFFFFF" stroke-width="2"></path>
+                <path d="M1,4 L19,4" class="MenuIcon-line2" stroke="#FFFFFF" stroke-width="2"></path>
+                <path d="M1,10 L19,10" class="MenuIcon-line3" stroke="#FFFFFF" stroke-width="2"></path>
+                <path d="M1,10 L19,10" class="MenuIcon-line4" stroke="#FFFFFF" stroke-width="2"></path>
+            </g>
+        </svg>
+        <svg class="CloseIcon" width="16px" height="16px" viewBox="0 0 16 16" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+          <g id="ALl-Boards" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+            <g id="Desktop" transform="translate(-915.000000, -235.000000)" fill="#FFFFFF">
+              <g id="Search-bar-Active" transform="translate(30.000000, 26.000000)">
+                <polygon id="Icon/Cross" points="901 210.6 899.4 209 893 215.4 886.6 209 885 210.6 891.4 217 885 223.4 886.6 225 893 218.6 899.4 225 901 223.4 894.6 217"></polygon>
+              </g>
+            </g>
+          </g>
+        </svg>
+      </a>
+
+      <div class="PrimaryNav-cta">
+        <a target="_blank" rel="noopener noreferrer" href="https://login.okta.com/?SAMLRequest=fc%2B7CsJAEAXQXvAflu1NNJUMeZBGELTx1a%2FrYILJTtyZGD%2FfSBRiYzlw77lMnD3rSj3Qc0ku0YtgrhU6S5fSXRN9PKxmS52l00nMpq6iBvJWCrfDe4ss6vStRe9aDzmGIZfo1jsgwyWDMzUyiIV9vt1AH4XGk5ClSvewUgMNa%2BYW%2FVj5jxhm9NLP67QQaSAMu64L6CYmsFSHlnzT4ZlLwTgcL6Sf8%2FeX9AU%3Dhttps://login.okta.com/?SAMLRequest=fc%2B7CsJAEAXQXvAflu1NNJUMeZBGELTx1a%2FrYILJTtyZGD%2FfSBRiYzlw77lMnD3rSj3Qc0ku0YtgrhU6S5fSXRN9PKxmS52l00nMpq6iBvJWCrfDe4ss6vStRe9aDzmGIZfo1jsgwyWDMzUyiIV9vt1AH4XGk5ClSvewUgMNa%2BYW%2FVj5jxhm9NLP67QQaSAMu64L6CYmsFSHlnzT4ZlLwTgcL6Sf8%2FeX9AU%3D" class="Button--redOutline">Login</a>
+        <a href="https://developer.okta.com/signup/" class="Button--red">Sign up</a>
+      </div>
+
+      <a class="SearchIcon" href="#"></a>
+      <form id="form_search" class="SearchBar Formisimo_clocked_69929" method="get" action="https://developer.okta.com/search/" name="form_search" __bizdiag="-784164280" __biza="WJ__">
+        <input type="text" name="stq" autocomplete="off" id="st-search-input-auto" class="st-search-input" placeholder="Search">
+        <input type="submit" name="submit" value="GO">
+      </form>
+
+    </nav>
+
+  </div>
+
+</header>
+
+	<div class="page-content">
+		
+
+
+
+
+
+
+<section class="Blog is-single">
+		
+	<div class="Blog-social">
+		
+		<a href="https://github.com/mraible" target="_blank"><i class="fa fa-github"></i></a>
+		
+		
+		<a href="https://twitter.com/mraible" target="_blank"><i class="fa fa-twitter"></i></a>
+		
+		
+		
+		<a href="http://raibledesigns.com" target="_blank"><i class="fa fa-external-link"></i></a>
+		
+	</div>
+	
+	
+
+<article class="BlogPost">
+	
+	<header class="BlogPost-header">
+	
+		<time class="BlogPost-date" datetime="2017-10-31">October 31, 2017</time>
+		
+		<h1 class="BlogPost-title">
+			
+			Add Authentication to Play Framework with OIDC and Okta
+			
+		</h1>
+		
+		<div class="BlogPost-attribution">
+			
+				<img src="/assets/avatar-matt_raible-9974af6192eb1753b7137c8fff0a2c6e6bb9736a2517986cb5cc50bb040e83d4.jpg" alt="avatar-matt_raible.jpg" class="BlogPost-avatar">
+			
+			<span class="BlogPost-author">Matt Raible</span>
+		</div>
+	
+	</header>
+	
+	<div class="BlogPost-content">
+		
+	<p>I’ve fallen in love with Play Framework in the past, but then found a more attractive framework in Spring Boot. I fell in love partly because Play was new and sexy at the time, but also because it’s “live reloading” of Java code was a killer feature I’d been looking for. When it added support for Scala in v2.0, I was very excited to learn Scala and discover the power of functional programming. Part of the reason I fell out of love with Play is that I fell <em>really hard</em> for Spring Boot. I’d used Spring for ten years before I found Spring Boot, so I knew how most things worked. With Play, I had to learn a lot of new things, and it was difficult to keep up.</p>
+
+<p>I figured it’d be fun to revisit Play and see how easy it is to integrate a modern authentication mechanism like OpenID Connect. I’m happy to report it’s <em>really</em> easy thanks to <a href="http://www.pac4j.org/">pac4j</a> and its <a href="https://github.com/pac4j/play-pac4j">play-pac4j</a> integration, so that’s what you’ll be building in this tutorial.</p>
+
+<p>Play has continued to evolve over the past several years, becoming a <a href="https://engineering.linkedin.com/play/play-framework-linkedin">staple framework for services at LinkedIn</a> and <a href="https://twitter.com/marcospereira/status/921144001021071362">increasing productivity at Verizon</a>. It’s also a key component of Lightbend’s microservices framework, <a href="https://www.lightbend.com/lagom-framework">Lagom</a>. However, it’s popularity seemed to peak around the time I was learning it. The <a href="http://sotagtrends.com/?tags=[playframework-2.0,playframework]&amp;relative=true">tag trends from Stack Overflow provide some evidence</a> of this.</p>
+
+<p><img src="/assets/blog/play-oidc-pac4j/stackoverflow-trends-dd9b60af18b7ffb2f5a4bdfaf47ee90368d93d1e66b8f00f08f6f719ae6f4eb3.png" alt="Stack Overflow Tag Trends" width="600" class="center-image" /></p>
+
+<h2 id="my-experiences-with-play">My Experiences with Play</h2>
+
+<p>I first started using the Play framework back in 2011, and have followed it ever since. I spoke about HTML5 with Play Scala, CoffeeScript, and Jade at Devoxx 2011. To create that presentation, I had to learn all these technologies. Not only did I learn them all, but I also created a “Play More” application that helped me figure out many issues with developing an HTML5-based mobile app along the way. You can see the presentation and demo video <a href="http://raibledesigns.com/rd/entry/my_html5_with_play_scala">on my website</a>.</p>
+
+<p>In February 2012, I updated my app and presentation to cover <a href="http://raibledesigns.com/rd/entry/secure_json_services_with_play">Play 2.0 and integrated Secure Socia</a>. I ended up not upgrading to Play 2.0, but I did learn how to secure my REST API. In the summer of 2012, I finally got my app <a href="http://raibledesigns.com/rd/entry/migrating_to_play_2_and">upgraded to Play 2</a> and was able to get the Secure Social Module for Play 2 integrated and running in 10 minutes.</p>
+
+<p>I also created a Play vs. Grails Smackdown presentation with James Ward that summer. The <a href="http://raibledesigns.com/rd/entry/play_vs_grails_smackdown_at">first time we delivered the talk was at ÜberConf</a>. James and I did the talk many more times, including at JavaOne 2013 (<a href="https://www.slideshare.net/mraible/play-framework-vs-grails-smackdown-javaone-2013">SlideShare</a>, <a href="https://www.youtube.com/watch?v=Yn-0IuKQA7w">YouTube</a>).</p>
+
+<h2 id="get-started-with-play-framework">Get Started with Play Framework</h2>
+
+<p>To get started with <a href="https://www.playframework.com/">Play</a>, there are a few different options. You can <a href="https://playframework.com/download#starters">download a starter project</a>, create a new application using SBT, or build from an <a href="https://playframework.com/download#examples">example project</a>. I decided to use SBT, so installed it using Homebrew.</p>
+
+<div class="language-bash highlighter-rouge"><pre class="highlight"><code>brew install sbt
+</code></pre>
+</div>
+
+<p>Of course, you can easily <a href="http://www.scala-sbt.org/release/docs/Setup.html">install it on Windows and Linux</a> too.</p>
+
+<p>Next, I ran the command to create a new Play app with Java. You can see I changed the default name and organization but kept the default versions.</p>
+
+<div class="language-bash highlighter-rouge"><pre class="highlight"><code>sbt new playframework/play-java-seed.g8
+Getting org.scala-sbt sbt 1.0.2 ...
+downloading file:////Users/mraible/.sbt/preloaded/org.scala-sbt/sbt/1.0.2/jars/sbt.jar ...
+    <span class="o">[</span>SUCCESSFUL <span class="o">]</span> org.scala-sbt#sbt;1.0.2!sbt.jar <span class="o">(</span>6ms<span class="o">)</span>
+...
+<span class="o">[</span>info] Loading settings from idea.sbt ...
+<span class="o">[</span>info] Loading global plugins from /Users/mraible/.sbt/1.0/plugins
+<span class="o">[</span>info] Set current project to mraible <span class="o">(</span><span class="k">in </span>build file:/Users/mraible/<span class="o">)</span>
+
+This template generates a Play Java project
+
+name <span class="o">[</span>play-java-seed]: okta-play-oidc-example
+organization <span class="o">[</span>com.example]: com.okta.developer
+scala_version <span class="o">[</span>2.12.3]:
+play_version <span class="o">[</span>2.6.6]:
+sbt_version <span class="o">[</span>1.0.2]:
+
+Template applied <span class="k">in</span> ./okta-play-oidc-example
+</code></pre>
+</div>
+
+<p>I proved everything worked by navigating into the project and running <code class="highlighter-rouge">sbt run</code>.</p>
+
+<p><strong>NOTE:</strong> This process can take a while to run the first time. On my super-beefy Mac Pro, it took 4m28s.</p>
+
+<p>I opened my browser to http://localhost:9000 and was pleased to see everything worked!</p>
+
+<p><img src="/assets/blog/play-oidc-pac4j/welcome-to-play-5e756ecbb9954efee0a9e6786487a925def1ff4a0659c656571787682f8bfe0d.png" alt="Welcome to Play" width="800" class="center-image" /></p>
+
+<h2 id="security-options-for-play-framework">Security Options for Play Framework</h2>
+
+<p>To figure out which security plugin I should use with Play, I <a href="https://twitter.com/mraible/status/922142654007197696">asked my network on Twitter</a>.</p>
+
+<div style="max-width: 500px; margin: 0 auto">
+<blockquote class="twitter-tweet" data-lang="en"><p lang="en" dir="ltr">This week, I hope to show how to integrate <a href="https://twitter.com/playframework?ref_src=twsrc%5Etfw">@playframework</a> with <a href="https://twitter.com/okta?ref_src=twsrc%5Etfw">@okta</a> for auth. Should I try to use securesocial, play-pac4j, or deadbolt?</p>&mdash; Matt Raible (@mraible) <a href="https://twitter.com/mraible/status/922142654007197696?ref_src=twsrc%5Etfw">October 22, 2017</a></blockquote>
+<script async="" src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
+</div>
+
+<p>From this conversation, I learned that <a href="https://www.playframework.com/documentation/2.6.x/JavaOAuth">Play’s built-in OAuth support</a> is only for OAuth 1.0. I also learned about <a href="https://github.com/zalando-stups/play-zhewbacca">play-zhewbacca</a> and <a href="https://www.silhouette.rocks/">Silhouette</a>. Secure Social <a href="https://github.com/jaliss/securesocial/commits/master">hasn’t been worked on for several months</a>, so I decided to pass on it. Silhouette has a pretty website and extensive documentation, but it’s not compatible with Java. I wanted to write a Java app for this example.</p>
+
+<p>I decided to try <a href="https://github.com/pac4j/play-pac4j">play-pac4j</a>. My reason was simple, I’m a <a href="/blog/2017/09/14/lazy-developers-guide-to-auth-with-vue">lazy developer</a>, and its README shows an OIDC example that looked easy enough to implement. Its <a href="http://www.pac4j.org/docs/clients/openid-connect.html">documentation</a> confirmed it didn’t require much.</p>
+
+<div class="language-java highlighter-rouge"><pre class="highlight"><code><span class="kd">final</span> <span class="n">OidcConfiguration</span> <span class="n">oidcConfiguration</span> <span class="o">=</span> <span class="k">new</span> <span class="n">OidcConfiguration</span><span class="o">();</span>
+<span class="n">oidcConfiguration</span><span class="o">.</span><span class="na">setClientId</span><span class="o">(</span><span class="s">"343992089165-i1es0qvej18asl33mvlbeq750i3ko32k..."</span><span class="o">);</span>
+<span class="n">oidcConfiguration</span><span class="o">.</span><span class="na">setSecret</span><span class="o">(</span><span class="s">"unXK_RSCbCXLTic2JACTiAo9"</span><span class="o">);</span>
+<span class="n">oidcConfiguration</span><span class="o">.</span><span class="na">setDiscoveryURI</span><span class="o">(</span><span class="s">"https://accounts.google.com/.well-known/openid-configuration"</span><span class="o">);</span>
+<span class="kd">final</span> <span class="n">OidcClient</span> <span class="n">oidcClient</span> <span class="o">=</span> <span class="k">new</span> <span class="n">OidcClient</span><span class="o">(</span><span class="n">oidcConfiguration</span><span class="o">);</span>
+<span class="n">oidcClient</span><span class="o">.</span><span class="na">addAuthorizationGenerator</span><span class="o">((</span><span class="n">ctx</span><span class="o">,</span> <span class="n">profile</span><span class="o">)</span> <span class="o">-&gt;</span> <span class="o">{</span> <span class="n">profile</span><span class="o">.</span><span class="na">addRole</span><span class="o">(</span><span class="s">"ROLE_ADMIN"</span><span class="o">);</span> <span class="k">return</span> <span class="n">profile</span><span class="o">;</span> <span class="o">});</span>
+</code></pre>
+</div>
+
+<h2 id="integrate-pac4j-into-play-java-seed">Integrate pac4j into Play Java Seed</h2>
+
+<p>If you’d like to follow along, below are the steps I used to integrate pac4j into my project and authenticate against Okta. Thanks to <a href="https://www.linkedin.com/in/jleleu/">Jérôme LELEU</a> for creating pac4j and writing a nice <a href="https://github.com/pac4j/play-pac4j-java-demo">play-pac4j-java-demo</a> project. The code in this project was a goldmine of information.</p>
+
+<p><strong>NOTE:</strong> I used IntelliJ IDEA to write the code in this example and found its SBT/Play support to be excellent. I didn’t even need to install any plugins because I already had the Scala plugin installed. Play has a <a href="https://www.playframework.com/documentation/2.6.x/IDE">plethora of documentation</a> for Eclipse, IDEA, NetBeans, and Emacs.</p>
+
+<p>Add pac4j dependencies to <code class="highlighter-rouge">build.sbt</code>:</p>
+
+<div class="language-scala highlighter-rouge"><pre class="highlight"><code><span class="k">val</span> <span class="n">playPac4jVersion</span> <span class="k">=</span> <span class="s">"4.0.0"</span>
+<span class="k">val</span> <span class="n">pac4jVersion</span> <span class="k">=</span> <span class="s">"2.1.0"</span>
+<span class="k">val</span> <span class="n">playVersion</span> <span class="k">=</span> <span class="s">"2.6.6"</span>
+
+<span class="n">libraryDependencies</span> <span class="o">++=</span> <span class="nc">Seq</span><span class="o">(</span>
+  <span class="n">guice</span><span class="o">,</span>
+  <span class="n">ehcache</span><span class="o">,</span>
+  <span class="s">"org.pac4j"</span> <span class="o">%</span> <span class="s">"play-pac4j"</span> <span class="o">%</span> <span class="n">playPac4jVersion</span><span class="o">,</span>
+  <span class="s">"org.pac4j"</span> <span class="o">%</span> <span class="s">"pac4j-oidc"</span> <span class="o">%</span> <span class="n">pac4jVersion</span> <span class="n">exclude</span><span class="o">(</span><span class="s">"commons-io"</span> <span class="o">,</span> <span class="s">"commons-io"</span><span class="o">),</span>
+  <span class="s">"com.typesafe.play"</span> <span class="o">%</span> <span class="s">"play-cache_2.12"</span> <span class="o">%</span> <span class="n">playVersion</span><span class="o">,</span>
+  <span class="s">"commons-io"</span> <span class="o">%</span> <span class="s">"commons-io"</span> <span class="o">%</span> <span class="s">"2.4"</span>
+<span class="o">)</span>
+</code></pre>
+</div>
+
+<p>Create <code class="highlighter-rouge">app/modules/SecurityModule.java</code>. This class configures OIDC, sets up a secure <code class="highlighter-rouge">HttpActionAdapter</code>, and registers callback and logout controllers.</p>
+
+<div class="language-java highlighter-rouge"><pre class="highlight"><code><span class="kn">package</span> <span class="n">modules</span><span class="o">;</span>
+
+<span class="kn">import</span> <span class="nn">com.google.inject.AbstractModule</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">com.typesafe.config.Config</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">controllers.SecureHttpActionAdapter</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.pac4j.core.authorization.authorizer.RequireAnyRoleAuthorizer</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.pac4j.core.client.Clients</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.pac4j.oidc.client.OidcClient</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.pac4j.oidc.config.OidcConfiguration</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.pac4j.play.CallbackController</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.pac4j.play.LogoutController</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.pac4j.play.store.PlayCacheSessionStore</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.pac4j.play.store.PlaySessionStore</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">play.Environment</span><span class="o">;</span>
+
+<span class="kn">import</span> <span class="nn">java.util.List</span><span class="o">;</span>
+
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">SecurityModule</span> <span class="kd">extends</span> <span class="n">AbstractModule</span> <span class="o">{</span>
+
+    <span class="kd">private</span> <span class="kd">final</span> <span class="n">Config</span> <span class="n">configuration</span><span class="o">;</span>
+
+    <span class="kd">public</span> <span class="nf">SecurityModule</span><span class="o">(</span><span class="kd">final</span> <span class="n">Environment</span> <span class="n">environment</span><span class="o">,</span> <span class="kd">final</span> <span class="n">Config</span> <span class="n">configuration</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">configuration</span> <span class="o">=</span> <span class="n">configuration</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="nd">@Override</span>
+    <span class="nd">@SuppressWarnings</span><span class="o">(</span><span class="s">"unchecked"</span><span class="o">)</span>
+    <span class="kd">protected</span> <span class="kt">void</span> <span class="nf">configure</span><span class="o">()</span> <span class="o">{</span>
+        <span class="n">bind</span><span class="o">(</span><span class="n">PlaySessionStore</span><span class="o">.</span><span class="na">class</span><span class="o">).</span><span class="na">to</span><span class="o">(</span><span class="n">PlayCacheSessionStore</span><span class="o">.</span><span class="na">class</span><span class="o">);</span>
+
+        <span class="kd">final</span> <span class="n">OidcConfiguration</span> <span class="n">oidcConfiguration</span> <span class="o">=</span> <span class="k">new</span> <span class="n">OidcConfiguration</span><span class="o">();</span>
+        <span class="n">oidcConfiguration</span><span class="o">.</span><span class="na">setDiscoveryURI</span><span class="o">(</span><span class="n">configuration</span><span class="o">.</span><span class="na">getString</span><span class="o">(</span><span class="s">"oidc.discoveryUri"</span><span class="o">));</span>
+        <span class="n">oidcConfiguration</span><span class="o">.</span><span class="na">setClientId</span><span class="o">(</span><span class="n">configuration</span><span class="o">.</span><span class="na">getString</span><span class="o">(</span><span class="s">"oidc.clientId"</span><span class="o">));</span>
+        <span class="n">oidcConfiguration</span><span class="o">.</span><span class="na">setSecret</span><span class="o">(</span><span class="n">configuration</span><span class="o">.</span><span class="na">getString</span><span class="o">(</span><span class="s">"oidc.clientSecret"</span><span class="o">));</span>
+
+        <span class="kd">final</span> <span class="n">OidcClient</span> <span class="n">oidcClient</span> <span class="o">=</span> <span class="k">new</span> <span class="n">OidcClient</span><span class="o">(</span><span class="n">oidcConfiguration</span><span class="o">);</span>
+        <span class="n">oidcClient</span><span class="o">.</span><span class="na">addAuthorizationGenerator</span><span class="o">((</span><span class="n">ctx</span><span class="o">,</span> <span class="n">profile</span><span class="o">)</span> <span class="o">-&gt;</span> <span class="o">{</span> 
+            <span class="n">profile</span><span class="o">.</span><span class="na">addRole</span><span class="o">(</span><span class="s">"ROLE_ADMIN"</span><span class="o">);</span> 
+            <span class="k">return</span> <span class="n">profile</span><span class="o">;</span> 
+        <span class="o">});</span>
+
+        <span class="kd">final</span> <span class="n">String</span> <span class="n">baseUrl</span> <span class="o">=</span> <span class="n">configuration</span><span class="o">.</span><span class="na">getString</span><span class="o">(</span><span class="s">"baseUrl"</span><span class="o">);</span>
+        <span class="kd">final</span> <span class="n">Clients</span> <span class="n">clients</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Clients</span><span class="o">(</span><span class="n">baseUrl</span> <span class="o">+</span> <span class="s">"/callback"</span><span class="o">,</span>  <span class="n">oidcClient</span><span class="o">);</span>
+
+        <span class="kd">final</span> <span class="n">org</span><span class="o">.</span><span class="na">pac4j</span><span class="o">.</span><span class="na">core</span><span class="o">.</span><span class="na">config</span><span class="o">.</span><span class="na">Config</span> <span class="n">config</span> <span class="o">=</span> <span class="k">new</span> <span class="n">org</span><span class="o">.</span><span class="na">pac4j</span><span class="o">.</span><span class="na">core</span><span class="o">.</span><span class="na">config</span><span class="o">.</span><span class="na">Config</span><span class="o">(</span><span class="n">clients</span><span class="o">);</span>
+        <span class="n">config</span><span class="o">.</span><span class="na">addAuthorizer</span><span class="o">(</span><span class="s">"admin"</span><span class="o">,</span> <span class="k">new</span> <span class="n">RequireAnyRoleAuthorizer</span><span class="o">&lt;&gt;(</span><span class="s">"ROLE_ADMIN"</span><span class="o">));</span>
+        <span class="n">config</span><span class="o">.</span><span class="na">setHttpActionAdapter</span><span class="o">(</span><span class="k">new</span> <span class="n">SecureHttpActionAdapter</span><span class="o">());</span>
+        <span class="n">bind</span><span class="o">(</span><span class="n">org</span><span class="o">.</span><span class="na">pac4j</span><span class="o">.</span><span class="na">core</span><span class="o">.</span><span class="na">config</span><span class="o">.</span><span class="na">Config</span><span class="o">.</span><span class="na">class</span><span class="o">).</span><span class="na">toInstance</span><span class="o">(</span><span class="n">config</span><span class="o">);</span>
+
+        <span class="c1">// callback</span>
+        <span class="kd">final</span> <span class="n">CallbackController</span> <span class="n">callbackController</span> <span class="o">=</span> <span class="k">new</span> <span class="n">CallbackController</span><span class="o">();</span>
+        <span class="n">callbackController</span><span class="o">.</span><span class="na">setDefaultUrl</span><span class="o">(</span><span class="s">"/"</span><span class="o">);</span>
+        <span class="n">callbackController</span><span class="o">.</span><span class="na">setMultiProfile</span><span class="o">(</span><span class="kc">true</span><span class="o">);</span>
+        <span class="n">bind</span><span class="o">(</span><span class="n">CallbackController</span><span class="o">.</span><span class="na">class</span><span class="o">).</span><span class="na">toInstance</span><span class="o">(</span><span class="n">callbackController</span><span class="o">);</span>
+
+        <span class="c1">// logout</span>
+        <span class="kd">final</span> <span class="n">LogoutController</span> <span class="n">logoutController</span> <span class="o">=</span> <span class="k">new</span> <span class="n">LogoutController</span><span class="o">();</span>
+        <span class="n">logoutController</span><span class="o">.</span><span class="na">setDefaultUrl</span><span class="o">(</span><span class="s">"/?defaulturlafterlogout"</span><span class="o">);</span>
+        <span class="n">bind</span><span class="o">(</span><span class="n">LogoutController</span><span class="o">.</span><span class="na">class</span><span class="o">).</span><span class="na">toInstance</span><span class="o">(</span><span class="n">logoutController</span><span class="o">);</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre>
+</div>
+
+<p>Create <code class="highlighter-rouge">app/controllers/SecureHttpActionAdapter.java</code> to show unauthorized and forbidden messages when user’s don’t have access to an action.</p>
+
+<div class="language-java highlighter-rouge"><pre class="highlight"><code><span class="kn">package</span> <span class="n">controllers</span><span class="o">;</span>
+
+<span class="kn">import</span> <span class="nn">org.pac4j.core.context.HttpConstants</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.pac4j.play.PlayWebContext</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.pac4j.play.http.DefaultHttpActionAdapter</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">play.mvc.Result</span><span class="o">;</span>
+
+<span class="kn">import</span> <span class="nn">static</span> <span class="n">play</span><span class="o">.</span><span class="na">mvc</span><span class="o">.</span><span class="na">Results</span><span class="o">.*;</span>
+
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">SecureHttpActionAdapter</span> <span class="kd">extends</span> <span class="n">DefaultHttpActionAdapter</span> <span class="o">{</span>
+
+    <span class="nd">@Override</span>
+    <span class="kd">public</span> <span class="n">Result</span> <span class="nf">adapt</span><span class="o">(</span><span class="kt">int</span> <span class="n">code</span><span class="o">,</span> <span class="n">PlayWebContext</span> <span class="n">context</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">if</span> <span class="o">(</span><span class="n">code</span> <span class="o">==</span> <span class="n">HttpConstants</span><span class="o">.</span><span class="na">UNAUTHORIZED</span><span class="o">)</span> <span class="o">{</span>
+            <span class="k">return</span> <span class="nf">unauthorized</span><span class="o">(</span><span class="n">views</span><span class="o">.</span><span class="na">html</span><span class="o">.</span><span class="na">error401</span><span class="o">.</span><span class="na">render</span><span class="o">().</span><span class="na">toString</span><span class="o">()).</span><span class="na">as</span><span class="o">((</span><span class="n">HttpConstants</span><span class="o">.</span><span class="na">HTML_CONTENT_TYPE</span><span class="o">));</span>
+        <span class="o">}</span> <span class="k">else</span> <span class="k">if</span> <span class="o">(</span><span class="n">code</span> <span class="o">==</span> <span class="n">HttpConstants</span><span class="o">.</span><span class="na">FORBIDDEN</span><span class="o">)</span> <span class="o">{</span>
+            <span class="k">return</span> <span class="nf">forbidden</span><span class="o">(</span><span class="n">views</span><span class="o">.</span><span class="na">html</span><span class="o">.</span><span class="na">error403</span><span class="o">.</span><span class="na">render</span><span class="o">().</span><span class="na">toString</span><span class="o">()).</span><span class="na">as</span><span class="o">((</span><span class="n">HttpConstants</span><span class="o">.</span><span class="na">HTML_CONTENT_TYPE</span><span class="o">));</span>
+        <span class="o">}</span> <span class="k">else</span> <span class="o">{</span>
+            <span class="k">return</span> <span class="kd">super</span><span class="o">.</span><span class="na">adapt</span><span class="o">(</span><span class="n">code</span><span class="o">,</span> <span class="n">context</span><span class="o">);</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre>
+</div>
+
+<p>Create <code class="highlighter-rouge">app/views/error401.scala.html</code> to show the unauthorized message.</p>
+
+<div class="language-html highlighter-rouge"><pre class="highlight"><code><span class="nt">&lt;html&gt;</span>
+    <span class="nt">&lt;body&gt;</span>
+        <span class="nt">&lt;h1&gt;</span>Unauthorized<span class="nt">&lt;/h1&gt;</span>
+        <span class="nt">&lt;br</span> <span class="nt">/&gt;</span>
+        <span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">"/"</span><span class="nt">&gt;</span>Home<span class="nt">&lt;/a&gt;</span>
+    <span class="nt">&lt;/body&gt;</span>
+<span class="nt">&lt;/html&gt;</span>
+</code></pre>
+</div>
+
+<p>And <code class="highlighter-rouge">app/views/error403.scala.html</code> to show the forbidden message.</p>
+
+<div class="language-html highlighter-rouge"><pre class="highlight"><code><span class="nt">&lt;html&gt;</span>
+    <span class="nt">&lt;body&gt;</span>
+        <span class="nt">&lt;h1&gt;</span>Forbidden<span class="nt">&lt;/h1&gt;</span>
+        <span class="nt">&lt;br</span> <span class="nt">/&gt;</span>
+        <span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">"/"</span><span class="nt">&gt;</span>Home<span class="nt">&lt;/a&gt;</span>
+    <span class="nt">&lt;/body&gt;</span>
+<span class="nt">&lt;/html&gt;</span>
+</code></pre>
+</div>
+
+<p>In <code class="highlighter-rouge">app/controllers/HomeController.java</code> add a method that’s secured by the OIDC client, a method to show the profile information returned from Okta (or any identity provider), and a method to get the profiles.</p>
+
+<div class="language-java highlighter-rouge"><pre class="highlight"><code><span class="kn">package</span> <span class="n">controllers</span><span class="o">;</span>
+
+<span class="kn">import</span> <span class="nn">com.google.inject.Inject</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.pac4j.core.profile.CommonProfile</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.pac4j.core.profile.ProfileManager</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.pac4j.play.PlayWebContext</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.pac4j.play.java.Secure</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.pac4j.play.store.PlaySessionStore</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">play.mvc.*</span><span class="o">;</span>
+
+<span class="kn">import</span> <span class="nn">java.util.List</span><span class="o">;</span>
+
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">HomeController</span> <span class="kd">extends</span> <span class="n">Controller</span> <span class="o">{</span>
+
+    <span class="kd">public</span> <span class="n">Result</span> <span class="nf">index</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="nf">ok</span><span class="o">(</span><span class="n">views</span><span class="o">.</span><span class="na">html</span><span class="o">.</span><span class="na">index</span><span class="o">.</span><span class="na">render</span><span class="o">());</span>
+    <span class="o">}</span>
+
+    <span class="nd">@Secure</span><span class="o">(</span><span class="n">clients</span> <span class="o">=</span> <span class="s">"OidcClient"</span><span class="o">)</span>
+    <span class="kd">public</span> <span class="n">Result</span> <span class="nf">oidcIndex</span><span class="o">()</span> <span class="o">{</span> <span class="k">return</span> <span class="n">protectedIndexView</span><span class="o">();</span> <span class="o">}</span>
+
+    <span class="nd">@Secure</span>
+    <span class="kd">public</span> <span class="n">Result</span> <span class="nf">protectedIndex</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="nf">protectedIndexView</span><span class="o">();</span>
+    <span class="o">}</span>
+
+    <span class="kd">private</span> <span class="n">Result</span> <span class="nf">protectedIndexView</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="nf">ok</span><span class="o">(</span><span class="n">views</span><span class="o">.</span><span class="na">html</span><span class="o">.</span><span class="na">protectedIndex</span><span class="o">.</span><span class="na">render</span><span class="o">(</span><span class="n">getProfiles</span><span class="o">()));</span>
+    <span class="o">}</span>
+
+    <span class="nd">@Inject</span>
+    <span class="kd">private</span> <span class="n">PlaySessionStore</span> <span class="n">playSessionStore</span><span class="o">;</span>
+
+    <span class="nd">@SuppressWarnings</span><span class="o">(</span><span class="s">"unchecked"</span><span class="o">)</span>
+    <span class="kd">private</span> <span class="n">List</span><span class="o">&lt;</span><span class="n">CommonProfile</span><span class="o">&gt;</span> <span class="nf">getProfiles</span><span class="o">()</span> <span class="o">{</span>
+        <span class="kd">final</span> <span class="n">PlayWebContext</span> <span class="n">context</span> <span class="o">=</span> <span class="k">new</span> <span class="n">PlayWebContext</span><span class="o">(</span><span class="n">ctx</span><span class="o">(),</span> <span class="n">playSessionStore</span><span class="o">);</span>
+        <span class="kd">final</span> <span class="n">ProfileManager</span><span class="o">&lt;</span><span class="n">CommonProfile</span><span class="o">&gt;</span> <span class="n">profileManager</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ProfileManager</span><span class="o">(</span><span class="n">context</span><span class="o">);</span>
+        <span class="k">return</span> <span class="n">profileManager</span><span class="o">.</span><span class="na">getAll</span><span class="o">(</span><span class="kc">true</span><span class="o">);</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre>
+</div>
+
+<p>Create <code class="highlighter-rouge">app/views/protectedIndex.scala.html</code> to display the profile information after logging in. You might notice that there are two links to log out, one that does a local logout and one that logs out from Okta as well.</p>
+
+<div class="language-scala highlighter-rouge"><pre class="highlight"><code><span class="o">@(</span><span class="n">profileList</span><span class="k">:</span> <span class="kt">java.util.List</span><span class="o">[</span><span class="kt">org.pac4j.core.profile.CommonProfile</span><span class="o">])</span>
+<span class="nd">@import</span> <span class="n">scala</span><span class="o">.</span><span class="n">collection</span><span class="o">.</span><span class="nc">JavaConverters</span><span class="o">.</span><span class="k">_</span>
+<span class="nd">@profiles</span><span class="o">()</span> <span class="k">=</span> <span class="o">{</span> <span class="nd">@profileList</span><span class="o">.</span><span class="n">toList</span> <span class="o">}</span>
+<span class="o">&lt;</span><span class="n">h1</span><span class="o">&gt;</span><span class="nc">Protected</span> <span class="nc">Area</span><span class="o">&lt;/</span><span class="n">h1</span><span class="o">&gt;</span>
+<span class="o">&lt;</span><span class="n">a</span> <span class="n">href</span><span class="o">=</span><span class="s">".."</span><span class="o">&gt;</span><span class="nc">Back</span><span class="o">&lt;/</span><span class="n">a</span><span class="o">&gt;</span>
+<span class="o">&lt;</span><span class="n">ul</span><span class="o">&gt;</span>
+    <span class="o">&lt;</span><span class="n">li</span><span class="o">&gt;&lt;</span><span class="n">a</span> <span class="n">href</span><span class="o">=</span><span class="s">"/logout?url=/?forcepostlogouturl"</span><span class="o">&gt;</span><span class="nc">Local</span> <span class="n">logout</span><span class="o">&lt;/</span><span class="n">a</span><span class="o">&gt;&lt;/</span><span class="n">li</span><span class="o">&gt;</span>
+    <span class="o">&lt;</span><span class="n">li</span><span class="o">&gt;&lt;</span><span class="n">a</span> <span class="n">href</span><span class="o">=</span><span class="s">"/centralLogout?url=http://localhost:9000/?forcepostlogouturlafteridp"</span><span class="o">&gt;</span><span class="nc">Central</span> <span class="n">logout</span><span class="o">&lt;/</span><span class="n">a</span><span class="o">&gt;&lt;/</span><span class="n">li</span><span class="o">&gt;</span>
+<span class="o">&lt;/</span><span class="n">ul</span><span class="o">&gt;</span>
+
+<span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span>
+<span class="n">profiles</span><span class="k">:</span> <span class="kt">@profiles</span>
+<span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+</code></pre>
+</div>
+
+<p>Create <code class="highlighter-rouge">app/controllers/CentralLogoutController.java</code> to handle the central logout behavior.</p>
+
+<div class="language-java highlighter-rouge"><pre class="highlight"><code><span class="kn">package</span> <span class="n">controllers</span><span class="o">;</span>
+
+<span class="kn">import</span> <span class="nn">com.typesafe.config.Config</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">javax.inject.Inject</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.pac4j.play.LogoutController</span><span class="o">;</span>
+
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">CentralLogoutController</span> <span class="kd">extends</span> <span class="n">LogoutController</span> <span class="o">{</span>
+
+    <span class="nd">@Inject</span>
+    <span class="kd">public</span> <span class="nf">CentralLogoutController</span><span class="o">(</span><span class="n">Config</span> <span class="n">config</span><span class="o">)</span> <span class="o">{</span>
+        <span class="n">String</span> <span class="n">baseUrl</span> <span class="o">=</span> <span class="n">config</span><span class="o">.</span><span class="na">getString</span><span class="o">(</span><span class="s">"baseUrl"</span><span class="o">);</span>
+        <span class="n">setDefaultUrl</span><span class="o">(</span><span class="n">baseUrl</span> <span class="o">+</span> <span class="s">"/?defaulturlafterlogoutafteridp"</span><span class="o">);</span>
+        <span class="n">setLocalLogout</span><span class="o">(</span><span class="kc">true</span><span class="o">);</span>
+        <span class="n">setCentralLogout</span><span class="o">(</span><span class="kc">true</span><span class="o">);</span>
+        <span class="n">setLogoutUrlPattern</span><span class="o">(</span><span class="n">baseUrl</span> <span class="o">+</span> <span class="s">"/.*"</span><span class="o">);</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre>
+</div>
+
+<p><strong>NOTE:</strong> If you want to make it so central logout doesn’t kill local log out, use <code class="highlighter-rouge">setLocalLogout(false);</code>.</p>
+
+<p>Open <code class="highlighter-rouge">conf/routes</code> and add routes to the new methods you added, as well as pac4j’s controllers.</p>
+
+<div class="language-scala highlighter-rouge"><pre class="highlight"><code><span class="nc">GET</span>     <span class="o">/</span>                           <span class="n">controllers</span><span class="o">.</span><span class="nc">HomeController</span><span class="o">.</span><span class="n">index</span>
+<span class="nc">GET</span>     <span class="o">/</span><span class="n">oidc</span><span class="o">/</span><span class="n">index</span><span class="o">.</span><span class="n">html</span>            <span class="n">controllers</span><span class="o">.</span><span class="nc">HomeController</span><span class="o">.</span><span class="n">oidcIndex</span><span class="o">()</span>
+<span class="nc">GET</span>     <span class="o">/</span><span class="k">protected</span><span class="o">/</span><span class="n">index</span><span class="o">.</span><span class="n">html</span>       <span class="n">controllers</span><span class="o">.</span><span class="nc">HomeController</span><span class="o">.</span><span class="n">protectedIndex</span><span class="o">()</span>
+<span class="nc">GET</span>     <span class="o">/</span><span class="n">callback</span>                   <span class="nd">@org</span><span class="o">.</span><span class="n">pac4j</span><span class="o">.</span><span class="n">play</span><span class="o">.</span><span class="nc">CallbackController</span><span class="o">.</span><span class="n">callback</span><span class="o">()</span>
+<span class="nc">POST</span>    <span class="o">/</span><span class="n">callback</span>                   <span class="nd">@org</span><span class="o">.</span><span class="n">pac4j</span><span class="o">.</span><span class="n">play</span><span class="o">.</span><span class="nc">CallbackController</span><span class="o">.</span><span class="n">callback</span><span class="o">()</span>
+<span class="nc">GET</span>     <span class="o">/</span><span class="n">logout</span>                     <span class="nd">@org</span><span class="o">.</span><span class="n">pac4j</span><span class="o">.</span><span class="n">play</span><span class="o">.</span><span class="nc">LogoutController</span><span class="o">.</span><span class="n">logout</span><span class="o">()</span>
+<span class="nc">GET</span>     <span class="o">/</span><span class="n">centralLogout</span>              <span class="n">controllers</span><span class="o">.</span><span class="nc">CentralLogoutController</span><span class="o">.</span><span class="n">logout</span><span class="o">()</span>
+</code></pre>
+</div>
+
+<p>Add a link to invoke OIDC in <code class="highlighter-rouge">app/views/index.scala.html</code>.</p>
+
+<div class="language-scala highlighter-rouge"><pre class="highlight"><code><span class="o">@()</span>
+
+<span class="nd">@main</span><span class="o">(</span><span class="s">"Welcome to Play"</span><span class="o">)</span> <span class="o">{</span>
+  <span class="o">&lt;</span><span class="n">h1</span><span class="o">&gt;</span><span class="nc">Welcome</span> <span class="n">to</span> <span class="nc">Play</span><span class="o">!&lt;/</span><span class="n">h1</span><span class="o">&gt;</span>
+
+  <span class="o">&lt;</span><span class="n">a</span> <span class="n">href</span><span class="o">=</span><span class="s">"oidc/index.html"</span><span class="o">&gt;</span><span class="nc">Protected</span> <span class="nc">URL</span> <span class="n">by</span> <span class="nc">OIDC</span><span class="o">&lt;/</span><span class="n">a</span><span class="o">&gt;</span>
+<span class="o">}</span>
+</code></pre>
+</div>
+
+<p>Finally, enable the <code class="highlighter-rouge">SecurityModule</code> and set the properties needed in it by modifying <code class="highlighter-rouge">conf/application.conf</code>.</p>
+
+<div class="language-scala highlighter-rouge"><pre class="highlight"><code><span class="n">play</span> <span class="o">{</span>
+  <span class="n">modules</span> <span class="o">{</span>
+    <span class="n">enabled</span> <span class="o">+=</span> <span class="n">modules</span><span class="o">.</span><span class="nc">SecurityModule</span>
+  <span class="o">}</span>
+<span class="o">}</span>
+
+<span class="n">baseUrl</span> <span class="k">=</span> <span class="s">"http://localhost:9000"</span>
+
+<span class="n">oidc</span><span class="o">.</span><span class="n">discoveryUri</span> <span class="k">=</span> <span class="s">"<span class="okta-preview-domain"><span class="okta-preview-domain">https://{yourOktaDomain}.com</span></span>/oauth2/default/.well-known/openid-configuration"</span>
+<span class="n">oidc</span><span class="o">.</span><span class="n">clientId</span> <span class="k">=</span> <span class="s">"{clientId}"</span>
+<span class="n">oidc</span><span class="o">.</span><span class="n">clientSecret</span> <span class="k">=</span> <span class="s">"{clientSecret}"</span>
+</code></pre>
+</div>
+
+<p>You’ll need to create an OIDC App in Okta to get a <code class="highlighter-rouge"><span class="p">{</span><span class="err">clientId</span><span class="p">}</span></code> and <code class="highlighter-rouge"><span class="p">{</span><span class="err">clientSecret</span><span class="p">}</span></code>.</p>
+
+<h2 id="create-an-oidc-app-in-okta">Create an OIDC App in Okta</h2>
+
+<p>Log in to your Okta Developer account (or <a href="https://developer.okta.com/signup/">sign up</a> if you don’t have an account) and navigate to <strong>Applications</strong> &gt; <strong>Add Application</strong>. Click <strong>Web</strong> and then click <strong>Next</strong>. Give the app a name you’ll remember, specify <code class="highlighter-rouge">http://localhost:9000</code> as a Base URI, as well as the following values. Note that you won’t be able to enter a Logout redirect URI until after you’ve clicked the <strong>Done</strong> button.</p>
+
+<ul>
+  <li>Login redirect URIs: <code class="highlighter-rouge">http://localhost:9000/callback?client_name=OidcClient</code></li>
+  <li>Logout redirect URIs: <code class="highlighter-rouge">http://localhost:9000/?forcepostlogouturlafteridp</code></li>
+</ul>
+
+<p>Copy the client ID and secret into your <code class="highlighter-rouge">application.conf</code> file. While you’re in there, modify the <code class="highlighter-rouge">oidc.discoveryUri</code> to match your Okta domain. For example:</p>
+
+<div class="language-properties highlighter-rouge"><pre class="highlight"><code><span class="py">oidc.discoveryUri</span> <span class="p">=</span> <span class="s">"https://dev-158606.oktapreview.com/oauth2/default/.well-known/openid-configuration"</span>
+</code></pre>
+</div>
+
+<p>After making these changes, you should be able to refresh your browser and log in. Play handles recompiling any new/changed files when you reload – a very slick feature!</p>
+
+<p><img src="/assets/blog/play-oidc-pac4j/play-with-oidc-link-d4cf2bf7d055186cdfd5776f97e86300da8f68a64bfab474007b07e25f29ac2c.png" alt="Play with OIDC Link" width="800" class="center-image" /></p>
+
+<p><img src="/assets/blog/play-oidc-pac4j/okta-login-6c913d268d1b7a0b20ae21ee98584b5e786eb7b451ec73e47388a678b4b3debe.png" alt="Okta Login" width="800" class="center-image" /></p>
+
+<p><img src="/assets/blog/play-oidc-pac4j/oidc-profiles-6244bf048b630d50cc80109b8c69fc459687d2a8a95bf2560988248f8f5cf252.png" alt="Profiles after login" width="800" class="center-image" /></p>
+
+<p>You might notice (in the bottom right corner) that roles are set to <code class="highlighter-rouge">ROLE_ADMIN</code>. This value is hardcoded in <code class="highlighter-rouge">SecurityModule</code>. In the following section, I’ll show you how to map Okta groups to roles.</p>
+
+<h2 id="mapping-okta-groups-to-roles">Mapping Okta Groups to Roles</h2>
+
+<p>You can create groups and include them as claims. For example, create a <code class="highlighter-rouge">ROLE_ADMIN</code> and <code class="highlighter-rouge">ROLE_USER</code> group (<strong>Users</strong> &gt; <strong>Groups</strong> &gt; <strong>Add Group</strong>) and add users to them. You can use the account you signed up with, or create a new user (<strong>Users</strong> &gt; <strong>Add Person</strong>).</p>
+
+<p>Navigate to <strong>API</strong> &gt; <strong>Authorization Servers</strong>, click the <strong>Authorization Servers</strong> tab and edit the <code class="highlighter-rouge">default</code> one. Click the <strong>Claims</strong> tab and <strong>Add Claim</strong>. Name it “groups” or “roles”, and include it in the ID Token. Set the value type to “Groups” and set the filter to be a Regex of <code class="highlighter-rouge">.*</code>.</p>
+
+<p><img src="/assets/blog/play-oidc-pac4j/add-groups-claim-e3e2ee1647d33329ff3fa34be02b0859e2204c602e2e3a9b2c6f2be2dd306bc4.png" alt="Add groups claim" width="600" class="center-image" /></p>
+
+<p>After adding the <code class="highlighter-rouge">groups</code> claim, you can modify <code class="highlighter-rouge">SecurityModule.java</code> to use it for the roles.</p>
+
+<div class="language-java highlighter-rouge"><pre class="highlight"><code><span class="n">oidcClient</span><span class="o">.</span><span class="na">addAuthorizationGenerator</span><span class="o">((</span><span class="n">ctx</span><span class="o">,</span> <span class="n">profile</span><span class="o">)</span> <span class="o">-&gt;</span> <span class="o">{</span>
+    <span class="n">profile</span><span class="o">.</span><span class="na">addRoles</span><span class="o">((</span><span class="n">List</span><span class="o">)</span> <span class="n">profile</span><span class="o">.</span><span class="na">getAttribute</span><span class="o">(</span><span class="s">"groups"</span><span class="o">));</span>
+    <span class="k">return</span> <span class="n">profile</span><span class="o">;</span>
+<span class="o">});</span>
+</code></pre>
+</div>
+
+<p>Or you can make this logic more robust so it only adds roles from groups that begin with <code class="highlighter-rouge">ROLE_</code>.</p>
+
+<div class="language-java highlighter-rouge"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">java.util.Set</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.util.stream.Collectors</span><span class="o">;</span>
+
+<span class="n">oidcClient</span><span class="o">.</span><span class="na">addAuthorizationGenerator</span><span class="o">((</span><span class="n">ctx</span><span class="o">,</span> <span class="n">profile</span><span class="o">)</span> <span class="o">-&gt;</span> <span class="o">{</span>
+    <span class="k">if</span> <span class="o">(</span><span class="n">profile</span><span class="o">.</span><span class="na">getAttribute</span><span class="o">(</span><span class="s">"groups"</span><span class="o">)</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
+        <span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="n">groups</span> <span class="o">=</span> <span class="o">(</span><span class="n">List</span><span class="o">)</span> <span class="n">profile</span><span class="o">.</span><span class="na">getAttribute</span><span class="o">(</span><span class="s">"groups"</span><span class="o">);</span>
+        <span class="n">Set</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="n">filteredGroups</span> <span class="o">=</span> <span class="n">groups</span><span class="o">.</span><span class="na">stream</span><span class="o">()</span>
+                <span class="o">.</span><span class="na">filter</span><span class="o">(</span><span class="n">group</span> <span class="o">-&gt;</span> <span class="n">group</span><span class="o">.</span><span class="na">startsWith</span><span class="o">(</span><span class="s">"ROLE_"</span><span class="o">))</span>
+                <span class="o">.</span><span class="na">collect</span><span class="o">(</span><span class="n">Collectors</span><span class="o">.</span><span class="na">toSet</span><span class="o">());</span>
+        <span class="n">profile</span><span class="o">.</span><span class="na">addRoles</span><span class="o">(</span><span class="n">filteredGroups</span><span class="o">);</span>
+    <span class="o">}</span>
+    <span class="k">return</span> <span class="n">profile</span><span class="o">;</span>
+<span class="o">});</span>
+</code></pre>
+</div>
+
+<p>After integrating groups with roles, logging in with a user that belongs to both groups will show up with these roles.</p>
+
+<p><img src="/assets/blog/play-oidc-pac4j/roles-from-okta-0ab302e78b7e2f4a40b4192e9c90149c438ce64067255b4e316afe9fcd1d33b0.png" alt="Roles from Okta" width="800" class="center-image" /></p>
+
+<h2 id="source-code">Source Code</h2>
+
+<p>You can see the full source code for the application developed in this tutorial <a href="https://github.com/oktadeveloper/okta-play-oidc-example">on GitHub</a>.</p>
+
+<h2 id="have-fun-playing-with-play">Have Fun Playing With Play!</h2>
+
+<p>I hope you’ve enjoyed this quick tutorial on how to add authentication with OIDC and play-pac4j to your Play application. I was tempted to look at other solutions, and even try Silhouette + Scala, but pac4j made it pretty easy to accomplish my goal.</p>
+
+<p>If you have a similar tutorial on using Silhouette or another OIDC library for Play, I’d love to hear about it. Bonus points if it integrates with Okta or Keycloak. You can find me on Twitter <a href="https://twitter.com/mraible">@mraible</a>.</p>
+
+<p>If you’re a Java dev who’s interested in reading more about integrating Okta, I’d love to have you check out these resources:</p>
+
+<ul>
+  <li><a href="/blog/2017/10/20/oidc-with-jhipster">My recent post on using OIDC support with JHipster</a></li>
+  <li><a href="/blog/2017/10/13/okta-groups-spring-security">Micah Silverman’s recent post on RBAC with Thymeleaf and Spring Security</a></li>
+  <li><a href="/blog/2017/07/25/oidc-primer-part-1">Identity, Claims, &amp; Tokens – An OpenID Connect Primer, Part 1 of 3</a></li>
+</ul>
+
+<p>And finally, I’d love to have you follow our whole team on Twitter for more awesome content. Check us out <a href="https://twitter.com/OktaDev">@oktadev</a>!</p>
+
+
+
+	</div>
+	
+</article>
+
+		
+</section>
+
+		
+	</div><footer class="Footer">
+    <div class="Wrap">
+
+        <div class="Row">
+
+            <div class="Column--3 Column--medium-6 Column--xSmall-12">
+
+                <a class="Logo" href="https://www.okta.com/" target="_blank" rel="noopener noreferrer">
+                    <img src="https://developer.okta.com/sites/all/themes/developer/images/logo-footer.png" alt="Okta">
+                    Visit okta.com
+                </a>
+
+            </div>
+
+            <div class="Column--3 Column--medium-12 Column--xSmall-12">
+
+                <h4>Social</h4>
+                <ul class="Footer-links Footer-links--social">
+                    <li><a class="Footer-links--github" target="_blank" rel="noopener noreferrer" href="http://github.com/oktadeveloper">Github</a></li>
+                    <li><a class="Footer-links--twitter" target="_blank" rel="noopener noreferrer" href="http://twitter.com/OktaDev">Twitter</a></li>
+                    <li><a class="Footer-links--forum" target="_blank" rel="noopener noreferrer" href="https://devforum.okta.com/">Forum</a></li>
+                    <li><a class="Footer-links--rss" target="_blank" rel="noopener noreferrer" href="http://feeds.feedburner.com/OktaBlog">RSS Blog</a></li>
+                </ul>
+            </div>
+
+            <div class="Column--3 Column--medium-6 Column--small-12">
+                <h4>More Info</h4>
+                <ul class="Footer-links">
+                    <li><a target="_blank" href="https://developer.okta.com/integrate-with-okta/">Integrate with Okta</a></li>
+                    <li><a href="/blog/">Blog</a></li>
+                    <li><a href="/docs/platform-release-notes/platform-release-notes.html">Release Notes</a></li>
+                    <li><a href="/3rd_party_notices/">3rd Party Notices</a></li>
+                </ul>
+            </div>
+
+            <div class="Column--3 Column--medium-6 Column--small-12">
+                <h4>Contact &amp; Legal</h4>
+                <ul class="Footer-links">
+                    <li><a href="https://developer.okta.com/contact/">Contact Sales</a></li>
+                    <li><a target="_blank" rel="noopener noreferrer" href="mailto:developers@okta.com">Contact Support</a></li>
+                    <li><a href="https://developer.okta.com/terms/">Terms &amp; Conditions</a></li>
+                    <li><a href="https://developer.okta.com/privacy/">Privacy Policy</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</footer>
+
+    <script type="text/javascript" src="/assets/master-0365dd27cf276cb2a15c0a43906ca592538204cf1ad4557547bf4e50609b411e.js"></script>
+    <script type="text/javascript" src="/assets/myOkta-911cbafbbe079b7a5522d9cbe15bd2a5f44e1582531e88393934bec69f97696b.js"></script>
+    
+    
+    
+    
+      <script type="text/javascript" src="/assets/blog-6e32dad27404131cc8630a5282264bed2ab4c08c91ac86fa496b75c53aa4f681.js"></script>
+    
+
+  <!-- START Post Footer -->
+  
+  <!-- START Google Tag Manager -->
+  <!-- https://support.google.com/tagmanager/answer/6103696?hl=en -->
+  <noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-TJ45R6" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+  <!-- END Google Tag Manager -->
+  <!-- START Google Remarketing Tag -->
+  <script type="text/javascript">
+    /* <![CDATA[ */
+    var google_conversion_id = 1006913831;
+    var google_custom_params = window.google_tag_params;
+    var google_remarketing_only = true;
+    /* ]]> */
+  </script>
+  <div style="display:none;"><script type="text/javascript" src="//www.googleadservices.com/pagead/conversion.js"></script></div>
+  <noscript><div style="display:inline;"><img height="1" width="1" style="border-style:none;" alt="" src="//googleads.g.doubleclick.net/pagead/viewthroughconversion/1006913831/?value=0&amp;guid=ON&amp;script=0"></div></noscript>
+  <!-- END Google Remarketing Tag -->
+  <!-- START Crazy Egg Tracking -->
+  <script type="text/javascript">
+    setTimeout(function(){var a=document.createElement("script");
+    var b=document.getElementsByTagName("script")[0];
+    a.src=document.location.protocol+"//script.crazyegg.com/pages/scripts/0021/9333.js?"+Math.floor(new Date().getTime()/3600000);
+    a.async=true;a.type="text/javascript";b.parentNode.insertBefore(a,b)}, 1);
+  </script>
+  <!-- END Crazy Egg Tracking -->
+
+  <!-- END Post Footer -->
+</body>
+</html>

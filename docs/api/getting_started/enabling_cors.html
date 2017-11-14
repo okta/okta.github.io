@@ -1,0 +1,602 @@
+<!DOCTYPE html>
+<html class="no-js" lang="en" dir="ltr">
+<head>
+  <script>
+    var searchDomain = 'https://developer.okta.com';
+    var isProduction = window.location.hostname === 'developer.okta.com';
+    if (isProduction) {
+      // TypeKit
+      (function(d) {
+        var config = {
+          kitId: 'jff5neq',
+          scriptTimeout: 3000,
+          async: true
+        },
+        h=d.documentElement,t=setTimeout(function(){h.className=h.className.replace(/bwf-loadingb/g,"")+" wf-inactive";},config.scriptTimeout),tk=d.createElement("script"),f=false,s=d.getElementsByTagName("script")[0],a;h.className+=" wf-loading";tk.src='https://use.typekit.net/'+config.kitId+'.js';tk.async=true;tk.onload=tk.onreadystatechange=function(){a=this.readyState;if(f||a&&a!="complete"&&a!="loaded")return;f=true;clearTimeout(t);try{Typekit.load(config)}catch(e){}};s.parentNode.insertBefore(tk,s)
+      })(document);
+
+      // Google analytics
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+              (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+              m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+      ga('create', 'UA-15777010-3', 'auto');
+      ga('send', 'pageview');
+
+      // START Google Tag Manager
+      (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+      new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+      j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+      '//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+      })(window,document,'script','dataLayer','GTM-TJ45R6');
+      // END Google Tag Manager
+    }
+	</script>
+  <meta charset="utf-8">
+  <meta http-equiv="x-ua-compatible" content="IE=edge,chrome=1">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+ 	
+
+  <link type="text/css" rel="stylesheet" href="https://developer.okta.com/sites/all/themes/developer/css/master.css" media="all" />
+  <meta class="swiftype" name="title" data-type="string" content="Enabling CORS | Okta Developer" />
+  <meta class="swiftype" name="summary" data-type="string" content="Overview" />
+
+  <link type="text/css" rel="stylesheet" href="/assets/animate-ec43d72c3ed45e08a460b8a2966d8dba6006aebfa0530935c3973fa493a8771f.css">
+  <link type="text/css" rel="stylesheet" href="/assets/okta-a96df4c9d48b78b618e1d541f46f7137d73d40653571e020c1ad59edd7915c60.css">
+  
+  
+  <title>Enabling CORS | Okta Developer</title>
+  <meta name="description" content="Overview">
+  <link rel="canonical" href="https://developer.okta.com/docs/api/getting_started/enabling_cors.html"  data-proofer-ignore>
+  <link rel="alternate" type="application/rss+xml" title="Okta Developer" href="https://developer.okta.com/feed.xml"><!-- GA -->
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+  <link rel="manifest" href="/manifest.json">
+  <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#21313a">
+  <meta name="theme-color" content="#ffffff">
+</head>
+
+<body>
+  <div class="Page enabling-cors Page--docs-page">
+    <!-- START Header -->
+    
+
+
+
+
+<header class="Header is-fixed">
+
+  <div class="Wrap">
+
+    <a class="Logo" href="https://developer.okta.com">
+      <svg version="1.1" id="OktaLogo" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 431.9 151.4" style="enable-background:new 0 0 431.9 151.4;" xml:space="preserve"><g><g><g><path d="M102.2,41.4c-21,0-38.1,17.1-38.1,38.1s17.1,38.1,38.1,38.1s38.1-17.1,38.1-38.1l0,0C140.3,58.5,123.2,41.4,102.2,41.4z M102.2,98.5c-10.5,0-19-8.5-19-19s8.5-19,19-19s19,8.5,19,19c0.1,10.5-8.4,19-18.9,19.1C102.3,98.6,102.2,98.6,102.2,98.5L102.2,98.5z"/><path d="M169.1,92.3c0-1.9,1.5-3.4,3.4-3.4c0.9,0,1.8,0.4,2.4,1c9.5,9.7,25.3,26.3,25.4,26.4c0.4,0.5,0.8,0.8,1.4,0.9l1.6,0.2h17.2c1.8,0,3.3-1.4,3.4-3.2c0-0.8-0.3-1.5-0.8-2.2l-28.6-29.2l-1.5-1.5c-3.2-3.9-2.9-5.4,0.8-9.3l22.6-25.1c1.1-1.4,0.8-3.5-0.6-4.6c-0.6-0.4-1.3-0.7-2-0.7h-17c-0.6,0.2-1.1,0.5-1.5,0.9L175,64.4c-1.3,1.4-3.4,1.5-4.8,0.2c-0.7-0.6-1.1-1.5-1.1-2.5V18.9c0-1.7-1.3-3-3-3c-0.1,0-0.2,0-0.3,0h-12.7c-2.2,0-3.3,1.5-3.3,2.8v95.8c0,2.2,1.8,2.8,3.3,2.8h12.7c1.7,0.1,3.2-1.2,3.3-2.9c0,0,0,0,0,0V92.3z"/><path d="M273,114l-1.4-12.8c-0.2-1.7-1.7-2.9-3.4-2.7c0,0,0,0-0.1,0l-2.9,0.2c-10.1,0-18.5-7.9-19-18c0-0.3,0-0.7,0-1V64.2c-0.1-2,1.5-3.6,3.5-3.7c0,0,0,0,0,0h17c1.7-0.1,3.1-1.5,3-3.2c0,0,0-0.1,0-0.1v-12c0-2.3-1.5-3.6-2.8-3.6h-17.1c-1.9,0.1-3.5-1.5-3.6-3.4c0,0,0,0,0,0V18.9c-0.1-1.7-1.5-3.1-3.2-3c0,0-0.1,0-0.1,0h-12.7c-1.6-0.1-3,1.1-3.1,2.7c0,0.1,0,0.1,0,0.2c0,0,0,61.7,0,62c0.5,21,17.9,37.6,38.9,37c1.4,0,2.9-0.2,4.3-0.3C272,117.2,273.2,115.7,273,114z"/></g><path d="M364.7,98c-10.8,0-12.4-3.8-12.4-18.3l0,0V44.8c0-1.8-1.4-3.2-3.2-3.2c0,0-0.1,0-0.1,0h-12.8c-1.8,0-3.2,1.4-3.3,3.2v1.6C314.6,36,291.3,42.5,281,60.8c-10.4,18.3-3.9,41.6,14.4,51.9c14,7.9,31.4,6.2,43.5-4.2c3.6,5.5,9.3,9.1,18.3,9.1c1.5,0,9.7,0.3,9.7-3.5v-13.6C367,99.2,366,98.1,364.7,98z M314.2,98.6c-10.5,0-19-8.5-19-19s8.5-19,19-19s19,8.5,19,19l0,0C333.2,90.1,324.7,98.6,314.2,98.6z"/></g><path d="M19.4,74c2.2-1.9,4.1-4.1,5.7-6.6c3.5-5.3,5.4-11.5,5.2-17.9V27c0-4.9,0.9-8.4,2.7-10.5c1.8-2.1,4.8-3,9.2-3h12.6c1.2,0,2.1-0.9,2.2-2.1l0,0V2.2C57,1,56,0,54.8,0c0,0,0,0,0,0H41.5c-7.8,0-12.9,2.1-18,7.6s-7.1,12.3-7.1,21.7v14.2c0,2.2-0.1,4-0.2,5.7v2.2c-0.5,3.2-1.8,6.2-3.6,8.9C9.4,64.7,5.1,70.9,0.9,74l0,0l-0.3,0.3l0,0l-0.2,0.3H0.2v0.3l0,0c-0.1,0.3-0.1,0.7,0,1l0,0v0.3h0.1l0.2,0.3l0,0l0.3,0.3l0,0c4.2,3.1,8.5,9.3,11.3,13.7c1.8,2.7,3.1,5.7,3.6,8.9v2.2c0.1,1.6,0.2,3.5,0.2,5.7v14.3c0,9.4,2.4,16.7,7.1,21.7s10.2,7.6,18,7.6h13.8c1.2,0,2.2-1,2.2-2.2V140l0,0c0-1.2-1-2.2-2.2-2.2H42.2c-4.4,0-7.5-1-9.2-3s-2.7-5.6-2.7-10.5v-22.4c0.2-6.4-1.7-12.6-5.2-17.9c-1.6-2.5-3.5-4.7-5.7-6.6l0,0c-0.9-0.7-1.1-2-0.4-2.9C19.2,74.3,19.3,74.2,19.4,74L19.4,74z"/><path d="M412.5,74c-2.2-1.9-4.1-4.1-5.7-6.6c-3.5-5.3-5.4-11.5-5.2-17.9V27c0-4.9-0.9-8.4-2.7-10.5s-4.8-3-9.2-3h-12.6c-1.2,0-2.2-1-2.2-2.2c0,0,0,0,0,0l0,0V2.2c0-1.2,1-2.2,2.2-2.2c0,0,0,0,0,0h13.4c7.8,0,12.9,2.1,18,7.6s7.1,12.3,7.1,21.7v14.2c0,2.2,0.1,4,0.2,5.7v2.2c0.5,3.2,1.8,6.2,3.6,8.9c2.8,4.5,7.1,10.7,11.3,13.7l0,0l0.3,0.3l0,0l0.2,0.3h0.1v0.3l0,0c0.1,0.3,0.1,0.7,0,1l0,0v0.3h-0.1l-0.2,0.3l0,0l-0.3,0.3l0,0c-4.2,3.1-8.5,9.3-11.3,13.7c-1.8,2.7-3.1,5.7-3.6,8.9v2.2c-0.1,1.6-0.2,3.5-0.2,5.7v14.3c0,9.4-2.4,16.7-7.1,21.7s-10.2,7.6-18,7.6h-13.4c-1.2,0-2.2-1-2.2-2.2c0,0,0,0,0,0V140l0,0c0-1.2,1-2.2,2.2-2.2l0,0h12.7c4.4,0,7.5-1,9.2-3s2.7-5.6,2.7-10.5v-22.4c-0.2-6.3,1.6-12.6,5.1-17.9c1.6-2.5,3.5-4.7,5.7-6.6l0,0c0.9-0.7,1.1-2,0.4-2.9C412.7,74.3,412.6,74.2,412.5,74L412.5,74z"/></g></svg>
+    </a>
+
+    <nav class="Header-nav PrimaryNav">
+      <ul class="menu">
+        <li class="first leaf">
+          <a href="https://developer.okta.com/product/">Product</a>
+        </li>
+        <li class="leaf">
+          <a href="https://developer.okta.com/pricing/">Pricing</a>
+        </li>
+        <li class="leaf">
+          <a href="/blog/">Blog</a>
+        </li>
+        <li class="leaf">
+          <a href="/documentation/" class="active">Docs</a>
+        </li>
+        <li class="last expanded">
+          <span class="nolink">Support</span>
+          <ul class="menu">
+            <li class="first leaf"><a href="https://devforum.okta.com/">Okta Developer Forums</a></li>
+            <li class="last leaf"><a href="mailto:developers@okta.com">developers@okta.com</a></li>
+          </ul>
+        </li>
+      </ul>
+      <a class="PrimaryNav-toggle" href="#">
+        <svg width="20px" height="20px" viewBox="0 0 20 20" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+            <g class="MenuIcon" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="round">
+                <path d="M1,16 L19,16" class="MenuIcon-line1" stroke="#FFFFFF" stroke-width="2"></path>
+                <path d="M1,4 L19,4" class="MenuIcon-line2" stroke="#FFFFFF" stroke-width="2"></path>
+                <path d="M1,10 L19,10" class="MenuIcon-line3" stroke="#FFFFFF" stroke-width="2"></path>
+                <path d="M1,10 L19,10" class="MenuIcon-line4" stroke="#FFFFFF" stroke-width="2"></path>
+            </g>
+        </svg>
+        <svg class="CloseIcon" width="16px" height="16px" viewBox="0 0 16 16" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+          <g id="ALl-Boards" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+            <g id="Desktop" transform="translate(-915.000000, -235.000000)" fill="#FFFFFF">
+              <g id="Search-bar-Active" transform="translate(30.000000, 26.000000)">
+                <polygon id="Icon/Cross" points="901 210.6 899.4 209 893 215.4 886.6 209 885 210.6 891.4 217 885 223.4 886.6 225 893 218.6 899.4 225 901 223.4 894.6 217"></polygon>
+              </g>
+            </g>
+          </g>
+        </svg>
+      </a>
+
+      <div class="PrimaryNav-cta">
+        <a target="_blank" rel="noopener noreferrer" href="https://login.okta.com/?SAMLRequest=fc%2B7CsJAEAXQXvAflu1NNJUMeZBGELTx1a%2FrYILJTtyZGD%2FfSBRiYzlw77lMnD3rSj3Qc0ku0YtgrhU6S5fSXRN9PKxmS52l00nMpq6iBvJWCrfDe4ss6vStRe9aDzmGIZfo1jsgwyWDMzUyiIV9vt1AH4XGk5ClSvewUgMNa%2BYW%2FVj5jxhm9NLP67QQaSAMu64L6CYmsFSHlnzT4ZlLwTgcL6Sf8%2FeX9AU%3Dhttps://login.okta.com/?SAMLRequest=fc%2B7CsJAEAXQXvAflu1NNJUMeZBGELTx1a%2FrYILJTtyZGD%2FfSBRiYzlw77lMnD3rSj3Qc0ku0YtgrhU6S5fSXRN9PKxmS52l00nMpq6iBvJWCrfDe4ss6vStRe9aDzmGIZfo1jsgwyWDMzUyiIV9vt1AH4XGk5ClSvewUgMNa%2BYW%2FVj5jxhm9NLP67QQaSAMu64L6CYmsFSHlnzT4ZlLwTgcL6Sf8%2FeX9AU%3D" class="Button--redOutline">Login</a>
+        <a href="https://developer.okta.com/signup/" class="Button--red">Sign up</a>
+      </div>
+
+      <a class="SearchIcon" href="#"></a>
+      <form id="form_search" class="SearchBar Formisimo_clocked_69929" method="get" action="https://developer.okta.com/search/" name="form_search" __bizdiag="-784164280" __biza="WJ__">
+        <input type="text" name="stq" autocomplete="off" id="st-search-input-auto" class="st-search-input" placeholder="Search">
+        <input type="submit" name="submit" value="GO">
+      </form>
+
+    </nav>
+
+  </div>
+
+</header>
+
+    <!-- END Header -->
+     <!-- START Page Center w/Sub Nav & Content -->
+    <section class="PageContent DynamicSidebar has-tableOfContents">
+      <!-- START Fixed sidebar --><aside class="Sidebar">
+  <h2 class="Sidebar-location Sidebar-toggle h6">Navigation</h2>
+  <div class="Sidebar-close Sidebar-toggle"></div>
+  <div>
+    <h3 class="Sidebar-title"><a href = "/authentication-guide/">Authentication Guide</a></h3>
+    <ul class="Sidebar-nav">
+      <li>
+        <a href = "/authentication-guide/auth-overview/">OAuth 2.0 Overview</a>
+        
+      </li>
+      <li>
+        <a href = "/authentication-guide/implementing-authentication/">Implementing OAuth 2.0</a>
+        
+      </li>
+      <li>
+      <a href = "/authentication-guide/social-login/">Social Login</a>
+      
+      </li>
+      <li>
+      <a href = "/authentication-guide/saml-login/">SAML Login</a>
+      
+      </li>
+      <li>
+      <a href = "/authentication-guide/tokens/">Working With Tokens</a>
+      
+      </li>
+      <!--
+      <li>
+      <a href = "/authentication-guide/custom-login/">Customizing Login</a>
+      
+      </li>
+    -->
+    </ul>
+
+    <h3 class="Sidebar-title">Use Cases</h3>
+    <ul class="Sidebar-nav">
+      <li>
+        <a href="/use_cases/authentication/">Authentication</a>
+      </li>
+      <li>
+        <a href="/use_cases/mfa/">Multi-Factor Authentication</a>
+      </li>
+      <li>
+        <a href="/use_cases/api_access_management/">API Access Management</a>
+      </li>
+      <li>
+        <a href="/use_cases/integrate_with_okta/">Integrate with Okta</a>
+      </li>
+    </ul>
+
+    <h3 class="Sidebar-title">Reference</h3>
+    <ul class="Sidebar-nav">
+      <li>
+        <a href="/docs/api/getting_started/api_test_client.html">Getting Started</a>
+        <ul>
+          <li>
+            <a href="/docs/api/getting_started/api_test_client.html">Getting Started With the Okta APIs</a>
+          </li>
+          <li>
+            <a href="/docs/api/getting_started/getting_a_token.html">Getting a Token</a>
+          </li>
+          <li class="is-active">
+            <a href="/docs/api/getting_started/enabling_cors.html">Enabling CORS</a>
+          </li>
+          <li>
+            <a href="/docs/api/getting_started/design_principles.html">Design Principles</a>
+          </li>
+          <li>
+            <a href="/docs/api/getting_started/releases-at-okta.html">Okta Release Lifecycle</a>
+          </li>
+        </ul>
+      </li>
+      <li>
+        <a href="/docs/api/resources/authn.html">Authentication Reference</a>
+      </li>
+      <li>
+        <a href="/docs/api/resources/apps.html">API Reference</a>
+      </li>
+      <li>
+        <a href="/reference/error_codes/">Error Codes</a>
+      </li>
+      <li>
+        <a href="/reference/okta_expression_language/">Okta Expression Language</a>
+      </li>
+      <li>
+        <a href="/docs/platform-release-notes/platform-release-notes.html">Okta API Release Notes</a>
+      </li>
+    </ul>
+
+    <h3 class="Sidebar-title">Standards</h3>
+    <ul class="Sidebar-nav">
+      
+      
+      
+      <li>
+        <a href="/standards/OAuth/">OAuth 2.0 and Okta</a>
+      </li>
+      
+      
+      <li>
+        <a href="/standards/OIDC/">OpenID Connect and Okta</a>
+      </li>
+      
+      
+      <li>
+        <a href="/standards/SAML/">SAML</a>
+      </li>
+      
+      
+      
+      
+      <li>
+        <a href="/standards/SCIM/">SCIM Provisioning with Lifecycle Management</a>
+      </li>
+      
+    </ul>
+
+    <script>
+      if (document.querySelectorAll("#Sidebar_Resources .is-active").length) {
+        document.getElementById('Sidebar_Resources').classList.remove('Sidebar-hide');
+      }
+
+      if (document.querySelectorAll("#Sidebar_References .is-active").length) {
+        document.getElementById('Sidebar_References').classList.remove('Sidebar-hide');
+      }
+    </script>
+  </div>
+</aside>
+<!-- END Fixed sidebar -->
+      <!-- START Page Content -->
+      <div class="PageContent-main" id="docs-body">
+        <a id="edit-link" href="https://github.com/okta/okta.github.io/edit/source/_source/_docs/api/getting_started/enabling_cors.md" data-proofer-ignore>Edit Page</a>
+      <h1 id="overview">Overview</h1>
+
+<p><a href="http://en.wikipedia.org/wiki/Cross-Origin_Resource_Sharing">Cross-Origin Resource Sharing (CORS)</a> is a mechanism that allows a web page to make an AJAX call using <a href="http://en.wikipedia.org/wiki/XMLHttpRequest">XMLHttpRequest (XHR)</a> to a domain that is  different from the one from where the script was loaded.  Such “cross-domain” requests would otherwise be forbidden by web browsers, per the <a href="http://en.wikipedia.org/wiki/Same_origin_policy">same origin security policy</a>.  CORS defines a <a href="http://www.w3.org/TR/cors/">standardized</a> way in which the browser and the server can interact to determine whether or not to allow the cross-origin request</p>
+
+<p>In Okta, CORS allows JavaScript hosted on your websites to make an XHR to the Okta API with the Okta session cookie. Every website origin must be explicitly permitted via the Okta Admin Dashboard for CORS.</p>
+
+<blockquote>
+  <p><strong>Caution:</strong> Only grant access to specific origins (websites) that you control and trust to access the Okta API.</p>
+</blockquote>
+
+<h2 id="api-support">API Support</h2>
+
+<p>The Okta API supports CORS on an API by API basis. If you’re building an application that needs CORS, please check that the specific operation supports CORS for your use case. APIs that support CORS are marked with the following icon <span class="api-label api-label-small api-label-cors"><i class="fa fa-cloud-download"></i> CORS</span>.</p>
+
+<h2 id="browser-support">Browser Support</h2>
+
+<p>Not all browsers supports CORS.  The following table describes which browsers support this feature.</p>
+
+<iframe frameborder="0" width="100%" height="460px" src="https://caniuse.com/cors/embed/description&amp;links"></iframe>
+
+<blockquote>
+  <p>IE8 and IE9 do not support authenticated requests and cannot use the Okta session cookie with CORS.</p>
+</blockquote>
+
+<h2 id="granting-cross-origin-access-to-websites">Granting Cross-Origin Access to Websites</h2>
+
+<p>You can enable CORS for websites that need cross-origin requests to the
+Okta API on the developer console. Select <strong>API</strong> &gt; <strong>Trusted Origins</strong> to see
+the screen shown below.</p>
+
+<p><img src="/assets/okta-admin-ui-cors-dev-b654a75171aebe022d80108d9fd3438ff299ca496febc6cb0a0288196d826f69.png" cors="" settings="" ui="" alt="CORS Settings UI" /></p>
+
+<blockquote>
+  <p>Select <strong>Add Origin</strong> to specify the base URL of website you want to allow cross-origin requests.</p>
+</blockquote>
+
+<p><img src="/assets/okta-admin-ui-cors-new-dev-1d1fd6e122e7eb8e310baf55d8ee45c2216666c26260818e972c243dd5e8df3b.png" add="" cors="" origin="" alt="" /></p>
+
+<p><strong>Note: If you do not enable CORS, or disable it at a later date, the list of websites is retained.</strong></p>
+
+<h2 id="testing">Testing</h2>
+
+<p>Test your CORS configuration:</p>
+
+<ol>
+  <li>Grant cross-origin access to <code class="highlighter-rouge">https://developer.okta.com</code> from your org’s developer console.</li>
+  <li>Enter your Okta organization in the form below and click <strong>Test</strong>. Your Okta user profile displays below the form.</li>
+</ol>
+
+<div id="cors-test">
+  <form class="form-cors-test" role="form">
+    <div class="form-group col-md-6">
+      <div class="input-group">
+        <div class="input-group-addon">https://</div>
+        <input id="input-orgUrl" type="text" class="form-control" placeholder="acme.okta.com" required="" />
+      </div>
+    </div>
+    <button type="button" class="btn btn-primary"><i class="fa fa-cloud-download"></i> Test</button>
+  </form>
+  <div id="cors-test-result" class="cors-test-result">
+
+  </div>
+</div>
+
+<h2 class="api api-request api-request-example" id="request-examples">Request Examples</h2>
+
+<p>The following code samples can be added to your website to test your CORS configuration.  Remember to replace the <code class="highlighter-rouge">baseUrl</code> with the URL for your Okta organization.</p>
+
+<h3 id="xmlhttprequest">XMLHttpRequest</h3>
+
+<div class="language-javascript highlighter-rouge"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">baseUrl</span> <span class="o">=</span> <span class="s1">'<span class="okta-preview-domain">https://{yourOktaDomain}.com</span>'</span><span class="p">;</span>
+<span class="kd">var</span> <span class="nx">xhr</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">XMLHttpRequest</span><span class="p">();</span>
+<span class="k">if</span> <span class="p">(</span><span class="s2">"withCredentials"</span> <span class="k">in</span> <span class="nx">xhr</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">xhr</span><span class="p">.</span><span class="nx">onerror</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+      <span class="nx">alert</span><span class="p">(</span><span class="s1">'Invalid URL or Cross-Origin Request Blocked.  You must explicitly add this site ('</span> <span class="o">+</span> <span class="nb">window</span><span class="p">.</span><span class="nx">location</span><span class="p">.</span><span class="nx">origin</span> <span class="o">+</span> <span class="s1">') to the list of allowed websites in your Okta Admin Dashboard'</span><span class="p">);</span>
+    <span class="p">}</span>
+    <span class="nx">xhr</span><span class="p">.</span><span class="nx">onload</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+        <span class="nx">alert</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">responseText</span><span class="p">);</span>
+    <span class="p">};</span>
+    <span class="nx">xhr</span><span class="p">.</span><span class="nx">open</span><span class="p">(</span><span class="s1">'GET'</span><span class="p">,</span> <span class="nx">baseUrl</span> <span class="o">+</span> <span class="s1">'/api/v1/users/me'</span><span class="p">,</span> <span class="kc">true</span><span class="p">);</span>
+    <span class="nx">xhr</span><span class="p">.</span><span class="nx">withCredentials</span> <span class="o">=</span> <span class="kc">true</span><span class="p">;</span>
+    <span class="nx">xhr</span><span class="p">.</span><span class="nx">send</span><span class="p">();</span>
+<span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+    <span class="nx">alert</span><span class="p">(</span><span class="s2">"CORS is not supported for this browser!"</span><span class="p">)</span>
+<span class="p">}</span>
+</code></pre>
+</div>
+
+<h3 id="jquery">jQuery</h3>
+
+<div class="language-javascript highlighter-rouge"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">baseUrl</span> <span class="o">=</span> <span class="s1">'<span class="okta-preview-domain">https://{yourOktaDomain}.com</span>'</span><span class="p">;</span>
+<span class="nx">$</span><span class="p">.</span><span class="nx">ajax</span><span class="p">({</span>
+  <span class="na">url</span><span class="p">:</span> <span class="nx">baseUrl</span> <span class="o">+</span> <span class="s1">'/api/v1/users/me'</span><span class="p">,</span>
+  <span class="na">type</span><span class="p">:</span> <span class="s1">'GET'</span><span class="p">,</span>
+  <span class="na">xhrFields</span><span class="p">:</span> <span class="p">{</span> <span class="na">withCredentials</span><span class="p">:</span> <span class="kc">true</span> <span class="p">},</span>
+  <span class="na">accept</span><span class="p">:</span> <span class="s1">'application/json'</span>
+<span class="p">}).</span><span class="nx">done</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">data</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">alert</span><span class="p">(</span><span class="nx">data</span><span class="p">);</span>
+<span class="p">})</span>
+<span class="p">.</span><span class="nx">fail</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">xhr</span><span class="p">,</span> <span class="nx">textStatus</span><span class="p">,</span> <span class="nx">error</span><span class="p">)</span> <span class="p">{</span>
+  <span class="kd">var</span> <span class="nx">title</span><span class="p">,</span> <span class="nx">message</span><span class="p">;</span>
+  <span class="k">switch</span> <span class="p">(</span><span class="nx">xhr</span><span class="p">.</span><span class="nx">status</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">case</span> <span class="mi">403</span> <span class="err">:</span>
+      <span class="nx">title</span> <span class="o">=</span> <span class="nx">xhr</span><span class="p">.</span><span class="nx">responseJSON</span><span class="p">.</span><span class="nx">errorSummary</span><span class="p">;</span>
+      <span class="nx">message</span> <span class="o">=</span> <span class="s1">'Please login to your Okta organization before running the test'</span><span class="p">;</span>
+      <span class="k">break</span><span class="p">;</span>
+    <span class="nl">default</span> <span class="p">:</span>
+      <span class="nx">title</span> <span class="o">=</span> <span class="s1">'Invalid URL or Cross-Origin Request Blocked'</span><span class="p">;</span>
+      <span class="nx">message</span> <span class="o">=</span> <span class="s1">'You must explicitly add this site ('</span> <span class="o">+</span> <span class="nb">window</span><span class="p">.</span><span class="nx">location</span><span class="p">.</span><span class="nx">origin</span> <span class="o">+</span> <span class="s1">') to the list of allowed websites in your Okta Admin Dashboard'</span><span class="p">;</span>
+      <span class="k">break</span><span class="p">;</span>
+  <span class="p">}</span>
+  <span class="nx">alert</span><span class="p">(</span><span class="nx">title</span> <span class="o">+</span> <span class="s1">': '</span> <span class="o">+</span> <span class="nx">message</span><span class="p">);</span>
+<span class="p">});</span>
+</code></pre>
+</div>
+
+<h2 class="api api-response api-response-example" id="response-example-error">Response Example: Error</h2>
+
+<p>If you did not enable CORS, or your CORS configuration is incorrect, you
+will see an error in your browser’s developer tool or JavaScript console:</p>
+
+<h3 id="chrome">Chrome</h3>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>XMLHttpRequest cannot load <span class="okta-preview-domain">https://{yourOktaDomain}.com</span>/api/v1/users/me. No 'Access-Control-Allow-Origin' header is present on the requested resource. Origin 'https://your-website.com' is therefore not allowed access.
+</code></pre>
+</div>
+
+<h3 id="safari">Safari</h3>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>XMLHttpRequest cannot load <span class="okta-preview-domain">https://{yourOktaDomain}.com</span>/api/v1/users/me. Origin <span class="okta-preview-domain">https://{yourOktaDomain}.com</span> is not allowed by Access-Control-Allow-Origin.
+</code></pre>
+</div>
+
+<h3 id="firefox">Firefox</h3>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>Cross-Origin Request Blocked: The Same Origin Policy disallows reading the remote resource at <span class="okta-preview-domain">https://{yourOktaDomain}.com</span>/api/v1/users/me. This can be fixed by moving the resource to the same domain or enabling CORS.
+</code></pre>
+</div>
+
+<h3 id="internet-explorer">Internet Explorer</h3>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>SEC7118: XMLHttpRequest for <span class="okta-preview-domain">https://{yourOktaDomain}.com</span>/api/v1/users/me required Cross Origin Resource Sharing (CORS).
+
+SEC7120: Origin <span class="okta-preview-domain">https://{yourOktaDomain}.com</span> not found in Access-Control-Allow-Origin header.
+
+SCRIPT7002: XMLHttpRequest: Network Error 0x80070005, Access is denied.
+</code></pre>
+</div>
+
+<h2 id="additional-resources">Additional Resources</h2>
+
+<ul>
+  <li><a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Access_control_CORS">HTTP access control (CORS)</a></li>
+</ul>
+
+<script id="template-profile" type="text/template" class="template">
+  <div class="panel panel-default panel-profile">
+    <div class="panel-heading">
+      <span class="panel-title">Profile</span>
+    </div>
+    <div class="panel-body">
+      <div class="form-horizontal" role="form">
+        <div class="form-group">
+          <label class="col-1-3 control-label">ID</label>
+          <div class="col-2-3">
+            <p class="form-control-static"><%= user.id %></p>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="col-1-3 control-label">Status</label>
+          <div class="col-2-3">
+            <p class="form-control-static"><%= user.status %></p>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="col-1-3 control-label">Login</label>
+          <div class="col-2-3">
+            <p class="form-control-static"><%= user.profile.login %></p>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="col-1-3 control-label">Email</label>
+          <div class="col-2-3">
+            <p class="form-control-static"><%= user.profile.email %></p>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="col-1-3 control-label">First Name</label>
+          <div class="col-2-3">
+            <p class="form-control-static"><%= user.profile.firstName %></p>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="col-1-3 control-label">Last Name</label>
+          <div class="col-2-3">
+            <p class="form-control-static"><%= user.profile.lastName %></p>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="col-1-3 control-label">Mobile Phone</label>
+          <div class="col-2-3">
+            <p class="form-control-static"><%= user.profile.mobilePhone %></p>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="col-1-3 control-label">Created</label>
+          <div class="col-2-3">
+            <p class="form-control-static"><%= user.created %></p>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="col-1-3 control-label">Updated</label>
+          <div class="col-2-3">
+            <p class="form-control-static"><%= user.lastUpdated %></p>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="col-1-3 control-label">Last Login</label>
+          <div class="col-2-3">
+            <p class="form-control-static"><%= user.lastLogin %></p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</script>
+
+
+      </div>
+      <div class="TableOfContents TableOfContentsPreload">
+        <div class="TableOfContents-item is-level1">
+          <script>
+                  document.write(document.title.split('|')[0].trim());
+          </script>
+        </div>
+        <div class="TableOfContentsLoader"></div>
+      </div><!-- END Page Content -->
+    </section><!-- END Page Center w/Sub Nav & Content -->
+
+    <!-- START Footer -->
+    <footer class="Footer">
+    <div class="Wrap">
+
+        <div class="Row">
+
+            <div class="Column--3 Column--medium-6 Column--xSmall-12">
+
+                <a class="Logo" href="https://www.okta.com/" target="_blank" rel="noopener noreferrer">
+                    <img src="https://developer.okta.com/sites/all/themes/developer/images/logo-footer.png" alt="Okta">
+                    Visit okta.com
+                </a>
+
+            </div>
+
+            <div class="Column--3 Column--medium-12 Column--xSmall-12">
+
+                <h4>Social</h4>
+                <ul class="Footer-links Footer-links--social">
+                    <li><a class="Footer-links--github" target="_blank" rel="noopener noreferrer" href="http://github.com/oktadeveloper">Github</a></li>
+                    <li><a class="Footer-links--twitter" target="_blank" rel="noopener noreferrer" href="http://twitter.com/OktaDev">Twitter</a></li>
+                    <li><a class="Footer-links--forum" target="_blank" rel="noopener noreferrer" href="https://devforum.okta.com/">Forum</a></li>
+                    <li><a class="Footer-links--rss" target="_blank" rel="noopener noreferrer" href="http://feeds.feedburner.com/OktaBlog">RSS Blog</a></li>
+                </ul>
+            </div>
+
+            <div class="Column--3 Column--medium-6 Column--small-12">
+                <h4>More Info</h4>
+                <ul class="Footer-links">
+                    <li><a target="_blank" href="https://developer.okta.com/integrate-with-okta/">Integrate with Okta</a></li>
+                    <li><a href="/blog/">Blog</a></li>
+                    <li><a href="/docs/platform-release-notes/platform-release-notes.html">Release Notes</a></li>
+                    <li><a href="/3rd_party_notices/">3rd Party Notices</a></li>
+                </ul>
+            </div>
+
+            <div class="Column--3 Column--medium-6 Column--small-12">
+                <h4>Contact &amp; Legal</h4>
+                <ul class="Footer-links">
+                    <li><a href="https://developer.okta.com/contact/">Contact Sales</a></li>
+                    <li><a target="_blank" rel="noopener noreferrer" href="mailto:developers@okta.com">Contact Support</a></li>
+                    <li><a href="https://developer.okta.com/terms/">Terms &amp; Conditions</a></li>
+                    <li><a href="https://developer.okta.com/privacy/">Privacy Policy</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</footer>
+
+    <script type="text/javascript" src="/assets/master-0365dd27cf276cb2a15c0a43906ca592538204cf1ad4557547bf4e50609b411e.js"></script>
+    <script type="text/javascript" src="/assets/myOkta-911cbafbbe079b7a5522d9cbe15bd2a5f44e1582531e88393934bec69f97696b.js"></script>
+    
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js"></script>
+    
+    
+    
+      <script type="text/javascript" src="/assets/cors-f26a8d56072c36b567cc408358196f71d352b11f48133de16c2dc5ffcd529d44.js"></script>
+    
+    
+      <script type="text/javascript" src="/assets/docs-0af8e0751a2375ff1b4d8e8ddf6a1b7ffd864bd473116861d71f541c4859329e.js"></script>
+    
+
+    <!-- END Footer -->
+  </div>
+  <!-- START Post Footer -->
+  
+  <!-- START Google Tag Manager -->
+  <!-- https://support.google.com/tagmanager/answer/6103696?hl=en -->
+  <noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-TJ45R6" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+  <!-- END Google Tag Manager -->
+  <!-- START Google Remarketing Tag -->
+  <script type="text/javascript">
+    /* <![CDATA[ */
+    var google_conversion_id = 1006913831;
+    var google_custom_params = window.google_tag_params;
+    var google_remarketing_only = true;
+    /* ]]> */
+  </script>
+  <div style="display:none;"><script type="text/javascript" src="//www.googleadservices.com/pagead/conversion.js"></script></div>
+  <noscript><div style="display:inline;"><img height="1" width="1" style="border-style:none;" alt="" src="//googleads.g.doubleclick.net/pagead/viewthroughconversion/1006913831/?value=0&amp;guid=ON&amp;script=0"></div></noscript>
+  <!-- END Google Remarketing Tag -->
+  <!-- START Crazy Egg Tracking -->
+  <script type="text/javascript">
+    setTimeout(function(){var a=document.createElement("script");
+    var b=document.getElementsByTagName("script")[0];
+    a.src=document.location.protocol+"//script.crazyegg.com/pages/scripts/0021/9333.js?"+Math.floor(new Date().getTime()/3600000);
+    a.async=true;a.type="text/javascript";b.parentNode.insertBefore(a,b)}, 1);
+  </script>
+  <!-- END Crazy Egg Tracking -->
+
+  <!-- END Post Footer -->
+</body>
+</html>

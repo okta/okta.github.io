@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html class="no-js" lang="en" dir="ltr">
+<body>
+    <h2 id="okta-aspnet-core-quickstart">Okta ASP.NET Core Quickstart</h2>
+
+<h3 id="create-a-new-project">Create a new project</h3>
+
+<p>If you don’t already have an ASP.NET Core 2.0 project, create one using <code class="highlighter-rouge">dotnet new mvc</code> or the ASP.NET Core Web Application template in Visual Studio. Choose <strong>No Authentication</strong> if necessary.</p>
+
+<h3 id="configure-the-middleware">Configure the middleware</h3>
+
+<p>Make sure you have these <code class="highlighter-rouge">using</code> statements at the top of your <code class="highlighter-rouge">Startup.cs</code> file:</p>
+
+<div class="language-csharp highlighter-rouge"><pre class="highlight"><code><span class="k">using</span> <span class="nn">Microsoft.AspNetCore.Authentication.Cookies</span><span class="p">;</span>
+<span class="k">using</span> <span class="nn">Microsoft.AspNetCore.Authentication.OpenIdConnect</span><span class="p">;</span>
+<span class="k">using</span> <span class="nn">Microsoft.IdentityModel.Tokens</span><span class="p">;</span>
+</code></pre>
+</div>
+
+<p>In the <code class="highlighter-rouge">ConfigureServices</code> method, add this <code class="highlighter-rouge">UseAuthentication</code> block and configure it using the information from the Okta application you just created:</p>
+
+<div class="language-csharp highlighter-rouge"><pre class="highlight"><code><span class="n">services</span><span class="p">.</span><span class="nf">AddAuthentication</span><span class="p">(</span><span class="n">sharedOptions</span> <span class="p">=&gt;</span>
+<span class="p">{</span>
+    <span class="n">sharedOptions</span><span class="p">.</span><span class="n">DefaultAuthenticateScheme</span> <span class="p">=</span> <span class="n">CookieAuthenticationDefaults</span><span class="p">.</span><span class="n">AuthenticationScheme</span><span class="p">;</span>
+    <span class="n">sharedOptions</span><span class="p">.</span><span class="n">DefaultSignInScheme</span> <span class="p">=</span> <span class="n">CookieAuthenticationDefaults</span><span class="p">.</span><span class="n">AuthenticationScheme</span><span class="p">;</span>
+    <span class="n">sharedOptions</span><span class="p">.</span><span class="n">DefaultChallengeScheme</span> <span class="p">=</span> <span class="n">OpenIdConnectDefaults</span><span class="p">.</span><span class="n">AuthenticationScheme</span><span class="p">;</span>
+<span class="p">})</span>
+<span class="p">.</span><span class="nf">AddCookie</span><span class="p">()</span>
+<span class="p">.</span><span class="nf">AddOpenIdConnect</span><span class="p">(</span><span class="n">options</span> <span class="p">=&gt;</span>
+<span class="p">{</span>
+    <span class="n">options</span><span class="p">.</span><span class="n">ClientId</span> <span class="p">=</span> <span class="s">"{clientId}"</span><span class="p">;</span>
+    <span class="n">options</span><span class="p">.</span><span class="n">ClientSecret</span> <span class="p">=</span> <span class="s">"{clientSecret}"</span><span class="p">;</span>
+    <span class="n">options</span><span class="p">.</span><span class="n">Authority</span> <span class="p">=</span> <span class="s">"<span class="okta-preview-domain">https://{yourOktaDomain}.com</span>/oauth2/default"</span><span class="p">;</span>
+    <span class="n">options</span><span class="p">.</span><span class="n">CallbackPath</span> <span class="p">=</span> <span class="s">"/authorization-code/callback"</span><span class="p">;</span>
+    <span class="n">options</span><span class="p">.</span><span class="n">ResponseType</span> <span class="p">=</span> <span class="s">"code"</span><span class="p">;</span>
+    <span class="n">options</span><span class="p">.</span><span class="n">SaveTokens</span> <span class="p">=</span> <span class="k">true</span><span class="p">;</span>
+    <span class="n">options</span><span class="p">.</span><span class="n">UseTokenLifetime</span> <span class="p">=</span> <span class="k">false</span><span class="p">;</span>
+    <span class="n">options</span><span class="p">.</span><span class="n">GetClaimsFromUserInfoEndpoint</span> <span class="p">=</span> <span class="k">true</span><span class="p">;</span>
+    <span class="n">options</span><span class="p">.</span><span class="n">Scope</span><span class="p">.</span><span class="nf">Add</span><span class="p">(</span><span class="s">"openid"</span><span class="p">);</span>
+    <span class="n">options</span><span class="p">.</span><span class="n">Scope</span><span class="p">.</span><span class="nf">Add</span><span class="p">(</span><span class="s">"profile"</span><span class="p">);</span>
+    <span class="n">options</span><span class="p">.</span><span class="n">TokenValidationParameters</span> <span class="p">=</span> <span class="k">new</span> <span class="n">TokenValidationParameters</span>
+    <span class="p">{</span>
+        <span class="n">NameClaimType</span> <span class="p">=</span> <span class="s">"name"</span>
+    <span class="p">};</span>
+<span class="p">});</span>
+</code></pre>
+</div>
+
+<p>Then, in the <code class="highlighter-rouge">Configure</code> method, add this line <strong>above</strong> the <code class="highlighter-rouge">UseMvc</code> line:</p>
+
+<div class="language-csharp highlighter-rouge"><pre class="highlight"><code><span class="n">app</span><span class="p">.</span><span class="nf">UseAuthentication</span><span class="p">();</span>
+</code></pre>
+</div>
+
+<h3 id="annotate-your-application">Annotate your application</h3>
+
+<p>Use the <code class="highlighter-rouge">[Authorize]</code> attribute on controllers or actions to require a logged-in user.</p>
+
+<p>Alternatively, you can create actions to log the user in (or out):</p>
+
+<div class="language-csharp highlighter-rouge"><pre class="highlight"><code><span class="k">using</span> <span class="nn">Microsoft.AspNetCore.Authentication.Cookies</span><span class="p">;</span>
+<span class="k">using</span> <span class="nn">Microsoft.AspNetCore.Authentication.OpenIdConnect</span><span class="p">;</span>
+<span class="k">using</span> <span class="nn">Microsoft.AspNetCore.Authorization</span><span class="p">;</span>
+<span class="k">using</span> <span class="nn">Microsoft.AspNetCore.Mvc</span><span class="p">;</span>
+
+<span class="k">public</span> <span class="k">class</span> <span class="nc">AccountController</span> <span class="p">:</span> <span class="n">Controller</span>
+<span class="p">{</span>
+    <span class="k">public</span> <span class="n">IActionResult</span> <span class="nf">Login</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(!</span><span class="n">HttpContext</span><span class="p">.</span><span class="n">User</span><span class="p">.</span><span class="n">Identity</span><span class="p">.</span><span class="n">IsAuthenticated</span><span class="p">)</span>
+        <span class="p">{</span>
+            <span class="k">return</span> <span class="nf">Challenge</span><span class="p">(</span><span class="n">OpenIdConnectDefaults</span><span class="p">.</span><span class="n">AuthenticationScheme</span><span class="p">);</span>
+        <span class="p">}</span>
+
+        <span class="k">return</span> <span class="nf">RedirectToAction</span><span class="p">(</span><span class="s">"Index"</span><span class="p">,</span> <span class="s">"Home"</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="k">public</span> <span class="n">IActionResult</span> <span class="nf">Logout</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">HttpContext</span><span class="p">.</span><span class="n">User</span><span class="p">.</span><span class="n">Identity</span><span class="p">.</span><span class="n">IsAuthenticated</span><span class="p">)</span>
+        <span class="p">{</span>
+            <span class="k">return</span> <span class="nf">SignOut</span><span class="p">(</span><span class="n">CookieAuthenticationDefaults</span><span class="p">.</span><span class="n">AuthenticationScheme</span><span class="p">,</span> <span class="n">OpenIdConnectDefaults</span><span class="p">.</span><span class="n">AuthenticationScheme</span><span class="p">);</span>
+        <span class="p">}</span>
+
+        <span class="k">return</span> <span class="nf">RedirectToAction</span><span class="p">(</span><span class="s">"Index"</span><span class="p">,</span> <span class="s">"Home"</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre>
+</div>
+
+<p>Open a private or incognito window in your browser and try navigating to a route that has the <code class="highlighter-rouge">[Authorize]</code> attribute, or to the <code class="highlighter-rouge">/Account/Login</code> action above. You’ll be redirected to the Okta Sign-In page.</p>
+
+<blockquote>
+  <p>Note: If you want to log the user out, you’ll need to add a <strong>Logout redirect URI</strong> to the application configuration in Okta with a value of <code class="highlighter-rouge">http://{yourServerUrl}/signout-callback-oidc</code>. For example, <code class="highlighter-rouge">http://localhost:5000/signout-callback-oidc</code>.</p>
+</blockquote>
+
+<h3 id="thats-it">That’s it!</h3>
+
+<p>ASP.NET Core automatically populates <code class="highlighter-rouge">HttpContext.User</code> with the information Okta sends back about the user. You can check whether the user is logged in with <code class="highlighter-rouge">User.Identity.IsAuthenticated</code> in your actions or views, and see all of the user’s claims in <code class="highlighter-rouge">User.Claims</code>.</p>
+
+<p>If you want to do more with the user, you can use the <a href="https://github.com/okta/okta-sdk-dotnet">Okta .NET SDK</a> to get or update the user’s details stored in Okta.</p>
+
+<h3 id="example-project">Example project</h3>
+
+<p>If you want a full, working example, head over to the <a href="https://github.com/oktadeveloper/okta-aspnetcore-mvc-example">ASP.NET Core 2.0 MVC example</a> repository.</p>
+
+</body>
+</html>

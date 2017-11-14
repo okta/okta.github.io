@@ -1,0 +1,525 @@
+<!doctype html>
+<!--[if lt IE 7 ]> <html class="ie6 no-flexbox"> <![endif]-->
+<!--[if IE 7 ]>    <html class="ie7 no-flexbox"> <![endif]-->
+<!--[if IE 8 ]>    <html class="ie8 no-flexbox"> <![endif]-->
+<!--[if IE 9 ]>    <html class="ie9 no-flexbox"> <![endif]-->
+<!--[if IE 10 ]>    <html class="ie10 no-flexbox"> <![endif]-->
+<!--[if (gt IE 10)|!(IE)]><!--> <html class="modern wf-loading" lang="en"> <!--<![endif]-->
+  <head>
+  <script>
+    var searchDomain = 'https://developer.okta.com';
+    var isProduction = window.location.hostname === 'developer.okta.com';
+    if (isProduction) {
+      // TypeKit
+      (function(d) {
+        var config = {
+          kitId: 'jff5neq',
+          scriptTimeout: 3000,
+          async: true
+        },
+        h=d.documentElement,t=setTimeout(function(){h.className=h.className.replace(/bwf-loadingb/g,"")+" wf-inactive";},config.scriptTimeout),tk=d.createElement("script"),f=false,s=d.getElementsByTagName("script")[0],a;h.className+=" wf-loading";tk.src='https://use.typekit.net/'+config.kitId+'.js';tk.async=true;tk.onload=tk.onreadystatechange=function(){a=this.readyState;if(f||a&&a!="complete"&&a!="loaded")return;f=true;clearTimeout(t);try{Typekit.load(config)}catch(e){}};s.parentNode.insertBefore(tk,s)
+      })(document);
+
+      // Google analytics
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+              (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+              m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+      ga('create', 'UA-15777010-3', 'auto');
+      ga('send', 'pageview');
+
+      // START Google Tag Manager
+      (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+      new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+      j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+      '//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+      })(window,document,'script','dataLayer','GTM-TJ45R6');
+      // END Google Tag Manager
+    }
+	</script>
+  <meta charset="utf-8">
+  <meta http-equiv="x-ua-compatible" content="IE=edge,chrome=1">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+ 	
+
+  <link type="text/css" rel="stylesheet" href="https://developer.okta.com/sites/all/themes/developer/css/master.css" media="all" />
+  <meta class="swiftype" name="title" data-type="string" content="Get Started with Spring Boot, SAML, and Okta | Okta Developer" />
+  <meta class="swiftype" name="summary" data-type="string" content="Today I’d like to show you how build a Spring Boot application that leverages Okta’s Platform API for authentication via SAML. SAML (Security Assertion Marku..." />
+
+  <link type="text/css" rel="stylesheet" href="/assets/animate-ec43d72c3ed45e08a460b8a2966d8dba6006aebfa0530935c3973fa493a8771f.css">
+  <link type="text/css" rel="stylesheet" href="/assets/okta-a96df4c9d48b78b618e1d541f46f7137d73d40653571e020c1ad59edd7915c60.css">
+  
+  
+  <title>Get Started with Spring Boot, SAML, and Okta | Okta Developer</title>
+  <meta name="description" content="Today I’d like to show you how build a Spring Boot application that leverages Okta’s Platform API for authentication via SAML. SAML (Security Assertion Marku...">
+  <link rel="canonical" href="https://developer.okta.com/blog/2017/03/16/spring-boot-saml"  data-proofer-ignore>
+  <link rel="alternate" type="application/rss+xml" title="Okta Developer" href="https://developer.okta.com/feed.xml"><!-- GA -->
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+  <link rel="manifest" href="/manifest.json">
+  <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#21313a">
+  <meta name="theme-color" content="#ffffff">
+</head>
+
+  
+    <body id="blog">
+	
+
+
+
+
+<header class="Header is-fixed">
+
+  <div class="Wrap">
+
+    <a class="Logo" href="https://developer.okta.com">
+      <svg version="1.1" id="OktaLogo" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 431.9 151.4" style="enable-background:new 0 0 431.9 151.4;" xml:space="preserve"><g><g><g><path d="M102.2,41.4c-21,0-38.1,17.1-38.1,38.1s17.1,38.1,38.1,38.1s38.1-17.1,38.1-38.1l0,0C140.3,58.5,123.2,41.4,102.2,41.4z M102.2,98.5c-10.5,0-19-8.5-19-19s8.5-19,19-19s19,8.5,19,19c0.1,10.5-8.4,19-18.9,19.1C102.3,98.6,102.2,98.6,102.2,98.5L102.2,98.5z"/><path d="M169.1,92.3c0-1.9,1.5-3.4,3.4-3.4c0.9,0,1.8,0.4,2.4,1c9.5,9.7,25.3,26.3,25.4,26.4c0.4,0.5,0.8,0.8,1.4,0.9l1.6,0.2h17.2c1.8,0,3.3-1.4,3.4-3.2c0-0.8-0.3-1.5-0.8-2.2l-28.6-29.2l-1.5-1.5c-3.2-3.9-2.9-5.4,0.8-9.3l22.6-25.1c1.1-1.4,0.8-3.5-0.6-4.6c-0.6-0.4-1.3-0.7-2-0.7h-17c-0.6,0.2-1.1,0.5-1.5,0.9L175,64.4c-1.3,1.4-3.4,1.5-4.8,0.2c-0.7-0.6-1.1-1.5-1.1-2.5V18.9c0-1.7-1.3-3-3-3c-0.1,0-0.2,0-0.3,0h-12.7c-2.2,0-3.3,1.5-3.3,2.8v95.8c0,2.2,1.8,2.8,3.3,2.8h12.7c1.7,0.1,3.2-1.2,3.3-2.9c0,0,0,0,0,0V92.3z"/><path d="M273,114l-1.4-12.8c-0.2-1.7-1.7-2.9-3.4-2.7c0,0,0,0-0.1,0l-2.9,0.2c-10.1,0-18.5-7.9-19-18c0-0.3,0-0.7,0-1V64.2c-0.1-2,1.5-3.6,3.5-3.7c0,0,0,0,0,0h17c1.7-0.1,3.1-1.5,3-3.2c0,0,0-0.1,0-0.1v-12c0-2.3-1.5-3.6-2.8-3.6h-17.1c-1.9,0.1-3.5-1.5-3.6-3.4c0,0,0,0,0,0V18.9c-0.1-1.7-1.5-3.1-3.2-3c0,0-0.1,0-0.1,0h-12.7c-1.6-0.1-3,1.1-3.1,2.7c0,0.1,0,0.1,0,0.2c0,0,0,61.7,0,62c0.5,21,17.9,37.6,38.9,37c1.4,0,2.9-0.2,4.3-0.3C272,117.2,273.2,115.7,273,114z"/></g><path d="M364.7,98c-10.8,0-12.4-3.8-12.4-18.3l0,0V44.8c0-1.8-1.4-3.2-3.2-3.2c0,0-0.1,0-0.1,0h-12.8c-1.8,0-3.2,1.4-3.3,3.2v1.6C314.6,36,291.3,42.5,281,60.8c-10.4,18.3-3.9,41.6,14.4,51.9c14,7.9,31.4,6.2,43.5-4.2c3.6,5.5,9.3,9.1,18.3,9.1c1.5,0,9.7,0.3,9.7-3.5v-13.6C367,99.2,366,98.1,364.7,98z M314.2,98.6c-10.5,0-19-8.5-19-19s8.5-19,19-19s19,8.5,19,19l0,0C333.2,90.1,324.7,98.6,314.2,98.6z"/></g><path d="M19.4,74c2.2-1.9,4.1-4.1,5.7-6.6c3.5-5.3,5.4-11.5,5.2-17.9V27c0-4.9,0.9-8.4,2.7-10.5c1.8-2.1,4.8-3,9.2-3h12.6c1.2,0,2.1-0.9,2.2-2.1l0,0V2.2C57,1,56,0,54.8,0c0,0,0,0,0,0H41.5c-7.8,0-12.9,2.1-18,7.6s-7.1,12.3-7.1,21.7v14.2c0,2.2-0.1,4-0.2,5.7v2.2c-0.5,3.2-1.8,6.2-3.6,8.9C9.4,64.7,5.1,70.9,0.9,74l0,0l-0.3,0.3l0,0l-0.2,0.3H0.2v0.3l0,0c-0.1,0.3-0.1,0.7,0,1l0,0v0.3h0.1l0.2,0.3l0,0l0.3,0.3l0,0c4.2,3.1,8.5,9.3,11.3,13.7c1.8,2.7,3.1,5.7,3.6,8.9v2.2c0.1,1.6,0.2,3.5,0.2,5.7v14.3c0,9.4,2.4,16.7,7.1,21.7s10.2,7.6,18,7.6h13.8c1.2,0,2.2-1,2.2-2.2V140l0,0c0-1.2-1-2.2-2.2-2.2H42.2c-4.4,0-7.5-1-9.2-3s-2.7-5.6-2.7-10.5v-22.4c0.2-6.4-1.7-12.6-5.2-17.9c-1.6-2.5-3.5-4.7-5.7-6.6l0,0c-0.9-0.7-1.1-2-0.4-2.9C19.2,74.3,19.3,74.2,19.4,74L19.4,74z"/><path d="M412.5,74c-2.2-1.9-4.1-4.1-5.7-6.6c-3.5-5.3-5.4-11.5-5.2-17.9V27c0-4.9-0.9-8.4-2.7-10.5s-4.8-3-9.2-3h-12.6c-1.2,0-2.2-1-2.2-2.2c0,0,0,0,0,0l0,0V2.2c0-1.2,1-2.2,2.2-2.2c0,0,0,0,0,0h13.4c7.8,0,12.9,2.1,18,7.6s7.1,12.3,7.1,21.7v14.2c0,2.2,0.1,4,0.2,5.7v2.2c0.5,3.2,1.8,6.2,3.6,8.9c2.8,4.5,7.1,10.7,11.3,13.7l0,0l0.3,0.3l0,0l0.2,0.3h0.1v0.3l0,0c0.1,0.3,0.1,0.7,0,1l0,0v0.3h-0.1l-0.2,0.3l0,0l-0.3,0.3l0,0c-4.2,3.1-8.5,9.3-11.3,13.7c-1.8,2.7-3.1,5.7-3.6,8.9v2.2c-0.1,1.6-0.2,3.5-0.2,5.7v14.3c0,9.4-2.4,16.7-7.1,21.7s-10.2,7.6-18,7.6h-13.4c-1.2,0-2.2-1-2.2-2.2c0,0,0,0,0,0V140l0,0c0-1.2,1-2.2,2.2-2.2l0,0h12.7c4.4,0,7.5-1,9.2-3s2.7-5.6,2.7-10.5v-22.4c-0.2-6.3,1.6-12.6,5.1-17.9c1.6-2.5,3.5-4.7,5.7-6.6l0,0c0.9-0.7,1.1-2,0.4-2.9C412.7,74.3,412.6,74.2,412.5,74L412.5,74z"/></g></svg>
+    </a>
+
+    <nav class="Header-nav PrimaryNav">
+      <ul class="menu">
+        <li class="first leaf">
+          <a href="https://developer.okta.com/product/">Product</a>
+        </li>
+        <li class="leaf">
+          <a href="https://developer.okta.com/pricing/">Pricing</a>
+        </li>
+        <li class="leaf">
+          <a href="/blog/" class="active">Blog</a>
+        </li>
+        <li class="leaf">
+          <a href="/documentation/">Docs</a>
+        </li>
+        <li class="last expanded">
+          <span class="nolink">Support</span>
+          <ul class="menu">
+            <li class="first leaf"><a href="https://devforum.okta.com/">Okta Developer Forums</a></li>
+            <li class="last leaf"><a href="mailto:developers@okta.com">developers@okta.com</a></li>
+          </ul>
+        </li>
+      </ul>
+      <a class="PrimaryNav-toggle" href="#">
+        <svg width="20px" height="20px" viewBox="0 0 20 20" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+            <g class="MenuIcon" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="round">
+                <path d="M1,16 L19,16" class="MenuIcon-line1" stroke="#FFFFFF" stroke-width="2"></path>
+                <path d="M1,4 L19,4" class="MenuIcon-line2" stroke="#FFFFFF" stroke-width="2"></path>
+                <path d="M1,10 L19,10" class="MenuIcon-line3" stroke="#FFFFFF" stroke-width="2"></path>
+                <path d="M1,10 L19,10" class="MenuIcon-line4" stroke="#FFFFFF" stroke-width="2"></path>
+            </g>
+        </svg>
+        <svg class="CloseIcon" width="16px" height="16px" viewBox="0 0 16 16" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+          <g id="ALl-Boards" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+            <g id="Desktop" transform="translate(-915.000000, -235.000000)" fill="#FFFFFF">
+              <g id="Search-bar-Active" transform="translate(30.000000, 26.000000)">
+                <polygon id="Icon/Cross" points="901 210.6 899.4 209 893 215.4 886.6 209 885 210.6 891.4 217 885 223.4 886.6 225 893 218.6 899.4 225 901 223.4 894.6 217"></polygon>
+              </g>
+            </g>
+          </g>
+        </svg>
+      </a>
+
+      <div class="PrimaryNav-cta">
+        <a target="_blank" rel="noopener noreferrer" href="https://login.okta.com/?SAMLRequest=fc%2B7CsJAEAXQXvAflu1NNJUMeZBGELTx1a%2FrYILJTtyZGD%2FfSBRiYzlw77lMnD3rSj3Qc0ku0YtgrhU6S5fSXRN9PKxmS52l00nMpq6iBvJWCrfDe4ss6vStRe9aDzmGIZfo1jsgwyWDMzUyiIV9vt1AH4XGk5ClSvewUgMNa%2BYW%2FVj5jxhm9NLP67QQaSAMu64L6CYmsFSHlnzT4ZlLwTgcL6Sf8%2FeX9AU%3Dhttps://login.okta.com/?SAMLRequest=fc%2B7CsJAEAXQXvAflu1NNJUMeZBGELTx1a%2FrYILJTtyZGD%2FfSBRiYzlw77lMnD3rSj3Qc0ku0YtgrhU6S5fSXRN9PKxmS52l00nMpq6iBvJWCrfDe4ss6vStRe9aDzmGIZfo1jsgwyWDMzUyiIV9vt1AH4XGk5ClSvewUgMNa%2BYW%2FVj5jxhm9NLP67QQaSAMu64L6CYmsFSHlnzT4ZlLwTgcL6Sf8%2FeX9AU%3D" class="Button--redOutline">Login</a>
+        <a href="https://developer.okta.com/signup/" class="Button--red">Sign up</a>
+      </div>
+
+      <a class="SearchIcon" href="#"></a>
+      <form id="form_search" class="SearchBar Formisimo_clocked_69929" method="get" action="https://developer.okta.com/search/" name="form_search" __bizdiag="-784164280" __biza="WJ__">
+        <input type="text" name="stq" autocomplete="off" id="st-search-input-auto" class="st-search-input" placeholder="Search">
+        <input type="submit" name="submit" value="GO">
+      </form>
+
+    </nav>
+
+  </div>
+
+</header>
+
+	<div class="page-content">
+		
+
+
+
+
+
+
+<section class="Blog is-single">
+		
+	<div class="Blog-social">
+		
+		<a href="https://github.com/mraible" target="_blank"><i class="fa fa-github"></i></a>
+		
+		
+		<a href="https://twitter.com/mraible" target="_blank"><i class="fa fa-twitter"></i></a>
+		
+		
+		
+		<a href="http://raibledesigns.com" target="_blank"><i class="fa fa-external-link"></i></a>
+		
+	</div>
+	
+	
+
+<article class="BlogPost">
+	
+	<header class="BlogPost-header">
+	
+		<time class="BlogPost-date" datetime="2017-03-16">March 16, 2017</time>
+		
+		<h1 class="BlogPost-title">
+			
+			Get Started with Spring Boot, SAML, and Okta
+			
+		</h1>
+		
+		<div class="BlogPost-attribution">
+			
+				<img src="/assets/avatar-matt_raible-9974af6192eb1753b7137c8fff0a2c6e6bb9736a2517986cb5cc50bb040e83d4.jpg" alt="avatar-matt_raible.jpg" class="BlogPost-avatar">
+			
+			<span class="BlogPost-author">Matt Raible</span>
+		</div>
+	
+	</header>
+	
+	<div class="BlogPost-content">
+		
+	<p>Today I’d like to show you how build a Spring Boot application that leverages Okta’s Platform API for authentication via SAML. SAML (Security Assertion Markup Language) is an XML-based standard for securely exchanging authentication and authorization information between entities—specifically between identity providers, service providers, and users. Well-known IdPs include Salesforce, Okta, OneLogin, and Shibboleth.</p>
+
+<p>My Okta developer experience began a couple years ago (in December 2014) when I worked for a client that was adopting it. I was tasked with helping them decide on a web framework to use, so I built prototypes with Node, Ruby, and Spring. I documented my findings in <a href="https://raibledesigns.com/rd/entry/integrating_node_js_ruby_and">a blog post</a>. Along the way, <a href="https://twitter.com/mraible/status/550057304331001856">I tweeted</a> my issues with Spring Boot, and <a href="http://stackoverflow.com/questions/27713524/how-do-i-configure-spring-security-saml-to-work-with-okta?stw=2">asked how to fix it</a> on Stack Overflow. I ended up figuring out the solution through trial-and-error and my findings made it into the <a href="http://docs.spring.io/autorepo/docs/spring-security-saml/1.0.x-SNAPSHOT/reference/html/chapter-idp-guide.html#d5e1816">official Spring documentation</a><a href="http://docs.spring.io/autorepo/docs/spring-security-saml/1.0.x-SNAPSHOT/reference/html/chapter-idp-guide.html#d5e1816">.</a> Things have changed a lot since then and now Spring Security 4.2 has support for auto-loading custom DSLs. And guess what, there’s even a DSL for SAML configuration!</p>
+
+<p>Ready to get started? You can follow along in with the written tutorial below, <a href="https://github.com/oktadeveloper/okta-spring-boot-saml-example">check out the code on GitHub</a>, or watch the screencast I made to walk you through the same process.</p>
+
+<div style="text-align: center">
+<iframe width="560" height="315" src="https://www.youtube.com/embed/JBtyGfrz-jA" frameborder="0" allowfullscreen=""></iframe>
+</div>
+
+<h2 id="sign-up-for-an-okta-developer-account">Sign Up for an Okta Developer Account</h2>
+
+<p>Fast forward two years, and I find myself as an Okta employee. To start developing with Okta, I created a new developer account at <a href="https://developer.okta.com">https://developer.okta.com</a>. Make sure you take a screenshot or write down your Okta URL after you’ve signed up. You’ll need this URL to get back to the admin console.</p>
+
+<p>You’ll receive an email to activate your account and change your temporary password. After completing these steps, you’ll land on your dashboard with some annotations about “apps”.</p>
+
+<h2 id="create-a-saml-application-on-okta">Create a SAML Application on Okta</h2>
+
+<p>At the time of this writing, the easiest way to create a SAML-aware Spring Boot application is to use Spring Security’s <a href="https://github.com/spring-projects/spring-security-saml-dsl">SAML DSL project</a>. It contains a sample project that provides <a href="https://github.com/spring-projects/spring-security-saml-dsl/blob/master/samples/spring-security-saml-dsl-sample/README.md">instructions</a> for configuring Okta as a SAML provider. These instructions will likely work for you if you’re experienced Spring Boot and Okta developer. If you’re new to both, this “start from scratch” tutorial might work better for you.</p>
+
+<p>Just like I did, the first thing you’ll need to do is create a developer account at <a href="https://developer.okta.com/signup/">https://developer.okta.com</a>. After activating your account, log in to it. If you just created an account, you’ll see a screen similar to the one below.</p>
+
+<p><img src="/assets/blog/spring-boot-saml/okta-dev-console-ae44457cfb33d302002f53ccdcdff88c3aa5f143b040a15b8f44c3f49d344a3e.png" alt="Okta Dev Console" width="800" class="center-image" /></p>
+
+<p>Click on <strong>&lt; &gt; Developer</strong> in the top-left corner and switch to the Classic UI. If you see a screen like the following, you’re good to go! The reason you need to use the Classic UI for this tutorial is because we haven’t yet added SAML support to the <a href="/blog/2017/09/25/all-new-developer-console">Developer Console</a>.</p>
+
+<p><img src="/assets/blog/spring-boot-saml/okta-classic-ui-01a57606d8ff822ed58aa8aac97458fa941367a505bbe9aff669c4040957def4.png" alt="Okta Classic UI" width="800" class="center-image" /></p>
+
+<p>Click <strong>Add Applications</strong> in the top right to continue. This will bring you to a screen with a <strong>Create New App</strong> green button on the left.</p>
+
+<p><img src="/assets/blog/spring-boot-saml/create-new-app-077f21a7fe9f111657bbd8e43df628a46b3063e370811ab5037744ca47cc7a24.png" alt="Create New App" width="800" class="center-image" /></p>
+
+<p>Click the button and choose <strong>Web</strong> for the platform and <strong>SAML 2.0</strong> for the sign on method.</p>
+
+<p><img src="/assets/blog/spring-boot-saml/new-app-saml-2.0-abf1cacf7aa21ef2fdfdb426ecf859892a35e6fe70d041c61b9c0829bec4892b.png" alt="New App with SAML 2.0" width="700" class="center-image" /></p>
+
+<p>Click the <strong>Create</strong> button. The next screen will prompt you for an application name. I used “Spring SAML”, but any name will work.</p>
+
+<p><img src="/assets/blog/spring-boot-saml/app-name-50bd7c7c00c3231f9ee91817ccf79a5ea333a54bd1a2e547ffef834d68ed5e3f.png" alt="Enter App name" width="800" class="center-image" /></p>
+
+<p>Click the <strong>Next</strong> button. This brings you to the second step, configuring SAML. Enter the following values:</p>
+
+<ul>
+  <li>Single sign on URL: <code class="highlighter-rouge">https://localhost:8443/saml/SSO</code></li>
+  <li>Audience URI: <code class="highlighter-rouge">https://localhost:8443/saml/metadata</code></li>
+</ul>
+
+<p><img src="/assets/blog/spring-boot-saml/saml-integration-7e7552cb9ca9be1cb309eb050c929c5055194ceb73d47673a5e5e99856f901c5.png" alt="SAML Integration" width="800" class="center-image" /></p>
+
+<p>Scroll to the bottom of the form and click <strong>Next</strong>. This will bring you to the third step, feedback. Choose “I’m an Okta customer adding an internal app” and optionally select the App type.</p>
+
+<p><img src="/assets/blog/spring-boot-saml/customer-or-partner-ff00c8bce21ef5b309cfa6153921837ce355d1fbca34a0d7b4f370ed620433a4.png" alt="Customer or Partner" width="800" class="center-image" /></p>
+
+<p>Click the <strong>Finish</strong> button to continue. This will bring you to the application’s “Sign On” tab which has a section with a link to your applications metadata in a yellow box. Copy the <strong>Identity Provider metadata</strong> link as you’ll need it to configure your Spring Boot application.</p>
+
+<p><img src="/assets/blog/spring-boot-saml/saml-metadata-6d838947b22e019f5b3342fba7cbc5c07339ed608151a31e663132a3447b5424.png" alt="SAML Metadata" width="800" class="center-image" /></p>
+
+<p>The final setup step you’ll need is to assign people to the application. Click on the <strong>Assignments</strong> tab and the <strong>Assign</strong> &gt; <strong>Assign to People</strong> button. You’ll see a list of people with your account in it.</p>
+
+<p><img src="/assets/blog/spring-boot-saml/assign-people-8cedc47512a2954f22f38fc79cf7fc659c07521e1c29bccfd73bbfc2fcc79ccb.png" alt="Assign People" width="600" class="center-image" /></p>
+
+<p>Click the <strong>Assign</strong> button, accept the default username (your email), and click the <strong>Done</strong> button.</p>
+
+<h2 id="create-a-spring-boot-application-with-saml-support">Create a Spring Boot Application with SAML Support</h2>
+
+<p>Navigate to <a href="https://start.spring.io">https://start.spring.io</a> in your favorite browser and select Security, Web, Thymeleaf, and DevTools as dependencies.</p>
+
+<p><img src="/assets/blog/spring-boot-saml/start.spring-b648c0569e39d61602171554753400f049eb95269d831361f1ae1a92d3d9179b.png" alt="start.spring.io" width="800" class="center-image" /></p>
+
+<p>Click <strong>Generate Project</strong>, download the generated ZIP file and open it in your favorite editor. Add the <code class="highlighter-rouge">spring-security-saml-dsl</code> dependency to your <code class="highlighter-rouge">pom.xml</code>.</p>
+
+<div class="language-xml highlighter-rouge"><pre class="highlight"><code><span class="nt">&lt;dependency&gt;</span>
+    <span class="nt">&lt;groupId&gt;</span>org.springframework.security.extensions<span class="nt">&lt;/groupId&gt;</span>
+    <span class="nt">&lt;artifactId&gt;</span>spring-security-saml-dsl<span class="nt">&lt;/artifactId&gt;</span>
+    <span class="nt">&lt;version&gt;</span>1.0.0.M3<span class="nt">&lt;/version&gt;</span>
+<span class="nt">&lt;/dependency&gt;</span>
+</code></pre>
+</div>
+
+<p>You’ll also need to add the Spring Milestone repository since a milestone release is all that’s available at the time of this writing.</p>
+
+<div class="language-xml highlighter-rouge"><pre class="highlight"><code><span class="nt">&lt;repositories&gt;</span>
+    <span class="nt">&lt;repository&gt;</span>
+        <span class="nt">&lt;id&gt;</span>spring-milestones<span class="nt">&lt;/id&gt;</span>
+        <span class="nt">&lt;name&gt;</span>Spring Milestones<span class="nt">&lt;/name&gt;</span>
+        <span class="nt">&lt;url&gt;</span>https://repo.spring.io/libs-milestone<span class="nt">&lt;/url&gt;</span>
+    <span class="nt">&lt;/repository&gt;</span>
+<span class="nt">&lt;/repositories&gt;</span>
+</code></pre>
+</div>
+
+<p><strong>NOTE:</strong> If you’d like to see instructions for Gradle, please view the project’s <a href="https://github.com/spring-projects/spring-security-saml-dsl/blob/master/README.md">README.md</a>.</p>
+
+<p>In <code class="highlighter-rouge">src/main/resources/application.properties</code>, add the following key/value pairs. Make sure to use the “Identity Provider metadata” value you copied earlier (hint: you can find it again under the “Sign On” tab in your Okta application).</p>
+
+<div class="language-properties highlighter-rouge"><pre class="highlight"><code><span class="py">server.port</span> <span class="p">=</span> <span class="s">8443</span>
+<span class="py">server.ssl.enabled</span> <span class="p">=</span> <span class="s">true</span>
+<span class="err">server.ssl.key-</span><span class="py">alias</span> <span class="p">=</span> <span class="s">spring</span>
+<span class="err">server.ssl.key-</span><span class="py">store</span> <span class="p">=</span> <span class="s">src/main/resources/saml/keystore.jks</span>
+<span class="err">server.ssl.key-store-</span><span class="py">password</span> <span class="p">=</span> <span class="s">secret</span>
+
+<span class="err">security.saml2.metadata-</span><span class="py">url</span> <span class="p">=</span> <span class="s">&lt;your metadata url&gt;</span>
+</code></pre>
+</div>
+
+<p>From a terminal window, navigate to the <code class="highlighter-rouge">src/main/resources</code> directory of your app and create a <code class="highlighter-rouge">saml</code> directory. Navigate into the directory and run the following command. Use “secret” when prompted for a keystore password.</p>
+
+<div class="language-bash highlighter-rouge"><pre class="highlight"><code>keytool -genkey -v -keystore keystore.jks -alias spring -keyalg RSA -keysize 2048 -validity 10000
+</code></pre>
+</div>
+
+<p>The values for the rest of the questions don’t matter since you’re not generating a real certificate. However, you will need to answer “yes” to the following question.</p>
+
+<div class="language-bash highlighter-rouge"><pre class="highlight"><code>Is <span class="nv">CN</span><span class="o">=</span>Unknown, <span class="nv">OU</span><span class="o">=</span>Unknown, <span class="nv">O</span><span class="o">=</span>Unknown, <span class="nv">L</span><span class="o">=</span>Unknown, <span class="nv">ST</span><span class="o">=</span>Unknown, <span class="nv">C</span><span class="o">=</span>Unknown correct?
+  <span class="o">[</span>no]:
+</code></pre>
+</div>
+
+<p>Create a <code class="highlighter-rouge">SecurityConfiguration.java</code> file in the <code class="highlighter-rouge">com.example</code> package.</p>
+
+<div class="language-java highlighter-rouge"><pre class="highlight"><code><span class="kn">package</span> <span class="n">com</span><span class="o">.</span><span class="na">example</span><span class="o">;</span>
+
+<span class="kn">import</span> <span class="nn">static</span> <span class="n">org</span><span class="o">.</span><span class="na">springframework</span><span class="o">.</span><span class="na">security</span><span class="o">.</span><span class="na">extensions</span><span class="o">.</span><span class="na">saml2</span><span class="o">.</span><span class="na">config</span><span class="o">.</span><span class="na">SAMLConfigurer</span><span class="o">.</span><span class="na">saml</span><span class="o">;</span>
+
+<span class="kn">import</span> <span class="nn">org.springframework.beans.factory.annotation.Value</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.springframework.context.annotation.Configuration</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.springframework.security.config.annotation.web.builders.HttpSecurity</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.springframework.security.config.annotation.web.configuration.EnableWebSecurity</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter</span><span class="o">;</span>
+
+<span class="nd">@EnableWebSecurity</span>
+<span class="nd">@Configuration</span>
+<span class="nd">@EnableGlobalMethodSecurity</span><span class="o">(</span><span class="n">securedEnabled</span> <span class="o">=</span> <span class="kc">true</span><span class="o">)</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">SecurityConfiguration</span> <span class="kd">extends</span> <span class="n">WebSecurityConfigurerAdapter</span> <span class="o">{</span>
+    <span class="nd">@Value</span><span class="o">(</span><span class="s">"${security.saml2.metadata-url}"</span><span class="o">)</span>
+    <span class="n">String</span> <span class="n">metadataUrl</span><span class="o">;</span>
+
+    <span class="nd">@Value</span><span class="o">(</span><span class="s">"${server.ssl.key-alias}"</span><span class="o">)</span>
+    <span class="n">String</span> <span class="n">keyAlias</span><span class="o">;</span>
+
+    <span class="nd">@Value</span><span class="o">(</span><span class="s">"${server.ssl.key-store-password}"</span><span class="o">)</span>
+    <span class="n">String</span> <span class="n">password</span><span class="o">;</span>
+
+    <span class="nd">@Value</span><span class="o">(</span><span class="s">"${server.port}"</span><span class="o">)</span>
+    <span class="n">String</span> <span class="n">port</span><span class="o">;</span>
+
+    <span class="nd">@Value</span><span class="o">(</span><span class="s">"${server.ssl.key-store}"</span><span class="o">)</span>
+    <span class="n">String</span> <span class="n">keyStoreFilePath</span><span class="o">;</span>
+
+    <span class="nd">@Override</span>
+    <span class="kd">protected</span> <span class="kt">void</span> <span class="nf">configure</span><span class="o">(</span><span class="kd">final</span> <span class="n">HttpSecurity</span> <span class="n">http</span><span class="o">)</span> <span class="kd">throws</span> <span class="n">Exception</span> <span class="o">{</span>
+        <span class="n">http</span>
+            <span class="o">.</span><span class="na">authorizeRequests</span><span class="o">()</span>
+                <span class="o">.</span><span class="na">antMatchers</span><span class="o">(</span><span class="s">"/saml*"</span><span class="o">).</span><span class="na">permitAll</span><span class="o">()</span>
+                <span class="o">.</span><span class="na">anyRequest</span><span class="o">().</span><span class="na">authenticated</span><span class="o">()</span>
+                <span class="o">.</span><span class="na">and</span><span class="o">()</span>
+            <span class="o">.</span><span class="na">apply</span><span class="o">(</span><span class="n">saml</span><span class="o">())</span>
+                <span class="o">.</span><span class="na">serviceProvider</span><span class="o">()</span>
+                    <span class="o">.</span><span class="na">keyStore</span><span class="o">()</span>
+                        <span class="o">.</span><span class="na">storeFilePath</span><span class="o">(</span><span class="s">"saml/keystore.jks"</span><span class="o">)</span>
+                        <span class="o">.</span><span class="na">password</span><span class="o">(</span><span class="k">this</span><span class="o">.</span><span class="na">password</span><span class="o">)</span>
+                        <span class="o">.</span><span class="na">keyname</span><span class="o">(</span><span class="k">this</span><span class="o">.</span><span class="na">keyAlias</span><span class="o">)</span>
+                        <span class="o">.</span><span class="na">keyPassword</span><span class="o">(</span><span class="k">this</span><span class="o">.</span><span class="na">password</span><span class="o">)</span>
+                        <span class="o">.</span><span class="na">and</span><span class="o">()</span>
+                    <span class="o">.</span><span class="na">protocol</span><span class="o">(</span><span class="s">"https"</span><span class="o">)</span>
+                    <span class="o">.</span><span class="na">hostname</span><span class="o">(</span><span class="n">String</span><span class="o">.</span><span class="na">format</span><span class="o">(</span><span class="s">"%s:%s"</span><span class="o">,</span> <span class="s">"localhost"</span><span class="o">,</span> <span class="k">this</span><span class="o">.</span><span class="na">port</span><span class="o">))</span>
+                    <span class="o">.</span><span class="na">basePath</span><span class="o">(</span><span class="s">"/"</span><span class="o">)</span>
+                    <span class="o">.</span><span class="na">and</span><span class="o">()</span>
+                <span class="o">.</span><span class="na">identityProvider</span><span class="o">()</span>
+                <span class="o">.</span><span class="na">metadataFilePath</span><span class="o">(</span><span class="k">this</span><span class="o">.</span><span class="na">metadataUrl</span><span class="o">);</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre>
+</div>
+
+<p>Create an <code class="highlighter-rouge">IndexController.java</code> file in the same directory and use it to set the default view to <code class="highlighter-rouge">index</code>.</p>
+
+<div class="language-java highlighter-rouge"><pre class="highlight"><code><span class="kn">package</span> <span class="n">com</span><span class="o">.</span><span class="na">example</span><span class="o">;</span>
+
+<span class="kn">import</span> <span class="nn">org.springframework.stereotype.Controller</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.springframework.web.bind.annotation.RequestMapping</span><span class="o">;</span>
+
+<span class="nd">@Controller</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">IndexController</span> <span class="o">{</span>
+
+    <span class="nd">@RequestMapping</span><span class="o">(</span><span class="s">"/"</span><span class="o">)</span>
+    <span class="kd">public</span> <span class="n">String</span> <span class="nf">index</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="s">"index"</span><span class="o">;</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre>
+</div>
+
+<p>Since you chose Thymeleaf when creating your application, you can create a <code class="highlighter-rouge">src/main/resources/templates/index.html</code> and it will automatically be rendered after you sign-in. Create this file and populate it with the following HTML.</p>
+
+<div class="language-html highlighter-rouge"><pre class="highlight"><code><span class="cp">&lt;!DOCTYPE html&gt;</span>
+<span class="nt">&lt;html&gt;</span>
+<span class="nt">&lt;head&gt;</span>
+    <span class="nt">&lt;title&gt;</span>Spring Security SAML Example<span class="nt">&lt;/title&gt;</span>
+<span class="nt">&lt;/head&gt;</span>
+<span class="nt">&lt;body&gt;</span>
+Hello SAML!
+<span class="nt">&lt;/body&gt;</span>
+<span class="nt">&lt;/html&gt;</span>
+</code></pre>
+</div>
+
+<h2 id="run-the-app-and-login-with-okta">Run the App and Login with Okta</h2>
+
+<p>Start the app using your IDE or <code class="highlighter-rouge">mvn spring-boot:run</code> and navigate to <code class="highlighter-rouge">https://localhost:8443</code>. If you’re using Chrome, you’ll likely see a privacy error.</p>
+
+<p><img src="/assets/blog/spring-boot-saml/connection-not-private-4c4dce4ee0839b72abdd94a7cf97ef3610402ea2062bf44a34f59add1c14177d.png" alt="Connection Not Private" width="800" class="center-image" /></p>
+
+<p>Click the “ADVANCED” link at the bottom. Then click the “proceed to localhost (unsafe)” link.</p>
+
+<p><img src="/assets/blog/spring-boot-saml/connection-not-private-proceed-fe5ba0fd6308c96fc912453079815090a8781a7ba7025868fc1d632b1bc70aca.png" alt="Proceed to localhost" width="800" class="center-image" /></p>
+
+<p>Next, you’ll be redirected to Okta to sign in and redirected back to your app. If you’re already logged in, you won’t see anything from Okta. If you sign out from Okta, you’ll see a login screen such as the one below.</p>
+
+<p><img src="/assets/blog/spring-boot-saml/okta-login-b529f9ea23f41bc85ab4e9a04392eb079a7cca10b94b4cac460134fe3f1cf725.png" alt="Okta Login" width="800" class="center-image" /></p>
+
+<p>After you’ve logged in, you should see a screen like the one below.</p>
+
+<p><img src="/assets/blog/spring-boot-saml/hello-saml-b02f43bbec741e570382cad20cb0d1d4c824b63597efd072074124c474a1f0a9.png" alt="Hello SAML" width="800" class="center-image" /></p>
+
+<h2 id="source-code">Source Code</h2>
+
+<p>You can find the source code for this article at <a href="https://github.com/oktadeveloper/okta-spring-boot-saml-example">https://github.com/oktadeveloper/okta-spring-boot-saml-example</a>.</p>
+
+<h2 id="learn-more">Learn More</h2>
+
+<p>This article showed you how to create a SAML application in Okta and talk to it using Spring Boot and Spring Security’s SAML extension. The SAML extension hasn’t had a GA release, but hopefully will soon. I also believe it’s possible to take the SAML DSL (in <code class="highlighter-rouge">SecurityConfiguration.java</code>) and create a Spring Boot starter that allows you to get started with SAML simply by configuring application properties.</p>
+
+<p>Have questions or comments? Post your question to Stack Overflow with the “<a href="http://stackoverflow.com/questions/tagged/okta">okta</a>” or “<a href="http://stackoverflow.com/questions/tagged/okta-api">okta-api</a>” tag, hit me up via email at <a href="mailto:matt.raible@okta.com">matt.raible@okta.com</a>, or ping me on Twitter <a href="https://twitter.com/mraible">@mraible</a>. In future articles, I’ll show you <a href="/blog/2017/03/21/spring-boot-oauth">how to configure Spring Boot with OAuth 2.0 and Okta</a>. Then I’ll explore different techniques of <a href="https://developer.okta.com/blog/2017/04/17/angular-authentication-with-oidc">authenticating with Angular</a> and using the access token to talk to a <a href="/blog/2017/09/19/build-a-secure-notes-application-with-kotlin-typescript-and-okta">secured Spring Boot application</a>. Until then, happy authenticating! 😊</p>
+
+<p><strong>Changelog:</strong></p>
+
+<ul>
+  <li>Apr 20, 2017: Thanks to <a href="https://github.com/AlexeySoshin">Alexey Soshin</a> for contributing a <a href="https://github.com/oktadeveloper/okta-spring-boot-saml-example/pull/2">pull request</a> to make the code in this blog post more bootiful!</li>
+  <li>Oct 10, 2017: Updated instructions for the <a href="/blog/2017/09/25/all-new-developer-console">Okta Developer Console</a>.</li>
+</ul>
+
+
+	</div>
+	
+</article>
+
+		
+</section>
+
+		
+	</div><footer class="Footer">
+    <div class="Wrap">
+
+        <div class="Row">
+
+            <div class="Column--3 Column--medium-6 Column--xSmall-12">
+
+                <a class="Logo" href="https://www.okta.com/" target="_blank" rel="noopener noreferrer">
+                    <img src="https://developer.okta.com/sites/all/themes/developer/images/logo-footer.png" alt="Okta">
+                    Visit okta.com
+                </a>
+
+            </div>
+
+            <div class="Column--3 Column--medium-12 Column--xSmall-12">
+
+                <h4>Social</h4>
+                <ul class="Footer-links Footer-links--social">
+                    <li><a class="Footer-links--github" target="_blank" rel="noopener noreferrer" href="http://github.com/oktadeveloper">Github</a></li>
+                    <li><a class="Footer-links--twitter" target="_blank" rel="noopener noreferrer" href="http://twitter.com/OktaDev">Twitter</a></li>
+                    <li><a class="Footer-links--forum" target="_blank" rel="noopener noreferrer" href="https://devforum.okta.com/">Forum</a></li>
+                    <li><a class="Footer-links--rss" target="_blank" rel="noopener noreferrer" href="http://feeds.feedburner.com/OktaBlog">RSS Blog</a></li>
+                </ul>
+            </div>
+
+            <div class="Column--3 Column--medium-6 Column--small-12">
+                <h4>More Info</h4>
+                <ul class="Footer-links">
+                    <li><a target="_blank" href="https://developer.okta.com/integrate-with-okta/">Integrate with Okta</a></li>
+                    <li><a href="/blog/">Blog</a></li>
+                    <li><a href="/docs/platform-release-notes/platform-release-notes.html">Release Notes</a></li>
+                    <li><a href="/3rd_party_notices/">3rd Party Notices</a></li>
+                </ul>
+            </div>
+
+            <div class="Column--3 Column--medium-6 Column--small-12">
+                <h4>Contact &amp; Legal</h4>
+                <ul class="Footer-links">
+                    <li><a href="https://developer.okta.com/contact/">Contact Sales</a></li>
+                    <li><a target="_blank" rel="noopener noreferrer" href="mailto:developers@okta.com">Contact Support</a></li>
+                    <li><a href="https://developer.okta.com/terms/">Terms &amp; Conditions</a></li>
+                    <li><a href="https://developer.okta.com/privacy/">Privacy Policy</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</footer>
+
+    <script type="text/javascript" src="/assets/master-0365dd27cf276cb2a15c0a43906ca592538204cf1ad4557547bf4e50609b411e.js"></script>
+    <script type="text/javascript" src="/assets/myOkta-911cbafbbe079b7a5522d9cbe15bd2a5f44e1582531e88393934bec69f97696b.js"></script>
+    
+    
+    
+    
+      <script type="text/javascript" src="/assets/blog-6e32dad27404131cc8630a5282264bed2ab4c08c91ac86fa496b75c53aa4f681.js"></script>
+    
+
+  <!-- START Post Footer -->
+  
+  <!-- START Google Tag Manager -->
+  <!-- https://support.google.com/tagmanager/answer/6103696?hl=en -->
+  <noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-TJ45R6" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+  <!-- END Google Tag Manager -->
+  <!-- START Google Remarketing Tag -->
+  <script type="text/javascript">
+    /* <![CDATA[ */
+    var google_conversion_id = 1006913831;
+    var google_custom_params = window.google_tag_params;
+    var google_remarketing_only = true;
+    /* ]]> */
+  </script>
+  <div style="display:none;"><script type="text/javascript" src="//www.googleadservices.com/pagead/conversion.js"></script></div>
+  <noscript><div style="display:inline;"><img height="1" width="1" style="border-style:none;" alt="" src="//googleads.g.doubleclick.net/pagead/viewthroughconversion/1006913831/?value=0&amp;guid=ON&amp;script=0"></div></noscript>
+  <!-- END Google Remarketing Tag -->
+  <!-- START Crazy Egg Tracking -->
+  <script type="text/javascript">
+    setTimeout(function(){var a=document.createElement("script");
+    var b=document.getElementsByTagName("script")[0];
+    a.src=document.location.protocol+"//script.crazyegg.com/pages/scripts/0021/9333.js?"+Math.floor(new Date().getTime()/3600000);
+    a.async=true;a.type="text/javascript";b.parentNode.insertBefore(a,b)}, 1);
+  </script>
+  <!-- END Crazy Egg Tracking -->
+
+  <!-- END Post Footer -->
+</body>
+</html>

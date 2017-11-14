@@ -1,0 +1,793 @@
+<!doctype html>
+<!--[if lt IE 7 ]> <html class="ie6 no-flexbox"> <![endif]-->
+<!--[if IE 7 ]>    <html class="ie7 no-flexbox"> <![endif]-->
+<!--[if IE 8 ]>    <html class="ie8 no-flexbox"> <![endif]-->
+<!--[if IE 9 ]>    <html class="ie9 no-flexbox"> <![endif]-->
+<!--[if IE 10 ]>    <html class="ie10 no-flexbox"> <![endif]-->
+<!--[if (gt IE 10)|!(IE)]><!--> <html class="modern wf-loading" lang="en"> <!--<![endif]-->
+  <head>
+  <script>
+    var searchDomain = 'https://developer.okta.com';
+    var isProduction = window.location.hostname === 'developer.okta.com';
+    if (isProduction) {
+      // TypeKit
+      (function(d) {
+        var config = {
+          kitId: 'jff5neq',
+          scriptTimeout: 3000,
+          async: true
+        },
+        h=d.documentElement,t=setTimeout(function(){h.className=h.className.replace(/bwf-loadingb/g,"")+" wf-inactive";},config.scriptTimeout),tk=d.createElement("script"),f=false,s=d.getElementsByTagName("script")[0],a;h.className+=" wf-loading";tk.src='https://use.typekit.net/'+config.kitId+'.js';tk.async=true;tk.onload=tk.onreadystatechange=function(){a=this.readyState;if(f||a&&a!="complete"&&a!="loaded")return;f=true;clearTimeout(t);try{Typekit.load(config)}catch(e){}};s.parentNode.insertBefore(tk,s)
+      })(document);
+
+      // Google analytics
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+              (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+              m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+      ga('create', 'UA-15777010-3', 'auto');
+      ga('send', 'pageview');
+
+      // START Google Tag Manager
+      (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+      new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+      j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+      '//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+      })(window,document,'script','dataLayer','GTM-TJ45R6');
+      // END Google Tag Manager
+    }
+	</script>
+  <meta charset="utf-8">
+  <meta http-equiv="x-ua-compatible" content="IE=edge,chrome=1">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+ 	
+
+  <link type="text/css" rel="stylesheet" href="https://developer.okta.com/sites/all/themes/developer/css/master.css" media="all" />
+  <meta class="swiftype" name="title" data-type="string" content="Add Role-Based Access Control to Your App with Spring Security and Thymeleaf | Okta Developer" />
+  <meta class="swiftype" name="summary" data-type="string" content="User management functions are required by a wide variety of apps and APIs, and it’s a common use-case to partition access to parts of an application accordin..." />
+
+  <link type="text/css" rel="stylesheet" href="/assets/animate-ec43d72c3ed45e08a460b8a2966d8dba6006aebfa0530935c3973fa493a8771f.css">
+  <link type="text/css" rel="stylesheet" href="/assets/okta-a96df4c9d48b78b618e1d541f46f7137d73d40653571e020c1ad59edd7915c60.css">
+  
+  
+  <title>Add Role-Based Access Control to Your App with Spring Security and Thymeleaf | Okta Developer</title>
+  <meta name="description" content="User management functions are required by a wide variety of apps and APIs, and it’s a common use-case to partition access to parts of an application accordin...">
+  <link rel="canonical" href="https://developer.okta.com/blog/2017/10/13/okta-groups-spring-security"  data-proofer-ignore>
+  <link rel="alternate" type="application/rss+xml" title="Okta Developer" href="https://developer.okta.com/feed.xml"><!-- GA -->
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+  <link rel="manifest" href="/manifest.json">
+  <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#21313a">
+  <meta name="theme-color" content="#ffffff">
+</head>
+
+  
+    <body id="blog">
+	
+
+
+
+
+<header class="Header is-fixed">
+
+  <div class="Wrap">
+
+    <a class="Logo" href="https://developer.okta.com">
+      <svg version="1.1" id="OktaLogo" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 431.9 151.4" style="enable-background:new 0 0 431.9 151.4;" xml:space="preserve"><g><g><g><path d="M102.2,41.4c-21,0-38.1,17.1-38.1,38.1s17.1,38.1,38.1,38.1s38.1-17.1,38.1-38.1l0,0C140.3,58.5,123.2,41.4,102.2,41.4z M102.2,98.5c-10.5,0-19-8.5-19-19s8.5-19,19-19s19,8.5,19,19c0.1,10.5-8.4,19-18.9,19.1C102.3,98.6,102.2,98.6,102.2,98.5L102.2,98.5z"/><path d="M169.1,92.3c0-1.9,1.5-3.4,3.4-3.4c0.9,0,1.8,0.4,2.4,1c9.5,9.7,25.3,26.3,25.4,26.4c0.4,0.5,0.8,0.8,1.4,0.9l1.6,0.2h17.2c1.8,0,3.3-1.4,3.4-3.2c0-0.8-0.3-1.5-0.8-2.2l-28.6-29.2l-1.5-1.5c-3.2-3.9-2.9-5.4,0.8-9.3l22.6-25.1c1.1-1.4,0.8-3.5-0.6-4.6c-0.6-0.4-1.3-0.7-2-0.7h-17c-0.6,0.2-1.1,0.5-1.5,0.9L175,64.4c-1.3,1.4-3.4,1.5-4.8,0.2c-0.7-0.6-1.1-1.5-1.1-2.5V18.9c0-1.7-1.3-3-3-3c-0.1,0-0.2,0-0.3,0h-12.7c-2.2,0-3.3,1.5-3.3,2.8v95.8c0,2.2,1.8,2.8,3.3,2.8h12.7c1.7,0.1,3.2-1.2,3.3-2.9c0,0,0,0,0,0V92.3z"/><path d="M273,114l-1.4-12.8c-0.2-1.7-1.7-2.9-3.4-2.7c0,0,0,0-0.1,0l-2.9,0.2c-10.1,0-18.5-7.9-19-18c0-0.3,0-0.7,0-1V64.2c-0.1-2,1.5-3.6,3.5-3.7c0,0,0,0,0,0h17c1.7-0.1,3.1-1.5,3-3.2c0,0,0-0.1,0-0.1v-12c0-2.3-1.5-3.6-2.8-3.6h-17.1c-1.9,0.1-3.5-1.5-3.6-3.4c0,0,0,0,0,0V18.9c-0.1-1.7-1.5-3.1-3.2-3c0,0-0.1,0-0.1,0h-12.7c-1.6-0.1-3,1.1-3.1,2.7c0,0.1,0,0.1,0,0.2c0,0,0,61.7,0,62c0.5,21,17.9,37.6,38.9,37c1.4,0,2.9-0.2,4.3-0.3C272,117.2,273.2,115.7,273,114z"/></g><path d="M364.7,98c-10.8,0-12.4-3.8-12.4-18.3l0,0V44.8c0-1.8-1.4-3.2-3.2-3.2c0,0-0.1,0-0.1,0h-12.8c-1.8,0-3.2,1.4-3.3,3.2v1.6C314.6,36,291.3,42.5,281,60.8c-10.4,18.3-3.9,41.6,14.4,51.9c14,7.9,31.4,6.2,43.5-4.2c3.6,5.5,9.3,9.1,18.3,9.1c1.5,0,9.7,0.3,9.7-3.5v-13.6C367,99.2,366,98.1,364.7,98z M314.2,98.6c-10.5,0-19-8.5-19-19s8.5-19,19-19s19,8.5,19,19l0,0C333.2,90.1,324.7,98.6,314.2,98.6z"/></g><path d="M19.4,74c2.2-1.9,4.1-4.1,5.7-6.6c3.5-5.3,5.4-11.5,5.2-17.9V27c0-4.9,0.9-8.4,2.7-10.5c1.8-2.1,4.8-3,9.2-3h12.6c1.2,0,2.1-0.9,2.2-2.1l0,0V2.2C57,1,56,0,54.8,0c0,0,0,0,0,0H41.5c-7.8,0-12.9,2.1-18,7.6s-7.1,12.3-7.1,21.7v14.2c0,2.2-0.1,4-0.2,5.7v2.2c-0.5,3.2-1.8,6.2-3.6,8.9C9.4,64.7,5.1,70.9,0.9,74l0,0l-0.3,0.3l0,0l-0.2,0.3H0.2v0.3l0,0c-0.1,0.3-0.1,0.7,0,1l0,0v0.3h0.1l0.2,0.3l0,0l0.3,0.3l0,0c4.2,3.1,8.5,9.3,11.3,13.7c1.8,2.7,3.1,5.7,3.6,8.9v2.2c0.1,1.6,0.2,3.5,0.2,5.7v14.3c0,9.4,2.4,16.7,7.1,21.7s10.2,7.6,18,7.6h13.8c1.2,0,2.2-1,2.2-2.2V140l0,0c0-1.2-1-2.2-2.2-2.2H42.2c-4.4,0-7.5-1-9.2-3s-2.7-5.6-2.7-10.5v-22.4c0.2-6.4-1.7-12.6-5.2-17.9c-1.6-2.5-3.5-4.7-5.7-6.6l0,0c-0.9-0.7-1.1-2-0.4-2.9C19.2,74.3,19.3,74.2,19.4,74L19.4,74z"/><path d="M412.5,74c-2.2-1.9-4.1-4.1-5.7-6.6c-3.5-5.3-5.4-11.5-5.2-17.9V27c0-4.9-0.9-8.4-2.7-10.5s-4.8-3-9.2-3h-12.6c-1.2,0-2.2-1-2.2-2.2c0,0,0,0,0,0l0,0V2.2c0-1.2,1-2.2,2.2-2.2c0,0,0,0,0,0h13.4c7.8,0,12.9,2.1,18,7.6s7.1,12.3,7.1,21.7v14.2c0,2.2,0.1,4,0.2,5.7v2.2c0.5,3.2,1.8,6.2,3.6,8.9c2.8,4.5,7.1,10.7,11.3,13.7l0,0l0.3,0.3l0,0l0.2,0.3h0.1v0.3l0,0c0.1,0.3,0.1,0.7,0,1l0,0v0.3h-0.1l-0.2,0.3l0,0l-0.3,0.3l0,0c-4.2,3.1-8.5,9.3-11.3,13.7c-1.8,2.7-3.1,5.7-3.6,8.9v2.2c-0.1,1.6-0.2,3.5-0.2,5.7v14.3c0,9.4-2.4,16.7-7.1,21.7s-10.2,7.6-18,7.6h-13.4c-1.2,0-2.2-1-2.2-2.2c0,0,0,0,0,0V140l0,0c0-1.2,1-2.2,2.2-2.2l0,0h12.7c4.4,0,7.5-1,9.2-3s2.7-5.6,2.7-10.5v-22.4c-0.2-6.3,1.6-12.6,5.1-17.9c1.6-2.5,3.5-4.7,5.7-6.6l0,0c0.9-0.7,1.1-2,0.4-2.9C412.7,74.3,412.6,74.2,412.5,74L412.5,74z"/></g></svg>
+    </a>
+
+    <nav class="Header-nav PrimaryNav">
+      <ul class="menu">
+        <li class="first leaf">
+          <a href="https://developer.okta.com/product/">Product</a>
+        </li>
+        <li class="leaf">
+          <a href="https://developer.okta.com/pricing/">Pricing</a>
+        </li>
+        <li class="leaf">
+          <a href="/blog/" class="active">Blog</a>
+        </li>
+        <li class="leaf">
+          <a href="/documentation/">Docs</a>
+        </li>
+        <li class="last expanded">
+          <span class="nolink">Support</span>
+          <ul class="menu">
+            <li class="first leaf"><a href="https://devforum.okta.com/">Okta Developer Forums</a></li>
+            <li class="last leaf"><a href="mailto:developers@okta.com">developers@okta.com</a></li>
+          </ul>
+        </li>
+      </ul>
+      <a class="PrimaryNav-toggle" href="#">
+        <svg width="20px" height="20px" viewBox="0 0 20 20" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+            <g class="MenuIcon" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="round">
+                <path d="M1,16 L19,16" class="MenuIcon-line1" stroke="#FFFFFF" stroke-width="2"></path>
+                <path d="M1,4 L19,4" class="MenuIcon-line2" stroke="#FFFFFF" stroke-width="2"></path>
+                <path d="M1,10 L19,10" class="MenuIcon-line3" stroke="#FFFFFF" stroke-width="2"></path>
+                <path d="M1,10 L19,10" class="MenuIcon-line4" stroke="#FFFFFF" stroke-width="2"></path>
+            </g>
+        </svg>
+        <svg class="CloseIcon" width="16px" height="16px" viewBox="0 0 16 16" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+          <g id="ALl-Boards" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+            <g id="Desktop" transform="translate(-915.000000, -235.000000)" fill="#FFFFFF">
+              <g id="Search-bar-Active" transform="translate(30.000000, 26.000000)">
+                <polygon id="Icon/Cross" points="901 210.6 899.4 209 893 215.4 886.6 209 885 210.6 891.4 217 885 223.4 886.6 225 893 218.6 899.4 225 901 223.4 894.6 217"></polygon>
+              </g>
+            </g>
+          </g>
+        </svg>
+      </a>
+
+      <div class="PrimaryNav-cta">
+        <a target="_blank" rel="noopener noreferrer" href="https://login.okta.com/?SAMLRequest=fc%2B7CsJAEAXQXvAflu1NNJUMeZBGELTx1a%2FrYILJTtyZGD%2FfSBRiYzlw77lMnD3rSj3Qc0ku0YtgrhU6S5fSXRN9PKxmS52l00nMpq6iBvJWCrfDe4ss6vStRe9aDzmGIZfo1jsgwyWDMzUyiIV9vt1AH4XGk5ClSvewUgMNa%2BYW%2FVj5jxhm9NLP67QQaSAMu64L6CYmsFSHlnzT4ZlLwTgcL6Sf8%2FeX9AU%3Dhttps://login.okta.com/?SAMLRequest=fc%2B7CsJAEAXQXvAflu1NNJUMeZBGELTx1a%2FrYILJTtyZGD%2FfSBRiYzlw77lMnD3rSj3Qc0ku0YtgrhU6S5fSXRN9PKxmS52l00nMpq6iBvJWCrfDe4ss6vStRe9aDzmGIZfo1jsgwyWDMzUyiIV9vt1AH4XGk5ClSvewUgMNa%2BYW%2FVj5jxhm9NLP67QQaSAMu64L6CYmsFSHlnzT4ZlLwTgcL6Sf8%2FeX9AU%3D" class="Button--redOutline">Login</a>
+        <a href="https://developer.okta.com/signup/" class="Button--red">Sign up</a>
+      </div>
+
+      <a class="SearchIcon" href="#"></a>
+      <form id="form_search" class="SearchBar Formisimo_clocked_69929" method="get" action="https://developer.okta.com/search/" name="form_search" __bizdiag="-784164280" __biza="WJ__">
+        <input type="text" name="stq" autocomplete="off" id="st-search-input-auto" class="st-search-input" placeholder="Search">
+        <input type="submit" name="submit" value="GO">
+      </form>
+
+    </nav>
+
+  </div>
+
+</header>
+
+	<div class="page-content">
+		
+
+
+
+
+
+
+<section class="Blog is-single">
+		
+	<div class="Blog-social">
+		
+		<a href="https://github.com/dogeared" target="_blank"><i class="fa fa-github"></i></a>
+		
+		
+		<a href="https://twitter.com/afitnerd" target="_blank"><i class="fa fa-twitter"></i></a>
+		
+		
+		
+		<a href="https://afitnerd.com" target="_blank"><i class="fa fa-external-link"></i></a>
+		
+	</div>
+	
+	
+
+<article class="BlogPost">
+	
+	<header class="BlogPost-header">
+	
+		<time class="BlogPost-date" datetime="2017-10-13">October 13, 2017</time>
+		
+		<h1 class="BlogPost-title">
+			
+			Add Role-Based Access Control to Your App with Spring Security and Thymeleaf
+			
+		</h1>
+		
+		<div class="BlogPost-attribution">
+			
+				<img src="/assets/avatar-dogeared-faf0ce7b6d3e6b9207b916b1f999135729f64a3f2988107e5bc8bf82e31a6d4a.jpg" alt="avatar-dogeared.jpg" class="BlogPost-avatar">
+			
+			<span class="BlogPost-author">Micah Silverman</span>
+		</div>
+	
+	</header>
+	
+	<div class="BlogPost-content">
+		
+	<p>User management functions are required by a wide variety of apps and APIs, and it’s a common use-case to partition access to parts of an application according to roles assigned to a user. This is the basis of role-based access control (RBAC). Okta manages these roles with groups. Users can belong to one or more groups. With the Okta Spring Security integration, these groups are automatically mapped to roles that can be called out in your application to grant or deny access. This is all done using common Spring Security annotations as you’ll see below.</p>
+
+<p>Okta’s Java dev team is working hard on our next generation SDK and integrations. With Okta’s <a href="https://github.com/okta/okta-spring-boot">integration for Spring Boot and Spring Security</a> you can wire up your Okta tenant to a Spring Boot application and take advantage of the built in RBAC.</p>
+
+<p>In this post, you’ll walk through a simple example that has some unprotected pages, some pages that can only be accessed by authenticated users and some pages that can only be accessed by users who belong to a particular group.</p>
+
+<p>All the code used in this demo can be found <a href="https://github.com/oktadeveloper/okta-spring-security-roles-example">in this GitHub repo</a>.</p>
+
+<h2 id="configure-okta">Configure Okta</h2>
+
+<p>To get started, let’s get your Okta tenant set up. You’ll then be able to fire up the sample app and see it in action. Head on over to <a href="https://developer.okta.com">https://developer.okta.com</a> and sign up for a developer account.</p>
+
+<p>Here’s what we are going to do to exercise the code:</p>
+
+<ol>
+  <li>Create an <code class="highlighter-rouge">admins</code> group</li>
+  <li>Create a <code class="highlighter-rouge">users</code> group</li>
+  <li>Create a user who belongs to the <code class="highlighter-rouge">users</code> groups</li>
+  <li>Create a second user who belongs to both groups</li>
+  <li>Create an OpenID Connect (OIDC) application</li>
+  <li>Add our two groups to the application</li>
+  <li>Configure the default Authorization Server to include group memberships in access tokens</li>
+</ol>
+
+<p>If that seems like a lot – don’t worry! It’s just a bunch of clicking in a friendly webapp.</p>
+
+<h3 id="groups">Groups</h3>
+
+<p>Navigate in your Okta Admin Dashboard to <code class="highlighter-rouge">Users</code> -&gt; <code class="highlighter-rouge">Groups</code>. Click <code class="highlighter-rouge">Add Group</code> and fill in <code class="highlighter-rouge">admins</code> for the Name. Click <code class="highlighter-rouge">Add Group</code>to save it.</p>
+
+<p><img src="/assets/blog/okta-groups-spring-security/groups-3-895ad9a1fee4a39ba7b29f0992d9835cb53363ab35aeabd59c5041e702c46138.png" alt="Default AS" width="700" class="center-image" /></p>
+
+<p>Repeat for the <code class="highlighter-rouge">users</code> group.</p>
+
+<h3 id="users">Users</h3>
+
+<p>Navigate in your Okta Admin Dashboard to <code class="highlighter-rouge">Users</code> -&gt; <code class="highlighter-rouge">People</code>. Click <code class="highlighter-rouge">Add User</code> and fill in the form. Add this user to the <code class="highlighter-rouge">users</code> group you set up previously. Make sure the checkbox is selected to send an activation email.</p>
+
+<p><img src="/assets/blog/okta-groups-spring-security/users-2-fd6e6827d4f7f706629b39e778be836562c424e266501cc9ab42dc09b634670c.png" alt="Default AS" width="700" class="center-image" /></p>
+
+<p>Click <code class="highlighter-rouge">Save and Add Another</code>. Repeat the above steps, only for the second user add to both the <code class="highlighter-rouge">users</code> and <code class="highlighter-rouge">admins</code> groups.</p>
+
+<p><img src="/assets/blog/okta-groups-spring-security/users-3-6549e4d11eafa511fd9d8912843f2aaae3ddea363004f91bf9c4a15b11687013.png" alt="Default AS" width="700" class="center-image" /></p>
+
+<p><strong>Note</strong>: Either the primary or secondary email needs to be a real email address so you can activate the user. Check your email and click the links for both users to activate them.</p>
+<h3 id="oidc-application">OIDC Application</h3>
+
+<p>Click the <code class="highlighter-rouge">Applications</code> menu item in your Okta Admin Dashboard. Click <code class="highlighter-rouge">Add Application</code>.</p>
+
+<p><img src="/assets/blog/okta-groups-spring-security/applications-2-39ea22e813460f6e98b930722f293ec216e2a84348bfffb32d0aa2ea8df3f527.png" alt="Default AS" width="700" class="center-image" /></p>
+
+<p>Choose the <code class="highlighter-rouge">Web</code> option and click <code class="highlighter-rouge">Next</code>.</p>
+
+<p>Fill out the form like so:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Field</th>
+      <th>Value</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Name</td>
+      <td>Fun with Spring Security Roles</td>
+    </tr>
+    <tr>
+      <td>Base URIs</td>
+      <td>http://localhost:8080/</td>
+    </tr>
+    <tr>
+      <td>Login redirect URIs</td>
+      <td>http://localhost:8080/</td>
+    </tr>
+    <tr>
+      <td>Group assignments</td>
+      <td><code class="highlighter-rouge">admins</code> and <code class="highlighter-rouge">users</code></td>
+    </tr>
+    <tr>
+      <td>Grant type allowed</td>
+      <td>Check: <code class="highlighter-rouge">Implicit</code></td>
+    </tr>
+  </tbody>
+</table>
+
+<p>Click<code class="highlighter-rouge">Done</code>!</p>
+
+<p><img src="/assets/blog/okta-groups-spring-security/applications-3-328d58ce6c9036dbd53644e4b3bb2e2f14e3243b03beb85047081b24a90feecd.png" alt="Default AS" width="700" class="center-image" /></p>
+
+<p><strong>Note</strong>: The URIs specified above are the Spring Boot defaults. These can easily be changed later on.</p>
+
+<p>Scroll down on the resulting page and note the <code class="highlighter-rouge">Client ID</code>. You’ll need it later to configure the Spring Boot app.</p>
+<h3 id="authorization-server">Authorization Server</h3>
+
+<p>Navigate in your Okta Admin Dashboard to <code class="highlighter-rouge">API</code> -&gt; <code class="highlighter-rouge">Authorization Servers</code>.</p>
+
+<p><img src="/assets/blog/okta-groups-spring-security/as-1-edcea0d050e00c96ec6277ec9e6fc756fda21365a5038588ca3d4d23ee38d39f.png" alt="Default AS" width="700" class="center-image" /></p>
+
+<p>Note the <code class="highlighter-rouge">Issuer URI</code>. You’ll need it later to configure the Spring Boot app.</p>
+
+<p>Click the <code class="highlighter-rouge">default</code> link and choose the <code class="highlighter-rouge">Claims</code> tab. Click <code class="highlighter-rouge">Add Claim</code>.</p>
+
+<p>Fill out the form like so:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Field</th>
+      <th>Value</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Name</td>
+      <td>groups</td>
+    </tr>
+    <tr>
+      <td>Include in token type</td>
+      <td>Access Token</td>
+    </tr>
+    <tr>
+      <td>Value type</td>
+      <td>Groups</td>
+    </tr>
+    <tr>
+      <td>Filter</td>
+      <td>Regex .*</td>
+    </tr>
+    <tr>
+      <td>Include in</td>
+      <td>Any scope</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>Click<code class="highlighter-rouge">Create</code>.</p>
+
+<p><img src="/assets/blog/okta-groups-spring-security/as-3-379fed7c6f2e9befea19607b2f9a1c1acd97efe8870f61165eedae58431b840b.png" alt="Default AS" width="700" class="center-image" /></p>
+
+<p>This ensures that group membership information is included in the Access Token when a user authenticates. This is key to hooking into Spring Security’s roles and authorities mechanism.</p>
+
+<h2 id="configure-your-spring-boot-app">Configure Your Spring Boot App</h2>
+
+<p>Clone the <a href="https://github.com/oktadeveloper/okta-spring-security-roles-example">GitHub repo</a>.</p>
+
+<div class="language-bash highlighter-rouge"><pre class="highlight"><code>git clone https://github.com/okta/okta.github.io.git
+</code></pre>
+</div>
+
+<p>Open up the project in your favorite IDE or editor. The screenshots below are from <a href="https://www.jetbrains.com/idea/">IntelliJ IDEA</a>.</p>
+
+<p>Make a copy of the <code class="highlighter-rouge">application.yml.sample</code> file and name it <code class="highlighter-rouge">application.yml</code></p>
+
+<p>Update the values with the information you saved earlier. My settings are shown below:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Value</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>baseUrl</td>
+      <td>https://dev-237330.oktapreview.com</td>
+    </tr>
+    <tr>
+      <td>issuer</td>
+      <td>https://dev-237330.oktapreview.com/oauth2/default</td>
+    </tr>
+    <tr>
+      <td>audience</td>
+      <td>api://default</td>
+    </tr>
+    <tr>
+      <td>clientId</td>
+      <td>0oacdldhkydGGruON0h7</td>
+    </tr>
+    <tr>
+      <td>rolesClaim</td>
+      <td>groups</td>
+    </tr>
+    <tr>
+      <td>redirectUri</td>
+      <td>http://localhost:8080/</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>Let’s fire up the application and see it in action before we jump into the code.</p>
+
+<p>You can run this from the command line:</p>
+
+<div class="language-bash highlighter-rouge"><pre class="highlight"><code>mvn spring-boot:run
+</code></pre>
+</div>
+
+<h2 id="exercise-the-app">Exercise the App</h2>
+
+<p>Navigate to the home page and click <code class="highlighter-rouge">Login</code>.</p>
+
+<p><img src="/assets/blog/okta-groups-spring-security/app-1-27e3fe11b53cef9560f5178de2bdbecf6c2e9148709c376f4e3c1663184fa34f.png" alt="Default AS" width="700" class="center-image" /></p>
+
+<p>Sign in as the user that belongs to the <code class="highlighter-rouge">users</code> group that you created before.</p>
+
+<p>You’ll see that the app knows who you are and there are a row of buttons on the bottom of the page.</p>
+
+<p>These buttons are connected to the app such that only members of the <code class="highlighter-rouge">users</code> group will be able to see the page when <code class="highlighter-rouge">Users Only</code> is clicked and only members of the <code class="highlighter-rouge">admins</code> group will be able to see the page when <code class="highlighter-rouge">Admins Only</code> is clicked.</p>
+
+<p><img src="/assets/blog/okta-groups-spring-security/app-3-6117b86cd2a73ab750767098c6eac1b66783fa0af36d74b5d1c8850acf1e5da9.png" alt="Default AS" width="700" class="center-image" /></p>
+
+<p>Click <code class="highlighter-rouge">Users Only</code>. You’ll see a page that shows that you’re a member of the <code class="highlighter-rouge">users</code> group.</p>
+
+<p>Click <code class="highlighter-rouge">Back</code> then <code class="highlighter-rouge">Admins Only</code>. Notice that you get a <code class="highlighter-rouge">403 Unauthorized</code> because you’re not a member of the <code class="highlighter-rouge">admins</code> group.</p>
+
+<p>Click the <code class="highlighter-rouge">Logout</code> button. Log in again as the user that belongs to the <code class="highlighter-rouge">admins</code> group that you created before.</p>
+
+<p>Click <code class="highlighter-rouge">Admins Only</code>.</p>
+
+<p><img src="/assets/blog/okta-groups-spring-security/app-6-5a5c52a8afe6a20c379b4698b65f8bbde059ed54e595ff2de1d78f3f6ceebcb9.png" alt="Default AS" width="700" class="center-image" /></p>
+
+<p>This time, you can see that you are in both the <code class="highlighter-rouge">admins</code> group and the <code class="highlighter-rouge">users</code> group.</p>
+<h2 id="spring-security-code-review">Spring Security Code Review</h2>
+
+<p>Now that you’ve seen the app working, let’s jump into the code and see how Okta groups link up to Spring Security roles.</p>
+
+<p>The demo application <a href="https://github.com/oktadeveloper/okta-spring-security-roles-example">found on GitHub</a> makes use of:</p>
+
+<ol>
+  <li>Spring Boot</li>
+  <li>Spring Security</li>
+  <li>Spring Security OAuth2</li>
+  <li>Okta Spring Security Starter</li>
+  <li>Thymeleaf Templates</li>
+  <li>Thymeleaf Extras for Spring Security 4</li>
+  <li>Okta Sign-In Widget</li>
+</ol>
+
+<p>The “behind the scenes magic” happens by virtue of the fact that we depend on the <code class="highlighter-rouge">okta-spring-security-starter</code> (from pom.xml):</p>
+
+<div class="language-xml highlighter-rouge"><pre class="highlight"><code>...
+<span class="nt">&lt;dependency&gt;</span>
+    <span class="nt">&lt;groupId&gt;</span>com.okta.spring<span class="nt">&lt;/groupId&gt;</span>
+    <span class="nt">&lt;artifactId&gt;</span>okta-spring-security-starter<span class="nt">&lt;/artifactId&gt;</span>
+    <span class="nt">&lt;version&gt;</span>0.1.0<span class="nt">&lt;/version&gt;</span>
+<span class="nt">&lt;/dependency&gt;</span>
+...
+</code></pre>
+</div>
+
+<p>Let’s start at the beginning and take a look at how the Okta Sign-In Widget bridges the gap from the client side to Spring Boot.</p>
+
+<h3 id="the-okta-sign-in-widget">The Okta Sign-In Widget</h3>
+
+<p>In the <code class="highlighter-rouge">login.html</code> Thymeleaf template, we set up the login widget like so:</p>
+
+<div class="language-javascript highlighter-rouge"><pre class="highlight"><code><span class="nx">$</span><span class="p">(</span> <span class="nb">document</span> <span class="p">).</span><span class="nx">ready</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+    <span class="kd">var</span> <span class="nx">data</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="na">baseUrl</span><span class="p">:</span> <span class="p">[[</span><span class="nx">$</span><span class="p">{</span><span class="nx">appProperties</span><span class="p">.</span><span class="nx">baseUrl</span><span class="p">}]],</span>
+        <span class="na">clientId</span><span class="p">:</span> <span class="p">[[</span><span class="nx">$</span><span class="p">{</span><span class="nx">appProperties</span><span class="p">.</span><span class="nx">clientId</span><span class="p">}]],</span>
+        <span class="na">redirectUri</span><span class="p">:</span> <span class="p">[[</span><span class="nx">$</span><span class="p">{</span><span class="nx">appProperties</span><span class="p">.</span><span class="nx">redirectUri</span><span class="p">}]],</span>
+        <span class="na">authParams</span><span class="p">:</span> <span class="p">{</span>
+            <span class="na">issuer</span><span class="p">:</span> <span class="p">[[</span><span class="nx">$</span><span class="p">{</span><span class="nx">appProperties</span><span class="p">.</span><span class="nx">issuer</span><span class="p">}]],</span>
+            <span class="na">responseType</span><span class="p">:</span> <span class="p">[</span><span class="s1">'token'</span><span class="p">]</span>
+        <span class="p">}</span>
+    <span class="p">};</span>
+    <span class="nb">window</span><span class="p">.</span><span class="nx">oktaSignIn</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">OktaSignIn</span><span class="p">(</span><span class="nx">data</span><span class="p">);</span>
+
+    <span class="c1">// Check if we already have an access token</span>
+    <span class="kd">var</span> <span class="nx">token</span> <span class="o">=</span> <span class="nx">oktaSignIn</span><span class="p">.</span><span class="nx">tokenManager</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">'token'</span><span class="p">);</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nx">token</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nb">window</span><span class="p">.</span><span class="nx">location</span><span class="p">.</span><span class="nx">href</span> <span class="o">=</span> <span class="s2">"/authenticated"</span><span class="p">;</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+        <span class="nx">renderWidget</span><span class="p">();</span>
+    <span class="p">}</span>
+<span class="p">});</span>
+</code></pre>
+</div>
+
+<p>Notice that we’ve embedded all the settings to connect to our Okta tenant as inline Thymeleaf Template variables (lines 3 - 8). These values are passed in from the Spring Boot controller as part of the model. This is powerful because you only have to specify these settings in one place. Both server side and client side make use of them. You’ll see how these settings are managed below. For now, just know that they all come from the <code class="highlighter-rouge">application.yml</code> file.</p>
+
+<p>After the Okta Sign-In Widget is configured and instantiated, we check to see if the user has already logged in. If so, we send them to the <code class="highlighter-rouge">/authenticated</code> page. If not, we render the widget, which gives the user the opportunity to log in.</p>
+
+<p>Here’s the <code class="highlighter-rouge">renderWidget</code> function:</p>
+
+<div class="language-javascript highlighter-rouge"><pre class="highlight"><code><span class="kd">function</span> <span class="nx">renderWidget</span><span class="p">()</span> <span class="p">{</span>
+    <span class="nx">oktaSignIn</span><span class="p">.</span><span class="nx">renderEl</span><span class="p">(</span>
+        <span class="p">{</span><span class="na">el</span><span class="p">:</span> <span class="s1">'#okta-login-container'</span><span class="p">},</span>
+        <span class="kd">function</span> <span class="p">(</span><span class="nx">response</span><span class="p">)</span> <span class="p">{</span>
+
+            <span class="c1">// check if success</span>
+            <span class="k">if</span> <span class="p">(</span><span class="nx">response</span><span class="p">.</span><span class="nx">status</span> <span class="o">===</span> <span class="s1">'SUCCESS'</span><span class="p">)</span> <span class="p">{</span>
+
+                <span class="c1">// for our example we have the id token and the access token</span>
+                <span class="nx">oktaSignIn</span><span class="p">.</span><span class="nx">tokenManager</span><span class="p">.</span><span class="nx">add</span><span class="p">(</span><span class="s1">'token'</span><span class="p">,</span> <span class="nx">response</span><span class="p">[</span><span class="mi">0</span><span class="p">]);</span>
+
+                <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nb">document</span><span class="p">.</span><span class="nx">location</span><span class="p">.</span><span class="nx">protocol</span><span class="p">.</span><span class="nx">startsWith</span><span class="p">(</span><span class="s1">'https'</span><span class="p">))</span> <span class="p">{</span>
+                    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span>
+                        <span class="s1">'WARNING: You are about to pass a bearer token in a cookie over an insecure\n'</span> <span class="o">+</span>
+                        <span class="s1">'connection. This should *NEVER* be done in a production environment per\n'</span> <span class="o">+</span>
+                        <span class="s1">'https://tools.ietf.org/html/rfc6750'</span>
+                    <span class="p">);</span>
+                <span class="p">}</span>
+                <span class="nb">document</span><span class="p">.</span><span class="nx">cookie</span> <span class="o">=</span> <span class="s1">'access_token='</span> <span class="o">+</span> <span class="nx">oktaSignIn</span><span class="p">.</span><span class="nx">tokenManager</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">'token'</span><span class="p">).</span><span class="nx">accessToken</span><span class="p">;</span>
+                <span class="nb">document</span><span class="p">.</span><span class="nx">location</span><span class="p">.</span><span class="nx">href</span> <span class="o">=</span> <span class="s2">"/authenticated"</span><span class="p">;</span>
+            <span class="p">}</span>
+        <span class="p">},</span>
+        <span class="kd">function</span> <span class="p">(</span><span class="nx">err</span><span class="p">)</span> <span class="p">{</span>
+            <span class="c1">// handle any errors</span>
+            <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">err</span><span class="p">);</span>
+        <span class="p">}</span>
+    <span class="p">);</span>
+<span class="p">}</span>
+</code></pre>
+</div>
+
+<p>Once the widget is rendered on the page, the internal logic takes over based on your settings when the user logs in. In this case, you are using the <a href="https://tools.ietf.org/html/rfc6749#section-1.3.2">implicit</a> flow and will get back only an access token as specified by the <code class="highlighter-rouge">responseType</code> parameter of the configuration.</p>
+
+<p>On successful login, you enter the callback function with a <code class="highlighter-rouge">response</code> object. The response object has your (or in this case, your user’s) access token.</p>
+
+<p>Line 19 sets a cookie with the access token and line 20 sends the (now authenticated) user to the <code class="highlighter-rouge">/authenticated</code> endpoint.</p>
+
+<p>At this point, Spring Security can recognize the authenticated user. Before we look at how the Spring Security roles work, let’s first see how Spring Security deals with the access token.</p>
+
+<h3 id="spring-security-token-extractor">Spring Security Token Extractor</h3>
+
+<p>By default, the Spring Security OAuth 2.0 plugin processes access tokens coming in on an <code class="highlighter-rouge">Authorization</code> header as a bearer token. This is fine for applications that are creating RESTful responses for clients, such as an Angular client.</p>
+
+<p>For this example, I wanted to keep the architecture and amount of JavaScript minimal, so I wanted full page transitions. This is a little old-school, but it keeps the example code tight and small.</p>
+
+<p>In order for Spring Security to recognize that a user has authenticated, we need it to be able to handle the token coming in on a cookie.</p>
+
+<p>Fortunately, Spring Security makes it pretty easy to override the default behavior by setting a <code class="highlighter-rouge">TokenExtractor</code>. Here’s the code that makes this happen from <code class="highlighter-rouge">OktaSpringSecurityRolesExampleApplication</code>:</p>
+
+<div class="language-java highlighter-rouge"><pre class="highlight"><code><span class="nd">@Bean</span>
+<span class="kd">protected</span> <span class="n">ResourceServerConfigurerAdapter</span> <span class="nf">resourceServerConfigurerAdapter</span><span class="o">()</span> <span class="o">{</span>
+    <span class="k">return</span> <span class="k">new</span> <span class="nf">ResourceServerConfigurerAdapter</span><span class="o">()</span> <span class="o">{</span>
+        <span class="o">...</span>
+        <span class="nd">@Override</span>
+        <span class="kd">public</span> <span class="kt">void</span> <span class="nf">configure</span><span class="o">(</span><span class="n">ResourceServerSecurityConfigurer</span> <span class="n">resources</span><span class="o">)</span> <span class="kd">throws</span> <span class="n">Exception</span> <span class="o">{</span>
+            <span class="n">resources</span><span class="o">.</span><span class="na">tokenExtractor</span><span class="o">(</span><span class="k">new</span> <span class="n">TokenExtractor</span><span class="o">()</span> <span class="o">{</span>
+
+                <span class="nd">@Override</span>
+                <span class="kd">public</span> <span class="n">Authentication</span> <span class="nf">extract</span><span class="o">(</span><span class="n">HttpServletRequest</span> <span class="n">request</span><span class="o">)</span> <span class="o">{</span>
+                    <span class="n">String</span> <span class="n">tokenValue</span> <span class="o">=</span> <span class="n">findCookie</span><span class="o">(</span><span class="n">ACCESS_TOKEN_COOKIE_NAME</span><span class="o">,</span> <span class="n">request</span><span class="o">.</span><span class="na">getCookies</span><span class="o">());</span>
+                    <span class="k">if</span> <span class="o">(</span><span class="n">tokenValue</span> <span class="o">==</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span> <span class="k">return</span> <span class="kc">null</span><span class="o">;</span> <span class="o">}</span>
+
+                    <span class="k">return</span> <span class="k">new</span> <span class="nf">PreAuthenticatedAuthenticationToken</span><span class="o">(</span><span class="n">tokenValue</span><span class="o">,</span> <span class="s">""</span><span class="o">);</span>
+                <span class="o">}</span>
+                <span class="o">...</span>
+            <span class="o">});</span>
+        <span class="o">}</span>
+    <span class="o">};</span>
+<span class="o">}</span>
+</code></pre>
+</div>
+
+<p>All this is doing is pulling the access token from the list of cookies on the incoming request, if it can. The parsing and validation is handled automatically. Pretty neat, eh?</p>
+
+<h3 id="role-based-access-controls">Role Based Access Controls</h3>
+
+<p>In the application setup, you define which paths are open. All other paths require an authenticated session at least.</p>
+
+<p>Here’s another excerpt from <code class="highlighter-rouge">OktaSpringSecurityRolesExampleApplication</code>:</p>
+
+<div class="language-java highlighter-rouge"><pre class="highlight"><code><span class="nd">@Bean</span>
+<span class="kd">protected</span> <span class="n">ResourceServerConfigurerAdapter</span> <span class="nf">resourceServerConfigurerAdapter</span><span class="o">()</span> <span class="o">{</span>
+    <span class="k">return</span> <span class="k">new</span> <span class="nf">ResourceServerConfigurerAdapter</span><span class="o">()</span> <span class="o">{</span>
+
+        <span class="nd">@Override</span>
+        <span class="kd">public</span> <span class="kt">void</span> <span class="nf">configure</span><span class="o">(</span><span class="n">HttpSecurity</span> <span class="n">http</span><span class="o">)</span> <span class="kd">throws</span> <span class="n">Exception</span> <span class="o">{</span>
+            <span class="n">http</span><span class="o">.</span><span class="na">authorizeRequests</span><span class="o">()</span>
+                <span class="o">.</span><span class="na">antMatchers</span><span class="o">(</span><span class="s">"/"</span><span class="o">,</span> <span class="s">"/login"</span><span class="o">,</span> <span class="s">"/images/**"</span><span class="o">).</span><span class="na">permitAll</span><span class="o">()</span>
+                <span class="o">.</span><span class="na">and</span><span class="o">()</span>
+                <span class="o">.</span><span class="na">exceptionHandling</span><span class="o">().</span><span class="na">accessDeniedHandler</span><span class="o">(</span><span class="n">customAccessDeniedHandler</span><span class="o">);</span>
+        <span class="o">}</span>
+        <span class="o">...</span>
+    <span class="o">};</span>
+<span class="o">}</span>
+</code></pre>
+</div>
+
+<p>Here, you are telling Spring Security to let any unauthenticated user access the home page (<code class="highlighter-rouge">/</code>), the login page (<code class="highlighter-rouge">/login</code>), and anything that comes from our static images folder.</p>
+
+<p>You also define a custom access-denied handler. Every other path is automatically locked down by default.</p>
+
+<p>Here’s the <code class="highlighter-rouge">SecureController</code>:</p>
+
+<div class="language-java highlighter-rouge"><pre class="highlight"><code><span class="nd">@Controller</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">SecureController</span> <span class="o">{</span>
+
+    <span class="kd">private</span> <span class="n">AppProperties</span> <span class="n">appProperties</span><span class="o">;</span>
+
+    <span class="kd">public</span> <span class="nf">SecureController</span><span class="o">(</span><span class="n">AppProperties</span> <span class="n">appProperties</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">appProperties</span> <span class="o">=</span> <span class="n">appProperties</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="nd">@RequestMapping</span><span class="o">(</span><span class="s">"/authenticated"</span><span class="o">)</span>
+    <span class="kd">public</span> <span class="n">String</span> <span class="nf">authenticated</span><span class="o">(</span><span class="n">Model</span> <span class="n">model</span><span class="o">)</span> <span class="o">{</span>
+        <span class="n">model</span><span class="o">.</span><span class="na">addAttribute</span><span class="o">(</span><span class="s">"appProperties"</span><span class="o">,</span> <span class="n">appProperties</span><span class="o">);</span>
+        <span class="k">return</span> <span class="s">"authenticated"</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="nd">@RequestMapping</span><span class="o">(</span><span class="s">"/users"</span><span class="o">)</span>
+    <span class="nd">@PreAuthorize</span><span class="o">(</span><span class="s">"hasAuthority('users')"</span><span class="o">)</span>
+    <span class="kd">public</span> <span class="n">String</span> <span class="nf">users</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="s">"roles"</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="nd">@RequestMapping</span><span class="o">(</span><span class="s">"/admins"</span><span class="o">)</span>
+    <span class="nd">@PreAuthorize</span><span class="o">(</span><span class="s">"hasAuthority('admins')"</span><span class="o">)</span>
+    <span class="kd">public</span> <span class="n">String</span> <span class="nf">admins</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="s">"roles"</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="nd">@RequestMapping</span><span class="o">(</span><span class="s">"/403"</span><span class="o">)</span>
+    <span class="kd">public</span> <span class="n">String</span> <span class="nf">error403</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="s">"403"</span><span class="o">;</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre>
+</div>
+
+<p>There are four paths defined in this controller and all require an authenticated user at a minimum. The real value comes in with the <code class="highlighter-rouge">/users</code> and <code class="highlighter-rouge">/admins</code> paths.</p>
+
+<p>Notice that they both have the <code class="highlighter-rouge">@PreAuthorize</code> annotation. This means that the <a href="https://docs.spring.io/spring/docs/current/spring-framework-reference/core.html#expressions">SpringEL</a> expression that follows must be satisfied before the method will even be entered. The <code class="highlighter-rouge">hasAuthority</code> function looks to see if the authenticated user belongs to those roles. In this case, these are automatically mapped to the Okta groups we created earlier. That’s why it was key to ensure that the <code class="highlighter-rouge">groups</code> claim was included in the access token from Okta.</p>
+
+<p>While there was a bit of setup to get to this point, you get role-based access control with one line of code!</p>
+
+<h3 id="end-to-end-configuration">End to End Configuration</h3>
+
+<p>Since the client side is a set of HTML pages in the form of Thymeleaf templates that are served from the application itself, it makes sense to have a single source for configuration values that are needed on both the client and server.</p>
+
+<p>Spring makes this easy with the <code class="highlighter-rouge">@Component</code> and <code class="highlighter-rouge">@ConfigurationProperties</code> annotations.</p>
+
+<p>Here’s the <code class="highlighter-rouge">AppProperties</code> class:</p>
+
+<div class="language-java highlighter-rouge"><pre class="highlight"><code><span class="nd">@Component</span>
+<span class="nd">@ConfigurationProperties</span><span class="o">(</span><span class="s">"okta.oauth"</span><span class="o">)</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">AppProperties</span> <span class="o">{</span>
+    <span class="kd">private</span> <span class="n">String</span> <span class="n">issuer</span><span class="o">;</span>
+    <span class="kd">private</span> <span class="n">String</span> <span class="n">audience</span><span class="o">;</span>
+    <span class="kd">private</span> <span class="n">String</span> <span class="n">clientId</span><span class="o">;</span>
+    <span class="kd">private</span> <span class="n">String</span> <span class="n">rolesClaim</span><span class="o">;</span>
+    <span class="kd">private</span> <span class="n">String</span> <span class="n">baseUrl</span><span class="o">;</span>
+    <span class="kd">private</span> <span class="n">String</span> <span class="n">redirectUri</span><span class="o">;</span>
+
+    <span class="c1">// getters and setters</span>
+<span class="o">}</span>
+</code></pre>
+</div>
+
+<p>The <code class="highlighter-rouge">@ConfigurationProperties</code> tells Spring to pull in all the properties from the <code class="highlighter-rouge">application.yml</code> file that belong to the <code class="highlighter-rouge">okta.oauth</code> key.</p>
+
+<p>The <code class="highlighter-rouge">@Component</code> annotation causes Spring to instantiate this Object and make it available for auto-wiring elsewhere.</p>
+
+<p>Here’s a snippet from the the <code class="highlighter-rouge">HomeController</code>:</p>
+
+<div class="language-java highlighter-rouge"><pre class="highlight"><code><span class="nd">@Controller</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">HomeController</span> <span class="o">{</span>
+
+    <span class="kd">private</span> <span class="n">AppProperties</span> <span class="n">appProperties</span><span class="o">;</span>
+
+    <span class="kd">public</span> <span class="nf">HomeController</span><span class="o">(</span><span class="n">AppProperties</span> <span class="n">appProperties</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">appProperties</span> <span class="o">=</span> <span class="n">appProperties</span><span class="o">;</span>
+    <span class="o">}</span>
+    <span class="o">...</span>
+    <span class="nd">@RequestMapping</span><span class="o">(</span><span class="s">"/login"</span><span class="o">)</span>
+    <span class="kd">public</span> <span class="n">String</span> <span class="nf">login</span><span class="o">(</span><span class="n">Model</span> <span class="n">model</span><span class="o">)</span> <span class="o">{</span>
+        <span class="n">model</span><span class="o">.</span><span class="na">addAttribute</span><span class="o">(</span><span class="s">"appProperties"</span><span class="o">,</span> <span class="n">appProperties</span><span class="o">);</span>
+        <span class="k">return</span> <span class="s">"login"</span><span class="o">;</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre>
+</div>
+
+<p>Before returning the <code class="highlighter-rouge">login</code> view when the <code class="highlighter-rouge">/login</code> endpoint is hit, the <code class="highlighter-rouge">AppProperties</code> object (autowired in on lines 4 &amp; 5) is added to the model.</p>
+
+<p>This is what makes it available to the Thymeleaf template as you saw before:</p>
+
+<div class="language-javascript highlighter-rouge"><pre class="highlight"><code><span class="o">&lt;</span><span class="nx">script</span> <span class="nx">th</span><span class="err">:</span><span class="nx">inline</span><span class="o">=</span><span class="s2">"javascript"</span><span class="o">&gt;</span>
+    <span class="cm">/*&lt;![CDATA[*/</span>
+    <span class="nx">$</span><span class="p">(</span> <span class="nb">document</span> <span class="p">).</span><span class="nx">ready</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+        <span class="kd">var</span> <span class="nx">data</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="na">baseUrl</span><span class="p">:</span> <span class="p">[[</span><span class="nx">$</span><span class="p">{</span><span class="nx">appProperties</span><span class="p">.</span><span class="nx">baseUrl</span><span class="p">}]],</span>
+            <span class="na">clientId</span><span class="p">:</span> <span class="p">[[</span><span class="nx">$</span><span class="p">{</span><span class="nx">appProperties</span><span class="p">.</span><span class="nx">clientId</span><span class="p">}]],</span>
+            <span class="na">redirectUri</span><span class="p">:</span> <span class="p">[[</span><span class="nx">$</span><span class="p">{</span><span class="nx">appProperties</span><span class="p">.</span><span class="nx">redirectUri</span><span class="p">}]],</span>
+            <span class="na">authParams</span><span class="p">:</span> <span class="p">{</span>
+                <span class="na">issuer</span><span class="p">:</span> <span class="p">[[</span><span class="nx">$</span><span class="p">{</span><span class="nx">appProperties</span><span class="p">.</span><span class="nx">issuer</span><span class="p">}]],</span>
+                <span class="na">responseType</span><span class="p">:</span> <span class="p">[</span><span class="s1">'token'</span><span class="p">]</span>
+            <span class="p">}</span>
+        <span class="p">};</span>
+        <span class="nb">window</span><span class="p">.</span><span class="nx">oktaSignIn</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">OktaSignIn</span><span class="p">(</span><span class="nx">data</span><span class="p">);</span>
+        <span class="p">...</span>
+    <span class="p">});</span>
+    <span class="p">...</span>
+    <span class="cm">/*]]&gt;*/</span>
+<span class="o">&lt;</span><span class="sr">/script</span><span class="err">&gt;
+</span></code></pre>
+</div>
+
+<h2 id="get-coding">Get Coding!</h2>
+
+<p>Hopefully you’ve seen the benefit of Okta’s Groups mechanism in conjunction with Spring Security’s role-based access control.</p>
+
+<p>Try it for yourself and let me know how your experience is with it! You can find me on Twitter <a href="https://twitter.com/afitnerd">@afitnerd</a>.</p>
+
+<p>Keep an eye out for upcoming releases of the new Okta Java Spring Boot Integration, which will have support for other OIDC workflows, including <code class="highlighter-rouge">code</code> as well as hosted, configurable login and registration views.</p>
+
+
+	</div>
+	
+</article>
+
+		
+</section>
+
+		
+	</div><footer class="Footer">
+    <div class="Wrap">
+
+        <div class="Row">
+
+            <div class="Column--3 Column--medium-6 Column--xSmall-12">
+
+                <a class="Logo" href="https://www.okta.com/" target="_blank" rel="noopener noreferrer">
+                    <img src="https://developer.okta.com/sites/all/themes/developer/images/logo-footer.png" alt="Okta">
+                    Visit okta.com
+                </a>
+
+            </div>
+
+            <div class="Column--3 Column--medium-12 Column--xSmall-12">
+
+                <h4>Social</h4>
+                <ul class="Footer-links Footer-links--social">
+                    <li><a class="Footer-links--github" target="_blank" rel="noopener noreferrer" href="http://github.com/oktadeveloper">Github</a></li>
+                    <li><a class="Footer-links--twitter" target="_blank" rel="noopener noreferrer" href="http://twitter.com/OktaDev">Twitter</a></li>
+                    <li><a class="Footer-links--forum" target="_blank" rel="noopener noreferrer" href="https://devforum.okta.com/">Forum</a></li>
+                    <li><a class="Footer-links--rss" target="_blank" rel="noopener noreferrer" href="http://feeds.feedburner.com/OktaBlog">RSS Blog</a></li>
+                </ul>
+            </div>
+
+            <div class="Column--3 Column--medium-6 Column--small-12">
+                <h4>More Info</h4>
+                <ul class="Footer-links">
+                    <li><a target="_blank" href="https://developer.okta.com/integrate-with-okta/">Integrate with Okta</a></li>
+                    <li><a href="/blog/">Blog</a></li>
+                    <li><a href="/docs/platform-release-notes/platform-release-notes.html">Release Notes</a></li>
+                    <li><a href="/3rd_party_notices/">3rd Party Notices</a></li>
+                </ul>
+            </div>
+
+            <div class="Column--3 Column--medium-6 Column--small-12">
+                <h4>Contact &amp; Legal</h4>
+                <ul class="Footer-links">
+                    <li><a href="https://developer.okta.com/contact/">Contact Sales</a></li>
+                    <li><a target="_blank" rel="noopener noreferrer" href="mailto:developers@okta.com">Contact Support</a></li>
+                    <li><a href="https://developer.okta.com/terms/">Terms &amp; Conditions</a></li>
+                    <li><a href="https://developer.okta.com/privacy/">Privacy Policy</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</footer>
+
+    <script type="text/javascript" src="/assets/master-0365dd27cf276cb2a15c0a43906ca592538204cf1ad4557547bf4e50609b411e.js"></script>
+    <script type="text/javascript" src="/assets/myOkta-911cbafbbe079b7a5522d9cbe15bd2a5f44e1582531e88393934bec69f97696b.js"></script>
+    
+    
+    
+    
+      <script type="text/javascript" src="/assets/blog-6e32dad27404131cc8630a5282264bed2ab4c08c91ac86fa496b75c53aa4f681.js"></script>
+    
+
+  <!-- START Post Footer -->
+  
+  <!-- START Google Tag Manager -->
+  <!-- https://support.google.com/tagmanager/answer/6103696?hl=en -->
+  <noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-TJ45R6" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+  <!-- END Google Tag Manager -->
+  <!-- START Google Remarketing Tag -->
+  <script type="text/javascript">
+    /* <![CDATA[ */
+    var google_conversion_id = 1006913831;
+    var google_custom_params = window.google_tag_params;
+    var google_remarketing_only = true;
+    /* ]]> */
+  </script>
+  <div style="display:none;"><script type="text/javascript" src="//www.googleadservices.com/pagead/conversion.js"></script></div>
+  <noscript><div style="display:inline;"><img height="1" width="1" style="border-style:none;" alt="" src="//googleads.g.doubleclick.net/pagead/viewthroughconversion/1006913831/?value=0&amp;guid=ON&amp;script=0"></div></noscript>
+  <!-- END Google Remarketing Tag -->
+  <!-- START Crazy Egg Tracking -->
+  <script type="text/javascript">
+    setTimeout(function(){var a=document.createElement("script");
+    var b=document.getElementsByTagName("script")[0];
+    a.src=document.location.protocol+"//script.crazyegg.com/pages/scripts/0021/9333.js?"+Math.floor(new Date().getTime()/3600000);
+    a.async=true;a.type="text/javascript";b.parentNode.insertBefore(a,b)}, 1);
+  </script>
+  <!-- END Crazy Egg Tracking -->
+
+  <!-- END Post Footer -->
+</body>
+</html>

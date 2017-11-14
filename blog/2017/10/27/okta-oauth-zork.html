@@ -1,0 +1,679 @@
+<!doctype html>
+<!--[if lt IE 7 ]> <html class="ie6 no-flexbox"> <![endif]-->
+<!--[if IE 7 ]>    <html class="ie7 no-flexbox"> <![endif]-->
+<!--[if IE 8 ]>    <html class="ie8 no-flexbox"> <![endif]-->
+<!--[if IE 9 ]>    <html class="ie9 no-flexbox"> <![endif]-->
+<!--[if IE 10 ]>    <html class="ie10 no-flexbox"> <![endif]-->
+<!--[if (gt IE 10)|!(IE)]><!--> <html class="modern wf-loading" lang="en"> <!--<![endif]-->
+  <head>
+  <script>
+    var searchDomain = 'https://developer.okta.com';
+    var isProduction = window.location.hostname === 'developer.okta.com';
+    if (isProduction) {
+      // TypeKit
+      (function(d) {
+        var config = {
+          kitId: 'jff5neq',
+          scriptTimeout: 3000,
+          async: true
+        },
+        h=d.documentElement,t=setTimeout(function(){h.className=h.className.replace(/bwf-loadingb/g,"")+" wf-inactive";},config.scriptTimeout),tk=d.createElement("script"),f=false,s=d.getElementsByTagName("script")[0],a;h.className+=" wf-loading";tk.src='https://use.typekit.net/'+config.kitId+'.js';tk.async=true;tk.onload=tk.onreadystatechange=function(){a=this.readyState;if(f||a&&a!="complete"&&a!="loaded")return;f=true;clearTimeout(t);try{Typekit.load(config)}catch(e){}};s.parentNode.insertBefore(tk,s)
+      })(document);
+
+      // Google analytics
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+              (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+              m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+      ga('create', 'UA-15777010-3', 'auto');
+      ga('send', 'pageview');
+
+      // START Google Tag Manager
+      (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+      new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+      j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+      '//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+      })(window,document,'script','dataLayer','GTM-TJ45R6');
+      // END Google Tag Manager
+    }
+	</script>
+  <meta charset="utf-8">
+  <meta http-equiv="x-ua-compatible" content="IE=edge,chrome=1">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+ 	
+
+  <link type="text/css" rel="stylesheet" href="https://developer.okta.com/sites/all/themes/developer/css/master.css" media="all" />
+  <meta class="swiftype" name="title" data-type="string" content="Play Zork, Learn OAuth | Okta Developer" />
+  <meta class="swiftype" name="summary" data-type="string" content="" />
+
+  <link type="text/css" rel="stylesheet" href="/assets/animate-ec43d72c3ed45e08a460b8a2966d8dba6006aebfa0530935c3973fa493a8771f.css">
+  <link type="text/css" rel="stylesheet" href="/assets/okta-a96df4c9d48b78b618e1d541f46f7137d73d40653571e020c1ad59edd7915c60.css">
+  
+  
+  <title>Play Zork, Learn OAuth | Okta Developer</title>
+  <meta name="description" content="">
+  <link rel="canonical" href="https://developer.okta.com/blog/2017/10/27/okta-oauth-zork"  data-proofer-ignore>
+  <link rel="alternate" type="application/rss+xml" title="Okta Developer" href="https://developer.okta.com/feed.xml"><!-- GA -->
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+  <link rel="manifest" href="/manifest.json">
+  <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#21313a">
+  <meta name="theme-color" content="#ffffff">
+</head>
+
+  
+    <body id="blog">
+	
+
+
+
+
+<header class="Header is-fixed">
+
+  <div class="Wrap">
+
+    <a class="Logo" href="https://developer.okta.com">
+      <svg version="1.1" id="OktaLogo" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 431.9 151.4" style="enable-background:new 0 0 431.9 151.4;" xml:space="preserve"><g><g><g><path d="M102.2,41.4c-21,0-38.1,17.1-38.1,38.1s17.1,38.1,38.1,38.1s38.1-17.1,38.1-38.1l0,0C140.3,58.5,123.2,41.4,102.2,41.4z M102.2,98.5c-10.5,0-19-8.5-19-19s8.5-19,19-19s19,8.5,19,19c0.1,10.5-8.4,19-18.9,19.1C102.3,98.6,102.2,98.6,102.2,98.5L102.2,98.5z"/><path d="M169.1,92.3c0-1.9,1.5-3.4,3.4-3.4c0.9,0,1.8,0.4,2.4,1c9.5,9.7,25.3,26.3,25.4,26.4c0.4,0.5,0.8,0.8,1.4,0.9l1.6,0.2h17.2c1.8,0,3.3-1.4,3.4-3.2c0-0.8-0.3-1.5-0.8-2.2l-28.6-29.2l-1.5-1.5c-3.2-3.9-2.9-5.4,0.8-9.3l22.6-25.1c1.1-1.4,0.8-3.5-0.6-4.6c-0.6-0.4-1.3-0.7-2-0.7h-17c-0.6,0.2-1.1,0.5-1.5,0.9L175,64.4c-1.3,1.4-3.4,1.5-4.8,0.2c-0.7-0.6-1.1-1.5-1.1-2.5V18.9c0-1.7-1.3-3-3-3c-0.1,0-0.2,0-0.3,0h-12.7c-2.2,0-3.3,1.5-3.3,2.8v95.8c0,2.2,1.8,2.8,3.3,2.8h12.7c1.7,0.1,3.2-1.2,3.3-2.9c0,0,0,0,0,0V92.3z"/><path d="M273,114l-1.4-12.8c-0.2-1.7-1.7-2.9-3.4-2.7c0,0,0,0-0.1,0l-2.9,0.2c-10.1,0-18.5-7.9-19-18c0-0.3,0-0.7,0-1V64.2c-0.1-2,1.5-3.6,3.5-3.7c0,0,0,0,0,0h17c1.7-0.1,3.1-1.5,3-3.2c0,0,0-0.1,0-0.1v-12c0-2.3-1.5-3.6-2.8-3.6h-17.1c-1.9,0.1-3.5-1.5-3.6-3.4c0,0,0,0,0,0V18.9c-0.1-1.7-1.5-3.1-3.2-3c0,0-0.1,0-0.1,0h-12.7c-1.6-0.1-3,1.1-3.1,2.7c0,0.1,0,0.1,0,0.2c0,0,0,61.7,0,62c0.5,21,17.9,37.6,38.9,37c1.4,0,2.9-0.2,4.3-0.3C272,117.2,273.2,115.7,273,114z"/></g><path d="M364.7,98c-10.8,0-12.4-3.8-12.4-18.3l0,0V44.8c0-1.8-1.4-3.2-3.2-3.2c0,0-0.1,0-0.1,0h-12.8c-1.8,0-3.2,1.4-3.3,3.2v1.6C314.6,36,291.3,42.5,281,60.8c-10.4,18.3-3.9,41.6,14.4,51.9c14,7.9,31.4,6.2,43.5-4.2c3.6,5.5,9.3,9.1,18.3,9.1c1.5,0,9.7,0.3,9.7-3.5v-13.6C367,99.2,366,98.1,364.7,98z M314.2,98.6c-10.5,0-19-8.5-19-19s8.5-19,19-19s19,8.5,19,19l0,0C333.2,90.1,324.7,98.6,314.2,98.6z"/></g><path d="M19.4,74c2.2-1.9,4.1-4.1,5.7-6.6c3.5-5.3,5.4-11.5,5.2-17.9V27c0-4.9,0.9-8.4,2.7-10.5c1.8-2.1,4.8-3,9.2-3h12.6c1.2,0,2.1-0.9,2.2-2.1l0,0V2.2C57,1,56,0,54.8,0c0,0,0,0,0,0H41.5c-7.8,0-12.9,2.1-18,7.6s-7.1,12.3-7.1,21.7v14.2c0,2.2-0.1,4-0.2,5.7v2.2c-0.5,3.2-1.8,6.2-3.6,8.9C9.4,64.7,5.1,70.9,0.9,74l0,0l-0.3,0.3l0,0l-0.2,0.3H0.2v0.3l0,0c-0.1,0.3-0.1,0.7,0,1l0,0v0.3h0.1l0.2,0.3l0,0l0.3,0.3l0,0c4.2,3.1,8.5,9.3,11.3,13.7c1.8,2.7,3.1,5.7,3.6,8.9v2.2c0.1,1.6,0.2,3.5,0.2,5.7v14.3c0,9.4,2.4,16.7,7.1,21.7s10.2,7.6,18,7.6h13.8c1.2,0,2.2-1,2.2-2.2V140l0,0c0-1.2-1-2.2-2.2-2.2H42.2c-4.4,0-7.5-1-9.2-3s-2.7-5.6-2.7-10.5v-22.4c0.2-6.4-1.7-12.6-5.2-17.9c-1.6-2.5-3.5-4.7-5.7-6.6l0,0c-0.9-0.7-1.1-2-0.4-2.9C19.2,74.3,19.3,74.2,19.4,74L19.4,74z"/><path d="M412.5,74c-2.2-1.9-4.1-4.1-5.7-6.6c-3.5-5.3-5.4-11.5-5.2-17.9V27c0-4.9-0.9-8.4-2.7-10.5s-4.8-3-9.2-3h-12.6c-1.2,0-2.2-1-2.2-2.2c0,0,0,0,0,0l0,0V2.2c0-1.2,1-2.2,2.2-2.2c0,0,0,0,0,0h13.4c7.8,0,12.9,2.1,18,7.6s7.1,12.3,7.1,21.7v14.2c0,2.2,0.1,4,0.2,5.7v2.2c0.5,3.2,1.8,6.2,3.6,8.9c2.8,4.5,7.1,10.7,11.3,13.7l0,0l0.3,0.3l0,0l0.2,0.3h0.1v0.3l0,0c0.1,0.3,0.1,0.7,0,1l0,0v0.3h-0.1l-0.2,0.3l0,0l-0.3,0.3l0,0c-4.2,3.1-8.5,9.3-11.3,13.7c-1.8,2.7-3.1,5.7-3.6,8.9v2.2c-0.1,1.6-0.2,3.5-0.2,5.7v14.3c0,9.4-2.4,16.7-7.1,21.7s-10.2,7.6-18,7.6h-13.4c-1.2,0-2.2-1-2.2-2.2c0,0,0,0,0,0V140l0,0c0-1.2,1-2.2,2.2-2.2l0,0h12.7c4.4,0,7.5-1,9.2-3s2.7-5.6,2.7-10.5v-22.4c-0.2-6.3,1.6-12.6,5.1-17.9c1.6-2.5,3.5-4.7,5.7-6.6l0,0c0.9-0.7,1.1-2,0.4-2.9C412.7,74.3,412.6,74.2,412.5,74L412.5,74z"/></g></svg>
+    </a>
+
+    <nav class="Header-nav PrimaryNav">
+      <ul class="menu">
+        <li class="first leaf">
+          <a href="https://developer.okta.com/product/">Product</a>
+        </li>
+        <li class="leaf">
+          <a href="https://developer.okta.com/pricing/">Pricing</a>
+        </li>
+        <li class="leaf">
+          <a href="/blog/" class="active">Blog</a>
+        </li>
+        <li class="leaf">
+          <a href="/documentation/">Docs</a>
+        </li>
+        <li class="last expanded">
+          <span class="nolink">Support</span>
+          <ul class="menu">
+            <li class="first leaf"><a href="https://devforum.okta.com/">Okta Developer Forums</a></li>
+            <li class="last leaf"><a href="mailto:developers@okta.com">developers@okta.com</a></li>
+          </ul>
+        </li>
+      </ul>
+      <a class="PrimaryNav-toggle" href="#">
+        <svg width="20px" height="20px" viewBox="0 0 20 20" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+            <g class="MenuIcon" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="round">
+                <path d="M1,16 L19,16" class="MenuIcon-line1" stroke="#FFFFFF" stroke-width="2"></path>
+                <path d="M1,4 L19,4" class="MenuIcon-line2" stroke="#FFFFFF" stroke-width="2"></path>
+                <path d="M1,10 L19,10" class="MenuIcon-line3" stroke="#FFFFFF" stroke-width="2"></path>
+                <path d="M1,10 L19,10" class="MenuIcon-line4" stroke="#FFFFFF" stroke-width="2"></path>
+            </g>
+        </svg>
+        <svg class="CloseIcon" width="16px" height="16px" viewBox="0 0 16 16" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+          <g id="ALl-Boards" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+            <g id="Desktop" transform="translate(-915.000000, -235.000000)" fill="#FFFFFF">
+              <g id="Search-bar-Active" transform="translate(30.000000, 26.000000)">
+                <polygon id="Icon/Cross" points="901 210.6 899.4 209 893 215.4 886.6 209 885 210.6 891.4 217 885 223.4 886.6 225 893 218.6 899.4 225 901 223.4 894.6 217"></polygon>
+              </g>
+            </g>
+          </g>
+        </svg>
+      </a>
+
+      <div class="PrimaryNav-cta">
+        <a target="_blank" rel="noopener noreferrer" href="https://login.okta.com/?SAMLRequest=fc%2B7CsJAEAXQXvAflu1NNJUMeZBGELTx1a%2FrYILJTtyZGD%2FfSBRiYzlw77lMnD3rSj3Qc0ku0YtgrhU6S5fSXRN9PKxmS52l00nMpq6iBvJWCrfDe4ss6vStRe9aDzmGIZfo1jsgwyWDMzUyiIV9vt1AH4XGk5ClSvewUgMNa%2BYW%2FVj5jxhm9NLP67QQaSAMu64L6CYmsFSHlnzT4ZlLwTgcL6Sf8%2FeX9AU%3Dhttps://login.okta.com/?SAMLRequest=fc%2B7CsJAEAXQXvAflu1NNJUMeZBGELTx1a%2FrYILJTtyZGD%2FfSBRiYzlw77lMnD3rSj3Qc0ku0YtgrhU6S5fSXRN9PKxmS52l00nMpq6iBvJWCrfDe4ss6vStRe9aDzmGIZfo1jsgwyWDMzUyiIV9vt1AH4XGk5ClSvewUgMNa%2BYW%2FVj5jxhm9NLP67QQaSAMu64L6CYmsFSHlnzT4ZlLwTgcL6Sf8%2FeX9AU%3D" class="Button--redOutline">Login</a>
+        <a href="https://developer.okta.com/signup/" class="Button--red">Sign up</a>
+      </div>
+
+      <a class="SearchIcon" href="#"></a>
+      <form id="form_search" class="SearchBar Formisimo_clocked_69929" method="get" action="https://developer.okta.com/search/" name="form_search" __bizdiag="-784164280" __biza="WJ__">
+        <input type="text" name="stq" autocomplete="off" id="st-search-input-auto" class="st-search-input" placeholder="Search">
+        <input type="submit" name="submit" value="GO">
+      </form>
+
+    </nav>
+
+  </div>
+
+</header>
+
+	<div class="page-content">
+		
+
+
+
+
+
+
+<section class="Blog is-single">
+		
+	<div class="Blog-social">
+		
+		<a href="https://github.com/dogeared" target="_blank"><i class="fa fa-github"></i></a>
+		
+		
+		<a href="https://twitter.com/afitnerd" target="_blank"><i class="fa fa-twitter"></i></a>
+		
+		
+		
+		<a href="https://afitnerd.com" target="_blank"><i class="fa fa-external-link"></i></a>
+		
+	</div>
+	
+	
+
+<article class="BlogPost">
+	
+	<header class="BlogPost-header">
+	
+		<time class="BlogPost-date" datetime="2017-10-27">October 27, 2017</time>
+		
+		<h1 class="BlogPost-title">
+			
+			Play Zork, Learn OAuth
+			
+		</h1>
+		
+		<div class="BlogPost-attribution">
+			
+				<img src="/assets/avatar-dogeared-faf0ce7b6d3e6b9207b916b1f999135729f64a3f2988107e5bc8bf82e31a6d4a.jpg" alt="avatar-dogeared.jpg" class="BlogPost-avatar">
+			
+			<span class="BlogPost-author">Micah Silverman</span>
+		</div>
+	
+	</header>
+	
+	<div class="BlogPost-content">
+		
+	<p><img src="/assets/blog/okta-oauth-zork/zork-06b93a624abcd13a4a58e69fe756002e053a2aa942f5144b98afb95bc35be553.jpg" alt="Default AS" width="150" align="right" /></p>
+
+<p>In the early ‘80s, some of the best “video” games were text-based adventures. These games would print out descriptive text of your surroundings and you would interact with the game using simple, but natural language commands like: “go north” or “take sword”. Fast forward some 30 years and a specification for an authorization framework called <a href="https://oauth.net/2/">OAuth 2.0</a> was published. This framework allows an application to receive a token from an external party (like <a href="https://okta.com">Okta</a>) that indicates a user is authorized to use the application. What do these two things have in common? Absolutely nothing. But, I thought it would be fun to mash them together to demonstrate how OAuth works by playing a text-based game.</p>
+
+<p><a href="http://www.infocom-if.org/company/company.html">Infocom</a> was a popular producer of text-based games and they standardized a file format and interpreter for them called <a href="https://en.wikipedia.org/wiki/Z_machine">zMachine</a>. There’s a great <a href="http://zmpp.sourceforge.net/">zMachine interpreter written in Java</a>. I incorporated this into a Spring Boot / Spring Security application that interacts with Okta for OAuth so that you can play <a href="https://en.wikipedia.org/wiki/Zork">Zork</a> - one of the most iconic of these games. The application is available on the <a href="https://github.com/oktadeveloper/okta-zork-oauth-example">Okta Developer Github account</a>.</p>
+
+<p>Let’s jump right in so you can see it in action and then we’ll break down how everything works.</p>
+
+<h2 id="play-zork-in-3-clicks">Play Zork in 3 Clicks</h2>
+
+<p>Navigate to: <a href="https://okta-oidc-fun.herokuapp.com">https://okta-oidc-fun.herokuapp.com</a>. Click <code class="highlighter-rouge">token</code>. Then, click the link at the bottom of the page. (It starts with: <code class="highlighter-rouge">https://micah.okta.com/oauth2/aus2yrcz7aMrmDAKZ1t7/v1/authorize</code>.)</p>
+
+<p>You should see an <code class="highlighter-rouge">Access Token</code> and a button that says: <code class="highlighter-rouge">Game With Your Access Token</code>. Click that. Now, you’ll be at the page where you can play Zork!</p>
+
+<p><img src="/assets/blog/okta-oauth-zork/token-2eec9a345b04ad55831a2b6d51895b8d91158c257c5574fcea5204bf77c9a0dc.png" alt="Default AS" width="700" class="center-image" /></p>
+
+<p><img src="/assets/blog/okta-oauth-zork/zork1-b6b40b7cad789c4691c19b68179e58cd3afa3d86ec7e178243887b79aba5b748.png" alt="Default AS" width="700" class="center-image" /></p>
+
+<p>Enter a command in the text field and hit enter to send it. You should see a response from the game in JSON form above it. Try clicking <code class="highlighter-rouge">Use Access Token</code> and sending a command. You’ll get back a <code class="highlighter-rouge">Unauthorized</code> message.</p>
+
+<p>Without the presence of the access token, the application can’t tell that you’re an authorized game player and rejects the request.</p>
+
+<p>In the spirit of the game, you can choose your own adventure:</p>
+
+<ul>
+  <li><a href="#what-the-heck-is-oauth">Learn a little more about OAuth</a></li>
+  <li><a href="#deploy-okta-zork-oauth-to-heroku">Deploy the application and user your own Okta Tenant</a></li>
+  <li><a href="#spring-boot--spring-security--okta--easy-oauth">Dive into the code</a></li>
+</ul>
+
+<h2 id="what-the-heck-is-oauth">What the Heck is OAuth?</h2>
+
+<p>My colleague at Okta wrote a great in-depth <a href="https://developer.okta.com/blog/2017/06/21/what-the-heck-is-oauth">post that defines what OAuth is and is not</a>. Here, we’ll cover the important points.</p>
+
+<p>OAuth is a standard that apps can use to provide client applications with “secure delegated access”. It works over HTTPS and authorizes devices, APIs, servers, and applications with access tokens rather than credentials.</p>
+
+<p>An application obtains an access token through an interaction that usually involves authentication with an external provider. This is often referred to as <em>federated identity</em>. This token then represents you making it so that you don’t have to provide your username and password to the external provider on every request. Tokens used in this way are called <code class="highlighter-rouge">bearer</code> tokens. This is because all that’s needed to gain access to the application is to present the token. That’s why it’s important that applications safeguard tokens and don’t <em>leak</em> them accidentally.</p>
+
+<p>Note, there are two version of OAuth: <a href="https://oauth.net/core/1.0a/">1.0a</a> and <a href="https://oauth.net/2/">2.0</a>. Version 2.0 is the most commonly used nowadays. Anywhere throughout this post that you see OAuth, I’m talking about OAuth 2.0.</p>
+
+<p>Once you establish trust with an external provider and that provider is issuing tokens, you can easily make the leap to single sign-on (SSO). For instance, you can have two applications backed by the same external provider for authentication. Both applications can make use of an access token from the external provider without the user having to reauthenticate.</p>
+
+<p>There are a number of <em>authorization flows</em> used in OAuth. This post focuses on the <em>implicit</em> flow. The way the implicit flow works is:</p>
+
+<ol>
+  <li>The user attempts to access a protected resource (like: <code class="highlighter-rouge">/v1/game</code>)</li>
+  <li>The user is redirected to an external identity provider to authenticate (like Okta)</li>
+  <li>Upon successful authentication, the user is redirected back to the application with an access token</li>
+  <li>The application verifies the access token and if valid, allows the user access to the protected resource</li>
+</ol>
+
+<p>This flow is what’s happening in the previous section. You might be saying to yourself, “But, wait - I didn’t have to login”. Well, that’s because in an effort to keep the example super simple, the application establishes a session in the background using a fixed username and password.</p>
+
+<p>Here’s what’s happening behind the scenes as you navigate through the <a href="https://okta-oidc-fun.herokuapp.com">OIDC Playground</a> above:</p>
+
+<p><img src="/assets/blog/okta-oauth-zork/okta-oidc-fun-zork-afea8e83ceeeb5023da731c8f024a2b035d81f0f868d5687432219d44fc626c7.png" alt="Default AS" width="700" class="center-image" /></p>
+
+<p>You may be wondering why the first column in this sequence diagram is labeled with OIDC. That stands for <a href="http://openid.net/connect/">OpenID Connect</a>. The truth is, the application running on Okta is an OIDC application. A full treatment of OIDC is outside the scope of this post. All you need to know for now is that OIDC is a superset of OAuth 2.0. That is, if it’s an OIDC app, OAuth is supported.</p>
+
+<p>The <code class="highlighter-rouge">/authorize…</code> line kicks off the OAuth interaction. The user authenticates with Okta and, if successful, Okta redirects back with an access token.</p>
+
+<p>The <code class="highlighter-rouge">OIDC-FUN</code> app then makes an <a href="https://en.wikipedia.org/wiki/Ajax_(programming)">ajax</a> request to the <code class="highlighter-rouge">ZORK-OAUTH</code> app using the access token to represent the user’s identity. In this way, we are achieving SSO of a sort. The Zork app verifies the token and, if correct, extracts the user identity information and processes the command (if any) that was sent. It also uses the user identity information to save the game state back to Okta.</p>
+
+<p>The <code class="highlighter-rouge">ZORK-OAUTH</code> app interacts with Okta at startup. Those are the top two lines. Based on your configuration, a <a href="https://tools.ietf.org/html/rfc7517">JSON Web Key Set</a> is retrieved. The JSON response is an array of available public keys configured in Okta. This enables verifying the cryptographically signed access token (in the form of a JWT) down the line. This is not explicitly part of the OAuth 2.0 specification, but it is part of the <a href="https://openid.net/specs/openid-connect-discovery-1_0.html">OIDC Discovery</a> specification that Okta has implemented.</p>
+
+<p>Let’s set up your very own Okta Developer Account and deploy the Zork application to it. You can see the OAuth implicit flow fully in action. Then, we’ll dig into the code.</p>
+
+<h2 id="set-up-your-okta-developer-account">Set Up Your Okta Developer Account</h2>
+<p>In this section, we’ll get everything set up in Okta so you can deploy the <a href="https://github.com/oktadeveloper/okta-zork-oauth-example">Okta Zork Auth</a> app. Here’s a summary of the steps:</p>
+
+<ol>
+  <li>Sign up for a free Okta developer account</li>
+  <li>Add a web application that supports the OAuth implicit flow</li>
+  <li>Update the Okta profile schema to support saving game state</li>
+  <li>Create an API token for saving game state to a user profile</li>
+</ol>
+
+<p>Navigate to <a href="https://developer.okta.com">https://developer.okta.com</a> to set up your developer account. You’ll receive a confirmation email with a link. Follow the link to finish setup. You’ll then be at your Admin Console.</p>
+
+<p>Click <strong>Applications</strong> along the top menu and click <strong>Add Application</strong>.</p>
+
+<p><img src="/assets/blog/okta-oauth-zork/applications-1-6184c6e8d80f5065ea7b880f827926247037112098e37ec692d8f5d852ccf812.png" alt="Default AS" width="700" class="center-image" /></p>
+
+<p>Choose <strong>Web</strong> and then click <em>*Next</em>.</p>
+
+<p>Later, you’ll be deploying the Zork application to Heroku. Fill in the values for <strong>Base-URIs</strong> and <strong>Login redirect URIs</strong> that match your Heroku app name. That is, if you name your Heroku app: <code class="highlighter-rouge">okta-zork-test</code>, the URL will be: https://okta-zork-test.herokuapp.com</p>
+
+<p><img src="/assets/blog/okta-oauth-zork/applications-3-c4414e5bbd555e97bfc7be5f564a666cffe4f0336ddec860bebd308d256e1e66.png" alt="Default AS" width="700" class="center-image" /></p>
+
+<p>If you scroll to the bottom, you’ll see a <strong>Client ID</strong>. Save this value somewhere as we’ll be using it later to configure Heroku.</p>
+
+<p>As you make your way through Zork, the application saves your game state. This makes it so that when you come back to the game, you can pick up where you left off. Rather than add another moving part to the application in the form of a database, I took advantage of Okta’s profile schema capability. In short, you can add any number of key/value pairs to the default user profile. In this case, I added <code class="highlighter-rouge">zMachineData</code>. It’s a string type field and the app will store your game state as a base64-encoded string. To add that profile schema attribute, do the following:</p>
+
+<p>Select <strong>Users</strong> -&gt; <strong>Profile Editor</strong> from the main menu of your Admin Console. Click <strong>Profile</strong> next to <strong>User</strong>.</p>
+
+<p><img src="/assets/blog/okta-oauth-zork/profile-2-b10ad2a8ff0ce9d50b6717ab6682a1028fc743afb4f51776f82ae870b46bbb53.png" alt="Default AS" width="700" class="center-image" /></p>
+
+<p>Click <strong>Add Attribute</strong>. Enter <code class="highlighter-rouge">zMachineData</code> for the <strong>Display name</strong> and <strong>Variable name</strong> fields. Click <strong>Save</strong>. That’s all there is to it! Now, every user in your tenant has a <code class="highlighter-rouge">zMachineData</code> attribute on their profile.</p>
+
+<p>The last thing we need to do is create an API token. This enables the application to save the game state to the authenticated user’s profile.</p>
+
+<p>Choose <strong>API</strong> -&gt; <strong>Tokens</strong> from the main menu of your Admin Console. Click <strong>Create Token</strong>. Give it a name and click <strong>Create Token</strong>.</p>
+
+<p><img src="/assets/blog/okta-oauth-zork/token-4-ba3c4e9f89b1a00ba498cb621d3a1d238d037f974d9bb1d20aaeeffa0591204d.png" alt="Default AS" width="700" class="center-image" /></p>
+
+<p>Save the token value somewhere. You’ll need it later when you deploy the app to Heroku. The token value is only ever showed once on this screen, so make sure you save it.</p>
+
+<p>Now that you’ve got everything setup on the Okta, side. Let’s deploy the application to your own Heroku instance. After that, we’ll dig into the code.</p>
+
+<h2 id="deploy-okta-zork-oauth-to-heroku">Deploy Okta Zork OAuth to Heroku</h2>
+
+<p>Heroku makes it exceedingly easy to deploy Spring Boot applications. In fact, they even provide a handy deploy button where all you have to do is log in to Heroku, enter some configuration parameters, and go! If you haven’t already, go and <a href="https://www.heroku.com/">create a Heroku account</a>. It’s free.</p>
+
+<p>Next, click this:</p>
+
+<p><a href="https://heroku.com/deploy?template=https://github.com/oktadeveloper/okta-zork-oauth-example"><img src="https://www.herokucdn.com/deploy/button.svg" alt="Deploy" /></a></p>
+
+<p>You’ll need some information to properly configure the app (you can leave the <code class="highlighter-rouge">OKTA_AUDIENCE</code> and <code class="highlighter-rouge">OKTA_AUTH_SERVER_ID</code> defaults as-is):</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Environment Variable</th>
+      <th>Example</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>App Name</td>
+      <td>The base name of what you set above, like: <code class="highlighter-rouge">okta-zork-test</code></td>
+    </tr>
+    <tr>
+      <td>OKTA_ORG_URL</td>
+      <td>https://micah.okta.com</td>
+    </tr>
+    <tr>
+      <td>OKTA_API_TOKEN</td>
+      <td>saved from before</td>
+    </tr>
+    <tr>
+      <td>OKTA_CLIENT_ID</td>
+      <td>saved from before</td>
+    </tr>
+    <tr>
+      <td>OKTA_AUDIENCE</td>
+      <td>api://default</td>
+    </tr>
+    <tr>
+      <td>OKTA_AUTH_SERVER_ID</td>
+      <td>default</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>Click <strong>Deploy App</strong>. Once it’s finished deploying, you should be able to browse to: http://<App Name="">.herokuapp.com and see the app in action using your own users from your Okta tenant.</App></p>
+
+<p><img src="/assets/blog/okta-oauth-zork/zork2-4aa5686b0ca79bf9c8631864ff55e12af23f4c1cf5bc32c12e7b46398ea22bdc.png" alt="Default AS" width="700" class="center-image" /></p>
+
+<h2 id="spring-boot--spring-security--okta--easy-oauth">Spring Boot + Spring Security + Okta = Easy OAuth</h2>
+
+<p>The code for the Zork application is hosted on the <a href="https://github.com/oktadeveloper/okta-zork-oauth-example">Okta Developer Github</a>.</p>
+
+<p>The great thing is that this is just a vanilla Spring Boot with Spring Security app. It uses the Okta Spring Security starter, which hooks into the normal mechanisms of the Spring framework. The end result is that there’s is <em>no</em> additional code as relates to authentication. And, there’s only a few lines of Okta-specific code for saving game state. Let’s take a look.</p>
+
+<p>The home page has a <strong>Zork It Up!</strong> link. Here’s a snippet from <code class="highlighter-rouge">home.html</code></p>
+
+<div class="language-html highlighter-rouge"><pre class="highlight"><code><span class="nt">&lt;a</span> <span class="na">th:href=</span><span class="s">"@{${userAuthorizationUri}(
+    client_id=${clientId},
+    response_type=token,
+    scope=openid,
+    redirect_uri=${redirectUri},
+    nonce=${nonce},
+    state=${state}
+)}"</span> <span class="na">class=</span><span class="s">"btn btn-primary"</span><span class="nt">&gt;</span>Zork It Up!<span class="nt">&lt;/a&gt;</span>
+</code></pre>
+</div>
+
+<p>It’s using values pulled out of the model to substitute in for the Thymeleaf template. Thymeleaf has a handy format for specifying a url with query parameters:</p>
+
+<p><code class="highlighter-rouge">&lt;a th:href=”@{URL(param1=value1, param2=value2, ...)}”&gt;...&lt;/a&gt;</code></p>
+
+<p>This ends up being rendered as:</p>
+
+<p><code class="highlighter-rouge">&lt;a href=”URL?param1=value1&amp;param2=value2”&gt;...&lt;/a&gt;</code></p>
+
+<p>And, as you can see above, the URL can be a variable reference.</p>
+
+<p>In the <code class="highlighter-rouge">HomeController</code>, these values are set <code class="highlighter-rouge">home</code> method:</p>
+
+<div class="language-java highlighter-rouge"><pre class="highlight"><code><span class="nd">@RequestMapping</span><span class="o">(</span><span class="s">"/"</span><span class="o">)</span>
+<span class="kd">public</span> <span class="n">String</span> <span class="nf">home</span><span class="o">(</span><span class="n">HttpServletRequest</span> <span class="n">req</span><span class="o">,</span> <span class="n">Model</span> <span class="n">model</span><span class="o">)</span> <span class="o">{</span>
+    <span class="n">model</span><span class="o">.</span><span class="na">addAttribute</span><span class="o">(</span><span class="s">"clientId"</span><span class="o">,</span> <span class="n">clientId</span><span class="o">);</span>
+    <span class="n">model</span><span class="o">.</span><span class="na">addAttribute</span><span class="o">(</span><span class="s">"userAuthorizationUri"</span><span class="o">,</span> <span class="n">issuer</span> <span class="o">+</span> <span class="s">"/v1/authorize"</span><span class="o">);</span>
+    <span class="n">model</span><span class="o">.</span><span class="na">addAttribute</span><span class="o">(</span><span class="s">"redirectUri"</span><span class="o">,</span> <span class="n">req</span><span class="o">.</span><span class="na">getRequestURL</span><span class="o">());</span>
+    <span class="n">model</span><span class="o">.</span><span class="na">addAttribute</span><span class="o">(</span><span class="s">"nonce"</span><span class="o">,</span> <span class="n">UUID</span><span class="o">.</span><span class="na">randomUUID</span><span class="o">().</span><span class="na">toString</span><span class="o">());</span>
+    <span class="n">model</span><span class="o">.</span><span class="na">addAttribute</span><span class="o">(</span><span class="s">"state"</span><span class="o">,</span> <span class="n">UUID</span><span class="o">.</span><span class="na">randomUUID</span><span class="o">().</span><span class="na">toString</span><span class="o">());</span>
+
+    <span class="k">return</span> <span class="s">"home"</span><span class="o">;</span>
+<span class="o">}</span>
+</code></pre>
+</div>
+
+<p>The rendered href for my deployed app is this (<code class="highlighter-rouge">nonce</code> and <code class="highlighter-rouge">state</code> are always random UUIDs for this example app):</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>https://micah.okta.com/oauth2/aus2yrcz7aMrmDAKZ1t7/v1/authorize?
+client_id=0oa2yrbf35Vcbom491t7&amp;response_type=token&amp;scope=openid&amp;
+redirect_uri=https://okta-oauth-zork.herokuapp.com/&amp;
+nonce=e9fad6d6-202a-4f01-a740-8679c4092ec1&amp;
+state=d8c6d98f-d302-4afb-9624-b12500085a12
+</code></pre>
+</div>
+
+<p>This is the “front door” to an OAuth implicit flow. The <code class="highlighter-rouge">response_type</code> field indicates that an access token will be returned. The <code class="highlighter-rouge">redirect_uri</code> field indicates where Okta will redirect back to upon successful authentication.</p>
+
+<p>Note the <code class="highlighter-rouge">scope</code> field. It’s set to <code class="highlighter-rouge">openid</code>. In OIDC a <code class="highlighter-rouge">scope</code> field is required and at least <code class="highlighter-rouge">openid</code> must be present as a scope. For more information on OIDC, check out my three-part series on the <a href="https://developer.okta.com/blog/2017/07/25/oidc-primer-part-1">Okta Blog</a>.</p>
+
+<p>Assuming authentication is successful and Okta redirects back to your application, there’s some javascript that takes over to display the access token and a command using <a href="https://httpie.org">HTTPie</a> to interact with the game.</p>
+
+<div class="language-javascript highlighter-rouge"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">showToken</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">token</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">$</span><span class="p">(</span><span class="s1">'#access_token_div'</span><span class="p">).</span><span class="nx">show</span><span class="p">();</span>
+    <span class="nx">$</span><span class="p">(</span><span class="s1">'#access_token'</span><span class="p">).</span><span class="nx">val</span><span class="p">(</span><span class="nx">token</span><span class="p">);</span>
+
+    <span class="nx">$</span><span class="p">(</span><span class="s1">'#httpie_div'</span><span class="p">).</span><span class="nx">show</span><span class="p">();</span>
+    <span class="kd">var</span> <span class="nx">httpieArea</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s1">'httpie'</span><span class="p">);</span>
+    <span class="p">...</span>
+    <span class="nx">httpie</span><span class="p">.</span><span class="nx">setSize</span><span class="p">(</span><span class="kc">null</span><span class="p">,</span> <span class="mi">100</span><span class="p">);</span>
+
+    <span class="kd">var</span> <span class="nx">val</span> <span class="o">=</span> <span class="s1">'http POST \\\n'</span><span class="p">;</span>
+    <span class="nx">val</span> <span class="o">+=</span> <span class="s1">'[[${redirectUri}]]v1/game'</span><span class="p">;</span>
+    <span class="nx">val</span> <span class="o">+=</span> <span class="s1">' \\\nAuthorization:"Bearer '</span> <span class="o">+</span> <span class="nx">token</span> <span class="o">+</span> <span class="s1">'"'</span><span class="p">;</span>
+    <span class="nx">val</span> <span class="o">+=</span> <span class="s1">' \\\ncommand="look"'</span><span class="p">;</span>
+    <span class="nx">httpie</span><span class="p">.</span><span class="nx">setValue</span><span class="p">(</span><span class="nx">val</span><span class="p">);</span>
+<span class="p">};</span>
+</code></pre>
+</div>
+
+<p>You should end up seeing a command like this:</p>
+
+<div class="language-bash highlighter-rouge"><pre class="highlight"><code>http POST <span class="se">\</span>
+https://okta-oauth-zork.herokuapp.com/v1/game <span class="se">\</span>
+Authorization:<span class="s2">"Bearer eyJhbGciOiJS..."</span> <span class="se">\</span>
+<span class="nb">command</span><span class="o">=</span><span class="s2">"look"</span>
+</code></pre>
+</div>
+<p>Give it a try. You’ll see output from the game that’s something like this:</p>
+
+<div class="language-javascript highlighter-rouge"><pre class="highlight"><code><span class="p">{</span>
+    <span class="s2">"gameInfo"</span><span class="err">:</span> <span class="p">[</span>
+        <span class="s2">"ZORK I: The Great Underground Empire"</span><span class="p">,</span>
+        <span class="s2">"Copyright (c) 1981, 1982, 1983 Infocom, Inc. All rights reserved."</span><span class="p">,</span>
+        <span class="s2">"ZORK is a registered trademark of Infocom, Inc."</span><span class="p">,</span>
+        <span class="s2">"Revision 88 / Serial number 840726"</span>
+    <span class="p">],</span>
+    <span class="s2">"look"</span><span class="err">:</span> <span class="p">[</span>
+        <span class="s2">"Kitchen"</span><span class="p">,</span>
+        <span class="s2">"You are in the kitchen of the white house. A table seems to have been used recently for the preparation of food. A passage leads to the west and a dark staircase can be seen leading upward. A dark chimney leads down and to the east is a small window which is open."</span><span class="p">,</span>
+        <span class="s2">"On the table is an elongated brown sack, smelling of hot peppers."</span><span class="p">,</span>
+        <span class="s2">"A bottle is sitting on the table."</span><span class="p">,</span>
+        <span class="s2">"The glass bottle contains:"</span><span class="p">,</span>
+        <span class="s2">"  A quantity of water"</span>
+    <span class="p">],</span>
+    <span class="s2">"request"</span><span class="err">:</span> <span class="s2">"look"</span><span class="p">,</span>
+    <span class="s2">"response"</span><span class="err">:</span> <span class="p">[</span>
+        <span class="s2">"Kitchen"</span><span class="p">,</span>
+        <span class="s2">"You are in the kitchen of the white house. A table seems to have been used recently for the preparation of food. A passage leads to the west and a dark staircase can be seen leading upward. A dark chimney leads down and to the east is a small window which is open."</span><span class="p">,</span>
+        <span class="s2">"On the table is an elongated brown sack, smelling of hot peppers."</span><span class="p">,</span>
+        <span class="s2">"A bottle is sitting on the table."</span><span class="p">,</span>
+        <span class="s2">"The glass bottle contains:"</span><span class="p">,</span>
+        <span class="s2">"  A quantity of water"</span>
+    <span class="p">],</span>
+    <span class="s2">"status"</span><span class="err">:</span> <span class="s2">"SUCCESS"</span>
+<span class="p">}</span>
+</code></pre>
+</div>
+
+<p>Try submitting the same command without the token:</p>
+
+<div class="language-javascript highlighter-rouge"><pre class="highlight"><code><span class="nx">HTTP</span><span class="o">/</span><span class="mf">1.1</span> <span class="mi">401</span>
+<span class="p">...</span>
+<span class="p">{</span>
+    <span class="s2">"error"</span><span class="err">:</span> <span class="s2">"unauthorized"</span><span class="p">,</span>
+    <span class="s2">"error_description"</span><span class="err">:</span> <span class="s2">"Full authentication is required to access this resource"</span>
+<span class="p">}</span>
+</code></pre>
+</div>
+
+<p>This is Spring Security doing its job. Let’s take a look at this code starting with the <code class="highlighter-rouge">GameController</code>:</p>
+
+<div class="language-java highlighter-rouge"><pre class="highlight"><code><span class="nd">@RequestMapping</span><span class="o">(</span><span class="n">value</span> <span class="o">=</span> <span class="n">VERSION</span> <span class="o">+</span> <span class="s">"/game"</span><span class="o">,</span> <span class="n">method</span> <span class="o">=</span> <span class="n">RequestMethod</span><span class="o">.</span><span class="na">POST</span><span class="o">)</span>
+<span class="kd">public</span> <span class="nd">@ResponseBody</span> <span class="n">CommandResponse</span> <span class="nf">command</span><span class="o">(</span>
+    <span class="nd">@RequestBody</span><span class="o">(</span><span class="n">required</span> <span class="o">=</span> <span class="kc">false</span><span class="o">)</span> <span class="n">CommandRequest</span> <span class="n">commandRequest</span><span class="o">,</span>
+    <span class="n">HttpServletRequest</span> <span class="n">req</span><span class="o">,</span>
+    <span class="n">Principal</span> <span class="n">principal</span>
+<span class="o">)</span> <span class="kd">throws</span> <span class="n">IOException</span> <span class="o">{</span>
+    <span class="n">Client</span> <span class="n">client</span> <span class="o">=</span> <span class="n">Clients</span><span class="o">.</span><span class="na">builder</span><span class="o">().</span><span class="na">build</span><span class="o">();</span>
+    <span class="n">User</span> <span class="n">user</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="na">getUser</span><span class="o">(</span><span class="n">principal</span><span class="o">.</span><span class="na">getName</span><span class="o">());</span>
+    <span class="n">String</span> <span class="n">zMachineRequest</span> <span class="o">=</span> <span class="o">(</span><span class="n">commandRequest</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span> <span class="o">?</span> <span class="n">commandRequest</span><span class="o">.</span><span class="na">getCommand</span><span class="o">()</span> <span class="o">:</span> <span class="kc">null</span><span class="o">;</span>
+    <span class="o">...</span>
+
+    <span class="n">String</span> <span class="n">zMachineResponse</span> <span class="o">=</span> <span class="n">gameService</span><span class="o">.</span><span class="na">doZMachine</span><span class="o">(</span><span class="n">zMachineCommands</span><span class="o">,</span> <span class="n">user</span><span class="o">);</span>
+
+    <span class="n">CommandResponse</span> <span class="n">res</span> <span class="o">=</span> <span class="n">gameService</span><span class="o">.</span><span class="na">processZMachineResponse</span><span class="o">(</span><span class="n">zMachineRequest</span><span class="o">,</span> <span class="n">zMachineResponse</span><span class="o">);</span>
+
+    <span class="k">if</span> <span class="o">(</span><span class="n">zMachineRequest</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
+        <span class="n">gameService</span><span class="o">.</span><span class="na">saveGameState</span><span class="o">(</span><span class="n">user</span><span class="o">);</span>
+    <span class="o">}</span>
+    <span class="o">...</span>
+
+    <span class="k">return</span> <span class="n">res</span><span class="o">;</span>
+<span class="o">}</span>
+</code></pre>
+</div>
+
+<p>When a user hits the <code class="highlighter-rouge">/v1/game</code> endpoint (as we did above), this method is entered. But – hold up there – the method expects an authenticated user in the form of <code class="highlighter-rouge">Principal principal</code> parameter to the method. What if the user isn’t authenticated? That’s where the beauty of Spring Security comes in. If there is no authenticated user, Spring Security will not allow this method to be entered and will instead set the <code class="highlighter-rouge">401</code> response with the error message we saw above.</p>
+
+<p>There’s a <code class="highlighter-rouge">Bean</code> in <code class="highlighter-rouge">OktaSpringBootOauthExampleApplication</code> the controls this behavior:</p>
+
+<div class="language-java highlighter-rouge"><pre class="highlight"><code><span class="nd">@Bean</span>
+<span class="kd">protected</span> <span class="n">ResourceServerConfigurerAdapter</span> <span class="nf">resourceServerConfigurerAdapter</span><span class="o">()</span> <span class="o">{</span>
+
+    <span class="k">return</span> <span class="k">new</span> <span class="nf">ResourceServerConfigurerAdapter</span><span class="o">()</span> <span class="o">{</span>
+
+        <span class="nd">@Override</span>
+        <span class="kd">public</span> <span class="kt">void</span> <span class="nf">configure</span><span class="o">(</span><span class="n">HttpSecurity</span> <span class="n">http</span><span class="o">)</span> <span class="kd">throws</span> <span class="n">Exception</span> <span class="o">{</span>
+            <span class="n">http</span>
+                <span class="o">.</span><span class="na">authorizeRequests</span><span class="o">()</span>
+                <span class="o">.</span><span class="na">antMatchers</span><span class="o">(</span><span class="s">"/"</span><span class="o">,</span> <span class="s">"/images/**"</span><span class="o">,</span> <span class="s">"/css/**"</span><span class="o">,</span> <span class="s">"/js/**"</span><span class="o">,</span> <span class="s">"/favicon.ico"</span><span class="o">).</span><span class="na">permitAll</span><span class="o">()</span>
+                <span class="o">.</span><span class="na">antMatchers</span><span class="o">(</span><span class="n">HttpMethod</span><span class="o">.</span><span class="na">OPTIONS</span><span class="o">,</span> <span class="n">VERSION</span> <span class="o">+</span> <span class="s">"/game"</span><span class="o">).</span><span class="na">permitAll</span><span class="o">();</span>
+        <span class="o">}</span>
+    <span class="o">};</span>
+<span class="o">}</span>
+</code></pre>
+</div>
+
+<p>By default, all paths are locked down in Spring Security. Lines 10 and 11 define certain paths and certain request methods that are permitted without authentication. Everything else, requires an authenticated user.</p>
+
+<p>The Okta Spring Security Integration makes it so that an Okta issued access token can be presented as a bearer token with the <code class="highlighter-rouge">Authorization</code> header and can be processed as an authenticated user.</p>
+
+<p>The upshot of all this is that no Okta-specific auth code is required in the controller! That’s a real bonus.</p>
+
+<p>These lines from <code class="highlighter-rouge">GameController</code> make use of the configured API Token to work with the Okta user and save the game state to the <code class="highlighter-rouge">zMachineData</code> profile attribute:</p>
+
+<div class="language-java highlighter-rouge"><pre class="highlight"><code><span class="n">Client</span> <span class="n">client</span> <span class="o">=</span> <span class="n">Clients</span><span class="o">.</span><span class="na">builder</span><span class="o">().</span><span class="na">build</span><span class="o">();</span>
+<span class="n">User</span> <span class="n">user</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="na">getUser</span><span class="o">(</span><span class="n">principal</span><span class="o">.</span><span class="na">getName</span><span class="o">());</span>
+<span class="err">…</span>
+<span class="n">gameService</span><span class="o">.</span><span class="na">saveGameState</span><span class="o">(</span><span class="n">user</span><span class="o">);</span>
+</code></pre>
+</div>
+
+<h2 id="this-is-why-we-build-framework-integrations">This is Why We Build Framework Integrations</h2>
+<p>I initially built this example before the Okta Spring Security integration had been released. Here’s a list of dependencies that I had for the project at that point:</p>
+
+<ol>
+  <li>spring-boot-starter-web</li>
+  <li>spring-boot-starter-thymeleaf</li>
+  <li>spring-boot-starter-security</li>
+  <li>spring-security-oauth2</li>
+  <li>jjwt</li>
+  <li>fluent-hc</li>
+  <li>guava</li>
+  <li>okta-sdk-api</li>
+  <li>okta-sdk-impl</li>
+  <li>okta-sdk-httpclient</li>
+</ol>
+
+<p>Even with the support of <code class="highlighter-rouge">spring-security-oauth2</code>, there was a lot of code I needed to implement myself including: retrieval of the <a href="https://openid.net/specs/openid-connect-discovery-1_0.html">discovery document</a>, retrieval of the <a href="https://tools.ietf.org/html/rfc7517">JWKS</a>, parsing and validating the access token (<a href="https://tools.ietf.org/html/rfc7519">JWT</a>), hooking up the access token to Spring Security’s SecurityContext mechanism.</p>
+
+<p>I did a major refactor of the code when the Okta Spring Security integration was released. Here’s a list of current dependencies for the project:</p>
+
+<ol>
+  <li>spring-boot-starter-thymeleaf</li>
+  <li>okta-spring-security-starter</li>
+  <li>spring-security-oauth2</li>
+  <li>guava</li>
+  <li>okta-sdk-api</li>
+  <li>okta-sdk-impl</li>
+  <li>okta-sdk-httpclient</li>
+</ol>
+
+<p>I was able to eliminate three dependencies. More importantly, I was able to dramatically reduce the codebase:</p>
+
+<p><img src="/assets/blog/okta-oauth-zork/before-and-after-1-ea756645ce27c630998220c551f7e1c6aa2041d2fd1e51d7871d047730b88ada.png" alt="Default AS" width="700" class="center-image" /></p>
+
+<p>I was able to completely delete seven classes representing 570 lines of code. In the tree view on the right, the application is now focused only on the task at hand: the management of playing the game. The view on the left is littered with auth concerns not particularly germane to the application.</p>
+
+<p>This is why <a href="https://www.rdegges.com/2017/authentication-still-sucks/">we are working hard</a> to build great framework integrations for using Okta. The less auth code you as a developer have to write, the more stable and focused your code will be.</p>
+
+<h2 id="put-the-canary-and-the-bauble-in-the-case">Put the Canary and the Bauble in the Case</h2>
+
+<p>I hope that you’ve enjoyed learning a bit about OAuth by playing a classic text-based adventure game.</p>
+
+<p>All the code, including the friendly purple deploy button can be found on the <a href="https://github.com/oktadeveloper/okta-zork-oauth-example">Github repo</a>.</p>
+
+<p>You can play the game without setting it up yourself by starting with the <a href="https://okta-oidc-fun.herokuapp.com">oidc playground</a>.</p>
+
+<p>You can tweet at me <a href="https://twitter.com/afitnerd">@afitnerd</a> or <a href="https://twitter.com/oktadev">@OktaDev</a></p>
+
+
+	</div>
+	
+</article>
+
+		
+</section>
+
+		
+	</div><footer class="Footer">
+    <div class="Wrap">
+
+        <div class="Row">
+
+            <div class="Column--3 Column--medium-6 Column--xSmall-12">
+
+                <a class="Logo" href="https://www.okta.com/" target="_blank" rel="noopener noreferrer">
+                    <img src="https://developer.okta.com/sites/all/themes/developer/images/logo-footer.png" alt="Okta">
+                    Visit okta.com
+                </a>
+
+            </div>
+
+            <div class="Column--3 Column--medium-12 Column--xSmall-12">
+
+                <h4>Social</h4>
+                <ul class="Footer-links Footer-links--social">
+                    <li><a class="Footer-links--github" target="_blank" rel="noopener noreferrer" href="http://github.com/oktadeveloper">Github</a></li>
+                    <li><a class="Footer-links--twitter" target="_blank" rel="noopener noreferrer" href="http://twitter.com/OktaDev">Twitter</a></li>
+                    <li><a class="Footer-links--forum" target="_blank" rel="noopener noreferrer" href="https://devforum.okta.com/">Forum</a></li>
+                    <li><a class="Footer-links--rss" target="_blank" rel="noopener noreferrer" href="http://feeds.feedburner.com/OktaBlog">RSS Blog</a></li>
+                </ul>
+            </div>
+
+            <div class="Column--3 Column--medium-6 Column--small-12">
+                <h4>More Info</h4>
+                <ul class="Footer-links">
+                    <li><a target="_blank" href="https://developer.okta.com/integrate-with-okta/">Integrate with Okta</a></li>
+                    <li><a href="/blog/">Blog</a></li>
+                    <li><a href="/docs/platform-release-notes/platform-release-notes.html">Release Notes</a></li>
+                    <li><a href="/3rd_party_notices/">3rd Party Notices</a></li>
+                </ul>
+            </div>
+
+            <div class="Column--3 Column--medium-6 Column--small-12">
+                <h4>Contact &amp; Legal</h4>
+                <ul class="Footer-links">
+                    <li><a href="https://developer.okta.com/contact/">Contact Sales</a></li>
+                    <li><a target="_blank" rel="noopener noreferrer" href="mailto:developers@okta.com">Contact Support</a></li>
+                    <li><a href="https://developer.okta.com/terms/">Terms &amp; Conditions</a></li>
+                    <li><a href="https://developer.okta.com/privacy/">Privacy Policy</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</footer>
+
+    <script type="text/javascript" src="/assets/master-0365dd27cf276cb2a15c0a43906ca592538204cf1ad4557547bf4e50609b411e.js"></script>
+    <script type="text/javascript" src="/assets/myOkta-911cbafbbe079b7a5522d9cbe15bd2a5f44e1582531e88393934bec69f97696b.js"></script>
+    
+    
+    
+    
+      <script type="text/javascript" src="/assets/blog-6e32dad27404131cc8630a5282264bed2ab4c08c91ac86fa496b75c53aa4f681.js"></script>
+    
+
+  <!-- START Post Footer -->
+  
+  <!-- START Google Tag Manager -->
+  <!-- https://support.google.com/tagmanager/answer/6103696?hl=en -->
+  <noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-TJ45R6" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+  <!-- END Google Tag Manager -->
+  <!-- START Google Remarketing Tag -->
+  <script type="text/javascript">
+    /* <![CDATA[ */
+    var google_conversion_id = 1006913831;
+    var google_custom_params = window.google_tag_params;
+    var google_remarketing_only = true;
+    /* ]]> */
+  </script>
+  <div style="display:none;"><script type="text/javascript" src="//www.googleadservices.com/pagead/conversion.js"></script></div>
+  <noscript><div style="display:inline;"><img height="1" width="1" style="border-style:none;" alt="" src="//googleads.g.doubleclick.net/pagead/viewthroughconversion/1006913831/?value=0&amp;guid=ON&amp;script=0"></div></noscript>
+  <!-- END Google Remarketing Tag -->
+  <!-- START Crazy Egg Tracking -->
+  <script type="text/javascript">
+    setTimeout(function(){var a=document.createElement("script");
+    var b=document.getElementsByTagName("script")[0];
+    a.src=document.location.protocol+"//script.crazyegg.com/pages/scripts/0021/9333.js?"+Math.floor(new Date().getTime()/3600000);
+    a.async=true;a.type="text/javascript";b.parentNode.insertBefore(a,b)}, 1);
+  </script>
+  <!-- END Crazy Egg Tracking -->
+
+  <!-- END Post Footer -->
+</body>
+</html>

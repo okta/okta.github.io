@@ -1,0 +1,418 @@
+<!doctype html>
+<!--[if lt IE 7 ]> <html class="ie6 no-flexbox"> <![endif]-->
+<!--[if IE 7 ]>    <html class="ie7 no-flexbox"> <![endif]-->
+<!--[if IE 8 ]>    <html class="ie8 no-flexbox"> <![endif]-->
+<!--[if IE 9 ]>    <html class="ie9 no-flexbox"> <![endif]-->
+<!--[if IE 10 ]>    <html class="ie10 no-flexbox"> <![endif]-->
+<!--[if (gt IE 10)|!(IE)]><!--> <html class="modern wf-loading" lang="en"> <!--<![endif]-->
+  <head>
+  <script>
+    var searchDomain = 'https://developer.okta.com';
+    var isProduction = window.location.hostname === 'developer.okta.com';
+    if (isProduction) {
+      // TypeKit
+      (function(d) {
+        var config = {
+          kitId: 'jff5neq',
+          scriptTimeout: 3000,
+          async: true
+        },
+        h=d.documentElement,t=setTimeout(function(){h.className=h.className.replace(/bwf-loadingb/g,"")+" wf-inactive";},config.scriptTimeout),tk=d.createElement("script"),f=false,s=d.getElementsByTagName("script")[0],a;h.className+=" wf-loading";tk.src='https://use.typekit.net/'+config.kitId+'.js';tk.async=true;tk.onload=tk.onreadystatechange=function(){a=this.readyState;if(f||a&&a!="complete"&&a!="loaded")return;f=true;clearTimeout(t);try{Typekit.load(config)}catch(e){}};s.parentNode.insertBefore(tk,s)
+      })(document);
+
+      // Google analytics
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+              (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+              m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+      ga('create', 'UA-15777010-3', 'auto');
+      ga('send', 'pageview');
+
+      // START Google Tag Manager
+      (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+      new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+      j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+      '//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+      })(window,document,'script','dataLayer','GTM-TJ45R6');
+      // END Google Tag Manager
+    }
+	</script>
+  <meta charset="utf-8">
+  <meta http-equiv="x-ua-compatible" content="IE=edge,chrome=1">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+ 	
+
+  <link type="text/css" rel="stylesheet" href="https://developer.okta.com/sites/all/themes/developer/css/master.css" media="all" />
+  <meta class="swiftype" name="title" data-type="string" content="NoSQL Options for Java Developers, Part II | Okta Developer" />
+  <meta class="swiftype" name="summary" data-type="string" content="Last month, I wrote about NoSQL Options for Java Developers. I analyzed the data available from a variety of sources (Indeed jobs, GitHub stars, Stack Overfl..." />
+
+  <link type="text/css" rel="stylesheet" href="/assets/animate-ec43d72c3ed45e08a460b8a2966d8dba6006aebfa0530935c3973fa493a8771f.css">
+  <link type="text/css" rel="stylesheet" href="/assets/okta-a96df4c9d48b78b618e1d541f46f7137d73d40653571e020c1ad59edd7915c60.css">
+  
+  
+  <title>NoSQL Options for Java Developers, Part II | Okta Developer</title>
+  <meta name="description" content="Last month, I wrote about NoSQL Options for Java Developers. I analyzed the data available from a variety of sources (Indeed jobs, GitHub stars, Stack Overfl...">
+  <link rel="canonical" href="https://developer.okta.com/blog/2017/10/10/nosql-options-for-java-developers-part-ii"  data-proofer-ignore>
+  <link rel="alternate" type="application/rss+xml" title="Okta Developer" href="https://developer.okta.com/feed.xml"><!-- GA -->
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+  <link rel="manifest" href="/manifest.json">
+  <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#21313a">
+  <meta name="theme-color" content="#ffffff">
+</head>
+
+  
+    <body id="blog">
+	
+
+
+
+
+<header class="Header is-fixed">
+
+  <div class="Wrap">
+
+    <a class="Logo" href="https://developer.okta.com">
+      <svg version="1.1" id="OktaLogo" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 431.9 151.4" style="enable-background:new 0 0 431.9 151.4;" xml:space="preserve"><g><g><g><path d="M102.2,41.4c-21,0-38.1,17.1-38.1,38.1s17.1,38.1,38.1,38.1s38.1-17.1,38.1-38.1l0,0C140.3,58.5,123.2,41.4,102.2,41.4z M102.2,98.5c-10.5,0-19-8.5-19-19s8.5-19,19-19s19,8.5,19,19c0.1,10.5-8.4,19-18.9,19.1C102.3,98.6,102.2,98.6,102.2,98.5L102.2,98.5z"/><path d="M169.1,92.3c0-1.9,1.5-3.4,3.4-3.4c0.9,0,1.8,0.4,2.4,1c9.5,9.7,25.3,26.3,25.4,26.4c0.4,0.5,0.8,0.8,1.4,0.9l1.6,0.2h17.2c1.8,0,3.3-1.4,3.4-3.2c0-0.8-0.3-1.5-0.8-2.2l-28.6-29.2l-1.5-1.5c-3.2-3.9-2.9-5.4,0.8-9.3l22.6-25.1c1.1-1.4,0.8-3.5-0.6-4.6c-0.6-0.4-1.3-0.7-2-0.7h-17c-0.6,0.2-1.1,0.5-1.5,0.9L175,64.4c-1.3,1.4-3.4,1.5-4.8,0.2c-0.7-0.6-1.1-1.5-1.1-2.5V18.9c0-1.7-1.3-3-3-3c-0.1,0-0.2,0-0.3,0h-12.7c-2.2,0-3.3,1.5-3.3,2.8v95.8c0,2.2,1.8,2.8,3.3,2.8h12.7c1.7,0.1,3.2-1.2,3.3-2.9c0,0,0,0,0,0V92.3z"/><path d="M273,114l-1.4-12.8c-0.2-1.7-1.7-2.9-3.4-2.7c0,0,0,0-0.1,0l-2.9,0.2c-10.1,0-18.5-7.9-19-18c0-0.3,0-0.7,0-1V64.2c-0.1-2,1.5-3.6,3.5-3.7c0,0,0,0,0,0h17c1.7-0.1,3.1-1.5,3-3.2c0,0,0-0.1,0-0.1v-12c0-2.3-1.5-3.6-2.8-3.6h-17.1c-1.9,0.1-3.5-1.5-3.6-3.4c0,0,0,0,0,0V18.9c-0.1-1.7-1.5-3.1-3.2-3c0,0-0.1,0-0.1,0h-12.7c-1.6-0.1-3,1.1-3.1,2.7c0,0.1,0,0.1,0,0.2c0,0,0,61.7,0,62c0.5,21,17.9,37.6,38.9,37c1.4,0,2.9-0.2,4.3-0.3C272,117.2,273.2,115.7,273,114z"/></g><path d="M364.7,98c-10.8,0-12.4-3.8-12.4-18.3l0,0V44.8c0-1.8-1.4-3.2-3.2-3.2c0,0-0.1,0-0.1,0h-12.8c-1.8,0-3.2,1.4-3.3,3.2v1.6C314.6,36,291.3,42.5,281,60.8c-10.4,18.3-3.9,41.6,14.4,51.9c14,7.9,31.4,6.2,43.5-4.2c3.6,5.5,9.3,9.1,18.3,9.1c1.5,0,9.7,0.3,9.7-3.5v-13.6C367,99.2,366,98.1,364.7,98z M314.2,98.6c-10.5,0-19-8.5-19-19s8.5-19,19-19s19,8.5,19,19l0,0C333.2,90.1,324.7,98.6,314.2,98.6z"/></g><path d="M19.4,74c2.2-1.9,4.1-4.1,5.7-6.6c3.5-5.3,5.4-11.5,5.2-17.9V27c0-4.9,0.9-8.4,2.7-10.5c1.8-2.1,4.8-3,9.2-3h12.6c1.2,0,2.1-0.9,2.2-2.1l0,0V2.2C57,1,56,0,54.8,0c0,0,0,0,0,0H41.5c-7.8,0-12.9,2.1-18,7.6s-7.1,12.3-7.1,21.7v14.2c0,2.2-0.1,4-0.2,5.7v2.2c-0.5,3.2-1.8,6.2-3.6,8.9C9.4,64.7,5.1,70.9,0.9,74l0,0l-0.3,0.3l0,0l-0.2,0.3H0.2v0.3l0,0c-0.1,0.3-0.1,0.7,0,1l0,0v0.3h0.1l0.2,0.3l0,0l0.3,0.3l0,0c4.2,3.1,8.5,9.3,11.3,13.7c1.8,2.7,3.1,5.7,3.6,8.9v2.2c0.1,1.6,0.2,3.5,0.2,5.7v14.3c0,9.4,2.4,16.7,7.1,21.7s10.2,7.6,18,7.6h13.8c1.2,0,2.2-1,2.2-2.2V140l0,0c0-1.2-1-2.2-2.2-2.2H42.2c-4.4,0-7.5-1-9.2-3s-2.7-5.6-2.7-10.5v-22.4c0.2-6.4-1.7-12.6-5.2-17.9c-1.6-2.5-3.5-4.7-5.7-6.6l0,0c-0.9-0.7-1.1-2-0.4-2.9C19.2,74.3,19.3,74.2,19.4,74L19.4,74z"/><path d="M412.5,74c-2.2-1.9-4.1-4.1-5.7-6.6c-3.5-5.3-5.4-11.5-5.2-17.9V27c0-4.9-0.9-8.4-2.7-10.5s-4.8-3-9.2-3h-12.6c-1.2,0-2.2-1-2.2-2.2c0,0,0,0,0,0l0,0V2.2c0-1.2,1-2.2,2.2-2.2c0,0,0,0,0,0h13.4c7.8,0,12.9,2.1,18,7.6s7.1,12.3,7.1,21.7v14.2c0,2.2,0.1,4,0.2,5.7v2.2c0.5,3.2,1.8,6.2,3.6,8.9c2.8,4.5,7.1,10.7,11.3,13.7l0,0l0.3,0.3l0,0l0.2,0.3h0.1v0.3l0,0c0.1,0.3,0.1,0.7,0,1l0,0v0.3h-0.1l-0.2,0.3l0,0l-0.3,0.3l0,0c-4.2,3.1-8.5,9.3-11.3,13.7c-1.8,2.7-3.1,5.7-3.6,8.9v2.2c-0.1,1.6-0.2,3.5-0.2,5.7v14.3c0,9.4-2.4,16.7-7.1,21.7s-10.2,7.6-18,7.6h-13.4c-1.2,0-2.2-1-2.2-2.2c0,0,0,0,0,0V140l0,0c0-1.2,1-2.2,2.2-2.2l0,0h12.7c4.4,0,7.5-1,9.2-3s2.7-5.6,2.7-10.5v-22.4c-0.2-6.3,1.6-12.6,5.1-17.9c1.6-2.5,3.5-4.7,5.7-6.6l0,0c0.9-0.7,1.1-2,0.4-2.9C412.7,74.3,412.6,74.2,412.5,74L412.5,74z"/></g></svg>
+    </a>
+
+    <nav class="Header-nav PrimaryNav">
+      <ul class="menu">
+        <li class="first leaf">
+          <a href="https://developer.okta.com/product/">Product</a>
+        </li>
+        <li class="leaf">
+          <a href="https://developer.okta.com/pricing/">Pricing</a>
+        </li>
+        <li class="leaf">
+          <a href="/blog/" class="active">Blog</a>
+        </li>
+        <li class="leaf">
+          <a href="/documentation/">Docs</a>
+        </li>
+        <li class="last expanded">
+          <span class="nolink">Support</span>
+          <ul class="menu">
+            <li class="first leaf"><a href="https://devforum.okta.com/">Okta Developer Forums</a></li>
+            <li class="last leaf"><a href="mailto:developers@okta.com">developers@okta.com</a></li>
+          </ul>
+        </li>
+      </ul>
+      <a class="PrimaryNav-toggle" href="#">
+        <svg width="20px" height="20px" viewBox="0 0 20 20" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+            <g class="MenuIcon" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="round">
+                <path d="M1,16 L19,16" class="MenuIcon-line1" stroke="#FFFFFF" stroke-width="2"></path>
+                <path d="M1,4 L19,4" class="MenuIcon-line2" stroke="#FFFFFF" stroke-width="2"></path>
+                <path d="M1,10 L19,10" class="MenuIcon-line3" stroke="#FFFFFF" stroke-width="2"></path>
+                <path d="M1,10 L19,10" class="MenuIcon-line4" stroke="#FFFFFF" stroke-width="2"></path>
+            </g>
+        </svg>
+        <svg class="CloseIcon" width="16px" height="16px" viewBox="0 0 16 16" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+          <g id="ALl-Boards" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+            <g id="Desktop" transform="translate(-915.000000, -235.000000)" fill="#FFFFFF">
+              <g id="Search-bar-Active" transform="translate(30.000000, 26.000000)">
+                <polygon id="Icon/Cross" points="901 210.6 899.4 209 893 215.4 886.6 209 885 210.6 891.4 217 885 223.4 886.6 225 893 218.6 899.4 225 901 223.4 894.6 217"></polygon>
+              </g>
+            </g>
+          </g>
+        </svg>
+      </a>
+
+      <div class="PrimaryNav-cta">
+        <a target="_blank" rel="noopener noreferrer" href="https://login.okta.com/?SAMLRequest=fc%2B7CsJAEAXQXvAflu1NNJUMeZBGELTx1a%2FrYILJTtyZGD%2FfSBRiYzlw77lMnD3rSj3Qc0ku0YtgrhU6S5fSXRN9PKxmS52l00nMpq6iBvJWCrfDe4ss6vStRe9aDzmGIZfo1jsgwyWDMzUyiIV9vt1AH4XGk5ClSvewUgMNa%2BYW%2FVj5jxhm9NLP67QQaSAMu64L6CYmsFSHlnzT4ZlLwTgcL6Sf8%2FeX9AU%3Dhttps://login.okta.com/?SAMLRequest=fc%2B7CsJAEAXQXvAflu1NNJUMeZBGELTx1a%2FrYILJTtyZGD%2FfSBRiYzlw77lMnD3rSj3Qc0ku0YtgrhU6S5fSXRN9PKxmS52l00nMpq6iBvJWCrfDe4ss6vStRe9aDzmGIZfo1jsgwyWDMzUyiIV9vt1AH4XGk5ClSvewUgMNa%2BYW%2FVj5jxhm9NLP67QQaSAMu64L6CYmsFSHlnzT4ZlLwTgcL6Sf8%2FeX9AU%3D" class="Button--redOutline">Login</a>
+        <a href="https://developer.okta.com/signup/" class="Button--red">Sign up</a>
+      </div>
+
+      <a class="SearchIcon" href="#"></a>
+      <form id="form_search" class="SearchBar Formisimo_clocked_69929" method="get" action="https://developer.okta.com/search/" name="form_search" __bizdiag="-784164280" __biza="WJ__">
+        <input type="text" name="stq" autocomplete="off" id="st-search-input-auto" class="st-search-input" placeholder="Search">
+        <input type="submit" name="submit" value="GO">
+      </form>
+
+    </nav>
+
+  </div>
+
+</header>
+
+	<div class="page-content">
+		
+
+
+
+
+
+
+<section class="Blog is-single">
+		
+	<div class="Blog-social">
+		
+		<a href="https://github.com/mraible" target="_blank"><i class="fa fa-github"></i></a>
+		
+		
+		<a href="https://twitter.com/mraible" target="_blank"><i class="fa fa-twitter"></i></a>
+		
+		
+		
+		<a href="http://raibledesigns.com" target="_blank"><i class="fa fa-external-link"></i></a>
+		
+	</div>
+	
+	
+
+<article class="BlogPost">
+	
+	<header class="BlogPost-header">
+	
+		<time class="BlogPost-date" datetime="2017-10-10">October 10, 2017</time>
+		
+		<h1 class="BlogPost-title">
+			
+			NoSQL Options for Java Developers, Part II
+			
+		</h1>
+		
+		<div class="BlogPost-attribution">
+			
+				<img src="/assets/avatar-matt_raible-9974af6192eb1753b7137c8fff0a2c6e6bb9736a2517986cb5cc50bb040e83d4.jpg" alt="avatar-matt_raible.jpg" class="BlogPost-avatar">
+			
+			<span class="BlogPost-author">Matt Raible</span>
+		</div>
+	
+	</header>
+	
+	<div class="BlogPost-content">
+		
+	<p>Last month, I wrote about <a href="/blog/2017/09/08/nosql-options-for-java-developers">NoSQL Options for Java Developers</a>. I analyzed the data available from a variety of sources (Indeed jobs, GitHub stars, Stack Overflow tags) to pick the top five options: MongoDB, Redis, Cassandra, Neo4j, and PostgreSQL. After writing this article, I shared it with a few experts I know in the Java and NoSQL communities and asked them the following questions:</p>
+
+<ol>
+  <li>Do you agree with my choices of the top 5 NoSQL options (MongoDB, Redis, Cassandra, Neo4j, and PostgreSQL with its JSON support)?</li>
+  <li>Do you have any good or bad stories about using any of these databases in production?</li>
+  <li>Have you found any of these databases particularly difficult to get started with or maintain over time?</li>
+  <li>What is your favorite NoSQL database and why?</li>
+  <li>Anything else you’d like to share?</li>
+</ol>
+
+<p>Today I’m happy to share their answers with you. But first, some introductions.</p>
+
+<p><a href="https://www.linkedin.com/in/justinmccarthy/"><strong>Justin McCarthy</strong></a><br />
+Justin is the CTO and co-founder of <a href="https://www.strongdm.com/">strongDM</a>, a company that provides secure access to databases (permissions, monitoring, and compliance reporting). He’s also an Okta customer.</p>
+
+<p><a href="https://twitter.com/GlowinskiRafal"><strong>Rafal Glowinski</strong></a><br />
+Rafal is a Team Leader for the largest Polish e-commerce: allegro.pl. His teams are using lots of Cassandra and MongoDB in their daily operations, and there are many many stories to be told about their struggle with them both when it comes to performance, ease of use (or lack of it), HA+ replication, developer errors, etc.</p>
+
+<p><a href="https://www.linkedin.com/in/vladmihalcea/"><strong>Vlad Mihalcea</strong></a><br />
+Vlad is the CEO of Hypersistence and also a Developer Advocate for the Hibernate project. He is the author of <a href="https://leanpub.com/high-performance-java-persistence">High-Performance Java Persistence</a> and an expert on most things related to databases.</p>
+
+<p><a href="https://twitter.com/ldoguin"><strong>Laurent Doguin</strong></a><br />
+Laurent is the VP of Developer Relations at Clever Cloud. Before Clever Cloud, he was a Developer Advocate for Couchbase and has a vast amount of NoSQL and cloud experience.</p>
+
+<p>Now that you’ve met everyone let’s take a look at my questions and their answers about NoSQL options for Java developers.</p>
+
+<h2 id="1-do-you-agree-with-my-choices-of-the-top-5-nosql-options">1. Do you agree with my choices of the top 5 NoSQL options?</h2>
+
+<p><strong>Justin:</strong> MongoDB, Redis, Cassandra, Neo4j are the leading representatives of some important and orthogonal categories of non-relational databases: document, in-memory KV, petabyte KV, and graph.</p>
+
+<p>Redis and Cassandra look more like KV stores than Mongo, Neo4j or PG. The principal discriminator between Redis and Cassandra is the intended and expected scale. It’s natural to run dozens or hundreds of Cassandra nodes in one coherent store, something that very few would attempt on Redis – even with the Cluster enhancements Redis released back in 2015.</p>
+
+<p>Regarding the Top 5, I would argue for introducing DynamoDB as a burgeoning success story (possibly replacing PG in the Top 5). Amazon did not invent the notion of object storage, but they implemented and priced S3 well enough that it’s now shorthand for all object storage (S3 API compatibility is pervasive among storage products). Similarly, DynamoDB is capturing share across verticals (presumably from both Redis and Mongo). DynamoDB could be on a path to become the de facto choice for sub-Cassandra, non-RDBMS use cases deployed to AWS.</p>
+
+<p>Finally, on Postgres, and Postgres+hstore+JSON: Postgres is great. It can be incredibly fast and remains the most featureful open source database. It does documents. It does key-value. There are patterns for both horizontal and vertical scalability. There’s a huge community of operational skills. Developers breaking ground on a new project should probably have to make a case for not using Postgres – and that case should probably include QPS values &gt; 200k, storage volume &gt; 10TB, or a fundamental graph structure in the data.</p>
+
+<p><strong>Rafal:</strong> Absolutely. For me, top three are MongoDB, Cassandra, and Redis. They complement each other nicely and are easy to start with.</p>
+
+<p><strong>Vlad:</strong> I agree. Although PostgreSQL is weird to be included there because all major RDBMS support JSON these days.</p>
+
+<p><strong>Laurent:</strong> I completely agree. What I found very interesting here is that they can mostly be complementary. You could use Mongo or PG as a primary datastore with Redis for cache, neo4j for graph specific queries and Cassandra if you need to do heavy scale CQRS or analytics.</p>
+
+<h2 id="2-do-you-have-any-good-or-bad-stories-about-using-any-of-these-databases-in-production">2. Do you have any good or bad stories about using any of these databases in production?</h2>
+
+<p><strong>Justin:</strong></p>
+
+<p>Good stories:</p>
+
+<ul>
+  <li>Redis has never let me down operationally. No crashes, no disappointments. Good for putting up huge benchmark numbers and making the most of minimal hardware allocations.</li>
+</ul>
+
+<p>Bad stories:</p>
+
+<ul>
+  <li>Cassandra: we misunderstood important Cassandra-specific schema design practices, causing production-impacting compaction and memory pressure problems. Unlike a relational database which could provide a performant in-database data manipulation, we could not simply migrate from schema A to A’ as an online operation. Instead, the system needed to be coded to perform lazy migrations, reading from the old and writing to the new. Multiply this across several schema objects and several major releases. Weeks of inconsistent state, while firefighting crashing nodes!</li>
+  <li>MongoDB: the classic Mongo problem – insufficient data validation and incomplete migrations leading to corrupt documents. Data integrity checks forced into the main codebase that would, in most relational systems, be expressed declaratively at schema design time and enforced by the database itself.</li>
+  <li>Redis: excessive creativity! Redis is a data structure store, meaning almost any arrangement of memory you could imagine in your most clever, pointerful C code is possible to recreate through the Redis protocol. Excellent for performance; awful for legibility, diagnostics, and recoverability. Strong recommendation to discuss and review each new type of Redis structure (or even command) that is introduced into your codebase; be sure to ask questions about how you will verify the integrity of these data structures and perform migrations on them over time.</li>
+</ul>
+
+<p><strong>Rafal:</strong> Oh yes, quite a few. We use MongoDB in lots of our microservices and it does a good job (MongoDB 3.x obviously) and is easy to use especially when combined with a DDD-like approach. Cassandra can be blazingly fast, but only when it is used properly. At first, we treated it a bit like a silver-bullet which lead us to learn few lessons the hard way, but now everything is (mostly) under control.</p>
+
+<p><strong>Vlad:</strong> I used MongoDB on a project where, if PostgreSQL supported JSON back then, we would have never chosen Mongo. We were using for storing non-structured data, coming from 3rd party real-estate agencies, so we’re using it as a JSON store.</p>
+
+<p><strong>Laurent:</strong> From the Clever Cloud trenches: Anything you can do with Mongo, you can do it better with PostgreSQL. We have had performance issues, we have had some surprises with the loose typing of Javascript that never happened with PLSQL. We also lost some data with MongoDB after a split brain.</p>
+
+<p>We also had issues with Cassandra tombstones, Neo4J hardly scale up.</p>
+
+<p>The only problem we have with Postgres is regarding an upgrade that requires you to have both versions on the machine. Postgres10 fixes this.</p>
+
+<h2 id="3-have-you-found-any-of-these-databases-particularly-difficult-to-get-started-with-or-maintain-over-time">3. Have you found any of these databases particularly difficult to get started with or maintain over time?</h2>
+
+<p><strong>Justin:</strong> Cassandra has the steepest learning curve and is the most sensitive to the interplay between schema design and operational tuning parameters. The data volumes and query rates are typically so high that metrics collection and aggregation is essential for understanding what’s happening; you can’t just run <code class="highlighter-rouge">top</code> and diagnose a problem.</p>
+
+<p>Again due to the sizes involved, Cassandra seems to be the store most vulnerable to oscillation between an over-provisioned condition (where the CPUs are asleep, memory and IO are not taxed) and a hair-on-fire emergency.</p>
+
+<p><strong>Rafal:</strong> MongoDB is a breeze to start with. It is even simpler if you can use Spring Data MongoDB project for data access. I recommend reading about its architecture (master-slave + replicas, how Write Concerns work and when to use them) to all developers using MongoDB.</p>
+
+<p>Cassandra is also quite easy to setup and to start with, but once your data volume and traffic grow high enough, things can get hairy. When that happens, be ready for a deep dive into Cassandra’s architecture and internal details, because you will need to understand them really well to solve some problems you will encounter. A good example would be the way that tombstones are handled in Cassandra: all values are read into memory and then filtered out, which can cause a considerable amount of stress on Garbage Collection.</p>
+
+<p><strong>Vlad:</strong> Starting with Mongo is pretty straightforward. I think that’s why it’s so popular even if it didn’t use to excel on consistency or reliability. However, 3.4 has come a long way and even passes Jepsen tests now.</p>
+
+<p><strong>Laurent:</strong> I found that getting started for any of these databases is a breeze. Never had any issues. It might be why they are so popular. Neo4J might be a little different in that regard since it’s the only Graph DB out of the five selected.</p>
+
+<p>About maintaining them over time, I guess it really depends on what you do with them. We aim at having as less downtime as possible. So we love when you can do rolling upgrade. So one big point for Mongo and Cassandra. We never really tried with the others. So they are a little bit harder to maintain. Can’t wait for Postgres10! :)</p>
+
+<h2 id="4-what-is-your-favorite-nosql-database-and-why">4. What is your favorite NoSQL database and why?</h2>
+
+<p><strong>Justin:</strong> Redis, but mainly for romantic/emotional reasons: it inspires me to cleverness, which is … great for prototypes. It’s also great in production – as long as you reduce the cleverness to the minimum necessary for your use case.</p>
+
+<p><strong>Rafal:</strong> MongoDB 3.x. Don’t want to repeat myself too much, so I will keep it short: it just works, it is flexible (no schema, ad-hoc queries), great support for DDD-like approach, amazing data access framework: Spring Data MongoDB (kudos to Oliver Gierke and Spring Data Team!).</p>
+
+<p><strong>Vlad:</strong> CockroachDB because it speaks the PostgreSQL protocol, therefore offering ACID guarantees while distributing data globally. Google Spanner is only very interesting, being the DB used by many Google products, like Google Analytics.</p>
+
+<p><strong>Laurent:</strong> Out of these five, Postgres would be my favorite. It’s the most versatile to me. The one I have the more experience with and where you will find the best resources online. Redis would come close second because of their recent module system. I am expecting it to grow a lot more. They have the user base already, and they are adding more and more features.</p>
+
+<h2 id="5-anything-else-youd-like-to-share">5. Anything else you’d like to share?</h2>
+
+<p><strong>Justin:</strong> These are all awesome options. In many technical disciplines, generational successors tend to completely replace their predecessors (the front-end / JS ecosystem for example); by contrast, our NoSQL choices have mostly proven to be additive to traditional RDBMS and glut object storage, leading to fewer uncomfortable compromises and happier developers &amp; operators.</p>
+
+<p><strong>Rafal:</strong></p>
+
+<p>Some tips to any future MongoDB users:</p>
+
+<ul>
+  <li>Use Spring Data Mongo if you can.</li>
+  <li>MongoDB will let you think more in a DDD way than any other DB (well maybe PostgreSQL with JSON support would too).</li>
+  <li>Don’t be afraid to create more complex documents (artifacts) - atomicity is guaranteed on document level only.</li>
+  <li>Even with large collections, response times are predictable.</li>
+  <li>Learn (and I do mean LEARN) about Write Concerns in MongoDB. Especially that writes always go to primary and reading from secondary can give you stale data).</li>
+  <li>It allows you to perform queries on any field. Yes, they can be slow, but you can still perform them. Even if just once a week or two to verify something.</li>
+  <li>Its schema-less approach is awesome when adding new fields, which can be a huge pain in some of a well known RDBMS.</li>
+</ul>
+
+<p>Things don’t look so bright for Cassandra:</p>
+
+<ul>
+  <li>It is not a silver bullet. It is a fantastic database, but be sure to learn about proper use cases. Don’t use it if yours is not one of those.</li>
+  <li>It is a JVM-based database, which means that at some point you will have to worry about Garbage Collection throughput. Then you will have to decide if it is cheaper to continually tune the GC or go for Azul’s Zing JVM.</li>
+  <li>Build many separate clusters for different usage patterns. There is no “one size fits all” when it comes to configuring Cassandra cluster.</li>
+  <li>Avoid running any Spark Jobs on a shared cluster. Spark Job (even more so an ill-configured one) can quickly max out Cassandra nodes and lead to a failure of the entire cluster.</li>
+  <li>Dive into the gory details of how Cassandra works internally. Sooner or later you will need that knowledge.</li>
+  <li>Be sure your developers know when and how to use it. Proper clustering/partitioning keys, TTL handling will help you not to kill any nodes and achieve the best performance.</li>
+</ul>
+
+<p>Redis and Couchbase:</p>
+
+<p>Other teams use Redis and Couchbase a lot, but I cannot really give you many details. I know we have had a lot of problems with Couchbase’s babysitter demon dying quite often and that we have found a major bug in Couchbase’s async (Rx) driver. Not much to tell other than that.</p>
+
+<p><strong>Vlad:</strong> Although not in the NoSQL category, being a NewSQL database, VoltDB is very promising because it’s very well suited for operating entirely in memory. When NVM storage will become mainstream, it’s going to be very well prepared to get the most out of these storage devices, unlike other disk-based oriented SQL or NoSQL databases.</p>
+
+<p><strong>Laurent:</strong> There are roughly two reasons to go NoSQL. Scale or non relational storage. Anyone looking into NoSQL for scale should read <a href="https://aphyr.com/tags/jepsen">Aphyr’s blog post series</a> before making any choice.</p>
+
+<p>Thanks to Justin, Rafal, Vlad, and Laurent for sharing all their NoSQL knowledge! I hope you learned something from these questions and answers.</p>
+
+
+
+	</div>
+	
+</article>
+
+		
+</section>
+
+		
+	</div><footer class="Footer">
+    <div class="Wrap">
+
+        <div class="Row">
+
+            <div class="Column--3 Column--medium-6 Column--xSmall-12">
+
+                <a class="Logo" href="https://www.okta.com/" target="_blank" rel="noopener noreferrer">
+                    <img src="https://developer.okta.com/sites/all/themes/developer/images/logo-footer.png" alt="Okta">
+                    Visit okta.com
+                </a>
+
+            </div>
+
+            <div class="Column--3 Column--medium-12 Column--xSmall-12">
+
+                <h4>Social</h4>
+                <ul class="Footer-links Footer-links--social">
+                    <li><a class="Footer-links--github" target="_blank" rel="noopener noreferrer" href="http://github.com/oktadeveloper">Github</a></li>
+                    <li><a class="Footer-links--twitter" target="_blank" rel="noopener noreferrer" href="http://twitter.com/OktaDev">Twitter</a></li>
+                    <li><a class="Footer-links--forum" target="_blank" rel="noopener noreferrer" href="https://devforum.okta.com/">Forum</a></li>
+                    <li><a class="Footer-links--rss" target="_blank" rel="noopener noreferrer" href="http://feeds.feedburner.com/OktaBlog">RSS Blog</a></li>
+                </ul>
+            </div>
+
+            <div class="Column--3 Column--medium-6 Column--small-12">
+                <h4>More Info</h4>
+                <ul class="Footer-links">
+                    <li><a target="_blank" href="https://developer.okta.com/integrate-with-okta/">Integrate with Okta</a></li>
+                    <li><a href="/blog/">Blog</a></li>
+                    <li><a href="/docs/platform-release-notes/platform-release-notes.html">Release Notes</a></li>
+                    <li><a href="/3rd_party_notices/">3rd Party Notices</a></li>
+                </ul>
+            </div>
+
+            <div class="Column--3 Column--medium-6 Column--small-12">
+                <h4>Contact &amp; Legal</h4>
+                <ul class="Footer-links">
+                    <li><a href="https://developer.okta.com/contact/">Contact Sales</a></li>
+                    <li><a target="_blank" rel="noopener noreferrer" href="mailto:developers@okta.com">Contact Support</a></li>
+                    <li><a href="https://developer.okta.com/terms/">Terms &amp; Conditions</a></li>
+                    <li><a href="https://developer.okta.com/privacy/">Privacy Policy</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</footer>
+
+    <script type="text/javascript" src="/assets/master-0365dd27cf276cb2a15c0a43906ca592538204cf1ad4557547bf4e50609b411e.js"></script>
+    <script type="text/javascript" src="/assets/myOkta-911cbafbbe079b7a5522d9cbe15bd2a5f44e1582531e88393934bec69f97696b.js"></script>
+    
+    
+    
+    
+      <script type="text/javascript" src="/assets/blog-6e32dad27404131cc8630a5282264bed2ab4c08c91ac86fa496b75c53aa4f681.js"></script>
+    
+
+  <!-- START Post Footer -->
+  
+  <!-- START Google Tag Manager -->
+  <!-- https://support.google.com/tagmanager/answer/6103696?hl=en -->
+  <noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-TJ45R6" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+  <!-- END Google Tag Manager -->
+  <!-- START Google Remarketing Tag -->
+  <script type="text/javascript">
+    /* <![CDATA[ */
+    var google_conversion_id = 1006913831;
+    var google_custom_params = window.google_tag_params;
+    var google_remarketing_only = true;
+    /* ]]> */
+  </script>
+  <div style="display:none;"><script type="text/javascript" src="//www.googleadservices.com/pagead/conversion.js"></script></div>
+  <noscript><div style="display:inline;"><img height="1" width="1" style="border-style:none;" alt="" src="//googleads.g.doubleclick.net/pagead/viewthroughconversion/1006913831/?value=0&amp;guid=ON&amp;script=0"></div></noscript>
+  <!-- END Google Remarketing Tag -->
+  <!-- START Crazy Egg Tracking -->
+  <script type="text/javascript">
+    setTimeout(function(){var a=document.createElement("script");
+    var b=document.getElementsByTagName("script")[0];
+    a.src=document.location.protocol+"//script.crazyegg.com/pages/scripts/0021/9333.js?"+Math.floor(new Date().getTime()/3600000);
+    a.async=true;a.type="text/javascript";b.parentNode.insertBefore(a,b)}, 1);
+  </script>
+  <!-- END Crazy Egg Tracking -->
+
+  <!-- END Post Footer -->
+</body>
+</html>

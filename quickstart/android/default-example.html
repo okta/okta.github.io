@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html class="no-js" lang="en" dir="ltr">
+<body>
+    <h2 id="okta-android-quickstart">Okta Android Quickstart</h2>
+
+<p>This guide will walk you through integrating authentication into an Android app with Okta by performing these steps:</p>
+
+<ol>
+  <li>Add an OpenID Connect Client in Okta</li>
+  <li>Add Okta-AppAuth to your Android project</li>
+  <li>Implement Okta Sign-in</li>
+  <li>Handle the Login State</li>
+  <li>Using the AccessToken</li>
+</ol>
+
+<p>At the end of the Android instructions you can choose your server type to learn more about post-authentication workflows, such as verifying tokens that your Android application can send to your server.</p>
+
+<h2 id="prerequisites">Prerequisites</h2>
+<p>If you do not already have a <strong>Developer Edition Account</strong>, you can create one at <a href="https://developer.okta.com/signup/">https://developer.okta.com/signup/</a>.</p>
+
+<h3 id="add-an-openid-connect-client">Add an OpenID Connect Client</h3>
+<ul>
+  <li>Log into the Okta Developer Dashboard, click <strong>Applications</strong> then <strong>Add Application</strong>.</li>
+  <li>Choose <strong>Native app</strong> as the platform, then populate your new OpenID Connect application with values similar to:</li>
+</ul>
+
+<table>
+  <thead>
+    <tr>
+      <th>Setting</th>
+      <th>Value</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Application Name</td>
+      <td>My Android App</td>
+    </tr>
+    <tr>
+      <td>Login redirect URIs</td>
+      <td>com.oktapreview.{yourOrg}:/callback</td>
+    </tr>
+    <tr>
+      <td>Logout redirect URIs</td>
+      <td>com.oktapreview.{yourOrg}:/logout</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>After you have created the application there are two more values you will need to gather:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Setting</th>
+      <th>Where to Find</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Client ID</td>
+      <td>In the applications list, or on the “General” tab of a specific application.</td>
+    </tr>
+    <tr>
+      <td>Org URL</td>
+      <td>On the home screen of the developer dashboard, in the upper right.</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>These values will be used in your Android application to setup the OpenID Connect flow with Okta.</p>
+
+<h2 id="add-okta-appauth-to-your-android-project">Add Okta-AppAuth to your Android Project</h2>
+<p>The simplest way to add authentication into an Android app is using the library <a href="https://bintray.com/okta/com.okta.android/okta-sdk-appauth-android">Okta AppAuth</a>, available through <a href="https://bintray.com/bintray/jcenter">JCenter</a>. To install it, simply add the following to your <code class="highlighter-rouge">build.grade</code>:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>compile 'com.okta.android:appauth-android:0.1.0'
+</code></pre>
+</div>
+
+<h3 id="configuration">Configuration</h3>
+<p>Create a new <code class="highlighter-rouge">okta_app_auth_config.json</code> file in your application’s <code class="highlighter-rouge">res/raw</code> directory with the following contents:</p>
+<div class="language-json highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"client_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"{clientIdValue}"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"redirect_uri"</span><span class="p">:</span><span class="w"> </span><span class="s2">"{redirectUriValue}"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"scopes"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="s2">"openid"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"profile"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"offline_access"</span><span class="w">
+  </span><span class="p">],</span><span class="w">
+  </span><span class="nt">"issuer_uri"</span><span class="p">:</span><span class="w"> </span><span class="s2">"<span class="okta-preview-domain">https://{yourOktaDomain}.com</span>/oauth2/default"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+</div>
+<p><strong>Note</strong>: <em>To receive a <strong>refresh_token</strong>, you must include the <code class="highlighter-rouge">offline_access</code> scope.</em></p>
+
+<h3 id="update-the-uri-scheme">Update the URI Scheme</h3>
+<p>In order to redirect back to your application from a web browser, you must specify a unique URI to your app. To do this, you must define a gradle manifest placeholder in your app’s <code class="highlighter-rouge">build.gradle</code>:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>android.defaultConfig.manifestPlaceholders = [
+    "appAuthRedirectScheme": "com.okta.example"
+]
+</code></pre>
+</div>
+
+<p>Make sure this is consistent with the redirect URI used in <code class="highlighter-rouge">okta_app_auth_config.json</code>. For example, if your <strong>Login Redirect URI</strong> is <code class="highlighter-rouge">com.okta.example:/callback</code>, the <strong>AppAuth Redirect Scheme</strong> will be <code class="highlighter-rouge">com.okta.example</code>.</p>
+
+<h2 id="implement-okta-sign-in">Implement Okta Sign-In</h2>
+<p>Users can sign in to your Android application a number of different ways.
+The easiest, and most secure way is to use the <strong>default login page</strong>. This page renders the <a href="/code/javascript/okta_sign-in_widget.html">Okta Sign-In Widget</a>, equipped to handle User Lifecycle operations, MFA, and more.</p>
+
+<p>First initialize the Okta AppAuth SDK in the <code class="highlighter-rouge">Activity#onCreate</code> method of the Activity that you are using to log users into your app. In this example, we will call it <code class="highlighter-rouge">LoginActivity</code>:</p>
+
+<div class="language-java highlighter-rouge"><pre class="highlight"><code><span class="c1">// LoginActivity.java</span>
+
+<span class="kn">import</span> <span class="nn">com.okta.appauth.android.OktaAppAuth</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">net.openid.appauth.AuthorizationException</span><span class="o">;</span>
+
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">LoginActivity</span> <span class="kd">extends</span> <span class="n">Activity</span> <span class="o">{</span>
+
+    <span class="kd">private</span> <span class="n">OktaAppAuth</span> <span class="n">mOktaAuth</span><span class="o">;</span>
+
+    <span class="nd">@Override</span>
+    <span class="kd">protected</span> <span class="kt">void</span> <span class="nf">onCreate</span><span class="o">(</span><span class="n">Bundle</span> <span class="n">savedInstanceState</span><span class="o">)</span> <span class="o">{</span>
+        <span class="kd">super</span><span class="o">.</span><span class="na">onCreate</span><span class="o">(</span><span class="n">savedInstanceState</span><span class="o">);</span>
+
+        <span class="n">mOktaAuth</span> <span class="o">=</span> <span class="n">OktaAppAuth</span><span class="o">.</span><span class="na">getInstance</span><span class="o">(</span><span class="k">this</span><span class="o">);</span>
+
+        <span class="c1">// Do any of your own setup of the Activity</span>
+
+        <span class="n">mOktaAuth</span><span class="o">.</span><span class="na">init</span><span class="o">(</span>
+            <span class="k">this</span><span class="o">,</span>
+            <span class="k">new</span> <span class="n">OktaAppAuth</span><span class="o">.</span><span class="na">OktaAuthListener</span><span class="o">()</span> <span class="o">{</span>
+                <span class="nd">@Override</span>
+                <span class="kd">public</span> <span class="kt">void</span> <span class="nf">onSuccess</span><span class="o">()</span> <span class="o">{</span>
+                    <span class="c1">// Handle a successful initialization (e.g. display login button)</span>
+                <span class="o">}</span>
+
+                <span class="nd">@Override</span>
+                <span class="kd">public</span> <span class="kt">void</span> <span class="nf">onTokenFailure</span><span class="o">(</span><span class="nd">@NonNull</span> <span class="n">AuthorizationException</span> <span class="n">ex</span><span class="o">)</span> <span class="o">{</span>
+                    <span class="c1">// Handle a failed initialization</span>
+                <span class="o">}</span>
+            <span class="o">}</span>
+        <span class="o">);</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre>
+</div>
+
+<p>Once the <code class="highlighter-rouge">OktaAppAuth</code> instance is initialized, you can start the authorization flow by simply calling <code class="highlighter-rouge">login</code> whenever you’re ready:</p>
+
+<div class="language-java highlighter-rouge"><pre class="highlight"><code><span class="c1">// LoginActivity.java</span>
+
+<span class="kd">public</span> <span class="kt">void</span> <span class="nf">onSuccess</span><span class="o">()</span> <span class="o">{</span>
+    <span class="c1">// Handle a successful initialization (e.g. display login button)</span>
+
+    <span class="n">Intent</span> <span class="n">completionIntent</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Intent</span><span class="o">(</span><span class="k">this</span><span class="o">,</span> <span class="n">AuthorizedActivity</span><span class="o">.</span><span class="na">class</span><span class="o">);</span>
+    <span class="n">Intent</span> <span class="n">cancelIntent</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Intent</span><span class="o">(</span><span class="k">this</span><span class="o">,</span> <span class="n">LoginActivity</span><span class="o">.</span><span class="na">class</span><span class="o">);</span>
+    <span class="n">cancelIntent</span><span class="o">.</span><span class="na">setFlags</span><span class="o">(</span><span class="n">Intent</span><span class="o">.</span><span class="na">FLAG_ACTIVITY_CLEAR_TOP</span><span class="o">);</span>
+
+    <span class="n">mOktaAuth</span><span class="o">.</span><span class="na">login</span><span class="o">(</span>
+        <span class="k">this</span><span class="o">,</span>
+        <span class="n">PendingIntent</span><span class="o">.</span><span class="na">getActivity</span><span class="o">(</span><span class="k">this</span><span class="o">,</span> <span class="mi">0</span><span class="o">,</span> <span class="n">completionIntent</span><span class="o">,</span> <span class="mi">0</span><span class="o">),</span>
+        <span class="n">PendingIntent</span><span class="o">.</span><span class="na">getActivity</span><span class="o">(</span><span class="k">this</span><span class="o">,</span> <span class="mi">0</span><span class="o">,</span> <span class="n">cancelIntent</span><span class="o">,</span> <span class="mi">0</span><span class="o">)</span>
+    <span class="o">);</span>
+<span class="o">}</span>
+</code></pre>
+</div>
+
+<h2 id="handle-the-login-state">Handle the Login State</h2>
+<p>In native applications, it is common for users to have a long-lived session. It is important for the app to manage the user’s session by refreshing tokens when they expire, using the <code class="highlighter-rouge">refresh_token</code> or re-prompting the user to login. See <a href="https://github.com/okta/okta-sdk-appauth-android#refresh-a-token-manually">refreshing a token manually</a> for more information.</p>
+
+<p>When starting up the application, check for the existance of an <code class="highlighter-rouge">access_token</code> to see if the user has an existing session:</p>
+
+<div class="language-java highlighter-rouge"><pre class="highlight"><code><span class="c1">// LoginActivity.java</span>
+<span class="nd">@Override</span>
+<span class="kd">protected</span> <span class="kt">void</span> <span class="nf">onCreate</span><span class="o">(</span><span class="n">Bundle</span> <span class="n">savedInstanceState</span><span class="o">)</span> <span class="o">{</span>
+    <span class="o">...</span>
+
+    <span class="n">mOktaAuth</span> <span class="o">=</span> <span class="n">OktaAppAuth</span><span class="o">.</span><span class="na">getInstance</span><span class="o">(</span><span class="k">this</span><span class="o">);</span>
+
+    <span class="k">if</span> <span class="o">(</span><span class="n">mOktaAuth</span><span class="o">.</span><span class="na">isUserLoggedIn</span><span class="o">())</span> <span class="o">{</span>
+        <span class="n">Log</span><span class="o">.</span><span class="na">i</span><span class="o">(</span><span class="n">TAG</span><span class="o">,</span> <span class="s">"User is already authenticated, proceeding to protected activity"</span><span class="o">);</span>
+        <span class="n">startActivity</span><span class="o">(</span><span class="k">new</span> <span class="n">Intent</span><span class="o">(</span><span class="k">this</span><span class="o">,</span> <span class="n">ProtectedActivity</span><span class="o">.</span><span class="na">class</span><span class="o">));</span>
+        <span class="n">finish</span><span class="o">();</span>
+        <span class="k">return</span><span class="o">;</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre>
+</div>
+
+<h2 id="using-the-access-token">Using the Access Token</h2>
+
+<p>Your Android application now has an access token in private Shared Preferences that was issued by your Okta Authorization server. You can use this token to authenticate requests for resources on your server or API. As a hypothetical example, let’s say that you have an API that gives us messages for our user.  You could create a <code class="highlighter-rouge">callMessagesApi</code> function that makes an authenticated request to your server.</p>
+
+<div class="language-java highlighter-rouge"><pre class="highlight"><code><span class="kd">private</span> <span class="kt">void</span> <span class="nf">callMessagesApi</span><span class="o">()</span> <span class="o">{</span>
+    <span class="n">mOktaAuth</span><span class="o">.</span><span class="na">performAuthorizedRequest</span><span class="o">(</span><span class="k">new</span> <span class="n">OktaAppAuth</span><span class="o">.</span><span class="na">BearerAuthRequest</span><span class="o">()</span> <span class="o">{</span>
+        <span class="nd">@NonNull</span>
+        <span class="nd">@Override</span>
+        <span class="kd">public</span> <span class="n">HttpURLConnection</span> <span class="nf">createRequest</span><span class="o">()</span> <span class="kd">throws</span> <span class="n">Exception</span> <span class="o">{</span>
+            <span class="k">try</span> <span class="o">{</span>
+                <span class="kd">final</span> <span class="n">URL</span> <span class="n">myUrl</span> <span class="o">=</span> <span class="k">new</span> <span class="n">URL</span><span class="o">(</span><span class="s">"http://localhost:{serverPort}/api/messages"</span><span class="o">);</span>
+                <span class="n">HttpURLConnection</span> <span class="n">conn</span> <span class="o">=</span> <span class="o">(</span><span class="n">HttpURLConnection</span><span class="o">)</span> <span class="n">myUrl</span><span class="o">.</span><span class="na">openConnection</span><span class="o">();</span>
+                <span class="n">conn</span><span class="o">.</span><span class="na">setInstanceFollowRedirects</span><span class="o">(</span><span class="kc">false</span><span class="o">);</span> <span class="c1">// recommended during authorized calls</span>
+                <span class="k">return</span> <span class="n">conn</span><span class="o">;</span>
+            <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="n">MalformedURLException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+                <span class="n">Log</span><span class="o">.</span><span class="na">i</span><span class="o">(</span><span class="n">TAG</span><span class="o">,</span> <span class="n">e</span><span class="o">.</span><span class="na">getLocalizedMessage</span><span class="o">());</span>
+            <span class="o">}</span>
+            <span class="k">return</span> <span class="kc">null</span><span class="o">;</span>
+        <span class="o">}</span>
+
+        <span class="nd">@Override</span>
+        <span class="kd">public</span> <span class="kt">void</span> <span class="nf">onSuccess</span><span class="o">(</span><span class="nd">@NonNull</span> <span class="n">InputStream</span> <span class="n">inputStream</span><span class="o">)</span> <span class="o">{</span>
+            <span class="c1">// Handle successful response in the input stream</span>
+        <span class="o">}</span>
+
+        <span class="nd">@Override</span>
+        <span class="kd">public</span> <span class="kt">void</span> <span class="nf">onTokenFailure</span><span class="o">(</span><span class="nd">@NonNull</span> <span class="n">AuthorizationException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+            <span class="c1">// Handle failure to acquire new tokens from Okta</span>
+        <span class="o">}</span>
+
+        <span class="nd">@Override</span>
+        <span class="kd">public</span> <span class="kt">void</span> <span class="nf">onFailure</span><span class="o">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">,</span> <span class="n">Exception</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+            <span class="c1">// Handle failure to make your authorized request or a response with a 4xx or</span>
+            <span class="c1">// 5xx HTTP status response code</span>
+        <span class="o">}</span>
+    <span class="o">});</span>
+<span class="o">}</span>
+</code></pre>
+</div>
+
+<p>In the next section you can select your server technology to see how your server can read this incoming token and validate it.</p>
+
+</body>
+</html>

@@ -1,0 +1,872 @@
+<!doctype html>
+<!--[if lt IE 7 ]> <html class="ie6 no-flexbox"> <![endif]-->
+<!--[if IE 7 ]>    <html class="ie7 no-flexbox"> <![endif]-->
+<!--[if IE 8 ]>    <html class="ie8 no-flexbox"> <![endif]-->
+<!--[if IE 9 ]>    <html class="ie9 no-flexbox"> <![endif]-->
+<!--[if IE 10 ]>    <html class="ie10 no-flexbox"> <![endif]-->
+<!--[if (gt IE 10)|!(IE)]><!--> <html class="modern wf-loading" lang="en"> <!--<![endif]-->
+  <head>
+  <script>
+    var searchDomain = 'https://developer.okta.com';
+    var isProduction = window.location.hostname === 'developer.okta.com';
+    if (isProduction) {
+      // TypeKit
+      (function(d) {
+        var config = {
+          kitId: 'jff5neq',
+          scriptTimeout: 3000,
+          async: true
+        },
+        h=d.documentElement,t=setTimeout(function(){h.className=h.className.replace(/bwf-loadingb/g,"")+" wf-inactive";},config.scriptTimeout),tk=d.createElement("script"),f=false,s=d.getElementsByTagName("script")[0],a;h.className+=" wf-loading";tk.src='https://use.typekit.net/'+config.kitId+'.js';tk.async=true;tk.onload=tk.onreadystatechange=function(){a=this.readyState;if(f||a&&a!="complete"&&a!="loaded")return;f=true;clearTimeout(t);try{Typekit.load(config)}catch(e){}};s.parentNode.insertBefore(tk,s)
+      })(document);
+
+      // Google analytics
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+              (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+              m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+      ga('create', 'UA-15777010-3', 'auto');
+      ga('send', 'pageview');
+
+      // START Google Tag Manager
+      (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+      new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+      j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+      '//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+      })(window,document,'script','dataLayer','GTM-TJ45R6');
+      // END Google Tag Manager
+    }
+	</script>
+  <meta charset="utf-8">
+  <meta http-equiv="x-ua-compatible" content="IE=edge,chrome=1">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+ 	
+
+  <link type="text/css" rel="stylesheet" href="https://developer.okta.com/sites/all/themes/developer/css/master.css" media="all" />
+  <meta class="swiftype" name="title" data-type="string" content="Build a Preact App with Authentication | Okta Developer" />
+  <meta class="swiftype" name="summary" data-type="string" content="React is a fast, and lightweight library, which has led to fast adoption acrossthe SPA (single-page app) ecosystem. Preact is an even lighter-and-fasteralter..." />
+
+  <link type="text/css" rel="stylesheet" href="/assets/animate-ec43d72c3ed45e08a460b8a2966d8dba6006aebfa0530935c3973fa493a8771f.css">
+  <link type="text/css" rel="stylesheet" href="/assets/okta-a96df4c9d48b78b618e1d541f46f7137d73d40653571e020c1ad59edd7915c60.css">
+  
+  
+  <title>Build a Preact App with Authentication | Okta Developer</title>
+  <meta name="description" content="React is a fast, and lightweight library, which has led to fast adoption acrossthe SPA (single-page app) ecosystem. Preact is an even lighter-and-fasteralter...">
+  <link rel="canonical" href="https://developer.okta.com/blog/2017/10/19/build-a-preact-app-with-authentication"  data-proofer-ignore>
+  <link rel="alternate" type="application/rss+xml" title="Okta Developer" href="https://developer.okta.com/feed.xml"><!-- GA -->
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+  <link rel="manifest" href="/manifest.json">
+  <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#21313a">
+  <meta name="theme-color" content="#ffffff">
+</head>
+
+  
+    <body id="blog">
+	
+
+
+
+
+<header class="Header is-fixed">
+
+  <div class="Wrap">
+
+    <a class="Logo" href="https://developer.okta.com">
+      <svg version="1.1" id="OktaLogo" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 431.9 151.4" style="enable-background:new 0 0 431.9 151.4;" xml:space="preserve"><g><g><g><path d="M102.2,41.4c-21,0-38.1,17.1-38.1,38.1s17.1,38.1,38.1,38.1s38.1-17.1,38.1-38.1l0,0C140.3,58.5,123.2,41.4,102.2,41.4z M102.2,98.5c-10.5,0-19-8.5-19-19s8.5-19,19-19s19,8.5,19,19c0.1,10.5-8.4,19-18.9,19.1C102.3,98.6,102.2,98.6,102.2,98.5L102.2,98.5z"/><path d="M169.1,92.3c0-1.9,1.5-3.4,3.4-3.4c0.9,0,1.8,0.4,2.4,1c9.5,9.7,25.3,26.3,25.4,26.4c0.4,0.5,0.8,0.8,1.4,0.9l1.6,0.2h17.2c1.8,0,3.3-1.4,3.4-3.2c0-0.8-0.3-1.5-0.8-2.2l-28.6-29.2l-1.5-1.5c-3.2-3.9-2.9-5.4,0.8-9.3l22.6-25.1c1.1-1.4,0.8-3.5-0.6-4.6c-0.6-0.4-1.3-0.7-2-0.7h-17c-0.6,0.2-1.1,0.5-1.5,0.9L175,64.4c-1.3,1.4-3.4,1.5-4.8,0.2c-0.7-0.6-1.1-1.5-1.1-2.5V18.9c0-1.7-1.3-3-3-3c-0.1,0-0.2,0-0.3,0h-12.7c-2.2,0-3.3,1.5-3.3,2.8v95.8c0,2.2,1.8,2.8,3.3,2.8h12.7c1.7,0.1,3.2-1.2,3.3-2.9c0,0,0,0,0,0V92.3z"/><path d="M273,114l-1.4-12.8c-0.2-1.7-1.7-2.9-3.4-2.7c0,0,0,0-0.1,0l-2.9,0.2c-10.1,0-18.5-7.9-19-18c0-0.3,0-0.7,0-1V64.2c-0.1-2,1.5-3.6,3.5-3.7c0,0,0,0,0,0h17c1.7-0.1,3.1-1.5,3-3.2c0,0,0-0.1,0-0.1v-12c0-2.3-1.5-3.6-2.8-3.6h-17.1c-1.9,0.1-3.5-1.5-3.6-3.4c0,0,0,0,0,0V18.9c-0.1-1.7-1.5-3.1-3.2-3c0,0-0.1,0-0.1,0h-12.7c-1.6-0.1-3,1.1-3.1,2.7c0,0.1,0,0.1,0,0.2c0,0,0,61.7,0,62c0.5,21,17.9,37.6,38.9,37c1.4,0,2.9-0.2,4.3-0.3C272,117.2,273.2,115.7,273,114z"/></g><path d="M364.7,98c-10.8,0-12.4-3.8-12.4-18.3l0,0V44.8c0-1.8-1.4-3.2-3.2-3.2c0,0-0.1,0-0.1,0h-12.8c-1.8,0-3.2,1.4-3.3,3.2v1.6C314.6,36,291.3,42.5,281,60.8c-10.4,18.3-3.9,41.6,14.4,51.9c14,7.9,31.4,6.2,43.5-4.2c3.6,5.5,9.3,9.1,18.3,9.1c1.5,0,9.7,0.3,9.7-3.5v-13.6C367,99.2,366,98.1,364.7,98z M314.2,98.6c-10.5,0-19-8.5-19-19s8.5-19,19-19s19,8.5,19,19l0,0C333.2,90.1,324.7,98.6,314.2,98.6z"/></g><path d="M19.4,74c2.2-1.9,4.1-4.1,5.7-6.6c3.5-5.3,5.4-11.5,5.2-17.9V27c0-4.9,0.9-8.4,2.7-10.5c1.8-2.1,4.8-3,9.2-3h12.6c1.2,0,2.1-0.9,2.2-2.1l0,0V2.2C57,1,56,0,54.8,0c0,0,0,0,0,0H41.5c-7.8,0-12.9,2.1-18,7.6s-7.1,12.3-7.1,21.7v14.2c0,2.2-0.1,4-0.2,5.7v2.2c-0.5,3.2-1.8,6.2-3.6,8.9C9.4,64.7,5.1,70.9,0.9,74l0,0l-0.3,0.3l0,0l-0.2,0.3H0.2v0.3l0,0c-0.1,0.3-0.1,0.7,0,1l0,0v0.3h0.1l0.2,0.3l0,0l0.3,0.3l0,0c4.2,3.1,8.5,9.3,11.3,13.7c1.8,2.7,3.1,5.7,3.6,8.9v2.2c0.1,1.6,0.2,3.5,0.2,5.7v14.3c0,9.4,2.4,16.7,7.1,21.7s10.2,7.6,18,7.6h13.8c1.2,0,2.2-1,2.2-2.2V140l0,0c0-1.2-1-2.2-2.2-2.2H42.2c-4.4,0-7.5-1-9.2-3s-2.7-5.6-2.7-10.5v-22.4c0.2-6.4-1.7-12.6-5.2-17.9c-1.6-2.5-3.5-4.7-5.7-6.6l0,0c-0.9-0.7-1.1-2-0.4-2.9C19.2,74.3,19.3,74.2,19.4,74L19.4,74z"/><path d="M412.5,74c-2.2-1.9-4.1-4.1-5.7-6.6c-3.5-5.3-5.4-11.5-5.2-17.9V27c0-4.9-0.9-8.4-2.7-10.5s-4.8-3-9.2-3h-12.6c-1.2,0-2.2-1-2.2-2.2c0,0,0,0,0,0l0,0V2.2c0-1.2,1-2.2,2.2-2.2c0,0,0,0,0,0h13.4c7.8,0,12.9,2.1,18,7.6s7.1,12.3,7.1,21.7v14.2c0,2.2,0.1,4,0.2,5.7v2.2c0.5,3.2,1.8,6.2,3.6,8.9c2.8,4.5,7.1,10.7,11.3,13.7l0,0l0.3,0.3l0,0l0.2,0.3h0.1v0.3l0,0c0.1,0.3,0.1,0.7,0,1l0,0v0.3h-0.1l-0.2,0.3l0,0l-0.3,0.3l0,0c-4.2,3.1-8.5,9.3-11.3,13.7c-1.8,2.7-3.1,5.7-3.6,8.9v2.2c-0.1,1.6-0.2,3.5-0.2,5.7v14.3c0,9.4-2.4,16.7-7.1,21.7s-10.2,7.6-18,7.6h-13.4c-1.2,0-2.2-1-2.2-2.2c0,0,0,0,0,0V140l0,0c0-1.2,1-2.2,2.2-2.2l0,0h12.7c4.4,0,7.5-1,9.2-3s2.7-5.6,2.7-10.5v-22.4c-0.2-6.3,1.6-12.6,5.1-17.9c1.6-2.5,3.5-4.7,5.7-6.6l0,0c0.9-0.7,1.1-2,0.4-2.9C412.7,74.3,412.6,74.2,412.5,74L412.5,74z"/></g></svg>
+    </a>
+
+    <nav class="Header-nav PrimaryNav">
+      <ul class="menu">
+        <li class="first leaf">
+          <a href="https://developer.okta.com/product/">Product</a>
+        </li>
+        <li class="leaf">
+          <a href="https://developer.okta.com/pricing/">Pricing</a>
+        </li>
+        <li class="leaf">
+          <a href="/blog/" class="active">Blog</a>
+        </li>
+        <li class="leaf">
+          <a href="/documentation/">Docs</a>
+        </li>
+        <li class="last expanded">
+          <span class="nolink">Support</span>
+          <ul class="menu">
+            <li class="first leaf"><a href="https://devforum.okta.com/">Okta Developer Forums</a></li>
+            <li class="last leaf"><a href="mailto:developers@okta.com">developers@okta.com</a></li>
+          </ul>
+        </li>
+      </ul>
+      <a class="PrimaryNav-toggle" href="#">
+        <svg width="20px" height="20px" viewBox="0 0 20 20" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+            <g class="MenuIcon" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="round">
+                <path d="M1,16 L19,16" class="MenuIcon-line1" stroke="#FFFFFF" stroke-width="2"></path>
+                <path d="M1,4 L19,4" class="MenuIcon-line2" stroke="#FFFFFF" stroke-width="2"></path>
+                <path d="M1,10 L19,10" class="MenuIcon-line3" stroke="#FFFFFF" stroke-width="2"></path>
+                <path d="M1,10 L19,10" class="MenuIcon-line4" stroke="#FFFFFF" stroke-width="2"></path>
+            </g>
+        </svg>
+        <svg class="CloseIcon" width="16px" height="16px" viewBox="0 0 16 16" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+          <g id="ALl-Boards" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+            <g id="Desktop" transform="translate(-915.000000, -235.000000)" fill="#FFFFFF">
+              <g id="Search-bar-Active" transform="translate(30.000000, 26.000000)">
+                <polygon id="Icon/Cross" points="901 210.6 899.4 209 893 215.4 886.6 209 885 210.6 891.4 217 885 223.4 886.6 225 893 218.6 899.4 225 901 223.4 894.6 217"></polygon>
+              </g>
+            </g>
+          </g>
+        </svg>
+      </a>
+
+      <div class="PrimaryNav-cta">
+        <a target="_blank" rel="noopener noreferrer" href="https://login.okta.com/?SAMLRequest=fc%2B7CsJAEAXQXvAflu1NNJUMeZBGELTx1a%2FrYILJTtyZGD%2FfSBRiYzlw77lMnD3rSj3Qc0ku0YtgrhU6S5fSXRN9PKxmS52l00nMpq6iBvJWCrfDe4ss6vStRe9aDzmGIZfo1jsgwyWDMzUyiIV9vt1AH4XGk5ClSvewUgMNa%2BYW%2FVj5jxhm9NLP67QQaSAMu64L6CYmsFSHlnzT4ZlLwTgcL6Sf8%2FeX9AU%3Dhttps://login.okta.com/?SAMLRequest=fc%2B7CsJAEAXQXvAflu1NNJUMeZBGELTx1a%2FrYILJTtyZGD%2FfSBRiYzlw77lMnD3rSj3Qc0ku0YtgrhU6S5fSXRN9PKxmS52l00nMpq6iBvJWCrfDe4ss6vStRe9aDzmGIZfo1jsgwyWDMzUyiIV9vt1AH4XGk5ClSvewUgMNa%2BYW%2FVj5jxhm9NLP67QQaSAMu64L6CYmsFSHlnzT4ZlLwTgcL6Sf8%2FeX9AU%3D" class="Button--redOutline">Login</a>
+        <a href="https://developer.okta.com/signup/" class="Button--red">Sign up</a>
+      </div>
+
+      <a class="SearchIcon" href="#"></a>
+      <form id="form_search" class="SearchBar Formisimo_clocked_69929" method="get" action="https://developer.okta.com/search/" name="form_search" __bizdiag="-784164280" __biza="WJ__">
+        <input type="text" name="stq" autocomplete="off" id="st-search-input-auto" class="st-search-input" placeholder="Search">
+        <input type="submit" name="submit" value="GO">
+      </form>
+
+    </nav>
+
+  </div>
+
+</header>
+
+	<div class="page-content">
+		
+
+
+
+
+
+
+<section class="Blog is-single">
+		
+	<div class="Blog-social">
+		
+		<a href="https://github.com/leebrandt" target="_blank"><i class="fa fa-github"></i></a>
+		
+		
+		<a href="https://twitter.com/leebrandt" target="_blank"><i class="fa fa-twitter"></i></a>
+		
+		
+		
+		<a href="http://leebrandt.me" target="_blank"><i class="fa fa-external-link"></i></a>
+		
+	</div>
+	
+	
+
+<article class="BlogPost">
+	
+	<header class="BlogPost-header">
+	
+		<time class="BlogPost-date" datetime="2017-10-19">October 19, 2017</time>
+		
+		<h1 class="BlogPost-title">
+			
+			Build a Preact App with Authentication
+			
+		</h1>
+		
+		<div class="BlogPost-attribution">
+			
+				<img src="/assets/avatar-leebrandt-23a647548f26433d031856dcef1df5204763b94283cd68c397d816a61363a94d.jpg" alt="avatar-leebrandt.jpg" class="BlogPost-avatar">
+			
+			<span class="BlogPost-author">Lee Brandt</span>
+		</div>
+	
+	</header>
+	
+	<div class="BlogPost-content">
+		
+	<p>React is a fast, and lightweight library, which has led to fast adoption across
+the SPA (single-page app) ecosystem. Preact is an even lighter-and-faster
+alternative to React, weighing in at a measly 3kb! For less complex
+applications, it can be a great choice.</p>
+
+<p>In this tutorial, you’ll build a basic Preact application with a couple of pages
+and user authentication using the <a href="https://developer.okta.com/code/javascript/okta_sign-in_widget">Okta Sign-In
+Widget</a>.</p>
+
+<h2 id="bootstrap-your-app-with-preactcli">Bootstrap Your App With PreactCLI</h2>
+
+<p>To get your project started, you’ll install the
+<a href="https://github.com/developit/preact-cli">PreactCLI</a> using
+<a href="https://www.npmjs.com/package/preact-cli">NPM</a>.</p>
+
+<div class="language-bash highlighter-rouge"><pre class="highlight"><code>npm install -g preact-cli
+</code></pre>
+</div>
+
+<p>Once you have the CLI installed, run the command to create a base Preact
+application:</p>
+
+<div class="language-bash highlighter-rouge"><pre class="highlight"><code>preact create okta-preact-example
+</code></pre>
+</div>
+
+<p>This command will chug along for a few minutes scaffolding a basic Preact app
+and installing all the dependencies. Once it’s done, you should see a bunch of
+information on the command line informing you of what you can do next.</p>
+
+<p>Change into the application directory.</p>
+
+<div class="language-bash highlighter-rouge"><pre class="highlight"><code><span class="nb">cd </span>okta-preact-example
+</code></pre>
+</div>
+
+<p>Then start the application, just to make sure everything worked as expected.</p>
+
+<div class="language-bash highlighter-rouge"><pre class="highlight"><code>npm start
+</code></pre>
+</div>
+
+<p>You should see a quick build run and the screen will clear and show you that the
+application is running at <code class="highlighter-rouge">http://localhost:8080</code>. When you open up that URL in
+your browser, you should see a page like this:</p>
+
+<p><img src="/assets/blog/build-a-preact-app-with-authentication/base-preact-app-58e75e5400d94a340acabcc9a9b283818e0ba445f05ae76513f5f10ed6b03768.png" alt="Base Preact Application" width="700" class="center-image" /></p>
+
+<h3 id="some-things-to-note-about-preactcli">Some Things To Note About PreactCLI</h3>
+
+<p>Even though the PreactCLI-generated app looks a lot like a React app generated
+by <a href="https://github.com/facebookincubator/create-react-app">create-react-app</a>,
+and you can even use some of the React plugins (like
+<a href="https://reacttraining.com/react-router/">React-Router</a> in your Preact
+application, there are some significant differences.</p>
+
+<p>For instance, unlike the ReactCLI, there is no way to <code class="highlighter-rouge">eject</code> the
+<a href="https://webpack.js.org/">Webpack</a> configuration. Instead Preact encourages
+developers to customize Webpack by creating a file called <code class="highlighter-rouge">preact.config.js</code>,
+using Preact’s <a href="https://github.com/developit/preact-cli/blob/HEAD/docs/webpack-helpers.md">Webpack Config
+Helpers</a>
+and exporting functions to change the way Webpack behaves.</p>
+
+<p>Even though the PreactCLI says the application is running at
+<code class="highlighter-rouge">http://0.0.0.0:8080</code>, use <code class="highlighter-rouge">http://localhost:8080</code>. It’s the same thing and when
+you set up your application in the Okta dashboard, you’ll set
+<code class="highlighter-rouge">http://localhost:8080</code> as your base URL and callback URL, so this just makes
+sure that you can call the Okta APIs.</p>
+
+<h2 id="create-your-okta-application">Create Your Okta Application</h2>
+
+<p>Now that you have the basic shell of an application, it’s time to add user
+authentication. If you don’t already have one, create a free (forever) account
+at <a href="https://developer.okta.com/signup/">Okta</a>.</p>
+
+<p>Once you’ve created an account, go to the admin dashboard and click on
+“Applications” in the page menu. Then click the green “Add Application” button,
+then the green “Create New App” button, so that you see a modal window like:</p>
+
+<p><img src="/assets/blog/build-a-preact-app-with-authentication/create-application-screen-d481b15c7c5921436d2ca6f7ff97894b7a7e181059cb7e2020ae85c913d24293.png" alt="Create Application Screen" width="700" class="center-image" /></p>
+
+<p>Choose “SPA” from the Platform buttons. <a href="http://openid.net/connect/">OpenID
+Connect</a> will already be chosen for you. Click the
+“Next” button to create your application.</p>
+
+<p>This will take you to a screen to “Application Settings” page of the Create
+Application wizard. Enter “OktaPreactExample” in the Application name field and
+add <code class="highlighter-rouge">http://localhost:8080</code> as your base URI and as a login redirect URI. When
+you’re done, your form should look like this:</p>
+
+<p><img src="/assets/blog/build-a-preact-app-with-authentication/create-integration-screen-8d64d9f26e8c09e43eba0f6a3613cfe8bec720f1172b884e20a3a7bc7db42add.png" alt="Create Integration Screen" width="700" class="center-image" /></p>
+
+<p><em>You’ll need to create a user (if you don’t already have one) and assign your
+new application to them as well. Or you can log in with the credentials you use
+to log in to your Okta account (the admin user).</em></p>
+
+<h2 id="install-the-okta-sign-in-widget">Install the Okta Sign In Widget</h2>
+
+<p>The easiest way to get Okta’s authentication into your new Preact application
+will be to use Okta’s <a href="https://github.com/okta/okta-signin-widget">Sign-In
+Widget</a>. You’ll install it with npm
+using:</p>
+
+<div class="language-bash highlighter-rouge"><pre class="highlight"><code>npm install @okta/okta-signin-widget --save
+</code></pre>
+</div>
+
+<p>You’ll also need to install <code class="highlighter-rouge">preact-router</code> with:</p>
+
+<div class="language-bash highlighter-rouge"><pre class="highlight"><code>npm install preact-router --save
+</code></pre>
+</div>
+
+<h2 id="add-an-auth-high-order-component">Add an Auth High Order Component</h2>
+
+<p>With that done, you now need to add some <a href="https://facebook.github.io/react/docs/higher-order-components.html">High Order
+Components</a>
+to help with authentication.</p>
+
+<p>Add a file called <code class="highlighter-rouge">auth.js</code> in the <code class="highlighter-rouge">/src/lib</code> folder and add the following code:</p>
+
+<div class="language-js highlighter-rouge"><pre class="highlight"><code><span class="kr">import</span> <span class="p">{</span><span class="nx">h</span><span class="p">}</span> <span class="nx">from</span> <span class="s1">'preact'</span><span class="p">;</span>
+<span class="kr">import</span> <span class="p">{</span> <span class="nx">route</span> <span class="p">}</span> <span class="nx">from</span> <span class="s1">'preact-router'</span><span class="p">;</span>
+<span class="kr">import</span> <span class="nx">OktaSignIn</span> <span class="nx">from</span> <span class="s1">'@okta/okta-signin-widget/dist/js/okta-sign-in.min.js'</span><span class="p">;</span>
+<span class="kr">import</span> <span class="s1">'@okta/okta-signin-widget/dist/css/okta-sign-in.min.css'</span><span class="p">;</span>
+<span class="kr">import</span> <span class="s1">'@okta/okta-signin-widget/dist/css/okta-theme.css'</span><span class="p">;</span>
+
+<span class="kr">class</span> <span class="nx">Auth</span> <span class="p">{</span>
+  <span class="nx">constructor</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">login</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">login</span><span class="p">.</span><span class="nx">bind</span><span class="p">(</span><span class="k">this</span><span class="p">);</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">logout</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">logout</span><span class="p">.</span><span class="nx">bind</span><span class="p">(</span><span class="k">this</span><span class="p">);</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">isAuthenticated</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">isAuthenticated</span><span class="p">.</span><span class="nx">bind</span><span class="p">(</span><span class="k">this</span><span class="p">);</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">handleAuthentication</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">handleAuthentication</span><span class="p">.</span><span class="nx">bind</span><span class="p">(</span><span class="k">this</span><span class="p">);</span>
+
+    <span class="k">this</span><span class="p">.</span><span class="nx">widget</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">OktaSignIn</span><span class="p">({</span>
+      <span class="na">baseUrl</span><span class="p">:</span> <span class="s1">'<span class="okta-preview-domain"><span class="okta-preview-domain">https://{yourOktaDomain}.com</span></span>/'</span><span class="p">,</span>
+      <span class="na">clientId</span><span class="p">:</span> <span class="s1">'{clientId}'</span><span class="p">,</span>
+      <span class="na">redirectUri</span><span class="p">:</span> <span class="s1">'http://localhost:8080'</span><span class="p">,</span>
+      <span class="na">authParams</span><span class="p">:</span> <span class="p">{</span>
+        <span class="na">responseType</span><span class="p">:</span> <span class="p">[</span><span class="s1">'id_token'</span><span class="p">,</span> <span class="s1">'token'</span><span class="p">],</span>
+        <span class="na">scopes</span><span class="p">:</span> <span class="p">[</span><span class="s1">'openid'</span><span class="p">,</span> <span class="s1">'email'</span><span class="p">,</span> <span class="s1">'profile'</span><span class="p">]</span>
+      <span class="p">}</span>
+    <span class="p">});</span>
+  <span class="p">}</span>
+
+  <span class="nx">isAuthenticated</span><span class="p">()</span> <span class="p">{</span>
+    <span class="c1">// Checks if there is a current accessToken in the TokenManger.</span>
+    <span class="k">return</span> <span class="o">!!</span><span class="k">this</span><span class="p">.</span><span class="nx">widget</span><span class="p">.</span><span class="nx">tokenManager</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">'accessToken'</span><span class="p">);</span>
+  <span class="p">}</span>
+
+  <span class="nx">getCurrentUser</span><span class="p">(){</span>
+    <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">widget</span><span class="p">.</span><span class="nx">tokenManager</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">'idToken'</span><span class="p">);</span>
+  <span class="p">}</span>
+
+  <span class="nx">login</span><span class="p">()</span> <span class="p">{</span>
+    <span class="c1">// Redirect to the login page</span>
+    <span class="nx">route</span><span class="p">(</span><span class="s1">'/login/'</span><span class="p">);</span>
+  <span class="p">}</span>
+
+  <span class="nx">async</span> <span class="nx">logout</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">widget</span><span class="p">.</span><span class="nx">tokenManager</span><span class="p">.</span><span class="nx">clear</span><span class="p">();</span>
+    <span class="nx">await</span> <span class="k">this</span><span class="p">.</span><span class="nx">widget</span><span class="p">.</span><span class="nx">signOut</span><span class="p">();</span>
+    <span class="nx">location</span> <span class="o">=</span> <span class="s1">'/'</span><span class="p">;</span>
+  <span class="p">}</span>
+
+  <span class="nx">handleAuthentication</span><span class="p">(</span><span class="nx">tokens</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">for</span> <span class="p">(</span><span class="kd">let</span> <span class="nx">token</span> <span class="nx">of</span> <span class="nx">tokens</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">if</span> <span class="p">(</span><span class="nx">token</span><span class="p">.</span><span class="nx">idToken</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">this</span><span class="p">.</span><span class="nx">widget</span><span class="p">.</span><span class="nx">tokenManager</span><span class="p">.</span><span class="nx">add</span><span class="p">(</span><span class="s1">'idToken'</span><span class="p">,</span> <span class="nx">token</span><span class="p">);</span>
+      <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="nx">token</span><span class="p">.</span><span class="nx">accessToken</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">this</span><span class="p">.</span><span class="nx">widget</span><span class="p">.</span><span class="nx">tokenManager</span><span class="p">.</span><span class="nx">add</span><span class="p">(</span><span class="s1">'accessToken'</span><span class="p">,</span> <span class="nx">token</span><span class="p">);</span>
+      <span class="p">}</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="c1">// create a singleton</span>
+<span class="kr">const</span> <span class="nx">auth</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Auth</span><span class="p">();</span>
+<span class="kr">export</span> <span class="kr">const</span> <span class="nx">withAuth</span> <span class="o">=</span> <span class="nx">WrappedComponent</span> <span class="o">=&gt;</span> <span class="nx">props</span> <span class="o">=&gt;</span>
+  <span class="o">&lt;</span><span class="nx">WrappedComponent</span> <span class="nx">auth</span><span class="o">=</span><span class="p">{</span><span class="nx">auth</span><span class="p">}</span> <span class="p">{...</span><span class="nx">props</span><span class="p">}</span> <span class="sr">/&gt;</span><span class="err">;
+</span></code></pre>
+</div>
+
+<p>In the first line of code, you can tell something’s different. The <code class="highlighter-rouge">h</code> module in
+Preact is what turns
+<a href="https://facebook.github.io/react/docs/introducing-jsx.html">JSX</a> into <a href="https://developer.mozilla.org/en-US/docs/Web/API/Document_Object_Model/Introduction">DOM
+elements</a>.
+Normally, React would use the <code class="highlighter-rouge">React</code> library to generate <code class="highlighter-rouge">React.createElement</code>
+statements to make DOM elements from JSX. Preact uses the <code class="highlighter-rouge">h</code> library to make
+something like <code class="highlighter-rouge">h('div', {class:'something'}, 'Content')</code> statements to do that.</p>
+
+<p>Next, you imported <code class="highlighter-rouge">route</code> from preact-router right below the <code class="highlighter-rouge">h</code> import. This
+is what is used by Preact to do the redirects in the <code class="highlighter-rouge">login</code> function. Notice
+that the <code class="highlighter-rouge">Auth</code> class is just a regular function and does not extend
+<code class="highlighter-rouge">Component</code>. In the constructor, the internal functions were bound with the
+<code class="highlighter-rouge">this</code> context from the Auth class.</p>
+
+<p>Then enter your Okta organization URL and client ID to the Okta Sign-In Widget
+configuration. Your Organization URL will be the URL you use when you log into
+your Okta account (e.g. http://dev-12345.oktapreview.com) and you can get your
+client ID from the application’s property page in the administrative dashboard
+on the “General” tab for your application (obviously, yours won’t be blurred
+out):</p>
+
+<p><img src="/assets/blog/build-a-preact-app-with-authentication/client-id-screen-1eb2a524991905966245242c1daecfe49e9447fcbe5fa90b3856e994cb9034df.png" alt="Client ID Screen" width="700" class="center-image" /></p>
+
+<p>You’ll also want to change the <code class="highlighter-rouge">redirectUri</code> property to <code class="highlighter-rouge">http://localhost:8080</code>
+because the Preact uses port <code class="highlighter-rouge">8080</code> instead of <code class="highlighter-rouge">3000</code> for normal React apps.</p>
+
+<p>The <code class="highlighter-rouge">login</code> function simply routes the user to the login page, while the
+<code class="highlighter-rouge">logout</code> function clears the tokens saved in the widget’s token manager, calls
+<code class="highlighter-rouge">signOut</code> on the widget, and redirects the user to the root of the application.</p>
+
+<p>Finally, a singleton of the <code class="highlighter-rouge">Auth</code> class is created to be shared by all the
+components, and is passed in as a prop called <code class="highlighter-rouge">auth</code> to any component that you
+wrap in <code class="highlighter-rouge">withAuth</code>.</p>
+
+<h2 id="create-a-widget-wrapper">Create a Widget Wrapper</h2>
+
+<p>Create a file in your <code class="highlighter-rouge">/src/lib</code> folder called <code class="highlighter-rouge">OktaSignInWidget.js</code>. Enter the
+code for this component:</p>
+
+<div class="language-js highlighter-rouge"><pre class="highlight"><code><span class="kr">import</span> <span class="p">{</span> <span class="nx">h</span><span class="p">,</span> <span class="nx">Component</span> <span class="p">}</span> <span class="nx">from</span> <span class="s1">'preact'</span><span class="p">;</span>
+
+<span class="kr">export</span> <span class="k">default</span> <span class="kr">class</span> <span class="nx">OktaSignInWidget</span> <span class="kr">extends</span> <span class="nx">Component</span> <span class="p">{</span>
+  <span class="nx">componentDidMount</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">widget</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">props</span><span class="p">.</span><span class="nx">widget</span><span class="p">;</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">widget</span><span class="p">.</span><span class="nx">renderEl</span><span class="p">({</span> <span class="na">el</span><span class="p">:</span> <span class="k">this</span><span class="p">.</span><span class="nx">widgetContainer</span> <span class="p">},</span> <span class="k">this</span><span class="p">.</span><span class="nx">props</span><span class="p">.</span><span class="nx">onSuccess</span><span class="p">,</span> <span class="k">this</span><span class="p">.</span><span class="nx">props</span><span class="p">.</span><span class="nx">onError</span><span class="p">);</span>
+  <span class="p">}</span>
+
+  <span class="nx">componentWillUnmount</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">widget</span><span class="p">.</span><span class="nx">remove</span><span class="p">();</span>
+  <span class="p">}</span>
+
+  <span class="nx">render</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="o">&lt;</span><span class="nx">div</span> <span class="nx">ref</span><span class="o">=</span><span class="p">{(</span><span class="nx">div</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span> <span class="k">this</span><span class="p">.</span><span class="nx">widgetContainer</span> <span class="o">=</span> <span class="nx">div</span><span class="p">;</span> <span class="p">}}</span> <span class="sr">/</span><span class="err">&gt;
+</span>  <span class="p">}</span>
+<span class="p">};</span>
+</code></pre>
+</div>
+
+<p>Here, the <code class="highlighter-rouge">componentDidMount</code> method renders the Okta Sign-In Widget to the
+<code class="highlighter-rouge">div</code> in your render method and the <code class="highlighter-rouge">componentWillUnmount</code> function removes the
+widget.</p>
+
+<p>In the <code class="highlighter-rouge">render</code> method, there’s some strange-looking code. This allows you to
+set a reference to the current element into a variable called <code class="highlighter-rouge">widgetContainer</code>
+and then use it in the <code class="highlighter-rouge">componentDidMount</code> as <code class="highlighter-rouge">this.widgetContainer</code>. Neat, huh?
+Thanks to <a href="https://twitter.com/mraible">Matt Raible</a> for showing me that trick!</p>
+
+<h2 id="create-a-redirect-component">Create a Redirect Component</h2>
+
+<p>The React-Router has a Redirect component in it, but the Preact router doesn’t,
+so you’ll need one. Luckily, it’s easy to create your own. In your <code class="highlighter-rouge">/src/lib</code>
+folder create a file called <code class="highlighter-rouge">Redirect.js</code> and add the following code:</p>
+
+<div class="language-js highlighter-rouge"><pre class="highlight"><code><span class="kr">import</span> <span class="p">{</span> <span class="nx">Component</span> <span class="p">}</span> <span class="nx">from</span> <span class="s1">'preact'</span><span class="p">;</span>
+
+<span class="kr">export</span> <span class="k">default</span> <span class="kr">class</span> <span class="nx">Redirect</span> <span class="kr">extends</span> <span class="nx">Component</span> <span class="p">{</span>
+  <span class="nx">componentWillMount</span><span class="p">()</span> <span class="p">{</span>
+    <span class="nx">location</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">props</span><span class="p">.</span><span class="nx">to</span><span class="p">.</span><span class="nx">pathname</span><span class="p">;</span>
+  <span class="p">}</span>
+
+  <span class="nx">render</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="kc">null</span><span class="p">;</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre>
+</div>
+
+<p>This is just a component that will redirect based on a URL passed to it. In this
+case, the use will be redirected using the <code class="highlighter-rouge">window.location</code> mechanism, mostly
+because you’ll want to refresh the page. You could also just use
+<code class="highlighter-rouge">route(this.props.to.pathname)</code> and let Preact’s router redirect the user.</p>
+
+<h2 id="create-a-login-component">Create a Login Component</h2>
+
+<p>Next, create a <code class="highlighter-rouge">Login</code> folder in <code class="highlighter-rouge">src/routes</code>. In that folder create an
+<code class="highlighter-rouge">index.js</code> file and a <code class="highlighter-rouge">style.css</code> file. This just follows along with the way the
+Preact CLI creates components.</p>
+
+<p>In the <code class="highlighter-rouge">index.js</code> file, create a <code class="highlighter-rouge">Login</code> component, wrapped in the <code class="highlighter-rouge">withAuth</code>
+component. First, by importing the modules needed:</p>
+
+<div class="language-js highlighter-rouge"><pre class="highlight"><code><span class="kr">import</span> <span class="p">{</span> <span class="nx">h</span><span class="p">,</span> <span class="nx">Component</span> <span class="p">}</span> <span class="nx">from</span> <span class="s1">'preact'</span><span class="p">;</span>
+<span class="kr">import</span> <span class="nx">Redirect</span> <span class="nx">from</span> <span class="s1">'../../lib/Redirect'</span><span class="p">;</span>
+<span class="kr">import</span> <span class="nx">OktaSignInWidget</span> <span class="nx">from</span> <span class="s1">'../../lib/OktaSignInWidget'</span><span class="p">;</span>
+<span class="kr">import</span> <span class="p">{</span> <span class="nx">withAuth</span> <span class="p">}</span> <span class="nx">from</span> <span class="s1">'../../lib/auth'</span><span class="p">;</span>
+</code></pre>
+</div>
+
+<p>Start the component by wrapping in the <code class="highlighter-rouge">withAuth</code> high order component you
+created earlier, and set the beginning state. Here, you’ll have the
+<code class="highlighter-rouge">redirectToReferrer</code> set to false by default.</p>
+
+<div class="language-js highlighter-rouge"><pre class="highlight"><code><span class="kr">export</span> <span class="k">default</span> <span class="nx">withAuth</span><span class="p">(</span><span class="kr">class</span> <span class="nx">Login</span> <span class="kr">extends</span> <span class="nx">Component</span> <span class="p">{</span>
+  <span class="nx">state</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="na">redirectToReferrer</span><span class="p">:</span> <span class="kc">false</span>
+  <span class="p">};</span>
+<span class="p">}</span>
+</code></pre>
+</div>
+
+<p>In the <code class="highlighter-rouge">componentWillMount</code> lifecycle function, wire up the <code class="highlighter-rouge">onSuccess</code> and
+<code class="highlighter-rouge">onError</code> functions and create them in your component.</p>
+
+<div class="language-js highlighter-rouge"><pre class="highlight"><code><span class="nx">componentWillMount</span><span class="p">()</span> <span class="p">{</span>
+  <span class="k">this</span><span class="p">.</span><span class="nx">onSuccess</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">onSuccess</span><span class="p">.</span><span class="nx">bind</span><span class="p">(</span><span class="k">this</span><span class="p">);</span>
+  <span class="k">this</span><span class="p">.</span><span class="nx">onError</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">onError</span><span class="p">.</span><span class="nx">bind</span><span class="p">(</span><span class="k">this</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="nx">onSuccess</span><span class="p">(</span><span class="nx">tokens</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">this</span><span class="p">.</span><span class="nx">props</span><span class="p">.</span><span class="nx">auth</span><span class="p">.</span><span class="nx">handleAuthentication</span><span class="p">(</span><span class="nx">tokens</span><span class="p">);</span>
+  <span class="k">this</span><span class="p">.</span><span class="nx">setState</span><span class="p">({</span>
+    <span class="na">redirectToReferrer</span><span class="p">:</span> <span class="kc">true</span>
+  <span class="p">});</span>
+<span class="p">}</span>
+
+<span class="nx">onError</span><span class="p">(</span><span class="nx">err</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">'error logging in'</span><span class="p">,</span> <span class="nx">err</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre>
+</div>
+
+<p>You’ll notice your component passes handling of the authentication back to the
+high order component. This is a prime example of the benefits of high order
+components and composition in JavaScript.</p>
+
+<p>Finally, create the <code class="highlighter-rouge">render</code> function that will make the decision about showing
+the login widget or, if the user is already logged in, redirecting them to the
+home page. You could also redirect the user to the page they were going to when
+they were redirected to the login page, but let’s skip that for now.</p>
+
+<div class="language-js highlighter-rouge"><pre class="highlight"><code><span class="nx">render</span><span class="p">({</span><span class="nx">location</span><span class="p">,</span> <span class="nx">auth</span><span class="p">},</span> <span class="p">{</span><span class="nx">redirectToReferrer</span><span class="p">})</span> <span class="p">{</span>
+  <span class="kd">let</span> <span class="nx">from</span><span class="p">;</span>
+  <span class="k">if</span> <span class="p">(</span><span class="nx">location</span> <span class="o">&amp;&amp;</span> <span class="nx">location</span><span class="p">.</span><span class="nx">state</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">from</span> <span class="o">=</span> <span class="nx">location</span><span class="p">.</span><span class="nx">state</span><span class="p">;</span>
+  <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+    <span class="nx">from</span> <span class="o">=</span> <span class="p">{</span> <span class="na">pathname</span><span class="p">:</span> <span class="s1">'/'</span> <span class="p">};</span>
+  <span class="p">}</span>
+
+  <span class="k">if</span> <span class="p">(</span><span class="nx">auth</span><span class="p">.</span><span class="nx">isAuthenticated</span><span class="p">()</span> <span class="o">||</span> <span class="nx">redirectToReferrer</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="o">&lt;</span><span class="nx">Redirect</span> <span class="nx">to</span><span class="o">=</span><span class="p">{</span><span class="nx">from</span><span class="p">}</span> <span class="sr">/&gt;</span><span class="err">;
+</span>  <span class="p">}</span>
+
+  <span class="k">return</span> <span class="p">(</span>
+    <span class="o">&lt;</span><span class="nx">OktaSignInWidget</span>
+      <span class="nx">widget</span><span class="o">=</span><span class="p">{</span><span class="nx">auth</span><span class="p">.</span><span class="nx">widget</span><span class="p">}</span>
+      <span class="nx">onSuccess</span><span class="o">=</span><span class="p">{</span><span class="k">this</span><span class="p">.</span><span class="nx">onSuccess</span><span class="p">}</span>
+      <span class="nx">onError</span><span class="o">=</span><span class="p">{</span><span class="k">this</span><span class="p">.</span><span class="nx">onError</span><span class="p">}</span> <span class="sr">/</span><span class="err">&gt;
+</span>  <span class="p">);</span>
+<span class="p">}</span>
+</code></pre>
+</div>
+
+<p>You’ll notice here that Preact is a little different in that it gives you
+handles to <code class="highlighter-rouge">props</code> and <code class="highlighter-rouge">state</code> as parameters to the <code class="highlighter-rouge">render</code> function. This code
+simply uses destructuring of those parameters to make using <code class="highlighter-rouge">location</code>, <code class="highlighter-rouge">auth</code>
+and <code class="highlighter-rouge">redirectToReferrer</code> simple without having a ton of <code class="highlighter-rouge">this.props.{whatever}</code>.</p>
+
+<p>So your final <code class="highlighter-rouge">/src/routes/login/index.js</code> file will look like:</p>
+
+<div class="language-js highlighter-rouge"><pre class="highlight"><code><span class="kr">import</span> <span class="p">{</span> <span class="nx">h</span><span class="p">,</span> <span class="nx">Component</span> <span class="p">}</span> <span class="nx">from</span> <span class="s1">'preact'</span><span class="p">;</span>
+<span class="kr">import</span> <span class="nx">Redirect</span> <span class="nx">from</span> <span class="s1">'../../lib/Redirect'</span><span class="p">;</span>
+<span class="kr">import</span> <span class="nx">OktaSignInWidget</span> <span class="nx">from</span> <span class="s1">'../../lib/OktaSignInWidget'</span><span class="p">;</span>
+<span class="kr">import</span> <span class="p">{</span> <span class="nx">withAuth</span> <span class="p">}</span> <span class="nx">from</span> <span class="s1">'../../lib/auth'</span><span class="p">;</span>
+
+<span class="kr">export</span> <span class="k">default</span> <span class="nx">withAuth</span><span class="p">(</span><span class="kr">class</span> <span class="nx">Login</span> <span class="kr">extends</span> <span class="nx">Component</span> <span class="p">{</span>
+  <span class="nx">state</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="na">redirectToReferrer</span><span class="p">:</span> <span class="kc">false</span>
+  <span class="p">};</span>
+
+  <span class="nx">componentWillMount</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">onSuccess</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">onSuccess</span><span class="p">.</span><span class="nx">bind</span><span class="p">(</span><span class="k">this</span><span class="p">);</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">onError</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">onError</span><span class="p">.</span><span class="nx">bind</span><span class="p">(</span><span class="k">this</span><span class="p">);</span>
+  <span class="p">}</span>
+
+  <span class="nx">onSuccess</span><span class="p">(</span><span class="nx">tokens</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">props</span><span class="p">.</span><span class="nx">auth</span><span class="p">.</span><span class="nx">handleAuthentication</span><span class="p">(</span><span class="nx">tokens</span><span class="p">);</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">setState</span><span class="p">({</span>
+      <span class="na">redirectToReferrer</span><span class="p">:</span> <span class="kc">true</span>
+    <span class="p">});</span>
+  <span class="p">}</span>
+
+  <span class="nx">onError</span><span class="p">(</span><span class="nx">err</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">'error logging in'</span><span class="p">,</span> <span class="nx">err</span><span class="p">);</span>
+  <span class="p">}</span>
+
+ <span class="nx">render</span><span class="p">({</span><span class="nx">location</span><span class="p">,</span> <span class="nx">auth</span><span class="p">},</span> <span class="p">{</span><span class="nx">redirectToReferrer</span><span class="p">})</span> <span class="p">{</span>
+    <span class="kd">let</span> <span class="nx">from</span><span class="p">;</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nx">location</span> <span class="o">&amp;&amp;</span> <span class="nx">location</span><span class="p">.</span><span class="nx">state</span><span class="p">)</span> <span class="p">{</span>
+      <span class="nx">from</span> <span class="o">=</span> <span class="nx">location</span><span class="p">.</span><span class="nx">state</span><span class="p">;</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+      <span class="nx">from</span> <span class="o">=</span> <span class="p">{</span> <span class="na">pathname</span><span class="p">:</span> <span class="s1">'/'</span> <span class="p">};</span>
+    <span class="p">}</span>
+
+    <span class="k">if</span> <span class="p">(</span><span class="nx">auth</span><span class="p">.</span><span class="nx">isAuthenticated</span><span class="p">()</span> <span class="o">||</span> <span class="nx">redirectToReferrer</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">return</span> <span class="o">&lt;</span><span class="nx">Redirect</span> <span class="nx">to</span><span class="o">=</span><span class="p">{</span><span class="nx">from</span><span class="p">}</span> <span class="sr">/&gt;</span><span class="err">;
+</span>    <span class="p">}</span>
+
+    <span class="k">return</span> <span class="p">(</span>
+      <span class="o">&lt;</span><span class="nx">OktaSignInWidget</span>
+        <span class="nx">widget</span><span class="o">=</span><span class="p">{</span><span class="nx">auth</span><span class="p">.</span><span class="nx">widget</span><span class="p">}</span>
+        <span class="nx">onSuccess</span><span class="o">=</span><span class="p">{</span><span class="k">this</span><span class="p">.</span><span class="nx">onSuccess</span><span class="p">}</span>
+        <span class="nx">onError</span><span class="o">=</span><span class="p">{</span><span class="k">this</span><span class="p">.</span><span class="nx">onError</span><span class="p">}</span> <span class="sr">/</span><span class="err">&gt;
+</span>    <span class="p">);</span>
+  <span class="p">}</span>
+<span class="p">})</span>
+</code></pre>
+</div>
+
+<h2 id="update-the-profile-page">Update the Profile Page</h2>
+
+<p>Now that you have the <code class="highlighter-rouge">Login</code> component and it is using the Okta Sign-In Widget,
+use the <code class="highlighter-rouge">auth</code> component you created and update the profile page (in
+<code class="highlighter-rouge">/src/routes/profile/index.js</code>) to give you some more information about the
+user. This is what your final <code class="highlighter-rouge">/src/routes/profile/index.js</code> file should look
+like:</p>
+
+<div class="language-js highlighter-rouge"><pre class="highlight"><code><span class="kr">import</span> <span class="p">{</span> <span class="nx">h</span><span class="p">,</span> <span class="nx">Component</span> <span class="p">}</span> <span class="nx">from</span> <span class="s1">'preact'</span><span class="p">;</span>
+<span class="kr">import</span> <span class="p">{</span> <span class="nx">route</span> <span class="p">}</span> <span class="nx">from</span> <span class="s1">'preact-router'</span><span class="p">;</span>
+<span class="kr">import</span> <span class="p">{</span> <span class="nx">withAuth</span> <span class="p">}</span> <span class="nx">from</span> <span class="s1">'../../lib/auth'</span><span class="p">;</span>
+<span class="kr">import</span> <span class="nx">style</span> <span class="nx">from</span> <span class="s1">'./style'</span><span class="p">;</span>
+
+<span class="kr">export</span> <span class="k">default</span> <span class="nx">withAuth</span><span class="p">(</span><span class="kr">class</span> <span class="nx">Profile</span> <span class="kr">extends</span> <span class="nx">Component</span> <span class="p">{</span>
+  <span class="nx">constructor</span><span class="p">(</span><span class="nx">props</span><span class="p">){</span>
+    <span class="kr">super</span><span class="p">(</span><span class="nx">props</span><span class="p">);</span>
+  <span class="p">}</span>
+
+  <span class="nx">componentWillMount</span><span class="p">(){</span>
+    <span class="k">if</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">props</span><span class="p">.</span><span class="nx">auth</span><span class="p">.</span><span class="nx">isAuthenticated</span><span class="p">()){</span>
+      <span class="k">this</span><span class="p">.</span><span class="nx">state</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="na">user</span><span class="p">:</span> <span class="k">this</span><span class="p">.</span><span class="nx">props</span><span class="p">.</span><span class="nx">auth</span><span class="p">.</span><span class="nx">getCurrentUser</span><span class="p">()</span>
+      <span class="p">};</span>
+    <span class="p">}</span><span class="k">else</span><span class="p">{</span>
+      <span class="k">return</span> <span class="nx">route</span><span class="p">(</span><span class="s1">'/login/'</span><span class="p">);</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+
+  <span class="nx">render</span><span class="p">(</span><span class="nx">props</span><span class="p">,</span> <span class="p">{</span> <span class="nx">user</span> <span class="p">})</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="p">(</span>
+      <span class="nx">user</span> <span class="p">?</span>
+      <span class="o">&lt;</span><span class="nx">div</span> <span class="kr">class</span><span class="o">=</span><span class="p">{</span><span class="nx">style</span><span class="p">.</span><span class="nx">profile</span><span class="p">}</span><span class="o">&gt;</span>
+        <span class="o">&lt;</span><span class="nx">h3</span> <span class="kr">class</span><span class="o">=</span><span class="p">{</span><span class="nx">style</span><span class="p">.</span><span class="nx">heading</span><span class="p">}</span><span class="o">&gt;</span><span class="nx">Profile</span><span class="o">&lt;</span><span class="sr">/h3</span><span class="err">&gt;
+</span>        <span class="o">&lt;</span><span class="nx">ul</span><span class="o">&gt;</span>
+          <span class="o">&lt;</span><span class="nx">li</span><span class="o">&gt;</span>
+            <span class="o">&lt;</span><span class="nx">span</span> <span class="kr">class</span><span class="o">=</span><span class="p">{</span><span class="nx">style</span><span class="p">.</span><span class="nx">key</span><span class="p">}</span><span class="o">&gt;</span><span class="nx">Name</span><span class="p">:</span><span class="o">&lt;</span><span class="sr">/span</span><span class="err">&gt;
+</span>            <span class="o">&lt;</span><span class="nx">span</span> <span class="kr">class</span><span class="o">=</span><span class="p">{</span><span class="nx">style</span><span class="p">.</span><span class="nx">value</span><span class="p">}</span><span class="o">&gt;</span><span class="p">{</span><span class="nx">user</span><span class="p">.</span><span class="nx">claims</span><span class="p">.</span><span class="nx">name</span><span class="p">}</span><span class="o">&lt;</span><span class="sr">/span</span><span class="err">&gt;
+</span>          <span class="o">&lt;</span><span class="sr">/li</span><span class="err">&gt;
+</span>          <span class="o">&lt;</span><span class="nx">li</span><span class="o">&gt;</span>
+            <span class="o">&lt;</span><span class="nx">span</span> <span class="kr">class</span><span class="o">=</span><span class="p">{</span><span class="nx">style</span><span class="p">.</span><span class="nx">key</span><span class="p">}</span><span class="o">&gt;</span><span class="na">Email</span><span class="p">:</span><span class="o">&lt;</span><span class="sr">/span</span><span class="err">&gt;
+</span>            <span class="o">&lt;</span><span class="nx">span</span> <span class="kr">class</span><span class="o">=</span><span class="p">{</span><span class="nx">style</span><span class="p">.</span><span class="nx">value</span><span class="p">}</span><span class="o">&gt;</span><span class="p">{</span><span class="nx">user</span><span class="p">.</span><span class="nx">claims</span><span class="p">.</span><span class="nx">email</span><span class="p">}</span><span class="o">&lt;</span><span class="sr">/span</span><span class="err">&gt;
+</span>          <span class="o">&lt;</span><span class="sr">/li</span><span class="err">&gt;
+</span>        <span class="o">&lt;</span><span class="sr">/ul</span><span class="err">&gt;
+</span>      <span class="o">&lt;</span><span class="sr">/div&gt; </span><span class="err">:
+</span>      <span class="kc">null</span>
+    <span class="p">);</span>
+  <span class="p">}</span>
+<span class="p">})</span>
+</code></pre>
+</div>
+
+<p>You’ve added the authentication protection at the <code class="highlighter-rouge">Component</code> level in the
+<code class="highlighter-rouge">componentWillMount</code> function of the component. If the user is authenticated, it
+calls the <code class="highlighter-rouge">getCurrentUser</code> function on the high order component and adds the
+user to the component’s state. In the <code class="highlighter-rouge">render</code> function, you simply output the
+user’s name and email.</p>
+
+<h2 id="update-the-header-component">Update the Header Component</h2>
+
+<p>Now you just need to get the routes into your application and get the menu to
+link to them. Start by changing the <code class="highlighter-rouge">/src/components/header/index.js</code> file to:</p>
+
+<div class="language-js highlighter-rouge"><pre class="highlight"><code><span class="kr">import</span> <span class="p">{</span> <span class="nx">h</span><span class="p">,</span> <span class="nx">Component</span> <span class="p">}</span> <span class="nx">from</span> <span class="s1">'preact'</span><span class="p">;</span>
+<span class="kr">import</span> <span class="p">{</span> <span class="nx">Link</span> <span class="p">}</span> <span class="nx">from</span> <span class="s1">'preact-router/match'</span><span class="p">;</span>
+<span class="kr">import</span> <span class="p">{</span> <span class="nx">withAuth</span> <span class="p">}</span> <span class="nx">from</span> <span class="s1">'../../lib/auth'</span><span class="p">;</span>
+<span class="kr">import</span> <span class="nx">style</span> <span class="nx">from</span> <span class="s1">'./style'</span><span class="p">;</span>
+
+<span class="kr">export</span> <span class="k">default</span> <span class="nx">withAuth</span><span class="p">(</span><span class="kr">class</span> <span class="nx">Header</span> <span class="kr">extends</span> <span class="nx">Component</span> <span class="p">{</span>
+  <span class="nx">componentWillMount</span><span class="p">(){</span>
+    <span class="k">if</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">props</span><span class="p">.</span><span class="nx">auth</span><span class="p">.</span><span class="nx">isAuthenticated</span><span class="p">()){</span>
+      <span class="k">this</span><span class="p">.</span><span class="nx">setState</span><span class="p">({</span>
+          <span class="na">user</span><span class="p">:</span> <span class="k">this</span><span class="p">.</span><span class="nx">props</span><span class="p">.</span><span class="nx">auth</span><span class="p">.</span><span class="nx">getCurrentUser</span><span class="p">()</span>
+      <span class="p">});</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+
+  <span class="nx">render</span><span class="p">(</span><span class="nx">props</span><span class="p">,</span> <span class="p">{</span><span class="nx">user</span><span class="p">})</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="p">(</span>
+      <span class="o">&lt;</span><span class="nx">header</span> <span class="kr">class</span><span class="o">=</span><span class="p">{</span><span class="nx">style</span><span class="p">.</span><span class="nx">header</span><span class="p">}</span><span class="o">&gt;</span>
+        <span class="o">&lt;</span><span class="nx">h1</span><span class="o">&gt;</span><span class="nx">Preact</span> <span class="nx">App</span><span class="o">&lt;</span><span class="sr">/h1</span><span class="err">&gt;
+</span>        <span class="o">&lt;</span><span class="nx">nav</span><span class="o">&gt;</span>
+          <span class="o">&lt;</span><span class="nx">Link</span> <span class="nx">activeClassName</span><span class="o">=</span><span class="p">{</span><span class="nx">style</span><span class="p">.</span><span class="nx">active</span><span class="p">}</span> <span class="nx">href</span><span class="o">=</span><span class="s2">"/"</span><span class="o">&gt;</span><span class="nx">Home</span><span class="o">&lt;</span><span class="sr">/Link</span><span class="err">&gt;
+</span>          <span class="p">{</span><span class="nx">user</span> <span class="p">?</span> <span class="o">&lt;</span><span class="nx">Link</span> <span class="nx">activeClassName</span><span class="o">=</span><span class="p">{</span><span class="nx">style</span><span class="p">.</span><span class="nx">active</span><span class="p">}</span> <span class="nx">href</span><span class="o">=</span><span class="s2">"/profile"</span><span class="o">&gt;</span><span class="nx">Profile</span><span class="o">&lt;</span><span class="sr">/Link&gt; : null </span><span class="err">}
+</span>          <span class="p">{</span><span class="nx">user</span>
+            <span class="p">?</span> <span class="o">&lt;</span><span class="nx">Link</span> <span class="nx">activeClassName</span><span class="o">=</span><span class="p">{</span><span class="nx">style</span><span class="p">.</span><span class="nx">active</span><span class="p">}</span> <span class="nx">onClick</span><span class="o">=</span><span class="p">{</span><span class="nx">props</span><span class="p">.</span><span class="nx">auth</span><span class="p">.</span><span class="nx">logout</span><span class="p">.</span><span class="nx">bind</span><span class="p">(</span><span class="kc">null</span><span class="p">,</span> <span class="nx">props</span><span class="p">.</span><span class="nx">history</span><span class="p">)}</span> <span class="nx">href</span><span class="o">=</span><span class="s2">"javascript:;"</span><span class="o">&gt;</span><span class="nx">Logout</span><span class="o">&lt;</span><span class="sr">/Link</span><span class="err">&gt;
+</span>            <span class="p">:</span> <span class="o">&lt;</span><span class="nx">Link</span> <span class="nx">activeClassName</span><span class="o">=</span><span class="p">{</span><span class="nx">style</span><span class="p">.</span><span class="nx">active</span><span class="p">}</span> <span class="nx">onClick</span><span class="o">=</span><span class="p">{</span><span class="nx">props</span><span class="p">.</span><span class="nx">auth</span><span class="p">.</span><span class="nx">login</span><span class="p">.</span><span class="nx">bind</span><span class="p">(</span><span class="kc">null</span><span class="p">,</span> <span class="nx">props</span><span class="p">.</span><span class="nx">history</span><span class="p">)}</span> <span class="nx">href</span><span class="o">=</span><span class="s2">"javascript:;"</span><span class="o">&gt;</span><span class="nx">Login</span><span class="o">&lt;</span><span class="sr">/Link&gt;</span><span class="err">}
+</span>        <span class="o">&lt;</span><span class="sr">/nav</span><span class="err">&gt;
+</span>      <span class="o">&lt;</span><span class="sr">/header</span><span class="err">&gt;
+</span>    <span class="p">);</span>
+  <span class="p">}</span>
+<span class="p">})</span>
+</code></pre>
+</div>
+
+<p>This will show the “Login” button if the user is not logged in and the “Logout”
+button if they are. It will also only show the “Profile” menu item to those
+users who are logged in.</p>
+
+<h2 id="change-your-routing">Change Your Routing</h2>
+
+<p>Finally, change the routes in your <code class="highlighter-rouge">/src/components/app.js</code> file so that your
+application knows about your new routes and how to handle them. So your new
+<code class="highlighter-rouge">app.js</code> file will look like:</p>
+
+<div class="language-js highlighter-rouge"><pre class="highlight"><code><span class="kr">import</span> <span class="p">{</span> <span class="nx">h</span><span class="p">,</span> <span class="nx">Component</span> <span class="p">}</span> <span class="nx">from</span> <span class="s1">'preact'</span><span class="p">;</span>
+<span class="kr">import</span> <span class="p">{</span> <span class="nx">Router</span> <span class="p">}</span> <span class="nx">from</span> <span class="s1">'preact-router'</span><span class="p">;</span>
+
+<span class="kr">import</span> <span class="nx">Header</span> <span class="nx">from</span> <span class="s1">'./header'</span><span class="p">;</span>
+<span class="kr">import</span> <span class="nx">Home</span> <span class="nx">from</span> <span class="s1">'../routes/home'</span><span class="p">;</span>
+<span class="kr">import</span> <span class="nx">Profile</span> <span class="nx">from</span> <span class="s1">'../routes/profile'</span><span class="p">;</span>
+<span class="kr">import</span> <span class="nx">Login</span> <span class="nx">from</span> <span class="s1">'../routes/Login'</span><span class="p">;</span>
+<span class="c1">// import Home from 'async!./home';</span>
+<span class="c1">// import Profile from 'async!./profile';</span>
+
+<span class="kr">export</span> <span class="k">default</span> <span class="kr">class</span> <span class="nx">App</span> <span class="kr">extends</span> <span class="nx">Component</span> <span class="p">{</span>
+  <span class="cm">/** Gets fired when the route changes.
+   *  @param {Object} event   "change" event from [preact-router](http://git.io/preact-router)
+   *  @param {string} event.url The newly routed URL
+   */</span>
+  <span class="nx">handleRoute</span> <span class="o">=</span> <span class="nx">e</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">currentUrl</span> <span class="o">=</span> <span class="nx">e</span><span class="p">.</span><span class="nx">url</span><span class="p">;</span>
+  <span class="p">};</span>
+
+  <span class="nx">render</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="p">(</span>
+      <span class="o">&lt;</span><span class="nx">div</span> <span class="nx">id</span><span class="o">=</span><span class="s2">"app"</span><span class="o">&gt;</span>
+        <span class="o">&lt;</span><span class="nx">Header</span> <span class="o">/&gt;</span>
+        <span class="o">&lt;</span><span class="nx">Router</span> <span class="nx">onChange</span><span class="o">=</span><span class="p">{</span><span class="k">this</span><span class="p">.</span><span class="nx">handleRoute</span><span class="p">}</span><span class="o">&gt;</span>
+          <span class="o">&lt;</span><span class="nx">Home</span> <span class="nx">path</span><span class="o">=</span><span class="s2">"/"</span> <span class="o">/&gt;</span>
+          <span class="o">&lt;</span><span class="nx">Profile</span> <span class="nx">path</span><span class="o">=</span><span class="s2">"/profile/"</span> <span class="o">/&gt;</span>
+          <span class="o">&lt;</span><span class="nx">Login</span> <span class="nx">path</span><span class="o">=</span><span class="s2">"/login/"</span> <span class="o">/&gt;</span>
+        <span class="o">&lt;</span><span class="sr">/Router</span><span class="err">&gt;
+</span>      <span class="o">&lt;</span><span class="sr">/div</span><span class="err">&gt;
+</span>    <span class="p">);</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre>
+</div>
+
+<p>All that really changed is that you imported the newly created Login component
+and remove the user property being passed into the Profile component and added a
+new route for the Login component.</p>
+
+<h2 id="run-your-new-preact-application">Run Your New Preact Application!</h2>
+
+<p>You should now be able to save your work and run <code class="highlighter-rouge">npm start</code> in the root folder
+and see a fully-functioning Preact application with user authentication via
+Okta!</p>
+
+<p>There are a lot of similarities between Preact and React, but there are some key
+differences. Preact is meant for applications where keeping the size of the
+download small is critical. There are some nice conveniences in the Preact
+router, but there are some things missing (like <code class="highlighter-rouge">withRouter</code>). There are also
+some neat conveniences, like having <code class="highlighter-rouge">props</code> and <code class="highlighter-rouge">state</code> passed to the <code class="highlighter-rouge">render</code>
+function. All in all, I think Preact is neat, but I could see really needing a
+full-fledged React for complex apps.</p>
+
+<h2 id="learn-more">Learn More</h2>
+
+<p>You can find out more about Preact from <a href="https://preactjs.com/">their website</a>
+and Preact-Router from the <a href="https://github.com/developit/preact-router">Github
+repository</a>.</p>
+
+<p>You can also get the complete code for this article from the <a href="https://github.com/oktadeveloper/okta-preact-widget-example">Okta Developer
+Github repository</a>.</p>
+
+<p>As always, if you have any questions, comments or concerns about the article,
+the code, Preact or Okta, feel free to reach out to me via
+<a href="mailto:lee.brandt@okta.com">email</a>, or hit me up in the comments or via Twitter
+<a href="https://twitter.com/leebrandt">@leebrandt</a>.</p>
+
+<p>If you’re interested in learning more about authentication using the Okta
+Sign-In Widget with Angular, you can follow Matt Raible’s posts at
+<a href="https://developer.okta.com/blog/2017/03/27/angular-okta-sign-in-widget">https://developer.okta.com/blog/2017/03/27/angular-okta-sign-in-widget</a> or
+<a href="https://developer.okta.com/blog/2017/06/13/add-authentication-angular-pwa">https://developer.okta.com/blog/2017/06/13/add-authentication-angular-pwa</a>, and
+If you want to know more about Okta’s Identity Platform, read Randall Degges
+post at
+<a href="https://developer.okta.com/blog/2017/08/29/meet-the-new-okta-identity-platform">https://developer.okta.com/blog/2017/08/29/meet-the-new-okta-identity-platform</a>.</p>
+
+
+	</div>
+	
+</article>
+
+		
+</section>
+
+		
+	</div><footer class="Footer">
+    <div class="Wrap">
+
+        <div class="Row">
+
+            <div class="Column--3 Column--medium-6 Column--xSmall-12">
+
+                <a class="Logo" href="https://www.okta.com/" target="_blank" rel="noopener noreferrer">
+                    <img src="https://developer.okta.com/sites/all/themes/developer/images/logo-footer.png" alt="Okta">
+                    Visit okta.com
+                </a>
+
+            </div>
+
+            <div class="Column--3 Column--medium-12 Column--xSmall-12">
+
+                <h4>Social</h4>
+                <ul class="Footer-links Footer-links--social">
+                    <li><a class="Footer-links--github" target="_blank" rel="noopener noreferrer" href="http://github.com/oktadeveloper">Github</a></li>
+                    <li><a class="Footer-links--twitter" target="_blank" rel="noopener noreferrer" href="http://twitter.com/OktaDev">Twitter</a></li>
+                    <li><a class="Footer-links--forum" target="_blank" rel="noopener noreferrer" href="https://devforum.okta.com/">Forum</a></li>
+                    <li><a class="Footer-links--rss" target="_blank" rel="noopener noreferrer" href="http://feeds.feedburner.com/OktaBlog">RSS Blog</a></li>
+                </ul>
+            </div>
+
+            <div class="Column--3 Column--medium-6 Column--small-12">
+                <h4>More Info</h4>
+                <ul class="Footer-links">
+                    <li><a target="_blank" href="https://developer.okta.com/integrate-with-okta/">Integrate with Okta</a></li>
+                    <li><a href="/blog/">Blog</a></li>
+                    <li><a href="/docs/platform-release-notes/platform-release-notes.html">Release Notes</a></li>
+                    <li><a href="/3rd_party_notices/">3rd Party Notices</a></li>
+                </ul>
+            </div>
+
+            <div class="Column--3 Column--medium-6 Column--small-12">
+                <h4>Contact &amp; Legal</h4>
+                <ul class="Footer-links">
+                    <li><a href="https://developer.okta.com/contact/">Contact Sales</a></li>
+                    <li><a target="_blank" rel="noopener noreferrer" href="mailto:developers@okta.com">Contact Support</a></li>
+                    <li><a href="https://developer.okta.com/terms/">Terms &amp; Conditions</a></li>
+                    <li><a href="https://developer.okta.com/privacy/">Privacy Policy</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</footer>
+
+    <script type="text/javascript" src="/assets/master-0365dd27cf276cb2a15c0a43906ca592538204cf1ad4557547bf4e50609b411e.js"></script>
+    <script type="text/javascript" src="/assets/myOkta-911cbafbbe079b7a5522d9cbe15bd2a5f44e1582531e88393934bec69f97696b.js"></script>
+    
+    
+    
+    
+      <script type="text/javascript" src="/assets/blog-6e32dad27404131cc8630a5282264bed2ab4c08c91ac86fa496b75c53aa4f681.js"></script>
+    
+
+  <!-- START Post Footer -->
+  
+  <!-- START Google Tag Manager -->
+  <!-- https://support.google.com/tagmanager/answer/6103696?hl=en -->
+  <noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-TJ45R6" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+  <!-- END Google Tag Manager -->
+  <!-- START Google Remarketing Tag -->
+  <script type="text/javascript">
+    /* <![CDATA[ */
+    var google_conversion_id = 1006913831;
+    var google_custom_params = window.google_tag_params;
+    var google_remarketing_only = true;
+    /* ]]> */
+  </script>
+  <div style="display:none;"><script type="text/javascript" src="//www.googleadservices.com/pagead/conversion.js"></script></div>
+  <noscript><div style="display:inline;"><img height="1" width="1" style="border-style:none;" alt="" src="//googleads.g.doubleclick.net/pagead/viewthroughconversion/1006913831/?value=0&amp;guid=ON&amp;script=0"></div></noscript>
+  <!-- END Google Remarketing Tag -->
+  <!-- START Crazy Egg Tracking -->
+  <script type="text/javascript">
+    setTimeout(function(){var a=document.createElement("script");
+    var b=document.getElementsByTagName("script")[0];
+    a.src=document.location.protocol+"//script.crazyegg.com/pages/scripts/0021/9333.js?"+Math.floor(new Date().getTime()/3600000);
+    a.async=true;a.type="text/javascript";b.parentNode.insertBefore(a,b)}, 1);
+  </script>
+  <!-- END Crazy Egg Tracking -->
+
+  <!-- END Post Footer -->
+</body>
+</html>

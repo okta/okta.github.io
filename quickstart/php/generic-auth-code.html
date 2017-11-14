@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html class="no-js" lang="en" dir="ltr">
+<body>
+    <h2 id="okta-php-quickstart">Okta PHP Quickstart</h2>
+
+<h2 id="redirecting-to-authorization-endpoint">Redirecting to Authorization Endpoint</h2>
+<p>First you need to generate a URL to the authorization endpoint for the Authorization Server and redirect the user.</p>
+
+<div class="language-php highlighter-rouge"><pre class="highlight"><code><span class="cp">&lt;?php</span>
+
+<span class="nv">$query</span> <span class="o">=</span> <span class="nb">http_build_query</span><span class="p">([</span>
+    <span class="s1">'client_id'</span> <span class="o">=&gt;</span> <span class="s1">''</span><span class="p">,</span>
+    <span class="s1">'response_type'</span> <span class="o">=&gt;</span> <span class="s1">'code'</span><span class="p">,</span>
+    <span class="s1">'response_mode'</span> <span class="o">=&gt;</span> <span class="s1">'query'</span><span class="p">,</span>
+    <span class="s1">'scope'</span> <span class="o">=&gt;</span> <span class="s1">'openid profile'</span><span class="p">,</span>
+    <span class="s1">'redirect_uri'</span> <span class="o">=&gt;</span> <span class="s1">'http://localhost/login_callback.php'</span><span class="p">,</span>
+    <span class="s1">'state'</span> <span class="o">=&gt;</span> <span class="nv">$state</span><span class="p">,</span>
+    <span class="s1">'nonce'</span> <span class="o">=&gt;</span> <span class="nv">$nonce</span>
+<span class="p">]);</span>
+
+<span class="nb">header</span><span class="p">(</span><span class="s1">'Location: '</span> <span class="o">.</span> <span class="s1">'<span class="okta-preview-domain">https://{yourOktaDomain}.com</span>/oauth2/default/v1/authorize?'</span><span class="o">.</span><span class="nv">$query</span><span class="p">);</span>
+</code></pre>
+</div>
+<blockquote>
+  <p>The <code class="highlighter-rouge">nonce</code> should be a generated string such as UUID, and the <code class="highlighter-rouge">state</code> can be any string representing state of the
+application.</p>
+</blockquote>
+
+<h2 id="exchange-auth-code">Exchange Auth Code</h2>
+<p>After a successful login from the redirect, a code will be present in the request object.</p>
+
+<p>This code should be placed in the file specified for your <code class="highlighter-rouge">redirect_uri</code> from the previous step.</p>
+
+<div class="language-php highlighter-rouge"><pre class="highlight"><code><span class="cp">&lt;?php</span>
+
+<span class="k">if</span><span class="p">(</span><span class="nb">array_key_exists</span><span class="p">(</span><span class="s1">'state'</span><span class="p">,</span> <span class="nv">$_REQUEST</span><span class="p">)</span> <span class="o">&amp;&amp;</span> <span class="nv">$_REQUEST</span><span class="p">[</span><span class="s1">'state'</span><span class="p">]</span> <span class="o">!==</span> <span class="nv">$state</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">throw</span> <span class="k">new</span> <span class="nx">\Exception</span><span class="p">(</span><span class="s1">'State does not match.'</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="k">if</span><span class="p">(</span><span class="nb">array_key_exists</span><span class="p">(</span><span class="s1">'code'</span><span class="p">,</span> <span class="nv">$_REQUEST</span><span class="p">))</span> <span class="p">{</span>
+    <span class="nv">$exchange</span> <span class="o">=</span> <span class="nx">exchangeCode</span><span class="p">(</span><span class="nv">$_REQUEST</span><span class="p">[</span><span class="s1">'code'</span><span class="p">]);</span>
+<span class="p">}</span>
+
+<span class="k">function</span> <span class="nf">exchangeCode</span><span class="p">(</span><span class="nv">$code</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nv">$authHeaderSecret</span> <span class="o">=</span> <span class="nb">base64_encode</span><span class="p">(</span> <span class="s1">'{CLIENT_ID}:{CLIENT_SECRET}'</span> <span class="p">);</span>
+    <span class="nv">$query</span> <span class="o">=</span> <span class="nb">http_build_query</span><span class="p">([</span>
+        <span class="s1">'grant_type'</span> <span class="o">=&gt;</span> <span class="s1">'authorization_code'</span><span class="p">,</span>
+        <span class="s1">'code'</span> <span class="o">=&gt;</span> <span class="nv">$code</span>
+    <span class="p">]);</span>
+    <span class="nv">$headers</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="s1">'Authorization: Basic '</span> <span class="o">.</span> <span class="nv">$authHeaderSecret</span><span class="p">,</span>
+        <span class="s1">'Accept: application/json'</span><span class="p">,</span>
+        <span class="s1">'Content-Type: application/x-www-form-urlencoded'</span><span class="p">,</span>
+        <span class="s1">'Connection: close'</span><span class="p">,</span>
+        <span class="s1">'Content-Length: 0'</span>
+    <span class="p">];</span>
+    <span class="nv">$url</span> <span class="o">=</span> <span class="s1">'<span class="okta-preview-domain">https://{yourOktaDomain}.com</span>/oauth2/default/v1/token?'</span> <span class="o">.</span> <span class="nv">$query</span><span class="p">;</span>
+    <span class="nv">$ch</span> <span class="o">=</span> <span class="nb">curl_init</span><span class="p">();</span>
+    <span class="nb">curl_setopt</span><span class="p">(</span><span class="nv">$ch</span><span class="p">,</span> <span class="nx">CURLOPT_URL</span><span class="p">,</span> <span class="nv">$url</span><span class="p">);</span>
+    <span class="nb">curl_setopt</span><span class="p">(</span><span class="nv">$ch</span><span class="p">,</span> <span class="nx">CURLOPT_RETURNTRANSFER</span><span class="p">,</span> <span class="mi">1</span><span class="p">);</span>
+    <span class="nb">curl_setopt</span><span class="p">(</span><span class="nv">$ch</span><span class="p">,</span> <span class="nx">CURLOPT_HEADER</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+    <span class="nb">curl_setopt</span><span class="p">(</span><span class="nv">$ch</span><span class="p">,</span> <span class="nx">CURLOPT_HTTPHEADER</span><span class="p">,</span> <span class="nv">$headers</span><span class="p">);</span>
+    <span class="nb">curl_setopt</span><span class="p">(</span><span class="nv">$ch</span><span class="p">,</span> <span class="nx">CURLOPT_POST</span><span class="p">,</span> <span class="mi">1</span><span class="p">);</span>
+    <span class="nv">$output</span> <span class="o">=</span> <span class="nb">curl_exec</span><span class="p">(</span><span class="nv">$ch</span><span class="p">);</span>
+    <span class="nv">$httpcode</span> <span class="o">=</span> <span class="nb">curl_getinfo</span><span class="p">(</span><span class="nv">$ch</span><span class="p">,</span> <span class="nx">CURLINFO_HTTP_CODE</span><span class="p">);</span>
+    <span class="k">if</span><span class="p">(</span><span class="nb">curl_error</span><span class="p">(</span><span class="nv">$ch</span><span class="p">))</span> <span class="p">{</span>
+        <span class="nv">$httpcode</span> <span class="o">=</span> <span class="mi">500</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="nb">curl_close</span><span class="p">(</span><span class="nv">$ch</span><span class="p">);</span>
+    <span class="k">return</span> <span class="nb">json_decode</span><span class="p">(</span><span class="nv">$output</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre>
+</div>
+
+<p>The result of this will provide you with an access token for that user.</p>
+
+<div class="language-php highlighter-rouge"><pre class="highlight"><code><span class="nv">$jwt</span> <span class="o">=</span> <span class="nv">$exchange</span><span class="o">-&gt;</span><span class="na">access_token</span><span class="p">;</span>
+</code></pre>
+</div>
+
+<p>This access token is a JWT and should be verified according to the process described in <a href="/authentication-guide/tokens/">Working With OAuth 2.0 Tokens</a>.  This verification can be done easily with the <a href="https://github.com/okta/okta-jwt-verifier-php">Okta JWT Verifier for PHP</a>.</p>
+
+<h3 id="handling-errors">Handling Errors</h3>
+<p>If an error is present in the login, an <code class="highlighter-rouge">error</code> query parameter will be present.</p>
+
+<div class="language-php highlighter-rouge"><pre class="highlight"><code><span class="k">if</span><span class="p">(</span><span class="nb">array_key_exists</span><span class="p">(</span><span class="s1">'error'</span><span class="p">,</span> <span class="nv">$_REQUEST</span><span class="p">))</span> <span class="p">{</span>
+    <span class="k">throw</span> <span class="k">new</span> <span class="nx">\Exception</span><span class="p">(</span><span class="nv">$_REQUEST</span><span class="p">[</span><span class="s1">'error'</span><span class="p">]);</span>
+<span class="p">}</span>
+</code></pre>
+</div>
+
+</body>
+</html>

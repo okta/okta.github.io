@@ -1,0 +1,673 @@
+<!doctype html>
+<!--[if lt IE 7 ]> <html class="ie6 no-flexbox"> <![endif]-->
+<!--[if IE 7 ]>    <html class="ie7 no-flexbox"> <![endif]-->
+<!--[if IE 8 ]>    <html class="ie8 no-flexbox"> <![endif]-->
+<!--[if IE 9 ]>    <html class="ie9 no-flexbox"> <![endif]-->
+<!--[if IE 10 ]>    <html class="ie10 no-flexbox"> <![endif]-->
+<!--[if (gt IE 10)|!(IE)]><!--> <html class="modern wf-loading" lang="en"> <!--<![endif]-->
+  <head>
+  <script>
+    var searchDomain = 'https://developer.okta.com';
+    var isProduction = window.location.hostname === 'developer.okta.com';
+    if (isProduction) {
+      // TypeKit
+      (function(d) {
+        var config = {
+          kitId: 'jff5neq',
+          scriptTimeout: 3000,
+          async: true
+        },
+        h=d.documentElement,t=setTimeout(function(){h.className=h.className.replace(/bwf-loadingb/g,"")+" wf-inactive";},config.scriptTimeout),tk=d.createElement("script"),f=false,s=d.getElementsByTagName("script")[0],a;h.className+=" wf-loading";tk.src='https://use.typekit.net/'+config.kitId+'.js';tk.async=true;tk.onload=tk.onreadystatechange=function(){a=this.readyState;if(f||a&&a!="complete"&&a!="loaded")return;f=true;clearTimeout(t);try{Typekit.load(config)}catch(e){}};s.parentNode.insertBefore(tk,s)
+      })(document);
+
+      // Google analytics
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+              (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+              m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+      ga('create', 'UA-15777010-3', 'auto');
+      ga('send', 'pageview');
+
+      // START Google Tag Manager
+      (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+      new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+      j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+      '//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+      })(window,document,'script','dataLayer','GTM-TJ45R6');
+      // END Google Tag Manager
+    }
+	</script>
+  <meta charset="utf-8">
+  <meta http-equiv="x-ua-compatible" content="IE=edge,chrome=1">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+ 	
+
+  <link type="text/css" rel="stylesheet" href="https://developer.okta.com/sites/all/themes/developer/css/master.css" media="all" />
+  <meta class="swiftype" name="title" data-type="string" content="Build Your First Progressive Web Application with Angular and Spring Boot | Okta Developer" />
+  <meta class="swiftype" name="summary" data-type="string" content="A recent DoubleClick report that found 53% of visits are abandoned if a mobile site takes more than 3 seconds to load. That same report said the average mobi..." />
+
+  <link type="text/css" rel="stylesheet" href="/assets/animate-ec43d72c3ed45e08a460b8a2966d8dba6006aebfa0530935c3973fa493a8771f.css">
+  <link type="text/css" rel="stylesheet" href="/assets/okta-a96df4c9d48b78b618e1d541f46f7137d73d40653571e020c1ad59edd7915c60.css">
+  
+  
+  <title>Build Your First Progressive Web Application with Angular and Spring Boot | Okta Developer</title>
+  <meta name="description" content="A recent DoubleClick report that found 53% of visits are abandoned if a mobile site takes more than 3 seconds to load. That same report said the average mobi...">
+  <link rel="canonical" href="https://developer.okta.com/blog/2017/05/09/progressive-web-applications-with-angular-and-spring-boot"  data-proofer-ignore>
+  <link rel="alternate" type="application/rss+xml" title="Okta Developer" href="https://developer.okta.com/feed.xml"><!-- GA -->
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+  <link rel="manifest" href="/manifest.json">
+  <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#21313a">
+  <meta name="theme-color" content="#ffffff">
+</head>
+
+  
+    <body id="blog">
+	
+
+
+
+
+<header class="Header is-fixed">
+
+  <div class="Wrap">
+
+    <a class="Logo" href="https://developer.okta.com">
+      <svg version="1.1" id="OktaLogo" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 431.9 151.4" style="enable-background:new 0 0 431.9 151.4;" xml:space="preserve"><g><g><g><path d="M102.2,41.4c-21,0-38.1,17.1-38.1,38.1s17.1,38.1,38.1,38.1s38.1-17.1,38.1-38.1l0,0C140.3,58.5,123.2,41.4,102.2,41.4z M102.2,98.5c-10.5,0-19-8.5-19-19s8.5-19,19-19s19,8.5,19,19c0.1,10.5-8.4,19-18.9,19.1C102.3,98.6,102.2,98.6,102.2,98.5L102.2,98.5z"/><path d="M169.1,92.3c0-1.9,1.5-3.4,3.4-3.4c0.9,0,1.8,0.4,2.4,1c9.5,9.7,25.3,26.3,25.4,26.4c0.4,0.5,0.8,0.8,1.4,0.9l1.6,0.2h17.2c1.8,0,3.3-1.4,3.4-3.2c0-0.8-0.3-1.5-0.8-2.2l-28.6-29.2l-1.5-1.5c-3.2-3.9-2.9-5.4,0.8-9.3l22.6-25.1c1.1-1.4,0.8-3.5-0.6-4.6c-0.6-0.4-1.3-0.7-2-0.7h-17c-0.6,0.2-1.1,0.5-1.5,0.9L175,64.4c-1.3,1.4-3.4,1.5-4.8,0.2c-0.7-0.6-1.1-1.5-1.1-2.5V18.9c0-1.7-1.3-3-3-3c-0.1,0-0.2,0-0.3,0h-12.7c-2.2,0-3.3,1.5-3.3,2.8v95.8c0,2.2,1.8,2.8,3.3,2.8h12.7c1.7,0.1,3.2-1.2,3.3-2.9c0,0,0,0,0,0V92.3z"/><path d="M273,114l-1.4-12.8c-0.2-1.7-1.7-2.9-3.4-2.7c0,0,0,0-0.1,0l-2.9,0.2c-10.1,0-18.5-7.9-19-18c0-0.3,0-0.7,0-1V64.2c-0.1-2,1.5-3.6,3.5-3.7c0,0,0,0,0,0h17c1.7-0.1,3.1-1.5,3-3.2c0,0,0-0.1,0-0.1v-12c0-2.3-1.5-3.6-2.8-3.6h-17.1c-1.9,0.1-3.5-1.5-3.6-3.4c0,0,0,0,0,0V18.9c-0.1-1.7-1.5-3.1-3.2-3c0,0-0.1,0-0.1,0h-12.7c-1.6-0.1-3,1.1-3.1,2.7c0,0.1,0,0.1,0,0.2c0,0,0,61.7,0,62c0.5,21,17.9,37.6,38.9,37c1.4,0,2.9-0.2,4.3-0.3C272,117.2,273.2,115.7,273,114z"/></g><path d="M364.7,98c-10.8,0-12.4-3.8-12.4-18.3l0,0V44.8c0-1.8-1.4-3.2-3.2-3.2c0,0-0.1,0-0.1,0h-12.8c-1.8,0-3.2,1.4-3.3,3.2v1.6C314.6,36,291.3,42.5,281,60.8c-10.4,18.3-3.9,41.6,14.4,51.9c14,7.9,31.4,6.2,43.5-4.2c3.6,5.5,9.3,9.1,18.3,9.1c1.5,0,9.7,0.3,9.7-3.5v-13.6C367,99.2,366,98.1,364.7,98z M314.2,98.6c-10.5,0-19-8.5-19-19s8.5-19,19-19s19,8.5,19,19l0,0C333.2,90.1,324.7,98.6,314.2,98.6z"/></g><path d="M19.4,74c2.2-1.9,4.1-4.1,5.7-6.6c3.5-5.3,5.4-11.5,5.2-17.9V27c0-4.9,0.9-8.4,2.7-10.5c1.8-2.1,4.8-3,9.2-3h12.6c1.2,0,2.1-0.9,2.2-2.1l0,0V2.2C57,1,56,0,54.8,0c0,0,0,0,0,0H41.5c-7.8,0-12.9,2.1-18,7.6s-7.1,12.3-7.1,21.7v14.2c0,2.2-0.1,4-0.2,5.7v2.2c-0.5,3.2-1.8,6.2-3.6,8.9C9.4,64.7,5.1,70.9,0.9,74l0,0l-0.3,0.3l0,0l-0.2,0.3H0.2v0.3l0,0c-0.1,0.3-0.1,0.7,0,1l0,0v0.3h0.1l0.2,0.3l0,0l0.3,0.3l0,0c4.2,3.1,8.5,9.3,11.3,13.7c1.8,2.7,3.1,5.7,3.6,8.9v2.2c0.1,1.6,0.2,3.5,0.2,5.7v14.3c0,9.4,2.4,16.7,7.1,21.7s10.2,7.6,18,7.6h13.8c1.2,0,2.2-1,2.2-2.2V140l0,0c0-1.2-1-2.2-2.2-2.2H42.2c-4.4,0-7.5-1-9.2-3s-2.7-5.6-2.7-10.5v-22.4c0.2-6.4-1.7-12.6-5.2-17.9c-1.6-2.5-3.5-4.7-5.7-6.6l0,0c-0.9-0.7-1.1-2-0.4-2.9C19.2,74.3,19.3,74.2,19.4,74L19.4,74z"/><path d="M412.5,74c-2.2-1.9-4.1-4.1-5.7-6.6c-3.5-5.3-5.4-11.5-5.2-17.9V27c0-4.9-0.9-8.4-2.7-10.5s-4.8-3-9.2-3h-12.6c-1.2,0-2.2-1-2.2-2.2c0,0,0,0,0,0l0,0V2.2c0-1.2,1-2.2,2.2-2.2c0,0,0,0,0,0h13.4c7.8,0,12.9,2.1,18,7.6s7.1,12.3,7.1,21.7v14.2c0,2.2,0.1,4,0.2,5.7v2.2c0.5,3.2,1.8,6.2,3.6,8.9c2.8,4.5,7.1,10.7,11.3,13.7l0,0l0.3,0.3l0,0l0.2,0.3h0.1v0.3l0,0c0.1,0.3,0.1,0.7,0,1l0,0v0.3h-0.1l-0.2,0.3l0,0l-0.3,0.3l0,0c-4.2,3.1-8.5,9.3-11.3,13.7c-1.8,2.7-3.1,5.7-3.6,8.9v2.2c-0.1,1.6-0.2,3.5-0.2,5.7v14.3c0,9.4-2.4,16.7-7.1,21.7s-10.2,7.6-18,7.6h-13.4c-1.2,0-2.2-1-2.2-2.2c0,0,0,0,0,0V140l0,0c0-1.2,1-2.2,2.2-2.2l0,0h12.7c4.4,0,7.5-1,9.2-3s2.7-5.6,2.7-10.5v-22.4c-0.2-6.3,1.6-12.6,5.1-17.9c1.6-2.5,3.5-4.7,5.7-6.6l0,0c0.9-0.7,1.1-2,0.4-2.9C412.7,74.3,412.6,74.2,412.5,74L412.5,74z"/></g></svg>
+    </a>
+
+    <nav class="Header-nav PrimaryNav">
+      <ul class="menu">
+        <li class="first leaf">
+          <a href="https://developer.okta.com/product/">Product</a>
+        </li>
+        <li class="leaf">
+          <a href="https://developer.okta.com/pricing/">Pricing</a>
+        </li>
+        <li class="leaf">
+          <a href="/blog/" class="active">Blog</a>
+        </li>
+        <li class="leaf">
+          <a href="/documentation/">Docs</a>
+        </li>
+        <li class="last expanded">
+          <span class="nolink">Support</span>
+          <ul class="menu">
+            <li class="first leaf"><a href="https://devforum.okta.com/">Okta Developer Forums</a></li>
+            <li class="last leaf"><a href="mailto:developers@okta.com">developers@okta.com</a></li>
+          </ul>
+        </li>
+      </ul>
+      <a class="PrimaryNav-toggle" href="#">
+        <svg width="20px" height="20px" viewBox="0 0 20 20" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+            <g class="MenuIcon" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="round">
+                <path d="M1,16 L19,16" class="MenuIcon-line1" stroke="#FFFFFF" stroke-width="2"></path>
+                <path d="M1,4 L19,4" class="MenuIcon-line2" stroke="#FFFFFF" stroke-width="2"></path>
+                <path d="M1,10 L19,10" class="MenuIcon-line3" stroke="#FFFFFF" stroke-width="2"></path>
+                <path d="M1,10 L19,10" class="MenuIcon-line4" stroke="#FFFFFF" stroke-width="2"></path>
+            </g>
+        </svg>
+        <svg class="CloseIcon" width="16px" height="16px" viewBox="0 0 16 16" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+          <g id="ALl-Boards" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+            <g id="Desktop" transform="translate(-915.000000, -235.000000)" fill="#FFFFFF">
+              <g id="Search-bar-Active" transform="translate(30.000000, 26.000000)">
+                <polygon id="Icon/Cross" points="901 210.6 899.4 209 893 215.4 886.6 209 885 210.6 891.4 217 885 223.4 886.6 225 893 218.6 899.4 225 901 223.4 894.6 217"></polygon>
+              </g>
+            </g>
+          </g>
+        </svg>
+      </a>
+
+      <div class="PrimaryNav-cta">
+        <a target="_blank" rel="noopener noreferrer" href="https://login.okta.com/?SAMLRequest=fc%2B7CsJAEAXQXvAflu1NNJUMeZBGELTx1a%2FrYILJTtyZGD%2FfSBRiYzlw77lMnD3rSj3Qc0ku0YtgrhU6S5fSXRN9PKxmS52l00nMpq6iBvJWCrfDe4ss6vStRe9aDzmGIZfo1jsgwyWDMzUyiIV9vt1AH4XGk5ClSvewUgMNa%2BYW%2FVj5jxhm9NLP67QQaSAMu64L6CYmsFSHlnzT4ZlLwTgcL6Sf8%2FeX9AU%3Dhttps://login.okta.com/?SAMLRequest=fc%2B7CsJAEAXQXvAflu1NNJUMeZBGELTx1a%2FrYILJTtyZGD%2FfSBRiYzlw77lMnD3rSj3Qc0ku0YtgrhU6S5fSXRN9PKxmS52l00nMpq6iBvJWCrfDe4ss6vStRe9aDzmGIZfo1jsgwyWDMzUyiIV9vt1AH4XGk5ClSvewUgMNa%2BYW%2FVj5jxhm9NLP67QQaSAMu64L6CYmsFSHlnzT4ZlLwTgcL6Sf8%2FeX9AU%3D" class="Button--redOutline">Login</a>
+        <a href="https://developer.okta.com/signup/" class="Button--red">Sign up</a>
+      </div>
+
+      <a class="SearchIcon" href="#"></a>
+      <form id="form_search" class="SearchBar Formisimo_clocked_69929" method="get" action="https://developer.okta.com/search/" name="form_search" __bizdiag="-784164280" __biza="WJ__">
+        <input type="text" name="stq" autocomplete="off" id="st-search-input-auto" class="st-search-input" placeholder="Search">
+        <input type="submit" name="submit" value="GO">
+      </form>
+
+    </nav>
+
+  </div>
+
+</header>
+
+	<div class="page-content">
+		
+
+
+
+
+
+
+<section class="Blog is-single">
+		
+	<div class="Blog-social">
+		
+		<a href="https://github.com/mraible" target="_blank"><i class="fa fa-github"></i></a>
+		
+		
+		<a href="https://twitter.com/mraible" target="_blank"><i class="fa fa-twitter"></i></a>
+		
+		
+		
+		<a href="http://raibledesigns.com" target="_blank"><i class="fa fa-external-link"></i></a>
+		
+	</div>
+	
+	
+
+<article class="BlogPost">
+	
+	<header class="BlogPost-header">
+	
+		<time class="BlogPost-date" datetime="2017-05-09">May 9, 2017</time>
+		
+		<h1 class="BlogPost-title">
+			
+			Build Your First Progressive Web Application with Angular and Spring Boot
+			
+		</h1>
+		
+		<div class="BlogPost-attribution">
+			
+				<img src="/assets/avatar-matt_raible-9974af6192eb1753b7137c8fff0a2c6e6bb9736a2517986cb5cc50bb040e83d4.jpg" alt="avatar-matt_raible.jpg" class="BlogPost-avatar">
+			
+			<span class="BlogPost-author">Matt Raible</span>
+		</div>
+	
+	</header>
+	
+	<div class="BlogPost-content">
+		
+	<p>A recent DoubleClick report that found 53% of visits are abandoned if a mobile site takes more than 3 seconds to load. That same report said the average mobile sites load in 19 seconds. According to Alex Russell in his recent talk on the state of mobile development, one of the biggest problems in mobile today is that developers use powerful laptops and desktops to develop their mobile applications, rather than using a $200 device on a 3G connection. Using this environment is “ground truth” to the majority of web users in the world. It’s cool to develop native applications, but people with slow phones and internet don’t want to download a 60MB app, they just want to use the web. Progressive web applications, or PWAs, are one of the easiest ways to make web applications faster and easier to use, allowing developers to build a better internet for everyone.</p>
+
+<p>Check out the full video of Alex’s talk to learn more about <a href="https://www.youtube.com/watch?v=K1SFnrf4jZo&amp;feature=youtu.be">Adapting to the Mobile Present</a>.</p>
+
+<p>PWAs are becoming increasingly popular in web development. Most of the information about PWAs on the web today comes from Google and its network of Google Developer Experts. This isn’t surprising as Google is often promoting the latest and greatest web technologies. They also develop their own browser, Chrome, which makes it possible to use many of the new standards in HTML5, JavaScript and beyond.</p>
+
+<h2 id="so-what-is-a-pwa">So What is a PWA?</h2>
+
+<p>PWAs leverage <a href="https://en.wikipedia.org/wiki/Transport_Layer_Security">Transport Layer Security</a> (TLS), webapp manifests, and service workers to make an application installable with offline capabilities. In other words, a PWA is like a native app on your phone, but it’s built with web technologies like HTML5, JavaScript, and CSS3. If built right, a PWA is indistinguishable from a native application.</p>
+
+<h2 id="use-progressive-web-apps-to-build-better-mobile-apps">Use Progressive Web Apps to Build Better Mobile Apps</h2>
+
+<p>To combat the problems Alex Russell calls to light, and ultimately build better mobile apps, he recommends five techniques:</p>
+
+<ol>
+  <li>Implement the PRPL pattern</li>
+  <li>Get a ~$150-200 unlocked Android (e.g. Moto G4)</li>
+  <li>Use chrome://inspect &amp;&amp; chrome://inspect?tracing</li>
+  <li>Install <a href="https://github.com/GoogleChrome/lighthouse">Lighthouse</a> and use it to analyze your applications</li>
+  <li>Use Chrome DevTools Network and CPU Throttling</li>
+</ol>
+
+<p>Google engineer Addy Osmani describes <a href="https://developers.google.com/web/fundamentals/performance/prpl-pattern/">the PRPL pattern</a> in an article on Google’s Web Fundamentals site.</p>
+
+<blockquote>
+  <p>PRPL is a pattern for structuring and serving Progressive Web Apps (PWAs), with an emphasis on the performance of app delivery and launch. It stands for:</p>
+  <ul>
+    <li><strong>Push</strong> critical resources for the initial URL route.</li>
+    <li><strong>Render</strong> initial route.</li>
+    <li><strong>Pre-cache</strong> remaining routes.</li>
+    <li><strong>Lazy-load</strong> and create remaining routes on demand.</li>
+  </ul>
+</blockquote>
+
+<p>The <a href="https://developers.google.com/web/progressive-web-apps/checklist">Progressive Web App Checklist</a> lists all the things you’ll need to make a progressive webapp. However, I like the simple list that Alex Russell lists on <a href="https://infrequently.org/2016/09/what-exactly-makes-something-a-progressive-web-app/">What, Exactly, Makes Something A Progressive Web App?</a>.</p>
+
+<p><img src="/assets/blog/angular-spring-boot-pwa/alex-russell-pwas-e15d04f035b31af65625edf6113c00c7520e995047c56e495e2ebd2c1c03ec0d.png" alt="Alex Russell&#039;s PWA Checklist" width="800" class="center-image" /></p>
+
+<p>This article will show you how to build a PWA with a Spring Boot backend and an Angular frontend. It’ll work offline and I’ll show how to deploy it to the cloud.</p>
+
+<h2 id="run-a-spring-boot-api">Run a Spring Boot API</h2>
+
+<p>In <a href="/blog/2017/04/26/bootiful-development-with-spring-boot-and-angular">part 1 of this series</a>, I showed you how to create an API with Spring Boot and display its data in an Angular UI. You’ll be using that project as a starting point for this tutorial. You’ll adding offline capabilities by turning it into a PWA.</p>
+
+<p>To begin, clone the project from GitHub.</p>
+
+<div class="language-bash highlighter-rouge"><pre class="highlight"><code>git clone https://github.com/oktadeveloper/spring-boot-angular-example.git
+</code></pre>
+</div>
+
+<p>Open the “server” project in your favorite IDE and run <code class="highlighter-rouge">DemoApplication</code> or start it from the command line using <code class="highlighter-rouge">./mvnw spring-boot:run</code>.</p>
+
+<p>Re-build your application and navigate to <code class="highlighter-rouge">http://localhost:8080/good-beers</code>. You should see the list of good beers in your browser.</p>
+
+<p><img src="/assets/blog/angular-spring-boot-pwa/good-beers-json-e1d41f9859ef735fa60939aa8ceeffba8f73c26f3da69013fc69c6e2ad027d57.png" alt="Good Beers JSON" width="800" class="center-image" /></p>
+
+<p>You can also see the result in your terminal window using HTTPie.</p>
+
+<div class="language-bash highlighter-rouge"><pre class="highlight"><code>http localhost:8080/good-beers
+</code></pre>
+</div>
+
+<h2 id="progressive-web-apps-with-angular">Progressive Web Apps with Angular</h2>
+
+<p>I started my PWAs learning journey while sitting in a conference session with <a href="https://twitter.com/jshcrowthe">Josh Crowther</a> at <a href="https://stormpath.com/blog/angular-and-microservices-rich-web-experience-2016">The Rich Web Experience</a>. His <a href="https://bit.ly/2haHF1y">Progressive Web Apps: The Future of the Web</a> presentation taught me everything I needed to know to get started. However, his examples used Polymer and I wanted to create a PWA with Angular.</p>
+
+<p>When I first started researching how to build PWAs with Angular, I found <a href="https://mobile.angular.io">mobile.angular.io</a>.</p>
+
+<p><img src="/assets/blog/angular-spring-boot-pwa/mobile.angular.io-12d299aa9cbee13266ce47a34ee93a262249044daa33d4bd0d22bf7304f3fc49.png" alt="Angular Mobile Toolkit" width="800" class="center-image" /></p>
+
+<p>This website seemed to be exactly what I needed and I was pumped to find a tutorial showing <a href="https://github.com/angular/mobile-toolkit/blob/master/guides/cli-setup.md">how to build a PWA with Angular CLI</a>. After installing Angular CLI, I tried the tutorial’s recommended first step:</p>
+
+<pre>
+ng new hello-mobile --mobile
+</pre>
+
+<p>I was disappointed to find that Angular CLI (v1.0.0) does not support the mobile flag.</p>
+
+<p><img src="/assets/blog/angular-spring-boot-pwa/ng-new-mobile-3c03db9a1fb9bb400eb3ecd8883c33dc9a47d09723a567ad53e1bbbb25ac85ca.png" alt="ng new with mobile flag" width="800" class="center-image" /></p>
+
+<p>After searching through the project’s GitHub issues, I <a href="https://github.com/angular/mobile-toolkit/issues/109">found a reference</a> to <a href="https://twitter.com/webmaxru">Maxim Salnikov</a>’s <a href="https://github.com/webmaxru/pwa-guide-ngpoland/tree/step-dashboard">PWA demo app</a>. Maxim created this repo as part of a half-day workshop at <a href="http://ng-poland.pl/">ngPoland</a> and the project’s <code class="highlighter-rouge">README</code> said to contact him for workshop instructions. I emailed Maxim and he politely shared his <a href="https://bit.ly/pwa-ngpoland">Angular 2 PWA Workshop instructions</a> and <a href="http://slides.com/webmax/pwa-ngpoland#/">slides</a>.</p>
+
+<p><strong>NOTE:</strong> Since then, Maxim as created a new guide called <a href="http://bit.ly/pwa-ng-nl">Progressive Web Apps using the Angular Mobile Toolkit</a>.</p>
+
+<h2 id="transform-your-angular-app-to-be-a-pwa">Transform your Angular App to be a PWA</h2>
+
+<p>There are a number of steps you need to perform to make the Angular client work offline and be a PWA.</p>
+
+<ol>
+  <li>Add Angular Material</li>
+  <li>Create and register a Service Worker</li>
+  <li>Create an App Shell</li>
+  <li>Add a manifest to make it installable</li>
+</ol>
+
+<h3 id="add-angular-material">Add Angular Material</h3>
+
+<p>Installing <a href="https://material.angular.io/">Angular Material</a> is not a necessary step, but it will make the client look much nicer. Make sure you’re in the <code class="highlighter-rouge">client</code> directory, then install it using npm.</p>
+
+<pre>
+npm install --save @angular/material @angular/cdk
+</pre>
+
+<p>Add imports for the modules you’ll be using in <code class="highlighter-rouge">app.module.ts</code>:</p>
+
+<div class="language-typescript highlighter-rouge"><pre class="highlight"><code><span class="k">import</span> <span class="p">{</span> <span class="nx">MatListModule</span><span class="p">,</span> <span class="nx">MatToolbarModule</span> <span class="p">}</span> <span class="k">from</span> <span class="s1">'@angular/material'</span><span class="p">;</span>
+
+<span class="err">@</span><span class="nx">NgModule</span><span class="p">({</span>
+  <span class="p">...</span>
+  <span class="na">imports</span><span class="p">:</span> <span class="p">[</span>
+    <span class="p">...</span>
+    <span class="nx">MatListModule</span><span class="p">,</span> <span class="nx">MatToolbarModule</span>
+  <span class="p">]</span>
+</code></pre>
+</div>
+
+<p>Add Material icons and a theme to <code class="highlighter-rouge">styles.css</code>:</p>
+
+<div class="language-css highlighter-rouge"><pre class="highlight"><code><span class="k">@import</span> <span class="s2">'~https://fonts.googleapis.com/icon?family=Material+Icons'</span><span class="p">;</span>
+<span class="k">@import</span> <span class="s2">'~@angular/material/prebuilt-themes/deeppurple-amber.css'</span><span class="p">;</span>
+
+<span class="nt">body</span> <span class="p">{</span>
+  <span class="nl">margin</span><span class="p">:</span> <span class="m">0</span><span class="p">;</span>
+  <span class="nl">font-family</span><span class="p">:</span> <span class="n">Roboto</span><span class="p">,</span> <span class="nb">sans-serif</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre>
+</div>
+
+<p>Change the HTML templates to use Material components. For <code class="highlighter-rouge">app.component.html</code>, you can change the <code class="highlighter-rouge">&lt;h1&gt;</code> to be an <code class="highlighter-rouge">&lt;mat-toolbar&gt;</code>.</p>
+
+<div class="language-html highlighter-rouge"><pre class="highlight"><code><span class="nt">&lt;mat-toolbar</span> <span class="na">color=</span><span class="s">"primary"</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;span&gt;</span>Welcome to {{title}}!<span class="nt">&lt;/span&gt;</span>
+<span class="nt">&lt;/mat-toolbar&gt;</span>
+
+<span class="nt">&lt;app-beer-list&gt;&lt;/app-beer-list&gt;</span>
+</code></pre>
+</div>
+
+<p>In <code class="highlighter-rouge">beer-list.component.html</code>, change it to use <code class="highlighter-rouge">&lt;mat-list&gt;</code> and its related components.</p>
+
+<div class="language-html highlighter-rouge"><pre class="highlight"><code><span class="nt">&lt;h2&gt;</span>Beer List<span class="nt">&lt;/h2&gt;</span>
+
+<span class="nt">&lt;mat-list&gt;</span>
+  <span class="nt">&lt;mat-list-item</span> <span class="err">*</span><span class="na">ngFor=</span><span class="s">"let b of beers"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;img</span> <span class="na">mat-list-avatar</span> <span class="na">src=</span><span class="s">"{{b.giphyUrl}}"</span> <span class="na">alt=</span><span class="s">"{{b.name}}"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;h3</span> <span class="na">mat-line</span><span class="nt">&gt;</span>
+      {{b.name}}
+    <span class="nt">&lt;/h3&gt;</span>
+  <span class="nt">&lt;/mat-list-item&gt;</span>
+<span class="nt">&lt;/mat-list&gt;</span>
+</code></pre>
+</div>
+
+<p>After making these changes, the app should look a little better. Run <code class="highlighter-rouge">ng serve</code> and you should see how your UI has changed. Below is a screenshot using Chrome’s device toolbar.</p>
+
+<p><img src="/assets/blog/angular-spring-boot-pwa/angular-material-be3f9168655a32bde71c5a628cc16164cdde068e18acbb4430e018222761eea7.png" alt="Angular Material" width="800" class="center-image" /></p>
+
+<p>To prove that there’s still work to do, you’ll notice that if you toggle offline mode in the Network tab of Chrome’s developer tools, the app does not work.</p>
+
+<p><img src="/assets/blog/angular-spring-boot-pwa/offline-fails-15ed56ca70b8ff79de4427c982744ebaab999bf0cf981290887ab5c03f55c598.png" alt="Offline fails" width="800" class="center-image" /></p>
+
+<h3 id="create-and-register-a-service-worker">Create and Register a Service Worker</h3>
+
+<p>Angular has service worker support built-in, you just need to install <code class="highlighter-rouge">@angular/service-worker</code>.</p>
+
+<div class="language-bash highlighter-rouge"><pre class="highlight"><code>npm install --save-dev @angular/service-worker@1.0.0-beta.16
+</code></pre>
+</div>
+
+<p><strong>NOTE:</strong> I specify the version because <a href="https://github.com/angular/angular-cli/issues/8247">Angular CLI 1.5.0 is pinned to this version</a>. This should be fixed in Angular CLI 1.6.0.</p>
+
+<p>To enable service worker support in Angular CLI, run the following command:</p>
+
+<div class="language-bash highlighter-rouge"><pre class="highlight"><code>ng <span class="nb">set </span>apps.0.serviceWorker<span class="o">=</span><span class="nb">true</span>
+</code></pre>
+</div>
+
+<p>Service workers are only enabled for production builds. To see it in action, run <code class="highlighter-rouge">ng serve -prod</code>.</p>
+
+<p>Now go to <strong>DevTools</strong> &gt; <strong>Application</strong> &gt; <strong>Service Workers</strong> to see that it’s been registered.</p>
+
+<p><img src="/assets/blog/angular-spring-boot-pwa/application-service-workers-49a97fb3b2d7dd16b19855e291902914de21cfb74b1d8f059145a2f3e6416850.png" alt="Application Service Workers" width="800" class="center-image" /></p>
+
+<p><strong>TIP:</strong> To ensure the service worker gets updated with each page refresh, check the “Update on reload” checkbox.</p>
+
+<p>After making this change and refreshing, you’ll notice that caches are created for local assets.</p>
+
+<p><img src="/assets/blog/angular-spring-boot-pwa/cache-storage-bff26e0424420d3f15bd0b158d5be231df52e131cd4ae61377010ccdc44474ed.png" alt="Cache Storage" width="800" class="center-image" /></p>
+
+<h3 id="add-a-manifest-to-make-it-installable">Add a Manifest to Make it Installable</h3>
+
+<p>The final step to making your app a PWA is to add a manifest that describes the application. This also enables the ability for people to install your app in Chrome as well as on smart phones.</p>
+
+<p>You can use <a href="http://realfavicongenerator.net/">Favicon Generator</a> to generate graphic assets and a <code class="highlighter-rouge">manifest.json</code> file. For an app icon, I searched for “beer icons” and found <a href="http://www.flaticon.com/free-icon/beer_168557#term=beer&amp;page=1&amp;position=26">this one</a>, developed by <a href="http://www.flaticon.com/authors/freepik">Freepik</a>. I generated a favicon, changed the generator options to use <code class="highlighter-rouge">assets/favicons</code> for the path, and downloaded the favicon package.</p>
+
+<p>Copy the contents of <code class="highlighter-rouge">favicons.zip</code> to <code class="highlighter-rouge">src/assets/favicons</code> and add the following HTML to the <code class="highlighter-rouge">&lt;head&gt;</code> of <code class="highlighter-rouge">index.html</code>.</p>
+
+<div class="language-html highlighter-rouge"><pre class="highlight"><code><span class="nt">&lt;link</span> <span class="na">rel=</span><span class="s">"apple-touch-icon"</span> <span class="na">sizes=</span><span class="s">"180x180"</span> <span class="na">href=</span><span class="s">"assets/favicons/apple-touch-icon.png"</span><span class="nt">&gt;</span>
+<span class="nt">&lt;link</span> <span class="na">rel=</span><span class="s">"icon"</span> <span class="na">type=</span><span class="s">"image/png"</span> <span class="na">sizes=</span><span class="s">"32x32"</span> <span class="na">href=</span><span class="s">"assets/favicons/favicon-32x32.png"</span><span class="nt">&gt;</span>
+<span class="nt">&lt;link</span> <span class="na">rel=</span><span class="s">"icon"</span> <span class="na">type=</span><span class="s">"image/png"</span> <span class="na">sizes=</span><span class="s">"16x16"</span> <span class="na">href=</span><span class="s">"assets/favicons/favicon-16x16.png"</span><span class="nt">&gt;</span>
+<span class="nt">&lt;link</span> <span class="na">rel=</span><span class="s">"manifest"</span> <span class="na">href=</span><span class="s">"assets/favicons/manifest.json"</span><span class="nt">&gt;</span>
+<span class="nt">&lt;link</span> <span class="na">rel=</span><span class="s">"mask-icon"</span> <span class="na">href=</span><span class="s">"assets/favicons/safari-pinned-tab.svg"</span> <span class="na">color=</span><span class="s">"#5bbad5"</span><span class="nt">&gt;</span>
+<span class="nt">&lt;link</span> <span class="na">rel=</span><span class="s">"shortcut icon"</span> <span class="na">href=</span><span class="s">"assets/favicons/favicon.ico"</span><span class="nt">&gt;</span>
+<span class="nt">&lt;meta</span> <span class="na">name=</span><span class="s">"msapplication-config"</span> <span class="na">content=</span><span class="s">"assets/favicons/browserconfig.xml"</span><span class="nt">&gt;</span>
+<span class="nt">&lt;meta</span> <span class="na">name=</span><span class="s">"theme-color"</span> <span class="na">content=</span><span class="s">"#ffffff"</span><span class="nt">&gt;</span>
+</code></pre>
+</div>
+
+<p>Modify <code class="highlighter-rouge">assets/favicons/manifest.json</code> to add three additional properties: <code class="highlighter-rouge">short_name</code>, <code class="highlighter-rouge">background_color</code>, and <code class="highlighter-rouge">start_url</code>.</p>
+
+<div class="language-json highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"PWA Beers"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"short_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Beers"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"icons"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"src"</span><span class="p">:</span><span class="w"> </span><span class="s2">"/assets/favicons/favicon-32x32.png"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"sizes"</span><span class="p">:</span><span class="w"> </span><span class="s2">"32x32"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"image/png"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"src"</span><span class="p">:</span><span class="w"> </span><span class="s2">"/assets/favicons/android-chrome-192x192.png"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"sizes"</span><span class="p">:</span><span class="w"> </span><span class="s2">"192x192"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"image/png"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">],</span><span class="w">
+  </span><span class="nt">"background_color"</span><span class="p">:</span><span class="w"> </span><span class="s2">"#ffa500"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"theme_color"</span><span class="p">:</span><span class="w"> </span><span class="s2">"#ffffff"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"display"</span><span class="p">:</span><span class="w"> </span><span class="s2">"standalone"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"start_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"/index.html"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+</div>
+
+<p>If you refresh your app and Chrome doesn’t prompt you to install the app, you probably need to turn on a couple of features. Copy and paste the following URLs into Chrome to enable each feature.</p>
+
+<ul>
+  <li>chrome://flags/#bypass-app-banner-engagement-checks</li>
+  <li>chrome://flags/#enable-app-banners</li>
+</ul>
+
+<p>After making these changes, you should see a prompt at the top of the screen to install the app. You can verify your manifest loaded correctly by going to <strong>DevTools</strong> &gt; <strong>Application</strong> &gt; <strong>Manifest</strong>.</p>
+
+<p><img src="/assets/blog/angular-spring-boot-pwa/install-pwa-prompt-chrome-76aa4f16201764b0b6bd59d94ed7d116ffdf340619c717f19ac132e825c5d4cf.png" alt="Install PWA Prompt Chrome" width="800" class="center-image" /></p>
+
+<p>If you open Chrome developer tools &gt; Network and enable offline, you’ll notice the app still loads when the user is offline. <em>Yippee!</em></p>
+
+<p><img src="/assets/blog/angular-spring-boot-pwa/offline-works-826aa2c4b48e4f89625727872ad6ea0f857a990e2cb08491b7fe8de57e1b92e0.png" alt="Offline works" width="800" class="center-image" /></p>
+
+<h3 id="test-with-lighthouse">Test with Lighthouse</h3>
+
+<p>Install the <a href="https://chrome.google.com/webstore/detail/lighthouse/blipmdconlkpinefehnmjammfjpmpbjk">Lighthouse extension for Chrome</a> and click its icon to audit your app.</p>
+
+<p><img src="/assets/blog/angular-spring-boot-pwa/lighthouse-local-report-4dd6ea2fda245d03e7f7202fa9ede2c27988f5256222194bcf6512453762cccc.png" alt="Lighthouse PWA Report" width="800" class="center-image" /></p>
+
+<p>You can see that five audits fails, two of which you can fix.</p>
+
+<p>Update <code class="highlighter-rouge">assets/favicons/manifest.json</code> to have an icon that’s 512 pixels wide.</p>
+
+<div class="language-json highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"src"</span><span class="p">:</span><span class="w"> </span><span class="s2">"/assets/favicons/android-chrome-512x512.png"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"sizes"</span><span class="p">:</span><span class="w"> </span><span class="s2">"512x512"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"image/png"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+</div>
+
+<p>Add a <code class="highlighter-rouge">&lt;noscript&gt;</code> tag to <code class="highlighter-rouge">src/index.html</code> that indicates JavaScript is required.</p>
+
+<div class="language-html highlighter-rouge"><pre class="highlight"><code><span class="nt">&lt;noscript&gt;&lt;h1&gt;</span>You must enable JavaScript to view this page.<span class="nt">&lt;/h1&gt;&lt;/noscript&gt;</span>
+</code></pre>
+</div>
+
+<p>Run Lighthouse again and your score should be much better this time.</p>
+
+<p><img src="/assets/blog/angular-spring-boot-pwa/lighthouse-local-report2-1c65d0b57688478190052a62a05fb1cd05e48e3002b20b4ad13b3f06fbbb5eb7.png" alt="Lighthouse PWA Report, 2nd Attempt" width="800" class="center-image" /></p>
+
+<p>82 is an OK score, but you might notice that the app is not served over HTTPS. Deploying the app to a cloud provider can make this possible.</p>
+
+<h2 id="deploy-to-the-cloud">Deploy to the Cloud!</h2>
+
+<p>There are many cloud providers that support Spring Boot. For the Angular client, any web server will do since the app is full of static files after it’s been built. However, there are a couple things you’ll need to do to prepare the application for production.</p>
+
+<p>Modify <code class="highlighter-rouge">beer.service.ts</code> to use a different URL for production.</p>
+
+<div class="language-typescript highlighter-rouge"><pre class="highlight"><code>  <span class="nx">getAll</span><span class="p">()</span><span class="err">:</span> <span class="nx">Observable</span><span class="o">&lt;</span><span class="kr">any</span><span class="o">&gt;</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">http</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">'https://pwa-server.cfapps.io/good-beers'</span><span class="p">);</span>
+  <span class="p">}</span>
+</code></pre>
+</div>
+
+<p>In the <code class="highlighter-rouge">client</code> directory, run the following command to build and optimize for production.</p>
+
+<div class="language-bash highlighter-rouge"><pre class="highlight"><code>ng build -prod --aot
+</code></pre>
+</div>
+
+<h3 id="cloud-foundry">Cloud Foundry</h3>
+
+<p>Now, let’s look at how to deploy it on Cloud Foundry with <a href="http://run.pivotal.io/">Pivotal Web Services</a>. The instructions below assume you have an account and have logged in (using <code class="highlighter-rouge">cf login</code>).</p>
+
+<p><strong>Deploy the client</strong></p>
+
+<p>To deploy a static application to Cloud Foundry is very easy. In the <code class="highlighter-rouge">dist</code> directory, create an empty <code class="highlighter-rouge">Staticfile</code>. Enable pushstate routing since that’s what Angular CLI uses by default.</p>
+
+<div class="language-bash highlighter-rouge"><pre class="highlight"><code>touch Staticfile
+<span class="nb">echo</span> <span class="s2">"pushstate: enabled"</span> &gt;&gt; Staticfile
+</code></pre>
+</div>
+
+<p>Run the following commands to push the client, set it to force HTTPs, then start it.</p>
+
+<p><strong>NOTE:</strong> You may have to change the name from “pwa-client” to a unique name that’s not being used.</p>
+
+<div class="language-bash highlighter-rouge"><pre class="highlight"><code>cf push pwa-client --no-start
+cf <span class="nb">set</span>-env pwa-client FORCE_HTTPS <span class="nb">true
+</span>cf start pwa-client
+</code></pre>
+</div>
+
+<p>Navigate to the deployed application in your browser (e.g. https://pwa-client.cfapps.io) and ensure it loads. If it does, you’ll likely have a 404 in its console for when it tries to access the server.</p>
+
+<p><strong>Deploy the server</strong></p>
+
+<p>To deploy the Spring Boot backend, you first need to add CORS configuration for the new client. In <code class="highlighter-rouge">BeerController.java</code>, change <code class="highlighter-rouge">origins</code> to the location of the deployed client.</p>
+
+<div class="language-java highlighter-rouge"><pre class="highlight"><code><span class="nd">@GetMapping</span><span class="o">(</span><span class="s">"/good-beers"</span><span class="o">)</span>
+<span class="nd">@CrossOrigin</span><span class="o">(</span><span class="n">origins</span> <span class="o">=</span> <span class="s">"https://pwa-client.cfapps.io"</span><span class="o">)</span>
+<span class="kd">public</span> <span class="n">Collection</span><span class="o">&lt;</span><span class="n">Map</span><span class="o">&lt;</span><span class="n">String</span><span class="o">,</span> <span class="n">String</span><span class="o">&gt;&gt;</span> <span class="nf">goodBeers</span><span class="o">()</span> <span class="o">{</span>
+</code></pre>
+</div>
+
+<p>Next, build the app and push it to Cloud Foundry. If you run the following commands from the <code class="highlighter-rouge">server</code> directory, all of this should happen for you.</p>
+
+<div class="language-bash highlighter-rouge"><pre class="highlight"><code>mvn clean package
+cf push -p target/<span class="k">*</span>jar pwa-server
+</code></pre>
+</div>
+
+<p>After deploying to Pivotal’s Cloud Foundry, I ran a Lighthouse audit again and found my score to be 100. <em>Wahoo!</em></p>
+
+<p><img src="/assets/blog/angular-spring-boot-pwa/lighthouse-prod-report-37676259bd957576a44e7967fee52b73cf0599215f3071a21c45585bba9786ea.png" alt="Lighthouse Production Report" width="800" class="center-image" /></p>
+
+<h2 id="automation">Automation</h2>
+
+<p>There were quite a few steps involved to deploy this application and update files for production. For that reason, I wrote a <a href="https://github.com/oktadeveloper/spring-boot-angular-pwa-example/blob/master/deploy.sh"><code class="highlighter-rouge">deploy.sh</code></a> script that automates everything and uses random domain names for both servers. Kudos to <a href="https://twitter.com/starbuxman">Josh Long</a> for helping create it.</p>
+
+<p>If you’d like to use these scripts in your project, make sure to revert the changes for production URLs in <code class="highlighter-rouge">beer.service.ts</code> and <code class="highlighter-rouge">BeerController.java</code>.</p>
+
+<p>You can find the source code associated with this article <a href="https://github.com/oktadeveloper/spring-boot-angular-pwa-example">on GitHub</a>. If you find any bugs, please file an issue, or post a question to Stack Overflow with the “okta” tag. Of course, you can always <a href="https://twitter.com/mraible">ping me on Twitter</a> too.</p>
+
+<p>In April 2017, I did a talk on Cloud Native PWAs at Devoxx France with Josh Long. The video below is a recording of that talk and shows me writing similar code to what’s listed in this article.</p>
+
+<div style="max-width: 560px; margin: 0 auto">
+<iframe width="560" height="315" src="https://www.youtube.com/embed/xo7djiUBMpU" frameborder="0" allowfullscreen=""></iframe>
+</div>
+
+<h2 id="whats-next">What’s Next?</h2>
+
+<p>This article showed you to convert an existing Angular application into a progressive web application and deploy it to the cloud.</p>
+
+<p>One of the recommendations in the Lighthouse report was to <a href="https://developers.google.com/web/tools/lighthouse/audits/http2">use HTTP/2</a>. In a future post, I’ll write about HTTP/2, what cloud providers support it, and how to deploy to the ones that do.</p>
+
+<p>I’d like to give a big thanks to all the engineers that’ve been developing progressive web apps and documenting how to do it. It’s new and exciting stuff, and may become the best way to write mobile applications in the future.</p>
+
+<h2 id="learn-more-about-pwas">Learn More About PWAs</h2>
+
+<p>To learn more about progressive web applications, check out two of my recent posts:</p>
+
+<ul>
+  <li><a href="/blog/2017/07/20/the-ultimate-guide-to-progressive-web-applications">The Ultimate Guide to Progressive Web Applications</a></li>
+  <li><a href="/blog/2017/06/13/add-authentication-angular-pwa">Add Authentication to Your Angular PWA</a></li>
+</ul>
+
+<p>I’d also recommend visiting the following websites:</p>
+
+<ul>
+  <li><a href="https://developers.google.com/web/progressive-web-apps/">Google Developer’s Progressive Web Apps Homepage</a></li>
+  <li><a href="https://developers.google.com/web/ilt/pwa/">Progressive Web Apps Training from Google</a></li>
+  <li><a href="https://pwa-directory.appspot.com/">PWA Directory</a></li>
+  <li><a href="http://bit.ly/pwa-ng-nl">Maxim Salnikov’s Angular Mobile Toolkit Workshop</a></li>
+  <li><a href="https://github.com/tastejs/hacker-news-pwas">Hacker News Readers as Progressive Web Apps</a></li>
+</ul>
+
+<p><strong>Update:</strong> To learn how to add authentication to this application, see <a href="/blog/2017/06/13/add-authentication-angular-pwa.html">Add Authentication to Your Angular PWA</a>. I also wrote a blog post on <a href="/blog/2017/06/15/build-microservices-architecture-spring-boot.html">how to develop the backend using a microservices architecture</a>.</p>
+
+<p><strong>Changelog:</strong></p>
+
+<ul>
+  <li>Nov 3, 2017: Updated to use Spring Boot 1.5.8, Angular 5.0.0, and Angular CLI 1.5.0. You can see what changed in this article via <a href="https://github.com/okta/okta.github.io/pull/1453">this pull request on GitHub</a>. For code changes, see <a href="https://github.com/oktadeveloper/spring-boot-angular-pwa-example/pull/2">oktadeveloper/spring-boot-angular-pwa-example#2</a>.</li>
+</ul>
+
+
+	</div>
+	
+</article>
+
+		
+</section>
+
+		
+	</div><footer class="Footer">
+    <div class="Wrap">
+
+        <div class="Row">
+
+            <div class="Column--3 Column--medium-6 Column--xSmall-12">
+
+                <a class="Logo" href="https://www.okta.com/" target="_blank" rel="noopener noreferrer">
+                    <img src="https://developer.okta.com/sites/all/themes/developer/images/logo-footer.png" alt="Okta">
+                    Visit okta.com
+                </a>
+
+            </div>
+
+            <div class="Column--3 Column--medium-12 Column--xSmall-12">
+
+                <h4>Social</h4>
+                <ul class="Footer-links Footer-links--social">
+                    <li><a class="Footer-links--github" target="_blank" rel="noopener noreferrer" href="http://github.com/oktadeveloper">Github</a></li>
+                    <li><a class="Footer-links--twitter" target="_blank" rel="noopener noreferrer" href="http://twitter.com/OktaDev">Twitter</a></li>
+                    <li><a class="Footer-links--forum" target="_blank" rel="noopener noreferrer" href="https://devforum.okta.com/">Forum</a></li>
+                    <li><a class="Footer-links--rss" target="_blank" rel="noopener noreferrer" href="http://feeds.feedburner.com/OktaBlog">RSS Blog</a></li>
+                </ul>
+            </div>
+
+            <div class="Column--3 Column--medium-6 Column--small-12">
+                <h4>More Info</h4>
+                <ul class="Footer-links">
+                    <li><a target="_blank" href="https://developer.okta.com/integrate-with-okta/">Integrate with Okta</a></li>
+                    <li><a href="/blog/">Blog</a></li>
+                    <li><a href="/docs/platform-release-notes/platform-release-notes.html">Release Notes</a></li>
+                    <li><a href="/3rd_party_notices/">3rd Party Notices</a></li>
+                </ul>
+            </div>
+
+            <div class="Column--3 Column--medium-6 Column--small-12">
+                <h4>Contact &amp; Legal</h4>
+                <ul class="Footer-links">
+                    <li><a href="https://developer.okta.com/contact/">Contact Sales</a></li>
+                    <li><a target="_blank" rel="noopener noreferrer" href="mailto:developers@okta.com">Contact Support</a></li>
+                    <li><a href="https://developer.okta.com/terms/">Terms &amp; Conditions</a></li>
+                    <li><a href="https://developer.okta.com/privacy/">Privacy Policy</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</footer>
+
+    <script type="text/javascript" src="/assets/master-0365dd27cf276cb2a15c0a43906ca592538204cf1ad4557547bf4e50609b411e.js"></script>
+    <script type="text/javascript" src="/assets/myOkta-911cbafbbe079b7a5522d9cbe15bd2a5f44e1582531e88393934bec69f97696b.js"></script>
+    
+    
+    
+    
+      <script type="text/javascript" src="/assets/blog-6e32dad27404131cc8630a5282264bed2ab4c08c91ac86fa496b75c53aa4f681.js"></script>
+    
+
+  <!-- START Post Footer -->
+  
+  <!-- START Google Tag Manager -->
+  <!-- https://support.google.com/tagmanager/answer/6103696?hl=en -->
+  <noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-TJ45R6" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+  <!-- END Google Tag Manager -->
+  <!-- START Google Remarketing Tag -->
+  <script type="text/javascript">
+    /* <![CDATA[ */
+    var google_conversion_id = 1006913831;
+    var google_custom_params = window.google_tag_params;
+    var google_remarketing_only = true;
+    /* ]]> */
+  </script>
+  <div style="display:none;"><script type="text/javascript" src="//www.googleadservices.com/pagead/conversion.js"></script></div>
+  <noscript><div style="display:inline;"><img height="1" width="1" style="border-style:none;" alt="" src="//googleads.g.doubleclick.net/pagead/viewthroughconversion/1006913831/?value=0&amp;guid=ON&amp;script=0"></div></noscript>
+  <!-- END Google Remarketing Tag -->
+  <!-- START Crazy Egg Tracking -->
+  <script type="text/javascript">
+    setTimeout(function(){var a=document.createElement("script");
+    var b=document.getElementsByTagName("script")[0];
+    a.src=document.location.protocol+"//script.crazyegg.com/pages/scripts/0021/9333.js?"+Math.floor(new Date().getTime()/3600000);
+    a.async=true;a.type="text/javascript";b.parentNode.insertBefore(a,b)}, 1);
+  </script>
+  <!-- END Crazy Egg Tracking -->
+
+  <!-- END Post Footer -->
+</body>
+</html>

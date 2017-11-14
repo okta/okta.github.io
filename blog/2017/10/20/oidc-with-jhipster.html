@@ -1,0 +1,459 @@
+<!doctype html>
+<!--[if lt IE 7 ]> <html class="ie6 no-flexbox"> <![endif]-->
+<!--[if IE 7 ]>    <html class="ie7 no-flexbox"> <![endif]-->
+<!--[if IE 8 ]>    <html class="ie8 no-flexbox"> <![endif]-->
+<!--[if IE 9 ]>    <html class="ie9 no-flexbox"> <![endif]-->
+<!--[if IE 10 ]>    <html class="ie10 no-flexbox"> <![endif]-->
+<!--[if (gt IE 10)|!(IE)]><!--> <html class="modern wf-loading" lang="en"> <!--<![endif]-->
+  <head>
+  <script>
+    var searchDomain = 'https://developer.okta.com';
+    var isProduction = window.location.hostname === 'developer.okta.com';
+    if (isProduction) {
+      // TypeKit
+      (function(d) {
+        var config = {
+          kitId: 'jff5neq',
+          scriptTimeout: 3000,
+          async: true
+        },
+        h=d.documentElement,t=setTimeout(function(){h.className=h.className.replace(/bwf-loadingb/g,"")+" wf-inactive";},config.scriptTimeout),tk=d.createElement("script"),f=false,s=d.getElementsByTagName("script")[0],a;h.className+=" wf-loading";tk.src='https://use.typekit.net/'+config.kitId+'.js';tk.async=true;tk.onload=tk.onreadystatechange=function(){a=this.readyState;if(f||a&&a!="complete"&&a!="loaded")return;f=true;clearTimeout(t);try{Typekit.load(config)}catch(e){}};s.parentNode.insertBefore(tk,s)
+      })(document);
+
+      // Google analytics
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+              (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+              m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+      ga('create', 'UA-15777010-3', 'auto');
+      ga('send', 'pageview');
+
+      // START Google Tag Manager
+      (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+      new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+      j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+      '//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+      })(window,document,'script','dataLayer','GTM-TJ45R6');
+      // END Google Tag Manager
+    }
+	</script>
+  <meta charset="utf-8">
+  <meta http-equiv="x-ua-compatible" content="IE=edge,chrome=1">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+ 	
+
+  <link type="text/css" rel="stylesheet" href="https://developer.okta.com/sites/all/themes/developer/css/master.css" media="all" />
+  <meta class="swiftype" name="title" data-type="string" content="Use OpenID Connect Support with JHipster | Okta Developer" />
+  <meta class="swiftype" name="summary" data-type="string" content="Single sign-on (SSO) is a feature that most developers don’t care about when building one-off applications for clients or themselves. However, when developin..." />
+
+  <link type="text/css" rel="stylesheet" href="/assets/animate-ec43d72c3ed45e08a460b8a2966d8dba6006aebfa0530935c3973fa493a8771f.css">
+  <link type="text/css" rel="stylesheet" href="/assets/okta-a96df4c9d48b78b618e1d541f46f7137d73d40653571e020c1ad59edd7915c60.css">
+  
+  
+  <title>Use OpenID Connect Support with JHipster | Okta Developer</title>
+  <meta name="description" content="Single sign-on (SSO) is a feature that most developers don’t care about when building one-off applications for clients or themselves. However, when developin...">
+  <link rel="canonical" href="https://developer.okta.com/blog/2017/10/20/oidc-with-jhipster"  data-proofer-ignore>
+  <link rel="alternate" type="application/rss+xml" title="Okta Developer" href="https://developer.okta.com/feed.xml"><!-- GA -->
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+  <link rel="manifest" href="/manifest.json">
+  <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#21313a">
+  <meta name="theme-color" content="#ffffff">
+</head>
+
+  
+    <body id="blog">
+	
+
+
+
+
+<header class="Header is-fixed">
+
+  <div class="Wrap">
+
+    <a class="Logo" href="https://developer.okta.com">
+      <svg version="1.1" id="OktaLogo" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 431.9 151.4" style="enable-background:new 0 0 431.9 151.4;" xml:space="preserve"><g><g><g><path d="M102.2,41.4c-21,0-38.1,17.1-38.1,38.1s17.1,38.1,38.1,38.1s38.1-17.1,38.1-38.1l0,0C140.3,58.5,123.2,41.4,102.2,41.4z M102.2,98.5c-10.5,0-19-8.5-19-19s8.5-19,19-19s19,8.5,19,19c0.1,10.5-8.4,19-18.9,19.1C102.3,98.6,102.2,98.6,102.2,98.5L102.2,98.5z"/><path d="M169.1,92.3c0-1.9,1.5-3.4,3.4-3.4c0.9,0,1.8,0.4,2.4,1c9.5,9.7,25.3,26.3,25.4,26.4c0.4,0.5,0.8,0.8,1.4,0.9l1.6,0.2h17.2c1.8,0,3.3-1.4,3.4-3.2c0-0.8-0.3-1.5-0.8-2.2l-28.6-29.2l-1.5-1.5c-3.2-3.9-2.9-5.4,0.8-9.3l22.6-25.1c1.1-1.4,0.8-3.5-0.6-4.6c-0.6-0.4-1.3-0.7-2-0.7h-17c-0.6,0.2-1.1,0.5-1.5,0.9L175,64.4c-1.3,1.4-3.4,1.5-4.8,0.2c-0.7-0.6-1.1-1.5-1.1-2.5V18.9c0-1.7-1.3-3-3-3c-0.1,0-0.2,0-0.3,0h-12.7c-2.2,0-3.3,1.5-3.3,2.8v95.8c0,2.2,1.8,2.8,3.3,2.8h12.7c1.7,0.1,3.2-1.2,3.3-2.9c0,0,0,0,0,0V92.3z"/><path d="M273,114l-1.4-12.8c-0.2-1.7-1.7-2.9-3.4-2.7c0,0,0,0-0.1,0l-2.9,0.2c-10.1,0-18.5-7.9-19-18c0-0.3,0-0.7,0-1V64.2c-0.1-2,1.5-3.6,3.5-3.7c0,0,0,0,0,0h17c1.7-0.1,3.1-1.5,3-3.2c0,0,0-0.1,0-0.1v-12c0-2.3-1.5-3.6-2.8-3.6h-17.1c-1.9,0.1-3.5-1.5-3.6-3.4c0,0,0,0,0,0V18.9c-0.1-1.7-1.5-3.1-3.2-3c0,0-0.1,0-0.1,0h-12.7c-1.6-0.1-3,1.1-3.1,2.7c0,0.1,0,0.1,0,0.2c0,0,0,61.7,0,62c0.5,21,17.9,37.6,38.9,37c1.4,0,2.9-0.2,4.3-0.3C272,117.2,273.2,115.7,273,114z"/></g><path d="M364.7,98c-10.8,0-12.4-3.8-12.4-18.3l0,0V44.8c0-1.8-1.4-3.2-3.2-3.2c0,0-0.1,0-0.1,0h-12.8c-1.8,0-3.2,1.4-3.3,3.2v1.6C314.6,36,291.3,42.5,281,60.8c-10.4,18.3-3.9,41.6,14.4,51.9c14,7.9,31.4,6.2,43.5-4.2c3.6,5.5,9.3,9.1,18.3,9.1c1.5,0,9.7,0.3,9.7-3.5v-13.6C367,99.2,366,98.1,364.7,98z M314.2,98.6c-10.5,0-19-8.5-19-19s8.5-19,19-19s19,8.5,19,19l0,0C333.2,90.1,324.7,98.6,314.2,98.6z"/></g><path d="M19.4,74c2.2-1.9,4.1-4.1,5.7-6.6c3.5-5.3,5.4-11.5,5.2-17.9V27c0-4.9,0.9-8.4,2.7-10.5c1.8-2.1,4.8-3,9.2-3h12.6c1.2,0,2.1-0.9,2.2-2.1l0,0V2.2C57,1,56,0,54.8,0c0,0,0,0,0,0H41.5c-7.8,0-12.9,2.1-18,7.6s-7.1,12.3-7.1,21.7v14.2c0,2.2-0.1,4-0.2,5.7v2.2c-0.5,3.2-1.8,6.2-3.6,8.9C9.4,64.7,5.1,70.9,0.9,74l0,0l-0.3,0.3l0,0l-0.2,0.3H0.2v0.3l0,0c-0.1,0.3-0.1,0.7,0,1l0,0v0.3h0.1l0.2,0.3l0,0l0.3,0.3l0,0c4.2,3.1,8.5,9.3,11.3,13.7c1.8,2.7,3.1,5.7,3.6,8.9v2.2c0.1,1.6,0.2,3.5,0.2,5.7v14.3c0,9.4,2.4,16.7,7.1,21.7s10.2,7.6,18,7.6h13.8c1.2,0,2.2-1,2.2-2.2V140l0,0c0-1.2-1-2.2-2.2-2.2H42.2c-4.4,0-7.5-1-9.2-3s-2.7-5.6-2.7-10.5v-22.4c0.2-6.4-1.7-12.6-5.2-17.9c-1.6-2.5-3.5-4.7-5.7-6.6l0,0c-0.9-0.7-1.1-2-0.4-2.9C19.2,74.3,19.3,74.2,19.4,74L19.4,74z"/><path d="M412.5,74c-2.2-1.9-4.1-4.1-5.7-6.6c-3.5-5.3-5.4-11.5-5.2-17.9V27c0-4.9-0.9-8.4-2.7-10.5s-4.8-3-9.2-3h-12.6c-1.2,0-2.2-1-2.2-2.2c0,0,0,0,0,0l0,0V2.2c0-1.2,1-2.2,2.2-2.2c0,0,0,0,0,0h13.4c7.8,0,12.9,2.1,18,7.6s7.1,12.3,7.1,21.7v14.2c0,2.2,0.1,4,0.2,5.7v2.2c0.5,3.2,1.8,6.2,3.6,8.9c2.8,4.5,7.1,10.7,11.3,13.7l0,0l0.3,0.3l0,0l0.2,0.3h0.1v0.3l0,0c0.1,0.3,0.1,0.7,0,1l0,0v0.3h-0.1l-0.2,0.3l0,0l-0.3,0.3l0,0c-4.2,3.1-8.5,9.3-11.3,13.7c-1.8,2.7-3.1,5.7-3.6,8.9v2.2c-0.1,1.6-0.2,3.5-0.2,5.7v14.3c0,9.4-2.4,16.7-7.1,21.7s-10.2,7.6-18,7.6h-13.4c-1.2,0-2.2-1-2.2-2.2c0,0,0,0,0,0V140l0,0c0-1.2,1-2.2,2.2-2.2l0,0h12.7c4.4,0,7.5-1,9.2-3s2.7-5.6,2.7-10.5v-22.4c-0.2-6.3,1.6-12.6,5.1-17.9c1.6-2.5,3.5-4.7,5.7-6.6l0,0c0.9-0.7,1.1-2,0.4-2.9C412.7,74.3,412.6,74.2,412.5,74L412.5,74z"/></g></svg>
+    </a>
+
+    <nav class="Header-nav PrimaryNav">
+      <ul class="menu">
+        <li class="first leaf">
+          <a href="https://developer.okta.com/product/">Product</a>
+        </li>
+        <li class="leaf">
+          <a href="https://developer.okta.com/pricing/">Pricing</a>
+        </li>
+        <li class="leaf">
+          <a href="/blog/" class="active">Blog</a>
+        </li>
+        <li class="leaf">
+          <a href="/documentation/">Docs</a>
+        </li>
+        <li class="last expanded">
+          <span class="nolink">Support</span>
+          <ul class="menu">
+            <li class="first leaf"><a href="https://devforum.okta.com/">Okta Developer Forums</a></li>
+            <li class="last leaf"><a href="mailto:developers@okta.com">developers@okta.com</a></li>
+          </ul>
+        </li>
+      </ul>
+      <a class="PrimaryNav-toggle" href="#">
+        <svg width="20px" height="20px" viewBox="0 0 20 20" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+            <g class="MenuIcon" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="round">
+                <path d="M1,16 L19,16" class="MenuIcon-line1" stroke="#FFFFFF" stroke-width="2"></path>
+                <path d="M1,4 L19,4" class="MenuIcon-line2" stroke="#FFFFFF" stroke-width="2"></path>
+                <path d="M1,10 L19,10" class="MenuIcon-line3" stroke="#FFFFFF" stroke-width="2"></path>
+                <path d="M1,10 L19,10" class="MenuIcon-line4" stroke="#FFFFFF" stroke-width="2"></path>
+            </g>
+        </svg>
+        <svg class="CloseIcon" width="16px" height="16px" viewBox="0 0 16 16" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+          <g id="ALl-Boards" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+            <g id="Desktop" transform="translate(-915.000000, -235.000000)" fill="#FFFFFF">
+              <g id="Search-bar-Active" transform="translate(30.000000, 26.000000)">
+                <polygon id="Icon/Cross" points="901 210.6 899.4 209 893 215.4 886.6 209 885 210.6 891.4 217 885 223.4 886.6 225 893 218.6 899.4 225 901 223.4 894.6 217"></polygon>
+              </g>
+            </g>
+          </g>
+        </svg>
+      </a>
+
+      <div class="PrimaryNav-cta">
+        <a target="_blank" rel="noopener noreferrer" href="https://login.okta.com/?SAMLRequest=fc%2B7CsJAEAXQXvAflu1NNJUMeZBGELTx1a%2FrYILJTtyZGD%2FfSBRiYzlw77lMnD3rSj3Qc0ku0YtgrhU6S5fSXRN9PKxmS52l00nMpq6iBvJWCrfDe4ss6vStRe9aDzmGIZfo1jsgwyWDMzUyiIV9vt1AH4XGk5ClSvewUgMNa%2BYW%2FVj5jxhm9NLP67QQaSAMu64L6CYmsFSHlnzT4ZlLwTgcL6Sf8%2FeX9AU%3Dhttps://login.okta.com/?SAMLRequest=fc%2B7CsJAEAXQXvAflu1NNJUMeZBGELTx1a%2FrYILJTtyZGD%2FfSBRiYzlw77lMnD3rSj3Qc0ku0YtgrhU6S5fSXRN9PKxmS52l00nMpq6iBvJWCrfDe4ss6vStRe9aDzmGIZfo1jsgwyWDMzUyiIV9vt1AH4XGk5ClSvewUgMNa%2BYW%2FVj5jxhm9NLP67QQaSAMu64L6CYmsFSHlnzT4ZlLwTgcL6Sf8%2FeX9AU%3D" class="Button--redOutline">Login</a>
+        <a href="https://developer.okta.com/signup/" class="Button--red">Sign up</a>
+      </div>
+
+      <a class="SearchIcon" href="#"></a>
+      <form id="form_search" class="SearchBar Formisimo_clocked_69929" method="get" action="https://developer.okta.com/search/" name="form_search" __bizdiag="-784164280" __biza="WJ__">
+        <input type="text" name="stq" autocomplete="off" id="st-search-input-auto" class="st-search-input" placeholder="Search">
+        <input type="submit" name="submit" value="GO">
+      </form>
+
+    </nav>
+
+  </div>
+
+</header>
+
+	<div class="page-content">
+		
+
+
+
+
+
+
+<section class="Blog is-single">
+		
+	<div class="Blog-social">
+		
+		<a href="https://github.com/mraible" target="_blank"><i class="fa fa-github"></i></a>
+		
+		
+		<a href="https://twitter.com/mraible" target="_blank"><i class="fa fa-twitter"></i></a>
+		
+		
+		
+		<a href="http://raibledesigns.com" target="_blank"><i class="fa fa-external-link"></i></a>
+		
+	</div>
+	
+	
+
+<article class="BlogPost">
+	
+	<header class="BlogPost-header">
+	
+		<time class="BlogPost-date" datetime="2017-10-20">October 20, 2017</time>
+		
+		<h1 class="BlogPost-title">
+			
+			Use OpenID Connect Support with JHipster
+			
+		</h1>
+		
+		<div class="BlogPost-attribution">
+			
+				<img src="/assets/avatar-matt_raible-9974af6192eb1753b7137c8fff0a2c6e6bb9736a2517986cb5cc50bb040e83d4.jpg" alt="avatar-matt_raible.jpg" class="BlogPost-avatar">
+			
+			<span class="BlogPost-author">Matt Raible</span>
+		</div>
+	
+	</header>
+	
+	<div class="BlogPost-content">
+		
+	<p>Single sign-on (SSO) is a feature that most developers don’t care about when building one-off applications for clients or themselves. However, when developing apps for their company, which will be used by employees of their business, they often need to hook into an existing identity provider. It might be Active Directory (AD), LDAP, or a myriad of other systems. Okta provides SSO for many companies around the world and allows them to configure AD and LDAP as <em>masters</em> that sync their users to the cloud.</p>
+
+<p>When you use Okta as an employee, you log in once to your dashboard, then log in to the rest of your apps by clicking on bookmarks (or as we like to call them <em>chiclets</em>). If you couple this SSO system with our <a href="https://developer.okta.com/">API Products</a> – which allows developers to integrate SSO into their apps – you have a compelling solution.</p>
+
+<p>Speaking of compelling, have you heard of <a href="http://www.jhipster.tech">JHipster</a>? JHipster is one of the hippest things to happen to Java developers in the last few years. JHipster is an application generator, and a developer platform, that allows you to build applications quickly and easily. By default, it generates a <a href="https://projects.spring.io/spring-boot/">Spring Boot</a> backend and an <a href="https://angular.io/">Angular</a> front-end.</p>
+
+<p>You can generate boilerplate code (often called CRUD, for Create, Read, Update, and Delete) for domain objects for the application you’re developing. JHipster’s <a href="http://www.jhipster.tech/jdl-studio/">JDL Studio</a> makes modeling domain objects as easy as creating a file that describes your entities and their relationships to one another. For example, here’s what a bug tracker’s JDL looks like.</p>
+
+<p><img src="/assets/blog/oidc-with-jhipster/jdl-studio-example-c71480c14feadda1b88cbd9e9766cb7df3a52dd43119f85bcdeaafcafeab8fda.png" alt="JDL Studio Example" width="800" class="center-image" /></p>
+
+<p><strong>NOTE:</strong> You can find other examples at <a href="https://github.com/jhipster/jdl-samples">https://github.com/jhipster/jdl-samples</a>.</p>
+
+<p>JHipster is so hip it recently won a <a href="https://blogs.oracle.com/java/announcing-2017-dukes-choice-award-nominations">Duke’s Choice Award at JavaOne 2017</a>. The Duke’s Choice Award celebrates extreme innovation using Java technology.</p>
+
+<p><img src="/assets/blog/oidc-with-jhipster/dukes-choice-award-jhipster-fa850d8b3c13eb5c6943ce8793629e70e9381cd6f454690767dd81c1657d44e6.jpg" alt="JHipster wins a Duke’s Choice Award!" width="600" class="center-image" /></p>
+
+<p>A week later, it won an honorable bronze at the <a href="https://jaxenter.com/winners-jax-innovation-awards-2017-137993.html">JAX Innovation Awards 2017</a> for most innovative contribution to the Java ecosystem. With over 360 contributors, it’s got a great community too!</p>
+
+<div style="max-width: 500px; margin: 0 auto">
+<blockquote class="twitter-tweet" data-lang="en"><p lang="en" dir="ltr">2 awards in a row for <a href="https://twitter.com/java_hipster?ref_src=twsrc%5Etfw">@java_hipster</a>, <a href="https://twitter.com/hashtag/DukesChoiceAward?src=hash&amp;ref_src=twsrc%5Etfw">#DukesChoiceAward</a> &amp; <a href="https://twitter.com/hashtag/JAXenter?src=hash&amp;ref_src=twsrc%5Etfw">#JAXenter</a> award. Feeling proud. Thanks to all our contributors &amp; amazing core team</p>&mdash; Deepu K Sasidharan (@deepu105) <a href="https://twitter.com/deepu105/status/917844704707923969?ref_src=twsrc%5Etfw">October 10, 2017</a></blockquote>
+<script async="" src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
+</div>
+
+<p>I’ve been a committer on the JHipster project ever since I <a href="http://www.jhipster-book.com/#!/news/entry/welcome-to-the-jhipster-mini-book">started writing the JHipster Mini-Book for InfoQ in June of 2015</a>. After developing a couple of apps with it, finding and fixing bugs along the way, I was invited to be a part of the project. Fast forward two years later, and version 4.0 of the book is <a href="https://www.infoq.com/minibooks/jhipster-4-mini-book">available for download</a>, and I’ve spoken about JHipster around the world at several conferences including Devoxx Belgium, Devoxx France, Angular Summit, and JavaOne.</p>
+
+<h2 id="enter-oauth-20">Enter OAuth 2.0</h2>
+
+<p>I’m a fan of <a href="https://oauth.net/">OAuth 2.0</a> and <a href="http://openid.net/connect/">OpenID Connect</a> (OIDC). It helps that I work for Okta, where we implement both options in our API and allow developers to use our libraries — or third party libraries — to connect. I like how OAuth will enable me to use my existing credentials at an Identity Provider (e.g., Google, Facebook, or even Okta) to log in to applications without creating a new account.</p>
+
+<blockquote>
+  <p>If you want to know more about how OAuth and OIDC work, check out my article <a href="https://developer.okta.com/blog/2017/06/21/what-the-heck-is-oauth">What the Heck is OAuth</a> or watch Karl McGuinness’s <a href="https://www.youtube.com/watch?v=6ypYXxRPKgk">What the Heck is OpenID Connect talk from Oktane 17</a>.</p>
+</blockquote>
+
+<p>About a month ago, I started looking into creating a JHipster Module that’d work with Okta, much like <a href="https://stormpath.com/blog/stormpath-jhipster-application">the one I created at Stormpath</a>. I knew that JHipster had OAuth as one of its authentication options, but I was unfamiliar with how it worked. I discovered when you chose OAuth as your authentication mechanism; it created an OAuth server and an Angular client with the client ID and client secret embedded in the code.</p>
+
+<p>Embedding a client secret in a SPA (single-page app) is a no-no in OAuth-land, and should only be done for confidential clients that can hide the secret. I spoke to the team about the current OAuth implementation and since no-one was proud of it, and hardly anyone was using it, I decided to refactor the existing implementation rather than create a module.</p>
+
+<h2 id="add-keycloak-support">Add Keycloak Support</h2>
+
+<p>Over the last couple years, JHipster has <a href="https://github.com/jhipster/generator-jhipster/issues/2465">had</a> a <a href="https://github.com/jhipster/generator-jhipster/issues/6139">few</a> <a href="https://issues.jboss.org/browse/KEYCLOAK-2243?">requests</a> for Keycloak integration. <a href="http://www.keycloak.org/">Keycloak</a> is an open source identity and access management solution. It has an Apache 2.0 license and is run by Red Hat. It supports standard protocols like OIDC, OAuth 2.0, and SAML 2.0. You can find its <a href="https://github.com/keycloak/keycloak">source code on GitHub</a>.</p>
+
+<p>JHipster uses <a href="https://github.com/spring-projects/spring-security">Spring Security</a> and <a href="/blog/2017/03/21/spring-boot-oauth">I knew that it integrated with OAuth very easily</a>. After <a href="https://github.com/gmarziou/jhipster-keycloak/issues/2#issuecomment-327007722">a lengthy discussion with the JHipster community</a>, I decided to implement OAuth / OIDC support for JHipster using Spring Security, and nothing else. We thought about making it so the Angular client embedded a login form that was OIDC-aware, but realized we might have to have different libraries for different UI frameworks and it’d get complicated. By leveraging Spring Security and OAuth’s <em><a href="https://tools.ietf.org/html/rfc6749#section-4.1">authorization code flow</a></em>, Spring Security would handle the redirect to the Identity Provider (aka IdP) for sign in, manage the code-for-token exchange, and redirect back to the UI.</p>
+
+<p>This turned out to be awesome because all we had to do was define properties for Spring Security (in <code class="highlighter-rouge">src/main/resources/config/application.yml</code>).</p>
+
+<div class="language-yaml highlighter-rouge"><pre class="highlight"><code><span class="s">security</span><span class="pi">:</span>
+    <span class="s">basic</span><span class="pi">:</span>
+        <span class="s">enabled</span><span class="pi">:</span> <span class="s">false</span>
+    <span class="s">oauth2</span><span class="pi">:</span>
+        <span class="s">client</span><span class="pi">:</span>
+            <span class="s">accessTokenUri</span><span class="pi">:</span> <span class="s">http://localhost:9080/auth/realms/jhipster/protocol/openid-connect/token</span>
+            <span class="s">userAuthorizationUri</span><span class="pi">:</span> <span class="s">http://localhost:9080/auth/realms/jhipster/protocol/openid-connect/auth</span>
+            <span class="s">clientId</span><span class="pi">:</span> <span class="s">web_app</span>
+            <span class="s">clientSecret</span><span class="pi">:</span> <span class="s">web_app</span>
+            <span class="s">clientAuthenticationScheme</span><span class="pi">:</span> <span class="s">form</span>
+            <span class="s">scope</span><span class="pi">:</span> <span class="s">openid profile email</span>
+        <span class="s">resource</span><span class="pi">:</span>
+            <span class="s">userInfoUri</span><span class="pi">:</span> <span class="s">http://localhost:9080/auth/realms/jhipster/protocol/openid-connect/userinfo</span>
+            <span class="s">tokenInfoUri</span><span class="pi">:</span> <span class="s">http://localhost:9080/auth/realms/jhipster/protocol/openid-connect/token/introspect</span>
+            <span class="s">preferTokenInfo</span><span class="pi">:</span> <span class="s">false</span>
+</code></pre>
+</div>
+
+<p>To make Keycloak work out-of-the-box, JHipster automatically creates a <code class="highlighter-rouge">src/main/docker/keycloak.yml</code> file for Docker Compose that has a realm and users configured. This file uses Keycloak’s image, imports the default data, and exposes the default port at <code class="highlighter-rouge">9080</code>.</p>
+
+<div class="language-yml highlighter-rouge"><pre class="highlight"><code><span class="s">version</span><span class="pi">:</span> <span class="s1">'</span><span class="s">2'</span>
+<span class="s">services</span><span class="pi">:</span>
+  <span class="s">keycloak</span><span class="pi">:</span>
+    <span class="s">image</span><span class="pi">:</span> <span class="s">jboss/keycloak:3.3.0.CR1</span>
+    <span class="s">command</span><span class="pi">:</span> <span class="pi">[</span><span class="s2">"</span><span class="s">-b"</span><span class="pi">,</span> <span class="s2">"</span><span class="s">0.0.0.0"</span><span class="pi">,</span> <span class="s2">"</span><span class="s">-Dkeycloak.migration.action=import"</span><span class="pi">,</span> <span class="s2">"</span><span class="s">-Dkeycloak.migration.provider=dir"</span><span class="pi">,</span> <span class="s2">"</span><span class="s">-Dkeycloak.migration.dir=/opt/jboss/keycloak/realm-config"</span><span class="pi">,</span> <span class="s2">"</span><span class="s">-Dkeycloak.migration.strategy=OVERWRITE_EXISTING"</span><span class="pi">,</span> <span class="s2">"</span><span class="s">-Djboss.socket.binding.port-offset=1000"</span><span class="pi">]</span>
+    <span class="s">volumes</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="s">./realm-config:/opt/jboss/keycloak/realm-config</span>
+    <span class="s">environment</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="s">KEYCLOAK_USER=admin</span>
+      <span class="pi">-</span> <span class="s">KEYCLOAK_PASSWORD=admin</span>
+    <span class="s">ports</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="s">9080:9080</span>
+      <span class="pi">-</span> <span class="s">9443:9443</span>
+      <span class="pi">-</span> <span class="s">10990:10990</span>
+</code></pre>
+</div>
+
+<p>If you’re unfamiliar with how Docker Compose works, check out Lee Brandt’s <a href="/blog/2017/10/11/developers-guide-to-docker-part-3">Developer’s Guide to Docker Compose</a>.</p>
+
+<p>This means you can start Keycloak in your JHipster app’s root directory using the following command.</p>
+
+<div class="language-bash highlighter-rouge"><pre class="highlight"><code>docker-compose -f src/main/docker/keycloak.yml up
+</code></pre>
+</div>
+
+<p>Once you have it up and running, you can start your app (in another terminal window or your IDE), and you’ll be able to log in as you normally would with session or JWT authentication.</p>
+
+<h2 id="switch-to-okta">Switch to Okta</h2>
+
+<p>The <strong>really</strong> cool part is you only need to override Spring Security’s OAuth properties to switch from Keycloak to Okta (or likely any other IdP)!  For example, you can create a <code class="highlighter-rouge">~/.okta.env</code> file with the following properties:</p>
+
+<div class="language-bash highlighter-rouge"><pre class="highlight"><code><span class="nb">export </span><span class="nv">SECURITY_OAUTH2_CLIENT_ACCESS_TOKEN_URI</span><span class="o">=</span><span class="s2">"<span class="okta-preview-domain"><span class="okta-preview-domain">https://{yourOktaDomain}.com</span></span>/oauth2/default/v1/token"</span>
+<span class="nb">export </span><span class="nv">SECURITY_OAUTH2_CLIENT_USER_AUTHORIZATION_URI</span><span class="o">=</span><span class="s2">"<span class="okta-preview-domain"><span class="okta-preview-domain">https://{yourOktaDomain}.com</span></span>/oauth2/default/v1/authorize"</span>
+<span class="nb">export </span><span class="nv">SECURITY_OAUTH2_RESOURCE_USER_INFO_URI</span><span class="o">=</span><span class="s2">"<span class="okta-preview-domain"><span class="okta-preview-domain">https://{yourOktaDomain}.com</span></span>/oauth2/default/v1/userinfo"</span>
+<span class="nb">export </span><span class="nv">SECURITY_OAUTH2_RESOURCE_TOKEN_INFO_URI</span><span class="o">=</span><span class="s2">"<span class="okta-preview-domain"><span class="okta-preview-domain">https://{yourOktaDomain}.com</span></span>/oauth2/default/v1/introspect"</span>
+<span class="nb">export </span><span class="nv">SECURITY_OAUTH2_CLIENT_CLIENT_ID</span><span class="o">=</span><span class="s2">"{clientId}"</span>
+<span class="nb">export </span><span class="nv">SECURITY_OAUTH2_CLIENT_CLIENT_SECRET</span><span class="o">=</span><span class="s2">"{clientSecret}"</span>
+</code></pre>
+</div>
+
+<p>Of course, you’ll need to create a new OIDC client in Okta and fill in the variables before this works. Once you’ve done that, you can run the following command to set these environment variables.</p>
+
+<div class="language-bash highlighter-rouge"><pre class="highlight"><code><span class="nb">source</span> ~/.okta.env
+</code></pre>
+</div>
+
+<p>Restart your app and <em>voila</em> - you’re now using Okta!</p>
+
+<p>In case you don’t know how to set up an OIDC app on Okta, here’s a quick tutorial.</p>
+
+<h2 id="set-up-an-oidc-app-on-okta">Set Up an OIDC App on Okta</h2>
+
+<p>Log in to your Okta Developer account (or <a href="https://developer.okta.com/signup/">sign up</a> if you don’t have an account) and navigate to <strong>Applications</strong> &gt; <strong>Add Application</strong>. Click <strong>Web</strong> and click <strong>Next</strong>. Give the app a name you’ll remember, and specify <code class="highlighter-rouge">http://localhost:8080</code> as a Base URI and Login Redirect URI. Click <strong>Done</strong> and copy the client ID and secret into your <code class="highlighter-rouge">application.yml</code> file.</p>
+
+<p>Create a <code class="highlighter-rouge">ROLE_ADMIN</code> and <code class="highlighter-rouge">ROLE_USER</code> group (<strong>Users</strong> &gt; <strong>Groups</strong> &gt; <strong>Add Group</strong>) and add users to them. You can use the account you signed up with, or create a new user (<strong>Users</strong> &gt; <strong>Add Person</strong>). Navigate to <strong>API</strong> &gt; <strong>Authorization Servers</strong>, click the <strong>Authorization Servers</strong> tab and edit the default one. Click the <strong>Claims</strong> tab and <strong>Add Claim</strong>. Name it “groups” or “roles”, and include it in the ID Token. Set the value type to “Groups” and set the filter to be a Regex of <code class="highlighter-rouge">.*</code>.</p>
+
+<p><strong>NOTE:</strong> If you want to use Okta all the time (instead of Keycloak), modify JHipster’s Protractor tests to use this account when running. Do this by changing the credentials in <code class="highlighter-rouge">src/test/javascript/e2e/account/account.spec.ts</code> and <code class="highlighter-rouge">src/test/javascript/e2e/admin/administration.spec.ts</code>.</p>
+
+<h2 id="watch-a-screencast-on-jhipsters-refactored-oauth-support">Watch a Screencast on JHipster’s Refactored OAuth Support</h2>
+
+<p>To make things easier to understand, I created a screencast that shows you how to create a JHipster app with the new OAuth support. After building it and explaining how it works with Keycloak, I deploy it to Cloud Foundry, set its configuration to point to Okta, and demonstrate how that works. Easy peasy!</p>
+
+<div style="max-width: 560px; margin: 0 auto">
+<iframe width="560" height="315" src="https://www.youtube.com/embed/MaqIsQB1yeQ" frameborder="0" allowfullscreen=""></iframe>
+</div>
+
+<p>The source code for the project created in this screencast can be <a href="https://github.com/mraible/jhipster-oidc-example">found on GitHub</a>.</p>
+
+<h2 id="pwas-with-jhipster">PWAs with JHipster</h2>
+
+<p>Did you know that JHipster supports creating progressive web apps (PWAs) too? When you generate a JHipster project, it tells you how to make it a PWA in its <code class="highlighter-rouge">README.md</code> under the <em>Service Workers</em> heading.</p>
+
+<p>Service workers are disabled by default. To enable them uncomment the service worker registering script in <code class="highlighter-rouge">src/main/webapp/index.html</code>:</p>
+
+<div class="language-html highlighter-rouge"><pre class="highlight"><code><span class="nt">&lt;script&gt;</span>
+    <span class="k">if</span> <span class="p">(</span><span class="s1">'serviceWorker'</span> <span class="k">in</span> <span class="nx">navigator</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">navigator</span><span class="p">.</span><span class="nx">serviceWorker</span>
+        <span class="p">.</span><span class="nx">register</span><span class="p">(</span><span class="s1">'./sw.js'</span><span class="p">)</span>
+        <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">'Service Worker Registered'</span><span class="p">);</span> <span class="p">});</span>
+    <span class="p">}</span>
+<span class="nt">&lt;/script&gt;</span>
+</code></pre>
+</div>
+
+<p>And uncomment the copy file option in <code class="highlighter-rouge">webpack/webpack.common.js</code>:</p>
+
+<div class="language-js highlighter-rouge"><pre class="highlight"><code><span class="p">{</span> <span class="nl">from</span><span class="p">:</span> <span class="s1">'./src/main/webapp/sw.js'</span><span class="p">,</span> <span class="nx">to</span><span class="err">:</span> <span class="s1">'sw.js'</span> <span class="p">},</span>
+</code></pre>
+</div>
+
+<p>I made my <a href="https://github.com/mraible/javaone2017-jhipster-demo">JavaOne demo</a> into a PWA and deployed it to Cloud Foundry and Heroku. You can see the app received a 💯 Lighthouse score on both platforms!</p>
+
+<div style="max-width: 500px; margin: 0 auto">
+<blockquote class="twitter-tweet" data-lang="en"><p lang="en" dir="ltr">I added PWA support to my <a href="https://twitter.com/hashtag/JavaOne?src=hash&amp;ref_src=twsrc%5Etfw">#JavaOne</a> <a href="https://twitter.com/java_hipster?ref_src=twsrc%5Etfw">@java_hipster</a> demo and ran Lighthouse. <a href="https://twitter.com/heroku?ref_src=twsrc%5Etfw">@heroku</a> vs. <a href="https://twitter.com/cloudfoundry?ref_src=twsrc%5Etfw">@cloudfoundry</a>, fight! <br /><br />…Heroku wins by 160ms. <a href="https://twitter.com/hashtag/pwa?src=hash&amp;ref_src=twsrc%5Etfw">#pwa</a> 💯 <a href="https://t.co/AkvwxsgeLC">pic.twitter.com/AkvwxsgeLC</a></p>&mdash; Matt Raible (@mraible) <a href="https://twitter.com/mraible/status/915378742075076608?ref_src=twsrc%5Etfw">October 4, 2017</a></blockquote>
+</div>
+
+<h2 id="learn-more-about-jhipster">Learn More about JHipster</h2>
+
+<p>Even if you don’t create your next application with JHipster, it’s a great way to learn how to integrate technologies. It has NoSQL database support (MongoDB, Cassandra, and soon Couchbase), load testing support with Gatling, and i18n up the wazoo! Can you believe it currently supports 37 different languages, including right-to-left languages?!</p>
+
+<p>I hope you get a chance to get hip with JHipster soon! In the meantime, here are a few related articles about the technologies mentioned in this post:</p>
+
+<ul>
+  <li><a href="/blog/2017/09/08/nosql-options-for-java-developers">NoSQL Options for Java Developers</a>, and <a href="/blog/2017/10/10/nosql-options-for-java-developers-part-ii">Part II that includes Q &amp; A with NoSQL Experts</a></li>
+  <li><a href="/blog/2017/06/20/develop-microservices-with-jhipster">Develop and Deploy Microservices with JHipster</a></li>
+  <li><a href="/blog/2017/07/20/the-ultimate-guide-to-progressive-web-applications">The Ultimate Guide to Progressive Web Applications</a></li>
+</ul>
+
+<p>Don’t forget to check out the <a href="http://www.jhipster-book.com/">JHipster Mini-Book</a> too. It’s free after all! 🤓</p>
+
+<p>You can follow the <a href="https://twitter.com/java_hipster">@java_hipster project on Twitter</a>. If you enjoyed this article, please follow us <a href="https://twitter.com/oktadev">@OktaDev</a> for many more like it!</p>
+
+
+	</div>
+	
+</article>
+
+		
+</section>
+
+		
+	</div><footer class="Footer">
+    <div class="Wrap">
+
+        <div class="Row">
+
+            <div class="Column--3 Column--medium-6 Column--xSmall-12">
+
+                <a class="Logo" href="https://www.okta.com/" target="_blank" rel="noopener noreferrer">
+                    <img src="https://developer.okta.com/sites/all/themes/developer/images/logo-footer.png" alt="Okta">
+                    Visit okta.com
+                </a>
+
+            </div>
+
+            <div class="Column--3 Column--medium-12 Column--xSmall-12">
+
+                <h4>Social</h4>
+                <ul class="Footer-links Footer-links--social">
+                    <li><a class="Footer-links--github" target="_blank" rel="noopener noreferrer" href="http://github.com/oktadeveloper">Github</a></li>
+                    <li><a class="Footer-links--twitter" target="_blank" rel="noopener noreferrer" href="http://twitter.com/OktaDev">Twitter</a></li>
+                    <li><a class="Footer-links--forum" target="_blank" rel="noopener noreferrer" href="https://devforum.okta.com/">Forum</a></li>
+                    <li><a class="Footer-links--rss" target="_blank" rel="noopener noreferrer" href="http://feeds.feedburner.com/OktaBlog">RSS Blog</a></li>
+                </ul>
+            </div>
+
+            <div class="Column--3 Column--medium-6 Column--small-12">
+                <h4>More Info</h4>
+                <ul class="Footer-links">
+                    <li><a target="_blank" href="https://developer.okta.com/integrate-with-okta/">Integrate with Okta</a></li>
+                    <li><a href="/blog/">Blog</a></li>
+                    <li><a href="/docs/platform-release-notes/platform-release-notes.html">Release Notes</a></li>
+                    <li><a href="/3rd_party_notices/">3rd Party Notices</a></li>
+                </ul>
+            </div>
+
+            <div class="Column--3 Column--medium-6 Column--small-12">
+                <h4>Contact &amp; Legal</h4>
+                <ul class="Footer-links">
+                    <li><a href="https://developer.okta.com/contact/">Contact Sales</a></li>
+                    <li><a target="_blank" rel="noopener noreferrer" href="mailto:developers@okta.com">Contact Support</a></li>
+                    <li><a href="https://developer.okta.com/terms/">Terms &amp; Conditions</a></li>
+                    <li><a href="https://developer.okta.com/privacy/">Privacy Policy</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</footer>
+
+    <script type="text/javascript" src="/assets/master-0365dd27cf276cb2a15c0a43906ca592538204cf1ad4557547bf4e50609b411e.js"></script>
+    <script type="text/javascript" src="/assets/myOkta-911cbafbbe079b7a5522d9cbe15bd2a5f44e1582531e88393934bec69f97696b.js"></script>
+    
+    
+    
+    
+      <script type="text/javascript" src="/assets/blog-6e32dad27404131cc8630a5282264bed2ab4c08c91ac86fa496b75c53aa4f681.js"></script>
+    
+
+  <!-- START Post Footer -->
+  
+  <!-- START Google Tag Manager -->
+  <!-- https://support.google.com/tagmanager/answer/6103696?hl=en -->
+  <noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-TJ45R6" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+  <!-- END Google Tag Manager -->
+  <!-- START Google Remarketing Tag -->
+  <script type="text/javascript">
+    /* <![CDATA[ */
+    var google_conversion_id = 1006913831;
+    var google_custom_params = window.google_tag_params;
+    var google_remarketing_only = true;
+    /* ]]> */
+  </script>
+  <div style="display:none;"><script type="text/javascript" src="//www.googleadservices.com/pagead/conversion.js"></script></div>
+  <noscript><div style="display:inline;"><img height="1" width="1" style="border-style:none;" alt="" src="//googleads.g.doubleclick.net/pagead/viewthroughconversion/1006913831/?value=0&amp;guid=ON&amp;script=0"></div></noscript>
+  <!-- END Google Remarketing Tag -->
+  <!-- START Crazy Egg Tracking -->
+  <script type="text/javascript">
+    setTimeout(function(){var a=document.createElement("script");
+    var b=document.getElementsByTagName("script")[0];
+    a.src=document.location.protocol+"//script.crazyegg.com/pages/scripts/0021/9333.js?"+Math.floor(new Date().getTime()/3600000);
+    a.async=true;a.type="text/javascript";b.parentNode.insertBefore(a,b)}, 1);
+  </script>
+  <!-- END Crazy Egg Tracking -->
+
+  <!-- END Post Footer -->
+</body>
+</html>

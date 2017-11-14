@@ -1,0 +1,1110 @@
+<!doctype html>
+<!--[if lt IE 7 ]> <html class="ie6 no-flexbox"> <![endif]-->
+<!--[if IE 7 ]>    <html class="ie7 no-flexbox"> <![endif]-->
+<!--[if IE 8 ]>    <html class="ie8 no-flexbox"> <![endif]-->
+<!--[if IE 9 ]>    <html class="ie9 no-flexbox"> <![endif]-->
+<!--[if IE 10 ]>    <html class="ie10 no-flexbox"> <![endif]-->
+<!--[if (gt IE 10)|!(IE)]><!--> <html class="modern wf-loading" lang="en"> <!--<![endif]-->
+  <head>
+  <script>
+    var searchDomain = 'https://developer.okta.com';
+    var isProduction = window.location.hostname === 'developer.okta.com';
+    if (isProduction) {
+      // TypeKit
+      (function(d) {
+        var config = {
+          kitId: 'jff5neq',
+          scriptTimeout: 3000,
+          async: true
+        },
+        h=d.documentElement,t=setTimeout(function(){h.className=h.className.replace(/bwf-loadingb/g,"")+" wf-inactive";},config.scriptTimeout),tk=d.createElement("script"),f=false,s=d.getElementsByTagName("script")[0],a;h.className+=" wf-loading";tk.src='https://use.typekit.net/'+config.kitId+'.js';tk.async=true;tk.onload=tk.onreadystatechange=function(){a=this.readyState;if(f||a&&a!="complete"&&a!="loaded")return;f=true;clearTimeout(t);try{Typekit.load(config)}catch(e){}};s.parentNode.insertBefore(tk,s)
+      })(document);
+
+      // Google analytics
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+              (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+              m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+      ga('create', 'UA-15777010-3', 'auto');
+      ga('send', 'pageview');
+
+      // START Google Tag Manager
+      (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+      new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+      j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+      '//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+      })(window,document,'script','dataLayer','GTM-TJ45R6');
+      // END Google Tag Manager
+    }
+	</script>
+  <meta charset="utf-8">
+  <meta http-equiv="x-ua-compatible" content="IE=edge,chrome=1">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+ 	
+
+  <link type="text/css" rel="stylesheet" href="https://developer.okta.com/sites/all/themes/developer/css/master.css" media="all" />
+  <meta class="swiftype" name="title" data-type="string" content="Add Authentication to Your Angular PWA | Okta Developer" />
+  <meta class="swiftype" name="summary" data-type="string" content="You’re developing a Progressive Web Application (PWA) and your service worker and web app manifest are working swimmingly. You’ve even taken the time to depl..." />
+
+  <link type="text/css" rel="stylesheet" href="/assets/animate-ec43d72c3ed45e08a460b8a2966d8dba6006aebfa0530935c3973fa493a8771f.css">
+  <link type="text/css" rel="stylesheet" href="/assets/okta-a96df4c9d48b78b618e1d541f46f7137d73d40653571e020c1ad59edd7915c60.css">
+  
+  
+  <title>Add Authentication to Your Angular PWA | Okta Developer</title>
+  <meta name="description" content="You’re developing a Progressive Web Application (PWA) and your service worker and web app manifest are working swimmingly. You’ve even taken the time to depl...">
+  <link rel="canonical" href="https://developer.okta.com/blog/2017/06/13/add-authentication-angular-pwa"  data-proofer-ignore>
+  <link rel="alternate" type="application/rss+xml" title="Okta Developer" href="https://developer.okta.com/feed.xml"><!-- GA -->
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+  <link rel="manifest" href="/manifest.json">
+  <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#21313a">
+  <meta name="theme-color" content="#ffffff">
+</head>
+
+  
+    <body id="blog">
+	
+
+
+
+
+<header class="Header is-fixed">
+
+  <div class="Wrap">
+
+    <a class="Logo" href="https://developer.okta.com">
+      <svg version="1.1" id="OktaLogo" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 431.9 151.4" style="enable-background:new 0 0 431.9 151.4;" xml:space="preserve"><g><g><g><path d="M102.2,41.4c-21,0-38.1,17.1-38.1,38.1s17.1,38.1,38.1,38.1s38.1-17.1,38.1-38.1l0,0C140.3,58.5,123.2,41.4,102.2,41.4z M102.2,98.5c-10.5,0-19-8.5-19-19s8.5-19,19-19s19,8.5,19,19c0.1,10.5-8.4,19-18.9,19.1C102.3,98.6,102.2,98.6,102.2,98.5L102.2,98.5z"/><path d="M169.1,92.3c0-1.9,1.5-3.4,3.4-3.4c0.9,0,1.8,0.4,2.4,1c9.5,9.7,25.3,26.3,25.4,26.4c0.4,0.5,0.8,0.8,1.4,0.9l1.6,0.2h17.2c1.8,0,3.3-1.4,3.4-3.2c0-0.8-0.3-1.5-0.8-2.2l-28.6-29.2l-1.5-1.5c-3.2-3.9-2.9-5.4,0.8-9.3l22.6-25.1c1.1-1.4,0.8-3.5-0.6-4.6c-0.6-0.4-1.3-0.7-2-0.7h-17c-0.6,0.2-1.1,0.5-1.5,0.9L175,64.4c-1.3,1.4-3.4,1.5-4.8,0.2c-0.7-0.6-1.1-1.5-1.1-2.5V18.9c0-1.7-1.3-3-3-3c-0.1,0-0.2,0-0.3,0h-12.7c-2.2,0-3.3,1.5-3.3,2.8v95.8c0,2.2,1.8,2.8,3.3,2.8h12.7c1.7,0.1,3.2-1.2,3.3-2.9c0,0,0,0,0,0V92.3z"/><path d="M273,114l-1.4-12.8c-0.2-1.7-1.7-2.9-3.4-2.7c0,0,0,0-0.1,0l-2.9,0.2c-10.1,0-18.5-7.9-19-18c0-0.3,0-0.7,0-1V64.2c-0.1-2,1.5-3.6,3.5-3.7c0,0,0,0,0,0h17c1.7-0.1,3.1-1.5,3-3.2c0,0,0-0.1,0-0.1v-12c0-2.3-1.5-3.6-2.8-3.6h-17.1c-1.9,0.1-3.5-1.5-3.6-3.4c0,0,0,0,0,0V18.9c-0.1-1.7-1.5-3.1-3.2-3c0,0-0.1,0-0.1,0h-12.7c-1.6-0.1-3,1.1-3.1,2.7c0,0.1,0,0.1,0,0.2c0,0,0,61.7,0,62c0.5,21,17.9,37.6,38.9,37c1.4,0,2.9-0.2,4.3-0.3C272,117.2,273.2,115.7,273,114z"/></g><path d="M364.7,98c-10.8,0-12.4-3.8-12.4-18.3l0,0V44.8c0-1.8-1.4-3.2-3.2-3.2c0,0-0.1,0-0.1,0h-12.8c-1.8,0-3.2,1.4-3.3,3.2v1.6C314.6,36,291.3,42.5,281,60.8c-10.4,18.3-3.9,41.6,14.4,51.9c14,7.9,31.4,6.2,43.5-4.2c3.6,5.5,9.3,9.1,18.3,9.1c1.5,0,9.7,0.3,9.7-3.5v-13.6C367,99.2,366,98.1,364.7,98z M314.2,98.6c-10.5,0-19-8.5-19-19s8.5-19,19-19s19,8.5,19,19l0,0C333.2,90.1,324.7,98.6,314.2,98.6z"/></g><path d="M19.4,74c2.2-1.9,4.1-4.1,5.7-6.6c3.5-5.3,5.4-11.5,5.2-17.9V27c0-4.9,0.9-8.4,2.7-10.5c1.8-2.1,4.8-3,9.2-3h12.6c1.2,0,2.1-0.9,2.2-2.1l0,0V2.2C57,1,56,0,54.8,0c0,0,0,0,0,0H41.5c-7.8,0-12.9,2.1-18,7.6s-7.1,12.3-7.1,21.7v14.2c0,2.2-0.1,4-0.2,5.7v2.2c-0.5,3.2-1.8,6.2-3.6,8.9C9.4,64.7,5.1,70.9,0.9,74l0,0l-0.3,0.3l0,0l-0.2,0.3H0.2v0.3l0,0c-0.1,0.3-0.1,0.7,0,1l0,0v0.3h0.1l0.2,0.3l0,0l0.3,0.3l0,0c4.2,3.1,8.5,9.3,11.3,13.7c1.8,2.7,3.1,5.7,3.6,8.9v2.2c0.1,1.6,0.2,3.5,0.2,5.7v14.3c0,9.4,2.4,16.7,7.1,21.7s10.2,7.6,18,7.6h13.8c1.2,0,2.2-1,2.2-2.2V140l0,0c0-1.2-1-2.2-2.2-2.2H42.2c-4.4,0-7.5-1-9.2-3s-2.7-5.6-2.7-10.5v-22.4c0.2-6.4-1.7-12.6-5.2-17.9c-1.6-2.5-3.5-4.7-5.7-6.6l0,0c-0.9-0.7-1.1-2-0.4-2.9C19.2,74.3,19.3,74.2,19.4,74L19.4,74z"/><path d="M412.5,74c-2.2-1.9-4.1-4.1-5.7-6.6c-3.5-5.3-5.4-11.5-5.2-17.9V27c0-4.9-0.9-8.4-2.7-10.5s-4.8-3-9.2-3h-12.6c-1.2,0-2.2-1-2.2-2.2c0,0,0,0,0,0l0,0V2.2c0-1.2,1-2.2,2.2-2.2c0,0,0,0,0,0h13.4c7.8,0,12.9,2.1,18,7.6s7.1,12.3,7.1,21.7v14.2c0,2.2,0.1,4,0.2,5.7v2.2c0.5,3.2,1.8,6.2,3.6,8.9c2.8,4.5,7.1,10.7,11.3,13.7l0,0l0.3,0.3l0,0l0.2,0.3h0.1v0.3l0,0c0.1,0.3,0.1,0.7,0,1l0,0v0.3h-0.1l-0.2,0.3l0,0l-0.3,0.3l0,0c-4.2,3.1-8.5,9.3-11.3,13.7c-1.8,2.7-3.1,5.7-3.6,8.9v2.2c-0.1,1.6-0.2,3.5-0.2,5.7v14.3c0,9.4-2.4,16.7-7.1,21.7s-10.2,7.6-18,7.6h-13.4c-1.2,0-2.2-1-2.2-2.2c0,0,0,0,0,0V140l0,0c0-1.2,1-2.2,2.2-2.2l0,0h12.7c4.4,0,7.5-1,9.2-3s2.7-5.6,2.7-10.5v-22.4c-0.2-6.3,1.6-12.6,5.1-17.9c1.6-2.5,3.5-4.7,5.7-6.6l0,0c0.9-0.7,1.1-2,0.4-2.9C412.7,74.3,412.6,74.2,412.5,74L412.5,74z"/></g></svg>
+    </a>
+
+    <nav class="Header-nav PrimaryNav">
+      <ul class="menu">
+        <li class="first leaf">
+          <a href="https://developer.okta.com/product/">Product</a>
+        </li>
+        <li class="leaf">
+          <a href="https://developer.okta.com/pricing/">Pricing</a>
+        </li>
+        <li class="leaf">
+          <a href="/blog/" class="active">Blog</a>
+        </li>
+        <li class="leaf">
+          <a href="/documentation/">Docs</a>
+        </li>
+        <li class="last expanded">
+          <span class="nolink">Support</span>
+          <ul class="menu">
+            <li class="first leaf"><a href="https://devforum.okta.com/">Okta Developer Forums</a></li>
+            <li class="last leaf"><a href="mailto:developers@okta.com">developers@okta.com</a></li>
+          </ul>
+        </li>
+      </ul>
+      <a class="PrimaryNav-toggle" href="#">
+        <svg width="20px" height="20px" viewBox="0 0 20 20" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+            <g class="MenuIcon" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="round">
+                <path d="M1,16 L19,16" class="MenuIcon-line1" stroke="#FFFFFF" stroke-width="2"></path>
+                <path d="M1,4 L19,4" class="MenuIcon-line2" stroke="#FFFFFF" stroke-width="2"></path>
+                <path d="M1,10 L19,10" class="MenuIcon-line3" stroke="#FFFFFF" stroke-width="2"></path>
+                <path d="M1,10 L19,10" class="MenuIcon-line4" stroke="#FFFFFF" stroke-width="2"></path>
+            </g>
+        </svg>
+        <svg class="CloseIcon" width="16px" height="16px" viewBox="0 0 16 16" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+          <g id="ALl-Boards" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+            <g id="Desktop" transform="translate(-915.000000, -235.000000)" fill="#FFFFFF">
+              <g id="Search-bar-Active" transform="translate(30.000000, 26.000000)">
+                <polygon id="Icon/Cross" points="901 210.6 899.4 209 893 215.4 886.6 209 885 210.6 891.4 217 885 223.4 886.6 225 893 218.6 899.4 225 901 223.4 894.6 217"></polygon>
+              </g>
+            </g>
+          </g>
+        </svg>
+      </a>
+
+      <div class="PrimaryNav-cta">
+        <a target="_blank" rel="noopener noreferrer" href="https://login.okta.com/?SAMLRequest=fc%2B7CsJAEAXQXvAflu1NNJUMeZBGELTx1a%2FrYILJTtyZGD%2FfSBRiYzlw77lMnD3rSj3Qc0ku0YtgrhU6S5fSXRN9PKxmS52l00nMpq6iBvJWCrfDe4ss6vStRe9aDzmGIZfo1jsgwyWDMzUyiIV9vt1AH4XGk5ClSvewUgMNa%2BYW%2FVj5jxhm9NLP67QQaSAMu64L6CYmsFSHlnzT4ZlLwTgcL6Sf8%2FeX9AU%3Dhttps://login.okta.com/?SAMLRequest=fc%2B7CsJAEAXQXvAflu1NNJUMeZBGELTx1a%2FrYILJTtyZGD%2FfSBRiYzlw77lMnD3rSj3Qc0ku0YtgrhU6S5fSXRN9PKxmS52l00nMpq6iBvJWCrfDe4ss6vStRe9aDzmGIZfo1jsgwyWDMzUyiIV9vt1AH4XGk5ClSvewUgMNa%2BYW%2FVj5jxhm9NLP67QQaSAMu64L6CYmsFSHlnzT4ZlLwTgcL6Sf8%2FeX9AU%3D" class="Button--redOutline">Login</a>
+        <a href="https://developer.okta.com/signup/" class="Button--red">Sign up</a>
+      </div>
+
+      <a class="SearchIcon" href="#"></a>
+      <form id="form_search" class="SearchBar Formisimo_clocked_69929" method="get" action="https://developer.okta.com/search/" name="form_search" __bizdiag="-784164280" __biza="WJ__">
+        <input type="text" name="stq" autocomplete="off" id="st-search-input-auto" class="st-search-input" placeholder="Search">
+        <input type="submit" name="submit" value="GO">
+      </form>
+
+    </nav>
+
+  </div>
+
+</header>
+
+	<div class="page-content">
+		
+
+
+
+
+
+
+<section class="Blog is-single">
+		
+	<div class="Blog-social">
+		
+		<a href="https://github.com/mraible" target="_blank"><i class="fa fa-github"></i></a>
+		
+		
+		<a href="https://twitter.com/mraible" target="_blank"><i class="fa fa-twitter"></i></a>
+		
+		
+		
+		<a href="http://raibledesigns.com" target="_blank"><i class="fa fa-external-link"></i></a>
+		
+	</div>
+	
+	
+
+<article class="BlogPost">
+	
+	<header class="BlogPost-header">
+	
+		<time class="BlogPost-date" datetime="2017-06-13">June 13, 2017</time>
+		
+		<h1 class="BlogPost-title">
+			
+			Add Authentication to Your Angular PWA
+			
+		</h1>
+		
+		<div class="BlogPost-attribution">
+			
+				<img src="/assets/avatar-matt_raible-9974af6192eb1753b7137c8fff0a2c6e6bb9736a2517986cb5cc50bb040e83d4.jpg" alt="avatar-matt_raible.jpg" class="BlogPost-avatar">
+			
+			<span class="BlogPost-author">Matt Raible</span>
+		</div>
+	
+	</header>
+	
+	<div class="BlogPost-content">
+		
+	<p>You’re developing a Progressive Web Application (PWA) and your service worker and web app manifest are working swimmingly. You’ve even taken the time to deploy it to a server with HTTPS and you’re feeling pretty good about  things. But wait, you don’t have any way of knowing who your users are! Don’t you want to provide them with an opportunity to authenticate and tell you who they are? Once you know who they are, you can give them all kinds of personalization options, inspire them to ❤️ your app, and maybe even support your work!</p>
+
+<p>In this article, I’ll show you how you can lock down a Spring Boot app, then use a modern authentication protocol, in this case OpenID Connect (OIDC), to authenticate and gain access to its APIs.</p>
+
+<h2 id="secure-your-spring-boot-app">Secure Your Spring Boot App</h2>
+
+<p>You might’ve heard that <a href="https://www.okta.com/blog/2017/03/stormpath-welcome-to-Okta/">Stormpath joined forces with Okta</a> a few months ago (February 2017). Since the transition, we’ve been working hard to make the Stormpath SDKs work with Okta’s API. The good news is we’ve made great progress!</p>
+
+<p>In this example, you’ll use Stormpath’s Spring Boot Starter to add security to a Spring Boot app. I’ll show you how this starter provides functionality such as login, forgot password, and user registration.</p>
+
+<p>Then I’ll show you how you can use OIDC and Okta’s Auth SDK in an Angular app to login and get data from the Spring Boot app. Finally, I’ll show how Stormpath’s Angular SDK has similar functionality to the Spring Boot Starter, providing login, user registration, and forgot password features.</p>
+
+<p>I recently created a Spring Boot app that provides a list of good beers, based on a pre-populated list. It filters out less-than-great beers and displays them in an Angular UI that displays the first animated GIF (from Giphy) that matches the beer name.</p>
+
+<p>Let’s get started!</p>
+
+<p>Rather than building Spring Boot and Angular applications from scratch, you can clone an existing GitHub project to get you going quickly.</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>git clone https://github.com/oktadeveloper/spring-boot-angular-pwa-example.git
+</code></pre>
+</div>
+
+<p>If you’d prefer to build this application yourself, please read <a href="/blog/2017/05/09/progressive-web-applications-with-angular-and-spring-boot">Build Your First Progressive Web Application with Angular and Spring Boot</a>.</p>
+
+<p>In this project’s <code class="highlighter-rouge">server/pom.xml</code> file, you’ll need to add the following XML:</p>
+
+<div class="language-xml highlighter-rouge"><pre class="highlight"><code><span class="nt">&lt;properties&gt;</span>
+    <span class="nt">&lt;stormpath.version&gt;</span>2.0.0-okta-rc2<span class="nt">&lt;/stormpath.version&gt;</span>
+<span class="nt">&lt;/properties&gt;</span>
+
+<span class="nt">&lt;dependencies&gt;</span>
+    ...
+    <span class="nt">&lt;dependency&gt;</span>
+        <span class="nt">&lt;groupId&gt;</span>com.stormpath.spring<span class="nt">&lt;/groupId&gt;</span>
+        <span class="nt">&lt;artifactId&gt;</span>stormpath-default-spring-boot-starter<span class="nt">&lt;/artifactId&gt;</span>
+    <span class="nt">&lt;/dependency&gt;</span>
+<span class="nt">&lt;/dependencies&gt;</span>
+
+<span class="nt">&lt;dependencyManagement&gt;</span>
+    <span class="nt">&lt;dependencies&gt;</span>
+        <span class="nt">&lt;dependency&gt;</span>
+            <span class="nt">&lt;groupId&gt;</span>com.stormpath.sdk<span class="nt">&lt;/groupId&gt;</span>
+            <span class="nt">&lt;artifactId&gt;</span>stormpath-bom<span class="nt">&lt;/artifactId&gt;</span>
+            <span class="nt">&lt;version&gt;</span>${stormpath.version}<span class="nt">&lt;/version&gt;</span>
+            <span class="nt">&lt;type&gt;</span>pom<span class="nt">&lt;/type&gt;</span>
+            <span class="nt">&lt;scope&gt;</span>import<span class="nt">&lt;/scope&gt;</span>
+        <span class="nt">&lt;/dependency&gt;</span>
+    <span class="nt">&lt;/dependencies&gt;</span>
+<span class="nt">&lt;/dependencyManagement&gt;</span>
+</code></pre>
+</div>
+
+<h2 id="get-started-with-okta">Get Started with Okta</h2>
+
+<p>To begin, you’ll need to create an Okta Developer account. This account is free forever and provides the complete Okta Identity Platform for up to 3 applications and 100 users.</p>
+
+<ol>
+  <li>Head on over to <a href="https://www.okta.com/developer/signup">https://www.okta.com/developer/signup</a></li>
+  <li>Fill out the signup form, and click “Get Started”</li>
+  <li>Within a few minutes you’ll get a confirmation email, follow the instructions in the email to finish setting up your account</li>
+</ol>
+
+<p>Once you’re set up you’ll receive a couple URLs. The first is an admin console URL that looks something like this:</p>
+
+<p>https://dev-123456-admin.oktapreview.com/admin/getting-started</p>
+
+<p>Use this one to manually change organization settings, create users, or other general administrative work.</p>
+
+<p>The other URL looks similar, but is missing the <code class="highlighter-rouge">admin</code> part:</p>
+
+<p>https://dev-123456.oktapreview.com/</p>
+
+<p>This is the one your users could interact with, and will be the base URL for any API access.</p>
+
+<p><strong>Important:</strong> The second URL (the non-admin one) is the one you will need to remember, you will use this URL for API access.</p>
+
+<p>To setup your Okta account for Spring Boot, you’ll first need to create an application.</p>
+
+<h3 id="create-an-application">Create an Application</h3>
+
+<ol>
+  <li>Navigate to your Admin console: i.e. https://dev-123456-admin.oktapreview.com/admin/dashboard</li>
+  <li>On the top menu click on <strong>Applications</strong></li>
+  <li>Click <strong>Add Application</strong></li>
+  <li>Click <strong>Create New App</strong></li>
+  <li>On the <em>Create a New Application Integration</em> popup, select the following values, then click <strong>Create</strong>
+    <ul>
+      <li>Platform - Native</li>
+      <li>Sign-on Method - OpenID Connect</li>
+    </ul>
+  </li>
+  <li>On the <em>Create OpenID Connect Integration</em> page, enter the following value, then click <strong>Next</strong>
+    <ul>
+      <li>Application Name - Spring Boot Awesomesauce</li>
+    </ul>
+  </li>
+  <li>Use <code class="highlighter-rouge">http://localhost:8080/client/callback</code> for the Redirect URIs, and click <strong>Finish</strong></li>
+</ol>
+
+<p>Your application has been created, but you still have a few settings to change.</p>
+
+<ol>
+  <li>On the <em>General</em> tab, click <strong>Edit</strong> on the <strong>General Settings</strong> panel</li>
+  <li>Check the <em>Refresh Token</em>, and <em>Resource Owner Password</em> checkboxes click <strong>Save</strong></li>
+  <li>Click <strong>Edit</strong> on the Client Credentials panel</li>
+  <li>Select the <em>Use Client Authentication</em> radio button, and click the <strong>Save</strong> button</li>
+  <li>Click on the <em>Assignments</em> tab and then select the <em>Assign</em> button and <strong>Assign to Groups</strong></li>
+  <li>Select the <em>Assign</em> button in the <em>Everyone</em> column, and click the <strong>Done</strong> button</li>
+  <li>Grab the ID portion of the URL of your browser’s current page. For example, if my URL was: <code class="highlighter-rouge">https://dev-123456-admin.oktapreview.com/admin/app/oidc_client/instance/00icu81200icu812/#tab-assignments</code> then <code class="highlighter-rouge">00icu81200icu812</code> is my application’s ID</li>
+</ol>
+
+<p><strong>Important:</strong> You will need to remember your application’s ID.</p>
+
+<h3 id="create-an-access-token">Create an Access Token</h3>
+
+<ol>
+  <li>Navigate to your Admin console</li>
+  <li>On the top menu click on <strong>API</strong> &gt; <strong>Tokens</strong></li>
+  <li>Click <strong>Create Token</strong></li>
+  <li>On the popup, give your new token a name like “Bootiful Token”, and click <strong>Create Token</strong></li>
+</ol>
+
+<p><strong>Important:</strong> You will need to remember this token value, so copy/paste it somewhere safe.</p>
+
+<p>For more information take a look at the official <a href="/docs/api/getting_started/getting_a_token.html">Create an API token</a> guide.</p>
+
+<h3 id="run-the-spring-boot-app">Run the Spring Boot App</h3>
+
+<p>To make your Spring Boot app aware of your Okta settings, you need to set a few environment variables. You can also use <a href="https://docs.stormpath.com/java/servlet-plugin/config.html">other options</a> for setting these variables.</p>
+
+<div class="language-bash highlighter-rouge"><pre class="highlight"><code><span class="nb">export </span><span class="nv">STORMPATH_CLIENT_BASEURL</span><span class="o">=[</span>baseurl_from_above]
+<span class="nb">export </span><span class="nv">OKTA_APPLICATION_ID</span><span class="o">=[</span>application_id_from_above]
+<span class="nb">export </span><span class="nv">OKTA_API_TOKEN</span><span class="o">=[</span>api_token_from_above]
+</code></pre>
+</div>
+
+<p>Now, start it up…</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>cd server 
+./mvnw spring-boot:run
+</code></pre>
+</div>
+
+<p>Navigate to <code class="highlighter-rouge">http://localhost:8080</code> and you’ll be prompted to log in.</p>
+
+<p><img src="/assets/blog/angular-pwa-auth/spring-boot-login-225f9b949e279ba11a8a61a21ca460967aa39eb84ef9c3ea8be8fee35e33df4a.png" alt="Spring Boot Login" width="800" /></p>
+
+<p>If you call the API with a different <code class="highlighter-rouge">Accept</code> header (e.g. <code class="highlighter-rouge">application/json</code>), you’ll get a JSON response. The command below uses <a href="https://httpie.org/">HTTPie</a>.</p>
+
+<div class="language-bash highlighter-rouge"><pre class="highlight"><code><span class="gp">$ </span>http localhost:8080/login
+HTTP/1.1 200
+Cache-Control: no-cache, no-store, max-age<span class="o">=</span>0, must-revalidate
+Content-Type: application/json
+Date: Fri, 02 Jun 2017 00:09:20 GMT
+Expires: 0
+Pragma: no-cache
+Set-Cookie: <span class="nv">JSESSIONID</span><span class="o">=</span>5A22B9431D01E5928E2EFAAC50A0EA38; <span class="nv">Path</span><span class="o">=</span>/; HttpOnly
+Transfer-Encoding: chunked
+X-Content-Type-Options: nosniff
+X-Frame-Options: DENY
+X-XSS-Protection: 1; <span class="nv">mode</span><span class="o">=</span>block
+</code></pre>
+</div>
+<div class="language-json highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
+    </span><span class="nt">"accountStores"</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w">
+    </span><span class="nt">"form"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"fields"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+            </span><span class="p">{</span><span class="w">
+                </span><span class="nt">"label"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Username or Email"</span><span class="p">,</span><span class="w">
+                </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"login"</span><span class="p">,</span><span class="w">
+                </span><span class="nt">"placeholder"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Username or Email"</span><span class="p">,</span><span class="w">
+                </span><span class="nt">"required"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+                </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"text"</span><span class="w">
+            </span><span class="p">},</span><span class="w">
+            </span><span class="p">{</span><span class="w">
+                </span><span class="nt">"label"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Password"</span><span class="p">,</span><span class="w">
+                </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"password"</span><span class="p">,</span><span class="w">
+                </span><span class="nt">"placeholder"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Password"</span><span class="p">,</span><span class="w">
+                </span><span class="nt">"required"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+                </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"password"</span><span class="w">
+            </span><span class="p">}</span><span class="w">
+        </span><span class="p">]</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+</div>
+
+<p><a name="create-open-id-connect-app"></a></p>
+<h2 id="create-an-openid-connect-app-for-angular">Create an OpenID Connect App for Angular</h2>
+
+<p>OpenID Connect (OIDC) is built on top of the OAuth 2.0 protocol. It allows clients to verify the identity of the user and obtain their basic profile information. To get started you’ll need to:</p>
+
+<ol>
+  <li>Log in to your Okta account and navigate to <strong>Admin &gt; Add Applications</strong> and click on <strong>Create New App</strong></li>
+  <li>Select <strong>Single Page App (SPA)</strong> for the Platform and <strong>OpenID Connect</strong> for the sign on method</li>
+  <li>Click <strong>Create</strong> and give your application a name (e.g. Angular PWA)</li>
+  <li>On the next screen, add <code class="highlighter-rouge">http://localhost:4200</code> as a Redirect URI and click <strong>Finish</strong>. You should see settings like this:</li>
+</ol>
+
+<p>%{ img blog/angular-pwa-auth/oidc-settings.png alt:”Okta OIDC Settings” width:”800” %}</p>
+
+<p>Click on the <strong>Assignments</strong> tab and select <strong>Assign</strong> &gt; <strong>Assign to Groups</strong>. Select the <em>Assign</em> button in the <em>Everyone</em> column, and click the <strong>Done</strong> button.</p>
+
+<h2 id="authenticate-with-openid-connect">Authenticate with OpenID Connect</h2>
+
+<p>Start the Angular application by running the following commands in your project’s root directory.</p>
+
+<div class="language-bash highlighter-rouge"><pre class="highlight"><code><span class="nb">cd </span>client
+npm install
+ng serve
+</code></pre>
+</div>
+
+<p>If you receive an error like the one below, modify <code class="highlighter-rouge">package.json</code> to use the latest version of <code class="highlighter-rouge">@angular/cli</code> or disable the warning using the instructions provided.</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>Your global Angular CLI version (1.0.3) is greater than your local
+version (1.0.0). The local Angular CLI version is used.
+
+To disable this warning use "ng set --global warnings.versionMismatch=false".
+</code></pre>
+</div>
+
+<p>When you navigate to <code class="highlighter-rouge">http://localhost:4200</code>, you’ll likely see a cross-origin request error.</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>Fetch API cannot load http://localhost:8080/good-beers. No 'Access-Control-Allow-Origin' 
+header is present on the requested resource. Origin 'http://localhost:4200' is therefore 
+not allowed access. The response had HTTP status code 403. If an opaque response serves 
+your needs, set the request's mode to 'no-cors' to fetch the resource with CORS disabled.
+</code></pre>
+</div>
+
+<p>When you’re using Spring Boot without the Stormpath Spring Boot starter, you can use a <code class="highlighter-rouge">@CrossOrigin</code> annotation to enable cross-origin resource 
+sharing (CORS) on the server. See the <a href="/blog/2017/04/26/bootiful-development-with-spring-boot-and-angular#configure-cors-for-spring-boot">configure CORS for Spring Boot section</a> of 
+<a href="/blog/2017/04/26/bootiful-development-with-spring-boot-and-angular">Bootiful Development with Spring Boot and Angular</a>.</p>
+
+<p>When you’re using the Stormpath Spring Boot Starter, you can enable it by adding the following property to the Spring 
+Boot app’s <code class="highlighter-rouge">src/main/resources/application.properties</code>.</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>stormpath.web.cors.allowed.originUris=http://localhost:4200
+</code></pre>
+</div>
+
+<p>Also, remove the <code class="highlighter-rouge">@CrossOrigin</code> annotation from <code class="highlighter-rouge">BeerController.java</code> since it’s no longer needed. Make sure to save the files you changed and your server auto-restarted. If it did not, kill it and restart it.</p>
+
+<p>Install <a href="https://github.com/manfredsteyer">Manfred Steyer’s</a> project to <a href="https://github.com/manfredsteyer/angular-oauth2-oidc">add OAuth 2 and OpenID Connect support</a> to your Angular client.</p>
+
+<div class="language-bash highlighter-rouge"><pre class="highlight"><code>npm install --save angular-oauth2-oidc
+</code></pre>
+</div>
+
+<p>Modify <code class="highlighter-rouge">client/src/app/app.component.ts</code> to import <code class="highlighter-rouge">OAuthService</code> and configure your app to use your Okta application settings (replacing <code class="highlighter-rouge">[oidc-client-id]</code> and <code class="highlighter-rouge">[dev-id]</code> with the values from your “Angular PWA” OIDC app).</p>
+
+<div class="language-typescript highlighter-rouge"><pre class="highlight"><code><span class="k">import</span> <span class="p">{</span> <span class="nx">OAuthService</span> <span class="p">}</span> <span class="k">from</span> <span class="s1">'angular-oauth2-oidc'</span><span class="p">;</span>
+
+<span class="p">...</span>
+
+  <span class="kd">constructor</span><span class="p">(</span><span class="k">private</span> <span class="nx">oauthService</span><span class="err">:</span> <span class="nx">OAuthService</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">oauthService</span><span class="p">.</span><span class="nx">redirectUri</span> <span class="o">=</span> <span class="nb">window</span><span class="p">.</span><span class="nx">location</span><span class="p">.</span><span class="nx">origin</span><span class="p">;</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">oauthService</span><span class="p">.</span><span class="nx">clientId</span> <span class="o">=</span> <span class="s1">'[oidc-client-id]'</span><span class="p">;</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">oauthService</span><span class="p">.</span><span class="nx">scope</span> <span class="o">=</span> <span class="s1">'openid profile email'</span><span class="p">;</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">oauthService</span><span class="p">.</span><span class="nx">oidc</span> <span class="o">=</span> <span class="kc">true</span><span class="p">;</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">oauthService</span><span class="p">.</span><span class="nx">issuer</span> <span class="o">=</span> <span class="s1">'https://dev-[dev-id].oktapreview.com'</span><span class="p">;</span>
+
+    <span class="k">this</span><span class="p">.</span><span class="nx">oauthService</span><span class="p">.</span><span class="nx">loadDiscoveryDocument</span><span class="p">().</span><span class="nx">then</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+      <span class="k">this</span><span class="p">.</span><span class="nx">oauthService</span><span class="p">.</span><span class="nx">tryLogin</span><span class="p">({});</span>
+    <span class="p">});</span>
+  <span class="p">}</span>
+<span class="p">...</span>
+</code></pre>
+</div>
+
+<p>Modify <code class="highlighter-rouge">client/src/app/app/app.component.html</code> to use <code class="highlighter-rouge">&lt;router-outlet&gt;</code> instead of <code class="highlighter-rouge">&lt;app-beer-list&gt;</code>.</p>
+
+<div class="language-html highlighter-rouge"><pre class="highlight"><code><span class="nt">&lt;div</span> <span class="err">*</span><span class="na">shellNoRender</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;router-outlet&gt;&lt;/router-outlet&gt;</span>
+<span class="nt">&lt;/div&gt;</span>
+</code></pre>
+</div>
+
+<p>Create <code class="highlighter-rouge">client/src/app/home/home.component.ts</code> and configure it to display <strong>Login</strong> and <strong>Logout</strong> buttons.</p>
+
+<div class="language-typescript highlighter-rouge"><pre class="highlight"><code><span class="k">import</span> <span class="p">{</span> <span class="nx">Component</span> <span class="p">}</span> <span class="k">from</span> <span class="s1">'@angular/core'</span><span class="p">;</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">OAuthService</span> <span class="p">}</span> <span class="k">from</span> <span class="s1">'angular-oauth2-oidc'</span><span class="p">;</span>
+
+<span class="err">@</span><span class="nx">Component</span><span class="p">({</span>
+  <span class="na">template</span><span class="p">:</span> <span class="err">`</span>
+    <span class="o">&lt;</span><span class="nx">md</span><span class="o">-</span><span class="nx">card</span> <span class="o">*</span><span class="nx">ngIf</span><span class="o">=</span><span class="s2">"givenName"</span><span class="o">&gt;</span>
+      <span class="o">&lt;</span><span class="nx">md</span><span class="o">-</span><span class="nx">card</span><span class="o">-</span><span class="nx">title</span><span class="o">&gt;</span><span class="nx">Welcome</span><span class="p">,</span> <span class="p">{{</span><span class="nx">givenName</span><span class="p">}}</span><span class="o">!&lt;</span><span class="sr">/md-card-title</span><span class="err">&gt;
+</span>      <span class="o">&lt;</span><span class="nx">button</span> <span class="nx">md</span><span class="o">-</span><span class="nx">raised</span><span class="o">-</span><span class="nx">button</span> <span class="p">(</span><span class="nx">click</span><span class="p">)</span><span class="o">=</span><span class="s2">"logout()"</span><span class="o">&gt;</span><span class="nx">Logout</span><span class="o">&lt;</span><span class="sr">/button</span><span class="err">&gt;
+</span>      <span class="o">&lt;</span><span class="nx">a</span> <span class="nx">md</span><span class="o">-</span><span class="nx">button</span> <span class="nx">routerLink</span><span class="o">=</span><span class="s2">"/beer-list"</span><span class="o">&gt;</span><span class="nx">Beer</span> <span class="nx">List</span><span class="o">&lt;</span><span class="sr">/a</span><span class="err">&gt;
+</span>    <span class="o">&lt;</span><span class="sr">/md-card</span><span class="err">&gt;
+</span>
+    <span class="o">&lt;</span><span class="nx">md</span><span class="o">-</span><span class="nx">card</span> <span class="o">*</span><span class="nx">ngIf</span><span class="o">=</span><span class="s2">"!givenName"</span><span class="o">&gt;</span>
+      <span class="o">&lt;</span><span class="nx">button</span> <span class="nx">md</span><span class="o">-</span><span class="nx">raised</span><span class="o">-</span><span class="nx">button</span> <span class="p">(</span><span class="nx">click</span><span class="p">)</span><span class="o">=</span><span class="s2">"login()"</span><span class="o">&gt;</span><span class="nx">Login</span><span class="o">&lt;</span><span class="sr">/button</span><span class="err">&gt;
+</span>    <span class="o">&lt;</span><span class="sr">/md-card&gt;</span><span class="err">`
+</span><span class="p">})</span>
+<span class="k">export</span> <span class="kr">class</span> <span class="nx">HomeComponent</span> <span class="p">{</span>
+  <span class="kd">constructor</span><span class="p">(</span><span class="k">private</span> <span class="na">oauthService</span><span class="p">:</span> <span class="nx">OAuthService</span><span class="p">)</span> <span class="p">{</span>
+  <span class="p">}</span>
+
+  <span class="nx">login</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">oauthService</span><span class="p">.</span><span class="nx">initImplicitFlow</span><span class="p">();</span>
+  <span class="p">}</span>
+
+  <span class="nx">logout</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">oauthService</span><span class="p">.</span><span class="nx">logOut</span><span class="p">();</span>
+  <span class="p">}</span>
+
+  <span class="nx">get</span> <span class="nx">givenName</span><span class="p">()</span> <span class="p">{</span>
+    <span class="kd">const</span> <span class="nx">claims</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">oauthService</span><span class="p">.</span><span class="nx">getIdentityClaims</span><span class="p">();</span>
+    <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">claims</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">return</span> <span class="kc">null</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="nx">claims</span><span class="p">.</span><span class="nx">name</span><span class="p">;</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre>
+</div>
+
+<p>Modify <code class="highlighter-rouge">client/src/app/shared/beer/beer.service.ts</code> to read the access token from <code class="highlighter-rouge">oauthService</code> and add an <code class="highlighter-rouge">Authorization</code> header.</p>
+
+<div class="language-typescript highlighter-rouge"><pre class="highlight"><code><span class="k">import</span> <span class="p">{</span> <span class="nx">Injectable</span> <span class="p">}</span> <span class="k">from</span> <span class="s1">'@angular/core'</span><span class="p">;</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">Http</span><span class="p">,</span> <span class="nx">Response</span><span class="p">,</span> <span class="nx">Headers</span><span class="p">,</span> <span class="nx">RequestOptions</span> <span class="p">}</span> <span class="k">from</span> <span class="s1">'@angular/http'</span><span class="p">;</span>
+<span class="k">import</span> <span class="s1">'rxjs/add/operator/map'</span><span class="p">;</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">Observable</span> <span class="p">}</span> <span class="k">from</span> <span class="s1">'rxjs'</span><span class="p">;</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">OAuthService</span> <span class="p">}</span> <span class="k">from</span> <span class="s1">'angular-oauth2-oidc'</span><span class="p">;</span>
+
+<span class="err">@</span><span class="nx">Injectable</span><span class="p">()</span>
+<span class="k">export</span> <span class="kr">class</span> <span class="nx">BeerService</span> <span class="p">{</span>
+
+  <span class="kd">constructor</span><span class="p">(</span><span class="k">private</span> <span class="nx">http</span><span class="err">:</span> <span class="nx">Http</span><span class="p">,</span> <span class="k">private</span> <span class="nx">oauthService</span><span class="err">:</span> <span class="nx">OAuthService</span><span class="p">)</span> <span class="p">{</span>
+  <span class="p">}</span>
+
+  <span class="nx">getAll</span><span class="p">()</span><span class="err">:</span> <span class="nx">Observable</span><span class="o">&lt;</span><span class="kr">any</span><span class="o">&gt;</span> <span class="p">{</span>
+    <span class="kd">const</span> <span class="na">headers</span><span class="p">:</span> <span class="nx">Headers</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Headers</span><span class="p">();</span>
+    <span class="nx">headers</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="s1">'Authorization'</span><span class="p">,</span> <span class="k">this</span><span class="p">.</span><span class="nx">oauthService</span><span class="p">.</span><span class="nx">authorizationHeader</span><span class="p">());</span>
+
+    <span class="kd">const</span> <span class="nx">options</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">RequestOptions</span><span class="p">({</span> <span class="na">headers</span><span class="p">:</span> <span class="nx">headers</span> <span class="p">});</span>
+
+    <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">http</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">'http://localhost:8080/good-beers'</span><span class="p">,</span> <span class="nx">options</span><span class="p">)</span>
+      <span class="p">.</span><span class="nx">map</span><span class="p">((</span><span class="na">response</span><span class="p">:</span> <span class="nx">Response</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="nx">response</span><span class="p">.</span><span class="nx">json</span><span class="p">());</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre>
+</div>
+
+<p>Create <code class="highlighter-rouge">client/src/app/shared/auth/auth.guard.ts</code> to navigate to the <code class="highlighter-rouge">HomeComponent</code> if the user is not authenticated.</p>
+
+<div class="language-typescript highlighter-rouge"><pre class="highlight"><code><span class="k">import</span> <span class="p">{</span> <span class="nx">Injectable</span> <span class="p">}</span> <span class="k">from</span> <span class="s1">'@angular/core'</span><span class="p">;</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">ActivatedRouteSnapshot</span><span class="p">,</span> <span class="nx">CanActivate</span><span class="p">,</span> <span class="nx">Router</span><span class="p">,</span> <span class="nx">RouterStateSnapshot</span> <span class="p">}</span> <span class="k">from</span> <span class="s1">'@angular/router'</span><span class="p">;</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">OAuthService</span> <span class="p">}</span> <span class="k">from</span> <span class="s1">'angular-oauth2-oidc'</span><span class="p">;</span>
+
+<span class="err">@</span><span class="nx">Injectable</span><span class="p">()</span>
+<span class="k">export</span> <span class="kr">class</span> <span class="nx">AuthGuard</span> <span class="k">implements</span> <span class="nx">CanActivate</span> <span class="p">{</span>
+
+  <span class="kd">constructor</span><span class="p">(</span><span class="k">private</span> <span class="nx">oauthService</span><span class="err">:</span> <span class="nx">OAuthService</span><span class="p">,</span> <span class="k">private</span> <span class="nx">router</span><span class="err">:</span> <span class="nx">Router</span><span class="p">)</span> <span class="p">{}</span>
+
+  <span class="nx">canActivate</span><span class="p">(</span><span class="nx">route</span><span class="err">:</span> <span class="nx">ActivatedRouteSnapshot</span><span class="p">,</span> <span class="nx">state</span><span class="err">:</span> <span class="nx">RouterStateSnapshot</span><span class="p">)</span><span class="err">:</span> <span class="kr">boolean</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">oauthService</span><span class="p">.</span><span class="nx">hasValidIdToken</span><span class="p">())</span> <span class="p">{</span>
+      <span class="k">return</span> <span class="kc">true</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="k">this</span><span class="p">.</span><span class="nx">router</span><span class="p">.</span><span class="nx">navigate</span><span class="p">([</span><span class="s1">'/home'</span><span class="p">]);</span>
+    <span class="k">return</span> <span class="kc">false</span><span class="p">;</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre>
+</div>
+
+<p>Add <code class="highlighter-rouge">OAuthModule.forRoot()</code> to the list of imports in <code class="highlighter-rouge">client/src/app/app.module.ts</code>, add <code class="highlighter-rouge">HomeComponent</code> in <code class="highlighter-rouge">declarations</code>, and lock the <code class="highlighter-rouge">/beer-list</code> route down with the <code class="highlighter-rouge">AuthGuard</code>.</p>
+
+<div class="language-typescript highlighter-rouge"><pre class="highlight"><code><span class="k">import</span> <span class="p">{</span> <span class="nx">OAuthModule</span> <span class="p">}</span> <span class="k">from</span> <span class="s1">'angular-oauth2-oidc'</span><span class="p">;</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">HomeComponent</span> <span class="p">}</span> <span class="k">from</span> <span class="s1">'./home/home.component'</span><span class="p">;</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">RouterModule</span><span class="p">,</span> <span class="nx">Routes</span> <span class="p">}</span> <span class="k">from</span> <span class="s1">'@angular/router'</span><span class="p">;</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">AuthGuard</span> <span class="p">}</span> <span class="k">from</span> <span class="s1">'./shared/auth/auth.guard'</span><span class="p">;</span>
+
+<span class="kd">const</span> <span class="nx">appRoutes</span><span class="err">:</span> <span class="nx">Routes</span> <span class="o">=</span> <span class="p">[</span>
+  <span class="p">{</span> <span class="na">path</span><span class="p">:</span> <span class="s1">'beer-list'</span><span class="p">,</span> <span class="na">component</span><span class="p">:</span> <span class="nx">BeerListComponent</span><span class="p">,</span> <span class="na">canActivate</span><span class="p">:</span> <span class="p">[</span><span class="nx">AuthGuard</span><span class="p">]</span> <span class="p">},</span>
+  <span class="p">{</span> <span class="na">path</span><span class="p">:</span> <span class="s1">'home'</span><span class="p">,</span> <span class="na">component</span><span class="p">:</span> <span class="nx">HomeComponent</span> <span class="p">},</span>
+  <span class="p">{</span> <span class="na">path</span><span class="p">:</span> <span class="s1">''</span><span class="p">,</span> <span class="na">redirectTo</span><span class="p">:</span> <span class="s1">'home'</span><span class="p">,</span> <span class="na">pathMatch</span><span class="p">:</span> <span class="s1">'full'</span> <span class="p">},</span>
+  <span class="p">{</span> <span class="na">path</span><span class="p">:</span> <span class="s1">'**'</span><span class="p">,</span> <span class="na">redirectTo</span><span class="p">:</span> <span class="s1">'home'</span> <span class="p">}</span>
+<span class="p">];</span>
+
+<span class="err">@</span><span class="nx">NgModule</span><span class="p">({</span>
+  <span class="na">declarations</span><span class="p">:</span> <span class="p">[</span>
+    <span class="p">...</span>
+    <span class="nx">HomeComponent</span>
+  <span class="p">],</span>
+  <span class="na">imports</span><span class="p">:</span> <span class="p">[</span>
+    <span class="p">...</span>
+    <span class="nx">OAuthModule</span><span class="p">.</span><span class="nx">forRoot</span><span class="p">(),</span>
+    <span class="nx">RouterModule</span><span class="p">.</span><span class="nx">forRoot</span><span class="p">(</span><span class="nx">appRoutes</span><span class="p">)</span>
+  <span class="p">],</span>
+  <span class="na">providers</span><span class="p">:</span> <span class="p">[</span><span class="nx">AuthGuard</span><span class="p">],</span>
+  <span class="na">bootstrap</span><span class="p">:</span> <span class="p">[</span><span class="nx">AppComponent</span><span class="p">]</span>
+<span class="p">})</span>
+<span class="k">export</span> <span class="kr">class</span> <span class="nx">AppModule</span> <span class="p">{</span> <span class="p">}</span>
+</code></pre>
+</div>
+
+<p>After making these changes, you should be able to run <code class="highlighter-rouge">ng serve</code> and see a login button.</p>
+
+<p><img src="/assets/blog/angular-pwa-auth/angular-login-button-7e1214a060ddbc6ce425c49604350ad21b26ddf8b41006ab48b2b6c833cc0b8c.png" alt="Angular Login Button" width="800" /></p>
+
+<p>Click the <strong>Login</strong> button and sign-in with one of the user’s that are configured in your Okta application.</p>
+
+<p><img src="/assets/blog/angular-pwa-auth/angular-okta-login-b372a3a7b78d981e9594f4176bed393871eeb3454b55a380a62fd372ce3c4d14.png" alt="Angular Okta Login" width="800" /></p>
+
+<p>This will likely fail with an error similar to the following:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>https://dev-158606.oktapreview.com/.well-known/openid-configuration net::ERR_FAILED
+error loading discovery document 
+</code></pre>
+</div>
+
+<p>To fix this problem, you need to add the client’s URL as a Trusted Origin for a cross-origin request. Login to your Okta dashboard and navigate to <strong>API</strong> &gt; <strong>Trusted Origins</strong>. Click the <strong>Add Origin</strong> button and enter <code class="highlighter-rouge">http://localhost:4200</code> for the Origin URL, give it a name like “Angular PWA”, check <strong>CORS</strong>, and click <strong>Save</strong>.</p>
+
+<p>Now you should be able to login and see a welcome message.</p>
+
+<p><img src="/assets/blog/angular-pwa-auth/angular-welcome-13b72426905bebff3cc8720b32ae0c8fca5a5c34df830a6142b304665b7b41a1.png" alt="Angular Welcome" width="800" /></p>
+
+<p>Click on <strong>Beer List</strong> to see data from your Spring Boot app.</p>
+
+<p><img src="/assets/blog/angular-pwa-auth/angular-beer-list-fd9362900de843aee144424e560e6724fa029c97dfe1b219c348620dccbceab1.png" alt="Angular Beer List" width="800" /></p>
+
+<p>To add the “Home” link at the top (as shown in the screenshot above), modify <code class="highlighter-rouge">client/src/app/beer-list/beer-list.component.html</code> to include the following HTML.</p>
+
+<div class="language-html highlighter-rouge"><pre class="highlight"><code><span class="nt">&lt;a</span> <span class="na">md-button</span> <span class="na">routerLink=</span><span class="s">"/home"</span><span class="nt">&gt;</span>Home<span class="nt">&lt;/a&gt;</span>
+
+<span class="nt">&lt;md-card&gt;</span>
+  <span class="nt">&lt;md-card-title&gt;</span>Beer List<span class="nt">&lt;/md-card-title&gt;</span>
+  <span class="nt">&lt;md-card-content&gt;</span>
+    <span class="nt">&lt;md-list&gt;</span>
+      <span class="nt">&lt;md-list-item</span> <span class="err">*</span><span class="na">ngFor=</span><span class="s">"let beer of beers"</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;img</span> <span class="na">md-list-avatar</span> <span class="na">src=</span><span class="s">"{{beer.giphyUrl}}"</span> <span class="na">alt=</span><span class="s">"{{beer.name}}"</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;h3</span> <span class="na">md-line</span><span class="nt">&gt;</span>
+          {{beer.name}}
+        <span class="nt">&lt;/h3&gt;</span>
+      <span class="nt">&lt;/md-list-item&gt;</span>
+    <span class="nt">&lt;/md-list&gt;</span>
+  <span class="nt">&lt;/md-card-content&gt;</span>
+<span class="nt">&lt;/md-card&gt;</span>
+</code></pre>
+</div>
+
+<p>Now, if you toggle “offline” in Chrome Developer Tools’ Network tab, you’ll see it all works offline too!</p>
+
+<p><img src="/assets/blog/angular-pwa-auth/angular-beer-list-offline-fbaaa9a2c9b056055e61cc650242f026bb5f49ce38068152eb0607395abc75f6.png" alt="Angular PWA Works Offline" width="800" /></p>
+
+<p>If it works - great, now we can add auth with Okta!</p>
+
+<h3 id="authenticating-with-the-okta-auth-sdk">Authenticating with the Okta Auth SDK</h3>
+
+<p>The Okta Auth SDK builds on top of Okta’s <a href="/docs/api/resources/authn.html">Authentication API</a> and <a href="/docs/api/resources/oidc.html">OAuth 2.0 API</a> to enable you to create a fully branded sign-in experience using JavaScript.</p>
+
+<p>Install it using npm:</p>
+
+<div class="language-bash highlighter-rouge"><pre class="highlight"><code>npm install @okta/okta-auth-js --save
+</code></pre>
+</div>
+
+<p>Add a reference to this library’s main JavaScript file in <code class="highlighter-rouge">client/.angular-cli.json</code>:</p>
+
+<div class="language-json highlighter-rouge"><pre class="highlight"><code><span class="s2">"scripts"</span><span class="err">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+  </span><span class="s2">"../node_modules/@okta/okta-auth-js/dist/okta-auth-js.min.js"</span><span class="w">
+</span><span class="p">]</span><span class="err">,</span><span class="w">
+</span></code></pre>
+</div>
+
+<p>Change <code class="highlighter-rouge">HomeComponent</code> to declare <code class="highlighter-rouge">OktaAuth</code> and modify its <code class="highlighter-rouge">template</code> so it has a sign-in form.</p>
+
+<div class="language-typescript highlighter-rouge"><pre class="highlight"><code><span class="kr">declare</span> <span class="kd">const</span> <span class="nx">OktaAuth</span><span class="err">:</span> <span class="kr">any</span><span class="p">;</span>
+
+<span class="err">@</span><span class="nx">Component</span><span class="p">({</span>
+  <span class="na">template</span><span class="p">:</span> <span class="err">`</span>
+    <span class="o">&lt;</span><span class="nx">md</span><span class="o">-</span><span class="nx">card</span> <span class="o">*</span><span class="nx">ngIf</span><span class="o">=</span><span class="s2">"givenName"</span><span class="o">&gt;</span>
+      <span class="o">&lt;</span><span class="nx">h2</span><span class="o">&gt;</span><span class="nx">Welcome</span><span class="p">,</span> <span class="p">{{</span><span class="nx">givenName</span><span class="p">}}</span><span class="o">!&lt;</span><span class="sr">/h2</span><span class="err">&gt;
+</span>      <span class="o">&lt;</span><span class="nx">button</span> <span class="nx">md</span><span class="o">-</span><span class="nx">raised</span><span class="o">-</span><span class="nx">button</span> <span class="p">(</span><span class="nx">click</span><span class="p">)</span><span class="o">=</span><span class="s2">"logout()"</span><span class="o">&gt;</span><span class="nx">Logout</span><span class="o">&lt;</span><span class="sr">/button</span><span class="err">&gt;
+</span>      <span class="o">&lt;</span><span class="nx">a</span> <span class="nx">md</span><span class="o">-</span><span class="nx">button</span> <span class="nx">routerLink</span><span class="o">=</span><span class="s2">"/beer-list"</span><span class="o">&gt;</span><span class="nx">Beer</span> <span class="nx">List</span><span class="o">&lt;</span><span class="sr">/a</span><span class="err">&gt;
+</span>    <span class="o">&lt;</span><span class="sr">/md-card</span><span class="err">&gt;
+</span>
+    <span class="o">&lt;</span><span class="nx">md</span><span class="o">-</span><span class="nx">card</span> <span class="o">*</span><span class="nx">ngIf</span><span class="o">=</span><span class="s2">"!givenName"</span><span class="o">&gt;</span>
+      <span class="o">&lt;</span><span class="nx">md</span><span class="o">-</span><span class="nx">card</span><span class="o">-</span><span class="nx">title</span><span class="o">&gt;</span><span class="nx">Login</span> <span class="kd">with</span> <span class="nx">Redirect</span><span class="o">&lt;</span><span class="sr">/md-card-title</span><span class="err">&gt;
+</span>      <span class="o">&lt;</span><span class="nx">button</span> <span class="nx">md</span><span class="o">-</span><span class="nx">raised</span><span class="o">-</span><span class="nx">button</span> <span class="p">(</span><span class="nx">click</span><span class="p">)</span><span class="o">=</span><span class="s2">"login()"</span><span class="o">&gt;</span><span class="nx">Login</span><span class="o">&lt;</span><span class="sr">/button</span><span class="err">&gt;
+</span>    <span class="o">&lt;</span><span class="sr">/md-card</span><span class="err">&gt;
+</span>
+    <span class="o">&lt;</span><span class="nx">md</span><span class="o">-</span><span class="nx">card</span> <span class="o">*</span><span class="nx">ngIf</span><span class="o">=</span><span class="s2">"!givenName"</span><span class="o">&gt;</span>
+      <span class="o">&lt;</span><span class="nx">md</span><span class="o">-</span><span class="nx">card</span><span class="o">-</span><span class="nx">title</span><span class="o">&gt;</span><span class="nx">Login</span> <span class="nx">Directly</span><span class="o">&lt;</span><span class="sr">/md-card-title</span><span class="err">&gt;
+</span>
+      <span class="o">&lt;</span><span class="nx">form</span> <span class="p">(</span><span class="nx">ngSubmit</span><span class="p">)</span><span class="o">=</span><span class="s2">"loginWithPassword()"</span> <span class="nx">ngNativeValidate</span><span class="o">&gt;</span>
+        <span class="o">&lt;</span><span class="nx">p</span> <span class="nx">style</span><span class="o">=</span><span class="s2">"color:red; font-weight:bold"</span> <span class="o">*</span><span class="nx">ngIf</span><span class="o">=</span><span class="s2">"error"</span><span class="o">&gt;</span>
+          <span class="p">{{</span><span class="nx">error</span><span class="p">}}</span>
+        <span class="o">&lt;</span><span class="sr">/p</span><span class="err">&gt;
+</span>
+        <span class="o">&lt;</span><span class="nx">p</span><span class="o">&gt;</span>
+          <span class="o">&lt;</span><span class="nx">md</span><span class="o">-</span><span class="nx">input</span><span class="o">-</span><span class="nx">container</span><span class="o">&gt;</span>
+            <span class="o">&lt;</span><span class="nx">input</span> <span class="nx">mdInput</span> <span class="p">[(</span><span class="nx">ngModel</span><span class="p">)]</span><span class="o">=</span><span class="s2">"username"</span> <span class="nx">name</span><span class="o">=</span><span class="s2">"username"</span>
+                   <span class="nx">placeholder</span><span class="o">=</span><span class="s2">"Name"</span> <span class="nx">required</span><span class="o">&gt;</span>
+          <span class="o">&lt;</span><span class="sr">/md-input-container</span><span class="err">&gt;
+</span>        <span class="o">&lt;</span><span class="sr">/p</span><span class="err">&gt;
+</span>
+        <span class="o">&lt;</span><span class="nx">p</span><span class="o">&gt;</span>
+          <span class="o">&lt;</span><span class="nx">md</span><span class="o">-</span><span class="nx">input</span><span class="o">-</span><span class="nx">container</span><span class="o">&gt;</span>
+            <span class="o">&lt;</span><span class="nx">input</span> <span class="nx">mdInput</span> <span class="p">[(</span><span class="nx">ngModel</span><span class="p">)]</span><span class="o">=</span><span class="s2">"password"</span> <span class="nx">name</span><span class="o">=</span><span class="s2">"password"</span>
+                   <span class="kd">type</span><span class="o">=</span><span class="s2">"password"</span> <span class="nx">placeholder</span><span class="o">=</span><span class="s2">"Password"</span> <span class="nx">required</span><span class="o">&gt;</span>
+          <span class="o">&lt;</span><span class="sr">/md-input-container</span><span class="err">&gt;
+</span>        <span class="o">&lt;</span><span class="sr">/p</span><span class="err">&gt;
+</span>
+        <span class="o">&lt;</span><span class="nx">button</span> <span class="nx">md</span><span class="o">-</span><span class="nx">raised</span><span class="o">-</span><span class="nx">button</span> <span class="kd">type</span><span class="o">=</span><span class="s2">"submit"</span><span class="o">&gt;</span><span class="nx">Login</span><span class="o">&lt;</span><span class="sr">/button</span><span class="err">&gt;
+</span>      <span class="o">&lt;</span><span class="sr">/form</span><span class="err">&gt;
+</span>    <span class="o">&lt;</span><span class="sr">/md-card&gt;</span><span class="err">`
+</span><span class="p">})</span>
+</code></pre>
+</div>
+
+<p>After making these changes,  run <code class="highlighter-rouge">ng serve</code> and the <code class="highlighter-rouge">HomeComponent</code> should render as follows (after you’ve logged out and unchecked “Offline” in the Network tab):</p>
+
+<p><img src="/assets/blog/angular-pwa-auth/angular-login-form-6953f2234df666355b1affa5f5aa333752252f10d05ca1442b20067ee9494233.png" alt="Angular Login Form" width="800" /></p>
+
+<p>Import Angular’s <code class="highlighter-rouge">Router</code>, add it as a dependency in the constructor, and add local variables for the <code class="highlighter-rouge">username</code> and <code class="highlighter-rouge">password</code> fields. Then implement a <code class="highlighter-rouge">loginWithPassword()</code> method in <code class="highlighter-rouge">HomeComponent</code>. This method uses the <code class="highlighter-rouge">OktaAuth</code> library to get a session token and exchange it for ID and access tokens.</p>
+
+<div class="language-typescript highlighter-rouge"><pre class="highlight"><code><span class="k">import</span> <span class="p">{</span> <span class="nx">Router</span> <span class="p">}</span> <span class="k">from</span> <span class="s1">'@angular/router'</span><span class="p">;</span>
+<span class="p">...</span>
+<span class="k">export</span> <span class="kr">class</span> <span class="nx">HomeComponent</span> <span class="p">{</span>
+  <span class="k">private</span> <span class="nx">username</span><span class="err">:</span> <span class="kr">string</span><span class="p">;</span>
+  <span class="k">private</span> <span class="nx">password</span><span class="err">:</span> <span class="kr">string</span><span class="p">;</span>
+  <span class="k">private</span> <span class="nx">error</span><span class="err">:</span> <span class="kr">string</span><span class="p">;</span>
+
+  <span class="kd">constructor</span><span class="p">(</span><span class="k">private</span> <span class="nx">oauthService</span><span class="err">:</span> <span class="nx">OAuthService</span><span class="p">,</span> <span class="k">private</span> <span class="nx">router</span><span class="err">:</span> <span class="nx">Router</span><span class="p">)</span> <span class="p">{</span>
+  <span class="p">}</span>
+  <span class="p">...</span>
+  <span class="nx">loginWithPassword</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">oauthService</span><span class="p">.</span><span class="nx">createAndSaveNonce</span><span class="p">().</span><span class="nx">then</span><span class="p">(</span><span class="nx">nonce</span> <span class="o">=&gt;</span> <span class="p">{</span>
+      <span class="kd">const</span> <span class="nx">authClient</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">OktaAuth</span><span class="p">({</span>
+        <span class="na">url</span><span class="p">:</span> <span class="k">this</span><span class="p">.</span><span class="nx">oauthService</span><span class="p">.</span><span class="nx">issuer</span>
+      <span class="p">});</span>
+      <span class="nx">authClient</span><span class="p">.</span><span class="nx">signIn</span><span class="p">({</span>
+        <span class="na">username</span><span class="p">:</span> <span class="k">this</span><span class="p">.</span><span class="nx">username</span><span class="p">,</span>
+        <span class="na">password</span><span class="p">:</span> <span class="k">this</span><span class="p">.</span><span class="nx">password</span>
+      <span class="p">}).</span><span class="nx">then</span><span class="p">((</span><span class="nx">response</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="nx">response</span><span class="p">.</span><span class="nx">status</span> <span class="o">===</span> <span class="s1">'SUCCESS'</span><span class="p">)</span> <span class="p">{</span>
+          <span class="nx">authClient</span><span class="p">.</span><span class="nx">token</span><span class="p">.</span><span class="nx">getWithoutPrompt</span><span class="p">({</span>
+            <span class="na">clientId</span><span class="p">:</span> <span class="k">this</span><span class="p">.</span><span class="nx">oauthService</span><span class="p">.</span><span class="nx">clientId</span><span class="p">,</span>
+            <span class="na">responseType</span><span class="p">:</span> <span class="p">[</span><span class="s1">'id_token'</span><span class="p">,</span> <span class="s1">'token'</span><span class="p">],</span>
+            <span class="na">scopes</span><span class="p">:</span> <span class="p">[</span><span class="s1">'openid'</span><span class="p">,</span> <span class="s1">'profile'</span><span class="p">,</span> <span class="s1">'email'</span><span class="p">],</span>
+            <span class="na">sessionToken</span><span class="p">:</span> <span class="nx">response</span><span class="p">.</span><span class="nx">sessionToken</span><span class="p">,</span>
+            <span class="na">nonce</span><span class="p">:</span> <span class="nx">nonce</span><span class="p">,</span>
+            <span class="na">redirectUri</span><span class="p">:</span> <span class="nb">window</span><span class="p">.</span><span class="nx">location</span><span class="p">.</span><span class="nx">origin</span>
+          <span class="p">})</span>
+            <span class="p">.</span><span class="nx">then</span><span class="p">((</span><span class="nx">tokens</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+              <span class="c1">// oauthService.processIdToken doesn't set an access token</span>
+              <span class="c1">// set it manually so oauthService.authorizationHeader() works</span>
+              <span class="nx">localStorage</span><span class="p">.</span><span class="nx">setItem</span><span class="p">(</span><span class="s1">'access_token'</span><span class="p">,</span> <span class="nx">tokens</span><span class="p">[</span><span class="mi">1</span><span class="p">].</span><span class="nx">accessToken</span><span class="p">);</span>
+              <span class="k">this</span><span class="p">.</span><span class="nx">oauthService</span><span class="p">.</span><span class="nx">processIdToken</span><span class="p">(</span><span class="nx">tokens</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="nx">idToken</span><span class="p">,</span> <span class="nx">tokens</span><span class="p">[</span><span class="mi">1</span><span class="p">].</span><span class="nx">accessToken</span><span class="p">);</span>
+              <span class="k">this</span><span class="p">.</span><span class="nx">router</span><span class="p">.</span><span class="nx">navigate</span><span class="p">([</span><span class="s1">'/home'</span><span class="p">]);</span>
+            <span class="p">});</span>
+        <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+          <span class="k">throw</span> <span class="k">new</span> <span class="nb">Error</span><span class="p">(</span><span class="s1">'We cannot handle the '</span> <span class="o">+</span> <span class="nx">response</span><span class="p">.</span><span class="nx">status</span> <span class="o">+</span> <span class="s1">' status'</span><span class="p">);</span>
+        <span class="p">}</span>
+      <span class="p">}).</span><span class="nx">fail</span><span class="p">((</span><span class="nx">error</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+        <span class="nx">console</span><span class="p">.</span><span class="nx">error</span><span class="p">(</span><span class="nx">error</span><span class="p">);</span>
+        <span class="k">this</span><span class="p">.</span><span class="nx">error</span> <span class="o">=</span> <span class="nx">error</span><span class="p">.</span><span class="nx">message</span><span class="p">;</span>
+      <span class="p">});</span>
+    <span class="p">});</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre>
+</div>
+
+<p>You should be able to sign in with the form as one of your app’s registered users. After logging in, you’ll be able to click the <strong>Beer List</strong> link and view the beer list.</p>
+
+<h2 id="authenticate-with-the-stormpath-angular-sdk">Authenticate with the Stormpath Angular SDK</h2>
+
+<p>If you’re a former Stormpath customer migrating to Okta, you might’ve used Stormpath’s Angular, AngularJS, or React SDKs. The good news is that these libraries should still work with Okta!</p>
+
+<p>Even if you weren’t a Stormpath customer, you can still use these libraries to talk to Okta. In the future, we’ll be releasing Okta SDKs with similar functionality. In the meantime, we’ll do our best to support these libraries and make it easy to transition to future versions.</p>
+
+<p>To save the code your wrote for OIDC, I recommend committing your changes to Git. Run the command below from the root directory of your project.</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>git commit -a -m "Add Security with OIDC and Okta"
+</code></pre>
+</div>
+
+<p>Then create a new branch for the Stormpath Angular SDK integration.</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>git checkout -b stormpath
+</code></pre>
+</div>
+
+<p>Install Stormpath’s Angular SDK to make it possible to communicate with the secured server. Make sure to run the following command from the <code class="highlighter-rouge">client</code> directory.</p>
+
+<div class="language-bash highlighter-rouge"><pre class="highlight"><code>npm install --save angular-stormpath
+</code></pre>
+</div>
+
+<p>Modify <code class="highlighter-rouge">client/src/app/app.module.ts</code> to import <code class="highlighter-rouge">StormpathConfiguration</code> and <code class="highlighter-rouge">StormpathModule</code>. Then create a function to configure the <code class="highlighter-rouge">endpointPrefix</code> to point to <code class="highlighter-rouge">http://localhost:8080</code>.</p>
+
+<div class="language-typescript highlighter-rouge"><pre class="highlight"><code><span class="k">import</span> <span class="p">{</span> <span class="nx">StormpathConfiguration</span><span class="p">,</span> <span class="nx">StormpathModule</span> <span class="p">}</span> <span class="k">from</span> <span class="s1">'angular-stormpath'</span><span class="p">;</span>
+
+<span class="k">export</span> <span class="kd">function</span> <span class="nx">stormpathConfig</span><span class="p">()</span><span class="err">:</span> <span class="nx">StormpathConfiguration</span> <span class="p">{</span>
+  <span class="kd">const</span> <span class="nx">spConfig</span><span class="err">:</span> <span class="nx">StormpathConfiguration</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">StormpathConfiguration</span><span class="p">();</span>
+  <span class="nx">spConfig</span><span class="p">.</span><span class="nx">endpointPrefix</span> <span class="o">=</span> <span class="s1">'http://localhost:8080'</span><span class="p">;</span>
+  <span class="nx">spConfig</span><span class="p">.</span><span class="nx">autoAuthorizedUris</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="k">new</span> <span class="nb">RegExp</span><span class="p">(</span><span class="nx">spConfig</span><span class="p">.</span><span class="nx">endpointPrefix</span> <span class="o">+</span> <span class="s1">'/*'</span><span class="p">));</span>
+  <span class="k">return</span> <span class="nx">spConfig</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre>
+</div>
+
+<p>Add <code class="highlighter-rouge">StormpathModule</code> to the imports in <code class="highlighter-rouge">@NgModule</code> and use the <code class="highlighter-rouge">stormpathConfig</code> function to override the default <code class="highlighter-rouge">StormpathConfiguration</code> in the <code class="highlighter-rouge">providers</code> list.</p>
+
+<div class="language-typescript highlighter-rouge"><pre class="highlight"><code><span class="err">@</span><span class="nx">NgModule</span><span class="p">({</span>
+  <span class="err">…</span>
+  <span class="na">imports</span><span class="p">:</span> <span class="p">[</span>
+    <span class="p">...</span>
+    <span class="nx">StormpathModule</span>
+  <span class="p">],</span>
+  <span class="na">providers</span><span class="p">:</span> <span class="p">[</span><span class="nx">BeerService</span><span class="p">,</span> <span class="nx">GiphyService</span><span class="p">,</span> <span class="nx">AuthGuard</span><span class="p">,</span>
+    <span class="p">{</span>
+      <span class="na">provide</span><span class="p">:</span> <span class="nx">StormpathConfiguration</span><span class="p">,</span> <span class="na">useFactory</span><span class="p">:</span> <span class="nx">stormpathConfig</span>
+    <span class="p">}</span>
+  <span class="p">],</span>
+  <span class="na">bootstrap</span><span class="p">:</span> <span class="p">[</span><span class="nx">AppComponent</span><span class="p">]</span>
+<span class="p">})</span>
+</code></pre>
+</div>
+
+<p>Modify <code class="highlighter-rouge">client/src/app/home/home.component.ts</code> to add the <code class="highlighter-rouge">&lt;sp-authport&gt;&lt;/sp-authport&gt;</code> component and a section to show the user’s name and a logout link. In other words, replace all the code in <code class="highlighter-rouge">home.component.ts</code> with the code below.</p>
+
+<div class="language-typescript highlighter-rouge"><pre class="highlight"><code><span class="k">import</span> <span class="p">{</span> <span class="nx">Component</span> <span class="p">}</span> <span class="k">from</span> <span class="s1">'@angular/core'</span><span class="p">;</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">AuthPortComponent</span> <span class="p">}</span> <span class="k">from</span> <span class="s1">'angular-stormpath'</span><span class="p">;</span>
+
+<span class="err">@</span><span class="nx">Component</span><span class="p">({</span>
+  <span class="na">styles</span><span class="p">:</span> <span class="p">[</span><span class="s1">'sp-authport { margin-top: 20px; display: block; }'</span><span class="p">],</span>
+  <span class="na">template</span><span class="p">:</span> <span class="err">`</span>
+    <span class="o">&lt;</span><span class="nx">md</span><span class="o">-</span><span class="nx">card</span> <span class="o">*</span><span class="nx">ngIf</span><span class="o">=</span><span class="s2">"(user$ | async)"</span><span class="o">&gt;</span>
+      <span class="o">&lt;</span><span class="nx">md</span><span class="o">-</span><span class="nx">card</span><span class="o">-</span><span class="nx">title</span><span class="o">&gt;</span><span class="nx">Welcome</span><span class="p">,</span> <span class="p">{{</span> <span class="p">(</span> <span class="nx">user$</span> <span class="o">|</span> <span class="k">async</span> <span class="p">).</span><span class="nx">fullName</span> <span class="p">}}</span><span class="o">!&lt;</span><span class="sr">/md-card-title</span><span class="err">&gt;
+</span>      <span class="o">&lt;</span><span class="nx">md</span><span class="o">-</span><span class="nx">card</span><span class="o">-</span><span class="nx">content</span><span class="o">&gt;</span>
+        <span class="o">&lt;</span><span class="nx">button</span> <span class="nx">md</span><span class="o">-</span><span class="nx">raised</span><span class="o">-</span><span class="nx">button</span> <span class="p">(</span><span class="nx">click</span><span class="p">)</span><span class="o">=</span><span class="s2">"logout(); return"</span><span class="o">&gt;</span><span class="nx">Logout</span><span class="o">&lt;</span><span class="sr">/button</span><span class="err">&gt;
+</span>        <span class="o">&lt;</span><span class="nx">a</span> <span class="nx">md</span><span class="o">-</span><span class="nx">button</span> <span class="nx">routerLink</span><span class="o">=</span><span class="s2">"/beer-list"</span><span class="o">&gt;</span><span class="nx">Beer</span> <span class="nx">List</span><span class="o">&lt;</span><span class="sr">/a</span><span class="err">&gt;
+</span>      <span class="o">&lt;</span><span class="sr">/md-card-content</span><span class="err">&gt;
+</span>    <span class="o">&lt;</span><span class="sr">/md-card</span><span class="err">&gt;
+</span>
+    <span class="o">&lt;</span><span class="nx">sp</span><span class="o">-</span><span class="nx">authport</span><span class="o">&gt;&lt;</span><span class="sr">/sp-authport&gt;</span><span class="err">`
+</span><span class="p">})</span>
+<span class="k">export</span> <span class="kr">class</span> <span class="nx">HomeComponent</span> <span class="k">extends</span> <span class="nx">AuthPortComponent</span> <span class="p">{</span>
+<span class="p">}</span>
+</code></pre>
+</div>
+
+<p>You’ll notice the <code class="highlighter-rouge">user$</code> variable in the HTML. This comes from <code class="highlighter-rouge">AuthPortComponent</code>, which <code class="highlighter-rouge">HomeComponent</code> extends.</p>
+
+<p>You’ll need to make two more changes to <code class="highlighter-rouge">AuthGuard</code> and <code class="highlighter-rouge">BeerService</code>. In <code class="highlighter-rouge">client/src/app/shared/auth/auth.guard.ts</code>, replace <code class="highlighter-rouge">OAuthService</code> with <code class="highlighter-rouge">Stormpath</code>.</p>
+
+<div class="language-typescript highlighter-rouge"><pre class="highlight"><code><span class="k">import</span> <span class="p">{</span> <span class="nx">Injectable</span> <span class="p">}</span> <span class="k">from</span> <span class="s1">'@angular/core'</span><span class="p">;</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">ActivatedRouteSnapshot</span><span class="p">,</span> <span class="nx">CanActivate</span><span class="p">,</span> <span class="nx">Router</span><span class="p">,</span> <span class="nx">RouterStateSnapshot</span> <span class="p">}</span> <span class="k">from</span> <span class="s1">'@angular/router'</span><span class="p">;</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">Stormpath</span> <span class="p">}</span> <span class="k">from</span> <span class="s1">'angular-stormpath'</span><span class="p">;</span>
+
+<span class="err">@</span><span class="nx">Injectable</span><span class="p">()</span>
+<span class="k">export</span> <span class="kr">class</span> <span class="nx">AuthGuard</span> <span class="k">implements</span> <span class="nx">CanActivate</span> <span class="p">{</span>
+
+  <span class="kd">constructor</span><span class="p">(</span><span class="k">private</span> <span class="nx">stormpath</span><span class="err">:</span> <span class="nx">Stormpath</span><span class="p">,</span> <span class="k">private</span> <span class="nx">router</span><span class="err">:</span> <span class="nx">Router</span><span class="p">)</span> <span class="p">{}</span>
+
+  <span class="nx">canActivate</span><span class="p">(</span><span class="nx">route</span><span class="err">:</span> <span class="nx">ActivatedRouteSnapshot</span><span class="p">,</span> <span class="nx">state</span><span class="err">:</span> <span class="nx">RouterStateSnapshot</span><span class="p">)</span><span class="err">:</span> <span class="kr">boolean</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">stormpath</span><span class="p">.</span><span class="nx">getToken</span><span class="p">())</span> <span class="p">{</span>
+      <span class="k">return</span> <span class="kc">true</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="k">this</span><span class="p">.</span><span class="nx">router</span><span class="p">.</span><span class="nx">navigate</span><span class="p">([</span><span class="s1">'/home'</span><span class="p">]);</span>
+    <span class="k">return</span> <span class="kc">false</span><span class="p">;</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre>
+</div>
+
+<p>The Stormpath Angular SDK will automatically send <code class="highlighter-rouge">Authorization</code> headers to <code class="highlighter-rouge">http://localhost:8080/*</code> based on the <code class="highlighter-rouge">autoAuthorizedUris</code> setting in <code class="highlighter-rouge">app.module.ts</code>. You can modify <code class="highlighter-rouge">beer.service.ts</code> so this URL isn’t duplicated.</p>
+
+<div class="language-typescript highlighter-rouge"><pre class="highlight"><code><span class="k">import</span> <span class="p">{</span> <span class="nx">Injectable</span> <span class="p">}</span> <span class="k">from</span> <span class="s1">'@angular/core'</span><span class="p">;</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">Http</span><span class="p">,</span> <span class="nx">Response</span> <span class="p">}</span> <span class="k">from</span> <span class="s1">'@angular/http'</span><span class="p">;</span>
+<span class="k">import</span> <span class="s1">'rxjs/add/operator/map'</span><span class="p">;</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">Observable</span> <span class="p">}</span> <span class="k">from</span> <span class="s1">'rxjs'</span><span class="p">;</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">StormpathConfiguration</span> <span class="p">}</span> <span class="k">from</span> <span class="s1">'angular-stormpath'</span><span class="p">;</span>
+
+<span class="err">@</span><span class="nx">Injectable</span><span class="p">()</span>
+<span class="k">export</span> <span class="kr">class</span> <span class="nx">BeerService</span> <span class="p">{</span>
+
+  <span class="kd">constructor</span><span class="p">(</span><span class="k">private</span> <span class="nx">http</span><span class="err">:</span> <span class="nx">Http</span><span class="p">,</span> <span class="k">private</span> <span class="nx">config</span><span class="err">:</span> <span class="nx">StormpathConfiguration</span><span class="p">)</span> <span class="p">{</span>
+  <span class="p">}</span>
+
+  <span class="nx">getAll</span><span class="p">()</span><span class="err">:</span> <span class="nx">Observable</span><span class="o">&lt;</span><span class="kr">any</span><span class="o">&gt;</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">http</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">config</span><span class="p">.</span><span class="nx">endpointPrefix</span> <span class="o">+</span> <span class="s1">'/good-beers'</span><span class="p">)</span>
+      <span class="p">.</span><span class="nx">map</span><span class="p">((</span><span class="na">response</span><span class="p">:</span> <span class="nx">Response</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="nx">response</span><span class="p">.</span><span class="nx">json</span><span class="p">());</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre>
+</div>
+
+<p>The template for the <code class="highlighter-rouge">&lt;sp-authport&gt;</code> component expects Bootstrap’s CSS to be available. To add Bootstrap, install it from the <code class="highlighter-rouge">client</code> directory using npm.</p>
+
+<div class="language-bash highlighter-rouge"><pre class="highlight"><code>npm install --save bootstrap@3.3.7
+</code></pre>
+</div>
+
+<p>Add a reference to Bootstrap’s CSS file in <code class="highlighter-rouge">client/.angular-cli.json</code>:</p>
+
+<div class="language-json highlighter-rouge"><pre class="highlight"><code><span class="s2">"styles"</span><span class="err">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+  </span><span class="s2">"styles.css"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"../node_modules/bootstrap/dist/css/bootstrap.min.css"</span><span class="w">
+</span><span class="p">]</span><span class="err">,</span><span class="w">
+</span></code></pre>
+</div>
+<p>Make sure your app is started (with <code class="highlighter-rouge">mvn spring-boot:run</code> in the <code class="highlighter-rouge">server</code> directory, and <code class="highlighter-rouge">ng serve</code> in the <code class="highlighter-rouge">client</code> directory) and navigate to http://localhost:4200. You should see a login screen like the one below and see the same post-login screen as you did with OIDC.</p>
+
+<p><strong>NOTE:</strong> If you still see the OIDC login screen, it’s because PWAs often get “stuck” in your browser. In Chrome Developer Tools, navigate to the <strong>Application</strong> tab &gt; <strong>Clear storage</strong> and click <strong>Clear selected</strong> at the bottom. Or just open an incognito window.</p>
+
+<p><img src="/assets/blog/angular-pwa-auth/angular-sp-login-462ba2834e4c5b0834c55f59ba0e3dfc05856bc7aac966cab1b1aaebb2cff782.png" alt="Stormpath Angular SDK Login" width="800" /></p>
+
+<p>There are a couple of issues I found when writing this tutorial. Please subscribe to the following GitHub issues to be notified when they’re fixed.</p>
+
+<ul>
+  <li><a href="https://github.com/stormpath/stormpath-sdk-java/issues/1335">Registering a new user doesn’t work with Angular</a></li>
+  <li><a href="https://github.com/stormpath/stormpath-sdk-java/issues/1336">OAuth invalid credentials results in “Invalid grant” as error</a></li>
+</ul>
+
+<h2 id="deploy-to-cloud-foundry">Deploy to Cloud Foundry</h2>
+
+<p>Now it’s time for one of the coolest places on the internet - <em>production!</em></p>
+
+<p>Before you deploy these applications to production, I recommend stopping both. That way there’s no resource contention for file access. Commit your changes to the <code class="highlighter-rouge">stormpath</code> branch and checkout the <code class="highlighter-rouge">master</code> branch.</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>git commit -a -m "Integrate Stormpath Angular SDK for login"
+git checkout master
+</code></pre>
+</div>
+
+<p>To deploy this app to Cloud Foundry, you’ll need to</p>
+
+<ol>
+  <li>Update <code class="highlighter-rouge">deploy.sh</code> in the root directory to set environment variables</li>
+  <li>Set the URL of the server in a different file</li>
+  <li>Add <code class="highlighter-rouge">pushstate: enabled</code> to  <code class="highlighter-rouge">Staticfile</code>.</li>
+</ol>
+
+<p>You can see the <a href="https://github.com/oktadeveloper/okta-spring-boot-angular-pwa-example/blob/master/deploy.sh">modified deploy.sh on GitHub</a>. Copy the contents of this file on top of your existing <code class="highlighter-rouge">deploy.sh</code>.</p>
+
+<blockquote>
+  <p><strong>NOTE:</strong> An alternative to enabling push state is to use hashes in the URL. To do this, you can pass in <code class="highlighter-rouge"><span class="p">{</span><span class="err">useHash:</span><span class="w"> </span><span class="err">true</span><span class="p">}</span></code> when creating your routes.</p>
+
+  <div class="language-typescript highlighter-rouge"><pre class="highlight"><code><span class="nx">RouterModule</span><span class="p">.</span><span class="nx">forRoot</span><span class="p">(</span><span class="nx">appRoutes</span><span class="p">,</span> <span class="p">{</span><span class="na">useHash</span><span class="p">:</span> <span class="kc">true</span><span class="p">})</span>
+</code></pre>
+  </div>
+
+  <p>Unfortunately, this causes the redirect login button to fail since there are now two hashes in the URL.</p>
+</blockquote>
+
+<p><a href="https://docs.cloudfoundry.org/cf-cli/install-go-cli.html">Install the Cloud Foundry CLI</a>, then log into <a href="http://run.pivotal.io/">Pivotal Web Services</a>.</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>cf login -a api.run.pivotal.io
+</code></pre>
+</div>
+
+<p>Run <code class="highlighter-rouge">./deploy.sh</code> and watch the magic happen!</p>
+
+<p>If you navigate to the client’s URL after deploying, you’ll see an error like the following in Chrome’s console.</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>XMLHttpRequest cannot load https://dev-158606.oktapreview.com/.well-known/openid-configuration. 
+No 'Access-Control-Allow-Origin' header is present on the requested resource. Origin 
+'https://pwa-client-phototopographical-subcurrent.cfapps.io' is therefore not allowed access.
+</code></pre>
+</div>
+
+<p>To fix this, modify the Trusted Origins on Okta (under <strong>API</strong> &gt; <strong>Trusted Origins</strong>) to have your client’s URL (e.g. <code class="highlighter-rouge">https://pwa-client-phototopographical-subcurrent.cfapps.io</code>).</p>
+
+<p><img src="/assets/blog/angular-pwa-auth/add-cf-origin-c6bc12f60e457ce0acaf993e1a7333fbe704beb4755954ef5ed6f7e1201daa64.png" alt="Add Trusted Origin" width="600" /></p>
+
+<p>This makes the cross-origin error go away, but it will cause an invalid request issue when you try to log in with the first login button.</p>
+
+<p><img src="/assets/blog/angular-pwa-auth/invalid-redirect-c34a59e8e0e3b73d6f9c3dc754fc126f343f31330aa36b36c5f0b7f59bc9fd66.png" alt="Invalid Redirect URI" width="800" /></p>
+
+<p>To fix this, modify the <code class="highlighter-rouge">Redirect URIs</code> for your “Angular PWA” OIDC application in Okta.</p>
+
+<p><img src="/assets/blog/angular-pwa-auth/oidc-settings-cf-redirect-f41d70d1ad2f7b2bf93a61b98a3c48e21ad28b8d1cc2f39aa6be3b29741336f1.png" alt="OIDC Redirect URIs" width="800" /></p>
+
+<p>Now both login techniques should work as expected and you should be able to load the beer list from your Spring Boot app.</p>
+
+<p><img src="/assets/blog/angular-pwa-auth/production-beer-list-069b194886b120a85778b16d84dbf6b0ac07898da64444ec57a2006658cadc72.png" alt="Production Beer List" width="800" /></p>
+
+<p>The first time I ran <a href="https://developers.google.com/web/tools/lighthouse/">Lighthouse</a> on this application, I was surprised to see it received a PWA score of 91. When I deployed this application previously, it <a href="/blog/2017/05/09/progressive-web-applications-with-angular-and-spring-boot#cloud-foundry">received a 98</a>.</p>
+
+<p><img src="/assets/blog/angular-pwa-auth/lighthouse-without-512-53c26aca1ffcb6b6c4f5775a4d6c1594938ad97266322a2d9a575c96e9447c17.png" alt="Lighthouse Score, first attempt" width="800" /></p>
+
+<p>I followed the advice in the report and added the following in the list of <code class="highlighter-rouge">icons</code> in  <code class="highlighter-rouge">client/src/assets/icons/manifest.json</code>.</p>
+
+<div class="language-json highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"src"</span><span class="p">:</span><span class="w"> </span><span class="s2">"/assets/icons/android-chrome-512x512.png"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"sizes"</span><span class="p">:</span><span class="w"> </span><span class="s2">"512x512"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"image/png"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+</div>
+
+<p>When I re-deployed (by running <code class="highlighter-rouge">./deploy.sh</code> again) with this change, I received a 100. <em>Huzzah!</em></p>
+
+<p><em>NOTE: I did have to update the Trusted Origins and Redirect URIs in Okta after I redeployed since <code class="highlighter-rouge">deploy.sh</code> picks a random name to deploy to each time.</em></p>
+
+<p><img src="/assets/blog/angular-pwa-auth/lighthouse-with-512-a08671fa9feaf85a724c34f0862e01602f746e029652b348c10f8b21cd66e803.png" alt="Lighthouse Perfect Score" width="800" /></p>
+
+<h2 id="happy-authenticating">Happy Authenticating!</h2>
+
+<p>You can find the source code associated with this article <a href="https://github.com/oktadeveloper/okta-spring-boot-angular-pwa-example">on GitHub</a>. If you find any bugs, please <a href="https://github.com/oktadeveloper/okta-spring-boot-angular-pwa-example/issues/new">file an issue</a>, or post your question to the <a href="https://devforum.okta.com/">Okta Developer Forums</a>. Of course, you can always <a href="https://twitter.com/mraible">ping me on Twitter</a> too.</p>
+
+<p>This article showed you how to develop a Spring Boot backend, and lock it down with Okta. You learned how to develop an Angular frontend and use OpenID Connect to get an access token and securely communicate with the backend. You also learned how you can use the Stormpath Angular SDK to do the same thing. Finally, you saw how to deploy everything to Cloud Foundry and get a Lighthouse PWA score of 100.</p>
+
+<p>To learn more about PWAs, check out some recent tutorials I wrote:</p>
+
+<ul>
+  <li><a href="/blog/2017/05/09/progressive-web-applications-with-angular-and-spring-boot">Build Your First Progressive Web Application with Angular and Spring Boot</a></li>
+  <li><a href="/blog/2017/05/17/develop-a-mobile-app-with-ionic-and-spring-boot">Tutorial: Develop a Mobile App With Ionic and Spring Boot</a></li>
+  <li><a href="https://scotch.io/tutorials/the-ultimate-guide-to-progressive-web-applications">The Ultimate Guide to Progressive Web Applications</a></li>
+</ul>
+
+<p>There’s also a number of excellent resources by Google and Smashing Magazine:</p>
+
+<ul>
+  <li>Addy Osmani at Google I/O ‘17: <a href="https://youtu.be/aCMbSyngXB4">Production Progressive Web Apps With JavaScript Frameworks</a></li>
+  <li>Google’s <a href="https://developers.google.com/web/progressive-web-apps/">Progressive Web Apps</a> homepage, <a href="https://codelabs.developers.google.com/codelabs/your-first-pwapp/">step-by-step code lab</a>, and <a href="https://developers.google.com/web/ilt/pwa/">instructor-led PWA training</a>.</li>
+  <li><a href="https://www.smashingmagazine.com/2016/08/a-beginners-guide-to-progressive-web-apps/">A Beginner’s Guide To Progressive Web Apps</a></li>
+</ul>
+
+
+	</div>
+	
+</article>
+
+		
+</section>
+
+		
+	</div><footer class="Footer">
+    <div class="Wrap">
+
+        <div class="Row">
+
+            <div class="Column--3 Column--medium-6 Column--xSmall-12">
+
+                <a class="Logo" href="https://www.okta.com/" target="_blank" rel="noopener noreferrer">
+                    <img src="https://developer.okta.com/sites/all/themes/developer/images/logo-footer.png" alt="Okta">
+                    Visit okta.com
+                </a>
+
+            </div>
+
+            <div class="Column--3 Column--medium-12 Column--xSmall-12">
+
+                <h4>Social</h4>
+                <ul class="Footer-links Footer-links--social">
+                    <li><a class="Footer-links--github" target="_blank" rel="noopener noreferrer" href="http://github.com/oktadeveloper">Github</a></li>
+                    <li><a class="Footer-links--twitter" target="_blank" rel="noopener noreferrer" href="http://twitter.com/OktaDev">Twitter</a></li>
+                    <li><a class="Footer-links--forum" target="_blank" rel="noopener noreferrer" href="https://devforum.okta.com/">Forum</a></li>
+                    <li><a class="Footer-links--rss" target="_blank" rel="noopener noreferrer" href="http://feeds.feedburner.com/OktaBlog">RSS Blog</a></li>
+                </ul>
+            </div>
+
+            <div class="Column--3 Column--medium-6 Column--small-12">
+                <h4>More Info</h4>
+                <ul class="Footer-links">
+                    <li><a target="_blank" href="https://developer.okta.com/integrate-with-okta/">Integrate with Okta</a></li>
+                    <li><a href="/blog/">Blog</a></li>
+                    <li><a href="/docs/platform-release-notes/platform-release-notes.html">Release Notes</a></li>
+                    <li><a href="/3rd_party_notices/">3rd Party Notices</a></li>
+                </ul>
+            </div>
+
+            <div class="Column--3 Column--medium-6 Column--small-12">
+                <h4>Contact &amp; Legal</h4>
+                <ul class="Footer-links">
+                    <li><a href="https://developer.okta.com/contact/">Contact Sales</a></li>
+                    <li><a target="_blank" rel="noopener noreferrer" href="mailto:developers@okta.com">Contact Support</a></li>
+                    <li><a href="https://developer.okta.com/terms/">Terms &amp; Conditions</a></li>
+                    <li><a href="https://developer.okta.com/privacy/">Privacy Policy</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</footer>
+
+    <script type="text/javascript" src="/assets/master-0365dd27cf276cb2a15c0a43906ca592538204cf1ad4557547bf4e50609b411e.js"></script>
+    <script type="text/javascript" src="/assets/myOkta-911cbafbbe079b7a5522d9cbe15bd2a5f44e1582531e88393934bec69f97696b.js"></script>
+    
+    
+    
+    
+      <script type="text/javascript" src="/assets/blog-6e32dad27404131cc8630a5282264bed2ab4c08c91ac86fa496b75c53aa4f681.js"></script>
+    
+
+  <!-- START Post Footer -->
+  
+  <!-- START Google Tag Manager -->
+  <!-- https://support.google.com/tagmanager/answer/6103696?hl=en -->
+  <noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-TJ45R6" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+  <!-- END Google Tag Manager -->
+  <!-- START Google Remarketing Tag -->
+  <script type="text/javascript">
+    /* <![CDATA[ */
+    var google_conversion_id = 1006913831;
+    var google_custom_params = window.google_tag_params;
+    var google_remarketing_only = true;
+    /* ]]> */
+  </script>
+  <div style="display:none;"><script type="text/javascript" src="//www.googleadservices.com/pagead/conversion.js"></script></div>
+  <noscript><div style="display:inline;"><img height="1" width="1" style="border-style:none;" alt="" src="//googleads.g.doubleclick.net/pagead/viewthroughconversion/1006913831/?value=0&amp;guid=ON&amp;script=0"></div></noscript>
+  <!-- END Google Remarketing Tag -->
+  <!-- START Crazy Egg Tracking -->
+  <script type="text/javascript">
+    setTimeout(function(){var a=document.createElement("script");
+    var b=document.getElementsByTagName("script")[0];
+    a.src=document.location.protocol+"//script.crazyegg.com/pages/scripts/0021/9333.js?"+Math.floor(new Date().getTime()/3600000);
+    a.async=true;a.type="text/javascript";b.parentNode.insertBefore(a,b)}, 1);
+  </script>
+  <!-- END Crazy Egg Tracking -->
+
+  <!-- END Post Footer -->
+</body>
+</html>

@@ -1,0 +1,1144 @@
+<!doctype html>
+<!--[if lt IE 7 ]> <html class="ie6 no-flexbox"> <![endif]-->
+<!--[if IE 7 ]>    <html class="ie7 no-flexbox"> <![endif]-->
+<!--[if IE 8 ]>    <html class="ie8 no-flexbox"> <![endif]-->
+<!--[if IE 9 ]>    <html class="ie9 no-flexbox"> <![endif]-->
+<!--[if IE 10 ]>    <html class="ie10 no-flexbox"> <![endif]-->
+<!--[if (gt IE 10)|!(IE)]><!--> <html class="modern wf-loading" lang="en"> <!--<![endif]-->
+  <head>
+  <script>
+    var searchDomain = 'https://developer.okta.com';
+    var isProduction = window.location.hostname === 'developer.okta.com';
+    if (isProduction) {
+      // TypeKit
+      (function(d) {
+        var config = {
+          kitId: 'jff5neq',
+          scriptTimeout: 3000,
+          async: true
+        },
+        h=d.documentElement,t=setTimeout(function(){h.className=h.className.replace(/bwf-loadingb/g,"")+" wf-inactive";},config.scriptTimeout),tk=d.createElement("script"),f=false,s=d.getElementsByTagName("script")[0],a;h.className+=" wf-loading";tk.src='https://use.typekit.net/'+config.kitId+'.js';tk.async=true;tk.onload=tk.onreadystatechange=function(){a=this.readyState;if(f||a&&a!="complete"&&a!="loaded")return;f=true;clearTimeout(t);try{Typekit.load(config)}catch(e){}};s.parentNode.insertBefore(tk,s)
+      })(document);
+
+      // Google analytics
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+              (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+              m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+      ga('create', 'UA-15777010-3', 'auto');
+      ga('send', 'pageview');
+
+      // START Google Tag Manager
+      (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+      new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+      j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+      '//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+      })(window,document,'script','dataLayer','GTM-TJ45R6');
+      // END Google Tag Manager
+    }
+	</script>
+  <meta charset="utf-8">
+  <meta http-equiv="x-ua-compatible" content="IE=edge,chrome=1">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+ 	
+
+  <link type="text/css" rel="stylesheet" href="https://developer.okta.com/sites/all/themes/developer/css/master.css" media="all" />
+  <meta class="swiftype" name="title" data-type="string" content="Build a Secure Notes Application with Kotlin, TypeScript, and Okta | Okta Developer" />
+  <meta class="swiftype" name="summary" data-type="string" content="I love my job as a developer advocate at Okta. I get to learn a lot, write interesting blog posts and create example apps with cool technologies like Kotlin,..." />
+
+  <link type="text/css" rel="stylesheet" href="/assets/animate-ec43d72c3ed45e08a460b8a2966d8dba6006aebfa0530935c3973fa493a8771f.css">
+  <link type="text/css" rel="stylesheet" href="/assets/okta-a96df4c9d48b78b618e1d541f46f7137d73d40653571e020c1ad59edd7915c60.css">
+  
+  
+  <title>Build a Secure Notes Application with Kotlin, TypeScript, and Okta | Okta Developer</title>
+  <meta name="description" content="I love my job as a developer advocate at Okta. I get to learn a lot, write interesting blog posts and create example apps with cool technologies like Kotlin,...">
+  <link rel="canonical" href="https://developer.okta.com/blog/2017/09/19/build-a-secure-notes-application-with-kotlin-typescript-and-okta"  data-proofer-ignore>
+  <link rel="alternate" type="application/rss+xml" title="Okta Developer" href="https://developer.okta.com/feed.xml"><!-- GA -->
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+  <link rel="manifest" href="/manifest.json">
+  <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#21313a">
+  <meta name="theme-color" content="#ffffff">
+</head>
+
+  
+    <body id="blog">
+	
+
+
+
+
+<header class="Header is-fixed">
+
+  <div class="Wrap">
+
+    <a class="Logo" href="https://developer.okta.com">
+      <svg version="1.1" id="OktaLogo" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 431.9 151.4" style="enable-background:new 0 0 431.9 151.4;" xml:space="preserve"><g><g><g><path d="M102.2,41.4c-21,0-38.1,17.1-38.1,38.1s17.1,38.1,38.1,38.1s38.1-17.1,38.1-38.1l0,0C140.3,58.5,123.2,41.4,102.2,41.4z M102.2,98.5c-10.5,0-19-8.5-19-19s8.5-19,19-19s19,8.5,19,19c0.1,10.5-8.4,19-18.9,19.1C102.3,98.6,102.2,98.6,102.2,98.5L102.2,98.5z"/><path d="M169.1,92.3c0-1.9,1.5-3.4,3.4-3.4c0.9,0,1.8,0.4,2.4,1c9.5,9.7,25.3,26.3,25.4,26.4c0.4,0.5,0.8,0.8,1.4,0.9l1.6,0.2h17.2c1.8,0,3.3-1.4,3.4-3.2c0-0.8-0.3-1.5-0.8-2.2l-28.6-29.2l-1.5-1.5c-3.2-3.9-2.9-5.4,0.8-9.3l22.6-25.1c1.1-1.4,0.8-3.5-0.6-4.6c-0.6-0.4-1.3-0.7-2-0.7h-17c-0.6,0.2-1.1,0.5-1.5,0.9L175,64.4c-1.3,1.4-3.4,1.5-4.8,0.2c-0.7-0.6-1.1-1.5-1.1-2.5V18.9c0-1.7-1.3-3-3-3c-0.1,0-0.2,0-0.3,0h-12.7c-2.2,0-3.3,1.5-3.3,2.8v95.8c0,2.2,1.8,2.8,3.3,2.8h12.7c1.7,0.1,3.2-1.2,3.3-2.9c0,0,0,0,0,0V92.3z"/><path d="M273,114l-1.4-12.8c-0.2-1.7-1.7-2.9-3.4-2.7c0,0,0,0-0.1,0l-2.9,0.2c-10.1,0-18.5-7.9-19-18c0-0.3,0-0.7,0-1V64.2c-0.1-2,1.5-3.6,3.5-3.7c0,0,0,0,0,0h17c1.7-0.1,3.1-1.5,3-3.2c0,0,0-0.1,0-0.1v-12c0-2.3-1.5-3.6-2.8-3.6h-17.1c-1.9,0.1-3.5-1.5-3.6-3.4c0,0,0,0,0,0V18.9c-0.1-1.7-1.5-3.1-3.2-3c0,0-0.1,0-0.1,0h-12.7c-1.6-0.1-3,1.1-3.1,2.7c0,0.1,0,0.1,0,0.2c0,0,0,61.7,0,62c0.5,21,17.9,37.6,38.9,37c1.4,0,2.9-0.2,4.3-0.3C272,117.2,273.2,115.7,273,114z"/></g><path d="M364.7,98c-10.8,0-12.4-3.8-12.4-18.3l0,0V44.8c0-1.8-1.4-3.2-3.2-3.2c0,0-0.1,0-0.1,0h-12.8c-1.8,0-3.2,1.4-3.3,3.2v1.6C314.6,36,291.3,42.5,281,60.8c-10.4,18.3-3.9,41.6,14.4,51.9c14,7.9,31.4,6.2,43.5-4.2c3.6,5.5,9.3,9.1,18.3,9.1c1.5,0,9.7,0.3,9.7-3.5v-13.6C367,99.2,366,98.1,364.7,98z M314.2,98.6c-10.5,0-19-8.5-19-19s8.5-19,19-19s19,8.5,19,19l0,0C333.2,90.1,324.7,98.6,314.2,98.6z"/></g><path d="M19.4,74c2.2-1.9,4.1-4.1,5.7-6.6c3.5-5.3,5.4-11.5,5.2-17.9V27c0-4.9,0.9-8.4,2.7-10.5c1.8-2.1,4.8-3,9.2-3h12.6c1.2,0,2.1-0.9,2.2-2.1l0,0V2.2C57,1,56,0,54.8,0c0,0,0,0,0,0H41.5c-7.8,0-12.9,2.1-18,7.6s-7.1,12.3-7.1,21.7v14.2c0,2.2-0.1,4-0.2,5.7v2.2c-0.5,3.2-1.8,6.2-3.6,8.9C9.4,64.7,5.1,70.9,0.9,74l0,0l-0.3,0.3l0,0l-0.2,0.3H0.2v0.3l0,0c-0.1,0.3-0.1,0.7,0,1l0,0v0.3h0.1l0.2,0.3l0,0l0.3,0.3l0,0c4.2,3.1,8.5,9.3,11.3,13.7c1.8,2.7,3.1,5.7,3.6,8.9v2.2c0.1,1.6,0.2,3.5,0.2,5.7v14.3c0,9.4,2.4,16.7,7.1,21.7s10.2,7.6,18,7.6h13.8c1.2,0,2.2-1,2.2-2.2V140l0,0c0-1.2-1-2.2-2.2-2.2H42.2c-4.4,0-7.5-1-9.2-3s-2.7-5.6-2.7-10.5v-22.4c0.2-6.4-1.7-12.6-5.2-17.9c-1.6-2.5-3.5-4.7-5.7-6.6l0,0c-0.9-0.7-1.1-2-0.4-2.9C19.2,74.3,19.3,74.2,19.4,74L19.4,74z"/><path d="M412.5,74c-2.2-1.9-4.1-4.1-5.7-6.6c-3.5-5.3-5.4-11.5-5.2-17.9V27c0-4.9-0.9-8.4-2.7-10.5s-4.8-3-9.2-3h-12.6c-1.2,0-2.2-1-2.2-2.2c0,0,0,0,0,0l0,0V2.2c0-1.2,1-2.2,2.2-2.2c0,0,0,0,0,0h13.4c7.8,0,12.9,2.1,18,7.6s7.1,12.3,7.1,21.7v14.2c0,2.2,0.1,4,0.2,5.7v2.2c0.5,3.2,1.8,6.2,3.6,8.9c2.8,4.5,7.1,10.7,11.3,13.7l0,0l0.3,0.3l0,0l0.2,0.3h0.1v0.3l0,0c0.1,0.3,0.1,0.7,0,1l0,0v0.3h-0.1l-0.2,0.3l0,0l-0.3,0.3l0,0c-4.2,3.1-8.5,9.3-11.3,13.7c-1.8,2.7-3.1,5.7-3.6,8.9v2.2c-0.1,1.6-0.2,3.5-0.2,5.7v14.3c0,9.4-2.4,16.7-7.1,21.7s-10.2,7.6-18,7.6h-13.4c-1.2,0-2.2-1-2.2-2.2c0,0,0,0,0,0V140l0,0c0-1.2,1-2.2,2.2-2.2l0,0h12.7c4.4,0,7.5-1,9.2-3s2.7-5.6,2.7-10.5v-22.4c-0.2-6.3,1.6-12.6,5.1-17.9c1.6-2.5,3.5-4.7,5.7-6.6l0,0c0.9-0.7,1.1-2,0.4-2.9C412.7,74.3,412.6,74.2,412.5,74L412.5,74z"/></g></svg>
+    </a>
+
+    <nav class="Header-nav PrimaryNav">
+      <ul class="menu">
+        <li class="first leaf">
+          <a href="https://developer.okta.com/product/">Product</a>
+        </li>
+        <li class="leaf">
+          <a href="https://developer.okta.com/pricing/">Pricing</a>
+        </li>
+        <li class="leaf">
+          <a href="/blog/" class="active">Blog</a>
+        </li>
+        <li class="leaf">
+          <a href="/documentation/">Docs</a>
+        </li>
+        <li class="last expanded">
+          <span class="nolink">Support</span>
+          <ul class="menu">
+            <li class="first leaf"><a href="https://devforum.okta.com/">Okta Developer Forums</a></li>
+            <li class="last leaf"><a href="mailto:developers@okta.com">developers@okta.com</a></li>
+          </ul>
+        </li>
+      </ul>
+      <a class="PrimaryNav-toggle" href="#">
+        <svg width="20px" height="20px" viewBox="0 0 20 20" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+            <g class="MenuIcon" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="round">
+                <path d="M1,16 L19,16" class="MenuIcon-line1" stroke="#FFFFFF" stroke-width="2"></path>
+                <path d="M1,4 L19,4" class="MenuIcon-line2" stroke="#FFFFFF" stroke-width="2"></path>
+                <path d="M1,10 L19,10" class="MenuIcon-line3" stroke="#FFFFFF" stroke-width="2"></path>
+                <path d="M1,10 L19,10" class="MenuIcon-line4" stroke="#FFFFFF" stroke-width="2"></path>
+            </g>
+        </svg>
+        <svg class="CloseIcon" width="16px" height="16px" viewBox="0 0 16 16" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+          <g id="ALl-Boards" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+            <g id="Desktop" transform="translate(-915.000000, -235.000000)" fill="#FFFFFF">
+              <g id="Search-bar-Active" transform="translate(30.000000, 26.000000)">
+                <polygon id="Icon/Cross" points="901 210.6 899.4 209 893 215.4 886.6 209 885 210.6 891.4 217 885 223.4 886.6 225 893 218.6 899.4 225 901 223.4 894.6 217"></polygon>
+              </g>
+            </g>
+          </g>
+        </svg>
+      </a>
+
+      <div class="PrimaryNav-cta">
+        <a target="_blank" rel="noopener noreferrer" href="https://login.okta.com/?SAMLRequest=fc%2B7CsJAEAXQXvAflu1NNJUMeZBGELTx1a%2FrYILJTtyZGD%2FfSBRiYzlw77lMnD3rSj3Qc0ku0YtgrhU6S5fSXRN9PKxmS52l00nMpq6iBvJWCrfDe4ss6vStRe9aDzmGIZfo1jsgwyWDMzUyiIV9vt1AH4XGk5ClSvewUgMNa%2BYW%2FVj5jxhm9NLP67QQaSAMu64L6CYmsFSHlnzT4ZlLwTgcL6Sf8%2FeX9AU%3Dhttps://login.okta.com/?SAMLRequest=fc%2B7CsJAEAXQXvAflu1NNJUMeZBGELTx1a%2FrYILJTtyZGD%2FfSBRiYzlw77lMnD3rSj3Qc0ku0YtgrhU6S5fSXRN9PKxmS52l00nMpq6iBvJWCrfDe4ss6vStRe9aDzmGIZfo1jsgwyWDMzUyiIV9vt1AH4XGk5ClSvewUgMNa%2BYW%2FVj5jxhm9NLP67QQaSAMu64L6CYmsFSHlnzT4ZlLwTgcL6Sf8%2FeX9AU%3D" class="Button--redOutline">Login</a>
+        <a href="https://developer.okta.com/signup/" class="Button--red">Sign up</a>
+      </div>
+
+      <a class="SearchIcon" href="#"></a>
+      <form id="form_search" class="SearchBar Formisimo_clocked_69929" method="get" action="https://developer.okta.com/search/" name="form_search" __bizdiag="-784164280" __biza="WJ__">
+        <input type="text" name="stq" autocomplete="off" id="st-search-input-auto" class="st-search-input" placeholder="Search">
+        <input type="submit" name="submit" value="GO">
+      </form>
+
+    </nav>
+
+  </div>
+
+</header>
+
+	<div class="page-content">
+		
+
+
+
+
+
+
+<section class="Blog is-single">
+		
+	<div class="Blog-social">
+		
+		<a href="https://github.com/mraible" target="_blank"><i class="fa fa-github"></i></a>
+		
+		
+		<a href="https://twitter.com/mraible" target="_blank"><i class="fa fa-twitter"></i></a>
+		
+		
+		
+		<a href="http://raibledesigns.com" target="_blank"><i class="fa fa-external-link"></i></a>
+		
+	</div>
+	
+	
+
+<article class="BlogPost">
+	
+	<header class="BlogPost-header">
+	
+		<time class="BlogPost-date" datetime="2017-09-19">September 19, 2017</time>
+		
+		<h1 class="BlogPost-title">
+			
+			Build a Secure Notes Application with Kotlin, TypeScript, and Okta
+			
+		</h1>
+		
+		<div class="BlogPost-attribution">
+			
+				<img src="/assets/avatar-matt_raible-9974af6192eb1753b7137c8fff0a2c6e6bb9736a2517986cb5cc50bb040e83d4.jpg" alt="avatar-matt_raible.jpg" class="BlogPost-avatar">
+			
+			<span class="BlogPost-author">Matt Raible</span>
+		</div>
+	
+	</header>
+	
+	<div class="BlogPost-content">
+		
+	<p>I love my job as a developer advocate at Okta. I get to learn a lot, write interesting blog posts and create example apps with cool technologies like Kotlin, TypeScript, Spring Boot, and Angular, which I’m about to demo. When it comes to writing Hello World apps with authentication, I can whip one out in a few minutes. That isn’t because I’m a particularly good programmer, it’s because the languages, frameworks, tools, and platforms available to developers are impressive.</p>
+
+<p>In this tutorial, I’ll show you how to write a note-taking application in Kotlin and TypeScript - two of the <a href="http://redmonk.com/sogrady/2017/06/08/language-rankings-6-17/">fastest growing languages of 2017</a>. You’ll use two popular frameworks, Spring Boot and Angular, to make development super fast. Along the way, I’ll show you a few tips and tricks from my favorite development IDE, IntelliJ IDEA. Finally, we’ll leverage Angular CLI and start.spring.io to generate application skeletons.</p>
+
+<p>As with any good example app, you’ll want to deploy it securely, so I’ll show you how to do that using Okta’s Identity APIs and our new Spring Boot starter. The Okta Spring Boot starter allows you to make your API into a resource server that can read and validate access tokens sent to it. The diagram below shows how a resource server fits into an OAuth architecture.</p>
+
+<p><img src="/assets/blog/kotlin-secure-notes/oauth-actors-f18225a2aeb504ddf47dc5a79ae282847e1630ad1a2ce081ab8602d1223ee685.png" alt="OAuth 2.0 Actors" width="800" class="center-image" /></p>
+
+<p>Phew! That’s a lot of buzzwords for one article. Don’t worry, I’ve confirmed it’s possible to develop this app in even less time than it takes to deploy and secure it. And developing is fun, so let’s get started!</p>
+
+<h2 id="build-a-notes-api-with-kotlin-and-spring-boot">Build a Notes API with Kotlin and Spring Boot</h2>
+
+<p>Start building the API for your application by navigating your favorite browser to <a href="https://start.spring.io">start.spring.io</a>. Select Kotlin as your language, and choose Web, H2, JPA, Rest Repositories, and DevTools. You’ll notice in the screenshot below that I changed the group and artifact names too. Please use these same names, so your package and class names match this tutorial.</p>
+
+<p><img src="/assets/blog/kotlin-secure-notes/start.spring.io-3e26738b99ad0210f53ca6c6f528fe44f72af11e3a7650e4bc3167f4892f0996.png" alt="start.spring.io" class="center-image" /></p>
+
+<p>Click <strong>Generate Project</strong> and expand the zip file after downloading. If you don’t have IntelliJ IDEA installed, now’s a good time to <a href="https://www.jetbrains.com/idea/">try it out</a>. It’s a great IDE for Java, Kotlin, Groovy, TypeScript, JavaScript, HTML, and Sass/CSS. One of its killer features is the ability to copy/paste Java code into a Kotlin class and have it auto-converted to Kotlin on-the-fly!</p>
+
+<p>You can also turn on automatic-compilation-on-save and reap the benefits of Spring Boot’s DevTools that restart your app when files change.</p>
+
+<ul>
+  <li>Go to <strong>Preferences &gt; Build, Execution, Deployment &gt; Compiler</strong> and enable “Build project automatically”</li>
+  <li>Open the Action window:
+    <ul>
+      <li>Linux: CTRL+SHIFT+A</li>
+      <li>Mac: SHIFT+COMMAND+A</li>
+      <li>Windows: CTRL+ALT+SHIFT+/</li>
+    </ul>
+  </li>
+  <li>Enter <strong>Registry…</strong> and enable <code class="highlighter-rouge">compiler.automake.allow.when.app.running</code></li>
+</ul>
+
+<p>Start by creating a new <code class="highlighter-rouge">Note</code> entity in <code class="highlighter-rouge">src/main/kotlin/com/okta/developer/notes/NotesApplication.kt</code>.</p>
+
+<div class="language-kotlin highlighter-rouge"><pre class="highlight"><code><span class="n">@SpringBootApplication</span>
+<span class="kd">class</span> <span class="nc">NotesApplication</span>
+
+<span class="k">fun</span> <span class="nf">main</span><span class="p">(</span><span class="n">args</span><span class="p">:</span> <span class="n">Array</span><span class="p">&lt;</span><span class="n">String</span><span class="p">&gt;)</span> <span class="p">{</span>
+    <span class="n">SpringApplication</span><span class="p">.</span><span class="n">run</span><span class="p">(</span><span class="n">NotesApplication</span><span class="o">::</span><span class="k">class</span><span class="p">.</span><span class="n">java</span><span class="p">,</span> <span class="p">*</span><span class="n">args</span><span class="p">)</span>
+<span class="p">}</span>
+
+<span class="n">@Entity</span>
+<span class="kd">data class</span> <span class="nc">Note</span><span class="p">(</span><span class="n">@Id</span> <span class="n">@GeneratedValue</span> <span class="kd">var</span> <span class="py">id</span><span class="p">:</span> <span class="n">Long</span><span class="p">?</span> <span class="p">=</span> <span class="k">null</span><span class="p">,</span>
+                <span class="kd">var</span> <span class="py">text</span><span class="p">:</span> <span class="n">String</span><span class="p">?</span> <span class="p">=</span> <span class="k">null</span><span class="p">,</span> <span class="kd">var</span> <span class="py">user</span><span class="p">:</span> <span class="n">String</span><span class="p">?</span> <span class="p">=</span> <span class="k">null</span><span class="p">)</span>
+</code></pre>
+</div>
+
+<p>Kotlin’s <a href="https://kotlinlang.org/docs/reference/data-classes.html">data classes</a> are built to hold data. By adding the <code class="highlighter-rouge">data</code> keyword, your class will get <code class="highlighter-rouge">equals()</code>, <code class="highlighter-rouge">hashCode()</code>, <code class="highlighter-rouge">toString()</code>, and a <code class="highlighter-rouge">copy()</code> function. The <code class="highlighter-rouge">Type? = null</code> syntax means the arguments are nullable when creating a new instance of the class.</p>
+
+<p>Create a <code class="highlighter-rouge">NotesRepository</code> for persisting the data in your notes. Add the following lines of code just below your <code class="highlighter-rouge">Note</code> entity.</p>
+
+<div class="language-kotlin highlighter-rouge"><pre class="highlight"><code><span class="n">@RepositoryRestResource</span>
+<span class="kd">interface</span> <span class="nc">NotesRepository</span> <span class="p">:</span> <span class="n">JpaRepository</span><span class="p">&lt;</span><span class="n">Note</span><span class="p">,</span> <span class="n">Long</span><span class="p">&gt;</span>
+</code></pre>
+</div>
+
+<p>The <code class="highlighter-rouge">extends</code> syntax differs from Java and is a lot more concise (a colon instead of <code class="highlighter-rouge">extends</code>).</p>
+
+<p>Create a <code class="highlighter-rouge">DataInitializer</code> bean that populates the database with some default data on startup.</p>
+
+<div class="language-kotlin highlighter-rouge"><pre class="highlight"><code><span class="n">@Component</span>
+<span class="kd">class</span> <span class="nc">DataInitializer</span><span class="p">(</span><span class="kd">val</span> <span class="py">repository</span><span class="p">:</span> <span class="n">NotesRepository</span><span class="p">)</span> <span class="p">:</span> <span class="n">ApplicationRunner</span> <span class="p">{</span>
+
+    <span class="n">@Throws</span><span class="p">(</span><span class="n">Exception</span><span class="o">::</span><span class="k">class</span><span class="p">)</span>
+    <span class="k">override</span> <span class="k">fun</span> <span class="nf">run</span><span class="p">(</span><span class="n">args</span><span class="p">:</span> <span class="n">ApplicationArguments</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">listOf</span><span class="p">(</span><span class="s">"Note 1"</span><span class="p">,</span> <span class="s">"Note 2"</span><span class="p">,</span> <span class="s">"Note 3"</span><span class="p">).</span><span class="n">forEach</span> <span class="p">{</span>
+            <span class="n">repository</span><span class="p">.</span><span class="n">save</span><span class="p">(</span><span class="n">Note</span><span class="p">(</span><span class="n">text</span> <span class="p">=</span> <span class="n">it</span><span class="p">,</span> <span class="n">user</span> <span class="p">=</span> <span class="s">"user"</span><span class="p">))</span>
+        <span class="p">}</span>
+        <span class="n">repository</span><span class="p">.</span><span class="n">findAll</span><span class="p">().</span><span class="n">forEach</span> <span class="p">{</span> <span class="n">println</span><span class="p">(</span><span class="n">it</span><span class="p">)</span> <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre>
+</div>
+
+<p>This example shows constructor injection, but Kotlin also <a href="https://stackoverflow.com/questions/35479631/how-to-use-spring-annotations-like-autowired-in-kotlin">supports field injection with <code class="highlighter-rouge">@Autowired</code></a>.</p>
+
+<p>Start the app in your IDE using its Spring Boot tooling, or from the command line using <code class="highlighter-rouge">mvnw spring-boot:run</code>. If you’re on a Mac or Linux, you might need to use <code class="highlighter-rouge">./mvnw spring-boot:run</code>.</p>
+
+<p>You should see the following printed to your console on startup.</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>Note(id=1, text=Note 1, user=user)
+Note(id=2, text=Note 2, user=user)
+Note(id=3, text=Note 3, user=user)
+</code></pre>
+</div>
+
+<p>I recommend <a href="https://httpie.org/">installing HTTPie</a>, a command-line HTTP client that is much easier to use than <code class="highlighter-rouge">curl</code>. Use HTTPie to query the <code class="highlighter-rouge">/notes</code> endpoint provided by Spring Data REST’s <code class="highlighter-rouge">@RepositoryRestResource</code>.</p>
+
+<div class="language-bash highlighter-rouge"><pre class="highlight"><code>http localhost:8080/notes
+</code></pre>
+</div>
+
+<p>The result will look like the following screenshot.</p>
+
+<p><img src="/assets/blog/kotlin-secure-notes/http-notes-f0f10307a3b7d30e0a3d3251886acf24ce60c2c3d93ca81150e396f95ab0e29f.png" alt="http request screenshot" class="center-image" /></p>
+
+<p>Create a <code class="highlighter-rouge">HomeController</code> (in the same <code class="highlighter-rouge">NotesApplication.kt</code> file) and use it to filter notes by the currently logged-in user.</p>
+
+<div class="language-kotlin highlighter-rouge"><pre class="highlight"><code><span class="k">import</span> <span class="nn">java.security.Principal</span>
+
+<span class="n">@RestController</span>
+<span class="kd">class</span> <span class="nc">HomeController</span><span class="p">(</span><span class="kd">val</span> <span class="py">repository</span><span class="p">:</span> <span class="n">NotesRepository</span><span class="p">)</span> <span class="p">{</span>
+
+    <span class="n">@GetMapping</span><span class="p">(</span><span class="s">"/"</span><span class="p">)</span>
+    <span class="k">fun</span> <span class="nf">home</span><span class="p">(</span><span class="n">principal</span><span class="p">:</span> <span class="n">Principal</span><span class="p">):</span> <span class="n">List</span><span class="p">&lt;</span><span class="n">Note</span><span class="p">&gt;</span> <span class="p">{</span>
+        <span class="n">println</span><span class="p">(</span><span class="s">"Fetching notes for user: ${principal.name}"</span><span class="p">)</span>
+        <span class="kd">val</span> <span class="py">notes</span> <span class="p">=</span> <span class="n">repository</span><span class="p">.</span><span class="n">findAllByUser</span><span class="p">(</span><span class="n">principal</span><span class="p">.</span><span class="n">name</span><span class="p">)</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">notes</span><span class="p">.</span><span class="n">isEmpty</span><span class="p">())</span> <span class="p">{</span>
+            <span class="k">return</span> <span class="n">listOf</span><span class="p">()</span>
+        <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+            <span class="k">return</span> <span class="n">notes</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre>
+</div>
+
+<p>The <code class="highlighter-rouge">findAllByUser()</code> method doesn’t exist on <code class="highlighter-rouge">NotesRepository</code>, so you’ll need to add it. Thanks to Spring Data JPA, all you need to do is add the method definition to the interface, and it will handle generating the finder method in the implementation.</p>
+
+<div class="language-kotlin highlighter-rouge"><pre class="highlight"><code><span class="kd">interface</span> <span class="nc">NotesRepository</span> <span class="p">:</span> <span class="n">JpaRepository</span><span class="p">&lt;</span><span class="n">Note</span><span class="p">,</span> <span class="n">Long</span><span class="p">&gt;</span> <span class="p">{</span>
+    <span class="k">fun</span> <span class="nf">findAllByUser</span><span class="p">(</span><span class="n">name</span><span class="p">:</span> <span class="n">String</span><span class="p">):</span> <span class="n">List</span><span class="p">&lt;</span><span class="n">Note</span><span class="p">&gt;</span>
+<span class="p">}</span>
+</code></pre>
+</div>
+
+<p>If you try to access this new endpoint, you’ll get an error that the <code class="highlighter-rouge">Principal</code> parameter is not defined.</p>
+
+<div class="language-bash highlighter-rouge"><pre class="highlight"><code><span class="gp">$ </span>http localhost:8080
+HTTP/1.1 500
+Connection: close
+Content-Type: application/json;charset<span class="o">=</span>UTF-8
+Date: Fri, 11 Aug 2017 07:36:46 GMT
+Transfer-Encoding: chunked
+</code></pre>
+</div>
+<div class="language-json highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
+    </span><span class="nt">"error"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Internal Server Error"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"exception"</span><span class="p">:</span><span class="w"> </span><span class="s2">"java.lang.IllegalArgumentException"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Parameter specified as non-null is null: method 
+                com.okta.developer.notes.HomeController.home, parameter principal"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"path"</span><span class="p">:</span><span class="w"> </span><span class="s2">"/"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"status"</span><span class="p">:</span><span class="w"> </span><span class="mi">500</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"timestamp"</span><span class="p">:</span><span class="w"> </span><span class="mi">1502437006005</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+</div>
+
+<p>Spring MVC throws a 500 error because it has no knowledge of a logged-in user. Add the Spring Security starter to your <code class="highlighter-rouge">pom.xml</code> to enable security in your application.</p>
+
+<div class="language-xml highlighter-rouge"><pre class="highlight"><code><span class="nt">&lt;dependency&gt;</span>
+    <span class="nt">&lt;groupId&gt;</span>org.springframework.boot<span class="nt">&lt;/groupId&gt;</span>
+    <span class="nt">&lt;artifactId&gt;</span>spring-boot-starter-security<span class="nt">&lt;/artifactId&gt;</span>
+<span class="nt">&lt;/dependency&gt;</span>
+</code></pre>
+</div>
+
+<p>Restart the Maven process to download this new dependency and add it to the classpath.</p>
+
+<p>If you navigate to http://localhost:8080 in your browser, you will see a basic authentication dialog. The command line will yield similar results.</p>
+
+<div class="language-json highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
+    </span><span class="nt">"error"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Unauthorized"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Full authentication is required to access this resource"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"path"</span><span class="p">:</span><span class="w"> </span><span class="s2">"/"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"status"</span><span class="p">:</span><span class="w"> </span><span class="mi">401</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"timestamp"</span><span class="p">:</span><span class="w"> </span><span class="mi">1502437281185</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+</div>
+
+<p>The Spring Security starter creates a default user with username “user” and a password that changes every time you start the application. You can find this password in your terminal, similar to the one below.</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>Using default security password: 103c55b4-2760-4830-9bca-a06a87d384f9
+</code></pre>
+</div>
+
+<p>Change the user’s password so it’s the same every time by adding the following to <code class="highlighter-rouge">src/main/resources/application.properties</code>.</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>security.user.password=kotlin is fun!
+</code></pre>
+</div>
+
+<p>After the change, verify that this HTTPie command works.</p>
+
+<div class="language-bash highlighter-rouge"><pre class="highlight"><code><span class="gp">$ </span>http --auth user:<span class="s1">'kotlin is fun!'</span> localhost:8080
+HTTP/1.1 200
+Cache-Control: no-cache, no-store, max-age<span class="o">=</span>0, must-revalidate
+Content-Type: application/json;charset<span class="o">=</span>UTF-8
+Date: Fri, 11 Aug 2017 07:47:10 GMT
+Expires: 0
+Pragma: no-cache
+Strict-Transport-Security: max-age<span class="o">=</span>31536000 ; includeSubDomains
+Transfer-Encoding: chunked
+X-Content-Type-Options: nosniff
+X-Frame-Options: DENY
+X-XSS-Protection: 1; <span class="nv">mode</span><span class="o">=</span>block
+</code></pre>
+</div>
+<div class="language-json highlighter-rouge"><pre class="highlight"><code><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"text"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Note 1"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"text"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Note 2"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"text"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Note 3"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+</span><span class="p">]</span><span class="w">
+</span></code></pre>
+</div>
+
+<p>The reason you don’t see the <code class="highlighter-rouge">user</code> property in the JSON above is because I added a <code class="highlighter-rouge">@JsonIgnore</code> annotation to the <code class="highlighter-rouge">Note</code> class.</p>
+
+<div class="language-kotlin highlighter-rouge"><pre class="highlight"><code><span class="k">import</span> <span class="nn">com.fasterxml.jackson.annotation.JsonIgnore</span>
+
+<span class="n">@Entity</span>
+<span class="kd">data class</span> <span class="nc">Note</span><span class="p">(</span><span class="n">@Id</span> <span class="n">@GeneratedValue</span> <span class="kd">var</span> <span class="py">id</span><span class="p">:</span> <span class="n">Long</span><span class="p">?</span> <span class="p">=</span> <span class="k">null</span><span class="p">,</span>
+                <span class="kd">var</span> <span class="py">text</span><span class="p">:</span> <span class="n">String</span><span class="p">?</span> <span class="p">=</span> <span class="k">null</span><span class="p">,</span>
+                <span class="n">@JsonIgnore</span> <span class="kd">var</span> <span class="py">user</span><span class="p">:</span> <span class="n">String</span><span class="p">?</span> <span class="p">=</span> <span class="k">null</span><span class="p">)</span>
+</code></pre>
+</div>
+
+<p>To automatically add the username to a note when it’s created, add a <code class="highlighter-rouge">RepositoryEventHandler</code> that is invoked before creating the record.</p>
+
+<div class="language-kotlin highlighter-rouge"><pre class="highlight"><code><span class="n">@Component</span>
+<span class="n">@RepositoryEventHandler</span><span class="p">(</span><span class="n">Note</span><span class="o">::</span><span class="k">class</span><span class="p">)</span>
+<span class="kd">class</span> <span class="nc">AddUserToNote</span> <span class="p">{</span>
+
+    <span class="n">@HandleBeforeCreate</span>
+    <span class="k">fun</span> <span class="nf">handleCreate</span><span class="p">(</span><span class="n">note</span><span class="p">:</span> <span class="n">Note</span><span class="p">)</span> <span class="p">{</span>
+        <span class="kd">val</span> <span class="py">username</span><span class="p">:</span> <span class="n">String</span> <span class="p">=</span>  <span class="n">SecurityContextHolder</span><span class="p">.</span><span class="n">getContext</span><span class="p">().</span><span class="n">getAuthentication</span><span class="p">().</span><span class="n">name</span>
+        <span class="n">println</span><span class="p">(</span><span class="s">"Creating note: $note with user: $username"</span><span class="p">)</span>
+        <span class="n">note</span><span class="p">.</span><span class="n">user</span> <span class="p">=</span> <span class="n">username</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre>
+</div>
+
+<p>After adding the handler, saving your files, and waiting for your API to restart, you’ll be able to run the following commands with wild success.</p>
+
+<div class="language-bash highlighter-rouge"><pre class="highlight"><code>http --auth user:<span class="s1">'kotlin is fun!'</span> POST localhost:8080/notes <span class="nv">text</span><span class="o">=</span><span class="s1">'Note 4'</span>
+http --auth user:<span class="s1">'kotlin is fun!'</span> PUT localhost:8080/notes/4 <span class="nv">text</span><span class="o">=</span><span class="s1">'Remember the Milk!'</span>
+http --auth user:<span class="s1">'kotlin is fun!'</span> DELETE localhost:8080/notes/4
+</code></pre>
+</div>
+
+<p>Your API works and is locked down, but you still only have one user. Rather than spending time setting up database tables and encrypting passwords, you can use Okta’s APIs to manage, authenticate, and authorize your users securely. To get started with  Okta, <a href="https://developer.okta.com/signup/">sign up for a  free-forever developer account</a>.</p>
+
+<h2 id="the-okta-spring-boot-starter">The Okta Spring Boot Starter</h2>
+
+<p>Okta provides a Spring Boot starter that integrates with Spring Security and its OAuth 2.0 support. Replace the Spring Security starter with the Okta Spring Security starter.</p>
+
+<div class="language-xml highlighter-rouge"><pre class="highlight"><code><span class="nt">&lt;dependency&gt;</span>
+      <span class="nt">&lt;groupId&gt;</span>com.okta.spring<span class="nt">&lt;/groupId&gt;</span>
+      <span class="nt">&lt;artifactId&gt;</span>okta-spring-security-starter<span class="nt">&lt;/artifactId&gt;</span>
+      <span class="nt">&lt;version&gt;</span>0.1.0<span class="nt">&lt;/version&gt;</span>
+<span class="nt">&lt;/dependency&gt;</span>    
+</code></pre>
+</div>
+
+<p>You’ll also need to upgrade the OAuth library used by Spring Security to the latest version.</p>
+
+<div class="language-xml highlighter-rouge"><pre class="highlight"><code><span class="nt">&lt;dependencyManagement&gt;</span>
+    <span class="nt">&lt;dependencies&gt;</span>
+        <span class="nt">&lt;dependency&gt;</span>
+            <span class="nt">&lt;groupId&gt;</span>org.springframework.security.oauth<span class="nt">&lt;/groupId&gt;</span>
+            <span class="nt">&lt;artifactId&gt;</span>spring-security-oauth2<span class="nt">&lt;/artifactId&gt;</span>
+            <span class="nt">&lt;version&gt;</span>2.2.0.RELEASE<span class="nt">&lt;/version&gt;</span>
+        <span class="nt">&lt;/dependency&gt;</span>
+    <span class="nt">&lt;/dependencies&gt;</span>
+<span class="nt">&lt;/dependencyManagement&gt;</span>
+</code></pre>
+</div>
+
+<p>After modifying your <code class="highlighter-rouge">pom.xml</code>, configure it with your Okta settings.</p>
+
+<h3 id="get-your-authorization-server-settings">Get Your Authorization Server Settings</h3>
+
+<p>Log in to your Okta account and navigate to <strong>API</strong> &gt; <strong>Authorization Servers</strong> in the top menu. There should be a “default” server listed with an audience and issuer URI specified.</p>
+
+<p><img src="/assets/blog/kotlin-secure-notes/default-as-server-82e7b3f72bd071f7460254d1dcf288051e9008c530b69466f8808915b69359e9.png" alt="Default AS" width="700" class="center-image" /></p>
+
+<p>Copy and paste the Issuer URL and audience values into <code class="highlighter-rouge">application.properties</code>:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>okta.oauth.issuer={issuer}
+okta.oauth.audience={audience}
+</code></pre>
+</div>
+
+<p>The Okta Spring Security starter expects you to have a custom claim called <code class="highlighter-rouge">groups</code>. Define a custom claim with these values:</p>
+
+<ul>
+  <li>Name: <code class="highlighter-rouge">groups</code></li>
+  <li>Value Type: <code class="highlighter-rouge">Groups</code></li>
+  <li>Filter: <code class="highlighter-rouge">Regex</code> - <code class="highlighter-rouge">.*</code></li>
+</ul>
+
+<h3 id="add-an-openid-connect-application">Add an OpenID Connect Application</h3>
+
+<p>Navigate to <strong>Applications</strong> and click on <strong>Add Application</strong>. Select Single Page App (SPA) and click <strong>Next</strong>. Give the application a name (e.g. “My OIDC App”) and specify <code class="highlighter-rouge">http://localhost:4200</code> as a Login redirect URI. Your upcoming Angular client will use this value. Click <strong>Done</strong> and admire your handiwork!</p>
+
+<p><img src="/assets/blog/kotlin-secure-notes/my-oidc-app-c43537ed7e9849672107f00ceff8577ed3e6a11390a3184286a827e96f30a524.png" alt="My OIDC App" width="700" class="center-image" /></p>
+
+<p>Copy the Client ID value into <code class="highlighter-rouge">application.properties</code>.</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>okta.oauth.clientId={client-id}
+</code></pre>
+</div>
+
+<p>Before you start building the Angular client, add a CORS filter to <code class="highlighter-rouge">NotesApplication</code> so cross-origin requests can succeed.</p>
+
+<div class="language-kotlin highlighter-rouge"><pre class="highlight"><code><span class="kd">class</span> <span class="nc">NotesApplication</span> <span class="p">{</span>
+
+    <span class="n">@Bean</span>
+    <span class="k">fun</span> <span class="nf">simpleCorsFilter</span><span class="p">():</span> <span class="n">FilterRegistrationBean</span> <span class="p">{</span>
+        <span class="kd">val</span> <span class="py">source</span> <span class="p">=</span> <span class="n">UrlBasedCorsConfigurationSource</span><span class="p">()</span>
+        <span class="kd">val</span> <span class="py">config</span> <span class="p">=</span> <span class="n">CorsConfiguration</span><span class="p">()</span>
+        <span class="n">config</span><span class="p">.</span><span class="n">allowCredentials</span> <span class="p">=</span> <span class="k">true</span>
+        <span class="n">config</span><span class="p">.</span><span class="n">allowedOrigins</span> <span class="p">=</span> <span class="n">listOf</span><span class="p">(</span><span class="s">"http://localhost:4200"</span><span class="p">)</span>
+        <span class="n">config</span><span class="p">.</span><span class="n">allowedMethods</span> <span class="p">=</span> <span class="n">listOf</span><span class="p">(</span><span class="s">"*"</span><span class="p">);</span>
+        <span class="n">config</span><span class="p">.</span><span class="n">allowedHeaders</span> <span class="p">=</span> <span class="n">listOf</span><span class="p">(</span><span class="s">"*"</span><span class="p">)</span>
+        <span class="n">source</span><span class="p">.</span><span class="n">registerCorsConfiguration</span><span class="p">(</span><span class="s">"/**"</span><span class="p">,</span> <span class="n">config</span><span class="p">)</span>
+        <span class="kd">val</span> <span class="py">bean</span> <span class="p">=</span> <span class="n">FilterRegistrationBean</span><span class="p">(</span><span class="n">CorsFilter</span><span class="p">(</span><span class="n">source</span><span class="p">))</span>
+        <span class="n">bean</span><span class="p">.</span><span class="n">order</span> <span class="p">=</span> <span class="n">Ordered</span><span class="p">.</span><span class="n">HIGHEST_PRECEDENCE</span>
+        <span class="k">return</span> <span class="n">bean</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="k">fun</span> <span class="nf">main</span><span class="p">(</span><span class="n">args</span><span class="p">:</span> <span class="n">Array</span><span class="p">&lt;</span><span class="n">String</span><span class="p">&gt;)</span> <span class="p">{</span>
+    <span class="n">SpringApplication</span><span class="p">.</span><span class="n">run</span><span class="p">(</span><span class="n">NotesApplication</span><span class="o">::</span><span class="k">class</span><span class="p">.</span><span class="n">java</span><span class="p">,</span> <span class="p">*</span><span class="n">args</span><span class="p">)</span>
+<span class="p">}</span>
+<span class="err">…</span>
+</code></pre>
+</div>
+
+<p>You can see the final version of this file <a href="https://github.com/oktadeveloper/okta-kotlin-typescript-notes-example/blob/master/server/src/main/kotlin/com/okta/developer/notes/NotesApplication.kt">on GitHub</a>.</p>
+
+<p>I hope you’ve enjoyed this quick tour of Kotlin and saw how its concise syntax can be a lot of fun. In May 2017, Kotlin was announced as an <a href="https://blog.jetbrains.com/kotlin/2017/05/kotlin-on-android-now-official/">officially supported language</a> on Android, giving the language quite a bit of attention. You can learn more about Kotlin on <a href="https://kotlinlang.org/">kotlinlang.org</a>.</p>
+
+<h2 id="build-an-angular-ui-with-typescript-and-angular-cli">Build an Angular UI with TypeScript and Angular CLI</h2>
+
+<p><a href="https://cli.angular.io/">Angular CLI</a> is a convenient way to create Angular applications. It generates a project skeleton, installs all the dependencies, and configures Webpack to compile TypeScript and optimize for production.</p>
+
+<p>Install Angular CLI using <a href="https://yarnpkg.com">Facebook’s Yarn</a>.</p>
+
+<div class="language-bash highlighter-rouge"><pre class="highlight"><code>yarn add global @angular/cli
+</code></pre>
+</div>
+
+<p>Or using npm (<code class="highlighter-rouge">npm install -g @angular/cli</code>).</p>
+
+<p>Then create a new project using its <code class="highlighter-rouge">ng</code> command.</p>
+
+<div class="language-bash highlighter-rouge"><pre class="highlight"><code>ng new client
+</code></pre>
+</div>
+
+<p>It takes a minute or two to install all the dependencies. After it finishes, you can run <code class="highlighter-rouge">ng serve</code> to view the app, or <code class="highlighter-rouge">ng test</code> to run unit tests. If you want to verify that the end-to-end tests pass, run <code class="highlighter-rouge">ng e2e</code>.</p>
+
+<p>Create a service and component using the <code class="highlighter-rouge">generate</code> (alias: <code class="highlighter-rouge">g</code>) command. You can use <code class="highlighter-rouge">s</code> as an alias for <code class="highlighter-rouge">service</code> and <code class="highlighter-rouge">c</code> as an alias for <code class="highlighter-rouge">component</code>.</p>
+
+<div class="language-bash highlighter-rouge"><pre class="highlight"><code>ng g service note
+ng g component note-list
+ng g c note-detail
+ng g c login
+</code></pre>
+</div>
+
+<p>The service files are generated in <code class="highlighter-rouge">client/src/app</code> by default, but I like to move them into a <code class="highlighter-rouge">shared/{service}</code> directory.</p>
+
+<div class="language-bash highlighter-rouge"><pre class="highlight"><code>mkdir -p src/app/shared/note
+mv src/app/note.service.<span class="k">*</span> src/app/shared/note
+</code></pre>
+</div>
+
+<p>At this point, I’d recommend opening your Angular client in IntelliJ IDEA. It has excellent TypeScript support and will auto-import classes for you, just like it does for Java and Kotlin.</p>
+
+<p>Add the <code class="highlighter-rouge">NoteService</code> to the <code class="highlighter-rouge">providers</code> list in <code class="highlighter-rouge">client/src/app/app.module.ts</code>. Notice that Angular CLI has already added the generated components to the <code class="highlighter-rouge">declarations</code> list.</p>
+
+<div class="language-typescript highlighter-rouge"><pre class="highlight"><code><span class="err">@</span><span class="nx">NgModule</span><span class="p">({</span>
+  <span class="na">declarations</span><span class="p">:</span> <span class="p">[</span>
+    <span class="nx">AppComponent</span><span class="p">,</span>
+    <span class="nx">NoteListComponent</span><span class="p">,</span>
+    <span class="nx">NoteDetailComponent</span><span class="p">,</span>
+    <span class="nx">LoginComponent</span>
+  <span class="p">],</span>
+  <span class="na">imports</span><span class="p">:</span> <span class="p">[</span>
+    <span class="nx">BrowserModule</span>
+  <span class="p">],</span>
+  <span class="na">providers</span><span class="p">:</span> <span class="p">[</span><span class="nx">NoteService</span><span class="p">],</span>
+  <span class="na">bootstrap</span><span class="p">:</span> <span class="p">[</span><span class="nx">AppComponent</span><span class="p">]</span>
+<span class="p">})</span>
+<span class="k">export</span> <span class="kr">class</span> <span class="nx">AppModule</span> <span class="p">{</span>
+<span class="p">}</span>
+</code></pre>
+</div>
+
+<p>Modify <code class="highlighter-rouge">client/src/app/shared/note/note.service.ts</code> to have a <code class="highlighter-rouge">getAll()</code> method that talks to the API.</p>
+
+<div class="language-typescript highlighter-rouge"><pre class="highlight"><code><span class="k">import</span> <span class="p">{</span> <span class="nx">Injectable</span> <span class="p">}</span> <span class="k">from</span> <span class="s1">'@angular/core'</span><span class="p">;</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">Observable</span> <span class="p">}</span> <span class="k">from</span> <span class="s1">'rxjs/Observable'</span><span class="p">;</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">HttpClient</span> <span class="p">}</span> <span class="k">from</span> <span class="s1">'@angular/common/http'</span><span class="p">;</span>
+
+<span class="err">@</span><span class="nx">Injectable</span><span class="p">()</span>
+<span class="k">export</span> <span class="kr">class</span> <span class="nx">NoteService</span> <span class="p">{</span>
+  <span class="k">public</span> <span class="nx">API</span> <span class="o">=</span> <span class="s1">'http://localhost:8080'</span><span class="p">;</span>
+  <span class="k">public</span> <span class="nx">NOTE_API</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">API</span> <span class="o">+</span> <span class="s1">'/notes'</span><span class="p">;</span>
+
+  <span class="kd">constructor</span><span class="p">(</span><span class="k">private</span> <span class="nx">http</span><span class="err">:</span> <span class="nx">HttpClient</span><span class="p">)</span> <span class="p">{</span>
+  <span class="p">}</span>
+
+  <span class="nx">getAll</span><span class="p">()</span><span class="err">:</span> <span class="nx">Observable</span><span class="o">&lt;</span><span class="kr">any</span><span class="o">&gt;</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">http</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">API</span><span class="p">);</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre>
+</div>
+
+<p><strong>TIP:</strong> If you’re using IntelliJ IDEA, I recommend you install the <a href="https://plugins.jetbrains.com/plugin/8395-angular-2-typescript-live-templates">Angular 2 TypeScript Live Templates</a>. They drastically reduce the amount of code you have to write with <a href="https://github.com/MrZaYaC/ng2-webstorm-snippets/blob/master/README.md#typescript-angular-snippets">several code-generation shortcuts</a>.</p>
+
+<p>In <code class="highlighter-rouge">client/src/app/notes-list/note-list.component.ts</code>, add a dependency on <code class="highlighter-rouge">NoteService</code> and get all the user’s notes when the component loads.</p>
+
+<div class="language-typescript highlighter-rouge"><pre class="highlight"><code><span class="k">import</span> <span class="p">{</span> <span class="nx">NoteService</span> <span class="p">}</span> <span class="k">from</span> <span class="s1">'../shared/note/note.service'</span><span class="p">;</span>
+
+<span class="k">export</span> <span class="kr">class</span> <span class="nx">NoteListComponent</span> <span class="k">implements</span> <span class="nx">OnInit</span> <span class="p">{</span>
+  <span class="nl">notes</span><span class="p">:</span> <span class="nb">Array</span><span class="o">&lt;</span><span class="kr">any</span><span class="o">&gt;</span><span class="p">;</span>
+
+  <span class="kd">constructor</span><span class="p">(</span><span class="k">private</span> <span class="nx">noteService</span><span class="err">:</span> <span class="nx">NoteService</span><span class="p">)</span> <span class="p">{</span>
+  <span class="p">}</span>
+
+  <span class="nx">ngOnInit</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">noteService</span><span class="p">.</span><span class="nx">getAll</span><span class="p">().</span><span class="nx">subscribe</span><span class="p">(</span><span class="nx">data</span> <span class="o">=&gt;</span> <span class="p">{</span>
+      <span class="k">this</span><span class="p">.</span><span class="nx">notes</span> <span class="o">=</span> <span class="nx">data</span><span class="p">;</span>
+    <span class="p">},</span> <span class="nx">error</span> <span class="o">=&gt;</span> <span class="nx">console</span><span class="p">.</span><span class="nx">error</span><span class="p">(</span><span class="nx">error</span><span class="p">));</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre>
+</div>
+
+<p>Replace the HTML in <code class="highlighter-rouge">client/src/app/note-list/note-list.component.html</code> with a few lines to render the notes list.</p>
+
+<div class="language-html highlighter-rouge"><pre class="highlight"><code><span class="nt">&lt;h2&gt;</span>Notes List<span class="nt">&lt;/h2&gt;</span>
+<span class="nt">&lt;div</span> <span class="err">*</span><span class="na">ngFor=</span><span class="s">"let note of notes"</span><span class="nt">&gt;</span>
+  {{note.text}}
+<span class="nt">&lt;/div&gt;</span>
+</code></pre>
+</div>
+
+<p>If you try to make things work at this point, you won’t be able to access your API because it expects you to send an access token in an <code class="highlighter-rouge">Authorization</code> header.</p>
+
+<p>Install the Okta Sign-In Widget to authenticate using the “My OIDC” app you already created and get an access token.</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>yarn add @okta/okta-signin-widget
+</code></pre>
+</div>
+
+<p>Create an <code class="highlighter-rouge">OktaAuthService</code> that can be used to render the Sign-In Widget and handle authentication. The following TypeScript code should be in <code class="highlighter-rouge">client/src/app/shared/okta/okta.service.ts</code>. Be sure to replace <code class="highlighter-rouge"><span class="p">{</span><span class="err">dev-id</span><span class="p">}</span></code>, <code class="highlighter-rouge"><span class="p">{</span><span class="err">client-id</span><span class="p">}</span></code>, and <code class="highlighter-rouge"><span class="p">{</span><span class="err">as-server-url</span><span class="p">}</span></code> with values appropriate for your Okta application and authorization server.</p>
+
+<div class="language-typescript highlighter-rouge"><pre class="highlight"><code><span class="k">import</span> <span class="p">{</span> <span class="nx">Injectable</span> <span class="p">}</span> <span class="k">from</span> <span class="s1">'@angular/core'</span><span class="p">;</span>
+<span class="k">import</span> <span class="o">*</span> <span class="k">as</span> <span class="nx">OktaSignIn</span> <span class="k">from</span> <span class="s1">'@okta/okta-signin-widget/dist/js/okta-sign-in.min.js'</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">ReplaySubject</span> <span class="p">}</span> <span class="k">from</span> <span class="s1">'rxjs/ReplaySubject'</span><span class="p">;</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">Observable</span> <span class="p">}</span> <span class="k">from</span> <span class="s1">'rxjs/Observable'</span><span class="p">;</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">Router</span> <span class="p">}</span> <span class="k">from</span> <span class="s1">'@angular/router'</span><span class="p">;</span>
+
+<span class="err">@</span><span class="nx">Injectable</span><span class="p">()</span>
+<span class="k">export</span> <span class="kr">class</span> <span class="nx">OktaAuthService</span> <span class="p">{</span>
+
+  <span class="nx">signIn</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">OktaSignIn</span><span class="p">({</span>
+    <span class="na">baseUrl</span><span class="p">:</span> <span class="s1">'https://dev-{dev-id}.oktapreview.com'</span><span class="p">,</span>
+    <span class="na">clientId</span><span class="p">:</span> <span class="s1">'{client-id}'</span><span class="p">,</span>
+    <span class="na">redirectUri</span><span class="p">:</span> <span class="s1">'http://localhost:4200'</span><span class="p">,</span>
+    <span class="na">authParams</span><span class="p">:</span> <span class="p">{</span>
+      <span class="na">issuer</span><span class="p">:</span> <span class="s1">'{as-server-url}'</span><span class="p">,</span>
+      <span class="na">responseType</span><span class="p">:</span> <span class="p">[</span><span class="s1">'id_token'</span><span class="p">,</span> <span class="s1">'token'</span><span class="p">],</span>
+      <span class="na">scopes</span><span class="p">:</span> <span class="p">[</span><span class="s1">'openid'</span><span class="p">,</span> <span class="s1">'email'</span><span class="p">,</span> <span class="s1">'profile'</span><span class="p">]</span>
+    <span class="p">}</span>
+  <span class="p">});</span>
+
+  <span class="k">private</span> <span class="na">userSource</span><span class="p">:</span> <span class="nx">ReplaySubject</span><span class="o">&lt;</span><span class="kr">any</span><span class="o">&gt;</span><span class="p">;</span>
+  <span class="k">public</span> <span class="nx">user</span><span class="na">$</span><span class="p">:</span> <span class="nx">Observable</span><span class="o">&lt;</span><span class="kr">any</span><span class="o">&gt;</span><span class="p">;</span>
+
+  <span class="kd">constructor</span><span class="p">(</span><span class="k">private</span> <span class="na">router</span><span class="p">:</span> <span class="nx">Router</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">userSource</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">ReplaySubject</span><span class="o">&lt;</span><span class="kr">any</span><span class="o">&gt;</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">user$</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">userSource</span><span class="p">.</span><span class="nx">asObservable</span><span class="p">();</span>
+  <span class="p">}</span>
+
+  <span class="nx">isAuthenticated</span><span class="p">()</span> <span class="p">{</span>
+    <span class="c1">// Checks if there is a current accessToken in the TokenManger.</span>
+    <span class="k">return</span> <span class="o">!!</span><span class="k">this</span><span class="p">.</span><span class="nx">signIn</span><span class="p">.</span><span class="nx">tokenManager</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">'accessToken'</span><span class="p">);</span>
+  <span class="p">}</span>
+
+  <span class="nx">login</span><span class="p">(</span><span class="nx">next</span><span class="p">?:</span> <span class="kr">string</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nx">next</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">this</span><span class="p">.</span><span class="nx">router</span><span class="p">.</span><span class="nx">navigate</span><span class="p">([</span><span class="s1">'login'</span><span class="p">,</span> <span class="p">{</span><span class="na">next</span><span class="p">:</span> <span class="nx">next</span><span class="p">}]);</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+      <span class="k">this</span><span class="p">.</span><span class="nx">router</span><span class="p">.</span><span class="nx">navigate</span><span class="p">([</span><span class="s1">'login'</span><span class="p">]);</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+
+  <span class="nx">showLogin</span><span class="p">()</span> <span class="p">{</span>
+    <span class="c1">// Launches the widget and stores the tokens</span>
+    <span class="k">try</span> <span class="p">{</span>
+      <span class="k">this</span><span class="p">.</span><span class="nx">signIn</span><span class="p">.</span><span class="nx">renderEl</span><span class="p">({</span><span class="na">el</span><span class="p">:</span> <span class="s1">'#okta-signin-container'</span><span class="p">},</span> <span class="nx">response</span> <span class="o">=&gt;</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="nx">response</span><span class="p">.</span><span class="nx">status</span> <span class="o">===</span> <span class="s1">'SUCCESS'</span><span class="p">)</span> <span class="p">{</span>
+          <span class="nx">response</span><span class="p">.</span><span class="nx">forEach</span><span class="p">(</span><span class="nx">token</span> <span class="o">=&gt;</span> <span class="p">{</span>
+            <span class="k">if</span> <span class="p">(</span><span class="nx">token</span><span class="p">.</span><span class="nx">idToken</span><span class="p">)</span> <span class="p">{</span>
+              <span class="k">this</span><span class="p">.</span><span class="nx">signIn</span><span class="p">.</span><span class="nx">tokenManager</span><span class="p">.</span><span class="nx">add</span><span class="p">(</span><span class="s1">'idToken'</span><span class="p">,</span> <span class="nx">token</span><span class="p">);</span>
+            <span class="p">}</span>
+            <span class="k">if</span> <span class="p">(</span><span class="nx">token</span><span class="p">.</span><span class="nx">accessToken</span><span class="p">)</span> <span class="p">{</span>
+              <span class="k">this</span><span class="p">.</span><span class="nx">signIn</span><span class="p">.</span><span class="nx">tokenManager</span><span class="p">.</span><span class="nx">add</span><span class="p">(</span><span class="s1">'accessToken'</span><span class="p">,</span> <span class="nx">token</span><span class="p">);</span>
+            <span class="p">}</span>
+          <span class="p">});</span>
+          <span class="k">this</span><span class="p">.</span><span class="nx">userSource</span><span class="p">.</span><span class="nx">next</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">idTokenAsUser</span><span class="p">);</span>
+          <span class="k">this</span><span class="p">.</span><span class="nx">signIn</span><span class="p">.</span><span class="nx">hide</span><span class="p">();</span>
+        <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+          <span class="nx">console</span><span class="p">.</span><span class="nx">error</span><span class="p">(</span><span class="nx">response</span><span class="p">);</span>
+        <span class="p">}</span>
+      <span class="p">});</span>
+    <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">exception</span><span class="p">)</span>  <span class="p">{</span>
+      <span class="c1">// An instance of the widget has already been rendered. Call remove() first.</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+
+  <span class="nx">get</span> <span class="nx">idTokenAsUser</span><span class="p">()</span> <span class="p">{</span>
+    <span class="kd">const</span> <span class="nx">token</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">signIn</span><span class="p">.</span><span class="nx">tokenManager</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">'idToken'</span><span class="p">);</span>
+    <span class="k">return</span> <span class="p">{</span>
+      <span class="na">name</span><span class="p">:</span> <span class="nx">token</span><span class="p">.</span><span class="nx">claims</span><span class="p">.</span><span class="nx">name</span><span class="p">,</span>
+      <span class="na">email</span><span class="p">:</span> <span class="nx">token</span><span class="p">.</span><span class="nx">claims</span><span class="p">.</span><span class="nx">email</span><span class="p">,</span>
+      <span class="na">username</span><span class="p">:</span> <span class="nx">token</span><span class="p">.</span><span class="nx">claims</span><span class="p">.</span><span class="nx">preferred_username</span>
+    <span class="p">};</span>
+  <span class="p">}</span>
+
+  <span class="k">async</span> <span class="nx">logout</span><span class="p">()</span> <span class="p">{</span>
+    <span class="c1">// Terminates the session with Okta and removes current tokens.</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">signIn</span><span class="p">.</span><span class="nx">tokenManager</span><span class="p">.</span><span class="nx">clear</span><span class="p">();</span>
+    <span class="k">await</span> <span class="k">this</span><span class="p">.</span><span class="nx">signIn</span><span class="p">.</span><span class="nx">signOut</span><span class="p">();</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">signIn</span><span class="p">.</span><span class="nx">remove</span><span class="p">();</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">userSource</span><span class="p">.</span><span class="nx">next</span><span class="p">(</span><span class="kc">undefined</span><span class="p">);</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">login</span><span class="p">();</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre>
+</div>
+
+<p><strong>NOTE:</strong> I realize this is quite a bit of code to render a sign-in form. The good news is we’ll be wrapping much of it into an <code class="highlighter-rouge">okta-angular</code> library soon.</p>
+
+<p>Create an <code class="highlighter-rouge">OktaAuthGuard</code> in <code class="highlighter-rouge">client/src/app/shared/okta/okta.guard.ts</code>. You’ll use this to  <em>guard</em> routes so they can’t be activated if the user isn’t authenticated.</p>
+
+<div class="language-typescript highlighter-rouge"><pre class="highlight"><code><span class="k">import</span> <span class="p">{</span> <span class="nx">Injectable</span> <span class="p">}</span> <span class="k">from</span> <span class="s1">'@angular/core'</span><span class="p">;</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">ActivatedRouteSnapshot</span><span class="p">,</span> <span class="nx">CanActivate</span><span class="p">,</span> <span class="nx">RouterStateSnapshot</span> <span class="p">}</span> <span class="k">from</span> <span class="s1">'@angular/router'</span><span class="p">;</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">OktaAuthService</span> <span class="p">}</span> <span class="k">from</span> <span class="s1">'./okta.service'</span><span class="p">;</span>
+
+<span class="err">@</span><span class="nx">Injectable</span><span class="p">()</span>
+<span class="k">export</span> <span class="kr">class</span> <span class="nx">OktaAuthGuard</span> <span class="k">implements</span> <span class="nx">CanActivate</span> <span class="p">{</span>
+  <span class="nx">signIn</span><span class="p">;</span>
+  <span class="nx">authenticated</span><span class="p">;</span>
+
+  <span class="kd">constructor</span><span class="p">(</span><span class="k">private</span> <span class="nx">oktaService</span><span class="err">:</span> <span class="nx">OktaAuthService</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">signIn</span> <span class="o">=</span> <span class="nx">oktaService</span><span class="p">;</span>
+  <span class="p">}</span>
+
+  <span class="nx">canActivate</span><span class="p">(</span><span class="nx">route</span><span class="err">:</span> <span class="nx">ActivatedRouteSnapshot</span><span class="p">,</span> <span class="nx">state</span><span class="err">:</span> <span class="nx">RouterStateSnapshot</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">authenticated</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">oktaService</span><span class="p">.</span><span class="nx">isAuthenticated</span><span class="p">();</span>
+    <span class="k">if</span> <span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">authenticated</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">return</span> <span class="kc">true</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">signIn</span><span class="p">.</span><span class="nx">login</span><span class="p">();</span>
+    <span class="k">return</span> <span class="kc">false</span><span class="p">;</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre>
+</div>
+
+<p>Create an <code class="highlighter-rouge">OktaAuthInterceptor</code> in <code class="highlighter-rouge">client/src/app/shared/okta.interceptor.ts</code> to automatically add an <code class="highlighter-rouge">Authorization</code> header to HTTP requests.</p>
+
+<div class="language-typescript highlighter-rouge"><pre class="highlight"><code><span class="k">import</span> <span class="p">{</span> <span class="nx">Injectable</span> <span class="p">}</span> <span class="k">from</span> <span class="s1">'@angular/core'</span><span class="p">;</span>
+<span class="k">import</span> <span class="p">{</span>
+  <span class="nx">HttpRequest</span><span class="p">,</span>
+  <span class="nx">HttpHandler</span><span class="p">,</span>
+  <span class="nx">HttpEvent</span><span class="p">,</span>
+  <span class="nx">HttpInterceptor</span><span class="p">,</span> <span class="nx">HttpErrorResponse</span><span class="p">,</span> <span class="nx">HttpResponse</span>
+<span class="p">}</span> <span class="k">from</span> <span class="s1">'@angular/common/http'</span><span class="p">;</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">Observable</span> <span class="p">}</span> <span class="k">from</span> <span class="s1">'rxjs/Observable'</span><span class="p">;</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">OktaAuthService</span> <span class="p">}</span> <span class="k">from</span> <span class="s1">'./okta.service'</span><span class="p">;</span>
+<span class="k">import</span> <span class="s1">'rxjs/add/operator/map'</span><span class="p">;</span>
+<span class="k">import</span> <span class="s1">'rxjs/add/operator/catch'</span><span class="p">;</span>
+
+<span class="err">@</span><span class="nx">Injectable</span><span class="p">()</span>
+<span class="k">export</span> <span class="kr">class</span> <span class="nx">OktaAuthInterceptor</span> <span class="k">implements</span> <span class="nx">HttpInterceptor</span> <span class="p">{</span>
+
+  <span class="kd">constructor</span><span class="p">(</span><span class="k">private</span> <span class="nx">oktaService</span><span class="err">:</span> <span class="nx">OktaAuthService</span><span class="p">)</span> <span class="p">{</span>
+  <span class="p">}</span>
+
+  <span class="nx">intercept</span><span class="p">(</span><span class="nx">request</span><span class="err">:</span> <span class="nx">HttpRequest</span><span class="o">&lt;</span><span class="kr">any</span><span class="o">&gt;</span><span class="p">,</span> <span class="nx">next</span><span class="err">:</span> <span class="nx">HttpHandler</span><span class="p">)</span><span class="err">:</span> <span class="nx">Observable</span><span class="o">&lt;</span><span class="nx">HttpEvent</span><span class="o">&lt;</span><span class="kr">any</span><span class="o">&gt;&gt;</span> <span class="p">{</span>
+
+    <span class="k">if</span> <span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">oktaService</span><span class="p">.</span><span class="nx">isAuthenticated</span><span class="p">())</span> <span class="p">{</span>
+      <span class="kd">const</span> <span class="nx">accessToken</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">oktaService</span><span class="p">.</span><span class="nx">signIn</span><span class="p">.</span><span class="nx">tokenManager</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">'accessToken'</span><span class="p">);</span>
+      <span class="nx">request</span> <span class="o">=</span> <span class="nx">request</span><span class="p">.</span><span class="nx">clone</span><span class="p">({</span>
+        <span class="na">setHeaders</span><span class="p">:</span> <span class="p">{</span>
+          <span class="na">Authorization</span><span class="p">:</span> <span class="err">`</span><span class="nx">$</span><span class="p">{</span><span class="nx">accessToken</span><span class="p">.</span><span class="nx">tokenType</span><span class="p">}</span> <span class="nx">$</span><span class="p">{</span><span class="nx">accessToken</span><span class="p">.</span><span class="nx">accessToken</span><span class="p">}</span><span class="err">`</span>
+        <span class="p">}</span>
+      <span class="p">});</span>
+    <span class="p">}</span>
+
+    <span class="k">return</span> <span class="nx">next</span><span class="p">.</span><span class="nx">handle</span><span class="p">(</span><span class="nx">request</span><span class="p">).</span><span class="nx">map</span><span class="p">((</span><span class="na">event</span><span class="p">:</span> <span class="nx">HttpEvent</span><span class="o">&lt;</span><span class="kr">any</span><span class="o">&gt;</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+      <span class="k">if</span> <span class="p">(</span><span class="nx">event</span> <span class="k">instanceof</span> <span class="nx">HttpResponse</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="nx">event</span><span class="p">;</span>
+      <span class="p">}</span>
+    <span class="p">}).</span><span class="k">catch</span><span class="p">(</span><span class="nx">error</span> <span class="o">=&gt;</span> <span class="p">{</span>
+      <span class="k">if</span> <span class="p">(</span><span class="nx">error</span> <span class="k">instanceof</span> <span class="nx">HttpErrorResponse</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="nx">error</span><span class="p">.</span><span class="nx">status</span> <span class="o">===</span> <span class="mi">401</span><span class="p">)</span> <span class="p">{</span>
+          <span class="k">this</span><span class="p">.</span><span class="nx">oktaService</span><span class="p">.</span><span class="nx">login</span><span class="p">();</span>
+          <span class="k">return</span> <span class="nx">Observable</span><span class="p">.</span><span class="nx">create</span><span class="p">(</span><span class="nx">error</span><span class="p">);</span>
+        <span class="p">}</span>
+      <span class="p">}</span>
+    <span class="p">});</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre>
+</div>
+
+<p>In <code class="highlighter-rouge">client/src/app/app.module.ts</code>, define the routes for the application, with <code class="highlighter-rouge">canActivate</code> guards for the note-related routes.</p>
+
+<div class="language-typescript highlighter-rouge"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">appRoutes</span><span class="err">:</span> <span class="nx">Routes</span> <span class="o">=</span> <span class="p">[</span>
+  <span class="p">{</span><span class="na">path</span><span class="p">:</span> <span class="s1">'login'</span><span class="p">,</span> <span class="na">component</span><span class="p">:</span> <span class="nx">LoginComponent</span><span class="p">},</span>
+  <span class="p">{</span><span class="na">path</span><span class="p">:</span> <span class="s1">'notes'</span><span class="p">,</span> <span class="na">component</span><span class="p">:</span> <span class="nx">NoteListComponent</span><span class="p">,</span> <span class="na">canActivate</span><span class="p">:</span> <span class="p">[</span><span class="nx">OktaAuthGuard</span><span class="p">]},</span>
+  <span class="p">{</span><span class="na">path</span><span class="p">:</span> <span class="s1">'notes/:id'</span><span class="p">,</span> <span class="na">component</span><span class="p">:</span> <span class="nx">NoteDetailComponent</span><span class="p">,</span> <span class="na">canActivate</span><span class="p">:</span> <span class="p">[</span><span class="nx">OktaAuthGuard</span><span class="p">]},</span>
+  <span class="p">{</span><span class="na">path</span><span class="p">:</span> <span class="s1">''</span><span class="p">,</span> <span class="na">redirectTo</span><span class="p">:</span> <span class="s1">'/notes'</span><span class="p">,</span> <span class="na">pathMatch</span><span class="p">:</span> <span class="s1">'full'</span><span class="p">}</span>
+<span class="p">];</span>
+</code></pre>
+</div>
+
+<p>Import <code class="highlighter-rouge">HttpClientModule</code> and <code class="highlighter-rouge">RouterModule</code>, configure <code class="highlighter-rouge">OktaAuthService</code> and <code class="highlighter-rouge">OktaAuthGard</code> as providers, and define <code class="highlighter-rouge">OktaAuthInterceptor</code> as an HTTP interceptor.</p>
+
+<div class="language-typescript highlighter-rouge"><pre class="highlight"><code><span class="err">@</span><span class="nx">NgModule</span><span class="p">({</span>
+  <span class="na">declarations</span><span class="p">:</span> <span class="p">[</span>
+    <span class="nx">AppComponent</span><span class="p">,</span>
+    <span class="nx">NoteListComponent</span><span class="p">,</span>
+    <span class="nx">NoteDetailComponent</span><span class="p">,</span>
+    <span class="nx">LoginComponent</span>
+  <span class="p">],</span>
+  <span class="na">imports</span><span class="p">:</span> <span class="p">[</span>
+    <span class="nx">BrowserModule</span><span class="p">,</span>
+    <span class="nx">HttpClientModule</span><span class="p">,</span>
+    <span class="nx">RouterModule</span><span class="p">.</span><span class="nx">forRoot</span><span class="p">(</span><span class="nx">appRoutes</span><span class="p">)</span>
+  <span class="p">],</span>
+  <span class="na">providers</span><span class="p">:</span> <span class="p">[</span><span class="nx">NoteService</span><span class="p">,</span> <span class="nx">OktaAuthService</span><span class="p">,</span> <span class="nx">OktaAuthGuard</span><span class="p">,</span> <span class="p">{</span>
+    <span class="na">provide</span><span class="p">:</span> <span class="nx">HTTP_INTERCEPTORS</span><span class="p">,</span>
+    <span class="na">useClass</span><span class="p">:</span> <span class="nx">OktaAuthInterceptor</span><span class="p">,</span>
+    <span class="na">multi</span><span class="p">:</span> <span class="kc">true</span>
+  <span class="p">}],</span>
+  <span class="na">bootstrap</span><span class="p">:</span> <span class="p">[</span><span class="nx">AppComponent</span><span class="p">]</span>
+<span class="p">})</span>
+<span class="k">export</span> <span class="kr">class</span> <span class="nx">AppModule</span> <span class="p">{</span>
+<span class="p">}</span>
+</code></pre>
+</div>
+
+<p>Modify <code class="highlighter-rouge">LoginComponent</code> (in <code class="highlighter-rouge">client/src/app/login/login.component.ts</code>) to show the homepage if the user is logged-in, or the sign-in widget if not.</p>
+
+<div class="language-typescript highlighter-rouge"><pre class="highlight"><code><span class="k">export</span> <span class="kr">class</span> <span class="nx">LoginComponent</span> <span class="k">implements</span> <span class="nx">OnInit</span> <span class="p">{</span>
+
+  <span class="kd">constructor</span><span class="p">(</span><span class="k">private</span> <span class="nx">oktaService</span><span class="err">:</span> <span class="nx">OktaAuthService</span><span class="p">,</span>
+              <span class="k">private</span> <span class="nx">router</span><span class="err">:</span> <span class="nx">Router</span><span class="p">)</span> <span class="p">{</span>
+  <span class="p">}</span>
+
+  <span class="nx">ngOnInit</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">oktaService</span><span class="p">.</span><span class="nx">isAuthenticated</span><span class="p">())</span> <span class="p">{</span>
+      <span class="k">this</span><span class="p">.</span><span class="nx">router</span><span class="p">.</span><span class="nx">navigate</span><span class="p">([</span><span class="s1">'/'</span><span class="p">]);</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+      <span class="k">this</span><span class="p">.</span><span class="nx">oktaService</span><span class="p">.</span><span class="nx">showLogin</span><span class="p">();</span>
+    <span class="p">}</span>
+
+    <span class="c1">// user authentication listener</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">oktaService</span><span class="p">.</span><span class="nx">user$</span><span class="p">.</span><span class="nx">subscribe</span><span class="p">(</span><span class="nx">user</span> <span class="o">=&gt;</span> <span class="p">{</span>
+      <span class="k">this</span><span class="p">.</span><span class="nx">router</span><span class="p">.</span><span class="nx">navigate</span><span class="p">([</span><span class="s1">'/'</span><span class="p">]);</span>
+    <span class="p">});</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre>
+</div>
+
+<p>In the same directory, update <code class="highlighter-rouge">login.component.html</code> to have a div for the sign-in widget to render in.</p>
+
+<div class="language-html highlighter-rouge"><pre class="highlight"><code><span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">"okta-signin-container"</span><span class="nt">&gt;&lt;/div&gt;</span>
+</code></pre>
+</div>
+
+<p>Modify <code class="highlighter-rouge">client/src/app/app.component.html</code> to show the user’s name and add a <code class="highlighter-rouge">&lt;router-outlet&gt;</code> for rendering all the routes.</p>
+
+<div class="language-html highlighter-rouge"><pre class="highlight"><code><span class="nt">&lt;h1&gt;</span>{{title}}<span class="nt">&lt;/h1&gt;</span>
+
+<span class="nt">&lt;div</span> <span class="err">*</span><span class="na">ngIf=</span><span class="s">"user"</span><span class="nt">&gt;</span>
+  Welcome {{user?.name}}!
+  <span class="nt">&lt;button</span> <span class="err">(</span><span class="na">click</span><span class="err">)="</span><span class="na">oktaService</span><span class="err">.</span><span class="na">logout</span><span class="err">()"</span><span class="nt">&gt;</span>Logout<span class="nt">&lt;/button&gt;</span>
+<span class="nt">&lt;/div&gt;</span>
+
+<span class="nt">&lt;router-outlet</span> <span class="err">[</span><span class="na">hidden</span><span class="err">]="!</span><span class="na">user</span><span class="err">"</span><span class="nt">&gt;&lt;/router-outlet&gt;</span>
+</code></pre>
+</div>
+
+<p>Then update <code class="highlighter-rouge">client/src/app/app.component.ts</code> so it has a reference to <code class="highlighter-rouge">user</code> and <code class="highlighter-rouge">oktaService</code>. Notice that this class populates the user variable if the user is already authenticated (for example, they refreshed their browser) or if they sign in with the widget. The <code class="highlighter-rouge">this.oktaService.user$</code> is an <code class="highlighter-rouge">Observable</code> that can be subscribed to for changes in the user.</p>
+
+<div class="language-typescript highlighter-rouge"><pre class="highlight"><code><span class="k">export</span> <span class="kr">class</span> <span class="nx">AppComponent</span> <span class="k">implements</span> <span class="nx">OnInit</span> <span class="p">{</span>
+  <span class="nx">title</span> <span class="o">=</span> <span class="s1">'My Notes'</span><span class="p">;</span>
+  <span class="nx">user</span><span class="p">;</span>
+
+  <span class="kd">constructor</span><span class="p">(</span><span class="k">public</span> <span class="nx">oktaService</span><span class="err">:</span> <span class="nx">OktaAuthService</span><span class="p">)</span> <span class="p">{</span>
+  <span class="p">}</span>
+
+  <span class="nx">ngOnInit</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">oktaService</span><span class="p">.</span><span class="nx">isAuthenticated</span><span class="p">())</span> <span class="p">{</span>
+      <span class="k">this</span><span class="p">.</span><span class="nx">user</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">oktaService</span><span class="p">.</span><span class="nx">idTokenAsUser</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="k">this</span><span class="p">.</span><span class="nx">oktaService</span><span class="p">.</span><span class="nx">user$</span><span class="p">.</span><span class="nx">subscribe</span><span class="p">(</span><span class="nx">user</span> <span class="o">=&gt;</span> <span class="p">{</span>
+      <span class="k">this</span><span class="p">.</span><span class="nx">user</span> <span class="o">=</span> <span class="nx">user</span><span class="p">;</span>
+    <span class="p">});</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre>
+</div>
+
+<p>To make the Okta Sign-In Widget look good, add its default CSS files to <code class="highlighter-rouge">client/src/styles</code>.</p>
+
+<div class="language-css highlighter-rouge"><pre class="highlight"><code><span class="k">@import</span> <span class="s2">'~https://ok1static.oktacdn.com/assets/js/sdk/okta-signin-widget/2.1.0/css/okta-sign-in.min.css'</span><span class="p">;</span>
+<span class="k">@import</span> <span class="s2">'~https://ok1static.oktacdn.com/assets/js/sdk/okta-signin-widget/2.1.0/css/okta-theme.css'</span><span class="p">;</span>
+</code></pre>
+</div>
+
+<p>After making all these changes, you should be able to fire up http://localhost:4200 (using <code class="highlighter-rouge">ng serve</code>) and see a sign in form.</p>
+
+<p><img src="/assets/blog/kotlin-secure-notes/signin-widget-8b72d59b8787cb47eaa60d53a5010539f41e069a665ccf2d049d4cd9d7b8361c.png" alt="Sign-In Widget" class="center-image" /></p>
+
+<p>After signing in, you should see the notes list, but no records in it.</p>
+
+<p><img src="/assets/blog/kotlin-secure-notes/notes-list-plain-d1c10637d58e25a5e4cd317f2380aba2ec86f69fb5742551dae99c5356d4de36.png" alt="Empty Notes List" class="center-image" /></p>
+
+<p>To make sure I could add, edit, and delete notes, I wrote a bunch of TypeScript and HTML. I also added <a href="https://material.angular.io">Angular Material</a> using <code class="highlighter-rouge">yarn add @angular/material @angular/cdk</code>.</p>
+
+<p>You can see the results in <a href="https://github.com/oktadeveloper/okta-kotlin-typescript-notes-example">the GitHub repository for this article</a>. In particular, the code in the following files:</p>
+
+<ul>
+  <li><a href="https://github.com/oktadeveloper/okta-kotlin-typescript-notes-example/blob/master/client/src/app/note-list/note-list.component.html">client/src/app/note-list/note-list.component.html</a></li>
+  <li><a href="https://github.com/oktadeveloper/okta-kotlin-typescript-notes-example/blob/master/client/src/app/note-detail/note-detail.component.ts">client/src/app/note-detail/note-detail.component.ts</a></li>
+  <li><a href="https://github.com/oktadeveloper/okta-kotlin-typescript-notes-example/blob/master/client/src/app/note-detail/note-detail.component.html">client/src/app/note-detail/note-detail.component.html</a></li>
+</ul>
+
+<p>The final <a href="https://github.com/oktadeveloper/okta-kotlin-typescript-notes-example/blob/master/client/src/app/app.module.ts">client/src/app/app.module.ts</a> shows all the imports needed for Angular Material. Its stylesheets are referenced in <a href="https://github.com/oktadeveloper/okta-kotlin-typescript-notes-example/blob/master/client/src/styles.css#L3">client/src/styles.css</a>. If you copy the code from these files into your project, you’ll have a working notes app with authentication!</p>
+
+<p>The screenshots below show the fruits of my labor.</p>
+
+<p><img src="/assets/blog/kotlin-secure-notes/notes-list-6ab62ff2e2fe8ea286fa5024b78cc8e894ab7bfe8347cab1fda761ecd2d8bedd.png" alt="Material Notes List" width="600" class="center-image" /></p>
+
+<p><img src="/assets/blog/kotlin-secure-notes/add-note-da7ff354e1840d1f95e5df84ab126749e15cbd4b5990967a30939a485128b3b2.png" alt="Add Note" width="600" class="center-image" /></p>
+
+<p><img src="/assets/blog/kotlin-secure-notes/edit-note-2e945b78002161b072b55113489df44f35fd5c2ac4191bf14f659c2545423089.png" alt="Edit Note" width="600" class="center-image" /></p>
+
+<p><strong>NOTE:</strong> There’s one issue with Okta’s Sign-In Widget I still haven’t fully figured out. Not every time, but everyone once it in a while, it requires me to move my mouse or click on the screen to make the notes list load after logging in. I opened <a href="https://github.com/okta/okta-signin-widget/issues/268">an issue</a> for this and tried the suggested solution, but it doesn’t work 100% of the time.</p>
+
+<p>You now know how to build an Angular client with TypeScript, using Okta’s Sign-In Widget for authentication.</p>
+
+<p>If you’re ambitious, you could even turn the client into a progressive web app (PWA), enabling offline access and faster load times. There are a couple of posts about developing PWAs on the this blog if you’re interested in learning more.</p>
+
+<ul>
+  <li><a href="/blog/2017/05/09/progressive-web-applications-with-angular-and-spring-boot">Build Your First Progressive Web Application with Angular and Spring Boot</a></li>
+  <li><a href="/blog/2017/06/13/add-authentication-angular-pwa">Add Authentication to Your Angular PWA</a></li>
+  <li><a href="/blog/2017/07/20/the-ultimate-guide-to-progressive-web-applications">The Ultimate Guide to Progressive Web Applications</a></li>
+</ul>
+
+<p>My good buddy <a href="https://twitter.com/starbuxman">Josh Long</a> and I recently hosted a live-coding session where we developed a Spring Boot microservices architecture on the backend and an Angular PWA on the front-end. The code we wrote is very similar to the code in this article. You can check the video out for reference <a href="https://virtualjug.com/building-robust-apis-and-apps-with-spring-boot-and-angular/">on YouTube</a>.</p>
+
+<h2 id="deploy-to-production">Deploy to Production</h2>
+
+<p>It’s cool to see an application running locally, but it’s even better to see it up and running in production.</p>
+
+<p>My platform of choice for deployment is Cloud Foundry. To get started, you’ll need to <a href="https://account.run.pivotal.io/z/uaa/sign-up">create</a> an account and install the command line tools.</p>
+
+<div class="language-bash highlighter-rouge"><pre class="highlight"><code>brew tap cloudfoundry/tap <span class="o">&amp;&amp;</span> brew install cf-cli
+cf login -a api.run.pivotal.io
+</code></pre>
+</div>
+
+<p>Before deploying, you’ll need to create a couple of files to build the application artifacts and tell Cloud Foundry where everything lives. Create a <code class="highlighter-rouge">manifest.yml</code> file in the root directory and specify where the files to upload are. Note that this file expects your apps to be in the same directory, with Spring Boot in a <code class="highlighter-rouge">server</code> subdirectory and the Angular app in a <code class="highlighter-rouge">client</code> subdirectory.</p>
+
+<div class="language-yaml highlighter-rouge"><pre class="highlight"><code><span class="nn">---</span>
+<span class="s">applications</span><span class="pi">:</span>
+
+<span class="pi">-</span> <span class="s">name</span><span class="pi">:</span> <span class="s">notes-server</span> 
+  <span class="s">host</span><span class="pi">:</span> <span class="s">notes-by-kotlin</span>
+  <span class="s">path</span><span class="pi">:</span> <span class="s">./server/target/notes-0.0.1-SNAPSHOT.jar</span>
+  <span class="s">env</span> <span class="pi">:</span>
+    <span class="s">FORCE_HTTPS</span><span class="pi">:</span> <span class="s">true</span>
+
+<span class="pi">-</span> <span class="s">name</span><span class="pi">:</span> <span class="s">notes-client</span>
+  <span class="s">host</span><span class="pi">:</span> <span class="s">notes-with-typescript</span>
+  <span class="s">path</span><span class="pi">:</span> <span class="s">./client/dist/</span>
+  <span class="s">env</span> <span class="pi">:</span>
+    <span class="s">FORCE_HTTPS</span><span class="pi">:</span> <span class="s">true</span>
+</code></pre>
+</div>
+
+<p>Then, create a <code class="highlighter-rouge">build.sh</code> script that packages the server and client, and replaces the development URLs with the production URLs.</p>
+
+<div class="language-bash highlighter-rouge"><pre class="highlight"><code><span class="c">#!/bin/bash</span>
+
+<span class="nv">start</span><span class="o">=</span><span class="sb">`</span><span class="nb">pwd</span><span class="sb">`</span>
+
+<span class="c"># set origin for client on server</span>
+sed -i -e <span class="s2">"s|http://localhost:4200|https://notes-with-typescript.cfapps.io|g"</span> <span class="nv">$start</span>/server/src/main/kotlin/com/okta/developer/notes/NotesApplication.kt
+
+mvn clean package -f <span class="nv">$start</span>/server/pom.xml
+
+<span class="nb">cd</span> <span class="nv">$start</span>/client
+rm -rf dist
+<span class="c"># set API URL</span>
+sed -i -e <span class="s2">"s|http://localhost:8080|https://notes-by-kotlin.cfapps.io|g"</span> <span class="nv">$start</span>/client/src/app/shared/note/note.service.ts
+<span class="c"># set redirectURI to client URI</span>
+sed -i -e <span class="s2">"s|http://localhost:4200|https://notes-with-typescript.cfapps.io|g"</span> <span class="nv">$start</span>/client/src/app/shared/okta/okta.service.ts
+yarn <span class="o">&amp;&amp;</span> ng build -prod --aot
+touch dist/Staticfile
+
+<span class="nb">cd</span> <span class="nv">$start</span>
+cf push
+
+<span class="c"># reset and remove changed files</span>
+git checkout <span class="nv">$start</span>
+rm -rf <span class="nv">$start</span>/server/src/main/kotlin/com/okta/developer/notes/NotesApplication.kt-e
+rm -rf <span class="nv">$start</span>/client/src/app/shared/note/note.service.ts-e
+</code></pre>
+</div>
+
+<p>After logging into Cloud Foundry, you can run the build script (using <code class="highlighter-rouge">sh build.sh</code>) and deploy everything. If you receive an error about the host name being in use, try a different host name in <code class="highlighter-rouge">manifest.yml</code>.</p>
+
+<p>Run <code class="highlighter-rouge">cf apps</code> to see the URLs of the applications you deployed.</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>name           requested state   instances   memory   disk   urls
+notes-client   started           1/1         1G       1G     notes-with-typescript.cfapps.io
+notes-server   started           1/1         1G       1G     notes-by-kotlin.cfapps.io
+</code></pre>
+</div>
+
+<p>When you try to log in, you’ll get a CORS error.</p>
+
+<p><img src="/assets/blog/kotlin-secure-notes/cf-client-login-error-377936a7178b28d855fe891c4d3376bc14ed641cb0195001916bedebffdc1a92.png" alt="Cloud Foundry Login" class="center-image" /></p>
+
+<p>To fix this, log in to your Okta dashboard once more and navigate to <strong>API</strong> &gt; <strong>Trusted Origins</strong>. Add <code class="highlighter-rouge">https://notes-with-typescript.cfapps.io</code> as an Origin URL with CORs support. You’ll also need to add <code class="highlighter-rouge">https://notes-with-typescript.cfapps.io</code> as a Login Redirect URI to your “My OIDC App”.</p>
+
+<p>You can now log in and add a note.</p>
+
+<p><img src="/assets/blog/kotlin-secure-notes/cf-success-1e9e870de086c903d671aa61484297236ca86bf6b5a8740d758b85f7873f0410.png" alt="Success in Production" class="center-image" /></p>
+
+<h2 id="learn-more">Learn More</h2>
+
+<p>Congrats! You’re well on your way to becoming a Kotlin and TypeScript developer who understands Spring Boot and Angular. All of the code used in this article is <a href="https://github.com/oktadeveloper/okta-kotlin-typescript-notes-example">available on GitHub</a>.</p>
+
+<p>If you have questions about this code or technologies you want to see in my next post, let me know on Twitter <a href="https://twitter.com/mraible">@mraible</a>!</p>
+
+
+	</div>
+	
+</article>
+
+		
+</section>
+
+		
+	</div><footer class="Footer">
+    <div class="Wrap">
+
+        <div class="Row">
+
+            <div class="Column--3 Column--medium-6 Column--xSmall-12">
+
+                <a class="Logo" href="https://www.okta.com/" target="_blank" rel="noopener noreferrer">
+                    <img src="https://developer.okta.com/sites/all/themes/developer/images/logo-footer.png" alt="Okta">
+                    Visit okta.com
+                </a>
+
+            </div>
+
+            <div class="Column--3 Column--medium-12 Column--xSmall-12">
+
+                <h4>Social</h4>
+                <ul class="Footer-links Footer-links--social">
+                    <li><a class="Footer-links--github" target="_blank" rel="noopener noreferrer" href="http://github.com/oktadeveloper">Github</a></li>
+                    <li><a class="Footer-links--twitter" target="_blank" rel="noopener noreferrer" href="http://twitter.com/OktaDev">Twitter</a></li>
+                    <li><a class="Footer-links--forum" target="_blank" rel="noopener noreferrer" href="https://devforum.okta.com/">Forum</a></li>
+                    <li><a class="Footer-links--rss" target="_blank" rel="noopener noreferrer" href="http://feeds.feedburner.com/OktaBlog">RSS Blog</a></li>
+                </ul>
+            </div>
+
+            <div class="Column--3 Column--medium-6 Column--small-12">
+                <h4>More Info</h4>
+                <ul class="Footer-links">
+                    <li><a target="_blank" href="https://developer.okta.com/integrate-with-okta/">Integrate with Okta</a></li>
+                    <li><a href="/blog/">Blog</a></li>
+                    <li><a href="/docs/platform-release-notes/platform-release-notes.html">Release Notes</a></li>
+                    <li><a href="/3rd_party_notices/">3rd Party Notices</a></li>
+                </ul>
+            </div>
+
+            <div class="Column--3 Column--medium-6 Column--small-12">
+                <h4>Contact &amp; Legal</h4>
+                <ul class="Footer-links">
+                    <li><a href="https://developer.okta.com/contact/">Contact Sales</a></li>
+                    <li><a target="_blank" rel="noopener noreferrer" href="mailto:developers@okta.com">Contact Support</a></li>
+                    <li><a href="https://developer.okta.com/terms/">Terms &amp; Conditions</a></li>
+                    <li><a href="https://developer.okta.com/privacy/">Privacy Policy</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</footer>
+
+    <script type="text/javascript" src="/assets/master-0365dd27cf276cb2a15c0a43906ca592538204cf1ad4557547bf4e50609b411e.js"></script>
+    <script type="text/javascript" src="/assets/myOkta-911cbafbbe079b7a5522d9cbe15bd2a5f44e1582531e88393934bec69f97696b.js"></script>
+    
+    
+    
+    
+      <script type="text/javascript" src="/assets/blog-6e32dad27404131cc8630a5282264bed2ab4c08c91ac86fa496b75c53aa4f681.js"></script>
+    
+
+  <!-- START Post Footer -->
+  
+  <!-- START Google Tag Manager -->
+  <!-- https://support.google.com/tagmanager/answer/6103696?hl=en -->
+  <noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-TJ45R6" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+  <!-- END Google Tag Manager -->
+  <!-- START Google Remarketing Tag -->
+  <script type="text/javascript">
+    /* <![CDATA[ */
+    var google_conversion_id = 1006913831;
+    var google_custom_params = window.google_tag_params;
+    var google_remarketing_only = true;
+    /* ]]> */
+  </script>
+  <div style="display:none;"><script type="text/javascript" src="//www.googleadservices.com/pagead/conversion.js"></script></div>
+  <noscript><div style="display:inline;"><img height="1" width="1" style="border-style:none;" alt="" src="//googleads.g.doubleclick.net/pagead/viewthroughconversion/1006913831/?value=0&amp;guid=ON&amp;script=0"></div></noscript>
+  <!-- END Google Remarketing Tag -->
+  <!-- START Crazy Egg Tracking -->
+  <script type="text/javascript">
+    setTimeout(function(){var a=document.createElement("script");
+    var b=document.getElementsByTagName("script")[0];
+    a.src=document.location.protocol+"//script.crazyegg.com/pages/scripts/0021/9333.js?"+Math.floor(new Date().getTime()/3600000);
+    a.async=true;a.type="text/javascript";b.parentNode.insertBefore(a,b)}, 1);
+  </script>
+  <!-- END Crazy Egg Tracking -->
+
+  <!-- END Post Footer -->
+</body>
+</html>

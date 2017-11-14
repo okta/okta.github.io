@@ -1,0 +1,589 @@
+<!doctype html>
+<!--[if lt IE 7 ]> <html class="ie6 no-flexbox"> <![endif]-->
+<!--[if IE 7 ]>    <html class="ie7 no-flexbox"> <![endif]-->
+<!--[if IE 8 ]>    <html class="ie8 no-flexbox"> <![endif]-->
+<!--[if IE 9 ]>    <html class="ie9 no-flexbox"> <![endif]-->
+<!--[if IE 10 ]>    <html class="ie10 no-flexbox"> <![endif]-->
+<!--[if (gt IE 10)|!(IE)]><!--> <html class="modern wf-loading" lang="en"> <!--<![endif]-->
+  <head>
+  <script>
+    var searchDomain = 'https://developer.okta.com';
+    var isProduction = window.location.hostname === 'developer.okta.com';
+    if (isProduction) {
+      // TypeKit
+      (function(d) {
+        var config = {
+          kitId: 'jff5neq',
+          scriptTimeout: 3000,
+          async: true
+        },
+        h=d.documentElement,t=setTimeout(function(){h.className=h.className.replace(/bwf-loadingb/g,"")+" wf-inactive";},config.scriptTimeout),tk=d.createElement("script"),f=false,s=d.getElementsByTagName("script")[0],a;h.className+=" wf-loading";tk.src='https://use.typekit.net/'+config.kitId+'.js';tk.async=true;tk.onload=tk.onreadystatechange=function(){a=this.readyState;if(f||a&&a!="complete"&&a!="loaded")return;f=true;clearTimeout(t);try{Typekit.load(config)}catch(e){}};s.parentNode.insertBefore(tk,s)
+      })(document);
+
+      // Google analytics
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+              (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+              m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+      ga('create', 'UA-15777010-3', 'auto');
+      ga('send', 'pageview');
+
+      // START Google Tag Manager
+      (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+      new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+      j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+      '//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+      })(window,document,'script','dataLayer','GTM-TJ45R6');
+      // END Google Tag Manager
+    }
+	</script>
+  <meta charset="utf-8">
+  <meta http-equiv="x-ua-compatible" content="IE=edge,chrome=1">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+ 	
+
+  <link type="text/css" rel="stylesheet" href="https://developer.okta.com/sites/all/themes/developer/css/master.css" media="all" />
+  <meta class="swiftype" name="title" data-type="string" content="Protecting a Spring Boot App with Apache Shiro | Okta Developer" />
+  <meta class="swiftype" name="summary" data-type="string" content="My favorite thing about Apache Shiro is how easy it makes handling authorization. You can use a role-based access control (RBAC) model of assigning roles to ..." />
+
+  <link type="text/css" rel="stylesheet" href="/assets/animate-ec43d72c3ed45e08a460b8a2966d8dba6006aebfa0530935c3973fa493a8771f.css">
+  <link type="text/css" rel="stylesheet" href="/assets/okta-a96df4c9d48b78b618e1d541f46f7137d73d40653571e020c1ad59edd7915c60.css">
+  
+  
+  <title>Protecting a Spring Boot App with Apache Shiro | Okta Developer</title>
+  <meta name="description" content="My favorite thing about Apache Shiro is how easy it makes handling authorization. You can use a role-based access control (RBAC) model of assigning roles to ...">
+  <link rel="canonical" href="https://developer.okta.com/blog/2017/07/13/apache-shiro-spring-boot"  data-proofer-ignore>
+  <link rel="alternate" type="application/rss+xml" title="Okta Developer" href="https://developer.okta.com/feed.xml"><!-- GA -->
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+  <link rel="manifest" href="/manifest.json">
+  <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#21313a">
+  <meta name="theme-color" content="#ffffff">
+</head>
+
+  
+    <body id="blog">
+	
+
+
+
+
+<header class="Header is-fixed">
+
+  <div class="Wrap">
+
+    <a class="Logo" href="https://developer.okta.com">
+      <svg version="1.1" id="OktaLogo" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 431.9 151.4" style="enable-background:new 0 0 431.9 151.4;" xml:space="preserve"><g><g><g><path d="M102.2,41.4c-21,0-38.1,17.1-38.1,38.1s17.1,38.1,38.1,38.1s38.1-17.1,38.1-38.1l0,0C140.3,58.5,123.2,41.4,102.2,41.4z M102.2,98.5c-10.5,0-19-8.5-19-19s8.5-19,19-19s19,8.5,19,19c0.1,10.5-8.4,19-18.9,19.1C102.3,98.6,102.2,98.6,102.2,98.5L102.2,98.5z"/><path d="M169.1,92.3c0-1.9,1.5-3.4,3.4-3.4c0.9,0,1.8,0.4,2.4,1c9.5,9.7,25.3,26.3,25.4,26.4c0.4,0.5,0.8,0.8,1.4,0.9l1.6,0.2h17.2c1.8,0,3.3-1.4,3.4-3.2c0-0.8-0.3-1.5-0.8-2.2l-28.6-29.2l-1.5-1.5c-3.2-3.9-2.9-5.4,0.8-9.3l22.6-25.1c1.1-1.4,0.8-3.5-0.6-4.6c-0.6-0.4-1.3-0.7-2-0.7h-17c-0.6,0.2-1.1,0.5-1.5,0.9L175,64.4c-1.3,1.4-3.4,1.5-4.8,0.2c-0.7-0.6-1.1-1.5-1.1-2.5V18.9c0-1.7-1.3-3-3-3c-0.1,0-0.2,0-0.3,0h-12.7c-2.2,0-3.3,1.5-3.3,2.8v95.8c0,2.2,1.8,2.8,3.3,2.8h12.7c1.7,0.1,3.2-1.2,3.3-2.9c0,0,0,0,0,0V92.3z"/><path d="M273,114l-1.4-12.8c-0.2-1.7-1.7-2.9-3.4-2.7c0,0,0,0-0.1,0l-2.9,0.2c-10.1,0-18.5-7.9-19-18c0-0.3,0-0.7,0-1V64.2c-0.1-2,1.5-3.6,3.5-3.7c0,0,0,0,0,0h17c1.7-0.1,3.1-1.5,3-3.2c0,0,0-0.1,0-0.1v-12c0-2.3-1.5-3.6-2.8-3.6h-17.1c-1.9,0.1-3.5-1.5-3.6-3.4c0,0,0,0,0,0V18.9c-0.1-1.7-1.5-3.1-3.2-3c0,0-0.1,0-0.1,0h-12.7c-1.6-0.1-3,1.1-3.1,2.7c0,0.1,0,0.1,0,0.2c0,0,0,61.7,0,62c0.5,21,17.9,37.6,38.9,37c1.4,0,2.9-0.2,4.3-0.3C272,117.2,273.2,115.7,273,114z"/></g><path d="M364.7,98c-10.8,0-12.4-3.8-12.4-18.3l0,0V44.8c0-1.8-1.4-3.2-3.2-3.2c0,0-0.1,0-0.1,0h-12.8c-1.8,0-3.2,1.4-3.3,3.2v1.6C314.6,36,291.3,42.5,281,60.8c-10.4,18.3-3.9,41.6,14.4,51.9c14,7.9,31.4,6.2,43.5-4.2c3.6,5.5,9.3,9.1,18.3,9.1c1.5,0,9.7,0.3,9.7-3.5v-13.6C367,99.2,366,98.1,364.7,98z M314.2,98.6c-10.5,0-19-8.5-19-19s8.5-19,19-19s19,8.5,19,19l0,0C333.2,90.1,324.7,98.6,314.2,98.6z"/></g><path d="M19.4,74c2.2-1.9,4.1-4.1,5.7-6.6c3.5-5.3,5.4-11.5,5.2-17.9V27c0-4.9,0.9-8.4,2.7-10.5c1.8-2.1,4.8-3,9.2-3h12.6c1.2,0,2.1-0.9,2.2-2.1l0,0V2.2C57,1,56,0,54.8,0c0,0,0,0,0,0H41.5c-7.8,0-12.9,2.1-18,7.6s-7.1,12.3-7.1,21.7v14.2c0,2.2-0.1,4-0.2,5.7v2.2c-0.5,3.2-1.8,6.2-3.6,8.9C9.4,64.7,5.1,70.9,0.9,74l0,0l-0.3,0.3l0,0l-0.2,0.3H0.2v0.3l0,0c-0.1,0.3-0.1,0.7,0,1l0,0v0.3h0.1l0.2,0.3l0,0l0.3,0.3l0,0c4.2,3.1,8.5,9.3,11.3,13.7c1.8,2.7,3.1,5.7,3.6,8.9v2.2c0.1,1.6,0.2,3.5,0.2,5.7v14.3c0,9.4,2.4,16.7,7.1,21.7s10.2,7.6,18,7.6h13.8c1.2,0,2.2-1,2.2-2.2V140l0,0c0-1.2-1-2.2-2.2-2.2H42.2c-4.4,0-7.5-1-9.2-3s-2.7-5.6-2.7-10.5v-22.4c0.2-6.4-1.7-12.6-5.2-17.9c-1.6-2.5-3.5-4.7-5.7-6.6l0,0c-0.9-0.7-1.1-2-0.4-2.9C19.2,74.3,19.3,74.2,19.4,74L19.4,74z"/><path d="M412.5,74c-2.2-1.9-4.1-4.1-5.7-6.6c-3.5-5.3-5.4-11.5-5.2-17.9V27c0-4.9-0.9-8.4-2.7-10.5s-4.8-3-9.2-3h-12.6c-1.2,0-2.2-1-2.2-2.2c0,0,0,0,0,0l0,0V2.2c0-1.2,1-2.2,2.2-2.2c0,0,0,0,0,0h13.4c7.8,0,12.9,2.1,18,7.6s7.1,12.3,7.1,21.7v14.2c0,2.2,0.1,4,0.2,5.7v2.2c0.5,3.2,1.8,6.2,3.6,8.9c2.8,4.5,7.1,10.7,11.3,13.7l0,0l0.3,0.3l0,0l0.2,0.3h0.1v0.3l0,0c0.1,0.3,0.1,0.7,0,1l0,0v0.3h-0.1l-0.2,0.3l0,0l-0.3,0.3l0,0c-4.2,3.1-8.5,9.3-11.3,13.7c-1.8,2.7-3.1,5.7-3.6,8.9v2.2c-0.1,1.6-0.2,3.5-0.2,5.7v14.3c0,9.4-2.4,16.7-7.1,21.7s-10.2,7.6-18,7.6h-13.4c-1.2,0-2.2-1-2.2-2.2c0,0,0,0,0,0V140l0,0c0-1.2,1-2.2,2.2-2.2l0,0h12.7c4.4,0,7.5-1,9.2-3s2.7-5.6,2.7-10.5v-22.4c-0.2-6.3,1.6-12.6,5.1-17.9c1.6-2.5,3.5-4.7,5.7-6.6l0,0c0.9-0.7,1.1-2,0.4-2.9C412.7,74.3,412.6,74.2,412.5,74L412.5,74z"/></g></svg>
+    </a>
+
+    <nav class="Header-nav PrimaryNav">
+      <ul class="menu">
+        <li class="first leaf">
+          <a href="https://developer.okta.com/product/">Product</a>
+        </li>
+        <li class="leaf">
+          <a href="https://developer.okta.com/pricing/">Pricing</a>
+        </li>
+        <li class="leaf">
+          <a href="/blog/" class="active">Blog</a>
+        </li>
+        <li class="leaf">
+          <a href="/documentation/">Docs</a>
+        </li>
+        <li class="last expanded">
+          <span class="nolink">Support</span>
+          <ul class="menu">
+            <li class="first leaf"><a href="https://devforum.okta.com/">Okta Developer Forums</a></li>
+            <li class="last leaf"><a href="mailto:developers@okta.com">developers@okta.com</a></li>
+          </ul>
+        </li>
+      </ul>
+      <a class="PrimaryNav-toggle" href="#">
+        <svg width="20px" height="20px" viewBox="0 0 20 20" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+            <g class="MenuIcon" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="round">
+                <path d="M1,16 L19,16" class="MenuIcon-line1" stroke="#FFFFFF" stroke-width="2"></path>
+                <path d="M1,4 L19,4" class="MenuIcon-line2" stroke="#FFFFFF" stroke-width="2"></path>
+                <path d="M1,10 L19,10" class="MenuIcon-line3" stroke="#FFFFFF" stroke-width="2"></path>
+                <path d="M1,10 L19,10" class="MenuIcon-line4" stroke="#FFFFFF" stroke-width="2"></path>
+            </g>
+        </svg>
+        <svg class="CloseIcon" width="16px" height="16px" viewBox="0 0 16 16" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+          <g id="ALl-Boards" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+            <g id="Desktop" transform="translate(-915.000000, -235.000000)" fill="#FFFFFF">
+              <g id="Search-bar-Active" transform="translate(30.000000, 26.000000)">
+                <polygon id="Icon/Cross" points="901 210.6 899.4 209 893 215.4 886.6 209 885 210.6 891.4 217 885 223.4 886.6 225 893 218.6 899.4 225 901 223.4 894.6 217"></polygon>
+              </g>
+            </g>
+          </g>
+        </svg>
+      </a>
+
+      <div class="PrimaryNav-cta">
+        <a target="_blank" rel="noopener noreferrer" href="https://login.okta.com/?SAMLRequest=fc%2B7CsJAEAXQXvAflu1NNJUMeZBGELTx1a%2FrYILJTtyZGD%2FfSBRiYzlw77lMnD3rSj3Qc0ku0YtgrhU6S5fSXRN9PKxmS52l00nMpq6iBvJWCrfDe4ss6vStRe9aDzmGIZfo1jsgwyWDMzUyiIV9vt1AH4XGk5ClSvewUgMNa%2BYW%2FVj5jxhm9NLP67QQaSAMu64L6CYmsFSHlnzT4ZlLwTgcL6Sf8%2FeX9AU%3Dhttps://login.okta.com/?SAMLRequest=fc%2B7CsJAEAXQXvAflu1NNJUMeZBGELTx1a%2FrYILJTtyZGD%2FfSBRiYzlw77lMnD3rSj3Qc0ku0YtgrhU6S5fSXRN9PKxmS52l00nMpq6iBvJWCrfDe4ss6vStRe9aDzmGIZfo1jsgwyWDMzUyiIV9vt1AH4XGk5ClSvewUgMNa%2BYW%2FVj5jxhm9NLP67QQaSAMu64L6CYmsFSHlnzT4ZlLwTgcL6Sf8%2FeX9AU%3D" class="Button--redOutline">Login</a>
+        <a href="https://developer.okta.com/signup/" class="Button--red">Sign up</a>
+      </div>
+
+      <a class="SearchIcon" href="#"></a>
+      <form id="form_search" class="SearchBar Formisimo_clocked_69929" method="get" action="https://developer.okta.com/search/" name="form_search" __bizdiag="-784164280" __biza="WJ__">
+        <input type="text" name="stq" autocomplete="off" id="st-search-input-auto" class="st-search-input" placeholder="Search">
+        <input type="submit" name="submit" value="GO">
+      </form>
+
+    </nav>
+
+  </div>
+
+</header>
+
+	<div class="page-content">
+		
+
+
+
+
+
+
+<section class="Blog is-single">
+		
+	<div class="Blog-social">
+		
+		<a href="https://github.com/bdemers" target="_blank"><i class="fa fa-github"></i></a>
+		
+		
+		<a href="https://twitter.com/briandemers" target="_blank"><i class="fa fa-twitter"></i></a>
+		
+		
+		
+		<a href="https://www.linkedin.com/in/bdemers/" target="_blank"><i class="fa fa-external-link"></i></a>
+		
+	</div>
+	
+	
+
+<article class="BlogPost">
+	
+	<header class="BlogPost-header">
+	
+		<time class="BlogPost-date" datetime="2017-07-13">July 13, 2017</time>
+		
+		<h1 class="BlogPost-title">
+			
+			Protecting a Spring Boot App with Apache Shiro
+			
+		</h1>
+		
+		<div class="BlogPost-attribution">
+			
+				<img src="/assets/avatar-bdemers-addbebf1a3b17c5330fd954357b4bbcdb57e5cfcab25c5267cfa8d2fc260f8a9.jpg" alt="avatar-bdemers.jpg" class="BlogPost-avatar">
+			
+			<span class="BlogPost-author">Brian Demers</span>
+		</div>
+	
+	</header>
+	
+	<div class="BlogPost-content">
+		
+	<p>My favorite thing about Apache Shiro is how easy it makes handling authorization. You can use a role-based access control (RBAC) model of assigning roles to users and then permissions to roles. This makes dealing with the inevitable requirements change simple. Your code does not change, just the permissions associated with the roles. In this post I want to demonstrate just how simple it is, using a Spring Boot application and walking through how I’d handle the following scenario:</p>
+
+<p>Your boss (The Supreme Commander) shows up at your desk and tells you the current volunteer (Stormtrooper) registration application needs have different access roles for the  different <em>types</em> of employees.</p>
+
+<ul>
+  <li>Officers can register new <em>“volunteers”</em></li>
+  <li>Underlings (you and I) only have read access the volunteers</li>
+  <li>Anyone from outside the <em>organization</em> doesn’t have any access to the <em>“volunteers”</em></li>
+  <li>It should go without saying the Supreme Commander has access to everything</li>
+</ul>
+
+<h2 id="start-with-a-rest-application">Start with a REST Application</h2>
+
+<p>To get started, grab this <a href="https://github.com/oktadeveloper/shiro-spring-boot-example">Spring Boot example</a>. It’ll get you started with a set of REST endpoints which expose CRUD operations to manage a list of Stormtroopers. You’ll be adding authentication and authorization using <a href="https://shiro.apache.org">Apache Shiro</a>.  All of the code is up on <a href="https://github.com/bdemers/shiro-spring-boot-example">Github</a>.</p>
+
+<p>Using the Apache Shiro Spring Boot starter is all you need, just add the dependency to your pom. (where <code class="highlighter-rouge">${shiro.version}</code> is at least 1.4.0):</p>
+
+<div class="language-xml highlighter-rouge"><pre class="highlight"><code><span class="nt">&lt;dependency&gt;</span>
+    <span class="nt">&lt;groupId&gt;</span>org.apache.shiro<span class="nt">&lt;/groupId&gt;</span>
+    <span class="nt">&lt;artifactId&gt;</span>shiro-spring-boot-web-starter<span class="nt">&lt;/artifactId&gt;</span>
+    <span class="nt">&lt;version&gt;</span>${shiro.version}<span class="nt">&lt;/version&gt;</span>
+<span class="nt">&lt;/dependency&gt;</span>
+</code></pre>
+</div>
+
+<p>Jumping into the code we will start with our <code class="highlighter-rouge">StormtrooperController</code>, and simply add annotations:</p>
+
+<div class="language-java highlighter-rouge"><pre class="highlight"><code><span class="nd">@RestController</span>
+<span class="nd">@RequestMapping</span><span class="o">(</span><span class="n">path</span> <span class="o">=</span> <span class="s">"/troopers"</span><span class="o">,</span>
+                <span class="n">produces</span> <span class="o">=</span> <span class="n">MediaType</span><span class="o">.</span><span class="na">APPLICATION_JSON_UTF8_VALUE</span><span class="o">)</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">StormtrooperController</span> <span class="o">{</span>
+
+    <span class="kd">private</span> <span class="kd">final</span> <span class="n">StormtrooperDao</span> <span class="n">trooperDao</span><span class="o">;</span>
+
+    <span class="nd">@Autowired</span>
+    <span class="kd">public</span> <span class="nf">StormtrooperController</span><span class="o">(</span><span class="n">StormtrooperDao</span> <span class="n">trooperDao</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">trooperDao</span> <span class="o">=</span> <span class="n">trooperDao</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="nd">@GetMapping</span><span class="o">()</span>
+    <span class="nd">@RequiresRoles</span><span class="o">(</span><span class="n">logical</span> <span class="o">=</span> <span class="n">Logical</span><span class="o">.</span><span class="na">OR</span><span class="o">,</span> <span class="n">value</span> <span class="o">=</span> <span class="o">{</span><span class="s">"admin"</span><span class="o">,</span> <span class="s">"officer"</span><span class="o">,</span> <span class="s">"underling"</span><span class="o">})</span>
+    <span class="kd">public</span> <span class="n">Collection</span><span class="o">&lt;</span><span class="n">Stormtrooper</span><span class="o">&gt;</span> <span class="nf">listTroopers</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="n">trooperDao</span><span class="o">.</span><span class="na">listStormtroopers</span><span class="o">();</span>
+    <span class="o">}</span>
+
+    <span class="nd">@GetMapping</span><span class="o">(</span><span class="n">path</span> <span class="o">=</span> <span class="s">"/{id}"</span><span class="o">)</span>
+    <span class="nd">@RequiresRoles</span><span class="o">(</span><span class="n">logical</span> <span class="o">=</span> <span class="n">Logical</span><span class="o">.</span><span class="na">OR</span><span class="o">,</span> <span class="n">value</span> <span class="o">=</span> <span class="o">{</span><span class="s">"admin"</span><span class="o">,</span> <span class="s">"officer"</span><span class="o">,</span> <span class="s">"underling"</span><span class="o">})</span>
+    <span class="kd">public</span> <span class="n">Stormtrooper</span> <span class="nf">getTrooper</span><span class="o">(</span><span class="nd">@PathVariable</span><span class="o">(</span><span class="s">"id"</span><span class="o">)</span> <span class="n">String</span> <span class="n">id</span><span class="o">)</span> <span class="kd">throws</span> <span class="n">NotFoundException</span> <span class="o">{</span>
+
+        <span class="n">Stormtrooper</span> <span class="n">stormtrooper</span> <span class="o">=</span> <span class="n">trooperDao</span><span class="o">.</span><span class="na">getStormtrooper</span><span class="o">(</span><span class="n">id</span><span class="o">);</span>
+        <span class="k">if</span> <span class="o">(</span><span class="n">stormtrooper</span> <span class="o">==</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
+            <span class="k">throw</span> <span class="k">new</span> <span class="nf">NotFoundException</span><span class="o">(</span><span class="n">id</span><span class="o">);</span>
+        <span class="o">}</span>
+        <span class="k">return</span> <span class="n">stormtrooper</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="nd">@PostMapping</span><span class="o">()</span>
+    <span class="nd">@RequiresRoles</span><span class="o">(</span><span class="n">logical</span> <span class="o">=</span> <span class="n">Logical</span><span class="o">.</span><span class="na">OR</span><span class="o">,</span> <span class="n">value</span> <span class="o">=</span> <span class="o">{</span><span class="s">"admin"</span><span class="o">,</span> <span class="s">"officer"</span><span class="o">})</span>
+    <span class="kd">public</span> <span class="n">Stormtrooper</span> <span class="nf">createTrooper</span><span class="o">(</span><span class="nd">@RequestBody</span> <span class="n">Stormtrooper</span> <span class="n">trooper</span><span class="o">)</span> <span class="o">{</span>
+
+        <span class="k">return</span> <span class="n">trooperDao</span><span class="o">.</span><span class="na">addStormtrooper</span><span class="o">(</span><span class="n">trooper</span><span class="o">);</span>
+    <span class="o">}</span>
+
+    <span class="nd">@PostMapping</span><span class="o">(</span><span class="n">path</span> <span class="o">=</span> <span class="s">"/{id}"</span><span class="o">)</span>
+    <span class="nd">@RequiresRoles</span><span class="o">(</span><span class="s">"admin"</span><span class="o">)</span>
+    <span class="kd">public</span> <span class="n">Stormtrooper</span> <span class="nf">updateTrooper</span><span class="o">(</span><span class="nd">@PathVariable</span><span class="o">(</span><span class="s">"id"</span><span class="o">)</span> <span class="n">String</span> <span class="n">id</span><span class="o">,</span> <span class="nd">@RequestBody</span> <span class="n">Stormtrooper</span> <span class="n">updatedTrooper</span><span class="o">)</span> <span class="kd">throws</span> <span class="n">NotFoundException</span> <span class="o">{</span>
+
+        <span class="k">return</span> <span class="n">trooperDao</span><span class="o">.</span><span class="na">updateStormtrooper</span><span class="o">(</span><span class="n">id</span><span class="o">,</span> <span class="n">updatedTrooper</span><span class="o">);</span>
+    <span class="o">}</span>
+
+    <span class="nd">@DeleteMapping</span><span class="o">(</span><span class="n">path</span> <span class="o">=</span> <span class="s">"/{id}"</span><span class="o">)</span>
+    <span class="nd">@ResponseStatus</span><span class="o">(</span><span class="n">value</span> <span class="o">=</span> <span class="n">HttpStatus</span><span class="o">.</span><span class="na">NO_CONTENT</span><span class="o">)</span>
+    <span class="nd">@RequiresRoles</span><span class="o">(</span><span class="s">"admin"</span><span class="o">)</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">deleteTrooper</span><span class="o">(</span><span class="nd">@PathVariable</span><span class="o">(</span><span class="s">"id"</span><span class="o">)</span> <span class="n">String</span> <span class="n">id</span><span class="o">)</span> <span class="o">{</span>
+        <span class="n">trooperDao</span><span class="o">.</span><span class="na">deleteStormtrooper</span><span class="o">(</span><span class="n">id</span><span class="o">);</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre>
+</div>
+
+<p>In the code block above you’re using Shiro’s <code class="highlighter-rouge">@RequiresRoles</code> annotation to describe your use-case.  You’ll notice the logical <code class="highlighter-rouge">OR</code> to allow any of these roles access.  This is great, your code is done, it was pretty easy to add, just a single line.</p>
+
+<p>You could stop here but, roles are not that flexible, and if you put them directly in your code you’re now tightly coupled to those names/IDs.</p>
+
+<h2 id="stop-using-roles">Stop Using Roles</h2>
+
+<p>Imagine your application has been deployed and is working fine, the following week your <em>boss</em> stops by your desk and tells you to to make some changes:</p>
+
+<ul>
+  <li>Officers need to be able to update troopers</li>
+  <li>He feels that the term ‘admin’ is fine for most superiors, but is not suitable to the Dark Lord</li>
+</ul>
+
+<p>Fine, you say, easy enough, you can just make a few small changes to the method signatures:</p>
+
+<div class="language-java highlighter-rouge"><pre class="highlight"><code><span class="nd">@GetMapping</span><span class="o">()</span>
+<span class="nd">@RequiresRoles</span><span class="o">(</span><span class="n">logical</span> <span class="o">=</span> <span class="n">Logical</span><span class="o">.</span><span class="na">OR</span><span class="o">,</span> <span class="n">value</span> <span class="o">=</span> <span class="o">{</span><span class="s">"emperor"</span><span class="o">,</span> <span class="s">"admin"</span><span class="o">,</span> <span class="s">"emperor"</span><span class="o">,</span> <span class="s">"officer"</span><span class="o">,</span> <span class="s">"underling"</span><span class="o">})</span>
+<span class="kd">public</span> <span class="n">Collection</span><span class="o">&lt;</span><span class="n">Stormtrooper</span><span class="o">&gt;</span> <span class="nf">listTroopers</span><span class="o">()</span>
+
+<span class="nd">@GetMapping</span><span class="o">(</span><span class="n">path</span> <span class="o">=</span> <span class="s">"/{id}"</span><span class="o">)</span>
+<span class="nd">@RequiresRoles</span><span class="o">(</span><span class="n">logical</span> <span class="o">=</span> <span class="n">Logical</span><span class="o">.</span><span class="na">OR</span><span class="o">,</span> <span class="n">value</span> <span class="o">=</span> <span class="o">{</span><span class="s">"emperor"</span><span class="o">,</span> <span class="s">"admin"</span><span class="o">,</span> <span class="s">"officer"</span><span class="o">,</span> <span class="s">"underling"</span><span class="o">})</span>
+<span class="kd">public</span> <span class="n">Stormtrooper</span> <span class="nf">getTrooper</span><span class="o">(</span><span class="nd">@PathVariable</span><span class="o">(</span><span class="s">"id"</span><span class="o">)</span> <span class="n">String</span> <span class="n">id</span><span class="o">)</span> <span class="kd">throws</span> <span class="n">NotFoundException</span>
+
+<span class="nd">@PostMapping</span><span class="o">()</span>
+<span class="nd">@RequiresRoles</span><span class="o">(</span><span class="n">logical</span> <span class="o">=</span> <span class="n">Logical</span><span class="o">.</span><span class="na">OR</span><span class="o">,</span> <span class="n">value</span> <span class="o">=</span> <span class="o">{</span><span class="s">"emperor"</span><span class="o">,</span> <span class="s">"admin"</span><span class="o">,</span> <span class="s">"officer"</span><span class="o">})</span>
+<span class="kd">public</span> <span class="n">Stormtrooper</span> <span class="nf">createTrooper</span><span class="o">(</span><span class="nd">@RequestBody</span> <span class="n">Stormtrooper</span> <span class="n">trooper</span><span class="o">)</span>
+
+<span class="nd">@PostMapping</span><span class="o">(</span><span class="n">path</span> <span class="o">=</span> <span class="s">"/{id}"</span><span class="o">)</span>
+<span class="nd">@RequiresRoles</span><span class="o">(</span><span class="n">logical</span> <span class="o">=</span> <span class="n">Logical</span><span class="o">.</span><span class="na">OR</span><span class="o">,</span> <span class="n">value</span> <span class="o">=</span> <span class="o">{</span><span class="s">"emperor"</span><span class="o">,</span> <span class="s">"admin"</span><span class="o">,</span> <span class="s">"officer"</span><span class="o">})</span>
+<span class="kd">public</span> <span class="n">Stormtrooper</span> <span class="nf">updateTrooper</span><span class="o">(</span><span class="nd">@PathVariable</span><span class="o">(</span><span class="s">"id"</span><span class="o">)</span> <span class="n">String</span> <span class="n">id</span><span class="o">,</span> <span class="nd">@RequestBody</span> <span class="n">Stormtrooper</span> <span class="n">updatedTrooper</span><span class="o">)</span> <span class="kd">throws</span> <span class="n">NotFoundException</span>
+
+<span class="nd">@DeleteMapping</span><span class="o">(</span><span class="n">path</span> <span class="o">=</span> <span class="s">"/{id}"</span><span class="o">)</span>
+<span class="nd">@ResponseStatus</span><span class="o">(</span><span class="n">value</span> <span class="o">=</span> <span class="n">HttpStatus</span><span class="o">.</span><span class="na">NO_CONTENT</span><span class="o">)</span>
+<span class="nd">@RequiresRoles</span><span class="o">(</span><span class="n">logical</span> <span class="o">=</span> <span class="n">Logical</span><span class="o">.</span><span class="na">OR</span><span class="o">,</span> <span class="n">value</span> <span class="o">=</span> <span class="o">{</span><span class="s">"emperor"</span><span class="o">,</span> <span class="s">"admin"</span><span class="o">})</span>
+<span class="kd">public</span> <span class="kt">void</span> <span class="nf">deleteTrooper</span><span class="o">(</span><span class="nd">@PathVariable</span><span class="o">(</span><span class="s">"id"</span><span class="o">)</span> <span class="n">String</span> <span class="n">id</span><span class="o">)</span>
+</code></pre>
+</div>
+
+<p>After another round of testing the deployment and you’re back in action!</p>
+
+<p>Wait, take a step back. Roles are great for simple use cases and making a change like this would work fine, but you know this will be changed again. Instead of changing your code every time the requirements change slightly, let’s decouple the roles and what they represent from your code. Instead, use permissions. Your method signatures will look like this:</p>
+
+<div class="language-java highlighter-rouge"><pre class="highlight"><code><span class="nd">@GetMapping</span><span class="o">()</span>
+<span class="nd">@RequiresPermissions</span><span class="o">(</span><span class="s">"troopers:read"</span><span class="o">)</span>
+<span class="kd">public</span> <span class="n">Collection</span><span class="o">&lt;</span><span class="n">Stormtrooper</span><span class="o">&gt;</span> <span class="nf">listTroopers</span><span class="o">()</span>
+
+<span class="nd">@GetMapping</span><span class="o">(</span><span class="n">path</span> <span class="o">=</span> <span class="s">"/{id}"</span><span class="o">)</span>
+<span class="nd">@RequiresPermissions</span><span class="o">(</span><span class="s">"troopers:read"</span><span class="o">)</span>
+<span class="kd">public</span> <span class="n">Stormtrooper</span> <span class="nf">getTrooper</span><span class="o">(</span><span class="nd">@PathVariable</span><span class="o">(</span><span class="s">"id"</span><span class="o">)</span> <span class="n">String</span> <span class="n">id</span><span class="o">)</span> <span class="kd">throws</span> <span class="n">NotFoundException</span>
+<span class="nd">@PostMapping</span><span class="o">()</span>
+<span class="nd">@RequiresPermissions</span><span class="o">(</span><span class="s">"troopers:create"</span><span class="o">)</span>
+<span class="kd">public</span> <span class="n">Stormtrooper</span> <span class="nf">createTrooper</span><span class="o">(</span><span class="nd">@RequestBody</span> <span class="n">Stormtrooper</span> <span class="n">trooper</span><span class="o">)</span>
+
+<span class="nd">@PostMapping</span><span class="o">(</span><span class="n">path</span> <span class="o">=</span> <span class="s">"/{id}"</span><span class="o">)</span>
+<span class="nd">@RequiresPermissions</span><span class="o">(</span><span class="s">"troopers:update"</span><span class="o">)</span>
+<span class="kd">public</span> <span class="n">Stormtrooper</span> <span class="nf">updateTrooper</span><span class="o">(</span><span class="nd">@PathVariable</span><span class="o">(</span><span class="s">"id"</span><span class="o">)</span> <span class="n">String</span> <span class="n">id</span><span class="o">,</span> <span class="nd">@RequestBody</span> <span class="n">Stormtrooper</span> <span class="n">updatedTrooper</span><span class="o">)</span> <span class="kd">throws</span> <span class="n">NotFoundException</span>
+
+<span class="nd">@DeleteMapping</span><span class="o">(</span><span class="n">path</span> <span class="o">=</span> <span class="s">"/{id}"</span><span class="o">)</span>
+<span class="nd">@ResponseStatus</span><span class="o">(</span><span class="n">value</span> <span class="o">=</span> <span class="n">HttpStatus</span><span class="o">.</span><span class="na">NO_CONTENT</span><span class="o">)</span>
+<span class="nd">@RequiresPermissions</span><span class="o">(</span><span class="s">"troopers:delete"</span><span class="o">)</span>
+<span class="kd">public</span> <span class="kt">void</span> <span class="nf">deleteTrooper</span><span class="o">(</span><span class="nd">@PathVariable</span><span class="o">(</span><span class="s">"id"</span><span class="o">)</span> <span class="n">String</span> <span class="n">id</span><span class="o">)</span>
+</code></pre>
+</div>
+
+<p>By using Shiro’s <code class="highlighter-rouge">@RequiresPermissions</code> annotation, this code would work with the original requirements and the new requirements without modification. The only thing that changes is how you map those permissions to roles, and in turn, to users. This could be done externally from your application in a database, or for this example a simple properties file.</p>
+
+<p><strong>NOTE:</strong> This example uses static usernames and passwords all stored as clear text, this is fine for a blog post, but seriously, manage your passwords <a href="https://stormpath.com/blog/password-security-right-way">correctly</a>!</p>
+
+<p>To meet the original requirements, the role-to-permission mapping would look like this:</p>
+
+<div class="language-properties highlighter-rouge"><pre class="highlight"><code><span class="py">role.admin</span> <span class="p">=</span> <span class="s">troopers:*</span>
+<span class="py">role.officer</span> <span class="p">=</span> <span class="s">troopers:create, troopers:read</span>
+<span class="py">role.underling</span> <span class="p">=</span> <span class="s">troopers:read</span>
+</code></pre>
+</div>
+
+<p>For the updated requirements, you would just change the file slightly to add the new ‘emperor’ role, and grant officers the ‘update’ permission:</p>
+
+<div class="language-properties highlighter-rouge"><pre class="highlight"><code><span class="py">role.emperor</span> <span class="p">=</span> <span class="s">*</span>
+<span class="py">role.admin</span> <span class="p">=</span> <span class="s">troopers:*</span>
+<span class="py">role.officer</span> <span class="p">=</span> <span class="s">troopers:create, troopers:read, troopers:update</span>
+<span class="py">role.underling</span> <span class="p">=</span> <span class="s">troopers:read</span>
+</code></pre>
+</div>
+
+<p>If the permission syntax looks a little funny to you, take a look at <a href="https://shiro.apache.org/permissions.html">Apache Shiro’s Wildcard Permission</a> documentation for an in depth explanation.</p>
+
+<h2 id="apache-shiro-and-spring">Apache Shiro and Spring</h2>
+
+<p>We’ve already covered the Maven dependencies and the actual REST controller, but our application will also need a <code class="highlighter-rouge">Realm</code> and error handling.</p>
+
+<p>If you take a look at the <code class="highlighter-rouge">SpringBootApp</code> class you will notice a few things that were NOT in the <a href="https://github.com/stormpath/jaxrs-spring-blog-example/blob/master/spring-boot/src/main/java/com/stormpath/example/springboot/SpringBootApp.java">original example</a>.</p>
+
+<div class="language-java highlighter-rouge"><pre class="highlight"><code><span class="nd">@Bean</span>
+<span class="kd">public</span> <span class="n">Realm</span> <span class="nf">realm</span><span class="o">()</span> <span class="o">{</span>
+    <span class="c1">// uses 'classpath:shiro-users.properties' by default</span>
+    <span class="n">PropertiesRealm</span> <span class="n">realm</span> <span class="o">=</span> <span class="k">new</span> <span class="n">PropertiesRealm</span><span class="o">();</span>
+
+    <span class="c1">// Caching isn't needed in this example, but we can still turn it on</span>
+    <span class="n">realm</span><span class="o">.</span><span class="na">setCachingEnabled</span><span class="o">(</span><span class="kc">true</span><span class="o">);</span>
+    <span class="k">return</span> <span class="n">realm</span><span class="o">;</span>
+<span class="o">}</span>
+
+<span class="nd">@Bean</span>
+<span class="kd">public</span> <span class="n">ShiroFilterChainDefinition</span> <span class="nf">shiroFilterChainDefinition</span><span class="o">()</span> <span class="o">{</span>
+    <span class="n">DefaultShiroFilterChainDefinition</span> <span class="n">chainDefinition</span> <span class="o">=</span> <span class="k">new</span> <span class="n">DefaultShiroFilterChainDefinition</span><span class="o">();</span>
+    <span class="c1">// use permissive to NOT require authentication, our controller Annotations will decide that</span>
+    <span class="n">chainDefinition</span><span class="o">.</span><span class="na">addPathDefinition</span><span class="o">(</span><span class="s">"/**"</span><span class="o">,</span> <span class="s">"authcBasic[permissive]"</span><span class="o">);</span>
+    <span class="k">return</span> <span class="n">chainDefinition</span><span class="o">;</span>
+<span class="o">}</span>
+
+<span class="nd">@Bean</span>
+<span class="kd">public</span> <span class="n">CacheManager</span> <span class="nf">cacheManager</span><span class="o">()</span> <span class="o">{</span>
+    <span class="c1">// Caching isn't needed in this example, but we will use the MemoryConstrainedCacheManager for this example.</span>
+    <span class="k">return</span> <span class="k">new</span> <span class="nf">MemoryConstrainedCacheManager</span><span class="o">();</span>
+<span class="o">}</span>
+</code></pre>
+</div>
+
+<p>First you have defined a Shiro <code class="highlighter-rouge">Realm</code>, a realm  is simply a user-store specific DAO. Shiro supports many different types of Realms out of the box (Active Directory, LDAP, Database, file, etc.).</p>
+
+<p>Next up you have the <code class="highlighter-rouge">ShiroFilterChainDefinition</code> which you’ve configured to allow BASIC authentication but NOT required it by using the ‘permissive’ option. This way your annotations configure everything. Instead of using annotations (or in addition to using them) you could define your <a href="https://shiro.apache.org/web.html#default-filters">permission to URL mappings</a> with Ant-style paths. This example would look something like:</p>
+
+<div class="language-java highlighter-rouge"><pre class="highlight"><code><span class="n">chainDefinition</span><span class="o">.</span><span class="na">addPathDefinition</span><span class="o">(</span><span class="s">"/troopers/**"</span><span class="o">,</span> <span class="s">"authcBasic, rest[troopers]"</span><span class="o">);</span>
+</code></pre>
+</div>
+
+<p>This would map any resource starting with the path <code class="highlighter-rouge">/troopers</code> to require BASIC authentication, and use the <a href="https://shiro.apache.org/static/current/apidocs/org/apache/shiro/web/filter/authz/HttpMethodPermissionFilter.html">‘rest’ filter</a> which based on the HTTP request method, appends a CRUD action to the permission string. For example an HTTP <code class="highlighter-rouge">GET</code> would map to ‘read’ so the full permission string for a ‘GET’ request would be <code class="highlighter-rouge">troopers:read</code> (just like you did with your annotations).</p>
+
+<h2 id="exception-handling">Exception Handling</h2>
+
+<p>The last bit of code you have handles exceptions.</p>
+
+<div class="language-java highlighter-rouge"><pre class="highlight"><code><span class="nd">@ExceptionHandler</span><span class="o">(</span><span class="n">UnauthenticatedException</span><span class="o">.</span><span class="na">class</span><span class="o">)</span>
+<span class="nd">@ResponseStatus</span><span class="o">(</span><span class="n">HttpStatus</span><span class="o">.</span><span class="na">UNAUTHORIZED</span><span class="o">)</span>
+<span class="kd">public</span> <span class="kt">void</span> <span class="nf">handleException</span><span class="o">(</span><span class="n">UnauthenticatedException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+    <span class="n">log</span><span class="o">.</span><span class="na">debug</span><span class="o">(</span><span class="s">"{} was thrown"</span><span class="o">,</span> <span class="n">e</span><span class="o">.</span><span class="na">getClass</span><span class="o">(),</span> <span class="n">e</span><span class="o">);</span>
+<span class="o">}</span>
+
+<span class="nd">@ExceptionHandler</span><span class="o">(</span><span class="n">AuthorizationException</span><span class="o">.</span><span class="na">class</span><span class="o">)</span>
+<span class="nd">@ResponseStatus</span><span class="o">(</span><span class="n">HttpStatus</span><span class="o">.</span><span class="na">FORBIDDEN</span><span class="o">)</span>
+<span class="kd">public</span> <span class="kt">void</span> <span class="nf">handleException</span><span class="o">(</span><span class="n">AuthorizationException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+    <span class="n">log</span><span class="o">.</span><span class="na">debug</span><span class="o">(</span><span class="s">"{} was thrown"</span><span class="o">,</span> <span class="n">e</span><span class="o">.</span><span class="na">getClass</span><span class="o">(),</span> <span class="n">e</span><span class="o">);</span>
+<span class="o">}</span>
+
+<span class="nd">@ExceptionHandler</span><span class="o">(</span><span class="n">NotFoundException</span><span class="o">.</span><span class="na">class</span><span class="o">)</span>
+<span class="nd">@ResponseStatus</span><span class="o">(</span><span class="n">HttpStatus</span><span class="o">.</span><span class="na">NOT_FOUND</span><span class="o">)</span>
+<span class="kd">public</span> <span class="nd">@ResponseBody</span> <span class="n">ErrorMessage</span> <span class="nf">handleException</span><span class="o">(</span><span class="n">NotFoundException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+    <span class="n">String</span> <span class="n">id</span> <span class="o">=</span> <span class="n">e</span><span class="o">.</span><span class="na">getMessage</span><span class="o">();</span>
+    <span class="k">return</span> <span class="k">new</span> <span class="nf">ErrorMessage</span><span class="o">(</span><span class="s">"Trooper Not Found: "</span><span class="o">+</span> <span class="n">id</span> <span class="o">+</span><span class="s">", why aren't you at your post? "</span><span class="o">+</span> <span class="n">id</span> <span class="o">+</span><span class="s">", do you copy?"</span><span class="o">);</span>
+<span class="o">}</span>
+</code></pre>
+</div>
+
+<p>The first two handle Shiro exceptions and simply set the status to 401 or 403. A 401 for invalid or missing user/passwords, and a 403 for any valid logged in user that does NOT have access to the resource. Lastly, you’ll want to handle any <code class="highlighter-rouge">NotFoundException</code> with a 404 and return a JSON serialized <code class="highlighter-rouge">ErrorMessage</code> object.</p>
+
+<h2 id="fire-it-up">Fire it Up!</h2>
+
+<p>If you put all of this together, or you just grab the code from <a href="https://github.com/oktadeveloper/shiro-spring-boot-example">Github</a>, you can start the application using <code class="highlighter-rouge">mvn spring-boot:run</code>.  Once you have everything running you can start making requests!</p>
+
+<div class="language-bash highlighter-rouge"><pre class="highlight"><code><span class="gp">$ </span>curl http://localhost:8080/troopers
+HTTP/1.1 401
+Content-Length: 0
+Date: Thu, 26 Jan 2017 21:12:41 GMT
+WWW-Authenticate: BASIC <span class="nv">realm</span><span class="o">=</span><span class="s2">"application"</span>
+</code></pre>
+</div>
+
+<p>Don’t forget, you need to authenticate!</p>
+
+<pre><code class="language-basic">$ curl --user emperor:secret http://localhost:8080/troopers
+HTTP/1.1 200
+Content-Type: application/json;charset=UTF-8
+Date: Thu, 26 Jan 2017 21:14:17 GMT
+Transfer-Encoding: chunked
+
+[
+    {
+        "id": "FN-0128",
+        "planetOfOrigin": "Naboo",
+        "species": "Twi'lek",
+        "type": "Sand"
+    },
+    {
+        "id": "FN-1383",
+        "planetOfOrigin": "Hoth",
+        "species": "Human",
+        "type": "Basic"
+    },
+    {
+        "id": "FN-1692",
+        "planetOfOrigin": "Hoth",
+        "species": "Nikto",
+        "type": "Marine"
+    },
+...
+</code></pre>
+
+<p>A <code class="highlighter-rouge">404</code> looks would look like this:</p>
+<div class="language-bash highlighter-rouge"><pre class="highlight"><code><span class="gp">$ </span>curl --user emperor:secret http://localhost:8080/troopers/TK-421
+HTTP/1.1 404
+Content-Type: application/json;charset<span class="o">=</span>UTF-8
+Date: Thu, 26 Jan 2017 21:15:54 GMT
+Transfer-Encoding: chunked
+
+<span class="o">{</span>
+    <span class="s2">"error"</span>: <span class="s2">"Trooper Not Found: TK-421, why aren't you at your post? TK-421, do you copy?"</span>
+<span class="o">}</span>
+</code></pre>
+</div>
+
+<h2 id="learn-more-about-apache-shiro">Learn More About Apache Shiro</h2>
+
+<p>This example has shown how easy it is to integrate Apache Shiro into a Spring Boot application, how using permissions allow for greater flexibility over roles, and all it takes is a single Annotation in your controller.</p>
+
+<p>At Stormpath we were happy to be able to commit our support to Apache Shiro, and we’ve carried that commitment forward to Okta. Look forward to more Shiro content from our team, including tutorials on using Shiro with Okta and OAuth plus how to add an AngularJS frontend to this <em>volunteer</em> application. Stay tuned, the Empire needs YOU!</p>
+
+<p>If you have questions on this example you can send them to <a href="http://shiro.apache.org/mailing-lists.html">Apache Shiro’s user list</a>, me on <a href="https://twitter.com/briandemers">Twitter</a>, or just leave them in the comments section below!</p>
+
+<p>To learn more, check out these posts:</p>
+
+<ul>
+  <li><a href="https://shiro.apache.org/10-minute-tutorial.html">Apache Shiro 10 Minute Tutorial</a></li>
+  <li><a href="https://stormpath.com/blog/new-rbac-resource-based-access-control">The New RBAC: Resource-Based Access Control</a></li>
+  <li><a href="https://shiro.apache.org/permissions.html#wildcard-permissions">Apache Shiro Wildcard Permissions</a></li>
+</ul>
+
+
+	</div>
+	
+</article>
+
+		
+</section>
+
+		
+	</div><footer class="Footer">
+    <div class="Wrap">
+
+        <div class="Row">
+
+            <div class="Column--3 Column--medium-6 Column--xSmall-12">
+
+                <a class="Logo" href="https://www.okta.com/" target="_blank" rel="noopener noreferrer">
+                    <img src="https://developer.okta.com/sites/all/themes/developer/images/logo-footer.png" alt="Okta">
+                    Visit okta.com
+                </a>
+
+            </div>
+
+            <div class="Column--3 Column--medium-12 Column--xSmall-12">
+
+                <h4>Social</h4>
+                <ul class="Footer-links Footer-links--social">
+                    <li><a class="Footer-links--github" target="_blank" rel="noopener noreferrer" href="http://github.com/oktadeveloper">Github</a></li>
+                    <li><a class="Footer-links--twitter" target="_blank" rel="noopener noreferrer" href="http://twitter.com/OktaDev">Twitter</a></li>
+                    <li><a class="Footer-links--forum" target="_blank" rel="noopener noreferrer" href="https://devforum.okta.com/">Forum</a></li>
+                    <li><a class="Footer-links--rss" target="_blank" rel="noopener noreferrer" href="http://feeds.feedburner.com/OktaBlog">RSS Blog</a></li>
+                </ul>
+            </div>
+
+            <div class="Column--3 Column--medium-6 Column--small-12">
+                <h4>More Info</h4>
+                <ul class="Footer-links">
+                    <li><a target="_blank" href="https://developer.okta.com/integrate-with-okta/">Integrate with Okta</a></li>
+                    <li><a href="/blog/">Blog</a></li>
+                    <li><a href="/docs/platform-release-notes/platform-release-notes.html">Release Notes</a></li>
+                    <li><a href="/3rd_party_notices/">3rd Party Notices</a></li>
+                </ul>
+            </div>
+
+            <div class="Column--3 Column--medium-6 Column--small-12">
+                <h4>Contact &amp; Legal</h4>
+                <ul class="Footer-links">
+                    <li><a href="https://developer.okta.com/contact/">Contact Sales</a></li>
+                    <li><a target="_blank" rel="noopener noreferrer" href="mailto:developers@okta.com">Contact Support</a></li>
+                    <li><a href="https://developer.okta.com/terms/">Terms &amp; Conditions</a></li>
+                    <li><a href="https://developer.okta.com/privacy/">Privacy Policy</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</footer>
+
+    <script type="text/javascript" src="/assets/master-0365dd27cf276cb2a15c0a43906ca592538204cf1ad4557547bf4e50609b411e.js"></script>
+    <script type="text/javascript" src="/assets/myOkta-911cbafbbe079b7a5522d9cbe15bd2a5f44e1582531e88393934bec69f97696b.js"></script>
+    
+    
+    
+    
+      <script type="text/javascript" src="/assets/blog-6e32dad27404131cc8630a5282264bed2ab4c08c91ac86fa496b75c53aa4f681.js"></script>
+    
+
+  <!-- START Post Footer -->
+  
+  <!-- START Google Tag Manager -->
+  <!-- https://support.google.com/tagmanager/answer/6103696?hl=en -->
+  <noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-TJ45R6" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+  <!-- END Google Tag Manager -->
+  <!-- START Google Remarketing Tag -->
+  <script type="text/javascript">
+    /* <![CDATA[ */
+    var google_conversion_id = 1006913831;
+    var google_custom_params = window.google_tag_params;
+    var google_remarketing_only = true;
+    /* ]]> */
+  </script>
+  <div style="display:none;"><script type="text/javascript" src="//www.googleadservices.com/pagead/conversion.js"></script></div>
+  <noscript><div style="display:inline;"><img height="1" width="1" style="border-style:none;" alt="" src="//googleads.g.doubleclick.net/pagead/viewthroughconversion/1006913831/?value=0&amp;guid=ON&amp;script=0"></div></noscript>
+  <!-- END Google Remarketing Tag -->
+  <!-- START Crazy Egg Tracking -->
+  <script type="text/javascript">
+    setTimeout(function(){var a=document.createElement("script");
+    var b=document.getElementsByTagName("script")[0];
+    a.src=document.location.protocol+"//script.crazyegg.com/pages/scripts/0021/9333.js?"+Math.floor(new Date().getTime()/3600000);
+    a.async=true;a.type="text/javascript";b.parentNode.insertBefore(a,b)}, 1);
+  </script>
+  <!-- END Crazy Egg Tracking -->
+
+  <!-- END Post Footer -->
+</body>
+</html>

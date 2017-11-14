@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html class="no-js" lang="en" dir="ltr">
+<body>
+    <h2 id="okta-react-quickstart">Okta React Quickstart</h2>
+
+<p>This guide will walk you through integrating authentication into a React app with Okta by performing these steps:</p>
+
+<ol>
+  <li>Add an OpenID Connect Client in Okta</li>
+  <li>Install the Okta React SDK</li>
+  <li>Attach Components to the Secure Router</li>
+  <li>Use the Access Token</li>
+</ol>
+
+<p>At the end of the React instructions you can choose your server type to learn more about post-authentication workflows, such as verifying tokens that your React application can send to your server.</p>
+
+<h2 id="prerequisites">Prerequisites</h2>
+<ul>
+  <li>If you do not already have a <strong>Developer Edition Account</strong>, you can create one at <a href="https://developer.okta.com/signup/">https://developer.okta.com/signup/</a>.</li>
+  <li>If you don’t have a React app, or are new to React, please continue with the <a href="https://facebook.github.io/react/docs/installation.html#creating-a-new-application">React Quickstart</a> guide. It will walk you through the creation of a React app, creating routes, and other application development essentials.</li>
+</ul>
+
+<h2 id="add-an-openid-connect-client-in-okta">Add an OpenID Connect Client in Okta</h2>
+<p>In Okta, applications are OpenID Connect clients that can use Okta Authorization servers to authenticate users.  Your Okta Org already has a default authorization server, so you just need to create an OIDC client that will use it.</p>
+<ul>
+  <li>Log into the Okta Developer Dashboard, click <strong>Applications</strong> then <strong>Add Application</strong>.</li>
+  <li>Choose <strong>Single Page App (SPA)</strong> as the platform, then populate your new OpenID Connect application with values suitable for your app. If you are running this locally and using the defaults from the <a href="https://facebook.github.io/react/docs/installation.html#creating-a-new-application">React Quickstart</a>, your <code class="highlighter-rouge">port</code> will be <code class="highlighter-rouge">3000</code>:</li>
+</ul>
+
+<table>
+  <thead>
+    <tr>
+      <th>Setting</th>
+      <th>Value</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>App Name</td>
+      <td>My SPA App</td>
+    </tr>
+    <tr>
+      <td>Base URIs</td>
+      <td>http://localhost:{port}</td>
+    </tr>
+    <tr>
+      <td>Login redirect URIs</td>
+      <td>http://localhost:{port}/implicit/callback</td>
+    </tr>
+    <tr>
+      <td>Grant Types Allowed</td>
+      <td>Implicit</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>After you have created the application there are two more values you will need to gather:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Setting</th>
+      <th>Where to Find</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Client ID</td>
+      <td>In the applications list, or on the “General” tab of a specific application.</td>
+    </tr>
+    <tr>
+      <td>Org URL</td>
+      <td>On the home screen of the developer dashboard, in the upper right.</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>These values will be used in your React application to setup the OpenID Connect flow with Okta.</p>
+
+<h2 id="install-the-okta-react-sdk">Install the Okta React SDK</h2>
+
+<p>You will need to use the <a href="https://github.com/okta/okta-oidc-js/tree/master/packages/okta-react">Okta React SDK</a> library to sign in the user by redirecting to the authorization endpoint on your Okta Org. You can install it via npm:</p>
+
+<div class="language-bash highlighter-rouge"><pre class="highlight"><code>npm install @okta/okta-react --save
+</code></pre>
+</div>
+
+<h3 id="configuration">Configuration</h3>
+
+<p>You will need the values from the OIDC client that you created in the previous step to instantiate the middleware. You will also need to know your Okta Org URL, which you can see on the home page of the Okta Developer console. Your Okta Org URL + <code class="highlighter-rouge">oauth2/default</code> will be the <code class="highlighter-rouge">issuer</code> param.</p>
+
+<p>In your application’s <code class="highlighter-rouge">App.js</code> file, import the following objects and pass in your configuration:</p>
+
+<div class="language-typescript highlighter-rouge"><pre class="highlight"><code><span class="k">import</span> <span class="p">{</span> <span class="nx">Security</span><span class="p">,</span> <span class="nx">SecureRoute</span><span class="p">,</span> <span class="nx">ImplicitCallback</span> <span class="p">}</span> <span class="k">from</span> <span class="s1">'@okta/okta-react'</span><span class="p">;</span>
+
+<span class="kd">const</span> <span class="nx">config</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="na">issuer</span><span class="p">:</span> <span class="s1">'<span class="okta-preview-domain">https://{yourOktaDomain}.com</span>/oauth2/default'</span><span class="p">,</span>
+  <span class="na">redirectUri</span><span class="p">:</span> <span class="nb">window</span><span class="p">.</span><span class="nx">location</span><span class="p">.</span><span class="nx">origin</span> <span class="o">+</span> <span class="s1">'/implicit/callback'</span><span class="p">,</span>
+  <span class="na">clientId</span><span class="p">:</span> <span class="s1">'{clientId}'</span>
+<span class="p">}</span>
+
+</code></pre>
+</div>
+
+<h2 id="attach-components-to-the-secure-router">Attach Components to the Secure Router</h2>
+
+<p>You’ll need to provide these routes in your sample application, so that we can sign the user in and handle the callback from Okta. We will show you how to set these up below using <a href="https://github.com/ReactTraining/react-router/tree/master/packages/react-router-dom">React Router DOM</a>:</p>
+
+<ul>
+  <li><code class="highlighter-rouge">/</code>: A default home page to handle basic control of the app.</li>
+  <li><code class="highlighter-rouge">/implicit/callback</code>: This is where auth is handled for you after redirection.</li>
+</ul>
+
+<h3 id="provide-the-login-and-logout-buttons">Provide the Login and Logout Buttons</h3>
+
+<p>In the relevant location in your application, you will want to provide <code class="highlighter-rouge">Login</code> and <code class="highlighter-rouge">Logout</code> buttons for the user. You can show/hide the correct button by using the <code class="highlighter-rouge">auth.isAuthenticated()</code> method. For example:</p>
+
+<div class="language-typescript highlighter-rouge"><pre class="highlight"><code><span class="c1">/// src/Home.js</span>
+
+<span class="k">import</span> <span class="nx">React</span><span class="p">,</span> <span class="p">{</span> <span class="nx">Component</span> <span class="p">}</span> <span class="k">from</span> <span class="s1">'react'</span><span class="p">;</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">Link</span> <span class="p">}</span> <span class="k">from</span> <span class="s1">'react-router-dom'</span><span class="p">;</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">withAuth</span> <span class="p">}</span> <span class="k">from</span> <span class="s1">'@okta/okta-react'</span><span class="p">;</span>
+
+<span class="k">export</span> <span class="k">default</span> <span class="nx">withAuth</span><span class="p">(</span><span class="kr">class</span> <span class="nx">Home</span> <span class="k">extends</span> <span class="nx">Component</span> <span class="p">{</span>
+  <span class="kd">constructor</span><span class="p">(</span><span class="nx">props</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">super</span><span class="p">(</span><span class="nx">props</span><span class="p">);</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">state</span> <span class="o">=</span> <span class="p">{</span> <span class="na">authenticated</span><span class="p">:</span> <span class="kc">null</span> <span class="p">};</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">checkAuthentication</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">checkAuthentication</span><span class="p">.</span><span class="nx">bind</span><span class="p">(</span><span class="k">this</span><span class="p">);</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">checkAuthentication</span><span class="p">();</span>
+  <span class="p">}</span>
+
+  <span class="k">async</span> <span class="nx">checkAuthentication</span><span class="p">()</span> <span class="p">{</span>
+    <span class="kd">const</span> <span class="nx">authenticated</span> <span class="o">=</span> <span class="k">await</span> <span class="k">this</span><span class="p">.</span><span class="nx">props</span><span class="p">.</span><span class="nx">auth</span><span class="p">.</span><span class="nx">isAuthenticated</span><span class="p">();</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nx">authenticated</span> <span class="o">!==</span> <span class="k">this</span><span class="p">.</span><span class="nx">state</span><span class="p">.</span><span class="nx">authenticated</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">this</span><span class="p">.</span><span class="nx">setState</span><span class="p">({</span> <span class="nx">authenticated</span> <span class="p">});</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+
+  <span class="nx">componentDidUpdate</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">checkAuthentication</span><span class="p">();</span>
+  <span class="p">}</span>
+
+  <span class="nx">render</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">state</span><span class="p">.</span><span class="nx">authenticated</span> <span class="o">===</span> <span class="kc">null</span><span class="p">)</span> <span class="k">return</span> <span class="kc">null</span><span class="p">;</span>
+    <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">state</span><span class="p">.</span><span class="nx">authenticated</span> <span class="p">?</span>
+      <span class="o">&lt;</span><span class="nx">button</span> <span class="nx">onClick</span><span class="o">=</span><span class="p">{</span><span class="k">this</span><span class="p">.</span><span class="nx">props</span><span class="p">.</span><span class="nx">auth</span><span class="p">.</span><span class="nx">logout</span><span class="p">}</span><span class="o">&gt;</span><span class="nx">Logout</span><span class="o">&lt;</span><span class="sr">/button&gt; </span><span class="err">:
+</span>      <span class="o">&lt;</span><span class="nx">button</span> <span class="nx">onClick</span><span class="o">=</span><span class="p">{</span><span class="k">this</span><span class="p">.</span><span class="nx">props</span><span class="p">.</span><span class="nx">auth</span><span class="p">.</span><span class="nx">login</span><span class="p">}</span><span class="o">&gt;</span><span class="nx">Login</span><span class="o">&lt;</span><span class="sr">/button&gt;</span><span class="err">;
+</span>  <span class="p">}</span>
+<span class="p">});</span>
+</code></pre>
+</div>
+
+<h3 id="update-your-appjs">Update your <code class="highlighter-rouge">App.js</code></h3>
+
+<p>Finally, passing in your configuration into <code class="highlighter-rouge">Security</code>, and connect your application’s paths:</p>
+
+<div class="language-typescript highlighter-rouge"><pre class="highlight"><code><span class="k">import</span> <span class="nx">React</span><span class="p">,</span> <span class="p">{</span> <span class="nx">Component</span> <span class="p">}</span> <span class="k">from</span> <span class="s1">'react'</span><span class="p">;</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">BrowserRouter</span> <span class="k">as</span> <span class="nx">Router</span><span class="p">,</span> <span class="nx">Route</span> <span class="p">}</span> <span class="k">from</span> <span class="s1">'react-router-dom'</span><span class="p">;</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">Security</span><span class="p">,</span> <span class="nx">SecureRoute</span><span class="p">,</span> <span class="nx">ImplicitCallback</span> <span class="p">}</span> <span class="k">from</span> <span class="s1">'@okta/okta-react'</span><span class="p">;</span>
+<span class="k">import</span> <span class="nx">Home</span> <span class="k">from</span> <span class="s1">'./Home'</span><span class="p">;</span>
+
+<span class="kd">const</span> <span class="nx">config</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="na">issuer</span><span class="p">:</span> <span class="s1">'<span class="okta-preview-domain">https://{yourOktaDomain}.com</span>/oauth2/default'</span><span class="p">,</span>
+  <span class="na">redirect_uri</span><span class="p">:</span> <span class="nb">window</span><span class="p">.</span><span class="nx">location</span><span class="p">.</span><span class="nx">origin</span> <span class="o">+</span> <span class="s1">'/implicit/callback'</span><span class="p">,</span>
+  <span class="na">client_id</span><span class="p">:</span> <span class="s1">'{clientId}'</span>
+<span class="p">}</span>
+
+<span class="kr">class</span> <span class="nx">App</span> <span class="k">extends</span> <span class="nx">Component</span> <span class="p">{</span>
+  <span class="nx">render</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="p">(</span>
+      <span class="o">&lt;</span><span class="nx">Router</span><span class="o">&gt;</span>
+        <span class="o">&lt;</span><span class="nx">Security</span> <span class="nx">issuer</span><span class="o">=</span><span class="p">{</span><span class="nx">config</span><span class="p">.</span><span class="nx">issuer</span><span class="p">}</span>
+                  <span class="nx">client_id</span><span class="o">=</span><span class="p">{</span><span class="nx">config</span><span class="p">.</span><span class="nx">clientId</span><span class="p">}</span>
+                  <span class="nx">redirect_uri</span><span class="o">=</span><span class="p">{</span><span class="nx">config</span><span class="p">.</span><span class="nx">redirect_uri</span><span class="p">}</span> <span class="o">&gt;</span>
+          <span class="o">&lt;</span><span class="nx">Route</span> <span class="nx">path</span><span class="o">=</span><span class="s1">'/'</span> <span class="nx">exact</span><span class="o">=</span><span class="p">{</span><span class="kc">true</span><span class="p">}</span> <span class="nx">component</span><span class="o">=</span><span class="p">{</span><span class="nx">Home</span><span class="p">}</span><span class="sr">/</span><span class="err">&gt;
+</span>          <span class="o">&lt;</span><span class="nx">Route</span> <span class="nx">path</span><span class="o">=</span><span class="s1">'/implicit/callback'</span> <span class="nx">component</span><span class="o">=</span><span class="p">{</span><span class="nx">ImplicitCallback</span><span class="p">}</span> <span class="sr">/</span><span class="err">&gt;
+</span>        <span class="o">&lt;</span><span class="sr">/Security</span><span class="err">&gt;
+</span>      <span class="o">&lt;</span><span class="sr">/Router</span><span class="err">&gt;
+</span>    <span class="p">);</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="k">export</span> <span class="k">default</span> <span class="nx">App</span><span class="p">;</span>
+</code></pre>
+</div>
+
+<h2 id="use-the-access-token">Use the Access Token</h2>
+
+<p>Your React application now has an access token in local storage that was issued by your Okta Authorization server. You can use this token to authenticate requests for resources on your server or API. As a hypothetical example, let’s say that you have an API that gives us messages for our user.  You could create a <code class="highlighter-rouge">MessageList</code> component that gets the access token from local storage, and use it to make an authenticated request to your server.</p>
+
+<p>Please continue down to the next section, Server Setup, to learn about access token validation on the server.  Here is what the React component could look like for this hypothetical example:</p>
+
+<div class="language-typescript highlighter-rouge"><pre class="highlight"><code><span class="k">import</span> <span class="nx">fetch</span> <span class="k">from</span> <span class="s1">'isomorphic-fetch'</span><span class="p">;</span>
+<span class="k">import</span> <span class="nx">React</span><span class="p">,</span> <span class="p">{</span> <span class="nx">Component</span> <span class="p">}</span> <span class="k">from</span> <span class="s1">'react'</span><span class="p">;</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">withAuth</span> <span class="p">}</span> <span class="k">from</span> <span class="s1">'@okta/okta-react'</span><span class="p">;</span>
+
+<span class="k">export</span> <span class="k">default</span> <span class="nx">withAuth</span><span class="p">(</span><span class="kr">class</span> <span class="nx">MessageList</span> <span class="k">extends</span> <span class="nx">Component</span> <span class="p">{</span>
+  <span class="kd">constructor</span><span class="p">(</span><span class="nx">props</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">super</span><span class="p">(</span><span class="nx">props</span><span class="p">)</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">state</span> <span class="o">=</span> <span class="p">{</span>
+      <span class="na">messages</span><span class="p">:</span> <span class="kc">null</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+
+  <span class="k">async</span> <span class="nx">componentDidMount</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">try</span> <span class="p">{</span>
+      <span class="kd">const</span> <span class="nx">response</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">fetch</span><span class="p">(</span><span class="s1">'http://localhost:{serverPort}/api/messages'</span><span class="p">,</span> <span class="p">{</span>
+        <span class="na">headers</span><span class="p">:</span> <span class="p">{</span>
+          <span class="na">Authorization</span><span class="p">:</span> <span class="s1">'Bearer '</span> <span class="o">+</span> <span class="k">await</span> <span class="k">this</span><span class="p">.</span><span class="nx">props</span><span class="p">.</span><span class="nx">auth</span><span class="p">.</span><span class="nx">getAccessToken</span><span class="p">()</span>
+        <span class="p">}</span>
+      <span class="p">});</span>
+      <span class="kd">const</span> <span class="nx">data</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">response</span><span class="p">.</span><span class="nx">json</span><span class="p">();</span>
+      <span class="k">this</span><span class="p">.</span><span class="nx">setState</span><span class="p">({</span> <span class="na">messages</span><span class="p">:</span> <span class="nx">data</span><span class="p">.</span><span class="nx">messages</span> <span class="p">});</span>
+    <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">err</span><span class="p">)</span> <span class="p">{</span>
+      <span class="c1">// handle error as needed</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+
+  <span class="nx">render</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="k">this</span><span class="p">.</span><span class="nx">state</span><span class="p">.</span><span class="nx">messages</span><span class="p">)</span> <span class="k">return</span> <span class="o">&lt;</span><span class="nx">div</span><span class="o">&gt;</span><span class="nx">Loading</span><span class="p">..</span><span class="o">&lt;</span><span class="sr">/div&gt;</span><span class="err">;
+</span>    <span class="kd">const</span> <span class="nx">items</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">state</span><span class="p">.</span><span class="nx">messages</span><span class="p">.</span><span class="nx">map</span><span class="p">(</span><span class="nx">message</span> <span class="o">=&gt;</span>
+      <span class="o">&lt;</span><span class="nx">li</span> <span class="nx">key</span><span class="o">=</span><span class="p">{</span><span class="nx">message</span><span class="p">}</span><span class="o">&gt;</span><span class="p">{</span><span class="nx">message</span><span class="p">}</span><span class="o">&lt;</span><span class="sr">/li</span><span class="err">&gt;
+</span>    <span class="p">);</span>
+    <span class="k">return</span> <span class="o">&lt;</span><span class="nx">ul</span><span class="o">&gt;</span><span class="p">{</span><span class="nx">items</span><span class="p">}</span><span class="o">&lt;</span><span class="sr">/ul&gt;</span><span class="err">;
+</span>  <span class="p">}</span>
+<span class="p">}));</span>
+</code></pre>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,528 @@
+<!DOCTYPE html>
+<html class="no-js" lang="en" dir="ltr">
+<head>
+  <script>
+    var searchDomain = 'https://developer.okta.com';
+    var isProduction = window.location.hostname === 'developer.okta.com';
+    if (isProduction) {
+      // TypeKit
+      (function(d) {
+        var config = {
+          kitId: 'jff5neq',
+          scriptTimeout: 3000,
+          async: true
+        },
+        h=d.documentElement,t=setTimeout(function(){h.className=h.className.replace(/bwf-loadingb/g,"")+" wf-inactive";},config.scriptTimeout),tk=d.createElement("script"),f=false,s=d.getElementsByTagName("script")[0],a;h.className+=" wf-loading";tk.src='https://use.typekit.net/'+config.kitId+'.js';tk.async=true;tk.onload=tk.onreadystatechange=function(){a=this.readyState;if(f||a&&a!="complete"&&a!="loaded")return;f=true;clearTimeout(t);try{Typekit.load(config)}catch(e){}};s.parentNode.insertBefore(tk,s)
+      })(document);
+
+      // Google analytics
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+              (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+              m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+      ga('create', 'UA-15777010-3', 'auto');
+      ga('send', 'pageview');
+
+      // START Google Tag Manager
+      (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+      new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+      j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+      '//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+      })(window,document,'script','dataLayer','GTM-TJ45R6');
+      // END Google Tag Manager
+    }
+	</script>
+  <meta charset="utf-8">
+  <meta http-equiv="x-ua-compatible" content="IE=edge,chrome=1">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+ 	
+
+  <link type="text/css" rel="stylesheet" href="https://developer.okta.com/sites/all/themes/developer/css/master.css" media="all" />
+  <meta class="swiftype" name="title" data-type="string" content="Session Cookie | Okta Developer" />
+  <meta class="swiftype" name="summary" data-type="string" content="Overview" />
+
+  <link type="text/css" rel="stylesheet" href="/assets/animate-ec43d72c3ed45e08a460b8a2966d8dba6006aebfa0530935c3973fa493a8771f.css">
+  <link type="text/css" rel="stylesheet" href="/assets/okta-a96df4c9d48b78b618e1d541f46f7137d73d40653571e020c1ad59edd7915c60.css">
+  
+  
+  <title>Session Cookie | Okta Developer</title>
+  <meta name="description" content="Overview">
+  <link rel="canonical" href="https://developer.okta.com/use_cases/authentication/session_cookie"  data-proofer-ignore>
+  <link rel="alternate" type="application/rss+xml" title="Okta Developer" href="https://developer.okta.com/feed.xml"><!-- GA -->
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+  <link rel="manifest" href="/manifest.json">
+  <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#21313a">
+  <meta name="theme-color" content="#ffffff">
+</head>
+
+<body>
+  <div class="Page session-cookie Page--docs-page">
+    <!-- START Header -->
+    
+
+
+
+
+<header class="Header is-fixed">
+
+  <div class="Wrap">
+
+    <a class="Logo" href="https://developer.okta.com">
+      <svg version="1.1" id="OktaLogo" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 431.9 151.4" style="enable-background:new 0 0 431.9 151.4;" xml:space="preserve"><g><g><g><path d="M102.2,41.4c-21,0-38.1,17.1-38.1,38.1s17.1,38.1,38.1,38.1s38.1-17.1,38.1-38.1l0,0C140.3,58.5,123.2,41.4,102.2,41.4z M102.2,98.5c-10.5,0-19-8.5-19-19s8.5-19,19-19s19,8.5,19,19c0.1,10.5-8.4,19-18.9,19.1C102.3,98.6,102.2,98.6,102.2,98.5L102.2,98.5z"/><path d="M169.1,92.3c0-1.9,1.5-3.4,3.4-3.4c0.9,0,1.8,0.4,2.4,1c9.5,9.7,25.3,26.3,25.4,26.4c0.4,0.5,0.8,0.8,1.4,0.9l1.6,0.2h17.2c1.8,0,3.3-1.4,3.4-3.2c0-0.8-0.3-1.5-0.8-2.2l-28.6-29.2l-1.5-1.5c-3.2-3.9-2.9-5.4,0.8-9.3l22.6-25.1c1.1-1.4,0.8-3.5-0.6-4.6c-0.6-0.4-1.3-0.7-2-0.7h-17c-0.6,0.2-1.1,0.5-1.5,0.9L175,64.4c-1.3,1.4-3.4,1.5-4.8,0.2c-0.7-0.6-1.1-1.5-1.1-2.5V18.9c0-1.7-1.3-3-3-3c-0.1,0-0.2,0-0.3,0h-12.7c-2.2,0-3.3,1.5-3.3,2.8v95.8c0,2.2,1.8,2.8,3.3,2.8h12.7c1.7,0.1,3.2-1.2,3.3-2.9c0,0,0,0,0,0V92.3z"/><path d="M273,114l-1.4-12.8c-0.2-1.7-1.7-2.9-3.4-2.7c0,0,0,0-0.1,0l-2.9,0.2c-10.1,0-18.5-7.9-19-18c0-0.3,0-0.7,0-1V64.2c-0.1-2,1.5-3.6,3.5-3.7c0,0,0,0,0,0h17c1.7-0.1,3.1-1.5,3-3.2c0,0,0-0.1,0-0.1v-12c0-2.3-1.5-3.6-2.8-3.6h-17.1c-1.9,0.1-3.5-1.5-3.6-3.4c0,0,0,0,0,0V18.9c-0.1-1.7-1.5-3.1-3.2-3c0,0-0.1,0-0.1,0h-12.7c-1.6-0.1-3,1.1-3.1,2.7c0,0.1,0,0.1,0,0.2c0,0,0,61.7,0,62c0.5,21,17.9,37.6,38.9,37c1.4,0,2.9-0.2,4.3-0.3C272,117.2,273.2,115.7,273,114z"/></g><path d="M364.7,98c-10.8,0-12.4-3.8-12.4-18.3l0,0V44.8c0-1.8-1.4-3.2-3.2-3.2c0,0-0.1,0-0.1,0h-12.8c-1.8,0-3.2,1.4-3.3,3.2v1.6C314.6,36,291.3,42.5,281,60.8c-10.4,18.3-3.9,41.6,14.4,51.9c14,7.9,31.4,6.2,43.5-4.2c3.6,5.5,9.3,9.1,18.3,9.1c1.5,0,9.7,0.3,9.7-3.5v-13.6C367,99.2,366,98.1,364.7,98z M314.2,98.6c-10.5,0-19-8.5-19-19s8.5-19,19-19s19,8.5,19,19l0,0C333.2,90.1,324.7,98.6,314.2,98.6z"/></g><path d="M19.4,74c2.2-1.9,4.1-4.1,5.7-6.6c3.5-5.3,5.4-11.5,5.2-17.9V27c0-4.9,0.9-8.4,2.7-10.5c1.8-2.1,4.8-3,9.2-3h12.6c1.2,0,2.1-0.9,2.2-2.1l0,0V2.2C57,1,56,0,54.8,0c0,0,0,0,0,0H41.5c-7.8,0-12.9,2.1-18,7.6s-7.1,12.3-7.1,21.7v14.2c0,2.2-0.1,4-0.2,5.7v2.2c-0.5,3.2-1.8,6.2-3.6,8.9C9.4,64.7,5.1,70.9,0.9,74l0,0l-0.3,0.3l0,0l-0.2,0.3H0.2v0.3l0,0c-0.1,0.3-0.1,0.7,0,1l0,0v0.3h0.1l0.2,0.3l0,0l0.3,0.3l0,0c4.2,3.1,8.5,9.3,11.3,13.7c1.8,2.7,3.1,5.7,3.6,8.9v2.2c0.1,1.6,0.2,3.5,0.2,5.7v14.3c0,9.4,2.4,16.7,7.1,21.7s10.2,7.6,18,7.6h13.8c1.2,0,2.2-1,2.2-2.2V140l0,0c0-1.2-1-2.2-2.2-2.2H42.2c-4.4,0-7.5-1-9.2-3s-2.7-5.6-2.7-10.5v-22.4c0.2-6.4-1.7-12.6-5.2-17.9c-1.6-2.5-3.5-4.7-5.7-6.6l0,0c-0.9-0.7-1.1-2-0.4-2.9C19.2,74.3,19.3,74.2,19.4,74L19.4,74z"/><path d="M412.5,74c-2.2-1.9-4.1-4.1-5.7-6.6c-3.5-5.3-5.4-11.5-5.2-17.9V27c0-4.9-0.9-8.4-2.7-10.5s-4.8-3-9.2-3h-12.6c-1.2,0-2.2-1-2.2-2.2c0,0,0,0,0,0l0,0V2.2c0-1.2,1-2.2,2.2-2.2c0,0,0,0,0,0h13.4c7.8,0,12.9,2.1,18,7.6s7.1,12.3,7.1,21.7v14.2c0,2.2,0.1,4,0.2,5.7v2.2c0.5,3.2,1.8,6.2,3.6,8.9c2.8,4.5,7.1,10.7,11.3,13.7l0,0l0.3,0.3l0,0l0.2,0.3h0.1v0.3l0,0c0.1,0.3,0.1,0.7,0,1l0,0v0.3h-0.1l-0.2,0.3l0,0l-0.3,0.3l0,0c-4.2,3.1-8.5,9.3-11.3,13.7c-1.8,2.7-3.1,5.7-3.6,8.9v2.2c-0.1,1.6-0.2,3.5-0.2,5.7v14.3c0,9.4-2.4,16.7-7.1,21.7s-10.2,7.6-18,7.6h-13.4c-1.2,0-2.2-1-2.2-2.2c0,0,0,0,0,0V140l0,0c0-1.2,1-2.2,2.2-2.2l0,0h12.7c4.4,0,7.5-1,9.2-3s2.7-5.6,2.7-10.5v-22.4c-0.2-6.3,1.6-12.6,5.1-17.9c1.6-2.5,3.5-4.7,5.7-6.6l0,0c0.9-0.7,1.1-2,0.4-2.9C412.7,74.3,412.6,74.2,412.5,74L412.5,74z"/></g></svg>
+    </a>
+
+    <nav class="Header-nav PrimaryNav">
+      <ul class="menu">
+        <li class="first leaf">
+          <a href="https://developer.okta.com/product/">Product</a>
+        </li>
+        <li class="leaf">
+          <a href="https://developer.okta.com/pricing/">Pricing</a>
+        </li>
+        <li class="leaf">
+          <a href="/blog/">Blog</a>
+        </li>
+        <li class="leaf">
+          <a href="/documentation/" class="active">Docs</a>
+        </li>
+        <li class="last expanded">
+          <span class="nolink">Support</span>
+          <ul class="menu">
+            <li class="first leaf"><a href="https://devforum.okta.com/">Okta Developer Forums</a></li>
+            <li class="last leaf"><a href="mailto:developers@okta.com">developers@okta.com</a></li>
+          </ul>
+        </li>
+      </ul>
+      <a class="PrimaryNav-toggle" href="#">
+        <svg width="20px" height="20px" viewBox="0 0 20 20" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+            <g class="MenuIcon" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="round">
+                <path d="M1,16 L19,16" class="MenuIcon-line1" stroke="#FFFFFF" stroke-width="2"></path>
+                <path d="M1,4 L19,4" class="MenuIcon-line2" stroke="#FFFFFF" stroke-width="2"></path>
+                <path d="M1,10 L19,10" class="MenuIcon-line3" stroke="#FFFFFF" stroke-width="2"></path>
+                <path d="M1,10 L19,10" class="MenuIcon-line4" stroke="#FFFFFF" stroke-width="2"></path>
+            </g>
+        </svg>
+        <svg class="CloseIcon" width="16px" height="16px" viewBox="0 0 16 16" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+          <g id="ALl-Boards" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+            <g id="Desktop" transform="translate(-915.000000, -235.000000)" fill="#FFFFFF">
+              <g id="Search-bar-Active" transform="translate(30.000000, 26.000000)">
+                <polygon id="Icon/Cross" points="901 210.6 899.4 209 893 215.4 886.6 209 885 210.6 891.4 217 885 223.4 886.6 225 893 218.6 899.4 225 901 223.4 894.6 217"></polygon>
+              </g>
+            </g>
+          </g>
+        </svg>
+      </a>
+
+      <div class="PrimaryNav-cta">
+        <a target="_blank" rel="noopener noreferrer" href="https://login.okta.com/?SAMLRequest=fc%2B7CsJAEAXQXvAflu1NNJUMeZBGELTx1a%2FrYILJTtyZGD%2FfSBRiYzlw77lMnD3rSj3Qc0ku0YtgrhU6S5fSXRN9PKxmS52l00nMpq6iBvJWCrfDe4ss6vStRe9aDzmGIZfo1jsgwyWDMzUyiIV9vt1AH4XGk5ClSvewUgMNa%2BYW%2FVj5jxhm9NLP67QQaSAMu64L6CYmsFSHlnzT4ZlLwTgcL6Sf8%2FeX9AU%3Dhttps://login.okta.com/?SAMLRequest=fc%2B7CsJAEAXQXvAflu1NNJUMeZBGELTx1a%2FrYILJTtyZGD%2FfSBRiYzlw77lMnD3rSj3Qc0ku0YtgrhU6S5fSXRN9PKxmS52l00nMpq6iBvJWCrfDe4ss6vStRe9aDzmGIZfo1jsgwyWDMzUyiIV9vt1AH4XGk5ClSvewUgMNa%2BYW%2FVj5jxhm9NLP67QQaSAMu64L6CYmsFSHlnzT4ZlLwTgcL6Sf8%2FeX9AU%3D" class="Button--redOutline">Login</a>
+        <a href="https://developer.okta.com/signup/" class="Button--red">Sign up</a>
+      </div>
+
+      <a class="SearchIcon" href="#"></a>
+      <form id="form_search" class="SearchBar Formisimo_clocked_69929" method="get" action="https://developer.okta.com/search/" name="form_search" __bizdiag="-784164280" __biza="WJ__">
+        <input type="text" name="stq" autocomplete="off" id="st-search-input-auto" class="st-search-input" placeholder="Search">
+        <input type="submit" name="submit" value="GO">
+      </form>
+
+    </nav>
+
+  </div>
+
+</header>
+
+    <!-- END Header -->
+     <!-- START Page Center w/Sub Nav & Content -->
+    <section class="PageContent DynamicSidebar has-tableOfContents">
+      <!-- START Fixed sidebar --><aside class="Sidebar">
+  <h2 class="Sidebar-location Sidebar-toggle h6">Navigation</h2>
+  <div class="Sidebar-close Sidebar-toggle"></div>
+  <div>
+    <h3 class="Sidebar-title"><a href = "/authentication-guide/">Authentication Guide</a></h3>
+    <ul class="Sidebar-nav">
+      <li>
+        <a href = "/authentication-guide/auth-overview/">OAuth 2.0 Overview</a>
+        
+      </li>
+      <li>
+        <a href = "/authentication-guide/implementing-authentication/">Implementing OAuth 2.0</a>
+        
+      </li>
+      <li>
+      <a href = "/authentication-guide/social-login/">Social Login</a>
+      
+      </li>
+      <li>
+      <a href = "/authentication-guide/saml-login/">SAML Login</a>
+      
+      </li>
+      <li>
+      <a href = "/authentication-guide/tokens/">Working With Tokens</a>
+      
+      </li>
+      <!--
+      <li>
+      <a href = "/authentication-guide/custom-login/">Customizing Login</a>
+      
+      </li>
+    -->
+    </ul>
+
+    <h3 class="Sidebar-title">Use Cases</h3>
+    <ul class="Sidebar-nav">
+      <li>
+        <a href="/use_cases/authentication/">Authentication</a>
+      </li>
+      <li>
+        <a href="/use_cases/mfa/">Multi-Factor Authentication</a>
+      </li>
+      <li>
+        <a href="/use_cases/api_access_management/">API Access Management</a>
+      </li>
+      <li>
+        <a href="/use_cases/integrate_with_okta/">Integrate with Okta</a>
+      </li>
+    </ul>
+
+    <h3 class="Sidebar-title">Reference</h3>
+    <ul class="Sidebar-nav">
+      <li>
+        <a href="/docs/api/getting_started/api_test_client.html">Getting Started</a>
+      </li>
+      <li>
+        <a href="/docs/api/resources/authn.html">Authentication Reference</a>
+      </li>
+      <li>
+        <a href="/docs/api/resources/apps.html">API Reference</a>
+      </li>
+      <li>
+        <a href="/reference/error_codes/">Error Codes</a>
+      </li>
+      <li>
+        <a href="/reference/okta_expression_language/">Okta Expression Language</a>
+      </li>
+      <li>
+        <a href="/docs/platform-release-notes/platform-release-notes.html">Okta API Release Notes</a>
+      </li>
+    </ul>
+
+    <h3 class="Sidebar-title">Standards</h3>
+    <ul class="Sidebar-nav">
+      
+      
+      
+      <li>
+        <a href="/standards/OAuth/">OAuth 2.0 and Okta</a>
+      </li>
+      
+      
+      <li>
+        <a href="/standards/OIDC/">OpenID Connect and Okta</a>
+      </li>
+      
+      
+      <li>
+        <a href="/standards/SAML/">SAML</a>
+      </li>
+      
+      
+      
+      
+      <li>
+        <a href="/standards/SCIM/">SCIM Provisioning with Lifecycle Management</a>
+      </li>
+      
+    </ul>
+
+    <script>
+      if (document.querySelectorAll("#Sidebar_Resources .is-active").length) {
+        document.getElementById('Sidebar_Resources').classList.remove('Sidebar-hide');
+      }
+
+      if (document.querySelectorAll("#Sidebar_References .is-active").length) {
+        document.getElementById('Sidebar_References').classList.remove('Sidebar-hide');
+      }
+    </script>
+  </div>
+</aside>
+<!-- END Fixed sidebar -->
+      <!-- START Page Content -->
+      <div class="PageContent-main" id="docs-body">
+        <a id="edit-link" href="https://github.com/okta/okta.github.io/edit/source/_source/_use_cases/authentication/session_cookie.md" data-proofer-ignore>Edit Page</a>
+      <h1 id="overview">Overview</h1>
+
+<p>Okta utilizes an HTTP session cookie to provide access to your Okta organization and applications across web requests for interactive user-agents such as a browser. This document provides examples for programmatically retrieving and setting a session cookie for different deployment scenarios to provide SSO capabilities for custom web applications built on Okta.</p>
+
+<p>Okta sessions are created and managed with the <a href="/docs/api/resources/sessions.html">Session API</a>.</p>
+
+<h2 id="retrieving-a-session-cookie-via-openid-connect-authorization-endpoint">Retrieving a session cookie via OpenID Connect Authorization Endpoint</h2>
+
+<p>This scenario is ideal for deployment scenarios where you have implemented both a custom login page and custom landing page for your application. The login page will typically collect the user’s credentials via a HTML form submit or POST and the web application will validate the credentials against your Okta organization by calling the <a href="/docs/api/resources/authn.html">Authentication API</a> to obtain a <a href="/docs/api/resources/sessions.html#session-token">session token</a>.</p>
+
+<p>Once a session token is obtained, it can be passed into the <a href="/docs/api/resources/oauth2.html#obtain-an-authorization-grant-from-a-user">OpenID Connect authorize endpoint</a> in order to get an Okta session cookie. Executing this flow will set a cookie in the end user’s browser and then redirect them back to the <code class="highlighter-rouge">redirect_uri</code> that is passed into the request.</p>
+
+<blockquote>
+  <p>The session token may only be used <strong>once</strong> to establish a session. If the session expires or the user logs out of Okta after using the token, the user won’t be able to reuse the same session token to get a new session cookie.</p>
+</blockquote>
+
+<h5 class="api api-request api-request-example" id="request-example">Request Example</h5>
+
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="okta-preview-domain">https://{yourOktaDomain}.com</span>/oauth2/v1/authorize?client_id={clientId}&amp;response_type=id_token&amp;scope=openid&amp;prompt=none&amp;redirect_uri=https%3A%2F%2Fyour-app.example.com&amp;state=Af0ifjslDkj&amp;nonce=n-0S6_WzA2Mj&amp;sessionToken=0HsohZYpJgMSHwmL9TQy7RRzuY
+</code></pre>
+</div>
+
+<blockquote>
+  <p>The <code class="highlighter-rouge">prompt=none</code> param guarantees that the user will not be prompted for credentials. You will either obtain the requested tokens or an OAuth error response.</p>
+</blockquote>
+
+<blockquote>
+  <p>The <code class="highlighter-rouge">sessionToken</code> param serves as the primary credentials. It represents the authentication that was already performed via the <a href="/docs/api/resources/authn.html">Authentication API</a>.</p>
+</blockquote>
+
+<h5 class="api api-response api-response-example" id="response-example">Response Example</h5>
+
+<div class="language-http highlighter-rouge"><pre class="highlight"><code><span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">302</span> <span class="ne">Moved Temporarily</span>
+<span class="na">Set-Cookie</span><span class="p">:</span> <span class="s">sid=lGj4FPxaG63Wm89TpJnaDF6; Path=/</span>
+<span class="na">Location</span><span class="p">:</span> <span class="s">https://your-app.example.com?id_token=S4sx3uixdsalasd&amp;state=Af0ifjslDkj&amp;nonce=n-0S6_WzA2Mj</span>
+</code></pre>
+</div>
+
+<p>The response also includes an <a href="/standards/OIDC/index.html#id-token">ID Token</a> that describes the authenticated user and can contain additional claims such as user profile attributes or email.</p>
+
+<p>The <a href="/docs/guides/okta_sign-in_widget.html">Okta Sign-In Widget</a> uses this flow. This flow can also be used by Single Page Applications with the <a href="/docs/api/resources/oauth2.html#request-parameter-details"><code class="highlighter-rouge">okta_post_messsage</code></a> response type, which doesn’t require a browser redirect.</p>
+
+<h2 id="retrieving-a-session-cookie-by-visiting-a-session-redirect-link">Retrieving a session cookie by visiting a session redirect link</h2>
+
+<blockquote>
+  <p>This pattern is supported, but not encouraged. The <a href="#retrieving-a-session-cookie-via-openid-connect-authorization-endpoint">OpenID Connect</a> flow described above is the preferred pattern for retrieving a session cookie.</p>
+</blockquote>
+
+<p>This scenario is ideal for deployment scenarios where you have implemented both a custom login page and custom landing page for your application. Your web application will solicit and validate the user credentials against your Okta organization by calling the <a href="/docs/api/resources/authn.html">Authentication API</a> to obtain a <a href="/docs/api/resources/authn.html#session-token">session token</a>.</p>
+
+<p>The session token along with the URL for your landing page can then be used to complete the following <a href="http://tools.ietf.org/html/rfc6570">URI Template</a> <code class="highlighter-rouge"><span class="okta-preview-domain">https://{yourOktaDomain}.com</span>/login/sessionCookieRedirect?token={sessionToken}&amp;redirectUrl={redirectUrl}</code> that will retrieve a session cookie for a user’s browser when visited.</p>
+
+<p>Be aware of the following requirements:</p>
+
+<ul>
+  <li>You must have your redirect URI white-listed as a Trusted Origin ( <a href="/docs/api/getting_started/releases-at-okta.html#early-access-ea"> <span class="api-label api-label-ea "> <i class="fa fa-flag"></i> Early Access </span> </a> ) within Okta. This is required to protect against open redirect attacks.</li>
+  <li>The session token may only be used <strong>once</strong> to establish a session. If the session expires or the user logs out of Okta after using the token, they will not be able to reuse the same session token to get a new session cookie.</li>
+  <li>When using a GET request to <code class="highlighter-rouge"><span class="okta-preview-domain">https://{yourOktaDomain}.com</span>/login/sessionCookieRedirect</code>, Internet Explorer is only compatible with redirect URLs that don’t grow beyond 255 characters, including request parameters.
+  If the <code class="highlighter-rouge">redirectUrl</code> is only going to Okta and the request parameters are longer, then use a POST request to this API and provide additional request parameters as POST form parameters. For more information about the character limitation, see the <a href="https://support.microsoft.com/en-us/help/208427/maximum-url-length-is-2-083-characters-in-internet-explorer">Microsoft documentation</a>.</li>
+</ul>
+
+<h5 class="api api-response api-response-example" id="response-example-1">Response Example</h5>
+
+<div class="language-http highlighter-rouge"><pre class="highlight"><code><span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">302</span> <span class="ne">Moved Temporarily</span>
+<span class="na">Set-Cookie</span><span class="p">:</span> <span class="s">my_app_session_cookie_name=my_apps_session_cookie_value; Path=/</span>
+<span class="na">Location</span><span class="p">:</span> <span class="s"><span class="okta-preview-domain">https://{yourOktaDomain}.com</span>/login/sessionCookieRedirect?token=0HsohZYpJgMSHwmL9TQy7RRzuY&amp;redirectUrl=https%3A%2F%2Fwww.example.com%2Fportal%2Fhome</span>
+</code></pre>
+</div>
+
+<p>The user’s browser will set your app’s session cookie and follow the redirect to Okta.  Okta will validate the session token and return a 302 status response that sets a session cookie for Okta and redirects the user’s browser back to your landing page.  After the page has loaded the user will have an active session with Okta and will be able to SSO into their applications until the session is expired or the user closes the session (logout) or browser application.</p>
+
+<h5 class="api api-request api-request-example" id="request-example-1">Request Example</h5>
+
+<div class="language-http highlighter-rouge"><pre class="highlight"><code><span class="nf">GET</span> <span class="nn">/login/sessionCookieRedirect?token=0HsohZYpJgMSHwmL9TQy7RRzuY&amp;redirectUrl=https%3A%2F%2Fyour-app.example.com</span> <span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span>
+<span class="na">Host</span><span class="p">:</span> <span class="s">your-domain.okta.com</span>
+<span class="na">Accept</span><span class="p">:</span> <span class="s">*/*</span>
+</code></pre>
+</div>
+
+<h5 class="api api-response api-response-example" id="response-example-2">Response Example</h5>
+
+<div class="language-http highlighter-rouge"><pre class="highlight"><code><span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">302</span> <span class="ne">Moved Temporarily</span>
+<span class="na">Set-Cookie</span><span class="p">:</span> <span class="s">sid=000aC_z7AZKTpSqtHFc0Ak6Vg; Path=/</span>
+<span class="na">Location</span><span class="p">:</span> <span class="s">https://your-app.example.com</span>
+</code></pre>
+</div>
+
+<h2 id="retrieving-a-session-cookie-by-visiting-an-application-embed-link">Retrieving a session cookie by visiting an application embed link</h2>
+
+<p>This scenario is ideal for deployment scenarios where you have a custom login page but immediately want to launch an Okta application after login without returning to a landing page. The login page will typically collect the user’s credentials via a HTML form submit or POST and validate the credentials against your Okta organization by calling the <a href="/docs/api/resources/authn.html">Authentication API</a> to obtain a session token.</p>
+
+<p>The session token can then be passed as a query parameter to an Okta application’s embed link that will set a session cookie as well as launch the application in a single web request.</p>
+
+<blockquote>
+  <p>The session token may only be used <strong>once</strong> to establish a session. If the session expires or the user logs out of Okta after using the token, they will not be able to reuse the same session token to get a new session cookie.</p>
+</blockquote>
+
+<h3 id="visit-an-embed-link-with-the-session-token">Visit an embed link with the session token</h3>
+
+<p>After your login flow is complete you can launch an Okta application for the user with an <a href="/docs/api/resources/users.html#get-assigned-app-links">embed link</a> that contains the the session token as a query parameter <code class="highlighter-rouge">sessionToken</code>.</p>
+
+<h5 class="api api-response api-response-example" id="response-example-3">Response Example</h5>
+
+<div class="language-http highlighter-rouge"><pre class="highlight"><code><span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">302</span> <span class="ne">Moved Temporarily</span>
+<span class="na">Location</span><span class="p">:</span> <span class="s">https://your-subdomain/app/google/go1013td3mXAQOJCHEHQ/mail?sessionToken=0HsohZYpJgMSHwmL9TQy7RRzuY</span>
+</code></pre>
+</div>
+
+<p>When the link is visited, the token in the request will be used to initiate the user’s session before processing the application launch request. A session cookie will be set in the browser and the user will have an active session with Okta and will be able to SSO into additional applications until the session is expired or the user closes the session (logout) or browser application.</p>
+
+<h5 class="api api-response api-response-example" id="response-example-4">Response Example</h5>
+
+<div class="language-http highlighter-rouge"><pre class="highlight"><code><span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">302</span> <span class="ne">Moved Temporarily</span>
+<span class="na">Set-Cookie</span><span class="p">:</span> <span class="s">sid=000aC_z7AZKTpSqtHFc0Ak6Vg; Path=/</span>
+<span class="na">Location</span><span class="p">:</span> <span class="s">https://mail.google.com/a/your-subdomain</span>
+</code></pre>
+</div>
+
+<blockquote>
+  <p>The HTTP response will vary depending on the specific Okta application but will always contain a <code class="highlighter-rouge">Set-Cookie</code> header.</p>
+</blockquote>
+
+<h3 id="initiate-a-saml-sso-with-the-session-token">Initiate a SAML SSO with the session token</h3>
+
+<p>After your login flow is complete you can also initiate a SAML SSO into an Okta application for the user with either the <code class="highlighter-rouge">HTTP-Redirect</code> or <code class="highlighter-rouge">HTTP-POST</code> binding to the application’s SAML SSO URL
+that contains the the session token as query parameter <code class="highlighter-rouge">sessionToken</code>.</p>
+
+<h5 class="api api-request api-request-example" id="request-example-2">Request Example</h5>
+
+<div class="language-http highlighter-rouge"><pre class="highlight"><code><span class="nf">GET</span> <span class="nn">/home/appwizardsaml_1/0oalkgr25YMb5reZp0g4/alnlkriVMi9J5WYmk0g4?RelayState=%2Fcustom%2Fdeep%2Flink&amp;sessionToken=0HsohZYpJgMSHwmL9TQy7RRzuY</span> <span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span>
+<span class="na">Host</span><span class="p">:</span> <span class="s">your-domain.okta.com</span>
+<span class="na">Accept</span><span class="p">:</span> <span class="s">*/*</span>
+</code></pre>
+</div>
+
+<p>When the link is visited, the token in the request will be used to initiate the user’s session before processing the SAML SSO request. A session cookie will be set in the browser and the user will have an active session with Okta and will be able to SSO into additional applications until the session is expired or the user closes the session (logout) or browser application.</p>
+
+<h5 class="api api-response api-response-example" id="response-example-5">Response Example</h5>
+
+<div class="language-http highlighter-rouge"><pre class="highlight"><code><span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">200</span> <span class="ne">OK</span>
+<span class="na">Content-Type</span><span class="p">:</span> <span class="s">text/html;charset=utf-8</span>
+<span class="na">Set-Cookie</span><span class="p">:</span> <span class="s">sid=000aC_z7AZKTpSqtHFc0Ak6Vg; Path=/</span>
+
+<span class="nt">&lt;html&gt;</span>
+<span class="nt">&lt;body&gt;</span>
+    <span class="nt">&lt;div&gt;</span>
+        <span class="nt">&lt;form</span> <span class="na">id=</span><span class="s">"appForm"</span> <span class="na">action=</span><span class="s">"https://sp.example.com/auth/saml20"</span> <span class="na">method=</span><span class="s">"POST"</span><span class="nt">&gt;</span>
+            <span class="nt">&lt;input</span> <span class="na">name=</span><span class="s">"SAMLResponse"</span> <span class="na">type=</span><span class="s">"hidden"</span> <span class="na">value=</span><span class="s">"PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz48c2FtbDJwOlJlc3BvbnNlIHhtbG5zOnNhbWwycD0idXJuOm9hc2lzOm5hbWVzOnRjOlNBTUw6Mi4wOnByb3RvY29sIiBEZXN0aW5hdGlvbj0iaHR0cHM6Ly9va3RhcHMxLm9rdGEuY29tL2F1dGgvc2FtbDIwL2thcmwiIElEPSJpZDEzODE1MzU1NjY3MTAwODkwMDAxMzkzODMwOTY2IiBJc3N1ZUluc3RhbnQ9IjIwMTMtMTAtMTFUMjM6NTI6NDYuNjk4WiIgVmVyc2lvbj0iMi4wIj48c2FtbDI6SXNzdWVyIHhtbG5zOnNhbWwyPSJ1cm46b2FzaXM6bmFtZXM6dGM6U0FNTDoyLjA6YXNzZXJ0aW9uIiBGb3JtYXQ9InVybjpvYXNpczpuYW1lczp0YzpTQU1MOjIuMDpuYW1laWQtZm9ybWF0OmVudGl0eSI+aHR0cDovL3d3dy5va3RhLmNvbS9rYml5TU9JTUhOTEdISk5DQlVSTTwvc2FtbDI6SXNzdWVyPjxkczpTaWduYXR1cmUgeG1sbnM6ZHM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvMDkveG1sZHNpZyMiPjxkczpTaWduZWRJbmZvPjxkczpDYW5vbmljYWxpemF0aW9uTWV0aG9kIEFsZ29yaXRobT0iaHR0cDovL3d3dy53My5vcmcvMjAwMS8xMC94bWwtZXhjLWMxNG4jIi8+PGRzOlNpZ25hdHVyZU1ldGhvZCBBbGdvcml0aG09Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvMDkveG1sZHNpZyNyc2Etc2hhMSIvPjxkczpSZWZlcmVuY2UgVVJJPSIjaWQxMzgxNTM1NTY2NzEwMDg5MDAwMTM5MzgzMDk2NiI+PGRzOlRyYW5zZm9ybXM+PGRzOlRyYW5zZm9ybSBBbGdvcml0aG09Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvMDkveG1sZHNpZyNlbnZlbG9wZWQtc2lnbmF0dXJlIi8+PGRzOlRyYW5zZm9ybSBBbGdvcml0aG09Imh0dHA6Ly93d3cudzMub3JnLzIwMDEvMTAveG1sLWV4Yy1jMTRuIyIvPjwvZHM6VHJhbnNmb3Jtcz48ZHM6RGlnZXN0TWV0aG9kIEFsZ29yaXRobT0iaHR0cDovL3d3dy53My5vcmcvMjAwMC8wOS94bWxkc2lnI3NoYTEiLz48ZHM6RGlnZXN0VmFsdWU+enNDNjJuOUI3S1RxN1pZdG5YM3M2dW9jYXRBPTwvZHM6RGlnZXN0VmFsdWU+PC9kczpSZWZlcmVuY2U+PC9kczpTaWduZWRJbmZvPjxkczpTaWduYXR1cmVWYWx1ZT5aZ3YvamFJdkpGSW9EV29GRnUyM0dJVVJLSU9JMUdOd2FmWXhZbmdWY01pRnQ5UTRwOS9MQUhMSXVKYzhjdXh4UmlmYlpza1ZlRWh1TG1xV3JSSFpMRHh2djJ4Wm15eUM4UGlSc2xFSGlzMEhhQTY3bDF3dlBaTURTSWxhV3lJaFFzVkppVE90Nk9GSXpjNkZwZEFZVWU0Y3ptcEEyaW4vK2RmQTl0S1dYbkU9PC9kczpTaWduYXR1cmVWYWx1ZT48ZHM6S2V5SW5mbz48ZHM6WDUwOURhdGE+PGRzOlg1MDlDZXJ0aWZpY2F0ZT5NSUlDblRDQ0FnYWdBd0lCQWdJR0FTbE1OYXdETUEwR0NTcUdTSWIzRFFFQkJRVUFNSUdSTVFzd0NRWURWUVFHRXdKVlV6RVRNQkVHCkExVUVDQXdLUTJGc2FXWnZjbTVwWVRFV01CUUdBMVVFQnd3TlUyRnVJRVp5WVc1amFYTmpiekVOTUFzR0ExVUVDZ3dFVDJ0MFlURVUKTUJJR0ExVUVDd3dMVTFOUFVISnZkbWxrWlhJeEVqQVFCZ05WQkFNTUNXSnZiM1J6ZEhKaGNERWNNQm9HQ1NxR1NJYjNEUUVKQVJZTgphVzVtYjBCdmEzUmhMbU52YlRBZUZ3MHhNREEyTVRneE56VTJOVEphRncwME1EQTJNVGd4TnpVM05USmFNSUdSTVFzd0NRWURWUVFHCkV3SlZVekVUTUJFR0ExVUVDQXdLUTJGc2FXWnZjbTVwWVRFV01CUUdBMVVFQnd3TlUyRnVJRVp5WVc1amFYTmpiekVOTUFzR0ExVUUKQ2d3RVQydDBZVEVVTUJJR0ExVUVDd3dMVTFOUFVISnZkbWxrWlhJeEVqQVFCZ05WQkFNTUNXSnZiM1J6ZEhKaGNERWNNQm9HQ1NxRwpTSWIzRFFFSkFSWU5hVzVtYjBCdmEzUmhMbU52YlRDQm56QU5CZ2txaGtpRzl3MEJBUUVGQUFPQmpRQXdnWWtDZ1lFQWtIUDlpSGNYCnRja0ZVMmliNkpWUTNVUDRaMDFoc1QyWXh1ZUhqa2pxL0Z3N1o3aEtueDMwb0JBeFl6dGxUZitsSVpjVWlRVnc5WUF2NVVKNC9uaEMKSTdiQmM2SVVuYnIzUTZ5NitjbWJ1VlVnaVhodzVsTTR5a2tMQ2dLZ01uVk5hcHRYNGt4RGY0ZGVRbEorS0pLeFdDWjN5TXR5aEZYZQo0bUtvbUwxQzRyc0NBd0VBQVRBTkJna3Foa2lHOXcwQkFRVUZBQU9CZ1FBbVJEODBnMVYzU2lNYjdEdHZwMG1CZWk5elczaEw3Y0RYCnV2ZFlBMXU0Vmhhais1bWppYVJ5QlFDODJLaU1UZ1l4MGExOWZGeUVRWHlwcGU0Nzh3MUNBUFFBbjhIWEFMVHR3WUJpMUgvbHpKRTUKaU5MRE55dWVtTjhaUVV5TTFNeVNYbDhiVmNRSE4wZmpnOWVmWG9kYkw4VzVhLzZwTW9Mc2NaaDJHTUsrVkE9PTwvZHM6WDUwOUNlcnRpZmljYXRlPjwvZHM6WDUwOURhdGE+PC9kczpLZXlJbmZvPjwvZHM6U2lnbmF0dXJlPjxzYW1sMnA6U3RhdHVzIHhtbG5zOnNhbWwycD0idXJuOm9hc2lzOm5hbWVzOnRjOlNBTUw6Mi4wOnByb3RvY29sIj48c2FtbDJwOlN0YXR1c0NvZGUgVmFsdWU9InVybjpvYXNpczpuYW1lczp0YzpTQU1MOjIuMDpzdGF0dXM6U3VjY2VzcyIvPjwvc2FtbDJwOlN0YXR1cz48c2FtbDI6QXNzZXJ0aW9uIHhtbG5zOnNhbWwyPSJ1cm46b2FzaXM6bmFtZXM6dGM6U0FNTDoyLjA6YXNzZXJ0aW9uIiBJRD0iaWQxMzgxNTM1NTY2NzE0OTg5MDAwMjMxOTQzNDgiIElzc3VlSW5zdGFudD0iMjAxMy0xMC0xMVQyMzo1Mjo0Ni42OThaIiBWZXJzaW9uPSIyLjAiPjxzYW1sMjpJc3N1ZXIgRm9ybWF0PSJ1cm46b2FzaXM6bmFtZXM6dGM6U0FNTDoyLjA6bmFtZWlkLWZvcm1hdDplbnRpdHkiIHhtbG5zOnNhbWwyPSJ1cm46b2FzaXM6bmFtZXM6dGM6U0FNTDoyLjA6YXNzZXJ0aW9uIj5odHRwOi8vd3d3Lm9rdGEuY29tL2tiaXlNT0lNSE5MR0hKTkNCVVJNPC9zYW1sMjpJc3N1ZXI+PGRzOlNpZ25hdHVyZSB4bWxuczpkcz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC8wOS94bWxkc2lnIyI+PGRzOlNpZ25lZEluZm8+PGRzOkNhbm9uaWNhbGl6YXRpb25NZXRob2QgQWxnb3JpdGhtPSJodHRwOi8vd3d3LnczLm9yZy8yMDAxLzEwL3htbC1leGMtYzE0biMiLz48ZHM6U2lnbmF0dXJlTWV0aG9kIEFsZ29yaXRobT0iaHR0cDovL3d3dy53My5vcmcvMjAwMC8wOS94bWxkc2lnI3JzYS1zaGExIi8+PGRzOlJlZmVyZW5jZSBVUkk9IiNpZDEzODE1MzU1NjY3MTQ5ODkwMDAyMzE5NDM0OCI+PGRzOlRyYW5zZm9ybXM+PGRzOlRyYW5zZm9ybSBBbGdvcml0aG09Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvMDkveG1sZHNpZyNlbnZlbG9wZWQtc2lnbmF0dXJlIi8+PGRzOlRyYW5zZm9ybSBBbGdvcml0aG09Imh0dHA6Ly93d3cudzMub3JnLzIwMDEvMTAveG1sLWV4Yy1jMTRuIyIvPjwvZHM6VHJhbnNmb3Jtcz48ZHM6RGlnZXN0TWV0aG9kIEFsZ29yaXRobT0iaHR0cDovL3d3dy53My5vcmcvMjAwMC8wOS94bWxkc2lnI3NoYTEiLz48ZHM6RGlnZXN0VmFsdWU+LzRvakxrbFE3SDVLVlQvYXhMSk9nVEttQkRRPTwvZHM6RGlnZXN0VmFsdWU+PC9kczpSZWZlcmVuY2U+PC9kczpTaWduZWRJbmZvPjxkczpTaWduYXR1cmVWYWx1ZT5OSGNxQVJGT2FHd2N3bVlyRklMeTlGendnWDZDenVMcDlhQm5UZkxXdFpic0tOWFRvSS92dG9GVjhDMzFEOUlKVlVoOVhNcmtQckN4Q2VZZGczdnlUbmx5dG80SlJ1TlR2elhncFBEcGlDZ2RGaWhHeFJPRk9JVFhoQkdkRFNXbVdkYkNuQWJDZzBWT2xlZHNnQjMxTExudXFJaGIxSGJGVy9ZeFBhUTRmbEU9PC9kczpTaWduYXR1cmVWYWx1ZT48ZHM6S2V5SW5mbz48ZHM6WDUwOURhdGE+PGRzOlg1MDlDZXJ0aWZpY2F0ZT5NSUlDblRDQ0FnYWdBd0lCQWdJR0FTbE1OYXdETUEwR0NTcUdTSWIzRFFFQkJRVUFNSUdSTVFzd0NRWURWUVFHRXdKVlV6RVRNQkVHCkExVUVDQXdLUTJGc2FXWnZjbTVwWVRFV01CUUdBMVVFQnd3TlUyRnVJRVp5WVc1amFYTmpiekVOTUFzR0ExVUVDZ3dFVDJ0MFlURVUKTUJJR0ExVUVDd3dMVTFOUFVISnZkbWxrWlhJeEVqQVFCZ05WQkFNTUNXSnZiM1J6ZEhKaGNERWNNQm9HQ1NxR1NJYjNEUUVKQVJZTgphVzVtYjBCdmEzUmhMbU52YlRBZUZ3MHhNREEyTVRneE56VTJOVEphRncwME1EQTJNVGd4TnpVM05USmFNSUdSTVFzd0NRWURWUVFHCkV3SlZVekVUTUJFR0ExVUVDQXdLUTJGc2FXWnZjbTVwWVRFV01CUUdBMVVFQnd3TlUyRnVJRVp5WVc1amFYTmpiekVOTUFzR0ExVUUKQ2d3RVQydDBZVEVVTUJJR0ExVUVDd3dMVTFOUFVISnZkbWxrWlhJeEVqQVFCZ05WQkFNTUNXSnZiM1J6ZEhKaGNERWNNQm9HQ1NxRwpTSWIzRFFFSkFSWU5hVzVtYjBCdmEzUmhMbU52YlRDQm56QU5CZ2txaGtpRzl3MEJBUUVGQUFPQmpRQXdnWWtDZ1lFQWtIUDlpSGNYCnRja0ZVMmliNkpWUTNVUDRaMDFoc1QyWXh1ZUhqa2pxL0Z3N1o3aEtueDMwb0JBeFl6dGxUZitsSVpjVWlRVnc5WUF2NVVKNC9uaEMKSTdiQmM2SVVuYnIzUTZ5NitjbWJ1VlVnaVhodzVsTTR5a2tMQ2dLZ01uVk5hcHRYNGt4RGY0ZGVRbEorS0pLeFdDWjN5TXR5aEZYZQo0bUtvbUwxQzRyc0NBd0VBQVRBTkJna3Foa2lHOXcwQkFRVUZBQU9CZ1FBbVJEODBnMVYzU2lNYjdEdHZwMG1CZWk5elczaEw3Y0RYCnV2ZFlBMXU0Vmhhais1bWppYVJ5QlFDODJLaU1UZ1l4MGExOWZGeUVRWHlwcGU0Nzh3MUNBUFFBbjhIWEFMVHR3WUJpMUgvbHpKRTUKaU5MRE55dWVtTjhaUVV5TTFNeVNYbDhiVmNRSE4wZmpnOWVmWG9kYkw4VzVhLzZwTW9Mc2NaaDJHTUsrVkE9PTwvZHM6WDUwOUNlcnRpZmljYXRlPjwvZHM6WDUwOURhdGE+PC9kczpLZXlJbmZvPjwvZHM6U2lnbmF0dXJlPjxzYW1sMjpTdWJqZWN0IHhtbG5zOnNhbWwyPSJ1cm46b2FzaXM6bmFtZXM6dGM6U0FNTDoyLjA6YXNzZXJ0aW9uIj48c2FtbDI6TmFtZUlEIEZvcm1hdD0idXJuOm9hc2lzOm5hbWVzOnRjOlNBTUw6MS4xOm5hbWVpZC1mb3JtYXQ6ZW1haWxBZGRyZXNzIj5mcmVkZmxpbnRzdG9uZUByaW5jb25oaWxsLmNvbTwvc2FtbDI6TmFtZUlEPjxzYW1sMjpTdWJqZWN0Q29uZmlybWF0aW9uIE1ldGhvZD0idXJuOm9hc2lzOm5hbWVzOnRjOlNBTUw6Mi4wOmNtOmJlYXJlciI+PHNhbWwyOlN1YmplY3RDb25maXJtYXRpb25EYXRhIE5vdE9uT3JBZnRlcj0iMjAxMy0xMC0xMVQyMzo1Nzo0Ni43MTdaIiBSZWNpcGllbnQ9Imh0dHBzOi8vb2t0YXBzMS5va3RhLmNvbS9hdXRoL3NhbWwyMC9rYXJsIi8+PC9zYW1sMjpTdWJqZWN0Q29uZmlybWF0aW9uPjwvc2FtbDI6U3ViamVjdD48c2FtbDI6Q29uZGl0aW9ucyBOb3RCZWZvcmU9IjIwMTMtMTAtMTFUMjM6NDc6NDYuNzE3WiIgTm90T25PckFmdGVyPSIyMDEzLTEwLTExVDIzOjU3OjQ2LjcxN1oiIHhtbG5zOnNhbWwyPSJ1cm46b2FzaXM6bmFtZXM6dGM6U0FNTDoyLjA6YXNzZXJ0aW9uIj48c2FtbDI6QXVkaWVuY2VSZXN0cmljdGlvbj48c2FtbDI6QXVkaWVuY2U+aHR0cHM6Ly93d3cub2t0YS5jb20vc2FtbDIvc2VydmljZS1wcm92aWRlci9zcGJmZHY5MnFLU0JUR1VZR1VQTzwvc2FtbDI6QXVkaWVuY2U+PC9zYW1sMjpBdWRpZW5jZVJlc3RyaWN0aW9uPjwvc2FtbDI6Q29uZGl0aW9ucz48c2FtbDI6QXV0aG5TdGF0ZW1lbnQgQXV0aG5JbnN0YW50PSIyMDEzLTEwLTExVDIzOjUyOjQ2LjY5OFoiIFNlc3Npb25JbmRleD0iaWQxMzgxNTM1NTY2Njk4LjY4MDQ3Mjc3IiB4bWxuczpzYW1sMj0idXJuOm9hc2lzOm5hbWVzOnRjOlNBTUw6Mi4wOmFzc2VydGlvbiI+PHNhbWwyOkF1dGhuQ29udGV4dD48c2FtbDI6QXV0aG5Db250ZXh0Q2xhc3NSZWY+dXJuOm9hc2lzOm5hbWVzOnRjOlNBTUw6Mi4wOmFjOmNsYXNzZXM6UGFzc3dvcmRQcm90ZWN0ZWRUcmFuc3BvcnQ8L3NhbWwyOkF1dGhuQ29udGV4dENsYXNzUmVmPjwvc2FtbDI6QXV0aG5Db250ZXh0Pjwvc2FtbDI6QXV0aG5TdGF0ZW1lbnQ+PC9zYW1sMjpBc3NlcnRpb24+PC9zYW1sMnA6UmVzcG9uc2U+"</span><span class="nt">/&gt;</span>
+            <span class="nt">&lt;input</span> <span class="na">name=</span><span class="s">"RelayState"</span> <span class="na">type=</span><span class="s">"hidden"</span> <span class="na">value=</span><span class="s">"/some/deep/link"</span><span class="nt">/&gt;</span>
+        <span class="nt">&lt;/form&gt;</span>
+
+        <span class="nt">&lt;script </span><span class="na">type=</span><span class="s">"text/javascript"</span><span class="nt">&gt;</span>
+
+          <span class="nx">$</span><span class="p">(</span><span class="kd">function</span><span class="p">(){</span>
+            <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s1">'appForm'</span><span class="p">).</span><span class="nx">submit</span><span class="p">();</span>
+          <span class="p">});</span>
+      <span class="nt">&lt;/script&gt;</span>
+  <span class="nt">&lt;/div&gt;</span>
+<span class="nt">&lt;/body&gt;</span>
+<span class="nt">&lt;/html&gt;</span>
+</code></pre>
+</div>
+
+<h3 id="initiate-a-ws-federation-sso-with-the-session-token">Initiate a WS-Federation SSO with the session token</h3>
+
+<p>You can also use the same <a href="#initiate-a-saml-sso-with-the-session-token">flow as SAML</a> for template WS-Federation application as well by passing the session token as query parameter <code class="highlighter-rouge">sessionToken</code>.</p>
+
+<h5 class="api api-request api-request-example" id="request-example-3">Request Example</h5>
+
+<div class="language-http highlighter-rouge"><pre class="highlight"><code><span class="nf">GET</span> <span class="nn">/app/template_wsfed/k9x69oiKYSUWMIYZBKTY/sso/wsfed/passive?wa=wsignin1.0&amp;wtrealm=https%3A%2F%2Fexample.com%2FApp%2F&amp;wctx=rm%3D0%26id%3Dpassive%26ru%3D%2FApp%2FHome%2FAbout&amp;sessionToken=0HsohZYpJgMSHwmL9TQy7RRzuY</span> <span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span>
+<span class="na">Host</span><span class="p">:</span> <span class="s">your-domain.okta.com</span>
+<span class="na">Accept</span><span class="p">:</span> <span class="s">*/*</span>
+</code></pre>
+</div>
+
+      </div>
+      <div class="TableOfContents TableOfContentsPreload">
+        <div class="TableOfContents-item is-level1">
+          <script>
+                  document.write(document.title.split('|')[0].trim());
+          </script>
+        </div>
+        <div class="TableOfContentsLoader"></div>
+      </div><!-- END Page Content -->
+    </section><!-- END Page Center w/Sub Nav & Content -->
+
+    <!-- START Footer -->
+    <footer class="Footer">
+    <div class="Wrap">
+
+        <div class="Row">
+
+            <div class="Column--3 Column--medium-6 Column--xSmall-12">
+
+                <a class="Logo" href="https://www.okta.com/" target="_blank" rel="noopener noreferrer">
+                    <img src="https://developer.okta.com/sites/all/themes/developer/images/logo-footer.png" alt="Okta">
+                    Visit okta.com
+                </a>
+
+            </div>
+
+            <div class="Column--3 Column--medium-12 Column--xSmall-12">
+
+                <h4>Social</h4>
+                <ul class="Footer-links Footer-links--social">
+                    <li><a class="Footer-links--github" target="_blank" rel="noopener noreferrer" href="http://github.com/oktadeveloper">Github</a></li>
+                    <li><a class="Footer-links--twitter" target="_blank" rel="noopener noreferrer" href="http://twitter.com/OktaDev">Twitter</a></li>
+                    <li><a class="Footer-links--forum" target="_blank" rel="noopener noreferrer" href="https://devforum.okta.com/">Forum</a></li>
+                    <li><a class="Footer-links--rss" target="_blank" rel="noopener noreferrer" href="http://feeds.feedburner.com/OktaBlog">RSS Blog</a></li>
+                </ul>
+            </div>
+
+            <div class="Column--3 Column--medium-6 Column--small-12">
+                <h4>More Info</h4>
+                <ul class="Footer-links">
+                    <li><a target="_blank" href="https://developer.okta.com/integrate-with-okta/">Integrate with Okta</a></li>
+                    <li><a href="/blog/">Blog</a></li>
+                    <li><a href="/docs/platform-release-notes/platform-release-notes.html">Release Notes</a></li>
+                    <li><a href="/3rd_party_notices/">3rd Party Notices</a></li>
+                </ul>
+            </div>
+
+            <div class="Column--3 Column--medium-6 Column--small-12">
+                <h4>Contact &amp; Legal</h4>
+                <ul class="Footer-links">
+                    <li><a href="https://developer.okta.com/contact/">Contact Sales</a></li>
+                    <li><a target="_blank" rel="noopener noreferrer" href="mailto:developers@okta.com">Contact Support</a></li>
+                    <li><a href="https://developer.okta.com/terms/">Terms &amp; Conditions</a></li>
+                    <li><a href="https://developer.okta.com/privacy/">Privacy Policy</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</footer>
+
+    <script type="text/javascript" src="/assets/master-0365dd27cf276cb2a15c0a43906ca592538204cf1ad4557547bf4e50609b411e.js"></script>
+    <script type="text/javascript" src="/assets/myOkta-911cbafbbe079b7a5522d9cbe15bd2a5f44e1582531e88393934bec69f97696b.js"></script>
+    
+    
+    
+    
+      <script type="text/javascript" src="/assets/docs-0af8e0751a2375ff1b4d8e8ddf6a1b7ffd864bd473116861d71f541c4859329e.js"></script>
+    
+
+    <!-- END Footer -->
+  </div>
+  <!-- START Post Footer -->
+  
+  <!-- START Google Tag Manager -->
+  <!-- https://support.google.com/tagmanager/answer/6103696?hl=en -->
+  <noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-TJ45R6" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+  <!-- END Google Tag Manager -->
+  <!-- START Google Remarketing Tag -->
+  <script type="text/javascript">
+    /* <![CDATA[ */
+    var google_conversion_id = 1006913831;
+    var google_custom_params = window.google_tag_params;
+    var google_remarketing_only = true;
+    /* ]]> */
+  </script>
+  <div style="display:none;"><script type="text/javascript" src="//www.googleadservices.com/pagead/conversion.js"></script></div>
+  <noscript><div style="display:inline;"><img height="1" width="1" style="border-style:none;" alt="" src="//googleads.g.doubleclick.net/pagead/viewthroughconversion/1006913831/?value=0&amp;guid=ON&amp;script=0"></div></noscript>
+  <!-- END Google Remarketing Tag -->
+  <!-- START Crazy Egg Tracking -->
+  <script type="text/javascript">
+    setTimeout(function(){var a=document.createElement("script");
+    var b=document.getElementsByTagName("script")[0];
+    a.src=document.location.protocol+"//script.crazyegg.com/pages/scripts/0021/9333.js?"+Math.floor(new Date().getTime()/3600000);
+    a.async=true;a.type="text/javascript";b.parentNode.insertBefore(a,b)}, 1);
+  </script>
+  <!-- END Crazy Egg Tracking -->
+
+  <!-- END Post Footer -->
+</body>
+</html>

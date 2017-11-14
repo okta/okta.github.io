@@ -1,0 +1,581 @@
+<!doctype html>
+<!--[if lt IE 7 ]> <html class="ie6 no-flexbox"> <![endif]-->
+<!--[if IE 7 ]>    <html class="ie7 no-flexbox"> <![endif]-->
+<!--[if IE 8 ]>    <html class="ie8 no-flexbox"> <![endif]-->
+<!--[if IE 9 ]>    <html class="ie9 no-flexbox"> <![endif]-->
+<!--[if IE 10 ]>    <html class="ie10 no-flexbox"> <![endif]-->
+<!--[if (gt IE 10)|!(IE)]><!--> <html class="modern wf-loading" lang="en"> <!--<![endif]-->
+  <head>
+  <script>
+    var searchDomain = 'https://developer.okta.com';
+    var isProduction = window.location.hostname === 'developer.okta.com';
+    if (isProduction) {
+      // TypeKit
+      (function(d) {
+        var config = {
+          kitId: 'jff5neq',
+          scriptTimeout: 3000,
+          async: true
+        },
+        h=d.documentElement,t=setTimeout(function(){h.className=h.className.replace(/bwf-loadingb/g,"")+" wf-inactive";},config.scriptTimeout),tk=d.createElement("script"),f=false,s=d.getElementsByTagName("script")[0],a;h.className+=" wf-loading";tk.src='https://use.typekit.net/'+config.kitId+'.js';tk.async=true;tk.onload=tk.onreadystatechange=function(){a=this.readyState;if(f||a&&a!="complete"&&a!="loaded")return;f=true;clearTimeout(t);try{Typekit.load(config)}catch(e){}};s.parentNode.insertBefore(tk,s)
+      })(document);
+
+      // Google analytics
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+              (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+              m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+      ga('create', 'UA-15777010-3', 'auto');
+      ga('send', 'pageview');
+
+      // START Google Tag Manager
+      (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+      new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+      j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+      '//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+      })(window,document,'script','dataLayer','GTM-TJ45R6');
+      // END Google Tag Manager
+    }
+	</script>
+  <meta charset="utf-8">
+  <meta http-equiv="x-ua-compatible" content="IE=edge,chrome=1">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+ 	
+
+  <link type="text/css" rel="stylesheet" href="https://developer.okta.com/sites/all/themes/developer/css/master.css" media="all" />
+  <meta class="swiftype" name="title" data-type="string" content="Build a React Application with User Authentication in 15 Minutes | Okta Developer" />
+  <meta class="swiftype" name="summary" data-type="string" content="React has quickly become one of the most favored front-end web frameworks, and is second only to plain old HTML5, according to JAXenter. So it’s no surprise ..." />
+
+  <link type="text/css" rel="stylesheet" href="/assets/animate-ec43d72c3ed45e08a460b8a2966d8dba6006aebfa0530935c3973fa493a8771f.css">
+  <link type="text/css" rel="stylesheet" href="/assets/okta-a96df4c9d48b78b618e1d541f46f7137d73d40653571e020c1ad59edd7915c60.css">
+  
+  
+  <title>Build a React Application with User Authentication in 15 Minutes | Okta Developer</title>
+  <meta name="description" content="React has quickly become one of the most favored front-end web frameworks, and is second only to plain old HTML5, according to JAXenter. So it’s no surprise ...">
+  <link rel="canonical" href="https://developer.okta.com/blog/2017/03/30/react-okta-sign-in-widget"  data-proofer-ignore>
+  <link rel="alternate" type="application/rss+xml" title="Okta Developer" href="https://developer.okta.com/feed.xml"><!-- GA -->
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+  <link rel="manifest" href="/manifest.json">
+  <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#21313a">
+  <meta name="theme-color" content="#ffffff">
+</head>
+
+  
+    <body id="blog">
+	
+
+
+
+
+<header class="Header is-fixed">
+
+  <div class="Wrap">
+
+    <a class="Logo" href="https://developer.okta.com">
+      <svg version="1.1" id="OktaLogo" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 431.9 151.4" style="enable-background:new 0 0 431.9 151.4;" xml:space="preserve"><g><g><g><path d="M102.2,41.4c-21,0-38.1,17.1-38.1,38.1s17.1,38.1,38.1,38.1s38.1-17.1,38.1-38.1l0,0C140.3,58.5,123.2,41.4,102.2,41.4z M102.2,98.5c-10.5,0-19-8.5-19-19s8.5-19,19-19s19,8.5,19,19c0.1,10.5-8.4,19-18.9,19.1C102.3,98.6,102.2,98.6,102.2,98.5L102.2,98.5z"/><path d="M169.1,92.3c0-1.9,1.5-3.4,3.4-3.4c0.9,0,1.8,0.4,2.4,1c9.5,9.7,25.3,26.3,25.4,26.4c0.4,0.5,0.8,0.8,1.4,0.9l1.6,0.2h17.2c1.8,0,3.3-1.4,3.4-3.2c0-0.8-0.3-1.5-0.8-2.2l-28.6-29.2l-1.5-1.5c-3.2-3.9-2.9-5.4,0.8-9.3l22.6-25.1c1.1-1.4,0.8-3.5-0.6-4.6c-0.6-0.4-1.3-0.7-2-0.7h-17c-0.6,0.2-1.1,0.5-1.5,0.9L175,64.4c-1.3,1.4-3.4,1.5-4.8,0.2c-0.7-0.6-1.1-1.5-1.1-2.5V18.9c0-1.7-1.3-3-3-3c-0.1,0-0.2,0-0.3,0h-12.7c-2.2,0-3.3,1.5-3.3,2.8v95.8c0,2.2,1.8,2.8,3.3,2.8h12.7c1.7,0.1,3.2-1.2,3.3-2.9c0,0,0,0,0,0V92.3z"/><path d="M273,114l-1.4-12.8c-0.2-1.7-1.7-2.9-3.4-2.7c0,0,0,0-0.1,0l-2.9,0.2c-10.1,0-18.5-7.9-19-18c0-0.3,0-0.7,0-1V64.2c-0.1-2,1.5-3.6,3.5-3.7c0,0,0,0,0,0h17c1.7-0.1,3.1-1.5,3-3.2c0,0,0-0.1,0-0.1v-12c0-2.3-1.5-3.6-2.8-3.6h-17.1c-1.9,0.1-3.5-1.5-3.6-3.4c0,0,0,0,0,0V18.9c-0.1-1.7-1.5-3.1-3.2-3c0,0-0.1,0-0.1,0h-12.7c-1.6-0.1-3,1.1-3.1,2.7c0,0.1,0,0.1,0,0.2c0,0,0,61.7,0,62c0.5,21,17.9,37.6,38.9,37c1.4,0,2.9-0.2,4.3-0.3C272,117.2,273.2,115.7,273,114z"/></g><path d="M364.7,98c-10.8,0-12.4-3.8-12.4-18.3l0,0V44.8c0-1.8-1.4-3.2-3.2-3.2c0,0-0.1,0-0.1,0h-12.8c-1.8,0-3.2,1.4-3.3,3.2v1.6C314.6,36,291.3,42.5,281,60.8c-10.4,18.3-3.9,41.6,14.4,51.9c14,7.9,31.4,6.2,43.5-4.2c3.6,5.5,9.3,9.1,18.3,9.1c1.5,0,9.7,0.3,9.7-3.5v-13.6C367,99.2,366,98.1,364.7,98z M314.2,98.6c-10.5,0-19-8.5-19-19s8.5-19,19-19s19,8.5,19,19l0,0C333.2,90.1,324.7,98.6,314.2,98.6z"/></g><path d="M19.4,74c2.2-1.9,4.1-4.1,5.7-6.6c3.5-5.3,5.4-11.5,5.2-17.9V27c0-4.9,0.9-8.4,2.7-10.5c1.8-2.1,4.8-3,9.2-3h12.6c1.2,0,2.1-0.9,2.2-2.1l0,0V2.2C57,1,56,0,54.8,0c0,0,0,0,0,0H41.5c-7.8,0-12.9,2.1-18,7.6s-7.1,12.3-7.1,21.7v14.2c0,2.2-0.1,4-0.2,5.7v2.2c-0.5,3.2-1.8,6.2-3.6,8.9C9.4,64.7,5.1,70.9,0.9,74l0,0l-0.3,0.3l0,0l-0.2,0.3H0.2v0.3l0,0c-0.1,0.3-0.1,0.7,0,1l0,0v0.3h0.1l0.2,0.3l0,0l0.3,0.3l0,0c4.2,3.1,8.5,9.3,11.3,13.7c1.8,2.7,3.1,5.7,3.6,8.9v2.2c0.1,1.6,0.2,3.5,0.2,5.7v14.3c0,9.4,2.4,16.7,7.1,21.7s10.2,7.6,18,7.6h13.8c1.2,0,2.2-1,2.2-2.2V140l0,0c0-1.2-1-2.2-2.2-2.2H42.2c-4.4,0-7.5-1-9.2-3s-2.7-5.6-2.7-10.5v-22.4c0.2-6.4-1.7-12.6-5.2-17.9c-1.6-2.5-3.5-4.7-5.7-6.6l0,0c-0.9-0.7-1.1-2-0.4-2.9C19.2,74.3,19.3,74.2,19.4,74L19.4,74z"/><path d="M412.5,74c-2.2-1.9-4.1-4.1-5.7-6.6c-3.5-5.3-5.4-11.5-5.2-17.9V27c0-4.9-0.9-8.4-2.7-10.5s-4.8-3-9.2-3h-12.6c-1.2,0-2.2-1-2.2-2.2c0,0,0,0,0,0l0,0V2.2c0-1.2,1-2.2,2.2-2.2c0,0,0,0,0,0h13.4c7.8,0,12.9,2.1,18,7.6s7.1,12.3,7.1,21.7v14.2c0,2.2,0.1,4,0.2,5.7v2.2c0.5,3.2,1.8,6.2,3.6,8.9c2.8,4.5,7.1,10.7,11.3,13.7l0,0l0.3,0.3l0,0l0.2,0.3h0.1v0.3l0,0c0.1,0.3,0.1,0.7,0,1l0,0v0.3h-0.1l-0.2,0.3l0,0l-0.3,0.3l0,0c-4.2,3.1-8.5,9.3-11.3,13.7c-1.8,2.7-3.1,5.7-3.6,8.9v2.2c-0.1,1.6-0.2,3.5-0.2,5.7v14.3c0,9.4-2.4,16.7-7.1,21.7s-10.2,7.6-18,7.6h-13.4c-1.2,0-2.2-1-2.2-2.2c0,0,0,0,0,0V140l0,0c0-1.2,1-2.2,2.2-2.2l0,0h12.7c4.4,0,7.5-1,9.2-3s2.7-5.6,2.7-10.5v-22.4c-0.2-6.3,1.6-12.6,5.1-17.9c1.6-2.5,3.5-4.7,5.7-6.6l0,0c0.9-0.7,1.1-2,0.4-2.9C412.7,74.3,412.6,74.2,412.5,74L412.5,74z"/></g></svg>
+    </a>
+
+    <nav class="Header-nav PrimaryNav">
+      <ul class="menu">
+        <li class="first leaf">
+          <a href="https://developer.okta.com/product/">Product</a>
+        </li>
+        <li class="leaf">
+          <a href="https://developer.okta.com/pricing/">Pricing</a>
+        </li>
+        <li class="leaf">
+          <a href="/blog/" class="active">Blog</a>
+        </li>
+        <li class="leaf">
+          <a href="/documentation/">Docs</a>
+        </li>
+        <li class="last expanded">
+          <span class="nolink">Support</span>
+          <ul class="menu">
+            <li class="first leaf"><a href="https://devforum.okta.com/">Okta Developer Forums</a></li>
+            <li class="last leaf"><a href="mailto:developers@okta.com">developers@okta.com</a></li>
+          </ul>
+        </li>
+      </ul>
+      <a class="PrimaryNav-toggle" href="#">
+        <svg width="20px" height="20px" viewBox="0 0 20 20" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+            <g class="MenuIcon" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="round">
+                <path d="M1,16 L19,16" class="MenuIcon-line1" stroke="#FFFFFF" stroke-width="2"></path>
+                <path d="M1,4 L19,4" class="MenuIcon-line2" stroke="#FFFFFF" stroke-width="2"></path>
+                <path d="M1,10 L19,10" class="MenuIcon-line3" stroke="#FFFFFF" stroke-width="2"></path>
+                <path d="M1,10 L19,10" class="MenuIcon-line4" stroke="#FFFFFF" stroke-width="2"></path>
+            </g>
+        </svg>
+        <svg class="CloseIcon" width="16px" height="16px" viewBox="0 0 16 16" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+          <g id="ALl-Boards" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+            <g id="Desktop" transform="translate(-915.000000, -235.000000)" fill="#FFFFFF">
+              <g id="Search-bar-Active" transform="translate(30.000000, 26.000000)">
+                <polygon id="Icon/Cross" points="901 210.6 899.4 209 893 215.4 886.6 209 885 210.6 891.4 217 885 223.4 886.6 225 893 218.6 899.4 225 901 223.4 894.6 217"></polygon>
+              </g>
+            </g>
+          </g>
+        </svg>
+      </a>
+
+      <div class="PrimaryNav-cta">
+        <a target="_blank" rel="noopener noreferrer" href="https://login.okta.com/?SAMLRequest=fc%2B7CsJAEAXQXvAflu1NNJUMeZBGELTx1a%2FrYILJTtyZGD%2FfSBRiYzlw77lMnD3rSj3Qc0ku0YtgrhU6S5fSXRN9PKxmS52l00nMpq6iBvJWCrfDe4ss6vStRe9aDzmGIZfo1jsgwyWDMzUyiIV9vt1AH4XGk5ClSvewUgMNa%2BYW%2FVj5jxhm9NLP67QQaSAMu64L6CYmsFSHlnzT4ZlLwTgcL6Sf8%2FeX9AU%3Dhttps://login.okta.com/?SAMLRequest=fc%2B7CsJAEAXQXvAflu1NNJUMeZBGELTx1a%2FrYILJTtyZGD%2FfSBRiYzlw77lMnD3rSj3Qc0ku0YtgrhU6S5fSXRN9PKxmS52l00nMpq6iBvJWCrfDe4ss6vStRe9aDzmGIZfo1jsgwyWDMzUyiIV9vt1AH4XGk5ClSvewUgMNa%2BYW%2FVj5jxhm9NLP67QQaSAMu64L6CYmsFSHlnzT4ZlLwTgcL6Sf8%2FeX9AU%3D" class="Button--redOutline">Login</a>
+        <a href="https://developer.okta.com/signup/" class="Button--red">Sign up</a>
+      </div>
+
+      <a class="SearchIcon" href="#"></a>
+      <form id="form_search" class="SearchBar Formisimo_clocked_69929" method="get" action="https://developer.okta.com/search/" name="form_search" __bizdiag="-784164280" __biza="WJ__">
+        <input type="text" name="stq" autocomplete="off" id="st-search-input-auto" class="st-search-input" placeholder="Search">
+        <input type="submit" name="submit" value="GO">
+      </form>
+
+    </nav>
+
+  </div>
+
+</header>
+
+	<div class="page-content">
+		
+
+
+
+
+
+
+<section class="Blog is-single">
+		
+	<div class="Blog-social">
+		
+		<a href="https://github.com/leebrandt" target="_blank"><i class="fa fa-github"></i></a>
+		
+		
+		<a href="https://twitter.com/leebrandt" target="_blank"><i class="fa fa-twitter"></i></a>
+		
+		
+		
+		<a href="http://leebrandt.me" target="_blank"><i class="fa fa-external-link"></i></a>
+		
+	</div>
+	
+	
+
+<article class="BlogPost">
+	
+	<header class="BlogPost-header">
+	
+		<time class="BlogPost-date" datetime="2017-03-30">March 30, 2017</time>
+		
+		<h1 class="BlogPost-title">
+			
+			Build a React Application with User Authentication in 15 Minutes
+			
+		</h1>
+		
+		<div class="BlogPost-attribution">
+			
+				<img src="/assets/avatar-leebrandt-23a647548f26433d031856dcef1df5204763b94283cd68c397d816a61363a94d.jpg" alt="avatar-leebrandt.jpg" class="BlogPost-avatar">
+			
+			<span class="BlogPost-author">Lee Brandt</span>
+		</div>
+	
+	</header>
+	
+	<div class="BlogPost-content">
+		
+	<p>React has quickly become one of the most favored front-end web frameworks, and is second only to plain old HTML5, <a href="https://jaxenter.com/technology-trends-2017-top-frameworks-131993.html">according to JAXenter</a>. So it’s no surprise that <a href="https://www.lynda.com/React-js-training-tutorials/7049-0.html">developers are learning it</a>, and <a href="https://stackoverflow.com/jobs?sort=i&amp;q=ReactJS">employers are asking for it</a>.</p>
+
+<p>In this tutorial, you’ll start with a very simple React app with a couple of pages and some routing built in, and add authentication using <a href="/code/javascript/okta_sign-in_widget">Okta’s Sign-In Widget</a>. The Sign-In Widget is an embeddable Javascript widget that allows developers to use Okta’s secure, scalable architecture with a minimum of effort from within React applications. Let’s get started!</p>
+<h2 id="get-the-simple-react-seed-project">Get the Simple React Seed Project</h2>
+<p>Start by cloning the simple React seed project.</p>
+
+<div class="language-bash highlighter-rouge"><pre class="highlight"><code>git clone https://github.com/leebrandt/simple-react-seed.git okta-react-widget-sample
+<span class="nb">cd </span>okta-react-widget-sample
+</code></pre>
+</div>
+
+<h2 id="add-the-okta-sign-in-widget">Add the Okta Sign-In Widget</h2>
+
+<p>Install the <a href="https://github.com/okta/okta-signin-widget">Okta Sign-In Widget</a> using npm.</p>
+
+<div class="language-bash highlighter-rouge"><pre class="highlight"><code>npm install @okta/okta-signin-widget@2.3.0 --save
+</code></pre>
+</div>
+
+<p>This will add the Okta Sign-In Widget code to your <code class="highlighter-rouge">node_modules</code> folder. We’ll be using version 2.3.0 of the Sign-In Widget.</p>
+
+<p><img src="/assets/blog/react-sign-in-widget/Okta-Widget-NPM-Modules-Screener-793639e55e4967b968ae363f1af37e4f1ec426d08fb0fe2ea7300459d84d3c87.png" alt="Okta in node_modules" /></p>
+
+<p>Then add the styles for the widget in your <code class="highlighter-rouge">index.html</code> file from the Okta CDN. Add these lines inside the <code class="highlighter-rouge">&lt;head&gt;</code> tag:</p>
+
+<div class="language-html highlighter-rouge"><pre class="highlight"><code>    <span class="nt">&lt;link</span>
+     <span class="na">href=</span><span class="s">"https://ok1static.oktacdn.com/assets/js/sdk/okta-signin-widget/2.3.0/css/okta-sign-in.min.css"</span>
+      <span class="na">type=</span><span class="s">"text/css"</span>
+      <span class="na">rel=</span><span class="s">"stylesheet"</span><span class="nt">/&gt;</span>
+
+    <span class="c">&lt;!-- Theme file: Customize or replace this file if you want to override our default styles --&gt;</span>
+    <span class="nt">&lt;link</span>
+      <span class="na">href=</span><span class="s">"https://ok1static.oktacdn.com/assets/js/sdk/okta-signin-widget/2.3.0/css/okta-theme.css"</span>
+      <span class="na">type=</span><span class="s">"text/css"</span>
+      <span class="na">rel=</span><span class="s">"stylesheet"</span><span class="nt">/&gt;</span>
+</code></pre>
+</div>
+
+<h2 id="the-loginpage-component">The LoginPage Component</h2>
+
+<p>First, create a folder called <code class="highlighter-rouge">auth</code> in the <code class="highlighter-rouge">./src/components</code> folder, then create a file called <code class="highlighter-rouge">LoginPage.js</code> where the <code class="highlighter-rouge">LoginPage</code> component will go.</p>
+
+<p>Start with the most basic of components:</p>
+
+<div class="language-js highlighter-rouge"><pre class="highlight"><code><span class="kr">import</span> <span class="nx">React</span> <span class="nx">from</span> <span class="s1">'react'</span><span class="p">;</span>
+
+<span class="kr">export</span> <span class="k">default</span> <span class="kr">class</span> <span class="nx">LoginPage</span> <span class="kr">extends</span> <span class="nx">React</span><span class="p">.</span><span class="nx">Component</span><span class="p">{</span>
+  <span class="nx">render</span><span class="p">(){</span>
+    <span class="k">return</span><span class="p">(</span>
+      <span class="o">&lt;</span><span class="nx">div</span><span class="o">&gt;</span><span class="nx">Login</span> <span class="nx">Page</span><span class="o">&lt;</span><span class="sr">/div</span><span class="err">&gt;
+</span>    <span class="p">);</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre>
+</div>
+
+<p>This little component doesn’t <em>do</em> much but at least you now have a handle to add the <code class="highlighter-rouge">LoginPage</code> to your routing. So in your <code class="highlighter-rouge">./src/app.js</code> file, you’ll import the component at the top:</p>
+
+<div class="language-js highlighter-rouge"><pre class="highlight"><code><span class="kr">import</span> <span class="nx">LoginPage</span> <span class="nx">from</span> <span class="s1">'./components/auth/LoginPage'</span><span class="p">;</span>
+</code></pre>
+</div>
+
+<p>and then add the route inside the main route (the one with the path of “/”)</p>
+
+<div class="language-js highlighter-rouge"><pre class="highlight"><code><span class="o">&lt;</span><span class="nx">Route</span> <span class="nx">path</span><span class="o">=</span><span class="s2">"/login"</span> <span class="nx">component</span><span class="o">=</span><span class="p">{</span><span class="nx">LoginPage</span><span class="p">}</span><span class="sr">/</span><span class="err">&gt;
+</span></code></pre>
+</div>
+
+<h2 id="add-the-openid-connect-application-in-okta">Add the OpenID Connect Application in Okta</h2>
+
+<p>In order to use Okta as your OpenID Connect provider for authentication, you’ll need to set up an application in the <a href="https://developer.okta.com">Okta developer console</a>.</p>
+
+<p>If you don’t have an Okta developer account, <a href="https://developer.okta.com/signup/">go create one</a>! Once you’re logged in, click on <strong>Applications</strong> in the top navbar, then click <strong>Add Application</strong>. Select SPA as the platform and click Next. Change the redirect URI to <code class="highlighter-rouge">http://localhost:3000</code>, and click Done. The application will be created with the following settings:</p>
+
+<p><img src="/assets/blog/react-sign-in-widget/react-sample-app-settings-7e3c921b2ac1447f3a11ba9fe944b13cf34db2831e14b72a37eaf26abe85c9e0.png" alt="OIDC Application Settings" width="800" /></p>
+
+<p>Now that you have an application created in Okta, you can set up the widget to talk to your new app!</p>
+
+<h2 id="add-the-widget-to-your-component">Add the Widget to Your Component</h2>
+
+<div class="language-js highlighter-rouge"><pre class="highlight"><code><span class="kr">import</span> <span class="nx">React</span> <span class="nx">from</span> <span class="s1">'react'</span><span class="p">;</span>
+<span class="kr">import</span> <span class="nx">OktaSignIn</span> <span class="nx">from</span> <span class="s1">'@okta/okta-signin-widget'</span><span class="p">;</span>
+
+<span class="kr">export</span> <span class="k">default</span> <span class="kr">class</span> <span class="nx">LoginPage</span> <span class="kr">extends</span> <span class="nx">React</span><span class="p">.</span><span class="nx">Component</span><span class="p">{</span>
+  <span class="nx">constructor</span><span class="p">(){</span>
+    <span class="kr">super</span><span class="p">();</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">widget</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">OktaSignIn</span><span class="p">({</span>
+      <span class="na">baseUrl</span><span class="p">:</span> <span class="s1">'https://{oktaOrgUrl}'</span><span class="p">,</span>
+      <span class="na">clientId</span><span class="p">:</span> <span class="s1">'{clientId}'</span><span class="p">,</span>
+      <span class="na">redirectUri</span><span class="p">:</span> <span class="s1">'http://localhost:3000'</span><span class="p">,</span>
+      <span class="na">authParams</span><span class="p">:</span> <span class="p">{</span>
+        <span class="na">responseType</span><span class="p">:</span> <span class="s1">'id_token'</span>
+      <span class="p">}</span>
+    <span class="p">});</span>
+  <span class="p">}</span>
+
+  <span class="nx">render</span><span class="p">(){</span>
+    <span class="k">return</span><span class="p">(</span>
+      <span class="o">&lt;</span><span class="nx">div</span><span class="o">&gt;</span><span class="nx">Login</span> <span class="nx">Page</span><span class="o">&lt;</span><span class="sr">/div</span><span class="err">&gt;
+</span>    <span class="p">);</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre>
+</div>
+
+<p>Copy the Client ID generated from your application’s settings page and paste it over <code class="highlighter-rouge"><span class="p">{</span><span class="err">clientId</span><span class="p">}</span></code>. Make sure you also replace <code class="highlighter-rouge"><span class="p">{</span><span class="err">oktaOrgUrl</span><span class="p">}</span></code> with your Okta organization URL, which you can find by going back to the main Dashboard page in the developer console. Usually it will look like: <code class="highlighter-rouge">https://dev-12345.oktapreview.com</code>.</p>
+
+<p>Thus far you’ve imported the <code class="highlighter-rouge">OktaSignIn</code> function from the <a href="https://github.com/okta/okta-signin-widget">Okta Sign-In Widget</a> <code class="highlighter-rouge">npm</code> module you installed earlier. Next, in the constructor of the component, you initialized an instance of <code class="highlighter-rouge">OktaSignIn</code> with the configuration for the application. This way, the application code will be able to talk to Okta and Okta will recognize that this is the app you just created.</p>
+
+<h2 id="show-the-login-widget">Show The Login Widget</h2>
+
+<p>Next, you’ll create the code to actually render the Sign-In Widget to the page! You’ll need to change your render method to create an HTML element  you can render the widget into. Make sure to get a <a href="https://facebook.github.io/react/docs/refs-and-the-dom.html">reference to the element</a> that will be rendered. Then, add a <code class="highlighter-rouge">componentDidMount</code> function to make sure you don’t try to render the widget before the HTML element is on the page.</p>
+
+<div class="language-js highlighter-rouge"><pre class="highlight"><code><span class="kr">import</span> <span class="nx">React</span> <span class="nx">from</span> <span class="s1">'react'</span><span class="p">;</span>
+<span class="kr">import</span> <span class="nx">OktaSignIn</span> <span class="nx">from</span> <span class="s1">'@okta/okta-signin-widget'</span><span class="p">;</span>
+
+<span class="kr">export</span> <span class="k">default</span> <span class="kr">class</span> <span class="nx">LoginPage</span> <span class="kr">extends</span> <span class="nx">React</span><span class="p">.</span><span class="nx">Component</span><span class="p">{</span>
+  <span class="nx">constructor</span><span class="p">(){</span>
+    <span class="kr">super</span><span class="p">();</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">state</span> <span class="o">=</span> <span class="p">{</span><span class="na">user</span><span class="p">:</span><span class="kc">null</span><span class="p">};</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">widget</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">OktaSignIn</span><span class="p">({</span>
+      <span class="na">baseUrl</span><span class="p">:</span> <span class="s1">'https://{oktaOrgUrl}'</span><span class="p">,</span>
+      <span class="na">clientId</span><span class="p">:</span> <span class="s1">'{clientId}'</span><span class="p">,</span>
+      <span class="na">redirectUri</span><span class="p">:</span> <span class="s1">'http://localhost:3000'</span><span class="p">,</span>
+      <span class="na">authParams</span><span class="p">:</span> <span class="p">{</span>
+        <span class="na">responseType</span><span class="p">:</span> <span class="s1">'id_token'</span>
+      <span class="p">}</span>
+    <span class="p">});</span>
+  <span class="p">}</span>
+
+  <span class="nx">componentDidMount</span><span class="p">(){</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">widget</span><span class="p">.</span><span class="nx">renderEl</span><span class="p">({</span><span class="na">el</span><span class="p">:</span><span class="k">this</span><span class="p">.</span><span class="nx">loginContainer</span><span class="p">},</span>
+      <span class="p">(</span><span class="nx">response</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+        <span class="k">this</span><span class="p">.</span><span class="nx">setState</span><span class="p">({</span><span class="na">user</span><span class="p">:</span> <span class="nx">response</span><span class="p">.</span><span class="nx">claims</span><span class="p">.</span><span class="nx">email</span><span class="p">});</span>
+      <span class="p">},</span>
+      <span class="p">(</span><span class="nx">err</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">err</span><span class="p">);</span>
+      <span class="p">}</span>
+    <span class="p">);</span>
+  <span class="p">}</span>
+
+  <span class="nx">render</span><span class="p">(){</span>
+    <span class="k">return</span><span class="p">(</span>
+     <span class="o">&lt;</span><span class="nx">div</span> <span class="nx">ref</span><span class="o">=</span><span class="p">{(</span><span class="nx">div</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span><span class="k">this</span><span class="p">.</span><span class="nx">loginContainer</span> <span class="o">=</span> <span class="nx">div</span><span class="p">;</span> <span class="p">}}</span> <span class="sr">/</span><span class="err">&gt;
+</span>    <span class="p">);</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre>
+</div>
+
+<p>You also added state to your component. If you’re using a flux implementation, this would naturally come from the app state. But to keep this tutorial simple, let your <code class="highlighter-rouge">LoginPage</code> keep track of it’s own state.</p>
+
+<h2 id="check-whether-the-user-is-logged-in">Check Whether the User is Logged In</h2>
+
+<p>We’re almost there, but you don’t necessarily want to render the widget right away. You’ll need to add a check to make sure the user isn’t already logged in, and move your <code class="highlighter-rouge">renderEl</code> out to a function called <code class="highlighter-rouge">showLogin</code>.</p>
+
+<div class="language-js highlighter-rouge"><pre class="highlight"><code> <span class="c1">// ...other stuff removed for brevity's sake</span>
+ <span class="nx">componentDidMount</span><span class="p">(){</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">widget</span><span class="p">.</span><span class="nx">session</span><span class="p">.</span><span class="nx">get</span><span class="p">((</span><span class="nx">response</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+      <span class="k">if</span><span class="p">(</span><span class="nx">response</span><span class="p">.</span><span class="nx">status</span> <span class="o">!==</span> <span class="s1">'INACTIVE'</span><span class="p">){</span>
+        <span class="k">this</span><span class="p">.</span><span class="nx">setState</span><span class="p">({</span><span class="na">user</span><span class="p">:</span><span class="nx">response</span><span class="p">.</span><span class="nx">login</span><span class="p">});</span>
+      <span class="p">}</span><span class="k">else</span><span class="p">{</span>
+        <span class="k">this</span><span class="p">.</span><span class="nx">showLogin</span><span class="p">();</span>
+      <span class="p">}</span>
+    <span class="p">});</span>
+  <span class="p">}</span>
+
+  <span class="nx">showLogin</span><span class="p">(){</span>
+    <span class="nx">Backbone</span><span class="p">.</span><span class="nx">history</span><span class="p">.</span><span class="nx">stop</span><span class="p">();</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">widget</span><span class="p">.</span><span class="nx">renderEl</span><span class="p">({</span><span class="na">el</span><span class="p">:</span><span class="k">this</span><span class="p">.</span><span class="nx">loginContainer</span><span class="p">},</span>
+      <span class="p">(</span><span class="nx">response</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+        <span class="k">this</span><span class="p">.</span><span class="nx">setState</span><span class="p">({</span><span class="na">user</span><span class="p">:</span> <span class="nx">response</span><span class="p">.</span><span class="nx">claims</span><span class="p">.</span><span class="nx">email</span><span class="p">});</span>
+      <span class="p">},</span>
+      <span class="p">(</span><span class="nx">err</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">err</span><span class="p">);</span>
+      <span class="p">}</span>
+    <span class="p">);</span>
+  <span class="p">}</span>
+</code></pre>
+</div>
+
+<p>You might have noticed a weird bit of code in that <code class="highlighter-rouge">showLogin</code> method. That first line: <code class="highlighter-rouge">Backbone.history.stop()</code>. The widget itself uses <a href="http://backbonejs.org/">Backbone.js</a> to navigate between its own screens (login, forgot password, etc.), and when it renders, it starts the <code class="highlighter-rouge">Backbone.history</code>. Since you’ve now moved it out into a <code class="highlighter-rouge">showLogin</code> function, the widget is going to re-render whenever the function is called. So this is just a little trick to tell Backbone to stop the history, because it’s going to restart when the widget is rendered.</p>
+
+<h2 id="the-final-loginpage-react-component">The Final LoginPage React Component</h2>
+
+<p>Let’s wrap this up. Make sure you bind the class’s <code class="highlighter-rouge">this</code> context to each of your methods. Add a <code class="highlighter-rouge">logout</code> method, and change your <code class="highlighter-rouge">render</code> method to make a decision on what to render, based on whether there is a currently logged in user.</p>
+
+<p>So the final version of <code class="highlighter-rouge">LoginPage.js</code> should look like this:</p>
+
+<div class="language-js highlighter-rouge"><pre class="highlight"><code><span class="kr">import</span> <span class="nx">React</span> <span class="nx">from</span> <span class="s1">'react'</span><span class="p">;</span>
+<span class="kr">import</span> <span class="nx">OktaSignIn</span> <span class="nx">from</span> <span class="s1">'@okta/okta-signin-widget'</span><span class="p">;</span>
+
+<span class="kr">export</span> <span class="k">default</span> <span class="kr">class</span> <span class="nx">LoginPage</span> <span class="kr">extends</span> <span class="nx">React</span><span class="p">.</span><span class="nx">Component</span><span class="p">{</span>
+  <span class="nx">constructor</span><span class="p">(){</span>
+    <span class="kr">super</span><span class="p">();</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">state</span> <span class="o">=</span> <span class="p">{</span> <span class="na">user</span><span class="p">:</span> <span class="kc">null</span> <span class="p">};</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">widget</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">OktaSignIn</span><span class="p">({</span>
+      <span class="na">baseUrl</span><span class="p">:</span> <span class="s1">'https://{oktaOrgUrl}'</span><span class="p">,</span>
+      <span class="na">clientId</span><span class="p">:</span> <span class="s1">'{clientId}'</span><span class="p">,</span>
+      <span class="na">redirectUri</span><span class="p">:</span> <span class="s1">'http://localhost:3000'</span><span class="p">,</span>
+      <span class="na">authParams</span><span class="p">:</span> <span class="p">{</span>
+        <span class="na">responseType</span><span class="p">:</span> <span class="s1">'id_token'</span>
+      <span class="p">}</span>
+    <span class="p">});</span>
+
+    <span class="k">this</span><span class="p">.</span><span class="nx">showLogin</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">showLogin</span><span class="p">.</span><span class="nx">bind</span><span class="p">(</span><span class="k">this</span><span class="p">);</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">logout</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">logout</span><span class="p">.</span><span class="nx">bind</span><span class="p">(</span><span class="k">this</span><span class="p">);</span>
+  <span class="p">}</span>
+
+  <span class="nx">componentDidMount</span><span class="p">(){</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">widget</span><span class="p">.</span><span class="nx">session</span><span class="p">.</span><span class="nx">get</span><span class="p">((</span><span class="nx">response</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+      <span class="k">if</span><span class="p">(</span><span class="nx">response</span><span class="p">.</span><span class="nx">status</span> <span class="o">!==</span> <span class="s1">'INACTIVE'</span><span class="p">){</span>
+        <span class="k">this</span><span class="p">.</span><span class="nx">setState</span><span class="p">({</span><span class="na">user</span><span class="p">:</span><span class="nx">response</span><span class="p">.</span><span class="nx">login</span><span class="p">});</span>
+      <span class="p">}</span><span class="k">else</span><span class="p">{</span>
+        <span class="k">this</span><span class="p">.</span><span class="nx">showLogin</span><span class="p">();</span>
+      <span class="p">}</span>
+    <span class="p">});</span>
+  <span class="p">}</span>
+
+  <span class="nx">showLogin</span><span class="p">(){</span>
+    <span class="nx">Backbone</span><span class="p">.</span><span class="nx">history</span><span class="p">.</span><span class="nx">stop</span><span class="p">();</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">widget</span><span class="p">.</span><span class="nx">renderEl</span><span class="p">({</span><span class="na">el</span><span class="p">:</span><span class="k">this</span><span class="p">.</span><span class="nx">loginContainer</span><span class="p">},</span>
+      <span class="p">(</span><span class="nx">response</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+        <span class="k">this</span><span class="p">.</span><span class="nx">setState</span><span class="p">({</span><span class="na">user</span><span class="p">:</span> <span class="nx">response</span><span class="p">.</span><span class="nx">claims</span><span class="p">.</span><span class="nx">email</span><span class="p">});</span>
+      <span class="p">},</span>
+      <span class="p">(</span><span class="nx">err</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">err</span><span class="p">);</span>
+      <span class="p">}</span>
+    <span class="p">);</span>
+  <span class="p">}</span>
+
+  <span class="nx">logout</span><span class="p">(){</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">widget</span><span class="p">.</span><span class="nx">signOut</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+      <span class="k">this</span><span class="p">.</span><span class="nx">setState</span><span class="p">({</span><span class="na">user</span><span class="p">:</span> <span class="kc">null</span><span class="p">});</span>
+      <span class="k">this</span><span class="p">.</span><span class="nx">showLogin</span><span class="p">();</span>
+    <span class="p">});</span>
+  <span class="p">}</span>
+
+  <span class="nx">render</span><span class="p">(){</span>
+    <span class="k">return</span><span class="p">(</span>
+      <span class="o">&lt;</span><span class="nx">div</span><span class="o">&gt;</span>
+        <span class="p">{</span><span class="k">this</span><span class="p">.</span><span class="nx">state</span><span class="p">.</span><span class="nx">user</span> <span class="p">?</span> <span class="p">(</span>
+          <span class="o">&lt;</span><span class="nx">div</span> <span class="nx">className</span><span class="o">=</span><span class="s2">"container"</span><span class="o">&gt;</span>
+            <span class="o">&lt;</span><span class="nx">div</span><span class="o">&gt;</span><span class="nx">Welcome</span><span class="p">,</span> <span class="p">{</span><span class="k">this</span><span class="p">.</span><span class="nx">state</span><span class="p">.</span><span class="nx">user</span><span class="p">}</span><span class="o">!&lt;</span><span class="sr">/div</span><span class="err">&gt;
+</span>            <span class="o">&lt;</span><span class="nx">button</span> <span class="nx">onClick</span><span class="o">=</span><span class="p">{</span><span class="k">this</span><span class="p">.</span><span class="nx">logout</span><span class="p">}</span><span class="o">&gt;</span><span class="nx">Logout</span><span class="o">&lt;</span><span class="sr">/button</span><span class="err">&gt;
+</span>          <span class="o">&lt;</span><span class="sr">/div</span><span class="err">&gt;
+</span>        <span class="p">)</span> <span class="p">:</span> <span class="kc">null</span><span class="p">}</span>
+        <span class="p">{</span><span class="k">this</span><span class="p">.</span><span class="nx">state</span><span class="p">.</span><span class="nx">user</span> <span class="p">?</span> <span class="kc">null</span> <span class="p">:</span> <span class="p">(</span>
+          <span class="o">&lt;</span><span class="nx">div</span> <span class="nx">ref</span><span class="o">=</span><span class="p">{(</span><span class="nx">div</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span><span class="k">this</span><span class="p">.</span><span class="nx">loginContainer</span> <span class="o">=</span> <span class="nx">div</span><span class="p">;</span> <span class="p">}}</span> <span class="sr">/</span><span class="err">&gt;
+</span>        <span class="p">)}</span>
+      <span class="o">&lt;</span><span class="sr">/div</span><span class="err">&gt;
+</span>    <span class="p">);</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre>
+</div>
+
+<h2 id="add-a-login-link">Add a Login Link</h2>
+
+<p>React is now wired up to handle the <code class="highlighter-rouge">/login</code> route and display the Okta Sign-In Widget to prompt the user to log in.</p>
+
+<p>Add a Login link to the top navbar by editing <code class="highlighter-rouge">./src/components/common/Navigation.js</code> and adding a new link under the existing Contact link:</p>
+
+<div class="language-html highlighter-rouge"><pre class="highlight"><code><span class="nt">&lt;li&gt;&lt;Link</span> <span class="na">to=</span><span class="s">"login"</span><span class="nt">&gt;</span>Login<span class="nt">&lt;/Link&gt;&lt;/li&gt;</span>
+</code></pre>
+</div>
+
+<h2 id="check-it-out">Check It Out</h2>
+
+<p>Now install the npm packages:</p>
+
+<div class="language-bash highlighter-rouge"><pre class="highlight"><code>npm install
+</code></pre>
+</div>
+
+<p>When you run the app now (with <code class="highlighter-rouge">npm start</code>), you should see something like this:</p>
+
+<p><img src="/assets/blog/react-sign-in-widget/Finished-Sample-Screener-ae69f53d352922d2ecd2a2baaf83b111defd6ce5b025952b7a4bcd9ce11fafae.gif" alt="Finished Sample" /></p>
+
+<p>If you have any problems with the application, one thing to try first is, delete the <code class="highlighter-rouge">node_modules</code> folder <strong>and</strong> the <code class="highlighter-rouge">package-lock.json</code> file and re-run the <code class="highlighter-rouge">npm install</code> command. This should fix any problems with package dependency management.</p>
+
+<p>If it works - congrats! If it doesn’t, please post a question to Stack Overflow with an <a href="http://stackoverflow.com/questions/tagged/okta">okta tag</a>, or hit me up on Twitter <a href="https://twitter.com/leebrandt">@leebrandt</a>.</p>
+
+<h2 id="react--okta">React + Okta</h2>
+
+<p>You can find a completed version of the application created in this blog post <a href="https://github.com/leebrandt/okta-react-widget-sample">on GitHub</a>.</p>
+
+<p>Building authentication in an application is hard. It’s even less fun to build it over and over again in each application you build. Okta does the hard part for you and makes it a lot more fun to be a developer! <a href="https://developer.okta.com/signup/">Sign up for a forever-free developer account</a> and try Okta today!</p>
+
+<p>I hope you’ve enjoyed this quick tour of our React support. If you have questions about Okta’s features, or what we’re building next, please hit me up on Twitter <a href="https://twitter.com/leebrandt">@leebrandt</a>, leave a comment below, or open an issue on GitHub.</p>
+
+<h3 id="changelog">Changelog</h3>
+
+<ul>
+  <li>October 20, 2017: Changed npm install to version 2.3.0 of widget and removed npm install at beginning. Also added instructions for fixing dependency issues in npm.</li>
+  <li>October 17, 2017: Fixed bugs and added navbar instructions.</li>
+  <li>September 30, 2017: Updated “create an OIDC app” instructions for the <a href="/blog/2017/09/25/all-new-developer-console">Okta Developer Console</a>. Updated the widget reference to 2.1.0.</li>
+</ul>
+
+
+	</div>
+	
+</article>
+
+		
+</section>
+
+		
+	</div><footer class="Footer">
+    <div class="Wrap">
+
+        <div class="Row">
+
+            <div class="Column--3 Column--medium-6 Column--xSmall-12">
+
+                <a class="Logo" href="https://www.okta.com/" target="_blank" rel="noopener noreferrer">
+                    <img src="https://developer.okta.com/sites/all/themes/developer/images/logo-footer.png" alt="Okta">
+                    Visit okta.com
+                </a>
+
+            </div>
+
+            <div class="Column--3 Column--medium-12 Column--xSmall-12">
+
+                <h4>Social</h4>
+                <ul class="Footer-links Footer-links--social">
+                    <li><a class="Footer-links--github" target="_blank" rel="noopener noreferrer" href="http://github.com/oktadeveloper">Github</a></li>
+                    <li><a class="Footer-links--twitter" target="_blank" rel="noopener noreferrer" href="http://twitter.com/OktaDev">Twitter</a></li>
+                    <li><a class="Footer-links--forum" target="_blank" rel="noopener noreferrer" href="https://devforum.okta.com/">Forum</a></li>
+                    <li><a class="Footer-links--rss" target="_blank" rel="noopener noreferrer" href="http://feeds.feedburner.com/OktaBlog">RSS Blog</a></li>
+                </ul>
+            </div>
+
+            <div class="Column--3 Column--medium-6 Column--small-12">
+                <h4>More Info</h4>
+                <ul class="Footer-links">
+                    <li><a target="_blank" href="https://developer.okta.com/integrate-with-okta/">Integrate with Okta</a></li>
+                    <li><a href="/blog/">Blog</a></li>
+                    <li><a href="/docs/platform-release-notes/platform-release-notes.html">Release Notes</a></li>
+                    <li><a href="/3rd_party_notices/">3rd Party Notices</a></li>
+                </ul>
+            </div>
+
+            <div class="Column--3 Column--medium-6 Column--small-12">
+                <h4>Contact &amp; Legal</h4>
+                <ul class="Footer-links">
+                    <li><a href="https://developer.okta.com/contact/">Contact Sales</a></li>
+                    <li><a target="_blank" rel="noopener noreferrer" href="mailto:developers@okta.com">Contact Support</a></li>
+                    <li><a href="https://developer.okta.com/terms/">Terms &amp; Conditions</a></li>
+                    <li><a href="https://developer.okta.com/privacy/">Privacy Policy</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</footer>
+
+    <script type="text/javascript" src="/assets/master-0365dd27cf276cb2a15c0a43906ca592538204cf1ad4557547bf4e50609b411e.js"></script>
+    <script type="text/javascript" src="/assets/myOkta-911cbafbbe079b7a5522d9cbe15bd2a5f44e1582531e88393934bec69f97696b.js"></script>
+    
+    
+    
+    
+      <script type="text/javascript" src="/assets/blog-6e32dad27404131cc8630a5282264bed2ab4c08c91ac86fa496b75c53aa4f681.js"></script>
+    
+
+  <!-- START Post Footer -->
+  
+  <!-- START Google Tag Manager -->
+  <!-- https://support.google.com/tagmanager/answer/6103696?hl=en -->
+  <noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-TJ45R6" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+  <!-- END Google Tag Manager -->
+  <!-- START Google Remarketing Tag -->
+  <script type="text/javascript">
+    /* <![CDATA[ */
+    var google_conversion_id = 1006913831;
+    var google_custom_params = window.google_tag_params;
+    var google_remarketing_only = true;
+    /* ]]> */
+  </script>
+  <div style="display:none;"><script type="text/javascript" src="//www.googleadservices.com/pagead/conversion.js"></script></div>
+  <noscript><div style="display:inline;"><img height="1" width="1" style="border-style:none;" alt="" src="//googleads.g.doubleclick.net/pagead/viewthroughconversion/1006913831/?value=0&amp;guid=ON&amp;script=0"></div></noscript>
+  <!-- END Google Remarketing Tag -->
+  <!-- START Crazy Egg Tracking -->
+  <script type="text/javascript">
+    setTimeout(function(){var a=document.createElement("script");
+    var b=document.getElementsByTagName("script")[0];
+    a.src=document.location.protocol+"//script.crazyegg.com/pages/scripts/0021/9333.js?"+Math.floor(new Date().getTime()/3600000);
+    a.async=true;a.type="text/javascript";b.parentNode.insertBefore(a,b)}, 1);
+  </script>
+  <!-- END Crazy Egg Tracking -->
+
+  <!-- END Post Footer -->
+</body>
+</html>

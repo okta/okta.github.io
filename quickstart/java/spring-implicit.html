@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html class="no-js" lang="en" dir="ltr">
+<body>
+    <h2 id="okta-javaspring-quickstart">Okta Java/Spring Quickstart</h2>
+
+<h3 id="include-the-dependency">Include the dependency</h3>
+
+<p>For Apache Maven:</p>
+<div class="language-xml highlighter-rouge"><pre class="highlight"><code><span class="nt">&lt;dependency&gt;</span>
+    <span class="nt">&lt;groupId&gt;</span>com.okta.spring<span class="nt">&lt;/groupId&gt;</span>
+    <span class="nt">&lt;artifactId&gt;</span>okta-spring-boot-starter<span class="nt">&lt;/artifactId&gt;</span>
+    <span class="nt">&lt;version&gt;</span>0.2.0<span class="nt">&lt;/version&gt;</span>
+<span class="nt">&lt;/dependency&gt;</span>
+</code></pre>
+</div>
+
+<p>For Gradle:</p>
+<div class="language-groovy highlighter-rouge"><pre class="highlight"><code><span class="n">compile</span> <span class="s1">'com.okta.spring:okta-spring-boot-starter:0.2.0'</span>
+</code></pre>
+</div>
+
+<h3 id="configure-your-properties">Configure your properties</h3>
+
+<p>You can configure your applications properties with environment variables, system properties, or configuration files. Take a look at the <a href="https://docs.spring.io/spring-boot/docs/current/reference/html/boot-features-external-config.html">Spring Boot documentation</a> for more details.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Property</th>
+      <th>Default</th>
+      <th>Details</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>okta.oauth2.issuer</td>
+      <td>N/A</td>
+      <td><a href="/docs/how-to/set-up-auth-server.html">Authorization Server</a> issuer URL, i.e.: <span class="okta-preview-domain">https://{yourOktaDomain}.com</span>/oauth2/default</td>
+    </tr>
+    <tr>
+      <td>okta.oauth2.clientId</td>
+      <td>N/A</td>
+      <td>The Client Id of your Okta OIDC application</td>
+    </tr>
+    <tr>
+      <td>okta.oauth2.audience</td>
+      <td>api://default</td>
+      <td>The audience of your <a href="/docs/how-to/set-up-auth-server.html">Authorization Server</a></td>
+    </tr>
+    <tr>
+      <td>okta.oauth2.scopeClaim</td>
+      <td>scp</td>
+      <td>The scope claim key in the Access Token’s JWT</td>
+    </tr>
+    <tr>
+      <td>okta.oauth2.rolesClaim</td>
+      <td>groups</td>
+      <td>The claim key in the Access Token’s JWT that corresponds to an array of the users groups.</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="create-a-controller">Create a Controller</h3>
+
+<p>The above client makes a request to <code class="highlighter-rouge">/api/messages</code>, we simply need to create a <code class="highlighter-rouge">Controller</code> to handle the response:</p>
+
+<div class="language-java highlighter-rouge"><pre class="highlight"><code><span class="nd">@RestController</span>
+<span class="kd">class</span> <span class="nc">MessagesRestController</span> <span class="o">{</span>
+
+    <span class="nd">@GetMapping</span><span class="o">(</span><span class="s">"/api/messages"</span><span class="o">)</span>
+    <span class="kd">public</span> <span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="nf">getMessages</span><span class="o">(</span><span class="n">Principal</span> <span class="n">principal</span><span class="o">)</span> <span class="o">{</span>
+        <span class="c1">// handle request</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre>
+</div>
+
+<h3 id="thats-it">That’s it!</h3>
+
+<p>Okta’s Spring Security integration will <a href="/blog/2017/06/21/what-the-heck-is-oauth#oauth-flows">parse the JWT access token</a> from the HTTP request’s <code class="highlighter-rouge">Authorization: Bearer</code> header value.</p>
+
+<p>Check out a <a href="https://github.com/okta/okta-spring-boot/tree/master/examples">Spring Boot example</a> or this <a href="/blog/2017/09/19/build-a-secure-notes-application-with-kotlin-typescript-and-okta">blog post</a>.</p>
+
+</body>
+</html>

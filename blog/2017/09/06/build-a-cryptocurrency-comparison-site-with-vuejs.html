@@ -1,0 +1,1126 @@
+<!doctype html>
+<!--[if lt IE 7 ]> <html class="ie6 no-flexbox"> <![endif]-->
+<!--[if IE 7 ]>    <html class="ie7 no-flexbox"> <![endif]-->
+<!--[if IE 8 ]>    <html class="ie8 no-flexbox"> <![endif]-->
+<!--[if IE 9 ]>    <html class="ie9 no-flexbox"> <![endif]-->
+<!--[if IE 10 ]>    <html class="ie10 no-flexbox"> <![endif]-->
+<!--[if (gt IE 10)|!(IE)]><!--> <html class="modern wf-loading" lang="en"> <!--<![endif]-->
+  <head>
+  <script>
+    var searchDomain = 'https://developer.okta.com';
+    var isProduction = window.location.hostname === 'developer.okta.com';
+    if (isProduction) {
+      // TypeKit
+      (function(d) {
+        var config = {
+          kitId: 'jff5neq',
+          scriptTimeout: 3000,
+          async: true
+        },
+        h=d.documentElement,t=setTimeout(function(){h.className=h.className.replace(/bwf-loadingb/g,"")+" wf-inactive";},config.scriptTimeout),tk=d.createElement("script"),f=false,s=d.getElementsByTagName("script")[0],a;h.className+=" wf-loading";tk.src='https://use.typekit.net/'+config.kitId+'.js';tk.async=true;tk.onload=tk.onreadystatechange=function(){a=this.readyState;if(f||a&&a!="complete"&&a!="loaded")return;f=true;clearTimeout(t);try{Typekit.load(config)}catch(e){}};s.parentNode.insertBefore(tk,s)
+      })(document);
+
+      // Google analytics
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+              (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+              m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+      ga('create', 'UA-15777010-3', 'auto');
+      ga('send', 'pageview');
+
+      // START Google Tag Manager
+      (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+      new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+      j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+      '//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+      })(window,document,'script','dataLayer','GTM-TJ45R6');
+      // END Google Tag Manager
+    }
+	</script>
+  <meta charset="utf-8">
+  <meta http-equiv="x-ua-compatible" content="IE=edge,chrome=1">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+ 	
+
+  <link type="text/css" rel="stylesheet" href="https://developer.okta.com/sites/all/themes/developer/css/master.css" media="all" />
+  <meta class="swiftype" name="title" data-type="string" content="Build a Cryptocurrency Comparison Site with Vue.js | Okta Developer" />
+  <meta class="swiftype" name="summary" data-type="string" content="Vue.js is a simple JavaScript framework that lets you build dynamic front-endweb applications. Lots of people compare it to React and Angular." />
+
+  <link type="text/css" rel="stylesheet" href="/assets/animate-ec43d72c3ed45e08a460b8a2966d8dba6006aebfa0530935c3973fa493a8771f.css">
+  <link type="text/css" rel="stylesheet" href="/assets/okta-a96df4c9d48b78b618e1d541f46f7137d73d40653571e020c1ad59edd7915c60.css">
+  
+  
+  <title>Build a Cryptocurrency Comparison Site with Vue.js | Okta Developer</title>
+  <meta name="description" content="Vue.js is a simple JavaScript framework that lets you build dynamic front-endweb applications. Lots of people compare it to React and Angular.">
+  <link rel="canonical" href="https://developer.okta.com/blog/2017/09/06/build-a-cryptocurrency-comparison-site-with-vuejs"  data-proofer-ignore>
+  <link rel="alternate" type="application/rss+xml" title="Okta Developer" href="https://developer.okta.com/feed.xml"><!-- GA -->
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+  <link rel="manifest" href="/manifest.json">
+  <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#21313a">
+  <meta name="theme-color" content="#ffffff">
+</head>
+
+  
+    <body id="blog">
+	
+
+
+
+
+<header class="Header is-fixed">
+
+  <div class="Wrap">
+
+    <a class="Logo" href="https://developer.okta.com">
+      <svg version="1.1" id="OktaLogo" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 431.9 151.4" style="enable-background:new 0 0 431.9 151.4;" xml:space="preserve"><g><g><g><path d="M102.2,41.4c-21,0-38.1,17.1-38.1,38.1s17.1,38.1,38.1,38.1s38.1-17.1,38.1-38.1l0,0C140.3,58.5,123.2,41.4,102.2,41.4z M102.2,98.5c-10.5,0-19-8.5-19-19s8.5-19,19-19s19,8.5,19,19c0.1,10.5-8.4,19-18.9,19.1C102.3,98.6,102.2,98.6,102.2,98.5L102.2,98.5z"/><path d="M169.1,92.3c0-1.9,1.5-3.4,3.4-3.4c0.9,0,1.8,0.4,2.4,1c9.5,9.7,25.3,26.3,25.4,26.4c0.4,0.5,0.8,0.8,1.4,0.9l1.6,0.2h17.2c1.8,0,3.3-1.4,3.4-3.2c0-0.8-0.3-1.5-0.8-2.2l-28.6-29.2l-1.5-1.5c-3.2-3.9-2.9-5.4,0.8-9.3l22.6-25.1c1.1-1.4,0.8-3.5-0.6-4.6c-0.6-0.4-1.3-0.7-2-0.7h-17c-0.6,0.2-1.1,0.5-1.5,0.9L175,64.4c-1.3,1.4-3.4,1.5-4.8,0.2c-0.7-0.6-1.1-1.5-1.1-2.5V18.9c0-1.7-1.3-3-3-3c-0.1,0-0.2,0-0.3,0h-12.7c-2.2,0-3.3,1.5-3.3,2.8v95.8c0,2.2,1.8,2.8,3.3,2.8h12.7c1.7,0.1,3.2-1.2,3.3-2.9c0,0,0,0,0,0V92.3z"/><path d="M273,114l-1.4-12.8c-0.2-1.7-1.7-2.9-3.4-2.7c0,0,0,0-0.1,0l-2.9,0.2c-10.1,0-18.5-7.9-19-18c0-0.3,0-0.7,0-1V64.2c-0.1-2,1.5-3.6,3.5-3.7c0,0,0,0,0,0h17c1.7-0.1,3.1-1.5,3-3.2c0,0,0-0.1,0-0.1v-12c0-2.3-1.5-3.6-2.8-3.6h-17.1c-1.9,0.1-3.5-1.5-3.6-3.4c0,0,0,0,0,0V18.9c-0.1-1.7-1.5-3.1-3.2-3c0,0-0.1,0-0.1,0h-12.7c-1.6-0.1-3,1.1-3.1,2.7c0,0.1,0,0.1,0,0.2c0,0,0,61.7,0,62c0.5,21,17.9,37.6,38.9,37c1.4,0,2.9-0.2,4.3-0.3C272,117.2,273.2,115.7,273,114z"/></g><path d="M364.7,98c-10.8,0-12.4-3.8-12.4-18.3l0,0V44.8c0-1.8-1.4-3.2-3.2-3.2c0,0-0.1,0-0.1,0h-12.8c-1.8,0-3.2,1.4-3.3,3.2v1.6C314.6,36,291.3,42.5,281,60.8c-10.4,18.3-3.9,41.6,14.4,51.9c14,7.9,31.4,6.2,43.5-4.2c3.6,5.5,9.3,9.1,18.3,9.1c1.5,0,9.7,0.3,9.7-3.5v-13.6C367,99.2,366,98.1,364.7,98z M314.2,98.6c-10.5,0-19-8.5-19-19s8.5-19,19-19s19,8.5,19,19l0,0C333.2,90.1,324.7,98.6,314.2,98.6z"/></g><path d="M19.4,74c2.2-1.9,4.1-4.1,5.7-6.6c3.5-5.3,5.4-11.5,5.2-17.9V27c0-4.9,0.9-8.4,2.7-10.5c1.8-2.1,4.8-3,9.2-3h12.6c1.2,0,2.1-0.9,2.2-2.1l0,0V2.2C57,1,56,0,54.8,0c0,0,0,0,0,0H41.5c-7.8,0-12.9,2.1-18,7.6s-7.1,12.3-7.1,21.7v14.2c0,2.2-0.1,4-0.2,5.7v2.2c-0.5,3.2-1.8,6.2-3.6,8.9C9.4,64.7,5.1,70.9,0.9,74l0,0l-0.3,0.3l0,0l-0.2,0.3H0.2v0.3l0,0c-0.1,0.3-0.1,0.7,0,1l0,0v0.3h0.1l0.2,0.3l0,0l0.3,0.3l0,0c4.2,3.1,8.5,9.3,11.3,13.7c1.8,2.7,3.1,5.7,3.6,8.9v2.2c0.1,1.6,0.2,3.5,0.2,5.7v14.3c0,9.4,2.4,16.7,7.1,21.7s10.2,7.6,18,7.6h13.8c1.2,0,2.2-1,2.2-2.2V140l0,0c0-1.2-1-2.2-2.2-2.2H42.2c-4.4,0-7.5-1-9.2-3s-2.7-5.6-2.7-10.5v-22.4c0.2-6.4-1.7-12.6-5.2-17.9c-1.6-2.5-3.5-4.7-5.7-6.6l0,0c-0.9-0.7-1.1-2-0.4-2.9C19.2,74.3,19.3,74.2,19.4,74L19.4,74z"/><path d="M412.5,74c-2.2-1.9-4.1-4.1-5.7-6.6c-3.5-5.3-5.4-11.5-5.2-17.9V27c0-4.9-0.9-8.4-2.7-10.5s-4.8-3-9.2-3h-12.6c-1.2,0-2.2-1-2.2-2.2c0,0,0,0,0,0l0,0V2.2c0-1.2,1-2.2,2.2-2.2c0,0,0,0,0,0h13.4c7.8,0,12.9,2.1,18,7.6s7.1,12.3,7.1,21.7v14.2c0,2.2,0.1,4,0.2,5.7v2.2c0.5,3.2,1.8,6.2,3.6,8.9c2.8,4.5,7.1,10.7,11.3,13.7l0,0l0.3,0.3l0,0l0.2,0.3h0.1v0.3l0,0c0.1,0.3,0.1,0.7,0,1l0,0v0.3h-0.1l-0.2,0.3l0,0l-0.3,0.3l0,0c-4.2,3.1-8.5,9.3-11.3,13.7c-1.8,2.7-3.1,5.7-3.6,8.9v2.2c-0.1,1.6-0.2,3.5-0.2,5.7v14.3c0,9.4-2.4,16.7-7.1,21.7s-10.2,7.6-18,7.6h-13.4c-1.2,0-2.2-1-2.2-2.2c0,0,0,0,0,0V140l0,0c0-1.2,1-2.2,2.2-2.2l0,0h12.7c4.4,0,7.5-1,9.2-3s2.7-5.6,2.7-10.5v-22.4c-0.2-6.3,1.6-12.6,5.1-17.9c1.6-2.5,3.5-4.7,5.7-6.6l0,0c0.9-0.7,1.1-2,0.4-2.9C412.7,74.3,412.6,74.2,412.5,74L412.5,74z"/></g></svg>
+    </a>
+
+    <nav class="Header-nav PrimaryNav">
+      <ul class="menu">
+        <li class="first leaf">
+          <a href="https://developer.okta.com/product/">Product</a>
+        </li>
+        <li class="leaf">
+          <a href="https://developer.okta.com/pricing/">Pricing</a>
+        </li>
+        <li class="leaf">
+          <a href="/blog/" class="active">Blog</a>
+        </li>
+        <li class="leaf">
+          <a href="/documentation/">Docs</a>
+        </li>
+        <li class="last expanded">
+          <span class="nolink">Support</span>
+          <ul class="menu">
+            <li class="first leaf"><a href="https://devforum.okta.com/">Okta Developer Forums</a></li>
+            <li class="last leaf"><a href="mailto:developers@okta.com">developers@okta.com</a></li>
+          </ul>
+        </li>
+      </ul>
+      <a class="PrimaryNav-toggle" href="#">
+        <svg width="20px" height="20px" viewBox="0 0 20 20" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+            <g class="MenuIcon" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="round">
+                <path d="M1,16 L19,16" class="MenuIcon-line1" stroke="#FFFFFF" stroke-width="2"></path>
+                <path d="M1,4 L19,4" class="MenuIcon-line2" stroke="#FFFFFF" stroke-width="2"></path>
+                <path d="M1,10 L19,10" class="MenuIcon-line3" stroke="#FFFFFF" stroke-width="2"></path>
+                <path d="M1,10 L19,10" class="MenuIcon-line4" stroke="#FFFFFF" stroke-width="2"></path>
+            </g>
+        </svg>
+        <svg class="CloseIcon" width="16px" height="16px" viewBox="0 0 16 16" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+          <g id="ALl-Boards" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+            <g id="Desktop" transform="translate(-915.000000, -235.000000)" fill="#FFFFFF">
+              <g id="Search-bar-Active" transform="translate(30.000000, 26.000000)">
+                <polygon id="Icon/Cross" points="901 210.6 899.4 209 893 215.4 886.6 209 885 210.6 891.4 217 885 223.4 886.6 225 893 218.6 899.4 225 901 223.4 894.6 217"></polygon>
+              </g>
+            </g>
+          </g>
+        </svg>
+      </a>
+
+      <div class="PrimaryNav-cta">
+        <a target="_blank" rel="noopener noreferrer" href="https://login.okta.com/?SAMLRequest=fc%2B7CsJAEAXQXvAflu1NNJUMeZBGELTx1a%2FrYILJTtyZGD%2FfSBRiYzlw77lMnD3rSj3Qc0ku0YtgrhU6S5fSXRN9PKxmS52l00nMpq6iBvJWCrfDe4ss6vStRe9aDzmGIZfo1jsgwyWDMzUyiIV9vt1AH4XGk5ClSvewUgMNa%2BYW%2FVj5jxhm9NLP67QQaSAMu64L6CYmsFSHlnzT4ZlLwTgcL6Sf8%2FeX9AU%3Dhttps://login.okta.com/?SAMLRequest=fc%2B7CsJAEAXQXvAflu1NNJUMeZBGELTx1a%2FrYILJTtyZGD%2FfSBRiYzlw77lMnD3rSj3Qc0ku0YtgrhU6S5fSXRN9PKxmS52l00nMpq6iBvJWCrfDe4ss6vStRe9aDzmGIZfo1jsgwyWDMzUyiIV9vt1AH4XGk5ClSvewUgMNa%2BYW%2FVj5jxhm9NLP67QQaSAMu64L6CYmsFSHlnzT4ZlLwTgcL6Sf8%2FeX9AU%3D" class="Button--redOutline">Login</a>
+        <a href="https://developer.okta.com/signup/" class="Button--red">Sign up</a>
+      </div>
+
+      <a class="SearchIcon" href="#"></a>
+      <form id="form_search" class="SearchBar Formisimo_clocked_69929" method="get" action="https://developer.okta.com/search/" name="form_search" __bizdiag="-784164280" __biza="WJ__">
+        <input type="text" name="stq" autocomplete="off" id="st-search-input-auto" class="st-search-input" placeholder="Search">
+        <input type="submit" name="submit" value="GO">
+      </form>
+
+    </nav>
+
+  </div>
+
+</header>
+
+	<div class="page-content">
+		
+
+
+
+
+
+
+<section class="Blog is-single">
+		
+	<div class="Blog-social">
+		
+		<a href="https://github.com/rdegges" target="_blank"><i class="fa fa-github"></i></a>
+		
+		
+		<a href="https://twitter.com/rdegges" target="_blank"><i class="fa fa-twitter"></i></a>
+		
+		
+		
+		<a href="https://www.rdegges.com" target="_blank"><i class="fa fa-external-link"></i></a>
+		
+	</div>
+	
+	
+
+<article class="BlogPost">
+	
+	<header class="BlogPost-header">
+	
+		<time class="BlogPost-date" datetime="2017-09-06">September 6, 2017</time>
+		
+		<h1 class="BlogPost-title">
+			
+			Build a Cryptocurrency Comparison Site with Vue.js
+			
+		</h1>
+		
+		<div class="BlogPost-attribution">
+			
+				<img src="/assets/avatar-rdegges-9fb23ebb06890fb7924b8ceb3a28d666ae4ae1a297a3cddf517e549547e5dfe3.jpg" alt="avatar-rdegges.jpg" class="BlogPost-avatar">
+			
+			<span class="BlogPost-author">Randall Degges</span>
+		</div>
+	
+	</header>
+	
+	<div class="BlogPost-content">
+		
+	<p><a href="https://vuejs.org/" title="Vue.js">Vue.js</a> is a simple JavaScript framework that lets you build dynamic front-end
+web applications. Lots of people compare it to <a href="https://facebook.github.io/react/" title="React.js">React</a> and <a href="https://angularjs.org/" title="Angular.js">Angular</a>.</p>
+
+<p>As a back-end developer, and someone not incredibly experienced with frontend
+web applications, I’ve found Vue.js a lot simpler to learn, use, and be
+successful with vs. React and Angular.</p>
+
+<p>In this article, I’ll walk you through the basics of Vue.js, and in the process
+we’ll build a very simple single page application that compares the prices of
+the top 10 cryptocurrencies. To keep things simple, we’ll just be using plain
+old HTML, CSS, and JavaScript for this – nothing fancy required.</p>
+
+<p><img src="/assets/blog/cryptocurrency/vue-homepage-d23f14ccc29624a402ebfa50010e1c167da6d8287bead90effea179788638317.png" alt="Vue.js Homepage" /></p>
+
+<h2 id="who-is-vue-built-for">Who is Vue Built For?</h2>
+
+<p>Vue.js is a framework designed to handle the view layer of your web
+applications. This means Vue will <em>only</em> handle things related to displaying the
+user interface on the page.</p>
+
+<p>Vue uses plain old HTML, and doesn’t require you to learn another language (like
+JSX with React), and can therefore be picked up by web designers and other
+front-end developers who are familiar with HTML already.</p>
+
+<p>If you’re looking for a simple JavaScript framework to help you dynamically
+display data, you can’t really go wrong with Vue:</p>
+
+<blockquote>
+  <p>Vue is simple, fast, and well documented.</p>
+</blockquote>
+
+<h2 id="vue-basics">Vue Basics</h2>
+
+<p>Let’s take a look at a minimal Vue.js web page:</p>
+
+<div class="language-html highlighter-rouge"><pre class="highlight"><code><span class="nt">&lt;html&gt;</span>
+  <span class="nt">&lt;body&gt;</span>
+    <span class="c">&lt;!-- All that Vue cares about is what is inside this div. --&gt;</span>
+    <span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">"app"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;/div&gt;</span>
+    <span class="nt">&lt;script </span><span class="na">src=</span><span class="s">"https://unpkg.com/vue"</span><span class="nt">&gt;&lt;/script&gt;</span>
+    <span class="nt">&lt;script&gt;</span>
+      <span class="kd">let</span> <span class="nx">app</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Vue</span><span class="p">({</span>
+        <span class="na">el</span><span class="p">:</span> <span class="s2">"#app"</span>
+      <span class="p">});</span>
+    <span class="nt">&lt;/script&gt;</span>
+  <span class="nt">&lt;/body&gt;</span>
+<span class="nt">&lt;/html&gt;</span>
+</code></pre>
+</div>
+
+<p>This minimal web page will initialize Vue.js fully, and have it manage
+everything inside of the <code class="highlighter-rouge">app</code> div. The <code class="highlighter-rouge">el</code> parameter in the Vue constructor tells
+Vue to bind itself to the element (in this case a div) whose id is <code class="highlighter-rouge">app</code>.</p>
+
+<h2 id="data-management">Data Management</h2>
+
+<p>One of the core things Vue does is manage data. In order to tell Vue what data
+you want to manage, you need to explicitly declare every bit of data you expect
+Vue to dynamically manage for you upfront in a special <code class="highlighter-rouge">data</code> object, like so:</p>
+
+<div class="language-html highlighter-rouge"><pre class="highlight"><code><span class="nt">&lt;html&gt;</span>
+  <span class="nt">&lt;body&gt;</span>
+    <span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">"app"</span><span class="nt">&gt;</span>
+      <span class="nt">&lt;h1&gt;</span>{{ message }}<span class="nt">&lt;/h1&gt;</span>
+    <span class="nt">&lt;/div&gt;</span>
+
+    <span class="nt">&lt;script </span><span class="na">src=</span><span class="s">"https://unpkg.com/vue"</span><span class="nt">&gt;&lt;/script&gt;</span>
+    <span class="nt">&lt;script&gt;</span>
+      <span class="kd">let</span> <span class="nx">app</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Vue</span><span class="p">({</span>
+        <span class="na">el</span><span class="p">:</span> <span class="s2">"#app"</span><span class="p">,</span>
+        <span class="na">data</span><span class="p">:</span> <span class="p">{</span>
+          <span class="na">message</span><span class="p">:</span> <span class="s2">"Hi!"</span>
+        <span class="p">}</span>
+      <span class="p">});</span>
+    <span class="nt">&lt;/script&gt;</span>
+  <span class="nt">&lt;/body&gt;</span>
+<span class="nt">&lt;/html&gt;</span>
+</code></pre>
+</div>
+
+<p><img src="/assets/blog/cryptocurrency/hi-screenshot-d129069db771fe36ccf6aadbbe7b1084c28890279d7d05fd39b3544129da00bd.png" alt="Hi Screenshot" /></p>
+
+<p>As you can see in the example above, I’m defining a new <code class="highlighter-rouge">data</code> object inside the
+<code class="highlighter-rouge">Vue</code> constructor, and defining my data inside of it. In this case, I’m just
+telling Vue that I’d like it to manage a message for me.</p>
+
+<p>You’ll also notice that my HTML code now contains a variable: <code class="highlighter-rouge"><span class="p">{</span><span class="err">{</span><span class="w"> </span><span class="err">message</span><span class="w"> </span><span class="p">}</span><span class="err">}</span></code>.
+After Vue starts up, and scans the <code class="highlighter-rouge">app</code> div for code, it will start replacing any
+variables it finds with the related <code class="highlighter-rouge">data</code> objects you’ve defined.</p>
+
+<p>If you open the JavaScript console in your browser, and attempt to modify the
+message value like so:</p>
+
+<div class="language-javascript highlighter-rouge"><pre class="highlight"><code><span class="nx">app</span><span class="p">.</span><span class="nx">message</span> <span class="o">=</span> <span class="s2">"yo"</span><span class="p">;</span>
+</code></pre>
+</div>
+
+<p>You’ll notice that the contents of the page will change!</p>
+
+<p><img src="/assets/blog/cryptocurrency/yo-screenshot-3092d5210f222ee24ad7a050b40dae0536b5e2da7b3c93632e41b5a24c244a1e.png" alt="Yo Screenshot" /></p>
+
+<p>This happens because Vue is managing that data for you. When the data changes,
+Vue re-renders the variable on the page.</p>
+
+<p>This behavior makes it really easy to build dynamic web applications, since any
+time you change data in JavaScript, the page is re-rendered on your behalf and
+you don’t need to worry about any sort of UI management.</p>
+
+<h2 id="conditionals">Conditionals</h2>
+
+<p>In addition to managing pieces of data, Vue also supports writing programming
+logic in your HTML templates.</p>
+
+<p>Vue supports typical if, else if, and else conditionals using the <code class="highlighter-rouge">v-if</code>,
+<code class="highlighter-rouge">v-else-if</code>, and <code class="highlighter-rouge">v-else</code> syntax.</p>
+
+<p>Let’s take a look at a simple Vue application that uses an if-else conditional.</p>
+
+<div class="language-html highlighter-rouge"><pre class="highlight"><code><span class="nt">&lt;html&gt;</span>
+  <span class="nt">&lt;body&gt;</span>
+    <span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">"app"</span><span class="nt">&gt;</span>
+      <span class="nt">&lt;h1&gt;</span>{{ message }}<span class="nt">&lt;/h1&gt;</span>
+      <span class="nt">&lt;p</span> <span class="na">v-if=</span><span class="s">"secretMessage"</span><span class="nt">&gt;</span>This is a secret HTML element.<span class="nt">&lt;/p&gt;</span>
+      <span class="nt">&lt;p</span> <span class="na">v-else</span><span class="nt">&gt;</span>Welcome to the website.<span class="nt">&lt;/p&gt;</span>
+    <span class="nt">&lt;/div&gt;</span>
+
+    <span class="nt">&lt;script </span><span class="na">src=</span><span class="s">"https://unpkg.com/vue"</span><span class="nt">&gt;&lt;/script&gt;</span>
+    <span class="nt">&lt;script&gt;</span>
+      <span class="kd">let</span> <span class="nx">app</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Vue</span><span class="p">({</span>
+        <span class="na">el</span><span class="p">:</span> <span class="s2">"#app"</span><span class="p">,</span>
+        <span class="na">data</span><span class="p">:</span> <span class="p">{</span>
+          <span class="na">message</span><span class="p">:</span> <span class="s2">"Hi!"</span><span class="p">,</span>
+          <span class="na">secretMessage</span><span class="p">:</span> <span class="kc">false</span>
+        <span class="p">}</span>
+      <span class="p">});</span>
+    <span class="nt">&lt;/script&gt;</span>
+  <span class="nt">&lt;/body&gt;</span>
+<span class="nt">&lt;/html&gt;</span>
+</code></pre>
+</div>
+
+<p>As you can see above, we now have two paragraph tags, each with a different
+message. If you run this in your browser, you’ll see the following:</p>
+
+<p><img src="/assets/blog/cryptocurrency/new-hi-screenshot-681ec9e7aecb963358ece5ccc12aefa6750f80d2d973ccca5af31929f99b3189.png" alt="New Hi Screenshot" /></p>
+
+<p>Because the <code class="highlighter-rouge">secretMessage</code> variable is false, the conditional statement in HTML
+will fail to execute, and the else statement code will be ran, outputting the
+HTML element with the welcome message.</p>
+
+<p>Since we know Vue is dynamic, we can now open the JavaScript console, modify the
+value of <code class="highlighter-rouge">secretMessage</code>, and BAM, the page will re-render with the secret message
+being shown.</p>
+
+<p><img src="/assets/blog/cryptocurrency/secret-message-b5398f70f3570a65bd709dc802ed8c9532aa9bcc12d43bf097a5e834b4bf776e.png" alt="Secret Message" /></p>
+
+<p>One important thing to note: when using Vue conditionals, the DOM will be
+modified. In the example above, when we enable the <code class="highlighter-rouge">secretMessage</code> flag and show
+the message, the previously shown paragraph tag will be completely removed from
+the DOM.</p>
+
+<h2 id="looping">Looping</h2>
+
+<p>Vue also supports simple loops. Here’s a small example application that uses Vue
+to loop through an array of shopping items, displaying them in an ordered list:</p>
+
+<div class="language-html highlighter-rouge"><pre class="highlight"><code><span class="nt">&lt;html&gt;</span>
+  <span class="nt">&lt;body&gt;</span>
+    <span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">"app"</span><span class="nt">&gt;</span>
+      <span class="nt">&lt;p&gt;</span>Shopping list<span class="nt">&lt;/p&gt;</span>
+      <span class="nt">&lt;ol&gt;</span>
+        <span class="nt">&lt;li</span> <span class="na">v-for=</span><span class="s">"item in shoppingList"</span><span class="nt">&gt;</span>{{ item }}<span class="nt">&lt;/li&gt;</span>
+      <span class="nt">&lt;/ol&gt;</span>
+    <span class="nt">&lt;/div&gt;</span>
+
+    <span class="nt">&lt;script </span><span class="na">src=</span><span class="s">"https://unpkg.com/vue"</span><span class="nt">&gt;&lt;/script&gt;</span>
+    <span class="nt">&lt;script&gt;</span>
+      <span class="kd">let</span> <span class="nx">app</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Vue</span><span class="p">({</span>
+        <span class="na">el</span><span class="p">:</span> <span class="s2">"#app"</span><span class="p">,</span>
+        <span class="na">data</span><span class="p">:</span> <span class="p">{</span>
+          <span class="na">shoppingList</span><span class="p">:</span> <span class="p">[</span>
+            <span class="s2">"milk"</span><span class="p">,</span>
+            <span class="s2">"eggs"</span><span class="p">,</span>
+            <span class="s2">"steak"</span><span class="p">,</span>
+            <span class="s2">"chicken"</span>
+          <span class="p">]</span>
+        <span class="p">}</span>
+      <span class="p">});</span>
+    <span class="nt">&lt;/script&gt;</span>
+  <span class="nt">&lt;/body&gt;</span>
+<span class="nt">&lt;/html&gt;</span>
+</code></pre>
+</div>
+
+<p>When this runs in the browser, you’ll see that the <code class="highlighter-rouge">v-for</code> directive Vue provides
+will repeat itself, looping over the contents of the <code class="highlighter-rouge">shoppingList</code> array:</p>
+
+<p><img src="/assets/blog/cryptocurrency/list-screenshot-e9dcd6eb5e1299ee8105783e4a297d6ee6a197facf8f55ad64fd1b7cb4d0c582.png" alt="List Screenshot" /></p>
+
+<p>If you go modify the <code class="highlighter-rouge">shoppingList</code> array in the JavaScript console, you’ll notice
+the same behavior as before: Vue will re-render the shopping list for you
+automatically.</p>
+
+<h2 id="two-way-data-management">Two-Way Data Management</h2>
+
+<p>The next basic concept we’ll cover is two-way data binding. Up until now, you’ve
+seen that whatever data you define in Vue will appropriately render when
+changed. This is really useful, but there’s a little bit more we can do.</p>
+
+<p>In some circumstances, like when accepting user input, you’ll also want Vue to
+manage user controlled data. This is called two way data binding: when both the
+user (and you) can manage the same pieces of data in your application.</p>
+
+<p>Let’s take a look at a simple Vue application that uses two-way data binding:</p>
+
+<div class="language-html highlighter-rouge"><pre class="highlight"><code><span class="nt">&lt;html&gt;</span>
+  <span class="nt">&lt;body&gt;</span>
+    <span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">"app"</span><span class="nt">&gt;</span>
+      <span class="nt">&lt;p&gt;</span>What's your favorite color?<span class="nt">&lt;/p&gt;</span>
+      <span class="nt">&lt;input</span> <span class="na">v-model=</span><span class="s">"color"</span> <span class="na">type=</span><span class="s">"text"</span><span class="nt">&gt;</span>
+      <span class="nt">&lt;p&gt;</span>Your favorite color is... {{ color }}<span class="nt">&lt;/p&gt;</span>
+    <span class="nt">&lt;/div&gt;</span>
+
+    <span class="nt">&lt;script </span><span class="na">src=</span><span class="s">"https://unpkg.com/vue"</span><span class="nt">&gt;&lt;/script&gt;</span>
+    <span class="nt">&lt;script&gt;</span>
+      <span class="kd">let</span> <span class="nx">app</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Vue</span><span class="p">({</span>
+        <span class="na">el</span><span class="p">:</span> <span class="s2">"#app"</span><span class="p">,</span>
+        <span class="na">data</span><span class="p">:</span> <span class="p">{</span>
+          <span class="na">color</span><span class="p">:</span> <span class="s1">''</span>
+        <span class="p">}</span>
+      <span class="p">});</span>
+    <span class="nt">&lt;/script&gt;</span>
+  <span class="nt">&lt;/body&gt;</span>
+<span class="nt">&lt;/html&gt;</span>
+</code></pre>
+</div>
+
+<p>As you can see if you try this out yourself, when you enter data into the input
+box, the <code class="highlighter-rouge">color</code> variable is changed, and then re-rendered on the page. This is
+two-way data binding.</p>
+
+<p><img src="/assets/blog/cryptocurrency/color-screenshot-a52ca827d6a37cabe6fa931a547e971410cf725cb259272c57fad5eb3bd11946.png" alt="Color Screenshot" /></p>
+
+<p>If you go into the JavaScript console and modify this directly yourself, you’ll
+see it change again.</p>
+
+<h2 id="doing-things-with-methods">Doing Things with Methods</h2>
+
+<p>Now that we’ve covered some of the fundamental Vue.js properties, let’s talk
+about something a little more interesting: Vue methods.</p>
+
+<p>In addition to managing data, Vue also provides a convenient way to structure
+your JavaScript <em>actions.</em></p>
+
+<p>Let’s take a look at a very simple example application that uses a method to
+capitalize the color from the example above when clicked:</p>
+
+<div class="language-html highlighter-rouge"><pre class="highlight"><code><span class="nt">&lt;html&gt;</span>
+  <span class="nt">&lt;body&gt;</span>
+    <span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">"app"</span><span class="nt">&gt;</span>
+      <span class="nt">&lt;p&gt;</span>What's your favorite color?<span class="nt">&lt;/p&gt;</span>
+      <span class="nt">&lt;input</span> <span class="na">v-model=</span><span class="s">"color"</span> <span class="na">type=</span><span class="s">"text"</span><span class="nt">&gt;</span>
+      <span class="nt">&lt;p&gt;</span>Your favorite color is... {{ color }}<span class="nt">&lt;/p&gt;</span>
+      <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"button"</span> <span class="na">v-on:click=</span><span class="s">"capitalizeColor"</span> <span class="na">value=</span><span class="s">"Capitalize"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;/div&gt;</span>
+
+    <span class="nt">&lt;script </span><span class="na">src=</span><span class="s">"https://unpkg.com/vue"</span><span class="nt">&gt;&lt;/script&gt;</span>
+    <span class="nt">&lt;script&gt;</span>
+      <span class="kd">let</span> <span class="nx">app</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Vue</span><span class="p">({</span>
+        <span class="na">el</span><span class="p">:</span> <span class="s2">"#app"</span><span class="p">,</span>
+        <span class="na">data</span><span class="p">:</span> <span class="p">{</span>
+          <span class="na">color</span><span class="p">:</span> <span class="s1">''</span>
+        <span class="p">},</span>
+        <span class="na">methods</span><span class="p">:</span> <span class="p">{</span>
+          <span class="na">capitalizeColor</span><span class="p">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+            <span class="k">this</span><span class="p">.</span><span class="nx">color</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">color</span><span class="p">.</span><span class="nx">toUpperCase</span><span class="p">();</span>
+          <span class="p">}</span>
+        <span class="p">}</span>
+      <span class="p">});</span>
+    <span class="nt">&lt;/script&gt;</span>
+  <span class="nt">&lt;/body&gt;</span>
+<span class="nt">&lt;/html&gt;</span>
+</code></pre>
+</div>
+
+<p><img src="/assets/blog/cryptocurrency/capitalize-screenshot-7c28a40eac3d7ff76b5ef1e650064c5dfdb1597af736754a218fd406e1e5290d.png" alt="Capitalize Screenshot" /></p>
+
+<p>In this example, we define a function in the <code class="highlighter-rouge">methods</code> object of Vue, which simply
+capitalizes the <code class="highlighter-rouge">color</code> variable from before. We then use the <code class="highlighter-rouge">v-on:click</code> attribute
+on our input tag to tell Vue that when the button is clicked, it should run that
+method.</p>
+
+<p>Pretty straightforward, right?</p>
+
+<h2 id="build-a-cryptocurrency-comparison-website-with-vue">Build a Cryptocurrency Comparison Website with Vue</h2>
+
+<p>Now that we’ve had a chance to look at some basic Vue.js patterns and usage,
+let’s try to build something with our new found knowledge!</p>
+
+<p>I’ve been using Bitcoin for many years now, and enjoy working with it, so I
+thought it’d be fun to hack together a little single page app that displays the
+top 10 cryptocurrencies as well as their price data.</p>
+
+<p>This could be a useful dashboard for someone who’s considering purchasing
+cryptocurrencies for speculative purposes, as it gives you an idea of how these
+things are valued at any given time.</p>
+
+<p>So… Let’s get started!</p>
+
+<p><strong>NOTE</strong>: If you’d rather just look at the completed project on Github, you can
+<a href="https://github.com/rdegges/cryptocompare" title="cryptocompare on Github">check it out on Github</a>.</p>
+
+<h3 id="bootstrapping">Bootstrapping</h3>
+
+<p>The first thing we’ll do is get our page bootstrapped with some basic HTML,
+JavaScript libraries, etc.</p>
+
+<p>Because I’m not a web designer (and have poor visual taste!), we’ll be using
+Twitter’s <a href="http://getbootstrap.com/" title="Twitter Bootstrap">Bootstrap</a> library for basic styling. We’ll also be using Vue.js, and a
+few other small helper libraries which will be explained later on:</p>
+
+<ul>
+  <li><a href="https://www.npmjs.com/package/vue2-filters" title="vue2-filters on NPM">vue2-filters</a>, a simple Vue.js library that provides some useful template
+filters for displaying text. In this app, I only the filter for helping to
+display currency values nicely.</li>
+  <li><a href="https://github.com/mzabriskie/axios" title="axios on Github">axios</a>, a popular JavaScript library for making HTTP requests</li>
+</ul>
+
+<p>All in all, our basic HTML page with all our dependencies included will look
+like this:</p>
+
+<div class="language-html highlighter-rouge"><pre class="highlight"><code><span class="cp">&lt;!DOCTYPE html&gt;</span>
+<span class="nt">&lt;html</span> <span class="na">lang=</span><span class="s">"en"</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;head&gt;</span>
+    <span class="nt">&lt;meta</span> <span class="na">charset=</span><span class="s">"utf-8"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;meta</span> <span class="na">http-equiv=</span><span class="s">"X-UA-Compatible"</span> <span class="na">content=</span><span class="s">"IE=edge"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;meta</span> <span class="na">name=</span><span class="s">"viewport"</span> <span class="na">content=</span><span class="s">"width=device-width, initial-scale=1"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;title&gt;</span>CryptoCompare<span class="nt">&lt;/title&gt;</span>
+
+    <span class="nt">&lt;link</span> <span class="na">rel=</span><span class="s">"stylesheet"</span> <span class="na">href=</span><span class="s">"https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"</span> <span class="na">integrity=</span><span class="s">"sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"</span> <span class="na">crossorigin=</span><span class="s">"anonymous"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;link</span> <span class="na">rel=</span><span class="s">"stylesheet"</span> <span class="na">href=</span><span class="s">"https://bootswatch.com/simplex/bootstrap.min.css"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;link</span> <span class="na">rel=</span><span class="s">"stylesheet"</span> <span class="na">href=</span><span class="s">"/static/css/style.css"</span><span class="nt">&gt;</span>
+
+    <span class="c">&lt;!--[if lt IE 9]&gt;
+      &lt;script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"&gt;&lt;/script&gt;
+      &lt;script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"&gt;&lt;/script&gt;
+    &lt;![endif]--&gt;</span>
+  <span class="nt">&lt;/head&gt;</span>
+  <span class="nt">&lt;body</span> <span class="na">class=</span><span class="s">"container"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;h1&gt;</span>Crypto Compare<span class="nt">&lt;/h1&gt;</span>
+
+    <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"row"</span><span class="nt">&gt;</span>
+      <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"jumbotron col-xs-offset-2 col-xs-8"</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;p&gt;</span>
+          This website indexes the top 10 cryptocurrencies by market cap (how
+          much the sum of all coins is collectively worth), and gives you an easy
+          way to compare cryptocurrency performance and rank over the last week.
+        <span class="nt">&lt;/p&gt;</span>
+      <span class="nt">&lt;/div&gt;</span>
+    <span class="nt">&lt;/div&gt;</span>
+
+    <span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">"app"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;/div&gt;</span>
+
+    <span class="nt">&lt;script </span><span class="na">src=</span><span class="s">"https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
+    <span class="nt">&lt;script </span><span class="na">src=</span><span class="s">"https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"</span> <span class="na">integrity=</span><span class="s">"sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"</span> <span class="na">crossorigin=</span><span class="s">"anonymous"</span><span class="nt">&gt;&lt;/script&gt;</span>
+    <span class="nt">&lt;script </span><span class="na">src=</span><span class="s">"https://unpkg.com/vue"</span><span class="nt">&gt;&lt;/script&gt;</span>
+    <span class="nt">&lt;script </span><span class="na">src=</span><span class="s">"/static/js/vue2-filters.min.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
+    <span class="nt">&lt;script </span><span class="na">src=</span><span class="s">"https://unpkg.com/axios/dist/axios.min.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
+    <span class="nt">&lt;script </span><span class="na">src=</span><span class="s">"/static/js/app.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
+  <span class="nt">&lt;/body&gt;</span>
+<span class="nt">&lt;/html&gt;</span>
+</code></pre>
+</div>
+
+<p>We’ve got all our dependencies included, we’ve got a basic HTML page, and we’re
+ready to start doing some real development work.</p>
+
+<h3 id="design-your-page">Design Your Page</h3>
+
+<p>The first thing I like to do after bootstrapping my page is to lay out the
+elements where they belong. In this case, since we’ll be building a ranked list
+of the top cryptocurrencies, we’ll have a very simple design. It’s just an HTML
+table that lists the top cryptocurrencies, and their associated stats.</p>
+
+<p>Here’s the modified HTML and CSS, and what it looks like after defining these
+basic elements:</p>
+
+<div class="language-html highlighter-rouge"><pre class="highlight"><code><span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">"app"</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;table</span> <span class="na">class=</span><span class="s">"table table-hover"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;thead&gt;</span>
+      <span class="nt">&lt;tr&gt;</span>
+        <span class="nt">&lt;td&gt;</span>Rank<span class="nt">&lt;/td&gt;</span>
+        <span class="nt">&lt;td&gt;</span>Name<span class="nt">&lt;/td&gt;</span>
+        <span class="nt">&lt;td&gt;</span>Symbol<span class="nt">&lt;/td&gt;</span>
+        <span class="nt">&lt;td&gt;</span>Price (USD)<span class="nt">&lt;/td&gt;</span>
+        <span class="nt">&lt;td&gt;</span>1H<span class="nt">&lt;/td&gt;</span>
+        <span class="nt">&lt;td&gt;</span>1D<span class="nt">&lt;/td&gt;</span>
+        <span class="nt">&lt;td&gt;</span>1W<span class="nt">&lt;/td&gt;</span>
+        <span class="nt">&lt;td&gt;</span>Market Cap (USD)<span class="nt">&lt;/td&gt;</span>
+    <span class="nt">&lt;/thead&gt;</span>
+    <span class="nt">&lt;tbody&gt;</span>
+    <span class="nt">&lt;/tbody&gt;</span>
+  <span class="nt">&lt;/table&gt;</span>
+<span class="nt">&lt;/div&gt;</span>
+</code></pre>
+</div>
+
+<div class="language-css highlighter-rouge"><pre class="highlight"><code><span class="c">/* /static/css/style.css */</span>
+
+<span class="nt">h1</span> <span class="p">{</span>
+  <span class="nl">text-align</span><span class="p">:</span> <span class="nb">center</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="nt">td</span> <span class="nt">img</span> <span class="p">{</span>
+  <span class="nl">width</span><span class="p">:</span> <span class="m">25px</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="nc">.jumbotron</span> <span class="nt">p</span> <span class="p">{</span>
+  <span class="nl">font-size</span><span class="p">:</span> <span class="m">1.2em</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="nc">.jumbotron</span> <span class="p">{</span>
+  <span class="nl">margin-top</span><span class="p">:</span> <span class="m">5em</span><span class="p">;</span>
+  <span class="nl">margin-bottom</span><span class="p">:</span> <span class="m">5em</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre>
+</div>
+
+<p><img src="/assets/blog/cryptocurrency/cryptocompare-naked-8824dbe959ab7a736d8d1854f4c3a4fe5b6461ba80d9a988e01e296e9623404f.png" alt="Cryptocompare Screenshot" /></p>
+
+<p>We’re off to a good start! We’ve now got our basic website layout done, and we
+have a good idea of what data we’ll need to make this work, etc.</p>
+
+<h3 id="cryptocurrency-data">Cryptocurrency Data</h3>
+
+<p>In order to build the rest of this app, we need a way to retrieve a list of the
+top cryptocurrencies, as well as their stats. For this project, I thought it’d
+be fun to show the following:</p>
+
+<ul>
+  <li>The top 10 cryptocurrencies by market cap (the total worth of all coins for
+the given currency)</li>
+  <li>Each currency’s name</li>
+  <li>Each currency’s symbol (this is how people typically refer to the currencies
+on trading platforms)</li>
+  <li>The current price of a single coin in each currency, in USD</li>
+  <li>The percent change in value of the currency over the last hour, day, and week</li>
+</ul>
+
+<p>Luckily for us, there’s a great free API service that provides this exact data.
+It’s called <a href="https://coinmarketcap.com/api/" title="CoinMarketCap">CoinMarketCap</a>. It doesn’t require any registration or setup, you can
+just read through their API documentation, figure out how the API endpoints
+work, and plug it into whatever you’re building.</p>
+
+<p>We’ll need to use the ticker API provided by CoinMarketCap, which will allow us
+to grab a list of the top 10 cryptocurrencies, and display their stats. Here’s
+what this API call looks like, and what it returns:</p>
+
+<div class="language-json highlighter-rouge"><pre class="highlight"><code><span class="p">[</span><span class="w">
+  </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"bitcoin"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Bitcoin"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"symbol"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BTC"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"rank"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"price_usd"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2747.54"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"price_btc"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1.0"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"24h_volume_usd"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2242640000.0"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"market_cap_usd"</span><span class="p">:</span><span class="w"> </span><span class="s2">"45223373666.0"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"available_supply"</span><span class="p">:</span><span class="w"> </span><span class="s2">"16459587.0"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"total_supply"</span><span class="p">:</span><span class="w"> </span><span class="s2">"16459587.0"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"percent_change_1h"</span><span class="p">:</span><span class="w"> </span><span class="s2">"-2.83"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"percent_change_24h"</span><span class="p">:</span><span class="w"> </span><span class="s2">"19.78"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"percent_change_7d"</span><span class="p">:</span><span class="w"> </span><span class="s2">"17.2"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"last_updated"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1500596647"</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="err">...</span><span class="w">
+</span><span class="p">]</span><span class="w">
+</span></code></pre>
+</div>
+
+<p>As you can see above, the resulting JSON is an array of the top 10
+cryptocurrencies. Each JSON object in the array represents one currency, and
+contains all the information we need.</p>
+
+<p>There is one thing we’re missing though. To make our table look nice, I’d also
+like to display the logo of each cryptocurrency next to their name.</p>
+
+<p>Unfortunately, the CoinMarketCap API doesn’t have any images, so I did a little
+Google-ing around and found another API we can use to retrieve metadata about
+tons of different cryptocurrencies, including their logos!</p>
+
+<p>The <a href="https://www.cryptocompare.com/api" title="CryptoCompare API">CryptoCompare API</a> provides us this data. Much like CoinMarketCap, there’s no
+registration required.</p>
+
+<p>The API call we’ll use to retrieve data about all the cryptocurrencies looks
+like this:</p>
+
+<div class="language-console highlighter-rouge"><pre class="highlight"><code><span class="w">$ </span><span class="nc">curl</span><span class="kv"> https://www.cryptocompare.com/api/data/coinlist
+</span>{
+  ...
+  "Data": {
+    "AVT": {
+      "Id": "138642",
+      "Url": "/coins/avt/overview",
+      "ImageUrl": "/media/1383599/avt.png",
+      "Name": "AVT",
+      "CoinName": "AventCoin",
+      "FullName": "AventCoin (AVT)",
+      "Algorithm": "N/A",
+      "ProofType": "N/A",
+      "FullyPremined": "0",
+      "TotalCoinSupply": "10000000",
+      "PreMinedValue": "N/A",
+      "TotalCoinsFreeFloat": "N/A",
+      "SortOrder": "1266"
+    },
+    ...
+  }
+}
+</code></pre>
+</div>
+
+<p>With the new data we have from the API call above, we can correlate a
+cryptocurrency’s symbol (for instance BTC, AVI, etc.) with an <code class="highlighter-rouge">ImageUrl</code> that
+shows a picture of that currency.</p>
+
+<p>Using this new data, plus the data from CoinMarketCap, we now have everything we
+need!</p>
+
+<h3 id="set-up-your-vue-app">Set Up Your Vue App</h3>
+
+<p>Now that we know how to grab the data we need, let’s start building out our Vue
+app. To keep things simple, all our Vue code will be placed into the file
+<code class="highlighter-rouge">static/js/app.js</code>.</p>
+
+<p>The first thing we need to do here is scaffold our Vue app, and tell it what
+variables we expect it to manage:</p>
+
+<div class="language-javascript highlighter-rouge"><pre class="highlight"><code><span class="cm">/**
+ * Our Vue.js application.
+ *
+ * This manages the entire front-end website.
+ */</span>
+
+<span class="c1">// The API we're using for grabbing metadata about each cryptocurrency</span>
+<span class="c1">// (including logo images). The service can be found at:</span>
+<span class="c1">// https://www.cryptocompare.com/api/</span>
+<span class="kd">let</span> <span class="nx">CRYPTOCOMPARE_API_URI</span> <span class="o">=</span> <span class="s2">"https://www.cryptocompare.com"</span><span class="p">;</span>
+
+<span class="c1">// The API we're using for grabbing cryptocurrency prices.  The service can be</span>
+<span class="c1">// found at: https://coinmarketcap.com/api/</span>
+<span class="kd">let</span> <span class="nx">COINMARKETCAP_API_URI</span> <span class="o">=</span> <span class="s2">"https://api.coinmarketcap.com"</span><span class="p">;</span>
+
+<span class="c1">// The amount of milliseconds (ms) after which we should update our currency</span>
+<span class="c1">// charts.</span>
+<span class="kd">let</span> <span class="nx">UPDATE_INTERVAL</span> <span class="o">=</span> <span class="mi">60</span> <span class="o">*</span> <span class="mi">1000</span><span class="p">;</span>
+
+<span class="kd">let</span> <span class="nx">app</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Vue</span><span class="p">({</span>
+  <span class="na">el</span><span class="p">:</span> <span class="s2">"#app"</span><span class="p">,</span>
+  <span class="na">data</span><span class="p">:</span> <span class="p">{</span>
+    <span class="na">coins</span><span class="p">:</span> <span class="p">[],</span>
+    <span class="na">coinData</span><span class="p">:</span> <span class="p">{}</span>
+  <span class="p">},</span>
+  <span class="na">methods</span><span class="p">:</span> <span class="p">{</span>
+
+    <span class="cm">/**
+     * Load up all cryptocurrency data.  This data is used to find what logos
+     * each currency has, so we can display things in a friendly way.
+     */</span>
+    <span class="na">getCoinData</span><span class="p">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+    <span class="p">},</span>
+
+    <span class="cm">/**
+     * Get the top 10 cryptocurrencies by value.  This data is refreshed each 5
+     * minutes by the backing API service.
+     */</span>
+    <span class="na">getCoins</span><span class="p">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+    <span class="p">},</span>
+
+    <span class="cm">/**
+     * Given a cryptocurrency ticket symbol, return the currency's logo
+     * image.
+     */</span>
+    <span class="na">getCoinImage</span><span class="p">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">symbol</span><span class="p">)</span> <span class="p">{</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+<span class="p">});</span>
+</code></pre>
+</div>
+
+<p>The two variables we’re going to have Vue manage for us to make this possible
+are:</p>
+
+<ul>
+  <li><code class="highlighter-rouge">coins</code> - which will be an array of all the different types of cryptocurrencies
+(bitcoin, ethereum, etc.), and</li>
+  <li><code class="highlighter-rouge">coinData</code> - which will be an object loaded from the CryptoCompare API service
+we looked at earlier. Using this we’ll be able to cross reference
+cryptocurrency data to get a logo image. We’re also going to define three stub
+methods that we’ll need to implement:</li>
+  <li><code class="highlighter-rouge">getCoinData</code> - which will retrieve the coin data from CryptoCompare</li>
+  <li><code class="highlighter-rouge">getCoins</code> - which will load the coin data from CoinMarketCap</li>
+  <li><code class="highlighter-rouge">getCoinImage</code> - which takes a currency symbol and returns a link to that
+currency’s logo image</li>
+</ul>
+
+<p>With these three methods in place, we can now begin writing some software!</p>
+
+<h3 id="implement-your-coin-methods">Implement Your Coin Methods</h3>
+
+<p>Let’s start by implementing the <code class="highlighter-rouge">getCoins</code> method that will talk to the
+CoinMarketCap API. We know from before that all we need to do is hit the API and
+store the resulting array of JSON data in our Vue variable.</p>
+
+<p>To make API requests, I like to use the axios JavaScript library (mentioned
+earlier on in this article). It’s a very popular library for making HTTP
+requests in client side JavaScript.</p>
+
+<p>Since I’ve already loaded it up for us in the web scaffold, we can use it
+directly in our Vue code:</p>
+
+<div class="language-javascript highlighter-rouge"><pre class="highlight"><code><span class="nx">getCoins</span><span class="err">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+  <span class="kd">let</span> <span class="nx">self</span> <span class="o">=</span> <span class="k">this</span><span class="p">;</span>
+
+  <span class="nx">axios</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="nx">COINMARKETCAP_API_URI</span> <span class="o">+</span> <span class="s2">"/v1/ticker/?limit=10"</span><span class="p">)</span>
+    <span class="p">.</span><span class="nx">then</span><span class="p">((</span><span class="nx">resp</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+      <span class="k">this</span><span class="p">.</span><span class="nx">coins</span> <span class="o">=</span> <span class="nx">resp</span><span class="p">.</span><span class="nx">data</span><span class="p">;</span>
+    <span class="p">})</span>
+    <span class="p">.</span><span class="k">catch</span><span class="p">((</span><span class="nx">err</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+      <span class="nx">console</span><span class="p">.</span><span class="nx">error</span><span class="p">(</span><span class="nx">err</span><span class="p">);</span>
+    <span class="p">});</span>
+<span class="p">},</span>
+</code></pre>
+</div>
+
+<p>As you can see, we can easily use axios to issue a GET request for us, grab the
+resulting array of data, and then store it as <code class="highlighter-rouge">self.coins</code> (which updates the Vue
+<code class="highlighter-rouge">coins</code> variable). Once that variable change occurs, Vue will re-render any part
+of our page that’s dependent upon it.</p>
+
+<p>Next, let’s implement our other method: <code class="highlighter-rouge">getCoinData</code>, which retrieves metadata
+about many different types of cryptocurrencies, and will be used to find their
+logo images:</p>
+
+<div class="language-javascript highlighter-rouge"><pre class="highlight"><code><span class="nx">getCoinData</span><span class="err">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+  <span class="kd">let</span> <span class="nx">self</span> <span class="o">=</span> <span class="k">this</span><span class="p">;</span>
+
+  <span class="nx">axios</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="nx">CRYPTOCOMPARE_API_URI</span> <span class="o">+</span> <span class="s2">"/api/data/coinlist"</span><span class="p">)</span>
+    <span class="p">.</span><span class="nx">then</span><span class="p">((</span><span class="nx">resp</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+      <span class="k">this</span><span class="p">.</span><span class="nx">coinData</span> <span class="o">=</span> <span class="nx">resp</span><span class="p">.</span><span class="nx">data</span><span class="p">.</span><span class="nx">Data</span><span class="p">;</span>
+      <span class="k">this</span><span class="p">.</span><span class="nx">getCoins</span><span class="p">();</span>
+    <span class="p">})</span>
+    <span class="p">.</span><span class="k">catch</span><span class="p">((</span><span class="nx">err</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+      <span class="k">this</span><span class="p">.</span><span class="nx">getCoins</span><span class="p">();</span>
+      <span class="nx">console</span><span class="p">.</span><span class="nx">error</span><span class="p">(</span><span class="nx">err</span><span class="p">);</span>
+    <span class="p">});</span>
+<span class="p">}</span>
+</code></pre>
+</div>
+
+<p>This is another simple API call: we make the request and update the data. One
+thing we will do here, however, is call the <code class="highlighter-rouge">getCoins</code> method as well. We do this
+because we’ll only need to call this method once when the page has loaded (to
+load up all the currency metadata), but will need to call the <code class="highlighter-rouge">getCoins</code> method
+many times to keep the data up-to-date, and we should only call it once the
+metadata about all coins has already been loaded.</p>
+
+<p>The last major coin method we need to implement is <code class="highlighter-rouge">getCoinImage</code>, which takes in
+a coin’s symbol and returns the full image URL. Here’s how we do that:</p>
+
+<div class="language-javascript highlighter-rouge"><pre class="highlight"><code><span class="nx">getCoinImage</span><span class="err">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">symbol</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="nx">CRYPTOCOMPARE_API_URI</span> <span class="o">+</span> <span class="k">this</span><span class="p">.</span><span class="nx">coinData</span><span class="p">[</span><span class="nx">symbol</span><span class="p">].</span><span class="nx">ImageUrl</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre>
+</div>
+
+<p>This code takes care of the cross-referencing between both API services, and
+allows us to easily retrieve a cryptocurrency’s image.</p>
+
+<h3 id="load-data-when-the-app-starts">Load Data When the App Starts</h3>
+
+<p>Now that we’ve built some of our data-retrieval methods, we need to actually run
+them. Otherwise: our app will open, but nothing will happen.</p>
+
+<p>In Vue, we can bind actions to certain events that happen on the page. One of
+these lifecycle events is called “created”, and we can use this lifecycle hook
+to run our code once the Vue app has been fully initialized in the browser.</p>
+
+<p>Here’s what it looks like:</p>
+
+<div class="language-javascript highlighter-rouge"><pre class="highlight"><code><span class="kd">let</span> <span class="nx">app</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Vue</span><span class="p">({</span>
+  <span class="c1">// ...</span>
+  <span class="na">created</span><span class="p">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">getCoinData</span><span class="p">();</span>
+  <span class="p">}</span>
+<span class="p">});</span>
+</code></pre>
+</div>
+
+<p>This is exactly what we need, because once the page is loaded, we’ll call our
+<code class="highlighter-rouge">getCoinData</code> method which will retrieve all coin image URls, then we’ll call our
+<code class="highlighter-rouge">getCoins</code> method which will load the initial data we need to eventually display
+on the page.</p>
+
+<p>Finally, we need to ensure that we actually keep the data on the page updating.
+The CryptoMarketCap API service says that their data is refreshed once every
+five minutes, so as to not be aggressive, we’ll be querying their API once per minute
+to display new results to our users.</p>
+
+<p>We can do this easily outside of our Vue app using a plain old call to
+JavaScript’s <code class="highlighter-rouge">setInterval</code> function:</p>
+
+<div class="language-javascript highlighter-rouge"><pre class="highlight"><code><span class="cm">/**
+ * Once the page has been loaded and all of our app stuff is working, we'll
+ * start polling for new cryptocurrency data every minute.
+ */</span>
+<span class="nx">setInterval</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="nx">app</span><span class="p">.</span><span class="nx">getCoins</span><span class="p">();</span>
+<span class="p">},</span> <span class="nx">UPDATE_INTERVAL</span><span class="p">);</span>
+</code></pre>
+</div>
+
+<p>Notice how we’re able to run our Vue method outside of our Vue app by calling it
+off the Vue app object. Vue publicly exports all of your data and methods so
+they can be used outside Vue.</p>
+
+<h3 id="displaying-your-data">Displaying Your Data</h3>
+
+<p>Now that we’ve built the data management side of things, let’s hop back into our
+HTML code and actually display some of this shiny new data for our users.</p>
+
+<p>Using the same constructs we learned earlier, we’re going to loop through the
+cryptocurrency data, filling out our table:</p>
+
+<div class="language-html highlighter-rouge"><pre class="highlight"><code><span class="nt">&lt;table</span> <span class="na">class=</span><span class="s">"table table-hover"</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;thead&gt;</span>
+    <span class="nt">&lt;tr&gt;</span>
+      <span class="nt">&lt;td&gt;</span>Rank<span class="nt">&lt;/td&gt;</span>
+      <span class="nt">&lt;td&gt;</span>Name<span class="nt">&lt;/td&gt;</span>
+      <span class="nt">&lt;td&gt;</span>Symbol<span class="nt">&lt;/td&gt;</span>
+      <span class="nt">&lt;td&gt;</span>Price (USD)<span class="nt">&lt;/td&gt;</span>
+      <span class="nt">&lt;td&gt;</span>1H<span class="nt">&lt;/td&gt;</span>
+      <span class="nt">&lt;td&gt;</span>1D<span class="nt">&lt;/td&gt;</span>
+      <span class="nt">&lt;td&gt;</span>1W<span class="nt">&lt;/td&gt;</span>
+      <span class="nt">&lt;td&gt;</span>Market Cap (USD)<span class="nt">&lt;/td&gt;</span>
+  <span class="nt">&lt;/thead&gt;</span>
+  <span class="nt">&lt;tbody&gt;</span>
+    <span class="nt">&lt;tr</span> <span class="na">v-for=</span><span class="s">"coin in coins"</span><span class="nt">&gt;</span>
+      <span class="nt">&lt;td&gt;</span>{{ coin.rank }}<span class="nt">&lt;/td&gt;</span>
+      <span class="nt">&lt;td&gt;&lt;img</span> <span class="na">v-bind:src=</span><span class="s">"getCoinImage(coin.symbol)"</span><span class="nt">&gt;</span> {{ coin.name }}<span class="nt">&lt;/td&gt;</span>
+      <span class="nt">&lt;td&gt;</span>{{ coin.symbol }}<span class="nt">&lt;/td&gt;</span>
+      <span class="nt">&lt;td&gt;</span>{{ coin.price_usd | currency }}<span class="nt">&lt;/td&gt;</span>
+      <span class="nt">&lt;td&gt;</span>
+        <span class="nt">&lt;span</span> <span class="na">v-if=</span><span class="s">"coin.percent_change_1h &gt; 0"</span><span class="nt">&gt;</span>+<span class="nt">&lt;/span&gt;</span>{{ coin.percent_change_1h }}%
+      <span class="nt">&lt;/td&gt;</span>
+      <span class="nt">&lt;td&gt;</span>
+        <span class="nt">&lt;span</span> <span class="na">v-if=</span><span class="s">"coin.percent_change_24h &gt; 0"</span><span class="nt">&gt;</span>+<span class="nt">&lt;/span&gt;</span>{{ coin.percent_change_24h }}%
+      <span class="nt">&lt;/td&gt;</span>
+      <span class="nt">&lt;td&gt;</span>
+        <span class="nt">&lt;span</span> <span class="na">v-if=</span><span class="s">"coin.percent_change_7d &gt; 0"</span><span class="nt">&gt;</span>+<span class="nt">&lt;/span&gt;</span>{{ coin.percent_change_7d }}%
+      <span class="nt">&lt;/td&gt;</span>
+      <span class="nt">&lt;td&gt;</span>{{ coin.market_cap_usd | currency }}<span class="nt">&lt;/td&gt;</span>
+    <span class="nt">&lt;/tr&gt;</span>
+  <span class="nt">&lt;/tbody&gt;</span>
+<span class="nt">&lt;/table&gt;</span>
+</code></pre>
+</div>
+
+<p>Pretty straightforward, right?</p>
+
+<p>The only new thing here is the <code class="highlighter-rouge">v-bind</code> directive. If you’re wondering what that
+does, it tells Vue to run the <code class="highlighter-rouge">getCoinImage</code> function, grab the result, and use
+that result for the <code class="highlighter-rouge">&lt;img&gt;</code> tag’s <code class="highlighter-rouge">src</code> attribute (this is how we’re able to display
+the logo to the user).</p>
+
+<p>The final thing we’ll want to do now is clean the coloring up a bit:</p>
+
+<ul>
+  <li>If the percent change in a currency is positive, we should color it green</li>
+  <li>If the percent change in a currency is negative, we should color it red</li>
+</ul>
+
+<p>This adds a bit more visual flair to the page, and makes it a little easier to
+eyeball the performance of a currency.</p>
+
+<p>So, let’s quickly build a method and plug it into our HTML:</p>
+
+<div class="language-javascript highlighter-rouge"><pre class="highlight"><code><span class="cm">/**
+ * Return a CSS color (either red or green) depending on whether or
+ * not the value passed in is negative or positive.
+ */</span>
+<span class="nl">getColor</span><span class="p">:</span> <span class="p">(</span><span class="nx">num</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="nx">num</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="p">?</span> <span class="s2">"color:green"</span> <span class="p">:</span> <span class="s2">"color:red"</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre>
+</div>
+
+<div class="language-html highlighter-rouge"><pre class="highlight"><code><span class="nt">&lt;tbody&gt;</span>
+  <span class="nt">&lt;tr</span> <span class="na">v-for=</span><span class="s">"coin in coins"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;td&gt;</span>{{ coin.rank }}<span class="nt">&lt;/td&gt;</span>
+    <span class="nt">&lt;td&gt;&lt;img</span> <span class="na">v-bind:src=</span><span class="s">"getCoinImage(coin.symbol)"</span><span class="nt">&gt;</span> {{ coin.name }}<span class="nt">&lt;/td&gt;</span>
+    <span class="nt">&lt;td&gt;</span>{{ coin.symbol }}<span class="nt">&lt;/td&gt;</span>
+    <span class="nt">&lt;td&gt;</span>{{ coin.price_usd | currency }}<span class="nt">&lt;/td&gt;</span>
+    <span class="nt">&lt;td</span> <span class="na">v-bind:style=</span><span class="s">"getColor(coin.percent_change_1h)"</span><span class="nt">&gt;</span>
+      <span class="nt">&lt;span</span> <span class="na">v-if=</span><span class="s">"coin.percent_change_1h &gt; 0"</span><span class="nt">&gt;</span>+<span class="nt">&lt;/span&gt;</span>{{ coin.percent_change_1h }}%
+    <span class="nt">&lt;/td&gt;</span>
+    <span class="nt">&lt;td</span> <span class="na">v-bind:style=</span><span class="s">"getColor(coin.percent_change_24h)"</span><span class="nt">&gt;</span>
+      <span class="nt">&lt;span</span> <span class="na">v-if=</span><span class="s">"coin.percent_change_24h &gt; 0"</span><span class="nt">&gt;</span>+<span class="nt">&lt;/span&gt;</span>{{ coin.percent_change_24h }}%
+    <span class="nt">&lt;/td&gt;</span>
+    <span class="nt">&lt;td</span> <span class="na">v-bind:style=</span><span class="s">"getColor(coin.percent_change_7d)"</span><span class="nt">&gt;</span>
+      <span class="nt">&lt;span</span> <span class="na">v-if=</span><span class="s">"coin.percent_change_7d &gt; 0"</span><span class="nt">&gt;</span>+<span class="nt">&lt;/span&gt;</span>{{ coin.percent_change_7d }}%
+    <span class="nt">&lt;/td&gt;</span>
+    <span class="nt">&lt;td&gt;</span>{{ coin.market_cap_usd | currency }}<span class="nt">&lt;/td&gt;</span>
+  <span class="nt">&lt;/tr&gt;</span>
+<span class="nt">&lt;/tbody&gt;</span>
+</code></pre>
+</div>
+
+<p>With these final changes, load the code up in your browser, and give it a go!</p>
+
+<p><img src="/assets/blog/cryptocurrency/cryptocompare-final-919a5e3736c3078d87db9b65841e8265c2902ded91f9df9a48d13da26fc2c18e.png" alt="Cryptocompare Final Screenshot" /></p>
+
+<p>If you play around with the app a bit, you’ll notice that every 60 seconds
+the data is updated as designed.</p>
+
+<p>In the event one currency takes over another’s ranking, all the items will shift
+seamlessly on the page (you can play around with this in the JavaScript console
+by modifying <code class="highlighter-rouge">app.coins</code> directly if you want).</p>
+
+<h2 id="put-it-all-together">Put It All Together</h2>
+
+<p>I hope you had fun learning a bit about Vue, and seeing how to use it to build
+a basic web app.</p>
+
+<p>If you’re a web developer looking to organize your front-end logic in a simpler
+and maintainable way, I strongly recommend you give Vue.js a try.</p>
+
+<p>And finally, if you’re interested in reading other articles about web
+development, APIs, and security, you should follow our <a href="https://twitter.com/oktadev" title="oktadev on Twitter">Twitter
+account</a>.</p>
+
+
+
+	</div>
+	
+</article>
+
+		
+</section>
+
+		
+	</div><footer class="Footer">
+    <div class="Wrap">
+
+        <div class="Row">
+
+            <div class="Column--3 Column--medium-6 Column--xSmall-12">
+
+                <a class="Logo" href="https://www.okta.com/" target="_blank" rel="noopener noreferrer">
+                    <img src="https://developer.okta.com/sites/all/themes/developer/images/logo-footer.png" alt="Okta">
+                    Visit okta.com
+                </a>
+
+            </div>
+
+            <div class="Column--3 Column--medium-12 Column--xSmall-12">
+
+                <h4>Social</h4>
+                <ul class="Footer-links Footer-links--social">
+                    <li><a class="Footer-links--github" target="_blank" rel="noopener noreferrer" href="http://github.com/oktadeveloper">Github</a></li>
+                    <li><a class="Footer-links--twitter" target="_blank" rel="noopener noreferrer" href="http://twitter.com/OktaDev">Twitter</a></li>
+                    <li><a class="Footer-links--forum" target="_blank" rel="noopener noreferrer" href="https://devforum.okta.com/">Forum</a></li>
+                    <li><a class="Footer-links--rss" target="_blank" rel="noopener noreferrer" href="http://feeds.feedburner.com/OktaBlog">RSS Blog</a></li>
+                </ul>
+            </div>
+
+            <div class="Column--3 Column--medium-6 Column--small-12">
+                <h4>More Info</h4>
+                <ul class="Footer-links">
+                    <li><a target="_blank" href="https://developer.okta.com/integrate-with-okta/">Integrate with Okta</a></li>
+                    <li><a href="/blog/">Blog</a></li>
+                    <li><a href="/docs/platform-release-notes/platform-release-notes.html">Release Notes</a></li>
+                    <li><a href="/3rd_party_notices/">3rd Party Notices</a></li>
+                </ul>
+            </div>
+
+            <div class="Column--3 Column--medium-6 Column--small-12">
+                <h4>Contact &amp; Legal</h4>
+                <ul class="Footer-links">
+                    <li><a href="https://developer.okta.com/contact/">Contact Sales</a></li>
+                    <li><a target="_blank" rel="noopener noreferrer" href="mailto:developers@okta.com">Contact Support</a></li>
+                    <li><a href="https://developer.okta.com/terms/">Terms &amp; Conditions</a></li>
+                    <li><a href="https://developer.okta.com/privacy/">Privacy Policy</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</footer>
+
+    <script type="text/javascript" src="/assets/master-0365dd27cf276cb2a15c0a43906ca592538204cf1ad4557547bf4e50609b411e.js"></script>
+    <script type="text/javascript" src="/assets/myOkta-911cbafbbe079b7a5522d9cbe15bd2a5f44e1582531e88393934bec69f97696b.js"></script>
+    
+    
+    
+    
+      <script type="text/javascript" src="/assets/blog-6e32dad27404131cc8630a5282264bed2ab4c08c91ac86fa496b75c53aa4f681.js"></script>
+    
+
+  <!-- START Post Footer -->
+  
+  <!-- START Google Tag Manager -->
+  <!-- https://support.google.com/tagmanager/answer/6103696?hl=en -->
+  <noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-TJ45R6" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+  <!-- END Google Tag Manager -->
+  <!-- START Google Remarketing Tag -->
+  <script type="text/javascript">
+    /* <![CDATA[ */
+    var google_conversion_id = 1006913831;
+    var google_custom_params = window.google_tag_params;
+    var google_remarketing_only = true;
+    /* ]]> */
+  </script>
+  <div style="display:none;"><script type="text/javascript" src="//www.googleadservices.com/pagead/conversion.js"></script></div>
+  <noscript><div style="display:inline;"><img height="1" width="1" style="border-style:none;" alt="" src="//googleads.g.doubleclick.net/pagead/viewthroughconversion/1006913831/?value=0&amp;guid=ON&amp;script=0"></div></noscript>
+  <!-- END Google Remarketing Tag -->
+  <!-- START Crazy Egg Tracking -->
+  <script type="text/javascript">
+    setTimeout(function(){var a=document.createElement("script");
+    var b=document.getElementsByTagName("script")[0];
+    a.src=document.location.protocol+"//script.crazyegg.com/pages/scripts/0021/9333.js?"+Math.floor(new Date().getTime()/3600000);
+    a.async=true;a.type="text/javascript";b.parentNode.insertBefore(a,b)}, 1);
+  </script>
+  <!-- END Crazy Egg Tracking -->
+
+  <!-- END Post Footer -->
+</body>
+</html>

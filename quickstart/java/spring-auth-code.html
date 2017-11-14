@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html class="no-js" lang="en" dir="ltr">
+<body>
+    <h2 id="okta-javaspring-quickstart">Okta Java/Spring Quickstart</h2>
+
+<h3 id="include-the-dependencies">Include the dependencies</h3>
+
+<p>For Apache Maven:</p>
+<div class="language-xml highlighter-rouge"><pre class="highlight"><code><span class="nt">&lt;dependency&gt;</span>
+    <span class="nt">&lt;groupId&gt;</span>com.okta.spring<span class="nt">&lt;/groupId&gt;</span>
+    <span class="nt">&lt;artifactId&gt;</span>okta-spring-boot-starter<span class="nt">&lt;/artifactId&gt;</span>
+    <span class="nt">&lt;version&gt;</span>0.2.0<span class="nt">&lt;/version&gt;</span>
+<span class="nt">&lt;/dependency&gt;</span>
+</code></pre>
+</div>
+<p>For Gradle:</p>
+<div class="language-groovy highlighter-rouge"><pre class="highlight"><code><span class="n">compile</span> <span class="s1">'com.okta.spring:okta-spring-boot-starter:0.2.0'</span>
+</code></pre>
+</div>
+
+<h3 id="configure-your-properties">Configure your properties</h3>
+
+<p>You can configure your applications properties with environment variables, system properties, or configuration files. Take a look at the <a href="https://docs.spring.io/spring-boot/docs/current/reference/html/boot-features-external-config.html">Spring Boot documentation</a> for more details.</p>
+
+<p>An example <code class="highlighter-rouge">application.properties</code> file would look like:</p>
+
+<div class="language-properties highlighter-rouge"><pre class="highlight"><code><span class="py">okta.oauth2.issuer</span><span class="p">=</span><span class="s"><span class="okta-preview-domain">https://{yourOktaDomain}.com</span>/oauth2/default</span>
+<span class="py">okta.oauth2.clientId</span><span class="p">=</span><span class="s">{yourClientId}</span>
+<span class="py">okta.oauth2.clientSecret</span><span class="p">=</span><span class="s">{yourClientSecret}</span>
+<span class="c"># Configure the callback URL to match the previous section
+</span><span class="py">security.oauth2.sso.loginPath</span><span class="p">=</span><span class="s">/authorization-code/callback</span>
+</code></pre>
+</div>
+
+<h3 id="annotate-your-application">Annotate your Application</h3>
+
+<p>Just add a <code class="highlighter-rouge">@EnableOAuth2Sso</code> annotation to your application, for example:</p>
+
+<div class="language-java highlighter-rouge"><pre class="highlight"><code><span class="nd">@EnableOAuth2Sso</span>
+<span class="nd">@SpringBootApplication</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">ExampleApplication</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+        <span class="n">SpringApplication</span><span class="o">.</span><span class="na">run</span><span class="o">(</span><span class="n">ExampleApplication</span><span class="o">.</span><span class="na">class</span><span class="o">,</span> <span class="n">args</span><span class="o">);</span>
+    <span class="o">}</span>
+
+    <span class="o">...</span>
+<span class="o">}</span>
+</code></pre>
+</div>
+
+<p>That’s it! Open an incognito window (to ensure clean browser cache) and browse to <code class="highlighter-rouge">http://localhost:8080/login</code> you will be  automatically redirected to the Okta login page.</p>
+
+<p>You can read more about <a href="http://projects.spring.io/spring-security-oauth/docs/oauth2.html">Spring’s OAuth 2 support</a> or take a look at this <a href="https://developer.okta.com/blog/2017/03/21/spring-boot-oauth">blog post</a> that describes the steps and configuration in detail.</p>
+
+</body>
+</html>

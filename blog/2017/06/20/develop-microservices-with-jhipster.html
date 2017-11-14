@@ -1,0 +1,1280 @@
+<!doctype html>
+<!--[if lt IE 7 ]> <html class="ie6 no-flexbox"> <![endif]-->
+<!--[if IE 7 ]>    <html class="ie7 no-flexbox"> <![endif]-->
+<!--[if IE 8 ]>    <html class="ie8 no-flexbox"> <![endif]-->
+<!--[if IE 9 ]>    <html class="ie9 no-flexbox"> <![endif]-->
+<!--[if IE 10 ]>    <html class="ie10 no-flexbox"> <![endif]-->
+<!--[if (gt IE 10)|!(IE)]><!--> <html class="modern wf-loading" lang="en"> <!--<![endif]-->
+  <head>
+  <script>
+    var searchDomain = 'https://developer.okta.com';
+    var isProduction = window.location.hostname === 'developer.okta.com';
+    if (isProduction) {
+      // TypeKit
+      (function(d) {
+        var config = {
+          kitId: 'jff5neq',
+          scriptTimeout: 3000,
+          async: true
+        },
+        h=d.documentElement,t=setTimeout(function(){h.className=h.className.replace(/bwf-loadingb/g,"")+" wf-inactive";},config.scriptTimeout),tk=d.createElement("script"),f=false,s=d.getElementsByTagName("script")[0],a;h.className+=" wf-loading";tk.src='https://use.typekit.net/'+config.kitId+'.js';tk.async=true;tk.onload=tk.onreadystatechange=function(){a=this.readyState;if(f||a&&a!="complete"&&a!="loaded")return;f=true;clearTimeout(t);try{Typekit.load(config)}catch(e){}};s.parentNode.insertBefore(tk,s)
+      })(document);
+
+      // Google analytics
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+              (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+              m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+      ga('create', 'UA-15777010-3', 'auto');
+      ga('send', 'pageview');
+
+      // START Google Tag Manager
+      (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+      new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+      j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+      '//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+      })(window,document,'script','dataLayer','GTM-TJ45R6');
+      // END Google Tag Manager
+    }
+	</script>
+  <meta charset="utf-8">
+  <meta http-equiv="x-ua-compatible" content="IE=edge,chrome=1">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+ 	
+
+  <link type="text/css" rel="stylesheet" href="https://developer.okta.com/sites/all/themes/developer/css/master.css" media="all" />
+  <meta class="swiftype" name="title" data-type="string" content="Develop and Deploy Microservices with JHipster | Okta Developer" />
+  <meta class="swiftype" name="summary" data-type="string" content="JHipster is one of those open-source projects you stumble upon and immediately think, “Of course!” It combines three very successful frameworks in web develo..." />
+
+  <link type="text/css" rel="stylesheet" href="/assets/animate-ec43d72c3ed45e08a460b8a2966d8dba6006aebfa0530935c3973fa493a8771f.css">
+  <link type="text/css" rel="stylesheet" href="/assets/okta-a96df4c9d48b78b618e1d541f46f7137d73d40653571e020c1ad59edd7915c60.css">
+  
+  
+  <title>Develop and Deploy Microservices with JHipster | Okta Developer</title>
+  <meta name="description" content="JHipster is one of those open-source projects you stumble upon and immediately think, “Of course!” It combines three very successful frameworks in web develo...">
+  <link rel="canonical" href="https://developer.okta.com/blog/2017/06/20/develop-microservices-with-jhipster"  data-proofer-ignore>
+  <link rel="alternate" type="application/rss+xml" title="Okta Developer" href="https://developer.okta.com/feed.xml"><!-- GA -->
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+  <link rel="manifest" href="/manifest.json">
+  <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#21313a">
+  <meta name="theme-color" content="#ffffff">
+</head>
+
+  
+    <body id="blog">
+	
+
+
+
+
+<header class="Header is-fixed">
+
+  <div class="Wrap">
+
+    <a class="Logo" href="https://developer.okta.com">
+      <svg version="1.1" id="OktaLogo" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 431.9 151.4" style="enable-background:new 0 0 431.9 151.4;" xml:space="preserve"><g><g><g><path d="M102.2,41.4c-21,0-38.1,17.1-38.1,38.1s17.1,38.1,38.1,38.1s38.1-17.1,38.1-38.1l0,0C140.3,58.5,123.2,41.4,102.2,41.4z M102.2,98.5c-10.5,0-19-8.5-19-19s8.5-19,19-19s19,8.5,19,19c0.1,10.5-8.4,19-18.9,19.1C102.3,98.6,102.2,98.6,102.2,98.5L102.2,98.5z"/><path d="M169.1,92.3c0-1.9,1.5-3.4,3.4-3.4c0.9,0,1.8,0.4,2.4,1c9.5,9.7,25.3,26.3,25.4,26.4c0.4,0.5,0.8,0.8,1.4,0.9l1.6,0.2h17.2c1.8,0,3.3-1.4,3.4-3.2c0-0.8-0.3-1.5-0.8-2.2l-28.6-29.2l-1.5-1.5c-3.2-3.9-2.9-5.4,0.8-9.3l22.6-25.1c1.1-1.4,0.8-3.5-0.6-4.6c-0.6-0.4-1.3-0.7-2-0.7h-17c-0.6,0.2-1.1,0.5-1.5,0.9L175,64.4c-1.3,1.4-3.4,1.5-4.8,0.2c-0.7-0.6-1.1-1.5-1.1-2.5V18.9c0-1.7-1.3-3-3-3c-0.1,0-0.2,0-0.3,0h-12.7c-2.2,0-3.3,1.5-3.3,2.8v95.8c0,2.2,1.8,2.8,3.3,2.8h12.7c1.7,0.1,3.2-1.2,3.3-2.9c0,0,0,0,0,0V92.3z"/><path d="M273,114l-1.4-12.8c-0.2-1.7-1.7-2.9-3.4-2.7c0,0,0,0-0.1,0l-2.9,0.2c-10.1,0-18.5-7.9-19-18c0-0.3,0-0.7,0-1V64.2c-0.1-2,1.5-3.6,3.5-3.7c0,0,0,0,0,0h17c1.7-0.1,3.1-1.5,3-3.2c0,0,0-0.1,0-0.1v-12c0-2.3-1.5-3.6-2.8-3.6h-17.1c-1.9,0.1-3.5-1.5-3.6-3.4c0,0,0,0,0,0V18.9c-0.1-1.7-1.5-3.1-3.2-3c0,0-0.1,0-0.1,0h-12.7c-1.6-0.1-3,1.1-3.1,2.7c0,0.1,0,0.1,0,0.2c0,0,0,61.7,0,62c0.5,21,17.9,37.6,38.9,37c1.4,0,2.9-0.2,4.3-0.3C272,117.2,273.2,115.7,273,114z"/></g><path d="M364.7,98c-10.8,0-12.4-3.8-12.4-18.3l0,0V44.8c0-1.8-1.4-3.2-3.2-3.2c0,0-0.1,0-0.1,0h-12.8c-1.8,0-3.2,1.4-3.3,3.2v1.6C314.6,36,291.3,42.5,281,60.8c-10.4,18.3-3.9,41.6,14.4,51.9c14,7.9,31.4,6.2,43.5-4.2c3.6,5.5,9.3,9.1,18.3,9.1c1.5,0,9.7,0.3,9.7-3.5v-13.6C367,99.2,366,98.1,364.7,98z M314.2,98.6c-10.5,0-19-8.5-19-19s8.5-19,19-19s19,8.5,19,19l0,0C333.2,90.1,324.7,98.6,314.2,98.6z"/></g><path d="M19.4,74c2.2-1.9,4.1-4.1,5.7-6.6c3.5-5.3,5.4-11.5,5.2-17.9V27c0-4.9,0.9-8.4,2.7-10.5c1.8-2.1,4.8-3,9.2-3h12.6c1.2,0,2.1-0.9,2.2-2.1l0,0V2.2C57,1,56,0,54.8,0c0,0,0,0,0,0H41.5c-7.8,0-12.9,2.1-18,7.6s-7.1,12.3-7.1,21.7v14.2c0,2.2-0.1,4-0.2,5.7v2.2c-0.5,3.2-1.8,6.2-3.6,8.9C9.4,64.7,5.1,70.9,0.9,74l0,0l-0.3,0.3l0,0l-0.2,0.3H0.2v0.3l0,0c-0.1,0.3-0.1,0.7,0,1l0,0v0.3h0.1l0.2,0.3l0,0l0.3,0.3l0,0c4.2,3.1,8.5,9.3,11.3,13.7c1.8,2.7,3.1,5.7,3.6,8.9v2.2c0.1,1.6,0.2,3.5,0.2,5.7v14.3c0,9.4,2.4,16.7,7.1,21.7s10.2,7.6,18,7.6h13.8c1.2,0,2.2-1,2.2-2.2V140l0,0c0-1.2-1-2.2-2.2-2.2H42.2c-4.4,0-7.5-1-9.2-3s-2.7-5.6-2.7-10.5v-22.4c0.2-6.4-1.7-12.6-5.2-17.9c-1.6-2.5-3.5-4.7-5.7-6.6l0,0c-0.9-0.7-1.1-2-0.4-2.9C19.2,74.3,19.3,74.2,19.4,74L19.4,74z"/><path d="M412.5,74c-2.2-1.9-4.1-4.1-5.7-6.6c-3.5-5.3-5.4-11.5-5.2-17.9V27c0-4.9-0.9-8.4-2.7-10.5s-4.8-3-9.2-3h-12.6c-1.2,0-2.2-1-2.2-2.2c0,0,0,0,0,0l0,0V2.2c0-1.2,1-2.2,2.2-2.2c0,0,0,0,0,0h13.4c7.8,0,12.9,2.1,18,7.6s7.1,12.3,7.1,21.7v14.2c0,2.2,0.1,4,0.2,5.7v2.2c0.5,3.2,1.8,6.2,3.6,8.9c2.8,4.5,7.1,10.7,11.3,13.7l0,0l0.3,0.3l0,0l0.2,0.3h0.1v0.3l0,0c0.1,0.3,0.1,0.7,0,1l0,0v0.3h-0.1l-0.2,0.3l0,0l-0.3,0.3l0,0c-4.2,3.1-8.5,9.3-11.3,13.7c-1.8,2.7-3.1,5.7-3.6,8.9v2.2c-0.1,1.6-0.2,3.5-0.2,5.7v14.3c0,9.4-2.4,16.7-7.1,21.7s-10.2,7.6-18,7.6h-13.4c-1.2,0-2.2-1-2.2-2.2c0,0,0,0,0,0V140l0,0c0-1.2,1-2.2,2.2-2.2l0,0h12.7c4.4,0,7.5-1,9.2-3s2.7-5.6,2.7-10.5v-22.4c-0.2-6.3,1.6-12.6,5.1-17.9c1.6-2.5,3.5-4.7,5.7-6.6l0,0c0.9-0.7,1.1-2,0.4-2.9C412.7,74.3,412.6,74.2,412.5,74L412.5,74z"/></g></svg>
+    </a>
+
+    <nav class="Header-nav PrimaryNav">
+      <ul class="menu">
+        <li class="first leaf">
+          <a href="https://developer.okta.com/product/">Product</a>
+        </li>
+        <li class="leaf">
+          <a href="https://developer.okta.com/pricing/">Pricing</a>
+        </li>
+        <li class="leaf">
+          <a href="/blog/" class="active">Blog</a>
+        </li>
+        <li class="leaf">
+          <a href="/documentation/">Docs</a>
+        </li>
+        <li class="last expanded">
+          <span class="nolink">Support</span>
+          <ul class="menu">
+            <li class="first leaf"><a href="https://devforum.okta.com/">Okta Developer Forums</a></li>
+            <li class="last leaf"><a href="mailto:developers@okta.com">developers@okta.com</a></li>
+          </ul>
+        </li>
+      </ul>
+      <a class="PrimaryNav-toggle" href="#">
+        <svg width="20px" height="20px" viewBox="0 0 20 20" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+            <g class="MenuIcon" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="round">
+                <path d="M1,16 L19,16" class="MenuIcon-line1" stroke="#FFFFFF" stroke-width="2"></path>
+                <path d="M1,4 L19,4" class="MenuIcon-line2" stroke="#FFFFFF" stroke-width="2"></path>
+                <path d="M1,10 L19,10" class="MenuIcon-line3" stroke="#FFFFFF" stroke-width="2"></path>
+                <path d="M1,10 L19,10" class="MenuIcon-line4" stroke="#FFFFFF" stroke-width="2"></path>
+            </g>
+        </svg>
+        <svg class="CloseIcon" width="16px" height="16px" viewBox="0 0 16 16" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+          <g id="ALl-Boards" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+            <g id="Desktop" transform="translate(-915.000000, -235.000000)" fill="#FFFFFF">
+              <g id="Search-bar-Active" transform="translate(30.000000, 26.000000)">
+                <polygon id="Icon/Cross" points="901 210.6 899.4 209 893 215.4 886.6 209 885 210.6 891.4 217 885 223.4 886.6 225 893 218.6 899.4 225 901 223.4 894.6 217"></polygon>
+              </g>
+            </g>
+          </g>
+        </svg>
+      </a>
+
+      <div class="PrimaryNav-cta">
+        <a target="_blank" rel="noopener noreferrer" href="https://login.okta.com/?SAMLRequest=fc%2B7CsJAEAXQXvAflu1NNJUMeZBGELTx1a%2FrYILJTtyZGD%2FfSBRiYzlw77lMnD3rSj3Qc0ku0YtgrhU6S5fSXRN9PKxmS52l00nMpq6iBvJWCrfDe4ss6vStRe9aDzmGIZfo1jsgwyWDMzUyiIV9vt1AH4XGk5ClSvewUgMNa%2BYW%2FVj5jxhm9NLP67QQaSAMu64L6CYmsFSHlnzT4ZlLwTgcL6Sf8%2FeX9AU%3Dhttps://login.okta.com/?SAMLRequest=fc%2B7CsJAEAXQXvAflu1NNJUMeZBGELTx1a%2FrYILJTtyZGD%2FfSBRiYzlw77lMnD3rSj3Qc0ku0YtgrhU6S5fSXRN9PKxmS52l00nMpq6iBvJWCrfDe4ss6vStRe9aDzmGIZfo1jsgwyWDMzUyiIV9vt1AH4XGk5ClSvewUgMNa%2BYW%2FVj5jxhm9NLP67QQaSAMu64L6CYmsFSHlnzT4ZlLwTgcL6Sf8%2FeX9AU%3D" class="Button--redOutline">Login</a>
+        <a href="https://developer.okta.com/signup/" class="Button--red">Sign up</a>
+      </div>
+
+      <a class="SearchIcon" href="#"></a>
+      <form id="form_search" class="SearchBar Formisimo_clocked_69929" method="get" action="https://developer.okta.com/search/" name="form_search" __bizdiag="-784164280" __biza="WJ__">
+        <input type="text" name="stq" autocomplete="off" id="st-search-input-auto" class="st-search-input" placeholder="Search">
+        <input type="submit" name="submit" value="GO">
+      </form>
+
+    </nav>
+
+  </div>
+
+</header>
+
+	<div class="page-content">
+		
+
+
+
+
+
+
+<section class="Blog is-single">
+		
+	<div class="Blog-social">
+		
+		<a href="https://github.com/mraible" target="_blank"><i class="fa fa-github"></i></a>
+		
+		
+		<a href="https://twitter.com/mraible" target="_blank"><i class="fa fa-twitter"></i></a>
+		
+		
+		
+		<a href="http://raibledesigns.com" target="_blank"><i class="fa fa-external-link"></i></a>
+		
+	</div>
+	
+	
+
+<article class="BlogPost">
+	
+	<header class="BlogPost-header">
+	
+		<time class="BlogPost-date" datetime="2017-06-20">June 20, 2017</time>
+		
+		<h1 class="BlogPost-title">
+			
+			Develop and Deploy Microservices with JHipster
+			
+		</h1>
+		
+		<div class="BlogPost-attribution">
+			
+				<img src="/assets/avatar-matt_raible-9974af6192eb1753b7137c8fff0a2c6e6bb9736a2517986cb5cc50bb040e83d4.jpg" alt="avatar-matt_raible.jpg" class="BlogPost-avatar">
+			
+			<span class="BlogPost-author">Matt Raible</span>
+		</div>
+	
+	</header>
+	
+	<div class="BlogPost-content">
+		
+	<p>JHipster is one of those open-source projects you stumble upon and immediately think, “<code class="highlighter-rouge">Of course!</code>” It combines three 
+very successful frameworks in web development: Bootstrap, Angular, and Spring Boot. Bootstrap was one of the first dominant 
+web-component frameworks. Its largest appeal was that it only required a bit of HTML and it worked! Bootstrap showed many 
+in the Java community how to develop components for the web. It leveled the playing field in HTML/CSS development, much 
+like Apple’s Human Interface Guidelines did for iOS apps.</p>
+
+<p>At its core, JHipster is a <a href="http://yeoman.io/">Yeoman</a> generator. Yeoman is a code generator that you run with a <code class="highlighter-rouge">yo</code> 
+command to generate complete applications or useful pieces of an application. Yeoman generators promote what the Yeoman 
+team calls the “<code class="highlighter-rouge">Yeoman workflow</code>”. This is an opinionated client-side stack of tools that can help developers quickly 
+build beautiful web applications. It takes care of providing everything needed to get working without the normal pains 
+associated with a manual setup.</p>
+
+<p><em>Learn more about JHipster, including its origin, at <a href="http://jhipster.github.io">http://jhipster.github.io</a>.</em></p>
+
+<p>This tutorial shows you how to build a microservices architecture with <a href="https://jhipster.github.io/2017/06/16/jhipster-release-4.5.4.html">JHipster 4.5.4</a>. You’ll generate a gateway (powered by Netflix Zuul and the JHipster Gateway), a microservice (that talks to MongoDB), and use Docker Compose to make sure it all runs locally. Then you’ll deploy it to Minikube and Google Cloud using Kubernetes.</p>
+
+<h2 id="install-jhipster-4">Install JHipster 4</h2>
+
+<p>The <a href="http://jhipster.github.io/installation/">Installing JHipster</a> instructions show you all the tools you’ll need to 
+use a released version of JHipster.</p>
+
+<ol>
+  <li>Install Java 8 <a href="http://www.oracle.com/technetwork/java/javase/downloads/index.html">from Oracle</a></li>
+  <li>Install Git from <a href="https://git-scm.com">https://git-scm.com</a></li>
+  <li>Install Node.js from <a href="http://nodejs.org">http://nodejs.org</a> (I used Node 6.11.0 to write this article)</li>
+  <li>Install Yarn using the <a href="https://yarnpkg.com/en/docs/install">Yarn installation instructions</a></li>
+  <li>
+    <p>Run the following command to install <a href="http://yeoman.io/">Yeoman</a></p>
+
+    <div class="highlighter-rouge"><pre class="highlight"><code> yarn global add yo
+</code></pre>
+    </div>
+  </li>
+  <li>
+    <p>Run the following command to install JHipster</p>
+
+    <div class="highlighter-rouge"><pre class="highlight"><code> yarn global add generator-jhipster
+</code></pre>
+    </div>
+  </li>
+</ol>
+
+<h2 id="microservices-with-jhipster">Microservices with JHipster</h2>
+
+<p>To build a microservices architecture with JHipster, you’ll need to generate two applications and clone another.</p>
+
+<ul>
+  <li>Generate a gateway</li>
+  <li>Generate a microservice</li>
+  <li>Clone the JHipster Registry</li>
+</ul>
+
+<p>You can see how these components fit in the diagram below.</p>
+
+<p><img src="/assets/blog/microservices-jhipster/jhipster-microservices-architecture-1e6c15cf88acb3e263caa575b1e5ebfa49ef0ad49c880d6d80de3a377ab363e5.png" alt="JHipster Microservices Architecture" width="800" /></p>
+
+<p>To see what’s happening inside your applications, you can use the <a href="https://jhipster.github.io/monitoring/#jhipster-console">JHipster Console</a>, 
+a monitoring tool based on the <a href="https://www.elastic.co/products">ELK Stack</a>. I’ll cover JHipster Console in the Docker Compose section.</p>
+
+<h2 id="create-an-api-gateway">Create an API Gateway</h2>
+
+<p>To create a microservices project, open a terminal window and create a <code class="highlighter-rouge">jhipster-microservices-example</code> directory. Then 
+create a <code class="highlighter-rouge">blog</code> directory for the gateway application.</p>
+
+<div class="language-bash highlighter-rouge"><pre class="highlight"><code>mkdir -p jhipster-microservices-example/blog
+</code></pre>
+</div>
+
+<p>In JHipster terms, a <strong>gateway</strong> is a normal JHipster application. This means you can develop 
+it like a monolith, but it also acts as the entrance to your microservices. More specifically, it provides HTTP 
+routing and load balancing, quality of service, security, and API documentation for all microservices.</p>
+
+<p>In a terminal, navigate to the <code class="highlighter-rouge">blog</code> directory and run <code class="highlighter-rouge">jhipster</code>.</p>
+
+<div class="language-bash highlighter-rouge"><pre class="highlight"><code><span class="nb">cd </span>jhipster-microservices-example/blog
+jhipster
+</code></pre>
+</div>
+
+<p>JHipster prompts you with many questions about the type of application you want to generate and what features you’d like 
+to include. Create the <code class="highlighter-rouge">blog</code> application with the following settings:</p>
+
+<ul>
+  <li>Application type: <code class="highlighter-rouge">Microservice gateway</code></li>
+  <li>Base name of the application: <code class="highlighter-rouge">blog</code></li>
+  <li>Port: <code class="highlighter-rouge">8080</code></li>
+  <li>Default package name: <code class="highlighter-rouge">org.jhipster.blog</code></li>
+  <li>JHipster Registry: <code class="highlighter-rouge">Yes</code></li>
+  <li>Type of authentication: <code class="highlighter-rouge">JWT</code></li>
+  <li>Type of database: <code class="highlighter-rouge">SQL</code></li>
+  <li>Production database: <code class="highlighter-rouge">PostgreSQL</code></li>
+  <li>Development database: <code class="highlighter-rouge">H2 with disk-based persistence</code></li>
+  <li>Maven or Gradle: <code class="highlighter-rouge">Maven</code></li>
+  <li>Other technologies: <code class="highlighter-rouge">Elasticsearch</code></li>
+  <li>Client framework: <code class="highlighter-rouge">Angular 4</code></li>
+  <li>Sass for CSS: <code class="highlighter-rouge">Yes</code></li>
+  <li>Internationalization support: <code class="highlighter-rouge">Yes</code></li>
+  <li>Native language: <code class="highlighter-rouge">English</code></li>
+  <li>Additional languages: <code class="highlighter-rouge">Spanish</code></li>
+  <li>Testing frameworks: <code class="highlighter-rouge">Gatling, Protractor</code></li>
+  <li>Install other generators from the JHipster Marketplace: <code class="highlighter-rouge">No</code></li>
+</ul>
+
+<p><img src="/assets/blog/microservices-jhipster/generate-blog-be1d1eb278e4f8507f0dc188d6dca9633a723c9b10b95cc62f3971ee14bb59d2.png" alt="Generating the gateway" width="800" /></p>
+
+<p>If you’d like to use the same settings I did, you can place the following <code class="highlighter-rouge">.yo-rc.json</code> file in the <code class="highlighter-rouge">blog</code> directory and 
+run <code class="highlighter-rouge">jhipster</code> in it. You won’t be prompted to answer any questions because the answers are already in <code class="highlighter-rouge">.yo-rc.json</code>.</p>
+
+<div class="language-json highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"generator-jhipster"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"promptValues"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"packageName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"org.jhipster.blog"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"nativeLanguage"</span><span class="p">:</span><span class="w"> </span><span class="s2">"en"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nt">"jhipsterVersion"</span><span class="p">:</span><span class="w"> </span><span class="s2">"4.5.4"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"baseName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"blog"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"packageName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"org.jhipster.blog"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"packageFolder"</span><span class="p">:</span><span class="w"> </span><span class="s2">"org/jhipster/blog"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"serverPort"</span><span class="p">:</span><span class="w"> </span><span class="s2">"8080"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"authenticationType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"jwt"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"hibernateCache"</span><span class="p">:</span><span class="w"> </span><span class="s2">"hazelcast"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"clusteredHttpSession"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"websocket"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"databaseType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"sql"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"devDatabaseType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"h2Disk"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"prodDatabaseType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"postgresql"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"searchEngine"</span><span class="p">:</span><span class="w"> </span><span class="s2">"elasticsearch"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"messageBroker"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"serviceDiscoveryType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"eureka"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"buildTool"</span><span class="p">:</span><span class="w"> </span><span class="s2">"maven"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"enableSocialSignIn"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"jwtSecretKey"</span><span class="p">:</span><span class="w"> </span><span class="s2">"f7450a034a7251b3d201cf5139852f9adf69c2d1"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"clientFramework"</span><span class="p">:</span><span class="w"> </span><span class="s2">"angular2"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"useSass"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"clientPackageManager"</span><span class="p">:</span><span class="w"> </span><span class="s2">"yarn"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"applicationType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"gateway"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"testFrameworks"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+      </span><span class="s2">"gatling"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"protractor"</span><span class="w">
+    </span><span class="p">],</span><span class="w">
+    </span><span class="nt">"jhiPrefix"</span><span class="p">:</span><span class="w"> </span><span class="s2">"jhi"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"enableTranslation"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"nativeLanguage"</span><span class="p">:</span><span class="w"> </span><span class="s2">"en"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"languages"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+      </span><span class="s2">"en"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"es"</span><span class="w">
+    </span><span class="p">]</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+</div>
+
+<p>The project creation process will take a couple of minutes to run, depending on your internet connection speed. When it’s 
+finished, you should see output like this:</p>
+
+<p><img src="/assets/blog/microservices-jhipster/generation-success-fc29cd14ce05f64f4807082784ddf096868bcc37855156a150e5d0080a82945f.png" alt="Generation success" width="600" /></p>
+
+<p>Before you can run this project, you’ll need to download and start an instance of the <a href="https://github.com/jhipster/jhipster-registry">JHipster Registry</a>. 
+Run the following commands in the <code class="highlighter-rouge">jhipster-microservices-example</code> directory.</p>
+
+<div class="language-bash highlighter-rouge"><pre class="highlight"><code>git clone git@github.com:jhipster/jhipster-registry.git registry
+<span class="nb">cd </span>registry <span class="o">&amp;&amp;</span> yarn <span class="o">&amp;&amp;</span> ./mvnw
+</code></pre>
+</div>
+
+<p>The <a href="https://jhipster.github.io/jhipster-registry/">JHipster Registry</a> is built on Spring Cloud Netflix and Spring Cloud Config. 
+Patterns provided by Spring Cloud Netflix include Service Discovery (Eureka), Circuit Breaker (Hystrix), Intelligent Routing (Zuul), 
+and Client Side Load Balancing (Ribbon).</p>
+
+<p>In a <a href="/blog/2017/06/15/build-microservices-architecture-spring-boot">previous post</a>, I showed you how you can use Eureka for 
+service discovery. JHipster Registry is a Eureka server, a Spring Cloud Config server, as well as an administration server. 
+It includes dashboards to monitor and manage your JHipster applications.</p>
+
+<p>JHipster Registry starts on port 8761 by default.</p>
+
+<p><img src="/assets/blog/microservices-jhipster/jhipster-registry-6211c7c7d4a74b675f578e0f24837502ea8a53995330efc1749a265448d2ed5c.png" alt="JHipster Registry" width="800" /></p>
+
+<p>In a new terminal window, navigate to <code class="highlighter-rouge">jhipster-microservices-example/blog</code> and run <code class="highlighter-rouge">./mvnw</code> to start the blog application 
+and open <code class="highlighter-rouge">http://localhost:8080</code> in your favorite browser. The first thing you’ll notice is a dapper-looking fellow 
+explaining how you can sign in or register.</p>
+
+<p><img src="/assets/blog/microservices-jhipster/default-homepage-59cff05fbc224e96a69c3ae3f1479cc89027ef25a09565e0d008181604679f28.png" alt="Default homepage" width="800" /></p>
+
+<p>Sign in with username <code class="highlighter-rouge">admin</code> and password <code class="highlighter-rouge">admin</code> and you’ll have access to navigate through the Administration section. 
+This section offers nice looking UIs on top of some Spring Boot’s many monitoring and configuration features. It also 
+allows you to administer users:</p>
+
+<p><img src="/assets/blog/microservices-jhipster/user-management-d9b7bdeec457183bb302d1567f2768870976c1a982bb20c8f7fab8d8b6ea0aef.png" alt="User management" width="800" /></p>
+
+<p>It gives you insights into Application and JVM metrics:</p>
+
+<p><img src="/assets/blog/microservices-jhipster/app-metrics-6d55958cb4cef8848932f7cb500b24f43e6f5c4ead4ec270ee50d550f1ca6846.png" alt="Application and JVM Metrics" width="800" /></p>
+
+<p>And it allows you to see the Swagger docs associated with its API.</p>
+
+<p><img src="/assets/blog/microservices-jhipster/swagger-docs-1c4ab470f66d53215a00b1a7b084b6ddeb02191641f2cc6692a44e47be84c6c0.png" alt="Swagger docs" width="800" /></p>
+
+<p>You can run the following command (in a separate terminal window) to start the Protractor tests and confirm everything is 
+working properly.</p>
+
+<div class="language-bash highlighter-rouge"><pre class="highlight"><code>yarn e2e
+</code></pre>
+</div>
+
+<p>At this point, it’s a good idea to check your project into Git so you can easily see what changes are made going forward.</p>
+
+<div class="language-bash highlighter-rouge"><pre class="highlight"><code>git init
+git add .
+git commit -m <span class="s2">"Gateway created"</span>
+</code></pre>
+</div>
+
+<p>Shut down your <code class="highlighter-rouge">blog</code> application before proceeding to the next section.</p>
+
+<h3 id="generate-entities">Generate Entities</h3>
+
+<p>For each entity you want to create, you will need:</p>
+
+<ul>
+  <li>A database table</li>
+  <li>A Liquibase change set</li>
+  <li>A JPA entity class</li>
+  <li>A Spring Data <code class="highlighter-rouge">JpaRepository</code> interface</li>
+  <li>A Spring MVC <code class="highlighter-rouge">RestController</code> class</li>
+  <li>An Angular model, state, component, dialog components, service</li>
+  <li>Several HTML pages for each component</li>
+</ul>
+
+<p>Also, you should have integration tests to verify that everything works and performance tests to verify that it runs fast. In an ideal world, you’d also have unit tests and integration tests for your Angular code.</p>
+
+<p>The good news is JHipster can generate all of this code for you, including integration tests and performance tests. In addition, if you have entities with relationships, it will generate the necessary schema to support them (with foreign keys), and the TypeScript and HTML code to manage them. You can also set up validation to require certain fields, as well as control their length.</p>
+
+<p>JHipster supports several methods of code generation. The first uses its <a href="https://jhipster.github.io/creating-an-entity/">entity sub-generator</a>. The entity sub-generator is a command-line tool that prompts you with questions which you answer. <a href="https://jhipster.github.io/jdl-studio/">JDL-Studio</a> is a browser-based tool for defining your domain model with JHipster Domain Language (JDL). Finally, <a href="https://jhipster.github.io/jhipster-uml/">JHipster-UML</a> is an option for those that like UML. Supported UML editors include <a href="https://www.modeliosoft.com/">Modelio</a>, <a href="http://www.umldesigner.org/">UML Designer</a>, <a href="https://www.genmymodel.com/">GenMyModel</a>, and <a href="http://www.visual-paradigm.com/">Visual Paradigm</a>. I like the visual nature of JDL-Studio, so I’ll use it for this project.</p>
+
+<p>Below is the entity diagram and JDL code needed to generate a simple blog with blogs, entries, and tags.</p>
+
+<p><img src="/assets/blog/microservices-jhipster/jdl-studio-blog-f6c10171bf61bd3f26fda6786baec6bba50377c32fc824f9bf17a6723d38d203.png" alt="Blog entity diagram" width="800" /></p>
+
+<p>You can <a href="http://bit.ly/jhipster4-blog-jdl">click on this URL</a>, or copy/paste the contents of the file below to your hard 
+drive if you’d like to follow along.</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>entity Blog {
+    name String required minlength(3),
+    handle String required minlength(2)
+}
+
+entity Entry {
+    title String required,
+    content TextBlob required,
+    date ZonedDateTime required
+}
+
+entity Tag {
+    name String required minlength(2)
+}
+
+relationship ManyToOne {
+    Blog{user(login)} to User,
+    Entry{blog(name)} to Blog
+}
+
+relationship ManyToMany {
+    Entry{tag(name)} to Tag{entry}
+}
+
+paginate Entry, Tag with infinite-scroll
+</code></pre>
+</div>
+
+<p>Run the following command (in the <code class="highlighter-rouge">blog</code> directory) to import this file. Running this command will generate entities, tests, and a UI.</p>
+
+<div class="language-bash highlighter-rouge"><pre class="highlight"><code>jhipster import-jdl ~/Downloads/jhipster-jdl.jh
+</code></pre>
+</div>
+
+<p>You’ll be prompted to overwrite <code class="highlighter-rouge">src/main/resources/config/liquibase/master.xml</code>. Type <code class="highlighter-rouge">a</code> to overwrite this 
+file, as well as others.</p>
+
+<p>Start the application with <code class="highlighter-rouge">/.mvnw</code> and run <code class="highlighter-rouge">yarn start</code> (in another window) to view the UI for the generated entities. 
+Create a couple of blogs for the existing <code class="highlighter-rouge">admin</code> and <code class="highlighter-rouge">user</code> users, as well as a few blog entries.</p>
+
+<p><img src="/assets/blog/microservices-jhipster/blogs-43eec411c0f7683d90a3bf378f06364f23115b37b6510e10d81e730b80ca3da2.png" alt="Blogs" width="800" /></p>
+
+<p><img src="/assets/blog/microservices-jhipster/entries-b2f637fafe4f414ebc37da264070b1c8d1540ace9d283835dd0d675bd4994027.png" alt="Entries" width="800" /></p>
+
+<p>From these screenshots, you can see that users can see each other’s data, and modify it.</p>
+
+<p>Now, check your generated entities into Git.</p>
+
+<div class="language-bash highlighter-rouge"><pre class="highlight"><code>git init
+git add .
+git commit -m <span class="s2">"Entities generated"</span>
+</code></pre>
+</div>
+
+<h3 id="add-business-logic">Add Business Logic</h3>
+
+<p><strong>TIP:</strong> To configure an IDE with your JHipster project, see <a href="https://jhipster.github.io/configuring-ide/">Configuring your IDE</a>. 
+Instructions exist for Eclipse, IntelliJ IDEA, Visual Studio Code, and NetBeans.</p>
+
+<p>To add more security around blogs and entries, open <code class="highlighter-rouge">BlogResource.java</code> and find the <code class="highlighter-rouge">getAllBlogs()</code> method. Change the 
+following line:</p>
+
+<div class="language-java highlighter-rouge"><pre class="highlight"><code><span class="n">List</span><span class="o">&lt;</span><span class="n">Blog</span><span class="o">&gt;</span> <span class="n">blogs</span> <span class="o">=</span> <span class="n">blogRepository</span><span class="o">.</span><span class="na">findAll</span><span class="o">();</span>
+</code></pre>
+</div>
+
+<p>To:</p>
+
+<div class="language-java highlighter-rouge"><pre class="highlight"><code><span class="n">List</span><span class="o">&lt;</span><span class="n">Blog</span><span class="o">&gt;</span> <span class="n">blogs</span> <span class="o">=</span> <span class="n">blogRepository</span><span class="o">.</span><span class="na">findByUserIsCurrentUser</span><span class="o">();</span>
+</code></pre>
+</div>
+
+<p>The <code class="highlighter-rouge">findByUserIsCurrentUser()</code> method is generated by JHipster in the <code class="highlighter-rouge">BlogRepository</code> class and allows limiting results 
+by the current user.</p>
+
+<div class="language-java highlighter-rouge"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">interface</span> <span class="nc">BlogRepository</span> <span class="kd">extends</span> <span class="n">JpaRepository</span><span class="o">&lt;</span><span class="n">Blog</span><span class="o">,</span><span class="n">Long</span><span class="o">&gt;</span> <span class="o">{</span>
+
+    <span class="nd">@Query</span><span class="o">(</span><span class="s">"select blog from Blog blog where blog.user.login = ?#{principal.username}"</span><span class="o">)</span>
+    <span class="n">List</span><span class="o">&lt;</span><span class="n">Blog</span><span class="o">&gt;</span> <span class="nf">findByUserIsCurrentUser</span><span class="o">();</span>
+
+<span class="o">}</span>
+</code></pre>
+</div>
+
+<p>After making this change, re-compiling <code class="highlighter-rouge">BlogResource</code> should trigger a restart of the application thanks to 
+<a href="http://docs.spring.io/spring-boot/docs/current/reference/html/using-boot-devtools.html">Spring Boot’s Developer tools</a>. 
+If you navigate to <code class="highlighter-rouge">http://localhost:9000/blogs</code>, you should only see the blog for the current user.</p>
+
+<p><img src="/assets/blog/microservices-jhipster/blogs-admin-5f2d635ead2b39744676fe3c6d413969c40596eadf41110d36f4eff6a6c932fd.png" alt="Admin's blog" width="800" /></p>
+
+<p>To add this same logic for entries, open <code class="highlighter-rouge">EntryResource.java</code> and find the <code class="highlighter-rouge">getAllEntries()</code> method. Change the following line:</p>
+
+<div class="language-java highlighter-rouge"><pre class="highlight"><code><span class="n">Page</span><span class="o">&lt;</span><span class="n">Entry</span><span class="o">&gt;</span> <span class="n">page</span> <span class="o">=</span> <span class="n">entryRepository</span><span class="o">.</span><span class="na">findAll</span><span class="o">(</span><span class="n">pageable</span><span class="o">);</span>
+</code></pre>
+</div>
+
+<p>To:</p>
+
+<div class="language-java highlighter-rouge"><pre class="highlight"><code><span class="n">Page</span><span class="o">&lt;</span><span class="n">Entry</span><span class="o">&gt;</span> <span class="n">page</span> <span class="o">=</span> <span class="n">entryRepository</span><span class="o">.</span><span class="na">findByBlogUserLoginOrderByDateDesc</span><span class="o">(</span><span class="n">SecurityUtils</span><span class="o">.</span><span class="na">getCurrentUserLogin</span><span class="o">(),</span> <span class="n">pageable</span><span class="o">);</span>
+</code></pre>
+</div>
+
+<p>Using your IDE, create this method in the <code class="highlighter-rouge">EntryRepository</code> class. It should look as follows:</p>
+
+<div class="language-java highlighter-rouge"><pre class="highlight"><code><span class="n">Page</span><span class="o">&lt;</span><span class="n">Entry</span><span class="o">&gt;</span> <span class="nf">findByBlogUserLoginOrderByDateDesc</span><span class="o">(</span><span class="n">String</span> <span class="n">currentUserLogin</span><span class="o">,</span> <span class="n">Pageable</span> <span class="n">pageable</span><span class="o">);</span>
+</code></pre>
+</div>
+
+<p>Recompile both changed classes and verify that the <code class="highlighter-rouge">user</code> user only sees the entries you created for them.</p>
+
+<p><img src="/assets/blog/microservices-jhipster/entries-user-6174c5f4b653864af7c6ae5b12739a1fab5f7c2d8ba62bd731c166b994f45503.png" alt="User's entries" width="800" /></p>
+
+<p>After making this changes, commit them to Git.</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>git add .
+git commit -m "Add business logic"
+</code></pre>
+</div>
+
+<p>You might notice that this application doesn’t look like a blog and it doesn’t allow HTML in the content field.</p>
+
+<h3 id="make-ui-enhancements">Make UI Enhancements</h3>
+
+<p>When doing UI development on a JHipster-generated application, it’s nice to see your changes as soon as you save a file. 
+JHipster 4 uses <a href="https://www.browsersync.io/">Browsersync</a> and <a href="https://webpack.github.io/">webpack</a> to power this feature. 
+You enable this previously by running the following command in the <code class="highlighter-rouge">blog</code> directory.</p>
+
+<div class="language-bash highlighter-rouge"><pre class="highlight"><code>yarn start
+</code></pre>
+</div>
+
+<p>In this section, you’ll change the following:</p>
+
+<ol>
+  <li>Change the rendered content field to display HTML</li>
+  <li>Change the list of entries to look like a blog</li>
+</ol>
+
+<h4 id="allow-html">Allow HTML</h4>
+
+<p>If you enter HTML in the <code class="highlighter-rouge">content</code> field of a blog entry, you’ll notice it’s escaped on the list screen.</p>
+
+<p><img src="/assets/blog/microservices-jhipster/entries-with-html-escaped-0eacff4f524fafd5776e7a205e97e7ba486838a86ffd6b23d135dc3644300660.png" alt="Escaped HTML" width="800" /></p>
+
+<p>To change this behavior, open <code class="highlighter-rouge">entry.component.html</code> and change the following line:</p>
+
+<div class="language-html highlighter-rouge"><pre class="highlight"><code><span class="nt">&lt;td&gt;</span>{{entry.content}}<span class="nt">&lt;/td&gt;</span>
+</code></pre>
+</div>
+
+<p>To:</p>
+
+<div class="language-html highlighter-rouge"><pre class="highlight"><code><span class="nt">&lt;td</span> <span class="err">[</span><span class="na">innerHTML</span><span class="err">]="</span><span class="na">entry</span><span class="err">.</span><span class="na">content</span><span class="err">"</span><span class="nt">&gt;&lt;/td&gt;</span>
+</code></pre>
+</div>
+
+<p>After making this change, you’ll see that the HTML is no longer escaped.</p>
+
+<p><img src="/assets/blog/microservices-jhipster/entries-with-html-4252d480bda493a261178c4f793c37283abded4f745a4770c57f821e29183ae9.png" alt="HTML in entries" width="800" /></p>
+
+<h4 id="improve-the-layout">Improve the layout</h4>
+
+<p>To make the list of entries look like a blog, replace <code class="highlighter-rouge">&lt;div class="table-responsive"&gt;</code> with HTML, so it uses a stacked layout in a single column.</p>
+
+<div class="language-html highlighter-rouge"><pre class="highlight"><code><span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"table-responsive"</span> <span class="err">*</span><span class="na">ngIf=</span><span class="s">"entries"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;div</span> <span class="na">infinite-scroll</span> <span class="err">(</span><span class="na">scrolled</span><span class="err">)="</span><span class="na">loadPage</span><span class="err">(</span><span class="na">page</span> <span class="err">+</span> <span class="na">1</span><span class="err">)"</span> <span class="err">[</span><span class="na">infiniteScrollDisabled</span><span class="err">]="</span><span class="na">page</span> <span class="nt">&gt;</span>= links['last']"
+         [infiniteScrollDistance]="0"&gt;
+        <span class="nt">&lt;div</span> <span class="err">*</span><span class="na">ngFor=</span><span class="s">"let entry of entries; trackBy: trackId"</span><span class="nt">&gt;</span>
+            <span class="nt">&lt;h2&gt;</span>{{entry.title}}<span class="nt">&lt;/h2&gt;</span>
+            <span class="nt">&lt;small&gt;</span>Posted on {{entry.date | date: 'short'}} by {{entry.blog.user.login}}<span class="nt">&lt;/small&gt;</span>
+            <span class="nt">&lt;div</span> <span class="err">[</span><span class="na">innerHTML</span><span class="err">]="</span><span class="na">entry</span><span class="err">.</span><span class="na">content</span><span class="err">"</span><span class="nt">&gt;&lt;/div&gt;</span>
+            <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"btn-group mb-4 mt-1"</span><span class="nt">&gt;</span>
+                <span class="nt">&lt;button</span> <span class="na">type=</span><span class="s">"submit"</span>
+                        <span class="err">[</span><span class="na">routerLink</span><span class="err">]="['/',</span> <span class="err">{</span> <span class="na">outlets:</span> <span class="err">{</span> <span class="na">popup:</span> <span class="err">'</span><span class="na">entry</span><span class="err">/'+</span> <span class="na">entry</span><span class="err">.</span><span class="na">id</span> <span class="err">+</span> <span class="err">'/</span><span class="na">edit</span><span class="err">'}</span> <span class="err">}]"</span>
+                        <span class="na">replaceUrl=</span><span class="s">"true"</span>
+                        <span class="na">class=</span><span class="s">"btn btn-primary btn-sm"</span><span class="nt">&gt;</span>
+                    <span class="nt">&lt;span</span> <span class="na">class=</span><span class="s">"fa fa-pencil"</span><span class="nt">&gt;&lt;/span&gt;</span>
+                    <span class="nt">&lt;span</span> <span class="na">class=</span><span class="s">"hidden-md-down"</span> <span class="na">jhiTranslate=</span><span class="s">"entity.action.edit"</span><span class="nt">&gt;</span>Edit<span class="nt">&lt;/span&gt;</span>
+                <span class="nt">&lt;/button&gt;</span>
+                <span class="nt">&lt;button</span> <span class="na">type=</span><span class="s">"submit"</span>
+                        <span class="err">[</span><span class="na">routerLink</span><span class="err">]="['/',</span> <span class="err">{</span> <span class="na">outlets:</span> <span class="err">{</span> <span class="na">popup:</span> <span class="err">'</span><span class="na">entry</span><span class="err">/'+</span> <span class="na">entry</span><span class="err">.</span><span class="na">id</span> <span class="err">+</span> <span class="err">'/</span><span class="na">delete</span><span class="err">'}</span> <span class="err">}]"</span>
+                        <span class="na">replaceUrl=</span><span class="s">"true"</span>
+                        <span class="na">class=</span><span class="s">"btn btn-danger btn-sm"</span><span class="nt">&gt;</span>
+                    <span class="nt">&lt;span</span> <span class="na">class=</span><span class="s">"fa fa-remove"</span><span class="nt">&gt;&lt;/span&gt;</span>
+                    <span class="nt">&lt;span</span> <span class="na">class=</span><span class="s">"hidden-md-down"</span> <span class="na">jhiTranslate=</span><span class="s">"entity.action.delete"</span><span class="nt">&gt;</span>Delete<span class="nt">&lt;/span&gt;</span>
+                <span class="nt">&lt;/button&gt;</span>
+            <span class="nt">&lt;/div&gt;</span>
+        <span class="nt">&lt;/div&gt;</span>
+    <span class="nt">&lt;/div&gt;</span>
+<span class="nt">&lt;/div&gt;</span>
+</code></pre>
+</div>
+
+<p>Now it looks more like a regular blog!</p>
+
+<p><img src="/assets/blog/microservices-jhipster/blog-entries-bd7c3d17bd49c9c75b2bab46afe39c1210ea03b58daaf72309d38e27ef80aaad.png" alt="Blog entries" width="800" /></p>
+
+<p>Commit all your changes to Git.</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>git add .
+git commit -m "UI enhancements"
+</code></pre>
+</div>
+
+<h2 id="create-a-microservice">Create a Microservice</h2>
+
+<p>To generate a <code class="highlighter-rouge">store</code> microservice, open a terminal window and navigate to the <code class="highlighter-rouge">jhipster-microservices-example</code> directory.
+Create a <code class="highlighter-rouge">store</code> directory and run <code class="highlighter-rouge">jhipster</code> in it.</p>
+
+<div class="language-bash highlighter-rouge"><pre class="highlight"><code><span class="nb">cd</span> ~/jhipster-microservices-example
+mkdir store
+<span class="nb">cd </span>store
+jhipster
+</code></pre>
+</div>
+
+<p>Use the following settings to generate a microservice that uses MongoDB for its database.</p>
+
+<ul>
+  <li>Application type: <code class="highlighter-rouge">Microservice application</code></li>
+  <li>Base name of the application: <code class="highlighter-rouge">store</code></li>
+  <li>Port: <code class="highlighter-rouge">8081</code></li>
+  <li>Default package name: <code class="highlighter-rouge">org.jhipster.store</code></li>
+  <li>Type of authentication: <code class="highlighter-rouge">JWT</code></li>
+  <li>Use JHipster Registry: <code class="highlighter-rouge">Yes</code></li>
+  <li>Type of database: <code class="highlighter-rouge">MongoDB</code></li>
+  <li>Maven or Gradle: <code class="highlighter-rouge">Maven</code></li>
+  <li>Other technologies: <code class="highlighter-rouge">None</code></li>
+  <li>Internationalization support: <code class="highlighter-rouge">Yes</code></li>
+  <li>Native language: <code class="highlighter-rouge">English</code></li>
+  <li>Additional languages: <code class="highlighter-rouge">Spanish</code></li>
+  <li>Testing frameworks: <code class="highlighter-rouge">Gatling</code></li>
+  <li>Install other generators from the JHipster Marketplace: <code class="highlighter-rouge">No</code></li>
+</ul>
+
+<p><img src="/assets/blog/microservices-jhipster/generate-store-7d46b818244e8df9ddb269238388e88e685ba22e37fd396807172444257b280d.png" alt="Generating the microservice" width="800" /></p>
+
+<p>The <code class="highlighter-rouge">.yo-rc.json</code> created by this process is as follows:</p>
+
+<div class="language-json highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"generator-jhipster"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"promptValues"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"packageName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"org.jhipster.store"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"nativeLanguage"</span><span class="p">:</span><span class="w"> </span><span class="s2">"en"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nt">"jhipsterVersion"</span><span class="p">:</span><span class="w"> </span><span class="s2">"4.5.4"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"baseName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"store"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"packageName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"org.jhipster.store"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"packageFolder"</span><span class="p">:</span><span class="w"> </span><span class="s2">"org/jhipster/store"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"serverPort"</span><span class="p">:</span><span class="w"> </span><span class="s2">"8081"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"authenticationType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"jwt"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"hibernateCache"</span><span class="p">:</span><span class="w"> </span><span class="s2">"no"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"clusteredHttpSession"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"websocket"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"databaseType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"mongodb"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"devDatabaseType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"mongodb"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"prodDatabaseType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"mongodb"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"searchEngine"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"messageBroker"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"serviceDiscoveryType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"eureka"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"buildTool"</span><span class="p">:</span><span class="w"> </span><span class="s2">"maven"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"enableSocialSignIn"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"jwtSecretKey"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ea21b5b635606be4d7937e29926166e0ee56abb1"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"enableTranslation"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"applicationType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"microservice"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"testFrameworks"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+      </span><span class="s2">"gatling"</span><span class="w">
+    </span><span class="p">],</span><span class="w">
+    </span><span class="nt">"jhiPrefix"</span><span class="p">:</span><span class="w"> </span><span class="s2">"jhi"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"skipClient"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"skipUserManagement"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"nativeLanguage"</span><span class="p">:</span><span class="w"> </span><span class="s2">"en"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"languages"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+      </span><span class="s2">"en"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"es"</span><span class="w">
+    </span><span class="p">],</span><span class="w">
+    </span><span class="nt">"clientPackageManager"</span><span class="p">:</span><span class="w"> </span><span class="s2">"yarn"</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+</div>
+
+<p>Commit your changes to Git. It’s always a good idea to do this before generating entities.</p>
+
+<div class="language-bash highlighter-rouge"><pre class="highlight"><code><span class="nb">cd</span> ~/jhipster-microservices-example/
+git add store
+git commit -m <span class="s2">"Generate store application"</span>
+</code></pre>
+</div>
+
+<h3 id="generate-product-entity">Generate Product Entity</h3>
+
+<p>Create a product entity by running the following command in the <code class="highlighter-rouge">store</code> directory.</p>
+
+<div class="language-bash highlighter-rouge"><pre class="highlight"><code>jhipster entity product
+</code></pre>
+</div>
+
+<p>Use the following answers for the questions asked:</p>
+
+<ul>
+  <li>Do you want to add a field to your entity? <code class="highlighter-rouge">Yes</code></li>
+  <li>What is the name of your field? <code class="highlighter-rouge">name</code></li>
+  <li>What is the type of your field? <code class="highlighter-rouge">String</code></li>
+  <li>Do you want to add validation rules to your field? <code class="highlighter-rouge">Yes</code></li>
+  <li>
+    <p>Which validation rules do you want to add? <code class="highlighter-rouge">Required</code></p>
+  </li>
+  <li>Do you want to add a field to your entity? <code class="highlighter-rouge">Yes</code></li>
+  <li>What is the name of your field? <code class="highlighter-rouge">price</code></li>
+  <li>What is the type of your field? <code class="highlighter-rouge">BigDecimal</code></li>
+  <li>Do you want to add validation rules to your field? <code class="highlighter-rouge">Yes</code></li>
+  <li>
+    <p>Which validation rules do you want to add? <code class="highlighter-rouge">Required</code></p>
+  </li>
+  <li>
+    <p>Do you want to add a field to your entity? <code class="highlighter-rouge">No</code></p>
+  </li>
+  <li>Do you want to use a Data Transfer Object (DTO)? <code class="highlighter-rouge">No</code></li>
+  <li>Do you want to use separate service class for your business logic? <code class="highlighter-rouge">No</code></li>
+  <li>Do you want pagination on your entity? <code class="highlighter-rouge">Yes, with pagination links</code></li>
+</ul>
+
+<p>Your terminal should look similar to the following after you’ve answered all these questions.</p>
+
+<p><img src="/assets/blog/microservices-jhipster/generate-product-8cf735f9735afc28f198341841cb7429c0eef36f36ae8a1c9309d13a556b3d4a.png" alt="Generating product entity" width="800" /></p>
+
+<h3 id="generate-ui-for-product-entity">Generate UI for Product Entity</h3>
+
+<p>A microservice only contains the server-side code for the entities it contains. To generate
+an Angular UI for the product, navigate to the <code class="highlighter-rouge">blog</code> directory and run the same command.</p>
+
+<div class="language-bash highlighter-rouge"><pre class="highlight"><code>jhipster entity product
+</code></pre>
+</div>
+
+<p>Use the following answers to the questions asked:</p>
+
+<ul>
+  <li>Do you want to generate this entity from an existing microservice? <code class="highlighter-rouge">Yes</code></li>
+  <li>Enter the path to the microservice root directory: <code class="highlighter-rouge">../store</code></li>
+  <li>Do you want to update the entity? <code class="highlighter-rouge">Yes</code></li>
+</ul>
+
+<p>A visual of these questions and answers is in the screenshot below.</p>
+
+<p><img src="/assets/blog/microservices-jhipster/generate-product-ui-041dc6e22426ac438b0502a99eabbfbfcd850c26946e4b64666682bee29d5d77.png" alt="Generating product entity UI" width="800" /></p>
+
+<p>Commit your changes to Git.</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>cd ~/jhipster-microservices-example
+git add .
+git commit -m "Add product entity"
+</code></pre>
+</div>
+
+<p>At this point, you should be able to verify everything works by starting the registry, blog, store, and MongoDB.
+You can run MongoDB using Docker Compose with the following command in the <code class="highlighter-rouge">store</code> directory. You’ll need to have Docker installed and running for this command to work.</p>
+
+<div class="language-bash highlighter-rouge"><pre class="highlight"><code>docker-compose -f src/main/docker/mongodb.yml up
+</code></pre>
+</div>
+
+<p>The <a href="#docker-compose">Docker Compose</a> section shows how you can run all your services using Docker.</p>
+
+<p>Navigate to <code class="highlighter-rouge">http://localhost:8080</code>, log in with admin/admin, and go to Entities &gt; Product. You should be able to
+add a product and see that it has a MongoDB identifier.</p>
+
+<p><img src="/assets/blog/microservices-jhipster/add-product-db7144bffa4902e715b63e8c7d7eec82cafcd15047f33c81b14f4eb0ff9e4266.png" alt="Add Product" width="800" /></p>
+
+<h2 id="build-for-production">Build for Production</h2>
+
+<p>A JHipster application can be deployed anywhere a Spring Boot application can be deployed. Its Angular client is
+bundled inside its JAR files. JHipster ships with support for deploying to <a href="https://jhipster.github.io/cloudfoundry/">Cloud Foundry</a>, <a href="https://jhipster.github.io/heroku/">Heroku</a>, <a href="https://jhipster.github.io/kubernetes/">Kubernetes</a>, <a href="https://jhipster.github.io/aws/">AWS</a>, and <a href="https://jhipster.github.io/boxfuse/">AWS with Boxfuse</a>.</p>
+
+<p>When you prepare a JHipster application for production, it’s recommended to use the pre-configured “<code class="highlighter-rouge">production</code>” profile. 
+With Maven, you can package your application by specifying the <code class="highlighter-rouge">prod</code> profile when building.</p>
+
+<div class="language-bash highlighter-rouge"><pre class="highlight"><code>./mvnw -Pprod package
+</code></pre>
+</div>
+
+<p>The production profile is used to build an optimized JavaScript client. You can invoke this using webpack by running 
+<code class="highlighter-rouge">yarn run webpack:prod</code>. The production profile also configures gzip compression with a servlet filter, cache headers, 
+and monitoring via <a href="https://github.com/dropwizard/metrics">Metrics</a>. If you have a <a href="http://graphite.wikidot.com/">Graphite</a> 
+server configured in your <code class="highlighter-rouge">application-prod.yml</code> file, your application will automatically send metrics data to it.</p>
+
+<p>When you run this command in the <code class="highlighter-rouge">blog</code> application, you’ll likely get a test failure.</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>Results :
+
+Failed tests:
+  BlogResourceIntTest.getAllBlogs:184 Status expected:&lt;200&gt; but was:&lt;500&gt;
+
+Tests run: 157, Failures: 1, Errors: 0, Skipped: 0
+</code></pre>
+</div>
+
+<p>The reason this happens is shown in a stack trace in your terminal.</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>Running org.jhipster.blog.web.rest.BlogResourceIntTest
+2017-06-19 10:29:17.288 ERROR 4168 --- [           main] o.j.b.w.rest.errors.ExceptionTranslator  
+: An unexpected error occured: Authentication object cannot be null; nested exception is 
+java.lang.IllegalArgumentException: Authentication object cannot be null
+2017-06-19 10:29:17.472 ERROR 4168 --- [           main] o.j.blog.web.rest.util.HeaderUtil        
+: Entity processing failed, A new blog cannot already have an ID
+</code></pre>
+</div>
+
+<p>To fix this, you can use Spring Security Test’s <a href="http://docs.spring.io/spring-security/site/docs/current/reference/html/test-method.html#test-method-withmockuser"><code class="highlighter-rouge">@WithMockUser</code></a>. Open <code class="highlighter-rouge">BlogResourceIntTest.java</code> and inject  <code class="highlighter-rouge">UserRepository</code> as a dependency.</p>
+
+<div class="language-java highlighter-rouge"><pre class="highlight"><code><span class="nd">@Autowired</span>
+<span class="kd">private</span> <span class="n">UserRepository</span> <span class="n">userRepository</span><span class="o">;</span>
+</code></pre>
+</div>
+
+<p>Change the <code class="highlighter-rouge">createEntity()</code> method, so it’s not <code class="highlighter-rouge">static</code> and uses the <code class="highlighter-rouge">userRepository</code> to set a user on the blog entity.</p>
+
+<div class="language-java highlighter-rouge"><pre class="highlight"><code><span class="kd">public</span> <span class="n">Blog</span> <span class="nf">createEntity</span><span class="o">(</span><span class="n">EntityManager</span> <span class="n">em</span><span class="o">)</span> <span class="o">{</span>
+    <span class="n">Blog</span> <span class="n">blog</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Blog</span><span class="o">()</span>
+            <span class="o">.</span><span class="na">name</span><span class="o">(</span><span class="n">DEFAULT_NAME</span><span class="o">)</span>
+            <span class="o">.</span><span class="na">handle</span><span class="o">(</span><span class="n">DEFAULT_HANDLE</span><span class="o">)</span>
+            <span class="o">.</span><span class="na">user</span><span class="o">(</span><span class="n">userRepository</span><span class="o">.</span><span class="na">findOneByLogin</span><span class="o">(</span><span class="s">"user"</span><span class="o">).</span><span class="na">get</span><span class="o">());</span>
+    <span class="k">return</span> <span class="n">blog</span><span class="o">;</span>
+<span class="o">}</span>
+</code></pre>
+</div>
+
+<p>Add <code class="highlighter-rouge">@WithMockUser</code> to the <code class="highlighter-rouge">getAllBlogs()</code> method.</p>
+
+<div class="language-java highlighter-rouge"><pre class="highlight"><code><span class="nd">@Test</span>
+<span class="nd">@Transactional</span>
+<span class="nd">@WithMockUser</span>
+<span class="kd">public</span> <span class="kt">void</span> <span class="nf">getAllBlogs</span><span class="o">()</span> <span class="kd">throws</span> <span class="n">Exception</span> <span class="o">{</span>
+</code></pre>
+</div>
+
+<p>Commit your changes to Git.</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>git add .
+git commit -m "Fix tests"
+</code></pre>
+</div>
+
+<p>After fixing this test, you should be able to run <code class="highlighter-rouge">./mvnw -Pprod package</code> without any failures. You might notice that
+this does take quite some time, mostly due to the Webpack build and optimizations. Below is the output from a Mid 2015
+MacBook Pro with 16GB of RAM and JAVA_OPTS set to <code class="highlighter-rouge">-Xmx2048m</code>.</p>
+
+<div class="language-bash highlighter-rouge"><pre class="highlight"><code><span class="o">[</span>INFO] ------------------------------------------------------------------------
+<span class="o">[</span>INFO] BUILD SUCCESS
+<span class="o">[</span>INFO] ------------------------------------------------------------------------
+<span class="o">[</span>INFO] Total <span class="nb">time</span>: 04:38 min
+<span class="o">[</span>INFO] Finished at: 2017-06-19T10:39:09-06:00
+<span class="o">[</span>INFO] Final Memory: 75M/747M
+<span class="o">[</span>INFO] ------------------------------------------------------------------------
+</code></pre>
+</div>
+
+<h2 id="deploy-to-the-cloud">Deploy to the Cloud</h2>
+
+<p>What good is a microservices architecture if it’s not deployed to a PaaS (Platform as a Service)?! PaaS providers
+are also known as “the cloud”, and allow you to deploy and scale microservices as needed. Docker provides
+a mechanism to “package” your applications as an entire bundle. A Docker container includes the operating system and 
+services needed to run your application. Often, Docker containers are used for the individual components of your 
+architecture. For example, you’ll have a Docker container for each app, as well as one for PostgreSQL, MongoDB, and
+Elasticsearch.</p>
+
+<p>To complete this section, you’ll need to <a href="https://docs.docker.com/engine/installation/">install Docker</a>.</p>
+
+<p><strong>NOTE:</strong> If you’re not on Mac or Windows, you may need to <a href="https://docs.docker.com/compose/install/">install Docker Compose</a> as well.</p>
+
+<p><a name="docker-compose"></a></p>
+
+<h3 id="run-with-docker-compose">Run with Docker Compose</h3>
+
+<p>Docker Compose is a tool for defining and running multi-container Docker applications. With Compose, you can create and 
+start all the components of your application with a single command.</p>
+
+<ol>
+  <li>Make sure Docker is running</li>
+  <li>
+    <p>Build Docker images for the <code class="highlighter-rouge">blog</code> and <code class="highlighter-rouge">store</code> applications by running the following command in both directories:</p>
+
+    <div class="highlighter-rouge"><pre class="highlight"><code> ./mvnw package -Pprod docker:build
+</code></pre>
+    </div>
+  </li>
+  <li>
+    <p>Using your terminal, navigate to the root directory of your project, and create a <code class="highlighter-rouge">docker</code> directory. Then run the 
+<a href="https://jhipster.github.io/docker-compose/#docker-compose-subgen">JHipster Docker Compose sub-generator</a> in it.</p>
+
+    <div class="highlighter-rouge"><pre class="highlight"><code> jhipster docker-compose
+</code></pre>
+    </div>
+
+    <ul>
+      <li>Application type: <code class="highlighter-rouge">Microservice application</code></li>
+      <li>Root directory of your microservices: <code class="highlighter-rouge">../</code></li>
+      <li>Applications to include: <code class="highlighter-rouge">blog</code> and <code class="highlighter-rouge">store</code></li>
+      <li>Applications with clustered databases: <code class="highlighter-rouge">None</code></li>
+      <li>Set up monitoring: <code class="highlighter-rouge">JHipster Console with ELK/Zipkin</code></li>
+      <li>The admin password for the JHipster Registry: <code class="highlighter-rouge">admin</code></li>
+    </ul>
+
+    <p><img src="/assets/blog/microservices-jhipster/generate-docker-26cd718e7905a8ef0ba2db98e709d55853c7996d0d9a62ea6801ff6f60a03c31.png" alt="Generating Docker" width="800" /></p>
+  </li>
+  <li>
+    <p>Run <code class="highlighter-rouge">docker-compose up</code> to run all your services and see the logs in the same window. Add <code class="highlighter-rouge">-d</code> if you want to run 
+them as a daemon</p>
+  </li>
+  <li>Use <a href="https://kitematic.com/">Kitematic</a> to view the ports and logs for the services deployed</li>
+</ol>
+
+<p><img src="/assets/blog/microservices-jhipster/kitematic-65f047ba2eb8c2639427d1f1de19a7a99910d4cf4c08c2d0a20039498a2e90b7.png" alt="Kitematic" width="800" /></p>
+
+<p>You can view the JHipster Registry at <code class="highlighter-rouge">http://localhost:8761</code>.</p>
+
+<p>To produce data for the JHipster Console to display, run some Gatling tests in the <code class="highlighter-rouge">blog</code> app.</p>
+
+<div class="language-bash highlighter-rouge"><pre class="highlight"><code>./mvnw gatling:execute
+</code></pre>
+</div>
+
+<p>These simulations can take a while (&gt; 10m) to complete. When they’re finished, you can view their pretty reports.</p>
+
+<p><img src="/assets/blog/microservices-jhipster/gatling-results-54f71d5b276eafec96b92d8bf21835da1902483234435b3b082079c0ffc89292.png" alt="Gatling Results" width="800" /></p>
+
+<p>You can see the JHipster Console at <code class="highlighter-rouge">http://localhost:5601</code>. Navigate to Dashboards &gt; Open to display some pre-built 
+dashboards for the JVM, logs, metrics, microservices, and performance. The screenshots below show you what some of 
+these look like.</p>
+
+<table>
+<tr>
+<td><img src="/assets/blog/microservices-jhipster/dashboard-jvm-0766e6ff164824b015749b9a629d7b4f8da5e156f04bd57b90546339a6eedad9.png" alt="JVM Dashboard" width="400" /></td>
+<td><img src="/assets/blog/microservices-jhipster/dashboard-metrics-2eba4f6630767553d254e1d3b4b982e4d13526b54f8c71989c049082df968462.png" alt="Metrics Dashboard" width="400" /></td>
+</tr>
+<tr>
+<td><img src="/assets/blog/microservices-jhipster/dashboard-microservices-79e53faa736cc3f705176bed733746caae51bfbeba89dac759d36d2da9d884d8.png" alt="Microservices Dashboard" width="400" /></td>
+<td><img src="/assets/blog/microservices-jhipster/dashboard-performance-1181616ed0fb6d676acee0dd76b31f2cdfb5df83670918908f6f2be93f44d17e.png" alt="Performance Dashboard" width="400" /></td>
+</tr>
+</table>
+
+<p>To save your changes for Docker Compose, commit your changes to Git.</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>git add .
+git commit -m "Add Docker Compose"
+</code></pre>
+</div>
+
+<h3 id="run-with-kubernetes-and-minikube">Run with Kubernetes and Minikube</h3>
+
+<p><a href="https://kubernetes.io/">Kubernetes</a> is an open-source system for automating deployment, scaling, and management of 
+containerized applications. It was developed at Google over the last 16 years and was internally called Borg. To deploy
+Docker containers with Kubernetes, you set up a cluster, then deploy to it. The context can be local (with Minikube), or 
+remote (e.g. a Raspberry Pi cluster, Google Cloud, AWS, OpenShift, etc.).</p>
+
+<p>Follow the steps below to use Kubernetes to deploy to a local cluster.</p>
+
+<ol>
+  <li>Install <a href="https://kubernetes.io/docs/tasks/kubectl/install/">kubectl</a>, <a href="https://www.virtualbox.org/wiki/Downloads">VirtualBox</a>
+and <a href="https://github.com/kubernetes/minikube/releases">Minikube</a></li>
+  <li>Start Minikube using <code class="highlighter-rouge">minikube start</code></li>
+  <li>
+    <p>To be able to work with the docker daemon, run the following command in your terminal:</p>
+
+    <div class="language-bash highlighter-rouge"><pre class="highlight"><code><span class="nb">eval</span> <span class="k">$(</span>minikube docker-env<span class="k">)</span>
+</code></pre>
+    </div>
+  </li>
+  <li>
+    <p>Create Docker images of the <code class="highlighter-rouge">blog</code> and <code class="highlighter-rouge">store</code> applications:</p>
+
+    <div class="language-bash highlighter-rouge"><pre class="highlight"><code> ./mvnw package -Pprod docker:build
+</code></pre>
+    </div>
+  </li>
+  <li>
+    <p>Using your terminal, navigate to the root directory of your project, and create a <code class="highlighter-rouge">kubernetes</code> directory. Then run the 
+<a href="https://jhipster.github.io/kubernetes/">JHipster Kubernetes sub-generator</a> in it.</p>
+
+    <div class="highlighter-rouge"><pre class="highlight"><code> jhipster kubernetes
+</code></pre>
+    </div>
+
+    <ul>
+      <li>Application type: <code class="highlighter-rouge">Microservice application</code></li>
+      <li>Root directory of your microservices: <code class="highlighter-rouge">../</code></li>
+      <li>Applications to include: <code class="highlighter-rouge">blog</code> and <code class="highlighter-rouge">store</code></li>
+      <li>The admin password for the JHipster Registry: <code class="highlighter-rouge">admin</code></li>
+      <li>Kubernetes namespace: <code class="highlighter-rouge">default</code></li>
+      <li>Base Docker repository name (e.g. <code class="highlighter-rouge">mraible</code>): <code class="highlighter-rouge">&lt;your-docker-hub-username&gt;</code></li>
+      <li>Command to push Docker image to repository: <code class="highlighter-rouge">docker push</code></li>
+    </ul>
+
+    <p><img src="/assets/blog/microservices-jhipster/generate-kubernetes-a51a2e3815d481f09a3afc98fa422accb30907eae16b3ab6e1955d278fa1046b.png" alt="Generating Kubernetes" width="800" /></p>
+  </li>
+  <li>
+    <p>Run the following commands to tag your Docker images. The Kubernetes sub-generator says to run <code class="highlighter-rouge">docker push</code> as well, 
+but you don’t need that for a Minikube deployment.</p>
+
+    <div class="language-bash highlighter-rouge"><pre class="highlight"><code> docker image tag blog mraible/blog
+ docker image tag store mraible/store
+</code></pre>
+    </div>
+  </li>
+  <li>
+    <p>Run the following commands in the <code class="highlighter-rouge">kubernetes</code> directory to deploy to Minikube.</p>
+
+    <div class="highlighter-rouge"><pre class="highlight"><code> kubectl apply -f registry
+ kubectl apply -f blog
+ kubectl apply -f store
+</code></pre>
+    </div>
+
+    <p>The deployment process can take several minutes to complete. Run <code class="highlighter-rouge">minikube dashboard</code> to see the deployed containers.</p>
+
+    <p><img src="/assets/blog/microservices-jhipster/minikube-dashboard-bebf1cae76f8f73fcc54aa86363b2098008a7fd24859a202ac70493113892aa0.png" alt="Minikube Dashboard" width="800" /></p>
+
+    <p>You can also run <code class="highlighter-rouge">kubectl get po -o wide --watch</code> to see the status of each pod.</p>
+  </li>
+  <li>Run <code class="highlighter-rouge">minikube service blog</code> to view the blog application. You should be able to login and add blogs, entries, and products.</li>
+</ol>
+
+<p>To remove all deployed containers, run the following command:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>kubectl delete deployment --all
+</code></pre>
+</div>
+
+<p>To stop Minikube, run <code class="highlighter-rouge">minikube stop</code>.</p>
+
+<p>To save your changes for Kubernetes, commit your changes to Git from the top-level directory.</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>git add .
+git commit -m "Kubernetes"
+</code></pre>
+</div>
+
+<h3 id="deploy-to-google-cloud">Deploy to Google Cloud</h3>
+
+<p>Google Cloud is a PaaS that’s built on Google’s core infrastructure. It’s one of the easiest providers to support Kubernetes. 
+Complete the steps below to deploy your hip microservices to Google Cloud. If you completed the Minikube section above, open 
+a new terminal window to reset things.</p>
+
+<ol>
+  <li>Create a Google Cloud project at <a href="https://console.cloud.google.com/">console.cloud.google.com</a></li>
+  <li>Navigate to <a href="https://console.cloud.google.com/kubernetes/list">https://console.cloud.google.com/kubernetes/list</a> to initialize the Container Engine for your project</li>
+  <li>
+    <p>Install <a href="https://cloud.google.com/sdk/">Google Cloud SDK</a> and set project using:</p>
+
+    <div class="highlighter-rouge"><pre class="highlight"><code>gcloud config set project &lt;project-name&gt;
+</code></pre>
+    </div>
+  </li>
+  <li>
+    <p>Create a cluster:</p>
+
+    <div class="highlighter-rouge"><pre class="highlight"><code>gcloud container clusters create &lt;cluster-name&gt; --machine-type=n1-standard-2 --scopes cloud-platform --zone us-west1-a
+</code></pre>
+    </div>
+
+    <p>To see a list of possible zones, run <code class="highlighter-rouge">gcloud compute zones list</code>.</p>
+  </li>
+  <li>
+    <p>Push the <code class="highlighter-rouge">blog</code> and <code class="highlighter-rouge">store</code> docker images to <a href="https://hub.docker.com/">Docker Hub</a>. You will need to create an account 
+and run <code class="highlighter-rouge">docker login</code> to push your images. The images can be run from any directory.</p>
+
+    <div class="language-bash highlighter-rouge"><pre class="highlight"><code> docker image tag blog mraible/blog
+ docker push mraible/blog
+ docker image tag store mraible/store
+ docker push mraible/store
+</code></pre>
+    </div>
+  </li>
+  <li>
+    <p>Run <code class="highlighter-rouge">kubectl</code> commands to deploy</p>
+
+    <div class="language-bash highlighter-rouge"><pre class="highlight"><code> kubectl apply -f registry
+ kubectl apply -f blog
+ kubectl apply -f store
+</code></pre>
+    </div>
+  </li>
+  <li>
+    <p>Use port-forwarding to see the registry app locally</p>
+
+    <div class="highlighter-rouge"><pre class="highlight"><code>kubectl port-forward jhipster-registry-0 8761:8761
+</code></pre>
+    </div>
+  </li>
+  <li>
+    <p>Run <code class="highlighter-rouge">kubectl get service blog</code> to get the external IP of the blog application on Google Cloud. Open 
+<code class="highlighter-rouge">http://&lt;external-ip&gt;:8080</code> to view your running application and verify everything works.</p>
+  </li>
+  <li>
+    <p>Scale microservice apps as needed with <code class="highlighter-rouge">kubectl</code>:</p>
+
+    <div class="highlighter-rouge"><pre class="highlight"><code>kubectl scale --replicas=3 deployment/store
+</code></pre>
+    </div>
+  </li>
+</ol>
+
+<p>Did you get everything working? If so, you rock! You’ve built a production-ready microservices scaffold for your application with JHipster!</p>
+
+<h2 id="issues-found">Issues Found</h2>
+
+<p>While creating this example, I ran into a few issues.</p>
+
+<ol>
+  <li>
+    <p>Alert translations not resolved in the gateway for microservice entities. The workaround is to open the <code class="highlighter-rouge">src/main/webapp/i18n/*/product.json</code> files and move the keys from <code class="highlighter-rouge">storeApp</code> to <code class="highlighter-rouge">blogApp</code>. See <a href="https://github.com/jhipster/generator-jhipster/issues/5960">issue #5960</a> for more information.</p>
+  </li>
+  <li>
+    <p>In production mode, new entries don’t show in the list. The logs have an error like the following:</p>
+
+    <div class="highlighter-rouge"><pre class="highlight"><code> 2017-06-19 18:08:06.930 ERROR 17597 --- [ XNIO-2 task-62] o.j.b.w.rest.errors.ExceptionTranslator  : 
+ An unexpected error occured: Unable to access lob stream; nested exception is org.hibernate.HibernateException: 
+ Unable to access lob stream
+</code></pre>
+    </div>
+
+    <p>This is a <a href="https://github.com/hipster-labs/generator-jhipster-entity-audit/issues/32">known issue with PostgreSQL</a>.
+ Adding <code class="highlighter-rouge">@Transactional</code> to the <code class="highlighter-rouge">EntryResource.java</code> class definition solved this problem.</p>
+  </li>
+  <li>
+    <p>When running everything in Minikube, adding new products fails. Upgrading to JHipster Registry 3.0.2 solved this issue. See <a href="https://github.com/oktadeveloper/jhipster-microservices-example/commit/5bed36131353aea148f5fee1cd8d3c4ed2ae00a8">this commit</a> to see how to upgrade.</p>
+  </li>
+</ol>
+
+<h2 id="source-code-and-screencast">Source Code and Screencast</h2>
+
+<p>The source code for this tutorial is <a href="https://github.com/oktadeveloper/jhipster-microservices-example">available on GitHub</a>. 
+See its <a href="https://github.com/oktadeveloper/jhipster-microservices-example">README</a> if you simply want to clone the project
+and run it. Or, you can <a href="https://youtu.be/dgVQOYEwleA">watch a screencast of building microservices with JHipster and deploying to Google Cloud</a>.</p>
+
+<div style="max-width: 560px; margin: 0 auto">
+<iframe width="560" height="315" src="https://www.youtube.com/embed/dgVQOYEwleA?ecver=1" frameborder="0" allowfullscreen=""></iframe>
+</div>
+
+<h2 id="learn-more-about-jhipster-and-microservices">Learn More about JHipster and Microservices</h2>
+
+<p>I hope you’ve enjoyed learning how JHipster can help you develop hip microservice architectures! It’s a nifty project, with an easy-to-use entity generator, a beautiful UI, and many Spring Boot best-practice patterns. If you have features you’d 
+like to add or if you’d like to refine existing features, you can <a href="https://github.com/jhipster/generator-jhipster">watch the project on GitHub</a> and <a href="https://github.com/jhipster/generator-jhipster/blob/master/CONTRIBUTING.md">help with its development</a> and support. We’re always looking for help!</p>
+
+<p>If you have questions about JHipster, please <a href="https://twitter.com/mraible">hit me up on Twitter</a> or post a question to 
+Stack Overflow with the <a href="http://stackoverflow.com/questions/tagged/jhipster">“jhipster” tag</a>.</p>
+
+<p>If you’re interested in learning more about microservices, you might also find the following resources useful:</p>
+
+<ul>
+  <li><a href="https://jhipster.github.io/microservices-architecture/">Doing Microservices with JHipster</a></li>
+  <li><a href="/blog/2017/06/15/build-microservices-architecture-spring-boot">Build a Microservices Architecture for Microbrews</a></li>
+  <li><a href="https://blog.heroku.com/bootstrapping_your_microservices_architecture_with_jhipster_and_spring">Bootstrapping Your Microservices Architecture with JHipster and Spring</a></li>
+  <li><a href="http://microservices.io/resources/index.html">Microservice Resources from Chris Richardson</a></li>
+</ul>
+
+
+	</div>
+	
+</article>
+
+		
+</section>
+
+		
+	</div><footer class="Footer">
+    <div class="Wrap">
+
+        <div class="Row">
+
+            <div class="Column--3 Column--medium-6 Column--xSmall-12">
+
+                <a class="Logo" href="https://www.okta.com/" target="_blank" rel="noopener noreferrer">
+                    <img src="https://developer.okta.com/sites/all/themes/developer/images/logo-footer.png" alt="Okta">
+                    Visit okta.com
+                </a>
+
+            </div>
+
+            <div class="Column--3 Column--medium-12 Column--xSmall-12">
+
+                <h4>Social</h4>
+                <ul class="Footer-links Footer-links--social">
+                    <li><a class="Footer-links--github" target="_blank" rel="noopener noreferrer" href="http://github.com/oktadeveloper">Github</a></li>
+                    <li><a class="Footer-links--twitter" target="_blank" rel="noopener noreferrer" href="http://twitter.com/OktaDev">Twitter</a></li>
+                    <li><a class="Footer-links--forum" target="_blank" rel="noopener noreferrer" href="https://devforum.okta.com/">Forum</a></li>
+                    <li><a class="Footer-links--rss" target="_blank" rel="noopener noreferrer" href="http://feeds.feedburner.com/OktaBlog">RSS Blog</a></li>
+                </ul>
+            </div>
+
+            <div class="Column--3 Column--medium-6 Column--small-12">
+                <h4>More Info</h4>
+                <ul class="Footer-links">
+                    <li><a target="_blank" href="https://developer.okta.com/integrate-with-okta/">Integrate with Okta</a></li>
+                    <li><a href="/blog/">Blog</a></li>
+                    <li><a href="/docs/platform-release-notes/platform-release-notes.html">Release Notes</a></li>
+                    <li><a href="/3rd_party_notices/">3rd Party Notices</a></li>
+                </ul>
+            </div>
+
+            <div class="Column--3 Column--medium-6 Column--small-12">
+                <h4>Contact &amp; Legal</h4>
+                <ul class="Footer-links">
+                    <li><a href="https://developer.okta.com/contact/">Contact Sales</a></li>
+                    <li><a target="_blank" rel="noopener noreferrer" href="mailto:developers@okta.com">Contact Support</a></li>
+                    <li><a href="https://developer.okta.com/terms/">Terms &amp; Conditions</a></li>
+                    <li><a href="https://developer.okta.com/privacy/">Privacy Policy</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</footer>
+
+    <script type="text/javascript" src="/assets/master-0365dd27cf276cb2a15c0a43906ca592538204cf1ad4557547bf4e50609b411e.js"></script>
+    <script type="text/javascript" src="/assets/myOkta-911cbafbbe079b7a5522d9cbe15bd2a5f44e1582531e88393934bec69f97696b.js"></script>
+    
+    
+    
+    
+      <script type="text/javascript" src="/assets/blog-6e32dad27404131cc8630a5282264bed2ab4c08c91ac86fa496b75c53aa4f681.js"></script>
+    
+
+  <!-- START Post Footer -->
+  
+  <!-- START Google Tag Manager -->
+  <!-- https://support.google.com/tagmanager/answer/6103696?hl=en -->
+  <noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-TJ45R6" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+  <!-- END Google Tag Manager -->
+  <!-- START Google Remarketing Tag -->
+  <script type="text/javascript">
+    /* <![CDATA[ */
+    var google_conversion_id = 1006913831;
+    var google_custom_params = window.google_tag_params;
+    var google_remarketing_only = true;
+    /* ]]> */
+  </script>
+  <div style="display:none;"><script type="text/javascript" src="//www.googleadservices.com/pagead/conversion.js"></script></div>
+  <noscript><div style="display:inline;"><img height="1" width="1" style="border-style:none;" alt="" src="//googleads.g.doubleclick.net/pagead/viewthroughconversion/1006913831/?value=0&amp;guid=ON&amp;script=0"></div></noscript>
+  <!-- END Google Remarketing Tag -->
+  <!-- START Crazy Egg Tracking -->
+  <script type="text/javascript">
+    setTimeout(function(){var a=document.createElement("script");
+    var b=document.getElementsByTagName("script")[0];
+    a.src=document.location.protocol+"//script.crazyegg.com/pages/scripts/0021/9333.js?"+Math.floor(new Date().getTime()/3600000);
+    a.async=true;a.type="text/javascript";b.parentNode.insertBefore(a,b)}, 1);
+  </script>
+  <!-- END Crazy Egg Tracking -->
+
+  <!-- END Post Footer -->
+</body>
+</html>

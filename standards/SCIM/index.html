@@ -1,0 +1,2225 @@
+<!DOCTYPE html>
+<html class="no-js" lang="en" dir="ltr">
+<head>
+  <script>
+    var searchDomain = 'https://developer.okta.com';
+    var isProduction = window.location.hostname === 'developer.okta.com';
+    if (isProduction) {
+      // TypeKit
+      (function(d) {
+        var config = {
+          kitId: 'jff5neq',
+          scriptTimeout: 3000,
+          async: true
+        },
+        h=d.documentElement,t=setTimeout(function(){h.className=h.className.replace(/bwf-loadingb/g,"")+" wf-inactive";},config.scriptTimeout),tk=d.createElement("script"),f=false,s=d.getElementsByTagName("script")[0],a;h.className+=" wf-loading";tk.src='https://use.typekit.net/'+config.kitId+'.js';tk.async=true;tk.onload=tk.onreadystatechange=function(){a=this.readyState;if(f||a&&a!="complete"&&a!="loaded")return;f=true;clearTimeout(t);try{Typekit.load(config)}catch(e){}};s.parentNode.insertBefore(tk,s)
+      })(document);
+
+      // Google analytics
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+              (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+              m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+      ga('create', 'UA-15777010-3', 'auto');
+      ga('send', 'pageview');
+
+      // START Google Tag Manager
+      (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+      new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+      j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+      '//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+      })(window,document,'script','dataLayer','GTM-TJ45R6');
+      // END Google Tag Manager
+    }
+	</script>
+  <meta charset="utf-8">
+  <meta http-equiv="x-ua-compatible" content="IE=edge,chrome=1">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+ 	
+
+  <link type="text/css" rel="stylesheet" href="https://developer.okta.com/sites/all/themes/developer/css/master.css" media="all" />
+  <meta class="swiftype" name="title" data-type="string" content="SCIM Provisioning with Lifecycle Management | Okta Developer" />
+  <meta class="swiftype" name="summary" data-type="string" content="Enable SCIM-based provisioning from Okta to your application." />
+
+  <link type="text/css" rel="stylesheet" href="/assets/animate-ec43d72c3ed45e08a460b8a2966d8dba6006aebfa0530935c3973fa493a8771f.css">
+  <link type="text/css" rel="stylesheet" href="/assets/okta-a96df4c9d48b78b618e1d541f46f7137d73d40653571e020c1ad59edd7915c60.css">
+  
+  
+  <title>SCIM Provisioning with Lifecycle Management | Okta Developer</title>
+  <meta name="description" content="Enable SCIM-based provisioning from Okta to your application.">
+  <link rel="canonical" href="https://developer.okta.com/standards/SCIM/index"  data-proofer-ignore>
+  <link rel="alternate" type="application/rss+xml" title="Okta Developer" href="https://developer.okta.com/feed.xml"><!-- GA -->
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+  <link rel="manifest" href="/manifest.json">
+  <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#21313a">
+  <meta name="theme-color" content="#ffffff">
+</head>
+
+<body>
+  <div class="Page scim-provisioning-with-lifecycle-management Page--docs-page">
+    <!-- START Header -->
+    
+
+
+
+
+<header class="Header is-fixed">
+
+  <div class="Wrap">
+
+    <a class="Logo" href="https://developer.okta.com">
+      <svg version="1.1" id="OktaLogo" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 431.9 151.4" style="enable-background:new 0 0 431.9 151.4;" xml:space="preserve"><g><g><g><path d="M102.2,41.4c-21,0-38.1,17.1-38.1,38.1s17.1,38.1,38.1,38.1s38.1-17.1,38.1-38.1l0,0C140.3,58.5,123.2,41.4,102.2,41.4z M102.2,98.5c-10.5,0-19-8.5-19-19s8.5-19,19-19s19,8.5,19,19c0.1,10.5-8.4,19-18.9,19.1C102.3,98.6,102.2,98.6,102.2,98.5L102.2,98.5z"/><path d="M169.1,92.3c0-1.9,1.5-3.4,3.4-3.4c0.9,0,1.8,0.4,2.4,1c9.5,9.7,25.3,26.3,25.4,26.4c0.4,0.5,0.8,0.8,1.4,0.9l1.6,0.2h17.2c1.8,0,3.3-1.4,3.4-3.2c0-0.8-0.3-1.5-0.8-2.2l-28.6-29.2l-1.5-1.5c-3.2-3.9-2.9-5.4,0.8-9.3l22.6-25.1c1.1-1.4,0.8-3.5-0.6-4.6c-0.6-0.4-1.3-0.7-2-0.7h-17c-0.6,0.2-1.1,0.5-1.5,0.9L175,64.4c-1.3,1.4-3.4,1.5-4.8,0.2c-0.7-0.6-1.1-1.5-1.1-2.5V18.9c0-1.7-1.3-3-3-3c-0.1,0-0.2,0-0.3,0h-12.7c-2.2,0-3.3,1.5-3.3,2.8v95.8c0,2.2,1.8,2.8,3.3,2.8h12.7c1.7,0.1,3.2-1.2,3.3-2.9c0,0,0,0,0,0V92.3z"/><path d="M273,114l-1.4-12.8c-0.2-1.7-1.7-2.9-3.4-2.7c0,0,0,0-0.1,0l-2.9,0.2c-10.1,0-18.5-7.9-19-18c0-0.3,0-0.7,0-1V64.2c-0.1-2,1.5-3.6,3.5-3.7c0,0,0,0,0,0h17c1.7-0.1,3.1-1.5,3-3.2c0,0,0-0.1,0-0.1v-12c0-2.3-1.5-3.6-2.8-3.6h-17.1c-1.9,0.1-3.5-1.5-3.6-3.4c0,0,0,0,0,0V18.9c-0.1-1.7-1.5-3.1-3.2-3c0,0-0.1,0-0.1,0h-12.7c-1.6-0.1-3,1.1-3.1,2.7c0,0.1,0,0.1,0,0.2c0,0,0,61.7,0,62c0.5,21,17.9,37.6,38.9,37c1.4,0,2.9-0.2,4.3-0.3C272,117.2,273.2,115.7,273,114z"/></g><path d="M364.7,98c-10.8,0-12.4-3.8-12.4-18.3l0,0V44.8c0-1.8-1.4-3.2-3.2-3.2c0,0-0.1,0-0.1,0h-12.8c-1.8,0-3.2,1.4-3.3,3.2v1.6C314.6,36,291.3,42.5,281,60.8c-10.4,18.3-3.9,41.6,14.4,51.9c14,7.9,31.4,6.2,43.5-4.2c3.6,5.5,9.3,9.1,18.3,9.1c1.5,0,9.7,0.3,9.7-3.5v-13.6C367,99.2,366,98.1,364.7,98z M314.2,98.6c-10.5,0-19-8.5-19-19s8.5-19,19-19s19,8.5,19,19l0,0C333.2,90.1,324.7,98.6,314.2,98.6z"/></g><path d="M19.4,74c2.2-1.9,4.1-4.1,5.7-6.6c3.5-5.3,5.4-11.5,5.2-17.9V27c0-4.9,0.9-8.4,2.7-10.5c1.8-2.1,4.8-3,9.2-3h12.6c1.2,0,2.1-0.9,2.2-2.1l0,0V2.2C57,1,56,0,54.8,0c0,0,0,0,0,0H41.5c-7.8,0-12.9,2.1-18,7.6s-7.1,12.3-7.1,21.7v14.2c0,2.2-0.1,4-0.2,5.7v2.2c-0.5,3.2-1.8,6.2-3.6,8.9C9.4,64.7,5.1,70.9,0.9,74l0,0l-0.3,0.3l0,0l-0.2,0.3H0.2v0.3l0,0c-0.1,0.3-0.1,0.7,0,1l0,0v0.3h0.1l0.2,0.3l0,0l0.3,0.3l0,0c4.2,3.1,8.5,9.3,11.3,13.7c1.8,2.7,3.1,5.7,3.6,8.9v2.2c0.1,1.6,0.2,3.5,0.2,5.7v14.3c0,9.4,2.4,16.7,7.1,21.7s10.2,7.6,18,7.6h13.8c1.2,0,2.2-1,2.2-2.2V140l0,0c0-1.2-1-2.2-2.2-2.2H42.2c-4.4,0-7.5-1-9.2-3s-2.7-5.6-2.7-10.5v-22.4c0.2-6.4-1.7-12.6-5.2-17.9c-1.6-2.5-3.5-4.7-5.7-6.6l0,0c-0.9-0.7-1.1-2-0.4-2.9C19.2,74.3,19.3,74.2,19.4,74L19.4,74z"/><path d="M412.5,74c-2.2-1.9-4.1-4.1-5.7-6.6c-3.5-5.3-5.4-11.5-5.2-17.9V27c0-4.9-0.9-8.4-2.7-10.5s-4.8-3-9.2-3h-12.6c-1.2,0-2.2-1-2.2-2.2c0,0,0,0,0,0l0,0V2.2c0-1.2,1-2.2,2.2-2.2c0,0,0,0,0,0h13.4c7.8,0,12.9,2.1,18,7.6s7.1,12.3,7.1,21.7v14.2c0,2.2,0.1,4,0.2,5.7v2.2c0.5,3.2,1.8,6.2,3.6,8.9c2.8,4.5,7.1,10.7,11.3,13.7l0,0l0.3,0.3l0,0l0.2,0.3h0.1v0.3l0,0c0.1,0.3,0.1,0.7,0,1l0,0v0.3h-0.1l-0.2,0.3l0,0l-0.3,0.3l0,0c-4.2,3.1-8.5,9.3-11.3,13.7c-1.8,2.7-3.1,5.7-3.6,8.9v2.2c-0.1,1.6-0.2,3.5-0.2,5.7v14.3c0,9.4-2.4,16.7-7.1,21.7s-10.2,7.6-18,7.6h-13.4c-1.2,0-2.2-1-2.2-2.2c0,0,0,0,0,0V140l0,0c0-1.2,1-2.2,2.2-2.2l0,0h12.7c4.4,0,7.5-1,9.2-3s2.7-5.6,2.7-10.5v-22.4c-0.2-6.3,1.6-12.6,5.1-17.9c1.6-2.5,3.5-4.7,5.7-6.6l0,0c0.9-0.7,1.1-2,0.4-2.9C412.7,74.3,412.6,74.2,412.5,74L412.5,74z"/></g></svg>
+    </a>
+
+    <nav class="Header-nav PrimaryNav">
+      <ul class="menu">
+        <li class="first leaf">
+          <a href="https://developer.okta.com/product/">Product</a>
+        </li>
+        <li class="leaf">
+          <a href="https://developer.okta.com/pricing/">Pricing</a>
+        </li>
+        <li class="leaf">
+          <a href="/blog/">Blog</a>
+        </li>
+        <li class="leaf">
+          <a href="/documentation/" class="active">Docs</a>
+        </li>
+        <li class="last expanded">
+          <span class="nolink">Support</span>
+          <ul class="menu">
+            <li class="first leaf"><a href="https://devforum.okta.com/">Okta Developer Forums</a></li>
+            <li class="last leaf"><a href="mailto:developers@okta.com">developers@okta.com</a></li>
+          </ul>
+        </li>
+      </ul>
+      <a class="PrimaryNav-toggle" href="#">
+        <svg width="20px" height="20px" viewBox="0 0 20 20" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+            <g class="MenuIcon" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="round">
+                <path d="M1,16 L19,16" class="MenuIcon-line1" stroke="#FFFFFF" stroke-width="2"></path>
+                <path d="M1,4 L19,4" class="MenuIcon-line2" stroke="#FFFFFF" stroke-width="2"></path>
+                <path d="M1,10 L19,10" class="MenuIcon-line3" stroke="#FFFFFF" stroke-width="2"></path>
+                <path d="M1,10 L19,10" class="MenuIcon-line4" stroke="#FFFFFF" stroke-width="2"></path>
+            </g>
+        </svg>
+        <svg class="CloseIcon" width="16px" height="16px" viewBox="0 0 16 16" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+          <g id="ALl-Boards" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+            <g id="Desktop" transform="translate(-915.000000, -235.000000)" fill="#FFFFFF">
+              <g id="Search-bar-Active" transform="translate(30.000000, 26.000000)">
+                <polygon id="Icon/Cross" points="901 210.6 899.4 209 893 215.4 886.6 209 885 210.6 891.4 217 885 223.4 886.6 225 893 218.6 899.4 225 901 223.4 894.6 217"></polygon>
+              </g>
+            </g>
+          </g>
+        </svg>
+      </a>
+
+      <div class="PrimaryNav-cta">
+        <a target="_blank" rel="noopener noreferrer" href="https://login.okta.com/?SAMLRequest=fc%2B7CsJAEAXQXvAflu1NNJUMeZBGELTx1a%2FrYILJTtyZGD%2FfSBRiYzlw77lMnD3rSj3Qc0ku0YtgrhU6S5fSXRN9PKxmS52l00nMpq6iBvJWCrfDe4ss6vStRe9aDzmGIZfo1jsgwyWDMzUyiIV9vt1AH4XGk5ClSvewUgMNa%2BYW%2FVj5jxhm9NLP67QQaSAMu64L6CYmsFSHlnzT4ZlLwTgcL6Sf8%2FeX9AU%3Dhttps://login.okta.com/?SAMLRequest=fc%2B7CsJAEAXQXvAflu1NNJUMeZBGELTx1a%2FrYILJTtyZGD%2FfSBRiYzlw77lMnD3rSj3Qc0ku0YtgrhU6S5fSXRN9PKxmS52l00nMpq6iBvJWCrfDe4ss6vStRe9aDzmGIZfo1jsgwyWDMzUyiIV9vt1AH4XGk5ClSvewUgMNa%2BYW%2FVj5jxhm9NLP67QQaSAMu64L6CYmsFSHlnzT4ZlLwTgcL6Sf8%2FeX9AU%3D" class="Button--redOutline">Login</a>
+        <a href="https://developer.okta.com/signup/" class="Button--red">Sign up</a>
+      </div>
+
+      <a class="SearchIcon" href="#"></a>
+      <form id="form_search" class="SearchBar Formisimo_clocked_69929" method="get" action="https://developer.okta.com/search/" name="form_search" __bizdiag="-784164280" __biza="WJ__">
+        <input type="text" name="stq" autocomplete="off" id="st-search-input-auto" class="st-search-input" placeholder="Search">
+        <input type="submit" name="submit" value="GO">
+      </form>
+
+    </nav>
+
+  </div>
+
+</header>
+
+    <!-- END Header -->
+     <!-- START Page Center w/Sub Nav & Content -->
+    <section class="PageContent DynamicSidebar has-tableOfContents">
+      <!-- START Fixed sidebar --><aside class="Sidebar">
+  <h2 class="Sidebar-location Sidebar-toggle h6">Navigation</h2>
+  <div class="Sidebar-close Sidebar-toggle"></div>
+  <div>
+    <h3 class="Sidebar-title"><a href = "/authentication-guide/">Authentication Guide</a></h3>
+    <ul class="Sidebar-nav">
+      <li>
+        <a href = "/authentication-guide/auth-overview/">OAuth 2.0 Overview</a>
+        
+      </li>
+      <li>
+        <a href = "/authentication-guide/implementing-authentication/">Implementing OAuth 2.0</a>
+        
+      </li>
+      <li>
+      <a href = "/authentication-guide/social-login/">Social Login</a>
+      
+      </li>
+      <li>
+      <a href = "/authentication-guide/saml-login/">SAML Login</a>
+      
+      </li>
+      <li>
+      <a href = "/authentication-guide/tokens/">Working With Tokens</a>
+      
+      </li>
+      <!--
+      <li>
+      <a href = "/authentication-guide/custom-login/">Customizing Login</a>
+      
+      </li>
+    -->
+    </ul>
+
+    <h3 class="Sidebar-title">Use Cases</h3>
+    <ul class="Sidebar-nav">
+      <li>
+        <a href="/use_cases/authentication/">Authentication</a>
+      </li>
+      <li>
+        <a href="/use_cases/mfa/">Multi-Factor Authentication</a>
+      </li>
+      <li>
+        <a href="/use_cases/api_access_management/">API Access Management</a>
+      </li>
+      <li>
+        <a href="/use_cases/integrate_with_okta/">Integrate with Okta</a>
+      </li>
+    </ul>
+
+    <h3 class="Sidebar-title">Reference</h3>
+    <ul class="Sidebar-nav">
+      <li>
+        <a href="/docs/api/getting_started/api_test_client.html">Getting Started</a>
+      </li>
+      <li>
+        <a href="/docs/api/resources/authn.html">Authentication Reference</a>
+      </li>
+      <li>
+        <a href="/docs/api/resources/apps.html">API Reference</a>
+      </li>
+      <li>
+        <a href="/reference/error_codes/">Error Codes</a>
+      </li>
+      <li>
+        <a href="/reference/okta_expression_language/">Okta Expression Language</a>
+      </li>
+      <li>
+        <a href="/docs/platform-release-notes/platform-release-notes.html">Okta API Release Notes</a>
+      </li>
+    </ul>
+
+    <h3 class="Sidebar-title">Standards</h3>
+    <ul class="Sidebar-nav">
+      
+      
+      
+      <li>
+        <a href="/standards/OAuth/">OAuth 2.0 and Okta</a>
+      </li>
+      
+      
+      <li>
+        <a href="/standards/OIDC/">OpenID Connect and Okta</a>
+      </li>
+      
+      
+      <li>
+        <a href="/standards/SAML/">SAML</a>
+      </li>
+      
+      
+      
+      
+      <li class="is-active">
+        <a href="/standards/SCIM/">SCIM Provisioning with Lifecycle Management</a>
+      </li>
+      
+    </ul>
+
+    <script>
+      if (document.querySelectorAll("#Sidebar_Resources .is-active").length) {
+        document.getElementById('Sidebar_Resources').classList.remove('Sidebar-hide');
+      }
+
+      if (document.querySelectorAll("#Sidebar_References .is-active").length) {
+        document.getElementById('Sidebar_References').classList.remove('Sidebar-hide');
+      }
+    </script>
+  </div>
+</aside>
+<!-- END Fixed sidebar -->
+      <!-- START Page Content -->
+      <div class="PageContent-main" id="docs-body">
+        <a id="edit-link" href="https://github.com/okta/okta.github.io/edit/source/_source/_standards/SCIM/index.md" data-proofer-ignore>Edit Page</a>
+      <h1 id="scim-provisioning-with-oktas-lifecycle-management">SCIM: Provisioning with Okta’s Lifecycle Management</h1>
+<p>Developers at a software vendor (ISV), Okta customers, and system-integrators (SI) want to facilitate fast,
+enterprise-wide deployment of their app by integrating with Okta for user provisioning primarily via the SCIM standard.
+This article describes:</p>
+
+<ul>
+  <li>The provisioning actions and use cases that your integration should consider supporting.</li>
+  <li>The technical options for how to build the integration (focusing on SCIM).</li>
+  <li>The process for building, submitting for Okta Review, and publishing in the OIN (if you want the app available for all Okta customers).</li>
+</ul>
+
+<h2 id="understanding-provisioning-use-cases">Understanding Provisioning Use Cases</h2>
+
+<h3 id="the-value-of-provisioning">The Value of Provisioning</h3>
+
+<p>With the proliferation of cloud apps, today’s IT organizations are faced with the prospect of managing user accounts
+in an ever-expanding number of admin consoles for each app. This is not a problem if an enterprise has one or two cloud apps,
+but as the number grows, the situation quickly becomes unmanageable. Cloud app vendors hoping to sell into enterprises
+need to have an answer to this concern.</p>
+
+<p>Thousands of Okta customers have chosen our <a href="https://www.okta.com/products/lifecycle-management/">Lifecycle Management</a> product as the platform solution
+to address this challenge of managing the lifecycle of user accounts in their cloud apps,
+and a key feature of this product is integrations for automated provisioning to those apps.
+Lifecycle Management (Provisioning) automates many of the traditionally manual tasks required to on-board and off-board employees.
+New employees are automatically provisioned with user accounts in their apps, profile updates like department changes populate automatically,
+and inactive employees are automatically deactivated from their apps. By making these actions less time-consuming and error-prone,
+companies can cut costs, allow new employees to be immediately productive, and reduce the threat of data leakage.</p>
+
+<h3 id="provisioning-actions">Provisioning Actions</h3>
+
+<p>Provisioning consists of a set of actions between Okta and the cloud app.
+These actions are building blocks that combine to solve end-to-end use cases.
+As the developer, you’ll need to define the use cases that your target customer wants
+and the corresponding actions to build into your integration.</p>
+
+<p>The set of actions that an integration can do under the Provisioning umbrella
+are easily described with the acronym CRUD: the common database operations of Create, Read, Update, and Delete.
+CRUD actions relate to Provisioning in the following ways:</p>
+
+<h4 id="create-users">Create Users</h4>
+
+<p>Create new users in the downstream application based on values derived from the Okta user profile and Okta group assignment.</p>
+
+<h4 id="read-import-users-and-groups">Read (Import) Users and Groups</h4>
+
+<p>Import users &amp; groups from the downstream application in order to match them to existing Okta users, or to create new Okta users from the imported application.</p>
+
+<h4 id="update-users">Update Users</h4>
+
+<p>For an application user that is affiliated with an Okta user,
+update the downstream user’s attributes when the Okta user is updated.
+Or, update the Okta user attributes if the application functions as the <a href="#profile-mastering-users">master</a> for the full Okta user profile or specific attributes.</p>
+
+<h4 id="deprovision-deactivate-users">Deprovision (Deactivate) Users</h4>
+
+<p>Deprovisioning the application user removes access to the downstream application.
+This can take many forms, such as user disabled, user access permissions changed, or user license pulled.
+Each application may choose different methods for deactivating a user’s access.</p>
+
+<p>For audit purposes, Okta users are never deleted; they are deactivated instead.
+Because of this, Okta doesn’t make delete requests to the user APIs in downstream applications.</p>
+
+<h4 id="sync-password">Sync Password</h4>
+
+<p>Okta sets the user’s password to either match the Okta password or to be a randomly generated password.
+Learn more about the overall use case in <a href="https://help.okta.com/en/prod/Content/Topics/Security/Security_Using_Sync_Password.htm">Using Sync Password: Active Directory Environments</a>.</p>
+
+<h4 id="profile-mastering-users">Profile Mastering Users</h4>
+
+<blockquote>
+  <p>Profile Mastering Users is currently a  <a href="/docs/api/getting_started/releases-at-okta.html#beta"> <span class="api-label api-label-beta "> <i class="fa fa-warning"></i> Beta </span> </a>  feature for Okta’s SCIM-Based Provisioning option.
+<a href="/docs/api/getting_started/releases-at-okta.html#beta">Beta features</a> are made available to a small set of customers for testing and feedback.
+While in Beta, Okta may make breaking changes, so the integration with the feature can’t be published in the Okta Integration Network or used by customers in production environments.</p>
+</blockquote>
+
+<p>Mastering is a more sophisticated version of read (import) Users.
+Mastering defines the flow and maintenance of user-object attributes and their lifecycle state.
+When a profile is mastered from a given resource (application or directory),
+the Okta user profile’s attributes and lifecycle state are derived exclusively from that resource.
+In other words, an Okta user mastered by Active Directory (or HR system) has an Okta profile.
+However, the profile isn’t editable in Okta by the user or Okta admin, and derives its information exclusively from Active Directory.
+If the lifecycle state of the user in Active Directory moves to Disabled,
+the linked Okta user also switches to the corresponding lifecycle state of Deactivated on the next the read (import).</p>
+
+<h3 id="provisioning-use-cases">Provisioning Use Cases</h3>
+
+<p>Provisioning actions can be combined to solve for end-to-end use cases.</p>
+
+<h4 id="directory-as-master-downstream-provisioning">Directory-as-Master (Downstream Provisioning)</h4>
+
+<!-- Images for v2: https://oktawiki.atlassian.net/wiki/pages/viewpage.action?pageId=181895852 -->
+
+<p>In many enterprises, Active Directory (or LDAP) is the system of record for employee identities.
+Okta has developed a powerful, lightweight agent to sync with Active Directory to populate employee and group information.
+Within Okta, IT admins can leverage features such as <a href="https://help.okta.com/en/prod/Content/Topics/Directory/About_Universal_Directory.htm">Universal Directory</a> and <a href="https://help.okta.com/en/prod/Content/Topics/Directory/About_Universal_Directory.htm">group membership rules</a> to map that information when provisioning accounts and permissions in downstream apps.</p>
+
+<p>Subsequently, any updates to an employee’s profile, such as a change in department, in either Active Directory or Okta flow into the downstream app.
+Similarly, removing or deactivating an employee from Active Directory triggers deactivation in the downstream app as well.</p>
+
+<p>Okta supports these common Provisioning use cases:</p>
+
+<ul>
+  <li>Provision downstream apps automatically when new employee joins the company</li>
+  <li>Update downstream app automatically when employee profile attributes change</li>
+  <li>Remove employee access to downstream app automatically on termination or leave</li>
+  <li>Link existing downstream app users with Okta users using one-time app import</li>
+</ul>
+
+<h4 id="app-as-master">App-as-Master</h4>
+
+<blockquote>
+  <p>App-as-Master is currently a  <a href="/docs/api/getting_started/releases-at-okta.html#beta"> <span class="api-label api-label-beta "> <i class="fa fa-warning"></i> Beta </span> </a>  feature for Okta’s SCIM-Based Provisioning option.
+<a href="/docs/api/getting_started/releases-at-okta.html#beta">Beta features</a> are made available to a small set of customers for testing and feedback.
+While in Beta, Okta may make breaking changes, so the integration with the feature can’t be published in the Okta Application Network or used by customers in production environments.</p>
+</blockquote>
+
+<p>While most apps fit the category of a downstream app in the directory-as-master use case, some apps can be the master. This is the App-as-Master use case.</p>
+
+<p>The app-as-master use case typically applies to apps that can be used as the system of record for all employee profile information.
+An HR app like Workday or Successfactors Employee Central is the most common example.
+In this scenario, the HR app, not Active Directory, feeds employee profile details downstream into directories like AD and Okta, and apps like Box.</p>
+
+<!-- More info on configuring app-as-master in Okta is [here](). Note: link was missing from source -->
+
+<blockquote>
+  <p>Note: Integrations for the “App-as-Master” use case are significantly more complex than the Directory-as-Master use case and take more time to build and support.
+This is because these integrations sync a larger number of attributes and lifecycle states, and more directly impact the Okta user profile and downstream apps.</p>
+</blockquote>
+
+<h4 id="advanced-app-as-master-use-cases">Advanced App-as-Master Use Cases</h4>
+
+<p>There are several advanced App-as-Master use cases that aren’t currently supported by the SCIM-Based Provisioning option, but may be added in the future.
+Until then, consider out-of-band processes that work around these use cases.</p>
+
+<ul>
+  <li>
+    <p>Attribute-level mastering—The app wants to be the master for some employee attributes like phone number, while letting Okta or another app master other attributes. We call this attribute-level mastering.</p>
+  </li>
+  <li>
+    <p>Pre-hire interval—In an HR-as-Master use case, there is sometimes a desire to import the new employee into Okta from the HR app a few days prior to the hire/start date. This gives IT time to set up the employee’s apps in advance.
+A pre-hire interval configuration would specify how many days before the employee’s hire date Okta should import the employee.</p>
+  </li>
+  <li>
+    <p>Real-time sync/termination—In an HR-as-Master use case, a change in employee status within the HR system may need to be immediately reflected in Okta.
+Involuntary terminations is one scenario where an employee’s access to sensitive apps and content via Okta needs to be cut off within minutes.</p>
+  </li>
+  <li>
+    <p>Incremental/delta import—Importing a large number of user profiles from an app into Okta can take minutes, even hours.
+This can become a major performance and timing issue if frequent updates are needed. Currently, the SCIM-Based Provisioning option doesn’t support the ability to import only those user profiles that have changed since the last import. In the future, we may support this via filtering on <code class="highlighter-rouge">meta.lastModified</code>. (<a href="#filtering-on-metalastmodified">More information</a>)</p>
+  </li>
+</ul>
+
+<h2 id="ways-to-build-provisioning">Ways to Build Provisioning</h2>
+
+<p>Now that you understand the most common provisioning actions and use cases, let’s review your options to support provisioning as an app developer.
+While we outline a few different methods below, Okta recommends all ISVs support <a href="http://www.simplecloud.info/">the SCIM standard</a>.</p>
+
+<h3 id="provisioning-options-matrix">Provisioning Options Matrix</h3>
+
+<p>Okta has seen broad adoption of the standard in the market amongst our network of app developers over the course of 2016.
+Okta has doubled down on our investment in our SCIM client and launched our own SCIM provisioning developer program.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: left">Standard</th>
+      <th style="text-align: left">Recommendation</th>
+      <th style="text-align: left">Summary</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left">SCIM</td>
+      <td style="text-align: left"><strong>Recommended</strong></td>
+      <td style="text-align: left">Supports all of the use cases above.</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">SAML JIT (Just-in-Time)</td>
+      <td style="text-align: left">Not Recommended - Limited Functionality</td>
+      <td style="text-align: left">Just-in-Time Provisioning (JIT) is part of the SAML spec. Supports user/group Create and Update (upon user sign-on) but does not support Deactivate, Read, or Sync Password</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">Okta API</td>
+      <td style="text-align: left">Not Recommended - Not Verified by Okta</td>
+      <td style="text-align: left">Poll Okta API for user &amp; group CRUD operations. Polling Okta API is resource intensive, so provisioning won’t be real-time. Poor admin experience: cannot centralize within Okta</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="provisioning-to-on-premise-apps">Provisioning to On-Premise Apps</h3>
+
+<p>The options above are geared towards cloud apps but we have a solution for on-premise applications as well.
+See <a href="https://support.okta.com/help/Documentation/Knowledge_Article/46749316-On-Premises-Provisioning-Deployment-Guide">the product documentation</a> for details about Okta’s agent-based provisioning solution.</p>
+
+<h3 id="scim-facade">SCIM Facade</h3>
+
+<p>Sometimes it isn’t feasible for the cloud app to natively support a SCIM Server API.
+An alternative option is to build and host a SCIM facade middleware that translates
+between the Okta SCIM Client and the cloud app’s proprietary API. The Okta integration would be to this SCIM facade.</p>
+
+<blockquote>
+  <p>Have questions? Need help? Email us at <a href="mailto:developers@okta.com">developers@okta.com</a> or post your question on <a href="http://stackoverflow.com/search?q=okta,scim">Stack Overflow</a>.</p>
+</blockquote>
+
+<h2 id="scim-based-provisioning-integration">SCIM-Based Provisioning Integration</h2>
+
+<h3 id="overview">Overview</h3>
+
+<p>By implementing support for the SCIM standard, an application in the Okta
+Application Network can be notified when a user is created, updated,
+or removed from their application in Okta.</p>
+
+<p>If you haven’t heard of SCIM before, here is a good summary from the
+<a href="https://en.wikipedia.org/wiki/System_for_Cross-domain_Identity_Management">Wikipedia article on SCIM</a>:</p>
+
+<p>“System for Cross-domain Identity Management (SCIM) is an open
+standard for automating the exchange of user identity information
+between identity domains, or IT systems.”</p>
+
+<h3 id="understanding-user-provisioning-in-okta">Understanding User Provisioning in Okta</h3>
+
+<p>Okta is a universal directory that stores
+identity-related information.  Users can be created in Okta directly
+as local users or imported from external systems like Active
+Directory or a <a href="https://en.wikipedia.org/wiki/Category:Human_resource_management_software">Human Resource Management Software</a> system.</p>
+
+<p>An Okta user schema contains many different user attributes,
+but always contains a user name, first name, last name, and
+email address. This schema can be extended.</p>
+
+<p>Okta user attributes can be mapped from a source into Okta and can
+be mapped from Okta to a target.</p>
+
+<p>Below are the main operations in Okta’s SCIM user provisioning lifecycle:</p>
+
+<ol>
+  <li>Create a user account.</li>
+  <li>Read a list of accounts, with support for searching for a preexisting account.</li>
+  <li>Update an account (user profile changes, entitlement changes, etc).</li>
+  <li>Deactivate an account.</li>
+</ol>
+
+<p>In Okta, an application instance is a connector that provides Single Sign-On
+and provisioning functionality with the target application.</p>
+
+<h3 id="required-scim-server-capabilities">Required SCIM Server Capabilities</h3>
+
+<p>Okta supports provisioning to both SCIM 1.1 and SCIM 2.0 APIs.</p>
+
+<p>If you haven’t implemented SCIM, Okta recommends that you implement
+SCIM 2.0.</p>
+
+<p>Okta implements SCIM 2.0 as described in RFCs <a href="https://tools.ietf.org/html/rfc7642">7642</a>, <a href="https://tools.ietf.org/html/rfc7643">7643</a>, <a href="https://tools.ietf.org/html/rfc7644">7644</a>.</p>
+
+<p>If you are writing a SCIM implementation for the first time, an
+important part of the planning process is determining which of
+Okta’s provisioning features your SCIM API can or should support and
+which features you do not need to support.</p>
+
+<p>Specifically, you do not need to implement the SCIM 2.0
+specification fully to work with Okta. At a minimum, Okta requires that
+your SCIM 2.0 API implement the features described below:</p>
+
+<h4 id="base-url">Base URL</h4>
+
+<p>The API endpoint for your SCIM API <strong>MUST</strong> be secured via <a href="https://tools.ietf.org/html/rfc5246">TLS</a>
+(<code class="highlighter-rouge">https://</code>), Okta <em>does not</em> connect to unsecured API endpoints.</p>
+
+<p>You can choose any Base URL for your API endpoint. If you
+are implementing a brand new SCIM API, we suggest using <code class="highlighter-rouge">/scim/v2</code>
+as your Base URL; for example: <code class="highlighter-rouge">https://example.com/scim/v2</code> -
+however, you must support the URL structure described in the
+<a href="https://tools.ietf.org/html/rfc7644#section-3.2">“SCIM Endpoints and HTTP Methods” section of RFC7644</a>.</p>
+
+<p>If you have multiple Okta orgs, you can use the same SCIM server for all of them.
+Implement a subdomain for the SCIM server and each subdomain, for example: <code class="highlighter-rouge">https://subdomain.example.com/scim/v2</code>, where
+<code class="highlighter-rouge">subdomain</code> represent one Okta org. Let’s say you have three Okta orgs: company-a.okta.com, company-b.okta.com and company-c.okta.com.
+From each org you can pass a base URL containing the name of the org: <code class="highlighter-rouge">https://company-a.example.com/scim/v2</code>, <code class="highlighter-rouge">https://company-b.example.com/scim/v2</code> or  <code class="highlighter-rouge">https://company-c.example.com/scim/v2</code>.
+In your SCIM server, you can read which subdomain the request is coming from and identify the org.</p>
+
+<h4 id="authentication">Authentication</h4>
+
+<p>Your SCIM API <strong>MUST</strong> be secured against anonymous access. At the
+moment, Okta supports authentication against SCIM APIs with one of
+the following methods:</p>
+
+<ol>
+  <li><a href="https://tools.ietf.org/html/rfc6749#section-4.1">OAuth 2.0 Authorization Code Grant Flow</a></li>
+  <li><a href="https://en.wikipedia.org/wiki/Basic_access_authentication">Basic Authentication</a></li>
+  <li>Custom HTTP Header</li>
+</ol>
+
+<blockquote>
+  <p>Okta doesn’t support OAuth 2.0 <a href="https://tools.ietf.org/html/rfc6749#section-1.3.3">Resource Owner Password Credentials grant flows</a>.</p>
+</blockquote>
+
+<h4 id="basic-user-schema">Basic User Schema</h4>
+
+<p>Your service must be capable of storing the following four user
+attributes:</p>
+
+<ol>
+  <li>User ID (<code class="highlighter-rouge">userName</code>)</li>
+  <li>First Name (<code class="highlighter-rouge">name.givenName</code>)</li>
+  <li>Last Name (<code class="highlighter-rouge">name.familyName</code>)</li>
+  <li>Email (<code class="highlighter-rouge">emails</code>)</li>
+</ol>
+
+<p>Note that Okta supports more than the four user attributes listed
+above. However, these four attributes are the base attributes that
+you must support.  The full user schema for SCIM 2.0 is described
+in <a href="https://tools.ietf.org/html/rfc7643#section-4">section 4 of RFC 7643</a>.</p>
+
+<blockquote>
+  <p><strong>Best Practice:</strong> Keep your User ID distinct from the User Email
+Address. Many systems use an email address as a user identifier,
+but this is not recommended, as email addresses often change. Using
+a unique User ID to identify user resources prevents future
+complications.</p>
+</blockquote>
+
+<p>If your service supports user attributes beyond those four base
+attributes, add support for those additional
+attributes to your SCIM API. In some cases, you might need to
+configure Okta to map non-standard user attributes into the user
+profile for your application.</p>
+
+<p>Included in this git repository is a sample application written in
+Python/Flask, this sample application implements SCIM 2.0. Below is
+how this sample application defines these attributes:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>userName = db.Column(db.String(250),
+                     unique=True,
+                     nullable=False,
+                     index=True)
+familyName = db.Column(db.String(250))
+middleName = db.Column(db.String(250))
+givenName = db.Column(db.String(250))
+</code></pre>
+</div>
+
+<p>In addition to the basic user schema user attributes described
+above, your SCIM API must also have a unique identifier for each
+user resource and should also support marking resources as “active”
+or “inactive.”</p>
+
+<p>In the SCIM specification, the <code class="highlighter-rouge">id</code> attribute is used to uniquely
+identify resources. <a href="https://tools.ietf.org/html/rfc7643#section-3.1">Section 3.1</a> of <a href="https://tools.ietf.org/html/rfc7643">RFC 7643</a> provides more details
+on the <code class="highlighter-rouge">id</code> attribute:</p>
+
+<blockquote>
+  <p>“A unique identifier for a SCIM resource as defined by the service
+provider.  Each representation of the resource MUST include a
+non-empty “id” value.  This identifier MUST be unique across the
+SCIM service provider’s entire set of resources.  It MUST be a
+stable, identifier that can’t be reassigned, that is, it doesn’t change when the
+same resource is returned in subsequent requests.  The value of
+the “id” attribute is always issued by the service provider and
+MUST NOT be specified by the client.  The string “bulkId” is a
+reserved keyword and MUST NOT be used within any unique identifier
+value.  The attribute characteristics are “caseExact” as “true”, a
+mutability of “readOnly”, and a “returned” characteristic of
+“always”.”</p>
+</blockquote>
+
+<p>Our sample application defines <code class="highlighter-rouge">id</code> as a UUID, since
+<a href="https://tools.ietf.org/html/rfc7643">RFC 7643</a> requires that “this identifier MUST be unique across the
+SCIM service provider’s entire set of resources.”</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>id = db.Column(db.String(36), primary_key=True)
+</code></pre>
+</div>
+
+<p><strong>Note:</strong> Your SCIM API can use anything as an <code class="highlighter-rouge">id</code>, provided that the <code class="highlighter-rouge">id</code>
+uniquely identifies reach resource, as described in <a href="https://tools.ietf.org/html/rfc7643#section-3.1">section 3.1</a> of
+<a href="https://tools.ietf.org/html/rfc7643">RFC 7643</a>.</p>
+
+<p>Finally, your SCIM API must also support marking a resource as
+“active” or “inactive.”</p>
+
+<p>In our sample application, each user resource has a Boolean
+“active” attribute which is used to mark a user resource as
+“active” or “inactive”:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>active = db.Column(db.Boolean, default=False)
+</code></pre>
+</div>
+
+<h4 id="functionality">Functionality</h4>
+
+<p>Your SCIM API must support the following SCIM API endpoints to work with Okta:</p>
+
+<p><img src="/assets/scim_flowchart-b676222ceafd669b4bf0bba32b7a3741a4c5882f23ad294022b1f222be8787ba.png" alt="scim api endpoints required to work with Okta" width="640px" /></p>
+
+<h5 id="create-account-post-users">Create Account: POST /Users</h5>
+
+<p>Your SCIM 2.0 API should allow the creation of a new user
+account.  The four basic attributes listed above must be supported, along
+with any additional attributes that your application supports.  If your
+application supports entitlements, your SCIM 2.0 API should allow
+configuration of those as well.</p>
+
+<p>An HTTP POST to the <code class="highlighter-rouge">/Users</code> endpoint must return an immutable or
+system ID of the user (<code class="highlighter-rouge">id</code>) must be returned to Okta.</p>
+
+<p>Okta will call this SCIM API endpoint under the following circumstances:</p>
+
+<ul>
+  <li>
+    <p><strong>Direct assignment</strong></p>
+
+    <p>When a user is assigned to an Okta application using the “Assign
+to People” button in the “People” tab.</p>
+  </li>
+  <li>
+    <p><strong>Group-based assignment</strong></p>
+
+    <p>When a user is added to a group that is assigned to an Okta
+application. For example, an Okta administrator can assign a
+group of users to an Okta application using the “Assign to
+Groups” button in the “Groups” tab. When a group is assigned to an
+Okta application, Okta sends updates to the assigned
+application when a user is added or removed from that group.</p>
+  </li>
+</ul>
+
+<p>Below is an example demonstrating how the sample application handles account
+creation:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>@app.route("/scim/v2/Users", methods=['POST'])
+def users_post():
+    user_resource = request.get_json(force=True)
+    user = User(user_resource)
+    user.id = str(uuid.uuid4())
+    db.session.add(user)
+    db.session.commit()
+    rv = user.to_scim_resource()
+    send_to_browser(rv)
+    resp = flask.jsonify(rv)
+    resp.headers['Location'] = url_for('user_get',
+                                       user_id=user.userName,
+                                       _external=True)
+    return resp, 201
+</code></pre>
+</div>
+
+<p>Note: <code class="highlighter-rouge">force=True</code> is set because Okta sends
+<code class="highlighter-rouge">application/scim+json</code> as the <code class="highlighter-rouge">Content-Type</code> and the <code class="highlighter-rouge">.get_json()</code>
+method expects <code class="highlighter-rouge">application/json</code>.</p>
+
+<p>For more information on user creation via the <code class="highlighter-rouge">/Users</code> SCIM
+endpoint, see <a href="https://tools.ietf.org/html/rfc7644#section-3.3">section 3.3</a> of the <a href="https://tools.ietf.org/html/rfc7644">SCIM 2.0 Protocol Specification</a>.</p>
+
+<h5 id="read-list-of-accounts-with-search-get-users">Read list of accounts with search: GET /Users</h5>
+
+<p>Your SCIM 2.0 API must support the ability for Okta to retrieve
+users (and entitlements like groups if available) from your
+service.  This allows Okta to fetch all user resources in an
+efficient manner for reconciliation and initial bootstrap (to
+get all users from your app into the system).</p>
+
+<p>Here is an example using <code class="highlighter-rouge">curl</code> to make a GET request to <code class="highlighter-rouge">/Users</code>:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>curl https://joel-scim.herokuapp.com/scim/v2/Users
+</code></pre>
+</div>
+
+<p>Below is how the sample application handles listing user resources,
+with support for filtering and pagination:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>@app.route("/scim/v2/Users", methods=['GET'])
+def users_get():
+    query = User.query
+    request_filter = request.args.get('filter')
+    match = None
+    if request_filter:
+        match = re.match('(\w+) eq "([^"]*)"', request_filter)
+    if match:
+        (search_key_name, search_value) = match.groups()
+        search_key = getattr(User, search_key_name)
+        query = query.filter(search_key == search_value)
+    count = int(request.args.get('count', 100))
+    start_index = int(request.args.get('startIndex', 1))
+    if start_index &lt; 1:
+        start_index = 1
+    start_index -= 1
+    query = query.offset(start_index).limit(count)
+    total_results = query.count()
+    found = query.all()
+    rv = ListResponse(found,
+                      start_index=start_index,
+                      count=count,
+                      total_results=total_results)
+    return flask.jsonify(rv.to_scim_resource())
+</code></pre>
+</div>
+
+<blockquote>
+  <p>If you want to see the SQL query that SQLAlchemy is using for
+the query, add this code after the <code class="highlighter-rouge">query</code> statement that you want
+to see: <code class="highlighter-rouge">print(str(query.statement))</code></p>
+</blockquote>
+
+<p>For more details on the <code class="highlighter-rouge">/Users</code> SCIM endpoint, see <a href="https://tools.ietf.org/html/rfc7644#section-3.4.2">section 3.4.2</a>
+of the <a href="https://tools.ietf.org/html/rfc7644">SCIM 2.0 Protocol Specification</a>.</p>
+
+<h5 id="read-account-details-get-usersid">Read Account Details: GET /Users/{id}</h5>
+
+<p>Your SCIM 2.0 API must support fetching of users by user id.</p>
+
+<p>Below is how the sample application handles returning a user resource
+by <code class="highlighter-rouge">user_id</code>:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>@app.route("/scim/v2/Users/&lt;user_id&gt;", methods=['GET'])
+def user_get(user_id):
+    try:
+        user = User.query.filter_by(id=user_id).one()
+    except:
+        return scim_error("User not found", 404)
+    return render_json(user)
+</code></pre>
+</div>
+
+<p>If we don’t find a user, we return a HTTP status 404 (“Not found”)
+with SCIM error message.</p>
+
+<p>For more details on the <code class="highlighter-rouge">/Users/{id}</code> SCIM endpoint, see <a href="https://tools.ietf.org/html/rfc7644#section-3.4.1">section 3.4.1</a>
+of the <a href="https://tools.ietf.org/html/rfc7644">SCIM 2.0 Protocol Specification</a>.</p>
+
+<h5 id="update-account-details-put-usersid">Update Account Details: PUT /Users/{id}</h5>
+
+<p>When a profile attribute of a user assigned to your SCIM enabled
+application is changed, Okta will do the following:</p>
+
+<ul>
+  <li>Make a GET request against <code class="highlighter-rouge">/Users/{id}</code> on your SCIM API for the
+user to update.</li>
+  <li>Take the resource returned from your SCIM API and update only the
+attributes that need to be updated.</li>
+  <li>Make a PUT request against <code class="highlighter-rouge">/Users/{id}</code> in your SCIM API with
+the updated resource as the payload.</li>
+</ul>
+
+<p>Examples of things that can cause changes to an Okta user profile
+are:</p>
+
+<ul>
+  <li>A change in profile a master like Active Directory or a Human Resource
+Management Software system.</li>
+  <li>A direct change of a profile attribute in Okta for a local user.</li>
+</ul>
+
+<p>Below is how the sample application handles account profile updates:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>@app.route("/scim/v2/Users/&lt;user_id&gt;", methods=['PUT'])
+def users_put(user_id):
+    user_resource = request.get_json(force=True)
+    user = User.query.filter_by(id=user_id).one()
+    user.update(user_resource)
+    db.session.add(user)
+    db.session.commit()
+    return render_json(user)
+</code></pre>
+</div>
+
+<p>For more details on updates to the <code class="highlighter-rouge">/Users/{id}</code> SCIM endpoint, see <a href="https://tools.ietf.org/html/rfc7644#section-3.5.1">section 3.5.1</a>
+of the <a href="https://tools.ietf.org/html/rfc7644">SCIM 2.0 Protocol Specification</a>.</p>
+
+<h5 id="deactivate-account-patch-usersid">Deactivate Account: PATCH /Users/{id}</h5>
+
+<p>Deprovisioning is perhaps the most important reason customers why
+customers ask that your application supports provisioning
+with Okta. Your SCIM API should support account deactivation via a
+PATCH to <code class="highlighter-rouge">/Users/{id}</code> where the payload of the PATCH request sets
+the <code class="highlighter-rouge">active</code> property of the user to <code class="highlighter-rouge">false</code>.
+Okta also does a PUT if the Patch is not supported for deactivation.</p>
+
+<p>Your SCIM API should allow account updates at the attribute level.
+If entitlements are supported, your SCIM API should also be able
+to update entitlements based on SCIM profile updates.</p>
+
+<p>Okta will send a PATCH request to your application to deactivate a
+user when an Okta user is “unassigned” from your
+application. Examples of when this happen are as follows:</p>
+
+<ul>
+  <li>A user is manually unassigned from your application.</li>
+  <li>A user is removed from a group which is assigned to your application.</li>
+  <li>When a user is deactivated in Okta, either manually or via
+by an external profile master like Active Directory or a Human
+Resource Management Software system.</li>
+</ul>
+
+<p>Below is how the sample application handles account deactivation:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>@app.route("/scim/v2/Users/&lt;user_id&gt;", methods=['PATCH'])
+def users_patch(user_id):
+    patch_resource = request.get_json(force=True)
+    for attribute in ['schemas', 'Operations']:
+        if attribute not in patch_resource:
+            message = "Payload must contain '{}' attribute.".format(attribute)
+            return message, 400
+    schema_patchop = 'urn:ietf:params:scim:api:messages:2.0:PatchOp'
+    if schema_patchop not in patch_resource['schemas']:
+        return "The 'schemas' type in this request is not supported.", 501
+    user = User.query.filter_by(id=user_id).one()
+    for operation in patch_resource['Operations']:
+        if 'op' not in operation and operation['op'] != 'replace':
+            continue
+        value = operation['value']
+        for key in value.keys():
+            setattr(user, key, value[key])
+    db.session.add(user)
+    db.session.commit()
+    return render_json(user)
+</code></pre>
+</div>
+
+<p>For more details on user attribute updates to <code class="highlighter-rouge">/Users/{id}</code> SCIM endpoint, see <a href="https://tools.ietf.org/html/rfc7644#section-3.5.2">section 3.5.2</a>
+of the <a href="https://tools.ietf.org/html/rfc7644">SCIM 2.0 Protocol Specification</a>.</p>
+
+<h5 id="filtering-on-username-eq-required">Filtering on <code class="highlighter-rouge">userName eq</code> (Required)</h5>
+
+<p>Your SCIM API must be able to filter users following the pattern  “userName eq “…” “.
+This is because most provisioning actions, besides Import Users, require the ability
+for Okta to determine if a user resource exists on your system.</p>
+
+<p>Consider the scenario where an Okta customer with thousands of
+users has a provisioning integration with your system, which also
+has thousands of users. When an Okta customer adds a new user to
+their Okta organization, Okta needs a way to determine quickly if a
+resource for the newly created user was previously created on your
+system.</p>
+
+<p>Examples of filters that Okta might send to your SCIM API are as
+follows:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>userName eq "jane.doe"
+
+userName eq "jane.doe@example.com"
+</code></pre>
+</div>
+
+<p>Here is an example of how to implement SCIM filtering in Python:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>request_filter = request.args.get('filter')
+match = None
+if request_filter:
+    match = re.match('(\w+) eq "([^"]*)"', request_filter)
+if match:
+    (search_key_name, search_value) = match.groups()
+    search_key = getattr(User, search_key_name)
+    query = query.filter(search_key == search_value)
+</code></pre>
+</div>
+
+<p>For more details on filtering in SCIM 2.0, see <a href="https://tools.ietf.org/html/rfc7644#section-3.4.2.2">section 3.4.2.2</a>
+of the <a href="https://tools.ietf.org/html/rfc7644">SCIM 2.0 Protocol Specification</a>.</p>
+
+<h5 id="filtering-on-additional-parameters-optional">Filtering on Additional Parameters (Optional)</h5>
+
+<p>Okta currently only supports filtering on <code class="highlighter-rouge">username eq</code>. However, we may support additional parameters and operators in the future to unlock new use cases. You may want to support these now to future-proof your application. These additional filters may include the following:</p>
+
+<p><code class="highlighter-rouge">meta.lastModified</code>: This filter would be needed to fetch incremental updates
+from SCIM APIs by querying for resources using a filter expression
+that requests resources which were updated since the last update. This will likely be done using the <code class="highlighter-rouge">gt</code> filter operator. For
+example:</p>
+
+<blockquote>
+  <p><code class="highlighter-rouge">filter=meta.lastModified gt "2011-05-13T04:42:34Z"</code></p>
+</blockquote>
+
+<p><code class="highlighter-rouge">externalId</code>: Okta may use the <code class="highlighter-rouge">externalId</code> as a more robust alternative to <code class="highlighter-rouge">userName</code> when determining if the user already exists in your application during a reactivation flow. <code class="highlighter-rouge">externalId</code> is a more stable identifier for users, because the <code class="highlighter-rouge">userName</code> and email addresses for a user can change.</p>
+
+<p>Here is an example of an <code class="highlighter-rouge">externalId</code> filter that might be sent to
+your application:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>externalId eq "00u1abcdefGHIJKLMNOP"
+</code></pre>
+</div>
+
+<p>For details about supporting <code class="highlighter-rouge">externalId</code>, see
+<a href="https://tools.ietf.org/html/rfc7643#section-3.1">section 3.1</a> of <a href="https://tools.ietf.org/html/rfc7643">RFC 7643</a>, excerpted below.
+Note that in the following excerpt, “provisioning client” refers to Okta and the service provider refers to you, the 3rd-party that Okta is making calls to.</p>
+
+<blockquote>
+  <p>(externalId is) “A String that is an identifier for the resource
+as defined by the provisioning client.  The “externalId” may
+simplify identification of a resource between the provisioning
+client and the service provider by allowing the client to use a
+filter to locate the resource with an identifier from the
+provisioning domain, obviating the need to store a local mapping
+between the provisioning domain’s identifier of the resource and
+the identifier used by the service provider.  Each resource MAY
+include a non-empty “externalId” value.  The value of the
+“externalId” attribute is always issued by the provisioning
+client and MUST NOT be specified by the service provider.  The
+service provider MUST always interpret the externalId as scoped
+to the provisioning domain.  While the server does not enforce
+uniqueness, it is assumed that the value’s uniqueness is
+controlled by the client setting the value.</p>
+</blockquote>
+
+<p>When adding support for <code class="highlighter-rouge">externalId</code> filtering to your application,
+we suggest that you use OAuth2.0 for authentication and use the
+OAuth2.0 <code class="highlighter-rouge">client_id</code> to scope the <code class="highlighter-rouge">externalId</code> to the provisioning
+domain.</p>
+
+<p><code class="highlighter-rouge">emails</code> and <code class="highlighter-rouge">id</code>: Both of these attributes could also be used by Okta to determine if the user already exists in your application, instead of <code class="highlighter-rouge">userName</code> or <code class="highlighter-rouge">externalId</code>.</p>
+
+<h5 id="resource-paging">Resource Paging</h5>
+
+<p>When returning large lists of resources, your SCIM implementation
+must support pagination using a <em>limit</em> (<code class="highlighter-rouge">count</code>) and <em>offset</em>
+(<code class="highlighter-rouge">startIndex</code>) to return smaller groups of resources in a request.</p>
+
+<p>Below is an example of a <code class="highlighter-rouge">curl</code> command that makes a request to the
+<code class="highlighter-rouge">/Users/</code> SCIM endpoint with <code class="highlighter-rouge">count</code> and <code class="highlighter-rouge">startIndex</code> set:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>$ curl 'https://scim-server.example.com/scim/v2/Users?count=1&amp;startIndex=1'
+{
+  "Resources": [
+    {
+      "active": false,
+      "id": 1,
+      "meta": {
+        "location": "http://scim-server.example.com/scim/v2/Users/1",
+        "resourceType": "User"
+      },
+      "name": {
+        "familyName": "Doe",
+        "givenName": "Jane",
+        "middleName": null
+      },
+      "schemas": [
+        "urn:ietf:params:scim:schemas:core:2.0:User"
+      ],
+      "userName": "jane.doe@example.com"
+    }
+  ],
+  "itemsPerPage": 1,
+  "schemas": [
+    "urn:ietf:params:scim:api:messages:2.0:ListResponse"
+  ],
+  "startIndex": 0,
+  "totalResults": 1
+}
+</code></pre>
+</div>
+
+<blockquote>
+  <p>Note: When returning a paged resource, your API should return a
+capitalized <code class="highlighter-rouge">Resources</code> JSON key (“Resources”), however Okta will also
+support a lowercase string (“resources”). Okta will also accept
+lowercase JSON strings for the keys of child nodes inside
+<code class="highlighter-rouge">Resources</code> object such as <code class="highlighter-rouge">startindex</code>, <code class="highlighter-rouge">itemsperpage</code>, or <code class="highlighter-rouge">totalresults</code>.</p>
+</blockquote>
+
+<p>One way to handle paged resources is to have your database do the
+paging for you. Here is how the sample application handles
+pagination with SQLAlchemy:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>count = int(request.args.get('count', 100))
+start_index = int(request.args.get('startIndex', 1))
+if start_index &lt; 1:
+    start_index = 1
+start_index -= 1
+query = query.offset(start_index).limit(count)
+</code></pre>
+</div>
+
+<p>Note: This code subtracts “1” from the
+<code class="highlighter-rouge">startIndex</code>, because <code class="highlighter-rouge">startIndex</code> is <a href="https://tools.ietf.org/html/rfc7644#section-3.4.2">1-indexed</a> and
+the OFFSET statement is <a href="http://www.postgresql.org/docs/8.0/static/queries-limit.html">0-indexed</a>.</p>
+
+<p>For more details pagination on a SCIM 2.0 endpoint, see <a href="https://tools.ietf.org/html/rfc7644#section-3.4.2.4">section 3.4.2.4</a>
+of the <a href="https://tools.ietf.org/html/rfc7644">SCIM 2.0 Protocol Specification</a>.</p>
+
+<h5 id="rate-limiting">Rate Limiting</h5>
+
+<p>Some customer actions, such as adding hundreds of users at once,
+causes large bursts of HTTP requests to your SCIM API. For
+scenarios like this, we suggest that your SCIM API return rate
+limiting information to Okta via the <a href="https://en.wikipedia.org/wiki/List_of_HTTP_status_codes#429">HTTP 429 Too Many Requests</a>
+status code. This helps Okta throttle the rate at which SCIM
+requests are made to your API.</p>
+
+<p>For more details on rate limiting requests using the HTTP 429
+status code, see <a href="https://tools.ietf.org/html/rfc6585#section-4">section 4</a> of <a href="https://tools.ietf.org/html/rfc6585">RFC 6585</a>.</p>
+
+<h5 id="get-groups-api-endpoint">GET /Groups API Endpoint</h5>
+
+<p>Okta currently supports the /Groups endpoint for GET /Groups of a SCIM API. This is usually done to check for groups data and is not mandatory for SCIM to work. The minimum check we require is for the resources to be of JSON. check example below.</p>
+
+<p>Example:</p>
+
+<div class="language-sh highlighter-rouge"><pre class="highlight"><code><span class="o">{</span>
+  <span class="s2">"schemas"</span>: <span class="o">[</span>
+    <span class="s2">"urn:ietf:params:scim:api:messages:2.0:ListResponse"</span>
+  <span class="o">]</span>,
+  <span class="s2">"totalResults"</span>: 1,
+  <span class="s2">"startIndex"</span>: 0,
+  <span class="s2">"itemsPerPage"</span>: 0,
+  <span class="s2">"Resources"</span>: <span class="o">[</span>
+    <span class="o">{</span>
+      <span class="s2">"id"</span>: <span class="s2">"66ed8bece1944aa18bf96fb5c935c4ba"</span>,
+      <span class="s2">"schemas"</span>: <span class="o">[</span>
+        <span class="s2">"urn:ietf:params:scim:schemas:core:2.0:Group"</span>
+      <span class="o">]</span>,
+      <span class="s2">"displayName"</span>: <span class="s2">"Marketing"</span>,
+      <span class="s2">"members"</span>: <span class="o">[</span>
+        <span class="o">{</span>
+          <span class="s2">"value"</span>: <span class="s2">"m1@atko.com"</span>,
+          <span class="s2">"</span><span class="nv">$ref</span><span class="s2">"</span>: <span class="s2">"localhost:8080/Users/12345"</span>,
+          <span class="s2">"display"</span>: <span class="s2">"Marketing User 1"</span>
+        <span class="o">}</span>,
+        <span class="o">{</span>
+          <span class="s2">"value"</span>: <span class="s2">"m2@atko.com"</span>,
+          <span class="s2">"</span><span class="nv">$ref</span><span class="s2">"</span>: <span class="s2">"localhost:8080/Users/12346"</span>,
+          <span class="s2">"display"</span>: <span class="s2">"Marketing User 2"</span>
+        <span class="o">}</span>
+      <span class="o">]</span>
+    <span class="o">}</span>
+  <span class="o">]</span>
+<span class="o">}</span>
+</code></pre>
+</div>
+
+<h5 id="create-group-post-groups">Create Group: POST /Groups</h5>
+
+<p>With Group Push Beta, Okta now supports creation of a Group along with its user memberships in the downstream SCIM enabled application if your SCIM 2.0 API supports it. The caveat is that the users must already be provisioned in your SCIM enabled application.</p>
+
+<h5 id="read-group-details-get-groupsid">Read Group Details: GET /Groups/{id}</h5>
+
+<p>With Group Push Beta, Okta now supports reading the Group’s details by group id along with the membership details. If a Group is not found, your SCIM application may return a HTTP status 404(“not found”).For more details on the <code class="highlighter-rouge">/Groups/{id}</code> SCIM endpoint, see <a href="https://tools.ietf.org/html/rfc7644#section-3.4.1">section 3.4.1</a> of the <a href="https://tools.ietf.org/html/rfc7644">SCIM 2.0 Protocol Specification</a>.</p>
+
+<h5 id="update-group-details-put-groupsid">Update Group Details: PUT /Groups/{id}</h5>
+
+<p>With Group Push Beta, any updates to the Group profile and memberships in Okta can now be reflected into your SCIM application. Okta will do the following to make the Group changes effective:</p>
+<ul>
+  <li>Make a GET request against <code class="highlighter-rouge">/Groups/{id}</code> on your SCIM API for the
+group to update.</li>
+  <li>Take the resource returned from your SCIM API and update only the
+attributes that need to be updated.</li>
+  <li>Make a PUT request against <code class="highlighter-rouge">/Groups/{id}</code> in your SCIM API with
+the updated resource as the payload.</li>
+</ul>
+
+<h5 id="delete-group-delete-groupsid">Delete Group: DELETE /Groups/{id}</h5>
+
+<p>With Group Push Beta, Okta can delete the Group in your SCIM enabled application. For more details on deleting resources, see section <a href="https://tools.ietf.org/html/rfc7644#section-3.6">3.6</a> of the <a href="https://tools.ietf.org/html/rfc7644">SCIM 2.0 Protocol Specification</a>.</p>
+
+<h3 id="scim-features-not-implemented-by-okta">SCIM Features Not Implemented by Okta</h3>
+
+<p>The following features are currently not supported by Okta:</p>
+
+<h4 id="delete-usersid">DELETE /Users/{id}</h4>
+
+<p>Deleting users via DELETE is covered in
+<a href="https://tools.ietf.org/html/rfc7644#section-3.6">section 3.6</a> of the <a href="https://tools.ietf.org/html/rfc7644">SCIM 2.0 Protocol Specification</a>.</p>
+
+<p>Okta users are never <strong>deleted</strong>; they are <strong>deactivated</strong>
+instead. Because of this, Okta never makes an HTTP DELETE
+request to a user resource on your SCIM API. Instead, Okta makes
+an HTTP PATCH request to set the <code class="highlighter-rouge">active</code> setting to <code class="highlighter-rouge">false</code>.</p>
+
+<h4 id="querying-with-post">Querying with POST</h4>
+
+<p>The ability to query users with a POST request is described in
+<a href="https://tools.ietf.org/html/rfc7644#section-3.4.3">section 3.4.3</a> of the <a href="https://tools.ietf.org/html/rfc7644">SCIM 2.0 Protocol Specification</a>.</p>
+
+<p>Querying using POST is sometimes useful if your query contains
+<a href="https://en.wikipedia.org/wiki/Personally_identifiable_information">personally identifiable information</a> that would be exposed in
+system logs if used query parameters with a GET request.</p>
+
+<p>Okta currently does not support this feature.</p>
+
+<h4 id="bulk-operations">Bulk Operations</h4>
+
+<p>The ability to send a large collection of resource operations in a
+single request is covered in
+<a href="https://tools.ietf.org/html/rfc7644#section-3.7">section 3.7</a> of the <a href="https://tools.ietf.org/html/rfc7644">SCIM 2.0 Protocol Specification</a>.</p>
+
+<p>Okta currently does not support this feature and makes
+one request per resource operation.</p>
+
+<h4 id="me-authenticated-subject-alias">“/Me” Authenticated Subject Alias</h4>
+
+<p>The <code class="highlighter-rouge">/Me</code> URI alias for the current authenticated subject is
+covered in
+<a href="https://tools.ietf.org/html/rfc7644#section-3.11">section 3.11</a> of the <a href="https://tools.ietf.org/html/rfc7644">SCIM 2.0 Protocol Specification</a>.</p>
+
+<p>Okta does not currently make SCIM requests with the <code class="highlighter-rouge">/Me</code> URI alias.</p>
+
+<h4 id="schemas-api-endpoint">/Schemas API endpoint</h4>
+
+<p>Okta does not currently make queries against the <code class="highlighter-rouge">/Schemas</code>
+endpoint, but this functionality is being planned.</p>
+
+<p>Here is the specification for the <code class="highlighter-rouge">/Schemas</code> endpoint, from
+<a href="https://tools.ietf.org/html/rfc7644#section-4">section 4</a> of <a href="https://tools.ietf.org/html/rfc7644">RFC 7644</a>:</p>
+
+<blockquote>
+  <p>An HTTP GET to this endpoint is used to retrieve information about
+resource schemas supported by a SCIM service provider.  An HTTP
+GET to the endpoint “/Schemas” SHALL return all supported schemas
+in ListResponse format (see Figure 3).  Individual schema
+definitions can be returned by appending the schema URI to the
+/Schemas endpoint.  For example:</p>
+
+  <p><code class="highlighter-rouge">/Schemas/urn:ietf:params:scim:schemas:core:2.0:User</code></p>
+
+  <p>The contents of each schema returned are described in Section 7 of
+RFC7643.  An example representation of SCIM schemas may be found
+in Section 8.7 of RFC7643.</p>
+</blockquote>
+
+<h4 id="serviceproviderconfig-api-endpoint">/ServiceProviderConfig API endpoint</h4>
+
+<p>Okta does not currently make queries against the <code class="highlighter-rouge">/ServiceProviderConfig</code>
+endpoint, but this functionality is being planned.</p>
+
+<p>Here is the specification for the <code class="highlighter-rouge">/ServiceProviderConfig</code> endpoint, from
+<a href="https://tools.ietf.org/html/rfc7644#section-4">section 4</a> of <a href="https://tools.ietf.org/html/rfc7644">RFC 7644</a>:</p>
+
+<blockquote>
+  <p>An HTTP GET to this endpoint will return a JSON structure that
+describes the SCIM specification features available on a service
+provider.  This endpoint SHALL return responses with a JSON object
+using a “schemas” attribute of
+<code class="highlighter-rouge">urn:ietf:params:scim:schemas:core:2.0:ServiceProviderConfig</code>.
+The attributes returned in the JSON object are defined in
+Section 5 of RFC7643.  An example representation of SCIM service
+provider configuration may be found in Section 8.5 of RFC7643.</p>
+</blockquote>
+
+<h4 id="filtering-on-metalastmodified">Filtering on meta.lastModified</h4>
+
+<p>Okta does not currently make queries for resources using
+<code class="highlighter-rouge">meta.lastModified</code> as part of a filter expression.</p>
+
+<p>Okta plans to add functionality to fetch incremental updates
+from SCIM APIs by querying for resources using a filter expression
+that requests resources which were updated since the last update.</p>
+
+<p>This will likely be done using the <code class="highlighter-rouge">gt</code> filter operator. For
+example:</p>
+
+<blockquote>
+  <p><code class="highlighter-rouge">filter=meta.lastModified gt "2011-05-13T04:42:34Z"</code></p>
+</blockquote>
+
+<h2 id="publishing-your-scim-based-provisioning-integration">Publishing Your SCIM-Based Provisioning Integration</h2>
+
+<h3 id="process">Process</h3>
+
+<p>In order to allow customers to use your SCIM provisioning integration with Okta,
+you’ll need to get your app published in <a href="https://www.okta.com/resources/find-your-apps/">the Okta Integration Network</a>.</p>
+
+<p>Follow the steps below to test and submit your application for Okta review:</p>
+
+<ol>
+  <li>Review Okta’s SCIM Docs &amp; Prepare Your App</li>
+  <li>Test Your SCIM Server</li>
+  <li>Submit for Okta Review</li>
+  <li>Test with Customers</li>
+  <li>Publish to Okta Integration Network (OIN)</li>
+</ol>
+
+<blockquote>
+  <p>Have questions? Need help? Email us at <a href="mailto:developers@okta.com">developers@okta.com</a> or post your question on <a href="http://stackoverflow.com/search?q=okta,scim">Stack Overflow</a>.</p>
+</blockquote>
+
+<h3 id="private-app-option">Private App Option</h3>
+
+<p>The OIN is for making an integration publicly discoverable and accessible to all Okta customers.
+However, you can also just use the integration privately within a few named orgs.
+This could be the case if you are a system integrator, customer, or Okta PS integrating to a custom app.
+If this is the case, follow steps 1-3 and you will be able to indicate in step 3 that you don’t want to publish in OIN.
+Okta will create the submitted integration per usual and assign it to Orgs that you specify as a private app.
+Note that you cannot use the SCIM template app used for prototyping, as it has limitations that prevent it from being used in production.</p>
+
+<h4 id="review-oktas-scim-docs--prepare-your-app">Review Okta’s SCIM Docs &amp; Prepare Your App</h4>
+
+<p>The first step is to build a compliant SCIM server.
+Even if you already support SCIM, it is important that you review Okta’s SCIM docs above,
+especially the following sections, to understand the specifics of Okta’s support for the SCIM standard:</p>
+
+<ul>
+  <li><a href="#understanding-user-provisioning-in-okta">Understanding User Provisioning in Okta</a></li>
+  <li><a href="#required-scim-server-capabilities">Required SCIM Server Capabilities</a></li>
+  <li><a href="#scim-features-not-implemented-by-okta">SCIM Features Not Implemented by Okta</a></li>
+</ul>
+
+<h4 id="test-your-scim-server">Test Your SCIM Server</h4>
+
+<h5 id="testing-your-scim-server-with-runscope">Testing your SCIM server with Runscope</h5>
+
+<p>The easiest way for you to develop and verify your SCIM integration
+is to make use of an automated test suite that runs on Runscope.</p>
+
+<p>If you are already familiar with Runscope, then import the
+OKTA SCIM Spec Test JSON API test (for SCIM 1.1 or SCIM 2.0) and configure the <code class="highlighter-rouge">SCIM Base
+  URL</code> variable to point at the base URL for your SCIM server, for
+example: <code class="highlighter-rouge">https://example.com/scim/v2</code>.</p>
+
+<ul>
+  <li><a href="SCIMFiles/Okta-SCIM-20-SPEC-Test.json">Okta SCIM 2.0 Spec Test JSON</a></li>
+  <li><a href="SCIMFiles/Okta-SCIM-11-SPEC-Test.json">Okta SCIM 1.1 Spec Test JSON</a></li>
+</ul>
+
+<p>If you are not familiar with Runscope, follow the detailed
+instructions below to get started with using Runscope to test your
+SCIM server.</p>
+
+<h5 id="set-up-runscope">Set up Runscope</h5>
+
+<p>If you do not have a Runscope account already, we suggest starting
+with <a href="https://www.runscope.com/okta">Runscope’s free trial plan for Okta</a>. Here is how to get started:</p>
+
+<ol>
+  <li>Download the Okta SCIM Spec Test for your version of SCIM:
+    <ul>
+      <li><a href="SCIMFiles/Okta-SCIM-20-SPEC-Test.json">Okta SCIM 2.0 Spec Test JSON</a></li>
+      <li><a href="SCIMFiles/Okta-SCIM-11-SPEC-Test.json">Okta SCIM 1.1 Spec Test JSON</a></li>
+    </ul>
+
+    <p>You will use this file to import Okta’s SCIM test suite into Runscope.)</p>
+  </li>
+  <li><a href="http://www.runscope.com/signup">Sign up for Runscope</a>.</li>
+  <li>You may see a tutorial after signing up for Runscope, if so, click
+    “Skip Tutorial”.</li>
+  <li>You should now see a screen that says “API Tests”.</li>
+  <li>In the lower left of your screen, click on the “Import Tests”
+    link.</li>
+  <li>You should now see a title that starts with “Import Tests into
+    …”</li>
+  <li>Select “Runscope API Tests” as the format to import</li>
+  <li>Click the “Choose File” button and select the JSON file that you saved in Step 1.</li>
+  <li>Click the blue “Import API Test” button.</li>
+  <li>After the import completes, click on the “All Tests” link on
+the left hand side of your screen.</li>
+</ol>
+
+<p>Now that you’ve imported Okta’s SCIM test suite into Runscope, your
+next step will be to customize the test suite for the SCIM
+integration that you are writing.</p>
+
+<h5 id="customize-the-imported-runscope-test-for-your-scim-integration">Customize the imported Runscope test for your SCIM integration</h5>
+
+<p>After importing Okta’s SCIM test suite into Runscope, you will need to
+configure the test for your SCIM integration. Here is how to do that:</p>
+
+<ol>
+  <li>You should be looking at the “API Tests” screen in Runscope, if
+not, click on the “Tests” tab on the top of Runscope’s user interface.</li>
+  <li>You should see a test named “Okta SCIM 2.0 Tests”, if not,
+follow the “Set up Runscope” steps above.</li>
+  <li>Move your mouse over the “Okta SCIM 2.0 Tests” test, then select
+the “Edit” link on the lower left of the test.</li>
+  <li>In the “Environment” section of your test, you should see a
+collapsed “Test Settings” section, click the arrow on the left
+of “Test Settings” to expand this section.</li>
+  <li>
+    <p>“Initial Variables” should be selected, click the “Add Initial
+Variable” link and add the following:</p>
+
+    <table>
+      <thead>
+        <tr>
+          <th style="text-align: left">Variable Name (Case Sensitive)</th>
+          <th style="text-align: left">Example Values</th>
+          <th style="text-align: left">Notes</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td style="text-align: left">SCIMBaseURL</td>
+          <td style="text-align: left">https://example.com/scim/v2</td>
+          <td style="text-align: left">For example, if your SCIM integration is hosted on https://example.com and uses a prefix of /scim/v2 then the “SCIM Base URL” for your integration would be: https://example.com/scim/v2.</td>
+        </tr>
+        <tr>
+          <td style="text-align: left">auth</td>
+          <td style="text-align: left">Bearer abcxyz1234567890</td>
+          <td style="text-align: left">Basic/Oauth authorization values</td>
+        </tr>
+      </tbody>
+    </table>
+  </li>
+  <li>
+    <p>Add the <a href="SCIMFiles/Initial_Script_Spec.txt">Initial Script Spec</a>.</p>
+
+    <p>If you are developing your SCIM integration in a local
+development environment, we suggest using the excellent tool
+<a href="https://ngrok.com/">ngrok</a> to expose your local development environment to Runscope.</p>
+  </li>
+  <li>Click the “Save” button at the top of the test.</li>
+</ol>
+
+<h5 id="running-oktas-scim-tests-against-your-scim-server">Running Okta’s SCIM tests against your SCIM server</h5>
+
+<p>Now that you have updated your SCIM test in Runscope for your SCIM
+server, it is time to run the test:</p>
+
+<ol>
+  <li>If you followed the steps above, you should now be seeing a “Run
+Now” button at the top of your test.</li>
+  <li>Click the “Run Now” button.</li>
+  <li>On the left side of your screen, you will see a test show up in
+the “Recent Test Results” section.</li>
+  <li>Click on the top test in the “Recent Test Results” section.</li>
+  <li>If the test is still running, you will see live updates of the
+test in progress. Once the test is complete, you will see the
+results of your test.</li>
+  <li>
+    <p>To see the details of tests, click on the little arrow next to
+each test to expand the details of a particular test case.</p>
+
+    <p>Doing this will allow you to see the <strong>Request</strong> and <strong>Response</strong>
+for each HTTP request that was made.</p>
+  </li>
+  <li>Since this test is running in your own Runscope instance, we
+encourage you to update the tests to better fit your own
+environment.</li>
+  <li>See <a href="#required-scim-server-capabilities">Required SCIM Server Capabilities</a> for details
+about your SCIM server needs to implement to pass all of
+the tests.</li>
+  <li>Keep running this test suite until all the tests pass.
+Here is an <a href="https://www.runscope.com/radar/qmovuxkrhtws/f95ac15f-3f22-46c3-8f1a-1001fbf8fb66/history/6a35fabf-5ce5-4e48-a13f-7292b1bd3cc5">example of a test suite where all tests pass</a>.</li>
+</ol>
+
+<h5 id="sharing-test-results-from-runscope">Sharing test results from Runscope</h5>
+
+<p>As you are developing your SCIM server, you will likely want to
+share test results with teammates or with Okta.</p>
+
+<p>Here is how to share a test result from Runscope with someone else:</p>
+
+<ol>
+  <li>Open the test result that you want to share.</li>
+  <li>At the top of the test result, Change the “Private / Shareable”
+toggle from “Private” to “Shareable”.</li>
+  <li>Copy the URL for the test result, it will look something like
+this:
+<code class="highlighter-rouge">https://www.runscope.com/radar/abcdefghijkl/m01nopq2-3456-7r8s-9012-t34567uvw890/history/123ef4gh-i567-89j0-1k2l-3m4n5o678901</code></li>
+  <li>Share that URL with the person that you want to share the test
+result with. Here is an example test result from Runscope:
+<a href="https://www.runscope.com/radar/qmovuxkrhtws/f95ac15f-3f22-46c3-8f1a-1001fbf8fb66/history/6a35fabf-5ce5-4e48-a13f-7292b1bd3cc5">https://www.runscope.com/radar/qmovuxkrhtws/f95ac15f-3f22-46c3-8f1a-1001fbf8fb66/history/6a35fabf-5ce5-4e48-a13f-7292b1bd3cc5</a></li>
+</ol>
+
+<h4 id="testing-your-scim-server-with-okta">Testing your SCIM server with Okta</h4>
+
+<p>Once you have a SCIM server that passes all of the Runscope tests,
+test your SCIM integration directly with Okta. To do so, you will first need to sign up for <a href="https://developer.okta.com/signup/">an Okta developer account</a>.</p>
+
+<p>Note: If you are using OAuth Authorization Code Grant flow as your authentication method
+or need to support the Profile Master action, Okta will need to custom-configure a template app for you.
+Please request this in your email to <a href="mailto:developers@okta.com">developers@okta.com</a>.</p>
+
+<ol>
+  <li>
+    <p>Navigate to the admin interface in your Okta org by clicking <strong>Admin</strong>.
+ <img src="/assets/scim-end-user-ui-32cadb05aec228479af6e097f4772d36d82e70304da4dfc77d54021951c34248.png" alt="Admin Button" /></p>
+  </li>
+  <li>
+    <p>Click <strong>Applications</strong>, then <strong>Add Application</strong>.
+ <img src="/assets/scim-apps-59a8d7217be20b7bff0afd740dddd93941a4e0ff3e406fdb9eea8f13a672f02f.png" alt="Admin Button" /></p>
+  </li>
+  <li>
+    <p>Search for “SCIM”. You’ll see three different SCIM template applications for each SCIM version (1.1 and 2.0) based off of the various authentication methods you could choose to support (Header Auth, Basic Auth, or Bearer Token).
+ <img src="/assets/scim-templates-fca69c7de7d0b54b2397bfc1038a12ae9ef3a5eb4a54bc040395183178960a5e.png" alt="Admin Button" /></p>
+  </li>
+</ol>
+
+<h4 id="submit-for-okta-review">Submit for Okta Review</h4>
+
+<p>Once you have a functioning SCIM app integration in your developer org, there are a few steps to submit it for Okta review via the OIN Manager.</p>
+
+<p>Your submission provides Okta with all the metadata needed to create a customized app for publication in <a href="https://www.okta.com/resources/find-your-apps/?_ga=1.200024301.294942002.1477328324">the Okta Integration Network</a>. Okta will review the submission, create the customized app, run it through our internal QA, and then make it available in your developer org for your own testing.</p>
+
+<p>We recommend completing these five steps before actual submission, with detailed instructions in the next section:</p>
+
+<ol>
+  <li>Check the Profile Attributes for your application.</li>
+  <li>Check the Attribute Mappings for your application.</li>
+  <li>Run the second set of Runscope tests: Okta SCIM 2.0 CRUD Test.</li>
+  <li>Prepare the customer-facing configuration guide.</li>
+  <li>Create a demo video showing working integration (optional)</li>
+</ol>
+
+<p>After performing these steps, navigate to the OIN Manager at <a href="https://oanmanager.okta.com/">https://oanmanager.okta.com/</a> to complete the submission form and track review status.</p>
+
+<h5 id="check-the-profile-attributes-for-your-application">Check the Profile Attributes for your application</h5>
+
+<p>Before submitting your application to Okta, you should check the
+User Attributes to make sure that the attributes are set to what
+you would want your users to see.</p>
+
+<p>Check your Profile Attributes as follows:</p>
+
+<ul>
+  <li>From the “Admin” section in Okta, open the settings page for your
+application.</li>
+  <li>In the “Provisioning” tab, scroll to the bottom and click the
+“Edit Attributes” button in the “User Attributes” section.</li>
+  <li>A “Profile Editor” screen will open, check the following settings:
+    <ul>
+      <li>The “Display name” for the application</li>
+      <li>The “Description”</li>
+      <li>
+        <p>In the “Attributes” section, remove all attributes that are not
+supported by your application.</p>
+
+        <p>This is an important step! Your users will get confused if your
+application appears to support attributes that are not
+supported by your SCIM API.</p>
+
+        <p>You can delete an attribute by selecting it, then
+clicking the “Delete” button located in right hand attribute details pane.
+Before removing, check the mapping between Okta and Application and
+<strong>remove the mappings</strong> for the attribute(s) to be deleted.</p>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+<h5 id="check-the-attribute-mappings-for-your-application">Check the Attribute Mappings for Your Application</h5>
+
+<p>The last step for you to complete before submitting your
+application to Okta is to check the User Profile Mappings for your
+application. These mappings are what determine how profile
+attributes are mapped to and from your application to an Okta
+user’s Universal Directory profile.</p>
+
+<p>To check the User Profile Mappings for your application, do the
+following:</p>
+
+<ul>
+  <li>From the “Admin” section in Okta, open the settings page for your
+application.</li>
+  <li>In the “Provisioning” tab, scroll to the bottom and click the
+“Edit Mappings” button in the “Attribute Mappings” section.</li>
+  <li>Check that each mapping is what you would expect it to be. Be
+sure to check both of the following:
+    <ol>
+      <li>From your application to Okta.</li>
+      <li>From Okta to your application.</li>
+    </ol>
+  </li>
+</ul>
+
+<h5 id="run-the-second-set-of-runscope-tests-okta-scim-20-crud-test">Run the Second Set of Runscope Tests: Okta SCIM 2.0 CRUD Test</h5>
+
+<p>This is an important test that needs to be run in order to check if the Application
+can handle the <strong>CR</strong>eate, <strong>U</strong>pdate and <strong>D</strong>eactivate (CRUD) users functionality from Okta.
+This allows the Application to be tested with actual Okta integration so thereby achieving end to end testing.</p>
+
+<p>The test follows this pattern:</p>
+
+<ol>
+  <li>Check the Application added to the Okta org (Preview org or Developer account org)</li>
+  <li>Adds a new user in Okta.</li>
+  <li>Assign the user to the application.</li>
+  <li>Validates in the Application if the user has been created.</li>
+  <li>Update the user firstName attribute in Okta.</li>
+  <li>Validates in the Application if the user attribute has been updated.</li>
+  <li>Deactivate the user in Okta.</li>
+  <li>Validates in the Application if the user has been deactivated.</li>
+  <li>Reactivate the user in Okta</li>
+  <li>Re assign the Application to the user.</li>
+  <li>Validates the user creation/update in Application.</li>
+</ol>
+
+<p>If you are already familiar with Runscope, then import the
+OKTA SCIM 2.0 CRUD Test and configure the <code class="highlighter-rouge">SCIM Base
+  URL</code> variable to point at the base URL for your SCIM server, for
+example: <code class="highlighter-rouge">https://example.com/scim/v2</code>.</p>
+
+<ul>
+  <li><a href="SCIMFiles/Okta-SCIM-CRUD-Test.json">Okta SCIM 2.0 CRUD Test JSON</a></li>
+</ul>
+
+<p>If you are not familiar with Runscope, follow <a href="#set-up-runscope">the detailed
+instructions</a> to get started with using Runscope to test your
+SCIM server.</p>
+
+<h5 id="prepare-the-customer-facing-configuration-guide">Prepare the Customer-Facing Configuration Guide</h5>
+
+<p>We recommend preparing the customer-facing configuration guide before beginning to work through the submission document.
+This guide will be exposed externally in Okta’s admin interface to end customers.
+For more details, see the <a href="http://saml-doc.okta.com/Provisioning_Docs/SCIM_Configuration_Guide_Instructions.pdf">configuration guide guidelines</a>.</p>
+
+<p>Note: When you are ready, use <a href="https://oanmanager.okta.com/">this form</a> to submit for Okta review.</p>
+
+<h4 id="test-with-customers">Test with Customers</h4>
+
+<p>We require that one joint customer successfully validate that the integration is working as expected from their perspective before making it publicly available in the Okta Integration Network for any customer to use without assistance.</p>
+
+<p>Here’s the process for getting joint customers involved in testing a newly developed SCIM integration:</p>
+
+<ol>
+  <li>Identify joint customers interested in piloting the integration.</li>
+  <li>Once identified, an Okta admin from the joint customer emails <a href="mailto:developers@okta.com">developers@okta.com</a> and asks for this integration to be assigned to their Okta org (be sure to specify the org subdomain in the request). Okta assigns the app.</li>
+  <li>Integration and configuration review with the joint customer. Partners are responsible for managing the customer identification and testing process, but Okta can support as needed. Please coordinate by emailing <a href="mailto:developers@okta.com">developers@okta.com</a>.</li>
+  <li>The Okta admin emails <a href="mailto:developers@okta.com">developers@okta.com</a> directly stating that the integration is working as expected.</li>
+</ol>
+
+<h4 id="publish-to-okta-integration-network">Publish to Okta Integration Network</h4>
+
+<p>In order for an app to be published in the Okta Integration Network, it must meet the following criteria:</p>
+
+<ul>
+  <li>ISV configuration guide explaining:
+    <ul>
+      <li>The supported features</li>
+      <li>Step-by-step instructions for setting up the integration</li>
+    </ul>
+  </li>
+  <li>Gotchas &amp; known issues</li>
+  <li>Support and Contact Info</li>
+  <li>ISV Support Contact</li>
+  <li>ISV Escalation Contact</li>
+  <li>Full, permanent test tenant provided to Okta</li>
+  <li>RunScope Test Suite</li>
+  <li>Final Full QA by Okta</li>
+  <li>Customer validation</li>
+</ul>
+
+<h2 id="provisioning-faqs">Provisioning FAQs</h2>
+
+<h3 id="scim-technical-questions">SCIM Technical Questions</h3>
+
+<p><strong>What are the differences between SCIM 1.1 and 2.0?</strong></p>
+
+<ul>
+  <li>
+    <p>Namespaces:  Namespaces are different, therefore 2.0 is not backwards compatible with 1.1</p>
+
+    <table>
+      <thead>
+        <tr>
+          <th>SCIM 1.1</th>
+          <th>SCIM 2.0</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><code class="highlighter-rouge">urn:scim:schemas:core:1.0 urn:scim:schemas:extension:enterprise:1.0</code></td>
+          <td><code class="highlighter-rouge">urn:ietf:params:scim:schemas:core:2.0:User urn:ietf:params:scim:schemas:extension:enterprise:2.0:User</code></td>
+        </tr>
+      </tbody>
+    </table>
+  </li>
+  <li>
+    <p>Service Provider Configuration Endpoint: There’s no <code class="highlighter-rouge">s</code> at the end of the SCIM 2.0 endpoint.</p>
+
+    <table>
+      <thead>
+        <tr>
+          <th>SCIM 1.1</th>
+          <th>SCIM 2.0</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><code class="highlighter-rouge">/ServiceProviderConfigs</code></td>
+          <td><code class="highlighter-rouge">/ServiceProviderConfig</code></td>
+        </tr>
+      </tbody>
+    </table>
+  </li>
+  <li>
+    <p>Patch Protocol</p>
+
+    <table>
+      <thead>
+        <tr>
+          <th>SCIM 1.1</th>
+          <th>SCIM 2.0</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><a href="http://www.simplecloud.info/specs/draft-scim-api-01.html#edit-resource-with-patch">Section 3.3.2</a></td>
+          <td><a href="https://tools.ietf.org/html/rfc7644#section-3.5.2">Section 3.5.2: Uses JSON Patch</a></td>
+        </tr>
+      </tbody>
+    </table>
+  </li>
+  <li>
+    <p>Error Response Schema</p>
+
+    <table>
+      <thead>
+        <tr>
+          <th>SCIM 1.1</th>
+          <th>SCIM 2.0</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><a href="http://www.simplecloud.info/specs/draft-scim-api-01.html#anchor6">Section 3.9</a></td>
+          <td><a href="https://tools.ietf.org/html/rfc7644#section-3.12">Section 3.12</a></td>
+        </tr>
+      </tbody>
+    </table>
+  </li>
+  <li>
+    <p>Reference Type</p>
+
+    <table>
+      <thead>
+        <tr>
+          <th>SCIM 1.1</th>
+          <th>SCIM 2.0</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>N/A</td>
+          <td>Supports reference type pointing to the full URL of another SCIM Resource</td>
+        </tr>
+      </tbody>
+    </table>
+  </li>
+  <li>
+    <p>Query by POST /search</p>
+
+    <table>
+      <thead>
+        <tr>
+          <th>SCIM 1.1</th>
+          <th>SCIM 2.0</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>N/A</td>
+          <td><a href="https://tools.ietf.org/html/rfc7644#section-3.4.3">Section 3.4.3</a></td>
+        </tr>
+      </tbody>
+    </table>
+  </li>
+</ul>
+
+<p><strong>Our API is similar to SCIM, but is not 100% compliant. Can we still integrate with Okta?</strong></p>
+
+<p>Unfortunately, your app’s SCIM server API must be fully SCIM compliant in order to integrate with Okta.
+Okta’s SCIM client endpoints are hard coded into a template which adhere directly to <a href="http://www.simplecloud.info/">the SCIM spec</a>.
+Not all capabilities of the SCIM spec need to be supported (see <a href="#required-scim-server-capabilities">Required SCIM Server Capabilities</a> in our SCIM Technical Reference) but the core schema and features do need to be supported.</p>
+
+<p><strong>SCIM is a new standard. How broadly is it being adopted by cloud app vendors and how confident can I be in the SCIM standard’s long-term viability?</strong></p>
+
+<p>Okta has seen significant SCIM momentum in the market amongst our network of app developers over the past year.
+Hot new apps like <a href="https://api.slack.com/scim">Slack</a>
+and <a href="https://www.lucidchart.com/techblog/2016/08/04/an-implementers-overview-managing-cloud-identity-with-scim/">Lucidchart</a>
+are supporting SCIM as well established software companies
+like <a href="https://github.com/Huddle/huddle-apis/wiki/Integrating%20with%20SCIM">Huddle</a>
+and <a href="https://developer.citrixonline.com/implementing-scim-apis">Citrix</a>.
+Okta has doubled down on our investment in our SCIM server
+and launched our own SCIM provisioning developer program.
+The SCIM standards is strong and is run by Salesforce, Google, and Sailpoint (Okta is also a contributor).</p>
+
+<p><strong>How should I be managing authentication to my SCIM API?</strong></p>
+
+<p>Okta recommends using the OAuth 2.0 Authorization Code Grant Flow (aka “three-legged OAuth).
+Okta doesn’t support the Client Credentials or Resource Owner Password Credentials Authorization grant flows.
+The Authorization Code Grant Flow is more common in SaaS/cloud and is also more secure.
+In addition to OAuth, Okta also supports basic auth and header token auth options.</p>
+
+<p><strong>I have a multi-tenant app how do I allow my customers to customize their specific tenant in Okta?</strong></p>
+
+<p>Use the three-legged OAuth (Authorization Grant flow),
+so that you know exactly which token/key the customer is using.
+Another option is by URL. When the customer configures your app in Okta, we can prompt them to add their unique subdomain for your app  (see Zscaler app below).
+Okta can use part of this url in the SCIM endpoint for that customer, for example http://www.company.com/tenantA/scim or http://www.company.com/tenantB/scim).
+This subdomain field can be configured with Okta after you submit your app for Okta review.</p>
+
+<p><img src="/assets/scim-scalar-9512a9e239e9e1ecf99b293b57ebee76fb8d8df4151ded9f07422f81f0ce225b.png" alt="Example SCIM endpoint with subdomain" /></p>
+
+<p><strong>Why do I need to implement the type attribute for attributes such as emails/phoneNumbers/addresses?</strong></p>
+
+<p>The SCIM User Profile allows for an array of emails. The only way to differentiate between emails is to use the <code class="highlighter-rouge">type</code> sub-attribute.</p>
+
+<ul>
+  <li>When returning multi-valued attributes, service providers SHOULD canonicalize the value returned (e.g., by returning a value for the sub-attribute “type”, such as “home” or “work”) when appropriate (e.g., for email addresses and URLs).</li>
+  <li>Service providers MAY return element objects with the same “value” sub-attribute more than once with a different <code class="highlighter-rouge">type</code> sub-attribute (e.g., the same email address may be used for work and home) but SHOULD NOT return the same (type, value) combination more than once per attribute, as this complicates processing by the client.</li>
+  <li>When defining schema for multi-valued attributes, it is considered a good practice to provide a <code class="highlighter-rouge">type</code> attribute that MAY be used for the purpose of canonicalization of values. In the schema definition for an attribute, the service provider MAY define the recommended canonical values (see <a href="https://tools.ietf.org/html/rfc7643#section-7">RFC 7643 Section 7</a>).</li>
+</ul>
+
+<p>See <a href="https://tools.ietf.org/html/rfc7643#section-2.4">Section 2.4 of RFC 7643</a> for more details.</p>
+
+<p><strong>I only have one email/phone number/address in my user profile. Do I need to implement the array of emails/phone numbers/addresses?</strong></p>
+
+<p>Yes, the you must return these fields in an array, which is specified in the SCIM spec as a multi-valued attribute: <a href="https://tools.ietf.org/html/rfc7643#section-2.4">Section 2.4</a>.</p>
+
+<p><strong>Why doesn’t Okta support DELETE /Users?</strong></p>
+
+<p>Okta users are never deleted for compliance and audit purposes; they are deactivated instead. Because of this, Okta never makes an HTTP DELETE request to a user resource on your SCIM API. Instead, Okta makes an HTTP PATCH request to set the active setting to false. You’ll need to support the concept of an “active” and “inactive” user in your app.</p>
+
+<p><strong>Will Okta be supporting the /Groups SCIM endpoint? When?</strong></p>
+
+<p>Yes, Okta will eventually support the /Groups endpoint of the SCIM API. We are targeting early 2017 for this feature. In the meantime, to support the setting licensing / entitlements in your app without groups, you can use custom attributes in Okta to manage this. For examples, Lucidchart was able to support this use case with a user attribute called “License Type”. See the “Extensibility” section of Lucidchart’s blog post for more details.</p>
+
+<p><strong>How does data validation work with SCIM provisioning? For example, if my app requires phone number in a specific format, how do I ensure that Okta passes the attribute in that format? If a data validation error issue occurs how does error reporting work?</strong></p>
+
+<p>The SCIM spec specifies valid data formats for a given user profile attribute, however Okta does not rigorously validate that the customer has inputted values meeting those requirements to preserve flexibility.
+Therefore, data validation should be handled by your app’s SCIM Server. In other words, when Okta provisions user profile to your app, it should check that the data is valid per their special requirements. Error messages sent in the response from your app will be surfaced to Okta Admin via alerts and tasks in the Okta interface. You should also specify your data requirements in your config guide.</p>
+
+<p><strong>How much filtering support is needed?</strong></p>
+
+<p>The filtering capabilities in the SCIM protocol are pretty broad but the common filtering use case with Okta is quite narrow – determine if a newly created Okta user already exists in your app based on a matching identifier . This means the eq (equals) operator is all you really need to support for now. We “might” eventually support other operators but don’t right now.
+Note that Okta only supports filtering via the eq operator on the SCIM userName attribute on the SCIM Server side. However, Okta can use any AppUser attribute on the Okta side for passing into the eq operator. Typically this would also be <code class="highlighter-rouge">appuser.userName</code>, but <code class="highlighter-rouge">appuser.email</code> or <code class="highlighter-rouge">appuser.randomAttribute</code> can also work.</p>
+
+<h3 id="publishing-questions">Publishing Questions</h3>
+
+<p><strong>If I submit my app with a set of attributes, and then I want to add attributes during the testing phase of the app, is this acceptable?</strong></p>
+
+<p>Yes. Add a new app instance in your dev org to test the new attributes and email <a href="mailto:developers@okta.com">developers@okta.com</a>.</p>
+
+<p><strong>Once my app has been published, and I add additional attributes, how do I republish my app? Can I republish frequently?</strong></p>
+
+<p>Yes, you can republish your app, but we recommend you don’t do it frequently. Your app goes through Okta’s QA process every time you add additional attributes.</p>
+
+<h3 id="dev-doc-examples">Dev Doc Examples</h3>
+
+<p>Box - https://docs.box.com/docs/getting-started-box-integration
+Slack - https://api.slack.com/
+OneLogin - https://developers.onelogin.com/
+Zendesk - https://developer.zendesk.com/apps</p>
+
+<h2 id="helpful-resources">Helpful Resources</h2>
+
+<p><a href="https://www.lucidchart.com/techblog/2016/08/04/an-implementers-overview-managing-cloud-identity-with-scim/">SCIM Overview</a></p>
+
+<p><a href="https://help.okta.com/en/prod/Content/Topics/Directory/Directory_People.htm">Okta End-User Management</a></p>
+
+<p><a href="https://help.okta.com/en/prod/Content/Topics/Apps/Provisioning_Deprovisioning_Overview.htm">Okta Provisioning Basics</a></p>
+
+<p><a href="https://developers.facebook.com/docs/facebook-at-work/provisioning/scim-api">SCIM and Facebook</a></p>
+
+<p><a href="http://openidexplained.com/">OpenID Explained</a></p>
+
+<p><a href="https://developers.onelogin.com/scim">SCIM and Onelogin</a></p>
+
+<h2 id="appendix-using-the-example-scim-server">Appendix: Using the Example SCIM Server</h2>
+
+<p>Okta provides an <a href="https://github.com/oktadeveloper/okta-scim-beta">example SCIM Server</a> written in
+Python, with <a href="/docs/sdk/opp/javadoc/overview-summary.html">documentation</a>.</p>
+
+<p>This example SCIM server demonstrates how to implement a basic SCIM
+server that can create, read, update, and deactivate Okta users.</p>
+
+<p>You can find the sample code to handle HTTP requests to this sample application in <a href="#required-scim-server-capabilities">Required SCIM Server Capabilities</a>
+Use the instructions that follow to set up and run the example SCIM server.</p>
+
+<h3 id="how-to-run">How to run</h3>
+
+<p>This example code was written for <strong>Python 2.7</strong> and does not
+currently work with Python 3.</p>
+
+<p>Here is how to run the example code on your machine:</p>
+
+<p>First, start by doing a <code class="highlighter-rouge">git checkout</code> of this repository, then
+<code class="highlighter-rouge">cd</code> to directory that <code class="highlighter-rouge">git</code> creates. Then, do the following:</p>
+
+<ol>
+  <li>
+    <p><code class="highlighter-rouge">cd</code> to the directory you just checked out:</p>
+
+    <div class="highlighter-rouge"><pre class="highlight"><code>$ cd okta-scim-beta
+</code></pre>
+    </div>
+  </li>
+  <li>
+    <p>Create an isolated Python environment named <code class="highlighter-rouge">venv</code> using <a href="http://docs.python-guide.org/en/latest/dev/virtualenvs/">virtualenv</a>:</p>
+
+    <div class="highlighter-rouge"><pre class="highlight"><code>$ virtualenv venv
+</code></pre>
+    </div>
+  </li>
+  <li>
+    <p>Next, activate the newly created virtual environment:</p>
+
+    <div class="highlighter-rouge"><pre class="highlight"><code>$ source venv/bin/activate
+</code></pre>
+    </div>
+  </li>
+  <li>
+    <p>Then, install the dependencies for the sample SCIM server using
+Python’s <a href="https://en.wikipedia.org/wiki/Pip_%28package_manager%29">“pip” package manager</a>:</p>
+
+    <div class="highlighter-rouge"><pre class="highlight"><code>$ pip install -r requirements.txt
+</code></pre>
+    </div>
+  </li>
+  <li>
+    <p>Finally, start the example SCIM server using this command:</p>
+
+    <div class="highlighter-rouge"><pre class="highlight"><code>$ python scim-server.py
+</code></pre>
+    </div>
+  </li>
+</ol>
+
+<h3 id="introduction">Introduction</h3>
+
+<p>Below are instructions for writing a SCIM server in Python, using
+Flask and SQLAlchemy.</p>
+
+<p>A completed version of this example server is available in this git
+repository in the file named <code class="highlighter-rouge">scim-server.py</code>.</p>
+
+<h3 id="imports">Imports</h3>
+
+<p>We start by importing the Python packages that the SCIM server will
+use:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>import os
+import re
+import uuid
+
+from flask import Flask
+from flask import render_template
+from flask import request
+from flask import url_for
+from flask_socketio import SocketIO
+from flask_socketio import emit
+from flask_sqlalchemy import SQLAlchemy
+import flask
+</code></pre>
+</div>
+
+<h3 id="setup">Setup</h3>
+
+<p><code class="highlighter-rouge">re</code> adds support for regular expression parsing, <code class="highlighter-rouge">flask</code> adds the Flask
+web framework, <code class="highlighter-rouge">flask_socketio</code> and <code class="highlighter-rouge">flask_sqlalchemy</code> add a idiomatic support for
+their respective technologies to Flask.</p>
+
+<p>Next we initialize Flask, SQLAlchemy, and SocketIO:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>app = Flask(__name__)
+database_url = os.getenv('DATABASE_URL', 'sqlite:///test-users.db')
+app.config['SQLALCHEMY_DATABASE_URI'] = database_url
+db = SQLAlchemy(app)
+socketio = SocketIO(app)
+</code></pre>
+</div>
+
+<h3 id="sqlalchemy-support-for-the-users-table">SQLAlchemy support for the “users” table:</h3>
+
+<p>Below is the class that SQLAlchemy uses to give us easy access to
+the “users” table.</p>
+
+<p>The <code class="highlighter-rouge">update</code> method is used to “merge” or “update” a new User object
+into an existing User object. This is used to simplify the code for
+the code that handles PUT calls to <code class="highlighter-rouge">/Users/{id}</code>.</p>
+
+<p>The <code class="highlighter-rouge">to_scim_resource</code> method is used to turn a User object into
+a <a href="https://tools.ietf.org/html/rfc7643#section-4.1">SCIM “User” resource schema</a>.</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>class User(db.Model):
+    __tablename__ = 'users'
+    id = db.Column(db.String(36), primary_key=True)
+    active = db.Column(db.Boolean, default=False)
+    userName = db.Column(db.String(250),
+                         unique=True,
+                         nullable=False,
+                         index=True)
+    familyName = db.Column(db.String(250))
+    middleName = db.Column(db.String(250))
+    givenName = db.Column(db.String(250))
+
+    def __init__(self, resource):
+        self.update(resource)
+
+    def update(self, resource):
+        for attribute in ['userName', 'active']:
+            if attribute in resource:
+                setattr(self, attribute, resource[attribute])
+        for attribute in ['givenName', 'middleName', 'familyName']:
+            if attribute in resource['name']:
+                setattr(self, attribute, resource['name'][attribute])
+
+    def to_scim_resource(self):
+        rv = {
+            "schemas": ["urn:ietf:params:scim:schemas:core:2.0:User"],
+            "id": self.id,
+            "userName": self.userName,
+            "name": {
+                "familyName": self.familyName,
+                "givenName": self.givenName,
+                "middleName": self.middleName,
+            },
+            "active": self.active,
+            "meta": {
+                "resourceType": "User",
+                "location": url_for('user_get',
+                                    user_id=self.id,
+                                    _external=True),
+                # "created": "2010-01-23T04:56:22Z",
+                # "lastModified": "2011-05-13T04:42:34Z",
+            }
+        }
+        return rv
+</code></pre>
+</div>
+
+<h3 id="support-for-scim-query-resources">Support for SCIM Query resources</h3>
+
+<p>We also define a <code class="highlighter-rouge">ListResponse</code> class, which is used to return an
+array of SCIM resources into a
+<a href="https://tools.ietf.org/html/rfc7644#section-3.4.2">Query Resource</a>.</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>class ListResponse():
+    def __init__(self, list, start_index=1, count=None, total_results=0):
+        self.list = list
+        self.start_index = start_index
+        self.count = count
+        self.total_results = total_results
+
+    def to_scim_resource(self):
+        rv = {
+            "schemas": ["urn:ietf:params:scim:api:messages:2.0:ListResponse"],
+            "totalResults": self.total_results,
+            "startIndex": self.start_index,
+            "Resources": []
+        }
+        resources = []
+        for item in self.list:
+            resources.append(item.to_scim_resource())
+        if self.count:
+            rv['itemsPerPage'] = self.count
+        rv['Resources'] = resources
+        return rv
+</code></pre>
+</div>
+
+<h3 id="support-for-scim-error-messages">Support for SCIM error messages</h3>
+
+<p>Given a <code class="highlighter-rouge">message</code> and HTTP <code class="highlighter-rouge">status_code</code>, this will return a Flask
+response with the appropriately formatted SCIM error message.</p>
+
+<p>By default, this function will return an HTTP status of “<a href="https://tools.ietf.org/html/rfc2068#section-10.5.1">HTTP 500
+Internal Server Error</a>”. However you should return a more specific
+<code class="highlighter-rouge">status_code</code> when possible.</p>
+
+<p>See <a href="https://tools.ietf.org/html/rfc7644#section-3.12">section 3.12</a> of <a href="https://tools.ietf.org/html/rfc7644">RFC 7644</a> for details.</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>def scim_error(message, status_code=500):
+    rv = {
+        "schemas": ["urn:ietf:params:scim:api:messages:2.0:Error"],
+        "detail": message,
+        "status": str(status_code)
+    }
+    return flask.jsonify(rv), status_code
+</code></pre>
+</div>
+
+<h3 id="socketio-support">Socket.IO support</h3>
+
+<p>This sample application makes use of Socket.IO to give you a “real
+time” view of SCIM requests that Okta makes to this sample
+application.</p>
+
+<p>When you load the sample application (the “/” route), your browser
+will be sent a web application that uses Socket.IO to display
+updates without the need for you to reload the page:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>@app.route('/')
+def hello():
+    return render_template('base.html')
+</code></pre>
+</div>
+
+<p>This page is updated using the functions below:</p>
+
+<ul>
+  <li><code class="highlighter-rouge">send_to_browser</code> is syntactic sugar that will <code class="highlighter-rouge">emit</code> Socket.IO
+messages to the browser with the proper <code class="highlighter-rouge">broadcast</code> and
+<code class="highlighter-rouge">namespace</code> settings.</li>
+  <li><code class="highlighter-rouge">render_json</code> is more syntactic sugar which is used to render
+JSON replies to Okta’s SCIM client and <code class="highlighter-rouge">emit</code> the SCIM resource
+to Socket.IO at the same time.</li>
+  <li><code class="highlighter-rouge">test_connect</code> is the function called with a browser first starts
+up Socket.IO, it returns a list of currently active users to the
+browser via Socket.IO.</li>
+  <li><code class="highlighter-rouge">test_disconnect</code> is a stub that shows how to handle Socket.IO
+“disconnect” messages.</li>
+</ul>
+
+<p>The code described above is as follows:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>def send_to_browser(obj):
+    socketio.emit('user',
+                  {'data': obj},
+                  broadcast=True,
+                  namespace='/test')
+
+
+def render_json(obj):
+    rv = obj.to_scim_resource()
+    send_to_browser(rv)
+    return flask.jsonify(rv)
+
+
+@socketio.on('connect', namespace='/test')
+def test_connect():
+    for user in User.query.filter_by(active=True).all():
+        emit('user', {'data': user.to_scim_resource()})
+
+
+@socketio.on('disconnect', namespace='/test')
+def test_disconnect():
+    print('Client disconnected')
+</code></pre>
+</div>
+
+<h3 id="socketio-application">Socket.IO application</h3>
+
+<p>Below is the JavaScript that powers the Socket.IO application
+described above. For the full contents of the HTML that this
+JavaScript is part of, see the <code class="highlighter-rouge">base.html</code> file in the <code class="highlighter-rouge">templates</code>
+directory of this project.</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>$(document).ready(function () {
+    namespace = '/test'; // change to an empty string to use the global namespace
+    var uri = 'https://' + document.domain  + namespace;
+    console.log(uri);
+    var socket = io.connect(uri);
+
+    socket.on('user', function(msg) {
+        console.log(msg);
+        var user = msg.data;
+        var user_element = '#' + user.id
+        var userRow = '&lt;tr id="' + user.id + '"&gt;&lt;td&gt;' + user.id + '&lt;/td&gt;&lt;td&gt;' + user.name.givenName + '&lt;/td&gt;&lt;td&gt;' + user.name.familyName + '&lt;/td&gt;&lt;td&gt;' + user.userName + '&lt;/td&gt;&lt;/tr&gt;';
+        if($(user_element).length &amp;&amp; user.active) {
+            $(user_element).replaceWith(userRow);
+        } else if (user.active) {
+            $('#users-table').append(userRow);
+        }
+
+        if($(user_element).length &amp;&amp; user.active) {
+            $(user_element).show();
+        }
+        if($(user_element).length &amp;&amp; !user.active) {
+            $(user_element).hide();
+        }
+    });
+});
+</code></pre>
+</div>
+
+<h3 id="support-for-running-from-the-command-line">Support for running from the command line</h3>
+
+<p>This bit of code allows you to run the sample application by typing
+<code class="highlighter-rouge">python scim-server.py</code> from your command line.</p>
+
+<p>This code also includes a <code class="highlighter-rouge">try/catch</code> block that creates all tables
+of the <code class="highlighter-rouge">User.query.one()</code> function throws an error (which should
+only happen if the User table isn’t defined.</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>if __name__ == "__main__":
+    try:
+        User.query.one()
+    except:
+        db.create_all()
+    app.debug = True
+    socketio.run(app)
+</code></pre>
+</div>
+
+      </div>
+      <div class="TableOfContents TableOfContentsPreload">
+        <div class="TableOfContents-item is-level1">
+          <script>
+                  document.write(document.title.split('|')[0].trim());
+          </script>
+        </div>
+        <div class="TableOfContentsLoader"></div>
+      </div><!-- END Page Content -->
+    </section><!-- END Page Center w/Sub Nav & Content -->
+
+    <!-- START Footer -->
+    <footer class="Footer">
+    <div class="Wrap">
+
+        <div class="Row">
+
+            <div class="Column--3 Column--medium-6 Column--xSmall-12">
+
+                <a class="Logo" href="https://www.okta.com/" target="_blank" rel="noopener noreferrer">
+                    <img src="https://developer.okta.com/sites/all/themes/developer/images/logo-footer.png" alt="Okta">
+                    Visit okta.com
+                </a>
+
+            </div>
+
+            <div class="Column--3 Column--medium-12 Column--xSmall-12">
+
+                <h4>Social</h4>
+                <ul class="Footer-links Footer-links--social">
+                    <li><a class="Footer-links--github" target="_blank" rel="noopener noreferrer" href="http://github.com/oktadeveloper">Github</a></li>
+                    <li><a class="Footer-links--twitter" target="_blank" rel="noopener noreferrer" href="http://twitter.com/OktaDev">Twitter</a></li>
+                    <li><a class="Footer-links--forum" target="_blank" rel="noopener noreferrer" href="https://devforum.okta.com/">Forum</a></li>
+                    <li><a class="Footer-links--rss" target="_blank" rel="noopener noreferrer" href="http://feeds.feedburner.com/OktaBlog">RSS Blog</a></li>
+                </ul>
+            </div>
+
+            <div class="Column--3 Column--medium-6 Column--small-12">
+                <h4>More Info</h4>
+                <ul class="Footer-links">
+                    <li><a target="_blank" href="https://developer.okta.com/integrate-with-okta/">Integrate with Okta</a></li>
+                    <li><a href="/blog/">Blog</a></li>
+                    <li><a href="/docs/platform-release-notes/platform-release-notes.html">Release Notes</a></li>
+                    <li><a href="/3rd_party_notices/">3rd Party Notices</a></li>
+                </ul>
+            </div>
+
+            <div class="Column--3 Column--medium-6 Column--small-12">
+                <h4>Contact &amp; Legal</h4>
+                <ul class="Footer-links">
+                    <li><a href="https://developer.okta.com/contact/">Contact Sales</a></li>
+                    <li><a target="_blank" rel="noopener noreferrer" href="mailto:developers@okta.com">Contact Support</a></li>
+                    <li><a href="https://developer.okta.com/terms/">Terms &amp; Conditions</a></li>
+                    <li><a href="https://developer.okta.com/privacy/">Privacy Policy</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</footer>
+
+    <script type="text/javascript" src="/assets/master-0365dd27cf276cb2a15c0a43906ca592538204cf1ad4557547bf4e50609b411e.js"></script>
+    <script type="text/javascript" src="/assets/myOkta-911cbafbbe079b7a5522d9cbe15bd2a5f44e1582531e88393934bec69f97696b.js"></script>
+    
+    
+    
+    
+      <script type="text/javascript" src="/assets/docs-0af8e0751a2375ff1b4d8e8ddf6a1b7ffd864bd473116861d71f541c4859329e.js"></script>
+    
+
+    <!-- END Footer -->
+  </div>
+  <!-- START Post Footer -->
+  
+  <!-- START Google Tag Manager -->
+  <!-- https://support.google.com/tagmanager/answer/6103696?hl=en -->
+  <noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-TJ45R6" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+  <!-- END Google Tag Manager -->
+  <!-- START Google Remarketing Tag -->
+  <script type="text/javascript">
+    /* <![CDATA[ */
+    var google_conversion_id = 1006913831;
+    var google_custom_params = window.google_tag_params;
+    var google_remarketing_only = true;
+    /* ]]> */
+  </script>
+  <div style="display:none;"><script type="text/javascript" src="//www.googleadservices.com/pagead/conversion.js"></script></div>
+  <noscript><div style="display:inline;"><img height="1" width="1" style="border-style:none;" alt="" src="//googleads.g.doubleclick.net/pagead/viewthroughconversion/1006913831/?value=0&amp;guid=ON&amp;script=0"></div></noscript>
+  <!-- END Google Remarketing Tag -->
+  <!-- START Crazy Egg Tracking -->
+  <script type="text/javascript">
+    setTimeout(function(){var a=document.createElement("script");
+    var b=document.getElementsByTagName("script")[0];
+    a.src=document.location.protocol+"//script.crazyegg.com/pages/scripts/0021/9333.js?"+Math.floor(new Date().getTime()/3600000);
+    a.async=true;a.type="text/javascript";b.parentNode.insertBefore(a,b)}, 1);
+  </script>
+  <!-- END Crazy Egg Tracking -->
+
+  <!-- END Post Footer -->
+</body>
+</html>

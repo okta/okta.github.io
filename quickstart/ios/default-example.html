@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html class="no-js" lang="en" dir="ltr">
+<body>
+    <h2 id="okta-ios-quickstart">Okta iOS Quickstart</h2>
+
+<p>This guide will walk you through integrating authentication into an iOS (Swift) app with Okta by performing these steps:</p>
+
+<ol>
+  <li>Add an OpenID Connect Client in Okta</li>
+  <li>Add Okta-AppAuth to your iOS project</li>
+  <li>Implement Okta Sign-in</li>
+  <li>Handle the Login State</li>
+  <li>Using the AccessToken</li>
+</ol>
+
+<p>At the end of the iOS instructions you can choose your server type to learn more about post-authentication workflows, such as verifying tokens that your iOS application can send to your server.</p>
+
+<h2 id="prerequisites">Prerequisites</h2>
+<p>If you do not already have a <strong>Developer Edition Account</strong>, you can create one at <a href="https://developer.okta.com/signup/">https://developer.okta.com/signup/</a>.</p>
+
+<h3 id="add-an-openid-connect-client">Add an OpenID Connect Client</h3>
+<ul>
+  <li>Log into the Okta Developer Dashboard, click <strong>Applications</strong> then <strong>Add Application</strong>.</li>
+  <li>Choose <strong>Native app</strong> as the platform, then populate your new OpenID Connect application with values similar to:</li>
+</ul>
+
+<table>
+  <thead>
+    <tr>
+      <th>Setting</th>
+      <th>Value</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Application Name</td>
+      <td>My iOS App</td>
+    </tr>
+    <tr>
+      <td>Login redirect URIs</td>
+      <td>com.oktapreview.{yourOrg}:/callback</td>
+    </tr>
+    <tr>
+      <td>Logout redirect URIs</td>
+      <td>com.oktapreview.{yourOrg}:/logout</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>After you have created the application there are two more values you will need to gather:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Setting</th>
+      <th>Where to Find</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Client ID</td>
+      <td>In the applications list, or on the “General” tab of a specific application.</td>
+    </tr>
+    <tr>
+      <td>Org URL</td>
+      <td>On the home screen of the developer dashboard, in the upper right.</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>These values will be used in your iOS application to setup the OpenID Connect flow with Okta.</p>
+
+<h2 id="add-okta-appauth-to-your-ios-project">Add Okta-AppAuth to your iOS Project</h2>
+<p>The simplest way to add authentication into an iOS app is using the library <a href="http://cocoapods.org/pods/OktaAuth">Okta AppAuth</a>, available through <a href="http://cocoapods.org">CocoaPods</a>. To install it, simply add the following line to your Podfile:</p>
+
+<div class="language-ruby highlighter-rouge"><pre class="highlight"><code><span class="n">pod</span> <span class="s1">'OktaAuth'</span><span class="p">,</span> <span class="s1">'~&gt; 0.1'</span>
+</code></pre>
+</div>
+
+<p>Now, install the <code class="highlighter-rouge">OktaAuth</code> dependency and open the compiled project:</p>
+<div class="language-bash highlighter-rouge"><pre class="highlight"><code>pod install <span class="o">&amp;&amp;</span> open project.xcworkspace
+</code></pre>
+</div>
+
+<h3 id="configuration">Configuration</h3>
+<p>Create a new <code class="highlighter-rouge">Okta.plist</code> file in your application’s bundle with the following fields:</p>
+<div class="language-xml highlighter-rouge"><pre class="highlight"><code><span class="cp">&lt;?xml version="1.0" encoding="UTF-8"?&gt;</span>
+<span class="cp">&lt;!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd"&gt;</span>
+<span class="nt">&lt;plist</span> <span class="na">version=</span><span class="s">"1.0"</span><span class="nt">&gt;</span>
+<span class="nt">&lt;dict&gt;</span>
+  <span class="nt">&lt;key&gt;</span>issuer<span class="nt">&lt;/key&gt;</span>
+  <span class="nt">&lt;string&gt;</span><span class="okta-preview-domain">https://{yourOktaDomain}.com</span>/oauth2/default<span class="nt">&lt;/string&gt;</span>
+  <span class="nt">&lt;key&gt;</span>clientId<span class="nt">&lt;/key&gt;</span>
+  <span class="nt">&lt;string&gt;</span>{clientIdValue}<span class="nt">&lt;/string&gt;</span>
+  <span class="nt">&lt;key&gt;</span>redirectUri<span class="nt">&lt;/key&gt;</span>
+  <span class="nt">&lt;string&gt;</span>com.oktapreview.{yourOrg}:/callback<span class="nt">&lt;/string&gt;</span>
+  <span class="nt">&lt;key&gt;</span>scopes<span class="nt">&lt;/key&gt;</span>
+  <span class="nt">&lt;array&gt;</span>
+	<span class="nt">&lt;string&gt;</span>offline_access<span class="nt">&lt;/string&gt;</span>
+	<span class="nt">&lt;string&gt;</span>openid<span class="nt">&lt;/string&gt;</span>
+	<span class="nt">&lt;string&gt;</span>profile<span class="nt">&lt;/string&gt;</span>
+  <span class="nt">&lt;/array&gt;</span>
+<span class="nt">&lt;/dict&gt;</span>
+<span class="nt">&lt;/plist&gt;</span>
+</code></pre>
+</div>
+<p><strong>Note</strong>: <em>To receive a <strong>refresh_token</strong>, you must include the <code class="highlighter-rouge">offline_access</code> scope.</em></p>
+
+<h3 id="update-the-private-use-uri-scheme">Update the Private-use URI Scheme</h3>
+<p>In order to redirect back to your application from a web browser, you must specify a unique URI to your app. To do this, open <code class="highlighter-rouge">Info.plist</code> in your application bundle and set a <strong>URL Scheme</strong> to the scheme of the login redirect URI.</p>
+
+<p>For example, if your <strong>Login Redirect URI</strong> is <code class="highlighter-rouge">com.okta.example:/callback</code>, the <strong>URL Scheme</strong> will be <code class="highlighter-rouge">com.okta.example</code>.</p>
+
+<h2 id="implement-okta-sign-in">Implement Okta Sign-In</h2>
+<p>Users can sign in to your iOS application a number of different ways.
+The easiest, and most secure way is to use the <strong>default login page</strong>. This page renders the <a href="/code/javascript/okta_sign-in_widget.html">Okta Sign-In Widget</a>, equipped to handle User Lifecycle operations, MFA, and more.</p>
+
+<p>Login events can be triggered by an <code class="highlighter-rouge">@IBAction</code>, <code class="highlighter-rouge">viewDidLoad</code>, or programmatically. In order to launch the event, first update your <code class="highlighter-rouge">AppDelegate</code> to include the following function to allow the redirect to occur:</p>
+
+<div class="language-swift highlighter-rouge"><pre class="highlight"><code><span class="c1">// AppDelegate.swift</span>
+<span class="kd">import</span> <span class="kt">OktaAuth</span>
+
+<span class="kd">func</span> <span class="nf">application</span><span class="p">(</span><span class="n">_</span> <span class="nv">app</span><span class="p">:</span> <span class="kt">UIApplication</span><span class="p">,</span>
+    <span class="n">open</span> <span class="nv">url</span><span class="p">:</span> <span class="kt">URL</span><span class="p">,</span>
+    <span class="nv">options</span><span class="p">:</span> <span class="p">[</span><span class="kt">UIApplicationOpenURLOptionsKey</span> <span class="p">:</span> <span class="kt">Any</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="kt">Bool</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="kt">OktaAuth</span><span class="o">.</span><span class="nf">resume</span><span class="p">(</span><span class="nv">url</span><span class="p">:</span> <span class="n">url</span><span class="p">,</span> <span class="nv">options</span><span class="p">:</span> <span class="n">options</span><span class="p">)</span>
+<span class="p">}</span>
+</code></pre>
+</div>
+
+<p>Then, you can start the authorization flow by simply calling <code class="highlighter-rouge">login</code>:</p>
+<div class="language-swift highlighter-rouge"><pre class="highlight"><code><span class="kt">OktaAuth</span>
+  <span class="o">.</span><span class="nf">login</span><span class="p">()</span>
+  <span class="o">.</span><span class="nf">start</span><span class="p">(</span><span class="k">self</span><span class="p">)</span> <span class="p">{</span> <span class="n">response</span><span class="p">,</span> <span class="n">error</span> <span class="k">in</span>
+    <span class="k">if</span> <span class="n">error</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span> <span class="nf">print</span><span class="p">(</span><span class="n">error</span><span class="o">!</span><span class="p">)</span> <span class="p">}</span>
+
+    <span class="c1">// Success</span>
+    <span class="k">if</span> <span class="k">let</span> <span class="nv">tokenResponse</span> <span class="o">=</span> <span class="n">response</span> <span class="p">{</span>
+      <span class="c1">// tokenResponse.accessToken</span>
+      <span class="c1">// tokenResponse.idToken</span>
+      <span class="c1">// tokenResponse.refreshToken</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+</code></pre>
+</div>
+
+<h2 id="handle-the-login-state">Handle the Login State</h2>
+<p>In native applications, it is common for users to have a long-lived session. It is important for the app to manage the user’s session by refreshing tokens when they expire, using the <code class="highlighter-rouge">refresh_token</code> or re-prompting the user to login.</p>
+
+<h3 id="store-the-users-tokens">Store the User’s Tokens</h3>
+<p>Tokens are securly stored in the Keychain. They are easily set and retrieved with the helper methods <code class="highlighter-rouge">set</code> and <code class="highlighter-rouge">get</code>.</p>
+<div class="language-swift highlighter-rouge"><pre class="highlight"><code><span class="kt">OktaAuth</span>
+  <span class="o">.</span><span class="nf">login</span><span class="p">()</span>
+  <span class="o">.</span><span class="nf">start</span><span class="p">(</span><span class="k">self</span><span class="p">)</span> <span class="p">{</span> <span class="n">response</span><span class="p">,</span> <span class="n">error</span> <span class="k">in</span>
+    <span class="k">if</span> <span class="n">error</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span> <span class="nf">print</span><span class="p">(</span><span class="n">error</span><span class="o">!</span><span class="p">)</span> <span class="p">}</span>
+
+    <span class="c1">// Success</span>
+    <span class="k">if</span> <span class="k">let</span> <span class="nv">tokenResponse</span> <span class="o">=</span> <span class="n">response</span> <span class="p">{</span>
+      <span class="kt">OktaAuth</span><span class="o">.</span><span class="n">tokens</span><span class="o">.</span><span class="nf">set</span><span class="p">(</span>
+        <span class="nv">value</span><span class="p">:</span> <span class="n">tokenResponse</span><span class="o">.</span><span class="n">accessToken</span><span class="o">!</span><span class="p">,</span>
+        <span class="nv">forKey</span><span class="p">:</span> <span class="s">"accessToken"</span>
+      <span class="p">)</span>
+      <span class="kt">OktaAuth</span><span class="o">.</span><span class="n">tokens</span><span class="o">.</span><span class="nf">set</span><span class="p">(</span>
+        <span class="nv">value</span><span class="p">:</span> <span class="n">tokenResponse</span><span class="o">.</span><span class="n">idToken</span><span class="o">!</span><span class="p">,</span>
+        <span class="nv">forKey</span><span class="p">:</span> <span class="s">"idToken"</span>
+      <span class="p">)</span>
+      <span class="kt">OktaAuth</span><span class="o">.</span><span class="n">tokens</span><span class="o">.</span><span class="nf">set</span><span class="p">(</span>
+        <span class="nv">value</span><span class="p">:</span> <span class="n">tokenResponse</span><span class="o">.</span><span class="n">refreshToken</span><span class="o">!</span><span class="p">,</span>
+        <span class="nv">forKey</span><span class="p">:</span> <span class="s">"refreshToken"</span>
+      <span class="p">)</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+</code></pre>
+</div>
+
+<p>When starting up the application, check for the existance of an <code class="highlighter-rouge">access_token</code> to see if the user has an existing session:</p>
+
+<div class="language-swift highlighter-rouge"><pre class="highlight"><code><span class="k">if</span> <span class="k">let</span> <span class="nv">currentToken</span> <span class="o">=</span> <span class="kt">OktaAuth</span><span class="o">.</span><span class="n">tokens</span><span class="o">.</span><span class="nf">get</span><span class="p">(</span><span class="nv">forKey</span><span class="p">:</span> <span class="s">"accessToken"</span><span class="p">)</span> <span class="p">{</span>
+  <span class="c1">// Token is valid!</span>
+<span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+  <span class="c1">// Token does not exist, prompt the user to login.</span>
+<span class="p">}</span>
+</code></pre>
+</div>
+
+<h2 id="using-the-access-token">Using the Access Token</h2>
+
+<p>Your iOS application now has an access token in the Keychain that was issued by your Okta Authorization server. You can use this token to authenticate requests for resources on your server or API. As a hypothetical example, let’s say that you have an API that gives us messages for our user.  You could create a <code class="highlighter-rouge">callMessagesApi</code> function that gets the access token from the Keychain, and use it to make an authenticated request to your server.</p>
+
+<div class="language-swift highlighter-rouge"><pre class="highlight"><code>
+<span class="kd">func</span> <span class="nf">callMessagesApi</span><span class="p">()</span> <span class="p">{</span>
+  <span class="k">let</span> <span class="nv">url</span> <span class="o">=</span> <span class="kt">URL</span><span class="p">(</span><span class="nv">string</span><span class="p">:</span> <span class="s">"http://localhost:{serverPort}/api/messages"</span><span class="p">)</span>
+
+  <span class="c1">// Set the authorization header</span>
+  <span class="k">let</span> <span class="nv">headers</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="s">"Authorization"</span><span class="p">:</span> <span class="s">"Bearer </span><span class="se">\(</span><span class="kt">OktaAuth</span><span class="o">.</span><span class="n">tokens</span><span class="o">.</span><span class="nf">get</span><span class="p">(</span><span class="s">"accessToken"</span><span class="p">)</span><span class="se">)</span><span class="s">"</span>
+    <span class="o">...</span>
+  <span class="p">]</span>
+
+  <span class="k">var</span> <span class="nv">request</span> <span class="o">=</span> <span class="kt">URLRequest</span><span class="p">(</span><span class="nv">url</span><span class="p">:</span> <span class="n">url</span><span class="o">!</span><span class="p">)</span>
+  <span class="n">request</span><span class="o">.</span><span class="n">allHTTPHeaderFields</span> <span class="o">=</span> <span class="n">headers</span>
+
+  <span class="k">let</span> <span class="nv">task</span> <span class="o">=</span> <span class="kt">URLSession</span><span class="o">.</span><span class="n">shared</span><span class="o">.</span><span class="nf">dataTask</span><span class="p">(</span><span class="nv">with</span><span class="p">:</span> <span class="n">request</span><span class="p">){</span> <span class="n">data</span><span class="p">,</span> <span class="n">response</span><span class="p">,</span> <span class="n">error</span> <span class="k">in</span>
+    <span class="k">if</span> <span class="n">error</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span> <span class="k">return</span> <span class="p">}</span>
+
+    <span class="k">let</span> <span class="nv">serverResponse</span> <span class="o">=</span> <span class="n">response</span> <span class="p">{</span>
+      <span class="c1">// serverResponse</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+  <span class="n">task</span><span class="o">.</span><span class="nf">resume</span><span class="p">()</span>
+<span class="p">}</span>
+</code></pre>
+</div>
+
+<p>In the next section you can select your server technology to see how your server can read this incoming token and validate it.</p>
+
+</body>
+</html>

@@ -1,0 +1,585 @@
+<!doctype html>
+<!--[if lt IE 7 ]> <html class="ie6 no-flexbox"> <![endif]-->
+<!--[if IE 7 ]>    <html class="ie7 no-flexbox"> <![endif]-->
+<!--[if IE 8 ]>    <html class="ie8 no-flexbox"> <![endif]-->
+<!--[if IE 9 ]>    <html class="ie9 no-flexbox"> <![endif]-->
+<!--[if IE 10 ]>    <html class="ie10 no-flexbox"> <![endif]-->
+<!--[if (gt IE 10)|!(IE)]><!--> <html class="modern wf-loading" lang="en"> <!--<![endif]-->
+  <head>
+  <script>
+    var searchDomain = 'https://developer.okta.com';
+    var isProduction = window.location.hostname === 'developer.okta.com';
+    if (isProduction) {
+      // TypeKit
+      (function(d) {
+        var config = {
+          kitId: 'jff5neq',
+          scriptTimeout: 3000,
+          async: true
+        },
+        h=d.documentElement,t=setTimeout(function(){h.className=h.className.replace(/bwf-loadingb/g,"")+" wf-inactive";},config.scriptTimeout),tk=d.createElement("script"),f=false,s=d.getElementsByTagName("script")[0],a;h.className+=" wf-loading";tk.src='https://use.typekit.net/'+config.kitId+'.js';tk.async=true;tk.onload=tk.onreadystatechange=function(){a=this.readyState;if(f||a&&a!="complete"&&a!="loaded")return;f=true;clearTimeout(t);try{Typekit.load(config)}catch(e){}};s.parentNode.insertBefore(tk,s)
+      })(document);
+
+      // Google analytics
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+              (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+              m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+      ga('create', 'UA-15777010-3', 'auto');
+      ga('send', 'pageview');
+
+      // START Google Tag Manager
+      (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+      new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+      j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+      '//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+      })(window,document,'script','dataLayer','GTM-TJ45R6');
+      // END Google Tag Manager
+    }
+	</script>
+  <meta charset="utf-8">
+  <meta http-equiv="x-ua-compatible" content="IE=edge,chrome=1">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+ 	
+
+  <link type="text/css" rel="stylesheet" href="https://developer.okta.com/sites/all/themes/developer/css/master.css" media="all" />
+  <meta class="swiftype" name="title" data-type="string" content="NoSQL Options for Java Developers | Okta Developer" />
+  <meta class="swiftype" name="summary" data-type="string" content="The Java community is one I know and love, so even though a NoSQL database is rarely tied to a language I’m writing this article for you, Java developers aro..." />
+
+  <link type="text/css" rel="stylesheet" href="/assets/animate-ec43d72c3ed45e08a460b8a2966d8dba6006aebfa0530935c3973fa493a8771f.css">
+  <link type="text/css" rel="stylesheet" href="/assets/okta-a96df4c9d48b78b618e1d541f46f7137d73d40653571e020c1ad59edd7915c60.css">
+  
+  
+  <title>NoSQL Options for Java Developers | Okta Developer</title>
+  <meta name="description" content="The Java community is one I know and love, so even though a NoSQL database is rarely tied to a language I’m writing this article for you, Java developers aro...">
+  <link rel="canonical" href="https://developer.okta.com/blog/2017/09/08/nosql-options-for-java-developers"  data-proofer-ignore>
+  <link rel="alternate" type="application/rss+xml" title="Okta Developer" href="https://developer.okta.com/feed.xml"><!-- GA -->
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+  <link rel="manifest" href="/manifest.json">
+  <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#21313a">
+  <meta name="theme-color" content="#ffffff">
+</head>
+
+  
+    <body id="blog">
+	
+
+
+
+
+<header class="Header is-fixed">
+
+  <div class="Wrap">
+
+    <a class="Logo" href="https://developer.okta.com">
+      <svg version="1.1" id="OktaLogo" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 431.9 151.4" style="enable-background:new 0 0 431.9 151.4;" xml:space="preserve"><g><g><g><path d="M102.2,41.4c-21,0-38.1,17.1-38.1,38.1s17.1,38.1,38.1,38.1s38.1-17.1,38.1-38.1l0,0C140.3,58.5,123.2,41.4,102.2,41.4z M102.2,98.5c-10.5,0-19-8.5-19-19s8.5-19,19-19s19,8.5,19,19c0.1,10.5-8.4,19-18.9,19.1C102.3,98.6,102.2,98.6,102.2,98.5L102.2,98.5z"/><path d="M169.1,92.3c0-1.9,1.5-3.4,3.4-3.4c0.9,0,1.8,0.4,2.4,1c9.5,9.7,25.3,26.3,25.4,26.4c0.4,0.5,0.8,0.8,1.4,0.9l1.6,0.2h17.2c1.8,0,3.3-1.4,3.4-3.2c0-0.8-0.3-1.5-0.8-2.2l-28.6-29.2l-1.5-1.5c-3.2-3.9-2.9-5.4,0.8-9.3l22.6-25.1c1.1-1.4,0.8-3.5-0.6-4.6c-0.6-0.4-1.3-0.7-2-0.7h-17c-0.6,0.2-1.1,0.5-1.5,0.9L175,64.4c-1.3,1.4-3.4,1.5-4.8,0.2c-0.7-0.6-1.1-1.5-1.1-2.5V18.9c0-1.7-1.3-3-3-3c-0.1,0-0.2,0-0.3,0h-12.7c-2.2,0-3.3,1.5-3.3,2.8v95.8c0,2.2,1.8,2.8,3.3,2.8h12.7c1.7,0.1,3.2-1.2,3.3-2.9c0,0,0,0,0,0V92.3z"/><path d="M273,114l-1.4-12.8c-0.2-1.7-1.7-2.9-3.4-2.7c0,0,0,0-0.1,0l-2.9,0.2c-10.1,0-18.5-7.9-19-18c0-0.3,0-0.7,0-1V64.2c-0.1-2,1.5-3.6,3.5-3.7c0,0,0,0,0,0h17c1.7-0.1,3.1-1.5,3-3.2c0,0,0-0.1,0-0.1v-12c0-2.3-1.5-3.6-2.8-3.6h-17.1c-1.9,0.1-3.5-1.5-3.6-3.4c0,0,0,0,0,0V18.9c-0.1-1.7-1.5-3.1-3.2-3c0,0-0.1,0-0.1,0h-12.7c-1.6-0.1-3,1.1-3.1,2.7c0,0.1,0,0.1,0,0.2c0,0,0,61.7,0,62c0.5,21,17.9,37.6,38.9,37c1.4,0,2.9-0.2,4.3-0.3C272,117.2,273.2,115.7,273,114z"/></g><path d="M364.7,98c-10.8,0-12.4-3.8-12.4-18.3l0,0V44.8c0-1.8-1.4-3.2-3.2-3.2c0,0-0.1,0-0.1,0h-12.8c-1.8,0-3.2,1.4-3.3,3.2v1.6C314.6,36,291.3,42.5,281,60.8c-10.4,18.3-3.9,41.6,14.4,51.9c14,7.9,31.4,6.2,43.5-4.2c3.6,5.5,9.3,9.1,18.3,9.1c1.5,0,9.7,0.3,9.7-3.5v-13.6C367,99.2,366,98.1,364.7,98z M314.2,98.6c-10.5,0-19-8.5-19-19s8.5-19,19-19s19,8.5,19,19l0,0C333.2,90.1,324.7,98.6,314.2,98.6z"/></g><path d="M19.4,74c2.2-1.9,4.1-4.1,5.7-6.6c3.5-5.3,5.4-11.5,5.2-17.9V27c0-4.9,0.9-8.4,2.7-10.5c1.8-2.1,4.8-3,9.2-3h12.6c1.2,0,2.1-0.9,2.2-2.1l0,0V2.2C57,1,56,0,54.8,0c0,0,0,0,0,0H41.5c-7.8,0-12.9,2.1-18,7.6s-7.1,12.3-7.1,21.7v14.2c0,2.2-0.1,4-0.2,5.7v2.2c-0.5,3.2-1.8,6.2-3.6,8.9C9.4,64.7,5.1,70.9,0.9,74l0,0l-0.3,0.3l0,0l-0.2,0.3H0.2v0.3l0,0c-0.1,0.3-0.1,0.7,0,1l0,0v0.3h0.1l0.2,0.3l0,0l0.3,0.3l0,0c4.2,3.1,8.5,9.3,11.3,13.7c1.8,2.7,3.1,5.7,3.6,8.9v2.2c0.1,1.6,0.2,3.5,0.2,5.7v14.3c0,9.4,2.4,16.7,7.1,21.7s10.2,7.6,18,7.6h13.8c1.2,0,2.2-1,2.2-2.2V140l0,0c0-1.2-1-2.2-2.2-2.2H42.2c-4.4,0-7.5-1-9.2-3s-2.7-5.6-2.7-10.5v-22.4c0.2-6.4-1.7-12.6-5.2-17.9c-1.6-2.5-3.5-4.7-5.7-6.6l0,0c-0.9-0.7-1.1-2-0.4-2.9C19.2,74.3,19.3,74.2,19.4,74L19.4,74z"/><path d="M412.5,74c-2.2-1.9-4.1-4.1-5.7-6.6c-3.5-5.3-5.4-11.5-5.2-17.9V27c0-4.9-0.9-8.4-2.7-10.5s-4.8-3-9.2-3h-12.6c-1.2,0-2.2-1-2.2-2.2c0,0,0,0,0,0l0,0V2.2c0-1.2,1-2.2,2.2-2.2c0,0,0,0,0,0h13.4c7.8,0,12.9,2.1,18,7.6s7.1,12.3,7.1,21.7v14.2c0,2.2,0.1,4,0.2,5.7v2.2c0.5,3.2,1.8,6.2,3.6,8.9c2.8,4.5,7.1,10.7,11.3,13.7l0,0l0.3,0.3l0,0l0.2,0.3h0.1v0.3l0,0c0.1,0.3,0.1,0.7,0,1l0,0v0.3h-0.1l-0.2,0.3l0,0l-0.3,0.3l0,0c-4.2,3.1-8.5,9.3-11.3,13.7c-1.8,2.7-3.1,5.7-3.6,8.9v2.2c-0.1,1.6-0.2,3.5-0.2,5.7v14.3c0,9.4-2.4,16.7-7.1,21.7s-10.2,7.6-18,7.6h-13.4c-1.2,0-2.2-1-2.2-2.2c0,0,0,0,0,0V140l0,0c0-1.2,1-2.2,2.2-2.2l0,0h12.7c4.4,0,7.5-1,9.2-3s2.7-5.6,2.7-10.5v-22.4c-0.2-6.3,1.6-12.6,5.1-17.9c1.6-2.5,3.5-4.7,5.7-6.6l0,0c0.9-0.7,1.1-2,0.4-2.9C412.7,74.3,412.6,74.2,412.5,74L412.5,74z"/></g></svg>
+    </a>
+
+    <nav class="Header-nav PrimaryNav">
+      <ul class="menu">
+        <li class="first leaf">
+          <a href="https://developer.okta.com/product/">Product</a>
+        </li>
+        <li class="leaf">
+          <a href="https://developer.okta.com/pricing/">Pricing</a>
+        </li>
+        <li class="leaf">
+          <a href="/blog/" class="active">Blog</a>
+        </li>
+        <li class="leaf">
+          <a href="/documentation/">Docs</a>
+        </li>
+        <li class="last expanded">
+          <span class="nolink">Support</span>
+          <ul class="menu">
+            <li class="first leaf"><a href="https://devforum.okta.com/">Okta Developer Forums</a></li>
+            <li class="last leaf"><a href="mailto:developers@okta.com">developers@okta.com</a></li>
+          </ul>
+        </li>
+      </ul>
+      <a class="PrimaryNav-toggle" href="#">
+        <svg width="20px" height="20px" viewBox="0 0 20 20" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+            <g class="MenuIcon" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="round">
+                <path d="M1,16 L19,16" class="MenuIcon-line1" stroke="#FFFFFF" stroke-width="2"></path>
+                <path d="M1,4 L19,4" class="MenuIcon-line2" stroke="#FFFFFF" stroke-width="2"></path>
+                <path d="M1,10 L19,10" class="MenuIcon-line3" stroke="#FFFFFF" stroke-width="2"></path>
+                <path d="M1,10 L19,10" class="MenuIcon-line4" stroke="#FFFFFF" stroke-width="2"></path>
+            </g>
+        </svg>
+        <svg class="CloseIcon" width="16px" height="16px" viewBox="0 0 16 16" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+          <g id="ALl-Boards" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+            <g id="Desktop" transform="translate(-915.000000, -235.000000)" fill="#FFFFFF">
+              <g id="Search-bar-Active" transform="translate(30.000000, 26.000000)">
+                <polygon id="Icon/Cross" points="901 210.6 899.4 209 893 215.4 886.6 209 885 210.6 891.4 217 885 223.4 886.6 225 893 218.6 899.4 225 901 223.4 894.6 217"></polygon>
+              </g>
+            </g>
+          </g>
+        </svg>
+      </a>
+
+      <div class="PrimaryNav-cta">
+        <a target="_blank" rel="noopener noreferrer" href="https://login.okta.com/?SAMLRequest=fc%2B7CsJAEAXQXvAflu1NNJUMeZBGELTx1a%2FrYILJTtyZGD%2FfSBRiYzlw77lMnD3rSj3Qc0ku0YtgrhU6S5fSXRN9PKxmS52l00nMpq6iBvJWCrfDe4ss6vStRe9aDzmGIZfo1jsgwyWDMzUyiIV9vt1AH4XGk5ClSvewUgMNa%2BYW%2FVj5jxhm9NLP67QQaSAMu64L6CYmsFSHlnzT4ZlLwTgcL6Sf8%2FeX9AU%3Dhttps://login.okta.com/?SAMLRequest=fc%2B7CsJAEAXQXvAflu1NNJUMeZBGELTx1a%2FrYILJTtyZGD%2FfSBRiYzlw77lMnD3rSj3Qc0ku0YtgrhU6S5fSXRN9PKxmS52l00nMpq6iBvJWCrfDe4ss6vStRe9aDzmGIZfo1jsgwyWDMzUyiIV9vt1AH4XGk5ClSvewUgMNa%2BYW%2FVj5jxhm9NLP67QQaSAMu64L6CYmsFSHlnzT4ZlLwTgcL6Sf8%2FeX9AU%3D" class="Button--redOutline">Login</a>
+        <a href="https://developer.okta.com/signup/" class="Button--red">Sign up</a>
+      </div>
+
+      <a class="SearchIcon" href="#"></a>
+      <form id="form_search" class="SearchBar Formisimo_clocked_69929" method="get" action="https://developer.okta.com/search/" name="form_search" __bizdiag="-784164280" __biza="WJ__">
+        <input type="text" name="stq" autocomplete="off" id="st-search-input-auto" class="st-search-input" placeholder="Search">
+        <input type="submit" name="submit" value="GO">
+      </form>
+
+    </nav>
+
+  </div>
+
+</header>
+
+	<div class="page-content">
+		
+
+
+
+
+
+
+<section class="Blog is-single">
+		
+	<div class="Blog-social">
+		
+		<a href="https://github.com/mraible" target="_blank"><i class="fa fa-github"></i></a>
+		
+		
+		<a href="https://twitter.com/mraible" target="_blank"><i class="fa fa-twitter"></i></a>
+		
+		
+		
+		<a href="http://raibledesigns.com" target="_blank"><i class="fa fa-external-link"></i></a>
+		
+	</div>
+	
+	
+
+<article class="BlogPost">
+	
+	<header class="BlogPost-header">
+	
+		<time class="BlogPost-date" datetime="2017-09-08">September 8, 2017</time>
+		
+		<h1 class="BlogPost-title">
+			
+			NoSQL Options for Java Developers
+			
+		</h1>
+		
+		<div class="BlogPost-attribution">
+			
+				<img src="/assets/avatar-matt_raible-9974af6192eb1753b7137c8fff0a2c6e6bb9736a2517986cb5cc50bb040e83d4.jpg" alt="avatar-matt_raible.jpg" class="BlogPost-avatar">
+			
+			<span class="BlogPost-author">Matt Raible</span>
+		</div>
+	
+	</header>
+	
+	<div class="BlogPost-content">
+		
+	<p>The Java community is one I know and love, so even though a NoSQL database is rarely tied to a language I’m writing this article for you, Java developers around the world. In this article, I’ll show you several options for NoSQL databases. After exploring all the options, I’ll narrow the choices down to the top five based on Indeed Jobs, GitHub stars, and Stack Overflow tags. Then I’ll let you know if they’re supported by Spring Data and Spring Boot.</p>
+
+<h2 id="why-nosql">Why NoSQL?</h2>
+
+<p>NoSQL databases have helped many web-scale companies achieve high scalability through <a href="https://en.wikipedia.org/wiki/Eventual_consistency">eventual consistency</a>: because a NoSQL database is often distributed across several machines, with some latency, it guarantees only that all instances will eventually be consistent. Eventually consistent services are often called BASE (basically available, soft state, eventual consistency) services in contrast to traditional ACID properties.</p>
+
+<h2 id="selecting-nosql-candidates">Selecting NoSQL Candidates</h2>
+
+<p>Defining the top five can be difficult. Many folks have attempted to this recently. See the <a href="#research--notes">Research &amp; Notes section</a> at the end of this article for reference.</p>
+
+<p>In mid-August, I told my followers on Twitter that I was writing this article. I asked for good/bad stories about NoSQL databases and received a number of options people wanted me to include.</p>
+
+<div style="margin: 0 auto; max-width: 500px">
+<blockquote class="twitter-tweet" data-lang="en"><p lang="en" dir="ltr">I&#39;m writing an article about NoSQL options for <a href="https://twitter.com/java">@Java</a> developers. I&#39;d 💙 to hear what you prefer, as well as good/bad stories in production.</p>&mdash; Matt Raible (@mraible) <a href="https://twitter.com/mraible/status/897492857170280448">August 15, 2017</a></blockquote>
+<script async="" src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
+</div>
+
+<p>I received many suggestions, listed in alphabetical order below:</p>
+
+<ol>
+  <li>ArangoDB</li>
+  <li>Cassandra</li>
+  <li>Couchbase</li>
+  <li>DynamoDB</li>
+  <li>FaunaDB</li>
+  <li>Hazelcast</li>
+  <li>MongoDB</li>
+  <li>Neo4j</li>
+  <li>PostgreSQL JSON</li>
+  <li>Redis</li>
+  <li>(JetBrains) Xodus</li>
+</ol>
+
+<p>People also mentioned <a href="http://hibernate.org/ogm/">Hibernate OGM</a> (JPA for NoSQL) and <a href="https://github.com/lordofthejars/nosql-unit/">NoSQLUnit</a> as tools to help access and test NoSQL databases.</p>
+
+<p>Note that I didn’t receive any requests for CouchDB, HBase, Elasticsearch, or Solr. CouchDB and Couchbase are often confused because of similar names, but <a href="https://www.couchbase.com/couchbase-vs-couchdb">they’re quite different</a>. Since CouchDB is a document store, I included it in my rankings. I also added HBase since it is mentioned by ITBusinessEdge, KDnuggets, and DB-Engines (in Research &amp; Notes section). I didn’t include Elasticsearch or Solr because I believe those aren’t often used as the primary data store.</p>
+
+<h2 id="raibles-ranking-technique">Raible’s Ranking Technique</h2>
+
+<p>I used Indeed Jobs, GitHub Stars, Stack Overflow tags, and Docker pulls to develop my system of ranking the top five NoSQL databases.</p>
+
+<h3 id="indeed-jobs">Indeed Jobs</h3>
+
+<p>I searched on <a href="https://www.indeed.com/jobs">Indeed Jobs</a> without a location and found very few surprises, save for Amazon’s DynamoDB showing up as a top contender.</p>
+
+<p><img src="/assets/blog/nosql-for-java/indeed-jobs-d07509c1435c8f744492d6ef6793966d3c8769f0faf32319e8867a753382d2bf.png" alt="Indeed Jobs, September 2017" width="700" class="center-image" /></p>
+
+<p><strong>NOTE:</strong> It’s difficult to search for “PostgreSQL JSON” because most listings specify “PostgreSQL” as a requirement, not its NoSQL support. I searched for “postgres + json”. Xodus is the name of a company, so I had to tack on “JetBrains” to ensure accurate results.</p>
+
+<h3 id="github-stars">GitHub Stars</h3>
+
+<p>I searched and found the top five NoSQL options by GitHub stars are Redis, MongoDB, ArangoDB, Neo4j, and Cassandra.</p>
+
+<p><img src="/assets/blog/nosql-for-java/github-stars-d52f3abd491f50cfc94c0531258056cd3a78b840a1183ba55cf597518aa9613b.png" alt="GitHub Stars, September 2017" width="700" class="center-image" /></p>
+
+<p><strong>NOTE:</strong> Cassandra, HBase, PostgreSQL are mirrored repositories. DynamoDB, Couchbase, and FaunaDB don’t have their servers on GitHub, so I counted stars for their Java-based drivers. Using number of stars for each option’s Java driver is a good idea, but <a href="https://redis.io/clients#java">there’s 11 just for Redis</a>.</p>
+
+<p>You can use Tim Qian’s <a href="https://github.com/timqian/star-history">star-history project</a> to see the star growth of these five.</p>
+
+<p><img src="/assets/blog/nosql-for-java/github-stars-growth-fb048ee38d653439f761c5cc969f193335d7450e95b32138266462bf9028d01e.png" alt="GitHub Star History" width="700" class="center-image" /></p>
+
+<h3 id="stack-overflow-tags">Stack Overflow Tags</h3>
+
+<p>I searched on Stack Overflow for tags for each and found that MongoDB and PostgreSQL are the most popular, followed by Neo4j, Cassandra, and Redis.</p>
+
+<p><img src="/assets/blog/nosql-for-java/stackoverflow-tags-908a348a4937ea6d7521faa77020153f99941e30bea88239f379389dacb992d0.png" alt="Stack Overflow Tags, September 2017" width="700" class="center-image" /></p>
+
+<h3 id="docker-pulls">Docker Pulls</h3>
+
+<p>I searched on <a href="https://hub.docker.com/">Docker Hub</a> for images and found the stats to be 10M+ for a few, 5M+ for Neo4j, and 1M+ for many others. FaunaDB and JetBrains Xodus don’t seem to have images available.</p>
+
+<p><img src="/assets/blog/nosql-for-java/docker-pulls-9b06dd611d9d01f247b5da7434952bfba5190a6464116e2a3713a2fddabe085a.png" alt="Docker Pulls, September 2017" width="700" class="center-image" /></p>
+
+<p>After gathering this information, it didn’t seem very relevant to include these stats in my ranking. My reason is two-fold: because the numbers aren’t exact and because there weren’t “official” images for each option.</p>
+
+<h2 id="nosql-options-matrix">NoSQL Options Matrix</h2>
+
+<p>I created a matrix to combine jobs, stars, and tags. I awarded 1-5 points based on the ranking they scored in each category. If an option didn’t make the top five, it received a zero. The results – MongoDB, Redis, Cassandra, Neo4j, and PostgreSQL – are in the table below.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>NoSQL Option</th>
+      <th style="text-align: center">Jobs</th>
+      <th style="text-align: center">Stars</th>
+      <th style="text-align: center">Tags</th>
+      <th style="text-align: center">Total</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>MongoDB</td>
+      <td style="text-align: center">5</td>
+      <td style="text-align: center">4</td>
+      <td style="text-align: center">5</td>
+      <td style="text-align: center">14</td>
+    </tr>
+    <tr>
+      <td>Redis</td>
+      <td style="text-align: center">3</td>
+      <td style="text-align: center">5</td>
+      <td style="text-align: center">1</td>
+      <td style="text-align: center">9</td>
+    </tr>
+    <tr>
+      <td>Cassandra</td>
+      <td style="text-align: center">4</td>
+      <td style="text-align: center">1</td>
+      <td style="text-align: center">2</td>
+      <td style="text-align: center">7</td>
+    </tr>
+    <tr>
+      <td>Neo4j</td>
+      <td style="text-align: center">0</td>
+      <td style="text-align: center">2</td>
+      <td style="text-align: center">3</td>
+      <td style="text-align: center">5</td>
+    </tr>
+    <tr>
+      <td>PostgreSQL</td>
+      <td style="text-align: center">0</td>
+      <td style="text-align: center">0</td>
+      <td style="text-align: center">4</td>
+      <td style="text-align: center">4</td>
+    </tr>
+    <tr>
+      <td>ArangoDB</td>
+      <td style="text-align: center">0</td>
+      <td style="text-align: center">3</td>
+      <td style="text-align: center">0</td>
+      <td style="text-align: center">3</td>
+    </tr>
+    <tr>
+      <td>HBase</td>
+      <td style="text-align: center">2</td>
+      <td style="text-align: center">0</td>
+      <td style="text-align: center">0</td>
+      <td style="text-align: center">2</td>
+    </tr>
+    <tr>
+      <td>DynamoDB</td>
+      <td style="text-align: center">1</td>
+      <td style="text-align: center">0</td>
+      <td style="text-align: center">0</td>
+      <td style="text-align: center">1</td>
+    </tr>
+    <tr>
+      <td>Couchbase</td>
+      <td style="text-align: center">1</td>
+      <td style="text-align: center">0</td>
+      <td style="text-align: center">0</td>
+      <td style="text-align: center">1</td>
+    </tr>
+    <tr>
+      <td>CouchDB</td>
+      <td style="text-align: center">0</td>
+      <td style="text-align: center">0</td>
+      <td style="text-align: center">0</td>
+      <td style="text-align: center">0</td>
+    </tr>
+    <tr>
+      <td>Hazelcast</td>
+      <td style="text-align: center">0</td>
+      <td style="text-align: center">0</td>
+      <td style="text-align: center">0</td>
+      <td style="text-align: center">0</td>
+    </tr>
+    <tr>
+      <td>JetBrains Xodus</td>
+      <td style="text-align: center">0</td>
+      <td style="text-align: center">0</td>
+      <td style="text-align: center">0</td>
+      <td style="text-align: center">0</td>
+    </tr>
+    <tr>
+      <td>FaunaDB</td>
+      <td style="text-align: center">0</td>
+      <td style="text-align: center">0</td>
+      <td style="text-align: center">0</td>
+      <td style="text-align: center">0</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>If you look at <a href="https://db-engines.com/en/ranking">DB-Engines Ranking</a> for their top five options, you’ll find PostgreSQL, MongoDB, Cassandra, Redis, and HBase.</p>
+
+<p><img src="/assets/blog/nosql-for-java/db-engines-ranking-9c091fb940caba489e8912b6a1621827279372225b97134a480905294ddeff94.png" alt="DB-Engines Ranking, September 2017" width="800" class="center-image" /></p>
+
+<p>Will you look at that - our top five results are pretty close!</p>
+
+<h2 id="overview-of-nosql-options">Overview of NoSQL Options</h2>
+
+<p>Since my top five results are pretty close to what DB-Engines has, I’ll use mine as the top five. Below is an overview of each one, along with information about their Spring Boot support.</p>
+
+<p>You might ask “Why Spring Boot?” My answer is simple: because Spring Boot adoption is high. According to <a href="http://redmonk.com/fryan/2017/06/22/language-framework-popularity-a-look-at-java-june-2017/">Redmonk’s recent look at Java frameworks</a>, Spring Boot adoption grew 76% between September 2016 and June 2017.</p>
+
+<p><img src="/assets/blog/nosql-for-java/java-frameworks-growth-11e7c712f00f458b29a2241cb6b845eb463ef41bd26eb67968eb4621ed187e1f.png" alt="The Spring Boot Explosion" width="800" class="center-image" /></p>
+
+<p>And things haven’t slowed down since June: <a href="https://twitter.com/PieterHumphrey/status/905131222094929920">Maven downloads in August 2017 were 22.2 million</a>.</p>
+
+<h3 id="mongodb">MongoDB</h3>
+
+<p>MongoDB was founded in 2007 by the folks behind DoubleClick, ShopWiki, and Gilt Groupe. It uses the Apache and GNU-APGL licenses on <a href="https://github.com/mongodb/mongo">GitHub</a>. Its many large customers include Adobe, eBay, and eHarmony.</p>
+
+<ul>
+  <li><strong>Available on start.spring.io?</strong> Yes, including embedded MongoDB for testing.</li>
+  <li><strong>Supported by Spring Data?</strong> Yes, via <a href="https://projects.spring.io/spring-data-mongodb/">Spring Data MongoDB</a>.</li>
+  <li><strong>Bonus:</strong> Supported by Hibernate OGM, NoSQLUnit, and <a href="http://www.jhipster.tech">JHipster</a>.</li>
+</ul>
+
+<h3 id="redis">Redis</h3>
+
+<p>Redis stands for REmote Dictionary Server and was started by <a href="http://invece.org/">Salvatore Sanfilippo</a>. It was initially released on April 10, 2009. According to <a href="https://redis.io/">redis.io</a>, Redis is a BSD-licensed in-memory data structure store and can be used as a database, cache, and message broker. <a href="https://redis.io/topics/whos-using-redis">Well known companies using Redis</a> include Twitter, GitHub, Snapchat, and Craigslist.</p>
+
+<ul>
+  <li><strong>Available on start.spring.io?</strong> Yes.</li>
+  <li><strong>Supported by Spring Data?</strong> Yes, via <a href="https://projects.spring.io/spring-data-redis/">Spring Data Redis</a>.</li>
+  <li><strong>Bonus:</strong> Supported by NoSQLUnit. Hibernate ORM support is in progress.</li>
+</ul>
+
+<h3 id="cassandra">Cassandra</h3>
+
+<p><a href="http://cassandra.apache.org/">Cassandra</a> is “a distributed storage system for managing structured data that is designed to scale to a very large size across many commodity servers, with no single point of failure” (from <a href="https://www.facebook.com/notes/facebook-engineering/cassandra-a-structured-storage-system-on-a-p2p-network/24413138919">“Cassandra – A structured storage system on a P2P Network”</a> on the Facebook Engineering blog). It was initially developed at Facebook to power its Inbox Search feature. Its creators, Avinash Lakshman (one of the creators of Amazon DynamoDB) and Prashant Malik, released it as an open-source project in July 2008. In March 2009, it became an Apache Incubator project and graduated to a top-level project in February 2010.</p>
+
+<p>In addition to Facebook, Cassandra helps a number of other companies achieve web scale. It has some <a href="http://cassandra.apache.org">impressive numbers about scalability on its homepage</a>.</p>
+
+<blockquote>
+  <p>One of the largest production deployments is Apple’s, with over 75,000 nodes storing over 10 PB of data. Other large Cassandra installations include Netflix (2,500 nodes, 420 TB, over 1 trillion requests per day), Chinese search engine Easou (270 nodes, 300 TB, over 800 million requests per day), and eBay (over 100 nodes, 250 TB).</p>
+</blockquote>
+
+<ul>
+  <li><strong>Available on start.spring.io?</strong> Yes.</li>
+  <li><strong>Supported by Spring Data?</strong> Yes, via <a href="https://projects.spring.io/spring-data-cassandra">Spring Data Cassandra</a>.</li>
+  <li><strong>Bonus:</strong>  Supported by NoSQLUnit and JHipster. Hibernate ORM support is in progress.</li>
+</ul>
+
+<h3 id="neo4j">Neo4j</h3>
+
+<p>Neo4j is available as GPL3-licensed “community edition” with some extensions licensed under the Affero GPL. The community edition is limited to running on one node and does not contain clustering support or hot backups. Neo4J’s “enterprise edition” has scale-out capabilities, in-memory page cache, and hot backups. A 30-day trial is available; no pricing is provided.</p>
+
+<p>Neo4j is best known as a graph database, where everything is stored as an edge, node, or an attribute. Version 1.0 was released in February 2010 and has been developed by Neo4j, Inc. since its beginning. Its <a href="https://neo4j.com/customers/">large customers</a> include Walmart, Airbnb, Monsanto, and eBay.</p>
+
+<ul>
+  <li><strong>Available on start.spring.io?</strong> Yes.</li>
+  <li><strong>Supported by Spring Data?</strong> Yes, via <a href="https://projects.spring.io/spring-data-neo4j">Spring Data Neo4j</a>.</li>
+  <li><strong>Bonus:</strong>  Supported by Hibernate ORM and NoSQLUnit.</li>
+</ul>
+
+<h3 id="postgresql-json">PostgreSQL JSON</h3>
+
+<p>PostgreSQL is a traditional relational database management system (RDBMS) that has NoSQL support via its native JSON support (added in version 9.2). In 9.4, they added support for Binary JSON (aka <a href="https://www.postgresql.org/docs/current/static/datatype-json.html">JSONB</a>) and indexes.</p>
+
+<p>Leigh Halliday explains how you can <a href="https://blog.codeship.com/unleash-the-power-of-storing-json-in-postgres/">unleash the power of storing JSON in Postgres</a> in a blog post dated June 2017. Halliday goes on to show how this can be used with Ruby on Rails. A blog post from Umair Shahid shows <a href="https://blog.2ndquadrant.com/processing-json/">how to process PostgreSQL JSON &amp; JSONB data in Java</a>.</p>
+
+<p>I’m not sure that PostgreSQL and its JSON support should be included as a recommend NoSQL option. However, it likely makes sense if you’re already using PostgreSQL and want to make your data schema more free-flowing. As <a href="https://www.compose.com/articles/could-postgresql-9-5-be-your-next-json-database/">Dj Walker-Morgan says</a>, “PostgreSQL 9.5 isn’t your next JSON database, but it is a great relational database with a fully fledged JSON story.”</p>
+
+<ul>
+  <li><strong>Available on start.spring.io?</strong> Yes.</li>
+  <li><strong>Supported by Spring Data?</strong> Yes, via <a href="https://projects.spring.io/spring-data-jpa/">Spring Data JPA</a>.</li>
+</ul>
+
+<h2 id="recommendation">Recommendation</h2>
+
+<p>I feel good about how this analysis played out, and as a committer on the <a href="http://www.jhipster.tech">JHipster</a> project, I’m both well aware of the strength of that team and think that its support for MongoDB and Cassandra is a pretty strong endorsement. It’s interesting to see that there’s <a href="https://github.com/jhipster/generator-jhipster/issues/6086">work-in-progress to add Couchbase</a> too.</p>
+
+<p>But I’m not stopping there. I shared this analysis with a few experts I know in the Java and NoSQL communities and asked them the following questions:</p>
+
+<ol>
+  <li>Do you agree with my choices of the top 5 NoSQL options (MongoDB, Redis, Cassandra, Neo4j, and PostgreSQL with its JSON support)?</li>
+  <li>Do you have any good or bad stories about using any of these databases in production?</li>
+  <li>Have you found any of these databases particularly difficult to get started with or maintain over time?</li>
+  <li>What is your favorite NoSQL database and why?</li>
+  <li>Anything else you’d like to share?</li>
+</ol>
+
+<p>Please check back in a few weeks! I’ll post the answers to these questions from the experts I interviewed. I’ll also update this post to point to it when I do. If you’re an expert on NoSQL databases, let me know! I’d be happy to include your answers in the interview. Just send me a message to <a href="https://twitter.com/mraible">@mraible on Twitter</a> or matt.raible@okta.com.</p>
+
+<p><strong>Update:</strong> <a href="/blog/2017/10/10/nosql-options-for-java-developers-part-ii">Part II has been published</a>. Many thanks to Justin McCarthy, Rafal Glowinski, Vlad Mihalcea, and Laurent Doguin for answering these questions!</p>
+
+<h2 id="research--notes">Research &amp; Notes</h2>
+
+<p>ITBusinessEdge has a <a href="http://www.itbusinessedge.com/slideshows/top-five-nosql-databases-and-when-to-use-them.html">slideshow about the top five NoSQL databases</a>. However, there’s no date on the article, and it says Redis Labs made the selection. The slideshow lists MongoDB, Cassandra, Redis, Cassandra, CouchDB, and HBase.</p>
+
+<p><a href="https://twitter.com/mattmayo13">Matthew Mayo</a>, editor of KDnuggets, wrote a similar article about <a href="http://www.kdnuggets.com/2016/06/top-nosql-database-engines.html">Top NoSQL Database Engines</a> in June 2016. Mayo used <a href="http://db-engines.com/en/ranking">db-engines.com ranking</a> and Google Trends to select the top five: MongoDB, Cassandra, Redis, HBase, and Neo4j.</p>
+
+<p>Hackernoon has an <a href="https://hackernoon.com/top-4-nosql-databases-infographic-b6acc389befc">Infographic of the most popular NoSQL databases</a> that are “worth your notice.” This article is from June 2017, and the comments say the rankings are based on stats from <a href="https://db-engines.com/en/ranking_trend">https://db-engines.com/en/ranking_trend</a>.</p>
+
+<p><img src="/assets/blog/nosql-for-java/hackernoon-infographic-226b39cd37b8bd0bbcb6032f036be943dd9179b1920b2aa3c7f1410f50a979b7.png" alt="Hackernoon Infographic" class="center-image" /></p>
+
+<p><strong>NOTE:</strong> If you look at this ranking today (September 6, 2017), you’ll see that Redis has replaced Couchbase. Or maybe Hackernoon skipped over Redis? It also begs the question: is Elasticsearch a NoSQL database, or a search engine? Should Solr be considered a NoSQL database as well? Both show up in <a href="https://db-engines.com/en/ranking_trend">DB-Engines Ranking Trends</a>.</p>
+
+<p><img src="/assets/blog/nosql-for-java/db-engines-ranking-graph-991a4b29a9a9558b48d7998f60dc4a1c505b0dc51a292e0182cf96bb09141cac.png" alt="DB-Engines Ranking Graph" width="800" class="center-image" /></p>
+
+<p>JAXenter published the results of their annual survey of <a href="https://jaxenter.com/top-databases-2017-132912.html">top database trends</a> on March 30, 2017. They list Elasticsearch and Solr as databases. They also include Apache Spark and Hadoop. MongoDB, Cassandra, Redis, and Neo4j are the most interesting “NoSQL” databases. Hazelcast is listed as the top in-memory data grid, over CouchDB and Oracle.</p>
+
+<p><img src="/assets/blog/nosql-for-java/jaxenter-top-databases-8a8fde81a3a47bd62684d10020586d5721046cf743d2cb22487560d7b2838771.png" alt="JAXenter Top Database Trends" width="645" class="center-image" /></p>
+
+<p><strong>Changelog:</strong></p>
+
+<ul>
+  <li>Oct 10, 2017: Updated to link to <a href="/blog/2017/10/10/nosql-options-for-java-developers-part-ii">Part II blog post</a> with answers from experts.</li>
+</ul>
+
+
+	</div>
+	
+</article>
+
+		
+</section>
+
+		
+	</div><footer class="Footer">
+    <div class="Wrap">
+
+        <div class="Row">
+
+            <div class="Column--3 Column--medium-6 Column--xSmall-12">
+
+                <a class="Logo" href="https://www.okta.com/" target="_blank" rel="noopener noreferrer">
+                    <img src="https://developer.okta.com/sites/all/themes/developer/images/logo-footer.png" alt="Okta">
+                    Visit okta.com
+                </a>
+
+            </div>
+
+            <div class="Column--3 Column--medium-12 Column--xSmall-12">
+
+                <h4>Social</h4>
+                <ul class="Footer-links Footer-links--social">
+                    <li><a class="Footer-links--github" target="_blank" rel="noopener noreferrer" href="http://github.com/oktadeveloper">Github</a></li>
+                    <li><a class="Footer-links--twitter" target="_blank" rel="noopener noreferrer" href="http://twitter.com/OktaDev">Twitter</a></li>
+                    <li><a class="Footer-links--forum" target="_blank" rel="noopener noreferrer" href="https://devforum.okta.com/">Forum</a></li>
+                    <li><a class="Footer-links--rss" target="_blank" rel="noopener noreferrer" href="http://feeds.feedburner.com/OktaBlog">RSS Blog</a></li>
+                </ul>
+            </div>
+
+            <div class="Column--3 Column--medium-6 Column--small-12">
+                <h4>More Info</h4>
+                <ul class="Footer-links">
+                    <li><a target="_blank" href="https://developer.okta.com/integrate-with-okta/">Integrate with Okta</a></li>
+                    <li><a href="/blog/">Blog</a></li>
+                    <li><a href="/docs/platform-release-notes/platform-release-notes.html">Release Notes</a></li>
+                    <li><a href="/3rd_party_notices/">3rd Party Notices</a></li>
+                </ul>
+            </div>
+
+            <div class="Column--3 Column--medium-6 Column--small-12">
+                <h4>Contact &amp; Legal</h4>
+                <ul class="Footer-links">
+                    <li><a href="https://developer.okta.com/contact/">Contact Sales</a></li>
+                    <li><a target="_blank" rel="noopener noreferrer" href="mailto:developers@okta.com">Contact Support</a></li>
+                    <li><a href="https://developer.okta.com/terms/">Terms &amp; Conditions</a></li>
+                    <li><a href="https://developer.okta.com/privacy/">Privacy Policy</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</footer>
+
+    <script type="text/javascript" src="/assets/master-0365dd27cf276cb2a15c0a43906ca592538204cf1ad4557547bf4e50609b411e.js"></script>
+    <script type="text/javascript" src="/assets/myOkta-911cbafbbe079b7a5522d9cbe15bd2a5f44e1582531e88393934bec69f97696b.js"></script>
+    
+    
+    
+    
+      <script type="text/javascript" src="/assets/blog-6e32dad27404131cc8630a5282264bed2ab4c08c91ac86fa496b75c53aa4f681.js"></script>
+    
+
+  <!-- START Post Footer -->
+  
+  <!-- START Google Tag Manager -->
+  <!-- https://support.google.com/tagmanager/answer/6103696?hl=en -->
+  <noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-TJ45R6" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+  <!-- END Google Tag Manager -->
+  <!-- START Google Remarketing Tag -->
+  <script type="text/javascript">
+    /* <![CDATA[ */
+    var google_conversion_id = 1006913831;
+    var google_custom_params = window.google_tag_params;
+    var google_remarketing_only = true;
+    /* ]]> */
+  </script>
+  <div style="display:none;"><script type="text/javascript" src="//www.googleadservices.com/pagead/conversion.js"></script></div>
+  <noscript><div style="display:inline;"><img height="1" width="1" style="border-style:none;" alt="" src="//googleads.g.doubleclick.net/pagead/viewthroughconversion/1006913831/?value=0&amp;guid=ON&amp;script=0"></div></noscript>
+  <!-- END Google Remarketing Tag -->
+  <!-- START Crazy Egg Tracking -->
+  <script type="text/javascript">
+    setTimeout(function(){var a=document.createElement("script");
+    var b=document.getElementsByTagName("script")[0];
+    a.src=document.location.protocol+"//script.crazyegg.com/pages/scripts/0021/9333.js?"+Math.floor(new Date().getTime()/3600000);
+    a.async=true;a.type="text/javascript";b.parentNode.insertBefore(a,b)}, 1);
+  </script>
+  <!-- END Crazy Egg Tracking -->
+
+  <!-- END Post Footer -->
+</body>
+</html>

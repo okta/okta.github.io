@@ -1,0 +1,1089 @@
+<!DOCTYPE html>
+<html class="no-js" lang="en" dir="ltr">
+<head>
+  <script>
+    var searchDomain = 'https://developer.okta.com';
+    var isProduction = window.location.hostname === 'developer.okta.com';
+    if (isProduction) {
+      // TypeKit
+      (function(d) {
+        var config = {
+          kitId: 'jff5neq',
+          scriptTimeout: 3000,
+          async: true
+        },
+        h=d.documentElement,t=setTimeout(function(){h.className=h.className.replace(/bwf-loadingb/g,"")+" wf-inactive";},config.scriptTimeout),tk=d.createElement("script"),f=false,s=d.getElementsByTagName("script")[0],a;h.className+=" wf-loading";tk.src='https://use.typekit.net/'+config.kitId+'.js';tk.async=true;tk.onload=tk.onreadystatechange=function(){a=this.readyState;if(f||a&&a!="complete"&&a!="loaded")return;f=true;clearTimeout(t);try{Typekit.load(config)}catch(e){}};s.parentNode.insertBefore(tk,s)
+      })(document);
+
+      // Google analytics
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+              (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+              m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+      ga('create', 'UA-15777010-3', 'auto');
+      ga('send', 'pageview');
+
+      // START Google Tag Manager
+      (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+      new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+      j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+      '//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+      })(window,document,'script','dataLayer','GTM-TJ45R6');
+      // END Google Tag Manager
+    }
+	</script>
+  <meta charset="utf-8">
+  <meta http-equiv="x-ua-compatible" content="IE=edge,chrome=1">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+ 	
+
+  <link type="text/css" rel="stylesheet" href="https://developer.okta.com/sites/all/themes/developer/css/master.css" media="all" />
+  <meta class="swiftype" name="title" data-type="string" content="Importing Your Stormpath Data Into Okta | Okta Developer" />
+  <meta class="swiftype" name="summary" data-type="string" content="Secure, scalable, and highly available authentication and user management for any app.
+" />
+
+  <link type="text/css" rel="stylesheet" href="/assets/animate-ec43d72c3ed45e08a460b8a2966d8dba6006aebfa0530935c3973fa493a8771f.css">
+  <link type="text/css" rel="stylesheet" href="/assets/okta-a96df4c9d48b78b618e1d541f46f7137d73d40653571e020c1ad59edd7915c60.css">
+  
+  
+  <title>Importing Your Stormpath Data Into Okta | Okta Developer</title>
+  <meta name="description" content="Secure, scalable, and highly available authentication and user management for any app.
+">
+  <link rel="canonical" href="https://developer.okta.com/documentation/stormpath-import"  data-proofer-ignore>
+  <link rel="alternate" type="application/rss+xml" title="Okta Developer" href="https://developer.okta.com/feed.xml"><!-- GA -->
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+  <link rel="manifest" href="/manifest.json">
+  <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#21313a">
+  <meta name="theme-color" content="#ffffff">
+</head>
+
+<body>
+  <div class="Page importing-your-stormpath-data-into-okta Page--docs-page">
+    <!-- START Header -->
+    
+
+
+
+
+<header class="Header is-fixed">
+
+  <div class="Wrap">
+
+    <a class="Logo" href="https://developer.okta.com">
+      <svg version="1.1" id="OktaLogo" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 431.9 151.4" style="enable-background:new 0 0 431.9 151.4;" xml:space="preserve"><g><g><g><path d="M102.2,41.4c-21,0-38.1,17.1-38.1,38.1s17.1,38.1,38.1,38.1s38.1-17.1,38.1-38.1l0,0C140.3,58.5,123.2,41.4,102.2,41.4z M102.2,98.5c-10.5,0-19-8.5-19-19s8.5-19,19-19s19,8.5,19,19c0.1,10.5-8.4,19-18.9,19.1C102.3,98.6,102.2,98.6,102.2,98.5L102.2,98.5z"/><path d="M169.1,92.3c0-1.9,1.5-3.4,3.4-3.4c0.9,0,1.8,0.4,2.4,1c9.5,9.7,25.3,26.3,25.4,26.4c0.4,0.5,0.8,0.8,1.4,0.9l1.6,0.2h17.2c1.8,0,3.3-1.4,3.4-3.2c0-0.8-0.3-1.5-0.8-2.2l-28.6-29.2l-1.5-1.5c-3.2-3.9-2.9-5.4,0.8-9.3l22.6-25.1c1.1-1.4,0.8-3.5-0.6-4.6c-0.6-0.4-1.3-0.7-2-0.7h-17c-0.6,0.2-1.1,0.5-1.5,0.9L175,64.4c-1.3,1.4-3.4,1.5-4.8,0.2c-0.7-0.6-1.1-1.5-1.1-2.5V18.9c0-1.7-1.3-3-3-3c-0.1,0-0.2,0-0.3,0h-12.7c-2.2,0-3.3,1.5-3.3,2.8v95.8c0,2.2,1.8,2.8,3.3,2.8h12.7c1.7,0.1,3.2-1.2,3.3-2.9c0,0,0,0,0,0V92.3z"/><path d="M273,114l-1.4-12.8c-0.2-1.7-1.7-2.9-3.4-2.7c0,0,0,0-0.1,0l-2.9,0.2c-10.1,0-18.5-7.9-19-18c0-0.3,0-0.7,0-1V64.2c-0.1-2,1.5-3.6,3.5-3.7c0,0,0,0,0,0h17c1.7-0.1,3.1-1.5,3-3.2c0,0,0-0.1,0-0.1v-12c0-2.3-1.5-3.6-2.8-3.6h-17.1c-1.9,0.1-3.5-1.5-3.6-3.4c0,0,0,0,0,0V18.9c-0.1-1.7-1.5-3.1-3.2-3c0,0-0.1,0-0.1,0h-12.7c-1.6-0.1-3,1.1-3.1,2.7c0,0.1,0,0.1,0,0.2c0,0,0,61.7,0,62c0.5,21,17.9,37.6,38.9,37c1.4,0,2.9-0.2,4.3-0.3C272,117.2,273.2,115.7,273,114z"/></g><path d="M364.7,98c-10.8,0-12.4-3.8-12.4-18.3l0,0V44.8c0-1.8-1.4-3.2-3.2-3.2c0,0-0.1,0-0.1,0h-12.8c-1.8,0-3.2,1.4-3.3,3.2v1.6C314.6,36,291.3,42.5,281,60.8c-10.4,18.3-3.9,41.6,14.4,51.9c14,7.9,31.4,6.2,43.5-4.2c3.6,5.5,9.3,9.1,18.3,9.1c1.5,0,9.7,0.3,9.7-3.5v-13.6C367,99.2,366,98.1,364.7,98z M314.2,98.6c-10.5,0-19-8.5-19-19s8.5-19,19-19s19,8.5,19,19l0,0C333.2,90.1,324.7,98.6,314.2,98.6z"/></g><path d="M19.4,74c2.2-1.9,4.1-4.1,5.7-6.6c3.5-5.3,5.4-11.5,5.2-17.9V27c0-4.9,0.9-8.4,2.7-10.5c1.8-2.1,4.8-3,9.2-3h12.6c1.2,0,2.1-0.9,2.2-2.1l0,0V2.2C57,1,56,0,54.8,0c0,0,0,0,0,0H41.5c-7.8,0-12.9,2.1-18,7.6s-7.1,12.3-7.1,21.7v14.2c0,2.2-0.1,4-0.2,5.7v2.2c-0.5,3.2-1.8,6.2-3.6,8.9C9.4,64.7,5.1,70.9,0.9,74l0,0l-0.3,0.3l0,0l-0.2,0.3H0.2v0.3l0,0c-0.1,0.3-0.1,0.7,0,1l0,0v0.3h0.1l0.2,0.3l0,0l0.3,0.3l0,0c4.2,3.1,8.5,9.3,11.3,13.7c1.8,2.7,3.1,5.7,3.6,8.9v2.2c0.1,1.6,0.2,3.5,0.2,5.7v14.3c0,9.4,2.4,16.7,7.1,21.7s10.2,7.6,18,7.6h13.8c1.2,0,2.2-1,2.2-2.2V140l0,0c0-1.2-1-2.2-2.2-2.2H42.2c-4.4,0-7.5-1-9.2-3s-2.7-5.6-2.7-10.5v-22.4c0.2-6.4-1.7-12.6-5.2-17.9c-1.6-2.5-3.5-4.7-5.7-6.6l0,0c-0.9-0.7-1.1-2-0.4-2.9C19.2,74.3,19.3,74.2,19.4,74L19.4,74z"/><path d="M412.5,74c-2.2-1.9-4.1-4.1-5.7-6.6c-3.5-5.3-5.4-11.5-5.2-17.9V27c0-4.9-0.9-8.4-2.7-10.5s-4.8-3-9.2-3h-12.6c-1.2,0-2.2-1-2.2-2.2c0,0,0,0,0,0l0,0V2.2c0-1.2,1-2.2,2.2-2.2c0,0,0,0,0,0h13.4c7.8,0,12.9,2.1,18,7.6s7.1,12.3,7.1,21.7v14.2c0,2.2,0.1,4,0.2,5.7v2.2c0.5,3.2,1.8,6.2,3.6,8.9c2.8,4.5,7.1,10.7,11.3,13.7l0,0l0.3,0.3l0,0l0.2,0.3h0.1v0.3l0,0c0.1,0.3,0.1,0.7,0,1l0,0v0.3h-0.1l-0.2,0.3l0,0l-0.3,0.3l0,0c-4.2,3.1-8.5,9.3-11.3,13.7c-1.8,2.7-3.1,5.7-3.6,8.9v2.2c-0.1,1.6-0.2,3.5-0.2,5.7v14.3c0,9.4-2.4,16.7-7.1,21.7s-10.2,7.6-18,7.6h-13.4c-1.2,0-2.2-1-2.2-2.2c0,0,0,0,0,0V140l0,0c0-1.2,1-2.2,2.2-2.2l0,0h12.7c4.4,0,7.5-1,9.2-3s2.7-5.6,2.7-10.5v-22.4c-0.2-6.3,1.6-12.6,5.1-17.9c1.6-2.5,3.5-4.7,5.7-6.6l0,0c0.9-0.7,1.1-2,0.4-2.9C412.7,74.3,412.6,74.2,412.5,74L412.5,74z"/></g></svg>
+    </a>
+
+    <nav class="Header-nav PrimaryNav">
+      <ul class="menu">
+        <li class="first leaf">
+          <a href="https://developer.okta.com/product/">Product</a>
+        </li>
+        <li class="leaf">
+          <a href="https://developer.okta.com/pricing/">Pricing</a>
+        </li>
+        <li class="leaf">
+          <a href="/blog/">Blog</a>
+        </li>
+        <li class="leaf">
+          <a href="/documentation/" class="active">Docs</a>
+        </li>
+        <li class="last expanded">
+          <span class="nolink">Support</span>
+          <ul class="menu">
+            <li class="first leaf"><a href="https://devforum.okta.com/">Okta Developer Forums</a></li>
+            <li class="last leaf"><a href="mailto:developers@okta.com">developers@okta.com</a></li>
+          </ul>
+        </li>
+      </ul>
+      <a class="PrimaryNav-toggle" href="#">
+        <svg width="20px" height="20px" viewBox="0 0 20 20" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+            <g class="MenuIcon" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="round">
+                <path d="M1,16 L19,16" class="MenuIcon-line1" stroke="#FFFFFF" stroke-width="2"></path>
+                <path d="M1,4 L19,4" class="MenuIcon-line2" stroke="#FFFFFF" stroke-width="2"></path>
+                <path d="M1,10 L19,10" class="MenuIcon-line3" stroke="#FFFFFF" stroke-width="2"></path>
+                <path d="M1,10 L19,10" class="MenuIcon-line4" stroke="#FFFFFF" stroke-width="2"></path>
+            </g>
+        </svg>
+        <svg class="CloseIcon" width="16px" height="16px" viewBox="0 0 16 16" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+          <g id="ALl-Boards" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+            <g id="Desktop" transform="translate(-915.000000, -235.000000)" fill="#FFFFFF">
+              <g id="Search-bar-Active" transform="translate(30.000000, 26.000000)">
+                <polygon id="Icon/Cross" points="901 210.6 899.4 209 893 215.4 886.6 209 885 210.6 891.4 217 885 223.4 886.6 225 893 218.6 899.4 225 901 223.4 894.6 217"></polygon>
+              </g>
+            </g>
+          </g>
+        </svg>
+      </a>
+
+      <div class="PrimaryNav-cta">
+        <a target="_blank" rel="noopener noreferrer" href="https://login.okta.com/?SAMLRequest=fc%2B7CsJAEAXQXvAflu1NNJUMeZBGELTx1a%2FrYILJTtyZGD%2FfSBRiYzlw77lMnD3rSj3Qc0ku0YtgrhU6S5fSXRN9PKxmS52l00nMpq6iBvJWCrfDe4ss6vStRe9aDzmGIZfo1jsgwyWDMzUyiIV9vt1AH4XGk5ClSvewUgMNa%2BYW%2FVj5jxhm9NLP67QQaSAMu64L6CYmsFSHlnzT4ZlLwTgcL6Sf8%2FeX9AU%3Dhttps://login.okta.com/?SAMLRequest=fc%2B7CsJAEAXQXvAflu1NNJUMeZBGELTx1a%2FrYILJTtyZGD%2FfSBRiYzlw77lMnD3rSj3Qc0ku0YtgrhU6S5fSXRN9PKxmS52l00nMpq6iBvJWCrfDe4ss6vStRe9aDzmGIZfo1jsgwyWDMzUyiIV9vt1AH4XGk5ClSvewUgMNa%2BYW%2FVj5jxhm9NLP67QQaSAMu64L6CYmsFSHlnzT4ZlLwTgcL6Sf8%2FeX9AU%3D" class="Button--redOutline">Login</a>
+        <a href="https://developer.okta.com/signup/" class="Button--red">Sign up</a>
+      </div>
+
+      <a class="SearchIcon" href="#"></a>
+      <form id="form_search" class="SearchBar Formisimo_clocked_69929" method="get" action="https://developer.okta.com/search/" name="form_search" __bizdiag="-784164280" __biza="WJ__">
+        <input type="text" name="stq" autocomplete="off" id="st-search-input-auto" class="st-search-input" placeholder="Search">
+        <input type="submit" name="submit" value="GO">
+      </form>
+
+    </nav>
+
+  </div>
+
+</header>
+
+    <!-- END Header -->
+     <!-- START Page Center w/Sub Nav & Content -->
+    <section class="PageContent DynamicSidebar has-tableOfContents">
+      <!-- START Fixed sidebar --><aside class="Sidebar">
+  <h2 class="Sidebar-location Sidebar-toggle h6">Navigation</h2>
+  <div class="Sidebar-close Sidebar-toggle"></div>
+  <div>
+    <h3 class="Sidebar-title"><a href = "/authentication-guide/">Authentication Guide</a></h3>
+    <ul class="Sidebar-nav">
+      <li>
+        <a href = "/authentication-guide/auth-overview/">OAuth 2.0 Overview</a>
+        
+      </li>
+      <li>
+        <a href = "/authentication-guide/implementing-authentication/">Implementing OAuth 2.0</a>
+        
+      </li>
+      <li>
+      <a href = "/authentication-guide/social-login/">Social Login</a>
+      
+      </li>
+      <li>
+      <a href = "/authentication-guide/saml-login/">SAML Login</a>
+      
+      </li>
+      <li>
+      <a href = "/authentication-guide/tokens/">Working With Tokens</a>
+      
+      </li>
+      <!--
+      <li>
+      <a href = "/authentication-guide/custom-login/">Customizing Login</a>
+      
+      </li>
+    -->
+    </ul>
+
+    <h3 class="Sidebar-title">Use Cases</h3>
+    <ul class="Sidebar-nav">
+      <li>
+        <a href="/use_cases/authentication/">Authentication</a>
+      </li>
+      <li>
+        <a href="/use_cases/mfa/">Multi-Factor Authentication</a>
+      </li>
+      <li>
+        <a href="/use_cases/api_access_management/">API Access Management</a>
+      </li>
+      <li>
+        <a href="/use_cases/integrate_with_okta/">Integrate with Okta</a>
+      </li>
+    </ul>
+
+    <h3 class="Sidebar-title">Reference</h3>
+    <ul class="Sidebar-nav">
+      <li>
+        <a href="/docs/api/getting_started/api_test_client.html">Getting Started</a>
+      </li>
+      <li>
+        <a href="/docs/api/resources/authn.html">Authentication Reference</a>
+      </li>
+      <li>
+        <a href="/docs/api/resources/apps.html">API Reference</a>
+      </li>
+      <li>
+        <a href="/reference/error_codes/">Error Codes</a>
+      </li>
+      <li>
+        <a href="/reference/okta_expression_language/">Okta Expression Language</a>
+      </li>
+      <li>
+        <a href="/docs/platform-release-notes/platform-release-notes.html">Okta API Release Notes</a>
+      </li>
+    </ul>
+
+    <h3 class="Sidebar-title">Standards</h3>
+    <ul class="Sidebar-nav">
+      
+      
+      
+      <li>
+        <a href="/standards/OAuth/">OAuth 2.0 and Okta</a>
+      </li>
+      
+      
+      <li>
+        <a href="/standards/OIDC/">OpenID Connect and Okta</a>
+      </li>
+      
+      
+      <li>
+        <a href="/standards/SAML/">SAML</a>
+      </li>
+      
+      
+      
+      
+      <li>
+        <a href="/standards/SCIM/">SCIM Provisioning with Lifecycle Management</a>
+      </li>
+      
+    </ul>
+
+    <script>
+      if (document.querySelectorAll("#Sidebar_Resources .is-active").length) {
+        document.getElementById('Sidebar_Resources').classList.remove('Sidebar-hide');
+      }
+
+      if (document.querySelectorAll("#Sidebar_References .is-active").length) {
+        document.getElementById('Sidebar_References').classList.remove('Sidebar-hide');
+      }
+    </script>
+  </div>
+</aside>
+<!-- END Fixed sidebar -->
+      <!-- START Page Content -->
+      <div class="PageContent-main" id="docs-body">
+        <a id="edit-link" href="https://github.com/okta/okta.github.io/edit/source/_source/" data-proofer-ignore>Edit Page</a>
+      <h1 id="importing-your-stormpath-data-into-okta">Importing Your Stormpath Data Into Okta</h1>
+
+<p>The Stormpath Import tool is a script that takes the data that you exported from Stormpath and imports it into Okta using Okta’s REST API. Once you have run the script, you will have to update your Stormpath Integration to use the Okta API.</p>
+
+<p><a name="prerequisites-and-capacity-planning"></a></p>
+<h2 id="prerequisites-and-capacity-planning">Prerequisites and Capacity Planning</h2>
+
+<p>Before you begin the import process, you need the following:</p>
+
+<ul>
+  <li>A decompressed local copy of the data you <a href="https://stormpath.com/export">exported from Stormpath</a></li>
+  <li>An Okta account which you can sign-up for here: <a href="https://developer.okta.com/signup/stormpath/">https://developer.okta.com/signup/stormpath/</a></li>
+  <li>The URL for your new Okta org (for example: <span class="okta-preview-domain">https://{yourOktaDomain}.com</span>)</li>
+  <li>An Okta API token: <a href="/docs/api/getting_started/getting_a_token.html">Instructions</a></li>
+</ul>
+
+<p>Once you have collected all these, start <a href="#running-the-import">the import process</a>.</p>
+
+<blockquote>
+  <p><strong>NOTE:</strong> If you are planning on migrating more than 20,000 users and/or 20 apps, you will need to get your limits increased. To increase your limit, email <a href="mailto:developers@okta.com">developers@okta.com</a>.</p>
+</blockquote>
+
+<p><a name="things-that-wont-migrate-and-known-caveats"></a></p>
+<h2 id="things-that-wont-migrate-and-known-caveats">Things That Won’t Migrate and Known Caveats</h2>
+
+<p><a name="usernames-must-be-in-email-format"></a></p>
+<h4 id="usernames-must-be-in-email-format">Usernames Must be in Email Format</h4>
+
+<p>The Stormpath Account <code class="highlighter-rouge">username</code> will be imported into the Okta User Profile <code class="highlighter-rouge">login</code> property. However, this value must be in email format: <code class="highlighter-rouge">example@domain.xyz</code>. If an Account’s <code class="highlighter-rouge">username</code> is not in email format, the import tool will convert it into email format by appending <code class="highlighter-rouge">@emailnotprovided.local</code>. For example, a Stormpath <code class="highlighter-rouge">username</code> value of <code class="highlighter-rouge">susan</code> will become <code class="highlighter-rouge">susan@emailnotprovided.local</code> after the import into Okta.</p>
+
+<p><a name="email-prefixes-must-be-unique"></a></p>
+<h4 id="email-prefixes-must-be-unique">Email Prefixes Must be Unique</h4>
+
+<p>Username prefixes must be unique in order for Stormpath Accounts to be successfully imported. This is because users in Okta may sign in with either  their username prefix, or their full username (in email format). This means that from Okta’s perspective <code class="highlighter-rouge">susan@example.com</code> and <code class="highlighter-rouge">susan</code> can both be used for sign in.</p>
+
+<p>This means that if a Stormpath Account shares an email prefix with one or more other Accounts, these Accounts will be imported, but the import tool will also log a warning to the console. Technically both users will still be able to log in, though they would only be able to do it with their full username (for example <code class="highlighter-rouge">susan@emailnotprovided.local</code>). The recommended options for this situation are:</p>
+
+<ul>
+  <li>Let affected users know that they need to sign in with the email suffix, and after they sign in they should update their username to use their real email address</li>
+  <li>Pre-process the Stormpath Accounts to use a different email suffix of your choosing</li>
+  <li>Contact <a href="mailto:developers@okta.com">developers@okta.com</a> to disable the requirement that usernames must be in the form of an email address.</li>
+</ul>
+
+<p><a name="custom-data-for-accounts-only"></a></p>
+<h4 id="custom-data-for-accounts-only">Custom Data For Accounts Only</h4>
+
+<p>Custom Data on any Stormpath resources other than Accounts is not imported. This means that Custom Data will not be imported from any of the following resources:</p>
+
+<ul>
+  <li>Tenant</li>
+  <li>Application</li>
+  <li>Directory</li>
+  <li>Group</li>
+  <li>Organization</li>
+</ul>
+
+<p>Account Custom Data will be imported according to the rules explained <a href="#stormpath-custom-data">below</a>.</p>
+
+<p><a name="account-links--duplicate-emails"></a></p>
+<h4 id="account-links--duplicate-emails">Account Links &amp; Duplicate Emails</h4>
+
+<p>Accounts are identified based on their email address and merged based on their Account Links. If multiple Accounts have the same email address and are linked with Account Links, then the import tool merges these Accounts into a single Okta User. There are two scenarios in which an Account is not imported:</p>
+
+<ul>
+  <li>If there are multiple Stormpath Accounts with the same email address that are not linked with AccountLinks</li>
+  <li>If there are multiple Stormpath Accounts with different email addresses that are linked with AccountLinks.</li>
+</ul>
+
+<p><a name="unverified-accounts"></a></p>
+<h4 id="unverified-accounts">Unverified Accounts</h4>
+
+<p>Accounts with <code class="highlighter-rouge">status</code> value <code class="highlighter-rouge">UNVERIFIED</code> are not imported. For more information on the <code class="highlighter-rouge">UNVERIFIED</code> status in Stormpath, see <a href="https://docs.stormpath.com/rest/product-guide/latest/accnt_mgmt.html#the-email-verification-workflow">the Stormpath documentation</a>.</p>
+
+<p><a name="active-directory-and-other-ldap-directories"></a></p>
+<h4 id="active-directory-and-other-ldap-directories">Active Directory and other LDAP Directories</h4>
+
+<p>LDAP Directories are not imported. For more information see <a href="#stormpath-directories-ldap">below</a>.</p>
+
+<p><a name="social-directory-caveats"></a></p>
+<h4 id="social-directory-caveats">Social Directory Caveats</h4>
+
+<p>Only Facebook, Google, and LinkedIn Directories are imported, as explained <a href="#stormpath-directories-social">below</a>. GitHub and Twitter Social Directories are not supported.</p>
+
+<p><a name="password-strength-caveats"></a></p>
+<h4 id="password-strength-caveats">Password Strength Caveats</h4>
+
+<p>The Stormpath Password Policy attributes <code class="highlighter-rouge">maxLength</code> and <code class="highlighter-rouge">minDiacritic</code> are not supported in Okta and will not be imported. For more information see the <a href="#stormpath-directory-password-strength">Password Strength section below</a>.</p>
+
+<p><a name="running-the-import"></a></p>
+<h2 id="running-the-import-tool">Running the Import Tool</h2>
+
+<p><a name="install"></a></p>
+<h4 id="install">Install</h4>
+
+<p>The Import Tool is written in Node.js, and requires Node.js version 7 or higher.</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>npm install -g @okta/stormpath-migration
+</code></pre>
+</div>
+
+<p><a name="run"></a></p>
+<h4 id="run">Run</h4>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>import-stormpath --stormPathBaseDir /path/to/export/data --oktaBaseUrl <span class="okta-preview-domain">https://{yourOktaDomain}.com</span> --oktaApiToken yourApiToken
+</code></pre>
+</div>
+
+<blockquote>
+  <p>NOTE: The import tool uses the Okta API and respects the API’s rate limiting. If your import exceeds the rate limit at any time, the tool will automatically pause. It will then automatically resume once it is able to do so. These actions will be logged to the console.</p>
+</blockquote>
+
+<p><a name="required-args"></a></p>
+<h4 id="required-args">Required Args</h4>
+
+<ul>
+  <li>
+    <p><code class="highlighter-rouge">--stormPathBaseDir (-b)</code>: Root directory where your Stormpath tenant export data lives</p>
+
+    <ul>
+      <li>Example: <code class="highlighter-rouge">--stormPathBaseDir ~/Desktop/stormpath-exports/683IDSZVtUQewtFoqVrIEe</code></li>
+    </ul>
+  </li>
+  <li>
+    <p><code class="highlighter-rouge">--oktaBaseUrl (-u)</code>: Base URL of your Okta tenant</p>
+
+    <ul>
+      <li>Example: <code class="highlighter-rouge">--oktaBaseUrl <span class="okta-preview-domain">https://{yourOktaDomain}.com</span></code></li>
+    </ul>
+  </li>
+  <li>
+    <p><code class="highlighter-rouge">--oktaApiToken (-t)</code>: API token for your Okta tenant (SSWS token)</p>
+
+    <ul>
+      <li>Example: <code class="highlighter-rouge">--oktaApiToken 00gdoRRz2HUBdy06kTDwTOiPeVInGKpKfG-H4P_Lij</code></li>
+    </ul>
+  </li>
+</ul>
+
+<p><a name="optional-args"></a></p>
+<h4 id="optional-args">Optional Args</h4>
+
+<ul>
+  <li>
+    <p><code class="highlighter-rouge">--customData (-d)</code>: Strategy for importing Stormpath Account custom data. Defaults to <code class="highlighter-rouge">flatten</code>.</p>
+
+    <ul>
+      <li>
+        <p>Options</p>
+
+        <ul>
+          <li><code class="highlighter-rouge">flatten</code> - (Default) Add <a href="/docs/api/resources/schemas.html#user-profile-schema-property-object">custom user profile schema properties</a> for each custom data property. Use this for simple custom data objects. For more information see <a href="#custom-data-objects">below</a>.</li>
+          <li><code class="highlighter-rouge">stringify</code> - Stringify the Account custom data object into one <code class="highlighter-rouge">customData</code> <a href="/docs/api/resources/schemas.html#user-profile-schema-property-object">custom user profile schema property</a>. Use this for more complex custom data objects. For more information see <a href="#custom-data-objects">below</a>.</li>
+          <li><code class="highlighter-rouge">exclude</code> - Exclude Stormpath Account custom data from the import</li>
+        </ul>
+      </li>
+      <li>
+        <p>Example: <code class="highlighter-rouge">--customData stringify</code></p>
+      </li>
+    </ul>
+  </li>
+  <li>
+    <p><code class="highlighter-rouge">--concurrencyLimit (-c)</code>: Max number of concurrent transactions. Defaults to <code class="highlighter-rouge">30</code>. Higher values may speed up your import.</p>
+
+    <ul>
+      <li>Example: <code class="highlighter-rouge">--concurrencyLimit 200</code></li>
+    </ul>
+  </li>
+  <li><code class="highlighter-rouge">--maxFiles (-f)</code>: Max number of files to parse per directory. You can use this to test an import without processing all of your files.
+    <ul>
+      <li>Example: <code class="highlighter-rouge">--maxFiles 500</code></li>
+    </ul>
+  </li>
+  <li>
+    <p><code class="highlighter-rouge">--logLevel (-l)</code>: Logging level. Defaults to <code class="highlighter-rouge">info</code>.</p>
+
+    <ul>
+      <li>Options: <code class="highlighter-rouge">error</code>, <code class="highlighter-rouge">warn</code>, <code class="highlighter-rouge">info</code>, <code class="highlighter-rouge">verbose</code>, <code class="highlighter-rouge">debug</code>, <code class="highlighter-rouge">silly</code></li>
+      <li>Example: <code class="highlighter-rouge">--logLevel verbose</code></li>
+    </ul>
+  </li>
+</ul>
+
+<p><a name="how-to-sanity-check-your-import"></a></p>
+<h3 id="how-to-sanity-check-your-import">How to Sanity Check Your Import</h3>
+
+<p>At a minimum, you should log in to your Okta Admin Console and check to make sure that the imported data looks the way you’d expect it to. For more information on this, see <a href="#how-stormpath-maps-to-okta">How Stormpath Maps to Okta</a> below.</p>
+
+<p><a name="updating-your-application"></a></p>
+<h3 id="updating-your-application">Updating Your Application</h3>
+
+<p>After you run the import tool and check the results, update your application to use the latest version of the Stormpath integration. It is very important that you read the changelog for your integration to understand how the upgrade will affect your application.</p>
+
+<blockquote>
+  <p>NOTE: These integrations will not be supported after 2017-08-17. They will continue to work with the Okta API, but we are not planning any new feature development on these packages.</p>
+</blockquote>
+
+<table>
+  <thead>
+    <tr>
+      <th>Integration</th>
+      <th>Version</th>
+      <th>Documentation</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Java Spring</td>
+      <td>2.0.0-okta</td>
+      <td>Release candidates currently documented <a href="https://github.com/stormpath/stormpath-sdk-java/blob/okta/OktaGettingStarted.md">here</a></td>
+    </tr>
+    <tr>
+      <td>Java Spring Boot</td>
+      <td>2.0.0-okta</td>
+      <td>Release candidates currently documented <a href="https://github.com/stormpath/stormpath-sdk-java/blob/okta/OktaGettingStarted.md">here</a></td>
+    </tr>
+    <tr>
+      <td>Node Express-Stormpath</td>
+      <td>4</td>
+      <td>Release candidates currently documented <a href="https://github.com/stormpath/express-stormpath/blob/4.0.0/docs/changelog.rst">here</a>.</td>
+    </tr>
+    <tr>
+      <td>ASP.NET 4.x</td>
+      <td>4</td>
+      <td><a href="https://github.com/stormpath/stormpath-dotnet-owin-middleware/blob/master/changelog.md">Changelog</a>, <a href="https://github.com/stormpath/stormpath-dotnet-owin-middleware/blob/master/migrating.md">Migration Guide</a></td>
+    </tr>
+    <tr>
+      <td>ASP.NET Core</td>
+      <td>4</td>
+      <td><a href="https://github.com/stormpath/stormpath-dotnet-owin-middleware/blob/master/changelog.md">Changelog</a>, <a href="https://github.com/stormpath/stormpath-dotnet-owin-middleware/blob/master/migrating.md">Migration Guide</a></td>
+    </tr>
+  </tbody>
+</table>
+
+<blockquote>
+  <p>NOTE: If you are not using one of these integrations, then you will have to port the SDK functionality to use the Okta REST API.</p>
+</blockquote>
+
+<p>Once you have updated your application and read the Changelog, you should try logging in with a known user to confirm the import has succeeded. If you are experiencing any problems, get in touch: <a href="mailto:developers@okta.com">developers@okta.com</a></p>
+
+<p><a name="debugging-the-tool"></a></p>
+<h3 id="debugging-the-tool">Debugging the tool</h3>
+
+<p>If you experience problems with your import, try setting the <code class="highlighter-rouge">logLevel</code> higher, as documented <a href="#optional-args">above</a>. You can also read the import script’s source code <a href="https://github.com/okta/stormpath-migration">on GitHub</a>.</p>
+
+<p><a name="how-stormpath-maps-to-okta"></a></p>
+<h2 id="how-stormpath-maps-to-okta">How Stormpath Maps to Okta</h2>
+
+<p><a name="overview"></a></p>
+<h3 id="overview">Overview</h3>
+
+<p>The Okta Organization (or Org) represents your private space inside Okta, which means it is equivalent to a Stormpath Tenant. Your Stormpath Accounts are modeled as Users inside Okta. The equivalent of the Stormpath Directory, Group, or Organization in Okta is the Group. In Okta, Groups can be thought of as sets of Users, and Users can be members of many different sets. Whereas in Stormpath your user Account belonged to a particular Directory, in Okta these associations are far more free-form. An Okta User can be associated with many different Groups simultaneously. For an example of how this can affect your user model, see <a href="#changes-in-structure-and-hierarchy">below</a>.</p>
+
+<p>The import tool works by iterating over your Stormpath data and then uses the Okta API to create equivalent objects inside Okta. The table below shows how this mapping happens. Further information on this mapping can be found in dedicated sections below:</p>
+
+<p><strong>Headline Resources</strong></p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Stormpath Resource</th>
+      <th>Okta Equivalent</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Account</td>
+      <td><a href="/docs/api/resources/users.html#user-properties">User</a></td>
+    </tr>
+    <tr>
+      <td>Application</td>
+      <td><a href="/docs/api/resources/oauth-clients.html">Client applications</a> acting as a client for an <a href="/docs/api/resources/oauth2.html#authorization-operations">OAuth 2.0 Authorization Server</a></td>
+    </tr>
+    <tr>
+      <td>Directory (Cloud)</td>
+      <td><a href="/docs/api/resources/groups.html">Group</a></td>
+    </tr>
+    <tr>
+      <td>Directory (Social)</td>
+      <td><a href="/docs/api/resources/idps.html">Identity Provider</a> + <a href="/docs/api/resources/groups.html">Group</a></td>
+    </tr>
+    <tr>
+      <td>Directory (SAML)</td>
+      <td><a href="/docs/api/resources/idps.html">Identity Provider</a></td>
+    </tr>
+    <tr>
+      <td>Directory (LDAP)</td>
+      <td>Not imported (<a href="#stormpath-directories-ldap">see below</a>)</td>
+    </tr>
+    <tr>
+      <td>Directory Password Strength</td>
+      <td><a href="/docs/api/resources/policy.html#GroupPasswordPolicy">Group Password Policy</a></td>
+    </tr>
+    <tr>
+      <td>Group</td>
+      <td><a href="/docs/api/resources/groups.html">Group</a></td>
+    </tr>
+    <tr>
+      <td>Organization</td>
+      <td><a href="/docs/api/resources/groups.html">Group</a></td>
+    </tr>
+    <tr>
+      <td>Custom Data</td>
+      <td><a href="/docs/api/resources/schemas.html">Custom Schema Properties</a></td>
+    </tr>
+  </tbody>
+</table>
+
+<p>You may notice that many Stormpath resources are becoming Groups inside Okta. This is primarily because the Okta Groups API supports prefix searching. As part of the import process, your Okta entities will have relevant prefixes attached to them. So, to fetch all Groups that represent imported Stormpath Directories, the query would be:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>GET /api/v1/groups?q=dir
+</code></pre>
+</div>
+
+<p>More on this can be found in the <a href="#import-naming-conventions">Import Naming Conventions</a> section below.</p>
+
+<p><a name="changes-in-structure-and-hierarchy"></a></p>
+<h4 id="changes-in-structure-and-hierarchy">Changes in Structure and Hierarchy</h4>
+
+<p>Groups in Okta do not own Users, and Users in Okta can be associated with multiple Groups. This is very different from Stormpath’s data model, where Directories own Accounts. Additionally, in Stormpath Accounts can be indirectly associated with other Account Stores. For example, in Stormpath, an Account “JSmith@ex.com” can be associated with Organization X indirectly, via a Directory that is directly associated with that Organization:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>[JSmith@ex.com]--[DirectoryA]--[OrganizationX]
+</code></pre>
+</div>
+
+<p>Because Okta has a relatively flat data model, the import process cannot preserve this structure and behavior. During import, Organization X and Directory A will become two Okta Groups, <code class="highlighter-rouge">org:OrganizationX</code> and <code class="highlighter-rouge">dir:DirectoryA</code>. The Account <code class="highlighter-rouge">JSmith@ex.com</code> will become a User with the same <code class="highlighter-rouge">name</code>, but that User cannot be indirectly associated with a Group via another Group. Instead, the User will be associated with both Groups:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>        ┌--[org:OrganizationX]
+        |
+[JSmith@ex.com]--[dir:DirectoryA]
+</code></pre>
+</div>
+
+<p>This means that in the future, if you add a new User to the <code class="highlighter-rouge">dir:DirectoryA</code> Group, they will not be automatically added to the <code class="highlighter-rouge">org:OrganizationX</code> Group. You will have to explicitly add the new User to both Groups.</p>
+
+<p><a name="import-naming-conventions"></a></p>
+<h4 id="import-naming-conventions">Import Naming Conventions</h4>
+
+<p>Each of the new Okta entities is named in a way that ties it to the Stormpath entity that is its source. The naming conventions are also designed for easy querying. More information about each entity’s naming convention can be found below.</p>
+
+<p><a name="the-import-process"></a></p>
+<h3 id="the-import-process">The Import Process</h3>
+
+<p>Stormpath resources are imported in the following order:</p>
+
+<ol>
+  <li>Accounts (including their Custom Data)</li>
+  <li>Directories (including Password Policy)</li>
+  <li>Groups</li>
+  <li>Organizations</li>
+  <li>Applications</li>
+</ol>
+
+<p><a name="stormpath-accounts"></a></p>
+<h3 id="stormpath-accounts">Stormpath Accounts</h3>
+
+<p>Stormpath Accounts are imported first. They are identified and merged based on their email address. If multiple Accounts have the same email address and are linked with AccountLinks, then the import tool will merge these Accounts into a single Okta User.</p>
+
+<p>The information from a Stormpath Account is imported into the <a href="/docs/api/resources/users.html#profile-object">Profile object</a> found inside an <a href="/docs/api/resources/users.html#user-properties">Okta User</a>.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Stormpath Account Attribute</th>
+      <th>Okta Profile Attribute</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="highlighter-rouge">username</code></td>
+      <td><code class="highlighter-rouge">login</code></td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">email</code></td>
+      <td><code class="highlighter-rouge">email</code></td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">givenName</code></td>
+      <td><code class="highlighter-rouge">firstName</code></td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">middleName</code></td>
+      <td><code class="highlighter-rouge">middleName</code></td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">lastName</code></td>
+      <td><code class="highlighter-rouge">surname</code></td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">fullName</code></td>
+      <td><code class="highlighter-rouge">displayName</code></td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">emailVerificationStatus</code></td>
+      <td><code class="highlighter-rouge">emailVerificationStatus</code> *</td>
+    </tr>
+  </tbody>
+</table>
+
+<p><em>*This is a <a href="/docs/api/resources/schemas.html">Custom Schema Attribute</a>.</em></p>
+
+<p>User API Keys (up to 10) and Custom Data are also imported. API Keys are added as Custom Schema Properties to the Profile using this format:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>"stormpathApiKey_{1-10}": "{apiKeyId}:{apiKeySecret}"
+</code></pre>
+</div>
+
+<p>More information on custom data can be found <a href="#custom-data-objects">below</a>.</p>
+
+<p><strong>Imported Passwords</strong></p>
+
+<p>Your passwords are exported from Stormpath in a hashed form. On first login, Okta will use the imported password hash and then convert the password to Okta’s secure password store for future logins.</p>
+
+<p><strong>Imported User Naming Convention</strong></p>
+
+<p>Okta Users created from Stormpath Accounts have a <code class="highlighter-rouge">login</code> inside the User’s Profile that exactly matches the <code class="highlighter-rouge">username</code> found on the old Stormpath Account:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>"login": "{SP_username}"
+</code></pre>
+</div>
+
+<p><a name="stormpath-custom-data"></a></p>
+<h3 id="stormpath-custom-data">Stormpath Custom Data</h3>
+
+<p>Only Custom Data associated with Accounts will be imported, although it can be skipped entirely if you wish. For more information on this, see <a href="#running-the-import">Running the Import</a>. If you choose to import Custom Data, the Okta import tool will scan all of the Custom Data on every Stormpath Account and create one Custom Profile Schema for all of the Users it is importing. However, Profile properties will only be returned if they have values. If they are blank, they will not be returned by the API.</p>
+
+<p>What your imported Custom Data looks like depends primarily on whether is a simple <code class="highlighter-rouge">key:value</code> pair, or a more complex object.</p>
+
+<p><a name="simple-custom-data"></a></p>
+<h5 id="simple-custom-data">Simple Custom Data</h5>
+
+<p>Any Custom Data attributes are imported and added to a user’s profile as custom schema properties. For more on the Okta User Profile Schema go here: https://developer.okta.com/docs/api/resources/schemas.html#schema-properties</p>
+
+<p>This Account Custom Data in Stormpath:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>"customData": {
+    "hello": "world"
+}
+</code></pre>
+</div>
+
+<p>Would be added to the User Profile in Okta:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>"profile": {
+    "login": "rob@example.com",
+    "firstName": "Rob",
+    "lastName": "Examplehousse",
+    "hello": "world"
+}
+</code></pre>
+</div>
+
+<p><a name="custom-data-objects"></a></p>
+<h5 id="custom-data-objects">Custom Data Objects</h5>
+
+<p>Since Okta does not support complex objects in the User Profile, those are imported in one of two ways: either by flattening (default), or stringifying.</p>
+
+<p>Here is an example of a complex object:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
+    </span><span class="err">foo:</span><span class="w"> </span><span class="err">{</span><span class="w">
+        </span><span class="err">bar:</span><span class="w"> </span><span class="err">{</span><span class="w">
+            </span><span class="err">baz:</span><span class="w"> </span><span class="err">'john'</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+    </span><span class="err">}</span><span class="w">
+</span><span class="err">}</span><span class="w">
+</span></code></pre>
+</div>
+
+<p>And here it is after the two different migration strategies have been applied:</p>
+
+<ul>
+  <li><strong>Flattened:</strong> <code class="highlighter-rouge">"foo_bar_baz": "john"</code></li>
+  <li><strong>Stringified:</strong> <code class="highlighter-rouge">"customData": "{"foo":{"bar":{"baz":"john"}}}"</code></li>
+</ul>
+
+<p><strong>Flattened</strong></p>
+
+<p>In this case, all properties except the last one are concatenated into the attribute name, and the last value is preserved. This strategy is most likely to preserve the data structure, though two important points should be noted:</p>
+
+<ul>
+  <li>Mixed-type arrays will be converted into arrays of strings</li>
+  <li>Empty objects will not be imported</li>
+</ul>
+
+<p>Because it will likely preserve the data structure, and also because allows for <a href="/docs/api/resources/users.html#list-users-with-search">search</a>, this is the default strategy that is used by the import tool.</p>
+
+<p><strong>Stringified</strong></p>
+
+<p>Stringifying serializes the entire object into a single string, which is then added as a value to the Profile attribute “customData”. If there are multiple complex objects, they are all included in that string. Do not use this strategy if you will need to search your custom schema properties in Okta. If you do not have a consistent schema across all accounts, and one property may have multiple types values, e.g. a number or string, the stringify option may be a better choice (if search is not needed).</p>
+
+<p><a name="stormpath-directories-cloud"></a></p>
+<h3 id="stormpath-directories-cloud">Stormpath Directories (Cloud)</h3>
+
+<p><a href="https://docs.stormpath.com/rest/product-guide/latest/accnt_mgmt.html#types-of-directories">Stormpath Cloud Directories</a> are modeled as <a href="/docs/api/resources/groups.html#group-attributes">Okta Groups</a>. The Cloud Directories Password Strength object is modeled as an Okta Password Policy, about which you can find more <a href="#stormpath-directory-password-strength">below</a>. All Accounts that were associated with this Cloud Directory are now represented as Users inside Okta, and these Users are added to the new Group.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Stormpath Directory Attribute</th>
+      <th>Okta Group Profile Attribute</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="highlighter-rouge">name</code></td>
+      <td><code class="highlighter-rouge">name</code></td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">description</code></td>
+      <td><code class="highlighter-rouge">description</code></td>
+    </tr>
+  </tbody>
+</table>
+
+<p><strong>Imported (Directory) Group Naming Convention</strong></p>
+
+<p>Okta Groups made for imported Stormpath Cloud Directories use the <code class="highlighter-rouge">name</code> property inside the Okta Group’s Profile object. The <code class="highlighter-rouge">name</code> is made up of a <code class="highlighter-rouge">dir:</code> prefix and the Stormpath Directory’s <code class="highlighter-rouge">name</code>:</p>
+
+<p><code class="highlighter-rouge">"name": "dir:{SP_directoryName}"</code></p>
+
+<p><a name="stormpath-directory-password-strength"></a></p>
+<h4 id="stormpath-directory-password-strength">Stormpath Directory Password Strength</h4>
+
+<p>The <a href="https://docs.stormpath.com/rest/product-guide/latest/reference.html#password-strength">Stormpath Cloud Directory Password Policy’s Strength resource</a> maps almost entirely to the <a href="/docs/api/resources/policy.html#PasswordComplexityObject">Okta Password Policy’s Complexity object</a>, with the <code class="highlighter-rouge">preventReuse</code> attribute being mapped to the <a href="/docs/api/resources/policy.html#PasswordAgeObject">Okta Password Policy’s Age object</a>.</p>
+
+<p>There are a few points to note here:</p>
+
+<ul>
+  <li>First of all, the Stormpath Password Policy attributes <code class="highlighter-rouge">maxLength</code> and <code class="highlighter-rouge">minDiacritic</code> are not supported in Okta and will not migrate. Also, the Stormpath attributes <code class="highlighter-rouge">minLowerCase</code>, <code class="highlighter-rouge">minUpperCase</code>, <code class="highlighter-rouge">minNumber</code>, and <code class="highlighter-rouge">minSymbol</code> all have integer values in Stormpath, specifying an occurrence requirement. Whereas in Okta, the equivalent properties take 0 or 1, meaning that the value must occur at least once. For more information see <a href="/docs/api/resources/policy.html#PasswordComplexityObject">here</a>.</li>
+</ul>
+
+<table>
+  <thead>
+    <tr>
+      <th>Stormpath Directory Password Strength Attribute</th>
+      <th>Okta Complexity Attribute</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="highlighter-rouge">minLength</code></td>
+      <td><code class="highlighter-rouge">minLength</code></td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">maxLength</code></td>
+      <td>Not supported</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">minLowerCase</code></td>
+      <td><code class="highlighter-rouge">minLowerCase</code></td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">minUpperCase</code></td>
+      <td><code class="highlighter-rouge">minUpperCase</code></td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">minNumeric</code></td>
+      <td><code class="highlighter-rouge">minNumber</code></td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">minSymbol</code></td>
+      <td><code class="highlighter-rouge">minSymbol</code></td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">minDiacritic</code></td>
+      <td>Not supported</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">preventReuse</code></td>
+      <td><code class="highlighter-rouge">historyCount</code></td>
+    </tr>
+  </tbody>
+</table>
+
+<p><strong>Imported Group Password Policy Naming Convention</strong></p>
+
+<p>Okta Group Password Policies made for imported Stormpath Password Strength policies have a <code class="highlighter-rouge">name</code> property that is composed of the <code class="highlighter-rouge">name</code> of the Stormpath Directory that owns the source Password Strength, as well as a <code class="highlighter-rouge">-Policy</code> suffix:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>"name": "{SP_directoryName}-Policy"
+</code></pre>
+</div>
+
+<p><a name="stormpath-directories-social"></a></p>
+<h3 id="stormpath-directories-social">Stormpath Directories (Social)</h3>
+
+<p><a href="https://docs.stormpath.com/rest/product-guide/latest/auth_n.html#social-login-providers">Stormpath Social Directories</a> (Facebook, Google, LinkedIn) are modeled as <a href="/docs/api/resources/idps.html">Okta Identity Providers</a>. Twitter and GitHub are not supported, so any Stormpath Social Directories for those providers are not imported.</p>
+
+<p>Your Social providers Client ID and Secret are also imported into the IdP’s <code class="highlighter-rouge">credentials</code> object.</p>
+
+<p>Any Stormpath Accounts that were associated with your Stormpath Social Directory will have their equivalent Okta Users associated with the new Okta Identity Provider. Custom <a href="https://docs.stormpath.com/rest/product-guide/latest/reference.html#attribute-statement-mapping-rules">Attribute Mappings</a> from your Stormpath Social Directory are added as <a href="/docs/api/resources/schemas.html">Custom Schema Properties</a> to the relevant User Profiles. An Okta Group is also created and associated with the relevant Authorization Server. That Group shares the same <code class="highlighter-rouge">name</code> as the Identity Provider and is assigned Users as they are created during social login.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Stormpath Directory Attribute</th>
+      <th>Okta Group Profile Attribute</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="highlighter-rouge">name</code></td>
+      <td><code class="highlighter-rouge">name</code></td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">description</code></td>
+      <td><code class="highlighter-rouge">description</code></td>
+    </tr>
+  </tbody>
+</table>
+
+<p><strong>Imported (Social) Identity Provider Naming Convention</strong></p>
+
+<p>Identity Providers created for imported Stormpath Social Directories have a <code class="highlighter-rouge">name</code> property that is composed of a <code class="highlighter-rouge">dir:</code> prefix and the <code class="highlighter-rouge">name</code> of the Stormpath Directory:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>"name": "dir:{SP_directoryName}"
+</code></pre>
+</div>
+
+<p><a name="stormpath-directories-saml"></a></p>
+<h3 id="stormpath-directories-saml">Stormpath Directories (SAML)</h3>
+
+<p>Just like Stormpath Social Directories, <a href="https://docs.stormpath.com/rest/product-guide/latest/auth_n.html#social-login-providers">Stormpath SAML Directories</a> are also modeled as <a href="/docs/api/resources/idps.html">Okta Identity Providers</a>. Your SAML signing certificate is also imported over, as well as the SSO Login URL.</p>
+
+<p>Additionally, any attribute mappings that you defined in Stormpath are  imported as <a href="/docs/api/resources/schemas.html">Custom Schema Properties</a>.</p>
+
+<p>Users will be associated with this new SAML IdP when they next log in.</p>
+
+<p><strong>Imported (SAML) Identity Provider Naming Convention</strong></p>
+
+<p>Identity Providers have a <code class="highlighter-rouge">name</code> property that is composed of a <code class="highlighter-rouge">dir:</code> prefix and the <code class="highlighter-rouge">name</code> of the Stormpath Directory:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>"name": "dir:{SP_directoryName}"
+</code></pre>
+</div>
+
+<p><a name="stormpath-directories-ldap"></a></p>
+<h3 id="stormpath-directories-ldap">Stormpath Directories (LDAP)</h3>
+
+<p>As mentioned in <a href="#things-that-wont-migrate-and-known-caveats">the Caveats section</a>, LDAP Directories (including Active Directory) cannot be imported into Okta. You will need to set them up fresh inside Okta, which will re-import the data from your LDAP directory.</p>
+
+<ul>
+  <li><a href="https://help.okta.com/en/prod/Content/Topics/Directory/Okta%20Active%20Directory%20Agent.htm">Instructions to set up Active Directory</a></li>
+  <li><a href="https://help.okta.com/en/prod/Content/Topics/Directory/Okta%20Java%20LDAP%20Agent.htm">Instructions to set up LDAP</a></li>
+</ul>
+
+<p><a name="stormpath-groups"></a></p>
+<h3 id="stormpath-groups">Stormpath Groups</h3>
+
+<p>The information inside a <a href="https://docs.stormpath.com/rest/product-guide/latest/reference.html#group">Stormpath Group</a> is imported into the Okta Group’s <a href="/docs/api/resources/groups.html#profile-object">Profile object</a>. The Stormpath Account Store Mappings are used to find all Accounts that were associated with this Group, and these associations are then used to add the appropriate Okta Users to the newly-created Okta Group.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Stormpath Group Attribute</th>
+      <th>Okta Group Profile Attribute</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="highlighter-rouge">name</code></td>
+      <td><code class="highlighter-rouge">name</code></td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">description</code></td>
+      <td><code class="highlighter-rouge">description</code></td>
+    </tr>
+  </tbody>
+</table>
+
+<p><strong>Imported (Group) Group Naming Convention</strong></p>
+
+<p>Okta Groups that model Stormpath Groups use the <code class="highlighter-rouge">name</code> property inside the Okta Group’s Profile. The Profile <code class="highlighter-rouge">name</code> is made up of a <code class="highlighter-rouge">group:</code> prefix, along with the <code class="highlighter-rouge">id</code> of the Okta Group that models the Stormpath Directory that owned the Stormpath Group, as well as the exact <code class="highlighter-rouge">name</code> of the Stormpath Group:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>"name": "group:{OKTA_groupId}:{SP_groupName}"
+</code></pre>
+</div>
+
+<p><a name="stormpath-organizations"></a></p>
+<h3 id="stormpath-organizations">Stormpath Organizations</h3>
+
+<p>The <a href="https://docs.stormpath.com/rest/product-guide/latest/reference.html#organization">Stormpath Organization</a> becomes a Group in Okta, and its information is imported to an <a href="/docs/api/resources/groups.html#profile-object">Okta Group Profile</a> (see table below). The Organization Account Store Mappings are used to find all Accounts associated with that Organization, and the imported Users are associated with this new Organization Group.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Stormpath Organization Attribute</th>
+      <th>Okta Group Profile Attribute</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="highlighter-rouge">name</code></td>
+      <td><code class="highlighter-rouge">name</code></td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">nameKey</code></td>
+      <td><code class="highlighter-rouge">description</code></td>
+    </tr>
+  </tbody>
+</table>
+
+<p><strong>Imported (Organization) Group Naming Convention</strong></p>
+
+<p>Okta Groups that model Stormpath Organizations use the <code class="highlighter-rouge">name</code> and <code class="highlighter-rouge">description</code> properties inside the Group’s Profile. The Profile <code class="highlighter-rouge">name</code> is made up of an <code class="highlighter-rouge">org:</code> prefix and the Stormpath Organization’s <code class="highlighter-rouge">name</code>:</p>
+
+<p><code class="highlighter-rouge">"name": "org:{SP_organizationName}"</code></p>
+
+<p>The Profile <code class="highlighter-rouge">description</code> is made up of the Stormpath Organization’s <code class="highlighter-rouge">nameKey</code> with no prefix:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>"description": "{SP_organizationNameKey}"
+</code></pre>
+</div>
+
+<p><a name="stormpath-applications"></a></p>
+<h3 id="stormpath-applications">Stormpath Applications</h3>
+
+<p>Stormpath Applications have OAuth Client Applications created for them in Okta, as well as Authorization Servers.</p>
+
+<ul>
+  <li>An OAuth Client Application is created with <code class="highlighter-rouge">type</code> set to <code class="highlighter-rouge">web</code></li>
+  <li>An <a href="/docs/api/resources/oauth2.html#authorization-operations">Authorization Server</a> is also created</li>
+  <li>The Authorization Server and Client Application are associated with one another</li>
+  <li>Any relevant Okta Groups are assigned to the new OAuth Client Application</li>
+  <li>Access and Refresh Token TTL values are imported</li>
+</ul>
+
+<p><strong>Imported (Application) OAuth Client Naming Convention</strong></p>
+
+<p>Okta OAuth Client Applications that model Stormpath Applications have a <code class="highlighter-rouge">client_name</code> that is made up of a <code class="highlighter-rouge">app:</code> prefix and the Stormpath Application’s <code class="highlighter-rouge">name</code> attribute:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>"client_name": "app:{SP_applicationName}"
+</code></pre>
+</div>
+
+      </div>
+      <div class="TableOfContents TableOfContentsPreload">
+        <div class="TableOfContents-item is-level1">
+          <script>
+                  document.write(document.title.split('|')[0].trim());
+          </script>
+        </div>
+        <div class="TableOfContentsLoader"></div>
+      </div><!-- END Page Content -->
+    </section><!-- END Page Center w/Sub Nav & Content -->
+
+    <!-- START Footer -->
+    <footer class="Footer">
+    <div class="Wrap">
+
+        <div class="Row">
+
+            <div class="Column--3 Column--medium-6 Column--xSmall-12">
+
+                <a class="Logo" href="https://www.okta.com/" target="_blank" rel="noopener noreferrer">
+                    <img src="https://developer.okta.com/sites/all/themes/developer/images/logo-footer.png" alt="Okta">
+                    Visit okta.com
+                </a>
+
+            </div>
+
+            <div class="Column--3 Column--medium-12 Column--xSmall-12">
+
+                <h4>Social</h4>
+                <ul class="Footer-links Footer-links--social">
+                    <li><a class="Footer-links--github" target="_blank" rel="noopener noreferrer" href="http://github.com/oktadeveloper">Github</a></li>
+                    <li><a class="Footer-links--twitter" target="_blank" rel="noopener noreferrer" href="http://twitter.com/OktaDev">Twitter</a></li>
+                    <li><a class="Footer-links--forum" target="_blank" rel="noopener noreferrer" href="https://devforum.okta.com/">Forum</a></li>
+                    <li><a class="Footer-links--rss" target="_blank" rel="noopener noreferrer" href="http://feeds.feedburner.com/OktaBlog">RSS Blog</a></li>
+                </ul>
+            </div>
+
+            <div class="Column--3 Column--medium-6 Column--small-12">
+                <h4>More Info</h4>
+                <ul class="Footer-links">
+                    <li><a target="_blank" href="https://developer.okta.com/integrate-with-okta/">Integrate with Okta</a></li>
+                    <li><a href="/blog/">Blog</a></li>
+                    <li><a href="/docs/platform-release-notes/platform-release-notes.html">Release Notes</a></li>
+                    <li><a href="/3rd_party_notices/">3rd Party Notices</a></li>
+                </ul>
+            </div>
+
+            <div class="Column--3 Column--medium-6 Column--small-12">
+                <h4>Contact &amp; Legal</h4>
+                <ul class="Footer-links">
+                    <li><a href="https://developer.okta.com/contact/">Contact Sales</a></li>
+                    <li><a target="_blank" rel="noopener noreferrer" href="mailto:developers@okta.com">Contact Support</a></li>
+                    <li><a href="https://developer.okta.com/terms/">Terms &amp; Conditions</a></li>
+                    <li><a href="https://developer.okta.com/privacy/">Privacy Policy</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</footer>
+
+    <script type="text/javascript" src="/assets/master-0365dd27cf276cb2a15c0a43906ca592538204cf1ad4557547bf4e50609b411e.js"></script>
+    <script type="text/javascript" src="/assets/myOkta-911cbafbbe079b7a5522d9cbe15bd2a5f44e1582531e88393934bec69f97696b.js"></script>
+    
+    
+    
+    
+      <script type="text/javascript" src="/assets/docs-0af8e0751a2375ff1b4d8e8ddf6a1b7ffd864bd473116861d71f541c4859329e.js"></script>
+    
+
+    <!-- END Footer -->
+  </div>
+  <!-- START Post Footer -->
+  
+  <!-- START Google Tag Manager -->
+  <!-- https://support.google.com/tagmanager/answer/6103696?hl=en -->
+  <noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-TJ45R6" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+  <!-- END Google Tag Manager -->
+  <!-- START Google Remarketing Tag -->
+  <script type="text/javascript">
+    /* <![CDATA[ */
+    var google_conversion_id = 1006913831;
+    var google_custom_params = window.google_tag_params;
+    var google_remarketing_only = true;
+    /* ]]> */
+  </script>
+  <div style="display:none;"><script type="text/javascript" src="//www.googleadservices.com/pagead/conversion.js"></script></div>
+  <noscript><div style="display:inline;"><img height="1" width="1" style="border-style:none;" alt="" src="//googleads.g.doubleclick.net/pagead/viewthroughconversion/1006913831/?value=0&amp;guid=ON&amp;script=0"></div></noscript>
+  <!-- END Google Remarketing Tag -->
+  <!-- START Crazy Egg Tracking -->
+  <script type="text/javascript">
+    setTimeout(function(){var a=document.createElement("script");
+    var b=document.getElementsByTagName("script")[0];
+    a.src=document.location.protocol+"//script.crazyegg.com/pages/scripts/0021/9333.js?"+Math.floor(new Date().getTime()/3600000);
+    a.async=true;a.type="text/javascript";b.parentNode.insertBefore(a,b)}, 1);
+  </script>
+  <!-- END Crazy Egg Tracking -->
+
+  <!-- END Post Footer -->
+</body>
+</html>

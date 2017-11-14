@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html class="no-js" lang="en" dir="ltr">
+<body>
+    <h2 id="okta-aspnet-4-quickstart">Okta ASP.NET 4 Quickstart</h2>
+
+<h3 id="create-a-new-web-api-project">Create a new Web API project</h3>
+
+<p>If you don’t already have a Web API project, create a new ASP.NET (.NET Framework) project and choose the Web API template. Choose <strong>No Authentication</strong>.</p>
+
+<h3 id="install-required-packages">Install required packages</h3>
+
+<p>First, install these packages with NuGet:</p>
+
+<ul>
+  <li><code class="highlighter-rouge">Microsoft.Owin.Host.SystemWeb</code> (if it isn’t already installed)</li>
+  <li><code class="highlighter-rouge">Microsoft.IdentityModel.Protocols.OpenIdConnect</code></li>
+</ul>
+
+<p>There are a few additional packages you need to install from prerelease sources. <a href="https://docs.microsoft.com/en-us/nuget/tools/package-manager-ui#package-sources">Add these sources</a> to the NuGet Package Manager:</p>
+
+<ul>
+  <li><a href="https://www.myget.org/F/azureadwebstacknightly/">Azure AD WebStack Nightly</a></li>
+  <li><a href="https://dotnet.myget.org/F/katana-dev/api/v3/index.json">Katana Dev</a></li>
+</ul>
+
+<p>Install these packages (with the <strong>Include prerelease</strong> option checked):</p>
+
+<ul>
+  <li><code class="highlighter-rouge">Microsoft.IdentityModel.Tokens</code> version <strong>5.2.0</strong> or greater (from Azure AD WebStack Nightly)</li>
+  <li><code class="highlighter-rouge">Microsoft.Owin.Security.Jwt</code> version <strong>4.0.0-alpha1</strong> or greater (from Katana Dev)</li>
+</ul>
+
+<h3 id="configure-the-middleware">Configure the middleware</h3>
+
+<p>If you don’t already have a <code class="highlighter-rouge">Startup.cs</code> file (OWIN Startup class), create one by right-clicking on your project and choosing <strong>Add</strong> - <strong>Class</strong>. Pick the <strong>OWIN Startup</strong> template and name the new class <code class="highlighter-rouge">Startup</code>.</p>
+
+<p>Make sure you have these <code class="highlighter-rouge">using</code> statements at the top of your <code class="highlighter-rouge">Startup.cs</code> file:</p>
+
+<div class="language-csharp highlighter-rouge"><pre class="highlight"><code><span class="k">using</span> <span class="nn">System.Threading.Tasks</span><span class="p">;</span>
+<span class="k">using</span> <span class="nn">Microsoft.IdentityModel.Protocols</span><span class="p">;</span>
+<span class="k">using</span> <span class="nn">Microsoft.IdentityModel.Protocols.OpenIdConnect</span><span class="p">;</span>
+<span class="k">using</span> <span class="nn">Microsoft.IdentityModel.Tokens</span><span class="p">;</span>
+<span class="k">using</span> <span class="nn">Microsoft.Owin</span><span class="p">;</span>
+<span class="k">using</span> <span class="nn">Microsoft.Owin.Security</span><span class="p">;</span>
+<span class="k">using</span> <span class="nn">Microsoft.Owin.Security.Jwt</span><span class="p">;</span>
+<span class="k">using</span> <span class="nn">Owin</span><span class="p">;</span>
+</code></pre>
+</div>
+
+<p>Add the following code to your <code class="highlighter-rouge">Configuration</code> method:</p>
+
+<div class="language-csharp highlighter-rouge"><pre class="highlight"><code><span class="k">public</span> <span class="k">void</span> <span class="nf">Configuration</span><span class="p">(</span><span class="n">IAppBuilder</span> <span class="n">app</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="c1">// Configure JWT Bearer middleware
+</span>    <span class="c1">// with an OpenID Connect Authority
+</span>
+    <span class="kt">var</span> <span class="n">authority</span> <span class="p">=</span> <span class="s">"<span class="okta-preview-domain">https://{yourOktaDomain}.com</span>/oauth2/default"</span><span class="p">;</span>
+
+    <span class="kt">var</span> <span class="n">configurationManager</span> <span class="p">=</span> <span class="k">new</span> <span class="n">ConfigurationManager</span><span class="p">&lt;</span><span class="n">OpenIdConnectConfiguration</span><span class="p">&gt;(</span>
+        <span class="n">authority</span> <span class="p">+</span> <span class="s">"/.well-known/openid-configuration"</span><span class="p">,</span>
+        <span class="k">new</span> <span class="nf">OpenIdConnectConfigurationRetriever</span><span class="p">(),</span>
+        <span class="k">new</span> <span class="nf">HttpDocumentRetriever</span><span class="p">());</span>
+
+    <span class="n">app</span><span class="p">.</span><span class="nf">UseJwtBearerAuthentication</span><span class="p">(</span><span class="k">new</span> <span class="n">JwtBearerAuthenticationOptions</span>
+    <span class="p">{</span>
+        <span class="n">AuthenticationMode</span> <span class="p">=</span> <span class="n">AuthenticationMode</span><span class="p">.</span><span class="n">Active</span><span class="p">,</span>
+        <span class="n">TokenValidationParameters</span> <span class="p">=</span> <span class="k">new</span> <span class="n">TokenValidationParameters</span>
+        <span class="p">{</span>
+            <span class="n">ValidAudience</span> <span class="p">=</span> <span class="s">"api://default"</span><span class="p">,</span>
+            <span class="n">ValidIssuer</span> <span class="p">=</span> <span class="n">authority</span><span class="p">,</span>
+            <span class="n">IssuerSigningKeyResolver</span> <span class="p">=</span> <span class="p">(</span><span class="n">token</span><span class="p">,</span> <span class="n">securityToken</span><span class="p">,</span> <span class="n">identifier</span><span class="p">,</span> <span class="n">parameters</span><span class="p">)</span> <span class="p">=&gt;</span>
+            <span class="p">{</span>
+                <span class="kt">var</span> <span class="n">discoveryDocument</span> <span class="p">=</span> <span class="n">Task</span><span class="p">.</span><span class="nf">Run</span><span class="p">(()</span> <span class="p">=&gt;</span> <span class="n">configurationManager</span><span class="p">.</span><span class="nf">GetConfigurationAsync</span><span class="p">()).</span><span class="nf">GetAwaiter</span><span class="p">().</span><span class="nf">GetResult</span><span class="p">();</span>
+                <span class="k">return</span> <span class="n">discoveryDocument</span><span class="p">.</span><span class="n">SigningKeys</span><span class="p">;</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+    <span class="p">});</span>
+<span class="p">}</span>
+</code></pre>
+</div>
+
+<h3 id="protect-application-resources">Protect application resources</h3>
+
+<p>Use the <code class="highlighter-rouge">[Authorize]</code> attribute on API controllers or actions to require an authenticated user. For example, create an <code class="highlighter-rouge">/api/messages</code> route in a new API controller that returns secret messages if a token is present:</p>
+
+<div class="language-csharp highlighter-rouge"><pre class="highlight"><code><span class="k">using</span> <span class="nn">System.Collections.Generic</span><span class="p">;</span>
+<span class="k">using</span> <span class="nn">System.Linq</span><span class="p">;</span>
+<span class="k">using</span> <span class="nn">System.Security.Claims</span><span class="p">;</span>
+<span class="k">using</span> <span class="nn">System.Web.Http</span><span class="p">;</span>
+
+<span class="na">[Authorize]</span>
+<span class="k">public</span> <span class="k">class</span> <span class="nc">MessagesController</span> <span class="p">:</span> <span class="n">ApiController</span>
+<span class="p">{</span>
+    <span class="p">[</span><span class="n">HttpGet</span><span class="p">]</span>
+    <span class="p">[</span><span class="nf">Route</span><span class="p">(</span><span class="s">"~/api/messages"</span><span class="p">)]</span>
+    <span class="k">public</span> <span class="n">IEnumerable</span><span class="p">&lt;</span><span class="kt">string</span><span class="p">&gt;</span> <span class="nf">Get</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="kt">var</span> <span class="n">principal</span> <span class="p">=</span> <span class="n">RequestContext</span><span class="p">.</span><span class="n">Principal</span><span class="p">.</span><span class="n">Identity</span> <span class="k">as</span> <span class="n">ClaimsIdentity</span><span class="p">;</span>
+
+        <span class="kt">var</span> <span class="n">login</span> <span class="p">=</span> <span class="n">principal</span><span class="p">.</span><span class="n">Claims</span>
+            <span class="p">.</span><span class="nf">SingleOrDefault</span><span class="p">(</span><span class="n">c</span> <span class="p">=&gt;</span> <span class="n">c</span><span class="p">.</span><span class="n">Type</span> <span class="p">==</span> <span class="n">ClaimTypes</span><span class="p">.</span><span class="n">NameIdentifier</span><span class="p">)</span>
+            <span class="p">?.</span><span class="n">Value</span><span class="p">;</span>
+
+        <span class="k">return</span> <span class="k">new</span> <span class="kt">string</span><span class="p">[]</span>
+        <span class="p">{</span>
+            <span class="err">$</span><span class="s">"For {login ?? "</span><span class="n">your</span><span class="s">"} eyes only"</span><span class="p">,</span>
+            <span class="s">"Your mission, should you choose to accept it..."</span>
+        <span class="p">};</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre>
+</div>
+
+<h3 id="thats-it">That’s it!</h3>
+
+<p>The JWT Bearer middleware automatically validates tokens and populates <code class="highlighter-rouge">HttpContext.User</code> with a limited set of user information.</p>
+
+<p>If you want to do more with the user, you can use the <a href="https://github.com/okta/okta-sdk-dotnet">Okta .NET SDK</a> to get or update the user’s details stored in Okta.</p>
+
+<blockquote>
+  <p>Note: If your client application is running on a different server (or port) than your ASP.NET Core server, you’ll need to add <a href="https://docs.microsoft.com/en-us/aspnet/core/security/cors">CORS middleware</a> to the pipeline as well.</p>
+</blockquote>
+
+</body>
+</html>

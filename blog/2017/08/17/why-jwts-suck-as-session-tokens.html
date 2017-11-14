@@ -1,0 +1,651 @@
+<!doctype html>
+<!--[if lt IE 7 ]> <html class="ie6 no-flexbox"> <![endif]-->
+<!--[if IE 7 ]>    <html class="ie7 no-flexbox"> <![endif]-->
+<!--[if IE 8 ]>    <html class="ie8 no-flexbox"> <![endif]-->
+<!--[if IE 9 ]>    <html class="ie9 no-flexbox"> <![endif]-->
+<!--[if IE 10 ]>    <html class="ie10 no-flexbox"> <![endif]-->
+<!--[if (gt IE 10)|!(IE)]><!--> <html class="modern wf-loading" lang="en"> <!--<![endif]-->
+  <head>
+  <script>
+    var searchDomain = 'https://developer.okta.com';
+    var isProduction = window.location.hostname === 'developer.okta.com';
+    if (isProduction) {
+      // TypeKit
+      (function(d) {
+        var config = {
+          kitId: 'jff5neq',
+          scriptTimeout: 3000,
+          async: true
+        },
+        h=d.documentElement,t=setTimeout(function(){h.className=h.className.replace(/bwf-loadingb/g,"")+" wf-inactive";},config.scriptTimeout),tk=d.createElement("script"),f=false,s=d.getElementsByTagName("script")[0],a;h.className+=" wf-loading";tk.src='https://use.typekit.net/'+config.kitId+'.js';tk.async=true;tk.onload=tk.onreadystatechange=function(){a=this.readyState;if(f||a&&a!="complete"&&a!="loaded")return;f=true;clearTimeout(t);try{Typekit.load(config)}catch(e){}};s.parentNode.insertBefore(tk,s)
+      })(document);
+
+      // Google analytics
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+              (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+              m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+      ga('create', 'UA-15777010-3', 'auto');
+      ga('send', 'pageview');
+
+      // START Google Tag Manager
+      (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+      new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+      j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+      '//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+      })(window,document,'script','dataLayer','GTM-TJ45R6');
+      // END Google Tag Manager
+    }
+	</script>
+  <meta charset="utf-8">
+  <meta http-equiv="x-ua-compatible" content="IE=edge,chrome=1">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+ 	
+
+  <link type="text/css" rel="stylesheet" href="https://developer.okta.com/sites/all/themes/developer/css/master.css" media="all" />
+  <meta class="swiftype" name="title" data-type="string" content="Why JWTs Suck as Session Tokens | Okta Developer" />
+  <meta class="swiftype" name="summary" data-type="string" content="" />
+
+  <link type="text/css" rel="stylesheet" href="/assets/animate-ec43d72c3ed45e08a460b8a2966d8dba6006aebfa0530935c3973fa493a8771f.css">
+  <link type="text/css" rel="stylesheet" href="/assets/okta-a96df4c9d48b78b618e1d541f46f7137d73d40653571e020c1ad59edd7915c60.css">
+  
+  
+  <title>Why JWTs Suck as Session Tokens | Okta Developer</title>
+  <meta name="description" content="">
+  <link rel="canonical" href="https://developer.okta.com/blog/2017/08/17/why-jwts-suck-as-session-tokens"  data-proofer-ignore>
+  <link rel="alternate" type="application/rss+xml" title="Okta Developer" href="https://developer.okta.com/feed.xml"><!-- GA -->
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+  <link rel="manifest" href="/manifest.json">
+  <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#21313a">
+  <meta name="theme-color" content="#ffffff">
+</head>
+
+  
+    <body id="blog">
+	
+
+
+
+
+<header class="Header is-fixed">
+
+  <div class="Wrap">
+
+    <a class="Logo" href="https://developer.okta.com">
+      <svg version="1.1" id="OktaLogo" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 431.9 151.4" style="enable-background:new 0 0 431.9 151.4;" xml:space="preserve"><g><g><g><path d="M102.2,41.4c-21,0-38.1,17.1-38.1,38.1s17.1,38.1,38.1,38.1s38.1-17.1,38.1-38.1l0,0C140.3,58.5,123.2,41.4,102.2,41.4z M102.2,98.5c-10.5,0-19-8.5-19-19s8.5-19,19-19s19,8.5,19,19c0.1,10.5-8.4,19-18.9,19.1C102.3,98.6,102.2,98.6,102.2,98.5L102.2,98.5z"/><path d="M169.1,92.3c0-1.9,1.5-3.4,3.4-3.4c0.9,0,1.8,0.4,2.4,1c9.5,9.7,25.3,26.3,25.4,26.4c0.4,0.5,0.8,0.8,1.4,0.9l1.6,0.2h17.2c1.8,0,3.3-1.4,3.4-3.2c0-0.8-0.3-1.5-0.8-2.2l-28.6-29.2l-1.5-1.5c-3.2-3.9-2.9-5.4,0.8-9.3l22.6-25.1c1.1-1.4,0.8-3.5-0.6-4.6c-0.6-0.4-1.3-0.7-2-0.7h-17c-0.6,0.2-1.1,0.5-1.5,0.9L175,64.4c-1.3,1.4-3.4,1.5-4.8,0.2c-0.7-0.6-1.1-1.5-1.1-2.5V18.9c0-1.7-1.3-3-3-3c-0.1,0-0.2,0-0.3,0h-12.7c-2.2,0-3.3,1.5-3.3,2.8v95.8c0,2.2,1.8,2.8,3.3,2.8h12.7c1.7,0.1,3.2-1.2,3.3-2.9c0,0,0,0,0,0V92.3z"/><path d="M273,114l-1.4-12.8c-0.2-1.7-1.7-2.9-3.4-2.7c0,0,0,0-0.1,0l-2.9,0.2c-10.1,0-18.5-7.9-19-18c0-0.3,0-0.7,0-1V64.2c-0.1-2,1.5-3.6,3.5-3.7c0,0,0,0,0,0h17c1.7-0.1,3.1-1.5,3-3.2c0,0,0-0.1,0-0.1v-12c0-2.3-1.5-3.6-2.8-3.6h-17.1c-1.9,0.1-3.5-1.5-3.6-3.4c0,0,0,0,0,0V18.9c-0.1-1.7-1.5-3.1-3.2-3c0,0-0.1,0-0.1,0h-12.7c-1.6-0.1-3,1.1-3.1,2.7c0,0.1,0,0.1,0,0.2c0,0,0,61.7,0,62c0.5,21,17.9,37.6,38.9,37c1.4,0,2.9-0.2,4.3-0.3C272,117.2,273.2,115.7,273,114z"/></g><path d="M364.7,98c-10.8,0-12.4-3.8-12.4-18.3l0,0V44.8c0-1.8-1.4-3.2-3.2-3.2c0,0-0.1,0-0.1,0h-12.8c-1.8,0-3.2,1.4-3.3,3.2v1.6C314.6,36,291.3,42.5,281,60.8c-10.4,18.3-3.9,41.6,14.4,51.9c14,7.9,31.4,6.2,43.5-4.2c3.6,5.5,9.3,9.1,18.3,9.1c1.5,0,9.7,0.3,9.7-3.5v-13.6C367,99.2,366,98.1,364.7,98z M314.2,98.6c-10.5,0-19-8.5-19-19s8.5-19,19-19s19,8.5,19,19l0,0C333.2,90.1,324.7,98.6,314.2,98.6z"/></g><path d="M19.4,74c2.2-1.9,4.1-4.1,5.7-6.6c3.5-5.3,5.4-11.5,5.2-17.9V27c0-4.9,0.9-8.4,2.7-10.5c1.8-2.1,4.8-3,9.2-3h12.6c1.2,0,2.1-0.9,2.2-2.1l0,0V2.2C57,1,56,0,54.8,0c0,0,0,0,0,0H41.5c-7.8,0-12.9,2.1-18,7.6s-7.1,12.3-7.1,21.7v14.2c0,2.2-0.1,4-0.2,5.7v2.2c-0.5,3.2-1.8,6.2-3.6,8.9C9.4,64.7,5.1,70.9,0.9,74l0,0l-0.3,0.3l0,0l-0.2,0.3H0.2v0.3l0,0c-0.1,0.3-0.1,0.7,0,1l0,0v0.3h0.1l0.2,0.3l0,0l0.3,0.3l0,0c4.2,3.1,8.5,9.3,11.3,13.7c1.8,2.7,3.1,5.7,3.6,8.9v2.2c0.1,1.6,0.2,3.5,0.2,5.7v14.3c0,9.4,2.4,16.7,7.1,21.7s10.2,7.6,18,7.6h13.8c1.2,0,2.2-1,2.2-2.2V140l0,0c0-1.2-1-2.2-2.2-2.2H42.2c-4.4,0-7.5-1-9.2-3s-2.7-5.6-2.7-10.5v-22.4c0.2-6.4-1.7-12.6-5.2-17.9c-1.6-2.5-3.5-4.7-5.7-6.6l0,0c-0.9-0.7-1.1-2-0.4-2.9C19.2,74.3,19.3,74.2,19.4,74L19.4,74z"/><path d="M412.5,74c-2.2-1.9-4.1-4.1-5.7-6.6c-3.5-5.3-5.4-11.5-5.2-17.9V27c0-4.9-0.9-8.4-2.7-10.5s-4.8-3-9.2-3h-12.6c-1.2,0-2.2-1-2.2-2.2c0,0,0,0,0,0l0,0V2.2c0-1.2,1-2.2,2.2-2.2c0,0,0,0,0,0h13.4c7.8,0,12.9,2.1,18,7.6s7.1,12.3,7.1,21.7v14.2c0,2.2,0.1,4,0.2,5.7v2.2c0.5,3.2,1.8,6.2,3.6,8.9c2.8,4.5,7.1,10.7,11.3,13.7l0,0l0.3,0.3l0,0l0.2,0.3h0.1v0.3l0,0c0.1,0.3,0.1,0.7,0,1l0,0v0.3h-0.1l-0.2,0.3l0,0l-0.3,0.3l0,0c-4.2,3.1-8.5,9.3-11.3,13.7c-1.8,2.7-3.1,5.7-3.6,8.9v2.2c-0.1,1.6-0.2,3.5-0.2,5.7v14.3c0,9.4-2.4,16.7-7.1,21.7s-10.2,7.6-18,7.6h-13.4c-1.2,0-2.2-1-2.2-2.2c0,0,0,0,0,0V140l0,0c0-1.2,1-2.2,2.2-2.2l0,0h12.7c4.4,0,7.5-1,9.2-3s2.7-5.6,2.7-10.5v-22.4c-0.2-6.3,1.6-12.6,5.1-17.9c1.6-2.5,3.5-4.7,5.7-6.6l0,0c0.9-0.7,1.1-2,0.4-2.9C412.7,74.3,412.6,74.2,412.5,74L412.5,74z"/></g></svg>
+    </a>
+
+    <nav class="Header-nav PrimaryNav">
+      <ul class="menu">
+        <li class="first leaf">
+          <a href="https://developer.okta.com/product/">Product</a>
+        </li>
+        <li class="leaf">
+          <a href="https://developer.okta.com/pricing/">Pricing</a>
+        </li>
+        <li class="leaf">
+          <a href="/blog/" class="active">Blog</a>
+        </li>
+        <li class="leaf">
+          <a href="/documentation/">Docs</a>
+        </li>
+        <li class="last expanded">
+          <span class="nolink">Support</span>
+          <ul class="menu">
+            <li class="first leaf"><a href="https://devforum.okta.com/">Okta Developer Forums</a></li>
+            <li class="last leaf"><a href="mailto:developers@okta.com">developers@okta.com</a></li>
+          </ul>
+        </li>
+      </ul>
+      <a class="PrimaryNav-toggle" href="#">
+        <svg width="20px" height="20px" viewBox="0 0 20 20" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+            <g class="MenuIcon" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="round">
+                <path d="M1,16 L19,16" class="MenuIcon-line1" stroke="#FFFFFF" stroke-width="2"></path>
+                <path d="M1,4 L19,4" class="MenuIcon-line2" stroke="#FFFFFF" stroke-width="2"></path>
+                <path d="M1,10 L19,10" class="MenuIcon-line3" stroke="#FFFFFF" stroke-width="2"></path>
+                <path d="M1,10 L19,10" class="MenuIcon-line4" stroke="#FFFFFF" stroke-width="2"></path>
+            </g>
+        </svg>
+        <svg class="CloseIcon" width="16px" height="16px" viewBox="0 0 16 16" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+          <g id="ALl-Boards" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+            <g id="Desktop" transform="translate(-915.000000, -235.000000)" fill="#FFFFFF">
+              <g id="Search-bar-Active" transform="translate(30.000000, 26.000000)">
+                <polygon id="Icon/Cross" points="901 210.6 899.4 209 893 215.4 886.6 209 885 210.6 891.4 217 885 223.4 886.6 225 893 218.6 899.4 225 901 223.4 894.6 217"></polygon>
+              </g>
+            </g>
+          </g>
+        </svg>
+      </a>
+
+      <div class="PrimaryNav-cta">
+        <a target="_blank" rel="noopener noreferrer" href="https://login.okta.com/?SAMLRequest=fc%2B7CsJAEAXQXvAflu1NNJUMeZBGELTx1a%2FrYILJTtyZGD%2FfSBRiYzlw77lMnD3rSj3Qc0ku0YtgrhU6S5fSXRN9PKxmS52l00nMpq6iBvJWCrfDe4ss6vStRe9aDzmGIZfo1jsgwyWDMzUyiIV9vt1AH4XGk5ClSvewUgMNa%2BYW%2FVj5jxhm9NLP67QQaSAMu64L6CYmsFSHlnzT4ZlLwTgcL6Sf8%2FeX9AU%3Dhttps://login.okta.com/?SAMLRequest=fc%2B7CsJAEAXQXvAflu1NNJUMeZBGELTx1a%2FrYILJTtyZGD%2FfSBRiYzlw77lMnD3rSj3Qc0ku0YtgrhU6S5fSXRN9PKxmS52l00nMpq6iBvJWCrfDe4ss6vStRe9aDzmGIZfo1jsgwyWDMzUyiIV9vt1AH4XGk5ClSvewUgMNa%2BYW%2FVj5jxhm9NLP67QQaSAMu64L6CYmsFSHlnzT4ZlLwTgcL6Sf8%2FeX9AU%3D" class="Button--redOutline">Login</a>
+        <a href="https://developer.okta.com/signup/" class="Button--red">Sign up</a>
+      </div>
+
+      <a class="SearchIcon" href="#"></a>
+      <form id="form_search" class="SearchBar Formisimo_clocked_69929" method="get" action="https://developer.okta.com/search/" name="form_search" __bizdiag="-784164280" __biza="WJ__">
+        <input type="text" name="stq" autocomplete="off" id="st-search-input-auto" class="st-search-input" placeholder="Search">
+        <input type="submit" name="submit" value="GO">
+      </form>
+
+    </nav>
+
+  </div>
+
+</header>
+
+	<div class="page-content">
+		
+
+
+
+
+
+
+<section class="Blog is-single">
+		
+	<div class="Blog-social">
+		
+		<a href="https://github.com/rdegges" target="_blank"><i class="fa fa-github"></i></a>
+		
+		
+		<a href="https://twitter.com/rdegges" target="_blank"><i class="fa fa-twitter"></i></a>
+		
+		
+		
+		<a href="https://www.rdegges.com" target="_blank"><i class="fa fa-external-link"></i></a>
+		
+	</div>
+	
+	
+
+<article class="BlogPost">
+	
+	<header class="BlogPost-header">
+	
+		<time class="BlogPost-date" datetime="2017-08-17">August 17, 2017</time>
+		
+		<h1 class="BlogPost-title">
+			
+			Why JWTs Suck as Session Tokens
+			
+		</h1>
+		
+		<div class="BlogPost-attribution">
+			
+				<img src="/assets/avatar-rdegges-9fb23ebb06890fb7924b8ceb3a28d666ae4ae1a297a3cddf517e549547e5dfe3.jpg" alt="avatar-rdegges.jpg" class="BlogPost-avatar">
+			
+			<span class="BlogPost-author">Randall Degges</span>
+		</div>
+	
+	</header>
+	
+	<div class="BlogPost-content">
+		
+	<p><img src="/assets/blog/why-jwts-suck-as-session-tokens/jwts-so-hot-right-now-51c95f8114d838c08ba3430c0495e355d54d328e33227495d58cb4e781de291c.jpg" alt="blog/why-jwts-suck-as-session-tokens/jwts-so-hot-right-now.jpg" /></p>
+
+<p>JSON Web Tokens (JWTs) are <em>so</em> hot right now. They’re all the rage in web
+development:</p>
+
+<ul>
+  <li>Trendy? ✓</li>
+  <li>Secure? ✓</li>
+  <li>Scalable? ✓</li>
+  <li>Compact? ✓</li>
+  <li>JSON? ✓</li>
+</ul>
+
+<p>With all these amazing things going for JWTs, they seem like an unstoppable hype
+train headed straight for Stack Overflow fame and fortune!</p>
+
+<p>But… today I’m here to talk with you about the downsides of using JWTs.
+Specifically, why it’s a bad idea to use JWTs as session tokens for most people.</p>
+
+<h2 id="what-are-jwts">What are JWTs?</h2>
+
+<p>If you aren’t already familiar with JWTs, don’t panic! They aren’t that
+complicated!</p>
+
+<p>The way I like to think of JWTs is that they’re just some JSON data that you can
+verify came from someone you know.</p>
+
+<p><img src="/assets/blog/why-jwts-suck-as-session-tokens/json-web-token-0824edbedeaa0ea289d6f724c1a383e97d1cbdb3df8e21f5a726bbc151d3a321.png" alt="JSON Web Token" /></p>
+
+<p>Pretend I’m blind and hard of hearing. Let’s also pretend that last week you
+bought me lunch, and now I need your Venmo address to pay you back. If I ask you
+for your Venmo address in person, and someone else shouts <em>their</em> Venmo address, I
+might accidentally send <em>them</em> the money I owe <em>you</em>.</p>
+
+<p>That’s because I heard <em>someone</em> shout a Venmo address, and I trusted that it
+was <em>you</em>, even though in this case, it wasn’t.</p>
+
+<p>JWTs were designed to prevent this sort of thing from happening. JWTs give
+people an easy way to pass data between each other, while at the same time
+verifying who created the data in the first place.</p>
+
+<p>So, going back to our previous example, if I received 1,000,000 different
+JWTs that contained a Venmo address, I’d easily be able to tell which one
+actually came from you.</p>
+
+<h2 id="how-do-jwts-work">How do JWTs Work?</h2>
+
+<p>JWTs are JSON data, encoded as a string, and cryptographically signed. I know
+that sounds fancy, but it really isn’t.</p>
+
+<p><img src="/assets/blog/why-jwts-suck-as-session-tokens/jwt-formula-b7c24e097d62283a65375078fa815fddcbe1ab4877c5b4a7b844493e004e0d4d.png" alt="JSON Web Token Formula" /></p>
+
+<p>The core of any JWT is claims. Claims are the JSON data inside the JWT. It’s the
+data you care about, and want to pass along securely to someone else. I’m not
+going into the details here, but just know that JWTs hold JSON data.</p>
+
+<p>How do JWTs make it so that you know whether or not they can be trusted?
+Cryptographic signatures.</p>
+
+<p>Let’s say I write a letter. When I sign that letter, I’m “signing” it. This
+means that anyone who reads that letter will know that I wrote it. And, because
+my signature is unique, there will be no question of its authenticity.</p>
+
+<p>Cryptographic signatures work in much the same way. There are two main ways to
+“sign” JWTs cryptographically: using symmetric or asymmetric keys. Both types
+are commonly used, and provide the same guarantees of authenticity.</p>
+
+<h3 id="jwts-in-a-nutshell">JWTs in a Nutshell</h3>
+
+<p>JWTs aren’t magic–they’re just blobs of JSON that have been cryptographically
+signed. Regardless of whether they’re symmetrically or asymmetrically signed,
+they provide the same guarantees: you can trust that a JWT is valid and created
+by someone you have faith in.</p>
+
+<p>These properties of JWTs make them really useful in certain scenarios where you
+need to assert that some data can be trusted (such as when using federated
+login/single sign-on).</p>
+
+<h3 id="jwt-encryption-note">JWT Encryption Note</h3>
+
+<p><img src="/assets/blog/why-jwts-suck-as-session-tokens/key-sketch-61e6cdc9831efceb7bea8acb1421b4d597d1a1a4c83df350bd8c0a6352148b45.png" alt="Key Sketch" /></p>
+
+<p>One final note I want to make about JWTs before moving on: their contents (the
+JSON data inside of them) are usually <strong>not</strong> encrypted. This means that anyone can
+view the data inside the JWT, even without a key.</p>
+
+<p>JWTs don’t try to encrypt your data so nobody else can see it, they simply help
+you verify that it was created by someone you trust.</p>
+
+<p>Now, if you <em>do</em> want to encrypt your JWTs you can do so by using <a href="http://self-issued.info/docs/draft-ietf-jose-json-web-encryption.html" title="JSON Web Encryption">JWE</a>, but this is
+not nearly as common as unencrypted JWTs. If you are using JWTs and need
+encryption, be sure you use the right thing!</p>
+
+<h2 id="how-are-people-using-jwts-today">How are People Using JWTs Today?</h2>
+
+<p>The most common use case for JWTs is authentication. There are tons of web
+security libraries which use JWTs as session tokens, API tokens, etc.</p>
+
+<p>The idea is that when someone authenticates to a website/API, the server will
+generate a JWT that contains the user’s ID, as well as some other critical
+information, and then send it to the browser/API/etc. to store as a session
+token.</p>
+
+<p><img src="/assets/blog/why-jwts-suck-as-session-tokens/jwt-session-c66df0e71adcde705ac96cd3fd402b040222d35d956eda49249ec7e1717a738d.png" alt="JWT Session" /></p>
+
+<p>When that user visits another page on the website, for instance, their browser
+will automatically send that JWT to the server, which will validate the JWT to
+make sure that it’s the same token it created originally, then let the user do
+stuff.</p>
+
+<p>In theory, this sounds nice because:</p>
+
+<ul>
+  <li>When the server receives a JWT, it can validate that it is legitimate and
+trust that the user is whoever the token says they are</li>
+  <li>The server can validate this token locally without making any network
+requests, talking to a database, etc. This can potentially make session
+management faster because instead of needing to load the user from a database
+(or cache) on every request, you just need to run a small bit of local code.
+This is probably the single biggest reason people like using JWTs: they are
+stateless.</li>
+</ul>
+
+<p>These two perks sound great because they will speed up webapp performance,
+reduce load on cache servers and database servers, and generally provide faster
+experiences.</p>
+
+<p>As a bonus benefit, as the webapp creator you can embed other information about
+the user into your JWT:</p>
+
+<ul>
+  <li>User permissions</li>
+  <li>User personal information</li>
+  <li>Etc.</li>
+</ul>
+
+<p>This means that you can reduce your database load even further by simply
+embedding extra user information in your tokens as well!</p>
+
+<h2 id="why-do-jwts-suck">Why Do JWTs Suck?</h2>
+
+<p><img src="/assets/blog/why-jwts-suck-as-session-tokens/rage-face-55bec569ef91eb3e4ac1c0e9a73d4dea55bc40317c7f6b0594b1240e40774c71.jpg" alt="Rage Face" width="200" /></p>
+
+<p>Now that we’ve seen how JWTs are used for authentication purposes, let’s get
+into my favorite subject of all: why JWTs are not good session tokens.</p>
+
+<p>I often argue with coworkers, colleagues, and friends about this, so it’s nice
+to finally get all my thoughts on the subject down in bytes.</p>
+
+<p>In particular, I plan to explain to you why normal old sessions are superior to
+JWTs in almost every way.</p>
+
+<h3 id="context">Context</h3>
+
+<p>Before I start making web developers all over the world angry, I want to provide
+some context into my reasoning.</p>
+
+<p>Most websites that developers build are relatively simple:</p>
+
+<ul>
+  <li>A user registers for the website</li>
+  <li>A user signs into the website</li>
+  <li>A user clicks around and does stuff</li>
+  <li>The website uses the user’s information to create, update, and delete
+information</li>
+</ul>
+
+<p>99.9% of all websites match the criteria above.</p>
+
+<p>For these types of websites, what’s important to know is that almost every page
+a user interacts with contains some sort of dynamic data. Odds are, if you’re
+running a website that requires a user to sign in to use it, you’re going to be
+doing things with that user in your database often:</p>
+
+<ul>
+  <li>Recording the actions a user is taking</li>
+  <li>Adding some data for the user to the database</li>
+  <li>Checking a user’s permissions to see if they can do something</li>
+  <li>Etc.</li>
+</ul>
+
+<p>The important thing to remember is that most sites require user information for
+nearly every operation.</p>
+
+<p>With that out of the way, let’s get into the reasons why JWTs suck. First up?
+Size.</p>
+
+<h3 id="size">Size</h3>
+
+<p>Let’s take a look at two scenarios:</p>
+
+<ul>
+  <li>Storing a user ID (abc123) in a cookie</li>
+  <li>Storing a user ID (abc123) in a JWT</li>
+</ul>
+
+<p>If we store the ID in a cookie, our total size is 6 bytes. If we store the ID in
+a JWT (with basic header fields set, as well as a reasonably long secret), the
+size has now inflated to 304 bytes. For storing a simple user session, that is a
+~51x size inflation on every single page request in exchange for cryptographic
+signing (as well as some header metadata).</p>
+
+<p><img src="/assets/blog/why-jwts-suck-as-session-tokens/jwt-size-e9c552fe648b2d0e627d792ecd2ae72852ac4d801d2d511e8cc358a6583ac397.png" alt="JWT Size" /></p>
+
+<p>For reference, here were the JWT claims I used to get that number:</p>
+
+<div class="language-json highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"iss"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.mywebsite.com"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"sub"</span><span class="p">:</span><span class="w"> </span><span class="s2">"abc123"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"nbf"</span><span class="p">:</span><span class="w"> </span><span class="mi">1497934977</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"exp"</span><span class="p">:</span><span class="w"> </span><span class="mi">1497938577</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"iat"</span><span class="p">:</span><span class="w"> </span><span class="mi">1497934977</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"jti"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1234567"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"typ"</span><span class="p">:</span><span class="w"> </span><span class="s2">"authtoken"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+</div>
+
+<p>Let’s say that your website gets roughly 100k page views per month. That means
+you’d be consuming an additional ~24MB of bandwidth each month. That doesn’t
+sound like a lot, but when you’re consistently bloating every single page
+request, all the little things start to add up.</p>
+
+<p>Also: this example was using the smallest possible amount of information encoded
+in a JWT. In reality, many people end up storing much more information in JWTs
+than just a user ID, greatly increasing these byte counts.</p>
+
+<h3 id="youre-going-to-hit-the-database-anyway">You’re Going to Hit the Database Anyway</h3>
+
+<p>As I mentioned above, most websites that require user login are primarily
+generating dynamic user content for CRUD operations (create, update, delete).</p>
+
+<p><img src="/assets/blog/why-jwts-suck-as-session-tokens/youll-hit-the-db-anyway-751f7c471a9dbf846c77f3ac446949c1c2db50c599abec599e69e380939f03a5.png" alt="You'll Hit the DB Anyway" /></p>
+
+<p>The issue with using JWTs on these websites is that for almost every single page
+the user loads, the user object needs to be loaded from a cache / database
+because one of the following situations are occurring:</p>
+
+<ul>
+  <li>A mission critical user check needs to run (eg: does this user have enough
+money in their account to complete the transaction?)</li>
+  <li>A database write needs to occur to persist information (if this information is
+related to the user, it’s likely that the full user object must also be
+retrieved from the database)</li>
+  <li>The full user object must be pulled out of the cache / database so that the
+website can properly generate its dynamic page content</li>
+</ul>
+
+<p>Think about the websites you build. Do they often manipulate user data? Do they
+frequently use various fields on the user account to work? If so, your site
+falls into this category, and you’ll likely be talking to the cache server /
+database regardless of whether or not you’ve got a JWT.</p>
+
+<p>This means that on most websites, the stateless benefits of a JWT are not being
+taken advantage of.</p>
+
+<p>To compound this issue, since JWTs are larger (in bytes) and also require CPU to
+compute cryptographic signatures, they’re actually significantly slower than
+traditional sessions when used in this manner.</p>
+
+<p>Almost every web framework loads the user on every incoming request. This
+includes frameworks like Django, Rails, Express.js (if you’re using an
+authentication library), etc. This means that even for sites that are primarily
+stateless, the web framework you’re using is still loading the user object
+regardless.</p>
+
+<p>Finally: if you’re storing your user information in a modern cache like
+memcached/redis, it’s not uncommon over a VPC to achieve cache GET times of 5ms
+or below, which is <em>extremely</em> fast. I’ve personally used DynamoDB on Amazon in
+the past as a session store, and consistently achieved 1ms cache retrieval
+times. Because caching systems are so fast, there’s very little performance
+overhead when retrieving users in this manner.</p>
+
+<h3 id="redundant-signing">Redundant Signing</h3>
+
+<p>One of the main selling points of JWTs are cryptographic signatures. Because
+JWTs are cryptographically signed, a receiving party can verify that the JWT is
+valid, and trusted.</p>
+
+<p>But… what would you say if I told you that in pretty much every single web
+framework created over the last 20 years, you could also get the benefits of
+cryptographic signatures when using plain old session cookies?</p>
+
+<p>Well, you can =)</p>
+
+<p>Most web frameworks cryptographically sign (and many encrypt!) your cookies for
+you automatically. This means that you get the exact same benefits as using JWT
+signatures without using JWTs themselves.</p>
+
+<p>In fact, in most web authentication cases, the JWT data is stored in a session
+cookie anyways, meaning that there are now two levels of signing. One on the
+cookie itself, and one on the JWT.</p>
+
+<p>While having two levels of signing may sound like a good idea, it is not. You
+get no security benefits, and you’ve now got to spend twice as long on CPU
+cycles to validate both signatures. Not really ideal for web environments where
+milliseconds are important. This is especially true in single threaded
+environments (cough cough <em>nodejs</em>) where number crunching can block your main
+event loop.</p>
+
+<h2 id="whats-a-better-solution">What’s a Better Solution?</h2>
+
+<p>If JWTs suck, then what’s a better solution? Plain old sessions!</p>
+
+<p><img src="/assets/blog/why-jwts-suck-as-session-tokens/sessionid-vs-jwt-3db76c728244b12c8a71d064c045216b7609bbe5468433c54845edffc2f1674d.png" alt="SessionID vs JWT" /></p>
+
+<p>If you’re building a simple website like the ones described above, then your
+best bet is to stick with boring, simple, and secure server side sessions.
+Instead of storing a user ID inside of a JWT, then storing a JWT inside of a
+cookie: just store the user ID directly inside of the cookie and be done with
+it.</p>
+
+<p>If your website is popular and has many users, cache your sessions in a backend
+like memcached or redis, and you can easily scale your service with very little
+hassle.</p>
+
+<p>Excellent quality web frameworks like Django know this, which is why they
+operate this way.</p>
+
+<h2 id="how-should-i-use-jwts">How Should I Use JWTs?</h2>
+
+<p>It’s important to note that I don’t hate JWTs. I just think they’re useless for
+a majority of websites. With that said, however, there are several cases in
+which JWTs can be useful.</p>
+
+<p>If you’re building API services that need to support server-to-server or
+client-to-server (like a mobile app or single page app (SPA)) communication,
+using JWTs as your API tokens is a very smart idea. In this scenario:</p>
+
+<ul>
+  <li>You will have an authentication API which clients authenticate against, and
+get back a JWT</li>
+  <li>Clients then use this JWT to send authenticated requests to other API services</li>
+  <li>These other API services use the client’s JWT to validate the client is
+trusted and can perform some action without needing to perform a network
+validation</li>
+</ul>
+
+<p><img src="/assets/blog/why-jwts-suck-as-session-tokens/good-jwt-example-acc793ee5fa4143ed97670e367bc29167cbb7cc570729f6ce09601191a7c4dab.png" alt="Good JWT Example" /></p>
+
+<p>For these types of API services, JWTs make perfect sense because clients will be
+making requests frequently, with limited scope, and usually authentication data
+can be persisted in a stateless way without too much dependence on user data.</p>
+
+<p>If you’re building any type of service where you need three or more parties
+involved in a request, JWTs can also be useful. In this case the requesting
+party will have a token to prove their identity, and can forward it to the third
+(or 4th … nth) service without needing to incur a real-time validation each
+and every time.</p>
+
+<p>Finally: if you’re using user federation (things like single sign-on and OpenID
+Connect), JWTs become important because you need a way to validate a user’s
+identity via a third party. Thanks to cryptographic signing, JWTs make a
+valuable addition to federated user protocols.</p>
+
+<h2 id="wrap-up">Wrap Up</h2>
+
+<p>When you start building your next website, just rely on your web framework’s
+default authentication libraries and tools, and stop trying to shove JWTs into
+the mix unnecessarily.</p>
+
+<p>Finally, if you’re interested in web security and all sorts of other interesting
+problems in the authentication space, you should consider signing up for an <a href="https://developer.okta.com/" title="Okta Developer Account">Okta
+Developer Account</a>. Our API service stores user accounts for your web apps,
+mobile apps, and API services, and makes web security fun again.</p>
+
+<p>If you have any questions, feel free to hit me up on Twitter <a href="https://twitter.com/rdegges" title="Randall on Twitter">@rdegges</a>.</p>
+
+
+
+	</div>
+	
+</article>
+
+		
+</section>
+
+		
+	</div><footer class="Footer">
+    <div class="Wrap">
+
+        <div class="Row">
+
+            <div class="Column--3 Column--medium-6 Column--xSmall-12">
+
+                <a class="Logo" href="https://www.okta.com/" target="_blank" rel="noopener noreferrer">
+                    <img src="https://developer.okta.com/sites/all/themes/developer/images/logo-footer.png" alt="Okta">
+                    Visit okta.com
+                </a>
+
+            </div>
+
+            <div class="Column--3 Column--medium-12 Column--xSmall-12">
+
+                <h4>Social</h4>
+                <ul class="Footer-links Footer-links--social">
+                    <li><a class="Footer-links--github" target="_blank" rel="noopener noreferrer" href="http://github.com/oktadeveloper">Github</a></li>
+                    <li><a class="Footer-links--twitter" target="_blank" rel="noopener noreferrer" href="http://twitter.com/OktaDev">Twitter</a></li>
+                    <li><a class="Footer-links--forum" target="_blank" rel="noopener noreferrer" href="https://devforum.okta.com/">Forum</a></li>
+                    <li><a class="Footer-links--rss" target="_blank" rel="noopener noreferrer" href="http://feeds.feedburner.com/OktaBlog">RSS Blog</a></li>
+                </ul>
+            </div>
+
+            <div class="Column--3 Column--medium-6 Column--small-12">
+                <h4>More Info</h4>
+                <ul class="Footer-links">
+                    <li><a target="_blank" href="https://developer.okta.com/integrate-with-okta/">Integrate with Okta</a></li>
+                    <li><a href="/blog/">Blog</a></li>
+                    <li><a href="/docs/platform-release-notes/platform-release-notes.html">Release Notes</a></li>
+                    <li><a href="/3rd_party_notices/">3rd Party Notices</a></li>
+                </ul>
+            </div>
+
+            <div class="Column--3 Column--medium-6 Column--small-12">
+                <h4>Contact &amp; Legal</h4>
+                <ul class="Footer-links">
+                    <li><a href="https://developer.okta.com/contact/">Contact Sales</a></li>
+                    <li><a target="_blank" rel="noopener noreferrer" href="mailto:developers@okta.com">Contact Support</a></li>
+                    <li><a href="https://developer.okta.com/terms/">Terms &amp; Conditions</a></li>
+                    <li><a href="https://developer.okta.com/privacy/">Privacy Policy</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</footer>
+
+    <script type="text/javascript" src="/assets/master-0365dd27cf276cb2a15c0a43906ca592538204cf1ad4557547bf4e50609b411e.js"></script>
+    <script type="text/javascript" src="/assets/myOkta-911cbafbbe079b7a5522d9cbe15bd2a5f44e1582531e88393934bec69f97696b.js"></script>
+    
+    
+    
+    
+      <script type="text/javascript" src="/assets/blog-6e32dad27404131cc8630a5282264bed2ab4c08c91ac86fa496b75c53aa4f681.js"></script>
+    
+
+  <!-- START Post Footer -->
+  
+  <!-- START Google Tag Manager -->
+  <!-- https://support.google.com/tagmanager/answer/6103696?hl=en -->
+  <noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-TJ45R6" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+  <!-- END Google Tag Manager -->
+  <!-- START Google Remarketing Tag -->
+  <script type="text/javascript">
+    /* <![CDATA[ */
+    var google_conversion_id = 1006913831;
+    var google_custom_params = window.google_tag_params;
+    var google_remarketing_only = true;
+    /* ]]> */
+  </script>
+  <div style="display:none;"><script type="text/javascript" src="//www.googleadservices.com/pagead/conversion.js"></script></div>
+  <noscript><div style="display:inline;"><img height="1" width="1" style="border-style:none;" alt="" src="//googleads.g.doubleclick.net/pagead/viewthroughconversion/1006913831/?value=0&amp;guid=ON&amp;script=0"></div></noscript>
+  <!-- END Google Remarketing Tag -->
+  <!-- START Crazy Egg Tracking -->
+  <script type="text/javascript">
+    setTimeout(function(){var a=document.createElement("script");
+    var b=document.getElementsByTagName("script")[0];
+    a.src=document.location.protocol+"//script.crazyegg.com/pages/scripts/0021/9333.js?"+Math.floor(new Date().getTime()/3600000);
+    a.async=true;a.type="text/javascript";b.parentNode.insertBefore(a,b)}, 1);
+  </script>
+  <!-- END Crazy Egg Tracking -->
+
+  <!-- END Post Footer -->
+</body>
+</html>

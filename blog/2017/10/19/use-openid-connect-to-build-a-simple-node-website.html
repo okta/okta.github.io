@@ -1,0 +1,766 @@
+<!doctype html>
+<!--[if lt IE 7 ]> <html class="ie6 no-flexbox"> <![endif]-->
+<!--[if IE 7 ]>    <html class="ie7 no-flexbox"> <![endif]-->
+<!--[if IE 8 ]>    <html class="ie8 no-flexbox"> <![endif]-->
+<!--[if IE 9 ]>    <html class="ie9 no-flexbox"> <![endif]-->
+<!--[if IE 10 ]>    <html class="ie10 no-flexbox"> <![endif]-->
+<!--[if (gt IE 10)|!(IE)]><!--> <html class="modern wf-loading" lang="en"> <!--<![endif]-->
+  <head>
+  <script>
+    var searchDomain = 'https://developer.okta.com';
+    var isProduction = window.location.hostname === 'developer.okta.com';
+    if (isProduction) {
+      // TypeKit
+      (function(d) {
+        var config = {
+          kitId: 'jff5neq',
+          scriptTimeout: 3000,
+          async: true
+        },
+        h=d.documentElement,t=setTimeout(function(){h.className=h.className.replace(/bwf-loadingb/g,"")+" wf-inactive";},config.scriptTimeout),tk=d.createElement("script"),f=false,s=d.getElementsByTagName("script")[0],a;h.className+=" wf-loading";tk.src='https://use.typekit.net/'+config.kitId+'.js';tk.async=true;tk.onload=tk.onreadystatechange=function(){a=this.readyState;if(f||a&&a!="complete"&&a!="loaded")return;f=true;clearTimeout(t);try{Typekit.load(config)}catch(e){}};s.parentNode.insertBefore(tk,s)
+      })(document);
+
+      // Google analytics
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+              (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+              m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+      ga('create', 'UA-15777010-3', 'auto');
+      ga('send', 'pageview');
+
+      // START Google Tag Manager
+      (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+      new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+      j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+      '//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+      })(window,document,'script','dataLayer','GTM-TJ45R6');
+      // END Google Tag Manager
+    }
+	</script>
+  <meta charset="utf-8">
+  <meta http-equiv="x-ua-compatible" content="IE=edge,chrome=1">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+ 	
+
+  <link type="text/css" rel="stylesheet" href="https://developer.okta.com/sites/all/themes/developer/css/master.css" media="all" />
+  <meta class="swiftype" name="title" data-type="string" content="Use OpenID Connect to Build a Simple Node.js Website | Okta Developer" />
+  <meta class="swiftype" name="summary" data-type="string" content="If you’ve ever spent time trying to figure out the best way to handle userauthentication for your Node app and been confused: you’re not alone. Over thelast ..." />
+
+  <link type="text/css" rel="stylesheet" href="/assets/animate-ec43d72c3ed45e08a460b8a2966d8dba6006aebfa0530935c3973fa493a8771f.css">
+  <link type="text/css" rel="stylesheet" href="/assets/okta-a96df4c9d48b78b618e1d541f46f7137d73d40653571e020c1ad59edd7915c60.css">
+  
+  
+  <title>Use OpenID Connect to Build a Simple Node.js Website | Okta Developer</title>
+  <meta name="description" content="If you’ve ever spent time trying to figure out the best way to handle userauthentication for your Node app and been confused: you’re not alone. Over thelast ...">
+  <link rel="canonical" href="https://developer.okta.com/blog/2017/10/19/use-openid-connect-to-build-a-simple-node-website"  data-proofer-ignore>
+  <link rel="alternate" type="application/rss+xml" title="Okta Developer" href="https://developer.okta.com/feed.xml"><!-- GA -->
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+  <link rel="manifest" href="/manifest.json">
+  <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#21313a">
+  <meta name="theme-color" content="#ffffff">
+</head>
+
+  
+    <body id="blog">
+	
+
+
+
+
+<header class="Header is-fixed">
+
+  <div class="Wrap">
+
+    <a class="Logo" href="https://developer.okta.com">
+      <svg version="1.1" id="OktaLogo" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 431.9 151.4" style="enable-background:new 0 0 431.9 151.4;" xml:space="preserve"><g><g><g><path d="M102.2,41.4c-21,0-38.1,17.1-38.1,38.1s17.1,38.1,38.1,38.1s38.1-17.1,38.1-38.1l0,0C140.3,58.5,123.2,41.4,102.2,41.4z M102.2,98.5c-10.5,0-19-8.5-19-19s8.5-19,19-19s19,8.5,19,19c0.1,10.5-8.4,19-18.9,19.1C102.3,98.6,102.2,98.6,102.2,98.5L102.2,98.5z"/><path d="M169.1,92.3c0-1.9,1.5-3.4,3.4-3.4c0.9,0,1.8,0.4,2.4,1c9.5,9.7,25.3,26.3,25.4,26.4c0.4,0.5,0.8,0.8,1.4,0.9l1.6,0.2h17.2c1.8,0,3.3-1.4,3.4-3.2c0-0.8-0.3-1.5-0.8-2.2l-28.6-29.2l-1.5-1.5c-3.2-3.9-2.9-5.4,0.8-9.3l22.6-25.1c1.1-1.4,0.8-3.5-0.6-4.6c-0.6-0.4-1.3-0.7-2-0.7h-17c-0.6,0.2-1.1,0.5-1.5,0.9L175,64.4c-1.3,1.4-3.4,1.5-4.8,0.2c-0.7-0.6-1.1-1.5-1.1-2.5V18.9c0-1.7-1.3-3-3-3c-0.1,0-0.2,0-0.3,0h-12.7c-2.2,0-3.3,1.5-3.3,2.8v95.8c0,2.2,1.8,2.8,3.3,2.8h12.7c1.7,0.1,3.2-1.2,3.3-2.9c0,0,0,0,0,0V92.3z"/><path d="M273,114l-1.4-12.8c-0.2-1.7-1.7-2.9-3.4-2.7c0,0,0,0-0.1,0l-2.9,0.2c-10.1,0-18.5-7.9-19-18c0-0.3,0-0.7,0-1V64.2c-0.1-2,1.5-3.6,3.5-3.7c0,0,0,0,0,0h17c1.7-0.1,3.1-1.5,3-3.2c0,0,0-0.1,0-0.1v-12c0-2.3-1.5-3.6-2.8-3.6h-17.1c-1.9,0.1-3.5-1.5-3.6-3.4c0,0,0,0,0,0V18.9c-0.1-1.7-1.5-3.1-3.2-3c0,0-0.1,0-0.1,0h-12.7c-1.6-0.1-3,1.1-3.1,2.7c0,0.1,0,0.1,0,0.2c0,0,0,61.7,0,62c0.5,21,17.9,37.6,38.9,37c1.4,0,2.9-0.2,4.3-0.3C272,117.2,273.2,115.7,273,114z"/></g><path d="M364.7,98c-10.8,0-12.4-3.8-12.4-18.3l0,0V44.8c0-1.8-1.4-3.2-3.2-3.2c0,0-0.1,0-0.1,0h-12.8c-1.8,0-3.2,1.4-3.3,3.2v1.6C314.6,36,291.3,42.5,281,60.8c-10.4,18.3-3.9,41.6,14.4,51.9c14,7.9,31.4,6.2,43.5-4.2c3.6,5.5,9.3,9.1,18.3,9.1c1.5,0,9.7,0.3,9.7-3.5v-13.6C367,99.2,366,98.1,364.7,98z M314.2,98.6c-10.5,0-19-8.5-19-19s8.5-19,19-19s19,8.5,19,19l0,0C333.2,90.1,324.7,98.6,314.2,98.6z"/></g><path d="M19.4,74c2.2-1.9,4.1-4.1,5.7-6.6c3.5-5.3,5.4-11.5,5.2-17.9V27c0-4.9,0.9-8.4,2.7-10.5c1.8-2.1,4.8-3,9.2-3h12.6c1.2,0,2.1-0.9,2.2-2.1l0,0V2.2C57,1,56,0,54.8,0c0,0,0,0,0,0H41.5c-7.8,0-12.9,2.1-18,7.6s-7.1,12.3-7.1,21.7v14.2c0,2.2-0.1,4-0.2,5.7v2.2c-0.5,3.2-1.8,6.2-3.6,8.9C9.4,64.7,5.1,70.9,0.9,74l0,0l-0.3,0.3l0,0l-0.2,0.3H0.2v0.3l0,0c-0.1,0.3-0.1,0.7,0,1l0,0v0.3h0.1l0.2,0.3l0,0l0.3,0.3l0,0c4.2,3.1,8.5,9.3,11.3,13.7c1.8,2.7,3.1,5.7,3.6,8.9v2.2c0.1,1.6,0.2,3.5,0.2,5.7v14.3c0,9.4,2.4,16.7,7.1,21.7s10.2,7.6,18,7.6h13.8c1.2,0,2.2-1,2.2-2.2V140l0,0c0-1.2-1-2.2-2.2-2.2H42.2c-4.4,0-7.5-1-9.2-3s-2.7-5.6-2.7-10.5v-22.4c0.2-6.4-1.7-12.6-5.2-17.9c-1.6-2.5-3.5-4.7-5.7-6.6l0,0c-0.9-0.7-1.1-2-0.4-2.9C19.2,74.3,19.3,74.2,19.4,74L19.4,74z"/><path d="M412.5,74c-2.2-1.9-4.1-4.1-5.7-6.6c-3.5-5.3-5.4-11.5-5.2-17.9V27c0-4.9-0.9-8.4-2.7-10.5s-4.8-3-9.2-3h-12.6c-1.2,0-2.2-1-2.2-2.2c0,0,0,0,0,0l0,0V2.2c0-1.2,1-2.2,2.2-2.2c0,0,0,0,0,0h13.4c7.8,0,12.9,2.1,18,7.6s7.1,12.3,7.1,21.7v14.2c0,2.2,0.1,4,0.2,5.7v2.2c0.5,3.2,1.8,6.2,3.6,8.9c2.8,4.5,7.1,10.7,11.3,13.7l0,0l0.3,0.3l0,0l0.2,0.3h0.1v0.3l0,0c0.1,0.3,0.1,0.7,0,1l0,0v0.3h-0.1l-0.2,0.3l0,0l-0.3,0.3l0,0c-4.2,3.1-8.5,9.3-11.3,13.7c-1.8,2.7-3.1,5.7-3.6,8.9v2.2c-0.1,1.6-0.2,3.5-0.2,5.7v14.3c0,9.4-2.4,16.7-7.1,21.7s-10.2,7.6-18,7.6h-13.4c-1.2,0-2.2-1-2.2-2.2c0,0,0,0,0,0V140l0,0c0-1.2,1-2.2,2.2-2.2l0,0h12.7c4.4,0,7.5-1,9.2-3s2.7-5.6,2.7-10.5v-22.4c-0.2-6.3,1.6-12.6,5.1-17.9c1.6-2.5,3.5-4.7,5.7-6.6l0,0c0.9-0.7,1.1-2,0.4-2.9C412.7,74.3,412.6,74.2,412.5,74L412.5,74z"/></g></svg>
+    </a>
+
+    <nav class="Header-nav PrimaryNav">
+      <ul class="menu">
+        <li class="first leaf">
+          <a href="https://developer.okta.com/product/">Product</a>
+        </li>
+        <li class="leaf">
+          <a href="https://developer.okta.com/pricing/">Pricing</a>
+        </li>
+        <li class="leaf">
+          <a href="/blog/" class="active">Blog</a>
+        </li>
+        <li class="leaf">
+          <a href="/documentation/">Docs</a>
+        </li>
+        <li class="last expanded">
+          <span class="nolink">Support</span>
+          <ul class="menu">
+            <li class="first leaf"><a href="https://devforum.okta.com/">Okta Developer Forums</a></li>
+            <li class="last leaf"><a href="mailto:developers@okta.com">developers@okta.com</a></li>
+          </ul>
+        </li>
+      </ul>
+      <a class="PrimaryNav-toggle" href="#">
+        <svg width="20px" height="20px" viewBox="0 0 20 20" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+            <g class="MenuIcon" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="round">
+                <path d="M1,16 L19,16" class="MenuIcon-line1" stroke="#FFFFFF" stroke-width="2"></path>
+                <path d="M1,4 L19,4" class="MenuIcon-line2" stroke="#FFFFFF" stroke-width="2"></path>
+                <path d="M1,10 L19,10" class="MenuIcon-line3" stroke="#FFFFFF" stroke-width="2"></path>
+                <path d="M1,10 L19,10" class="MenuIcon-line4" stroke="#FFFFFF" stroke-width="2"></path>
+            </g>
+        </svg>
+        <svg class="CloseIcon" width="16px" height="16px" viewBox="0 0 16 16" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+          <g id="ALl-Boards" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+            <g id="Desktop" transform="translate(-915.000000, -235.000000)" fill="#FFFFFF">
+              <g id="Search-bar-Active" transform="translate(30.000000, 26.000000)">
+                <polygon id="Icon/Cross" points="901 210.6 899.4 209 893 215.4 886.6 209 885 210.6 891.4 217 885 223.4 886.6 225 893 218.6 899.4 225 901 223.4 894.6 217"></polygon>
+              </g>
+            </g>
+          </g>
+        </svg>
+      </a>
+
+      <div class="PrimaryNav-cta">
+        <a target="_blank" rel="noopener noreferrer" href="https://login.okta.com/?SAMLRequest=fc%2B7CsJAEAXQXvAflu1NNJUMeZBGELTx1a%2FrYILJTtyZGD%2FfSBRiYzlw77lMnD3rSj3Qc0ku0YtgrhU6S5fSXRN9PKxmS52l00nMpq6iBvJWCrfDe4ss6vStRe9aDzmGIZfo1jsgwyWDMzUyiIV9vt1AH4XGk5ClSvewUgMNa%2BYW%2FVj5jxhm9NLP67QQaSAMu64L6CYmsFSHlnzT4ZlLwTgcL6Sf8%2FeX9AU%3Dhttps://login.okta.com/?SAMLRequest=fc%2B7CsJAEAXQXvAflu1NNJUMeZBGELTx1a%2FrYILJTtyZGD%2FfSBRiYzlw77lMnD3rSj3Qc0ku0YtgrhU6S5fSXRN9PKxmS52l00nMpq6iBvJWCrfDe4ss6vStRe9aDzmGIZfo1jsgwyWDMzUyiIV9vt1AH4XGk5ClSvewUgMNa%2BYW%2FVj5jxhm9NLP67QQaSAMu64L6CYmsFSHlnzT4ZlLwTgcL6Sf8%2FeX9AU%3D" class="Button--redOutline">Login</a>
+        <a href="https://developer.okta.com/signup/" class="Button--red">Sign up</a>
+      </div>
+
+      <a class="SearchIcon" href="#"></a>
+      <form id="form_search" class="SearchBar Formisimo_clocked_69929" method="get" action="https://developer.okta.com/search/" name="form_search" __bizdiag="-784164280" __biza="WJ__">
+        <input type="text" name="stq" autocomplete="off" id="st-search-input-auto" class="st-search-input" placeholder="Search">
+        <input type="submit" name="submit" value="GO">
+      </form>
+
+    </nav>
+
+  </div>
+
+</header>
+
+	<div class="page-content">
+		
+
+
+
+
+
+
+<section class="Blog is-single">
+		
+	<div class="Blog-social">
+		
+		<a href="https://github.com/rdegges" target="_blank"><i class="fa fa-github"></i></a>
+		
+		
+		<a href="https://twitter.com/rdegges" target="_blank"><i class="fa fa-twitter"></i></a>
+		
+		
+		
+		<a href="https://www.rdegges.com" target="_blank"><i class="fa fa-external-link"></i></a>
+		
+	</div>
+	
+	
+
+<article class="BlogPost">
+	
+	<header class="BlogPost-header">
+	
+		<time class="BlogPost-date" datetime="2017-10-19">October 19, 2017</time>
+		
+		<h1 class="BlogPost-title">
+			
+			Use OpenID Connect to Build a Simple Node.js Website
+			
+		</h1>
+		
+		<div class="BlogPost-attribution">
+			
+				<img src="/assets/avatar-rdegges-9fb23ebb06890fb7924b8ceb3a28d666ae4ae1a297a3cddf517e549547e5dfe3.jpg" alt="avatar-rdegges.jpg" class="BlogPost-avatar">
+			
+			<span class="BlogPost-author">Randall Degges</span>
+		</div>
+	
+	</header>
+	
+	<div class="BlogPost-content">
+		
+	<p>If you’ve ever spent time trying to figure out the best way to handle user
+authentication for your Node app and been confused: you’re not alone. Over the
+last few years authentication practices have changed quite a bit.</p>
+
+<p>Today I’m going to show you how to use OpenID Connect to build an extremely
+simple Node.js website (using Express.js) that allows you to manage your users,
+log them in, and log them out.</p>
+
+<p>Back in the day, all websites would require users to register with a
+username/password and log in with those same credentials. This was simple, but
+caused a lot of security problems because developers would need to write the
+code to authenticate the user directly, store their credentials, manage their
+data, etc. It also required developers to build custom authorization schemes so
+that they could track what permissions their users had to perform certain
+operations.</p>
+
+<p>A while later, OAuth came into fashion with a new idea: let a user have one
+account with a large OAuth provider (Google, Facebook, etc.), and let users log
+into your service via their OAuth account with that provider. This had some nice
+benefits: developers no longer had to worry about storing passwords and managing
+credentials. The downside was that OAuth is a flexible protocol, and doesn’t lay
+out rules around authorization, data management, etc. This means that developers
+using pure OAuth are required to write a lot of custom security code themselves,
+which causes problems.</p>
+
+<p>Just recently, however, <a href="http://openid.net/connect/">OpenID Connect</a> (OIDC) has
+come onto the scene. It’s a protocol built on top of OAuth that provides
+everything you could ever want: simplified user authentication, simplified
+authorization, and lots of nice management to tie them all together. OIDC has
+been gaining popularity in the development community.</p>
+
+<p>The only problem with OIDC is that there still aren’t a ton of great tools and
+integrations to make using it easy.</p>
+
+<p>One of my amazing <a href="https://developer.okta.com/">Okta</a> colleagues,
+<a href="https://github.com/robertjd">Robert</a>, has been working on a new Node.js
+library,
+<a href="https://www.npmjs.com/package/@okta/oidc-middleware#customizing-routes">oidc-middleware</a>,
+that attempts to make adding user authentication and authorization to your Node
+apps simple.</p>
+
+<p>So, without further ado, let’s build something together! I’ll show you how to
+use the new oidc-middleware package to build a simple website.</p>
+
+<h2 id="create-an-okta-account">Create an Okta Account</h2>
+
+<p>The first thing you’ll need to do before we build our simple Node.js website is
+to create a free <a href="https://developer.okta.com/signup/">Okta developer account</a>.</p>
+
+<p>If you haven’t heard of Okta before, we’re an API service that allows you to
+easily store your user accounts, manage them from a simple web UI, handle user
+login and registration, password reset functionality, social login, single
+sign-on, and lots more.</p>
+
+<p><strong>NOTE</strong>: If you’d like to skip the following sections and get straight into the
+code, you can visit the <a href="https://github.com/oktadeveloper/okta-express-example">Github
+repo</a> for this
+application directly.</p>
+
+<h2 id="create-an-application">Create an Application</h2>
+
+<p>Now that you’ve got an Okta account, you need to create an Application. Using
+Okta, you can create as many Applications as you’d like. Each Application
+represents an actual application you might be building.</p>
+
+<p>Since you’re going to be building a simple Node website right now, you only need
+to create a single Application.</p>
+
+<p>To get started, go log into your new Okta dashboard. Once you’re in, click the
+“Applications” tab. You’ll see something like this:</p>
+
+<p><img src="/assets/blog/use-openid-connect-to-build-a-simple-node-website/okta-application-dashboard-2411f71868af3851f962ad8affabfe2872fbb07a54192bcfca3414167c917c6d.png" alt="Okta Application Dashboard" width="700" class="center-image" /></p>
+
+<p>This is where you can view all of your Okta applications, and manage them.</p>
+
+<p>Since we don’t have an Application created yet, let’s do that now. Click the big
+green “Add Application” button and then click the “Web” box (because you’re
+going to build a web app):</p>
+
+<p><img src="/assets/blog/use-openid-connect-to-build-a-simple-node-website/okta-create-application-04063eaccb4f7c883af3263faafa4b93c6073386edbf8ba29bb19c720be7f261.png" alt="Okta Create Application" width="700" class="center-image" /></p>
+
+<p>Once you move to the next screen, you’ll be able to configure your app settings.
+There’s a lot of things you can do here (feel free to play around with it
+sometime!), but for now: leave all the defaults as-is.</p>
+
+<p><img src="/assets/blog/use-openid-connect-to-build-a-simple-node-website/okta-application-settings-41831c8166894414b8ec815c36907c2637f79d5b9151faed18ba92d934f9defd.png" alt="Okta Application Settings" width="700" class="center-image" /></p>
+
+<p>Next, you’ll want to copy down a few settings that we’ll need later on.</p>
+
+<p>To start, you’ll need the Client ID and Client Secret of your newly created
+Application. You’ll find this on the page you land one once you’ve created your
+new Application:</p>
+
+<p><img src="/assets/blog/use-openid-connect-to-build-a-simple-node-website/okta-application-secrets-f5032e6ea8d2a1b8425f647b0bcbd8db246abd99e16d68ad66aad759d4404bb3.png" alt="Okta Application Secrets" width="700" class="center-image" /></p>
+
+<p>Next, you’ll need your Okta Organization URL. If you go to the “Dashboard” page,
+you should see it at the top-right hand corner of the page. It’s the setting
+called “Org URL”. Here’s what mine looks like, for example:
+dev-310095.oktapreview.com</p>
+
+<p><img src="/assets/blog/use-openid-connect-to-build-a-simple-node-website/okta-org-url-d30c4e1fad7ad4043e25564d217f4233ca29e9e0e4f6ed2b941c2c624c4ecb44.png" alt="Okta Org URL" width="700" class="center-image" /></p>
+
+<p>Now that you have those settings, keep them someplace safe and we’ll use them
+soon.</p>
+
+<h2 id="build-the-expressjs-app">Build the Express.js App</h2>
+
+<p>The next thing you’ll do is build a simple Express.js app without any sort of
+login capabilities. It will be very simple (but that’s the point!).</p>
+
+<h3 id="create-the-application-skeleton">Create the Application Skeleton</h3>
+
+<p>To get started, create a new folder somewhere on your computer, and enter it.
+Then create a <code class="highlighter-rouge">server.js</code> file and insert the following code:</p>
+
+<div class="language-javascript highlighter-rouge"><pre class="highlight"><code><span class="s2">"use strict"</span><span class="p">;</span>
+
+<span class="kr">const</span> <span class="nx">express</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s2">"express"</span><span class="p">);</span>
+
+<span class="kd">let</span> <span class="nx">app</span> <span class="o">=</span> <span class="nx">express</span><span class="p">();</span>
+
+<span class="c1">// App settings</span>
+<span class="nx">app</span><span class="p">.</span><span class="nx">set</span><span class="p">(</span><span class="s2">"view engine"</span><span class="p">,</span> <span class="s2">"pug"</span><span class="p">);</span>
+
+<span class="c1">// App middleware</span>
+<span class="nx">app</span><span class="p">.</span><span class="nx">use</span><span class="p">(</span><span class="s2">"/static"</span><span class="p">,</span> <span class="nx">express</span><span class="p">.</span><span class="kr">static</span><span class="p">(</span><span class="s2">"static"</span><span class="p">));</span>
+
+<span class="c1">// App routes</span>
+<span class="nx">app</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s2">"/"</span><span class="p">,</span> <span class="p">(</span><span class="nx">req</span><span class="p">,</span> <span class="nx">res</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="nx">res</span><span class="p">.</span><span class="nx">render</span><span class="p">(</span><span class="s2">"index"</span><span class="p">);</span>
+<span class="p">});</span>
+
+<span class="nx">app</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s2">"/dashboard"</span><span class="p">,</span> <span class="p">(</span><span class="nx">req</span><span class="p">,</span> <span class="nx">res</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="nx">res</span><span class="p">.</span><span class="nx">render</span><span class="p">(</span><span class="s2">"dashboard"</span><span class="p">);</span>
+<span class="p">});</span>
+
+<span class="nx">app</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s2">"/logout"</span><span class="p">,</span> <span class="p">(</span><span class="nx">req</span><span class="p">,</span> <span class="nx">res</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="nx">res</span><span class="p">.</span><span class="nx">redirect</span><span class="p">(</span><span class="s2">"/"</span><span class="p">);</span>
+<span class="p">});</span>
+
+<span class="nx">app</span><span class="p">.</span><span class="nx">listen</span><span class="p">(</span><span class="mi">3000</span><span class="p">);</span>
+</code></pre>
+</div>
+
+<p>This is a basic Express.js application:</p>
+
+<ul>
+  <li>It creates an Express application</li>
+  <li>It configures Express to serve static files (css, images, etc.)</li>
+  <li>It contains three routes: a home page route, a dashboard route, and a logout
+route. The home page route simply shows an HTML template (that we’ll create in
+a moment). The dashboard route shows a dashboard template. And the logout
+route redirects the user back to the home page. Simple!</li>
+  <li>On the very last line of the file, Express will start up a local web server on
+port 3000 so you can view the website locally.</li>
+</ul>
+
+<p>Next, you’ll need to create a new directory called <code class="highlighter-rouge">views</code>, and inside it,
+create a <code class="highlighter-rouge">base.pug</code> template with the following contents:</p>
+
+<pre><code class="language-jade">doctype html
+html(lang="en")
+  head
+    meta(charset="utf-8")
+    meta(name="viewport", content="width=device-width, initial-scale=1, shrink-to-fit=no")
+
+    link(rel="stylesheet", href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css", integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M", crossorigin="anonymous")
+    link(rel="stylesheet", href="/static/css/style.css")
+
+  body
+    .container
+      block body
+
+    script(src="https://code.jquery.com/jquery-3.2.1.slim.min.js", integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN", crossorigin="anonymous")
+    script(src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js", integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4", crossorigin="anonymous")
+    script(src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js", integrity="sha384-h0AbiXch4ZDo7tp9hKZ4TsHbi047NrKGLO3SEJAg45jXxnGIfYzk4Si90RDIqNm1", crossorigin="anonymous")
+</code></pre>
+
+<p>This is a simple <a href="https://pugjs.org/api/getting-started.html">pug</a> template that
+contains nothing more than some very basic HTML formatting, and
+<a href="http://getbootstrap.com/">Bootstrap</a>. If you aren’t already familiar with pug,
+you may want to read through this <a href="https://www.sitepoint.com/jade-tutorial-for-beginners/">excellent beginner’s
+tutorial</a>.</p>
+
+<p><strong>NOTE</strong>: pug used to be named <code class="highlighter-rouge">jade</code>, this is useful to know if you’re looking
+for resources online.</p>
+
+<p>Next, you’ll want to create the HTML template that renders the home page of the
+site. Create the file <code class="highlighter-rouge">views/index.pug</code> and include the following code:</p>
+
+<pre><code class="language-jade">extends base.pug
+
+block body
+  h1.text-center Welcome to the Example App!
+
+  .jumbotron
+    p.
+      Thanks for checking out this super simple Okta sample app.  If you login
+      below, you'll be taken to an admin panel that is only accessible for
+      authenticated users.
+
+    p.
+      Please #[a(href="/login") login] to continue.
+</code></pre>
+
+<p>This is your simple home page template.</p>
+
+<p>Now, let’s create a dashboard page. This page will be what the user sees after
+logging into the website. Create the file <code class="highlighter-rouge">views/dashboard.pug</code> and include the
+following:</p>
+
+<pre><code class="language-jade">extends base.pug
+
+block body
+  h1.text-center User Dashboard
+
+  .jumbotron
+    ul
+      li Your Email Address is: #{user.preferred_username}
+      li Your First Name is: #{user.given_name}
+      li Your Last Name is: #{user.family_name}
+
+    p.
+      If you'd like to logout, please #[a(href="/logout") click here].
+</code></pre>
+
+<p>Next, let’s add a bit of CSS to make things look nice. Create a new folder to store your static assets (css, images, etc.):</p>
+
+<div class="language-console highlighter-rouge"><pre class="highlight"><code><span class="w">$ </span><span class="nc">mkdir</span><span class="kv"> -p static/css
+</span></code></pre>
+</div>
+
+<p>Now create the file <code class="highlighter-rouge">static/css/style.css</code> and include the following:</p>
+
+<div class="language-css highlighter-rouge"><pre class="highlight"><code><span class="nt">h1</span> <span class="p">{</span>
+  <span class="nl">margin-top</span><span class="p">:</span> <span class="m">2em</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="nc">.jumbotron</span> <span class="p">{</span>
+  <span class="nl">margin-top</span><span class="p">:</span> <span class="m">2em</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre>
+</div>
+
+<p>Now, if you want to run this simple website, you can do so by installing the
+required dependencies, then starting up your Node server on the command line:</p>
+
+<div class="language-console highlighter-rouge"><pre class="highlight"><code><span class="w">$ </span><span class="nc">npm</span><span class="kv"> install express pug     # install dependencies
+</span><span class="w">$ </span><span class="nc">node</span><span class="kv"> server.js              # run the server
+</span></code></pre>
+</div>
+
+<p>Once the server is running, you can view the site by visiting
+<code class="highlighter-rouge">http://localhost:3000</code> in your browser.</p>
+
+<p>Remember how I said this would be a simple website? I wasn’t lying! Here’s what
+your new website homepage will look like:</p>
+
+<p><img src="/assets/blog/use-openid-connect-to-build-a-simple-node-website/app-home-137a5c82c6dab5164a56cf35c6993f1c635a3eee4427313d62ae45070cf7a7c0.png" alt="Application Homepage" width="700" class="center-image" /></p>
+
+<p>By now, you should have a working website with no authentication. So let’s take
+it one step further in the next section and add OIDC.</p>
+
+<h3 id="add-openid-connect-to-your-website">Add OpenID Connect to Your Website</h3>
+
+<p>To get started, you’ll need to install two new Node.js libraries:</p>
+
+<p><a href="https://github.com/expressjs/session">express-session</a>, which will manage user
+sessions for your website, and
+<a href="https://github.com/okta/okta-oidc-js">oidc-middleware</a>, which will handle all
+of the OIDC implementation details for your website</p>
+
+<p>To install these libraries, run the following command:</p>
+
+<div class="language-console highlighter-rouge"><pre class="highlight"><code><span class="w">$ </span><span class="nc">npm</span><span class="kv"> install express-session @okta/oidc-middleware
+</span></code></pre>
+</div>
+
+<p>Next, you’ll need to import these libraries in your <code class="highlighter-rouge">server.js</code> from before:</p>
+
+<div class="language-javascript highlighter-rouge"><pre class="highlight"><code><span class="kr">const</span> <span class="nx">express</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s2">"express"</span><span class="p">);</span>
+<span class="kr">const</span> <span class="nx">session</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s2">"express-session"</span><span class="p">);</span>
+<span class="kr">const</span> <span class="nx">ExpressOIDC</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s2">"@okta/oidc-middleware"</span><span class="p">).</span><span class="nx">ExpressOIDC</span><span class="p">;</span>
+</code></pre>
+</div>
+
+<p>Now that the libraries are imported properly, you can initialize the session
+middleware and the OIDC middleware:</p>
+
+<div class="language-javascript highlighter-rouge"><pre class="highlight"><code><span class="c1">// App middleware</span>
+<span class="nx">app</span><span class="p">.</span><span class="nx">use</span><span class="p">(</span><span class="s2">"/static"</span><span class="p">,</span> <span class="nx">express</span><span class="p">.</span><span class="kr">static</span><span class="p">(</span><span class="s2">"static"</span><span class="p">));</span>
+
+<span class="nx">app</span><span class="p">.</span><span class="nx">use</span><span class="p">(</span><span class="nx">session</span><span class="p">({</span>
+  <span class="na">cookie</span><span class="p">:</span> <span class="p">{</span> <span class="na">httpOnly</span><span class="p">:</span> <span class="kc">true</span> <span class="p">},</span>
+  <span class="na">secret</span><span class="p">:</span> <span class="s2">"long random string"</span>
+<span class="p">}));</span>
+
+<span class="kd">let</span> <span class="nx">oidc</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">ExpressOIDC</span><span class="p">({</span>
+  <span class="na">issuer</span><span class="p">:</span> <span class="s2">"https://dev-111464.oktapreview.com/oauth2/default"</span><span class="p">,</span>
+  <span class="na">client_id</span><span class="p">:</span> <span class="s2">"your-client-id-here"</span><span class="p">,</span>
+  <span class="na">client_secret</span><span class="p">:</span> <span class="s2">"your-client-secret-here"</span><span class="p">,</span>
+  <span class="na">redirect_uri</span><span class="p">:</span> <span class="s2">"http://localhost:3000/authorization-code/callback"</span><span class="p">,</span>
+  <span class="na">routes</span><span class="p">:</span> <span class="p">{</span>
+    <span class="na">callback</span><span class="p">:</span> <span class="p">{</span> <span class="na">defaultRedirect</span><span class="p">:</span> <span class="s2">"/dashboard"</span> <span class="p">}</span>
+  <span class="p">},</span>
+  <span class="na">scope</span><span class="p">:</span> <span class="s1">'openid profile'</span>
+<span class="p">});</span>
+</code></pre>
+</div>
+
+<p>The session middleware contains a number <a href="https://github.com/expressjs/session">of
+options</a>, but the only ones we’ll need for
+now are the following two:</p>
+
+<ul>
+  <li><code class="highlighter-rouge">cookie.httponly</code>: this option tells the browser that JavaScript code should
+not be allowed to access the session data. JavaScript on clients is a
+dangerous thing, ensuring your cookies that contain identity information are
+safe is always of top importance.</li>
+  <li><code class="highlighter-rouge">secret</code>: this option should be a long random string that you create. It
+should be the same across all your webservers, but never shared publicly or
+stored in a public place. This value is used to ensure your user’s identity
+information is protected cryptographically inside of cookies.</li>
+</ul>
+
+<p>The OIDC middleware also contains a number <a href="https://www.npmjs.com/package/@okta/oidc-middleware#new-expressoidcconfig">of
+options</a>.
+I’ll walk you through them briefly:</p>
+
+<ul>
+  <li><code class="highlighter-rouge">issuer</code>: this should be your Org URL value (that you wrote down earlier) with
+<code class="highlighter-rouge">/oauth2/default</code> appended. This is the OAuth2 endpoint that’s used for
+handling authorization.</li>
+  <li><code class="highlighter-rouge">client_id/client_secret</code>: these values are what you wrote down earlier after
+creating your Okta Application. They can be found in your Application settings
+in Okta.</li>
+  <li><code class="highlighter-rouge">redirect_uri</code>: this setting tells Okta where to redirect the user after
+they’ve signed in. This value should stay the same as it is listed above, as
+this library will handle that route for you automatically.</li>
+  <li><code class="highlighter-rouge">routes.callback.default_redirect</code>: this option tells Okta where to redirect a
+user once they’ve been signed into your website. In this case, you’ll want to
+redirect them to the dashboard page.</li>
+  <li><code class="highlighter-rouge">scope</code>: the OpenID Connect protocol has a lot of standard scopes that
+determine what data about your user is returned to you once the user has been
+signed in. The values here provide basic user information for your website. To
+view a complete list of available scopes, check out <a href="https://developer.okta.com/standards/OIDC/index.html#scope-dependent-claims-not-always-returned">this
+page</a>.</li>
+</ul>
+
+<p>Now that you’ve configured OIDC for your website, it’s time to hook up the
+routes:</p>
+
+<div class="language-javascript highlighter-rouge"><pre class="highlight"><code><span class="c1">// App routes</span>
+<span class="nx">app</span><span class="p">.</span><span class="nx">use</span><span class="p">(</span><span class="nx">oidc</span><span class="p">.</span><span class="nx">router</span><span class="p">);</span>
+
+<span class="nx">app</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s2">"/"</span><span class="p">,</span> <span class="p">(</span><span class="nx">req</span><span class="p">,</span> <span class="nx">res</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="nx">res</span><span class="p">.</span><span class="nx">render</span><span class="p">(</span><span class="s2">"index"</span><span class="p">);</span>
+<span class="p">});</span>
+
+<span class="nx">app</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s2">"/dashboard"</span><span class="p">,</span> <span class="nx">oidc</span><span class="p">.</span><span class="nx">ensureAuthenticated</span><span class="p">(),</span> <span class="p">(</span><span class="nx">req</span><span class="p">,</span> <span class="nx">res</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">req</span><span class="p">.</span><span class="nx">userinfo</span><span class="p">);</span>
+  <span class="nx">res</span><span class="p">.</span><span class="nx">render</span><span class="p">(</span><span class="s2">"dashboard"</span><span class="p">,</span> <span class="p">{</span> <span class="na">user</span><span class="p">:</span> <span class="nx">req</span><span class="p">.</span><span class="nx">userinfo</span> <span class="p">});</span>
+<span class="p">});</span>
+
+<span class="nx">app</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s2">"/logout"</span><span class="p">,</span> <span class="p">(</span><span class="nx">req</span><span class="p">,</span> <span class="nx">res</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="nx">req</span><span class="p">.</span><span class="nx">logout</span><span class="p">();</span>
+  <span class="nx">res</span><span class="p">.</span><span class="nx">redirect</span><span class="p">(</span><span class="s2">"/"</span><span class="p">);</span>
+<span class="p">});</span>
+</code></pre>
+</div>
+
+<p>The first thing that’s happening above is that you’re using the built-in OIDC
+routes that ship with the oidc-middleware library. This library provides routes
+to handle authenticating the user properly (behind the scenes), and a number of
+other things. I’ll show you how these work soon.</p>
+
+<p>You’ll also notice that your dashboard route is now using a new Node.js
+middleware: <code class="highlighter-rouge">oidc.ensureAuthenticated()</code>. This middleware will do the following:</p>
+
+<ul>
+  <li>If a user tries to visit <code class="highlighter-rouge">/dashboard</code> and is not logged in, they will be
+redirected to Okta to log in, before being allowed to visit the page</li>
+  <li>If a user tries to visit <code class="highlighter-rouge">/dashboard</code> and they <em>are</em> logged in, they will be
+allowed to view the page with no problems</li>
+</ul>
+
+<p>You’ll also notice that inside the dashboard route, you’re now able to access
+the logged-in user’s personal information via <code class="highlighter-rouge">req.userinfo</code>. The
+oidc-middleware library makes this object available to you whenever a user is
+logged in. You’ll notice that that this object shows the following information:</p>
+
+<div class="language-javascript highlighter-rouge"><pre class="highlight"><code><span class="p">{</span> <span class="nl">sub</span><span class="p">:</span> <span class="s1">'00uc5nynm5RZivEun0h7'</span><span class="p">,</span>
+  <span class="nx">name</span><span class="err">:</span> <span class="s1">'Randall Degges'</span><span class="p">,</span>
+  <span class="nx">locale</span><span class="err">:</span> <span class="s1">'en-US'</span><span class="p">,</span>
+  <span class="nx">preferred_username</span><span class="err">:</span> <span class="s1">'r@rdegges.com'</span><span class="p">,</span>
+  <span class="nx">given_name</span><span class="err">:</span> <span class="s1">'Randall'</span><span class="p">,</span>
+  <span class="nx">family_name</span><span class="err">:</span> <span class="s1">'Degges'</span><span class="p">,</span>
+  <span class="nx">zoneinfo</span><span class="err">:</span> <span class="s1">'America/Los_Angeles'</span><span class="p">,</span>
+  <span class="nx">updated_at</span><span class="err">:</span> <span class="mi">1507772025</span> <span class="p">}</span>
+</code></pre>
+</div>
+
+<p>The data that’s returned about each logged-in user can be modified by including
+more (or fewer) scopes (as mentioned previously).</p>
+
+<p>In the code above, you’ll also notice that there is a real logout
+implementation. The oidc-middleware library includes a new method:
+<code class="highlighter-rouge">req.logout()</code>, which wipes all session data and logs the user out of your
+application.</p>
+
+<h3 id="modify-the-server-start">Modify the Server Start</h3>
+
+<p>Now that you’ve got your code in place, there’s only one tiny piece of code left
+to change: the code that starts your web server.</p>
+
+<p>Normally when your Node application starts running, via the <code class="highlighter-rouge">app.listen()</code>
+method, the web site is immediately online. Now that you’re using OIDC, however,
+you don’t actually want that behavior.</p>
+
+<p>In order to set up the OIDC rules and policies, the oidc-middleware library
+performs its setup routines asynchronously. If your site was to immediately go
+online, it could cause errors when users try to view protected pages, etc.</p>
+
+<p>To get around this, you’ll want to modify your server start code like so:</p>
+
+<div class="language-javascript highlighter-rouge"><pre class="highlight"><code><span class="nx">oidc</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s2">"ready"</span><span class="p">,</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="nx">app</span><span class="p">.</span><span class="nx">listen</span><span class="p">(</span><span class="mi">3000</span><span class="p">);</span>
+<span class="p">});</span>
+
+<span class="nx">oidc</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s2">"error"</span><span class="p">,</span> <span class="nx">err</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">error</span><span class="p">(</span><span class="nx">err</span><span class="p">);</span>
+<span class="p">});</span>
+</code></pre>
+</div>
+
+<p>By listening for the events that the oidc-middleware library provides, you can
+safely start your Node server as soon as the OIDC setup has finished, thereby
+solving any timing problems you might have run into otherwise.</p>
+
+<h2 id="test-it-out">Test It Out</h2>
+
+<p>Now that your application has been built, why not try it out? If you visit
+<code class="highlighter-rouge">http://localhost:3000</code> and click through the prompts,
+you’ll see how everything fits together:</p>
+
+<p>Once you click login, you’ll be redirected to <code class="highlighter-rouge">/login</code> The oidc-middleware will
+intercept that <code class="highlighter-rouge">/login</code> request, and redirect the user to Okta’s hosted sign-in
+page where they’ll be prompted for their email address and password The user
+will then enter their credentials, and log in They will then be redirected back
+to your local website, where the oidc-middleware library will again intercept
+the request, create a session for the user, and log them in Finally, they will
+be redirected to the dashboard page (<code class="highlighter-rouge">/dashboard</code>), where your route code will
+run and echo their basic information back to them</p>
+
+<p>Here’s what each of the pages looks like in the flow:</p>
+
+<p><img src="/assets/blog/use-openid-connect-to-build-a-simple-node-website/app-home-137a5c82c6dab5164a56cf35c6993f1c635a3eee4427313d62ae45070cf7a7c0.png" alt="Application Homepage" width="700" class="center-image" /></p>
+
+<p>Then, once you click “login”, you’ll be taken to the login page:</p>
+
+<p><img src="/assets/blog/use-openid-connect-to-build-a-simple-node-website/app-login-a2d19dbaa6587203d3d377bd6174b461156199ddc4c41ad3718e22c6a9d4754d.png" alt="Application Login Page" width="700" class="center-image" /></p>
+
+<p>Finally, once you’ve logged in, you’ll be taken to the dashboard page where you
+can view your user information:</p>
+
+<p><img src="/assets/blog/use-openid-connect-to-build-a-simple-node-website/app-dashboard-bff49f950ea36afc1fcbb2a3c93ed79d94e92c927c5fa7f9ba8bdbafb8f10c53.png" alt="Application Dashboard" width="700" class="center-image" /></p>
+
+<h2 id="resources">Resources</h2>
+
+<p>Now that you’ve built your first Node.js site using OIDC to handle
+authentication using our new <a href="https://github.com/okta/okta-oidc-js">oidc-middleware
+library</a>, you might want to learn more
+about OIDC.</p>
+
+<p>One of my good friends and co-workers <a href="https://twitter.com/afitnerd">Micah
+Silverman</a> recently published a three part primer
+to OIDC which I strongly recommend you read if you’re interested in learning
+more about OIDC. You can <a href="https://developer.okta.com/blog/2017/07/25/oidc-primer-part-1">check it out
+here</a>.</p>
+
+<p>You can also <a href="https://twitter.com/rdegges">follow myself</a> and
+<a href="https://twitter.com/oktadev">Okta</a> on Twitter to see more of what I’m working
+on, and ask any auth-related questions you might have.</p>
+
+
+	</div>
+	
+</article>
+
+		
+</section>
+
+		
+	</div><footer class="Footer">
+    <div class="Wrap">
+
+        <div class="Row">
+
+            <div class="Column--3 Column--medium-6 Column--xSmall-12">
+
+                <a class="Logo" href="https://www.okta.com/" target="_blank" rel="noopener noreferrer">
+                    <img src="https://developer.okta.com/sites/all/themes/developer/images/logo-footer.png" alt="Okta">
+                    Visit okta.com
+                </a>
+
+            </div>
+
+            <div class="Column--3 Column--medium-12 Column--xSmall-12">
+
+                <h4>Social</h4>
+                <ul class="Footer-links Footer-links--social">
+                    <li><a class="Footer-links--github" target="_blank" rel="noopener noreferrer" href="http://github.com/oktadeveloper">Github</a></li>
+                    <li><a class="Footer-links--twitter" target="_blank" rel="noopener noreferrer" href="http://twitter.com/OktaDev">Twitter</a></li>
+                    <li><a class="Footer-links--forum" target="_blank" rel="noopener noreferrer" href="https://devforum.okta.com/">Forum</a></li>
+                    <li><a class="Footer-links--rss" target="_blank" rel="noopener noreferrer" href="http://feeds.feedburner.com/OktaBlog">RSS Blog</a></li>
+                </ul>
+            </div>
+
+            <div class="Column--3 Column--medium-6 Column--small-12">
+                <h4>More Info</h4>
+                <ul class="Footer-links">
+                    <li><a target="_blank" href="https://developer.okta.com/integrate-with-okta/">Integrate with Okta</a></li>
+                    <li><a href="/blog/">Blog</a></li>
+                    <li><a href="/docs/platform-release-notes/platform-release-notes.html">Release Notes</a></li>
+                    <li><a href="/3rd_party_notices/">3rd Party Notices</a></li>
+                </ul>
+            </div>
+
+            <div class="Column--3 Column--medium-6 Column--small-12">
+                <h4>Contact &amp; Legal</h4>
+                <ul class="Footer-links">
+                    <li><a href="https://developer.okta.com/contact/">Contact Sales</a></li>
+                    <li><a target="_blank" rel="noopener noreferrer" href="mailto:developers@okta.com">Contact Support</a></li>
+                    <li><a href="https://developer.okta.com/terms/">Terms &amp; Conditions</a></li>
+                    <li><a href="https://developer.okta.com/privacy/">Privacy Policy</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</footer>
+
+    <script type="text/javascript" src="/assets/master-0365dd27cf276cb2a15c0a43906ca592538204cf1ad4557547bf4e50609b411e.js"></script>
+    <script type="text/javascript" src="/assets/myOkta-911cbafbbe079b7a5522d9cbe15bd2a5f44e1582531e88393934bec69f97696b.js"></script>
+    
+    
+    
+    
+      <script type="text/javascript" src="/assets/blog-6e32dad27404131cc8630a5282264bed2ab4c08c91ac86fa496b75c53aa4f681.js"></script>
+    
+
+  <!-- START Post Footer -->
+  
+  <!-- START Google Tag Manager -->
+  <!-- https://support.google.com/tagmanager/answer/6103696?hl=en -->
+  <noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-TJ45R6" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+  <!-- END Google Tag Manager -->
+  <!-- START Google Remarketing Tag -->
+  <script type="text/javascript">
+    /* <![CDATA[ */
+    var google_conversion_id = 1006913831;
+    var google_custom_params = window.google_tag_params;
+    var google_remarketing_only = true;
+    /* ]]> */
+  </script>
+  <div style="display:none;"><script type="text/javascript" src="//www.googleadservices.com/pagead/conversion.js"></script></div>
+  <noscript><div style="display:inline;"><img height="1" width="1" style="border-style:none;" alt="" src="//googleads.g.doubleclick.net/pagead/viewthroughconversion/1006913831/?value=0&amp;guid=ON&amp;script=0"></div></noscript>
+  <!-- END Google Remarketing Tag -->
+  <!-- START Crazy Egg Tracking -->
+  <script type="text/javascript">
+    setTimeout(function(){var a=document.createElement("script");
+    var b=document.getElementsByTagName("script")[0];
+    a.src=document.location.protocol+"//script.crazyegg.com/pages/scripts/0021/9333.js?"+Math.floor(new Date().getTime()/3600000);
+    a.async=true;a.type="text/javascript";b.parentNode.insertBefore(a,b)}, 1);
+  </script>
+  <!-- END Crazy Egg Tracking -->
+
+  <!-- END Post Footer -->
+</body>
+</html>

@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html class="no-js" lang="en" dir="ltr">
+<body>
+    <h2 id="okta-java-quickstart">Okta Java Quickstart</h2>
+
+<h3 id="include-the-dependency">Include the dependency</h3>
+
+<p>For Apache Maven:</p>
+<div class="language-xml highlighter-rouge"><pre class="highlight"><code><span class="nt">&lt;dependency&gt;</span>
+    <span class="nt">&lt;groupId&gt;</span>com.okta.jwt<span class="nt">&lt;/groupId&gt;</span>
+    <span class="nt">&lt;artifactId&gt;</span>okta-jwt-verifier<span class="nt">&lt;/artifactId&gt;</span>
+    <span class="nt">&lt;version&gt;</span>0.2.0<span class="nt">&lt;/version&gt;</span>
+<span class="nt">&lt;/dependency&gt;</span>
+</code></pre>
+</div>
+
+<p>For Gradle:</p>
+<div class="language-groovy highlighter-rouge"><pre class="highlight"><code><span class="n">compile</span> <span class="s1">'com.okta.jwt:okta-jwt-verifier:0.2.0'</span>
+</code></pre>
+</div>
+
+<h3 id="use-the-api">Use the API</h3>
+
+<p>We can create a simple Servlet example by creating a <code class="highlighter-rouge">Filter</code>:</p>
+
+<div class="language-java highlighter-rouge"><pre class="highlight"><code><span class="nd">@WebFilter</span><span class="o">(</span><span class="n">urlPatterns</span> <span class="o">=</span> <span class="o">{</span><span class="s">"/api/*"</span><span class="o">})</span>
+<span class="kd">public</span> <span class="kd">static</span> <span class="kd">class</span> <span class="nc">OktaAccessTokenFilter</span> <span class="kd">implements</span> <span class="n">Filter</span> <span class="o">{</span>
+
+    <span class="kd">private</span> <span class="n">JwtVerifier</span> <span class="n">jwtVerifier</span><span class="o">;</span>
+
+    <span class="nd">@Override</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">init</span><span class="o">(</span><span class="n">FilterConfig</span> <span class="n">filterConfig</span><span class="o">)</span> <span class="kd">throws</span> <span class="n">ServletException</span> <span class="o">{</span>
+
+        <span class="k">try</span> <span class="o">{</span>
+            <span class="k">this</span><span class="o">.</span><span class="na">jwtVerifier</span> <span class="o">=</span> <span class="k">new</span> <span class="n">JwtHelper</span><span class="o">()</span>
+                    <span class="o">.</span><span class="na">setIssuerUrl</span><span class="o">(</span><span class="s">"<span class="okta-preview-domain">https://{yourOktaDomain}.com</span>/oauth2/default"</span><span class="o">))</span>
+                    <span class="o">.</span><span class="na">setAudience</span><span class="o">(</span><span class="s">"api://default"</span><span class="o">)</span>
+                    <span class="o">.</span><span class="na">build</span><span class="o">();</span>
+
+        <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="n">IOException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+            <span class="k">throw</span> <span class="k">new</span> <span class="nf">ServletException</span><span class="o">(</span><span class="s">"Failed to create JWT Verifier"</span><span class="o">,</span> <span class="n">e</span><span class="o">);</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
+
+    <span class="nd">@Override</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">doFilter</span><span class="o">(</span><span class="n">ServletRequest</span> <span class="n">request</span><span class="o">,</span> <span class="n">ServletResponse</span> <span class="n">response</span><span class="o">,</span> <span class="n">FilterChain</span> <span class="n">chain</span><span class="o">)</span>
+                                                 <span class="kd">throws</span> <span class="n">IOException</span><span class="o">,</span> <span class="n">ServletException</span> <span class="o">{</span>
+
+        <span class="n">HttpServletRequest</span> <span class="n">httpRequest</span> <span class="o">=</span> <span class="o">(</span><span class="n">HttpServletRequest</span><span class="o">)</span> <span class="n">request</span><span class="o">;</span>
+        <span class="n">HttpServletResponse</span> <span class="n">httpResponse</span> <span class="o">=</span> <span class="o">(</span><span class="n">HttpServletResponse</span><span class="o">)</span> <span class="n">response</span><span class="o">;</span>
+
+        <span class="n">String</span> <span class="n">authHeader</span> <span class="o">=</span> <span class="n">httpRequest</span><span class="o">.</span><span class="na">getHeader</span><span class="o">(</span><span class="s">"Authorization"</span><span class="o">);</span>
+
+        <span class="k">if</span> <span class="o">(</span><span class="n">authHeader</span> <span class="o">!=</span> <span class="kc">null</span>
+                <span class="o">&amp;&amp;</span> <span class="o">!</span><span class="n">authHeader</span><span class="o">.</span><span class="na">isEmpty</span><span class="o">()</span>
+                <span class="o">&amp;&amp;</span> <span class="n">authHeader</span><span class="o">.</span><span class="na">startsWith</span><span class="o">(</span><span class="s">"Bearer "</span><span class="o">))</span> <span class="o">{</span>
+
+            <span class="c1">// Strip the auth type</span>
+            <span class="n">String</span> <span class="n">jwtString</span> <span class="o">=</span> <span class="n">authHeader</span><span class="o">.</span><span class="na">replaceFirst</span><span class="o">(</span><span class="s">"^Bearer "</span><span class="o">,</span> <span class="s">""</span><span class="o">);</span>
+
+            <span class="k">try</span> <span class="o">{</span>
+                <span class="n">jwtVerifier</span><span class="o">.</span><span class="na">decodeAccessToken</span><span class="o">(</span><span class="n">jwtString</span><span class="o">);</span>
+                <span class="n">chain</span><span class="o">.</span><span class="na">doFilter</span><span class="o">(</span><span class="n">request</span><span class="o">,</span> <span class="n">response</span><span class="o">);</span>
+                <span class="k">return</span><span class="o">;</span>
+
+            <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="n">JoseException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+                <span class="n">httpRequest</span><span class="o">.</span><span class="na">getServletContext</span><span class="o">().</span><span class="na">log</span><span class="o">(</span><span class="s">"Failed to decode Access Token"</span><span class="o">,</span> <span class="n">e</span><span class="o">);</span>
+            <span class="o">}</span>
+        <span class="o">}</span>
+
+        <span class="n">httpResponse</span><span class="o">.</span><span class="na">setHeader</span><span class="o">(</span><span class="s">"WWW-Authenticate"</span><span class="o">,</span> <span class="s">"Bearer realm=\"Okta-Servlet-Example\""</span><span class="o">);</span>
+        <span class="n">httpResponse</span><span class="o">.</span><span class="na">sendError</span><span class="o">(</span><span class="mi">401</span><span class="o">,</span> <span class="s">"Unauthorized"</span><span class="o">);</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre>
+</div>
+
+<p>Next up is to create a <code class="highlighter-rouge">Servlet</code> for the ‘/api/messages’ endpoint we defined in the above client:</p>
+<div class="language-java highlighter-rouge"><pre class="highlight"><code><span class="nd">@WebServlet</span><span class="o">(</span><span class="n">urlPatterns</span><span class="o">={</span><span class="s">"/api/messages"</span><span class="o">})</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">ExampleServlet</span> <span class="kd">extends</span> <span class="n">HttpServlet</span> <span class="o">{</span>
+    <span class="nd">@Override</span>
+    <span class="kd">protected</span> <span class="kt">void</span> <span class="nf">doGet</span><span class="o">(</span><span class="n">HttpServletRequest</span> <span class="n">request</span><span class="o">,</span> <span class="n">HttpServletResponse</span> <span class="n">response</span><span class="o">)</span>
+                                                     <span class="kd">throws</span> <span class="n">ServletException</span><span class="o">,</span> <span class="n">IOException</span> <span class="o">{</span>
+        <span class="c1">// handle request</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre>
+</div>
+
+<p>For more examples and other project information check out <a href="https://github.com/okta/okta-jwt-verifier-java">okta/okta-jwt-verifier-java</a> on Github.</p>
+
+</body>
+</html>

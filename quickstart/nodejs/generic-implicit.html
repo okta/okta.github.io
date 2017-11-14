@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html class="no-js" lang="en" dir="ltr">
+<body>
+    <h2 id="okta-nodejs-quickstart">Okta Node.js Quickstart</h2>
+
+<p>Okta has created a simplified Node library to make this easy for Okta applications, <a href="https://www.npmjs.com/package/@okta/jwt-verifier">Okta JWT Verifier</a>.  Below is an example that shows you how to validate access tokens for a specific Okta authorization server (the issuer) and adds a secondary check for the audience of the token. To learn more about validating Okta access tokens, please see <a href="https://developer.okta.com/standards/OAuth/index.html#validating-access-tokens">Validating Access Tokens</a>.</p>
+
+<div class="language-javascript highlighter-rouge"><pre class="highlight"><code><span class="kr">const</span> <span class="nx">OktaJwtVerifier</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'@okta/jwt-verifier'</span><span class="p">);</span>
+
+<span class="kr">const</span> <span class="nx">oktaJwtVerifier</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">OktaJwtVerifier</span><span class="p">({</span>
+  <span class="na">issuer</span><span class="p">:</span> <span class="s1">'<span class="okta-preview-domain">https://{yourOktaDomain}.com</span>/oauth2/default'</span><span class="p">,</span>
+  <span class="na">assertClaims</span><span class="p">:</span> <span class="p">{</span>
+    <span class="na">aud</span><span class="p">:</span> <span class="s1">'api://default'</span>
+  <span class="p">}</span>
+<span class="p">});</span>
+
+<span class="c1">// The access token string, which should be obtained from the Authorization header on the request to your server</span>
+<span class="kr">const</span> <span class="nx">accessTokenString</span> <span class="o">=</span> <span class="s1">'eyJhbGciOiJSUzI1NiIsImtpZCI6Imk2UnRjSkxvbUg0e...'</span><span class="p">;</span>
+
+<span class="nx">oktaJwtVerifier</span><span class="p">.</span><span class="nx">verifyAccessToken</span><span class="p">(</span><span class="nx">accessTokenString</span><span class="p">)</span>
+  <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="nx">jwt</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="c1">// the token is valid</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">jwt</span><span class="p">.</span><span class="nx">claims</span><span class="p">);</span>
+  <span class="p">})</span>
+  <span class="p">.</span><span class="k">catch</span><span class="p">(</span><span class="nx">err</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="c1">// a validation failed, inspect the error</span>
+  <span class="p">});</span>
+</code></pre>
+</div>
+
+</body>
+</html>

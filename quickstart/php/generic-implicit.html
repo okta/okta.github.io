@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html class="no-js" lang="en" dir="ltr">
+<body>
+    <h2 id="okta-php-quickstart">Okta PHP Quickstart</h2>
+
+<p>When a request is made to the messages api of your PHP application, we need to get the bearer token from the
+authorization header and validate that the token. If the token is valid, we can reply with the messages we want to
+provide to the user, if not, we should return a 401 to let the front end know that the request could not be authorized.</p>
+
+<blockquote>
+  <p>NOTE: The rest of this quickstart assumes that you have an understand of PHP and composer. You should have at least
+ PHP7 and the latest version of composer installed on your computer. Your project should contain a <code class="highlighter-rouge">composer.json</code>
+ file that is ready to have dependencies installed.</p>
+</blockquote>
+
+<h2 id="installing-dependencies">Installing Dependencies</h2>
+<p>There are a few libraries you will need to install in order for us to verify the token that is provided in the
+Authorization header. We have created a JWT verifier library to help you decode and verify JWTs (which is how the
+authroization token will be provided).</p>
+
+<div class="language-bash highlighter-rouge"><pre class="highlight"><code>composer require okta/jwt-verifier
+</code></pre>
+</div>
+
+<p>The JWT Verifier package that you have just installed is built as a wrapper around some of the popular PHP libraries.
+ The rest of this quickstart will assume that we are using the <a href="https://packagist.org/packages/spomky-labs/jose">spomky-labs/jose</a>.
+The package is also built to allow you to use any PSR-7 compliant library for making http requests. The rest of this
+quickstart will assume the use of the <a href="https://packagist.org/packages/guzzlehttp/psr7">guzzlehttp/psr7</a> library.
+Let’s install these two packages with composer.</p>
+
+<div class="language-bash highlighter-rouge"><pre class="highlight"><code>composer require spomky-labs/jose guzzlehttp/psr7
+</code></pre>
+</div>
+
+<h2 id="messages-api">Messages API</h2>
+<p>Our client side application is going to be sending us a call to an api endpoint to get messages. In our example below,
+ we will not be using a router, so we need to change the endpoint of the fetch call in our client application code.
+ In your client side app, we need to change <code class="highlighter-rouge">/api/messages</code> to <code class="highlighter-rouge">/api/messages.php</code>. Once you are done, create the
+ file <code class="highlighter-rouge">/api/messages.php</code></p>
+
+<p>Our first step is to include the composer autoload file.  In your new <code class="highlighter-rouge">messages.php</code> file, add the following:</p>
+
+<blockquote>
+  <p>NOTE: All code blocks will be added progressively to the file. The full file is provided at the end of this quickstart.</p>
+</blockquote>
+
+<div class="language-php highlighter-rouge"><pre class="highlight"><code><span class="k">require</span> <span class="nx">__DIR__</span> <span class="o">.</span> <span class="s1">'/../vendor/autoload.php'</span><span class="p">;</span> <span class="c1">// This path may be different for you.
+</span></code></pre>
+</div>
+
+<p>Next, we need to make sure that the authorization header is present, but we also need to ignore any <code class="highlighter-rouge">prefetch</code>
+requests that have a request method of <code class="highlighter-rouge">OPTIONS</code>. We do this because the modern browsers will prefetch the page to
+get all available options, but will not send the authorization header. If we return a <code class="highlighter-rouge">401 Unauthorized</code> during the
+prefetch, the client side application will quit trying to make the call, and will no longer respond to the messages
+api.</p>
+
+<div class="language-php highlighter-rouge"><pre class="highlight"><code><span class="c1">// Don't do anything for prefetch requests.
+</span><span class="k">if</span> <span class="p">(</span> <span class="nv">$_SERVER</span><span class="p">[</span><span class="s1">'REQUEST_METHOD'</span><span class="p">]</span> <span class="o">===</span> <span class="s1">'OPTIONS'</span> <span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="kc">false</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="c1">// Make sure the authorization header is available, if not return 401.
+</span><span class="k">if</span> <span class="p">(</span> <span class="o">!</span> <span class="nb">isset</span><span class="p">(</span> <span class="nv">$_SERVER</span><span class="p">[</span><span class="s1">'HTTP_AUTHORIZATION'</span><span class="p">]</span> <span class="p">)</span> <span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="nb">http_response_code</span><span class="p">(</span> <span class="mi">401</span> <span class="p">);</span>
+<span class="p">}</span>
+</code></pre>
+</div>
+
+<p>Now that we have ignored any requests for <code class="highlighter-rouge">OPTIONS</code> (prefetch requests) and made sure that the authorization header
+is present, we can now begin our verification process.  First, we set up some variables to store some information in.
+ Next we extract the authentication type and the token from the Authorization header then we need to make sure that
+ the authentication type is a Bearer token.</p>
+
+<div class="language-php highlighter-rouge"><pre class="highlight"><code><span class="nv">$authType</span> <span class="o">=</span> <span class="kc">null</span><span class="p">;</span>
+<span class="nv">$authData</span> <span class="o">=</span> <span class="kc">null</span><span class="p">;</span>
+
+<span class="c1">// Extract the auth type and the data from the Authorization header.
+</span><span class="k">list</span><span class="p">(</span> <span class="nv">$authType</span><span class="p">,</span> <span class="nv">$authData</span> <span class="p">)</span> <span class="o">=</span> <span class="nb">explode</span><span class="p">(</span> <span class="s2">" "</span><span class="p">,</span> <span class="nv">$_SERVER</span><span class="p">[</span><span class="s1">'HTTP_AUTHORIZATION'</span><span class="p">],</span> <span class="mi">2</span> <span class="p">);</span>
+
+<span class="c1">// If the Authorization Header is not a bearer type, return a 401.
+</span><span class="k">if</span> <span class="p">(</span> <span class="nv">$authType</span> <span class="o">!=</span> <span class="s1">'Bearer'</span> <span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="nb">http_response_code</span><span class="p">(</span> <span class="mi">401</span> <span class="p">);</span>
+<span class="p">}</span>
+
+</code></pre>
+</div>
+
+<p>Now we are ready to use our verifier library to make sure the token is valid. The library only requires a few options
+ to be set. Full documentation can be found in our <a href="https://github.com/okta/okta-jwt-verifier-php">github repository</a>.
+ All of this will be wrapped inside of a try catch block. If there are any exceptions, we will respond with a <code class="highlighter-rouge">401
+ Unauthorized</code> to tell the client there was an issue.</p>
+
+<div class="language-php highlighter-rouge"><pre class="highlight"><code><span class="k">try</span> <span class="p">{</span>
+    <span class="c1">// Setup the JWT Verifier.
+</span>    <span class="nv">$jwtVerifier</span> <span class="o">=</span> <span class="p">(</span> <span class="k">new</span> <span class="nx">\Okta\JwtVerifier\JwtVerifierBuilder</span><span class="p">()</span> <span class="p">)</span>
+        <span class="o">-&gt;</span><span class="na">setAdaptor</span><span class="p">(</span> <span class="k">new</span> <span class="nx">\Okta\JwtVerifier\Adaptors\SpomkyLabsJose</span><span class="p">()</span> <span class="p">)</span>
+        <span class="o">-&gt;</span><span class="na">setIssuer</span><span class="p">(</span> <span class="s1">'<span class="okta-preview-domain">https://{yourOktaDomain}.com</span>/oauth2/default'</span> <span class="p">)</span>
+        <span class="o">-&gt;</span><span class="na">build</span><span class="p">();</span>
+
+    <span class="c1">// Verify the JWT from the Authorization Header.
+</span>    <span class="nv">$jwt</span> <span class="o">=</span> <span class="nv">$jwtVerifier</span><span class="o">-&gt;</span><span class="na">verify</span><span class="p">(</span> <span class="nv">$authData</span> <span class="p">);</span>
+<span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">\Exception</span> <span class="nv">$e</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// We encountered an error, return a 401.
+</span>    <span class="k">return</span> <span class="nb">http_response_code</span><span class="p">(</span> <span class="mi">401</span> <span class="p">);</span>
+<span class="p">}</span>
+</code></pre>
+</div>
+
+<p>If the verify method was successful, we will now have access to all the claims of the token. We need to check and
+make sure that the <code class="highlighter-rouge">cid</code> (ClientId) from the token matches what our ClientId is from the authoriztation server.</p>
+
+<div class="language-php highlighter-rouge"><pre class="highlight"><code><span class="c1">// Check to make sure the client id is valid.
+</span><span class="k">if</span><span class="p">(</span> <span class="nv">$jwt</span><span class="o">-&gt;</span><span class="na">getClaims</span><span class="p">()[</span><span class="s1">'cid'</span><span class="p">]</span> <span class="o">!=</span> <span class="s1">'{clientId}'</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="nb">http_response_code</span><span class="p">(</span> <span class="mi">401</span> <span class="p">);</span>
+<span class="p">}</span>
+</code></pre>
+</div>
+
+<p>Finally, if we have made it to this point, everything checks out and you can respond with the messages you want to
+supply the client application.</p>
+
+<div class="language-php highlighter-rouge"><pre class="highlight"><code><span class="c1">//JWT is valid!
+</span><span class="k">print</span> <span class="nb">json_encode</span><span class="p">([</span>
+    <span class="s1">'messages'</span> <span class="o">=&gt;</span> <span class="p">[</span>
+        <span class="s1">'message 1'</span><span class="p">,</span>
+        <span class="s1">'message 2'</span>
+    <span class="p">]</span>
+<span class="p">]);</span>
+</code></pre>
+</div>
+
+<p>All that is left is to start the php server and try it out. To start your PHP server, and to make sure everything
+works with the proxy of the client code, you can run the following:</p>
+
+<div class="language-bash highlighter-rouge"><pre class="highlight"><code>php -S 0.0.0.0:8000
+</code></pre>
+</div>
+
+<blockquote>
+  <p>NOTE: The port used above should match the port you specified in the proxy setup. The important part here is that
+you use <code class="highlighter-rouge">0.0.0.0</code> for the host instead of <code class="highlighter-rouge">localhost</code> or <code class="highlighter-rouge">127.0.0.1</code>.  If you run into an issue where the browser
+console is reporting <code class="highlighter-rouge">Proxy error: Could not proxy request /api/messages.php from localhost:3000 to
+http://localhost:8000.</code> or similar, close our of both servers (the client server and PHP) and make sure your proxy
+port match and that you are using <code class="highlighter-rouge">0.0.0.0</code> when starting the PHP server.</p>
+</blockquote>
+
+<h4 id="full-messages-api">Full Messages API</h4>
+
+<div class="language-php highlighter-rouge"><pre class="highlight"><code><span class="cp">&lt;?php</span>
+
+<span class="c1">// /api/messages.php
+</span>
+<span class="k">require</span> <span class="nx">__DIR__</span> <span class="o">.</span> <span class="s1">'/../vendor/autoload.php'</span><span class="p">;</span>
+
+<span class="c1">// Don't do anything for prefetch requests.
+</span><span class="k">if</span> <span class="p">(</span> <span class="nv">$_SERVER</span><span class="p">[</span><span class="s1">'REQUEST_METHOD'</span><span class="p">]</span> <span class="o">===</span> <span class="s1">'OPTIONS'</span> <span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="kc">false</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="c1">// Make sure the authorization header is available, if not return 401.
+</span><span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nb">isset</span><span class="p">(</span> <span class="nv">$_SERVER</span><span class="p">[</span><span class="s1">'HTTP_AUTHORIZATION'</span><span class="p">]</span> <span class="p">)</span> <span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="nb">http_response_code</span><span class="p">(</span> <span class="mi">401</span> <span class="p">);</span>
+<span class="p">}</span>
+
+<span class="nv">$authType</span> <span class="o">=</span> <span class="kc">null</span><span class="p">;</span>
+<span class="nv">$authData</span> <span class="o">=</span> <span class="kc">null</span><span class="p">;</span>
+
+<span class="c1">// Extract the auth type and the data from the Authorization header.
+</span><span class="k">list</span><span class="p">(</span> <span class="nv">$authType</span><span class="p">,</span> <span class="nv">$authData</span> <span class="p">)</span> <span class="o">=</span> <span class="nb">explode</span><span class="p">(</span> <span class="s2">" "</span><span class="p">,</span> <span class="nv">$_SERVER</span><span class="p">[</span><span class="s1">'HTTP_AUTHORIZATION'</span><span class="p">],</span> <span class="mi">2</span> <span class="p">);</span>
+
+<span class="c1">// If the Authorization Header is not a bearer token, return a 401.
+</span><span class="k">if</span> <span class="p">(</span> <span class="nv">$authType</span> <span class="o">!=</span> <span class="s1">'Bearer'</span> <span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="nb">http_response_code</span><span class="p">(</span> <span class="mi">401</span> <span class="p">);</span>
+<span class="p">}</span>
+
+<span class="k">try</span> <span class="p">{</span>
+    <span class="c1">// Setup the JWT Verifier.
+</span>    <span class="nv">$jwtVerifier</span> <span class="o">=</span> <span class="p">(</span> <span class="k">new</span> <span class="nx">\Okta\JwtVerifier\JwtVerifierBuilder</span><span class="p">()</span> <span class="p">)</span>
+        <span class="o">-&gt;</span><span class="na">setAdaptor</span><span class="p">(</span> <span class="k">new</span> <span class="nx">\Okta\JwtVerifier\Adaptors\SpomkyLabsJose</span><span class="p">()</span> <span class="p">)</span>
+        <span class="o">-&gt;</span><span class="na">setIssuer</span><span class="p">(</span> <span class="s1">'<span class="okta-preview-domain">https://{yourOktaDomain}.com</span>/oauth2/default'</span> <span class="p">)</span>
+        <span class="o">-&gt;</span><span class="na">build</span><span class="p">();</span>
+
+    <span class="c1">// Verify the JWT from the Authorization Header.
+</span>    <span class="nv">$jwt</span> <span class="o">=</span> <span class="nv">$jwtVerifier</span><span class="o">-&gt;</span><span class="na">verify</span><span class="p">(</span> <span class="nv">$authData</span> <span class="p">);</span>
+
+<span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">\Exception</span> <span class="nv">$e</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// We encountered an error, return a 401.
+</span>    <span class="k">return</span> <span class="nb">http_response_code</span><span class="p">(</span> <span class="mi">401</span> <span class="p">);</span>
+<span class="p">}</span>
+
+<span class="c1">// Check to make sure the client id is valid.
+</span><span class="k">if</span><span class="p">(</span> <span class="nv">$jwt</span><span class="o">-&gt;</span><span class="na">getClaims</span><span class="p">()[</span><span class="s1">'cid'</span><span class="p">]</span> <span class="o">!=</span> <span class="s1">'{clientId}'</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="nb">http_response_code</span><span class="p">(</span> <span class="mi">401</span> <span class="p">);</span>
+<span class="p">}</span>
+
+<span class="c1">//JWT is valid!
+</span><span class="k">print</span> <span class="nb">json_encode</span><span class="p">([</span>
+    <span class="s1">'messages'</span> <span class="o">=&gt;</span> <span class="p">[</span>
+        <span class="s1">'message 1'</span><span class="p">,</span>
+        <span class="s1">'message 2'</span>
+    <span class="p">]</span>
+<span class="p">]);</span>
+
+</code></pre>
+</div>
+
+</body>
+</html>

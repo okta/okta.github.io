@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html class="no-js" lang="en" dir="ltr">
+<body>
+    <h2 id="okta-nodejsexpressjs-quickstart">Okta Node.js/Express.js Quickstart</h2>
+
+<p>To handle the authentication callback from Okta, your Express server will need to handle this callback.  In this section we’ll show you how to install and configure the <a href="https://github.com/okta/okta-oidc-js/tree/master/packages/oidc-middleware">@okta/oidc-middleware</a> library, referred to below as ExpressOIDC, it will add the needed callback handler to your application.</p>
+
+<h3 id="install-the-library">Install The Library</h3>
+
+<p>This library is available on NPM:</p>
+
+<div class="language-bash highlighter-rouge"><pre class="highlight"><code>npm install @okta/oidc-middleware
+</code></pre>
+</div>
+
+<h3 id="configure-the-oidc-router">Configure The OIDC Router</h3>
+
+<p>To use ExpressOIDC you create an instance of the middleware by passing the needed configuration, then attaching its router to your Express app.  You will also need to add session support to your app, so that ExpressOIDC can create the session cookie after authentication is complete.  Here is an example configuration:</p>
+
+<div class="language-javascript highlighter-rouge"><pre class="highlight"><code><span class="kr">const</span> <span class="nx">session</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'express-session'</span><span class="p">);</span>
+<span class="kr">const</span> <span class="p">{</span> <span class="nx">ExpressOIDC</span> <span class="p">}</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'@okta/oidc-middleware'</span><span class="p">);</span>
+
+<span class="c1">// session support is required to use ExpressOIDC</span>
+<span class="nx">app</span><span class="p">.</span><span class="nx">use</span><span class="p">(</span><span class="nx">session</span><span class="p">({</span>
+  <span class="na">secret</span><span class="p">:</span> <span class="s1">'this should be secure'</span><span class="p">,</span>
+  <span class="na">resave</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+  <span class="na">saveUninitialized</span><span class="p">:</span> <span class="kc">false</span>
+<span class="p">}));</span>
+
+<span class="kr">const</span> <span class="nx">oidc</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">ExpressOIDC</span><span class="p">({</span>
+  <span class="na">issuer</span><span class="p">:</span> <span class="s1">'<span class="okta-preview-domain">https://{yourOktaDomain}.com</span>/oauth2/default'</span><span class="p">,</span>
+  <span class="na">client_id</span><span class="p">:</span> <span class="s1">'{clientId}'</span><span class="p">,</span>
+  <span class="na">client_secret</span><span class="p">:</span> <span class="s1">'{clientSecret}'</span><span class="p">,</span>
+  <span class="na">redirect_uri</span><span class="p">:</span> <span class="s1">'http://localhost:3000/authorization-code/callback'</span><span class="p">,</span>
+  <span class="na">scope</span><span class="p">:</span> <span class="s1">'openid profile'</span>
+<span class="p">});</span>
+
+<span class="c1">// ExpressOIDC will attach handlers for the /login and /authorization-code/callback routes</span>
+<span class="nx">app</span><span class="p">.</span><span class="nx">use</span><span class="p">(</span><span class="nx">oidc</span><span class="p">.</span><span class="nx">router</span><span class="p">);</span>
+</code></pre>
+</div>
+
+<h3 id="protect-your-routes">Protect Your Routes</h3>
+
+<p>If you want to require authentication for certain routes, add the <code class="highlighter-rouge">oidc.ensureAuthenticated()</code> middleware.  If the user is not authenticated, they will be redirected to the login page:</p>
+
+<div class="language-javascript highlighter-rouge"><pre class="highlight"><code><span class="nx">app</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">'/protected'</span><span class="p">,</span> <span class="nx">oidc</span><span class="p">.</span><span class="nx">ensureAuthenticated</span><span class="p">(),</span> <span class="p">(</span><span class="nx">req</span><span class="p">,</span> <span class="nx">res</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="nx">res</span><span class="p">.</span><span class="nx">send</span><span class="p">(</span><span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">(</span><span class="nx">req</span><span class="p">.</span><span class="nx">userinfo</span><span class="p">));</span>
+<span class="p">});</span>
+</code></pre>
+</div>
+
+<p>If you want a page to always be accessible, but change its contents if the user is logged in, you can do a truthy check on <code class="highlighter-rouge">req.userinfo</code> to know if the user is authenticated or not:</p>
+
+<div class="language-javascript highlighter-rouge"><pre class="highlight"><code><span class="nx">app</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">'/'</span><span class="p">,</span> <span class="p">(</span><span class="nx">req</span><span class="p">,</span> <span class="nx">res</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="k">if</span> <span class="p">(</span><span class="nx">req</span><span class="p">.</span><span class="nx">userinfo</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">res</span><span class="p">.</span><span class="nx">send</span><span class="p">(</span><span class="err">`</span><span class="nx">Hi</span> <span class="nx">$</span><span class="p">{</span><span class="nx">req</span><span class="p">.</span><span class="nx">userinfo</span><span class="p">.</span><span class="nx">name</span><span class="p">}</span><span class="o">!</span><span class="err">`</span><span class="p">);</span>
+  <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+    <span class="nx">res</span><span class="p">.</span><span class="nx">send</span><span class="p">(</span><span class="s1">'Hi!'</span><span class="p">);</span>
+  <span class="p">}</span>
+<span class="p">});</span>
+</code></pre>
+</div>
+
+<h3 id="starting-your-server">Starting Your Server</h3>
+
+<p>When you create an instance of ExpressOIDC, some initial communication is made to the issuer (your Okta Org) to ensure that the provided client credentials are correct.  Because this is asynchronous you will need to wait for ExpressOIDC to be ready, then you can tell your Express app to start listening:</p>
+
+<div class="language-javascript highlighter-rouge"><pre class="highlight"><code><span class="nx">oidc</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">'ready'</span><span class="p">,</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="nx">app</span><span class="p">.</span><span class="nx">listen</span><span class="p">(</span><span class="mi">3000</span><span class="p">,</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="err">`</span><span class="nx">Started</span><span class="o">!</span><span class="err">`</span><span class="p">));</span>
+<span class="p">});</span>
+
+<span class="nx">oidc</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">'error'</span><span class="p">,</span> <span class="nx">err</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">'Unable to configure ExpressOIDC'</span><span class="p">,</span> <span class="nx">err</span><span class="p">);</span>
+<span class="p">});</span>
+</code></pre>
+</div>
+
+<h3 id="test-the-login-flow">Test The Login Flow</h3>
+
+<p>Once the server is running, simply visit <code class="highlighter-rouge">/login</code> in your browser.  Any GET requests for <code class="highlighter-rouge">/login</code> will redirect the user the the Okta Sign-In Page for the configured org (as specified by the <code class="highlighter-rouge">issuer</code> option).  Once login is successful on the Okta Sign-In Page, the user will be sent back to the Express server.  The callback should be automatically handled for you, and a session created for the user.</p>
+
+<p>For more information about other configuration and customization that is available, please see the <a href="https://github.com/okta/okta-oidc-js/tree/master/packages/oidc-middleware">@okta/oidc-middleware README</a>.</p>
+
+</body>
+</html>

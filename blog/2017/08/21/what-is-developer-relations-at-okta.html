@@ -1,0 +1,417 @@
+<!doctype html>
+<!--[if lt IE 7 ]> <html class="ie6 no-flexbox"> <![endif]-->
+<!--[if IE 7 ]>    <html class="ie7 no-flexbox"> <![endif]-->
+<!--[if IE 8 ]>    <html class="ie8 no-flexbox"> <![endif]-->
+<!--[if IE 9 ]>    <html class="ie9 no-flexbox"> <![endif]-->
+<!--[if IE 10 ]>    <html class="ie10 no-flexbox"> <![endif]-->
+<!--[if (gt IE 10)|!(IE)]><!--> <html class="modern wf-loading" lang="en"> <!--<![endif]-->
+  <head>
+  <script>
+    var searchDomain = 'https://developer.okta.com';
+    var isProduction = window.location.hostname === 'developer.okta.com';
+    if (isProduction) {
+      // TypeKit
+      (function(d) {
+        var config = {
+          kitId: 'jff5neq',
+          scriptTimeout: 3000,
+          async: true
+        },
+        h=d.documentElement,t=setTimeout(function(){h.className=h.className.replace(/bwf-loadingb/g,"")+" wf-inactive";},config.scriptTimeout),tk=d.createElement("script"),f=false,s=d.getElementsByTagName("script")[0],a;h.className+=" wf-loading";tk.src='https://use.typekit.net/'+config.kitId+'.js';tk.async=true;tk.onload=tk.onreadystatechange=function(){a=this.readyState;if(f||a&&a!="complete"&&a!="loaded")return;f=true;clearTimeout(t);try{Typekit.load(config)}catch(e){}};s.parentNode.insertBefore(tk,s)
+      })(document);
+
+      // Google analytics
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+              (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+              m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+      ga('create', 'UA-15777010-3', 'auto');
+      ga('send', 'pageview');
+
+      // START Google Tag Manager
+      (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+      new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+      j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+      '//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+      })(window,document,'script','dataLayer','GTM-TJ45R6');
+      // END Google Tag Manager
+    }
+	</script>
+  <meta charset="utf-8">
+  <meta http-equiv="x-ua-compatible" content="IE=edge,chrome=1">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+ 	
+
+  <link type="text/css" rel="stylesheet" href="https://developer.okta.com/sites/all/themes/developer/css/master.css" media="all" />
+  <meta class="swiftype" name="title" data-type="string" content="What is Developer Relations at Okta? | Okta Developer" />
+  <meta class="swiftype" name="summary" data-type="string" content="" />
+
+  <link type="text/css" rel="stylesheet" href="/assets/animate-ec43d72c3ed45e08a460b8a2966d8dba6006aebfa0530935c3973fa493a8771f.css">
+  <link type="text/css" rel="stylesheet" href="/assets/okta-a96df4c9d48b78b618e1d541f46f7137d73d40653571e020c1ad59edd7915c60.css">
+  
+  
+  <title>What is Developer Relations at Okta? | Okta Developer</title>
+  <meta name="description" content="">
+  <link rel="canonical" href="https://developer.okta.com/blog/2017/08/21/what-is-developer-relations-at-okta"  data-proofer-ignore>
+  <link rel="alternate" type="application/rss+xml" title="Okta Developer" href="https://developer.okta.com/feed.xml"><!-- GA -->
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+  <link rel="manifest" href="/manifest.json">
+  <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#21313a">
+  <meta name="theme-color" content="#ffffff">
+</head>
+
+  
+    <body id="blog">
+	
+
+
+
+
+<header class="Header is-fixed">
+
+  <div class="Wrap">
+
+    <a class="Logo" href="https://developer.okta.com">
+      <svg version="1.1" id="OktaLogo" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 431.9 151.4" style="enable-background:new 0 0 431.9 151.4;" xml:space="preserve"><g><g><g><path d="M102.2,41.4c-21,0-38.1,17.1-38.1,38.1s17.1,38.1,38.1,38.1s38.1-17.1,38.1-38.1l0,0C140.3,58.5,123.2,41.4,102.2,41.4z M102.2,98.5c-10.5,0-19-8.5-19-19s8.5-19,19-19s19,8.5,19,19c0.1,10.5-8.4,19-18.9,19.1C102.3,98.6,102.2,98.6,102.2,98.5L102.2,98.5z"/><path d="M169.1,92.3c0-1.9,1.5-3.4,3.4-3.4c0.9,0,1.8,0.4,2.4,1c9.5,9.7,25.3,26.3,25.4,26.4c0.4,0.5,0.8,0.8,1.4,0.9l1.6,0.2h17.2c1.8,0,3.3-1.4,3.4-3.2c0-0.8-0.3-1.5-0.8-2.2l-28.6-29.2l-1.5-1.5c-3.2-3.9-2.9-5.4,0.8-9.3l22.6-25.1c1.1-1.4,0.8-3.5-0.6-4.6c-0.6-0.4-1.3-0.7-2-0.7h-17c-0.6,0.2-1.1,0.5-1.5,0.9L175,64.4c-1.3,1.4-3.4,1.5-4.8,0.2c-0.7-0.6-1.1-1.5-1.1-2.5V18.9c0-1.7-1.3-3-3-3c-0.1,0-0.2,0-0.3,0h-12.7c-2.2,0-3.3,1.5-3.3,2.8v95.8c0,2.2,1.8,2.8,3.3,2.8h12.7c1.7,0.1,3.2-1.2,3.3-2.9c0,0,0,0,0,0V92.3z"/><path d="M273,114l-1.4-12.8c-0.2-1.7-1.7-2.9-3.4-2.7c0,0,0,0-0.1,0l-2.9,0.2c-10.1,0-18.5-7.9-19-18c0-0.3,0-0.7,0-1V64.2c-0.1-2,1.5-3.6,3.5-3.7c0,0,0,0,0,0h17c1.7-0.1,3.1-1.5,3-3.2c0,0,0-0.1,0-0.1v-12c0-2.3-1.5-3.6-2.8-3.6h-17.1c-1.9,0.1-3.5-1.5-3.6-3.4c0,0,0,0,0,0V18.9c-0.1-1.7-1.5-3.1-3.2-3c0,0-0.1,0-0.1,0h-12.7c-1.6-0.1-3,1.1-3.1,2.7c0,0.1,0,0.1,0,0.2c0,0,0,61.7,0,62c0.5,21,17.9,37.6,38.9,37c1.4,0,2.9-0.2,4.3-0.3C272,117.2,273.2,115.7,273,114z"/></g><path d="M364.7,98c-10.8,0-12.4-3.8-12.4-18.3l0,0V44.8c0-1.8-1.4-3.2-3.2-3.2c0,0-0.1,0-0.1,0h-12.8c-1.8,0-3.2,1.4-3.3,3.2v1.6C314.6,36,291.3,42.5,281,60.8c-10.4,18.3-3.9,41.6,14.4,51.9c14,7.9,31.4,6.2,43.5-4.2c3.6,5.5,9.3,9.1,18.3,9.1c1.5,0,9.7,0.3,9.7-3.5v-13.6C367,99.2,366,98.1,364.7,98z M314.2,98.6c-10.5,0-19-8.5-19-19s8.5-19,19-19s19,8.5,19,19l0,0C333.2,90.1,324.7,98.6,314.2,98.6z"/></g><path d="M19.4,74c2.2-1.9,4.1-4.1,5.7-6.6c3.5-5.3,5.4-11.5,5.2-17.9V27c0-4.9,0.9-8.4,2.7-10.5c1.8-2.1,4.8-3,9.2-3h12.6c1.2,0,2.1-0.9,2.2-2.1l0,0V2.2C57,1,56,0,54.8,0c0,0,0,0,0,0H41.5c-7.8,0-12.9,2.1-18,7.6s-7.1,12.3-7.1,21.7v14.2c0,2.2-0.1,4-0.2,5.7v2.2c-0.5,3.2-1.8,6.2-3.6,8.9C9.4,64.7,5.1,70.9,0.9,74l0,0l-0.3,0.3l0,0l-0.2,0.3H0.2v0.3l0,0c-0.1,0.3-0.1,0.7,0,1l0,0v0.3h0.1l0.2,0.3l0,0l0.3,0.3l0,0c4.2,3.1,8.5,9.3,11.3,13.7c1.8,2.7,3.1,5.7,3.6,8.9v2.2c0.1,1.6,0.2,3.5,0.2,5.7v14.3c0,9.4,2.4,16.7,7.1,21.7s10.2,7.6,18,7.6h13.8c1.2,0,2.2-1,2.2-2.2V140l0,0c0-1.2-1-2.2-2.2-2.2H42.2c-4.4,0-7.5-1-9.2-3s-2.7-5.6-2.7-10.5v-22.4c0.2-6.4-1.7-12.6-5.2-17.9c-1.6-2.5-3.5-4.7-5.7-6.6l0,0c-0.9-0.7-1.1-2-0.4-2.9C19.2,74.3,19.3,74.2,19.4,74L19.4,74z"/><path d="M412.5,74c-2.2-1.9-4.1-4.1-5.7-6.6c-3.5-5.3-5.4-11.5-5.2-17.9V27c0-4.9-0.9-8.4-2.7-10.5s-4.8-3-9.2-3h-12.6c-1.2,0-2.2-1-2.2-2.2c0,0,0,0,0,0l0,0V2.2c0-1.2,1-2.2,2.2-2.2c0,0,0,0,0,0h13.4c7.8,0,12.9,2.1,18,7.6s7.1,12.3,7.1,21.7v14.2c0,2.2,0.1,4,0.2,5.7v2.2c0.5,3.2,1.8,6.2,3.6,8.9c2.8,4.5,7.1,10.7,11.3,13.7l0,0l0.3,0.3l0,0l0.2,0.3h0.1v0.3l0,0c0.1,0.3,0.1,0.7,0,1l0,0v0.3h-0.1l-0.2,0.3l0,0l-0.3,0.3l0,0c-4.2,3.1-8.5,9.3-11.3,13.7c-1.8,2.7-3.1,5.7-3.6,8.9v2.2c-0.1,1.6-0.2,3.5-0.2,5.7v14.3c0,9.4-2.4,16.7-7.1,21.7s-10.2,7.6-18,7.6h-13.4c-1.2,0-2.2-1-2.2-2.2c0,0,0,0,0,0V140l0,0c0-1.2,1-2.2,2.2-2.2l0,0h12.7c4.4,0,7.5-1,9.2-3s2.7-5.6,2.7-10.5v-22.4c-0.2-6.3,1.6-12.6,5.1-17.9c1.6-2.5,3.5-4.7,5.7-6.6l0,0c0.9-0.7,1.1-2,0.4-2.9C412.7,74.3,412.6,74.2,412.5,74L412.5,74z"/></g></svg>
+    </a>
+
+    <nav class="Header-nav PrimaryNav">
+      <ul class="menu">
+        <li class="first leaf">
+          <a href="https://developer.okta.com/product/">Product</a>
+        </li>
+        <li class="leaf">
+          <a href="https://developer.okta.com/pricing/">Pricing</a>
+        </li>
+        <li class="leaf">
+          <a href="/blog/" class="active">Blog</a>
+        </li>
+        <li class="leaf">
+          <a href="/documentation/">Docs</a>
+        </li>
+        <li class="last expanded">
+          <span class="nolink">Support</span>
+          <ul class="menu">
+            <li class="first leaf"><a href="https://devforum.okta.com/">Okta Developer Forums</a></li>
+            <li class="last leaf"><a href="mailto:developers@okta.com">developers@okta.com</a></li>
+          </ul>
+        </li>
+      </ul>
+      <a class="PrimaryNav-toggle" href="#">
+        <svg width="20px" height="20px" viewBox="0 0 20 20" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+            <g class="MenuIcon" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="round">
+                <path d="M1,16 L19,16" class="MenuIcon-line1" stroke="#FFFFFF" stroke-width="2"></path>
+                <path d="M1,4 L19,4" class="MenuIcon-line2" stroke="#FFFFFF" stroke-width="2"></path>
+                <path d="M1,10 L19,10" class="MenuIcon-line3" stroke="#FFFFFF" stroke-width="2"></path>
+                <path d="M1,10 L19,10" class="MenuIcon-line4" stroke="#FFFFFF" stroke-width="2"></path>
+            </g>
+        </svg>
+        <svg class="CloseIcon" width="16px" height="16px" viewBox="0 0 16 16" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+          <g id="ALl-Boards" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+            <g id="Desktop" transform="translate(-915.000000, -235.000000)" fill="#FFFFFF">
+              <g id="Search-bar-Active" transform="translate(30.000000, 26.000000)">
+                <polygon id="Icon/Cross" points="901 210.6 899.4 209 893 215.4 886.6 209 885 210.6 891.4 217 885 223.4 886.6 225 893 218.6 899.4 225 901 223.4 894.6 217"></polygon>
+              </g>
+            </g>
+          </g>
+        </svg>
+      </a>
+
+      <div class="PrimaryNav-cta">
+        <a target="_blank" rel="noopener noreferrer" href="https://login.okta.com/?SAMLRequest=fc%2B7CsJAEAXQXvAflu1NNJUMeZBGELTx1a%2FrYILJTtyZGD%2FfSBRiYzlw77lMnD3rSj3Qc0ku0YtgrhU6S5fSXRN9PKxmS52l00nMpq6iBvJWCrfDe4ss6vStRe9aDzmGIZfo1jsgwyWDMzUyiIV9vt1AH4XGk5ClSvewUgMNa%2BYW%2FVj5jxhm9NLP67QQaSAMu64L6CYmsFSHlnzT4ZlLwTgcL6Sf8%2FeX9AU%3Dhttps://login.okta.com/?SAMLRequest=fc%2B7CsJAEAXQXvAflu1NNJUMeZBGELTx1a%2FrYILJTtyZGD%2FfSBRiYzlw77lMnD3rSj3Qc0ku0YtgrhU6S5fSXRN9PKxmS52l00nMpq6iBvJWCrfDe4ss6vStRe9aDzmGIZfo1jsgwyWDMzUyiIV9vt1AH4XGk5ClSvewUgMNa%2BYW%2FVj5jxhm9NLP67QQaSAMu64L6CYmsFSHlnzT4ZlLwTgcL6Sf8%2FeX9AU%3D" class="Button--redOutline">Login</a>
+        <a href="https://developer.okta.com/signup/" class="Button--red">Sign up</a>
+      </div>
+
+      <a class="SearchIcon" href="#"></a>
+      <form id="form_search" class="SearchBar Formisimo_clocked_69929" method="get" action="https://developer.okta.com/search/" name="form_search" __bizdiag="-784164280" __biza="WJ__">
+        <input type="text" name="stq" autocomplete="off" id="st-search-input-auto" class="st-search-input" placeholder="Search">
+        <input type="submit" name="submit" value="GO">
+      </form>
+
+    </nav>
+
+  </div>
+
+</header>
+
+	<div class="page-content">
+		
+
+
+
+
+
+
+<section class="Blog is-single">
+		
+	<div class="Blog-social">
+		
+		<a href="https://github.com/mraible" target="_blank"><i class="fa fa-github"></i></a>
+		
+		
+		<a href="https://twitter.com/mraible" target="_blank"><i class="fa fa-twitter"></i></a>
+		
+		
+		
+		<a href="http://raibledesigns.com" target="_blank"><i class="fa fa-external-link"></i></a>
+		
+	</div>
+	
+	
+
+<article class="BlogPost">
+	
+	<header class="BlogPost-header">
+	
+		<time class="BlogPost-date" datetime="2017-08-21">August 21, 2017</time>
+		
+		<h1 class="BlogPost-title">
+			
+			What is Developer Relations at Okta?
+			
+		</h1>
+		
+		<div class="BlogPost-attribution">
+			
+				<img src="/assets/avatar-matt_raible-9974af6192eb1753b7137c8fff0a2c6e6bb9736a2517986cb5cc50bb040e83d4.jpg" alt="avatar-matt_raible.jpg" class="BlogPost-avatar">
+			
+			<span class="BlogPost-author">Matt Raible</span>
+		</div>
+	
+	</header>
+	
+	<div class="BlogPost-content">
+		
+	<p><img src="/assets/blog/devrel-at-okta/developer-relations-50f2d3a84221a1cb8a4b06d7b5c41a4095dbd92d9fba18c4860d02c2555cc05c.png" alt="Developer Relations" width="640" /></p>
+
+<p>Okta is investing heavily into making developers successful by creating great developer experiences through updated SDKs and integrations as well as new pricing and packaging. These updates are intended to give developers everything they need to build modern, secure applications. But equally important is how Okta <strong>speaks</strong> to developers. How we engage with the community and build our reputation with a wide range of developers. At the heart of that effort, is our Developer Relations (DevRel) team. In this post, we’d like to introduce you to that team and give you a behind the scenes glimpse into how a large, successful company builds an authentic, high-value developer relations program from scratch.</p>
+
+<h2 id="how-to-build-a-developer-relations-team">How to Build a Developer Relations Team</h2>
+
+<p>Building a developer relations team at Okta was easy. Stormpath already had a DevRel team. When we <a href="https://www.okta.com/blog/2017/03/stormpath-welcome-to-Okta/">joined forces</a> — poof — it all came together! However, building a DevRel team at Stormpath wasn’t easy. The process started by hiring developers that could create and maintain SDKs for Stormpath’s API. Once the SDKs were created, these same developers started advocating for their respective projects through blog posts and speaking engagements.</p>
+
+<p>Ultimately, this meant finding people who were a special combination of great developers with great taste for a good developer experience, who also genuinely loved helping other people build stuff, and were already actively engaged with the developer community because they loved it.</p>
+
+<p>So, who made the team?</p>
+
+<h3 id="meet-the-okta-devrel-team">Meet the Okta DevRel Team</h3>
+
+<p>The DevRel team at Okta is made up of four individual contributors, each with our specialties. Let me take a moment and introduce them to you.</p>
+
+<h4 id="randall-degges">Randall Degges</h4>
+
+<p><img src="/assets/avatar-rdegges-9fb23ebb06890fb7924b8ceb3a28d666ae4ae1a297a3cddf517e549547e5dfe3.jpg" alt="Randall Degges" class="BlogPost-avatar pull-left img-100px" /></p>
+
+<p><strong><a href="https://twitter.com/rdegges">Randall</a></strong> is our Lead Developer Advocate. He wrote the <a href="https://www.rdegges.com/2012/my-heroku-book-is-finished/">first book on Heroku</a>, loves to hack Python and JavaScript, and is our go-to guy when it comes to deployment pipelines and AWS. If you’re having issues with Okta’s Python or Node.js SDKs, Randall’s the guy to talk to.</p>
+
+<h4 id="nate-barbettini">Nate Barbettini</h4>
+
+<p><img src="/assets/avatar-nbarbettini-04840721946d0ed1aac5fdec3b87212e7d2656ec4482ba24df3a21d8306de85b.jpg" alt="Nate Barbettini" class="BlogPost-avatar pull-left img-100px" /></p>
+
+<p><strong><a href="https://twitter.com/nbarbettini">Nate</a></strong> specializes in full-stack .NET and JavaScript. He was recently <a href="https://twitter.com/okta/status/862081320054276096">granted the .NET MVP Award from Microsoft</a> for his contributions to the .NET community. If you’re having issues with our .NET SDK, talk to Nate.</p>
+
+<h4 id="lee-brandt">Lee Brandt</h4>
+
+<p><img src="/assets/avatar-leebrandt-23a647548f26433d031856dcef1df5204763b94283cd68c397d816a61363a94d.jpg" alt="Lee Brandt" class="BlogPost-avatar pull-left img-100px" /></p>
+
+<p><strong><a href="https://twitter.com/leebrandt">Lee</a></strong> also specializes in .NET and JavaScript. He’s a long-time Microsoft MVP and the founder of KCDC (Kansas City Developers Conference). <a href="http://www.kcdc.info/">KCDC</a> is one of the region’s largest developer conferences and h numerous languages and communities represented. Lee is a rockstar in .NET, Angular, and React, so hit him up if you have issues with these frameworks and Okta.</p>
+
+<h4 id="matt-raible">Matt Raible</h4>
+
+<p><img src="/assets/avatar-matt_raible-9974af6192eb1753b7137c8fff0a2c6e6bb9736a2517986cb5cc50bb040e83d4.jpg" alt="Matt Raible" class="BlogPost-avatar pull-left img-100px" /></p>
+
+<p>That’s me!  I’m <strong><a href="https://twitter.com/mraible">Matt Raible</a></strong> and I started as a web developer, then a Java developer for about a decade,  and then got back into UI development. I’m a Java Champion and like to code in both Java and JavaScript, though TypeScript has been a lot of fun lately. If you’re having issues with our Java SDK, Spring Boot, our Sign-In Widget, or anything Angular, let me know!</p>
+
+<h2 id="why-developer-relations">Why Developer Relations?</h2>
+
+<p>We have a Developer Relations team at Okta because we recognize that the decision maker for software has changed. In the past, companies that sell software could sell it via marketing, using a top-down approach that targeted CEOs or CTOs. Some companies still sell software this way, but the market has changed and developers have become the dominate decision makers. Especially when it comes to choosing software that their applications interact with. Need proof? See <a href="http://redmonk.com/sogrady/">Stephen O’Grady’s</a> <a href="https://thenewkingmakers.com/">The New Kingmakers</a>.</p>
+
+<blockquote>
+  <p><img src="/assets/blog/devrel-at-okta/newkingmakers-0115572c11115c04ed1aea354aa13b3cb24e22aa5f3c60846a319a9a58ff0fc2.jpg" alt="The New Kingmakers" width="150" class="pull-right m-x-sm" />
+While the actual number might be up for debate, the importance of technical talent is not. The most successful companies today 
+are those that understand the strategic role that developers will play in their success or failure. Not just successful 
+technology companies – virtually every company today needs a developer strategy. There’s a reason that ESPN and Sears have 
+rolled out API programs, that companies are being bought not for their products but their people. The reason is that developers
+are the most valuable resource in business.</p>
+</blockquote>
+
+<p>Everyone on the DevRel Team at Okta are former developers. In fact, we’re <em>still</em> developers! We’re working on the Okta SDKs, coding new examples to show how certain frameworks interact with our API, and hacking because we like to hack! We <em>know</em> that developers are the decision makers because we’ve been influencing software decisions for most of our lives.</p>
+
+<p>Marketing to developers is often a hard shift for a successful traditional marketing organization. Proven tactics like branded collateral, Gartner and Forrester research, hosted events, and press releases can be difficult to map to developer audiences. Developers want to see code, they want to know how your systems work, and they want to use technology that’ll keep them excited and employed. Developers listen to the community. If there are negative things said about your product or API, you’re going to have a hard time winning them over.</p>
+
+<p>DevRel means engaging the community. It’s a focused type of field marketing for the purpose of awareness, evaluation, sentiment, and product feedback. Our job is to make other developers <em>aware</em> that we exist and respectful of our opinions and thoughts via blog posts, speaking at conferences, and creating cool shit.</p>
+
+<h2 id="how-devrel-works-at-okta">How DevRel Works at Okta</h2>
+
+<p>We plan to increase awareness of Okta’s Identity API (aka <a href="https://developer.okta.com/">The Identity Platform for Developers</a>) with many initiatives.</p>
+
+<ul>
+  <li>Developer content marketing and thought leadership</li>
+  <li>Regional community presence</li>
+  <li>Influencer programs</li>
+  <li>Support and engagement in open source tooling</li>
+  <li>Internal advocacy</li>
+</ul>
+
+<h3 id="developer-content-marketing-and-thought-leadership">Developer content marketing and thought leadership</h3>
+
+<p>Okta’s <a href="https://developer.okta.com/blog/">Developer Blog</a> is our primary way of creating content and providing thought leadership. We’re on Twitter <a href="https://twitter.com/oktadev">@OktaDev</a>, and chances are you’ll find one of us speaking at your favorite tech conference.</p>
+
+<p>We recognize that content is king and we use our blog posts to extend our reach into the communities we know devs are already participating in.</p>
+
+<p><img src="/assets/blog/devrel-at-okta/content-is-king-0b320f0b5963ff155ad7a06a299a61bee27e0efe84e4c3ee1f8b73c349024d30.png" alt="Content is King" /></p>
+
+<div style="text-align: right; font-style: italic; margin-top: -20px">
+  Image created by <a href="https://github.com/amateurhuman">Chris Kelly</a> / <a href="https://twitter.com/amateurhuman">@amateurhuman</a>
+</div>
+
+<p>We do this so we can share the interesting stuff that we’re building and educate developers at the same time. This also allows us to get feedback on what we’re building. It’s a win-win situation and helps both us and our users.</p>
+
+<h3 id="regional-community-presence">Regional community presence</h3>
+
+<p>For those developers that happen to live in the same town as our DevRel Team, there are even more benefits. We sponsor meetups that use our favorite technologies, and we’re interested in sponsoring more! We also have a company-wide initiative that allows us to buy developers a strong cup of coffee or an ice cold beer. In exchange, we hope to hear about your pain points with APIs like ours, and how we can make things easier for you.</p>
+
+<p>Our DevRel Team is traveling to many big cities in the US to give tech talks, hang out, and generally get to know YOU. We do this so we can solicit feedback from other developers, build relationships, and try to positively impact developers lives all over the place.</p>
+
+<p>If you’re interested in having us speak at your user group outside of the US, we can make that happen too! However, at this time, we require you to cover our travel expenses.</p>
+
+<p>We sponsor meetups because we recognize that they’re an important source of knowledge for many developers around the world. They also offer a sense of community, networking, and social interaction that can’t be found online.</p>
+
+<h3 id="influencer-programs">Influencer programs</h3>
+
+<p>We’re just getting started with our influencer program. We hope to engage with influencers in our respective communities and help them out by doing the little things that make them feel welcome. For example, giving them rides from the airport, taking them out to dinner, and hosting community meetups. If you’re an influencer in your community and have ideas, let us know!</p>
+
+<p>We do this because we know how important influencers are and how traveling solo can be lonely. We want to make your hard work and traveling experience more pleasant!</p>
+
+<h3 id="support-and-engagement-in-open-source-tooling">Support and engagement in open source tooling</h3>
+
+<p>Supporting open source is something we did well at Stormpath. We helped support the <a href="https://github.com/jwtk/jjwt">Java JWT project</a>, created a <a href="https://www.jwtinspector.io/">plugin for Chrome to inspect JWTs</a>, and actively engaged with the open source security projects in the Java community (e.g. Apache Shiro and Spring Security) to make them better.</p>
+
+<p>At Okta, we plan to do much of the same. We’re working to make <a href="https://oauth.com">https://oauth.com</a> better, and we plan to do the same for OpenID Connect. We’ll continue to invest in the Java JWT project, and we’re working closely with the Spring Security team to make sure their OpenID Connect support is world-class.</p>
+
+<p>If you’re involved in an open source project that helps developers use OAuth, OIDC, and other authentication standards, let us know how we can help! We have the budget to help with hosting costs, promotional materials, or whatever your project might need.</p>
+
+<h3 id="internal-advocacy">Internal advocacy</h3>
+
+<p>We’re doing our best to educate Okta employees how to work with developers too. We’ve already done several presentations on what DevRel is, and we’re making moves to make our documentation better, and our blog friendlier.</p>
+
+<p>We know that Developer DNA cannot just be a part of the DevRel team. All of Okta needs Developer DNA. We’ve been telling people they can help by sharing feedback with us, having a beer with an engineer, build for good developer experience, and by giving back to the community.</p>
+
+<h2 id="devex-devrel-and-roi">DevEx, DevRel, and ROI</h2>
+
+<p><img src="/assets/avatar-alex_salazar-b72c56883178044fbd5ed9f81d693f467ba1cb4aec14905ab79b7afe398fcf40.jpg" alt="Alex Salazar" class="BlogPost-avatar pull-right img-150px" /></p>
+
+<p>The DevRel Team focuses on making developers’ lives easier, but it’s not all fun and games. Our fearless leader, <a href="https://twitter.com/salatzar">Alex Salazar</a>, is in charge of making sure our efforts are right on the business side of things. Alex is the former CEO of Stormpath, so he’s hyper aware of revenue growth, cost reduction, and trying to balance predictability and risk. He knows that our go-to-market strategy needs to be around developer experience (DevEx) and developer relations (DevRel). It’s going to be tough to market to developers if our product is crap.</p>
+
+<p>We’re focused as a team on cost efficiency and repeatability, to increase our ROI. We know what types of DevRel are the most effective (blogging, how to videos). We know what DevEx investments will have the greatest impact (ease of use, excellent documentation). We’ll do more of what’s working, and stop doing the things that aren’t.</p>
+
+<p>And more than anything, we’re <strong>tracking the metrics that matter</strong>. This way, we know how many developers are using our API, with which SDKs, and how long it takes them to activate their account after signing up.</p>
+
+<p><img src="/assets/blog/devrel-at-okta/track-metrics-cbed8bd9e30688f7abd2d93206dfb695318eb12f6a0128189672f587444afd90.png" alt="Track Metrics" /></p>
+
+<h2 id="heres-to-the-future">Here’s to the Future!</h2>
+
+<p>Being a part of the DevRel Team at Okta has been a great experience for me. It’s fun to be a part of something that’s just beginning, with a team of outstanding individuals. If you’re a developer using Okta, and you have feedback to share, please contact us at developers@okta.com. DevRel at Okta is a fun ride, and we’re just getting started.</p>
+
+<p><a href="https://developer.okta.com"><img src="/assets/blog/devrel-at-okta/okta-api-7171252458b62cd1b33acd6e0f738e7a0ed0b95acf6d8ad94ce502021b513474.png" alt="Okta API" /></a></p>
+
+<p>If you’d like to talk to me about DevRel at Okta, or in your organization, please hit me up on Twitter <a href="https://twitter.com/mraible">@mraible</a> or directly via email to matt.raible@okta.com.</p>
+
+
+	</div>
+	
+</article>
+
+		
+</section>
+
+		
+	</div><footer class="Footer">
+    <div class="Wrap">
+
+        <div class="Row">
+
+            <div class="Column--3 Column--medium-6 Column--xSmall-12">
+
+                <a class="Logo" href="https://www.okta.com/" target="_blank" rel="noopener noreferrer">
+                    <img src="https://developer.okta.com/sites/all/themes/developer/images/logo-footer.png" alt="Okta">
+                    Visit okta.com
+                </a>
+
+            </div>
+
+            <div class="Column--3 Column--medium-12 Column--xSmall-12">
+
+                <h4>Social</h4>
+                <ul class="Footer-links Footer-links--social">
+                    <li><a class="Footer-links--github" target="_blank" rel="noopener noreferrer" href="http://github.com/oktadeveloper">Github</a></li>
+                    <li><a class="Footer-links--twitter" target="_blank" rel="noopener noreferrer" href="http://twitter.com/OktaDev">Twitter</a></li>
+                    <li><a class="Footer-links--forum" target="_blank" rel="noopener noreferrer" href="https://devforum.okta.com/">Forum</a></li>
+                    <li><a class="Footer-links--rss" target="_blank" rel="noopener noreferrer" href="http://feeds.feedburner.com/OktaBlog">RSS Blog</a></li>
+                </ul>
+            </div>
+
+            <div class="Column--3 Column--medium-6 Column--small-12">
+                <h4>More Info</h4>
+                <ul class="Footer-links">
+                    <li><a target="_blank" href="https://developer.okta.com/integrate-with-okta/">Integrate with Okta</a></li>
+                    <li><a href="/blog/">Blog</a></li>
+                    <li><a href="/docs/platform-release-notes/platform-release-notes.html">Release Notes</a></li>
+                    <li><a href="/3rd_party_notices/">3rd Party Notices</a></li>
+                </ul>
+            </div>
+
+            <div class="Column--3 Column--medium-6 Column--small-12">
+                <h4>Contact &amp; Legal</h4>
+                <ul class="Footer-links">
+                    <li><a href="https://developer.okta.com/contact/">Contact Sales</a></li>
+                    <li><a target="_blank" rel="noopener noreferrer" href="mailto:developers@okta.com">Contact Support</a></li>
+                    <li><a href="https://developer.okta.com/terms/">Terms &amp; Conditions</a></li>
+                    <li><a href="https://developer.okta.com/privacy/">Privacy Policy</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</footer>
+
+    <script type="text/javascript" src="/assets/master-0365dd27cf276cb2a15c0a43906ca592538204cf1ad4557547bf4e50609b411e.js"></script>
+    <script type="text/javascript" src="/assets/myOkta-911cbafbbe079b7a5522d9cbe15bd2a5f44e1582531e88393934bec69f97696b.js"></script>
+    
+    
+    
+    
+      <script type="text/javascript" src="/assets/blog-6e32dad27404131cc8630a5282264bed2ab4c08c91ac86fa496b75c53aa4f681.js"></script>
+    
+
+  <!-- START Post Footer -->
+  
+  <!-- START Google Tag Manager -->
+  <!-- https://support.google.com/tagmanager/answer/6103696?hl=en -->
+  <noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-TJ45R6" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+  <!-- END Google Tag Manager -->
+  <!-- START Google Remarketing Tag -->
+  <script type="text/javascript">
+    /* <![CDATA[ */
+    var google_conversion_id = 1006913831;
+    var google_custom_params = window.google_tag_params;
+    var google_remarketing_only = true;
+    /* ]]> */
+  </script>
+  <div style="display:none;"><script type="text/javascript" src="//www.googleadservices.com/pagead/conversion.js"></script></div>
+  <noscript><div style="display:inline;"><img height="1" width="1" style="border-style:none;" alt="" src="//googleads.g.doubleclick.net/pagead/viewthroughconversion/1006913831/?value=0&amp;guid=ON&amp;script=0"></div></noscript>
+  <!-- END Google Remarketing Tag -->
+  <!-- START Crazy Egg Tracking -->
+  <script type="text/javascript">
+    setTimeout(function(){var a=document.createElement("script");
+    var b=document.getElementsByTagName("script")[0];
+    a.src=document.location.protocol+"//script.crazyegg.com/pages/scripts/0021/9333.js?"+Math.floor(new Date().getTime()/3600000);
+    a.async=true;a.type="text/javascript";b.parentNode.insertBefore(a,b)}, 1);
+  </script>
+  <!-- END Crazy Egg Tracking -->
+
+  <!-- END Post Footer -->
+</body>
+</html>
