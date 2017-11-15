@@ -223,12 +223,3 @@ function check_sample_code_orgs() {
         return 1
     fi
 }
-
-function fold() {
-    local name=$1
-    local command="${@:2}"
-    echo -en "travis_fold:start:${name}\\r"
-    echo "\$ ${command}"
-    ${command}
-    echo -en "travis_fold:end:${name}\\r"
-}

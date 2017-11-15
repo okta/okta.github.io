@@ -31,7 +31,10 @@ env:
   - secure: gFSORYQLSBNIK8peGgUOhd0Yj6GzE18HA0GLrmp0PMtobe003poalkNgLsPy2W2QFZbG3bCjbqFMmCbUh5uRnX8eCy/whe+lwXeQsv5uh0EIGWgxVxhk79dCx5cakERusoj2BUgJJ432R7nRXjEW5v2AK9QAOeCG2Dvwdb8WSes=
 
 deploy:
-  provider: script
-  script: scripts/gh-pages-publish.sh
+  provider: pages
+  skip_cleanup: true
+  github_token: $GITHUB_TOKEN
+  local_dir: dist
+  target_branch: master
   on:
     branch: source
