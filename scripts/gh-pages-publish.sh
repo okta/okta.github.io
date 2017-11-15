@@ -13,6 +13,9 @@ REMOTE_URL="https://${GITHUB_TOKEN}@github.com/${GITHUB_SLUG}.git"
 TARGET_BRANCH="master"
 GENERATED_SITE_LOCATION="$(pwd)/${GENERATED_SITE_LOCATION:-"dist"}"
 
+# change to dist
+cd ${GENERATED_SITE_LOCATION}
+
 # First make sure we are currently on the target branch, if not FAIL!
 CURRENT_BRANCH=$(git rev-parse --abbrev-ref HEAD)
 

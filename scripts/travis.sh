@@ -30,7 +30,7 @@ fi
 fold npm_find_missing_slashes npm run find-missing-slashes
 
 # 7. Run htmlproofer to validate links, scripts, and images
-bundle exec ./scripts/htmlproofer.rb
+fold bundle_exec_htmlproofer bundle exec ./scripts/htmlproofer.rb
 
 # 8. Ensure that page fragments for quickstarts have not appeared in the sitemap
 
