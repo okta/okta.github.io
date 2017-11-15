@@ -80,7 +80,10 @@ function findBadLinks(file, fileMap) {
     .filter(link => !link.prepped.includes('mailto:') && !link.prepped.includes('tel:'))
 
     // Remove links with no extension that resolve to an html file
-    .filter(link => !fileMap[`${link.prepped}.html`]);
+    .filter(link => !fileMap[`${link.prepped}.html`])
+
+    // Remove link to okta.com stylesheet that needs a query string for cache busting
+    .filter(link => !link.prepped.includes('sites/all/themes/developer/css/master.css'));
 }
 
 async function run(dir) {

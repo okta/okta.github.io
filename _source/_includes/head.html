@@ -38,7 +38,7 @@
  		<meta name="robots" content="noindex,nofollow">
  	{% endif %}
 
-  <link type="text/css" rel="stylesheet" href="{{ site.external_domain }}/sites/all/themes/developer/css/master.css" media="all" />
+  <link type="text/css" rel="stylesheet" href="{{ site.external_domain }}/sites/all/themes/developer/css/master.css?{{site.time | date: '%s%N'}}" media="all" />
   <meta class="swiftype" name="title" data-type="string" content="{% if page.meta_title %}{{ page.meta_title }}{% elsif page.title %}{{ page.title }} | {{ site.title }}{% else %}{{ site.title }}{% endif %}" />
   <meta class="swiftype" name="summary" data-type="string" content="{% if page.excerpt %}{{ page.excerpt | strip_html | strip_newlines | truncate: 160 }}{% else %}{{ site.description }}{% endif %}" />
 
