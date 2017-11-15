@@ -2802,7 +2802,7 @@ curl -v -X GET \
 
 {% api_operation get /api/v1/users/*:userId*/clients/*:clientId*/grants %}
 
-Lists all grant references for a specified user and client
+Lists all grants for a specified user and client
 
 #### Request Parameters
 {:.api .api-request .api-request-params}
