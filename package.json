@@ -13,12 +13,11 @@
     "postbuild-prod": "bash scripts/post-build-prod.sh",
     "prestart": "npm run clean",
     "start": "npm run generate serve -- --incremental",
-    "stop": "if-env CI=true && exit 0 || (pkill -f okta_github_io)",
     "test-only": "protractor tests/selenium/conf.js",
+    "stop": "if-env CI=true && exit 0 || (pkill -f 'okta_github_io|webdriver-manager/selenium')",
     "pretest": "npm run generate serve -- --no-watch & wait-on http://localhost:4000 && webdriver-manager update --gecko false",
     "test": "npm run test-only || (npm stop && exit 1)",
     "posttest": "npm run stop",
-    "import-external": "node scripts/import-external 2>&1",
     "find-missing-slashes": "node scripts/find-missing-slashes",
     "post-build-lint": "bash scripts/post-build-lint.sh"
   },

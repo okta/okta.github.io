@@ -28,4 +28,4 @@ git commit -m "Deploy site for ${CURRENT_HASH}"
 
 # add the remote
 git remote add ${REMOTE_NAME} ${REMOTE_URL}
-#git push ${REMOTE_NAME} ${TARGET_BRANCH}
+git push ${REMOTE_NAME} ${TARGET_BRANCH}
