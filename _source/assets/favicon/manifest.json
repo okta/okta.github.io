@@ -1,5 +1,7 @@
 {
-    "name": "",
+    "name": "Okta Developer Blog",
+    "short_name": "@OktaDev",
+    "start_url": "index.html",
     "icons": [
         {
             "src": "/assets/favicon/android-chrome-192x192.png",
