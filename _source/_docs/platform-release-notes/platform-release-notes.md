@@ -1,22 +1,22 @@
 ---
 layout: docs_page
 title: Okta API Release Notes
-excerpt: Summary of changes to the Okta API since Release 2017.45
+excerpt: Release Note for 2017.47: Bug fix to partial profile update
 ---
 
-## Okta API Release Notes for Release 2017.46
+## Okta API Release Notes for Release 2017.47
 
-These release notes summarize the changes since 2017.45. Dates for preview and production release are the earliest possible release date. Always check your org to verify the release version.
+These release notes summarize the changes since 2017.46. Dates for preview and production release are the earliest possible release date. Always check your org to verify the release version.
 
 ### API Bug Fix
 
-The following bug fix is available now on preview orgs, and will be available on production orgs starting November 28, 2017:
+The following bug fix will be available on preview orgs starting November 21, and will be available on production orgs starting November 28, 2017:
 
-* After updating a user with a POST to `/user/{userId}`, HAL links would not be included in the response body. (OKTA-145195)
+* A partial profile update (POST `/api/v1/users/ {userId}`) incorrectly required that `login` be specified in the `profile`. (OKTA-145770)
 
 ### Does Your Org Have This Change Yet?
 
-To verify the current release for an org, click the **Admin** button and check the footer of the Dashboard page.
+To verify the current release for an org, check the footer of the Dashboard page. If necessary, click the **Admin** button to navigate to your dashboard.
 
 {% img release_notes/version_footer.png alt:"Release Number in Footer" %}
 
