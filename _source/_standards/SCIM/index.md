@@ -113,7 +113,7 @@ Okta supports these common Provisioning use cases:
 
 > App-as-Master is currently a {% api_lifecycle beta %} feature for Okta’s SCIM-Based Provisioning option.
 [Beta features](/docs/api/getting_started/releases-at-okta.html#beta) are made available to a small set of customers for testing and feedback.
-While in Beta, Okta may make breaking changes, so the integration with the feature can't be published in the Okta Application Network or used by customers in production environments.
+While in Beta, Okta may make breaking changes, so the integration with the feature can't be published in the Okta Integration Network or used by customers in production environments.
 
 While most apps fit the category of a downstream app in the directory-as-master use case, some apps can be the master. This is the App-as-Master use case.
 
@@ -1145,7 +1145,7 @@ Here’s the process for getting joint customers involved in testing a newly dev
 1. Identify joint customers interested in piloting the integration.
 2. Once identified, an Okta admin from the joint customer emails <developers@okta.com> and asks for this integration to be assigned to their Okta org (be sure to specify the org subdomain in the request). Okta assigns the app.
 3. Integration and configuration review with the joint customer. Partners are responsible for managing the customer identification and testing process, but Okta can support as needed. Please coordinate by emailing <developers@okta.com>.
-4. The Okta admin emails <developers@okta.com> directly stating that the integration is working as expected. 
+4. The Okta admin emails <developers@okta.com> directly stating that the integration is working as expected.
 
 #### Publish to Okta Integration Network
 
