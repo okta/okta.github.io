@@ -1,5 +1,5 @@
 
-The AppGroups endpoint is useful for gaining a better understanding of the meaning of groups present in Okta. For example, risk scores could be inferred based on access granted through a given group.
+You can gain a better understanding of the meaning of groups in Okta by looking at the appGroups endpoint. For example, you can infer risk scores based on the access granted to a user from a given group.
 
 #### Best Practices appGroups
 

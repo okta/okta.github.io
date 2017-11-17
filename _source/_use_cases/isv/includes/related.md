@@ -25,3 +25,5 @@ Related articles
 [appGroup Object]: ../../docs/api/resources/apps.html#application-group-model "App Group Object"
 [API endpoints]: ../../documentation/index.html "API Endpoints"
 [SCIM Standards]: ../../standards/SCIM/index.html "SCIM Standards"
+[Okta Cloud Connect]: https://www.okta.com/partners/okta-cloud-connect "Okta Cloud Connect"
+[Getting a token]: https://developer.okta.com/docs/api/getting_started/getting_a_token.html "Getting a token"
