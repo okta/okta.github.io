@@ -45,17 +45,11 @@ To easily interact with the [Okta Sign-In Widget](/code/javascript/okta_sign-in_
 npm install @okta/okta-angular --save
 ```
 
-> There is an known bug when using `babel-polyfill` and `zone.js` in Angular 2+ that states: `Uncaught TypeError: NativePromise.resolve is not a function`. To get around this error, inject the following line above the `zone.js` import in your `src/polyfills.ts` file:
+> There is [a known bug](https://github.com/angular/zone.js/issues/891) when using `babel-polyfill` and `zone.js` that causes: `Uncaught TypeError: NativePromise.resolve is not a function`. To temporarily get around this issue, install an updated version of `zone.js`:
 
-```typescript
-// Temporary solution
-import '@okta/okta-signin-widget/dist/js/okta-sign-in.min.js';
-
-/**********************************************************
- * Zone JS is required by Angular itself.
- */
-import 'zone.js/dist/zone';  // Included with Angular CLI.
-``` 
+```bash
+npm install https://github.com/lboyette-okta/zone.js.git#issue-891 --save
+```
 
 ## Create Routes
 Some routes require authentication in order to render. Defining these protected routes is easy with the `OktaAuthGuard` from `@okta/okta-angular`. Lets take a look at what routes are required for this example, using [Angular Router](https://angular.io/guide/router):
@@ -70,6 +64,10 @@ First, update `src/app/app.component.html` to provide the Login logic:
 <!-- src/app/app.component.html -->
 <link
   href="https://ok1static.oktacdn.com/assets/js/sdk/okta-signin-widget/{{ site.versions.okta_signin_widget }}/css/okta-sign-in.min.css"
+  type="text/css"
+  rel="stylesheet"/>
+<link
+  href="https://ok1static.oktacdn.com/assets/js/sdk/okta-signin-widget/{{ site.versions.okta_signin_widget }}/css/okta-theme.css"
   type="text/css"
   rel="stylesheet"/>
 
@@ -92,7 +90,7 @@ Then, update `src/app/app.component.ts` to handle the `login()` and `logout()` c
 import { Component } from '@angular/core';
 import { OktaAuthService } from '@okta/okta-angular';
 
-import * as OktaSignIn from '@okta/okta-signin-widget';
+import OktaSignIn from '@okta/okta-signin-widget/dist/js/okta-sign-in.min.js';
 
 @Component({
   selector: 'app-root',
@@ -124,7 +122,7 @@ export class AppComponent {
 
   async logout() {
     // Terminates the session with Okta and removes current tokens.
-    await this.widget.signOut();
+    await this.signIn.logout();
     this.widget.remove();
   }
 }
