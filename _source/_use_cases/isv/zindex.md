@@ -2,7 +2,7 @@
 layout: docs_page
 title: ISV Partner Integrations
 weight: 4
-excerpt: Go beyond Single Sign-On and Provisioning and Build deeper integrations with Okta 
+excerpt: Go beyond Single Sign-On and provisioning to build deeper integrations with Okta
 ---
 # ISV Partner Integrations
 

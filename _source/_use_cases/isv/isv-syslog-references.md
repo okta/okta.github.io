@@ -76,57 +76,57 @@ Use the following table for reference when moving from the Events API to the Sys
 
 This table contains the eventType, message and Percentage times the event appeared in our corpus of data.  Use this table as a starting point to get to understand Okta's events better.
 
-| eventType | displayMessage | Pct(%) |
-|:----|:----|:----|
-| application.user_membership.add | Add user to application membership | 19.19% |
-| user.authentication.sso | User single sign on to app | 6.09% |
-| application.user_membership.remove | Remove users application membership | 4.99% |
-| user.session.start | User login to Okta | 4.56% |
-| application.provision.user.push_profile | Push users profile to external application | 4.08% |
-| app.user_management | Successfully imported new member to an app group | 3.57% |
-| application.provision.user.sync | Sync user in external application | 3.52% |
-| application.user_membership.update | Updated user application property | 3.40% |
-| system.agent.ad.realtimesync | Perform RealTimeSync by AD agent | 3.34% |
-| user.authentication.auth_via_AD_agent | Authenticate user with AD agent | 3.05% |
-| user.session.access_admin_app | User accessing Okta admin app | 2.47% |
-| group.user_membership.add | Add user to group membership | 1.99% |
-| application.provision.user.push | Push new user to external application | 1.86% |
-| user.account.update_profile | Update user profile for Okta | 1.49% |
-| user.session.end | User logout from Okta | 1.44% |
-| application.lifecycle.update | Update application | 1.20% |
-| application.provision.user.verify_exists | Verify user exists in external application | 1.17% |
-| user.authentication.auth_via_mfa | Authentication of user via MFA | 1.01% |
+| eventType | displayMessage |
+|:----|:----|
+| application.user_membership.add | Add user to application membership |
+| user.authentication.sso | User single sign on to app |
+| application.user_membership.remove | Remove users application membership |
+| user.session.start | User login to Okta |
+| application.provision.user.push_profile | Push users profile to external application |
+| app.user_management | Successfully imported new member to an app group |
+| application.provision.user.sync | Sync user in external application |
+| application.user_membership.update | Updated user application property |
+| system.agent.ad.realtimesync | Perform RealTimeSync by AD agent |
+| user.authentication.auth_via_AD_agent | Authenticate user with AD agent |
+| user.session.access_admin_app | User accessing Okta admin app |
+| group.user_membership.add | Add user to group membership |
+| application.provision.user.push | Push new user to external application |
+| user.account.update_profile | Update user profile for Okta |
+| user.session.end | User logout from Okta |
+| application.lifecycle.update | Update application |
+| application.provision.user.verify_exists | Verify user exists in external application |
+| user.authentication.auth_via_mfa | Authentication of user via MFA |
 
 ## Common Failure Events
 
 This table contains the eventType, message and Percentage times the event appeared in our corpus of data.  Use this table as a starting point to get to understand Okta's events better.
 
-| eventType | displayMessage | Pct(%) |
-|:----|:----|:----|
-| user.session.start | User login to Okta | 1.75% |
-| system.agent.ad.realtimesync | Perform RealTimeSync by AD agent | 1.63% |
-| user.authentication.auth_via_AD_agent | Authenticate user with AD agent | 0.89% |
-| user.authentication.auth_via_radius | Authentication of user via Radius | 0.25% |
-| user.account.reset_password | User reset password for Okta (by admin) | 0.21% |
-| app.generic.unauth_app_access_attempt | User attempted unauthorized access to app | 0.07% |
-| system.agent.ad.connect | Connect AD agent to Okta | 0.03% |
-| user.authentication.auth_via_mfa | Authentication of user via MFA | 0.03% |
-| system.agent.ad.reset_user_password | Perform user password reset by AD agent | 0.03% |
-| application.provision.user.push_profile | Push users profile to external application | 0.02% |
-| system.agent.ad.invoke_dir | Perform directory invoke command by AD agent | 0.02% |
-| application.provision.user.sync | Sync user in external application | 0.02% |
-| app.oauth2.as.authorize | OAuth2 authorization request | 0.01% |
-| app.oauth2.authorize | OIDC authorization request | 0.01% |
-| user.lifecycle.create | Create okta user | 0.01% |
-| user.authentication.auth_via_IDP | Authenticate user via IDP | 0.01% |
-| application.provision.integration.call_api | Application integration API called | 0.00% |
-| system.agent.ad.write_ldap | Perform LDAP write by AD agent | 0.00% |
-| app.oauth2.authorize.invalid_client_id | OIDC authorization request | 0.00% |
-| app.oauth2.authorize.user_not_assigned | OIDC authorization request | 0.00% |
-| system.agent.ad.read_ldap | Perform LDAP read by AD agent | 0.00% |
-| system.agent.ad.read_toplogy | (blank) | 0.00% |
-| user.account.lock | Max sign in attempts exceeded | 0.00% |
-| user.account.update_password | User update password for Okta | 0.00% |
+| eventType | displayMessage |
+|:----|:----|
+| user.session.start | User login to Okta |
+| system.agent.ad.realtimesync | Perform RealTimeSync by AD agent |
+| user.authentication.auth_via_AD_agent | Authenticate user with AD agent |
+| user.authentication.auth_via_radius | Authentication of user via Radius |
+| user.account.reset_password | User reset password for Okta (by admin) |
+| app.generic.unauth_app_access_attempt | User attempted unauthorized access to app |
+| system.agent.ad.connect | Connect AD agent to Okta |
+| user.authentication.auth_via_mfa | Authentication of user via MFA |
+| system.agent.ad.reset_user_password | Perform user password reset by AD agent |
+| application.provision.user.push_profile | Push users profile to external application |
+| system.agent.ad.invoke_dir | Perform directory invoke command by AD agent |
+| application.provision.user.sync | Sync user in external application |
+| app.oauth2.as.authorize | OAuth2 authorization request |
+| app.oauth2.authorize | OIDC authorization request |
+| user.lifecycle.create | Create okta user |
+| user.authentication.auth_via_IDP | Authenticate user via IDP |
+| application.provision.integration.call_api | Application integration API called |
+| system.agent.ad.write_ldap | Perform LDAP write by AD agent |
+| app.oauth2.authorize.invalid_client_id | OIDC authorization request |
+| app.oauth2.authorize.user_not_assigned | OIDC authorization request |
+| system.agent.ad.read_ldap | Perform LDAP read by AD agent |
+| system.agent.ad.read_toplogy | (blank) |
+| user.account.lock | Max sign in attempts exceeded |
+| user.account.update_password | User update password for Okta |
 
 ## Other notable events
 
