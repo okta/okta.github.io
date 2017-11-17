@@ -63,6 +63,7 @@ Some routes require authentication in order to render. Defining these protected 
 First, update `src/app/app.component.html` to provide the Login logic:
 ```html
 <!-- src/app/app.component.html -->
+
 <link
   href="https://ok1static.oktacdn.com/assets/js/sdk/okta-signin-widget/{{ site.versions.okta_signin_widget }}/css/okta-sign-in.min.css"
   type="text/css"
@@ -71,11 +72,6 @@ First, update `src/app/app.component.html` to provide the Login logic:
   href="https://ok1static.oktacdn.com/assets/js/sdk/okta-signin-widget/{{ site.versions.okta_signin_widget }}/css/okta-theme.css"
   type="text/css"
   rel="stylesheet"/>
-
-<link
-href="https://ok1static.oktacdn.com/assets/js/sdk/okta-signin-widget/{{ site.versions.okta_signin_widget }}/css/okta-theme.css"
-type="text/css"
-rel="stylesheet"/>
 
 <button routerLink="/"> Home </button>
 <button *ngIf="!signIn.isAuthenticated()" routerLink="/login"> Login </button>
@@ -130,7 +126,7 @@ export class ProtectedComponent {
   message;
 
   constructor() {
-    this.message = 'Protected endpont!';
+    this.message = 'Protected endpoint!';
   }
 }
 ```
@@ -144,6 +140,8 @@ This route hosts the Sign-In Widget and redirects if the user is already logged 
 Create a new component `src/app/login.component.ts`:
 
 ```typescript
+// src/app/login.component.ts
+
 import { Component, OnInit } from '@angular/core';
 import { Router, NavigationStart} from '@angular/router';
 
@@ -168,7 +166,7 @@ export class LoginComponent {
     this.signIn = oktaAuth;
 
     // Show the widget when prompted, otherwise remove it from the DOM.
-    router.events.forEach((event) => {
+    router.events.forEach(event => {
       if (event instanceof NavigationStart) {
         switch(event.url) {
           case '/login':
@@ -198,7 +196,7 @@ export class LoginComponent {
 ```
 
 ### Connect the Routes
-The `OktaAuthModule` handles different authentication flows for your application, so it requires your OpenID Connect configuration. By default `okta/okta-angular` redirects to the Okta Sign-In Page when the user is not authenticated. To override this behavior, see [using a custom login-page](https://github.com/okta/okta-oidc-js/tree/master/packages/okta-angular#using-a-custom-login-page).
+The `OktaAuthModule` handles different authentication flows for your application, so it requires your OpenID Connect configuration. By default `okta/okta-angular` redirects to the Okta Sign-In Page when the user is not authenticated. We override this behavior by passing an `onAuthRequired` function to the `OktaAuthGuard`. For more information, see [using a custom login-page](https://github.com/okta/okta-oidc-js/tree/master/packages/okta-angular#using-a-custom-login-page).
 
 Update `src/app/app.module.ts` to include your project components and routes. Your completed file should look similar to:
 
@@ -235,7 +233,7 @@ const appRoutes: Routes = [
     component: OktaCallbackComponent
   },
   {
-    path: '/login',
+    path: 'login',
     component: LoginComponent
   },
   {
@@ -243,7 +241,7 @@ const appRoutes: Routes = [
     component: ProtectedComponent,
     canActivate: [ OktaAuthGuard ],
     data: {
-      onAuthRequired: onAuthRequired
+      onAuthRequired
     }
   }
 ]
