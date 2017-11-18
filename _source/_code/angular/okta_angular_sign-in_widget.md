@@ -215,6 +215,7 @@ import {
 
 import { AppComponent } from './app.component';
 import { ProtectedComponent } from './protected.component';
+import { LoginComponent } from './login.component';
 
 const config = {
   issuer: 'https://{yourOktaDomain}.com/oauth2/default',
@@ -256,7 +257,6 @@ const appRoutes: Routes = [
     RouterModule.forRoot(appRoutes),    
     OktaAuthModule.initAuth(config)
   ],
-  providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
