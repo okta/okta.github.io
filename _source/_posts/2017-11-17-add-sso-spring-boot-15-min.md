@@ -19,7 +19,7 @@ Going from zero to secure web server doesn’t happen in a flash. To complete th
 
 ## Why Spring?
 
-{% img blog/add-sso-spring-boot-15-min/41283358.png alt:"Spring" width:"600" %}{: .center-image }
+{% img blog/add-sso-spring-boot-15-min/spring-logo.png alt:"Spring" width:"600" %}{: .center-image }
 
 [Spring](http://spring.io) is a mature, widely used, and well-documented set of tools and libraries that were built to make your life easier as a Java developer. It offers an enormous amount of functionality, from easy database connections and server creation (as we'll see in this tutorial) to turn-key security, messaging, mobile development, and more.  
 
@@ -27,9 +27,9 @@ Going from zero to secure web server doesn’t happen in a flash. To complete th
 
 ## Download and Initialize a New Spring Boot Project
 
-Spring offers a tool called [Spring Initializr](https://start.spring.io/) that allows you to create and download a zip file containing a new Spring Boot project with a single click. Head on over there and create a new project that includes the **Web** and **Security** starters. I left the default artifact and group intact and unzipped the demo.zip file in my home directory. That unpacked the following files:
+Spring offers a tool called [Spring Initializr](https://start.spring.io/) that allows you to create and download a zip file containing a new Spring Boot project with a single click. Head on over there and create a new project that includes the **Web** and **Security** starters. I left the default artifact and group intact and unzipped the `demo.zip` file in my home directory. That unpacked the following files:
 
-{% img blog/add-sso-spring-boot-15-min/99261089.png alt:"Directory tree" width:"600" %}{: .center-image }
+{% img blog/add-sso-spring-boot-15-min/dir-tree.png alt:"Directory tree" width:"600" %}{: .center-image }
 
 Those of you familiar with [Maven](http://maven.apache.org) will recognize the **pom.xml** file. Just four little dependencies pull in an enormous amount of functionality from Spring:
 
@@ -38,18 +38,15 @@ Those of you familiar with [Maven](http://maven.apache.org) will recognize the *
     <groupId>org.springframework.boot</groupId>
     <artifactId>spring-boot-starter-security</artifactId>
 </dependency>
-
 <dependency>
     <groupId>org.springframework.boot</groupId>
     <artifactId>spring-boot-starter-web</artifactId>
 </dependency>
-
 <dependency>
     <groupId>org.springframework.boot</groupId>
     <artifactId>spring-boot-starter-test</artifactId>
     <scope>test</scope>
 </dependency>
-
 <dependency>
     <groupId>org.springframework.security</groupId>
     <artifactId>spring-security-test</artifactId>
@@ -67,7 +64,7 @@ Amid all the colorful log statements, the one to look for is likely second to th
 
 >Tomcat started on port(s): 8080 (http)
 
-{% img blog/add-sso-spring-boot-15-min/46794333.png alt:"Screen Shot of mvn spring-boot:run" width:"600" %}{: .center-image }
+{% img blog/add-sso-spring-boot-15-min/spring-boot-run.png alt:"Screen Shot of mvn spring-boot:run" width:"600" %}{: .center-image }
 
 Because you requested the Spring Security Starter package when you created the project, the server is protected by default using [Basic Authentication](https://www.httpwatch.com/httpgallery/authentication/).  This can be verified by opening a browser and visiting:
 
@@ -75,37 +72,41 @@ Because you requested the Spring Security Starter package when you created the p
 
 A browser dialog should appear asking for your username and password (which you haven’t set up yet):
 
-{% img blog/add-sso-spring-boot-15-min/1838429.png alt:"Screen Shot of browser basic auth" width:"600" %}{: .center-image }
+{% img blog/add-sso-spring-boot-15-min/basic-auth-prompt.png alt:"Screen Shot of browser basic auth" width:"600" %}{: .center-image }
 
 Rather than bother with setting up a hard coded username and password in your new server, wouldn’t it be better to suddenly have access to full-fledged OAuth session management, user administration, site statistics, and more? We can do that in just minutes with Okta! 
+
 ## Add OAuth Authentication to Your Server with Okta
+
 Now it’s time to enhance your server with user management, key and credential storage and rotation, OAuth server maintenance, forgotten password handling, and a slick administration UI. That sounds like a lot of work!  Fortunately, it's done for you with Okta's user management and authorization services. You merely plug Okta dependencies into your Spring Boot project, configure a few security settings, and you get all of that and a bag of chips in just a few simple steps.  Here's how. 
+
 ### Get Your Okta Credentials
+
 If you're new to Okta, you can [sign up here](https://developer.okta.com/signup/) for a free developer account. You'll receive an invitation email with your username (your email address) and a temporary password. Follow the link provided in the email, sign in using these credentials, and create your admin account for the first time. You'll be asked to create a new password, and after completing this page, you will find your Okta developer console. There is much to explore here, so if you'd like, feel free to take a break and browse around!  
 
 When you're ready to proceed, go to the **Applications** tab in your Okta dashboard. It should look something like this:
 
-{% img blog/add-sso-spring-boot-15-min/50219573.png alt:"Screen Shot of Okta add application" width:"600" %}{: .center-image }
+{% img blog/add-sso-spring-boot-15-min/okta-app-screen.png alt:"Screen Shot of Okta add application" width:"600" %}{: .center-image }
 
 Click on the green **Add Application** button, and since you're building a web server, select **Web** *(.NET, Java, etc.)* as the application type and click **Next**:
 
-{% img blog/add-sso-spring-boot-15-min/49174321.png alt:"Screen Shot of Okta create application" width:"600" %}{: .center-image }
+{% img blog/add-sso-spring-boot-15-min/create-app-screen.png alt:"Screen Shot of Okta create application" width:"600" %}{: .center-image }
 
 In the settings page that follows, there is one default value to change. In the **Login Redirect URIs** field, replace the default value with: 
 
 > http://localhost:8080/login 
 
-{% img blog/add-sso-spring-boot-15-min/28490707.png alt:"Screen Shot of Okta application settings" width:"600" %}{: .center-image }
+{% img blog/add-sso-spring-boot-15-min/app-settings-screen.png alt:"Screen Shot of Okta application settings" width:"600" %}{: .center-image }
 
 Then, click **Done**. This takes you to home base for your new application. There are a lot of features here too but for now you'll want to take note of a few pieces of information in the **General** sub-tab of the **Application** main tab in the dashboard. The first two are the **Client ID** and **Client Secret** located near the bottom of the page:
 
-{% img blog/add-sso-spring-boot-15-min/20202833.png alt:"Screen Shot of Okta application created" width:"600" %}{: .center-image }
+{% img blog/add-sso-spring-boot-15-min/app-created-screen.png alt:"Screen Shot of Okta application created" width:"600" %}{: .center-image }
 
 Keep those handy, and keep them safe! You'll use them in your Spring Boot server to authenticate with Okta.  
 
 Next, go to the **API** tab at the top of the dashboard, and in this screen, take note of the **Issuer URI**. If you don't see it, make sure you're on the **Authorization Servers** sub-tab. This is the Okta OAuth Authorization server that your server will communicate with.
 
-{% img blog/add-sso-spring-boot-15-min/79371866.png alt:"Screen Shot of Okta OAuth Issuer Location" width:"600" %}{: .center-image }
+{% img blog/add-sso-spring-boot-15-min/issuer-screen.png alt:"Screen Shot of Okta OAuth Issuer Location" width:"600" %}{: .center-image }
 
 Now that your **Client ID**, **Client Secret**, and **Issuer URI** are stashed somewhere safely; it's time to plug Okta into your server. Add the Okta and Spring OAuth dependencies along with the others in the **pom.xml** file:
 
@@ -122,18 +123,16 @@ Now that your **Client ID**, **Client Secret**, and **Issuer URI** are stashed s
 </dependency>
 ```
 
-Next you'll add three values to: 
+Next you'll add three values to: `src/main/resources/application.properties`
 
-```src/main/resources/application.properties```
-
-```bash
+```properties
 okta.oauth2.issuer=(your **Issuer URI**)
 okta.oauth2.clientId=(your **Client ID**)
 okta.oauth2.clientSecret=(your **Client Secret**)
 ```
 Like so:
 
-```bash
+```properties
 okta.oauth2.issuer=https://dev-279161.oktapreview.com/oauth2/default
 okta.oauth2.clientId=0oacqif7do3e0hD0h7
 okta.oauth2.clientSecret=(your **Client Secret**)
@@ -158,12 +157,12 @@ Okta provides the user ID of the caller via the `java.security.Principal` interf
 ```java
 @GetMapping("/")
 public String echoTheUsersEmailAddress(Principal principal) {
-   return "Hey there! Your email address is: "+principal.getName();
+   return "Hey there! Your email address is: " + principal.getName();
 }
 
 ``` 
 
-With the new imports, annotations, and request handler, the main Application.java should look like this:
+With the new imports, annotations, and request handler, the main `DemoApplication.java` should look like this:
 
 ```java
 package com.example.demo;
@@ -181,8 +180,8 @@ import java.security.Principal;
 public class DemoApplication {
 
    public static void main(String[] args) {
-    SpringApplication.run(DemoApplication.class, args);
-}
+     SpringApplication.run(DemoApplication.class, args);
+   }
 
 @GetMapping("/")
   public String echoTheUsersEmailAddress(Principal principal) {
@@ -193,13 +192,13 @@ public class DemoApplication {
 
 When you restart the server via `./mvnw spring-boot:run` and visit `http://localhost:8080` in your browser, you’ll be taken to your personal Okta subdomain to log in:
 
-{% img blog/add-sso-spring-boot-15-min/46732958.png alt:"Screen Shot of Okta Login" width:"600" %}{: .center-image }
+{% img blog/add-sso-spring-boot-15-min/okta-login-screen.png alt:"Screen Shot of Okta Login" width:"600" %}{: .center-image }
 
 You can log in using the email and password you set when you created your Okta account, because you were added by default as a user in the “My Web App” Okta application. Unless you created a new user back in the administration dashboard, this is the only user that has been given permission to access your site.
 
 Once you’ve logged in, you will be redirected back to your site as an authenticated user, and should be seeing your email address echoed back to you!
 
-{% img blog/add-sso-spring-boot-15-min/82255842.png alt:"Screen Shot of result" width:"600" %}{: .center-image }
+{% img blog/add-sso-spring-boot-15-min/app-success.png alt:"Screen Shot of result" width:"600" %}{: .center-image }
 
 ## What’s Next?
 
