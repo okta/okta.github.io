@@ -5,17 +5,17 @@ author: mraible
 tags: [authentication, spring boot, spring boot 2.0, angular, angular 5, okta, oidc]
 ---
 
-Technology moves fast these days. It can be difficult to keep up with the latest trends, as well as new releases of your favorite projects. I'm here to help! Spring Boot and Angular are two of my favorite projects, so I figured I'd write y'all a guide to show you how to use their latest and greatest releases.
+Technology moves fast these days. It can be challenging to keep up with the latest trends, as well as new releases of your favorite projects. I'm here to help! Spring Boot and Angular are two of my favorite projects, so I figured I'd write y'all a guide to show you how to use their latest and greatest releases.
 
-For Spring Boot, the biggest change in 2.0 is its new web framework: Spring WebFlux. For Angular 5.0, it brings a new `HttpClient` to the table. This class replaces `Http`, and is a bit easier to use, with less boilerplate code. Today, I'm not going to explore Spring WebFlux, because we still [have some work to do](https://github.com/okta/okta-spring-boot/issues/24) before we can support in with the [Okta Spring Boot Starter](https://github.com/okta/okta-spring-boot).
+For Spring Boot, the most significant change in 2.0 is its new web framework: Spring WebFlux. For Angular 5.0, it brings a new `HttpClient` to the table. This class replaces `Http`, and is a bit easier to use, with less boilerplate code. Today, I'm not going to explore Spring WebFlux, because we still [have some work to do](https://github.com/okta/okta-spring-boot/issues/24) before we can support in with the [Okta Spring Boot Starter](https://github.com/okta/okta-spring-boot).
 
-The good news is our [Angular SDK]() works well with Angular 5, so I'll be showing how to use it in this blog post. Speaking of Angular, did you know that Angular has [one of the most dramatic increases in questions on Stack Overflow](https://stackoverflow.blog/2017/11/13/cliffs-insanity-dramatic-shifts-technologies-stack-overflow/)? You might think this means a lot of people have issues with Angular. I like to think that there's a shit ton of people using it, and developers often have questions when using a new technology. It's a positive sign of a healthy community. You rarely see a lot of questions on Stack Overflow for a dying technology.
+The good news is our [Angular SDK]() works well with Angular 5, so I'll be showing how to use it in this blog post. Speaking of Angular, did you know that Angular has [one of the most dramatic increases in questions on Stack Overflow](https://stackoverflow.blog/2017/11/13/cliffs-insanity-dramatic-shifts-technologies-stack-overflow/)? You might think this means a lot of people have issues with Angular. I like to think that there's a lot of people using it, and developers often have questions when using a new technology. It's a definite sign of a healthy community. You rarely see a lot of questions on Stack Overflow for a dying technology.
 
 {% img blog/spring-boot-2-angular-5/increase-in-stack-overflow-technologies-2017.png alt:"Year over year change in questions asked for tags in Stack Overflow" width:"800" %}{: .center-image }
 
-This article describes how to build a simple CRUD application that displays a list of cool cars. It'll allow you to edit the list, and it'll display an animated gif from [GIPHY](http://giphy.com) that matches the car's name. You'll also learn how to secure your application using Okta's Spring Boot starter and Angular SDK.
+This article describes how to build a simple CRUD application that displays a list of cool cars. It'll allow you to edit the list, and it'll show an animated gif from [GIPHY](http://giphy.com) that matches the car's name. You'll also learn how to secure your application using Okta's Spring Boot starter and Angular SDK.
 
-You will need [Java 8](http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html) and [Node.js 8](https://nodejs.org/) installed in order to complete this tutorial.
+You will need [Java 8](http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html) and [Node.js 8](https://nodejs.org/) installed to complete this tutorial.
 
 ## Build an API with Spring Boot 2.0
 
@@ -64,7 +64,7 @@ interface CarRepository extends JpaRepository<Car, Long> {
 }
 ```
 
-Add an `ApplicationRunning` bean to the `DemoApplication.java` class and use it to add some default data to the database.
+Add an `ApplicationRunner` bean to the `DemoApplication.java` class and use it to add some default data to the database.
 
 ```java
 package com.okta.developer.demo;
@@ -78,11 +78,11 @@ import java.util.stream.Stream;
 @SpringBootApplication
 public class DemoApplication {
 
-	public static void main(String[] args) {
-		SpringApplication.run(DemoApplication.class, args);
-	}
+    public static void main(String[] args) {
+        SpringApplication.run(DemoApplication.class, args);
+    }
 
-	@Bean
+    @Bean
     ApplicationRunner init(CarRepository repository) {
         return args -> {
             Stream.of("Ferrari", "Jaguar", "Porsche", "Lamborghini", "Bugatti",
@@ -145,7 +145,7 @@ class CoolCarController {
 }
 ```
 
-If you restart your server app and hit `localhost:8080/good-beers` with your browser, or a command-line client, you should see the filtered list of cars.
+If you restart your server app and hit `localhost:8080/cool-cars` with your browser, or a command-line client, you should see the filtered list of cars.
 
 ```bash
 http localhost:8080/cool-cars
@@ -182,9 +182,9 @@ Transfer-Encoding: chunked
 
 ## Create a Client with Angular CLI
 
-Angular CLI is a command-line utility that can generate an Angular project for your. Not only can it create new projects, but it can also generate code. It's a very handy tool because it also offers commands that will build and optimize your project for production. It uses webpack under the covers for building. If you want to learn more about webpack, I recommend [webpack.academy](https://webpack.academy). 
+Angular CLI is a command-line utility that can generate an Angular project for you. Not only can it create new projects, but it can also generate code. It's a convenient tool because it also offers commands that will build and optimize your project for production. It uses webpack under the covers for building. If you want to learn more about webpack, I recommend [webpack.academy](https://webpack.academy). 
 
-You can learn about the basics of Angular CLI at <https://cli.angular.io>. 
+You can learn the basics of Angular CLI at <https://cli.angular.io>. 
 
 {% img blog/spring-boot-2-angular-5/cli.angular.io.png alt:"Angular CLI Homepage" width:"800" %}{: .center-image }
 
@@ -225,7 +225,7 @@ Use Angular CLI to generate a car service that can talk to the Cool Cars API.
 ng g s car
 ```
 
-Move the generated files into a `src/app/shared/car` directory.
+Move the generated files into the `client/src/app/shared/car` directory.
 
 ```bash
 $ mkdir -p src/app/shared/car
@@ -295,6 +295,7 @@ export class CarListComponent implements OnInit {
 
 Update `client/src/app/car-list/car-list.component.html` to show the list of cars.
 
+{% raw %}
 ```html
 <h2>Car List</h2>
 
@@ -302,9 +303,11 @@ Update `client/src/app/car-list/car-list.component.html` to show the list of car
   {{car.name}}
 </div>
 ```
+{% endraw %}
 
 Update `client/src/app/app.component.html` to have the `app-car-list` element.
 
+{% raw %}
 ```html
 <div style="text-align:center">
   <h1>Welcome to {{title}}!</h1>
@@ -312,6 +315,7 @@ Update `client/src/app/app.component.html` to have the `app-car-list` element.
 
 <app-car-list></app-car-list>
 ```
+{% endraw %}
 
 Start the client application using `ng serve`. Open your favorite browser to <http://localhost:4200>. You won't see the
 car list just yet, and if you open your developer console, you'll see why.
@@ -373,6 +377,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 Update `client/src/app/app.component.html` to use the toolbar component.
 
+{% raw %}
 ```html
 <mat-toolbar color="primary">
   <span>Welcome to {{title}}!</span>
@@ -380,9 +385,11 @@ Update `client/src/app/app.component.html` to use the toolbar component.
 
 <app-car-list></app-car-list>
 ```
+{% endraw %}
 
 Update `client/src/app/car-list/car-list.component.html` to use the card layout and list component.
 
+{% raw %}
 ```html
 <mat-card>
   <mat-card-header>Car List</mat-card-header>
@@ -396,6 +403,7 @@ Update `client/src/app/car-list/car-list.component.html` to use the card layout 
   </mat-card-content>
 </mat-card>
 ```
+{% endraw %}
 
 Modify `client/src/styles.css` to specify the theme and icons.
 
@@ -481,7 +489,7 @@ Now your browser should show you the list of car names, along with an avatar ima
 
 ## Add an Edit Feature
 
-Having a list of car names and images is cool, but it's a lot more fun when you can interact with it! To add an edit feature, start by generating an `car-edit` component.
+Having a list of car names and images is cool, but it's a lot more fun when you can interact with it! To add an edit feature, start by generating a `car-edit` component.
 
 ```bash
 ng g c car-edit
@@ -530,6 +538,7 @@ export class CarService {
 In `client/src/app/car-list/car-list.component.html`, add a link to the edit component. Also, add a button at the bottom
 to add a new car.
 
+{% raw %}
 ```html
 <mat-card>
   <mat-card-header>Car List</mat-card-header>
@@ -547,6 +556,7 @@ to add a new car.
   <button mat-fab color="primary" [routerLink]="['/car-add']">Add</button>
 </mat-card>
 ```
+{% endraw %}
 
 In `client/src/app/app.module.ts`, add routes and import the `FormsModule`.
 
@@ -650,6 +660,7 @@ export class CarEditComponent implements OnInit, OnDestroy {
 
 Update the HTML in `client/src/app/car-edit/car-edit.component.html` to have a form with the car's name, as well as to display the image from Giphy.
 
+{% raw %}
 ```html
 <mat-card>
   <form #carForm="ngForm" (ngSubmit)="save(carForm.value)">
@@ -678,6 +689,7 @@ Update the HTML in `client/src/app/car-edit/car-edit.component.html` to have a f
   </form>
 </mat-card>
 ```
+{% endraw %}
 
 Put a little padding around the image by adding the following CSS to `client/src/app/car-edit/car-edit.component.css`.
 
@@ -697,7 +709,7 @@ The following screenshot shows what it looks like to edit a car that you've adde
 
 ## Add Authentication with Okta
 
-Add authentication with Okta is a nifty feature you can add to this application. Knowing who the person is can come in handy if you want to add auditing, or personalize your application (with a ratings feature for example).
+Add authentication with Okta is a nifty feature you can add to this application. Knowing who the person is can come in handy if you want to add auditing, or personalize your application (with a rating feature for example).
 
 ### Okta's Spring Boot Starter
 
@@ -705,9 +717,9 @@ On the server side, you can lock things down with the Okta Spring Boot starter. 
 
 ```xml
 <dependency>
-	<groupId>com.okta.spring</groupId>
-	<artifactId>okta-spring-boot-starter</artifactId>
-	<version>0.2.0</version>
+    <groupId>com.okta.spring</groupId>
+    <artifactId>okta-spring-boot-starter</artifactId>
+    <version>0.2.0</version>
 </dependency>
 ```
 
@@ -746,7 +758,7 @@ org.springframework.boot.autoconfigure.security.oauth2.resource.AuthoritiesExtra
 
 If you'd like to see when this issue is fixed, you can [subscribe to issue #22 on GitHub](https://github.com/okta/okta-spring-boot/issues/22).
 
-To workaround this problem, you can downgrade to the Okta Spring Boot starter to version 0.1.0. Make sure to change it's name from `spring-boot` to `spring-security` too!
+To workaround this problem, you can downgrade the Okta Spring Boot starter to version 0.1.0. Make sure to change its name from `spring-boot` to `spring-security` too!
 
 ```xml
 <dependency>
@@ -819,7 +831,7 @@ Next, initialize and import the `OktaAuthModule`.
 })
 ```
 
-These are the three steps you need to setup an Angular app to use Okta. To make it easy to add a bearer token to HTTP
+These are the three steps you need to set up an Angular app to use Okta. To make it easy to add a bearer token to HTTP
 requests, you can use an [`HttpInterceptor`](https://angular.io/api/common/http/HttpInterceptor).
 
 Create `client/src/app/shared/okta/auth.interceptor.ts` and add the following code to it.
@@ -868,6 +880,7 @@ import { AuthInterceptor } from './shared/okta/auth.interceptor';
 
 Modify `client/src/app/app.component.html` to have login and logout buttons.
 
+{% raw %}
 ```html
 <mat-toolbar color="primary">
   <span>Welcome to {{title}}!</span>
@@ -887,6 +900,7 @@ Modify `client/src/app/app.component.html` to have login and logout buttons.
 
 <router-outlet></router-outlet>
 ```
+{% endraw %}
 
 You might notice there's a span with a `toolbar-spacer` class. To make that work as expected, update `client/src/app/app.component.css` to have the following class.
 
@@ -939,6 +953,7 @@ const appRoutes: Routes = [
 
 Move the HTML for the button from `app.component.html` to `client/src/app/home/home.component.html`.
 
+{% raw %}
 ```html
 <mat-card>
   <mat-card-content>
@@ -951,6 +966,7 @@ Move the HTML for the button from `app.component.html` to `client/src/app/home/h
   </mat-card-content>
 </mat-card>
 ```
+{% endraw %}
 
 Add `oktaAuth` as a dependency in `client/src/app/home/home.component.ts`.
 
@@ -961,8 +977,9 @@ export class HomeComponent {
 }
 ```
 
-Update `client/src/app/app.component.html` so the Logout button redirects back to home when it's clicked.
+Update `client/src/app/app.component.html`, so the Logout button redirects back to home when it's clicked.
 
+{% raw %}
 ```html
 <mat-toolbar color="primary">
   <span>Welcome to {{title}}!</span>
@@ -974,8 +991,9 @@ Update `client/src/app/app.component.html` so the Logout button redirects back t
 
 <router-outlet></router-outlet>
 ```
+{% endraw %}
 
-Another option is to add an `OktaAuthGuard` to the `car-list` route. However, this will make you login before you can even see the app.
+Another option is to add an `OktaAuthGuard` to the `car-list` route. However, this will make you log in before you can even see the app.
 
 ```typescript
 {
@@ -985,11 +1003,11 @@ Another option is to add an `OktaAuthGuard` to the `car-list` route. However, th
 }
 ```
 
-Now you should be able to click on the Login button. If everything is configured correctly, you'll be redirected to Okta to log in.
+Now you should be able to click on the Login button. If you've configured everything correctly, you'll be redirected to Okta to log in.
 
 {% img blog/spring-boot-2-angular-5/okta-login.png alt:"Okta Login" width:"800" %}{: .center-image }
 
-Enter the credentials you used to sign up for an account and you should be redirected back to your app. However, your
+Enter the credentials you used to sign up for an account, and you should be redirected back to your app. However, your
 list of cars won't load because of a CORS error. This happens because Spring's `@CrossOrigin` doesn't work well with 
 Spring Security. 
 
@@ -1032,7 +1050,7 @@ You can see the full source code for the application developed in this tutorial 
 This article shows you how to use Okta's Spring Boot support. If you'd like to learn more about this project, I encourage
 you to [star it on GitHub](https://github.com/okta/okta-spring-boot).
 
-It also uses Okta's Angular SDK, which is something we haven't written about on this blog before. To learn more about this project, see [https://www.npmjs.com/package/@okta/okta-angular] or [find it on GitHub](https://github.com/okta/okta-oidc-js/tree/master/packages/okta-angular).
+It also uses Okta's Angular SDK, which is something we haven't written about on this blog before. To learn more about this project, see [https://www.npmjs.com/package/@okta/okta-angular](https://www.npmjs.com/package/@okta/okta-angular) or [check it out on GitHub](https://github.com/okta/okta-oidc-js/tree/master/packages/okta-angular).
 
 I've written a number of Spring Boot and Angular tutorials in the past, and I've recently updated them for Angular 5.
 
@@ -1042,6 +1060,3 @@ I've written a number of Spring Boot and Angular tutorials in the past, and I've
 * [Build an Angular App with Okta's Sign-In Widget in 15 Minutes](/blog/2017/03/27/angular-okta-sign-in-widget)
 
 If you have any questions, please don't hesitate to leave a comment below, or ask us on our [Okta Developer Forums](https://devforum.okta.com/). Follow us [on Twitter](https://twitter.com/oktadev) if you want to be notified when we publish new blog posts.
-
-
-
