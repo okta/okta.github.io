@@ -27,7 +27,7 @@
         {{ include.post_content }}
     </div>
 
-    {% if post.comments %}
+    {% if page.layout != 'blog_index' && post.comments %}
     <span id="disqus">
          <div id="disqus_thread"></div>
          <script type="text/javascript">
