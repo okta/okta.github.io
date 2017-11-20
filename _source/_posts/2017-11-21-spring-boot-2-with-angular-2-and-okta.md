@@ -877,9 +877,9 @@ Modify `client/src/app/app.component.html` to have login and logout buttons.
   </button>
 </mat-toolbar>
 
-<mat-card>
+<mat-card *ngIf="!oktaAuth.isAuthenticated()">
   <mat-card-content>
-    <button mat-raised-button color="accent" *ngIf="!oktaAuth.isAuthenticated()"
+    <button mat-raised-button color="accent"
             (click)="oktaAuth.loginRedirect()">Login
     </button>
   </mat-card-content>
@@ -918,7 +918,74 @@ Now if you restart your client, you should see a login button.
 
 {% img blog/spring-boot-2-angular-5/login-button.png alt:"Login Button" width:"800" %}{: .center-image }
 
-Click on it and you'll be redirected to Okta to log in.
+Notice that this shows elements from the car-list component. To fix this, you can create a home component and make it the default route.
+
+```bash
+ng g c home
+```
+
+Modify `client/src/app/app.module.ts` to update the routes.
+
+```typescript
+const appRoutes: Routes = [
+  {path: '', redirectTo: '/home', pathMatch: 'full'},
+  {
+    path: 'home',
+    component: HomeComponent
+  },
+  ...
+}
+```
+
+Move the HTML for the button from `app.component.html` to `client/src/app/home/home.component.html`.
+
+```html
+<mat-card>
+  <mat-card-content>
+    <button mat-raised-button color="accent" *ngIf="!oktaAuth.isAuthenticated()"
+            (click)="oktaAuth.loginRedirect()">Login
+    </button>
+    <button mat-raised-button color="accent" *ngIf="oktaAuth.isAuthenticated()"
+            [routerLink]="['/car-list']">Car List
+    </button>
+  </mat-card-content>
+</mat-card>
+```
+
+Add `oktaAuth` as a dependency in `client/src/app/home/home.component.ts`.
+
+```typescript
+export class HomeComponent {
+  constructor(private oktaAuth: OktaAuthService) {
+  }
+}
+```
+
+Update `client/src/app/app.component.html` so the Logout button redirects back to home when it's clicked.
+
+```html
+<mat-toolbar color="primary">
+  <span>Welcome to {{title}}!</span>
+  <span class="toolbar-spacer"></span>
+  <button mat-raised-button color="accent" *ngIf="oktaAuth.isAuthenticated()"
+          (click)="oktaAuth.logout()" [routerLink]="['/home']">Logout
+  </button>
+</mat-toolbar>
+
+<router-outlet></router-outlet>
+```
+
+Another option is to add an `OktaAuthGuard` to the `car-list` route. However, this will make you login before you can even see the app.
+
+```typescript
+{
+  path: 'car-list',
+  component: CarListComponent,
+  canActivate: [OktaAuthGuard]
+}
+```
+
+Now you should be able to click on the Login button. If everything is configured correctly, you'll be redirected to Okta to log in.
 
 {% img blog/spring-boot-2-angular-5/okta-login.png alt:"Okta Login" width:"800" %}{: .center-image }
 
@@ -955,3 +1022,26 @@ public FilterRegistrationBean simpleCorsFilter() {
 Restart your server and celebrate when it all works! 🎉
 
 {% img blog/spring-boot-2-angular-5/success-at-last.png alt:"Success!" width:"800" %}{: .center-image }
+
+## Source Code
+
+You can see the full source code for the application developed in this tutorial on GitHub at [https://github.com/oktadeveloper/okta-spring-boot-2-angular-5-example](https://github.com/oktadeveloper/okta-spring-boot-2-angular-5-example). 
+
+## Learn More about Spring Boot and Angular
+
+This article shows you how to use Okta's Spring Boot support. If you'd like to learn more about this project, I encourage
+you to [star it on GitHub](https://github.com/okta/okta-spring-boot).
+
+It also uses Okta's Angular SDK, which is something we haven't written about on this blog before. To learn more about this project, see [https://www.npmjs.com/package/@okta/okta-angular] or [find it on GitHub](https://github.com/okta/okta-oidc-js/tree/master/packages/okta-angular).
+
+I've written a number of Spring Boot and Angular tutorials in the past, and I've recently updated them for Angular 5.
+
+* [Bootiful Development with Spring Boot and Angular](/blog/2017/04/26/bootiful-development-with-spring-boot-and-angular)
+* [Build a Secure Notes Application with Kotlin, TypeScript, and Okta](/blog/2017/09/19/build-a-secure-notes-application-with-kotlin-typescript-and-okta)
+* [Angular Authentication with OpenID Connect and Okta in 20 Minutes](/blog/2017/04/17/angular-authentication-with-oidc)
+* [Build an Angular App with Okta's Sign-In Widget in 15 Minutes](/blog/2017/03/27/angular-okta-sign-in-widget)
+
+If you have any questions, please don't hesitate to leave a comment below, or ask us on our [Okta Developer Forums](https://devforum.okta.com/). Follow us [on Twitter](https://twitter.com/oktadev) if you want to be notified when we publish new blog posts.
+
+
+
