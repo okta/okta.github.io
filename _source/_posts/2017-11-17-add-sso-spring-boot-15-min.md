@@ -1,6 +1,6 @@
 ---
 layout: blog_post
-title: 'Add Single Sign-On to Your Spring Boot Web Server in 15 Minutes'
+title: 'Add Single Sign-On to Your Spring Boot Web App in 15 Minutes'
 author: silas-b
 tags: [authentication, oauth, sso, spring, java]
 ---
@@ -70,7 +70,9 @@ Tomcat started on port(s): 8080 (http)
 
 Because you requested the Spring Security Starter package when you created the project, the server is protected by default using [Basic Authentication](https://www.httpwatch.com/httpgallery/authentication/).  This can be verified by opening a browser and visiting:
 
-> http://localhost:8080
+```
+http://localhost:8080
+```
 
 A browser dialog should appear asking for your username and password (which you haven’t set up yet):
 
@@ -96,7 +98,9 @@ Click on the green **Add Application** button, and since you're building a web s
 
 In the settings page that follows, there is one default value to change. In the **Login Redirect URIs** field, replace the default value with: 
 
-> http://localhost:8080/login 
+```
+http://localhost:8080/login
+```
 
 {% img blog/add-sso-spring-boot-15-min/app-settings-screen.png alt:"Screen Shot of Okta application settings" width:"600" %}{: .center-image }
 
@@ -140,9 +144,7 @@ okta.oauth2.clientId=0oacqif7do3e0hD0h7
 okta.oauth2.clientSecret=(your **Client Secret**)
 ```
 
-One last bit to do before reaping all that Okta can offer – use it on your server! For this post, the goal is to add single sign-on authentication, so that only users that have registered with you will be able to log into your server and interact with it. The main application class needs to tell the Okta client library to enable single sign-on, and that’s done by adding the following annotation to the main application class at:
-
-> src/main/java//com//example//demo//DemoApplication.java
+One last bit to do before reaping all that Okta can offer – use it on your server! For this post, the goal is to add single sign-on authentication, so that only users that have registered with you will be able to log into your server and interact with it. The main application class needs to tell the Okta client library to enable single sign-on, and that’s done by adding the following annotation to the main application class at: `src/main/java/com/example/demo/DemoApplication.java`
 
 ```java
 @EnableOAuth2Sso
