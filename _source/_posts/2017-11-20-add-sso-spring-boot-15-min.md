@@ -3,6 +3,8 @@ layout: blog_post
 title: 'Add Single Sign-On to Your Spring Boot Web App in 15 Minutes'
 author: silas-b
 tags: [authentication, oauth, sso, spring, java]
+redirect_from:
+    - "/blog/2017/11/17/add-sso-spring-boot-15-min"
 ---
 
 Need a secure web server right now? With Spring Boot and Okta, you can spin up an enterprise-quality REST server with complete user identity and authorization management in less than 20 minutes. Out of the box, Spring Boot and its Starter packages supply a near instant production-ready Tomcat server, and Okta hardens your APIs with a variety of OAuth flows just as fast. This tutorial will walk you through the complete process. The cherry on top will be using Okta to add fully featured client authentication and user administration with just a few lines of code and config! By the end of this tutorial, your secured Spring Boot server will be able to serve web content or function as a backend API, but only to users who have registered with you. Ready? Let's go!
