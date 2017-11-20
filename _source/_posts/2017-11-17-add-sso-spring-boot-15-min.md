@@ -62,7 +62,9 @@ Before getting to the fun stuff, make sure everything is kosher by running the s
 
 Amid all the colorful log statements, the one to look for is likely second to the last:
 
->Tomcat started on port(s): 8080 (http)
+```
+Tomcat started on port(s): 8080 (http)
+```
 
 {% img blog/add-sso-spring-boot-15-min/spring-boot-run.png alt:"Screen Shot of mvn spring-boot:run" width:"600" %}{: .center-image }
 
