@@ -183,14 +183,14 @@ import java.security.Principal;
 @SpringBootApplication
 public class DemoApplication {
 
-   public static void main(String[] args) {
-     SpringApplication.run(DemoApplication.class, args);
-   }
+    public static void main(String[] args) {
+        SpringApplication.run(DemoApplication.class, args);
+    }
 
-@GetMapping("/")
-  public String echoTheUsersEmailAddress(Principal principal) {
-    return "Hey there! Your email address is: "+principal.getName();
-  }
+    @GetMapping("/")
+    public String echoTheUsersEmailAddress(Principal principal) {
+        return "Hey there! Your email address is: " + principal.getName();
+    }
 }
 ```
 
