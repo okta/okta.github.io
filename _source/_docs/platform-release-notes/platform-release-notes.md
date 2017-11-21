@@ -1,7 +1,7 @@
 ---
 layout: docs_page
 title: Okta API Release Notes
-excerpt: Release Note for 2017.47: Bug fix to partial profile update
+excerpt: Release Note for 2017.47 Bug fix to partial profile update
 ---
 
 ## Okta API Release Notes for Release 2017.47

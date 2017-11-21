@@ -1,7 +1,7 @@
 ---
 layout: docs_page
 title: Okta API Release Notes
-excerpt: 2017.46 Release Note: HAL link bug fixed
+excerpt: 2017.46 Release Note HAL link bug fixed
 ---
 
 ## Okta API Release Notes for Release 2017.46
