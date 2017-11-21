@@ -96,7 +96,7 @@ To allow apps to communicate with one another on an iOS device, we need to regis
 
 The easiest way to set this up is to navigate to the **Info** tab under your Application's target. Specify a **URL Scheme** to be your *redirectUri*, excluding the path.
 
-{% img blog/ios-app-secure-auth/url-scheme.png alt:"Update Private-Use URI Scheme" width:"600" %}{: .center-image }
+{% img blog/ios-app-secure-auth/url-scheme.png alt:"Update Private-Use URI Scheme" width:"750" %}{: .center-image }
 
 ## Add User Authentication
 First, we need to handle the inter-app communication between the device's native browser and your application. Open `AppDelegate.swift` and add the following:
