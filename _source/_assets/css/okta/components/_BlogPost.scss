@@ -336,6 +336,10 @@
 		margin-bottom: 0;
 		width: 100%;
 	}
+
+	#disqus {
+		margin-top: get-spacing('medium');
+	}
 }
 
 @include media('<860px') {
