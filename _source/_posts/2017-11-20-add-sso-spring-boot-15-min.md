@@ -3,6 +3,8 @@ layout: blog_post
 title: 'Add Single Sign-On to Your Spring Boot Web App in 15 Minutes'
 author: silas-b
 tags: [authentication, oauth, sso, spring, java]
+redirect_from:
+    - "/blog/2017/11/17/add-sso-spring-boot-15-min"
 ---
 
 Need a secure web server right now? With Spring Boot and Okta, you can spin up an enterprise-quality REST server with complete user identity and authorization management in less than 20 minutes. Out of the box, Spring Boot and its Starter packages supply a near instant production-ready Tomcat server, and Okta hardens your APIs with a variety of OAuth flows just as fast. This tutorial will walk you through the complete process. The cherry on top will be using Okta to add fully featured client authentication and user administration with just a few lines of code and config! By the end of this tutorial, your secured Spring Boot server will be able to serve web content or function as a backend API, but only to users who have registered with you. Ready? Let's go!
@@ -183,14 +185,14 @@ import java.security.Principal;
 @SpringBootApplication
 public class DemoApplication {
 
-   public static void main(String[] args) {
-     SpringApplication.run(DemoApplication.class, args);
-   }
+    public static void main(String[] args) {
+        SpringApplication.run(DemoApplication.class, args);
+    }
 
-@GetMapping("/")
-  public String echoTheUsersEmailAddress(Principal principal) {
-    return "Hey there! Your email address is: "+principal.getName();
-  }
+    @GetMapping("/")
+    public String echoTheUsersEmailAddress(Principal principal) {
+        return "Hey there! Your email address is: " + principal.getName();
+    }
 }
 ```
 
@@ -209,8 +211,9 @@ Once you’ve logged in, you will be redirected back to your site as an authenti
 Now the real fun begins, as you create or onboard new users to your app! Take some time to experiment with different permission levels. Check out the audit logs to see what your users’ activities have been. Add users to groups, and customize and control email and text message communications. 
 
 Interested in learning more? Check out these other Java resources:
-Our [Java Product Documentation](https://developer.okta.com/code/java/)
-[Secure Your SPA with Spring Boot and OAuth](https://developer.okta.com/blog/2017/10/27/secure-spa-spring-boot-oauth)
-[Add Role-Based Access Control to Your App with Spring Security and Thymeleaf](https://developer.okta.com/blog/2017/10/13/okta-groups-spring-security)
+
+* Our [Java Product Documentation](/code/java/)
+* [Secure Your SPA with Spring Boot and OAuth](/blog/2017/10/27/secure-spa-spring-boot-oauth)
+* [Add Role-Based Access Control to Your App with Spring Security and Thymeleaf](/blog/2017/10/13/okta-groups-spring-security)
 
 And if you have questions about this or any of our other content (or just want to chat!) hit us up on Twitter [@OktaDev](https://twitter.com/OktaDev). We’d love to hear from you!
