@@ -246,6 +246,7 @@ url           | The URL of the login page for this app                | String  
 usernameField | CSS selector for the username field in the login form | String   | FALSE    | FALSE  |
 passwordField | CSS selector for the password field in the login form | String   | FALSE    | FALSE  |
 buttonField   | CSS selector for the login button in the login form   | String   | FALSE    | FALSE  |
+loginUrlRegex     | A regular expression that further restricts `url` to the specified regular expression | String | FALSE | FALSE |
 
 ##### Request Example
 {:.api .api-request .api-request-example}
@@ -264,7 +265,8 @@ curl -v -X POST \
       "buttonField": "btn-login",
       "passwordField": "txtbox-password",
       "usernameField": "txtbox-username",
-      "url": "https://example.com/login.html"
+      "url": "https://example.com/login.html",
+      "loginUrlRegex": "REGEX_EXPRESSION"
     }
   }
 }' "https://{yourOktaDomain}.com/api/v1/apps"
@@ -309,7 +311,8 @@ curl -v -X POST \
       "buttonField": "btn-login",
       "passwordField": "txtbox-password",
       "usernameField": "txtbox-username",
-      "url": "https://example.com/login.html"
+      "url": "https://example.com/login.html",
+      "loginUrlRegex": "REGEX_EXPRESSION"
     }
   },
   "_links": {
@@ -346,12 +349,13 @@ Adds a SWA application that requires a browser plugin and supports 3 CSS selecto
 
 Parameter          | Description                                           | DataType | Nullable | Unique | Validation
 ------------------ | ----------------------------------------------------- | -------- | -------- | ------ | ----------------------------------------
-url                | The URL of the login page for this app                | String   | FALSE    | FALSE  | [URL](http://tools.ietf.org/html/rfc3986)
-usernameField      | CSS selector for the username field in the login form | String   | FALSE    | FALSE  |
-passwordField      | CSS selector for the password field in the login form | String   | FALSE    | FALSE  |
-buttonField        | CSS selector for the login button in the login form   | String   | FALSE    | FALSE  |
+targetURL                | The URL of the login page for this app                | String   | FALSE    | FALSE  | [URL](http://tools.ietf.org/html/rfc3986)
+usernameSelector      | CSS selector for the username field in the login form | String   | FALSE    | FALSE  |
+passwordSelector      | CSS selector for the password field in the login form | String   | FALSE    | FALSE  |
+buttonSelector        | CSS selector for the login button in the login form   | String   | FALSE    | FALSE  |
 extraFieldSelector | CSS selector for the extra field in the form          | String   | FALSE    | FALSE  |
 extraFieldValue    | Value for extra field form field                      | String   | FALSE    | FALSE  |
+loginUrlRegex     | A regular expression that further restricts `targetURL` to the specified regular expression | String | FALSE | FALSE |
 
 ##### Request Example
 {:.api .api-request .api-request-example}
@@ -367,12 +371,13 @@ curl -v -X POST \
   "signOnMode": "BROWSER_PLUGIN",
   "settings": {
     "app": {
-      "buttonField": "#btn-login",
-      "passwordField": "#txtbox-password",
-      "usernameField": "#txtbox-username",
-      "url": "https://example.com/login.html",
+      "buttonSelector": "#btn-login",
+      "passwordSelector": "#txtbox-password",
+      "userNameSelector": "#txtbox-username",
+      "targetUrl": "https://example.com/login.html",
       "extraFieldSelector": ".login",
-      "extraFieldValue": "SOMEVALUE"
+      "extraFieldValue": "SOMEVALUE",
+      "loginUrlRegex": "REGEX_EXPRESSION"
     }
   }
 }' "https://{yourOktaDomain}.com/api/v1/apps"
@@ -419,7 +424,8 @@ curl -v -X POST \
       "usernameField": "#txtbox-username",
       "url": "https://example.com/login.html",
       "extraFieldSelector": ".login",
-      "extraFieldValue": "SOMEVALUE"
+      "extraFieldValue": "SOMEVALUE",
+      "loginUrlRegex": "REGEX_EXPRESSION"
     }
   },
   "_links": {
@@ -1076,9 +1082,9 @@ curl -v -X POST \
           "implicit",
           "authorization_code"
         ],
-        "application_type": "native"
+        "application_type": "native",
         "tos_uri":"https://example.com/client/tos",
-        "policy_uri":"https://example.com/client/policy",
+        "policy_uri":"https://example.com/client/policy"
       }
     }
     }' "https://{yourOktaDomain}.com/api/v1/apps"
@@ -4689,10 +4695,10 @@ Specifies credentials and scheme for the application's `signOnMode`.
 | ---------------- | -------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------- | -------- | --------------- | --------- | --------- | ---------- |
 | scheme           | Determines how credentials are managed for the `signOnMode`                                                    | [Authentication Scheme](#authentication-schemes)          | TRUE     |                 |           |           |            |
 | userNameTemplate | Template used to generate a user’s username when the application is assigned via a group or directly to a user | [UserName Template Object](#username-template-object)     | TRUE     | *Okta UserName* |           |           |            |
-| signing          | Signing credential for the `signOnMode`                                                                        | [Signing Credential Object](#signing-credential-object)   | False    |                 |           |           |            |
+| signing          | Signing credential for the `signOnMode`                                                                        | [Signing Credential Object](#signing-credential-object)   | FALSE    |                 |           |           |            |
 | userName         | Shared username for app                                                                                        | String                                                    | TRUE     |                 | 1         | 100       |            |
 | password         | Shared password for app                                                                                        | [Password Object](#password-object)                       | TRUE     |                 |           |           |            |
-| oauthClient      | Credential for OAuth 2.0 client                                                                                | [OAuth Credential Object](#oauth-credential-object)   | False    |                 |           |           |            |
+| oauthClient      | Credential for OAuth 2.0 client                                                                                | [OAuth Credential Object](#oauth-credential-object)   | FALSE    |                 |           |           |            |
 |------------------+----------------------------------------------------------------------------------------------------------------+-----------------------------------------------------------+----------+-----------------+-----------+-----------+------------|
 
 ~~~json

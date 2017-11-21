@@ -2631,7 +2631,7 @@ curl -v -X POST \
 A consent represents a user&#8217;s explicit permission to allow an application to access resources protected by scopes. Consent grants are different from tokens because a consent can outlast a token, and there can be multiple tokens with varying sets of scopes derived from a single consent. When an application comes back and needs to get a new access token, it may not need to prompt the user for consent if they have already consented to the specified scopes. 
 Consent grants remain valid until the user manually revokes them, or until the user, application, authorization server or scope is deactivated or deleted.
 
->Hint: For all grant operations, you can substitute `me` for the `userId` to specify the user who already has a session in this org.
+> Hint: For all grant operations, you can use `me` instead of the `userId` in an endpoint that contains `/users`, in an active session with no SSWS token (API token). For example: `https://{yourOktaDomain}.com/api/v1/users/me/grants` returns all the grants for the active session user. 
 
 ### List Grants
 {:.api .api-operation}
@@ -2795,6 +2795,85 @@ curl -v -X GET \
 }
 ~~~
 
+### List Grants for a User-Client Combination
+{:.api .api-operation}
+
+{% api_lifecycle beta %}
+
+{% api_operation get /api/v1/users/*:userId*/clients/*:clientId*/grants %}
+
+Lists all grants for a specified user and client
+
+#### Request Parameters
+{:.api .api-request .api-request-params}
+
+| Parameter | Description                                                                                         | Parameter Type | DataType | Required |
+|:----------|:----------------------------------------------------------------------------------------------|:---------------|:---------|:---------|
+| userId    | ID of the user whose grants you are listing for the specified `clientId`  | URL            | String   | TRUE     |
+| clientId  | ID of the client whose grants you are listing for the specified `userId`   | URL            | String   | TRUE      |
+
+#### Request Example
+{:.api .api-request .api-request-example}
+
+~~~sh
+curl -v -X GET \
+-H "Accept: application/json" \
+-H "Content-Type: application/json" \
+-H "Authorization: SSWS ${api_token}" \
+"https://{yourOktaDomain}.com/api/v1/users/00ucmukel4KHsPARU0h7/clients/0oabskvc6442nkvQO0h7/grants"
+~~~
+
+#### Response Example
+{:.api .api-response .api-response-example}
+
+~~~sh
+[
+    {
+        "id": "oag3j3j33ILN7OFqP0h6",
+        "status": "ACTIVE",
+        "created": "2017-11-03T03:34:17.000Z",
+        "lastUpdated": "2017-11-03T03:34:17.000Z",
+        "issuerId": "ausain6z9zIedDCxB0h7",
+        "clientId": "0oabskvc6442nkvQO0h7",
+        "userId": "00u5t60iloOHN9pBi0h7",
+        "scopeId": "scpCmCCV1DpxVkCaye2X",
+        "_links": {
+            "app": {
+                "href": "https://{yourOktaDomain}.com/api/v1/apps/0oabskvc6442nkvQO0h7",
+                "title": "Test App for Groups Claim"
+            },
+            "scope": {
+                "href": "https://{yourOktaDomain}.com/api/v1/authorizationServers/ausain6z9zIedDCxB0h7/scopes/scpCmCCV1DpxVkCaye2X",
+                "title": "Your phone"
+            },
+            "self": {
+                "href": "https://{yourOktaDomain}.com/api/v1/users/00u5t60iloOHN9pBi0h7/grants/oag3j3j33ILN7OFqP0h6"
+            },
+            "revoke": {
+                "href": "https://{yourOktaDomain}.com/api/v1/users/00u5t60iloOHN9pBi0h7/grants/oag3j3j33ILN7OFqP0h6",
+                "hints": {
+                    "allow": [
+                        "DELETE"
+                    ]
+                }
+            },
+            "client": {
+                "href": "https://{yourOktaDomain}.com/oauth2/v1/clients/0oabskvc6442nkvQO0h7",
+                "title": "Test App for Groups Claim"
+            },
+            "user": {
+                "href": "https://{yourOktaDomain}.com/api/v1/users/00u5t60iloOHN9pBi0h7",
+                "title": "Saml Jackson"
+            },
+            "issuer": {
+                "href": "https://{yourOktaDomain}.com/api/v1/authorizationServers/ausain6z9zIedDCxB0h7",
+                "title": "Example Authorization Server"
+            }
+        }
+    }
+]
+~~~
+
 ### Revoke All Grants for a User
 {:.api .api-operation}
 
@@ -2864,6 +2943,42 @@ curl -v -X DELETE \
 HTTP/1.1 204 No Content
 ~~~
 
+
+### Revoke Grants for User and Client
+{:.api .api-operation}
+
+{% api_lifecycle beta %}
+
+{% api_operation delete /api/v1/users/*:userId*/clients/*:clientId*/grants %}
+
+Revokes all grants for the specified user and client
+     
+#### Request Parameters
+{:.api .api-request .api-request-params}
+
+| Parameter | Description                                                            | Parameter Type | DataType | Required |
+|:----------|:-----------------------------------------------------------------------|:---------------|:---------|:---------|
+| userId    | ID of the user whose grants are being revoked for the specified client | URL            | String   | TRUE     |
+| clientId  | ID of the client who was granted consent by the specified user         | URL            | String   | TRUE     |
+
+#### Request Example
+{:.api .api-request .api-request-example}
+
+~~~sh
+curl -v -X DELETE \
+-H "Accept: application/json" \
+-H "Content-Type: application/json" \
+-H "Authorization: SSWS ${api_token}" \
+"https://{yourOktaDomain}.com/api/v1/users/00ucmukel4KHsPARU0h7/clients/0oabskvc6442nkvQO0h7/grants"
+~~~  
+
+#### Response Example
+{:.api .api-response .api-response-example}
+
+~~~sh
+HTTP/1.1 204 No Content
+~~~
+
 ## User-Client Grant Reference Operations
 
 {% api_lifecycle beta %}
@@ -2914,41 +3029,6 @@ curl -v -X GET \
         }
     }
 ]
-~~~
-
-### Revoke Grants for User and Client
-{:.api .api-operation}
-
-{% api_lifecycle beta %}
-
-{% api_operation delete /api/v1/users/*:userId*/clients/*:clientId*/grants %}
-
-Revokes all grants for the specified user and client
-     
-#### Request Parameters
-{:.api .api-request .api-request-params}
-
-| Parameter | Description                                                            | Parameter Type | DataType | Required |
-|:----------|:-----------------------------------------------------------------------|:---------------|:---------|:---------|
-| userId    | ID of the user whose grants are being revoked for the specified client | URL            | String   | TRUE     |
-| clientId  | ID of the client who was granted consent by the specified user         | URL            | String   | TRUE     |
-
-#### Request Example
-{:.api .api-request .api-request-example}
-
-~~~sh
-curl -v -X DELETE \
--H "Accept: application/json" \
--H "Content-Type: application/json" \
--H "Authorization: SSWS ${api_token}" \
-"https://{yourOktaDomain}.com/api/v1/users/00ucmukel4KHsPARU0h7/clients/0oabskvc6442nkvQO0h7/grants"
-~~~  
-
-#### Response Example
-{:.api .api-response .api-response-example}
-
-~~~sh
-HTTP/1.1 204 No Content
 ~~~
 
 ## User Model

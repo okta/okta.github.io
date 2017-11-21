@@ -20,7 +20,7 @@ class BlogPage extends BasePage {
 
   isPaginationVisible() {
     this.waitForPresence(this.$pagination);
-    return this.$pagination.isDisplayed();
+    return this.$pagination.isPresent();
   }
 
   clickNext() {
@@ -42,6 +42,7 @@ class BlogPage extends BasePage {
   clickReadMoreOnPost(post) {
     const blogPost = this.$$blogPost.get(post);
     const readMoreLink = blogPost.element(by.linkText('Read more'));
+    this.waitForPresence(readMoreLink);
     return readMoreLink.click();
   }
 

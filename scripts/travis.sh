@@ -1,25 +1,25 @@
 #!/bin/bash
-set -ex
+set -e
 
 source "${0%/*}/helpers.sh"
 
-if [ $TRAVIS_EVENT_TYPE != 'push' ]; then
+if [[ $TRAVIS_EVENT_TYPE != 'push' ]]; then
   export CHROME_HEADLESS=true
 fi
 
 # 2. Run the npm install to pull in test dependencies
-npm install
+fold npm_install npm install
 
-# 3. build the site
-npm run build-prod
-
-# 4. Run tests
-npm test
+# 3. Build site and Run tests
+fold npm_test npm test
 
 export GENERATED_SITE_LOCATION="dist"
 
+# 4. copy assets and previous history into dist
+fold npm_postbuild_prod npm run postbuild-prod
+
 # 5. Run Lint checker
-npm run post-build-lint
+fold npm_lint npm run post-build-lint
 
 if ! url_consistency_check || ! duplicate_slug_in_url || ! check_for_localhost_links || ! check_index_links; then
   echo "FAILED LINT CHECK!"
@@ -27,10 +27,10 @@ if ! url_consistency_check || ! duplicate_slug_in_url || ! check_for_localhost_l
 fi
 
 # 6. Run find-missing-slashes to find links that will redirect to okta.github.io
-npm run find-missing-slashes
+fold npm_find_missing_slashes npm run find-missing-slashes
 
 # 7. Run htmlproofer to validate links, scripts, and images
-bundle exec ./scripts/htmlproofer.rb
+fold bundle_exec_htmlproofer bundle exec ./scripts/htmlproofer.rb
 
 # 8. Ensure that page fragments for quickstarts have not appeared in the sitemap
 
