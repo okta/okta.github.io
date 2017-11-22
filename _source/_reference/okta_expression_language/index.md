@@ -287,7 +287,7 @@ firstName | String
 lastName | String
 middleInitial | String
 fullName | String
-honoroficPrefix | String
+honorificPrefix | String
 email1 | String
 email2 | String
 additionalEmail | Boolean
