@@ -11,6 +11,7 @@ class TableOfContentsPage extends BasePage {
     this.$level1Item = $('.TableOfContents-item.is-level1');
     this.$$level2Item = $$('.TableOfContents-item.is-level2');
     this.$$level3Item = $$('.TableOfContents-item.is-level3');
+    this.$$level4Item = $$('.TableOfContents-item.is-level4');
     this.$topOfPage = element(by.linkText('Top of Page'));
     this.setPageLoad(this.$tableOfContents);
   }
@@ -25,6 +26,20 @@ class TableOfContentsPage extends BasePage {
   
   level3ItemsVisible(expectedTextArray) {
     return this.$$level3Item.filter(element => {
+      return element.getText().then(text => {
+        for (let i = 0; i < expectedTextArray.length; i++) {
+          if (text == expectedTextArray[i] && element.isDisplayed()) {
+            return true;
+          }
+        }
+      })
+    }).then(elementList => {
+      return elementList.length == expectedTextArray.length;
+    })
+  }
+
+  level4ItemsVisible(expectedTextArray) {
+    return this.$$level4Item.filter(element => {
       return element.getText().then(text => {
         for (let i = 0; i < expectedTextArray.length; i++) {
           if (text == expectedTextArray[i] && element.isDisplayed()) {
