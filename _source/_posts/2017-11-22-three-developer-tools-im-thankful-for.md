@@ -86,13 +86,11 @@ Vim (and its community) are awesome. Thank you
 [Bram](http://www.moolenaar.net/) for creating it all those years ago.
 
 Finally: if you want to support Vim and show your thanks as well, please
-consider donating to become an [official Vim
-sponsor](https://vim.sourceforge.io/sponsor/index.php). Vim has been collecting
-money for a non-profit that [helps children in
-Uganda](http://iccf-holland.org/).
+consider donating to become an [official Vim sponsor](https://vim.sourceforge.io/sponsor/index.php). Vim has been collecting
+money for a non-profit that [helps children in Uganda](http://iccf-holland.org/).
 
-Plus, if you donate $100 or more you get your name on the Vim donors [hall of
-honour](https://vim.sourceforge.io/sponsor/hall_of_honour.php) forever (where
+Plus, if you donate $100 or more you get your name on the Vim donors
+[hall of honour](https://vim.sourceforge.io/sponsor/hall_of_honour.php) forever (where
 you can join me!).
 
 
@@ -152,8 +150,11 @@ project which bootstraps it.
 Most developers are used to using Bash as their standard shell, but zsh
 provides some incredibly nice features (especially when paired with oh-my-zsh):
 
-Easy to install plugins A massive community Fast, incremental search Incredible
-customization SPEED!!#@~
+- Easy to install plugins
+- A massive community
+- Fast, incremental search
+- Incredible customization
+- SPEED!
 
 I have a ton of customization built into my shell, which allows me to do things
 like easily search for previously entered commands, quickly launch programs,
@@ -169,12 +170,10 @@ years, that adds up to roughly ~15.21 days of saved human time!
 
 That’s pretty incredible!
 
-If you’d like to check out my zsh dotfiles, you can do so
-[here](https://github.com/rdegges/dot-zsh).
+If you’d like to check out my zsh dotfiles, you can do so [here](https://github.com/rdegges/dot-zsh).
 
-Thank you very much Paul for creating zsh, and
-[Robby](https://twitter.com/robbyrussell) for creating oh-my-zsh. You guys are
-amazing.
+Thank you very much Paul for creating zsh, and [Robby](https://twitter.com/robbyrussell)
+for creating oh-my-zsh. You guys are amazing.
 
 
 ## Happy Thanksgiving
