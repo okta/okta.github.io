@@ -76,7 +76,7 @@ myself:
 - [html5.vim](https://github.com/othree/html5.vim)
 - [ultisnips](https://github.com/SirVer/ultisnips)
 - [vim-snippets](https://github.com/honza/vim-snippets)
-- [vim-coloresque](gko/vim-coloresque)
+- [vim-coloresque](https://github.com/gko/vim-coloresque)
 - [vim-surround](https://github.com/tpope/vim-surround)
 
 If you want to check out my Vim dotfiles, you can do so
