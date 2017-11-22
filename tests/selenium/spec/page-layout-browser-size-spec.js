@@ -16,7 +16,7 @@ describe('page layout and browser size spec', () => {
 
     // Verify that support link dropdown is visible
     expect(navPage.isSupportMenuDisplayed()).toBe(false);
-    navPage.clickSupportLink();
+    navPage.hoverSupportLink();
     expect(navPage.isSupportMenuDisplayed()).toBe(true);
   });
 
