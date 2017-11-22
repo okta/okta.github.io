@@ -33,9 +33,7 @@ class TableOfContentsPage extends BasePage {
           }
         }
       })
-    }).then(elementList => {
-      return elementList.length == expectedTextArray.length;
-    })
+    }).then(elementList => (elementList.length == expectedTextArray.length));
   }
 
   level4ItemsVisible(expectedTextArray) {
@@ -47,9 +45,7 @@ class TableOfContentsPage extends BasePage {
           }
         }
       })
-    }).then(elementList => {
-      return elementList.length == expectedTextArray.length;
-    })
+    }).then(elementList => (elementList.length == expectedTextArray.length));
   }
   
   clickByLinkText(linkText) {
