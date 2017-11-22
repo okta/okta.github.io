@@ -36,22 +36,22 @@ they’re all essential tools in my development arsenal, and I want to take a
 minute to share just why I’m so thankful for them.
 
 
-## vim
+## Vim
 
 {% img blog/thankful/vim.png alt:"Vim" width:"600" %}{: .center-image }
 
 If you’ve ever met me in person (or seen me online), you probably know that I’m
-pretty old school. I learned how to use [vim](https://vim.sourceforge.io/)
+pretty old school. I learned how to use [Vim](https://vim.sourceforge.io/)
 sometime around the year 2000, and it just stuck. Over the years I’ve tried
-using new modern IDEs, but they never stick. vim has always just clicked with
+using new modern IDEs, but they never stick. Vim has always just clicked with
 me. It matches my style: simple and basic, but powerful >:)
 
 I’m a quick typist, and I prefer to keep my hands on the keyboard at all times.
-vim lets me navigate around quickly, performing even complicated tasks without
-moving my hands. Once you get used to vim motion keys, your editing powers
+Vim lets me navigate around quickly, performing even complicated tasks without
+moving my hands. Once you get used to Vim motion keys, your editing powers
 become magical.
 
-In addition to this, vim has an incredible community of developers who build
+In addition to this, Vim has an incredible community of developers who build
 insanely useful plugins that add features to the editor. I use quite a few
 myself:
 
@@ -79,19 +79,19 @@ myself:
 - [vim-coloresque](gko/vim-coloresque)
 - [vim-surround](https://github.com/tpope/vim-surround)
 
-If you want to check out my vim dotfiles, you can do so
+If you want to check out my Vim dotfiles, you can do so
 [here](https://github.com/rdegges/dot-vim).
 
-vim (and its community) are awesome. Thank you
+Vim (and its community) are awesome. Thank you
 [Bram](http://www.moolenaar.net/) for creating it all those years ago.
 
-Finally: if you want to support vim and show your thanks as well, please
-consider donating to become an [official vim
-sponsor](https://vim.sourceforge.io/sponsor/index.php). vim has been collecting
+Finally: if you want to support Vim and show your thanks as well, please
+consider donating to become an [official Vim
+sponsor](https://vim.sourceforge.io/sponsor/index.php). Vim has been collecting
 money for a non-profit that [helps children in
 Uganda](http://iccf-holland.org/).
 
-Plus, if you donate $100 or more you get your name on the vim donors [hall of
+Plus, if you donate $100 or more you get your name on the Vim donors [hall of
 honour](https://vim.sourceforge.io/sponsor/hall_of_honour.php) forever (where
 you can join me!).
 
@@ -129,9 +129,9 @@ like a horizontal split line). This makes creating complex window arrangements
 easy and intuitive.
 
 Finally, I also customized tmux so that I can use the binding key (ctrl-a) +
-any vim movement key to move seamlessly between windows.
+any Vim movement key to move seamlessly between windows.
 
-When combined with vim, tmux is a beast. It makes editing and working on large,
+When combined with Vim, tmux is a beast. It makes editing and working on large,
 complicated projects extremely painless and quick.
 
 If you’d like to check out my tmux dotfiles, you can do so
