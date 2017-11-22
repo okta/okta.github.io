@@ -25,6 +25,13 @@ describe('table of contents navigation spec', () => {
     tocPage.clickByLinkText('Last Section');
     tocPage.waitForLinkToBeDisplayed('Sub Section 1');
     expect(tocPage.level3ItemsVisible(expectedLevel3Items)).toBe(true);
+
+    const expectedLevel4Items = ['Image Section', 'Link Section'];
+    tocPage.clickByLinkText('Sub Section 1');
+    tocPage.waitForLinkToBeDisplayed('Image Section');
+    tocPage.waitForLinkToBeDisplayed('Link Section');
+    expect(tocPage.level4ItemsVisible(expectedLevel4Items)).toBe(true);
+
     expect(tocPage.isTopOfPageLinkDisplayed()).toBe(true);
     
     tocPage.gotoTopOfPage();

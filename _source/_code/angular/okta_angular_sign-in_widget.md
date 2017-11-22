@@ -56,12 +56,14 @@ Some routes require authentication in order to render. Defining these protected 
 
 - `/`: A default page to handle basic control of the app.
 - `/protected`: A protected route that can only be accessed by an authenticated user.
+- `/login`: A custom login page to handle signing users into your app.
 
 ### `/`
 
 First, update `src/app/app.component.html` to provide the Login logic:
 ```html
 <!-- src/app/app.component.html -->
+
 <link
   href="https://ok1static.oktacdn.com/assets/js/sdk/okta-signin-widget/{{ site.versions.okta_signin_widget }}/css/okta-sign-in.min.css"
   type="text/css"
@@ -72,67 +74,50 @@ First, update `src/app/app.component.html` to provide the Login logic:
   rel="stylesheet"/>
 
 <button routerLink="/"> Home </button>
-<button *ngIf="!signIn.isAuthenticated()" (click)="login()"> Login </button>
+<button *ngIf="!signIn.isAuthenticated()" routerLink="/login"> Login </button>
 <button *ngIf="signIn.isAuthenticated()" (click)="logout()"> Logout </button>
 <button routerLink="/protected"> Protected </button>
-
-<!-- Container to inject the Sign-In Widget -->
-<div id="okta-signin-container"></div>
 
 <router-outlet></router-outlet>
 ```
 
-Then, update `src/app/app.component.ts` to handle the `login()` and `logout()` calls:
+Then, update `src/app/app.component.ts` to handle the `logout()` call:
 
 ```typescript
 // src/app/app.component.ts
 
 import { Component } from '@angular/core';
-import { OktaAuthService } from '@okta/okta-angular';
+import { Router } from '@angular/router';
 
-import OktaSignIn from '@okta/okta-signin-widget/dist/js/okta-sign-in.min.js';
+import { OktaAuthService } from '@okta/okta-angular';
 
 @Component({
   selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+  templateUrl: './app.component.html'
 })
 export class AppComponent {
   signIn;
-  widget;
+  router;
 
-  constructor(public oktaAuth: OktaAuthService) {
+  constructor(public oktaAuth: OktaAuthService, router: Router) {
     this.signIn = oktaAuth;
-    this.widget = new OktaSignIn({
-      baseUrl: 'https://{yourOktaDomain}.com'
-    });
-  }
-
-  login(){
-    this.widget.renderEl(
-      { el: '#okta-signin-container'}, res => {
-        if (res.status === 'SUCCESS') {
-          this.signIn.loginRedirect({ sessionToken: res.session.token });
-          // Hide the widget
-          this.widget.hide();
-        }
-      }
-    );
+    this.router = router;
   }
 
   async logout() {
     // Terminates the session with Okta and removes current tokens.
     await this.signIn.logout();
-    this.widget.remove();
+    this.router.navigateByUrl('/');
   }
 }
 ```
 
-`/protected`
+### `/protected`
 This route will only be visible to users with a valid `accessToken` or `idToken`.
 
 Create a new component `src/app/protected.component.ts`:
 
+{% raw %}
 ```typescript
 // src/app/protected.component.ts
 
@@ -146,15 +131,77 @@ export class ProtectedComponent {
   message;
 
   constructor() {
-    this.message = 'Protected endpont!';
+    this.message = 'Protected endpoint!';
+  }
+}
+```
+{% endraw %}
+
+When a user attempts to access a route that is protected by `OktaAuthGuard`, it first checks to see if the user has been authenticated. If `isAuthenticated()` returns `false`, start the login flow.
+
+### `/login`
+This route hosts the Sign-In Widget and redirects if the user is already logged in. If the user is coming from a protected page, they'll be redirected back to the page upon login.
+
+Create a new component `src/app/login.component.ts`:
+
+```typescript
+// src/app/login.component.ts
+
+import { Component, OnInit } from '@angular/core';
+import { Router, NavigationStart} from '@angular/router';
+
+import { OktaAuthService } from '@okta/okta-angular';
+import * as OktaSignIn from '@okta/okta-signin-widget/dist/js/okta-sign-in.min.js';
+
+@Component({
+  selector: 'app-secure',
+  template: `
+    <!-- Container to inject the Sign-In Widget -->
+    <div id="okta-signin-container"></div>
+  `
+})
+export class LoginComponent {
+  signIn;
+
+  widget = new OktaSignIn({
+    baseUrl: 'https://{yourOktaDomain}.com'
+  });
+
+  constructor(oktaAuth: OktaAuthService, router: Router) {
+    this.signIn = oktaAuth;
+
+    // Show the widget when prompted, otherwise remove it from the DOM.
+    router.events.forEach(event => {
+      if (event instanceof NavigationStart) {
+        switch(event.url) {
+          case '/login':
+            break;
+          case '/protected':
+            break;
+          default:
+            this.widget.remove();
+            break;
+        }
+      }
+    });
+  }
+
+  ngOnInit() {
+    this.widget.renderEl(
+      { el: '#okta-signin-container'}, res => {
+        if (res.status === 'SUCCESS') {
+          this.signIn.loginRedirect({ sessionToken: res.session.token });
+          // Hide the widget
+          this.widget.hide();
+        }
+      }
+    );
   }
 }
 ```
 
-When a user attempts to access a route that is protected by `OktaAuthGuard`, it first checks to see if the user has been authenticated. If `isAuthenticated()` returns `false`, start the login flow.
-
 ### Connect the Routes
-The `OktaAuthModule` handles different authentication flows for your application, so it requires your OpenID Connect configuration. By default `okta/okta-angular` redirects to the Okta Sign-In Page when the user is not authenticated. To override this behavior, see [using a custom login-page](https://github.com/okta/okta-oidc-js/tree/master/packages/okta-angular#using-a-custom-login-page).
+The `OktaAuthModule` handles different authentication flows for your application, so it requires your OpenID Connect configuration. By default `okta/okta-angular` redirects to the Okta Sign-In Page when the user is not authenticated. We override this behavior by passing an `onAuthRequired` function to the `OktaAuthGuard`. For more information, see [using a custom login-page](https://github.com/okta/okta-oidc-js/tree/master/packages/okta-angular#using-a-custom-login-page).
 
 Update `src/app/app.module.ts` to include your project components and routes. Your completed file should look similar to:
 
@@ -173,11 +220,17 @@ import {
 
 import { AppComponent } from './app.component';
 import { ProtectedComponent } from './protected.component';
+import { LoginComponent } from './login.component';
 
 const config = {
   issuer: 'https://{yourOktaDomain}.com/oauth2/default',
   redirectUri: 'http://localhost:4200/implicit/callback',
   clientId: '{clientId}'
+}
+
+export function onAuthRequired({ oktaAuth, router }) {
+  // Redirect the user to your custom login page
+  router.navigate(['/login']);
 }
 
 const appRoutes: Routes = [
@@ -186,14 +239,22 @@ const appRoutes: Routes = [
     component: OktaCallbackComponent
   },
   {
+    path: 'login',
+    component: LoginComponent
+  },
+  {
     path: 'protected',
     component: ProtectedComponent,
-    canActivate: [ OktaAuthGuard ]
+    canActivate: [ OktaAuthGuard ],
+    data: {
+      onAuthRequired
+    }
   }
 ]
 @NgModule({
   declarations: [
     AppComponent,
+    LoginComponent,
     ProtectedComponent
   ],
   imports: [
@@ -201,7 +262,6 @@ const appRoutes: Routes = [
     RouterModule.forRoot(appRoutes),    
     OktaAuthModule.initAuth(config)
   ],
-  providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
