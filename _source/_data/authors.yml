@@ -152,3 +152,17 @@ jf:
   twitter: https://twitter.com/jf
   github: https://github.com/jpf
   web: http://joel.franusic.com
+
+silas-b:
+  full_name: Silas Brazil
+  display_name: Silas Brazil
+  avatar: avatar-silas-b.jpg
+  github: https://github.com/silas-b
+  web: https://www.linkedin.com/in/silas-brazil
+
+jmelberg:
+  full_name: Jordan Melberg
+  display_name: Jordan Melberg
+  avatar: avatar-jmelberg.jpg
+  email: jordan.melberg@okta.com
+  github: https://github.com/jmelberg

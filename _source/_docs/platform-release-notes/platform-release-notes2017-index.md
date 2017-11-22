@@ -8,6 +8,7 @@ excerpt: List of changes to the Okta API
 
 * [Platform Release Notes for Current Preview Release](platform-release-notes.html)
 * [Platform Release Notes for 2016](platform-release-notes2016-index.html)
+* [Platform Release Notes for Release 2017.46](platform-release-notes2017-46.html) 
 * [Platform Release Notes for Release 2017.45](platform-release-notes2017-45.html) 
 * [Platform Release Notes for Release 2017.44](platform-release-notes2017-44.html) 
 * [Platform Release Notes for Release 2017.43](platform-release-notes2017-43.html) 
