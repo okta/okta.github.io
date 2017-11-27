@@ -417,5 +417,5 @@ you implement these authentication concepts in your applications.
 #### References
 1. [Common keytool commands](https://www.sslshopper.com/article-most-common-java-keytool-keystore-commands.html)
 2. [Common openssl commands](https://www.sslshopper.com/article-most-common-openssl-commands.html)
-3. [Dropwizard https configuration manual](http://www.dropwizard.io/0.7.0/docs/manual/configuration.html#man-configuration-https)
+3. [Dropwizard https configuration manual](http://www.dropwizard.io/0.7.1/docs/manual/configuration.html#man-configuration-https)
 4. [Jersey client documentation](https://jersey.java.net/documentation/latest/client.html#d0e5128)
