@@ -16,7 +16,7 @@ Each year around Thanksgiving time I always try to sit back, relax, and think
 about how thankful I am for everything I have. I have a cool job (thanks
 [@oktadev](https://twitter.com/oktadev)!), an awesome wife
 ([@samanthadegges](https://twitter.com/samanthadegges)), a great family,
-incredibly friends, and some particularly awesome co-workers (shout out!):
+incredible friends, and some particularly awesome co-workers (shout out!):
 
 - [@nbarbettini](https://twitter.com/nbarbettini)
 - [@mraible](https://twitter.com/mraible)
