@@ -139,7 +139,7 @@ public void onSuccess() {
 ## Handle the Login State
 In native applications, it is common for users to have a long-lived session. It is important for the app to manage the user's session by refreshing tokens when they expire, using the `refresh_token` or re-prompting the user to login. See [refreshing a token manually](https://github.com/okta/okta-sdk-appauth-android#refresh-a-token-manually) for more information.
 
-When starting up the application, check for the existance of an `access_token` to see if the user has an existing session:
+When starting up the application, check for the existence of an `access_token` to see if the user has an existing session:
 
 ```java
 // LoginActivity.java

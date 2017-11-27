@@ -143,7 +143,7 @@ OktaAuth
   }
 ```
 
-When starting up the application, check for the existance of an `access_token` to see if the user has an existing session:
+When starting up the application, check for the existence of an `access_token` to see if the user has an existing session:
 
 ```swift
 if let currentToken = OktaAuth.tokens.get(forKey: "accessToken") {
