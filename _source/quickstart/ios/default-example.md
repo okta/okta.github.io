@@ -143,16 +143,6 @@ OktaAuth
   }
 ```
 
-When starting up the application, check for the existence of an `access_token` to see if the user has an existing session:
-
-```swift
-if let currentToken = OktaAuth.tokens.get(forKey: "accessToken") {
-  // Token is valid!
-} else {
-  // Token does not exist, prompt the user to login.
-}
-```
-
 ## Using the Access Token
 
 Your iOS application now has an access token in the Keychain that was issued by your Okta Authorization server. You can use this token to authenticate requests for resources on your server or API. As a hypothetical example, let's say that you have an API that gives us messages for our user.  You could create a `callMessagesApi` function that gets the access token from the Keychain, and use it to make an authenticated request to your server.
