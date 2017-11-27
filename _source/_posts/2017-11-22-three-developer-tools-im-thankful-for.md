@@ -24,6 +24,7 @@ incredible friends, and some particularly awesome co-workers (shout out!):
 - [@SalaTzar](https://twitter.com/SalaTzar)
 - [@LindsayB610](https://twitter.com/LindsayB610)
 - [@kaifubrent](https://twitter.com/kaifubrent)
+- [@omgitstom](https://twitter.com/omgitstom)
 
 I could probably write an entire essay about all the amazing people I know and
 friends I have, but I’ll save that for another time. Today I wanted to reflect
