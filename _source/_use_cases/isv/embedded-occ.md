@@ -266,7 +266,7 @@ Here is a sample response from a successful call:
 
 ### Error Codes
 
-Below we provide a list of error codes that could be encountered, for more details on error codes and http response codes from Okta please refer to our [Error Codes](../../reference/error_codes/)
+Below we provide a list of error codes that could be encountered, for more details on error codes and http response codes from Okta please refer to our [Error Codes](../../reference/error_codes/index)
 
 #### Duplicate Subdomain
 
