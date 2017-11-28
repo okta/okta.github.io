@@ -17,8 +17,8 @@ In this post, I will be showing you how to use the Go programming language to wr
 
 If you're impatient and want to try out the finished software and start sending webhooks from Okta, you can download the "loghook" program below and get started:
 
--   [macOS](https://github.com/jpf/loghook/releases/download/v0.0.4/loghook_darwin_amd64.zip)
--   [Linux](https://github.com/jpf/loghook/releases/download/v0.0.4/loghook_linux_amd64.zip)
+-   [macOS](https://github.com/jpf/loghook/releases/download/v0.0.4/loghook_darwin_amd64)
+-   [Linux](https://github.com/jpf/loghook/releases/download/v0.0.4/loghook_linux_amd64)
 
 Let's discuss what webhooks are. Simply stated, they are "[user-defined HTTP callbacks](http://timothyfitz.com/2009/02/09/what-webhooks-are-and-why-you-should-care/)". In concrete terms what this means is that by implementing webhooks with Okta, you can integrate Okta into any website that supports callbacks via webhooks.
 

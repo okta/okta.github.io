@@ -114,7 +114,7 @@ You'll see the image in your list named `tutorial` with a tag of 0.0.1. If you w
 ```bash
 docker run -p 3000:3000 -d --name demo tutorial:0.0.1  
 ```
-This will create a container based on the `tutorial:0.0.1` image that you just creted and name it 'demo'. This command also has the `-d` switch that specifies that you want to run it in daemon mode (in the background). Finally, it also has the `-p` switch that maps port 3000 on the host machine (your local machine) to the exposed port on the container (formatted like `[host port]:[container port]`). This will allow you to go to <http://localhost:3000> on your machine and be viewing the container's response on that same port.
+This will create a container based on the `tutorial:0.0.1` image that you just creted and name it 'demo'. This command also has the `-d` switch that specifies that you want to run it in daemon mode (in the background). Finally, it also has the `-p` switch that maps port 3000 on the host machine (your local machine) to the exposed port on the container (formatted like `[host port]:[container port]`). This will allow you to go to `http://localhost:3000` on your machine and be viewing the container's response on that same port.
 
 ## Learn More
 

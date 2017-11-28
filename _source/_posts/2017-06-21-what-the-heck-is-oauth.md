@@ -256,7 +256,7 @@ When people ask if you support OAuth, you have to clarify what they're asking fo
 
 There's a large surface area with OAuth. With Implicit Flow, there's lots of redirects and lots of room for errors. There's been a lot of people trying to exploit OAuth between applications and it's easy to do if you don't follow recommended Web Security 101 guidelines. For example:
 
-* [Always use CSRF token with the `state` parameter to ensure flow integrity](http://www.twobotechnologies.com/blog/2014/02/importance-of-state-in-oauth2.html)
+* Always use CSRF token with the `state` parameter to ensure flow integrity
 * Always whitelist redirect URIs to ensure proper URI validations
 * Bind the same client to authorization grants and token requests with a client ID
 * For confidential clients, make sure the client secrets aren't leaked. Don't put a client secret in your app that's distributed through an App Store!

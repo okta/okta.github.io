@@ -1,7 +1,11 @@
 ---
 layout: quickstart_partial
 libraryName: Native Android
+sitemap:
+  exclude: "yes"
 ---
+
+## Okta Android Quickstart
 
 This guide will walk you through integrating authentication into an Android app with Okta by performing these steps:
 
@@ -37,7 +41,7 @@ After you have created the application there are two more values you will need t
 These values will be used in your Android application to setup the OpenID Connect flow with Okta.
 
 ## Add Okta-AppAuth to your Android Project
-The simplest way to add authentication into an Android app is using the library [Okta AppAuth](https://bintray.com/okta/com.okta.android/okta-appauth), available through [JCenter](https://bintray.com/bintray/jcenter). To install it, simply add the following to your `build.grade`:
+The simplest way to add authentication into an Android app is using the library [Okta AppAuth](https://bintray.com/okta/com.okta.android/okta-sdk-appauth-android), available through [JCenter](https://bintray.com/bintray/jcenter). To install it, simply add the following to your `build.grade`:
 
 ```
 compile 'com.okta.android:appauth-android:0.1.0'
@@ -85,15 +89,15 @@ import net.openid.appauth.AuthorizationException;
 public class LoginActivity extends Activity {
 
     private OktaAppAuth mOktaAuth;
-    
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-    
+
         mOktaAuth = OktaAppAuth.getInstance(this);
-    
+
         // Do any of your own setup of the Activity
-    
+
         mOktaAuth.init(
             this,
             new OktaAppAuth.OktaAuthListener() {
@@ -101,7 +105,7 @@ public class LoginActivity extends Activity {
                 public void onSuccess() {
                     // Handle a successful initialization (e.g. display login button)
                 }
-            
+
                 @Override
                 public void onTokenFailure(@NonNull AuthorizationException ex) {
                     // Handle a failed initialization
@@ -142,11 +146,11 @@ When starting up the application, check for the existance of an `access_token` t
 @Override
 protected void onCreate(Bundle savedInstanceState) {
     ...
-    
+
     mOktaAuth = OktaAppAuth.getInstance(this);
 
     if (mOktaAuth.isUserLoggedIn()) {
-        Log.i(TAG, "User is already authenticated, proceeding to protected activity");        
+        Log.i(TAG, "User is already authenticated, proceeding to protected activity");
         startActivity(new Intent(this, ProtectedActivity.class));
         finish();
         return;

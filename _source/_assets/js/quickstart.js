@@ -4,10 +4,10 @@
    *
    * This object defines the links that will appear, and serves as a state object once
    * the app begins.  If you need to add new libraries, add them to this object.  If
-   * you need to change the default active libraries, change the active states in this
+   * you need to change the default libraries, change the `default` states in this
    * object.
    *
-   * `active` links will be selected by default. As the user navigates, the active
+   * `default` links will be selected by default. As the user navigates, the active
    * properties will be modified accordingly.
    */
   var linkState = {
@@ -16,7 +16,7 @@
         name: 'okta-sign-in-page',
         label: 'Okta Sign-In Page',
         serverExampleType: 'auth-code',
-        active: true
+        default: true
       },
       {
         name: 'widget',
@@ -46,18 +46,18 @@
     ],
     servers: [
       {
-        active: true,
+        default: true,
         name: 'nodejs',
         label: 'Node JS',
         frameworks: [
           {
-            name: 'generic',
-            label: 'Generic Node'
-          },
-          {
-            active: true,
+            default: true,
             name: 'express',
             label: 'Express.js'
+          },
+          {
+            name: 'generic',
+            label: 'Generic Node'
           }
         ]
       },
@@ -68,7 +68,7 @@
           {
             name: 'spring',
             label: 'Spring',
-            active: true
+            default: true
           },
           {
             name: 'generic',
@@ -83,7 +83,7 @@
           {
             name: 'generic',
             label: 'Generic PHP',
-            active: true
+            default: true
           }
         ]
       },
@@ -94,7 +94,7 @@
           {
             name: 'aspnetcore',
             label: 'ASP.NET Core',
-            active: true
+            default: true
           },
           {
             name: 'aspnet4',
@@ -152,6 +152,13 @@
           renderFrameworkLinks(server);
           $(this).addClass('active');
           server.active = true;
+
+          // Sets the first framework to active if one is not set
+          var framework = server.frameworks.filter(function(fwork){
+            return fwork.active == true;
+          })[0] || server.frameworks[0];
+          framework.active = true;
+
           applySelectionTuple(getSelectionTupleFromLinkSate());
         }
       });
@@ -177,6 +184,7 @@
 
       server.frameworks.forEach(function (framework) {
         var link = $('<a>', {
+          id: 'framework-' + framework.name,
           text: framework.label,
           class: framework.active ? 'active' : '',
           click: function () {
@@ -199,7 +207,7 @@
    * Fetches the content for a given selection tuple
    */
   function loadContent(clientName, server, framework) {
-    var client = linkState.clients.filter(function(client) {
+    var client = linkState.clients.filter(function (client) {
       return client.name === clientName;
     })[0];
     var clientContentUrl = clientName + '/default-example.html';
@@ -208,12 +216,15 @@
     $.ajax({
       url: clientContentUrl
     }).done(function( html ) {
-      $( "#client_content" ).html( html );
+      $('#client_content').html(html);
     });
     $.ajax({
       url: serverContentUrl
-    }).done(function( html ) {
-      $( "#server_content" ).html( html );
+    }).done(function (html) {
+      $('#server_content').html( html );
+
+      // Set the framework to active
+      document.getElementById('framework-' + framework).setAttribute('class', 'active');
     });
   };
 
@@ -261,6 +272,10 @@
   function applySelectionTuple(selectionTuple) {
     window.location.replace('#/' + selectionTuple.join('/'));
     loadContent.apply(null, selectionTuple);
+    if (window.ga) {
+      window.ga('set', 'page', window.location.pathname + window.location.hash);
+      window.ga('send', 'pageview');
+    }
   }
 
   /**
@@ -282,6 +297,31 @@
     });
   }
 
+  function getDefaultClient(serverName) {
+    return linkState.clients.filter(function (client) {
+      return client.default;
+    })[0];
+  }
+
+  function getDefaultServer(serverName) {
+    return linkState.servers.filter(function (server) {
+      return server.default;
+    })[0];
+  }
+
+  function getDefaultFrameworkForServer(serverName) {
+    var server = linkState.servers.filter(function (server) {
+      return server.name == serverName;
+    })[0];
+    if (!server) {
+      return
+    }
+    var defaultFramework = server.frameworks.filter(function (framework) {
+      return framework.default === true;
+    })[0];
+    return defaultFramework;
+  }
+
 
   /**
    * Begin application.  Fetch default selections from link state, and current
@@ -289,11 +329,13 @@
    */
   function main() {
     var hashTuple = getSelectionTupleFromHash();
-    var stateTuple = getSelectionTupleFromLinkSate();
+    var defaultClient = getDefaultClient();
+    var defaultServer = getDefaultServer();
+    var defaultFramework = getDefaultFrameworkForServer(hashTuple[1] || defaultServer.name);
     var initialTuple = [
-      hashTuple[0] || stateTuple[0],
-      hashTuple[1] || stateTuple[1],
-      hashTuple[2] || stateTuple[2]
+      hashTuple[0] || defaultClient.name,
+      hashTuple[1] || defaultServer.name,
+      hashTuple[2] || defaultFramework.name
     ];
 
     applySelectionTupleToLinkSate(initialTuple);

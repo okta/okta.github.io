@@ -1,7 +1,11 @@
 ---
 layout: quickstart_partial
 exampleDescription: Express.js Auth Code Example
+sitemap:
+  exclude: "yes"
 ---
+
+## Okta Node.js/Express.js Quickstart
 
 To handle the authentication callback from Okta, your Express server will need to handle this callback.  In this section we'll show you how to install and configure the [@okta/oidc-middleware](https://github.com/okta/okta-oidc-js/tree/master/packages/oidc-middleware) library, referred to below as ExpressOIDC, it will add the needed callback handler to your application.
 

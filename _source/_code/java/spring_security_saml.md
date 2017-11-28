@@ -37,7 +37,7 @@ Please make sure the following are installed before starting installation:
 
 	java -version
 
-[Apache Maven](https://maven.apache.org/download.cgi)
+[Apache Maven](https://maven.apache.org)
 	- Check using the command  below
 
 	mvn --version
@@ -50,7 +50,7 @@ This section covers what you need to do to install and configure Tomcat from scr
 How to install the Spring Security SAML sample Okta application on Mac OS X:
 
 1. **Installing Tomcat**
-	- If it’s not already installed, install Tomcat with Homebrew using these directions: <http://blog.bolshchikov.net/post/50277857673/installing-tomcat-on-macos-with-homebrew>
+	- If it’s not already installed, install Tomcat with Homebrew using [these directions](https://github.com/mhulse/mhulse.github.io/wiki/Installing-Apache-Tomcat-using-Homebrew-on-OS-X-Yosemite)
 
 
 2. **Downloading the Spring SAML Extension**
@@ -117,7 +117,7 @@ How to install the Spring Security SAML sample Okta application on Mac OS X:
 
 
 7. **Starting Application**
-	- Load the Spring SAML application by opening this Link: [Sample App](http://localhost:8080/spring-security-saml2-sample/saml/discovery?entityID=http%3A%2F%2Flocalhost%3A8080%2Fspring-security-saml2-sample%2Fsaml%2Fmetadata&returnIDParam=idp)
+	- Load the Spring SAML application by opening this Link: `http://localhost:8080/spring-security-saml2-sample/saml/discovery?entityID=http%3A%2F%2Flocalhost%3A8080%2Fspring-security-saml2-sample%2Fsaml%2Fmetadata&returnIDParam=idp`
 	- **Note:** Links on app will not be functional as of yet because we have not yet configured any IDPs. Full app functionality  will be completed after the "Configuring Spring Security SAML to work with Okta" section.
 
 	Here's what it should look like: {% img spring-security-saml-intro.png alt:"App Running" %}
@@ -271,7 +271,7 @@ test worked when you see a screen that looks like the one below: {% img spring-s
 	known as an "SP initiated" login)
 
 	-   Open the sample application in your browser:
-		<http://localhost:8080/spring-security-saml2-sample>
+		`http://localhost:8080/spring-security-saml2-sample`
 
 	-   Select the Okta IdP from the list
 		It will be a URL that starts with "http://www.okta.com/"

@@ -2,7 +2,7 @@
 
 DEPLOY_BRANCH="weekly"
 TARGET_S3_BUCKET="s3://developer.okta.com-staging"
-REGISTRY="https://artifacts.aue1d.saasure.com/artifactory/api/npm/npm-okta"
+REGISTRY="${ARTIFACTORY_URL}/api/npm/npm-okta"
 
 source "${0%/*}/setup.sh"
 

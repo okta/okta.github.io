@@ -1,7 +1,11 @@
 ---
 layout: quickstart_partial
 exampleDescription: Angular Implicit
+sitemap:
+  exclude: "yes"
 ---
+
+## Okta Angular Quickstart
 
 This guide will walk you through integrating authentication into an Angular app with Okta by performing these steps:
 
@@ -85,6 +89,7 @@ import { OktaAuthService } from '@okta/okta-angular';
   template: `
     <button *ngIf="!oktaAuth.isAuthenticated()" (click)="oktaAuth.loginRedirect()"> Login </button>
     <button *ngIf="oktaAuth.isAuthenticated()" (click)="oktaAuth.logout()"> Logout </button>
+    <router-outlet></router-outlet>
   `,
 })
 export class AppComponent {

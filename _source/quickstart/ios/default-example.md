@@ -1,7 +1,11 @@
 ---
 layout: quickstart_partial
 libraryName: Native iOS
+sitemap:
+  exclude: "yes"
 ---
+
+## Okta iOS Quickstart
 
 This guide will walk you through integrating authentication into an iOS (Swift) app with Okta by performing these steps:
 
@@ -98,7 +102,7 @@ Then, you can start the authorization flow by simply calling `login`:
 ```swift
 OktaAuth
   .login()
-  .start(self) { response, error in    
+  .start(self) { response, error in
     if error != nil { print(error!) }
 
     // Success
@@ -118,7 +122,7 @@ Tokens are securly stored in the Keychain. They are easily set and retrieved wit
 ```swift
 OktaAuth
   .login()
-  .start(self) { response, error in    
+  .start(self) { response, error in
     if error != nil { print(error!) }
 
     // Success
@@ -167,7 +171,7 @@ func callMessagesApi() {
   var request = URLRequest(url: url!)
   request.allHTTPHeaderFields = headers
 
-  let task = URLSession.shared.dataTask(with: request){ data, response, error in 
+  let task = URLSession.shared.dataTask(with: request){ data, response, error in
     if error != nil { return }
 
     let serverResponse = response {

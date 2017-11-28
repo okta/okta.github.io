@@ -55,7 +55,7 @@ public interface StormtrooperDao {
 }
 ```
 
-The actual implementation of the `StormtrooperDao` is not important for these examples, If you are interested, you can take a look at code for [`DefaultStormtrooperDao`](https://github.com/oktadeveloper/jaxrs-spring-blog-example/blob/master/common/src/main/java/com/oktadeveloper/example/common/dao/DefaultStormtrooperDao.java), which generates 50 random Stormtroopers.
+The actual implementation of the `StormtrooperDao` is not important for these examples, If you are interested, you can take a look at code for [`DefaultStormtrooperDao`](https://github.com/oktadeveloper/jaxrs-spring-blog-example/blob/master/common/src/main/java/com/okta/example/common/dao/DefaultStormtrooperDao.java), which generates 50 random Stormtroopers.
 
 ## Try Spring
 

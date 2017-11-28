@@ -125,6 +125,30 @@ function check_for_localhost_links() {
     fi
 }
 
+# Verify for occurences of localhost have been removed
+function check_for_all_localhost_links() {
+    local dir=$(pwd)/dist
+    local links=$(grep -EoR "href=\"(http|https)://localhost"  --include="*.html" $dir)
+    if [ "$links" ];
+    then
+        echo $links
+        echo "Links contain localhost!"
+        return 1
+    fi
+}
+
+# Verify for occurences of 'index' contain .html
+function check_index_links() {
+    local dir=$(pwd)/_source
+    local links=$(grep -EoR "index#"  --include="*.md" $dir --exclude={README.md,package.json} | sort | uniq )
+    if [ "$links" ];
+    then
+        echo $links
+        echo "A link contains index without the filetype!"
+        return 1
+    fi
+}
+
 # Check for broken markdown headers
 function header_checker() {
     local dir=$(pwd)
@@ -198,4 +222,13 @@ function check_sample_code_orgs() {
         echo "Files contain old URL reference -> oktapreview.com"
         return 1
     fi
+}
+
+function fold() {
+    local name=$1
+    local command="${@:2}"
+    echo -en "travis_fold:start:${name}\\r"
+    echo "\$ ${command}"
+    ${command}
+    echo -en "travis_fold:end:${name}\\r"
 }

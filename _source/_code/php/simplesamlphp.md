@@ -254,7 +254,7 @@ test worked when you see a screen that looks like the one below:
 
     -   Open the example application in your browser:
 
-        <http://localhost/okta-simplesamlphp-example/>
+        `http://localhost/okta-simplesamlphp-example/`
 
     -   Click on the 'example-okta-com' link.
 

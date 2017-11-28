@@ -6,11 +6,11 @@ tags: [trust, trust pages, trust relationship, product, engineering, customer su
 
 ---
 
-I recently read an excellent [article](http://www.viabilify.com/blog/trust) about how amazing products shape the **trust relationship** with customers. I think great products are the _first step_ in building a trust relationship. And like other aspects of the product that are derived from the product but are not physically part of it, the trust relationship is now more important than ever before.
+I recently read an excellent article about how amazing products shape the **trust relationship** with customers. I think great products are the _first step_ in building a trust relationship. And like other aspects of the product that are derived from the product but are not physically part of it, the trust relationship is now more important than ever before.
 
 * * *
 
->When you use a product, every engagement with that product has a direct correlation with your perception of the value of that product. — From [Product Loyalty Follows Trust Like Form Follows Function](http://www.viabilify.com/blog/trust)
+> When you use a product, every engagement with that product has a direct correlation with your perception of the value of that product. — From "Product Loyalty Follows Trust Like Form Follows Function"
 
 * * *
 

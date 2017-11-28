@@ -165,7 +165,7 @@ test worked when you see a screen that looks like the one below:
 	~~~
 
     -   Open the example application in your browser:
-        <http://localhost:{{ page.port }}/>
+        `http://localhost:{{ page.port }}/`
 
     -   Click on the link for your Okta IdP.
 

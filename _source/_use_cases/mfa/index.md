@@ -15,9 +15,7 @@ security to their applications.
 <blockquote class="twitter-tweet" lang="en">
 <p>In all my years working in this industry I&#39;ve seen exactly 2
 effective security technologies stand the test of time: firewalls
-and 2fa</p>&mdash; Chris Rohlf (@chrisrohlf)
-<a href="https://twitter.com/chrisrohlf/status/574639358101352449">
-March 8, 2015</a>
+and 2fa</p>&mdash; Chris Rohlf (@chrisrohlf) March 8, 2015
 </blockquote>
 <script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
 

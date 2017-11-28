@@ -308,20 +308,21 @@ endpoint.
 
 API rate limits apply per minute to the endpoints in an org. The rate applies either to all the endpoints with the same base URL or to an exact URL, as noted in the following table.
 
-| Okta API Endpoint                                                          | Limit |
-|:---------------------------------------------------------------------------|------:|
-| `/api/v1/apps`                                                             |   100 |
-| `/api/v1/apps/{id}` (exact URL only)                                       |   500 |
-| `/api/v1/authn`                                                            |   500 |
-| `/api/v1/groups/{id}` (exact URL only)                                     |  1000 |
-| `/api/v1/groups`                                                           |   500 |
-| `/api/v1/logs`                                                             |    60 |
-| `/api/v1/sessions`                                                         |   750 |
-| `/api/v1/users/{id}` (exact URL plus query params or other qualifiers)     |   600 |
-| `/api/v1/users`                                                            |   600 |
-| `/api/v1/` (if no other `/api/v1` limit specified in this table)           |  1200 |
-| `/oauth2/v1/token`  (per second, not minute)                               |     4 |
-| `/oauth2/v1` (per second, not minute)                                      |    40 |
+| Okta API Endpoint                                                                             | Limit |
+|:----------------------------------------------------------------------------------------------|------:|
+| `/api/v1/apps`                                                                                |   100 |
+| `/api/v1/apps/{id}` (exact URL only)                                                          |   500 |
+| `/api/v1/authn`                                                                               |   500 |
+| `/api/v1/groups/{id}` (exact URL only)                                                        |  1000 |
+| `/api/v1/groups`                                                                              |   500 |
+| `/api/v1/logs`                                                                                |    60 |
+| `/api/v1/sessions`                                                                            |   750 |
+| `/api/v1/users/{id}` GET (exact URL plus query params or other qualifiers)                    |  2000 |
+| `/api/v1/users/{id}` All other HTTP methods (exact URL plus query params or other qualifiers) |   600 |
+| `/api/v1/users`                                                                               |   600 |
+| `/api/v1/` (if no other `/api/v1` limit specified in this table)                              |  1200 |
+| `/oauth2/v1/token`  (per second, not minute)                                                  |     4 |
+| `/oauth2/v1` (per second, not minute)                                                         |    40 |
 
 For all API endpoints not listed in the table above, the API rate limit is a combined 10,000 requests per minute.
 

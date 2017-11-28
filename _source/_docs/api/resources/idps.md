@@ -17,10 +17,10 @@ Explore the Identity Providers API: [![Run in Postman](https://run.pstmn.io/butt
 
 Each identity provider (IdP) requires some setup. Use the Okta setup guide for your IdP:
 
-* [Facebook](/docs/api/resources/social_authentication.html#facebook)
-* [Google](/docs/api/resources/social_authentication.html#google)
-* [LinkedIn](/docs/api/resources/social_authentication.html#linkedin)
-* [Microsoft](/docs/api/resources/social_authentication.html#microsoft)
+* [Facebook](/authentication-guide/social-login/facebook.html)
+* [Google](/authentication-guide/social-login/google.html)
+* [LinkedIn](/authentication-guide/social-login/linkedin.html)
+* [Microsoft](/authentication-guide/social-login/microsoft.html)
 
 ## Identity Provider Operations
 
@@ -4589,7 +4589,7 @@ Specifies the behavior for just-in-time (JIT) provisioning of an IdP user as a n
 | profileMaster                       | Determines if the IdP should act as a source of truth for user profile attributes | Boolean                                                               | FALSE    | FALSE    |           |           |            |
 | callout                             | Webhook settings for the `CALLOUT` action                                         | [Callout Object](#callout-object)                                     | TRUE     | FALSE    |           |           |            |
 | groups                              | Provisioning settings for a user's group memberships                              | [Group Provisioning Policy Object](#group-provisioning-policy-object) | FALSE    | FALSE    |           |           |            |
-| conditions {%api_lifecycle EA %}  | Conditional behaviors for an IdP user during authentication                       | [Provisioning Conditions Object](#provisioning-conditions-object)     | FALSE    | FALSE    |           |           |            |
+| conditions | Conditional behaviors for an IdP user during authentication                       | [Provisioning Conditions Object](#provisioning-conditions-object)     | FALSE    | FALSE    |           |           |            |
 |---------------+-----------------------------------------------------------------+-----------------------------------------------------------------------------------------+----------+----------+-----------+-----------+----------------------------------|
 
 ~~~json

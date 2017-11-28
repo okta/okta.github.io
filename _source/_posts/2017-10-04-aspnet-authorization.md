@@ -137,9 +137,9 @@ _EnthusiastOnly.cshtml_
 <h1>Enthusiast Dashboard</h1>
 ```
 
-Now you should be able to run your application, log in as a user in the "Admin" group, and go to the <http://localhost:5000/User/AdminOnly> route successfully. The `EnthusiastOnly` route should return an unauthorized error.
+Now you should be able to run your application, log in as a user in the "Admin" group, and go to the `http://localhost:5000/User/AdminOnly` route successfully. The `EnthusiastOnly` route should return an unauthorized error.
 
-Log back out and log in as a member of the "Enthusiast" group and go to the <http://localhost:5000/User/EnthusiastOnly> URL, and you should be able to get to it. 
+Log back out and log in as a member of the "Enthusiast" group and go to the `http://localhost:5000/User/EnthusiastOnly` URL, and you should be able to get to it. 
 
 Congratulations! You just added authorization to you .NET application! Not only can users get into your application, but you can make sure they have access to the data and functionality they need!
 

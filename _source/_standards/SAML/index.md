@@ -159,7 +159,7 @@ can help you build your applications and integrations:
 
 - [.NET Framework](https://en.wikipedia.org/wiki/.NET_Framework_version_history) 4.5 or above: [Kentor Authentication Services](https://github.com/KentorIT/authservices#kentor-authentication-services)
 - .NET Framework 4 or below: [ComponentSpace SAML 2.0](http://www.componentspace.com/SAMLv20.aspx) - Paid software, licenses start at $299
-- Java: [OpenSAML](https://shibboleth.net/products/opensaml-java.html)
+- Java: [OpenSAML](https://wiki.shibboleth.net/confluence/display/OpenSAML/Home)
 - Java/Spring: [Spring Security SAML](/code/java/spring_security_saml.html)
 - PHP: [SimpleSAMLphp](/code/php//simplesamlphp.html)
 - Python: [PySAML2](/code/python/pysaml2.html)

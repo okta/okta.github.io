@@ -1,23 +1,23 @@
 {
   "name": "@okta/okta.github.io",
   "version": "0.0.4",
-  "publishConfig": {
-    "registry": "https://artifacts.aue1d.saasure.com/artifactory/api/npm/npm-okta"
-  },
   "description": "NPM dependencies for testing and building developer.okta.com",
   "files": [
     "dist"
   ],
   "scripts": {
     "clean": "node scripts/clean",
-    "build-prod": "npm run clean && git fetch --force origin master:master && git clone -b master . dist && cross-env JEKYLL_ENV=production bundle exec jekyll build --verbose",
-    "start": "npm run clean && cross-env JEKYLL_ENV=production bundle exec jekyll serve --incremental",
-    "stop": "if-env CI=true && exit 0 || (pkill -f clean && kill $(lsof -t -i:4000; lsof -t -i:4444))",
+    "pregenerate": "npm run clean",
+    "generate": "cross-env PID_FINDER=okta_github_io JEKYLL_ENV=production bundle exec jekyll",
+    "build-prod": "npm run generate build -- --verbose",
+    "postbuild-prod": "bash scripts/post-build-prod.sh",
+    "prestart": "npm run clean",
+    "start": "npm run generate serve -- --incremental",
     "test-only": "protractor tests/selenium/conf.js",
-    "pretest": "npm start & wait-on http://localhost:4000 && webdriver-manager update --gecko false",
+    "stop": "if-env CI=true && exit 0 || (pkill -f 'okta_github_io|webdriver-manager/selenium')",
+    "pretest": "npm run generate serve -- --no-watch & wait-on http://localhost:4000 && webdriver-manager update --gecko false",
     "test": "npm run test-only || (npm stop && exit 1)",
-    "posttest": "npm stop",
-    "import-external": "node scripts/import-external 2>&1",
+    "posttest": "npm run stop",
     "find-missing-slashes": "node scripts/find-missing-slashes",
     "post-build-lint": "bash scripts/post-build-lint.sh"
   },

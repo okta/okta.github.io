@@ -1,30 +1,51 @@
 {% assign author = site.data.authors[post.author] %}
 
 <article class="BlogPost{% if page.layout == 'blog_index' %} is-excerpt{% endif %}">
-	
-	<header class="BlogPost-header">
-	
-		<time class="BlogPost-date" datetime="{{ post.date | date: '%F'}}">{{ post.date | date: "%B %-d, %Y" }}</time>
-		
-		<h1 class="BlogPost-title">
-			{% if page.layout == 'blog_index' %}
-			<a href="{{ post.url }}">{{ post.title }}</a>
-			{% else %}
-			{{ post.title }}
-			{% endif %}
-		</h1>
-		
-		<div class="BlogPost-attribution">
-			{% if author.avatar %}
-				{% img '{{ author.avatar }}' alt:'{{ author.avatar }}' class:BlogPost-avatar %}
-			{% endif %}
-			<span class="BlogPost-author">{{ author.full_name }}</span>
-		</div>
-	
-	</header>
-	
-	<div class="BlogPost-content">
-		{{ include.post_content }}
-	</div>
-	
+
+    <header class="BlogPost-header">
+
+        <time class="BlogPost-date" datetime="{{ post.date | date: '%F'}}">{{ post.date | date: "%B %-d, %Y" }}</time>
+
+        <h1 class="BlogPost-title">
+            {% if page.layout == 'blog_index' %}
+            <a href="{{ post.url }}">{{ post.title }}</a>
+            {% else %}
+            {{ post.title }}
+            {% endif %}
+        </h1>
+
+        <div class="BlogPost-attribution">
+            {% if author.avatar %}
+            {% img '{{ author.avatar }}' alt:'{{ author.avatar }}' class:BlogPost-avatar %}
+            {% endif %}
+            <span class="BlogPost-author">{{ author.full_name }}</span>
+        </div>
+
+    </header>
+
+    <div class="BlogPost-content">
+        {{ include.post_content }}
+    </div>
+
+    {% if page.layout != 'blog_index' and post.comments != false %}
+    <div id="disqus">
+        <div id="disqus_thread"></div>
+        <script type="text/javascript">
+            var disqus_title = '{{ page.title }}';
+            var disqus_url = '{{ page.url | prepend: site.url }}';
+
+            (function () {
+                var dsq = document.createElement('script');
+                dsq.async = true;
+                dsq.type = 'text/javascript';
+                dsq.src = '//{{ site.disqus_shortname }}.disqus.com/embed.js';
+                (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+            })();
+          </script>
+          <noscript>
+              Please enable JavaScript to view the
+              <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus</a>.
+         </noscript>
+    </div>
+    {% endif %}
 </article>

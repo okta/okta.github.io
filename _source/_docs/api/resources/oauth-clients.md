@@ -25,91 +25,6 @@ flows defined by [the OAuth 2.0 spec](http://oauth.net/documentation) or [OpenID
 
 [![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/291ba43cde74844dd4a7)
 
-## Client Application Model
-
-### Example
-
-~~~json
-{
-  "client_id": "0jrabyQWm4B9zVJPbotY",
-  "client_secret": "5W7XULCEs4BJKnWUXwh8lgmeXRhcGcdViFp84pWe",
-  "client_id_issued_at": 1453913425,
-  "client_secret_expires_at": 0,
-  "client_name": "Example OAuth Client",
-  "client_uri": "https://www.example-application.com",
-  "logo_uri": "https://www.example-application.com/logo.png",
-  "application_type": "web",
-  "redirect_uris": [
-    "https://www.example-application.com/oauth2/redirectUri"
-  ],
-  "post_logout_redirect_uris": [
-    "https://www.example-application.com/oauth2/postLogoutRedirectUri"
-  ],
-  "response_types": [
-    "id_token",
-    "code"
-  ],
-  "grant_types": [
-    "authorization_code"
-  ],
-  "token_endpoint_auth_method": "client_secret_post",
-  "initiate_login_uri": "https://www.example-application.com/oauth2/login"
-}
-~~~
-
-### Client Application Properties
-
-Client applications have the following properties:
-
-| --------------------------- | -------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------- | -------- | ------ | --------- |
-| Property                    | Description                                                                                                                | DataType                                                                                     | Nullable | Unique | Readonly  |
-|:----------------------------|:---------------------------------------------------------------------------------------------------------------------------|:---------------------------------------------------------------------------------------------|:---------|:-------|:----------|
-| client_id                   | Unique key for the client application                                                                                      | String                                                                                       | FALSE    | TRUE   | TRUE      |
-| client_id_issued_at         | Time at which the client_id was issued (measured in unix seconds)                                                          | Number                                                                                       | TRUE     | FALSE  | TRUE      |
-| client_name                 | Human-readable string name of the client application                                                                       | String                                                                                       | FALSE    | TRUE   | FALSE     |
-| client_secret               | OAuth 2.0 client secret string (used for confidential clients)                                                             | String                                                                                       | TRUE     | TRUE   | TRUE      |
-| client_secret_expires_at    | Time at which the client_secret will expire or 0 if it will not expire(measured in unix seconds)                           | Number                                                                                       | TRUE     | FALSE  | TRUE      |
-| logo_uri                    | (Not currently implemented in Okta) URL string that references a logo for the client consent dialogs (not sign-in dialogs) | String                                                                                       | TRUE     | FALSE  | FALSE     |
-| application_type            | The type of client application. Default value: `web`                                                                       | `web`, `native`, `browser`, or `service`                                                     | TRUE     | FALSE  | TRUE      |
-| redirect_uris               | Array of redirection URI strings for use in redirect-based flows                                                           | Array                                                                                        | TRUE     | FALSE  | FALSE     |
-| post_logout_redirect_uris   | Array of redirection URI strings for use for relying party initiated logouts                                               | Array                                                                                        | TRUE     | FALSE  | FALSE     |
-| response_types              | Array of OAuth 2.0 response type strings. Default value: `code`                                                            | Array of `code`, `token`, `id_token`                                                         | TRUE     | FALSE  | FALSE     |
-| grant_types                 | Array of OAuth 2.0 grant type strings. Default value: `authorization_code`                                                 | Array of `authorization_code`, `implicit`, `password`, `refresh_token`, `client_credentials` | TRUE     | FALSE  | FALSE     |
-| token_endpoint_auth_method  | requested authentication method for the token endpoint. Default value: `client_secret_basic`                               | `none`, `client_secret_post`, `client_secret_basic`, or `client_secret_jwt`                  | TRUE     | FALSE  | FALSE     |
-| initiate_login_uri          | URL that a third party can use to initiate a login by the client                                                           | String                                                                                       | TRUE     | FALSE  | FALSE     |
-
-Property Details
-
-* The `client_id` is immutable. And when creating a client application, you cannot specify the `client_id`, Okta uses application ID for it.
-
-* The `client_secret` is only shown on the response of the creation or update of a client application (and only if the `token_endpoint_auth_method` is one that requires a client secret). You cannot specify the `client_secret` and if the `token_endpoint_auth_method` requires one Okta will generate a random `client_secret` for the client application.
-
-* If you want to specify the `client_id` or `client_secret`, you can use [Apps API](/docs/api/resources/apps#add-oauth-20-client-application) to create or update a client application.
-
-* At least one redirect URI and response type is required for all client types, with exceptions: if the client uses the
-  [Resource Owner Password](https://tools.ietf.org/html/rfc6749#section-4.3) flow (if `grant_types` contains the value `password`)
-  or [Client Credentials](https://tools.ietf.org/html/rfc6749#section-4.4) flow (if `grant_types` contains the value `client_credentials`)
-  then no redirect URI or response type is necessary. In these cases you can pass either null or an empty array for these attributes.
-
-* All redirect URIs must be absolute URIs and must not include a fragment compontent.
-
-* Different application types have different valid values for the corresponding grant type:
-
-    |------------------ | -------------------------------------------------------------------------- | ---------------------------------------------- |
-    | Application Type  | Valid Grant Type                                                           | Requirements                                   |
-    | :---------------- | :------------------------------------------------------------------------- | :--------------------------------------------- |
-    | `web`             | `authorization_code`, `implicit`, `refresh_token`, `client_credentials`(*) | Must have at least `authorization_code`        |
-    | `native`          | `authorization_code`, `implicit`, `password`, `refresh_token`              | Must have at least `authorization_code`        |
-    | `browser`         | `implicit`                                                                 |                                                |
-    | `service`         | `client_credentials`                                                       | Works with OAuth 2.0 flow (not OpenID Connect) |
-
-    (*) `client_credentials` with a `web` application type allows you to use one `client_id` for an application that needs to make user-specific calls and back-end calls for data.
-
-* The `grant_types` and `response_types` values described above are partially orthogonal, as they refer to arguments passed to different
-    endpoints in the [OAuth 2.0 protocol](https://tools.ietf.org/html/rfc6749). However, they are related in that the `grant_types`
-    available to a client influence the `response_types` that the client is allowed to use, and vice versa. For instance, a `grant_types`
-    value that includes `authorization_code` implies a `response_types` value that includes `code`, as both values are defined as part of
-    the OAuth 2.0 authorization code grant.
 
 ## Client Application Operations
 
@@ -133,6 +48,8 @@ Adds a new client application to your organization.
 {:.api .api-response .api-response-params}
 
 The created [OAuth Client](#client-application-model).
+
+> {% api_lifecycle beta %} Note: Apps created on `/api/v1/apps` default to `consent_method=TRUSTED`, while those created on `/api/v1/clients` default to `consent_method=REQUIRED`.
 
 ##### Request Example
 {:.api .api-request .api-request-example}
@@ -613,3 +530,93 @@ curl -v -X DELETE \
 ~~~http
 HTTP/1.1 204 No Content
 ~~~
+
+## Client Application Model
+
+### Example
+
+~~~json
+{
+  "client_id": "0jrabyQWm4B9zVJPbotY",
+  "client_secret": "5W7XULCEs4BJKnWUXwh8lgmeXRhcGcdViFp84pWe",
+  "client_id_issued_at": 1453913425,
+  "client_secret_expires_at": 0,
+  "client_name": "Example OAuth Client",
+  "client_uri": "https://www.example-application.com",
+  "logo_uri": "https://www.example-application.com/logo.png",
+  "application_type": "web",
+  "redirect_uris": [
+    "https://www.example-application.com/oauth2/redirectUri"
+  ],
+  "post_logout_redirect_uris": [
+    "https://www.example-application.com/oauth2/postLogoutRedirectUri"
+  ],
+  "response_types": [
+    "id_token",
+    "code"
+  ],
+  "grant_types": [
+    "authorization_code"
+  ],
+  "token_endpoint_auth_method": "client_secret_post",
+  "initiate_login_uri": "https://www.example-application.com/oauth2/login",
+  "tos_uri":"https://example-application.com/client/tos",
+  "policy_uri":"https://example-application.com/client/policy"
+}
+~~~
+
+### Client Application Properties
+
+Client applications have the following properties:
+
+| Property                            | Description                                                                                                                | DataType                                                                                     | Nullable | Unique | Readonly  |
+|:------------------------------------|:---------------------------------------------------------------------------------------------------------------------------|:---------------------------------------------------------------------------------------------|:---------|:-------|:----------|
+| client_id                           | Unique key for the client application                                                                                      | String                                                                                       | FALSE    | TRUE   | TRUE      |
+| client_id_issued_at                 | Time at which the client_id was issued (measured in unix seconds)                                                          | Number                                                                                       | TRUE     | FALSE  | TRUE      |
+| client_name                         | Human-readable string name of the client application                                                                       | String                                                                                       | FALSE    | TRUE   | FALSE     |
+| client_secret                       | OAuth 2.0 client secret string (used for confidential clients)                                                             | String                                                                                       | TRUE     | TRUE   | TRUE      |
+| client_secret_expires_at            | Time at which the client_secret will expire or 0 if it will not expire(measured in unix seconds)                           | Number                                                                                       | TRUE     | FALSE  | TRUE      |
+| logo_uri                            | (Not currently implemented in Okta) URL string that references a logo for the client consent dialogs (not sign-in dialogs) | String                                                                                       | TRUE     | FALSE  | FALSE     |
+| application_type                    | The type of client application. Default value: `web`                                                                       | `web`, `native`, `browser`, or `service`                                                     | TRUE     | FALSE  | TRUE      |
+| redirect_uris                       | Array of redirection URI strings for use in redirect-based flows                                                           | Array                                                                                        | TRUE     | FALSE  | FALSE     |
+| post_logout_redirect_uris           | Array of redirection URI strings for use for relying party initiated logouts                                               | Array                                                                                        | TRUE     | FALSE  | FALSE     |
+| response_types                      | Array of OAuth 2.0 response type strings. Default value: `code`                                                            | Array of `code`, `token`, `id_token`                                                         | TRUE     | FALSE  | FALSE     |
+| grant_types                         | Array of OAuth 2.0 grant type strings. Default value: `authorization_code`                                                 | Array of `authorization_code`, `implicit`, `password`, `refresh_token`, `client_credentials` | TRUE     | FALSE  | FALSE     |
+| token_endpoint_auth_method          | requested authentication method for the token endpoint. Default value: `client_secret_basic`                               | `none`, `client_secret_post`, `client_secret_basic`, or `client_secret_jwt`                  | TRUE     | FALSE  | FALSE     |
+| initiate_login_uri                  | URL that a third party can use to initiate a login by the client                                                           | String                                                                                       | TRUE     | FALSE  | FALSE     |
+| tos_uri {% api_lifecycle beta %}    | URL string of a web page providing the client's terms of service document                                                                                         | URL                                                                                          | TRUE     | FALSE  | FALSE     |
+| policy_uri {% api_lifecycle beta %} | URL string of a web page providing the client's policy document                                                                                                   | URL                                                                                          | TRUE     | FALSE  | FALSE     |
+
+Property Details
+
+* The `client_id` is immutable. And when creating a client application, you cannot specify the `client_id`, Okta uses application ID for it.
+
+* The `client_secret` is only shown on the response of the creation or update of a client application (and only if the `token_endpoint_auth_method` is one that requires a client secret). You cannot specify the `client_secret` and if the `token_endpoint_auth_method` requires one Okta will generate a random `client_secret` for the client application.
+
+* If you want to specify the `client_id` or `client_secret`, you can use [Apps API](/docs/api/resources/apps#add-oauth-20-client-application) to create or update a client application.
+
+* At least one redirect URI and response type is required for all client types, with exceptions: if the client uses the
+  [Resource Owner Password](https://tools.ietf.org/html/rfc6749#section-4.3) flow (if `grant_types` contains the value `password`)
+  or [Client Credentials](https://tools.ietf.org/html/rfc6749#section-4.4) flow (if `grant_types` contains the value `client_credentials`)
+  then no redirect URI or response type is necessary. In these cases you can pass either null or an empty array for these attributes.
+
+* All redirect URIs must be absolute URIs and must not include a fragment component.
+
+* Different application types have different valid values for the corresponding grant type:
+
+    |------------------ | -------------------------------------------------------------------------- | ---------------------------------------------- |
+    | Application Type  | Valid Grant Type                                                           | Requirements                                   |
+    | :---------------- | :------------------------------------------------------------------------- | :--------------------------------------------- |
+    | `web`             | `authorization_code`, `implicit`, `refresh_token`, `client_credentials`(*) | Must have at least `authorization_code`        |
+    | `native`          | `authorization_code`, `implicit`, `password`, `refresh_token`              | Must have at least `authorization_code`        |
+    | `browser`         | `implicit`                                                                 |                                                |
+    | `service`         | `client_credentials`                                                       | Works with OAuth 2.0 flow (not OpenID Connect) |
+
+    (*) `client_credentials` with a `web` application type allows you to use one `client_id` for an application that needs to make user-specific calls and back-end calls for data.
+
+* The `grant_types` and `response_types` values described above are partially orthogonal, as they refer to arguments passed to different
+    endpoints in the [OAuth 2.0 protocol](https://tools.ietf.org/html/rfc6749). However, they are related in that the `grant_types`
+    available to a client influence the `response_types` that the client is allowed to use, and vice versa. For instance, a `grant_types`
+    value that includes `authorization_code` implies a `response_types` value that includes `code`, as both values are defined as part of
+    the OAuth 2.0 authorization code grant.
+

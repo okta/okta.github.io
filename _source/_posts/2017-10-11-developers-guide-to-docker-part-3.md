@@ -180,7 +180,7 @@ networks:
 
 With that all done, you should be able to save the file and run `docker-compose up -d` in the folder where you docker-compose.yml file is and watch Docker build and start your environment for you.
 
-If everything completes successfully, you can then go to <http://localhost/users> and see something like the image below.
+If everything completes successfully, you can then go to `http://localhost/users` and see something like the image below.
 
 {% img blog/docker-for-developers/docker-compose-running.png alt:"Docker Compose Running" width:"800" %}
 

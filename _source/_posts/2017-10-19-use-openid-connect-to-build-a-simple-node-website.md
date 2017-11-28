@@ -263,7 +263,7 @@ $ node server.js              # run the server
 ```
 
 Once the server is running, you can view the site by visiting
-[http://localhost:3000](http://localhost:3000) in your browser.
+`http://localhost:3000` in your browser.
 
 Remember how I said this would be a simple website? I wasn't lying! Here's what
 your new website homepage will look like:
@@ -449,7 +449,7 @@ solving any timing problems you might have run into otherwise.
 ## Test It Out
 
 Now that your application has been built, why not try it out? If you visit
-[http://localhost:3000](http://localhost:3000) and click through the prompts,
+`http://localhost:3000` and click through the prompts,
 you'll see how everything fits together:
 
 Once you click login, you'll be redirected to `/login` The oidc-middleware will

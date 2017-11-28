@@ -213,7 +213,7 @@ Hello SAML!
 
 ## Run the App and Login with Okta
 
-Start the app using your IDE or `mvn spring-boot:run` and navigate to [https://localhost:8443](https://localhost:8443). If you're using Chrome, you'll likely see a privacy error.
+Start the app using your IDE or `mvn spring-boot:run` and navigate to `https://localhost:8443`. If you're using Chrome, you'll likely see a privacy error.
 
 {% img blog/spring-boot-saml/connection-not-private.png alt:"Connection Not Private" width:"800" %}{: .center-image }
 

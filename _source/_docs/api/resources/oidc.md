@@ -94,37 +94,7 @@ WWW-Authenticate: Bearer error="insufficient_scope", error_description="The acce
 
 #### Validating ID Tokens
 
-You can pass ID Tokens around different components of your app, and these components can use ID Tokens as a lightweight authentication mechanism identifying the app and the user.
-But before you can use the information in the ID Token or rely on it as an assertion that the user has authenticated, you must validate it to prove its integrity.
-
-ID Tokens are sensitive and can be misused if intercepted. Transmit them only over HTTPS
-and only via POST data or within request headers. If you store them on your server, you must store them securely.
-
-Clients must validate the ID Token in the Token Response in the following manner:
-
-1. Verify that the `iss` (issuer) claim in the ID Token exactly matches the issuer identifier for your Okta org (which is typically obtained during [Discovery](#openid-connect-discovery-document)).
-2. Verify that the `aud` (audience) claim contains the `client_id` of your app.
-3. Verify the signature of the ID Token according to [JWS](https://tools.ietf.org/html/rfc7515) using the algorithm specified in the JWT `alg` header property. Use the public keys provided by Okta via the [Discovery Document](#openid-connect-discovery-document).
-4. Verify that the expiry time (from the `exp` claim) has not already passed.
-5. A `nonce` claim must be present and its value checked to verify that it is the same value as the one that was sent in the Authentication Request. The client should check the nonce value for replay attacks.
-6. The client should check the `auth_time` claim value and request re-authentication using `prompt=login` if it determines too much time has elapsed since the last end-user authentication.
-
-Step 3 involves downloading the public JWKS from Okta (specified by the `jwks_uri` property in the [discovery document](#openid-connect-discovery-document)). The result of this call is a [JSON Web Key](https://tools.ietf.org/html/rfc7517) set.
-
-Each public key is identified by a `kid` attribute, which corresponds with the `kid` claim in the [ID Token header](/standards/OIDC/index.html#claims-in-the-header-section).
-
-Please note the following:
-
-* For security purposes, Okta automatically rotates keys used to sign the token.
-* The current key rotation schedule is four times a year. This schedule can change without notice.
-* In case of an emergency, Okta can rotate keys as needed.
-* Okta always publishes keys to the JWKS.
-* If your app follows the best practice to always resolve the `kid`, key rotations won't cause problems.
-* If you download the key and store it locally, **you are responsible for updates**.
-
->Keys used to sign tokens automatically rotate and should always be resolved dynamically against the published JWKS. Your app might fail if you hardcode public keys in your applications. Be sure to include key rollover in your implementation.
-
->If your application cannot retrieve keys dynamically, the administrator can disable the automatic key rotation in the administration UI, [generate a key credential](apps.html#generate-new-application-key-credential) and [update the application](apps.html#update-key-credential-for-application) to use it for signing.
+For more information on validating ID tokens, see our [Authentication Guide](/authentication-guide/tokens/validating-id-tokens).
 
 ### Introspection Request
 {:.api .api-operation}

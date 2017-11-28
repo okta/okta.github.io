@@ -246,6 +246,7 @@ url           | The URL of the login page for this app                | String  
 usernameField | CSS selector for the username field in the login form | String   | FALSE    | FALSE  |
 passwordField | CSS selector for the password field in the login form | String   | FALSE    | FALSE  |
 buttonField   | CSS selector for the login button in the login form   | String   | FALSE    | FALSE  |
+loginUrlRegex     | A regular expression that further restricts `url` to the specified regular expression | String | FALSE | FALSE |
 
 ##### Request Example
 {:.api .api-request .api-request-example}
@@ -264,7 +265,8 @@ curl -v -X POST \
       "buttonField": "btn-login",
       "passwordField": "txtbox-password",
       "usernameField": "txtbox-username",
-      "url": "https://example.com/login.html"
+      "url": "https://example.com/login.html",
+      "loginUrlRegex": "REGEX_EXPRESSION"
     }
   }
 }' "https://{yourOktaDomain}.com/api/v1/apps"
@@ -309,7 +311,8 @@ curl -v -X POST \
       "buttonField": "btn-login",
       "passwordField": "txtbox-password",
       "usernameField": "txtbox-username",
-      "url": "https://example.com/login.html"
+      "url": "https://example.com/login.html",
+      "loginUrlRegex": "REGEX_EXPRESSION"
     }
   },
   "_links": {
@@ -346,12 +349,13 @@ Adds a SWA application that requires a browser plugin and supports 3 CSS selecto
 
 Parameter          | Description                                           | DataType | Nullable | Unique | Validation
 ------------------ | ----------------------------------------------------- | -------- | -------- | ------ | ----------------------------------------
-url                | The URL of the login page for this app                | String   | FALSE    | FALSE  | [URL](http://tools.ietf.org/html/rfc3986)
-usernameField      | CSS selector for the username field in the login form | String   | FALSE    | FALSE  |
-passwordField      | CSS selector for the password field in the login form | String   | FALSE    | FALSE  |
-buttonField        | CSS selector for the login button in the login form   | String   | FALSE    | FALSE  |
+targetURL                | The URL of the login page for this app                | String   | FALSE    | FALSE  | [URL](http://tools.ietf.org/html/rfc3986)
+usernameSelector      | CSS selector for the username field in the login form | String   | FALSE    | FALSE  |
+passwordSelector      | CSS selector for the password field in the login form | String   | FALSE    | FALSE  |
+buttonSelector        | CSS selector for the login button in the login form   | String   | FALSE    | FALSE  |
 extraFieldSelector | CSS selector for the extra field in the form          | String   | FALSE    | FALSE  |
 extraFieldValue    | Value for extra field form field                      | String   | FALSE    | FALSE  |
+loginUrlRegex     | A regular expression that further restricts `targetURL` to the specified regular expression | String | FALSE | FALSE |
 
 ##### Request Example
 {:.api .api-request .api-request-example}
@@ -367,12 +371,13 @@ curl -v -X POST \
   "signOnMode": "BROWSER_PLUGIN",
   "settings": {
     "app": {
-      "buttonField": "#btn-login",
-      "passwordField": "#txtbox-password",
-      "usernameField": "#txtbox-username",
-      "url": "https://example.com/login.html",
+      "buttonSelector": "#btn-login",
+      "passwordSelector": "#txtbox-password",
+      "userNameSelector": "#txtbox-username",
+      "targetUrl": "https://example.com/login.html",
       "extraFieldSelector": ".login",
-      "extraFieldValue": "SOMEVALUE"
+      "extraFieldValue": "SOMEVALUE",
+      "loginUrlRegex": "REGEX_EXPRESSION"
     }
   }
 }' "https://{yourOktaDomain}.com/api/v1/apps"
@@ -419,7 +424,8 @@ curl -v -X POST \
       "usernameField": "#txtbox-username",
       "url": "https://example.com/login.html",
       "extraFieldSelector": ".login",
-      "extraFieldValue": "SOMEVALUE"
+      "extraFieldValue": "SOMEVALUE",
+      "loginUrlRegex": "REGEX_EXPRESSION"
     }
   },
   "_links": {
@@ -987,22 +993,25 @@ Adds an OAuth 2.0 client application. This application is only available to the 
 ##### Settings
 {:.api .api-request .api-request-params}
 
-| Parameter          | Description                                                      | DataType                                                                                     | Nullable | Unique | Validation |
-|:-------------------|:-----------------------------------------------------------------|:---------------------------------------------------------------------------------------------|:---------|:-------|:-----------|
-| client_uri         | URL string of a web page providing information about the client  | String                                                                                       | TRUE     | FALSE  | FALSE      |
-| logo_uri           | URL string that references a logo for the client                 | String                                                                                       | TRUE     | FALSE  | FALSE      |
-| application_type   | The type of client application                                   | `web`, `native`, `browser`, or `service`                                                     | TRUE     | FALSE  | TRUE       |
-| redirect_uris      | Array of redirection URI strings for use in redirect-based flows | Array                                                                                        | TRUE     | FALSE  | TRUE       |
-| response_types     | Array of OAuth 2.0 response type strings                         | Array of `code`, `token`, `id_token`                                                         | TRUE     | FALSE  | TRUE       |
-| grant_types        | Array of OAuth 2.0 grant type strings                            | Array of `authorization_code`, `implicit`, `password`, `refresh_token`, `client_credentials` | FALSE    | FALSE  | TRUE       |
-| initiate_login_uri | URL that a third party can use to initiate a login by the client | String                                                                                       | TRUE     | FALSE  | TRUE       |
+| Parameter                                 | Description                                                                                 | DataType                                                                                     | Nullable | Unique | Validation | Default   |
+|:------------------------------------------|:--------------------------------------------------------------------------------------------|:---------------------------------------------------------------------------------------------|:---------|:-------|:-----------|:----------|
+| client_uri                                | URL string of a web page providing information about the client                             | String                                                                                       | TRUE     | FALSE  | FALSE      |           |
+| logo_uri                                  | URL string that references a logo for the client                                            | URL                                                                                          | TRUE     | FALSE  | FALSE      |           |
+| redirect_uris                             | Array of redirection URI strings for use in redirect-based flows                            | Array                                                                                        | TRUE     | FALSE  | TRUE       |           |
+| response_types                            | Array of OAuth 2.0 response type strings                                                    | Array of `code`, `token`, `id_token`                                                         | TRUE     | FALSE  | TRUE       |           |
+| grant_types                               | Array of OAuth 2.0 grant type strings                                                       | Array of `authorization_code`, `implicit`, `password`, `refresh_token`, `client_credentials` | FALSE    | FALSE  | TRUE       |           |
+| initiate_login_uri                        | URL string that a third party can use to initiate a login by the client                     | String                                                                                       | TRUE     | FALSE  | TRUE       |           |
+| application_type                          | The type of client application                                                              | `web`, `native`, `browser`, or `service`                                                     | TRUE     | FALSE  | TRUE       |           |
+| tos_uri {% api_lifecycle beta %}          | URL string of a web page providing the client's terms of service document                   | URL                                                                                          | TRUE     | FALSE  | FALSE      |           |
+| policy_uri {% api_lifecycle beta %}       | URL string of a web page providing the client's policy document                             | URL                                                                                          | TRUE     | FALSE  | FALSE      |           |
+| consent_method {% api_lifecycle beta %} } | Indicates whether user consent is required or implicit. Valid values: `REQUIRED`, `TRUSTED` | String                                                                                       | TRUE     | FALSE  | TRUE       | `TRUSTED` |
 
 * At least one redirect URI and response type is required for all client types, with exceptions: if the client uses the
   [Resource Owner Password](https://tools.ietf.org/html/rfc6749#section-4.3) flow (if `grant_types` contains the value `password`)
   or [Client Credentials](https://tools.ietf.org/html/rfc6749#section-4.4) flow (if `grant_types` contains the value `client_credentials`)
   then no redirect URI or response type is necessary. In these cases you can pass either null or an empty array for these attributes.
 
-* All redirect URIs must be absolute URIs and must not include a fragment compontent.
+* All redirect URIs must be absolute URIs and must not include a fragment component.
 
 * Different application types have different valid values for the corresponding grant type:
 
@@ -1020,6 +1029,21 @@ Adds an OAuth 2.0 client application. This application is only available to the 
     value that includes `authorization_code` implies a `response_types` value that includes `code`, as both values are defined as part of
     the OAuth 2.0 authorization code grant.
 
+* {% api_lifecycle beta %} A consent dialog is displayed depending on the values of three elements:
+    * `prompt`, a query parameter used in requests to [`/oauth2/:authorizationServerId/v1/authorize`](/docs/api/resources/oauth2.html#obtain-an-authorization-grant-from-a-user)(custom authorization server) or [`/oauth2/v1/authorize`](/docs/api/resources/oidc.html#authentication-request) (Org authorization server)
+    * `consent_method`, a property listed in the Settings table above
+    * `consent`, a property on [scopes](/docs/api/resources/oauth2.html#scopes-properties)
+
+    | `prompt` Value    | `consent_method`                 | `consent`                   | Result       |
+    |:------------------|:---------------------------------|:----------------------------|:-------------|
+    | `CONSENT`         | `TRUSTED` or `REQUIRED`          | `REQUIRED`                  | Prompted     |
+    | `CONSENT`         | `TRUSTED`                        | `IMPLICIT`                  | Not prompted |
+    | `NONE`            | `TRUSTED`                        | `REQUIRED` or `IMPLICIT`    | Not prompted |
+    | `NONE`            | `REQUIRED`                       | `REQUIRED`                  | Prompted     |
+    | `NONE`            | `REQUIRED`                       | `IMPLICIT`                  | Not prompted | <!--If you change this, change the table in /oauth2.md too. Add 'LOGIN' to first three rows when supported -->
+
+> {% api_lifecycle beta %} Note: Apps created on `/api/v1/apps` default to `consent_method=TRUSTED`, while those created on `/api/v1/clients` default to `consent_method=REQUIRED`.
+
 ##### Request Example
 {:.api .api-request .api-request-example}
 
@@ -1036,8 +1060,9 @@ curl -v -X POST \
     "signOnMode": "OPENID_CONNECT",
     "credentials": {
       "oauthClient": {
-        "autoKeyRotation": true
-        "token_endpoint_auth_method": "client_secret_post",
+        "client_id":"0oa1hm4POxgJM6CPu0g4", 
+        "autoKeyRotation": true,
+        "token_endpoint_auth_method": "client_secret_post"
       }
     },
     "settings": {
@@ -1058,6 +1083,8 @@ curl -v -X POST \
           "authorization_code"
         ],
         "application_type": "native"
+        "tos_uri":"https://example.com/client/tos",
+        "policy_uri":"https://example.com/client/policy",
       }
     }
     }' "https://{yourOktaDomain}.com/api/v1/apps"
@@ -1133,7 +1160,10 @@ curl -v -X POST \
         "implicit",
         "authorization_code"
       ],
-      "application_type": "native"
+      "application_type": "native",
+      "tos_uri": "https://example.com/client/tos",
+      "policy_uri":"https://example.com/client/policy",
+      "consent_method": "REQUIRED"
     }
   },
   "_links": {
@@ -4501,7 +4531,7 @@ Applications have the following properties:
 |:-----------------|:---------------------------------------------|:-------------------------------------------------------------------|:-----------|:---------|:-----------|:------------|:------------|
 | id               | unique key for app                           | String                                                             | FALSE      | TRUE     | TRUE       |             |             |
 | name             | unique key for app definition                | String ( [App Names & Settings](#app-names--settings))              | FALSE      | TRUE     | TRUE       | 1           | 255         |
-| label            | unique user-defined display name for app     | String                                                             | FALSE      | TRUE     | FALSE      | 1           | 50          |
+| label            | unique user-defined display name for app     | String                                                             | FALSE      | TRUE     | FALSE      | 1           | 100         |
 | created          | timestamp when app was created               | Date                                                               | FALSE      | FALSE    | TRUE       |             |             |
 | lastUpdated      | timestamp when app was last updated          | Date                                                               | FALSE      | FALSE    | TRUE       |             |             |
 | status           | status of app                                | `ACTIVE` or `INACTIVE`                                             | FALSE      | FALSE    | TRUE       |             |             |
@@ -4665,10 +4695,10 @@ Specifies credentials and scheme for the application's `signOnMode`.
 | ---------------- | -------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------- | -------- | --------------- | --------- | --------- | ---------- |
 | scheme           | Determines how credentials are managed for the `signOnMode`                                                    | [Authentication Scheme](#authentication-schemes)          | TRUE     |                 |           |           |            |
 | userNameTemplate | Template used to generate a user’s username when the application is assigned via a group or directly to a user | [UserName Template Object](#username-template-object)     | TRUE     | *Okta UserName* |           |           |            |
-| signing          | Signing credential for the `signOnMode`                                                                        | [Signing Credential Object](#signing-credential-object)   | False    |                 |           |           |            |
+| signing          | Signing credential for the `signOnMode`                                                                        | [Signing Credential Object](#signing-credential-object)   | FALSE    |                 |           |           |            |
 | userName         | Shared username for app                                                                                        | String                                                    | TRUE     |                 | 1         | 100       |            |
 | password         | Shared password for app                                                                                        | [Password Object](#password-object)                       | TRUE     |                 |           |           |            |
-| oauthClient      | Credential for OAuth 2.0 client                                                                                | [OAuth Credential Object](#oauth-credential-object)   | False    |                 |           |           |            |
+| oauthClient      | Credential for OAuth 2.0 client                                                                                | [OAuth Credential Object](#oauth-credential-object)   | FALSE    |                 |           |           |            |
 |------------------+----------------------------------------------------------------------------------------------------------------+-----------------------------------------------------------+----------+-----------------+-----------+-----------+------------|
 
 ~~~json

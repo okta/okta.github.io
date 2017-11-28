@@ -86,7 +86,7 @@ public class BeerController {
 
 You should be able to start the `server` application by running it in your favorite IDE or from the command line using `mvn spring-boot:run`. You'll want to do this from the `server` directory. If you don't have Maven installed, you can use the Maven wrapper that's included in the project (`./mvnw spring-boot:run`).
 
-After the app has started, navigate to <http://localhost:8080/good-beers>. You should see the list of good beers in your browser.
+After the app has started, navigate to `http://localhost:8080/good-beers`. You should see the list of good beers in your browser.
 
 {% img blog/ionic-spring-boot/good-beers-json.png alt:"Good Beers JSON" width:"800" %}
 
@@ -113,7 +113,7 @@ cd ionic-beer
 ionic serve
 ```
 
-This will open your default browser on [http://localhost:8100](http://localhost:8100). You can click through the tabbed interface to see the default structure of the app.
+This will open your default browser on `http://localhost:8100`. You can click through the tabbed interface to see the default structure of the app.
 
 {% img blog/ionic-spring-boot/ionic-tabs.png alt:"Ionic shell with tabs" width:"800" %}
 
@@ -358,7 +358,7 @@ Update `beer.html` to display the image retrieved:
 ```
 {% endraw %}
 
-Start the Spring Boot app in one terminal window and run `ionic serve` in another. Open <http://localhost:8100> in your browser. Click on the Beer icon, and you'll likely see an error in your browser.
+Start the Spring Boot app in one terminal window and run `ionic serve` in another. Open `http://localhost:8100` in your browser. Click on the Beer icon, and you'll likely see an error in your browser.
 
 ```
 Uncaught (in promise): Error: No provider for Http!

@@ -134,7 +134,7 @@ cd server
 ./mvnw spring-boot:run
 ```
 
-Navigate to <http://localhost:8080> and you'll be prompted to log in.
+Navigate to `http://localhost:8080` and you'll be prompted to log in.
 
 {% img blog/angular-pwa-auth/spring-boot-login.png alt:"Spring Boot Login" width:"800" %}
 
@@ -211,7 +211,7 @@ version (1.0.0). The local Angular CLI version is used.
 To disable this warning use "ng set --global warnings.versionMismatch=false".
 ```
 
-When you navigate to <http://localhost:4200>, you'll likely see a cross-origin request error.
+When you navigate to `http://localhost:4200`, you'll likely see a cross-origin request error.
 
 ```
 Fetch API cannot load http://localhost:8080/good-beers. No 'Access-Control-Allow-Origin' 

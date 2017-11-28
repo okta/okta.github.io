@@ -1,7 +1,11 @@
 ---
 layout: quickstart_partial
 libraryName: Sign-In Widget
+sitemap:
+  exclude: "yes"
 ---
+
+## Okta Sign-In Widget Quickstart
 
 The [Okta Sign-In Widget](https://github.com/okta/okta-signin-widget) is a JavaScript widget that allows you to customize the Okta Sign-In experience by hosting it on your own page. This guide will walk you through integrating the Sign-In Widget into your custom front-end application by performing these steps:
 
