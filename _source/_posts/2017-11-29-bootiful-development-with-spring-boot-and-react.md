@@ -6,7 +6,7 @@ tags: [authentication, spring boot, react, okta, oidc]
 ---
 
 Are you a Java Developer that's eager to try out React? React has been getting a lot of positive press in the last couple
-years, and for good reason! Once you learn how it works, it makes a lot of sense, and can be fun to develop with. Not only
+years, and for a good reason! Once you learn how it works, it makes a lot of sense and can be fun to develop with. Not only
 that, but it's *wicked fast!*
 
 First of all, React isn't a full-fledged web framework. It's more of a toolkit for developing
@@ -20,7 +20,7 @@ Angular is a good friend of mine, and I'm not abandoning my old friend to adopt 
 If you've read this blog for a bit, you might remember my [Bootiful Development with Spring Boot and Angular](/blog/2017/04/26/bootiful-development-with-spring-boot-and-angular) tutorial. Today, I'll show you how to build
 the same application, except with React this time.
 
-This post shows how you can build a UI and an API as separate apps. You’ll learn how to create REST endpoints with Spring MVC, configure Spring Boot to allow CORS, and create an React app to display its data. This app will display a list of beers from the API, then fetch a GIF from [GIPHY](https://giphy.com/) that matches the beer’s name. I'll also show you to to integrate Okta and its OpenID Connect (OIDC) support to lock down your API and add authentication to your UI.
+This post shows how you can build a UI and an API as separate apps. You’ll learn how to create REST endpoints with Spring MVC, configure Spring Boot to allow CORS, and create a React app to display its data. This app will show a list of beers from the API, then fetch a GIF from [GIPHY](https://giphy.com/) that matches the beer’s name. I'll also show you to integrate Okta and its OpenID Connect (OIDC) support to lock down your API and add authentication to your UI.
 
 Let's get started!
 
@@ -48,7 +48,7 @@ Create a directory called `spring-boot-react-example`, with a `server` directory
 
 Open the “server" project in your favorite IDE and run `DemoApplication` or start it from the command line using `./mvnw spring-boot:run`.
 
-Create a `com.example.demo.beer` package and a `Beer.java` file in it. This will be the entity that holds your data.
+Create a `com.example.demo.beer` package and a `Beer.java` file in it. This class will be the entity that holds your data.
 
 ```java
 package com.example.demo.beer;
@@ -139,7 +139,7 @@ public class BeerCommandLineRunner implements CommandLineRunner {
 }
 ```
 
-Rebuild your project and you should see a list of beers printed in your terminal.
+Rebuild your project, and you should see a list of beers printed in your terminal.
 
 {% img blog/react-spring-boot/beers-in-terminal.png alt:"Beers printed in terminal" width:"800" %}{: .center-image }
 
@@ -211,13 +211,13 @@ To create a React project, make sure you have [Node.js](https://nodejs.org/), [C
 npm install -g create-react-app@1.4.3
 ```
 
-From a terminal window, cd into the root of the `spring-boot-react-example` directory and run the following command. This will create a new React application with TypeScript support.
+From a terminal window, cd into the root of the `spring-boot-react-example` directory and run the following command. This command will create a new React application with TypeScript support.
 
 ```bash
 create-react-app client --scripts-version=react-scripts-ts
 ```
 
-This will create a new `client` directory and run `yarn` to install all the necessary dependencies. To verify everything works, cd into the `client` directory and run `yarn start`. If everything works, you should see the following in your browser.
+After this process runs, you will have a new `client` directory with all the necessary dependencies installed. To verify everything works, cd into the `client` directory and run `yarn start`. If everything works, you should see the following in your browser.
 
 {% img blog/react-spring-boot/react-welcome.png alt:"Welcome to React" width:"800" %}{: .center-image }
 
@@ -233,10 +233,10 @@ componentDidMount() {
 }
 ```
 
-This method is invoked as part of [React's component lifecycle](https://reactjs.org/docs/react-component.html#the-component-lifecycle). The code above uses [`fetch`](https://fetch.spec.whatwg.org/),
+[React's component lifecycle](https://reactjs.org/docs/react-component.html#the-component-lifecycle) will call the `componentDidMount()` method. The code above uses [`fetch`](https://fetch.spec.whatwg.org/),
 a modern replacement for `XMLHttpRequest`. It's [supported in most browsers according to caniuse.com](https://caniuse.com/#search=fetch).
 
-You can see that it sets the `beers` state with the response data. In order to initialize the state for this component, you need to override the constructor.
+You can see that it sets the `beers` state with the response data. To initialize the state for this component, you need to override the constructor.
 
 ```typescript
 constructor(props: any) {
@@ -492,23 +492,23 @@ You may serve it with a static server:
   serve -s build
 ```
 
-Run the suggested commands and you should be able to open your browser to view `http://localhost:5000`. This will result in a CORS error, so crack open `BeerController.java` again and adjust it's allowed origins to allow port 5000.
+Run the suggested commands, and you should be able to open your browser to view `http://localhost:5000`. Your browser will likely show a CORS error in its console, so crack open `BeerController.java` again and adjust its allowed origins to permit port 5000.
 
 ```java
 @CrossOrigin(origins = {"http://localhost:3000", "http://localhost:5000"})
 ```
 
-Restart your server and `http://localhost:5000` should load with beer names and images.
+Restart your server, and `http://localhost:5000` should load with beer names and images.
 
 I ran a [Lighthouse](https://developers.google.com/web/tools/lighthouse/) audit in Chrome and found that this app only scores a 73/100 at this point.
 
 {% img blog/react-spring-boot/lighthouse-first.png alt:"Lighthouse Score from first audit" width:"800" %}{: .center-image } 
 
-You'll notice in the screenshot above that "Manifest does not have icons at least 512px". This one sounds easy enough to fix. You can download a 512 pixel free beer icon from [this page](https://www.flaticon.com/free-icon/beer_168557#term=beer&page=1&position=29). 
+You'll notice in the screenshot above that "Manifest does not have icons at least 512px". This one sounds easy enough to fix. You can download a 512-pixel free beer icon from [this page](https://www.flaticon.com/free-icon/beer_168557#term=beer&page=1&position=29). 
 
 **NOTE:** This icon is made by <a href="http://www.freepik.com" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a>. It's licensed by <a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0" target="_blank">CC 3.0 BY</a>.
 
-Copy the downloaded `beer.png` to `client/public`. Modify `client/public/manifest.json` to have a name specific to this app, and to add the 512 pixel icon.
+Copy the downloaded `beer.png` to `client/public`. Modify `client/public/manifest.json` to have a name specific to this app, and to add the 512-pixel icon.
 
 ```json
 {
@@ -533,17 +533,17 @@ Copy the downloaded `beer.png` to `client/public`. Modify `client/public/manifes
 }
 ```
 
-After making this change, I was able to achieve an 82 Lighthouse score for PWA. The biggest complaint from this report was that I wasn't using HTTPS. To see how the app would score when it used HTTPS, I deployed it to [Pivotal Cloud Foundry](https://pivotal.io/platform) and [Heroku](https://www.heroku.com/). I was pumped to discover it scored 💯 on both platforms.
+After making this change, I was able to achieve an 82 Lighthouse score for PWA. The most prominent complaint from this report was that I wasn't using HTTPS. To see how the app would score when it used HTTPS, I deployed it to [Pivotal Cloud Foundry](https://pivotal.io/platform) and [Heroku](https://www.heroku.com/). I was pumped to discover it scored 💯 on both platforms.
 
 {% img blog/react-spring-boot/lighthouse-cloudfoundry.png alt:"Lighthouse on Cloud Foundry" width:"800" %}{: .center-image } 
 
 {% img blog/react-spring-boot/lighthouse-heroku.png alt:"Lighthouse on Heroku" width:"800" %}{: .center-image } 
 
-To read the scripts I used to deploy everything, see [`cloudfoundry.sh`]() and [`heroku.sh`]() in this article's companion GitHub repository. I owe a big thanks to [@starbuxman](https://twitter.com/starbuxman) and [@codefinger](https://twitter.com/codefinger) for their help creating them!
+To read the scripts I used to deploy everything, see [`cloudfoundry.sh`](https://github.com/oktadeveloper/spring-boot-react-example/blob/master/cloudfoundry.sh) and [`heroku.sh`](https://github.com/oktadeveloper/spring-boot-react-example/blob/master/heroku.sh) in this article's companion GitHub repository. I owe a big thanks to [@starbuxman](https://twitter.com/starbuxman) and [@codefinger](https://twitter.com/codefinger) for their help creating them!
 
 ## Add Authentication with Okta
 
-You might be thinking, "this is pretty cool, it's easy to see why people fall in love with React". There's another tool you might fall in love with after you've tried it: Authentication with Okta! Why Okta? Because you can get [7,000 active monthly users for free](https://developer.okta.com/pricing/)! It's a worth a try, especially when you see how easy it is to add Okta Auth to Spring Boot and React.
+You might be thinking, "this is pretty cool, it's easy to see why people fall in love with React." There's another tool you might fall in love with after you've tried it: Authentication with Okta! Why Okta? Because you can get [7,000 active monthly users for free](https://developer.okta.com/pricing/)! It's a worth a try, especially when you see how easy it is to add Okta Auth to Spring Boot and React.
 
 ### Okta Spring Boot Starter
 
@@ -652,7 +652,7 @@ class App extends React.Component {
 export default App;
 ```
 
-Create `client/src/Home.tsx` to contain the application shell that `App.tsx` used to contain. This class renders the app shell, as well as login/logout buttons, and the `<BeerList/>` if you're authenticated. 
+Create `client/src/Home.tsx` to contain the application shell that `App.tsx` formerly contained. This class renders the app shell, as well as login/logout buttons, and the `<BeerList/>` if you're authenticated. 
 
 ```typescript
 import * as React from 'react';
@@ -739,7 +739,7 @@ Create `client/src/okta.d.ts` with the following declaration to solve this probl
 declare module '@okta/okta-react';
 ```
 
-Restart the client and you'll see there's some work to do on the `BeerList` component.
+Restart the client, and you'll see there's some work to do on the `BeerList` component.
 
 ```
 ./src/Home.tsx
@@ -782,11 +782,11 @@ Your browser should now show a Login button.
 
 {% img blog/react-spring-boot/login-button.png alt:"Login Button" width:"800" %}{: .center-image } 
 
-When you click the button to log in, enter the email and password you used to create your Okta Developer account. When it redirects you back to your application, you'll likely see "Loading..." and a CORS error in your brower's console.
+When you click the button to log in, enter the email and password you used to create your Okta Developer account. When it redirects you back to your application, you'll likely see "Loading..." and a CORS error in your browser's console.
 
 {% img blog/react-spring-boot/cors-error.png alt:"CORS Error after login" width:"800" %}{: .center-image } 
 
-This happens because Spring's `@CrossOrigin` doesn't play well with Spring Security. To solve this problem, add a `simpleCorsFilter` bean to the body of `DemoApplication.java`. 
+This error happens because Spring's `@CrossOrigin` doesn't play well with Spring Security. To solve this problem, add a `simpleCorsFilter` bean to the body of `DemoApplication.java`. 
 
 ```java
 package com.example.demo;
@@ -859,7 +859,7 @@ interface BeerListState {
 }
 ```
 
-Change the constructor so it initializes `error` to an empty string.
+Change the constructor, so it initializes `error` to an empty string.
 
 ```typescript
 this.state = {
@@ -953,11 +953,11 @@ To learn more about React, Spring Boot, or Okta, check out the following resourc
 * [Build a Preact App with Authentication ](/blog/2017/10/19/build-a-preact-app-with-authentication)
 * [Create a Custom Login Form with Okta's React SDK](/code/react/okta_react.html#create-a-custom-login-form)
 
-You can find the source code associated with this article [on GitHub](https://github.com/oktadeveloper/spring-boot-react-example). The basic example (without authentication) is in the `master` branch, while the Okta integration is in the `okta` branch. To check out the Okta branch on your local machine, run the following commands.
+You can find the source code associated with this article [on GitHub](https://github.com/oktadeveloper/spring-boot-react-example). The primary example (without authentication) is in the `master` branch, while the Okta integration is in the `okta` branch. To check out the Okta branch on your local machine, run the following commands.
 
 ```bash
 git clone git@github.com:oktadeveloper/spring-boot-react-example.git
 git checkout okta
 ```
 
-If you find any issues, please add a comment below and I'll do my best to help.
+If you find any issues, please add a comment below, and I'll do my best to help.
