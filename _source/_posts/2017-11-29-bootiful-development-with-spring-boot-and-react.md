@@ -267,7 +267,7 @@ class App extends React.Component<{}, any> {
 
 Change the `render()` method to have the following JSX. [JSX](https://facebook.github.io/jsx/) is Facebook's XML-like syntax that renders HTML via JavaScript.
 
-```typescript jsx
+```typescript
 render() {
   const {beers, isLoading} = this.state;
 
@@ -297,14 +297,14 @@ render() {
 If you look at `http://localhost:3000` in your browser, you'll see a "Loading..." message. If you look in your browser's console, you'll likely see an issue about CORS.
 
 <pre style="color: red">
-Failed to load http://localhost:8080/good-beers: No 'Access-Control-Allow-Origin' header is present on the requested resource. Origin 'http://localhost:4200' is therefore not allowed access.
+Failed to load http://localhost:8080/good-beers: No 'Access-Control-Allow-Origin' header is present on the requested resource. Origin 'http://localhost:3000' is therefore not allowed access.
 </pre>
 
 To fix this issue, you’ll need to configure Spring Boot to allow cross-domain access from `http://localhost:3000`.
 
 ### Configure CORS for Spring Boot
 
-In the server project, open `server/src/main/java/com/example/demo/beer/BeerController.java` and add a `@CrossOrigin` annotation to enable cross-origin resource sharing (CORS) from the client (`http://localhost:4200`).
+In the server project, open `server/src/main/java/com/example/demo/beer/BeerController.java` and add a `@CrossOrigin` annotation to enable cross-origin resource sharing (CORS) from the client (`http://localhost:3000`).
 
 ```java
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -322,7 +322,7 @@ After making these changes, restart the server, refresh your browser, and you sh
 
 To make this application easier to maintain, move the beer list fetching and rendering from `App.tsx` to its own `BeerList` component. Create `src/BeerList.tsx` and populate it with the code from `App.tsx`.
 
-```typescript tsx
+```typescript
 import * as React from 'react';
 
 class BeerList extends React.Component<{}, any> {
@@ -368,7 +368,7 @@ export default BeerList;
 
 Then change `client/src/App.tsx` so it only contains a shell and a reference to `<BeerList/>`.
 
-```typescript jsx
+```typescript
 import * as React from 'react';
 import './App.css';
 import BeerList from './BeerList';
@@ -396,7 +396,7 @@ export default App;
 
 To make it look a little better, add a [GIPHY](http://giphy.com) component to fetch images based on the beer’s name. Create `client/src/GiphyImage.tsx` and place the following code inside it.
 
-```typescript jsx
+```typescript
 import * as React from 'react';
 
 interface GiphyImageProps {
@@ -447,7 +447,7 @@ export default GiphyImage;
 
 Change the `render()` method in `BeerList.tsx` to use this component.
 
-```typescript jsx
+```typescript
 import GiphyImage from './GiphyImage';
 ...
 render() {
@@ -494,7 +494,7 @@ You may serve it with a static server:
 
 Run the suggested commands and you should be able to open your browser to view `http://localhost:5000`. This will result in a CORS error, so crack open `BeerController.java` again and adjust it's allowed origins to allow port 5000.
 
-```typescript jsx
+```java
 @CrossOrigin(origins = {"http://localhost:3000", "http://localhost:5000"})
 ```
 
@@ -504,11 +504,11 @@ I ran a [Lighthouse](https://developers.google.com/web/tools/lighthouse/) audit 
 
 {% img blog/react-spring-boot/lighthouse-first.png alt:"Lighthouse Score from first audit" width:"800" %}{: .center-image } 
 
-You'll notice in the screenshot above that "Manifest does not have icons at least 512px". This one sounds easy enough to fix. Download the 512 pixel free beer icon from [this page](https://www.flaticon.com/free-icon/beer_168557#term=beer&page=1&position=29). 
+You'll notice in the screenshot above that "Manifest does not have icons at least 512px". This one sounds easy enough to fix. You can download a 512 pixel free beer icon from [this page](https://www.flaticon.com/free-icon/beer_168557#term=beer&page=1&position=29). 
 
-**NOTE:** This icon is made by <a href="http://www.freepik.com" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a>. It's licensed by <a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0" target="_blank">CC 3.0 BY</a>
+**NOTE:** This icon is made by <a href="http://www.freepik.com" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a>. It's licensed by <a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0" target="_blank">CC 3.0 BY</a>.
 
-Copy the downloaded `beer.png` to `client/public`. Modify `client/public/manifest.json` to have a name specific to this app, and to add a 512 pixel icon.
+Copy the downloaded `beer.png` to `client/public`. Modify `client/public/manifest.json` to have a name specific to this app, and to add the 512 pixel icon.
 
 ```json
 {
@@ -543,7 +543,7 @@ To read the scripts I used to deploy everything, see [`cloudfoundry.sh`]() and [
 
 ## Add Authentication with Okta
 
-You might be thinking, "this is pretty cool". I agree, it's easy to see why people fall in love with React. There's another tool you might fall in love with after you've tried it: Authentication with Okta! Why Okta? Because you can get [7,000 active monthly users for free](https://developer.okta.com/pricing/)! It's a worth a try, especially when you see how easy it is to add Okta Auth to Spring Boot and React.
+You might be thinking, "this is pretty cool, it's easy to see why people fall in love with React". There's another tool you might fall in love with after you've tried it: Authentication with Okta! Why Okta? Because you can get [7,000 active monthly users for free](https://developer.okta.com/pricing/)! It's a worth a try, especially when you see how easy it is to add Okta Auth to Spring Boot and React.
 
 ### Okta Spring Boot Starter
 
@@ -551,9 +551,9 @@ To lock down the backend, you can use [Okta's Spring Boot Starter](https://githu
 
 ```xml
 <dependency>
-	<groupId>com.okta.spring</groupId>
-	<artifactId>okta-spring-boot-starter</artifactId>
-	<version>0.2.0</version>
+    <groupId>com.okta.spring</groupId>
+    <artifactId>okta-spring-boot-starter</artifactId>
+    <version>0.2.0</version>
 </dependency>
 ```
 
@@ -572,22 +572,385 @@ You'll also need to add a `<dependencyManagement>` section to upgrade Spring Sec
 
 ```
 
-**NOTE:** The Okta Spring Boot Starter 0.2.0 [doesn't work with Spring Boot's DevTools](https://github.com/okta/okta-spring-boot/issues/22). This tutorial doesn't use DevTools, but I think it's important to make you aware in case you try to add it.
+**NOTE:** [There is an issue](https://github.com/okta/okta-spring-boot/issues/22) with Okta's Spring Boot starter where it doesn't work with Spring Boot's DevTools.
 
+Now you need to configure the server to use Okta for authentication. You'll need to create an OIDC app in Okta for that.
+
+### Create an OIDC App in Okta
+
+Log in to your Okta Developer account (or [sign up](https://developer.okta.com/signup/) if you don’t have an account) and navigate to **Applications** > **Add Application**. Click **Single-Page App**, click **Next**, and give the app a name you’ll remember. Change all instances of `localhost:8080` to `localhost:3000` and click **Done**.
+
+Copy the client ID into your `server/src/main/resources/application.properties` file. While you're in there, add a `okta.oauth2.issuer` property that matches your Okta domain. For example:
+
+```properties
+okta.oauth2.issuer=https://{yourOktaDomain}.com/oauth2/default
+okta.oauth2.clientId=XXX
+```
+
+Update `server/src/main/java/com/okta/developer/demo/DemoApplication.java` to enable it as a resource server.
+
+```java
+import org.springframework.security.oauth2.config.annotation.web.configuration.EnableResourceServer;
+
+@EnableResourceServer
+@SpringBootApplication
+```
+
+After making these changes, you should be able to restart the server and see access denied when you try to navigate to http://localhost:8080.
+
+{% img blog/react-spring-boot/server-access-denied.png alt:"Access Denied by Okta Spring Boot Starter" width:"800" %}{: .center-image } 
+
+### Okta's React Support
+
+Okta's React SDK allows you to integrate OIDC into a React application. You can learn more about Okta's React SDK can be [found on npmjs.com](https://www.npmjs.com/package/@okta/okta-react). To install, run the following commands:
+
+```
+yarn add @okta/okta-react react-router-dom
+yarn add -D @types/react-router-dom
+```
+
+Okta's React SDK depends on [react-router](https://www.npmjs.com/package/react-router), hence the reason for installing `react-router-dom`. Configuring routing in `client/src/App.tsx` is a common practice, so replace its code with the TypeScript below that sets up Okta Auth.
+
+```typescript
+import * as React from 'react';
+import './App.css';
+import Home from './Home';
+import { BrowserRouter as Router, Route } from 'react-router-dom';
+import { Security, ImplicitCallback } from '@okta/okta-react';
+
+const config = {
+  issuer: 'https://{yourOktaDomain}.com/oauth2/default',
+  redirectUri: window.location.origin + '/implicit/callback',
+  clientId: 'XXX'
+};
+
+export interface Auth {
+  login(): {};
+  logout(): {};
+  isAuthenticated(): boolean;
+  getAccessToken(): string;
+}
+
+class App extends React.Component {
+
+  render() {
+    return (
+      <Router>
+        <Security
+          issuer={config.issuer}
+          client_id={config.clientId}
+          redirect_uri={config.redirectUri}
+        >
+          <Route path="/" exact={true} component={Home}/>
+          <Route path="/implicit/callback" component={ImplicitCallback}/>
+        </Security>
+      </Router>
+    );
+  }
+}
+
+export default App;
+```
+
+Create `client/src/Home.tsx` to contain the application shell that `App.tsx` used to contain. This class renders the app shell, as well as login/logout buttons, and the `<BeerList/>` if you're authenticated. 
+
+```typescript
+import * as React from 'react';
+import './App.css';
+import BeerList from './BeerList';
+import { withAuth } from '@okta/okta-react';
+import { Auth } from './App';
+
+const logo = require('./logo.svg');
+
+interface HomeProps {
+  auth: Auth;
+}
+
+interface HomeState {
+  authenticated: boolean;
+}
+
+export default withAuth(class Home extends React.Component<HomeProps, HomeState> {
+  constructor(props: HomeProps) {
+    super(props);
+    this.state = {authenticated: false};
+    this.checkAuthentication = this.checkAuthentication.bind(this);
+    this.checkAuthentication();
+  }
+
+  async checkAuthentication() {
+    const isAuthenticated = await this.props.auth.isAuthenticated();
+    const {authenticated} = this.state;
+    if (isAuthenticated !== authenticated) {
+      this.setState({authenticated: isAuthenticated});
+    }
+  }
+
+  componentDidUpdate() {
+    this.checkAuthentication();
+  }
+
+  render() {
+    const {authenticated} = this.state;
+    let body = null;
+    if (authenticated) {
+      body = (
+        <div className="Buttons">
+          <button onClick={this.props.auth.logout}>Logout</button>
+          <BeerList auth={this.props.auth}/>
+        </div>
+      );
+    } else {
+      body = (
+        <div className="Buttons">
+          <button onClick={this.props.auth.login}>Login</button>
+        </div>
+      );
+    }
+
+    return (
+      <div className="App">
+        <div className="App-header">
+          <img src={logo} className="App-logo" alt="logo"/>
+          <h2>Welcome to React</h2>
+        </div>
+        {body}
+      </div>
+    );
+  }
+});
+```
+
+If you look at your React app in your browser, you'll likely see an error like the following:
+
+```bash
+./src/Home.tsx
+(4,26): error TS7016: Could not find a declaration file for module '@okta/okta-react'. 
+'/Users/mraible/spring-boot-react-example/client/node_modules/@okta/okta-react/dist/index.js' 
+ implicitly has an 'any' type.
+  Try `npm install @types/@okta/okta-react` if it exists or add a new declaration (.d.ts) file 
+  containing `declare module '@okta/okta-react';`
+```
+
+Create `client/src/okta.d.ts` with the following declaration to solve this problem.
+
+```typescript
+declare module '@okta/okta-react';
+```
+
+Restart the client and you'll see there's some work to do on the `BeerList` component.
+
+```
+./src/Home.tsx
+(44,21): error TS2339: Property 'auth' does not exist on type 'IntrinsicAttributes & 
+IntrinsicClassAttributes<BeerList> & Readonly<{ children?: ReactNode; }> & ...'.
+```
+
+In `client/src/BeerList.tsx`, add the `auth` property to the props by creating a `BeerListProps` interface that's passed into the class signature. 
+
+```typescript
+import { Auth } from './App';
+
+interface BeerListProps {
+  auth: Auth;
+}
+
+interface BeerListState {
+  beers: Array<{}>;
+  isLoading: boolean;
+}
+
+class BeerList extends React.Component<BeerListProps, BeerListState> {
+  ...
+}
+```
+
+Add the following CSS rules to `client/src/App.css` to make the Login/Logout buttons a little more visible.
+
+```css
+.Buttons {
+  margin-top: 10px;
+}
+
+.Buttons button {
+  font-size: 1em;
+}
+```
+
+Your browser should now show a Login button.
+
+{% img blog/react-spring-boot/login-button.png alt:"Login Button" width:"800" %}{: .center-image } 
+
+When you click the button to log in, enter the email and password you used to create your Okta Developer account. When it redirects you back to your application, you'll likely see "Loading..." and a CORS error in your brower's console.
+
+{% img blog/react-spring-boot/cors-error.png alt:"CORS Error after login" width:"800" %}{: .center-image } 
+
+This happens because Spring's `@CrossOrigin` doesn't play well with Spring Security. To solve this problem, add a `simpleCorsFilter` bean to the body of `DemoApplication.java`. 
+
+```java
+package com.example.demo;
+
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.web.servlet.FilterRegistrationBean;
+import org.springframework.context.annotation.Bean;
+import org.springframework.core.Ordered;
+import org.springframework.security.oauth2.config.annotation.web.configuration.EnableResourceServer;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
+import org.springframework.web.filter.CorsFilter;
+
+import java.util.Arrays;
+import java.util.Collections;
+
+@EnableResourceServer
+@SpringBootApplication
+public class DemoApplication {
+
+    public static void main(String[] args) {
+        SpringApplication.run(DemoApplication.class, args);
+    }
+
+    @Bean
+    public FilterRegistrationBean simpleCorsFilter() {
+        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+        CorsConfiguration config = new CorsConfiguration();
+        config.setAllowCredentials(true);
+        config.setAllowedOrigins(Arrays.asList("http://localhost:3000", "http://localhost:5000"));
+        config.setAllowedMethods(Collections.singletonList("*"));
+        config.setAllowedHeaders(Collections.singletonList("*"));
+        source.registerCorsConfiguration("/**", config);
+        FilterRegistrationBean bean = new FilterRegistrationBean(new CorsFilter(source));
+        bean.setOrder(Ordered.HIGHEST_PRECEDENCE);
+        return bean;
+    }
+}
+```
+
+To make it all work on the client, modify the `componentDidMount()` method in `client/src/BeerList.tsx` to set an authorization header.
+
+
+```typescript
+async componentDidMount() {
+  this.setState({isLoading: true});
+
+  try {
+    const response = await fetch('http://localhost:8080/good-beers', {
+      headers: {
+        Authorization: 'Bearer ' + await this.props.auth.getAccessToken()
+    }
+  });
+    const data = await response.json();
+    this.setState({beers: data, isLoading: false});
+  } catch (err) {
+    this.setState({error: err});
+  }
+}
+```
+
+You'll also need to add `error` in the `BeerListState` interface.
+
+```typescript
+interface BeerListState {
+  beers: Array<{}>;
+  isLoading: boolean;
+  error: string;
+}
+```
+
+Change the constructor so it initializes `error` to an empty string.
+
+```typescript
+this.state = {
+  beers: [],
+  isLoading: false,
+  error: ''
+};
+```
+
+Then change the `render()` method to show an error when it happens.
+
+```typescript
+  render() {
+    const {beers, isLoading, error} = this.state;
+
+    if (isLoading) {
+      return <p>Loading ...</p>;
+    }
+
+    if (error.length > 0) {
+      return <p>Error: {error}</p>;
+    }
+
+    return (...)
+  }
+```
+
+Now you should be able to see the beer list as an authenticated user. 
+
+{% img blog/react-spring-boot/success.png alt:"Wahoo!" width:"800" %}{: .center-image } 
+
+If it works, congratulations!
 
 ### Clean Up Those TypeScript Warnings
 
+You might notice that your browser's console reports some TypeScript warnings.
+
+```bash
+./src/BeerList.tsx
+[16, 22]: Type declaration of 'any' loses type-safety. Consider replacing it with a more precise 
+ type, the empty type ('{}'), or suppress this occurrence.
+[52, 27]: Type declaration of 'any' loses type-safety. Consider replacing it with a more precise 
+ type, the empty type ('{}'), or suppress this occurrence.
+./src/GiphyImage.tsx
+[7, 59]: Type declaration of 'any' loses type-safety. Consider replacing it with a more precise 
+ type, the empty type ('{}'), or suppress this occurrence.
+```
+
+To fix the first issue, change `client/src/BeerList.tsx` so its constructor reads as follows:
+
+```typescript
+constructor(props: BeerListProps) {
+  ...
+}
+```
+
+For the second issue, create a `Beer` interface in `client/src/BeerList.tsx`. Put it alongside the other interfaces at the top.
+
+```typescript
+interface Beer {
+  id: number;
+  name: string;
+}
+```
+
+Then change `{beers.map((beer: any) =>` to be `{beers.map((beer: Beer) =>`. 
+
+The third issue can be solved by creating a new `GiphyImageState` interface in `client/src/GiphyImage.tsx` to define the state properties.
+
+```typescript
+interface GiphyImageState {
+  giphyUrl: string;
+  isLoading: boolean;
+}
+
+class GiphyImage extends React.Component<GiphyImageProps, GiphyImageState> {
+  ...
+}
+```
+
+After making these changes, you should be rid of your TypeScript warnings.
+
 ## Learn More About Spring Boot and React
 
-Angular vs React from Devoxx + YouTube
+To learn more about React, Spring Boot, or Okta, check out the following resources:
 
-Fave Learning Video
+* [Intro to React Workshop by Eric Vicenti](https://vimeo.com/213710634) - highly recommended for learning React!
+* My [Angular vs React Smackdown Talk at Devoxx Belgium](https://www.youtube.com/watch?v=qYEEuiI4l10) with [Deepu K Sasidharan](https:/twitter.com/deepu105)
+* [How to fetch data in React](https://www.robinwieruch.de/react-fetching-data/) by [Robin Wieruch](https://twitter.com/rwieruch)
+* [Build a React Application with User Authentication in 15 Minutes](/blog/2017/03/30/react-okta-sign-in-widget) 
+* [Build a Preact App with Authentication ](/blog/2017/10/19/build-a-preact-app-with-authentication)
+* [Create a Custom Login Form with Okta's React SDK](/code/react/okta_react.html#create-a-custom-login-form)
 
-https://www.robinwieruch.de/react-fetching-data/
-
-https://developer.okta.com/blog/2017/03/30/react-okta-sign-in-widget
-
-https://developer.okta.com/blog/2017/10/19/build-a-preact-app-with-authentication
-
-https://developer.okta.com/code/react/okta_react.html
-
+You can find the source code associated with this article [on GitHub](https://github.com/oktadeveloper/spring-boot-react-example). If you find any issues, please add a comment below and I'll do my best to help.
