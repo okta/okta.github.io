@@ -953,4 +953,11 @@ To learn more about React, Spring Boot, or Okta, check out the following resourc
 * [Build a Preact App with Authentication ](/blog/2017/10/19/build-a-preact-app-with-authentication)
 * [Create a Custom Login Form with Okta's React SDK](/code/react/okta_react.html#create-a-custom-login-form)
 
-You can find the source code associated with this article [on GitHub](https://github.com/oktadeveloper/spring-boot-react-example). If you find any issues, please add a comment below and I'll do my best to help.
+You can find the source code associated with this article [on GitHub](https://github.com/oktadeveloper/spring-boot-react-example). The basic example (without authentication) is in the `master` branch, while the Okta integration is in the `okta` branch. To check out the Okta branch on your local machine, run the following commands.
+
+```bash
+git clone git@github.com:oktadeveloper/spring-boot-react-example.git
+git checkout okta
+```
+
+If you find any issues, please add a comment below and I'll do my best to help.
