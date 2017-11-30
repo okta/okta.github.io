@@ -54,7 +54,10 @@ The created [Identity Provider](#identity-provider-model)
 
 Adds a new `SAML2` type IdP to your organization
 
-> You must first add the IdP's signature certificate to the IdP key store before you can add a SAML 2.0 IdP with a `kid` credential reference.
+Notes:
+
+* You must first add the IdP's signature certificate to the IdP key store before you can add a SAML 2.0 IdP with a `kid` credential reference.
+* Don't use `fromURI` to automatically redirect a user to a particular app after successfully authenticating with a third-party IdP. Instead, use [SAML Deep Links](#redirecting-with-saml-deep-links). Using `fromURI` is not tested and not supported. This technique is for sign on that is initiated by a third-party IdP, not for SP-initiated sign on. For more information about deep links, see [Understanding SP-Initiated Login Flow](/standards/SAML/#understanding-sp-initiated-login-flow).
 
 ##### Request Example
 {:.api .api-request .api-request-example}
@@ -252,6 +255,15 @@ curl -v -X POST \
   }
 }
 ~~~
+##### Redirecting with SAML Deep Links
+
+Use SAML deep links to automatically redirect the user to an app after successfully authenticating with a third-party IdP. To use deep links, assemble these three parts into a URL:
+
+1. IdP ACS URL, for example: `https://{myOktaDomain}.com/sso/saml2/:IdPId`
+2. The SSO URL from the sing-on instructions on the SAML app, for example: `/app/:app-location/:appId/sso/saml`
+3. Optionally, the inbound relay state, for example: `?RelayState=:anyUrlEncodedValue`
+
+The deep link for steps 1-3 is: `https://{myOktaDomain}.com/sso/saml2/:IdPId/app/:app-location/:appId/sso/saml?RelayState=:anyUrlEncodedValue`
 
 #### Add Facebook Identity Provider
 {:.api .api-operation}
