@@ -129,21 +129,20 @@ If you try to access this new endpoint, you’ll get an error that the `Principa
 
 ```bash
 $ http localhost:8080
-HTTP/1.1 500
+HTTP/1.1 500 
 Connection: close
 Content-Type: application/json;charset=UTF-8
-Date: Fri, 11 Aug 2017 07:36:46 GMT
+Date: Thu, 30 Nov 2017 17:04:01 GMT
 Transfer-Encoding: chunked
 ```
 ```json
 {
     "error": "Internal Server Error",
     "exception": "java.lang.IllegalArgumentException",
-    "message": "Parameter specified as non-null is null: method 
-                com.okta.developer.notes.HomeController.home, parameter principal",
+    "message": "Parameter specified as non-null is null: method com.okta.developer.notes.HomeController.home, parameter principal",
     "path": "/",
     "status": 500,
-    "timestamp": 1502437006005
+    "timestamp": 1512061441679
 }
 ```
 
@@ -166,7 +165,7 @@ If you navigate to http://localhost:8080 in your browser, you will see a basic a
     "message": "Full authentication is required to access this resource",
     "path": "/",
     "status": 401,
-    "timestamp": 1502437281185
+    "timestamp": 1512061542911
 }
 ```
 
@@ -259,8 +258,8 @@ Okta provides a Spring Boot starter that integrates with Spring Security and its
 ```xml
 <dependency>
       <groupId>com.okta.spring</groupId>
-      <artifactId>okta-spring-security-starter</artifactId>
-      <version>0.1.0</version>
+      <artifactId>okta-spring-boot-starter</artifactId>
+      <version>0.2.0</version>
 </dependency>    
 ```
 
@@ -359,7 +358,7 @@ Then create a new project using its `ng` command.
 ng new client
 ```
 
-It takes a minute or two to install all the dependencies. After it finishes, you can run `ng serve` to view the app, or `ng test` to run unit tests. If you want to verify that the end-to-end tests pass, run `ng e2e`. 
+It takes a minute or two to install all the dependencies. After it finishes, cd into the `client` directory. You can run `ng serve` to view the app, or `ng test` to run unit tests. If you want to verify that the end-to-end tests pass, run `ng e2e`. 
 
 Create a service and component using the `generate` (alias: `g`) command. You can use `s` as an alias for `service` and `c` as an alias for `component`. 
 
@@ -403,8 +402,8 @@ Modify `client/src/app/shared/note/note.service.ts` to have a `getAll()` method 
 
 ```typescript
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs/Observable';
 import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs/Observable';
 
 @Injectable()
 export class NoteService {
@@ -617,7 +616,7 @@ export class OktaAuthInterceptor implements HttpInterceptor {
       if (error instanceof HttpErrorResponse) {
         if (error.status === 401) {
           this.oktaService.login();
-          return Observable.create(error);
+          return Observable.throw(error);
         }
       }
     });
@@ -732,8 +731,8 @@ export class AppComponent implements OnInit {
 To make the Okta Sign-In Widget look good, add its default CSS files to `client/src/styles`.
 
 ```css
-@import '~https://ok1static.oktacdn.com/assets/js/sdk/okta-signin-widget/2.1.0/css/okta-sign-in.min.css';
-@import '~https://ok1static.oktacdn.com/assets/js/sdk/okta-signin-widget/2.1.0/css/okta-theme.css';
+@import '~https://ok1static.oktacdn.com/assets/js/sdk/okta-signin-widget/2.4.0/css/okta-sign-in.min.css';
+@import '~https://ok1static.oktacdn.com/assets/js/sdk/okta-signin-widget/2.4.0/css/okta-theme.css';
 ```
 
 After making all these changes, you should be able to fire up http://localhost:4200 (using `ng serve`) and see a sign in form.
@@ -859,3 +858,7 @@ You can now log in and add a note.
 Congrats! You're well on your way to becoming a Kotlin and TypeScript developer who understands Spring Boot and Angular. All of the code used in this article is [available on GitHub](https://github.com/oktadeveloper/okta-kotlin-typescript-notes-example). 
 
 If you have questions about this code or technologies you want to see in my next post, let me know on Twitter [@mraible](https://twitter.com/mraible)!
+
+**Changelog:**
+
+* Nov 30, 2017: Updated to use Spring Boot 1.5.9, Angular 5.0, and Angular CLI 1.5.5. See the code changes in the [example app on GitHub](). 
