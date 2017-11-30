@@ -258,8 +258,8 @@ Okta provides a Spring Boot starter that integrates with Spring Security and its
 ```xml
 <dependency>
       <groupId>com.okta.spring</groupId>
-      <artifactId>okta-spring-boot-starter</artifactId>
-      <version>0.2.0</version>
+      <artifactId>okta-spring-security-starter</artifactId>
+      <version>0.1.0</version>
 </dependency>    
 ```
 
@@ -588,8 +588,7 @@ import {
 } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
 import { OktaAuthService } from './okta.service';
-import 'rxjs/add/operator/map';
-import 'rxjs/add/operator/catch';
+import 'rxjs/add/operator/do';
 
 @Injectable()
 export class OktaAuthInterceptor implements HttpInterceptor {
@@ -608,15 +607,12 @@ export class OktaAuthInterceptor implements HttpInterceptor {
       });
     }
 
-    return next.handle(request).map((event: HttpEvent<any>) => {
+    return next.handle(request).do((event: HttpEvent<any>) => {
       if (event instanceof HttpResponse) {
         return event;
-      }
-    }).catch(error => {
-      if (error instanceof HttpErrorResponse) {
-        if (error.status === 401) {
+      } else if (event instanceof HttpErrorResponse) {
+        if (event.status === 401) {
           this.oktaService.login();
-          return Observable.throw(error);
         }
       }
     });
@@ -731,8 +727,8 @@ export class AppComponent implements OnInit {
 To make the Okta Sign-In Widget look good, add its default CSS files to `client/src/styles`.
 
 ```css
-@import '~https://ok1static.oktacdn.com/assets/js/sdk/okta-signin-widget/2.4.0/css/okta-sign-in.min.css';
-@import '~https://ok1static.oktacdn.com/assets/js/sdk/okta-signin-widget/2.4.0/css/okta-theme.css';
+@import '~@okta/okta-signin-widget/dist/css/okta-sign-in.min.css';
+@import '~@okta/okta-signin-widget/dist/css/okta-theme.css';
 ```
 
 After making all these changes, you should be able to fire up http://localhost:4200 (using `ng serve`) and see a sign in form.
@@ -861,4 +857,4 @@ If you have questions about this code or technologies you want to see in my next
 
 **Changelog:**
 
-* Nov 30, 2017: Updated to use Spring Boot 1.5.9, Angular 5.0, and Angular CLI 1.5.5. See the code changes in the [example app on GitHub](). 
+* Nov 30, 2017: Updated to use Spring Boot 1.5.9, Angular 5.0, Angular CLI 1.5.5, Angular Material 5.0.0-rc.2, and Okta Sign-In Widget 2.5.0. See the code changes in the [example app on GitHub](https://github.com/oktadeveloper/okta-kotlin-typescript-notes-example/pull/3/files). Changes to this article can be viewed [in this pull request]().
