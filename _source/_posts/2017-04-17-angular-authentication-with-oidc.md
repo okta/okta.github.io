@@ -107,7 +107,7 @@ You can make sure your new project's tests pass, run `ng test`:
 ```bash
 $ ng test
 ...
-Chrome 60.0.3112 (Mac OS X 10.12.6): Executed 3 of 3 SUCCESS (0.239 secs / 0.213 secs)
+Chrome 62.0.3202 (Mac OS X 10.12.6): Executed 3 of 3 SUCCESS (0.239 secs / 0.213 secs)
 ```
 
 ## Add a Search Feature
@@ -264,20 +264,18 @@ Create `src/assets/data/people.json` to hold your data.
 ]
 ```
 
-Modify `src/app/shared/search/search.service.ts` and provide `Http` as a dependency in its constructor. In this same file, create a `getAll()` method to gather all the people. Also, define the `Address` and `Person` classes that JSON will be marshalled to.
+Modify `src/app/shared/search/search.service.ts` and provide `HttpClient` as a dependency in its constructor. In this same file, create a `getAll()` method to gather all the people. Also, define the `Address` and `Person` classes that JSON will be marshalled to.
 
 ```typescript
 import { Injectable } from '@angular/core';
-import { Http, Response } from '@angular/http';
-import 'rxjs/add/operator/map';
+import { HttpClient } from '@angular/common/http';
 
 @Injectable()
 export class SearchService {
-  constructor(private http: Http) {}
+  constructor(private http: HttpClient) {}
 
   getAll() {
-    return this.http.get('assets/data/people.json')
-        .map((res: Response) => res.json());
+    return this.http.get('assets/data/people.json');
   }
 }
 
@@ -352,17 +350,17 @@ ORIGINAL EXCEPTION: No provider for SearchService!
 ```
 
 To fix the "No provider" error from above, update `app.module.ts` to import the `SearchService`
-and add the service to the list of providers. Because `SearchService` depends on `Http`, you’ll need to import `HttpModule` as well.
+and add the service to the list of providers. Because `SearchService` depends on `HttpClient`, you’ll need to import `HttpClientModule` as well.
 
 ```typescript
 import { SearchService } from './shared';
-import { HttpModule } from '@angular/http';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   ...
   imports: [
     ...
-    HttpModule
+    HttpClientModule
   ],
   providers: [SearchService],
   bootstrap: [AppComponent]
@@ -421,7 +419,7 @@ Now the search results look better.
 But wait, you still don't have search functionality! To add a search feature, add a `search()` method to `SearchService`.
 
 ```typescript
-import { Observable } from 'rxjs';
+import { Observable } from 'rxjs/Observable';
 
 search(q: string): Observable<any> {
   if (!q || q === '*') {
@@ -516,10 +514,10 @@ Update `src/app/edit/edit.component.html` to display an editable form. You might
 Modify `EditComponent` to import model and service classes and to use the `SearchService` to get data.
 
 ```typescript
-import { Component, OnInit, OnDestroy } from '@angular/core';
-import { Address, Person, SearchService } from '../shared';
-import { Subscription } from 'rxjs';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Person, SearchService } from '../shared';
+import { ActivatedRoute } from '@angular/router';
+import { Subscription } from 'rxjs/Subscription';
 
 @Component({
   selector: 'app-edit',
@@ -590,7 +588,7 @@ search(q: string): Observable<any> {
   } else {
     q = q.toLowerCase();
   }
-  return this.getAll().map(data => {
+  return this.getAll().map((data: any) => {
     const results: any = [];
     data.map(item => {
       // check for item in localStorage
@@ -606,7 +604,7 @@ search(q: string): Observable<any> {
 }
 
 get(id: number) {
-  return this.getAll().map(all => {
+  return this.getAll().map((all: any) => {
     if (localStorage['person' + id]) {
       return JSON.parse(localStorage['person' + id]);
     }
@@ -653,7 +651,7 @@ Since the `SearchComponent` doesn't execute a search automatically when you exec
 
 ```typescript
 import { ActivatedRoute } from '@angular/router';
-import { Subscription } from 'rxjs';
+import { Subscription } from 'rxjs/Subscription';
 ...
 
 sub: Subscription;
@@ -777,7 +775,7 @@ import { OAuthService, JwksValidationHandler } from 'angular-oauth2-oidc';
     this.oauthService.redirectUri = window.location.origin;
     this.oauthService.clientId = '{client-id}';
     this.oauthService.scope = 'openid profile email';
-    this.oauthService.issuer = 'https://dev-{dev-id}.oktapreview.com';
+    this.oauthService.issuer = 'https://{yourOktaDomain}.com';
     this.oauthService.tokenValidationHandler = new JwksValidationHandler();
 
     // Load Discovery Document and then try to login the user
@@ -917,18 +915,10 @@ Install it using npm:
 npm install @okta/okta-auth-js --save
 ```
 
-Add a reference to this library’s main JavaScript file in `.angular-cli.json`:
-
-```json
-"scripts": [
-  "../node_modules/@okta/okta-auth-js/dist/okta-auth-js.min.js"
-],
-```
-
 The components in this section use Bootstrap CSS classes. Install Bootstrap 4.
 
 ```bash
-npm install bootstrap@4.0.0-beta --save
+npm install bootstrap@4.0.0-beta.2 --save
 ```
 
 Modify `src/styles.css` to add a reference to Bootstrap’s CSS file.
@@ -956,8 +946,7 @@ Create `src/app/shared/auth/okta.auth.wrapper.ts` to wrap the Okta Auth SDK and 
 ```typescript
 import { OAuthService } from 'angular-oauth2-oidc';
 import { Injectable } from '@angular/core';
-
-declare const OktaAuth: any;
+import * as OktaAuth from '@okta/okta-auth-js';
 
 @Injectable()
 export class OktaAuthWrapper {
@@ -989,7 +978,7 @@ export class OktaAuthWrapper {
               const idToken = tokens[0].idToken;
               const accessToken = tokens[1].accessToken;
               const keyValuePair = `#id_token=${encodeURIComponent(idToken)}&access_token=${encodeURIComponent(accessToken)}`;
-              return this.oauthService.tryLogin({ <1>
+              return this.oauthService.tryLogin({
                 customHashFragment: keyValuePair,
                 disableOAuth2StateCheck: true
               });
@@ -1113,6 +1102,7 @@ You can find a completed version of the application created in this blog post [o
 
 * Aug 31, 2017: Updated to use Angular CLI 1.3.2 and angular-oauth2-oidc 2.0.12. See the code changes in the [example app on GitHub](https://github.com/oktadeveloper/okta-angular-openid-connect-example/pull/2/files).
 * Sep 28, 2017: Updated "create an OIDC app" instructions for the [Okta Developer Console](/blog/2017/09/25/all-new-developer-console).
+* Nov 30, 2017: Updated to use Angular CLI 1.5.5 and angular-oauth2-oidc 3.0.1. See the code changes in the [example app on GitHub](https://github.com/oktadeveloper/okta-angular-openid-connect-example/pull/3/files). Changes to this article can be viewed [in this pull request](https://github.com/okta/okta.github.io/pull/1517).
 
 
 
