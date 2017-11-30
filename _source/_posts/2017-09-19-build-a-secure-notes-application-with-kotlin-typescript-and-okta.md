@@ -188,7 +188,7 @@ $ http --auth user:'kotlin is fun!' localhost:8080
 HTTP/1.1 200
 Cache-Control: no-cache, no-store, max-age=0, must-revalidate
 Content-Type: application/json;charset=UTF-8
-Date: Fri, 11 Aug 2017 07:47:10 GMT
+Date: Thu, 30 Nov 2017 18:41:46 GMT
 Expires: 0
 Pragma: no-cache
 Strict-Transport-Security: max-age=31536000 ; includeSubDomains
@@ -459,7 +459,7 @@ Install the Okta Sign-In Widget to authenticate using the “My OIDC” app you 
 yarn add @okta/okta-signin-widget
 ```
 
-Create an `OktaAuthService` that can be used to render the Sign-In Widget and handle authentication. The following TypeScript code should be in `client/src/app/shared/okta/okta.service.ts`. Be sure to replace `{dev-id}`, `{client-id}`, and `{as-server-url}` with values appropriate for your Okta application and authorization server.
+Create an `OktaAuthService` that can be used to render the Sign-In Widget and handle authentication. The following TypeScript code should be in `client/src/app/shared/okta/okta.service.ts`. Be sure to replace `{yourOktaDomain}` and `{client-id}` with values appropriate for your Okta organization and application.
 
 ```typescript
 import { Injectable } from '@angular/core';
@@ -472,11 +472,11 @@ import { Router } from '@angular/router';
 export class OktaAuthService {
 
   signIn = new OktaSignIn({
-    baseUrl: 'https://dev-{dev-id}.oktapreview.com',
+    baseUrl: 'https://{yourOktaDomain}.com',
     clientId: '{client-id}',
     redirectUri: 'http://localhost:4200',
     authParams: {
-      issuer: '{as-server-url}',
+      issuer: 'https://{yourOktaDomain}.com/oauth2/default',
       responseType: ['id_token', 'token'],
       scopes: ['openid', 'email', 'profile']
     }
@@ -547,7 +547,7 @@ export class OktaAuthService {
 }
 ```
 
-**NOTE:** I realize this is quite a bit of code to render a sign-in form. The good news is we’ll be wrapping much of it into an `okta-angular` library soon. 
+**NOTE:** I realize this is quite a bit of code to render a sign-in form. The good news is you can simplify things by using the [Okta Angular SDK](https://www.npmjs.com/package/@okta/okta-angular).
 
 Create an `OktaAuthGuard` in `client/src/app/shared/okta/okta.guard.ts`. You’ll use this to  *guard* routes so they can’t be activated if the user isn’t authenticated.
 
@@ -857,4 +857,4 @@ If you have questions about this code or technologies you want to see in my next
 
 **Changelog:**
 
-* Nov 30, 2017: Updated to use Spring Boot 1.5.9, Angular 5.0, Angular CLI 1.5.5, Angular Material 5.0.0-rc.2, and Okta Sign-In Widget 2.5.0. See the code changes in the [example app on GitHub](https://github.com/oktadeveloper/okta-kotlin-typescript-notes-example/pull/3/files). Changes to this article can be viewed [in this pull request]().
+* Nov 30, 2017: Updated to use Spring Boot 1.5.9, Angular 5.0, Angular CLI 1.5.5, Angular Material 5.0.0-rc.2, and Okta Sign-In Widget 2.5.0. See the code changes in the [example app on GitHub](https://github.com/oktadeveloper/okta-kotlin-typescript-notes-example/pull/3/files). Changes to this article can be viewed [in this pull request](https://github.com/okta/okta.github.io/pull/1516).
