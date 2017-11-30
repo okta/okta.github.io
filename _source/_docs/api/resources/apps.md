@@ -1082,9 +1082,9 @@ curl -v -X POST \
           "implicit",
           "authorization_code"
         ],
-        "application_type": "native",
+        "application_type": "native"
         "tos_uri":"https://example.com/client/tos",
-        "policy_uri":"https://example.com/client/policy"
+        "policy_uri":"https://example.com/client/policy",
       }
     }
     }' "https://{yourOktaDomain}.com/api/v1/apps"
