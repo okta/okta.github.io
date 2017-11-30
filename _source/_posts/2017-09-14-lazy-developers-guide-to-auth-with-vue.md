@@ -11,7 +11,7 @@ When I started writing this article, I wanted to show you how to add authenticat
 
 ## Vue CLI + PWA!
 
-Every web app that has mobile users should add PWA support so the app loads faster and works offline. Vue.js has [excellent PWA support](https://github.com/vuejs-templates/pwa). You might recognize me as a fan of PWAs if you’ve read my [Ultimate Guide to Progressive Web Applications](https://developer.okta.com/blog/2017/07/20/the-ultimate-guide-to-progressive-web-applications). 
+Every web app that has mobile users should add PWA support so the app loads faster and works offline. Vue.js has [excellent PWA support](https://github.com/vuejs-templates/pwa). You might recognize me as a fan of PWAs if you’ve read my [Ultimate Guide to Progressive Web Applications](https://developer.okta.com/blog/2017/07/20/the-ultimate-guide-to-progressive-web-applications.html). 
 
 I installed [Vue CLI](https://github.com/vuejs/vue-cli) and went to work.
 
@@ -292,7 +292,7 @@ If you open Chrome Developer Tools, you’ll see a message that recommends insta
 
 ## Add Okta for Authentication
 
-To replace the fake, hard-coded authentication in `src/auth.js`, start by installing the [Okta Auth SDK](https://developer.okta.com/code/javascript/okta_auth_sdk)
+To replace the fake, hard-coded authentication in `src/auth.js`, start by installing the [Okta Auth SDK](https://developer.okta.com/code/javascript/okta_auth_sdk.html)
 
 ```bash
 npm install @okta/okta-auth-js --save
@@ -543,5 +543,5 @@ If you’re intrigued by Vue.js, follow [@vuejs](https://twitter.com/vuejs) and 
 
 You can see the code this lazy developer created for this article [on GitHub](https://github.com/oktadeveloper/okta-vue-auth-example). You can also check out some other articles I wrote on PWAs.
 
-* [Build Your First Progressive Web Application with Angular and Spring Boot](/blog/2017/05/09/progressive-web-applications-with-angular-and-spring-boot)
-* [The Ultimate Guide to Progressive Web Applications](/blog/2017/07/20/the-ultimate-guide-to-progressive-web-applications) 
+* [Build Your First Progressive Web Application with Angular and Spring Boot](/blog/2017/05/09/progressive-web-applications-with-angular-and-spring-boot.html)
+* [The Ultimate Guide to Progressive Web Applications](/blog/2017/07/20/the-ultimate-guide-to-progressive-web-applications.html) 

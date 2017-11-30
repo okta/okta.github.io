@@ -24,10 +24,10 @@ js: docsIndex
                     {% continue %}
                     {% endunless %}
                     <div class="Column--4 Column--small-12">
-                        <a href="{{ document.url | remove: '/index' | append: '/' }}">
+                        <a href="{{ document.url | remove: '/index.html' | append: '/' }}">
                             <h3 class="h4">{{ document.title }}</h3>
                         </a>
-                        <p> {{ document.excerpt | default: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur efficitur viverra consectetur. Donec lobortis ante in pretium aliquet. Ut orci est, consectetur ac bibendum non, porttitor a enim." }} </p>
+                        <p> {{ document.excerpt }} </p>
                     </div>
                     {% endfor %}
                 </div>
@@ -39,7 +39,7 @@ js: docsIndex
                     {% assign documents = site.reference | sort:'weight' %}
                     {% for document in documents %}
                     <div class="Column--4 Column--small-12">
-                        <a href="{% if document.id contains '/index' %}{{ document.url | remove: '/index' | append: '/' }}{% else %}{{ document.link }}{% endif %}">
+                        <a href="{% if document.id contains '/index' %}{{ document.url | remove: '/index.html' | append: '/' }}{% else %}{{ document.link }}{% endif %}">
                             <h3 class="h4">{{ document.title }}</h3>
                         </a>
                         <p>{{ document.excerpt }}</p>
@@ -58,7 +58,7 @@ js: docsIndex
                     {% continue %}
                   {% endunless %}
                     <div class="Column--4 Column--small-12">
-                        <a href="{{ document.url | remove: '/index' | append: '/' }}">
+                        <a href="{{ document.url | remove: '/index.html' | append: '/' }}">
                             <h3 class="h4">{{ document.title }}</h3>
                         </a>
                         <p>{{ document.excerpt }}</p>

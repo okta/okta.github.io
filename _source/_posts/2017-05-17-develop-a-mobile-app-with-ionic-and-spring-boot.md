@@ -19,7 +19,7 @@ To begin, create a directory on your hard drive called `spring-boot-ionic-exampl
 
 ## Build a Spring Boot API
 
-I recently wrote about how to build a Spring Boot API in [Bootiful Development with Spring Boot with Angular](/blog/2017/04/26/bootiful-development-with-spring-boot-and-angular). Rather than covering that again, you can clone the existing project and copy the `server` directory into `spring-boot-ionic-example`.
+I recently wrote about how to build a Spring Boot API in [Bootiful Development with Spring Boot with Angular](/blog/2017/04/26/bootiful-development-with-spring-boot-and-angular.html). Rather than covering that again, you can clone the existing project and copy the `server` directory into `spring-boot-ionic-example`.
 
 ```bash
 git clone https://github.com/oktadeveloper/spring-boot-angular-example.git
@@ -814,9 +814,9 @@ You can find a completed version of the application created in this blog post [o
 To learn more about Ionic and Angular, please see the following resources:
 
 * [Get started with Ionic Framework](http://ionicframework.com/getting-started/)
-* [Build Your First Progressive Web Application with Angular and Spring Boot](/blog/2017/05/09/progressive-web-applications-with-angular-and-spring-boot)
-* [Bootiful Development with Spring Boot and Angular](/blog/2017/04/26/bootiful-development-with-spring-boot-and-angular)
-* [Angular Authentication with OpenID Connect and Okta in 20 Minutes](/blog/2017/04/17/angular-authentication-with-oidc)
+* [Build Your First Progressive Web Application with Angular and Spring Boot](/blog/2017/05/09/progressive-web-applications-with-angular-and-spring-boot.html)
+* [Bootiful Development with Spring Boot and Angular](/blog/2017/04/26/bootiful-development-with-spring-boot-and-angular.html)
+* [Angular Authentication with OpenID Connect and Okta in 20 Minutes](/blog/2017/04/17/angular-authentication-with-oidc.html)
 
 
 

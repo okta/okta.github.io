@@ -42,7 +42,7 @@ JHipster leverages [Docker and Docker Compose](http://www.jhipster.tech/docker-c
 
 [Burr Sutter](https://twitter.com/burrsutter) is another great speaker, and in [this session](https://events.rainfocus.com/catalog/oracle/oow17/catalogjavaone17?search=%22Eight%20Steps%20to%20Becoming%20Awesome%20with%20Kubernetes%22&showEnrolled=false) he’s covering one of the most talked about technologies on the web today: Kubernetes! Everybody seems to be rocking with Kubernetes. Even your favorite open source repositories at GitHub are running on top of it. Don’t be the last developer to board this bullet train. Come to this session to learn eight simple and practical steps that will take you from Kubernetes novice to expert.
 
-JHipster has [support for deploying to Kubernetes](http://www.jhipster.tech/kubernetes/). You can learn more about how this works (and see a screencast of deploying to Google Cloud) in an article on this blog: [Develop and Deploy Microservices with JHipster](https://developer.okta.com/blog/2017/06/20/develop-microservices-with-jhipster).
+JHipster has [support for deploying to Kubernetes](http://www.jhipster.tech/kubernetes/). You can learn more about how this works (and see a screencast of deploying to Google Cloud) in an article on this blog: [Develop and Deploy Microservices with JHipster](https://developer.okta.com/blog/2017/06/20/develop-microservices-with-jhipster.html).
 
 **When:** Wednesday, Oct 04, 9:30 a.m. - 10:15 a.m.
 **Where:** Moscone West - Room 2004

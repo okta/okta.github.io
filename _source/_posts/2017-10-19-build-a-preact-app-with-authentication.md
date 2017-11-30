@@ -13,7 +13,7 @@ applications, it can be a great choice.
 
 In this tutorial, you'll build a basic Preact application with a couple of pages
 and user authentication using the [Okta Sign-In
-Widget](https://developer.okta.com/code/javascript/okta_sign-in_widget).
+Widget](https://developer.okta.com/code/javascript/okta_sign-in_widget.html).
 
 
 ## Bootstrap Your App With PreactCLI
@@ -603,8 +603,8 @@ the code, Preact or Okta, feel free to reach out to me via
 
 If you’re interested in learning more about authentication using the Okta
 Sign-In Widget with Angular, you can follow Matt Raible’s posts at
-<https://developer.okta.com/blog/2017/03/27/angular-okta-sign-in-widget> or
-<https://developer.okta.com/blog/2017/06/13/add-authentication-angular-pwa>, and
+<https://developer.okta.com/blog/2017/03/27/angular-okta-sign-in-widget.html> or
+<https://developer.okta.com/blog/2017/06/13/add-authentication-angular-pwa.html>, and
 If you want to know more about Okta’s Identity Platform, read Randall Degges
 post at
-<https://developer.okta.com/blog/2017/08/29/meet-the-new-okta-identity-platform>.
+<https://developer.okta.com/blog/2017/08/29/meet-the-new-okta-identity-platform.html>.

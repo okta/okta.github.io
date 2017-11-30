@@ -27,7 +27,7 @@ Rather than building Spring Boot and Angular applications from scratch, you can 
 git clone https://github.com/oktadeveloper/spring-boot-angular-pwa-example.git
 ```
 
-If you'd prefer to build this application yourself, please read [Build Your First Progressive Web Application with Angular and Spring Boot](/blog/2017/05/09/progressive-web-applications-with-angular-and-spring-boot).
+If you'd prefer to build this application yourself, please read [Build Your First Progressive Web Application with Angular and Spring Boot](/blog/2017/05/09/progressive-web-applications-with-angular-and-spring-boot.html).
 
 In this project's `server/pom.xml` file, you'll need to add the following XML:
 
@@ -221,8 +221,8 @@ your needs, set the request's mode to 'no-cors' to fetch the resource with CORS 
 ```
 
 When you're using Spring Boot without the Stormpath Spring Boot starter, you can use a `@CrossOrigin` annotation to enable cross-origin resource 
-sharing (CORS) on the server. See the [configure CORS for Spring Boot section](/blog/2017/04/26/bootiful-development-with-spring-boot-and-angular#configure-cors-for-spring-boot) of 
-[Bootiful Development with Spring Boot and Angular](/blog/2017/04/26/bootiful-development-with-spring-boot-and-angular).
+sharing (CORS) on the server. See the [configure CORS for Spring Boot section](/blog/2017/04/26/bootiful-development-with-spring-boot-and-angular.html#configure-cors-for-spring-boot) of 
+[Bootiful Development with Spring Boot and Angular](/blog/2017/04/26/bootiful-development-with-spring-boot-and-angular.html).
 
 When you're using the Stormpath Spring Boot Starter, you can enable it by adding the following property to the Spring 
 Boot app's `src/main/resources/application.properties`.
@@ -777,7 +777,7 @@ Now both login techniques should work as expected and you should be able to load
 
 {% img blog/angular-pwa-auth/production-beer-list.png alt:"Production Beer List" width:"800" %}
 
-The first time I ran [Lighthouse](https://developers.google.com/web/tools/lighthouse/) on this application, I was surprised to see it received a PWA score of 91. When I deployed this application previously, it [received a 98](/blog/2017/05/09/progressive-web-applications-with-angular-and-spring-boot#cloud-foundry).
+The first time I ran [Lighthouse](https://developers.google.com/web/tools/lighthouse/) on this application, I was surprised to see it received a PWA score of 91. When I deployed this application previously, it [received a 98](/blog/2017/05/09/progressive-web-applications-with-angular-and-spring-boot.html#cloud-foundry).
  
 {% img blog/angular-pwa-auth/lighthouse-without-512.png alt:"Lighthouse Score, first attempt" width:"800" %}
 
@@ -805,8 +805,8 @@ This article showed you how to develop a Spring Boot backend, and lock it down w
 
 To learn more about PWAs, check out some recent tutorials I wrote:
 
-* [Build Your First Progressive Web Application with Angular and Spring Boot](/blog/2017/05/09/progressive-web-applications-with-angular-and-spring-boot) 
-* [Tutorial: Develop a Mobile App With Ionic and Spring Boot](/blog/2017/05/17/develop-a-mobile-app-with-ionic-and-spring-boot)
+* [Build Your First Progressive Web Application with Angular and Spring Boot](/blog/2017/05/09/progressive-web-applications-with-angular-and-spring-boot.html) 
+* [Tutorial: Develop a Mobile App With Ionic and Spring Boot](/blog/2017/05/17/develop-a-mobile-app-with-ionic-and-spring-boot.html)
 * [The Ultimate Guide to Progressive Web Applications](https://scotch.io/tutorials/the-ultimate-guide-to-progressive-web-applications)
 
 There's also a number of excellent resources by Google and Smashing Magazine:

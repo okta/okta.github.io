@@ -11,7 +11,7 @@ Are you using Spring Security to lock everything down? Are your microservices lo
 
 This tutorial shows you how you can use Spring Security, Okta, and a few Java libraries to secure your microservices architecture. Not only that, but I'll show you how to secure *everything*, so even your backend services communicate securely. You'll learn how to use JWTs and [Juiser](https://github.com/juiser/juiser) to read an `X-Forwarded-User` header and turn it into a Spring Security `User`.
 
-This tutorial builds off [Build a Microservices Architecture for Microbrews with Spring Boot](/blog/2017/06/15/build-microservices-architecture-spring-boot). A simple microservices architecture with Spring Boot and Spring Cloud looks as follows. It uses Stormpath’s Spring Boot Starter (it’s been modified to work with Okta while we work on building up Okta’s Java support) and Juiser, a library created by [Les Hazlewood](https://twitter.com/lhazlewood). Juiser is independent and open source, and is not tied to a particular identity provider.
+This tutorial builds off [Build a Microservices Architecture for Microbrews with Spring Boot](/blog/2017/06/15/build-microservices-architecture-spring-boot.html). A simple microservices architecture with Spring Boot and Spring Cloud looks as follows. It uses Stormpath’s Spring Boot Starter (it’s been modified to work with Okta while we work on building up Okta’s Java support) and Juiser, a library created by [Les Hazlewood](https://twitter.com/lhazlewood). Juiser is independent and open source, and is not tied to a particular identity provider.
 
 {% img blog/microservices-spring-secure/spring-microservices-diagram.png alt:"Spring Boot + Cloud Microservices Architecture" width:"800" %}
 
@@ -428,7 +428,7 @@ After logging in, you should see a page displaying your user's information.
 Click the **Logout** button to delete the cookies in your browser and end your session.
 ## Add Okta's Sign-In Widget to the Client
 
-Install [Okta's Sign-In Widget](https://developer.okta.com/code/javascript/okta_sign-in_widget) to make it possible to communicate with the secured server.
+Install [Okta's Sign-In Widget](https://developer.okta.com/code/javascript/okta_sign-in_widget.html) to make it possible to communicate with the secured server.
 
 ```bash
 cd client

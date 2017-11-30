@@ -5,7 +5,7 @@ author: bdemers
 tags: [oauth, oauth2, oauth2.0, oauth 2.0, spring, spring boot, spring security]
 --- 
 
-If you have a JavaScript single-page application (SPA) that needs to securely access resources from a Spring Boot application, you likely want to use the OAuth 2.0 implicit flow! With this flow your client will send a bearer token with each request and your server side application will verify the token with an Identity Provider (IdP). This allows your resource server to trust that your client is authorized to make the request. In OAuth terms your SPA is the client and your Spring Boot application is the Resource Server. For a more detailed explanation on the various OAuth flows take a look at our [What the Heck is OAuth](/blog/2017/06/21/what-the-heck-is-oauth) post.
+If you have a JavaScript single-page application (SPA) that needs to securely access resources from a Spring Boot application, you likely want to use the OAuth 2.0 implicit flow! With this flow your client will send a bearer token with each request and your server side application will verify the token with an Identity Provider (IdP). This allows your resource server to trust that your client is authorized to make the request. In OAuth terms your SPA is the client and your Spring Boot application is the Resource Server. For a more detailed explanation on the various OAuth flows take a look at our [What the Heck is OAuth](/blog/2017/06/21/what-the-heck-is-oauth.html) post.
 
 Today you are going to build two small applications that demonstrate these principles in action: a simple SPA client app with a little bit of JQuery and a backend service with Spring Boot. You'll start out by using the standard Spring OAuth bits and then switch to the Okta Spring Boot Starter and check out its added features. Obviously (this is the Okta developer blog), you'll be using Okta for your IdP, but the first sections will be vendor agnostic.
 
@@ -338,7 +338,7 @@ okta:
 
 Restart your application and the first two concerns have been taken care of!
 
-The last one requires an extra step, you will have to add extra data to Okta's access token. We have a [whole post on this topic](/blog/2017/10/13/okta-groups-spring-security), but the cliff notes are as follows: 
+The last one requires an extra step, you will have to add extra data to Okta's access token. We have a [whole post on this topic](/blog/2017/10/13/okta-groups-spring-security.html), but the cliff notes are as follows: 
 
 Head back over to the Okta Developer Console, on the menu bar click **API** > **Authorization Server**. In this example we have been using the 'default' authorization server, so click edit, then select the 'Claims' tab. Click 'Add Claim' and fill out the form with the following values:
 
@@ -380,8 +380,8 @@ public class MessageOfTheDayController {
 In this post, we created a standard Spring Boot + Spring Security OAuth 2.0 application that uses an OAuth implicit flow, then spiced it up with the `okta-spring-boot-starter` which added (without any code) support for: client side access token validation, OAuth scope support, and Okta group to authority mapping. Next time, I'll create a sample app which uses an OAuth code-flow.
 
 Want to learn more about OAuth?
-- [What the Heck is OAuth](/blog/2017/06/21/what-the-heck-is-oauth)
-- [An OpenID Connect Primer](/blog/2017/07/25/oidc-primer-part-1)
+- [What the Heck is OAuth](/blog/2017/06/21/what-the-heck-is-oauth.html)
+- [An OpenID Connect Primer](/blog/2017/07/25/oidc-primer-part-1.html)
 - [OAuth.net](https://www.oauth.com/)
 
 Questions? Comments? Cool stories about OAuth? Hit me up on Twitter [@briandemers](https://twitter.com/briandemers) and make sure to follow my team [@oktadev](https://twitter.com/oktadev).

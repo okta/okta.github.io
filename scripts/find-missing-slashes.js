@@ -77,10 +77,7 @@ function findBadLinks(file, fileMap) {
     .filter(link => !link.prepped.includes('://'))
 
     // Remove non http protocols (i.e. mailto: and tel:)
-    .filter(link => !link.prepped.includes('mailto:') && !link.prepped.includes('tel:'))
-
-    // Remove links with no extension that resolve to an html file
-    .filter(link => !fileMap[`${link.prepped}.html`]);
+    .filter(link => !link.prepped.includes('mailto:') && !link.prepped.includes('tel:'));
 }
 
 async function run(dir) {

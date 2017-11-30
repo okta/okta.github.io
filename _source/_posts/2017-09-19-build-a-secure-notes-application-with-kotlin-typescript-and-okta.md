@@ -768,9 +768,9 @@ You now know how to build an Angular client with TypeScript, using Okta’s Sign
 
 If you’re ambitious, you could even turn the client into a progressive web app (PWA), enabling offline access and faster load times. There are a couple of posts about developing PWAs on the this blog if you’re interested in learning more. 
 
-* [Build Your First Progressive Web Application with Angular and Spring Boot](/blog/2017/05/09/progressive-web-applications-with-angular-and-spring-boot)
-* [Add Authentication to Your Angular PWA](/blog/2017/06/13/add-authentication-angular-pwa)
-* [The Ultimate Guide to Progressive Web Applications](/blog/2017/07/20/the-ultimate-guide-to-progressive-web-applications)
+* [Build Your First Progressive Web Application with Angular and Spring Boot](/blog/2017/05/09/progressive-web-applications-with-angular-and-spring-boot.html)
+* [Add Authentication to Your Angular PWA](/blog/2017/06/13/add-authentication-angular-pwa.html)
+* [The Ultimate Guide to Progressive Web Applications](/blog/2017/07/20/the-ultimate-guide-to-progressive-web-applications.html)
 
 My good buddy [Josh Long](https://twitter.com/starbuxman) and I recently hosted a live-coding session where we developed a Spring Boot microservices architecture on the backend and an Angular PWA on the front-end. The code we wrote is very similar to the code in this article. You can check the video out for reference [on YouTube](https://virtualjug.com/building-robust-apis-and-apps-with-spring-boot-and-angular/). 
 

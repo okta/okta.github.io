@@ -73,7 +73,7 @@ To figure out which security plugin I should use with Play, I [asked my network 
 
 From this conversation, I learned that [Play’s built-in OAuth support](https://www.playframework.com/documentation/2.6.x/JavaOAuth) is only for OAuth 1.0. I also learned about [play-zhewbacca](https://github.com/zalando-stups/play-zhewbacca) and [Silhouette](https://www.silhouette.rocks/). Secure Social [hasn’t been worked on for several months](https://github.com/jaliss/securesocial/commits/master), so I decided to pass on it. Silhouette has a pretty website and extensive documentation, but it’s not compatible with Java. I wanted to write a Java app for this example.
 
-I decided to try [play-pac4j](https://github.com/pac4j/play-pac4j). My reason was simple, I’m a [lazy developer](/blog/2017/09/14/lazy-developers-guide-to-auth-with-vue), and its README shows an OIDC example that looked easy enough to implement. Its [documentation](http://www.pac4j.org/docs/clients/openid-connect.html) confirmed it didn’t require much.
+I decided to try [play-pac4j](https://github.com/pac4j/play-pac4j). My reason was simple, I’m a [lazy developer](/blog/2017/09/14/lazy-developers-guide-to-auth-with-vue.html), and its README shows an OIDC example that looked easy enough to implement. Its [documentation](http://www.pac4j.org/docs/clients/openid-connect.html) confirmed it didn’t require much.
 
 ```java
 final OidcConfiguration oidcConfiguration = new OidcConfiguration();
@@ -427,9 +427,9 @@ If you have a similar tutorial on using Silhouette or another OIDC library for P
 
 If you’re a Java dev who’s interested in reading more about integrating Okta, I’d love to have you check out these resources:
 
-* [My recent post on using OIDC support with JHipster](/blog/2017/10/20/oidc-with-jhipster)
-* [Micah Silverman’s recent post on RBAC with Thymeleaf and Spring Security](/blog/2017/10/13/okta-groups-spring-security)
-* [Identity, Claims, & Tokens – An OpenID Connect Primer, Part 1 of 3](/blog/2017/07/25/oidc-primer-part-1)
+* [My recent post on using OIDC support with JHipster](/blog/2017/10/20/oidc-with-jhipster.html)
+* [Micah Silverman’s recent post on RBAC with Thymeleaf and Spring Security](/blog/2017/10/13/okta-groups-spring-security.html)
+* [Identity, Claims, & Tokens – An OpenID Connect Primer, Part 1 of 3](/blog/2017/07/25/oidc-primer-part-1.html)
 
 And finally, I’d love to have you follow our whole team on Twitter for more awesome content. Check us out [@oktadev](https://twitter.com/OktaDev)!
 

@@ -13,7 +13,7 @@ title: Platform Release Notes July 20, 2016
 The `expires_in` response parameter tells you the number of seconds before a `token` (Access Token) expires. If your
 response from the `/oauth2/v1/authorize` endpoint includes an Access Token, `expires_in` is included in the response.
 
-For more information, see the `/oauth2/v1/authorize` [Response Parameters](/docs/api/resources/oauth2#response-parameters).
+For more information, see the `/oauth2/v1/authorize` [Response Parameters](/docs/api/resources/oauth2.html#response-parameters).
 
 ### SHA256 Certificate for New SAML IdP Instances
 

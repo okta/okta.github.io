@@ -10,9 +10,9 @@ be a good idea when you have a large team working on a single product. Your proj
 that can function independently of one another. Once components can function independently, they can be built, tested, 
 and deployed independently. This gives an organization and its teams the agility to develop and deploy very quickly.
 
-In a [previous article](/blog/2017/04/26/bootiful-development-with-spring-boot-and-angular), I showed you how to build 
+In a [previous article](/blog/2017/04/26/bootiful-development-with-spring-boot-and-angular.html), I showed you how to build 
 a Spring Boot API with an Angular client. I then showed you how to 
-[convert the Angular app into a progressive web application that works offline](/blog/2017/05/09/progressive-web-applications-with-angular-and-spring-boot). 
+[convert the Angular app into a progressive web application that works offline](/blog/2017/05/09/progressive-web-applications-with-angular-and-spring-boot.html). 
 The Angular PWA is a good example of a resilient application because it still works when connectivity fails. Did you know 
 you can develop similar resiliency in your API with Spring Boot, Spring Cloud, and a microservices architecture? This 
 article shows you how to convert the previously created Spring Boot application to use microservices. You'll create a 
@@ -302,7 +302,7 @@ To enable the "Compile on save" feature:</p>
 ### Create an Edge Service
 
 The edge service will be similar to the standalone beer service created in 
-[Bootiful Development with Spring Boot and Angular](/blog/2017/04/26/bootiful-development-with-spring-boot-and-angular). 
+[Bootiful Development with Spring Boot and Angular](/blog/2017/04/26/bootiful-development-with-spring-boot-and-angular.html). 
 However, it will have fallback capabilities which prevent the client from receiving an HTTP error when the service is 
 not available.
 
@@ -491,7 +491,7 @@ Start the `beer-catalog-service` again and this list should eventually return th
 
 ### Add an Angular PWA Client
 
-You can copy the Angular PWA client I created in a [previous tutorial](/blog/2017/05/09/progressive-web-applications-with-angular-and-spring-boot) and install its dependencies.
+You can copy the Angular PWA client I created in a [previous tutorial](/blog/2017/05/09/progressive-web-applications-with-angular-and-spring-boot.html) and install its dependencies.
 
 ```bash
 git clone git@github.com:oktadeveloper/spring-boot-angular-pwa-example.git

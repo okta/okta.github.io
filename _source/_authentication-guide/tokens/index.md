@@ -13,7 +13,7 @@ Additional information about ID tokens can be found here: <https://developer.okt
 
 This section will help you understand token validation, revocation, as well as how to use a refresh token to get a new access token.
 
-- [Validating Access Tokens](/authentication-guide/tokens/validating-access-tokens)
-- [Validating ID Tokens](/authentication-guide/tokens/validating-id-tokens)
-- [Refreshing Access Tokens](/authentication-guide/tokens/refreshing-tokens)
-- [Revoking Tokens](/authentication-guide/tokens/revoking-tokens)
+- [Validating Access Tokens](/authentication-guide/tokens/validating-access-tokens.html)
+- [Validating ID Tokens](/authentication-guide/tokens/validating-id-tokens.html)
+- [Refreshing Access Tokens](/authentication-guide/tokens/refreshing-tokens.html)
+- [Revoking Tokens](/authentication-guide/tokens/revoking-tokens.html)

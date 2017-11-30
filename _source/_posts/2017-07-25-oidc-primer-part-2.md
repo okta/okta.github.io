@@ -5,7 +5,7 @@ author: dogeared
 tags: [oauth, oauth2, oauth2.0, oauth 2.0, OpenID, OpenID Connect, oidc]
 ---
 
-In the [first installment of this OpenID Connect (OIDC) series](https://developer.okta.com/blog/2017/07/25/oidc-primer-part-1), we looked at some OIDC basics, its history, and the various flow types, scopes, and tokens involved. In this post, we'll dive into the mechanics of OIDC and see the various flows in action.
+In the [first installment of this OpenID Connect (OIDC) series](https://developer.okta.com/blog/2017/07/25/oidc-primer-part-1.html), we looked at some OIDC basics, its history, and the various flow types, scopes, and tokens involved. In this post, we'll dive into the mechanics of OIDC and see the various flows in action.
 
 The token(s) you get back from an OIDC flow and the contents of the `/userinfo` endpoint are a function of the flow type and scopes requested. You can see this live on the [OIDC flow test site](https://okta-oidc-fun.herokuapp.com). Here, you can set different toggles for `scope` and `response_type`, which determines the type of flow for your app.
 
@@ -131,6 +131,6 @@ You can easily create your own instance of the OIDC tool if you have an Okta ten
 
 You can explore the code or just click the friendly purple button to deploy your own instance.
 
-In the [final installment](https://developer.okta.com/blog/2017/08/01/oidc-primer-part-3), we dig into the various types of tokens and how to validate them.
+In the [final installment](https://developer.okta.com/blog/2017/08/01/oidc-primer-part-3.html), we dig into the various types of tokens and how to validate them.
 
-The whole series is live now. Part 1 is [here](https://developer.okta.com/blog/2017/07/25/oidc-primer-part-1). Part 3 is [here](https://developer.okta.com/blog/2017/08/01/oidc-primer-part-3).
+The whole series is live now. Part 1 is [here](https://developer.okta.com/blog/2017/07/25/oidc-primer-part-1.html). Part 3 is [here](https://developer.okta.com/blog/2017/08/01/oidc-primer-part-3.html).

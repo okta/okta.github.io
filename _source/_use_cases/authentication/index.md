@@ -45,7 +45,7 @@ widget.
 ### Auth SDK
 
 For those who are building a Javascript front end or Single Page App
-(SPA), the light-weight, JavaScript-based [Okta Auth SDK](/code/javascript/okta_auth_sdk)
+(SPA), the light-weight, JavaScript-based [Okta Auth SDK](/code/javascript/okta_auth_sdk.html)
 gives you the added control beyond our sign-in widget to cater to your
 needs.  This Javascript SDK provides all the standard login support
 including password management and strong authentication.  In addition,
@@ -60,7 +60,7 @@ comprehensive [authentication REST API](/docs/api/resources/authn.html)
 exposed through Okta.  Use it as a
 standalone API to provide the identity layer on top of your existing
 application and authentication logic, or use it with the Okta [Sessions API](/docs/api/resources/sessions.html)
-to obtain an Okta [session cookie](/use_cases/authentication/session_cookie) and access apps within Okta.
+to obtain an Okta [session cookie](/use_cases/authentication/session_cookie.html) and access apps within Okta.
 This session integration provides an SSO experience across custom and Okta-managed apps.
 
 ## Building Apps That Support SSO

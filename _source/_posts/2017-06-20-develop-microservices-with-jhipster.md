@@ -165,7 +165,7 @@ The [JHipster Registry](https://jhipster.github.io/jhipster-registry/) is built 
 Patterns provided by Spring Cloud Netflix include Service Discovery (Eureka), Circuit Breaker (Hystrix), Intelligent Routing (Zuul), 
 and Client Side Load Balancing (Ribbon). 
 
-In a [previous post](/blog/2017/06/15/build-microservices-architecture-spring-boot), I showed you how you can use Eureka for 
+In a [previous post](/blog/2017/06/15/build-microservices-architecture-spring-boot.html), I showed you how you can use Eureka for 
 service discovery. JHipster Registry is a Eureka server, a Spring Cloud Config server, as well as an administration server. 
 It includes dashboards to monitor and manage your JHipster applications. 
 
@@ -937,6 +937,6 @@ Stack Overflow with the ["jhipster" tag](http://stackoverflow.com/questions/tagg
 If you're interested in learning more about microservices, you might also find the following resources useful:
 
 * [Doing Microservices with JHipster](https://jhipster.github.io/microservices-architecture/)
-* [Build a Microservices Architecture for Microbrews](/blog/2017/06/15/build-microservices-architecture-spring-boot)
+* [Build a Microservices Architecture for Microbrews](/blog/2017/06/15/build-microservices-architecture-spring-boot.html)
 * [Bootstrapping Your Microservices Architecture with JHipster and Spring](https://blog.heroku.com/bootstrapping_your_microservices_architecture_with_jhipster_and_spring)
 * [Microservice Resources from Chris Richardson](http://microservices.io/resources/index.html)

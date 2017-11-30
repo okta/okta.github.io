@@ -117,7 +117,7 @@ To make a login page for authentication, create `src/pages/login/login.ts` and `
 ```
 {% endraw %}
 
-You can leverage a couple of open source libraries to perform the actual authentication. The first one is [Manfred Steyer's](https://github.com/manfredsteyer) [angular-oauth2-oidc](https://github.com/manfredsteyer/angular-oauth2-oidc). This library allows you to interact with identity and access tokens easily. The second is the [Okta Auth SDK](/code/javascript/okta_auth_sdk). [OAuth is not an authentication protocol](/blog/2017/06/21/what-the-heck-is-oauth), but OIDC is. Why is it necessary to add Okta's authentication library then? Because OIDC authentication works via redirect (when using in a SPA) and I'd rather perform authentication without redirecting to Okta.
+You can leverage a couple of open source libraries to perform the actual authentication. The first one is [Manfred Steyer's](https://github.com/manfredsteyer) [angular-oauth2-oidc](https://github.com/manfredsteyer/angular-oauth2-oidc). This library allows you to interact with identity and access tokens easily. The second is the [Okta Auth SDK](/code/javascript/okta_auth_sdk.html). [OAuth is not an authentication protocol](/blog/2017/06/21/what-the-heck-is-oauth.html), but OIDC is. Why is it necessary to add Okta's authentication library then? Because OIDC authentication works via redirect (when using in a SPA) and I'd rather perform authentication without redirecting to Okta.
 
 Install `angular-oauth2-oidc` and the Okta Auth SDK using npm.
 
@@ -283,7 +283,7 @@ login(): void {
 }
 ```
 
-You want an identity token so you can have more information about the user. You want an access token so you can use it to access protected APIs that require a Bearer token. For example, in [Adding Authentication to Your Angular PWA](/blog/2017/06/13/add-authentication-angular-pwa), there's a `BeerService` that sends an access token when it makes an API request.
+You want an identity token so you can have more information about the user. You want an access token so you can use it to access protected APIs that require a Bearer token. For example, in [Adding Authentication to Your Angular PWA](/blog/2017/06/13/add-authentication-angular-pwa.html), there's a `BeerService` that sends an access token when it makes an API request.
 
 ```typescript
 import { Injectable } from '@angular/core';
@@ -650,7 +650,7 @@ After performing these steps, you should be able to run `ionic cordova emulate a
 ## PWAs with Ionic
 Ionic ships with support for creating progressive web apps (PWAs). This means you can deploy your Ionic app as a web app (rather than a mobile app) and make it run offline in [browsers that support service workers](http://caniuse.com/#feat=serviceworkers). 
 
-You can see how to enable service workers and make your app into a PWA by reading the [PWAs section](/blog/2017/05/17/develop-a-mobile-app-with-ionic-and-spring-boot#pwas-with-ionic) of [how to develop a mobile app with Ionic and Spring Boot](/blog/2017/05/17/develop-a-mobile-app-with-ionic-and-spring-boot). A PWA is a web application that can be “installed” on your system. It works offline when you don't have an internet connection, leveraging data cached during your last interactions with the app. Adding PWA features can make your apps load a lot faster, creating happy users. To learn more about PWAs, see [The Ultimate Guide to Progressive Web Applications](/blog/2017/07/20/the-ultimate-guide-to-progressive-web-applications). 
+You can see how to enable service workers and make your app into a PWA by reading the [PWAs section](/blog/2017/05/17/develop-a-mobile-app-with-ionic-and-spring-boot.html#pwas-with-ionic) of [how to develop a mobile app with Ionic and Spring Boot](/blog/2017/05/17/develop-a-mobile-app-with-ionic-and-spring-boot.html). A PWA is a web application that can be “installed” on your system. It works offline when you don't have an internet connection, leveraging data cached during your last interactions with the app. Adding PWA features can make your apps load a lot faster, creating happy users. To learn more about PWAs, see [The Ultimate Guide to Progressive Web Applications](/blog/2017/07/20/the-ultimate-guide-to-progressive-web-applications.html). 
 
 Ionic has invested heavily in supporting PWAs. You can read more about why in [
 What Progressive Web Apps can do for you](http://blog.ionic.io/what-progressive-web-apps-can-do-for-you/).
@@ -663,6 +663,6 @@ You can see the complete source code for this project [on GitHub](https://github
 
 To learn more about Ionic, Angular, or Okta, please see the following resources:
 
-* [Adding Authentication to your Angular PWA](/blog/2017/06/13/add-authentication-angular-pwa)
-* [Tutorial: Develop a Mobile App With Ionic and Spring Boot](/blog/2017/05/17/develop-a-mobile-app-with-ionic-and-spring-boot)
-* [Build Your First Progressive Web Application with Angular and Spring Boot](/blog/2017/05/09/progressive-web-applications-with-angular-and-spring-boot)
+* [Adding Authentication to your Angular PWA](/blog/2017/06/13/add-authentication-angular-pwa.html)
+* [Tutorial: Develop a Mobile App With Ionic and Spring Boot](/blog/2017/05/17/develop-a-mobile-app-with-ionic-and-spring-boot.html)
+* [Build Your First Progressive Web Application with Angular and Spring Boot](/blog/2017/05/09/progressive-web-applications-with-angular-and-spring-boot.html)

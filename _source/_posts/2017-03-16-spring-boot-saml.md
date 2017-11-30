@@ -29,7 +29,7 @@ Just like I did, the first thing you'll need to do is create a developer account
 
 {% img blog/spring-boot-saml/okta-dev-console.png alt:"Okta Dev Console" width:"800" %}{: .center-image }
  
-Click on **< > Developer** in the top-left corner and switch to the Classic UI. If you see a screen like the following, you're good to go! The reason you need to use the Classic UI for this tutorial is because we haven't yet added SAML support to the [Developer Console](/blog/2017/09/25/all-new-developer-console).
+Click on **< > Developer** in the top-left corner and switch to the Classic UI. If you see a screen like the following, you're good to go! The reason you need to use the Classic UI for this tutorial is because we haven't yet added SAML support to the [Developer Console](/blog/2017/09/25/all-new-developer-console.html).
 
 {% img blog/spring-boot-saml/okta-classic-ui.png alt:"Okta Classic UI" width:"800" %}{: .center-image }
 
@@ -237,9 +237,9 @@ You can find the source code for this article at [https://github.com/oktadevelop
 
 This article showed you how to create a SAML application in Okta and talk to it using Spring Boot and Spring Security's SAML extension. The SAML extension hasn't had a GA release, but hopefully will soon. I also believe it's possible to take the SAML DSL (in `SecurityConfiguration.java`) and create a Spring Boot starter that allows you to get started with SAML simply by configuring application properties.
 
-Have questions or comments? Post your question to Stack Overflow with the "[okta](http://stackoverflow.com/questions/tagged/okta)" or "[okta-api](http://stackoverflow.com/questions/tagged/okta-api)” tag, hit me up via email at [matt.raible@okta.com](mailto:matt.raible@okta.com), or ping me on Twitter [@mraible](https://twitter.com/mraible). In future articles, I'll show you [how to configure Spring Boot with OAuth 2.0 and Okta](/blog/2017/03/21/spring-boot-oauth). Then I'll explore different techniques of [authenticating with Angular](https://developer.okta.com/blog/2017/04/17/angular-authentication-with-oidc) and using the access token to talk to a [secured Spring Boot application](/blog/2017/09/19/build-a-secure-notes-application-with-kotlin-typescript-and-okta). Until then, happy authenticating! 😊
+Have questions or comments? Post your question to Stack Overflow with the "[okta](http://stackoverflow.com/questions/tagged/okta)" or "[okta-api](http://stackoverflow.com/questions/tagged/okta-api)” tag, hit me up via email at [matt.raible@okta.com](mailto:matt.raible@okta.com), or ping me on Twitter [@mraible](https://twitter.com/mraible). In future articles, I'll show you [how to configure Spring Boot with OAuth 2.0 and Okta](/blog/2017/03/21/spring-boot-oauth.html). Then I'll explore different techniques of [authenticating with Angular](https://developer.okta.com/blog/2017/04/17/angular-authentication-with-oidc.html) and using the access token to talk to a [secured Spring Boot application](/blog/2017/09/19/build-a-secure-notes-application-with-kotlin-typescript-and-okta.html). Until then, happy authenticating! 😊
 
 **Changelog:**
 
 * Apr 20, 2017: Thanks to [Alexey Soshin](https://github.com/AlexeySoshin) for contributing a [pull request](https://github.com/oktadeveloper/okta-spring-boot-saml-example/pull/2) to make the code in this blog post more bootiful!
-* Oct 10, 2017: Updated instructions for the [Okta Developer Console](/blog/2017/09/25/all-new-developer-console).
+* Oct 10, 2017: Updated instructions for the [Okta Developer Console](/blog/2017/09/25/all-new-developer-console.html).

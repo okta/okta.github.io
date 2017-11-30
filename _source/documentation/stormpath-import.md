@@ -1,6 +1,7 @@
 ---
 layout: docs_page
 title: Importing Your Stormpath Data Into Okta
+permalink: /documentation/stormpath-import.html
 ---
 
 # Importing Your Stormpath Data Into Okta

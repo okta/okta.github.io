@@ -252,7 +252,7 @@ A custom claim can be configured in the following ways:
 
 ## Validating Access Tokens
 
-For more information on validating access tokens, see our [Authentication Guide](/authentication-guide/tokens/validating-access-tokens).
+For more information on validating access tokens, see our [Authentication Guide](/authentication-guide/tokens/validating-access-tokens.html).
 
 ## Refresh Token
 

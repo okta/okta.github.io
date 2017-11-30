@@ -442,6 +442,6 @@ Now, comparing a Spring Boot application and an WAR packaged application, isn’
 
 Want to learn more about securing your Spring or JAX-RS applications, Apache Shiro, or REST fundamentals? Take a look at these posts:
 
-- [Protecting a Spring Boot App with Apache Shiro](https://developer.okta.com/blog/2017/07/13/apache-shiro-spring-boot)
+- [Protecting a Spring Boot App with Apache Shiro](https://developer.okta.com/blog/2017/07/13/apache-shiro-spring-boot.html)
 - [Protecting JAX-RS Resources with RBAC and Apache Shiro](https://stormpath.com/blog/protecting-jax-rs-resources-rbac-apache-shiro)
 - [The Fundamentals of REST API Design](https://stormpath.com/blog/fundamentals-rest-api-design)

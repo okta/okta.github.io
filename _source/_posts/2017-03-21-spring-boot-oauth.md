@@ -146,11 +146,11 @@ The source code for this tutorial and the examples in it are available [on GitHu
 
 This tutorial showed you how to use Spring CLI, Groovy, Spring Boot, Spring Security, and Okta to quickly prototype an OAuth client. This information is useful for those that are developing a Spring MVC application with traditional server-rendered pages. However, these days, lots of developers are using JavaScript frameworks and mobile applications to build their UIs.
 
-In a [future tutorial](/blog/2017/09/19/build-a-secure-notes-application-with-kotlin-typescript-and-okta), I'll show you how to develop one of these fancy UIs in Angular and use the access token retrieved to talk to a Spring Boot API that's secured by Spring Security and does JWT validation.
+In a [future tutorial](/blog/2017/09/19/build-a-secure-notes-application-with-kotlin-typescript-and-okta.html), I'll show you how to develop one of these fancy UIs in Angular and use the access token retrieved to talk to a Spring Boot API that's secured by Spring Security and does JWT validation.
 
 **Changelog:**
 
-* Oct 11, 2017: Updated instructions for the [Okta Developer Console](/blog/2017/09/25/all-new-developer-console).
+* Oct 11, 2017: Updated instructions for the [Okta Developer Console](/blog/2017/09/25/all-new-developer-console.html).
 * Oct 20, 2017: Added missing `scope: openid profile email` to `application.yaml`. 
 
 

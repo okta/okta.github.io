@@ -539,6 +539,6 @@ INFO[0000] Sending events matching '.*' to 'https://requestb.in/0ab12345'
 INFO[0000] Started polling for events at: https://dev-12345.oktapreview.com
 ```
 
-I hope that this post has inspired you to think of cool ways you can use webhooks with your own Okta org. I highly suggest checking out [Zapier](https://zapier.com/) and in particular the excellent [Zapier Webhook support](https://zapier.com/blog/how-use-zapier-webhooks/) that Zapier provides. You should also take a look at this post on [the webhooks vs serverless debate](https://developer.okta.com/blog/2017/10/11/why-are-webhooks-better-than-serverless-extensibility) by my friend and colleague Randall Degges.
+I hope that this post has inspired you to think of cool ways you can use webhooks with your own Okta org. I highly suggest checking out [Zapier](https://zapier.com/) and in particular the excellent [Zapier Webhook support](https://zapier.com/blog/how-use-zapier-webhooks/) that Zapier provides. You should also take a look at this post on [the webhooks vs serverless debate](https://developer.okta.com/blog/2017/10/11/why-are-webhooks-better-than-serverless-extensibility.html) by my friend and colleague Randall Degges.
 
 [Let me know](mailto:joel.franusic@okta.com) how you're using `loghook` or if you have any questions or comments about this post. And don't forget to follow our team on Twitter [@oktadev](https://twitter.com/OktaDev). Thanks for reading!

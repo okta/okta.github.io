@@ -29,7 +29,7 @@ In the case of the Authorization Code flow, you use the Authorization Server's `
 
 For the Authorization Code and Resource Owner Password flows, you use the Authorization Server's `/token` endpoint directly. For more information about this endpoint, see [Request a Token](/docs/api/resources/oauth2.html#request-a-token). For more information about the Client Credentials and Resource Owner Password flows, see:
 
-- [Implementing the Authorization Code Flow](/authentication-guide/implementing-authentication/auth-code)
+- [Implementing the Authorization Code Flow](/authentication-guide/implementing-authentication/auth-code.html)
 - [Implementing the Resource Owner Password Flow](/authentication-guide/implementing-authentication/password.html)
 
 The following combinations of grant type and scope, when sent to `/token` endpoint, will return a refresh token:

@@ -89,7 +89,7 @@ If your app is so dynamic that you don’t want anything cached, a PWA might not
 
 Adding PWA support is important so people with slow connections and affordable smart phones can use your webapp more easily. If your app is large and you can't load parts of it lazily (meaning loading it on-demand rather than at the beginning), bundling it all up in a hybrid app with [Cordova](https://www.google.com/url?q=http://cordova.apache.org/docs/en/latest/guide/cli/index.html&sa=D&ust=1496180358261000&usg=AFQjCNEg15ndTpZMXoO0pJX4AyRs-zdXjg) might make sense. If your app does intense tasks or is highly interactive (like a game), coding it with native SDKs is likely a good option. 
 
-**If you’re interested in learning more about [using Cordova with Ionic and Spring Boot, you can check out my recent tutorial](https://developer.okta.com/blog/2017/05/17/develop-a-mobile-app-with-ionic-and-spring-boot).**
+**If you’re interested in learning more about [using Cordova with Ionic and Spring Boot, you can check out my recent tutorial](https://developer.okta.com/blog/2017/05/17/develop-a-mobile-app-with-ionic-and-spring-boot.html).**
 
 PWAs are useful for apps like Twitter and news sites because they have a lot of text that you’ll read, but not necessarily interact with. Having it as a PWA allows you to open the app, load its data, then read its contents later when you’re offline. This should work in a normal web application, but I’ve noticed that some browsers will try to reload the page when you open them, resulting in a dreaded "server not found" error.
 
@@ -125,7 +125,7 @@ The requirements for a PWA can be quickly added to almost any web application. A
 2. Create and include a JavaScript file with code to cache network requests.
 3. Create and include a web app manifest. 
 
-To see how to add these features to an Angular application, see my [Build Your First Progressive Web Application with Angular and Spring Boot](/blog/2017/05/09/progressive-web-applications-with-angular-and-spring-boot) blog post on Okta’s developer blog. This article shows you how to add a service worker, a manifest with icons, and deploy it to CloudFoundry with HTTPS. Not only that, but it scores a 98/100 using the Lighthouse Chrome Extension.
+To see how to add these features to an Angular application, see my [Build Your First Progressive Web Application with Angular and Spring Boot](/blog/2017/05/09/progressive-web-applications-with-angular-and-spring-boot.html) blog post on Okta’s developer blog. This article shows you how to add a service worker, a manifest with icons, and deploy it to CloudFoundry with HTTPS. Not only that, but it scores a 98/100 using the Lighthouse Chrome Extension.
 
 {% img blog/angular-spring-boot-pwa/lighthouse-prod-report.png alt:"Lighthouse Report" width:"800" %}
 
@@ -178,7 +178,7 @@ and try again, or run `ng set apps.0.serviceWorker=false` in your .angular-cli.j
 
 Ionic is a framework that leverages Angular to create native apps with web technologies. It leverages Cordova to run the app on phones but also has built-in service worker and manifest support if you want to deploy your app to the web.
 
-See my [tutorial about developing mobile applications with Ionic and Spring Boot](/blog/2017/05/17/develop-a-mobile-app-with-ionic-and-spring-boot) to learn more. Below is a screenshot of the completed application in the tutorial.
+See my [tutorial about developing mobile applications with Ionic and Spring Boot](/blog/2017/05/17/develop-a-mobile-app-with-ionic-and-spring-boot.html) to learn more. Below is a screenshot of the completed application in the tutorial.
 
 {% img blog/ionic-spring-boot/beer-modal.png alt:"Mmmmm, Guinness" width:"800" %}
 
@@ -219,6 +219,6 @@ Or, you can check out any of these great resources:
 
 Ready to get your feet wet building an app? You can find some interesting PWA tutorials here:
 
-* [Build Your First Progressive Web Application with Angular and Spring Boot](/blog/2017/05/09/progressive-web-applications-with-angular-and-spring-boot) 
-* [Tutorial: Develop a Mobile App With Ionic and Spring Boot](/blog/2017/05/17/develop-a-mobile-app-with-ionic-and-spring-boot)
+* [Build Your First Progressive Web Application with Angular and Spring Boot](/blog/2017/05/09/progressive-web-applications-with-angular-and-spring-boot.html) 
+* [Tutorial: Develop a Mobile App With Ionic and Spring Boot](/blog/2017/05/17/develop-a-mobile-app-with-ionic-and-spring-boot.html)
 * [A Beginner's Guide To Progressive Web Apps](https://www.smashingmagazine.com/2016/08/a-beginners-guide-to-progressive-web-apps/)

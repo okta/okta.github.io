@@ -178,7 +178,7 @@ But I'm not stopping there. I shared this analysis with a few experts I know in 
 
 Please check back in a few weeks! I'll post the answers to these questions from the experts I interviewed. I'll also update this post to point to it when I do. If you're an expert on NoSQL databases, let me know! I'd be happy to include your answers in the interview. Just send me a message to [@mraible on Twitter](https://twitter.com/mraible) or matt.raible@okta.com.
 
-**Update:** [Part II has been published](/blog/2017/10/10/nosql-options-for-java-developers-part-ii). Many thanks to Justin McCarthy, Rafal Glowinski, Vlad Mihalcea, and Laurent Doguin for answering these questions!
+**Update:** [Part II has been published](/blog/2017/10/10/nosql-options-for-java-developers-part-ii.html). Many thanks to Justin McCarthy, Rafal Glowinski, Vlad Mihalcea, and Laurent Doguin for answering these questions!
 
 ## Research & Notes
 
@@ -200,4 +200,4 @@ JAXenter published the results of their annual survey of [top database trends](h
 
 **Changelog:**
 
-* Oct 10, 2017: Updated to link to [Part II blog post](/blog/2017/10/10/nosql-options-for-java-developers-part-ii) with answers from experts.
+* Oct 10, 2017: Updated to link to [Part II blog post](/blog/2017/10/10/nosql-options-for-java-developers-part-ii.html) with answers from experts.

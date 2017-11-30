@@ -9,7 +9,7 @@ the last two articles I discussed the [general principles of having
 good
 tests](https://www.okta.com/blog/2015/01/android-unit-testing-part-i-what-makes-strong-test-automation/)
 and the way to [run Android tests on JVM making them
-fast](/blog/2015/04/07/android-unit-testing-part-2). This
+fast](/blog/2015/04/07/android-unit-testing-part-2.html). This
 part will show how to make your Android code less heavily
 coupled. This is a preparation step to ensure that your tests are
 isolated from each other.*

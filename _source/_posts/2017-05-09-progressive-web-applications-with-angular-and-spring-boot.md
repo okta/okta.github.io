@@ -41,7 +41,7 @@ This article will show you how to build a PWA with a Spring Boot backend and an 
 
 ## Run a Spring Boot API
 
-In [part 1 of this series](/blog/2017/04/26/bootiful-development-with-spring-boot-and-angular), I showed you how to create an API with Spring Boot and display its data in an Angular UI. You'll be using that project as a starting point for this tutorial. You'll adding offline capabilities by turning it into a PWA.
+In [part 1 of this series](/blog/2017/04/26/bootiful-development-with-spring-boot-and-angular.html), I showed you how to create an API with Spring Boot and display its data in an Angular UI. You'll be using that project as a starting point for this tutorial. You'll adding offline capabilities by turning it into a PWA.
 
 To begin, clone the project from GitHub.
 
@@ -367,8 +367,8 @@ I'd like to give a big thanks to all the engineers that've been developing progr
 
 To learn more about progressive web applications, check out two of my recent posts:
 
-* [The Ultimate Guide to Progressive Web Applications](/blog/2017/07/20/the-ultimate-guide-to-progressive-web-applications)
-* [Add Authentication to Your Angular PWA](/blog/2017/06/13/add-authentication-angular-pwa)
+* [The Ultimate Guide to Progressive Web Applications](/blog/2017/07/20/the-ultimate-guide-to-progressive-web-applications.html)
+* [Add Authentication to Your Angular PWA](/blog/2017/06/13/add-authentication-angular-pwa.html)
 
 I’d also recommend visiting the following websites:
 

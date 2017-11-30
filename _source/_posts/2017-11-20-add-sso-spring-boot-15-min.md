@@ -213,7 +213,7 @@ Now the real fun begins, as you create or onboard new users to your app! Take so
 Interested in learning more? Check out these other Java resources:
 
 * Our [Java Product Documentation](/code/java/)
-* [Secure Your SPA with Spring Boot and OAuth](/blog/2017/10/27/secure-spa-spring-boot-oauth)
-* [Add Role-Based Access Control to Your App with Spring Security and Thymeleaf](/blog/2017/10/13/okta-groups-spring-security)
+* [Secure Your SPA with Spring Boot and OAuth](/blog/2017/10/27/secure-spa-spring-boot-oauth.html)
+* [Add Role-Based Access Control to Your App with Spring Security and Thymeleaf](/blog/2017/10/13/okta-groups-spring-security.html)
 
 And if you have questions about this or any of our other content (or just want to chat!) hit us up on Twitter [@OktaDev](https://twitter.com/OktaDev). We’d love to hear from you!

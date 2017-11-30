@@ -34,7 +34,7 @@ I’ve been a committer on the JHipster project ever since I [started writing th
 
 I’m a fan of [OAuth 2.0](https://oauth.net/) and [OpenID Connect](http://openid.net/connect/) (OIDC). It helps that I work for Okta, where we implement both options in our API and allow developers to use our libraries &mdash; or third party libraries &mdash; to connect. I like how OAuth will enable me to use my existing credentials at an Identity Provider (e.g., Google, Facebook, or even Okta) to log in to applications without creating a new account.
 
-> If you want to know more about how OAuth and OIDC work, check out my article [What the Heck is OAuth](https://developer.okta.com/blog/2017/06/21/what-the-heck-is-oauth) or watch Karl McGuinness’s [What the Heck is OpenID Connect talk from Oktane 17](https://www.youtube.com/watch?v=6ypYXxRPKgk). 
+> If you want to know more about how OAuth and OIDC work, check out my article [What the Heck is OAuth](https://developer.okta.com/blog/2017/06/21/what-the-heck-is-oauth.html) or watch Karl McGuinness’s [What the Heck is OpenID Connect talk from Oktane 17](https://www.youtube.com/watch?v=6ypYXxRPKgk). 
 
 About a month ago, I started looking into creating a JHipster Module that’d work with Okta, much like [the one I created at Stormpath](https://stormpath.com/blog/stormpath-jhipster-application). I knew that JHipster had OAuth as one of its authentication options, but I was unfamiliar with how it worked. I discovered when you chose OAuth as your authentication mechanism; it created an OAuth server and an Angular client with the client ID and client secret embedded in the code. 
 
@@ -44,7 +44,7 @@ Embedding a client secret in a SPA (single-page app) is a no-no in OAuth-land, a
 
 Over the last couple years, JHipster has [had](https://github.com/jhipster/generator-jhipster/issues/2465) a [few](https://github.com/jhipster/generator-jhipster/issues/6139) [requests](https://issues.jboss.org/browse/KEYCLOAK-2243?) for Keycloak integration. [Keycloak](http://www.keycloak.org/) is an open source identity and access management solution. It has an Apache 2.0 license and is run by Red Hat. It supports standard protocols like OIDC, OAuth 2.0, and SAML 2.0. You can find its [source code on GitHub](https://github.com/keycloak/keycloak).
 
-JHipster uses [Spring Security](https://github.com/spring-projects/spring-security) and [I knew that it integrated with OAuth very easily](/blog/2017/03/21/spring-boot-oauth). After [a lengthy discussion with the JHipster community](https://github.com/gmarziou/jhipster-keycloak/issues/2#issuecomment-327007722), I decided to implement OAuth / OIDC support for JHipster using Spring Security, and nothing else. We thought about making it so the Angular client embedded a login form that was OIDC-aware, but realized we might have to have different libraries for different UI frameworks and it’d get complicated. By leveraging Spring Security and OAuth’s *[authorization code flow](https://tools.ietf.org/html/rfc6749#section-4.1)*, Spring Security would handle the redirect to the Identity Provider (aka IdP) for sign in, manage the code-for-token exchange, and redirect back to the UI. 
+JHipster uses [Spring Security](https://github.com/spring-projects/spring-security) and [I knew that it integrated with OAuth very easily](/blog/2017/03/21/spring-boot-oauth.html). After [a lengthy discussion with the JHipster community](https://github.com/gmarziou/jhipster-keycloak/issues/2#issuecomment-327007722), I decided to implement OAuth / OIDC support for JHipster using Spring Security, and nothing else. We thought about making it so the Angular client embedded a login form that was OIDC-aware, but realized we might have to have different libraries for different UI frameworks and it’d get complicated. By leveraging Spring Security and OAuth’s *[authorization code flow](https://tools.ietf.org/html/rfc6749#section-4.1)*, Spring Security would handle the redirect to the Identity Provider (aka IdP) for sign in, manage the code-for-token exchange, and redirect back to the UI. 
 
 This turned out to be awesome because all we had to do was define properties for Spring Security (in `src/main/resources/config/application.yml`).
 
@@ -85,7 +85,7 @@ services:
       - 10990:10990
 ```
 
-If you’re unfamiliar with how Docker Compose works, check out Lee Brandt's [Developer’s Guide to Docker Compose](/blog/2017/10/11/developers-guide-to-docker-part-3). 
+If you’re unfamiliar with how Docker Compose works, check out Lee Brandt's [Developer’s Guide to Docker Compose](/blog/2017/10/11/developers-guide-to-docker-part-3.html). 
 
 This means you can start Keycloak in your JHipster app’s root directory using the following command.
 
@@ -170,9 +170,9 @@ Even if you don’t create your next application with JHipster, it’s a great w
 
 I hope you get a chance to get hip with JHipster soon! In the meantime, here are a few related articles about the technologies mentioned in this post: 
 
-* [NoSQL Options for Java Developers](/blog/2017/09/08/nosql-options-for-java-developers), and [Part II that includes Q & A with NoSQL Experts](/blog/2017/10/10/nosql-options-for-java-developers-part-ii) 
-* [Develop and Deploy Microservices with JHipster](/blog/2017/06/20/develop-microservices-with-jhipster)
-* [The Ultimate Guide to Progressive Web Applications](/blog/2017/07/20/the-ultimate-guide-to-progressive-web-applications)
+* [NoSQL Options for Java Developers](/blog/2017/09/08/nosql-options-for-java-developers.html), and [Part II that includes Q & A with NoSQL Experts](/blog/2017/10/10/nosql-options-for-java-developers-part-ii.html) 
+* [Develop and Deploy Microservices with JHipster](/blog/2017/06/20/develop-microservices-with-jhipster.html)
+* [The Ultimate Guide to Progressive Web Applications](/blog/2017/07/20/the-ultimate-guide-to-progressive-web-applications.html)
 
 Don’t forget to check out the [JHipster Mini-Book](http://www.jhipster-book.com/) too. It’s free after all! 🤓 
 

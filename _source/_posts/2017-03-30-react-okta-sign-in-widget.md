@@ -7,7 +7,7 @@ tags: [react, sign-in widget, okta, es6]
 
 React has quickly become one of the most favored front-end web frameworks, and is second only to plain old HTML5, [according to JAXenter](https://jaxenter.com/technology-trends-2017-top-frameworks-131993.html). So it’s no surprise that [developers are learning it](https://www.lynda.com/React-js-training-tutorials/7049-0.html), and [employers are asking for it](https://stackoverflow.com/jobs?sort=i&q=ReactJS).
 
-In this tutorial, you’ll start with a very simple React app with a couple of pages and some routing built in, and add authentication using [Okta’s Sign-In Widget](/code/javascript/okta_sign-in_widget). The Sign-In Widget is an embeddable Javascript widget that allows developers to use Okta’s secure, scalable architecture with a minimum of effort from within React applications. Let’s get started!
+In this tutorial, you’ll start with a very simple React app with a couple of pages and some routing built in, and add authentication using [Okta’s Sign-In Widget](/code/javascript/okta_sign-in_widget.html). The Sign-In Widget is an embeddable Javascript widget that allows developers to use Okta’s secure, scalable architecture with a minimum of effort from within React applications. Let’s get started!
 ## Get the Simple React Seed Project
 Start by cloning the simple React seed project.
 
@@ -300,4 +300,4 @@ I hope you’ve enjoyed this quick tour of our React support. If you have questi
 
 * October 20, 2017: Changed npm install to version 2.3.0 of widget and removed npm install at beginning. Also added instructions for fixing dependency issues in npm.
 * October 17, 2017: Fixed bugs and added navbar instructions.
-* September 30, 2017: Updated "create an OIDC app" instructions for the [Okta Developer Console](/blog/2017/09/25/all-new-developer-console). Updated the widget reference to 2.1.0.
+* September 30, 2017: Updated "create an OIDC app" instructions for the [Okta Developer Console](/blog/2017/09/25/all-new-developer-console.html). Updated the widget reference to 2.1.0.

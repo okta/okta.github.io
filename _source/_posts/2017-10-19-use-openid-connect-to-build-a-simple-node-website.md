@@ -486,7 +486,7 @@ One of my good friends and co-workers [Micah
 Silverman](https://twitter.com/afitnerd) recently published a three part primer
 to OIDC which I strongly recommend you read if you're interested in learning
 more about OIDC. You can [check it out
-here](https://developer.okta.com/blog/2017/07/25/oidc-primer-part-1).
+here](https://developer.okta.com/blog/2017/07/25/oidc-primer-part-1.html).
 
 You can also [follow myself](https://twitter.com/rdegges) and
 [Okta](https://twitter.com/oktadev) on Twitter to see more of what I'm working

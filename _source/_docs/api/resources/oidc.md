@@ -93,8 +93,7 @@ WWW-Authenticate: Bearer error="insufficient_scope", error_description="The acce
 ~~~
 
 #### Validating ID Tokens
-
-For more information on validating ID tokens, see our [Authentication Guide](/authentication-guide/tokens/validating-id-tokens).
+For more information on validating ID tokens, see our [Authentication Guide](/authentication-guide/tokens/validating-id-tokens.html).
 
 ### Introspection Request
 {:.api .api-operation}

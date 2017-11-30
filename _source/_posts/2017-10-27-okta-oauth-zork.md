@@ -36,7 +36,7 @@ In the spirit of the game, you can choose your own adventure:
 
 ## What the Heck is OAuth?
 
-My colleague at Okta wrote a great in-depth [post that defines what OAuth is and is not](https://developer.okta.com/blog/2017/06/21/what-the-heck-is-oauth). Here, we’ll cover the important points.
+My colleague at Okta wrote a great in-depth [post that defines what OAuth is and is not](https://developer.okta.com/blog/2017/06/21/what-the-heck-is-oauth.html). Here, we’ll cover the important points.
 
 OAuth is a standard that apps can use to provide client applications with “secure delegated access”. It works over HTTPS and authorizes devices, APIs, servers, and applications with access tokens rather than credentials.
 
@@ -188,7 +188,7 @@ state=d8c6d98f-d302-4afb-9624-b12500085a12
 
 This is the “front door” to an OAuth implicit flow. The `response_type` field indicates that an access token will be returned. The `redirect_uri` field indicates where Okta will redirect back to upon successful authentication.
 
-Note the `scope` field. It’s set to `openid`. In OIDC a `scope` field is required and at least `openid` must be present as a scope. For more information on OIDC, check out my three-part series on the [Okta Blog](https://developer.okta.com/blog/2017/07/25/oidc-primer-part-1).
+Note the `scope` field. It’s set to `openid`. In OIDC a `scope` field is required and at least `openid` must be present as a scope. For more information on OIDC, check out my three-part series on the [Okta Blog](https://developer.okta.com/blog/2017/07/25/oidc-primer-part-1.html).
 
 Assuming authentication is successful and Okta redirects back to your application, there’s some javascript that takes over to display the access token and a command using [HTTPie](https://httpie.org) to interact with the game.
 

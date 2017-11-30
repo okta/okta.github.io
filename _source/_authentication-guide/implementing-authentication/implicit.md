@@ -59,7 +59,7 @@ Your application must now extract the token(s) from the URI and store them.
 
 ### 3. Next Steps
 
-When your application passes a request with an `access_token`, the resource server will need to validate it. For more on this, see [Validating Access Tokens](/authentication-guide/tokens/validating-access-tokens).
+When your application passes a request with an `access_token`, the resource server will need to validate it. For more on this, see [Validating Access Tokens](/authentication-guide/tokens/validating-access-tokens.html).
 
 ### Examples
 

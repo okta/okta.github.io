@@ -187,6 +187,6 @@ If everything completes successfully, you can then go to `http://localhost/users
 Congratulations! You have a complete environment that is defined in your source code. It can be versioned and checked in to source control. This is what people refer to as “Infrastructure as Code”. It also means that recreating this environment on the test, staging and production environments is as easy as running `docker-compose up -d` on the corresponding machine! I _told_ you good developers are lazy!
 
 ## Learn More
-You can learn more about [Docker Compose](https://docs.docker.com/compose/compose-file/) and [Docker](https://docs.docker.com/) in general from their respective documentation. If you want to learn more about the `Dockerfile` used in this project, check out [part two of this series on the `Dockerfile`](https://developer.okta.com/blog/2017/08/28/developers-guide-to-docker-part-2).
+You can learn more about [Docker Compose](https://docs.docker.com/compose/compose-file/) and [Docker](https://docs.docker.com/) in general from their respective documentation. If you want to learn more about the `Dockerfile` used in this project, check out [part two of this series on the `Dockerfile`](https://developer.okta.com/blog/2017/08/28/developers-guide-to-docker-part-2.html).
 
 As always, if you have any questions or comments about this, or any, of my articles, feel free to hit me up on [Twitter](https://twitter.com/leebrandt) or [Github](https://github.com/leebrandt).

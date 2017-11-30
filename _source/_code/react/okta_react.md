@@ -35,7 +35,7 @@ If you do not already have a **Developer Edition Account**, you can create one a
 To quickly create a React app, we recommend the create-react-app CLI. Follow their guide [here](https://github.com/facebookincubator/create-react-app#quick-overview).
 
 ## Install Dependencies
-A simple way to add authentication to a React app is using the [Okta Auth JS](/code/javascript/okta_auth_sdk) library. We can install it via `npm`:
+A simple way to add authentication to a React app is using the [Okta Auth JS](/code/javascript/okta_auth_sdk.html) library. We can install it via `npm`:
 ```bash
 npm install @okta/okta-auth-js --save
 ```

@@ -59,7 +59,7 @@ The usual OAuth 2.0 grant flow looks like this:
 3. If the grant is valid, the authorization server returns an access token, possibly alongside a refresh and/or ID token.
 4. The client now uses that access token to access the resource server.
 
-> For a deeper dive into OAuth 2.0, see [What the Heck is OAuth?](/blog/2017/06/21/what-the-heck-is-oauth) over on the Okta Developer blog.
+> For a deeper dive into OAuth 2.0, see [What the Heck is OAuth?](/blog/2017/06/21/what-the-heck-is-oauth.html) over on the Okta Developer blog.
 > 
 > If you'd like to see the OAuth 2.0 spec, you can find it here: <https://tools.ietf.org/html/rfc6749>
 
@@ -173,7 +173,7 @@ app -> client: Response
 
 -->
 
-For information how to set up your application to use this flow, see [Implement the Authorization Code Flow](/authentication-guide/implementing-authentication/auth-code).
+For information how to set up your application to use this flow, see [Implement the Authorization Code Flow](/authentication-guide/implementing-authentication/auth-code.html).
 
 ### Authorization Code with PKCE
 
@@ -213,7 +213,7 @@ app -> client: Response
 
 -->
 
-For information how to set up your application to use this flow, see [Implement the Authorization Code Flow with PKCE](/authentication-guide/implementing-authentication/auth-code-pkce).
+For information how to set up your application to use this flow, see [Implement the Authorization Code Flow with PKCE](/authentication-guide/implementing-authentication/auth-code-pkce.html).
 
 ### Implicit Flow
 
@@ -240,7 +240,7 @@ client -> app: Request with access token
 app -> client: Response
 -->
 
-For information how to set up your application to use this flow, see [Implement the Implicit Flow](/authentication-guide/implementing-authentication/implicit).
+For information how to set up your application to use this flow, see [Implement the Implicit Flow](/authentication-guide/implementing-authentication/implicit.html).
 
 ### Resource Owner Password Flow 
 
@@ -265,7 +265,7 @@ app -> client: Response
 
 -->
 
-For information how to set up your application to use this flow, see [Implement the Resource Owner Password Flow](/authentication-guide/implementing-authentication/password).
+For information how to set up your application to use this flow, see [Implement the Resource Owner Password Flow](/authentication-guide/implementing-authentication/password.html).
 
 ### Client Credentials Flow
 
@@ -290,4 +290,4 @@ app -> client: Response
 
 -->
 
-For information how to set up your application to use this flow, see [Implement the Client Credentials Flow](/authentication-guide/implementing-authentication/client-creds).
+For information how to set up your application to use this flow, see [Implement the Client Credentials Flow](/authentication-guide/implementing-authentication/client-creds.html).

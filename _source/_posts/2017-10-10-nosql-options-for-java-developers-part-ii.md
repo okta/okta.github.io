@@ -5,7 +5,7 @@ author: mraible
 tags: [nosql, java, redis, mongodb, cassandra, neo4j, postgresql, spring boot, spring data]
 ---
 
-Last month, I wrote about [NoSQL Options for Java Developers](/blog/2017/09/08/nosql-options-for-java-developers). I analyzed the data available from a variety of sources (Indeed jobs, GitHub stars, Stack Overflow tags) to pick the top five options: MongoDB, Redis, Cassandra, Neo4j, and PostgreSQL. After writing this article, I shared it with a few experts I know in the Java and NoSQL communities and asked them the following questions:
+Last month, I wrote about [NoSQL Options for Java Developers](/blog/2017/09/08/nosql-options-for-java-developers.html). I analyzed the data available from a variety of sources (Indeed jobs, GitHub stars, Stack Overflow tags) to pick the top five options: MongoDB, Redis, Cassandra, Neo4j, and PostgreSQL. After writing this article, I shared it with a few experts I know in the Java and NoSQL communities and asked them the following questions:
 
 1. Do you agree with my choices of the top 5 NoSQL options (MongoDB, Redis, Cassandra, Neo4j, and PostgreSQL with its JSON support)?
 2. Do you have any good or bad stories about using any of these databases in production?
