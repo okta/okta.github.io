@@ -36,42 +36,41 @@ This will create a `ng-demo` project and run `npm install` in it. It should take
 
 ```bash
 [mraible:~/dev] $ ng new ng-demo
-installing ng
-  create .editorconfig
-  create README.md
-  create src/app/app.component.css
-  create src/app/app.component.html
-  create src/app/app.component.spec.ts
-  create src/app/app.component.ts
-  create src/app/app.module.ts
-  create src/assets/.gitkeep
-  create src/environments/environment.prod.ts
-  create src/environments/environment.ts
-  create src/favicon.ico
-  create src/index.html
-  create src/main.ts
-  create src/polyfills.ts
-  create src/styles.css
-  create src/test.ts
-  create src/tsconfig.app.json
-  create src/tsconfig.spec.json
-  create src/typings.d.ts
-  create .angular-cli.json
-  create e2e/app.e2e-spec.ts
-  create e2e/app.po.ts
-  create e2e/tsconfig.e2e.json
-  create .gitignore
-  create karma.conf.js
-  create package.json
-  create protractor.conf.js
-  create tsconfig.json
-  create tslint.json
-Successfully initialized git.
+  create ng-demo/README.md (1022 bytes)
+  create ng-demo/.angular-cli.json (1242 bytes)
+  create ng-demo/.editorconfig (245 bytes)
+  create ng-demo/.gitignore (516 bytes)
+  create ng-demo/src/assets/.gitkeep (0 bytes)
+  create ng-demo/src/environments/environment.prod.ts (51 bytes)
+  create ng-demo/src/environments/environment.ts (387 bytes)
+  create ng-demo/src/favicon.ico (5430 bytes)
+  create ng-demo/src/index.html (293 bytes)
+  create ng-demo/src/main.ts (370 bytes)
+  create ng-demo/src/polyfills.ts (2405 bytes)
+  create ng-demo/src/styles.css (80 bytes)
+  create ng-demo/src/test.ts (1085 bytes)
+  create ng-demo/src/tsconfig.app.json (211 bytes)
+  create ng-demo/src/tsconfig.spec.json (304 bytes)
+  create ng-demo/src/typings.d.ts (104 bytes)
+  create ng-demo/e2e/app.e2e-spec.ts (289 bytes)
+  create ng-demo/e2e/app.po.ts (208 bytes)
+  create ng-demo/e2e/tsconfig.e2e.json (235 bytes)
+  create ng-demo/karma.conf.js (923 bytes)
+  create ng-demo/package.json (1312 bytes)
+  create ng-demo/protractor.conf.js (722 bytes)
+  create ng-demo/tsconfig.json (363 bytes)
+  create ng-demo/tslint.json (3097 bytes)
+  create ng-demo/src/app/app.module.ts (316 bytes)
+  create ng-demo/src/app/app.component.css (0 bytes)
+  create ng-demo/src/app/app.component.html (1141 bytes)
+  create ng-demo/src/app/app.component.spec.ts (986 bytes)
+  create ng-demo/src/app/app.component.ts (207 bytes)
+You can `ng set --global packageManager=yarn`.
 Installing packages for tooling via npm.
 Installed packages for tooling via npm.
-You can `ng set --global packageManager=yarn`.
+Successfully initialized git.
 Project 'ng-demo' successfully created.
-[mraible:~] 46s $
+[mraible:~] 42s $
 ```
 
 You can see the what version of Angular CLI you're using with `ng --version`.
@@ -84,9 +83,11 @@ $ ng --version
  / ___ \| | | | (_| | |_| | | (_| | |      | |___| |___ | |
 /_/   \_\_| |_|\__, |\__,_|_|\__,_|_|       \____|_____|___|
                |___/
-@angular/cli: 1.3.2
-node: 8.4.0
-os: darwin x64
+
+Angular CLI: 1.5.5
+Node: 8.9.1
+OS: darwin x64
+Angular:
 ```
 
 ## Run Your Angular Application
