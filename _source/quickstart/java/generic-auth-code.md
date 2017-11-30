@@ -1,10 +1,3 @@
 ---
-layout: quickstart_partial
-exampleDescription: Java Auth Code Example
-sitemap:
-  exclude: "yes"
+redirect_to: /quickstart/#/okta-sign-in-page/java/generic
 ---
-
-## Okta Java Quickstart
-
-{% include quickstart-coming-soon.html %}
