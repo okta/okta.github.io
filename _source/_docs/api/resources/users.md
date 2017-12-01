@@ -26,6 +26,7 @@ Creates a new user in your Okta organization with or without credentials
 - [Create User without Credentials](#create-user-without-credentials)
 - [Create User with Recovery Question](#create-user-with-recovery-question)
 - [Create User with Password](#create-user-with-password)
+- [Create User with Imported Hashed Password](#create-user-with-imported-hashed-password)
 - [Create User with Password & Recovery Question](#create-user-with-password--recovery-question)
 - [Create User with Authentication Provider](#create-user-with-authentication-provider)
 - [Create User in Group](#create-user-in-group)
@@ -255,6 +256,82 @@ curl -v -X POST \
     "provider": {
       "type": "OKTA",
       "name": "OKTA"
+    }
+  },
+  "_links": {
+    "activate": {
+      "href": "https://{yourOktaDomain}.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/activate"
+    }
+  }
+}
+~~~
+
+#### Create User with Imported Hashed Password
+{:.api .api-operation}
+
+> Creating or updating users with an imported hashed password is an {% api_lifecycle ea %} feature.
+
+Creates a user with a specified [hashed password](#hashed-password-object)
+
+The new user is able to login immediately after activation with the specified password.
+This flow is common when migrating users from another data store in cases where we wish to allow the users to retain their current passwords.
+
+> Important: Do not generate or send a one-time activation token when activating users with an imported password.  Users should login with their imported password.
+
+##### Request Example
+{:.api .api-request .api-request-example}
+
+~~~sh
+curl -v -X POST \
+-H "Accept: application/json" \
+-H "Content-Type: application/json" \
+-H "Authorization: SSWS ${api_token}" \
+-d '{
+  "profile": {
+    "firstName": "Isaac",
+    "lastName": "Brock",
+    "email": "isaac.brock@example.com",
+    "login": "isaac.brock@example.com",
+    "mobilePhone": "555-415-1337"
+  },
+  "credentials": {
+    "password" : {
+      "hash": {
+        "algorithm": "BCRYPT",
+        "workFactor": 10,
+        "salt": "rwh3vH166HCH/NT9XV5FYu",
+        "value": "qaMqvAPULkbiQzkTCWo5XDcvzpk8Tna"
+      }
+    }
+  }
+}' "https://{yourOktaDomain}.com/api/v1/users?activate=false"
+~~~
+
+##### Response Example
+{:.api .api-response .api-response-example}
+
+~~~json
+{
+  "id": "00ub0oNGTSWTBKOLGLNR",
+  "status": "ACTIVE",
+  "created": "2013-07-02T21:36:25.344Z",
+  "activated": null,
+  "statusChanged": null,
+  "lastLogin": null,
+  "lastUpdated": "2013-07-02T21:36:25.344Z",
+  "passwordChanged": "2013-07-02T21:36:25.344Z",
+  "profile": {
+    "firstName": "Isaac",
+    "lastName": "Brock",
+    "email": "isaac.brock@example.com",
+    "login": "isaac.brock@example.com",
+    "mobilePhone": "555-415-1337"
+  },
+  "credentials": {
+    "password": {},
+    "provider": {
+      "type": "IMPORT",
+      "name": "IMPORT"
     }
   },
   "_links": {
@@ -3286,13 +3363,20 @@ Specifies primary authentication and recovery credentials for a user.  Credentia
 
 Specifies a password for a user
 
-A password value is a **write-only** property.  When a user has a valid password and a response object contains a password credential, then the Password Object is a bare object without the `value` property defined (e.g. `password: {}`) to indicate that a password value exists.
-
 | Property | DataType | Nullable | Unique | Readonly | MinLength       | MaxLength | Validation      |
 |:---------|:---------|:---------|:-------|:---------|:----------------|:----------|:----------------|
 | value    | String   | TRUE     | FALSE  | FALSE    | Password Policy | 40        | Password Policy |
+| hash     | [Hashed Password Object](#hashed-password-object)     | TRUE     | FALSE  | FALSE    | N/A | N/A |  |
+
+A password value is a **write-only** property. 
+A password hash is a **write-only** property. 
+
+When a user has a valid password or imported hashed password, and a response object contains a password credential, then the Password Object is a bare object without the `value` property defined (e.g. `password: {}`) to indicate that a password value exists.
+
 
 ##### Default Password Policy
+
+The password specified in the value property must meet the default password policy requirements:
 
 - Must be a minimum of 8 characters
 - Must have a character from the following groups:
@@ -3303,6 +3387,40 @@ A password value is a **write-only** property.  When a user has a valid password
   - *For example, a user with login isaac.brock@example.com will not be able set password brockR0cks! as the password contains the login part brock*
 
 > Password policy requirements can be modified in the Okta Admin UI *(Security -> Policies)*
+
+##### Hashed Password Object
+
+{% api_lifecycle ea %}
+
+Specifies a hashed password that can be imported into Okta.  This allows an existing password to be imported into Okta directly from some other store.
+A hashed password may be specified in a Password Object when creating or updating a user, but not for other operations.  When updating a user with a hashed password the user must have the `STAGED` status.
+
+| Property | DataType | Description | Nullable | Min Value | Max Value |
+|:---------|:---------|:---------|:-------|:---------|:----------------|
+| algorithm    | String   | The algorithm used to hash the password.  Must be set to "BCRYPT" | FALSE     | N/A  | N/A  | 
+| workFactor    | Integer   | Governs the strength of the hash, and the time required to compute it | FALSE     | 1  | 20  |  
+| salt    | String   | Specifies the password salt used to generate the hash | FALSE     | 22  | 22  |  
+| value | String | The actual hashed password| FALSE | N/A | N/A | 
+
+
+~~~sh
+"password" : {
+  "hash": {
+    "algorithm": "BCRYPT",
+    "workFactor": 10,
+    "salt": "rwh3vH166HCH/NT9XV5FYu",
+    "value": "qaMqvAPULkbiQzkTCWo5XDcvzpk8Tna"
+  }
+}
+~~~
+
+
+##### Hashing Algorithm
+Currently the only supported hashing algorithim is the bcrypt algorithm.
+
+##### Default Password Policy
+
+Because the plain text password is not specified when a hashed password is provided, password policy is not applied.  
 
 #### Recovery Question Object
 
@@ -3319,12 +3437,16 @@ Specifies the authentication provider that validates the user&#8217;s password c
 
 | Property | DataType                                                     | Nullable | Unique | Readonly |
 |:---------|:-------------------------------------------------------------|:---------|:-------|:---------|
-| type     | `OKTA`, `ACTIVE_DIRECTORY`,`LDAP`, `FEDERATION`, or `SOCIAL` | FALSE    | FALSE  | TRUE     |
+| type     | `OKTA`, `ACTIVE_DIRECTORY`,`LDAP`, `FEDERATION`, `SOCIAL` or `IMPORT` | FALSE    | FALSE  | TRUE     |
 | name     | String                                                       | TRUE     | FALSE  | TRUE     |
 
 > `ACTIVE_DIRECTORY` or `LDAP` providers specify the directory instance name as the `name` property.
 
 > Users with a `FEDERATION` or `SOCIAL` authentication provider do not support a `password` or `recovery_question` credential and must authenticate via a trusted Identity Provider.
+
+>`IMPORT` specifies a hashed password that was imported from an external source.
+
+> Creating or updating users with an imported hashed password is an {% api_lifecycle ea %} feature.
 
 ### Links Object
 
