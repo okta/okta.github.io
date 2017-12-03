@@ -372,7 +372,7 @@ An Open ID Connect flow involves the following steps:
 4. Validate JWT ID token locally based on built-in dates and signature
 5. Get additional user attributes as needed with access token
 
-{% img blog/oauth/oidc-flow.png alt:"OIDF Flow" width:"800" %}
+{% img blog/oauth/oidc-flow.png alt:"OIDC Flow" width:"800" %}
 
 ## OAuth + Okta
 [Okta](https://www.okta.com) is best known for its single-sign on services that allow you to seamlessly authenticate to the applications you use on a daily basis. But did you know Okta also has an awesome developer platform? Secure single sign-on often uses SAML as the protocol of choice, but Okta also provides several other options, including a Sign-in Widget, Auth SDK (a JavaScript-based library), Social Login, and an Authentication API for any client. If you're interested in learning about Okta straight from the source, you should attend [Oktane17](https://www.okta.com/oktane17/) in late August. There's a [track dedicated to app development](https://www.okta.com/oktane17/agenda/#AppDev).
