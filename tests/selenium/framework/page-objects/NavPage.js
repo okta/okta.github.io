@@ -15,6 +15,7 @@ class NavPage extends BasePage {
     this.$resultsBox = $('.SearchResults');
     this.$supportLink = element(by.cssContainingText('span', 'Support'));
     this.$$menus = $$('.menu');
+    this.$supportNav = $('.Header-nav. .expanded');
     this.setPageLoad(this.$header);
   }
 
@@ -56,6 +57,10 @@ class NavPage extends BasePage {
 
   clickSupportLink() {
     return this.$supportLink.click()
+  }
+
+  hoverSupportLink() {
+  	 browser.actions().mouseMove(element(by.css('.Header-nav .expanded'))).perform();
   }
 
   isSupportMenuDisplayed() {
