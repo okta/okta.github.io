@@ -27,9 +27,11 @@ In this case, *only* the Kong API gateway is interacting with Okta. Kong then pa
 
 I created a screencast based on [this working example](https://github.com/oktadeveloper/okta-kong-origin-example).
 
-It uses [Docker](https://www.docker.com/) to create a container for Kong and another for a [Spring Boot](https://projects.spring.io/spring-boot/) app that understands the `x-userinfo` HTTP header.
+<div style="width: 560px; margin: 0 auto">
+  <iframe width="560" height="315" src="https://www.youtube.com/embed/JUll6Dgu_pI" frameborder="0" allowfullscreen></iframe>
+</div>
 
-The slides used in the screencast [can be found on Speakerdeck](https://speakerdeck.com/dogeared/okta-plus-kong-api-gateway-with-oidc). 
+In this demo, I use [Docker](https://www.docker.com/) to create a container for Kong and another for a [Spring Boot](https://projects.spring.io/spring-boot/) app that understands the `x-userinfo` HTTP header.
 
-<iframe width="480" height="270" src="https://www.youtube.com/embed/JUll6Dgu_pI" frameborder="0" gesture="media" allow="encrypted-media" allowfullscreen></iframe>
+The slides used in the screencast [can be found on Speaker Deck](https://speakerdeck.com/dogeared/okta-plus-kong-api-gateway-with-oidc). 
 
