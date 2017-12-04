@@ -321,7 +321,7 @@ Update `client/src/app/app.component.html` to have the `app-car-list` element.
 ```
 {% endraw %}
 
-Start the client application using `ng serve`. Open your favorite browser to <http://localhost:4200>. You won't see the
+Start the client application using `ng serve`. Open your favorite browser to http://localhost:4200. You won't see the
 car list just yet, and if you open your developer console, you'll see why.
 
 {% img blog/spring-boot-2-angular-5/cors-error.png alt:"CORS Error" width:"800" %}{: .center-image }
