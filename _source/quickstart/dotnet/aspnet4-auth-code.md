@@ -1,10 +1,3 @@
 ---
-layout: quickstart_partial
-exampleDescription: ASP.NET 4.x Auth Code Example
-sitemap:
-  exclude: "yes"
+redirect_to: /quickstart/#/okta-sign-in-page/dotnet/aspnet4
 ---
-
-## Okta ASP.NET 4 Quickstart
-
-{% include quickstart-coming-soon.html %}

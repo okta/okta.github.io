@@ -1,10 +1,3 @@
 ---
-layout: quickstart_partial
-exampleDescription: NodeJS Auth Code Example
-sitemap:
-  exclude: "yes"
+redirect_to: /quickstart/#/okta-sign-in-page/nodejs/generic
 ---
-
-## Okta Node.js Quickstart
-
-{% include quickstart-coming-soon.html %}

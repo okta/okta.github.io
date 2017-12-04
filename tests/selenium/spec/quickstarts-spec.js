@@ -86,7 +86,7 @@ describe('quickstarts page navigation spec', () => {
 
   it('can toggle to client and server setup via right-side nav', () => {
     quickstartsPage.resizeXLarge();
-    quickstartsPage.waitUntilOnScreen(quickstartsPage.getSkipLink());    
+    quickstartsPage.waitUntilOnScreen(quickstartsPage.getSkipLink());
     quickstartsPage.selectServerSetupLink();
     quickstartsPage.waitUntilOnScreen(quickstartsPage.getNodeJSLink());
     quickstartsPage.selectClientSetupLink();
@@ -117,7 +117,7 @@ describe('quickstarts page navigation spec', () => {
       'Express.js'
     ])).toBe(true);
 
-    quickstartsPage.selectAndroid();
+    quickstartsPage.selectAndroidClient();
     expect(quickstartsPage.urlContains("/android")).toBe(true);
     expect(quickstartsPage.activeLinksContain([
         'Android',
@@ -216,5 +216,92 @@ describe('quickstarts page navigation spec', () => {
         'Generic Java',
         'Spring'
     ])).toBe(true);
+  });
+});
+
+describe('quickstart page content spec', () => {
+  const quickstartsPage = new QuickStartsPage('/quickstart');
+
+  beforeEach(() => {
+    quickstartsPage.resizeMedium();
+    return quickstartsPage.load();
+  });
+
+  it('should load the sign-in page content when I click Sign-In Page', () => {
+    quickstartsPage.selectHosted();
+    browser.sleep(100);
+    return expect(quickstartsPage.isShowingSignInPageContent()).toBe(true);
+  });
+
+  it('should load the sign-in widget content when I click Sign-In Widget', () => {
+    quickstartsPage.selectSignInWidget();
+    browser.sleep(100);
+    return expect(quickstartsPage.isShowingSignInWidgetContent()).toBe(true);
+  });
+
+  it('should load the Angular content when I click Angular', () => {
+    quickstartsPage.selectAngularClient();
+    browser.sleep(100);
+    return expect(quickstartsPage.isShowingAngularContent()).toBe(true);
+  });
+
+  it('should load the React content when I click React', () => {
+    quickstartsPage.selectReactClient();
+    browser.sleep(100);
+    return expect(quickstartsPage.isShowingReactContent()).toBe(true);
+  });
+
+  it('should load the Android content when I click Android', () => {
+    quickstartsPage.selectAndroidClient();
+    browser.sleep(100);
+    return expect(quickstartsPage.isShowingAndroidContent()).toBe(true);
+  });
+
+  it('should load the iOS content when I click iOS', () => {
+    quickstartsPage.selectiOSClient();
+    browser.sleep(100);
+    return expect(quickstartsPage.isShowingIosContent()).toBe(true);
+  });
+
+  it('should load the Node/Generic content when I click Node/Generic', () => {
+    quickstartsPage.selectNodeJSServer();
+    quickstartsPage.selectGenericNode();
+    browser.sleep(100);
+    return expect(quickstartsPage.isShowingNodeGenericContent()).toBe(true);
+  });
+
+  it('should load the Node/Express content when I click Node/Express', () => {
+    quickstartsPage.selectNodeJSServer();
+    quickstartsPage.selectExpressJS();
+    browser.sleep(100);
+    return expect(quickstartsPage.isShowingNodeExpressContent()).toBe(true);
+  });
+
+  it('should load the Java/Generic content when I click Java/Generic', () => {
+    quickstartsPage.selectJavaServer();
+    quickstartsPage.selectGenericJava();
+    browser.sleep(100);
+    return expect(quickstartsPage.isShowingJavaGenericContent()).toBe(true);
+  });
+
+  it('should load the Java/Spring content when I click Java/Spring', () => {
+    quickstartsPage.selectJavaServer();
+    quickstartsPage.selectSpring();
+    browser.sleep(100);
+    return expect(quickstartsPage.isShowingJavaSpringContent()).toBe(true);
+  });
+
+  it('should load the .NET/ASP Core content when I click .NET/ASP Core', () => {
+    quickstartsPage.selectDotNet();
+    quickstartsPage.selectDotNetCore();
+    browser.sleep(100);
+    return expect(quickstartsPage.isShowingDotnetAspCoreContent()).toBe(true);
+  });
+
+  it('should load the .NET/ASP 4 content when I click .NET/ASP 4', () => {
+    quickstartsPage.selectDotNet();
+    quickstartsPage.selectDotNetFour();
+    browser.sleep(100);
+    return expect(quickstartsPage.isShowingDotnetAsp4Content()).toBe(true);
   });
 });

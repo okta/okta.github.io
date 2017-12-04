@@ -13,7 +13,6 @@ plugins:
   - jekyll-redirect-from
   - jekyll-paginate
   - jekyll-assets
-  - jekyll-redirect-from
 
 source: _source
 destination: dist
@@ -100,6 +99,16 @@ defaults:
       collection: reference
     values:
       layout: documentation
+  -
+    scope:
+      collection: quickstart
+    values:
+      sitemap: false
+  -
+    scope:
+      collection: quickstart-fragments
+    values:
+      sitemap: false
 
 # Okta Library versions
 versions:
