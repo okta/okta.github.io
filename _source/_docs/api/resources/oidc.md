@@ -508,6 +508,7 @@ of the response.
 | code_challenge_method | Method used to derive the code challenge. Must be `S256`.                                                                                                                                                                                                                                                                                                                                               | Query      | String   | FALSE    |
 | login_hint            | A username to prepopulate if prompting for authentication.                                                                                                                                                                                                                                                                                                                                              | Query      | String   | FALSE    |
 | idp_scope             | A space delimited list of scopes to be provided to the Social Identity Provider when performing   [Social Login](social_authentication.html). These scopes are used in addition to the scopes already configured on the Identity Provider.                                                                                                                                                                | Query      | String   | FALSE    |
+| request | A JWT created by the client that can be included as a query parameter in the body of the request. Typically used for Okta to consume, such as for an MFA push. | Query | JWT | FALSE |
 
 #### Parameter Details
 
@@ -530,6 +531,15 @@ of the response.
  Using the `state` parameter is also a countermeasure to several other known attacks as outlined in [OAuth 2.0 Threat Model and Security Considerations](https://tools.ietf.org/html/rfc6819).
 
  * [Proof Key for Code Exchange](https://tools.ietf.org/html/rfc7636) (PKCE) is a stronger mechanism for binding the authorization code to the client than just a client secret, and prevents [a code interception attack](https://tools.ietf.org/html/rfc7636#section-1) if both the code and the client credentials are intercepted (which can happen on mobile/native devices). The PKCE-enabled client creates a large random string as code_verifier and derives code_challenge from it using code_challenge_method. It passes the code_challenge and code_challenge_method in the authorization request for code flow. When a client tries to redeem the code, it must pass the code_verifer. Okta recomputes the challenge and returns the requested token only if it matches the code_challenge in the original authorization request. When a client, whose `token_endpoint_auth_method` is `none`, makes a code flow authorization request, the `code_challenge` parameter is required.
+
+ * About the `request` parameter:
+      * You can sign the JWT using the app's client ID and client secret.
+      * We recommend you don't duplicate any request parameters in both the JWT and the query URI itself. However, you can do so with `state`, `nonce`, `code_challenge`, and `code_challenge_method`.  
+     * Okta validates the `request` parameter in the following ways:
+        1. `iss` is required and must  be the `client_id`.
+        2. `aud` is required and must be same value as the authorization server issuer that mints the ID token or access token. This value is published in metadata for Okta Authorization Server and Custom Authorization Server.
+        3. JWT lifetime is evaluated using the `iat` and `exp` claims if present. If the JWT is expired or not yet valid, Okta returns an `invalid_request_object`  error.
+        4. Okta rejects the JWT if the `jti` claim is present and it has already been processed.
 
 #### postMessage() Data Model
 
@@ -608,6 +618,7 @@ curl -v -X GET \
   response_type=code&
   response_mode=form_post&
   scope=openid offline_access&
+  request=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJPa3RhIiwiaWF0IjoxNTEyNDA2MjE2LCJleHAiOjE1NDM5NDIyMTYsImF1ZCI6Ind3dy5leGFtcGxlLmNvbSIsInN1YiI6InNqYWNrc29uQGV4YW1wbGUuY29tIiwiRW1haWwiOiJzamFja3NvbkBleGFtcGxlLmNvbSJ9.3VR4_ySoAzuIhGw_wdEZrUeB3-OReQp7qBtmCe3BIDI&
   redirect_uri=${redirect_uri}&
   state=${state}&
   nonce=${nonce}"
@@ -626,6 +637,7 @@ curl -v -X GET \
   response_type=id_token token&
   response_mode=form_post&
   scope=openid offline_access&
+  request=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJPa3RhIiwiaWF0IjoxNTEyNDA2MjE2LCJleHAiOjE1NDM5NDIyMTYsImF1ZCI6Ind3dy5leGFtcGxlLmNvbSIsInN1YiI6InNqYWNrc29uQGV4YW1wbGUuY29tIiwiRW1haWwiOiJzamFja3NvbkBleGFtcGxlLmNvbSJ9.3VR4_ySoAzuIhGw_wdEZrUeB3-OReQp7qBtmCe3BIDI&
   redirect_uri=${redirect_uri}&
   state=${state}&
   nonce=${nonce}"

@@ -68,6 +68,7 @@ This is a starting point for OAuth 2.0 flows such as implicit and authorization 
 | code_challenge_method | Specifies the method that was used to derive the code challenge. Only S256 is supported.                                                                                                                                                                                                                                                                                                                                                                 | Query | String   | FALSE    |                  |
 | login_hint            | A username to prepopulate if prompting for authentication.                                                                                                                                                                                                                                                                                                                                                                                               | Query | String   | FALSE    |                  |
 | idp_scope             | A space delimited list of scopes to be provided to the Social Identity Provider when performing [Social Login](social_authentication.html). These scopes are used in addition to the scopes already configured on the Identity Provider.                                                                                                                                                                                                                 | Query | String   | FALSE    |                  |
+| request | A JWT created by the client that can be included as a query parameter in the body of the request. Typically used for Okta to consume, such as for an MFA push. | Query | JWT | FALSE |
 
 ##### Request Parameter Details
 
@@ -91,6 +92,15 @@ This is a starting point for OAuth 2.0 flows such as implicit and authorization 
     Then the client passes the *code_challenge* and *code_challenge_method* in the authorization request for code flow. When a client tries to redeem the code, it must pass the *code_verifier*. Okta recomputes the challenge and returns the requested token only if it matches the *code_challenge* in the original authorization request. When a client, whose *token_endpoint_auth_method* is ``none``, makes a code flow authorization request, *code_challenge* is required.
     Since *code_challenge_method* only supports S256, this means that the value for *code_challenge* must be: `BASE64URL-ENCODE(SHA256(ASCII(*code_verifier*)))`. According to the [PKCE spec](https://tools.ietf.org/html/rfc7636), the *code_verifier* must be at least 43 characters and no more than 128 characters.
  
+  * About the `request` parameter:
+      * You can sign the JWT using the app's client ID and client secret.
+      * We recommend you don't duplicate any request parameters in both the JWT and the query URI itself. However, you can do so with `state`, `nonce`, `code_challenge`, and `code_challenge_method`.  
+     * Okta validates the `request` parameter in the following ways:
+        1. `iss` is required and must  be the `client_id`.
+        2. `aud` is required and must be same value as the authorization server issuer that mints the ID token or access token. This value is published in metadata for Okta Authorization Server and Custom Authorization Server.
+        3. JWT lifetime is evaluated using the `iat` and `exp` claims if present. If the JWT is expired or not yet valid, Okta returns an `invalid_request_object`  error.
+        4. Okta rejects the JWT if the `jti` claim is present and it has already been processed.
+
  * {% api_lifecycle beta %} A consent dialog is displayed depending on the values of three elements:
      * `prompt`, a query parameter used in requests to [`/oauth2/:authorizationServerId/v1/authorize`](/docs/api/resources/oauth2.html#obtain-an-authorization-grant-from-a-user)(custom authorization server) or [`/oauth2/v1/authorize`](/docs/api/resources/oidc.html#authentication-request) (Org authorization server)
      * `consent_method`, a property on [apps](/docs/api/resources/apps.html#settings-7)
