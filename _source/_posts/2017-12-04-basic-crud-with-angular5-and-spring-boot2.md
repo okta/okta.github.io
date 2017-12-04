@@ -749,7 +749,7 @@ Copy the client ID into your `server/src/main/resources/application.properties` 
 
 ```properties
 okta.oauth2.issuer=https://{yourOktaDomain}.com/oauth2/default
-okta.oauth2.clientId=XXX
+okta.oauth2.clientId={clientId}
 ```
 
 Update `server/src/main/java/com/okta/developer/demo/DemoApplication.java` to enable it as a resource server.
@@ -786,7 +786,7 @@ You'll also need to change the property names in `application.properties` to be 
 
 ```properties
 okta.oauth.issuer=https://{yourOktaDomain}.com/oauth2/default
-okta.oauth.clientId=XXX
+okta.oauth.clientId={clientId}
 ```
 
 Now when you restart your server, you should see a message in your browser like the one below.
@@ -814,7 +814,7 @@ In `client/src/app/app.module.ts`, add a `config` variable with the settings for
 const config = {
   issuer: 'https://{yourOktaDomain}.com/oauth2/default',
   redirectUri: 'http://localhost:4200/implicit/callback',
-  clientId: 'XXX'
+  clientId: '{clientId}'
 };
 ```
 
