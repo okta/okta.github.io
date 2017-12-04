@@ -66,11 +66,15 @@ function oktaCustomRenderFunction(document_type, item) {
     $('.Page').toggleClass('PrimaryNav-is-active');
   });
 
-  $('.PrimaryNav .expanded .nolink').on('click', function(e){
-    e.stopPropagation();
-    e.preventDefault();
-    $(this).parent('li').toggleClass('is-active');
+  $('.PrimaryNav .expanded .nolink, .PrimaryNav .expanded > a').hover(function(event){
+	$('.PrimaryNav .expanded').removeClass('is-active');
+	if ($(this).hasClass('nolink')) {
+		event.stopPropagation();
+		event.preventDefault();
+	}
+	$(this).parent('li').addClass('is-active');
   });
+
 
   $('#form_search #st-search-input-auto').on('keyup', function(){
       if ($(this).val().length > 0) {

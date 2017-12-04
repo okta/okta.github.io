@@ -17,8 +17,14 @@
 
     <nav class="Header-nav PrimaryNav">
       <ul class="menu">
-        <li class="first leaf">
+        <li class="first expanded">
           <a href="{{ site.external_domain }}/product/">Product</a>
+          <ul class="menu">
+            <li class="first leaf"><a href="{{ site.external_domain }}/product/">Overview</a></li>
+            <li class="leaf"><a href="{{ site.external_domain }}/product/authentication/">Authentication</a></li>
+            <li class="leaf"><a href="{{ site.external_domain }}/product/authorization/">Authorization</a></li>
+            <li class="last leaf"><a href="{{ site.external_domain }}/product/user-management/">User Management</a></li>
+          </ul>
         </li>
         <li class="leaf">
           <a href="{{ site.external_domain }}/pricing/">Pricing</a>
