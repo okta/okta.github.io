@@ -508,7 +508,7 @@ of the response.
 | code_challenge_method | Method used to derive the code challenge. Must be `S256`.                                                                                                                                                                                                                                                                                                                                               | Query      | String   | FALSE    |
 | login_hint            | A username to prepopulate if prompting for authentication.                                                                                                                                                                                                                                                                                                                                              | Query      | String   | FALSE    |
 | idp_scope             | A space delimited list of scopes to be provided to the Social Identity Provider when performing   [Social Login](social_authentication.html). These scopes are used in addition to the scopes already configured on the Identity Provider.                                                                                                                                                                | Query      | String   | FALSE    |
-| request | A JWT created by the client that enables requests to be passed in a single, self-contained parameter. | Query | JWT | FALSE    | See Description. |
+| request | A JWT created by the client that enables requests to be passed as a single, self-contained parameter. | Query | JWT | FALSE    | See Description. |
 
 #### Parameter Details
 
@@ -640,7 +640,6 @@ but with `response_type=id_token` or `response_type=id_token token`:
 curl -v -X GET \
 -H "Accept: application/json" \
 -H "Content-Type: application/json" \
--H "Authorization: SSWS ${api_token}" \
 "https://{yourOktaDomain}.com/oauth2/v1/authorize?
   client_id=${client_id}&
   response_type=id_token token&
