@@ -765,7 +765,7 @@ Content-Type: application/json;charset=UTF-8
 
 The API takes an ID Token and logs the user out of the Okta session if the subject matches the current Okta session. A `post_logout_redirect_uri` may be specified to redirect the User after the logout has been performed. Otherwise, the user is redirected to the Okta login page.
 
-Note that this is not a server-side call.
+This operation is provided for RP-initiated logout for the User's browser session.
 
 #### Request Parameters
 
