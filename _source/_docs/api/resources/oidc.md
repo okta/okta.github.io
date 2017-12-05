@@ -533,7 +533,7 @@ of the response.
  * [Proof Key for Code Exchange](https://tools.ietf.org/html/rfc7636) (PKCE) is a stronger mechanism for binding the authorization code to the client than just a client secret, and prevents [a code interception attack](https://tools.ietf.org/html/rfc7636#section-1) if both the code and the client credentials are intercepted (which can happen on mobile/native devices). The PKCE-enabled client creates a large random string as code_verifier and derives code_challenge from it using code_challenge_method. It passes the code_challenge and code_challenge_method in the authorization request for code flow. When a client tries to redeem the code, it must pass the code_verifer. Okta recomputes the challenge and returns the requested token only if it matches the code_challenge in the original authorization request. When a client, whose `token_endpoint_auth_method` is `none`, makes a code flow authorization request, the `code_challenge` parameter is required.
 
 * About the `request` parameter:
-  * You must sign the JWT using the app's client ID and client secret.
+  * You must sign the JWT using the app's client secret.
   * The JWT can't be encrypted.
   * Okta supports these signing algorithms: [HS256](https://tools.ietf.org/html/rfc7518#section-5.2.3), [HS384](https://tools.ietf.org/html/rfc7518#section-5.2.4), and [HS512](https://tools.ietf.org/html/rfc7518#section-5.2.5).
   * We recommend you don't duplicate any request parameters in both the JWT and the query URI itself. However, you can do so with `state`, `nonce`, `code_challenge`, and `code_challenge_method`.
@@ -608,23 +608,30 @@ These APIs are compliant with the OpenID Connect and OAuth 2.0 spec with some Ok
 
 #### Request Examples
 
-This request initiates the authorization code flow, as signaled by `response_type=code`. The request will return an authorization code that you can use as the `code` parameter in a token request.
+This request initiates the authorization code flow, as signaled by `response_type=code`. The request returns an authorization code that you can use as the `code` parameter in a token request.
 
 ~~~sh
 curl -v -X GET \
 -H "Accept: application/json" \
 -H "Content-Type: application/json" \
--H "Authorization: SSWS ${api_token}" \
 "https://{yourOktaDomain}.com/oauth2/v1/authorize?
   client_id=${client_id}&
   response_type=code&
   response_mode=form_post&
   scope=openid offline_access&
-  request=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJPa3RhIiwiaWF0IjoxNTEyNDA2MjE2LCJleHAiOjE1NDM5NDIyMTYsImF1ZCI6Ind3dy5leGFtcGxlLmNvbSIsInN1YiI6InNqYWNrc29uQGV4YW1wbGUuY29tIiwiRW1haWwiOiJzamFja3NvbkBleGFtcGxlLmNvbSJ9.3VR4_ySoAzuIhGw_wdEZrUeB3-OReQp7qBtmCe3BIDI&
   redirect_uri=${redirect_uri}&
   state=${state}&
   nonce=${nonce}"
 ~~~
+This request does the same thing, but uses the `request` parameter to deliver a signed (HS256) JWT that contains all the query parameters:
+
+~~~sh
+curl -v -X GET \
+-H "Accept: application/json" \
+-H "Content-Type: application/json" \
+"https://{yourOktaDomain}.com/oauth2/v1/authorize?
+  request=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJPa3RhIiwiaWF0IjoxNTEyNTE2MjIxLCJleHAiOjE1NDQwNTIyMjEsImF1ZCI6Ind3dy5leGFtcGxlLmNvbSIsInN1YiI6InNqYWNrc29uQGV4YW1wbGUuY29tIiwiRW1haWwiOiJzamFja3NvbkBleGFtcGxlLmNvbSIsInJlc3BvbnNlX3R5cGUiOiJjb2RlIiwicmVzcG9uc2VfbW9kZSI6ImZvcm1fcG9zdCIsInJlZGlyZWN0X3VyaSI6Im15UmVkaXJlY3RVUkkuY29tIiwic3RhdGUiOiJteVN0YXRlIiwibm9uY2UiOiJteU5vbmNlIiwic2NvcGUiOiJvcGVuaWQgb2ZmbGluZV9hY2Nlc3MifQ.TjPy2_nUerULClavBNHcpnO_Pd1DxNEjQCeSW45ALJg"
+  ~~~
 
 This request initiates the implicit flow, that is, to obtain an ID Token and optionally an Access Token directly from the authorization server, use the same request,
 but with `response_type=id_token` or `response_type=id_token token`:
