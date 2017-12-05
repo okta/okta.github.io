@@ -19,6 +19,8 @@ The [Okta Sign-in Widget][widget-reference] provides an embeddable JavaScript si
 
 Angular 4 was [recently released](http://angularjs.blogspot.com/2017/03/angular-400-now-available.html), as well as [Angular CLI 1.4.4](https://github.com/angular/angular-cli/releases/tag/v1.4.4). To see how you might use Okta's Sign-In Widget in a simple Angular application, create a new application with Angular CLI. First, you’ll need to install Angular CLI.
 
+**NOTE:** This post has been updated to use [Angular 5](https://blog.angular.io/version-5-0-0-of-angular-now-available-37e414935ced) and [Angular CLI 1.5.5](https://github.com/angular/angular-cli/releases/tag/v1.5.5).
+
 ```bash
 npm install -g @angular/cli
 ```
@@ -37,7 +39,7 @@ After this command completes, you can create a new application.
   create angular-okta-example/src/favicon.ico (5430 bytes)
   create angular-okta-example/src/index.html (305 bytes)
   create angular-okta-example/src/main.ts (370 bytes)
-  create angular-okta-example/src/polyfills.ts (2498 bytes)
+  create angular-okta-example/src/polyfills.ts (2405 bytes)
   create angular-okta-example/src/styles.css (80 bytes)
   create angular-okta-example/src/test.ts (1085 bytes)
   create angular-okta-example/src/tsconfig.app.json (211 bytes)
@@ -50,10 +52,10 @@ After this command completes, you can create a new application.
   create angular-okta-example/package.json (1325 bytes)
   create angular-okta-example/protractor.conf.js (722 bytes)
   create angular-okta-example/tsconfig.json (363 bytes)
-  create angular-okta-example/tslint.json (2968 bytes)
-  create angular-okta-example/src/app/app.module.ts (314 bytes)
+  create angular-okta-example/tslint.json (3097 bytes)
+  create angular-okta-example/src/app/app.module.ts (316 bytes)
   create angular-okta-example/src/app/app.component.css (0 bytes)
-  create angular-okta-example/src/app/app.component.html (1120 bytes)
+  create angular-okta-example/src/app/app.component.html (1141 bytes)
   create angular-okta-example/src/app/app.component.spec.ts (986 bytes)
   create angular-okta-example/src/app/app.component.ts (207 bytes)
 You can `ng set --global packageManager=yarn`.
@@ -61,7 +63,7 @@ Installing packages for tooling via npm.
 Installed packages for tooling via npm.
 Successfully initialized git.
 Project 'angular-okta-example' successfully created.
-[mraible:~] 2m6s $
+[mraible:~] 42s $
 ```
 
 This will create a new `angular-okta-example` directory and install all the necessary dependencies. To verify everything works, run `ng e2e` in a terminal window. All tests should pass and you should see results like the following.
@@ -79,15 +81,15 @@ npm install --save @okta/okta-signin-widget
 Add the widget's CSS to `src/styles.css`:
 
 ```css
-@import '~https://ok1static.oktacdn.com/assets/js/sdk/okta-signin-widget/2.1.0/css/okta-sign-in.min.css';
-@import '~https://ok1static.oktacdn.com/assets/js/sdk/okta-signin-widget/2.1.0/css/okta-theme.css';
+@import '~@okta/okta-signin-widget/dist/css/okta-sign-in.min.css';
+@import '~@okta/okta-signin-widget/dist/css/okta-theme.css';
 ```
 
 Create `src/app/shared/okta/okta.service.ts` and use it to wrap the widget's configuration and make it an injectable service.
 
 ```ts
 import { Injectable } from '@angular/core';
-import * as OktaSignIn from '@okta/okta-signin-widget/dist/js/okta-sign-in.min.js';
+import * as OktaSignIn from '@okta/okta-signin-widget';
 
 @Injectable()
 export class Okta {
@@ -203,10 +205,16 @@ If it works - congrats! If it doesn't, please post a question to Stack Overflow 
 
 #### Customize the Widget CSS
 
-If you'd like to customize the widget's CSS, the easiest way is you write your own CSS. Remove the CSS `@import` statements you added to `src/styles.css`. Add an `@import` for [Bootstrap 4](https://getbootstrap.com/) and a few style rules to position elements. Copy the following code into `src/styles.css`.
+If you'd like to customize the widget's CSS, the easiest way is you write your own CSS. Remove the CSS `@import` statements you added to `src/styles.css` and install Bootstrap 4.
+
+```bash
+npm install bootstrap@4.0.0-beta.2 --save
+```
+
+Add an `@import` for [Bootstrap 4](https://getbootstrap.com/) and a few style rules to position elements. Copy the following code into `src/styles.css`.
 
 ```css
-@import url(https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css);
+@import "~bootstrap/dist/css/bootstrap.css";
 
 #okta-login-container {
   margin: 0 auto;
@@ -235,8 +243,8 @@ After making these changes, the sign-in widget will look like the following scre
 If you try to run `npm test` or `ng test`, tests will fail:
 
 ```bash
-Chrome 61.0.3163 (Mac OS X 10.12.6): Executed 3 of 3 (3 FAILED) (0 secs / 0.157 secs)
-Chrome 61.0.3163 (Mac OS X 10.12.6) AppComponent should render title in a h1 tag FAILED
+Chrome 62.0.3202 (Mac OS X 10.12.6): Executed 3 of 3 (3 FAILED) (0 secs / 0.157 secs)
+Chrome 62.0.3202 (Mac OS X 10.12.6) AppComponent should render title in a h1 tag FAILED
 	Failed: No provider for Okta!
 ```
 
@@ -260,14 +268,14 @@ describe('AppComponent', () => {
 After making this changes, you should see the sweet smell of success.
 
 ```bash
-Chrome 61.0.3163 (Mac OS X 10.12.6): Executed 3 of 3 SUCCESS (0.77 secs / 0.759 secs)
+Chrome 62.0.3202 (Mac OS X 10.12.6): Executed 3 of 3 SUCCESS (0.77 secs / 0.759 secs)
 ```
 
 Protractor tests should still work as well. You can prove this by running `ng e2e` in a terminal window.
 
 ## Angular + Okta
 
-You can find a completed version of the application created in this blog post [on GitHub](https://github.com/oktadeveloper/okta-angular-sign-in-widget-example). In a future post, I’ll show you how to create a more Angular-native experience, where you control the HTML for the login form.
+You can find a completed version of the application created in this blog post [on GitHub](https://github.com/oktadeveloper/okta-angular-sign-in-widget-example). In a future post, I’ll show you how to create a more Angular-native experience, where [you control the HTML for the login form](/blog/2017/04/17/angular-authentication-with-oidc).
 
 Building authentication in an application is hard. It’s even less fun to build it over and over again in each application you build. Okta does the hard part for you and makes it a lot more fun to be a developer! [Sign up for a forever-free developer account and try Okta today!](https://developer.okta.com/signup/).
 
@@ -276,5 +284,6 @@ I hope you’ve enjoyed this quick tour of our Angular support. If you have ques
 **Changelog:**
 
 * Sep 30, 2017: Updated to use Angular CLI 1.4.4 and Okta Sign-In Widget 2.1.0. See the code changes in the [example app on GitHub](https://github.com/oktadeveloper/okta-angular-sign-in-widget-example/pull/8). Updated "create an OIDC app" instructions for the [Okta Developer Console](/blog/2017/09/25/all-new-developer-console).
+* Nov 30, 2017: Updated to use Angular CLI 1.5.5 and Okta Sign-In Widget 2.5.0. See the code changes in the [example app on GitHub](https://github.com/oktadeveloper/okta-angular-sign-in-widget-example/pull/11). Changes to this article can be viewed [in this pull request](https://github.com/okta/okta.github.io/pull/1520).
 
 [widget-reference]: https://github.com/okta/okta-signin-widget
