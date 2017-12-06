@@ -939,7 +939,7 @@ After making these changes, you should be rid of your TypeScript warnings.
 To learn more about React, Spring Boot, or Okta, check out the following resources:
 
 * [Intro to React Workshop by Eric Vicenti](https://vimeo.com/213710634) - highly recommended for learning React!
-* My [Angular vs React Smackdown Talk at Devoxx Belgium](https://www.youtube.com/watch?v=qYEEuiI4l10) with [Deepu K Sasidharan](https:/twitter.com/deepu105)
+* My [Angular vs React Smackdown Talk at Devoxx Belgium](https://www.youtube.com/watch?v=qYEEuiI4l10) with [Deepu K Sasidharan](https://twitter.com/deepu105)
 * [How to fetch data in React](https://www.robinwieruch.de/react-fetching-data/) by [Robin Wieruch](https://twitter.com/rwieruch)
 * [Build a React Application with User Authentication in 15 Minutes](/blog/2017/03/30/react-okta-sign-in-widget)
 * [Build a Preact App with Authentication ](/blog/2017/10/19/build-a-preact-app-with-authentication)
