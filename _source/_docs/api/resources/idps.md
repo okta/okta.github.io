@@ -259,11 +259,11 @@ curl -v -X POST \
 
 Use SAML deep links to automatically redirect the user to an app after successfully authenticating with a third-party IdP. To use deep links, assemble these three parts into a URL:
 
-1. SP ACS URL, for example: `https://{myOktaDomain}.com/sso/saml2/:IdPId`
+1. SP ACS URL, for example: `https://{myOktaDomain}.com/sso/saml2/:IdpId`
 2. The app to which the user is automatically redirected after successfully authenticated with the IdP, for example: `/app/:app-location/:appId/sso/saml`
 3. Optionally, If the app is an outbound SAML app, you can specify the relayState passed to it, for example: `?RelayState=:anyUrlEncodedValue`
 
-The deep link for steps 1-3 is: `https://{myOktaDomain}.com/sso/saml2/:IdPId/app/:app-location/:appId/sso/saml?RelayState=:anyUrlEncodedValue`
+The deep link for steps 1-3 is: `https://{myOktaDomain}.com/sso/saml2/:IdpId/app/:app-location/:appId/sso/saml?RelayState=:anyUrlEncodedValue`
 
 #### Add Facebook Identity Provider
 {:.api .api-operation}
@@ -3091,7 +3091,7 @@ Parameter     | Description                                                     
 ------------- | ------------------------------------------------------------------------------- | ---------- | --------------------------------------------- | -------- | -------
 id            | `id` of the source IdP                                                          | URL        | String                                        | TRUE     |
 kid           | Unique key of [IdP Key Credential](#identity-provider-key-credential-model)     | URL        | String                                        | TRUE     |
-targetIdPId   | `id` of the target IdP                                                          | Query      | String                                        | TRUE     |
+targetIdpId   | `id` of the target IdP                                                          | Query      | String                                        | TRUE     |
 
 ##### Response Parameters
 {:.api .api-response .api-response-params}
