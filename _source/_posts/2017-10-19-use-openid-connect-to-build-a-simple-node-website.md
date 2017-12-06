@@ -3,6 +3,9 @@ layout: blog_post
 title: "Use OpenID Connect to Build a Simple Node.js Website"
 author: rdegges
 tags: [javascript, oidc, openid, nodejs, expressjs]
+tweets:
+    - "Learn how to use OpenID Connect to build a simple Node website."
+    - "Come see how to build a simple Node website using OpenID Connect!"
 ---
 
 

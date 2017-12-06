@@ -467,6 +467,8 @@ You can find the source code associated with this article [on GitHub](https://gi
 
 **Update:** To learn how to turn this application into a progressive web application that can work offline, see [Build Your First Progressive Web Application with Angular and Spring Boot](/blog/2017/05/09/progressive-web-applications-with-angular-and-spring-boot.html). I also wrote a [tutorial that shows how to develop an Ionic mobile app for this Spring Boot backend](/blog/2017/05/17/develop-a-mobile-app-with-ionic-and-spring-boot.html).
 
+**Update 2:** To see how to develop this same application with Spring Boot, React, and Okta, see [Bootiful Development with Spring Boot and React](/blog/2017/12/06/bootiful-development-with-spring-boot-and-react).
+
 **Changelog:**
 
 * Nov 3, 2017: Updated to use Spring Boot 1.5.8, Angular 5.0.0, and Angular CLI 1.5.0. See the code changes in the [example app on GitHub](https://github.com/oktadeveloper/spring-boot-angular-example/pull/5). 

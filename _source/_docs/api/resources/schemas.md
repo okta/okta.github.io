@@ -638,7 +638,7 @@ curl -v -X POST \
 
 ## App User Schema Operations
 
-{% api_lifecycle beta %}
+{% api_lifecycle ea %}
 
 ### Get App User Schema
 {:.api .api-operation}
@@ -1296,8 +1296,8 @@ User profile schema properties have the following standard [JSON Schema Draft 6]
 | title                          | user-defined display name for the property | String                                            | FALSE    | FALSE  | FALSE    |
 | description                    | description of the property                | String                                            | TRUE     | FALSE  | FALSE    |
 | type                           | type of property                           | `string`, `boolean`, `number`, `integer`, `array` | FALSE    | TRUE   | TRUE     |
-| enum {% api_lifecycle beta %}  | enumerated value of the property           | array                                             | TRUE     | TRUE   | FALSE    |
-| oneOf {% api_lifecycle beta %} | non-empty array of valid JSON schemas      | array                                             | TRUE     | TRUE   | FALSE    |
+| enum {% api_lifecycle ea %}    | enumerated value of the property           | array                                             | TRUE     | TRUE   | FALSE    |
+| oneOf {% api_lifecycle ea %}   | non-empty array of valid JSON schemas      | array                                             | TRUE     | TRUE   | FALSE    |
 
 
 ##### Description Details
@@ -1550,8 +1550,8 @@ User profile schema properties have the following standard [JSON Schema Draft 6]
 | title                          | user-defined display name for the property | String                                            | FALSE    | FALSE  | FALSE    |
 | description                    | description of the property                | String                                            | TRUE     | FALSE  | FALSE    |
 | type                           | type of property                           | `string`, `boolean`, `number`, `integer`, `array` | FALSE    | FALSE  | FALSE    |
-| enum {% api_lifecycle beta %}  | enumerated value of the property           | array                                             | TRUE     | TRUE   | FALSE    |
-| oneOf {% api_lifecycle beta %} | non-empty array of valid JSON schemas      | array                                             | TRUE     | TRUE   | FALSE    |
+| enum {% api_lifecycle ea %}    | enumerated value of the property           | array                                             | TRUE     | TRUE   | FALSE    |
+| oneOf {% api_lifecycle ea %}   | non-empty array of valid JSON schemas      | array                                             | TRUE     | TRUE   | FALSE    |
 
 ##### Description Details
 

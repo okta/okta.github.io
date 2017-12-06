@@ -3,6 +3,9 @@ layout: blog_post
 title: "Meet the New Okta Identity Platform"
 author: rdegges
 tags: [authentication, authorization, announcements]
+tweets:
+    - "@rdegges on the new and improved Okta identity platform"
+    - "The new Okta identity platform was released. Read @rdegges' announcement here"
 ---
 
 
