@@ -525,11 +525,7 @@ Copy the downloaded `beer.png` to `client/public`. Modify `client/public/manifes
 }
 ```
 
-After making this change, I was able to achieve an 82 Lighthouse score for PWA. 
-
-> [Lighthouse](https://developers.google.com/web/tools/lighthouse/) is an open-source, automated tool for improving the quality of web pages. You can run it against any web page, public or requiring authentication. It has audits for performance, accessibility, progressive web apps, and more.
-
-The most prominent complaint from this report was that I wasn't using HTTPS. To see how the app would score when it used HTTPS, I deployed it to [Pivotal Cloud Foundry](https://pivotal.io/platform) and [Heroku](https://www.heroku.com/). I was pumped to discover it scored 💯 on both platforms.
+After making this change, I was able to achieve an 82 Lighthouse score for PWA. The most prominent complaint from this report was that I wasn't using HTTPS. To see how the app would score when it used HTTPS, I deployed it to [Pivotal Cloud Foundry](https://pivotal.io/platform) and [Heroku](https://www.heroku.com/). I was pumped to discover it scored 💯 on both platforms.
 
 {% img blog/react-spring-boot/lighthouse-cloudfoundry.png alt:"Lighthouse on Cloud Foundry" width:"800" %}{: .center-image }
 
@@ -580,7 +576,7 @@ Copy the client ID into your `server/src/main/resources/application.properties` 
 
 ```properties
 okta.oauth2.issuer=https://{yourOktaDomain}.com/oauth2/default
-okta.oauth2.clientId=XXX
+okta.oauth2.clientId={clientId}
 ```
 
 Update `server/src/main/java/com/okta/developer/demo/DemoApplication.java` to enable it as a resource server.
@@ -617,7 +613,7 @@ import { Security, ImplicitCallback } from '@okta/okta-react';
 const config = {
   issuer: 'https://{yourOktaDomain}.com/oauth2/default',
   redirectUri: window.location.origin + '/implicit/callback',
-  clientId: 'XXX'
+  clientId: '{clientId}'
 };
 
 export interface Auth {
