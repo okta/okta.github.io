@@ -645,7 +645,6 @@ curl -v -X GET \
   response_type=id_token token&
   response_mode=form_post&
   scope=openid offline_access&
-  request=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJPa3RhIiwiaWF0IjoxNTEyNDA2MjE2LCJleHAiOjE1NDM5NDIyMTYsImF1ZCI6Ind3dy5leGFtcGxlLmNvbSIsInN1YiI6InNqYWNrc29uQGV4YW1wbGUuY29tIiwiRW1haWwiOiJzamFja3NvbkBleGFtcGxlLmNvbSJ9.3VR4_ySoAzuIhGw_wdEZrUeB3-OReQp7qBtmCe3BIDI&
   redirect_uri=${redirect_uri}&
   state=${state}&
   nonce=${nonce}"
