@@ -633,8 +633,7 @@ curl -v -X GET \
   request=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJPa3RhIiwiaWF0IjoxNTEyNTE2MjIxLCJleHAiOjE1NDQwNTIyMjEsImF1ZCI6Ind3dy5leGFtcGxlLmNvbSIsInN1YiI6InNqYWNrc29uQGV4YW1wbGUuY29tIiwiRW1haWwiOiJzamFja3NvbkBleGFtcGxlLmNvbSIsInJlc3BvbnNlX3R5cGUiOiJjb2RlIiwicmVzcG9uc2VfbW9kZSI6ImZvcm1fcG9zdCIsInJlZGlyZWN0X3VyaSI6Im15UmVkaXJlY3RVUkkuY29tIiwic3RhdGUiOiJteVN0YXRlIiwibm9uY2UiOiJteU5vbmNlIiwic2NvcGUiOiJvcGVuaWQgb2ZmbGluZV9hY2Nlc3MifQ.TjPy2_nUerULClavBNHcpnO_Pd1DxNEjQCeSW45ALJg"
   ~~~
 
-This request initiates the implicit flow, that is, to obtain an ID Token and optionally an Access Token directly from the authorization server, use the same request,
-but with `response_type=id_token` or `response_type=id_token token`:
+This request initiates the implicit flow, that is, it obtains an ID Token and optionally an Access Token directly from the authorization server. We use the same request as the first example, but with `response_type=id_token` or `response_type=id_token token`:
 
 ~~~sh
 curl -v -X GET \
