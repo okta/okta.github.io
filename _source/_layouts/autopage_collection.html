@@ -1,40 +1,38 @@
 ---
-layout: master
-show_bottom_cta: true
+layout: docs_page
 ---
 
-<section class="Blog is-index">
-	
-	{% for post in paginator.posts %}
-		{% capture _post_content %}
-			<p>{{ post.content | strip_html | truncatewords:75 }}</p>
-			<p><a class="BlogPost-more" href="{{post.url}}">Read more</a></p>
-		{% endcapture %}
-		{% include blog_post.html post_content=_post_content %}
-	{% endfor %}
-	
+<div class="releaseNotes">
+
+    <h1>Okta Platform Release Notes</h1>
+    <hr>
+    {% for post in paginator.posts %}
+      {{ post.content}}
+       <hr>
+    {% endfor %}
+
 	{% if paginator.total_pages > 1 %}
 	<div class="Blog-pagination">
-		
+
 		{% if paginator.previous_page %}
 		<a href="{{ paginator.previous_page_path | prepend: site.baseurl | replace: '//', '/' }}">&laquo; Prev</a>
 		{% endif %}
-		
+
 		{% for page in (1..paginator.total_pages) %}
 			{% if page == paginator.page %}
 			<em>{{ page }}</em>
 			{% elsif page == 1 %}
 			<a href="{{ paginator.previous_page_path | prepend: site.baseurl | append: '/' | replace: '//', '/' }}">{{ page }}</a>
 			{% else %}
-			<a href="{{ site.baseurl | append: '/blog' | append: site.paginate_path | append: '/' | replace: ':num', '/:num' | replace: ':num', page | replace: '//', '/' }}">{{ page }}</a>
+			<a href="{{ site.baseurl | append: '/collection/release-notes' | append: site.paginate_path | append: '/' | replace: ':num', '/:num' | replace: ':num', page | replace: '//', '/' }}">{{ page }}</a>
 			{% endif %}
 		{% endfor %}
-		
+
 		{% if paginator.next_page %}
 		<a href="{{ paginator.next_page_path | prepend: site.baseurl | replace: '//', '/' }}">Next &raquo;</a>
 		{% endif %}
-		
+
 	</div>
 	{% endif %}
 
-</section>
+</div>

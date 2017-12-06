@@ -11,7 +11,7 @@ disqus_shortname: oktadevblog
 
 plugins:
   - jekyll-redirect-from
-  - jekyll-paginate
+  - jekyll-paginate-v2
   - jekyll-assets
 
 source: _source
@@ -79,9 +79,28 @@ collections:
     permalink: /:collection/:path:output_ext
   quickstarts:
     output: true
+  release_notes:
+    output: false
+    permalink: /:name
 
-paginate: 10
-paginate_path: "/blog/page/:num"
+autopages:
+  enabled: true
+  tags:
+    enabled: false
+  categories:
+    enabled: false
+  collections:
+    enabled: true
+    permalink: /collection/:coll
+
+pagination:
+  enabled: true
+  per_page: 10
+  permalink: '/page/:num'
+  title: ':title - page :num'
+  limit: 0
+  sort_field: 'date'
+  sort_reverse: true
 
 defaults:
   -
