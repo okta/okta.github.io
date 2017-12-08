@@ -579,6 +579,8 @@ okta.oauth2.issuer=https://{yourOktaDomain}.com/oauth2/default
 okta.oauth2.clientId={clientId}
 ```
 
+**NOTE:** The value of `{yourOktaDomain}` should be something like `dev-123456.oktapreview.com`. Make sure you don't include `-admin` in the value!
+
 Update `server/src/main/java/com/okta/developer/demo/DemoApplication.java` to enable it as a resource server.
 
 ```java
