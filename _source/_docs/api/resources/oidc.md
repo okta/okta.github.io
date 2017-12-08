@@ -781,9 +781,9 @@ Content-Type: application/json;charset=UTF-8
 
 {% api_operation get /oauth2/v1/logout %}
 
-The API takes an ID Token and logs the user out of the Okta session if the subject matches the current Okta session. A `post_logout_redirect_uri` may be specified to redirect the User after the logout has been performed. Otherwise, the user is redirected to the Okta login page.
+This redirect endpoint takes an ID Token and logs the user out of Okta if the subject matches the current Okta session. A `post_logout_redirect_uri` may be specified to redirect the User after the logout has been performed. Otherwise, the user is redirected to the Okta login page.
 
-Use this operation to log out a User by removing their Okta browser session.
+Note: This is not a server-side API call.
 
 #### Request Parameters
 
