@@ -331,7 +331,7 @@ curl -X POST \
   -H "Accept: application/json" \
   -H "Cache-Control: no-cache" \
   -H "Content-Type: application/x-www-form-urlencoded" \
-  -d "grant_type=password&username=dolores.abernathy%40${org}.com&
+  -d "grant_type=password&username=dolores.abernathy%40westworld.com&
       password=<password>&scope=openid&client_id=<client_id>
       & client_secret=<client_secret>"
 ~~~
@@ -1057,7 +1057,7 @@ curl -X PUT \
     "audiences": [
       "https://api.new-resource.com"
     ]
-}'   "https://${org}/api/v1/authorizationServers/aus1rqsshhhRoat780g7" \
+}'   "https://{yourOktaDomain}.com/api/v1/authorizationServers/aus1rqsshhhRoat780g7" \
 ~~~
 
 ##### Response Example
@@ -1092,7 +1092,7 @@ curl -X DELETE \
   -H 'Accept: application/json' \
   -H 'Content-Type: application/json' \
   -H "Authorization: SSWS ${api_token}" \
-"https://${org}/api/v1/authorizationServers/aus1rqsshhhRoat780g7" \
+"https://{yourOktaDomain}.com/api/v1/authorizationServers/aus1rqsshhhRoat780g7" \
 ~~~
 
 ##### Response Example
