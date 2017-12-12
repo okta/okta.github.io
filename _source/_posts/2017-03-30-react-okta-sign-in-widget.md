@@ -131,7 +131,7 @@ export default class LoginPage extends React.Component{
       clientId: '{clientId}',
       redirectUri: 'http://localhost:3000',
       authParams: {
-        issuer: 'https://{yourOktaDomain}.com/oauth2/default'
+        issuer: 'default'
         responseType: 'id_token'
       }
     });
