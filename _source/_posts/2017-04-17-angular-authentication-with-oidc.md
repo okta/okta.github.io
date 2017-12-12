@@ -956,7 +956,7 @@ export class OktaAuthWrapper {
   constructor(private oauthService: OAuthService) {
     this.authClient = new OktaAuth({
       url: 'https://{yourOktaDomain}.com',
-      issuer: 'https://{yourOktaDomain}.com/oauth2/default'
+      issuer: 'default'
     });
   }
 
