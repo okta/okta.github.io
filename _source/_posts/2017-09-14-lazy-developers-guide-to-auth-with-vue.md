@@ -449,7 +449,7 @@ return authClient.signIn({
 
 You’ll need to create an OIDC App in Okta to get a `{clientId}`. To do this, log in to your Okta Developer account and navigate to **Applications** > **Add Application**. Click **SPA** and click the **Next** button. Give the app a name you’ll remember, and specify `http://localhost:8080` as a Base URI and Login Redirect URI.
 
-{% img blog/vue-auth-sdk/oidc-settings.png alt:"OIDC Settings" width:"600" %}{: .center-image }
+{% img blog/vue-auth-sdk/oidc-settings.png alt:"OIDC Settings" width:"700" %}{: .center-image }
 
 Click **Done** and you’ll be shown a screen with this information as well as a Client ID at the bottom. Copy the Client ID into `src/auth.js`.
 
