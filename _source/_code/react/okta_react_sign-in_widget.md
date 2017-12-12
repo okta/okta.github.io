@@ -35,7 +35,7 @@ If you do not already have a **Developer Edition Account**, you can create one a
 To quickly create a React app, we recommend the create-react-app CLI. Follow their guide [here](https://github.com/facebookincubator/create-react-app#quick-overview).
 
 ## Install Dependencies
-A simple way to add authentication into a React app is using the [Okta Sign-In Widget](/code/javascript/okta_sign-in_widget.html) library. We can install it via `npm`:
+A simple way to add authentication into a React app is using the [Okta Sign-In Widget](/code/javascript/okta_sign-in_widget) library. We can install it via `npm`:
 ```bash
 cd okta-app && npm install @okta/okta-signin-widget --save
 ```
@@ -47,7 +47,7 @@ npm install @okta/okta-react react-router-dom --save
 
 ## Create a Widget Wrapper
 
-To provide a fully featured and customizable login experience, the [Okta Sign-In Widget](/code/javascript/okta_sign-in_widget.html) is available to handle User Lifecycle operations, MFA, and more. To render the Sign-In Widget in React, we must create a wrapper that allows us to treat it as a React component.
+To provide a fully featured and customizable login experience, the [Okta Sign-In Widget](/code/javascript/okta_sign-in_widget) is available to handle User Lifecycle operations, MFA, and more. To render the Sign-In Widget in React, we must create a wrapper that allows us to treat it as a React component.
 
 Create a `src/OktaSignInWidget.js` file:
 

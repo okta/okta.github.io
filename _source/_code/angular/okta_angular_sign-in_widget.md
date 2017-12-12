@@ -33,13 +33,13 @@ If you do not already have a  **Developer Edition Account**, you can create one 
 To quickly create an Angular app, we recommend the **angular-cli**. Follow [their installation guide](https://github.com/angular/angular-cli#installation) to create a new Angular app.
 
 ## Install Dependencies
-A simple way to add authentication into an Angular app is using the library [Okta Sign-In Widget](/code/javascript/okta_sign-in_widget.html). We can install it via `npm`:
+A simple way to add authentication into an Angular app is using the library [Okta Sign-In Widget](/code/javascript/okta_sign-in_widget). We can install it via `npm`:
 
 ```bash
 cd okta-app && npm install @okta/okta-signin-widget --save
 ```
 
-To easily interact with the [Okta Sign-In Widget](/code/javascript/okta_sign-in_widget.html), we will also need [`@okta/okta-angular`](https://github.com/okta/okta-oidc-js/tree/master/packages/okta-angular):
+To easily interact with the [Okta Sign-In Widget](/code/javascript/okta_sign-in_widget), we will also need [`@okta/okta-angular`](https://github.com/okta/okta-oidc-js/tree/master/packages/okta-angular):
 
 ```bash
 npm install @okta/okta-angular --save
