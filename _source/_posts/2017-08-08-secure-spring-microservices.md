@@ -450,7 +450,7 @@ export class OktaAuthService {
     baseUrl: 'https://{yourOktaDomain}.com',
     clientId: '{clientId}',
     authParams: {
-      issuer: 'https://{yourOktaDomain}',
+      issuer: 'default',
       responseType: ['id_token', 'token'],
       scopes: ['openid', 'email', 'profile']
     }
