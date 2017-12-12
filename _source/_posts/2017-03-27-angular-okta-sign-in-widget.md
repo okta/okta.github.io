@@ -99,7 +99,10 @@ export class Okta {
     this.widget = new OktaSignIn({
       baseUrl: 'https://{yourOktaDomain}.com',
       clientId: '{clientId}',
-      redirectUri: 'http://localhost:4200'
+      redirectUri: 'http://localhost:4200',
+      authParams: {
+        issuer: 'default'
+      }
     });
   }
 
