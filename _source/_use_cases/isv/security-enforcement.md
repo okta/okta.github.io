@@ -20,14 +20,16 @@ To resolve an incident or mitigate a perceived threat, an external system may wa
 
 #### Simplified Examples
 
-For readability simplified versions of the API transactions will be illustrated below. We use the following modifications:
+For readability simplified versions of the API transactions are illustrated below. We use the following modifications:
 
 + Repetitive details like content-type and authorization headers will be excluded
 + Request and response objects will be truncated to focus on the most relevant information
   + Truncated sections will be denoted by an ellipsis ("...")
++ In syntax statements introducing each endpoint, the base URL is omitted.
 + Replacement values will be noted in italicized braces _{}_
 + Examples:
-  + `{base_url}` = Base URL of the Okta org (e.g. _`https://acme.okta.com`_ )
+  + `{yourOktaDomain}.com` = Base URL of the Okta org (e.g. _`https://acme.okta.com`_ ) 
+        If you are logged in, your Okta domain name appears instead of the placeholder.
   + `{user_id}` = Opaque and Immutable Okta ID for a user (e.g. _`00u1ae58uup0y5Qkg1d8`_)
   + `{group_id}` = Opaque and Immutable Okta ID for a group (e.g. _`00g1at1k0dzmV839P1d8`_)
 

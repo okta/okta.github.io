@@ -28,11 +28,11 @@ Request
 
 ```sh
 # ALL users using skinny_users endpoint
-GET {base_url}/api/v1/apps/{app_id}/skinny_users
+GET https://{yourOktaDomain}.com/api/v1/apps/{app_id}/skinny_users
 # ALL users using the users endpoint
-GET {base_url}/api/v1/apps/{app_id}/users
+GET https://{yourOktaDomain}.com/api/v1/apps/{app_id}/users
 # Specific User using their Okta User ID (uid)
-GET {base_url}/api/v1/apps/{app_id}/users/{user_id}
+GET https://{yourOktaDomain}.com/api/v1/apps/{app_id}/users/{user_id}
 ```
 
 Response
@@ -80,7 +80,7 @@ Request
 
 ```sh
 #Retrieve all Apps with Embedded appUser objects for given user
-GET {base_url}/api/v1/apps?filter=user.id eq "00u1a7q3KgTkZE1d8"&expand=user/00u1a7q3KgTkZE1d8
+GET https://{yourOktaDomain}.com/api/v1/apps?filter=user.id eq "00u1a7q3KgTkZE1d8"&expand=user/00u1a7q3KgTkZE1d8
 ```
 
 Response
