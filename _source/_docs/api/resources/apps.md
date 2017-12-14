@@ -4967,7 +4967,7 @@ Profile Requirements
 * The `profile` property is not encrypted, so don't store sensitive data in it.
 * The `profile` property doesn't limit the level of nesting in the JSON schema you created, but there is a practical size limit. We recommend a JSON schema size of 1 MB or less for best performance.
 
-> Profile Object is only avialible to OAuth 2.0 client applications.
+> Profile Object is only available to OAuth 2.0 client applications.
 
 ### Application User Model
 
