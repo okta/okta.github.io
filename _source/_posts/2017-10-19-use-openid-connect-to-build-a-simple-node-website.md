@@ -109,7 +109,7 @@ new Application:
 Next, you'll need your Okta Organization URL. If you go to the "Dashboard" page,
 you should see it at the top-right hand corner of the page. It's the setting
 called "Org URL". Here's what mine looks like, for example:
-dev-310095.oktapreview.com
+`dev-111464.oktapreview.com`
 
 {% img blog/use-openid-connect-to-build-a-simple-node-website/okta-org-url.png alt:"Okta Org URL" width:"700" %}{: .center-image }
 
