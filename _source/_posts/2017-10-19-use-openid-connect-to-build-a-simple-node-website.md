@@ -312,9 +312,9 @@ app.use(session({
 }));
 
 let oidc = new ExpressOIDC({
-  issuer: "https://{{yourOktaDomain}}.com/oauth2/default",
-  client_id: "{{clientId}}",
-  client_secret: "{{clientSecret}}",
+  issuer: "https://{yourOktaDomain}.com/oauth2/default",
+  client_id: "{clientId}",
+  client_secret: "{clientSecret}",
   redirect_uri: "http://localhost:3000/authorization-code/callback",
   routes: {
     callback: { defaultRedirect: "/dashboard" }
