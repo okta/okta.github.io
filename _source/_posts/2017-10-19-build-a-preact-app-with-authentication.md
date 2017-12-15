@@ -123,9 +123,9 @@ npm install preact-router --save
 ```
 
 
-## Add an Auth High Order Component
+## Add an Auth Higher-Order Component
 
-With that done, you now need to add some [High Order
+With that done, you now need to add some [Higher-Order
 Components](https://facebook.github.io/react/docs/higher-order-components.html)
 to help with authentication.
 
@@ -304,7 +304,7 @@ import OktaSignInWidget from '../../lib/OktaSignInWidget';
 import { withAuth } from '../../lib/auth';
 ```
 
-Start the component by wrapping in the `withAuth` high order component you
+Start the component by wrapping in the `withAuth` higher-order component you
 created earlier, and set the beginning state. Here, you'll have the
 `redirectToReferrer` set to false by default.
 
@@ -338,7 +338,7 @@ onError(err) {
 ```
 
 You'll notice your component passes handling of the authentication back to the
-high order component. This is a prime example of the benefits of high order
+higher-order component. This is a prime example of the benefits of higher-order
 components and composition in JavaScript.
 
 Finally, create the `render` function that will make the decision about showing
@@ -478,7 +478,7 @@ export default withAuth(class Profile extends Component {
 
 You've added the authentication protection at the `Component` level in the
 `componentWillMount` function of the component. If the user is authenticated, it
-calls the `getCurrentUser` function on the high order component and adds the
+calls the `getCurrentUser` function on the higher-order component and adds the
 user to the component’s state. In the `render` function, you simply output the
 user’s name and email.
 
