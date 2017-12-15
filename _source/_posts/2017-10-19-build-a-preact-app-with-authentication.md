@@ -90,8 +90,7 @@ then the green "Create New App" button, so that you see a modal window like:
 
 {% img blog/build-a-preact-app-with-authentication/create-application-screen.png alt:"Create Application Screen" width:"700" %}{: .center-image }
 
-Choose "SPA" from the Platform buttons. [OpenID
-Connect](http://openid.net/connect/) will already be chosen for you. Click the
+Choose "SPA" from the Platform buttons. Click the
 "Next" button to create your application.
 
 This will take you to a screen to "Application Settings" page of the Create
