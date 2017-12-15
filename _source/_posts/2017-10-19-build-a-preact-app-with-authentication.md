@@ -61,7 +61,7 @@ your browser, you should see a page like this:
 Even though the PreactCLI-generated app looks a lot like a React app generated
 by [create-react-app](https://github.com/facebookincubator/create-react-app),
 and you can even use some of the React plugins (like
-[React-Router](https://reacttraining.com/react-router/) in your Preact
+[React-Router](https://reacttraining.com/react-router/)) in your Preact
 application, there are some significant differences.
 
 For instance, unlike the ReactCLI, there is no way to `eject` the

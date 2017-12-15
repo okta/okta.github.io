@@ -109,7 +109,7 @@ new Application:
 Next, you'll need your Okta Organization URL. If you go to the "Dashboard" page,
 you should see it at the top-right hand corner of the page. It's the setting
 called "Org URL". Here's what mine looks like, for example:
-dev-310095.oktapreview.com
+`dev-111464.oktapreview.com`
 
 {% img blog/use-openid-connect-to-build-a-simple-node-website/okta-org-url.png alt:"Okta Org URL" width:"700" %}{: .center-image }
 
@@ -312,9 +312,9 @@ app.use(session({
 }));
 
 let oidc = new ExpressOIDC({
-  issuer: "https://dev-111464.oktapreview.com/oauth2/default",
-  client_id: "your-client-id-here",
-  client_secret: "your-client-secret-here",
+  issuer: "https://{yourOktaDomain}.com/oauth2/default",
+  client_id: "{clientId}",
+  client_secret: "{clientSecret}",
   redirect_uri: "http://localhost:3000/authorization-code/callback",
   routes: {
     callback: { defaultRedirect: "/dashboard" }
