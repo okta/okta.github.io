@@ -38,6 +38,6 @@ Once your users can sign in to your app, use Okta's Management API and SDKs to c
 ## More Resources
 
 <ul class='code-list'>
-  <li><span class='code-icon info-16-gray'></span> <a href='spring_security_saml.html'>Spring Security SAML</a></li>
+  <li><span class='code-icon info-16-gray'></span> <a href='spring_security_saml'>Spring Security SAML</a></li>
   <li><span class='code-icon info-16-gray'></span> <a href='https://github.com/oktadeveloper/okta-openidconnect-appauth-android'>Android Native Application with AppAuth</a></li>
 </ul>

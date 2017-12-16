@@ -64,19 +64,16 @@ collections:
     output: true
   code:
     output: true
-    permalink: /:collection/:path:output_ext
   use_cases:
     output: true
   authentication-guide:
     output: true
-    permalink: /:collection/:path:output_ext
   reference:
     output: true
   3rd_party_notices:
     output: true
   docs:
     output: true
-    permalink: /:collection/:path:output_ext
   quickstarts:
     output: true
 
@@ -114,7 +111,7 @@ defaults:
 versions:
   jwt_validator_java: 0.2.0
   spring_boot_starter: 0.2.0
-  okta_signin_widget: 2.1.0
+  okta_signin_widget: 2.5.0
 
 signup_error_email_address: "BD-ISV@okta.com"
 
