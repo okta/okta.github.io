@@ -28,7 +28,7 @@ The System Log API has one endpoint:
 
 This collection resource is backed by a [LogEvent object](#logevent-object) model and associated [event types](#event-types). 
 
-See [Examples](#examples) for ways you can use the System Log API. For common use cases see [Useful System Log Queries](https://support.okta.com/help/Documentation/Knowledge_Article/Useful-System-Log-Queries).
+See [Examples](#examples) for ways you can use the System Log API.
 
 ## LogEvent Object
 
