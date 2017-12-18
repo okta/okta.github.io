@@ -3,6 +3,9 @@ layout: blog_post
 title: "Get Started with Spring Security 5.0 and OIDC"
 author: mraible
 tags: [java, spring-security, spring-boot, springframework, oidc, spring-webflux]
+tweets: 
+  - "Did you know that Spring Security 5 supports OpenID Connect out-of-the-box? It's pretty sweet!"
+  - "Spring Security 5 supports OAuth 2.0 Login: https://docs.spring.io/spring-security/site/docs/5.0.0.RELEASE/reference/htmlsingle/#jc-oauth2login.\n\nSee how it works with Okta →"
 ---
 
 Spring Security is a powerful and highly customizable authentication and access-control framework. It is the de-facto standard for securing Spring-based applications.
