@@ -3784,7 +3784,7 @@ Content-Type: application/json
 
 {% api_operation GET /api/v1/idps/*:id*/users/*:uid*/credentials/tokens %}
 
-Fetches the tokens minted by the Social Authentication Provider when the user authenticates with Okta via Social Auth.
+Fetches the tokens minted by the Social Authentication Provider when the user authenticates with Okta via Social Auth. This is useful, for example, when the Social Authentication Provider wants to transmit targeted content, registration data, or other resources to Okta. 
 
 ##### Request Parameters
 {:.api .api-request .api-request-params}
@@ -5465,7 +5465,7 @@ The CSR model for IdP defines a certificate signing request for a signature or d
 
 ## Identity Provider Social Auth Token Model
 
-The Social Auth Token Model provides the tokens and associated metadata provided by Social Providers during Social Auth.
+The Social Auth Token Model provides the tokens and associated metadata provided by Social Providers during Social Auth. It's useful for Okta to consume tokens from the Social Authentication Provider, for example, when the provider wants to transmit targeted content, registration data, or other resources to Okta. 
 
 ### Example
 
