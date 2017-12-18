@@ -10,7 +10,7 @@ tweets:
 
 Spring Security is a powerful and highly customizable authentication and access-control framework. It is the de-facto standard for securing Spring-based applications.
 
-I first encountered Spring Security when it was called Acegi Security in 2005. I had implemented standard Java EE in my open source project, AppFuse. Acegi Security offered a lot more, including remember me and password encryption as standard features. I had managed to get remember me working with Java EE, but it wasn't very clean. I first wrote about [migrating to Acegi Security](https://raibledesigns.com/rd/entry/using_acegi_security_with_appfuse) in January 2005.
+I first encountered Spring Security when it was called Acegi Security in 2005. I had implemented standard Java EE in my open source project, AppFuse. Acegi Security offered a lot more, including remember me and password encryption as standard features. I had managed to get "remember me" working with Java EE, but it wasn't very clean. I first wrote about [migrating to Acegi Security](https://raibledesigns.com/rd/entry/using_acegi_security_with_appfuse) in January 2005.
 
 I have to admit; it seemed awful at first. Even though it provided more functionality than Java EE authentication, it required reams of XML to configure everything.
 
@@ -34,7 +34,7 @@ Spring Security makes authentication with OAuth 2.0 pretty darn easy. It also pr
 > If you're not familiar with OAuth or OIDC, I recommend you read [What the Heck is OAuth](/blog/2017/06/21/what-the-heck-is-oauth). An Open ID Connect flow involves the following steps:
 >
 > 1. Discover OIDC metadata                             
-> 2. Perform OAuth flow to obtain id token and access token
+> 2. Perform OAuth flow to obtain ID token and access tokens
 > 3. Get JWT signature keys and optionally dynamically register the Client application
 > 4. Validate JWT ID token locally based on built-in dates and signature
 > 5. Get additional user attributes as needed with access token
