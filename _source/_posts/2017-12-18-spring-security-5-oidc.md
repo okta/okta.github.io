@@ -1,19 +1,19 @@
 ---
 layout: blog_post
-title: "Get Started with OIDC and Spring Security 5.0"
+title: "Get Started with Spring Security 5.0 and OIDC"
 author: mraible
 tags: [java, spring-security, spring-boot, springframework, oidc, spring-webflux]
 ---
 
-Spring Security is a powerful and highly customizable authentication and access-control framework. It is the de-facto standard for securing Spring-based applications. 
+Spring Security is a powerful and highly customizable authentication and access-control framework. It is the de-facto standard for securing Spring-based applications.
 
-I first encountered Spring Security when it was called Acegi Security in 2005. I had implemented standard Java EE in my open source project, AppFuse. Acegi Security offered a lot more, including remember me and password encryption as standard features. I had managed to get remember me working with Java EE, but it wasn't very clean. I first wrote about [migrating to Acegi Security](https://raibledesigns.com/rd/entry/using_acegi_security_with_appfuse) in January 2005. 
- 
-I have to admit; it seemed awful at first. Even though it provided more functionality than Java EE authentication, it required reams of XML to configure everything. 
+I first encountered Spring Security when it was called Acegi Security in 2005. I had implemented standard Java EE in my open source project, AppFuse. Acegi Security offered a lot more, including remember me and password encryption as standard features. I had managed to get remember me working with Java EE, but it wasn't very clean. I first wrote about [migrating to Acegi Security](https://raibledesigns.com/rd/entry/using_acegi_security_with_appfuse) in January 2005.
 
-In 2012, I was still using XML when I [upgraded to Spring Security 3.1](http://raibledesigns.com/rd/entry/upgrading_appfuse_to_spring_security). Then Spring Boot came along in 2014 and changed everything. 
+I have to admit; it seemed awful at first. Even though it provided more functionality than Java EE authentication, it required reams of XML to configure everything.
 
-These days, Spring Security offers *much* simpler configuration via Spring's JavaConfig. If you look at the [`SecurityConfiguration.java`](https://github.com/mraible/jhipster-oidc-example/blob/master/src/main/java/com/okta/developer/config/SecurityConfiguration.java) class from the [JHipster OIDC example](https://github.com/mraible/jhipster-oidc-example) I [wrote about](/blog/2017/10/20/oidc-with-jhipster) recently, you'll see it's less than 100 lines of code! 
+In 2012, I was still using XML when I [upgraded to Spring Security 3.1](http://raibledesigns.com/rd/entry/upgrading_appfuse_to_spring_security). Then Spring Boot came along in 2014 and changed everything.
+
+These days, Spring Security offers *much* simpler configuration via Spring's JavaConfig. If you look at the [`SecurityConfiguration.java`](https://github.com/mraible/jhipster-oidc-example/blob/master/src/main/java/com/okta/developer/config/SecurityConfiguration.java) class from the [JHipster OIDC example](https://github.com/mraible/jhipster-oidc-example) I [wrote about](/blog/2017/10/20/oidc-with-jhipster) recently, you'll see it's less than 100 lines of code!
 
 [Spring Security 5.0](https://spring.io/blog/2017/11/28/spring-security-5-0-0-release-released) resolves 400+ tickets, and has a [plethora of new features](https://docs.spring.io/spring-security/site/docs/5.0.0.RELEASE/reference/htmlsingle/#new):
 
@@ -23,14 +23,14 @@ These days, Spring Security offers *much* simpler configuration via Spring's Jav
 
 Today, I'll be showing you how to utilize the OAuth 2.0 Login support with Okta. I'll also show you to retrieve a user's information via OpenID Connect (OIDC).
 
-You know that Okta offers [free developer accounts](https://developer.okta.com/pricing/) with up to 7,000 active monthly users, right? That should be enough to get your killer app off the ground. 
+You know that Okta offers [free developer accounts](https://developer.okta.com/pricing/) with up to 7,000 active monthly users, right? That should be enough to get your killer app off the ground.
 
 Spring Security makes authentication with OAuth 2.0 pretty darn easy. It also provides the ability to fetch a user's information via OIDC. Follow the steps below to learn more!
 
 > **What is OIDC?**
 > If you're not familiar with OAuth or OIDC, I recommend you read [What the Heck is OAuth](/blog/2017/06/21/what-the-heck-is-oauth). An Open ID Connect flow involves the following steps:
-> 
-> 1. Discover OIDC metadata                              
+>
+> 1. Discover OIDC metadata                             
 > 2. Perform OAuth flow to obtain id token and access token
 > 3. Get JWT signature keys and optionally dynamically register the Client application
 > 4. Validate JWT ID token locally based on built-in dates and signature
@@ -40,11 +40,11 @@ Spring Security makes authentication with OAuth 2.0 pretty darn easy. It also pr
 
 ## Create a Spring Boot App
 
-Open [start.spring.io](https://start.spring.io) in your browser. Spring Initialzr is a site that allows you to create new Spring Boot applications quickly and easily. Set the Spring Boot version (in the top right corner) to `2.0.0.M7`. Type in a group and artifact name. As you can see from the screenshot below, I chose `com.okta.developer` and `oidc`. For dependencies, select **Web**, **Reactive Web**, **Security**, and **Thymeleaf**. 
+Open [start.spring.io](https://start.spring.io) in your browser. Spring Initialzr is a site that allows you to create new Spring Boot applications quickly and easily. Set the Spring Boot version (in the top right corner) to `2.0.0.M7`. Type in a group and artifact name. As you can see from the screenshot below, I chose `com.okta.developer` and `oidc`. For dependencies, select **Web**, **Reactive Web**, **Security**, and **Thymeleaf**.
 
 {% img blog/spring-security-5/start.spring.io.png alt:"start.spring.io" width:"800" %}{: .center-image }
 
-Click **Generate Project**, download the zip, expand it on your hard drive, and open the project in your favorite IDE. Run the app with `./mvnw spring-boot:run`, and you'll be prompted to log in. 
+Click **Generate Project**, download the zip, expand it on your hard drive, and open the project in your favorite IDE. Run the app with `./mvnw spring-boot:run`, and you'll be prompted to log in.
 
 {% img blog/spring-security-5/default-login.png alt:"Default Login" width:"700" %}{: .center-image }
 
@@ -68,7 +68,7 @@ security.user.password=spring security is ph@!
 
 However, this is a deprecated feature in Spring Boot 2.0. The good news is this change will [likely be reverted before a GA release](https://github.com/spring-projects/spring-boot/issues/10963).
 
-In the meantime, you can copy the password that's printed to your console and use it with [HTTPie](https://httpie.org/). 
+In the meantime, you can copy the password that's printed to your console and use it with [HTTPie](https://httpie.org/).
 
 ```bash
 $ http --auth user:'bf91316f-f894-453a-9268-4826cdd7e151' localhost:8080
@@ -89,11 +89,11 @@ The response will be a 404 as well.
 
 ```json
 {
-    "error": "Not Found",
-    "message": "No message available",
-    "path": "/",
-    "status": 404,
-    "timestamp": "2017-12-03T19:11:50.846+0000"
+   "error": "Not Found",
+   "message": "No message available",
+   "path": "/",
+   "status": 404,
+   "timestamp": "2017-12-03T19:11:50.846+0000"
 }
 ```
 
@@ -110,10 +110,10 @@ import java.security.Principal;
 @RestController
 public class MainController {
 
-    @GetMapping("/")
-    String home(Principal user) {
-        return "Hello " + user.getName();
-    }
+   @GetMapping("/")
+   String home(Principal user) {
+       return "Hello " + user.getName();
+   }
 }
 ```
 
@@ -148,43 +148,43 @@ Rename `src/main/resources/application.properties` to `src/main/resources/applic
 
 ```yaml
 spring:
-  thymeleaf:
-    cache: false
-  security:
-    oauth2:
-      client:
-        registration:
-          okta:
-            client-id: {clientId}
-            client-secret: {clientSecret}
-        provider:
-          okta:
-            authorization-uri: https://{yourOktaDomain}.com/oauth2/default/v1/authorize
-            token-uri: https://{yourOktaDomain}.com/oauth2/default/v1/token
-            user-info-uri: https://{yourOktaDomain}.com/oauth2/default/v1/userinfo
-            jwk-set-uri: https://{yourOktaDomain}.com/oauth2/default/v1/keys
+ thymeleaf:
+   cache: false
+ security:
+   oauth2:
+     client:
+       registration:
+         okta:
+           client-id: {clientId}
+           client-secret: {clientSecret}
+       provider:
+         okta:
+           authorization-uri: https://{yourOktaDomain}.com/oauth2/default/v1/authorize
+           token-uri: https://{yourOktaDomain}.com/oauth2/default/v1/token
+           user-info-uri: https://{yourOktaDomain}.com/oauth2/default/v1/userinfo
+           jwk-set-uri: https://{yourOktaDomain}.com/oauth2/default/v1/keys
 ```
 
-Copy the client ID and secret from your OIDC app into `application.yml` file. For `{yourOktaDomain}`, use the value of your domain (e.g. `dev-158606.oktapreview.com`). Make sure it does *not* include `-admin` in it.
+Copy the client ID and secret from your OIDC app into your `application.yml` file. For `{yourOktaDomain}`, use the value of your domain (e.g. `dev-158606.oktapreview.com`). Make sure it does *not* include `-admin` in it.
 
 You'll need to add some dependencies to your `pom.xml` for Spring Security 5's OAuth configuration to initialize correctly.
 
 ```xml
 <dependency>
-    <groupId>org.springframework.security</groupId>
-    <artifactId>spring-security-config</artifactId>
+   <groupId>org.springframework.security</groupId>
+   <artifactId>spring-security-config</artifactId>
 </dependency>
 <dependency>
-    <groupId>org.springframework.security</groupId>
-    <artifactId>spring-security-oauth2-client</artifactId>
+   <groupId>org.springframework.security</groupId>
+   <artifactId>spring-security-oauth2-client</artifactId>
 </dependency>
 <dependency>
-    <groupId>org.springframework.security</groupId>
-    <artifactId>spring-security-oauth2-jose</artifactId>
+   <groupId>org.springframework.security</groupId>
+   <artifactId>spring-security-oauth2-jose</artifactId>
 </dependency>
 <dependency>
-    <groupId>org.thymeleaf.extras</groupId>
-    <artifactId>thymeleaf-extras-springsecurity4</artifactId>
+   <groupId>org.thymeleaf.extras</groupId>
+   <artifactId>thymeleaf-extras-springsecurity4</artifactId>
 </dependency>
 ```
 
@@ -198,7 +198,7 @@ After clicking on the link, you should see a login screen.
 
 {% img blog/spring-security-5/okta-login.png alt:"Okta Login" width:"800" %}{: .center-image }
 
-Enter the credentials you used to create your account and you should see a screen like the following after logging in.
+Enter the credentials you used to create your account, and you should see a screen like the following after logging in.
 
 {% img blog/spring-security-5/post-login-oauth2.png alt:"Okta Login" width:"700" %}{: .center-image }
 
@@ -210,20 +210,20 @@ Change your `MainController.java` to have the code below. This code adds a `/use
 
 ```java
 /*
- * Copyright 2002-2017 the original author or authors.
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *      http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
+* Copyright 2002-2017 the original author or authors.
+*
+* Licensed under the Apache License, Version 2.0 (the "License");
+* you may not use this file except in compliance with the License.
+* You may obtain a copy of the License at
+*
+*      http://www.apache.org/licenses/LICENSE-2.0
+*
+* Unless required by applicable law or agreed to in writing, software
+* distributed under the License is distributed on an "AS IS" BASIS,
+* WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+* See the License for the specific language governing permissions and
+* limitations under the License.
+*/
 package com.okta.developer.oidc;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -244,57 +244,57 @@ import java.util.Collections;
 import java.util.Map;
 
 /**
- * @author Joe Grandja
- */
+* @author Joe Grandja
+*/
 @Controller
 public class MainController {
 
-    private final OAuth2AuthorizedClientService authorizedClientService;
+   private final OAuth2AuthorizedClientService authorizedClientService;
 
-    public MainController(OAuth2AuthorizedClientService authorizedClientService) {
-        this.authorizedClientService = authorizedClientService;
-    }
+   public MainController(OAuth2AuthorizedClientService authorizedClientService) {
+       this.authorizedClientService = authorizedClientService;
+   }
 
-    @RequestMapping("/")
-    public String index(Model model, OAuth2AuthenticationToken authentication) {
-        OAuth2AuthorizedClient authorizedClient = this.getAuthorizedClient(authentication);
-        model.addAttribute("userName", authentication.getName());
-        model.addAttribute("clientName", authorizedClient.getClientRegistration().getClientName());
-        return "index";
-    }
+   @RequestMapping("/")
+   public String index(Model model, OAuth2AuthenticationToken authentication) {
+       OAuth2AuthorizedClient authorizedClient = this.getAuthorizedClient(authentication);
+       model.addAttribute("userName", authentication.getName());
+       model.addAttribute("clientName", authorizedClient.getClientRegistration().getClientName());
+       return "index";
+   }
 
-    @RequestMapping("/userinfo")
-    public String userinfo(Model model, OAuth2AuthenticationToken authentication) {
-        OAuth2AuthorizedClient authorizedClient = this.getAuthorizedClient(authentication);
-        Map userAttributes = Collections.emptyMap();
-        String userInfoEndpointUri = authorizedClient.getClientRegistration()
-                .getProviderDetails().getUserInfoEndpoint().getUri();
-        if (!StringUtils.isEmpty(userInfoEndpointUri)) {    // userInfoEndpointUri is optional for OIDC Clients
-            userAttributes = WebClient.builder()
-                    .filter(oauth2Credentials(authorizedClient)).build()
-                    .get().uri(userInfoEndpointUri)
-                    .retrieve()
-                    .bodyToMono(Map.class).block();
-        }
-        model.addAttribute("userAttributes", userAttributes);
-        return "userinfo";
-    }
+   @RequestMapping("/userinfo")
+   public String userinfo(Model model, OAuth2AuthenticationToken authentication) {
+       OAuth2AuthorizedClient authorizedClient = this.getAuthorizedClient(authentication);
+       Map userAttributes = Collections.emptyMap();
+       String userInfoEndpointUri = authorizedClient.getClientRegistration()
+               .getProviderDetails().getUserInfoEndpoint().getUri();
+       if (!StringUtils.isEmpty(userInfoEndpointUri)) {    // userInfoEndpointUri is optional for OIDC Clients
+           userAttributes = WebClient.builder()
+                   .filter(oauth2Credentials(authorizedClient)).build()
+                   .get().uri(userInfoEndpointUri)
+                   .retrieve()
+                   .bodyToMono(Map.class).block();
+       }
+       model.addAttribute("userAttributes", userAttributes);
+       return "userinfo";
+   }
 
-    private OAuth2AuthorizedClient getAuthorizedClient(OAuth2AuthenticationToken authentication) {
-        return this.authorizedClientService.loadAuthorizedClient(
-                authentication.getAuthorizedClientRegistrationId(), authentication.getName());
-    }
+   private OAuth2AuthorizedClient getAuthorizedClient(OAuth2AuthenticationToken authentication) {
+       return this.authorizedClientService.loadAuthorizedClient(
+               authentication.getAuthorizedClientRegistrationId(), authentication.getName());
+   }
 
-    private ExchangeFilterFunction oauth2Credentials(OAuth2AuthorizedClient authorizedClient) {
-        return ExchangeFilterFunction.ofRequestProcessor(
-                clientRequest -> {
-                    ClientRequest authorizedRequest = ClientRequest.from(clientRequest)
-                            .header(HttpHeaders.AUTHORIZATION,
-                                    "Bearer " + authorizedClient.getAccessToken().getTokenValue())
-                            .build();
-                    return Mono.just(authorizedRequest);
-                });
-    }
+   private ExchangeFilterFunction oauth2Credentials(OAuth2AuthorizedClient authorizedClient) {
+       return ExchangeFilterFunction.ofRequestProcessor(
+               clientRequest -> {
+                   ClientRequest authorizedRequest = ClientRequest.from(clientRequest)
+                           .header(HttpHeaders.AUTHORIZATION,
+                                   "Bearer " + authorizedClient.getAccessToken().getTokenValue())
+                           .build();
+                   return Mono.just(authorizedRequest);
+               });
+   }
 }
 ```
 
@@ -302,32 +302,32 @@ Create a Thymeleaf index page at `src/main/resources/templates/index.html`. You 
 
 ```html
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" 
-      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+     xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
 <head>
-    <title>Spring Security - OAuth 2.0 Login</title>
-    <meta charset="utf-8" />
+   <title>Spring Security - OAuth 2.0 Login</title>
+   <meta charset="utf-8" />
 </head>
 <body>
 <div style="float: right" th:fragment="logout" sec:authorize="isAuthenticated()">
-    <div style="float:left">
-        <span style="font-weight:bold">User: </span><span sec:authentication="name"></span>
-    </div>
-    <div style="float:none">&nbsp;</div>
-    <div style="float:right">
-        <form action="#" th:action="@{/logout}" method="post">
-            <input type="submit" value="Logout" />
-        </form>
-    </div>
+   <div style="float:left">
+       <span style="font-weight:bold">User: </span><span sec:authentication="name"></span>
+   </div>
+   <div style="float:none">&nbsp;</div>
+   <div style="float:right">
+       <form action="#" th:action="@{/logout}" method="post">
+           <input type="submit" value="Logout" />
+       </form>
+   </div>
 </div>
 <h1>OAuth 2.0 Login with Spring Security</h1>
 <div>
-    You are successfully logged in <span style="font-weight:bold" th:text="${userName}"></span>
-    via the OAuth 2.0 Client <span style="font-weight:bold" th:text="${clientName}"></span>
+   You are successfully logged in <span style="font-weight:bold" th:text="${userName}"></span>
+   via the OAuth 2.0 Client <span style="font-weight:bold" th:text="${clientName}"></span>
 </div>
 <div>&nbsp;</div>
 <div>
-    <a href="/userinfo" th:href="@{/userinfo}">Display User Info</a>
+   <a href="/userinfo" th:href="@{/userinfo}">Display User Info</a>
 </div>
 </body>
 </html>
@@ -339,19 +339,19 @@ Create another template at `src/main/resources/userinfo.html` to display the use
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Spring Security - OAuth 2.0 User Info</title>
-    <meta charset="utf-8" />
+   <title>Spring Security - OAuth 2.0 User Info</title>
+   <meta charset="utf-8" />
 </head>
 <body>
 <div th:replace="index::logout"></div>
 <h1>OAuth 2.0 User Info</h1>
 <div>
-    <span style="font-weight:bold">User Attributes:</span>
-    <ul>
-        <li th:each="userAttribute : ${userAttributes}">
-            <span style="font-weight:bold" th:text="${userAttribute.key}"></span>: <span th:text="${userAttribute.value}"></span>
-        </li>
-    </ul>
+   <span style="font-weight:bold">User Attributes:</span>
+   <ul>
+       <li th:each="userAttribute : ${userAttributes}">
+           <span style="font-weight:bold" th:text="${userAttribute.key}"></span>: <span th:text="${userAttribute.value}"></span>
+       </li>
+   </ul>
 </div>
 </body>
 </html>
@@ -377,6 +377,6 @@ These resources provide additional information about Okta and OIDC:
 * [What’s in a Token? – An OpenID Connect Primer, Part 3 of 3](/blog/2017/08/01/oidc-primer-part-3)
 * [Add Role-Based Access Control to Your App with Spring Security and Thymeleaf](/blog/2017/10/13/okta-groups-spring-security)
 
-If you have any questions about this article, please leave a comment below. You can also post to [Stack Overflow with the okta tag](https://stackoverflow.com/questions/tagged/okta) or use our [developer forums](https://devforum.okta.com/). 
+If you have any questions about this post, please leave a comment below. You can also post to [Stack Overflow with the okta tag](https://stackoverflow.com/questions/tagged/okta) or use our [developer forums](https://devforum.okta.com/).
 
-[Follow @OktaDev on Twitter](https://twitter.com/oktadev) to be notified of future articles about Spring Security and Spring Boot.
+[Follow @OktaDev on Twitter](https://twitter.com/oktadev) for more awesome content!
