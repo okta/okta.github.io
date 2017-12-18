@@ -42,5 +42,5 @@ Once your users can sign in to your app, use Okta's Management API and SDKs to c
 
 <ul class='code-list'>
   <li><span class='fa fa-github'></span> <a href='https://github.com/oktadeveloper/okta-aspnetcore-mvc-example'>ASP.NET Core 2.0 MVC example app</a></li>
-  <li><span class='code-icon info-16-gray'></span> <a href='/code/dotnet/jwt-validation.html'>.NET JWT validation guide</a></li>
+  <li><span class='code-icon info-16-gray'></span> <a href='/code/dotnet/jwt-validation'>.NET JWT validation guide</a></li>
 </ul>

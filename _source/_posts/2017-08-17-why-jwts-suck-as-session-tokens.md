@@ -3,6 +3,9 @@ layout: blog_post
 title: 'Why JWTs Suck as Session Tokens'
 author: rdegges
 tags: [security, jwt, token, authentication, sessions]
+tweets:
+    - "@rdegges doesn't like JSON Web Tokens. Do you?"
+    - "Stop using JSON Web Tokens for web authentication. Use cookies and session IDs instead."
 ---
 
 {% img blog/why-jwts-suck-as-session-tokens/jwts-so-hot-right-now.jpg alt:"JWTs: So Hot Right Now" %}

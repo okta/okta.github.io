@@ -450,7 +450,7 @@ export class OktaAuthService {
     baseUrl: 'https://{yourOktaDomain}.com',
     clientId: '{clientId}',
     authParams: {
-      issuer: 'https://{yourOktaDomain}',
+      issuer: 'default',
       responseType: ['id_token', 'token'],
       scopes: ['openid', 'email', 'profile']
     }
@@ -509,7 +509,7 @@ export class OktaAuthService {
 }
 ```
 
-Make sure to replace `{yourOktaDomain}` and `{client}` in the above code.
+Make sure to replace `{yourOktaDomain}` and `{clientId}` in the above code.
 
 Add `OktaAuthService` as a provider to `client/src/app/app.module.ts`.
 

@@ -111,14 +111,6 @@
 		    border-bottom: solid 3px get-color('gray-light');
 		    z-index: 100;
 
-			@include media('<medium') {
-				margin-top: get-spacing(x-small);
-			}
-
-			@include media('<600px') {
-				margin-top: 0;
-			}
-
 	        h3,
 	        ul {
 		        display: none;

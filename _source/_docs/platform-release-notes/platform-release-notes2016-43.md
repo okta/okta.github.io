@@ -24,7 +24,7 @@ The [OpenID Connect discovery endpoint](/docs/api/resources/oidc.html#openid-con
 Request Example:
 
 ~~~sh
-GET https://${org}.example.com/.well-known/openid-configuration
+GET https://{yourOktaDomain}.com/.well-known/openid-configuration
 ~~~
 
 Response Example:

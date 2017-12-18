@@ -3,6 +3,9 @@ layout: blog_post
 title: 'Why Are Webhooks Better Than Serverless Extensibility?'
 author: rdegges
 tags: [webhooks, serverless, lambda, business, saas]
+tweets:
+    - "Serverless? Bah humbug!"
+    - "Webhooks vs Serverless: A never-ending debate!"
 ---
 
 
