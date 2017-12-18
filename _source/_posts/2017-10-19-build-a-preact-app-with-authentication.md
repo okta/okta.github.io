@@ -61,7 +61,7 @@ your browser, you should see a page like this:
 Even though the PreactCLI-generated app looks a lot like a React app generated
 by [create-react-app](https://github.com/facebookincubator/create-react-app),
 and you can even use some of the React plugins (like
-[React-Router](https://reacttraining.com/react-router/) in your Preact
+[React-Router](https://reacttraining.com/react-router/)) in your Preact
 application, there are some significant differences.
 
 For instance, unlike the ReactCLI, there is no way to `eject` the
@@ -90,8 +90,7 @@ then the green "Create New App" button, so that you see a modal window like:
 
 {% img blog/build-a-preact-app-with-authentication/create-application-screen.png alt:"Create Application Screen" width:"700" %}{: .center-image }
 
-Choose "SPA" from the Platform buttons. [OpenID
-Connect](http://openid.net/connect/) will already be chosen for you. Click the
+Choose "SPA" from the Platform buttons. Click the
 "Next" button to create your application.
 
 This will take you to a screen to "Application Settings" page of the Create
@@ -124,9 +123,9 @@ npm install preact-router --save
 ```
 
 
-## Add an Auth High Order Component
+## Add an Auth Higher-Order Component
 
-With that done, you now need to add some [High Order
+With that done, you now need to add some [Higher-Order
 Components](https://facebook.github.io/react/docs/higher-order-components.html)
 to help with authentication.
 
@@ -305,7 +304,7 @@ import OktaSignInWidget from '../../lib/OktaSignInWidget';
 import { withAuth } from '../../lib/auth';
 ```
 
-Start the component by wrapping in the `withAuth` high order component you
+Start the component by wrapping in the `withAuth` higher-order component you
 created earlier, and set the beginning state. Here, you'll have the
 `redirectToReferrer` set to false by default.
 
@@ -339,7 +338,7 @@ onError(err) {
 ```
 
 You'll notice your component passes handling of the authentication back to the
-high order component. This is a prime example of the benefits of high order
+higher-order component. This is a prime example of the benefits of higher-order
 components and composition in JavaScript.
 
 Finally, create the `render` function that will make the decision about showing
@@ -479,7 +478,7 @@ export default withAuth(class Profile extends Component {
 
 You've added the authentication protection at the `Component` level in the
 `componentWillMount` function of the component. If the user is authenticated, it
-calls the `getCurrentUser` function on the high order component and adds the
+calls the `getCurrentUser` function on the higher-order component and adds the
 user to the component’s state. In the `render` function, you simply output the
 user’s name and email.
 

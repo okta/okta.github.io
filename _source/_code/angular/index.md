@@ -20,6 +20,6 @@ New to Okta? Our Quick Start Guide will walk you through adding user authenticat
 ## More Resources
 
 <ul class='code-list'>
-    <li><span class='code-icon launch-16'></span> <a href='okta_angular_sign-in_widget.html'>Angular + Okta Sign-In Widget</a></li>
-    <li><span class='code-icon launch-16'></span> <a href='okta_angular_auth_js.html'>Angular + Okta Auth SDK</a></li>
+    <li><span class='code-icon launch-16'></span> <a href='okta_angular_sign-in_widget'>Angular + Okta Sign-In Widget</a></li>
+    <li><span class='code-icon launch-16'></span> <a href='okta_angular_auth_js'>Angular + Okta Auth SDK</a></li>
 </ul>

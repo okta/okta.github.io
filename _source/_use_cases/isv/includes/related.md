@@ -1,7 +1,4 @@
 
-Related articles
-: These are all items that are similar in nature
-
 + [Security Analytics]
 + [Security Enforcement]
 + [ISV Syslog References]

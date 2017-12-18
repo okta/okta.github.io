@@ -68,6 +68,7 @@ This is a starting point for OAuth 2.0 flows such as implicit and authorization 
 | code_challenge_method | Specifies the method that was used to derive the code challenge. Only S256 is supported.                                                                                                                                                                                                                                                                                                                                                                 | Query | String   | FALSE    |                  |
 | login_hint            | A username to prepopulate if prompting for authentication.                                                                                                                                                                                                                                                                                                                                                                                               | Query | String   | FALSE    |                  |
 | idp_scope             | A space delimited list of scopes to be provided to the Social Identity Provider when performing [Social Login](social_authentication.html). These scopes are used in addition to the scopes already configured on the Identity Provider.                                                                                                                                                                                                                 | Query | String   | FALSE    |                  |
+| request | A JWT created by the client that enables requests to be passed as a single, self-contained parameter. | Query | JWT | FALSE    | See Description. |
 
 ##### Request Parameter Details
 
@@ -83,16 +84,26 @@ This is a starting point for OAuth 2.0 flows such as implicit and authorization 
       This value provides a secure way for a single-page application to perform a sign-in flow
       in a popup window or an iFrame and receive the ID token and/or access token back in the parent page without leaving the context of that page.
       The data model for the [postMessage](https://developer.mozilla.org/en-US/docs/Web/API/Window/postMessage) call is in the next section.
-    * The `Referrer-Policy` header is automatically included in the request for `fragment` or `query`, and is set to `Referrer-Policy: no-referrer`.
+    * The `Referrer-Policy` header is automatically included in the request for `fragment` or `query`, and is set to `Referrer-Policy: no-referrer`. However, a browser is not obligated to respect the `Referrer-Policy` header from a redirect. If the `response_mode` is `query`, the location specified in `redirect_uri` must set this header to prevent leaking authorization codes.
  * Okta requires the OAuth 2.0 *state* parameter on all requests to the authorization endpoint in order to prevent cross-site request forgery (CSRF).
     The OAuth 2.0 specification [requires](https://tools.ietf.org/html/rfc6749#section-10.12) that clients protect their redirect URIs against CSRF by sending a value in the authorize request which binds the request to the user-agent&#8217;s authenticated state.
     Using the *state* parameter is also a countermeasure to several other known attacks as outlined in [OAuth 2.0 Threat Model and Security Considerations](https://tools.ietf.org/html/rfc6819).
  * [Proof Key for Code Exchange](https://tools.ietf.org/html/rfc7636) (PKCE) is a stronger mechanism for binding the authorization code to the client than just a client secret, and prevents [a code interception attack](https://tools.ietf.org/html/rfc7636#section-1) if both the code and the client credentials are intercepted (which can happen on mobile/native devices). The PKCE-enabled client creates a large random string as *code_verifier* and derives *code_challenge* from it using the method specified in *code_challenge_method*.
     Then the client passes the *code_challenge* and *code_challenge_method* in the authorization request for code flow. When a client tries to redeem the code, it must pass the *code_verifier*. Okta recomputes the challenge and returns the requested token only if it matches the *code_challenge* in the original authorization request. When a client, whose *token_endpoint_auth_method* is ``none``, makes a code flow authorization request, *code_challenge* is required.
     Since *code_challenge_method* only supports S256, this means that the value for *code_challenge* must be: `BASE64URL-ENCODE(SHA256(ASCII(*code_verifier*)))`. According to the [PKCE spec](https://tools.ietf.org/html/rfc7636), the *code_verifier* must be at least 43 characters and no more than 128 characters.
- 
+* About the `request` parameter:
+  * You must sign the JWT using the app's client secret.
+  * The JWT can't be encrypted.
+  * Okta supports these signing algorithms: [HS256](https://tools.ietf.org/html/rfc7518#section-5.2.3), [HS384](https://tools.ietf.org/html/rfc7518#section-5.2.4), and [HS512](https://tools.ietf.org/html/rfc7518#section-5.2.5).
+  * We recommend you don't duplicate any request parameters in both the JWT and the query URI itself. However, you can do so with `state`, `nonce`, `code_challenge`, and `code_challenge_method`.
+  * Okta validates the `request` parameter in the following ways:
+    1. `iss` is required and must  be the `client_id`.
+    2. `aud` is required and must be same value as the authorization server issuer that mints the ID token or access token. This value is published in metadata for Okta Authorization Server and Custom Authorization Server.
+    3. JWT lifetime is evaluated using the `iat` and `exp` claims if present. If the JWT is expired or not yet valid, Okta returns an `invalid_request_object`  error.
+    4. Okta rejects the JWT if the `jti` claim is present and it has already been processed.
+
  * {% api_lifecycle beta %} A consent dialog is displayed depending on the values of three elements:
-     * `prompt`, a query parameter used in requests to [`/oauth2/:authorizationServerId/v1/authorize`](/docs/api/resources/oauth2.html#obtain-an-authorization-grant-from-a-user)(custom authorization server) or [`/oauth2/v1/authorize`](/docs/api/resources/oidc.html#authentication-request) (Org authorization server)
+     * `prompt`, a query parameter used in requests to [`/oauth2/:authorizationServerId/v1/authorize`](/docs/api/resources/oauth2.html#obtain-an-authorization-grant-from-a-user)(Custom Authorization Server) or [`/oauth2/v1/authorize`](/docs/api/resources/oidc.html#authentication-request) (Okta Authorization Server)
      * `consent_method`, a property on [apps](/docs/api/resources/apps.html#settings-7)
      * `consent`, a property on [scopes](/docs/api/resources/oauth2.html#scopes-properties)
  
@@ -320,7 +331,7 @@ curl -X POST \
   -H "Accept: application/json" \
   -H "Cache-Control: no-cache" \
   -H "Content-Type: application/x-www-form-urlencoded" \
-  -d "grant_type=password&username=dolores.abernathy%40${org}.com&
+  -d "grant_type=password&username=dolores.abernathy%40westworld.com&
       password=<password>&scope=openid&client_id=<client_id>
       & client_secret=<client_secret>"
 ~~~
@@ -598,9 +609,11 @@ Content-Type: application/json;charset=UTF-8
 #### Logout Request
 {:.api .api-operation}
 
-{% api_operation post /oauth2/*:authorizationServerId*/v1/logout %}
+{% api_operation get /oauth2/*:authorizationServerId*/v1/logout %}
 
-The API takes an ID Token and logs the user out of Okta if the subject matches the current Okta session. A `post_logout_redirect_uri` may be specified to redirect the User after the logout has been performed. Otherwise, the user is redirected to the Okta login page.
+This redirect endpoint takes an ID Token and logs the user out of Okta if the subject matches the current Okta session. A `post_logout_redirect_uri` may be specified to redirect the User after the logout has been performed. Otherwise, the user is redirected to the Okta login page.
+
+Note: This is not a server-side API call.
 
 ##### Request Parameters
 
@@ -1044,7 +1057,7 @@ curl -X PUT \
     "audiences": [
       "https://api.new-resource.com"
     ]
-}'   "https://${org}/api/v1/authorizationServers/aus1rqsshhhRoat780g7" \
+}'   "https://{yourOktaDomain}.com/api/v1/authorizationServers/aus1rqsshhhRoat780g7" \
 ~~~
 
 ##### Response Example
@@ -1079,7 +1092,7 @@ curl -X DELETE \
   -H 'Accept: application/json' \
   -H 'Content-Type: application/json' \
   -H "Authorization: SSWS ${api_token}" \
-"https://${org}/api/v1/authorizationServers/aus1rqsshhhRoat780g7" \
+"https://{yourOktaDomain}.com/api/v1/authorizationServers/aus1rqsshhhRoat780g7" \
 ~~~
 
 ##### Response Example

@@ -298,12 +298,12 @@ To replace the fake, hard-coded authentication in `src/auth.js`, start by instal
 npm install @okta/okta-auth-js --save
 ```
 
-Replace the code in `auth.js` with the following code that uses the Auth SDK to log in and save a session token as the token. If you don’t have an Okta Developer account, [create one](https://developer.okta.com/signup/). Then replace `{yourOktaDomain}` in the code below with your information (for example, https://dev-123456.oktapreview.com).
+Replace the code in `auth.js` with the following code that uses the Auth SDK to log in and save a session token as the token. If you don’t have an Okta Developer account, [create one](https://developer.okta.com/signup/). Then replace `{yourOktaDomain}` in the code below with your information (for example, `dev-123456.oktapreview`).
 
 ```javascript
 /* globals localStorage */
 const OktaAuth = require('@okta/okta-auth-js')
-const authClient = new OktaAuth({url: 'https://{yourOktaDomain}.com'})
+const authClient = new OktaAuth({url: 'https://{yourOktaDomain}.com', issuer: 'default'})
 
 export default {
   login (email, pass, cb) {
@@ -449,7 +449,7 @@ return authClient.signIn({
 
 You’ll need to create an OIDC App in Okta to get a `{clientId}`. To do this, log in to your Okta Developer account and navigate to **Applications** > **Add Application**. Click **SPA** and click the **Next** button. Give the app a name you’ll remember, and specify `http://localhost:8080` as a Base URI and Login Redirect URI.
 
-{% img blog/vue-auth-sdk/oidc-settings.png alt:"OIDC Settings" width:"600" %}{: .center-image }
+{% img blog/vue-auth-sdk/oidc-settings.png alt:"OIDC Settings" width:"700" %}{: .center-image }
 
 Click **Done** and you’ll be shown a screen with this information as well as a Client ID at the bottom. Copy the Client ID into `src/auth.js`.
 
