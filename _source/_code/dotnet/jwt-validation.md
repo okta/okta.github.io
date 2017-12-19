@@ -12,6 +12,8 @@ When you use the Okta API to [obtain an authorization grant for a user](/docs/ap
 
 A common practice is to send one of these tokens in the `Bearer` header of future requests, to authorize the request for that user. Your server must then validate the token to make sure it's authentic and hasn't expired.
 
+> Note: This guide is specific to the .NET environment.  If you need general information, please see [Working With OAuth 2.0 Tokens](/authentication-guide/tokens/).
+
 ## Who should use this guide
 
 You **don't** need to validate tokens manually if:
