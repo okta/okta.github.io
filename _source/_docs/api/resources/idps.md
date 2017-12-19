@@ -3784,7 +3784,7 @@ Content-Type: application/json
 
 {% api_operation GET /api/v1/idps/*:id*/users/*:uid*/credentials/tokens %}
 
-Okta doesn't import all the user information from a social provider. If the app needs information which isn't imported, it can request a token from this endpoint, then make an API call to the social provider with the token to get the additional information. 
+Okta doesn't import all the user information from a social provider. If the app needs information which isn't imported, it can get the user token from this endpoint, then make an API call to the social provider with the token to request the additional information. 
 
 ##### Request Parameters
 {:.api .api-request .api-request-params}
@@ -5417,7 +5417,7 @@ The CSR model for IdP defines a certificate signing request for a signature or d
 
 ## Identity Provider Social Authentication Token Model
 
-The Social Authentication Token Model provides the tokens and associated metadata provided by social providers during social authentication. However, Okta doesn't import all the user information from a social provider. If the app needs information which isn't imported, it can request a token from this endpoint, then make an API call to the social provider with the token to get the additional information. 
+The Social Authentication Token Model provides the tokens and associated metadata provided by social providers during social authentication. However, Okta doesn't import all the user information from a social provider. If the app needs information which isn't imported, it can get athe user token from this endpoint, then make an API call to the social provider with the token to request the additional information. 
 
 ### Example
 
