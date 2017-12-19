@@ -3736,104 +3736,39 @@ curl -v -X GET \
 {:.api .api-response .api-response-example}
 
 ~~~json
-[
-    {
-        "id": "00u5t60iloOHN9pBi0h7",
-        "externalId": "externalId",
-        "created": "2017-12-19T17:30:16.000Z",
-        "lastUpdated": "2017-12-19T17:30:16.000Z",
-        "profile": {
-            "profileUrl": null,
-            "firstName": null,
-            "lastName": null,
-            "honorificSuffix": null,
-            "displayName": null,
-            "honorificPrefix": null,
-            "middleName": null,
-            "email": null
+{
+    "id": "00u5t60iloOHN9pBi0h7",
+    "externalId": "externalId",
+    "created": "2017-12-19T17:30:16.000Z",
+    "lastUpdated": "2017-12-19T17:30:16.000Z",
+    "profile": {
+        "profileUrl": null,
+        "firstName": null,
+        "lastName": null,
+        "honorificSuffix": null,
+        "displayName": null,
+        "honorificPrefix": null,
+        "middleName": null,
+        "email": null
+    },
+    "_links": {
+        "idp": {
+            "href": "https://{yourOktaDomain}.com/api/v1/idps/0oa62bfdiumsUndnZ0h7"
         },
-        "_embedded": {
-            "user": {
-                "id": "00u5t60iloOHN9pBi0h7",
-                "status": "ACTIVE",
-                "created": "2016-02-09T23:10:22.000Z",
-                "activated": null,
-                "statusChanged": "2016-02-09T23:39:49.000Z",
-                "lastLogin": "2017-12-19T17:26:56.000Z",
-                "lastUpdated": "2017-12-07T18:30:43.000Z",
-                "passwordChanged": "2017-12-07T18:14:59.000Z",
-                "profile": {
-                    "firstName": "Saml",
-                    "lastName": "Jackson",
-                    "mobilePhone": null,
-                    "secondEmail": null,
-                    "login": "Saml.Jackson@example.com",
-                    "email": "Saml.Jackson@example.com"
-                },
-                "credentials": {
-                    "password": {},
-                    "recovery_question": {
-                        "question": "What is the name of your first stuffed animal?"
-                    },
-                    "provider": {
-                        "type": "OKTA",
-                        "name": "OKTA"
-                    }
-                },
-                "_links": {
-                    "suspend": {
-                        "href": "https://{yourOktaDomain}.com/api/v1/users/00u5t60iloOHN9pBi0h7/lifecycle/suspend",
-                        "method": "POST"
-                    },
-                    "resetPassword": {
-                        "href": "https://{yourOktaDomain}.com/api/v1/users/00u5t60iloOHN9pBi0h7/lifecycle/reset_password",
-                        "method": "POST"
-                    },
-                    "forgotPassword": {
-                        "href": "https://{yourOktaDomain}.com/api/v1/users/00u5t60iloOHN9pBi0h7/credentials/forgot_password",
-                        "method": "POST"
-                    },
-                    "expirePassword": {
-                        "href": "https://{yourOktaDomain}.com/api/v1/users/00u5t60iloOHN9pBi0h7/lifecycle/expire_password",
-                        "method": "POST"
-                    },
-                    "changeRecoveryQuestion": {
-                        "href": "https://{yourOktaDomain}.com/api/v1/users/00u5t60iloOHN9pBi0h7/credentials/change_recovery_question",
-                        "method": "POST"
-                    },
-                    "self": {
-                        "href": "https://{yourOktaDomain}.com/api/v1/users/00u5t60iloOHN9pBi0h7"
-                    },
-                    "changePassword": {
-                        "href": "https://{yourOktaDomain}.com/api/v1/users/00u5t60iloOHN9pBi0h7/credentials/change_password",
-                        "method": "POST"
-                    },
-                    "deactivate": {
-                        "href": "https://{yourOktaDomain}.com/api/v1/users/00u5t60iloOHN9pBi0h7/lifecycle/deactivate",
-                        "method": "POST"
-                    }
-                }
+        "self": {
+            "href": "https://{yourOktaDomain}.com/api/v1/idps/0oa62bfdiumsUndnZ0h7/users/00u5t60iloOHN9pBi0h7",
+            "hints": {
+                "allow": [
+                    "GET",
+                    "DELETE"
+                ]
             }
         },
-        "_links": {
-            "idp": {
-                "href": "https://{yourOktaDomain}.com/api/v1/idps/0oa62bfdiumsUndnZ0h7"
-            },
-            "self": {
-                "href": "https://{yourOktaDomain}.com/api/v1/idps/0oa62bfdiumsUndnZ0h7/users/00u5t60iloOHN9pBi0h7",
-                "hints": {
-                    "allow": [
-                        "GET",
-                        "DELETE"
-                    ]
-                }
-            },
-            "user": {
-                "href": "https://{yourOktaDomain}.com/api/v1/users/00u5t60iloOHN9pBi0h7"
-            }
+        "user": {
+            "href": "https://{yourOktaDomain}.com/api/v1/users/00u5t60iloOHN9pBi0h7"
         }
     }
-]
+}
 ~~~
 
 If the IdP doesn't exist, you receive an error response.
