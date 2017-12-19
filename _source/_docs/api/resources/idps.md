@@ -3715,7 +3715,6 @@ Parameter     | Description                                                     
 ------------- | ------------------------------------------------------------------------------- | ---------- | --------------------------------------------- | -------- |
 id | ID of the [Identity Provider](#identity-provider-model) | URL | String | TRUE |
 uid           | ID of the Okta User                                                           | URL        | String                                        | TRUE     |
-expand | Optionally embeds linked [User](Users.html#user-model) resources | Query | String | FALSE |
 
 ##### Response Parameters
 {:.api .api-response .api-response-params}
@@ -3730,13 +3729,14 @@ curl -v -X GET \
 -H "Accept: application/json" \
 -H "Content-Type: application/json" \
 -H "Authorization: SSWS ${api_token}" \
-    'https://{yourOktaDomain}.com/api/v1/idps/0oa62bfdiumsUndnZ0h7/users?expand=user' \
+    'https://{yourOktaDomain}.com/api/v1/idps/0oa62bfdiumsUndnZ0h7/users/00u5t60iloOHN9pBi0h7' \
 ~~~
 
 ##### Response Example
 {:.api .api-response .api-response-example}
 
 ~~~json
+[
     {
         "id": "00u5t60iloOHN9pBi0h7",
         "externalId": "externalId",
@@ -3833,6 +3833,7 @@ curl -v -X GET \
             }
         }
     }
+]
 ~~~
 
 If the IdP doesn't exist, you receive an error response.
