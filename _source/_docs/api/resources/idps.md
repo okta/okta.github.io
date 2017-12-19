@@ -3560,7 +3560,7 @@ curl -v -X GET \
 
 ## Identity Provider User Operations
 
-### Listing IdPs associated with a user
+### List IdPs Associated with a User
 {:.api .api-operation}
 
 {% api_operation GET /api/v1/users/*:uid*/idps %}
@@ -3694,14 +3694,163 @@ Content-Type: application/json
 
 {
   "errorCode": "E0000007",
-  "errorSummary": "Not found: Resource not found: 00u3b8ixnOCwbn8Sn0g4 (User)",
+  "errorSummary": "Not found: Resource not found: 00ub0oNGTSWTBKOLGLNR (User)",
   "errorLink": "E0000007",
   "errorId": "oaeYW9k9yJuSSSkhaMQdA1-Zg",
   "errorCauses": []
 }
 ~~~
 
-### Link a user to a Social IdP without a transaction
+### Get a Linked Identity Provider User 
+{:.api .api-operation}
+
+{% api_operation GET /api/v1/idps/*:id*/users/*:uid* %}
+
+Fetches a linked [IdP user](#identity-provider-user-model) by ID. This endpoint doesn't support the SAML2 [Identity Provider Type](#identity-provider-type).
+
+##### Request Parameters
+{:.api .api-request .api-request-params}
+
+Parameter     | Description                                                                     | Param Type | DataType                                      | Required |
+------------- | ------------------------------------------------------------------------------- | ---------- | --------------------------------------------- | -------- |
+id | ID of the [Identity Provider](#identity-provider-model) | URL | String | TRUE |
+uid           | ID of the Okta User                                                           | URL        | String                                        | TRUE     |
+expand | Optionally embeds linked [User](Users.html#user-model) resources | Query | String | FALSE |
+
+##### Response Parameters
+{:.api .api-response .api-response-params}
+
+Return the associated [Identity Providers](#identity-provider-model)
+
+##### Request Example
+{:.api .api-request .api-request-example}
+
+~~~sh
+curl -v -X GET \
+-H "Accept: application/json" \
+-H "Content-Type: application/json" \
+-H "Authorization: SSWS ${api_token}" \
+    'https://{yourOktaDomain}.com/api/v1/idps/0oa62bfdiumsUndnZ0h7/users?expand=user' \
+~~~
+
+##### Response Example
+{:.api .api-response .api-response-example}
+
+~~~json
+    {
+        "id": "00u5t60iloOHN9pBi0h7",
+        "externalId": "externalId",
+        "created": "2017-12-19T17:30:16.000Z",
+        "lastUpdated": "2017-12-19T17:30:16.000Z",
+        "profile": {
+            "profileUrl": null,
+            "firstName": null,
+            "lastName": null,
+            "honorificSuffix": null,
+            "displayName": null,
+            "honorificPrefix": null,
+            "middleName": null,
+            "email": null
+        },
+        "_embedded": {
+            "user": {
+                "id": "00u5t60iloOHN9pBi0h7",
+                "status": "ACTIVE",
+                "created": "2016-02-09T23:10:22.000Z",
+                "activated": null,
+                "statusChanged": "2016-02-09T23:39:49.000Z",
+                "lastLogin": "2017-12-19T17:26:56.000Z",
+                "lastUpdated": "2017-12-07T18:30:43.000Z",
+                "passwordChanged": "2017-12-07T18:14:59.000Z",
+                "profile": {
+                    "firstName": "Saml",
+                    "lastName": "Jackson",
+                    "mobilePhone": null,
+                    "secondEmail": null,
+                    "login": "Saml.Jackson@example.com",
+                    "email": "Saml.Jackson@example.com"
+                },
+                "credentials": {
+                    "password": {},
+                    "recovery_question": {
+                        "question": "What is the name of your first stuffed animal?"
+                    },
+                    "provider": {
+                        "type": "OKTA",
+                        "name": "OKTA"
+                    }
+                },
+                "_links": {
+                    "suspend": {
+                        "href": "https://{yourOktaDomain}.com/api/v1/users/00u5t60iloOHN9pBi0h7/lifecycle/suspend",
+                        "method": "POST"
+                    },
+                    "resetPassword": {
+                        "href": "https://{yourOktaDomain}.com/api/v1/users/00u5t60iloOHN9pBi0h7/lifecycle/reset_password",
+                        "method": "POST"
+                    },
+                    "forgotPassword": {
+                        "href": "https://{yourOktaDomain}.com/api/v1/users/00u5t60iloOHN9pBi0h7/credentials/forgot_password",
+                        "method": "POST"
+                    },
+                    "expirePassword": {
+                        "href": "https://{yourOktaDomain}.com/api/v1/users/00u5t60iloOHN9pBi0h7/lifecycle/expire_password",
+                        "method": "POST"
+                    },
+                    "changeRecoveryQuestion": {
+                        "href": "https://{yourOktaDomain}.com/api/v1/users/00u5t60iloOHN9pBi0h7/credentials/change_recovery_question",
+                        "method": "POST"
+                    },
+                    "self": {
+                        "href": "https://{yourOktaDomain}.com/api/v1/users/00u5t60iloOHN9pBi0h7"
+                    },
+                    "changePassword": {
+                        "href": "https://{yourOktaDomain}.com/api/v1/users/00u5t60iloOHN9pBi0h7/credentials/change_password",
+                        "method": "POST"
+                    },
+                    "deactivate": {
+                        "href": "https://{yourOktaDomain}.com/api/v1/users/00u5t60iloOHN9pBi0h7/lifecycle/deactivate",
+                        "method": "POST"
+                    }
+                }
+            }
+        },
+        "_links": {
+            "idp": {
+                "href": "https://{yourOktaDomain}.com/api/v1/idps/0oa62bfdiumsUndnZ0h7"
+            },
+            "self": {
+                "href": "https://{yourOktaDomain}.com/api/v1/idps/0oa62bfdiumsUndnZ0h7/users/00u5t60iloOHN9pBi0h7",
+                "hints": {
+                    "allow": [
+                        "GET",
+                        "DELETE"
+                    ]
+                }
+            },
+            "user": {
+                "href": "https://{yourOktaDomain}.com/api/v1/users/00u5t60iloOHN9pBi0h7"
+            }
+        }
+    }
+~~~
+
+If the IdP doesn't exist, you receive an error response.
+
+~~~http
+HTTP/1.1 400 Bad Request
+Content-Type: application/json
+
+{
+  "errorCode": "E0000007",
+  "errorSummary": Not found: Resource not found: 0oa62bfdiumsUndnZ0h8 (IdpAppInstance)",
+  "errorLink": "E0000007",
+  "errorId": "oaeYW9k9yJuSSSkhaMQdA1-Zg",
+  "errorCauses": []
+}
+~~~
+
+### Link a User to a Social IdP Without a Transaction
 {:.api .api-operation}
 
 {% api_operation POST /api/v1/idps/*:id*/users/*:uid* %}
