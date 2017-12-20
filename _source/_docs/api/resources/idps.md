@@ -3797,7 +3797,7 @@ uid           | `id` of the Okta User                                           
 ##### Response Parameters
 {:.api .api-response .api-response-params}
 
-Return a list of the the associated [social authentication tokens](#identity-provider-social-auth-token-model)
+Return a list of the the associated [social authentication tokens](#identity-provider-social-authentication-token-model)
 
 ##### Request Example
 {:.api .api-request .api-request-example}
