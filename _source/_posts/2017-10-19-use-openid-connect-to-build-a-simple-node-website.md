@@ -282,7 +282,7 @@ To get started, you'll need to install two new Node.js libraries:
 
 [express-session](https://github.com/expressjs/session), which will manage user
 sessions for your website, and
-[oidc-middleware](https://github.com/okta/okta-oidc-js), which will handle all
+[oidc-middleware](https://github.com/okta/okta-oidc-js/tree/master/packages/oidc-middleware), which will handle all
 of the OIDC implementation details for your website
 
 To install these libraries, run the following command:
@@ -482,7 +482,7 @@ can view your user information:
 
 Now that you've built your first Node.js site using OIDC to handle
 authentication using our new [oidc-middleware
-library](https://github.com/okta/okta-oidc-js), you might want to learn more
+library](https://github.com/okta/okta-oidc-js/tree/master/packages/oidc-middleware), you might want to learn more
 about OIDC.
 
 One of my good friends and co-workers [Micah
