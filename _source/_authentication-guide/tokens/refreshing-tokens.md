@@ -42,10 +42,16 @@ The following combinations of grant type and scope, when sent to `/token` endpoi
 
 > NOTE: The authorization code flow is unique, in that the `offline_access` scope has to be requested as part of the code request to the `/authorize` endpoint, and not the request sent to the `/token` endpoint.
 
-This table only shows the minimum requirements. For example, with the `password` grant type you can also include an `openid` scope alongside the `offline_scope`:
+This table only shows the minimum requirements. For example, with the `password` grant type you can also include an `openid` scope alongside the `offline_access` scope:
 
 ```
-'grant_type=password&redirect_uri=http%3A%2F%2Flocalhost%3A8080&username=example%40mailinator.com&password=a.gReAt.pasSword&scope=openid%20offline_access'
+POST https://{yourOktaDomain}.com/oauth2/default/v1/token
+
+grant_type=password
+ &redirect_uri=http%3A%2F%2Flocalhost%3A8080
+ &username=example%40mailinator.com
+ &password=a.gReAt.pasSword
+ &scope=openid%20offline_access
 ```
 
 You would then get back an ID token alongside your access and refresh tokens.
