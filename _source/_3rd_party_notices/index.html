@@ -11,7 +11,7 @@ layout: default
     {% if element.id contains '/index' %}
     {% continue %}
     {% endif %}
-    <li><a href="{{ element.url }}.html">{{ element.title }}</a></li>
+    <li><a href="{{ element.url }}">{{ element.title }}</a></li>
     {% endfor %}
     </ul>
   </div>

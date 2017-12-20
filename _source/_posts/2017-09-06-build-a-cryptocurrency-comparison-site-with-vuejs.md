@@ -3,6 +3,9 @@ layout: blog_post
 title: 'Build a Cryptocurrency Comparison Site with Vue.js'
 author: rdegges
 tags: [vuejs, javascript, bitcoin, cryptocurrency]
+tweets:
+    - "Like cryptocurrencies? Like @vuejs? Let's build something fun! <3"
+    - "Spend your next hour building a fun cryptocurrency website instead of scrolling through twitter"
 ---
 
 
