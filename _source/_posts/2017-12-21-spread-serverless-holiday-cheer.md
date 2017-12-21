@@ -17,7 +17,8 @@ The API will be simple: it will have one route called `/cheer`.
 
 ```
 GET /cheer
-
+```
+```json
 200 OK
 {
   "holidaySeason": true,
@@ -34,7 +35,8 @@ POST /cheer
 {
   "name": "Nate"
 }
-
+```
+```json
 200 OK
 {
   "holidaySeason": true,
@@ -161,7 +163,7 @@ Switch over to the [API Gateway console](https://console.aws.amazon.com/apigatew
 
 {% img blog/serverless-holiday-cheer/new-api-gateway.png alt:"Create a new API Gateway API" width:"700" %}{: .center-image }
 
-The API will have one path (or "resource"), called `/cheer`. From the Actions button, click **Create Resource**. Enter Cheer as the Resource Name, and the path will be automatically filled in.
+The API will have one path (or "resource"), called `/cheer`. From the Actions button, click **Create Resource**. Enter `Cheer` as the Resource Name, and the path will be automatically filled in.
 
 Both the `GET` and `POST` methods will be supported. Instead of defining these separately, you can add a single rule that handles any method. With the `/cheer` resource selected, choose **Create Method** from the Actions button. Pick ANY and click the checkmark to add the method.
 
@@ -169,9 +171,9 @@ Choose **Lambda Function** as the integration type, and check **Use Lambda Proxy
 
 {% img blog/serverless-holiday-cheer/cheer-method-setup.png alt:"Define a method for the /cheer resource" width:"700" %}{: .center-image }
 
-Click **Save** to create the method definition. On the Method Execution screen, click Test and pick a method (GET or POST) to send to your function. If everything is configured correctly, you'll see the JSON response on the right.
+Click **Save** to create the method definition. On the Method Execution screen, click **Test** and pick a method (GET or POST) to send to your function. If everything is configured correctly, you'll see the JSON response on the right.
 
-You're almost there! From the Actions button, choose **Deploy API**. Create a new stage called `production` and click Deploy. When the API is deployed, you'll get an Invoke URL like:
+You're almost there! From the Actions button, choose **Deploy API**. Create a new stage called `production` and click **Deploy**. When the API is deployed, you'll get an Invoke URL like:
 
 ```
 https://blah.execute-api.us-east-1.amazonaws.com/production
