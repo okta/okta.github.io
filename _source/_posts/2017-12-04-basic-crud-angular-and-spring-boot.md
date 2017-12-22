@@ -684,7 +684,7 @@ Update the HTML in `client/src/app/car-edit/car-edit.component.html` to have a f
       <button mat-raised-button color="primary" type="submit"
               [disabled]="!carForm.form.valid">Save</button>
       <button mat-raised-button color="secondary" (click)="remove(car.href)"
-              *ngIf="car.href">Delete</button>
+              *ngIf="car.href" type="button">Delete</button>
       <a mat-button routerLink="/car-list">Cancel</a>
     </mat-card-actions>
     <mat-card-footer>
