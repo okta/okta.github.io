@@ -165,9 +165,9 @@ Request Example for Okta Authorization Server:
 curl -X GET \
   'https://{yourOktaDomain}.com/oauth2/v1/authorize?client_id=0oabskvc6442nkvQO0h7
   &response_type=id_token
-  &response_mode=fragment&scope=openid%20phone%20groups
+  &response_mode=fragment&scope=openid%20groups
   &redirect_uri=https%3A%2F%2FmyOktaDomain.com
-  &state=myState&nonce=${nonce-value}' \
+  &state=myState&nonce=${yourNonceValue}' \
 ~~~
 
 #### Step Five: Decode the JWT to Verify 
@@ -175,16 +175,7 @@ curl -X GET \
 Decode the JWT in the response to see that the groups are in the token. For example, this JWK contains the group claim:
 
  ~~~JSON
- eyJhbGciOiJSUzI1NiIsImtpZCI6IlhqNUNEQTkxRGZZc1gyOHBLUzZFbjdLMmlRel9wTUQwNHZ5bXBUQU1wMXcifQ.eyJzdWIiOiI
-wMHU1dDYwaWxvT0hOOXBCaTBoNyIsInZlciI6MSwiaXNzIjoiaHR0cHM6Ly9teXN0aWNvcnAub2t0YXByZXZpZXcuY29tL29hdXRoM
- i9hdXNhaW42ejl6SWVkREN4QjBoNyIsImF1ZCI6IjBvYWJza3ZjNjQ0Mm5rdlFPMGg3IiwiaWF0IjoxNTA1MjQ2NDkwLCJleHAiOjE
-1MDUyNTAwOTAsImp0aSI6IklELlpnWE0zUkVMd3hGOGRUWERhS2EtRGw5TXBzMWZCMUZ4eHpFZkI2RXRrcGsiLCJhbXIiOlsicHdkI
-l0sImlkcCI6IjAwbzV0NjBpbDNVenlJZTV2MGg3Iiwibm9uY2UiOiIyMTg1ZWRmNC04NGE4LTQ5MWUtYmE3Mi0yMGI3NjU0MDI1NDM
-iLCJhdXRoX3RpbWUiOjE1MDUyMzM0ODksIm15Z3JvdXBXaGl0ZWxpc3QiOlsiV2VzdENvYXN0RGl2aXNpb24iXSwiZmlyc3ROYW1lI
- joiTXlzdGkifQ.ZO5mGmjXxE9XUD17hn4NNQtxYZjRK_4dCaXRgpDRajUyzyDW5qmyjZbtv5qbd5JVe3WnT7TVT4qD7UTuVWH6maL-
-nS0aE0_F61ftS0xADdacLiGpGuIh-c62AaE7_tdkZBwUagqz3XebhAwZ3SicLUCIpc9ySWyyKf96eIRD2xps3TDZVDS9e5r20r0GWu
-EhoW9LksrmAdT63GbGMMt0iH_kWY1ePgG2T-UKWDmdoJZqAthPlCkTWzSyN8oRuebcRQQUA5CIzcWGAuGhiDiOw8sp6utPD0u2pm79
- fST36rCGaDHmcm3L60JHlEeIbRArkp_793BB8OKRLdh9weNtcA
+ eyJraWQiOiJiS0U0czM3d01tQWZ5ZzQtVFJQcVg1YW50blE1ajBuNFJKcE9nSl9zT0JVIiwiYWxnIjoiUlMyNTYifQ.eyJzdWIiOiIwMHU1dDYwaWxvT0hOOXBCaTBoNyIsInZlciI6MSwiaXNzIjoiaHR0cHM6Ly9teXN0aWNvcnAub2t0YXByZXZpZXcuY29tIiwiYXVkIjoiMG9hYnNrdmM2NDQybmt2UU8waDciLCJpYXQiOjE1MTM4MTIyNzgsImV4cCI6MTUxMzgxNTg3OCwianRpIjoiSUQuNlBKamc0c0VQam8zRWVvR0FSblExUEoyRnFVY2dhajdmWUUwUG5fNW9FWSIsImFtciI6WyJwd2QiXSwiaWRwIjoiMDBvNXQ2MGlsM1V6eUllNXYwaDciLCJub25jZSI6ImIxYmMxYWZlLTA5ZjctNGUyOC1hODQ3LWRjMGIyODZjN2Y0NiIsImF1dGhfdGltZSI6MTUxMzc5NTMyMiwiZ3JvdXBzIjpbIldlc3RDb2FzdERpdmlzaW9uIl19.QLp-xJ5vKYq6I2VAUEL11QL9D70EDBlYQb_GPirEOJeSEGhlFDaNdow7-FBbBUTCkn51LU4lNyKLxTi_Mhj5S3I8KxinuAxjyvUpt7zt3BmkDBpVzHB4oz9D28j2QXElslVnEf42pwn5VPyjRrejo63CkykeXZGAGU9irlZHHM9TqmZKHZzBVk5wN3RkbqfZ3VtMAt4zP7xGHH156IcGnlNe-k_p70Mtun_hblxwo1TFxR3MbIlNfxXSliiyQb8Y3wa7tp9OKZECDStZ4FCt4R1n5MKC1wVI2rc8yM7n6DbPT73lB7j4wtCBlcm_Dd-GqCwof-_eb_s8RkCKGlhdcQ
 ~~~
 
  Example Payload Data for ID Token:
@@ -193,7 +184,7 @@ EhoW9LksrmAdT63GbGMMt0iH_kWY1ePgG2T-UKWDmdoJZqAthPlCkTWzSyN8oRuebcRQQUA5CIzcWGAu
 {
   "sub": "00u5t60iloOHN9pBi0h7",
   "ver": 1,
-  "iss": "https://{yourOktaDomain}.com/oauth2/ausain6z9zIedDCxB0h7",
+  "iss": "https://{yourOktaDomain}.com",
   "aud": "0oabskvc6442nkvQO0h7",
   "iat": 1505323527,
   "exp": 1505327127,
@@ -202,12 +193,11 @@ EhoW9LksrmAdT63GbGMMt0iH_kWY1ePgG2T-UKWDmdoJZqAthPlCkTWzSyN8oRuebcRQQUA5CIzcWGAu
     "pwd"
   ],
   "idp": "00o5t60il3UzyIe5v0h7",
-  "nonce": "2185edf4-84a8-491e-ba72-20b765402543",
+  "nonce": "${yourNonceValue}",
   "auth_time": 1505320024,
   "groups": [
     "WestCoastDivision"
-  ],
-  "phone_number": "+1 (202) 224-3121"
+  ]
 }
  ~~~
 
@@ -406,7 +396,7 @@ Request Example for Custom Authorization Server:
  curl -X GET \
   'https://{yourOktaDomain}.com/oauth2/ausain6z9zIedDCxB0h7/v1/authorize?client_id=0oabskvc6442nkvQO0h7
     &response_type=id_token&response_mode=fragment
-     &scope=openid&redirect_uri=https%3A%2F%2example.com/oauth2/callback
+     &scope=openid%20groups&redirect_uri=https%3A%2F%2example.com/oauth2/callback
     &state=myState&nonce=${nonce-value}' \
  ~~~
 
