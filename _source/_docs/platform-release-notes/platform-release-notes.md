@@ -13,11 +13,11 @@ These release notes summarize the changes since 2017.50. Dates for preview and p
 | Feature Enhancement                          | Expected in Preview Orgs | Expected in Production Orgs |
 |:---------------------------------------------------|:------------------------------------|:---------------------------------------|
 | [Token Preview](#token-preview)          | December 28, 2017          | January 8, 2017                     | 
-| [New values for `amr` base claim](new-values-for-amr-base-claim) | December 28, 2017          | January 8, 2017                     |
+| [New values for `amr` base claim](#new-values-for-amr-base-claim) | December 28, 2017          | January 8, 2017                |
 
 #### Token Preview
 
-Configuring an application or integration to use OpenID Connect  ID tokens or Oauth 2.0 access tokens can take a lot of trial-and-error.
+Configuring an application or integration to use OpenID Connect  ID tokens or OAuth 2.0 access tokens can take a lot of trial-and-error.
 Okta has made it easier to choose configuration settings and see the resulting tokens in the **Token Preview** tab of the Authorization Server page:
 
 {% img release_notes/token_preview.png alt:"Screen shot of token preview tab" %}
@@ -32,7 +32,7 @@ Once you've got the right combination, it's easy to configure your authorization
 
 We improved some behaviors related for [base claim `amr`](/standards/OIDC/index.html#base-claims-always-present):
 
-* When MFA factors `sms` or `call` are used, the `amr` claim returns `mca`.
+* When [MFA factors `sms` or `call`](/docs/api/resources/factors#factor-type) are used, the `amr` claim returns [`mca`](/docs/api/resources/sessions#amr-object).
 * When [MFA factor `token:hardware`](/docs/api/resources/factors#factor-type) is used, the `amr` claim returns `hwk`.
 * When [MFA factor `web`](/docs/api/resources/factors#factor-type) is used, the `amr` claim returns `swk`. <!-- OKTA-152175 -->
 
