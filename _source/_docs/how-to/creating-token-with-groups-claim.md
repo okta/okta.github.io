@@ -132,12 +132,12 @@ Request Example:
     "profile": {
         "groupwhitelist": [
             "00gbso71miOMjxHRW0h7"
-            ]
+        ]
     }
    }
 ~~~
 
-You can add application groups, user groups or both to the group whitelist, specified as an array of IDs. 
+You can add application groups, user groups, or both to the group whitelist, specified as an array of IDs. 
 
 To use the group whitelist for every client that gets this claim in a token, put the attribute name of the whitelist in the first parameter of the `getFilteredGroups` function described in the next step. 
 
@@ -157,7 +157,7 @@ d. In **Groups claim expression**, add this expression: `getFilteredGroups(app.p
 
 #### Step Four: Send a Test Request
 
-To obtain a token with the configured groups claim, send a request for an ID token that includes the `groups` scope: `https://{yourOktaDomain}.com/oauth2/v1/authorize`
+To obtain a token with the configured groups claim, send a request for an ID token that includes the `groups` claim set in step 3.c. as a scope to `https://{yourOktaDomain}.com/oauth2/v1/authorize`, as illustrated in the following example.
 
 Request Example for Okta Authorization Server:
 
@@ -194,7 +194,7 @@ Decode the JWT in the response to see that the groups are in the token. For exam
   ],
   "idp": "00o5t60il3UzyIe5v0h7",
   "nonce": "${yourNonceValue}",
-  "auth_time": 1505320024,
+  "auth_time": 1513795322,
   "groups": [
     "WestCoastDivision"
   ]
@@ -394,31 +394,24 @@ Request Example for Custom Authorization Server:
 
  ~~~curl
  curl -X GET \
-  'https://{yourOktaDomain}.com/oauth2/ausain6z9zIedDCxB0h7/v1/authorize?client_id=0oabskvc6442nkvQO0h7
-    &response_type=id_token&response_mode=fragment
-     &scope=openid%20groups&redirect_uri=https%3A%2F%2example.com/oauth2/callback
-    &state=myState&nonce=${nonce-value}' \
+  'https://${yourOktaDomain}.com/oauth2/ausain6z9zIedDCxB0h7/v1/authorize?client_id=0oabskvc6442nkvQO0h7
+    &response_type=id_token
+    &response_mode=fragment
+    &scope=groups%20openid
+    &redirect_uri=https%3A%2F%2FmyOktaDomain.com
+    &state=myState&nonce=${myNonceValue}' \
  ~~~
 
 >Note:
 * In this example, the claim was configured to work with all scopes. If you specify only certain scopes to return the claim, you'll need to specify one of them in the request.
-* To obtain an access token, simply change `response_type=id_token` to `response_type='token`.
+* To obtain an access token, simply change `response_type=id_token` to `response_type='token'`.
 
 #### Step Five: Decode the JWT to Verify 
 
 Decode the JWT in the response to see that the groups are in the token. For example, this JWK contains the group claim:
 
 ~~~JSON
-eyJhbGciOiJSUzI1NiIsImtpZCI6IlhqNUNEQTkxRGZZc1gyOHBLUzZFbjdLMmlRel9wTUQwNHZ5bXBUQU1wMXcifQ.eyJzdWIiOiI
-wMHU1dDYwaWxvT0hOOXBCaTBoNyIsInZlciI6MSwiaXNzIjoiaHR0cHM6Ly9teXN0aWNvcnAub2t0YXByZXZpZXcuY29tL29hdXRoM
-i9hdXNhaW42ejl6SWVkREN4QjBoNyIsImF1ZCI6IjBvYWJza3ZjNjQ0Mm5rdlFPMGg3IiwiaWF0IjoxNTA1MjQ2NDkwLCJleHAiOjE
-1MDUyNTAwOTAsImp0aSI6IklELlpnWE0zUkVMd3hGOGRUWERhS2EtRGw5TXBzMWZCMUZ4eHpFZkI2RXRrcGsiLCJhbXIiOlsicHdkI
-l0sImlkcCI6IjAwbzV0NjBpbDNVenlJZTV2MGg3Iiwibm9uY2UiOiIyMTg1ZWRmNC04NGE4LTQ5MWUtYmE3Mi0yMGI3NjU0MDI1NDM
-iLCJhdXRoX3RpbWUiOjE1MDUyMzM0ODksIm15Z3JvdXBXaGl0ZWxpc3QiOlsiV2VzdENvYXN0RGl2aXNpb24iXSwiZmlyc3ROYW1lI
-joiTXlzdGkifQ.ZO5mGmjXxE9XUD17hn4NNQtxYZjRK_4dCaXRgpDRajUyzyDW5qmyjZbtv5qbd5JVe3WnT7TVT4qD7UTuVWH6maL-
-nS0aE0_F61ftS0xADdacLiGpGuIh-c62AaE7_tdkZBwUagqz3XebhAwZ3SicLUCIpc9ySWyyKf96eIRD2xps3TDZVDS9e5r20r0GWu
-EhoW9LksrmAdT63GbGMMt0iH_kWY1ePgG2T-UKWDmdoJZqAthPlCkTWzSyN8oRuebcRQQUA5CIzcWGAuGhiDiOw8sp6utPD0u2pm79
-fST36rCGaDHmcm3L60JHlEeIbRArkp_793BB8OKRLdh9weNtcA
+eyJraWQiOiJ2U2N0OVJ0R2g5ang5QVFfT05aNEFhM19lZ3YwVlktelJKWTZvbmE5R3o4IiwiYWxnIjoiUlMyNTYifQ.eyJzdWIiOiIwMHU1dDYwaWxvT0hOOXBCaTBoNyIsInZlciI6MSwiaXNzIjoiaHR0cHM6Ly9teXN0aWNvcnAub2t0YXByZXZpZXcuY29tL29hdXRoMi9hdXNhaW42ejl6SWVkREN4QjBoNyIsImF1ZCI6IjBvYWJza3ZjNjQ0Mm5rdlFPMGg3IiwiaWF0IjoxNTE0NDAzNzE0LCJleHAiOjE1MTQ0MDczMTQsImp0aSI6IklELkpmYlJNRmFOdmJmX0ppdUp5ckE2MVJ3YVI4NXlzYWsxZWp4N25JV1RRb0UiLCJhbXIiOlsicHdkIl0sImlkcCI6IjAwbzV0NjBpbDNVenlJZTV2MGg3Iiwibm9uY2UiOiJhMzA4ZTQ2OS1kYjljLTQ4YzItYjdhMy01ZTc0Y2ExMTI1YjIiLCJhdXRoX3RpbWUiOjE1MTQ0MDMwMTAsIm15Z3JvdXBXaGl0ZWxpc3QiOlsiV2VzdENvYXN0RGl2aXNpb24iXX0.D0ZQYUfWgTzg58cIRMGzCXFjwtTAse0h1MDzMhq4pStoSkqcf-9heiywxLt1rFmrI_IXXn8idi3zeYcOIIbaPwGgOB13DmNBIQcqAmIWiU8Ytk2IzizUH8qqAreCO6cZkNNck164UsRFSyrd7gGf7MMhzvHEE7Z_EEjKdjh8_-_M-eUBdBeFYpqL1MkU02Ib0M7rWJLu8E6jVf8zpRvcIACY-Ne1XN7o6v3NAnM6tLS2iPmpDTJoSuCwM0E5IDSwddTG0R0GUF0zi2c7gz3P21oU0vNJ1Vnq76tZEdRtMsB9wV9GVwuaLFjVibmCvOExyKbduegA9aM0Afn0erq2EA
 ~~~
 
 Example Payload Data for an ID Token:
@@ -429,15 +422,15 @@ Example Payload Data for an ID Token:
   "ver": 1,
   "iss": "https://{yourOktaDomain}.com/oauth2/ausain6z9zIedDCxB0h7",
   "aud": "0oabskvc6442nkvQO0h7",
-  "iat": 1505323527,
-  "exp": 1505327127,
-  "jti": "ID.T1lKS9a167PIUUl5vxSsAssIUKpr3TRgqbVbi5U_Ono",
+  "iat": 1514403714,
+  "exp": 1514407314,
+  "jti": "ID.JfbRMFaNvbf_JiuJyrA61RwaR85ysak1ejx7nIWTQoE",
   "amr": [
     "pwd"
   ],
   "idp": "00o5t60il3UzyIe5v0h7",
-  "nonce": "2185edf4-84a8-491e-ba72-20b765402543",
-  "auth_time": 1505320024,
+  "nonce": "${myNonceValue}",
+  "auth_time": 1514403010,
   "groups": [
     "WestCoastDivision"
   ]
