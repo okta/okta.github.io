@@ -86,3 +86,79 @@ This benefit depends, of course, on the level of security your apps require.
 * [Set up a custom authorization server](https://help.okta.com/en/prev/Content/Topics/Security/API_Access.htm) and use the power of Okta's API Access Management.
 * Visit [the API Access Management endpoint documentation](/docs/api/resources/oauth2.html) and start building your integration today.
 * For simpler use cases focused on SSO, visit [the OpenID Connect documentation](/docs/api/resources/oidc.html).
+
+## Recommended Practices for API Access Management
+
+API Access Management, or  OAuth as a Service,  extends Okta’s security policies, universal directory, and user provisioning into APIs, while providing well-defined OAuth interfaces for developers. Further, while many of our customers use dedicated API gateways such as Apigee or Mulesoft, API Access Management can be used equally well with or without a gateway.
+
+This document represents our recommendations for proper usage based on the OAuth specifications, our design decisions, security best practices, and successful customer deployments. Your requirements and constraints may be different, so not every recommendation fits every situation. However, most recommendations fit most scenarios.
+
+> All communications between all components must be secure. This is non-negotiable.
+
+### Definitions
+
+An API Product is a group of API endpoints offered together to satisfy a particular set of related use cases. For example, a bank may have a Home Loan API Product and a Personal Line of Credit API Product, both of which use some of the same underlying APIs.
+
+Okta API Products refers to all the resources and tools that Okta makes available.
+
+### Recommendations
+
+* [OAuth Client](#oauth-client)
+* [Authorization Server](#authorization-server)
+* [API Gateway (optional)](#api-gateway-optional)
+* [Securing Applications](#securing-applications)
+* [Resource (API) Servers](#resource-api-servers)
+
+#### OAuth Client
+
+* A `client_secret` is a password. Protect it as you would any other password.
+* Configure clients to support only the grant types that are required by the specific use cases under development. Disable all other grant types.
+* Within Okta, a client is treated similarly to an application, therefore only assigned users and groups can authenticate with it. Use the `Everyone` group only when necessary.
+* Okta sends tokens to a `redirect_uri` only if it is on the whitelist. Therefore, limit this list  to URIs in active use.
+
+#### Authorization Server
+
+* Assign an authorization server to specific OAuth 2.0 clients. Use the **All Clients** option only if no other solution is possible.
+
+* Assign one authorization server per API Product. Doing so allows teams to maintain separate authorization policies and token expiration times while eliminating scope name collisions. Authorization servers often reflect use cases at the orchestration layer, not individual endpoints. For example, a banking institution may use one authorization server with a short-lived access token for money transfers but a separate authorization server with a long-lived access token for read-only transaction sync for Quickbooks.
+
+* Make the authorization server audience, defined by the claim (`aud`), specific to the API to reduce the risk of inappropriate access token reuse. A single global audience is rarely acceptable. For example: Instead of using `api.company.com` for the audience, a better approach is specifying `api.company.com/product1` and `api.company.com/product2`.
+
+* Define scopes within authorization servers that are granular and specific to the permissions required. A generic `admin` scope is rarely appropriate. A more common pattern is a URN such as `https://company.com/scopes/product1.admin`, or Java-style namespacing such as `com.okta.product1.admin`, which is Google’s approach for their API services.
+
+* Authorization policies and rules are treated as a case or switch statement. Therefore, when a matching rule is found, it is applied and the result is immediately returned. No further rules are executed.
+
+    * If a request generates unexpected scopes, it is because of a overly broad rule within the Authorization Server.
+
+    * An OAuth client can be assigned to any number of authorization servers. Doing so provides for a variety of tokens to be generated, each with separate authorization policies, token expiration times, and scopes. The audience claim (`aud`) is important in this case.
+
+* OAuth clients and authorization servers can be assigned on a many-to-many basis. This allows a developer to use a single OAuth Client to retrieve access tokens from different authorization servers depending on the use case. The only configuration changes necessary are the endpoints accessed and the scopes requested.
+
+* Configure the access token lifetime to reflect the security requirements of the use case. For example, an access token for a banking API may include a `transactions:read` scope with a multihour lifetime. By contrast, the lifetime of an access token for transferring funds should be only a matter of minutes.
+
+#### API Gateway (optional)
+
+* Access tokens should be used exclusively via an HTTP Authorization header instead of encoded into a payload or URL which may be logged or cached.
+* When a gateway successfully validates an access token, cache the result until the expiration time (exp). Do this for validation that is either [local](https://developer.okta.com/standards/OAuth/#validating-access-tokens) or via [the introspect endpoint](https://developer.okta.com/docs/api/resources/oauth2.html#introspection-request).
+* When a gateway retrieves the JWKS (public keys) to validate a token, it should cache the result until a new or unknown key is referenced in a token.
+* If the gateway is performing endpoint or HTTP verb-level authorization using scopes, the scopes must be defined and granted in the Okta Authorization Server or Custom Authorization Server before being used in the gateway.
+
+    **Note:** If a user requests scopes from the authorization server which haven't been configured, an error results with no scopes granted.
+
+#### Securing Applications
+
+* Access tokens and refresh tokens are sensitive and should be protected as such.
+* Access tokens should be used exclusively via an HTTP Authorization header instead of encoded into a payload or URL which may be logged or cached.
+* A `client_secret` is a password and should be treated and protected as such. Therefore, it should not be embedded in mobile applications, frontend Javascript applications, or any other scenario where a malicious user could access it.
+* Avoid using resource owner password grant type (`password`) except in legacy application or transitional scenarios. The authorization code, implicit, or hybrid grant types are recommended in most scenarios.
+* For mobile applications, using the Authorization Code grant type with PKCE is the best choice. Implicit or hybrid grant type is the next best option.
+* For Android or iOS applications, use the AppAuth libraries from the OpenID Foundation.
+* When an application successfully validates an access token, cache the result until the expiration time (`exp`). Do this for validation that is either [local](https://developer.okta.com/standards/OAuth/#validating-access-tokens) or via [the introspect endpoint](https://developer.okta.com/docs/api/resources/oauth2.html#introspection-request).
+* When an application retrieves the JWKS (public keys) to validate a token, it should cache the result until a new or unknown key is referenced in a token.
+* Never use an access token granted within OpenID Connect for authorization within your applications. The OpenID Connect access token is signed with an Okta-internal key and cannot be validated by your application. Thus, it could be modified without your knowledge and is not safe.
+
+#### Resource (API) Servers
+
+* Accept access tokens only via an HTTP Authorization header. Don't encode tokens into a payload or URL which may be logged or cached.
+* A resource server must confirm that the audience claim (`aud`) is the value expected.
+* When a resource server successfully validates an access token cache the result until the expiration time (`exp`). Do this for validation that is either [local](https://developer.okta.com/standards/OAuth/#validating-access-tokens) or via [the introspect endpoint](https://developer.okta.com/docs/api/resources/oauth2.html#introspection-request).
