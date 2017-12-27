@@ -1,52 +1,31 @@
 ---
 layout: docs_page
 title: Okta API Release Notes
-excerpt: Release Note for 2017.49 App User Schema EA,  more simple HAL link rollout, JWT request parameter, and bug fixes
+excerpt: Summary of changes to the Okta API since Release 2017.49
 ---
 
-## Okta API Release Notes for Release 2017.49
+## Okta API Release Notes for Release 2017.50
 
-These release notes summarize the changes since 2017.47. Dates for preview and production release are the earliest possible release date. Always check your org to verify the release version.
+These release notes summarize the changes since 2017.49. Dates for preview and production release are the earliest possible release date. Always check your org to verify the release version.
 
-### New and Enhanced Features
+### New and Enhanced Feature
 
-| Feature | Available in Preview Orgs | Available in Production Orgs |
-| :------------------------------------ | :------------------------ | :------------------- |
-| [App User Schema API in EA](#early-access-feature-in-preview-app-user-schema-api)  | December 6, 2017 | January 10, 2017 |
-| [HAL Link Rollout](#completing-rollout-of-simple-hal-links)                     | December 6, 2017 | December 12, 2017 |
-| [JWT as a Request Parameter](#jwt-as-a-request-parameter) | December 6, 2017 | December 12, 2017 |
+#### Strict Policy Enforcement for Password Changes
 
-#### Early Access Feature in Preview: App User Schema API
+Added `strict` optional parameter to the following operations:
 
-The [App User Schema API](/docs/api/resources/schemas.html#app-user-schema-operations) is an [Early Access (EA)](/docs/api/getting_started/releases-at-okta.html#early-access-ea) release. Use this API to work with App User profiles, typically for apps that have features for provisioning users.
-<!-- OKTA-148782 -->
+* [Update User](https://developer.okta.com/docs/api/resources/users.html#update-user)
+* [Change Password](https://developer.okta.com/docs/api/resources/users.html#change-password)
 
-#### Completing Rollout of Simple HAL Links
+This parameter allows you to force the validation of the password policy’s `minAge` and `passwordHistory` requirements when an updated password is sent. This will be Generally Available in preview orgs starting on Dec 13, 2017 and in production orgs starting on Dec 19, 2017.
+<!-- OKTA-148151 -->
 
-In previous releases, Okta enabled functionality which modifies the set of links returned with user collection elements. In the new functionality, when a collection of Users is returned, the Links object returned with each element contains only the `_self` link, which can be used to obtain the individual User object. The User object contains the full set of links. We made this change to ensure you always have up-to-date and complete links.
+### API Bug Fix
 
-Most orgs already have this functionality and should see no change in behavior.
-Some orgs did not receive this functionality because they were identified as possible users of the .NET SDK. These customers have received a communication from Okta outlining the changes and any actions they might need to take.
+The following bug fixes will be available on preview orgs starting Dec 13, 2017, and will be available on production orgs starting December 19, 2017:
 
-Some preview orgs created with the Developer Paid edition will receive the new functionality on preview orgs starting December 6, 2017, and on production orgs starting December 12, 2017. 
+* When using the [Zones API](https://developer.okta.com/docs/api/resources/zones.html#update-an-ip-zone), erasing all IP addresses in the Default IP Blacklist zone caused an error. (OKTA-145602)
 
-See [the User Model documentation](/docs/api/resources/users.html#user-model) for more information. <!-- OKTA-150507 -->
-
-#### JWT as a Request Parameter
-
-A new parameter, `request` is available for all `/authorize` endpoints. The parameter contains a JWT created by the client, enabling requests to be passed in a single, self-contained parameter. This JWT must be signed. 
-
-For details about using `request`, see [Oauth 2.0](/docs/api/resources/oauth2.html#request-parameters) or [OpenID Connect](/docs/api/resources/oidc.html#request-parameters-3) documentation. <!-- OKTA-78476 -->
-
-### API Bug Fixes
-
-The following bug fixes will be available on preview orgs starting Dec 6, 2017, and will be available on production orgs starting December 11, 2017:
-
-* Password requirements were incorrectly evaluated on passwords longer than 72 characters. (OKTA-144636)
-
-* If the number of results in a page was divisible by the `limit` parameter value, an additional empty page was incorrectly returned. (OKTA-146006)
-
-* If an app embed link with a session token was used to access an app, the user was incorrectly prompted to authenticate again, instead of using the token to launch the application. (OKTA-149823)
 
 ### Does Your Org Have This Change Yet?
 

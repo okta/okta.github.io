@@ -25,12 +25,9 @@ To get a refresh token, you send a request to your Okta Authorization Server.
 
 In the case of the Authorization Code flow, you use the Authorization Server's `/authorize` endpoint to get an authorization code, specifying an `offline_access` scope. You then send this code to the `/token` endpoint to get an access token and a refresh token. For more information about this endpoint, see [Obtain an Authorization Grant from a User](/docs/api/resources/oauth2.html#obtain-an-authorization-grant-from-a-user). For more information about the Authorization Code flow, see [Implementing the Authorization Code Flow](/authentication-guide/implementing-authentication/auth-code.html).
 
-### Get a Refresh Token with the Authorization Code or Password Flow
+### Get a Refresh Token with the Resource Owner Password Flow
 
-For the Authorization Code and Resource Owner Password flows, you use the Authorization Server's `/token` endpoint directly. For more information about this endpoint, see [Request a Token](/docs/api/resources/oauth2.html#request-a-token). For more information about the Client Credentials and Resource Owner Password flows, see:
-
-- [Implementing the Authorization Code Flow](/authentication-guide/implementing-authentication/auth-code)
-- [Implementing the Resource Owner Password Flow](/authentication-guide/implementing-authentication/password.html)
+For the Resource Owner Password flow, you use the Authorization Server's `/token` endpoint directly. For more information about this endpoint, see [Request a Token](/docs/api/resources/oauth2.html#request-a-token). For more information about the Resource Owner Password flow, see [Implementing the Resource Owner Password Flow](/authentication-guide/implementing-authentication/password.html).
 
 The following combinations of grant type and scope, when sent to `/token` endpoint, will return a refresh token:
 
@@ -42,10 +39,16 @@ The following combinations of grant type and scope, when sent to `/token` endpoi
 
 > NOTE: The authorization code flow is unique, in that the `offline_access` scope has to be requested as part of the code request to the `/authorize` endpoint, and not the request sent to the `/token` endpoint.
 
-This table only shows the minimum requirements. For example, with the `password` grant type you can also include an `openid` scope alongside the `offline_scope`:
+This table only shows the minimum requirements. For example, with the `password` grant type you can also include an `openid` scope alongside the `offline_access` scope:
 
 ```
-'grant_type=password&redirect_uri=http%3A%2F%2Flocalhost%3A8080&username=example%40mailinator.com&password=a.gReAt.pasSword&scope=openid%20offline_access'
+POST https://{yourOktaDomain}.com/oauth2/default/v1/token
+
+grant_type=password
+ &redirect_uri=http%3A%2F%2Flocalhost%3A8080
+ &username=example%40mailinator.com
+ &password=a.gReAt.pasSword
+ &scope=openid%20offline_access
 ```
 
 You would then get back an ID token alongside your access and refresh tokens.
@@ -56,7 +59,7 @@ For more information see the [Okta OAuth 2.0 reference page](/docs/api/resources
 
 ## Get a Refresh Token Silently for Your SPA
 
-In a normal Single-Page Application (SPA) it is usually undesirable to redirect the user to a login page during normal navigation. For example, a user could request access to a resource, prompting your SPA to send a request to the Okta `/authorize` endpoint. Normally, if a user does not have a valid session, this request will result in a redirection to a login page. To avoid this disruptive redirection, the endpoint allows for a request parameter called `prompt`. If the value of the `prompt` parameter is `none`, this guarantees that the user will not be prompted to login, regardless of whether they have an active session or not. Instead, your application will either silently obtain the requested tokens or an OAuth error response. How to act on the error is up to you. 
+In a normal Single-Page Application (SPA) it is usually undesirable to redirect the user to a login page during normal navigation. For example, a user could request access to a resource, prompting your SPA to send a request to the Okta `/authorize` endpoint. Normally, if a user does not have a valid session, this request will result in a redirection to a login page. To avoid this disruptive redirection, the endpoint allows for a request parameter called `prompt`. If the value of the `prompt` parameter is `none`, this guarantees that the user will not be prompted to login, regardless of whether they have an active session or not. Instead, your application will either silently obtain the requested tokens or an OAuth error response. How to act on the error is up to you.
 
 For more information on the `/authorize` endpoint, see the [Authentication Request section of the OIDC Reference](/docs/api/resources/oidc.html#authentication-request).
 
