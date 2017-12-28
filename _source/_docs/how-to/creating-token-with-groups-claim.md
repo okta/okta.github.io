@@ -33,53 +33,53 @@ Send a request to `https://{yourOktaDomain}.com/api/v1/groups` and collect the I
 
    Request Example:
 
-~~~curl
-  curl -X GET \
-    -H 'Accept: application/json' \
-    -H 'Authorization: SSWS ${api_token}' \
-    -H 'Content-Type: application/json' \
-    "https://{yourOktaDomain}.com/api/v1/groups"
+~~~sh
+curl -X GET \
+  -H 'accept: application/json' \
+  -H 'authorization: SSWS ${api_token}' \
+  -H 'content-type: application/json' \
+  "https://{yourOktaDomain}.com/api/v1/groups"
 ~~~
 
    Response Example:
 
 ~~~json
-  [
-      {
-          "id": "00gbso71miOMjxHRW0h7",
-          "created": "2017-08-25T21:15:48.000Z",
-           "lastUpdated": "2017-08-25T21:15:48.000Z",
-          "lastMembershipUpdated": "2017-08-25T21:16:07.000Z",
-          "objectClass": [
-              "okta:user_group"
-          ],
-          "type": "OKTA_GROUP",
-          "profile": {
-              "name": "WestCoastDivision",
-              "description": "Employees West of the Rockies"
-          },
-          "_links": {
-              "logo": [
-                  {
-                    "name": "medium",
-                    "href": "https://op1static.oktacdn.com/assets/img/logos/groups/okta-medium.d7fb831bc4e7e1a5d8bd35dfaf405d9e.png",
-                     "type": "image/png"
-                  },
-                  {
-                      "name": "large",
-                      "href": "https://op1static.oktacdn.com/assets/img/logos/groups/okta-large.511fcb0de9da185b52589cb14d581c2c.png",
-                      "type": "image/png"
-                  }
-              ],
-              "users": {
-                  "href": "https://{yourOktaDomain}.com/api/v1/groups/00gbso71miOMjxHRW0h7/users"
-             },
-              "apps": {
-                  "href": "https://{yourOktaDomain}.com/api/v1/groups/00gbso71miOMjxHRW0h7/apps"
-               }
-          }
+[
+  {
+    "id": "00gbso71miOMjxHRW0h7",
+    "created": "2017-08-25T21:15:48.000Z",
+    "lastUpdated": "2017-08-25T21:15:48.000Z",
+    "lastMembershipUpdated": "2017-08-25T21:16:07.000Z",
+    "objectClass": [
+      "okta:user_group"
+    ],
+    "type": "OKTA_GROUP",
+    "profile": {
+      "name": "WestCoastDivision",
+      "description": "Employees West of the Rockies"
+    },
+    "_links": {
+      "logo": [
+        {
+          "name": "medium",
+          "href": "https://op1static.oktacdn.com/assets/img/logos/groups/okta-medium.d7fb831bc4e7e1a5d8bd35dfaf405d9e.png",
+          "type": "image/png"
+        },
+        {
+          "name": "large",
+          "href": "https://op1static.oktacdn.com/assets/img/logos/groups/okta-large.511fcb0de9da185b52589cb14d581c2c.png",
+          "type": "image/png"
+        }
+      ],
+      "users": {
+        "href": "https://{yourOktaDomain}.com/api/v1/groups/00gbso71miOMjxHRW0h7/users"
+      },
+      "apps": {
+        "href": "https://{yourOktaDomain}.com/api/v1/groups/00gbso71miOMjxHRW0h7/apps"
       }
-  ]
+    }
+  }
+]
 ~~~
 
 This example uses one `groupId` for simplicity's sake.
@@ -92,8 +92,8 @@ The following example names the group whitelist `groupwhitelist`, but you can na
 
 Request Example:
 
- ~~~curl
-  curl -X POST \
+~~~sh
+curl -X POST \
   https://{yourOktaDomain}.com/api/v1/apps/0oabskvc6442nkvQO0h7 \
   -H 'accept: application/json' \
   -H 'authorization: SSWS ${api_token}' \
@@ -121,20 +121,20 @@ Request Example:
           "token",
           "id_token",
           "code"
-         ],
+        ],
         "grant_types": [
           "implicit",
           "authorization_code"
         ],
-         "application_type": "native"
+        "application_type": "native"
       }
-     },
+    },
     "profile": {
-        "groupwhitelist": [
-            "00gbso71miOMjxHRW0h7"
-        ]
+      "groupwhitelist": [
+        "00gbso71miOMjxHRW0h7"
+      ]
     }
-   }
+  }'
 ~~~
 
 You can add application groups, user groups, or both to the group whitelist, specified as an array of IDs. 
@@ -149,11 +149,11 @@ For the Okta Authorization Server, you can only create an ID token with a groups
 
  a. In the Okta user interface, navigate to the Sign On tab of the client application you are configuring, and click the **Edit** button in the Open ID Connect ID Token section.
 
-b. In **Groups claim type**, choose **Expression**.
+ b. In **Groups claim type**, choose **Expression**.
 
-c. In **Group claims filter**, leave the default name `groups` or change it if you wish.
+ c. In **Group claims filter**, leave the default name `groups` or change it if you wish.
 
-d. In **Groups claim expression**, add this expression: `getFilteredGroups(app.profile.groupwhitelist, "group.name", 40)`.
+ d. In **Groups claim expression**, add this expression: `getFilteredGroups(app.profile.groupwhitelist, "group.name", 40)`.
 
 #### Step Four: Send a Test Request
 
@@ -161,9 +161,9 @@ To obtain a token with the configured groups claim, send a request for an ID tok
 
 Request Example for Okta Authorization Server:
 
-~~~curl
+~~~sh
 curl -X GET \
-  'https://{yourOktaDomain}.com/oauth2/v1/authorize?client_id=0oabskvc6442nkvQO0h7
+  "https://{yourOktaDomain}.com/oauth2/v1/authorize?client_id=0oabskvc6442nkvQO0h7
   &response_type=id_token
   &response_mode=fragment&scope=openid%20groups
   &redirect_uri=https%3A%2F%2Fexample.com
@@ -199,7 +199,7 @@ Example Payload Data for ID Token:
     "WestCoastDivision"
   ]
 }
- ~~~
+~~~
 
 The ID token contains the group WestCoastDivision so the audience (`aud`) has access to the group information about the user.
 
@@ -215,13 +215,13 @@ Send a request to `https://{yourOktaDomain}.com/api/v1/groups` and collect the I
 
 Request Example:
 
-~~~curl
+~~~sh
 curl -X GET \
-   -H 'Accept: application/json' \
-  -H 'Authorization: SSWS ${api_token}' \
-  -H 'Content-Type: application/json' \
+  -H 'accept: application/json' \
+  -H 'authorization: SSWS ${api_token}' \
+  -H 'content-type: application/json' \
   "https://{yourOktaDomain}.com/api/v1/groups"
- ~~~
+~~~
 
 This example uses one `groupId` for simplicity's sake.
 
@@ -229,54 +229,54 @@ This example uses one `groupId` for simplicity's sake.
 
 ~~~json
 [
-    {
-        "id": "00gbso71miOMjxHRW0h7",
-        "created": "2017-08-25T21:15:48.000Z",
-        "lastUpdated": "2017-08-25T21:15:48.000Z",
-        "lastMembershipUpdated": "2017-08-25T21:16:07.000Z",
-        "objectClass": [
-            "okta:user_group"
-        ],
-        "type": "OKTA_GROUP",
-        "profile": {
-         "name": "WestCoastDivision",
-         "description": "Employees West of the Rockies"
+  {
+    "id": "00gbso71miOMjxHRW0h7",
+    "created": "2017-08-25T21:15:48.000Z",
+    "lastUpdated": "2017-08-25T21:15:48.000Z",
+    "lastMembershipUpdated": "2017-08-25T21:16:07.000Z",
+    "objectClass": [
+      "okta:user_group"
+    ],
+    "type": "OKTA_GROUP",
+    "profile": {
+      "name": "WestCoastDivision",
+      "description": "Employees West of the Rockies"
+    },
+    "_links": {
+      "logo": [
+        {
+          "name": "medium",
+          "href": "https://op1static.oktacdn.com/assets/img/logos/groups/okta-medium.d7fb831bc4e7e1a5d8bd35dfaf405d9e.png",
+          "type": "image/png"
         },
-        "_links": {
-            "logo": [
-                {
-                    "name": "medium",
-                     "href": "https://op1static.oktacdn.com/assets/img/logos/groups/okta-medium.d7fb831bc4e7e1a5d8bd35dfaf405d9e.png",
-                    "type": "image/png"
-                },
-                {
-                    "name": "large",
-                    "href": "https://op1static.oktacdn.com/assets/img/logos/groups/okta-large.511fcb0de9da185b52589cb14d581c2c.png",
-                    "type": "image/png"
-                }
-             ],
-            "users": {
-                "href": "https://{yourOktaDomain}.com/api/v1/groups/00gbso71miOMjxHRW0h7/users"
-            },
-             "apps": {
-                 "href": "https://{yourOktaDomain}.com/api/v1/groups/00gbso71miOMjxHRW0h7/apps"
-            }
+        {
+          "name": "large",
+          "href": "https://op1static.oktacdn.com/assets/img/logos/groups/okta-large.511fcb0de9da185b52589cb14d581c2c.png",
+          "type": "image/png"
         }
-     }
- ]
+      ],
+      "users": {
+        "href": "https://{yourOktaDomain}.com/api/v1/groups/00gbso71miOMjxHRW0h7/users"
+      },
+      "apps": {
+        "href": "https://{yourOktaDomain}.com/api/v1/groups/00gbso71miOMjxHRW0h7/apps"
+      }
+    }
+  }
+]
 ~~~
 
 #### Step Two:  Add List of Groups to Profile of Client App
 
- If you only have one or two groups to specify, simply add the group IDs to the first parameter of the `getFilteredGroups` function described in the next step.
+If you only have one or two groups to specify, simply add the group IDs to the first parameter of the `getFilteredGroups` function described in the next step.
 However, if you have a lot of groups to whitelist, you can put the group IDs in the client app's profile property bag: `https://{yourOktaDomain}.com/api/v1/apps/:aid`.
 
 This example names the group whitelist `groupwhitelist`, but you can name it anything.
 
 Request Example:
 
-~~~curl
- curl -X POST \
+~~~sh
+curl -X POST \
   https://{yourOktaDomain}.com/api/v1/apps/0oabskvc6442nkvQO0h7 \
   -H 'accept: application/json' \
   -H 'authorization: SSWS ${api_token}' \
@@ -288,16 +288,16 @@ Request Example:
     "status": "ACTIVE",
     "signOnMode": "OPENID_CONNECT",
     "credentials": {
-       "oauthClient": {
+      "oauthClient": {
         "token_endpoint_auth_method": "client_secret_post"
       }
     },
-     "settings": {
+    "settings": {
       "oauthClient": {
         "client_uri": "http://localhost:8080",
         "logo_uri": "http://developer.okta.com/assets/images/logo-new.png",
         "redirect_uris": [
-           "https://example.com/oauth2/callback",
+          "https://example.com/oauth2/callback",
           "myapp://callback"
         ],
         "response_types": [
@@ -312,17 +312,17 @@ Request Example:
         "application_type": "native"
       }
     },
-     "profile": {
-        "groupwhitelist": [
-            "00gbso71miOMjxHRW0h7"
-            ]
+    "profile": {
+      "groupwhitelist": [
+        "00gbso71miOMjxHRW0h7"
+      ]
     }
-  }
+  }'
 ~~~
 
- You can add application groups, user groups or both to the group whitelist, specified as an array of IDs. 
+You can add application groups, user groups or both to the group whitelist, specified as an array of IDs. 
 
- To use the group whitelist for every client that gets this claim in a token, put the attribute name of the whitelist in the first parameter of the `getFilteredGroups` function described in the next step. 
+To use the group whitelist for every client that gets this claim in a token, put the attribute name of the whitelist in the first parameter of the `getFilteredGroups` function described in the next step. 
 
 #### Step Three: Configure a Custom Claim for Your Groups (Custom Authorization Server)
 
@@ -336,47 +336,47 @@ Add a custom claim for the ID token or access token on a Custom Authorization Se
 
 The maximum number of groups specified must be less than 100.
 
- In the following two examples for creating the groups claim, the `name` for the claim is `groups`, but you can name it whatever you wish.
+In the following two examples for creating the groups claim, the `name` for the claim is `groups`, but you can name it whatever you wish.
 
 ##### Request Example for Access Token
 
-~~~curl
- curl -X POST \
+~~~sh
+curl -X POST \
   https://{yourOktaDomain}.com/api/v1/authorizationServers/ausain6z9zIedDCxB0h7/claims \
   -H 'accept: application/json' \
   -H 'authorization: SSWS ${api_token}' \
   -H 'cache-control: no-cache' \
   -H 'content-type: application/json' \
   -d '{
-	"name": "groups",
-	"status": "ACTIVE",
-	"claimType": "RESOURCE",
-	"valueType": "EXPRESSION",
-	"value": "\"getFilteredGroups(app.profile.groupwhitelist, \"group.name\", 40)\"",
-	"conditions": {
-        "scopes": []
-    }
+   "name": "groups",
+   "status": "ACTIVE",
+   "claimType": "RESOURCE",
+   "valueType": "EXPRESSION",
+   "value": "\"getFilteredGroups(app.profile.groupwhitelist, \"group.name\", 40)\"",
+   "conditions": {
+     "scopes": []
+   }
  }'
- ~~~
+~~~
 
 ##### Request Example for ID Token
 
-~~~curl
- curl -X POST \
+~~~sh
+curl -X POST \
   https://{yourOktaDomain}.com/api/v1/authorizationServers/ausain6z9zIedDCxB0h7/claims \
   -H 'accept: application/json' \
   -H 'authorization: SSWS ${api_token}' \
   -H 'cache-control: no-cache' \
   -H 'content-type: application/json' \
   -d '{
-	"name": "groups",
-	"status": "ACTIVE",
-	"claimType": "IDENTITY",
-	"valueType": "EXPRESSION",
-	"value": "\"getFilteredGroups(app.profile.groupwhitelist, \"group.name\", 40)\"",
-	"conditions": {
-        "scopes": []
-    }
+   "name": "groups",
+   "status": "ACTIVE",
+   "claimType": "IDENTITY",
+   "valueType": "EXPRESSION",
+   "value": "\"getFilteredGroups(app.profile.groupwhitelist, \"group.name\", 40)\"",
+   "conditions": {
+     "scopes": []
+   }
  }'
  ~~~
 
@@ -392,7 +392,7 @@ To obtain a token with the configured groups claim, send a request for an ID tok
 
 Request Example for Custom Authorization Server:
 
- ~~~curl
+~~~sh
  curl -X GET \
   'https://${yourOktaDomain}.com/oauth2/ausain6z9zIedDCxB0h7/v1/authorize?client_id=0oabskvc6442nkvQO0h7
     &response_type=id_token
@@ -416,8 +416,8 @@ eyJraWQiOiJ2U2N0OVJ0R2g5ang5QVFfT05aNEFhM19lZ3YwVlktelJKWTZvbmE5R3o4IiwiYWxnIjoi
 
 Example Payload Data for an ID Token:
 
- ~~~JSON
- {
+~~~JSON
+{
   "sub": "00u5t60iloOHN9pBi0h7",
   "ver": 1,
   "iss": "https://{yourOktaDomain}.com/oauth2/ausain6z9zIedDCxB0h7",
@@ -449,12 +449,12 @@ Example Payload Data for an Access Token:
   "uid": "00u5t60iloOHN9pBi0h7",
   "scp": [
     "openid"
-  ]
+  ],
   "groups": [
     "WestCoastDivision"
   ]
 }
- ~~~
+~~~
 
 The ID token or access token contains the group WestCoastDivision so the audience (`aud`) has access to the group information about the user.
 
