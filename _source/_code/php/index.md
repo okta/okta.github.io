@@ -39,5 +39,5 @@ Once your users can sign in to your app, use Okta's Management API and SDKs to c
 
 <ul class='code-list'>
   <li><span class='fa fa-github'></span> <a href='https://github.com/okta/okta-jwt-verifier-php'>Okta JWT Verifier for PHP</a></li>
-  <li><span class='code-icon info-16-gray'></span> <a href='simplesamlphp'>SimpleSAMLphp</a></li>
+  <li><span class='code-icon info-16-gray'></span> <a href='simplesamlphp.html'>SimpleSAMLphp</a></li>
 </ul>

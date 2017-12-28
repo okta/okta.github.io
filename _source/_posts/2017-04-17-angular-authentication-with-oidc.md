@@ -775,7 +775,7 @@ import { OAuthService, JwksValidationHandler } from 'angular-oauth2-oidc';
     this.oauthService.redirectUri = window.location.origin;
     this.oauthService.clientId = '{client-id}';
     this.oauthService.scope = 'openid profile email';
-    this.oauthService.issuer = 'https://{yourOktaDomain}.com/oauth2/default';
+    this.oauthService.issuer = 'https://{yourOktaDomain}.com';
     this.oauthService.tokenValidationHandler = new JwksValidationHandler();
 
     // Load Discovery Document and then try to login the user
@@ -955,8 +955,7 @@ export class OktaAuthWrapper {
 
   constructor(private oauthService: OAuthService) {
     this.authClient = new OktaAuth({
-      url: 'https://{yourOktaDomain}.com',
-      issuer: 'default'
+      url: this.oauthService.issuer
     });
   }
 
@@ -1101,10 +1100,9 @@ You can find a completed version of the application created in this blog post [o
 
 **Changelog:**
 
-* Nov 30, 2017: Updated to use Angular CLI 1.5.5 and angular-oauth2-oidc 3.0.1. See the code changes in the [example app on GitHub](https://github.com/oktadeveloper/okta-angular-openid-connect-example/pull/3/files). Changes to this article can be viewed [in this pull request](https://github.com/okta/okta.github.io/pull/1517).
-* Sep 28, 2017: Updated "create an OIDC app" instructions for the [Okta Developer Console](/blog/2017/09/25/all-new-developer-console).
 * Aug 31, 2017: Updated to use Angular CLI 1.3.2 and angular-oauth2-oidc 2.0.12. See the code changes in the [example app on GitHub](https://github.com/oktadeveloper/okta-angular-openid-connect-example/pull/2/files).
-
+* Sep 28, 2017: Updated "create an OIDC app" instructions for the [Okta Developer Console](/blog/2017/09/25/all-new-developer-console).
+* Nov 30, 2017: Updated to use Angular CLI 1.5.5 and angular-oauth2-oidc 3.0.1. See the code changes in the [example app on GitHub](https://github.com/oktadeveloper/okta-angular-openid-connect-example/pull/3/files). Changes to this article can be viewed [in this pull request](https://github.com/okta/okta.github.io/pull/1517).
 
 
 

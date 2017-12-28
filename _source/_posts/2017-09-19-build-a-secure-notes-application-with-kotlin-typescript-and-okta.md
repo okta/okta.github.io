@@ -476,7 +476,7 @@ export class OktaAuthService {
     clientId: '{client-id}',
     redirectUri: 'http://localhost:4200',
     authParams: {
-      issuer: 'default',
+      issuer: 'https://{yourOktaDomain}.com/oauth2/default',
       responseType: ['id_token', 'token'],
       scopes: ['openid', 'email', 'profile']
     }

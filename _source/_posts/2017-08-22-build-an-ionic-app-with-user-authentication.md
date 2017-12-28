@@ -125,7 +125,7 @@ Install `angular-oauth2-oidc` and the Okta Auth SDK using npm.
 npm install angular-oauth2-oidc@1.0.20 @okta/okta-auth-js --save
 ```
 
-In `src/pages/login/login.ts`, add the basic structure of the `LoginPage` class and a constructor that configures your OIDC settings with the `OAuthService` from angular-oauth2-oidc. You will need to replace `{clientId}` with the Client ID from your Okta OIDC settings and `{yourOktaDomain}` with your account's correct URI.
+In `src/pages/login/login.ts`, add the basic structure of the `LoginPage` class and a constructor that configures your OIDC settings with the `OAuthService` from angular-oauth2-oidc. You will need to replace “[client-id]” with the Client ID from your Okta OIDC settings and “[dev-id]” with your account's correct URI.
 
 ```typescript
 import { Component, ViewChild } from '@angular/core';
@@ -145,9 +145,9 @@ export class LoginPage {
 
   constructor(private navCtrl: NavController, private oauthService: OAuthService) {
     oauthService.redirectUri = window.location.origin;
-    oauthService.clientId = '{clientId}';
+    oauthService.clientId = '[client-id]';
     oauthService.scope = 'openid profile email';
-    oauthService.issuer = 'https://{yourOktaDomain}.com/oauth2/default';
+    oauthService.issuer = 'https://dev-[dev-id].oktapreview.com/oauth2/default';
   }
 
   ionViewDidLoad(): void {

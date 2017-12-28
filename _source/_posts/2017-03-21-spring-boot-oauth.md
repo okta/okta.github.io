@@ -150,8 +150,8 @@ In a [future tutorial](/blog/2017/09/19/build-a-secure-notes-application-with-ko
 
 **Changelog:**
 
-* Oct 20, 2017: Added missing `scope: openid profile email` to `application.yaml`. 
 * Oct 11, 2017: Updated instructions for the [Okta Developer Console](/blog/2017/09/25/all-new-developer-console).
+* Oct 20, 2017: Added missing `scope: openid profile email` to `application.yaml`. 
 
 
 

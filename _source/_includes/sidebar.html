@@ -11,7 +11,7 @@
             {% for guide in guides %}{% unless guide.id contains "auth-overview" %}{% continue %}{% endunless %}
               {% if guide.id contains "/index" %}{% continue %}{% endif %}
                 <li{% if guide.title == page.title %} class="is-active"{% endif %}>
-                  <a href="{{ guide.id }}">{{ guide.title }}</a>
+                  <a href="{{ guide.id }}.html">{{ guide.title }}</a>
                 </li>
             {% endfor %}
           </ul>
@@ -24,7 +24,7 @@
             {% for guide in guides %}{% unless guide.id contains "implementing-authentication" %}{% continue %}{% endunless %}
               {% if guide.id contains "/index" %}{% continue %}{% endif %}
                 <li{% if guide.title == page.title %} class="is-active"{% endif %}>
-                  <a href="{{ guide.id }}">{{ guide.title }}</a>
+                  <a href="{{ guide.id }}.html">{{ guide.title }}</a>
                 </li>
             {% endfor %}
           </ul>
@@ -37,7 +37,7 @@
           {% for guide in guides %}{% unless guide.id contains "social-login" %}{% continue %}{% endunless %}
             {% if guide.id contains "/index" %}{% continue %}{% endif %}
               <li{% if guide.title == page.title %} class="is-active"{% endif %}>
-                <a href="{{ guide.id }}">{{ guide.title }}</a>
+                <a href="{{ guide.id }}.html">{{ guide.title }}</a>
               </li>
           {% endfor %}
         </ul>
@@ -50,7 +50,7 @@
           {% for guide in guides %}{% unless guide.id contains "saml-login" %}{% continue %}{% endunless %}
             {% if guide.id contains "/index" %}{% continue %}{% endif %}
               <li{% if guide.title == page.title %} class="is-active"{% endif %}>
-                <a href="{{ guide.id }}">{{ guide.title }}</a>
+                <a href="{{ guide.id }}.html">{{ guide.title }}</a>
               </li>
           {% endfor %}
         </ul>
@@ -63,7 +63,7 @@
           {% for guide in guides %}{% unless guide.id contains "tokens" %}{% continue %}{% endunless %}
             {% if guide.id contains "/index" %}{% continue %}{% endif %}
               <li{% if guide.title == page.title %} class="is-active"{% endif %}>
-                <a href="{{ guide.id }}">{{ guide.title }}</a>
+                <a href="{{ guide.id }}.html">{{ guide.title }}</a>
               </li>
           {% endfor %}
         </ul>
@@ -77,7 +77,7 @@
           {% for guide in guides %}{% unless guide.id contains "custom-login" %}{% continue %}{% endunless %}
             {% if guide.id contains "/index" %}{% continue %}{% endif %}
               <li{% if guide.title == page.title %} class="is-active"{% endif %}>
-                <a href="{{ guide.id }}">{{ guide.title }}</a>
+                <a href="{{ guide.id }}.html">{{ guide.title }}</a>
               </li>
           {% endfor %}
         </ul>
@@ -96,21 +96,21 @@
     <h3 class="Sidebar-title">Reference</h3>
     <ul class="Sidebar-nav">
       <li{% if page.title contains '/getting_started' %} class="is-active"{% endif %}>
-        <a href="/docs/api/getting_started/api_test_client">Getting Started</a>{% if page.id contains "docs/api/getting_started" %}
+        <a href="/docs/api/getting_started/api_test_client.html">Getting Started</a>{% if page.id contains "docs/api/getting_started" %}
         <ul>{% assign docs = site.docs | sort: 'weight' %}{% for doc in docs %}{% unless doc.id contains "docs/api/getting_started" %}{% continue %}{% endunless %}{% if doc.id contains "/index" %}{% continue %}{% endif %}
           <li{% if doc.title == page.title%} class="is-active"{% endif %}>
-            <a href="{{ doc.id }}">{{ doc.title }}</a>
+            <a href="{{ doc.id }}.html">{{ doc.title }}</a>
           </li>{% endfor %}
         </ul>{% endif %}
       </li>{% assign auth_references = "/docs/api/resources/authn,/docs/api/resources/oauth2,/docs/api/resources/oidc,/docs/api/resources/social_authentication,/docs/api/resources/sessions" | split: "," %}{% assign api_references = "/docs/api/resources/apps,/docs/api/resources/events,/docs/api/resources/oauth-clients, /docs/api/resources/factor_admin,/docs/api/resources/factors,/docs/api/resources/groups,/docs/api/resources/idps,/docs/api/resources/policy,/docs/api/resources/roles,/docs/api/resources/schemas,/docs/api/resources/system_log,/docs/api/resources/templates,/docs/api/resources/tokens,/docs/api/resources/users,/docs/api/resources/zones" | split: "," %}
       <li>
-        <a href="/docs/api/resources/authn">Authentication Reference</a>{% if page.id contains "docs/api/resources" %}
+        <a href="/docs/api/resources/authn.html">Authentication Reference</a>{% if page.id contains "docs/api/resources" %}
         <ul id="Sidebar_References" class="Sidebar-hide">{% assign docs = site.docs %}{% assign docids = auth_references %}{% for docid in docids %}{% for doc in docs %}{% unless doc.id == docid %}{% continue %}{% endunless %}
           <li{% if doc.title == page.title%} class="is-active"{% endif %}><a href="{{ doc.url }}">{{ doc.title }}</a></li>{% endfor %}{% endfor %}
         </ul>{% endif %}
       </li>
       <li>
-        <a href="/docs/api/resources/apps">API Reference</a>{% if page.id contains "docs/api/resources" %}
+        <a href="/docs/api/resources/apps.html">API Reference</a>{% if page.id contains "docs/api/resources" %}
         <ul id="Sidebar_Resources" class="Sidebar-hide">{% assign docs = site.docs %}{% assign docids = api_references %}{% for docid in docids %}{% for doc in docs %}{% if doc.beta %}{% continue %}{% endif %}{% unless doc.id == docid %}{% continue %}{% endunless %}
           <li{% if doc.title == page.title%} class="is-active"{% endif %}><a href="{{ doc.url }}">{{ doc.title }}</a></li>{% endfor %}{% endfor %}
         </ul>{% endif %}

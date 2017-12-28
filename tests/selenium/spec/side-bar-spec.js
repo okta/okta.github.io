@@ -18,12 +18,12 @@ describe('sidebar navigation spec', () => {
   it('contains sub-links on reference side navigation', () => {
     // Sub-links are shown when the user clicks on the main link on the side bar
     sideBarPage.clickAuthenticationReferenceLink();
-    expect(sideBarPage.getCurrentURL()).toBe('/docs/api/resources/authn');
+    expect(sideBarPage.getCurrentURL()).toBe('/docs/api/resources/authn.html');
     expect(sideBarPage.authenticationReferenceHasLinks()).toBe(true);
     expect(sideBarPage.APIReferenceHasLinks()).toBe(false);
 
     sideBarPage.clickAPIReferenceLink();
-    expect(sideBarPage.getCurrentURL()).toBe('/docs/api/resources/apps');
+    expect(sideBarPage.getCurrentURL()).toBe('/docs/api/resources/apps.html');
     expect(sideBarPage.authenticationReferenceHasLinks()).toBe(false);
     expect(sideBarPage.APIReferenceHasLinks()).toBe(true);
   });

@@ -127,11 +127,10 @@ export default class LoginPage extends React.Component{
     super();
     this.state = {user:null};
     this.widget = new OktaSignIn({
-      baseUrl: 'https://{yourOktaDomain}.com',
+      baseUrl: 'https://{oktaOrgUrl}',
       clientId: '{clientId}',
       redirectUri: 'http://localhost:3000',
       authParams: {
-        issuer: 'default'
         responseType: 'id_token'
       }
     });

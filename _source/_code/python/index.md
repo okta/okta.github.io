@@ -38,5 +38,5 @@ Once your users can sign in to your app, use Okta's Management API and SDKs to c
 ## More Resources
 
 <ul class='code-list'>
-  <li><span class='code-icon info-16-gray'></span> <a href='pysaml2'>PySAML2</a></li>
+  <li><span class='code-icon info-16-gray'></span> <a href='pysaml2.html'>PySAML2</a></li>
 </ul>

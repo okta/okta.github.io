@@ -458,7 +458,7 @@ You’ve just created an Angular app that talks to a Spring Boot API using cross
 
 To learn more about Angular, Spring Boot, or Okta, check out the following resources:
 
-* [Angular Authentication with OpenID Connect and Okta in 20 Minutes](/blog/2017/04/17/angular-authentication-with-oidc)
+* [Angular with OpenID Connect](/blog/2017/04/17/angular-authentication-with-oidc)
 * [Get Started with Spring Boot, OAuth 2.0, and Okta](/blog/2017/03/21/spring-boot-oauth)
 * [Getting Started with Spring Boot by Josh Long](https://youtu.be/sbPSjI4tt10) (SF JUG 2015)
 * [Angular Best Practices by Stephen Fluin](https://youtu.be/hHNUohOPCCo) (ng-conf 2017)

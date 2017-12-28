@@ -46,7 +46,7 @@ npm install @okta/okta-react react-router-dom --save
 ```
 
 ## Create a Custom Login Form
-If the [Okta Sign-In Widget](/code/javascript/okta_sign-in_widget) does not fit your needs, [Auth-JS](/code/javascript/okta_auth_sdk) provides lower-level access to User Lifecycle operations, MFA, and more. For this example, we'll create a simple username and password form without MFA.
+If the [Okta Sign-In Widget](/code/javascript/okta_sign-in_widget.html) does not fit your needs, [Auth-JS](/code/javascript/okta_auth_sdk.html) provides lower-level access to User Lifecycle operations, MFA, and more. For this example, we'll create a simple username and password form without MFA.
 
 Create a `src/LoginForm.js` file:
 

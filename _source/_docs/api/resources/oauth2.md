@@ -84,7 +84,7 @@ This is a starting point for OAuth 2.0 flows such as implicit and authorization 
       This value provides a secure way for a single-page application to perform a sign-in flow
       in a popup window or an iFrame and receive the ID token and/or access token back in the parent page without leaving the context of that page.
       The data model for the [postMessage](https://developer.mozilla.org/en-US/docs/Web/API/Window/postMessage) call is in the next section.
-    * The `Referrer-Policy` header is automatically included in the request for `fragment` or `query`, and is set to `Referrer-Policy: no-referrer`. However, a browser is not obligated to respect the `Referrer-Policy` header from a redirect. If the `response_mode` is `query`, the location specified in `redirect_uri` must set this header to prevent leaking authorization codes.
+    * The `Referrer-Policy` header is automatically included in the request for `fragment` or `query`, and is set to `Referrer-Policy: no-referrer`.
  * Okta requires the OAuth 2.0 *state* parameter on all requests to the authorization endpoint in order to prevent cross-site request forgery (CSRF).
     The OAuth 2.0 specification [requires](https://tools.ietf.org/html/rfc6749#section-10.12) that clients protect their redirect URIs against CSRF by sending a value in the authorize request which binds the request to the user-agent&#8217;s authenticated state.
     Using the *state* parameter is also a countermeasure to several other known attacks as outlined in [OAuth 2.0 Threat Model and Security Considerations](https://tools.ietf.org/html/rfc6819).
@@ -331,7 +331,7 @@ curl -X POST \
   -H "Accept: application/json" \
   -H "Cache-Control: no-cache" \
   -H "Content-Type: application/x-www-form-urlencoded" \
-  -d "grant_type=password&username=dolores.abernathy%40westworld.com&
+  -d "grant_type=password&username=dolores.abernathy%40${org}.com&
       password=<password>&scope=openid&client_id=<client_id>
       & client_secret=<client_secret>"
 ~~~
@@ -611,9 +611,9 @@ Content-Type: application/json;charset=UTF-8
 
 {% api_operation get /oauth2/*:authorizationServerId*/v1/logout %}
 
-This redirect endpoint takes an ID Token and logs the user out of Okta if the subject matches the current Okta session. A `post_logout_redirect_uri` may be specified to redirect the User after the logout has been performed. Otherwise, the user is redirected to the Okta login page.
+The API takes an ID Token and logs the user out of Okta if the subject matches the current Okta session. A `post_logout_redirect_uri` may be specified to redirect the User after the logout has been performed. Otherwise, the user is redirected to the Okta login page.
 
-Note: This is not a server-side API call.
+Use this operation to log out a User by removing their Okta browser session.
 
 ##### Request Parameters
 
@@ -1057,7 +1057,7 @@ curl -X PUT \
     "audiences": [
       "https://api.new-resource.com"
     ]
-}'   "https://{yourOktaDomain}.com/api/v1/authorizationServers/aus1rqsshhhRoat780g7" \
+}'   "https://${org}/api/v1/authorizationServers/aus1rqsshhhRoat780g7" \
 ~~~
 
 ##### Response Example
@@ -1092,7 +1092,7 @@ curl -X DELETE \
   -H 'Accept: application/json' \
   -H 'Content-Type: application/json' \
   -H "Authorization: SSWS ${api_token}" \
-"https://{yourOktaDomain}.com/api/v1/authorizationServers/aus1rqsshhhRoat780g7" \
+"https://${org}/api/v1/authorizationServers/aus1rqsshhhRoat780g7" \
 ~~~
 
 ##### Response Example

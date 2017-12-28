@@ -20,6 +20,6 @@ New to Okta? Our Quick Start Guide will walk you through adding user authenticat
 ## More Resources
 
 <ul class='code-list'>
-    <li><span class='code-icon launch-16'></span> <a href='okta_react_sign-in_widget'>React + Okta Sign-In Widget</a></li>
-    <li><span class='code-icon launch-16'></span> <a href='okta_react'>React + Okta Auth SDK</a></li>
+    <li><span class='code-icon launch-16'></span> <a href='okta_react_sign-in_widget.html'>React + Okta Sign-In Widget</a></li>
+    <li><span class='code-icon launch-16'></span> <a href='okta_react.html'>React + Okta Auth SDK</a></li>
 </ul>
