@@ -166,8 +166,8 @@ curl -X GET \
   "https://{yourOktaDomain}.com/oauth2/v1/authorize?client_id=0oabskvc6442nkvQO0h7
   &response_type=id_token
   &response_mode=fragment&scope=openid%20groups
-  &redirect_uri=https%3A%2F%2FmyOktaDomain.com
-  &state=myState&nonce=${yourNonceValue}" \
+  &redirect_uri=https%3A%2F%2Fexample.com
+  &state=myState&nonce=${yourNonceValue}' \
 ~~~
 
 #### Step Five: Decode the JWT to Verify 
@@ -175,26 +175,26 @@ curl -X GET \
 Decode the JWT in the response to see that the groups are in the token. For example, this JWK contains the `groups` claim in an ID token:
 
  ~~~JSON
- eyJraWQiOiJiS0U0czM3d01tQWZ5ZzQtVFJQcVg1YW50blE1ajBuNFJKcE9nSl9zT0JVIiwiYWxnIjoiUlMyNTYifQ.eyJzdWIiOiIwMHU1dDYwaWxvT0hOOXBCaTBoNyIsInZlciI6MSwiaXNzIjoiaHR0cHM6Ly9teXN0aWNvcnAub2t0YXByZXZpZXcuY29tIiwiYXVkIjoiMG9hYnNrdmM2NDQybmt2UU8waDciLCJpYXQiOjE1MTM4MTIyNzgsImV4cCI6MTUxMzgxNTg3OCwianRpIjoiSUQuNlBKamc0c0VQam8zRWVvR0FSblExUEoyRnFVY2dhajdmWUUwUG5fNW9FWSIsImFtciI6WyJwd2QiXSwiaWRwIjoiMDBvNXQ2MGlsM1V6eUllNXYwaDciLCJub25jZSI6ImIxYmMxYWZlLTA5ZjctNGUyOC1hODQ3LWRjMGIyODZjN2Y0NiIsImF1dGhfdGltZSI6MTUxMzc5NTMyMiwiZ3JvdXBzIjpbIldlc3RDb2FzdERpdmlzaW9uIl19.QLp-xJ5vKYq6I2VAUEL11QL9D70EDBlYQb_GPirEOJeSEGhlFDaNdow7-FBbBUTCkn51LU4lNyKLxTi_Mhj5S3I8KxinuAxjyvUpt7zt3BmkDBpVzHB4oz9D28j2QXElslVnEf42pwn5VPyjRrejo63CkykeXZGAGU9irlZHHM9TqmZKHZzBVk5wN3RkbqfZ3VtMAt4zP7xGHH156IcGnlNe-k_p70Mtun_hblxwo1TFxR3MbIlNfxXSliiyQb8Y3wa7tp9OKZECDStZ4FCt4R1n5MKC1wVI2rc8yM7n6DbPT73lB7j4wtCBlcm_Dd-GqCwof-_eb_s8RkCKGlhdcQ
+eyJraWQiOiJiS0U0czM3d01tQWZ5ZzQtVFJQcVg1YW50blE1ajBuNFJKcE9nSl9zT0JVIiwiYWxnIjoiUlMyNTYifQ.eyJzdWIiOiIwMHU1dDYwaWxvT0hOOXBCaTBoNyIsInZlciI6MSwiaXNzIjoiaHR0cHM6Ly9teXN0aWNvcnAub2t0YXByZXZpZXcuY29tIiwiYXVkIjoiMG9hYnNrdmM2NDQybmt2UU8waDciLCJpYXQiOjE1MTQ0OTc3ODEsImV4cCI6MTUxNDUwMTM4MSwianRpIjoiSUQua0FlMWFzU08wM00walp0Y2ZHZGtpWGwwUW9LRHE5aHl3OE1VUU1UNGwtWSIsImFtciI6WyJwd2QiXSwiaWRwIjoiMDBvNXQ2MGlsM1V6eUllNXYwaDciLCJub25jZSI6IjQ1YzExMDJiLTM0MmUtNGZjMC04ZDllLWM0NTY0MmFlOWFkOCIsImF1dGhfdGltZSI6MTUxNDQ5NjM1MCwiZ3JvdXBzIjpbIldlc3RDb2FzdERpdmlzaW9uIl19.ACKbJZ-lbGtgBAQDhamq7K9WJzHS0WySN0R2LXSkBahWWVMU1W-oTh2xDuHmyQv6HZpk-V4epnk-OItRBQb214NsRG8AJGn5n3QGYp5xPWVXXQ_hFZSro4br6Rdn_U8iZebqs6EXpGhxG7tN9VEgB-SkAynHdy2MbQpikGWcxORSA8vQLQhDRt2VZDobienTA8zLeThzOyAmhPjELxHRHFVT1OOrEoCqUV6wlk8LfhATRlxZGm6lrlZQbqxV_PDM8u7zN0l9XV01Rh0WHO7zZ_Oq0PEeQkf-TC9x7Gl_pOuRyRfGEsrqq-ZEL6AZszxotRKQJO1nNahAhfbNESO2mg
 ~~~
 
- Example Payload Data for ID Token:
+Example Payload Data for ID Token:
 
 ~~~JSON
 {
   "sub": "00u5t60iloOHN9pBi0h7",
   "ver": 1,
-  "iss": "https://{yourOktaDomain}.com",
+  "iss": "https://${yourOktaDomain}.com",
   "aud": "0oabskvc6442nkvQO0h7",
-  "iat": 1505323527,
-  "exp": 1505327127,
-  "jti": "ID.T1lKS9a167PIUUl5vxSsAssIUKpr3TRgqbVbi5U_Ono",
+  "iat": 1514497781,
+  "exp": 1514501381,
+  "jti": "ID.kAe1asSO03M0jZtcfGdkiXl0QoKDq9hyw8MUQMT4l-Y",
   "amr": [
     "pwd"
   ],
   "idp": "00o5t60il3UzyIe5v0h7",
   "nonce": "${yourNonceValue}",
-  "auth_time": 1513795322,
+  "auth_time": 1514496350,
   "groups": [
     "WestCoastDivision"
   ]
@@ -394,13 +394,13 @@ Request Example for Custom Authorization Server:
 
 ~~~sh
  curl -X GET \
-  "https://${yourOktaDomain}.com/oauth2/ausain6z9zIedDCxB0h7/v1/authorize?client_id=0oabskvc6442nkvQO0h7
-  &response_type=id_token
-  &response_mode=fragment
-  &scope=groups%20openid
-  &redirect_uri=https%3A%2F%2FmyOktaDomain.com
-  &state=myState&nonce=${myNonceValue}" \
-~~~
+  'https://${yourOktaDomain}.com/oauth2/ausain6z9zIedDCxB0h7/v1/authorize?client_id=0oabskvc6442nkvQO0h7
+    &response_type=id_token
+    &response_mode=fragment
+    &scope=groups%20openid
+    &redirect_uri=https%3A%2F%2Fexample.com
+    &state=myState&nonce=${myNonceValue}' \
+ ~~~
 
 >Note:
 * In this example, the claim was configured to work with all scopes. If you specify only certain scopes to return the claim, you'll need to specify one of them in the request.
@@ -411,7 +411,7 @@ Request Example for Custom Authorization Server:
 Decode the JWT in the response to see that the groups are in the token. For example, this JWK contains the group claim:
 
 ~~~JSON
-eyJraWQiOiJ2U2N0OVJ0R2g5ang5QVFfT05aNEFhM19lZ3YwVlktelJKWTZvbmE5R3o4IiwiYWxnIjoiUlMyNTYifQ.eyJzdWIiOiIwMHU1dDYwaWxvT0hOOXBCaTBoNyIsInZlciI6MSwiaXNzIjoiaHR0cHM6Ly9teXN0aWNvcnAub2t0YXByZXZpZXcuY29tL29hdXRoMi9hdXNhaW42ejl6SWVkREN4QjBoNyIsImF1ZCI6IjBvYWJza3ZjNjQ0Mm5rdlFPMGg3IiwiaWF0IjoxNTE0NDAzNzE0LCJleHAiOjE1MTQ0MDczMTQsImp0aSI6IklELkpmYlJNRmFOdmJmX0ppdUp5ckE2MVJ3YVI4NXlzYWsxZWp4N25JV1RRb0UiLCJhbXIiOlsicHdkIl0sImlkcCI6IjAwbzV0NjBpbDNVenlJZTV2MGg3Iiwibm9uY2UiOiJhMzA4ZTQ2OS1kYjljLTQ4YzItYjdhMy01ZTc0Y2ExMTI1YjIiLCJhdXRoX3RpbWUiOjE1MTQ0MDMwMTAsIm15Z3JvdXBXaGl0ZWxpc3QiOlsiV2VzdENvYXN0RGl2aXNpb24iXX0.D0ZQYUfWgTzg58cIRMGzCXFjwtTAse0h1MDzMhq4pStoSkqcf-9heiywxLt1rFmrI_IXXn8idi3zeYcOIIbaPwGgOB13DmNBIQcqAmIWiU8Ytk2IzizUH8qqAreCO6cZkNNck164UsRFSyrd7gGf7MMhzvHEE7Z_EEjKdjh8_-_M-eUBdBeFYpqL1MkU02Ib0M7rWJLu8E6jVf8zpRvcIACY-Ne1XN7o6v3NAnM6tLS2iPmpDTJoSuCwM0E5IDSwddTG0R0GUF0zi2c7gz3P21oU0vNJ1Vnq76tZEdRtMsB9wV9GVwuaLFjVibmCvOExyKbduegA9aM0Afn0erq2EA
+eyJraWQiOiJ2U2N0OVJ0R2g5ang5QVFfT05aNEFhM19lZ3YwVlktelJKWTZvbmE5R3o4IiwiYWxnIjoiUlMyNTYifQ.eyJzdWIiOiIwMHU1dDYwaWxvT0hOOXBCaTBoNyIsInZlciI6MSwiaXNzIjoiaHR0cHM6Ly9teXN0aWNvcnAub2t0YXByZXZpZXcuY29tL29hdXRoMi9hdXNhaW42ejl6SWVkREN4QjBoNyIsImF1ZCI6IjBvYWJza3ZjNjQ0Mm5rdlFPMGg3IiwiaWF0IjoxNTE0NDk3MzQ2LCJleHAiOjE1MTQ1MDA5NDYsImp0aSI6IklELlo1RkhPY1BhUUI3Q3ExeXhkRElIRzhieDd0Y3gxVGxYcFdvZTY4cHpGSDgiLCJhbXIiOlsicHdkIl0sImlkcCI6IjAwbzV0NjBpbDNVenlJZTV2MGg3Iiwibm9uY2UiOiIzODBiNTgwMS05MTYzLTRjNGEtOWMyMS1kNjBhMmEzMzJhNzciLCJhdXRoX3RpbWUiOjE1MTQ0OTYzNTAsIm15Z3JvdXBXaGl0ZWxpc3QiOlsiV2VzdENvYXN0RGl2aXNpb24iXX0.X4_rs_bgmWW5cX6p-fur_EN4-Uf2hz3jZZVUgdBRUX0x64O7wbmuPXGicjfLIMH6HRx7bETPjALNoSjvUrFI1IEHBMVROZQGvAYtB5f5ge6ZvZVNk0B8Coz6h3Y9vLmZGwxOFHR0_bbQQC2j01wKKeFPjznfMxtEuBLkD2DXuF7WkHZSmMG5dp7L9LUpvwfCQ2fv1SYRQ_pRVGIxZK5jh9O2yip4LMANbayDkF0Ud8lbq9CAv3Zz4tG77Cwou87yphnHlPgHDrCRRiEbCoe6Q1l8UIfMC3kfaT2HoyJb6jvA91h89jgRbIvUEfasrLoSwUJQv-sYz302QiQdF8WZAQ
 ~~~
 
 Example Payload Data for an ID Token:
@@ -422,15 +422,15 @@ Example Payload Data for an ID Token:
   "ver": 1,
   "iss": "https://{yourOktaDomain}.com/oauth2/ausain6z9zIedDCxB0h7",
   "aud": "0oabskvc6442nkvQO0h7",
-  "iat": 1514403714,
-  "exp": 1514407314,
-  "jti": "ID.JfbRMFaNvbf_JiuJyrA61RwaR85ysak1ejx7nIWTQoE",
+  "iat": 1514497346,
+  "exp": 1514500946,
+  "jti": "ID.Z5FHOcPaQB7Cq1yxdDIHG8bx7tcx1TlXpWoe68pzFH8",
   "amr": [
     "pwd"
   ],
   "idp": "00o5t60il3UzyIe5v0h7",
   "nonce": "${myNonceValue}",
-  "auth_time": 1514403010,
+  "auth_time": 1514496350,
   "groups": [
     "WestCoastDivision"
   ]
