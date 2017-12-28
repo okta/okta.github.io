@@ -12,9 +12,11 @@ When you use the Okta API to [obtain an authorization grant for a user](/docs/ap
 
 A common practice is to send one of these tokens in the `Bearer` header of future requests, to authorize the request for that user. Your server must then validate the token to make sure it's authentic and hasn't expired.
 
+> Note: This guide is specific to the .NET environment.  If you need general information, please see [Working With OAuth 2.0 Tokens](/authentication-guide/tokens/).
+
 ## Who should use this guide
 
-You **don't** need to validate tokens manually if:
+You _don't_ need to validate tokens manually if:
 
 * You are using <a href='/quickstart/#/widget/dotnet/aspnet4' data-proofer-ignore>ASP.NET</a> or <a href='/quickstart/#/widget/dotnet/aspnetcore' data-proofer-ignore>ASP.NET Core</a> with the `JwtBearer` or `OpenIdConnect` middleware
 * You want to send tokens to Okta to be validated (this is called [token introspection](/docs/api/resources/oauth2.html#introspection-request))

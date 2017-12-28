@@ -145,7 +145,7 @@ Request
 {:.api .api-request .api-request-example}
 
 ```sh
-POST {base_url}/api/v1/logs?filter=(eventType eq "user.session.start" AND outcome.result eq "FAILURE")
+POST https://{yourOktaDomain}.com/api/v1/logs?filter=(eventType eq "user.session.start" AND outcome.result eq "FAILURE")
 ```
 
 Response
@@ -191,7 +191,7 @@ Request
 {:.api .api-request .api-request-example}
 
 ```sh
-POST {base_url}/api/v1/logs?filter=(eventType eq "user.authentication.sso" AND outcome.result eq "SUCCESS")
+POST https://{yourOktaDomain}.com/api/v1/logs?filter=(eventType eq "user.authentication.sso" AND outcome.result eq "SUCCESS")
 ```
 
 Response

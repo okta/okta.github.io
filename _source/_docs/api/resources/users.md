@@ -1445,11 +1445,12 @@ in the request is deleted.
 ##### Request Parameters
 {:.api .api-request .api-request-params}
 
-| Parameter   | Description                 | Param Type | DataType                                  | Required |
-|:------------|:----------------------------|:-----------|:------------------------------------------|:---------|
-| userId      | ID of user to update        | URL        | String                                    | TRUE     |
-| profile     | Updated profile for user    | Body       |   [Profile Object](#profile-object)         | FALSE    |
-| credentials | Update credentials for user | Body       |   [Credentials Object](#credentials-object) | FALSE    |
+| Parameter   | Description                                                        | Param Type | DataType                                  | Required |
+|:------------|:-------------------------------------------------------------------|:-----------|:------------------------------------------|:---------|
+| userId      | ID of user to update                                               | URL        | String                                    | TRUE     |
+| strict      | If true, validates against minimum age and history password policy | Query      | String                                    | FALSE    |
+| profile     | Updated profile for user                                           | Body       |   [Profile Object](#profile-object)         | FALSE    |
+| credentials | Update credentials for user                                        | Body       |   [Credentials Object](#credentials-object) | FALSE    |
 
 `profile` and `credentials` can be updated independently or together with a single request.
 
@@ -1470,11 +1471,12 @@ Updates a user&#8217;s profile or credentials with partial update semantics
 ##### Request Parameters
 {:.api .api-request .api-request-params}
 
-| Parameter   | Description                 | Param Type | DataType                                  | Required |
-|:------------|:----------------------------|:-----------|:------------------------------------------|:---------|
-| userId      | ID of user to update        | URL        | String                                    | TRUE     |
-| profile     | Updated profile for user    | Body       |   [Profile Object](#profile-object)         | FALSE    |
-| credentials | Update credentials for user | Body       |   [Credentials Object](#credentials-object) | FALSE    |
+| Parameter   | Description                                                        | Param Type | DataType                                  | Required |
+|:------------|:-------------------------------------------------------------------|:-----------|:------------------------------------------|:---------|
+| userId      | ID of user to update                                               | URL        | String                                    | TRUE     |
+| strict      | If true, validates against minimum age and history password policy | Query      | String                                    | FALSE    |
+| profile     | Updated profile for user                                           | Body       |   [Profile Object](#profile-object)         | FALSE    |
+| credentials | Update credentials for user                                        | Body       |   [Credentials Object](#credentials-object) | FALSE    |
 
 `profile` and `credentials` can be updated independently or with a single request.
 
@@ -2596,11 +2598,12 @@ This operation can only be performed on users in `STAGED`, `ACTIVE`, `PASSWORD_E
 ##### Request Parameters
 {:.api .api-request .api-request-params}
 
-Parameter   | Description               | Param Type | DataType                            | Required |
-------------| --------------------------| ---------- | ------------------------------------| -------- |
-id          | `id` of user              | URL        | String                              | TRUE     |
-oldPassword | Current password for user | Body       | [Password Object](#password-object) | TRUE     |
-newPassword | New password for user     | Body       | [Password Object](#password-object) | TRUE     |
+Parameter   | Description                                            | Param Type | DataType                            | Required |
+------------| -------------------------------------------------------| ---------- | ------------------------------------| -------- |
+id          | `id` of user                                           | URL        | String                              | TRUE     |
+strict      | If true, validates against password minimum age policy | Query      | String                              | FALSE    |
+oldPassword | Current password for user                              | Body       | [Password Object](#password-object) | TRUE     |
+newPassword | New password for user                                  | Body       | [Password Object](#password-object) | TRUE     |
 
 ##### Response Parameters
 {:.api .api-response .api-response-params}
