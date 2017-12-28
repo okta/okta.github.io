@@ -55,14 +55,14 @@ Send a request to `https://{yourOktaDomain}.com/api/v1/groups` and collect the I
           ],
           "type": "OKTA_GROUP",
           "profile": {
-           "name": "WestCoastDivision",
-           "description": "Employees West of the Rockies"
+              "name": "WestCoastDivision",
+              "description": "Employees West of the Rockies"
           },
           "_links": {
               "logo": [
                   {
                     "name": "medium",
-                     "href": "https://op1static.oktacdn.com/assets/img/logos/groups/okta-medium.d7fb831bc4e7e1a5d8bd35dfaf405d9e.png",
+                    "href": "https://op1static.oktacdn.com/assets/img/logos/groups/okta-medium.d7fb831bc4e7e1a5d8bd35dfaf405d9e.png",
                      "type": "image/png"
                   },
                   {
@@ -172,7 +172,7 @@ curl -X GET \
 
 #### Step Five: Decode the JWT to Verify 
 
-Decode the JWT in the response to see that the groups are in the token. For example, this JWK contains the group claim:
+Decode the JWT in the response to see that the groups are in the token. For example, this JWK contains the `groups` claim in an ID token:
 
  ~~~JSON
  eyJraWQiOiJiS0U0czM3d01tQWZ5ZzQtVFJQcVg1YW50blE1ajBuNFJKcE9nSl9zT0JVIiwiYWxnIjoiUlMyNTYifQ.eyJzdWIiOiIwMHU1dDYwaWxvT0hOOXBCaTBoNyIsInZlciI6MSwiaXNzIjoiaHR0cHM6Ly9teXN0aWNvcnAub2t0YXByZXZpZXcuY29tIiwiYXVkIjoiMG9hYnNrdmM2NDQybmt2UU8waDciLCJpYXQiOjE1MTM4MTIyNzgsImV4cCI6MTUxMzgxNTg3OCwianRpIjoiSUQuNlBKamc0c0VQam8zRWVvR0FSblExUEoyRnFVY2dhajdmWUUwUG5fNW9FWSIsImFtciI6WyJwd2QiXSwiaWRwIjoiMDBvNXQ2MGlsM1V6eUllNXYwaDciLCJub25jZSI6ImIxYmMxYWZlLTA5ZjctNGUyOC1hODQ3LWRjMGIyODZjN2Y0NiIsImF1dGhfdGltZSI6MTUxMzc5NTMyMiwiZ3JvdXBzIjpbIldlc3RDb2FzdERpdmlzaW9uIl19.QLp-xJ5vKYq6I2VAUEL11QL9D70EDBlYQb_GPirEOJeSEGhlFDaNdow7-FBbBUTCkn51LU4lNyKLxTi_Mhj5S3I8KxinuAxjyvUpt7zt3BmkDBpVzHB4oz9D28j2QXElslVnEf42pwn5VPyjRrejo63CkykeXZGAGU9irlZHHM9TqmZKHZzBVk5wN3RkbqfZ3VtMAt4zP7xGHH156IcGnlNe-k_p70Mtun_hblxwo1TFxR3MbIlNfxXSliiyQb8Y3wa7tp9OKZECDStZ4FCt4R1n5MKC1wVI2rc8yM7n6DbPT73lB7j4wtCBlcm_Dd-GqCwof-_eb_s8RkCKGlhdcQ
@@ -203,7 +203,7 @@ Decode the JWT in the response to see that the groups are in the token. For exam
 
 The ID token contains the group WestCoastDivision so the audience (`aud`) has access to the group information about the user.
 
-For flows other than implicit, post to the token endpoint `https://{yourOktaDomain}.com/oauth2/:authorizationServerId/v1/token` with the user or client you want. Make sure the user is assigned to the app and to one of the groups from your whitelist.
+For flows other than implicit, post to the token endpoint `https://{yourOktaDomain}.com/oauth2/v1/token` with the user or client you want. Make sure the user is assigned to the app and to one of the groups from your whitelist.
 
 If the results aren't as expected, start your troubleshooting by inspecting the System Log to see what went wrong. Also, try requesting only an ID token instead of both and ID token and access token.
 
