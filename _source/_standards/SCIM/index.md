@@ -176,7 +176,7 @@ between the Okta SCIM Client and the cloud app’s proprietary API. The Okta int
 ### Overview
 
 By implementing support for the SCIM standard, an application in the Okta
-Application Network can be notified when a user is created, updated,
+Integration Network can be notified when a user is created, updated,
 or removed from their application in Okta.
 
 If you haven't heard of SCIM before, here is a good summary from the
