@@ -124,13 +124,13 @@ Okta API Products refers to all the resources and tools that Okta makes availabl
 
 * Make the authorization server audience, defined by the claim (`aud`), specific to the API to reduce the risk of inappropriate access token reuse. A single global audience is rarely acceptable. For example: Instead of using `api.company.com` for the audience, a better approach is specifying `api.company.com/product1` and `api.company.com/product2`.
 
-* Define scopes within authorization servers that are granular and specific to the permissions required. A generic `admin` scope is rarely appropriate. A more common pattern is a URN such as `https://company.com/scopes/product1.admin`, or Java-style namespacing such as `com.okta.product1.admin`, which is Google’s approach for their API services.
+* Define scopes within authorization servers that are granular and specific to the permissions required. A generic admin scope is rarely appropriate. Java-style namespacing such as `com.okta.product1.admin` or Google’s URL-based style such as `https://company.com/scopes/product1.admin` are common and scalable approaches.
 
 * Authorization policies and rules are treated as a case or switch statement. Therefore, when a matching rule is found, it is applied and the result is immediately returned. No further rules are executed.
 
     * If a request generates unexpected scopes, it is because of a overly broad rule within the Authorization Server.
 
-    * An OAuth client can be assigned to any number of authorization servers. Doing so provides for a variety of tokens to be generated, each with separate authorization policies, token expiration times, and scopes. The audience claim (`aud`) is important in this case.
+    * An OAuth 2.0 client can be assigned to any number of authorization servers. Doing so provides for a variety of tokens to be generated, each with separate authorization policies, token expiration times, and scopes. The audience claim (`aud`) identifies which token maps to which API Product. 
 
 * OAuth clients and authorization servers can be assigned on a many-to-many basis. This allows a developer to use a single OAuth Client to retrieve access tokens from different authorization servers depending on the use case. The only configuration changes necessary are the endpoints accessed and the scopes requested.
 
@@ -151,8 +151,8 @@ Okta API Products refers to all the resources and tools that Okta makes availabl
 * Access tokens should be used exclusively via an HTTP Authorization header instead of encoded into a payload or URL which may be logged or cached.
 * A `client_secret` is a password and should be treated and protected as such. Therefore, it should not be embedded in mobile applications, frontend Javascript applications, or any other scenario where a malicious user could access it.
 * Avoid using resource owner password grant type (`password`) except in legacy application or transitional scenarios. The authorization code, implicit, or hybrid grant types are recommended in most scenarios.
-* For mobile applications, using the Authorization Code grant type with PKCE is the best choice. Implicit or hybrid grant type is the next best option.
-* For Android or iOS applications, use the AppAuth libraries from the OpenID Foundation.
+* For mobile applications, using the Authorization Code grant type with PKCE is the best choice. The implicit or hybrid grant type is the next best option.
+* For Android or iOS applications, use the AppAuth [iOS](https://openid.github.io/AppAuth-iOS/) or  [Android](https://openid.github.io/AppAuth-Android/) libraries from the OpenID Foundation.
 * When an application successfully validates an access token, cache the result until the expiration time (`exp`). Do this for validation that is either [local](https://developer.okta.com/standards/OAuth/#validating-access-tokens) or via [the introspect endpoint](https://developer.okta.com/docs/api/resources/oauth2.html#introspection-request).
 * When an application retrieves the JWKS (public keys) to validate a token, it should cache the result until a new or unknown key is referenced in a token.
 * Never use an access token granted within OpenID Connect for authorization within your applications. The OpenID Connect access token is signed with an Okta-internal key and cannot be validated by your application. Thus, it could be modified without your knowledge and is not safe.
