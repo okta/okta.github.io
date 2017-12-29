@@ -584,14 +584,14 @@ Individual queries have a timeout of 30 seconds.
 ```json
 {
   "errorCode": "E0000001",
-  "errorSummary": "Api validation failed: 'until': The date format in your query is not recognized. Please enter dates using ISO8601 string format.. 'until': must be a valid date-time, empty, or 'now'. ",
+  "errorSummary": "Api validation failed: 'until': The date format in your query is not recognized. Please enter dates using ISO8601 string format.. 'until': must be a valid date-time or empty.",
   "errorId": "dd4998a1-2267-499b-9e4d-ec821fcc5ca9",
   "errorCauses": [
     {
       "errorSummary": "until: The date format in your query is not recognized. Please enter dates using ISO8601 string format."
     },
     {
-      "errorSummary": "until: must be a valid date-time, empty, or 'now'"
+      "errorSummary": "until: must be a valid date-time or empty."
     }
   ]
 }
