@@ -76,6 +76,9 @@ collections:
     output: true
   quickstarts:
     output: true
+  change-log:
+    output: true
+    permalink: /docs/change-log/
 
 paginate: 10
 paginate_path: "/blog/page/:num"
@@ -104,6 +107,11 @@ defaults:
   -
     scope:
       collection: quickstart-fragments
+    values:
+      sitemap: false
+  -
+    scope:
+      collection: change-log
     values:
       sitemap: false
 
