@@ -2,7 +2,7 @@
 layout: docs_page
 weight: 4
 title: Error Codes
-excerpt: Information about the errors that the Okta API returns.
+excerpt: Understand Okta API errors.
 redirect_from:
     - "/docs/getting_started/error_codes.html"
     - "/docs/api/getting_started/error_codes.html"

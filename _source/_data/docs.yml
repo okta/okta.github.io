@@ -1,9 +1,9 @@
-# -- Okta API Release Notes
-- section: platform-release-notes/platform-release-notes.html
-  slug: Okta API Release Notes
-  title: Okta API Release Notes
+# -- Okta API Products Change Log
+- section: change-log
+  slug: Change Log
+  title: Change Log
   pages:
-    - platform-release-notes
+    - index
 
 # -- APIS
 - section: api/getting_started
