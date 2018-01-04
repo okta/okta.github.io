@@ -1,9 +1,9 @@
 ---
 layout: quickstart_partial
-exampleDescription: ASP.NET 4.x Implicit Example
+exampleDescription: ASP.NET 4.x Web API implicit example
 ---
 
-## Okta ASP.NET 4 Quickstart
+## Okta ASP.NET 4.x Web API Quickstart
 
 ### Create a new Web API project
 

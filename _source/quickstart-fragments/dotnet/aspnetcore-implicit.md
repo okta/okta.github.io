@@ -1,9 +1,9 @@
 ---
 layout: quickstart_partial
-exampleDescription: ASP.NET Core 2.0 Implicit Example
+exampleDescription: ASP.NET Core 2.0 API implicit example
 ---
 
-## Okta ASP.NET Core Quickstart
+## Okta ASP.NET Core Web API Quickstart
 
 ### Create a new project
 

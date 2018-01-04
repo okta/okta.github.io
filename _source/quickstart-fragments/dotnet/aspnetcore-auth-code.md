@@ -1,9 +1,9 @@
 ---
 layout: quickstart_partial
-exampleDescription: ASP.NET Core 2.0 Auth Code Example
+exampleDescription: ASP.NET Core 2.0 MVC authorization code example
 ---
 
-## Okta ASP.NET Core Quickstart
+## Okta ASP.NET Core MVC Quickstart
 
 If you want a full, working example, head over to the [ASP.NET Core MVC example](https://github.com/oktadeveloper/okta-aspnetcore-mvc-example) repository.
 

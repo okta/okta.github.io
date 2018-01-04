@@ -1,9 +1,9 @@
 ---
 layout: quickstart_partial
-exampleDescription: ASP.NET 4.x Auth Code Example
+exampleDescription: ASP.NET 4.x MVC authorization code example
 ---
 
-## Okta ASP.NET MVC 4.x Quickstart
+## Okta ASP.NET 4.x MVC Quickstart
 
 If you want a full, working example, head over to the [ASP.NET MVC example](https://github.com/oktadeveloper/okta-aspnet-mvc-example) repository.
 
