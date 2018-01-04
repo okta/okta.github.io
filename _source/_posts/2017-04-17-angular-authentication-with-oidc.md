@@ -92,7 +92,7 @@ Angular:
 
 ## Run Your Angular Application
 
-The project is configured with [webpack dev server](https://webpack.github.io/docs/webpack-dev-server.html). To start it, make sure you're in the `ng-demo` directory, then run:
+The project is configured with [webpack dev server](https://github.com/webpack/webpack-dev-server). To start it, make sure you're in the `ng-demo` directory, then run:
 
 ```bash
 ng serve
