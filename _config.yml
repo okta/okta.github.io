@@ -76,7 +76,7 @@ collections:
     output: true
   quickstarts:
     output: true
-  change-log-source:
+  change-log:
     output: false
 
 paginate: 10

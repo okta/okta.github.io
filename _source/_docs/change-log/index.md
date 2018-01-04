@@ -8,9 +8,8 @@ excerpt: List of changes to the Okta API and related API Products including bug 
 
 <div>
 
-{% assign sorted = site.change-log-source | sort: 'date' | reverse %}
+{% assign sorted = site.change-log | sort: 'date' | reverse %}
 {% for file in sorted %}
-  {% if file.id contains "/index" %}{% continue %}{% endif %}
-  {{ file.content }}
+{{ file.content | markdownify }}
 {% endfor %}
 </div>
