@@ -106,4 +106,4 @@ Other exceptions include:
 Such features may spend more than one month between preview and production for their GA release.
 * Features exposed in the Okta user interface may be EA or GA without the corresponding API being in the same stage of the lifecycle, or available at all.
 
-As with all changes that affect our customers, changes outside the regular Beta-EA-GA lifecycle are reported in the [Okta API Release Notes](/docs/change-log/index.html).
+As with all changes that affect our customers, changes outside the regular Beta-EA-GA lifecycle are reported in the [Okta API Release Notes](/docs/change-log/).
