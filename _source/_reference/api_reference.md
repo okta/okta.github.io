@@ -1,7 +1,7 @@
 ---
 layout: docs_page
 weight: 3
-title: API Reference
-link: /docs/api/resources/apps.html
-excerpt: Documentation for all available Okta REST API endpoints. Includes sample requests and responses.
+title: Management API
+link: /docs/api/resources/apps
+excerpt: Manage Okta resources such as users, groups, and factors with REST endpoints.
 ---
