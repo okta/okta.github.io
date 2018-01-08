@@ -18,7 +18,7 @@ At a high-level, this flow has the following steps:
 
 For more information on the implicit flow, including why to use it, see [our OAuth 2.0 overview](/authentication-guide/auth-overview/#implicit-flow).
 
-### 1. Setting up your Application
+## 1. Setting up your Application
 
 You set up your OpenID Connect application inside the Okta Developer Console:
 
@@ -26,7 +26,7 @@ You set up your OpenID Connect application inside the Okta Developer Console:
 2. On the Create New Application page, select **SPA**.
 3. Fill-in the Application Settings, then click **Done**.
 
-### 2. Using the Implicit Flow
+## 2. Using the Implicit Flow
 
 Kicking off this flow is very similar to the [authorization code flow](/authentication-guide/implementing-authentication/auth-code.html) except that the `response_type` is `token` and/or `id_token` instead of `code`.
 
@@ -57,11 +57,11 @@ http://localhost:8080/#access_token=eyJhb[...]erw&token_type=Bearer&expires_in=
 
 Your application must now extract the token(s) from the URI and store them.
 
-### 3. Next Steps
+## 3. Next Steps
 
 When your application passes a request with an `access_token`, the resource server will need to validate it. For more on this, see [Validating Access Tokens](/authentication-guide/tokens/validating-access-tokens).
 
-### Examples
+## Examples
 
 The following quickstart guides will show you how to integrate the implicit flow into your front-end application.
 

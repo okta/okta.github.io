@@ -8,6 +8,7 @@ exampleDescription: Spring Implicit Example
 ### Include the dependency
 
 For Apache Maven:
+
 ```xml
 <dependency>
     <groupId>com.okta.spring</groupId>
@@ -17,6 +18,7 @@ For Apache Maven:
 ```
 
 For Gradle:
+
 ```groovy
 compile 'com.okta.spring:okta-spring-boot-starter:{{ site.versions.spring_boot_starter }}'
 ```
@@ -48,7 +50,7 @@ class MessagesRestController {
 }
 ```
 
-### That's it!
+### Conclusion
 
 Okta's Spring Security integration will [parse the JWT access token](/blog/2017/06/21/what-the-heck-is-oauth#oauth-flows) from the HTTP request's `Authorization: Bearer` header value.
 

@@ -20,7 +20,6 @@ When you create an Okta expression, you can reference any attribute that lives o
 ### Okta user profile
 Every user has an Okta user profile.  The Okta user profile is the central source of truth for a user's core attributes.  To reference an Okta user profile attribute, just reference `user` and specify the attribute variable name.
 
-
 Syntax  | Definitions | Examples
 -------- | ---------- | ------------
 `user.$attribute` | `user` reference to the Okta user<br>`$attribute` the attribute variable name | user.firstName<br>user.lastName<br>user.username<br>user.email
@@ -39,7 +38,6 @@ In addition to an Okta user profile, some users have separate IdP user profiles 
 Syntax                | Definitions                                                                                | Examples
 ----------------------|--------------------------------------------------------------------------------------------|------------
 `idpuser.$attribute`  | `idpuser` implicit reference to in-context IdP<br>`$attribute` the attribute variable name | idpuser.firstName
-
 
 > With Universal Directory, there are about 30 attributes in the base Okta profile and any number of custom attributes can be added.  All App user profiles have a username attribute and possibly others depending on the application.   To find a full list of Okta user and App user attributes and their variable names, go to People > Profile Editor.  If you're not yet using Universal Directory, contact your Support or Professional Services team.
 
@@ -85,8 +83,6 @@ Function | Input Parameter Signature | Return Type | Example | Output
 `String.toUpperCase` | (String input) | String | `String.toUpperCase("This")` | THIS
 `String.toLowerCase` | (String input) | String | `String.toLowerCase("ThiS")` | this
 
-
-
 The following {% api_lifecycle deprecated %} functions perform some of the same tasks as the ones in the above table.
 
 Function  | Example | Input | Output
@@ -114,10 +110,9 @@ Function  | Return Type | Example | Output
  |  | `Arrays.isEmpty(NULL)` | true
 `Arrays.toCsvString(array)` | String | `Arrays.toCsvString({"This", "is", " a ", "test"})` | This,is, a ,test
 
-
 ### Conversion Functions
 
-##### Data Conversion Functions
+#### Data Conversion Functions
 
 Function  | Return Type | Example | Input | Output
 -------- | ---------| --------- | -------| --------
@@ -129,7 +124,7 @@ Function  | Return Type | Example | Input | Output
 **Note:**  Convert.toInt(double) rounds the passed numeric value either up or down to the nearest integer. Be sure to consider
 integer type range limitations when converting from a number to an integer with this function.
 
-##### Country Code Conversion Functions
+#### Country Code Conversion Functions
 
 These functions convert between ISO 3166-1 2-character country codes (Alpha 2), 3-character country codes (Alpha 3), numeric country codes, and full ISO country names.
 
@@ -144,7 +139,6 @@ Function  | Return Type | Example  | Output
 
 For more information on these codes, see the [ISO 3166-1 online lookup tool](https://www.iso.org/obp/ui/#search/code/).
 
-
 ### Group Functions
 
 Function  | Return Type | Example | Output
@@ -157,7 +151,7 @@ Function  | Return Type | Example | Output
 `isMemberOfGroupNameRegex` | Boolean | `isMemberOfGroupNameRegex("/.*admin.*")` | **True**, if the user under consideration is a member of any groups with names that contain *admin*; otherwise,  **False**.
 `getFilteredGroups` | Array | `getFilteredGroups({"00gml2xHE3RYRx7cM0g3"}, "group.name", 40)` | Array of groups
 
-##### getFilteredGroups Details
+#### getFilteredGroups Details
 
 `getFilteredGroups` returns all groups contained in a specified list, the whitelist, of which the user is a member. The groups are returned in a format specified by the `group_expression` parameter. You must specify the maximum number of groups to return. The format of this EL function is `getFilteredGroups( whitelist, group_expression, limit)`.
 
@@ -207,7 +201,7 @@ The `whitelist` parameter must evaluate to a list of group ids that is returned 
 >Both input parameters are optional for the Time.now function. The time zone ID supports both new and old style formats, listed below. The third example for
 the Time.now function shows how to specify the military time format.
 
-##### Time Zone IDs
+#### Time Zone IDs
 
 The following old style IDs are supported: GMT, WET, CET, MET, ECT, EET, MIT, HST, AST, PST, MST, PNT, CST, EST, IET, PRT, CNT, AGT, BET, ART, CAT, EAT, NET, PLT, IST, BST, VST, CTT, JST, ACT, AET, SST, NST.
 
@@ -255,10 +249,8 @@ Ternary operator example:<br>If group code is 123, assign value of Sales, else a
 
 You can specify IF...THEN...ELSE statements with the Okta EL. The primary use of these expressions is profile mappings and group rules. Group rules do not usually specificy an ELSE component.
 
-
 The format for conditional expressions is
 <p><code>[Condition] ? [Value if TRUE] : [Value if FALSE]</code></p>
-
 
 <br>There are several rules for specifying the condition.
 
@@ -295,8 +287,7 @@ city | String
 salary | Int
 isContractor | Boolean
 
-
-##### Samples Using Profile Mapping
+#### Samples Using Profile Mapping
 
 The following samples are valid conditional expressions that apply to profile mapping. The attribute *courtesyTitle* is from another system being mapped to Okta.
 
@@ -309,10 +300,9 @@ The following samples are valid conditional expressions that apply to profile ma
 <p>If either email2 or email3 exists, make additionalEmail true; otherwise, make it false.<br>
 <code>String.len(email2) > 0 OR String.len(email3) > 0 ? True : False</code></p>
 
-##### Samples Using Group Rules
+#### Samples Using Group Rules
 
 The following samples are valid conditional expressions. The actions in these cases are group assignments.
-
 
 IF (Implicit) | Condition | Assign to this Group Name if Condition is TRUE
 ------------- | --------- | ----------------------------------------------
@@ -321,7 +311,6 @@ IF | user.city=="San Francisco" | sfo
 IF | user.salary >=1000000 | expensiveEmployee
 IF | !user.isContractor | fullTimeEmployees
 IF | user.salary > 1000000 AND !user.isContractor | expensiveFullTimeEmployees
-
 
 ## Popular Expressions
 

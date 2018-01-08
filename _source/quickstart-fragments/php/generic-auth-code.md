@@ -23,6 +23,7 @@ $query = http_build_query([
 
 header('Location: ' . 'https://{yourOktaDomain}.com/oauth2/default/v1/authorize?'.$query);
 ```
+
 > The `nonce` should be a generated string such as UUID, and the `state` can be any string representing state of the
 application.
 

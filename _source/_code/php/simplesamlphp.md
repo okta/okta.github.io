@@ -45,23 +45,13 @@ To set up Okta to connect to your application, follow the guide to
 [setting up a SAML application in Okta](/standards/SAML/setting_up_a_saml_application_in_okta.html).
 As you follow the instructions, there are two steps where you will do things differently:
 
-* *In step \#6*: Use ***SimpleSAMLphp Example*** instead "Example SAML application"
-* *In step \#7*: Instead of entering the URL: `http://example.com/saml/sso/example-okta-com`
+*In step \#6*: Use ***SimpleSAMLphp Example*** instead "Example SAML application"
+*In step \#7*: Instead of entering the URL: `http://example.com/saml/sso/example-okta-com`
 
-  Use the following URLs:
-
-  * In the "Single sign on URL" field, use:
-
-    `http://localhost/simplesamlphp/www/module.php/saml/sp/saml2-acs.php/example-okta-com`
-
-  * In the "Audience URI (SP Entity ID)" field, use instead:
-
-     `http://localhost/simplesamlphp/www/module.php/saml/sp/metadata.php/example-okta-com`
-
-  * For the "Relay State" field, use:
-
-    `http://localhost/okta-simplesamlphp-example/?saml_sso=example-okta-com`
-
+Use the following URLs:
+* In the "Single sign on URL" field, use: `http://localhost/simplesamlphp/www/module.php/saml/sp/saml2-acs.php/example-okta-com`
+* In the "Audience URI (SP Entity ID)" field, use instead: `http://localhost/simplesamlphp/www/module.php/saml/sp/metadata.php/example-okta-com`
+* For the "Relay State" field, use: `http://localhost/okta-simplesamlphp-example/?saml_sso=example-okta-com`
 
 ## Configuring SimpleSAMLphp to work with Okta
 
@@ -98,8 +88,7 @@ PHP, reconfiguring Apache, and creating some symbolic links.
 
 1. Install SimpleSAMLphp to the `~/simplesamlphp` directory.
 
-   When you follow the directions for installing SimpleSAMLphp,
-   install it to a directory named `simplesamlphp` in your home directory.
+   When you follow the directions for installing SimpleSAMLphp, install it to a directory named `simplesamlphp` in your home directory.
 
    ~~~
    $ cd ~
@@ -116,7 +105,7 @@ PHP, reconfiguring Apache, and creating some symbolic links.
    $ brew install php56-mcrypt
    ~~~
 
-2. Edit `httpd.conf` to use the new version of PHP that you installed with homebrew.
+3. Edit `httpd.conf` to use the new version of PHP that you installed with homebrew.
 
    ~~~
    $ sudo $EDITOR /etc/apache2/httpd.conf
@@ -134,13 +123,13 @@ PHP, reconfiguring Apache, and creating some symbolic links.
    LoadModule php5_module /usr/local/Cellar/php56/5.6.7/libexec/apache2/libphp5.so
    ~~~
 
-2. Find the `DocumentRoot` for your setup of Apache.
+4. Find the `DocumentRoot` for your setup of Apache.
 
    ~~~
    $ grep ^DocumentRoot /etc/apache2/httpd.conf
    ~~~
 
-3. `cd` to the `DocumentRoot` directory.
+5. `cd` to the `DocumentRoot` directory.
 
    Assuming that the command above returned `DocumentRoot "/Library/WebServer/Documents"`,
    then `cd` to that directory
@@ -149,7 +138,7 @@ PHP, reconfiguring Apache, and creating some symbolic links.
    $ cd /Library/WebServer/Documents
    ~~~
 
-4. Add symbolic links from `DocumentRoot` to your `simplesamlphp` and `okta-simplesamlphp-example` directories.
+6. Add symbolic links from `DocumentRoot` to your `simplesamlphp` and `okta-simplesamlphp-example` directories.
 
    ~~~
    $ sudo ln -s ~/simplesamlphp/simplesamlphp .
@@ -164,7 +153,7 @@ PHP, reconfiguring Apache, and creating some symbolic links.
     $ cd ~/simplesamlphp
     ~~~
 
-1.  Copy the modified SimpleSAMLphp configuration files from the example application
+2.  Copy the modified SimpleSAMLphp configuration files from the example application
     to the nested `simplesamlphp` directory.
 
     ~~~
@@ -176,7 +165,7 @@ PHP, reconfiguring Apache, and creating some symbolic links.
     $ cp okta-simplesamlphp-example/saml20-idp-remote.php simplesamlphp/metadata/
     ~~~
 
-1.  Install the PHP dependencies for SimpleSAMLphp using [Composer](https://getcomposer.org/)
+3.  Install the PHP dependencies for SimpleSAMLphp using [Composer](https://getcomposer.org/)
 
     ~~~
     $ brew install homebrew/php/composer
@@ -184,7 +173,7 @@ PHP, reconfiguring Apache, and creating some symbolic links.
     $ composer install
     ~~~
 
-1.  Open the `config.php` configuration file for SimpleSAMLphp in your favorite text editor.
+4.  Open the `config.php` configuration file for SimpleSAMLphp in your favorite text editor.
 
     Run this command:
 
@@ -193,11 +182,8 @@ PHP, reconfiguring Apache, and creating some symbolic links.
     ~~~
 
     Then, from inside of your text editor, do the folowing:
-
-    * Search for `baseurlpath` and change the value to `'/simplesamlphp/www/'`
-
+    * Search for `baseurlpath` and change the value to `'/simplesamlphp/www/'`.
     * Search for `auth.adminpassword` and change the value to a secure password.
-
     * Search for `secretsalt` and change the value to something random.
 
       There is an example command in for generating a "secret salt" in the
@@ -207,8 +193,7 @@ PHP, reconfiguring Apache, and creating some symbolic links.
       $ dd if=/dev/urandom bs=1 count=48 2> /dev/null | openssl base64
       ~~~
 
-
-1.  Open the the `saml-autoconfig.php` file for SimpleSAMLphp in your favorite text editor.
+5.  Open the the `saml-autoconfig.php` file for SimpleSAMLphp in your favorite text editor.
 
     Run this command:
 
@@ -232,7 +217,6 @@ PHP, reconfiguring Apache, and creating some symbolic links.
     > Note: The contents of `{metadata-url}` should look similar to this:
     > `https://{yourOktaDomain}.com/app/a0b1c2deFGHIJKLMNOPQ/sso/saml/metadata`
 
-
 ## Test the SAML integration
 
 Now that you have set up a "chiclet" in your Okta organization and have
@@ -248,24 +232,13 @@ test worked when you see a screen that looks like the one below:
 
 {% img example-application-authenticated-user.png alt:"Authenticated user" %}
 
-
-1.  Login from the Okta SimpleSAMLphp example application (This is
-    known as an **SP-initiated login**.)
-
-    -   Open the example application in your browser:
-
-        `http://localhost/okta-simplesamlphp-example/`
-
-    -   Click on the 'example-okta-com' link.
-
+1.  Login from the Okta SimpleSAMLphp example application (This is known as an **SP-initiated login**.)
+  * Open the example application in your browser: `http://localhost/okta-simplesamlphp-example/`
+  * Click on the 'example-okta-com' link.
 
 2.  Login from Okta (This is known as an **IdP-initiated" login**.)
-
-    -   Sign in to your Okta organization.
-
-    -   Click the button for the application you created earlier
-        "Configuring Okta to work with SimpleSAMLphp" section
-        above: {% img simplesamlphp-example-okta-chiclet.png alt:"SimpleSAMLphp Example" %}
+  * Sign in to your Okta organization.
+  * Click the button for the application you created earlier in the "Configuring Okta to work with SimpleSAMLphp" section above: {% img simplesamlphp-example-okta-chiclet.png alt:"SimpleSAMLphp Example" %}
 
 You will know that your testing was successful if are able to get to the "Logged in"
 page pictured above using both "SP initated" and "IdP initated" login.

@@ -12,7 +12,7 @@ The Client Credentials flow is recommended for use in machine-to-machine authent
 - Your application passes its client credentials to your Okta authorization server.
 - If the credentials are accurate, Okta responds with an access token.
 
-### 1. Setting up your Application
+## 1. Setting up your Application
 
 You set up your OpenID Connect application inside the Okta Developer Console:
 
@@ -20,11 +20,11 @@ You set up your OpenID Connect application inside the Okta Developer Console:
 2. On the Create New Application page, select **Service**.
 3. Fill-in the Application Name, then click **Done**.
 
-### 2. Creating Custom Scopes
+## 2. Creating Custom Scopes
 
 The Client Credentials flow never has a user context, so you can't request OpenID scopes. Instead, you must create a custom scope. For more information on creating custom scopes, see [our OAuth 2.0 overview](/authentication-guide/auth-overview/#client-credentials-flow).
 
-### 3. Using the Client Credentials Flow
+## 3. Using the Client Credentials Flow
 
 Your Client Application will need to have its client ID and secret stored in a secure manner. You can find the client ID and secret in your application's General tab. These are then passed via Basic Auth in the request to your Okta Authorization Server's `/token` endpoint:
 
@@ -58,6 +58,6 @@ If the credentials are valid, the application will receive back an access token:
 }
 ```
 
-### 3. Next Steps
+## 4. Next Steps
 
 When your application sends a request with an access_token, the resource server will need to validate it. For more on this, see [Validating Access Tokens](/authentication-guide/tokens/validating-access-tokens).

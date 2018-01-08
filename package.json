@@ -19,7 +19,8 @@
     "test": "npm run test-only || (npm stop && exit 1)",
     "posttest": "npm run stop",
     "find-missing-slashes": "node scripts/find-missing-slashes",
-    "post-build-lint": "bash scripts/post-build-lint.sh"
+    "post-build-lint": "bash scripts/post-build-lint.sh",
+    "lint": "bash scripts/markdown-lint.sh"
   },
   "repository": {
     "type": "git",

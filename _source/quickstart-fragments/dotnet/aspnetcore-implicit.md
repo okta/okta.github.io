@@ -9,7 +9,6 @@ exampleDescription: ASP.NET Core 2.0 API implicit example
 
 If you don't already have an ASP.NET Core 2.0 project, create one using `dotnet new mvc` or the ASP.NET Core Web Application template in Visual Studio. Choose **No Authentication** if necessary.
 
-
 ### Configure the middleware
 
 Make sure you have these `using` statements at the top of your `Startup.cs` file:
@@ -73,7 +72,7 @@ public class MessagesController : Controller
 }
 ```
 
-### That's it!
+### Conclusion
 
 The JWT Bearer middleware automatically validates tokens and populates `HttpContext.User` with a limited set of user information.
 

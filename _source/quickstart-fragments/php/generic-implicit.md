@@ -9,9 +9,7 @@ When a request is made to the messages api of your PHP application, we need to g
 authorization header and validate that the token. If the token is valid, we can reply with the messages we want to
 provide to the user, if not, we should return a 401 to let the front end know that the request could not be authorized.
 
-> NOTE: The rest of this quickstart assumes that you have an understand of PHP and composer. You should have at least
- PHP7 and the latest version of composer installed on your computer. Your project should contain a `composer.json`
- file that is ready to have dependencies installed.
+> NOTE: The rest of this quickstart assumes that you have an understand of PHP and composer. You should have at least PHP7 and the latest version of composer installed on your computer. Your project should contain a `composer.json` file that is ready to have dependencies installed.
 
 ## Installing Dependencies
 There are a few libraries you will need to install in order for us to verify the token that is provided in the
@@ -39,7 +37,6 @@ Our client side application is going to be sending us a call to an api endpoint 
  file `/api/messages.php`
 
 Our first step is to include the composer autoload file.  In your new `messages.php` file, add the following:
-
 
 > NOTE: All code blocks will be added progressively to the file. The full file is provided at the end of this quickstart.
 
@@ -141,7 +138,7 @@ console is reporting `Proxy error: Could not proxy request /api/messages.php fro
 http://localhost:8000.` or similar, close our of both servers (the client server and PHP) and make sure your proxy
 port match and that you are using `0.0.0.0` when starting the PHP server.
 
-#### Full Messages API
+### Full Messages API
 
 ```php
 <?php

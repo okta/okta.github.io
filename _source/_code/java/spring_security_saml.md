@@ -42,7 +42,6 @@ Please make sure the following are installed before starting installation:
 
 	mvn --version
 
-
 ## Installation
 
 This section covers what you need to do to install and configure Tomcat from scratch on Mac OS X. If you already have Tomcat on your system, you can skip to Step 2 below.
@@ -50,77 +49,32 @@ This section covers what you need to do to install and configure Tomcat from scr
 How to install the Spring Security SAML sample Okta application on Mac OS X:
 
 1. **Installing Tomcat**
-	- If it’s not already installed, install Tomcat with Homebrew using [these directions](https://github.com/mhulse/mhulse.github.io/wiki/Installing-Apache-Tomcat-using-Homebrew-on-OS-X-Yosemite)
-
+  - If it’s not already installed, install Tomcat with Homebrew using [these directions](https://github.com/mhulse/mhulse.github.io/wiki/Installing-Apache-Tomcat-using-Homebrew-on-OS-X-Yosemite)
 
 2. **Downloading the Spring SAML Extension**
-
-	- Use `git clone` to clone the extention locally
-
-	  ~~~ shell
-	  git clone https://github.com/spring-projects/spring-security-saml.git
-	  ~~~
-
+  - Use `git clone` to clone the extention locally: `git clone https://github.com/spring-projects/spring-security-saml.git`
 
 3. **Downloading sample application**
-
-	- Use `git clone` to clone this repository locally
-
-	  ~~~ shell
-	  git clone https://github.com/nshobayo/okta-SpringSAML.git
-	  ~~~
-
-	- Use the command below to copy the sample Okta application into the Extension's "src" folder
-
-	  ~~~ shell
-	  rm -rf spring-security-saml/sample/src/main
-	  cp -r okta-SpringSAML/src/main spring-security-saml/sample/src
-	  ~~~
+  - Use `git clone` to clone this repository locally: `git clone https://github.com/nshobayo/okta-SpringSAML.git`
+  - Use the command below to copy the sample Okta application into the Extension's "src" folder: `rm -rf spring-security-saml/sample/src/main &&  cp -r okta-SpringSAML/src/main spring-security-saml/sample/src`
 
 4. **Compilation**
-
-	- Make sure your working directory is the `sample` subdirectory of the `spring-security-saml` directory
-
-	  ~~~ shell
-	  cd spring-security-saml/sample
-	  ~~~
-
-	- To compile
-
-	  ~~~ shell
-	  ../gradlew build install
-	  ~~~
-
-	This task compiles, tests, and assembles the code into a `.war` file.
-
-	A successful build should look something like this: {% img spring-security-saml-build.png alt:"successful build" %}
-
-	- Your compiled war archive file, `spring-security-SAML2-sample.war`, can be found in directory `build/libs/`
-
+  - Make sure your working directory is the `sample` subdirectory of the `spring-security-saml` directory: `cd spring-security-saml/sample`.
+  - To compile run: `../gradlew build install`. This task compiles, tests, and assembles the code into a `.war` file. A successful build should look something like this: {% img spring-security-saml-build.png alt:"successful build" %}
+  - Your compiled war archive file, `spring-security-SAML2-sample.war`, can be found in directory `build/libs/`
 
 5. **Deployment**
+  - Assuming your current directory is `spring-security-saml/sample` Use the command below to copy the compiled `spring-security-SAML2-sample.war` file to the Tomcat directory you set up in step one.
 
-	- Assuming your current directory is `spring-security-saml/sample` Use the command below to copy the compiled `spring-security-SAML2-sample.war` file to the Tomcat directory you set up in step one
-
-	  ~~~ shell
-	cp build/libs/spring-security-SAML2-sample.war /Library/Tomcat/webapps/
-	  ~~~
-
+	`cp build/libs/spring-security-SAML2-sample.war /Library/Tomcat/webapps/`
 
 6. **Starting Tomcat**
-
-	- Use the command below to start Tomcat
-
-	  ~~~ shell
-	/Library/Tomcat/bin/startup.sh
-	  ~~~
-
+  - Use this command to start Tomcat: `/Library/Tomcat/bin/startup.sh`
 
 7. **Starting Application**
-	- Load the Spring SAML application by opening this Link: `http://localhost:8080/spring-security-saml2-sample/saml/discovery?entityID=http%3A%2F%2Flocalhost%3A8080%2Fspring-security-saml2-sample%2Fsaml%2Fmetadata&returnIDParam=idp`
-	- **Note:** Links on app will not be functional as of yet because we have not yet configured any IDPs. Full app functionality  will be completed after the "Configuring Spring Security SAML to work with Okta" section.
-
-	Here's what it should look like: {% img spring-security-saml-intro.png alt:"App Running" %}
+  - Load the Spring SAML application by opening this Link: `http://localhost:8080/spring-security-saml2-sample/saml/discovery?entityID=http%3A%2F%2Flocalhost%3A8080%2Fspring-security-saml2-sample%2Fsaml%2Fmetadata&returnIDParam=idp`
+  - **Note:** Links on app will not be functional as of yet because we have not yet configured any IDPs. Full app functionality  will be completed after the "Configuring Spring Security SAML to work with Okta" section.
+  - Here's what it should look like: {% img spring-security-saml-intro.png alt:"App Running" %}
 
 ## Configuring Okta to work with Spring Security SAML
 
@@ -200,7 +154,6 @@ Here is how to configure Okta:
 	link you copied in step \#9 is still in your clipboard, as you will
 	need it in the next section.
 
-
 ## Configuring Spring Security SAML to work with Okta
 
 Now that you have configured a "Spring Security SAML" application, you
@@ -208,7 +161,6 @@ are ready to configure Spring Security SAML to work with Okta. In this
 section we will use the "Identity Provider metadata" link from the
 section above to configure Spring Security SAML. Once you've completed
 these steps, you'll have a working example of connecting Okta to Spring.
-
 
 1.  Open the `securityContext.xml` file in your favorite text editor.
 	If you followed the instructions above for "Installing the Spring
@@ -243,7 +195,6 @@ these steps, you'll have a working example of connecting Okta to Spring.
 	that you copied in step \#9 of the "Configuring Okta to work with
 	Spring Security SAML" instructions above!**
 
-
 4.  Save the `securityContext.xml` file, then restart Tomcat
 
 5.  If you are using Mac OS X, you can restart Tomcat using the commands
@@ -253,7 +204,6 @@ these steps, you'll have a working example of connecting Okta to Spring.
 	 /Library/Tomcat/bin/shutdown.sh
 	 /Library/Tomcat/bin/startup.sh
 	~~~
-
 
 ## Test the SAML integration
 
@@ -266,31 +216,20 @@ application ("SP initiated") and starting from Okta ("IdP initiated").
 You will be testing both methods. In both cases, you will know of the
 test worked when you see a screen that looks like the one below: {% img spring-security-saml-assert.png alt:"Authenticated user" %}
 
-
 1.  Login from the Spring Security SAML sample application (This is
 	known as an "SP initiated" login)
+  - Open the sample application in your browser: `http://localhost:8080/spring-security-saml2-sample`
+  - Select the Okta IdP from the list. It will be a URL that starts with "http://www.okta.com/"
+  - Click the "Start single sign-on" button. {% img spring-security-saml-selection.png alt:"Start single sign-on" %}
 
-	-   Open the sample application in your browser:
-		`http://localhost:8080/spring-security-saml2-sample`
-
-	-   Select the Okta IdP from the list
-		It will be a URL that starts with "http://www.okta.com/"
-
-	-   Click the "Start single sign-on" button. {% img spring-security-saml-selection.png alt:"Start single sign-on" %}
-
-2.  Login from Okta (This is known as an "IdP initiated" login)
-
-	-   Log in to your Okta organization
-
-	-   Click the button for the application you created in the
-		"Configuring Okta to work with Spring Security SAML" section
-		above: %{ img spring-security-saml-okta-chiclet.png alt:"Spring Security SAML" %}
+2. Login from Okta (This is known as an "IdP initiated" login)
+  - Log in to your Okta organization
+  - Click the button for the application you created in the "Configuring Okta to work with Spring Security SAML" section above: %{ img spring-security-saml-okta-chiclet.png alt:"Spring Security SAML" %}
 
 If you're able to get to the "Authenticated User" page using both of the
 methods above, then you're done.
 
 Congratulations on getting Okta working with Spring!
-
 
 ## Next Steps
 

@@ -66,7 +66,6 @@ guide. As noted in the instructions, there are two steps to change:
 
   **Note:** "{{ page.port }}" is the port that {{ page.framework }} uses by default, if you are using a different port number, change "{{ page.port }}" to the port number you are using.
 
-
 ## Configuring {{ page.saml_library }} to work with Okta
 
 Now that you have configured the {{ page.chiclet_name }} "chiclet" in your Okta organization, you
@@ -153,37 +152,16 @@ test worked when you see a screen that looks like the one below:
 
 {% img pysaml2-authenticated-user.png alt:"Authenticated user" %}
 
-
 1.  Login from the Okta {{ page.saml_library }} example application (This is
     known as an **SP-initiated login**.)
+  - Start the example application from the command line: `source venv/bin/activate && python app.py`
+  - Open the example application in your browser: `http://localhost:{{ page.port }}/`
+  - Click on the link for your Okta IdP.
 
-    -   Start the example application from the command line:
-
-    	~~~ shell
-    	$ source venv/bin/activate
-	$ python app.py
-	~~~
-
-    -   Open the example application in your browser:
-        `http://localhost:{{ page.port }}/`
-
-    -   Click on the link for your Okta IdP.
-
-
-2.  Login from Okta (This is known as an **IdP-initiated" login**.)
-
-    -   Start the example application from the command line:
-
-    	~~~ shell
-    	$ source venv/bin/activate
-	$ python app.py
-	~~~
-
-    -   Sign in to your Okta organization.
-
-    -   Click the button for the application you created earlier
-        "Configuring Okta to work with {{ page.saml_library }}" section
-        above: {% img pysaml2-example-okta-chiclet.png alt:"{{ page.chiclet_name }}" %}
+2. Login from Okta (This is known as an **IdP-initiated" login**.)
+  - Start the example application from the command line: `source venv/bin/activate && python app.py`
+  - Sign in to your Okta organization.
+  - Click the button for the application you created earlier "Configuring Okta to work with {{ page.saml_library }}" section above: {% img pysaml2-example-okta-chiclet.png alt:"{{ page.chiclet_name }}" %}
 
 If you can to get to the "Logged in" page using both of the
 methods above, the test are successful.

@@ -84,7 +84,6 @@ This document provides further information about the errors that the Okta API re
 |<a name="E0000109"></a>E0000109|An SMS message was recently sent. Please wait 30 seconds before trying again.|429|
 |<a name="E0000112"></a>E0000112|Cannot update this user because they are still being activated. Please try again in a few minutes.|409|
 
-
 ## Okta Error Codes Listed by HTTP Return Code
 
 <table>
@@ -158,7 +157,6 @@ This document provides further information about the errors that the Okta API re
 <tr><td rowspan="1" bgcolor="#FFFFFF"><strong>503</strong></td><td>E0000010</td><td>Service is in read-only mode.</td></tr>
 </table>
 
-
 ## OpenID Connect and Okta Social Authentication
 
 In stituations where Okta needs to pass an error to a downstream application via a `redirect_uri`, the error code and description will be encoded as the query parameters `error` and `error_description`.
@@ -168,7 +166,6 @@ In stituations where Okta needs to pass an error to a downstream application via
 > ~~~
 > https://example.com?error=access_denied&error_description=The%20resource%20owner%20or%20authorization%20server%20denied%20the%20request.
 > ~~~
-
 
 <table>
 <thead>
@@ -230,12 +227,10 @@ In stituations where Okta needs to pass an error to a downstream application via
 <td class="left">The request parameters are not valid.</td>
 </tr>
 
-
 <tr>
 <td class="left">user_canceled_request</td>
 <td class="left">User canceled the social login request.</td>
 </tr>
-
 
 </tbody>
 </table>

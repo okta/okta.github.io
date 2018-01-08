@@ -19,7 +19,7 @@ At a high-level, this flow has the following steps:
 
 For more information on the authorization code flow, including why to use it, see [our OAuth 2.0 overview](/authentication-guide/auth-overview/#authorization-code-flow).
 
-### 1. Setting up your Application
+## 1. Setting up your Application
 
 You set up your OpenID Connect application inside the Okta Developer Console:
 
@@ -27,7 +27,7 @@ You set up your OpenID Connect application inside the Okta Developer Console:
 2. On the Create New Application page, select **Web**.
 3. Fill-in the Application Settings, then click **Done**. The "Login redirect URIs" must match a URI that your user can be redirected to with their authorization code. See below for more details.
 
-### 2. Using the Authorization Code Flow
+## 2. Using the Authorization Code Flow
 
 To get an authorization code, you make a request to your authorization server's `/authorize` endpoint. If you are using the default Okta authorization server, then your request URL would look something like this:
 
@@ -56,7 +56,7 @@ http://localhost:8080/?code=P5I7mdxxdv13_JfXrCSq&state=state-296bc9a0-a2a2-4a57
 
 This code will remain valid for 60 seconds, during which it can be exchanged for tokens.
 
-### 3. Exchanging the Code for Tokens
+## 3. Exchanging the Code for Tokens
 
 To exchange this code for access and ID tokens, you pass it to your authorization server's `/token` endpoint. If you are using the default Okta authorization server, then your request would look something like this:
 
@@ -91,11 +91,11 @@ If the code is still valid, your application will receive back access and ID tok
 }
 ```
 
-### 4. Next Steps
+## 4. Next Steps
 
 When your application passes a request with an `access_token`, the resource server will need to validate it. For more on this, see [Validating Access Tokens](/authentication-guide/tokens/validating-access-tokens).
 
-### Examples
+## Examples
 
 The following web application examples show you the authorization code flow, as it would be implemented by a web app that needs to authenticate the end user and then create a local session for that user. These projects use popular web frameworks to handle the heavy lifting. Each project can be cloned and ran locally.
 

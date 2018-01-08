@@ -33,6 +33,7 @@ pod 'OktaAuth', '~> 0.1'
 
 ## Configuration
 Create a new `Okta.plist` file in your application's bundle with the following fields:
+
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
@@ -53,6 +54,7 @@ Create a new `Okta.plist` file in your application's bundle with the following f
 </dict>
 </plist>
 ```
+
 **Note**: *To receive a **refresh_token**, you must include the `offline_access` scope.*
 
 > Important: Most native applications send access tokens to access APIs. If you're building an API that will need to accept access tokens, [create an authorization server](/authentication-guide/implementing-authentication/set-up-authz-server.html).
@@ -67,6 +69,7 @@ Users can sign in to your iOS application a number of different ways.
 The easiest, and most secure way is to use the **default login page**. This page renders the [Okta Sign-In Widget](../javascript/okta_sign-in_widget), equipped to handle User Lifecycle operations, MFA, and more.
 
 First, update your `AppDelegate` to include the following function to allow the redirect to occur:
+
 ```swift
 // AppDelegate.swift
 import OktaAuth
@@ -77,12 +80,11 @@ func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpe
 ```
 
 Then, you can start the authorization flow by simply calling `login`:
+
 ```swift
 OktaAuth
     .login()
-    .start(self) {
-        response, error in    
-        
+    .start(self) { response, error in
         if error != nil { print(error!) }
 
         // Success
@@ -99,12 +101,11 @@ In native applications, it is common for users to have a long-lived session. It 
 
 ### Store the User's Tokens
 Tokens are securly stored in the Keychain. They are easily set and retrieved with the helper methods `set` and `get`.
+
 ```swift
 OktaAuth
     .login()
-    .start(self) {
-        response, error in    
-        
+    .start(self) { response, error in
         if error != nil { print(error!) }
 
         // Success
@@ -132,12 +133,10 @@ Before using an `access_token` or `id_token`, ensure the tokens are valid by cal
 ```swift
 OktaAuth
     .introspect()
-    .validate(token: currentToken) {
-        response, error in
-        
+    .validate(token: currentToken) { response, error in
         if error != nil { print("Error: \(error!)") }
-            
-        if let isValid = response { 
+
+        if let isValid = response {
             if !isValid {
                 // Token is not valid, prompt the user to login
             }
@@ -147,12 +146,11 @@ OktaAuth
 
 ### Fetch User Claims
 Now that the `access_token` has been stored and validated, use it to retrieve more information about the user:
+
 ```swift
-OktaAuth.userinfo() {
-    response, error in
-            
+OktaAuth.userinfo() { response, error in
     if error != nil { print("Error: \(error!)") }
-            
+
     if let userinfo = response {
         // userinfo["name"]
         // userinfo["email"]
@@ -163,5 +161,5 @@ OktaAuth.userinfo() {
 ## Conclusion
 You have now successfully authenticated with Okta! Now what? With a user's `id_token`, you have basic claims for the user's identity. You can extend the set of claims by modifying the `scopes` to retrieve custom information about the user. This includes `locale`, `address`, `groups`, and [more](../../docs/api/resources/oidc.html).
 
-## Support 
+## Support
 Have a question or see a bug? Post your question on [Okta Developer Forums](https://devforum.okta.com/).

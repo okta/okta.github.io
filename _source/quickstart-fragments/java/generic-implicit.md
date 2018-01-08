@@ -8,6 +8,7 @@ exampleDescription: Java Implicit Example
 ### Include the dependency
 
 For Apache Maven:
+
 ```xml
 <dependency>
     <groupId>com.okta.jwt</groupId>
@@ -17,6 +18,7 @@ For Apache Maven:
 ```
 
 For Gradle:
+
 ```groovy
 compile 'com.okta.jwt:okta-jwt-verifier:{{ site.versions.jwt_validator_java }}'
 ```
@@ -78,6 +80,7 @@ public static class OktaAccessTokenFilter implements Filter {
 ```
 
 Next up is to create a `Servlet` for the '/api/messages' endpoint we defined in the above client:
+
 ```java
 @WebServlet(urlPatterns={"/api/messages"})
 public class ExampleServlet extends HttpServlet {

@@ -44,6 +44,7 @@ After you have created the application there are two more values you will need t
 The easiest way to get started with the [Okta Sign-In Widget](https://github.com/okta/okta-signin-widget) is to load the JS and CSS files directly from the CDN.
 
 To use our CDN, include the following links to your HTML:
+
 ```html
 <script
 src="https://ok1static.oktacdn.com/assets/js/sdk/okta-signin-widget/{{ site.versions.okta_signin_widget }}/js/okta-sign-in.min.js"
@@ -138,8 +139,7 @@ Then copy this widget configuration into your front-end application:
 
 With the above code in your front-end application, you should see the Sign In Widget when you load your application.  At this point you should be able to login, and be redirected back to your application with an access token and ID Token.  You should have the JavaScript console open in your browser while doing this, it will allow you to see the success messages from the examples and any errors that may arise. Once this is working you can move on to the next section, where we will make use of the access token to make an authenticated request against your server.
 
-
-### Use the Access Token to Authenticate Requests.
+### Use the Access Token to Authenticate Requests
 
 Your application now has an access token in local storage that was issued by your Okta Authorization server. You can use this token to authenticate requests for resources on your server or API. As a hypothetical example, let's say that you have an API that gives us messages for our user.  You could create a `callMessagesApi` function that gets the access token from local storage, and use it to make an authenticated request to your server.
 

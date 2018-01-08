@@ -8,16 +8,15 @@ redirect_from:
     - "/docs/guides/okta_sign-in_widget.html"
 ---
 
-## Okta Sign-In Widget Guide
+# Okta Sign-In Widget Guide
 
 The Okta Sign-In Widget is a JavaScript library that gives
 you a fully-featured and customizable login experience which
 can be used to authenticate users on any website. This guide will introduce you to the Sign-In Widget and show you how to create a simple page that uses it.
 
-
 {% img okta-signin.png alt:"Screenshot of basic Okta Sign-In Widget" %}{: .center-image }
 
-### Who Should Use This Guide?
+## Who Should Use This Guide
 
 Follow this guide if you would like to create a simple page from scratch while learning how to use the Sign-In Widget.
 
@@ -26,7 +25,7 @@ If you already have an application and would to integrate the Sign-In Widget int
 * [Okta Sign-In Widget Source & API Reference][widget-reference]
 * <a href="/quickstart/#/widget" data-proofer-ignore>Okta Sign-In Widget Quickstart Guide</a>
 
-### Features
+## Features
 
 The Sign-in Widget supports the following use cases:
 
@@ -55,7 +54,7 @@ Once you have these prerequisites, getting the Sign-in Widget working has four s
 3.  Serve the HTML file with a web server
 4.  Configure a Trusted Origin in your Okta organization
 
-#### 1. Create an HTML file
+### 1. Create an HTML file
 
 The below code will render a login page using the Okta Sign-in Widget. You can copy and paste it into an HTML file called, for example, `login-to-okta.html`:
 
@@ -93,11 +92,11 @@ The below code will render a login page using the Okta Sign-in Widget. You can c
 </html>
 ~~~
 
-#### 2. Modify the HTML
+### 2. Modify the HTML
 
 Change the `orgUrl` variable to your Okta org's URL (for example: `https://{yourOktaDomain}.com`), then save the file.
 
-#### 3. Serve the File
+### 3. Serve the File
 
 If you aren’t sure which web server to use or don’t have one set up already, an easy web server to set up on Mac OS X or GNU/Linux is the SimpleHTTPServer that is included with Python.
 
@@ -113,7 +112,7 @@ In Python 3 this command is:
 python3 -m http.server
 ~~~
 
-#### 4. Configure a Trusted Origin
+### 4. Configure a Trusted Origin
 
 This step is necessary for Okta to accept authentication requests from an application through the Sign-In Widget.
 
@@ -139,11 +138,11 @@ To do this, you will now perform the following steps:
 3. Update the post-authentication behavior of the widget
 4. Configure redirects in your Okta organization
 
-#### Create the landing page
+### Create the landing page
 
 The first step will be to create the landing page that the user will be redirected to after authentication. For this example, you should create the file in the same directory as your existing sign-in page, and name it something like `signed-in.html`. You can add any content you might like to your landing page.
 
-#### Add a Redirect URL
+### Add a Redirect URL
 
 There are just two lines you will need to modify in your widget code to get the sample working in your own environment. Under the line where you specify the fully-qualified domain name for your Okta org, add the following line:
 
@@ -153,7 +152,7 @@ There are just two lines you will need to modify in your widget code to get the 
 
 Replace `http://localhost:3333/signed-in.html` in the `redirectUrl` variable with the URL of the landing page in your own web application where you would like to redirect the user after a successful login.
 
-#### Update the post-authentication behavior
+### Update the post-authentication behavior
 
 The other change you should make to your widget code is to change the success behavior, found on this line:
 
@@ -182,11 +181,11 @@ The updated section of your sign-in widget will now look something like this:
 
 Once you are done, save the updated file.
 
-#### Configure redirects
+### Configure redirects
 
 To allow redirects, go back to the Trusted Origins section where you allowed CORS and edit the Origin that you entered. In addition to enabling CORS, also enable Redirect. If you need any help doing this, you can refer to [the Security API help page](https://help.okta.com/en/prev/Content/Topics/Security/API.htm?cshid=Security_API#Security_API).
 
-### Testing the Okta Sign-In Widget
+## Testing the Okta Sign-In Widget
 
 At this point, you are ready to test the Okta Sign-In Widget.
 
@@ -201,7 +200,6 @@ Here are two things for you to try:
 2.  Try using a valid username and password. If everything works, you will be redirected to `signed-in.html`.
 
 If you are redirected when you sign in successfully, then it works! Your next step is to configure the Okta Sign-In Widget for your specific requirements. For example, you can [configure Multi-factor Authentication](https://help.okta.com/en/prod/Content/Topics/Security/MFA.htm) for your Okta org and try logging in using the Okta Sign-In Widget.
-
 
 ## Customization
 

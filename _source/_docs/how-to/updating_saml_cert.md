@@ -18,26 +18,23 @@ This How To contains six sections:
 * [Determine the Signature Algorithm of a Certificate](#determine-the-signature-algorithm-of-a-certificate)
 * [Obtaining the Certificate for an App from a URL](#obtaining-the-certificate-for-an-app-from-a-url)
 
-
-### Why Should I Do This?
+## Why Should I Do This?
 
 To take advantage of the additional security features of SHA256 certificates.
 
-### New SAML 2.0 App Integrations
+## New SAML 2.0 App Integrations
 
 New SAML 2.0 app integrations automatically use SHA256 certificates.
 As instructed, upload the SHA256 certificate to the ISV.
 
-### Existing SAML 2.0 App Integrations
-
+## Existing SAML 2.0 App Integrations
 
 To update existing app integrations, there are four steps to follow.
 
-  1. List your apps and get the app id, name, and label for each app to update.<br />For each app to update, perform the following steps.<br />
-  2. Generate a new application key credential.
-  3. Update the key credential for the app to specify the new signing key id.
-  4. Upload the new certificate to the ISV. (This step cannot be automated.)
-
+1. List your apps and get the app id, name, and label for each app to update.<br />For each app to update, perform the following steps.<br />
+2. Generate a new application key credential.
+3. Update the key credential for the app to specify the new signing key id.
+4. Upload the new certificate to the ISV. (This step cannot be automated.)
 
 > **Important:** After you complete the first three steps, your users cannot access the application until step 4 is completed.
 
@@ -45,7 +42,7 @@ Although unlikely, if your ISV does not accept the SHA256 certificate, you can r
 
 For information on using the Postman REST API test client for these steps, see [API Test Client](/docs/api/getting_started/api_test_client.html).
 
-#### Step 1 – List your apps and get the app id, name, and label for each app to update.
+### Step 1 – List your apps and get the app id, name, and label for each app to update.
 
 Use the [List Apps API](/docs/api/resources/apps.html#list-applications) to return a list of all apps.
 
@@ -56,7 +53,6 @@ Request: `GET /api/v1/apps`
 Truncated Response:
 
 ~~~json
-
 {
     "id": "0000000000aaaaaBBBBBo",
     "name": "appname",
@@ -107,14 +103,12 @@ Truncated Response:
       }
     }
   }
-
 ~~~
 
-#### Step 2 – Generate a new application key credential.
+### Step 2 – Generate a new application key credential.
 
 Use the [Apps API](/docs/api/resources/apps.html#generate-new-application-key-credential)
 to generate new credentials. Pass each app ID (`id`) that was collected in the previous step as the app ID (`aid`) in this API. If you have no company policy for credential expiration, 10 years is suggested.
-
 
 Request: `POST /api/v1/apps/0000000000aaaaaBBBBBo/credentials/keys/generate?validityYears=10`
 
@@ -159,7 +153,7 @@ Response:
 }
 ~~~
 
-#### Step 3 – Update the key credential for the app to specify the new signing key id.
+### Step 3 – Update the key credential for the app to specify the new signing key id.
 
 Call the [Apps API](/docs/api/resources/apps.html#update-key-credential-for-application) with the app ID you obtained in step 1. In the body, include
 the app name and the app label that you obtained in step 1, the key ID that you obtained in step 2, and the value *SAML_2_0* for the sign on mode.
@@ -182,31 +176,27 @@ curl -v -X PUT \
   }
  }
 }' "https://{yourOktaDomain}.com/api/v1/apps/${aid}"
-
 ~~~
 
-
-#### Step 4 – Upload the new certificate to the ISV.
+### Step 4 – Upload the new certificate to the ISV.
 
 > After completing step 3, your users cannot access the SAML app until you complete this step.
-
 
 1. In the Okta user interface, select **Applications** and choose your app.
 2. Select **Sign-On Options**.
 3. Click **View Setup Instructions**, as shown below. <br />{% img saml_setup_link.png "Accessing SAML Setup Instructions" alt:"Accessing SAML Setup Instructions" %}
 4. Perform the setup for your app again, using the instructions provided. During this setup, you will upload the certificate in a specified format, the metadata, or the certificate fingerprint.
 
-
-### Reverting to a SHA1 Certificate
+## Reverting to a SHA1 Certificate
 
 If your ISV does not accept certificates with a SHA256 signature, you can revert the settings to use the previous SHA1 certificate by rolling
 over the app key to specify the SHA1 certificate you previously associated with your integration.
 
-#### Step 1 – List your apps and get the id, name, and label for the app to revert.
+### Step 1 – List your apps and get the id, name, and label for the app to revert.
 
 This step is the same as [Step 1](#step-1--list-your-apps-and-get-the-app-id-name-and-label-for-each-app-to-update), above.
 
-#### Step 2 – Retrieve all certificates associated with the app and locate the SHA1 certificate.
+### Step 2 – Retrieve all certificates associated with the app and locate the SHA1 certificate.
 
 Use the [List Key Credentials for an Application API](/docs/api/resources/apps#list-key-credentials-for-application) to list all the credentials.
 Pass the app ID (`id`) that was collected in the previous step as the app ID (`aid`) in this API. Then, determine which certificate is the SHA1 certificate by copying the certificate text for each of the returned certificates, and [determine the signature algorithm](#determine-the-signature-algorithm-of-a-certificate)
@@ -250,10 +240,9 @@ Response:
     "use": "sig",
     "x5t#S256": "_DXULzisdoprgJ8OhiSN_KUD2rScRDd7pY2HE1ZI_bs"
   }
-
 ~~~
 
-#### Step 3 – Update the key credential for the application with the SHA1 certificate.
+### Step 3 – Update the key credential for the application with the SHA1 certificate.
 
 Use the [Apps API](/docs/api/resources/apps#update-key-credential-for-application)
 to update the key credential for the application to specify the kid of the SHA1 certificate that you retrieved in step 2.
@@ -261,7 +250,7 @@ to update the key credential for the application to specify the kid of the SHA1 
 This step is the same as
 [Step 3](#step-3--update-the-key-credential-for-the-app-to-specify-the-new-signing-key-id), above.
 
-#### Step 4 – Upload the SHA1 certificate to the ISV.
+### Step 4 – Upload the SHA1 certificate to the ISV.
 
 > After completing step 3, your users cannot access the SAML app until you complete this step.
 
@@ -270,8 +259,7 @@ This step is the same as
 3. Click **View Setup Instructions**, as shown below. <br />{% img saml_setup_link.png "Accessing SAML Setup Instructions" alt:"Accessing SAML Setup Instructions" %}
 4. Perform the setup for your app again, using the instructions provided. During this setup, you will upload the certificate in a specified format, the metadata, or the certificate fingerprint.
 
-
-### Determine the Signature Algorithm of a Certificate
+## Determine the Signature Algorithm of a Certificate
 
 You can find the signature algorithm of a certificate either by using the command line or by uploading your certificate to a free, online certificate decoder service.
 
@@ -311,7 +299,7 @@ sure to note the certificate format that the decoder service requires.
 
 The Signature Algorithm is either *sha256WithRSAEncryption* or *sha1WithRSAEncryption*.
 
-### Obtaining the Certificate for an App from a URL
+## Obtaining the Certificate for an App from a URL
 
 You can obtain the current certificate for an app from the following URL:
 

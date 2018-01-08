@@ -9,7 +9,7 @@ The Okta Sign-In Page provides the easiest, most secure way to allow users to au
 
 <center>{% img okta-sign-in-page.png alt:"Okta Sign-In Page" width:"500" %}</center>
 
-##### Using The Sign-In Page
+### Using The Sign-In Page
 
 When you application needs to authenticate the user, it will need to redirect the user to the Sign-In Page by making an Authorization Code request to an authorization server in your Okta org. Once the user completes the login form, they will be redirected back to your server with an Authorization Code that can be used to get more information about the user. We have created server-side libraries that do most of this work for you with just a few lines of configuration. Please select your server technology below to get instructions for your server.
 

@@ -36,7 +36,7 @@ the screen shown below.
 
 {% img okta-admin-ui-cors-dev.png "CORS Settings UI" alt:"CORS Settings UI" %}
 
-> Select **Add Origin** to specify the base URL of website you want to allow cross-origin requests. 
+> Select **Add Origin** to specify the base URL of website you want to allow cross-origin requests.
 
 {% img okta-admin-ui-cors-new-dev.png "Add CORS Origin" alt: "Add CORS Origin" %}
 

@@ -8,7 +8,7 @@ redirect_from:
   - "/docs/guides/okta_auth_sdk.html"
 ---
 
-## Okta Auth SDK Guide
+# Okta Auth SDK Guide
 
 The Okta Auth SDK builds on top of our [Authentication API](/docs/api/resources/authn) and [OpenID Connect API](/docs/api/resources/oidc) to enable you to create a fully branded sign-in experience using JavaScript.
 
@@ -193,7 +193,7 @@ else {
 
 > This example, like everything else on this page, is for illustrative purposes only. The `prompt()` method is not considered a secure way of asking for user authentication credentials.
 
-#### Complete Okta Session and OIDC Token Example
+### Complete Okta Session and OIDC Token Example
 
 ~~~ html
 

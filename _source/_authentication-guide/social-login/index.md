@@ -17,7 +17,7 @@ Currently Okta supports the following social login providers:
 - [LinkedIn](linkedin)
 - [Microsoft](microsoft)
 
-### Features
+## Features
 
 Configuring social login with Okta allows you to use the following features:
 
@@ -31,9 +31,9 @@ Configuring social login with Okta allows you to use the following features:
 
 * **Support for Webhooks:** Make callouts to your application during user registration and/or account linking. For example: prompt a user for additional attributes before linking their account, or enable a customized validation or confirmation flow.
 
-* **OAuth 2.0 Scope Configuration:** Specify OAuth 2.0 scopes to fully control which Social Profile attributes are linked to Okta. 
+* **OAuth 2.0 Scope Configuration:** Specify OAuth 2.0 scopes to fully control which Social Profile attributes are linked to Okta.
 
-### The Social Login Process
+## The Social Login Process
 
 The social login process starts at the [authentication endpoint](/docs/api/resources/oidc.html#authentication-request), then goes out to the provider and back:
 
@@ -64,9 +64,9 @@ ok -> ua: 302 to redirect_uri
 
 Social authentication requests are canceled if not completed within fifteen minutes.
 
-### The Set-up Process
+## The Set-up Process
 
-To set up social login, configure the following: 
+To set up social login, configure the following:
 
 1. An OAuth 2.0 client in your social provider
 2. An Identity Provider in Okta

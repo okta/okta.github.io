@@ -31,11 +31,10 @@ If you only need one Authorization Server, but you'd like to know more about cus
 {% img okta-admin-auth-server-toolbar-dev alt:"Authorization Server" %}
 
 2. Choose **Add Authorization Server** and supply the requested information.
-
-    * **Name**
-    * **Audience:** URI for the OAuth 2.0 resource server that consumes the access tokens. Use an absolute path such as `https://api.example.com/pets`.
+  * **Name**
+  * **Audience:** URI for the OAuth 2.0 resource server that consumes the access tokens. Use an absolute path such as `https://api.example.com/pets`.
       This value is used as the default [audience](https://tools.ietf.org/html/rfc7519#section-4.1.3) for access tokens.
-    * **Description**
+  * **Description**
 
 When complete, your Authorization Server's **Settings** tab displays the information that you provided and allows you to edit it.
 {% img auth_server2.png alt:"Add Authorization Server" width:"640px" %}
@@ -44,22 +43,22 @@ Once the Authorization Server is created you can also edit the Signing Key Rotat
 
 ## Create Access Policies
 
-Access policies are containers for rules. Each access policy applies to a particular OpenID Connect application, and the rules it contains define different access and refresh token lifetimes depending on the nature of the token request. 
+Access policies are containers for rules. Each access policy applies to a particular OpenID Connect application, and the rules it contains define different access and refresh token lifetimes depending on the nature of the token request.
 
 1. In the Okta Developer Dashboard, navigate to **API > Authorization Servers**.
 2. Choose the name of an Authorization Server.
 3. Choose **Access Policies > Add Policy**
     {% img access_policy1.png alt:"Add Access Policy" width:"640px" %}
 4. Provide the requested information:
-    * **Name**
-    * **Description**
-    * Assign to **All clients**, or select **The following clients:** and enter the name of the Okta OpenID Connect applications covered by this access policy. This field will auto-complete the names of your OpenID Connect applications as you type.
-    {% img access_policy2.png alt:"Access Policy Configuration" width:"640px" %}
+  * **Name**
+  * **Description**
+  * Assign to **All clients**, or select **The following clients:** and enter the name of the Okta OpenID Connect applications covered by this access policy. This field will auto-complete the names of your OpenID Connect applications as you type.
+  {% img access_policy2.png alt:"Access Policy Configuration" width:"640px" %}
 
 While in the Access Policy list, you can:
 * Set access policies to be active or deactivate them for testing or debugging purposes.
 * Reorder any policies you create using drag-n-drop.
-    {% img access_policy3.png alt:"Access Policy List" width:"640px" %}
+  {% img access_policy3.png alt:"Access Policy List" width:"640px" %}
 
 Polices are evaluated in priority order, as are the rules in a policy.
 The first policy and rule that matches the client request is applied and no further rule or policy processing occurs. If a client matches no policies, the authentication attempt will fail and an error will be returned.
@@ -71,16 +70,16 @@ Rules define particular token lifetimes for a given combination of grant type, u
 1. In the Okta Developer Dashboard, navigate to **API > Authorization Servers**.
 2. Choose the name of an authorization server, and select **Access Policies**.
 3. Choose the name of an access policy, and select **Add Rule**.
-    {% img rule1.png alt:"Add Rule" width:"640px" %}
+  {% img rule1.png alt:"Add Rule" width:"640px" %}
 4. Enter the requested information:
-    * **Rule Name**
-    * **IF Grant type is:** Select one or more OAuth 2.0 grant types.
-    * **AND User is:** Select whether there's no user (client credentials flow), or a user assigned to a client that's assigned to this rule's policy, or a user assigned to one or more groups that you specify or a list of users that you specify.
-    * **AND Requested these scopes:** Choose the scopes (any scopes, or a list that you specify) that can be requested by the user as part of the rule conditions.
-    * **THEN Access token lifetime is:** Choose the length of time before an access token expires.
-    * **THEN Refresh token lifetime is:** Choose the length of time before a refresh token expires.
+  * **Rule Name**
+  * **IF Grant type is:** Select one or more OAuth 2.0 grant types.
+  * **AND User is:** Select whether there's no user (client credentials flow), or a user assigned to a client that's assigned to this rule's policy, or a user assigned to one or more groups that you specify or a list of users that you specify.
+  * **AND Requested these scopes:** Choose the scopes (any scopes, or a list that you specify) that can be requested by the user as part of the rule conditions.
+  * **THEN Access token lifetime is:** Choose the length of time before an access token expires.
+  * **THEN Refresh token lifetime is:** Choose the length of time before a refresh token expires.
 5. Choose **Create Rule** to save the rule.
-    {% img rule2.png alt:"Rules List" width:"640px" %}
+  {% img rule2.png alt:"Rules List" width:"640px" %}
 
 While in the Rules list for an access policy, you can:
 
@@ -103,14 +102,14 @@ Rules can also be used to restrict grant types, users, or scopes. For example, y
 
 1. Not create any rules that match "Any scopes", and
 2. Ensure that all of your rules only match to the `openid` and/or `offline_access` scopes.
- 
+
 Any request that is sent with a different scope will not match any rules and will consequently fail.
 
 At this point you can keep reading to find out how to create custom scopes and claims, or proceed immediately to [Testing your Authorization Server](#test-your-authorization-server-configuration).
 
 ## Create Scopes (Optional)
 
-Scopes specify what access privileges are being requested as part of the authorization. For example, the `email` scope requests access to the user's email address. There are certain reserved scopes that are created with any Okta authorization server, which are listed [here](/standards/OIDC/index.html#scopes). 
+Scopes specify what access privileges are being requested as part of the authorization. For example, the `email` scope requests access to the user's email address. There are certain reserved scopes that are created with any Okta authorization server, which are listed [here](/standards/OIDC/index.html#scopes).
 
 If you need scopes in addition to the reserved scopes provided, you can create them. Custom scopes can have corresponding claims that tie them to some sort of user information.
 
@@ -133,19 +132,20 @@ Create ID Token claims for OpenID Connect, or access tokens for OAuth 2.0:
 
 1. In the Okta Developer Dashboard, navigate to **API > Authorization Servers**.
 2. Choose the name of the Authorization Server to display, and choose **Claims**.
-{% img claims1.png alt:"Choose Claims" width:"800px" %}
- Okta provides a default subject claim. You can edit the mapping, or create your own claims.
+  {% img claims1.png alt:"Choose Claims" width:"800px" %}
+  Okta provides a default subject claim. You can edit the mapping, or create your own claims.
 3. Choose **Add Claim** and provide the requested information.
 {% img claim.png alt:"Edit Claims" width:"800px" %}
+  * **Name**
+  * **Include in token type**: Choose Access Token (OAuth 2.0) or ID Token (OpenID Connect). If you choose ID Token, you can also choose if the claim should be included only when requested, or always.
+  * **Value type**: Choose whether you'll define the claim by a group filter or by an **Expression** written in Okta Expression Language.
+    **Mapping**: This option displays if you chose **Expression** in the previous field. Add the mapping here using [Okta's Expression Language](/reference/okta_expression_language/), for example `appuser.username`.
 
-    * **Name**
-    * **Include in token type**: Choose Access Token (OAuth 2.0) or ID Token (OpenID Connect). If you choose ID Token, you can also choose if the claim should be included only when requested, or always.
-    * **Value type**: Choose whether you'll define the claim by a group filter or by an **Expression** written in Okta Expression Language.
-        * **Mapping**: This option displays if you chose **Expression** in the previous field. Add the mapping here using [Okta's Expression Language](/reference/okta_expression_language/), for example `appuser.username`.
-          Be sure to check that your expression returns the results expected--the expression isn't validated here.
-        * **Filter**: This option displays if you chose **Groups** in the previous field. Use it to add a group filter. If you leave it blank, all users are specified for this claim.
-    * **Disable claim**: Check this option if you want to temporarily disable the claim for testing or debugging.
-    * **Include in**: Specify whether the claim is valid for any scope, or select the scopes for which it is valid.
+    Be sure to check that your expression returns the results expected--the expression isn't validated here.
+
+    **Filter**: This option displays if you chose **Groups** in the previous field. Use it to add a group filter. If you leave it blank, all users are specified for this claim.
+  * **Disable claim**: Check this option if you want to temporarily disable the claim for testing or debugging.
+  * **Include in**: Specify whether the claim is valid for any scope, or select the scopes for which it is valid.
 
 While in the Claims list, you can:
 
@@ -156,15 +156,15 @@ While in the Claims list, you can:
 
 ## Test Your Authorization Server Configuration
 
-Once you have followed the above instructions to set-up and/or customize your Authorization Server, you can test it by sending any one of the API calls that returns OAuth 2.0 and/or OpenID Connect tokens. 
+Once you have followed the above instructions to set-up and/or customize your Authorization Server, you can test it by sending any one of the API calls that returns OAuth 2.0 and/or OpenID Connect tokens.
 
 > NOTE: The `{authorizationServerId}` for the default server is `default`.
 
-A full description of Okta's relevant APIs can be found here: [OAuth 2.0 Authorization Operations](/docs/api/resources/oauth2.html#authorization-operations). 
+A full description of Okta's relevant APIs can be found here: [OAuth 2.0 Authorization Operations](/docs/api/resources/oauth2.html#authorization-operations).
 
-We have included here a few things that you can try to ensure that your Authorization Server is functioning as expected. 
+We have included here a few things that you can try to ensure that your Authorization Server is functioning as expected.
 
-> Note: This is not meant to be an exhaustive testing reference, but only to show some examples. 
+> Note: This is not meant to be an exhaustive testing reference, but only to show some examples.
 
 ### OpenID Connect Configuration
 
@@ -174,15 +174,15 @@ For more information on this endpoint, see here: [Retrieve Authorization Server 
 
 ### Custom Scopes and Claims
 
-You can retrieve a list of all scopes for your Authorization Server, including custom ones, using this endpoint: 
+You can retrieve a list of all scopes for your Authorization Server, including custom ones, using this endpoint:
 
-`/api/v1/authorizationServers/{authorizationServerId}/scopes` 
+`/api/v1/authorizationServers/{authorizationServerId}/scopes`
 
 For more information on this endpoint, see here: [Get all scopes](/docs/api/resources/oauth2.html#get-all-scopes).
 
 If you created any custom claims, the easiest way to confirm that they have been successfully added is to use this endpoint:
 
-`/api/v1/authorizationServers/{authorizationServerId}/claims` 
+`/api/v1/authorizationServers/{authorizationServerId}/claims`
 
 For more information on this endpoint, see here: [Get all claims](/docs/api/resources/oauth2.html#get-all-claims).
 
@@ -190,7 +190,7 @@ For more information on this endpoint, see here: [Get all claims](/docs/api/reso
 
 To test your Authorization Server more thoroughly, you can try a full authentication flow which returns an ID Token. To do this, you will need a client Application in Okta with at least one User assigned to it.
 
-For more information you can read about: 
+For more information you can read about:
 - [The OpenID Connect Application Wizard](https://help.okta.com/en/prev/Content/Topics/Apps/Apps_App_Integration_Wizard.htm)
 - [How to assign a User to an Application](https://support.okta.com/help/Documentation/Knowledge_Article/27418177-Using-the-Okta-Applications-Page#Assigning)
 

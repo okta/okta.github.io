@@ -35,7 +35,6 @@ After you have created the application there are two more values you will need t
 | Client ID     | In the applications list, or on the "General" tab of a specific application.    |
 | Org URL       | On the home screen of the developer dashboard, in the upper right.             |
 
-
 These values will be used in your iOS application to setup the OpenID Connect flow with Okta.
 
 ## Add Okta-AppAuth to your iOS Project
@@ -46,12 +45,14 @@ pod 'OktaAuth', '~> 0.1'
 ```
 
 Now, install the `OktaAuth` dependency and open the compiled project:
+
 ```bash
 pod install && open project.xcworkspace
 ```
 
 ### Configuration
 Create a new `Okta.plist` file in your application's bundle with the following fields:
+
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
@@ -72,6 +73,7 @@ Create a new `Okta.plist` file in your application's bundle with the following f
 </dict>
 </plist>
 ```
+
 **Note**: *To receive a **refresh_token**, you must include the `offline_access` scope.*
 
 ### Update the Private-use URI Scheme
@@ -97,6 +99,7 @@ func application(_ app: UIApplication,
 ```
 
 Then, you can start the authorization flow by simply calling `login`:
+
 ```swift
 OktaAuth
   .login()
@@ -117,6 +120,7 @@ In native applications, it is common for users to have a long-lived session. It 
 
 ### Store the User's Tokens
 Tokens are securly stored in the Keychain. They are easily set and retrieved with the helper methods `set` and `get`.
+
 ```swift
 OktaAuth
   .login()

@@ -25,3 +25,6 @@ then
     echo "Failed localhost checker! Please remove all localhost links"
     exit 1;
 fi
+
+# Run markdown lint check
+npm run lint

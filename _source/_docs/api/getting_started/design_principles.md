@@ -16,7 +16,7 @@ Breaking changes such as removing or renaming an attribute will be released as a
 
 Do not consume any Okta API unless it is documented on this site. All undocumented endpoints should be considered private, subject to change without notice, and not covered by any agreements.
 
-### Compatibility rules for input parameters
+## Compatibility rules for input parameters
 
 - Requests are compatible irrespective of the order in which the query parameters appear.
 - Requests are compatible irrespective of the order in which the properties of the JSON parameters appear
@@ -24,7 +24,7 @@ Do not consume any Okta API unless it is documented on this site. All undocument
 - Existing query parameters cannot be removed from future versions of requests.
 - Existing properties cannot be removed from the JSON parameters in future versions of requests.
 
-### Compatibility rules for JSON responses
+## Compatibility rules for JSON responses
 
 - Responses are compatible irrespective of the order in which the properties appear.
 - New properties may be added to future versions of the response.
@@ -57,22 +57,22 @@ Okta supports a subset of the `UTF-8` specification. Specifically, any character
 Where possible, the Okta API strives to use appropriate HTTP verbs for each
 action.
 
-#### GET
+### GET
 
 Used for retrieving resources.
 
-#### POST
+### POST
 
 Used for creating resources, or performing custom actions (such as
 user lifecycle operations).  For POST requests
 with no `body` param, be sure to set the `Content-Length` header to zero.
 
-#### PUT
+### PUT
 
 Used for replacing resources or collections. For PUT requests
 with no `body` param, be sure to set the `Content-Length` header to zero.
 
-#### DELETE
+### DELETE
 
 Used for deleting resources.
 
@@ -93,7 +93,6 @@ Okta supports the standard `User-Agent` HTTP header to identify the user's brows
 The **public IP address** of your application will be automatically used as the client IP address for your request. Okta supports the standard `X-Forwarded-For` HTTP header to forward the originating client's IP address if your application is behind a proxy server or acting as a login portal or gateway.
 
 > The **public IP address** of your trusted web application must be whitelisted in your [org's network security settings](https://help.okta.com/en/prod/Content/Topics/Security/Security_Network.htm) as a trusted gateway in order to forward the user agent's original IP address with the `X-Forwarded-For` HTTP header.
-
 
 ## Errors
 
@@ -338,20 +337,18 @@ End-user endpoints have org-wide rate limits as well:
 | `/login/login.htm`                       |   850 |
 | `/login/sso_iwa_auth`                    |   500 |
 
-#### Example Rate Limit Header with Org-Wide Rate Limit Error  
+#### Example Rate Limit Header with Org-Wide Rate Limit Error
 
 This example shows the relevant portion of a rate limit header being
 returned with the error for a request that exceeded the concurrent rate
 limit.
 
 ~~~http
-
-HTTP/1.1 429 
+HTTP/1.1 429
 Date: Tue, 26 Sep 2017 21:33:25 GMT
 X-Rate-Limit-Limit: 5000
 X-Rate-Limit-Remaining: 4198
 X-Rate-Limit-Reset: 1605463723
-
 ~~~
 
 ### Concurrent Rate Limits
@@ -368,7 +365,7 @@ For concurrent rate limits, traffic is measured in three different areas. Counts
 Okta has verified that these limits are sufficient based on current usage or grandfathered higher limits for those orgs that have historically exceeded this limit.
 
 Any request that would cause us to exceed the concurrent limit returns an HTTP 429 error, and the first error every 60 seconds is written to the log.
-Reporting concurrent rate limits once a minute keeps log volume manageable. 
+Reporting concurrent rate limits once a minute keeps log volume manageable.
 
 #### Example Error Response Events
 
@@ -478,23 +475,20 @@ Reporting concurrent rate limits once a minute keeps log volume manageable.
         "version": "0"
     }
 ~~~
-  
-#### Example Rate Limit Header with Concurrent Rate Limit Error  
+
+#### Example Rate Limit Header with Concurrent Rate Limit Error
 
 This example shows the relevant portion of a rate limit header being returned with the error for a request that exceeded the concurrent rate limit.
-~~~http
 
-HTTP/1.1 429 
+~~~http
+HTTP/1.1 429
 Date: Tue, 26 Sep 2017 21:33:25 GMT
 X-Rate-Limit-Limit: 0
 X-Rate-Limit-Remaining: 0
 X-Rate-Limit-Reset: 1506461721
-
 ~~~
 
-Notice that instead of the typical counts for time-based rate limits, when a request exceeds the limit for concurrent requests,
-`X-Rate-Limit-Limit`, `X-Rate-Limit-Remaining`, and `X-Rate-Limit-Reset` report the concurrent values instead. 
-When the number of unfinished requests is below the concurrent rate limit, request headers will switch back to reporting the time-based rate limits.
+Notice that instead of the typical counts for time-based rate limits, when a request exceeds the limit for concurrent requests, `X-Rate-Limit-Limit`, `X-Rate-Limit-Remaining`, and `X-Rate-Limit-Reset` report the concurrent values instead. When the number of unfinished requests is below the concurrent rate limit, request headers will switch back to reporting the time-based rate limits.
 
 The `X-Rate-Limit-Reset` time for concurrent rate limits is only a
 suggestion. There's no guarantee that enough requests will complete to
@@ -512,7 +506,6 @@ The following header is set in each response:
 HTTP/1.1 200 OK
 X-Okta-Request-Id: reqVy8wsvmBQN27h4soUE3ZEnA
 ~~~
-
 
 ## Cross-Origin Resource Sharing (CORS)
 

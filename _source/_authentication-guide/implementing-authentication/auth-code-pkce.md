@@ -19,7 +19,7 @@ The Authorization Code Flow with PKCE is the standard Code flow with an extra st
 
 For more information on the authorization code with PKCE flow, including why to use it, see our [OAuth 2.0 Overview](/authentication-guide/auth-overview/#authorization-code-with-pkce).
 
-### 1. Setting up your Application
+## 1. Setting up your Application
 
 You set up your OpenID Connect application inside the Okta Developer Console:
 
@@ -27,7 +27,7 @@ You set up your OpenID Connect application inside the Okta Developer Console:
 2. On the Create New Application page, select **Native**.
 3. Fill-in the Application Settings, then click **Done**.
 
-### 2. Using the Authorization Code Flow with PKCE
+## 2. Using the Authorization Code Flow with PKCE
 
 Just like with the regular authorization code flow, you start by making a request to your authorization server’s `/authorize` endpoint. However, in this instance you will also have to pass along a code challenge.
 
@@ -79,7 +79,7 @@ yourApp:/callback?code=BdLDvZvO3ZfSwg-asLNk&state=state-8600b31f-52d1-4dca-
 
 This code can only be used once, and will remain valid for 60 seconds, during which time it can be exchanged for tokens.
 
-### 3. Exchanging the Code for Tokens
+## 3. Exchanging the Code for Tokens
 
 To exchange this code for access and ID tokens, you pass it to your authorization server's `/token` endpoint along with the `code_verifier` that was generated at the beginning:
 
@@ -117,11 +117,11 @@ If the code is still valid, and the code verifier matches, your application will
 }
 ```
 
-### 4. Next Steps
+## 4. Next Steps
 
 When your application passes a request with an `access_token`, the resource server will need to validate it. For more on this, see [Validating Access Tokens](/authentication-guide/tokens/validating-access-tokens).
 
-### Examples
+## Examples
 
 The following native application examples show the authorization code flow, as it would be implemented by a native application that needs to authenticate a user.  These are complete example applications that show the entire experience.
 

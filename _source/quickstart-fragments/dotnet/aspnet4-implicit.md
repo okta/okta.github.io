@@ -26,7 +26,6 @@ Install these packages (with the **Include prerelease** option checked):
 - `Microsoft.IdentityModel.Tokens` version **5.2.0** or greater (from Azure AD WebStack Nightly)
 - `Microsoft.Owin.Security.Jwt` version **4.0.0-alpha1** or greater (from Katana Dev)
 
-
 ### Configure the middleware
 
 If you don't already have a `Startup.cs` file (OWIN Startup class), create one by right-clicking on your project and choosing **Add** - **Class**. Pick the **OWIN Startup** template and name the new class `Startup`.
@@ -108,7 +107,7 @@ public class MessagesController : ApiController
 }
 ```
 
-### That's it!
+### Conclusion
 
 The JWT Bearer middleware automatically validates tokens and populates `HttpContext.User` with a limited set of user information.
 

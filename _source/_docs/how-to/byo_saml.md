@@ -5,7 +5,7 @@ excerpt: How to use a custom SAML certificate for apps
 ---
 
 <a name="top"></a>
-## Bring Your Own SAML App Certificate
+# Bring Your Own SAML App Certificate
 
 Okta Admins can upload their own SAML certificates to sign the assertion for Outbound SAML apps and to sign the AuthNRequest and decrypt the assertion for Inbound SAML.
 
@@ -19,13 +19,13 @@ To use your own SAML certificate, update the key credential for the affected app
 
 The general procedure is the same for Outbound and Inbound SAML application; however, some of the api calls are different, as described in the steps below. The general procedure contains the following seven steps:
 
-  1. [List your apps](#step-1--list-your-apps)
-  2. [Generate a certificate signing request (CSR)](#step-2--generate-a-csr)
-  3. [Sign the CSR](#step-3--sign-the-csr)
-  4. [Publish the CSR](#step-4--publish-the-csr)
-  5. [Update the key credential for the app to specify the new certificate](#step-5--update-the-key-credential)
-  6. [Clone the certificate (optional)](#step-6--clone-the-certificate-optional)
-  7. [Upload the new certificate to the ISV](#step-7--upload-the-new-certificate-to-the-isv)
+1. [List your apps](#step-1--list-your-apps)
+2. [Generate a certificate signing request (CSR)](#step-2--generate-a-csr)
+3. [Sign the CSR](#step-3--sign-the-csr)
+4. [Publish the CSR](#step-4--publish-the-csr)
+5. [Update the key credential for the app to specify the new certificate](#step-5--update-the-key-credential)
+6. [Clone the certificate (optional)](#step-6--clone-the-certificate-optional)
+7. [Upload the new certificate to the ISV](#step-7--upload-the-new-certificate-to-the-isv)
 
 > **Important:** In the third step, use your own process to sign the CSR. You can't move to step four until the process is completed.
 
@@ -43,7 +43,6 @@ Request: `GET /api/v1/apps`
 Truncated Response:
 
 ~~~json
-
 {
     "id": "00000id1U3iyFqLu0g4",
     "name": "appname",
@@ -107,7 +106,6 @@ The following request generates a CSR in JSON format to use with Outbound SAML a
 
 - For Inbound SAML, change the POST statement to `POST /api/v1/idps/00000id1U3iyFqLu0g4/credentials/csrs/`.
 - For PKCS#10 format, change the Accept statement to `Accept: application/pkcs10`. <br />*Accept* specifies the response format; *Content-Type* specifies the request format.
-
 
 ~~~json
 POST /api/v1/apps/00000id1U3iyFqLu0g4/credentials/csrs/
@@ -212,7 +210,6 @@ Content-Type: application/json;charset=UTF-8
   "x5t#S256": "6ZA0gDvExTUMszE4Dvs72pEj396Q7vOHJkQQrdSddVE"
 }
 ~~~
-
 
 #### Step 5 – Update the key credential
 
@@ -352,4 +349,3 @@ For Outbound SAML, complete the following four steps.
 4. Perform the setup for your app again, using the instructions provided. During this setup, you will upload the certificate in a specified format, the metadata, or the certificate fingerprint.
 
 For Inbound SAML, follow the existing procedures for your setup.
-

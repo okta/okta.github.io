@@ -36,11 +36,13 @@ To quickly create a React app, we recommend the create-react-app CLI. Follow the
 
 ## Install Dependencies
 A simple way to add authentication into a React app is using the [Okta Sign-In Widget](/code/javascript/okta_sign-in_widget) library. We can install it via `npm`:
+
 ```bash
 cd okta-app && npm install @okta/okta-signin-widget --save
 ```
 
 We'll also need `@okta/okta-react` and `react-router-dom` to manage our routes:
+
 ```bash
 npm install @okta/okta-react react-router-dom --save
 ```
@@ -122,7 +124,7 @@ export default withAuth(class Home extends Component {
     const button = this.state.authenticated ?
       <button onClick={this.props.auth.logout}>Logout</button> :
       <button onClick={this.props.auth.login}>Login</button>;
-    
+
     return (
       <div>
         <Link to='/'>Home</Link><br/>
@@ -153,6 +155,7 @@ This route hosts the Sign-In Widget and redirects if the user is already logged 
 Create a new component `src/Login.js`:
 
 {% raw %}
+
 ```typescript
 // src/Login.js
 
@@ -192,7 +195,7 @@ export default withAuth(class Login extends Component {
   onError(err) {
     console.log('error logging in', err);
   }
-  
+
   render() {
     if (this.state.authenticated === null) return null;
     return this.state.authenticated ?
@@ -204,6 +207,7 @@ export default withAuth(class Login extends Component {
   }
 });
 ```
+
 {% endraw %}
 
 ### `/implicit/callback`
@@ -259,5 +263,5 @@ You have now successfully authenticated with Okta! Now what? With a user's `id_t
 
 Want to learn how to use the user's `access_token`? Check out our <a href='/quickstart/#/react/nodejs/generic' data-proofer-ignore>React Quickstart integrations</a> to learn about protecting routes on your server, validating the `access_token`, and more!
 
-## Support 
+## Support
 Have a question or see a bug? Post your question on [Okta Developer Forums](https://devforum.okta.com/).

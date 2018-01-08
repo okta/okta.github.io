@@ -61,6 +61,7 @@ Some routes require authentication in order to render. Defining these protected 
 ### `/`
 
 First, update `src/app/app.component.html` to provide the Login logic:
+
 ```html
 <!-- src/app/app.component.html -->
 
@@ -118,6 +119,7 @@ This route will only be visible to users with a valid `accessToken` or `idToken`
 Create a new component `src/app/protected.component.ts`:
 
 {% raw %}
+
 ```typescript
 // src/app/protected.component.ts
 
@@ -135,6 +137,7 @@ export class ProtectedComponent {
   }
 }
 ```
+
 {% endraw %}
 
 When a user attempts to access a route that is protected by `OktaAuthGuard`, it first checks to see if the user has been authenticated. If `isAuthenticated()` returns `false`, start the login flow.
@@ -259,7 +262,7 @@ const appRoutes: Routes = [
   ],
   imports: [
     BrowserModule,
-    RouterModule.forRoot(appRoutes),    
+    RouterModule.forRoot(appRoutes),
     OktaAuthModule.initAuth(config)
   ],
   bootstrap: [AppComponent]
@@ -279,5 +282,5 @@ You have now successfully authenticated with Okta! Now what? With a user's `id_t
 
 Want to learn how to use the user's `access_token`? Check out our <a href='/quickstart/#/angular/nodejs/generic' data-proofer-ignore>Angular Quickstart integrations</a> to learn about protecting routes on your server, validating the `access_token`, and more!
 
-## Support 
+## Support
 Have a question or see a bug? Post your question on [Okta Developer Forums](https://devforum.okta.com/).

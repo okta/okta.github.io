@@ -26,11 +26,13 @@ If you do not already have a  **Developer Edition Account**, you can create one 
 
 ## Create an Angular App
 To quickly create an Angular app, install the Angular CLI:
+
 ```bash
 npm install -g @angular/cli
 ```
 
 Now, create a new application:
+
 ```bash
 ng new okta-app
 ```
@@ -77,7 +79,7 @@ export class OktaAuthService {
 
   login() {
     // Launches the login redirect.
-    this.oktaAuth.token.getWithRedirect({ 
+    this.oktaAuth.token.getWithRedirect({
       responseType: ['id_token', 'token'],
       scopes: ['openid', 'email', 'profile']
     });
@@ -136,6 +138,7 @@ export class OktaAuthGuard implements CanActivate {
 Whenever a user attempts to access a route that is protected by `OktaAuthGuard`, it first checks to see if the user has been authenticated. If `isAuthenticated()` returns `false`, start the login flow.
 
 Finally, inject the guard and service into `src/app/app.module.ts` so we can use it in any declared routes:
+
 ```typescript
 // app.module.ts
 
@@ -157,6 +160,7 @@ Lets take a look at what routes are needed:
 
 ### `/`
 First, update `src/app/app.component.html` to provide the Login logic:
+
 ```html
 <!-- app.component.html -->
 
@@ -247,10 +251,11 @@ const appRoutes: Routes = [
   }
 ]
 ```
+
 *Notice how the path [/protected](#protected) uses the `canActivate` parameter to gate access to the route.*
 
-
 Finally, update your `@NgModule` to include your project components and routes in `src/app/app.module.ts`:
+
 ```typescript
 // app.module.ts
 
@@ -279,5 +284,5 @@ You have now successfully authenticated with Okta! Now what? With a user's `id_t
 
 Want to learn how to use the user's `access_token`? Check out our <a href='/quickstart/#/angular/nodejs/generic' data-proofer-ignore>Angular Quickstart integrations</a> to learn about protecting routes on your server, validating the `access_token`, and more!
 
-## Support 
+## Support
 Have a question or see a bug? Post your question on [Okta Developer Forums](https://devforum.okta.com/).

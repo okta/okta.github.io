@@ -11,7 +11,6 @@ If you want a full, working example, head over to the [ASP.NET Core MVC example]
 
 If you don't already have an ASP.NET Core 2.0 project, create one using `dotnet new mvc` or the ASP.NET Core Web Application template in Visual Studio. Choose **No Authentication** as the authentication type.
 
-
 ### Configure the application in Okta
 
 Sign in to your Okta developer account (or [create one](https://developer.okta.com/signup/)). Create or update an application in Okta with these settings:
@@ -128,7 +127,7 @@ dotnet run
 
 Open `http://localhost:60611` in a private or incognito window in your browser. Try navigating to a route that has the `[Authorize]` attribute, or to the `/Account/Login` action. You'll be redirected to the Okta Sign-In page.
 
-### That's it!
+### Conclusion
 
 ASP.NET Core automatically populates `HttpContext.User` with the information Okta sends back about the user. You can check whether the user is logged in with `User.Identity.IsAuthenticated` in your actions or views, and see all of the user's claims in `User.Claims`.
 

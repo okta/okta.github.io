@@ -8,6 +8,7 @@ exampleDescription: Spring Auth Code Example
 ### Include the dependencies
 
 For Apache Maven:
+
 ```xml
 <dependency>
     <groupId>com.okta.spring</groupId>
@@ -15,7 +16,9 @@ For Apache Maven:
     <version>{{ site.versions.spring_boot_starter }}</version>
 </dependency>
 ```
+
 For Gradle:
+
 ```groovy
 compile 'com.okta.spring:okta-spring-boot-starter:{{ site.versions.spring_boot_starter }}'
 ```

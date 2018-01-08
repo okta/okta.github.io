@@ -15,7 +15,7 @@ The Resource Owner Password Flow is intended for use cases where you control bot
 
 For more information on the resource owner password flow, including why to use it, see [our OAuth 2.0 overview](/authentication-guide/auth-overview/#resource-owner-password-flow).
 
-### 1. Setting up your Application
+## 1. Setting up your Application
 
 You set up your OpenID Connect application inside the Okta Developer Console:
 
@@ -25,7 +25,7 @@ You set up your OpenID Connect application inside the Okta Developer Console:
 4. On the next screen, in the "Client Credentials section", click **Edit**.
 5. Select "Use Client Authentication", then click **Save**.
 
-### 2. Using the Resource Owner Password Flow
+## 2. Using the Resource Owner Password Flow
 
 Before you can begin this flow, you will have to collect the user's password in a manner of your choosing.
 
@@ -64,6 +64,6 @@ If the credentials are valid, your application will receive back access and ID t
 }
 ```
 
-### 3. Next Steps
+## 3. Next Steps
 
 When your application passes a request with an access token, the resource server will need to validate it. For more on this, see [Validating Access Tokens](/authentication-guide/tokens/validating-access-tokens).
