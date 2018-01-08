@@ -27,7 +27,7 @@ Create a directory to hold your server and client applications. I called mine `o
 
 ```bash
 git clone https://github.com/oktadeveloper/okta-spring-boot-2-angular-5-example.git
-cd okta-spring-boot-2-angular-5/client && npm install && ng serve &
+cd okta-spring-boot-2-angular-5-example/client && npm install && ng serve &
 cd ../server && ./mvnw spring-boot:run
 ```
 
