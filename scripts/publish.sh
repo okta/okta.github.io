@@ -12,7 +12,7 @@ branch_environment_map[weekly]=developer-okta-com-preprod
 # Check if we are in one of our publish branches
 if [[ -z "${branch_environment_map[$BRANCH]+unset}" ]]; then
     echo "Current branch is not a publish branch"
-    exit ${BUILD_FAILURE};
+    exit $SUCCESS
 else
     DEPLOY_ENVIRONMENT=${branch_environment_map[$BRANCH]}
 fi
