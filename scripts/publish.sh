@@ -18,6 +18,7 @@ else
 fi
 
 source "${0%/*}/setup.sh"
+source "${0%/*}/helpers.sh"
 
 require_env_var "OKTA_HOME"
 require_env_var "BRANCH"
