@@ -31,7 +31,7 @@ The above handshake is what will be happening behind the scenes once this exampl
 
 As a starter guide, this post assumes only basic familiarity with Java and a few Java essentials such as Maven. If you already have a Vert.x server running, feel free to fast forward to the good stuff: you’ll integrate with Okta in the [Configure the Vert.x OAuth Handler](#Configure-the-Vert.x-OAuth-Handler) section.
 
-The completed code example, including imports and pom.xml, can be found [on Github](https://github.com/silas-b/OktaBlogs/tree/master/VertxAndOkta).
+The completed code example, including imports and pom.xml, can be found [on Github](https://github.com/oktadeveloper/OktaBlogs/tree/master/VertxAndOkta).
 
 ## Start A New Vert.x Server
 
