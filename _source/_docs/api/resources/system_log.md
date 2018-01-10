@@ -276,21 +276,21 @@ Describes the client performing the action.
 
 ### GeographicalContext Object
 
-Describes the location of the target that the action was performed on.
+Geographical Context describes a set of geographic coordinates. In addition to containing latitude and longitude data, this object also contains address data of postal code-level granularity. Within the [Client](#client-object) object, the geographical context refers to the physical location of the client when it sends the request that triggers this event.
 
-|------------+----------------------------------------------------------------+-----------------+----------|
-| Property   | Description                                                    | DataType        | Nullable |
-| ---------- | -------------------------------------------------------------- | --------------- | -------- |
-| geolocation | Geolocation of the target                                     | [Geolocation Object](#geolocation-object) | TRUE |
-| city       | City of the event                                              | String          | TRUE     |
-| state      | State of the client                                            | String          | TRUE     |
-| country    | Country of the client                                          | String          | TRUE     |
-| postalCode | Postal code of the client                                      | String          | TRUE     |
-|------------+----------------------------------------------------------------+-----------------+----------|
+|-------------+------------------------------------------------------------------------------------+---------------------------------------+----------|
+| Property    | Description                                                                        | DataType                              | Nullable |
+| ----------- | ---------------------------------------------------------------------------------- | ------------------------------------- | -------- |
+| geolocation | Contains the geolocation coordinates (latitude, longitude)                         | [Geolocation Object](#geolocation-object) | TRUE |
+| city        | The city encompassing the area containing the geolocation coordinates, if available (e.g. Seattle, San Francisco) | String | TRUE     |
+| state       | Full name of the state/province encompassing the area containing the geolocation coordinates (e.g. Montana, Incheon) | String | TRUE  |
+| country     | Full name of the country encompassing the area containing the geolocation coordinates (e.g. France, Uganda) | String       | TRUE     |
+| postalCode  | Postal code of the area encompassing the geolocation coordinates                   | String                                | TRUE     |
+|-------------+------------------------------------------------------------------------------------+---------------------------------------+----------|
 
 ### Geolocation Object
 
-The latitude and longitude of the geolocation where an action was performed.
+Latitude and longitude of the geolocation where an action was performed, formatted according to the [ISO-6709](https://en.wikipedia.org/wiki/ISO_6709) standard. The latitude uses 2 digits for its integer part and the longitude uses 3 digits for its integer part.
 
 |------------+----------------------------------------------------------------+-----------------+----------|
 | Property   | Description                                                    | DataType        | Nullable |
