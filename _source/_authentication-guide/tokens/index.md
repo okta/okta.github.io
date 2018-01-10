@@ -7,9 +7,9 @@ title: Working with OAuth 2.0 Tokens
 
 Once you have [implemented your preferred OAuth 2.0 flow](/authentication-guide/implementing-authentication/), you will need to know how work with the tokens that you have been granted.
 
-More information about access tokens can be found here: <https://developer.okta.com/standards/OAuth/index.html#access-token>
+More information about access tokens can be found here: <https://developer.okta.com/standards/OAuth/#access-token>
 
-Additional information about ID tokens can be found here: <https://developer.okta.com/standards/OIDC/index.html#id-token>
+Additional information about ID tokens can be found here: <https://developer.okta.com/standards/OIDC/#id-token>
 
 This section will help you understand token validation, revocation, as well as how to use a refresh token to get a new access token.
 

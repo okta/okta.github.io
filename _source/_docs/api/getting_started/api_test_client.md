@@ -27,7 +27,7 @@ If you need organizations with guaranteed SLAs or enterprise features, [let us k
 
 ## Set Up Your Environment
 
-1. [Create an API token](getting_a_token.html){:target="_blank"} for your org.
+1. [Create an API token](getting_a_token){:target="_blank"} for your org.
 1. [Install the Postman app](https://www.getpostman.com/apps){:target="_blank"}.
 1. Launch Postman and click the **Import** button. Select **Import From Link**, and paste this link into the textbox: `https://developer.okta.com/docs/api/postman/example.oktapreview.com.environment`
     {% img import_enviro.png alt:"Importing the Okta Example Environment" %}
@@ -91,7 +91,7 @@ Import any Okta API collection for Postman from the following list:
 | Users                                     |   [![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/1755573c5cf5fbf7968b){:target="_blank"} |
 | Custom SMS Templates                      |   [![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/d71f7946d8d56ccdaa06){:target="_blank"} |
 
-These buttons are also available at the top of each API reference page in [developer.okta.com](/docs/api/resources/apps.html).
+These buttons are also available at the top of each API reference page in [developer.okta.com](/docs/api/resources/apps).
 
 ## Tips
 

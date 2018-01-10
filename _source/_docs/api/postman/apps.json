@@ -1,7 +1,7 @@
 {
 	"id": "e9959fe8-f3e5-5654-8228-1ad067c4c9c4",
 	"name": "Apps (Okta API)",
-	"description": "The [Okta Application API](/docs/api/resources/apps.html) provides operations to manage applications and/or assignments to users or groups for your organization.",
+	"description": "The [Okta Application API](/docs/api/resources/apps) provides operations to manage applications and/or assignments to users or groups for your organization.",
 	"order": [
 		"0d1d79ce-acbb-f192-ad02-99d930d1b795",
 		"138a4c61-5ab2-0e3e-39f4-f2e151e7c4dc",

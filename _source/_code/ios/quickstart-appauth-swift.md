@@ -55,7 +55,7 @@ Create a new `Okta.plist` file in your application's bundle with the following f
 ```
 **Note**: *To receive a **refresh_token**, you must include the `offline_access` scope.*
 
-> Important: Most native applications send access tokens to access APIs. If you're building an API that will need to accept access tokens, [create an authorization server](/authentication-guide/implementing-authentication/set-up-authz-server.html).
+> Important: Most native applications send access tokens to access APIs. If you're building an API that will need to accept access tokens, [create an authorization server](/authentication-guide/implementing-authentication/set-up-authz-server).
 
 ### Update the Private-use URI Scheme
 In order to redirect back to your application from a web browser, you must specify a unique URI to your app. To do this, open `Info.plist` in your application bundle and set a **URL Scheme** to the scheme of the login redirect URI.
@@ -161,7 +161,7 @@ OktaAuth.userinfo() {
 ```
 
 ## Conclusion
-You have now successfully authenticated with Okta! Now what? With a user's `id_token`, you have basic claims for the user's identity. You can extend the set of claims by modifying the `scopes` to retrieve custom information about the user. This includes `locale`, `address`, `groups`, and [more](../../docs/api/resources/oidc.html).
+You have now successfully authenticated with Okta! Now what? With a user's `id_token`, you have basic claims for the user's identity. You can extend the set of claims by modifying the `scopes` to retrieve custom information about the user. This includes `locale`, `address`, `groups`, and [more](/docs/api/resources/oidc).
 
 ## Support 
 Have a question or see a bug? Post your question on [Okta Developer Forums](https://devforum.okta.com/).

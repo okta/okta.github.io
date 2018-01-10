@@ -80,7 +80,7 @@ Used for deleting resources.
 
 ## Client Request Context
 
-Okta will derive client request context directly from the HTTP request headers and client TCP socket.  Request context is used to evaluate policies such as **Okta Sign-On Policy** and provide client information for [troubleshooting and auditing](../resources/events.html#client-objecttype) purposes.
+Okta will derive client request context directly from the HTTP request headers and client TCP socket.  Request context is used to evaluate policies such as **Okta Sign-On Policy** and provide client information for [troubleshooting and auditing](../resources/events#client-objecttype) purposes.
 
 ### User Agent
 
@@ -122,7 +122,7 @@ All requests that result in an error will return the appropriate 4xx or 5xx erro
 }
 ~~~
 
-See [Error Codes](error_codes.html) for a list of API error codes.
+See [Error Codes](error_codes) for a list of API error codes.
 
 > Only the `errorCode` property is supported for runtime error flow control.  The `errorSummary` property is only intended for troubleshooting and may change over time.
 
@@ -132,15 +132,15 @@ The Okta API currently requires the custom HTTP authentication scheme `SSWS` for
 
     Authorization: SSWS 00QCjAl4MlV-WPXM…0HmjFx-vbGua
 
-> See [Obtaining a token](getting_a_token.html) for instructions on how to get an API key for your organization.
+> See [Obtaining a token](getting_a_token) for instructions on how to get an API key for your organization.
 
-The API key (API token) isn't interchangeable with an Okta [session token](/docs/api/resources/authn.html#session-token), access tokens or ID tokens used with [OAuth 2.0 and OpenID Connect](/docs/api/resources/oauth2.html).
+The API key (API token) isn't interchangeable with an Okta [session token](/docs/api/resources/authn#session-token), access tokens or ID tokens used with [OAuth 2.0 and OpenID Connect](/docs/api/resources/oauth2).
 
 ## Pagination
 
 Requests that return a list of resources may support paging.  Pagination is based on a cursor and not on page number. The cursor is opaque to the client and specified in either the `before` or `after` query parameter.  For some resources, you can also set a custom page size with the `limit` parameter.
 
-Note that for technical reasons not all APIs respect pagination or the `before` and `limit` parameters, see the [Events API](/docs/api/resources/events.html) for example.
+Note that for technical reasons not all APIs respect pagination or the `before` and `limit` parameters, see the [Events API](/docs/api/resources/events) for example.
 
 Param    | Description
 -------- | ------------
@@ -168,9 +168,9 @@ Link Relation Type | Description
 
 When you first make an API call and get a cursor-paged list of objects, the end of the list will be the point at which you do not receive another `next` link value with the response. This holds true for all but two cases:
 
-1. [Events API](/docs/api/resources/events.html): The `next` link always exists, since the [Events API](/docs/api/resources/events.html) is like a stream of data with a cursor.
+1. [Events API](/docs/api/resources/events): The `next` link always exists, since the [Events API](/docs/api/resources/events) is like a stream of data with a cursor.
 
-2. [SystemLog API](/docs/api/resources/system_log): The `next` link will always exist in polling queries in the [SystemLog API](/docs/api/resources/system_log). A polling query is defined as an `ASCENDING` query with an empty or absent `until` parameter. Like in the [Events API](/docs/api/resources/events.html), the polling query is a stream of data.
+2. [SystemLog API](/docs/api/resources/system_log): The `next` link will always exist in polling queries in the [SystemLog API](/docs/api/resources/system_log). A polling query is defined as an `ASCENDING` query with an empty or absent `until` parameter. Like in the [Events API](/docs/api/resources/events), the polling query is a stream of data.
 
 ## Filtering
 
@@ -223,7 +223,7 @@ Filters must be evaluated using standard order of operations. Attribute operator
 
 ## Hypermedia
 
-Resources in the Okta API use hypermedia for "discoverability".  Hypermedia enables API clients to navigate  resources by following links like a web browser instead of hard-coding URLs in your application.  Links are identified by link relations which are named keys. Link relations describe what resources are available and how they can be interacted with.  Each resource may publish a set of link relationships based on the state of the resource.  For example, the status of a user in the [User API](/docs/api/resources/users.html#links-object) will govern which lifecycle operations are permitted.  Only the permitted operations will be published as lifecycle operations.
+Resources in the Okta API use hypermedia for "discoverability".  Hypermedia enables API clients to navigate  resources by following links like a web browser instead of hard-coding URLs in your application.  Links are identified by link relations which are named keys. Link relations describe what resources are available and how they can be interacted with.  Each resource may publish a set of link relationships based on the state of the resource.  For example, the status of a user in the [User API](/docs/api/resources/users#links-object) will govern which lifecycle operations are permitted.  Only the permitted operations will be published as lifecycle operations.
 
 The Okta API had incorporated [JSON Hypertext Application Language](http://tools.ietf.org/html/draft-kelly-json-hal-06) or HAL format as the foundation for hypermedia "discoverability".  HAL provides a set of conventions for expressing hyperlinks in JSON responses representing two simple concepts: Resources and Links.
 
@@ -506,7 +506,7 @@ stop exceeding the concurrent rate limit at the time indicated.
 
 ## Request Debugging
 
-The request ID will always be present in every API response and can be used for debugging. This value can be used to correlate events from the [Events API](/docs/api/resources/events.html) as well as the System Log events.
+The request ID will always be present in every API response and can be used for debugging. This value can be used to correlate events from the [Events API](/docs/api/resources/events) as well as the System Log events.
 
 The following header is set in each response:
 
@@ -522,7 +522,7 @@ X-Okta-Request-Id: reqVy8wsvmBQN27h4soUE3ZEnA
 
 [Cross-Origin Resource Sharing (CORS)](http://en.wikipedia.org/wiki/Cross-Origin_Resource_Sharing) is a mechanism that allows a web page to make an AJAX call using [XMLHttpRequest (XHR)](http://en.wikipedia.org/wiki/XMLHttpRequest) to a domain that is  different from the one from where the script was loaded.  Such "cross-domain" requests would otherwise be forbidden by web browsers, per the [same origin security policy](http://en.wikipedia.org/wiki/Same_origin_policy).  CORS defines a [standardized](http://www.w3.org/TR/cors/) way in which the browser and the server can interact to determine whether or not to allow the cross-origin request.
 
-In Okta, CORS allows JavaScript hosted on your websites to make an XHR to the Okta API with the Okta session cookie. Every website origin must be explicitly permitted via the Okta Admin Dashboard for CORS.  See [Enabling CORS](./enabling_cors.html) for details on how to allow your website to make cross-origin requests.
+In Okta, CORS allows JavaScript hosted on your websites to make an XHR to the Okta API with the Okta session cookie. Every website origin must be explicitly permitted via the Okta Admin Dashboard for CORS.  See [Enabling CORS](enabling_cors) for details on how to allow your website to make cross-origin requests.
 
 > **Caution:** Only grant access to specific origins (websites) that you control and trust to access the Okta API.
 

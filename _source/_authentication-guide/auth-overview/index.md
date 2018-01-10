@@ -17,11 +17,11 @@ This page will give you an overview of OAuth 2.0 and OpenID Connect and their Ok
 
 There are three major kinds of authentication that you can perform with Okta:
 
-- The [Authentication API](/docs/api/resources/authn.html) controls access to your Okta org and applications. It provides operations to authenticate users, perform multi-factor enrollment and verification, recover forgotten passwords, and unlock accounts. It is the underlying API that the Okta Sign-in Widget and Auth JS use under the hood.
-- The [OAuth 2.0](/docs/api/resources/oauth2.html) protocol controls authorization to access a protected resource, like your web app, native app, or API service.
-- The [OpenID Connect](/docs/api/resources/oidc.html) protocol is built on the OAuth 2.0 protocol and helps authenticate users and convey information about them. It is also more opinionated than plain OAuth 2.0, for example in its scope definitions.
+- The [Authentication API](/docs/api/resources/authn) controls access to your Okta org and applications. It provides operations to authenticate users, perform multi-factor enrollment and verification, recover forgotten passwords, and unlock accounts. It is the underlying API that the Okta Sign-in Widget and Auth JS use under the hood.
+- The [OAuth 2.0](/docs/api/resources/oauth2) protocol controls authorization to access a protected resource, like your web app, native app, or API service.
+- The [OpenID Connect](/docs/api/resources/oidc) protocol is built on the OAuth 2.0 protocol and helps authenticate users and convey information about them. It is also more opinionated than plain OAuth 2.0, for example in its scope definitions.
 
-If you would like to work with the Okta API and control user access to Okta, then you should use [the Authentication API](/docs/api/resources/authn.html).
+If you would like to work with the Okta API and control user access to Okta, then you should use [the Authentication API](/docs/api/resources/authn).
 
 If you are interested in controlling access to your own application, then use the OAuth 2.0 and OpenID Connect (OIDC) protocols. The OAuth 2.0 protocol will allow you to delegate authorization, while the OIDC protocol will allow you retrieve and store authentication information about your end-users. The Okta Authentication Guide is intended to help you figure out how to implement and use OAuth 2.0 and OIDC with Okta. 
 
@@ -33,7 +33,7 @@ Session tokens are for use within Okta, while ID tokens, access tokens, and refr
 
 The Authentication API is used by the Okta Sign-In Widget as well as the AuthJS library. Both AuthJS and the Authentication API are intended for advanced use cases.
 
-You can find out more about the Authentication API in our [API Reference](/docs/api/resources/authn.html).
+You can find out more about the Authentication API in our [API Reference](/docs/api/resources/authn).
 
 ### OAuth 2.0
 
@@ -67,7 +67,7 @@ At the core of both OAuth 2.0 and its OpenID Connect extension is the authorizat
 and its own signing key for tokens in order to keep proper boundary between security domains. In the context of this guide, Okta is your authorization server.
 
 The authorization server also acts as an OpenID Connect Provider,
-which means you can request [ID tokens](/standards/OIDC/index.html#id-token)
+which means you can request [ID tokens](/standards/OIDC/#id-token)
 in addition to [access tokens](/standards/OAuth/#access-token) from the authorization server endpoints.
 
 ### OpenID Connect

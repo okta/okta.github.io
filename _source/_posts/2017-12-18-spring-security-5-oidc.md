@@ -374,7 +374,7 @@ This article showed you how to implement login with OAuth 2.0 and Spring Securit
 
 These resources provide additional information about Okta and OIDC:
 
-* [Okta Developer Documentation](/documentation/) and its [OpenID Connect API](/docs/api/resources/oidc.html)
+* [Okta Developer Documentation](/documentation/) and its [OpenID Connect API](/docs/api/resources/oidc)
 * [Identity, Claims, & Tokens – An OpenID Connect Primer, Part 1 of 3](/blog/2017/07/25/oidc-primer-part-1)
 * [OIDC in Action – An OpenID Connect Primer, Part 2 of 3](/blog/2017/07/25/oidc-primer-part-2)
 * [What’s in a Token? – An OpenID Connect Primer, Part 3 of 3](/blog/2017/08/01/oidc-primer-part-3)

@@ -45,7 +45,7 @@ Note the parameters that are being passed:
 
 - `grant_type` is `client_credentials`, indicating that we are using the Client Credentials grant type.
 - `redirectUri` must match one of the "Login redirect URIs" you specified when you were creating your Okta application in Step 1.
-- `scope` must be at least one custom scope that you have created. For more information about this, see the [Custom Authorization Server chapter](/authentication-guide/implementing-authentication/set-up-authz-server.html#create-scopes-optional).
+- `scope` must be at least one custom scope that you have created. For more information about this, see the [Custom Authorization Server chapter](/authentication-guide/implementing-authentication/set-up-authz-server#create-scopes-optional).
 
 If the credentials are valid, the application will receive back an access token:
 

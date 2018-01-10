@@ -917,8 +917,8 @@ The first three parameters correspond to different types of lists:
 | Parameter | Description                                                                                                                                  | Param Type | DataType | Required |
 |:----------|:---------------------------------------------------------------------------------------------------------------------------------------------|:-----------|:---------|:---------|
 | q         | Finds a user that matches `firstName`, `lastName`, and `email` properties                                                                    | Query      | String   | FALSE    |
-| filter    |   [Filters](/docs/api/getting_started/design_principles.html#filtering) users with a supported expression for a subset of properties           | Query      | String   | FALSE    |
-| search    | Searches for users with a supported   [filtering](/docs/api/getting_started/design_principles.html#filtering)  expression for most properties  | Query      | String   | FALSE    |
+| filter    |   [Filters](/docs/api/getting_started/design_principles#filtering) users with a supported expression for a subset of properties           | Query      | String   | FALSE    |
+| search    | Searches for users with a supported   [filtering](/docs/api/getting_started/design_principles#filtering)  expression for most properties  | Query      | String   | FALSE    |
 | limit     | Specifies the number of results returned                                                                                                     | Query      | Number   | FALSE    |
 | after     | Specifies the pagination cursor for the next page of users (default is 200)                                                                  | Query      | String   | FALSE    |
 
@@ -926,9 +926,9 @@ The first three parameters correspond to different types of lists:
   * If you don&#8217;t specify any value for `limit` and do specify a query, a maximum of 10 results are returned.
   * The maximum value for `limit` is 200 for most orgs.
   *  Don&#8217;t write code that depends on the default or maximum value, as it may change.
-  * An HTTP 500 status code usually indicates that you have exceeded the request timeout.  Retry your request with a smaller limit and paginate the results. For more information, see [Pagination](/docs/api/getting_started/design_principles.html#pagination).
+  * An HTTP 500 status code usually indicates that you have exceeded the request timeout.  Retry your request with a smaller limit and paginate the results. For more information, see [Pagination](/docs/api/getting_started/design_principles#pagination).
   * Use `limit` and `after` with all four query types.
-  * Treat the `after` cursor as an opaque value and obtain it through the next link relation. See [Pagination](/docs/api/getting_started/design_principles.html#pagination).
+  * Treat the `after` cursor as an opaque value and obtain it through the next link relation. See [Pagination](/docs/api/getting_started/design_principles#pagination).
 
 ##### Response Parameters
 {:.api .api-response .api-response-params}
@@ -1130,7 +1130,7 @@ Examples use cURL-style escaping instead of URL encoding to make them easier to 
 
 > Hint: If filtering by `email`, `lastName`, or `firstName`, it may be easier to use `q` instead of `filter`.
 
-See [Filtering](/docs/api/getting_started/design_principles.html#filtering) for more information about the expressions used in filtering.
+See [Filtering](/docs/api/getting_started/design_principles#filtering) for more information about the expressions used in filtering.
 
 ##### Filter Examples
 
@@ -1824,7 +1824,7 @@ id        | `id` of user | URL        | String   | TRUE     |
 ##### Response Parameters
 {:.api .api-response .api-response-params}
 
-Array of [Groups](groups.html)
+Array of [Groups](groups)
 
 ##### Request Example
 {:.api .api-request .api-request-example}
@@ -2733,7 +2733,7 @@ Lists all grants for the specified user
 | limit     | The maximum number of grants to return                                                       | Query      | Number   | FALSE    | 20      |
 | after     | Specifies the pagination cursor for the next page of grants                                  | Query      | String   | FALSE    |         |
 
-> Note: The after cursor should treated as an opaque value and obtained through [the next link relation](/docs/api/getting_started/design_principles.html#pagination).
+> Note: The after cursor should treated as an opaque value and obtained through [the next link relation](/docs/api/getting_started/design_principles#pagination).
 
 #### Request Example
 {:.api .api-request .api-request-example}
@@ -3330,7 +3330,7 @@ For more information about `login`, see [Get User by ID](#get-user-with-id).
 
 #### Custom Profile Properties
 
-User profiles may be extended with custom properties but the property must first be added to the user profile schema before it can be referenced.  You can use the Profile Editor in the Admin UI or the [Schemas API](./schemas.html) to manage schema extensions.
+User profiles may be extended with custom properties but the property must first be added to the user profile schema before it can be referenced.  You can use the Profile Editor in the Admin UI or the [Schemas API](schemas) to manage schema extensions.
 
 Custom attributes may contain HTML tags. It is the client&#8217;s responsibility to escape or encode this data before displaying it. Use [best-practices](https://www.owasp.org/index.php/XSS_(Cross_Site_Scripting)_Prevention_Cheat_Sheet) to prevent cross-site scripting.
 
@@ -3457,7 +3457,7 @@ Specifies link relations (See [Web Linking](http://tools.ietf.org/html/rfc5988))
 
 #### Individual Users vs Collection of Users
 
-For an individual User result, the Links Object contains a full set of link relations available for that User as determined by Policy. For a collection of Users, the Links Object contains only the self link. Operations that return a collection of Users include [List Users](#list-users) and [List Group Members](groups.html#list-group-members).
+For an individual User result, the Links Object contains a full set of link relations available for that User as determined by Policy. For a collection of Users, the Links Object contains only the self link. Operations that return a collection of Users include [List Users](#list-users) and [List Group Members](groups#list-group-members).
 
 
 | Link Relation Type     | Description                                                                                                                                           |

@@ -37,7 +37,7 @@ For readability simplified versions of the API transactions are illustrated belo
 
 When using logs from Okta to write back to Okta, the values for `user_id`, `group_id` and others will be present in the log.  They will be found in the `actor` or `target` object, along with other references suitable for distinction.
 
-When using logs from outside of Okta to trigger to coorelate or trigger events, use the lookup and search functions described in the [Users](./security-analytics.html#users) and [Groups](./security-analytics.html#groups) sections above to retrieve the Okta identifier for those objects.
+When using logs from outside of Okta to trigger to coorelate or trigger events, use the lookup and search functions described in the [Users](security-analytics#users) and [Groups](security-analytics#groups) sections above to retrieve the Okta identifier for those objects.
 
 </div>
 
