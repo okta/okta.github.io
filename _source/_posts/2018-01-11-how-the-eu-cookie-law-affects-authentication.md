@@ -4,8 +4,8 @@ title: "How the EU Cookie Law Affects Authentication"
 author: rdegges
 tags: [law, programming, security]
 tweets: 
-  - "Wondering if the EU Cookie Law affects you? Read the synopsis by @rdegges here: "
-  - "Are you trying to work around the EU Cookie Law? Be smart! Read our in-depth article on the topic→ "
+  - "Wondering if the EU Cookie Law affects you? Read the synopsis by @rdegges here:"
+  - "Are you trying to work around the EU Cookie Law? Be smart! Read our in-depth article on the topic→"
 ---
 
 **NOTE**: *This blog post is provided for informational purposes only and is provided as-is, without any warranty (even though we had one of our lawyers take a quick look).  While it touches on certain legal concepts, it does not constitute legal advice.  If you or your organization requires legal advice, please be sure to contact an attorney.*
@@ -16,11 +16,9 @@ Over the last few years you might have noticed banners like this one popping up 
 
 These banners are a direct result of the passage of the EU directive, sometimes
 known as the Cookie Law, back in 2011. The EU passed this directive to improve
-consumer awareness about how their data is being used by websites and give
+consumer awareness about how their data are being used by websites and give
 consumers the option not to participate in the data collection and tracking
-practices that many websites utilize.
-
-The Cookie Law got its name because at the time a majority of the data websites
+practices that many websites utilize.  The Cookie Law got its name because at the time a majority of the data websites
 collected about users was stored in cookies.
 
 Unfortunately, there’s a lot of confusion and misinformation in the developer
@@ -89,8 +87,8 @@ don’t need to worry.
 
 This is, of course, completely false.
 
-Regardless of where you store user information for purposes like tracking and
-marketing, you are only compliant if you show a cookie banner on your website.
+If you are storing user information for tracking or marketing purposes, you must
+show a banner on your website regardless of where you store that information.
 Just because the EU Cookie Law has “cookie” in the name, it doesn’t mean that
 using an alternate place to store information will make you compliant!
 
@@ -131,7 +129,7 @@ accessible to client-side Javascript code, which puts you at risk for
 attacks](https://www.owasp.org/index.php/Cross-site_Scripting_(XSS)) (XSS) which
 just so happen to be one of the most common attacks
 ([pdf](https://www.owasp.org/images/7/72/OWASP_Top_10-2017_%28en%29.pdf.pdf))
-(and one of the hardest to prevent!) across the entire internet!
+and one of the hardest to prevent across the entire internet!
 
 In short: when handling sensitive information like user session info, you must
 always store that data in cookies (with the [httpOnly flag
