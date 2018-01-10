@@ -10,8 +10,6 @@ Okta&#8217;s [Universal Directory](https://support.okta.com/articles/Knowledge_A
 
 > Okta has only implemented a subset of [JSON Schema Draft 4](https://tools.ietf.org/html/draft-zyp-json-schema-04).  This document should describe which parts are applicable to Okta and any extensions Okta has made to [JSON Schema Draft 4](https://tools.ietf.org/html/draft-zyp-json-schema-04)
 
-{% api_lifecycle ea %}
-
 ## Getting Started
 
 Explore the Schemas API: [![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/443242e60287fb4b8d6d)
@@ -637,8 +635,6 @@ curl -v -X POST \
 ~~~
 
 ## App User Schema Operations
-
-{% api_lifecycle ea %}
 
 ### Get App User Schema
 {:.api .api-operation}
@@ -1296,8 +1292,8 @@ User profile schema properties have the following standard [JSON Schema Draft 6]
 | title                          | user-defined display name for the property | String                                            | FALSE    | FALSE  | FALSE    |
 | description                    | description of the property                | String                                            | TRUE     | FALSE  | FALSE    |
 | type                           | type of property                           | `string`, `boolean`, `number`, `integer`, `array` | FALSE    | TRUE   | TRUE     |
-| enum {% api_lifecycle ea %}    | enumerated value of the property           | array                                             | TRUE     | TRUE   | FALSE    |
-| oneOf {% api_lifecycle ea %}   | non-empty array of valid JSON schemas      | array                                             | TRUE     | TRUE   | FALSE    |
+| enum                           | enumerated value of the property           | array                                             | TRUE     | TRUE   | FALSE    |
+| oneOf                          | non-empty array of valid JSON schemas      | array                                             | TRUE     | TRUE   | FALSE    |
 
 
 ##### Description Details
@@ -1550,8 +1546,8 @@ User profile schema properties have the following standard [JSON Schema Draft 6]
 | title                          | user-defined display name for the property | String                                            | FALSE    | FALSE  | FALSE    |
 | description                    | description of the property                | String                                            | TRUE     | FALSE  | FALSE    |
 | type                           | type of property                           | `string`, `boolean`, `number`, `integer`, `array` | FALSE    | FALSE  | FALSE    |
-| enum {% api_lifecycle ea %}    | enumerated value of the property           | array                                             | TRUE     | TRUE   | FALSE    |
-| oneOf {% api_lifecycle ea %}   | non-empty array of valid JSON schemas      | array                                             | TRUE     | TRUE   | FALSE    |
+| enum                           | enumerated value of the property           | array                                             | TRUE     | TRUE   | FALSE    |
+| oneOf                          | non-empty array of valid JSON schemas      | array                                             | TRUE     | TRUE   | FALSE    |
 
 ##### Description Details
 

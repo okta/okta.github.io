@@ -3111,6 +3111,405 @@ curl -v -X GET \
 ]
 ~~~
 
+## User Email Operations
+
+{% api_lifecycle beta %}
+
+These operations can be used to manage a user's emails.
+
+### User Email Object
+
+| Property    | Description                                 | Datatype                                                        | Unique |
+|:------------|:--------------------------------------------|:----------------------------------------------------------------|:-------|
+| id          | The ID of the email object                  | String                                                          | TRUE   |
+| status      | Whether is email is verified or not         | String                                                          | FALSE  |
+| value       | The value of the email address              | String                                                          | FALSE  |
+| _links      | Discoverable resources related to the email | [JSON HAL](http://tools.ietf.org/html/draft-kelly-json-hal-06)  | FALSE  |
+
+Example 
+
+~~~json
+{
+  "id": "00T196qTp3LIMZQ0L0g3",
+  "status": "UNVERIFIED | VERIFIED",
+  "value": "saml.jackson@example.com",
+  "_links": {
+    "self": {
+      "href": "/api/v1/users/00uzjoiIBruZE06jj0g3/emails/00T196qTp3LIMZQ0L0g3",
+      "hints": {
+        "allow": [
+          "GET"
+        ]
+      }
+    },
+    "verify": {
+      "href": "/api/v1/users/00uzjoiIBruZE06jj0g3/emails/00T196qTp3LIMZQ0L0g3/verify",
+      "hints": {
+        "allow": [
+          "POST"
+        ]
+      }
+    },
+    "change": {
+      "href": "/api/v1/users/00uzjoiIBruZE06jj0g3/emails/00T196qTp3LIMZQ0L0g3/change",
+      "hints": {
+        "allow": [
+          "POST"
+        ]
+      }
+    },
+    "user": {
+      "href": "/api/v1/users/00uzjoiIBruZE06jj0g3",
+      "hints": {
+        "allow": [
+          "GET"
+        ]
+      }
+    }
+  }
+}
+~~~
+
+### List Emails
+{:.api .api-operation}
+
+{% api_lifecycle beta %}
+
+{% api_operation get /api/v1/users/*:uid*/emails %}
+
+List a users emails
+
+#### Request
+{:.api .api-request .api-request-example}
+
+~~~sh
+GET /api/v1/users/00uzjoiIBruZE06jj0g3/emails HTTP/1.1
+Accept: application/json
+Content-Type: application/json
+~~~
+
+#### Response (Verified Email)
+{:.api .api-response .api-response-example}
+
+> Note: Though the email is in `VERIFIED` status, the `verify` operation is still published for completeness.
+
+~~~json
+[
+  {
+    "id": "00T196qTp3LIMZQ0L0g3",
+    "status": "VERIFIED",
+    "value": "saml.jackson@example.com",
+    "_links": {
+      "self": {
+        "href": "/api/v1/users/00uzjoiIBruZE06jj0g3/emails/00T196qTp3LIMZQ0L0g3",
+        "hints": {
+          "allow": [
+            "GET"
+          ]
+        }
+      },
+      "verify": {
+        "href": "/api/v1/users/00uzjoiIBruZE06jj0g3/emails/00T196qTp3LIMZQ0L0g3/verify",
+        "hints": {
+          "allow": [
+            "POST"
+          ]
+        }
+      },
+      "change": {
+        "href": "/api/v1/users/00uzjoiIBruZE06jj0g3/emails/00T196qTp3LIMZQ0L0g3/change",
+        "hints": {
+          "allow": [
+            "POST"
+          ]
+        }
+      },
+      "user": {
+        "href": "/api/v1/users/00uzjoiIBruZE06jj0g3",
+        "hints": {
+          "allow": [
+            "GET"
+          ]
+        }
+      }
+    }
+  }
+]
+~~~
+
+#### Response (Unverified Email)
+{:.api .api-response .api-response-example}
+
+~~~json
+[
+  {
+    "id": "00T196qTp3LIMZQ0L0g3",
+    "status": "UNVERIFIED",
+    "value": "saml.jackson@example.com",
+    "_links": {
+      "self": {
+        "href": "/api/v1/users/00uzjoiIBruZE06jj0g3/emails/00T196qTp3LIMZQ0L0g3",
+        "hints": {
+          "allow": [
+            "GET"
+          ]
+        }
+      },
+      "verify": {
+        "href": "/api/v1/users/00uzjoiIBruZE06jj0g3/emails/00T196qTp3LIMZQ0L0g3/verify",
+        "hints": {
+          "allow": [
+            "POST"
+          ]
+        }
+      },
+      "user": {
+        "href": "/api/v1/users/00uzjoiIBruZE06jj0g3",
+        "hints": {
+          "allow": [
+            "GET"
+          ]
+        }
+      }
+    }
+  }
+]
+~~~
+
+### Get Email
+{:.api .api-operation}
+
+{% api_lifecycle beta %}
+
+{% api_operation get /api/v1/users/*:uid*/emails/*:eid* %}
+
+Get a particular email for a user
+
+#### Request
+{:.api .api-request .api-request-example}
+
+~~~sh
+GET /api/v1/users/00uzjoiIBruZE06jj0g3/emails/00T196qTp3LIMZQ0L0g3 HTTP/1.1
+Accept: application/json
+Content-Type: application/json
+~~~
+
+#### Response
+{:.api .api-response .api-response-example}
+
+~~~json
+{
+  "id": "00T196qTp3LIMZQ0L0g3",
+  "status": "UNVERIFIED",
+  "value": "saml.jackson@example.com",
+  "_links": {
+    "self": {
+      "href": "/api/v1/users/00uzjoiIBruZE06jj0g3/emails/00T196qTp3LIMZQ0L0g3",
+      "hints": {
+        "allow": [
+          "GET"
+        ]
+      }
+    },
+    "verify": {
+      "href": "/api/v1/users/00uzjoiIBruZE06jj0g3/emails/00T196qTp3LIMZQ0L0g3/verify",
+      "hints": {
+        "allow": [
+          "POST"
+        ]
+      }
+    },
+    "user": {
+      "href": "/api/v1/users/00uzjoiIBruZE06jj0g3",
+      "hints": {
+        "allow": [
+          "GET"
+        ]
+      }
+    }
+  }
+}
+~~~
+
+### Verify Email
+{:.api .api-operation}
+
+{% api_lifecycle beta %}
+
+{% api_operation post /api/v1/users/*:uid*/emails/*:eid*/verify %}
+
+Trigger email verification flow for an unverified email
+
+> Verification is idempotent and can be retried at any time.  Issuing a new verification will replace any previously issued verification tokens!
+
+#### Request Parameters
+{:.api .api-request .api-request-params}
+
+| Parameter   | Description                                                               | Param Type | DataType           | Required | Default                     |
+|:----------- | ------------------------------------------------------------------------- | ---------- | ------------------ | -------- | --------------------------- |
+| uid         | `id` of user                                                              | URL        | String             | TRUE     |                             |
+| eid         | `id` of email                                                             | URL        | String             | TRUE     |                             |
+| sendEmail   | Sends a verification email to the user if `true`                          | Query      | Boolean            | FALSE    | TRUE                        |
+| redirectUri | Specifies where the end-user is redirected after verification             | Body       | String             | FALSE    | `/app/UserHome`             |
+| expiresAt   | Timestamp when the verification token expires                             | Body       | Date               | FALSE    | 5 days |
+| actions     | Extensible actions performed when verification token is validated          | Body       | Actions Object     | FALSE    |                             |
+
+##### Actions Object
+> `signOn` property determines whether user has to sign-in after clicking on email verification link to complete verification process. Thus, if `signOn` is set to `REQUIRED`, an Okta session is granted after the user has signed in.
+
+| Property      | DataType                         | Nullable | Unique | Readonly | Default          |
+|:--------------|:---------------------------------|:---------|:-------|:---------|:-----------------|
+| signOn        | `NOT_REQUIRED` or `REQUIRED`     | TRUE     | FALSE  | FALSE    | `REQUIRED`       |
+
+
+#### Request
+{:.api .api-request .api-request-example}
+
+~~~sh
+POST /api/v1/users/00uzjoiIBruZE06jj0g3/emails/00T196qTp3LIMZQ0L0g3/verify HTTP/1.1
+Accept: application/json
+Content-Type: application/json
+
+{
+  "redirectUri": "https://example.com/some/page?state=blah&custom=true",
+  "expiresAt": "2017-06-14T00:17:57.000Z",
+  "actions": {
+    "signOn": "REQUIRED"
+  }
+}
+~~~
+
+#### Response
+{:.api .api-response .api-response-example}
+
+~~~sh
+HTTP/1.1 202 Accepted
+Content-Type: application/json
+
+{
+  "verificationToken": "HcjJ03HcEEFEydBk5N8k"
+}
+~~~
+
+##### Errors
+
+~~~sh
+HTTP/1.1 400 Bad Request
+Content-Type: application/json
+
+{
+  "errorCode": "E0000001",
+  "errorSummary": "Api validation failed: expiresAt",
+  "errorLink": "E0000001",
+  "errorId": "oaeWGQKoQHeQmy0u8w8bPwi_Q",
+  "errorCauses": [
+    {
+      "errorSummary": "The verification token must not expire in the past"
+    }
+  ]
+}
+~~~
+
+### Change Email Credential
+{:.api .api-operation}
+
+{% api_lifecycle beta %}
+
+{% api_operation post /api/v1/users/*:id*/emails/*:eid*/change %}
+
+Change a verified email.
+
+This operation delays a profile update/push until the user has verified their email address.
+
+> Email changes are idempotent.  Issuing a new change verification will replace any previously issued change verification tokens!
+
+#### Request Parameters
+{:.api .api-request .api-request-params}
+
+| Parameter   | Description                                                                | Param Type | DataType           | Required | Default                     |
+|:----------- | -------------------------------------------------------------------------- | ---------- | ------------------ | -------- | --------------------------- |
+| uid         | `id` of user                                                               | URL        | String             | TRUE     |                             |
+| eid         | `id` of email                                                              | URL        | String             | TRUE     |                             |
+| sendEmail   | Sends a verification email to the user if `true`                           | Query      | Boolean            | FALSE    | TRUE                        |
+| value       | Target email address that will replace current email address when verified | Body       | String (RFC Email) | TRUE     |                             |
+| redirectUri | Specifies where the end-user is redirected after verification              | Body       | String             | FALSE    | `/app/UserHome`             |
+| expiresAt   | Timestamp when the verification token expires                              | Body       | Date               | FALSE    | 5 days |
+| actions     | Extensible actions peformed when verification token is validated           | Body       | Actions Object     | FALSE    |                             |
+
+##### Actions Object
+
+> `signOn` property determines whether user has to sign-in after clicking on email verification link to complete verification process. Thus, if `signOn` is set to `REQUIRED`, an Okta session is granted after the user has signed in.
+
+| Property      | DataType                         | Nullable | Unique | Readonly | Default          |
+|:--------------|:---------------------------------|:---------|:-------|:---------|:-----------------|
+| signOn        | `NOT_REQUIRED` or `REQUIRED`     | TRUE     | FALSE  | FALSE    | `REQUIRED`       |
+
+#### Request
+{:.api .api-request .api-request-example}
+
+~~~sh
+POST /api/v1/users/00uzjoiIBruZE06jj0g3/emails/00T196qTp3LIMZQ0L0g3/change HTTP/1.1
+Accept: application/json
+Content-Type: application/json
+
+{
+  "redirectUri": "https://example.com/some/page?state=blah&custom=true",
+  "expiresAt": "2017-06-14T00:17:57.000Z",
+  "value": "update@example.com",
+  "actions": {
+    "signOn": "REQUIRED"
+  }
+}
+~~~
+
+#### Response
+{:.api .api-response .api-response-example}
+
+~~~sh
+HTTP/1.1 202 Accepted
+Content-Type: application/json
+
+{
+  "verificationToken": "HcjJ03HcEEFEydBk5N8k"
+}
+~~~
+
+##### Errors
+
+~~~sh
+HTTP/1.1 400 Bad Request
+Content-Type: application/json
+
+{
+  "errorCode": "E0000001",
+  "errorSummary": "Api validation failed: expiresAt",
+  "errorLink": "E0000001",
+  "errorId": "oaeWGQKoQHeQmy0u8w8bPwi_Q",
+  "errorCauses": [
+    {
+      "errorSummary": "The verification token must not expire in the past"
+    }
+  ]
+}
+~~~
+
+~~~sh
+HTTP/1.1 400 Bad Request
+Content-Type: application/json
+
+{
+  "errorCode": "E0000001",
+  "errorSummary": "Api validation failed: value",
+  "errorLink": "E0000001",
+  "errorId": "oaeWGQKoQHeQmy0u8w8bPwi_Q",
+  "errorCauses": [
+    {
+      "errorSummary": "The verification token must not expire in the past"
+    }
+  ]
+}
+~~~
+
 ## User Model
 
 ### Example
@@ -3579,4 +3978,4 @@ For an individual User result, the Links Object contains a full set of link rela
 | client_name | The name of the OAuth 2.0 client            | String                                                          | TRUE   |
 | client_uri  | The URI of the OAuth 2.0 client             | String                                                          | FALSE  |
 | logo_uri    | The logo URI of the OAuth 2.0 client        | String                                                          | FALSE  |
-| _links      | Discoverable resources related to the grant |     [JSON HAL](http://tools.ietf.org/html/draft-kelly-json-hal-06)  | FALSE  |
+| _links      | Discoverable resources related to the grant | [JSON HAL](http://tools.ietf.org/html/draft-kelly-json-hal-06)  | FALSE  |

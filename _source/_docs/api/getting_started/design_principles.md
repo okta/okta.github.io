@@ -166,7 +166,11 @@ Link Relation Type | Description
 `next`             | Specifies the URL of the immediate next page of results.
 `prev`             | Specifies the URL of the immediate previous page of results.
 
-When you first make an API call and get a cursor-paged list of objects, the end of the list will be the point at which you do not receive another `next` link value with the response. The behavior is different in the [Events API](/docs/api/resources/events.html). In the [Events API](/docs/api/resources/events.html), the next link always exists, since that connotation is more like a cursor or stream of data. The other APIs are primarily fixed data lengths.
+When you first make an API call and get a cursor-paged list of objects, the end of the list will be the point at which you do not receive another `next` link value with the response. This holds true for all but two cases:
+
+1. [Events API](/docs/api/resources/events.html): The `next` link always exists, since the [Events API](/docs/api/resources/events.html) is like a stream of data with a cursor.
+
+2. [SystemLog API](/docs/api/resources/system_log): The `next` link will always exist in polling queries in the [SystemLog API](/docs/api/resources/system_log). A polling query is defined as an `ASCENDING` query with an empty or absent `until` parameter. Like in the [Events API](/docs/api/resources/events.html), the polling query is a stream of data.
 
 ## Filtering
 
