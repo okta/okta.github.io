@@ -1,8 +1,11 @@
 ---
 layout: blog_post
-title: 'Add Single Sign On to Your Vert.x Server with Okta'
+title: 'Add Single Sign-On to Your Vert.x Server with Okta'
 author: silas-b
 tags: [sso, vert.x, java, oauth]
+tweets:
+  - Learn how to use @vertx_project with OAuth!
+  - Add SSO to your @Vertx_Project with OAuth and @OktaDev
 ---
 
 Vert.x has continued to gain traction as a contender to the Spring ecosystem, largely due to improved performance and its polyglot accessibility. Fortunately, securing a Vert.x server with industry-leading authentication and authorization is almost as quick and easy as it is in Spring! In just a few minutes, you can have secure single sign-on guarding your server and giving you access to a wealth of information about your users. This tutorial will walk you through that process, as you stand up a new Vert.x server and integrate it with Okta for security and user management.
@@ -40,11 +43,11 @@ After clicking generate, downloading, and unzipping locally, you should see the 
 
 {% img blog/sso-oauth-vertx/vertx-project-tree.png alt:"Vert.x project tree" width:"700" %}{: .center-image }
 
-And running with `mvn compile exec:java` from the root *demo* directory should start the server on port 8080:
+And running with `mvn compile exec:java` from the *demo* directory should start the server on port 8080:
 
 {% img blog/sso-oauth-vertx/vertx-compile.png alt:"Vert.x project compiling" width:"700" %}{: .center-image }
 
-Visiting `http://localhost:8080` in your browser returns a reassuring hello-world response:
+Visiting `http://localhost:8080` in your browser returns a reassuring hello world response:
 
 {% img blog/sso-oauth-vertx/vertx-hello.png alt:"Vert.x initial hello world page" width:"700" %}{: .center-image }
 
@@ -52,7 +55,7 @@ At this point, a proper next step would be to switch to https before continuing 
 
 ## Bring in the Vert.x Config
 
-Vert.x offers a versatile config library, albeit a little more work to set up than in Spring. This example will make use of a handful of config values, so you can take this opportunity to add Vert.x Config to your project. The dependency should already be present in your pom.xml if you specified Vert.x Config when creating the starter project.
+Vert.x offers a versatile config library, albeit a little more work to set up than in Spring. This example will make use of a handful of config values, so you can take this opportunity to add Vert.x Config to your project. The dependency should already be present in your `pom.xml` if you specified Vert.x Config when creating the starter project.
 
 ```xml
 <dependency>
@@ -68,7 +71,7 @@ Create a file called `src/main/application.json` and add the following content:
 {
    "clientId": "{okta-client-id}",
    "clientSecret": "{okta-client-secret}",
-   "issuer": "{okta-issuer-url}",
+   "issuer": "https://{oktaOrgUrl}/oauth2/default",
    "callbackUrl": "http://localhost:8080/login",
    "port": 8080
 }
@@ -134,7 +137,7 @@ These values can now be used in your `src/main/application.json` file.
 Vert.x comes with an out-of-the-box OAuth manager that integrates nicely with Okta as an identity provider.  To keep things tidy, you'll create a separate factory method in `src/main/java/com/example/demo/MainVerticle.java`that produces a configured OAuth handler.  Add the following to the `MainVerticle` class, replacing the client info below with your account details obtained from the Okta developer dashboard:
 
 ```java
-AuthHandler getOAuthHandler(Router router){
+AuthHandler getOAuthHandler(Router router) {
     OAuth2Auth oauth2 = OAuth2Auth.create(vertx, OAuth2FlowType.AUTH_CODE, new OAuth2ClientOptions()
         .setClientID(config().getString("clientId"))
         .setClientSecret(config().getString("clientSecret"))
@@ -156,7 +159,7 @@ In the above example, note the three requested scopes: **openid**, **profile**, 
 
 ## Intercept and Authorize Protected Endpoints
 
-Now that the AuthHandler is prepared, it needs to precede request handling of any protected endpoint and authenticate the user. By using a wildcard to register it as the top-level handler for all paths below `/private/`, it will only need to be dealt with once for all future handlers you might create. Any request handler below the `/private/` path can then be guaranteed that when it is called, it will only be from a properly authenticated user.
+Now that the `AuthHandler` is prepared, it needs to precede request handling of any protected endpoint and authenticate the user. By using a wildcard to register it as the top-level handler for all paths below `/private/`, it will only need to be dealt with once for all future handlers you might create. Any request handler below the `/private/` path can then be guaranteed that when it is called, it will only be from a properly authenticated user.
 
 Alter the `startServer()` method of the `MainVerticle` class as indicated below to generate and register the handler:
 
@@ -187,7 +190,7 @@ This would be an excellent time to start up the server again and make sure every
 
 Now that callers to your `/private/` APIs are logged in, the next thing you'll want is their information. This is delivered in the form of a [JSON Web Token](https://www.jsonwebtoken.io/), which must be extracted and decoded. The Vert.x OAuth handler hides this as a named member of a stringified JSON object called the **principal**, which is itself a component of the context's **user** object. That encoded token is then decoded and verified using the JWT library of your choice. This example uses [Okta's JWT verifier library](https://github.com/okta/okta-jwt-verifier-java).
 
-Both the `access_token` and `id_token` are available, but this tutorial will only decode the `id_token`. There is a similar function to decode the `access_token` if needed.  To accomplish this, include the Okta JWT lib dependency in your **pom.xml**:
+Both the `access_token` and `id_token` are available, but this tutorial will only decode the `id_token`. There is a similar function to decode the `access_token` if needed.  To accomplish this, include the Okta JWT lib dependency in your `pom.xml`:
 
 ```xml
 <dependency>
@@ -209,7 +212,7 @@ Map<String, Object> getIdClaims(RoutingContext ctx) {
 
         Jwt idTokenJwt = jwtVerifier.decodeIdToken(ctx.user().principal().getString("id_token"), null);
         return idTokenJwt.getClaims();
-    }catch(Exception e){
+    } catch (Exception e) {
         //do something with the exception...
         return new HashMap<>();
     }
@@ -243,7 +246,7 @@ With this final change, restarting your server and once again hitting `http://lo
 
 ## Onward and Upward
 
-Congratulations, you now have a high-performance Vert.x server protected by Okta's state-of-the-art security and identity management! Okta provides [an entire SDK](https://github.com/okta/okta-sdk-java) for interacting further with users and accounts, including adding custom data and attributes to your users.
+Congratulations, you now have a high-performance Vert.x server protected by Okta's state-of-the-art security and identity management! Okta provides a [Java SDK](https://github.com/okta/okta-sdk-java) for interacting further with users and accounts, including adding custom data and attributes to your users.
 
 Thanks for reading, and as always, please hit us up in the comments below with questions. We’d love to have you follow us on Twitter [@OktaDev](https://twitter.com/OktaDev), or read on for more great Java content from our blog:
 * [Get Started with Spring Security 5.0 and OIDC](https://developer.okta.com/blog/2017/12/18/spring-security-5-oidc)
