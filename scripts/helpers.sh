@@ -261,6 +261,6 @@ function removeHTMLExtensions() {
         fi
         cp "$f" "${f%.html}";
         path=`echo ${f%.html} | sed "s/.\/dist//g"`
-        sed "s+{{ page.redirect.to }}+$path+g" ./_source/_layouts/redirect.html > $f
+        sed "s+{{ page.redirect.to | remove: 'index' }}+$path+g" ./_source/_layouts/redirect.html > $f
     done
 }
