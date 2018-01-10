@@ -124,7 +124,7 @@ personal information.
 
 The problem is that **HTML local storage is not a safe place to store sensitive
 information like a user’s session data**. HTML local storage is designed to be
-accessible to client-side Javascript code, which puts you at risk for
+accessible to client-side JavaScript code, which puts you at risk for
 [cross-site scripting
 attacks](https://www.owasp.org/index.php/Cross-site_Scripting_(XSS)) (XSS) which
 just so happen to be one of the most common attacks
