@@ -43,7 +43,7 @@ After clicking generate, downloading, and unzipping locally, you should see the 
 
 {% img blog/sso-oauth-vertx/vertx-project-tree.png alt:"Vert.x project tree" width:"700" %}{: .center-image }
 
-And running with `mvn compile exec:java` from the *demo* directory should start the server on port 8080:
+And running with `mvn compile exec:java` from the `demo` directory should start the server on port 8080:
 
 {% img blog/sso-oauth-vertx/vertx-compile.png alt:"Vert.x project compiling" width:"700" %}{: .center-image }
 
@@ -71,7 +71,7 @@ Create a file called `src/main/application.json` and add the following content:
 {
    "clientId": "{okta-client-id}",
    "clientSecret": "{okta-client-secret}",
-   "issuer": "https://{oktaOrgUrl}/oauth2/default",
+   "issuer": "https://{yourOktaDomain}/oauth2/default",
    "callbackUrl": "http://localhost:8080/login",
    "port": 8080
 }
