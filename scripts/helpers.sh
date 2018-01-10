@@ -254,7 +254,7 @@ function removeHTMLExtensions() {
     find ./dist -type f ! -iname 'index.html' -name '*.html' -print0 | while read -d $'\0' f
     do
         
-        if [ -a `echo ${f%.html}` ] ;
+        if [ -e `echo ${f%.html}` ] ;
         then
             # Skip if files have already been updated
             continue;
