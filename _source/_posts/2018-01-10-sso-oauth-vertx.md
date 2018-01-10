@@ -29,7 +29,7 @@ Let someone else deal with it. To achieve this, a bit of cooperation is required
 
 The above handshake is what will be happening behind the scenes once this example is completed. Vert.x supplies a handy OAuth library to take care of this entire process for you – all you need to do is configure it and register it appropriately.  That's what this tutorial demonstrates.
 
-As a starter guide, this post assumes only basic familiarity with Java and a few Java essentials such as Maven. If you already have a Vert.x server running, feel free to fast forward to the good stuff: you’ll integrate with Okta in the [Configure the Vert.x OAuth Handler](#Configure-the-Vert.x-OAuth-Handler) section.
+As a starter guide, this post assumes only basic familiarity with Java and a few Java essentials such as Maven. If you already have a Vert.x server running, feel free to fast forward to the good stuff: you’ll integrate with Okta in the [Configure the Vert.x OAuth Handler](#configure-the-vertx-oauth-handler) section.
 
 The completed code example, including imports and pom.xml, can be found [on Github](https://github.com/oktadeveloper/OktaBlogs/tree/master/VertxAndOkta).
 
