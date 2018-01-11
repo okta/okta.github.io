@@ -34,6 +34,13 @@
         serverExampleType: 'implicit'
       },
       {
+        name: 'vue',
+        label: 'Vue',
+        serverExampleType: 'implicit',
+        // Temporary icon until Vue.js is added
+        codeIconName: 'javascript'
+      },
+      {
         name: 'android',
         label: 'Android',
         serverExampleType: 'implicit'
@@ -42,7 +49,7 @@
         name: 'ios',
         label: 'iOS',
         serverExampleType: 'implicit'
-      },
+      }
     ],
     servers: [
       {
