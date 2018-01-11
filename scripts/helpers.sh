@@ -87,7 +87,6 @@ function check_for_jekyll_dependencies() {
     interject 'Done Jekyll checking dependencies'
 }
 
-
 function generate_html() {
     check_for_jekyll_dependencies
 
@@ -263,4 +262,8 @@ function removeHTMLExtensions() {
         path=`echo ${f%.html} | sed "s/.\/dist//g"`
         sed "s+{{ page.redirect.to | remove: 'index' }}+$path+g" ./_source/_layouts/redirect.html > $f
     done
+}
+
+function check_github_pages() {
+    ruby scripts/gh-pages-docs.rb;
 }

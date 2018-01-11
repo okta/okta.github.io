@@ -41,3 +41,11 @@ then
 else
     echo -e "\xE2\x9C\x94 Passed quickstart sitemap check"
 fi
+
+if ! check_github_pages ;
+then
+    echo "Known GitHub pages paths are throwing 404 error pages. Please contact #eng-devex."
+    exit 1
+else
+    echo -e "\xE2\x9C\x94 Passed route check for GitHub Pages"
+fi

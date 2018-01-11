@@ -5,6 +5,7 @@ description: > # this means to ignore newlines until "baseurl:"
   Secure, scalable, and highly available authentication and user management for any app.
 baseurl: ""
 url: "https://developer.okta.com"
+weekly_url: "http://developer.trexcloud.com"
 twitter_username: OktaDev
 github_username:  oktadeveloper
 disqus_shortname: oktadevblog
@@ -130,3 +131,12 @@ dev_forum:  https://devforum.okta.com/
 
 # Location of main Drupal site for navigation and shared resources
 external_domain: https://developer.okta.com
+
+github_pages_docs:
+  - okta-sdk-java
+  - okta-sdk-php
+  - okta-sdk-nodejs
+  # - okta-sdk-python
+  - okta-sdk-dotnet
+  # - okta-jwt-verifier-java
+  # - okta-spring-boot
