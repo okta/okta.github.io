@@ -10,7 +10,7 @@ Okta is a standards-compliant [OAuth 2.0](http://oauth.net/documentation) author
 
 OpenID Connect extends OAuth 2.0. The OAuth 2.0 API provides API security via scoped access tokens, and OpenID Connect provides user authentication and an SSO layer.
 
-This page contains detailed information about the OAuth 2.0 / OpenID Connect endpoints that Okta exposes on its authorization servers. For higher-level information about how to use this endpoints, see the [Okta Authentication Guide](/authentication-guide).
+This page contains detailed information about the OAuth 2.0 / OpenID Connect endpoints that Okta exposes on its authorization servers. For higher-level information about how to use this endpoints, see the [Okta Authentication Guide](/authentication-guide/).
 
 ## Endpoints
 
