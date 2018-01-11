@@ -859,7 +859,7 @@ you’ll need to get your app published in [the Okta Integration Network](https:
 
 Follow the steps below to test and submit your application for Okta review:
 
-1. [Review Okta’s SCIM Docs & Prepare Your App](#review-oktas-scim-docs-prepare-your-app)
+1. [Review Okta’s SCIM Docs and Prepare Your App](#review-oktas-scim-docs-and-prepare-your-app)
 2. [Test Your SCIM Server](#test-your-scim-server)
 3. [Submit for Okta Review and Testing](#submit-for-okta-review-and-testing)
 4. [Publish to Okta Integration Network (OIN) in Beta](#publish-to-okta-integration-network-oin-in-beta)
@@ -876,7 +876,7 @@ If this is the case, follow steps 1-3 and you will be able to indicate in step 3
 Okta will create the submitted integration per usual and assign it to Orgs that you specify as a private app.
 Note that you cannot use the SCIM template app used for prototyping, as it has limitations that prevent it from being used in production.
 
-#### Review Okta’s SCIM Docs & Prepare Your App
+#### Review Okta’s SCIM Docs and Prepare Your App
 
 The first step is to build a compliant SCIM server.
 Even if you already support SCIM, it is important that you review Okta’s SCIM docs above,
