@@ -11,12 +11,12 @@ Single sign-on is just one aspect of federation. First, an account for the user 
 
 While many ISVs use proprietary APIs, Okta recommends that you implement your API using the [Simple Cloud Identity Management protocol](http://www.simplecloud.info/) (SCIM) which supports all of the key features needed in provisioning.
 
-[Okta’s SCIM Provisioning Developer Program](/standards/SCIM/index.html)
+[Okta’s SCIM Provisioning Developer Program](/standards/SCIM/)
 is designed to help you build your SCIM server and integrate provisioning into the Okta Integration Network.
 Get started by reviewing the program process, SCIM docs, and applying to the program.
 
 Related articles:
 
-* [Single Sign-On](/use_cases/integrate_with_okta/sso-with-saml.html)
-* [Promotion](/use_cases/integrate_with_okta/promotion.html)
-* [OIN FAQs](/use_cases/integrate_with_okta/oan-faqs.html)
+* [Single Sign-On](/use_cases/integrate_with_okta/sso-with-saml)
+* [Promotion](/use_cases/integrate_with_okta/promotion)
+* [OIN FAQs](/use_cases/integrate_with_okta/oan-faqs)

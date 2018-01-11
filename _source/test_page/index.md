@@ -91,9 +91,9 @@ nostra             | nostra maecenas non. Dolor arcu convallis.              | B
 * Platea `vulputate` `lacinia` integer et facilisis elementum blandit congue quam. Nec turpis semper amet metus ridiculus porta, dolor eu diam. [ridiculus](https://tools.ietf.org/html/rfc6749).
 
 * {% api_lifecycle beta %} Nec turpis semper amet metus ridiculus porta, dolor eu diam:
-    * `prompt`, Primis ad cum fusce Nunco [`/oauth2/:authorizationServerId/v1/authorize`](/docs/api/resources/oauth2.html#obtain-an-authorization-grant-from-a-user)(custom authorization server)
+    * `prompt`, Primis ad cum fusce Nunco [`/oauth2/:authorizationServerId/v1/authorize`](/docs/api/resources/oauth2#obtain-an-authorization-grant-from-a-user)(custom authorization server)
     * `consent_method`, magnis nisi euismod penatibus posuere
-    * `consent`, integer taciti [scopes](/docs/api/resources/oauth2.html#scopes-properties)
+    * `consent`, integer taciti [scopes](/docs/api/resources/oauth2#scopes-properties)
 
     | `prompt` Value    | `consent_method`                 | `consent`                   | Result       |
     |:------------------|:---------------------------------|:----------------------------|:-------------|

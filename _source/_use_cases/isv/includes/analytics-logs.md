@@ -93,7 +93,7 @@ save checkpointUrl
 
 ##### Ad hoc Queries
 
-This approach is intended to one-off collection of specific events tightly filtered by date, a filter, a query or any valid combination of these as [described here](../../docs/api/resources/system_log.html#list-events)
+This approach is intended to one-off collection of specific events tightly filtered by date, a filter, a query or any valid combination of these as [described here](/docs/api/resources/system_log#list-events)
 
 ###### Ad hoc Pseudocode 1
 

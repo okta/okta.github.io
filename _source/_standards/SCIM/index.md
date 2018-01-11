@@ -75,7 +75,7 @@ Learn more about the overall use case in [Using Sync Password: Active Directory 
 #### Profile Mastering Users
 
 > Profile Mastering Users is currently a {% api_lifecycle beta %} feature for Okta’s SCIM-Based Provisioning option.
-[Beta features](/docs/api/getting_started/releases-at-okta.html#beta) are made available to a small set of customers for testing and feedback.
+[Beta features](/docs/api/getting_started/releases-at-okta#beta) are made available to a small set of customers for testing and feedback.
 While in Beta, Okta may make breaking changes, so the integration with the feature can't be published in the Okta Integration Network or used by customers in production environments.
 
 Mastering is a more sophisticated version of read (import) Users.
@@ -112,7 +112,7 @@ Okta supports these common Provisioning use cases:
 #### App-as-Master
 
 > App-as-Master is currently a {% api_lifecycle beta %} feature for Okta’s SCIM-Based Provisioning option.
-[Beta features](/docs/api/getting_started/releases-at-okta.html#beta) are made available to a small set of customers for testing and feedback.
+[Beta features](/docs/api/getting_started/releases-at-okta#beta) are made available to a small set of customers for testing and feedback.
 While in Beta, Okta may make breaking changes, so the integration with the feature can't be published in the Okta Integration Network or used by customers in production environments.
 
 While most apps fit the category of a downstream app in the directory-as-master use case, some apps can be the master. This is the App-as-Master use case.

@@ -115,7 +115,7 @@ Your application has been created, but you still have a few settings to change.
 
 **Important:** You will need to remember this token value, so copy/paste it somewhere safe.
 
-For more information take a look at the official [Create an API token](/docs/api/getting_started/getting_a_token.html) guide.
+For more information take a look at the official [Create an API token](/docs/api/getting_started/getting_a_token) guide.
 
 ### Run the Spring Boot App
 
@@ -446,7 +446,7 @@ If it works - great, now we can add auth with Okta!
 
 ### Authenticating with the Okta Auth SDK
 
-The Okta Auth SDK builds on top of Okta's [Authentication API](/docs/api/resources/authn.html) and [OAuth 2.0 API](/docs/api/resources/oidc.html) to enable you to create a fully branded sign-in experience using JavaScript.
+The Okta Auth SDK builds on top of Okta's [Authentication API](/docs/api/resources/authn) and [OAuth 2.0 API](/docs/api/resources/oidc) to enable you to create a fully branded sign-in experience using JavaScript.
 
 Install it using npm:
 

@@ -3,7 +3,7 @@ layout: docs_page
 weight: 1
 title: Social Login Overview
 redirect_from:
-    - "/docs/api/resources/social_authentication.html"
+    - "/docs/api/resources/social_authentication"
 ---
 
 # Social Login
@@ -35,7 +35,7 @@ Configuring social login with Okta allows you to use the following features:
 
 ### The Social Login Process
 
-The social login process starts at the [authentication endpoint](/docs/api/resources/oidc.html#authentication-request), then goes out to the provider and back:
+The social login process starts at the [authentication endpoint](/docs/api/resources/oidc#authentication-request), then goes out to the provider and back:
 
 1. The user who wishes to authenticate clicks a “Log in with x” link.
 2. The user authenticates and is asked by the Provider to accept the permissions required by your app.

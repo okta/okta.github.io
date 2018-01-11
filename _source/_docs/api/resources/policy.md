@@ -823,7 +823,7 @@ authType |  | `ANY` or `RADIUS` | No |
 {: #NetworkConditionObject }
 
 Specifies a network selection mode, and a set of network zones to be included or excluded. If the connection parameter's data type is `ZONE`, exactly one of the include or exclude arrays is required.
-Specific zone ids to include or exclude are enumerated in the respective arrays. The [Zones API](./zones.html) can be used to manage network zones.
+Specific zone ids to include or exclude are enumerated in the respective arrays. The [Zones API](zones) can be used to manage network zones.
 
 Parameter | Description | Data Type | Required |
 | --- | --- | --- | ---

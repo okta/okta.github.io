@@ -40,7 +40,7 @@ If you only need one Authorization Server, but you'd like to know more about cus
 When complete, your Authorization Server's **Settings** tab displays the information that you provided and allows you to edit it.
 {% img auth_server2.png alt:"Add Authorization Server" width:"640px" %}
 
-Once the Authorization Server is created you can also edit the Signing Key Rotation setting. You can find out more about Okta's signing keys by reading about [token validation](/authentication-guide/tokens/validating-access-tokens.html#what-to-check-when-validating-an-access-token).
+Once the Authorization Server is created you can also edit the Signing Key Rotation setting. You can find out more about Okta's signing keys by reading about [token validation](/authentication-guide/tokens/validating-access-tokens#what-to-check-when-validating-an-access-token).
 
 ## Create Access Policies
 
@@ -110,7 +110,7 @@ At this point you can keep reading to find out how to create custom scopes and c
 
 ## Create Scopes (Optional)
 
-Scopes specify what access privileges are being requested as part of the authorization. For example, the `email` scope requests access to the user's email address. There are certain reserved scopes that are created with any Okta authorization server, which are listed [here](/standards/OIDC/index.html#scopes). 
+Scopes specify what access privileges are being requested as part of the authorization. For example, the `email` scope requests access to the user's email address. There are certain reserved scopes that are created with any Okta authorization server, which are listed [here](/standards/OIDC/#scopes). 
 
 If you need scopes in addition to the reserved scopes provided, you can create them. Custom scopes can have corresponding claims that tie them to some sort of user information.
 
@@ -160,7 +160,7 @@ Once you have followed the above instructions to set-up and/or customize your Au
 
 > NOTE: The `{authorizationServerId}` for the default server is `default`.
 
-A full description of Okta's relevant APIs can be found here: [OAuth 2.0 Authorization Operations](/docs/api/resources/oauth2.html#authorization-operations). 
+A full description of Okta's relevant APIs can be found here: [OAuth 2.0 Authorization Operations](/docs/api/resources/oauth2#authorization-operations). 
 
 We have included here a few things that you can try to ensure that your Authorization Server is functioning as expected. 
 
@@ -170,7 +170,7 @@ We have included here a few things that you can try to ensure that your Authoriz
 
 To verify that your server was created and has the expected configuration values, you can send an API request to the Server's OpenID Connect Metadata URI: `https://{yourOktaDomain}.com/oauth2/{authorizationServerId}/.well-known/openid-configuration` using an HTTP client or by typing the URI inside of a browser. This will return information about the OpenID configuration of your Authorization Server, though it does not currently return any custom scopes or claims that you might have created.
 
-For more information on this endpoint, see here: [Retrieve Authorization Server OpenID Connect Metadata](/docs/api/resources/oauth2.html#retrieve-authorization-server-openid-connect-metadata).
+For more information on this endpoint, see here: [Retrieve Authorization Server OpenID Connect Metadata](/docs/api/resources/oauth2#retrieve-authorization-server-openid-connect-metadata).
 
 ### Custom Scopes and Claims
 
@@ -178,13 +178,13 @@ You can retrieve a list of all scopes for your Authorization Server, including c
 
 `/api/v1/authorizationServers/{authorizationServerId}/scopes` 
 
-For more information on this endpoint, see here: [Get all scopes](/docs/api/resources/oauth2.html#get-all-scopes).
+For more information on this endpoint, see here: [Get all scopes](/docs/api/resources/oauth2#get-all-scopes).
 
 If you created any custom claims, the easiest way to confirm that they have been successfully added is to use this endpoint:
 
 `/api/v1/authorizationServers/{authorizationServerId}/claims` 
 
-For more information on this endpoint, see here: [Get all claims](/docs/api/resources/oauth2.html#get-all-claims).
+For more information on this endpoint, see here: [Get all claims](/docs/api/resources/oauth2#get-all-claims).
 
 ### Testing an OpenID Connect Flow
 
@@ -212,7 +212,7 @@ To this you will need to add the following URL query parameters:
 - A `response_mode` which you can set to `fragment`
 - (Optionally) `state` and `nonce` values
 
-All of the values are fully documented here: [Obtain an Authorization Grant from a User](/docs/api/resources/oauth2.html#obtain-an-authorization-grant-from-a-user).
+All of the values are fully documented here: [Obtain an Authorization Grant from a User](/docs/api/resources/oauth2#obtain-an-authorization-grant-from-a-user).
 
 The resulting URL would look like this:
 

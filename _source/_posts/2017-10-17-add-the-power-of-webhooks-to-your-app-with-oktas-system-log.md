@@ -513,7 +513,7 @@ $ export OKTA_ORG_URL="https://{yourOktaDomain}.com"
 $ export OKTA_API_KEY="01A_BcDE23fgH4IJKLM5nop_QRstUvwXYZ6aBC78dE"
 ```
 
-**IMPORTANT**: The values for `OKTA_ORG_URL` and `OKTA_API_KEY` above are examples. You will need to use the URL for your own Okta org as well as [create an API token](https://developer.okta.com/docs/api/getting_started/getting_a_token.html) to allow `loghook` to connect to your Okta org.
+**IMPORTANT**: The values for `OKTA_ORG_URL` and `OKTA_API_KEY` above are examples. You will need to use the URL for your own Okta org as well as [create an API token](https://developer.okta.com/docs/api/getting_started/getting_a_token) to allow `loghook` to connect to your Okta org.
 
 Now, you'll need to edit the `loghook.csv` file and add entries for where you want to send the webhooks. The [RequestBin](https://requestb.in/) tool is a great resource to use for setting up a quick and temporary webhook endpoint for testing.
 
@@ -539,6 +539,6 @@ INFO[0000] Sending events matching '.*' to 'https://requestb.in/0ab12345'
 INFO[0000] Started polling for events at: https://dev-12345.oktapreview.com
 ```
 
-I hope that this post has inspired you to think of cool ways you can use webhooks with your own Okta org. I highly suggest checking out [Zapier](https://zapier.com/) and in particular the excellent [Zapier Webhook support](https://zapier.com/blog/how-use-zapier-webhooks/) that Zapier provides. You should also take a look at this post on [the webhooks vs serverless debate](https://developer.okta.com/blog/2017/10/11/why-are-webhooks-better-than-serverless-extensibility) by my friend and colleague Randall Degges.
+I hope that this post has inspired you to think of cool ways you can use webhooks with your own Okta org. I highly suggest checking out [Zapier](https://zapier.com/) and in particular the excellent [Zapier Webhook support](https://zapier.com/blog/how-use-zapier-webhooks/) that Zapier provides. You should also take a look at this post on [the webhooks vs serverless debate](/blog/2017/10/11/why-are-webhooks-better-than-serverless-extensibility) by my friend and colleague Randall Degges.
 
 [Let me know](mailto:joel.franusic@okta.com) how you're using `loghook` or if you have any questions or comments about this post. And don't forget to follow our team on Twitter [@oktadev](https://twitter.com/OktaDev). Thanks for reading!

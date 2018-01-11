@@ -43,11 +43,11 @@ To update existing app integrations, there are four steps to follow.
 
 Although unlikely, if your ISV does not accept the SHA256 certificate, you can revert the procedure to use a SHA1 certificate.
 
-For information on using the Postman REST API test client for these steps, see [API Test Client](/docs/api/getting_started/api_test_client.html).
+For information on using the Postman REST API test client for these steps, see [API Test Client](/docs/api/getting_started/api_test_client).
 
 #### Step 1 – List your apps and get the app id, name, and label for each app to update.
 
-Use the [List Apps API](/docs/api/resources/apps.html#list-applications) to return a list of all apps.
+Use the [List Apps API](/docs/api/resources/apps#list-applications) to return a list of all apps.
 
 For each app to update, collect the `id`, `name`, and `label` elements.
 
@@ -112,7 +112,7 @@ Truncated Response:
 
 #### Step 2 – Generate a new application key credential.
 
-Use the [Apps API](/docs/api/resources/apps.html#generate-new-application-key-credential)
+Use the [Apps API](/docs/api/resources/apps#generate-new-application-key-credential)
 to generate new credentials. Pass each app ID (`id`) that was collected in the previous step as the app ID (`aid`) in this API. If you have no company policy for credential expiration, 10 years is suggested.
 
 
@@ -161,7 +161,7 @@ Response:
 
 #### Step 3 – Update the key credential for the app to specify the new signing key id.
 
-Call the [Apps API](/docs/api/resources/apps.html#update-key-credential-for-application) with the app ID you obtained in step 1. In the body, include
+Call the [Apps API](/docs/api/resources/apps#update-key-credential-for-application) with the app ID you obtained in step 1. In the body, include
 the app name and the app label that you obtained in step 1, the key ID that you obtained in step 2, and the value *SAML_2_0* for the sign on mode.
 
 Request:

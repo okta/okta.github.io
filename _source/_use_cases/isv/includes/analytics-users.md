@@ -50,17 +50,17 @@ Synchronization jobs should, **at a minimum**, introduce filters on `lastUpdated
 
 ##### Users State
 
-In addition to the attributes discussed in the filtering guidelines above the User object has a status attribute. Refer to the online documentation describing the controlling [state machine](../../docs/api/resources/users.html#user-status).
+In addition to the attributes discussed in the filtering guidelines above the User object has a status attribute. Refer to the online documentation describing the controlling [state machine](/docs/api/resources/users#user-status).
 
 ##### Users Profile
 
 A Universal Directory enabled Okta Org features an extensible schema with the ability to source and master data from many sources including Applications and Directories.  Information related to the user’s organizational role, hierarchy, geographic location and more can be found in the user profile.  The schema is extensible and the level of detail contained is based entirely on the customer’s implementation.
 
-The default attributes of a user are aligned with core SCIM attributes and [listed here](../../docs/api/resources/users.html#default-profile-properties).
+The default attributes of a user are aligned with core SCIM attributes and [listed here](/docs/api/resources/users#default-profile-properties).
 
 ##### Users - Ambiguous Search
 
-Use the `q` (query) parameter to search across multiple attributes to [find users](../../docs/api/resources/users.html#find-users)
+Use the `q` (query) parameter to search across multiple attributes to [find users](/docs/api/resources/users#find-users)
 
 Request
 {:.api .api-request .api-request-example}
@@ -95,8 +95,8 @@ Response
 
 ##### Users - Targeted Search
 
-Use the `q` (query) parameter to search across multiple attributes to [find users](../../docs/api/resources/users.html#find-users)
-Use our [filter](../../docs/api/resources/users.html#list-users-with-a-filter) and [search](../../docs/api/resources/users.html#list-users-with-search) capabilities to locate users with greater accuracy and flexibility.
+Use the `q` (query) parameter to search across multiple attributes to [find users](/docs/api/resources/users#find-users)
+Use our [filter](/docs/api/resources/users#list-users-with-a-filter) and [search](/docs/api/resources/users#list-users-with-search) capabilities to locate users with greater accuracy and flexibility.
 
 Request
 {:.api .api-request .api-request-example}
@@ -136,7 +136,7 @@ Retrieve a single user based on the user’s:
 + username (full) _jdoe@domain.tld_
 + Okta id (uid) _00u1aq5mpenI88ZEn1d8_
 
-Using [Get User](../../docs/api/resources/users.html#get-user)
+Using [Get User](/docs/api/resources/users#get-user)
 
 Request(s)
 {:.api .api-request .api-request-example}

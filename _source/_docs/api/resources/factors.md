@@ -739,7 +739,7 @@ Customize (and optionally localize) the SMS message sent to the user on enrollme
 * If the language provided in the `Accept-Language` header doesn't exist, the SMS message is sent using the template text.
 * If the provided <em>templateId</em> doesn't match the existing template, the SMS message is sent using the default template.
 
->For instructions about how to create custom templates, see [SMS Template](/docs/api/resources/templates.html#add-sms-template).
+> For instructions about how to create custom templates, see [SMS Template](/docs/api/resources/templates#add-sms-template).
 
 
 ###### Request Example
@@ -764,7 +764,7 @@ curl -v -X POST \
 
 Customize (and optionally localize) the SMS message sent to the user in case Okta needs to resend the message as part of enrollment.
 
->For instructions about how to create custom templates, see [SMS Template](/docs/api/resources/templates.html#add-sms-template).
+> For instructions about how to create custom templates, see [SMS Template](/docs/api/resources/templates#add-sms-template).
 
 
 ###### Request Example
@@ -2213,7 +2213,7 @@ Customize (and optionally localize) the SMS message sent to the user on verifica
 * If the language provided in the `Accept-Language` header doesn't exist in the template definition, the SMS message is sent using the template text.
 * If the provided `templateId` doesn't match an existing template, the SMS message is sent using the default template.
 
-To create custom templates, see [Templates](/docs/api/resources/templates.html#add-sms-template).
+To create custom templates, see [Templates](/docs/api/resources/templates#add-sms-template).
 
 ###### Request Example
 {:.api .api-request .api-request-example}
@@ -2386,9 +2386,9 @@ Parameter    | Description                                         | Param Type 
 uid          | `id` of user                                        | URL        | String   | TRUE     |
 fid          | `id` of factor                                      | URL        | String   | TRUE     |
 
-> The client `IP Address` & `User Agent` of the HTTP request is automatically captured and sent in the push notification as additional context.<br>You should [always send a valid User-Agent HTTP header](../getting_started/design_principles.html#user-agent) when verifying a push factor.
+> The client `IP Address` & `User Agent` of the HTTP request is automatically captured and sent in the push notification as additional context.<br>You should [always send a valid User-Agent HTTP header](../getting_started/design_principles#user-agent) when verifying a push factor.
 
-> The **public IP address** of your application must be [whitelisted as a gateway IP address](../getting_started/design_principles.html#ip-address) to forward the user agent's original IP address with the `X-Forwarded-For` HTTP header.
+> The **public IP address** of your application must be [whitelisted as a gateway IP address](../getting_started/design_principles#ip-address) to forward the user agent's original IP address with the `X-Forwarded-For` HTTP header.
 
 #### Response Parameters
 {:.api .api-response .api-response-params}
