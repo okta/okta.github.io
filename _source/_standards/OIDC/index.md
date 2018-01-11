@@ -3,6 +3,7 @@ layout: docs_page
 title: OpenID Connect and Okta
 excerpt: This simple identity layer on top of the OAuth 2.0 protocol makes identity management easier.
 icon: /assets/img/icons/openid.svg
+redirect_from: /standards/
 ---
 
 # OpenID Connect and Okta
