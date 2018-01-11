@@ -3,6 +3,9 @@ layout: blog_post
 title: "Two Approaches to Setting Up a MERN Stack Application"
 author: leebrandt
 tags: [mongo, express, node, react, mern]
+tweets:
+  - "Check out two approaches to setting up a MERN stack app"
+  - "Two ways to get a MERN stack app set up"
 ---
 
 The trend I’ve seen in web applications is a backend API written in a server-side technology like Node, with a front-end single-page application written in something like React. The problem with these stacks is that it can be hard to run and deploy them as a single unit. The API and UI will need to be started, stopped and deployed separately. That can be a bit of a pain when developing, and if you are writing the API to only be consumed by that single front end, the extra steps can be unnecessary. If this sounds like you, I'll show you the two main paths I found for setting up a MERN (Mongo, Express, React, and Node) stack application to run and deploy as a single code base.
