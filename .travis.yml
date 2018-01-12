@@ -16,6 +16,12 @@ script: ./scripts/travis.sh
 
 dist: trusty
 
+cache:
+  directories:
+  - $TRAVIS_BUILD_DIR/tmp/.htmlproofer
+  - /home/travis/.rvm/
+  - node_modules
+
 env:
   global:
   - NOKOGIRI_USE_SYSTEM_LIBRARIES=true
