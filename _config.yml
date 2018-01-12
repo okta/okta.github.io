@@ -13,6 +13,7 @@ plugins:
   - jekyll-redirect-from
   - jekyll-paginate
   - jekyll-assets
+  - jekyll-include-cache
 
 source: _source
 destination: dist

@@ -132,6 +132,8 @@ GEM
     jekyll-github-metadata (2.9.3)
       jekyll (~> 3.1)
       octokit (~> 4.0, != 4.4.0)
+    jekyll-include-cache (0.1.0)
+      jekyll (~> 3.3)
     jekyll-mentions (1.2.0)
       activesupport (~> 4.0)
       html-pipeline (~> 2.3)
@@ -269,4 +271,4 @@ DEPENDENCIES
   tzinfo-data (= 1.2017.2)
 
 BUNDLED WITH
-   1.16.0
+   1.16.1
