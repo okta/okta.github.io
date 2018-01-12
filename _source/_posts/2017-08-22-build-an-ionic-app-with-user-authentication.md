@@ -73,7 +73,7 @@ OpenID Connect (OIDC) builds on top of the OAuth 2.0 protocol. It allows clients
 * Give your application a name (e.g. "Ionic OIDC")
 * Change the **Base URI** and **Login redirect URI** to `http://localhost:8100` and click **Done**. You should see settings like the following:
 
-{% img blog/ionic-authentication/oidc-settings.png alt:"Okta OIDC Settings" width:"800" %}
+{% img blog/ionic-authentication/oidc-settings.png alt:"Okta OIDC Settings" width:"700" %}{: .center-image }
 
 ## Create a Login Page
 
@@ -682,5 +682,7 @@ To learn more about Ionic, Angular, or Okta, please see the following resources:
 * [Adding Authentication to your Angular PWA](/blog/2017/06/13/add-authentication-angular-pwa)
 * [Tutorial: Develop a Mobile App With Ionic and Spring Boot](/blog/2017/05/17/develop-a-mobile-app-with-ionic-and-spring-boot)
 * [Build Your First Progressive Web Application with Angular and Spring Boot](/blog/2017/05/09/progressive-web-applications-with-angular-and-spring-boot)
+
+**Changelog:**
 
 * Jan 11, 2018: Updated to use Ionic CLI 3.19.0 and angular-oauth2-oidc 3.1.4. See the code changes in the [example app on GitHub](https://github.com/oktadeveloper/okta-ionic-auth-example/pull/6). Changes to this article can be viewed [in this pull request](https://github.com/okta/okta.github.io/pull/1628).
