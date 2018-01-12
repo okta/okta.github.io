@@ -34,7 +34,7 @@ From a terminal window, create a new application using the following command:
 ionic start ionic-auth
 ```
 
-You will be prompted to select a starter project and optionally link your app to your Ionic Dashboard. For this tutorial, choose the **tabs** starter project and do not connect the app to your Ionic Dashboard.
+You will be prompted to select a starter project. For this tutorial, choose the **tabs** starter project. When prompted to integrate your app with Cordova, answer yes. When prompted to install the free Ionic Pro SDK and connect your app, answer no.
 
 Project creation may take a minute or two to complete, depending on your internet connection speed. Run the commands below to start your Ionic application.
 
@@ -77,7 +77,13 @@ OpenID Connect (OIDC) builds on top of the OAuth 2.0 protocol. It allows clients
 
 ## Create a Login Page
 
-To make a login page for authentication, create `src/pages/login/login.ts` and `src/pages/login/login.html`. In `login.html`, add a form with username and password fields.
+Generate a login page for authentication by running the following command:
+
+```bash
+ionic g page Login
+```
+
+In the generated `src/pages/login/login.html`, add a form with username and password fields.
 
 {% raw %}
 ```html
@@ -122,17 +128,17 @@ You can leverage a couple of open source libraries to perform the actual authent
 Install `angular-oauth2-oidc` and the Okta Auth SDK using npm.
 
 ```bash
-npm install angular-oauth2-oidc@1.0.20 @okta/okta-auth-js --save
+npm install angular-oauth2-oidc @okta/okta-auth-js --save
 ```
 
 In `src/pages/login/login.ts`, add the basic structure of the `LoginPage` class and a constructor that configures your OIDC settings with the `OAuthService` from angular-oauth2-oidc. You will need to replace `{clientId}` with the Client ID from your Okta OIDC settings and `{yourOktaDomain}` with your account's correct URI.
 
 ```typescript
 import { Component, ViewChild } from '@angular/core';
-import { NavController } from 'ionic-angular';
-import { OAuthService } from 'angular-oauth2-oidc';
-import OktaAuth from '@okta/okta-auth-js';
+import { IonicPage, NavController } from 'ionic-angular';
+import { JwksValidationHandler, OAuthService } from 'angular-oauth2-oidc';
 
+@IonicPage()
 @Component({
   selector: 'page-login',
   templateUrl: 'login.html'
@@ -148,6 +154,12 @@ export class LoginPage {
     oauthService.clientId = '{clientId}';
     oauthService.scope = 'openid profile email';
     oauthService.issuer = 'https://{yourOktaDomain}.com/oauth2/default';
+    oauthService.tokenValidationHandler = new JwksValidationHandler();
+    
+    // Load Discovery Document and then try to login the user
+    this.oauthService.loadDiscoveryDocument().then(() => {
+      this.oauthService.tryLogin();
+    });
   }
 
   ionViewDidLoad(): void {
@@ -192,46 +204,41 @@ export class MyApp {
 }
 ```
 
-Update `src/app/app.module.ts` to add `LoginPage` to its `declarations` and `entryComponents`. You'll also need to add `OAuthService` to its `providers`.
+Update `src/app/app.module.ts` to add `OAuthModule`, `HttpClientModule`, and `LoginPageModule` as imports. 
 
 ```typescript
-import { LoginPage } from '../pages/login/login';
-import { OAuthService } from 'angular-oauth2-oidc';
+import { LoginPageModule } from '../pages/login/login.module';
+import { OAuthModule } from 'angular-oauth2-oidc';
 
 @NgModule({
-  declarations: [
-    ...
-    LoginPage
+  ...
+  imports: [
+    BrowserModule,
+    LoginPageModule,
+    OAuthModule.forRoot(),
+    IonicModule.forRoot(MyApp)
   ],
   ...
-  entryComponents: [
-    ...
-    LoginPage
-  ],
-  providers: [
-    OAuthService,
-    ...
-  ]
 })
 ```
 
 Run `ionic serve` to make sure the `LoginPage` is displayed when the app first loads. You'll see the following error when the app tries to load:
 
 ```
-No provider for Http!
+No provider for HttpClient!
 ```
 
 This error happens because `OAuthService` has a dependency on Angular's `Http`, but it hasn't been imported into your project. Add `HttpModule` as an import in `src/app/app.module.ts`.
 
 ```typescript
-import { HttpModule } from '@angular/http';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   ...
   imports: [
-    BrowserModule,
-    HttpModule,
-    IonicModule.forRoot(MyApp)
+    ...
+    HttpClientModule,
+    ...
   ],
   ...
 })
@@ -244,6 +251,7 @@ Now the login screen should load. You can use Chrome's Device Toolbar to see wha
 Add a `login()` method in `src/app/pages/login/login.ts` that uses the Okta Auth SDK to 1) login and 2) exchange the session token for an identity and access token. An [ID token](https://openid.net/specs/openid-connect-core-1_0.html#IDToken) is similar to an identity card, in standard JWT format, signed by the OpenID Provider. Access tokens are part of the OAuth specification. An access token can be a JWT. They are used to access protected resources, often by setting them as an `Authentication` header when making a request.
 
 ```typescript
+import * as OktaAuth from '@okta/okta-auth-js';
 import { TabsPage } from '../tabs/tabs';
 ...
 login(): void {
@@ -251,8 +259,8 @@ login(): void {
     const authClient = new OktaAuth({
       clientId: this.oauthService.clientId,
       redirectUri: this.oauthService.redirectUri,
-      url: 'https://dev-[dev-id].oktapreview.com',
-      issuer: this.oauthService.issuer
+      url: 'https://{yourOktaDomain}.oktapreview.com',
+      issuer: 'default'
     });
     return authClient.signIn({
       username: this.username,
@@ -266,11 +274,14 @@ login(): void {
           scopes: this.oauthService.scope.split(' ')
         })
           .then((tokens) => {
-            // oauthService.processIdToken doesn't set an access token
-            // set it manually so oauthService.authorizationHeader() works
-            localStorage.setItem('access_token', tokens[1].accessToken);
-            this.oauthService.processIdToken(tokens[0].idToken, tokens[1].accessToken);
-            this.navCtrl.push(TabsPage);
+            const idToken = tokens[0].idToken;
+            const accessToken = tokens[1].accessToken;
+            const keyValuePair = `#id_token=${encodeURIComponent(idToken)}&access_token=${encodeURIComponent(accessToken)}`;
+            this.oauthService.tryLogin({
+              customHashFragment: keyValuePair,
+              disableOAuth2StateCheck: true
+            });
+          this.navCtrl.push(TabsPage);
           });
       } else {
         throw new Error('We cannot handle the ' + response.status + ' status');
@@ -310,12 +321,12 @@ export class BeerService {
 }
 ```
 
-You can (optionally), pretty up the login screen by adding a logo above the form. Download [this image](https://www.okta.com/sites/all/themes/Okta/images/blog/Logos/Okta_Logo_BrightBlue_Medium.png), copy it to `src/assets/image/okta.png`, and add the following above the `<form>` tag in `login.html`. 
+You can (optionally), pretty up the login screen by adding a logo above the form. Download [this image](https://www.okta.com/sites/all/themes/Okta/images/blog/Logos/Okta_Logo_BrightBlue_Medium.png), copy it to `src/assets/imgs/okta.png`, and add the following above the `<form>` tag in `login.html`. You might want to edit the image so it's only 300 pixels wide. This reduces its size to 12 KB instead of 110 KB.
 
 ```html
 <ion-row>
   <ion-col text-center>
-    <img src="assets/image/okta.png" width="300">
+    <img src="assets/imgs/okta.png" width="300">
   </ion-col>
 </ion-row>
 ``` 
@@ -339,7 +350,7 @@ In `src/pages/home/home.ts`, add a `logout()` method, as well as methods to get 
 
 ```typescript
 import { Component } from '@angular/core';
-import { NavController, App } from 'ionic-angular';
+import { App } from 'ionic-angular';
 import { LoginPage } from '../login/login';
 import { OAuthService } from 'angular-oauth2-oidc';
 
@@ -349,12 +360,12 @@ import { OAuthService } from 'angular-oauth2-oidc';
 })
 export class HomePage {
 
-  constructor(public app: App, public navCtrl: NavController, public oauthService: OAuthService) {
+  constructor(public app: App, public oauthService: OAuthService) {
   }
-
+  
   logout() {
-    this.oauthService.logOut();
-    this.app.getRootNav().setRoot(LoginPage);
+    this.oauthService.logOut(true);
+    this.app.getRootNavs()[0].setRoot(LoginPage);
   }
 
   get givenName() {
@@ -493,8 +504,13 @@ Then add the methods below to facilitate logging in with OAuth.
 ```typescript
 redirectLogin() {
   this.oktaLogin().then(success => {
-    localStorage.setItem('access_token', success.access_token);
-    this.oauthService.processIdToken(success.id_token, success.access_token);
+    const idToken = success.id_token;
+    const accessToken = success.access_token;
+    const keyValuePair = `#id_token=${encodeURIComponent(idToken)}&access_token=${encodeURIComponent(accessToken)}`;
+    this.oauthService.tryLogin({
+      customHashFragment: keyValuePair,
+      disableOAuth2StateCheck: true
+    });
     this.navCtrl.push(TabsPage);
   }, (error) => {
     this.error = error;
@@ -666,3 +682,5 @@ To learn more about Ionic, Angular, or Okta, please see the following resources:
 * [Adding Authentication to your Angular PWA](/blog/2017/06/13/add-authentication-angular-pwa)
 * [Tutorial: Develop a Mobile App With Ionic and Spring Boot](/blog/2017/05/17/develop-a-mobile-app-with-ionic-and-spring-boot)
 * [Build Your First Progressive Web Application with Angular and Spring Boot](/blog/2017/05/09/progressive-web-applications-with-angular-and-spring-boot)
+
+* Jan 11, 2018: Updated to use Ionic CLI 3.19.0 and angular-oauth2-oidc 3.1.4. See the code changes in the [example app on GitHub](https://github.com/oktadeveloper/okta-ionic-auth-example/pull/6). Changes to this article can be viewed [in this pull request](https://github.com/okta/okta.github.io/pull/1628).

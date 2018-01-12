@@ -56,7 +56,7 @@ First, create `src/app/app.service.ts` as an authorization utility file and use 
 
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import * as OktaAuth from '@okta/okta-auth-js/dist/okta-auth-js.min.js';
+import * as OktaAuth from '@okta/okta-auth-js';
 
 @Injectable()
 export class OktaAuthService {
