@@ -260,19 +260,41 @@ The entity upon which an actor performs an action. Targets may be anything: an a
 
 ### Client Object
 
-Describes the client performing the action.
+When an event is triggered by an HTTP request, the Client object describes the [client](https://en.wikipedia.org/wiki/Category:Hypertext_Transfer_Protocol_clients) that issues that HTTP request. For instance, the web browser is the client when a user accesses Okta. When this request is received and processed, a login event is fired. When the event is not sourced to an HTTP request, such as in the case of an automatic update, the Client Object field is blank.
 
-|------------+--------------------------------------------------------------+-----------------+----------|
-| Property   | Description                                                  | DataType        | Nullable |
-| ---------- | ------------------------------------------------------------ | --------------- | -------- |
-| userAgent  | The user agent used by an actor to perform an action         | String          | TRUE     |
-| geographicalContext | Geographical context data of the event              | [GeographicalContext Object](#geographicalcontext-object) | TRUE |
-| zone       | Zone where the client is located                             | String          | TRUE     |
-| ipAddress  | Ip address of the client                                     | String          | TRUE     |
-| device     | Device that the client operated from                         | String          | TRUE     |
-| id         | ID of the client                                             | String          | TRUE     |
-| ipChain    | Describes IP addresses used to perform an action             | Array of [IpAddress](#ipaddress-object) | TRUE  |
-|------------+--------------------------------------------------------------+-----------------+----------|
+|------------+--------------------------------------------------------------------------------------------------------------------+-----------------+----------|
+| Property   | Description                                                                                                        | DataType        | Nullable |
+| ---------- | ------------------------------------------------------------------------------------------------------------------ | --------------- | -------- |
+| userAgent  | The [user agent](https://en.wikipedia.org/wiki/User_agent) used by an actor to perform an action | [UserAgent Object](#useragent-object) | TRUE |
+| geographicalContext | The physical location where the client made its request from | [GeographicalContext Object](#geographicalcontext-object)    | TRUE     |
+| zone       | The **name** of the [Zone](/docs/api/resources/zones.html#ZoneModel) that the client's location is mapped to       | String          | TRUE     |
+| ipAddress  | Ip address that the client made its request from                                                                   | String          | TRUE     |
+| device     | Type of device that the client operated from (e.g. Computer)                                                       | String          | TRUE     |
+|------------+--------------------------------------------------------------------------------------------------------------------+-----------------+----------|
+
+### UserAgent Object
+
+"A user agent is software (a software agent) that is acting on behalf of a user." ([Wikipedia](https://en.wikipedia.org/wiki/User_agent))
+
+In the Okta event data model, the UserAgent object provides specifications about the client software that makes event-triggering HTTP requests. User agent identification is often useful for identifying interoperability problems between servers and clients, and also for browser and operating system usage analytics.
+
+|--------------+---------------------------------------------------------------------------------------------------+----------------+----------|
+| Property     | Description                                                                                       | DataType       | Nullable |
+| ------------ | ------------------------------------------------------------------------------------------------- | -------------- | -------- |
+| Browser      | If the client is a web browser, this field identifies the type of web browser (e.g. CHROME, FIREFOX) | String      | TRUE     |
+| OS           | The [Operating System](https://en.wikipedia.org/wiki/Operating_system) the client runs on (e.g. Windows 10) | String | TRUE   |
+| RawUserAgent | A raw string representation of the user agent, formatted according to [section 5.5.3 of HTTP/1.1 Semantics and Content](https://tools.ietf.org/html/rfc7231#section-5.5.3). Both the **browser** and the **OS** fields can be derived from this field.                                                                                                             | String         | TRUE     |
+|--------------+---------------------------------------------------------------------------------------------------+----------------+----------|
+
+### Request Object
+
+The request object describes details related to the HTTP request that triggers this event, if available. When the event is not sourced to an http request, such as in the case of an automatic update on the Okta servers, the Request object will still exist, but the **ipChain** field will be empty.
+
+|--------------|---------------------------------------------------------------------------------------------------|----------------|----------|
+| Property     | Description                                                                                       | DataType       | Nullable |
+| ------------ | ------------------------------------------------------------------------------------------------- | -------------- | -------- |
+| ipChain      | If the incoming request passes through any proxies, the IP addresses of those proxies will be stored here in the format (clientIp, proxy1, proxy2, ...). This field is useful when working with trusted proxies.                             | Array of [IpAddress](#ipaddress-object) | TRUE     |
+|--------------+---------------------------------------------------------------------------------------------------+----------------+----------|
 
 ### GeographicalContext Object
 
@@ -290,14 +312,14 @@ Geographical Context describes a set of geographic coordinates. In addition to c
 
 ### Geolocation Object
 
-Latitude and longitude of the geolocation where an action was performed, formatted according to the [ISO-6709](https://en.wikipedia.org/wiki/ISO_6709) standard. The latitude uses 2 digits for its integer part and the longitude uses 3 digits for its integer part.
+Latitude and longitude of the geolocation where an action was performed, formatted according to the [ISO-6709](https://en.wikipedia.org/wiki/ISO_6709) standard.
 
-|------------+----------------------------------------------------------------+-----------------+----------|
-| Property   | Description                                                    | DataType        | Nullable |
-| ---------- | -------------------------------------------------------------- | --------------- | -------- |
-| lat        | Latitude                                                       | Double          | FALSE    |
-| lon        | Longitude                                                      | Double          | FALSE    |
-|------------+----------------------------------------------------------------+-----------------+----------|
+|------------+---------------------------------------------------------------------------------------------------+-----------------+----------|
+| Property   | Description                                                                                       | DataType        | Nullable |
+| ---------- | ------------------------------------------------------------------------------------------------- | --------------- | -------- |
+| lat        | Latitude. Uses 2 digits for the [integer part](https://en.wikipedia.org/wiki/ISO_6709#Latitude)   | Double          | FALSE    |
+| lon        | Longitude. Uses 3 digits for the [integer part](https://en.wikipedia.org/wiki/ISO_6709#Longitude) | Double          | FALSE    |
+|------------+---------------------------------------------------------------------------------------------------+-----------------+----------|
 
 ### Outcome Object
 
