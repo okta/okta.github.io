@@ -354,8 +354,7 @@
 		  padding-right: 10px;
 			background:#f5f5f5;
 			margin-right: 5px;
-			em {
-				font-weight: bold;
+			strong {
 				color: #090;
 			}
 			.api-label {
@@ -366,7 +365,7 @@
 		}
 
 		.api-uri-get {
-			em {
+			strong {
 				color: #090;
 			}
 			.api-label {
@@ -375,7 +374,7 @@
 		}
 
 		.api-uri-post {
-			em {
+			strong {
 				color: #F39C44;
 			}
 			.api-label {
@@ -384,7 +383,7 @@
 		}
 
 		.api-uri-put {
-			em {
+			strong {
 				color: #0069aa;
 			}
 			.api-label {
@@ -393,7 +392,7 @@
 		}
 
 		.api-uri-delete {
-			em {
+			strong {
 				color: #d9534f;
 			}
 			.api-label {
