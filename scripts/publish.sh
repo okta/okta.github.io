@@ -37,12 +37,8 @@ if ! generate_html;
 then
     echo "Error building site"
     exit ${BUILD_FAILURE};
-fi
-
-if ! removeHTMLExtensions;
-then
-    echo "Failed removing .html extensions"
-    exit ${BUILD_FAILURE};
+else
+    echo -e "\xE2\x9C\x94 Successfully built site into ./dist"
 fi
 
 interject "Generating conductor file in $(pwd)"
@@ -50,15 +46,32 @@ if ! generate_conductor_file;
 then
     echo "Error generating conductor file"
     exit ${BUILD_FAILURE};
+else
+    echo -e "\xE2\x9C\x94 Generated conductor file"
+fi
+
+if ! removeHTMLExtensions;
+then
+    echo "Failed removing .html extensions"
+    exit ${BUILD_FAILURE};
+else
+    echo -e "\xE2\x9C\x94 Removed HTML Extensions"
 fi
 
 # ----- Start (Temporary) Deploy to S3 -----
 if [[ "${BRANCH}" == "${DEPLOY_BRANCH}" ]];
 then
     interject "Uploading HTML from '${GENERATED_SITE_LOCATION}' to '${TARGET_S3_BUCKET}'"
-    if ! aws s3 cp ${GENERATED_SITE_LOCATION} ${TARGET_S3_BUCKET} --recursive;
+    if ! aws s3 cp ${GENERATED_SITE_LOCATION} ${TARGET_S3_BUCKET} --content-type text/html --recursive --exclude "*.*";
     then
-        echo "Error uploading HTML to S3"
+        echo "Error uploading extension-less files to S3"
+        exit ${BUILD_FAILURE}
+    fi
+
+    # Copy the rest of the files
+    if ! aws s3 cp ${GENERATED_SITE_LOCATION} ${TARGET_S3_BUCKET} --recursive --exclude "*" --include "*.*";
+    then
+        echo "Error uploading extensioned files to S3"
         exit ${BUILD_FAILURE}
     fi
 fi
