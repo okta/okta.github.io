@@ -818,5 +818,6 @@ To learn more about Ionic and Angular, please see the following resources:
 * [Bootiful Development with Spring Boot and Angular](/blog/2017/04/26/bootiful-development-with-spring-boot-and-angular)
 * [Angular Authentication with OpenID Connect and Okta in 20 Minutes](/blog/2017/04/17/angular-authentication-with-oidc)
 
+**Update:** To learn how to add authentication to an Ionic app, see [Build an Ionic App with User Authentication](/blog/2017/08/22/build-an-ionic-app-with-user-authentication).
 
 

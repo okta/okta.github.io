@@ -84,9 +84,9 @@ Okta will derive client request context directly from the HTTP request headers a
 
 ### User Agent
 
-Okta supports the standard `User-Agent` HTTP header to identify the user's browser or application.  You should always send a `User-Agent` string to uniquely identify your client application and version such as `Oktaprise/1.1`.
+Okta supports the standard `User-Agent` HTTP header to identify the user's browser or application. Always send a `User-Agent` string to uniquely identify your client application and version such as `Oktaprise/1.1`.
 
-> If your application is acting as a gateway or proxy, you should forward the `User-Agent` of the originating client with your API requests
+> If your application is acting as a gateway or proxy, you should forward the `User-Agent` of the originating client with your API requests.
 
 ### IP Address
 
@@ -94,6 +94,9 @@ The **public IP address** of your application will be automatically used as the 
 
 > The **public IP address** of your trusted web application must be whitelisted in your [org's network security settings](https://help.okta.com/en/prod/Content/Topics/Security/Security_Network.htm) as a trusted gateway in order to forward the user agent's original IP address with the `X-Forwarded-For` HTTP header.
 
+### Accept Language
+
+The `Accept-Language` HTTP header advertises which languages the client is able to understand, for example `Accept-Language: en-US'. Include it if it is available.
 
 ## Errors
 

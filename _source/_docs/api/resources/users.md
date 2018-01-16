@@ -3767,7 +3767,7 @@ Specifies a password for a user
 
 | Property | DataType | Nullable | Unique | Readonly | MinLength       | MaxLength | Validation      |
 |:---------|:---------|:---------|:-------|:---------|:----------------|:----------|:----------------|
-| value    | String   | TRUE     | FALSE  | FALSE    | Password Policy | 40        | Password Policy |
+| value    | String   | TRUE     | FALSE  | FALSE    | Password Policy | 72        | Password Policy |
 | hash     | [Hashed Password Object](#hashed-password-object)     | TRUE     | FALSE  | FALSE    | N/A | N/A |  |
 
 A password value is a **write-only** property. 
