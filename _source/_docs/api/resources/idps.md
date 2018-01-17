@@ -17,10 +17,10 @@ Explore the Identity Providers API: [![Run in Postman](https://run.pstmn.io/butt
 
 Each identity provider (IdP) requires some setup. Use the Okta setup guide for your IdP:
 
-* [Facebook](/authentication-guide/social-login/facebook.html)
-* [Google](/authentication-guide/social-login/google.html)
-* [LinkedIn](/authentication-guide/social-login/linkedin.html)
-* [Microsoft](/authentication-guide/social-login/microsoft.html)
+* [Facebook](/authentication-guide/social-login/facebook)
+* [Google](/authentication-guide/social-login/google)
+* [LinkedIn](/authentication-guide/social-login/linkedin)
+* [Microsoft](/authentication-guide/social-login/microsoft)
 
 ## Identity Provider Operations
 
@@ -1002,7 +1002,7 @@ after     | Specifies the pagination cursor for the next page of IdPs           
 
 Parameter Details
 
-* The `after` cursor should treated as an opaque value and obtained through the next link relationship. See [Pagination](/docs/api/getting_started/design_principles.html#pagination).
+* The `after` cursor should treated as an opaque value and obtained through the next link relationship. See [Pagination](/docs/api/getting_started/design_principles#pagination).
 * Search currently performs a startsWith match but it should be considered an implementation detail and may change without notice in the future.
 
 ##### Response Parameters
@@ -2237,7 +2237,7 @@ curl -v -X GET \
 
 {% api_operation get /api/v1/idps/tx/*:tid*/target %}
 
-Fetches the target transformed [Okta user profile](/docs/api/resources/users.html#profile-object) for a just-in-time provisioning transaction
+Fetches the target transformed [Okta user profile](/docs/api/resources/users#profile-object) for a just-in-time provisioning transaction
 
 ##### Request Parameters
 {:.api .api-request .api-request-params}
@@ -2249,7 +2249,7 @@ tid       | `id` of an IdP transaction | URL        | String   | TRUE     |
 ##### Response Parameters
 {:.api .api-response .api-response-params}
 
-[Trasformed Okta User Profile](/docs/api/resources/users.html#profile-object)
+[Trasformed Okta User Profile](/docs/api/resources/users#profile-object)
 
 ##### Request Example
 {:.api .api-request .api-request-example}
@@ -2294,7 +2294,7 @@ curl -v -X GET \
 
 {% api_operation get /api/v1/idps/tx/*:tid*/users %}
 
-Enumerates the candidate [Okta users](/docs/api/resources/users.html#user-model) for an account link transaction
+Enumerates the candidate [Okta users](/docs/api/resources/users#user-model) for an account link transaction
 
 Link candidates are determined by the IdP's [account link policy](#account-link-policy-object) and [subject policy](#subject-policy-object).
 
@@ -2308,7 +2308,7 @@ tid       | `id` of an IdP transaction | URL        | String   | TRUE     |
 ##### Response Parameters
 {:.api .api-response .api-response-params}
 
-Array of [Okta User](/docs/api/resources/users.html#user-model)
+Array of [Okta User](/docs/api/resources/users#user-model)
 
 ##### Request Example
 {:.api .api-request .api-request-example}
@@ -2393,7 +2393,7 @@ Provisions an IdP user as a new Okta user.
 Parameter | Description                                        | Param Type | DataType                                              | Required | Default
 --------- | -------------------------------------------------- | ---------- | ----------------------------------------------------- | -------- | --------------------------------
 tid       | `id` of an IdP transaction                         | URL        | String                                                | TRUE     |
-profile   | profile for [Okta user](/docs/api/resources/users.html#profile-object) | Body       | [Okta User Profile Object](/docs/api/resources/users.html#profile-object) | FALSE    | UD transformed Okta user profile
+profile   | profile for [Okta user](/docs/api/resources/users#profile-object) | Body       | [Okta User Profile Object](/docs/api/resources/users#profile-object) | FALSE    | UD transformed Okta user profile
 
 ##### Response Parameters
 {:.api .api-response .api-response-params}
@@ -2470,7 +2470,7 @@ Parameter | Description                                                         
 --------- | --------------------------------------------------------------------------- | ---------- | ----------------------------------------------------- | -------- |
 tid       | `id` of an IdP transaction                                                  | URL        | String                                                | TRUE     |
 uid       | `id` of an Okta user [link candidate](#list-users-for-idp-link-transaction) | URL        | String                                                | TRUE     |
-profile   | profile for [Okta user](/docs/api/resources/users.html#profile-object)                     | Body       | [Okta User Profile Object](/docs/api/resources/users.html#profile-object) | FALSE    |
+profile   | profile for [Okta user](/docs/api/resources/users#profile-object)                     | Body       | [Okta User Profile Object](/docs/api/resources/users#profile-object) | FALSE    |
 
 ##### Response Parameters
 {:.api .api-response .api-response-params}
@@ -3165,7 +3165,7 @@ Generates a new key pair and returns a Certificate Signing Request for it.
 Parameter     | Description                                                                     | Param Type | DataType                                      | Required |
 ------------- | ------------------------------------------------------------------------------- | ---------- | --------------------------------------------- | -------- |
 id            | `id` of the IdP                                                                 | URL        | String                                        | TRUE     |
-metadata      | Metadata for the CSR                                                            | Body       | [CSR Metadata](apps.html#csr-metadata-object)                 | TRUE     |
+metadata      | Metadata for the CSR                                                            | Body       | [CSR Metadata](apps#csr-metadata-object)                 | TRUE     |
 
 ##### Response Parameters
 {:.api .api-response .api-response-params}
@@ -4995,7 +4995,7 @@ Specifies the behavior for establishing, validating, and matching a username for
 |----------------- | ----------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------ | -------- | -------- | --------- | --------- | --------------------------------------------------------------------|
 | Property         | Description                                                                                                                         | DataType                                               | Nullable | Readonly | MinLength | MaxLength | Validation                                                          |
 | ---------------- | ----------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------ | -------- | -------- | --------- | --------- | ------------------------------------------------------------------- |
-| userNameTemplate | [Okta EL Expression](../getting_started/okta_expression_lang.html) to generate or transform a unique username for the IdP user     | [UserName Template Object](#username-template-object)  | FALSE    | FALSE    |           |           | [Okta EL Expression](../getting_started/okta_expression_lang.html)  |
+| userNameTemplate | [Okta EL Expression](../getting_started/okta_expression_lang) to generate or transform a unique username for the IdP user     | [UserName Template Object](#username-template-object)  | FALSE    | FALSE    |           |           | [Okta EL Expression](../getting_started/okta_expression_lang)  |
 | filter           | Optional [regular expression pattern](https://en.wikipedia.org/wiki/Regular_expression) used to filter untrusted IdP usernames      | String                                                 | TRUE     | FALSE    | 0         | 1024      |                                                                     |
 | matchType        | Determines the Okta user profile attribute match conditions for account linking and authentication of the transformed IdP username  | `USERNAME`, `EMAIL`, `USERNAME_OR_EMAIL` or `CUSTOM_ATTRIBUTE`      | FALSE    | FALSE    |           |           |
 | matchAttribute        | Okta user profile attribute for matching transformed IdP username. Only for matchType `CUSTOM_ATTRIBUTE` ( {% api_lifecycle ea %}) and `SAML2` IdP  | String      | TRUE    | FALSE    |           |           |  See `matchAttribute` Validation  |
@@ -5032,7 +5032,7 @@ Property Details
 |--------- | ------------------------------------------------------------------------------ | -------- | -------- | -------- | --------- | --------- | ------------------------------------------------|
 | Property | Description                                                                                                                      | DataType | Nullable | Readonly | MinLength | MaxLength | Validation                                                         |
 |--------- | ------------------------------------------------------------------------------ | -------- | -------- | -------- | --------- | --------- | ------------------------------------------------|
-| template | [Okta EL Expression](../getting_started/okta_expression_lang.html) to generate or transform an unique username for the IdP user  | String   | FALSE    | FALSE    | 9         | 1024      | [Okta EL Expression](../getting_started/okta_expression_lang.html) |
+| template | [Okta EL Expression](../getting_started/okta_expression_lang) to generate or transform an unique username for the IdP user  | String   | FALSE    | FALSE    | 9         | 1024      | [Okta EL Expression](../getting_started/okta_expression_lang) |
 
 Property Details
 
@@ -5226,7 +5226,7 @@ All IdP transactions have the following properties:
 | status        | status of transaction                                                                  | `ACCOUNT_JIT`, `ACCOUNT_LINK` or `SUCCESS`                      | FALSE    | FALSE  | TRUE     |
 | created       | timestamp when transaction was created                                                 | Date                                                            | FALSE    | FALSE  | TRUE     |
 | expiresAt     | timestamp when transaction expires                                                     | Date                                                            | FALSE    | FALSE  | TRUE     |
-| sessionToken  | ephemeral [one-time token](authn.html#session-token) used to bootstrap an Okta session | String                                                          | TRUE     | FALSE  | TRUE     |
+| sessionToken  | ephemeral [one-time token](authn#session-token) used to bootstrap an Okta session      | String                                                          | TRUE     | FALSE  | TRUE     |
 | idp           | identity provider for authenticated user                                               | [IdP Authority Object](#identity-provider-authority-object)     | FALSE    | FALSE  | TRUE     |
 | context       | optional authentication context for transaction                                        | [Context Object](#identity-provider-transaction-context-object) | FALSE    | FALSE  | TRUE     |
 | _links        | [discoverable resources](#links-object) related to the transaction                     | [JSON HAL](http://tools.ietf.org/html/draft-kelly-json-hal-06)  | TRUE     | FALSE  | TRUE     |
@@ -5284,9 +5284,9 @@ This object is used for dynamic discovery of related resources and lifecycle ope
 | Link Relation Type | Description                                                                                                                                                                        |
 |-------------------------- | -----------------------------------------------------------------------------------------------------------------------------------------------------------|
 | source             | [IdP user](#identity-provider-user-model) for the transaction                                                                                                   |
-| target             | Transformed [Okta user profile](/docs/api/resources/users.html#profile-object) for the transaction via UD Profile Mappings for the IdP  |
-| users              | [Okta user](/docs/api/resources/users.html#user-model) candidates for the account link transaction that match the IdP's [account link policy](#account-link-policy-object) and [subject policy](#subject-policy-object) |
-| provision          | Lifecycle operation to just-in-time provision a new [Okta user](/docs/api/resources/users.html#user-model) for the IdP user   |
+| target             | Transformed [Okta user profile](/docs/api/resources/users#profile-object) for the transaction via UD Profile Mappings for the IdP  |
+| users              | [Okta user](/docs/api/resources/users#user-model) candidates for the account link transaction that match the IdP's [account link policy](#account-link-policy-object) and [subject policy](#subject-policy-object) |
+| provision          | Lifecycle operation to just-in-time provision a new [Okta user](/docs/api/resources/users#user-model) for the IdP user   |
 | next               | Completes the transaction             |
 | cancel             | Cancels the transaction               |
 |-------------------  | --------------------------------------------------------------------------------------------------------------------------------------------------------------------|
@@ -5401,7 +5401,7 @@ All linked IdP users have the following properties:
 | ---------------- | --------------------------------------------------------- | ---------------------------------------------------------------- | -------- | ------ | -------- | --------- |
 | Property         | Description                                      | DataType                                                 | Nullable | Unique | Readonly | MaxLength |
 | ---------------- | --------------------------------------------------------- | ---------------------------------------------------------------- | -------- | ------ | -------- | --------- |
-| id               | unique key of [User](/docs/api/resources/users.html)     | String                                                          | FALSE    | TRUE   | TRUE   |            |
+| id               | unique key of [User](/docs/api/resources/users)     | String                                                          | FALSE    | TRUE   | TRUE   |            |
 | externalId       | unique IdP-specific identifier for user         | String                                                                          | FALSE    | TRUE   | TRUE     | 512   |
 | created          | timestamp when IdP user was created                          | Date                                                         | FALSE    | FALSE  | TRUE     |         |
 | lastUpdated      | timestamp when IdP user was last updated                     | Date                                                   | FALSE    | FALSE  | TRUE     |           |
@@ -5451,7 +5451,7 @@ This object is used for dynamic discovery of related resources and lifecycle ope
 | ------------------ | ---------------------------------- |
 | self               | The primary URL for the IdP user   |
 | idp                | The IdP that issued the identity   |
-| users              | The linked [Okta user](/docs/api/resources/users.html) |
+| users              | The linked [Okta user](/docs/api/resources/users) |
 |------------------- | -----------------------------------|
 
 ## Identity Provider CSR Model

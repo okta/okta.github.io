@@ -13,7 +13,7 @@ The OAuth 2.0 API provides API security via scoped access tokens, and OpenID Con
 
 To understand more about OAuth 2.0 and Okta:
 
-* [Learn about how Okta implemented the OAuth 2.0 standards](/standards/OAuth/index.html)
+* [Learn about how Okta implemented the OAuth 2.0 standards](/standards/OAuth/)
 * Explore the OAuth 2.0 API: [![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/e4d286b1af2294bb14a0)
 * [Custom OAuth 2.0 Access Tokens video](https://www.youtube.com/watch?v=4aOJm6SF8Ww)
 
@@ -52,10 +52,10 @@ This is a starting point for OAuth 2.0 flows such as implicit and authorization 
 
 | Parameter             | Description                                                                                                                                                                                                                                                                                                                                                                                                                                              | Type  | DataType | Required | Default          |
 |:----------------------|:---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|:------|:---------|:---------|:-----------------|
-|     [idp](idps.html)      | The Identity provider used to do the authentication. If omitted, use Okta as the identity provider.                                                                                                                                                                                                                                                                                                                                                      | Query | String   | FALSE    | Okta is the IDP. |
-| sessionToken          | An Okta one-time session token. This allows an API-based user login flow (rather than Okta login UI). Session tokens can be obtained via the     [Authentication API](authn.html).                                                                                                                                                                                                                                                                           | Query | String   | FALSE    |                  |
+|     [idp](idps)      | The Identity provider used to do the authentication. If omitted, use Okta as the identity provider.                                                                                                                                                                                                                                                                                                                                                      | Query | String   | FALSE    | Okta is the IDP. |
+| sessionToken          | An Okta one-time session token. This allows an API-based user login flow (rather than Okta login UI). Session tokens can be obtained via the     [Authentication API](authn).                                                                                                                                                                                                                                                                           | Query | String   | FALSE    |                  |
 | response_type         | Can be a combination of ``code``, ``token``, and ``id_token``. The chosen combination determines which flow is used; see this reference from the     [OAuth 2.0 specification](https://tools.ietf.org/html/rfc6749#section-3.1.1). The code response type returns an authorization code which can be later exchanged for an Access Token or a Refresh Token.                                                                                                 | Query | String   | TRUE     |                  |
-| client_id             | Obtained during either     UI client registration or     [API client registration](oauth-clients.html). It is the identifier for the client and it must match what has been registered in Okta during client registration.                                                                                                                                                                                                                                       | Query | String   | TRUE     |                  |
+| client_id             | Obtained during either     UI client registration or     [API client registration](oauth-clients). It is the identifier for the client and it must match what has been registered in Okta during client registration.                                                                                                                                                                                                                                       | Query | String   | TRUE     |                  |
 | redirect_uri          | Specifies the callback location where the authorization code should be sent and it must match what has been registered in Okta during client registration.                                                                                                                                                                                                                                                                                               | Query | String   | TRUE     |                  |
 | display               | Specifies how to display the authentication and consent UI. Valid values: ``page`` or ``popup``.                                                                                                                                                                                                                                                                                                                                                         | Query | String   | FALSE    |                  |
 | max_age               | Specifies the allowable elapsed time, in seconds, since the last time the end user was actively authenticated by Okta.                                                                                                                                                                                                                                                                                                                                   | Query | String   | FALSE    |                  |
@@ -67,7 +67,7 @@ This is a starting point for OAuth 2.0 flows such as implicit and authorization 
 | code_challenge        | Specifies a challenge of     [PKCE](#request-parameter-details). The challenge is verified in the Token request.                                                                                                                                                                                                                                                                                                                                             | Query | String   | FALSE    |                  |
 | code_challenge_method | Specifies the method that was used to derive the code challenge. Only S256 is supported.                                                                                                                                                                                                                                                                                                                                                                 | Query | String   | FALSE    |                  |
 | login_hint            | A username to prepopulate if prompting for authentication.                                                                                                                                                                                                                                                                                                                                                                                               | Query | String   | FALSE    |                  |
-| idp_scope             | A space delimited list of scopes to be provided to the Social Identity Provider when performing [Social Login](social_authentication.html). These scopes are used in addition to the scopes already configured on the Identity Provider.                                                                                                                                                                                                                 | Query | String   | FALSE    |                  |
+| idp_scope             | A space delimited list of scopes to be provided to the Social Identity Provider when performing [Social Login](social_authentication). These scopes are used in addition to the scopes already configured on the Identity Provider.                                                                                                                                                                                                                 | Query | String   | FALSE    |                  |
 | request | A JWT created by the client that enables requests to be passed as a single, self-contained parameter. | Query | JWT | FALSE    | See Description. |
 
 ##### Request Parameter Details
@@ -103,9 +103,9 @@ This is a starting point for OAuth 2.0 flows such as implicit and authorization 
     4. Okta rejects the JWT if the `jti` claim is present and it has already been processed.
 
  * {% api_lifecycle beta %} A consent dialog is displayed depending on the values of three elements:
-     * `prompt`, a query parameter used in requests to [`/oauth2/:authorizationServerId/v1/authorize`](/docs/api/resources/oauth2.html#obtain-an-authorization-grant-from-a-user)(Custom Authorization Server) or [`/oauth2/v1/authorize`](/docs/api/resources/oidc.html#authentication-request) (Okta Authorization Server)
-     * `consent_method`, a property on [apps](/docs/api/resources/apps.html#settings-7)
-     * `consent`, a property on [scopes](/docs/api/resources/oauth2.html#scopes-properties)
+     * `prompt`, a query parameter used in requests to [`/oauth2/:authorizationServerId/v1/authorize`](/docs/api/resources/oauth2#obtain-an-authorization-grant-from-a-user)(Custom Authorization Server) or [`/oauth2/v1/authorize`](/docs/api/resources/oidc#authentication-request) (Okta Authorization Server)
+     * `consent_method`, a property on [apps](/docs/api/resources/apps#settings-7)
+     * `consent`, a property on [scopes](/docs/api/resources/oauth2#scopes-properties)
  
      | `prompt` Value    | `consent_method`                 | `consent`                   | Result       |
      |:------------------|:---------------------------------|:----------------------------|:-------------|
@@ -241,7 +241,7 @@ The following parameters can be posted as a part of the URL-encoded form values 
 | client_assertion      | Required if the `client_assertion_type` is specified. Contains the JWT signed with the `client_secret`.     [JWT Details](#token-authentication-methods)                                                                                                                                                                                     | String |
 | client_assertion_type | Indicates a JWT is being used to authenticate the client. Per the     [Client Authentication spec](http://openid.net/specs/openid-connect-core-1_0.html#ClientAuthentication), the valid value is `urn:ietf:params:oauth:client-assertion-type:jwt-bearer`.                                                                                  | String |
 
-{% api_lifecycle beta %} Note: Use the grant type `password` with scopes that require consent only if [the `consent_method`](/docs/api/resources/apps.html#settings-7) for the client is `TRUSTED`. 
+{% api_lifecycle beta %} Note: Use the grant type `password` with scopes that require consent only if [the `consent_method`](/docs/api/resources/apps#settings-7) for the client is `TRUSTED`. 
 Requests for scopes that require consent using the `password` grant type receive a `consent_required` error response if `consent_method` is `REQUIRED`.
 
 ##### Refresh Tokens for Web and Native Applications
@@ -266,7 +266,7 @@ using either of the following methods:
 
 Use only one of these methods in a single request or an error will occur.
 
->If the value returned by `token_endpoint_auth_method` in the [Dynamic Client Registration API](/docs/api/resources/oauth-clients.html#update-client-application) is not what you wish to use, you can change the value of a client app&#8217;s `token_endpoint_auth_method` with any of the values returned by `token_endpoint_auth_methods_support` (`client_secret_post`, `client_secret_basic`, or `client_secret_jwt`).
+>If the value returned by `token_endpoint_auth_method` in the [Dynamic Client Registration API](/docs/api/resources/oauth-clients#update-client-application) is not what you wish to use, you can change the value of a client app&#8217;s `token_endpoint_auth_method` with any of the values returned by `token_endpoint_auth_methods_support` (`client_secret_post`, `client_secret_basic`, or `client_secret_jwt`).
 
 You can&#8217;t change this value in the Okta user interface.
 
@@ -1036,7 +1036,7 @@ Updates authorization server identified by *authorizationServerId*.
 | name        | The name of the authorization server                                                                            | String                                                                                                  | TRUE     |
 | description | The description of the authorization server                                                                     | String                                                                                                  | FALSE    |
 | audiences   | The list of audiences this Custom Authorization Server can issue tokens to, currently Okta only supports one audience. | Array                                                                                                   | TRUE     |
-| credentials | The credentials signing object with the `rotationMode` of the authorization server                              |     [Authorization server credentials object](oauth2.html#authorization-server-credentials-signing-object)  | FALSE    |
+| credentials | The credentials signing object with the `rotationMode` of the authorization server                              |     [Authorization server credentials object](oauth2#authorization-server-credentials-signing-object)  | FALSE    |
 
 ##### Response Parameters
 {:.api .api-request .api-response-params}
@@ -1843,7 +1843,7 @@ Content-Type: application/json;charset=UTF-8
 Rotates the current keys for a Custom Authorization Server. If you rotate keys, the `ACTIVE` key becomes the `EXPIRED` key, the `NEXT` key becomes the `ACTIVE` key, and the Custom Authorization Server immediately issues tokens signed with the new active key.
 
 >Authorization server keys can be rotated in both *MANUAL* and *AUTO* mode, however, it is recommended to rotate keys manually only when the authorization server is in *MANUAL* mode.
->If keys are rotated manually, any intermediate cache should be invalidated and keys should be fetched again using the [get keys](oauth2.html#get-keys) endpoint.
+>If keys are rotated manually, any intermediate cache should be invalidated and keys should be fetched again using the [get keys](oauth2#get-keys) endpoint.
 
 ##### Request Parameters
 {:.api .api-request .api-request-params}
@@ -2283,8 +2283,8 @@ Token limits:
 | consent {% api_lifecycle beta %}     | Indicates whether a consent dialog is needed for the scope. Valid values: `REQUIRED`, `IMPLICIT`. | Enum    | `IMPLICIT` | FALSE                         |
 
 * {% api_lifecycle beta %} A consent dialog is displayed depending on the values of three elements:
-    * `prompt`, a query parameter used in requests to [`/oauth2/:authorizationServerId/v1/authorize`](/docs/api/resources/oauth2.html#obtain-an-authorization-grant-from-a-user)(custom authorization server) or [`/oauth2/v1/authorize`](/docs/api/resources/oidc.html#authentication-request) (Org authorization server)
-    * `consent_method`, a property on [apps](/docs/api/resources/apps.html#settings-7)
+    * `prompt`, a query parameter used in requests to [`/oauth2/:authorizationServerId/v1/authorize`](/docs/api/resources/oauth2#obtain-an-authorization-grant-from-a-user)(custom authorization server) or [`/oauth2/v1/authorize`](/docs/api/resources/oidc#authentication-request) (Org authorization server)
+    * `consent_method`, a property on [apps](/docs/api/resources/apps#settings-7)
     * `consent`, a property on scopes as listed in the table above
 
     | `prompt` Value    | `consent_method`                 | `consent`                   | Result       |
@@ -2356,7 +2356,7 @@ If `valueType` is `GROUPS`, then the groups returned are filtered according to t
 * `CONTAINS`: Group names contain `value` (not case sensitive). For example, if `value` is `group1`, then `MyGroup123` and `group1` are included.
 * `REGEX`: Group names match the REGEX expression in `value` (case sensitive). For example if `value` is `/^[a-z0-9_-]{3,16}$/`, then any group name that has at least 3 letters, no more than 16, and contains lower case letters, a hyphen, or numbers. 
 
-If you have complex filters for groups, you can [create a groups whitelist](/docs/how-to/creating-token-with-groups-claim.html) to put them all in a claim.
+If you have complex filters for groups, you can [create a groups whitelist](/docs/how-to/creating-token-with-groups-claim) to put them all in a claim.
 
 ##### Details for `alwaysIncludeInToken`
 

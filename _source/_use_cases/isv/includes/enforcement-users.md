@@ -1,17 +1,17 @@
 
 An individual user’s
- [state](./security-enforcement.html#user---change-state),
- [sessions](./security-enforcement.html#user---clear-sessions),
- [credentials](./security-enforcement.html#user---credentials) and
- [profile](./security-enforcement.html#user---profile) can be updated depending on the specific use case.
+ [state](security-enforcement#user---change-state),
+ [sessions](security-enforcement#user---clear-sessions),
+ [credentials](security-enforcement#user---credentials) and
+ [profile](security-enforcement#user---profile) can be updated depending on the specific use case.
 
 #### User - Change State
 
-A user’s state can be toggled according to a prescribed [state machine](../../docs/api/resources/users.html#user-status)
+A user’s state can be toggled according to a prescribed [state machine](/docs/api/resources/users#user-status)
 
 Suspending a user is a non-destructive operation that will leave a user profile, credentials, enrolled factors, groups membership and assigned applications intact while still preventing the user from signing into Okta or any subordinate application. *The act of suspending a user will destroy any existing Okta session for that user.*
 
-[Suspend a User](../../docs/api/resources/users.html#suspend-user)
+[Suspend a User](/docs/api/resources/users#suspend-user)
 
 Request
 {:.api .api-request .api-request-example}
@@ -29,7 +29,7 @@ HTTP/1.1 200 OK
 
 To reverse this operation after a threat has been cleared or an internal timer has elapsed you can return a suspended user back to an active state:
 
-[Unsuspend a User](../../docs/api/resources/users.html#unsuspend-user)
+[Unsuspend a User](/docs/api/resources/users#unsuspend-user)
 
 Request
 {:.api .api-request .api-request-example}
@@ -45,13 +45,13 @@ Response
 HTTP/1.1 200 OK
 ```
 
-There are other user state operations that can be changed. Be aware of the full effect of such changes before implementing this feature.  Read our online documentation for more details about user [lifecycle operations](../../docs/api/resources/users.html#lifecycle-operations).
+There are other user state operations that can be changed. Be aware of the full effect of such changes before implementing this feature.  Read our online documentation for more details about user [lifecycle operations](/docs/api/resources/users#lifecycle-operations).
 
 #### User - Clear Sessions
 
 You can clear existing user sessions, forcing a user to authenticate on the next operation.  This action may be taken alone to clear suspicious sessions or in conjunction with other actions -- like changing authentication policies to enforce MFA or expiring a password -- to accelerate the enforcement of that change.
 
-[Clear User Session](../../docs/api/resources/users.html#clear-user-sessions)
+[Clear User Session](/docs/api/resources/users#clear-user-sessions)
 
 Request
 {:.api .api-request .api-request-example}
@@ -77,7 +77,7 @@ While there are more operations you can perform against a user’s credentials w
 
 Use this flow to expire a password.  This will cause a user to be foreced to change their current password the next time they login to a connected system. _Applies to AD mastered accounts too_.
 
-[Expire Password](../../docs/api/resources/users.html#expire-password)
+[Expire Password](/docs/api/resources/users#expire-password)
 
 Request
 {:.api .api-request .api-request-example}
@@ -105,7 +105,7 @@ Use this password expiration flow along with a flag to define a `tempPassword`, 
 + Not needing to code in password complexity parameters or risk generating passwords that aren't compliant
   + Okta is aware of it's own policies or the policies of the underlying directory and will generate compliant passwords
 
-[Expire Password with random tempPassword](../../docs/api/resources/users.html#response-parameters-15)
+[Expire Password with random tempPassword](/docs/api/resources/users#response-parameters-15)
 
 Request
 {:.api .api-request .api-request-example}
@@ -129,7 +129,7 @@ Use this password reset flow to generate an Okta password reset flow link.  Use 
 
 Using an Okta password reset link will direct the user to an Okta password reset sequence.  You can choose to have Okta send the link to the user directly or you can have the link returned and choose to provide it to the user through other means.
 
-[Reset a password](../../docs/api/resources/users.html#reset-password)
+[Reset a password](/docs/api/resources/users#reset-password)
 
 Request (Okta returns link)
 {:.api .api-request .api-request-example}
@@ -188,13 +188,13 @@ User attributes are:
 + Extensible
 + Strongly Typed (string, number, Boolean, integer, etc.)
 + Capable of being mapped downstream or leveraged by rules based groups
-+ Discoverable through our [Schemas API](../../docs/api/resources/schemas.html#schemas-api)
++ Discoverable through our [Schemas API](/docs/api/resources/schemas#schemas-api)
 
 ##### User - Profile Change
 
 Even with all this power and flexibility a partial update of a user profile to a known or set of known attributes is a simple operation.
 
-[Update Profile](../../docs/api/resources/users.html#update-profile)
+[Update Profile](/docs/api/resources/users#update-profile)
 
 Request
 {:.api .api-request .api-request-example}

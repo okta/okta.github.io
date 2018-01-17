@@ -17,20 +17,20 @@ Further guidance about resources inside of the Apps endpoint are discussed in th
 
 #### Apps Data
 
-The application data model is described in [detail here](../../docs/api/resources/apps.html#application-properties)
+The application data model is described in [detail here](/docs/api/resources/apps#application-properties)
 
 Here we will draw attention to a few App attributes and their meaning in the context of a security analytics integration:
 
 + `features`
-  + [This collection](../../docs/api/resources/apps.html#features) will describe the provisioning capabilities that are in effect for the application
+  + [This collection](/docs/api/resources/apps#features) will describe the provisioning capabilities that are in effect for the application
 + `signOnMode`
-  + [This object](../../docs/api/resources/apps.html#signon-modes) will describe what method of authentication (if any) is in place for the application
+  + [This object](/docs/api/resources/apps#signon-modes) will describe what method of authentication (if any) is in place for the application
 + `credentials.scheme`
-  + For applications where Okta is vaulting credentials for application, using [this attribute](../../docs/api/resources/apps.html#authentication-schemes) describes how they are managed
+  + For applications where Okta is vaulting credentials for application, using [this attribute](/docs/api/resources/apps#authentication-schemes) describes how they are managed
 
 ##### Apps - Retrieve active applications
 
-using a filter on the status attribute to retrieve a [list the active Applications](../../docs/api/resources/apps.html#list-applications)
+using a filter on the status attribute to retrieve a [list the active Applications](/docs/api/resources/apps#list-applications)
 
 Request
 {:.api .api-request .api-request-example}

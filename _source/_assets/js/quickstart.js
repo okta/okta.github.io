@@ -34,6 +34,13 @@
         serverExampleType: 'implicit'
       },
       {
+        name: 'vue',
+        label: 'Vue',
+        serverExampleType: 'implicit',
+        // Temporary icon until Vue.js is added
+        codeIconName: 'javascript'
+      },
+      {
         name: 'android',
         label: 'Android',
         serverExampleType: 'implicit'
@@ -42,7 +49,7 @@
         name: 'ios',
         label: 'iOS',
         serverExampleType: 'implicit'
-      },
+      }
     ],
     servers: [
       {
@@ -210,8 +217,8 @@
     var client = linkState.clients.filter(function (client) {
       return client.name === clientName;
     })[0];
-    var clientContentUrl = '/quickstart-fragments/' + clientName + '/default-example.html';
-    var serverContentUrl = '/quickstart-fragments/' + server + '/' + framework + '-' + client.serverExampleType + '.html';
+    var clientContentUrl = '/quickstart-fragments/' + clientName + '/default-example';
+    var serverContentUrl = '/quickstart-fragments/' + server + '/' + framework + '-' + client.serverExampleType;
 
     $.ajax({
       url: clientContentUrl

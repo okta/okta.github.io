@@ -12,11 +12,11 @@ For example
 + Removing a user from a group could un-assign a sensitive application or remove a permissive role in a downstream application
 
 > As previously mentioned, the `{group_id}` referenced below is an opaque Okta ID and may need to be discovered or configured in some way.\\
-Refer to the [Groups](./security-analytics.html#groups) section in our analytics guide for ideas related to working with groups.
+Refer to the [Groups](security-analytics#groups) section in our analytics guide for ideas related to working with groups.
 
 #### Group - Add Member
 
-Follow these steps to [add a user to a group](../../docs/api/resources/groups.html#add-user-to-group)
+Follow these steps to [add a user to a group](/docs/api/resources/groups#add-user-to-group)
 
 Request
 {:.api .api-request .api-request-example}
@@ -34,7 +34,7 @@ HTTP/1.1 204 No Content
 
 #### Group - Remove Member
 
-Follow these steps to [remove a user from a group](../../docs/api/resources/groups.html#remove-user-from-group)
+Follow these steps to [remove a user from a group](/docs/api/resources/groups#remove-user-from-group)
 
 Request
 {:.api .api-request .api-request-example}

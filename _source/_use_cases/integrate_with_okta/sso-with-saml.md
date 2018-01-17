@@ -7,9 +7,9 @@ excerpt: Support SSO in your app and join the Okta Integration Network.
 
 ## Single Sign-On
 
-Your application needs to support Federated Single Sign-On, a common approach for an application to rely on an external identity provider. For web-based applications, [Security Assertion Markup Language (SAML)](https://en.wikipedia.org/wiki/Security_Assertion_Markup_Language) is the standard. For mobile applications, many mobile solution vendors offer proprietary SDKs to provide support. Okta offers [Okta Mobile Connect](/docs/guides/okta_mobile_connect.html) which is based on the SAML protocol.
+Your application needs to support Federated Single Sign-On, a common approach for an application to rely on an external identity provider. For web-based applications, [Security Assertion Markup Language (SAML)](https://en.wikipedia.org/wiki/Security_Assertion_Markup_Language) is the standard. For mobile applications, many mobile solution vendors offer proprietary SDKs to provide support. Okta offers [Okta Mobile Connect](/docs/guides/okta_mobile_connect) which is based on the SAML protocol.
 
-For details on how to federate your application with SAML and Okta Mobile Connect, go to our [Single Sign-On with Okta](/docs/guides/saml_guidance.html) section for additional guidance.
+For details on how to federate your application with SAML and Okta Mobile Connect, go to our [Single Sign-On with Okta](/docs/guides/saml_guidance) section for additional guidance.
 
 
 ### Single Sign-On: Building an Integration with Okta
@@ -18,7 +18,7 @@ Use the following instructions to support single sign-on for your app in the pub
 
 #### 1. Prepare Your Application
 
-Use Okta’s [Single Sign-On with Okta](/docs/guides/saml_guidance.html) guide for best practices on supporting SAML in your app which includes toolkits and testing tools.
+Use Okta’s [Single Sign-On with Okta](/docs/guides/saml_guidance) guide for best practices on supporting SAML in your app which includes toolkits and testing tools.
 
 #### 2. Integrate Your App
 
@@ -50,6 +50,6 @@ Already part of the Okta Integration Network but looking for a more “go-to-mar
 
 Related articles:
 
-* [Provisioning](/use_cases/integrate_with_okta/provisioning.html)
-* [Promotion](/use_cases/integrate_with_okta/promotion.html)
-* [OIN FAQs](/use_cases/integrate_with_okta/oan-faqs.html)
+* [Provisioning](/use_cases/integrate_with_okta/provisioning)
+* [Promotion](/use_cases/integrate_with_okta/promotion)
+* [OIN FAQs](/use_cases/integrate_with_okta/oan-faqs)

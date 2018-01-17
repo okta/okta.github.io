@@ -74,7 +74,7 @@ Make sure this is consistent with the redirect URI used in `okta_app_auth_config
 
 ## Implement Okta Sign-In
 Users can sign in to your Android application a number of different ways.
-The easiest, and most secure way is to use the **default login page**. This page renders the [Okta Sign-In Widget](/code/javascript/okta_sign-in_widget.html), equipped to handle User Lifecycle operations, MFA, and more.
+The easiest, and most secure way is to use the **default login page**. This page renders the [Okta Sign-In Widget](/code/javascript/okta_sign-in_widget), equipped to handle User Lifecycle operations, MFA, and more.
 
 First initialize the Okta AppAuth SDK in the `Activity#onCreate` method of the Activity that you are using to log users into your app. In this example, we will call it `LoginActivity`:
 

@@ -907,7 +907,7 @@ If it works - great! If you want to build your own login form in your app, conti
 
 ### Authentication with the Okta Auth SDK
 
-The Okta Auth SDK builds on top of Otka's [Authentication API](/docs/api/resources/authn.html) and [OAuth 2.0 API](/docs/api/resources/oidc.html) to enable you to create a fully branded sign-in experience using JavaScript.
+The Okta Auth SDK builds on top of Otka's [Authentication API](/docs/api/resources/authn) and [OAuth 2.0 API](/docs/api/resources/oidc) to enable you to create a fully branded sign-in experience using JavaScript.
 
 Install it using npm:
 

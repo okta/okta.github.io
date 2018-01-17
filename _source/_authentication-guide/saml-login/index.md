@@ -3,7 +3,7 @@ layout: docs_page
 weight: 1
 title: SAML Authentication with OIDC
 redirect_from:
-    - "/docs/how-to/inbound-saml-with-oidc.html"
+    - "/docs/how-to/inbound-saml-with-oidc"
 ---
 
 # Authenticating Against an External SAML IdP
@@ -14,7 +14,7 @@ Okta supports authentication with an external SAML Identity Provider (IdP) that 
 
 The SAML flow is initiated with the Service Provider (SP), in this case Okta, who then redirects you to the IdP for authentication. On successful authentication, a user is created inside Okta, and you are redirected back to the URL you specified along with an ID token. 
 
-For more high-level information, you can read about [Understanding SP-initiated Login Flow](/standards/SAML/index.html#understanding-sp-initiated-login-flow).
+For more high-level information, you can read about [Understanding SP-initiated Login Flow](/standards/SAML/#understanding-sp-initiated-login-flow).
 
 ## Set-up
 
@@ -39,7 +39,7 @@ Once you are done with the configuration, take note of the value at the end of y
 
 ### 2. Configure an OpenID Connect Client Application
 
-You will also need to add an OIDC Client Application inside Okta. Users that are signing in for the first time will have [user entities](/docs/api/resources/users.html) created for them and associated with this application. You can add an OIDC App using [the OpenID Connect Application Wizard](https://help.okta.com/en/prev/Content/Topics/Apps/Apps_App_Integration_Wizard.htm). You will also need to assign the application to either "Everyone" or a particular Group that you'd like your new SAML users to be associated with. For more information, see [How to assign a User to an Application](https://support.okta.com/help/Documentation/Knowledge_Article/27418177-Using-the-Okta-Applications-Page#Assigning).
+You will also need to add an OIDC Client Application inside Okta. Users that are signing in for the first time will have [user entities](/docs/api/resources/users) created for them and associated with this application. You can add an OIDC App using [the OpenID Connect Application Wizard](https://help.okta.com/en/prev/Content/Topics/Apps/Apps_App_Integration_Wizard.htm). You will also need to assign the application to either "Everyone" or a particular Group that you'd like your new SAML users to be associated with. For more information, see [How to assign a User to an Application](https://support.okta.com/help/Documentation/Knowledge_Article/27418177-Using-the-Okta-Applications-Page#Assigning).
 
 Once you are done setting this up, be sure to copy the Client ID for your new application.
 
@@ -63,7 +63,7 @@ In this URL, replace `{yourOktaDomain}.com` with your org's base URL, and then i
 - `redirect_uri` needs to be URL encoded and to match a redirect URI that you configured in your OIDC application
 - `state` and `nonce` can have any value you want for the purposes of this example
 
-For a full explanation of all these parameters, see here: [OAuth 2.0 Request parameters](/docs/api/resources/oauth2.html#request-parameters).
+For a full explanation of all these parameters, see here: [OAuth 2.0 Request parameters](/docs/api/resources/oauth2#request-parameters).
 
 ### Testing the flow
 

@@ -21,7 +21,7 @@ Examples of this in action
 
 Similar or more powerful queries can be performed when ingesting date into external systems.
 
-Learn more about [filtering here](../../docs/api/getting_started/design_principles.html#filtering)
+Learn more about [filtering here](/docs/api/getting_started/design_principles#filtering)
 
 ## Event Stitching
 

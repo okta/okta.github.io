@@ -53,7 +53,7 @@ Group membership manipulation is the de facto standard for affecting user entitl
 
 ##### Groups - Retrieve with stats and app details
 
-Using [Get Group](../../docs/api/resources/groups.html#get-group) you can also add a query parameter expand with a value of app and or stats.  The result is a single call with additional details about the group. This method works when getting a singular group by id and when listing groups with or without a filter or query applied.
+Using [Get Group](/docs/api/resources/groups#get-group) you can also add a query parameter expand with a value of app and or stats.  The result is a single call with additional details about the group. This method works when getting a singular group by id and when listing groups with or without a filter or query applied.
 
 Request
 {:.api .api-request .api-request-example}
@@ -105,7 +105,7 @@ Response
 
 ##### Groups - Retrieve Group Members
 
-Using the same logic described online in [List Group Members](../../docs/api/resources/groups.html#list-group-members) you can retrieve a list of users in each group. *Hint*: _use the `group._embedded.stats.usersCount` value to know if *ANY* users are assigned_
+Using the same logic described online in [List Group Members](/docs/api/resources/groups#list-group-members) you can retrieve a list of users in each group. *Hint*: _use the `group._embedded.stats.usersCount` value to know if *ANY* users are assigned_
 
 If your integration doesn't need credential and credential provider related details when listing group members use the "skinny_users" endpoint, it operates in the same manor as the "users" endpoint with the following differences in the resulting data object
 
@@ -175,7 +175,7 @@ Response
 
 ##### Groups - Retrieve Apps assigned by a group
 
-Using the logic described online with [List Assigned Applications](../../docs/api/resources/groups.html#list-assigned-applications) you can retrieve a collection of applications that are assigned based on membership of that group. *Hint*: _Use the `group._embedded.stats.appsCount` value discussed [above](#groups---retrieve-with-stats-and-app-details) to know if *ANY* apps are assigned_
+Using the logic described online with [List Assigned Applications](/docs/api/resources/groups#list-assigned-applications) you can retrieve a collection of applications that are assigned based on membership of that group. *Hint*: _Use the `group._embedded.stats.appsCount` value discussed [above](#groups---retrieve-with-stats-and-app-details) to know if *ANY* apps are assigned_
 
 Request
 {:.api .api-request .api-request-example}
@@ -215,7 +215,7 @@ Response
 
 ##### Groups - Change Membership
 
-Methods of, and reasons to, manipulate Groups and Group membership are discussed in our “Write back to enforce policy in Okta” [Groups](./security-enforcement.html#groups) section below.
+Methods of, and reasons to, manipulate Groups and Group membership are discussed in our “Write back to enforce policy in Okta” [Groups](security-enforcement#groups) section below.
 
 #### Groups More
 

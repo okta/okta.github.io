@@ -11,7 +11,7 @@ and the client obtains an Okta session.
 
 ## Getting Started
 
-If you are new to OpenID Connect, read [the standards topic](/standards/OIDC/index.html) before experimenting with the Postman collection. If you are familiar with
+If you are new to OpenID Connect, read [the standards topic](/standards/OIDC/) before experimenting with the Postman collection. If you are familiar with
 [the OpenID Connect spec](http://openid.net/specs/openid-connect-core-1_0.html), you may want to experiment with the Postman collection now:
 
 [![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/fd92d7c1ab0fbfdecab2)
@@ -30,7 +30,7 @@ Explore the OpenID Connect API: [![Run in Postman](https://run.pstmn.io/button.s
 {% api_operation get /oauth2/v1/userinfo %}
 {% api_operation post /oauth2/v1/userinfo %}
 
-You must include the `access_token` returned from the [/oauth2/v1/authorize](oidc.html#authentication-request) endpoint as an authorization header parameter.
+You must include the `access_token` returned from the [/oauth2/v1/authorize](oidc#authentication-request) endpoint as an authorization header parameter.
 
 This endpoint complies with the [OIDC userinfo spec](http://openid.net/specs/openid-connect-core-1_0.html#UserInfo).
 
@@ -70,7 +70,7 @@ Returns a JSON document with information requested in the scopes list of the tok
 ~~~
 
 The claims in the response are identical to those returned for the requested scopes in the `id_token` JWT, except for the `sub` claim which is always present.
-See [Scope-Dependent Claims](/standards/OIDC/index.html#scope-dependent-claims-not-always-returned) for more information about individual claims.
+See [Scope-Dependent Claims](/standards/OIDC/#scope-dependent-claims-not-always-returned) for more information about individual claims.
 
 #### Response Example (Error)
 {:.api .api-response .api-response-example}
@@ -105,7 +105,7 @@ The API takes an Access Token or Refresh Token, and returns a boolean indicating
 If the token is active, additional data about the token is also returned. If the token is invalid, expired, or revoked, it is considered inactive.
 An implicit client can only introspect its own tokens, while a confidential client can inspect all Access Tokens.
 
-> Note; [ID Tokens](/standards/OIDC/index.html#id-token) are also valid, however, they are usually validated on the service provider or app side of a flow.
+> Note; [ID Tokens](/standards/OIDC/#id-token) are also valid, however, they are usually validated on the service provider or app side of a flow.
 
 #### Request Parameters
 
@@ -247,7 +247,7 @@ Content-Type: application/json;charset=UTF-8
 
 The API takes an Access Token or Refresh Token and revokes it. Revoked tokens are considered inactive at the introspection endpoint. A client may only revoke its own tokens.
 
-> Because this endpoint works with the [Okta Authorization Server](/standards/OAuth/index.html#authorization-servers), you don&#8217;t need an authorization server ID.
+> Because this endpoint works with the [Okta Authorization Server](/standards/OAuth/#authorization-servers), you don&#8217;t need an authorization server ID.
 
 #### Request Parameters
 
@@ -485,7 +485,7 @@ This is a starting point for OpenID Connect flows such as implicit and authoriza
 authenticates the user and returns tokens along with an authorization grant to the client application as a part
 of the response.
 
-> Because this endpoint works with the [Okta Authorization Server](/standards/OAuth/index.html#authorization-servers), you don&#8217;t need an authorization server ID.
+> Because this endpoint works with the [Okta Authorization Server](/standards/OAuth/#authorization-servers), you don&#8217;t need an authorization server ID.
 
 #### Request Parameters
 {:.api .api-request .api-request-params}
@@ -500,7 +500,7 @@ of the response.
 | display               | How to display the authentication and consent UI. Valid values: `page` or `popup`.                                                                                                                                                                                                                                                                                                                      | Query      | String   | FALSE    |                  |
 | max_age               | Allowable elapsed time, in seconds, since the last time the end user was actively authenticated by Okta.                                                                                                                                                                                                                                                                                                | Query      | String   | FALSE    |                  |
 | response_mode         | How the authorization response should be returned.     [Valid values: `fragment`, `form_post`, `query` or `okta_post_message`](#parameter-details). If `id_token` or `token` is specified as the response type, then `query` isn&#8217;t allowed as a response mode. Defaults to `fragment` in implicit and hybrid flow. Defaults to `query` in authorization code flow and cannot be set as `okta_post_message`. | Query      | String   | FALSE    | See Parameter Details. |
-| scope                 | `openid` is required. Other   [scopes](/standards/OIDC/index.html#scopes) may also be included.                                                                                                                                                                                                                                                                                                         | Query      | String   | TRUE     |
+| scope                 | `openid` is required. Other   [scopes](/standards/OIDC/#scopes) may also be included.                                                                                                                                                                                                                                                                                                         | Query      | String   | TRUE     |
 | state                 | A value to be returned in the token. The client application can use it to remember the state of its interaction with the end user at the time of the authentication call. It can contain alphanumeric, comma, period, underscore and hyphen characters.                                                                                                                                                 | Query      | String   | TRUE     |
 | prompt                | Either *none* or `login`. If `none`,  do not prompt for authentication, and return an error if the end user is not already authenticated. If `login`, force a prompt (even if the user had an existing session). Default: depends on whether an Okta session exists.                                                                                                                                     | Query      | String   | FALSE    | See Parameter Details. |
 | nonce                 | A value that must be returned in the ID Token. It is used to mitigate replay attacks.                                                                                                                                                                                                                                                                                                                   | Query      | String   | TRUE     |
@@ -552,7 +552,7 @@ Use the postMessage() data model to help you when working with the `okta_post_me
 | Parameter         | Description                                                                                                                                                                                                                                                                                                   | DataType |
 |:------------------|:--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|:---------|
 | id_token          | The ID Token JWT contains the details of the authentication event and the claims corresponding to the requested scopes. This is returned if the `response_type` includes `id_token`.                                                                                                                          | String   |
-| access_token      | The `access_token` used to access the   [`/oauth2/v1/userinfo`](/docs/api/resources/oidc.html#get-user-information) endpoint. This is returned if the `response_type` included a token. <b>Important</b>: Unlike the ID Token JWT, the `access_token` structure is specific to Okta, and is subject to change. | String   |
+| access_token      | The `access_token` used to access the   [`/oauth2/v1/userinfo`](/docs/api/resources/oidc#get-user-information) endpoint. This is returned if the `response_type` included a token. <b>Important</b>: Unlike the ID Token JWT, the `access_token` structure is specific to Okta, and is subject to change. | String   |
 | state             | If the request contained a `state` parameter, then the same unmodified value is returned back in the response.                                                                                                                                                                                                | String   |
 | error             | The error-code string providing information if anything goes wrong.                                                                                                                                                                                                                                           | String   |
 | error_description | Additional description of the error.                                                                                                                                                                                                                                                                          | String   |
@@ -571,7 +571,7 @@ Irrespective of the response type, the contents of the response are as described
 | Parameter         | Description                                                                                                                                                                                                                                                          | DataType |
 |:------------------|:---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|:---------|
 | id_token          | JWT that contains the details of the authentication event and the claims corresponding to the requested scopes. This is returned if the `response_type` includes `id_token`.                                                                                         | String   |
-| access_token      | Used to access the   [`/oauth2/v1/userinfo`](/docs/api/resources/oidc.html#get-user-information) endpoint. This is returned if `response_type` includes `token`. Unlike the ID Token JWT, the `access_token` structure is specific to Okta, and is subject to change.  | String   |
+| access_token      | Used to access the   [`/oauth2/v1/userinfo`](/docs/api/resources/oidc#get-user-information) endpoint. This is returned if `response_type` includes `token`. Unlike the ID Token JWT, the `access_token` structure is specific to Okta, and is subject to change.  | String   |
 | token_type        | The token type is always `Bearer` and is returned only when `token` is specified as a `response_type`.                                                                                                                                                               | String   |
 | code              | An opaque value that can be used to redeem tokens from   the [token endpoint](#token-request). `code` is returned if the `response_type` includes `code`. The code has a lifetime of 60 seconds.                                                                                                                                                                             | String   |
 | expires_in        | Number of seconds until the `access_token` expires. This is only returned if the response included an `access_token`.                                                                                                                                                | String   |
@@ -677,7 +677,7 @@ https://www.example.com/#error=invalid_scope&error_description=The+requested+sco
 
 The API returns Access Tokens, ID Tokens, and Refresh Tokens, depending on the request parameters.
 
->Because this endpoint works with the [Okta Authorization Server](/standards/OAuth/index.html#authorization-servers), you don&#8217;t need an authorization server ID.
+>Because this endpoint works with the [Okta Authorization Server](/standards/OAuth/#authorization-servers), you don&#8217;t need an authorization server ID.
 
 #### Request Parameters
 

@@ -100,6 +100,6 @@ If you have new marketing ideas or additional questions, please contact <partner
 
 Related articles:
 
-* [Single Sign-On](/use_cases/integrate_with_okta/sso-with-saml.html)
-* [Provisioning](/use_cases/integrate_with_okta/provisioning.html)
-* [OIN FAQs](/use_cases/integrate_with_okta/oan-faqs.html)
+* [Single Sign-On](/use_cases/integrate_with_okta/sso-with-saml)
+* [Provisioning](/use_cases/integrate_with_okta/provisioning)
+* [OIN FAQs](/use_cases/integrate_with_okta/oan-faqs)

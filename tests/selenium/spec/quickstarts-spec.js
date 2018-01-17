@@ -99,7 +99,7 @@ describe('quickstarts page navigation spec', () => {
         'Okta Sign-In Widget',
         'Node JS',
         'Express.js'
-      ])).toBe(true);
+    ])).toBe(true);
 
     quickstartsPage.selectAngularClient();
     expect(quickstartsPage.urlContains("/angular")).toBe(true);
@@ -107,7 +107,7 @@ describe('quickstarts page navigation spec', () => {
         'Angular',
         'Node JS',
         'Express.js'
-      ])).toBe(true);
+    ])).toBe(true);
 
     quickstartsPage.selectReactClient();
     expect(quickstartsPage.urlContains("/react")).toBe(true);
@@ -123,7 +123,7 @@ describe('quickstarts page navigation spec', () => {
         'Android',
         'Node JS',
         'Express.js'
-      ])).toBe(true);
+    ])).toBe(true);
 
     quickstartsPage.selectiOSClient();
     expect(quickstartsPage.urlContains("/ios")).toBe(true);
@@ -131,7 +131,16 @@ describe('quickstarts page navigation spec', () => {
         'iOS',
         'Node JS',
         'Express.js'
-      ])).toBe(true);
+    ])).toBe(true);
+
+    quickstartsPage.selectVueClient();
+    expect(quickstartsPage.urlContains("/vue")).toBe(true);
+    expect(quickstartsPage.activeLinksContain([
+        'Vue',
+        'Node JS',
+        'Express.js'
+    ])).toBe(true);
+
   });
 
   util.itNoHeadless('can select all server setups', () => {
