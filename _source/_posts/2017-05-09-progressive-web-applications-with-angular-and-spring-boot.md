@@ -378,7 +378,7 @@ I’d also recommend visiting the following websites:
 * [Maxim Salnikov’s Angular Mobile Toolkit Workshop](http://bit.ly/pwa-ng-nl)
 * [Hacker News Readers as Progressive Web Apps](https://github.com/tastejs/hacker-news-pwas)
 
-**Update:** To learn how to add authentication to this application, see [Add Authentication to Your Angular PWA](/blog/2017/06/13/add-authentication-angular-pwa.html). I also wrote a blog post on [how to develop the backend using a microservices architecture](/blog/2017/06/15/build-microservices-architecture-spring-boot.html).
+**Update:** To learn how to add authentication to this application, see [Add Authentication to Your Angular PWA](/blog/2017/06/13/add-authentication-angular-pwa). I also wrote a blog post on [how to develop the backend using a microservices architecture](/blog/2017/06/15/build-microservices-architecture-spring-boot).
 
 **Changelog:**
 

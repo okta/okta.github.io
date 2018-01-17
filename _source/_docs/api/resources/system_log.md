@@ -15,8 +15,8 @@ Often the terms "event" and "log event" are used interchangeably. In the context
  
 Notes:
 
-* The System Log API contains much more [structured data](#logevent-object) than the [Events API](/docs/api/resources/events.html#event-model).
-* The System Log API supports additional [SCIM filters](#request-parameters) and the `q` query parameter, because of the presence of more structured data than the [Events API](/docs/api/resources/events.html#request-parameters).
+* The System Log API contains much more [structured data](#logevent-object) than the [Events API](/docs/api/resources/events#event-model).
+* The System Log API supports additional [SCIM filters](#request-parameters) and the `q` query parameter, because of the presence of more structured data than the [Events API](/docs/api/resources/events#request-parameters).
 
 ## Getting Started
 
@@ -276,21 +276,21 @@ Describes the client performing the action.
 
 ### GeographicalContext Object
 
-Describes the location of the target that the action was performed on.
+Geographical Context describes a set of geographic coordinates. In addition to containing latitude and longitude data, this object also contains address data of postal code-level granularity. Within the [Client](#client-object) object, the geographical context refers to the physical location of the client when it sends the request that triggers this event.
 
-|------------+----------------------------------------------------------------+-----------------+----------|
-| Property   | Description                                                    | DataType        | Nullable |
-| ---------- | -------------------------------------------------------------- | --------------- | -------- |
-| geolocation | Geolocation of the target                                     | [Geolocation Object](#geolocation-object) | TRUE |
-| city       | City of the event                                              | String          | TRUE     |
-| state      | State of the client                                            | String          | TRUE     |
-| country    | Country of the client                                          | String          | TRUE     |
-| postalCode | Postal code of the client                                      | String          | TRUE     |
-|------------+----------------------------------------------------------------+-----------------+----------|
+|-------------+------------------------------------------------------------------------------------+---------------------------------------+----------|
+| Property    | Description                                                                        | DataType                              | Nullable |
+| ----------- | ---------------------------------------------------------------------------------- | ------------------------------------- | -------- |
+| geolocation | Contains the geolocation coordinates (latitude, longitude)                         | [Geolocation Object](#geolocation-object) | TRUE |
+| city        | The city encompassing the area containing the geolocation coordinates, if available (e.g. Seattle, San Francisco) | String | TRUE     |
+| state       | Full name of the state/province encompassing the area containing the geolocation coordinates (e.g. Montana, Incheon) | String | TRUE  |
+| country     | Full name of the country encompassing the area containing the geolocation coordinates (e.g. France, Uganda) | String       | TRUE     |
+| postalCode  | Postal code of the area encompassing the geolocation coordinates                   | String                                | TRUE     |
+|-------------+------------------------------------------------------------------------------------+---------------------------------------+----------|
 
 ### Geolocation Object
 
-The latitude and longitude of the geolocation where an action was performed.
+Latitude and longitude of the geolocation where an action was performed, formatted according to the [ISO-6709](https://en.wikipedia.org/wiki/ISO_6709) standard. The latitude uses 2 digits for its integer part and the longitude uses 3 digits for its integer part.
 
 |------------+----------------------------------------------------------------+-----------------+----------|
 | Property   | Description                                                    | DataType        | Nullable |
@@ -473,7 +473,7 @@ The table below summarizes the supported query parameters:
 | `since`     | Filters the lower time bound of the log events `published` property                                   | An [ISO8601 internet date/time format](https://tools.ietf.org/html/rfc3339#page-8) with timezone. An example: `2017-05-03T16:22:187Z` | 7 days prior to `until` |
 | `until`     | Filters the upper time bound of the log events `published` property                                   | An [ISO8601 internet date/time format](https://tools.ietf.org/html/rfc3339#page-8) with timezone. An example: `2017-05-03T16:22:187Z` | Current time |
 | `after`     | Used to retrieve the next page of results. Okta returns a link in the HTTP Header (`rel=next`) that includes the after query parameter. | Opaque token |                         |
-| `filter`    | [Filter Expression](#expression-filter) that filters the results                                      | [SCIM Filter expression](/docs/api/getting_started/design_principles.html#filtering) | |
+| `filter`    | [Filter Expression](#expression-filter) that filters the results                                      | [SCIM Filter expression](/docs/api/getting_started/design_principles#filtering) | |
 | `q`         | Filters the log events results by one or more exact [keywords](#keyword-filter)                       | URL encoded string                                       |                         |
 | `sortOrder` | The order of the returned events sorted by `published`                                                | `ASCENDING` or `DESCENDING`                              | `ASCENDING`             |
 | `limit`     | Sets the number of results returned in the response                                                   | Integer between 0 and 100                                | 100                     |
@@ -493,7 +493,7 @@ Filter                                       | Description
 `target.id eq ":id"`                         | Events published with a specific target id
 `actor.id eq ":id"`                          | Events published with a specific actor id
 
-See [Filtering](/docs/api/getting_started/design_principles.html#filtering) for more information about expressions.
+See [Filtering](/docs/api/getting_started/design_principles#filtering) for more information about expressions.
 
 The following are some examples of common filter expressions.
 
@@ -699,6 +699,6 @@ curl -v -X GET \
 "https://{yourOktaDomain}.com/api/v1/logs?since=2017-10-01T00:00:00.000Z"
 ```
 
-and retrieve the next page of events through the [`Link` response header](/docs/api/getting_started/design_principles.html#link-header) value with the `next` link relation. Continue this process until no events are returned.
+and retrieve the next page of events through the [`Link` response header](/docs/api/getting_started/design_principles#link-header) value with the `next` link relation. Continue this process until no events are returned.
 
 > Do not attempt to transfer data by manually paginating using `since` and `until` as this may lead to skipped or duplicated events. Instead, always follow the `next` links. 

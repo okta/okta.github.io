@@ -1030,9 +1030,9 @@ Adds an OAuth 2.0 client application. This application is only available to the 
     the OAuth 2.0 authorization code grant.
 
 * {% api_lifecycle beta %} A consent dialog is displayed depending on the values of three elements:
-    * `prompt`, a query parameter used in requests to [`/oauth2/:authorizationServerId/v1/authorize`](/docs/api/resources/oauth2.html#obtain-an-authorization-grant-from-a-user)(custom authorization server) or [`/oauth2/v1/authorize`](/docs/api/resources/oidc.html#authentication-request) (Org authorization server)
+    * `prompt`, a query parameter used in requests to [`/oauth2/:authorizationServerId/v1/authorize`](/docs/api/resources/oauth2#obtain-an-authorization-grant-from-a-user)(custom authorization server) or [`/oauth2/v1/authorize`](/docs/api/resources/oidc#authentication-request) (Org authorization server)
     * `consent_method`, a property listed in the Settings table above
-    * `consent`, a property on [scopes](/docs/api/resources/oauth2.html#scopes-properties)
+    * `consent`, a property on [scopes](/docs/api/resources/oauth2#scopes-properties)
 
     | `prompt` Value    | `consent_method`                 | `consent`                   | Result       |
     |:------------------|:---------------------------------|:----------------------------|:-------------|
@@ -1348,7 +1348,7 @@ filter    | Filters apps by `status`, `user.id`, `group.id` or `credentials.sign
 after     | Specifies the pagination cursor for the next page of apps                                                        | Query      | String   | FALSE    |
 expand    | Traverses `users` link relationship and optionally embeds [Application User](#application-user-model) resource   | Query      | String   | FALSE    |
 
-> The page cursor should treated as an opaque value and obtained through the next link relation. See [Pagination](/docs/api/getting_started/design_principles.html#pagination)
+> The page cursor should treated as an opaque value and obtained through the next link relation. See [Pagination](/docs/api/getting_started/design_principles#pagination)
 
 ###### Filters
 
@@ -3075,7 +3075,7 @@ Fetches a specific user assignment for application by `id`.
 Parameter | Description                                     | Param Type | DataType | Required | Default
 --------- | ----------------------------------------------- | ---------- | -------- | -------- | -------
 aid       | unique key of [Application](#application-model) | URL        | String   | TRUE     |
-uid       | unique key of assigned [User](/docs/api/resources/users.html)       | URL        | String   | TRUE     |
+uid       | unique key of assigned [User](/docs/api/resources/users)       | URL        | String   | TRUE     |
 
 ##### Response Parameters
 {:.api .api-response .api-response-params}
@@ -3150,7 +3150,7 @@ aid       | unique key of [Application](#application-model)                  | U
 limit     | specifies the number of results for a page                       | Query      | Number   | FALSE    | 20
 after     | specifies the pagination cursor for the next page of assignments | Query      | String   | FALSE    |
 
-> The page cursor should treated as an opaque value and obtained through the next link relation. See [Pagination](/docs/api/getting_started/design_principles.html#pagination)
+> The page cursor should treated as an opaque value and obtained through the next link relation. See [Pagination](/docs/api/getting_started/design_principles#pagination)
 
 ##### Response Parameters
 {:.api .api-response .api-response-params}
@@ -3257,7 +3257,7 @@ Updates a user's [credentials](#application-user-credentials-object) for an assi
 Parameter | Description                                                        | Param Type | DataType                                    | Required | Default
 --------- | ------------------------------------------------------------------ | ---------- | ------------------------------------------- | -------- | -------
 aid       | unique key of [Application](#application-model)                    | URL        | String                                      | TRUE     |
-uid       | unique key of a valid [User](/docs/api/resources/users.html)                           | URL        | String                                      | TRUE     |
+uid       | unique key of a valid [User](/docs/api/resources/users)            | URL        | String                                      | TRUE     |
 appuser   | user's [credentials](#application-user-credentials-object) for app | Body       | [Application User](#application-user-model) | TRUE     |
 
 ##### Response Parameters
@@ -3343,7 +3343,7 @@ Updates a user's profile for an application
 Parameter | Description                                     | Param Type | DataType                                    | Required | Default
 --------- | ----------------------------------------------- | ---------- | ------------------------------------------- | -------- | -------
 aid       | unique key of [Application](#application-model) | URL        | String                                      | TRUE     |
-uid       | unique key of a valid [User](/docs/api/resources/users.html)        | URL        | String                                      | TRUE     |
+uid       | unique key of a valid [User](/docs/api/resources/users)        | URL        | String                                      | TRUE     |
 appuser   | credentials for app                             | Body       | [Application User](#application-user-model) | FALSE    |
 
 ##### Response Parameters
@@ -3459,7 +3459,7 @@ Removes an assignment for a user from an application.
 Parameter | Description                                     | Param Type | DataType | Required | Default
 --------- | ----------------------------------------------- | ---------- | -------- | -------- | -------
 aid       | unique key of [Application](#application-model) | URL        | String   | TRUE     |
-uid       | unique key of assigned [User](/docs/api/resources/users.html)       | URL        | String   | TRUE     |
+uid       | unique key of assigned [User](/docs/api/resources/users)       | URL        | String   | TRUE     |
 
 ##### Response Parameters
 {:.api .api-response .api-response-params}
@@ -3499,7 +3499,7 @@ Assigns a group to an application
 Parameter | Description                                     | Param Type | DataType                                      | Required | Default
 --------- | ----------------------------------------------- | ---------- | --------------------------------------------- | -------- | -------
 aid       | unique key of [Application](#application-model) | URL        | String                                        | TRUE     |
-gid       | unique key of a valid [Group](groups.html)      | URL        | String                                        | TRUE     |
+gid       | unique key of a valid [Group](groups)      | URL        | String                                        | TRUE     |
 appgroup  | App group                                       | Body       | [Application Group](#application-group-model) | FALSE    |
 
 ##### Response Parameters
@@ -3543,7 +3543,7 @@ Fetches an application group assignment
 Parameter | Description                                     | Param Type | DataType | Required | Default
 --------- | ----------------------------------------------- | ---------- | -------- | -------- | -------
 aid       | unique key of [Application](#application-model) | URL        | String   | TRUE     |
-gid       | unique key of an assigned [Group](groups.html)  | URL        | String   | TRUE     |
+gid       | unique key of an assigned [Group](groups)  | URL        | String   | TRUE     |
 
 ##### Response Parameters
 {:.api .api-response .api-response-params}
@@ -3588,7 +3588,7 @@ aid       | unique key of [Application](#application-model)                  | U
 limit     | Specifies the number of results for a page                       | Query      | Number   | FALSE    | 20
 after     | Specifies the pagination cursor for the next page of assignments | Query      | String   | FALSE    |
 
-> The page cursor should treated as an opaque value and obtained through the next link relation. See [Pagination](/docs/api/getting_started/design_principles.html#pagination)
+> The page cursor should treated as an opaque value and obtained through the next link relation. See [Pagination](/docs/api/getting_started/design_principles#pagination)
 
 ##### Response Parameters
 {:.api .api-response .api-response-params}
@@ -3637,7 +3637,7 @@ Removes a group assignment from an application.
 Parameter | Description                                     | Param Type | DataType | Required | Default
 --------- | ----------------------------------------------- | ---------- | -------- | -------- | -------
 aid       | unique key of [Application](#application-model) | URL        | String   | TRUE     |
-gid       | unique key of an assigned [Group](groups.html)  | URL        | String   | TRUE     |
+gid       | unique key of an assigned [Group](groups)  | URL        | String   | TRUE     |
 
 ##### Response Parameters
 {:.api .api-response .api-response-params}
@@ -3749,7 +3749,7 @@ Clones a X.509 certificate for an application key credential from a source appli
 
 > Important: Sharing certificates is not a recommended security practice.
 
-For step-by-step instructions to clone a credential, see [Share Application Key Credentials Between Apps](/docs/how-to/sharing-cert.html).
+For step-by-step instructions to clone a credential, see [Share Application Key Credentials Between Apps](/docs/how-to/sharing-cert).
 
 ##### Request Parameters
 {:.api .api-request .api-request-params}
@@ -4796,7 +4796,7 @@ Determines how to authenticate the OAuth 2.0 client
 
 * The `client_id` must consist of alphanumeric characters or the following special characters `$-_.+!*'(),`. It must contain between 6 and 100 characters, inclusive, and must not be the reserved word `ALL_CLIENTS`. The `client_secret` must consist of printable characters, which are defined in [the OAuth 2.0 Spec](https://tools.ietf.org/html/rfc6749#appendix-A), and must contain between 14 and 100 characters, inclusive.
 
-* If `autoKeyRotation` is not specified, the client automatically opts in for Okta's [key rotation](/docs/api/resources/oidc.html#validating-id-tokens). This property may be updated via the API or via the Okta Admin user interface.
+* If `autoKeyRotation` is not specified, the client automatically opts in for Okta's [key rotation](/docs/api/resources/oidc#validating-id-tokens). This property may be updated via the API or via the Okta Admin user interface.
 
 ~~~json
 {
@@ -4917,7 +4917,7 @@ Specifies (optional) attribute statements for a SAML application.
 | ---------- | -------------------------------------------------------------------------------------------- | ----------- | -------- |
 | namespace  | The name format of the attribute                                                             | String      | FALSE    |
 | ---------- | -------------------------------------------------------------------------------------------- | ----------- | -------- |
-| values     | The value of the attribute; Supports [Okta EL](../getting_started/okta_expression_lang.html) | String      | FALSE    |
+| values     | The value of the attribute; Supports [Okta EL](../getting_started/okta_expression_lang) | String      | FALSE    |
 |------------+--------------------------------------------------------------------------------------------- | ----------- | -------- |
 
 ##### Supported Namespaces
@@ -4960,7 +4960,7 @@ Basic           | urn:oasis:names:tc:SAML:2.0:attrname-format:basic
 ### Profile Object
 {:.api .api-operation}
 
-Profile object is a container for any valid JSON schema that can be referenced from a request. For example, add an app manager contact email address, or define a whitelist of groups that you can then reference using the [Okta Expression `getFilteredGroups`](/reference/okta_expression_language/index.html#group-functions).
+Profile object is a container for any valid JSON schema that can be referenced from a request. For example, add an app manager contact email address, or define a whitelist of groups that you can then reference using the [Okta Expression `getFilteredGroups`](/reference/okta_expression_language/#group-functions).
 
 Profile Requirements
 
@@ -5021,7 +5021,7 @@ All application user assignments have the following properties:
 |------------------+--------------------------------------------------------------+-----------------------------------------------------------------------------|----------|--------|----------|-----------|-----------+------------|
 | Property         | Description                                                  | DataType                                                                    | Nullable | Unique | Readonly | MinLength | MaxLength | Validation |
 | ---------------- | ------------------------------------------------------------ | --------------------------------------------------------------------------- | -------- | ------ | -------- | --------- | --------- | ---------- |
-| id               | unique key of [User](/docs/api/resources/users.html)                             | String                                                                      | FALSE    | TRUE   | TRUE     |           |           |            |
+| id               | unique key of [User](/docs/api/resources/users)              | String                                                                      | FALSE    | TRUE   | TRUE     |           |           |            |
 | externalId       | id of user in target app *(must be imported or provisioned)* | String                                                                      | TRUE     | TRUE   | TRUE     |           | 512       |            |
 | created          | timestamp when app user was created                          | Date                                                                        | FALSE    | FALSE  | TRUE     |           |           |            |
 | lastUpdated      | timestamp when app user was last updated                     | Date                                                                        | FALSE    | FALSE  | TRUE     |           |           |            |

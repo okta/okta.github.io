@@ -13,13 +13,13 @@ module Okta
     def render(context)
       case @api_lifecycle.downcase
         when "beta"
-          %{ <a href="/docs/api/getting_started/releases-at-okta.html#beta"> <span class="api-label api-label-beta #{@class}"> <i class="fa fa-warning"></i> Beta </span> </a> }
+          %{ <a href="/docs/api/getting_started/releases-at-okta#beta"> <span class="api-label api-label-beta #{@class}"> <i class="fa fa-warning"></i> Beta </span> </a> }
         when "ea"
-          %{ <a href="/docs/api/getting_started/releases-at-okta.html#early-access-ea"> <span class="api-label api-label-ea #{@class}"> <i class="fa fa-flag"></i> Early Access </span> </a> }
+          %{ <a href="/docs/api/getting_started/releases-at-okta#early-access-ea"> <span class="api-label api-label-ea #{@class}"> <i class="fa fa-flag"></i> Early Access </span> </a> }
         when "ga"
-          %{ <a href="/docs/api/getting_started/releases-at-okta.html#general-availability-ga"> <span class="api-label api-label-ga #{@class}"> <i class="fa fa-circle-o"></i> General Availability </span> </a> }
+          %{ <a href="/docs/api/getting_started/releases-at-okta#general-availability-ga"> <span class="api-label api-label-ga #{@class}"> <i class="fa fa-circle-o"></i> General Availability </span> </a> }
         when "deprecated"
-          %{ <a href="/docs/api/getting_started/releases-at-okta.html#deprecation"> <span class="api-label api-label-deprecated #{@class}"> <i class="fa fa-fire-extinguisher"></i> Deprecated </span> </a> }
+          %{ <a href="/docs/api/getting_started/releases-at-okta#deprecation"> <span class="api-label api-label-deprecated #{@class}"> <i class="fa fa-fire-extinguisher"></i> Deprecated </span> </a> }
       end
     end
   end

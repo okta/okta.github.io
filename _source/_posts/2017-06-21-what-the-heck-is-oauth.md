@@ -377,7 +377,7 @@ An Open ID Connect flow involves the following steps:
 ## OAuth + Okta
 [Okta](https://www.okta.com) is best known for its single-sign on services that allow you to seamlessly authenticate to the applications you use on a daily basis. But did you know Okta also has an awesome developer platform? Secure single sign-on often uses SAML as the protocol of choice, but Okta also provides several other options, including a Sign-in Widget, Auth SDK (a JavaScript-based library), Social Login, and an Authentication API for any client. If you're interested in learning about Okta straight from the source, you should attend [Oktane17](https://www.okta.com/oktane17/) in late August. There's a [track dedicated to app development](https://www.okta.com/oktane17/agenda/#AppDev).
 
-See [Okta's OAuth 2.0 API](http://developer.okta.com/docs/api/resources/oauth2.html) for specific information on how we support OAuth.
+See [Okta's OAuth 2.0 API](http://developer.okta.com/docs/api/resources/oauth2) for specific information on how we support OAuth.
 
 SAML is implement by Okta with its SSO chiclets. If you're an Okta customer, like me, you likely interact with most apps using something like https://okta.okta.com/app/UserHome. When you click on a chiclet, we send a message, we sign the assertion, inside the assertion it says who the user is, and that it came from Okta. Slap on a digital signature on it and you're good to go.
 

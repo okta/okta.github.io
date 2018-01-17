@@ -1,7 +1,7 @@
 {
 	"id": "05649232-8eeb-7fe6-8764-be67a95429ea",
 	"name": "Groups (Okta API)",
-	"description": "The [Okta Groups API](/docs/api/resources/groups.html) provides operations to manage your organization groups and their user members.",
+	"description": "The [Okta Groups API](/docs/api/resources/groups) provides operations to manage your organization groups and their user members.",
 	"order": [
 		"48b63c93-8599-21f3-31ca-db2ca595e596",
 		"a512fa07-866b-48c3-bac5-32aa746e2934",

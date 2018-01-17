@@ -217,8 +217,8 @@
     var client = linkState.clients.filter(function (client) {
       return client.name === clientName;
     })[0];
-    var clientContentUrl = '/quickstart-fragments/' + clientName + '/default-example.html';
-    var serverContentUrl = '/quickstart-fragments/' + server + '/' + framework + '-' + client.serverExampleType + '.html';
+    var clientContentUrl = '/quickstart-fragments/' + clientName + '/default-example';
+    var serverContentUrl = '/quickstart-fragments/' + server + '/' + framework + '-' + client.serverExampleType;
 
     $.ajax({
       url: clientContentUrl

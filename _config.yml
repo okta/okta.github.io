@@ -13,6 +13,7 @@ plugins:
   - jekyll-redirect-from
   - jekyll-paginate
   - jekyll-assets
+  - jekyll-include-cache
 
 source: _source
 destination: dist
@@ -40,7 +41,6 @@ ga_ua_id: "UA-15777010-3"
 production_url: "https://developer.okta.com"
 
 include: [_static, .nojekyll, .woff, .tff]
-
 
 assets:
   compress:

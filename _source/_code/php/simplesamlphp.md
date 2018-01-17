@@ -42,7 +42,7 @@ you need to set up an Okta chiclet (application icon) that an Okta user selects 
 application using SAML via SimpleSAMLphp.
 
 To set up Okta to connect to your application, follow the guide to
-[setting up a SAML application in Okta](/standards/SAML/setting_up_a_saml_application_in_okta.html).
+[setting up a SAML application in Okta](/standards/SAML/setting_up_a_saml_application_in_okta).
 As you follow the instructions, there are two steps where you will do things differently:
 
 * *In step \#6*: Use ***SimpleSAMLphp Example*** instead "Example SAML application"
@@ -226,7 +226,7 @@ PHP, reconfiguring Apache, and creating some symbolic links.
 
     Be sure to replace the contents of `{metdata-url}` with the link
     that you copied in step \#10 of the
-    "[Setting up a SAML application in Okta](/standards/SAML/setting_up_a_saml_application_in_okta.html)"
+    "[Setting up a SAML application in Okta](/standards/SAML/setting_up_a_saml_application_in_okta)"
     instructions that you followed above!
 
     > Note: The contents of `{metadata-url}` should look similar to this:
@@ -287,7 +287,7 @@ array should not be hard coded, but should come from a dynamic datastore.
 
 If you want to learn more about SAML and what to consider when writing a
 SAML implementation, Okta's in-depth
-[SAML guidance](/docs/getting_started/saml_guidance.html)
+[SAML guidance](/docs/getting_started/saml_guidance)
 is a great place to learn more.
 
 Finally, if you got this far in this guide and still have questions,

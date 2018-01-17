@@ -17,7 +17,7 @@ Refer to the [appGroup Object] data model for an elaboaration of the appGroup da
 
 ##### appGroup - Retrieve appGroup objects for a given app
 
-Using [this method](../../docs/api/resources/apps.html#list-groups-assigned-to-application) you can list the groups used to assign the specified app along with any application properties defined as a function of being assigned through that group.
+Using [this method](/docs/api/resources/apps#list-groups-assigned-to-application) you can list the groups used to assign the specified app along with any application properties defined as a function of being assigned through that group.
 
 Request
 {:.api .api-request .api-request-example}

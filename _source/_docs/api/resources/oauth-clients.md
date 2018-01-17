@@ -150,7 +150,7 @@ limit     | Specifies the number of client results in a page                    
 after     | Specifies the pagination cursor for the next page of clients                               | Query     | String   | FALSE    |
 
 >Note:
-*  The `after` cursor should treated as an opaque value and obtained through [the next link relation](/docs/api/getting_started/design_principles.html#pagination).
+*  The `after` cursor should treated as an opaque value and obtained through [the next link relation](/docs/api/getting_started/design_principles#pagination).
 * Search currently performs a startsWith match but this is an implementation detail and may change without notice in the future.
 
 ##### Response Parameters
@@ -290,7 +290,7 @@ limit     | Specifies the number of client results in a page                    
 after     | Specifies the pagination cursor for the next page of clients                               | Query     | String   | FALSE    |
 
 >Note:
-*  The `after` cursor should treated as an opaque value and obtained through [the next link relation](/docs/api/getting_started/design_principles.html#pagination).
+*  The `after` cursor should treated as an opaque value and obtained through [the next link relation](/docs/api/getting_started/design_principles#pagination).
 * Search currently performs a startsWith match but this is an implementation detail and may change without notice in the future.
 
 ##### Request Example

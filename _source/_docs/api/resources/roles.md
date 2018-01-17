@@ -175,12 +175,12 @@ Lists all group targets for a `USER_ADMIN` role assignment.
 | limit     | Specifies the number of results for a page (default is 20)   | Query      | Number   | FALSE    |
 | after     | Specifies the pagination cursor for the next page of targets | Query      | String   | FALSE    |
 
-Treat the page cursor as an opaque value: obtain it through the next link relation. See [Pagination](/docs/api/getting_started/design_principles.html#pagination).
+Treat the page cursor as an opaque value: obtain it through the next link relation. See [Pagination](/docs/api/getting_started/design_principles#pagination).
 
 ##### Response Parameters
 {:.api .api-response .api-response-params}
 
-Array of [Groups](./groups.html)
+Array of [Groups](groups)
 
 If the role isn't scoped to specific group targets, an empty array `[]` is returned.
 
@@ -338,7 +338,7 @@ Lists all app targets for an `APP_ADMIN` role assignment.
 | limit     | Specifies the number of results for a page (default is 20)   | Query      | Number   | FALSE    |
 | after     | Specifies the pagination cursor for the next page of targets | Query      | String   | FALSE    |
 
-Treat the page cursor as an opaque value: obtain it through the next link relation. See [Pagination](/docs/api/getting_started/design_principles.html#pagination)
+Treat the page cursor as an opaque value: obtain it through the next link relation. See [Pagination](/docs/api/getting_started/design_principles#pagination)
 
 ##### Response Parameters
 {:.api .api-response .api-response-params}
@@ -557,6 +557,6 @@ Refer to the [product documentation](https://help.okta.com/en/prod/Content/Topic
 | `SUPER_ADMIN`     | Super Administrator          |                         |
 | `ORG_ADMIN`       | Organizational Administrator |                         |
 | `APP_ADMIN`       | Application Administrator    | Apps                    |
-| `USER_ADMIN`      | Group Administrator          | [Groups](./groups.html) |
+| `USER_ADMIN`      | Group Administrator          | [Groups](groups) |
 | `MOBILE_ADMIN`    | Mobile Administrator         |                         |
 | `READ_ONLY_ADMIN` | Read-only Administrator      |                         |

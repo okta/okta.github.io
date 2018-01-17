@@ -22,7 +22,7 @@ Okta is [certified for OpenID Connect](http://openid.net/certification/) for Bas
 OAuth 2.0 is an authorization framework for delegated access to APIs, and OpenID Connect is an SSO protocol for authenticating end users and asserting their identity.
 OpenID Connect extends OAuth 2.0:
 
-* Provides a signed [*id_token*](#id-token) for the client and [a UserInfo endpoint](/docs/api/resources/oidc.html#openid-connect-discovery-document) from which you can retrieve user attributes.
+* Provides a signed [*id_token*](#id-token) for the client and [a UserInfo endpoint](/docs/api/resources/oidc#openid-connect-discovery-document) from which you can retrieve user attributes.
 * Provides access to the [Okta Authorization Server](#authorization-servers).
 * Provides a standard set of scopes and claims for identities including profile, email, address, and phone.
 
@@ -38,10 +38,10 @@ The basic authentication flow with Okta as your identity provider:
 3. Okta authenticates the user.
 4. Okta approves or denies the requested scopes.
 5. Okta mints a token and sends it in the response.
-6. The application validates the ID Token’s integrity. For more information, see [Validating ID Tokens](/docs/api/resources/oidc.html#validating-id-tokens).
+6. The application validates the ID Token’s integrity. For more information, see [Validating ID Tokens](/docs/api/resources/oidc#validating-id-tokens).
 
 > Important: Okta uses public key cryptography to sign tokens and verify that they are valid.
-See the last section of [Validating ID Tokens](/docs/api/resources/oidc.html#validating-id-tokens) for more information on the necessary logic
+See the last section of [Validating ID Tokens](/docs/api/resources/oidc#validating-id-tokens) for more information on the necessary logic
 you must have in your application to ensure it’s always updated with the latest keys.
 
 ## Authorization Servers
@@ -54,9 +54,9 @@ an Okta feature that helps you secure access to your API.
 
 ## Dynamic Client Registration
 
-Okta provides [dynamic client registration](/docs/api/resources/oauth-clients.html), operations to register and manage
+Okta provides [dynamic client registration](/docs/api/resources/oauth-clients), operations to register and manage
 client applications for use with Okta&#8217;s OAuth 2.0 and OpenID Connect endpoints.
-You can also perform these operations in the [Apps API](/docs/api/resources/apps.html).
+You can also perform these operations in the [Apps API](/docs/api/resources/apps).
 
 ## Claims
 
@@ -70,7 +70,7 @@ The claims requested by the `profile`, `email`, `address`, and `phone` scope val
 
 OpenID Connect uses scope values to specify what access privileges are being requested for Access Tokens.
 The scopes associated with Access Tokens determine which claims are available when they are used
-to access [the OIDC `userinfo` endpoint](/docs/api/resources/oidc.html#get-user-information). The following scopes are supported:
+to access [the OIDC `userinfo` endpoint](/docs/api/resources/oidc#get-user-information). The following scopes are supported:
 
 | -------------  | -------------------------------------------------------------------------------                               | -------------- |
 | Property       | Description                                                                                                   | Required       |
@@ -107,11 +107,11 @@ token and optionally an Access Token directly from the authorization server&#821
 * [Hybrid flow](http://openid.net/specs/openid-connect-core-1_0.html#HybridFlowAuth) -- a combination of the other
 two flows.
 
-Clients should always [validate ID Tokens](/docs/api/resources/oidc.html#validating-id-tokens) to ensure their integrity.
+Clients should always [validate ID Tokens](/docs/api/resources/oidc#validating-id-tokens) to ensure their integrity.
 
 The ID Tokens returned by the authentication endpoint (implicit flow) or the Token endpoint (authorization code flow)
 are identical, except that in the implicit flow, the *nonce* parameter is required (and hence must have been included
-in the request), and the *at_hash* parameter is required if the response includes [an Access Token](/standards/OAuth/index.html#access-token) but prohibited if the
+in the request), and the *at_hash* parameter is required if the response includes [an Access Token](/standards/OAuth/#access-token) but prohibited if the
 response does not include an Access Token.
 
 The ID Token (*id_token*) consists of three period-separated, base64URL-encoded JSON segments: [a header](#id-token-header), [the payload](#id-token-payload), and [the signature](#id-token-signature).
@@ -179,7 +179,7 @@ Claims in the header are always returned.
 | Property      | Description                                                                                                                                                                                                  | DataType      | Example                    |
 |:--------------|:-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|:--------------|:---------------------------|
 | alg           | Identifies the digital signature algorithm used. This is always be RS256.                                                                                                                                    | String        | "RS256"                    |
-| kid           | Identifies the *public-key* used to verify the *id_token*. The corresponding *public-key* can be found as a part of the   [well-known configuration&#8217;s](/docs/api/resources/oidc.html#openid-connect-discovery-document) *jwks_uri* value.   | String        | "a5dfwef1a-0ead3f5223_w1e" |
+| kid           | Identifies the *public-key* used to verify the *id_token*. The corresponding *public-key* can be found as a part of the   [well-known configuration&#8217;s](/docs/api/resources/oidc#openid-connect-discovery-document) *jwks_uri* value.   | String        | "a5dfwef1a-0ead3f5223_w1e" |
 
 #### Claims in the payload section
 
@@ -242,7 +242,7 @@ For more information about configuring an app for OpenID Connect, including grou
     | `id_token` `token`        | `email` if email scope is requested; `name` and `preferred_username` if profile scope is requested | Claims associated with the requested scopes |
     | `code` `id_token` `token` | `email` if email scope is requested; `name` and `preferred_username` if profile scope is requested | Claims associated with the requested scopes |
 
-* The full set of claims for the requested scopes is available via the [/oauth2/v1/userinfo](/docs/api/resources/oidc.html#get-user-information) endpoint. Call this endpoint using the Access Token.
+* The full set of claims for the requested scopes is available via the [/oauth2/v1/userinfo](/docs/api/resources/oidc#get-user-information) endpoint. Call this endpoint using the Access Token.
 
 
 ## More Information
@@ -250,4 +250,4 @@ For more information about configuring an app for OpenID Connect, including grou
 For more information about Okta and OpenID Connect, see:
 
 * [Okta&#8217;s API Access Management Introduction](/use_cases/api_security/)
-* [API for OpenID Connect](/docs/api/resources/oidc.html)
+* [API for OpenID Connect](/docs/api/resources/oidc)

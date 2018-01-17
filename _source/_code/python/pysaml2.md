@@ -48,7 +48,7 @@ Before you can configure your application and {{ page.saml_library }} set up an
 Okta chiclet (application icon) that enables an Okta user to sign in to your to your application with SAML and {{ page.saml_library }}.
 
 To set up Okta to connect to your application, follow the
-[setting up a SAML application in Okta](/docs/guides/setting_up_a_saml_application_in_okta.html)
+[setting up a SAML application in Okta](/docs/guides/setting_up_a_saml_application_in_okta)
 guide. As noted in the instructions, there are two steps to change:
 
 * *In step \#6*: Use ***{{ page.chiclet_name }}*** instead of ***Example SAML application*** .
@@ -119,7 +119,7 @@ the following steps, you will have a working example of connecting Okta to a sam
 
 5.  Be sure to replace the contents of `${metdata_url}` with the link
     that you copied in step \#10 of the
-    "[Setting up a SAML application in Okta](/docs/guides/setting_up_a_saml_application_in_okta.html)"
+    "[Setting up a SAML application in Okta](/docs/guides/setting_up_a_saml_application_in_okta)"
     instructions that you followed above!
 
     Note: The contents of `${metadata_url}` should look similar to: `https://{yourOktaDomain}.com/app/a0b1c2deFGHIJKLMNOPQ/sso/saml/metadata`
@@ -205,7 +205,7 @@ example, on a production system, the contents of the
 from a dynamic datastore.
 
 If you want to learn more about SAML and what to consider when writing a SAML implementation, Okta's
-in-depth [SAML guidance](/docs/getting_started/saml_guidance.html)
+in-depth [SAML guidance](/docs/getting_started/saml_guidance)
 is a great place to learn more.
 
 Finally, if you got this far in this guide and still have questions,

@@ -46,7 +46,8 @@ function exchangeCode($code) {
     $authHeaderSecret = base64_encode( '{CLIENT_ID}:{CLIENT_SECRET}' );
     $query = http_build_query([
         'grant_type' => 'authorization_code',
-        'code' => $code
+        'code' => $code,
+        'redirect_uri' => 'http://localhost/login_callback.php'
     ]);
     $headers = [
         'Authorization: Basic ' . $authHeaderSecret,
