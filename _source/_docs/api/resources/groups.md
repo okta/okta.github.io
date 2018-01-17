@@ -182,11 +182,11 @@ Enumerates groups in your organization with pagination. A subset of groups can b
 Parameter | Description                                                                                | ParamType | DataType | Required | Default
 --------- | ------------------------------------------------------------------------------------------ | --------- | -------- | -------- | -------
 q         | Searches the `name` property of groups for matching value                                  | Query     | String   | FALSE    |
-filter    | [Filter expression](/docs/api/getting_started/design_principles.html#filtering) for groups | Query     | String   | FALSE    |
+filter    | [Filter expression](/docs/api/getting_started/design_principles#filtering) for groups | Query     | String   | FALSE    |
 limit     | Specifies the number of group results in a page                                            | Query     | Number   | FALSE    | 10000
 after     | Specifies the pagination cursor for the next page of groups                                | Query     | String   | FALSE    |
 
-> The `after` cursor should treated as an opaque value and obtained through the next link relation. See [Pagination](/docs/api/getting_started/design_principles.html#pagination)
+> The `after` cursor should treated as an opaque value and obtained through the next link relation. See [Pagination](/docs/api/getting_started/design_principles#pagination)
 
 > Search currently performs a startsWith match but it should be considered an implementation detail and may change without notice in the future
 
@@ -207,7 +207,7 @@ Filter                                                   | Description
 `lastMembershipUpdated gt "yyyy-MM-dd'T'HH:mm:ss.SSSZ"`  | Groups with memberships last updated after a specific timestamp
 `id eq "00g1emaKYZTWRYYRRTSK"`                           | Group with a specified `id`
 
-See [Filtering](/docs/api/getting_started/design_principles.html#filtering) for more information on expressions
+See [Filtering](/docs/api/getting_started/design_principles#filtering) for more information on expressions
 
 > All filters must be [URL encoded](http://en.wikipedia.org/wiki/Percent-encoding) where `filter=lastUpdated gt "2013-06-01T00:00:00.000Z"` is encoded as `filter=lastUpdated%20gt%20%222013-06-01T00:00:00.000Z%22`
 
@@ -246,7 +246,7 @@ Reminders about the `limit` query parameter and query timeouts:
 * If you don’t specify any value for limit and do specify a query, a maximum of 10 results are returned.
 * The maximum value for limit is 200 for most orgs.
 * Don’t write code that depends on the default or maximum value, as it may change.
-* If you receive a HTTP 500 status code, you more than likely have exceeded the request timeout.  Retry your request with a smaller `limit` and [page the results](/docs/api/getting_started/design_principles.html#pagination).
+* If you receive a HTTP 500 status code, you more than likely have exceeded the request timeout.  Retry your request with a smaller `limit` and [page the results](/docs/api/getting_started/design_principles#pagination).
 
 ##### Request Example
 {:.api .api-request .api-request-example}
@@ -893,7 +893,7 @@ HTTP/1.1 204 No Content
 
 {% api_operation get /api/v1/groups/*:id*/users %}
 
-Enumerates all [users](/docs/api/resources/users.html#user-model) that are a member of a group.
+Enumerates all [users](/docs/api/resources/users#user-model) that are a member of a group.
 
 ##### Request Parameters
 {:.api .api-request .api-request-params}
@@ -904,16 +904,16 @@ id        | `id` of the group                                          | URL    
 limit     | Specifies the number of user results in a page             | Query     | Number   | FALSE    | 10000
 after     | Specifies the pagination cursor for the next page of users | Query     | String   | FALSE    |
 
-> The `after` cursor should treated as an opaque value and obtained through the next link relation. See [Pagination](/docs/api/getting_started/design_principles.html#pagination)
+> The `after` cursor should treated as an opaque value and obtained through the next link relation. See [Pagination](/docs/api/getting_started/design_principles#pagination)
 
 The default user limit is set to a very high number due to historical reasons which is no longer valid for most organizations.  This will change in a future version of this API.  The recommended page limit is now `limit=200`.
 
-> If you receive a HTTP 500 status code, you more than likely have exceeded the request timeout.  Retry your request with a smaller `limit` and page the results (See [Pagination](/docs/api/getting_started/design_principles.html#pagination))
+> If you receive a HTTP 500 status code, you more than likely have exceeded the request timeout.  Retry your request with a smaller `limit` and page the results (See [Pagination](/docs/api/getting_started/design_principles#pagination))
 
 ##### Response Parameters
 {:.api .api-response .api-response-params}
 
-Array of [Users](users.html#user-model)
+Array of [Users](users#user-model)
 
 ##### Request Example
 {:.api .api-request .api-request-example}
@@ -1002,7 +1002,7 @@ Link: <https://{yourOktaDomain}.com/api/v1/groups/00g1fanEFIQHMQQJMHZP/users?aft
 
 {% api_operation put /api/v1/groups/*:gid*/users/*:uid* %}
 
-Adds a [user](users.html#user-model) to a group with `OKTA_GROUP` type.
+Adds a [user](users#user-model) to a group with `OKTA_GROUP` type.
 
 > Only memberships for groups with `OKTA_GROUP` type can be modified.<br>
 > Application imports are responsible for managing group memberships for groups with `APP_GROUP` type such as Active Directory groups.
@@ -1043,7 +1043,7 @@ HTTP/1.1 204 No Content
 
 {% api_operation delete /api/v1/groups/*:gid*/users/*:uid* %}
 
-Removes a [user](users.html#user-model) from a group with `OKTA_GROUP` type.
+Removes a [user](users#user-model) from a group with `OKTA_GROUP` type.
 
 > Only memberships for groups with `OKTA_GROUP` type can be modified.<br>
 > Application imports are responsible for managing group memberships for groups with `APP_GROUP` type such as Active Directory groups.
@@ -1591,7 +1591,7 @@ HTTP/1.1 200 No Content
 
 {% api_operation get /api/v1/groups/*:id*/apps %}
 
-Enumerates all [applications](apps.html#application-model) that are assigned to a group. See [Application Group Operations](apps.html#application-group-operations)
+Enumerates all [applications](apps#application-model) that are assigned to a group. See [Application Group Operations](apps#application-group-operations)
 
 ##### Request Parameters
 {:.api .api-request .api-request-params}
@@ -1602,12 +1602,12 @@ id        | id of the group                                           | URL     
 limit     | Specifies the number of app results for a page            | Query     | Number   | FALSE    | 20
 after     | Specifies the pagination cursor for the next page of apps | Query     | String   | FALSE    |
 
-> The page cursor should treated as an opaque value and obtained through the next link relation. See [Pagination](/docs/api/getting_started/design_principles.html#pagination)
+> The page cursor should treated as an opaque value and obtained through the next link relation. See [Pagination](/docs/api/getting_started/design_principles#pagination)
 
 ##### Response Parameters
 {:.api .api-response .api-response-params}
 
-Array of [Applications](apps.html#application-model)
+Array of [Applications](apps#application-model)
 
 ##### Request Example
 {:.api .api-request .api-request-example}
@@ -1917,7 +1917,7 @@ Specifies link relations (See [Web Linking](http://tools.ietf.org/html/rfc5988))
 | self               | The primary URL for the group                                                                                                                                    |
 | logo               | Provides links to logo images for the group if available                                                                                                         |
 | users              | Provides [group member operations](#group-member-operations) for the group                                                                                       |
-| apps               | Lists all [applications](apps.html#application-model) that are assigned to the group. See [Application Group Operations](apps.html#application-group-operations) |
+| apps               | Lists all [applications](apps#application-model) that are assigned to the group. See [Application Group Operations](apps#application-group-operations) |
 |--------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 
 > The Links Object is read only.

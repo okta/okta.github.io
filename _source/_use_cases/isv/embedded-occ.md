@@ -226,7 +226,7 @@ curl -v -H "Authorization:SSWS <API token>" \
 
 >The name parameter value above is to be replaced with the name of your application
 
-Refer to the [apps api](https://developer.okta.com/docs/api/resources/apps.html#response-example-6) documentation for details about responses and error codes.
+Refer to the [apps api](/docs/api/resources/apps#response-example-6) documentation for details about responses and error codes.
 
 At this point, the app instance in Okta is created and Okta is now aware of the SAML SP information based on your input in the app instantiation API call.  Now you need to get the SAML IDP Metadata from Okta to complete the SAML configuration in your environment. The response property `_links.metadata.href` is the endpoint to be used to fetch the IDP metadata.  The response will be returned in XML format.
 
@@ -266,7 +266,7 @@ Here is a sample response from a successful call:
 
 ### Error Codes
 
-Below we provide a list of error codes that could be encountered, for more details on error codes and http response codes from Okta please refer to our [Error Codes](../../reference/error_codes/index)
+Below we provide a list of error codes that could be encountered, for more details on error codes and http response codes from Okta please refer to our [Error Codes](/docs/api/getting_started/error_codes)
 
 #### Duplicate Subdomain
 

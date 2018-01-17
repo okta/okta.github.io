@@ -9,7 +9,7 @@ excerpt: OIN FAQs
 
 **Q: Do I need to contact Okta first to start integrating my application?**
 
-A: No, the materials here should be enough to help you get started. You should start by enabling [SAML](/docs/guides/saml_guidance.html) with your application. Then test your app integration and submit for review by Okta with the [App Wizard](/use_cases/integrate_with_okta/sso-with-saml.html). Get stuck or have questions? Email <developers@okta.com>.
+A: No, the materials here should be enough to help you get started. You should start by enabling [SAML](/docs/guides/saml_guidance) with your application. Then test your app integration and submit for review by Okta with the [App Wizard](/use_cases/integrate_with_okta/sso-with-saml). Get stuck or have questions? Email <developers@okta.com>.
 
 <br/>
 
@@ -109,6 +109,6 @@ A: To get started, check out the [Okta Help Center](https://support.okta.com/hel
 
 See also:
 
-* [Single Sign-On](/use_cases/integrate_with_okta/sso-with-saml.html)
-* [Provisioning](/use_cases/integrate_with_okta/provisioning.html)
-* [Promotion](/use_cases/integrate_with_okta/promotion.html)
+* [Single Sign-On](/use_cases/integrate_with_okta/sso-with-saml)
+* [Provisioning](/use_cases/integrate_with_okta/provisioning)
+* [Promotion](/use_cases/integrate_with_okta/promotion)

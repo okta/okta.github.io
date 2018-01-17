@@ -1,7 +1,7 @@
 {
 	"id": "1f98885f-a451-0be9-efb7-df84e1746083",
 	"name": "Sessions (Okta API)",
-	"description": "The [Okta Session API](/docs/api/resources/sessions.html) provides operations to create and manage authentication sessions with your Okta organization.",
+	"description": "The [Okta Session API](/docs/api/resources/sessions) provides operations to create and manage authentication sessions with your Okta organization.",
 	"order": [
 		"4a5cb892-c0cc-526f-8053-fdf38aeabd97",
 		"3f8273a0-71d4-e9b5-c049-29a55495e4b2",

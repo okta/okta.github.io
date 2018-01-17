@@ -1,7 +1,7 @@
 {
 	"id": "59081abb-bd74-7c67-a8d9-ef999536c95e",
 	"name": "Users (Okta API)",
-	"description": "The [Okta User API](/docs/api/resources/users.html) provides operations to manage users in your organization.",
+	"description": "The [Okta User API](/docs/api/resources/users) provides operations to manage users in your organization.",
 	"order": [
 		"b3acf562-5a3a-8a65-8c6d-96e3482a27fc",
 		"740e9ec9-fac6-4fa1-3853-07983054b5f6",

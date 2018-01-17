@@ -8,7 +8,7 @@ redirect_from: "/docs/api/rest/events.html"
 
 The Okta Events API provides read access to your organization's system log. [Export event data](https://support.okta.com/help/Documentation/Knowledge_Article/Exporting-Okta-Log-Data) as a batch job from your organization to another system for reporting or analysis.
 
-> The new beta [System Log API](/docs/api/resources/system_log.html) will eventually replace the Events API and contains much more [structured data](/docs/api/resources/system_log.html#logevent-object).
+> The new beta [System Log API](/docs/api/resources/system_log) will eventually replace the Events API and contains much more [structured data](/docs/api/resources/system_log#logevent-object).
 
 ## Getting Started
 
@@ -34,12 +34,12 @@ Fetches a list of events from your Okta organization system log
 |:----------|:--------------------------------------------------------------------------------------------|:-----------|:---------|:---------|:--------|
 | limit     | Specifies the number of results to page                                                     | Query      | Number   | FALSE    | 1000    |
 | startDate | Specifies the timestamp to list events after                                                | Query      | Date     | FALSE    |         |
-| filter    |   [Filter expression](/docs/api/getting_started/design_principles.html#filtering) for events  | Query      | String   | FALSE    |         |
+| filter    |   [Filter expression](/docs/api/getting_started/design_principles#filtering) for events  | Query      | String   | FALSE    |         |
 | after     | Specifies the pagination cursor for the next page of events                                 | Query      | String   | FALSE    |         |
 
 Parameter Details
 
-* Treat the `after` cursor as an opaque value as its contents are subject to change without notice. Obtain it through the `next` link relation. See [Pagination](/docs/api/getting_started/design_principles.html#pagination) for more details on link relations.
+* Treat the `after` cursor as an opaque value as its contents are subject to change without notice. Obtain it through the `next` link relation. See [Pagination](/docs/api/getting_started/design_principles#pagination) for more details on link relations.
 * `startDate` and `filter` query parameters are mutually exclusive and cannot be used together in the same request.
 * `startDate` and `after` query parameters are mutually exclusive and cannot be used together in the same request.
 * `startDate` defaults to 1 hour ago when `filter`, `after` and `startDate` query parameters are omitted.
@@ -47,18 +47,18 @@ Parameter Details
 
 ###### Reliable Ingestion
 
-The most reliable method to ingest all events from Okta is to use a [pagination](/docs/api/getting_started/design_principles.html#pagination) cursor via the `after` parameter. This will ensure that events are not skipped or duplicated due to the lack of timestamp precision.
+The most reliable method to ingest all events from Okta is to use a [pagination](/docs/api/getting_started/design_principles#pagination) cursor via the `after` parameter. This will ensure that events are not skipped or duplicated due to the lack of timestamp precision.
 
 The general sequence of steps to leverage the `after` parameter:
 
 1. Issue an initial request using `startDate` with a value set to some date in the last 90 days
-1. Retrieve the next page of events through the [`Link` response header](/docs/api/getting_started/design_principles.html#link-header) value with the `next` link relation
+1. Retrieve the next page of events through the [`Link` response header](/docs/api/getting_started/design_principles#link-header) value with the `next` link relation
 1. Optionally include a `filter` parameter to narrow the returned results
 1. Issue the paginated request
 1. Retrieve the next page of events through the `Link` response header value with the `next` link relation 
 1. Pause and repeat the previous step
 
-Note that if no data is returned, this typically indicates you have caught up with the event stream. To avoid issues with [rate limiting](/docs/api/getting_started/design_principles.html#rate-limiting), ensure your polling frequency is sufficiently long.
+Note that if no data is returned, this typically indicates you have caught up with the event stream. To avoid issues with [rate limiting](/docs/api/getting_started/design_principles#rate-limiting), ensure your polling frequency is sufficiently long.
 
 ###### Filters
 
@@ -73,7 +73,7 @@ The following expressions are supported for events with the `filter` query param
 | `published eq "yyyy-MM-dd'T'HH:mm:ss.SSSZ"` | Events published updated at a specific datetime                                      |
 | `published gt "yyyy-MM-dd'T'HH:mm:ss.SSSZ"` | Events published updated after a specific datetime                                   |
 
-See [Filtering](/docs/api/getting_started/design_principles.html#filtering) for more information on expressions.
+See [Filtering](/docs/api/getting_started/design_principles#filtering) for more information on expressions.
 
 >Note: All filters must be [URL encoded](http://en.wikipedia.org/wiki/Percent-encoding) where `filter=published gt "2017-10-01T00:00:00.000Z"` is encoded as `filter=published%20gt%20%222017-10-01T00:00:00.000Z%22`.
 
@@ -573,13 +573,13 @@ The schema of a target is dependent on the actor's `objectType`
 
 #### User ObjectType
 
-A denormalized reference to a [User](users.html#user-model):
+A denormalized reference to a [User](users#user-model):
 
 | Property    | Description                                             | DataType | Nullable |
 |:------------|:--------------------------------------------------------|:---------|:---------|
-| id          | Unique key for     [user](users.html#user-model)            | String   | FALSE    |
-| displayName |     [User's](users.html#profile-object) first and last name | String   | TRUE     |
-| login       | Unique login for     [user](users.html#user-model)          | String   | TRUE     |
+| id          | Unique key for     [user](users#user-model)            | String   | FALSE    |
+| displayName |     [User's](users#profile-object) first and last name | String   | TRUE     |
+| login       | Unique login for     [user](users#user-model)          | String   | TRUE     |
 | objectType  | Type of object                                          | `User`   | FALSE    |
 
 ~~~ json
@@ -591,7 +591,7 @@ A denormalized reference to a [User](users.html#user-model):
 }
 ~~~
 
-The user can be retrieved by `id` with the [User API](users.html#get-user-with-id).
+The user can be retrieved by `id` with the [User API](users#get-user-with-id).
 
 #### AppInstance ObjectType
 
@@ -599,8 +599,8 @@ Describes an application:
 
 | Property    | Description                                        | DataType      | Nullable |
 |:------------|:---------------------------------------------------|:--------------|:---------|
-| id          | Unique key for    [app](apps.html#application-model)  | String        | FALSE    |
-| displayName |    [App's](apps.html#application-model) label         | String        | TRUE     |
+| id          | Unique key for    [app](apps#application-model)  | String        | FALSE    |
+| displayName |    [App's](apps#application-model) label         | String        | TRUE     |
 | objectType  | Type of object                                     | `AppInstance` | FALSE    |
 
 ~~~ json
@@ -611,7 +611,7 @@ Describes an application:
 }
 ~~~
 
-The app can be retrieved by `id` with the [Apps API](apps.html#get-application).
+The app can be retrieved by `id` with the [Apps API](apps#get-application).
 
 #### Client ObjectType
 

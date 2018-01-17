@@ -4,8 +4,8 @@ weight: 5
 title: Okta Expression Language
 excerpt: Use Okta's Expression Language throughout the Okta Admin Console and API.
 redirect_from:
-    - "/docs/getting_started/okta_expression_lang.html"
-    - "/docs/api/getting_started/okta_expression_lang.html"
+    - "/docs/getting_started/okta_expression_lang"
+    - "/docs/api/getting_started/okta_expression_lang"
 ---
 
 # Overview
@@ -173,9 +173,9 @@ This function takes Okta EL expressions for all parameters that evaluate to the 
 
 All parameters must be valid Okta EL expressions that evaluate as described above. Okta EL expressions can be comprised of strings, integers, arrays, etc.
 
-The string produced by the `group_expression` parameter usually contains attributes and objects from the [Groups API](/docs/api/resources/groups.html), although it is not limited to those attributes and objects. Attributes and objects listed in the [Group Attributes](/docs/api/resources/groups.html#group-attributes) section of the Groups API can be any of the following: `id`, `status`, `name`, `description`, `objectClass`, and the `profile` object that contains the `groupType`, `samAccountName`, `objectSid`, `groupScope`, `windowsDomainQualifiedName`, `dn`, and `externalID` attributes for groups that come from apps such as Active Directory.
+The string produced by the `group_expression` parameter usually contains attributes and objects from the [Groups API](/docs/api/resources/groups), although it is not limited to those attributes and objects. Attributes and objects listed in the [Group Attributes](/docs/api/resources/groups#group-attributes) section of the Groups API can be any of the following: `id`, `status`, `name`, `description`, `objectClass`, and the `profile` object that contains the `groupType`, `samAccountName`, `objectSid`, `groupScope`, `windowsDomainQualifiedName`, `dn`, and `externalID` attributes for groups that come from apps such as Active Directory.
 
-The `whitelist` parameter must evaluate to a list of group ids that is returned from the [Groups API](/docs/api/resources/groups.html). If the user is not member of a group in the whitelist, the group is ignored.
+The `whitelist` parameter must evaluate to a list of group ids that is returned from the [Groups API](/docs/api/resources/groups). If the user is not member of a group in the whitelist, the group is ignored.
 
 **Parameter Examples**
 

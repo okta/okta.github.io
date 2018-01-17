@@ -127,7 +127,7 @@ should also consider adding SAML support to that website too.
 Okta has documentation to help in both of these scenarios:
 
 * If you need to add SAML support to your software, start with
-Okta's [Single Sign-On guidance](/docs/guides/saml_guidance.html).
+Okta's [Single Sign-On guidance](/docs/guides/saml_guidance).
 
 * If your website already supports SAML, and you want to add
 SAML support to your mobile app, start with the

@@ -105,23 +105,24 @@ function generate_html() {
     fi
 }
 
+function generate_conductor_file() {
+    pushd $GENERATED_SITE_LOCATION
+    CONDUCTOR_FILE=conductor.yml
+    find -type f -iname 'index.html' | xargs dirname | sed -s "s/^\.//" | while read -r line ; do
+        if [ ! -z "${line}" ]; then
+            echo "  - from: ${line}" >> ${CONDUCTOR_FILE}
+            echo "    to: ${line}/" >> ${CONDUCTOR_FILE}
+        fi
+    done
+    popd
+}
+
 function require_env_var() {
     local env_var_name=$1
     eval env_var=\$$env_var_name
     if [[ -z "${env_var}" ]]; then
         echo "Environment variable '${env_var_name}' must be defined, but isn't.";
         exit 1
-    fi
-}
-
-# Verify for occurences of localhost:4000 have been removed
-function check_for_localhost_links() {
-    local links=$(grep -R "localhost:4000"  --include="*.html" ../* --exclude-dir={node_modules,scripts,tests,dist} --exclude={README.md,package.json})
-    if [ "$links" ];
-    then
-        echo $links
-        echo "Files contain localhost:4000!"
-        return 1
     fi
 }
 
@@ -224,6 +225,13 @@ function check_sample_code_orgs() {
     fi
 }
 
+function check_for_quickstart_pages_in_sitemap() {
+    if grep "quickstart/[^<]" dist/sitemap.xml;
+    then
+        exit 1
+    fi
+}
+
 function fold() {
     local name=$1
     local command="${@:2}"
@@ -238,4 +246,21 @@ function send_promotion_message() {
       -H "Content-Type: application/json" \
       -X POST -d "[{\"artifactId\":\"$1\",\"repository\":\"npm-okta\",\"artifact\":\"$2\",\"version\":\"$3\",\"promotionType\":\"ARTIFACT\"}]" \
       -k "${APERTURE_BASE_URL}/v1/artifact-promotion/createPromotionEvent"
+}
+
+function removeHTMLExtensions() {
+    # Removing all generated .html files (excludes the main 'index.html' in the dir) and
+    # create 302 redirects to extensionless pages
+    find ./dist -type f ! -iname 'index.html' -name '*.html' -print0 | while read -d $'\0' f
+    do
+        
+        if [ -e `echo ${f%.html}` ] ;
+        then
+            # Skip if files have already been updated
+            continue;
+        fi
+        cp "$f" "${f%.html}";
+        path=`echo ${f%.html} | sed "s/.\/dist//g"`
+        sed "s+{{ page.redirect.to | remove: 'index' }}+$path+g" ./_source/_layouts/redirect.html > $f
+    done
 }

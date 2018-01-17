@@ -120,7 +120,7 @@ In the case of a deep link, the SP sets the RelayState of the SAML request with 
 
 {% img saml_guidance_deeplink.png "SP-initiated flow with Deep Link" alt:"SP-initiated Login with Deep Link" %}
 
-For instructions to construct a deep link for SAML IdPs, see [Redirecting with SAML Deep Links](/docs/api/resources/idps.html#redirecting-with-saml-deep-links).
+For instructions to construct a deep link for SAML IdPs, see [Redirecting with SAML Deep Links](/docs/api/resources/idps#redirecting-with-saml-deep-links).
 
 ### Exposing SAML configuration in SP
 
@@ -144,7 +144,7 @@ This is particularly important where the entire population is intended to be SAM
 
 Because SAML is an HTTP-based protocol, supporting SAML in a native mobile app may seem tricky.  You can actually achieve this quite easily by including an embedded webview in your native app to support the HTTP redirects.  When launching the webview, make sure you hit a URL on the SP side that will trigger a SAML redirect back to the IDP.  From that point on, the webview will carry out the SP-initiated login flow as it would happen in a browser.  When the SP finally receives the SAML response and authenticates the user successfully, your native app can leave the webview and proceed with the rest of the login bootstrap which typically involves generating some sort of a token (for example, OAuth) which is stored by the native app for subsequent access.  This is a fairly common approach used by many ISVs to support SAML integration with enterprises.
 
-For more details, see the [technical overview for Okta Mobile Connect](/docs/guides/okta_mobile_connect.html).
+For more details, see the [technical overview for Okta Mobile Connect](/docs/guides/okta_mobile_connect).
 
 ## Testing SAML
 
@@ -152,7 +152,7 @@ Use the [Okta SAML validation tool](http://saml.oktadev.com/) to speed up the pr
 
 This tool makes it easy for you to send SAML Requests to your SAML SP. It  allows you to quickly change the contents of the SAML requests and simplifies the process of debugging SAML issues by automatically decoding SAML payloads and displaying server headers for you.
 
-You can also install the [SAML Tracer extension to Firefox](saml_tracer.html) for testing, or similar tools for other browsers.
+You can also install the [SAML Tracer extension to Firefox](saml_tracer) for testing, or similar tools for other browsers.
 
 ## SAML Toolkits
 
@@ -162,9 +162,9 @@ can help you build your applications and integrations:
 - [.NET Framework](https://en.wikipedia.org/wiki/.NET_Framework_version_history) 4.5 or above: [Kentor Authentication Services](https://github.com/KentorIT/authservices#kentor-authentication-services)
 - .NET Framework 4 or below: [ComponentSpace SAML 2.0](http://www.componentspace.com/SAMLv20.aspx) - Paid software, licenses start at $299
 - Java: [OpenSAML](https://wiki.shibboleth.net/confluence/display/OpenSAML/Home)
-- Java/Spring: [Spring Security SAML](/code/java/spring_security_saml.html)
-- PHP: [SimpleSAMLphp](/code/php//simplesamlphp.html)
-- Python: [PySAML2](/code/python/pysaml2.html)
+- Java/Spring: [Spring Security SAML](/code/java/spring_security_saml)
+- PHP: [SimpleSAMLphp](/code/php//simplesamlphp)
+- Python: [PySAML2](/code/python/pysaml2)
 - Ruby: [Ruby-SAML](https://rubygems.org/gems/ruby-saml)
 
 > Note: Okta doesn't own or maintain these toolkits, though we do provide documentation to help you use them with Okta.
