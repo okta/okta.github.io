@@ -27,15 +27,19 @@ if ! url_consistency_check || ! duplicate_slug_in_url; then
   exit 1;
 fi
 
-# 6. Update file extensions and create redirects
-if ! removeHTMLExtensions;
-then
-  echo "Failed removing .html extensions"
-  exit 1;
-fi
+# 7. Update file extensions and create redirects
+#
+#    TEMPORARILY DISABLED UNTIL S3 Migration
+#    GitHub Pages does not render extension-less files
+#
+# if ! removeHTMLExtensions;
+# then
+#   echo "Failed removing .html extensions"
+#   exit 1;
+# fi
 
-# 7. Run find-missing-slashes to find links that will redirect to okta.github.io
+# 8. Run find-missing-slashes to find links that will redirect to okta.github.io
 fold npm_find_missing_slashes npm run find-missing-slashes
 
-# 8. Run htmlproofer to validate links, scripts, and images
+# 9. Run htmlproofer to validate links, scripts, and images
 fold bundle_exec_htmlproofer bundle exec ./scripts/htmlproofer.rb

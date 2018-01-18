@@ -3,7 +3,7 @@
 require 'html-proofer'
 
 options = {
-    :assume_extension => false,
+    :assume_extension => true,
     :allow_hash_href => true,
     :empty_alt_ignore => true,
     :log_level => :error,
