@@ -687,4 +687,4 @@ Learn more about Okta and its APIs at [developer.okta.com](http://developer.okta
 
 **Changelog:**
 
-* Jan 18, 2018: Updated to use latest client from [Build Your First Progressive Web Application with Angular and Spring Boot](/blog/2017/05/09/progressive-web-applications-with-angular-and-spring-boot) and the Okta Sign-In Widget v2.5.0. See the code changes in the [example app on GitHub](https://github.com/oktadeveloper/spring-boot-microservices-example/pull/7). Changes to this article can be viewed [in this pull request](https://github.com/okta/okta.github.io/pull/1638).
+* Jan 18, 2018: Updated to use latest client from [Build Your First Progressive Web Application with Angular and Spring Boot](/blog/2017/05/09/progressive-web-applications-with-angular-and-spring-boot) and the Okta Sign-In Widget v2.5.0. See the code changes in the [example app on GitHub](https://github.com/oktadeveloper/spring-boot-microservices-example/pull/7). Changes to this article can be viewed [in this pull request](https://github.com/okta/okta.github.io/pull/1649).
