@@ -31,6 +31,7 @@ git clone https://github.com/oktadeveloper/spring-boot-microservices-example.git
 export STORMPATH_CLIENT_BASEURL=[base-url]
 export OKTA_APPLICATION_ID=[application-id]
 export OKTA_API_TOKEN=[api-token]
+export OKTA_AUTHORIZATIONSERVER_ID=default
 ```
 
 ## Add Stormpath's Zuul Support to the Edge Service
@@ -45,7 +46,7 @@ The **edge-service** application handles the routing to the backend `beer-catalo
 <dependency>
     <groupId>com.stormpath.sdk</groupId>
     <artifactId>stormpath-bom</artifactId>
-    <version>2.0.0-okta-rc3</version>
+    <version>2.0.4-okta</version>
     <type>pom</type>
     <scope>import</scope>
 </dependency>
@@ -435,11 +436,18 @@ cd client
 npm install @okta/okta-signin-widget --save
 ```
 
+Add the widget's CSS to `src/styles.css`:
+
+```css
+@import '~@okta/okta-signin-widget/dist/css/okta-sign-in.min.css';
+@import '~@okta/okta-signin-widget/dist/css/okta-theme.css';
+```
+
 Create `client/src/app/shared/okta/okta.service.ts` and use it to configure the widget to talk to your Okta instance.
 
 ```typescript
 import { Injectable } from '@angular/core';
-import * as OktaSignIn from '@okta/okta-signin-widget/dist/js/okta-sign-in.min.js'
+import * as OktaSignIn from '@okta/okta-signin-widget';
 import { ReplaySubject } from 'rxjs/ReplaySubject';
 import { Observable } from 'rxjs/Observable';
 
@@ -518,9 +526,7 @@ import { OktaAuthService } from './shared/okta/okta.service';
 
 @NgModule({
   ...
-  providers: [
-    BeerService, GiphyService, OktaAuthService
-  ],
+  providers: [OktaAuthService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
@@ -531,26 +537,24 @@ it exists.
 
 ```typescript
 import { Injectable } from '@angular/core';
-import { Http, Headers, RequestOptions, Response } from '@angular/http';
-import 'rxjs/add/operator/map';
-import { Observable } from 'rxjs';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Observable } from 'rxjs/Observable';
 import { OktaAuthService } from '../okta/okta.service';
 
 @Injectable()
 export class BeerService {
 
-  constructor(private http: Http, private oktaService: OktaAuthService) {
+  constructor(private http: HttpClient, private oktaService: OktaAuthService) {
   }
 
   getAll(): Observable<any> {
-    const headers: Headers = new Headers();
+    let headers: HttpHeaders = new HttpHeaders();
     if (this.oktaService.isAuthenticated()) {
       const accessToken = this.oktaService.signIn.tokenManager.get('accessToken');
-      headers.append('Authorization', accessToken.tokenType + ' ' + accessToken.accessToken);
+      // headers is immutable, so re-assign
+      headers = headers.append('Authorization', accessToken.tokenType + ' ' + accessToken.accessToken);
     }
-    const options = new RequestOptions({ headers: headers });
-    return this.http.get('http://localhost:8081/good-beers', options)
-      .map((response: Response) => response.json());
+    return this.http.get('http://localhost:8081/good-beers', {headers: headers});
   }
 }
 ```
@@ -559,9 +563,9 @@ Modify `app.component.html` to add a placeholder for the widget and a section to
 
 {% raw %}
 ```html
-<md-toolbar color="primary">
-  <span>{{title}}</span>
-</md-toolbar>
+<mat-toolbar color="primary">
+  <span>Welcome to {{title}}!</span>
+</mat-toolbar>
 
 <!-- Container to inject the Sign-In Widget -->
 <div id="okta-signin-container"></div>
@@ -571,14 +575,27 @@ Modify `app.component.html` to add a placeholder for the widget and a section to
     Welcome {{user?.name}}!
   </h2>
 
-  <button md-raised-button (click)="oktaService.logout()">Logout</button>
-</div>
-<md-progress-bar mode="indeterminate" *shellRender></md-progress-bar>
-<div [hidden]="!user" *shellNoRender>
+  <button mat-raised-button (click)="oktaService.logout()">Logout</button>
+
   <app-beer-list></app-beer-list>
 </div>
 ```
 {% endraw %}
+
+For the `mat-raised-button` directive to work, you have to add `MatButtonModule` to the list of imports in `client/src/app/app.module.ts`.
+
+```typescript
+import { MatButtonModule, MatListModule, MatToolbarModule, } from '@angular/material';
+
+@NgModule({
+  ...
+  imports: [
+    ...
+    MatListModule, MatButtonModule, MatToolbarModule
+  ],
+  ...
+})
+```
 
 You’ll notice the `user` variable in the HTML. To resolve this, you need to change your `AppComponent`, so it 1) shows
 the login or converts the token on initial load and 2) subscribes to changes in the `user$` observable from `OktaAuthService`.
@@ -619,14 +636,6 @@ export class AppComponent implements OnInit {
     });
   }
 }
-```
-
-Okta's Sign-In Widget ships with CSS that make it looks good out-of-the-box. To use them in your application, modify 
- `client/src/styles.css` to have the following two imports. 
-
-```css
-@import '~https://ok1static.oktacdn.com/assets/js/sdk/okta-signin-widget/2.1.0/css/okta-sign-in.min.css';
-@import '~https://ok1static.oktacdn.com/assets/js/sdk/okta-signin-widget/2.1.0/css/okta-theme.css';
 ```
 
 ### Verify Authentication Works
