@@ -93,7 +93,7 @@ The following example names the group whitelist `groupwhitelist`, but you can na
 Request Example:
 
 ~~~sh
-curl -X POST \
+curl -X PUT \
   https://{yourOktaDomain}.com/api/v1/apps/0oabskvc6442nkvQO0h7 \
   -H 'accept: application/json' \
   -H 'authorization: SSWS ${api_token}' \
