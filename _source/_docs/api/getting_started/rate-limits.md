@@ -47,12 +47,15 @@ When reading the following tables, remember that a more specific limit is consid
 | All other actions | `/api/v1/`                                                              |  1200 |
 
 ### Okta API Endpoints and Per-Second Limits
-Two org-wide rate limits are on a per-second basis instead of per minute to prevent brute force attacks:
+Two org-wide rate limits are on a per user, per-second basis to prevent brute force attacks while protecting other users:
 
 | Action | Okta API Endpoint                           | Per Second Limit |
 |:-------- | :----------------------------------------------------------|-------:|
 | Generate or refresh an OAuth 2.0 token | `/oauth2/v1/token`    |      4 |
 | Authenticate the same user | `/api/v1/authn/`           |      4 |
+
+### Okta Rate Limits for All Other Endpoints
+Finally, for all endpoints not listed in the tables above, the API rate limit is a combined 10,000 requests per minute. 
 
 ### Okta Home Page Endpoints and Per-Minute Limits
 
@@ -72,8 +75,11 @@ The following endpoints are used by the Okta home page for authentication and si
 | `/bc/fileStoreRecord`                          |    500 |
 | `/bc/globalFileStoreRecord`               |    500 |
 
-### Okta Rate Limits for All Other Endpoints
-Finally, for all endpoints not listed in the tables above, the API rate limit is a combined 10,000 requests per minute. 
+### End-User Rate Limit
+
+Okta limits the number of requests from the Okta user interface to 40 requests per user per 10 seconds per endpoint. This rate limit protects users from each other, and from other API requests in the system. 
+
+If a user is able to exceed this limit, they are locked out until the rate limit passes, and a message is written to the user interface and the System Log. 
 
 ## Concurrent Rate Limits
 
@@ -90,12 +96,6 @@ Reporting concurrent rate limits once a minute keeps log volume manageable.
 
 >Important: Operations rarely hit the concurrent rate limit: even very large bulk loads rarely use more than 10 threads at a time.
 
-## End-User Rate Limit
-
-In addition to the org-wide and concurrent rate limit, Okta limits the number of requests per end user to 40 requests per 10 seconds per endpoint used during end-user interactions with the Okta user interface. This rate limit protects users from each other, and from other API requests in the system. 
-
-If an end user is able to exceed the rate limit, they are locked out until the rate limit passes, and a message is written to the System Log. 
-
 ## Check Your Rate Limits with Okta's Rate Limit Headers
 
 Okta provides three headers in each response to report on both concurrent and org-wide rate limits. 
@@ -109,9 +109,9 @@ For example:
 
 ~~~ http
 HTTP/1.1 200 OK
-X-Rate-Limit-Limit: 20
-X-Rate-Limit-Remaining: 15
-X-Rate-Limit-Reset: 1366037820
+X-Rate-Limit-Limit  10000
+X-Rate-Limit-Remaining  9999
+X-Rate-Limit-Reset  1516307596
 ~~~
 
 The best way to be sure about org-wide rate limits is to check the relevant headers in the response. The System Log doesn't report every
