@@ -3,13 +3,16 @@ layout: blog_post
 title: A Developer's Guide To Docker - The Dockerfile
 author: leebrandt
 tags: [docker, devops, developer]
+redirect_from:
+  - "/blog/2017/05/10/developers-guide-to-docker-part-2"
+  - "/blog/2017/10/11/developers-guide-to-docker-part-2"
 ---
 
 Creating a consistent environment for development, testing, staging, and production is one of the big benefits of using containers. Not only do containers make the *entire* environment portable, they remove *environment-specific problems*, like, "Why does it work in test, but not in production?" Usually, it's a package or framework that's installed on the test machine that is not on the production server. Containers carry all those dependencies with them, minimizing the possibility for those problems. To help create a consistent container, you need an image that is configured in code that can be versioned and distributed. That's where the `Dockerfile` comes in.
 
 A `Dockerfile` (without an extension) is simply a text file with some keywords and rules that Docker uses to create an image. That image is then used to create a container, or multiple containers that all have the same set up. In this tutorial, you'll build a `Dockerfile` that you'll use to create an image for a basic web application.
 
->In [the previous article in this series](https://developer.okta.com/blog/2017/05/10/developers-guide-to-docker-part-1), I told you that images are like blueprints for creating containers. Well really, they *are* containers. Containers frozen in time that you can use to “stamp out a copy” anytime you want.
+>In [the previous article in this series](/blog/2017/05/10/developers-guide-to-docker-part-1), I told you that images are like blueprints for creating containers. Well really, they *are* containers. Containers frozen in time that you can use to “stamp out a copy” anytime you want.
 
 To get the base application, just clone it from: [Github](https://github.com/leebrandt/docker-node-sample). This is just a basic Node website. Don’t have Node installed on your machine? Don’t worry, you’re not even going to run this application on your machine, you’re going to run it in a container.
 
