@@ -11,11 +11,10 @@ excerpt: Understand rate limits at Okta and learn how to design for efficient us
 
 The number of API requests for an organization is limited for all APIs in order to protect the service for all users.
 
-Okta has three types of rate limits:
+Okta has two types of rate limits:
 
 * [Org-wide rate limits](#org-wide-rate-limits) that vary by API endpoint
 * [Concurrent rate limits](#concurrent-rate-limits) on the number of simultaneous transactions regardless of endpoint
-* [An end-user rate limit](#end-user-rate-limit) on individual endpoints that end users access in the Okta user interface
 
 Rate limits may be changed to protect customers. We provide advance warning of changes when possible.
 
@@ -43,7 +42,7 @@ When reading the following tables, remember that a more specific limit is consid
 | Get a user by user ID | `/api/v1/users/{id}`                                       | 2000 |
 | Get a user by user login name | `/api/v1/users/{login}`                    | 2000 |
 | Create, update, or delete a user by ID | `/api/v1/users/{id}`             |   600 |
-| Create an org (ISVs only)           | `api/v1/orgs`                               |      50 |
+| Create an org (ISVs only)           | `/api/v1/orgs`                               |      50 |
 | All other actions | `/api/v1/`                                                              |  1200 |
 
 ### Okta API Endpoints and Per-User Limits
