@@ -187,6 +187,8 @@ export class AppComponent implements OnInit {
 }
 ```
 
+**NOTE:** Using Angular's `ChangeDetectorRef` is necessary to manually trigger the change detector and let the view know that variables have changed. See [okta/okta-signin-widget#268](https://github.com/okta/okta-signin-widget/issues/268) for more information.
+
 And modify `app.component.html` to have a `<div>` with `id="okta-login-container"` and a place to show the logged in user's email.
 
 {% raw %}
