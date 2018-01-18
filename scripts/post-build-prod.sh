@@ -25,5 +25,14 @@ cd ${CLONE_DIR}
 # copy previous assets into new dist assets
 rsync -r "${CLONE_DIR}/assets/" "${GENERATED_SITE_LOCATION}/assets/"
 
+# Copies over the .git folder.
+# This leaves the /dist folder when `git stash --all`
+# is run by the Travis deploy plugin.
+#
+# TODO: Switch over to GitHub pages plugin -
+# https://docs.travis-ci.com/user/deployment/pages/
+# instead of providing custom logic.
+rsync -r "${CLONE_DIR}/.git" "${GENERATED_SITE_LOCATION}/.git"
+
 # remove cloned directory
 rm -rf "${CLONE_DIR}"
