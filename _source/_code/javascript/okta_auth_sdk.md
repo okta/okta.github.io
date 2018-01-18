@@ -243,7 +243,7 @@ else {
 ~~~
 
 [authjs-reference]: https://github.com/okta/okta-auth-js
-[authjs-reference-client-config]: https://github.com/okta/okta-auth-js#client-configuration
+[authjs-reference-client-configuration]: https://github.com/okta/okta-auth-js#client-configuration
 [authjs-reference-token-getwithredirect]: https://github.com/okta/okta-auth-js#tokengetwithredirectoptions
 [authjs-reference-token-parsefromurl]: https://github.com/okta/okta-auth-js#tokenparsefromurloptions
 [authjs-reference-tokenmanager-add]: https://github.com/okta/okta-auth-js#tokenmanageraddkey-token
