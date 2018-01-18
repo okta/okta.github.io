@@ -32,7 +32,7 @@ rsync -r "${CLONE_DIR}/assets/" "${GENERATED_SITE_LOCATION}/assets/"
 # TODO: Switch over to GitHub pages plugin -
 # https://docs.travis-ci.com/user/deployment/pages/
 # instead of providing custom logic.
-rsync -r "${CLONE_DIR}/.git" "${GENERATED_SITE_LOCATION}/.git"
+rsync -r -I "${CLONE_DIR}/.git" "${GENERATED_SITE_LOCATION}/.git"
 
 # remove cloned directory
 rm -rf "${CLONE_DIR}"
