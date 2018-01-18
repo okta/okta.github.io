@@ -5,6 +5,7 @@ author: leebrandt
 tags: [docker, devops, developer]
 redirect_from:
     - "/blog/2017/10/10/developers-guide-to-docker-part-3"
+    - "/blog/2017/08/28/developers-guide-to-docker-part-3"
 ---
 
 Good developers care as much about efficiency as they do about writing clean code. Containerization can add efficiency to both your workflow and your application, and has thus become all the rage among modern dev. And, as a good developer, you know that manually creating containers from images using `docker run …` or even using the `Dockerfile` to create containers is less than ideal. How would you like to have one command that tells Docker to build the containers for the UI, the API, the database, and the cache server? Let me show you how that works with Docker Compose!

@@ -22,8 +22,14 @@ CLONE_DIR="${TEMP_DIR}/${GITHUB_SLUG}"
 git clone -b ${TARGET_BRANCH} ${REMOTE_URL} "${CLONE_DIR}"
 cd ${CLONE_DIR}
 
-# copy previous assets into new dist assets
-rsync -r "${CLONE_DIR}/assets/" "${GENERATED_SITE_LOCATION}/assets/"
+# copy the original version of the images in
+IMAGE_DIR="${GENERATED_SITE_LOCATION}/assets/img/"
+mkdir -p "${IMAGE_DIR}"
+rsync -r "${SOURCE_REPO_DIR}/_source/_assets/img/" "${IMAGE_DIR}"
 
-# remove cloned directory
-rm -rf "${CLONE_DIR}"
+# overlay dist (without deleting)
+rsync -r "${GENERATED_SITE_LOCATION}/" "${CLONE_DIR}"
+
+# move the new overlay clone dir back to dist
+rm -rf "${GENERATED_SITE_LOCATION}"
+mv "${CLONE_DIR}" "${GENERATED_SITE_LOCATION}"
