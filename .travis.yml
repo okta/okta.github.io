@@ -33,5 +33,6 @@ env:
 deploy:
   provider: script
   script: scripts/gh-pages-publish.sh
+  skip_cleanup: true
   on:
     branch: source
