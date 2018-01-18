@@ -46,8 +46,8 @@ When reading the following tables, remember that a more specific limit is consid
 | Create an org (ISVs only)           | `api/v1/orgs`                               |      50 |
 | All other actions | `/api/v1/`                                                              |  1200 |
 
-### Okta API Endpoints and Per-Second Limits
-Two org-wide rate limits are on a per user, per-second basis to prevent brute force attacks while protecting other users:
+### Okta API Endpoints and Per-User Limits
+Two org-wide rate limits for API endpoints are on a per user, per-second basis to prevent brute force attacks:
 
 | Action | Okta API Endpoint                           | Per Second Limit |
 |:-------- | :----------------------------------------------------------|-------:|
@@ -131,20 +131,20 @@ This example shows the relevant portion of a rate limit header being returned wi
 
 ~~~http
 HTTP/1.1 200 
-Date: Tue, 27 Sep 2017 21:33:25 GMT
+Date: Tue, 27 Jan 2018 21:33:25 GMT
 X-Rate-Limit-Limit: 600
 X-Rate-Limit-Remaining: 598
-X-Rate-Limit-Reset: 1605463000
+X-Rate-Limit-Reset: 1516308901
 ~~~
 
 The following example show a rate limit header being returned for a request that has exceeded the rate limit for the `/api/v1/users` endpoint:
 
 ~~~http
 HTTP/1.1 200 
-Date: Tue, 27 Sep 2017 21:33:25 GMT
+Date: Tue, 27 Jan 2018 21:33:25 GMT
 X-Rate-Limit-Limit: 600
 X-Rate-Limit-Remaining: 0
-X-Rate-Limit-Reset: 1605463723
+X-Rate-Limit-Reset: 1516308966
 ~~~
 
 ### Example Rate Limit Header with Concurrent Rate Limit  
@@ -153,7 +153,7 @@ This example shows the relevant portion of a rate limit header being returned wi
 
 ~~~http
 HTTP/1.1 429 
-Date: Tue, 26 Sep 2017 21:33:25 GMT
+Date: Tue, 26 Jan 2018 21:33:25 GMT
 X-Rate-Limit-Limit: 0
 X-Rate-Limit-Remaining: 0
 X-Rate-Limit-Reset: 1506461721
@@ -172,7 +172,7 @@ The error condition resolves itself as soon as there is another concurrent threa
     "eventId": "tevEVgTHo-aQjOhd1OZ7QS3uQ1506395956000",
     "sessionId": "102oMlafQxwTUGJMLL8FhVNZA",
     "requestId": "reqIUuPHG7ZSEuHGUXBZxUXEw",
-    "published": "2017-09-26T03:19:16.000Z",
+    "published": "2018-01-26T03:19:16.000Z",
     "action": {
       "message": "Too many concurrent requests in flight",
       "categories": [],
@@ -238,7 +238,7 @@ The error condition resolves itself as soon as there is another concurrent threa
         "eventType": "core.concurrency.org.limit.violation",
         "legacyEventType": "core.concurrency.org.limit.violation",
         "outcome": null,
-        "published": "2017-09-26T20:21:32.783Z",
+        "published": "2018-01-26T20:21:32.783Z",
         "request": {
             "ipChain": [
                 {
