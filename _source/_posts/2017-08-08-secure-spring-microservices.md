@@ -49,7 +49,7 @@ At this point, your application's settings should look as follows:
 
 You'll also need to create an API token:
 
-* On the top menu click on **API** > **Tokens**
+* On the top menu, click on **API** > **Tokens**
 * Click **Create Token**
 * On the modal, give your new token a name, for example: `Microservices`, and click **Create Token**
 * **Important:** You will need to remember this token value, so copy/paste it somewhere safe.
