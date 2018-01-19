@@ -34,6 +34,8 @@ export OKTA_API_TOKEN=[api-token]
 export OKTA_AUTHORIZATIONSERVER_ID=default
 ```
 
+In this tutorial, you'll build a microservices architecture with Spring Boot and related projects. To add security with Okta, you'll have to create two applications in your developer console. The first will be a "Native" application that supports the Stormpath Java SDK, and OAuth grant types authorization code, refresh token, and resource owner password. This type of application is typically reserved for native mobile applications, but it also includes the Stormpath Java SDK. This is because the Stormpath SDK was retrofitted to work with Okta, and not built specifically for the Okta API, per se. For the Angular client, you'll need a second "SPA" application. 
+
 ## Add Stormpath's Zuul Support to the Edge Service
 
 > **NOTE:** I'm using Stormpath's Java SDK in this example. It has been updated to work with Okta's API. We plan to release 
@@ -545,7 +547,7 @@ Modify `app.component.html` to add a placeholder for the widget and a section to
 ```
 {% endraw %}
 
-You’ll notice the `user` variable in the HTML. To resolve this, you need to change your `AppComponent` so it renders the Sign-In Widget. Angular's `ChangeDetectorRef` is used to notify Angular when things have changed and rendering needs to process changed variables.
+You’ll notice the `user` variable in the HTML. To resolve this, you need to change your `src/app/app.component.ts` so it renders the Sign-In Widget. Angular's `ChangeDetectorRef` is used to notify Angular when things have changed and rendering needs to process changed variables.
 
 ```typescript
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
@@ -614,7 +616,7 @@ export class AppComponent implements OnInit {
 }
 ```
 
-In order for the `BeerListComponent` to detect that you've logged in, you need to use add a constructor dependency on `ChangeDetectorRef` and invoke its `detectChanges()` method when you set the `giphyUrl` property on each `beer`.
+In order for the `BeerListComponent` (at `src/app/beer-list/beer-list.component.ts`) to detect that you've logged in, you need to use add a constructor dependency on `ChangeDetectorRef` and invoke its `detectChanges()` method when you set the `giphyUrl` property on each `beer`.
 
 ```typescript
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
