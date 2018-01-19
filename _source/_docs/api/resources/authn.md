@@ -119,8 +119,6 @@ Content-Type: application/json
 
 `429 Too Many Requests` status code may be returned when the rate-limit is exceeded.
 
-> Authentication requests are aggressively rate-limited (e.g. 1 request per username/per second) for security purposes.
-
 ~~~http
 HTTP/1.1 429 Too Many Requests
 Content-Type: application/json
