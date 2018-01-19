@@ -39,7 +39,7 @@ npm install -g ionic
 
 Run the app so you can see its basic functionality before adding authentication.
 
-| [{% img blog/cryptocurrency-pwa/crypto-pwa-home.png alt:"Crypto PWA - Home" width:"280" %}](/assets/blog/cryptocurrency-pwa/crypto-pwa-home-69329f087aa8073397cec14ce6d3bfe3d8878e79ed29110bb9bd533c6d28621e.png) | [{% img blog/cryptocurrency-pwa/crypto-pwa-add.png alt:"Crypto PWA - Add" width:"280" %}](/assets/blog/cryptocurrency-pwa/crypto-pwa-add-cb534ec4cd596babdc2f4a1f2246c27702c4b69f6989b4d04710abb70f33b847.png) | [{% img blog/cryptocurrency-pwa/crypto-pwa-home-btc.png alt:"Crypto PWA - Home with BTC" width:"280" %}](/assets/blog/cryptocurrency-pwa/crypto-pwa-home-btc-be94818700289748d7e33e2306959607f13075c94496724d4adcd83340dbb370.png) |  
+| [{% img blog/cryptocurrency-pwa/crypto-pwa-home.png alt:"Crypto PWA - Home" width:"280" %}](/assets/blog/cryptocurrency-pwa/crypto-pwa-home-d0a91ea78cd6721c87a451cb3adca75bd114751aa71562d017e809b539047a87.png) | [{% img blog/cryptocurrency-pwa/crypto-pwa-add.png alt:"Crypto PWA - Add" width:"280" %}](/assets/blog/cryptocurrency-pwa/crypto-pwa-add-80d7da9233d958a26ef1b67970f09174944c3d19d20eb712fcbbcf0450e9c94d.png) | [{% img blog/cryptocurrency-pwa/crypto-pwa-home-btc.png alt:"Crypto PWA - Home with BTC" width:"280" %}](/assets/blog/cryptocurrency-pwa/crypto-pwa-home-btc-be94818700289748d7e33e2306959607f13075c94496724d4adcd83340dbb370.png) |  
 
 You can verify it works offline &mdash; like a PWA should &mdash; by toggling offline mode in your browser (in Chrome: Developer Tools > Network > Offline).
 
