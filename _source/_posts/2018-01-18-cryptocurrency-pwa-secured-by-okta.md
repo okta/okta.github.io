@@ -5,7 +5,7 @@ author: mraible
 tags: [cryptocurrency, ionic, authentication, oidc, angular, okta]
 tweets:
   - "Want to learn how to build an @ionicframework app to manage your cryptocurrencies? @joshuamorony has the 🎟! See how to lock it down with @okta →"
-  - "Leverage OIDC and @okta to add authentication to your cryptocurrencies wealth tracking Ionic app →"
+  - "Leverage OIDC and @okta to add authentication to your cryptocurrency wealth tracking Ionic app →"
 ---
 
 Cryptocurrencies are all the rage. Over the last year, the value of Bitcoin alone has risen 1,603%, driving more and more people to wonder if they're missing out on the "next big thing." Because of the massive influx of money into cryptocurrencies like Bitcoin, Ethereum, Monero, and Ripple &mdash; blockchain technology (which is the foundation of all cryptocurrency) has become an area of intense technical study. At its core, blockchain technology does nothing more than maintain a decentralized log of transactions that can be easily shared across many nodes (miners).
