@@ -3,9 +3,9 @@
 ###############################################################################
 # LINT
 ###############################################################################
+export GENERATED_SITE_LOCATION="dist"
 
 function url_consistency_check() {
-    interject "Checking ${GENERATED_SITE_LOCATION} to make sure documentation uses proper prefixes ('/api/v1', '/oauth2', etc) in example URLs"
     if [ ! -d "$GENERATED_SITE_LOCATION" ]; then
        echo "Directory ${GENERATED_SITE_LOCATION} not found";
        return 1;
@@ -26,16 +26,13 @@ function url_consistency_check() {
         sed -e 's/^\([^:]*\):\([^:]*\).*<\/span> \(.*\)<\/span>.*/\1:\2:\3/' | \
         # Write the results to STDOUT and the $url_consistency_check_file
         tee $url_consistency_check_file
-    interject "Done checking $GENERATED_SITE_LOCATION for proper prefixes in URLs"
     # Return "True" if the file is empty
     return `[ ! -s $url_consistency_check_file ]`
 }
 
 function duplicate_slug_in_url() {
-    interject "Checking ${GENERATED_SITE_LOCATION} to verify duplicate /api/v1 does not exist"
     output_file=`mktemp`
     find $GENERATED_SITE_LOCATION -iname '*.html' | xargs grep '/api/v1/api/v1' | tee $output_file
-    interject "Done checking $GENERATED_SITE_LOCATION for duplicate slugs"
     # Return "True" if the file is empty
     return `[ ! -s $output_file ]`
 }
