@@ -33,6 +33,7 @@ loadHoldings(): void {
 ## Switch from Local Storage to Okta Custom Profile Attributes
 
 In [a previous article](/blog/2018/01/18/cryptocurrency-pwa-secured-by-okta), I showed you how to add Okta to an Ionic PWA for authentication. To complete this tutorial, you’ll need to [sign up for a free Okta Developer account](https://developer.okta.com/signup/).
+
 Once you have an Okta Developer account, you can leverage our API to store your holdings as custom profile attributes instead of local storage. While LocalStorage is great for demos, using custom profile attributes will allow you to access your holdings across different devices.
 
 > To learn more about Okta's Universal Directory and its Profile Editor features, see our [manage user profiles](https://help.okta.com/en/prod/Content/Topics/Directory/Directory_Profile_Editor.htm) documentation.
