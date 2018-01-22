@@ -867,7 +867,7 @@ Follow the steps below to test and submit your application for Okta review:
 
 > Have questions? Need help? Email us at <developers@okta.com> or post your question on [Stack Overflow](http://stackoverflow.com/search?q=okta,scim).
 
-### Private App Option
+#### Private App Option
 
 The OIN is for making an integration publicly discoverable and accessible to all Okta customers.
 However, you can also just use the integration privately within a few named orgs.
@@ -876,7 +876,7 @@ If this is the case, follow steps 1-3 and you will be able to indicate in step 3
 Okta will create the submitted integration per usual and assign it to Orgs that you specify as a private app.
 Note that you cannot use the SCIM template app used for prototyping, as it has limitations that prevent it from being used in production.
 
-#### Review Okta’s SCIM Docs and Prepare Your App
+#### Step 1. Review Okta’s SCIM Docs and Prepare Your App
 
 The first step is to build a compliant SCIM server.
 Even if you already support SCIM, it is important that you review Okta’s SCIM docs above,
@@ -886,7 +886,7 @@ especially the following sections, to understand the specifics of Okta’s suppo
 * [Required SCIM Server Capabilities](#required-scim-server-capabilities)
 * [SCIM Features Not Implemented by Okta](#scim-features-not-implemented-by-okta)
 
-#### Test Your SCIM Server
+#### Step 2. Test Your SCIM Server
 
 ##### Testing your SCIM server with Runscope
 
@@ -1008,7 +1008,7 @@ Here is how to share a test result from Runscope with someone else:
     result with. Here is an example test result from Runscope:
     <https://www.runscope.com/radar/qmovuxkrhtws/f95ac15f-3f22-46c3-8f1a-1001fbf8fb66/history/6a35fabf-5ce5-4e48-a13f-7292b1bd3cc5>
 
-#### Testing your SCIM server with Okta
+##### Testing your SCIM server with Okta
 
 Once you have a SCIM server that passes all of the Runscope tests,
 test your SCIM integration directly with Okta. To do so, you will first need to sign up for [an Okta developer account](https://developer.okta.com/signup/).
@@ -1026,11 +1026,13 @@ Please request this in your email to <developers@okta.com>.
 3. Search for “SCIM”. You’ll see three different SCIM template applications for each SCIM version (1.1 and 2.0) based off of the various authentication methods you could choose to support (Header Auth, Basic Auth, or Bearer Token).
     {% img scim-templates.png alt:"Admin Button" %}
 
-#### Submit for Okta Review and Testing
+Your QA team should test the use cases in the spreadsheet [Okta SCIM Test Plan](SCIMFiles/okta-scim-test-plan.xls).
+
+#### Step 3. Submit for Okta Review and Testing
 
 Once you have a functioning SCIM app integration in your developer org, there are a few steps to submit it for Okta review via the OIN Manager.
 
-Your submission provides Okta with all the metadata needed to create a customized app for publication in [the Okta Integration Network](https://www.okta.com/resources/find-your-apps/?_ga=1.200024301.294942002.1477328324). Okta will review the submission, create the customized app, run it through our internal QA, and then make it available in your developer org for your own testing.
+Your submission provides Okta with all the metadata needed to create a customized app for publication in [the Okta Integration Network](https://www.okta.com/resources/find-your-apps/). Okta will review the submission, create the customized app, run it through our internal QA, and then make it available in your developer org for your own testing.
 
 We recommend completing these five steps before actual submission, with detailed instructions in the next section:
 
@@ -1128,7 +1130,7 @@ For more details, see the [configuration guide guidelines](http://saml-doc.okta.
 
 Note: When you are ready, use [this form](https://oanmanager.okta.com/) to submit for Okta review.
 
-#### Publish to Okta Integration Network (OIN) in Beta
+#### Step 4. Publish to Okta Integration Network (OIN) in Beta
 
 Okta recently changed the process by which an ISV can publish their integration into the Okta Integration Network (OIN). Now, before becoming Okta-verified, publish to the OIN in Beta. Publishing in Beta allows customer to more easily see and test your newly submitted SCIM-enabled integration while it undergoes customer validation. 
 
@@ -1149,7 +1151,7 @@ Once Okta completes the QA process and the requisite changes are made (all issue
 
 {% img scim-beta.png alt:"User interface shows an integration in Beta" %}
 
-#### Become Okta-Verified in the OIN
+#### Step 5. Become Okta-Verified in the OIN
 
 We require that one joint customer successfully validates the integration is working as expected from their perspective before we make it Okta-Verified in the OIN. The integration needs to be used and validated in production (not preview). 
 
