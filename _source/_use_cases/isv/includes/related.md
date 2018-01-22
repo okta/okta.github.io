@@ -13,7 +13,7 @@
 [Auth Principals]: /docs/api/getting_started/design_principles#authentication "Authentication"
 [User Agent]: /docs/api/getting_started/design_principles#user-agent "User-Agent"
 [Pagination]: /docs/api/getting_started/design_principles#pagination "Pagination"
-[Rate Limiting]: /docs/api/getting_started/design_principles#rate-limiting "Rate Limiting"
+[Rate Limiting]: /docs/api/getting_started/rate-limits "Rate Limiting"
 [System Log API]: /docs/api/resources/system_log "System Log API"
 [Users API]: /docs/api/resources/users "Users API"
 [Groups API]: /docs/api/resources/groups "Groups API"

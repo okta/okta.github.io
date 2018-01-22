@@ -160,6 +160,11 @@
 			max-width: unset;
 		}
 
+		/* Don't put borders on table cells */
+		table td, table tbody {
+			border-bottom: 0;
+		}
+
 		blockquote {
 			@include margin(large auto);
 			@include padding(large);
