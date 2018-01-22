@@ -25,6 +25,9 @@ then
     exit 1
 fi
 
+# Remove the dead file (THIS IS A ONE-TIME-ONLY THING)
+rm -rf ${GENERATED_SITE_LOCATION}/docs/api/resources/resrouce-server-beta
+
 # commit
 git add .
 git commit -m "Deploy site for ${CURRENT_HASH}"
