@@ -139,7 +139,7 @@ Login to your Okta account, or [create one](https://developer.okta.com/signup/) 
 After making these changes, copy the your Client ID and Platform ID into `okta.service.ts`. Then modify `app.component.ts` to use the `Okta` service and the widget to login/logout.
 
 ```ts
-import { Component, OnInit } from '@angular/core';
+import { Component, ChangeDetectorRef, OnInit } from '@angular/core';
 import { Okta } from './shared/okta/okta.service';
 
 @Component({
@@ -148,11 +148,11 @@ import { Okta } from './shared/okta/okta.service';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit {
-  title = 'app works!';
+  title = 'app';
   user;
   oktaSignIn;
 
-  constructor(private okta: Okta) {
+  constructor(private okta: Okta, private changeDetectorRef: ChangeDetectorRef) {
     this.oktaSignIn = okta.getWidget();
   }
 
@@ -160,6 +160,8 @@ export class AppComponent implements OnInit {
     this.oktaSignIn.renderEl({el: '#okta-login-container'}, (response) => {
       if (response.status === 'SUCCESS') {
         this.user = response.claims.email;
+        this.oktaSignIn.remove();
+        this.changeDetectorRef.detectChanges();
       }
     });
   }
@@ -167,7 +169,8 @@ export class AppComponent implements OnInit {
   ngOnInit() {
     this.oktaSignIn.session.get((response) => {
       if (response.status !== 'INACTIVE') {
-        this.user = response.login
+        this.user = response.login;
+        this.changeDetectorRef.detectChanges();
       } else {
         this.showLogin();
       }
@@ -176,12 +179,15 @@ export class AppComponent implements OnInit {
 
   logout() {
     this.oktaSignIn.signOut(() => {
-      this.showLogin();
       this.user = undefined;
+      this.changeDetectorRef.detectChanges();
+      this.showLogin();
     });
   }
 }
 ```
+
+**NOTE:** Using Angular's `ChangeDetectorRef` is necessary to manually trigger the change detector and let the view know that variables have changed. See [okta/okta-signin-widget#268](https://github.com/okta/okta-signin-widget/issues/268) for more information.
 
 And modify `app.component.html` to have a `<div>` with `id="okta-login-container"` and a place to show the logged in user's email.
 
@@ -202,8 +208,6 @@ your user's credentials to login. You should see a "Hello {email}" message with 
 
 {% img blog/angular-sign-in-widget/login-success.png alt:"Login Success" width:"800" %}{: .center-image }
 
-**NOTE:** You may experience an issue where the sign-in process seems to hang. Clicking anywhere in the browser window seems to solve this problem. I’m not sure why this happens. You can track this issue [here](https://github.com/okta/okta-signin-widget/issues/268).
-
 If it works - congrats! If it doesn't, please post a question to Stack Overflow with an [okta tag](http://stackoverflow.com/questions/tagged/okta), or hit me up [on Twitter](https://twitter.com/mraible).
 
 #### Customize the Widget CSS
@@ -213,6 +217,8 @@ If you'd like to customize the widget's CSS, the easiest way is you write your o
 ```bash
 npm install bootstrap@4.0.0-beta.2 --save
 ```
+
+**NOTE:** If you're using Yarn (instead of npm), you might experience [this issue](https://github.com/angular/angular-cli/issues/9020). If you do, the workaround is to modify your `package.json` and change the Bootstrap version from `"^4.0.0-beta.2"` to `"4.0.0-beta.2"`.
 
 Add an `@import` for [Bootstrap 4](https://getbootstrap.com/) and a few style rules to position elements. Copy the following code into `src/styles.css`.
 
@@ -286,6 +292,7 @@ I hope you’ve enjoyed this quick tour of our Angular support. If you have ques
 
 **Changelog:**
 
+* Jan 17, 2018: Updated `AppComponent` to use Angular's `ChangeDetectionRef` to solve [issue 268](https://github.com/okta/okta-signin-widget/issues/268#issuecomment-358482335) (hanging issues with the Sign-In Widget). See the code changes in the [example app on GitHub](https://github.com/oktadeveloper/okta-angular-sign-in-widget-example/pull/14). Changes to this article can be viewed [in this pull request](https://github.com/okta/okta.github.io/pull/1644).
 * Nov 30, 2017: Updated to use Angular CLI 1.5.5 and Okta Sign-In Widget 2.5.0. See the code changes in the [example app on GitHub](https://github.com/oktadeveloper/okta-angular-sign-in-widget-example/pull/11). Changes to this article can be viewed [in this pull request](https://github.com/okta/okta.github.io/pull/1520).
 * Sep 30, 2017: Updated to use Angular CLI 1.4.4 and Okta Sign-In Widget 2.1.0. See the code changes in the [example app on GitHub](https://github.com/oktadeveloper/okta-angular-sign-in-widget-example/pull/8). Updated "create an OIDC app" instructions for the [Okta Developer Console](/blog/2017/09/25/all-new-developer-console).
 

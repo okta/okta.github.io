@@ -333,10 +333,23 @@ To enable Feign, Hystrix, and registration with the Eureka server, add the appro
 `EdgeServiceApplication.java`:
 
 ```java
+package com.example;
+
+import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
+import lombok.Data;
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.circuitbreaker.EnableCircuitBreaker;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import org.springframework.cloud.netflix.feign.EnableFeignClients;
+import org.springframework.cloud.netflix.feign.FeignClient;
 import org.springframework.cloud.netflix.zuul.EnableZuulProxy;
+import org.springframework.hateoas.Resources;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.stream.Collectors;
 
 @EnableFeignClients
 @EnableCircuitBreaker
@@ -362,9 +375,21 @@ class Beer {
 }
 ```
 
-Create a `BeerClient` that uses Feign to talk to the `beer-catalog-service`.
+Create a `BeerClient` interface that uses Feign to talk to the `beer-catalog-service`.
 
 ```java
+public class EdgeServiceApplication {
+
+    public static void main(String[] args) {
+        SpringApplication.run(EdgeServiceApplication.class, args);
+    }
+}
+
+@Data
+class Beer {
+    private String name;
+}
+
 @FeignClient("beer-catalog-service")
 interface BeerClient {
 
@@ -373,7 +398,7 @@ interface BeerClient {
 }
 ```
 
-Create a `RestController` that filters out less-than-great beers and exposes a `/good-beers` endpoint.
+Create a `RestController` below the `BeerClient` that filters out less-than-great beers and exposes a `/good-beers` endpoint.
 
 **NOTE:** To get `beer.getName()` to work in your IDE, you may need to install the Lombok plugin. In Intellij, you can 
 install it by going to Preferences -> Plugins -> Browse Plugins. Search for "lombok plugin" and click to install it. 
@@ -494,7 +519,7 @@ Start the `beer-catalog-service` again and this list should eventually return th
 You can copy the Angular PWA client I created in a [previous tutorial](/blog/2017/05/09/progressive-web-applications-with-angular-and-spring-boot) and install its dependencies.
 
 ```bash
-git clone git@github.com:oktadeveloper/spring-boot-angular-pwa-example.git
+git clone https://github.com/oktadeveloper/spring-boot-angular-pwa-example.git
 cp -r spring-boot-angular-pwa-example/client ~/spring-boot-microservices-example/.
 cd ~/spring-boot-microservices-example/client
 npm install
@@ -563,6 +588,8 @@ download/install the [Cloud Foundry CLI](https://github.com/cloudfoundry/cli#dow
 There are quite a few steps involved to deploy all the services and the Angular client for production. For that reason, 
 I wrote a [`deploy.sh`](https://github.com/oktadeveloper/spring-boot-microservices-example/blob/master/deploy.sh) script 
 that automates everything. 
+
+**TIP:** If you receive an error stating that you're using too much memory, you may have to upgrade your Cloud Foundry subscription.
  
 ## When to Use Microservices
 
