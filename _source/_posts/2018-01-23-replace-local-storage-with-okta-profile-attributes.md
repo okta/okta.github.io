@@ -280,7 +280,7 @@ This class has a few things I'd like to point out:
 * Retrieving user profile attributes is done with `user.getProfile().get(ATTRIBUTE_NAME)`
 * Saving user profile attributes is done with `user.getProfile().put(ATTRIBUTE_NAME)`
 
-**NOTE:** The call to `user.getProfile()` returns a [`UserProfile`](/okta-sdk-java/apidocs/com/okta/sdk/resource/user/UserProfile.html). This implements `java.util.Map` and [`PropertyRetriever`](/okta-sdk-java/apidocs/com/okta/sdk/resource/PropertyRetriever.html), which allows for more type-safe operations (`getString()`, `getBoolean()`, etc.). 
+**NOTE:** The call to `user.getProfile()` returns a [`UserProfile`](https://developer.okta.com/okta-sdk-java/apidocs/com/okta/sdk/resource/user/UserProfile.html). This implements `java.util.Map` and [`PropertyRetriever`](https://developer.okta.com/okta-sdk-java/apidocs/com/okta/sdk/resource/PropertyRetriever.html), which allows for more type-safe operations (`getString()`, `getBoolean()`, etc.). 
 
 Speaking of `Holding`, you'll need to create a `com.okta.developer.holdingsapi.Holding` class to handle the values coming from (and sending to) the client.
 
