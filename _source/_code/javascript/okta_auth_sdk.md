@@ -179,7 +179,8 @@ else {
   // You're not logged in, you need a sessionToken
   var username = prompt('What is your username?');
   var password = prompt('What is your password?');
-  return authClient.signIn({username, password})
+
+  authClient.signIn({username, password})
   .then(res => {
     if (res.status === 'SUCCESS') {
       authClient.token.getWithRedirect({
@@ -228,7 +229,8 @@ else {
       // You're not logged in, you need a sessionToken
       var username = prompt('What is your username?');
       var password = prompt('What is your password?');
-      return authClient.signIn({username, password})
+
+      authClient.signIn({username, password})
       .then(res => {
         if (res.status === 'SUCCESS') {
           authClient.token.getWithRedirect({
@@ -243,7 +245,7 @@ else {
 ~~~
 
 [authjs-reference]: https://github.com/okta/okta-auth-js
-[authjs-reference-client-config]: https://github.com/okta/okta-auth-js#client-configuration
+[authjs-reference-client-configuration]: https://github.com/okta/okta-auth-js#client-configuration
 [authjs-reference-token-getwithredirect]: https://github.com/okta/okta-auth-js#tokengetwithredirectoptions
 [authjs-reference-token-parsefromurl]: https://github.com/okta/okta-auth-js#tokenparsefromurloptions
 [authjs-reference-tokenmanager-add]: https://github.com/okta/okta-auth-js#tokenmanageraddkey-token
