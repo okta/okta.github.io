@@ -15,6 +15,8 @@ Dates for preview and production release are the earliest possible release date.
 To verify the current release for an org, check the footer of the Dashboard page. If necessary, click the **Admin** button to navigate to your dashboard.
 {% img release_notes/version_footer.png alt:"Release Number in Footer" %}
 
+> Note: Changes to Okta unrelated to API Products are published in the [Okta Release Notes](https://help.okta.com/en/prod/Content/Topics/ReleaseNotes/okta-relnotes.htm).
+
 <div>
 {% assign sorted = site.change-log | sort: 'date' | reverse %}
 {% for file in sorted %}
