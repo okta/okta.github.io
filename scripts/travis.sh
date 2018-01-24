@@ -23,4 +23,6 @@ fold npm_lint npm run post-build-lint
 fold npm_find_missing_slashes npm run find-missing-slashes
 
 # Run htmlproofer to validate links, scripts, and images
+#   -  Passing in the argument 'true' to automatically add the '.html' extension to
+#      extension-less files. 
 fold bundle_exec_htmlproofer bundle exec ./scripts/htmlproofer.rb true

@@ -3,16 +3,13 @@
 require 'html-proofer'
 
 # Ruby hack to convert params to boolean
-class String
-    def to_bool
-      return true   if self == true   || self =~ (/(true)$/i)
-      return false  if self == false  || self.blank? || self =~ (/(false)$/i)
-      raise ArgumentError.new("invalid value for Boolean: \"#{self}\"")
-    end
+extensions = true
+if ARGV[0] == 'false'
+    extensions = false
 end
 
 options = {
-    :assume_extension => ARGV[0].to_bool,
+    :assume_extension => extensions,
     :allow_hash_href => true,
     :empty_alt_ignore => true,
     :log_level => :error,

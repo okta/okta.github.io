@@ -61,6 +61,8 @@ then
 fi
 
 # Run htmlproofer to validate links, scripts, and images
+#   -  Passing in the argument 'false' to prevent adding an '.html' extension to
+#      extension-less files. 
 if ! bundle exec ./scripts/htmlproofer.rb false;
 then
     exit ${BUILD_FAILURE}
