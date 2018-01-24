@@ -43,3 +43,38 @@ fold npm_find_missing_slashes npm run find-missing-slashes
 
 # 9. Run htmlproofer to validate links, scripts, and images
 fold bundle_exec_htmlproofer bundle exec ./scripts/htmlproofer.rb
+
+#10. Run the ghost inspector test for CSS changes
+
+# Download ngrok
+curl -s https://bin.equinox.io/c/4VmDzA7iaHb/ngrok-stable-linux-amd64.zip > ngrok.zip
+unzip ngrok.zip
+
+# Download json parser for determining ngrok tunnel
+curl -sO http://stedolan.github.io/jq/download/linux64/jq
+chmod +x $PWD/jq
+
+# Start the server
+npm start &
+
+until $(curl --output /dev/null --silent --head --fail http://localhost:4000); do
+    echo '.'
+    sleep 5
+done
+
+# Open ngrok tunnel
+./ngrok authtoken $NGROK_TOKEN
+./ngrok http 4000 > /dev/null &
+
+sleep 2
+
+curl 'http://localhost:4000'
+
+# Execute Ghost Inspector tests using the ngrok tunnel
+curl 'http://localhost:4040/api/tunnels'
+START_URL=$(curl 'http://localhost:4040/api/tunnels' | $PWD/jq -r '.tunnels[1].public_url' | awk '{print $1"/test_page"}')
+echo $START_URL
+curl "https://api.ghostinspector.com/v1/tests/5a67825ecee4a76f5d965883/execute/?apiKey=$GHOST_API_KEY&startUrl=$START_URL" > $PWD/ghostinspector.json
+
+# Exit with a fail status if any tests have failed
+if [ $(grep -c '"screenshotComparePassing":false' $PWD/ghostinspector.json) -ne 0 ]; then exit 1; fi
