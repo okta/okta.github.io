@@ -6,6 +6,7 @@ excerpt: Make your app enterprise ready and connect with thousands of customers 
 redirect_from:
   - "/docs/api/getting_started/oan_guidance"
   - "/docs/guides/oan_guidance"
+  - "/use_cases/sso_and_provisioning/draft"
 ---
 
 ## Integrate with Okta
