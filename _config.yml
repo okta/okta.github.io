@@ -79,16 +79,14 @@ collections:
   change-log:
     output: true
     permalink: /docs/change-log/
+  sdk:
+    output: true
+    permalink: /docs/sdk/:path
 
 paginate: 10
 paginate_path: "/blog/page/:num"
 
 defaults:
-  -
-    scope:
-      collection: slides
-    values:
-      layout: documentation
   -
     scope:
       collection: code
@@ -99,21 +97,14 @@ defaults:
       collection: reference
     values:
       layout: documentation
-  -
-    scope:
-      collection: quickstart
-    values:
-      sitemap: false
-  -
-    scope:
-      collection: quickstart-fragments
-    values:
-      sitemap: false
-  -
-    scope:
-      collection: change-log
-    values:
-      sitemap: false
+
+sitemap_ignore:
+  - sdk
+  - change-log
+  - quickstart-fragments
+  - 3rd_party_notices
+  # Omit from sitemap.collection traversal
+  - posts
 
 # Okta Library versions
 versions:
