@@ -103,11 +103,21 @@ Okta API Products refers to all the resources and tools that Okta makes availabl
 
 ### Recommendations
 
+* [API Access Management Administrator Role](#api-access-management-administrator-role)
 * [OAuth Client](#oauth-client)
 * [Authorization Server](#authorization-server)
 * [API Gateway (optional)](#api-gateway-optional)
 * [Securing Applications](#securing-applications)
 * [Resource (API) Servers](#resource-api-servers)
+
+#### API Access Management Administrator Role
+
+Okta provides the API Access Management Administrator role to make managing authorization servers. A user with this role can perform the following tasks:
+
+* Create and edit authorization servers, scopes, custom claims, and access policies
+* Create and edit  OAuth and OIDC client apps
+* Assign users and groups to OAuth/OIDC client apps
+* View user profiles so that you can assign users or clients in the Token Preview dialog
 
 #### OAuth Client
 

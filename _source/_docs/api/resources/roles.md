@@ -539,7 +539,7 @@ The role model defines several **read-only** properties:
 |:------------|:------------------------------------------------------|:------------------------------------------------------------------------------------------------------------|:---------|:-------|:----------|
 | id          | Unique key for the role assignment                    | String                                                                                                      | FALSE    | TRUE   | TRUE      |
 | label       | Display name of role                                  | String                                                                                                      | FALSE    | FALSE  | TRUE      |
-| type        | Type of role                                          | `SUPER_ADMIN`, `ORG_ADMIN`, `APP_ADMIN`, `USER_ADMIN`, `MOBILE_ADMIN`, `READ_ONLY_ADMIN`, `HELP_DESK_ADMIN` | FALSE    | FALSE  | TRUE      |
+| type        | Type of role                                          | `SUPER_ADMIN`, `ORG_ADMIN`, `API_ACCESS_MANAGEMENT_ADMIN` {% api_lifecycle ea %}, `APP_ADMIN`, `USER_ADMIN`, `MOBILE_ADMIN`, `READ_ONLY_ADMIN`, `HELP_DESK_ADMIN` | FALSE    | FALSE  | TRUE      |
 | status      | Status of role assignment                             | `ACTIVE`                                                                                                    | FALSE    | FALSE  | TRUE      |
 | created     | Timestamp when app user was created                   | Date                                                                                                        | FALSE    | FALSE  | TRUE      |
 | lastUpdated | Timestamp when app user was last updated              | Date                                                                                                        | FALSE    | FALSE  | TRUE      |
@@ -556,6 +556,7 @@ Refer to the [product documentation](https://help.okta.com/en/prod/Content/Topic
 |:----------------- |:---------------------------- |:----------------------- |
 | `SUPER_ADMIN`     | Super Administrator          |                         |
 | `ORG_ADMIN`       | Organizational Administrator |                         |
+| `API_ACCESS_MANAGEMENT_ADMIN` {% api_lifecycle ea %} | API Access Management Administrator (requires that the API Access Management feature is enabled) |
 | `APP_ADMIN`       | Application Administrator    | Apps                    |
 | `USER_ADMIN`      | Group Administrator          | [Groups](groups) |
 | `MOBILE_ADMIN`    | Mobile Administrator         |                         |
