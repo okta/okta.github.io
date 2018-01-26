@@ -138,6 +138,7 @@ Components are how Vue.js organizes pieces of your application. A component wrap
 
 In the ClientApp folder, create a new folder called `components`. Inside the new folder, create a file called `Dashboard.vue`:
 
+{% raw %}
 ```html
 <template>
   <div class="dashboard">
@@ -207,11 +208,13 @@ export default {
 }
 </style>
 ```
+{% endraw %}
+
 The Dashboard component is responsible for displaying all the user’s to-do items, and rendering an input field that lets the user add a new item. In `router.js`, you told the Vue router to render this component on the `/` path, or the root route of the application.
 
 This component has HTML in the `<template>` section, JavaScript in the `<script>` section, and CSS in the `<style>` section, all stored in one `.vue` file. If your Vue components become too large or unwieldy, you can choose to split them into separate HTML, JS, and CSS files as needed.
 
-When you use `{moustaches}` or attributes like `v-for` in the component’s HTML, Vue.js automatically inserts (or **binds**) data that’s available to the component. In this case, you’ve defined a handful of JavaScript methods in the `computed` section that retrieve things like the user’s name and the user’s to-do list from the data store. That data is then automatically rendered by Vue. (You’ll build the data store in a minute!)
+When you use `{{moustaches}}` or attributes like `v-for` in the component’s HTML, Vue.js automatically inserts (or **binds**) data that’s available to the component. In this case, you’ve defined a handful of JavaScript methods in the `computed` section that retrieve things like the user’s name and the user’s to-do list from the data store. That data is then automatically rendered by Vue. (You’ll build the data store in a minute!)
 
 Notice the `components: { TodoItem }` line? The Dashboard component relies on another component called TodoItem. Create a file called `TodoItem.vue`:
 
@@ -289,6 +292,7 @@ Using components to split your app into small pieces makes it easier to organize
 
 Add another component called `Login.vue`:
 
+{% raw %}
 ```html
 <template>
   <div>
@@ -348,6 +352,7 @@ input {
 }
 </style>
 ```
+{% endraw %}
 
 The Login component renders a simple login form, and shows an error message if the login is unsuccessful.
 
@@ -803,6 +808,7 @@ npm install @okta/okta-auth-js@1.11.0
 
 Create a file in the ClientApp folder called `oktaAuth.js` that holds the Auth SDK configuration and makes the client available to the rest of your Vue app:
 
+{% raw %}
 ```js
 import OktaAuth from '@okta/okta-auth-js'
 
@@ -822,6 +828,7 @@ export default {
   client: oktaAuthClient
 }
 ```
+{% endraw %}
 
 Replace `yourOktaOrgUrl` with your Okta Org URL, which usually looks like this: `https://dev-12345.oktapreview.com`. You can find it in the top right corner of the Dashboard page.
 
@@ -916,6 +923,7 @@ Under the hood, the Okta Auth SDK uses OpenID Connect to get access and ID token
 
 Open up the `Startup.cs` file and add this code to the `ConfigureServices` method:
 
+{% raw %}
 ```csharp
 services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
 .AddJwtBearer(options =>
@@ -924,6 +932,7 @@ services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     options.Audience = "api://default";
 });
 ```
+{% endraw %}
 
 This code adds token authentication to the ASP.NET Core authentication system. With this in place, your frontend code will need to attach an access token to requests in order to access the API.
 
@@ -996,6 +1005,7 @@ dotnet add package Okta.Sdk --version 1.0.0-alpha4
 
 Open the `Startup.cs` file again and add this code anywhere in the `ConfigureServices` method:
 
+{% raw %}
 ```csharp
 services.AddSingleton<IOktaClient>(new OktaClient(new OktaClientConfiguration
 {
@@ -1003,6 +1013,7 @@ services.AddSingleton<IOktaClient>(new OktaClient(new OktaClientConfiguration
     Token = Configuration["okta:token"]
 }));
 ```
+{% endraw %}
 
 This makes the Okta .NET SDK available to the whole project as a service. You’ll also need to add these lines to the top of the file:
 
@@ -1011,7 +1022,8 @@ using Okta.Sdk;
 using Okta.Sdk.Configuration;
 ```
 
-Remember to replace `{{yourOktaOrgUrl}}` with your Okta Org URL.
+Remember to replace `yourOktaOrgUrl` with your Okta Org URL.
+
 ### Get an Okta API token
 The Okta SDK needs an Okta API token to call the Okta API. This is used for management tasks (like storing and retrieving user profile data), and is separate from the Bearer tokens you’re using for user authentication.
 
@@ -1044,9 +1056,11 @@ Generate a [random GUID](https://www.guidgenerator.com/) as the ID value, and sa
 
 Grab the Okta API token value and store it using the Secret Manager:
 
+{% raw %}
 ```bash
 dotnet user-secrets set okta:token {{oktaApiToken}}
 ```
+{% endraw %}
 
 To make the values stored in the Secret Manager available to your application, you need to add it as a configuration source in `Startup.cs`. At the top of the file, in the `Startup` (constructor) method, add this code:
 
