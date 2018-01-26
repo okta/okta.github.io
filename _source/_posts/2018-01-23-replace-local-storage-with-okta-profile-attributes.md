@@ -12,7 +12,7 @@ Whether it’s more secure or not is debatable, especially when compared with se
 
 ## The Local Storage API
 
-The local storage API is simple in that it only has a couple of methods to set and get data. In a [previous article](), I showed you how to build a PWA that stores your cryptocurrency holdings. In its `src/providers/holdings/holdings.ts` service, you can see how the local storage API works.
+The local storage API is simple in that it only has a couple of methods to set and get data. In a [previous article](/blog/2018/01/18/cryptocurrency-pwa-secured-by-okta), I showed you how to build a PWA that stores your cryptocurrency holdings. In its `src/providers/holdings/holdings.ts` service, you can see how the local storage API works.
 
 ```typescript
 saveHoldings(): void {
