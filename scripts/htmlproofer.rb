@@ -2,13 +2,18 @@
 
 require 'html-proofer'
 
+# Ruby hack to convert params to boolean
+extensions = true
+if ARGV[0] == 'false'
+    extensions = false
+end
+
 options = {
-    :assume_extension => true,
+    :assume_extension => extensions,
     :allow_hash_href => true,
     :empty_alt_ignore => true,
     :log_level => :error,
     :only_4xx => true,
-    :cache => { :timeframe => '1d' },
     # 8 threads, any more doesn't seem to make a difference
     :parallel => { :in_processes => 8},
     :file_ignore => [

@@ -436,7 +436,7 @@ Identity Providers have a `name` property that is composed of a `dir:` prefix an
 
 As mentioned in [the Caveats section](#things-that-wont-migrate-and-known-caveats), LDAP Directories (including Active Directory) cannot be imported into Okta. You will need to set them up fresh inside Okta, which will re-import the data from your LDAP directory.
 
-- [Instructions to set up Active Directory](https://help.okta.com/en/prod/Content/Topics/Directory/Okta%20Active%20Directory%20Agent.htm)
+- [Instructions to set up Active Directory](https://help.okta.com/en/prod/Content/Topics/Directory/okta-active-directory-agent.htm)
 - [Instructions to set up LDAP](https://help.okta.com/en/prod/Content/Topics/Directory/Okta%20Java%20LDAP%20Agent.htm)
 
 <a name="stormpath-groups"></a>

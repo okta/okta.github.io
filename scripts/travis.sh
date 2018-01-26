@@ -7,39 +7,22 @@ if [[ $TRAVIS_EVENT_TYPE != 'push' ]]; then
   export CHROME_HEADLESS=true
 fi
 
-# 2. Run the npm install to pull in test dependencies
+# Run the npm install to pull in test dependencies
 fold npm_install npm install
 
-# 3. Build site and Run tests
+# Build site and Run tests
 fold npm_test npm test
 
-export GENERATED_SITE_LOCATION="dist"
-
-# 4. copy assets and previous history into dist
+# Copy assets and previous history into dist
 fold npm_postbuild_prod npm run postbuild-prod
 
-# 5. Run Lint checker
+# Run Lint checker
 fold npm_lint npm run post-build-lint
 
-# 6. Run Travis specific tests
-if ! url_consistency_check || ! duplicate_slug_in_url; then
-  echo "FAILED LINT CHECK!"
-  exit 1;
-fi
-
-# 7. Update file extensions and create redirects
-#
-#    TEMPORARILY DISABLED UNTIL S3 Migration
-#    GitHub Pages does not render extension-less files
-#
-# if ! removeHTMLExtensions;
-# then
-#   echo "Failed removing .html extensions"
-#   exit 1;
-# fi
-
-# 8. Run find-missing-slashes to find links that will redirect to okta.github.io
+# Run find-missing-slashes to find links that will redirect to okta.github.io
 fold npm_find_missing_slashes npm run find-missing-slashes
 
-# 9. Run htmlproofer to validate links, scripts, and images
-fold bundle_exec_htmlproofer bundle exec ./scripts/htmlproofer.rb
+# Run htmlproofer to validate links, scripts, and images
+#   -  Passing in the argument 'true' to automatically add the '.html' extension to
+#      extension-less files. 
+fold bundle_exec_htmlproofer bundle exec ./scripts/htmlproofer.rb true

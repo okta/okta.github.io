@@ -41,3 +41,19 @@ then
 else
     echo -e "\xE2\x9C\x94 Passed quickstart sitemap check"
 fi
+
+if ! url_consistency_check ;
+then
+    echo "Failed checking for proper prefixes ('/api/v1', '/oauth2', etc) in example URLs"
+    exit 1
+else
+    echo -e "\xE2\x9C\x94 Passed URL consistency check"
+fi
+
+if ! duplicate_slug_in_url ;
+then
+    echo "Duplicate slugs: /api/v1 exist"
+    exit 1
+else
+    echo -e "\xE2\x9C\x94 Passed duplicate slug checker"
+fi
