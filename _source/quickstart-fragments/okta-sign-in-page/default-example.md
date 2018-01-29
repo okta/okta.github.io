@@ -34,7 +34,7 @@ After you have created the application there are two more values you will need t
 | Setting       | Where to Find                                                                  |
 | ------------- | ------------------------------------------------------------------------------ |
 | Client ID     | In the applications list, or on the "General" tab of a specific application.   |
-| Client Secret | In the applications list, or on the "General" tab of a specific application.   |
+| Client Secret | On the "General" tab of a specific application.                                |
 | Org URL       | On the home screen of the developer dashboard, in the upper right.             |
 
 To integrate this flow into your application, select your server technology below.
