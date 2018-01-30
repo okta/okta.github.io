@@ -1301,7 +1301,7 @@ Start the server one more time with `dotnet run` and try adding a real to-do ite
 ## Build Secure Apps!
 If you made it all the way to the end, congratulations! I’d love to hear about what you built. Shoot me a tweet [@nbarbettini](https://twitter.com/nbarbettini) and tell me about it!
 
-Feel free to download the final project’s [code on GitHub](https://github.com/nbarbettini/okta-vuejs-aspnetcore-todo-example).
+Feel free to download the final project’s [code on GitHub](https://github.com/oktadeveloper/okta-vuejs-aspnetcore-todo-example).
 
 If you want to keep building, here’s what you could do next:
 - Add a form in Vue (and a controller on the backend) to let a new user create an account
