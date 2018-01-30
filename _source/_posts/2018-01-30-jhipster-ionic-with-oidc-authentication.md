@@ -102,7 +102,7 @@ docker-compose -f src/main/docker/keycloak.yml up
 
 Start your application with `./gradlew` (or `./mvnw` if you chose Maven) and you should be able to log in using "admin/admin" for your credentials.
 
-To switch to Okta by default, you'll first need to create an OIDC app. If you don't have an Okta Developer, [get one today](https://developer.okta.com/signup/)!
+To switch to Okta by default, you'll first need to create an OIDC app. If you don't have an Okta Developer account, [get one today](https://developer.okta.com/signup/)!
 
 Log in to your Okta Developer account and navigate to **Applications** > **Add Application**. Click **Web** and click the **Next** button. Give the app a name you’ll remember, specify `http://localhost:8080` as a Base URI, and the following as a **Login redirect URI** and **Logout redirect URI**.
 
