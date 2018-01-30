@@ -71,11 +71,11 @@ Here is how to set up a SAML application in Okta:
     on the "Identity Provider metadata" link and select "Copy")
     {% img okta-admin-ui-identity-provider-metadata-link.png alt:"Sign on methods" %}
 
-11. Right-click on the "People" section of the "Example SAML Application"
+11. Right-click on the "Assignments" section of the "Example SAML Application"
     application and select "Open Link In New Tab" (so that you can come
     back to the "Sign On" section later).
 
-    In the new tab that opens, click on the "Assign Application" button
+    In the new tab that opens, click on the "Assign" button and select "Assign to People"
     {% img example-saml-application-okta-assign-people-to-application.png alt:"Assign Application" %}
 
 12. A dialog titled "Assign Example SAML Application to up to 500 people"
