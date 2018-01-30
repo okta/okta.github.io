@@ -2279,6 +2279,7 @@ Token limits:
 | description                          | Description of the scope                                                                          | String  |            | FALSE                         |
 | system                               | Whether Okta created the scope                                                                    | Boolean |            | FALSE                         |
 | default                              | Whether the scope is a default scope                                                              | Boolean |            | FALSE                         |
+| metadataPublish        | Whether or not this custom scope is published in `/oauth2/:authServerId/.well-known/openid-configuration` Valid values: `ALL_CLIENT` or `NO_CLIENTS`  | String | `NO_CLIENTS` | FALSE |
 | displayName {% api_lifecycle beta %} | Name of the end user displayed in a consent dialog                                                | String  |            | FALSE                         |
 | consent {% api_lifecycle beta %}     | Indicates whether a consent dialog is needed for the scope. Valid values: `REQUIRED`, `IMPLICIT`. | Enum    | `IMPLICIT` | FALSE                         |
 

@@ -1750,16 +1750,34 @@
   position: relative;  
 }
 
+.code-preact-32::after {
+  content: $code-preact;
+  color: #673ab8;
+  position: relative;
+}
+
 .code-react-32::after {
   content: $code-react;
   color: #46b3e9;
   position: relative;  
 }
 
+.code-vue-32::after {
+  content: $code-vue;
+  color: #42b983;
+  position: relative;
+}
+
 .code-widget-32::after {
   content: $aura;
   color: #fff;
   position: relative;  
+}
+
+.code-xamarin-32::after {
+  content: $code-xamarin;
+  color: #1faece;
+  position: relative;
 }
 
 .code-okta-sign-in-page-32::after {
@@ -1777,6 +1795,9 @@
 .code-dotnet-32::before,
 .code-angular-32::before,
 .code-nodejs-32::before,
+.code-preact-32::before,
+.code-vue-32::before,
+.code-xamarin-32::before,
 .code-react-32::before {
   content: $code-background;
   color: #fff;
