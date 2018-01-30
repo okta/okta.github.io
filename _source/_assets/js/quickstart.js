@@ -36,9 +36,7 @@
       {
         name: 'vue',
         label: 'Vue',
-        serverExampleType: 'implicit',
-        // Temporary icon until Vue.js is added
-        codeIconName: 'javascript'
+        serverExampleType: 'implicit'
       },
       {
         name: 'android',
