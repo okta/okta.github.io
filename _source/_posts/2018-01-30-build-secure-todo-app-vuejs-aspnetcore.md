@@ -91,8 +91,6 @@ new Vue({
   template: '<App/>',
   components: { App }
 })
-
-store.dispatch('checkLoggedIn')
 ```
 
 This file sets up Vue, and serves as the main entry point (or starting point) for the whole JavaScript application.
@@ -162,7 +160,7 @@ export default {
   computed: {
     name () {
       if (this.$parent.userInfo) {
-        return this.$parent.userInfo.name
+        return this.$parent.userInfo.given_name
       } else {
         return 'Hello'
       }
@@ -210,7 +208,7 @@ The Dashboard component is responsible for displaying all the user’s to-do ite
 
 This component has HTML in the `<template>` section, JavaScript in the `<script>` section, and CSS in the `<style>` section, all stored in one `.vue` file. If your Vue components become too large or unwieldy, you can choose to split them into separate HTML, JS, and CSS files as needed.
 
-When you use {% raw %}`{{moustaches}}`{% endraw %} or attributes like `v-for` in the component’s HTML, Vue.js automatically inserts (or **binds**) data that’s available to the component. In this case, you’ve defined a handful of JavaScript methods in the `computed` section that retrieve things like the user’s name and the user’s to-do list from the data store. That data is then automatically rendered by Vue. Don't worry about `$store` and `$auth` yet - you'll add these pieces in a few minutes.
+When you use {% raw %}`{{moustaches}}`{% endraw %} or attributes like `v-for` in the component’s HTML, Vue.js automatically inserts (or **binds**) data that’s available to the component. In this case, you’ve defined a handful of JavaScript methods in the `computed` section that retrieve things like the user’s name and the user’s to-do list from the data store. That data is then automatically rendered by Vue. Don't worry about `$store` and `$auth` yet. You'll add these pieces in a few minutes.
 
 Notice the `components: { TodoItem }` line? The Dashboard component relies on another component called TodoItem. Create a file called `TodoItem.vue`:
 
@@ -397,9 +395,11 @@ The App component is responsible for two things:
 * Providing the base HTML and CSS used by the app.
 * Keeping track of whether the user is logged in, using the `$auth` plugin. (This will be covered a little later.)
 
-The `<router-view>` element provides a place to render the Vue router's active route. Right now, there's only one route, that will render the Dashboard component in the `<router-view>`. If the app needed a navbar or other UI elements that should exist outside of the current router view, they could be placed in this component. For now, the component will just show a simple button to log in or out, depending on the value of the `authenticated` variable in the component code.
+The `<router-view>` element provides a place to render the Vue router's active route. Right now, there's only one route: `/` which will render the Dashboard component in the `<router-view>`.
 
-How does Vue know that the App component contains this base HTML and CSS? If you look back at `boot-app.js`, you’ll see this line:
+Navbars and other UI elements that should exist outside of the current router view can be placed in this component. For now, the component will just show a simple button to log in or out, depending on the value of the `authenticated` variable in the component code.
+
+How does Vue know that the App component should be used as the "base" HTML and CSS for the app? If you look back at `boot-app.js`, you’ll see this line:
 
 ```js
 import App from './components/App'
@@ -410,7 +410,7 @@ This statement loads the App component, which is then passed to Vue in `new Vue(
 You’re all done building components! It’s time to add some state management and authentication. First, I’ll explain what state management is and why it’s useful.
 
 ### Add Vuex for state management
-Components are a great way to break up your app into manageable pieces, but when you start passing data between many components, it can be hard to keep all of that data in sync.
+Components are a great way to break up your app into manageable pieces, but when you start passing data between many components, it becomes hard to keep all of that data in sync.
 
 The [Vuex](https://vuex.vuejs.org/) library helps solve this problem by creating a **store** that holds data in a central place. Then, any of your components can get the data they need from the store. Bonus: if the data in the store changes, all your components get the updated data immediately!
 
@@ -433,7 +433,7 @@ export default new Vuex.Store({
 })
 ```
 
-This file initializes Vuex and makes it available to your Vue components, and that’s it. The real meat of Vuex is in **mutations** and **actions**, but you’ll write those in separate files to keep everything organized.
+This file initializes Vuex and makes it available to your Vue components. The real meat of Vuex is in **mutations** and **actions**, but you’ll write those in separate files to keep everything organized.
 
 Create a file called `mutations.js`:
 
@@ -455,13 +455,13 @@ export const mutations = {
 
 This file defines two things: the `state` or data that’s shared across the app, and mutations that change that state. Vuex follows a few simple rules:
 
-* State is immutable -- it can’t be changed _except_ by a mutation.
+* State is immutable -- it can’t be changed except by a mutation.
 * Mutations can change state, but they must be synchronous. Async code (like API calls) must run in an action instead.
 * Actions run asynchronous code, then commit mutations, which change state.
 
 Enforcing this hierarchy of rules makes it easier to understand how data and changes flow through your app. If some piece of state changes, you know that a mutation caused the change.
 
-As you can see, this app uses the Vuex store to keep track of both the to-do list (the `state.todos` array), and authentication state (whether the user is logged in, what their name is). The Dashboard component accesses this data with computed properties like:
+This app uses the Vuex store to keep track of the to-do list (the `state.todos` array). The Dashboard component accesses this data with computed properties like:
 
 ```js
 todos () {
@@ -477,7 +477,8 @@ import axios from 'axios'
 export const actions = {
   async getAllTodos({ commit }, data) {
     // Todo: get the user's to-do items
-    commit('loadTodos', [{ text: 'Fake to-do item' }])
+    let fakeTodoItem = { text: 'Fake to-do item' }
+    commit('loadTodos', [fakeTodoItem])
   },
 
   async addTodo({ dispatch }, data) {
@@ -497,7 +498,7 @@ export const actions = {
 }
 ```
 
-Most of these actions are marked with `// Todo` (no pun intended), because you’ll need to revisit them after you have the backend API in place. For now, the `getAllTodos` action commits the `loadTodos` mutation with a fake to-do item. Later, this action will call your API to retrieve the user’s to-do items and then commit the same mutation with the items returned from the API.
+Most of these actions are marked with `// Todo` (no pun intended), because you’ll need to revisit them after you have the backend API in place. For now, the `getAllTodos` action commits the `loadTodos` mutation with a fake to-do item. Later, this action will call your API to retrieve the user’s to-do items and then commit the mutation with the real items returned from the API.
 
 
 ## Add identity and security with Okta
@@ -508,11 +509,11 @@ Most of these actions are marked with `// Todo` (no pun intended), because you�
 * Require authentication on the backend API
 * Store each user’s to-do items securely
 
-To get started, sign up for a free [Okta Developer account](https://developer.okta.com/signup). After you activate your new account (called an Okta organization, or org for short), click Applications at the top of the screen. Choose Single-Page App and change both the base URI and login redirect URI to `http://localhost:5000`:
+To get started, sign up for a free [Okta Developer account](https://developer.okta.com/signup). After you activate your new account (called an Okta organization, or org), click Applications at the top of the screen. Choose Single-Page App and click Next. Change the base URI to `http://localhost:5000`, and the login redirect URI to `http://localhost:5000/implicit/callback`:
 
-{% img blog/build-secure-todo-app-vuejs-aspnetcore/okta-app-settings.png alt:"Okta application settings" width:"800" %}{: .center-image }
+{% img blog/build-secure-todo-app-vuejs-aspnetcore/okta-app-settings.png alt:"Okta application settings" width:"700" %}{: .center-image }
 
-After you click Done, you’ll be redirected to the new application’s details. Scroll down and copy the Client ID - you’ll need it in a minute.
+After you click Done, you’ll be redirected to the new application’s details. Scroll down and copy the Client ID. You’ll need it in a minute.
 
 ### Add a custom user profile field
 By default, Okta stores basic information about your users: first name, last name, email, and so on. If you want to store more, Okta supports custom profile fields that can store any type of user data you need. You can use this to store the to-do items for each user right on the user profile - no extra database needed!
@@ -545,7 +546,9 @@ Vue.use(Router)
 
 // Add the $auth plugin from the Okta Vue SDK to the Vue instance
 Vue.use(Auth, {
+  // Replace this with your Okta domain:
   issuer: 'https://{yourOktaDomain}.com/oauth2/default',
+  // Replace this with the client ID of the Okta app you just created:
   client_id: '{clientId}',
   redirect_uri: 'http://localhost:5000/implicit/callback',
   scope: 'openid profile email'
@@ -573,11 +576,11 @@ Next, paste the Client ID you copied from the application you created a minute a
 
 Try it out: run the server with `dotnet run` and try logging in with the email and password you used to sign up for Okta:
 
-{% img blog/build-secure-todo-app-vuejs-aspnetcore/logged-in-for-reals.png alt:"Logged in and sending real API requests" width:"500" %}{: .center-image }
+{% img blog/build-secure-todo-app-vuejs-aspnetcore/logged-in.png alt:"Logged in and sending real API requests" width:"450" %}{: .center-image }
 
-The Log in button uses the Okta Vue SDK to redirect to your Okta organization's hosted login screen, which then redirects back to your app with tokens that identify the user. The `/implicit/callback` route you added to the router handles this redirect from Okta and calls the `Auth.handleCallback()` function on the Okta Vue SDK. This function takes care of parsing the tokens and letting your app know that the user logged in.
+The Log in button uses the Okta Vue SDK to redirect to your Okta organization's hosted login screen, which then redirects back to your app with tokens that identify the user. The `/implicit/callback` route you added to the router handles this redirect from Okta and calls the `Auth.handleCallback()` function in the Okta Vue SDK. This function takes care of parsing the tokens and letting your app know that the user logged in.
 
-Tip: If you need to fix bugs or make changes in your JavaScript code, you don’t need to stop and restart the server with `dotnet run` again. As soon as you modify any of your Vue or JavaScript files, the frontend app will be recompiled automatically. Try making a change to the Dashboard component and see it appear instantly in your browser (like magic).
+Tip: If you need to fix bugs or make changes in your JavaScript code, you don’t need to stop and restart the server with `dotnet run` again. As soon as you modify any of your Vue or JavaScript files, the frontend app will be recompiled automatically. If you make a change to the Dashboard component (for example), it'll appear instantly in the browser (almost like magic).
 
 Try logging in, refreshing the page (you should still be logged in!), and logging out. That takes care of authenticating the user on the frontend! Later, you'll update the store to make secure, authenticated calls to your backend API using the same tokens you just obtained.
 
@@ -592,7 +595,7 @@ This pattern (JavaScript code calling a backend API) is a common way to architec
 If you want an introduction to ASP.NET Core from the ground up, check out my free [Little ASP.NET Core Book](http://littleasp.net/book)!
 
 The template you started from already includes the scaffolding you need for a basic ASP.NET Core project:
-* The `Startup.cs` file, which configures the project and defines the middleware pipeline. You’ll modify this file later.
+* The `Startup.cs` file, which configures the project and defines the middleware pipeline.
 * A pair of controllers in the aptly-named Controllers folder.
 
 In ASP.NET Core, Controllers handle requests to specific routes in your backend application or API. The `HomeController` contains boilerplate code that handles the root route `/` and renders your frontend app. You won’t need to modify it. The `SampleDataController`, on the other hand, can be deleted. Time to write a new controller!
@@ -733,9 +736,11 @@ You’ll also need to add this `using` statement to the top of the file:
 using Vue2Spa.Services;
 ```
 
-Adding the new service to the `ConfigureServices` method makes it available throughout the ASP.NET Core project. In your `TodoController`, add this code at the top of the class:
+Adding the new service to the `ConfigureServices` method makes it available to your controllers. In your `TodoController`, add this code at the top of the class:
 
 ```csharp
+// ...
+
 public class TodoController : Controller
 {
     private readonly ITodoItemService _todoItemService;
@@ -770,7 +775,7 @@ When a request comes into the `GetAllTodos` method, the controller calls the `IT
 That takes care of the backend API (for now). The frontend now needs to be updated to call the `/api/todo` route to get the user’s to-do items. In `actions.js`, update the `getAllTodos` function:
 
 ```js
-async getAllTodos({ commit }) {
+async getAllTodos({ commit }, data) {
   let response = await axios.get('/api/todo')
   
   if (response && response.data) {
@@ -780,13 +785,13 @@ async getAllTodos({ commit }) {
 },
 ```
 
-The new action code uses the [axios HTTP library](https://github.com/axios/axios) to make a request to the backend on the `/api/todo` route, which will be handled by the `GetAllTodos` method on the backend `TodoController`. If data is returned, the `loadTodos` mutation is committed and the Vuex store is updated with the user’s to-do items. The Dashboard view will automatically see the updated data in the store and render the items in the browser.
+The new action code uses the [axios library](https://github.com/axios/axios) to make a request to the backend on the `/api/todo` route, which will be handled by the `GetAllTodos` method on the backend `TodoController`. If data is returned, the `loadTodos` mutation is committed and the Vuex store is updated with the user’s to-do items. The Dashboard view will automatically see the updated data in the store and render the items in the browser.
 
 Ready to test it out? Run the project with `dotnet run` and browse to http://localhost:5000: 
 
-{% img blog/build-secure-todo-app-vuejs-aspnetcore/logged-in-less-fake.png alt:"Logged in with an Okta user" width:"500" %}{: .center-image }
+{% img blog/build-secure-todo-app-vuejs-aspnetcore/logged-in-fake-items-via-backend.png alt:"Retrieved fake items from the backend API" width:"500" %}{: .center-image }
 
-The data may be fake, but you’ve successfully connected the backend and frontend! The final step is to add real data storage and token authentication to the app. You're almost there!
+The data may be fake, but you’ve successfully connected the backend and frontend! The final step is to add data storage and token authentication to the app. You're almost there!
 
 
 ## Add token authentication to the API
@@ -842,7 +847,7 @@ With the code you've added to the `Startup` class, plus the `[Authorize]` attrib
 
 Since your frontend code isn't yet attaching a token to the request, the `TodoController` is responding with 401 Unauthorized (access denied).
 
-Open up `actions.js` once more and add a small function that attaches the user’s token to the HTTP `Authorization` header:
+Open up `actions.js` once more and add a small function at the top that attaches the user’s token to the HTTP `Authorization` header:
 
 ```js
 const addAuthHeader = async (auth) => {
@@ -869,7 +874,8 @@ if (justLoggedIn) {
 Refresh the browser (or start the server) and the request will succeed once again, because the frontend is passing a valid token.
 
 ### Add the Okta .NET SDK
-You’re almost done! The final task is to store and retrieve the user’s to-do items in the Okta custom profile attribute you set up earlier. You’ll use the [Okta .NET SDK](https://www.nuget.org/packages/Okta.Sdk) to do this in a few lines of backend code.
+
+Almost done! The final task is to store and retrieve the user’s to-do items in the Okta custom profile attribute you set up earlier. You’ll use the [Okta .NET SDK](https://www.nuget.org/packages/Okta.Sdk) to do this in a few lines of backend code.
 
 Stop the `dotnet` server (if it’s running), and install the Okta .NET SDK in your project:
 
@@ -901,7 +907,7 @@ The Okta SDK needs an Okta API token to call the Okta API. This is used for mana
 
 Generate an Okta API token in the Okta developer console by hovering on API and clicking Tokens. Create a token and copy the value.
 
-The Okta API token is sensitive and should be protected, because it allows you to do any action in the Okta API (including deleting users and applications) Because of this, you shouldn’t store it in code that gets checked into source control. Instead, use the [.NET Secret Manager](https://docs.microsoft.com/en-us/aspnet/core/security/app-secrets) tool.
+The Okta API token is sensitive and should be protected, because it allows you to do any action in the Okta API (including deleting users and applications). You shouldn’t store it in code that gets checked into source control. Instead, use the [.NET Secret Manager](https://docs.microsoft.com/en-us/aspnet/core/security/app-secrets) tool.
 
 Tip: If you’re using Visual Studio 2017 on Windows, you can right-click the project in the Solution Explorer and choose **Manage user secrets**. Then you can skip the installation steps and jump down to adding the secret value with `dotnet user-secrets set`.
 
@@ -1061,7 +1067,7 @@ namespace Vue2Spa.Services
 }
 ```
 
-Okta custom profile fields only store primitives likes strings and numbers, but you’re using the `TodoModel` type to represent to-do items. This service serializes the strongly-typed items to a JSON array and stores them as a string. It’s not the fastest data storage mechanism, but it works!
+Okta custom profile fields only store primitives likes strings and numbers, but you’re using the `TodoModel` type to represent to-do items. This service serializes the `TodoModel` items to a JSON array and stores them as a string. It’s not the fastest data storage mechanism, but it works!
 
 Since you’ve created a new service class, update the line in the `Startup.cs` file to use the `OktaTodoItemService` instead of the `FakeTodoItemService`:
 
@@ -1148,7 +1154,7 @@ async addTodo({ dispatch }, data) {
     { text: data.text },
     await addAuthHeader(data.$auth))
 
-  await dispatch('getAllTodos', data.$auth)
+  await dispatch('getAllTodos', { $auth: data.$auth })
 },
 
 async toggleTodo({ dispatch }, data) {
@@ -1157,12 +1163,12 @@ async toggleTodo({ dispatch }, data) {
     { completed: data.completed },
     await addAuthHeader(data.$auth))
 
-  await dispatch('getAllTodos', data.$auth)
+  await dispatch('getAllTodos', { $auth: data.$auth })
 },
 
 async deleteTodo({ dispatch }, data) {
   await axios.delete('/api/todo/' + data.id, await addAuthHeader(data.$auth))
-  await dispatch('getAllTodos', data.$auth)
+  await dispatch('getAllTodos', { $auth: data.$auth })
 }
 ```
 
