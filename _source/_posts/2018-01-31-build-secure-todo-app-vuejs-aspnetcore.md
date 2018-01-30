@@ -297,7 +297,7 @@ Create a file called `App.vue` in the `components` folder:
       <router-view />
 
       <template v-if="authenticated">
-        <button v-if='authenticated' v-on:click='logout'>Log out</button>
+        <button v-on:click='logout'>Log out</button>
       </template>
 
       <template v-else>
