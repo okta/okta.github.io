@@ -576,7 +576,7 @@ Next, paste the Client ID you copied from the application you created a minute a
 
 Try it out: run the server with `dotnet run` and try logging in with the email and password you used to sign up for Okta:
 
-{% img blog/build-secure-todo-app-vuejs-aspnetcore/logged-in.png alt:"Logged in and sending real API requests" width:"450" %}{: .center-image }
+{% img blog/build-secure-todo-app-vuejs-aspnetcore/logged-in.png alt:"Logged in via Okta" width:"450" %}{: .center-image }
 
 The Log in button uses the Okta Vue SDK to redirect to your Okta organization's hosted login screen, which then redirects back to your app with tokens that identify the user. The `/implicit/callback` route you added to the router handles this redirect from Okta and calls the `Auth.handleCallback()` function in the Okta Vue SDK. This function takes care of parsing the tokens and letting your app know that the user logged in.
 
@@ -1174,7 +1174,7 @@ async deleteTodo({ dispatch }, data) {
 
 Start the server once more with `dotnet run` and try adding a real to-do item to the list:
 
-{% img blog/build-secure-todo-app-vuejs-aspnetcore/final-app.png alt:"Final application" width:"500" %}{: .center-image }
+{% img blog/build-secure-todo-app-vuejs-aspnetcore/final-app.png alt:"Final to-do application" width:"500" %}{: .center-image }
 
 
 ## Build Secure Apps with ASP.NET Core and Vue.js
