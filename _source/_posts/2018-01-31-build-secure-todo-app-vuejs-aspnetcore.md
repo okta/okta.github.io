@@ -751,6 +751,7 @@ public class TodoController : Controller
     }
 
     // Existing code...
+}
 ```
 
 Adding this code causes ASP.NET Core to inject an `ITodoItemService` object into the controller. Because you’re using the interface here, your controller doesn’t know (or care) which implementation of the `ITodoItemService` it receives. It’s currently the `FakeTodoItemService`, but later it’ll be a more interesting (and real) implementation.
@@ -838,7 +839,8 @@ Controllers need to opt-in to an authentication check, by adding the `[Authorize
 [Authorize]
 public class TodoController : Controller
 {
-    // ...
+    // Existing code...
+}
 ```
 
 With the code you've added to the `Startup` class, plus the `[Authorize]` attribute on the controller, requests to `/api/todo` now require a valid access token to succeed. If you tried running the app now and looking at your browser’s network console, you’d see a failed API request:
