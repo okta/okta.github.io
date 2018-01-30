@@ -47,9 +47,7 @@ npm i -g generator-jhipster
 To develop a blog application with JHipster, open a terminal window, create a directory, and run `jhipster`.
 
 ```
-mkdir blog
-cd blog
-jhipster
+mkdir blog && cd blog && jhipster
 ```
 
 JHipster asks many questions about the type of application you want to create and what features you’d like to include. The table below shows the choices I made to create a blog application with Angular, OAuth 2.0 / OIDC authentication, and Gradle.
@@ -136,7 +134,7 @@ security:
 
 On Okta, navigate to **Users** > **Groups**. Create `ROLE_ADMIN` and `ROLE_USER` groups and add your account to them.
 
-**TIP:** If you've installed e2e tests with Protractor, you'll need to modify them to use an Okta account when running integration tests. Change the default credentials in `src/test/javascript/e2e/account/account.spec.ts` and `src/test/javascript/e2e/admin/administration.spec.ts`.
+**TIP:** If you've installed e2e tests with Protractor, you'll need to modify them to use an Okta account when running integration tests. Change the default credentials in `src/test/javascript/e2e/account/account.spec.ts` and `src/test/javascript/e2e/admin/administration.spec.ts`. Even better, set your credentials as environment variables and read them in your Protractor tests.
 
 Navigate to **API** > **Authorization Servers**, click the **Authorization Servers** tab and edit the default one. Click the **Claims** tab and **Add Claim**. Name it "groups" or "roles", and include it in the ID Token. Set the value type to "Groups" and set the filter to be a Regex of `.*`.
 
@@ -204,10 +202,10 @@ ionic serve
 
 You'll see a screen with a sign-in button. Click on it, and you'll be redirected to Okta to authenticate.
 
-{% img blog/jhipster-ionic/ionic-okta-login.png alt:"Ionic Authenticated" width:"400" %}
 {% img blog/jhipster-ionic/ionic-welcome.png alt:"Ionic Welcome" width:"400" %}
+{% img blog/jhipster-ionic/ionic-okta-login.png alt:"Ionic Authenticated" width:"400" %}
 
-Now that you know authentication works, you can use the entity generator to generate Ionic pages for your data model. Run the following commands (in your `~ionic4j` directory) to generate screens for your entities.
+Now that you know authentication works, you can use the entity generator to generate Ionic pages for your data model. Run the following commands (in your `~/ionic4j` directory) to generate screens for your entities.
 
 ```bash
 yo jhipster-ionic:entity blog
@@ -222,7 +220,7 @@ The iOS emulator runs on port 8080, so you will need to change your backend to r
 * `backend/src/main/resources/config/application-dev.yml`
 * `ionic4j/src/providers/api/api.ts`
 
-**NOTE:** You'll also need to add `http://localhost:8888/login` as a valid redirect URI in your Okta application.
+**NOTE:** You'll also need to add `http://localhost:8888/login` as a valid redirect URI in the Okta Developer Console.
 
 Restart the blog app, then run the Ionic app with `ionic cordova emulate ios`. You should be able to log in to your Ionic app, tap **Entities** and view the list of blogs.
 
@@ -242,13 +240,13 @@ You can try adding a second entry by clicking the + sign in the top right corner
 
 I hope you've enjoyed this tour of Ionic for JHipster. Since JHipster supports progressive web apps (PWAs), you might be asking yourself, why Ionic instead of a PWA?
 
-The first version of 21-Points Health I wrote with JHipster 2.x was painful to use on a mobile device, mostly because it didn't have remember me support. The 4.x version of 21-Points Health is better, but it's still not great. If PWA support was better on the iPhone (and it [will be soon](https://twitter.com/rmondello/status/956256845311590400)!), I might think differently. In the meantime, I like that Ionic provides a UI that looks like a native app, and its animations and things like pull-to-refresh are hard to beat.
+The first version of [21-Points Health](https://github.com/mraible/21-points) I wrote with JHipster 2.x was painful to use on a mobile device, mostly because it didn't have remember me support. The 4.x version of 21-Points Health is better, but it's still not great. If PWA support was better on the iPhone (and it [will be soon](https://twitter.com/rmondello/status/956256845311590400)!), I might think differently. In the meantime, I like that Ionic provides a UI that looks like a native app, and its animations and things like pull-to-refresh are hard to beat.
 
-I want to develop the **best user experience**. Native apps are painful to distribute, but they still seem to work better than PWAs (on iOS). The beauty of the way that Ionic integrates with JHipster is you can have both! You can turn your JHipster app into a PWA (instructions are in your app's README) *and* distribute a mobile app in the app store. If you slap on on some analytics, you see which one gets more usage, and determine the best client for yourself.
+I want to develop the **best user experience**. Native apps are painful to distribute, but they still seem to work better than PWAs (on iOS). The beauty of the way that Ionic integrates with JHipster is you can have both! You can turn your JHipster app into a PWA (instructions are in your app's README) *and* distribute a mobile app in the app store. If you slap on some analytics, you can see which one gets more usage, and determine the best client for yourself.
 
 ## Learn More About Ionic and JHipster
 
-I've written a thing or two about JHipster and Ionic on this blog. If you'd like to see how to deploy your Ionic app to a mobile device, I recommend reading the [deploy to a mobile device](/blog/2017/05/17/develop-a-mobile-app-with-ionic-and-spring-boot#deploy-to-a-mobile-device) section of [Tutorial: Develop a Mobile App With Ionic and Spring Boot](/blog/2017/05/17/develop-a-mobile-app-with-ionic-and-spring-boot#deploy-to-a-mobile-device). I showed how to add OIDC authentication to an Ionic app in [Build an Ionic App with User Authentication](https://developer.okta.com/blog/2017/08/22/build-an-ionic-app-with-user-authentication).
+I've written a thing or two about JHipster and Ionic on this blog. If you'd like to see how to deploy your Ionic app to a mobile device, I recommend reading the [deploy to a mobile device](/blog/2017/05/17/develop-a-mobile-app-with-ionic-and-spring-boot#deploy-to-a-mobile-device) section of [Tutorial: Develop a Mobile App With Ionic and Spring Boot](/blog/2017/05/17/develop-a-mobile-app-with-ionic-and-spring-boot). I showed how to add OIDC authentication to an Ionic app in [Build an Ionic App with User Authentication](https://developer.okta.com/blog/2017/08/22/build-an-ionic-app-with-user-authentication).
 
 You can find the source code for the application developed in this post at <https://github.com/oktadeveloper/okta-ionic-jhipster-example>. 
 
