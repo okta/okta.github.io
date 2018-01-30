@@ -65,7 +65,12 @@ Logs from serving your app will appear here. Press Ctrl+C at any time to stop.
  › Press d to toggle development mode. (current mode: development)
 ```
 
-If you're on a Mac, press **i** to open iOS emulator. If you're on Windows or Linux, I'd suggest trying the Android emulator or your Android device (if you have one). If it doesn't work, don't worry, I'll show you how to make that work later on.
+If you're on a Mac, press **i** to open iOS emulator. You will be prompted to install/open with Expo, then presented with the rendered `App.js`.
+
+{% img blog/react-native-app-auth/open-in-expo.png alt:"Open in Expo" width:"400" %}
+{% img blog/react-native-app-auth/default-page.png alt:"Rendered App.js" width:"400" %}
+
+If you're on Windows or Linux, I'd suggest trying the Android emulator or your Android device (if you have one). If it doesn't work, don't worry, I'll show you how to make that work later on.
 
 **TIP:** You can use TypeScript instead of JavaScript in your React Native app using Microsoft's [TypeScript React Native Starter](https://github.com/Microsoft/TypeScript-React-Native-Starter). If you decide to go this route, I'd recommend following the steps to convert your app after you've completed this tutorial.
 
