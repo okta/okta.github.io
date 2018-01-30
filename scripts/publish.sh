@@ -23,7 +23,11 @@ source "${0%/*}/helpers.sh"
 require_env_var "OKTA_HOME"
 require_env_var "BRANCH"
 require_env_var "REPO"
-require_env_var "RUNSCOPE_TRIGGER_ID"
+
+# Get the Runscope trigger ID
+get_secret prod/tokens/runscope_trigger_id RUNSCOPE_TRIGGER_ID
+
+STAGING_BASE_URL_RUNSCOPE="https://dq3iyfxeowfmd.cloudfront.net"
 
 export TEST_SUITE_TYPE="build"
 
