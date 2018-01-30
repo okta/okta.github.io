@@ -42,11 +42,36 @@ cd okta-react-native-app-auth
 npm start
 ```
 
+This will result your terminal prompting you with some options:
+
+```bash
+To view your app with live reloading, point the Expo app to this QR code.
+You'll find the QR scanner on the Projects tab of the app.
+
+[QR Code]
+
+Or enter this address in the Expo app's search bar:
+
+  exp://172.31.98.12:19000
+
+Your phone will need to be on the same local network as this computer.
+For links to install the Expo app, please visit https://expo.io.
+
+Logs from serving your app will appear here. Press Ctrl+C at any time to stop.
+
+ › Press a to open Android device or emulator, or i to open iOS emulator.
+ › Press q to display QR code.
+ › Press r to restart packager, or R to restart packager and clear cache.
+ › Press d to toggle development mode. (current mode: development)
+```
+
+If you're on a Mac, press **i** to open iOS emulator. If you're on Windows or Linux, I'd suggest trying the Android emulator or your Android device (if you have one). If it doesn't work, don't worry, I'll show you how to make that work later on.
+
 **TIP:** You can use TypeScript instead of JavaScript in your React Native app using Microsoft's [TypeScript React Native Starter](https://github.com/Microsoft/TypeScript-React-Native-Starter). If you decide to go this route, I'd recommend following the steps to convert your app after you've completed this tutorial.
 
 ## React Native and OAuth
 
-In this tutorial, I'll use [React Native App Auth](https://github.com/FormidableLabs/react-native-app-auth), a library created by [Formidable](http://formidable.com/). The reason I'm using this library is three-fold: 1) they provide a nice [example](https://github.com/FormidableLabs/react-native-app-auth/tree/master/Example) that I was able to make work in just a few minutes and 2) it uses AppAuth (a mature OAuth client implementation), and 3) I was unable to get anything else working.
+In this example, I'll use [React Native App Auth](https://github.com/FormidableLabs/react-native-app-auth), a library created by [Formidable](http://formidable.com/). The reason I'm using this library is three-fold: 1) they provide a nice [example](https://github.com/FormidableLabs/react-native-app-auth/tree/master/Example) that I was able to make work in just a few minutes, 2) it uses AppAuth (a mature OAuth client implementation), and 3) I was unable to get anything else working.
 
 * I tried [react-native-oauth](https://github.com/fullstackreact/react-native-oauth), but discovered it required using an existing provider before adding a new one. I only wanted to have Okta as a provider. Also, it's high number of issues and pull requests served as a warning sign.
 * I tried [react-native-simple-auth](https://github.com/adamjmcgrath/react-native-simple-auth), but had issues with Safari redirecting back to my app successfully.
