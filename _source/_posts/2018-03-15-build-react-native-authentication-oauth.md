@@ -9,6 +9,10 @@ tweets:
   - "The React Native + OAuth Tutorial you've been looking is live on the @okta developer blog! "
 ---
 
+// note: p1 similar to https://developer.okta.com/blog/2017/08/22/build-an-ionic-app-with-user-authentication
+
+With Okta and OpenID Connect (OIDC) you can easily integrate authentication into a React Native application, and never have to build it yourself again. OIDC allows you to authenticate directly against the [Okta API](https://developer.okta.com/product/), and this article shows you how to do just that in a React Native application. I’ll show you how to log in with OIDC redirect, using AppAuth; user registration is omitted as the feature is still under active development.
+
 React Native is a pretty slick framework. Unlike Ionic and other hybrid mobile frameworks, it allows you to use web technologies (React and JavaScript) to build native mobile apps. There is no no browser or WebView involved, so developing a mobile app with React Native is similar to using the native SDK in that you'll do all your testing on an emulator or device. There is no way to test it in your browser like there is with Ionic. This can be a benefit in that you don't have to write that works in-browser and on-device separately. 
 
 If you look at Google Trends, you can see that React Native is even more popular than Android and iOS for native development!
@@ -42,9 +46,15 @@ npm start
 
 ## React Native and OAuth
 
-In this tutorial, I'll use [React Native App Auth](https://github.com/FormidableLabs/react-native-app-auth), a library created by [Formidable](http://formidable.com/)
+In this tutorial, I'll use [React Native App Auth](https://github.com/FormidableLabs/react-native-app-auth), a library created by [Formidable](http://formidable.com/). The reason I'm using this library is three-fold: 1) they provide a nice [example](https://github.com/FormidableLabs/react-native-app-auth/tree/master/Example) that I was able to make work in just a few minutes and 2) it uses AppAuth (a mature OAuth client implementation), and 3) I was unable to get anything else working.
+
+* I tried [react-native-oauth](https://github.com/fullstackreact/react-native-oauth), but discovered it required using an existing provider before adding a new one. I only wanted to have Okta as a provider. Also, it's high number of issues and pull requests served as a warning sign.
+* I tried [react-native-simple-auth](https://github.com/adamjmcgrath/react-native-simple-auth), but had issues with Safari redirecting back to my app successfully.
+* I tried doing [this OAuth 2 with React Native tutorial](https://medium.com/@jtremback/oauth-2-with-react-native-c3c7c64cbb6d), but also had problems redirecting back to my app.
 
 ### Add React Native App Auth for Authentication
+
+
 
 ### Create Native Application in Okta
 
