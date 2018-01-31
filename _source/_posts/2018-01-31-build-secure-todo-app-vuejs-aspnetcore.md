@@ -509,7 +509,7 @@ Most of these actions are marked with `// Todo` (no pun intended), because you'l
 * Require authentication on the backend API
 * Store each user's to-do items securely
 
-To get started, sign up for a free [Okta Developer account](https://developer.okta.com/signup). After you activate your new account (called an Okta organization, or org), click Applications at the top of the screen. Choose Single-Page App and click Next. Change the base URI to `http://localhost:5000`, and the login redirect URI to `http://localhost:5000/implicit/callback`:
+To get started, sign up for a free [Okta Developer account](https://developer.okta.com/signup/). After you activate your new account (called an Okta organization, or org), click Applications at the top of the screen. Choose Single-Page App and click Next. Change the base URI to `http://localhost:5000`, and the login redirect URI to `http://localhost:5000/implicit/callback`:
 
 {% img blog/build-secure-todo-app-vuejs-aspnetcore/okta-app-settings.png alt:"Okta application settings" width:"700" %}{: .center-image }
 
