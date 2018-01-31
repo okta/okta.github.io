@@ -33,7 +33,7 @@ github_edit_url: "https://github.com/okta/okta.github.io/edit/source/_source/"
 get_started_url: "https://developer.okta.com/signup/"
 stack_overflow_forum_url: "http://stackoverflow.com/search?q=okta"
 
-timezone: UTC
+timezone: EST
 ga_ua_id: "UA-15777010-3"
 
 # This is different from "url"
