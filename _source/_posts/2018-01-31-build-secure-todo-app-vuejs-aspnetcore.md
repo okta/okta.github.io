@@ -61,7 +61,7 @@ Now you're ready to run the app for the first time! Execute `dotnet run` in the 
 
 {% img blog/build-secure-todo-app-vuejs-aspnetcore/dotnet-run-localhost.png alt:"Execute dotnet run in terminal" width:"800" %}{: .center-image }
 
-Open up a browser and navigate to `http://localhost:5000``:
+Open up a browser and navigate to `http://localhost:5000`:
 
 {% img blog/build-secure-todo-app-vuejs-aspnetcore/vue-starter.png alt:"Vue.js starter template app" width:"800" %}{: .center-image }
 
