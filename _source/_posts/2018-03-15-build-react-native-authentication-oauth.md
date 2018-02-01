@@ -666,7 +666,7 @@ In iOS Simulator, press **Command + R** (on Mac, **CTRL + R** on others)to reloa
 I hope you've enjoyed this whirlwind tour of how to do authentication with Okta and React Native. You can learn more about React Native on [its official site](https://facebook.github.io/react-native/). You can also add to its ~60K stars
  [on GitHub](https://github.com/facebook/react-native).
  
- You can find the source code for this application at <https://github.com/oktadeveloper/okta-react-native-app-auth>.
+ You can find the source code for this application at <https://github.com/oktadeveloper/okta-react-native-app-auth-example>.
  
  If you're interested in seeing how to do regular React development with Okta, I encourage you to check out the following resources.
  
