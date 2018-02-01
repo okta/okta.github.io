@@ -267,7 +267,7 @@ When an event is triggered by an HTTP request, the Client object describes the [
 | ---------- | ------------------------------------------------------------------------------------------------------------------ | --------------- | -------- |
 | userAgent  | The [user agent](https://en.wikipedia.org/wiki/User_agent) used by an actor to perform an action | [UserAgent Object](#useragent-object) | TRUE |
 | geographicalContext | The physical location where the client made its request from | [GeographicalContext Object](#geographicalcontext-object)    | TRUE     |
-| zone       | The **name** of the [Zone](/docs/api/resources/zones.html#ZoneModel) that the client's location is mapped to       | String          | TRUE     |
+| zone       | The **name** of the [Zone](/docs/api/resources/zones#ZoneModel) that the client's location is mapped to       | String          | TRUE     |
 | ipAddress  | Ip address that the client made its request from                                                                   | String          | TRUE     |
 | device     | Type of device that the client operated from (e.g. Computer)                                                       | String          | TRUE     |
 |------------+--------------------------------------------------------------------------------------------------------------------+-----------------+----------|
