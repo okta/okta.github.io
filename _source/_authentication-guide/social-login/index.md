@@ -31,7 +31,7 @@ Configuring social login with Okta allows you to use the following features:
 
 * **Support for Webhooks:** Make callouts to your application during user registration and/or account linking. For example: prompt a user for additional attributes before linking their account, or enable a customized validation or confirmation flow.
 
-* **OAuth 2.0 Scope Configuration:** Specify OAuth 2.0 scopes to fully control which Social Profile attributes are linked to Okta. 
+* **OAuth 2.0 Scope Configuration:** Specify OAuth 2.0 scopes to fully control which Social Profile attributes are linked to Okta.
 
 ### The Social Login Process
 
@@ -66,10 +66,10 @@ Social authentication requests are canceled if not completed within fifteen minu
 
 ### The Set-up Process
 
-To set up social login, configure the following: 
+To set up social login, configure the following:
 
 1. An OAuth 2.0 client in your social provider
 2. An Identity Provider in Okta
 3. An OpenID Connect Application in Okta
 
-Every Identity Provider in Okta is linked to an Application, and every time a user signs in with a Social Identity Provider for the first time, an Application User is created for them. The Application User represents the external user at the Social Identity Provider and can be used to map attributes to the Okta User. For more information about how to configure this behavior see [Social Identity Provider Settings](social-settings) below.
+Every Identity Provider in Okta is linked to an Application, and every time a user signs in with a Social Identity Provider for the first time, an Application User is created for them. The Application User represents the external user at the Social Identity Provider and can be used to map attributes to the Okta User. For more information about how to configure this behavior see [Social Identity Provider Settings](social-settings).
