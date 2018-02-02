@@ -59,7 +59,7 @@ The `@Grab` annotation invokes [Grape](http://docs.groovy-lang.org/latest/html/d
 Run this app with the following command:
 
 ```bash
-spring run helloGroovy.groovy
+spring run helloWorld.groovy
 ```
 
 Navigate to `http://localhost:8080` and you'll be prompted to login with your browser's basic authentication dialog. Enter `user` for the username and copy/paste the generated password from your console. If you copied and pasted the password successfully, you'll see `Hello World` in your browser.
@@ -106,17 +106,16 @@ security:
   oauth2:
     client:
       # From OIDC app
-      clientId: # clientId
-      clientSecret: # clientSecret
+      clientId: {yourClientId}
+      clientSecret: {yourClientSecret}
       # From Authorization Server's metadata
-      accessTokenUri: # token_endpoint
-      userAuthorizationUri: # authorization_endpoint
+      accessTokenUri: https://{yourOktaDomain}.com/oauth2/default/v1/token	
+      userAuthorizationUri: https://{yourOktaDomain}.com/oauth2/default/v1/authorize 
       clientAuthenticationScheme: form
       scope: openid profile email
     resource:
-      # from your Auth Server's metadata, check .well-known/openid-configuration
-      # if not in .well-known/oauth-authorization-server
-      userInfoUri: # userinfo_endpoint
+      # from your Auth Server's metadata, check .well-known/openid-configuration if not in .well-known/oauth-authorization-server
+      userInfoUri: https://{yourOktaDomain}.com/oauth2/default/v1/userinfo
 ```
 
 Start your app with `spring run helloOAuth.groovy` and navigate to `http://localhost:8080`. You'll be redirected to Okta to login. 
@@ -150,6 +149,7 @@ In a [future tutorial](/blog/2017/09/19/build-a-secure-notes-application-with-ko
 
 **Changelog:**
 
+* Feb 2, 2018: Added more information to `application.yml` so it's easier to copy and paste.
 * Oct 20, 2017: Added missing `scope: openid profile email` to `application.yaml`. 
 * Oct 11, 2017: Updated instructions for the [Okta Developer Console](/blog/2017/09/25/all-new-developer-console).
 
