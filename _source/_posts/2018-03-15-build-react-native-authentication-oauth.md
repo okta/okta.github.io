@@ -427,32 +427,6 @@ svn export https://github.com/FormidableLabs/react-native-app-auth/trunk/Example
 
 Run your app with `npm run ios`.
 
-> **NOTE:** It's possible you'll see the following error:
-> 
-> ```
-> error: bundling failed: Error: Couldn't find preset > 
->  "babel-preset-react-native-stage-0/decorator-support" relative to directory
->  "/Users/<username>/okta-react-native-app-auth"
-> ```
-> 
-> To fix this, modify your `package.json` to remove `babel-preset-react-native-stage-0` and add `babel-preset-react-native`.
-> 
-> ```json
-> "devDependencies": {
->   "babel-preset-react-native": "^4.0.0",
->   "jest-react-native": "^18.0.0",
->   "react-test-renderer": "16.2.0"
-> },
-> ```
-> 
-> You'll also need to change `.babelrc` to have the following for `presets`:
-> 
-> ```json
-> "presets": ["react-native"],
-> ```
-> 
-> Run `npm i`, followed by `npm run ios`.
-
 You should see a screen that says "Hello, stranger." Click on **Authorize** and you'll be prompted to continue or cancel.
 
 | {% img blog/react-native-app-auth/hello.png alt:"Hello, stranger" width:"400" %} | {% img blog/react-native-app-auth/continue.png alt:"Cancel or Continue" width:"400" %} |
