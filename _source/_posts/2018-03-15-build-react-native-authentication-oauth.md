@@ -19,8 +19,6 @@ If you look at Google Trends, you can see that React Native is even more popular
 
 <script type="text/javascript" src="https://ssl.gstatic.com/trends_nrtr/1294_RC01/embed_loader.js"></script> <script type="text/javascript"> trends.embed.renderExploreWidget("TIMESERIES", {"comparisonItem":[{"keyword":"ios development","geo":"","time":"today 12-m"},{"keyword":"android development","geo":"","time":"today 12-m"},{"keyword":"react native","geo":"","time":"today 12-m"}],"category":0,"property":""}, {"exploreQuery":"q=ios%20development,android%20development,react%20native&date=today 12-m,today 12-m,today 12-m","guestPath":"https://trends.google.com:443/trends/embed/"}); </script> 
 
-![Google Trends: React Native vs iOS and Android](/assets/img/blog/react-native-app-auth/google-trends.png)
-
 {% img blog/react-native-app-auth/google-trends.png alt:"Google Trends: React Native vs iOS and Android" width:"800" %}{: .center-image }
 
 // todo: It'd be cool if we could turn this graphic into something that looks better. Like this post does: https://medium.com/react-native-development/a-brief-history-of-react-native-aae11f4ca39
@@ -33,18 +31,18 @@ Today I'm going to show you how to develop a React Native app with the latest an
 
 React has a `create-react-app` command-line tool (CLI) that you can use to create new React apps. React Native has a similar tool called [Create React Native App](https://github.com/react-community/create-react-native-app). Before you install it, make sure you have [Node](https://nodejs.org/) v6 or later installed.
 
-Install `create-react-native-app` and create a new project called `okta-react-native-app-auth`:
+Install `create-react-native-app` and create a new project called `okta-rn`:
 
 ```bash
 npm install -g create-react-native-app
-create-react-native-app okta-react-native-app-auth
-cd okta-react-native-app-auth
+create-react-native-app okta-rn
+cd okta-rn
 npm start
 ```
 
 This will result your terminal prompting you with some options:
 
-```bash
+```
 To view your app with live reloading, point the Expo app to this QR code.
 You'll find the QR scanner on the Projects tab of the app.
 
@@ -67,8 +65,8 @@ Logs from serving your app will appear here. Press Ctrl+C at any time to stop.
 
 If you're on a Mac, press **i** to open iOS emulator. You will be prompted to install/open with Expo, then presented with the rendered `App.js`.
 
-{% img blog/react-native-app-auth/open-in-expo.png alt:"Open in Expo" width:"450" %}
-{% img blog/react-native-app-auth/default-page.png alt:"Rendered App.js" width:"450" %}
+{% img blog/react-native-app-auth/open-in-expo.png alt:"Open in Expo" width:"400" %}
+{% img blog/react-native-app-auth/default-page.png alt:"Rendered App.js" width:"400" %}
 
 If you're on Windows or Linux, I'd suggest trying the Android emulator or your Android device (if you have one). If it doesn't work, don't worry, I'll show you how to make that work later on.
 
@@ -98,45 +96,21 @@ You'll need to "eject" the native configuration for your app, which is normally 
 npm run eject
 ```
 
-You should see output similar to the following:
+When prompted to answer questions, use the following answers.
 
-```
-We didn't find any uses of the Expo SDK in your project, so you should be fine to eject to
-"Plain" React Native. (This check isn't very sophisticated, though.)
-
-We strongly recommend that you read this document before you proceed:
-  https://github.com/react-community/create-react-native-app/blob/master/EJECTING.md
-
-Ejecting is permanent! Please be careful with your selection.
-
-? How would you like to eject from create-react-native-app? React Native: I'd like a regular React Native project.
-We have a couple of questions to ask you about how you'd like to name your app:
-? What should your app appear as on a user's home screen? Okta RN
-? What should your Android Studio and Xcode projects be called? OktaRN
-Writing your selections to app.json...
-Wrote to app.json, please update it manually in the future.
-Scanning folders for symlinks in /Users/mraible/okta-react-native-app-auth/node_modules (11ms)
-Generating the iOS folder.
-Generating the Android folder.
-Successfully copied template native code.
-Babel preset changed to `babel-preset-react-native-stage-0/decorator-support`.
-Updating your yarn scripts in package.json...
-Your package.json is up to date!
-Adding entry point...
-Added new entry points!
-
-Note that using `yarn start` will now require you to run Xcode and/or
-Android Studio to build the native code for your project.
-Removing node_modules...
-Installing packages with yarn...
-```
+| Question | Answer |
+|---|---|
+| What should your app appear as on a user's home screen? | `Okta RN` |
+| What should your Android Studio and Xcode projects be called? | `OktaRN` |
 
 To install App Auth for React Native, run the following commands:
 
 ```bash
-npm install react-native-app-auth --save
-react-native link react-native-app-auth
+npm i react-native-app-auth --save
+react-native link
 ```
+
+**TIP:** If you see a "Command `link` unrecognized" error, run `npm i && react-native link`. 
 
 After running these commands, you have to [configure the native iOS and Android projects](https://github.com/FormidableLabs/react-native-app-auth#setup). I've copied the steps below for your convenience. 
 
@@ -158,18 +132,18 @@ target 'OktaRN' do
 end
 ```
 
-Then run `pod install`. This can take a while, even on a fast connection. Now is a good time to grab a coffee, or a scotch! 🥃
+Then run `pod install` from the `ios` directory. This can take a while the first time, even on a fast connection. Now is a good time to grab a coffee, or a scotch! 🥃
 
 Open your project in Xcode by running `open OktaRN.xcworkspace` from the `ios` directory.
 
-If you intend to support iOS 10 and older, you need to define the supported redirect URL schemes in your [`ios/OktaRN/Info.plist`] as follows:
+If you intend to support iOS 10 and older, you need to define the supported redirect URL schemes in `ios/OktaRN/Info.plist` as follows:
 
 ```xml
 <key>CFBundleURLTypes</key>
 <array>
   <dict>
     <key>CFBundleURLName</key>
-    <string>{yourAppIdentifier}</string>
+    <string>$(PRODUCT_BUNDLE_IDENTIFIER)</string>
     <key>CFBundleURLSchemes</key>
     <array>
       <string>{yourReversedOktaDomain}</string>
@@ -185,18 +159,18 @@ Below is what mine looks like after I changed my app identifier and added this k
 <string>com.okta.developer.reactnative.$(PRODUCT_NAME:rfc1034identifier)</string>
 <key>CFBundleURLTypes</key>
 <array>
-		<dict>
-			 <key>CFBundleURLName</key>
-			 <string>$(PRODUCT_BUNDLE_IDENTIFIER)</string>
-			 <key>CFBundleURLSchemes</key>
-			 <array>
-				  <string>com.oktapreview.dev-158606</string>
-		  </array>
-	 </dict>
+  <dict>
+    <key>CFBundleURLName</key>
+    <string>$(PRODUCT_BUNDLE_IDENTIFIER)</string>
+    <key>CFBundleURLSchemes</key>
+    <array>
+      <string>com.oktapreview.dev-158606</string>
+    </array>
+  </dict>
 </array>
 ```
 
-Open `AppDelegate.h` in your project and add the following lines.
+Open `AppDelegate.h` in your Xcode project (OktaRN > OktaRN > `AppDelegate.h`) and add the lines with the `+` next to them below.
 
 ```diff
 + @protocol OIDAuthorizationFlowSession;
@@ -207,7 +181,7 @@ Open `AppDelegate.h` in your project and add the following lines.
   @end
 ```
 
-This holds the authorization flow information that started before you redirect to Okta. After Okta authorizes you, it redirects to the `redirect_uri` that's passed in.
+This property holds the authorization flow information that started before you redirect to Okta. After Okta authorizes you, it redirects to the `redirect_uri` that's passed in.
 
 The authorization flow starts from an `openURL()` app delegate method. To add it, open `AppDelegate.m` and import `AppAuth.h`.
 
@@ -298,7 +272,7 @@ defaultConfig {
 
 ## Build Your App
 
-Modify `App.js` to have the following code that allows you to authorize, refresh your access token, and revoke it.
+Replace the code in `App.js` with the following JavaScript. This code allows you to authorize, refresh your access token, and revoke it.
 
 ```js
 import React, { Component } from 'react';
@@ -453,39 +427,15 @@ svn export https://github.com/FormidableLabs/react-native-app-auth/trunk/Example
 
 Run your app with `npm run ios`.
 
-You'll likely get an error similar to the following:
-
-```
-error: bundling failed: Error: Couldn't find preset "babel-preset-react-native-stage-0/decorator-support" relative to directory "/Users/mraible/okta-react-native-app-auth"
-```
-
-To fix this, modify your `package.json` to remove `babel-preset-react-native-stage-0` and add `babel-preset-react-native`.
-
-```json
-"devDependencies": {
-  "babel-preset-react-native": "^4.0.0",
-  "jest-react-native": "^18.0.0",
-  "react-test-renderer": "16.2.0"
-},
-```
-
-You'll also need to change `.babelrc` to have the following for `presets`:
-
-```json
-"presets": ["react-native"],
-```
-
-Run `npm i`, followed by `npm run ios`. 
-
 You should see a screen that says "Hello, stranger." Click on **Authorize** and you'll be prompted to continue or cancel.
 
-| ![Hello, stranger](/assets/img/blog/react-native-app-auth/hello.png) | ![Cancel | Continue](/assets/img/blog/react-native-app-auth/continue.png) |
+| {% img blog/react-native-app-auth/hello.png alt:"Hello, stranger" width:"400" %} | {% img blog/react-native-app-auth/continue.png alt:"Cancel or Continue" width:"400" %} |
 
 Click **Continue** and you should see an Okta sign-in form. Enter your credentials and you'll be redirected back to the application. 
 
-| ![Okta Sign-In](/assets/img/blog/react-native-app-auth/okta-login.png) | ![Access Token Info](/assets/img/blog/react-native-app-auth/access-token.png) |
+| {% img blog/react-native-app-auth/okta-login.png alt:"Okta Sign-In" width:"400" %} | {% img blog/react-native-app-auth/access-token.png alt:"Access Token Info" width:"400" %} |
 
-You can click **Refresh** to watch the access token and expire date change.
+You can click **Refresh** to watch the values for the access token and expire date change.
 
 **TIP:** If animations happen slowly in iOS Simulator, toggle **Debug** > **Slow Animations**.
 
@@ -499,15 +449,29 @@ Execution failed for task ':app:installDebug'.
 > com.android.builder.testing.api.DeviceException: No connected devices!
 ```
 
-To fix this, open Android Studio, select open existing project, and select the `android` directory in your project. If you're prompted to update anything, approve it.
+To fix this, open Android Studio, choose **open existing project**, and select the `android` directory in your project. If you're prompted to update anything, approve it.
+
+If you get an error `Could not find method google()`, edit `build.gradle` to remove this line, then reload the project. 
 
 To create a new AVD, navigate to **Tools** > **Android** > **AVD Manager**. Create a new Virtual Device and click Play. I chose a Pixel 2 as you can see from my settings below.
 
-![AVD Pixel 2](/assets/img/blog/react-native-app-auth/avd-pixel-2.png)
+{% img blog/react-native-app-auth/avd-pixel-2.png alt:"AVD Pixel 2" width:"800" %}{: .center-image }
 
-Run `npm run android` again. You should see a welcome screen and be able to authorize sucessfully.
+Modify `android/build.gradle` to add `google()` back in, then run `npm run android` again. You should see a welcome screen and be able to authorize successfully.
 
-| ![Hello, stranger](/assets/img/blog/react-native-app-auth/android-hello.png) | ![Okta Sign-In](/assets/img/blog/react-native-app-auth/android-sign-in.png) | ![Access Token on Android](/assets/img/blog/react-native-app-auth/android-access-token.png) |
+| {% img blog/react-native-app-auth/android-hello.png alt:"Hello, stranger" width:"300" %} | {% img blog/react-native-app-auth/android-sign-in.png alt:"Okta Sign-In" width:"300" %} | {% img blog/react-native-app-auth/android-access-token.png alt:"Access Token on Android" width:"300" %} |
+
+### Upgrade to the latest release
+
+The [react-native-git-upgrade](https://www.npmjs.com/package/react-native-git-upgrade) tool is a handy way to upgrade your project to use the latest versions. Install it and run it.
+
+```js
+npm i -g react-native-git-upgrade
+react-native-git-upgrade
+npm i
+```
+
+Or, you can just change your `package.json` to have `react-native": "0.52.2` and then run `npm i`.
 
 ### Get and View an ID Token
 
@@ -537,9 +501,9 @@ authorize = async () => {
       {
         hasLoggedInOnce: true,
         accessToken: authState.accessToken,
-        idToken: authState.idToken,
         accessTokenExpirationDate: authState.accessTokenExpirationDate,
-        refreshToken: authState.refreshToken
+        refreshToken: authState.refreshToken,
+        idToken: authState.idToken
       },
       500
     );
@@ -582,9 +546,11 @@ Finally, add a `<Form.Label>` and `<Form.Value>` row after the one that displays
 <Form.Value>{JSON.stringify(state.idTokenJSON)}</Form.Value>
 ```
 
-Unfortunately, there's a [bug in react-native-app-auth](https://github.com/FormidableLabs/react-native-app-auth/issues/17) that prevents this from working on Android. It works great on iOS though!
+**NOTE:** There's a [bug in react-native-app-auth](https://github.com/FormidableLabs/react-native-app-auth/issues/17) that prevents this from working on Android. 
 
-![ID Token on iOS](/assets/img/blog/react-native-app-auth/ios-id-token.png)
+Run `npm run ios` and you should see the claims in the ID token after authorizing with Okta.
+
+{% img blog/react-native-app-auth/ios-id-token.png alt:"ID Token on iOS" width:"500" %}{: .center-image }
 
 ### Call an API with Your Access Token
 
@@ -619,9 +585,7 @@ state = {
 };
 ```
 
-Set it to this same value in the `revoke()` method.
-
-Add a `fetchGoodBeers()` method that uses the access token to call the backend.
+Set it to this same value in the `revoke()` method. Add a `fetchGoodBeers()` method that uses the access token to call the backend.
 
 ```js
 fetchGoodBeers = async () => {
@@ -659,7 +623,7 @@ Modify the row where you display the ID token to show the JSON from the API.
 
 In iOS Simulator, press **Command + R** (on Mac, **CTRL + R** on others)to reload everything and you should see the JSON when you click on the **Good Beers** button. You can reload in Android using **Command + M** (on Mac, **CTRL + M** on other operating systems).
 
-| ![Good Beers on iOS](/assets/img/blog/react-native-app-auth/good-beers-ios.png) | ![Good Beers Android](/assets/img/blog/react-native-app-auth/good-beers-android.png) | 
+| {% img blog/react-native-app-auth/good-beers-ios.png alt:"Good Beers on iOS" width:"400" %} | {% img blog/react-native-app-auth/good-beers-android.png alt:"Good Beers on Android" width:"350" %} |
 
 ## Learn More about React Native and React
 
@@ -671,5 +635,7 @@ I hope you've enjoyed this whirlwind tour of how to do authentication with Okta 
  If you're interested in seeing how to do regular React development with Okta, I encourage you to check out the following resources.
  
  * [Build a React Application with User Authentication in 15 Minutes](https://developer.okta.com/blog/2017/03/30/react-okta-sign-in-widget)
- * [Build a Preact App with Authentication]()https://developer.okta.com/blog/2017/10/19/build-a-preact-app-with-authentication)
+ * [Build a Preact App with Authentication](https://developer.okta.com/blog/2017/10/19/build-a-preact-app-with-authentication)
  * [Bootiful Development with Spring Boot and React](https://developer.okta.com/blog/2017/12/06/bootiful-development-with-spring-boot-and-react)
+ 
+ If you have any questions about this article, please hit me up on Twitter [@mraible](https://twitter.com/mraible).
