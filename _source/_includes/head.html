@@ -39,6 +39,7 @@
    {% endif %}
 
   <link type="text/css" rel="stylesheet" href="{{ site.external_domain }}/sites/all/themes/developer/css/master.css" media="all" />
+  <meta class="swiftype" name="title" data-type="string" content="{% if page.meta_title %}{{ page.meta_title }}{% elsif page.title %}{{ page.title }} | {{ site.title }}{% else %}{{ site.title }}{% endif %}">
   <meta class="swiftype" name="summary" data-type="string" content="{% if page.description %}{{ page.description | strip_html | strip_newlines | truncate: 300 }}{% elsif page.excerpt %}{{ page.excerpt | strip_html | strip_newlines | truncate 300 }}{% else %}{{ site.description }}{% endif %}" />
 
   {% css animate %}
