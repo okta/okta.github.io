@@ -29,18 +29,18 @@
       })(window,document,'script','dataLayer','GTM-TJ45R6');
       // END Google Tag Manager
     }
-	</script>
+  </script>
   <meta charset="utf-8">
   <meta http-equiv="x-ua-compatible" content="IE=edge,chrome=1">
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
- 	{% if page.sitemap.exclude == "yes" %}
- 		<meta name="robots" content="noindex,nofollow">
- 	{% endif %}
+   {% if page.sitemap.exclude == "yes" %}
+     <meta name="robots" content="noindex,nofollow">
+   {% endif %}
 
   <link type="text/css" rel="stylesheet" href="{{ site.external_domain }}/sites/all/themes/developer/css/master.css" media="all" />
-  <meta class="swiftype" name="title" data-type="string" content="{% if page.meta_title %}{{ page.meta_title }}{% elsif page.title %}{{ page.title }} | {{ site.title }}{% else %}{{ site.title }}{% endif %}" />
-  <meta class="swiftype" name="summary" data-type="string" content="{% if page.excerpt %}{{ page.excerpt | strip_html | strip_newlines | truncate: 160 }}{% else %}{{ site.description }}{% endif %}" />
+  <meta class="swiftype" name="title" data-type="string" content="{% if page.meta_title %}{{ page.meta_title }}{% elsif page.title %}{{ page.title }} | {{ site.title }}{% else %}{{ site.title }}{% endif %}">
+  <meta class="swiftype" name="summary" data-type="string" content="{% if page.description %}{{ page.description | strip_html | strip_newlines | truncate: 300 }}{% elsif page.excerpt %}{{ page.excerpt | strip_html | strip_newlines | truncate 300 }}{% else %}{{ site.description }}{% endif %}" />
 
   {% css animate %}
   {% css okta %}
@@ -51,8 +51,7 @@
     {% css '{{layout.css}}' %}
   {% endif %}
   <title>{% if page.meta_title %}{{ page.meta_title }}{% elsif page.title %}{{ page.title }} | {{ site.title }}{% else %}{{ site.title }}{% endif %}</title>
-  <meta name="description" content="{% if page.excerpt %}{{ page.excerpt | strip_html | strip_newlines | truncate: 160 }}{% else %}{{ site.description }}{% endif %}">
-  <link rel="canonical" href="{{ page.url | replace:'/index.html','/' | prepend: site.baseurl | prepend: site.url }}"  data-proofer-ignore>
+  <meta name="description" content="{% if page.description %}{{ page.description | strip_html | strip_newlines | truncate: 300 }}{% elsif page.excerpt %}{{ page.excerpt | strip_html | strip_newlines | truncate 300 }}{% else %}{{ site.description }}{% endif %}">
   <link rel="alternate" type="application/rss+xml" title="{{ site.title }}" href="{{ "/feed.xml" | prepend: site.baseurl | prepend: site.url }}"><!-- GA -->
   <link rel="apple-touch-icon" sizes="180x180" href="/assets/favicon/apple-touch-icon.png">
   <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon/favicon-32x32.png">
