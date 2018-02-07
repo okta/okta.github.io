@@ -15,21 +15,11 @@ Note that clients managed via this API are modeled as applications in Okta and a
 Administrator dashboard. Changes made via the API appear in the UI and vice versa. Tokens issued by these clients
 follow the rules for Access Tokens and ID Tokens.
 
-> This API is an {% api_lifecycle ea%} feature.
-
-Explore the Client Registration API: [![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/291ba43cde74844dd4a7){:target="_blank"}
-
 ## Getting Started
 
-If you are new to OAuth 2.0 or OpenID Connect, read this topic before experimenting with the Postman collection. If you are familiar with the
-flows defined by [the OAuth 2.0 spec](http://oauth.net/documentation) or [OpenID Connect spec](http://openid.net/specs/openid-connect-core-1_0.html), you may want to experiment with the Postman collection first:
-
-[![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/291ba43cde74844dd4a7)
-
+Explore the Client Application API: [![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/291ba43cde74844dd4a7)
 
 ## Client Application Operations
-
-Explore the Client Application API: [![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/7a7f9956c58e49996dc8)
 
 ### Register New Client
 {:.api .api-operation}

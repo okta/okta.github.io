@@ -20,7 +20,7 @@ There are several use cases and Okta product features built on top of the OAuth 
 
 * Social Authentication -- {% api_lifecycle ea %}
 * OpenID Connect
-* API Access Management -- {% api_lifecycle ea %}
+* API Access Management
 
 It&#8217;s important to understand which use case you are targeting and build your application according to the correct patterns for that use case.
 The OAuth 2.0 APIs each have several different [query params](/docs/api/resources/oauth2#obtain-an-authorization-grant-from-a-user) which dictate which type of flow you are using and the mechanics of that flow.

@@ -5,8 +5,6 @@ title: API Access Management Troubleshooting
 
 # Troubleshooting for API Access Management
 
-> API Access Management is {% api_lifecycle ea %}.
-
 If you run into trouble setting up an authorization server or performing
 other tasks for API Access Management, use the following suggestions to resolve your issues.
 
