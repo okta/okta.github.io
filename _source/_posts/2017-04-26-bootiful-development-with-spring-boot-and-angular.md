@@ -204,7 +204,7 @@ To create an Angular project, make sure you have [Node.js](https://nodejs.org/) 
 npm install -g @angular/cli@1.6.7
 ```
 
-From a terminal window, cd into the root of the `spring-boot-angular-example` directory and run the following command.
+From a terminal window, cd into the root of the `spring-boot-angular-example` directory and run the following command:
 
 ```bash
 ng new client
