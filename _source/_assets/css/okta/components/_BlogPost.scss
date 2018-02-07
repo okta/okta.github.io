@@ -165,21 +165,19 @@
 			border-bottom: 0;
 		}
 
+		/* Same as what docs uses (in _PageContent.scss) */
 		blockquote {
-			@include margin(large auto);
-			@include padding(large);
-			background: #ECF2F6;
-			border-left: 18px solid #115D8B;
-			font-style: normal;
-			max-width: 800px;
-
+			margin: 24px 24px;
+			border-left: 8px solid #00659d;
+			background: #DEEEF6;
+			padding: 24px;
+			font-size: 1em;
 			p {
-				font-size: 24px;
-				line-height: 40px;
-			}
-
-			cite {
-				font-size: 20px;
+				color: get-color('black');
+				font-size: 1em;
+				&:last-child {
+					margin-bottom: 0;
+				}
 			}
 		}
 

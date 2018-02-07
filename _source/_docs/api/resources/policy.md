@@ -86,7 +86,7 @@ Included as embedded objects, one or more <a href="#rules">Policy Rules</a>.
 
 #### Request Parameters
 
-The policy ID described in the [Policy Object](#PolicyObject) is required.
+The policy type described in the [Policy Object](#PolicyObject) is required.
 
 ##### Request Example
 {:.api .api-request .api-request-example}
@@ -518,6 +518,8 @@ Different policy types control settings for different operations.  All policy ty
 
 <a href="#GroupPasswordPolicy">Password Policy</a>
 
+[OAuth Authorization Policy](/docs/api/resources/oauth2#policies-object)
+
 ### Policy Priority and Defaults
 
 ### Default Policies
@@ -603,10 +605,10 @@ The Policy model defines several attributes:
 Parameter | Description | Data Type | Required | Default
 | --- | --- | --- | ---
 id | Identifier of the policy | String | No | Assigned
-type | Policy type | Specifies the type of the policy, e.g. `OKTA_SIGN_ON` or `MFA_ENROLL` | Yes |
+type | Specifies the [type of policy](#policy-types). Valid values: `OKTA_SIGN_ON`, `PASSWORD`, `MFA_ENROLL`, `OAUTH_AUTHORIZATION_POLICY` | String | Yes |
 name | Name of the policy | String | Yes |
-system | This is set to 'true' on system policies, which cannot be deleted. | Boolean | No | false
-description | Description of the policy | String | No | Null
+system | This is set to `true` on system policies, which cannot be deleted. | String | No | `false`
+description | Description of the policy. | String | No | Null
 priority | Priority of the policy | Int | No | Last / Lowest Priority
 status | Status of the policy: ACTIVE or INACTIVE | String | No | "ACTIVE"
 conditions | Conditions for policy | <a href="#PolicyConditionsObject">Conditions Object</a> | No |
@@ -727,8 +729,8 @@ The Rules model defines several attributes:
 Parameter | Description | Data Type | Required | Default
 | --- | --- | --- | ---
 id | Identifier of the rule | String | No | Assigned
-type | Rule type | `OKTA_SIGN_ON` or `PASSWORD` or `MFA_ENROLL` | Yes |
-status | Status of the rule: `ACTIVE` or `INACTIVE` | String | No | ACTIVE
+type | Rule type. Valid values: `OKTA_SIGN_ON` or `PASSWORD` or `MFA_ENROLL` | String (Enum) | Yes |
+status | Status of the rule: `ACTIVE` or `INACTIVE` | String (Enum) | No | ACTIVE
 priority | Priority of the rule | Integer | No | Last / Lowest Priority
 system | This is set to 'true' on system rules, which cannot be deleted. | Boolean | No | false
 created | Timestamp when the rule was created | Date | No | Assigned

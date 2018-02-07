@@ -57,11 +57,11 @@ You'll need to make sure the `ASPNETCORE_ENVIRONMENT` variable is set on your ma
 
 In Visual Studio Code, you can open the Integrated Terminal from the View menu to run the above commands.
 
-Now you're ready to run the app for the first time! Execute `dotnet run` in the terminal. After the app compiles, it should report that it's running on localhost:5000.
+Now you're ready to run the app for the first time! Execute `dotnet run` in the terminal. After the app compiles, it should report that it's running on `localhost:5000`.
 
 {% img blog/build-secure-todo-app-vuejs-aspnetcore/dotnet-run-localhost.png alt:"Execute dotnet run in terminal" width:"800" %}{: .center-image }
 
-Open up a browser and navigate to [http://localhost:5000](http://localhost:5000):
+Open up a browser and navigate to `http://localhost:5000`:
 
 {% img blog/build-secure-todo-app-vuejs-aspnetcore/vue-starter.png alt:"Vue.js starter template app" width:"800" %}{: .center-image }
 
@@ -509,7 +509,7 @@ Most of these actions are marked with `// Todo` (no pun intended), because you'l
 * Require authentication on the backend API
 * Store each user's to-do items securely
 
-To get started, sign up for a free [Okta Developer account](https://developer.okta.com/signup). After you activate your new account (called an Okta organization, or org), click Applications at the top of the screen. Choose Single-Page App and click Next. Change the base URI to `http://localhost:5000`, and the login redirect URI to `http://localhost:5000/implicit/callback`:
+To get started, sign up for a free [Okta Developer account](https://developer.okta.com/signup/). After you activate your new account (called an Okta organization, or org), click Applications at the top of the screen. Choose Single-Page App and click Next. Change the base URI to `http://localhost:5000`, and the login redirect URI to `http://localhost:5000/implicit/callback`:
 
 {% img blog/build-secure-todo-app-vuejs-aspnetcore/okta-app-settings.png alt:"Okta application settings" width:"700" %}{: .center-image }
 
@@ -788,7 +788,7 @@ async getAllTodos({ commit }, data) {
 
 The new action code uses the [axios library](https://github.com/axios/axios) to make a request to the backend on the `/api/todo` route, which will be handled by the `GetAllTodos` method on the backend `TodoController`. If data is returned, the `loadTodos` mutation is committed and the Vuex store is updated with the user's to-do items. The Dashboard view will automatically see the updated data in the store and render the items in the browser.
 
-Ready to test it out? Run the project with `dotnet run` and browse to http://localhost:5000: 
+Ready to test it out? Run the project with `dotnet run` and browse to `http://localhost:5000`: 
 
 {% img blog/build-secure-todo-app-vuejs-aspnetcore/logged-in-fake-items-via-backend.png alt:"Retrieved fake items from the backend API" width:"500" %}{: .center-image }
 

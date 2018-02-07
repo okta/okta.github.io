@@ -78,7 +78,7 @@ deactivate         | Denies use of this factor for MFA
 
 {% api_operation get /api/v1/org/factors %}
 
-Fetches a factor for the specified user.
+Lists factors in your organization
 
 #### Request Parameters
 {:.api .api-request .api-request-params}

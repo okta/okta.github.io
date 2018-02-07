@@ -33,7 +33,7 @@ github_edit_url: "https://github.com/okta/okta.github.io/edit/source/_source/"
 get_started_url: "https://developer.okta.com/signup/"
 stack_overflow_forum_url: "http://stackoverflow.com/search?q=okta"
 
-timezone: UTC
+timezone: EST
 ga_ua_id: "UA-15777010-3"
 
 # This is different from "url"
@@ -110,7 +110,7 @@ sitemap_ignore:
 versions:
   jwt_validator_java: 0.2.0
   spring_boot_starter: 0.2.0
-  okta_signin_widget: 2.5.0
+  okta_signin_widget: 2.6.0
 
 signup_error_email_address: "BD-ISV@okta.com"
 

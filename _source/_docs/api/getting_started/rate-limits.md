@@ -3,7 +3,7 @@ layout: docs_page
 title: Rate Limiting at Okta
 weight: 3
 redirect_from:
-  - "/docs/getting_started/design_principles.html#rate-limiting"
+  - "/docs/getting_started/design_principles#rate-limiting"
 excerpt: Understand rate limits at Okta and learn how to design for efficient use of resources
 ---
 

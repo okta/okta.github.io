@@ -147,21 +147,59 @@ For more information on these codes, see the [ISO 3166-1 online lookup tool](htt
 
 ### Group Functions
 
-Function  | Return Type | Example | Output
---------- | ----------- | ------- | -------
-`isMemberOfGroupName` | Boolean | `isMemberOfGroupName("group1")` | **True**, if the user under consideration is a member of *group1'; otherwise, **False**.
-`isMemberOfGroup` | Boolean | `isMemberOfGroup("groupId")` | **True**, if the user under consideration is a member of group with id *groupId*; otherwise,  **False**.
-`isMemberOfAnyGroup` | Boolean | `isMemberOfAnyGroup("groupId1", "groupId2", "groupId3")` | **True**, if the user under consideration is a member of any groups with ids *groupId1*, *groupId2* or *groupId3*; otherwise **False**.
-`isMemberOfGroupNameStartsWith` | Boolean | `isMemberOfGroupNameStartsWith("San Fr")` | **True**, if the user under consideration is a member of any groups with names that starts with *San Fr*; otherwise,  **False**.
-`isMemberOfGroupNameContains` | Boolean | `isMemberOfGroupNameContains("admin")` | **True**, if the user under consideration is a member of any groups with names that contains *admin*; otherwise,  **False**.
-`isMemberOfGroupNameRegex` | Boolean | `isMemberOfGroupNameRegex("/.*admin.*")` | **True**, if the user under consideration is a member of any groups with names that contain *admin*; otherwise,  **False**.
-`getFilteredGroups` | Array | `getFilteredGroups({"00gml2xHE3RYRx7cM0g3"}, "group.name", 40)` | Array of groups
+Group functions return either an array of groups or **True** or **False**.
 
-##### getFilteredGroups Details
+Function  | Return Type | Example |
+--------- | ----------- | ------- | -------
+`getFilteredGroups` | Array | `getFilteredGroups({"00gml2xHE3RYRx7cM0g3"}, "group.name", 40)` |
+`Groups.contains` | Array | `contains(app_type/app_instance_id, pattern, limit)` |
+`Groups.startsWith` | Array | `startsWith(app_type/app_instance_id, pattern, limit)` |
+`Groups.endsWith` | Array | `endsWith(app_type/app_instance_id, pattern, limit)` |
+`isMemberOfGroupName` | Boolean | `isMemberOfGroupName("group1")` |
+`isMemberOfGroup` | Boolean | `isMemberOfGroup("groupId")` |
+`isMemberOfAnyGroup` | Boolean | `isMemberOfAnyGroup("groupId1", "groupId2", "groupId3")` |
+`isMemberOfGroupNameStartsWith` | Boolean | `isMemberOfGroupNameStartsWith("San Fr")` |
+`isMemberOfGroupNameContains` | Boolean | `isMemberOfGroupNameContains("admin")` |
+`isMemberOfGroupNameRegex` | Boolean | `isMemberOfGroupNameRegex("/.*admin.*")` |
+
+##### Using Group Functions for Dynamic Group Whitelists
+Three Group functions help you use dynamic group whitelists:  `contains`, `startsWith`, and `endsWith`.
+
+These functions return all the groups that match the specified criteria. Use this function to get a list of groups that include the current user is as a member.
+
+You can use this function anywhere to get a list of groups of which the current user is a member, including both user groups and app groups that originate from sources outside Okta, such as from Active Directory and Workday. Additionally, you can use this combined, custom-formatted list for customizable claims into Access and ID Tokens that drive authorization flows. All three functions have the same parameters:
+
+| Parameter | Description | Nullable | Example Values |
+| :------------- | :-------------- | :---------- | :--------------------- |
+| app | Application type or App ID | FALSE | `"OKTA"`, `"0oa13c5hnZFqZsoS00g4"`, `"active_directory"` |
+| pattern | Search term | FALSE | `"Eastern-Region"`, `"Eastern"`, `"-Region"` |
+| limit | Maximum number of groups returned. Must be a valid EL expression and evaluate to a value from 1 to 100. | FALSE | `1`, `50`, `100` |
+
+To use these functions to create a token using a dynamic group whitelist, create a Groups claim on an app:
+
+1. In the Okta user interface, navigate to the Sign On tab of the client application you are configuring, and click  **Edit** in the Open ID Connect ID Token section.
+
+2. In **Groups claim type**, choose **Expression**.
+
+3. In **Group claims filter**, leave the default name **groups** or change it if you wish.
+
+4. In Groups claim expression, add one of the three functions with the criteria for your dynamic group whitelist:
+
+    `Groups.startsWith("active.directory", "myGroup", 10)`
+
+  Notes:
+  * The syntax for these three functions is different from `getFilteredGroups`.
+  * You can also create a claim directly in a Custom Authorization Server instead of on the OpenID Connect or OAuth 2.0 app.
+
+
+
+##### Using Groups Functions for Static Group Whitelists
+
+The `getFilteredGroups` group function helps you use a static group whitelist.
 
 `getFilteredGroups` returns all groups contained in a specified list, the whitelist, of which the user is a member. The groups are returned in a format specified by the `group_expression` parameter. You must specify the maximum number of groups to return. The format of this EL function is `getFilteredGroups( whitelist, group_expression, limit)`.
 
-You can use this function anywhere to get a list of groups of which the current user is a member, incuding both user groups and app groups that originate from sources outside Okta, such as from Active Directory and Workday. Additionally, you can use this combined, custom-formatted list for customizable claims into Access and ID Tokens that drive authorization flows.
+You can use this function anywhere to get a list of groups of which the current user is a member, including both user groups and app groups that originate from sources outside Okta, such as from Active Directory and Workday. Additionally, you can use this combined, custom-formatted list for customizable claims into Access and ID Tokens that drive authorization flows.
 
 This function takes Okta EL expressions for all parameters that evaluate to the correct data type. With these expressions you can create complex definitions for the whitelist, the group format, and for the number of groups to return that can include `if` logic and customized formatting.
 
@@ -179,16 +217,18 @@ The `whitelist` parameter must evaluate to a list of group ids that is returned 
 
 **Parameter Examples**
 
-* whitelist<br />
-  Array: `{"00gn335BVurvavwEEL0g3", "00gnfg5BVurvavAAEL0g3"}`<br />
-  Array variable: `app.profile.groups.whitelist`
-* group_expression<br />
-  Attribute name: `"group.id"`<br />
-  Okta EL string containing an if condition: `"(group.objectClass[0] == 'okta:windows_security_principal') ? 'AD: ' + group.profile.windowsDomainQualifiedName : 'Okta: ' + group.name"`<br /><br />If *okta:windows_security_principal* is true for
-  a group, the function returns the `windowsDomainQualifiedName` prefixed with `AD:`; otherwise, the function returns the group name prefixed with `Okta:`.
-* limit<br />
-   Integer between 1 and 100, inclusive; for example: `50`.<br />
-   Okta EL expression containing a condition that evaluates to an integer: `app.profile.maxLimit < 100 ? app.profile.maxLimit : 100`.<br /><br /> If the maximum group limit in the profile is less than 100, return that number of groups; otherwise, return a maximum of 100 groups. `Note:` If there are more groups returned than the specified limit, an error is returned.
+* whitelist
+  * Array: `{"00gn335BVurvavwEEL0g3", "00gnfg5BVurvavAAEL0g3"}`<br />
+  * Array variable: `app.profile.groups.whitelist`
+* group_expression
+  * Attribute name: `"group.id"`
+  * Okta EL string containing an if condition: `"(group.objectClass[0] == 'okta:windows_security_principal') ? 'AD: ' + group.profile.windowsDomainQualifiedName : 'Okta: ' + group.name"`
+      If *okta:windows_security_principal* is true for
+      a group, the function returns the `windowsDomainQualifiedName` prefixed with `AD:`; otherwise, the function returns the group name prefixed with `Okta:`.
+* limit
+   * Integer between 1 and 100, inclusive; for example: `50`.
+   * Okta EL expression containing a condition that evaluates to an integer: `app.profile.maxLimit < 100 ? app.profile.maxLimit : 100`.
+    If the maximum group limit in the profile is less than 100, return that number of groups; otherwise, return a maximum of 100 groups. If there are more groups returned than the specified limit, an error is returned.
 
 ### Time Functions
 

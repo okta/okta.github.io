@@ -32,3 +32,6 @@ git commit -m "Deploy site for ${CURRENT_HASH}"
 # add the remote
 git remote add ${REMOTE_NAME} ${REMOTE_URL}
 git push ${REMOTE_NAME} ${TARGET_BRANCH}
+
+# Trigger Runscope tests 
+curl -I -X GET "https://api.runscope.com/radar/bucket/$RUNSCOPE_TRIGGER_ID/trigger?base_url=$PROD_BASE_URL_RUNSCOPE"

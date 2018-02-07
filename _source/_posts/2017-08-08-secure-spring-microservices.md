@@ -32,16 +32,16 @@ git clone https://github.com/oktadeveloper/spring-boot-microservices-example.git
 * In the developer console, navigate to **Applications** > **Add Application**
 * Click **Native** and **Next**
 * On the next page, enter the following values and click **Done**
-** Application Name: `My Test App`
-** Login redirect URIs: `http://localhost:8080/client/callback`
+  * Application Name: `My Test App`
+  * Login redirect URIs: `http://localhost:8080/client/callback`
 
 After your application has been created, you still have a few settings you need to change:
 
 * On the **General** tab, click **Edit** on the *General Settings* panel
 * Select **Refresh Token** and **Resource Owner Password** and click **Save**
 * Click **Edit** on the *Client Credentials* panel
-** Select **Use Client Authentication** and click **Save**
-** Copy and save the Client ID for your application
+  * Select **Use Client Authentication** and click **Save**
+  * Copy and save the Client ID for your application
 
 At this point, your application's settings should look as follows:
 
