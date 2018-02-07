@@ -210,7 +210,7 @@ From a terminal window, cd into the root of the `spring-boot-angular-example` di
 ng new client
 ```
 
-This will create a new `client` directory and run `npm install` to install all the necessary dependencies. To verify everything works, cd into the `client` directory and run `ng e2e`. If everything works, you should see output like the following in your terminal.
+This will create a new `client` directory and run `npm install` to install all the necessary dependencies. To verify everything works, cd into the `client` directory and run `ng e2e`. If everything works, you should see output like the following in your terminal:
 
 ```bash
 [10:30:59] I/launcher - Running 1 instances of WebDriver
