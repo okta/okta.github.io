@@ -2,6 +2,7 @@
 layout: blog_post
 title: 'Why JWTs Suck as Session Tokens'
 author: rdegges
+description: "Learn why you should never use JSON web tokens as session tokens (either in cookies or HTML local storage)."
 tags: [security, jwt, token, authentication, sessions]
 tweets:
     - "@rdegges doesn't like JSON Web Tokens. Do you?"
