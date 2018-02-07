@@ -31,9 +31,10 @@ git clone https://github.com/oktadeveloper/spring-boot-microservices-example.git
 
 ## Create a Web Application in Okta
 
-If you don't have one, [create an Okta Developer account](https://developer.okta.com/signup/). After you've completed the setup process, log in to your account and navigate to **Applications** > **Add Application**. Click **Web** and **Next**. * On the next page, enter the following values and click **Done**.
+If you don't have one, [create an Okta Developer account](https://developer.okta.com/signup/). After you've completed the setup process, log in to your account and navigate to **Applications** > **Add Application**. Click **Web** and **Next**. On the next page, enter the following values and click **Done**.
 
 * Application Name: `Spring OAuth`
+* Base URIs: `http://localhost:8081`
 * Login redirect URIs: `http://localhost:8081/login`
 
 Take note of the clientId and client secret values as you'll need these to configure your Spring Boot apps.
@@ -72,7 +73,6 @@ Open `edge-service/src/main/java/com/example/EdgeServiceApplication.java` and ad
 ```java
 import org.springframework.boot.autoconfigure.security.oauth2.client.EnableOAuth2Sso;
 ...
-
 @EnableOAuth2Sso
 @SpringBootApplication
 public class EdgeServiceApplication {
@@ -94,11 +94,36 @@ security.oauth2.resource.prefer-token-info=false
 
 **TIP:** If you see `{yourOktaDomain}` in the above code snippet, log in to your Okta account and refresh this page. It will replace this value with your domain. 
 
+Add a `ResourceServerConfig.java` class to the same package as `EdgeServiceApplication`.
+
+```java
+package com.example;
+
+import org.springframework.context.annotation.Configuration;
+import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.oauth2.config.annotation.web.configuration.EnableResourceServer;
+import org.springframework.security.oauth2.config.annotation.web.configuration.ResourceServerConfigurerAdapter;
+import org.springframework.security.web.util.matcher.RequestHeaderRequestMatcher;
+
+@Configuration
+@EnableResourceServer
+public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
+
+    @Override
+    public void configure(HttpSecurity http) throws Exception {
+        http
+            .requestMatcher(new RequestHeaderRequestMatcher("Authorization"))
+            .authorizeRequests()
+            .antMatchers("/**").authenticated();
+    }
+}
+```
+
 At this point, you've configured enough to sign-in to your Edge Service application, but it won't be able to communicate with the downstream beer-catalog-service.
 
 ## Add Spring Security OAuth to the Beer Catalog Service
 
-In `beer-catalog-service/pom.xml`, add the same dependencies you added to the Edge Service.
+In `beer-catalog-service/pom.xml`, add the same dependencies you added to the Edge Service, as well as one for Thymleaf.
 
 ```xml
 <dependency>
@@ -112,6 +137,10 @@ In `beer-catalog-service/pom.xml`, add the same dependencies you added to the Ed
 <dependency>
     <groupId>org.springframework.security</groupId>
     <artifactId>spring-security-jwt</artifactId>
+</dependency>
+<dependency>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-starter-thymeleaf</artifactId>
 </dependency>
 ```
 
@@ -289,7 +318,7 @@ public class UserFeignClientInterceptor implements RequestInterceptor {
 }
 ```
 
-Register it as a `@Bean` in `EdgeServiceApplication`.
+Register it as a `@Bean` inside the `EdgeServiceApplication` class.
 
 ```java
 @Bean
@@ -304,17 +333,6 @@ In order to get Hystrix aware of the security context, you need to [add two prop
 feign.hystrix.enabled=true
 hystrix.shareSecurityContext=true
 ```
-
-You'll also need to add [Spring Cloud Security](https://cloud.spring.io/spring-cloud-security/) to `edge-service/pom.xml` in order to relay the access token for the Zuul proxy.
-
-```xml
-<dependency>
-    <groupId>org.springframework.cloud</groupId>
-    <artifactId>spring-cloud-security</artifactId>
-</dependency>
-```
-
-Without this dependency, requests to `/good-beers` will work (because Feign is configured), but `/home` will not (because Zuul needs Spring Cloud Security).
 
 ### Verify Secure Communication
 
@@ -339,43 +357,58 @@ cd edge-service
 ./mvnw spring-boot:run
 ```
 
-Open your browser and navigate to `http://localhost:8081/home`. You should be redirected to your Okta domain and see a login page, prompting for your credentials.
+Open your browser and navigate to `http://localhost:8081/good-beers`. You should be redirected to your Okta domain and see a login page, prompting for your credentials.
 
 {% img blog/microservices-spring-oauth/okta-login.png alt:"Okta Sign-In Form" width:"800" %}{: .center-image }
 
-Enter the credentials you created your account with and you'll see your user details on the next page.
+Enter the credentials you created your account with and you'll see a list of good beers as a result. 
+
+{% img blog/microservices-spring-oauth/good-beers.png alt:"Good Beers" width:"800" %}{: .center-image }
+
+If you try to navigate to `http://localhost:8081/home`, it won't work. This is because you need to add [Spring Cloud Security](https://cloud.spring.io/spring-cloud-security/) to `edge-service/pom.xml` in order to relay the access token for the Zuul proxy.
+
+```xml
+<dependency>
+    <groupId>org.springframework.cloud</groupId>
+    <artifactId>spring-cloud-security</artifactId>
+</dependency>
+```
+
+Without this dependency, requests to `/good-beers` will work (because Feign is configured), but `/home` will not (because Zuul needs Spring Cloud Security).
+
+Restart your Edge Server application, navigate to `http://localhost:8081/home` and you'll see your user details on the next page.
 
 {% img blog/microservices-spring-oauth/user-details.png alt:"Okta User Details" width:"800" %}{: .center-image }
 
 **NOTE:** I was unable to get the logout button to work due to a CSRF error. I tried adding `security.enable-csrf=false` to `application.properties` in the Edge Service app, but it didn't help.
 
-You should also be able to see the list of good beers by hitting `http://localhost:8081/good-beers`. 
-
-{% img blog/microservices-spring-oauth/good-beers.png alt:"Good Beers" width:"800" %}{: .center-image }
-
-? Is this screenshot ^^ necessary?
-
 ## Add Okta's Sign-In Widget to the Client
 
-To use Okta's Sign-In Widget, you'll need to modify your app in Okta to enable an *Implicit* grant type. Log in to your account, navigate to **Applications** > **Spring OAuth** > **General** and click **Edit**. Enable **Implicit (Hybrid)** under **Allowed grant types** and select both checkboxes below it. Add `http://localhost:4200` under **Login redirect URIs** and click **Save**.
+To use Okta's Sign-In Widget, you'll need to modify your app in Okta to enable an *Implicit* grant type. Log in to your account, navigate to **Applications** > **Spring OAuth** > **General** tab and click **Edit**. Enable **Implicit (Hybrid)** under **Allowed grant types** and select both checkboxes below it. Add `http://localhost:4200` under **Login redirect URIs** and click **Save**.
 
-In order for the Sign-In Widget to make requests to this application, you'll also need to configure the client URL as a trusted origin. Click **API** > **Trusted Origin** > **Add Origin**. Enter `http://localhost:4200` as the **Origin URL** and select both checkboxes under it.
+In order for the Sign-In Widget to make requests to this application, you'll also need to configure the client URL as a trusted origin. Click **API** > **Trusted Origins** > **Add Origin**. Enter `http://localhost:4200` as the **Origin URL** and select both checkboxes under it.
+
+Open a terminal, navigate to `spring-boot-microservices-example/client`, and install the client's dependencies using npm.
+
+```bash
+cd client
+npm install
+```
 
 Install [Okta's Sign-In Widget](https://developer.okta.com/code/javascript/okta_sign-in_widget) to make it possible to communicate with the secured server.
 
 ```bash
-cd client
 npm install @okta/okta-signin-widget --save
 ```
 
-Add the widget's CSS to `src/styles.css`:
+Add the widget's CSS to `client/src/styles.css`:
 
 ```css
 @import '~@okta/okta-signin-widget/dist/css/okta-sign-in.min.css';
 @import '~@okta/okta-signin-widget/dist/css/okta-theme.css';
 ```
 
-Create `client/src/app/shared/okta/okta.service.ts` and use it to configure the widget to talk to your Okta instance.
+Create `client/src/app/shared/okta/okta.service.ts` and use it to configure the widget to talk to your Okta tenant. Make sure to replace `{yourOktaDomain}` and `{clientId}` in the code below.
 
 ```typescript
 import { Injectable } from '@angular/core';
@@ -451,7 +484,7 @@ export class BeerService {
 }
 ```
 
-Modify `app.component.html` to add a placeholder for the widget and a section to show the user’s name and a logout button.
+Modify `app.component.html` to add a placeholder for the widget and a section to show the user's name and a logout button.
 
 {% raw %}
 ```html
@@ -474,7 +507,7 @@ Modify `app.component.html` to add a placeholder for the widget and a section to
 ```
 {% endraw %}
 
-You’ll notice the `user` variable in the HTML. To resolve this, you need to change your `src/app/app.component.ts` so it renders the Sign-In Widget. Angular's `ChangeDetectorRef` is used to notify Angular when things have changed and rendering needs to process changed variables.
+You’ll notice the `user` variable in the HTML. To resolve this, you need to change your `client/src/app/app.component.ts` so it renders the Sign-In Widget. Angular's `ChangeDetectorRef` is used to notify Angular when things have changed and rendering needs to process changed variables.
 
 ```typescript
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
@@ -595,7 +628,51 @@ If you want to adjust the style of the form, so it isn't right up against the to
 
 {% img blog/microservices-spring-secure/angular-login-top-margin.png alt:"Angular Login Styled" width:"800" %}{: .center-image }
 
-You should be able to log in, see a welcome message, as well as a logout button.
+You should be able to log in, see a welcome message, as well as a logout button. However, you won't see a beer list because of the following error in your console.
+
+<pre color="red">
+Failed to load http://localhost:8081/good-beers: Response for preflight is invalid (redirect)
+</pre>
+
+This happens because Spring Security doesn't recognize the `@CrossOrigin` annotation on the `/good-beers` endpoint. To fix this, add a `simpleCorsFilter` to `EdgeServiceApplication`.
+
+```java
+import org.springframework.boot.web.servlet.FilterRegistrationBean;
+import org.springframework.core.Ordered;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
+import org.springframework.web.filter.CorsFilter;
+
+import java.util.Collections;
+...
+public class EdgeServiceApplication {
+
+    public static void main(String[] args) {
+        SpringApplication.run(EdgeServiceApplication.class, args);
+    }
+
+    @Bean
+    public RequestInterceptor getUserFeignClientInterceptor() {
+        return new UserFeignClientInterceptor();
+    }
+
+    @Bean
+    public FilterRegistrationBean simpleCorsFilter() {
+        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+        CorsConfiguration config = new CorsConfiguration();
+        config.setAllowCredentials(true);
+        config.setAllowedOrigins(Collections.singletonList("http://localhost:4200"));
+        config.setAllowedMethods(Collections.singletonList("*"));
+        config.setAllowedHeaders(Collections.singletonList("*"));
+        source.registerCorsConfiguration("/**", config);
+        FilterRegistrationBean bean = new FilterRegistrationBean(new CorsFilter(source));
+        bean.setOrder(Ordered.HIGHEST_PRECEDENCE);
+        return bean;
+    }
+}
+```
+
+Restart the Edge Service application and try again. This time you should have great success!
 
 {% img blog/microservices-spring-secure/angular-welcome.png alt:"Angular Welcome" width:"800" %}{: .center-image }
 
@@ -610,7 +687,7 @@ git clone https://github.com/oktadeveloper/spring-boot-microservices-example.git
 git checkout oauth
 ```
 
-If you're interested in learning about the future of Spring Security and OAuth 2.0, see [Next Generation OAuth 2.0 Support with Spring Security](https://spring.io/blog/2018/01/30/next-generation-oauth-2-0-support-with-spring-security) by our good friend [Joe Grandja](https://twitter.com/joe_grandja). 
+If you're interested in learning about the future of Spring Security and OAuth 2.0, see [Next Generation OAuth 2.0 Support with Spring Security](https://spring.io/blog/2018/01/30/next-generation-oauth-2-0-support-with-spring-security) by our good friend [Joe Grandja](https://twitter.com/joe_grandja) of the Spring Security Team. 
 
 Also, JHipster uses this same setup with its [OAuth support](http://www.jhipster.tech/security/#-oauth2-and-openid-connect). I hope to write a post soon that demonstrates how to create a microservices architecture with JHipster and OAuth. In the meantime, you can see how to [Use Ionic for JHipster to Create Mobile Apps with OIDC Authentication](/blog/2018/01/30/jhipster-ionic-with-oidc-authentication).
 
