@@ -1485,10 +1485,10 @@ curl -v -X PUT \
 -H "Accept: application/json" \
 -H "Content-Type: application/json" \
 -H "Authorization: SSWS ${api_token}" \
--d `{
+-d '{
   "description": "Order car",
-  "name": "car:order"
-     }'
+  "name": "car:order",
+  "metadataPublish": "ALL_CLIENTS"
 }' "https://{yourOktaDomain}.com/api/v1/authorizationServers/ausnsopoM6vBRB3PD0g3/scopes/scpanemfdtktNn7w10h7"
 ~~~
 
@@ -2263,7 +2263,8 @@ Token limits:
     "system": false,
     "default": false,
     "displayName": "Saml Jackson",
-    "consent": "REQUIRED"
+    "consent": "REQUIRED",
+    "metadataPublish": "ALL_CLIENTS"
   }
 ]
 ~~~
@@ -2280,6 +2281,7 @@ Token limits:
 | metadataPublish        | Whether or not this custom scope is published in `/oauth2/:authServerId/.well-known/openid-configuration` Valid values: `ALL_CLIENT` or `NO_CLIENTS`  | String | `NO_CLIENTS` | FALSE |
 | displayName {% api_lifecycle beta %} | Name of the end user displayed in a consent dialog                                                | String  |            | FALSE                         |
 | consent {% api_lifecycle beta %}     | Indicates whether a consent dialog is needed for the scope. Valid values: `REQUIRED`, `IMPLICIT`. | Enum    | `IMPLICIT` | FALSE                         |
+| metadataPublish                      | Whether or not the scope should be included in the metadata. Valid values: `NO_CLIENTS`, `ALL_CLIENTS` | Enum    | `NO_CLIENTS` | TRUE except for create        |
 
 * {% api_lifecycle beta %} A consent dialog is displayed depending on the values of three elements:
     * `prompt`, a query parameter used in requests to [`/oauth2/:authorizationServerId/v1/authorize`](/docs/api/resources/oauth2#obtain-an-authorization-grant-from-a-user)(custom authorization server) or [`/oauth2/v1/authorize`](/docs/api/resources/oidc#authentication-request) (Org authorization server)
