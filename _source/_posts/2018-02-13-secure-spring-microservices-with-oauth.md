@@ -1,6 +1,6 @@
 ---
 layout: blog_post
-title: "Secure a Spring Microservices Architecture with Spring Security OAuth"
+title: "Secure a Spring Microservices Architecture with Spring Security and OAuth"
 author: mraible
 description: "This article shows you how to secure a Spring microservices architecture with Spring Security and OAuth. No Okta SDKs required!"
 tags: [spring, spring boot, microservices, oauth, spring security, java]
@@ -668,7 +668,7 @@ public class EdgeServiceApplication {
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         CorsConfiguration config = new CorsConfiguration();
         config.setAllowCredentials(true);
-        config.setAllowedOrigins(Collections.singletonList("http://localhost:4200"));
+        config.setAllowedOrigins(Collections.singletonList("*"));
         config.setAllowedMethods(Collections.singletonList("*"));
         config.setAllowedHeaders(Collections.singletonList("*"));
         source.registerCorsConfiguration("/**", config);
