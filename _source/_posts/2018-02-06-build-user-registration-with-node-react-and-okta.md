@@ -647,7 +647,7 @@ Even though the site still needs some serious style love, you will now be able t
 
 If you want to learn more about the technologies used in this articles, you can check out the documentation for:
 * Okta's [Node SDK](https://developer.okta.com/okta-sdk-nodejs/jsdocs/index.html) 
-* Okta’s [React SDK](https://developer.okta.com/code/react).
+* Okta’s [React SDK](https://developer.okta.com/code/react/).
 
 Also, check out other articles using Okta for authentication:
 * Randall Degges’s article on Okta in a [Simple Node Website](https://developer.okta.com/blog/2017/10/19/use-openid-connect-to-build-a-simple-node-website)

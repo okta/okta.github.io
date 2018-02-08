@@ -5,8 +5,6 @@ weight: 4
 ---
 # OAuth 2.0 API
 
-{% api_lifecycle ea %}
-
 Okta is a standards-compliant [OAuth 2.0](http://oauth.net/documentation) authorization server and a certified [OpenID Provider](http://openid.net/certification).
 
 The OAuth 2.0 API provides API security via scoped access tokens, and OpenID Connect provides user authentication and an SSO layer which is lighter and easier to use than SAML.

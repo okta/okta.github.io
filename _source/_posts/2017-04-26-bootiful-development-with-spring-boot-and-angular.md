@@ -2,7 +2,11 @@
 layout: blog_post
 title: Bootiful Development with Spring Boot and Angular
 author: mraible
+description: "This tutorial shows you how to develop a Spring Boot API and an Angular front-end that displays data from it."
 tags: [spring-boot, start.spring.io, java, angular, typescript, angular-cli]
+tweets: 
+  - "Want to see how to develop a Spring Boot API and and Angular 5 UI that talks to it? We have a tutorial for that! "
+  - "Bootiful Development with Spring Boot and Angular: two beautiful frameworks, working together in harmony ❤️ "
 ---
 
 To simplify development and deployment, you want everything in the same artifact, so you put your Angular app "inside" your Spring Boot app, right? But what if you could create your Angular app as a standalone app and make cross-origin requests to your API? Hey guess what, you can do both!
@@ -36,9 +40,9 @@ http https://start.spring.io/starter.zip \
 dependencies==devtools,h2,data-jpa,data-rest,web -d
 </pre>
 
-Create a directory called `spring-boot-angular-example`, with a `server` directory inside it. Expand the contents of `demo.zip` into the `server` directory.
+Create a directory called `spring-boot-angular-example` and expand the contents of `demo.zip` inside it. Rename the `demo` directory to `server` and delete `demo.zip`.
 
-Open the “server" project in your favorite IDE and run `DemoApplication` or start it from the command line using `./mvnw spring-boot:run`.
+Open the `server` project in your favorite IDE and run `DemoApplication` or start it from the command line using `./mvnw spring-boot:run`.
 
 Create a `com.example.demo.beer` package and a `Beer.java` file in it. This will be the entity that holds your data.
 
@@ -154,8 +158,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Collection;
-import java.util.HashMap;
-import java.util.Map;
 import java.util.stream.Collectors;
 
 @RestController
@@ -199,31 +201,29 @@ It’s cool that you created an API to display a list of beers, but APIs aren’
 To create an Angular project, make sure you have [Node.js](https://nodejs.org/) and the latest [Angular CLI installed](https://github.com/angular/angular-cli#updating-angular-cli).
 
 ```bash
-npm install -g @angular/cli@latest
+npm install -g @angular/cli@1.6.7
 ```
 
-Run `ng --version` to confirm you’re using version 1.0.0 (or later). From a terminal window, cd into the root of the `spring-boot-angular-example` directory and run the following command.
+From a terminal window, cd into the root of the `spring-boot-angular-example` directory and run the following command:
 
 ```bash
 ng new client
 ```
 
-This will create a new `client` directory and run `npm install` to install all the necessary dependencies. To verify everything works, run `ng e2e` in a terminal window. If everything works, you should see output like the following in your terminal.
+This will create a new `client` directory and run `npm install` to install all the necessary dependencies. To verify everything works, cd into the `client` directory and run `ng e2e`. If everything works, you should see output like the following in your terminal:
 
 ```bash
-[10:02:13] I/launcher - Running 1 instances of WebDriver
-[10:02:13] I/direct - Using ChromeDriver directly...
+[10:30:59] I/launcher - Running 1 instances of WebDriver
+[10:30:59] I/direct - Using ChromeDriver directly...
 Jasmine started
 
   client App
     ✓ should display welcome message
 
-Executed 1 of 1 spec SUCCESS in 1 sec.
-[10:02:16] I/launcher - 0 instance(s) of WebDriver still running
-[10:02:16] I/launcher - chrome #01 passed
+Executed 1 of 1 spec SUCCESS in 0.692 sec.
+[10:31:01] I/launcher - 0 instance(s) of WebDriver still running
+[10:31:01] I/launcher - chrome #01 passed
 ```
-
-**TIP:** If you’re just getting started with Angular, you might want to [watch this video of my recent Getting Started with Angular webinar](https://www.youtube.com/watch?v=Jq3szz2KOOs).
 
 If you’d rather not use the command line and have [IntelliJ IDEA](https://www.jetbrains.com/idea/) (or [WebStorm](https://www.jetbrains.com/webstorm/)) installed, you can create a new Static Web Project and select Angular CLI.
 
@@ -239,7 +239,7 @@ $ ng generate component beer-list
   create src/app/beer-list/beer-list.component.html (28 bytes)
   create src/app/beer-list/beer-list.component.spec.ts (643 bytes)
   create src/app/beer-list/beer-list.component.ts (280 bytes)
-  update src/app/app.module.ts (406 bytes)
+  update src/app/app.module.ts (408 bytes)
 ```
 
 **TIP:** There is a `g` alias for `generate` and a `c` alias for `component`, so you can type `ng g c beer-list` too.
@@ -265,7 +265,7 @@ Create a `src/app/shared/index.ts` file and export the `BeerService`. The reason
 export * from './beer/beer.service';
 ```
 
-Modify `beer.service.ts` to call the “good-beers" API service.
+Modify `client/src/app/shared/beer/beer.service.ts` to call the “good-beers" API service.
 
 ```typescript
 import { Injectable } from '@angular/core';
@@ -283,7 +283,7 @@ export class BeerService {
 }
 ```
 
-Open `src/app/app.module.ts` and add `HttpClientModule` as an import.
+Open `client/src/app/app.module.ts` and add `HttpClientModule` as an import.
 
 ```typescript
 import { HttpClientModule } from '@angular/common/http';
@@ -298,7 +298,7 @@ import { HttpClientModule } from '@angular/common/http';
 })
 ```
 
-Modify `beer-list.component.ts` to use the `BeerService` and store the results in a local variable. Notice that you need to add the service as a provider in the `@Component` definition or you will see an error.
+Modify `client/src/app/beer-list/beer-list.component.ts` to use the `BeerService` and store the results in a local variable. Notice that you need to add the service as a provider in the `@Component` definition or you will see an error.
 
 ```typescript
 import { Component, OnInit } from '@angular/core';
@@ -326,7 +326,7 @@ export class BeerListComponent implements OnInit {
 }
 ```
 
-Modify `beer-list.component.html` so it renders the list of beers.
+Modify `client/src/app/beer-list/beer-list.component.html` so it renders the list of beers.
 
 {% raw %}
 ```html
@@ -338,9 +338,14 @@ Modify `beer-list.component.html` so it renders the list of beers.
 ```
 {% endraw %}
 
-Update `app.component.html` to have the `BeerListComponent` rendered when you’re logged in.
+Update `app.component.html` to have the `BeerListComponent` below the title, removing the rest of the HTML.
 
 ```html
+<div style="text-align:center">
+  <h1>
+    Welcome to {{ title }}!
+  </h1>
+</div>
 <app-beer-list></app-beer-list>
 ```
 
@@ -368,7 +373,7 @@ After making these changes, you should be able to see a list of beers from your 
 
 {% img blog/angular-spring-boot/angular-beer-list.png alt:"Beer List in Angular" width:"800" %}{: .center-image }
 
-To make it look a little better, add a [Giphy](http://giphy.com) service to fetch images based on the beer’s name. Create `src/app/shared/giphy/giphy.service.ts` and place the following code inside it.
+To make it look a little better, add a [Giphy](http://giphy.com) service to fetch images based on the beer's name. Create `client/src/app/shared/giphy/giphy.service.ts` and place the following code inside it.
 
 ```typescript
 import { Injectable } from '@angular/core';
@@ -380,7 +385,7 @@ import 'rxjs/add/operator/map';
 export class GiphyService {
 
   // Public beta key: https://github.com/Giphy/GiphyAPI#public-beta-key
-  giphyApi = '//api.giphy.com/v1/gifs/search?api_key=dc6zaTOxFJmzC&q=';
+  giphyApi = '//api.giphy.com/v1/gifs/search?api_key=dc6zaTOxFJmzC&limit=1&q=';
 
   constructor(public http: HttpClient) {
   }
@@ -398,7 +403,7 @@ export class GiphyService {
 }
 ```
 
-Add an export for this class in `src/app/shared/index.ts`.
+Add an export for this class in `client/src/app/shared/index.ts`.
 
 ```typescript
 export * from './beer/beer.service';
@@ -420,8 +425,7 @@ import { BeerService, GiphyService } from '../shared';
 export class BeerListComponent implements OnInit {
   beers: Array<any>;
 
-  constructor(private beerService: BeerService,
-              private giphyService: GiphyService) { }
+  constructor(private beerService: BeerService, private giphyService: GiphyService) { }
 
   ngOnInit() {
     this.beerService.getAll().subscribe(
@@ -471,4 +475,5 @@ You can find the source code associated with this article [on GitHub](https://gi
 
 **Changelog:**
 
+* Feb 7, 2018: Updated to use Spring Boot 1.5.10, Angular 5.2.0, and Angular CLI 1.6.7. See the code changes in the [example app on GitHub](https://github.com/oktadeveloper/spring-boot-microservices-example/pull/6). Changes to this article can be viewed [in this pull request](https://github.com/okta/okta.github.io/pull/1733).
 * Nov 3, 2017: Updated to use Spring Boot 1.5.8, Angular 5.0.0, and Angular CLI 1.5.0. See the code changes in the [example app on GitHub](https://github.com/oktadeveloper/spring-boot-angular-example/pull/5). 
