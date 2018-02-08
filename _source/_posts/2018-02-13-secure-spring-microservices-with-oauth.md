@@ -683,6 +683,16 @@ Restart the Edge Service application and try again. This time you should have gr
 
 {% img blog/microservices-spring-secure/angular-welcome.png alt:"Angular Welcome" width:"800" %}{: .center-image }
 
+### Deploy to Cloud Foundry
+
+To deploy everything on Cloud Foundry with [Pivotal Web Services](http://run.pivotal.io/), you'll need to create an account, download/install the [Cloud Foundry CLI](https://github.com/cloudfoundry/cli#downloads), and sign-in (using `cf login -a api.run.pivotal.io`).
+ 
+There are quite a few steps involved to deploy all the services and the Angular client for production. For that reason, I wrote a [`deploy.sh`](https://github.com/oktadeveloper/spring-boot-microservices-example/blob/oauth/deploy.sh) script that automates everything. 
+
+**NOTE:** After this script finishes, you'll have to add the URL for the client to your Okta app as a **Login redirect URI**. You'll also need to add it as a an origin under **API** > **Trusted Origins**.
+
+**TIP:** If you receive an error stating that you're using too much memory, you may have to upgrade your Cloud Foundry subscription.
+
 ## Learn More about Spring Boot and OAuth
 
 This article showed you how to use Spring Security, OAuth, and Okta secure a microservices architecture. With Zuul, Feign, and Spring Cloud Security, you can ensure your backend services communicate securely. 
