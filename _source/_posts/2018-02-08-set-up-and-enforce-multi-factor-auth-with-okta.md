@@ -2,10 +2,13 @@
 layout: blog_post
 title: 'Set Up and Enforce Multi-Factor Authentication with the Okta API'
 author: dogeared
+description: "If you're building an application that needs multi-factor authentication, using Okta is a great way to shortcut the pain. In this short article you'll see how Okta helps simplify multi-factor authentication for your apps!"
 tags: [security, mfa, multi-factor authentication, authentication, api]
 tweets:
   - "Love APIs & MFA? Watch as @afitnerd walks you through MFA setup with the @Okta API."
   - "@OktaDev <3 APIs. Watch as @afitnerd walks you through MFA setup with the @Okta API."
+redirect_from:
+  - "/blog/2018/02/07/use-okta-api-for-mfa"
 ---
 
 So, you're building a custom app and you need to include support for multi-factor authentication (MFA). Did you know that [Okta's API](https://developer.okta.com/) can support multi-step MFA workflows?
