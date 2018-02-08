@@ -737,6 +737,8 @@ git checkout okta
 
 Learn more about Okta and its APIs at [developer.okta.com](http://developer.okta.com). If you have questions about this tutorial, please hit me up on Twitter [@mraible](https://twitter.com/mraible) or post a question to [Stack Overflow with an “okta” tag](https://stackoverflow.com/questions/tagged/okta).
 
+**Update:** To learn how to lock down this application with Spring Security and OAuth, see [Secure a Spring Microservices Architecture with OAuth](/blog/2017/02/03/security-spring-microservices-with-oauth).
+
 **Changelog:**
 
 * Feb 8, 2018: Updated to use Spring Boot 1.5.10, Angular 5.2.0, and the Okta Sign-In Widget v2.6.0. See the code changes in the [example app on GitHub](https://github.com/oktadeveloper/spring-boot-microservices-example/pull/11). Changes to this article can be viewed [in this pull request](https://github.com/okta/okta.github.io/pull/1741).
