@@ -163,7 +163,7 @@ can help you build your applications and integrations:
 - .NET Framework 4 or below: [ComponentSpace SAML 2.0](http://www.componentspace.com/SAMLv20.aspx) - Paid software, licenses start at $299
 - Java: [OpenSAML](https://wiki.shibboleth.net/confluence/display/OpenSAML/Home)
 - Java/Spring: [Spring Security SAML](/code/java/spring_security_saml)
-- PHP: [SimpleSAMLphp](/code/php//simplesamlphp)
+- PHP: [SimpleSAMLphp](/code/php/simplesamlphp)
 - Python: [PySAML2](/code/python/pysaml2)
 - Ruby: [Ruby-SAML](https://rubygems.org/gems/ruby-saml)
 
