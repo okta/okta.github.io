@@ -1,7 +1,8 @@
 ---
 layout: blog_post
-title: "Secure a Spring Microservices Architecture with OAuth"
+title: "Secure a Spring Microservices Architecture with Spring Security OAuth"
 author: mraible
+description: "This article shows you how to secure a Spring microservices architecture with Spring Security and OAuth. No Okta SDKs required!"
 tags: [spring, spring boot, microservices, oauth, spring security, java]
 tweets:
 - "Did you know you can secure your @springboot microservices using OAuth and Okta? → "
@@ -97,7 +98,7 @@ security.oauth2.resource.prefer-token-info=false
 Add a `ResourceServerConfig.java` class to the same package as `EdgeServiceApplication`.
 
 ```java
-package com.example;
+package com.example.edgeservice;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -160,10 +161,10 @@ security.oauth2.resource.prefer-token-info=false
 
 **TIP:** An alternative to adding these properties is to use environment variables. For example, `SECURITY_OAUTH2_CLIENT_CLIENT_ID` would be the environment variable to specify `security.oauth2.client.client-id`. Using environment variables would allow you to change the settings for both apps from one location.
 
-Create a `HomeController` in `beer-catalog-service/src/main/java/com/example/HomeController.java` to render the user's information so you can verify authentication is working.
+Create a `HomeController` in `beer-catalog-service/src/main/java/com/example/beercatalogservice/HomeController.java` to render the user's information so you can verify authentication is working.
 
 ```java
-package com.example;
+package com.example.beercatalogservice;
 
 import org.springframework.security.oauth2.provider.OAuth2Authentication;
 import org.springframework.stereotype.Controller;
@@ -264,7 +265,7 @@ Create a `home.html` template in `beer-catalog-service/src/main/resources/templa
 Create a `ResourceServerConfig.java` class in the same package as `HomeController`. This class configures Spring Security so it secures all endpoints, except those accessed with an `Authorization` header.
 
 ```java
-package com.example;
+package com.example.beercatalogservice;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -290,7 +291,7 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
 The `@FeignClient` used to talk to `beer-catalog-service` is not aware of the `Authorization` header. To make it aware, create a `UserFeignClientInterceptor` class in the same directory as `EdgeServiceApplication`.
 
 ```java
-package com.example;
+package com.example.edgeservice;
 
 import feign.RequestInterceptor;
 import feign.RequestTemplate;
@@ -321,9 +322,18 @@ public class UserFeignClientInterceptor implements RequestInterceptor {
 Register it as a `@Bean` inside the `EdgeServiceApplication` class.
 
 ```java
-@Bean
-public RequestInterceptor getUserFeignClientInterceptor() {
-    return new UserFeignClientInterceptor();
+import feign.RequestInterceptor;
+...
+public class EdgeServiceApplication {
+
+	public static void main(String[] args) {
+		SpringApplication.run(EdgeServiceApplication.class, args);
+	}
+
+    @Bean
+    public RequestInterceptor getUserFeignClientInterceptor() {
+        return new UserFeignClientInterceptor();
+    }
 }
 ```
 
@@ -457,8 +467,7 @@ import { OktaService } from './shared/okta/okta.service';
 export class AppModule { }
 ```
 
-Modify `client/src/app/shared/beer/beer.service.ts` to read the access token and set it in an `Authorization` header when 
-it exists. 
+Modify `client/src/app/shared/beer/beer.service.ts` to read the access token and set it in an `Authorization` header when it exists. 
 
 ```typescript
 import { Injectable } from '@angular/core';
@@ -523,8 +532,7 @@ export class AppComponent implements OnInit {
   user;
   signIn;
 
-  constructor(private oktaService: OktaService,
-              private changeDetectorRef: ChangeDetectorRef) {
+  constructor(private oktaService: OktaService, private changeDetectorRef: ChangeDetectorRef) {
     this.signIn = oktaService.getWidget();
   }
 
@@ -591,8 +599,7 @@ import { BeerService, GiphyService } from '../shared';
 export class BeerListComponent implements OnInit {
   beers: Array<any>;
 
-  constructor(private beerService: BeerService,
-              private giphyService: GiphyService,
+  constructor(private beerService: BeerService, private giphyService: GiphyService,
               private changeDetectorRef: ChangeDetectorRef) { }
 
   ngOnInit() {
