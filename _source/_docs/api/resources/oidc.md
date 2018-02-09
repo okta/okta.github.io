@@ -98,7 +98,7 @@ There are three possible values for this parameter:
   * You must sign the JWT using the app's client secret.
   * The JWT can't be encrypted.
   * Okta supports these signing algorithms: [HS256](https://tools.ietf.org/html/rfc7518#section-5.2.3), [HS384](https://tools.ietf.org/html/rfc7518#section-5.2.4), and [HS512](https://tools.ietf.org/html/rfc7518#section-5.2.5).
-  * We recommend you don't duplicate any request parameters in both the JWT and the query URI itself. However, you can do so with `state`, `nonce`, `code_challenge`, and `code_challenge_method`.
+  * We recommend you don't duplicate any request parameters in both the JWT and the query URI itself. However, you can do so with `state`, `nonce`, `code_challenge`, and `code_challenge_method`. In those cases, the values in the query URI will override the JWT values.
   * Okta validates the `request` parameter in the following ways:
     1. `iss` is required and must  be the `client_id`.
     2. `aud` is required and must be same value as the authorization server issuer that mints the ID or access token. This value is published in the metadata for your authorization server.
@@ -108,15 +108,16 @@ There are three possible values for this parameter:
 `response_mode`:
 
 Each value for `response_mode` delivers different behavior:
-    * `fragment` -- Parameters are encoded in the URL fragment added to the `redirect_uri` when redirecting back to the client.
-    * `query` -- Parameters are encoded in the query string added to the `redirect_uri` when redirecting back to the client.
-    * `form_post` -- Parameters are encoded as HTML form values (`application/x-www-form-urlencoded` format) and are transmitted via the HTTP POST method to the client.
-    * `okta_post_message` -- Uses [HTML5 Web Messaging](https://developer.mozilla.org/en-US/docs/Web/API/Window/postMessage) (for example, window.postMessage()) instead of the redirect for the authorization response from the `/authorize` endpoint.
-      `okta_post_message` is an adaptation of the [Web Message Response Mode](https://tools.ietf.org/html/draft-sakimura-oauth-wmrm-00#section-4.1).
-      This value provides a secure way for a single-page application to perform a sign-in flow
-      in a popup window or an iFrame and receive the ID token and/or access token back in the parent page without leaving the context of that page.
-      The data model for the postMessage call is in the next section.
-    * The `Referrer-Policy` header is automatically included in the request for `fragment` or `query`, and is set to `Referrer-Policy: no-referrer`.
+* `fragment` - Parameters are encoded in the URL fragment added to the `redirect_uri` when redirecting back to the client.
+* `query` - Parameters are encoded in the query string added to the `redirect_uri` when redirecting back to the client.
+* `form_post` - Parameters are encoded as HTML form values (`application/x-www-form-urlencoded` format) and are transmitted via the HTTP POST method to the client.
+* `okta_post_message` - Uses [HTML5 Web Messaging](https://developer.mozilla.org/en-US/docs/Web/API/Window/postMessage) (for example, window.postMessage()) instead of the redirect for the authorization response from the `/authorize` endpoint.
+
+    `okta_post_message` is an adaptation of the [Web Message Response Mode](https://tools.ietf.org/html/draft-sakimura-oauth-wmrm-00#section-4.1).
+    This value provides a secure way for a single-page application to perform a sign-in flow
+    in a popup window or an iFrame and receive the ID token and/or access token back in the parent page without leaving the context of that page.
+    The data model for the postMessage call is in the next section.
+* The `Referrer-Policy` header is automatically included in the request for `fragment` or `query`, and is set to `Referrer-Policy: no-referrer`.
 
 `state`:
 
@@ -1102,9 +1103,8 @@ The header only includes the following reserved claims:
 
 The payload includes the following reserved claims:
 
-|--------------+-------------------+---------------------------------------------------------------+--------------|
-| Property     |  Description                                                                      | DataType     |
-|--------------+---------+----------+--------------------------------------------------------------+--------------|
+| Property     | Description                                                                      | DataType     |
+| :----------- | :------------------------------------------------------------------------------- | :----------- |
 | aud     | Identifies the audience (resource URI or server) that this access token is intended for. | String    |
 | cid     | Client ID of the client that requested the access token.  | String    |
 | exp     | The time the access token expires, represented in Unix time (seconds).   | Integer    |
@@ -1222,7 +1222,7 @@ The header and payload sections contain claims.
 
 Claims in the header are always returned.
 
-| ------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------| ------------- |
+
 | Property      | Description                                                                                                                                                                                                  | DataType      |
 |:--------------|:-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|:--------------|
 | alg           | Identifies the digital signature algorithm used. This is always be RS256.                                                                                                                                    | String        |
@@ -1234,7 +1234,6 @@ Claims in the payload are either base claims, independent of scope (always retur
 
 ###### Base claims (always present)
 
-| ------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------   | --------- | --------------------------------------------------- |
 | Property      | Description                                                                                                                                                                | DataType  | Example                                             |
 |:--------------|:---------------------------------------------------------------------------------------------------------------------------------------------------------------------------|:----------|:----------------------------------------------------|
 | amr           | JSON array of strings that are identifiers for [authentication methods](http://self-issued.info/docs/draft-jones-oauth-amr-values-00.html) used in the authentication.     | Array     | [ "pwd", "mfa", "otp", "kba", "sms", "swk", "hwk" ] |
@@ -1250,7 +1249,6 @@ Claims in the payload are either base claims, independent of scope (always retur
 
 ###### Scope-dependent claims (not always returned)
 
-| ------------------ | ----------------- | --------------------------------------------------------------------------------                                                                                                                                                   | -------------  | --------------------------                                                                                                      |
 | Property           | Required Scope    | Description                                                                                                                                                                                                                        | DataType       | Example                                                                                                                         |
 |:-------------------|:------------------|:-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|:---------------|:--------------------------------------------------------------------------------------------------------------------------------|:--|
 | name               | profile           | User's full name in displayable form including all name parts, possibly including titles and suffixes, ordered according to the user's locale and preferences.                                                         | String         | "John Doe"                                                                                                                      |
