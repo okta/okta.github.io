@@ -334,19 +334,25 @@ Describes the result of an action and the reason for that result.
 
 ### Transaction Object
 
-Describes the transaction data for an event.
+The **Transaction** object contains metadata associated with the event. This is useful for sourcing and identifying events. For example, a transaction object such as
+
+```json
+{
+    "id": "Wn4f-0RQ8D8lTSLkAmkKdQAADqo",
+    "type": "WEB",
+    "detail": null
+}
+```
+
+indicates that a single web request with requestId `Wn4f-0RQ8D8lTSLkAmkKdQAADqo` was responsible for creating this event.
 
 |------------+----------------------------------------------------------------+-----------------+----------|
 | Property   | Description                                                    | DataType        | Nullable |
 | ---------- | -------------------------------------------------------------- | --------------- | -------- |
-| id         | Id of the transaction Object                                   | String          | TRUE     |
-| type       | Type of transaction. Currently there are two valid types:{::nomarkdown}<br>{:/}`WEB`: {::nomarkdown}<br>{:/}`JOB` | String | TRUE     |
-| detail     | Details about the transaction                                  | Map[String->Object] | TRUE |
+| id         | Id of the transaction Object. When the **type** is `WEB`, this field will contain the requestId of the web request. | String | TRUE |
+| type       | Type of transaction. When the transaction is initiated from a single web request, this value is `WEB`. For jobs, this value is `JOB` | String | TRUE |
+| detail     | Details about the transaction                                  | Map[String → Object] | TRUE |
 |------------+----------------------------------------------------------------+-----------------+----------|
-
-**NOTE:** As of now, the **details** property is unused.
-
-**NOTE:** As of now, only `WEB` type **Transaction** objects are used.
 
 ### DebugContext Object
 
