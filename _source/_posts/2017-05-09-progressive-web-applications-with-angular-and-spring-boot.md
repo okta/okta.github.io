@@ -2,10 +2,14 @@
 layout: blog_post
 title: Build Your First Progressive Web Application with Angular and Spring Boot
 author: mraible
+description: "This article will show you how to build a PWA with a Spring Boot backend and an Angular frontend that will work offline. You'll also learn how to deploy it to Cloud Foundry!"
+tweets:
+  - "Did you know that PWAs are the way of the future? Native apps that require 60MB to download? Peshaw! Just use good ol' web technologies, a service worker, and caching to develop an awesome mobile experience → "
+  - "Eager to learn how to develop a PWA with Angular and TypeScript? We've got the 🎟 on our @oktadev blog. ✅ it! "
 tags: [spring boot, java, pwa, progressive web app, angular, typescript, angular-cli]
 ---
 
-A recent DoubleClick report that found 53% of visits are abandoned if a mobile site takes more than 3 seconds to load. That same report said the average mobile sites load in 19 seconds. According to Alex Russell in his recent talk on the state of mobile development, one of the biggest problems in mobile today is that developers use powerful laptops and desktops to develop their mobile applications, rather than using a $200 device on a 3G connection. Using this environment is "ground truth" to the majority of web users in the world. It's cool to develop native applications, but people with slow phones and internet don't want to download a 60MB app, they just want to use the web. Progressive web applications, or PWAs, are one of the easiest ways to make web applications faster and easier to use, allowing developers to build a better internet for everyone.
+An October 2016 DoubleClick report found 53% of visits are abandoned if a mobile site takes more than 3 seconds to load. That same report said the average mobile sites load in 19 seconds. According to Alex Russell in his recent talk on the state of mobile development, one of the biggest problems in mobile today is that developers use powerful laptops and desktops to develop their mobile applications, rather than using a $200 device on a 3G connection. Using this environment is "ground truth" to the majority of web users in the world. It's cool to develop native applications, but people with slow phones and internet don't want to download a 60MB app, they just want to use the web. Progressive web applications, or PWAs, are one of the easiest ways to make web applications faster and easier to use, allowing developers to build a better internet for everyone.
 
 Check out the full video of Alex’s talk to learn more about [Adapting to the Mobile Present](https://www.youtube.com/watch?v=K1SFnrf4jZo&feature=youtu.be).
 
@@ -33,7 +37,7 @@ Google engineer Addy Osmani describes [the PRPL pattern](https://developers.goog
 > * **Pre-cache** remaining routes.
 > * **Lazy-load** and create remaining routes on demand.
 
-The [Progressive Web App Checklist](https://developers.google.com/web/progressive-web-apps/checklist) lists all the things you'll need to make a progressive webapp. However, I like the simple list that Alex Russell lists on [What, Exactly, Makes Something A Progressive Web App?](https://infrequently.org/2016/09/what-exactly-makes-something-a-progressive-web-app/).
+The [Progressive Web App Checklist](https://developers.google.com/web/progressive-web-apps/checklist) lists all the things you'll need to make a progressive webapp. However, I like the simple list that Alex Russell lists on [What, Exactly, Makes Something A Progressive Web App?](https://infrequently.org/2016/09/what-exactly-makes-something-a-progressive-web-app/)
 
 {% img blog/angular-spring-boot-pwa/alex-russell-pwas.png alt:"Alex Russell&#039;s PWA Checklist" width:"800" %}{: .center-image }
 
@@ -65,23 +69,11 @@ http localhost:8080/good-beers
 
 I started my PWAs learning journey while sitting in a conference session with [Josh Crowther](https://twitter.com/jshcrowthe) at [The Rich Web Experience](https://stormpath.com/blog/angular-and-microservices-rich-web-experience-2016). His [Progressive Web Apps: The Future of the Web](https://bit.ly/2haHF1y) presentation taught me everything I needed to know to get started. However, his examples used Polymer and I wanted to create a PWA with Angular.
 
-When I first started researching how to build PWAs with Angular, I found [mobile.angular.io](https://mobile.angular.io).
-
-{% img blog/angular-spring-boot-pwa/mobile.angular.io.png alt:"Angular Mobile Toolkit" width:"800" %}{: .center-image }
-
-This website seemed to be exactly what I needed and I was pumped to find a tutorial showing [how to build a PWA with Angular CLI](https://github.com/angular/mobile-toolkit/blob/master/guides/cli-setup.md). After installing Angular CLI, I tried the tutorial's recommended first step:
-
-<pre>
-ng new hello-mobile --mobile
-</pre>
-
-I was disappointed to find that Angular CLI (v1.0.0) does not support the mobile flag.
-
-{% img blog/angular-spring-boot-pwa/ng-new-mobile.png alt:"ng new with mobile flag" width:"800" %}{: .center-image }
-
-After searching through the project's GitHub issues, I [found a reference](https://github.com/angular/mobile-toolkit/issues/109) to [Maxim Salnikov](https://twitter.com/webmaxru)'s [PWA demo app](https://github.com/webmaxru/pwa-guide-ngpoland/tree/step-dashboard). Maxim created this repo as part of a half-day workshop at [ngPoland](http://ng-poland.pl/) and the project's `README` said to contact him for workshop instructions. I emailed Maxim and he politely shared his [Angular 2 PWA Workshop instructions](https://bit.ly/pwa-ngpoland) and [slides](http://slides.com/webmax/pwa-ngpoland#/).
+I used my good friend Google to [find a reference](https://github.com/angular/mobile-toolkit/issues/109) to [Maxim Salnikov](https://twitter.com/webmaxru)'s [PWA demo app](https://github.com/webmaxru/pwa-guide-ngpoland/tree/step-dashboard). Maxim created this repo as part of a half-day workshop at [ngPoland](http://ng-poland.pl/) and the project's `README` said to contact him for workshop instructions. I emailed Maxim and he politely shared his [Angular 2 PWA Workshop instructions](https://bit.ly/pwa-ngpoland) and [slides](http://slides.com/webmax/pwa-ngpoland#/).
 
 **NOTE:** Since then, Maxim as created a new guide called [Progressive Web Apps using the Angular Mobile Toolkit](http://bit.ly/pwa-ng-nl).
+
+This tutorial has been built from Maxim's guides, and uses the latest and greatest Angular versions (Angular CLI 1.6.7 and Angular 5.2.0) from February 2018.
 
 ## Transform your Angular App to be a PWA
 
@@ -89,34 +81,36 @@ There are a number of steps you need to perform to make the Angular client work 
 
 1. Add Angular Material
 2. Create and register a Service Worker
-3. Create an App Shell
-4. Add a manifest to make it installable
+3. Add a manifest to make it installable
 
 ### Add Angular Material
 
-Installing [Angular Material](https://material.angular.io/) is not a necessary step, but it will make the client look much nicer. Make sure you're in the `client` directory, then install it using npm.
+Installing [Angular Material](https://material.angular.io/) is not a necessary step, but it will make the client look much nicer. Make sure you're in the `client` directory, then install its dependencies, as well as Angular Material.
 
-<pre>
+```bash
+npm install
 npm install --save @angular/material @angular/cdk
-</pre>
+```
 
 Add imports for the modules you'll be using in `app.module.ts`:
 
 ```typescript
-import { MatListModule, MatToolbarModule } from '@angular/material';
+import { MatButtonModule, MatListModule, MatToolbarModule } from '@angular/material';
 
 @NgModule({
   ...
   imports: [
     ...
-    MatListModule, MatToolbarModule
+    MatButtonModule, MatListModule, MatToolbarModule
   ]
+  ...
+})
 ```
 
 Add Material icons and a theme to `styles.css`:
 
 ```css
-@import '~https://fonts.googleapis.com/icon?family=Material+Icons';
+@import 'https://fonts.googleapis.com/icon?family=Material+Icons';
 @import '~@angular/material/prebuilt-themes/deeppurple-amber.css';
 
 body {
@@ -167,10 +161,8 @@ To prove that there's still work to do, you'll notice that if you toggle offline
 Angular has service worker support built-in, you just need to install `@angular/service-worker`.
 
 ```bash
-npm install --save-dev @angular/service-worker@1.0.0-beta.16
+npm install @angular/service-worker
 ```
-
-**NOTE:** I specify the version because [Angular CLI 1.5.0 is pinned to this version](https://github.com/angular/angular-cli/issues/8247). This should be fixed in Angular CLI 1.6.0.
 
 To enable service worker support in Angular CLI, run the following command:
 
@@ -178,9 +170,71 @@ To enable service worker support in Angular CLI, run the following command:
 ng set apps.0.serviceWorker=true
 ```
 
-Service workers are only enabled for production builds. To see it in action, run `ng serve -prod`.
+Import and register the Angular service worker in `client/app/app.module.ts`:
 
-Now go to **DevTools** > **Application** > **Service Workers** to see that it's been registered.
+```typescript
+import { ServiceWorkerModule } from '@angular/service-worker';
+import { environment } from '../environments/environment';
+
+@NgModule({
+  ...
+  imports: [
+    ...
+    ServiceWorkerModule.register('/ngsw-worker.js', {enabled: environment.production})
+  ],
+  providers: [],
+  bootstrap: [AppComponent]
+})
+```
+
+The `register()` helper takes care of registering the service worker, and disabling it in development mode.
+
+Create a `src/ngsw-config.json` file and populate it with the following JSON:
+
+```json
+{
+  "index": "/index.html",
+  "assetGroups": [
+    {
+      "name": "app",
+      "installMode": "prefetch",
+      "resources": {
+        "files": [
+          "/favicon.ico",
+          "/index.html"
+        ],
+        "versionedFiles": [
+          "/*.bundle.css",
+          "/*.bundle.js",
+          "/*.chunk.js"
+        ]
+      }
+    },
+    {
+      "name": "assets",
+      "installMode": "lazy",
+      "updateMode": "prefetch",
+      "resources": {
+        "files": [
+          "/assets/**"
+        ],
+        "urls": [
+          "https://fonts.googleapis.com/**"
+        ]
+      }
+    }
+  ]
+}
+```
+
+To build the client with service worker support, run `ng build --prod`. To see it in action, install [serve](https://www.npmjs.com/package/serve) and run the  application from the `dist` directory:
+
+```bash
+npm install -g serve
+serve -p 4200 -s dist
+```
+
+Open `http://localhost:4200` in Chrome and go to **DevTools** > **Application** > **Service Workers** to see that it's been registered.
 
 {% img blog/angular-spring-boot-pwa/application-service-workers.png alt:"Application Service Workers" width:"800" %}{: .center-image }
 
@@ -190,80 +244,108 @@ After making this change and refreshing, you'll notice that caches are created f
 
 {% img blog/angular-spring-boot-pwa/cache-storage.png alt:"Cache Storage" width:"800" %}{: .center-image }
 
+**TIP:** If you want to change how the service worker caches files and data resources, [see Angular's documentation](https://angular.io/guide/service-worker-config).
+
 ### Add a Manifest to Make it Installable
 
 The final step to making your app a PWA is to add a manifest that describes the application. This also enables the ability for people to install your app in Chrome as well as on smart phones.
 
 You can use [Favicon Generator](http://realfavicongenerator.net/) to generate graphic assets and a `manifest.json` file. For an app icon, I searched for "beer icons" and found [this one](http://www.flaticon.com/free-icon/beer_168557#term=beer&page=1&position=26), developed by [Freepik](http://www.flaticon.com/authors/freepik). I generated a favicon, changed the generator options to use `assets/favicons` for the path, and downloaded the favicon package.
 
-Copy the contents of `favicons.zip` to `src/assets/favicons` and add the following HTML to the `<head>` of `index.html`.
+Copy the contents of `favicons.zip` to `src/assets/favicons` (you will have to create this directory) and add the following HTML to the `<head>` of `index.html`.
 
 ```html
 <link rel="apple-touch-icon" sizes="180x180" href="assets/favicons/apple-touch-icon.png">
 <link rel="icon" type="image/png" sizes="32x32" href="assets/favicons/favicon-32x32.png">
 <link rel="icon" type="image/png" sizes="16x16" href="assets/favicons/favicon-16x16.png">
-<link rel="manifest" href="assets/favicons/manifest.json">
+<link rel="manifest" href="assets/favicons/site.webmanifest">
 <link rel="mask-icon" href="assets/favicons/safari-pinned-tab.svg" color="#5bbad5">
 <link rel="shortcut icon" href="assets/favicons/favicon.ico">
+<meta name="msapplication-TileColor" content="#da532c">
 <meta name="msapplication-config" content="assets/favicons/browserconfig.xml">
 <meta name="theme-color" content="#ffffff">
 ```
 
-Modify `assets/favicons/manifest.json` to add three additional properties: `short_name`, `background_color`, and `start_url`.
+Modify `assets/favicons/site.manifest` to have a `name`, `short_name`, as well as a `background_color`, and `start_url`.
 
 ```json
 {
-  "name": "PWA Beers",
-  "short_name": "Beers",
-  "icons": [
-    {
-      "src": "/assets/favicons/favicon-32x32.png",
-      "sizes": "32x32",
-      "type": "image/png"
-    },
-    {
-      "src": "/assets/favicons/android-chrome-192x192.png",
-      "sizes": "192x192",
-      "type": "image/png"
-    }
-  ],
-  "background_color": "#ffa500",
-  "theme_color": "#ffffff",
-  "display": "standalone",
-  "start_url": "/index.html"
+    "name": "PWA Beers",
+    "short_name": "Beers",
+    "icons": [
+        {
+            "src": "android-chrome-192x192.png",
+            "sizes": "192x192",
+            "type": "image/png"
+        },
+        {
+            "src": "android-chrome-512x512.png",
+            "sizes": "512x512",
+            "type": "image/png"
+        }
+    ],
+    "theme_color": "#ffffff",
+    "background_color": "#ffa500",
+    "display": "standalone",
+    "start_url": "/index.html"
 }
 ```
 
-If you refresh your app and Chrome doesn't prompt you to install the app, you probably need to turn on a couple of features. Copy and paste the following URLs into Chrome to enable each feature.
+Build your app with `ng build --prod`, serve it with `serve -p 4200 -s dist`, and navigate to `http://localhost:4200`.
 
-* chrome://flags/#bypass-app-banner-engagement-checks
+If Chrome doesn't prompt you to install the app, you probably need to turn on a couple of features. Copy and paste the following URLs into Chrome to enable each feature.
+
 * chrome://flags/#enable-app-banners
+* chrome://flags/#bypass-app-banner-engagement-checks
 
-After making these changes, you should see a prompt at the top of the screen to install the app. You can verify your manifest loaded correctly by going to **DevTools** > **Application** > **Manifest**.
+After making these changes, you should see a prompt at the top of the screen to install the app.
 
 {% img blog/angular-spring-boot-pwa/install-pwa-prompt-chrome.png alt:"Install PWA Prompt Chrome" width:"800" %}{: .center-image }
 
-If you open Chrome developer tools > Network and enable offline, you'll notice the app still loads when the user is offline. _Yippee!_
+You can verify your manifest loaded correctly by going to **DevTools** > **Application** > **Manifest**.
+
+{% img blog/angular-spring-boot-pwa/app-manifest.png alt:"Application Manifest" width:"800" %}{: .center-image }
+
+Click on the **Network** tab and enable offline. You'll notice the app still loads when the user is offline. However, it does not load the data from its API calls. To make this work, you need to modify `src/ngsw-config.json` and add a list of `dataGroups` after `assetGroups`.
+
+```json
+"dataGroups": [
+  {
+    "name": "local-api",
+    "urls": [
+      "http://localhost:8080/**"
+    ],
+    "cacheConfig": {
+      "maxSize": 100,
+      "maxAge": "1d",
+      "strategy": "freshness"
+    }
+  },
+  {
+    "name": "giphy-api",
+    "urls": [
+      "http://api.giphy.com/**"
+    ],
+    "cacheConfig": {
+      "maxSize": 100,
+      "maxAge": "1d",
+      "strategy": "performance"
+    }
+  }
+]
+```
+
+Rebuild your app and serve it up again. Now you'll notice it loads images when you're offline. _Yippee!_
 
 {% img blog/angular-spring-boot-pwa/offline-works.png alt:"Offline works" width:"800" %}{: .center-image }
 
 ### Test with Lighthouse
 
-Install the [Lighthouse extension for Chrome](https://chrome.google.com/webstore/detail/lighthouse/blipmdconlkpinefehnmjammfjpmpbjk) and click its icon to audit your app.
+Install the [Lighthouse extension for Chrome](https://chrome.google.com/webstore/detail/lighthouse/blipmdconlkpinefehnmjammfjpmpbjk) and click its icon to audit your app. You can also use Chrome Developer tools > **Audits** > **Perform an audit...**.
 
 {% img blog/angular-spring-boot-pwa/lighthouse-local-report.png alt:"Lighthouse PWA Report" width:"800" %}{: .center-image }
 
-You can see that five audits fails, two of which you can fix.
-
-Update `assets/favicons/manifest.json` to have an icon that's 512 pixels wide.
-
-```json
-{
-  "src": "/assets/favicons/android-chrome-512x512.png",
-  "sizes": "512x512",
-  "type": "image/png"
-}
-```
+You can see that four audits fails, one of which you can fix.
 
 Add a `<noscript>` tag to `src/index.html` that indicates JavaScript is required.
 
@@ -271,7 +353,7 @@ Add a `<noscript>` tag to `src/index.html` that indicates JavaScript is required
 <noscript><h1>You must enable JavaScript to view this page.</h1></noscript>
 ```
 
-Run Lighthouse again and your score should be much better this time.
+Rebuild and run Lighthouse again and your score should be much better this time.
 
 {% img blog/angular-spring-boot-pwa/lighthouse-local-report2.png alt:"Lighthouse PWA Report, 2nd Attempt" width:"800" %}{: .center-image }
 
@@ -289,10 +371,20 @@ Modify `beer.service.ts` to use a different URL for production.
   }
 ```
 
+Update `src/ngsw-config.json` to have this URL as a URL in the `local-api` data group.
+
+```json
+"name": "local-api",
+"urls": [
+  "http://localhost:8080/**",
+  "https://pwa-server.cfapps.io/**"
+],
+```
+
 In the `client` directory, run the following command to build and optimize for production.
 
 ```bash
-ng build -prod --aot
+ng build --prod
 ```
 
 ### Cloud Foundry
@@ -313,12 +405,12 @@ Run the following commands to push the client, set it to force HTTPs, then start
 **NOTE:** You may have to change the name from "pwa-client" to a unique name that's not being used.
 
 ```bash
-cf push pwa-client --no-start
+cf push pwa-client --no-start --random-route
 cf set-env pwa-client FORCE_HTTPS true
 cf start pwa-client
 ```
 
-Navigate to the deployed application in your browser (e.g. https://pwa-client.cfapps.io) and ensure it loads. If it does, you'll likely have a 404 in its console for when it tries to access the server.
+Navigate to the deployed application in your browser (e.g. https://pwa-client-unstaggered-vicomtesse.cfapps.io/) and ensure it loads. If it does, you'll likely have a 404 in its console for when it tries to access the server.
 
 **Deploy the server**
 
@@ -326,7 +418,7 @@ To deploy the Spring Boot backend, you first need to add CORS configuration for 
 
 ```java
 @GetMapping("/good-beers")
-@CrossOrigin(origins = "https://pwa-client.cfapps.io")
+@CrossOrigin(origins = "https://pwa-client-unstaggered-vicomtesse.cfapps.io")
 public Collection<Map<String, String>> goodBeers() {
 ```
 
@@ -365,12 +457,7 @@ I'd like to give a big thanks to all the engineers that've been developing progr
 
 ## Learn More About PWAs
 
-To learn more about progressive web applications, check out two of my recent posts:
-
-* [The Ultimate Guide to Progressive Web Applications](/blog/2017/07/20/the-ultimate-guide-to-progressive-web-applications)
-* [Add Authentication to Your Angular PWA](/blog/2017/06/13/add-authentication-angular-pwa)
-
-I’d also recommend visiting the following websites:
+To learn more about progressive web applications, check out [The Ultimate Guide to Progressive Web Applications](/blog/2017/07/20/the-ultimate-guide-to-progressive-web-applications). I’d also recommend visiting the following websites:
 
 * [Google Developer’s Progressive Web Apps Homepage](https://developers.google.com/web/progressive-web-apps/)
 * [Progressive Web Apps Training from Google](https://developers.google.com/web/ilt/pwa/)
@@ -382,4 +469,5 @@ I’d also recommend visiting the following websites:
 
 **Changelog:**
 
+* Feb 8, 2017: Updated to use Spring Boot 1.5.10, Angular 5.2.0, and Angular CLI 1.6.7. You can see what changed in this article via [this pull request on GitHub](https://github.com/okta/okta.github.io/pull/1737). For code changes, see [oktadeveloper/spring-boot-angular-pwa-example#3](https://github.com/oktadeveloper/spring-boot-angular-pwa-example/pull/3).
 * Nov 3, 2017: Updated to use Spring Boot 1.5.8, Angular 5.0.0, and Angular CLI 1.5.0. You can see what changed in this article via [this pull request on GitHub](https://github.com/okta/okta.github.io/pull/1453). For code changes, see [oktadeveloper/spring-boot-angular-pwa-example#2](https://github.com/oktadeveloper/spring-boot-angular-pwa-example/pull/2).

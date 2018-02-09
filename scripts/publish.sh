@@ -9,14 +9,6 @@ declare -A branch_environment_map
 branch_environment_map[source]=developer-okta-com-prod
 branch_environment_map[weekly]=developer-okta-com-preprod
 
-# Check if we are in one of our publish branches
-if [[ -z "${branch_environment_map[$BRANCH]+unset}" ]]; then
-    echo "Current branch is not a publish branch"
-    exit $SUCCESS
-else
-    DEPLOY_ENVIRONMENT=${branch_environment_map[$BRANCH]}
-fi
-
 source "${0%/*}/setup.sh"
 source "${0%/*}/helpers.sh"
 
@@ -41,12 +33,6 @@ then
     exit ${BUILD_FAILURE};
 fi
 
-# Copy assets and previous history into dist
-if ! npm run postbuild-prod;
-then
-    exit ${BUILD_FAILURE};
-fi
-
 if ! removeHTMLExtensions;
 then
     echo "Failed removing .html extensions"
@@ -67,10 +53,18 @@ fi
 
 # Run htmlproofer to validate links, scripts, and images
 #   -  Passing in the argument 'false' to prevent adding an '.html' extension to
-#      extension-less files. 
+#      extension-less files.
 if ! bundle exec ./scripts/htmlproofer.rb false;
 then
     exit ${BUILD_FAILURE}
+fi
+
+# Check if we are in one of our publish branches
+if [[ -z "${branch_environment_map[$BRANCH]+unset}" ]]; then
+    echo "Current branch is not a publish branch"
+    exit $SUCCESS
+else
+    DEPLOY_ENVIRONMENT=${branch_environment_map[$BRANCH]}
 fi
 
 interject "Generating conductor file in $(pwd)"

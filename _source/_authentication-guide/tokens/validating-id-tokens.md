@@ -46,7 +46,7 @@ The high-level overview of validating an ID token looks like this:
 
 The JSON Web Key Set (JWKS) needs to be retrieved from your [Okta Authorization Server](/authentication-guide/implementing-authentication/set-up-authz-server), though your application should have it cached. Specifically, your Authorization Server's Metadata endpoint contains the `jwks_uri`, which you can use to get the JWKS.
 
-> For more information about retrieving this metadata, see [Retrieve Authorization Server Metadata](/docs/api/resources/oauth2#retrieve-authorization-server-metadata).
+> For more information about retrieving this metadata, see [Retrieve Authorization Server Metadata](/docs/api/resources/oidc#well-knownoauth-authorization-server).
 
 ### Decode the ID Token
 
@@ -65,7 +65,7 @@ Please note the following:
 - In case of an emergency, Okta can rotate keys as needed.
 - Okta always publishes keys to the `jwks_uri`.
 - To save the network round trip, your app should cache the `jwks_uri` response locally. The [standard HTTP caching headers](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Cache-Control) are used and should be respected.
-- The administrator can switch the Authorization Server key rotation mode by updating the Authorization Server's `rotationMode` property. For more information see the API Reference: [Authorization Server Credentials Signing Object](/docs/api/resources/oauth2#authorization-server-credentials-signing-object).
+- The administrator can switch the Authorization Server key rotation mode by updating the Authorization Server's `rotationMode` property. For more information see the API Reference: [Authorization Server Credentials Signing Object](/docs/api/resources/authorization-servers#credentials-object).
 
 > Keys used to sign tokens automatically rotate and should always be resolved dynamically against the published JWKS. Your app might fail if you hardcode public keys in your applications. Be sure to include key rollover in your implementation.
 
@@ -83,7 +83,7 @@ You should verify the following:
 
 ## Validating A Token Remotely With Okta
 
-Alternatively, you can also validate an ID Token using the Token Introspection endpoint: [Introspection Request](/docs/api/resources/oidc#introspection-request). This endpoint takes your token as a URL query and returns back a JSON response with a boolean `active` property. If `active` is `true` then further information about the token is returned as well.
+Alternatively, you can also validate an ID Token using the Token Introspection endpoint: [Introspection Request](/docs/api/resources/oidc#introspect). This endpoint takes your token as a URL query and returns back a JSON response with a boolean `active` property. If `active` is `true` then further information about the token is returned as well.
 
 This incurs a network request which is slower to do verification, but can be used when you want to guarantee that the access token hasn't been revoked.
 

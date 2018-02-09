@@ -2,7 +2,11 @@
 layout: blog_post
 title: 'Build a Microservices Architecture for Microbrews with Spring Boot'
 author: mraible
+description: "This article shows you how to build a microservices architecture with Spring Boot, Netflix Eureka, Feign, and Hystrix."
 tags: [microservices, spring boot, spring cloud, netflix eureka, java]
+tweets:
+  - "Want to see how to build a microservices architecture with Spring Boot, Netflix Eureka, Feign, and Hystrix? We have just the 🎟 → "
+  - "Do you like good 🍺? If so, you'll 💙 this tutorial that shows you how to build a microservices architecture for microbrews! "
 ---
 Adopting a microservice architecture provides unique opportunities to add failover and resiliency to your systems, so 
 your components can handle load spikes and errors gracefully. Microservices make change less expensive too. It can also 
@@ -111,21 +115,21 @@ To learn more about service discovery and resolution with Eureka, watch Josh Lon
 
 ### Create a Eureka Service
 
-To begin, create a `spring-boot-microservices-example` directory. Navigate to [start.spring.io](https://start.spring.io). 
+To begin, create a `spring-boot-microservices-example` directory on your hard drive. Navigate to [start.spring.io](https://start.spring.io). 
 Enter `eureka-service` as an artifact name and select `Eureka Server` as a dependency. 
 
 {% img blog/microservices-spring-boot/eureka-service.png alt:"Eureka Server" width:"800" %}{: .center-image }
 
 Click the **Generate Project** button and expand `eureka-service.zip` into the `spring-boot-microservices-example` directory.
 
-Modify `src/main/resources/application.properties` to add a port number and disable registration.
+Modify `eureka-service/src/main/resources/application.properties` to add a port number and disable registration.
 
 ```
 server.port=8761
 eureka.client.register-with-eureka=false
 ```
 
-Open `src/main/java/com/example/EurekaServiceApplication.java` and add `@EnableEurekaServer` above `@SpringBootApplication`.
+Open `eureka-service/src/main/java/com/example/EurekaServiceApplication.java` and add `@EnableEurekaServer` above `@SpringBootApplication`.
 
 ```java
 import org.springframework.cloud.netflix.eureka.server.EnableEurekaServer;
@@ -306,7 +310,7 @@ The edge service will be similar to the standalone beer service created in
 However, it will have fallback capabilities which prevent the client from receiving an HTTP error when the service is 
 not available.
 
-Navigate to [start.spring.io](https://start.spring.io) and create an "edge-service" application with the following dependencies:
+Navigate to [start.spring.io](https://start.spring.io) and create an `edge-service` application with the following dependencies:
 
 * Eureka Discovery: for service registration
 * Feign: a declarative web service client
@@ -333,7 +337,7 @@ To enable Feign, Hystrix, and registration with the Eureka server, add the appro
 `EdgeServiceApplication.java`:
 
 ```java
-package com.example;
+package com.example.edgeservice;
 
 import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
 import lombok.Data;
@@ -441,7 +445,7 @@ You should be able to invoke the `/good-beers` endpoint as well.
 $ http localhost:8081/good-beers
 HTTP/1.1 200
 Content-Type: application/json;charset=UTF-8
-Date: Tue, 25 Apr 2017 17:37:50 GMT
+Date: Wed, 07 Feb 2018 16:50:51 GMT
 Transfer-Encoding: chunked
 X-Application-Context: edge-service:8081
 ```
@@ -469,18 +473,17 @@ $ http localhost:8081/good-beers
 HTTP/1.1 500
 Connection: close
 Content-Type: application/json;charset=UTF-8
-Date: Tue, 25 Apr 2017 17:40:32 GMT
+Date: Wed, 07 Feb 2018 16:51:38 GMT
 Transfer-Encoding: chunked
 X-Application-Context: edge-service:8081
-```
-```json
+
 {
     "error": "Internal Server Error",
-    "exception": "java.lang.RuntimeException",
-    "message": "com.netflix.client.ClientException: Load balancer does not have available server for client: beer-catalog-service",
+    "exception": "feign.RetryableException",
+    "message": "connect timed out executing GET http://beer-catalog-service/beers",
     "path": "/good-beers",
     "status": 500,
-    "timestamp": 1493142032310
+    "timestamp": 1518022298072
 }
 ```
 
@@ -504,7 +507,7 @@ Restart the `edge-service` and you should see an empty list returned.
 $ http localhost:8081/good-beers
 HTTP/1.1 200
 Content-Type: application/json;charset=UTF-8
-Date: Tue, 25 Apr 2017 17:44:18 GMT
+Date: Wed, 07 Feb 2018 16:52:59 GMT
 Transfer-Encoding: chunked
 X-Application-Context: edge-service:8081
 ```
@@ -629,8 +632,9 @@ If you have any questions about this article, you can email me at matt.raible@ok
 [with the Okta tag](http://stackoverflow.com/questions/tagged/okta), post to our [Developer Forums](https://devforum.okta.com/), 
 or [create an issue on GitHub](https://github.com/oktadeveloper/spring-boot-microservices-example/issues/new).
 
-**Update:** To learn about how security fits into all this, see [Secure a Spring Microservices Architecture with Spring Security, JWTs, Juiser, and Okta](/blog/2017/08/08/secure-spring-microservices.html).
- 
+**Update:** To learn about how security fits into all this, see [Secure a Spring Microservices Architecture with Spring Security, JWTs, Juiser, and Okta](/blog/2017/08/08/secure-spring-microservices).
+
 **Changelog:**
 
+* Feb 8, 2018: Updated to use use Spring Boot 1.5.10, Angular CLI 1.6.7, and Angular 5.2.0. See the code changes in the [example app on GitHub](https://github.com/oktadeveloper/spring-boot-microservices-example/pull/10). Changes to this article can be viewed [in this pull request](https://github.com/okta/okta.github.io/pull/1739).
 * Jan 17, 2018: Updated to use latest client from [Build Your First Progressive Web Application with Angular and Spring Boot](/blog/2017/05/09/progressive-web-applications-with-angular-and-spring-boot). See the code changes in the [example app on GitHub](https://github.com/oktadeveloper/spring-boot-microservices-example/pull/6). Changes to this article can be viewed [in this pull request](https://github.com/okta/okta.github.io/pull/1637).

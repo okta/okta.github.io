@@ -16,73 +16,73 @@ OpenID Connect is also available separately. Similarly, Okta provides a client m
 for onboarding, monitoring, and deprovisioning client apps.
 
 ## OAuth 2.0 and OpenID Connect
- 
+
 When do you use API Access Management and when do you use OpenID Connect?
- 
+
 ## Simple Use Cases
 
-In general, use OpenID Connect to sign users into apps, and use API Access Management to secure your APIs: 
+In general, use OpenID Connect to sign users into apps, and use API Access Management to secure your APIs:
 create one or more Custom Authorization Servers, define scopes and claims, and create policies and rules to determine who can access your API resources.
 
 For example:
 
 * Use Case 1 (API Access Management): You need to control API access for a variety of consumers: vendors, employees, and customers, for example.
-* Use Case 2 (OpenID Connect): You want users to sign into your custom web application to access their account. 
+* Use Case 2 (OpenID Connect): You want users to sign into your custom web application to access their account.
 
 ## Complex Use Cases
 
-You can also specify authorization servers in your OpenID Connect API calls. 
+You can also specify authorization servers in your OpenID Connect API calls.
 Every OpenID resource is also available in a version that lets you specify an authorization server that you created in Okta.
 See [OAuth 2.0 and OpenID Connect](#oauth-20-and-openid-connect) for details.
- 
+
 # Benefits of API Access Management
 
 Centralizing the management of your APIs makes it easier for others to consume your API resources.
 Using Okta's OAuth-as-a-Service feature, API Access Management, provides many benefits:
 
 * Create one or more [Custom Authorization Servers](/standards/OAuth/#authorization-servers), hosted on Okta. Custom Authorization Servers make it easier to manage sets of API access for multiple client apps across many customer types.
-* Create custom scopes and claims. Map your claims to the profiles in your user directory. 
+* Create custom scopes and claims. Map your claims to the profiles in your user directory.
 * Tokens are passed instead of credentials. In addition, the JWT tokens carry payloads for user context.
 * Stay protected with security standards compliance.
-* Manage API access with rules. Specifying the conditions under which actions are taken gives you precise and confident control over your APIs. 
+* Manage API access with rules. Specifying the conditions under which actions are taken gives you precise and confident control over your APIs.
 * Control complex business requirements with polices and rules. You control the ordering and relationships.
-* Enjoy the highest quality, always-available API Access Management. 
+* Enjoy the highest quality, always-available API Access Management.
 * Let Okta do the work of consuming standards changes to provide more or better services.
 
-> Note: In some places we have implemented stricter requirements or behaviors for additional security.  
+> Note: In some places we have implemented stricter requirements or behaviors for additional security.
 
 # Putting the Pieces Together
 
-The following is a high-level look at the basic components of API Access Management. 
+The following is a high-level look at the basic components of API Access Management.
 We use the same terms as the OpenID Connect and OAuth 2.0 spec. For complete explanations, read those specs.
 
 ## Tokens and Scopes
 
-The two biggest security benefits of OAuth are using tokens instead of passing credentials and restricting the scope of tokens. 
-Both of these measures go a long way toward mitigating the impact of a security compromise. 
+The two biggest security benefits of OAuth are using tokens instead of passing credentials and restricting the scope of tokens.
+Both of these measures go a long way toward mitigating the impact of a security compromise.
 
-* Sending usernames and passwords around is like putting all of your eggs in one basket. By using credentials to obtain a token, 
+* Sending usernames and passwords around is like putting all of your eggs in one basket. By using credentials to obtain a token,
     if someone gains access to the token, they may be able to use it for a short time, but they haven't compromised the user's identity.
-* Controlling what a token is entitled to access further limits damage in case of compromise. For example, scoping a token for shoppers 
+* Controlling what a token is entitled to access further limits damage in case of compromise. For example, scoping a token for shoppers
     on a web site, and not allowing them access to change prices, provides significant mitigation.
 
 Okta helps you manage ID Tokens (OpenID Connect) and Access Tokens (OAuth 2.0).
 
 ## Custom Claims
 
-The JWT extension to the OAuth Framework lets you include custom claims in ID and Access Tokens. 
+The JWT extension to the OAuth Framework lets you include custom claims in ID and Access Tokens.
 You can design tokens to disclose the information you want to share depending on the client and the scope of the tokens.
 For example, a shopping site might have one set of claims for customers while they browse, but another claim for admin functions
 like changing their personal information.
 
 Custom claims also help you by reducing the number of lookup calls required to retrieve user information from the identity provider (IdP).
-This benefit depends, of course, on the level of security your apps require. 
+This benefit depends, of course, on the level of security your apps require.
 
 # Getting Started with API Access Management
 
 * [Learn more](/standards/OAuth/) about Okta and OAuth 2.0.
 * [Set up a custom authorization server](https://help.okta.com/en/prev/Content/Topics/Security/API_Access.htm) and use the power of Okta's API Access Management.
-* Visit [the API Access Management endpoint documentation](/docs/api/resources/oauth2) and start building your integration today.
+* Visit [the OIDC/OAuth 2.0 endpoint documentation](/docs/api/resources/oidc) and start building your integration today.
 * For simpler use cases focused on SSO, visit [the OpenID Connect documentation](/docs/api/resources/oidc).
 
 ## Recommended Practices for API Access Management
@@ -137,7 +137,7 @@ Okta provides the API Access Management Administrator role to make managing auth
 
     * If a request generates unexpected scopes, it is because of a overly broad rule within the authorization server.
 
-    * An OAuth 2.0 client can be assigned to any number of authorization servers. Doing so provides for a variety of tokens to be generated, each with separate authorization policies, token expiration times, and scopes. The audience claim (`aud`) and client ID claim (`cid`) identify which token maps to which API Product. 
+    * An OAuth 2.0 client can be assigned to any number of authorization servers. Doing so provides for a variety of tokens to be generated, each with separate authorization policies, token expiration times, and scopes. The audience claim (`aud`) and client ID claim (`cid`) identify which token maps to which API Product.
 
 * OAuth clients and authorization servers can be assigned on a many-to-many basis. This allows a developer to use a single OAuth Client to retrieve access tokens from different authorization servers depending on the use case. The only difference is the endpoints accessed and the scopes requested.
 
@@ -146,7 +146,7 @@ Okta provides the API Access Management Administrator role to make managing auth
 #### API Gateway (optional)
 
 * Access tokens should be used exclusively via an HTTP Authorization header instead of encoded into a payload or URL which may be logged or cached.
-* When a gateway successfully validates an access token, cache the result until the expiration time (`exp` claim). Do this for validation that is either [local](/standards/OAuth/#validating-access-tokens) or via the [introspection endpoint](/docs/api/resources/oauth2#introspection-request).
+* When a gateway successfully validates an access token, cache the result until the expiration time (`exp` claim). Do this for validation that is either [local](/standards/OAuth/#validating-access-tokens) or via the [introspection endpoint](/docs/api/resources/oidc#introspect).
 * When a gateway retrieves the JWKS (public keys) to validate a token, it should cache the result until a new or unknown key is referenced in a token.
 * If the gateway is performing endpoint or HTTP verb-level authorization using scopes, the scopes must be defined and granted in the Okta authorization server or custom authorization server before being used in the gateway.
 
@@ -160,7 +160,7 @@ Okta provides the API Access Management Administrator role to make managing auth
 * Avoid using the resource owner password grant type (`password`) except in legacy application or transitional scenarios. The authorization code, implicit, or hybrid grant types are recommended in most scenarios.
 * For mobile applications, using the authorization code grant type with PKCE is the best practice. The implicit or hybrid grant type is the next best option.
 * For Android or iOS applications, use the [AppAuth for iOS](https://openid.github.io/AppAuth-iOS/) and [AppAuth for Android](https://openid.github.io/AppAuth-Android/) libraries from the OpenID Foundation.
-* When an application successfully validates an access token, cache the result until the expiration time (`exp`). Do this for validation that is either [local](/standards/OAuth/#validating-access-tokens) or via the [introspection endpoint](/docs/api/resources/oauth2#introspection-request).
+* When an application successfully validates an access token, cache the result until the expiration time (`exp`). Do this for validation that is either [local](/standards/OAuth/#validating-access-tokens) or via the [introspection endpoint](/docs/api/resources/oidc#introspect).
 * When an application retrieves the JWKS (public keys) to validate a token, it should cache the result until a new or unknown key is referenced in a token.
 
 * Never use an access token granted from the Okta organization authorization server for authorization within your applications. These tokens are intended for use with Okta and cannot be validated within your application. Instead, use tokens granted from a custom authorization server. Read more about the various types of authorization servers in the [OAuth 2.0 and Okta documentation](/standards/OAuth/#authorization-servers).
@@ -169,4 +169,4 @@ Okta provides the API Access Management Administrator role to make managing auth
 
 * Accept access tokens only via an HTTP Authorization header. Don't encode tokens into a payload or URL which may be logged or cached.
 * A resource server must confirm that the audience claim (`aud`) and client ID claim (`cid`) match the expected audience and client ID.
-* When a resource server successfully validates an access token, cache the result until the expiration time (`exp`). Do this for validation that is either [local](/standards/OAuth/#validating-access-tokens) or via the [introspection endpoint](/docs/api/resources/oauth2#introspection-request).
+* When a resource server successfully validates an access token, cache the result until the expiration time (`exp`). Do this for validation that is either [local](/standards/OAuth/#validating-access-tokens) or via the [introspection endpoint](/docs/api/resources/oidc#introspect).

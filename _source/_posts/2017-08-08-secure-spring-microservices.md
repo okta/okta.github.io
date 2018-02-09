@@ -57,7 +57,7 @@ You'll also need to create an API token:
 After completing these steps, you should have the information you need to set the following environment variables.
 
 ```bash
-export STORMPATH_CLIENT_BASEURL=https://{yourOktaDomain.com}
+export STORMPATH_CLIENT_BASEURL=https://{yourOktaDomain}.com
 export OKTA_APPLICATION_ID={clientId}
 export OKTA_API_TOKEN={apiToken}
 export OKTA_AUTHORIZATIONSERVER_ID=default
@@ -90,7 +90,7 @@ Then add a dependency for Stormpath's Zuul integration.
 </dependency>
 ```
 
-Add the following properties and values to the project's `application.properties`.
+Add the following properties and values to `edge-server/src/main/resources/application.properties`.
 
 ```properties
 server.use-forward-headers=true
@@ -172,10 +172,10 @@ For Juiser to read the JWT sent by Stormpath's Zuul support, you need to copy th
 </dependencies>
 ```
 
-Create a `HomeController` in `src/main/java/com/example/HomeController.java` to render the user's information so you can verify authentication is working.
+Create a `HomeController` in `src/main/java/com/example/beercatalogservice/HomeController.java` to render the user's information so you can verify authentication is working.
 
 ```java
-package com.example;
+package com.example.beercatalogservice;
 
 import org.juiser.model.User;
 import org.springframework.stereotype.Controller;
@@ -201,7 +201,7 @@ public class HomeController {
 
 **NOTE:** There is an issue with Juiser 1.0.0 that it won't initialize if you don't have at least one `@Controller` in your project.
 
-Create a `home.html` template in `src/main/resources/templates/home.html` and populate it with the following code.
+Create a `home.html` template in `beer-catalog-service/src/main/resources/templates/home.html` and populate it with the following code.
 
 ```html
 <!DOCTYPE HTML>
@@ -335,7 +335,7 @@ Create a `home.html` template in `src/main/resources/templates/home.html` and po
 </html>
 ```
 
-Add the following properties to `src/main/resources/application.properties` to configure Juiser.
+Add the following properties to `beer-catalog-service/src/main/resources/application.properties` to configure Juiser.
 
 ```properties
 server.use-forward-headers=true
@@ -345,7 +345,7 @@ juiser.header.jwt.key.resource=classpath:rsatest.pub.pem
 Create a `SecurityConfig.java` class in the same package as `HomeController`. This class configures Spring Security so it secures all endpoints.
 
 ```java
-package com.example;
+package com.example.beercatalogservice;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -366,7 +366,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 The `@FeignClient` used to talk to `beer-catalog-service` is not aware of the `X-Forwarded-User` header. To make it aware, create a `ForwardedAccountRequestInterceptor` class in the same directory as `EdgeServiceApplication`.
 
 ```java
-package com.example;
+package com.example.edgeservice;
 
 import com.stormpath.sdk.servlet.http.Resolver;
 import com.stormpath.zuul.account.ForwardedAccountHeaderFilter;
@@ -407,20 +407,36 @@ public class ForwardedAccountRequestInterceptor implements RequestInterceptor {
 Register it as a `@Bean` in `EdgeServiceApplication`.
 
 ```java
-@Bean
-public RequestInterceptor forwardedAccountRequestInterceptor(
-        @Qualifier("stormpathForwardedAccountHeaderValueResolver") Resolver<String> accountStringResolver) {
-    return new ForwardedAccountRequestInterceptor(accountStringResolver);
+import org.springframework.context.annotation.Bean;
+import feign.RequestInterceptor;
+import org.springframework.beans.factory.annotation.Qualifier;
+import com.stormpath.sdk.servlet.http.Resolver;
+...
+public class EdgeServiceApplication {
+    
+    public static void main(String[] args) {
+        SpringApplication.run(EdgeServiceApplication.class, args);
+    }
+    	
+    @Bean
+    public RequestInterceptor forwardedAccountRequestInterceptor(
+            @Qualifier("stormpathForwardedAccountHeaderValueResolver") Resolver<String> accountStringResolver) {
+        return new ForwardedAccountRequestInterceptor(accountStringResolver);
+    }
 }
 ```
 
 While you're modifying `EdgeServiceApplication`, change the `HystrixCommand` in `BeerController` to make Hystrix [execute on the calling thread](http://stackoverflow.com/q/29566777/65681) (so it's aware of the security context).
 
 ```java
+import com.netflix.hystrix.contrib.javanica.annotation.HystrixProperty;
+...
 @HystrixCommand(fallbackMethod = "fallback", commandProperties = {
         @HystrixProperty(name="execution.isolation.strategy", value="SEMAPHORE")
 })
 ```
+
+**NOTE:** There is [an issue](https://github.com/stormpath/stormpath-sdk-java/issues/1364) with the Stormpath Zuul Starter where it doesn't work with Spring Cloud `Edgeware.SR1`. Change `edge-service/pom.xml` to have `<spring-cloud.version>Dalston.RELEASE</spring-cloud.version>` to workaround this issue.
 
 ### Verify Secure Communication
 
@@ -463,12 +479,13 @@ To use Okta's Sign-In Widget, you'll need to create an additional app in Okta, t
 
 Create an OIDC app in Okta by going to the Developer Console and navigating to **Applications** and click on the **Add Application** button. Select **SPA** and click **Next**. On the next page, specify `http://localhost:4200` as a Base URI, Login redirect URI, and Logout redirect URI. Click **Done** and you should see settings like the following.
 
-{% img blog/angular-sign-in-widget/oidc-settings.png alt:"OIDC App Settings" width:"700" %}{: .center-image }
+{% img blog/microservices-spring-secure/oidc-settings.png alt:"OIDC App Settings" width:"700" %}{: .center-image }
 
 Install [Okta's Sign-In Widget](https://developer.okta.com/code/javascript/okta_sign-in_widget) to make it possible to communicate with the secured server.
 
 ```bash
 cd client
+npm install
 npm install @okta/okta-signin-widget --save
 ```
 
@@ -596,8 +613,7 @@ export class AppComponent implements OnInit {
   user;
   signIn;
 
-  constructor(private oktaService: OktaService,
-              private changeDetectorRef: ChangeDetectorRef) {
+  constructor(private oktaService: OktaService, private changeDetectorRef: ChangeDetectorRef) {
     this.signIn = oktaService.getWidget();
   }
 
@@ -664,8 +680,7 @@ import { BeerService, GiphyService } from '../shared';
 export class BeerListComponent implements OnInit {
   beers: Array<any>;
 
-  constructor(private beerService: BeerService,
-              private giphyService: GiphyService,
+  constructor(private beerService: BeerService, private giphyService: GiphyService,
               private changeDetectorRef: ChangeDetectorRef) { }
 
   ngOnInit() {
@@ -687,13 +702,13 @@ export class BeerListComponent implements OnInit {
 
 ### Verify Authentication Works
 
-Navigate to `http://localhost:4200`, and you should see a login form like the following. 
+Start the client with `npm start`, navigate to `http://localhost:4200`, and you should see a login form like the following. 
 
 {% img blog/microservices-spring-secure/angular-login.png alt:"Angular Login" width:"800" %}{: .center-image }
 
 **NOTE:** If it logs you in automatically, this is likely because you have cookies for `http://localhost:8080` still in your browser. Clear your cookies, or try an incognito window.
 
-If you want to adjust the style of the form, so it isn't right up against the top toolbar, add the following to `styles.css`.
+If you want to adjust the style of the form, so it isn't right up against the top toolbar, add the following to `client/src/styles.css`.
 
 ```css
 #okta-signin-container {
@@ -722,4 +737,5 @@ Learn more about Okta and its APIs at [developer.okta.com](http://developer.okta
 
 **Changelog:**
 
+* Feb 8, 2018: Updated to use Spring Boot 1.5.10, Angular 5.2.0, and the Okta Sign-In Widget v2.6.0. See the code changes in the [example app on GitHub](https://github.com/oktadeveloper/spring-boot-microservices-example/pull/11). Changes to this article can be viewed [in this pull request](https://github.com/okta/okta.github.io/pull/1741).
 * Jan 18, 2018: Updated to use latest client from [Build Your First Progressive Web Application with Angular and Spring Boot](/blog/2017/05/09/progressive-web-applications-with-angular-and-spring-boot) and the Okta Sign-In Widget v2.5.0. See the code changes in the [example app on GitHub](https://github.com/oktadeveloper/spring-boot-microservices-example/pull/7). Changes to this article can be viewed [in this pull request](https://github.com/okta/okta.github.io/pull/1649).
