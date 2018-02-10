@@ -63,7 +63,7 @@ In this URL, replace `{yourOktaDomain}.com` with your org's base URL, and then i
 - `redirect_uri` needs to be URL encoded and to match a redirect URI that you configured in your OIDC application
 - `state` and `nonce` can have any value you want for the purposes of this example
 
-For a full explanation of all these parameters, see here: [OAuth 2.0 Request parameters](/docs/api/resources/oauth2#request-parameters).
+For a full explanation of all these parameters, see here: [OAuth 2.0 Request parameters](/docs/api/resources/oidc#request-parameters-1).
 
 ### Testing the flow
 

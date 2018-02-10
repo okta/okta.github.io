@@ -1030,9 +1030,9 @@ Adds an OAuth 2.0 client application. This application is only available to the 
     the OAuth 2.0 authorization code grant.
 
 * {% api_lifecycle beta %} A consent dialog is displayed depending on the values of three elements:
-    * `prompt`, a query parameter used in requests to [`/oauth2/:authorizationServerId/v1/authorize`](/docs/api/resources/oauth2#obtain-an-authorization-grant-from-a-user)(custom authorization server) or [`/oauth2/v1/authorize`](/docs/api/resources/oidc#authentication-request) (Org authorization server)
+    * `prompt`, a query parameter used in requests to [`/oauth2/:authorizationServerId/v1/authorize`](/docs/api/resources/oidc#authorize)(custom authorization server) or [`/oauth2/v1/authorize`](/docs/api/resources/oidc#authorize) (Org authorization server)
     * `consent_method`, a property listed in the Settings table above
-    * `consent`, a property on [scopes](/docs/api/resources/oauth2#scopes-properties)
+    * `consent`, a property on [scopes](/docs/api/resources/authorization-servers#scope-properties)
 
     | `prompt` Value    | `consent_method`                 | `consent`                   | Result       |
     |:------------------|:---------------------------------|:----------------------------|:-------------|
@@ -4796,7 +4796,7 @@ Determines how to authenticate the OAuth 2.0 client
 
 * The `client_id` must consist of alphanumeric characters or the following special characters `$-_.+!*'(),`. It must contain between 6 and 100 characters, inclusive, and must not be the reserved word `ALL_CLIENTS`. The `client_secret` must consist of printable characters, which are defined in [the OAuth 2.0 Spec](https://tools.ietf.org/html/rfc6749#appendix-A), and must contain between 14 and 100 characters, inclusive.
 
-* If `autoKeyRotation` is not specified, the client automatically opts in for Okta's [key rotation](/docs/api/resources/oidc#validating-id-tokens). This property may be updated via the API or via the Okta Admin user interface.
+* If `autoKeyRotation` is not specified, the client automatically opts in for Okta's [key rotation](/authentication-guide/tokens/validating-id-tokens). This property may be updated via the API or via the Okta Admin user interface.
 
 ~~~json
 {

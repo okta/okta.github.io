@@ -518,7 +518,7 @@ Different policy types control settings for different operations.  All policy ty
 
 <a href="#GroupPasswordPolicy">Password Policy</a>
 
-[OAuth Authorization Policy](/docs/api/resources/oauth2#policies-object)
+[OAuth Authorization Policy](/docs/api/resources/authorization-servers#policy-object)
 
 ### Policy Priority and Defaults
 

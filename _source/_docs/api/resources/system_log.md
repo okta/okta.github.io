@@ -359,18 +359,47 @@ This object provides a way to store additional text about an event for debugging
 
 ### AuthenticationContext Object
 
-Describes authentication data for an event.
+All authentication relies on validating one or more credentials that proves the authenticity of the actor's identity. Credentials are sometimes provided by the actor, as is the case with passwords, and at other times provided by a third party, and validated by the authentication provider.
+
+The **AuthenticationContext** contains metadata about how the actor is authenticated. For example, an **authenticationContext** for an event in which a user authenticates with IWA will look something like:
+
+```json
+{
+    "AuthenticationProvider": "ACTIVE_DIRECTORY",
+    "AuthenticationStep": 0,
+    "CredentialProvider": null,
+    "CredentialType": "IWA",
+    "ExternalSessionId": "102N1EKyPFERROGvK9wizMAPQ",
+    "Interface": null,
+    "Issuer": null
+}
+```
+In such a case, one can recognize that the user used an IWA credential to authenticate against an Active Directory instance. All of the user's future generated events in this login session will share the same **externalSessionId**.
+ 
+Among other operations, this response object can be used to scan for suspicious login activity or perform analytics on user authentication habits (e.g. how often authentication scheme X is used versus authentication scheme Y).
 
 |------------+----------------------------------------------------------------+-----------------+----------+-----------+-----------|
 | Property   | Description                                                    | DataType        | Nullable | MinLength | MaxLength |
 | ---------- | -------------------------------------------------------------- | --------------- | -------- | --------- | --------- |
-| authenticationProvider | Type of authentication provider: `OKTA_AUTHENTICATION_PROVIDER`, `ACTIVE_DIRECTORY`, `LDAP`, `FEDERATION`, `SOCIAL`, `FACTOR_PROVIDER` | String | TRUE  | | |
-| credentialProvider | Type of credential provider: OKTA_CREDENTIAL_PROVIDER, RSA, SYMANTEC, GOOGLE, DUO, YUBIKEY | Array of String | TRUE  |           |           |
-| credentialType | Type of credential: `OTP`, `SMS`, `PASSWORD`, `ASSERTION`, `IWA`, `EMAIL`, `OAUTH2`, `JWT` | String        | TRUE     |           |           |
-| issuer     | Issuer of the credential                                       | [Issuer Object](#issuer-object) | TRUE | |         |
-| externalSessionId | External Session identifier of the request              | String          | TRUE     | 1         | 255       |
-| interface  | Authentication interface                                       | String          | TRUE     | 1         | 255       |
+| authenticationProvider | The system that proves the identity of an actor using the credentials provided to it | String | TRUE  | | |
+| credentialProvider | A credential provider is a software service that manages identities and their associated credentials. When authentication occurs via credentials provided by a credential provider, that credential provider will be recorded here. | Array of String | TRUE | | |
+| credentialType | The underlying technology/scheme used in the credential    | String          | TRUE     |           |           |
+| issuer     | The specific software entity that created and issued the credential. | [Issuer Object](#issuer-object) | TRUE | |   |
+| externalSessionId | A proxy for the actor's [session ID](https://www.owasp.org/index.php/Session_Management_Cheat_Sheet) | String | TRUE | 1 | 255 |
+| interface  | The third party user interface that the actor authenticates through, if any. | String | TRUE | 1        | 255       |
 |------------+----------------------------------------------------------------+-----------------+----------+-----------+-----------|
+
+###### Possible Values
+
+Some of the fields listed above have a finite set of possible values.
+
+|------------------------+-------------------------------------------------------------------------------------------------------|
+| Property               | Possible Values                                                                                       |
+| ---------------------- | ----------------------------------------------------------------------------------------------------- |
+| authenticationProvider | `OKTA_AUTHENTICATION_PROVIDER`, `ACTIVE_DIRECTORY`, `LDAP`, `FEDERATION`, `SOCIAL`, `FACTOR_PROVIDER` |
+| credentialProvider     | `OKTA_CREDENTIAL_PROVIDER`, `RSA`, `SYMANTEC`, `GOOGLE`, `DUO`, `YUBIKEY`                             |
+| credentialType         | `OTP`, `SMS`, `PASSWORD`, `ASSERTION`, `IWA`, `EMAIL`, `OAUTH2`, `JWT`                                |
+|------------------------+-------------------------------------------------------------------------------------------------------|
 
 ### Issuer Object
 
@@ -492,10 +521,10 @@ The table below summarizes the supported query parameters:
 |------------ + ------------------------------------------------------------------------------------------------------+----------------------------------------------------------+-------------------------|
 | Parameter   | Description                                                                                           | Format                                                   | Default                 |
 | ----------- | ----------------------------------------------------------------------------------------------------- | -------------------------------------------------------- | ----------------------- |
-| `since`     | Filters the lower time bound of the log events `published` property                                   | An [ISO8601 internet date/time format](https://tools.ietf.org/html/rfc3339#page-8) with timezone. An example: `2017-05-03T16:22:18Z` | 7 days prior to `until` |
-| `until`     | Filters the upper time bound of the log events `published` property                                   | An [ISO8601 internet date/time format](https://tools.ietf.org/html/rfc3339#page-8) with timezone. An example: `2017-05-03T16:22:18Z` | Current time |
-| `after`     | Used to retrieve the next page of results. Okta returns a link in the HTTP Header (`rel=next`) that includes the after query parameter. | Opaque token |                         |
-| `filter`    | [Filter Expression](#expression-filter) that filters the results                                      | [SCIM Filter expression](/docs/api/getting_started/design_principles#filtering) | |
+| `since`     | Filters the lower time bound of the log events `published` property | The [Internet Date/Time Format profile of ISO 8601](https://tools.ietf.org/html/rfc3339#page-8). An example: `2017-05-03T16:22:18Z` | 7 days prior to `until` |
+| `until`     | Filters the upper time bound of the log events `published` property | The [Internet Date/Time Format profile of ISO 8601](https://tools.ietf.org/html/rfc3339#page-8). An example: `2017-05-03T16:22:18Z` | Current time |
+| `after`     | Used to retrieve the next page of results. Okta returns a link in the HTTP Header (`rel=next`) that includes the after query parameter. | Opaque token           |                         |
+| `filter`    | [Filter Expression](#expression-filter) that filters the results                                      | [SCIM Filter expression](/docs/api/getting_started/design_principles#filtering) |  |
 | `q`         | Filters the log events results by one or more exact [keywords](#keyword-filter)                       | URL encoded string                                       |                         |
 | `sortOrder` | The order of the returned events sorted by `published`                                                | `ASCENDING` or `DESCENDING`                              | `ASCENDING`             |
 | `limit`     | Sets the number of results returned in the response                                                   | Integer between 0 and 100                                | 100                     |

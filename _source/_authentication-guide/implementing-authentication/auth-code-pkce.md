@@ -68,7 +68,7 @@ Note the parameters that are being passed:
 - `code_challenge_method` is the hash method used to generate the challenge, which will always be `S256`.
 - `code_challenge` is the code challenge used for PKCE.
 
-For more information on these parameters, see [the OAuth 2.0 API reference](/docs/api/resources/oauth2#obtain-an-authorization-grant-from-a-user).
+For more information on these parameters, see [the OAuth 2.0 API reference](/docs/api/resources/oidc#authorize).
 
 If the user does not have an existing session, this will open the Okta Sign-in Page. If they have an existing session, or after they authenticate, they will arrive at the specified `redirect_uri` along with an authorization `code`:
 
@@ -103,7 +103,7 @@ Note the parameters that are being passed:
 - `code` is the authorization code that you got from the `/authorize` endpoint.
 - `code_verifier` is the PKCE code verifier that your app generated at the beginning of this flow.
 
-For more information on these parameters, see the [OAuth 2.0 API reference](/docs/api/resources/oauth2#request-a-token).
+For more information on these parameters, see the [OAuth 2.0 API reference](/docs/api/resources/oidc#token).
 
 If the code is still valid, and the code verifier matches, your application will receive back access and ID tokens:
 

@@ -19,10 +19,25 @@ fold npm_postbuild_prod npm run postbuild-prod
 # Run Lint checker
 fold npm_lint npm run post-build-lint
 
+ASSUME_EXTENSION=true
+
+# (Weekly Only) Update file extensions and create redirects
+if [ $TRAVIS_BRANCH == 'weekly' ]; then
+  if ! removeHTMLExtensions;
+  then
+    echo "Failed removing .html extensions"
+    exit 1;
+  else
+    echo -e "\xE2\x9C\x94 Removed .html extensions and setup redirects"
+    ASSUME_EXTENSION=false
+  fi
+fi
+
+
 # Run find-missing-slashes to find links that will redirect to okta.github.io
 fold npm_find_missing_slashes npm run find-missing-slashes
 
 # Run htmlproofer to validate links, scripts, and images
 #   -  Passing in the argument 'true' to automatically add the '.html' extension to
 #      extension-less files. 
-fold bundle_exec_htmlproofer bundle exec ./scripts/htmlproofer.rb true
+fold bundle_exec_htmlproofer bundle exec ./scripts/htmlproofer.rb $ASSUME_EXTENSION
