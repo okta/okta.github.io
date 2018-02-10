@@ -1,6 +1,6 @@
 ---
 layout: blog_post
-title: 'Build a React Native Application and Authenticate with OAuth'
+title: 'Build a React Native Application and Authenticate with OAuth 2.0'
 author: mraible
 tags: [react-native, authentication, oauth, oidc, react, okta]
 tweets:
@@ -106,7 +106,7 @@ When prompted to answer questions, use the following answers.
 To install App Auth for React Native, run the following commands:
 
 ```bash
-npm i react-native-app-auth --save
+npm i react-native-app-auth@1.0.1 --save
 react-native link
 ```
 
