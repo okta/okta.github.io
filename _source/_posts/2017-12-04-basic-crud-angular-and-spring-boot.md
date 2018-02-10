@@ -2,6 +2,7 @@
 layout: blog_post
 title: 'Build a Basic CRUD App with Angular 5.0 and Spring Boot 2.0'
 author: mraible
+description: "Angular and Spring Boot are arguably the two most popular frameworks in all of web development. Matt Raible shows you how to use them together in the same app, and how to secure it all with Okta."
 tags: [authentication, spring boot, spring boot 2.0, angular, angular 5, okta, oidc]
 ---
 

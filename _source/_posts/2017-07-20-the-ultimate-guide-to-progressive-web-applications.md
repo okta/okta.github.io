@@ -2,6 +2,7 @@
 layout: blog_post
 title: 'The Ultimate Guide to Progressive Web Applications'
 author: mraible
+description: "In this guide, you’ll learn about the essential ingredients in a PWA, how to install one, why you should build one, and how they stack up against hybrid and native applications."
 tags: [pwa, progressive web applications, offline, service workers, http2, angular, ionic, react, vue.js]
 ---
 

@@ -2,6 +2,7 @@
 layout: blog_post
 title: "Build a Secure Notes Application with Kotlin, TypeScript, and Okta"
 author: mraible
+description: "In this tutorial, you'll learn how to write a note-taking application in Kotlin and TypeScript - two of the fastest growing languages of 2017. You'll use two popular frameworks, Spring Boot and Angular, to make development super fast."
 tags: [kotlin, spring boot, typescript, angular, okta, authentication]
 ---
 

@@ -2,6 +2,7 @@
 layout: blog_post
 title: 'What the Heck is OAuth?'
 author: mraible
+description: "OAuth 2.0 is a standard that apps can use to provide client applications with secure delegated access. OAuth works over HTTPS and authorizes devices, APIs, servers, and applications with access tokens rather than credentials."
 tags: [oauth, authorization, security, oidc, openid connect, oauth 2.0, okta]
 ---
 
