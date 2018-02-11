@@ -2,7 +2,7 @@
 layout: blog_post
 title: "Use Ionic for JHipster to Create Mobile Apps with OIDC Authentication"
 author: mraible
-description: "This article shows you how to use Ionic for JHipster to create a hybrid mobile app that runs on your phone. It supports JWT authenication, as well as OAuth 2.0 / OIDC. It even works with JHipster microservices!"
+description: "This article shows you how to use Ionic for JHipster to create a hybrid mobile app that runs on your phone. It supports JWT authentication, as well as OAuth 2.0 / OIDC. It even works with JHipster microservices!"
 tags: [ionic, ionicframework, jhipster, oidc, oauth, cordova, opencollective, ios, android]
 tweets:
 - "Learn how to use Ionic for JHipster to create a mobile app that works with Okta for authentication → "
