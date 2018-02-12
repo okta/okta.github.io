@@ -411,7 +411,13 @@ heroku config:set \
   SECURITY_OAUTH2_CLIENT_CLIENT_SECRET="$SECURITY_OAUTH2_CLIENT_CLIENT_SECRET"
 ```
 
+To set the JHipster Registry password on your gateway app, run:
+
+```bash
+heroku config:set JHIPSTER_REGISTRY_PASSWORD="$JHIPSTER_REGISTRY_PASSWORD"
+```
+
 Then update your Okta app to have a **Login redirect URI** that matches your Heroku app. Below are screenshots to prove everything worked when deploying to Heroku. 😊
 
-## Learn More about 
+## Learn More about Microservices and JHipster 
 
