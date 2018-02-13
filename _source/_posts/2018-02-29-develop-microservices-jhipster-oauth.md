@@ -113,7 +113,7 @@ security:
             prefer-token-info: false
 ```
 
-**NOTE:** Make sure to remove the `security.oauth2.resource.jwt.key-uri` key and value. This retrieves a public key from Keycloak, and Okta doesn't have this same functionality. 
+**NOTE:** Make sure to remove the `security.oauth2.resource.jwt.key-uri` key and value. This retrieves a public key from Keycloak, and Okta doesn't have this same functionality. I [entered an issue](https://github.com/jhipster/generator-jhipster/issues/7116) to fix this in JHipster.
 
 You can also use environment variables to override the default values. Using this technique is recommend because 1) You don't need to modify the values in each microservice application and 2) it prevents you from leaking your client secret in a source code repository.
 
