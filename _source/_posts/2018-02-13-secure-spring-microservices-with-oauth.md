@@ -2,21 +2,23 @@
 layout: blog_post
 title: "Secure a Spring Microservices Architecture with Spring Security and OAuth"
 author: mraible
-description: "This article shows you how to secure a Spring microservices architecture with Spring Security and OAuth. No Okta SDKs required!"
-tags: [spring, spring boot, microservices, oauth, spring security, java]
+description: "Secure a Spring microservices architecture with Spring Security and OAuth + this tutorial. No Okta SDKs required!"
+tags: [spring, spring boot, microservices, oauth 2.0, spring security, java]
 tweets:
 - "Did you know you can secure your @springboot microservices using OAuth and Okta? → "
-- "Feel the heat? A lot of the 🔥 in the #Java ecoysystem is coming from Spring Boot. Learn how to 🔒 it down with @SpringSecurity, OAuth and Okta! "
+- "Feel the heat? A lot of the 🔥 in the #Java ecosystem is coming from Spring Boot. Learn how to 🔒 it down with @SpringSecurity, OAuth, and Okta! "
 - "Spring Boot Microservices + @SpringSecurity + @oauth_2 + @okta = 😀! "
 ---
 
-Building a microservices architecture with Spring Boot and Spring Cloud can allow your team to scale and develop software faster. It can provide resiliency and elasticity to your architecture that allows it to fail gracefully and scale infinitely. All this is great, but you really need continuous deployment and excellent security to ensure your system stays up-to-date, healthy, and safe for years to come.
+Building a microservices architecture with Spring Boot and Spring Cloud can allow your team to scale and develop software faster. It can add resilience and elasticity to your architecture that allows it to fail gracefully and scale infinitely. All this is great, but you really need continuous deployment and excellent security to ensure your system stays up-to-date, healthy, and safe for years to come.
 
-Did you know that Spring Security and its OAuth support provide everything you need to lock down your API gateway, as well as your backend servers? You can set it up to automatically propogate your access tokens from one app to the other, ensuring that everything stays secure and encrypted along the way.
+With Spring Security and its OAuth 2.0 support you have everything you need to lock down your API gateway, as well as your backend servers. You can set it up to automatically propagate your access tokens from one app to the other, ensuring that everything stays secure and encrypted along the way.
 
 This tutorial shows you how to use Spring Security with OAuth and Okta to lock down your microservices architecture. You might remember a similar post I wrote back in August: [Secure a Spring Microservices Architecture with Spring Security, JWTs, Juiser, and Okta](/blog/2017/08/08/secure-spring-microservices). The difference in this post is you won't be using any Okta SDKs, Spring Security OAuth has everything you need!
 
-This tutorial shows you how to add security to a previous tutorial I wrote, [Build a Microservices Architecture for Microbrews with Spring Boot](/blog/2017/06/15/build-microservices-architecture-spring-boot). A basic microservices architecture with Spring Boot and Spring Cloud looks like the graphic below. 
+## Microservices Architectures with Spring Boot + Spring Cloud
+
+This tutorial shows you how to add security to a previous tutorial I wrote, [Build a Microservices Architecture for Microbrews with Spring Boot](/blog/2017/06/15/build-microservices-architecture-spring-boot). A basic microservices architecture with Spring Boot and Spring Cloud looks like the graphic below.
 
 {% img blog/microservices-spring-oauth/spring-microservices-diagram.png alt:"Spring Boot + Cloud Microservices Architecture" width:"700" %}{: .center-image }
 
@@ -32,7 +34,7 @@ git clone https://github.com/oktadeveloper/spring-boot-microservices-example.git
 
 ## Create a Web Application in Okta
 
-If you don't have one, [create an Okta Developer account](https://developer.okta.com/signup/). After you've completed the setup process, log in to your account and navigate to **Applications** > **Add Application**. Click **Web** and **Next**. On the next page, enter the following values and click **Done**.
+If you don't have one yet, [create a forever-free Okta Developer account](https://developer.okta.com/signup/). After you've completed the setup process, log in to your account and navigate to **Applications** > **Add Application**. Click **Web** and **Next**. On the next page, enter the following values and click **Done**.
 
 * Application Name: `Spring OAuth`
 * Base URIs: `http://localhost:8081`
@@ -79,7 +81,7 @@ import org.springframework.boot.autoconfigure.security.oauth2.client.EnableOAuth
 public class EdgeServiceApplication {
 ```
 
-Adding `@EnableOAuth2Sso` causes Spring Security to look for a number of properties. Add the following properties to `edge-service/src/main/resources/application.properties`.  
+Adding `@EnableOAuth2Sso` causes Spring Security to look for a number of properties. Add the following properties to `edge-service/src/main/resources/application.properties`. 
 
 ```properties
 security.oauth2.client.client-id={yourClientId}
@@ -93,7 +95,7 @@ security.oauth2.resource.token-info-uri=https://{yourOktaDomain}.com/oauth2/defa
 security.oauth2.resource.prefer-token-info=false
 ```
 
-**TIP:** If you see `{yourOktaDomain}` in the above code snippet, log in to your Okta account and refresh this page. It will replace this value with your domain. 
+**TIP:** If you see `{yourOktaDomain}` in the above code snippet, log in to your Okta account and refresh this page. It will replace this value with your domain.
 
 Add a `ResourceServerConfig.java` class to the same package as `EdgeServiceApplication`.
 
@@ -371,7 +373,7 @@ Open your browser and navigate to `http://localhost:8081/good-beers`. You should
 
 {% img blog/microservices-spring-oauth/okta-login.png alt:"Okta Sign-In Form" width:"800" %}{: .center-image }
 
-Enter the credentials you created your account with and you'll see a list of good beers as a result. 
+Enter the credentials you created your account with and you'll see a list of good beers as a result.
 
 {% img blog/microservices-spring-oauth/good-beers.png alt:"Good Beers" width:"800" %}{: .center-image }
 
@@ -390,9 +392,9 @@ Restart your Edge Server application, navigate to `http://localhost:8081/home` a
 
 {% img blog/microservices-spring-oauth/user-details.png alt:"Okta User Details" width:"800" %}{: .center-image }
 
-**NOTE:** I was unable to get the logout button to work due to a CSRF error. I tried adding `security.enable-csrf=false` to `application.properties` in the Edge Service app, but it didn't help.
+**NOTE:** I was unable to get the logout button to work due to a CSRF error. I tried adding `security.enable-csrf=false` to `application.properties` in the Edge Service app, but it didn't help. I sent an email to the Spring Security team asking if they had any advice.
 
-## Add Okta's Sign-In Widget to the Client
+## Add Okta's Sign-In Widget to the Angular Client
 
 To use Okta's Sign-In Widget, you'll need to modify your app in Okta to enable an *Implicit* grant type. Log in to your account, navigate to **Applications** > **Spring OAuth** > **General** tab and click **Edit**. Enable **Implicit (Hybrid)** under **Allowed grant types** and select both checkboxes below it. Add `http://localhost:4200` under **Login redirect URIs** and click **Save**.
 
@@ -467,7 +469,7 @@ import { OktaService } from './shared/okta/okta.service';
 export class AppModule { }
 ```
 
-Modify `client/src/app/shared/beer/beer.service.ts` to read the access token and set it in an `Authorization` header when it exists. 
+Modify `client/src/app/shared/beer/beer.service.ts` to read the access token and set it in an `Authorization` header when it exists.
 
 ```typescript
 import { Injectable } from '@angular/core';
@@ -621,7 +623,7 @@ export class BeerListComponent implements OnInit {
 
 ### Verify Authentication Works
 
-Start the client by opening a terminal, navigating to the `client` directory, then running `npm start`. Open your browser to `http://localhost:4200`, and you should see a login form like the following. 
+Start the client by opening a terminal, navigating to the `client` directory, then running `npm start`. Open your browser to `http://localhost:4200`, and you should see a login form like the following.
 
 {% img blog/microservices-spring-secure/angular-login.png alt:"Angular Login" width:"800" %}{: .center-image }
 
@@ -686,16 +688,16 @@ Restart the Edge Service application and try again. This time you should have gr
 ### Deploy to Cloud Foundry
 
 To deploy everything on Cloud Foundry with [Pivotal Web Services](http://run.pivotal.io/), you'll need to create an account, download/install the [Cloud Foundry CLI](https://github.com/cloudfoundry/cli#downloads), and sign-in (using `cf login -a api.run.pivotal.io`).
- 
-There are quite a few steps involved to deploy all the services and the Angular client for production. For that reason, I wrote a [`deploy.sh`](https://github.com/oktadeveloper/spring-boot-microservices-example/blob/oauth/deploy.sh) script that automates everything. 
+
+There are quite a few steps involved to deploy all the services and the Angular client for production. For that reason, I wrote a [`deploy.sh`](https://github.com/oktadeveloper/spring-boot-microservices-example/blob/oauth/deploy.sh) script that automates everything.
 
 **NOTE:** After this script finishes, you'll have to add the URL for the client to your Okta app as a **Login redirect URI**. You'll also need to add it as a an origin under **API** > **Trusted Origins**.
 
 **TIP:** If you receive an error stating that you're using too much memory, you may have to upgrade your Cloud Foundry subscription.
 
-## Learn More about Spring Boot and OAuth
+## Learn More about Spring Boot, OAuth 2.0, and Microservices
 
-This article showed you how to use Spring Security, OAuth, and Okta secure a microservices architecture. With Zuul, Feign, and Spring Cloud Security, you can ensure your backend services communicate securely. 
+This article showed you how to use Spring Security, OAuth, and Okta secure a microservices architecture. With Zuul, Feign, and Spring Cloud Security, you can ensure your backend services communicate securely.
 
 The source code for this tutorial is [available on GitHub](https://github.com/oktadeveloper/spring-boot-microservices-example/), in the ["oauth" branch](https://github.com/oktadeveloper/spring-boot-microservices-example/tree/oauth).
 
@@ -704,7 +706,9 @@ git clone https://github.com/oktadeveloper/spring-boot-microservices-example.git
 git checkout oauth
 ```
 
-If you're interested in learning about the future of Spring Security and OAuth 2.0, see [Next Generation OAuth 2.0 Support with Spring Security](https://spring.io/blog/2018/01/30/next-generation-oauth-2-0-support-with-spring-security) by our good friend [Joe Grandja](https://twitter.com/joe_grandja) of the Spring Security Team. 
+This tutorial showed you how to add security to a previous tutorial, [Build a Microservices Architecture for Microbrews with Spring Boot](/blog/2017/06/15/build-microservices-architecture-spring-boot).
+
+If you're interested in learning about the future of Spring Security and OAuth 2.0, see [Next Generation OAuth 2.0 Support with Spring Security](https://spring.io/blog/2018/01/30/next-generation-oauth-2-0-support-with-spring-security) by our good friend [Joe Grandja](https://twitter.com/joe_grandja) of the Spring Security Team.
 
 Also, JHipster uses this same setup with its [OAuth support](http://www.jhipster.tech/security/#-oauth2-and-openid-connect). I hope to write a post soon that demonstrates how to create a microservices architecture with JHipster and OAuth. In the meantime, you can see how to [Use Ionic for JHipster to Create Mobile Apps with OIDC Authentication](/blog/2018/01/30/jhipster-ionic-with-oidc-authentication).
 
