@@ -399,6 +399,13 @@ In the gateway, you'll also need to specify the registry's password in `src/main
 
 In each project, run `jhipster heroku` and answer the questions as follows:
 
+| Question | Answer |
+|---|---|---|
+| Name to deploy as? | `<unique-prefix>-<app-name>` (e.g., okta-gateway) |
+| Which region? | `us` |
+| Type of deployment? | `Git` |
+| JHipster Registry URL? | `<your-registry-url>` |
+
 After each has deployed, you'll want to run the following so they use Okta for authentication.
 
 ```bash
@@ -417,7 +424,35 @@ To set the JHipster Registry password on your gateway app, run:
 heroku config:set JHIPSTER_REGISTRY_PASSWORD="$JHIPSTER_REGISTRY_PASSWORD"
 ```
 
-Then update your Okta app to have a **Login redirect URI** that matches your Heroku app. Below are screenshots to prove everything worked when deploying to Heroku. 😊
+Then update your Okta app to have a **Login redirect URI** that matches your Heroku app (e.g., `https://okta-gateway.herokuapp.com/`). To do this, log in to your Okta account, go to **Applications** > **JHipster Microservices** > **General** > **Edit**. 
+
+To see if your apps have started correctly, you can run `heroku logs --tail` in each app's directory. You may see an error:
+
+```
+Error R10 (Boot timeout) -> Web process failed to bind to $PORT within 90 seconds of launch
+```
+
+If this happens, go to <https://help.heroku.com/> and click **Create a ticket** at the top. Click **Running Applications** > **Java**, scroll to the bottom, and click **Create a ticket**. Enter something like the following for the subject and description, select one of your apps, then submit it.
+
+```
+Subject: JHipster Apps Startup Timeout
+
+Description: Hello, I have three JHipster apps that have the following error on startup:
+
+Error R10 (Boot timeout) -> Web process failed to bind to $PORT within 90 seconds of launch
+
+Their URLs are as follows:
+
+* https://okta-gateway.herokuapp.com/
+* https://okta-blog.herokuapp.com/
+* https://okta-store.herokuapp.com/
+
+Can you please increase the timeouts on these apps?
+
+Thanks!
+```
+
+Below are screenshots to prove everything worked after I got my timeouts increased. 😊
 
 ## Learn More about Microservices and JHipster 
 
