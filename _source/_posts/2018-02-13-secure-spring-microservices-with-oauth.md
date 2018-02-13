@@ -714,4 +714,4 @@ If you're interested in learning about the future of Spring Security and OAuth 2
 
 Also, JHipster uses this same setup with its [OAuth support](http://www.jhipster.tech/security/#-oauth2-and-openid-connect). I hope to write a post soon that demonstrates how to create a microservices architecture with JHipster and OAuth. In the meantime, you can see how to [Use Ionic for JHipster to Create Mobile Apps with OIDC Authentication](/blog/2018/01/30/jhipster-ionic-with-oidc-authentication).
 
-Learn more about Okta and its APIs at [developer.okta.com/product](https://developer.okta.com/product). If you have questions about this tutorial, please leave a comment below or hit me up on Twitter [@mraible](https://twitter.com/mraible).
+Learn more about Okta and its APIs at [developer.okta.com/product](https://developer.okta.com/product/). If you have questions about this tutorial, please leave a comment below or hit me up on Twitter [@mraible](https://twitter.com/mraible).
