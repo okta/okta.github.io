@@ -16,7 +16,7 @@ JHipster is an application generator that allows you to generate applications wi
 
 In addition to having two very popular UI frameworks, JHipster also has modules that support generating mobile applications. If you like Ionic, which currently leverages Angular, you can use [Ionic for JHipster](/blog/2018/01/30/jhipster-ionic-with-oidc-authentication). If you're more of a React aficionado, you can use [Ignite JHipster](https://github.com/ruddell/ignite-jhipster).
 
-JHipster is 🔥, and so are microservices! Follow the instructions in this tutorial to create an API gateway, a blog microservice, and a companion store microservice.
+[JHipster](http://www.jhipster.tech) is 🔥, and so are microservices! Follow the instructions in this tutorial to create an API gateway, a blog microservice, and a companion store microservice.
 
 ## Install JHipster
 
@@ -295,7 +295,7 @@ There's a lot of services to start if you want to see all your applications runn
 
 Once everything finishes starting, open a browser to <http://localhost:8080> and click **sign in**. You should be redirected to your Okta org to sign-in, then back to the gateway once you've entered valid credentials.
 
-{% img blog/microservices-jhipster-oauth/welcome-jhipster.png alt:"Welcome, JHipster" width:"400" %} {% img blog/microservices-jhipster-oauth/okta-sign-in.png alt:"Okta Sign-In" width:"400" %} 
+| {% img blog/microservices-jhipster-oauth/welcome-jhipster.png alt:"Welcome, JHipster" width:"400" %} | {% img blog/microservices-jhipster-oauth/okta-sign-in.png alt:"Okta Sign-In" width:"400" %} |
 
 {% img blog/microservices-jhipster-oauth/jhipster-logged-in.png alt:"JHipster after Okta SSO" width:"800" %}{: .center-image }
 
@@ -454,5 +454,22 @@ Thanks!
 
 Below are screenshots to prove everything worked after I got my timeouts increased. 😊
 
-## Learn More about Microservices and JHipster 
+| {% img blog/microservices-jhipster-oauth/heroku-blog.png alt:"Blog on Heroku" width:"400" %} | {% img blog/microservices-jhipster-oauth/heroku-store.png alt:"Store on Heroku" width:"400" %} |
 
+## Learn More about Microservices and JHipster
+
+I hope you've enjoyed this whirlwind tour of how to create a microservices architecture with JHipster. Just because JHipster makes microservices easy doesn't mean you should use them. In the wise words of [Martin Fowler](https://martinfowler.com/articles/microservices.html) (March 2014):
+
+> “You shouldn't start with a microservices architecture. Instead begin with a monolith, keep it modular, and split it into microservices once the monolith becomes a problem.”
+
+Using a microservices architecture is a great way to scale development teams. However, if you don't have a large team, a [Majestic Monolith](https://m.signalvnoise.com/the-majestic-monolith-29166d022228) might work better.
+
+To learn more about microservices, authentication, and JHipster, see the following resources.
+
+* [Build a Microservices Architecture for Microbrews with Spring Boot](/blog/2017/06/15/build-microservices-architecture-spring-boot)
+* [Secure a Spring Microservices Architecture with Spring Security, JWTs, Juiser, and Okta](/blog/2017/06/15/build-microservices-architecture-spring-boot)
+* [Secure a Spring Microservices Architecture with Spring Security and OAuth]()
+* [Use OpenID Connect Support with JHipster](/blog/2017/10/20/oidc-with-jhipster)
+* [JHipster Security Documentation](http://www.jhipster.tech/security/)
+
+If you have any feedback, I'd love to hear it! Please leave a comment below, hit me up on Twitter ([@mraible](https://twitter.com/mraible), or post a question in our [Developer Forums](https://devforum.okta.com/).
