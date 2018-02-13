@@ -737,7 +737,7 @@ git checkout okta
 
 Learn more about Okta and its APIs at [developer.okta.com](http://developer.okta.com). If you have questions about this tutorial, please hit me up on Twitter [@mraible](https://twitter.com/mraible) or post a question to [Stack Overflow with an “okta” tag](https://stackoverflow.com/questions/tagged/okta).
 
-**Update:** To learn how to lock down this application with Spring Security and OAuth, see [Secure a Spring Microservices Architecture with OAuth](/blog/2017/02/03/security-spring-microservices-with-oauth).
+**Update:** To learn how to lock down this application with Spring Security and OAuth, see [Secure a Spring Microservices Architecture with Spring Security and OAuth](/blog/2017/02/03/secure-spring-microservices-with-oauth).
 
 **Changelog:**
 
