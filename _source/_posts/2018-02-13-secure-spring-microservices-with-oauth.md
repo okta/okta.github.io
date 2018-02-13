@@ -10,11 +10,11 @@ tweets:
 - "Spring Boot Microservices + @SpringSecurity + @oauth_2 + @okta = 😀! "
 ---
 
-Building a microservices architecture with Spring Boot and Spring Cloud can allow your team to scale and develop software faster. It can add resilience and elasticity to your architecture that allows it to fail gracefully and scale infinitely. All this is great, but you really need continuous deployment and excellent security to ensure your system stays up-to-date, healthy, and safe for years to come.
+Building a microservices architecture with Spring Boot and Spring Cloud can allow your team to scale and develop software faster. It can add resilience and elasticity to your architecture that will enable it to fail gracefully and scale infinitely. All this is great, but you need continuous deployment and excellent security to ensure your system stays up-to-date, healthy, and safe for years to come.
 
-With Spring Security and its OAuth 2.0 support you have everything you need to lock down your API gateway, as well as your backend servers. You can set it up to automatically propagate your access tokens from one app to the other, ensuring that everything stays secure and encrypted along the way.
+With Spring Security and its OAuth 2.0 support, you have everything you need to lock down your API gateway, as well as your backend servers. You can set it up to automatically propagate your access tokens from one app to the other, ensuring that everything stays secure and encrypted along the way.
 
-This tutorial shows you how to use Spring Security with OAuth and Okta to lock down your microservices architecture. You might remember a similar post I wrote back in August: [Secure a Spring Microservices Architecture with Spring Security, JWTs, Juiser, and Okta](/blog/2017/08/08/secure-spring-microservices). The difference in this post is you won't be using any Okta SDKs, Spring Security OAuth has everything you need!
+This tutorial shows you how to use Spring Security with OAuth and Okta to lock down your microservices architecture. You might remember a similar post I wrote back in August: [Secure a Spring Microservices Architecture with Spring Security, JWTs, Juiser, and Okta](/blog/2017/08/08/secure-spring-microservices). The difference in this post is you won't be using any Okta SDKs; Spring Security OAuth has everything you need!
 
 ## Microservices Architectures with Spring Boot + Spring Cloud
 
@@ -126,7 +126,7 @@ At this point, you've configured enough to sign-in to your Edge Service applicat
 
 ## Add Spring Security OAuth to the Beer Catalog Service
 
-In `beer-catalog-service/pom.xml`, add the same dependencies you added to the Edge Service, as well as one for Thymleaf.
+In `beer-catalog-service/pom.xml`, add the same dependencies you added to the Edge Service, as well as one for Thymeleaf.
 
 ```xml
 <dependency>
@@ -328,9 +328,9 @@ import feign.RequestInterceptor;
 ...
 public class EdgeServiceApplication {
 
-	public static void main(String[] args) {
-		SpringApplication.run(EdgeServiceApplication.class, args);
-	}
+    public static void main(String[] args) {
+        SpringApplication.run(EdgeServiceApplication.class, args);
+    }
 
     @Bean
     public RequestInterceptor getUserFeignClientInterceptor() {
@@ -373,11 +373,11 @@ Open your browser and navigate to `http://localhost:8081/good-beers`. You should
 
 {% img blog/microservices-spring-oauth/okta-login.png alt:"Okta Sign-In Form" width:"800" %}{: .center-image }
 
-Enter the credentials you created your account with and you'll see a list of good beers as a result.
+Enter the credentials you created your account with, and you'll see a list of good beers as a result.
 
 {% img blog/microservices-spring-oauth/good-beers.png alt:"Good Beers" width:"800" %}{: .center-image }
 
-If you try to navigate to `http://localhost:8081/home`, it won't work. This is because you need to add [Spring Cloud Security](https://cloud.spring.io/spring-cloud-security/) to `edge-service/pom.xml` in order to relay the access token for the Zuul proxy.
+If you try to navigate to `http://localhost:8081/home`, it won't work. This is because you need to add [Spring Cloud Security](https://cloud.spring.io/spring-cloud-security/) to `edge-service/pom.xml` to relay the access token for the Zuul proxy.
 
 ```xml
 <dependency>
@@ -398,7 +398,7 @@ Restart your Edge Server application, navigate to `http://localhost:8081/home` a
 
 To use Okta's Sign-In Widget, you'll need to modify your app in Okta to enable an *Implicit* grant type. Log in to your account, navigate to **Applications** > **Spring OAuth** > **General** tab and click **Edit**. Enable **Implicit (Hybrid)** under **Allowed grant types** and select both checkboxes below it. Add `http://localhost:4200` under **Login redirect URIs** and click **Save**.
 
-In order for the Sign-In Widget to make requests to this application, you'll also need to configure the client URL as a trusted origin. Click **API** > **Trusted Origins** > **Add Origin**. Enter `http://localhost:4200` as the **Origin URL** and select both checkboxes under it.
+For the Sign-In Widget to make requests to this application, you'll also need to configure the client URL as a trusted origin. Click **API** > **Trusted Origins** > **Add Origin**. Enter `http://localhost:4200` as the **Origin URL** and select both checkboxes under it.
 
 Open a terminal, navigate to `spring-boot-microservices-example/client`, and install the client's dependencies using npm.
 
@@ -518,7 +518,7 @@ Modify `app.component.html` to add a placeholder for the widget and a section to
 ```
 {% endraw %}
 
-You’ll notice the `user` variable in the HTML. To resolve this, you need to change your `client/src/app/app.component.ts` so it renders the Sign-In Widget. Angular's `ChangeDetectorRef` is used to notify Angular when things have changed and rendering needs to process changed variables.
+You’ll notice the `user` variable in the HTML. To resolve this, you need to change your `client/src/app/app.component.ts` so it renders the Sign-In Widget. Angular's `ChangeDetectorRef` is used to notify Angular when things have changed and rendering needs to process updated variables.
 
 ```typescript
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
@@ -691,7 +691,7 @@ To deploy everything on Cloud Foundry with [Pivotal Web Services](http://run.piv
 
 There are quite a few steps involved to deploy all the services and the Angular client for production. For that reason, I wrote a [`deploy.sh`](https://github.com/oktadeveloper/spring-boot-microservices-example/blob/oauth/deploy.sh) script that automates everything.
 
-**NOTE:** After this script finishes, you'll have to add the URL for the client to your Okta app as a **Login redirect URI**. You'll also need to add it as a an origin under **API** > **Trusted Origins**.
+**NOTE:** After this script finishes, you'll have to add the URL for the client to your Okta app as a **Login redirect URI**. You'll also need to add it as an origin under **API** > **Trusted Origins**.
 
 **TIP:** If you receive an error stating that you're using too much memory, you may have to upgrade your Cloud Foundry subscription.
 
