@@ -635,8 +635,6 @@ or [create an issue on GitHub](https://github.com/oktadeveloper/spring-boot-micr
 
 **Update:** To learn about how security fits into all this, see [Secure a Spring Microservices Architecture with Spring Security, JWTs, Juiser, and Okta](/blog/2017/08/08/secure-spring-microservices).
 
-**Update 2:** To learn how to lock this application down with Spring Security and OAuth, see [Secure a Spring Microservices Architecture with Spring Security and OAuth](/blog/2017/02/13/secure-spring-microservices-with-oauth).
-
 **Changelog:**
 
 * Feb 8, 2018: Updated to use use Spring Boot 1.5.10, Angular CLI 1.6.7, and Angular 5.2.0. See the code changes in the [example app on GitHub](https://github.com/oktadeveloper/spring-boot-microservices-example/pull/10). Changes to this article can be viewed [in this pull request](https://github.com/okta/okta.github.io/pull/1739).
