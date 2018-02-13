@@ -104,4 +104,3 @@ The following web application examples show you the authorization code flow, as 
 | <i class="icon code-dotnet-32"></i> | ASP.NET Core | <https://github.com/oktadeveloper/okta-aspnetcore-mvc-example> |
 | <i class="icon code-nodejs-32"></i> | Express.js   | <https://github.com/okta/samples-nodejs-express-4>             |
 | <i class="icon code-java-32"></i>   | Spring       | <https://github.com/okta/samples-java-spring-mvc>              |
-| <i class="icon code-php-32"></i>    | Symphony     | <https://github.com/okta/samples-php-symfony>                  |
