@@ -71,7 +71,7 @@ zuul.routes.home.path=/home
 zuul.routes.home.url=http://localhost:8080
 ```
 
-Open `edge-service/src/main/java/com/example/EdgeServiceApplication.java` and add `@EnableOAuth2Sso` to enable single sign-on (SSO) with OAuth.
+Open `edge-service/src/main/java/com/example/EdgeServiceApplication.java` and add `@EnableOAuth2Sso` to enable authentication with OAuth.
 
 ```java
 import org.springframework.boot.autoconfigure.security.oauth2.client.EnableOAuth2Sso;
@@ -122,7 +122,7 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
 }
 ```
 
-At this point, you've configured enough to sign-in to your Edge Service application, but it won't be able to communicate with the downstream beer-catalog-service.
+At this point, you've configured enough to sign-in to your Edge Service application, but it won't be able to communicate with the downstream `beer-catalog-service`.
 
 ## Add Spring Security OAuth to the Beer Catalog Service
 
@@ -396,7 +396,7 @@ Restart your Edge Server application, navigate to `http://localhost:8081/home` a
 
 ## Add Okta's Sign-In Widget to the Angular Client
 
-To use Okta's Sign-In Widget, you'll need to modify your app in Okta to enable an *Implicit* grant type. Log in to your account, navigate to **Applications** > **Spring OAuth** > **General** tab and click **Edit**. Enable **Implicit (Hybrid)** under **Allowed grant types** and select both checkboxes below it. Add `http://localhost:4200` under **Login redirect URIs** and click **Save**.
+To use Okta's Sign-In Widget, you'll need to modify your app in Okta to enable the *Implicit* grant type. Log in to your account, navigate to **Applications** > **Spring OAuth** > **General** tab and click **Edit**. Enable **Implicit (Hybrid)** under **Allowed grant types** and select both checkboxes below it. Add `http://localhost:4200` under **Login redirect URIs** and click **Save**.
 
 For the Sign-In Widget to make requests to this application, you'll also need to configure the client URL as a trusted origin. Click **API** > **Trusted Origins** > **Add Origin**. Enter `http://localhost:4200` as the **Origin URL** and select both checkboxes under it.
 
@@ -684,6 +684,8 @@ public class EdgeServiceApplication {
 Restart the Edge Service application and try again. This time you should have great success!
 
 {% img blog/microservices-spring-secure/angular-welcome.png alt:"Angular Welcome" width:"800" %}{: .center-image }
+
+**NOTE:** You should change the allowed origins from `*` to your client's URLs if you're using this configuration in production.
 
 ### Deploy to Cloud Foundry
 
