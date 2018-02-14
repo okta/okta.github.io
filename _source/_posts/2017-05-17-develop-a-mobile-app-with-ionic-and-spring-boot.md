@@ -89,7 +89,7 @@ You should be able to start the `server` application by running it in your favor
 
 After the app has started, navigate to `http://localhost:8080/good-beers`. You should see the list of good beers in your browser.
 
-{% img blog/ionic-spring-boot/good-beers-json.png alt:"Good Beers JSON" width:"800" %}
+{% img blog/ionic-spring-boot/good-beers-json.png alt:"Good Beers JSON" width:"800" %}{: .center-image }
 
 ## Create an Ionic App
 
@@ -101,13 +101,13 @@ npm install -g ionic cordova
 
 The [Ionic CLI](http://ionicframework.com/docs/cli/) is a command-line tool that significantly reduces the time it takes to develop an Ionic app. It's like a Swiss Army Knife: It brings together a bunch of miscellaneous tools under a single interface. The CLI contains a number of useful commands for Ionic development, such as `start`, `build`, `generate`, `serve`, and `run`.
 
-After installation completes, create a new application using the following command:
+After installation completes, cd into `spring-boot-ionic-example` and create a new application using the following command:
 
 ```bash
-ionic start ionic-beer --type ionic-angular
+ionic start ionic-beer
 ```
 
-You will be prompted to select a starter project and optionally link your app to your Ionic Dashboard. For the purposes of this tutorial, choose the **tabs** starter project and do not link the app to your Ionic Dashboard.
+You will be prompted to select a starter project and optionally integrate with Cordova to target native iOS and Android. For the purposes of this tutorial, choose the **tabs** starter project and answer `Yes` to Cordova.
 
 ```bash
 cd ionic-beer
@@ -116,7 +116,7 @@ ionic serve
 
 This will open your default browser on `http://localhost:8100`. You can click through the tabbed interface to see the default structure of the app.
 
-{% img blog/ionic-spring-boot/ionic-tabs.png alt:"Ionic shell with tabs" width:"800" %}
+{% img blog/ionic-spring-boot/ionic-tabs.png alt:"Ionic shell with tabs" width:"800" %}{: .center-image }
 
 Open the `ionic-beer` project in your preferred IDEA to start creating your UI. I recommend using IntelliJ IDEA because it has good TypeScript support and can auto-import classes just like it does for Java project.
 
@@ -151,26 +151,22 @@ Create `src/providers/beer-service.ts` to hold a `BeerService` that fetches the 
 
 ```typescript
 import { Injectable } from '@angular/core';
-import { Http, Response } from '@angular/http';
-import 'rxjs/add/operator/map';
-import 'rxjs/add/operator/catch';
 import { Observable } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
 
 @Injectable()
 export class BeerService {
   public API = 'http://localhost:8080';
   public BEER_API = this.API + '/beers';
 
-  constructor(public http: Http) {}
+  constructor(public http: HttpClient) {
+  }
 
   getGoodBeers(): Observable<any> {
-    return this.http.get(this.API + '/good-beers')
-      .map((response: Response) => response.json());
+    return this.http.get(this.API + '/good-beers');
   }
 }
 ```
-
-**NOTE:** If you receive TypeScript errors with this code, make sure your imports match. In particular, `Response` needs to be imported for `getGoodBeers()` to compile.
 
 Replace the HTML in `src/pages/beer/beer.html` to show the list of beers.
 
@@ -272,25 +268,23 @@ Create a `GiphyService` class in `src/providers/giphy-service.ts` with code that
 
 ```typescript
 import { Injectable } from '@angular/core';
-import { Http, Response } from '@angular/http';
-import { Observable } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
+import 'rxjs/add/operator/map';
 
 @Injectable()
 // http://tutorials.pluralsight.com/front-end-javascript/getting-started-with-angular-2-by-building-a-giphy-search-application
 export class GiphyService {
 
-  // Public beta key: https://github.com/Giphy/GiphyAPI#public-beta-key
-  giphyApi = 'https://api.giphy.com/v1/gifs/search?api_key=dc6zaTOxFJmzC&q=';
+  giphyApi = 'https://api.giphy.com/v1/gifs/search?api_key=dc6zaTOxFJmzC&limit=1&q=';
 
-  constructor(public http: Http) {
+  constructor(public http: HttpClient) {
   }
 
-  get(searchTerm): Observable<any> {
-    let apiLink = this.giphyApi + searchTerm;
-    return this.http.request(apiLink).map((res: Response) => {
-      let results = res.json().data;
-      if (results.length > 0) {
-        return results[0].images.original.url;
+  get(searchTerm) {
+    const apiLink = this.giphyApi + searchTerm;
+    return this.http.get(apiLink).map((response: any) => {
+      if (response.data.length > 0) {
+        return response.data[0].images.original.url;
       } else {
         return 'https://media.giphy.com/media/YaOxRsmrv9IeA/giphy.gif'; // dancing cat for 404
       }
@@ -362,21 +356,23 @@ Update `beer.html` to display the image retrieved:
 Start the Spring Boot app in one terminal window and run `ionic serve` in another. Open `http://localhost:8100` in your browser. Click on the Beer icon, and you'll likely see an error in your browser.
 
 ```
-Uncaught (in promise): Error: No provider for Http!
+Error: Uncaught (in promise): Error: StaticInjectorError[HttpClient]: 
+  StaticInjectorError[HttpClient]: 
+    NullInjectorError: No provider for HttpClient!
 ```
 
-{% img blog/ionic-spring-boot/no-http-provider.png alt:"No provider for Http!" width:"800" %}
+{% img blog/ionic-spring-boot/no-http-provider.png alt:"No provider for HttpClient!" width:"800" %}{: .center-image }
 
-This highlights one of the slick features of Ionic: errors display in your browser, not just the browser's console. Add `HttpModule` to the list of imports in `src/app/app.module.ts` to solve this issue.
+This highlights one of the slick features of Ionic: errors display in your browser, not just the browser's console. Add `HttpClientModule` to the list of imports in `src/app/app.module.ts` to solve this issue.
 
 ```typescript
-import { HttpModule } from '@angular/http';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   ...
   imports: [
     BrowserModule,
-    HttpModule,
+    HttpClientModule,
     IonicModule.forRoot(MyApp),
     BeerPageModule
   ],
@@ -385,15 +381,13 @@ import { HttpModule } from '@angular/http';
 After making this change, you'll likely see the following error in your browser's console.
 
 ```
-XMLHttpRequest cannot load http://localhost:8080/good-beers. No 'Access-Control-Allow-Origin'
-header is present on the requested resource. Origin 'http://localhost:8100' is therefore
-not allowed access. The response had HTTP status code 401.
+XMLHttpRequest cannot load http://localhost:8080/good-beers. No 'Access-Control-Allow-Origin' header is present on the requested resource. Origin 'http://localhost:8100' is therefore not allowed access. The response had HTTP status code 401.
 ```
 
-To fix this, open your Spring Boot application's `BeerController.java` class and change its `@CrossOrigin` annotation to allow `http://localhost:8100` and `file://`. This enables cross-origin resource sharing (CORS) from both the browser and the mobile client.
+To fix this, open your Spring Boot application's `BeerController.java` class and change its `@CrossOrigin` annotation to allow `http://localhost:8100` and `http://localhost:8080`. This enables cross-origin resource sharing (CORS) from both the browser and the mobile client (`http://localhost:8080` is used by iOS Simulator).
 
 ```java
-@CrossOrigin(origins = {"http://localhost:8100","file://"})
+@CrossOrigin(origins = {"http://localhost:8100","http://localhost:8080"})
 public Collection<Beer> goodBeers() {
 ```
 
@@ -401,7 +395,7 @@ Recompile this class, and DevTools should restart the application.
 
 If everything works as expected, you should see a page similar to the one below in your browser.
 
-{% img blog/ionic-spring-boot/good-beers-ui.png alt:"Good Beers UI" width:"800" %}
+{% img blog/ionic-spring-boot/good-beers-ui.png alt:"Good Beers UI" width:"800" %}{: .center-image }
 
 ### Add a Modal for Editing
 
@@ -475,7 +469,7 @@ export class BeerModalPage {
               public toastCtrl: ToastController,
               public navCtrl: NavController) {
     if (this.params.data.id) {
-      this.beerService.get(this.params.get('id')).subscribe(beer => {
+      this.beerService.get(this.params.get('id')).subscribe((beer: any) => {
         this.beer = beer;
         this.beer.href = beer._links.self.href;
         this.giphyService.get(beer.name).subscribe(url => beer.giphyUrl = url);
@@ -558,19 +552,17 @@ You'll also need to modify `beer-service.ts` to have `get()` and `save()` method
 
 ```typescript
 get(id: string) {
-  return this.http.get(this.BEER_API + '/' + id)
-    .map((response: Response) => response.json());
+  return this.http.get(this.BEER_API + '/' + id);
 }
 
 save(beer: any): Observable<any> {
-  let result: Observable<Response>;
+  let result: Observable<Object>;
   if (beer['href']) {
     result = this.http.put(beer.href, beer);
   } else {
     result = this.http.post(this.BEER_API, beer)
   }
-  return result.map((response: Response) => response.json())
-    .catch(error => Observable.throw(error));
+  return result.catch(error => Observable.throw(error));
 }
 ```
 
@@ -602,12 +594,12 @@ Now if you try to edit a beer's name, you'll see another CORS in your browser's 
 
 ```java
 @RepositoryRestResource
-@CrossOrigin(origins = {"http://localhost:8100","file://"})
+@CrossOrigin(origins = {"http://localhost:8100","http://localhost:8080"})
 ```
 
 Re-compile and now everything should work as expected. For example, below is a screenshot that shows I added a new beer and what it looks like when editing it.
 
-{% img blog/ionic-spring-boot/beer-modal.png alt:"Mmmmm, Guinness" width:"800" %}
+{% img blog/ionic-spring-boot/beer-modal.png alt:"Mmmmm, Guinness" width:"800" %}{: .center-image }
 
 ### Add Swipe to Delete
 
@@ -668,22 +660,21 @@ You'll also need to modify `beer-service.ts` to have a `remove()` method.
 
 ```typescript
 remove(id: string) {
-  return this.http.delete(this.BEER_API + '/' + id)
-    .map((response: Response) => response.json());
+  return this.http.delete(this.BEER_API + '/' + id);
 }
 ```
 
 After making these additions, you should be able to delete beer names. To emulate a left swipe in your browser, click on the item and drag it to the left.
 
-{% img blog/ionic-spring-boot/beer-delete.png alt:"Left swipe" width:"512" %}
+{% img blog/ionic-spring-boot/beer-delete.png alt:"Left swipe" width:"512" %}{: .center-image }
 
 ## PWAs with Ionic
 
 Ionic ships with support for creating progressive web apps (PWAs). If you'd like to learn more about what PWAs are, see [Navigating the World of Progressive Web Apps with Ionic 2](http://blog.ionic.io/navigating-the-world-of-progressive-web-apps-with-ionic-2/). This blog post is still relevant for Ionic 3.
 
-If you run the [Lighthouse Chrome extension](https://developers.google.com/web/tools/lighthouse/) on this application, you'll likely get a mediocre score in the 50s.
+If you run the [Lighthouse Chrome extension](https://developers.google.com/web/tools/lighthouse/) on this application, you'll likely get a mediocre score in the 40s.
 
-{% img blog/ionic-spring-boot/lighthouse-51.png alt:"Lighthouse: 51" width:"800" %}
+{% img blog/ionic-spring-boot/lighthouse-45.png alt:"Lighthouse: 45" width:"800" %}{: .center-image }
 
 To register a service worker, and improve the app's score, uncomment the following block in `src/index.html`.
 
@@ -698,20 +689,26 @@ if ('serviceWorker' in navigator) {
 </script>-->
 ```
 
-After making this change, the score should improve. In my tests, it increased to 75/100. The remaining issues were:
+After making this change, the score should improve. In my tests, it increased to 73/100. The remaining issues were:
 
-* A couple -1's in performance for "Cannot read property 'ts' of undefined"
-* Site is not progressively enhanced (page should contain some content when JavaScript is not available). You could likely solve this with [Angular's app-shell directives](https://www.npmjs.com/package/@angular/app-shell)
-* Site is not on HTTPS and does not redirect HTTP to HTTPS
+* Does not provide fallback content when JavaScript is not available.
+* Does not redirect HTTP traffic to HTTPS
+* Page load is not fast enough on 3G
+* Has a <meta name="viewport"> tag with width or initial-scale
 
-If you refresh the app and Chrome doesn't prompt you to install the app (a PWA feature), you probably need to turn on a couple of features. Copy and paste the following URLs into Chrome and enable each feature.
+To fix the first issue, add the following HTML in `src/index.html`, just after the `<body>` tag.
 
+```html
+<noscript>
+  <h1>You must enable JavaScript to view this page.</h1>
+</noscript>
 ```
-chrome://flags/#bypass-app-banner-engagement-checks
-chrome://flags/#enable-add-to-shelf
-```
 
-After enabling these flags, you'll see an error in your browser's console about `src/assets/imgs/logo.png` not being found. This file is referenced in `src/manifest.json`. You can fix this by copying a 512x512 PNG ([like this one](http://www.iconsdb.com/orange-icons/beer-icon.html)) into this location or by modifying `src/manifest.json` accordingly. At the very least, you should modify `src/manifest.json` to have your app's name.
+To fix the last issue, remove `viewport-fit=cover,` from the `<meta name="viewport">` tag's `content` attribute.
+
+```html
+<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+```
 
 ## Deploy to a Mobile Device
 
@@ -719,7 +716,7 @@ It's pretty cool that you're able to develop mobile apps with Ionic in your brow
 
 To see how your application will look on different devices you can run `ionic serve --lab`. The `--lab` flag opens a page in your browser that lets you see how your app looks on different devices.
 
-{% img blog/ionic-spring-boot/ionic-labs.png alt:"Ionic Labs" width:"800" %}
+{% img blog/ionic-spring-boot/ionic-labs.png alt:"Ionic Labs" width:"800" %}{: .center-image }
 
 ### iOS
 
@@ -747,16 +744,16 @@ To deploy the app to an iPhone, start by plugging it into your computer. Then ru
 ```
 npm install -g ios-deploy ios-sim
 ionic cordova build ios --prod
-open platforms/ios/MyApp.xcodeproj
+open platforms/ios/ionic-beer.xcodeproj
 ```
 
 Select your phone as the target in Xcode and click the play button to run your app. The first time you do this, Xcode may spin for a while with a "Processing symbol files" message at the top.
 
 **NOTE:** If you run into code signing issues, see [Ionic's deployment documentation](http://ionicframework.com/docs/intro/deploying/#ios-devices) to see how to solve.
 
-Once you've configured your phone, computer, and Apple ID to work, you should be able to open the app and see the beer list you created. Below is how it looks on my iPhone 6s Plus.
+Once you've configured your phone, computer, and Apple ID to work, you should be able to open the app and see the beer list you created. Below is how it looks on my iPhone 7 Plus.
 
-{% img blog/ionic-spring-boot/iphone-beer-list.jpg alt:"Phone Beer List" width:"500" %}
+{% img blog/ionic-spring-boot/iphone-beer-list.png alt:"Phone Beer List" width:"400" %}{: .center-image }
 
 ### Android
 
@@ -764,49 +761,22 @@ To emulate or deploy to an Android device, you'll first need to install [Android
 
 **If you've just installed Android Studio, make sure to open it to complete the installation.**
 
-To deploy to the Android emulator, run `ionic cordova emulate android`. This will install Andorid support and print out instructions about how to create an emulator image.
-
+To deploy to the Android emulator, run `ionic cordova emulate android`. This will install Android support and display an error if you don't have any AVD (Android Virtual Device) images.
+ 
 ```
-Error: No emulator images (avds) found.
-1. Download desired System Image by running:
-/Users/mraible/Library/Android/sdk/tools/android sdk
+(node:9300) UnhandledPromiseRejectionWarning: CordovaError: No emulator images (avds) found.
+1. Download desired System Image by running: /Users/mraible/Library/Android/sdk/tools/android sdk
 2. Create an AVD by running: /Users/mraible/Library/Android/sdk/tools/android avd
 HINT: For a faster emulator, use an Intel System Image and install the HAXM device driver
 ```
 
-Run the first suggestion and download your desired system image. Then run the second command and created an AVD (Android Virtual Device) with the following settings:
-
-```
-AVD Name: TestPhone
-Device: Nexus 5
-Target: Android 7.1.1
-CPU/ABI: Google APIs Intel Axom (x86_64)
-Skin: Skin with dynamic hardware controls
-```
-
-**WARNING:** These instructions won’t work with version 2.3.2 of Android Studio on Mac. When you try to run the first command, it’ll say the following:
-
-```
-*************************************************************************
-The "android" command is deprecated.
-For manual SDK, AVD, and project management, please use Android Studio.
-For command-line tools, use tools/bin/sdkmanager and tools/bin/avdmanager
-*************************************************************************
-```
-
-To solve this problem, open Android Studio, select “Open an existing Android Studio project” and select the `ionic-beer/platforms/android` directory. If prompted to upgrade, choose “OK”, then proceed to create a new AVD as [described in Android Studio’s documentation](https://developer.android.com/studio/run/managing-avds.html#createavd).
+To create a new AVD, open Android Studio and navigate to **Tools** > **Android** > **AVD Manager**. Create a new Virtual Device and click Play. I chose a Pixel 2.
 
 After performing these steps, you should be able to run `ionic cordova emulate android` and see your app running in the AVD.
 
-{% img blog/ionic-spring-boot/android-beer-list.png alt:"Android Beer List" width:"540" %}
+{% img blog/ionic-spring-boot/android-beer-list.png alt:"Android Beer List" width:"400" %}{: .center-image }
 
-**NOTE**: If you get an application error that says "The connection to the server was unsuccessful. (`file:///android/www/index.html`)", add the following line to `config.xml`. This sets the default timeout to 60 seconds (default is 20). Thanks to [Stack Overflow](http://stackoverflow.com/a/31377846) for the answer.
-
-```xml
-<preference name="loadUrlTimeoutValue" value="60000"/>
-```
-
-## Learn More
+## Learn More about Ionic and Angular
 
 I hope you've enjoyed this tour of Ionic and Angular. I like how Ionic takes your web development skills up a notch and allows you to create mobile applications that look and behave natively.
 
@@ -818,7 +788,11 @@ To learn more about Ionic and Angular, please see the following resources:
 * [Build Your First Progressive Web Application with Angular and Spring Boot](/blog/2017/05/09/progressive-web-applications-with-angular-and-spring-boot)
 * [Bootiful Development with Spring Boot and Angular](/blog/2017/04/26/bootiful-development-with-spring-boot-and-angular)
 * [Angular Authentication with OpenID Connect and Okta in 20 Minutes](/blog/2017/04/17/angular-authentication-with-oidc)
+* [Use Ionic for JHipster to Create Mobile Apps with OIDC Authentication](/blog/2018/01/30/jhipster-ionic-with-oidc-authentication)
 
 **Update:** To learn how to add authentication to an Ionic app, see [Build an Ionic App with User Authentication](/blog/2017/08/22/build-an-ionic-app-with-user-authentication).
 
+**Changelog:**
+
+* Feb 14, 2018: Updated to use the latest versions of Ionic (3.19.1 with Angular 5) and Spring Boot (1.5.10). See the code changes in [oktadeveloper/spring-boot-ionic-example#2](https://github.com/oktadeveloper/spring-boot-ionic-example/pull/2). Changes to this article can be viewed in [okta/okta.github.io#1759](https://github.com/okta/okta.github.io/pull/1759).
 
