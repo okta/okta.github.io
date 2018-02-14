@@ -3,6 +3,9 @@ layout: blog_post
 title: Get Started with Spring Boot, SAML, and Okta
 author: mraible
 description: "Learn how to build a Spring Boot application that authenticates against Okta's API with SAML. Uses Spring Security's Java config and its SAML DSL."
+tweets:
+  - "Need SAML integration in your Spring Boot application? Get Started with Spring Boot, SAML, and Okta → "
+  - "Spring Boot + SAML + Okta = 💙! Learn more → "
 tags: [spring-boot, saml, okta]
 ---
 
@@ -30,7 +33,7 @@ Just like I did, the first thing you'll need to do is create a developer account
 
 {% img blog/spring-boot-saml/okta-dev-console.png alt:"Okta Dev Console" width:"800" %}{: .center-image }
  
-Click on **< > Developer** in the top-left corner and switch to the Classic UI. If you see a screen like the following, you're good to go! The reason you need to use the Classic UI for this tutorial is because we haven't yet added SAML support to the [Developer Console](/blog/2017/09/25/all-new-developer-console).
+Click on **< > Developer Console** in the top-left corner and switch to the Classic UI. If you see a screen like the following, you're good to go! The reason you need to use the Classic UI for this tutorial is because we haven't yet added SAML support to the [Developer Console](/blog/2017/09/25/all-new-developer-console).
 
 {% img blog/spring-boot-saml/okta-classic-ui.png alt:"Okta Classic UI" width:"800" %}{: .center-image }
 
@@ -63,7 +66,7 @@ Click the **Finish** button to continue. This will bring you to the application'
 
 The final setup step you'll need is to assign people to the application. Click on the **Assignments** tab and the **Assign** > **Assign to People** button. You'll see a list of people with your account in it.
 
-{% img blog/spring-boot-saml/assign-people.png alt:"Assign People" width:"600" %}{: .center-image }
+{% img blog/spring-boot-saml/assign-people.png alt:"Assign People" width:"500" %}{: .center-image }
 
 Click the **Assign** button, accept the default username (your email), and click the **Done** button.
 
@@ -103,7 +106,7 @@ In `src/main/resources/application.properties`, add the following key/value pair
 server.port = 8443
 server.ssl.enabled = true
 server.ssl.key-alias = spring
-server.ssl.key-store = src/main/resources/saml/keystore.jks
+server.ssl.key-store = classpath:saml/keystore.jks
 server.ssl.key-store-password = secret
 
 security.saml2.metadata-url = <your metadata url>
@@ -122,10 +125,10 @@ Is CN=Unknown, OU=Unknown, O=Unknown, L=Unknown, ST=Unknown, C=Unknown correct?
   [no]:
 ```
 
-Create a `SecurityConfiguration.java` file in the `com.example` package.
+Create a `SecurityConfiguration.java` file in the `com.example.demo` package.
 
 ```java
-package com.example;
+package com.example.demo;
 
 import static org.springframework.security.extensions.saml2.config.SAMLConfigurer.saml;
 
@@ -165,7 +168,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
             .apply(saml())
                 .serviceProvider()
                     .keyStore()
-                        .storeFilePath("saml/keystore.jks")
+                        .storeFilePath(this.keyStoreFilePath)
                         .password(this.password)
                         .keyname(this.keyAlias)
                         .keyPassword(this.password)
@@ -183,7 +186,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 Create an `IndexController.java` file in the same directory and use it to set the default view to `index`.
 
 ```java
-package com.example;
+package com.example.demo;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -242,5 +245,6 @@ Have questions or comments? Post your question to Stack Overflow with the "[okta
 
 **Changelog:**
 
+* Feb  14, 2018: Updated to use Spring Boot 1.5.10 and `classpath:saml/keystore.jks` for the keystore path. See the code changes in [oktadeveloper/okta-spring-boot-saml-example#6](https://github.com/oktadeveloper/okta-spring-boot-saml-example/pull/6). Changes to this article can be viewed in [okta/okta.github.io#1760](https://github.com/okta/okta.github.io/pull/1760).
 * Oct 10, 2017: Updated instructions for the [Okta Developer Console](/blog/2017/09/25/all-new-developer-console).
 * Apr 20, 2017: Thanks to [Alexey Soshin](https://github.com/AlexeySoshin) for contributing a [pull request](https://github.com/oktadeveloper/okta-spring-boot-saml-example/pull/2) to make the code in this blog post more bootiful!
