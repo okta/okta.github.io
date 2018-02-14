@@ -95,7 +95,7 @@ Okta has verified that these limits are sufficient based on current usage. As a 
 
 The first request to exceed the concurrent limit returns an HTTP 429 error, and the first error every sixty seconds is written to the log. Reporting concurrent rate limits once a minute keeps log volume manageable.
 
->Important: Under normal circumstances, customers don't exceed the concurrency limits: exceeding them may be an indication of a problem which bears investigation.
+>Important: Under normal circumstances, customers don't exceed the concurrency limits. Exceeding them may be an indication of a problem which requires investigation.
 
 ## Check Your Rate Limits with Okta's Rate Limit Headers
 
