@@ -384,7 +384,7 @@ After making this change, you'll likely see the following error in your browser'
 XMLHttpRequest cannot load http://localhost:8080/good-beers. No 'Access-Control-Allow-Origin' header is present on the requested resource. Origin 'http://localhost:8100' is therefore not allowed access. The response had HTTP status code 401.
 ```
 
-To fix this, open your Spring Boot application's `BeerController.java` class and change its `@CrossOrigin` annotation to allow `http://localhost:8100` and `http://localhost:8080`. This enables cross-origin resource sharing (CORS) from both the browser and the mobile client.
+To fix this, open your Spring Boot application's `BeerController.java` class and change its `@CrossOrigin` annotation to allow `http://localhost:8100` and `http://localhost:8080`. This enables cross-origin resource sharing (CORS) from both the browser and the mobile client (`http://localhost:8080` is used by iOS Simulator).
 
 ```java
 @CrossOrigin(origins = {"http://localhost:8100","http://localhost:8080"})
