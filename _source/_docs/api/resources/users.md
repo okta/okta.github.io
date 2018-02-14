@@ -3183,9 +3183,10 @@ Lists a user's email
 {:.api .api-request .api-request-example}
 
 ~~~sh
-GET /api/v1/users/00uzjoiIBruZE06jj0g3/emails HTTP/1.1
-Accept: application/json
-Content-Type: application/json
+curl -v -X GET \
+  -H "Accept: application/json" \
+  -H "Content-Type: application/json" \
+  "https://{yourOktaDomain}.com/api/api/v1/users/00uzjoiIBruZE06jj0g3/emails"
 ~~~
 
 #### Response (Verified Email)
@@ -3289,9 +3290,10 @@ Gets a particular email for a user
 {:.api .api-request .api-request-example}
 
 ~~~sh
-GET /api/v1/users/00uzjoiIBruZE06jj0g3/emails/00T196qTp3LIMZQ0L0g3 HTTP/1.1
-Accept: application/json
-Content-Type: application/json
+curl -v -X GET \
+  -H "Accept: application/json" \
+  -H "Content-Type: application/json" \
+  "https://{yourOktaDomain}.com/api/v1/users/00uzjoiIBruZE06jj0g3/emails/00T196qTp3LIMZQ0L0g3"
 ~~~
 
 #### Response
@@ -3366,17 +3368,17 @@ The `signOn` property determines whether a user has to sign in after clicking on
 {:.api .api-request .api-request-example}
 
 ~~~sh
-POST /api/v1/users/00uzjoiIBruZE06jj0g3/emails/00T196qTp3LIMZQ0L0g3/verify HTTP/1.1
-Accept: application/json
-Content-Type: application/json
-
-{
-  "redirectUri": "https://example.com/some/page?state=blah&custom=true",
-  "expiresAt": "2017-06-14T00:17:57.000Z",
-  "actions": {
-    "signOn": "REQUIRED"
-  }
-}
+curl -X POST \
+  -H 'Accept: application/json' \
+  -H 'content-type: application/json' \
+  -d '{
+    "redirectUri": "https://example.com/some/page?state=blah&custom=true",
+    "expiresAt": "2017-06-14T00:17:57.000Z",
+    "actions": {
+     "signOn": "REQUIRED"
+     }
+    }' /
+    'https://{yourOktaDomain}.com/api/v1/users/00uzjoiIBruZE06jj0g3/emails/00T196qTp3LIMZQ0L0g3/verify'
 ~~~
 
 #### Response
@@ -3448,18 +3450,19 @@ The `signOn` property determines whether a user has to sign in after clicking on
 {:.api .api-request .api-request-example}
 
 ~~~sh
-POST /api/v1/users/00uzjoiIBruZE06jj0g3/emails/00T196qTp3LIMZQ0L0g3/change HTTP/1.1
-Accept: application/json
-Content-Type: application/json
+curl -X POST \
+  -H 'Accept: application/json' \
+  -H 'Content-Type: application/json' \
+  -d '{
+    "redirectUri": "https://example.com/some/page?state=blah&custom=true",
+    "expiresAt": "2017-06-14T00:17:57.000Z",
+    "value": "update@example.com",
+    "actions": {
+     "signOn": "REQUIRED"
+     }
+    }' \
+    'https://{yourOktaDomain}.com/api/api/v1/users/00uzjoiIBruZE06jj0g3/emails/00T196qTp3LIMZQ0L0g3/change' \
 
-{
-  "redirectUri": "https://example.com/some/page?state=blah&custom=true",
-  "expiresAt": "2017-06-14T00:17:57.000Z",
-  "value": "update@example.com",
-  "actions": {
-    "signOn": "REQUIRED"
-  }
-}
 ~~~
 
 #### Response
