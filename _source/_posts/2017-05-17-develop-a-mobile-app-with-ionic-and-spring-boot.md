@@ -101,7 +101,7 @@ npm install -g ionic cordova
 
 The [Ionic CLI](http://ionicframework.com/docs/cli/) is a command-line tool that significantly reduces the time it takes to develop an Ionic app. It's like a Swiss Army Knife: It brings together a bunch of miscellaneous tools under a single interface. The CLI contains a number of useful commands for Ionic development, such as `start`, `build`, `generate`, `serve`, and `run`.
 
-After installation completes, cd into `spring-boot-angular-example` and create a new application using the following command:
+After installation completes, cd into `spring-boot-ionic-example` and create a new application using the following command:
 
 ```bash
 ionic start ionic-beer
