@@ -1,6 +1,6 @@
 ---
 layout: blog_post
-title: "Secure a Spring Microservices Architecture with Spring Security and OAuth"
+title: "Secure a Spring Microservices Architecture with Spring Security and OAuth 2.0"
 author: mraible
 description: "Secure a Spring microservices architecture with Spring Security and OAuth + this tutorial. No Okta SDKs required!"
 tags: [spring, spring boot, microservices, oauth 2.0, spring security, java]

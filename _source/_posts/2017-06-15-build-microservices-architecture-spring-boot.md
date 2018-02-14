@@ -635,7 +635,7 @@ or [create an issue on GitHub](https://github.com/oktadeveloper/spring-boot-micr
 
 **Update:** To learn about how security fits into all this, see [Secure a Spring Microservices Architecture with Spring Security, JWTs, Juiser, and Okta](/blog/2017/08/08/secure-spring-microservices).
 
-**Update 2:** To learn how to lock this application down with Spring Security and OAuth, see [Secure a Spring Microservices Architecture with Spring Security and OAuth](/blog/2018/02/13/secure-spring-microservices-with-oauth).
+**Update 2:** To learn how to lock this application down with Spring Security and OAuth, see [Secure a Spring Microservices Architecture with Spring Security and OAuth 2.0](/blog/2018/02/13/secure-spring-microservices-with-oauth).
 
 **Changelog:**
 
