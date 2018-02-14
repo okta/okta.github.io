@@ -107,7 +107,7 @@ After installation completes, cd into `spring-boot-ionic-example` and create a n
 ionic start ionic-beer
 ```
 
-You will be prompted to select a starter project and optionally integrate with Cordova to target native iOS and Android. For the purposes of this tutorial, choose the **tabs** starter project and answer `Yes` to Cordo 
+You will be prompted to select a starter project and optionally integrate with Cordova to target native iOS and Android. For the purposes of this tutorial, choose the **tabs** starter project and answer `Yes` to Cordova.
 
 ```bash
 cd ionic-beer
