@@ -3,6 +3,9 @@ layout: blog_post
 title: Get Started with Spring Boot, SAML, and Okta
 author: mraible
 description: "Learn how to build a Spring Boot application that authenticates against Okta's API with SAML. Uses Spring Security's Java config and its SAML DSL."
+tweets:
+  - "Need SAML integration in your Spring Boot application? Get Started with Spring Boot, SAML, and Okta → "
+  - "Spring Boot + SAML + Okta = 💙! Learn more → "
 tags: [spring-boot, saml, okta]
 ---
 
@@ -242,6 +245,6 @@ Have questions or comments? Post your question to Stack Overflow with the "[okta
 
 **Changelog:**
 
-* Feb  14, 2018: Updated to use Spring Boot 1.5.10 and `classpath:saml/keystore.jks` for the keystore path. See the code changes in [oktadeveloper/okta-spring-boot-saml-example#6](https://github.com/oktadeveloper/okta-spring-boot-saml-example/pull/6). Changes to this article can be viewed in [okta/okta.github.io#1759](https://github.com/okta/okta.github.io/pull/1759).
+* Feb  14, 2018: Updated to use Spring Boot 1.5.10 and `classpath:saml/keystore.jks` for the keystore path. See the code changes in [oktadeveloper/okta-spring-boot-saml-example#6](https://github.com/oktadeveloper/okta-spring-boot-saml-example/pull/6). Changes to this article can be viewed in [okta/okta.github.io#1760](https://github.com/okta/okta.github.io/pull/1760).
 * Oct 10, 2017: Updated instructions for the [Okta Developer Console](/blog/2017/09/25/all-new-developer-console).
 * Apr 20, 2017: Thanks to [Alexey Soshin](https://github.com/AlexeySoshin) for contributing a [pull request](https://github.com/oktadeveloper/okta-spring-boot-saml-example/pull/2) to make the code in this blog post more bootiful!
