@@ -260,14 +260,14 @@ The entity upon which an actor performs an action. Targets may be anything: an a
 
 ### Client Object
 
-When an event is triggered by an HTTP request, the Client object describes the [client](https://en.wikipedia.org/wiki/Category:Hypertext_Transfer_Protocol_clients) that issues that HTTP request. For instance, the web browser is the client when a user accesses Okta. When this request is received and processed, a login event is fired. When the event is not sourced to an HTTP request, such as in the case of an automatic update, the Client Object field is blank.
+When an event is triggered by an HTTP request, the `client` object describes the [client](https://en.wikipedia.org/wiki/Category:Hypertext_Transfer_Protocol_clients) that issues that HTTP request. For instance, the web browser is the client when a user accesses Okta. When this request is received and processed, a login event is fired. When the event is not sourced to an HTTP request, such as in the case of an automatic update, the Client Object field is blank.
 
 |------------+--------------------------------------------------------------------------------------------------------------------+-----------------+----------|
 | Property   | Description                                                                                                        | DataType        | Nullable |
 | ---------- | ------------------------------------------------------------------------------------------------------------------ | --------------- | -------- |
 | userAgent  | The [user agent](https://en.wikipedia.org/wiki/User_agent) used by an actor to perform an action | [UserAgent Object](#useragent-object) | TRUE |
 | geographicalContext | The physical location where the client made its request from | [GeographicalContext Object](#geographicalcontext-object)    | TRUE     |
-| zone       | The **name** of the [Zone](/docs/api/resources/zones#ZoneModel) that the client's location is mapped to       | String          | TRUE     |
+| zone       | The `name` of the [Zone](/docs/api/resources/zones#ZoneModel) that the client's location is mapped to       | String          | TRUE     |
 | ipAddress  | Ip address that the client made its request from                                                                   | String          | TRUE     |
 | device     | Type of device that the client operated from (e.g. Computer)                                                       | String          | TRUE     |
 |------------+--------------------------------------------------------------------------------------------------------------------+-----------------+----------|
@@ -283,12 +283,12 @@ In the Okta event data model, the UserAgent object provides specifications about
 | ------------ | ------------------------------------------------------------------------------------------------- | -------------- | -------- |
 | Browser      | If the client is a web browser, this field identifies the type of web browser (e.g. CHROME, FIREFOX) | String      | TRUE     |
 | OS           | The [Operating System](https://en.wikipedia.org/wiki/Operating_system) the client runs on (e.g. Windows 10) | String | TRUE   |
-| RawUserAgent | A raw string representation of the user agent, formatted according to [section 5.5.3 of HTTP/1.1 Semantics and Content](https://tools.ietf.org/html/rfc7231#section-5.5.3). Both the **browser** and the **OS** fields can be derived from this field.                                                                                                             | String         | TRUE     |
+| RawUserAgent | A raw string representation of the user agent, formatted according to [section 5.5.3 of HTTP/1.1 Semantics and Content](https://tools.ietf.org/html/rfc7231#section-5.5.3). Both the `browser` and the `OS` fields can be derived from this field.                                                                                                             | String         | TRUE     |
 |--------------+---------------------------------------------------------------------------------------------------+----------------+----------|
 
 ### Request Object
 
-The request object describes details related to the HTTP request that triggers this event, if available. When the event is not sourced to an http request, such as in the case of an automatic update on the Okta servers, the Request object will still exist, but the **ipChain** field will be empty.
+The request object describes details related to the HTTP request that triggers this event, if available. When the event is not sourced to an http request, such as in the case of an automatic update on the Okta servers, the Request object will still exist, but the `ipChain` field will be empty.
 
 |--------------|---------------------------------------------------------------------------------------------------|----------------|----------|
 | Property     | Description                                                                                       | DataType       | Nullable |
@@ -334,7 +334,7 @@ Describes the result of an action and the reason for that result.
 
 ### Transaction Object
 
-The **Transaction** object contains metadata associated with the event. This is useful for sourcing and identifying events. For example, a transaction object such as
+The `transaction` object contains metadata associated with the event. This is useful for sourcing and identifying events. For example, a transaction object such as
 
 ```json
 {
@@ -349,29 +349,43 @@ indicates that a single web request with requestId `Wn4f-0RQ8D8lTSLkAmkKdQAADqo`
 |------------+----------------------------------------------------------------+-----------------+----------|
 | Property   | Description                                                    | DataType        | Nullable |
 | ---------- | -------------------------------------------------------------- | --------------- | -------- |
-| id         | Id of the transaction Object. When the **type** is `WEB`, this field will contain the requestId of the web request. | String | TRUE |
+| id         | Id of the transaction Object. When the `type` is `WEB`, this field will contain the requestId of the web request. | String | TRUE |
 | type       | Type of transaction. When the transaction is initiated from a single web request, this value is `WEB`. For jobs, this value is `JOB` | String | TRUE |
 | detail     | Details about the transaction                                  | Map[String → Object] | TRUE |
 |------------+----------------------------------------------------------------+-----------------+----------|
 
 ### DebugContext Object
 
-Describes additional context regarding an event.
+For some kinds of events (e.g. OMM provisioning, login, second factor SMS, etc.), the fields provided in other response objects will not be sufficient to adequately describe the operations the event has performed. In such cases, the `debugContext` object provides a way to store additional information.
 
-|------------+----------------------------------------------------------------+-----------------+----------|
-| Property   | Description                                                    | DataType        | Nullable |
-| ---------- | -------------------------------------------------------------- | --------------- | -------- |
-| debugData  | A map that goes from a String key to a value                   | Map[String->Object] | TRUE  |
-|------------+----------------------------------------------------------------+-----------------+----------|
+For example, an event where a second factor SMS token is sent to a user might have a `debugContext` that looks like:
 
-This object provides a way to store additional text about an event for debugging. For example, when you create an API token,
-`debugData` shows the `RequestUri` used to obtain the token, for example `/api/internal/tokens`.
+```json
+{
+    "debugData": {
+        "requestUri": "/api/v1/users/00u3gjksoiRGRAZHLSYV/factors/smsf8luacpZJAva10x45/verify",
+        "smsProvider": "TELESIGN",
+        "transactionId": "268632458E3C100F5F5F594C6DC689D4"
+    }
+}
+
+```
+
+By inspection of the `debugData` field, one can find the URI used to trigger the second factor SMS (`/api/v1/users/00u3gjksoiRGRAZHLSYV/factors/smsf8luacpZJAva10x45/verify`), the SMS provider (`TELESIGN`) and the ID used by Telesign to identify this transaction (`268632458E3C100F5F5F594C6DC689D4`).
+
+If for some reason the information needed to implement a feature is not provided in other response objects, it is advised to scan the `debugContext.debugData` field for potentially useful fields.
+
+|------------+---------------------------------------------------------------------------------+-----------------+----------|
+| Property   | Description                                                                     | DataType        | Nullable |
+| ---------- | ------------------------------------------------------------------------------- | --------------- | -------- |
+| debugData  | Dynamic field containing miscellaneous information dependent on the event type. | Map[String->Object] | TRUE |
+|------------+---------------------------------------------------------------------------------+-----------------+----------|
 
 ### AuthenticationContext Object
 
 All authentication relies on validating one or more credentials that proves the authenticity of the actor's identity. Credentials are sometimes provided by the actor, as is the case with passwords, and at other times provided by a third party, and validated by the authentication provider.
 
-The **AuthenticationContext** contains metadata about how the actor is authenticated. For example, an **authenticationContext** for an event in which a user authenticates with IWA will look something like:
+The `authenticationContext` contains metadata about how the actor is authenticated. For example, an `authenticationContext` for an event in which a user authenticates with IWA will look something like:
 
 ```json
 {
@@ -384,7 +398,7 @@ The **AuthenticationContext** contains metadata about how the actor is authentic
     "Issuer": null
 }
 ```
-In such a case, one can recognize that the user used an IWA credential to authenticate against an Active Directory instance. All of the user's future generated events in this login session will share the same **externalSessionId**.
+In such a case, one can recognize that the user used an IWA credential to authenticate against an Active Directory instance. All of the user's future generated events in this login session will share the same `externalSessionId`.
  
 Among other operations, this response object can be used to scan for suspicious login activity or perform analytics on user authentication habits (e.g. how often authentication scheme X is used versus authentication scheme Y).
 
