@@ -275,7 +275,6 @@ import 'rxjs/add/operator/map';
 // http://tutorials.pluralsight.com/front-end-javascript/getting-started-with-angular-2-by-building-a-giphy-search-application
 export class GiphyService {
 
-  // Public beta key: https://github.com/Giphy/GiphyAPI#public-beta-key
   giphyApi = 'https://api.giphy.com/v1/gifs/search?api_key=dc6zaTOxFJmzC&limit=1&q=';
 
   constructor(public http: HttpClient) {
@@ -381,9 +380,9 @@ import { HttpClientModule } from '@angular/common/http';
 
 After making this change, you'll likely see the following error in your browser's console.
 
-<pre color="red">
+```
 XMLHttpRequest cannot load http://localhost:8080/good-beers. No 'Access-Control-Allow-Origin' header is present on the requested resource. Origin 'http://localhost:8100' is therefore not allowed access. The response had HTTP status code 401.
-</pre>
+```
 
 To fix this, open your Spring Boot application's `BeerController.java` class and change its `@CrossOrigin` annotation to allow `http://localhost:8100` and `http://localhost:8080`. This enables cross-origin resource sharing (CORS) from both the browser and the mobile client.
 
@@ -752,9 +751,9 @@ Select your phone as the target in Xcode and click the play button to run your a
 
 **NOTE:** If you run into code signing issues, see [Ionic's deployment documentation](http://ionicframework.com/docs/intro/deploying/#ios-devices) to see how to solve.
 
-Once you've configured your phone, computer, and Apple ID to work, you should be able to open the app and see the beer list you created. Below is how it looks on my iPhone 6s Plus.
+Once you've configured your phone, computer, and Apple ID to work, you should be able to open the app and see the beer list you created. Below is how it looks on my iPhone 7 Plus.
 
-{% img blog/ionic-spring-boot/iphone-beer-list.png alt:"Phone Beer List" width:"500" %}{: .center-image }
+{% img blog/ionic-spring-boot/iphone-beer-list.png alt:"Phone Beer List" width:"400" %}{: .center-image }
 
 ### Android
 
@@ -775,15 +774,9 @@ To create a new AVD, open Android Studio and navigate to **Tools** > **Android**
 
 After performing these steps, you should be able to run `ionic cordova emulate android` and see your app running in the AVD.
 
-{% img blog/ionic-spring-boot/android-beer-list.png alt:"Android Beer List" width:"540" %}{: .center-image }
+{% img blog/ionic-spring-boot/android-beer-list.png alt:"Android Beer List" width:"400" %}{: .center-image }
 
-**NOTE**: If you get an application error that says "The connection to the server was unsuccessful. (`file:///android/www/index.html`)", add the following line to `config.xml`. This sets the default timeout to 60 seconds (default is 20). Thanks to [Stack Overflow](http://stackoverflow.com/a/31377846) for the answer.
-
-```xml
-<preference name="loadUrlTimeoutValue" value="60000"/>
-```
-
-## Learn More
+## Learn More about Ionic and Angular
 
 I hope you've enjoyed this tour of Ionic and Angular. I like how Ionic takes your web development skills up a notch and allows you to create mobile applications that look and behave natively.
 
@@ -801,5 +794,5 @@ To learn more about Ionic and Angular, please see the following resources:
 
 **Changelog:**
 
-* Feb 14, 2018: Updated to use the latest versions of Ionic (3.19.1 with Angular 5) and Spring Boot (1.5.10). See the code changes in the [example app on GitHub](https://github.com/oktadeveloper/spring-boot-ionic-example/pull/2). Changes to this article can be viewed in [okta/okta.github.io#1644](https://github.com/okta/okta.github.io/pull/1644).
+* Feb 14, 2018: Updated to use the latest versions of Ionic (3.19.1 with Angular 5) and Spring Boot (1.5.10). See the code changes in [oktadeveloper/spring-boot-ionic-example#2](https://github.com/oktadeveloper/spring-boot-ionic-example/pull/2). Changes to this article can be viewed in [okta/okta.github.io#1644](https://github.com/okta/okta.github.io/pull/1644).
 
