@@ -2,6 +2,7 @@
 layout: blog_post
 title: Get Started with Spring Boot, SAML, and Okta
 author: mraible
+description: "Learn how to build a Spring Boot application that authenticates against Okta's API with SAML. Uses Spring Security's Java config and its SAML DSL."
 tags: [spring-boot, saml, okta]
 ---
 

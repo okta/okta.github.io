@@ -2,6 +2,7 @@
 layout: blog_post
 title: Angular Authentication with OpenID Connect and Okta in 20 Minutes
 author: mraible
+description: "In this article, you’ll see how build a simple web application with Angular CLI, a tool for Angular development. You’ll also create an application with search and edit features, then add authentication."
 tags: [angular, authentication, oidc, openid connect, okta, typescript, angular-cli]
 ---
 

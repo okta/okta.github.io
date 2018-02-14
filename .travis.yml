@@ -1,21 +1,15 @@
 language: ruby
-
 rvm:
 - 2.2.4
-
 addons:
   chrome: stable
   sauce_connect: true
-
 before_install:
-  - gem update bundler
-  - bundle install
-  - nvm install $(cat .nvmrc)
-
-script: ./scripts/travis.sh
-
+- gem update bundler
+- bundle install
+- nvm install $(cat .nvmrc)
+script: "./scripts/travis.sh"
 dist: trusty
-
 env:
   global:
   - NOKOGIRI_USE_SYSTEM_LIBRARIES=true
@@ -29,9 +23,15 @@ env:
   - SAUCE_PLATFORM_NAME=""
   - secure: RW99TW7YvGgWt/P8fQQziPbxNITaJMO/4q2iCX72u/PtTu2dkeaCqUiRUi7qyV8jIIk7U4oruxJRFQpTaCIX5+JWZsSwLskoTsspOI9aTzyPdhVNckM1vpA5VfwstdyQTkX7zzKPLdvXK0xj0ZzQ+ACH/SobQNYKiAMvW7FVkIc=
   - secure: gFSORYQLSBNIK8peGgUOhd0Yj6GzE18HA0GLrmp0PMtobe003poalkNgLsPy2W2QFZbG3bCjbqFMmCbUh5uRnX8eCy/whe+lwXeQsv5uh0EIGWgxVxhk79dCx5cakERusoj2BUgJJ432R7nRXjEW5v2AK9QAOeCG2Dvwdb8WSes=
-
 deploy:
   provider: script
   script: scripts/gh-pages-publish.sh
   on:
     branch: source
+notifications:
+  slack:
+    on_success: change
+    on_failure: always
+    on_pull_requests: false
+    rooms:
+     - secure: Qu0iD73/wFwthPAcIfbg5oaD/4nOGW58N5dpsBQjbuIQM4wNBOyQSUszWy5iDm78kA8rxj6r2mVgSDSw28oHQczguv8iCLdAkzOZmPWDxNa4o34thM1pOaKI54cmJcnvigqjxcPybajYah7/ucthjUvf4V3NE5QOXb9fgnP6rPg=

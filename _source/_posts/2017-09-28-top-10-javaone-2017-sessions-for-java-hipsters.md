@@ -2,6 +2,7 @@
 layout: blog_post
 title: "The Top 10 JavaOne 2017 Sessions for the Java Hipster"
 author: mraible
+description: "This article contains a list of the top 10 JavaOne 2017 sessions for the Java Hipster. If you’re using JHipster, chances are you’re already aware of and using the latest trends and techniques in Java development."
 tags: [jhipster, java, javaone, javaone2017, springboot, angular, javascript]
 ---
 

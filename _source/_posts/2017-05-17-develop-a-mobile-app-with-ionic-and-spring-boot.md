@@ -2,6 +2,7 @@
 layout: blog_post
 title: 'Tutorial: Develop a Mobile App With Ionic and Spring Boot'
 author: mraible
+description: "This tutorial will show you how to build a Spring Boot API and an Ionic app, and then how to deploy the finished product to your iOS or Android-based mobile device."
 tags: [spring boot, java, pwa, progressive web app, ionic, typescript, ios, android]
 ---
 

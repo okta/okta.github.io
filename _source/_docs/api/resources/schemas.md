@@ -173,7 +173,6 @@ curl -v -X POST \
 -H "Content-Type: application/json" \
 -H "Authorization: SSWS ${api_token}" \
 -d '{
-  {
     "definitions": {
       "custom": {
         "id": "#custom",
@@ -181,7 +180,7 @@ curl -v -X POST \
         "properties": {
           "twitterUserName": {
             "title": "Twitter username",
-            "description": "User'\''s username for twitter.com",
+            "description": "Twitter Username",
             "type": "string",
             "required": false,
             "minLength": 1,
@@ -197,7 +196,6 @@ curl -v -X POST \
         "required": []
       }
     }
-  }
 }' "https://{yourOktaDomain}.com/api/v1/meta/schemas/user/default"
 ~~~
 

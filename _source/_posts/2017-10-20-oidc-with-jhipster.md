@@ -2,6 +2,7 @@
 layout: blog_post
 title: 'Use OpenID Connect Support with JHipster'
 author: mraible
+description: "JHipster is one of the hippest things to happen to Java developers in the last few years. This article shows you how to add single sign-on to your JHipster app with OpenID Connect (OIDC). You can even use Keycloak or Okta as your Identity Provider!"
 tags: [spring boot, angular, bootstrap, jhipster, java, typescript, oidc, oauth]
 ---
 

@@ -2,6 +2,7 @@
 layout: blog_post
 title: "The Lazy Developer's Guide to Authentication with Vue.js"
 author: mraible
+description: "This article shows you how to add authentication to a Vue.js application using the Okta Auth SDK and Okta API."
 tags: [authentication, auth, vue.js, vue, oidc, lazy developer]
 ---
 

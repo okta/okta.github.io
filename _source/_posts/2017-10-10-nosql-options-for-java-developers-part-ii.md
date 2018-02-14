@@ -2,6 +2,7 @@
 layout: blog_post
 title: 'NoSQL Options for Java Developers, Part II'
 author: mraible
+description: "A follow up article to NoSQL Options for Java Developers. This article asks a number of experts if they agree that the top five NoSQL options are MongoDB, Redis, Cassandra, Neo4j, and PostgreSQL."
 tags: [nosql, java, redis, mongodb, cassandra, neo4j, postgresql, spring boot, spring data]
 redirect_from:
   - "/blog/2017/09/08/nosql-options-for-java-developers-part-ii"

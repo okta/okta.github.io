@@ -2,6 +2,7 @@
 layout: blog_post
 title: "Get Started with Spring Security 5.0 and OIDC"
 author: mraible
+description: "Learn how to use Spring Security 5.0 and its OAuth 2.0 Login and OIDC support. Spring Security makes authentication with OAuth 2.0 pretty darn easy. It also provides the ability to fetch a user's information via OIDC. Follow this tutorial to learn more!"
 tags: [java, spring-security, spring-boot, springframework, oidc, spring-webflux]
 tweets: 
   - "Did you know that Spring Security 5 supports OpenID Connect out-of-the-box? It's pretty sweet!"

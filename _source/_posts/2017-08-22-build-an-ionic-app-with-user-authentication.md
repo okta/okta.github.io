@@ -2,13 +2,14 @@
 layout: blog_post
 title: 'Build an Ionic App with User Authentication'
 author: mraible
+description: "Ionic is an open source mobile SDK for developing native and progressive web applications. With Okta and OpenID Connect (OIDC) you can easily integrate authentication into an Ionic application, and never have to build it yourself again."
 tags: [ionic, authentication, oidc, angular, cordova, iphone, android, ios, okta]
 tweets: 
     - "Learn how to build an @ionicframework app with user authentication →"
     - "Leverage OIDC and @okta to add authentication to your Ionic app →"
 ---
 
-With Okta and OpenID Connect (OIDC) you can easily integrate authentication into an Ionic application, and never have to build it yourself again. OIDC allows you to authenticate directly against the [Okta API](/), and this article shows you how to do just that in an Ionic application. I'll demo how to log in with OIDC redirect, using Okta's Auth SDK, and using OAuth with Cordova's in-app browser; user registration is omitted as the feature is still under active development. 
+With Okta and OpenID Connect (OIDC) you can easily integrate authentication into an Ionic application, and never have to build it yourself again. OIDC allows you to authenticate directly against the [Okta API](https://developer.okta.com/product/), and this article shows you how to do just that in an Ionic application. I'll demo how to log in with OIDC redirect, using Okta's Auth SDK as well as how to use OAuth with Cordova's in-app browser; user registration is omitted as the feature is still under active development. 
 
 ## Why Ionic? 
 

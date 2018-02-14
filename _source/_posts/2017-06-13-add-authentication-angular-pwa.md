@@ -2,6 +2,7 @@
 layout: blog_post
 title: 'Add Authentication to Your Angular PWA'
 author: mraible
+description: "In this article, I'll show you how you can lock down a Spring Boot app, then use a modern authentication protocol, in this case OpenID Connect (OIDC), to authenticate and gain access to its APIs."
 tags: [pwa, progressive web app, angular, typescript, oidc, spring boot, java]
 ---
 

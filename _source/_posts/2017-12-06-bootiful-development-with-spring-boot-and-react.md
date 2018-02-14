@@ -2,6 +2,7 @@
 layout: blog_post
 title: 'Bootiful Development with Spring Boot and React'
 author: mraible
+description: "This post shows how you can build a UI and an API as separate apps. You’ll learn how to create REST endpoints with Spring MVC, configure Spring Boot to allow CORS, and create a React app to display its data. Finally, you'll lock it down with Okta."
 tags: [authentication, spring boot, react, okta, oidc]
 tweets: 
   - "Learn how to integrate @springboot and @reactjs in this tutorial from @mraible."
