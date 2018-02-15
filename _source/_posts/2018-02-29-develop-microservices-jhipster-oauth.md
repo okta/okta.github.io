@@ -404,7 +404,7 @@ In each project, run `jhipster heroku` and answer the questions as follows:
 | Name to deploy as? | `<unique-prefix>-<app-name>` (e.g., okta-gateway) |
 | Which region? | `us` |
 | Type of deployment? | `Git` |
-| JHipster Registry URL? | `<your-registry-url>` |
+| JHipster Registry URL? | `https://user:pass@app.herokuapp.com/` |
 
 After each has deployed, you'll want to run the following so they use Okta for authentication.
 
