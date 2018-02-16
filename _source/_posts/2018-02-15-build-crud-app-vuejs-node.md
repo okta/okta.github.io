@@ -759,6 +759,7 @@ Navigate to `http://localhost:8080` and give it a whirl.
 
 {% img blog/vue-crud-node/delete-post.png alt:"Delete Post" width:"800" %}{: .center-image }
 
+
 ## Do More With Vue!
 
 As I said at the top of this post, I think Vue stands head and shoulders above other frameworks. Here are five quick reasons why:
@@ -775,5 +776,7 @@ To learn more about Vue.js head over to [https://vuejs.org](https://vuejs.org/) 
 - [The Ultimate Guide to Progressive Web Applications](/blog/2017/07/20/the-ultimate-guide-to-progressive-web-applications)
 - [The Lazy Developer's Guide to Authentication with Vue.js](/blog/2017/09/14/lazy-developers-guide-to-auth-with-vue)
 - [Build a Cryptocurrency Comparison Site with Vue.js](/blog/2017/09/06/build-a-cryptocurrency-comparison-site-with-vuejs)
+
+You can find the source code for the application developed in this post at <https://github.com/oktadeveloper/okta-vue-node-example>. 
 
 Hit me up in the comments with any questions, and as always, follow [@oktadev](https://twitter.com/OktaDev) on Twitter to see all the cool content our dev team is creating.
