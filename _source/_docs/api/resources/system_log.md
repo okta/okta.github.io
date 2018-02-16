@@ -438,17 +438,17 @@ Describes an issuer in the authentication context.
 
 ### SecurityContext Object
 
-Describes security data related to an event.
+The `securityContext` object provides security information directly related to the evaluation of the event's IP reputation. IP reputation is a trustworthiness rating that evaluates how likely a sender is to be malicious based on the sender's IP address. As the name implies, the `securityContext` object is useful for security applications—flagging and inspecting suspicious events.
 
-|------------+----------------------------------------------------------------+-----------------+----------|
-| Property   | Description                                                    | DataType        | Nullable |
-| ---------- | -------------------------------------------------------------- | --------------- | -------- |
-| asNumber   | AS Number                                                      | Integer         | TRUE     |
-| asOrg      | AS Organization                                                | String          | TRUE     |
-| isp        | Internet Service Provider                                      | String          | TRUE     |
-| domain     | Domain                                                         | String          | TRUE     |
-| isProxy    | Specifies whether an event is from a known proxy               | Bool            | TRUE     |
-|------------+----------------------------------------------------------------+-----------------+----------|
+|----------+-------------------------------------------------------------------------------------------------+----------+----------|
+| Property | Description                                                                                     | DataType | Nullable |
+| -------- | ----------------------------------------------------------------------------------------------- | -------- | -------- |
+| asNumber | [Autonomous system](https://en.wikipedia.org/wiki/Autonomous_system_(Internet)) number associated with the autonomous system that the event request was sourced to | Integer | TRUE |
+| asOrg    | Organization associated with the autonomous system that the event request was sourced to        | String   | TRUE     |
+| isp      | [Internet service provider](https://en.wikipedia.org/wiki/Internet_service_provider) used to sent the event's request | String | TRUE |
+| domain   | The [domain name](https://en.wikipedia.org/wiki/Domain_name) associated with the IP address of the inbound event request | String | TRUE |
+| isProxy  | Specifies whether an event's request is from a known proxy                                      | Bool     | TRUE     |
+|----------+-------------------------------------------------------------------------------------------------+----------+----------|
 
 ### IpAddress Object
 
