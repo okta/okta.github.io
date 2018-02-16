@@ -463,7 +463,7 @@ cd platforms/ios/cordova && npm install ios-sim
 
 **TIP:** The biggest problem I found when running the app in Simulator was that it was difficult to get the keyboard to pop up. To workaround this, I used **Hardware** > **Keyboard** > **Toggle Software Keyboard** when I needed to type text in a field.
 
-If you enter your credentials on the login screen you'll notice nothing happens. Open Safari and navigate to **Develop** > **Simulator** > MyApp / **Login**, and you'll see that eventually, an error shows up in the console.
+If you enter your credentials on the login screen you'll notice nothing happens. Open Safari and navigate to **Develop** > **Simulator** > MyApp / **Login**, and you'll see that eventually, an error shows up in the console. If you don't see a Develop menu, review the steps in [this article](https://www.computerworld.com/article/3156141/apple-mac/how-to-use-the-safari-develop-menu-on-a-mac.html) to enable it.
 
 {% img blog/ionic-authentication/webinspector-error.png alt:"Web Inspector Error" %}
 
