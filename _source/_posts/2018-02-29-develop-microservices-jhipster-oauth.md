@@ -424,9 +424,23 @@ To set the JHipster Registry password on your gateway app, run:
 heroku config:set JHIPSTER_REGISTRY_PASSWORD="$JHIPSTER_REGISTRY_PASSWORD"
 ```
 
-Then update your Okta app to have a **Login redirect URI** that matches your Heroku app (e.g., `https://okta-gateway.herokuapp.com/`). To do this, log in to your Okta account, go to **Applications** > **JHipster Microservices** > **General** > **Edit**. 
+Then update your Okta app to have a **Login redirect URI** that matches your Heroku app (e.g., `https://okta-gateway.herokuapp.com/`). To do this, log in to your Okta account, go to **Applications** > **JHipster Microservices** > **General** > **Edit**. You'll also need to add this as a trusted origin in **API** > **Trusted Origins** > **Add Origin**.
 
-To see if your apps have started correctly, you can run `heroku logs --tail` in each app's directory. You may see an error:
+If you chose Elasticsearch like I did, you'll need to configure it to be in-memory and use [Heroku's ephemeral filesystem](http://stackoverflow.com/questions/12416738/how-to-use-herokus-ephemeral-filesystem). Add the following Elasticsearch properties to `src/main/resources/config/application-heroku.yml` and redeploy your apps using `jhipster heroku`. You could also try adding and configuring Heroku's [Searchbox Elasticsearch add-on](https://elements.heroku.com/addons/searchbox).
+
+```
+spring:
+    data:
+        elasticsearch:
+            cluster-name:
+            cluster-nodes:
+            properties:
+                path:
+                    logs: target/elasticsearch/log
+                    data: target/elasticsearch/data
+```
+
+To see if your apps have started correctly, you can run `heroku logs --tail` in each app's directory. You may see a timeout error:
 
 ```
 Error R10 (Boot timeout) -> Web process failed to bind to $PORT within 90 seconds of launch
@@ -443,9 +457,9 @@ Error R10 (Boot timeout) -> Web process failed to bind to $PORT within 90 second
 
 Their URLs are as follows:
 
-* https://okta-gateway.herokuapp.com/
-* https://okta-blog.herokuapp.com/
-* https://okta-store.herokuapp.com/
+* https://<your-prefix>-gateway.herokuapp.com/
+* https://<your-prefix>-blog.herokuapp.com/
+* https://<your-prefix>-store.herokuapp.com/
 
 Can you please increase the timeouts on these apps?
 
@@ -453,6 +467,8 @@ Thanks!
 ```
 
 Below are screenshots to prove everything worked after I got my timeouts increased. 😊
+
+| {% img blog/microservices-jhipster-oauth/heroku-welcome.png alt:"Gateway on Heroku" width:"400" %} | {% img blog/microservices-jhipster-oauth/heroku-gateway-routes.png alt:"Heroku Gateway Routes" width:"400" %} |
 
 | {% img blog/microservices-jhipster-oauth/heroku-blog.png alt:"Blog on Heroku" width:"400" %} | {% img blog/microservices-jhipster-oauth/heroku-store.png alt:"Store on Heroku" width:"400" %} |
 
@@ -472,4 +488,4 @@ To learn more about microservices, authentication, and JHipster, see the followi
 * [Use OpenID Connect Support with JHipster](/blog/2017/10/20/oidc-with-jhipster)
 * [JHipster Security Documentation](http://www.jhipster.tech/security/)
 
-If you have any feedback, I'd love to hear it! Please leave a comment below, hit me up on Twitter ([@mraible](https://twitter.com/mraible), or post a question in our [Developer Forums](https://devforum.okta.com/).
+If you have any feedback, I'd love to hear it! Please leave a comment below, hit me up on Twitter [@mraible](https://twitter.com/mraible), or post a question in our [Developer Forums](https://devforum.okta.com/).
