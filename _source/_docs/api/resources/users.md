@@ -1108,7 +1108,6 @@ the changes are reflected in your results.
 * Requires [URL encoding](http://en.wikipedia.org/wiki/Percent-encoding). For example, `filter=lastUpdated gt "2013-06-01T00:00:00.000Z"` is encoded as `filter=lastUpdated%20gt%20%222013-06-01T00:00:00.000Z%22`.
 Examples use cURL-style escaping instead of URL encoding to make them easier to read.
 * Supports only a limited number of properties: `status`, `lastUpdated`, `id`, `profile.login`, `profile.email`, `profile.firstName`, and `profile.lastName`.
-* Doesn&#8217;t include users with a status of `DEPROVISIONED`. You must include a status filter for deprovisioned users.
 
 | Filter                                        | Description                                      |
 |:----------------------------------------------|:-------------------------------------------------|
