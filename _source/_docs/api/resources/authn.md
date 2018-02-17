@@ -1202,6 +1202,39 @@ User is assigned to a Sign-On Policy or App Sign-On Policy that requires additio
          }
       },
       "factors":[
+         {  
+            "id":"opf1cla0gggOBWxuC1d8",
+            "factorType":"push",
+            "provider":"OKTA",
+            "vendorName":"OKTA",
+            "profile":{  
+               "credentialId":"abcd@okta.com",
+               "deviceType":"SmartPhone_Android",
+               "keys":[  
+                  {  
+                     "kty":"PKIX",
+                     "use":"sig",
+                     "kid":"default",
+                     "x5c":[  
+                        "Mdkkdfjkdjf"
+                     ]
+                  }
+               ],
+               "name":"SM-N9005",
+               "platform":"ANDROID",
+               "version":"21"
+            },
+            "_links":{  
+               "verify":{  
+                  "href":"https://{yourOktaDomain}.okta.com/api/v1/authn/factors/opf1cla0yyvOBWxuC1d8/verify",
+                  "hints":{  
+                     "allow":[  
+                        "POST"
+                     ]
+                  }
+               }
+            }
+         },
          {
             "id":"smsph8F1esz8LlSjo0g3",
             "factorType":"sms",
@@ -1225,7 +1258,12 @@ User is assigned to a Sign-On Policy or App Sign-On Policy that requires additio
       "policy":{
          "allowRememberDevice":true,
          "rememberDeviceLifetimeInMinutes":1440,
-         "rememberDeviceByDefault":false
+         "rememberDeviceByDefault":false,
+         "factorsPolicyInfo": {
+             "opf1cla0gggOBWxuC1d8": {
+                 "autoPushEnabled": true
+             }
+         }
       },
       "target":{
          "type":"APP",
@@ -3562,6 +3600,16 @@ Parameter      | Description                                         | Param Typ
 fid            | `id` of factor returned from enrollment             | URL        | String   | TRUE     |
 stateToken     | [state token](#state-token) for current transaction | Body       | String   | TRUE     |
 rememberDevice | user&#8217;s decision to remember device            | URL        | Boolean  | FALSE    |
+autoPush       | user&#8217;s decision to send push to device automatically | URL | Boolean  | FALSE    |
+
+**Okta Verify Push Details Pertaining to Auto-Push**
+
+* You don't need to pass the `autoPush` flag to Okta unless you have a custom sign-in flow that does not use the Okta sign-in widget, but want Okta to keep track of this preference.  The custom sign-in flow must still handle the logic to actually send the Auto-Push, since this param only deals with the Auto-Push setting.  
+* If you pass the `autoPush` query param when verifying an Okta Verify Push factor, Okta saves this value as the user's preference to have the push notification sent automatically if the verification is successful (the user presses "Approve" on their phone).
+* If there is already a saved Auto-Push preference, the successful verify call overrides the current preference if it is different from the value of `autoPush`.
+* This saved Auto-Push preference is always returned in the `/api/v1/authn/` response's `autoPushEnabled` field if the user is enrolled for the Okta Verify Push factor [example here](#response-example-for-factor-challenge-for-step-up-authentication-with-okta-session).  If the user's Auto-Push preference has not explicitly been set before, `autoPushEnabled` has a value of false.
+* The Auto-Push preference is stored in a cookie value and users that clear their cookies remove that preference. 
+* Please note, the `autoPush` flag will have no effect when trying to verify a factor other than Okta Verify Push (factorId prefix = "opf").
 
 
 ##### Request Example for Verify Push Factor

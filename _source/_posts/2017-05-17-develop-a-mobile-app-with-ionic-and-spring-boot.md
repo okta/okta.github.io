@@ -670,7 +670,7 @@ After making these additions, you should be able to delete beer names. To emulat
 
 ## PWAs with Ionic
 
-Ionic ships with support for creating progressive web apps (PWAs). If you'd like to learn more about what PWAs are, see [Navigating the World of Progressive Web Apps with Ionic 2](http://blog.ionic.io/navigating-the-world-of-progressive-web-apps-with-ionic-2/). This blog post is still relevant for Ionic 3.
+Ionic ships with support for creating progressive web apps (PWAs). If you'd like to learn more about what PWAs are, see [Navigating the World of Progressive Web Apps with Ionic 2](http://blog.ionicframework.com/navigating-the-world-of-progressive-web-apps-with-ionic-2/). This blog post is still relevant for Ionic 3.
 
 If you run the [Lighthouse Chrome extension](https://developers.google.com/web/tools/lighthouse/) on this application, you'll likely get a mediocre score in the 40s.
 
