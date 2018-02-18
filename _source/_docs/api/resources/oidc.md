@@ -49,7 +49,7 @@ If you have a developer account, you can use the `default` authorization server 
 ### /authorize
 {:.api .api-operation}
 
-{% api_operation get ${baseUrl}/v1/authorize %}
+{% api_operation get *${baseUrl}*/v1/authorize %}
 
 > This endpoint's base URL will vary depending on whether you are using a custom authorization server or not. For more information, see [Composing Your Base URL](#composing-your-base-url).
 
@@ -236,7 +236,7 @@ https://www.example.com/#error=invalid_scope&error_description=The+requested+sco
 ### /token
 {:.api .api-operation}
 
-{% api_operation post ${baseUrl}/v1/token %}
+{% api_operation post *${baseUrl}*/v1/token %}
 
 This endpoint returns access tokens, ID tokens, and refresh tokens, depending on the request parameters. For [password](/authentication-guide/implementing-authentication/password), [client credentials](/authentication-guide/implementing-authentication/client-creds), and [refresh token](/authentication-guide/tokens/refreshing-tokens) flows, calling `/token` is the only step of the flow. For the [authorization code](/authentication-guide/implementing-authentication/auth-code) flow, calling `/token` is the second step of the flow.
 
@@ -333,7 +333,7 @@ Content-Type: application/json;charset=UTF-8
 ### /introspect
 {:.api .api-operation}
 
-{% api_operation post ${baseUrl}/v1/introspect %}
+{% api_operation post *${baseUrl}*/v1/introspect %}
 
 > This endpoint's base URL will vary depending on whether you are using a custom authorization server or not. For more information, see [Composing Your Base URL](#composing-your-base-url).
 
@@ -442,7 +442,7 @@ Content-Type: application/json;charset=UTF-8
 {:.api .api-operation}
 
 
-{% api_operation post ${baseUrl}/v1/revoke %}
+{% api_operation post *${baseUrl}*/v1/revoke %}
 
 > This endpoint's base URL will vary depending on whether you are using a custom authorization server or not. For more information, see [Composing Your Base URL](#composing-your-base-url).
 
@@ -497,7 +497,7 @@ Content-Type: application/json;charset=UTF-8
 ### /logout
 {:.api .api-operation}
 
-{% api_operation get ${baseUrl}/v1/logout %}
+{% api_operation get *${baseUrl}*/v1/logout %}
 
 > This endpoint's base URL will vary depending on whether you are using a custom authorization server or not. For more information, see [Composing Your Base URL](#composing-your-base-url).
 
@@ -560,7 +560,7 @@ Content-Type: application/json;charset=UTF-8
 ### /keys
 {:.api .api-operation}
 
-{% api_operation get ${baseUrl}/v1/keys %}
+{% api_operation get *${baseUrl}*/v1/keys %}
 
 > This endpoint's base URL will vary depending on whether you are using a custom authorization server or not. For more information, see [Composing Your Base URL](#composing-your-base-url).
 
@@ -649,7 +649,7 @@ You can use an [introspection request](#introspect) for validation.
 ### /userinfo
 {:.api .api-operation}
 
-{% api_operation get ${baseUrl}/v1/userinfo %}
+{% api_operation get *${baseUrl}*/v1/userinfo %}
 
 > This endpoint's base URL will vary depending on whether you are using a custom authorization server or not. For more information, see [Composing Your Base URL](#composing-your-base-url).
 
@@ -851,7 +851,7 @@ HTTP 404 Not Found
 ### /.well-known/openid-configuration
 {:.api .api-operation}
 
-{% api_operation get ${baseUrl}/.well-known/openid-configuration %}
+{% api_operation get *${baseUrl}*/.well-known/openid-configuration %}
 
 > This endpoint's base URL will vary depending on whether you are using a custom authorization server or not. For more information, see [Composing Your Base URL](#composing-your-base-url).
 
