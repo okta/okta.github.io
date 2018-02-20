@@ -827,11 +827,3 @@ iframe[name='google_conversion_frame'] {
 
 .icon-small--social {
   background-image: image_url('icons/flat-twitter--with-hover.png'); }
-
-.playgroundIframe {
-  height: 680px;
-  width: 1600px;
-  padding: 10px;
-  -webkit-box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
-  -moz-box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
-  box-shadow: 0 0 20px rgba(0, 0, 0, 0.2); }
