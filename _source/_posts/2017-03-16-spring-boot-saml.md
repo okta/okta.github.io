@@ -16,7 +16,7 @@ My Okta developer experience began a couple years ago (in December 2014) when I 
 Ready to get started? You can follow along in with the written tutorial below, [check out the code on GitHub](https://github.com/oktadeveloper/okta-spring-boot-saml-example), or watch the screencast I made to walk you through the same process.
 
 <div style="text-align: center">
-<iframe width="560" height="315" src="https://www.youtube.com/embed/JBtyGfrz-jA" frameborder="0" allowfullscreen></iframe>
+<iframe width="600" height="338" style="max-width: 100%" src="https://www.youtube.com/embed/kBaitgdcNWo" frameborder="0" allowfullscreen></iframe>
 </div>
 
 ## Sign Up for an Okta Developer Account
