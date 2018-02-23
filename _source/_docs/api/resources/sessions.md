@@ -564,6 +564,28 @@ If the session is invalid, a `404 Not Found` response will be returned.
 }
 ~~~
 
+#### Option: Use the HTTP Header Prefer
+
+Okta now supports [the HTTP Header `Prefer`](https://tools.ietf.org/html/rfc7240#section-4.2) in [the Sessions API for refreshing sessions](/docs/api/resources/sessions#refresh-current-session). You can extend the session lifetime, but skip any processing work related to building the response body.
+
+Example Request
+
+~~~http
+Accept: application/json
+Content-Type: application/json
+Authorization: SSWS ${api_token} or {sid_cookie}
+Prefer: return=minimal
+
+POST https://${yourDomain}.com/api/v1/sessions/{id-or-me}/refresh
+~~~
+
+Example Response
+
+~~~http
+HTTP/1.1 204 No Content
+Preference-Applied: return=minimal
+~~~
+
 ### Close Current Session
 {:.api .api-request}
 
