@@ -9,7 +9,7 @@ title: System Log (Beta)
 
 The Okta System Log records system events related to your organization in order to provide an audit trail that can be used to understand platform activity and to diagnose problems.
 
-The Okta System Log API provides near real-time read-only access to your organization's system log and is the programmatic counterpart of the [System Log UI](https://support.okta.com/help/Documentation/Knowledge_Article/About-the-System-Log-651903282). 
+The Okta System Log API provides near real-time read-only access to your organization's system log and is the programmatic counterpart of the [System Log UI](https://help.okta.com/en/prod/Content/Topics/Reports/Reports_SysLog.htm). 
 
 Often the terms "event" and "log event" are used interchangeably. In the context of this API, an "event" is an occurrence of interest within the system and "log" or "log event" is the recorded fact.  
  
@@ -218,7 +218,7 @@ LogEvent objects are read-only. The following properties are available:
 
 > The actor and/or target of an event is dependent on the action performed. All events have actors but not all have targets.
 
-> The `authenticationContext.externalSessionId` identifies events that occurred in the same session.  A single `transaction.id` identifies events that occurred together as part of an operation (e.g. a request to Okta's servers). Use `authenticationContext.externalSessionId` to link events that occurred in the same session, and the `transaction.id` to link events that occurred as part of the same operation.
+> The `authenticationContext.externalSessionId` identifies events that occurred in the same session. A single `transaction.id` identifies events that occurred together as part of an operation (e.g. a request to Okta's servers). Use `authenticationContext.externalSessionId` to link events that occurred in the same session, and the `transaction.id` to link events that occurred as part of the same operation.
 
 ### Actor Object
 
@@ -399,7 +399,7 @@ The `authenticationContext` contains metadata about how the actor is authenticat
 }
 ```
 In such a case, one can recognize that the user used an IWA credential to authenticate against an Active Directory instance. All of the user's future generated events in this login session will share the same `externalSessionId`.
- 
+
 Among other operations, this response object can be used to scan for suspicious login activity or perform analytics on user authentication habits (e.g. how often authentication scheme X is used versus authentication scheme Y).
 
 |------------+----------------------------------------------------------------+-----------------+----------+-----------+-----------|
@@ -427,18 +427,18 @@ Some of the fields listed above have a finite set of possible values.
 
 ### Issuer Object
 
-Describes an issuer in the authentication context.
+Describes the `issuer` of the authorization server when the authentication is performed via OAuth. This is the location where well-known resources regarding details of the authorization servers are published.
 
 |------------+----------------------------------------------------------------+-----------------+----------|
 | Property   | Description                                                    | DataType        | Nullable |
 | ---------- | -------------------------------------------------------------- | --------------- | -------- |
-| id         | An ID for the issuer                                           | String          | TRUE     |
-| type       | The type of the issuer                                         | String          | TRUE     |
+| id         | Varies depending on the type of authentication. If authentication is SAML 2.0, `id` is the issuer in the SAML assertion. For social login, `id` is the issuer of the token.                                         | String          | TRUE     |
+| type       | Information regarding `issuer` and source of the SAML assertion or token.                                         | String          | TRUE     |
 |------------+----------------------------------------------------------------+-----------------+----------|
 
 ### SecurityContext Object
 
-The `securityContext` object provides security information directly related to the evaluation of the event's IP reputation. IP reputation is a trustworthiness rating that evaluates how likely a sender is to be malicious based on the sender's IP address. As the name implies, the `securityContext` object is useful for security applications—flagging and inspecting suspicious events.
+The `securityContext` object provides security information directly related to the evaluation of the event's IP reputation. IP reputation is a trustworthiness rating that evaluates how likely a sender is to be malicious based on the sender's IP address. As the name implies, the `securityContext` object is useful for security applications-flagging and inspecting suspicious events.
 
 |----------+-------------------------------------------------------------------------------------------------+----------+----------|
 | Property | Description                                                                                     | DataType | Nullable |
@@ -458,7 +458,7 @@ Describes an IP address used in a request.
 | Property                                                                                                   | Description                            | DataType                                                    | Nullable |
 |:-----------------------------------------------------------------------------------------------------------|:---------------------------------------|:------------------------------------------------------------|:---------|
 | ip                                                                                                         | IP address                             | String                                                      | TRUE     |
-| geographicalContext                                                                                        | Geographical context of the IP address |   [GeographicalContext Object](#geographicalcontext-object) | TRUE     |
+| geographicalContext                                                                                        | Geographical context of the IP address | [GeographicalContext Object](#geographicalcontext-object) | TRUE     |
 | version                                                                                                    | IP address version                     | V4 or V6                                                    | TRUE     |
 | source                                                                                                     | Details regarding the source           | String                                                      | TRUE     |
 | ------------+----------------------------------------------------------------+-----------------+---------- |
@@ -599,8 +599,8 @@ filter=client.ipAddress eq "184.73.186.14"
 
 ###### Keyword Filter
 
-The query parameter `q` can be used to perform keyword matching against a LogEvents object's attribute values. In order to satisfy the constraint, all supplied keywords must be matched exactly. 
-Note that matching is case-insensitive. 
+The query parameter `q` can be used to perform keyword matching against a LogEvents object's attribute values. In order to satisfy the constraint, all supplied keywords must be matched exactly.
+Note that matching is case-insensitive.
 
 The following are some examples of common keyword filtering:
 
@@ -617,9 +617,9 @@ LogEvent objects can be filtered by [`published`](#attributes) attribute value w
 * `since` and `until`
 * `after`
 
-Note that `since` and `after` are mutually exclusive and cannot be specified simultaneously. 
+Note that `since` and `after` are mutually exclusive and cannot be specified simultaneously.
 
-The `after` parameter is system generated for use in ["next" links](#next-link-response-header). Users should not attemp to craft requests using this value and rely on the system generated links instead.  
+The `after` parameter is system generated for use in ["next" links](#next-link-response-header). Users should not attemp to craft requests using this value and rely on the system generated links instead.
 
 ##### Response
 {:.api .api-response .api-response-params}

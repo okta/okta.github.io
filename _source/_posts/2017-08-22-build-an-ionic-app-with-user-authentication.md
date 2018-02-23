@@ -19,7 +19,7 @@ Cordova and PhoneGap allow you to target multiple platforms (e.g. Android and iO
 
 I first started using Ionic in late 2013. The project I was working on was developing a native application, but wanted to build several screens of the application with HTML so web developers could author them. I [wrote about my experience in March 2014](https://raibledesigns.com/rd/entry/developing_an_ios_native_app). I enjoyed working with it and found that porting an existing app to use it was more about modifying HTML and tweaking CSS. 
 
-Ionic 2 was [released in January](http://blog.ionic.io/announcing-ionic-2-0-0-final/), making it possible to develop Ionic applications with Angular. Ionic 3 was [released in April](http://blog.ionic.io/ionic-3-0-has-arrived/), allowing development with Angular 4.
+Ionic 2 was [released in January](http://blog.ionicframework.com/announcing-ionic-2-0-0-final/), making it possible to develop Ionic applications with Angular. Ionic 3 was [released in April](http://blog.ionicframework.com/ionic-3-0-has-arrived/), allowing development with Angular 4.
 
 **NOTE:** “Angular” is the common name for Angular 2+. AngularJS is the common name for the 1.x versions. The reason for #ItsJustAngular is Angular 4 was released in March 2017. See [Branding Guidelines for Angular and AngularJS](http://angularjs.blogspot.com/2017/01/branding-guidelines-for-angular-and.html) for more information.
 
@@ -673,7 +673,7 @@ Ionic ships with support for creating progressive web apps (PWAs). This means yo
 You can see how to enable service workers and make your app into a PWA by reading the [PWAs section](/blog/2017/05/17/develop-a-mobile-app-with-ionic-and-spring-boot#pwas-with-ionic) of [how to develop a mobile app with Ionic and Spring Boot](/blog/2017/05/17/develop-a-mobile-app-with-ionic-and-spring-boot). A PWA is a web application that can be “installed” on your system. It works offline when you don't have an internet connection, leveraging data cached during your last interactions with the app. Adding PWA features can make your apps load a lot faster, creating happy users. To learn more about PWAs, see [The Ultimate Guide to Progressive Web Applications](/blog/2017/07/20/the-ultimate-guide-to-progressive-web-applications). 
 
 Ionic has invested heavily in supporting PWAs. You can read more about why in [
-What Progressive Web Apps can do for you](http://blog.ionic.io/what-progressive-web-apps-can-do-for-you/).
+What Progressive Web Apps can do for you](http://blog.ionicframework.com/what-progressive-web-apps-can-do-for-you/).
 
 ## Learn More
 

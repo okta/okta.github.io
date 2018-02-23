@@ -25,7 +25,7 @@ Now use the instructions for your chosen authorization server to create a groups
 
 ### Create a Token with Groups Claim (Okta Authorization Server)
 
-Use this procedure if you have the Okta Authorization Server, not the `default` or other Custom Authorization Server. 
+Use this procedure if you have the Okta Authorization Server, not the `default` or other Custom Authorization Server.
 
 #### Step One: Get the Group IDs
 
@@ -87,7 +87,7 @@ This example uses one `groupId` for simplicity's sake.
 #### Step Two: Add List of Groups to Profile of Client App
 
 If you only have one or two groups to specify, simply add the group IDs to the first parameter of the `getFilteredGroups` function described in the next step.
-However, if you have a lot of groups to whitelist, you can put the group IDs in the client app's profile property bag: `https://{yourOktaDomain}.com/api/v1/apps/:aid`.
+However, if you have a lot of groups to whitelist, you can put the group IDs in the client app's profile property bag: `https://{yourOktaDomain}.com/api/v1/apps/${applicationId}`.
 The following example names the group whitelist `groupwhitelist`, but you can name it anything.
 
 Request Example:
@@ -137,9 +137,9 @@ curl -X PUT \
   }'
 ~~~
 
-You can add application groups, user groups, or both to the group whitelist, specified as an array of IDs. 
+You can add application groups, user groups, or both to the group whitelist, specified as an array of IDs.
 
-To use the group whitelist for every client that gets this claim in a token, put the attribute name of the whitelist in the first parameter of the `getFilteredGroups` function described in the next step. 
+To use the group whitelist for every client that gets this claim in a token, put the attribute name of the whitelist in the first parameter of the `getFilteredGroups` function described in the next step.
 
 #### Step Three: Configure a Custom Claim for Your Groups (Okta Authorization Server)
 
@@ -170,7 +170,7 @@ curl -X GET \
   &state=myState&nonce=${yourNonceValue}' \
 ~~~
 
-#### Step Five: Decode the JWT to Verify 
+#### Step Five: Decode the JWT to Verify
 
 Decode the JWT in the response to see that the groups are in the token. For example, this JWK contains the `groups` claim in an ID token:
 
@@ -269,7 +269,7 @@ This example uses one `groupId` for simplicity's sake.
 #### Step Two:  Add List of Groups to Profile of Client App
 
 If you only have one or two groups to specify, simply add the group IDs to the first parameter of the `getFilteredGroups` function described in the next step.
-However, if you have a lot of groups to whitelist, you can put the group IDs in the client app's profile property bag: `https://{yourOktaDomain}.com/api/v1/apps/:aid`.
+However, if you have a lot of groups to whitelist, you can put the group IDs in the client app's profile property bag: `https://{yourOktaDomain}.com/api/v1/apps/${applicationId}`.
 
 This example names the group whitelist `groupwhitelist`, but you can name it anything.
 
@@ -320,17 +320,17 @@ curl -X POST \
   }'
 ~~~
 
-You can add application groups, user groups or both to the group whitelist, specified as an array of IDs. 
+You can add application groups, user groups or both to the group whitelist, specified as an array of IDs.
 
-To use the group whitelist for every client that gets this claim in a token, put the attribute name of the whitelist in the first parameter of the `getFilteredGroups` function described in the next step. 
+To use the group whitelist for every client that gets this claim in a token, put the attribute name of the whitelist in the first parameter of the `getFilteredGroups` function described in the next step.
 
 #### Step Three: Configure a Custom Claim for Your Groups (Custom Authorization Server)
 
 Add a custom claim for the ID token or access token on a Custom Authorization Server with the following function:
 
 ~~~
- getFilteredGroups({app.profile.whitelist}, 
- "{value-to-represent-the-group-in-the-token}", 
+ getFilteredGroups({app.profile.whitelist},
+ "{value-to-represent-the-group-in-the-token}",
  {maximum-number-of-groups-to-include-in-token})
 ~~~
 
@@ -388,7 +388,7 @@ Now when you mint a token, groups in the `groupwhitelist` that also have the use
 
 #### Step Four: Send a Test Request
 
-To obtain a token with the configured groups claim, send a request for an ID token that includes one of the scopes that the claim is associated with: `https://{yourOktaDomain}.com/oauth2/:authorizationServerId/v1/authorize`.
+To obtain a token with the configured groups claim, send a request for an ID token that includes one of the scopes that the claim is associated with: `https://{yourOktaDomain}.com/oauth2/${authorizationServerId}/v1/authorize`.
 
 Request Example for Custom Authorization Server:
 
@@ -406,7 +406,7 @@ Request Example for Custom Authorization Server:
 * In this example, the claim was configured to work with all scopes. If you specify only certain scopes to return the claim, you'll need to specify one of them in the request.
 * To obtain an access token, simply change `response_type=id_token` to `response_type='token'`.
 
-#### Step Five: Decode the JWT to Verify 
+#### Step Five: Decode the JWT to Verify
 
 Decode the JWT in the response to see that the groups are in the token. For example, this JWK contains the group claim:
 
@@ -458,6 +458,6 @@ Example Payload Data for an Access Token:
 
 The ID token or access token contains the group WestCoastDivision so the audience (`aud`) has access to the group information about the user.
 
-For flows other than implicit, post to the token endpoint `https://{yourOktaDomain}.com/oauth2/:authorizationServerId/v1/token` with the user or client you want. Make sure the user is assigned to the app and to one of the groups from your whitelist.
+For flows other than implicit, post to the token endpoint `https://{yourOktaDomain}.com/oauth2/${authorizationServerId}/v1/token` with the user or client you want. Make sure the user is assigned to the app and to one of the groups from your whitelist.
 
 If the results aren't as expected, start your troubleshooting by inspecting the System Log to see what went wrong. Also, try requesting only an ID token instead of both and ID token and access token.

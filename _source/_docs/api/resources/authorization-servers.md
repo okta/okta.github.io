@@ -420,7 +420,7 @@ Returns the [policy](#policy-object) you updated
 
 #### Delete a Policy
 
-{% api_operation DELETE /api/v1/authorizationServers/${authorizationServerId}/policies/:policyId %}
+{% api_operation DELETE /api/v1/authorizationServers/${authorizationServerId}/policies/${policyId} %}
 
 Delete a policy specified by the `policyId`
 
@@ -492,7 +492,7 @@ Returns the [scopes](#scope-object) defined in the specified Custom Authorizatio
 
 #### Get a Scope
 
-{% api_operation get /api/v1/authorizationServers/${authorizationServerId}/scopes/:scopeId %}
+{% api_operation get /api/v1/authorizationServers/${authorizationServerId}/scopes/${scopeId} %}
 
 Get a scope specified by the `scopeId`
 
@@ -554,7 +554,7 @@ Returns the [scope](#scope-object) you created
 
 #### Update a Scope
 
-{% api_operation put /api/v1/authorizationServers/${authorizationServerId}/scopes/:scopeId %}
+{% api_operation put /api/v1/authorizationServers/${authorizationServerId}/scopes/${scopeId} %}
 
 Change the configuration of a scope specified by the `scopeId`
 
@@ -589,7 +589,7 @@ Returns the [scope](#scope-object) you updated
 
 #### Delete a Scope
 
-{% api_operation DELETE /api/v1/authorizationServers/${authorizationServerId}/scopes/:scopeId %}
+{% api_operation DELETE /api/v1/authorizationServers/${authorizationServerId}/scopes/${scopeId} %}
 
 Delete a scope specified by the `scopeId`
 
@@ -661,7 +661,7 @@ Returns the [claims](#claim-object) defined in the specified Custom Authorizatio
 
 #### Get a Claim
 
-{% api_operation get /api/v1/authorizationServers/${authorizationServerId}/claims/:claimId %}
+{% api_operation get /api/v1/authorizationServers/${authorizationServerId}/claims/${claimId} %}
 
 Returns the claim specified by the `claimId`
 
@@ -731,7 +731,7 @@ Returns the [claim](#claim-object) you created
 
 #### Update a Claim
 
-{% api_operation put /api/v1/authorizationServers/${authorizationServerId}/claims/:claimId %}
+{% api_operation put /api/v1/authorizationServers/${authorizationServerId}/claims/${claimId} %}
 
 Change the configuration of a claim specified by the `claimId`
 
@@ -776,7 +776,7 @@ Returns the [claim](#claim-object) you updated
 
 #### Delete a Claim
 
-{% api_operation DELETE /api/v1/authorizationServers/${authorizationServerId}/claims/:claimId %}
+{% api_operation DELETE /api/v1/authorizationServers/${authorizationServerId}/claims/${claimId} %}
 
 Delete a claim specified by the `claimId`
 

@@ -6,7 +6,7 @@ excerpt: The Schemas API defines custom user profiles for Okta users and applica
 
 # Schemas API
 
-Okta&#8217;s [Universal Directory](https://support.okta.com/articles/Knowledge_Article/About-Universal-Directory) allows administrators to define custom user profiles for Okta users and applications.  Okta has adopted a subset [JSON Schema Draft 4](https://tools.ietf.org/html/draft-zyp-json-schema-04) as the schema language to describe and validate extensible user profiles. [JSON Schema](http://json-schema.org/) is a lightweight declarative format for describing the structure, constraints, and validation of JSON documents.
+Okta&#8217;s [Universal Directory](https://help.okta.com/en/prod/Content/Topics/Directory/About_Universal_Directory.htm) allows administrators to define custom user profiles for Okta users and applications.  Okta has adopted a subset [JSON Schema Draft 4](https://tools.ietf.org/html/draft-zyp-json-schema-04) as the schema language to describe and validate extensible user profiles. [JSON Schema](http://json-schema.org/) is a lightweight declarative format for describing the structure, constraints, and validation of JSON documents.
 
 > Okta has only implemented a subset of [JSON Schema Draft 4](https://tools.ietf.org/html/draft-zyp-json-schema-04).  This document should describe which parts are applicable to Okta and any extensions Okta has made to [JSON Schema Draft 4](https://tools.ietf.org/html/draft-zyp-json-schema-04)
 
@@ -157,7 +157,7 @@ Adds one or more [custom user profile properties](#user-profile-schema-property-
 
 | Parameter   | Description                                          | Param Type | DataType                                                         | Required |
 |:------------|:-----------------------------------------------------|:-----------|:-----------------------------------------------------------------|:---------|
-| definitions | Subschema with one or more custom profile properties | Body       |  [User Profile Custom Subschema](#user-profile-custom-subschema) | TRUE     |
+| definitions | Subschema with one or more custom profile properties | Body       | [User Profile Custom Subschema](#user-profile-custom-subschema) | TRUE     |
 
 ##### Response Parameters
 {:.api .api-response .api-response-params}
@@ -326,7 +326,7 @@ Updates one or more [custom user profile properties](#user-profile-schema-proper
 
 | Parameter   | Description                                          | Param Type | DataType                                                         | Required |
 |:------------|:-----------------------------------------------------|:-----------|:-----------------------------------------------------------------|:---------|
-| definitions | Subschema with one or more custom profile properties | Body       |  [User Profile Custom Subschema](#user-profile-custom-subschema) | TRUE     |
+| definitions | Subschema with one or more custom profile properties | Body       | [User Profile Custom Subschema](#user-profile-custom-subschema) | TRUE     |
 
 ##### Response Parameters
 {:.api .api-response .api-response-params}
@@ -498,7 +498,7 @@ A property cannot be removed if it is being referenced as a [matchAttribute](./i
 
 | Parameter   | Description                                                    | Param Type | DataType                                                         | Required |
 |:------------|:---------------------------------------------------------------|:-----------|:-----------------------------------------------------------------|:---------|
-| definitions | Subschema with one or more custom profile properties to remove | Body       |  [User Profile Custom Subschema](#user-profile-custom-subschema) | TRUE     |
+| definitions | Subschema with one or more custom profile properties to remove | Body       | [User Profile Custom Subschema](#user-profile-custom-subschema) | TRUE     |
 
 > Properties must be explicitly set to `null` to be removed from schema, otherwise the `POST` will be interpreted as a partial update.
 
@@ -637,7 +637,7 @@ curl -v -X POST \
 ### Get App User Schema
 {:.api .api-operation}
 
-{% api_operation get /api/v1/meta/schemas/apps/*:instanceId*/default %}
+{% api_operation get /api/v1/meta/schemas/apps/${instanceId}/default %}
 
 Fetches the default schema for an App User
 
@@ -720,7 +720,7 @@ curl -v -X GET \
 ### Add Property to App User Profile Schema
 {:.api .api-operation}
 
-{% api_operation post /api/v1/meta/schemas/apps/*:instanceId*/default %}
+{% api_operation post /api/v1/meta/schemas/apps/${instanceId}/default %}
 
 Adds one or more [custom app user profile properties](#app-user-profile-schema-property-object) to the app user schema
 
@@ -831,7 +831,7 @@ curl -v -X POST \
 ### Update App User Profile Schema Property
 {:.api .api-operation}
 
-{% api_operation post /api/v1/meta/schemas/apps/*:instanceId*/default %}
+{% api_operation post /api/v1/meta/schemas/apps/${instanceId}/default %}
 
 Updates one or more [custom app user profile properties](#app-user-profile-schema-property-object) in the schema.
 
@@ -942,7 +942,7 @@ curl -v -X POST \
 ### Remove Property from App User Profile Schema
 {:.api .api-operation}
 
-{% api_operation post /api/v1/meta/schemas/apps/*:instanceId*/default %}
+{% api_operation post /api/v1/meta/schemas/apps/${instanceId}/default %}
 
 Removes one or more [custom app user profile properties](#app-user-profile-schema-property-object) from the user schema.
 
@@ -1163,11 +1163,11 @@ The user schema is a valid [JSON Schema Draft 4](https://tools.ietf.org/html/dra
 | $schema     | JSON Schema version identifier                                                           | String                                                  | FALSE    | FALSE  | TRUE     |             |
 | name        | name for the schema                                                                      | String                                                  | FALSE    | TRUE   | TRUE     |             |
 | title       | user-defined display name for the schema                                                 | String                                                  | FALSE    | FALSE  | FALSE    |             |
-| created     | timestamp when schema was created                                                        |   [ISO 8601 String](https://tools.ietf.org/html/rfc3339) | FALSE    | FALSE  | TRUE     |             |
-| lastUpdated | timestamp when schema was last updated                                                   |   [ISO 8601 String](https://tools.ietf.org/html/rfc3339) | FALSE    | FALSE  | TRUE     |             |
-| definitions | user profile subschemas                                                                  |   [User Profile Subschemas](#user-profile-subschemas)    | FALSE    | FALSE  | FALSE    | JSON Schema |
-| type        | type of   [root schema](https://tools.ietf.org/html/draft-zyp-json-schema-04#section-3.4) | String                                                  | FALSE    | FALSE  | TRUE     |             |
-| properties  | user model properties                                                                    |   [User Model](users#user-model) property set     | FALSE    | FALSE  | TRUE     |             |
+| created     | timestamp when schema was created                                                        | [ISO 8601 String](https://tools.ietf.org/html/rfc3339) | FALSE    | FALSE  | TRUE     |             |
+| lastUpdated | timestamp when schema was last updated                                                   | [ISO 8601 String](https://tools.ietf.org/html/rfc3339) | FALSE    | FALSE  | TRUE     |             |
+| definitions | user profile subschemas                                                                  | [User Profile Subschemas](#user-profile-subschemas)    | FALSE    | FALSE  | FALSE    | JSON Schema |
+| type        | type of [root schema](https://tools.ietf.org/html/draft-zyp-json-schema-04#section-3.4) | String                                                  | FALSE    | FALSE  | TRUE     |             |
+| properties  | user model properties                                                                    | [User Model](users#user-model) property set     | FALSE    | FALSE  | TRUE     |             |
 
 ### User Profile Subschemas
 
@@ -1226,29 +1226,29 @@ The base user profile is based on the [System for Cross-Domain Identity Manageme
 | middleName        | middle name(s) of the user                                                                                                         | String   | FALSE    | FALSE  | FALSE    |           |           |                                                                                                                   |
 | honorificPrefix   | honorific prefix(es) of the user, or title in most Western languages                                                               | String   | TRUE     | FALSE  | FALSE    |           |           |                                                                                                                   |
 | honorificSuffix   | honorific suffix(es) of the user                                                                                                   | String   | TRUE     | FALSE  | FALSE    |           |           |                                                                                                                   |
-| title             | user&#8217;s title, such as "Vice President"                                                                                       | String   | TRUE     | FALSE  | FALSE    |           |           |                                                                                                                   |
+| title             | user's title, such as "Vice President"                                                                                       | String   | TRUE     | FALSE  | FALSE    |           |           |                                                                                                                   |
 | displayName       | name of the user, suitable for display to end users                                                                                | String   | TRUE     | FALSE  | FALSE    |           |           |                                                                                                                   |
 | nickName          | casual way to address the user in real life                                                                                        | String   | TRUE     | FALSE  | FALSE    |           |           |                                                                                                                   |
-| profileUrl        | url of user&#8217;s online profile (e.g. a web page)                                                                               | String   | TRUE     | FALSE  | FALSE    |           |           | [URL](https://tools.ietf.org/html/rfc1808)                                                                        |
+| profileUrl        | url of user's online profile (e.g. a web page)                                                                               | String   | TRUE     | FALSE  | FALSE    |           |           | [URL](https://tools.ietf.org/html/rfc1808)                                                                        |
 | primaryPhone      | primary phone number of user such as home number                                                                                   | String   | TRUE     | FALSE  | FALSE    | 0         | 100       |                                                                                                                   |
 | mobilePhone       | mobile phone number of user                                                                                                        | String   | TRUE     | FALSE  | FALSE    | 0         | 100       |                                                                                                                   |
-| streetAddress     | full street address component of user&#8217;s address                                                                              | String   | TRUE     | FALSE  | FALSE    |           |           |                                                                                                                   |
-| city              | city or locality component of user&#8217;s address (`locality`)                                                                    | String   | TRUE     | FALSE  | FALSE    |           |           |                                                                                                                   |
-| state             | state or region component of user&#8217;s address (`region`)                                                                       | String   | TRUE     | FALSE  | FALSE    |           |           |                                                                                                                   |
-| zipCode           | zipcode or postal code component of user&#8217;s address (`postalCode`)                                                            | String   | TRUE     | FALSE  | FALSE    |           |           |                                                                                                                   |
-| countryCode       | country name component of user&#8217;s address (`country`)                                                                         | String   | TRUE     | FALSE  | FALSE    |           |           | [ISO 3166-1 alpha 2 "short" code format](https://tools.ietf.org/html/draft-ietf-scim-core-schema-22#ref-ISO3166)  |
-| postalAddress     | mailing address component of user&#8217;s address                                                                                  | String   | TRUE     | FALSE  | FALSE    |           |           |                                                                                                                   |
-| preferredLanguage | user&#8217;s preferred written or spoken languages                                                                                 | String   | TRUE     | FALSE  | FALSE    |           |           | [RFC 7231 Section 5.3.5](https://tools.ietf.org/html/rfc7231#section-5.3.5)                                       |
-| locale            | user&#8217;s default location for purposes of localizing items such as currency, date time format, numerical representations, etc. | String   | TRUE     | FALSE  | FALSE    |           |           | See Note for more details.                                                                                        |
-| timezone          | user&#8217;s time zone                                                                                                             | String   | TRUE     | FALSE  | FALSE    |           |           | [IANA Time Zone database format](https://tools.ietf.org/html/rfc6557)                                             |
+| streetAddress     | full street address component of user's address                                                                              | String   | TRUE     | FALSE  | FALSE    |           |           |                                                                                                                   |
+| city              | city or locality component of user's address (`locality`)                                                                    | String   | TRUE     | FALSE  | FALSE    |           |           |                                                                                                                   |
+| state             | state or region component of user's address (`region`)                                                                       | String   | TRUE     | FALSE  | FALSE    |           |           |                                                                                                                   |
+| zipCode           | zipcode or postal code component of user's address (`postalCode`)                                                            | String   | TRUE     | FALSE  | FALSE    |           |           |                                                                                                                   |
+| countryCode       | country name component of user's address (`country`)                                                                         | String   | TRUE     | FALSE  | FALSE    |           |           | [ISO 3166-1 alpha 2 "short" code format](https://tools.ietf.org/html/draft-ietf-scim-core-schema-22#ref-ISO3166)  |
+| postalAddress     | mailing address component of user's address                                                                                  | String   | TRUE     | FALSE  | FALSE    |           |           |                                                                                                                   |
+| preferredLanguage | user's preferred written or spoken languages                                                                                 | String   | TRUE     | FALSE  | FALSE    |           |           | [RFC 7231 Section 5.3.5](https://tools.ietf.org/html/rfc7231#section-5.3.5)                                       |
+| locale            | user's default location for purposes of localizing items such as currency, date time format, numerical representations, etc. | String   | TRUE     | FALSE  | FALSE    |           |           | See Note for more details.                                                                                        |
+| timezone          | user's time zone                                                                                                             | String   | TRUE     | FALSE  | FALSE    |           |           | [IANA Time Zone database format](https://tools.ietf.org/html/rfc6557)                                             |
 | userType          | used to identify the organization to user relationship such as "Employee" or "Contractor"                                          | String   | TRUE     | FALSE  | FALSE    |           |           |                                                                                                                   |
 | employeeNumber    | organization or company assigned unique identifier for the user                                                                    | String   | TRUE     | FALSE  | FALSE    |           |           |                                                                                                                   |
 | costCenter        | name of a cost center assigned to user                                                                                             | String   | TRUE     | FALSE  | FALSE    |           |           |                                                                                                                   |
-| organization      | name of user&#8217;s organization                                                                                                  | String   | TRUE     | FALSE  | FALSE    |           |           |                                                                                                                   |
-| division          | name of user&#8217;s division                                                                                                      | String   | TRUE     | FALSE  | FALSE    |           |           |                                                                                                                   |
-| department        | name of user&#8217;s department                                                                                                    | String   | TRUE     | FALSE  | FALSE    |           |           |                                                                                                                   |
-| managerId         | `id` of a user&#8217;s manager                                                                                                     | String   | TRUE     | FALSE  | FALSE    |           |           |                                                                                                                   |
-| manager           | displayName of the user&#8217;s manager                                                                                            | String   | TRUE     | FALSE  | FALSE    |           |           |                                                                                                                   |
+| organization      | name of user's organization                                                                                                  | String   | TRUE     | FALSE  | FALSE    |           |           |                                                                                                                   |
+| division          | name of user's division                                                                                                      | String   | TRUE     | FALSE  | FALSE    |           |           |                                                                                                                   |
+| department        | name of user's department                                                                                                    | String   | TRUE     | FALSE  | FALSE    |           |           |                                                                                                                   |
+| managerId         | `id` of a user's manager                                                                                                     | String   | TRUE     | FALSE  | FALSE    |           |           |                                                                                                                   |
+| manager           | displayName of the user's manager                                                                                            | String   | TRUE     | FALSE  | FALSE    |           |           |                                                                                                                   |
 
 > Note: A locale value is a concatenation of the ISO 639-1 two letter language code, an underscore, and the ISO 3166-1 2 letter country code; e.g., 'en_US' specifies the language English and country US. [Okta Support Doc for ISO compliant Locale values](https://support.okta.com/help/articles/Knowledge_Article/Universal-Directory-enforcement-of-ISO-compliant-Locale-values)
 
@@ -1366,7 +1366,7 @@ Specific property types support a **subset** of [JSON Schema validations](https:
 | `string`      | [JSON String](https://tools.ietf.org/html/rfc7159#section-7)                                                                        | `minLength` and `maxLength` |
 | `boolean`     | `false`, `true`, or `null`                                                                                                          |                             |
 | `number`      | [JSON Number](https://tools.ietf.org/html/rfc7159#section-6) with double-precision 64-bit IEEE 754 floating point number constraint | `minimum` and `maximum`     |
-| `integer`     | [JSON Number](https://tools.ietf.org/html/rfc7159#section-6) with 32-bit signed two&#8217;s complement integer constraint           | `minimum` and `maximum`     |
+| `integer`     | [JSON Number](https://tools.ietf.org/html/rfc7159#section-6) with 32-bit signed two's complement integer constraint           | `minimum` and `maximum`     |
 | `array`       | [JSON Array](https://tools.ietf.org/html/rfc7159#section-5)                                                                         |                             |
 
 
@@ -1455,11 +1455,11 @@ The app user schema is a valid [JSON Schema Draft 4](https://tools.ietf.org/html
 | $schema     | JSON Schema version identifier                                                           | String                                                             | FALSE    | FALSE  | TRUE     |             |
 | name        | name for the schema                                                                      | String                                                             | FALSE    | TRUE   | TRUE     |             |
 | title       | user-defined display name for the schema                                                 | String                                                             | FALSE    | FALSE  | FALSE    |             |
-| created     | timestamp when schema was created                                                        |     [ISO 8601 String](https://tools.ietf.org/html/rfc3339)            | FALSE    | FALSE  | TRUE     |             |
-| lastUpdated | timestamp when schema was last updated                                                   |     [ISO 8601 String](https://tools.ietf.org/html/rfc3339)            | FALSE    | FALSE  | TRUE     |             |
-| definitions | app user profile subschemas                                                              |     [App User Profile Subschemas](#app-user-profile-subschemas)       | FALSE    | FALSE  | FALSE    | JSON Schema |
-| type        | type of     [root schema](https://tools.ietf.org/html/draft-zyp-json-schema-04#section-3.4) | String                                                             | FALSE    | FALSE  | TRUE     |             |
-| properties  | user model properties                                                                    |     [App User Model](apps#application-user-model) property set | FALSE    | FALSE  | TRUE     |             |
+| created     | timestamp when schema was created                                                        | [ISO 8601 String](https://tools.ietf.org/html/rfc3339)            | FALSE    | FALSE  | TRUE     |             |
+| lastUpdated | timestamp when schema was last updated                                                   | [ISO 8601 String](https://tools.ietf.org/html/rfc3339)            | FALSE    | FALSE  | TRUE     |             |
+| definitions | app user profile subschemas                                                              | [App User Profile Subschemas](#app-user-profile-subschemas)       | FALSE    | FALSE  | FALSE    | JSON Schema |
+| type        | type of [root schema](https://tools.ietf.org/html/draft-zyp-json-schema-04#section-3.4) | String                                                             | FALSE    | FALSE  | TRUE     |             |
+| properties  | user model properties                                                                    | [App User Model](apps#application-user-model) property set | FALSE    | FALSE  | TRUE     |             |
 
 ### App User Profile Subschemas
 
@@ -1614,5 +1614,5 @@ Specific property types support a **subset** of [JSON Schema validations](https:
 | `string`      | [JSON String](https://tools.ietf.org/html/rfc7159#section-7)                                                                        | `minLength` and `maxLength` |
 | `boolean`     | `false`, `true`, or `null`                                                                                                          |                             |
 | `number`      | [JSON Number](https://tools.ietf.org/html/rfc7159#section-6) with double-precision 64-bit IEEE 754 floating point number constraint | `minimum` and `maximum`     |
-| `integer`     | [JSON Number](https://tools.ietf.org/html/rfc7159#section-6) with 32-bit signed two&#8217;s complement integer constraint           | `minimum` and `maximum`     |
+| `integer`     | [JSON Number](https://tools.ietf.org/html/rfc7159#section-6) with 32-bit signed two's complement integer constraint           | `minimum` and `maximum`     |
 | `array`       | [JSON Array](https://tools.ietf.org/html/rfc7159#section-5)                                                                         |                             |

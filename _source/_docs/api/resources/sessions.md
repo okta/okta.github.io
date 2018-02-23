@@ -127,7 +127,7 @@ curl -v -X POST \
 #### Get Session
 {:.api .api-operation}
 
-{% api_operation get /api/v1/sessions/*:id* %}
+{% api_operation get /api/v1/sessions/${sessionId} %}
 
 Get session information for a given session id.
 
@@ -203,7 +203,7 @@ If the session is invalid, a `404 Not Found` response will be returned.
 ### Extend Session
 {:.api .api-operation}
 
-{% api_operation put /api/v1/sessions/*:id* %} {% api_lifecycle deprecated %}
+{% api_operation put /api/v1/sessions/${sessionId} %} {% api_lifecycle deprecated %}
 
 Extends the lifetime of a user's session.
 
@@ -294,7 +294,7 @@ Refresh an existing session using the `id` for that session. (This is equivalent
 
 > Note this is an admin operation and requires an API token.
 
-{% api_operation post /api/v1/sessions/*:id*/lifecycle/refresh %}
+{% api_operation post /api/v1/sessions/${sessionId}/lifecycle/refresh %}
 
 ##### Request Parameters
 {:.api .api-request .api-request-params}
@@ -375,7 +375,7 @@ curl -v -X POST \
 ### Close Session
 {:.api .api-operation}
 
-{% api_operation delete /api/v1/sessions/*:id* %}
+{% api_operation delete /api/v1/sessions/${sessionId} %}
 
 Closes a user's session (logout).
 

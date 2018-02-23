@@ -45,7 +45,7 @@ Although unlikely, if your ISV does not accept the SHA256 certificate, you can r
 
 For information on using the Postman REST API test client for these steps, see [API Test Client](/docs/api/getting_started/api_test_client).
 
-#### Step 1 – List your apps and get the app id, name, and label for each app to update.
+#### Step 1: List your apps and get the app id, name, and label for each app to update.
 
 Use the [List Apps API](/docs/api/resources/apps#list-applications) to return a list of all apps.
 
@@ -110,7 +110,7 @@ Truncated Response:
 
 ~~~
 
-#### Step 2 – Generate a new application key credential.
+#### Step 2: Generate a new application key credential.
 
 Use the [Apps API](/docs/api/resources/apps#generate-new-application-key-credential)
 to generate new credentials. Pass each app ID (`id`) that was collected in the previous step as the app ID (`aid`) in this API. If you have no company policy for credential expiration, 10 years is suggested.
@@ -159,7 +159,7 @@ Response:
 }
 ~~~
 
-#### Step 3 – Update the key credential for the app to specify the new signing key id.
+#### Step 3: Update the key credential for the app to specify the new signing key id.
 
 Call the [Apps API](/docs/api/resources/apps#update-key-credential-for-application) with the app ID you obtained in step 1. In the body, include
 the app name and the app label that you obtained in step 1, the key ID that you obtained in step 2, and the value *SAML_2_0* for the sign on mode.
@@ -186,7 +186,7 @@ curl -v -X PUT \
 ~~~
 
 
-#### Step 4 – Upload the new certificate to the ISV.
+#### Step 4: Upload the new certificate to the ISV.
 
 > After completing step 3, your users cannot access the SAML app until you complete this step.
 
@@ -202,11 +202,11 @@ curl -v -X PUT \
 If your ISV does not accept certificates with a SHA256 signature, you can revert the settings to use the previous SHA1 certificate by rolling
 over the app key to specify the SHA1 certificate you previously associated with your integration.
 
-#### Step 1 – List your apps and get the id, name, and label for the app to revert.
+#### Step 1: List your apps and get the id, name, and label for the app to revert.
 
-This step is the same as [Step 1](#step-1--list-your-apps-and-get-the-app-id-name-and-label-for-each-app-to-update), above.
+This step is the same as [Step 1](#step-1-list-your-apps-and-get-the-app-id-name-and-label-for-each-app-to-update), above.
 
-#### Step 2 – Retrieve all certificates associated with the app and locate the SHA1 certificate.
+#### Step 2: Retrieve all certificates associated with the app and locate the SHA1 certificate.
 
 Use the [List Key Credentials for an Application API](/docs/api/resources/apps#list-key-credentials-for-application) to list all the credentials.
 Pass the app ID (`id`) that was collected in the previous step as the app ID (`aid`) in this API. Then, determine which certificate is the SHA1 certificate by copying the certificate text for each of the returned certificates, and [determine the signature algorithm](#determine-the-signature-algorithm-of-a-certificate)
@@ -253,15 +253,15 @@ Response:
 
 ~~~
 
-#### Step 3 – Update the key credential for the application with the SHA1 certificate.
+#### Step 3: Update the key credential for the application with the SHA1 certificate.
 
 Use the [Apps API](/docs/api/resources/apps#update-key-credential-for-application)
 to update the key credential for the application to specify the kid of the SHA1 certificate that you retrieved in step 2.
 
 This step is the same as
-[Step 3](#step-3--update-the-key-credential-for-the-app-to-specify-the-new-signing-key-id), above.
+[Step 3](#step-3-update-the-key-credential-for-the-app-to-specify-the-new-signing-key-id), above.
 
-#### Step 4 – Upload the SHA1 certificate to the ISV.
+#### Step 4: Upload the SHA1 certificate to the ISV.
 
 > After completing step 3, your users cannot access the SAML app until you complete this step.
 
