@@ -25,6 +25,9 @@ then
     exit 1
 fi
 
+# Remove cached version of a deleted file
+rm ${GENERATED_SITE_LOCATION}/documentation/stormpath-import.html
+
 # commit
 git add .
 git commit -m "Deploy site for ${CURRENT_HASH}"
@@ -33,5 +36,5 @@ git commit -m "Deploy site for ${CURRENT_HASH}"
 git remote add ${REMOTE_NAME} ${REMOTE_URL}
 git push ${REMOTE_NAME} ${TARGET_BRANCH}
 
-# Trigger Runscope tests 
+# Trigger Runscope tests
 curl -I -X GET "https://api.runscope.com/radar/bucket/$RUNSCOPE_TRIGGER_ID/trigger?base_url=$PROD_BASE_URL_RUNSCOPE"
