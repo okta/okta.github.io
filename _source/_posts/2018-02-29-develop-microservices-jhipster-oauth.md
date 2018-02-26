@@ -472,6 +472,10 @@ Below are screenshots to prove everything worked after I got my timeouts increas
 
 | {% img blog/microservices-jhipster-oauth/heroku-blog.png alt:"Blog on Heroku" width:"400" %} | {% img blog/microservices-jhipster-oauth/heroku-store.png alt:"Store on Heroku" width:"400" %} |
 
+## Source Code
+
+You can find the source code for this example at https://github.com/oktadeveloper/okta-jhipster-microservices-oauth-example.
+
 ## Learn More about Microservices and JHipster
 
 I hope you've enjoyed this whirlwind tour of how to create a microservices architecture with JHipster. Just because JHipster makes microservices easy doesn't mean you should use them. In the wise words of [Martin Fowler](https://martinfowler.com/articles/microservices.html) (March 2014):
