@@ -580,7 +580,7 @@ The table below summarizes the supported query parameters:
 | `filter`    | [Filter Expression](#expression-filter) that filters the results                                      | [SCIM Filter expression](/docs/api/getting_started/design_principles#filtering) |  |
 | `q`         | Filters the log events results by one or more exact [keywords](#keyword-filter)                       | URL encoded string                                       |                         |
 | `sortOrder` | The order of the returned events sorted by `published`                                                | `ASCENDING` or `DESCENDING`                              | `ASCENDING`             |
-| `limit`     | Sets the number of results returned in the response                                                   | Integer between 0 and 100                                | 100                     |
+| `limit`     | Sets the number of results returned in the response                                                   | Integer between 0 and 1000                                | 100                     |
 |-------------+-------------------------------------------------------------------------------------------------------+----------------------------------------------------------+-------------------------|
 
 ##### Filtering Results
