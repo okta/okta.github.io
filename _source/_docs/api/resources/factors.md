@@ -21,7 +21,7 @@ Explore the Factors API: [![Run in Postman](https://run.pstmn.io/button.svg)](ht
 ### Get Factor
 {:.api .api-operation}
 
-{% api_operation get /api/v1/users/*:uid*/factors/*:fid* %}
+{% api_operation get /api/v1/users/${userId}/factors/${factorId} %}
 
 Fetches a factor for the specified user
 
@@ -30,8 +30,8 @@ Fetches a factor for the specified user
 
 Parameter    | Description                                         | Param Type | DataType | Required |
 ------------ | --------------------------------------------------- | ---------- | -------- | -------- |
-uid          | `id` of user                                        | URL        | String   | TRUE     |
-fid          | `id` of factor                                      | URL        | String   | TRUE     |
+userId          | `id` of a user                                        | URL        | String   | TRUE     |
+factorId          | `id` of a factor                                      | URL        | String   | TRUE     |
 
 #### Response Parameters
 {:.api .api-response .api-response-params}
@@ -96,7 +96,7 @@ curl -v -X GET \
 ### List Enrolled Factors
 {:.api .api-operation}
 
-{% api_operation get /api/v1/users/*:uid*/factors %}
+{% api_operation get /api/v1/users/${userId}/factors %}
 
 Enumerates all the enrolled factors for the specified user
 
@@ -105,7 +105,7 @@ Enumerates all the enrolled factors for the specified user
 
 Parameter    | Description                                         | Param Type | DataType | Required |
 ------------ | --------------------------------------------------- | ---------- | -------- | -------- |
-uid          | `id` of user                                        | URL        | String   | TRUE     |
+userId          | `id` of a user                                        | URL        | String   | TRUE     |
 
 #### Response Parameters
 {:.api .api-response .api-response-params}
@@ -257,7 +257,7 @@ curl -v -X GET \
 ### List Factors to Enroll
 {:.api .api-operation}
 
-{% api_operation get /api/v1/users/*:uid*/factors/catalog %}
+{% api_operation get /api/v1/users/${userId}/factors/catalog %}
 
 Enumerates all the [supported factors](#supported-factors-for-providers) that can be enrolled for the specified user
 
@@ -266,7 +266,7 @@ Enumerates all the [supported factors](#supported-factors-for-providers) that ca
 
 Parameter    | Description                                         | Param Type | DataType | Required |
 ------------ | --------------------------------------------------- | ---------- | -------- | -------- |
-uid          | `id` of user                                        | URL        | String   | TRUE     |
+userId          | `id` of a user                                        | URL        | String   | TRUE     |
 
 #### Response Parameters
 {:.api .api-response .api-response-params}
@@ -415,7 +415,7 @@ curl -v -X GET \
 ### List Security Questions
 {:.api .api-operation}
 
-{% api_operation get /api/v1/users/*:uid*/factors/questions %}
+{% api_operation get /api/v1/users/${userId}/factors/questions %}
 
 Enumerates all available security questions for a user's `question` factor
 
@@ -424,7 +424,7 @@ Enumerates all available security questions for a user's `question` factor
 
 Parameter    | Description                                         | Param Type | DataType | Required |
 ------------ | --------------------------------------------------- | ---------- | -------- | -------- |
-uid          | `id` of user                                        | URL        | String   | TRUE     |
+userId          | `id` of a user                                        | URL        | String   | TRUE     |
 
 #### Response Parameters
 {:.api .api-response .api-response-params}
@@ -474,7 +474,7 @@ curl -v -X GET \
 ### Enroll Factor
 {:.api .api-operation}
 
-{% api_operation post /api/v1/users/*:id*/factors %}
+{% api_operation post /api/v1/users/${userId}/factors %}
 
 Enrolls a user with a supported [factor](#list-factors-to-enroll)
 
@@ -495,7 +495,7 @@ Enrolls a user with a supported [factor](#list-factors-to-enroll)
 Parameter    | Description                                   | Param Type  | DataType                | Required |
 ------------ | --------------------------------------------- | ----------- | ----------------------- | -------- |
 id           | `id` of user                                  | URL         | String                  | TRUE     |
-templateId   | `id` of SMS template (only for SMS factor)    | Query       | String                  | FALSE    |
+templateId   | `id` of an SMS template (only for SMS factor)    | Query       | String                  | FALSE    |
 factor       | Factor                                        | Body        | [Factor](#factor-model) | TRUE     |
 
 ##### Response Parameters
@@ -1501,7 +1501,7 @@ curl -v -X POST \
 ### Activate Factor
 {:.api .api-operation}
 
-{% api_operation post /api/v1/users/*:uid*/factors/*:fid*/lifecycle/activate %}
+{% api_operation post /api/v1/users/${userId}/factors/${factorId}/lifecycle/activate %}
 
 The `sms` and `token:software:totp` [factor types](#factor-type) require activation to complete the enrollment process.
 
@@ -1521,8 +1521,8 @@ Activates a `token:software:totp` factor by verifying the OTP.
 
 Parameter    | Description                                         | Param Type | DataType | Required | Default
 ------------ | --------------------------------------------------- | ---------- | -------- | -------- | -------
-uid          | `id` of user                                        | URL        | String   | TRUE     |
-fid          | `id` of factor returned from enrollment             | URL        | String   | TRUE     |
+userId          | `id` of a user                                        | URL        | String   | TRUE     |
+factorId          | `id` of a factor returned from enrollment             | URL        | String   | TRUE     |
 passCode     | OTP generated by device                             | Body       | String   | TRUE     |
 
 #### Response Parameters
@@ -1613,8 +1613,8 @@ Activates a `sms` factor by verifying the OTP.  The request/response is identica
 
 Parameter    | Description                                         | Param Type | DataType | Required |
 ------------ | --------------------------------------------------- | ---------- | -------- | -------- |
-uid          | `id` of user                                        | URL        | String   | TRUE     |
-fid          | `id` of factor returned from enrollment             | URL        | String   | TRUE     |
+userId          | `id` of a user                                        | URL        | String   | TRUE     |
+factorId          | `id` of a factor returned from enrollment             | URL        | String   | TRUE     |
 passCode     | OTP sent to mobile device                           | Body       | String   | TRUE     |
 
 ##### Response Parameters
@@ -1705,8 +1705,8 @@ Activates a `call` factor by verifying the OTP.  The request/response is identic
 
 Parameter    | Description                                         | Param Type | DataType | Required | Default
 ------------ | --------------------------------------------------- | ---------- | -------- | -------- | -------
-uid          | `id` of user                                        | URL        | String   | TRUE     |
-fid          | `id` of factor returned from enrollment             | URL        | String   | TRUE     |
+userId          | `id` of a user                                        | URL        | String   | TRUE     |
+factorId          | `id` of a factor returned from enrollment             | URL        | String   | TRUE     |
 passCode     | OTP sent to mobile device                           | Body       | String   | TRUE     |
 
 ##### Response Parameters
@@ -1800,8 +1800,8 @@ Activations have a short lifetime (minutes) and will `TIMEOUT` if they are not c
 
 Parameter | Description    | Param Type | DataType | Required | Default
 --------- | -------------- | ---------- | -------- | -------- | -------
-uid       | `id` of user   | URL        | String   | TRUE     |
-fid       | `id` of factor | URL        | String   | TRUE     |
+userId       | `id` of a user   | URL        | String   | TRUE     |
+factorId       | `id` of a factor | URL        | String   | TRUE     |
 
 #### Response Parameters
 {:.api .api-response .api-response-params}
@@ -1943,8 +1943,8 @@ Activates an `email` factor by verifying the OTP.
 
 Parameter    | Description                                         | Param Type | DataType | Required
 ------------ | --------------------------------------------------- | ---------- | -------- | -------- 
-uid          | `id` of user                                        | URL        | String   | TRUE     
-fid          | `id` of factor returned from enrollment             | URL        | String   | TRUE     
+userId          | `id` of a user                                        | URL        | String   | TRUE     
+factorId          | `id` of a factor returned from enrollment             | URL        | String   | TRUE     
 passCode     | OTP sent to email                           | Body       | String   | TRUE     
 
 ##### Response Parameters
@@ -2028,7 +2028,7 @@ curl -v -X POST \
 ### Reset Factor
 {:.api .api-operation}
 
-{% api_operation delete /api/v1/users/*:uid*/factors/*:fid* %}
+{% api_operation delete /api/v1/users/${userId}/factors/${factorId} %}
 
 Unenrolls an existing factor for the specified user, allowing the user to enroll a new factor.
 
@@ -2037,8 +2037,8 @@ Unenrolls an existing factor for the specified user, allowing the user to enroll
 
 Parameter    | Description                                         | Param Type | DataType | Required | Default
 ------------ | --------------------------------------------------- | ---------- | -------- | -------- | -------
-uid          | `id` of user                                        | URL        | String   | TRUE     |
-fid          | `id` of the factor to reset                         | URL        | String   | TRUE     |
+userId          | `id` of a user                                        | URL        | String   | TRUE     |
+factorId          | `id` of the factor to reset                         | URL        | String   | TRUE     |
 
 #### Response Parameters
 {:.api .api-response .api-response-params}
@@ -2066,7 +2066,7 @@ curl -v -X DELETE \
 ### Verify Security Question Factor
 {:.api .api-operation}
 
-{% api_operation post /api/v1/users/*:uid*/factors/*:fid*/verify %}
+{% api_operation post /api/v1/users/${userId}/factors/${factorId}/verify %}
 
 Verifies an answer to a `question` factor.
 
@@ -2075,8 +2075,8 @@ Verifies an answer to a `question` factor.
 
 Parameter    | Description                                         | Param Type | DataType | Required | Default
 ------------ | --------------------------------------------------- | ---------- | -------- | -------- | -------
-uid          | `id` of user                                        | URL        | String   | TRUE     |
-fid          | `id` of factor                                      | URL        | String   | TRUE     |
+userId          | `id` of a user                                        | URL        | String   | TRUE     |
+factorId          | `id` of a factor                                      | URL        | String   | TRUE     |
 answer       | answer to security question                         | Body       | String   | TRUE     |
 
 #### Response Parameters
@@ -2128,7 +2128,7 @@ curl -v -X POST \
 ### Verify SMS Factor
 {:.api .api-operation}
 
-{% api_operation post /api/v1/users/*:uid*/factors/*:fid*/verify %}
+{% api_operation post /api/v1/users/${userId}/factors/${factorId}/verify %}
 
 Verifies an OTP for a `sms` factor.
 
@@ -2137,9 +2137,9 @@ Verifies an OTP for a `sms` factor.
 
 Parameter    | Description                                         | Param Type | DataType | Required |
 ------------ | --------------------------------------------------- | ---------- | -------- | -------- |
-uid          | `id` of user                                        | URL        | String   | TRUE     |
-fid          | `id` of factor                                      | URL        | String   | TRUE     |
-templateId   | `id` of SMS template                                | Query      | String   | FALSE    |
+userId          | `id` of a user                                        | URL        | String   | TRUE     |
+factorId          | `id` of a factor                                      | URL        | String   | TRUE     |
+templateId   | `id` of an SMS template                                | Query      | String   | FALSE    |
 passCode     | OTP sent to device                                  | Body       | String   | FALSE    |
 
 > If you omit `passCode` in the request a new OTP is sent to the device, otherwise the request attempts to verify the `passCode`.
@@ -2234,7 +2234,7 @@ curl -v -X POST \
 ### Verify Call Factor
 {:.api .api-operation}
 
-{% api_operation post /api/v1/users/*:uid*/factors/*:fid*/verify %}
+{% api_operation post /api/v1/users/${userId}/factors/${factorId}/verify %}
 
 Verifies an OTP for a `call` factor
 
@@ -2243,8 +2243,8 @@ Verifies an OTP for a `call` factor
 
 Parameter    | Description                                         | Param Type | DataType | Required | Default
 ------------ | --------------------------------------------------- | ---------- | -------- | -------- | -------
-uid          | `id` of user                                        | URL        | String   | TRUE     |
-fid          | `id` of factor                                      | URL        | String   | TRUE     |
+userId          | `id` of a user                                        | URL        | String   | TRUE     |
+factorId          | `id` of a factor                                      | URL        | String   | TRUE     |
 passCode     | OTP sent to device                                  | Body       | String   | FALSE    |
 
 > If you omit `passCode` in the request a new OTP is sent to the device, otherwise the request attempts to verify the `passCode`.
@@ -2311,7 +2311,7 @@ curl -v -X POST \
 ### Verify TOTP Factor
 {:.api .api-operation}
 
-{% api_operation post /api/v1/users/*:uid*/factors/*:fid*/verify %}
+{% api_operation post /api/v1/users/${userId}/factors/${factorId}/verify %}
 
 Verifies an OTP for a `token:software:totp` factor
 
@@ -2320,8 +2320,8 @@ Verifies an OTP for a `token:software:totp` factor
 
 Parameter    | Description                                         | Param Type | DataType | Required |
 ------------ | --------------------------------------------------- | ---------- | -------- | -------- |
-uid          | `id` of user                                        | URL        | String   | TRUE     |
-fid          | `id` of factor                                      | URL        | String   | TRUE     |
+userId          | `id` of a user                                        | URL        | String   | TRUE     |
+factorId          | `id` of a factor                                      | URL        | String   | TRUE     |
 passCode     | OTP generated by device                             | Body       | String   | TRUE     |
 
 #### Response Parameters
@@ -2372,7 +2372,7 @@ curl -v -X POST \
 ### Verify Push Factor
 {:.api .api-operation}
 
-{% api_operation post /api/v1/users/*:uid*/factors/*:fid*/verify %}
+{% api_operation post /api/v1/users/${userId}/factors/${factorId}/verify %}
 
 Creates a new verification transaction and sends an asynchronous push notification to the device for the user to approve or reject.  You must [poll the transaction](#poll-for-verify-transaction-completion) to determine when it completes or expires.
 
@@ -2383,8 +2383,8 @@ Creates a new verification transaction and sends an asynchronous push notificati
 
 Parameter    | Description                                         | Param Type | DataType | Required | Default
 ------------ | --------------------------------------------------- | ---------- | -------- | -------- | -------
-uid          | `id` of user                                        | URL        | String   | TRUE     |
-fid          | `id` of factor                                      | URL        | String   | TRUE     |
+userId          | `id` of a user                                        | URL        | String   | TRUE     |
+factorId          | `id` of a factor                                      | URL        | String   | TRUE     |
 
 > The client `IP Address` & `User Agent` of the HTTP request is automatically captured and sent in the push notification as additional context.<br>You should [always send a valid User-Agent HTTP header](../getting_started/design_principles#user-agent) when verifying a push factor.
 
@@ -2441,7 +2441,7 @@ curl -v -X POST \
 #### Poll for Verify Transaction Completion
 {:.api .api-operation}
 
-{% api_operation get /api/v1/users/*:uid*/factors/*:fid*/transactions/*:tid* %}
+{% api_operation get /api/v1/users/${userId}/factors/${factorId}/transactions/${transactionId} %}
 
 Polls a push verification transaction for completion.  The transaction result is `WAITING`, `SUCCESS`, `REJECTED`, or `TIMEOUT`.
 
@@ -2452,9 +2452,9 @@ Polls a push verification transaction for completion.  The transaction result is
 
 Parameter    | Description         | Param Type | DataType | Required |
 ------------ | ------------------- | ---------- | -------- | -------- |
-uid          | `id` of user        | URL        | String   | TRUE     |
-fid          | `id` of factor      | URL        | String   | TRUE     |
-tid          | `id` of transaction | URL        | String   | TRUE     |
+userId          | `id` of a user        | URL        | String   | TRUE     |
+factorId          | `id` of a factor      | URL        | String   | TRUE     |
+transactionId          | `id` of a transaction | URL        | String   | TRUE     |
 
 ##### Response Parameters
 {:.api .api-response .api-response-params}
@@ -2559,7 +2559,7 @@ factorResult | verification result | Body       | [Factor Verify Result](#factor
 ### Verify Token Factor
 {:.api .api-operation}
 
-{% api_operation post /api/v1/users/*:uid*/factors/*:fid*/verify %}
+{% api_operation post /api/v1/users/${userId}/factors/${factorId}/verify %}
 
 Verifies an OTP for a `token` or `token:hardware` factor
 
@@ -2568,8 +2568,8 @@ Verifies an OTP for a `token` or `token:hardware` factor
 
 Parameter    | Description                                         | Param Type | DataType | Required |
 ------------ | --------------------------------------------------- | ---------- | -------- | -------- |
-uid          | `id` of user                                        | URL        | String   | TRUE     |
-fid          | `id` of factor                                      | URL        | String   | TRUE     |
+userId          | `id` of a user                                        | URL        | String   | TRUE     |
+factorId          | `id` of a factor                                      | URL        | String   | TRUE     |
 passCode     | OTP generated by device                             | Body       | String   | TRUE     |
 
 #### Response Parameters
@@ -2621,7 +2621,7 @@ curl -v -X POST \
 {:.api .api-operation}
 {% api_lifecycle ea %}
 
-<span class="api-uri-template api-uri-post"><span class="api-label">POST</span> /api/v1/users/*:uid*/factors/*:fid*/verify</span>
+<span class="api-uri-template api-uri-post"><span class="api-label">POST</span> /api/v1/users/${userId}/factors/${factorId}/verify</span>
 
 Verifies an OTP for an `email` factor
 
@@ -2630,8 +2630,8 @@ Verifies an OTP for an `email` factor
 
 Parameter    | Description                                         | Param Type | DataType | Required | Default
 ------------ | --------------------------------------------------- | ---------- | -------- | -------- | -------
-uid          | `id` of user                                        | URL        | String   | TRUE     |
-fid          | `id` of factor                                      | URL        | String   | TRUE     |
+userId          | `id` of a user                                        | URL        | String   | TRUE     |
+factorId          | `id` of a factor                                      | URL        | String   | TRUE     |
 passCode     | OTP sent to email address                                  | Body       | String   | FALSE    | ""                              |
 tokenLifetimeSeconds | Lifetime of the OTP when requesting one                        | QueryString | Int | FALSE        | 300
 
@@ -2749,9 +2749,9 @@ Factors have the following properties:
 | Property       | Description                                                      | DataType                                                                       | Nullable | Unique | Readonly | MinLength | MaxLength | Validation |
 | -------------- | ---------------------------------------------------------------- | ------------------------------------------------------------------------------ | -------- | ------ | -------- | --------- | --------- | ---------- |
 | id             | unique key for factor                                            | String                                                                         | FALSE    | TRUE   | TRUE     |           |           |            |
-| factorType     | type of factor                                                   | [Factor Type](#factor-type)                                                    | FALSE    | TRUE   | TRUE     |           |           |            |
+| factorType     | type of a factor                                                   | [Factor Type](#factor-type)                                                    | FALSE    | TRUE   | TRUE     |           |           |            |
 | provider       | factor provider                                                  | [Provider Type](#provider-type)                                                | FALSE    | TRUE   | TRUE     |           |           |            |
-| status         | status of factor                                                 | `NOT_SETUP`, `PENDING_ACTIVATION`, `ENROLLED`, `ACTIVE`, `INACTIVE`, `EXPIRED` | FALSE    | FALSE  | TRUE     |           |           |            |
+| status         | status of a factor                                                 | `NOT_SETUP`, `PENDING_ACTIVATION`, `ENROLLED`, `ACTIVE`, `INACTIVE`, `EXPIRED` | FALSE    | FALSE  | TRUE     |           |           |            |
 | created        | timestamp when factor was created                                | Date                                                                           | FALSE    | FALSE  | TRUE     |           |           |            |
 | lastUpdated    | timestamp when factor was last updated                           | Date                                                                           | FALSE    | FALSE  | TRUE     |           |           |            |
 | profile        | profile of a [supported factor](#supported-factors-for-providers)| [Factor Profile Object](#factor-profile-object)                                | TRUE     | FALSE  | FALSE    |           |           |            |
@@ -2796,7 +2796,7 @@ The following providers are supported:
 
 #### Supported Factors for Providers
 
-Each provider supports a subset of factor types.  The following table lists the factor types supported for each provider:
+Each provider supports a subset of a factor types.  The following table lists the factor types supported for each provider:
 
 |------------+------------------------|
 | Provider   | Factor Type            |
@@ -3022,7 +3022,7 @@ Push factors must complete activation on the device by scanning the QR code or v
 | Property       | Description                                       | DataType                                                       | Nullable | Unique | Readonly | MinLength | MaxLength | Validation |
 | -------------- | ------------------------------------------------- | -------------------------------------------------------------- | -------- | ------ | -------- | --------- | --------- | ---------- |
 | expiresAt      | lifetime of activation                            | Date                                                           | FALSE    | FALSE  | TRUE     |           |           |            |
-| factorResult   | result of factor activation                       | `WAITING`, `CANCELLED`, `TIMEOUT`, or `ERROR`                  | FALSE    | FALSE  | TRUE     |           |           |            |
+| factorResult   | result of a factor activation                       | `WAITING`, `CANCELLED`, `TIMEOUT`, or `ERROR`                  | FALSE    | FALSE  | TRUE     |           |           |            |
 | _links         | discoverable resources related to the activation  | [JSON HAL](http://tools.ietf.org/html/draft-kelly-json-hal-06) | FALSE    | FALSE  | TRUE     |           |           |            |
 |----------------+---------------------------------------------------+----------------------------------------------------------------+----------+--------+----------+-----------+-----------+------------|
 
@@ -3080,7 +3080,7 @@ Describes the outcome of a factor verification request
 |---------------+---------------------------------------------------+---------------------------------+----------+--------+----------|-----------|-----------+------------|
 | Property      | Description                                       | DataType                        | Nullable | Unique | Readonly | MinLength | MaxLength | Validation |
 | ------------- | ------------------------------------------------- | ------------------------------- | -------- | ------ | -------- | --------- | --------- | ---------- |
-| factorResult  | result of factor verification                     | [Factor Result](#factor-result) | FALSE    | FALSE  | TRUE     |           |           |            |
+| factorResult  | result of a factor verification                     | [Factor Result](#factor-result) | FALSE    | FALSE  | TRUE     |           |           |            |
 | factorMessage | optional display message for factor verification  | String                          | TRUE     | FALSE  | TRUE     |           |           |            |
 |---------------+---------------------------------------------------+---------------------------------+----------+--------+----------|-----------|-----------+------------|
 

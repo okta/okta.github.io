@@ -22,7 +22,7 @@ There are several use cases and Okta product features built on top of the OAuth 
 * OpenID Connect
 * API Access Management
 
-It&#8217;s important to understand which use case you are targeting and build your application according to the correct patterns for that use case.
+It's important to understand which use case you are targeting and build your application according to the correct patterns for that use case.
 The OAuth 2.0 APIs each have several different [query params](/docs/api/resources/oidc#authorize) which dictate which type of flow you are using and the mechanics of that flow.
 
 At the very basic level, the main API endpoints are:
@@ -39,7 +39,7 @@ flows defined by [the OAuth 2.0 spec](http://oauth.net/documentation), you may w
 
 In addition to the information in this topic, see:
 
-* [Okta&#8217;s API Access Management Introduction](/use_cases/api_security/)
+* [Okta's API Access Management Introduction](/use_cases/api_security/)
 * [OAuth 2.0/OIDC API](/docs/api/resources/oidc)
 * [Help for configuring API Access Management in the Okta UI](/docs/how-to/set-up-auth-server)
 
@@ -63,7 +63,7 @@ In addition to the information in this topic, see:
 
     {% img native_auth_flow.png alt:"Native Application Flow" %}
 
-    > Note: For native applications, the `client_id` and `client_secret` are embedded in the source code of the application; in this context, the client secret isn&#8217;t treated as a secret.
+    > Note: For native applications, the `client_id` and `client_secret` are embedded in the source code of the application; in this context, the client secret isn't treated as a secret.
     Therefore native apps should make use of Proof Key for Code Exchange (PKCE) to mitigate authorization code interception.
     For more information, see [Implementing the Authorization Code Flow with PKCE](/authentication-guide/implementing-authentication/auth-code-pkce).
 
@@ -94,9 +94,9 @@ In addition to the information in this topic, see:
 
 ## Custom User Experience
 
-By default, the Authorization Endpoint displays the Okta login page and authenticates users if they don&#8217;t have an existing session.
+By default, the Authorization Endpoint displays the Okta login page and authenticates users if they don't have an existing session.
 If you prefer to use a fully customized user experience, you can instead authenticate the user via the [Authentication API](/docs/api/resources/authn).
-This authentication method produces a `sessionToken` which can be passed into the Authorize Endpoint, and the user won&#8217;t see an Okta login page.
+This authentication method produces a `sessionToken` which can be passed into the Authorize Endpoint, and the user won't see an Okta login page.
 
 ## Access Token
 
@@ -161,7 +161,7 @@ Based on the granted scopes, claims are added into the Access Token returned fro
 
 ### Reserved Scopes and Claims
 
-Okta defines a number of reserved scopes and claims which can&#8217;t be overridden.
+Okta defines a number of reserved scopes and claims which can't be overridden.
 
 * [Reserved scopes](#reserved-scopes)
 * [Reserved claims in the header section](#reserved-claims-in-the-header-section)
@@ -238,12 +238,12 @@ A custom claim can be configured in the following ways:
 * Choose whether the claim is always included in a token, or only when the claim is specified.
 * Define the scopes that this claim is included in: either any scope or a list of scopes that you define.
 * Disable the claim. This is often used for testing.
-* Define the claim value, using [Okta&#8217;s Expression Language](/reference/okta_expression_language/) or a group filter.
-    * Example of expressions: `"user.region"`, the value of the custom field "region" on the user&#8217;s profile. You can create expressions to reference application groups.
+* Define the claim value, using [Okta's Expression Language](/reference/okta_expression_language/) or a group filter.
+    * Example of expressions: `"user.region"`, the value of the custom field "region" on the user's profile. You can create expressions to reference application groups.
     * Example of a set of Okta groups specified by `groupFilterType`: If the token recipient wanted to display a badge for all current customers, you could specify a `groupFilterType` that start with "Customer" (`STARTS_WITH=Customer`). See [`groupFilterType`](/docs/api/resources/authorization-servers#details-for-groupfiltertype) for details.
         Notice that you can use the group filter (`valueType` is `GROUP`) for Okta groups. For application groups, `valueType` must be `EXPRESSION`.
 
-  The expression is evaluated at runtime, and if the evaluated result is null, that custom claim isn&#8217;t added into the ID token or access token.
+  The expression is evaluated at runtime, and if the evaluated result is null, that custom claim isn't added into the ID token or access token.
   The datatype of a claim depends on the type of value. The datatype is:
     * An array if the claim value is a group filter.
     * The same datatype as the evaluated result if the claim value is an expression.
@@ -260,7 +260,7 @@ A Refresh Token is an opaque string. It is a long-lived token that the client ca
 A Refresh Token will be returned if 'offline_access' scope is requested using authorization_code, password, or refresh_token grant type.
 
 
-The lifetime of a Refresh Token is configured in [Access Policies](#access-policies), the minimum value is 24 hours. The refresh token can also expire after a period if no clients redeem it for an Access Token. The period should be equal to or larger than 10 minutes. If the token&#8217;s lifetime is set to unlimited, the Authorization Server will not check if clients use it or not.
+The lifetime of a Refresh Token is configured in [Access Policies](#access-policies), the minimum value is 24 hours. The refresh token can also expire after a period if no clients redeem it for an Access Token. The period should be equal to or larger than 10 minutes. If the token's lifetime is set to unlimited, the Authorization Server will not check if clients use it or not.
 
 ### Refresh Token Revocation
 
@@ -268,7 +268,7 @@ Refresh Tokens can be revoked explicitly by making a [Revocation Request](/docs/
 
 * The User is Suspended or Deactivated
 * The Client App is Deactivated or Deleted
-* The Authorization Server&#8217;s Resource URI is modified, or the Authorization Server is deleted.
+* The Authorization Server's Resource URI is modified, or the Authorization Server is deleted.
 
 No other modifications affect existing tokens.
 
@@ -276,7 +276,7 @@ No other modifications affect existing tokens.
 
 A Custom Authorization Server can issue an ID token to the client, as in OpenID Connect, but with the following differences:
 
-* The ID token can&#8217;t contain OIDC reserved scopes or a `groups` claim. To obtain a claim with group information, administrators must define a custom claim with a group filter and associate it with a scope.
+* The ID token can't contain OIDC reserved scopes or a `groups` claim. To obtain a claim with group information, administrators must define a custom claim with a group filter and associate it with a scope.
 * The custom properties in the app user profile are not included in the Id Token by default, even if profile scope is granted. To obtain a claim for a custom property, administrators must define a custom claim with an Okta Expression Language expression and associate it with a scope.
 
 The lifetime of an ID token is one hour. If the client that issued the token is deactivated, the token is
@@ -287,7 +287,7 @@ OAuth 2.0 (Custom Authorization Server), except the public keys should be retrie
 
 ## Requesting a Token
 
-You can request a token with the endpoint [`/oauth2/:authorizationServerId/v1/token`](/docs/api/resources/oidc#token).
+You can request a token with the endpoint [`/oauth2/${authorizationServerId}/v1/token`](/docs/api/resources/oidc#token).
 
 The grant type and scope in your request, as well as configurations set in the Custom Authorization Server, determine which
 tokens are returned and what they contain. For details, see [Response Parameters](/docs/api/resources/oidc#response-properties) and [Custom claim configuration](#custom-claim-configuration).
@@ -344,12 +344,12 @@ Okta provides two types of authorization servers:
 
 * Okta Authorization Server:
 Use the Okta Authorization Server to perform SSO with Okta or sign in users for apps displayed on the Okta home page.
-Okta hosts and manages the Okta Authorization Server. It can&#8217;t be configured,
+Okta hosts and manages the Okta Authorization Server. It can't be configured,
 though you can add a [groups claim](/standards/OIDC/#scope-dependent-claims-not-always-returned)
 and [app-user profile attributes](/docs/api/resources/apps#application-user-properties) to a client.
-The Access Token minted by the Okta Authorization Server is consumed by Okta APIs. The Access Token audience is always Okta specific, so the token can&#8217;t be validated by your applications.
+The Access Token minted by the Okta Authorization Server is consumed by Okta APIs. The Access Token audience is always Okta specific, so the token can't be validated by your applications.
 
-    >Note: The Okta Authorization Server doesn&#8217;t require that the API Access Management feature be enabled.
+    >Note: The Okta Authorization Server doesn't require that the API Access Management feature be enabled.
 
 * Custom Authorization Server:
 Use a Custom Authorization Server to secure your APIs.
@@ -385,7 +385,7 @@ This default authorization server includes a basic access policy and rule, which
 It allows you to specify `default` instead of the `authorizationServerId` in requests to it:
 
 * `https://{yourOktaDomain}.com/api/v1/authorizationServers/default`  vs
-* `https://{yourOktaDomain}.com/api/v1/authorizationServers/:authorizationServerId` for other Customer Authorization Servers
+* `https://{yourOktaDomain}.com/api/v1/authorizationServers/${authorizationServerId}` for other Customer Authorization Servers
 
 ## OpenID Connect and Authorization Servers
 
@@ -393,6 +393,6 @@ You can use the [OpenID Connect API](/docs/api/resources/oidc) without API Acces
 However, you can also use OpenID Connect with a Custom Authorization Server:
 
 * `/oauth2/v1/userinfo` for OpenID Connect without API Access Management
-* `/oauth2/:authorizationServerId/v1/userinfo` for OpenID Connect with API Access Management&#8217;s Custom Authorization Server.
+* `/oauth2/${authorizationServerId}/v1/userinfo` for OpenID Connect with API Access Management's Custom Authorization Server.
 
-You can&#8217;t mix tokens between different authorization servers. By design, authorization servers don&#8217;t have trust relationships with each other.
+You can't mix tokens between different authorization servers. By design, authorization servers don't have trust relationships with each other.

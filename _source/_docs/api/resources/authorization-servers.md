@@ -420,7 +420,7 @@ Returns the [policy](#policy-object) you updated
 
 #### Delete a Policy
 
-{% api_operation DELETE /api/v1/authorizationServers/${authorizationServerId}/policies/:policyId %}
+{% api_operation DELETE /api/v1/authorizationServers/${authorizationServerId}/policies/${policyId} %}
 
 Delete a policy specified by the `policyId`
 
@@ -492,7 +492,7 @@ Returns the [scopes](#scope-object) defined in the specified Custom Authorizatio
 
 #### Get a Scope
 
-{% api_operation get /api/v1/authorizationServers/${authorizationServerId}/scopes/:scopeId %}
+{% api_operation get /api/v1/authorizationServers/${authorizationServerId}/scopes/${scopeId} %}
 
 Get a scope specified by the `scopeId`
 
@@ -554,7 +554,7 @@ Returns the [scope](#scope-object) you created
 
 #### Update a Scope
 
-{% api_operation put /api/v1/authorizationServers/${authorizationServerId}/scopes/:scopeId %}
+{% api_operation put /api/v1/authorizationServers/${authorizationServerId}/scopes/${scopeId} %}
 
 Change the configuration of a scope specified by the `scopeId`
 
@@ -589,7 +589,7 @@ Returns the [scope](#scope-object) you updated
 
 #### Delete a Scope
 
-{% api_operation DELETE /api/v1/authorizationServers/${authorizationServerId}/scopes/:scopeId %}
+{% api_operation DELETE /api/v1/authorizationServers/${authorizationServerId}/scopes/${scopeId} %}
 
 Delete a scope specified by the `scopeId`
 
@@ -661,7 +661,7 @@ Returns the [claims](#claim-object) defined in the specified Custom Authorizatio
 
 #### Get a Claim
 
-{% api_operation get /api/v1/authorizationServers/${authorizationServerId}/claims/:claimId %}
+{% api_operation get /api/v1/authorizationServers/${authorizationServerId}/claims/${claimId} %}
 
 Returns the claim specified by the `claimId`
 
@@ -731,7 +731,7 @@ Returns the [claim](#claim-object) you created
 
 #### Update a Claim
 
-{% api_operation put /api/v1/authorizationServers/${authorizationServerId}/claims/:claimId %}
+{% api_operation put /api/v1/authorizationServers/${authorizationServerId}/claims/${claimId} %}
 
 Change the configuration of a claim specified by the `claimId`
 
@@ -776,7 +776,7 @@ Returns the [claim](#claim-object) you updated
 
 #### Delete a Claim
 
-{% api_operation DELETE /api/v1/authorizationServers/${authorizationServerId}/claims/:claimId %}
+{% api_operation DELETE /api/v1/authorizationServers/${authorizationServerId}/claims/${claimId} %}
 
 Delete a claim specified by the `claimId`
 
@@ -1333,16 +1333,16 @@ Token limits:
 
 | Property                            | Description                                                                                           | Type    | Default      | Required for create or update |
 |:-------------------------------------|:------------------------------------------------------------------------------------------------------|:--------|:-------------|:------------------------------|
-| consent {% api_lifecycle beta %}     | Indicates whether a consent dialog is needed for the scope. Valid values: `REQUIRED`, `IMPLICIT`.      | Enum    | `IMPLICIT`   | False                         |
+| consent {% api_lifecycle ea %}     | Indicates whether a consent dialog is needed for the scope. Valid values: `REQUIRED`, `IMPLICIT`.      | Enum    | `IMPLICIT`   | False                         |
 | default                              | Whether test the scope is a default scope                                                              | Boolean |              | False                         |
 | description                          | Description of the scope                                                                               | String  |              | False                         |
-| displayName {% api_lifecycle beta %} | Name of the end user displayed in a consent dialog                                                     | String  |              | False                         |
+| displayName {% api_lifecycle ea %} | Name of the end user displayed in a consent dialog                                                     | String  |              | False                         |
 | id                                   | ID of the scope                                                                                        | String  |              | False                         |
 | metadataPublish                      | Whether or not the scope should be included in the metadata. Valid values: `NO_CLIENTS`, `ALL_CLIENTS` | Enum    | `NO_CLIENTS` | True except for create        |
 | name                                 | Name of the scope                                                                                      | String  |              | True                          |
 | system                               | Whether Okta created the scope                                                                         | Boolean |              | False                         |
 
-* {% api_lifecycle beta %} A consent dialog is displayed depending on the values of three elements:
+* {% api_lifecycle ea %} A consent dialog is displayed depending on the values of three elements:
     * `prompt`, a query parameter used in requests to [`/authorize`](/docs/api/resources/oidc#authorize)
     * `consent_method`, a property on [apps](/docs/api/resources/apps#settings-7)
     * `consent`, a property on scopes as listed in the table above
@@ -1355,7 +1355,9 @@ Token limits:
     | `NONE`            | `REQUIRED`                       | `REQUIRED`                  | Prompted     |
     | `NONE`            | `REQUIRED`                       | `IMPLICIT`                  | Not prompted | 
 
-> {% api_lifecycle beta %} Note: Apps created on `/api/v1/apps` default to `consent_method=TRUSTED`, while those created on `/api/v1/clients` default to `consent_method=REQUIRED`.
+> Notes:
+  * Apps created on `/api/v1/apps` default to `consent_method=TRUSTED`, while those created on `/api/v1/clients` default to `consent_method=REQUIRED`.
+  * If you request a scope that requires consent while using the `client_credentials` flow, an error is returned. Because there is no user, no consent can be given.
 
 ### Claim Object
 

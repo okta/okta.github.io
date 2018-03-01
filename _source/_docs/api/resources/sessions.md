@@ -127,7 +127,7 @@ curl -v -X POST \
 #### Get Session
 {:.api .api-operation}
 
-{% api_operation get /api/v1/sessions/*:id* %}
+{% api_operation get /api/v1/sessions/${sessionId} %}
 
 Get session information for a given session id.
 
@@ -203,7 +203,7 @@ If the session is invalid, a `404 Not Found` response will be returned.
 ### Extend Session
 {:.api .api-operation}
 
-{% api_operation put /api/v1/sessions/*:id* %} {% api_lifecycle deprecated %}
+{% api_operation put /api/v1/sessions/${sessionId} %} {% api_lifecycle deprecated %}
 
 Extends the lifetime of a user's session.
 
@@ -294,7 +294,7 @@ Refresh an existing session using the `id` for that session. (This is equivalent
 
 > Note this is an admin operation and requires an API token.
 
-{% api_operation post /api/v1/sessions/*:id*/lifecycle/refresh %}
+{% api_operation post /api/v1/sessions/${sessionId}/lifecycle/refresh %}
 
 ##### Request Parameters
 {:.api .api-request .api-request-params}
@@ -375,7 +375,7 @@ curl -v -X POST \
 ### Close Session
 {:.api .api-operation}
 
-{% api_operation delete /api/v1/sessions/*:id* %}
+{% api_operation delete /api/v1/sessions/${sessionId} %}
 
 Closes a user's session (logout).
 
@@ -562,6 +562,28 @@ If the session is invalid, a `404 Not Found` response will be returned.
         }
     }
 }
+~~~
+
+#### Option: Use the HTTP Header Prefer
+
+Okta now supports [the HTTP Header `Prefer`](https://tools.ietf.org/html/rfc7240#section-4.2) in [the Sessions API for refreshing sessions](/docs/api/resources/sessions#refresh-current-session). You can extend the session lifetime, but skip any processing work related to building the response body.
+
+##### Example Request
+
+~~~sh
+curl -v -X POST \
+-H "Accept: application/json" \
+-H "Content-Type: application/json" \
+-H "Authorization: SSWS ${api_token}" \
+"https://{yourOktaDomain}.com/api/v1/sessions/me/refresh"
+~~~
+Note: `me` can also be an ID.
+
+##### Example Response
+
+~~~http
+HTTP/1.1 204 No Content
+Preference-Applied: return=minimal
 ~~~
 
 ### Close Current Session

@@ -161,7 +161,7 @@ curl -X POST
 ~~~
 
 ### Get an IP Zone
-{% api_operation get /api/v1/zones/*:zoneId* %}
+{% api_operation get /api/v1/zones/${zoneId} %}
 
 Gets an IP zone by id
 
@@ -532,7 +532,7 @@ curl -X GET \
 ### Update an IP Zone
 {:.api .api-operation}
 
-{% api_operation put /api/v1/zones/*:zoneId* %}
+{% api_operation put /api/v1/zones/${zoneId} %}
 
 Updates an existing IP Zone
 

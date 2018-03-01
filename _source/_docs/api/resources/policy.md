@@ -27,7 +27,7 @@ The policy API supports the following **rule operations**:
 ### Get a Policy
 {:.api .api-operation}
 
-{% api_operation get /api/v1/policies/*:policyId* %}
+{% api_operation get /api/v1/policies/${policyId} %}
 
 #### Request Parameters
 
@@ -53,7 +53,7 @@ HTTP 200:
 ### Get a Policy with Rules
 {:.api .api-operation}
 
-{% api_operation get /api/v1/policies/*:policyId*?expand=rules %}
+{% api_operation get /api/v1/policies/${policyId}?expand=rules %}
 
 #### Request Parameters
 
@@ -82,7 +82,7 @@ Included as embedded objects, one or more <a href="#rules">Policy Rules</a>.
 ### Get All Policies by Type
 {:.api .api-operation}
 
-{% api_operation get /api/v1/policies?type=*:type* %}
+{% api_operation get /api/v1/policies?type=${type} %}
 
 #### Request Parameters
 
@@ -110,7 +110,7 @@ HTTP 204:
 ### Delete Policy
 {:.api .api-operation}
 
-{% api_operation delete /api/v1/policies/*:policyId* %}
+{% api_operation delete /api/v1/policies/${policyId} %}
 
 #### Request Parameters
 
@@ -136,7 +136,7 @@ HTTP 204:
 ### Update a Policy
 {:.api .api-operation}
 
-{% api_operation put /api/v1/policies/*:policyId* %}
+{% api_operation put /api/v1/policies/${policyId} %}
 
 #### Request Parameters
 
@@ -218,7 +218,7 @@ HTTP 204:
 ### Activate a Policy
 {:.api .api-operation}
 
-{% api_operation post /api/v1/policies/*:policyId*/lifecycle/activate %}
+{% api_operation post /api/v1/policies/${policyId}/lifecycle/activate %}
 
 #### Request Parameters
 
@@ -244,7 +244,7 @@ HTTP 204:
 ### Deactivate a Policy
 {:.api .api-operation}
 
-{% api_operation post /api/v1/policies/*:policyId*/lifecycle/deactivate %}
+{% api_operation post /api/v1/policies/${policyId}/lifecycle/deactivate %}
 
 #### Request Parameters
 
@@ -272,7 +272,7 @@ HTTP 200:
 ### Get Policy Rules
 {:.api .api-operation}
 
-{% api_operation get /api/v1/policies/*:policyId*/rules %}
+{% api_operation get /api/v1/policies/${policyId}/rules %}
 
 #### Request Parameters
 
@@ -298,7 +298,7 @@ HTTP 200:
 ### Create a rule
 {:.api .api-operation}
 
-{% api_operation post /api/v1/policies/*:policyId*/rules %}
+{% api_operation post /api/v1/policies/${policyId}/rules %}
 
 #### Request Parameters
 
@@ -348,7 +348,7 @@ HTTP 200:
 ### Delete a rule
 {:.api .api-operation}
 
-{% api_operation delete /api/v1/policies/*:policyId*/rules/*:ruleId* %}
+{% api_operation delete /api/v1/policies/${policyId}/rules/${ruleId} %}
 
 #### Request Parameters
 
@@ -374,7 +374,7 @@ HTTP 204:
 ### Get a rule
 {:.api .api-operation}
 
-{% api_operation get /api/v1/policies/*:policyId*/rules/*:ruleId* %}
+{% api_operation get /api/v1/policies/${policyId}/rules/${ruleId} %}
 
 #### Request Parameters
 
@@ -400,7 +400,7 @@ HTTP 200:
 ### Update a rule
 {:.api .api-operation}
 
-{% api_operation put /api/v1/policies/*:policyId*/rules/*:ruleId* %}
+{% api_operation put /api/v1/policies/${policyId}/rules/${ruleId} %}
 
 #### Request Parameters
 
@@ -451,7 +451,7 @@ HTTP 200:
 ### Activate A Rule
 {:.api .api-operation}
 
-{% api_operation post /api/v1/policies/*:policyId*/rules/*:ruleId*/lifecycle/activate %}
+{% api_operation post /api/v1/policies/${policyId}/rules/${ruleId}/lifecycle/activate %}
 
 #### Request Parameters
 
@@ -477,7 +477,7 @@ HTTP 204:
 ### Deactivate A Rule
 {:.api .api-operation}
 
-{% api_operation post /api/v1/policies/*:policyId*/rules/*:ruleId*/lifecycle/deactivate %}
+{% api_operation post /api/v1/policies/${policyId}/rules/${ruleId}/lifecycle/deactivate %}
 
 #### Request Parameters
 
@@ -877,7 +877,7 @@ include | The AD integrations this policy applies to | Array | No | Include all 
 Okta Sign On Policy controls the manner in which a user is allowed to sign on to Okta, including whether they are challenged for multifactor authentication (MFA) and how long they are allowed to remain signed in before re-authenticating.
 
 >Note: Okta Sign On Policy is different from application sign-on policy, which determines the extra levels of authentication (if any) which must be performed before a specific Okta application can be invoked.
-Application sign-on policy can&#8217;t be configured via the API.
+Application sign-on policy can't be configured via the API.
 
 ### Policy Settings Data
 
@@ -920,7 +920,7 @@ requireFactor | Indicates if multi-factor authentication is required | Boolean |
 factorPromptMode | Indicates if the user should be challenged for second factor authentication (MFA) based on the device being used, a factor session lifetime, or on every sign on attempt. | `DEVICE`, `SESSION` or `ALWAYS` | Yes, if requireFactor is true | N/A
 rememberDeviceByDefault | Indicates if Okta should automatically remember the device  | Boolean | No | false
 factorLifetime | Interval of time that must elapse before the user is challenged for MFA, if the factor prompt mode is set to 'SESSION' | Integer | Yes, if requireFactor is true | N/A
-session | Properties governing the user&#8217;s session lifetime | <a href="#SignonSessionObject">Signon Session Object</a> | No |
+session | Properties governing the user's session lifetime | <a href="#SignonSessionObject">Signon Session Object</a> | No |
 
 
 ##### Signon Session Object
@@ -1061,7 +1061,7 @@ The following conditions may be applied to the rules associated with MFA Enrollm
 ## Password Policy
 {: #GroupPasswordPolicy }
 
-Password policy controls settings that determine a user&#8217;s password length and complexity, as well as the frequency with which a password can be changed.  This policy also governs the recovery operations that may be performed by the user, including change password, reset (forgot) password and self-service password unlock.
+Password policy controls settings that determine a user's password length and complexity, as well as the frequency with which a password can be changed.  This policy also governs the recovery operations that may be performed by the user, including change password, reset (forgot) password and self-service password unlock.
 
 #### Policy Settings Example
 
@@ -1270,7 +1270,7 @@ options | Delegation options | <a href="#DelegationOptionsObject">Delegation Opt
 
 Property | Description | Data Type | Required | Default
 | --- | --- | --- | ---
-skipUnlock | Indicates if, when performing an unlock operation on an Active Directory mastered user who is locked out of Okta, the system should also attempt to unlock the user&#8217;s Windows account. | Boolean | No | false
+skipUnlock | Indicates if, when performing an unlock operation on an Active Directory mastered user who is locked out of Okta, the system should also attempt to unlock the user's Windows account. | Boolean | No | false
 
 ### Policy Conditions
 The following conditions may be applied to Password Policy

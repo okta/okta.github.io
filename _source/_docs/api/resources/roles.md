@@ -16,7 +16,7 @@ Explore the Administrator Roles API:  [![Run in Postman](https://run.pstmn.io/bu
 ### List Roles Assigned to User
 {:.api .api-operation}
 
-{% api_operation get /api/v1/users/*:uid*/roles %}
+{% api_operation get /api/v1/users/${userId}/roles %}
 
 Lists all roles assigned to a user.
 
@@ -25,7 +25,7 @@ Lists all roles assigned to a user.
 
 | Parameter    | Description                                         | Param Type | DataType | Required |
 |:------------ |:--------------------------------------------------- |:---------- |:-------- |:-------- |
-| uid          | `id` of user                                        | URL        | String   | TRUE     |
+| userId          | `id` of a user                                        | URL        | String   | TRUE     |
 
 #### Response Parameters
 {:.api .api-response .api-response-params}
@@ -70,7 +70,7 @@ curl -v -X GET \
 ### Assign Role to User
 {:.api .api-operation}
 
-{% api_operation post /api/v1/users/*:uid*/roles %}
+{% api_operation post /api/v1/users/${userId}/roles %}
 
 Assigns a role to a user.
 
@@ -79,8 +79,8 @@ Assigns a role to a user.
 
 | Parameter | Description            | Param Type | DataType                  | Required |
 |:----------|:-----------------------|:-----------|:--------------------------|:---------|
-| uid       | `id` of user           | URL        | String                    | TRUE     |
-| type      | type of role to assign | Body       |   [Role Type](#role-types)  | TRUE     |
+| userId       | `id` of a user           | URL        | String                    | TRUE     |
+| type      | type of role to assign | Body       | [Role Type](#role-types)  | TRUE     |
 
 #### Response Parameters
 {:.api .api-response .api-response-params}
@@ -117,7 +117,7 @@ curl -v -X POST \
 ### Unassign Role from User
 {:.api .api-operation}
 
-{% api_operation delete /api/v1/users/*:uid*/roles/*:rid* %}
+{% api_operation delete /api/v1/users/${userId}/roles/${roleId} %}
 
 Unassigns a role from a user.
 
@@ -126,8 +126,8 @@ Unassigns a role from a user.
 
 | Parameter | Description  | Param Type | DataType | Required |
 |:----------|:-------------|:-----------|:---------|:---------|
-| uid       | `id` of user | URL        | String   | TRUE     |
-| rid       | `id` of role | URL        | String   | TRUE     |
+| userId       | `id` of a user | URL        | String   | TRUE     |
+| roleId       | `id` of a role | URL        | String   | TRUE     |
 
 #### Response Parameters
 {:.api .api-response .api-response-params}
@@ -161,7 +161,7 @@ HTTP/1.1 204 No Content
 #### List Group Targets for Group Admin Role
 {:.api .api-operation}
 
-{% api_operation get /api/v1/users/*:uid*/roles/*:rid*/targets/groups %}
+{% api_operation get /api/v1/users/${userId}/roles/${roleId}/targets/groups %}
 
 Lists all group targets for a `USER_ADMIN` role assignment.
 
@@ -170,8 +170,8 @@ Lists all group targets for a `USER_ADMIN` role assignment.
 
 | Parameter | Description                                                  | Param Type | DataType | Required |
 |:----------|:-------------------------------------------------------------|:-----------|:---------|:---------|
-| uid       | `id` of user                                                 | URL        | String   | TRUE     |
-| rid       | `id` of role                                                 | URL        | String   | TRUE     |
+| userId       | `id` of a user                                                 | URL        | String   | TRUE     |
+| roleId       | `id` of a role                                                 | URL        | String   | TRUE     |
 | limit     | Specifies the number of results for a page (default is 20)   | Query      | Number   | FALSE    |
 | after     | Specifies the pagination cursor for the next page of targets | Query      | String   | FALSE    |
 
@@ -236,7 +236,7 @@ curl -v -X GET \
 #### Add Group Target to Group Admin Role
 {:.api .api-operation}
 
-{% api_operation put /api/v1/users/*:uid*/roles/*:rid*/targets/groups/*:gid* %}
+{% api_operation put /api/v1/users/${userId}/roles/${roleId}/targets/groups/${groupId} %}
 
 Adds a group target for a `USER_ADMIN` role assignment.
 
@@ -247,9 +247,9 @@ Adding the first group target changes the scope of the role assignment from appl
 
 | Parameter | Description                                   | Param Type | DataType | Required |
 |:----------|:----------------------------------------------|:-----------|:---------|:---------|
-| uid       | `id` of user                                  | URL        | String   | TRUE     |
-| rid       | `id` of role                                  | URL        | String   | TRUE     |
-| gid       | `id` of group target to scope role assignment | URL        | String   | TRUE     |
+| userId       | `id` of a user                                  | URL        | String   | TRUE     |
+| roleId       | `id` of a role                                  | URL        | String   | TRUE     |
+| groupId      | `id` of group target to scope role assignment | URL        | String   | TRUE     |
 
 ##### Response Parameters
 {:.api .api-response .api-response-params}
@@ -279,7 +279,7 @@ HTTP/1.1 204 No Content
 #### Remove Group Target from Group Admin Role
 {:.api .api-operation}
 
-{% api_operation delete /api/v1/users/*:uid*/roles/*:rid*/targets/groups/*:gid* %}
+{% api_operation delete /api/v1/users/${userId}/roles/${roleId}/targets/groups/${groupId} %}
 
 Removes a group target from a `USER_ADMIN` role assignment.
 
@@ -290,9 +290,9 @@ Don't remove the last group target from a role assignment, as this causes an exc
 
 | Parameter | Description                              | Param Type | DataType | Required |
 |:----------|:-----------------------------------------|:-----------|:---------|:---------|
-| uid       | `id` of user                             | URL        | String   | TRUE     |
-| rid       | `id` of role                             | URL        | String   | TRUE     |
-| gid       | `id` of group target for role assignment | URL        | String   | TRUE     |
+| userId       | `id` of a user                             | URL        | String   | TRUE     |
+| roleId       | `id` of a role                             | URL        | String   | TRUE     |
+| groupId      | `id` of group target for role assignment | URL        | String   | TRUE     |
 
 ##### Response Parameters
 {:.api .api-response .api-response-params}
@@ -324,7 +324,7 @@ HTTP/1.1 204 No Content
 #### List App Targets for App Admin Role
 {:.api .api-operation}
 
-{% api_operation get /api/v1/users/*:uid*/roles/*:rid*/targets/catalog/apps %}
+{% api_operation get /api/v1/users/${userId}/roles/${roleId}/targets/catalog/apps %}
 
 Lists all app targets for an `APP_ADMIN` role assignment.
 
@@ -333,8 +333,8 @@ Lists all app targets for an `APP_ADMIN` role assignment.
 
 | Parameter | Description                                                  | Param Type | DataType | Required |
 |:----------|:-------------------------------------------------------------|:-----------|:---------|:---------|
-| uid       | `id` of user                                                 | URL        | String   | TRUE     |
-| rid       | `id` of role                                                 | URL        | String   | TRUE     |
+| userId       | `id` of a user                                                 | URL        | String   | TRUE     |
+| roleId       | `id` of a role                                                 | URL        | String   | TRUE     |
 | limit     | Specifies the number of results for a page (default is 20)   | Query      | Number   | FALSE    |
 | after     | Specifies the pagination cursor for the next page of targets | Query      | String   | FALSE    |
 
@@ -433,7 +433,7 @@ curl -v -X GET \
 #### Add App Target to App Admin Role
 {:.api .api-operation}
 
-{% api_operation put /api/v1/users/*:uid*/roles/*:rid*/targets/catalog/apps/*:appName* %}
+{% api_operation put /api/v1/users/${userId}/roles/${roleId}/targets/catalog/apps/${appName} %}
 
 Adds an app target for an `APP_ADMIN` role assignment.
 
@@ -444,8 +444,8 @@ Adding the first app target changes the scope of the role assignment from applyi
 
 | Parameter | Description                                                | Param Type | DataType | Required |
 |:----------|:-----------------------------------------------------------|:-----------|:---------|:---------|
-| uid       | `id` of user                                               | URL        | String   | TRUE     |
-| rid       | `id` of role                                               | URL        | String   | TRUE     |
+| userId       | `id` of a user                                               | URL        | String   | TRUE     |
+| roleId       | `id` of a role                                               | URL        | String   | TRUE     |
 | appName   | `name` of app target from catalog to scope role assignment | URL        | String   | TRUE     |
 
 ##### Response Parameters
@@ -476,7 +476,7 @@ HTTP/1.1 204 No Content
 #### Remove App Target from App Admin Role
 {:.api .api-operation}
 
-{% api_operation delete /api/v1/users/*:uid*/roles/*:rid*/targets/catalog/apps/*:appName* %}
+{% api_operation delete /api/v1/users/${userId}/roles/${roleId}/targets/catalog/apps/${appName} %}
 
 Removes an app target from an `APP_ADMIN` role assignment.
 
@@ -487,8 +487,8 @@ Don't remove the last app target from a role assignment, as this causes an excep
 
 | Parameter | Description                              | Param Type | DataType | Required |
 |:----------|:-----------------------------------------|:-----------|:---------|:---------|
-| uid       | `id` of user                             | URL        | String   | TRUE     |
-| rid       | `id` of role                             | URL        | String   | TRUE     |
+| userId       | `id` of a user                             | URL        | String   | TRUE     |
+| roleId       | `id` of a role                             | URL        | String   | TRUE     |
 | appName   | `name` of app target for role assignment | URL        | String   | TRUE     |
 
 ##### Response Parameters
@@ -543,8 +543,8 @@ The role model defines several **read-only** properties:
 | status      | Status of role assignment                             | `ACTIVE`                                                                                                    | FALSE    | FALSE  | TRUE      |
 | created     | Timestamp when app user was created                   | Date                                                                                                        | FALSE    | FALSE  | TRUE      |
 | lastUpdated | Timestamp when app user was last updated              | Date                                                                                                        | FALSE    | FALSE  | TRUE      |
-| _embedded   | Embedded resources related to the role assignment     |          [JSON HAL](http://tools.ietf.org/html/draft-kelly-json-hal-06)                                              | TRUE     | FALSE  | TRUE      |
-| _links      | Discoverable resources related to the role assignment |          [JSON HAL](http://tools.ietf.org/html/draft-kelly-json-hal-06)                                              | TRUE     | FALSE  | TRUE      |
+| _embedded   | Embedded resources related to the role assignment     | [JSON HAL](http://tools.ietf.org/html/draft-kelly-json-hal-06)                                              | TRUE     | FALSE  | TRUE      |
+| _links      | Discoverable resources related to the role assignment | [JSON HAL](http://tools.ietf.org/html/draft-kelly-json-hal-06)                                              | TRUE     | FALSE  | TRUE      |
 
 #### Role Types
 

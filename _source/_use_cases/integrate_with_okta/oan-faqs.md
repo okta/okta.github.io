@@ -103,7 +103,7 @@ Also, if you haven’t already done so, sign up for an Okta [developer account](
 
 **Q: In general, how can I get familiar with the Okta product?**
 
-A: To get started, check out the [Okta Help Center](https://support.okta.com/help) or [Okta Academy on YouTube](https://www.youtube.com/playlist?list=PLIid085fSVdurJ8l_UgfNGJohaSW6w97p). App Partners are eligible for live Okta 101 sessions as well, please email <developers@okta.com> if you are interested. 
+A: To get started, check out the [Okta Help Center](https://help.okta.com) or [OktaInc on YouTube](https://www.youtube.com/user/OktaInc). App Partners are eligible for live Okta 101 sessions as well, please email <developers@okta.com> if you are interested. 
 
 <br />
 

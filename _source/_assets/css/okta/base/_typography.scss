@@ -23,12 +23,6 @@ ol {
 	@include margin(small 0);
 }
 
-ul {
-	li + li {
-		margin-top: get-spacing('x-small');
-	}
-}
-
 blockquote {
 	@include margin(medium 0);
 	@include padding(x-small small);
