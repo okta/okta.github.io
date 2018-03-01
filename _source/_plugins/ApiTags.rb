@@ -28,7 +28,8 @@ module Okta
     def initialize(tag_name, text, tokens)
       params = text.split(" ")
       @operation = params[0]
-      @uri = params[1]
+      # Replace ${var} with **${var}**
+      @uri = params[1].gsub(/\${(.*?)\}/, '**${\1}**')
       super
     end
 

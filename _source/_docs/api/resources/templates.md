@@ -81,7 +81,7 @@ curl -v -X POST \
 ### Get SMS Template
 {:.api .api-operation}
 
-{% api_operation get /api/v1/templates/sms/*:id* %}
+{% api_operation get /api/v1/templates/sms/${smsTemplateId} %}
 
 Fetches a specific template by `id`
 
@@ -90,7 +90,7 @@ Fetches a specific template by `id`
 
 Parameter |    Description     | ParamType | DataType | Required |
 --------- | ------------------ | --------- | -------- | -------- |
-id        | `id` of a template | URL       | String   | TRUE     |
+smsTemplateId        | `id` of a template | URL       | String   | TRUE     |
 
 ##### Response Parameters
 {:.api .api-response .api-response-params}
@@ -183,7 +183,7 @@ curl -v -X GET \
 ### Update SMS Template
 {:.api .api-operation}
 
-{% api_operation put /api/v1/templates/sms/*:id* %}
+{% api_operation put /api/v1/templates/sms/${smsTemplateId} %}
 
 Updates the SMS template.
 
@@ -194,7 +194,7 @@ Updates the SMS template.
 
 Parameter | Description                                 | ParamType | DataType                            | Required |
 --------- | ------------------------------------------- | --------- | ----------------------------------- | -------- |
-id        | `id` of the SMS template to update            | URL       | String                              | TRUE     |
+smsTemplateId        | `id` of the SMS template to update            | URL       | String                              | TRUE     |
           | Full description of the custom SMS template | Body      | [SMS Template](#sms-template-model) | TRUE     |
 
 > All profile properties must be specified when updating an SMS custom template. Partial updates are described [here](#partial-sms-template-update).
@@ -241,7 +241,7 @@ curl -v -X PUT \
 ### Partial SMS Template Update
 {:.api .api-operation}
 
-{% api_operation post /api/v1/templates/sms/*:id* %}
+{% api_operation post /api/v1/templates/sms/${smsTemplateId} %}
 
 Updates only some of the SMS template properties:
 
@@ -257,7 +257,7 @@ Updates only some of the SMS template properties:
 
 Parameter | Description                                 | ParamType | DataType                            | Required |
 --------- | ------------------------------------------- | --------- | ----------------------------------- | -------- |
-id        | `id` of the SMS template to update            | URL       | String                              | TRUE     |
+smsTemplateId        | `id` of the SMS template to update            | URL       | String                              | TRUE     |
           | Attributes that we want to change           | Body      | [SMS Template](#sms-template-model) | TRUE     |
 
 > Full SMS template update is described [here](#update-sms-template).
@@ -306,7 +306,7 @@ curl -v -X POST \
 ### Remove SMS Template
 {:.api .api-operation}
 
-{% api_operation delete /api/v1/templates/sms/*:id* %}
+{% api_operation delete /api/v1/templates/sms/${smsTemplateId} %}
 
 Removes an SMS template.
 
@@ -317,7 +317,7 @@ Removes an SMS template.
 
 Parameter | Description                        | ParamType | DataType | Required |
 --------- | ---------------------------------- | --------- | -------- | -------- |
-id        | `id` of the SMS template to delete | URL       | String   | TRUE     |
+smsTemplateId        | `id` of the SMS template to delete | URL       | String   | TRUE     |
 
 ##### Response Parameters
 {:.api .api-response .api-response-params}
@@ -372,7 +372,7 @@ All templates have the following properties:
 | id                     | Unique key for template                                      | String                                                         | TRUE     | 20        | 20        |
 | name                   | Human-readable name of the template                          | String                                                         | FALSE    | 1         | 50        |
 | type                   | Type of the template                                         | String                                                         | FALSE    | 1         | 50        |
-| template               | Text of the template, including any [macros](#sms-template-macros).                                        | String (See note blow)                                         | FALSE    | 1         | 161       |
+| template               | Text of the template, including any [macros](#sms-template-macros).                                        | String (See note below)                                         | FALSE    | 1         | 161       |
 | created                | Timestamp when template was created                          | String (ISO-8601)                                              | TRUE     | N/A       | N/A       |
 | lastUpdated            | Timestamp when template was last updated                     | String (ISO-8601)                                              | TRUE     | N/A       | N/A       |
 | translations           | Array of [translations](#translation-attributes)             | Array                                                          | N/A      | N/A       | N/A       |

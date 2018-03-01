@@ -125,7 +125,7 @@ curl -X POST
 ~~~
 
 ### Get Trusted Origin
-{% api_operation get /api/v1/trustedOrigins/*:trustedOriginId* %}
+{% api_operation get /api/v1/trustedOrigins/${trustedOriginId} %}
 
 Gets a trusted origin by ID
 
@@ -451,7 +451,7 @@ curl -X GET \
 ### Update Trusted Origin
 {:.api .api-operation}
 
-{% api_operation put /api/v1/trustedOrigins/*:trustedOriginId* %}
+{% api_operation put /api/v1/trustedOrigins/${trustedOriginId} %}
 
 Updates an existing trusted origin
 
@@ -562,7 +562,7 @@ curl -X PUT
 ### Activate Trusted Origin
 {:.api .api-operation}
 
-{% api_operation post /api/v1/trustedOrigins/*:trustedOriginId*/lifecycle/activate %}
+{% api_operation post /api/v1/trustedOrigins/${trustedOriginId}/lifecycle/activate %}
 
 Activates an existing trusted origin
 
@@ -631,7 +631,7 @@ curl -X POST
 ### Deactivate Trusted Origin
 {:.api .api-operation}
 
-{% api_operation post /api/v1/trustedOrigins/*:trustedOriginId*/lifecycle/deactivate %}
+{% api_operation post /api/v1/trustedOrigins/${trustedOriginId}/lifecycle/deactivate %}
 
 Deactivates an existing trusted origin
 
@@ -700,7 +700,7 @@ curl -X POST
 ### Delete Trusted Origin
 {:.api .api-operation}
 
-{% api_operation delete /api/v1/trustedOrigins/*:trustedOriginId* %}
+{% api_operation delete /api/v1/trustedOrigins/${trustedOriginId} %}
 
 Deletes an existing trusted origin
 

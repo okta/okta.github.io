@@ -15,11 +15,6 @@ New to Okta? Our Quick Start Guide will walk you through adding user authenticat
       <span class='code-icon launch-16'></span><span>Authentication Quick Start Guide</span>
     </a>
   </li>
-  <li>
-    <a href='https://github.com/okta/samples-php-symfony' class='code-button'>
-      <span class='fa fa-github'></span><span>PHP Sample App</span>
-    </a>
-  </li>
 </ul>
 
 ## PHP SDK

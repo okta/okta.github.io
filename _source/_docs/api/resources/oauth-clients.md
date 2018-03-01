@@ -266,7 +266,7 @@ Response body:
 ### List Client Applications Matching a Search Filter
 {:.api .api-operation}
 
-{% api_operation get /oauth2/v1/clients?q=*:term* %}
+{% api_operation get /oauth2/v1/clients?q=${term} %}
 
 Lists all clients that match a search filter on `client_name`
 
@@ -341,7 +341,7 @@ Response body:
 ### Get OAuth Client
 {:.api .api-operation}
 
-{% api_operation get /oauth2/v1/clients/*:clientId* %}
+{% api_operation get /oauth2/v1/clients/${clientId} %}
 
 Fetches a specific client by `clientId` from your organization
 
@@ -350,7 +350,7 @@ Fetches a specific client by `clientId` from your organization
 
 | Parameter | Description                      | ParamType | DataType | Required |
 |:----------|:---------------------------------|:----------|:---------|:---------|
-| client_id | `client_id` of a specific client | URL       | String   | TRUE     |
+| clientId| `client_id` of a specific client | URL       | String   | TRUE     |
 
 ##### Response Parameters
 {:.api .api-response .api-response-params}
@@ -419,7 +419,7 @@ Content-Type: application/json
 ### Update Client Application
 {:.api .api-operation}
 
-{% api_operation put /oauth2/v1/clients/*:clientId* %}
+{% api_operation put /oauth2/v1/clients/${clientId} %}
 
 Updates the settings for a client application from your organization.
 
@@ -428,7 +428,7 @@ Updates the settings for a client application from your organization.
 
 Parameter | Description                        | ParamType | DataType                               | Required |
 --------- | ---------------------------------- | --------- | -------------------------------------- | -------- |
-client_id  | `client_id` of a specific client    | URL       | String                                 | TRUE     |
+clientId | `client_id` of a specific client    | URL       | String                                 | TRUE     |
 settings  | OAuth client registration settings | Body      | [Client Settings](#client-application-model) | TRUE     |
 
 > All settings must be specified when updating a client application, **partial updates are not supported.** If any settings are missing when updating a client application the update fails. The exceptions are: `client_secret_expires_at`, or `client_id_issued_at` must not be included in the request, and the `client_secret` can be omitted.
@@ -523,7 +523,7 @@ Content-Type: application/json;charset=UTF-8
 ### Generate New Client Secret
 {:.api .api-operation}
 
-{% api_operation put /oauth2/v1/clients/*:client_id*/lifecycle/newSecret %}
+{% api_operation put /oauth2/v1/clients/${clientId}/lifecycle/newSecret %}
 
 Generates a new client secret for the specified client application.
 
@@ -532,7 +532,7 @@ Generates a new client secret for the specified client application.
 
 Parameter | Description                        | ParamType | DataType                               | Required |
 --------- | ---------------------------------- | --------- | -------------------------------------- | -------- |
-client_id  | `client_id` of a specific client    | URL       | String                                 | TRUE     |
+clientId | `client_id` of a specific client    | URL       | String                                 | TRUE     |
 
 > This operation only applies to client applications which use the `client_secret_post` or `client_secret_basic` method for token endpoint authorization.
 
@@ -609,7 +609,7 @@ Content-Type: application/json;charset=UTF-8
 ### Remove Client Application
 {:.api .api-operation}
 
-{% api_operation delete /oauth2/v1/clients/*:client_id* %}
+{% api_operation delete /oauth2/v1/clients/${clientId} %}
 
 Removes a client application from your organization.
 
@@ -618,7 +618,7 @@ Removes a client application from your organization.
 
 | Parameter | Description                      | ParamType | DataType | Required |
 |:----------|:---------------------------------|:----------|:---------|:---------|
-| client_id | `client_id` of a specific client | URL       | String   | TRUE     |
+| clientId| `client_id` of a specific client | URL       | String   | TRUE     |
 
 ##### Response Parameters
 {:.api .api-response .api-response-params}

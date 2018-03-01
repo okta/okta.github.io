@@ -476,7 +476,8 @@ Content-Type: application/json;charset=UTF-8
 Date: Wed, 07 Feb 2018 16:51:38 GMT
 Transfer-Encoding: chunked
 X-Application-Context: edge-service:8081
-
+```
+```json
 {
     "error": "Internal Server Error",
     "exception": "feign.RetryableException",
@@ -633,6 +634,8 @@ If you have any questions about this article, you can email me at matt.raible@ok
 or [create an issue on GitHub](https://github.com/oktadeveloper/spring-boot-microservices-example/issues/new).
 
 **Update:** To learn about how security fits into all this, see [Secure a Spring Microservices Architecture with Spring Security, JWTs, Juiser, and Okta](/blog/2017/08/08/secure-spring-microservices).
+
+**Update 2:** To learn how to lock this application down with Spring Security and OAuth, see [Secure a Spring Microservices Architecture with Spring Security and OAuth 2.0](/blog/2018/02/13/secure-spring-microservices-with-oauth).
 
 **Changelog:**
 
