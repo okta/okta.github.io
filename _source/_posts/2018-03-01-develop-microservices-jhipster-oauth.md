@@ -10,7 +10,7 @@ tweets:
 - "Wanna get started with @java_hipster and a microservices architecture based on @springboot and @springsecurity? We have just the 🎫! We'll even show you how to deploy it to @heroku! "
 ---
 
-JHipster is a development platform to generate, develop, and deploy Spring Boot + Angular web applications and Spring microservices. It supports using many types of authentication: JWT, session-based, and OAuth 2.0 / OIDC. In its 5.0 release, it'll also add React as a UI option. The 5.0 version is under active development and will likely be released in the next few months.
+JHipster is a development platform to generate, develop, and deploy Spring Boot + Angular web applications and Spring microservices. It supports using many types of authentication: JWT, session-based, and OAuth 2.0. In its 5.0 release, it'll also add React as a UI option. The 5.0 version is under active development and will likely be released in the next few months.
 
 {% img blog/microservices-jhipster-oauth/what-is-jhipster.png alt:"Spring Boot + Angular = JHipster" width:"800" %}{: .center-image }
 
