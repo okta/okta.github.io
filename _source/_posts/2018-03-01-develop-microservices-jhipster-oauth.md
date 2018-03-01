@@ -146,7 +146,7 @@ Start the `gateway` app by navigating to its directory in a terminal and running
 
 **TIP:** If you already have Maven installed, you can just use `mvn`.
 
-Open your browser and go to <http://localhost:8761>. Log in with `admin/admin`, and you should see a welcome page that shows the gateway has registered.
+Open your browser and go to `http://localhost:8761`. Log in with `admin/admin`, and you should see a welcome page that shows the gateway has registered.
 
 {% img blog/microservices-jhipster-oauth/jhipster-registry-with-gateway.png alt:"JHipster Registry with Gateway registered" width:"800" %}{: .center-image }
 
@@ -293,7 +293,7 @@ There's a lot of services to start if you want to see all your applications runn
   
 4. Start the store app from the `store` directory by running `mvn`.
 
-Once everything finishes starting, open a browser to <http://localhost:8080> and click **sign in**. You should be redirected to your Okta org to sign-in, then back to the gateway once you've entered valid credentials.
+Once everything finishes starting, open a browser to `http://localhost:8080` and click **sign in**. You should be redirected to your Okta org to sign-in, then back to the gateway once you've entered valid credentials.
 
 {% img blog/microservices-jhipster-oauth/welcome-jhipster.png alt:"Welcome, JHipster" width:"800" %}{: .center-image }
 
