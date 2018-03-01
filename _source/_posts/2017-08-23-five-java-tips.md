@@ -37,7 +37,7 @@ http.requiresChannel()
     .anyRequest().requiresSecure(); 
 ```
 
-Or just use a [few properties](https://docs.spring.io/spring-boot/docs/current/reference/html/howto-embedded-servlet-containers.html#howto-configure-ssl) with Spring Boot:
+Or just use a [few properties](https://docs.spring.io/spring-boot/docs/1.5.10.RELEASE/reference/html/howto-embedded-servlet-containers.html#howto-configure-ssl) with Spring Boot:
 
 ```properties
 server.port=8443
