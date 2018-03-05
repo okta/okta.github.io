@@ -20,7 +20,7 @@ You will need [Java 8](http://www.oracle.com/technetwork/java/javase/downloads/j
 
 ## Build an API with Spring Boot 2.0
 
-To get started with [Spring Boot](https://projects.spring.io/spring-boot/) 2.0, you can work with its recent milestone release. Head on over to [start.spring.io](https://start.spring.io) and create a new project that uses Java, Spring Boot version 2.0.0 M6, and options to create a simple API: JPA, H2, Rest Repositories, Lombok, and Web. In this example, I've added Actuator as well, since it's a [very cool feature](https://dzone.com/articles/spring-boot-actuator-a-complete-guide) of Spring Boot.
+To get started with [Spring Boot](https://projects.spring.io/spring-boot/) 2.0, you can work with its recent milestone release. Head on over to [start.spring.io](https://start.spring.io) and create a new project that uses Java, Spring Boot version 2.0.0, and options to create a simple API: JPA, H2, Rest Repositories, Lombok, and Web. In this example, I've added Actuator as well, since it's a [very cool feature](https://dzone.com/articles/spring-boot-actuator-a-complete-guide) of Spring Boot.
 
 {% img blog/spring-boot-2-angular-5/start.spring.io.png alt:"Spring Initializr" width:"800" %}{: .center-image }
 
@@ -152,13 +152,12 @@ If you restart your server app and hit `localhost:8080/cool-cars` with your brow
 
 ```bash
 http localhost:8080/cool-cars
+HTTP/1.1 200 
+Content-Type: application/json;charset=UTF-8
+Date: Mon, 05 Mar 2018 12:31:32 GMT
+Transfer-Encoding: chunked
 ```
 ```json
-HTTP/1.1 200
-Content-Type: application/json;charset=UTF-8
-Date: Sun, 19 Nov 2017 21:29:22 GMT
-Transfer-Encoding: chunked
-
 [
     {
         "id": 1,
@@ -191,10 +190,10 @@ You can learn the basics of Angular CLI at <https://cli.angular.io>.
 
 {% img blog/spring-boot-2-angular-5/cli.angular.io.png alt:"Angular CLI Homepage" width:"800" %}{: .center-image }
 
-Install the latest version of Angular CLI, which is version 1.5.2.
+Install the latest version of Angular CLI, which is version 1.7.2.
 
 ```bash
-npm install -g @angular/cli@1.5.2
+npm install -g @angular/cli@1.7.2
 ```
 
 Create a new project in the umbrella directory you created. Again, mine is named `okta-spring-boot-2-angular-5-example`.
@@ -210,13 +209,7 @@ cd client
 npm install --save @angular/material @angular/cdk
 ```
 
-You'll use Angular Material's components to make the UI look better, especially on mobile phones. Install Angular's animations library, which Angular Material components sometimes leverages.
-
-```bash
-npm install --save @angular/animations
-```
-
-If you'd like to learn more about Angular Material, see <https://material.angular.io>. It has extensive documentation on its various components and how to use them.
+You'll use Angular Material's components to make the UI look better, especially on mobile phones. If you'd like to learn more about Angular Material, see <https://material.angular.io>. It has extensive documentation on its various components and how to use them.
 
 {% img blog/spring-boot-2-angular-5/material.angular.io.png alt:"Angular Material Homepage" width:"800" %}{: .center-image }
 
@@ -262,8 +255,7 @@ import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
-    AppComponent,
-    CarListComponent
+    AppComponent
   ],
   imports: [
     BrowserModule,
@@ -374,7 +366,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     MatCardModule,
     MatInputModule,
     MatListModule,
-    MatToolbarModule,
+    MatToolbarModule
   ],
   ...
 })
@@ -414,7 +406,7 @@ Modify `client/src/styles.css` to specify the theme and icons.
 
 ```css
 @import "~@angular/material/prebuilt-themes/pink-bluegrey.css";
-@import '~https://fonts.googleapis.com/icon?family=Material+Icons';
+@import 'https://fonts.googleapis.com/icon?family=Material+Icons';
 
 body {
  margin: 0;
@@ -736,7 +728,7 @@ On the server side, you can lock things down with the Okta Spring Boot starter. 
 <dependency>
     <groupId>com.okta.spring</groupId>
     <artifactId>okta-spring-boot-starter</artifactId>
-    <version>0.2.0</version>
+    <version>0.3.0</version>
 </dependency>
 ```
 
@@ -767,11 +759,10 @@ After making these changes, you should be able to restart your app and see acces
 Unfortunately, you'll likely see a stack trace with the following error instead.
 
 ```
-Caused by: java.lang.ClassNotFoundException:
-org.springframework.boot.autoconfigure.security.oauth2.resource.AuthoritiesExtractor
+java.lang.NoSuchMethodError: org.springframework.boot.env.YamlPropertySourceLoader.load(Ljava/lang/String;Lorg/springframework/core/io/Resource;Ljava/lang/String;)Lorg/springframework/core/env/PropertySource;
 ```
 
-This happens because Spring Boot 2.0.0.M6 includes Spring Security 5.0.0.RC1, which doesn’t include Resource Server support. If you'd like to see when this issue is fixed, you can [subscribe to the Okta Spring Boot Starter issue #30 on GitHub](https://github.com/okta/okta-spring-boot/issues/30).
+This happens because Spring Boot 2.0.0 removed a method that the Okta Spring Boot starter relied on. If you'd like to see when this issue is fixed, you can [subscribe to the Okta Spring Boot Starter issue #30 on GitHub](https://github.com/okta/okta-spring-boot/issues/30).
 
 To workaround this problem, you can downgrade the Okta Spring Boot starter to version 0.1.0. Make sure to change its name from `spring-boot` to `spring-security` too!
 
@@ -1032,6 +1023,7 @@ import java.util.Collections;
 ...
 
 @Bean
+@SuppressWarnings("unchecked")
 public FilterRegistrationBean simpleCorsFilter() {
     UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
     CorsConfiguration config = new CorsConfiguration();
@@ -1067,3 +1059,7 @@ I've written a number of Spring Boot and Angular tutorials in the past, and I've
 * [Build an Angular App with Okta's Sign-In Widget in 15 Minutes](/blog/2017/03/27/angular-okta-sign-in-widget)
 
 If you have any questions, please don't hesitate to leave a comment below, or ask us on our [Okta Developer Forums](https://devforum.okta.com/). Follow us [on Twitter](https://twitter.com/oktadev) if you want to be notified when we publish new blog posts.
+
+**Changelog:**
+
+* Mar 5, 2018: Updated to use Spring Boot 2.0 and Angular CLI 1.7.2 (with Angular 5.2.7). See the code changes in the [example app on GitHub](https://github.com/oktadeveloper/okta-spring-boot-2-angular-5-example/pull/2). Changes to this article can be viewed [okta/okta.github.io#1800](https://github.com/okta/okta.github.io/pull/1800).
