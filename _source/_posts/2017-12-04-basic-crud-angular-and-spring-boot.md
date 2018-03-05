@@ -1062,4 +1062,4 @@ If you have any questions, please don't hesitate to leave a comment below, or as
 
 **Changelog:**
 
-* Mar 5, 2018: Updated to use Spring Boot 2.0 and Angular CLI 1.7.2 (with Angular 5.2.7). See the code changes in the [example app on GitHub](https://github.com/oktadeveloper/okta-spring-boot-2-angular-5-example/pull/2). Changes to this article can be viewed [okta/okta.github.io#1800](https://github.com/okta/okta.github.io/pull/1800).
+* Mar 5, 2018: Updated to use Spring Boot 2.0 and Angular CLI 1.7.2 (with Angular 5.2.7). See the code changes in the [example app on GitHub](https://github.com/oktadeveloper/okta-spring-boot-2-angular-5-example/pull/2). Changes to this article can be viewed [okta/okta.github.io#1806](https://github.com/okta/okta.github.io/pull/1806).
