@@ -18,7 +18,6 @@ options = {
     :parallel => { :in_processes => 8},
     :file_ignore => [
         /3rd_party_notices/,
-        /quickstart/,
         # generated sdk docs
         /java_api_sdk/,
         /python_api_sdk/,
