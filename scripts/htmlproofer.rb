@@ -26,7 +26,8 @@ options = {
     ],
     :url_ignore => [
         /linkedin.com/, # linked in doesn't play nice with site crawlers
-        /stormpath.com/ # 😢
+        /stormpath.com/, # 😢
+        /\/quickstart\/#.*/ # /quickstart/#/
     ]
 }
 HTMLProofer.check_directory('dist', options).run
