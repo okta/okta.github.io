@@ -94,15 +94,15 @@ Modify `.samples.config.json` for your app, then run `npm run resource-server`. 
 
 ## Okta Authentication Quickstart Guides
 
-To see how many of the frameworks were built, you can read the plethora of [quickstart instructions](https://developer.okta.com/quickstart/) the Developer Experience team has created. When you log in to your Developer Console, you'll see links to them all on your dashboard. 
+To see how many of the frameworks were built, you can read the plethora of [quickstart instructions](/quickstart/) the Developer Experience team has created. When you log in to your Developer Console, you'll see links to them all on your dashboard. 
 
 {% img blog/samples-and-quickstarts/quickstart-guides.png alt:"React Sample - Authenticated" width:"700" %}{: .center-image }
 
 The instructions themselves are broken up into two categories: client setup and server setup. 
 
-For client, there's instructions for our [hosted sign-in page](https://developer.okta.com/quickstart/#/okta-sign-in-page), as well as how to use our [sign-in widget](https://developer.okta.com/quickstart/#/widget), which you embed in your application. There are instructions for [iOS](https://developer.okta.com/quickstart/#/ios) and [Android](https://developer.okta.com/quickstart/#/android), as well as for the most popular JavaScript frameworks: [Angular](https://developer.okta.com/quickstart/#/angular), [React](https://developer.okta.com/quickstart/#/react), and [Vue.js](https://developer.okta.com/quickstart/#/vue). 
+For client, there's instructions for our [hosted sign-in page](/quickstart/#/okta-sign-in-page), as well as how to use our [sign-in widget](/quickstart/#/widget), which you embed in your application. There are instructions for [iOS](/quickstart/#/ios) and [Android](/quickstart/#/android), as well as for the most popular JavaScript frameworks: [Angular](/quickstart/#/angular), [React](/quickstart/#/react), and [Vue.js](/quickstart/#/vue). 
 
-For server, there are Node instructions, both for [Express](https://developer.okta.com/quickstart/#/vue/nodejs/express) and [generic Node](https://developer.okta.com/quickstart/#/okta-sign-in-page/nodejs/generic). For Java, there are [Spring Boot](https://developer.okta.com/quickstart/#/okta-sign-in-page/java/spring) and a link to [generic Java](https://developer.okta.com/quickstart/#/okta-sign-in-page/java/generic), but nothing there yet. There are no frameworks for PHP, just [generic support](https://developer.okta.com/quickstart/#/okta-sign-in-page/php/generic) and .NET has both [ASP.NET Core](https://developer.okta.com/quickstart/#/okta-sign-in-page/dotnet/aspnetcore) and [ASP.NET 4.x](https://developer.okta.com/quickstart/#/okta-sign-in-page/dotnet/aspnet4). 
+For server, there are Node instructions, both for [Express](/quickstart/#/vue/nodejs/express) and [generic Node](/quickstart/#/okta-sign-in-page/nodejs/generic). For Java, there are [Spring Boot](/quickstart/#/okta-sign-in-page/java/spring) and a link to [generic Java](/quickstart/#/okta-sign-in-page/java/generic), but nothing there yet. There are no frameworks for PHP, just [generic support](/quickstart/#/okta-sign-in-page/php/generic) and .NET has both [ASP.NET Core](/quickstart/#/okta-sign-in-page/dotnet/aspnetcore) and [ASP.NET 4.x](/quickstart/#/okta-sign-in-page/dotnet/aspnet4). 
 
 ## Developer Experience at Okta
 
@@ -116,7 +116,7 @@ I thought it'd be fun to ask some questions of [Robert Damphousse](https://twitt
 
 > **Robert:** At the moment you can jump to sample projects from our existing quickstarts, not all quickstarts have them yet but when they do you should see a link at the top. You can also search for "sample" in the Okta org on GitHub.
 
-**How do these samples relate to the [Okta Quickstart Guides](https://developer.okta.com/quickstart)?**
+**How do these samples relate to the [Okta Quickstart Guides](/quickstart/)?**
  
 > **Robert:** The sample projects are complete applications that you can easily run and use as a reference for common Okta use cases. The Quickstarts are more like a walkthrough guide that walks you through the needed code and explains where the code should go in your existing application.
  
