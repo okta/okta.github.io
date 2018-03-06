@@ -133,6 +133,3 @@ I thought it'd be fun to ask some questions of [Robert Damphousse](https://twitt
 The Developer Experience team at Okta is developing a plethora of framework-specific SDKs, [documentation](/documentation/), and sample applications. They're doing really great work to make your development life simpler. 
 
 However, there's always room for improvement! If you have ideas for improvement, please create pull requests in our SDKs or samples, or ask your questions on our [DevForums](https://devforum.okta.com/). Of course, we'd be happy to have a [quick chat on Twitter too](https://twitter.com/oktadev)!
-
-[This link works](/quickstart/)
-[This link fails](/documentation/#blahblah)
