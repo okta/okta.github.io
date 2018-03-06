@@ -45,7 +45,7 @@ Wow, that's a lot of options! If you click on the first one, its [README](https:
 git clone https://github.com/okta/samples-java-spring.git
 ```
 
-I particularly like that it links to documentation that shows you [how to create an Okta application, for web mode](https://developer.okta.com/authentication-guide/implementing-authentication/auth-code#1-setting-up-your-application).  
+I particularly like that it links to documentation that shows you [how to create an Okta application, for web mode](/authentication-guide/implementing-authentication/auth-code#1-setting-up-your-application).  
 
 What if you're a front-end developer? The [React Sample Applications](https://github.com/okta/samples-js-react) profile is a good starting point.
 
@@ -100,9 +100,9 @@ To see how many of the frameworks were built, you can read the plethora of [quic
 
 The instructions themselves are broken up into two categories: client setup and server setup. 
 
-For client, there's instructions for our [hosted sign-in page](https://developer.okta.com/quickstart/#/okta-sign-in-page), as well as how to use our [sign-in widget](https://developer.okta.com/quickstart/#/widget), which you embed in your application. There are instructions for [iOS](https://developer.okta.com/quickstart/#/ios) and [Android](https://developer.okta.com/quickstart/#/android), as well as for the most popular JavaScript frameworks: [Angular](https://developer.okta.com/quickstart/#/angular), [React](https://developer.okta.com/quickstart/#/react), and [Vue.js](https://developer.okta.com/quickstart/#/vue). 
+For client, there's instructions for our [hosted sign-in page](/quickstart/#/okta-sign-in-page), as well as how to use our [sign-in widget](/quickstart/#/widget), which you embed in your application. There are instructions for [iOS](/quickstart/#/ios) and [Android](/quickstart/#/android), as well as for the most popular JavaScript frameworks: [Angular](/quickstart/#/angular), [React](/quickstart/#/react), and [Vue.js](/quickstart/#/vue). 
 
-For server, there are Node instructions, both for [Express](https://developer.okta.com/quickstart/#/vue/nodejs/express) and [generic Node](https://developer.okta.com/quickstart/#/okta-sign-in-page/nodejs/generic). For Java, there are [Spring Boot](https://developer.okta.com/quickstart/#/okta-sign-in-page/java/spring) and a link to [generic Java](https://developer.okta.com/quickstart/#/okta-sign-in-page/java/generic), but nothing there yet. There are no frameworks for PHP, just [generic support](https://developer.okta.com/quickstart/#/okta-sign-in-page/php/generic) and .NET has both [ASP.NET Core](https://developer.okta.com/quickstart/#/okta-sign-in-page/dotnet/aspnetcore) and [ASP.NET 4.x](https://developer.okta.com/quickstart/#/okta-sign-in-page/dotnet/aspnet4). 
+For server, there are Node instructions, both for [Express](/quickstart/#/vue/nodejs/express) and [generic Node](/quickstart/#/okta-sign-in-page/nodejs/generic). For Java, there are [Spring Boot](/quickstart/#/okta-sign-in-page/java/spring) and a link to [generic Java](/quickstart/#/okta-sign-in-page/java/generic), but nothing there yet. There are no frameworks for PHP, just [generic support](/quickstart/#/okta-sign-in-page/php/generic) and .NET has both [ASP.NET Core](/quickstart/#/okta-sign-in-page/dotnet/aspnetcore) and [ASP.NET 4.x](/quickstart/#/okta-sign-in-page/dotnet/aspnet4). 
 
 ## Developer Experience at Okta
 
@@ -130,6 +130,9 @@ I thought it'd be fun to ask some questions of [Robert Damphousse](https://twitt
 
 ## Learn More
 
-The Developer Experience team at Okta is developing a plethora of framework-specific SDKs, [documentation](https://developer.okta.com/documentation/), and sample applications. They're doing really great work to make your development life simpler. 
+The Developer Experience team at Okta is developing a plethora of framework-specific SDKs, [documentation](/documentation/), and sample applications. They're doing really great work to make your development life simpler. 
 
 However, there's always room for improvement! If you have ideas for improvement, please create pull requests in our SDKs or samples, or ask your questions on our [DevForums](https://devforum.okta.com/). Of course, we'd be happy to have a [quick chat on Twitter too](https://twitter.com/oktadev)!
+
+[This link works](/quickstart/)
+[This link fails](/documentation/#blahblah)
