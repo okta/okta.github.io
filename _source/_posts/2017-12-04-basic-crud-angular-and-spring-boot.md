@@ -720,15 +720,19 @@ The following screenshot shows what it looks like to edit a car that you've adde
 
 Add authentication with Okta is a nifty feature you can add to this application. Knowing who the person is can come in handy if you want to add auditing, or personalize your application (with a rating feature for example).
 
-### Okta's Spring Boot Starter
+### Spring Security + OAuth 2.0
 
-On the server side, you can lock things down with the Okta Spring Boot starter. Open `server/pom.xml` and add the following dependency.
+On the server side, you can lock things down with Spring Security and its OAuth 2.0 support. Open `server/pom.xml` and add the following dependencies.
 
 ```xml
 <dependency>
-    <groupId>com.okta.spring</groupId>
-    <artifactId>okta-spring-boot-starter</artifactId>
-    <version>0.3.0</version>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-starter-security</artifactId>
+</dependency>
+<dependency>
+    <groupId>org.springframework.security.oauth.boot</groupId>
+    <artifactId>spring-security-oauth2-autoconfigure</artifactId>
+    <version>2.0.0.RELEASE</version>
 </dependency>
 ```
 
@@ -738,11 +742,20 @@ Now you need to configure the server to use Okta for authentication. You'll need
 
 Log in to your Okta Developer account (or [sign up](https://developer.okta.com/signup/) if you don’t have an account) and navigate to **Applications** > **Add Application**. Click **Single-Page App**, click **Next**, and give the app a name you’ll remember. Change all instances of `localhost:8080` to `localhost:4200` and click **Done**.
 
-Copy the client ID into your `server/src/main/resources/application.properties` file. While you're in there, add a `okta.oauth2.issuer` property that matches your Okta domain. For example:
+Create `server/src/main/resources/application.yml` and copy the client ID into it. While you're in there, fill in the rest of the necessary values to match your Okta domain. For example:
 
-```properties
-okta.oauth2.issuer=https://{yourOktaDomain}.com/oauth2/default
-okta.oauth2.clientId={clientId}
+```yaml
+security:
+    oauth2:
+        client:
+            access-token-uri: https://{yourOktaDomain}.com/oauth2/default/v1/token
+            user-authorization-uri: https://{yourOktaDomain}.com/oauth2/default/v1/authorize
+            client-id: {clientId}
+            scope: openid profile email
+        resource:
+            user-info-uri: https://{yourOktaDomain}.com/oauth2/default/v1/userinfo
+            token-info-uri: https://{yourOktaDomain}.com/oauth2/default/v1/introspect
+            prefer-token-info: false
 ```
 
 Update `server/src/main/java/com/okta/developer/demo/DemoApplication.java` to enable it as a resource server.
@@ -756,37 +769,9 @@ import org.springframework.security.oauth2.config.annotation.web.configuration.E
 
 After making these changes, you should be able to restart your app and see access denied when you try to navigate to http://localhost:8080.
 
-Unfortunately, you'll likely see a stack trace with the following error instead.
-
-```
-java.lang.NoSuchMethodError: org.springframework.boot.env.YamlPropertySourceLoader.load(Ljava/lang/String;Lorg/springframework/core/io/Resource;Ljava/lang/String;)Lorg/springframework/core/env/PropertySource;
-```
-
-This happens because Spring Boot 2.0.0 removed a method that the Okta Spring Boot starter relied on. If you'd like to see when this issue is fixed, you can [subscribe to the Okta Spring Boot Starter issue #30 on GitHub](https://github.com/okta/okta-spring-boot/issues/30).
-
-To workaround this problem, you can downgrade the Okta Spring Boot starter to version 0.1.0. Make sure to change its name from `spring-boot` to `spring-security` too!
-
-```xml
-<dependency>
-    <groupId>com.okta.spring</groupId>
-    <artifactId>okta-spring-security-starter</artifactId>
-    <version>0.1.0</version>
-</dependency>
-```
-
-You'll also need to change the property names in `application.properties` to be `oauth` instead of `oauth2`.
-
-```properties
-okta.oauth.issuer=https://{yourOktaDomain}.com/oauth2/default
-okta.oauth.clientId={clientId}
-```
-
-Now when you restart your server, you should see a message in your browser like the one below.
-
 {% img blog/spring-boot-2-angular-5/access-denied.png alt:"Access Denied" width:"800" %}{: .center-image }
 
-It's nice that your server is locked down, but now you need to configure your client to talk to it. This is where
-Okta's Angular support comes in handy.
+It's nice that your server is locked down, but now you need to configure your client to talk to it. This is where Okta's Angular support comes in handy.
 
 ### Okta's Angular Support
 
