@@ -768,7 +768,7 @@ If you’re ambitious, you could even turn the client into a progressive web app
 * [Add Authentication to Your Angular PWA](/blog/2017/06/13/add-authentication-angular-pwa)
 * [The Ultimate Guide to Progressive Web Applications](/blog/2017/07/20/the-ultimate-guide-to-progressive-web-applications)
 
-My good buddy [Josh Long](https://twitter.com/starbuxman) and I recently hosted a live-coding session where we developed a Spring Boot microservices architecture on the backend and an Angular PWA on the front-end. The code we wrote is very similar to the code in this article. You can check the video out for reference [on YouTube](https://virtualjug.com/building-robust-apis-and-apps-with-spring-boot-and-angular/). 
+My good buddy [Josh Long](https://twitter.com/starbuxman) and I recently hosted a live-coding session where we developed a Spring Boot microservices architecture on the backend and an Angular PWA on the front-end. The code we wrote is very similar to the code in this article. You can check the video out for reference [on YouTube](https://www.youtube.com/watch?v=yHtSwGn7doc). 
 
 ## Deploy to Production
 
