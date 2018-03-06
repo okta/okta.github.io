@@ -742,7 +742,7 @@ Now you need to configure the server to use Okta for authentication. You'll need
 
 Log in to your Okta Developer account (or [sign up](https://developer.okta.com/signup/) if you don’t have an account) and navigate to **Applications** > **Add Application**. Click **Single-Page App**, click **Next**, and give the app a name you’ll remember. Change all instances of `localhost:8080` to `localhost:4200` and click **Done**.
 
-Create `server/src/main/resources/application.yml` and copy the client ID into it. While you're in there, fill in the rest of the necessary values to match your Okta domain. For example:
+Create `server/src/main/resources/application.yml` and copy the client ID into it. While you're in there, fill in the rest of the necessary values to match your Okta domain.
 
 ```yaml
 security:
