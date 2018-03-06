@@ -11,7 +11,7 @@ tweets:
 
 Developers love sample applications. It's one thing to see the steps to create an application or feature; but when someone provides a working app you can just build and run it's simply fantastic. Open source is near and dear to many developers today. Many of the frameworks we use to build applications are open source. It's a great way to develop widely-used software and get contributions from your users.
 
-Okta's Developer Experience (DevEx) team believes in developing great documentation and easy to configure SDKs. They 💙 open source and [host all our SDK's code, samples, and API's documentation on GitHub](https://github.com/okta).  This makes it easy for developers like you to change code and docs if you find a better way. 
+Okta's Developer Experience (DevEx) team believes in developing great documentation and easy to configure SDKs. We 💙 open source and [host all our SDK's code, samples, and API's documentation on GitHub](https://github.com/okta).  This makes it easy for developers like you to change code and docs if you find a better way. 
 
 In this post, I'll show you how to use our samples, which leverage our SDKs, and we'll have a chat with Robert Damphousse, Senior Developer on the DevEx team and open source strategist.
 
@@ -72,7 +72,7 @@ Then modify `src/.samples.config.js` to have your domain and client ID in it. Ru
 
 {% img blog/samples-and-quickstarts/react-sample-authenticated.png alt:"React Sample - Authenticated" width:"800" %}{: .center-image }
 
-To set up the Spring Boot resource server, clone that samples' repository and run it with your issuer:
+To set up the Spring Boot resource server, clone that sample's repository and run it with your issuer:
 
 ```bash
 git clone https://github.com/okta/samples-java-spring.git
