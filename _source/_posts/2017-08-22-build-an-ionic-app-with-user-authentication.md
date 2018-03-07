@@ -625,37 +625,16 @@ To emulate or deploy to an Android device, you'll first need to install [Android
 
 **If you've just installed Android Studio, make sure to open it to complete the installation.**
 
-To deploy to the Android emulator, run `ionic cordova emulate android`. This command will install Android support and print out instructions about how to create an emulator image.
+To deploy to the Android emulator, run `ionic cordova emulate android`. This command will install Android support and display an error if you don’t have any AVD (Android Virtual Device) images.
 
 ```
-Error: No emulator images (avds) found.
-1. Download desired System Image by running:
-/Users/mraible/Library/Android/sdk/tools/android sdk
+(node:9300) UnhandledPromiseRejectionWarning: CordovaError: No emulator images (avds) found.
+1. Download desired System Image by running: /Users/mraible/Library/Android/sdk/tools/android sdk
 2. Create an AVD by running: /Users/mraible/Library/Android/sdk/tools/android avd
 HINT: For a faster emulator, use an Intel System Image and install the HAXM device driver
 ```
 
-Run the first suggestion and download your desired system image. Then run the second command and created an AVD (Android Virtual Device) with the following settings:
-
-```
-AVD Name: TestPhone
-Device: Nexus 5
-Target: Android 7.1.1
-CPU/ABI: Google APIs Intel Axom (x86_64)
-Skin: Skin with dynamic hardware controls
-```
-
-**WARNING:** These instructions won't work with version 2.3.2 of Android Studio on Mac. When you try to run the first command, it'll say the following:
-
-```
-*************************************************************************
-The "android" command is deprecated.
-For manual SDK, AVD, and project management, please use Android Studio.
-For command-line tools, use tools/bin/sdkmanager and tools/bin/avdmanager
-*************************************************************************
-```
-
-To solve this problem, open Android Studio, select “Open an existing Android Studio project” and select the `ionic-auth/platforms/android` directory. If prompted to upgrade, choose “OK”, then proceed to create a new AVD as [described in Android Studio's documentation](https://developer.android.com/studio/run/managing-avds.html#createavd).
+To create a new AVD, open Android Studio and navigate to **Tools** > **Android** > **AVD Manager**. Create a new Virtual Device and click Play. I chose a Pixel 2.
 
 After performing these steps, you should be able to run `ionic cordova emulate android` and see your app running in the AVD.
 
@@ -689,4 +668,5 @@ To learn more about Ionic, Angular, or Okta, please see the following resources:
 
 **Changelog:**
 
+* Mar 7, 2018: Updated instructions for creating an AVD with Android Studio 3.0.
 * Jan 11, 2018: Updated to use Ionic CLI 3.19.0 and angular-oauth2-oidc 3.1.4. See the code changes in the [example app on GitHub](https://github.com/oktadeveloper/okta-ionic-auth-example/pull/6). Changes to this article can be viewed [in this pull request](https://github.com/okta/okta.github.io/pull/1628).
