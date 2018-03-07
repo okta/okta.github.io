@@ -649,13 +649,13 @@ export class CarEditComponent implements OnInit, OnDestroy {
   save(form: NgForm) {
     this.carService.save(form).subscribe(result => {
       this.gotoList();
-    }, error => console.error(error))
+    }, error => console.error(error));
   }
 
   remove(href) {
     this.carService.remove(href).subscribe(result => {
       this.gotoList();
-    }, error => console.error(error))
+    }, error => console.error(error));
   }
 }
 ```
@@ -703,6 +703,7 @@ Put a little padding around the image by adding the following CSS to `client/src
 
 Modify `client/src/app/app.component.html` and replace `<app-car-list></app-car-list>` with `<router-outlet></router-outlet>`. This change is necessary or routing between components won’t work.
 
+{% raw %}
 ```html
 <mat-toolbar color="primary">
   <span>Welcome to {{title}}!</span>
@@ -710,6 +711,7 @@ Modify `client/src/app/app.component.html` and replace `<app-car-list></app-car-
 
 <router-outlet></router-outlet>
 ```
+{% endraw %}
 
 After you make all these changes, you should be able to add, edit, or delete any cars. Below is a screenshot that shows the list with the add button.
 
