@@ -1092,7 +1092,7 @@ Content-Type: application/json;charset=UTF-8
       }
     },
     "self": {
-      "href": "https:{yourOktaDomain}.com/api/v1/authorizationServers/ausain6z9zIedDCxB0h7",
+      "href": "https://{yourOktaDomain}.com/api/v1/authorizationServers/ausain6z9zIedDCxB0h7",
       "hints": {
         "allow": [
           "GET",
@@ -1104,7 +1104,7 @@ Content-Type: application/json;charset=UTF-8
     "metadata": [
       {
         "name": "oauth-authorization-server",
-        "href": "https:{yourOktaDomain}.com/oauth2/ausain6z9zIedDCxB0h7/.well-known/oauth-authorization-server",
+        "href": "https://{yourOktaDomain}.com/oauth2/ausain6z9zIedDCxB0h7/.well-known/oauth-authorization-server",
         "hints": {
           "allow": [
             "GET"
@@ -1113,7 +1113,7 @@ Content-Type: application/json;charset=UTF-8
       },
       {
         "name": "openid-configuration",
-        "href": "{yourOktaDomain}.com/oauth2/ausain6z9zIedDCxB0h7/.well-known/openid-configuration",
+        "href": "https://{yourOktaDomain}.com/oauth2/ausain6z9zIedDCxB0h7/.well-known/openid-configuration",
         "hints": {
           "allow": [
             "GET"
@@ -1299,12 +1299,12 @@ Content-Type: application/json;charset=UTF-8
 
 | Property  | Description                                                                                   | Type                                     | Required for create or update            |
 |:-----------|:----------------------------------------------------------------------------------------------|:-----------------------------------------|:-----------------------------------------|
+| actions    | An object that contains the `tokens` array, which shows lifetime durations for the tokens                                             | Object                                  | System generated                         |
 | conditions | Specifies the people, groups, grant types and scopes the rule will be applied to              |[Condition Object](#condition-object)  | False                                    |
 | id         | ID of the rule                                                                                | String                                   | True except for create or get all claims |
 | name       | Name of the rule                                                                              | String                                   | True                                     |
 | status     | Specifies whether requests have access to this claim. Valid values: `ACTIVE` or `INACTIVE`    | Enum                                     | True                                     |
 | system     | Specifies whether the rule was created by Okta or not                                         | Boolean                                  | True                                     |
-| actions    | An object that contains the `tokens` array, which shows lifetime durations for the tokens                                             | Object                                  | System generated                         |
 
 Token limits:
 
@@ -1423,7 +1423,7 @@ Example from a Rule Object
           "EVERYONE"
         ],
         "exclude": []
-      }
+      },
     "scopes": {
       "include": [{
         "name": "*",
