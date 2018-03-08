@@ -18,16 +18,16 @@ options = {
     :parallel => { :in_processes => 8},
     :file_ignore => [
         /3rd_party_notices/,
-
         # generated sdk docs
         /java_api_sdk/,
         /python_api_sdk/,
         /javadoc/,
-        /csharp_api_sdk/,
+        /csharp_api_sdk/
     ],
     :url_ignore => [
         /linkedin.com/, # linked in doesn't play nice with site crawlers
-        /stormpath.com/ # 😢
+        /stormpath.com/, # 😢
+        /\/quickstart\/#.*/ # /quickstart/#/
     ]
 }
 HTMLProofer.check_directory('dist', options).run

@@ -48,7 +48,7 @@ server.ssl.key-password=another-secret
 
 ## 3. Build your Java web service with Spring Boot
 
-Spring Boot is an opinionated view of the Spring platform which makes it dead simple to write [twelve-factor apps](https://12factor.net/) in [very few lines](https://virtualjug.com/building-robust-apis-and-apps-with-spring-boot-and-angular/). If you’re still building WAR files you owe it to yourself to check this out. You can create complicated, application wide functions like setting up an OAuth resource server by using a single annotation (`@EnableResourceServer`) or change the server's port with a single property:
+Spring Boot is an opinionated view of the Spring platform which makes it dead simple to write [twelve-factor apps](https://12factor.net/) in [very few lines](https://www.youtube.com/watch?v=yHtSwGn7doc). If you’re still building WAR files you owe it to yourself to check this out. You can create complicated, application wide functions like setting up an OAuth resource server by using a single annotation (`@EnableResourceServer`) or change the server's port with a single property:
 ```ini
 server.port = 8090
 ```

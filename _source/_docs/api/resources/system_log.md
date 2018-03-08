@@ -1,11 +1,9 @@
 ---
 layout: docs_page
-title: System Log (Beta)
+title: System Log
 ---
 
 # System Log API
-
-{% api_lifecycle beta %}
 
 The Okta System Log records system events related to your organization in order to provide an audit trail that can be used to understand platform activity and to diagnose problems.
 
