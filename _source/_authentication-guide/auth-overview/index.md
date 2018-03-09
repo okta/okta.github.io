@@ -99,7 +99,7 @@ Any OAuth flow can give you an access token, but not all support ID tokens.
 | **Authorization Code**           | &#9989;        | &#9989;    |
 | **Authorization Code with PKCE** | &#9989;        | &#9989;    |
 | **Implicit**                     | &#9989;        | &#9989;    |
-| **Resource Owner Password**      | &#9989;        | &#10060;   |
+| **Resource Owner Password**      | &#9989;        | &#9989;    |
 | **Client Credentials**           | &#9989;        | &#10060;   |
 
 ### What kind of client are you building?

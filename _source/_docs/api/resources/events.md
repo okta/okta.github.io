@@ -8,7 +8,7 @@ redirect_from: "/docs/api/rest/events.html"
 
 The Okta Events API provides read access to your organization's system log. [Export event data](https://support.okta.com/help/Documentation/Knowledge_Article/Exporting-Okta-Log-Data) as a batch job from your organization to another system for reporting or analysis.
 
-> The new beta [System Log API](/docs/api/resources/system_log) will eventually replace the Events API and contains much more [structured data](/docs/api/resources/system_log#logevent-object).
+> The [System Log API](/docs/api/resources/system_log) will eventually replace the Events API and contains much more [structured data](/docs/api/resources/system_log#logevent-object).
 
 ## Getting Started
 
