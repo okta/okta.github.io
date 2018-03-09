@@ -51,18 +51,18 @@ js: docsIndex
                 <h1>How-To</h1>
                 <!-- START Subpages Grid -->
                 <div class="Row">
-                {% assign documents = site.how-to | sort:'weight' %}
+                {% assign documents = site.docs %}
                 {% for document in documents %}
-                  {% unless document.id contains '/index' %}
+                  {% unless document.id contains "docs/how-to/" %}
                     {% continue %}
                   {% endunless %}
                     <div class="Column--4 Column--small-12">
-                        <a href="{{ document.url | remove: '/index' | append: '/' }}">
+                        <a href="{{ document.url | remove: '.html' }}">
                             <h3 class="h4">{{ document.title }}</h3>
                         </a>
                         <p>{{ document.excerpt }}</p>
                     </div>
-                    {% endfor %}
+                {% endfor %}
                 </div>
                 <!-- END Subpages Grid -->
 
