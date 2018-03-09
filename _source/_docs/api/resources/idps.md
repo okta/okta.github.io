@@ -889,7 +889,8 @@ curl -v -X GET \
 -H "Accept: application/json" \
 -H "Content-Type: application/json" \
 -H "Authorization: SSWS ${api_token}" \
-"https://{yourOktaDomain}.com/api/v1/idps/0oa62bfdjnK55Z5x80h7"
+-d '{
+}' "https://{yourOktaDomain}.com/api/v1/idps/0oa62bfdjnK55Z5x80h7"
 ~~~
 
 ##### Response Example
@@ -1023,7 +1024,8 @@ curl -v -X GET \
 -H "Accept: application/json" \
 -H "Content-Type: application/json" \
 -H "Authorization: SSWS ${api_token}" \
-"https://{yourOktaDomain}.com/api/v1/idps?limit=20"
+-d '{
+}' "https://{yourOktaDomain}.com/api/v1/idps?limit=20"
 ~~~
 
 ##### Response Example
@@ -1405,7 +1407,8 @@ curl -v -X GET \
 -H "Accept: application/json" \
 -H "Content-Type: application/json" \
 -H "Authorization: SSWS ${api_token}" \
-"https://{yourOktaDomain}.com/api/v1/idps?q=Example&limit=10"
+-d '{
+}' "https://{yourOktaDomain}.com/api/v1/idps?q=Example&limit=10"
 ~~~
 
 ##### Response Example
@@ -1540,7 +1543,8 @@ curl -v -X GET \
 -H "Accept: application/json" \
 -H "Content-Type: application/json" \
 -H "Authorization: SSWS ${api_token}" \
-"https://{yourOktaDomain}.com/api/v1/idps?type=SAML2"
+-d '{
+}' "https://{yourOktaDomain}.com/api/v1/idps?type=SAML2"
 ~~~
 
 ##### Response Example
@@ -1848,7 +1852,8 @@ curl -v -X DELETE \
 -H "Accept: application/json" \
 -H "Content-Type: application/json" \
 -H "Authorization: SSWS ${api_token}" \
-"https://{yourOktaDomain}.com/api/v1/idps/0oa1k5d68qR2954hb0g4"
+-d '{
+}' "https://{yourOktaDomain}.com/api/v1/idps/0oa1k5d68qR2954hb0g4"
 ~~~
 
 
@@ -1888,7 +1893,8 @@ curl -v -X POST \
 -H "Accept: application/json" \
 -H "Content-Type: application/json" \
 -H "Authorization: SSWS ${api_token}" \
-"https://{yourOktaDomain}.com/api/v1/idps/0oa62bfdiumsUndnZ0h7/lifecycle/activate"
+-d '{
+}' "https://{yourOktaDomain}.com/api/v1/idps/0oa62bfdiumsUndnZ0h7/lifecycle/activate"
 ~~~
 
 ##### Response Example
@@ -2006,7 +2012,8 @@ curl -v -X POST \
 -H "Accept: application/json" \
 -H "Content-Type: application/json" \
 -H "Authorization: SSWS ${api_token}" \
-"https://{yourOktaDomain}.com/api/v1/idps/0oa62bfdiumsUndnZ0h7/lifecycle/deactivate"
+-d '{
+}' "https://{yourOktaDomain}.com/api/v1/idps/0oa62bfdiumsUndnZ0h7/lifecycle/deactivate"
 ~~~
 
 ##### Response Example
@@ -2099,7 +2106,39 @@ curl -v -X POST \
 
 ## Identity Provider Transaction Operations
 
-Operations for just-in-time provisioning or account linking with a `CALLOUT` action (webhook)
+Operations for just-in-time provisioning or account linking with a `callout` action (webhook)
+
+All transaction operations require a transaction ID which is obtained as part of the authentication call. 
+
+Use `callout` actions when you need to retrieve information from the profile of a user when you link or create them, or to perform other tasks that must be done before the link or create is completed.
+
+Before you can use transaction operations, set up the following:
+
+1. Add or create an app in Okta with settings that support `callout`: 
+  * **Allowed grant types** must include one or more **Client acting on behalf of a user** options selected.
+2. Configure a social IdP with settings that support `callout`:
+  * Be sure to complete the setup instructions in the **View Setup Instructions** link
+  * Select appropriate scopes for the client you configured in the previous step, and for the IdP as described in the **View Setup Instructions**.
+  * In the **Show Advanced Settings** link, be sure that you have either **Account Link Policy** or **Provisioning Policy** set to **Callout**.
+
+Once your IdP and app are set up, you can issue an authentication request and capture the transaction ID to verify your setup. The following example shows a request for an ID token, which is typically a simple request:
+
+~~~sh
+https://{myOktaDomain}.com/oauth2/v1/authorize?
+  idp=0oae5emt1lCVpXD2b0h7&
+  client_id=B6YnDUIpt6Oq354YYaNR&
+  response_type=id_token&
+  response_mode=fragment&
+  scope=openid&
+  redirect_uri=https://httpbin.org/get&state=state&nonce=nonce
+~~~
+
+The response will contain a transaction ID. You can then use the transaction ID to exercise the endpoints in this section. Unfinished or uncanceled transactions end after about ten minutes.
+
+If you aren't receiving a transaction ID, check that:
+
+* The user that you are adding with JIT or linking doesn't already exist in the app. If they do, deactivate and delete.
+* You don't have any sessions open for the IdP or the Okta org for the app.
 
 ### Get Identity Provider Transaction
 {:.api .api-operation}
@@ -2131,7 +2170,8 @@ curl -v -X GET \
 -H "Accept: application/json" \
 -H "Content-Type: application/json" \
 -H "Authorization: SSWS ${api_token}" \
-"https://{yourOktaDomain}.com/api/v1/idps/tx/satvklBYyJmwa6qOg0g3"
+-d '{
+}' "https://{yourOktaDomain}.com/api/v1/idps/tx/satvklBYyJmwa6qOg0g3"
 ~~~
 
 ##### Response Example
@@ -2207,7 +2247,8 @@ curl -v -X GET \
 -H "Accept: application/json" \
 -H "Content-Type: application/json" \
 -H "Authorization: SSWS ${api_token}" \
-"https://{yourOktaDomain}.com/api/v1/idps/tx/satvklBYyJmwa6qOg0g3/source"
+-d '{
+}' "https://{yourOktaDomain}.com/api/v1/idps/tx/satvklBYyJmwa6qOg0g3/source"
 ~~~
 
 ##### Response Example
@@ -2259,7 +2300,8 @@ curl -v -X GET \
 -H "Accept: application/json" \
 -H "Content-Type: application/json" \
 -H "Authorization: SSWS ${api_token}" \
-"https://{yourOktaDomain}.com/api/v1/idps/tx/satvklBYyJmwa6qOg0g3/source"
+-d '{
+}' "https://{yourOktaDomain}.com/api/v1/idps/tx/satvklBYyJmwa6qOg0g3/source"
 ~~~
 
 ##### Response Example
@@ -2318,7 +2360,8 @@ curl -v -X GET \
 -H "Accept: application/json" \
 -H "Content-Type: application/json" \
 -H "Authorization: SSWS ${api_token}" \
-"https://{yourOktaDomain}.com/api/v1/idps/tx/satvklBYyJmwa6qOg0g3/users"
+-d '{
+}' "https://{yourOktaDomain}.com/api/v1/idps/tx/satvklBYyJmwa6qOg0g3/users"
 ~~~
 
 ##### Response Example
@@ -2533,101 +2576,70 @@ curl -v -X POST \
 }
 ~~~
 
-
-### Find Users
+### Finish Identity Provider Transaction
 {:.api .api-operation}
 
-{% api_operation get /api/v1/idps/${idpId}/users %}
+{% api_operation POST /api/v1/idps/tx/${transactionId}/finish %}
 
-Find all the users linked to an identity provider
+Finishes an IdP transaction
 
-##### Request Parameters
+No actions are completed when using `callout` until the `/finish` request completes.
+
+#### Request Parameters
 {:.api .api-request .api-request-params}
 
-Parameter | Description             | Param Type | DataType | Required |
---------- | ----------------------- | ---------- | -------- | -------- |
-idpId       | `id` of IdP to search   | URL        | String   | TRUE     |
+| Parameter | Description | Datatype | Required |
+| :------------- | :-------------- | :------------ | :----------- |
+| transactionId          | The transaction ID referenced by all intermediate steps in the transaction  | String | TRUE |
 
-##### Response Parameters
-{:.api .api-response .api-response-params}
-
-List of the users that are linked to the specified identity provider
-
-##### Request Example
+#### Request Example
 
 ~~~sh
-GET https://{yourOktaDomain}.com/api/v1/idps/0oa4lb6lbtmH355Hx0h7/users
-200 OK
+curl -v -X POST \
+-H "Accept: application/json" \
+-H "Content-Type: application/json" \
+-H "Authorization: SSWS ${api_token}" \
+-d '{
+}' "https://{yourOktaDomain}/api/v1/idps/tx/sat4h4zexs17NrXWc0h6/finish"
 ~~~
 
-##### Response Example
+#### Response Example
 
-~~~json
-[
-  {
-      "id": "00u5cl9lo7nMjHjPr0h7",
-      "externalId": "109912936038778",
-      "created": "2015-11-03T19:10:11.000Z",
-      "lastUpdated": "2015-11-03T19:11:49.000Z",
-      "profile": {
-          "firstName": "Carol",
-          "middleName": "Lee",
-          "lastName": "Johnson",
-          "email": "carol_johnson@tfbnw.net",
-          "displayName": "Carol Johnson",
-          "profile": "https://www.facebook.com/app_scoped_user_id/109912936038778/"
-      },
-      "_links": {
-        "self": {
-          "href": "https://{yourOktaDomain}.com/api/v1/idps/0oa4lb6lbtmH355Hx0h7/users/00u5cl9lo7nMjHjPr0h7",
-          "hints": {
-              "allow": [
-                  "GET",
-                  "DELETE"
-                ]
-          }
-        },
-        "idp": {
-            "href": "https://{yourOktaDomain}.com/api/v1/idps/0oa4lb6lbtmH355Hx0h7"
-        },
-        "user": {
-            "href": "https://{yourOktaDomain}.com/api/v1/users/00u5cl9lo7nMjHjPr0h7"
-        }
-     }
-  }
-]
+~~~sh
+HTTP/1.1 200 OK
 ~~~
 
-### Unlink User from IdP
+### Cancel Identity Provider Transaction
 {:.api .api-operation}
 
-{% api_operation delete /api/v1/idps/${idpId}/users/${userId} %}
+{% api_operation POST /api/v1/idps/tx/${transactionId}/cancel %}
 
-Removes the link between the Okta user and the IdP user.
-The next time the user federates into Okta via this IdP, they have to re-link their account according to the account link policy configured in Okta for this IdP.
+Cancels an IdP transaction
 
-##### Request Parameters
+No actions are completed when using `callout` if the transaction is canceled.
+
+#### Request Parameters
 {:.api .api-request .api-request-params}
 
-Parameter | Description             | Param Type | DataType | Required |
---------- | ----------------------- | ---------- | -------- | -------- |
-idpId       | `id` of IdP to activate | URL        | String   | TRUE     |
-userId       | `id` of user to delete | URL        | String   | TRUE     |
+| Parameter | Description | Datatype | Required |
+| :------------- | :-------------- | :------------ | :----------- |
+| transactionId          | The transaction ID referenced by all intermediate steps in the transaction  | String | TRUE |
 
-##### Response Parameters
-{:.api .api-response .api-response-params}
-
-
-##### Request Example
+#### Request Example
 
 ~~~sh
-DELETE https://{yourOktaDomain}.com//api/v1/idps/0oa4lb6lbtmH355Hx0h7/users/00u5cl9lo7nMjHjPr0h7
+curl -v -X POST \
+-H "Accept: application/json" \
+-H "Content-Type: application/json" \
+-H "Authorization: SSWS ${api_token}" \
+-d '{
+}' "https://{yourOktaDomain}/api/v1/idps/tx/sat4jmxahzdtLDHOm0h6/cancel"
 ~~~
 
-##### Response Example
+#### Response Example
 
 ~~~sh
-204 - No Content
+HTTP/1.1 200 OK
 ~~~
 
 ## Identity Provider Key Store Operations
@@ -2876,7 +2888,8 @@ curl -v -X DELETE \
 -H "Accept: application/json" \
 -H "Content-Type: application/json" \
 -H "Authorization: SSWS ${api_token}" \
-"https://{yourOktaDomain}.com/api/v1/idps/credentials/keys/74bb2164-e0c8-4457-862b-7c29ba6cd2c9"
+-d '{
+}' "https://{yourOktaDomain}.com/api/v1/idps/credentials/keys/74bb2164-e0c8-4457-862b-7c29ba6cd2c9"
 ~~~
 
 ##### Response Example
@@ -3322,7 +3335,8 @@ curl -v -X POST \
 -H "Content-Type: application/x-x509-ca-cert" \
 -H "Authorization: SSWS ${api_token}" \
 --data-binary @certificate.cer \
-"https://{yourOktaDomain}.com/api/v1/idps/0oa1ysid1U3iyFqLu0g4/credentials/csrs/h9zkutaSe7fZX0SwN1GqDApofgD1OW8g2B5l2azha50/lifecycle/publish"
+-d '{
+}' "https://{yourOktaDomain}.com/api/v1/idps/0oa1ysid1U3iyFqLu0g4/credentials/csrs/h9zkutaSe7fZX0SwN1GqDApofgD1OW8g2B5l2azha50/lifecycle/publish"
 ~~~
 
 ##### Response Example
@@ -3396,7 +3410,8 @@ curl -v -X DELETE \
 -H "Accept: application/json" \
 -H "Content-Type: application/json" \
 -H "Authorization: SSWS ${api_token}" \
-"https://{yourOktaDomain}.com/api/v1/idps/0oad5lTSBOMUBOBVVQSC/credentials/csrs/-_-BFwAGoUYN-DDvsSKQFdx7OXaPZqrEPpFDO1hu-rg"
+-d '{
+}' "https://{yourOktaDomain}.com/api/v1/idps/0oad5lTSBOMUBOBVVQSC/credentials/csrs/-_-BFwAGoUYN-DDvsSKQFdx7OXaPZqrEPpFDO1hu-rg"
 ~~~
 
 ##### Response Example
@@ -3560,6 +3575,73 @@ curl -v -X GET \
 
 ## Identity Provider User Operations
 
+### Find Users
+{:.api .api-operation}
+
+{% api_operation get /api/v1/idps/${idpId}/users %}
+
+Find all the users linked to an identity provider
+
+##### Request Parameters
+{:.api .api-request .api-request-params}
+
+Parameter | Description             | Param Type | DataType | Required |
+--------- | ----------------------- | ---------- | -------- | -------- |
+idpId       | `id` of IdP to search   | URL        | String   | TRUE     |
+
+##### Response Parameters
+{:.api .api-response .api-response-params}
+
+List of the users that are linked to the specified identity provider
+
+##### Request Example
+
+~~~sh
+curl -v -X GET \
+-H "Accept: application/json" \
+-H "Content-Type: application/json" \
+-H "Authorization: SSWS ${api_token}" \
+ "GET https://{yourOktaDomain}.com/api/v1/idps/0oa4lb6lbtmH355Hx0h7/users"
+~~~
+
+##### Response Example
+
+~~~json
+[
+  {
+      "id": "00u5cl9lo7nMjHjPr0h7",
+      "externalId": "109912936038778",
+      "created": "2015-11-03T19:10:11.000Z",
+      "lastUpdated": "2015-11-03T19:11:49.000Z",
+      "profile": {
+          "firstName": "Carol",
+          "middleName": "Lee",
+          "lastName": "Johnson",
+          "email": "carol_johnson@tfbnw.net",
+          "displayName": "Carol Johnson",
+          "profile": "https://www.facebook.com/app_scoped_user_id/109912936038778/"
+      },
+      "_links": {
+        "self": {
+          "href": "https://{yourOktaDomain}.com/api/v1/idps/0oa4lb6lbtmH355Hx0h7/users/00u5cl9lo7nMjHjPr0h7",
+          "hints": {
+              "allow": [
+                  "GET",
+                  "DELETE"
+                ]
+          }
+        },
+        "idp": {
+            "href": "https://{yourOktaDomain}.com/api/v1/idps/0oa4lb6lbtmH355Hx0h7"
+        },
+        "user": {
+            "href": "https://{yourOktaDomain}.com/api/v1/users/00u5cl9lo7nMjHjPr0h7"
+        }
+     }
+  }
+]
+~~~
+
 ### List IdPs Associated with a User
 {:.api .api-operation}
 
@@ -3587,7 +3669,8 @@ curl -v -X GET \
 -H "Accept: application/json" \
 -H "Content-Type: application/json" \
 -H "Authorization: SSWS ${api_token}" \
-"https://{yourOktaDomain}.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/idps"
+-d '{
+}' "https://{yourOktaDomain}.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/idps"
 ~~~
 
 ##### Response Example
@@ -3864,6 +3947,44 @@ Content-Type: application/json
 }
 ~~~
 
+### Unlink User from IdP
+{:.api .api-operation}
+
+{% api_operation delete /api/v1/idps/${idpId}/users/${userId} %}
+
+Removes the link between the Okta user and the IdP user.
+The next time the user federates into Okta via this IdP, they have to re-link their account according to the account link policy configured in Okta for this IdP.
+
+##### Request Parameters
+{:.api .api-request .api-request-params}
+
+Parameter | Description             | Param Type | DataType | Required |
+--------- | ----------------------- | ---------- | -------- | -------- |
+idpId       | `id` of IdP to activate | URL        | String   | TRUE     |
+userId       | `id` of user to delete | URL        | String   | TRUE     |
+
+##### Response Parameters
+{:.api .api-response .api-response-params}
+
+
+##### Request Example
+
+~~~sh
+curl -v -X DELETE \
+-H "Accept: application/json" \
+-H "Content-Type: application/json" \
+-H "Authorization: SSWS ${api_token}" \
+-d '{
+}' "https://{yourOktaDomain}.com//api/v1/idps/0oa4lb6lbtmH355Hx0h7/users/00u5cl9lo7nMjHjPr0h7"
+~~~
+
+##### Response Example
+
+~~~sh
+204 - No Content
+~~~
+
+
 ### Social Authentication Token Operation
 {:.api .api-operation}
 
@@ -3892,6 +4013,7 @@ curl -v -X GET \
 -H "Accept: application/json" \
 -H "Content-Type: application/json" \
 -H "Authorization: SSWS ${api_token}" \
+-d '{
 }' "https://{yourOktaDomain}.com/api/v1/idps/0oa62b57p7c8PaGpU0h7/users/00ub0oNGTSWTBKOLGLNR/credentials/tokens"
 ~~~
 
