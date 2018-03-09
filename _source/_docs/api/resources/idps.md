@@ -2106,15 +2106,16 @@ curl -v -X POST \
 
 ## Identity Provider Transaction Operations
 
-Operations for just-in-time provisioning or account linking with a `CALLOUT` action (webhook)
+Operations for just-in-time provisioning or account linking with a `callout` action (webhook)
 
 All transaction operations require a transaction ID which is obtained as part of the authentication call. 
+
+Use `callout` actions when you need to retrieve information from the profile of a user when you link or create them, or to perform other tasks that must be done before the link or create is completed.
 
 Before you can use transaction operations, set up the following:
 
 1. Add or create an app in Okta with settings that support `callout`: 
-  * **Allowed grant types** must include one or more **Client acitng on behalf of a user** options selected.
-  * Make sure at least one user is assigned to the app. 
+  * **Allowed grant types** must include one or more **Client acting on behalf of a user** options selected.
 2. Configure a social IdP with settings that support `callout`:
   * Be sure to complete the setup instructions in the **View Setup Instructions** link
   * Select appropriate scopes for the client you configured in the previous step, and for the IdP as described in the **View Setup Instructions**.
