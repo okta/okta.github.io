@@ -781,4 +781,4 @@ You can find the source code for the application developed in this post at <http
 
 Hit me up in the comments with any questions, and as always, follow [@oktadev](https://twitter.com/OktaDev) on Twitter to see all the cool content our dev team is creating.
 
-* Mar 12, 2018: Updated to use the latest dependencies, including Bootstrap 4.0.0. See the code changes in [oktadeveloper/okta-vue-node-example-example#1](https://github.com/oktadeveloper/okta-vue-node-example/pull/1). Changes to this article can be viewed in [okta/okta.github.io#1900](https://github.com/okta/okta.github.io/pull/1900).
+* Mar 12, 2018: Updated to use the latest dependencies, including Bootstrap 4.0.0. See the code changes in [oktadeveloper/okta-vue-node-example-example#1](https://github.com/oktadeveloper/okta-vue-node-example/pull/1). Changes to this article can be viewed in [okta/okta.github.io#1837](https://github.com/okta/okta.github.io/pull/1837).
