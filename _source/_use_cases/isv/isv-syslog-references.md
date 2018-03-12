@@ -88,7 +88,7 @@ This table contains the eventType, message and Percentage times the event appear
 | application.user_membership.update | Updated user application property |
 | system.agent.ad.realtimesync | Perform RealTimeSync by AD agent |
 | user.authentication.auth_via_AD_agent | Authenticate user with AD agent |
-| user.session.access_admin_app | User accessing Okta admin app |
+| user.session.access_admin_app | User accessing Okta administrator app |
 | group.user_membership.add | Add user to group membership |
 | application.provision.user.push | Push new user to external application |
 | user.account.update_profile | Update user profile for Okta |

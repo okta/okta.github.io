@@ -91,7 +91,7 @@ While in the Rules list for an access policy, you can:
 
 ### Rule Usage
 
-Access policy rules are whitelists. If you want to create granular rules, you must first ensure that you have no rules that match "any" of something (for example "Any user"). You can then create specific rules for each specific use case that you do want to support. For example, if you wanted to ensure that only Admin users using the implicit flow were granted access, then you would create a rule specifying that if:
+Access policy rules are whitelists. If you want to create granular rules, you must first ensure that you have no rules that match "any" of something (for example "Any user"). You can then create specific rules for each specific use case that you do want to support. For example, if you wanted to ensure that only Admininstrator users were granted access via an implicit flow, then you would create a rule specifying that if:
 
 - a request is made using the `implicit` grant type, and
 - the user is a member of the `admin` group, and

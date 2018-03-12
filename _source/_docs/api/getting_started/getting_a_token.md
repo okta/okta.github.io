@@ -27,7 +27,7 @@ redirect_from: "/docs/getting_started/getting_a_token.html"
 
 6.  Make note of your API token, as you will only see it one time.
 
-{% img okta-admin-ui-token.png "Okta Admin Token UI" alt:"Okta Admin Token UI" %}
+{% img okta-admin-ui-token.png "Okta Administrator Token UI" alt:"Okta Administrator Token UI" %}
 
 ## Token Expiration
 

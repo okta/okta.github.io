@@ -25,7 +25,7 @@ Here's how you should configure an app powered by Kentor AuthServices to make it
 1. Download the latest version of KentorIT's AuthServices from <https://github.com/KentorIT/authservices> and open the Kentor.AuthServices.sln solution in Visual Studio.
 2. Identify the SampleApplication project and make a note of its URL property:
   {% img KentorOkta/VSProjectProperties.png alt:"Visual Studio Project properties" %}
-3. Go to you Okta organization and navigate to Admin => Applications.
+3. Go to you Okta organization, click the **Admin** button  and select **Applications**.
 4. Press the **Add Application** button and the green **Create New App** button
   {% img KentorOkta/CreateNewAppButton.png alt:"Press the Create a new Okta app" %}
 5. Select the **SAML 2.0** option and press the **Create** button.

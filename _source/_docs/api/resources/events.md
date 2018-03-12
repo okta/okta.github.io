@@ -376,7 +376,7 @@ The action `objectType` identifies the unique action performed.
 | app.user_management.importing_profile                            | Create or update user's profile from application                          |
 | app.user_management.update_from_master_failed                    | Failed to master user's profile from application                          |
 | app.user_management.verified_user_with_thirdparty                | Verified user against application                                         |
-| app.user_management.updating_api_credentials_for_password_change | Updating API credentials due to  API admin user password change           |
+| app.user_management.updating_api_credentials_for_password_change | Updating API credentials due to  API administrator user password change           |
 | app.user_management.activate_user                                | Activate user in application                                              |
 | app.user_management.deactivate_user                              | Deactivate user in application                                            |
 | app.user_management.reactivate_user                              | Reactivate user in application                                            |
@@ -429,7 +429,7 @@ The action `objectType` identifies the unique action performed.
 | app.rich_client.login_failure           |
 | app.rich_client.login_success           |
 
-##### Admin Appplication
+##### Administrator Appplication
 
 | ObjectType                    |
 |:------------------------------|
