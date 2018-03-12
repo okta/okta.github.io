@@ -5,7 +5,6 @@ author: leebrandt
 tags: [react, preact, javascript, security]
 ---
 
-
 React is a fast, and lightweight library, which has led to fast adoption across
 the SPA (single-page app) ecosystem. Preact is an even lighter-and-faster
 alternative to React, weighing in at a measly 3kb! For less complex
@@ -146,7 +145,7 @@ class Auth {
     this.handleAuthentication = this.handleAuthentication.bind(this);
 
     this.widget = new OktaSignIn({
-      baseUrl: 'https://{yourOktaDomain}.com/',
+      baseUrl: '{yourOktaDomain}',
       clientId: '{clientId}',
       redirectUri: 'http://localhost:8080',
       authParams: {
@@ -313,7 +312,7 @@ export default withAuth(class Login extends Component {
   state = {
     redirectToReferrer: false
   };
-}
+})
 ```
 
 In the `componentWillMount` lifecycle function, wire up the `onSuccess` and
