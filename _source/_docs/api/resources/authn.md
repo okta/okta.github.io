@@ -3890,7 +3890,7 @@ curl -v -X POST \
 -H "Content-Type: application/json" \
 -d '{
   "stateToken": "${stateToken}"
-}' "https://{yourOktaDomain}.com/api/v1/authn/factors/${factorId]/verify"
+}' "https://{yourOktaDomain}.com/api/v1/authn/factors/${factorId}/verify"
 ~~~
 
 ##### Response Example for Verify Duo Factor
@@ -4022,7 +4022,7 @@ curl -v -X POST \
 -H "Content-Type: application/json" \
 -d '{
   "stateToken": "${stateToken}"
-}' "https://{yourOktaDomain}.com/api/v1/authn/factors/${factorId]/verify"
+}' "https://{yourOktaDomain}.com/api/v1/authn/factors/${factorId}/verify"
 ~~~
 
 ##### Verification Poll Response Example
@@ -4081,7 +4081,7 @@ curl -v -X POST \
 -H "Content-Type: application/json" \
 -d '{
   "stateToken": "${stateToken}"
-}' "https://{yourOktaDomain}.com/api/v1/authn/factors/${factorId]/verify"
+}' "https://{yourOktaDomain}.com/api/v1/authn/factors/${factorId}/verify"
 ~~~
 
 ##### Response Example for Verify U2F Factor
@@ -4199,7 +4199,7 @@ curl -v -X POST \
   "stateToken": "${stateToken}",
   "clientData":"eyAiY2hhbGxlbmdlIjogIlJ6ZDhQbEJEWUEyQ0VsbXVGcHlMIiwgIm9yaWdpbiI6ICJodHRwczpcL1wvc25hZ2FuZGxhLm9rdGFwcmV2aWV3LmNvbSIsICJ0eXAiOiAibmF2aWdhdG9yLmlkLmdldEFzc2VydGlvbiIgfQ==",
   "signatureData":"AQAAAAEwRQIgRDEdmXr_jh1bEHtoUs1l7mMd-eUDO0eKqXKkrK5hUi0CIQDaVX030GgxVPr4RX3c4XgugildmHwDLwKRL0aMS3Sbpw==",
-}' "https://{yourOktaDomain}.com/api/v1/authn/factors/${factorId]/verify"
+}' "https://{yourOktaDomain}.com/api/v1/authn/factors/${factorId}/verify"
 ~~~
 
 ##### Response of U2F Verification Example
