@@ -205,14 +205,14 @@ ol.list--numbered {
 body {
   padding-top: 81px; }
 
-.wrap, .tabber > ul {
+.wrap {
   box-sizing: border-box;
   margin: 0 auto;
   max-width: 1230px;
   padding: 0 15px;
   position: relative;
   zoom: 1; }
-  .wrap:after, .tabber > ul:after {
+  .wrap:after {
     clear: both;
     content: "";
     display: table; }
@@ -251,7 +251,7 @@ body {
   .section--full-width.extra-padding--for-anchor {
     margin-top: -81px;
     padding-top: 111px; }
-  .section--full-width .wrap + .wrap, .section--full-width .tabber > ul + .wrap, .section--full-width .tabber > .wrap + ul, .section--full-width .tabber > ul + ul {
+  .section--full-width .wrap + .wrap {
     margin-top: 40px; }
   .section--full-width:nth-child(1) {
     z-index: 9; }
@@ -283,7 +283,7 @@ body {
   #valprop .button--large {
     margin-top: 24px; }
 
-#bottom-cta .wrap, #bottom-cta .tabber > ul {
+#bottom-cta .wrap {
   margin-left: auto;
   margin-right: auto;
   max-width: 660px; }
@@ -671,7 +671,7 @@ iframe[name='google_conversion_frame'] {
 .icon i {
   font-size: 48px; }
 
-.clearfix, .tabber {
+.clearfix {
   overflow: inherit;
   zoom: 1; }
 
@@ -717,48 +717,6 @@ iframe[name='google_conversion_frame'] {
   height: 65px;
   line-height: 65px;
   padding: 0 40px; }
-
-.tabber {
-  border: solid #E6E6E8;
-  border-width: 1px 0;
-  margin-bottom: 40px; }
-  .tabber > ul {
-    box-sizing: border-box;
-    padding: 0; }
-  .tabber li {
-    box-sizing: border-box; }
-    .tabber li + li {
-      border-top: 1px solid #fafafa; }
-  .tabber a {
-    border-bottom: 4px solid transparent;
-    color: #000;
-    display: block;
-    padding: 12px;
-    text-decoration: none;
-    vertical-align: middle; }
-    .tabber a:active, .tabber a:focus, .tabber a:hover {
-      border-bottom-color: #E6E6E8; }
-    .tabber a.active {
-      color: #007DC1;
-      border-bottom-color: #007DC1; }
-      .tabber a.active i {
-        background-position: bottom; }
-    .tabber a i, .tabber a span {
-      display: inline-block;
-      vertical-align: middle; }
-    .tabber a i {
-      border: solid #fff;
-      border-width: 11px 0;
-      height: 26px;
-      margin-right: 12px; }
-
-.tabber-targets > * {
-  float: left;
-  margin-right: -100%;
-  position: relative;
-  width: 100%; }
-.tabber-targets h2 {
-  color: #007DC1; }
 
 .btn {
   transition: 0.2s all;
@@ -827,11 +785,3 @@ iframe[name='google_conversion_frame'] {
 
 .icon-small--social {
   background-image: image_url('icons/flat-twitter--with-hover.png'); }
-
-.playgroundIframe {
-  height: 680px;
-  width: 1600px;
-  padding: 10px;
-  -webkit-box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
-  -moz-box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
-  box-shadow: 0 0 20px rgba(0, 0, 0, 0.2); }
