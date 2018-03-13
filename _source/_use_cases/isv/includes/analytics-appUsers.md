@@ -17,7 +17,7 @@ If full profile data isn't required make use of the "skinny_user" variant.  This
 
 #### appUsers Data
 
-Refer to the [appUser Object] data model for an elaboaration of the appUser data structure.
+Refer to the [appUser Object] data model for an elaboration of the appUser data structure.
 
 ##### appUsers - Retrieve list of appUsers for an App
 
