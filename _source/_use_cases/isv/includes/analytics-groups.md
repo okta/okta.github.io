@@ -107,7 +107,7 @@ Response
 
 Using the same logic described online in [List Group Members](/docs/api/resources/groups#list-group-members) you can retrieve a list of users in each group. *Hint*: _use the `group._embedded.stats.usersCount` value to know if *ANY* users are assigned_
 
-If your integration doesn't need credential and credential provider related details when listing group members use the "skinny_users" endpoint, it operates in the same manor as the "users" endpoint with the following differences in the resulting data object
+If your integration doesn't need credential and credential provider related details when listing group members use the "skinny_users" endpoint, it operates in the same manner as the "users" endpoint with the following differences in the resulting data object
 
 + `credentials.provider` object missing
 + `_links` object only contains `.self` reference
