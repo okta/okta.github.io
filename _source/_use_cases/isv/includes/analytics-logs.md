@@ -45,7 +45,7 @@ This demonstrates logic to deal with pagination aware cold and warm start collec
 Pseudocode (_pythonish_)
 
 + `since` = ISO8601 date/time
-  + not to exeed 180 days in the past
+  + not to exceed 180 days in the past
   + if omitted, defaults to 7 days in the past
 + `limit` = configurable page size
   + if omitted, default 100
@@ -131,7 +131,7 @@ store results
 
 ###### Ad hoc Pseudocode 2
 
-fetch the most recent 1000 events or 7 day worth of events for a specific user
+fetch the most recent 1000 events or 7 days worth of events for a specific user
 
 Pseudocode (_pythonish_)
 
