@@ -41,7 +41,7 @@ In addition to the information in this topic, see:
 
 * [Okta's API Access Management Introduction](/use_cases/api_security/)
 * [OAuth 2.0/OIDC API](/docs/api/resources/oidc)
-* [Help for configuring API Access Management in the Okta UI](/docs/how-to/set-up-auth-server)
+* [Help for configuring API Access Management in the Administrator UI](/docs/how-to/set-up-auth-server)
 
 ## Basic Flows
 
@@ -230,7 +230,7 @@ The full set of claims for requested scopes is available via the `/oauth2/v1/use
 
 ##### Custom claim configuration
 
-Define custom claims in [the Okta user interface](https://help.okta.com/en/prod/Content/Topics/Security/API_Access.htm?Highlight=custom%20claim) or using [the OAuth 2.0 API](/docs/api/resources/authorization-servers#create-a-claim).
+Define custom claims in [the administrator UI](https://help.okta.com/en/prod/Content/Topics/Security/API_Access.htm?Highlight=custom%20claim) or using [the OAuth 2.0 API](/docs/api/resources/authorization-servers#create-a-claim).
 
 A custom claim can be configured in the following ways:
 
@@ -354,7 +354,7 @@ The Access Token minted by the Okta Authorization Server is consumed by Okta API
 * Custom Authorization Server:
 Use a Custom Authorization Server to secure your APIs.
 Custom Authorization Servers are hosted on Okta, and created and configured by an org administrator.
-You can create and configure Custom Authorization Servers using the Okta user interface or the [Custom Authorization Server API](/docs/api/resources/authorization-servers#authorization-server-operations).
+You can create and configure Custom Authorization Servers using the administrator UI or the [Custom Authorization Server API](/docs/api/resources/authorization-servers#authorization-server-operations).
 The Access Token minted by a Custom Authorization Server is consumed by your APIs.
 You can specify the audience to make sure that the Access Token is for your APIs.
 Also, custom scopes can be configured to support the authorization for your APIs.

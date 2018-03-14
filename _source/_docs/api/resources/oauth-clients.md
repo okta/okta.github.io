@@ -12,7 +12,7 @@ OAuth 2.0 and OpenID Connect endpoints. This API largely follows the contract de
 and [OpenID Connect Dynamic Client Registration 1.0](https://openid.net/specs/openid-connect-registration-1_0.html).
 
 Note that clients managed via this API are modeled as applications in Okta and appear in the Applications section of the
-Administrator dashboard. Changes made via the API appear in the UI and vice versa. Tokens issued by these clients
+administrator UI. Changes made via the API appear in the UI and vice versa. Tokens issued by these clients
 follow the rules for Access Tokens and ID Tokens.
 
 ## Getting Started

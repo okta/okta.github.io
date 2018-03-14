@@ -76,7 +76,7 @@ The following endpoints are used by the Okta home page for authentication and si
 
 ### End-User Rate Limit
 
-Okta limits the number of requests from the Okta user interface to 40 requests per user per 10 seconds per endpoint. This rate limit protects users from each other, and from other API requests in the system. 
+Okta limits the number of requests from the administrator UI to 40 requests per user per 10 seconds per endpoint. This rate limit protects users from each other, and from other API requests in the system. 
 
 If a user exceeds this limit, they receive an HTTP 429 response without affecting other users in your org.
 A message is written to the System Log indicating that the end-user rate limit was encountered. 

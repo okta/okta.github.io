@@ -15,7 +15,7 @@ Okta offers Okta Cloud Connect (OCC) program for ISV partners with the need to q
 Embedded OCC takes this one step further by providing an even more seamless user experience for your customers through the following:
 
   1. Enhancing the Okta tenant creation experience by embedding this into your product user interface
-  1. Programmatically instantiating the appropriate app instance in the Okta tenant without the need to go through Okta user interface.
+  1. Programmatically instantiating the appropriate app instance in the Okta tenant without the need to go through administrator UI.
 
 At a high-level, the runtime flow/administrator experience is as follows:
 
@@ -79,7 +79,7 @@ You need to prompt for the following:
 If the administrator wants to use an existing Okta tenant, you should prompt for the following in order to instantiate your application with the given Okta tenant:
 
   1. **Okta tenant URL**: (e.g.  _{youOktaDomain}.com_ ) Best practice, as stated before, is to support both *.okta.com and *.oktapreview.com
-  1. **Okta API token**: This is the API token obtained from the Okta user interface for API access.  The API token carries the privileges of the administrator user used to fetch the token.  If the token does not have sufficient privilege, the API call returns an error.
+  1. **Okta API token**: This is the API token obtained from the administrator UI for API access.  The API token carries the privileges of the administrator user used to fetch the token.  If the token does not have sufficient privilege, the API call returns an error.
 
 ## Tenant Creation API (org api)
 

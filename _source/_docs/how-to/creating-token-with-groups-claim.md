@@ -145,9 +145,9 @@ To use the group whitelist for every client that gets this claim in a token, put
 
 For the Okta Authorization Server, you can only create an ID token with a groups claim, not an access token.
 
-> This step requires the Okta user interface. If you are using the Developer Console, select the drop-down control in the left side of the top banner to switch to Classic UI for Step Three.
+> This step requires the administrator UI. If you are using the Developer Console, select the drop-down control in the left side of the top banner to switch to Classic UI for Step Three.
 
- a. In the Okta user interface, navigate to the Sign On tab of the client application you are configuring, and click the **Edit** button in the Open ID Connect ID Token section.
+ a. In the administrator UI, navigate to the Sign On tab of the client application you are configuring, and click the **Edit** button in the Open ID Connect ID Token section.
 
  b. In **Groups claim type**, choose **Expression**.
 

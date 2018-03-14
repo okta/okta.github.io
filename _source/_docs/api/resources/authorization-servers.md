@@ -109,7 +109,7 @@ Returns the [Custom Authorization Server](#authorization-server-object) identifi
 
 | Parameter             | Description                                                              | Type   | Required |
 |:----------------------|:-------------------------------------------------------------------------|:-------|:---------|
-| authorizationServerId | Custom Authorization Server ID. You can find the ID in the Okta user interface. | String | True     |
+| authorizationServerId | Custom Authorization Server ID. You can find the ID in the administrator UI. | String | True     |
 
 #### Request Example
 {:.api .api-request .api-request-example}

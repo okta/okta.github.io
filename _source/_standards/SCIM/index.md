@@ -1121,7 +1121,7 @@ SCIM server.
 #### Prepare the Customer-Facing Configuration Guide
 
 We recommend preparing the customer-facing configuration guide before beginning to work through the submission document.
-This guide will be exposed externally in Okta’s user interface to end customers.
+This guide will be exposed externally in the administrator UI to end customers.
 For more details, see the [configuration guide guidelines](http://saml-doc.okta.com/Provisioning_Docs/SCIM_Configuration_Guide_Instructions.pdf).
 
 Note: When you are ready, use [this form](https://oanmanager.okta.com/) to submit for Okta review.
