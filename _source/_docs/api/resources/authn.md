@@ -69,7 +69,7 @@ As part of the authentication call either the username and password or the token
 | ----------- | :--------------------------------------------------------------------------------------------------------------------- | :--------- | :-------------------------------- | :------- | :------- |
 | username    | User's non-qualified short-name (e.g. dade.murphy) or unique fully-qualified login (e.g dade.murphy@example.com) | Body       | String                            | FALSE    |          |
 | password    | User's password credential                                                                                       | Body       | String                            | FALSE    |          |
-| audience    | App instance ID of the target app the user is signing into                                                       | Body       | String                            | FALSE    |          |
+| audience    | App ID of the target app the user is signing into                                                       | Body       | String                            | FALSE    |          |
 | relayState  | Optional state value that is persisted for the lifetime of the authentication transaction                              | Body       | String                            | FALSE    |  2048    |
 | options     | Opt-in features for the authentication transaction                                                                     | Body       | [Options Object](#options-object) | FALSE    |          |
 | context     | Provides additional context for the authentication transaction                                                         | Body       | [Context Object](#context-object) | FALSE    |          |
@@ -1228,7 +1228,7 @@ User is assigned to a Sign-On Policy or App Sign-On Policy that requires additio
             },
             "_links":{  
                "verify":{  
-                  "href":"https://{yourOktaDomain}.okta.com/api/v1/authn/factors/opf1cla0yyvOBWxuC1d8/verify",
+                  "href":"https://{yourOktaDomain}.com/api/v1/authn/factors/opf1cla0yyvOBWxuC1d8/verify",
                   "hints":{  
                      "allow":[  
                         "POST"
@@ -1541,7 +1541,7 @@ User is assigned to a Sign-on Policy or App Sign-on Policy that requires additio
             },
             "_links":{
                "verify":{
-                  "href":"https://{yourOktaDomain}.okta.com/api/v1/authn/factors/opf1cla0yyvOBWxuC1d8/verify",
+                  "href":"https://{yourOktaDomain}.com/api/v1/authn/factors/opf1cla0yyvOBWxuC1d8/verify",
                   "hints":{
                      "allow":[
                         "POST"
