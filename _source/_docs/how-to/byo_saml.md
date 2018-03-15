@@ -1,6 +1,6 @@
 ---
 layout: docs_page
-title: Upload Your Own SAML Certificates for Outbound SAML Apps
+title: Upload Your Own Certificates for Outbound SAML Apps
 excerpt: How to use a custom SAML certificate for apps
 ---
 
