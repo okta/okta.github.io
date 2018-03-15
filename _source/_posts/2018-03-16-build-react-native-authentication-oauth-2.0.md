@@ -5,9 +5,9 @@ author: mraible
 description: "Learn how to add authentication to your React Native applications with AppAuth and Okta."
 tags: [react-native, authentication, oauth, oidc, react, okta]
 tweets:
-  - "React Native is 🔥! Learn how to add Authentication with OAuth and AppAuth in this 😎 tutorial →"
+  - "React Native is 🔥! Learn how to add Authentication with OAuth 2.0 and AppAuth in this 😎 tutorial →"
   - "React Native provides a way for you to develop native apps with web technologies. See how to add authentication to your React Native apps with this handy tutorial."
-  - "The React Native + OAuth Tutorial you've been looking is live on the @okta developer blog!"
+  - "The React Native + OAuth 2.0 Tutorial you've been looking is live on the @okta developer blog!"
 ---
 
 With Okta and OpenID Connect (OIDC) you can easily integrate authentication into a React Native application and never have to build it yourself again. OIDC allows you to authenticate directly against the [Okta API](https://developer.okta.com/product/), and this article shows you how to do just that in a React Native application. Today you'll see how to log a user into your React Native application using an OIDC redirect via the AppAuth library.
