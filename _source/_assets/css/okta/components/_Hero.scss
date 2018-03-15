@@ -163,23 +163,3 @@
 		}
 	}
 }
-
-// Some of the styles are redundant
-// we want to ensure that we are using the new style
-.Hero--stormpath {
-	@extend %Hero;
-	@include color('white');
-	@include padding(large 0);
-
-	background: get-color('blue-bright');
-	text-align: center;
-	h1 {
-		@include font-weight('x-small');
-		@include font-size('new-h1');
-		@include line-height('large');
-	}
-	p {
-		@include color('white');
-		@include font-size('base');
-	}
-}

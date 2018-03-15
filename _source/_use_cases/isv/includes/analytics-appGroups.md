@@ -13,7 +13,7 @@ Like the guidance given for polling applications, the volatility of groups used 
 
 #### appGroups Data
 
-Refer to the [appGroup Object] data model for an elaboaration of the appGroup data structure.
+Refer to the [appGroup Object] data model for an elaboration of the appGroup data structure.
 
 ##### appGroup - Retrieve appGroup objects for a given app
 
