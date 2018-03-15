@@ -8,7 +8,7 @@ excerpt: Ingest identity context from Okta to enhance your Security ecosystem
 
 # {{page.title}}
 
-In this guide we will discuss the various types of data that can be retrieved from Okta, the potential business value of this data and how to effectivley interact with this data.
+In this guide we will discuss the various types of data that can be retrieved from Okta, the potential business value of this data and how to effectively interact with this data.
 
 ## What is Okta
 
@@ -24,7 +24,7 @@ Using our logs, you can ingest activities flowing through Okta for the purposes 
 
 + Using our other endpoints, you can discover additional information about users to:
   + Cross reference different identity expressions
-    + Different applcations referring to user with different identifiers:
+    + Different applications referring to user with different identifiers:
       + `John Doe`
       + `Jonathan Doe`
       + `Jdoe`
@@ -32,7 +32,7 @@ Using our logs, you can ingest activities flowing through Okta for the purposes 
   + Identify relationships between users
   + Discover any number of user profile attributes
 
-## What do I do now
+## What do I do now?
 
 ### Build
 
@@ -71,14 +71,14 @@ Okta has well documented public [API endpoints], In this document, we will discu
 
 #### Environment Setup
 
-All configurations will need to provide a customer the ability to define their base URL and API key. The base URL will be used as the basis for building organization specific RESTful URL’s and the API key is included in the Authorization header of requests to authenticate the interaction. The API key is to be considered extremely sensitive and controls should be put in place to protect it in the same manner that a password would be protected.
+All configurations will need to provide a customer the ability to define their base URL and API key. The base URL will be used as the basis for building organization specific RESTful URLs and the API key is included in the Authorization header of requests to authenticate the interaction. The API key is to be considered extremely sensitive and controls should be put in place to protect it in the same manner that a password would be protected.
 
 ##### More on getting setup
 
 Learn more in the following links:
 
 + [API Test Client]
-+ [Auth Principals]
++ [Auth Principles]
 
 #### User-Agent
 

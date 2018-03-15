@@ -1,6 +1,6 @@
 
-Our System Log API is a recent addition that improvies upon our Events API.\\
-Among other thigns it provides:
+Our System Log API is a recent addition that improves upon our Events API.\\
+Among other things it provides:
 
 + Extensible query parameters
   + Only retrieve the data relevant to your need
@@ -25,7 +25,7 @@ The page size (`limit` _parameter_) should be a configurable value with a range 
 
 For ongoing polling, the of collection should be configurable. Regular polling for new logs is preferred, a suggested default interval between 60 and 300 seconds is encouraged. A maximum interval of 1 day should be enforced.
 
-for Ad hoc queries, crafting a tightly scoped `filter` and specifcying `start` and `end` dates to reduce the data overhead associated with trying to do client side filtering.
+for Ad hoc queries, crafting a tightly scoped `filter` and specifying `start` and `end` dates to reduce the data overhead associated with trying to do client side filtering.
 
 </div>
 
@@ -40,15 +40,15 @@ This approach is intended to address the use-case of the SIEM, UEBA or other ext
 
 ###### Collection Pseudocode
 
-This demonstates a logic to deal with pagination aware cold and warm start collection
+This demonstrates logic to deal with pagination aware cold and warm start collection
 
 Pseudocode (_pythonish_)
 
 + `since` = ISO8601 date/time
-  + not to exeed 180 days in the past
-  + if ommitted, defaults to 7 days in the past
+  + not to exceed 180 days in the past
+  + if omitted, defaults to 7 days in the past
 + `limit` = configurable page size
-  + if ommitted, default 100
+  + if omitted, default 100
 
 ```python
 # check for an existing checkpointUrl
@@ -75,12 +75,12 @@ while url:
     url = response.links['next']['url']
   elif len(response.json()) = 0:
     # if this request returned 0 results there is no next link contained
-    # use the same as the checkpointUrl for the next itteration
+    # use the same as the checkpointUrl for the next iteration
     checkpointUrl = url
     url = false
   else:
     # if this request returned fewer results than requested
-    # use the next link contained in the response for the next itteration
+    # use the next link contained in the response for the next iteration
     checkpointUrl = response.links['next']['url']
     url = false
 
@@ -97,12 +97,12 @@ This approach is intended to one-off collection of specific events tightly filte
 
 ###### Ad hoc Pseudocode 1
 
-fetch all events occuring in the last 7 days with a specific eventType
+fetch all events occurring in the last 7 days with a specific eventType
 
 Pseudocode (_pythonish_)
 
 + `limit` = configurable page size
-  + if ommitted, default 100
+  + if omitted, default 100
 + `eventType` = a specific event type
 
 ```python
@@ -131,12 +131,12 @@ store results
 
 ###### Ad hoc Pseudocode 2
 
-fetch the most recent 1000 events or 7 day worth of events for a specific user
+fetch the most recent 1000 events or 7 days worth of events for a specific user
 
 Pseudocode (_pythonish_)
 
 + `limit` = configurable page size
-  + if ommitted, default 100
+  + if omitted, default 100
 + `userId` = a specific user of interest
 
 ```python
@@ -158,7 +158,7 @@ url += '&filter=(actor.alternateId eq "' + myUserId + '")'
 while url:
   response = GET url
   results += response.json()
-  # determin if we have already collected 1000
+  # determine if we have already collected 1000
   if len(results) >= 1000
     url = false
   # determine if there are more pages to collect
