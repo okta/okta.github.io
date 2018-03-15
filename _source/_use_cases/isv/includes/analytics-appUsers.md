@@ -11,13 +11,13 @@ The page size (`limit` _parameter_) should be a configurable value with a range 
 
 A specific need should be present before polling the information present.  The data models of appUser objects vary by application and implementation.
 
-If full profile data isn't required make use of the "skinny_user" variant.  This endpoint operates in the same manor as the "users" endpoint but is optimized for speed and efficiency returning a minimized response object.
+If full profile data isn't required make use of the "skinny_user" variant.  This endpoint operates in the same manner as the "users" endpoint but is optimized for speed and efficiency returning a minimized response object.
 
 </div>
 
 #### appUsers Data
 
-Refer to the [appUser Object] data model for an elaboaration of the appUser data structure.
+Refer to the [appUser Object] data model for an elaboration of the appUser data structure.
 
 ##### appUsers - Retrieve list of appUsers for an App
 

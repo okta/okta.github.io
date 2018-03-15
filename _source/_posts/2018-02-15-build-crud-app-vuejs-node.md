@@ -71,7 +71,7 @@ Point your favorite browser to `http://localhost:8080` and you should see the fr
 Let's install [bootstrap-vue](https://github.com/bootstrap-vue/bootstrap-vue) so you can take advantage of the various premade [components](https://getbootstrap.com/docs/4.0/components/) (plus you can keep the focus on functionality and not on custom CSS):
 
 ```
-npm i --save bootstrap-vue bootstrap@4.0.0-beta.2
+npm i --save bootstrap-vue bootstrap
 ```
 
 To complete the installation, modify `./src/main.js` to include [bootstrap-vue](https://github.com/bootstrap-vue/bootstrap-vue) and import the required CSS files. Your `./src/main.js` file should look like this:
@@ -780,3 +780,5 @@ To learn more about Vue.js head over to [https://vuejs.org](https://vuejs.org/) 
 You can find the source code for the application developed in this post at <https://github.com/oktadeveloper/okta-vue-node-example>. 
 
 Hit me up in the comments with any questions, and as always, follow [@oktadev](https://twitter.com/OktaDev) on Twitter to see all the cool content our dev team is creating.
+
+* Mar 12, 2018: Updated to use the latest dependencies, including Bootstrap 4.0.0. See the code changes in [oktadeveloper/okta-vue-node-example-example#1](https://github.com/oktadeveloper/okta-vue-node-example/pull/1). Changes to this article can be viewed in [okta/okta.github.io#1837](https://github.com/okta/okta.github.io/pull/1837).

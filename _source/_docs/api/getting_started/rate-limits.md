@@ -36,7 +36,7 @@ When reading the following tables, remember that a more specific limit is consid
 | Authenticate different end users | `/api/v1/authn`                             |   500 |
 | Creating or listing groups | `/api/v1/groups`                                     |   500 |
 | Get, update, or delete a group | `/api/v1/groups/{id}`                       | 1000 |
-| Get System Log data | `/api/v1/logs`                                                |     60 |
+| Get System Log data | `/api/v1/logs`                                                |     120 |
 | Get session information | `/api/v1/sessions`                                    |   750 |
 | Create or list users | `/api/v1/users`                                                 |   600 |
 | Get a user by user ID | `/api/v1/users/{id}`                                       | 2000 |
