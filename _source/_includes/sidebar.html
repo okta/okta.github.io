@@ -120,6 +120,16 @@
       </li>{% endfor %}
     </ul>
 
+    <h3 class="Sidebar-title">How-To</h3>
+    <ul class="Sidebar-nav">
+      {% assign elements = site.docs %}
+      {% for element in elements %}{% unless element.id contains "docs/how-to/" %}{% continue %}{% endunless %}
+      <li{% if element.title == page.title%} class="is-active"{% endif %}>
+        <a href="{{ element.url | remove: '.html' }}">{{ element.title }}</a>
+      </li>
+      {% endfor %}
+    </ul>
+
     <h3 class="Sidebar-title">Standards</h3>
     <ul class="Sidebar-nav">
       {% assign elements = site.standards %}
