@@ -35,7 +35,7 @@ cd okta-rn
 npm start
 ```
 
-This will result your terminal prompting you with some options:
+Running these commands will result in your terminal prompting you with some options:
 
 ```
 To view your app with live reloading, point the Expo app to this QR code.
@@ -68,15 +68,15 @@ If you're on Windows or Linux, I'd suggest trying the Android emulator or your A
 
 ## React Native and OAuth 2.0
 
-In this example, I'll use [React Native App Auth](https://github.com/FormidableLabs/react-native-app-auth), a library created by [Formidable](http://formidable.com/). The reason I'm using this library is three-fold: 1) they provide a nice [example](https://github.com/FormidableLabs/react-native-app-auth/tree/master/Example) that I was able to make work in just a few minutes, 2) it uses AppAuth (a mature OAuth client implementation), and 3) I was unable to get anything else working.
+In this example, I'll use [React Native App Auth](https://github.com/FormidableLabs/react-native-app-auth), a library created by [Formidable](http://formidable.com/). The reason I'm using this library is three-fold: 1) they provide an excellent [example](https://github.com/FormidableLabs/react-native-app-auth/tree/master/Example) that I was able to make work in just a few minutes, 2) it uses AppAuth (a mature OAuth client implementation), and 3) I was unable to get anything else working.
 
-* I tried [react-native-oauth](https://github.com/fullstackreact/react-native-oauth), but discovered it required using an existing provider before adding a new one. I only wanted to have Okta as a provider. Also, it's high number of issues and pull requests served as a warning sign.
-* I tried [react-native-simple-auth](https://github.com/adamjmcgrath/react-native-simple-auth), but had issues getting the deprecated Navigator component to work with the latest React Native release.
+* I tried [react-native-oauth](https://github.com/fullstackreact/react-native-oauth) but discovered it required using an existing provider before adding a new one. I only wanted to have Okta as a provider. Also, it's high number of issues and pull requests served as a warning sign.
+* I tried [react-native-simple-auth](https://github.com/adamjmcgrath/react-native-simple-auth) but had problems getting the deprecated Navigator component to work with the latest React Native release.
 * I tried doing [this OAuth 2 with React Native tutorial](https://medium.com/@jtremback/oauth-2-with-react-native-c3c7c64cbb6d), but also had problems redirecting back to my app.
 
 ### Create Native Application in Okta
 
-Before you add AppAuth to your React Native application, you'll need an application to authorize against. If you don't have a free-forever Okta Developer account, [get one today](https://developer.okta.com/signup/)!
+Before you add AppAuth to your React Native application, you'll need an app to authorize against. If you don't have a free-forever Okta Developer account, [get one today](https://developer.okta.com/signup/)!
 
 Log in to your Okta Developer account and navigate to **Applications** > **Add Application**. Click **Native** and click **Next**. Give the app a name you’ll remember (e.g., `React Native`), select `Refresh Token` as a grant type, in addition to the default `Authorization Code`. Copy the **Login redirect URI** (e.g., `com.oktapreview.dev-158606:/callback`) and save it somewhere. You'll need this value when configuring your app.
 
@@ -126,7 +126,7 @@ target 'OktaRN' do
 end
 ```
 
-Then run `pod install` from the `ios` directory. This can take a while the first time, even on a fast connection. Now is a good time to grab a coffee, or a scotch! 🥃
+Then run `pod install` from the `ios` directory. This can take a while the first time, even on a fast connection. Now is a good time to grab a coffee or a scotch! 🥃
 
 Open your project in Xcode by running `open OktaRN.xcworkspace` from the `ios` directory.
 
@@ -365,11 +365,11 @@ svn export https://github.com/FormidableLabs/react-native-app-auth/trunk/Example
 
 Run your app with `npm run ios`.
 
-You should see a screen that says "Hello, stranger." Click on **Authorize** and you'll be prompted to continue or cancel.
+You should see a screen that says "Hello, stranger." Click on **Authorize**, and you'll be prompted to continue or cancel.
 
 | {% img blog/react-native-app-auth/hello.png alt:"Hello, stranger" width:"400" %} | {% img blog/react-native-app-auth/continue.png alt:"Cancel or Continue" width:"400" %} |
 
-Click **Continue** and you should see an Okta sign-in form. Enter your credentials and you'll be redirected back to the application.
+Click **Continue** and you should see an Okta sign-in form. Enter your credentials, and you'll be redirected back to the application.
 
 | {% img blog/react-native-app-auth/okta-login.png alt:"Okta Sign-In" width:"400" %} | {% img blog/react-native-app-auth/access-token.png alt:"Access Token Info" width:"400" %} |
 
@@ -503,7 +503,7 @@ export default class App extends Component<{}, State> {
   };
 ```
 
-Then update the `authorize()` method to set the property from `authState`. You'll want to do add similar logic in the `refresh()` and `revoke()` methods.
+Then update the `authorize()` method to set the property from `authState`. You'll want to add similar logic in the `refresh()` and `revoke()` methods.
 
 ```js
 authorize = async () => {
@@ -568,7 +568,7 @@ Now that you have an access token, what can you do with it? You can call an Okta
 
 I wrote about how to create a "Good Beers" API in [Bootiful Development with Spring Boot and React](/blog/2017/12/06/bootiful-development-with-spring-boot-and-react). You can use the backend of that application to prove it works.
 
-Clone the project from GitHub and checkout the `okta` branch.
+Clone the project from GitHub and check out the `okta` branch.
 
 ```bash
 git clone https://github.com/oktadeveloper/spring-boot-react-example.git
