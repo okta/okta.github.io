@@ -1,9 +1,7 @@
 ---
 layout: docs_page
 title: OpenID Connect & OAuth 2.0 API
-redirect_from: 
-    - "/docs/api/resources/oauth2"
-    - "/docs/how-to/beta-auth-service/api-access-management-troubleshooting"
+redirect_from: "/docs/api/resources/oauth2"
 ---
 
 # OpenID Connect & OAuth 2.0 API
