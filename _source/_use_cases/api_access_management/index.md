@@ -122,7 +122,6 @@ Okta provides the API Access Management Administrator role to make managing auth
 * Configure clients to support only the grant types that are required by the specific use cases under development. Disable all other grant types.
 * Within Okta, only assigned users and groups can authenticate with a client (application). Use the **Everyone** group only when necessary.
 * Okta sends tokens and authorization codes to a redirect URI (bound to the application's client ID) only if it is on the whitelist. Therefore, limit this list to URIs in active use.
-* A client (application) should never inspect the contents of an access token. For example, do not customize the client's UI based on scopes in the access token.
 
 #### Authorization Server
 
