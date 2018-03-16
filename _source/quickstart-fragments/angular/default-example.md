@@ -14,6 +14,8 @@ This guide will walk you through integrating authentication into an Angular app 
 
 At the end of the Angular instructions you can choose your server type to learn more about post-authentication workflows, such as verifying tokens that your Angular application can send to your server.
 
+> If you would prefer to download a complete sample application, please visit [Angular Sample Applications for Okta][].
+
 ## Prerequisites
 * If you do not already have a **Developer Edition Account**, you can create one at [https://developer.okta.com/signup/](https://developer.okta.com/signup/).
 * If you don't have an Angular app, or are new to Angular, please start with the [Angular Quickstart](https://angular.io/guide/quickstart) guide. It will walk you through the creation of an Angular app, creating routes, and other application development essentials.
@@ -163,3 +165,5 @@ export class MessageListComponent {
 {% endraw %}
 
 In the next section you can select your server technology to see how your server can read this incoming token and validate it.
+
+[Angular Sample Applications for Okta]: https://github.com/okta/samples-js-angular
