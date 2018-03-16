@@ -64,6 +64,12 @@ module Okta
     # Replaces all occurences of 'yourOktaDomain' with a searchable span
     pages.output = pages.output.gsub(/https:\/\/{yourOktaDomain}.com/, '<span class="okta-preview-domain">https://{yourOktaDomain}.com</span>')
   end
+
+   Jekyll::Hooks.register [:pages, :posts, :documents], :post_render do |pages|
+    # Replaces all occurences of 'contactSupport' with a searchable span and link for init lower case
+    pages.output = pages.output.gsub(/contactSupport/, '<span class="contact-support"><a href="https://support.okta.com/help/open_case" target="_blank">contact Support</span')
+   end
+
 end
 
 Liquid::Template.register_tag('api_lifecycle', Okta::ApiLifecycleTag)
