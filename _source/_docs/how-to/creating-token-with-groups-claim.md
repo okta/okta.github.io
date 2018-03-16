@@ -1,10 +1,10 @@
 ---
 layout: docs_page
-title: Create a Token with a Groups Claim Using the App Profile
-excerpt: How to use the app profile to create an ID token or access token that contains a groups claim
+title: Create an ID Token or Access Token Containing a Groups Claim
+excerpt: Use the app profile to create an ID token or access token that contains a groups claim
 ---
 
-## How to Create a Token with a Groups Claim Using the App Profile
+# Create an ID Token or Access Token Containing a Groups Claim
 
 You can add a groups claim for any combination of application groups and user groups into ID tokens to perform SSO using Okta Authorization Server, or ID tokens and access tokens to perform authentication and authorization using Custom Authorization Server (API Access Management required).
 This process optionally uses Okta's flexible app profile, which accepts any JSON-compliant content, to create a whitelist of groups

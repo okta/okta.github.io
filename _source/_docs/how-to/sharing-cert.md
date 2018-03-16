@@ -1,10 +1,10 @@
 ---
 layout: docs_page
-title: How To Share Application Key Credentials
+title: Share Application Key Credentials for IdPs Across Apps
 excerpt: How to share application key credentials between apps
 ---
 
-# Share Application Key Credentials Between Apps
+# Share Application Key Credentials for IdPs Across Apps
 
 [Application key credential objects](/docs/api/resources/apps#application-key-credential-model)
 contain an opaque key ID (`kid`) and corresponding certificate.
