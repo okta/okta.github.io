@@ -11,6 +11,8 @@ Today you are going to build two small applications that demonstrate these princ
 
 ## Create a Spring Boot Application
 
+**Update:** You must use Spring Boot version 1.5.x. 
+
 If you haven't tried out [start.spring.io](https://start.spring.io) go check it out right now... with a couple of clicks it will get you a basic, runnable Spring Boot Application.
 
 ```bash
@@ -20,6 +22,7 @@ curl https://start.spring.io/starter.tgz \
  -d language=java \
  -d type=maven-project \
  -d baseDir=oauth-implicit-example \
+ -d bootVersion=1.5.8.RELEASE \
  | tar -xzvf -
 ```
 
