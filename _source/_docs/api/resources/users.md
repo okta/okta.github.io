@@ -74,7 +74,7 @@ Creating users with a `FEDERATION` or `SOCIAL` provider sets the user status to 
 Creates a user without a [password](#password-object) or [recovery question & answer](#recovery-question-object)
 
 When the user is activated, an email is sent to the user with an activation token that can be used to complete the activation process.
-This is the default flow for new user registration with the administrator UI.
+This is the default flow for new user registration using the administrator UI.
 
 ##### Request Example
 {:.api .api-request .api-request-example}
