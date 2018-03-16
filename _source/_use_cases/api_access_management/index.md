@@ -122,6 +122,7 @@ Okta provides the API Access Management Administrator role to make managing auth
 * Configure clients to support only the grant types that are required by the specific use cases under development. Disable all other grant types.
 * Within Okta, only assigned users and groups can authenticate with a client (application). Use the **Everyone** group only when necessary.
 * Okta sends tokens and authorization codes to a redirect URI (bound to the application's client ID) only if it is on the whitelist. Therefore, limit this list to URIs in active use.
+* A client (application) should never inspect the contents of an access token. For example, do not customize the client's UI based on scopes in the access token.
 
 #### Authorization Server
 
@@ -155,6 +156,7 @@ Okta provides the API Access Management Administrator role to make managing auth
 #### Securing Applications
 
 * Access tokens and refresh tokens are sensitive and should be protected as such. They should never be stored in client-side or frontend code.
+* A client (application) should never inspect the contents of an access token. For example, do not customize the client's UI based on scopes in the access token. 
 * Access tokens should be used exclusively via an HTTP Authorization header instead of encoded into a payload or URL which may be logged or cached.
 * A client secret is a password and should be treated and protected as such. Therefore, it should not be embedded in mobile applications, frontend JavaScript applications, or any other scenario where an attacker could access it.
 * Avoid using the resource owner password grant type (`password`) except in legacy application or transitional scenarios. The authorization code, implicit, or hybrid grant types are recommended in most scenarios.
