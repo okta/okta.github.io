@@ -1,11 +1,10 @@
 ---
 layout: docs_page
-title: Bring Your Own SAML App Certificate
+title: Upload Your Own Certificates for Outbound SAML Apps
 excerpt: How to use a custom SAML certificate for apps
 ---
 
-<a name="top"></a>
-## Bring Your Own SAML App Certificate
+# Upload Your Own SAML Certificates for Outbound SAML Apps
 
 Okta Admins can upload their own SAML certificates to sign the assertion for Outbound SAML apps and to sign the AuthNRequest and decrypt the assertion for Inbound SAML.
 

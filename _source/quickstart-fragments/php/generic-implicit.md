@@ -12,6 +12,8 @@ provide to the user, if not, we should return a 401 to let the front end know th
 > NOTE: The rest of this quickstart assumes that you have an understand of PHP and composer. You should have at least
  PHP7 and the latest version of composer installed on your computer. Your project should contain a `composer.json`
  file that is ready to have dependencies installed.
+>
+> If you would prefer to download a complete sample application, please visit [PHP Sample Applications for Okta][].
 
 ## Installing Dependencies
 There are a few libraries you will need to install in order for us to verify the token that is provided in the
@@ -200,3 +202,5 @@ print json_encode([
 ]);
 
 ```
+
+[PHP Sample Applications for Okta]: https://github.com/okta/samples-php

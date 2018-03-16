@@ -54,7 +54,7 @@ mkdir blog && cd blog && jhipster
 JHipster asks many questions about the type of application you want to create and what features you’d like to include. The table below shows the choices I made to create a blog application with Angular, OAuth 2.0 / OIDC authentication, and Gradle.
 
 | Question | Answer |
-|---|---|---|
+|---|---|
 | Type of application? | `Monolith` |
 | Name? | `blog` |
 | Java package name? | `com.okta.developer`  |

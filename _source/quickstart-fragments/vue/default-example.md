@@ -14,6 +14,8 @@ This guide will walk you through integrating authentication into a Vue app with 
 
 At the end of the Vue instructions you can choose your server type to learn more about post-authentication workflows, such as verifying tokens that your Vue application can send to your server.
 
+> If you would prefer to download a complete sample application, please visit [Vue Sample Applications for Okta][].
+
 ## Prerequisites
 * If you do not already have a **Developer Edition Account**, you can create one at [https://developer.okta.com/signup/](https://developer.okta.com/signup/).
 * If you don't have a Vue app, or are new to Vue, please start with the [Vue CLI](https://github.com/vuejs/vue-cli) guide. It will walk you through the creation of a Vue app, creating [routers](https://router.vuejs.org/en/essentials/getting-started.html), and other Vue.js development essentials.
@@ -179,3 +181,5 @@ export default {
 {% endraw %}
 
 In the next section you can select your server technology to see how your server can read this incoming token and validate it.
+
+[Vue Sample Applications for Okta]: https://github.com/okta/samples-js-vue
