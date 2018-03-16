@@ -56,7 +56,7 @@ One slick feature of Ionic's `serve` command is it shows compilation errors in t
 {% img blog/ionic-authentication/typescript-error.png alt:"TypeScript Error" %}
 
 ## Add User Authentication
-Ionic Cloud offers a free [Auth](https://docs.ionic.io/services/auth/) service. It allows authentication with an email and password, as well as social providers like Facebook, Google, and Twitter. It provides several classes you can use to build authentication in its `@ionic/cloud-angular` dependency. It even has support [custom authentication](https://docs.ionic.io/services/auth/custom-auth.html), but it "requires your own server to handle authentication" and will be decommissioned on January 31, 2018.
+Ionic Cloud offers a free Auth service. It allows authentication with an email and password, as well as social providers like Facebook, Google, and Twitter. It provides several classes you can use to build authentication in its `@ionic/cloud-angular` dependency. It even has support for custom authentication, but it "requires your own server to handle authentication" and will be decommissioned on January 31, 2018.
 
 While there aren't many current tutorials on using this service, there are a few from last year.
 

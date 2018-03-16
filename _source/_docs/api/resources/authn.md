@@ -69,6 +69,7 @@ As part of the authentication call either the username and password or the token
 | ----------- | :--------------------------------------------------------------------------------------------------------------------- | :--------- | :-------------------------------- | :------- | :------- |
 | username    | User's non-qualified short-name (e.g. dade.murphy) or unique fully-qualified login (e.g dade.murphy@example.com) | Body       | String                            | FALSE    |          |
 | password    | User's password credential                                                                                       | Body       | String                            | FALSE    |          |
+| audience    | App ID of the target app the user is signing into                                                       | Body       | String                            | FALSE    |          |
 | relayState  | Optional state value that is persisted for the lifetime of the authentication transaction                              | Body       | String                            | FALSE    |  2048    |
 | options     | Opt-in features for the authentication transaction                                                                     | Body       | [Options Object](#options-object) | FALSE    |          |
 | context     | Provides additional context for the authentication transaction                                                         | Body       | [Context Object](#context-object) | FALSE    |          |
@@ -957,7 +958,8 @@ curl -v -X POST \
 ~~~
 
 
-### Step-up Authentication
+
+### SP-initiated Step-up Authentication
 {:.api .api-operation}
 
 {% api_lifecycle ea %} 
@@ -1226,7 +1228,7 @@ User is assigned to a Sign-On Policy or App Sign-On Policy that requires additio
             },
             "_links":{  
                "verify":{  
-                  "href":"https://{yourOktaDomain}.okta.com/api/v1/authn/factors/opf1cla0yyvOBWxuC1d8/verify",
+                  "href":"https://{yourOktaDomain}.com/api/v1/authn/factors/opf1cla0yyvOBWxuC1d8/verify",
                   "hints":{  
                      "allow":[  
                         "POST"
@@ -1341,6 +1343,309 @@ User is assigned to a Sign-On Policy or App Sign-On Policy that requires additio
 }
 ~~~
 
+### IDP-initiated Step-up Authentication
+{:.api .api-operation}
+
+{% api_operation post /api/v1/authn %}
+
+{% api_lifecycle ea %}
+
+Authenticates a user for signing into the specified application.
+
+Note:
+* Only WS-Federation, SAML based apps are supported.
+* Pass the application instance ID of the app as ["audience"](#request-parameters-for-primary-authentication) along with the user credentials.
+
+> Okta Sign-on Policy and the related App Sign-on Policy will be evaluated after successful primary authentication.
+
+##### Request Example for IDP initiated Step-up Authentication
+{:.api .api-request .api-request-example}
+
+~~~sh
+curl -v -X POST \
+-H "Accept: application/json" \
+-H "Content-Type: application/json" \
+-d '{
+  "username": "dade.murphy@example.com",
+  "password": "correcthorsebatterystaple",
+  "audience": "0oa6gva7owNAhDam50h7",
+  "options": {
+    "multiOptionalFactorEnroll": false,
+    "warnBeforePasswordExpired": true
+  }
+}' "https://{yourOktaDomain}.com/api/v1/authn"
+~~~
+
+##### Response Example When MFA Isn't Required
+{:.api .api-response .api-response-example}
+
+~~~json
+{
+   "stateToken":"00quAZYqYjXg9DZhS5UzE1wrJuQ6KKb_kzOeH7OGB5",
+   "type":"SESSION_STEP_UP",
+   "expiresAt":"2017-05-30T23:19:40.000Z",
+   "status":"SUCCESS",
+   "_embedded":{
+      "user":{
+         "id":"00ub0oNGTSWTBKOLGLNR",
+         "passwordChanged":"2017-03-29T21:37:25.000Z",
+         "profile":{
+            "login":"dade.murphy@example.com",
+            "firstName":"Dade",
+            "lastName":"Murphy",
+            "locale":"en_US",
+            "timeZone":"America/Los_Angeles"
+         }
+      },
+      "target":{
+         "type":"APP",
+         "name":"salesforce",
+         "label":"Salesforce.com",
+         "_links":{
+            "logo":{
+               "name":"medium",
+               "href":"https://{yourOktaDomain}.com/assets/img/logos/salesforce_logo.dbd7e0b4de118a1dae1c39d60a3c30e5.png",
+               "type":"image/png"
+            }
+         }
+      }
+   },
+   "_links":{
+      "next":{
+         "name":"original",
+         "href":"https://{yourOktaDomain}.com/login/step-up/redirect?stateToken=00quAZYqYjXg9DZhS5UzE1wrJuQ6KKb_kzOeH7OGB5",
+         "hints":{
+            "allow":[
+               "GET"
+            ]
+         }
+      }
+   }
+}
+~~~
+
+> Sign in to the app by following the `next` link relation.
+
+##### Response Example for Factor Enroll
+{:.api .api-response .api-response-example}
+
+User is assigned to an MFA Policy that requires enrollment during sign-on and must [select a factor to enroll](#enroll-factor) to complete the authentication transaction.
+
+~~~json
+{
+   "stateToken":"00zEfSRIpELrl87ndYiHNkvOEbyEPrBmTYuf9dsGLl",
+   "type":"SESSION_STEP_UP",
+   "expiresAt":"2017-05-30T22:58:09.000Z",
+   "status":"MFA_ENROLL",
+   "_embedded":{
+      "user":{
+         "id":"00ub0oNGTSWTBKOLGLNR",
+         "passwordChanged":"2017-03-29T21:37:25.000Z",
+         "profile":{
+            "login":"dade.murphy@example.com",
+            "firstName":"Dade",
+            "lastName":"Murphy",
+            "locale":"en_US",
+            "timeZone":"America/Los_Angeles"
+         }
+      },
+      "factors":[
+         {
+            "factorType":"sms",
+            "provider":"OKTA",
+            "vendorName":"OKTA",
+            "_links":{
+               "enroll":{
+                  "href":"https://{yourOktaDomain}.com/api/v1/authn/factors",
+                  "hints":{
+                     "allow":[
+                        "POST"
+                     ]
+                  }
+               }
+            },
+            "status":"NOT_SETUP"
+         }
+      ],
+      "target":{
+         "type":"APP",
+         "name":"salesforce",
+         "label":"Salesforce.com",
+         "_links":{
+            "logo":{
+               "name":"medium",
+               "href":"https://{yourOktaDomain}.com/assets/img/logos/salesforce_logo.dbd7e0b4de118a1dae1c39d60a3c30e5.png",
+               "type":"image/png"
+            }
+         }
+      }
+   },
+   "_links":{
+      "cancel":{
+         "href":"https://{yourOktaDomain}.com/api/v1/authn/cancel",
+         "hints":{
+            "allow":[
+               "POST"
+            ]
+         }
+      }
+   }
+}
+~~~
+
+##### Response Example for Factor Challenge
+{:.api .api-response .api-response-example}
+
+User is assigned to a Sign-on Policy or App Sign-on Policy that requires additional verification and must [select and verify](#verify-factor) a previously enrolled [factor](#factor-object) by `id` to complete the authentication transaction.
+
+~~~json
+{
+   "stateToken":"00POAgFjELRueYUC1p7GFAmrm32EQa2HXw0_YssJ5J",
+   "type":"SESSION_STEP_UP",
+   "expiresAt":"2017-05-30T23:07:00.000Z",
+   "status":"MFA_REQUIRED",
+   "_embedded":{
+      "user":{
+         "id":"00ub0oNGTSWTBKOLGLNR",
+         "passwordChanged":"2017-03-29T21:37:25.000Z",
+         "profile":{
+            "login":"dade.murphy@example.com",
+            "firstName":"Dade",
+            "lastName":"Murphy",
+            "locale":"en_US",
+            "timeZone":"America/Los_Angeles"
+         }
+      },
+      "factors":[
+         {
+            "id":"opf1cla0gggOBWxuC1d8",
+            "factorType":"push",
+            "provider":"OKTA",
+            "vendorName":"OKTA",
+            "profile":{
+               "credentialId":"abcd@okta.com",
+               "deviceType":"SmartPhone_Android",
+               "keys":[
+                  {
+                     "kty":"PKIX",
+                     "use":"sig",
+                     "kid":"default",
+                     "x5c":[
+                        "Mdkkdfjkdjf"
+                     ]
+                  }
+               ],
+               "name":"SM-N9005",
+               "platform":"ANDROID",
+               "version":"21"
+            },
+            "_links":{
+               "verify":{
+                  "href":"https://{yourOktaDomain}.com/api/v1/authn/factors/opf1cla0yyvOBWxuC1d8/verify",
+                  "hints":{
+                     "allow":[
+                        "POST"
+                     ]
+                  }
+               }
+            }
+         },
+         {
+            "id":"smsph8F1esz8LlSjo0g3",
+            "factorType":"sms",
+            "provider":"OKTA",
+            "vendorName":"OKTA",
+            "profile":{
+               "phoneNumber":"+1 XXX-XXX-3161"
+            },
+            "_links":{
+               "verify":{
+                  "href":"https://{yourOktaDomain}.com/api/v1/authn/factors/smsph8F1esz8LlSjo0g3/verify",
+                  "hints":{
+                     "allow":[
+                        "POST"
+                     ]
+                  }
+               }
+            }
+         }
+      ],
+      "policy":{
+         "allowRememberDevice":true,
+         "rememberDeviceLifetimeInMinutes":1440,
+         "rememberDeviceByDefault":false,
+         "factorsPolicyInfo": {
+             "opf1cla0gggOBWxuC1d8": {
+                 "autoPushEnabled": true
+             }
+         }
+      },
+      "target":{
+         "type":"APP",
+         "name":"salesforce",
+         "label":"Salesforce.com",
+         "_links":{
+            "logo":{
+               "name":"medium",
+               "href":"https://{yourOktaDomain}.com/assets/img/logos/salesforce_logo.dbd7e0b4de118a1dae1c39d60a3c30e5.png",
+               "type":"image/png"
+            }
+         }
+      }
+   },
+   "_links":{
+      "cancel":{
+         "href":"https://{yourOktaDomain}.com/api/v1/authn/cancel",
+         "hints":{
+            "allow":[
+               "POST"
+            ]
+         }
+      }
+   }
+}
+~~~
+
+
+##### Response Example for Invalid or Unknown Application
+{:.api .api-response .api-response-example}
+
+~~~http
+HTTP/1.1 400 Bad Request
+Content-Type: application/json
+
+{
+    "errorCode": "E0000001",
+    "errorSummary": "Api validation failed: authRequest",
+    "errorLink": "E0000001",
+    "errorId": "oae-W6QeEcJQKarRZv8JcmtrA",
+    "errorCauses": [
+        {
+            "errorSummary": "Invalid or unknown audience '0oa6gva7owNAhDam50h7'."
+        }
+    ]
+}
+~~~
+
+##### Response Example for Unsupported Application
+{:.api .api-response .api-response-example}
+
+~~~http
+HTTP/1.1 400 Bad Request
+Content-Type: application/json
+
+{
+    "errorCode": "E0000001",
+    "errorSummary": "Api validation failed: authRequest",
+    "errorLink": "E0000001",
+    "errorId": "oaelApNWe8WR4uiK7EROTqp-Q",
+    "errorCauses": [
+        {
+            "errorSummary": "Sign-in not allowed for app '0oapt2yIp38ySYiMP0g3'."
+        }
+    ]
+}
+~~~
 
 ### Change Password
 {:.api .api-operation}
@@ -5988,7 +6293,7 @@ You advance the authentication or recovery transaction to the next state by post
 
 Represents the type of authentication
 
-Currently available only during [step-up authentication](#step-up-authentication).
+Currently available only during [SP-initiated step-up authentication](#sp-initiated-step-up-authentication) and [IDP-initiated step-up authentication](#idp-initiated-step-up-authentication).
 
 ### Tokens
 
@@ -6172,7 +6477,7 @@ A subset of policy settings of the Sign-On Policy or App Sign-On Policy publishe
 
 {% api_lifecycle ea %}
 Represents the target resource that user tried accessing. Typically this is the app that user is trying to sign-in.
-Currently this is available only during [step-up authentication](#step-up-authentication).
+Currently this is available only during [SP-initiated step-up authentication](#sp-initiated-step-up-authentication) and [IDP-initiated step-up authentication](#idp-initiated-step-up-authentication).
 
 | Property  | Description                                                                                                                  | DataType | Nullable | Unique | Readonly |
 | --------- | ---------------------------------------------------------------------------------------------------------------------------- | ---------| -------- | ------ | -------- |
