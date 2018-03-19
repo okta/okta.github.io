@@ -287,7 +287,7 @@ OAuth 2.0 (Custom Authorization Server), except the public keys should be retrie
 
 ## Requesting a Token
 
-You can request a token with the endpoint [`/oauth2/${authorizationServerId}/v1/token`](/docs/api/resources/oidc#token).
+You can request a token with the endpoint [`/oauth2/${authServerId}/v1/token`](/docs/api/resources/oidc#token).
 
 The grant type and scope in your request, as well as configurations set in the Custom Authorization Server, determine which
 tokens are returned and what they contain. For details, see [Response Parameters](/docs/api/resources/oidc#response-properties) and [Custom claim configuration](#custom-claim-configuration).
@@ -382,10 +382,10 @@ Doing so will make it easier to consume enhancements to the API Access Managemen
 
 Okta provides a pre-configured Custom Authorization Server with the name `default`.
 This default authorization server includes a basic access policy and rule, which you can edit to control access.
-It allows you to specify `default` instead of the `authorizationServerId` in requests to it:
+It allows you to specify `default` instead of the `authServerId` in requests to it:
 
-* `https://{yourOktaDomain}.com/api/v1/authorizationServers/default`  vs
-* `https://{yourOktaDomain}.com/api/v1/authorizationServers/${authorizationServerId}` for other Customer Authorization Servers
+* `https://{yourOktaDomain}.com/api/v1/authorizationServers/default` vs
+* `https://{yourOktaDomain}.com/api/v1/authorizationServers/${authServerId}` for other Customer Authorization Servers
 
 ## OpenID Connect and Authorization Servers
 
@@ -393,6 +393,6 @@ You can use the [OpenID Connect API](/docs/api/resources/oidc) without API Acces
 However, you can also use OpenID Connect with a Custom Authorization Server:
 
 * `/oauth2/v1/userinfo` for OpenID Connect without API Access Management
-* `/oauth2/${authorizationServerId}/v1/userinfo` for OpenID Connect with API Access Management's Custom Authorization Server.
+* `/oauth2/${authServerId}/v1/userinfo` for OpenID Connect with API Access Management's Custom Authorization Server.
 
 You can't mix tokens between different authorization servers. By design, authorization servers don't have trust relationships with each other.

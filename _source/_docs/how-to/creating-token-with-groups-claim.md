@@ -388,7 +388,7 @@ Now when you mint a token, groups in the `groupwhitelist` that also have the use
 
 #### Step Four: Send a Test Request
 
-To obtain a token with the configured groups claim, send a request for an ID token that includes one of the scopes that the claim is associated with: `https://{yourOktaDomain}.com/oauth2/${authorizationServerId}/v1/authorize`.
+To obtain a token with the configured groups claim, send a request for an ID token that includes one of the scopes that the claim is associated with: `https://{yourOktaDomain}.com/oauth2/${authServerId}/v1/authorize`.
 
 Request Example for Custom Authorization Server:
 
@@ -458,6 +458,6 @@ Example Payload Data for an Access Token:
 
 The ID token or access token contains the group WestCoastDivision so the audience (`aud`) has access to the group information about the user.
 
-For flows other than implicit, post to the token endpoint `https://{yourOktaDomain}.com/oauth2/${authorizationServerId}/v1/token` with the user or client you want. Make sure the user is assigned to the app and to one of the groups from your whitelist.
+For flows other than implicit, post to the token endpoint `https://{yourOktaDomain}.com/oauth2/${authServerId}/v1/token` with the user or client you want. Make sure the user is assigned to the app and to one of the groups from your whitelist.
 
 If the results aren't as expected, start your troubleshooting by inspecting the System Log to see what went wrong. Also, try requesting only an ID token instead of both and ID token and access token.
