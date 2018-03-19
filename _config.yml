@@ -124,5 +124,5 @@ external_domain: https://developer.okta.com
 
 # Link for telling people to contact support
 
-contact_support_lc: <a href="https://support.okta.com/help/open_case" target="_blank">contact Support</a>
-contact_support_uc: <a href="https://support.okta.com/help/open_case" target="_blank">Contact Support</a>
+contact_support_lc: contact <a href="https://support.okta.com/help/open_case" target="_blank">Support</a>
+contact_support_uc: Contact <a href="https://support.okta.com/help/open_case" target="_blank">Support</a>
