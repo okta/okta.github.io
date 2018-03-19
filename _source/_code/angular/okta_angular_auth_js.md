@@ -64,7 +64,7 @@ export class OktaAuthService {
   oktaAuth = new OktaAuth({
     url: 'https://{yourOktaDomain}.com',
     clientId: '{clientId}',
-    issuer: 'https://{yourOktaDomain}.com/oauth2/{authorizationServerId}',
+    issuer: 'https://{yourOktaDomain}.com/oauth2/{authServerId}',
     redirectUri: 'http://localhost:4200/callback',
   });
 
@@ -77,7 +77,7 @@ export class OktaAuthService {
 
   login() {
     // Launches the login redirect.
-    this.oktaAuth.token.getWithRedirect({ 
+    this.oktaAuth.token.getWithRedirect({
       responseType: ['id_token', 'token'],
       scopes: ['openid', 'email', 'profile']
     });
