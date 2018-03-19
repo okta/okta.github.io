@@ -73,7 +73,7 @@ the application can read attributes passed from Okta after a user logs in.
 
 ## Example SAML Response
 
-SAML responses are signed. This example contains profile attributes of the person who requested access to the app, as set in the General tab of the Okta Admin user interface.
+SAML responses are signed. This example contains profile attributes of the person who requested access to the app, as set in the General tab of the administrator UI.
 
 ~~~xml
 <saml2p:Response xmlns:saml2p="urn:oasis:names:tc:SAML:2.0:protocol"
@@ -234,4 +234,4 @@ RKvwyyTfqfq9pgSmB9xNVJIeVZbbZGTlNGqJti24E0AiIPggtxg5NJ+HHnEQ5RxdSsR4fbMz9i0K
 </saml2p:Response>
 ~~~
 
-SAML responses are signed, and contain the profile attributes of the person who requested access to the app, as set in the General tab of the Okta Admin user interface.
+SAML responses are signed, and contain the profile attributes of the person who requested access to the app, as set in the General tab of the administrator UI.

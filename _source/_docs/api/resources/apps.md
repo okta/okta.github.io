@@ -1045,7 +1045,7 @@ Adds an OAuth 2.0 client application. This application is only available to the 
 >Notes
   * Apps created on `/api/v1/apps` default to `consent_method=TRUSTED`, while those created on `/api/v1/clients` default to `consent_method=REQUIRED`.
   * If you request a scope that requires consent while using the `client_credentials` flow, an error is returned. Because there is no user, no consent can be given.
-  * These properties can also be configured in the Okta user interface App Wizard, General tab: `tos_uri`, `policy_uri`, `logo_uri`, and `consent_method`. They can't be set using [the Dynamic Client Registration API](/docs/api/resources/oauth-clients).
+  * These properties can also be configured in the App Wizard, General tab in the administrator UI: `tos_uri`, `policy_uri`, `logo_uri`, and `consent_method`. They can't be set using [the Dynamic Client Registration API](/docs/api/resources/oauth-clients).
 
 ##### Request Example
 {:.api .api-request .api-request-example}
@@ -4574,20 +4574,20 @@ The catalog is currently not exposed via an API.  While additional apps may be a
 | Custom SWA          | [Add Custom SWA Application](#add-custom-swa-application)                     |
 |---------------------+-------------------------------------------------------------------------------|
 
-The current workaround is to manually configure the desired application via the Okta Admin UI in a preview (sandbox) organization and view the application via [Get Application](#get-application)
+The current workaround is to manually configure the desired application via the administrator UI in a preview (sandbox) organization and view the application via [Get Application](#get-application)
 
-> App provisioning settings currently cannot be managed via the API and must be configured via the Okta Admin UI.
+> App provisioning settings currently cannot be managed via the API and must be configured via the administrator UI.
 
 ##### Features
 
 Applications may support optional provisioning features on a per-app basis.
 
-> Provisioning features currently may not be configured via the API and must be configured via the Okta Admin UI.
+> Provisioning features currently may not be configured via the API and must be configured via the administrator UI.
 
 The list of provisioning features an app may support are:
 
 |------------------------+------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| App Feature            | Admin UI Name          | Description                                                                                                                                                                                                                                    |
+| App Feature            | Name in the Administrator UI          | Description                                                                                                                                                                                                                                    |
 | ---------------------- | ---------------------- | -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | IMPORT_NEW_USERS       | User Import            | Creates or links a user in Okta to a user from the application.                                                                                                                                                                                |
 | IMPORT_PROFILE_UPDATES | User Import            | Updates a linked user's app profile during manual or scheduled imports.                                                                                                                                                                        |
@@ -4799,7 +4799,7 @@ Determines how to authenticate the OAuth 2.0 client
 
 * The `client_id` must consist of alphanumeric characters or the following special characters `$-_.+!*'(),`. It must contain between 6 and 100 characters, inclusive, and must not be the reserved word `ALL_CLIENTS`. The `client_secret` must consist of printable characters, which are defined in [the OAuth 2.0 Spec](https://tools.ietf.org/html/rfc6749#appendix-A), and must contain between 14 and 100 characters, inclusive.
 
-* If `autoKeyRotation` is not specified, the client automatically opts in for Okta's [key rotation](/authentication-guide/tokens/validating-id-tokens). This property may be updated via the API or via the Okta Admin user interface.
+* If `autoKeyRotation` is not specified, the client automatically opts in for Okta's [key rotation](/authentication-guide/tokens/validating-id-tokens). This property may be updated via the API or via the administrator UI.
 
 ~~~json
 {
@@ -5066,7 +5066,7 @@ User provisioning in Okta is an asynchronous background job that is triggered du
     * Application user has a `STAGED` status with no `externalId` while the background provisioning job is queued.
 2. When the background provisioning job completes successfully, the application user transitions to the `PROVISIONED` status.
     * Application user is assigned an `externalId` when successfully provisioned in target application.  The `externalId` should be immutable for the life of the assignment
-3. If the background provisioning job completes with an error, the application user remains with the `STAGED` status but has `syncState` as `ERROR`.  A provisioning task is created in the Okta Admin UI that must be resolved to retry the job.
+3. If the background provisioning job completes with an error, the application user remains with the `STAGED` status but has `syncState` as `ERROR`.  A provisioning task is created in the administrator UI that must be resolved to retry the job.
 
 When the `PUSH_PROFILE_UPDATES` feature is enabled, updates to an upstream profile are pushed downstream to the application according to profile mastering priority.  The app user's `syncState` has the following values:
 
@@ -5076,10 +5076,10 @@ When the `PUSH_PROFILE_UPDATES` feature is enabled, updates to an upstream profi
 | OUT_OF_SYNC  | Application user has changes that have not been pushed to the target application                                                                                                       |
 | SYNCING      | Background provisioning job is running to update the user's profile in the target application                                                                                          |
 | SYNCHRONIZED | All changes to the app user profile have successfully been synchronized with the target application                                                                                    |
-| ERROR        | Background provisioning job failed to update the user's profile in the target application. A provisioning task is created in the Okta Admin UI that must be resolved to retry the job. |
+| ERROR        | Background provisioning job failed to update the user's profile in the target application. A provisioning task is created in the administrator UI that must be resolved to retry the job. |
 |--------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 
-> User provisioning currently must be configured via the Okta Admin UI and is only available with specific editions.
+> User provisioning currently must be configured via the administrator UI and is only available with specific editions.
 
 #### Application User Credentials Object
 
@@ -5121,7 +5121,7 @@ If you attempt to assign a username or password to an application with an incomp
 
 #### Application User Profile Object
 
-Application User profiles are app-specific but may be customized by the Profile Editor in the Okta Admin UI. SSO apps typically don't support a user profile while apps with [user provisioning features](#features) have an app-specific profiles with optional and/or required properties.  Any profile properties visible in the Okta Admin UI for an application assignment can also be assigned via the API. Some properties are reference properties and imported from the target application and only allow specific values to be configured.
+Application User profiles are app-specific but may be customized by the Profile Editor in the administrator UI. SSO apps typically don't support a user profile while apps with [user provisioning features](#features) have an app-specific profiles with optional and/or required properties.  Any profile properties visible in the administrator UI for an application assignment can also be assigned via the API. Some properties are reference properties and imported from the target application and only allow specific values to be configured.
 
 ##### Profile Editor
 

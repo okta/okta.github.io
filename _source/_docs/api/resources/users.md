@@ -74,7 +74,7 @@ Creating users with a `FEDERATION` or `SOCIAL` provider sets the user status to 
 Creates a user without a [password](#password-object) or [recovery question & answer](#recovery-question-object)
 
 When the user is activated, an email is sent to the user with an activation token that can be used to complete the activation process.
-This is the default flow for new user registration with the Okta Admin UI.
+This is the default flow for new user registration using the administrator UI.
 
 ##### Request Example
 {:.api .api-request .api-request-example}
@@ -495,7 +495,7 @@ curl -v -X POST \
 
 Creates a user that is immediately added to the specified groups upon creation
 
-Use this in conjunction with other create operations for a Group Admin that is scoped to only create users in specified groups.
+Use this in conjunction with other create operations for a Group Administrator that is scoped to only create users in specified groups.
 
 ##### Request Example
 {:.api .api-request .api-request-example}
@@ -3726,11 +3726,11 @@ Okta has a default ambiguous name resolution policy for logins.  Users can login
 For more information about `login`, see [Get User by ID](#get-user-with-id).
 
 ##### Modifying Default Profile Properties
-The only permitted customization of the default profile is changing whether the `firstName` and `lastName` properties are nullable.  You can use the Profile Editor in the Admin UI or the [Schemas API](schemas) to make schema modifications.
+The only permitted customization of the default profile is changing whether the `firstName` and `lastName` properties are nullable.  You can use the Profile Editor in the administrator UI or the [Schemas API](schemas) to make schema modifications.
 
 #### Custom Profile Properties
 
-User profiles may be extended with custom properties but the property must first be added to the user profile schema before it can be referenced.  You can use the Profile Editor in the Admin UI or the [Schemas API](schemas) to manage schema extensions.
+User profiles may be extended with custom properties but the property must first be added to the user profile schema before it can be referenced.  You can use the Profile Editor in the administrator UI or the [Schemas API](schemas) to manage schema extensions.
 
 Custom attributes may contain HTML tags. It is the client's responsibility to escape or encode this data before displaying it. Use [best-practices](https://www.owasp.org/index.php/XSS_(Cross_Site_Scripting)_Prevention_Cheat_Sheet) to prevent cross-site scripting.
 
@@ -3789,7 +3789,7 @@ The password specified in the value property must meet the default password poli
 - Must not contain the user's login or parts of the the login when split on the following characters: `,` `.` `_` `#` `@`
   - *For example, a user with login isaac.brock@example.com will not be able set password brockR0cks! as the password contains the login part brock*
 
-> Password policy requirements can be modified in the Okta Admin UI *(Security -> Policies)*
+> Password policy requirements can be modified in the administrator UI *(Security -> Policies)*
 
 ##### Hashed Password Object
 

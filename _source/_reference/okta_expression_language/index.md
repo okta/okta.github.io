@@ -2,7 +2,7 @@
 layout: docs_page
 weight: 5
 title: Okta Expression Language
-excerpt: Use Okta's Expression Language throughout the Okta Admin Console and API.
+excerpt: Use Okta's Expression Language throughout the administrator UI and API.
 redirect_from:
     - "/docs/getting_started/okta_expression_lang"
     - "/docs/api/getting_started/okta_expression_lang"
@@ -12,7 +12,7 @@ redirect_from:
 
 Expressions allow you to reference, transform and combine attributes before you store them on a user profile or before passing them to an application for authentication or provisioning.  For example, you might use a custom expression to create a username by stripping @company.com from an email address.  Or you might combine `firstName` and `lastName` attributes into a single `displayName` attribute.
 
-This document details the features and syntax of Okta's Expression Language which can be used throughout the Okta Admin Console and API. This document will be updated over time as new capabilities are added to the language.  Okta's expression language is based on [SpEL](http://docs.spring.io/spring/docs/3.0.x/reference/expressions.html) and uses a subset of functionalities offered by SpEL.
+This document details the features and syntax of Okta's Expression Language which can be used throughout the administrator UI and API. This document will be updated over time as new capabilities are added to the language.  Okta's expression language is based on [SpEL](http://docs.spring.io/spring/docs/3.0.x/reference/expressions.html) and uses a subset of functionalities offered by SpEL.
 
 ## Referencing User Attributes
 When you create an Okta expression, you can reference any attribute that lives on an Okta user profile or App user profile.
@@ -177,7 +177,7 @@ You can use this function anywhere to get a list of groups of which the current 
 
 To use these functions to create a token using a dynamic group whitelist, create a Groups claim on an app:
 
-1. In the Okta user interface, navigate to the Sign On tab of the client application you are configuring, and click  **Edit** in the Open ID Connect ID Token section.
+1. In the administrator UI, navigate to the Sign On tab of the client application you are configuring, and click  **Edit** in the Open ID Connect ID Token section.
 
 2. In **Groups claim type**, choose **Expression**.
 

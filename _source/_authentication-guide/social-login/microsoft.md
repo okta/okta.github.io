@@ -55,7 +55,7 @@ title: Microsoft
 
 ##### 4. Register an OpenID Connect Application in Okta
 
-4.1. Back on the Okta Developer Dashboard, click on **Applications**.
+4.1. Back on the Okta administrator UI, click on **Applications**.
 
 4.2. Click **Add Application**.
 

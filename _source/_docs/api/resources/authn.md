@@ -4714,7 +4714,7 @@ username    | User's non-qualified short-name (e.g. dade.murphy) or unique fully
 factorType  | Recovery factor to use for primary authentication                                                                 | Body       | `EMAIL` or `SMS` or `Voice Call`  | FALSE    |           |
 relayState  | Optional state value that is persisted for the lifetime of the recovery transaction                               | Body       | String                            | FALSE    |   2048    |
 
-> A valid `factorType` is required for requests without an API token with admin privileges. For more information, see [Forgot Password with Trusted Application](#forgot-password-with-trusted-application).
+> A valid `factorType` is required for requests without an API token with administrator privileges. For more information, see [Forgot Password with Trusted Application](#forgot-password-with-trusted-application).
 
 The response is different, depending on whether the request is for a public application or a trusted application.
 
@@ -5008,7 +5008,7 @@ username    | User's non-qualified short-name (dade.murphy) or unique fully-qual
 factorType  | Recovery factor to use for primary authentication                                                                | Body       | `EMAIL` or `SMS`                  | FALSE    |            |
 relayState  | Optional state value that is persisted for the lifetime of the recovery transaction                              | Body       | String                            | FALSE    |  2048      |
 
-> A valid `factoryType` is required for requests without an API token with admin privileges. (See [Unlock Account with Trusted Application](#unlock-account-with-trusted-application))
+> A valid `factoryType` is required for requests without an API token with administrator privileges. (See [Unlock Account with Trusted Application](#unlock-account-with-trusted-application))
 
 ##### Response Parameter Public Application for Unlock Account
 {:.api .api-response .api-response-params}
@@ -6235,7 +6235,7 @@ An authentication or recovery transaction has one of the following states:
 | `RECOVERY`            | The user has requested a recovery token to reset their password or unlock their account.                  | POST to the `next` link relation to [answer the user's recovery question](#answer-recovery-question).          |
 | `RECOVERY_CHALLENGE`  | The user must verify the factor-specific recovery challenge.                                              | POST to the `verify` link relation to [verify the recovery factor](#verify-recovery-factor).                         |
 | `PASSWORD_RESET`      | The user successfully answered their recovery question and must to set a new password.                    | POST to the `next` link relation to [reset the user's password](#reset-password).                              |
-| `LOCKED_OUT`          | The user account is locked; self-service unlock or admin unlock is required.                              | POST to the `unlock` link relation to perform a [self-service unlock](#unlock-account).                              |
+| `LOCKED_OUT`          | The user account is locked; self-service unlock or administrator unlock is required.                              | POST to the `unlock` link relation to perform a [self-service unlock](#unlock-account).                              |
 | `MFA_ENROLL`          | The user must select and enroll an available factor for additional verification.                          | POST to the `enroll` link relation for a specific factor to [enroll the factor](#enroll-factor).                     |
 | `MFA_ENROLL_ACTIVATE` | The user must activate the factor to complete enrollment.                                                 | POST to the `next` link relation to [activate the factor](#activate-factor).                                         |
 | `MFA_REQUIRED`        | The user must provide additional verification with a previously enrolled factor.                          | POST to the `verify` link relation for a specific factor to [provide additional verification](#verify-factor).       |
@@ -6564,7 +6564,7 @@ A subset of [factor properties](factors#factor-model) published in an authentica
 | id             | unique key for factor                                                                    | String                                                         | TRUE     | TRUE   | TRUE     |
 | factorType     | type of factor                                                                           | [Factor Type](factors#factor-type)                        | FALSE    | TRUE   | TRUE     |
 | provider       | factor provider                                                                          | [Provider Type](factors#provider-type)                    | FALSE    | TRUE   | TRUE     |
-| vendorName     | factor Vendor Name (Same as provider but for On Prem MFA it depends on Admin Settings)   | [Provider Type](factors#provider-type)                    | FALSE    | TRUE   | TRUE     |
+| vendorName     | factor Vendor Name (Same as provider but for On Prem MFA it depends on Administrator Settings)   | [Provider Type](factors#provider-type)                    | FALSE    | TRUE   | TRUE     |
 | profile        | profile of a [supported factor](factors#supported-factors-for-providers)            | [Factor Profile Object](factors#factor-profile-object)    | TRUE     | FALSE  | TRUE     |
 | _embedded      | [embedded resources](#factor-embedded-resources) related to the factor                   | [JSON HAL](http://tools.ietf.org/html/draft-kelly-json-hal-06) | TRUE     | FALSE  | TRUE     |
 | _links         | [discoverable resources](#factor-links-object) for the factor                            | [JSON HAL](http://tools.ietf.org/html/draft-kelly-json-hal-06) | TRUE     | FALSE  | TRUE     |

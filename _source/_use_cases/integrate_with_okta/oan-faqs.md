@@ -87,15 +87,15 @@ A: Yes. For more information, see [Using the App Integration Wizard: SAML App Wi
 
 <br/>
 
-**Q: Is the IDP session time out a setting that an Okta admin can change? And if so, can it be changed on a per application basis, or is it a global setting for all of the user’s applications?**
+**Q: Is the IDP session time out a setting that an Okta administrator can change? And if so, can it be changed on a per application basis, or is it a global setting for all of the user’s applications?**
 
 A: Yes, the session time out default is 2 hours but can be customized by the hour or minute by the Okta administrator. This session time out is an IDP setting – and therefore, it is global and applies to all applications.
 
 <br/>
 
-**Q: My app is now in the OIN, what is the user experience for a joint customer admin that wants to set up single sign-on and provisioning for my app in the Okta interface?**
+**Q: My app is now in the OIN, what is the user experience for a joint customer administrator that wants to set up single sign-on and provisioning for my app in the Okta interface?**
 
-A: Okta creates unique SAML configuration documentation for each application in the OIN so each will be different but for a sample, see our instructions for [How to Configure SAML 2.0 in Salesforce.com](http://saml-doc.okta.com/SAML_Docs/How-to-Configure-SAML-2.0-in-Salesforce.html) as an example. See the [Setting up Salesforce in Okta](https://support.okta.com/help/articles/Knowledge_Article/Setting-Up-Salesforce-in-Okta) video for a step-by-step walk through of all the steps an IT admin would take to configure single sign-on and provisioning for an app.
+A: Okta creates unique SAML configuration documentation for each application in the OIN so each will be different but for a sample, see our instructions for [How to Configure SAML 2.0 in Salesforce.com](http://saml-doc.okta.com/SAML_Docs/How-to-Configure-SAML-2.0-in-Salesforce.html) as an example. See the [Setting up Salesforce in Okta](https://support.okta.com/help/articles/Knowledge_Article/Setting-Up-Salesforce-in-Okta) video for a step-by-step walk through of all the steps an IT administrator would take to configure single sign-on and provisioning for an app.
 
 Also, if you haven’t already done so, sign up for an Okta [developer account](https://developer.okta.com/signup/) and you can test drive the Okta user experience yourself.
 

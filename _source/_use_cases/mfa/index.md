@@ -61,7 +61,7 @@ in an idiomatic way.
 ### Setting up your Okta org for MFA
 
 Before you can start writing code, you'll need to make do a few
-things in the Admin interface to your Okta org.
+things in the administrator UI to your Okta org.
 
 1.  Enable support for MFA.
 2.  [Create an API token](/docs/api/getting_started/getting_a_token).
@@ -74,7 +74,7 @@ Okta API. Here is how to enable MFA for
 your Okta org:
 
 1.  Log in to your Okta org as a user with administration.
-2.  Click the "Admin" button to get into the Admin interface.
+2.  Click the "Admin" button to get into the administrator interface.
 3.  Open the "Security" menu.
 4.  Select "Authentication" from the menu.
 5.  Click on "Multifactor".

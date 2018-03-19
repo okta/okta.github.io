@@ -27,7 +27,7 @@ If you only need one Authorization Server, but you'd like to know more about cus
 
 > NOTE: If you have an [Okta Developer Edition](https://developer.okta.com/signup/) account, you can skip this step because you already have a custom Authorization Server created for you, called "default". The `{authServerId}` for the default server is `default`.
 
-1. In the Okta Developer Dashboard, navigate to **API > Authorization Servers**.
+1. In the administration UI, navigate to **API > Authorization Servers**.
 {% img okta-admin-auth-server-toolbar-dev alt:"Authorization Server" %}
 
 2. Choose **Add Authorization Server** and supply the requested information.
@@ -46,7 +46,7 @@ Once the Authorization Server is created you can also edit the Signing Key Rotat
 
 Access policies are containers for rules. Each access policy applies to a particular OpenID Connect application, and the rules it contains define different access and refresh token lifetimes depending on the nature of the token request.
 
-1. In the Okta Developer Dashboard, navigate to **API > Authorization Servers**.
+1. In the administration UI, navigate to **API > Authorization Servers**.
 2. Choose the name of an Authorization Server.
 3. Choose **Access Policies > Add Policy**
     {% img access_policy1.png alt:"Add Access Policy" width:"640px" %}
@@ -68,7 +68,7 @@ The first policy and rule that matches the client request is applied and no furt
 
 Rules define particular token lifetimes for a given combination of grant type, user, and scope. They are evaluated in priority order, and once a matching rule is found no other rules are evaluated. If no matching rule is found, then the authorization request fails.
 
-1. In the Okta Developer Dashboard, navigate to **API > Authorization Servers**.
+1. In the administration UI, navigate to **API > Authorization Servers**.
 2. Choose the name of an authorization server, and select **Access Policies**.
 3. Choose the name of an access policy, and select **Add Rule**.
     {% img rule1.png alt:"Add Rule" width:"640px" %}
@@ -91,7 +91,7 @@ While in the Rules list for an access policy, you can:
 
 ### Rule Usage
 
-Access policy rules are whitelists. If you want to create granular rules, you must first ensure that you have no rules that match "any" of something (for example "Any user"). You can then create specific rules for each specific use case that you do want to support. For example, if you wanted to ensure that only Admin users using the implicit flow were granted access, then you would create a rule specifying that if:
+Access policy rules are whitelists. If you want to create granular rules, you must first ensure that you have no rules that match "any" of something (for example "Any user"). You can then create specific rules for each specific use case that you do want to support. For example, if you wanted to ensure that only administrators using the implicit flow were granted access, then you would create a rule specifying that if:
 
 - a request is made using the `implicit` grant type, and
 - the user is a member of the `admin` group, and
@@ -114,7 +114,7 @@ Scopes specify what access privileges are being requested as part of the authori
 
 If you need scopes in addition to the reserved scopes provided, you can create them. Custom scopes can have corresponding claims that tie them to some sort of user information.
 
-1. In the Okta Developer Dashboard, navigate to **API > Authorization Servers**.
+1. In the administrator UI, navigate to **API > Authorization Servers**.
 2. Choose the name of the Authorization Server to display, and then select **Scopes**.
 {% img scope1.png alt:"Add Scopes" width:"800px" %}
 
@@ -131,7 +131,7 @@ Tokens contain claims that are statements about the subject, for example name, r
 
 Create ID Token claims for OpenID Connect, or access tokens for OAuth 2.0:
 
-1. In the Okta Developer Dashboard, navigate to **API > Authorization Servers**.
+1. In the administrator UI, navigate to **API > Authorization Servers**.
 2. Choose the name of the Authorization Server to display, and choose **Claims**.
 {% img claims1.png alt:"Choose Claims" width:"800px" %}
  Okta provides a default subject claim. You can edit the mapping, or create your own claims.

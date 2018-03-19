@@ -95,7 +95,7 @@ Documentation for features that have been deprecated are marked with the Depreca
 Some changes may not go through the full Beta-EA-GA lifecycle:
 
 *  Bug fixes that change only the incorrect behavior of the bug.
-* Cosmetic changes, such as changing the label of a field in the Okta User Interface.
+* Cosmetic changes, such as changing the label of a field in the administrator UI.
 * Changes that are narrow in scope or effect, or purely additive, such as adding a new attribute.
 
 Changes like these may be released to preview orgs any week of the month, and appear in production the next week.
@@ -104,6 +104,6 @@ Other exceptions include:
 
 * Occasionally, a feature is released using an iterative, custom schedule to enable close monitoring.
 Such features may spend more than one month between preview and production for their GA release.
-* Features exposed in the Okta user interface may be EA or GA without the corresponding API being in the same stage of the lifecycle, or available at all.
+* Features exposed in the administrator UI may be EA or GA without the corresponding API being in the same stage of the lifecycle, or available at all.
 
 As with all changes that affect our customers, changes outside the regular Beta-EA-GA lifecycle are reported in the [Okta API Release Notes](/docs/change-log/).

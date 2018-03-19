@@ -1,13 +1,13 @@
 ---
 layout: docs_page
-title: Admin Roles
+title: Administrator Roles
 ---
 
-# Admin Roles API
+# Administrator Roles API
 
-The Okta Admin Roles API provides operations to manage administrative role assignments for a user.
+The Okta Administrator Roles API provides operations to manage administrative role assignments for a user.
 
-## Getting Started with Admin Roles
+## Getting Started with Administrator Roles
 
 Explore the Administrator Roles API:  [![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/04f5ec85685ac6f2827e)
 
@@ -156,9 +156,9 @@ HTTP/1.1 204 No Content
 
 ## Role Target Operations
 
-### Group Admin Role Group Targets
+### Group Administrator Role Group Targets
 
-#### List Group Targets for Group Admin Role
+#### List Group Targets for Group Administrator Role
 {:.api .api-operation}
 
 {% api_operation get /api/v1/users/${userId}/roles/${roleId}/targets/groups %}
@@ -233,7 +233,7 @@ curl -v -X GET \
 ] 
 ~~~
 
-#### Add Group Target to Group Admin Role
+#### Add Group Target to Group Administrator Role
 {:.api .api-operation}
 
 {% api_operation put /api/v1/users/${userId}/roles/${roleId}/targets/groups/${groupId} %}
@@ -276,7 +276,7 @@ curl -v -X PUT \
 HTTP/1.1 204 No Content
 ~~~
 
-#### Remove Group Target from Group Admin Role
+#### Remove Group Target from Group Administrator Role
 {:.api .api-operation}
 
 {% api_operation delete /api/v1/users/${userId}/roles/${roleId}/targets/groups/${groupId} %}
@@ -319,9 +319,9 @@ curl -v -X DELETE \
 HTTP/1.1 204 No Content
 ~~~
 
-### App Admin Role App Targets
+### App Administrator Role App Targets
 
-#### List App Targets for App Admin Role
+#### List App Targets for App Administrator Role
 {:.api .api-operation}
 
 {% api_operation get /api/v1/users/${userId}/roles/${roleId}/targets/catalog/apps %}
@@ -430,7 +430,7 @@ curl -v -X GET \
 ]
 ~~~
 
-#### Add App Target to App Admin Role
+#### Add App Target to App Administrator Role
 {:.api .api-operation}
 
 {% api_operation put /api/v1/users/${userId}/roles/${roleId}/targets/catalog/apps/${appName} %}
@@ -473,7 +473,7 @@ curl -v -X PUT \
 HTTP/1.1 204 No Content
 ~~~
 
-#### Remove App Target from App Admin Role
+#### Remove App Target from App Administrator Role
 {:.api .api-operation}
 
 {% api_operation delete /api/v1/users/${userId}/roles/${roleId}/targets/catalog/apps/${appName} %}
