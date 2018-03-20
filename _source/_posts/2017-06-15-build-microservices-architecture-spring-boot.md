@@ -184,7 +184,6 @@ assumes you’re putting all classes in the same file.
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@ToString
 @Entity
 class Beer {
 
