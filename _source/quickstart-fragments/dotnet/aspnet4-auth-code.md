@@ -5,7 +5,7 @@ exampleDescription: ASP.NET 4.x MVC authorization code example
 
 ## Okta ASP.NET 4.x MVC Quickstart
 
-If you want a full, working example, head over to the [ASP.NET MVC example](https://github.com/oktadeveloper/okta-aspnet-mvc-example) repository.
+If you want a full, working example, head over to the [ASP.NET MVC example](https://github.com/oktadeveloper/okta-aspnet-mvc-example) repository and follow the instructions in that readme.
 
 ### Create a new project
 
@@ -13,10 +13,10 @@ If you don't already have an ASP.NET project, create one using the ASP.NET Web A
 
 Install these packages in the new project:
 
-* [Microsoft.Owin.Host.SystemWeb](https://www.nuget.org/packages/Microsoft.Owin.Host.SystemWeb) 3.1.0 or higher
-* [Microsoft.Owin.Security.Cookies](https://www.nuget.org/packages/Microsoft.Owin.Security.Cookies) 3.1.0 or higher
-* [Microsoft.Owin.Security.OpenIdConnect](https://www.nuget.org/packages/Microsoft.Owin.Security.OpenIdConnect) 3.1.0 or higher
-* [IdentityModel](https://www.nuget.org/packages/IdentityModel) 2.16.1 or higher
+* [Microsoft.Owin.Host.SystemWeb](https://www.nuget.org/packages/Microsoft.Owin.Host.SystemWeb) 4.0.0 or higher
+* [Microsoft.Owin.Security.Cookies](https://www.nuget.org/packages/Microsoft.Owin.Security.Cookies) 4.0.0 or higher
+* [Microsoft.Owin.Security.OpenIdConnect](https://www.nuget.org/packages/Microsoft.Owin.Security.OpenIdConnect) 4.0.0 or higher
+* [IdentityModel](https://www.nuget.org/packages/IdentityModel) 3.3.1 or higher
 
 
 ### Add a Startup class
@@ -28,89 +28,84 @@ Paste this code into the new class:
 ```csharp
 public class Startup
 {
-    public void Configuration(IAppBuilder app)
-    {
-        ConfigureAuth(app);
-    }
+    // These values are stored in Web.config. Make sure you update them!
+    private readonly string clientId = ConfigurationManager.AppSettings["okta:ClientId"];
+    private readonly string redirectUri = ConfigurationManager.AppSettings["okta:RedirectUri"];
+    private readonly string authority = ConfigurationManager.AppSettings["okta:OrgUri"];
+    private readonly string clientSecret = ConfigurationManager.AppSettings["okta:ClientSecret"];
+    private readonly string postLogoutRedirectUri = ConfigurationManager.AppSettings["okta:PostLogoutRedirectUri"];
 
-    private void ConfigureAuth(IAppBuilder app)
+    /// <summary>
+    /// Configure OWIN to use OpenID Connect to log in with Okta.
+    /// </summary>
+    /// <param name="app"></param>
+    public void Configuration(IAppBuilder app)
     {
         app.SetDefaultSignInAsAuthenticationType(CookieAuthenticationDefaults.AuthenticationType);
 
-        app.UseCookieAuthentication(new CookieAuthenticationOptions
-        {
-            AuthenticationType = CookieAuthenticationDefaults.AuthenticationType,
-        });
-
-        var clientId = ConfigurationManager.AppSettings["okta:ClientId"].ToString();
-        var clientSecret = ConfigurationManager.AppSettings["okta:ClientSecret"].ToString();
-        var issuer = ConfigurationManager.AppSettings["okta:Issuer"].ToString();
-        var redirectUri = ConfigurationManager.AppSettings["okta:RedirectUri"].ToString();
+        app.UseCookieAuthentication(new CookieAuthenticationOptions());
 
         app.UseOpenIdConnectAuthentication(new OpenIdConnectAuthenticationOptions
         {
             ClientId = clientId,
             ClientSecret = clientSecret,
-            Authority = issuer,
+            Authority = authority,
             RedirectUri = redirectUri,
-            ResponseType = "code id_token",
-            UseTokenLifetime = false,
-            Scope = "openid profile",
-            PostLogoutRedirectUri = ConfigurationManager.AppSettings["okta:PostLogoutRedirectUri"].ToString(),
+            ResponseType = OpenIdConnectResponseType.CodeIdToken,
+            Scope = OpenIdConnectScope.OpenIdProfile,
+            PostLogoutRedirectUri = postLogoutRedirectUri,
             TokenValidationParameters = new TokenValidationParameters
             {
                 NameClaimType = "name"
             },
+
             Notifications = new OpenIdConnectAuthenticationNotifications
             {
-                RedirectToIdentityProvider = context =>
-                {
-                    if (context.ProtocolMessage.RequestType == OpenIdConnectRequestType.LogoutRequest)
-                    {
-                        var idToken = context.OwinContext.Authentication.User.Claims
-                            .FirstOrDefault(c => c.Type == "id_token")?.Value;
-                        context.ProtocolMessage.IdTokenHint = idToken;
-                    }
-
-                    return Task.FromResult(true);
-                },
-                AuthorizationCodeReceived = async context =>
+                AuthorizationCodeReceived = async n => 
                 {
                     // Exchange code for access and ID tokens
-                    var tokenClient = new TokenClient(
-                        issuer + "/v1/token", clientId, clientSecret);
-                    var tokenResponse = await tokenClient.RequestAuthorizationCodeAsync(
-                        context.ProtocolMessage.Code, redirectUri);
+                    var tokenClient = new TokenClient(authority + "/v1/token", clientId, clientSecret);
+                    var tokenResponse = await tokenClient.RequestAuthorizationCodeAsync(n.Code, redirectUri);
 
                     if (tokenResponse.IsError)
                     {
                         throw new Exception(tokenResponse.Error);
                     }
-                    
-                    var userInfoClient = new UserInfoClient(issuer + "/v1/userinfo");
+
+                    var userInfoClient = new UserInfoClient(authority + "/v1/userinfo");
                     var userInfoResponse = await userInfoClient.GetAsync(tokenResponse.AccessToken);
+                    var claims = new List<Claim>();
+                    claims.AddRange(userInfoResponse.Claims);
+                    claims.Add(new Claim("id_token", tokenResponse.IdentityToken));
+                    claims.Add(new Claim("access_token", tokenResponse.AccessToken));
 
-                    var identity = new ClaimsIdentity();
-                    identity.AddClaims(userInfoResponse.Claims);
-
-                    identity.AddClaim(new Claim("id_token", tokenResponse.IdentityToken));
-                    identity.AddClaim(new Claim("access_token", tokenResponse.AccessToken));
                     if (!string.IsNullOrEmpty(tokenResponse.RefreshToken))
                     {
-                        identity.AddClaim(new Claim("refresh_token", tokenResponse.RefreshToken));
+                        claims.Add(new Claim("refresh_token", tokenResponse.RefreshToken));
                     }
 
-                    var nameClaim = new Claim(
-                        ClaimTypes.Name,
-                        userInfoResponse.Claims.FirstOrDefault(c => c.Type == "name")?.Value);
-                    identity.AddClaim(nameClaim);
+                    n.AuthenticationTicket.Identity.AddClaims(claims);
 
+                    return;
+                },
 
-                    context.AuthenticationTicket = new AuthenticationTicket(
-                        new ClaimsIdentity(identity.Claims, context.AuthenticationTicket.Identity.AuthenticationType),
-                        context.AuthenticationTicket.Properties);
+                RedirectToIdentityProvider = n =>
+                {
+                    // If signing out, add the id_token_hint
+                    if (n.ProtocolMessage.RequestType == OpenIdConnectRequestType.Logout)
+                    {
+                        var idTokenClaim = n.OwinContext.Authentication.User.FindFirst("id_token");
+
+                        if (idTokenClaim != null)
+                        {
+                            n.ProtocolMessage.IdTokenHint = idTokenClaim.Value;
+                        }
+
+                    }
+
+                    return Task.CompletedTask;
                 }
-            }
+            },
         });
     }
 }
@@ -119,19 +114,19 @@ public class Startup
 Add these using statements at the top of the file:
 
 ```csharp
-using System;
-using System.Configuration;
-using System.IdentityModel.Tokens;
-using System.Linq;
-using System.Security.Claims;
-using System.Threading.Tasks;
-using IdentityModel.Client;
-using Microsoft.IdentityModel.Protocols;
 using Microsoft.Owin;
+using Owin;
 using Microsoft.Owin.Security;
 using Microsoft.Owin.Security.Cookies;
 using Microsoft.Owin.Security.OpenIdConnect;
-using Owin;
+using System.Threading.Tasks;
+using Microsoft.IdentityModel.Protocols.OpenIdConnect;
+using System.Configuration;
+using System.Security.Claims;
+using IdentityModel.Client;
+using System;
+using System.Collections.Generic;
+using Microsoft.IdentityModel.Tokens;
 ```
 
 ### Configure the application in Okta
@@ -140,12 +135,12 @@ If you haven't already, sign in to your Okta developer account (or [create one](
 
 * **Application type**: Web
 * **Allowed grant types**: Authorization Code, Implicit (Hybrid) - Allow ID Token
-* **Login redirect URI**: `http://localhost:59896/authorization-code/callback`
-* **Logout redirect URI**: `http://localhost:59896/Account/PostLogout`
+* **Login redirect URI**: `http://localhost:8080/authorization-code/callback`
+* **Logout redirect URI**: `http://localhost:8080/Account/PostLogout`
 
 If you are creating an Okta application from scratch, click **Done** to see the full settings page and make sure the settings match the values above.
 
-**Note**: The local port may be different on your machine. You can find the assigned port by running the application, or right-clicking on the project and choosing **Properties**, then **Web**. If it's different than 59896, update the URIs in Okta and in `Web.config` below.
+**Note**: The local port may be different on your machine. You can find the assigned port by running the application, or right-clicking on the project and choosing **Properties**, then **Web**. If it's different than 8080, update the URIs in Okta and in `Web.config` below.
 
 ### Configure the project
 
@@ -155,11 +150,11 @@ Open the `Web.config` file and add these keys to the `<appSettings>` section:
 <!-- 1. Replace these values with your Okta configuration -->
 <add key="okta:ClientId" value="{clientId}" />
 <add key="okta:ClientSecret" value="{clientSecret}" />
-<add key="okta:Issuer" value="https://{yourOktaDomain}.com/oauth2/default" />
+<add key="okta:OrgUri" value="https://{yourOktaDomain}.com/oauth2/default" />
 
 <!-- 2. Update the Okta application with these values -->
-<add key="okta:RedirectUri" value="http://localhost:59896/authorization-code/callback" />
-<add key="okta:PostLogoutRedirectUri" value="http://localhost:59896/Account/PostLogout" />
+<add key="okta:RedirectUri" value="http://localhost:8080/authorization-code/callback" />
+<add key="okta:PostLogoutRedirectUri" value="http://localhost:8080/Account/PostLogout" />
 ```
 
 Copy the client ID and client secret from your Okta application into the appropriate keys in `Web.config`, and replace `{yourOktaDomain}` with your Okta domain name. You can find your Okta domain name in the top-right corner of the Dashboard page.
