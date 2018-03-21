@@ -10,9 +10,9 @@ tweets:
 - “Create a secure Dropwizard application with Okta and OAuth 2.0”
 ---
 
-Dropwizard is recognized as the pioneer in turn-key Java web server frameworks, and rivals Spring Boot for ease of adoption. Whether you're interested in trying it out for the first time, or already have a mature platform built on top of Dropwizard, you can add secure authentication to your site in a matter of minutes. By combining Dropwizard's production-ready essential libraries and Okta's identity platform, you can construct a fully secured internet-facing web service with little effort. Read on to see how!
+Dropwizard is recognized as the pioneer in turn-key Java API frameworks, and rivals Spring Boot for ease of adoption. Whether you're interested in trying it out for the first time, or already have a mature platform built on top of Dropwizard, you can add secure authentication to your site in a matter of minutes. By combining Dropwizard's production-ready essential libraries and Okta's identity platform, you can construct a fully secured internet-facing web service with little effort. Read on to see how!
 
-This tutorial assumes familiarity with Java, Maven, and basic web service and web security concepts. The first section sets up a new Dropwizard server from scratch, so if you already have one up and running, feel free to skip ahead and integrate With Okta]. You can also find the completed code example on [Github](https://github.com/oktadeveloper/okta-dropwizard-oauth-example).
+This tutorial assumes familiarity with Java, Maven, and basic web service and web security concepts. The first section sets up a new Dropwizard server from scratch, so if you already have one up and running, feel free to skip ahead and integrate With Okta]. You can also find the completed code example on [GithHub](https://github.com/oktadeveloper/okta-dropwizard-oauth-example).
 
 ## Dropwizard vs. Spring Boot
 
@@ -55,11 +55,11 @@ public class HomePageResource {
 Now back in `com.example.DemoApplication`, register this new resource with Jersey in the provided `run()` method:
 
 ```java
-    @Override
-    public void run(final DemoConfiguration configuration,
-                    final Environment environment) {
-        environment.jersey().register(new HomePageResource());
-    }
+@Override
+public void run(final DemoConfiguration configuration,
+                final Environment environment) {
+    environment.jersey().register(new HomePageResource());
+}
 ```
 
 With that, it's time to give the server a quick run and make sure all is working as expected. The following two commands will build and start the server on its default port of 8080:
@@ -81,7 +81,7 @@ Since one of Dropwizard’s goals is to make it easy to create RESTful applicati
 
 ### Create an Okta Account and Gather Credentials
 
-If you don't already have a free Okta account, you can follow [these instructions](https://developer.okta.com/blog/2017/10/27/secure-spa-spring-boot-oauth#get-your-oauth-info-ready) to create one and set up your first Okta application. There are four important values you will want to take note of:
+If you don't already have a free Okta account, you can follow [these instructions](/blog/2017/10/27/secure-spa-spring-boot-oauth#get-your-oauth-info-ready) to create one and set up your first Okta application. There are four important values you will want to take note of:
 
   - Client ID - e.g.: ***oot9wrjjararhfaa***
   - Client secret - e.g.: ***(Your Client Secret)***
@@ -117,7 +117,7 @@ Now add our new model to the `com.example.DemoConfiguration` class..
 
 ```java
 public class DemoConfiguration extends Configuration {
-   public OktaOAuthConfig oktaOAuth = new OktaOAuthConfig();
+    public OktaOAuthConfig oktaOAuth = new OktaOAuthConfig();
 }
 ```
 
@@ -125,7 +125,7 @@ Now these config values can be easily retrieved in the `DemoApplication` class v
 
 ### Handle the OAuth 2.0 Access Token 
 
-As I mentioned above Dropwizard’s OAuth support still requires you to handle the access token yourself. No worries though, we can do that in a few lines of code with the Okta JWT Verifier.
+As I mentioned above Dropwizard’s OAuth support still requires you to handle the access token yourself. No worries though, you can do that in a few lines of code with the Okta JWT Verifier.
 
 First up, add the `dropwizard-auth` and `okta-jwt-verifier` dependencies to your `pom.xml`:
 
@@ -198,33 +198,33 @@ That is it, basically two lines of code, one to validate the token another to re
 The last step is to wire this all up in our application class, edit `DemoApplication` and create a new method `configureOAuth()`: 
 
 ```java
-    private void configureOAuth(final DemoConfiguration configuration, final Environment environment) {
-        try {
-            OktaOAuthConfig widgetConfig = configuration.oktaOAuth;
-            // Configure the JWT Validator, it will validate Okta's JWT access tokens
-            JwtHelper helper = new JwtHelper()
-                    .setIssuerUrl(widgetConfig.issuer)
-                    .setClientId(widgetConfig.clientId);
+private void configureOAuth(final DemoConfiguration configuration, final Environment environment) {
+    try {
+        OktaOAuthConfig widgetConfig = configuration.oktaOAuth;
+        // Configure the JWT Validator, it will validate Okta's JWT access tokens
+        JwtHelper helper = new JwtHelper()
+                .setIssuerUrl(widgetConfig.issuer)
+                .setClientId(widgetConfig.clientId);
 
-            // set the audience only if set, otherwise the default is: api://default
-            String audience = widgetConfig.audience;
-            if (StringUtils.isNotEmpty(audience)) {
-                helper.setAudience(audience);
-            }
-
-            // register the OktaOAuthAuthenticator
-            environment.jersey().register(new AuthDynamicFeature(
-                new OAuthCredentialAuthFilter.Builder<AccessTokenPrincipal>()
-                    .setAuthenticator(new OktaOAuthAuthenticator(helper.build()))
-                    .setPrefix("Bearer")
-                    .buildAuthFilter()));
-
-            // Bind our custom principal to the @Auth annotation
-            environment.jersey().register(new AuthValueFactoryProvider.Binder<>(AccessTokenPrincipal.class));
-        } catch (Exception e) {
-            throw new IllegalStateException("Failed to configure JwtVerifier", e);
+        // set the audience only if set, otherwise the default is: api://default
+        String audience = widgetConfig.audience;
+        if (StringUtils.isNotEmpty(audience)) {
+            helper.setAudience(audience);
         }
+
+        // register the OktaOAuthAuthenticator
+        environment.jersey().register(new AuthDynamicFeature(
+            new OAuthCredentialAuthFilter.Builder<AccessTokenPrincipal>()
+                .setAuthenticator(new OktaOAuthAuthenticator(helper.build()))
+                .setPrefix("Bearer")
+                .buildAuthFilter()));
+
+        // Bind our custom principal to the @Auth annotation
+        environment.jersey().register(new AuthValueFactoryProvider.Binder<>(AccessTokenPrincipal.class));
+    } catch (Exception e) {
+        throw new IllegalStateException("Failed to configure JwtVerifier", e);
     }
+}
 ```
 
 This method does a couple things: creates a `JwtVerifier` based on the properties in our configuration file, registers the new `OktaOAuthAuthenticator` class, and finally binds the `@Auth` annotation to our new `AccessTokenPrincipal` class.
@@ -233,15 +233,15 @@ Don’t forget to update the `run()` method with a call to our new `configureOAu
 
 ```java
 @Override
-    public void run(final DemoConfiguration configuration,
-                    final Environment environment) {
+public void run(final DemoConfiguration configuration,
+                final Environment environment) {
 
-        // configure OAuth
-        configureOAuth(configuration, environment);
+    // configure OAuth
+    configureOAuth(configuration, environment);
 
-        // add resources
-        environment.jersey().register(new HomePageResource());
-    }
+    // add resources
+    environment.jersey().register(new HomePageResource());
+}
 ```
 
 Finally, update the `HomePageResource` to require authentication and add bit more personalization using the `@Auth` annotation.
@@ -257,7 +257,7 @@ public class HomePageResource {
 }
 ```
 
-You could restart the server and start handling requests!  But… you of course need to get an access token from some place. If you were handling class from another OAuth capable application you could stop here. However, since this is an example I’m going to add simple login page using Okta Sign-In Widget.
+You could restart the server and start handling requests!  But... you of course need to get an access token from some place. If you were handling class from another OAuth capable application you could stop here. However, since this is an example I’m going to add simple login page using the Okta Sign-In Widget.
 
 ### Add the Okta Sign-In Widget
 
@@ -287,7 +287,7 @@ public class LoginWidgetConfigResource {
 
 Pretty simple, it’s just a getter with a `@GET` annotation!
 
-Back in our `DemoApplication` class we need to register the new resource in the `run` method:
+Back in our `DemoApplication` class you need to register the new resource in the `run` method:
 
 ```java
 environment.jersey().register(new LoginWidgetConfigResource(configuration.oktaOAuth));
@@ -315,7 +315,7 @@ public void initialize(final Bootstrap<DemoConfiguration> bootstrap) {
 
 This configures the application to serve all of the files in `src/main/resources/assets` at the root (`/`) of your application.  It also defines `index.html` as the default welcome file.
 
-This creates a small issue.  If if you restart your application now it would throw an exception.  Both our static assets and our resources are being service from the root context.  The easy fix is to serve our API resources at `/api/*` with a single line in our application’s `run` method, the whole method should now look like:
+This creates a small issue.  If you restart your application now it would throw an exception.  Both our static assets and our resources are being service from the root context.  The easy fix is to serve your API resources at `/api/*` with a single line in your application’s `run` method, the whole method should now look like:
 
 ```java
 @Override
@@ -334,7 +334,7 @@ public void run(final DemoConfiguration configuration,
 }
 ```
 
-The only thing left to do create a login page.  I’m actually going to create a simple SPA app with a single index.html file.  This page will load the widget configuration from `/api/signInConfig`, prompt the user to login, and then display the results from a call to `/api/message`.  I’m not going to dig into the contents of the HTML, if you are interested you should be able to follow the comments.
+The only thing left to do create a login page.  I’m actually going to create a simple SPA app with a single `index.html` file.  This page will load the widget configuration from `/api/signInConfig`, prompt the user to login, and then display the results from a call to `/api/message`.  I’m not going to dig into the contents of the HTML, if you are interested you should be able to follow the comments.
 
 ```html
 <!doctype html>
@@ -478,13 +478,15 @@ The only thing left to do create a login page.  I’m actually going to create a
 </html>
 ```
 
-Whew! You've emerged from the jungle of hand-rolled OIDC clients, and now have authorization  in your Dropwizard server! There were quite a few code examples above, so if you need to verify anything you built along the way, you can always access the [complete source for this project](https://github.com/oktadeveloper/okta-dropwizard-oauth-example) on Github.
+Whew! You've emerged from the jungle of hand-rolled OIDC clients, and now have authorization in your Dropwizard server! There were quite a few code examples above, so if you need to verify anything you built along the way, you can always access the [complete source for this project](https://github.com/oktadeveloper/okta-dropwizard-oauth-example) on GithHub.
 
 Ok... time to see it in action! You can once again build the project with: 
 
-`mvn clean package`
+```bash
+mvn clean package
+```
 
-...but this time, you'll also need to specify the location of the **config.yml** as a command line argument when starting the server. It needs to include the path relative to the current working directory:
+...but this time, you'll also need to specify the location of the `config.yml` as a command line argument when starting the server. It needs to include the path relative to the current working directory:
 
 ```bash
 java -jar target/demo-1.0-SNAPSHOT.jar server config.yml
@@ -515,7 +517,7 @@ Dropwizard makes it really easy to add existing health checks or create your own
 
 In this post I’ve created a self contained Dropwizard application with a couple JAX-RS resources and a simple HTML page. Take a look at Dropwizard’s getting started guide or these resources for more info.
 
-- [Dropwizard](http://www.dropwizard.io/)
+- [Dropwizard Homepage](http://www.dropwizard.io/)
 - [Let’s Compare: JAX-RS vs Spring for REST Endpoints](/blog/2017/08/09/jax-rs-vs-spring-rest-endpoints)
 - [What the Heck is OAuth?](/blog/2017/06/21/what-the-heck-is-oauth)
 
