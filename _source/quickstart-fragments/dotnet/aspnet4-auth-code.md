@@ -65,7 +65,7 @@ public class Startup
             {
                 RedirectToIdentityProvider = context =>
                 {
-                    if (context.ProtocolMessage.RequestType == OpenIdConnectRequestType.LogoutRequest)
+                    if (context.ProtocolMessage.RequestType == OpenIdConnectRequestType.Logout)
                     {
                         var idToken = context.OwinContext.Authentication.User.Claims
                             .FirstOrDefault(c => c.Type == "id_token")?.Value;
