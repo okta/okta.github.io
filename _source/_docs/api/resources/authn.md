@@ -3460,23 +3460,28 @@ Activation gets the registration information from the U2F token using the API an
 <!-- Get the u2f-api.js from https://github.com/google/u2f-ref-code/tree/master/u2f-gae-demo/war/js -->
 <script src="/u2f-api.js"></script>
 <script>
-//use the appId from the activation object
-var appId = activation.appId;
-var registerRequests = [{
-    version: activation.version, //use the version from the activation object
-    challenge: activation.nonce //use the nonce from the activation object
-    }];
-u2f.register(appId, registerRequests, [], function (data) {
-  if (data.errorCode && data.errorCode !== 0) {
-    //Error from U2F platform
-  } else {
-	  //Get the registrationData from the callback result
-	  var registrationData = data.registrationData;
+  // Use the appId from the activation object
+  var appId = activation.appId;
 
-	  //Get the clientData from the callback result
-	  var clientData = data.clientData;
-  }
-});
+  // Use the version and nonce from the activation object
+  var registerRequests = [
+    {
+      version: activation.version,
+      challenge: activation.nonce
+    }
+  ];
+
+  u2f.register(appId, registerRequests, [], function (data) {
+    if (data.errorCode && data.errorCode !== 0) {
+      // Error from U2F platform
+    } else {
+      // Get the registrationData from the callback result
+      var registrationData = data.registrationData;
+
+      // Get the clientData from the callback result
+      var clientData = data.clientData;
+    }
+  });
 </script>
 ~~~
 
@@ -4469,29 +4474,36 @@ curl -v -X POST \
 <!-- Get the u2f-api.js from https://github.com/google/u2f-ref-code/tree/master/u2f-gae-demo/war/js -->
 <script src="/u2f-api.js"></script>
 <script>
-var challengeNonce = factor._embedded.challenge.nonce; //use the nonce from the challenge object
-var appId = factor.profile.appId; //use the appId from factor profile object
+  // Use the nonce from the challenge object
+  var challengeNonce = factor._embedded.challenge.nonce;
 
-//Use the version and credentialId from factor profile object
-var registeredKeys = [{version: factor.profile.version, keyHandle: factor.profile.credentialId }];
+  // Use the appId from factor profile object
+  var appId = factor.profile.appId;
 
-//Call the U2F javascript API to get signed assertion from the U2F token
-u2f.sign(appId, factorData.challenge.nonce, registeredKeys, function (data) {
-  if (data.errorCode && data.errorCode !== 0) {
-    //Error from U2F platform
-  } else {
-	  //Get the client data from callback result
-	  var clientData = data.clientData;
+  // Use the version and credentialId from factor profile object
+  var registeredKeys = [
+    {
+      version: factor.profile.version,
+      keyHandle: factor.profile.credentialId
+    }
+  ];
 
-    //Get the signature data from callback result
-	  var signatureData = data.signatureData;
-  }
-}
+  // Call the U2F javascript API to get signed assertion from the U2F token
+  u2f.sign(appId, factorData.challenge.nonce, registeredKeys, function (data) {
+    if (data.errorCode && data.errorCode !== 0) {
+      // Error from U2F platform
+    } else {
+      // Get the client data from callback result
+      var clientData = data.clientData;
+
+      // Get the signature data from callback result
+      var signatureData = data.signatureData;
+    }
+  });
 </script>
 ~~~
 
 #### Post the Signed Assertion to Okta to Complete Verification
-
 
 ##### Request Example for Signed Assertion
 {:.api .api-request .api-request-example}
@@ -4785,7 +4797,6 @@ curl -v -X POST \
   "recoveryType": "PASSWORD"
 }
 ~~~
-
 
 #### Forgot Password with SMS Factor
 
@@ -5555,7 +5566,6 @@ curl -v -X POST \
 
 The `factorType` and `recoveryType` properties vary depending on the recovery transaction.
 
-
 ### Verify Recovery Token
 {:.api .api-operation}
 
@@ -6180,7 +6190,6 @@ curl -v -X POST \
 }
 ~~~
 
-
 ## Transaction Model
 
 The Authentication API is a *stateful* API that implements a finite state machine with [defined states](#transaction-state) and transitions.  Each initial authentication or recovery request is issued a unique [state token](#state-token) that must be passed with each subsequent request until the transaction is complete or canceled.
@@ -6200,7 +6209,6 @@ The Authentication API leverages the [JSON HAL](http://tools.ietf.org/html/draft
 | factorResult  | optional status of last verification attempt for a given factor                                        | [Factor Result](#factor-result)                                | TRUE     | TRUE     |           |
 | _embedded     | [embedded resources](#embedded-resources) for the current `status`                                     | [JSON HAL](http://tools.ietf.org/html/draft-kelly-json-hal-06) | TRUE     | TRUE     |           |
 | _links        | [link relations](#links-object) for the current `status`                                               | [JSON HAL](http://tools.ietf.org/html/draft-kelly-json-hal-06) | TRUE     | TRUE     |           |
-
 
 > The `relayState` parameter is an opaque value for the transaction and processed as untrusted data which is just echoed in a response.  It is the client's responsibility to escape/encode this value before displaying in a UI such as a HTML document using [best practices](https://www.owasp.org/index.php/XSS_(Cross_Site_Scripting)_Prevention_Cheat_Sheet)
 
@@ -6444,20 +6452,20 @@ A subset of policy settings of the Sign-On Policy or App Sign-On Policy publishe
 ##### When sign-on policy is device based
 
 ~~~json
-{  
-   "allowRememberDevice":true,
-   "rememberDeviceByDefault":false,
-   "rememberDeviceLifetimeInMinutes":0
+{
+  "allowRememberDevice": true,
+  "rememberDeviceByDefault": false,
+  "rememberDeviceLifetimeInMinutes": 0
 }
 ~~~
 
 ##### When sign-on policy is time based
 
 ~~~json
-{  
-   "allowRememberDevice":true,
-   "rememberDeviceByDefault":false, 
-   "rememberDeviceLifetimeInMinutes":5 
+{
+  "allowRememberDevice": true,
+  "rememberDeviceByDefault": false,
+  "rememberDeviceLifetimeInMinutes": 5
 }
 ~~~
 
