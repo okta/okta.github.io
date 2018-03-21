@@ -12,7 +12,7 @@ tweets:
 
 Dropwizard is recognized as the pioneer in turn-key Java API frameworks, and rivals Spring Boot for ease of adoption. Whether you're interested in trying it out for the first time, or already have a mature platform built on top of Dropwizard, you can add secure authentication to your site in a matter of minutes. By combining Dropwizard's production-ready essential libraries and Okta's identity platform, you can construct a fully secured internet-facing web service with little effort. Read on to see how!
 
-This tutorial assumes familiarity with Java, Maven, and basic web service and web security concepts. The first section sets up a new Dropwizard server from scratch, so if you already have one up and running, feel free to skip ahead and integrate With Okta]. You can also find the completed code example on [GithHub](https://github.com/oktadeveloper/okta-dropwizard-oauth-example).
+This tutorial assumes familiarity with Java, Maven, and basic web service and web security concepts. The first section sets up a new Dropwizard server from scratch, so if you already have one up and running, feel free to skip ahead and integrate With Okta]. You can also find the completed code example on [GitHub](https://github.com/oktadeveloper/okta-dropwizard-oauth-example).
 
 ## Dropwizard vs. Spring Boot
 
@@ -478,7 +478,7 @@ The only thing left to do create a login page.  I’m actually going to create a
 </html>
 ```
 
-Whew! You've emerged from the jungle of hand-rolled OIDC clients, and now have authorization in your Dropwizard server! There were quite a few code examples above, so if you need to verify anything you built along the way, you can always access the [complete source for this project](https://github.com/oktadeveloper/okta-dropwizard-oauth-example) on GithHub.
+Whew! You've emerged from the jungle of hand-rolled OIDC clients, and now have authorization in your Dropwizard server! There were quite a few code examples above, so if you need to verify anything you built along the way, you can always access the [complete source for this project](https://github.com/oktadeveloper/okta-dropwizard-oauth-example) on GitHub.
 
 Ok... time to see it in action! You can once again build the project with: 
 
