@@ -7,7 +7,7 @@ integration: client
 
 # Add Okta authentication to your Vue app
 
-New to Okta? Use our Quick Start Guide will walk you through adding user authentication to your Vue application in minutes,
+New to Okta? Our Quick Start Guide will walk you through adding user authentication to your Vue application in minutes,
 or download a complete sample application to see our recommended usage.
 
 <ul class='code-list'>
