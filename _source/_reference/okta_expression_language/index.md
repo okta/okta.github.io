@@ -230,6 +230,19 @@ The `whitelist` parameter must evaluate to a list of group ids that is returned 
    * Okta EL expression containing a condition that evaluates to an integer: `app.profile.maxLimit < 100 ? app.profile.maxLimit : 100`.
     If the maximum group limit in the profile is less than 100, return that number of groups; otherwise, return a maximum of 100 groups. If there are more groups returned than the specified limit, an error is returned.
 
+### Linked Object Functions
+
+% api_lifecycle ea %}
+
+* **`user.getLinkedObject(String definitionName).$attribute`**
+Example: `user.getLinkedObject(primary).$lastName`
+Example Result: `Benioff` `Gates` `Whitman`
+
+* **`user.getLinkedObject(String definitionName).appuser(String appName).$attribute`** 
+
+Example: `user.getLinkedObject("manager").appuser(Salesforce).$lastName 
+Example Result: `Benioff`
+
 ### Time Functions
 
 | Function                    | Input Parameter Signature          | Return Type                              | Example                                                                                                            | Output                                                                                                  |
