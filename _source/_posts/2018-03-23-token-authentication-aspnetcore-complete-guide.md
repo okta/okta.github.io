@@ -234,7 +234,7 @@ The two common ways to get an authorization server are:
 * Building or configuring your own
 
 ### Hosted Authorization Server with Okta
-A hosted authorization server is the easiest way to generate tokens, because you don't need to build (or maintain) anything yourself. You can sign up for a [free account](https://developer.okta.com/signup) and then follow the [Okta + ASP.NET Core API quickstart](/quickstart/#/widget/dotnet/aspnetcore) for step-by-step instructions.
+A hosted authorization server is the easiest way to generate tokens, because you don't need to build (or maintain) anything yourself. You can sign up for a [free account](https://developer.okta.com/signup/) and then follow the [Okta + ASP.NET Core API quickstart](/quickstart/#/widget/dotnet/aspnetcore) for step-by-step instructions.
 
 Since the authorization server Okta creates for you has a standard discovery document, the `JwtBearer` configuration is super simple:
 

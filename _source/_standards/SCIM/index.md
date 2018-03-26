@@ -1225,7 +1225,7 @@ Yes, you can republish your app, but we recommend you don’t do it frequently. 
 ### Dev Doc Examples
 
 Box - [https://docs.box.com/docs/getting-started-box-integration](https://docs.box.com/docs/getting-started-box-integration)
-Slack - [https://api.slack.com/](https://api.slack.com/])
+Slack - [https://api.slack.com/](https://api.slack.com/)
 OneLogin - [https://developers.onelogin.com/](https://developers.onelogin.com/)
 Zendesk - [https://developer.zendesk.com/apps](https://developer.zendesk.com/apps)
 
