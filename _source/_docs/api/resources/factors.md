@@ -2674,6 +2674,66 @@ If the passcode is invalid response will be `403 Forbidden` with the following e
 }
 ~~~
 
+##### Verify Call Challenge (OTP)
+
+Specify `passCode` in the request to verify the factor.
+
+###### Request Example for Verify Call Challenge
+{:.api .api-request .api-request-example}
+
+~~~sh
+curl -v -X POST \
+-H "Accept: application/json" \
+-H "Content-Type: application/json" \
+-d '{
+  "stateToken": "007ucIX7PATyn94hsHfOLVaXAmOBkKHWnOOLG43bsb",
+  "passCode": "65786"
+}' "https://{yourOktaDomain}.com/api/v1/authn/factors/clf193zUBEROPBNZKPPE/verify"
+~~~
+
+###### Response Example for Verify Call Challenge
+{:.api .api-response .api-response-example}
+
+~~~json
+{
+  "expiresAt": "2015-11-03T10:15:57.000Z",
+  "status": "SUCCESS",
+  "relayState": "/myapp/some/deep/link/i/want/to/return/to",
+  "sessionToken": "00t6IUQiVbWpMLgtmwSjMFzqykb5QcaBNtveiWlGeM",
+  "_embedded": {
+    "user": {
+      "id": "00ub0oNGTSWTBKOLGLNR",
+      "passwordChanged": "2015-09-08T20:14:45.000Z",
+      "profile": {
+        "login": "dade.murphy@example.com",
+        "firstName": "Dade",
+        "lastName": "Murphy",
+        "locale": "en_US",
+        "timeZone": "America/Los_Angeles"
+      }
+    }
+  }
+}
+
+~~~
+
+## Recovery Operations
+
+### Forgot Password
+{:.api .api-operation}
+
+{% api_operation post /api/v1/authn/recovery/password %}
+
+Starts a new password recovery transaction for a given user and issues a [recovery token](#recovery-token) that can be used to reset the user's password.
+
+* [Forgot Password with Email Factor](#forgot-password-with-email-factor)
+* [Forgot Password with SMS Factor](#forgot-password-with-sms-factor)
+* [Forgot Password with Call Factor](#forgot-password-with-call-factor)
+* [Forgot Password with Trusted Application](#forgot-password-with-trusted-application)
+
+> Self-service password reset (forgot password) must be permitted via the user's assigned password policy to use this operation.
+
+
 #### Request Example
 {:.api .api-request .api-request-example}
 

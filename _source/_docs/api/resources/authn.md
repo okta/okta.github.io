@@ -17,6 +17,8 @@ The API is targeted for developers who want to build their own end-to-end login 
 * **Multifactor authentication** (MFA) strengthens the security of password-based authentication by requiring additional verification of another factor such as a temporary one-time password or an SMS passcode. The Authentication API supports user enrollment with MFA factors enabled by the administrator, as well as MFA challenges based on your **Okta Sign-On Policy**.
 * **Recovery** allows users to securely reset their password if they've forgotten it, or unlock their account if it has been locked out due to excessive failed login attempts. This functionality is subject to the security policy set by the administrator.
 
+There's an apostrophe here.
+
 ## Application Types
 
 The behavior of the Okta Authentication API varies depending on the type of your application and your org's security policies such as the **Okta Sign-On Policy**, **MFA Enrollment Policy**, or **Password Policy**.
@@ -4375,7 +4377,7 @@ factorId            | `id` of factor returned from enrollment             | URL 
 stateToken     | [state token](#state-token) for current transaction | Body       | String   | TRUE     |
 clientData     | base64 encoded client data from the U2F token       | Body       | String   | TRUE     |
 signatureData  | base64 encoded signature data from the U2F token    | Body       | String   | TRUE     |
-rememberDevice | user's decision to remember device            | URL        | Boolean  | FALSE    |
+rememberDevice | User's decision to remember device            | URL        | Boolean  | FALSE    |
 
 ##### Start Verification to Get Challenge Nonce
 
@@ -4708,7 +4710,7 @@ curl -v -X POST \
 
 {% api_operation post /api/v1/authn/recovery/password %}
 
-Starts a new password recovery transaction for a given user and issues a [recovery token](#recovery-token) that can be used to reset a user's password.
+Starts a new password recovery transaction for a given user and issues a [recovery token](#recovery-token) that can be used to reset the user's password.
 
 * [Forgot Password with Email Factor](#forgot-password-with-email-factor)
 * [Forgot Password with SMS Factor](#forgot-password-with-sms-factor)
