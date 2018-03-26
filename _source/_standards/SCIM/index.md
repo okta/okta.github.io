@@ -124,13 +124,13 @@ This is because these integrations sync a larger number of attributes and lifecy
 There are several advanced App-as-Master use cases that aren't currently supported by the SCIM-Based Provisioning option, but may be added in the future.
 Until then, consider out-of-band processes that work around these use cases.
 
-* Attribute-level mastering&mdash;The app wants to be the master for some employee attributes like phone number, while letting Okta or another app master other attributes. We call this attribute-level mastering.
+* Attribute-level mastering: The app wants to be the master for some employee attributes like phone number, while letting Okta or another app master other attributes. We call this attribute-level mastering.
 
-* Pre-hire interval&mdash;In an HR-as-Master use case, there is sometimes a desire to import the new employee into Okta from the HR app a few days prior to the hire/start date. This gives IT time to set up the employee’s apps in advance. A pre-hire interval configuration would specify how many days before the employee’s hire date Okta should import the employee.
+* Pre-hire interval: In an HR-as-Master use case, there is sometimes a desire to import the new employee into Okta from the HR app a few days prior to the hire/start date. This gives IT time to set up the employee’s apps in advance. A pre-hire interval configuration would specify how many days before the employee’s hire date Okta should import the employee.
 
-* Real-time sync/termination&mdash;In an HR-as-Master use case, a change in employee status within the HR system may need to be immediately reflected in Okta. Involuntary terminations is one scenario where an employee’s access to sensitive apps and content via Okta needs to be cut off within minutes.
+* Real-time sync/termination: In an HR-as-Master use case, a change in employee status within the HR system may need to be immediately reflected in Okta. Involuntary terminations is one scenario where an employee’s access to sensitive apps and content via Okta needs to be cut off within minutes.
 
-* Incremental/delta import&mdash;Importing a large number of user profiles from an app into Okta can take minutes, even hours. This can become a major performance and timing issue if frequent updates are needed. Currently, the SCIM-Based Provisioning option doesn't support the ability to import only those user profiles that have changed since the last import. In the future, we may support this via filtering on `meta.lastModified`. ([More information](#filtering-on-metalastmodified))
+* Incremental/delta import: Importing a large number of user profiles from an app into Okta can take minutes, even hours. This can become a major performance and timing issue if frequent updates are needed. Currently, the SCIM-Based Provisioning option doesn't support the ability to import only those user profiles that have changed since the last import. In the future, we may support this via filtering on `meta.lastModified`. ([More information](#filtering-on-metalastmodified))
 
 ## Ways to Build Provisioning
 
@@ -685,9 +685,9 @@ requests are made to your API.
 For more details on rate limiting requests using the HTTP 429
 status code, see [section 4](https://tools.ietf.org/html/rfc6585#section-4) of [RFC 6585](https://tools.ietf.org/html/rfc6585).
 
-##### GET /Groups API Endpoint
+##### GET /groups API Endpoint
 
-Okta currently supports the /Groups endpoint for GET /Groups of a SCIM API. This is usually done to check for groups data and is not mandatory for SCIM to work. The minimum check we require is for the resources to be of JSON. check example below.
+Okta currently supports the /groups endpoint for GET /groups of a SCIM API. This is usually done to check for groups data and is not mandatory for SCIM to work. The minimum check we require is for the resources to be of JSON. check example below.
 
 Example:
 
@@ -723,23 +723,23 @@ Example:
 }
 ~~~
 
-##### Create Group: POST /Groups
+##### Create Group: POST /groups
 
 With Group Push Beta, Okta now supports creation of a Group along with its user memberships in the downstream SCIM enabled application if your SCIM 2.0 API supports it. The caveat is that the users must already be provisioned in your SCIM enabled application.
 
-##### Read Group Details: GET /Groups/{id}
+##### Read Group Details: GET /groups/{id}
 
-With Group Push Beta, Okta now supports reading the Group's details by group id along with the membership details. If a Group is not found, your SCIM application may return a HTTP status 404("not found").For more details on the `/Groups/{id}` SCIM endpoint, see [section 3.4.1](https://tools.ietf.org/html/rfc7644#section-3.4.1) of the [SCIM 2.0 Protocol Specification](https://tools.ietf.org/html/rfc7644).
+With Group Push Beta, Okta now supports reading the Group's details by group id along with the membership details. If a Group is not found, your SCIM application may return a HTTP status 404("not found").For more details on the `/groups/{id}` SCIM endpoint, see [section 3.4.1](https://tools.ietf.org/html/rfc7644#section-3.4.1) of the [SCIM 2.0 Protocol Specification](https://tools.ietf.org/html/rfc7644).
 
-##### Update Group Details: PUT /Groups/{id}
+##### Update Group Details: PUT /groups/{id}
 
 With Group Push Beta, any updates to the Group profile and memberships in Okta can now be reflected into your SCIM application. Okta will do the following to make the Group changes effective:
 
-* Make a GET request against `/Groups/{id}` on your SCIM API for the group to update.
+* Make a GET request against `/groups/{id}` on your SCIM API for the group to update.
 * Take the resource returned from your SCIM API and update only the attributes that need to be updated.
-* Make a PUT request against `/Groups/{id}` in your SCIM API with the updated resource as the payload.
+* Make a PUT request against `/groups/{id}` in your SCIM API with the updated resource as the payload.
 
-##### Delete Group: DELETE /Groups/{id}
+##### Delete Group: DELETE /groups/{id}
 
 With Group Push Beta, Okta can delete the Group in your SCIM enabled application. For more details on deleting resources, see section [3.6](https://tools.ietf.org/html/rfc7644#section-3.6) of the [SCIM 2.0 Protocol Specification](https://tools.ietf.org/html/rfc7644).
 
@@ -1198,9 +1198,9 @@ Yes, the you must return these fields in an array, which is specified in the SCI
 
 Okta users are never deleted for compliance and audit purposes; they are deactivated instead. Because of this, Okta never makes an HTTP DELETE request to a user resource on your SCIM API. Instead, Okta makes an HTTP PATCH request to set the active setting to false. You’ll need to support the concept of an “active” and “inactive” user in your app.
 
-**Will Okta be supporting the /Groups SCIM endpoint? When?**
+**Will Okta be supporting the /groups SCIM endpoint? When?**
 
-Yes, Okta will eventually support the /Groups endpoint of the SCIM API. We are targeting early 2017 for this feature. In the meantime, to support the setting licensing / entitlements in your app without groups, you can use custom attributes in Okta to manage this. For examples, Lucidchart was able to support this use case with a user attribute called "License Type". See the “Extensibility” section of Lucidchart’s blog post for more details.
+Yes, Okta will eventually support the /groups endpoint of the SCIM API. We are targeting early 2017 for this feature. In the meantime, to support the setting licensing / entitlements in your app without groups, you can use custom attributes in Okta to manage this. For examples, Lucidchart was able to support this use case with a user attribute called "License Type". See the “Extensibility” section of Lucidchart’s blog post for more details.
 
 **How does data validation work with SCIM provisioning? For example, if my app requires phone number in a specific format, how do I ensure that Okta passes the attribute in that format? If a data validation error issue occurs how does error reporting work?**
 
@@ -1224,10 +1224,10 @@ Yes, you can republish your app, but we recommend you don’t do it frequently. 
 
 ### Dev Doc Examples
 
-Box - [https://docs.box.com/docs/getting-started-box-integration](https://docs.box.com/docs/getting-started-box-integration)
-Slack - [https://api.slack.com/](https://api.slack.com/)
-OneLogin - [https://developers.onelogin.com/](https://developers.onelogin.com/)
-Zendesk - [https://developer.zendesk.com/apps](https://developer.zendesk.com/apps)
+Box - <https://docs.box.com/docs/getting-started-box-integration>
+Slack - <https://api.slack.com/>
+OneLogin - <https://developers.onelogin.com/>
+Zendesk - <https://developer.zendesk.com/apps>
 
 ## Helpful Resources
 
