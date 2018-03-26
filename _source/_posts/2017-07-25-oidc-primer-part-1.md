@@ -3,6 +3,8 @@ layout: blog_post
 title: 'Identity, Claims, & Tokens – An OpenID Connect Primer, Part 1 of 3'
 author: dogeared
 tags: [oauth, oauth2, oauth2.0, oauth 2.0, OpenID, OpenID Connect, oidc]
+redirect_from:
+  - "/blog/2017/08/01/oidc-primer-part-1"
 ---
 
 In the beginning, there were proprietary approaches to working with external identity providers for authentication and authorization. Then came SAML (Security Assertion Markup Language) – an open standard using XML as its message exchange type. Then, there was OAuth and OAuth 2.0 – also open as well as being a modern, RESTful approach to authorization using JSON as its medium. And now, the holy grail of “secure delegated access” OpenID Connect (henceforth OIDC), which runs on top of OAuth 2.0.
