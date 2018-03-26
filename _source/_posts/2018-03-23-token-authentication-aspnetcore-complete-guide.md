@@ -226,7 +226,7 @@ var signingKeys = discoveryDocument.SigningKeys;
 That takes care of the _validation_ side of token authentication, but what about generating the tokens themselves?
 
 ## Generate Tokens for Authentication in ASP.NET Core
-Back in the ASP.NET 4.5 days, the `UseOAuthAuthorizationServer` middleware gave you an endpoint that could easily generate tokens for your application. However, the ASP.NET Core team [decided not to bring it to ASP.NET Core](https://stackoverflow.com/a/29144031/3191599), which means that you'll need to plug something else in. Specifically, you'll need to either find or build an authorization server that can generate tokens.
+Back in the ASP.NET 4.5 days, the `UseOAuthAuthorizationServer` middleware gave you an endpoint thatgit. Specifically, you'll need to either find or build an authorization server that can generate tokens.
 
 The two common ways to get an authorization server are:
 
