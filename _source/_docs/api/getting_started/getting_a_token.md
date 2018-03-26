@@ -14,18 +14,15 @@ redirect_from: "/docs/getting_started/getting_a_token.html"
 	If you don't have an Okta organization, you can create a free Okta
     Developer Edition organization [at this link](https://developer.okta.com/signup/){:target="_blank"}.
 
-2.  Click on the blue **Admin** button.
-    {% img okta-admin-ui-button-admin.png alt:"Admin" %}
-
-3.  Click on **Tokens** in the API menu.
+2.  Click on **Tokens** in the API menu.
 	{% img okta-admin-api-token-dev.png alt:"API" %}
 
-4.  Click on the **Create token** button.
+3.  Click on the **Create token** button.
 	{% img okta-create-api-token-button.png alt:"Create Token" %}
 
-5.  Name your token and click **Create token**.
+4.  Name your token and click **Create token**.
 
-6.  Make note of your API token, as you will only see it one time.
+5.  Make note of your API token, as you will only see it one time.
 
 {% img okta-admin-ui-token.png "Okta Administrator Token UI" alt:"Okta Administrator Token UI" %}
 
