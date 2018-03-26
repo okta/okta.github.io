@@ -8,16 +8,16 @@ redirect_from:
     - "/docs/guides/okta_sign-in_widget.html"
 ---
 
-# Widget Guide
+# Okta Sign-In Widget Guide
 
 The Okta Sign-In Widget is a JavaScript library that gives you a fully-featured and customizable login experience which can be used to authenticate users on any website.
 
 This guide will walk you through a few common use cases for the Widget and how to implement them. The full Widget reference can be found [on GitHub](https://github.com/okta/okta-signin-widget#okta-sign-in-widget).
 
-{% img okta-signin.png alt:"Screenshot of basic Okta Sign-In Widget" %}
+{% img okta-signin.png alt:"Screenshot of basic Okta Sign-In Widget" %}{: .center-image }
 
 
-## Widget Installation
+## Installation
 
 The first step is to install the Widget. For this, you have two options: local installation via NPM, or linking out to the Okta CDN instead.
 
@@ -113,6 +113,7 @@ function success(res) {
   if (res.status === ‘SUCCESS’) {
     res.session.setCookieAndRedirect(‘https://acme.okta.com/app/UserHome’);
   }
+}
 ~~~
 
 Replace `https://acme.okta.com/app/UserHome` with your own User Home landing page.
