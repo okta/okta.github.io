@@ -7,6 +7,8 @@ tags: [asp.net, aspnetcore, dotnet, webapi, security, oauth, oidc]
 tweets:
  - "Confused about token authentication in #aspnetcore? @nbarbettini breaks it down step by step →"
  - "A comprehensive guide to understanding token authentication in #aspnetcore →"
+redirect_from:
+ - "/blog/2018/03/27/token-authentication-aspnetcore-complete-guide"
 ---
 
 Token authentication has been a popular topic for the past few years, especially as mobile and JavaScript apps have continued to gain mindshare. Widespread adoption of token-based standards like [OAuth 2.0 and OpenID Connect][wthk-oauth] have introduced even more developers to tokens, but the best practices aren't always clear.
@@ -226,7 +228,7 @@ var signingKeys = discoveryDocument.SigningKeys;
 That takes care of the _validation_ side of token authentication, but what about generating the tokens themselves?
 
 ## Generate Tokens for Authentication in ASP.NET Core
-Back in the ASP.NET 4.5 days, the `UseOAuthAuthorizationServer` middleware gave you an endpoint thatgit. Specifically, you'll need to either find or build an authorization server that can generate tokens.
+Back in the ASP.NET 4.5 days, the `UseOAuthAuthorizationServer` middleware gave you an endpoint that could easily generate tokens for your application. However, the ASP.NET Core team [decided not to bring it to ASP.NET Core](https://stackoverflow.com/a/29144031/3191599), which means that you'll need to plug something else in. Specifically, you'll need to either find or build an authorization server that can generate tokens.
 
 The two common ways to get an authorization server are:
 
@@ -278,4 +280,3 @@ I'd love to hear your feedback! If you have questions or thoughts, post a commen
 [wthk-oauth]: /blog/2017/06/21/what-the-heck-is-oauth
 [oidc-primer]: /blog/2017/07/25/oidc-primer-part-1
 [nate-oidc-talk]: https://www.youtube.com/watch?v=996OiexHze0
-
