@@ -5,7 +5,7 @@ language: .NET
 integration: server
 ---
 
-# Add Okta to your .NET app
+# Add Okta authentication to your .NET app
 
 New to Okta? Our Quick Start Guide will walk you through adding user authentication to your .NET application in minutes.
 
