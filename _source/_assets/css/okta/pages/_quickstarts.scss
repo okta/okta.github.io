@@ -1,6 +1,3 @@
-.Page.okta-authentication-quickstart-guides {
-  background: #20313b;
-}
 .code-selector {
   background-color: rgb(32, 49, 59);
   border-radius: 5px;
@@ -52,11 +49,9 @@
 }
 
 // Disable the margin width determined by the parent CSS.
-.PageContent.quickstart-page.has-tableOfContents
 .PageContent-main#quickstart-body {
   max-width: none;
-  padding: 30px;
-  padding-right: 0px;
+  padding: 64px 0;
 }
 
 
