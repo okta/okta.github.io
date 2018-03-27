@@ -7,7 +7,7 @@ exampleDescription: Express.js Auth Code Example
 
 Your Express server will need to handle the authentication callback from Okta.  In this section we'll show you how to install and configure the [@okta/oidc-middleware](https://github.com/okta/okta-oidc-js/tree/master/packages/oidc-middleware) library, referred to below as ExpressOIDC, to do this automatically.
 
-> If you would prefer to download a complete sample application, please visit [Express Sample Applications for Okta][] and follow the instructions in that readme.
+> If you would prefer to download a complete sample application instead, please visit [Express Sample Applications for Okta][] and follow those instructions.
 
 ### Install The Library
 

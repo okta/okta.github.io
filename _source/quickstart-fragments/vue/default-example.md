@@ -14,7 +14,7 @@ This guide will walk you through integrating authentication into a Vue app with 
 
 At the end of the Vue instructions you can choose your server type to learn more about post-authentication workflows, such as verifying tokens that your Vue application can send to your server.
 
-> If you would prefer to download a complete sample application, please visit [Vue Sample Applications for Okta][] and follow the instructions in that readme.
+> If you would prefer to download a complete sample application instead, please visit [Vue Sample Applications for Okta][] and follow those instructions.
 
 ## Prerequisites
 * If you do not already have a **Developer Edition Account**, you can create one at [https://developer.okta.com/signup/](https://developer.okta.com/signup/).
