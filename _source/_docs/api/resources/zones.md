@@ -55,7 +55,7 @@ curl -X POST
       "value": "3.3.4.5/24"
     }
   ]
-}' "https://{yourOktaDomain}.com/api/v1/zones/"
+}' "https://{yourOktaDomain}.com/api/v1/zones"
 ~~~
 
 #### Successful Response Example
@@ -551,12 +551,7 @@ curl -X PUT
 -d '
 {
   "type": "IP",
-  "id": "nzovw2rFz2YoqmvwZ0g3",
   "name": "UpdatedNetZone",
-  "status": "ACTIVE",
-  "created": "2017-01-24T19:53:28.000Z",
-  "lastUpdated": "2017-01-24T19:53:28.000Z",
-  "system": false,
   "gateways": [
     {
       "type": "CIDR",
@@ -592,27 +587,7 @@ curl -X PUT
       "type": "RANGE",
       "value": "15.5.6.7-15.5.6.9"
     }
-  ],
-  "_links": {
-    "self": {
-      "href": "https://{yourOktaDomain}.com/api/v1/zones/nzovw2rFz2YoqmvwZ0g3",
-      "hints": {
-        "allow": [
-          "GET",
-          "PUT",
-          "DELETE"
-        ]
-      }
-    },
-    "deactivate": {
-      "href": "https://{yourOktaDomain}.com/api/v1/zones/nzovw2rFz2YoqmvwZ0g3/lifecycle/deactivate",
-      "hints": {
-        "allow": [
-          "POST"
-        ]
-      }
-    }
-  }
+  ]
 }
 ' "https://{yourOktaDomain}.com/api/v1/zones/nzovw2rFz2YoqmvwZ0g3"
 ~~~
@@ -699,8 +674,8 @@ An IP zone defines several attributes:
 |type          | Type of zone (currently it can only be IP)                                                | String                                      |   Yes         |     N/A       |
 |id            | Unique identifier for this zone                                                           | String                                      | No (Assigned) |     N/A       |
 |name          | Unique name for this zone                                                                 | String                                      |   Yes         | 128 (chars)   |
-|gateways      | IP addresses (range or CIDR form) of this zone                                            | Array of [Address Objects](#address-object) |   No          | 150 (entries) |
-|proxies       | IP addresses (range or CIDR form) allowed to forward request from gateway addresses above | Array of [Address Objects](#address-object) |   No          | 150 (entries) |
+|gateways      | IP addresses (range or CIDR form) of this zone                                            | Array of [Address Objects](#address-object) |   No          | 150 or 5,000 (entries) |
+|proxies       | IP addresses (range or CIDR form) allowed to forward request from gateway addresses above | Array of [Address Objects](#address-object) |   No          | 150 or 5,000 (entries) |
 
 #### Address Object
 
