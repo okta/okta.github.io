@@ -1650,7 +1650,7 @@ Content-Type: application/json
 ### Change Password
 {:.api .api-operation}
 
-{% api_operation post api/v1/authn/credentials/change_password %}
+{% api_operation post /api/v1/authn/credentials/change_password %}
 
 This operation changes a user's password by providing the existing password and the new password password for authentication transactions with either the `PASSWORD_EXPIRED` or `PASSWORD_WARN` state.
 

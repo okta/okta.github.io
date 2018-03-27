@@ -234,7 +234,7 @@ The two common ways to get an authorization server are:
 * Building or configuring your own
 
 ### Hosted Authorization Server with Okta
-A hosted authorization server is the easiest way to generate tokens, because you don't need to build (or maintain) anything yourself. You can sign up for a [free account](/signup) and then follow the [Okta + ASP.NET Core API quickstart](/quickstart/#/widget/dotnet/aspnetcore) for step-by-step instructions.
+A hosted authorization server is the easiest way to generate tokens, because you don't need to build (or maintain) anything yourself. You can sign up for a [free account](https://developer.okta.com/signup/) and then follow the [Okta + ASP.NET Core API quickstart](/quickstart/#/widget/dotnet/aspnetcore) for step-by-step instructions.
 
 Since the authorization server Okta creates for you has a standard discovery document, the `JwtBearer` configuration is super simple:
 
@@ -270,7 +270,7 @@ Here are some more resources if you want to keep learning:
 * [How to Secure Your .NET Web API with Token Authentication](/blog/2018/02/01/secure-aspnetcore-webapi-token-auth) here on the Okta blog
 * A [deep dive into the JWT bearer middleware](https://andrewlock.net/a-look-behind-the-jwt-bearer-authentication-middleware-in-asp-net-core/) on Andrew Lock's blog
 * [What the Heck is OAuth?][wthk-oauth]
-* Our [primer on OpenID Connect](oidc-primer)
+* Our [primer on OpenID Connect][oidc-primer]
 * [OAuth and OpenID Connect in plain English][nate-oidc-talk] on YouTube, by yours truly
 
 I'd love to hear your feedback! If you have questions or thoughts, post a comment below. You can also reach us on Twitter [@oktadev](https://twitter.com/oktadev).
@@ -278,4 +278,3 @@ I'd love to hear your feedback! If you have questions or thoughts, post a commen
 [wthk-oauth]: /blog/2017/06/21/what-the-heck-is-oauth
 [oidc-primer]: /blog/2017/07/25/oidc-primer-part-1
 [nate-oidc-talk]: https://www.youtube.com/watch?v=996OiexHze0
-
