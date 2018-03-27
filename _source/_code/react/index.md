@@ -7,8 +7,7 @@ integration: client
 
 # Add Okta authentication to your React app
 
-New to Okta? Our Quick Start Guide will walk you through adding user authentication to your React application in minutes,
-or download a complete sample application to see our recommended usage.
+New to Okta? Our Quick Start Guide will walk you through adding user authentication to your React application in minutes, or download a complete sample application to see our recommended usage.
 
 <ul class='code-list'>
   <li>
