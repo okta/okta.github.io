@@ -7,6 +7,9 @@ tags: [asp.net, aspnetcore, dotnet, webapi, security, oauth, oidc]
 tweets:
  - "Confused about token authentication in #aspnetcore? @nbarbettini breaks it down step by step →"
  - "A comprehensive guide to understanding token authentication in #aspnetcore →"
+redirect_from:
+  - /2018/03/27/token-authentication-aspnetcore-complete-guide
+ 
 ---
 
 Token authentication has been a popular topic for the past few years, especially as mobile and JavaScript apps have continued to gain mindshare. Widespread adoption of token-based standards like [OAuth 2.0 and OpenID Connect][wthk-oauth] have introduced even more developers to tokens, but the best practices aren't always clear.
