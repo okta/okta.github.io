@@ -17,7 +17,7 @@ function url_consistency_check() {
         # 'grep' all found files for 'api-uri-template', printing line numbers on output
         xargs grep -n api-uri-template | \
         # Search for the 'api/v' string, so we match "api/v1", "api/v2", etc
-        grep -v "{baseUrl}\?</strong>\/v" | grep -v api/v | grep -v oauth2 | grep -v .well-known | \
+        grep -v "{baseUrl}\?</strong>\/v" | grep -v /api/v | grep -v /oauth2 | grep -v /.well-known | \
         # The 'sed' command below pulls out the filename (\1), the line number (\2) and the URL path (\3)
         # For example, this:
         # dist/docs/api/resources/authn.html:2278:<p><span class="api-uri-template api-uri-post"><span class="api-label">POST</span> /api/v1/authn</span></p>
