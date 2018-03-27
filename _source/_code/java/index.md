@@ -22,7 +22,7 @@ New to Okta? Our Quick Start Guide will walk you through adding user authenticat
   </li>
 </ul>
 
-## Java SDK
+## Java Management SDK
 
 Once your users can sign in to your app, use Okta's Management API and SDKs to configure resources and manage your users.
 
@@ -35,9 +35,14 @@ Once your users can sign in to your app, use Okta's Management API and SDKs to c
   </li>
 </ul>
 
-## More Resources
+## Java Libraries
 
 <ul class='code-list'>
-  <li><span class='code-icon info-16-gray'></span> <a href='spring_security_saml'>Spring Security SAML</a></li>
-  <li><span class='code-icon info-16-gray'></span> <a href='https://github.com/oktadeveloper/okta-openidconnect-appauth-android'>Android Native Application with AppAuth</a></li>
+  <li>
+    <span class='fa fa-github'></span> <a href='https://github.com/okta/okta-jwt-verifier-java'>Okta JWT Verifier for Java</a>
+  </li>
 </ul>
+
+## Guides
+
+<p><a href='spring_security_saml'>Using Spring Security to add SAML support for Okta</a></p>

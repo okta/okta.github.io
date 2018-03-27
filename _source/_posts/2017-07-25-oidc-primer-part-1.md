@@ -3,6 +3,8 @@ layout: blog_post
 title: 'Identity, Claims, & Tokens – An OpenID Connect Primer, Part 1 of 3'
 author: dogeared
 tags: [oauth, oauth2, oauth2.0, oauth 2.0, OpenID, OpenID Connect, oidc]
+redirect_from:
+  - "/blog/2017/08/01/oidc-primer-part-1"
 ---
 
 In the beginning, there were proprietary approaches to working with external identity providers for authentication and authorization. Then came SAML (Security Assertion Markup Language) – an open standard using XML as its message exchange type. Then, there was OAuth and OAuth 2.0 – also open as well as being a modern, RESTful approach to authorization using JSON as its medium. And now, the holy grail of “secure delegated access” OpenID Connect (henceforth OIDC), which runs on top of OAuth 2.0.
@@ -200,10 +202,10 @@ It can be confusing sometimes to distinguish between the different token types. 
 
 ## Continue the OpenID Connect Journey
 
-In this post, we learned some basics about OpenID Connect, its history, and a bit about the various flow types, scopes, and tokens involved. In the [next installment](https://developer.okta.com/blog/2017/07/25/oidc-primer-part-2), we see OIDC in action!
+In this post, we learned some basics about OpenID Connect, its history, and a bit about the various flow types, scopes, and tokens involved. In the [next installment](/blog/2017/07/25/oidc-primer-part-2), we see OIDC in action!
 
 If you want to jump ahead, check out the example at: [https://okta-oidc-fun.herokuapp.com](https://okta-oidc-fun.herokuapp.com)
 
 And, the source code is at: [https://github.com/oktadeveloper/okta-oidc-flows-example](https://github.com/oktadeveloper/okta-oidc-flows-example)
 
-The whole series is live now. Part 2 is [here](https://developer.okta.com/blog/2017/07/25/oidc-primer-part-2). Part 3 is [here](https://developer.okta.com/blog/2017/08/01/oidc-primer-part-3).
+The whole series is live now. Part 2 is [here](/blog/2017/07/25/oidc-primer-part-2). Part 3 is [here](/blog/2017/08/01/oidc-primer-part-3).

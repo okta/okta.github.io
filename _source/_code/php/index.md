@@ -15,9 +15,14 @@ New to Okta? Our Quick Start Guide will walk you through adding user authenticat
       <span class='code-icon launch-16'></span><span>Authentication Quick Start Guide</span>
     </a>
   </li>
+  <li>
+    <a href='https://github.com/okta/samples-php' class='code-button'>
+      <span class='fa fa-github'></span><span>PHP Sample Applications</span>
+    </a>
+  </li>
 </ul>
 
-## PHP SDK
+## PHP Management SDK
 
 Once your users can sign in to your app, use Okta's Management API and SDKs to configure resources and manage your users.
 
@@ -30,9 +35,14 @@ Once your users can sign in to your app, use Okta's Management API and SDKs to c
   </li>
 </ul>
 
-## More Resources
+## PHP Libraries
 
 <ul class='code-list'>
-  <li><span class='fa fa-github'></span> <a href='https://github.com/okta/okta-jwt-verifier-php'>Okta JWT Verifier for PHP</a></li>
-  <li><span class='code-icon info-16-gray'></span> <a href='simplesamlphp'>SimpleSAMLphp</a></li>
+  <li>
+    <span class='fa fa-github'></span> <a href='https://github.com/okta/okta-jwt-verifier-php'>Okta JWT Verifier for PHP</a>
+  </li>
 </ul>
+
+## Guides
+
+<p><a href="simplesamlphp">Using SimpleSAMLphp to add support for Okta (via SAML)</a></p>

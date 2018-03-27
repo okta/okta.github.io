@@ -22,7 +22,7 @@ New to Okta? Our Quick Start Guide will walk you through adding user authenticat
   </li>
 </ul>
 
-## Node.js SDK
+## Node.js Management SDK
 
 Once your users can sign in to your app, use Okta's Management API and SDKs to configure resources and manage your users.
 
@@ -32,5 +32,13 @@ Once your users can sign in to your app, use Okta's Management API and SDKs to c
   </li>
   <li>
     <span class='fa fa-github'></span> <a href='https://github.com/okta/okta-sdk-nodejs'>Node.js SDK Source</a>
+  </li>
+</ul>
+
+## Node.js Libraries
+
+<ul class='code-list'>
+  <li>
+    <span class='fa fa-github'></span> <a href='https://github.com/okta/okta-oidc-js/tree/master/packages/jwt-verifier'>Okta JWT Verifier for Node.js</a>
   </li>
 </ul>

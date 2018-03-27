@@ -1,7 +1,9 @@
 ---
 layout: docs_page
 title: Users
-redirect_from: "docs/api/rest/users.html"
+redirect_from:
+ - "/docs/api/rest/users.html"
+ - "/docs/api/resources/user"
 ---
 
 # Users API
