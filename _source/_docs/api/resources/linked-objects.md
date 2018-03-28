@@ -21,11 +21,8 @@ For each relationship:
 
 For details, see the [Linked Object Model](#linked-object-model).
 
-The Expression Language functions for [linked objects](/reference/okta_expression_language/#linked-object-function) provide access to the details about a linked user.
-
-## Getting Started
-
-Explore the Linked Objects API: [![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/create-collection-from-jira) (link doesn't work yet)
+The Expression Language function for [linked objects](/reference/okta_expression_language/#linked-object-function) provides access to the details about a linked user.
+<!-- Hiding this until the collection is ready, hopefully GA  ## Getting Started Explore the Linked Objects API: [![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/create-collection-from-jira) (link doesn't work yet) -->
 
 ## Link Definition Operations
 
@@ -164,7 +161,7 @@ HTTP/1.1 200 OK
     },
     "_links": {
         "self": {
-            "href": "https://${yourOktaDomain}.com/api/v1/meta/schemas/user/default/linkedObjects/manager"
+            "href": "https://{yourOktaDomain}.com/api/v1/meta/schemas/user/default/linkedObjects/manager"
         }
     }
 }
@@ -337,6 +334,8 @@ HTTP/1.1 204 No Content
 
 For an `associated` user specified by ID, returns the `self` link for the `primary` user for the relationship specified by the primary-name . If the user specified is not the `associated` user in any relationship, an empty array is returned.
 
+Use `me` instead of `id` to specify the current session user.
+
 ##### Request Parameters
 {:.api .api-request .api-request-params}
 
@@ -380,7 +379,9 @@ curl -v -X GET \
 
 {% api_operation get /api/v1/users/${id}/linkedObjects/${associated-name} %}
 
-For the specified user, gets an array of users who are `associated` for the specified role. If the specified user is not a `primary`, no results are returned.
+For the specified user, gets an array of users who are `associated` for the specified role. If the specified user is not a `primary`,  an empty arry is returned.
+
+Use `me` instead of `id` to specify the current session user.
 
 ##### Request Parameters
 {:.api .api-request .api-request-params}
@@ -485,4 +486,5 @@ The following model contains example values for each attribute.
             "href": "https://{yourOktaDomain}.com/api/v1/meta/schemas/user/default/linkedObjects/manager"
         }
     }
+}
 ~~~
