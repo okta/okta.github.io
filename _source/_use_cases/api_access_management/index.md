@@ -72,7 +72,7 @@ Okta helps you manage ID Tokens (OpenID Connect) and Access Tokens (OAuth 2.0).
 
 The JWT extension to the OAuth Framework lets you include custom claims in ID and Access Tokens.
 You can design tokens to disclose the information you want to share depending on the client and the scope of the tokens.
-For example, a shopping site might have one set of claims for customers while they browse, but another claim for admin functions
+For example, a shopping site might have one set of claims for customers while they browse, but another claim for administrator functions
 like changing their personal information.
 
 Custom claims also help you by reducing the number of lookup calls required to retrieve user information from the identity provider (IdP).
@@ -131,7 +131,7 @@ Okta provides the API Access Management Administrator role to make managing auth
 
 * Make the authorization server audience (the `aud` claim) specific to the API to reduce the risk of inappropriate access token reuse. A single global audience is rarely acceptable. For example: Instead of using `api.company.com` for the audience, a better approach is specifying `api.company.com/product1` and `api.company.com/product2`.
 
-* Define scopes within authorization servers that are granular and specific to the permissions required. A generic admin scope is rarely appropriate. Java-style namespacing such as `com.okta.product1.admin` or Google’s URL-based style such as `https://company.com/scopes/product1.admin` are common and scalable approaches.
+* Define scopes within authorization servers that are granular and specific to the permissions required. A generic administrator scope is rarely appropriate. Java-style namespacing such as `com.okta.product1.admin` or Google’s URL-based style such as `https://company.com/scopes/product1.admin` are common and scalable approaches.
 
 * Authorization policies and rules are treated as a case or switch statement. Therefore, when a matching rule is found, it is applied and the result is immediately returned. No further rules are executed.
 

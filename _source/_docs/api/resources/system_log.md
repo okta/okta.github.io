@@ -13,10 +13,16 @@ The Okta System Log API provides near real-time read-only access to your organiz
 
 Often the terms "event" and "log event" are used interchangeably. In the context of this API, an "event" is an occurrence of interest within the system and "log" or "log event" is the recorded fact.  
  
-Notes:
+Notes on the System Log API:
 
-* The System Log API contains much more [structured data](#logevent-object) than the [Events API](/docs/api/resources/events#event-model).
-* The System Log API supports additional [SCIM filters](#request-parameters) and the `q` query parameter, because of the presence of more structured data than the [Events API](/docs/api/resources/events#request-parameters).
+* It contains much more [structured data](#logevent-object) than the [Events API](/docs/api/resources/events#event-model).
+* It supports additional [SCIM filters](#request-parameters) and the `q` query parameter, because of the presence of more structured data than the [Events API](/docs/api/resources/events#request-parameters).
+* Its primary supported use cases are:
+  * Event data export into a security information and event management system (SIEM).
+  * System monitoring.
+  * Development debugging.
+  * Event introspection and audit.
+* It is not intended to be used as a Database as a Service (DBaaS), or otherwise directly serve data to downstream consumers without an intermediate data store. 
 
 ## Getting Started
 
@@ -265,6 +271,7 @@ When an event is triggered by an HTTP request, the `client` object describes the
 |------------+--------------------------------------------------------------------------------------------------------------------+-----------------+----------|
 | Property   | Description                                                                                                        | DataType        | Nullable |
 | ---------- | ------------------------------------------------------------------------------------------------------------------ | --------------- | -------- |
+| id  | For OAuth requests this is the id of the OAuth [client](https://tools.ietf.org/html/rfc6749#section-1.1) making the request. For SSWS token requests, this is the id of the agent making the request. | [UserAgent Object](#useragent-object) | TRUE |
 | userAgent  | The [user agent](https://en.wikipedia.org/wiki/User_agent) used by an actor to perform an action | [UserAgent Object](#useragent-object) | TRUE |
 | geographicalContext | The physical location where the client made its request from | [GeographicalContext Object](#geographicalcontext-object)    | TRUE     |
 | zone       | The `name` of the [Zone](/docs/api/resources/zones#ZoneModel) that the client's location is mapped to       | String          | TRUE     |
@@ -406,7 +413,7 @@ Among other operations, this response object can be used to scan for suspicious 
 | Property   | Description                                                    | DataType        | Nullable | MinLength | MaxLength |
 | ---------- | -------------------------------------------------------------- | --------------- | -------- | --------- | --------- |
 | authenticationProvider | The system that proves the identity of an actor using the credentials provided to it | String | TRUE  | | |
-| credentialProvider | A credential provider is a software service that manages identities and their associated credentials. When authentication occurs via credentials provided by a credential provider, that credential provider will be recorded here. | Array of String | TRUE | | |
+| credentialProvider | A credential provider is a software service that manages identities and their associated credentials. When authentication occurs via credentials provided by a credential provider, that credential provider will be recorded here. | String | TRUE | | |
 | credentialType | The underlying technology/scheme used in the credential    | String          | TRUE     |           |           |
 | issuer     | The specific software entity that created and issued the credential. | [Issuer Object](#issuer-object) | TRUE | |   |
 | externalSessionId | A proxy for the actor's [session ID](https://www.owasp.org/index.php/Session_Management_Cheat_Sheet) | String | TRUE | 1 | 255 |
@@ -534,14 +541,14 @@ Throughout a user's session many requests (transactions) can occur, such as logg
 
 | External Session ID       | Transaction ID              | Event ID                             | Event Type                                  | Display Message                   |
 |:--------------------------|:----------------------------|:-------------------------------------|:--------------------------------------------|:----------------------------------|
-| trs5JnlvlaIQTOqOj9imLy7lA | WcKPxq1f8QLfFvv3UPHhhgAACGM | f24790d0-d324-47f8-aac5-c27a31ab928d | user.session.access_admin_app               | User accessing Okta admin app     |
+| trs5JnlvlaIQTOqOj9imLy7lA | WcKPxq1f8QLfFvv3UPHhhgAACGM | f24790d0-d324-47f8-aac5-c27a31ab928d | user.session.access_admin_app               | User accessing Okta administrator app     |
 |                           | WcKPxq1f8QLfFvv3UPHhhgAACGM | ed317758-8776-4240-a540-277c44dcb408 | application.lifecycle.update                | Update application                |
 |                           |                             | 421c1551-71b2-4ebe-a70d-b5f7d3698429 | application.lifecycle.update                | Update application                |
 |                           |                             | 06a50bbe-44fd-40de-83e6-2e4cc2a17d16 | application.lifecycle.update                | Update application                |
 | trsUz2TG3wKS6ar1lvWzHo71w | Wij-6q4YuniRd9yTmWHpfwAAADc | 3e240ff4-6af7-47f2-b107-a2ef661ffc01 | application.user_membership.change_username | Change users application username |
 |                           |                             | 572b05e9-b6be-4dfe-8bc3-01bb3a5a1af5 | application.user_membership.add            | Add user to application membership |
 |                           |                             | 30f29bbf-3218-429b-827a-0a93809591db | application.user_membership.remove        | Remove users application membership |
-|                           | Wij-964YuniRd9yTmWHu1AAAAEA | 5f98d062-05a9-4ede-89a0-8a2ce27efdd4 | user.session.access_admin_app               | User accessing Okta admin app     |
+|                           | Wij-964YuniRd9yTmWHu1AAAAEA | 5f98d062-05a9-4ede-89a0-8a2ce27efdd4 | user.session.access_admin_app               | User accessing Okta administrator app     |
 |                           | Wij-95eCbHF7In2MKNavlgAAD9I | 45f71ac2-e8b2-4c19-b4cc-d2560108c889 | application.lifecycle.update                | Update application                |
 |                           |                             | 46b85d65-01c6-44d2-86d2-25704804b1c5 | application.lifecycle.update                | Update application                |
 | 102GALFw8CzRT2KXoqnca8Jdg | Wij-AJeCbHF7In2MKNaOpAAAEC4 | b9ab9263-a4ae-4780-9981-377ec8f2da86 | user.session.start                          | User login to Okta                |

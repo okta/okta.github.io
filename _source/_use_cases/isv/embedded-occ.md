@@ -14,16 +14,16 @@ Okta offers Okta Cloud Connect (OCC) program for ISV partners with the need to q
 
 Embedded OCC takes this one step further by providing an even more seamless user experience for your customers through the following:
 
-  1. Enhancing the Okta tenant creation experience by embedding this into your product admin UI
-  1. Programmatically instantiating the appropriate app instance in the Okta tenant without the need to go through Okta Admin UI.
+  1. Enhancing the Okta tenant creation experience by embedding this into your product user interface
+  1. Programmatically instantiating the appropriate app instance in the Okta tenant without the need to go through administrator UI.
 
-At a high-level, the runtime flow/admin experience is as follows:
+At a high-level, the runtime flow/administrator experience is as follows:
 
   {% img occ_diag1.png alt:"OCC High Level Diagram" %}
 
 > In this example, ISV is "ACME" -- customer is "mycompany"
 
-  1. Admin navigates to Okta Configuration UI in the ACME admin console.  Enters the necessary information for new Okta tenant creation and hits submit.
+  1. Administrator navigates to Okta Configuration UI in the ACME administrator console.  Enters the necessary information for new Okta tenant creation and hits submit.
   1. ACME uses the input and calls the Okta tenant creation API (/orgs).  A tenant is created.  API call returns tenant-specific information including an API key for subsequent API access against this newly created Okta tenant.
   1. ACME uses Okta /apps API to instantiate the appropriate app instance to exchange SAML metadata to enable Single Sign-On.  Okta receives SAML SP metadata in the request; ACME receives SAML IDP metadata in the response.
 
@@ -36,7 +36,7 @@ If the customer is an existing Okta customer or already has an Okta tenant, an o
 Any ISVs interested in Embedded-OCC should contact Okta (developers@okta.com).  Special privilege needs to be granted to an API user of your choice before you are allowed to create new tenants.  Here is how the tenant creation privilege is set up:
 
   1. You must have an existing Okta tenant in the appropriate Okta instance (*.okta.com and/or *.oktapreview.com).  If your company is an existing Okta customer, we recommend that you create a separate tenant for the purpose of setting up Embedded-OCC.
-  1. Create a user in your Okta tenant.  Best practice is to create a system account used solely for Embedded-OCC.  Using an account that represents an end user/admin may lead to issues if this user is deactivated/locked-out in the future due to human activities.
+  1. Create a user in your Okta tenant.  Best practice is to create a system account used solely for Embedded-OCC.  Using an account that represents an end user or administrator may lead to issues if this user is deactivated/locked-out in the future due to human activities.
   1. Provide the user/tenant information to Okta.
   1. Once approved, Okta will grant the tenant creation privilege to this particular user.
 
@@ -46,7 +46,7 @@ You may choose to ONLY allow your production environment to create Okta tenants 
 
 ### Build UI to capture input for tenant creation and app instantiation
 
-You need to build and expose an admin UI to allow the following options:
+You need to build and expose an administrator user interface to allow the following options:
 
   1. Create a brand new Okta tenant + App instantiation
   1. Use an existing Okta tenant for App instantiation
@@ -55,13 +55,13 @@ You need to build and expose an admin UI to allow the following options:
 
 You need to prompt for the following:
 
-  1. If you allow admin to choose between *okta.com and *.oktapreview.com (recommended approach), prompt for it
+  1. If you allow administrators to choose between *okta.com and *.oktapreview.com (recommended approach), prompt for it
   1. **Okta Subdomain**: this determines the subdomain URL.  The domain name must be unused.
   1. **Company Name**: this is a “display name” for the customer’s company. (eg. “MyCompany Inc.”)
   1. **Admin First Name**: Okta requires first name for all users
   1. **Admin Last Name**: Okta requires last name for all users
   1. **Admin Email**: This needs to be a real email.  Notifications (activation, password reset, etc) will be sent to this email.  This value CAN be defaulted to be the Okta login name as well. However, the API does allow for login name and email to be different as they are two distinct attributes.
-  1. **Password**: Password for the Okta admin account
+  1. **Password**: Password for the Okta administrator account
       1. Best practice should include a “confirmation” field forcing user to retype the password.
       1. The default password policy requires the following and should be displayed in the UI.  **Tenant creation will result in an error if this is not met.**
           1. At least 8 characters
@@ -76,10 +76,10 @@ You need to prompt for the following:
 
 ### Use an existing Okta tenant for App instantiation
 
-If the admin wants to use an existing Okta tenant, you should prompt for the following in order to instantiate your application with the given Okta tenant:
+If the administrator wants to use an existing Okta tenant, you should prompt for the following in order to instantiate your application with the given Okta tenant:
 
   1. **Okta tenant URL**: (e.g.  _{youOktaDomain}.com_ ) Best practice, as stated before, is to support both *.okta.com and *.oktapreview.com
-  1. **Okta API token**: This is the API token obtained from the Okta Admin Console for API access.  The API token carries the privileges of the admin user used to fetch the token.  If the token does not have sufficient privilege, the API call will return an error.
+  1. **Okta API token**: This is the API token obtained from the administrator UI for API access.  The API token carries the privileges of the administrator user used to fetch the token.  If the token does not have sufficient privilege, the API call returns an error.
 
 ## Tenant Creation API (org api)
 
@@ -204,7 +204,7 @@ Now that you have created the Okta tenant, the next API call is to instantiate t
 
   1. The Okta tenant URL
   1. The API token
-      1. The API token either comes from the tenant creation response or come from admin input from UI where an existing Okta tenant is being used.
+      1. The API token either comes from the tenant creation response or come from administrator input from the user interface where an existing Okta tenant is being used.
 
 Depending on the set of inputs required to set up SAML for your app in Okta, the input parameters.  An example here is the “servicenow_app2” SAML app instantiation.  The only parameter needed is “loginURL” which is set to the SAML endpoint on the ServiceNow side.
 

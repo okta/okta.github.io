@@ -121,3 +121,9 @@ dev_forum:  https://devforum.okta.com/
 
 # Location of main Drupal site for navigation and shared resources
 external_domain: https://developer.okta.com
+
+# Link for telling people to contact support
+
+contact_support_lc: contact <a href="https://support.okta.com/help/open_case" target="_blank">Support</a>
+contact_support_uc: Contact <a href="https://support.okta.com/help/open_case" target="_blank">Support</a>
+

@@ -12,7 +12,7 @@ js: cors
 
 [Cross-Origin Resource Sharing (CORS)](http://en.wikipedia.org/wiki/Cross-Origin_Resource_Sharing) is a mechanism that allows a web page to make an AJAX call using [XMLHttpRequest (XHR)](http://en.wikipedia.org/wiki/XMLHttpRequest) to a domain that is  different from the one from where the script was loaded.  Such "cross-domain" requests would otherwise be forbidden by web browsers, per the [same origin security policy](http://en.wikipedia.org/wiki/Same_origin_policy).  CORS defines a [standardized](http://www.w3.org/TR/cors/) way in which the browser and the server can interact to determine whether or not to allow the cross-origin request
 
-In Okta, CORS allows JavaScript hosted on your websites to make an XHR to the Okta API with the Okta session cookie. Every website origin must be explicitly permitted via the Okta Admin Dashboard for CORS.
+In Okta, CORS allows JavaScript hosted on your websites to make an XHR to the Okta API with the Okta session cookie. Every website origin must be explicitly permitted via the administrator UI for CORS.
 
 > **Caution:** Only grant access to specific origins (websites) that you control and trust to access the Okta API.
 
@@ -76,7 +76,7 @@ var baseUrl = 'https://{yourOktaDomain}.com';
 var xhr = new XMLHttpRequest();
 if ("withCredentials" in xhr) {
     xhr.onerror = function() {
-      alert('Invalid URL or Cross-Origin Request Blocked.  You must explicitly add this site (' + window.location.origin + ') to the list of allowed websites in your Okta Admin Dashboard');
+      alert('Invalid URL or Cross-Origin Request Blocked.  You must explicitly add this site (' + window.location.origin + ') to the list of allowed websites in the administrator UI');
     }
     xhr.onload = function() {
         alert(this.responseText);
@@ -110,7 +110,7 @@ $.ajax({
       break;
     default :
       title = 'Invalid URL or Cross-Origin Request Blocked';
-      message = 'You must explicitly add this site (' + window.location.origin + ') to the list of allowed websites in your Okta Admin Dashboard';
+      message = 'You must explicitly add this site (' + window.location.origin + ') to the list of allowed websites in your administrator UI';
       break;
   }
   alert(title + ': ' + message);

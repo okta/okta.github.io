@@ -130,7 +130,7 @@ In the simple example above, you already performed the following steps:
 3.  Served the HTML file with a web server
 4.  Configured a Trusted Origin in your Okta organization
 
-In that example, you redirect the user to their Okta dashboard (as defined in the `orgUrl` variable). Now you will configure a redirect to a custom authentication landing page hosted on your server.
+In that example, you redirect the user to their administrator UI (as defined in the `orgUrl` variable). Now you will configure a redirect to a custom authentication landing page hosted on your server.
 
 To do this, you will now perform the following steps:
 
@@ -366,7 +366,7 @@ would replace the string `example.okta.com` below with
 Finally, the lines below actually render the Okta Sign-In
 Widget. Note that the value for `el` can be any selector of your choice - "#okta-login-container" is a selector for an element in the HTML code that has an `id` attribute of "okta-login-container".
 
-Also, note that we only define a "SUCCESS" callback in which we create an Okta session and redirect the browser to the Okta organization. This logs the user directly into the Okta dashboard. In a production environment, you should handle statuses beyond "SUCCESS" and define an "ERROR" callback as well.
+Also, note that we only define a "SUCCESS" callback in which we create an Okta session and redirect the browser to the Okta organization. This logs the user directly into the administrator UI. In a production environment, you should handle statuses beyond "SUCCESS" and define an "ERROR" callback as well.
 
 ~~~ javascript
 oktaSignIn.renderEl(

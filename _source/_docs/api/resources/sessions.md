@@ -131,7 +131,7 @@ curl -v -X POST \
 
 Get session information for a given session id.
 
-> Note this is an admin operation and requires an API token.
+> Note this is an administrator operation and requires an API token.
 
 ##### Request Example
 {:.api .api-request .api-request-example}
@@ -209,7 +209,7 @@ Extends the lifetime of a user's session.
 
 > This endpoint is deprecated. Use the [Refresh Session](#refresh-session) API instead.
 
-> Note this is an admin operation and requires an API token.
+> Note this is an administrator operation and requires an API token.
 
 ##### Request Parameters
 {:.api .api-request .api-request-params}
@@ -292,7 +292,7 @@ curl -v -X PUT \
 
 Refresh an existing session using the `id` for that session. (This is equivalent to the deprecated [Extend Session](#extend-session) operation).
 
-> Note this is an admin operation and requires an API token.
+> Note this is an administrator operation and requires an API token.
 
 {% api_operation post /api/v1/sessions/${sessionId}/lifecycle/refresh %}
 
@@ -379,7 +379,7 @@ curl -v -X POST \
 
 Closes a user's session (logout).
 
-> Note this is an admin operation and requires an API token.
+> Note this is an administrator operation and requires an API token.
 
 ##### Request Parameters
 {:.api .api-request .api-request-params}

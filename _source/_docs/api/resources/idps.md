@@ -5533,7 +5533,7 @@ All linked IdP users have the following properties:
 
 ### Identity Provider User Profile Object
 
-Identity Provider user profiles are IdP-specific but may be customized by the Profile Editor in the Okta Admin UI.
+Identity Provider user profiles are IdP-specific but may be customized by the Profile Editor in the administrator UI.
 
 {% img okta-admin-ui-profile-editor-idp.png alt:"IdP Profile Editor UI" %}
 

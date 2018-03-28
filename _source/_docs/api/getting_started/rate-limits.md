@@ -76,7 +76,7 @@ The following endpoints are used by the Okta home page for authentication and si
 
 ### End-User Rate Limit
 
-Okta limits the number of requests from the Okta user interface to 40 requests per user per 10 seconds per endpoint. This rate limit protects users from each other, and from other API requests in the system. 
+Okta limits the number of requests from the administrator UI to 40 requests per user per 10 seconds per endpoint. This rate limit protects users from each other, and from other API requests in the system. 
 
 If a user exceeds this limit, they receive an HTTP 429 response without affecting other users in your org.
 A message is written to the System Log indicating that the end-user rate limit was encountered. 
@@ -163,7 +163,7 @@ X-Rate-Limit-Reset: 1506461721
 The first two header values are always `0` for concurrent rate limit errors.
 The third header reports an estimated time interval when the concurrent rate limit may be resolved. It is not a guarantee.
 
-The error condition resolves itself as soon as there is another concurrent thread available. Normally, no intervention is required. However, if you notice frequent bursts of 429 errors, or if the concurrent rate limit isn't quickly resolved, you may be exceeding the concurrent rate limit. If you can't identify what is causing you to exceed the limit by examining activity in the log before the burst of 429 errors are logged, contact Okta Support.
+The error condition resolves itself as soon as there is another concurrent thread available. Normally, no intervention is required. However, if you notice frequent bursts of 429 errors, or if the concurrent rate limit isn't quickly resolved, you may be exceeding the concurrent rate limit. If you can't identify what is causing you to exceed the limit by examining activity in the log before the burst of 429 errors are logged, {{site.contact_support_lc}}.
 
 
 ### Example Error Response Events for Concurrent Rate Limit
@@ -279,7 +279,7 @@ The error condition resolves itself as soon as there is another concurrent threa
 
 You can request a temporary rate limit increase. For example, if you are importing a large number of users and groups you may need a temporary rate limit increase.
 
-To request an exception, open a case 10 days before you need the increase, with Okta Support and provide the following details:
+To request an exception, {{site.contact_support_lc}} 10 days before you need the increase, and provide the following details:
 
 * Your Org Name: the entire URL, for example https://cloudcompany.okta.com or https://unicorn.oktapreview.com
 * Endpoints and Rates: the URI that need to have their limits increased and how much of an increase is required

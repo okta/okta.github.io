@@ -21,7 +21,7 @@ This article describes:
 ### The Value of Provisioning
 
 With the proliferation of cloud apps, today’s IT organizations are faced with the prospect of managing user accounts
-in an ever-expanding number of admin consoles for each app. This is not a problem if an enterprise has one or two cloud apps,
+in an ever-expanding number of administrator consoles for each app. This is not a problem if an enterprise has one or two cloud apps,
 but as the number grows, the situation quickly becomes unmanageable. Cloud app vendors hoping to sell into enterprises
 need to have an answer to this concern.
 
@@ -148,7 +148,7 @@ Okta has doubled down on our investment in our SCIM client and launched our own 
 |:--|:--|:--|
 | SCIM  | **Recommended**  | Supports all of the use cases above.  |
 | SAML JIT (Just-in-Time)  | Not Recommended - Limited Functionality  | Just-in-Time Provisioning (JIT) is part of the SAML spec. Supports user/group Create and Update (upon user sign-on) but does not support Deactivate, Read, or Sync Password  |
-| Okta API  | Not Recommended - Not Verified by Okta  | Poll Okta API for user & group CRUD operations. Polling Okta API is resource intensive, so provisioning won’t be real-time. Poor admin experience: cannot centralize within Okta  |
+| Okta API  | Not Recommended - Not Verified by Okta  | Poll Okta API for user & group CRUD operations. Polling Okta API is resource intensive, so provisioning won’t be real-time. Poor administrator experience: cannot centralize within Okta  |
 
 ### Provisioning to On-Premise Apps
 
@@ -1013,7 +1013,7 @@ Note: If you are using OAuth Authorization Code Grant flow as your authenticatio
 or need to support the Profile Master action, Okta will need to custom-configure a template app for you.
 Please request this in your email to <developers@okta.com>.
 
-1. Navigate to the admin interface in your Okta org by clicking **Admin**.
+1. Navigate to the administrator interface in your Okta org by clicking **Admin**.
     {% img scim-end-user-ui.png alt:"Admin Button" %}
 
 2. Click **Applications**, then **Add Application**.
@@ -1121,7 +1121,7 @@ SCIM server.
 #### Prepare the Customer-Facing Configuration Guide
 
 We recommend preparing the customer-facing configuration guide before beginning to work through the submission document.
-This guide will be exposed externally in Okta’s admin interface to end customers.
+This guide will be exposed externally in the administrator UI to end customers.
 For more details, see the [configuration guide guidelines](http://saml-doc.okta.com/Provisioning_Docs/SCIM_Configuration_Guide_Instructions.pdf).
 
 Note: When you are ready, use [this form](https://oanmanager.okta.com/) to submit for Okta review.
@@ -1155,7 +1155,7 @@ Use this process to involve joint customers in testing a newly developed SCIM in
 
 1. Identify joint customers interested in piloting the integration.
 2. Integration and configuration review with the joint customer. Partners are responsible for managing the customer identification and testing process. This customer must be live with this integration in production, not preview. 
-3. The Okta admin for the customer who is live with the integration sends an email to <oktascimfeedback@okta.com> stating that the integration is working as expected.
+3. The Okta administrator for the customer who is live with the integration sends an email to <oktascimfeedback@okta.com> stating that the integration is working as expected.
 4. Once the above steps are complete, Okta changes the status of the integration in OIN to Okta-Verified. 
 
 Whether Beta or Okta-Verified, when issues arise related to the SCIM integration, the ISV acts as the first point of contact. 
@@ -1264,7 +1264,7 @@ Yes, Okta will eventually support the /Groups endpoint of the SCIM API. We are t
 **How does data validation work with SCIM provisioning? For example, if my app requires phone number in a specific format, how do I ensure that Okta passes the attribute in that format? If a data validation error issue occurs how does error reporting work?**
 
 The SCIM spec specifies valid data formats for a given user profile attribute, however Okta does not rigorously validate that the customer has inputted values meeting those requirements to preserve flexibility.
-Therefore, data validation should be handled by your app’s SCIM Server. In other words, when Okta provisions user profile to your app, it should check that the data is valid per their special requirements. Error messages sent in the response from your app will be surfaced to Okta Admin via alerts and tasks in the Okta interface. You should also specify your data requirements in your config guide.
+Therefore, data validation should be handled by your app’s SCIM Server. In other words, when Okta provisions user profile to your app, it should check that the data is valid per their special requirements. Error messages sent in the response from your app will be surfaced to the Okta administrator via alerts and tasks in the Okta interface. You should also specify your data requirements in your config guide.
 
 **How much filtering support is needed?**
 
