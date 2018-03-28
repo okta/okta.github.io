@@ -1,21 +1,27 @@
 ---
 layout: docs_page
 title: Linked Objects
-excerpt: The Linked Objects API helps you create or import users with relationships, like Manager and Direct Report.
+excerpt: The Linked Objects API helps you create relationships between pairs of users, such as Manager and Subordinate.
 ---
 
 # Linked Objects API
 
 {% api_lifecycle ea %}
 
-Users have relationships to each other, like manager and direct report or customer and sales representative. You can create or import users with relationships by using the Linked Objects API to represent the relationship:
+Users have relationships to each other, like manager and subordinate or customer and sales representative. You can create or import users with relationships by using the Linked Objects API to represent the relationship:
 
-1. Create a linked object definition such as Manager:Direct Report or Case Worker:Client. These pairs are represented by a `primary` attribute and an `associated` attribute.
-2. Assign the linked object definition to a pair of users to create the relationship between the two. For example, Jack is assigned Direct Report and Javier is assigned Manager.
+1. Create a linked object definition such as Manager:Subordinate or Case Worker:Client. These pairs are represented by a `primary` attribute and an `associated` attribute.
+2. Assign the linked object definition to a pair of users to create the relationship between the two. For example, Jack is assigned Subordinate and Javier is assigned Manager.
 
-For each relationship, a user has at most one `primary` link (a user has a single manager) but can have many associated links (a user can have many direct reports). Further, a user can be the `primary` in one relationship and the `associated` in another. A user can't be both the `primary` and `associated` in the same relationship. For details, see the [Linked Object Model](#linked-object-model).
+For each relationship:
 
-The Expression Language functions for [linked objects](/reference/okta_expression_language/#linked-object-functions) provide access to the details about a linked user.
+* A user has at most one `primary` link (a user has a single manager) but can have many `associated` links (a user can have many subordinates).
+* A user can be the `primary` in one relationship and the `associated` in another.
+* A user can be both the `primary` and `associated` in the same relationship.
+
+For details, see the [Linked Object Model](#linked-object-model).
+
+The Expression Language functions for [linked objects](/reference/okta_expression_language/#linked-object-function) provide access to the details about a linked user.
 
 ## Getting Started
 
@@ -24,26 +30,32 @@ Explore the Linked Objects API: [![Run in Postman](https://run.pstmn.io/button.s
 ## Link Definition Operations
 
 Link definition operations allow you to manage the creation and removal of the link definitions.
-If you remove a link definition, [what happens to the users assigned to that definition?].
+If you remove a link definition, links based on that definition are unavailable. Links will reappear if you recreate the definition, however, Okta is likely to change this behavior before becoming Generally Available, so don't rely on this behavior in production environments.
 
 Each org can create up to 200 definitions, and assign them to an unlimited number of users.
 
-### Add Linked Object Property to User Profile Schema
+### Add Linked Object Definition to User Profile Schema
 {:.api .api-operation}
 
-{% api_operation get /api/v1/meta/schemas/user/default/linkedObjects %}
+{% api_operation post /api/v1/meta/schemas/user/default/linkedObjects %}
 
-Adds a linked object property to the user profile schema
+Adds a linked object definition to the user profile schema
 
 ##### Request Parameters
 {:.api .api-request .api-request-params}
 
 | Parameter   | Description    | DataType          | Required |
 | :--------------- | :----------------- | :-------------------- |:------------ |
-| name | API name of the `primary` or `associated` link | String  | TRUE   |
-| title    | Display name of the `primary` or `associated` link | String | TRUE |
-| description | Brief description of the `primary` or `associated` role | String | FALSE |
-| type | The object type for this linked object definition | Enum of USER | TRUE |
+| primary-name | API name of the `primary` link | USER  | TRUE   |
+| primary-title    | Display name of the `primary` link | String | TRUE |
+| primary-description | Brief description of the `primary` role | String | FALSE |
+| primary-type | The object type for this `primary` link. Valid value: `USER` | String | TRUE |
+| associated-name | API name of the `associated` link | String  | TRUE   |
+| associated-title    | Display name of the `associated` link | String | TRUE |
+| associated-description | Brief description of the `associated` role | String | FALSE |
+| associated-type | The object type for this `associated` role. Valid value: `USER` | String | TRUE |
+
+> `type` is created as an ENUM to allow Okta to add moer object types in the future. This is not a guarantee that Okta will do so. 
 
 ##### Response Parameters
 {:.api .api-response .api-response-params}
@@ -60,18 +72,17 @@ curl -X POST \
   -H 'Content-Type: application/json' \
   -d '{
   "primary": {
-        "name": "Manager",
+        "name": "manager",
         "title": "Manager",
         "description": "Manager link property",
         "type": "USER"
     },
     "associated": {
-        "name": "CastMember",
-        "title": "Cast Member",
-        "description": "Cast Member link property",
+        "name": "subordinate",
+        "title": "Subordinate",
+        "description": "Subordinate link property",
         "type": "USER"
-    },
-    "cardinality": "MANY_TO_ONE"
+    }
 }' "https://{yourOktaDomain}.com/api/v1/meta/schemas/user/default/linkedObjects"
 ~~~
 
@@ -82,20 +93,20 @@ curl -X POST \
 HTTP/1.1 201 Created
 {
     "primary": {
-        "name": "Manager",
+        "name": "manager",
         "title": "Manager",
         "description": "Manager link property",
         "type": "USER"
     },
     "associated": {
-        "name": "CastMember",
-        "title": "Cast Member",
-        "description": "Cast Member link property",
+        "name": "subordinate",
+        "title": "Subordinate",
+        "description": "Subordinate link property",
         "type": "USER"
     },
     "_links": {
         "self": {
-            "href": "https://{yourOktaDomain}.com/api/v1/meta/schemas/user/default/linkedObjects/Manager"
+            "href": "https://{yourOktaDomain}.com/api/v1/meta/schemas/user/default/linkedObjects/manager"
         }
     }
 ~~~
@@ -129,7 +140,7 @@ curl -X POST \
   -H 'Accept: application/json' \
   -H 'Authorization: SSWS ${api_token}' \
   -H 'Content-Type: application/json' \
-  -d "https://{yourOktaDomain}.com/api/v1/meta/schemas/user/default/linkedObjects/Manager"
+  -d "https://{yourOktaDomain}.com/api/v1/meta/schemas/user/default/linkedObjects/manager"
 ~~~
 
 ##### Response Example
@@ -140,24 +151,25 @@ HTTP/1.1 200 OK
 
 {
     "primary": {
-        "name": "Manager",
+        "name": "manager",
         "title": "Manager",
         "description": "Manager link property",
         "type": "USER"
     },
     "associated": {
-        "name": "CastMember",
-        "title": "Cast Member",
-        "description": "Cast Member link property",
+        "name": "subordinate",
+        "title": "Subordinate",
+        "description": "Subordinate link property",
         "type": "USER"
     },
     "_links": {
         "self": {
-            "href": "https://${yourOktaDomain}.com/api/v1/meta/schemas/user/default/linkedObjects/Manager"
+            "href": "https://${yourOktaDomain}.com/api/v1/meta/schemas/user/default/linkedObjects/manager"
         }
     }
 }
 ~~~
+> Note: Regardless of whether you specify the primary or associated role in the request, the resulting link contains the primary role.
 
 ### Get All Linked Object Definitions
 {:.api .api-operation}
@@ -194,39 +206,39 @@ curl -v -X GET \
 [
     {
         "primary": {
-            "name": "Manager",
+            "name": "manager",
             "title": "Manager",
             "description": "Manager link property",
             "type": "USER"
         },
         "associated": {
-            "name": "CastMember",
-            "title": "Cast Member",
-            "description": "Cast Member link property",
+            "name": "subordinate",
+            "title": "Subordinate",
+            "description": "Subordinate link property",
             "type": "USER"
         },
         "_links": {
             "self": {
-                "href": "https://{yourOktaDomain}.com/api/v1/meta/schemas/user/default/linkedObjects/Manager"
+                "href": "https://{yourOktaDomain}.com/api/v1/meta/schemas/user/default/linkedObjects/manager"
             }
         }
     },
     {
         "primary": {
-            "name": "Choreographer",
-            "title": "Choreographer",
-            "description": "Dance choreographer",
+            "name": "mother",
+            "title": "Mother",
+            "description": "Mother",
             "type": "USER"
         },
         "associated": {
-            "name": "Dancer",
-            "title": "Company Dancer",
-            "description": "Dancer for the Company",
+            "name": "child",
+            "title": "Child",
+            "description": "Child",
             "type": "USER"
         },
         "_links": {
             "self": {
-                "href": "https://{yourOktaDomain}.com/api/v1/meta/schemas/user/default/linkedObjects/Choreographer"
+                "href": "https://{yourOktaDomain}.com/api/v1/meta/schemas/user/default/linkedObjects/mother"
             }
         }
     }
@@ -236,7 +248,7 @@ curl -v -X GET \
 ### Remove Linked Object Definition
 {:.api .api-operation}
 
-{% api_operation get /api/v1/meta/schemas/user/default/linkedObjects/${name} %}
+{% api_operation delete /api/v1/meta/schemas/user/default/linkedObjects/${name} %}
 
 Removes the linked object definition specified by either `primary` or `associated` name. The entire definition is removed, regardless of which name you specify
 
@@ -256,11 +268,11 @@ None
 {:.api .api-request .api-request-example}
 
 ~~~sh
-curl -v -X GET \
+curl -v -X DELETE \
 -H "Accept: application/json" \
 -H "Content-Type: application/json" \
 -H "Authorization: SSWS ${api_token}" \
-"https://{yourOktaDomain}.com/api/v1/meta/schemas/user/default/linkedObjects/Choreographer"
+"https://{yourOktaDomain}.com/api/v1/meta/schemas/user/default/linkedObjects/mother"
 ~~~
 
 ##### Response Example
@@ -276,15 +288,15 @@ Use link value operations to assign users to a relationship (pair of `primary` a
 
 For the following operations, the examples use consistent IDs so you can follow the operations more easily:
 
-* Manager is the `primary` role, and is assigned to `00u5t60iloOHN9pBi0h7`
-* Cast Member is the `associated` role, and is assigned to `00u5zex6ztMbOZhF50h7`
+* `manager` is the `primary` role, and is assigned to `00u5t60iloOHN9pBi0h7`
+* `subordinate` is the `associated` role, and is assigned to `00u5zex6ztMbOZhF50h7`
 
 ### Set Linked Object Value for Primary
 {:.api .api-operation}
 
-{% api_operation put /api/v1/users/${associated-userId}/linkedObjects/${primaryName}/{primary-userId} %}
+{% api_operation put /api/v1/users/${associated-userId}/linkedObjects/${primaryName}/${primary-userId} %}
 
-Sets the first user as the `associated` and the second user as the `primary` for the specified relationship.
+Sets the first user as the `associated` and the second user as the `primary` for the specified relationship. If the first user is already associated with a different `primary` for this relationship, the previous link is removed. A linked object relationship can specify only one primary user for an associated user.
 
 ##### Request Parameters
 {:.api .api-request .api-request-params}
@@ -293,7 +305,7 @@ Sets the first user as the `associated` and the second user as the `primary` for
 | :--------------- | :----------------- |:---------------- |:------------ |
 | associated-userId | User ID or `login` value of user to be assigned the `associated` role in a relationship | String | TRUE     |
 | primaryName | Name of the `primary` role in the relationship being assigned | String | TRUE  |
-| primary-userId | User ID to be assigned the `primary` role in the specified relationship | String | TRUE     |
+| primary-userId | User ID to be assigned the `primary` role for the `associated` user in the specified relationship. | String | TRUE     |
 
 ##### Response Parameters
 {:.api .api-response .api-response-params}
@@ -304,11 +316,11 @@ None
 {:.api .api-request .api-request-example}
 
 ~~~sh
-curl -v -X GET \
+curl -v -X PUT \
 -H "Accept: application/json" \
 -H "Content-Type: application/json" \
 -H "Authorization: SSWS ${api_token}" \
-"https://{yourOktaDomain}.com//api/v1/users/${associated-userId}/linkedObjects/${Manager}/{primary-userId}"
+"https://{yourOktaDomain}.com/api/v1/users/${associated-userId}/linkedObjects/${primary-name}/${primary-userId}"
 ~~~
 
 ##### Response Example
@@ -323,7 +335,7 @@ HTTP/1.1 204 No Content
 
 {% api_operation get /api/v1/users/${id}/linkedObjects/${primary-name} %}
 
-For a user, return the ID of the `primary` user. If the user specified is the primary for the specified relationship, nothing is returned.
+For an `associated` user specified by ID, returns the `self` link for the `primary` user for the relationship specified by the primary-name . If the user specified is not the `associated` user in any relationship, an empty array is returned.
 
 ##### Request Parameters
 {:.api .api-request .api-request-params}
@@ -335,7 +347,7 @@ For a user, return the ID of the `primary` user. If the user specified is the pr
 ##### Response Parameters
 {:.api .api-response .api-response-params}
 
-Link to the primary user.
+Array containing a link to the `primary` user, or an empty array if the specified user is not yet associated with a `primary` user.
 
 ##### Request Example
 {:.api .api-request .api-request-example}
@@ -345,7 +357,7 @@ curl -v -X GET \
 -H "Accept: application/json" \
 -H "Content-Type: application/json" \
 -H "Authorization: SSWS ${api_token}" \
-"https://{yourOktaDomain}.com//api/v1/users/00u5zex6ztMbOZhF50h7/linkedObjects/Manager"
+"https://{yourOktaDomain}.com/api/v1/users/00u5zex6ztMbOZhF50h7/linkedObjects/${primary-name}"
 ~~~
 
 ##### Response Example
@@ -356,7 +368,7 @@ curl -v -X GET \
     {
         "_links": {
             "self": {
-                "href": "https://mysticorp.oktapreview.com/api/v1/users/00u5t60iloOHN9pBi0h7"
+                "href": "https://{yourOktaDomain}.com/api/v1/users/00u5t60iloOHN9pBi0h7"
             }
         }
     }
@@ -366,7 +378,7 @@ curl -v -X GET \
 ### Get Associated Linked Object Values
 {:.api .api-operation}
 
-{% api_operation get /api/v1/users/00u5t60iloOHN9pBi0h7/linkedObjects/CastMember %}
+{% api_operation get /api/v1/users/${id}/linkedObjects/${associated-name} %}
 
 For the specified user, gets an array of users who are `associated` for the specified role. If the specified user is not a `primary`, no results are returned.
 
@@ -390,7 +402,7 @@ curl -v -X GET \
 -H "Accept: application/json" \
 -H "Content-Type: application/json" \
 -H "Authorization: SSWS ${api_token}" \
-"https://{yourOktaDomain}.com//api/v1/users/00u5t60iloOHN9pBi0h7/linkedObjects/CastMember"
+"https://{yourOktaDomain}.com/api/v1/users/00u5t60iloOHN9pBi0h7/linkedObjects/subordinate"
 ~~~
 
 ##### Response Example
@@ -401,7 +413,7 @@ curl -v -X GET \
     {
         "_links": {
             "self": {
-                "href": "https://mysticorp.oktapreview.com/api/v1/users/00u5zex6ztMbOZhF50h7"
+                "href": "https://{yourOktaDomain}.com/api/v1/users/00u5zex6ztMbOZhF50h7"
             }
         }
     }
@@ -414,16 +426,18 @@ curl -v -X GET \
 {% api_operation delete  /api/v1/users/${id}/linkedObjects/${primary-name}
  %}
 
-For the specified primary name and primary user, deletes the relationship between primary and all associated users.
+For the `associated` user specified by ID and the relationship specified by `primary` name, deletes any existing relationship between the `associated` and `primary` user.
 
 ##### Request Parameters
 {:.api .api-request .api-request-params}
 
 | Parameter   | Description    | DataType     | Required |
 | :--------------- | :----------------- |:---------------- |:------------ |
-| id | ID of the user in the `associated` role for the specified primary name. Can be `me` to represent the current session user. | String | TRUE     |
+| id | ID of the user in the `associated` role for the specified primary name. Can be `me` to represent the current session user. | String | TRUE   |
+| primary-name | The name of the primary role for which you are deleting all `associated` relationships | String | TRUE |
 
-If the specified user is in the `primary` role for the specified relationship, nothing is deleted.
+* If the specified user isn't in the `associated` role for any instance of the specified `primary` role, an HTTP 204 message is returned just as it is if any `associated` relationships were deleted.
+* If no linked object definition exists with the specified `primary-name`, an HTTP 404 is returned.
 
 ##### Response Parameters
 {:.api .api-response .api-response-params}
@@ -438,7 +452,7 @@ curl -v -X GET \
 -H "Accept: application/json" \
 -H "Content-Type: application/json" \
 -H "Authorization: SSWS ${api_token}" \
-"https://{yourOktaDomain}.com//api/v1/users/00u5t60iloOHN9pBi0h7/linkedObjects/Manager"
+"https://{yourOktaDomain}.com//api/v1/users/00u5t60iloOHN9pBi0h7/linkedObjects/manager"
 ~~~
 
 ##### Response Example
@@ -455,20 +469,20 @@ The following model contains example values for each attribute.
 ~~~sh
 {
     "primary": {
-        "name": "Manager",
+        "name": "manager",
         "title": "Manager",
         "description": "Manager link property",
         "type": "USER"
     },
     "associated": {
-        "name": "CastMember",
-        "title": "Cast Member",
-        "description": "Cast Member link property",
+        "name": "subordinate",
+        "title": "Subordinate",
+        "description": "Subordinate link property",
         "type": "USER"
     },
     "_links": {
         "self": {
-            "href": "https://{yourOktaDomain}.com/api/v1/meta/schemas/user/default/linkedObjects/Manager"
+            "href": "https://{yourOktaDomain}.com/api/v1/meta/schemas/user/default/linkedObjects/manager"
         }
     }
 ~~~
