@@ -37,4 +37,4 @@ Bob can be the `primary` for a Manager:Subordinate, an `associated` user for tha
 
 To represent a relationship, create a linked object definition that specifies a `primary` (parent) relationship and an `associated` (child), and then assign each side of that link type to the appropriate user.
 
-To get started, visit  [Linked Objects API](/docs/api/resources/linked-objects) to use the examples or try a Postman collection.
+To get started, visit  [Linked Objects API](/docs/api/resources/linked-objects).
