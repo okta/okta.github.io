@@ -16,7 +16,7 @@ Okta allows you to create up to 200 linked object definitions. These definitions
 * A sales representative has many customers
 * A case worker has many clients
 
-Of course, most organizations have more than one manager or sales representative. You can create the linked object definition once, then assign the `primary` relationship to as many users as you have people in that role. 
+Of course, most organizations have more than one manager or sales representative. You can create the linked object definition once, then assign the `primary` relationship to as many users as you have people in that relationship. 
 
 You can assign the `associated` relationship for a single `primary` user to as many users as needed. The `associated` user can be related to only one `primary` per linked object definition. But a user can be assigned to more than one linked object definition.
 

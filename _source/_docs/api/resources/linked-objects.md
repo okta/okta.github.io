@@ -26,8 +26,9 @@ The Expression Language function for [linked objects](/reference/okta_expression
 
 ## Link Definition Operations
 
-Link definition operations allow you to manage the creation and removal of the link definitions.
-If you remove a link definition, links based on that definition are unavailable. Links will reappear if you recreate the definition, however, Okta is likely to change this behavior before becoming Generally Available. Don't rely on this behavior in production environments.
+Link definition operations allow you to manage the creation and removal of the link definitions. If you remove a link definition, links based on that definition are unavailable.
+
+> Currently, links reappear if you recreate the definition. However, Okta is likely to change this behavior so that links don't reappear. Don't rely on this behavior in production environments.
 
 Each org can create up to 200 definitions, and assign them to an unlimited number of users.
 
@@ -42,7 +43,7 @@ Adds a linked object definition to the user profile schema
 {:.api .api-request .api-request-params}
 
 | Parameter | Description | Param Type | DataType  | Required |
-| :------------- | :-------------- | :---------------- | | :----------- | :------------ |
+| :------------- | :-------------- | :---------------- | :----------- | :------------ |
 | linkedObject | The linked object definition being created | Body | [Linked Object](#linked-object-model)  | TRUE   |
 
 ##### Response Parameters
@@ -158,7 +159,7 @@ HTTP/1.1 200 OK
     }
 }
 ~~~
-> Note: Regardless of whether you specify the primary or associated role in the request, the resulting link contains the primary role.
+> Note: Regardless of whether you specify the `primary` or `associated` name in the request, the resulting link contains the `primary`.
 
 ### Get All Linked Object Definitions
 {:.api .api-operation}
@@ -277,8 +278,8 @@ Use link value operations to assign users to a relationship (pair of `primary` a
 
 For the following operations, the examples use consistent IDs so you can follow the operations more easily:
 
-* `manager` is the `primary` role, and is assigned to `00u5t60iloOHN9pBi0h7`
-* `subordinate` is the `associated` role, and is assigned to `00u5zex6ztMbOZhF50h7`
+* `manager` is the `primary` relationship, and is assigned to `00u5t60iloOHN9pBi0h7`
+* `subordinate` is the `associated` relationship, and is assigned to `00u5zex6ztMbOZhF50h7`
 
 ### Set Linked Object Value for Primary
 {:.api .api-operation}
@@ -292,9 +293,9 @@ Sets the first user as the `associated` and the second user as the `primary` for
 
 | Parameter   | Description    | DataType     | Required |
 | :--------------- | :----------------- |:---------------- |:------------ |
-| associated.userId | User ID or `login` value of user to be assigned the `associated` role in a relationship | String | TRUE     |
-| primaryName | Name of the `primary` role in the relationship being assigned | String | TRUE  |
-| primary.userId | User ID to be assigned the `primary` role for the `associated` user in the specified relationship. | String | TRUE     |
+| associated.userId | User ID or `login` value of user to be assigned the `associated` relationship | String | TRUE     |
+| primaryName | Name of the `primary` relationship being assigned | String | TRUE  |
+| primary.userId | User ID to be assigned to `primary` for the `associated` user in the specified relationship. | String | TRUE   |
 
 ##### Response Parameters
 {:.api .api-response .api-response-params}
@@ -371,7 +372,7 @@ curl -v -X GET \
 
 {% api_operation get /api/v1/users/${id}/linkedObjects/${associated.name} %}
 
-For the specified user, gets an array of users who are `associated` for the specified role. If the specified user is not a `primary`,  an empty array is returned.
+For the specified user, gets an array of users who are `associated` for the specified relationship. If the specified user isn't assigned a `primary` relationship,  an empty array is returned.
 
 Use `me` instead of `id` to specify the current session user.
 
@@ -385,7 +386,7 @@ Use `me` instead of `id` to specify the current session user.
 ##### Response Parameters
 {:.api .api-response .api-response-params}
 
-Links to all users associated to the specified `primary` user for the specified `associated` role.
+Links to all users associated to the specified `primary` user for the specified `associated` relationship.
 
 ##### Request Example
 {:.api .api-request .api-request-example}
@@ -429,8 +430,12 @@ For the `associated` user specified by ID and the relationship specified by `pri
 | id | ID of the user in the `associated` relationship for the specified primary name. Can be `me` to represent the current session user. | String | TRUE   |
 | primary.name | The name of the `primary` relationship associated with the specified `associated` user. The relationship between these two users is the linked object value being deleted. | String | TRUE |
 
-* If the specified user isn't in the `associated` role for any instance of the specified `primary` role (no relationship is found), an HTTP 204 message is returned just as it is if a relationship is deleted.
-* If no linked object definition exists with the specified `primary.name`, an HTTP 404 is returned.
+An HTTP 204 message is returned:
+
+* If the relationship is deleted.
+* If the specified user isn't in the `associated` relationship for any instance of the specified `primary` and thus no relationship is found.
+
+An HTTP 404 is returned if no linked object definition exists with the specified `primary.name`.
 
 ##### Response Parameters
 {:.api .api-response .api-response-params}
@@ -486,11 +491,11 @@ The following model contains example values for each attribute.
 | :--------------- | :----------------- | :-------------------- |:------------ |
 | primary.name | API name of the `primary` link | String  | TRUE   |
 | primary.title    | Display name of the `primary` link | String | TRUE |
-| primary.description | Brief description of the `primary` role | String | FALSE |
-| primary.type | The object type for this `primary` link. Valid value: `USER` | USER | TRUE |
+| primary.description | Description of the `primary` relationship | String | FALSE |
+| primary.type | The object type for this `primary` link. Valid value: `USER` | Enum | TRUE |
 | associated.name | API name of the `associated` link | String  | TRUE   |
 | associated.title    | Display name of the `associated` link | String | TRUE |
-| associated.description | Brief description of the `associated` role | String | FALSE |
-| associated.type | The object type for this `associated` role. Valid value: `USER` | USER | TRUE |
+| associated.description | Description of the `associated` relationship | String | FALSE |
+| associated.type | The object type for this `associated` relationship. Valid value: `USER` | Enum | TRUE |
 
-> The primary.type and associated.type are created as ENUMs to allow Okta to add more object types in the future. This is not a guarantee that Okta will do so. 
+> The primary.type and associated.type are created as Enums to allow Okta to add more object types in the future. This is not a guarantee that Okta will do so. 
