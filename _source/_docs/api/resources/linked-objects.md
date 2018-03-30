@@ -284,7 +284,7 @@ For the following operations, the examples use consistent IDs so you can follow 
 ### Set Linked Object Value for Primary
 {:.api .api-operation}
 
-{% api_operation put /api/v1/users/${associated.userId}/linkedObjects/${primaryName}/${primary.userId} %}
+{% api_operation put /api/v1/users/${associated.userId}/linkedObjects/${primary.name}/${primary.userId} %}
 
 Sets the first user as the `associated` and the second user as the `primary` for the specified relationship. If the first user is already associated with a different `primary` for this relationship, the previous link is removed. A linked object relationship can specify only one primary user for an associated user.
 
@@ -294,7 +294,7 @@ Sets the first user as the `associated` and the second user as the `primary` for
 | Parameter   | Description    | DataType     | Required |
 | :--------------- | :----------------- |:---------------- |:------------ |
 | associated.userId | User ID or `login` value of user to be assigned the `associated` relationship | String | TRUE     |
-| primaryName | Name of the `primary` relationship being assigned | String | TRUE  |
+| primary.name | Name of the `primary` relationship being assigned | String | TRUE  |
 | primary.userId | User ID to be assigned to `primary` for the `associated` user in the specified relationship. | String | TRUE   |
 
 ##### Response Parameters
@@ -372,7 +372,7 @@ curl -v -X GET \
 
 {% api_operation get /api/v1/users/${id}/linkedObjects/${associated.name} %}
 
-For the specified user, gets an array of users who are `associated` for the specified relationship. If the specified user isn't assigned a `primary` relationship,  an empty array is returned.
+For the specified user, gets an array of users who are `associated` for the specified relationship. If the specified user isn't assigned a `primary` relationship, an empty array is returned.
 
 Use `me` instead of `id` to specify the current session user.
 
