@@ -847,7 +847,7 @@ Follow the steps below to test and submit your application for Okta review:
 1. [Review Okta’s SCIM Docs and Prepare Your App](#step-1-review-oktas-scim-docs-and-prepare-your-app)
 2. [Test Your SCIM Server](#step-2-test-your-scim-server)
 3. [Submit for Okta Review and Testing](#step-3-submit-for-okta-review-and-testing)
-4. [Publish to Okta Integration Network (OIN) in Beta](#step-4-publish-to-okta-integration-network-oin-in-beta)
+4. [Publish to Okta Integration Network (OIN) in Partner-Built EA](#step-4-publish-to-okta-integration-network-oin-in-partner-built-ea)
 5. [Become Okta-Verified in the OIN](#step-5-become-okta-verified-in-the-oin)
 
 > Have questions? Need help? Email us at <developers@okta.com> or post your question on [Stack Overflow](http://stackoverflow.com/search?q=okta,scim).
@@ -1067,11 +1067,13 @@ For more details, see the [configuration guide guidelines](http://saml-doc.okta.
 
 Note: When you are ready, use [this form](https://oanmanager.okta.com/) to submit for Okta review.
 
-### Step 4. Publish to Okta Integration Network (OIN) in Beta
+### Step 4. Publish to Okta Integration Network (OIN) in Partner-Built EA
 
-Okta recently changed the process by which an ISV can publish their integration into the Okta Integration Network (OIN). Now, before becoming Okta-verified, publish to the OIN in Beta. Publishing in Beta allows customer to more easily see and test your newly submitted SCIM-enabled integration while it undergoes customer validation.
+Okta recently changed the process by which an ISV can publish their integration into the Okta Integration Network (OIN). Now, before becoming Okta-verified, publish to the OIN in Partner-Built EA. Publishing in Partner-Built EA allows customer to more easily see and test your newly submitted SCIM-enabled integration while it undergoes customer validation.
 
-In order for an app to be published in the Okta Integration Network in Beta, it must meet the following criteria:
+> Note: Partner-Built EA application features have been verified and tested by Okta but may not have been deployed or used by a customer in an Okta production environment. We recommend that you fully test these integrations for your own provisioning use-cases before deploying in production for your end users.
+
+In order for an app to be published in the Okta Integration Network in Partner-Built EA, it must meet the following criteria:
 
 * Include an ISV configuration guide explaining:
   * The supported features
@@ -1084,9 +1086,9 @@ In order for an app to be published in the Okta Integration Network in Beta, it 
 * RunScope Test Suite
 * Final Full QA by Okta
 
-Once Okta completes the QA process and the requisite changes are made (all issues are closed), Okta allows the provisioning integration to enter the Okta Integration Network in Beta.
+Once Okta completes the QA process and the requisite changes are made (all issues are closed), Okta allows the provisioning integration to enter the Okta Integration Network in Partner-Built EA.
 
-{% img scim-beta.png alt:"User interface shows an integration in Beta" %}
+{% img scim-partner-ea.png alt:"User interface shows an integration in Partner-Built EA" %}
 
 ### Step 5. Become Okta-Verified in the OIN
 
@@ -1099,9 +1101,9 @@ Use this process to involve joint customers in testing a newly developed SCIM in
 3. The Okta administrator for the customer who is live with the integration sends an email to <oktascimfeedback@okta.com> stating that the integration is working as expected.
 4. Once the above steps are complete, Okta changes the status of the integration in OIN to Okta-Verified.
 
-Whether Beta or Okta-Verified, when issues arise related to the SCIM integration, the ISV acts as the first point of contact.
+Whether Partner-Built EA or Okta-Verified, when issues arise related to the SCIM integration, the ISV acts as the first point of contact.
 
-{% img scim-config-guide.png alt:"User interface shows an integration in Beta" %}
+{% img scim-config-guide.png alt:"User interface shows an integration in Okta Verified" %}
 
 ## Provisioning FAQs
 
