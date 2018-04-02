@@ -134,7 +134,6 @@ With that said, I hope you enjoyed this brief breakdown of the twelve-factor app
 Please [tweet at me](https://twitter.com/rdegges) if you have any security questions! Now go out there and make your applications more secure!
 
 
-<!--
 ## Gotcha!
 
 {% img blog/twelve-factor/stick-figure-happy.gif alt:"stick figure happy" width:"200" %}{: .center-image }
@@ -224,4 +223,3 @@ To sum things up, here's what I'd recommend you do when trying to build applicat
 If you do the above you're getting the best of both worlds: security and convenience.
 
 That's all for now, please [hit us up](https://twitter.com/oktadev) if you have any questions or leave a comment below.
--->
