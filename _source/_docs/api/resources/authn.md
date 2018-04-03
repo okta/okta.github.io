@@ -4503,7 +4503,7 @@ curl -v -X POST \
 </script>
 ~~~
 
-#### Post the Signed Assertion to Okta to Complete Verification
+##### Post the Signed Assertion to Okta to Complete Verification
 
 ##### Request Example for Signed Assertion
 {:.api .api-request .api-request-example}

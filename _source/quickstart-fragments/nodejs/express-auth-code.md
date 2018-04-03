@@ -5,9 +5,9 @@ exampleDescription: Express.js Auth Code Example
 
 ## Okta Node.js/Express.js Quickstart
 
-To handle the authentication callback from Okta, your Express server will need to handle this callback.  In this section we'll show you how to install and configure the [@okta/oidc-middleware](https://github.com/okta/okta-oidc-js/tree/master/packages/oidc-middleware) library, referred to below as ExpressOIDC, it will add the needed callback handler to your application.
+Your Express server will need to handle the authentication callback from Okta.  In this section we'll show you how to install and configure the [@okta/oidc-middleware](https://github.com/okta/okta-oidc-js/tree/master/packages/oidc-middleware) library, referred to below as ExpressOIDC, to do this automatically.
 
-> If you would prefer to download a complete sample application, please visit [Express Sample Applications for Okta][].
+> If you would prefer to download a complete sample application instead, please visit [Express Sample Applications for Okta][] and follow those instructions.
 
 ### Install The Library
 
@@ -19,7 +19,7 @@ npm install @okta/oidc-middleware
 
 ### Configure The OIDC Router
 
-To use ExpressOIDC you create an instance of the middleware by passing the needed configuration, then attaching its router to your Express app.  You will also need to add session support to your app, so that ExpressOIDC can create the session cookie after authentication is complete.  Here is an example configuration:
+To use ExpressOIDC you create an instance of the middleware by passing the needed configuration, then attaching its router to your Express app.  You will also need to add session support to your app, so that ExpressOIDC can create an Express session after authentication is complete.  Here is an example configuration:
 
 ```javascript
 const session = require('express-session');

@@ -1,8 +1,3 @@
 ---
-layout: software
-title: Okta API .NET SDK
-language: .NET
-excerpt: .NET bindings for the Okta API. <a href="/docs/sdk/core/csharp_api_sdk/html/6af60b57-62fa-477c-a899-e2f21286c53d.htm">Get started now</a>.
-github_url: https://github.com/okta/okta-sdk-dotnet
-weight: 1
+redirect_to: https://github.com/okta/okta-sdk-dotnet
 ---
