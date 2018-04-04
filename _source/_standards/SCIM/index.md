@@ -1069,7 +1069,7 @@ Note: When you are ready, use [this form](https://oanmanager.okta.com/) to submi
 
 ### Step 4. Publish to Okta Integration Network (OIN) in Partner-Built EA
 
-Okta recently changed the process by which an ISV can publish their integration into the Okta Integration Network (OIN). Now, before becoming Okta-verified, publish to the OIN in Partner-Built EA. Publishing in Partner-Built EA allows customer to more easily see and test your newly submitted SCIM-enabled integration while it undergoes customer validation.
+Okta recently changed the process by which an ISV can publish their integration into the Okta Integration Network (OIN). Now, before becoming Okta-verified, publish to the OIN in Partner-Built EA. Publishing in Partner-Built allows customers to easily discover your integration in the OIN and work directly with the you (the ISV) to validate and deploy your integration without Okta Interference.
 
 > Note: Partner-Built EA application features have been verified and tested by Okta but may not have been deployed or used by a customer in an Okta production environment. We recommend that you fully test these integrations for your own provisioning use-cases before deploying in production for your end users.
 
