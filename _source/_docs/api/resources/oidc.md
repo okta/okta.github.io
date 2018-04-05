@@ -30,7 +30,7 @@ This page contains detailed information about the OAuth 2.0 / OpenID Connect end
 
 ### Composing Your Base URL
 
-All of the endpoints on this page start with an authorization server. You have two types of authorization servers to choose from, depending on your use case:
+All of the endpoints on this page start with an authorization server, however the URL for that server will vary depending on the endpoint and the type of authorization server. You have two types of authorization servers to choose from, depending on your use case:
 
 #### 1. Single sign-on to Okta
 
@@ -826,7 +826,7 @@ curl -X GET \
         "client_secret_post",
         "client_secret_jwt",
         "none"
-    ]
+    ],
     "end_session_endpoint": "https://{yourOktaDomain}.com/oauth2/${authServerId}/v1/logout",
     "request_parameter_supported": true,
     "request_object_signing_alg_values_supported": [
@@ -853,9 +853,11 @@ HTTP 404 Not Found
 ### /.well-known/openid-configuration
 {:.api .api-operation}
 
-{% api_operation get ${baseUrl}/.well-known/openid-configuration %}
+{% api_operation get https://{yourOktaDomain}.com/.well-known/openid-configuration %}
 
-> This endpoint's base URL will vary depending on whether you are using a custom authorization server or not. For more information, see [Composing Your Base URL](#composing-your-base-url).
+{% api_operation get https://{yourOktaDomain}.com/oauth2/${authServerId}/.well-known/openid-configuration %}
+
+> This endpoint's base URL will vary depending on whether you are using a custom authorization server or not. The custom authorization server URL specifies an `authServerId`. For example, the custom Authorization Server automatically created for you by Okta has an `authServerId` value of `default`.
 
 Returns OpenID Connect metadata about your authorization server. This information can be used by clients to programmatically configure their interactions with Okta. Custom scopes and custom claims aren't returned.
 
@@ -866,7 +868,7 @@ This API doesn't require any authentication.
 
 ~~~sh
 curl -X GET \
-  "https:/{yourOktaDomain}.com/oauth2/${authServerId}/.well-known/openid-configuration?client_id=0oabzljih3rnr6aGt0h7" \
+  "https://{yourOktaDomain}.com/oauth2/${authServerId}/.well-known/openid-configuration?client_id=0oabzljih3rnr6aGt0h7" \
 ~~~
 
 #### Response Properties
@@ -874,7 +876,7 @@ curl -X GET \
 
 | Property  | Description                                                                                                   | Type    |
 |:-----------|:-------------------------------------------------------------------------------------------------------------|:--------|
-| authorization endpoint | URL of the authorization server's [authorization endpoint](#authorize). | String |
+| authorization_endpoint | URL of the authorization server's [authorization endpoint](#authorize). | String |
 | claims_supported | A list of the claims supported by this authorization server. | Array |
 | code_challenge_methods_supported| JSON array containing a list of [PKCE code challenge](/authentication-guide/implementing-authentication/auth-code-pkce) methods supported by this authorization server. | Array |
 | end_session_endpoint | URL of the authorization server's [logout endpoint](#logout). | String |

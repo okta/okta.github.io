@@ -14,14 +14,17 @@ This guide will walk you through integrating authentication into a React app wit
 
 At the end of the React instructions you can choose your server type to learn more about post-authentication workflows, such as verifying tokens that your React application can send to your server.
 
-> If you would prefer to download a complete sample application, please visit [React Sample Applications for Okta][].
+> If you would prefer to download a complete sample application instead, please visit [React Sample Applications for Okta][] and follow those instructions.
 
 ## Prerequisites
+
 * If you do not already have a **Developer Edition Account**, you can create one at [https://developer.okta.com/signup/](https://developer.okta.com/signup/).
 * If you don't have a React app, or are new to React, please continue with the [React Quickstart](https://facebook.github.io/react/docs/installation.html#creating-a-new-application) guide. It will walk you through the creation of a React app, creating routes, and other application development essentials.
 
 ## Add an OpenID Connect Client in Okta
+
 In Okta, applications are OpenID Connect clients that can use Okta Authorization servers to authenticate users.  Your Okta Org already has a default authorization server, so you just need to create an OIDC client that will use it.
+
 * Log into the Okta Developer Dashboard, click **Applications** then **Add Application**.
 * Choose **Single Page App (SPA)** as the platform, then populate your new OpenID Connect application with values suitable for your app. If you are running this locally and using the defaults from the [React Quickstart](https://facebook.github.io/react/docs/installation.html#creating-a-new-application), your `port` will be `3000`:
 
@@ -38,7 +41,6 @@ After you have created the application there are two more values you will need t
 | ------------- | ------------------------------------------------------------------------------ |
 | Client ID     | In the applications list, or on the "General" tab of a specific application.    |
 | Org URL       | On the home screen of the developer dashboard, in the upper right.             |
-
 
 These values will be used in your React application to setup the OpenID Connect flow with Okta.
 
@@ -71,8 +73,8 @@ const config = {
 
 You'll need to provide these routes in your sample application, so that we can sign the user in and handle the callback from Okta. We will show you how to set these up below using [React Router DOM](https://github.com/ReactTraining/react-router/tree/master/packages/react-router-dom):
 
-- `/`: A default home page to handle basic control of the app.
-- `/implicit/callback`: This is where auth is handled for you after redirection.
+* `/`: A default home page to handle basic control of the app.
+* `/implicit/callback`: This is where auth is handled for you after redirection.
 
 ### Provide the Login and Logout Buttons
 
@@ -90,6 +92,8 @@ export default withAuth(class Home extends Component {
     this.state = { authenticated: null };
     this.checkAuthentication = this.checkAuthentication.bind(this);
     this.checkAuthentication();
+    this.login = this.login.bind(this);
+    this.logout = this.logout.bind(this);
   }
 
   async checkAuthentication() {
@@ -103,11 +107,21 @@ export default withAuth(class Home extends Component {
     this.checkAuthentication();
   }
 
+  async login() {
+    // Redirect to '/' after login
+    this.props.login('/');
+  }
+
+  async logout() {
+    // Redirect to '/' after logout
+    this.props.logout('/');
+  }
+
   render() {
     if (this.state.authenticated === null) return null;
     return this.state.authenticated ?
-      <button onClick={this.props.auth.logout}>Logout</button> :
-      <button onClick={this.props.auth.login}>Login</button>;
+      <button onClick={this.logout}>Logout</button> :
+      <button onClick={this.login}>Login</button>;
   }
 });
 ```

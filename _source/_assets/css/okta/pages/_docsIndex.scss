@@ -1,123 +1,80 @@
-%Docs {
-    @extend %Hero;
-
-    @include padding(xx-large 0);
-    background: get-color('ebony-clay');
-    background-repeat: no-repeat;
-    background-position: right center;
-    background-size: cover;
-    color: get-color('white');
-    overflow: hidden;
-}
-
 .Docs {
-    @extend %Docs;
+  padding-bottom: 80px;
 
-    &-title {
-	    font-size: 40px;
-        line-height: 64px;
-        font-weight: 700;
-		letter-spacing: 4px;
-        margin-bottom: 0;
-        text-transform: uppercase;
-        font-family: "proxima-nova","Helvetica","sans-serif";
-        color: #fff,
-		span {
-			white-space: nowrap;
-		}
-	}
+  .Hero--docs {
+    padding-bottom: 80px;
+    color: get-color('white');
+    background: get-color('ebony-clay');
+    @media (max-width: 767px) {
+      padding-top: 120px;
+    }
+    @media (min-width: 1024px) {
+      padding-top: 218px;
+    }
+  	.Hero-subtitle {
+      margin: 64px auto 0;
+      font-size: 20px;
+      font-weight: 400;
+  	}
+  }
 
-	&-subtitle {
-        color: #d2d2d6;
-        font-size: 16px;
-        font-weight: 400;
-		line-height: 30px;
-        margin: 0, 0px, 0, auto;
-		a {
-			display: inline-table;
-			font-size: 14px;
-			color: #d2d2d6;
+  #docs-languages {
+    margin: 40px auto 0;
+    max-width: 860px;
+    .docs-page-tiles {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+    a {
+      display: inline-block;
+      width: 132px;
+      font-size: 14px;
+      font-weight: 600;
 			text-transform: uppercase;
-			padding: 0px 20px 30px;
-			border-bottom: 2px solid get-color('ebony-clay');
-			&:hover{
-				cursor: pointer;
-				text-decoration: none;
-			}
+      text-decoration: none;
+      letter-spacing: 1.5px;
+			padding: 24px 0;
+      color: get-color('iron');
 			&.active,
 			&:hover {
-				border-bottom-color:  #fff;
+				color: get-color('white');
 			}
+      i.icon.docsPage {
+        text-shadow: none;
+        &::before,
+        &::after {
+          font-size: 48px;
+        }
+      }
 		}
-	}
-
-	&-container {
-		margin: 50px, auto, 50px, auto;
-		background-color: #fff;
-		text-align: left;
-	}
+  }
 
 	&-content {
-		color: #5C5C5C;	
-        padding-left: 50px;
-        padding-right: 50px;
-		h1 {
-			color: rgb(0, 34, 65);
-			margin: 0;
-			border-bottom: 1px solid #9a9a9a;
-			display: inline-block;
-			width: 100%;
+    .Row {
+      margin-left: -32px;
+      margin-right: -32px;
+    }
+    [class^='Column-'] {
+      padding: 0 32px 32px;
+    }
+		h2 {
+			margin: 40px 0 0 0;
+			color: get-color('default');
 		}
-		h2, h3 {
-			color: #5C5C5C
-		}
-		a:hover {
-			color: rgb(0, 34, 65);
-		}
+		a {
+      &:hover {
+        .h4 {
+          color: get-color('blue-bright-hover');
+        }
+      }
+      .h4 {
+        color: get-color('blue-bright');
+      }
+    }
+    p {
+      margin: 10px 0;
+    }
 	}
 
-	%Row {
-		align-items: left;
-	}
-
-	// Update the icon size
-	i.icon.docsPage::before {
-		font-size: 40px;
-	}
-
-	i.icon.docsPage::after {
-		font-size: 40px;
-	}
-
-	table.docsPageTable {
-		width: auto;
-		margin-left: auto;
-		margin-right: auto;
-		border-style: hidden;
-		border-collapse: collapse;
-	}
-
-	table td.docsPageTableData {
-		border-style: hidden;
-		padding: 20px;
-	}
-
-	// When viewed from a mobile device, we break the table into two columns.
-	@media screen and (max-width: 750px) {
-		table.docsPageTable {
-			tbody {
-				display: flex;
-				border-style: hidden;			
-			}
-		}
-
-		td.docsPageTableRow {
-			display: flex;
-			flex-direction: column;
-		}
-
-		td.docsPageTableData {
-			display: block
-		}
-	}
 }

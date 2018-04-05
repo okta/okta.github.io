@@ -2,9 +2,11 @@
 layout: docs_page
 title: Apps
 redirect_from:
- - "/docs/api/rest/apps.html"
+ - "/docs/api/"
+ - "/docs/api/resources/"
  - "/docs/api/reference/"
  - "/docs/api/reference/index.html"
+ - "/docs/api/rest/apps.html"
 ---
 
 # Apps API

@@ -5,7 +5,7 @@ language: .NET
 integration: server
 ---
 
-# Add Okta to your .NET app
+# Add Okta authentication to your .NET app
 
 New to Okta? Our Quick Start Guide will walk you through adding user authentication to your .NET application in minutes.
 
@@ -27,9 +27,9 @@ New to Okta? Our Quick Start Guide will walk you through adding user authenticat
   </li>
 </ul>
 
-## .NET SDK
+## .NET Management SDK
 
-Once your users can sign in to your app, use Okta's Management APIs configure resources and manage your users. The .NET SDK makes calling Okta APIs from .NET code easy.
+Once your users can sign in to your app, use Okta's Management APIs to configure resources and manage your users. The .NET SDK makes calling Okta APIs from .NET code easy.
 
 <ul class='code-list'>
   <li>
@@ -43,10 +43,6 @@ Once your users can sign in to your app, use Okta's Management APIs configure re
   </li>
 </ul>
 
-## More Resources
+## Guides
 
-<ul class='code-list'>
-  <li><span class='fa fa-github'></span> <a href='https://github.com/oktadeveloper/okta-aspnetcore-mvc-example'>ASP.NET Core 2.0 MVC example</a></li>
-  <li><span class='fa fa-github'></span> <a href='https://github.com/oktadeveloper/okta-aspnet-mvc-example'>ASP.NET 4.x MVC example</a></li>
-  <li><span class='code-icon info-16-gray'></span> <a href='/code/dotnet/jwt-validation'>.NET JWT validation guide</a></li>
-</ul>
+<p><a href='/code/dotnet/jwt-validation'>.NET JWT validation guide</a></p>

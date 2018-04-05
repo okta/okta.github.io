@@ -22,7 +22,7 @@ New to Okta? Our Quick Start Guide will walk you through adding user authenticat
   </li>
 </ul>
 
-## Python SDK
+## Python Management SDK
 
 Once your users can sign in to your app, use Okta's Management API and SDKs to configure resources and manage your users.
 
@@ -35,8 +35,6 @@ Once your users can sign in to your app, use Okta's Management API and SDKs to c
   </li>
 </ul>
 
-## More Resources
+## Guides
 
-<ul class='code-list'>
-  <li><span class='code-icon info-16-gray'></span> <a href='pysaml2'>PySAML2</a></li>
-</ul>
+<p><a href='pysaml2'>Using PySAML2 to add Okta support (via SAML)</a></p>
