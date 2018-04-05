@@ -104,8 +104,8 @@ with Okta Mobile Connect is to have it tested by Okta.
 With that in mind, here are the most common reasons why an existing
 SAML-enabled mobile app might not work with Okta Mobile Connect:
 
-* No [URL Scheme](https://developer.apple.com/library/ios/featuredarticles/iPhoneURLScheme_Reference/Introduction/Introduction.html)
-  is registered for the app.
+* No [URL Scheme](https://developer.apple.com/documentation/foundation/url/1780352-scheme)
+ is registered for the app.
 * Calling the URL Scheme for the app doesn't simply return the app to
   the foreground. To work with Okta Mobile Connect your app must have
   a URL Scheme that returns your app to the embedded
