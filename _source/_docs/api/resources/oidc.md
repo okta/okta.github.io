@@ -73,7 +73,7 @@ of the callback response.
 | login_hint            | A username to prepopulate if prompting for authentication.                                                                                                                                                                                                                                                                                                                                              | Query      | String   | FALSE    |
 | max_age               | Allowable elapsed time, in seconds, since the last time the end user was actively authenticated by Okta.                                                                                                                                                                                                                                                                                                | Query      | String   | FALSE    |
 | nonce                 | A value that will be returned in the ID token. It is used to mitigate replay attacks.                                                                                                                                                                                                                                                                                                                   | Query      | String   | TRUE     |
-| prompt                | Either `none` or `login`. See [Parameter Details](#parameter-details) for more.                                                                                              | Query      | String   | FALSE    |
+| prompt                | Either `NONE`, `CONSENT`, or `LOGIN`. See [Parameter Details](#parameter-details) for more information.                                                                                              | Query      | String   | FALSE    |
 | redirect_uri          | Callback location where the authorization code or tokens should be sent. It must match the value preregistered in Okta during client registration.                                                                                                                                                                                                                                                                | Query      | String   | TRUE     |
 | response_type         | Any combination of `code`, `token`, and `id_token`. The combination determines the [flow](/authentication-guide/implementing-authentication/).                                                                                                                   | Query      | String   | TRUE     |
 | response_mode         | How the authorization response should be returned. [Valid values](#parameter-details): `fragment`, `form_post`, `query` or `okta_post_message`. If `id_token` or `token` is specified as the response type, then `query` isn't allowed as a response mode. Defaults to `fragment` in implicit and hybrid flows. If using the authorization code flow, this cannot be set to `okta_post_message` and if not specified the default value is `query`.  | Query      | String   | FALSE    |
@@ -89,11 +89,12 @@ of the callback response.
 
 `prompt`:
 
-There are three possible values for this parameter:
+There are four possible values for this parameter:
 
 1. Null (no `prompt` parameter): Normal behavior. If an Okta session already exists, the user is silently authenticated. Otherwise, the user is prompted to authenticate.
-2. `none`: Do not prompt for authentication. If an Okta session already exists, the user is silently authenticated. Otherwise, an error is returned.
-3. `login`: Always prompt the user for authentication, regardless of whether they have an Okta session.
+2. `NONE`: Do not prompt for authentication. If an Okta session already exists, the user is silently authenticated. Otherwise, an error is returned.
+3. `LOGIN`: Always prompt the user for authentication, regardless of whether they have an Okta session.
+4. `CONSENT`: Depending on the [values set for `consent_method` in the app and and `consent` on the scope](/docs/api/resources/apps.html#add-oauth-20-client-application), display a consent dialog.
 
 `request`:
 
