@@ -1150,18 +1150,20 @@ Content-Type: application/json;charset=UTF-8
 | credentials | Keys and settings used to sign tokens.                                                                                            | [Credentials Object](#credentials-object) | False                         |
 | description | The description of a Custom Authorization Server                                                                          | String                                                                  | True                          |
 | issuer      | The complete URL for a Custom Authorization Server. This becomes the `iss` claim in an access token.                      | String                                                                  | False                         |
-| issuerMode {% api_lifecycle ea %}  | Indicates whether the `issuer` value is the original Okta org domain URL, or a custom domain URL. Visible only if the Custom URL Domain feature is enabled.                      | String                                                                  | False                         |
+| issuerMode {% api_lifecycle ea %}  | Indicates whether the Okta Authorization Server uses the original Okta org domain URL, or a custom domain URL.                      | String                                                                  | False                         |
 | name        | The name of a Custom Authorization Server                                                                                 | String                                                                  | True                          |
 | status      | Indicates whether a Custom Authorization Server is `ACTIVE` or `INACTIVE`.                                                | Enum                                                                    | False                         |
 | _links      | List of discoverable resources related to a Custom Authorization Server                                                   |Links                                                                  | False                         |
 
 #### Property Details
 
-`issuerMode` is visible if you have the Custom URL Domain feature enabled. If the feature is enabled, you can set a custom domain URL in custom authorization server settings, an identity provider setting, or in the settings for an OpenID Connect token in an app, and this property is returned in the appropriate responses. To enable this feature, {{site.contact_support_lc}}. 
+`issuerMode` is visible if you have the Custom URL Domain feature enabled. If the feature is enabled, you can set a custom domain URL in an Okta Authorization Server, and this property is returned in the appropriate responses. To enable the Custom URL Domain feature, {{site.contact_support_lc}}. 
 
-* If set to `ORG_URL`, then in responses, `issuer` is the Okta org's original domain URL: `https://{yourOktaDomain}.com`. This is the default value in orgs created before [release 2081.14](/docs/change-log).
+* If set to `ORG_URL`, then in responses, `issuer` is the Okta org's original domain URL: `https://{yourOktaDomain}.com`.
 
-* If set to `CUSTOM_URL_DOMAIN`, then in responses, `issuer` is the custom domain URL configured in the administration user interface. This is the default value in orgs created before [release 2081.14](/docs/change-log).
+* If set to `CUSTOM_URL_DOMAIN`, then in responses, `issuer` is the custom domain URL configured in the administration user interface.
+
+After you enable the Custom URL Domain feature, all new Custom Authorization Servers use `CUSTOM_URL_DOMAIN` by default. All existing Custom Authorization Servers continue to use `ORG_URL` until changed via the administration UI or API, so that existing integrations with client and resource server continue to work after the feature is enabled.
 
 ### Policy Object
 

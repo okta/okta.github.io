@@ -4164,7 +4164,7 @@ All Identity Providers have the following properties:
 | ------------- | ------------------------------------------------------------ | -------------------------------------------------------------- | -------- | ------ | -------- | --------- | --------- |
 | id            | Unique key for the IdP                                       | String                                                         | FALSE    | TRUE   | TRUE     |           |           |
 | type          | Type of IdP                                                  | [Identity Provider Type](#identity-provider-type)              | FALSE    | FALSE  | FALSE    |           |           |
-| issuerMode {% api_lifecycle ea %}  | Indicates whether the `issuer` value is the original Okta org domain URL, or a custom domain URL.  | FALSE | FALSE | FALSE |   |
+| issuerMode {% api_lifecycle ea %}  | Indicates whether the Okta Authorization Server uses the original Okta org domain URL, or a custom domain URL.  | FALSE | FALSE | FALSE |   |
 | name          | Unique name for the IdP                                      | String                                                         | FALSE    | TRUE   | FALSE    | 1         | 100       |
 | status        | Status of the IdP                                            | `ACTIVE` or `INACTIVE`                                         | FALSE    | FALSE  | TRUE     |           |           |
 | created       | Timestamp when IdP was created                               | Date                                                           | FALSE    | FALSE  | TRUE     |           |           |
@@ -4178,11 +4178,13 @@ All Identity Providers have the following properties:
 
 * The properties `id`, `created`, `lastUpdated`, and `_links` are available after an IdP is created.
 
-* `issuerMode` is visible if you have the Custom URL Domain feature enabled. If the feature is enabled, you can set a custom domain URL in custom authorization server settings, an identity provider setting, or in the settings for an OpenID Connect token in an app, and this property is returned in the appropriate responses. To enable this feature, {{site.contact_support_lc}}. 
+* `issuerMode` is visible if you have the Custom URL Domain feature enabled. If the feature is enabled, you can set a custom domain URL in custom an identity provider setting, and this property is returned in the appropriate responses. To enable the Custom URL Domain feature, {{site.contact_support_lc}}. 
 
-    * If set to `ORG_URL`, then in responses, `issuer` is the Okta org's original domain URL: `https://{yourOktaDomain}.com`. This is the default value.
+    * If set to `ORG_URL`, then in the authorize request to the social IdP, Okta uses the Okta org's original domain URL, `https://{yourOktaDomain}.com`, as the domain in the `redirect_uri`. This is the default value for social IdPs created before the Custom URL Domain feature is enabled.
 
-    * If set to `CUSTOM_URL_DOMAIN`, then in responses, `issuer` is the custom domain URL configured in the administration user interface.
+    * If set to `CUSTOM_URL_DOMAIN`, then in the authorize request to the social IdP, Okta uses the custom domain URL as the `redirect_uri`. This is the default value for social IdPs created after the Custom URL Domain feature is enabled.
+
+  After you enable the Custom URL Domain feature, all new social IdPs use `CUSTOM_URL_DOMAIN` by default. All existing social IdPs continue to use `ORG_URL`, so that existing integrations with social IdP and resource server continue to work after the feature is enabled. You can change this value in any social IdP via the API or administrator UI.
 
 ### Identity Provider Type
 
