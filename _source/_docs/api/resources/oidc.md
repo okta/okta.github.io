@@ -73,7 +73,7 @@ of the callback response.
 | login_hint            | A username to prepopulate if prompting for authentication.                                                                                                                                                                                                                                                                                                                                              | Query      | String   | FALSE    |
 | max_age               | Allowable elapsed time, in seconds, since the last time the end user was actively authenticated by Okta.                                                                                                                                                                                                                                                                                                | Query      | String   | FALSE    |
 | nonce                 | A value that will be returned in the ID token. It is used to mitigate replay attacks.                                                                                                                                                                                                                                                                                                                   | Query      | String   | TRUE     |
-| prompt                | Either `NONE`, `CONSENT`, or `LOGIN`. See [Parameter Details](#parameter-details) for more information.                                                                                              | Query      | String   | FALSE    |
+| prompt                | Valid values: null, `NONE`, `CONSENT`, or `LOGIN`. See [Parameter Details](#parameter-details) for more information.                                                                                              | Query      | String   | FALSE    |
 | redirect_uri          | Callback location where the authorization code or tokens should be sent. It must match the value preregistered in Okta during client registration.                                                                                                                                                                                                                                                                | Query      | String   | TRUE     |
 | response_type         | Any combination of `code`, `token`, and `id_token`. The combination determines the [flow](/authentication-guide/implementing-authentication/).                                                                                                                   | Query      | String   | TRUE     |
 | response_mode         | How the authorization response should be returned. [Valid values](#parameter-details): `fragment`, `form_post`, `query` or `okta_post_message`. If `id_token` or `token` is specified as the response type, then `query` isn't allowed as a response mode. Defaults to `fragment` in implicit and hybrid flows. If using the authorization code flow, this cannot be set to `okta_post_message` and if not specified the default value is `query`.  | Query      | String   | FALSE    |
@@ -87,46 +87,45 @@ of the callback response.
  * `idp`, `sessionToken` and `idp_scope` are Okta extensions to [the OpenID specification](http://openid.net/specs/openid-connect-core-1_0.html#Authentication).
     All other parameters comply with the OpenID Connect specification and their behavior is consistent with the specification.
 
-`prompt`:
+* `prompt`:
 
-There are four possible values for this parameter:
+    There are four possible values for this parameter:
 
-1. Null (no `prompt` parameter): Normal behavior. If an Okta session already exists, the user is silently authenticated. Otherwise, the user is prompted to authenticate.
-2. `NONE`: Do not prompt for authentication. If an Okta session already exists, the user is silently authenticated. Otherwise, an error is returned.
-3. `LOGIN`: Always prompt the user for authentication, regardless of whether they have an Okta session.
-4. `CONSENT`: Depending on the [values set for `consent_method` in the app and and `consent` on the scope](/docs/api/resources/apps.html#add-oauth-20-client-application), display a consent dialog.
+    1. Null (no `prompt` parameter): Normal behavior. If an Okta session already exists, the user is silently authenticated. Otherwise, the user is prompted to authenticate.
+    2. `NONE`: Do not prompt for authentication. If an Okta session already exists, the user is silently authenticated. Otherwise, an error is returned.
+    3. `LOGIN`: Always prompt the user for authentication, regardless of whether they have an Okta session.
+    4. `CONSENT`: {% api_lifecycle ea %} Depending on the [values set for `consent_method` in the app and and `consent` on the scope](/docs/api/resources/apps.html#add-oauth-20-client-application), display the Okta consent dialog. User consent is available for Custom Authorization Servers (requires the API Access Management feature and the User Consent feature enabled).
 
-`request`:
+* `request`:
 
   * You must sign the JWT using the app's client secret.
   * The JWT can't be encrypted.
   * Okta supports these signing algorithms: [HS256](https://tools.ietf.org/html/rfc7518#section-5.2.3), [HS384](https://tools.ietf.org/html/rfc7518#section-5.2.4), and [HS512](https://tools.ietf.org/html/rfc7518#section-5.2.5).
   * We recommend you don't duplicate any request parameters in both the JWT and the query URI itself. However, you can do so with `state`, `nonce`, `code_challenge`, and `code_challenge_method`. In those cases, the values in the query URI will override the JWT values.
   * Okta validates the `request` parameter in the following ways:
-    1. `iss` is required and must  be the `client_id`.
-    2. `aud` is required and must be same value as the authorization server issuer that mints the ID or access token. This value is published in the metadata for your authorization server.
-    3. JWT lifetime is evaluated using the `iat` and `exp` claims if present. If the JWT is expired or not yet valid, Okta returns an `invalid_request_object`  error.
-    4. Okta rejects the JWT if the `jti` claim is present and it has already been processed.
+    * `iss` is required and must  be the `client_id`.
+    * `aud` is required and must be same value as the authorization server issuer that mints the ID or access token. This value is published in the metadata for your authorization server.
+    * JWT lifetime is evaluated using the `iat` and `exp` claims if present. If the JWT is expired or not yet valid, Okta returns an `invalid_request_object`  error.
+    * Okta rejects the JWT if the `jti` claim is present and it has already been processed.
 
-`response_mode`:
+* `response_mode`:
 
-Each value for `response_mode` delivers different behavior:
-* `fragment` - Parameters are encoded in the URL fragment added to the `redirect_uri` when redirecting back to the client.
-* `query` - Parameters are encoded in the query string added to the `redirect_uri` when redirecting back to the client.
-* `form_post` - Parameters are encoded as HTML form values (`application/x-www-form-urlencoded` format) and are transmitted via the HTTP POST method to the client.
-* `okta_post_message` - Uses [HTML5 Web Messaging](https://developer.mozilla.org/en-US/docs/Web/API/Window/postMessage) (for example, window.postMessage()) instead of the redirect for the authorization response from the `/authorize` endpoint.
+    Each value for `response_mode` delivers different behavior:
+    * `fragment` - Parameters are encoded in the URL fragment added to the `redirect_uri` when redirecting back to the client.
+    * `query` - Parameters are encoded in the query string added to the `redirect_uri` when redirecting back to the client.
+    * `form_post` - Parameters are encoded as HTML form values (`application/x-www-form-urlencoded` format) and are transmitted via the HTTP POST method to the client.
+    * `okta_post_message` - Uses [HTML5 Web Messaging](https://developer.mozilla.org/en-US/docs/Web/API/Window/postMessage) (for example, window.postMessage()) instead of the redirect for the authorization response from the `/authorize` endpoint.
 
-    `okta_post_message` is an adaptation of the [Web Message Response Mode](https://tools.ietf.org/html/draft-sakimura-oauth-wmrm-00#section-4.1).
-    This value provides a secure way for a single-page application to perform a sign-in flow
-    in a popup window or an iFrame and receive the ID token and/or access token back in the parent page without leaving the context of that page.
-    The data model for the postMessage call is in the next section.
-* The `Referrer-Policy` header is automatically included in the request for `fragment` or `query`, and is set to `Referrer-Policy: no-referrer`.
+        `okta_post_message` is an adaptation of the [Web Message Response Mode](https://tools.ietf.org/html/draft-sakimura-oauth-wmrm-00#section-4.1).
+        This value provides a secure way for a single-page application to perform a sign-in flow in a popup window or an iFrame and receive the ID token and/or access token back in the parent page without leaving the context of that page. 
+        The data model for the postMessage call is in the next section.
+    * The `Referrer-Policy` header is automatically included in the request for `fragment` or `query`, and is set to `Referrer-Policy: no-referrer`.
 
-`state`:
+* `state`:
 
-Okta requires the OAuth 2.0 `state` parameter on all requests to the `/authorize` endpoint in order to prevent cross-site request forgery (CSRF).
- The OAuth 2.0 specification [requires](https://tools.ietf.org/html/rfc6749#section-10.12) that clients protect their redirect URIs against CSRF by sending a value in the authorize request which binds the request to the user-agent's authenticated state.
- Using the `state` parameter is also a countermeasure to several other known attacks as outlined in [OAuth 2.0 Threat Model and Security Considerations](https://tools.ietf.org/html/rfc6819).
+    Okta requires the OAuth 2.0 `state` parameter on all requests to the `/authorize` endpoint in order to prevent cross-site request forgery (CSRF). The OAuth 2.0 specification [requires](https://tools.ietf.org/html/rfc6749#section-10.12) that clients protect their redirect URIs against CSRF by sending a value in the authorize request which binds the request to the user-agent's authenticated state.
+
+    Using the `state` parameter is also a countermeasure to several other known attacks as outlined in [OAuth 2.0 Threat Model and Security Considerations](https://tools.ietf.org/html/rfc6819).
 
 #### postMessage() Data Model
 
