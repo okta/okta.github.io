@@ -91,10 +91,10 @@ of the callback response.
 
     There are four possible values for this parameter:
 
-    1. Null (no `prompt` parameter): Normal behavior. If an Okta session already exists, the user is silently authenticated. Otherwise, the user is prompted to authenticate.
-    2. `NONE`: Do not prompt for authentication. If an Okta session already exists, the user is silently authenticated. Otherwise, an error is returned.
-    3. `LOGIN`: Always prompt the user for authentication, regardless of whether they have an Okta session.
-    4. `CONSENT`: {% api_lifecycle ea %} Depending on the [values set for `consent_method` in the app and and `consent` on the scope](/docs/api/resources/apps.html#add-oauth-20-client-application), display the Okta consent dialog. User consent is available for Custom Authorization Servers (requires the API Access Management feature and the User Consent feature enabled).
+    * Null (no `prompt` parameter): Normal behavior. If an Okta session already exists, the user is silently authenticated. Otherwise, the user is prompted to authenticate.
+    * `NONE`: Do not prompt for authentication. If an Okta session already exists, the user is silently authenticated. Otherwise, an error is returned.
+    * `LOGIN`: Always prompt the user for authentication, regardless of whether they have an Okta session.
+    * `CONSENT`: {% api_lifecycle ea %} Depending on the [values set for `consent_method` in the app and and `consent` on the scope](/docs/api/resources/apps.html#add-oauth-20-client-application), display the Okta consent dialog. User consent is available for Custom Authorization Servers (requires the API Access Management feature and the User Consent feature enabled).
 
 * `request`:
 
@@ -103,10 +103,10 @@ of the callback response.
   * Okta supports these signing algorithms: [HS256](https://tools.ietf.org/html/rfc7518#section-5.2.3), [HS384](https://tools.ietf.org/html/rfc7518#section-5.2.4), and [HS512](https://tools.ietf.org/html/rfc7518#section-5.2.5).
   * We recommend you don't duplicate any request parameters in both the JWT and the query URI itself. However, you can do so with `state`, `nonce`, `code_challenge`, and `code_challenge_method`. In those cases, the values in the query URI will override the JWT values.
   * Okta validates the `request` parameter in the following ways:
-    * `iss` is required and must  be the `client_id`.
-    * `aud` is required and must be same value as the authorization server issuer that mints the ID or access token. This value is published in the metadata for your authorization server.
-    * JWT lifetime is evaluated using the `iat` and `exp` claims if present. If the JWT is expired or not yet valid, Okta returns an `invalid_request_object`  error.
-    * Okta rejects the JWT if the `jti` claim is present and it has already been processed.
+    1. `iss` is required and must  be the `client_id`.
+    2. `aud` is required and must be same value as the authorization server issuer that mints the ID or access token. This value is published in the metadata for your authorization server.
+    3. JWT lifetime is evaluated using the `iat` and `exp` claims if present. If the JWT is expired or not yet valid, Okta returns an `invalid_request_object`  error.
+    4. Okta rejects the JWT if the `jti` claim is present and it has already been processed.
 
 * `response_mode`:
 
