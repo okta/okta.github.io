@@ -4,7 +4,7 @@
 	overflow-wrap: break-word;
 
 	& + & {
-		border-top: 1px solid #979797;
+		border-top: 1px solid $shady-lady;
 		margin-bottom: 0;
 		margin-top: get-spacing('medium');
 		padding-top: get-spacing('medium');
@@ -168,8 +168,8 @@
 		/* Same as what docs uses (in _PageContent.scss) */
 		blockquote {
 			margin: 24px 24px;
-			border-left: 8px solid #00659d;
-			background: #DEEEF6;
+			border-left: 8px solid $cerulean-4;
+			background: $pattens-blue-2;
 			padding: 24px;
 			font-size: 1em;
 			p {
@@ -183,7 +183,7 @@
 
 		pre {
 			@include padding(15px);
-			background: #f4f4f4;
+			background: get-color('code-background');
 			display: block;
 			margin: get-spacing('small') 0;
 			max-width: 900px;
@@ -205,82 +205,82 @@
 
 		/* -------------------------- PYGMENTS */
 
-		.highlight pre { color: #3d3d3d; } /* Base Style */
-		.highlight .p { color: #3d3d3d; } /* Punctuation */
-		.highlight .err { color: #3d3d3d; } /* Error */
-		.highlight .n { color: #115D8B; } /* Base Style */
-		.highlight .na { color: #115D8B; } /* Name Attribute */
-		.highlight .nb { color: #115D8B; } /* Name Builtin */
-		.highlight .nc { color: #115D8B; } /* Name Class */
-		.highlight .no { color: #115D8B; } /* Name Constant */
-		.highlight .nd { color: #115D8B; } /* Name Decorator */
-		.highlight .ni { color: #115D8B; } /* Name Entity */
-		.highlight .ne { color: #115D8B; } /* Name Exception */
-		.highlight .nf { color: #115D8B; } /* Name Function */
-		.highlight .nl { color: #115D8B; } /* Name Label */
-		.highlight .nn { color: #4CBF9C; } /* Name Namespace */
-		.highlight .nx { color: #115D8B; } /* Name Other */
-		.highlight .py { color: #115D8B; } /* Name Property */
-		.highlight .nt { color: #115D8B; } /* Name Tag */
-		.highlight .nv { color: #115D8B; } /* Name Variable */
-		.highlight .vc { color: #115D8B; } /* Name Variable Class */
-		.highlight .vg { color: #115D8B; } /* Name Variable Global */
-		.highlight .vi { color: #115D8B; } /* Name Variable Instance */
-		.highlight .bp { color: #115D8B; } /* Name Builtin Pseudo */
-		.highlight .g { color: #3d3d3d; } /* Base Style */
-		.highlight .gd { color: #3d3d3d; } /*  */
-		.highlight .o { color: #3d3d3d; } /* Base Style */
-		.highlight .ow { color: #4CBF9C; } /* Operator Word */
-		.highlight .c { color: #9A9A9A; font-style: italic; }/* Base Style */
-		.highlight .cm { color: #9A9A9A; font-style: italic; } /* Comment Multiline */
-		.highlight .cp { color: #9A9A9A; font-style: italic; } /* Comment Preproc */
-		.highlight .c1 { color: #9A9A9A; font-style: italic; } /* Comment Single */
-		.highlight .cs { color: #9A9A9A; font-style: italic; } /* Comment Special */
-		.highlight .k { color: #4CBF9C; } /* Base Style */
-		.highlight .kc { color: #4CBF9C; } /* Keyword Constant */
-		.highlight .kd { color: #4CBF9C; } /* Keyword Declaration */
-		.highlight .kn { color: #4CBF9C; } /* Keyword Namespace */
-		.highlight .kp { color: #4CBF9C; } /* Keyword Pseudo */
-		.highlight .kr { color: #4CBF9C; } /* Keyword Reserved */
-		.highlight .kt { color: #4CBF9C; } /* Keyword Type */
-		.highlight .l { color: #3d3d3d; } /* Base Style */
-		.highlight .ld { color: #990f69; } /* Literal Date */
-		.highlight .m { color: #990f69; } /* Literal Number */
-		.highlight .mf { color: #990f69; } /* Literal Number Float */
-		.highlight .mh { color: #990f69; } /* Literal Number Hex */
-		.highlight .mi { color: #990f69; } /* Literal Number Integer */
-		.highlight .mo { color: #990f69; } /* Literal Number Oct */
-		.highlight .il { color: #990f69; } /* Literal Number Integer Long */
-		.highlight .s { color: #E22866; } /* Literal String */
-		.highlight .sb { color: #E22866; } /* Literal String Backtick */
-		.highlight .sc { color: #E22866; } /* Literal String Char */
-		.highlight .sd { color: #E22866; } /* Literal String Doc */
-		.highlight .s2 { color: #E22866; } /* Literal String Double */
-		.highlight .se { color: #990f69; } /* Literal String Escape */
-		.highlight .sh { color: #E22866; } /* Literal String Heredoc */
-		.highlight .si { color: #E22866; } /* Literal String Interpol */
-		.highlight .sx { color: #E22866; } /* Literal String Other */
-		.highlight .sr { color: #990f69; } /* Literal String Regex */
-		.highlight .s1 { color: #E22866; } /* Literal String Single */
-		.highlight .ss { color: #E22866; } /* Literal String Symbol */
-		.highlight .g { color: #3d3d3d; } /* Base Style */
-		.highlight .gd { color: #3d3d3d; } /* Generic Deleted */
-		.highlight .ge { color: #3d3d3d; } /* Generic Emph */
-		.highlight .gr { color: #3d3d3d; } /* Generic Error */
-		.highlight .gh { color: #3d3d3d; } /* Generic Heading */
-		.highlight .gi { color: #3d3d3d; } /* Generic Inserted */
-		.highlight .go { color: #3d3d3d; } /* Generic Output */
-		.highlight .gp { color: #3d3d3d; } /* Generic Prompt */
-		.highlight .gs { color: #3d3d3d; } /* Generic Strong */
-		.highlight .gu { color: #3d3d3d; } /* Generic Subheading */
-		.highlight .gt { color: #3d3d3d; } /* Generic Traceback */
-		.highlight .x { color: #3d3d3d; } /* Other */
-		.highlight .w { color: #3d3d3d; } /* Text Whitespace */
+		.highlight pre { color: $eclipse-2; } /* Base Style */
+		.highlight .p { color: $eclipse-2; } /* Punctuation */
+		.highlight .err { color: $eclipse-2; } /* Error */
+		.highlight .n { color: $dark-cerulean; } /* Base Style */
+		.highlight .na { color: $dark-cerulean; } /* Name Attribute */
+		.highlight .nb { color: $dark-cerulean; } /* Name Builtin */
+		.highlight .nc { color: $dark-cerulean; } /* Name Class */
+		.highlight .no { color: $dark-cerulean; } /* Name Constant */
+		.highlight .nd { color: $dark-cerulean; } /* Name Decorator */
+		.highlight .ni { color: $dark-cerulean; } /* Name Entity */
+		.highlight .ne { color: $dark-cerulean; } /* Name Exception */
+		.highlight .nf { color: $dark-cerulean; } /* Name Function */
+		.highlight .nl { color: $dark-cerulean; } /* Name Label */
+		.highlight .nn { color: $puerto-rico; } /* Name Namespace */
+		.highlight .nx { color: $dark-cerulean; } /* Name Other */
+		.highlight .py { color: $dark-cerulean; } /* Name Property */
+		.highlight .nt { color: $dark-cerulean; } /* Name Tag */
+		.highlight .nv { color: $dark-cerulean; } /* Name Variable */
+		.highlight .vc { color: $dark-cerulean; } /* Name Variable Class */
+		.highlight .vg { color: $dark-cerulean; } /* Name Variable Global */
+		.highlight .vi { color: $dark-cerulean; } /* Name Variable Instance */
+		.highlight .bp { color: $dark-cerulean; } /* Name Builtin Pseudo */
+		.highlight .g { color: $eclipse-2; } /* Base Style */
+		.highlight .gd { color: $eclipse-2; } /*  */
+		.highlight .o { color: $eclipse-2; } /* Base Style */
+		.highlight .ow { color: $puerto-rico; } /* Operator Word */
+		.highlight .c { color: $nobel-2; font-style: italic; }/* Base Style */
+		.highlight .cm { color: $nobel-2; font-style: italic; } /* Comment Multiline */
+		.highlight .cp { color: $nobel-2; font-style: italic; } /* Comment Preproc */
+		.highlight .c1 { color: $nobel-2; font-style: italic; } /* Comment Single */
+		.highlight .cs { color: $nobel-2; font-style: italic; } /* Comment Special */
+		.highlight .k { color: $puerto-rico; } /* Base Style */
+		.highlight .kc { color: $puerto-rico; } /* Keyword Constant */
+		.highlight .kd { color: $puerto-rico; } /* Keyword Declaration */
+		.highlight .kn { color: $puerto-rico; } /* Keyword Namespace */
+		.highlight .kp { color: $puerto-rico; } /* Keyword Pseudo */
+		.highlight .kr { color: $puerto-rico; } /* Keyword Reserved */
+		.highlight .kt { color: $puerto-rico; } /* Keyword Type */
+		.highlight .l { color: $eclipse-2; } /* Base Style */
+		.highlight .ld { color: $jazzberry-jam; } /* Literal Date */
+		.highlight .m { color: $jazzberry-jam; } /* Literal Number */
+		.highlight .mf { color: $jazzberry-jam; } /* Literal Number Float */
+		.highlight .mh { color: $jazzberry-jam; } /* Literal Number Hex */
+		.highlight .mi { color: $jazzberry-jam; } /* Literal Number Integer */
+		.highlight .mo { color: $jazzberry-jam; } /* Literal Number Oct */
+		.highlight .il { color: $jazzberry-jam; } /* Literal Number Integer Long */
+		.highlight .s { color: $cerise; } /* Literal String */
+		.highlight .sb { color: $cerise; } /* Literal String Backtick */
+		.highlight .sc { color: $cerise; } /* Literal String Char */
+		.highlight .sd { color: $cerise; } /* Literal String Doc */
+		.highlight .s2 { color: $cerise; } /* Literal String Double */
+		.highlight .se { color: $jazzberry-jam; } /* Literal String Escape */
+		.highlight .sh { color: $cerise; } /* Literal String Heredoc */
+		.highlight .si { color: $cerise; } /* Literal String Interpol */
+		.highlight .sx { color: $cerise; } /* Literal String Other */
+		.highlight .sr { color: $jazzberry-jam; } /* Literal String Regex */
+		.highlight .s1 { color: $cerise; } /* Literal String Single */
+		.highlight .ss { color: $cerise; } /* Literal String Symbol */
+		.highlight .g { color: $eclipse-2; } /* Base Style */
+		.highlight .gd { color: $eclipse-2; } /* Generic Deleted */
+		.highlight .ge { color: $eclipse-2; } /* Generic Emph */
+		.highlight .gr { color: $eclipse-2; } /* Generic Error */
+		.highlight .gh { color: $eclipse-2; } /* Generic Heading */
+		.highlight .gi { color: $eclipse-2; } /* Generic Inserted */
+		.highlight .go { color: $eclipse-2; } /* Generic Output */
+		.highlight .gp { color: $eclipse-2; } /* Generic Prompt */
+		.highlight .gs { color: $eclipse-2; } /* Generic Strong */
+		.highlight .gu { color: $eclipse-2; } /* Generic Subheading */
+		.highlight .gt { color: $eclipse-2; } /* Generic Traceback */
+		.highlight .x { color: $eclipse-2; } /* Other */
+		.highlight .w { color: $eclipse-2; } /* Text Whitespace */
 
 		p, li {
 			code {
 				@include padding(0 xx-small);
-				background: #f4f4f4;
+				background: $white-smoke-10;
 				line-height: 24px;
 			}
 		}
@@ -292,7 +292,7 @@
 			width: 100%;
 
 			thead th {
-				background: #eee;
+				background: $white-smoke-4;
 				padding: 10px 10px 10px;
 				font-weight: bold;
 			}

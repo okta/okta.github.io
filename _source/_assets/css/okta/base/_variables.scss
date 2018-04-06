@@ -28,7 +28,7 @@ $font-size:     (
                 'h3':               28px,
                 'h2':               32px,
                 'h1':               36px,
-                
+
                 'new-small':        12px,
                 'new-h2':           28px,
                 'new-h1':           44px,
@@ -51,7 +51,7 @@ $font-weight:   (
                 'semibold':         500,
                 'mediumbold':       600,
                 'bold':             700,
-                
+
                 'new-h2':           500,
                 'new-h1':           500
 );
@@ -66,7 +66,7 @@ $line-height:   (
                 'h2':               42px,
                 'h1':               46px,
                 'large':            56px,
-                
+
                 'new-h1':           52px,
                 'new-h2':           36px,
                 'new-small':        20px,
@@ -81,64 +81,137 @@ $line-height:   (
 
 
 // Project/Client Colors
+
+// Abstract definitions:
+// (These are consistent with Nim. Changes here should be mirrored there - https://github.com/okta/courage/blob/master/assets/sass/nim/abstracts/_colors.scss)
+// Whites
+$white: #ffffff;
+$white-3: #fafafa;
+$white-smoke-4: #eeeeee;
+$white-smoke-6: #f0f0f0;
+$white-smoke-8: #f5f5f5;
+$white-smoke-10: #f4f4f4; // intentional developer color
+$gainsboro-2: #dddddd;
+$gainsboro-8: #e4e4e4;
+// Grays
+$dim-gray-3: #5d5d5d;
+$eclipse-2: #3d3d3d;
+$iron: #c2c3c3;
+$lily-white: #f2f5f5;
+$mortar: #555555;
+$mystic: #dee0df;
+$night-rider: #333333;
+$nobel: #999999;
+$nobel-2: #9a9a9a;
+$shady-lady: #979797;
+$suva-gray: #888888;
+$suva-gray-4: #8f8f8f;
+$very-light-gray: #cccccc;
+// Blacks
+$black: #000000;
+// Reds
+$jazzberry-jam: #990f69;
+$valencia: #d9534f;
+// Oranges
+$burnt-orange: #ff7640;
+$light-coral: #f57f7f;
+$red-orange: #ff3333;
+$sea-buckthorn: #f39c44;
+// Yellows
+$lemon: #f7f01b;
+// Blues
+$blue-whale: #142430; // intentional developer color
+$columbia-blue: #a9e6fd;
+$cerulean-4: #00659d;
+$cerulean-5: #0069aa;
+$curious-blue: #428bca;
+$curious-blue-2: #357ebd;
+$dark-cerulean: #115d8b; // intentional developer color
+$ghost: #d2d2d6; // intentional developer color
+$maya-blue: #4cc3ff;
+$maya-blue-2: #5dd2fc;
+$midnight: #20313b; // intentional developer color
+$mischka: #b3b3b5;
+$navy-blue: #007dc1;
+$pacific-blue-3: #0095e5;
+$pattens-blue: #e0eef6;
+$pattens-blue-2: #deeef6;
+$solitude-4: #dbe3e7;
+$summer-sky: #46b3e9;
+$turquoise: #5ce5bc;
+$white-lilac-2: #e6e6e8;
+// Greens
+$cyprus-2: #153b56; // intentional developer color
+$islamic-green: #009900;
+$puerto-rico: #4cbf9c;
+$puerto-rico-5: #4cbf9d;
+$screamin-green: #59ff99;
+$shamrock: #4cdb82;
+$periglacial-blue: #abadac;
+// Purples
+$cerise: #e22866; // intentional developer color
+$lavender-3: #f7fbfd;
+// Browns
+
+// Functional map:
 $colors:        (
-                'black':                  #000000,
-                'white':                  #fff,
+                'black':                  $black,
+                'white':                  $white,
 
-                'default':                #3D3D3D,
-                'accent':                 #007dc1,
+                'default':                $eclipse-2,
+                'accent':                 $navy-blue,
 
-                'blue-bright':            #007dc1,
-                'blue-bright-hover':      #0095e5,
+                'blue-bright':            $navy-blue,
+                'blue-bright-hover':      $pacific-blue-3,
 
-                'blue-medium':            #46b3e9,
-                'blue-medium-hover':      #4cc3ff,
+                'blue-medium':            $summer-sky,
+                'blue-medium-hover':      $maya-blue,
 
-                'blue-light':             #a9e6fd,
-                'blue-light-hover':       #5dd2fc,
+                'blue-light':             $columbia-blue,
+                'blue-light-hover':       $maya-blue-2,
 
-                'green':                  #4cbf9d,
-                'green-hover':            #5ce5bc,
+                'green':                  $puerto-rico-5,
+                'green-hover':            $turquoise,
 
-                'green-dark':             #4cbf9c,
-                'green-dark-hover':       #5ce5bc,
+                'green-dark':             $puerto-rico,
+                'green-dark-hover':       $turquoise,
 
-                'green-light':            #4cdb82,
-                'green-light-hover':      #59ff99,
+                'green-light':            $shamrock,
+                'green-light-hover':      $screamin-green,
 
-                'charcoal':               #5d5d5d,
-                'charcoal-hover':         #8f8f8f,
+                'charcoal':               $dim-gray-3,
+                'charcoal-hover':         $suva-gray-4,
 
-                'gray-dark':              #abadac,
-                'gray-dark-hover':        #dee0df,
+                'gray-dark':              $periglacial-blue,
+                'gray-dark-hover':        $mystic,
 
-                'gray-medium':            #c2c3c3,
-                'gray-medium-hover':      #f2f5f5,
+                'gray-medium':            $iron,
+                'gray-medium-hover':      $lily-white,
 
-                'gray-light':             #e6e6e8,
-                'gray-light-hover':       #b3b3b5,
+                'gray-light':             $white-lilac-2,
+                'gray-light-hover':       $mischka,
 
-                'gray-lighter':           #e4e4e4,
-                'gray-lighter-hover':     #eee,
+                'gray-lighter':           $gainsboro-8,
+                'gray-lighter-hover':     $white-smoke-4,
 
-                'gray-lightest':          #fafafa,
-                'gray-lightest-hover':    #a9e6fd,
+                'gray-lightest':          $white-3,
+                'gray-lightest-hover':    $columbia-blue,
 
-                'blue-products':          #E0EEF6,
+                'blue-products':          $pattens-blue,
 
-                'new-gray-dark':          #3d3d3d,
+                'new-gray-dark':          $eclipse-2,
 
-                'red':                    #f57f7f,
+                'red':                    $light-coral,
 
                 // 2017-07 Redesign Colors
-                'ebony-clay':             #20313B, // Background
-                'elephant':               #153B56, // Secondary background, table rule
-                'big-stone':              #142430, // Card / table background
-                'matisse':                #115D8B, // Card / table banner
-                'iron':                   #D2D2D6, // Body (type) color (dark bg)
-                'cerise':                 #E22866, // CTA buttons, links
+                'ebony-clay':             $midnight, // Background
+                'elephant':               $cyprus-2, // Secondary background, table rule
+                'big-stone':              $blue-whale, // Card / table background
+                'matisse':                $dark-cerulean, // Card / table banner
+                'iron':                   $ghost, // Body (type) color (dark bg) // Note difference from $iron
+                'cerise':                 $cerise, // CTA buttons, links
 
-                'code-background':        #F4F4F4,
+                'code-background':        $white-smoke-10,
 );
 
 

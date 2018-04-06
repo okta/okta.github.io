@@ -1,21 +1,18 @@
-.Page.okta-authentication-quickstart-guides {
-  background: #20313b;
-}
 .code-selector {
-  background-color: rgb(32, 49, 59);
+  background-color: get-color('ebony-clay');
   border-radius: 5px;
   margin-bottom: 10px;
   padding: 20px;
 
   h3 {
-    color: #fff;
+    color: $white;
     font-size: 18px;
     font-weight: lighter;
     margin-bottom: 5px;
   }
 
   a {
-    color: #fff;
+    color: $white;
     display: inline-block;
     height: 42px;
     line-height: 32px;
@@ -29,7 +26,7 @@
     }
     &.active,
     &:hover {
-      border-bottom: 2px solid #fff;
+      border-bottom: 2px solid $white;
     }
     .icon {
       left: 5px;
@@ -52,11 +49,9 @@
 }
 
 // Disable the margin width determined by the parent CSS.
-.PageContent.quickstart-page.has-tableOfContents
 .PageContent-main#quickstart-body {
   max-width: none;
-  padding: 30px;
-  padding-right: 0px;
+  padding: 64px 0;
 }
 
 
@@ -93,11 +88,7 @@
   }
   .TableOfContents-item{
     &.active {
-      border-left-color: rgb(0, 125, 193);
+      border-left-color: get-color('accent');
     }
   }
-}
-
-#server-framework-selector {
-  background-color: rgb(54, 69, 78);
 }

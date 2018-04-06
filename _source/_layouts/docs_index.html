@@ -4,18 +4,17 @@ show_bottom_cta: true
 js: docsIndex
 ---
 
-<section class="Docs u-Justify u-alignCenter">
+<section class="Docs">
+    <div class="Hero Hero--docs u-Justify u-alignCenter">
+        <h1 class="Docs-title Hero-title">Get started in minutes</h1>
+        <p class="Docs-subtitle Hero-subtitle">Add authentication, authorization, and user management to your apps and APIs.</p>
+        <div id="docs-languages"></div>
+    </div>
     <div class="Wrap">
-        <h1 class="Docs-title">Get started in minutes</h1>
-        <br/>
-        <p class="Docs-subtitle">Add authentication, authorization, and user management<br/> to your apps and APIs.</p>
-        <br/>        
-        <p class="Docs-subtitle" id="docs-languages"></p>
-
         <div class="Docs-container">
             <div class="Docs-content">
                 <br>
-                <h1>Use Cases</h1>
+                <h2>Use Cases</h2>
                 <!-- START Subpages Grid -->
                 <div class="Row">
                     {% assign documents = site.use_cases | sort:'weight' %}
@@ -33,7 +32,7 @@ js: docsIndex
                 </div>
                 <!-- END Subpages Grid -->
 
-                <h1>Reference</h1>
+                <h2>Reference</h2>
                 <!-- START Subpages Grid -->
                 <div class="Row">
                     {% assign documents = site.reference | sort:'weight' %}
@@ -48,7 +47,7 @@ js: docsIndex
                 </div>
                 <!-- END Subpages Grid -->
 
-                <h1>How-To</h1>
+                <h2>How-To</h2>
                 <!-- START Subpages Grid -->
                 <div class="Row">
                 {% assign documents = site.docs %}
@@ -66,7 +65,7 @@ js: docsIndex
                 </div>
                 <!-- END Subpages Grid -->
 
-                <h1>Standards</h1>
+                <h2>Standards</h2>
                 <!-- START Subpages Grid -->
                 <div class="Row">
                 {% assign documents = site.standards | sort:'weight' %}

@@ -11,15 +11,15 @@
 	line-height: 30px;
 	padding: 0 20px;
 	text-decoration: none;
-	
+
 	> a {
 		color: inherit;
 	}
 
 	&:active,
 	&:hover {
-		border-color: #000;
-		color: #000;
+		border-color: $black;
+		color: $black;
 		text-decoration: none;
 	}
 }
@@ -54,7 +54,7 @@
 	height: 54px;
 	line-height: 50px;
 	padding: 0 30px;
-	
+
 	&.Button--rounded {
 		border-radius: 27px;
 	}
@@ -76,7 +76,7 @@
 
 .Button--blueOutline {
 	@extend %Button;
-	
+
 	&,
 	&:active,
 	&:hover {
@@ -101,7 +101,7 @@
 
 .Button--greenOutline {
 	@extend %Button;
-	
+
 	&,
 	&:active,
 	&:hover {
@@ -112,7 +112,7 @@
 
 .Button--white {
 	@extend %Button;
-	
+
 	&,
 	&:active,
 	&:hover {
@@ -124,7 +124,7 @@
 
 .Button--whiteOutline {
 	@extend %Button;
-	
+
 	&,
 	&:active,
 	&:hover {
@@ -136,7 +136,7 @@
 .Button--whiteOutlineOpaque {
 	@extend %Button;
 	background-color: rgba(255,255,255,0.25);
-	
+
 	&,
 	&:active,
 	&:hover {

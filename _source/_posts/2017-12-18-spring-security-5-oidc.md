@@ -34,7 +34,7 @@ Spring Security makes authentication with OAuth 2.0 pretty darn easy. It also pr
 > **What is OIDC?**
 > If you're not familiar with OAuth or OIDC, I recommend you read [What the Heck is OAuth](/blog/2017/06/21/what-the-heck-is-oauth). An Open ID Connect flow involves the following steps:
 >
-> 1. Discover OIDC metadata                             
+> 1. Discover OIDC metadata
 > 2. Perform OAuth flow to obtain ID token and access tokens
 > 3. Get JWT signature keys and optionally dynamically register the Client application
 > 4. Validate JWT ID token locally based on built-in dates and signature

@@ -111,6 +111,13 @@ public class Startup
 }
 ```
 
+**Note**: If you are using .NET framework <4.6 or you are getting the following error: ```The request was aborted: Could not create SSL/TLS secure channel ```. Make sure to include the following code in the `Application_Start` or `Startup`:
+
+```csharp
+// Enable TLS 1.2
+ServicePointManager.SecurityProtocol |= SecurityProtocolType.Tls12;
+```
+
 Add these using statements at the top of the file:
 
 ```csharp
@@ -140,7 +147,15 @@ If you haven't already, sign in to your Okta developer account (or [create one](
 
 If you are creating an Okta application from scratch, click **Done** to see the full settings page and make sure the settings match the values above.
 
-**Note**: The local port may be different on your machine. You can find the assigned port by running the application, or right-clicking on the project and choosing **Properties**, then **Web**. If it's different than 8080, update the URIs in Okta and in `Web.config` below.
+### Set up the project port
+
+The local port may be different on your machine. Right-click on the project and choose  **Properties**, then **Web**. If it's different than 8080, update the **Project Url** and save your changes.
+
+{% img vs-project-port.png alt:"Project port settings" %}{: .center-image }
+
+**Note**: You can also find the assigned port by running the application.
+
+If you want to use a different port update the URIs in Okta and in `Web.config` as well.
 
 ### Configure the project
 

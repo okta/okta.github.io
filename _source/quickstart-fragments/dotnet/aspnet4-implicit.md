@@ -13,18 +13,10 @@ If you don't already have a Web API project, create a new ASP.NET (.NET Framewor
 
 First, install these packages with NuGet:
 
-- `Microsoft.Owin.Host.SystemWeb` (if it isn't already installed)
-- `Microsoft.IdentityModel.Protocols.OpenIdConnect`
-
-There are a few additional packages you need to install from prerelease sources. [Add these sources](https://docs.microsoft.com/en-us/nuget/tools/package-manager-ui#package-sources) to the NuGet Package Manager:
-
-- [Azure AD WebStack Nightly](https://www.myget.org/F/azureadwebstacknightly/)
-- [Katana Dev](https://dotnet.myget.org/F/katana-dev/api/v3/index.json)
-
-Install these packages (with the **Include prerelease** option checked):
-
-- `Microsoft.IdentityModel.Tokens` version **5.2.0** or greater (from Azure AD WebStack Nightly)
-- `Microsoft.Owin.Security.Jwt` version **4.0.0-alpha1** or greater (from Katana Dev)
+- `Microsoft.Owin.Host.SystemWeb` 4.0.0 or higher (if it isn't already installed)
+- `Microsoft.IdentityModel.Protocols.OpenIdConnect` 5.2.1 or higher
+- `Microsoft.IdentityModel.Tokens` 5.2.1 or higher
+- `Microsoft.Owin.Security.Jwt` 4.0.0 or higher
 
 
 ### Configure the middleware

@@ -65,8 +65,8 @@
 
         &.button-active {
           input[type=submit] {
-            background: #e22866;
-            color: #fff;
+            background: get-color('cerise');
+            color: $white;
           }
         }
       }

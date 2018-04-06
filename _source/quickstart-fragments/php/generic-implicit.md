@@ -13,7 +13,7 @@ provide to the user, if not, we should return a 401 to let the front end know th
  PHP7 and the latest version of composer installed on your computer. Your project should contain a `composer.json`
  file that is ready to have dependencies installed.
 >
-> If you would prefer to download a complete sample application, please visit [PHP Sample Applications for Okta][].
+> If you would prefer to download a complete sample application instead, please visit [PHP Sample Applications for Okta][] and follow those instructions.
 
 ## Installing Dependencies
 There are a few libraries you will need to install in order for us to verify the token that is provided in the

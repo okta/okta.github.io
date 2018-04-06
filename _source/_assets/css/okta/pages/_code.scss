@@ -16,7 +16,7 @@ ul.code-list {
   text-decoration:none;
   border: solid;
   border-width: 1px;
-  border-color: #D2D2D6;
+  border-color: $ghost;
   border-radius: 3px;
 
   .code-icon {
@@ -36,15 +36,15 @@ ul.code-list {
   }
 
   &.inverse {
-    background: #115D8B;
-    border: #115D8B;
+    background: $dark-cerulean;
+    border: $dark-cerulean;
 
     .code-icon::before {
-      color: white;
+      color: $white;
     }
 
     &:link, &:active, &:visited {
-      color: white;
+      color: $white;
     }
   }
 }

@@ -44,7 +44,7 @@ ul.toc {
 			font-family: fontawesome;
 			content: '\f097';
 			@include font-size('new-small');
-			color: #ccc;
+			color: $very-light-gray;
 			margin-right: 6px;
 		}
 	}

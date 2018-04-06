@@ -230,10 +230,28 @@ The `whitelist` parameter must evaluate to a list of group ids that is returned 
    * Okta EL expression containing a condition that evaluates to an integer: `app.profile.maxLimit < 100 ? app.profile.maxLimit : 100`.
     If the maximum group limit in the profile is less than 100, return that number of groups; otherwise, return a maximum of 100 groups. If there are more groups returned than the specified limit, an error is returned.
 
+### Linked Object Function
+
+{% api_lifecycle ea %}
+
+Use this function to retrieve properties about the user identified with the specified `primary` relationship. You can optionally specify an app.
+
+* Function: `user.getLinkedObject().$attribute`
+    * Parameters: (String primaryName, String userAttribute)
+    * Return Type: User
+    * Example: `user.getLinkedObject("manager").lastName`
+    * Example Result: `Gates` 
+
+* Function: `user.getLinkedObject().appuser().$attribute`
+    * Parameters: (String primaryName) (String appName) (String userAttribute)
+    * Return type: User
+    * Example: `user.getLinkedObject("manager").appuser("Salesforce").lastName
+    * Example Result: `Benioff`
+
 ### Time Functions
 
-| Function                    | Input Parameter Signature          | Return Type                              | Example                                                                                                            | Output                                                                                                  |
-|:----------------------------|:-----------------------------------|:-----------------------------------------|:-------------------------------------------------------------------------------------------------------------------|:--------------------------------------------------------------------------------------------------------|
+| Function | Input Parameter Signature | Return Type | Example  | Output  |
+| :----------- | :--------------------------| :--------------- |:-----|:---|
 | `Time.now`                  | (String timeZoneId, String format) | String                                   | `Time.now()`                                                                                                       | 2015-07-31T17:18:37.979Z (Current time, UTC format)                                                     |
 |                             |                                    | `Time.now("EST")`                        | 2015-07-31T13:30:49.964-04:00 (Specified time zone)                                                                |                                                                                                         |
 |                             |                                    | `Time.now("EST", "YYYY-MM-dd HH:mm:ss")` | 2015-07-31 13:36:48 (Specified time zone and format, military time)                                                |                                                                                                         |

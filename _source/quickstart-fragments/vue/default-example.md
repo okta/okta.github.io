@@ -14,14 +14,17 @@ This guide will walk you through integrating authentication into a Vue app with 
 
 At the end of the Vue instructions you can choose your server type to learn more about post-authentication workflows, such as verifying tokens that your Vue application can send to your server.
 
-> If you would prefer to download a complete sample application, please visit [Vue Sample Applications for Okta][].
+> If you would prefer to download a complete sample application instead, please visit [Vue Sample Applications for Okta][] and follow those instructions.
 
 ## Prerequisites
+
 * If you do not already have a **Developer Edition Account**, you can create one at [https://developer.okta.com/signup/](https://developer.okta.com/signup/).
 * If you don't have a Vue app, or are new to Vue, please start with the [Vue CLI](https://github.com/vuejs/vue-cli) guide. It will walk you through the creation of a Vue app, creating [routers](https://router.vuejs.org/en/essentials/getting-started.html), and other Vue.js development essentials.
 
 ## Add an OpenID Connect Client in Okta
+
 In Okta, applications are OpenID Connect clients that can use Okta Authorization servers to authenticate users.  Your Okta Org already has a default authorization server, so you just need to create an OIDC client that will use it.
+
 * Log into the Okta Developer Dashboard, click **Applications** then **Add Application**.
 * Choose **Single Page App (SPA)** as the platform, then populate your new OpenID Connect application with values suitable for your app. If you are running this locally and using the defaults from the [Vue CLI](https://github.com/vuejs/vue-cli), your `port` will be `8080`:
 
@@ -39,7 +42,6 @@ After you have created the application there are two more values you will need t
 | Client ID     | In the applications list, or on the "General" tab of a specific application.   |
 | Org URL       | On the home screen of the developer dashboard, in the upper right.             |
 
-
 These values will be used in your Vue application to setup the OpenID Connect flow with Okta.
 
 ## Install the Okta Vue SDK
@@ -51,6 +53,7 @@ npm install @okta/okta-vue --save
 ```
 
 ### Configuration
+
 You will need the values from the OIDC client that you created in the previous step to instantiate the middleware. You will also need to know your Okta Org URL, which you can see on the home page of the Okta Developer console.
 
 In your application's [vue-router](https://router.vuejs.org/en/essentials/getting-started.html) configuration, import the `@okta/okta-vue` plugin and pass it your OpenID Connect client information:
@@ -72,10 +75,11 @@ Vue.use(Auth, {
 
 You'll need to provide these routes in your sample application, so that we can sign the user in and handle the callback from Okta. We will show you how to set these up below using [Vue Router](https://router.vuejs.org/en/essentials/getting-started.html):
 
-- `/`: A default home page to handle basic control of the app.
-- `/implicit/callback`: Handle the response from Okta and store the returned tokens.
+* `/`: A default home page to handle basic control of the app.
+* `/implicit/callback`: Handle the response from Okta and store the returned tokens.
 
 ### Provide the Login and Logout Buttons
+
 In the relevant location in your application, you will want to provide `Login` and `Logout` buttons for the user. You can show/hide the correct button by using the `$auth.isAuthenticated()` method. For example:
 
 ```typescript
@@ -85,7 +89,7 @@ In the relevant location in your application, you will want to provide `Login` a
   <div id="app">
     <router-link to="/" tag="button" id='home-button'> Home </router-link>
     <button v-if='authenticated' v-on:click='logout' id='logout-button'> Logout </button>
-    <button v-else v-on:click='$auth.loginRedirect' id='login-button'> Login </button>
+    <button v-else v-on:click='login' id='login-button'> Login </button>
     <router-view/>
   </div>
 </template>
@@ -110,6 +114,9 @@ export default {
     async isAuthenticated () {
       this.authenticated = await this.$auth.isAuthenticated()
     },
+    login () {
+      this.$auth.loginRedirect('/')
+    },
     async logout () {
       await this.$auth.logout()
       await this.isAuthenticated()
@@ -123,6 +130,7 @@ export default {
 ```
 
 ### Create the Callback Handler
+
 In order to handle the redirect back from Okta, you need to capture the token values from the URL. You'll use `/implicit/callback` as the callback URL, and use the default `Auth.handleCallback()` component included.
 
 ```typescript
@@ -145,6 +153,7 @@ When your users are authenticated, your Vue application has an access token that
 Here is what the Vue component could look like for this hypothetical example using [axios](https://github.com/axios/axios):
 
 {% raw %}
+
 ```typescript
 // src/components/MessageList.vue
 
@@ -178,6 +187,7 @@ export default {
 }
 </script>
 ```
+
 {% endraw %}
 
 In the next section you can select your server technology to see how your server can read this incoming token and validate it.

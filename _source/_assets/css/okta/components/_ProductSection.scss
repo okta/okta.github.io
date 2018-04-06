@@ -84,9 +84,9 @@
 
 .ProductSection--authentication {
 	@include color('white');
-	background: #007DC1;
-	background: -webkit-linear-gradient(top, #46b3e9 0%, #007dc1 74%, #007dc1 100%);
-	background: linear-gradient(to bottom, #46b3e9 0%, #007dc1 74%, #007dc1 100%);
+	background: $navy-blue;
+	background: -webkit-linear-gradient(top, $summer-sky 0%, $navy-blue 74%, $navy-blue 100%);
+	background: linear-gradient(to bottom, $summer-sky 0%, $navy-blue 74%, $navy-blue 100%);
 
 	header h2 {
 		@include color('white');
@@ -162,8 +162,8 @@
 .ProductSection--api {
 	@include color('white');
 	background: get-color('blue-bright');
-	background: -webkit-linear-gradient(top, #46b3e9 0%, #007dc1 74%, #007dc1 100%);
-	background: linear-gradient(to bottom, #46b3e9 0%, #007dc1 74%, #007dc1 100%);
+	background: -webkit-linear-gradient(top, $summer-sky 0%, $navy-blue 74%, $navy-blue 100%);
+	background: linear-gradient(to bottom, $summer-sky 0%, $navy-blue 74%, $navy-blue 100%);
 
 	header {
 		h2 {

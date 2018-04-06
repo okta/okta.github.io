@@ -23,7 +23,7 @@
 
 	&-pagination {
 		@include color('charcoal');
-		border-top: 1px solid #979797;
+		border-top: 1px solid $shady-lady;
 		display: flex;
 		font-size: 18px;
 		justify-content: center;
@@ -59,7 +59,7 @@
 		width: 34px;
 
 		a {
-			color: #9a9a9a;
+			color: $nobel-2;
 			display: block;
 			font-size: 34px;
 			text-decoration: none;
