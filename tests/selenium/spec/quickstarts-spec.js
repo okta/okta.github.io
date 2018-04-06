@@ -133,6 +133,14 @@ describe('quickstarts page navigation spec', () => {
         'Express.js'
     ])).toBe(true);
 
+    quickstartsPage.selectReactNativeClient();
+    expect(quickstartsPage.urlContains("/react-native")).toBe(true);
+    expect(quickstartsPage.activeLinksContain([
+        'React Native',
+        'Node JS',
+        'Express.js'
+    ])).toBe(true);
+
     quickstartsPage.selectVueClient();
     expect(quickstartsPage.urlContains("/vue")).toBe(true);
     expect(quickstartsPage.activeLinksContain([

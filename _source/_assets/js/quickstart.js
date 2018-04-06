@@ -47,6 +47,12 @@
         name: 'ios',
         label: 'iOS',
         serverExampleType: 'implicit'
+      },
+      {
+        name: 'react-native',
+        label: 'React Native',
+        serverExampleType: 'implicit',
+        codeIconName: 'react' // Placeholder until React-Native has been added
       }
     ],
     servers: [

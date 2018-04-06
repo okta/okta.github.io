@@ -13,6 +13,7 @@ class QuickStartsPage extends BasePage {
     this.$androidLink = element(by.linkText('Android'));
     this.$angularLink = element(by.linkText('Angular'));
     this.$iOSLink = element(by.linkText('iOS'));
+    this.$reactNativeLink = element(by.linkText('React Native'));
     this.$vueLink = element(by.linkText('Vue'));
     this.$siwLink = element(by.linkText('Okta Sign-In Widget'));
     this.$reactLink = element(by.linkText('React'));
@@ -94,6 +95,10 @@ class QuickStartsPage extends BasePage {
 
   selectiOSClient() {
     return this.$iOSLink.click();
+  }
+
+  selectReactNativeClient() {
+    return this.$reactNativeLink.click()
   }
 
   selectVueClient() {
