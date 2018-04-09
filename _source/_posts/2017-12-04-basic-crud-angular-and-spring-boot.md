@@ -850,7 +850,8 @@ export class AuthInterceptor implements HttpInterceptor {
   }
 
   private async handleAccess(request: HttpRequest<any>, next: HttpHandler): Promise<HttpEvent<any>> {
-    // Only add to localhost requests since Giphy's API fails when the request include a token
+    // Only add to known domains since we don't want to send our tokens to just anyone. 
+    // Also, Giphy's API fails when the request includes a token.
     if (request.urlWithParams.indexOf('localhost') > -1) {
       const accessToken = await this.oktaAuth.getAccessToken();
       request = request.clone({
@@ -885,12 +886,12 @@ Modify `client/src/app/app.component.html` to have login and logout buttons.
 <mat-toolbar color="primary">
   <span>Welcome to {{title}}!</span>
   <span class="toolbar-spacer"></span>
-  <button mat-raised-button color="accent" *ngIf="isAuthenticated()"
+  <button mat-raised-button color="accent" *ngIf="isAuthenticated"
           (click)="oktaAuth.logout()">Logout
   </button>
 </mat-toolbar>
 
-<mat-card *ngIf="!isAuthenticated()">
+<mat-card *ngIf="!isAuthenticated">
   <mat-card-content>
     <button mat-raised-button color="accent"
             (click)="oktaAuth.loginRedirect()">Login
@@ -967,10 +968,10 @@ Move the HTML for the Login button from `app.component.html` to `client/src/app/
 ```html
 <mat-card>
   <mat-card-content>
-    <button mat-raised-button color="accent" *ngIf="!isAuthenticated()"
+    <button mat-raised-button color="accent" *ngIf="!isAuthenticated"
             (click)="oktaAuth.loginRedirect()">Login
     </button>
-    <button mat-raised-button color="accent" *ngIf="isAuthenticated()"
+    <button mat-raised-button color="accent" *ngIf="isAuthenticated"
             [routerLink]="['/car-list']">Car List
     </button>
   </mat-card-content>
@@ -1006,7 +1007,7 @@ Update `client/src/app/app.component.html`, so the Logout button redirects back 
 <mat-toolbar color="primary">
   <span>Welcome to {{title}}!</span>
   <span class="toolbar-spacer"></span>
-  <button mat-raised-button color="accent" *ngIf="oktaAuth.isAuthenticated()"
+  <button mat-raised-button color="accent" *ngIf="isAuthenticated"
           (click)="oktaAuth.logout()" [routerLink]="['/home']">Logout
   </button>
 </mat-toolbar>
