@@ -100,13 +100,15 @@ export class AppComponent {
   isAuthenticated: boolean;
 
   constructor(public oktaAuth: OktaAuthService) {
-    // Get the authentication state for immediate use
-    await this.isAuthenticated = this.oktaAuth.isAuthenticated();
-
     // Subscribe to authentication state changes
-    this.oktaAuth.$authenticatedState.subscribe(
+    this.oktaAuth.$authenticationState.subscribe(
       (isAuthenticated: boolean)  => this.isAuthenticated = isAuthenticated
     );
+  }
+
+  async ngOnInit() {
+    // Get the authentication state for immediate use
+    this.isAuthenticated = await this.oktaAuth.isAuthenticated();
   }
 
   login() {
@@ -186,7 +188,7 @@ export class MessageListComponent implements OnInit{
   }
 
   async ngOnInit() {
-    const accessToken = await oktaAuth.getAccessToken();
+    const accessToken = await this.oktaAuth.getAccessToken();
     const headers = new Headers({
       Authorization: 'Bearer ' + accessToken
     });
