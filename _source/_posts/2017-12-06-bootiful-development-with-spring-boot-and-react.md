@@ -6,7 +6,7 @@ description: "This post shows how you can build a UI and an API as separate apps
 tags: [authentication, spring boot, react, okta, oidc]
 tweets: 
   - "Learn how to integrate @springboot and @reactjs in this tutorial from @mraible."
-  - "Want to develop an application with @java on the backend and @typescriptlang on the front? This article is for you!"
+  - "Want to develop an application with @java on the backend and @reactjs on the front-end? This article is for you!"
 ---
 
 React has been getting a lot of positive press in the last couple years, making it an appealing frontend option for Java developers! Once you learn how it works, it makes a lot of sense and can be fun to develop with. Not only that, but it's *wicked fast!* If you’ve been following me, or if you've read this blog for a bit, you might remember my [Bootiful Development with Spring Boot and Angular](/blog/2017/04/26/bootiful-development-with-spring-boot-and-angular) tutorial. Today, I'll show you how to build the same application, except with React this time. Before we dive into that, let’s talk some more about what React is great for, and why I chose to explore it in this post.
@@ -23,7 +23,7 @@ Let's get started!
 
 **NOTE:** The instructions below for building a Spring Boot API are the same as the ones in [Bootiful Development with Spring Boot and Angular](/blog/2017/04/26/bootiful-development-with-spring-boot-and-angular). I've copied them below for your convenience.
 
-To get started with Spring Boot, navigate to [start.spring.io](https://start.spring.io). In the “Search for dependencies" field, select the following:
+To get started with Spring Boot, navigate to [start.spring.io](https://start.spring.io) and choose version 1.5.12+. In the “Search for dependencies" field, select the following:
 
 * [H2](http://www.h2database.com/html/main.html): An in-memory database
 * [JPA](http://www.oracle.com/technetwork/java/javaee/tech/persistence-jsp-140049.html): Standard ORM for Java
@@ -546,7 +546,7 @@ To lock down the backend, you can use [Okta's Spring Boot Starter](https://githu
 <dependency>
     <groupId>com.okta.spring</groupId>
     <artifactId>okta-spring-boot-starter</artifactId>
-    <version>0.2.0</version>
+    <version>0.4.0</version>
 </dependency>
 ```
 
@@ -558,7 +558,7 @@ You'll also need to add a `<dependencyManagement>` section to upgrade Spring Sec
         <dependency>
             <groupId>org.springframework.security.oauth</groupId>
             <artifactId>spring-security-oauth2</artifactId>
-            <version>2.2.0.RELEASE</version>
+            <version>2.3.0.RELEASE</version>
         </dependency>
     </dependencies>
 </dependencyManagement>
@@ -600,8 +600,8 @@ After making these changes, you should be able to restart the server and see acc
 Okta's React SDK allows you to integrate OIDC into a React application. You can learn more about Okta's React SDK can be [found on npmjs.com](https://www.npmjs.com/package/@okta/okta-react). To install, run the following commands:
 
 ```
-yarn add @okta/okta-react react-router-dom
-yarn add -D @types/react-router-dom
+yarn add @okta/okta-react@1.0.0 react-router-dom@4.2.2
+yarn add -D @types/react-router-dom@4.2.3
 ```
 
 Okta's React SDK depends on [react-router](https://www.npmjs.com/package/react-router), hence the reason for installing `react-router-dom`. Configuring routing in `client/src/App.tsx` is a common practice, so replace its code with the TypeScript below that sets up authentication with Okta.
@@ -721,11 +721,8 @@ If you look at your React app in your browser, you'll likely see an error like t
 
 ```bash
 ./src/Home.tsx
-(4,26): error TS7016: Could not find a declaration file for module '@okta/okta-react'.
-'/Users/mraible/spring-boot-react-example/client/node_modules/@okta/okta-react/dist/index.js'
-implicitly has an 'any' type.
- Try `npm install @types/@okta/okta-react` if it exists or add a new declaration (.d.ts) file
- containing `declare module '@okta/okta-react';`
+(4,26): error TS7016: Could not find a declaration file for module '@okta/okta-react'. '/Users/mraible/dev/okta/spring-boot-react-example/client/node_modules/@okta/okta-react/dist/index.js' implicitly has an 'any' type.
+  Try `npm install @types/@okta/okta-react` if it exists or add a new declaration (.d.ts) file containing `declare module '@okta/okta-react';`
 ```
 
 Create `client/src/okta.d.ts` with the following declaration to solve this problem.
@@ -956,3 +953,7 @@ git checkout okta
 ```
 
 If you find any issues, please add a comment below, and I'll do my best to help. If you liked this tutorial, I’d love to have you [follow me on Twitter](https://twitter.com/mraible). To be notified of more articles like this one, follow [@oktadev](https://twitter.com/oktadev).
+
+**Changelog:**
+
+* Apr 10, 2018: Updated to use Spring Boot 1.5.12, Okta Spring Boot Starter 0.4.0, and Okta React 1.0.0. See the code changes in the example app on GitHub: [master branch](https://github.com/oktadeveloper/spring-boot-react-example/pull/3), [okta branch](https://github.com/oktadeveloper/spring-boot-react-example/pull/2). Changes to this article can be viewed in [okta/okta.github.io#1942](https://github.com/okta/okta.github.io/pull/1942).
