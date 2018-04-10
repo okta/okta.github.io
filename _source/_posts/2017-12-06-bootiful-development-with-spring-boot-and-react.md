@@ -719,11 +719,11 @@ export default withAuth(class Home extends React.Component<HomeProps, HomeState>
 
 If you look at your React app in your browser, you'll likely see an error like the following:
 
-```bash
+<pre>
 ./src/Home.tsx
 (4,26): error TS7016: Could not find a declaration file for module '@okta/okta-react'. '/Users/mraible/dev/okta/spring-boot-react-example/client/node_modules/@okta/okta-react/dist/index.js' implicitly has an 'any' type.
   Try `npm install @types/@okta/okta-react` if it exists or add a new declaration (.d.ts) file containing `declare module '@okta/okta-react';`
-```
+</pre>
 
 Create `client/src/okta.d.ts` with the following declaration to solve this problem.
 
@@ -956,4 +956,4 @@ If you find any issues, please add a comment below, and I'll do my best to help.
 
 **Changelog:**
 
-* Apr 10, 2018: Updated to use Spring Boot 1.5.12, Okta Spring Boot Starter 0.4.0, and Okta React 1.0.0. See the code changes in the example app on GitHub: [master branch](https://github.com/oktadeveloper/spring-boot-react-example/pull/3), [okta branch](https://github.com/oktadeveloper/spring-boot-react-example/pull/2). Changes to this article can be viewed in [okta/okta.github.io#1942](https://github.com/okta/okta.github.io/pull/1942).
+* Apr 10, 2018: Updated to use Spring Boot 1.5.12, Okta Spring Boot Starter 0.4.0, and Okta React 1.0.0. You can see the code changes in the example app via pull requests on GitHub: [master#3](https://github.com/oktadeveloper/spring-boot-react-example/pull/3), [okta#2](https://github.com/oktadeveloper/spring-boot-react-example/pull/2). Changes to this article can be viewed in [okta/okta.github.io#1942](https://github.com/okta/okta.github.io/pull/1942).
