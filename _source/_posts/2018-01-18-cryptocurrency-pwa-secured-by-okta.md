@@ -322,7 +322,7 @@ Rerunning Lighthouse should give you a perfect PWA score of 100. *Huzzah!*
 
 ## Learn More About Ionic and PWAs
 
-In a future tutorial, I'll show you how to replace this app's local storage implementation with Okta's custom profile attributes. This enhancement will allow you to track your cryptocurrency holdings from any device, with any browser!
+In a [future tutorial](/blog/2018/01/23/replace-local-storage-with-okta-profile-attributes), I'll show you how to replace this app's local storage implementation with Okta's custom profile attributes. This enhancement will allow you to track your cryptocurrency holdings from any device, with any browser!
 
 For now, I hope you’ve enjoyed this brief look at Ionic, PWAs, and Okta. PWAs are more straightforward to distribute than mobile apps, and cloud services like Okta and Firebase make things even simpler.
 
