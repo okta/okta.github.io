@@ -255,6 +255,7 @@ class App extends React.Component<AppProps, AppState> {
       isLoading: false
     };
   }
+  // componentDidMount() and render()
   ...
 }
 ```
@@ -314,7 +315,7 @@ After making these changes, restart the server, refresh your browser, and you sh
 
 ### Create a BeerList Component
 
-To make this application easier to maintain, move the beer list fetching and rendering from `App.tsx` to its own `BeerList` component. Create `src/BeerList.tsx` and populate it with the code from `App.tsx`. Change all code references from `App` to `BeerList`, except in the JSX code.
+To make this application easier to maintain, move the beer list fetching and rendering from `App.tsx` to its own `BeerList` component. Create `src/BeerList.tsx` and populate it with the code from `App.tsx`. Change all code references from `App` to `BeerList`, except in the JSX code (where `App*` CSS classes are specified).
 
 ```typescript
 import * as React from 'react';
@@ -766,7 +767,7 @@ declare module '@okta/okta-react';
 Restart the client, and you'll see there's some work to do on the `BeerList` component.
 
 <pre>
-(39,21): Property 'auth' does not exist on type 'IntrinsicAttributes & IntrinsicClassAttributes<BeerList> & Readonly<{ children?: ReactNode; }> & ...'.
+(39,21): Property 'auth' does not exist on type 'IntrinsicAttributes &amp; IntrinsicClassAttributes&lt;BeerList&gt; &amp; Readonly&lt;{ children?: ReactNode; }&gt; &amp; ...'.
 </pre>
 
 In `client/src/BeerList.tsx`, add the `auth` property to the `BeerListProps` interface.
@@ -785,7 +786,7 @@ interface BeerListProps {
 
 interface BeerListState {
   beers: Array<Beer>;
-  åisLoading: boolean;
+  isLoading: boolean;
 }
 
 class BeerList extends React.Component<BeerListProps, BeerListState> {
