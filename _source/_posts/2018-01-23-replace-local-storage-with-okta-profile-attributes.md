@@ -8,6 +8,7 @@ tweets:
  - "Learn how to use the @okta Java SDK to store custom profile attributes to manage your cryptocurrency portfolio  →"
  - "Did you know that we provide a @java SDK for talking to our REST API? It's pretty slick. This blog post shows you how to use it to manage custom profile attributes."
 ---
+
 Local Storage is a JavaScript API technically known as `localStorage` that arrived with HTML5. It allows you to store information on a user’s browser quickly and easily. There are many debates on the web as to whether it’s better than cookies. Some say it’s faster (because it doesn’t send data with every request like cookies do) and more secure.
 Whether it’s more secure or not is debatable, especially when compared with secure cookies that have an [HttpOnly flag](https://www.owasp.org/index.php/HttpOnly). It does, however, offer the ability to store a lot more data than cookies. Cookies [can hold up to 4KB](http://browsercookielimits.squawky.net/), while local storage [can hold 5MB or more](https://www.html5rocks.com/en/tutorials/offline/quota-research/), depending on your browser.
 
@@ -419,4 +420,4 @@ If you love Java too, [follow @oktadev](https://twitter.com/oktadev) on Twitter 
 
 **Changelog:**
 
-* Apr 10, 2018: Updated dependencies in the example app to use Okta Spring Boot Starter and Java SDK version 0.4.0. See the code changes in the [example app on GitHub](https://github.com/oktadeveloper/okta-ionic-crypto-pwa/pull/2). Changes to this article can be viewed in [okta/okta.github.io#1941](https://github.com/okta/okta.github.io/pull/1941).
+* Apr 10, 2018: Updated dependencies in the example app to use Okta Spring Boot Starter and Java SDK version 0.4.0. See the code changes in the [example app on GitHub](https://github.com/oktadeveloper/okta-ionic-crypto-java-sdk/pull/2). Changes to this article can be viewed in [okta/okta.github.io#1941](https://github.com/okta/okta.github.io/pull/1941).
