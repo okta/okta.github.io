@@ -29,6 +29,12 @@ To begin, clone Josh’s finished repository.
 ```bash
 git clone https://github.com/joshuamorony/ionic-crypto-pwa.git
 cd ionic-crypto-pwa
+```
+
+Upgrade all the app's dependencies using [npm-check-updates](https://www.npmjs.com/package/npm-check-updates).
+
+```
+ncu -u
 npm install
 ```
 
@@ -64,12 +70,12 @@ For global logout to work, you’ll need to edit your application and add `http:
 
 ## Add Angular OIDC Support
 
-At this point, I tried adding [Okta's Angular SDK](https://github.com/okta/okta-oidc-js/tree/master/packages/okta-angular) using `npm install --save @okta/okta-angular`. However, I quickly discovered this library doesn't work with Ionic because it has a dependency on Angular Router, which Ionic doesn't use. You can track this issue [on GitHub](https://github.com/okta/okta-auth-js/issues/84).
+At this point, I tried adding [Okta's Angular SDK](https://github.com/okta/okta-oidc-js/tree/master/packages/okta-angular) using `npm install @okta/okta-angular`. However, I quickly discovered this library doesn't work with Ionic because it has a dependency on Angular Router, which Ionic doesn't use. You can track this issue [on GitHub](https://github.com/okta/okta-auth-js/issues/84).
 
 I knew that [angular-oauth2-oidc](https://github.com/manfredsteyer/angular-oauth2-oidc) worked based on [a previous tutorial](/blog/2017/08/22/build-an-ionic-app-with-user-authentication), so I installed angular-oauth2-oidc. Please do the same if you're following along.
 
 ```bash
-npm install --save angular-oauth2-oidc
+npm install angular-oauth2-oidc
 ```
 
 In `src/app/app.module.ts`, import `OAuthModule`.
@@ -274,6 +280,8 @@ npm run ionic:build --prod
 firebase deploy
 ```
 
+**NOTE:** You will need to install the `firebase-tools` package globally with `npm install -g firebase-tools` for the `firebase deploy` command to work.
+
 I deployed mine to <https://cryptopwa-oidc.firebaseapp.com> and received a [Lighthouse](https://developers.google.com/web/tools/lighthouse/) score of 91. Lighthouse is an automated tool for auditing the quality of web pages. You can run it against any web page to see audits for performance, accessibility, progressive web apps, and more.
 
 {% img blog/cryptocurrency-pwa/lighthouse-score-okta1.png alt:"Lighthouse Score: 91" width:"800" %}{: .center-image }
@@ -314,7 +322,7 @@ Rerunning Lighthouse should give you a perfect PWA score of 100. *Huzzah!*
 
 ## Learn More About Ionic and PWAs
 
-In a future tutorial, I'll show you how to replace this app's local storage implementation with Okta's custom profile attributes. This enhancement will allow you to track your cryptocurrency holdings from any device, with any browser!
+In a [future tutorial](/blog/2018/01/23/replace-local-storage-with-okta-profile-attributes), I'll show you how to replace this app's local storage implementation with Okta's custom profile attributes. This enhancement will allow you to track your cryptocurrency holdings from any device, with any browser!
 
 For now, I hope you’ve enjoyed this brief look at Ionic, PWAs, and Okta. PWAs are more straightforward to distribute than mobile apps, and cloud services like Okta and Firebase make things even simpler.
 
@@ -325,3 +333,7 @@ To learn more about Ionic and PWAs, check out the following resources:
 * [Tutorial: Develop a Mobile App With Ionic and Spring Boot](/blog/2017/05/17/develop-a-mobile-app-with-ionic-and-spring-boot)
 * [Build an Ionic App with User Authentication](/blog/2017/08/22/build-an-ionic-app-with-user-authentication)
 * [The Ultimate Guide to Progressive Web Applications](/blog/2017/07/20/the-ultimate-guide-to-progressive-web-applications)
+
+**Changelog:**
+
+* Apr 10, 2018: Updated dependencies in the example app to their latest versions using [npm-check-updates](https://www.npmjs.com/package/npm-check-updates). See the code changes in the [example app on GitHub](https://github.com/oktadeveloper/okta-ionic-crypto-pwa/pull/2). Changes to this article can be viewed in [okta/okta.github.io#1940](https://github.com/okta/okta.github.io/pull/1940).
