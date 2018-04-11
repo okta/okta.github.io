@@ -1226,10 +1226,10 @@ Yes, you can republish your app, but we recommend you don’t do it frequently. 
 
 ### Dev Doc Examples
 
-Box - <https://docs.box.com/docs/getting-started-box-integration>
-Slack - <https://api.slack.com/>
-OneLogin - <https://developers.onelogin.com/>
-Zendesk - <https://developer.zendesk.com/apps>
+* Box - <https://developer.box.com/docs/custom-integrations>
+* Slack - <https://api.slack.com/>
+* OneLogin - <https://developers.onelogin.com/>
+* Zendesk - <https://developer.zendesk.com/apps>
 
 ## Helpful Resources
 
