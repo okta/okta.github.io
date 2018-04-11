@@ -29,11 +29,13 @@ To begin, clone Josh’s finished repository.
 ```bash
 git clone https://github.com/joshuamorony/ionic-crypto-pwa.git
 cd ionic-crypto-pwa
+npm install
 ```
 
-Upgrade all the app's dependencies using [npm-check-updates](https://www.npmjs.com/package/npm-check-updates).
+Optional: upgrade all the app's dependencies using [npm-check-updates](https://www.npmjs.com/package/npm-check-updates).
 
 ```
+npm install -g npm-check-updates
 ncu -u
 npm install
 ```
