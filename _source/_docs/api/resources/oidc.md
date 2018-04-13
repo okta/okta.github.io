@@ -87,13 +87,20 @@ of the callback response.
  * `idp`, `sessionToken` and `idp_scope` are Okta extensions to [the OpenID specification](http://openid.net/specs/openid-connect-core-1_0.html#Authentication).
     All other parameters comply with the OpenID Connect specification and their behavior is consistent with the specification.
 
-`prompt`:
+consistent with the specification.
 
-There are three possible values for this parameter:
+* `prompt`:
 
-1. Null (no `prompt` parameter): Normal behavior. If an Okta session already exists, the user is silently authenticated. Otherwise, the user is prompted to authenticate.
-2. `none`: Do not prompt for authentication. If an Okta session already exists, the user is silently authenticated. Otherwise, an error is returned.
-3. `login`: Always prompt the user for authentication, regardless of whether they have an Okta session.
+    If no `prompt` parameter is specified, the standard behavior occurs:
+    * If an Okta session already exists, the user is silently authenticated. Otherwise, the user is prompted to authenticate.
+     * If scopes are requested that consent and consent is not yet given by the authenticated user, the user is prompted to give consent.
+
+    There are four possible values for this parameter:
+
+    * `none`: Do not prompt for authentication or consent. If an Okta session already exists, the user is silently authenticated. Otherwise, an error is returned.
+    * `login`: Always prompt the user for authentication, regardless of whether they have an Okta session.
+    * `consent`: {% api_lifecycle ea %} Depending on the [values set for `consent_method` in the app and and `consent` on the scope](/docs/api/resources/apps.html#add-oauth-20-client-application), display the Okta consent dialog, even if the user has already given consent. User consent is available for Custom Authorization Servers (requires the API Access Management feature and the User Consent feature enabled).
+    * `login` `consent` or `consent` `login` (order doesn't matter): The user is always prompted for authentication, and the user consent dialog is displayed depending on the [values set for `consent_method` in the app and and `consent` on the scope](/docs/api/resources/apps.html#add-oauth-20-client-application), even if the user has already given consent.
 
 `request`:
 
