@@ -49,7 +49,7 @@ To get your project off the ground quickly you can leverage the scaffolding func
 To install `vue-cli` run:
 
 ```
-npm install -g vue-cli
+npm install -g vue-cli@2.9.3
 ```
 
 Next, you need to initialize your project.  When you run the `vue init` command just accept all the default values.
@@ -71,7 +71,7 @@ Point your favorite browser to `http://localhost:8080` and you should see the fr
 Let's install [bootstrap-vue](https://github.com/bootstrap-vue/bootstrap-vue) so you can take advantage of the various premade [components](https://getbootstrap.com/docs/4.0/components/) (plus you can keep the focus on functionality and not on custom CSS):
 
 ```
-npm i --save bootstrap-vue bootstrap
+npm i bootstrap-vue@2.0.0-rc.7 bootstrap@4.1.0
 ```
 
 To complete the installation, modify `./src/main.js` to include [bootstrap-vue](https://github.com/bootstrap-vue/bootstrap-vue) and import the required CSS files. Your `./src/main.js` file should look like this:
@@ -119,7 +119,7 @@ The default application settings should be the same as those pictured.
 To install the Okta Vue SDK, run the following command:
 
 ```
-npm i --save @okta/okta-vue
+npm i @okta/okta-vue@1.0.0
 ```
 
 Open `./src/router/index.js` and replace the entire file with the following code.
@@ -352,7 +352,7 @@ Clicking on **Posts Manager** link should render the protected component.
 Now that users can securely authenticate, you can build the REST API server to perform CRUD operations on a post model. Add the following dependencies to your project:
 
 ```
-npm i --save express cors @okta/jwt-verifier sequelize sqlite3 epilogue axios
+npm i express@4.16.3 cors@2.8.4 @okta/jwt-verifier@0.0.11 sequelize@4.37.6 sqlite3@4.0.0 epilogue@0.7.1 axios@0.18.0
 ```
 
 Then, create the file  `./src/server.js` and paste the following code.
@@ -781,4 +781,5 @@ You can find the source code for the application developed in this post at <http
 
 Hit me up in the comments with any questions, and as always, follow [@oktadev](https://twitter.com/OktaDev) on Twitter to see all the cool content our dev team is creating.
 
+* Apr 16, 2018: Updated to use the latest dependencies, including Okta's Vue SDK 1.0.0. See the code changes in [oktadeveloper/okta-vue-node-example-example#2](https://github.com/oktadeveloper/okta-vue-node-example/pull/2). Changes to this article can be viewed in [okta/okta.github.io#1959](https://github.com/okta/okta.github.io/pull/1959).
 * Mar 12, 2018: Updated to use the latest dependencies, including Bootstrap 4.0.0. See the code changes in [oktadeveloper/okta-vue-node-example-example#1](https://github.com/oktadeveloper/okta-vue-node-example/pull/1). Changes to this article can be viewed in [okta/okta.github.io#1837](https://github.com/okta/okta.github.io/pull/1837).
