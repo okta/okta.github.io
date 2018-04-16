@@ -171,7 +171,7 @@ function check_sample_code_orgs() {
     local yourDomainUrls=$(grep -EoR "(http|https)://your-domain.okta*" --include="*.md" $dir --exclude-dir={node_modules,scripts,tests,dist} | sort | uniq)
     local jspUrls=$(grep -EoR "(http|https)://.*{org}.okta*" --include="*.md" $dir --exclude-dir={node_modules,scripts,tests,dist,s} | sort | uniq)
     local oktaPreviewUrls=$(grep -EoR "(http|https)://.*oktapreview.com*" --include="*.md" $dir --exclude-dir={node_modules,scripts,tests,dist,_posts,getting_started} | sort | uniq)
-    local yourOktaDomainParital=$(grep -EoR "(http|https)://{yourOktaDomain}/" --include="*.md" $dir --exclude-dir={node_modules,scripts,tests,dist,_posts,getting_started} | sort | uniq)
+    local yourOktaDomainPartial=$(grep -EoR "(http|https)://{yourOktaDomain}/" --include="*.md" $dir --exclude-dir={node_modules,scripts,tests,dist,_posts,getting_started} | sort | uniq)
 
     if [ "$yourOrgUrls" ];
     then
@@ -222,9 +222,9 @@ function check_sample_code_orgs() {
         return 1
     fi
 
-    if [ "$yourOktaDomainParital" ];
+    if [ "$yourOktaDomainPartial" ];
     then
-        echo "$yourOktaDomainParital"
+        echo "$yourOktaDomainPartial"
         echo "Files contain invalid URL reference -> https://{yourOktaDomain}/"
         echo "Please add '.com'"
         return 1
