@@ -73,7 +73,7 @@ of the callback response.
 | login_hint            | A username to prepopulate if prompting for authentication.                                                                                                                                                                                                                                                                                                                                              | Query      | String   | FALSE    |
 | max_age               | Allowable elapsed time, in seconds, since the last time the end user was actively authenticated by Okta.                                                                                                                                                                                                                                                                                                | Query      | String   | FALSE    |
 | nonce                 | A value that will be returned in the ID token. It is used to mitigate replay attacks.                                                                                                                                                                                                                                                                                                                   | Query      | String   | TRUE     |
-| prompt                | Either `none` or `login`. See [Parameter Details](#parameter-details) for more.                                                                                              | Query      | String   | FALSE    |
+| prompt                | Valid values: `none`, `consent`, `login`, or `consent` and `login` in either order. See [Parameter Details](#parameter-details) for more information.                                                                                              | Query      | String   | FALSE    |
 | redirect_uri          | Callback location where the authorization code or tokens should be sent. It must match the value preregistered in Okta during client registration.                                                                                                                                                                                                                                                                | Query      | String   | TRUE     |
 | response_type         | Any combination of `code`, `token`, and `id_token`. The combination determines the [flow](/authentication-guide/implementing-authentication/).                                                                                                                   | Query      | String   | TRUE     |
 | response_mode         | How the authorization response should be returned. [Valid values](#parameter-details): `fragment`, `form_post`, `query` or `okta_post_message`. If `id_token` or `token` is specified as the response type, then `query` isn't allowed as a response mode. Defaults to `fragment` in implicit and hybrid flows. If using the authorization code flow, this cannot be set to `okta_post_message` and if not specified the default value is `query`.  | Query      | String   | FALSE    |
@@ -87,13 +87,18 @@ of the callback response.
  * `idp`, `sessionToken` and `idp_scope` are Okta extensions to [the OpenID specification](http://openid.net/specs/openid-connect-core-1_0.html#Authentication).
     All other parameters comply with the OpenID Connect specification and their behavior is consistent with the specification.
 
-`prompt`:
+* `prompt`:
 
-There are three possible values for this parameter:
+    If no `prompt` parameter is specified, the standard behavior occurs:
+    * If an Okta session already exists, the user is silently authenticated. Otherwise, the user is prompted to authenticate.
+     * If scopes are requested that require consent and consent is not yet given by the authenticated user, the user is prompted to give consent.
 
-1. Null (no `prompt` parameter): Normal behavior. If an Okta session already exists, the user is silently authenticated. Otherwise, the user is prompted to authenticate.
-2. `none`: Do not prompt for authentication. If an Okta session already exists, the user is silently authenticated. Otherwise, an error is returned.
-3. `login`: Always prompt the user for authentication, regardless of whether they have an Okta session.
+    There are four possible values for this parameter:
+
+    * `none`: Do not prompt for authentication or consent. If an Okta session already exists, the user is silently authenticated. Otherwise, an error is returned.
+    * `login`: Always prompt the user for authentication, regardless of whether they have an Okta session.
+    * `consent`: {% api_lifecycle ea %} Depending on the [values set for `consent_method` in the app and and `consent` on the scope](/docs/api/resources/apps.html#add-oauth-20-client-application), display the Okta consent dialog, even if the user has already given consent. User consent is available for Custom Authorization Servers (requires the API Access Management feature and the User Consent feature enabled).
+    * `login consent` or `consent login` (order doesn't matter): The user is always prompted for authentication, and the user consent dialog is displayed depending on the [values set for `consent_method` in the app and and `consent` on the scope](/docs/api/resources/apps.html#add-oauth-20-client-application), even if the user has already given consent.
 
 `request`:
 
