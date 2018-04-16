@@ -160,7 +160,7 @@ curl -X PUT \
     "audiences": [
       "api://default"
     ]
-}'   "https://{yourOktaDomain}/api/v1/authorizationServers/aus1rqsshhhRoat780g7" \
+}'   "https://{yourOktaDomain}.com/api/v1/authorizationServers/aus1rqsshhhRoat780g7" \
 ~~~
 
 ##### Response Example
@@ -190,7 +190,7 @@ curl -X DELETE \
   -H 'Accept: application/json' \
   -H 'Content-Type: application/json' \
   -H "Authorization: SSWS ${api_token}" \
-"https://{yourOktaDomain}/api/v1/authorizationServers/aus1rqsshhhRoat780g7" \
+"https://{yourOktaDomain}.com/api/v1/authorizationServers/aus1rqsshhhRoat780g7" \
 ~~~
 
 ##### Response Example

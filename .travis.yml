@@ -30,8 +30,8 @@ deploy:
     branch: source
 notifications:
   slack:
-    on_success: change
-    on_failure: always
     on_pull_requests: false
+    on_success: never
+    on_failure: always
     rooms:
      - secure: Qu0iD73/wFwthPAcIfbg5oaD/4nOGW58N5dpsBQjbuIQM4wNBOyQSUszWy5iDm78kA8rxj6r2mVgSDSw28oHQczguv8iCLdAkzOZmPWDxNa4o34thM1pOaKI54cmJcnvigqjxcPybajYah7/ucthjUvf4V3NE5QOXb9fgnP6rPg=

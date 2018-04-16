@@ -2600,7 +2600,7 @@ curl -v -X POST \
 -H "Content-Type: application/json" \
 -H "Authorization: SSWS ${api_token}" \
 -d '{
-}' "https://{yourOktaDomain}/api/v1/idps/tx/sat4h4zexs17NrXWc0h6/finish"
+}' "https://{yourOktaDomain}.com/api/v1/idps/tx/sat4h4zexs17NrXWc0h6/finish"
 ~~~
 
 #### Response Example
@@ -2633,7 +2633,7 @@ curl -v -X POST \
 -H "Content-Type: application/json" \
 -H "Authorization: SSWS ${api_token}" \
 -d '{
-}' "https://{yourOktaDomain}/api/v1/idps/tx/sat4jmxahzdtLDHOm0h6/cancel"
+}' "https://{yourOktaDomain}.com/api/v1/idps/tx/sat4jmxahzdtLDHOm0h6/cancel"
 ~~~
 
 #### Response Example
