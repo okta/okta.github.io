@@ -5607,7 +5607,6 @@ Content-Type: application/json
 curl -v -X POST \
 -H "Accept: application/json" \
 -H "Content-Type: application/json" \
--H "Authorization: SSWS ${api_token}" \
 -d '{
   "recoveryToken": "00xdqXOE5qDZX8-PBR1bYv8AESqIFinDy3yul01tyh"
 }' "https://{yourOktaDomain}.com/api/v1/authn/recovery/token"

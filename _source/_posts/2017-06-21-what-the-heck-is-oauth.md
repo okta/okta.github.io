@@ -57,10 +57,10 @@ You can think of this like hotel key cards, but for apps. If you have a hotel ke
 
 To break it down simply, OAuth is where:
 
-App requests authorization from User
-User authorizes App and delivers proof
-App presents proof of authorization to server to get a Token
-Token is restricted to only access what the User authorized for the specific App
+1. App requests authorization from User
+2. User authorizes App and delivers proof
+3. App presents proof of authorization to server to get a Token
+4. Token is restricted to only access what the User authorized for the specific App
 
 ## OAuth Central Components
 
@@ -130,7 +130,7 @@ There's a pay to play problem here. Getting developers to do OAuth flows increas
 
 We've talked a bit about the client types, the token types, and the endpoints of the authorization server and how we can pass that to a resource server. I mentioned two different flows: getting the authorization and getting the tokens. Those don't have to happen on the same channel. The front channel is what goes over the browser. The browser redirected the user to the authorization server, the user gave consent. This happens on the user's browser. Once the user takes that authorization grant and hands that to the application, the client application no longer needs to use the browser to complete the OAuth flow to get the tokens.
 
-The tokens are meant to be consumed by the client application so it can access resources on your behalf. We call that the back channel. The back channel is a direct HTTP call directly from the client application to the resource server to exchange the authorization grant for tokens. These channels are used for different flows depending on what device capabilities you have.
+The tokens are meant to be consumed by the client application so it can access resources on your behalf. We call that the back channel. The back channel is an HTTP call directly from the client application to the resource server to exchange the authorization grant for tokens. These channels are used for different flows depending on what device capabilities you have.
 
 {% img blog/oauth/flow-channels.png alt:"Flow Channels" width:"800" %}{: .center-image }
 
