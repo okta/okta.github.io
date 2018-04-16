@@ -33,10 +33,6 @@ if [ $TRAVIS_BRANCH == 'weekly' ]; then
   fi
 fi
 
-
-# Run find-missing-slashes to find links that will redirect to okta.github.io
-fold npm_find_missing_slashes npm run find-missing-slashes
-
 # Run htmlproofer to validate links, scripts, and images
 #   -  Passing in the argument 'true' to automatically add the '.html' extension to
 #      extension-less files. 

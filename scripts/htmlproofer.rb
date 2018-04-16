@@ -4,14 +4,24 @@ require 'html-proofer'
 
 # Ruby hack to convert params to boolean
 extensions = true
+omit_external = false
+
 if ARGV[0] == 'false'
     extensions = false
+end
+
+if ARGV[1] == 'false'
+    # Only validate internal links
+    omit_external = true
+    puts "Validing ONLY internal links"
 end
 
 options = {
     :assume_extension => extensions,
     :allow_hash_href => true,
     :empty_alt_ignore => true,
+    # Run the external link checker
+    :disable_external => omit_external,
     :log_level => :error,
     :only_4xx => true,
     # 8 threads, any more doesn't seem to make a difference

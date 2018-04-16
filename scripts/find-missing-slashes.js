@@ -88,9 +88,9 @@ async function run(dir) {
   const badFiles = [];
   header(`Found ${files.filesToCheck.length} files to check in ${dir}`);
   for (let file of files.filesToCheck) {
-    console.log(`  Checking ${file.relative}`);
     const links = findBadLinks(file, files.fileMap);
     if (links.length > 0) {
+      console.log(`  Error in ${file.relative}`);
       links.forEach(link => console.log(`    └─ Invalid link: ${link.orig}`));
       badFiles.push({ file, links });
     }
