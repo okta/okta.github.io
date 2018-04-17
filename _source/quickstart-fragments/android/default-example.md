@@ -72,6 +72,12 @@ android.defaultConfig.manifestPlaceholders = [
 
 Make sure this is consistent with the redirect URI used in `okta_app_auth_config.json`. For example, if your **Login Redirect URI** is `com.okta.example:/callback`, the **AppAuth Redirect Scheme** will be `com.okta.example`.
 
+#### Chrome Custom Tabs `ERR_UNKNOWN_URL_SCHEME`
+
+There is a [known issue](https://github.com/okta/okta-sdk-appauth-android/issues/8) when redirecting back to a URI scheme from the browser via Chrome Custom Tabs. This is due to Chrome **not supporting** JavaScript initiated redirects back to native applications.
+
+More information on this topic is recorded in [this issue](https://github.com/okta/okta-sdk-appauth-android/issues/8).
+
 ## Implement Okta Sign-In
 Users can sign in to your Android application a number of different ways.
 The easiest, and most secure way is to use the **default login page**. This page renders the [Okta Sign-In Widget](/code/javascript/okta_sign-in_widget), equipped to handle User Lifecycle operations, MFA, and more.
