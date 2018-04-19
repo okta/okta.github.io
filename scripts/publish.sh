@@ -19,7 +19,7 @@ require_env_var "REPO"
 # Get the Runscope trigger ID
 get_secret prod/tokens/runscope_trigger_id RUNSCOPE_TRIGGER_ID
 
-STAGING_BASE_URL_RUNSCOPE="https://dq3iyfxeowfmd.cloudfront.net"
+STAGING_BASE_URL_RUNSCOPE="https://developer.okta.com"
 
 export TEST_SUITE_TYPE="build"
 
