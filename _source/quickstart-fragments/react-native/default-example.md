@@ -25,12 +25,12 @@ At the end of the React Native instructions you can choose your server type to l
 In Okta, applications are OpenID Connect clients that can use Okta Authorization servers to authenticate users.  Your Okta Org already has a default authorization server, so you just need to create an OIDC client that will use it.
 
 * Log into the Okta Developer Dashboard, click **Applications** then **Add Application**.
-* Choose **Native app** as the platform, then populate your new OpenID Connect application with values similar to:
+* Choose **Native app** as the platform, then populate your new OpenID Connect application with values suitable for your app. If you are running this locally and using the defaults from the [React Native Quickstart](https://github.com/react-community/create-react-native-app#getting-started), your `port` will be `19000`:
 
 | Setting             | Value                                         |
 | ------------------- | --------------------------------------------  |
 | App Name            | My Native App                                 |
-| Login redirect URIs | com.oktapreview.{yourOrg}:/+expo-auth-session |
+| Login redirect URIs | com.oktapreview.{orgName}:/+expo-auth-session |
 |                     | exp://localhost:{port}/+expo-auth-session     |
 | Grant Types Allowed | Authorization Code, Refresh Token             |
 
@@ -60,7 +60,7 @@ Assuming you're using an app created with `create-react-native-app`, modify your
 ```javascript
 {
   "expo": {
-    "scheme": "com.oktapreview.{yourOrg}"
+    "scheme": "com.oktapreview.{orgName}"
   }
 }
 ```
@@ -78,7 +78,7 @@ const tokenClient = new TokenClient({
   scope: 'openid profile',
   redirect_uri: __DEV__ ?
     'exp://localhost:{port}/+expo-auth-session' :
-    'com.oktapreview.{yourOrg}:/+expo-auth-session'
+    'com.oktapreview.{orgName}:/+expo-auth-session'
 });
 ```
 

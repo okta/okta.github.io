@@ -25,8 +25,8 @@ If you do not already have a **Developer Edition Account**, you can create one a
 | Setting             | Value                                               |
 | ------------------- | --------------------------------------------------- |
 | Application Name    | My iOS App                                          |
-| Login redirect URIs | com.oktapreview.{yourOrg}:/callback                 |
-| Logout redirect URIs| com.oktapreview.{yourOrg}:/logout                   |
+| Login redirect URIs | com.oktapreview.{orgName}:/callback                 |
+| Logout redirect URIs| com.oktapreview.{orgName}:/logout                   |
 
 After you have created the application there are two more values you will need to gather:
 
@@ -62,7 +62,7 @@ Create a new `Okta.plist` file in your application's bundle with the following f
   <key>clientId</key>
   <string>{clientIdValue}</string>
   <key>redirectUri</key>
-  <string>com.oktapreview.{yourOrg}:/callback</string>
+  <string>com.oktapreview.{orgName}:/callback</string>
   <key>scopes</key>
   <array>
 	<string>offline_access</string>

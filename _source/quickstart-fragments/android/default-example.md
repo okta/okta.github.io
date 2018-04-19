@@ -25,8 +25,8 @@ If you do not already have a **Developer Edition Account**, you can create one a
 | Setting             | Value                                               |
 | ------------------- | --------------------------------------------------- |
 | Application Name    | My Android App                                      |
-| Login redirect URIs | com.oktapreview.{yourOrg}:/callback                 |
-| Logout redirect URIs| com.oktapreview.{yourOrg}:/logout                   |
+| Login redirect URIs | com.oktapreview.{orgName}:/callback                 |
+| Logout redirect URIs| com.oktapreview.{orgName}:/logout                   |
 
 After you have created the application there are two more values you will need to gather:
 
