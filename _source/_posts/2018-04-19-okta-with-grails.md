@@ -2,7 +2,7 @@
 layout: blog_post
 title: "Build Server Side Authentication in Grails with OAuth 2.0 and Okta"
 author: moksamedia
-description: "This is a quick tutorial demonstrating how to add authentication to a Grails application with Okta"
+description: "This is a quick tutorial demonstrating how to add authentication to a Grails application with Okta."
 tags: [java, groovy, grails, spring, spring-boot, OIDC, OpenID Connect]
 tweets:
     - "Add single sign on to your Grails application using Okta"
@@ -29,7 +29,7 @@ Let's look at Grails + Groovy:
 
 Let’s look at Spring:
 * Spring Boot is great for simple REST API services
-* Spring's ORM is super powerful but correspondingly complicated
+* Spring Data is super powerful but correspondingly complicated
 * Templating in Spring is pretty old-fashioned these days
 * Spring has a HUGE community and massive enterprise support. 
 * Spring also has easy JSON conversion and TDD
@@ -133,7 +133,7 @@ Gradle is a super powerful build system that "eclipsed" Maven as the build tool 
 
 ## Add Authentication with Spring Security and Okta
 
-We are going to use the Spring Security Core Plugin and the Spring Security OAuth 2.0 plugin to connect with Okta OAuth. There are, however, a few other options. Apache Shiro has a plugin that integrates nicely with Grails. Shiro is a fine alternative that is worth examining. If you are building an API service that will have client-side authentication, then you might want to look at the [Okta Spring Boot Starter](https://github.com/okta/okta-spring-boot), which makes authentication super simple, and [this example app](https://github.com/ZacharyKlein/grails-react-okta-demo).
+We are going to use the Spring Security Core Plugin and the Spring Security OAuth 2.0 plugin to connect with Okta OAuth. There are, however, a few other options. Apache Shiro has a plugin that integrates nicely with Grails. Shiro is a fine alternative that is worth examining. If you are building an API service that will have client-side authentication, then you might want to look at the [Okta Spring Boot Starter](https://github.com/okta/okta-spring-boot), which makes authentication super simple, and [Zachary Klein's Grails + React + Okta demo](https://github.com/ZacharyKlein/grails-react-okta-demo).
 
 Because we will be using a purely server-side authentication flow, we can't use the authentication filter method implemented in the Spring Boot Starter.
 
@@ -145,7 +145,7 @@ Spring Security does a funny thing and uses thrown exceptions to handle the OAut
 
 What’s the "right" way? Writing a provider plugin for the Grails [spring-security-oauth2 plugin](http://plugins.grails.org/plugin/matrixcrawler/spring-security-oauth2) that tells Grails how to "talk" to Okta as an OAuth 2.0 provider.
 
-Fortunately for you, [I've already done this.](https://github.com/moksamedia/okta-oauth2-service)
+Fortunately for you, [I've already done this](https://github.com/moksamedia/okta-oauth2-service).
 
 If you don’t already have an account with Okta, now would be a great time to sign up for a [free developer account](https://developer.okta.com/).
 
@@ -261,7 +261,7 @@ grails:
 
 ### Run the App Again
 
-Whew! Lets test all that. Run the app again using 'grails run-app'. You should see the following. Notice particularly the three new controllers listed below the "Available Controllers" heading.
+Whew! Lets test all that. Run the app again using `grails run-app`. You should see the following. Notice particularly the three new controllers listed below the "Available Controllers" heading.
 
 {% img blog/okta-with-grails/welcome-to-grails2.png alt:"Run the application again" width:"600" %}{: .center-image }
 
@@ -273,7 +273,7 @@ Let's add a Home controller for the app. Use the Grails CLI to add the controlle
 grails create-controller Home
 ```
 
-Open the `HomeController.groovy` file and edit it to match the following. We need to do two things: 1) define our authentication requirement using the @Secured annotation, and 2) add some output text.
+Open the `HomeController.groovy` file and edit it to match the following. We need to do two things: 1) define our authentication requirement using the `@Secured` annotation, and 2) add some output text.
 
 ```groovy
 import grails.plugin.springsecurity.annotation.Secured
@@ -326,13 +326,13 @@ Obviously there's a lot we can do from here. We'll look at building out the app 
 
 ## Learn More about Grails, Gradle, Groovy, and Okta
 
-If you’d like to learn more about Grails to get ready for Part 2 check out the [documentation](http://docs.grails.org/snapshot/guide/single.html) and [Groovy Language Documentation.](http://groovy-lang.org/documentation.html)
+If you’d like to learn more about Grails to get ready for Part 2 check out the [documentation](http://docs.grails.org/snapshot/guide/single.html) and [Groovy Language Documentation](http://groovy-lang.org/documentation.html).
 
 While you’re in the Grails docs, make sure to familiarize yourself with the [basic folder structure of the Grails application](http://docs.grails.org/snapshot/guide/single.html#conventionOverConfiguration). As we saw, it can be touchy. 
 
-You may also want to take a look at [Understanding Controllers and Actions.](http://docs.grails.org/latest/guide/theWebLayer.html#understandingControllersAndActions)
+You may also want to take a look at [Understanding Controllers and Actions](http://docs.grails.org/latest/guide/theWebLayer.html#understandingControllersAndActions).
 
-And finally, you can [check out the Gradle docs here](https://docs.gradle.org/4.6/userguide/userguide.html?_ga=2.81050519.1610799736.1521489060-635091324.1521489060).
+And finally, you can [check out the Gradle docs](https://docs.gradle.org/4.6/userguide/userguide.html).
 
 If you’d like to learn more about Okta, you should definitely be following our team on Twitter [@oktadev](https://twitter.com/oktadev). You can also check out these other cool Java posts:
 
