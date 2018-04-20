@@ -2551,7 +2551,11 @@ recovery_question | Answer to user's current recovery question | Body       | [R
 ##### Response Parameters
 {:.api .api-response .api-response-params}
 
-[Credentials](#credentials-object) of the user
+For the specified user:
+
+[Password Object](#password-object),
+[Provider Object](#provider-object),
+[Recovery Question Object](#recovery-question-object)
 
 This operation does not affect the status of the user.
 
@@ -2574,15 +2578,13 @@ curl -v -X POST \
 
 ~~~json
 {
-  "credentials": {
-    "password": {},
-    "recovery_question": {
-      "question": "Who's a major player in the cowboy scene?"
-    },
-    "provider": {
-      "type": "OKTA",
-      "name": "OKTA"
-    }
+  "password": {},
+  "recovery_question": {
+    "question": "Who's a major player in the cowboy scene?"
+  },
+  "provider": {
+    "type": "OKTA",
+    "name": "OKTA"
   }
 }
 ~~~
@@ -2609,7 +2611,11 @@ newPassword | New password for user                                  | Body     
 ##### Response Parameters
 {:.api .api-response .api-response-params}
 
-[Credentials](#credentials-object) of the user
+For the specified user:
+
+[Password Object](#password-object),
+[Provider Object](#provider-object),
+[Recovery Question Object](#recovery-question-object)
 
 The user transitions to `ACTIVE` status when successfully invoked in `RECOVERY` status.
 
@@ -2632,15 +2638,13 @@ curl -v -X POST \
 
 ~~~json
 {
-  "credentials": {
-    "password": {},
-    "recovery_question": {
-      "question": "Who's a major player in the cowboy scene?"
-    },
-    "provider": {
-      "type": "OKTA",
-      "name": "OKTA"
-    }
+  "password": {},
+  "recovery_question": {
+    "question": "Who's a major player in the cowboy scene?"
+  },
+  "provider": {
+    "type": "OKTA",
+    "name": "OKTA"
   }
 }
 ~~~
@@ -2666,7 +2670,11 @@ recovery_question | New recovery question & answer for user | Body       | [Reco
 ##### Response Parameters
 {:.api .api-response .api-response-params}
 
-[Credentials](#credentials-object) of the user
+For the specified user:
+
+[Password Object](#password-object),
+[Provider Object](#provider-object),
+[Recovery Question Object](#recovery-question-object)
 
 > This operation does not affect the status of the user.
 
@@ -2692,15 +2700,13 @@ curl -v -X POST \
 
 ~~~json
 {
-  "credentials": {
-    "password": {},
-    "recovery_question": {
-      "question": "How many roads must a man walk down?"
-    },
-    "provider": {
-      "type": "OKTA",
-      "name": "OKTA"
-    }
+  "password": {},
+  "recovery_question": {
+    "question": "How many roads must a man walk down?"
+  },
+  "provider": {
+    "type": "OKTA",
+    "name": "OKTA"
   }
 }
 ~~~
