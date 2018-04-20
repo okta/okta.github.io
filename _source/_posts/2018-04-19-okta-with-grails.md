@@ -173,16 +173,16 @@ You’ll need to copy your Client ID and Client Secret to a safe place for later
 
 {% img blog/okta-with-grails/client-credentials.png alt:"Remember your credentials" width:"600" %}{: .center-image }
 
-That's it for Okta setup for our purposes. You can certainly dig MUCH deeper into the OAuth rabbit hole with tons of configuration options. [Take a look here to get started.](https://developer.okta.com/standards/OAuth/)
+That's it for Okta setup for our purposes. You can certainly dig MUCH deeper into the OAuth rabbit hole with tons of configuration options. [Take a look here to get started](https://developer.okta.com/standards/OAuth/).
 
 ## Dive Back Into Grails!
 
 We need to install three dependencies:
-* [Grails Spring Security Core Plugin.](https://grails-plugins.github.io/grails-spring-security-core/3.2.x/index.html#installation) (adds core Spring Security features)
-*  [Grails Spring Security OAuth2 plugin.](https://github.com/MatrixCrawler/grails-spring-security-oauth2) (adds OAuth 2.0 features)
+* [Grails Spring Security Core Plugin](https://grails-plugins.github.io/grails-spring-security-core/3.2.x/index.html#installation) (adds core Spring Security features)
+*  [Grails Spring Security OAuth2 plugin](https://github.com/MatrixCrawler/grails-spring-security-oauth2) (adds OAuth 2.0 features)
 * [Okta OAuth 2.0 Provider Plugin](https://github.com/moksamedia/okta-oauth2-service) (tells the OAuth plugin how to talk to Okta)
 
-Edit your `build.gradle` file, adding the new Maven repository and the three compile can you email brendependencies, as seen below.
+Edit your `build.gradle` file, adding the new Maven repository and the three compile dependencies, as seen below.
 
 ```groovy
 repositories {
