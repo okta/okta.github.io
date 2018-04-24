@@ -711,7 +711,7 @@ module.exports = router
 
 ## Learn More About Node and Secure User Management with Okta
 
-Now you have a fully functioning web application with user registration, authentication, and credential recovery, without having to has a single password or manage a single user. You can have your cake, and eat it too!
+Now you have a fully functioning web application with user registration, authentication, and credential recovery, without having to hash a single password or manage a single user. You can have your cake, and eat it too!
 
 OK, the cake is a lie, but you can now focus on what makes your application great and unique while offloading the complications of user management to Okta. If you'd like to learn more about Node, Okta, authentication, or application security, I'd encourage you to check out the rest of the Okta developer blog, and specifically these great resources:
 
