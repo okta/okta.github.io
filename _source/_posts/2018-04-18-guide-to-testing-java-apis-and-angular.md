@@ -80,31 +80,58 @@ const config = {
 };
 ```
 
-
 ## Unit Testing Spring Boot Controllers
 
-Everyone has opinions on what unit testing is and what it actually means. To me, unit tests focus on executing the smallest block of code possible. In simple terms, exercising your code's public methods.
+Everyone has opinions on what unit testing is and what it actually means. To me, unit tests focus on executing the smallest block of code possible. In simple terms, exercising your code's public methods. 
 
-Spring has a lot of helper test infrastructure to help set up the context of your application. When possible, I avoid using it, this allows for more focused and faster running tests. The most significant reason why I prefer constructor injection over field injection is how much easier it is to write tests; you can test your code in isolation and mock out the behavior you are testing for.
+The tests in the following sections were added in a [pull-request](https://github.com/oktadeveloper/okta-ionic-crypto-java-sdk-example/pull/3). In addition to adding tests, I also changed the `Holding` bean's setters to be fluent, so the methods can be changed together as you will see below.
 
-When given a choice, my preferred testing frameworks are [Mockito](https://site.mockito.org/) and [Hamcrest](http://hamcrest.org/JavaHamcrest/). Mockito makes it really easy to stub behavior, and Hamcrest has both excellent default assertion messages, and it helps isolate your test code from the differences between JUnit and TestNG. I usually write tests in Groovy as well to help reduce some of the boilerplatel, but I'll stick with Java for today.
+Spring has a lot of helper test infrastructure to help set up the context of your application. When possible, I avoid using it, this allows for more focused and faster running tests. How you inject your dependencies into your code changes the option you have for testing.  For example, if class we are testing `HoldingsController` was writen with field injection it would look something like this:
+
+```java
+public class HoldingsController {
+
+    @Autowired
+    private Client client;
+
+    public HoldingsController() {}
+    ...
+}
+```
+
+The above implementation can only be run inside a Spring container. Instead, the same code was written with constructor injection:
+
+```java
+public class HoldingsController {
+    private final Client client;
+
+    public HoldingsController(Client client) {
+        this.client = client;
+    }
+    ...
+}
+```
+
+The differences between the two might may or may not be obvious to you. The second example is just plain Java code: `Client` field is final, once the object is constructed is it ready to be used, and, to me most significantly, it can be used without a Spring. Constructor injection makes it much easier to write tests; you can test your code in isolation and mock out the behavior you are testing for. You can read on the topic from [Oliver Gierke](http://olivergierke.de/2013/11/why-field-injection-is-evil/). 
+
+When given a choice, my preferred testing frameworks are [Mockito](https://site.mockito.org/) and [Hamcrest](http://hamcrest.org/JavaHamcrest/). Mockito makes it really easy to stub behavior, and Hamcrest has both excellent default assertion messages, and it helps isolate your test code from the differences between JUnit and TestNG. I usually write tests in Groovy as well to help reduce some of the boilerplate, but I'll stick with Java for today.
 
 To refresh your memory, I'm going to write tests for the `HoldingsController`, this class has a single constructor and methods for `@GetMapping` and `@PostMapping`. I'll focus on the `saveHoldings(@RequestBody Holding[] holdings, Principal principal)` method: 
 
 ```java
-    @PostMapping
-    public Holding[] saveHoldings(@RequestBody Holding[] holdings, Principal principal) {
-        User user = client.getUser(principal.getName());
-        try {
-            String json = mapper.writeValueAsString(holdings);
-            user.getProfile().put(HOLDINGS_ATTRIBUTE_NAME, json);
-            user.update();
-        } catch (JsonProcessingException e) {
-            logger.error("Error saving Okta custom data: " + e.getMessage());
-            e.printStackTrace();
-        }
-        return holdings;
+@PostMapping
+public Holding[] saveHoldings(@RequestBody Holding[] holdings, Principal principal) {
+    User user = client.getUser(principal.getName());
+    try {
+        String json = mapper.writeValueAsString(holdings);
+        user.getProfile().put(HOLDINGS_ATTRIBUTE_NAME, json);
+        user.update();
+    } catch (JsonProcessingException e) {
+        logger.error("Error saving Okta custom data: " + e.getMessage());
+        e.printStackTrace();
     }
+    return holdings;
+}
 ```
 
 This method saves the argument `holdings` to an Okta custom profile property associated with the user.
@@ -154,19 +181,19 @@ You can see the behavior driven Given-When-Then style of Mockito (where, in this
 Now for the easy part, calling `HoldingsController.saveHoldings()`
 
 ```java
-        Holding[] inputHoldings = new Holding[] {
-                new Holding()
-                    .setCrypto("crypto1")
-                    .setCurrency("currency1")
-                    .setAmount("amount1"),
-                new Holding()
-                    .setCrypto("crypto2")
-                    .setCurrency("currency2")
-                    .setAmount("amount2")
-        };
+Holding[] inputHoldings = new Holding[] {
+        new Holding()
+            .setCrypto("crypto1")
+            .setCurrency("currency1")
+            .setAmount("amount1"),
+        new Holding()
+            .setCrypto("crypto2")
+            .setCurrency("currency2")
+            .setAmount("amount2")
+};
 
-        HoldingsController holdingsController = new HoldingsController(client);
-        Holding[] outputHoldings = holdingsController.saveHoldings(inputHoldings, principal);
+HoldingsController holdingsController = new HoldingsController(client);
+Holding[] outputHoldings = holdingsController.saveHoldings(inputHoldings, principal);
 ```
 
 Nothing special here, but that is the point! Using constructor injection allows us to treat this object like any other Java object.
@@ -181,24 +208,24 @@ We also need to validate that the custom property `holdings` was set, and `user.
 
 ```java
 ArgumentCaptor<String> holdingsJsonCaptor = ArgumentCaptor.forClass(String.class);
-        verify(userProfile).put(eq("holdings"), holdingsJsonCaptor.capture());
-        verify(user).update();
+verify(userProfile).put(eq("holdings"), holdingsJsonCaptor.capture());
+verify(user).update();
 ```
 
 Finally, we can validate the JSON string. [Spotify Hamcrest](https://github.com/spotify/java-hamcrest) (yes, the same [Spotify](https://www.spotify.com) you rock out to while coding) is my new favorite testing lib and shows the power and readability of custom Hamcrest matchers.
 
 ```json
-        JsonNode holdingsParsed = new ObjectMapper().readTree(holdingsJsonCaptor.getValue());
-        assertThat(holdingsParsed, jsonArray(contains(
-                jsonObject()
-                    .where("crypto", jsonText("crypto1"))
-                    .where("currency", jsonText("currency1"))
-                    .where("amount", jsonText("amount1")),
-                jsonObject()
-                    .where("crypto", jsonText("crypto2"))
-                    .where("currency", jsonText("currency2"))
-                    .where("amount", jsonText("amount2"))
-        )));
+JsonNode holdingsParsed = new ObjectMapper().readTree(holdingsJsonCaptor.getValue());
+assertThat(holdingsParsed, jsonArray(contains(
+        jsonObject()
+            .where("crypto", jsonText("crypto1"))
+            .where("currency", jsonText("currency1"))
+            .where("amount", jsonText("amount1")),
+        jsonObject()
+            .where("crypto", jsonText("crypto2"))
+            .where("currency", jsonText("currency2"))
+            .where("amount", jsonText("amount2"))
+)));
 ```
 I mentioned above Hamcrest has great default assertion messages, hopefully you will never have to see them, but that isn't likely, here is an example output of a failed JSON assertion:
 
