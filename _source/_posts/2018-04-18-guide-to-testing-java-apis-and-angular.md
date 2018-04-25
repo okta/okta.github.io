@@ -80,13 +80,269 @@ const config = {
 };
 ```
 
-## Testing Spring Boot Apps
 
-### Unit Testing Spring Boot Controllers
+## Unit Testing Spring Boot Controllers
+
+Everyone has opinions on what unit testing is and what it actually means. To me, unit tests focus on executing the smallest block of code possible. In simple terms, exercising your code's public methods.
+
+Spring has a lot of helper test infrastructure to help set up the context of your application. When possible, I avoid using it, this allows for more focused and faster running tests. The most significant reason why I prefer constructor injection over field injection is how much easier it is to write tests; you can test your code in isolation and mock out the behavior you are testing for.
+
+When given a choice, my preferred testing frameworks are [Mockito](https://site.mockito.org/) and [Hamcrest](http://hamcrest.org/JavaHamcrest/). Mockito makes it really easy to stub behavior, and Hamcrest has both excellent default assertion messages, and it helps isolate your test code from the differences between JUnit and TestNG. I usually write tests in Groovy as well to help reduce some of the boilerplatel, but I'll stick with Java for today.
+
+To refresh your memory, I'm going to write tests for the `HoldingsController`, this class has a single constructor and methods for `@GetMapping` and `@PostMapping`. I'll focus on the `saveHoldings(@RequestBody Holding[] holdings, Principal principal)` method: 
+
+```java
+    @PostMapping
+    public Holding[] saveHoldings(@RequestBody Holding[] holdings, Principal principal) {
+        User user = client.getUser(principal.getName());
+        try {
+            String json = mapper.writeValueAsString(holdings);
+            user.getProfile().put(HOLDINGS_ATTRIBUTE_NAME, json);
+            user.update();
+        } catch (JsonProcessingException e) {
+            logger.error("Error saving Okta custom data: " + e.getMessage());
+            e.printStackTrace();
+        }
+        return holdings;
+    }
+```
+
+This method saves the argument `holdings` to an Okta custom profile property associated with the user.
 
 ### Mocking Okta's Java SDK with Mockito
 
-### Mocking Okta's API with WireMock
+Mocktio and Hamcrest are both typically used with static imports, something like:
+
+```java
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.*;
+import static org.mockito.Mockito.*;
+```
+For those of you who don't like wildcard imports:
+
+```java
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.contains;
+import static org.hamcrest.Matchers.is;
+
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.eq;
+```
+
+I've defined a `saveHoldingsTest` in [HoldingsControllerTest](https://github.com/oktadeveloper/TODO) in which I created a few mock objects:
+
+```java
+Client client = mock(Client.class);
+User user = mock(User.class);
+UserProfile userProfile = mock(UserProfile.class);
+Principal principal = mock(Principal.class);
+```
+
+Then define the behaviour of the mocks:
+
+```java
+String username = "joe.coder@example.com";
+when(principal.getName()).thenReturn(username);
+when(client.getUser(username)).thenReturn(user);
+when(user.getProfile()).thenReturn(userProfile);
+```
+
+You can see the behavior driven Given-When-Then style of Mockito (where, in this case, the 'given' is the mock definition).  Anytime `principal.getName()` is called `"joe.coder@example.com"` will be returned and when `client.getUser("joe.coder@example.com")` is called, our mocked `User` instance is returned.
+
+Now for the easy part, calling `HoldingsController.saveHoldings()`
+
+```java
+        Holding[] inputHoldings = new Holding[] {
+                new Holding()
+                    .setCrypto("crypto1")
+                    .setCurrency("currency1")
+                    .setAmount("amount1"),
+                new Holding()
+                    .setCrypto("crypto2")
+                    .setCurrency("currency2")
+                    .setAmount("amount2")
+        };
+
+        HoldingsController holdingsController = new HoldingsController(client);
+        Holding[] outputHoldings = holdingsController.saveHoldings(inputHoldings, principal);
+```
+
+Nothing special here, but that is the point! Using constructor injection allows us to treat this object like any other Java object.
+
+The only thing left is to validate the results. Using Hamcrest we can verify the `saveHoldings` method returns a `Holding[]` equal to the input.
+
+```java
+assertThat(outputHoldings, is(inputHoldings));
+```
+
+We also need to validate that the custom property `holdings` was set, and `user.update()` was called, for this we will use a Mockito [ArgumentCaptor](http://site.mockito.org/javadoc/current/org/mockito/ArgumentCaptor.html) to capture the JSON string value of `holdings`:
+
+```java
+ArgumentCaptor<String> holdingsJsonCaptor = ArgumentCaptor.forClass(String.class);
+        verify(userProfile).put(eq("holdings"), holdingsJsonCaptor.capture());
+        verify(user).update();
+```
+
+Finally, we can validate the JSON string. [Spotify Hamcrest](https://github.com/spotify/java-hamcrest) (yes, the same [Spotify](https://www.spotify.com) you rock out to while coding) is my new favorite testing lib and shows the power and readability of custom Hamcrest matchers.
+
+```json
+        JsonNode holdingsParsed = new ObjectMapper().readTree(holdingsJsonCaptor.getValue());
+        assertThat(holdingsParsed, jsonArray(contains(
+                jsonObject()
+                    .where("crypto", jsonText("crypto1"))
+                    .where("currency", jsonText("currency1"))
+                    .where("amount", jsonText("amount1")),
+                jsonObject()
+                    .where("crypto", jsonText("crypto2"))
+                    .where("currency", jsonText("currency2"))
+                    .where("amount", jsonText("amount2"))
+        )));
+```
+I mentioned above Hamcrest has great default assertion messages, hopefully you will never have to see them, but that isn't likely, here is an example output of a failed JSON assertion:
+
+```txt
+java.lang.AssertionError: 
+Expected: an array node whose elements iterable containing [{
+  "crypto": a text node with value that is "crypto1"
+  "currency": a text node with value that is "currency1"
+  "amount": a text node with value that is "amount1"
+}, {
+  "crypto": a text node with value that is "crypto2"
+  "currency": a text node with value that is "currency2"
+  "amount": a text node with value that is "amount2"
+}]
+     but: was an array node whose elements item 0: {
+  "crypto": was a text node with value that was "wrong-crypto"
+  ...
+}
+```
+
+## Mocking Okta's API with WireMock
+
+Integration tests are a little more involved. Sometimes you spin up your full application and all of its required dependencies. Other times you mock out the external dependencies so you can focus on your code (and not worry about needing an internet connection just to run your tests). I'm a big fan of the later and try to take that approach when possible.
+
+The `HoldingsApiApplication` has two external dependencies, the Okta OAuth 2.0 IdP and the Okta Management API. I'm going to use [WireMock](http://wiremock.org/) for both. For OAuth mocking, you also have [another option](http://engineering.pivotal.io/post/faking_oauth_sso/), but it requires changes to how your application is running while testing. I prefer to make as few changes as possible to my application during integration testing. I'll give you a link to compare the two strategies at the end of this section.
+
+As you start to look at [HoldingsApiIT](https://github.com/oktadeveloper/TODO) you will see a few interesting things:
+
+```java
+@RunWith(SpringRunner.class)
+@ContextConfiguration(initializers = HoldingsApiIT.RandomPortInitializer.class)
+@SpringBootTest(classes = {HoldingsApiApplication.class},
+                webEnvironment = RANDOM_PORT,
+                properties = {
+                    "okta.client.token=FAKE_TEST_TOKEN",
+                    "okta.oauth2.localTokenValidation=false",
+                    "okta.oauth2.discoveryDisabled=true",
+                    "okta.client.orgUrl=http://localhost:${wiremock.server.port}",
+                    "okta.oauth2.issuer=http://localhost:${wiremock.server.port}/oauth/issuer",
+                    "security.oauth2.resource.userInfoUri=http://localhost:${wiremock.server.port}/oauth/userInfoUri"
+                })
+public class HoldingsApiIT {
+```
+
+The above is a JUnit test configured to run with the `SpringRunner`. The `ContextConfiguration` annotation defines a `RandomPortInitializer` which will assign a random port to the property `wiremock.server.port` before the test runs. This is done so the auto-configured Okta `Client` and OAuth components will access a local WireMock server (by setting the above `properties`).
+
+WireMock if you haven't already guessed is a nifty little testing lib you can use to mock HTTP responses, it spins up an embedded [Jetty](https://www.eclipse.org/jetty/) instance to handle real HTTP requests/responses. For example, if you wanted to mock a response to `/my/resource` and return the XML content `<hello>still using XML</hello>`, it would be represented in the following syntax:
+
+``` java
+stubFor(get(urlEqualTo("/my/resource"))
+    .withHeader("Accept", equalTo("text/xml"))
+    .willReturn(aResponse()
+        .withStatus(200)
+        .withHeader("Content-Type", "text/xml")
+        .withBody("<hello>still using XML</hello>")));
+ ```
+
+In simple cases, you can also use a JUnit rule to automatically start/stop the WireMock server. However, when coupled with the `SpringRunner` it doesn't work as well, do to the order in which rules and field injection happens. To work around this we simply fall back to the time-tested `@Before` and `@After` test annotations.
+
+```java
+private WireMockServer wireMockServer;
+
+@Before
+public void startMockServer() throws IOException {
+    wireMockServer = new WireMockServer(wireMockConfig().port(mockServerPort));
+    configureWireMock();
+    wireMockServer.start();
+}
+
+@After
+public void stopMockServer() {
+    if (wireMockServer != null && wireMockServer.isRunning()) {
+        wireMockServer.stop();
+    }
+}
+```
+
+I've also defined a method `configureWireMock()` which will configure how WireMock responds to requests:
+
+```java
+private void configureWireMock() throws IOException {
+     // load a JSON file from the classpath
+    String body = StreamUtils.copyToString(getClass().getResourceAsStream("/its/user.json"), StandardCharsets.UTF_8);
+
+    // respond to GET for user
+    wireMockServer.stubFor(WireMock.get("/api/v1/users/" + TEST_USER_EMAIl)
+            .willReturn(aResponse().withBody(body)));
+
+    // respond to PUT for user
+    wireMockServer.stubFor(WireMock.put("/api/v1/users/" + TEST_USER_ID)
+            .willReturn(aResponse().withBody(body)));
+
+    // OAuth userInfoUri
+    String userInfoBody = StreamUtils.copyToString(getClass().getResourceAsStream("/its/userInfo.json"), StandardCharsets.UTF_8);
+    wireMockServer.stubFor(
+            WireMock.get("/oauth/userInfoUri")
+                .withHeader("Authorization", WireMock.equalTo("Bearer "+ TEST_ACCESS_TOKEN))
+            .willReturn(aResponse()
+                    .withBody(userInfoBody)
+                    .withHeader("Content-Type", MediaType.APPLICATION_JSON_VALUE)
+            ));
+}
+```
+
+The above method loads a JSON file from the classpath `/its/user.json` and returns it's contents for GET and PUT requests for the `/api/v1/users` endpoints. A similar response is mocked for a GET request to `/oauth/userInfoUri`.
+
+
+The rest of test code looks pretty simple:
+
+```java
+@Autowired
+private TestRestTemplate restTemplate;
+
+@Test
+public void testGetHoldings() {
+
+    List<Holding> holdings = Arrays.asList(restTemplate.getForObject("/api/holdings", Holding[].class));
+
+    // use Spotify's hamcrest-pojo to validate the objects
+    assertThat(holdings, contains(
+            pojo(Holding.class)
+                .withProperty("crypto",   is("crypto-1"))
+                .withProperty("currency", is("currency-1"))
+                .withProperty("amount",   is("amount-1")),
+            pojo(Holding.class)
+                .withProperty("crypto",   is("crypto-2"))
+                .withProperty("currency", is("currency-2"))
+                .withProperty("amount",   is("amount-2"))
+    ));
+}
+```
+
+It's worth noting that this integration test is more complicated and slower than the corresponding unit test above. I feel developers typically create integration test because these tests have fewer lines of code. The unit tests finish nearly instantly, each integration test, on the other hand, spins up two servlet containers (one for our application and another for WireMock), for every test!  Having both unit and integration tests is essential, you should be writing more unit tests than integration tests. Check out [The Practical Test Pyramid](https://martinfowler.com/articles/practical-test-pyramid.html) to read more on the topic.
+
+#### Use MockMVC instead
+
+As I mentioned above, instead of using WireMock to fake an OAuth response, you can skip the OAuth validation check with a few cleaver tricks.
+
+I'm not going to go into detail here, but take a look how I wrote the same test with a this [other technique](https://github.com/oktadeveloper/TODO). The key areas to look at are the:
+
+  - `TestResourceServerConfiguration` disables stateless configuration for the resource server (NOT recommended for production)
+  - `@WithMockUser(username=TEST_USER_ID)` instructs the test framework to create a Spring SecurityContext for you
+  - How `MockMvc` is created with `apply(springSecurity())`
+  - Use `with(securityContext(SecurityContextHolder.getContext()))` when calling `MockMvc.perform()`
 
 ## Testing Ionic Apps
 
@@ -716,12 +972,80 @@ For example:
 
 ## Code Coverage Tools
 
+TODO: no idea how this works JS coverage and Jacoco (it looks like it _should_ work) 
+
+I've been using [CodeCov](https://codecov.io/), mostly because it is so easy to use, in your `travis.yml` you just add a pointer to your coverage file: 
+
+```yml
+after_success:
+  - bash <(curl -s https://codecov.io/bash) -f okta-ionic-crypto-java-sdk/holdings-api/target/site/jacoco-merge/jacoco.xml`
+```
+
+TODO: add `unittests` and `integration` flags: https://docs.codecov.io/docs/flags
+
+You can configure CodeCov to report on your GitHub [pull requests](https://github.com/apps/codecov) too!
+
 Why? 
 Tracking over time
 
 ### JaCoCo Java Code Coverage Library
 
-https://github.com/jacoco/jacoco
+For Java code coverage I typically use [Jacoco](https://github.com/jacoco/jacoco), It works by simply adding a Java agent, `-javaagent:/path/to/jacocoagent.jar` but since it has plugins for all of the major build tools you typically never need to do this directly. For example, I've configured this project to report UT, IT and total test coverage with the following `pom.xml` snippet.  
+
+```xml
+<plugin>
+    <groupId>org.jacoco</groupId>
+    <artifactId>jacoco-maven-plugin</artifactId>
+    <version>0.8.1</version>
+    <executions>
+        <execution>
+            <id>prepare-agent</id>
+            <phase>process-test-classes</phase>
+            <goals>
+                <goal>prepare-agent</goal>
+            </goals>
+        </execution>
+        <execution>
+            <id>prepare-agent-integration</id>
+            <phase>pre-integration-test</phase>
+            <goals>
+                <goal>prepare-agent-integration</goal>
+            </goals>
+        </execution>
+        <execution>
+            <id>jacoco-report</id>
+            <phase>verify</phase>
+            <goals>
+                <goal>report</goal>
+                <goal>report-integration</goal>
+            </goals>
+        </execution>
+        <execution>
+            <id>jacoco-merge-report</id>
+            <phase>verify</phase>
+            <goals>
+                <goal>merge</goal>
+                <goal>report</goal>
+            </goals>
+            <configuration>
+                <dataFile>${project.build.directory}/jacoco-merge.exec</dataFile>
+                <outputDirectory>${project.reporting.outputDirectory}/jacoco-merge</outputDirectory>
+                <destFile>${project.build.directory}/jacoco-merge.exec</destFile>
+                <fileSets>
+                  <fileSet>
+                    <directory>${project.build.directory}</directory>
+                    <includes>
+                      <include>*.exec</include>
+                    </includes>
+                  </fileSet>
+                </fileSets>
+            </configuration>
+        </execution>
+    </executions>
+</plugin>
+```
+
+The last bit here with the id of `jacoco-merge-report` merges the UT, and IT reports to create a new report with the total project test coverage.  If you are working with a Maven multi-module build, it is a little easier then this, and you could use the [`report-aggregate`](https://www.eclemma.org/jacoco/trunk/doc/report-aggregate-mojo.html) goal instead.
 
 ### Istanbul 
 
