@@ -58,4 +58,4 @@ I sometimes feel like not such a productive person. I get distracted easily and 
 
 So, those are the nine tracks that I will **not** be missing at our inaugural [Iterate Conference](https://www.iterateconf.io/)! It’s possible that they’re also all of the sessions at Iterate. Thank goodness we’ll have the video up on our [Youtube channel](https://www.youtube.com/channel/UC5AMiWqFVFxF1q9Ya1FuZ_Q) immediately after the event!
 
-And, now that I’ve shared mine, I have to know, what talks are on **your** list? Reply in the comments, or hit me up on Twitter [@leebrandt](https://twitter.com/leebrandt). You should also follow my team [@okatdev](https://twitter.com/OktaDev) for some day-of goodness.
+And, now that I’ve shared mine, I have to know, what talks are on **your** list? Reply in the comments, or hit me up on Twitter [@leebrandt](https://twitter.com/leebrandt). You should also follow my team [@oktadev](https://twitter.com/OktaDev) for some day-of goodness.
