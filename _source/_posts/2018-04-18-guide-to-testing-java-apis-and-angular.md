@@ -332,7 +332,6 @@ private void configureWireMock() throws IOException {
 
 The above method loads a JSON file from the classpath `/its/user.json` and returns it's contents for GET and PUT requests for the `/api/v1/users` endpoints. A similar response is mocked for a GET request to `/oauth/userInfoUri`.
 
-
 The rest of test code looks pretty simple:
 
 ```java
