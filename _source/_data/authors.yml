@@ -213,3 +213,10 @@ bkelley:
   avatar: avatar-bkelley.jpg
   email: braden@coupleofgingers.com
   github: https://github.com/redbmk
+
+team_okta:
+  full_name: Team Okta
+  display_name: Team Okta
+  avatar: avatar-oktadev.png
+  email: devrel@okta.com
+  github: https://github.com/oktadeveloper
