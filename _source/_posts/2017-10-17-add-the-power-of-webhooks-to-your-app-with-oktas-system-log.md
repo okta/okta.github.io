@@ -509,7 +509,7 @@ $ go build loghook.go
 At this point, you will have a binary named `loghook` in your current directory. Now you'll need to configure the environment variables that `loghook` uses and then edit the `loghook.csv` file:
 
 ```console
-$ export OKTA_ORG_URL="https://{yourOktaDomain}.com"
+$ export OKTA_ORG_URL="https://{yourOktaDomain}"
 $ export OKTA_API_KEY="01A_BcDE23fgH4IJKLM5nop_QRstUvwXYZ6aBC78dE"
 ```
 

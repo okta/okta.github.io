@@ -828,7 +828,7 @@ You need to provide the data form your application set up in Okta into your root
 
 ```javascript
 const config = {
-  issuer: 'https://{yourOktaDomain}.com/oauth2/default',
+  issuer: 'https://{yourOktaDomain}/oauth2/default',
   redirectUri: 'http://localhost:4200/implicit/callback',
   clientId: '{clientId}',
   scope: 'openid profile email'
@@ -1022,7 +1022,7 @@ Add the `JwtBearer` authentication in `Startup.cs`.
 services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     .AddJwtBearer(options =>
     {
-        options.Authority = "https://{yourOktaDomain}.com/oauth2/default";
+        options.Authority = "https://{yourOktaDomain}/oauth2/default";
         options.Audience = "api://default";
     });
 ```

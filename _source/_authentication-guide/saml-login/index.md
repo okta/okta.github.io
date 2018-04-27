@@ -34,7 +34,7 @@ The configuration information for an external IdP is stored in Okta. Create the 
 3. Fill in your SAML Identity Provider's settings. [Help](https://support.okta.com/help/Documentation/Knowledge_Article/40561903-Configuring-Inbound-SAML#Part1).
 
     > Hint: If you need a quick and easy SAML Identity Provider to use for testing purposes, you can try using <https://github.com/mcguinness/saml-idp>.
-4. Save the IdP in Okta and note of the value at the end of the **Assertion Consumer Service URL** (ACS URL). The string after the last slash is the IdP's `id` value. For example: If your ACS URL is `https://{yourOktaDomain}.com/sso/saml2/0oab8rlfooi5Atqv60h7`, then your Okta IdP's `id` is `0oab8rlfooi5Atqv60h7`.
+4. Save the IdP in Okta and note of the value at the end of the **Assertion Consumer Service URL** (ACS URL). The string after the last slash is the IdP's `id` value. For example: If your ACS URL is `https://{yourOktaDomain}/sso/saml2/0oab8rlfooi5Atqv60h7`, then your Okta IdP's `id` is `0oab8rlfooi5Atqv60h7`.
 
 ### Configure the OpenID Connect Client Application
 
@@ -60,7 +60,7 @@ Add these two values to an authorization URL to start the authentication flow.
 
 For example:
 
-`https://{yourOktaDomain}.com/oauth2/v1/authorize?idp=0oab8rlwfoo5Atqv60h7&client_id=0oab8om4bars6Y80Z0h7&response_type=id_token&response_mode=fragment&scope=openid&redirect_uri=http%3A%2F%2Flocalhost%3A8080&state=WM6D&nonce=YsG76j`
+`https://{yourOktaDomain}/oauth2/v1/authorize?idp=0oab8rlwfoo5Atqv60h7&client_id=0oab8om4bars6Y80Z0h7&response_type=id_token&response_mode=fragment&scope=openid&redirect_uri=http%3A%2F%2Flocalhost%3A8080&state=WM6D&nonce=YsG76j`
 
 In this URL, replace `{yourOktaDomain}.com` with your org's base URL, and replace the following values:
 

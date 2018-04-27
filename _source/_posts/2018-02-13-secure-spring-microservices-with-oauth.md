@@ -85,11 +85,11 @@ Adding `@EnableOAuth2Sso` causes Spring Security to look for a number of propert
 ```properties
 security.oauth2.client.client-id={yourClientId}
 security.oauth2.client.client-secret={yourClientSecret}
-security.oauth2.client.access-token-uri=https://{yourOktaDomain}.com/oauth2/default/v1/token
-security.oauth2.client.user-authorization-uri=https://{yourOktaDomain}.com/oauth2/default/v1/authorize
+security.oauth2.client.access-token-uri=https://{yourOktaDomain}/oauth2/default/v1/token
+security.oauth2.client.user-authorization-uri=https://{yourOktaDomain}/oauth2/default/v1/authorize
 security.oauth2.client.scope=openid profile email
-security.oauth2.resource.user-info-uri=https://{yourOktaDomain}.com/oauth2/default/v1/userinfo
-security.oauth2.resource.token-info-uri=https://{yourOktaDomain}.com/oauth2/default/v1/introspect
+security.oauth2.resource.user-info-uri=https://{yourOktaDomain}/oauth2/default/v1/userinfo
+security.oauth2.resource.token-info-uri=https://{yourOktaDomain}/oauth2/default/v1/introspect
 security.oauth2.resource.prefer-token-info=false
 ```
 
@@ -147,11 +147,11 @@ Add the same properties to `beer-catalog-service/src/main/resources/application.
 ```properties
 security.oauth2.client.client-id={yourClientId}
 security.oauth2.client.client-secret={yourClientSecret}
-security.oauth2.client.access-token-uri=https://{yourOktaDomain}.com/oauth2/default/v1/token
-security.oauth2.client.user-authorization-uri=https://{yourOktaDomain}.com/oauth2/default/v1/authorize
+security.oauth2.client.access-token-uri=https://{yourOktaDomain}/oauth2/default/v1/token
+security.oauth2.client.user-authorization-uri=https://{yourOktaDomain}/oauth2/default/v1/authorize
 security.oauth2.client.scope=openid profile email
-security.oauth2.resource.user-info-uri=https://{yourOktaDomain}.com/oauth2/default/v1/userinfo
-security.oauth2.resource.token-info-uri=https://{yourOktaDomain}.com/oauth2/default/v1/introspect
+security.oauth2.resource.user-info-uri=https://{yourOktaDomain}/oauth2/default/v1/userinfo
+security.oauth2.resource.token-info-uri=https://{yourOktaDomain}/oauth2/default/v1/introspect
 security.oauth2.resource.prefer-token-info=false
 ```
 
@@ -465,7 +465,7 @@ export class OktaService {
 
   constructor() {
     this.widget = new OktaSignIn({
-      baseUrl: 'https://{yourOktaDomain}.com',
+      baseUrl: 'https://{yourOktaDomain}',
       clientId: '{yourClientId}',
       authParams: {
         issuer: 'default',

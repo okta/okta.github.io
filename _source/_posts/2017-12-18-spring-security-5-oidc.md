@@ -163,10 +163,10 @@ spring:
            client-secret: {clientSecret}
        provider:
          okta:
-           authorization-uri: https://{yourOktaDomain}.com/oauth2/default/v1/authorize
-           token-uri: https://{yourOktaDomain}.com/oauth2/default/v1/token
-           user-info-uri: https://{yourOktaDomain}.com/oauth2/default/v1/userinfo
-           jwk-set-uri: https://{yourOktaDomain}.com/oauth2/default/v1/keys
+           authorization-uri: https://{yourOktaDomain}/oauth2/default/v1/authorize
+           token-uri: https://{yourOktaDomain}/oauth2/default/v1/token
+           user-info-uri: https://{yourOktaDomain}/oauth2/default/v1/userinfo
+           jwk-set-uri: https://{yourOktaDomain}/oauth2/default/v1/keys
 ```
 
 Copy the client ID and secret from your OIDC app into your `application.yml` file. For `{yourOktaDomain}`, use the value of your domain (e.g. `dev-158606.oktapreview.com`). Make sure it does *not* include `-admin` in it.

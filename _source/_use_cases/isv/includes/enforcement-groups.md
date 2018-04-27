@@ -22,7 +22,7 @@ Request
 {:.api .api-request .api-request-example}
 
 ```sh
-PUT https://{yourOktaDomain}.com/api/v1/users/{user_id}
+PUT https://{yourOktaDomain}/api/v1/users/{user_id}
 ```
 
 Response
@@ -40,7 +40,7 @@ Request
 {:.api .api-request .api-request-example}
 
 ```sh
-DELETE https://{yourOktaDomain}.com/api/v1/users/{user_id}
+DELETE https://{yourOktaDomain}/api/v1/users/{user_id}
 ```
 
 Response

@@ -56,7 +56,7 @@ curl -v -X POST \
      "fr" : "${org.name}: votre code de vérification est ${code}",
      "it" : "${org.name}: il codice di verifica è ${code}"
   }
-}' "https://{yourOktaDomain}.com/api/v1/templates/sms"
+}' "https://{yourOktaDomain}/api/v1/templates/sms"
 ~~~
 
 ##### Response Example
@@ -106,7 +106,7 @@ curl -v -X GET \
 -H "Accept: application/json" \
 -H "Content-Type: application/json" \
 -H "Authorization: SSWS ${api_token}" \
-"https://{yourOktaDomain}.com/api/v1/templates/sms/${templateId}"
+"https://{yourOktaDomain}/api/v1/templates/sms/${templateId}"
 ~~~
 
 ##### Response Example
@@ -157,7 +157,7 @@ curl -v -X GET \
 -H "Accept: application/json" \
 -H "Content-Type: application/json" \
 -H "Authorization: SSWS ${api_token}" \
-"https://{yourOktaDomain}.com/api/v1/templates/sms"
+"https://{yourOktaDomain}/api/v1/templates/sms"
 ~~~
 
 ##### Response Example
@@ -222,7 +222,7 @@ curl -v -X PUT \
       "es": "${org.name}: su código de inscripción es ${code}",
       "de": "${org.name}: ihre anmeldung code ist ${code}"
     }
-}' "https://{yourOktaDomain}.com/api/v1/templates/sms/${templateId}"
+}' "https://{yourOktaDomain}/api/v1/templates/sms/${templateId}"
 ~~~
 
 ##### Response Example
@@ -281,7 +281,7 @@ curl -v -X POST \
    {
       "de" : "${org.name}: ihre bestätigungscode ist ${code}."
    }
-}' "https://{yourOktaDomain}.com/api/v1/templates/sms/${templateId}"
+}' "https://{yourOktaDomain}/api/v1/templates/sms/${templateId}"
 ~~~
 
 ##### Response Example
@@ -333,7 +333,7 @@ curl -v -X DELETE \
 -H "Accept: application/json" \
 -H "Content-Type: application/json" \
 -H "Authorization: SSWS ${api_token}" \
-"https://{yourOktaDomain}.com/api/v1/templates/sms/${templateId}"
+"https://{yourOktaDomain}/api/v1/templates/sms/${templateId}"
 ~~~
 
 

@@ -66,7 +66,7 @@ Request
 {:.api .api-request .api-request-example}
 
 ```sh
-GET https://{yourOktaDomain}.com/api/v1/users/?q=John
+GET https://{yourOktaDomain}/api/v1/users/?q=John
 ```
 
 Response
@@ -102,7 +102,7 @@ Request
 {:.api .api-request .api-request-example}
 
 ```sh
-GET https://{yourOktaDomain}.com/api/v1/users/?filter=(profile.firstName eq "John" AND profile.lastName eq "Doe")
+GET https://{yourOktaDomain}/api/v1/users/?filter=(profile.firstName eq "John" AND profile.lastName eq "Doe")
 ```
 
 Response
@@ -143,11 +143,11 @@ Request(s)
 
 ```sh
 #by Short userName
-GET https://{yourOktaDomain}.com/api/v1/users/jdoe
+GET https://{yourOktaDomain}/api/v1/users/jdoe
 #by Full userName
-GET https://{yourOktaDomain}.com/api/v1/users/jdoe@domain.tld
+GET https://{yourOktaDomain}/api/v1/users/jdoe@domain.tld
 #by Okta id (uid)
-GET https://{yourOktaDomain}.com/api/v1/users/00u1aq5mpenI88ZEn1d8
+GET https://{yourOktaDomain}/api/v1/users/00u1aq5mpenI88ZEn1d8
 ```
 
 Response

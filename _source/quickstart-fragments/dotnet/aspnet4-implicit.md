@@ -46,7 +46,7 @@ public void Configuration(IAppBuilder app)
     // Configure JWT Bearer middleware
     // with an OpenID Connect Authority
 
-    var authority = "https://{yourOktaDomain}.com/oauth2/default";
+    var authority = "https://{yourOktaDomain}/oauth2/default";
 
     var configurationManager = new ConfigurationManager<OpenIdConnectConfiguration>(
         authority + "/.well-known/openid-configuration",

@@ -71,7 +71,7 @@ curl -v -X POST \
 -H "Content-Type: application/json" \
 -d '{
   "sessionToken": "00HiohZYpJgMSHwmL9TQy7RRzuY-q9soKp1SPmYYow"
-}' "https://{yourOktaDomain}.com/api/v1/sessions"
+}' "https://{yourOktaDomain}/api/v1/sessions"
 ~~~
 
 ##### Response Example
@@ -96,7 +96,7 @@ curl -v -X POST \
   "mfaActive": false,
   "_links": {
     "self": {
-      "href": "https://{yourOktaDomain}.com/api/v1/sessions/101W_juydrDRByB7fUdRyE2JQ",
+      "href": "https://{yourOktaDomain}/api/v1/sessions/101W_juydrDRByB7fUdRyE2JQ",
       "hints": {
         "allow": [
           "GET",
@@ -105,7 +105,7 @@ curl -v -X POST \
       }
     },
     "refresh": {
-      "href": "https://{yourOktaDomain}.com/api/v1/sessions/101W_juydrDRByB7fUdRyE2JQ/lifecycle/refresh",
+      "href": "https://{yourOktaDomain}/api/v1/sessions/101W_juydrDRByB7fUdRyE2JQ/lifecycle/refresh",
       "hints": {
         "allow": [
           "POST"
@@ -114,7 +114,7 @@ curl -v -X POST \
     },
     "user": {
       "name": "Isaac Brock",
-      "href": "https://{yourOktaDomain}.com/api/v1/users/00uit00ZK6ELuzPoD0g3",
+      "href": "https://{yourOktaDomain}/api/v1/users/00uit00ZK6ELuzPoD0g3",
       "hints": {
         "allow": [
           "GET"
@@ -142,7 +142,7 @@ curl -v -X GET \
 -H "Accept: application/json" \
 -H "Content-Type: application/json" \
 -H "Authorization: SSWS ${api_token}" \
-"https://{yourOktaDomain}.com/api/v1/sessions/101W_juydrDRByB7fUdRyE2JQ"
+"https://{yourOktaDomain}/api/v1/sessions/101W_juydrDRByB7fUdRyE2JQ"
 ~~~
 
 ##### Response Examples
@@ -171,7 +171,7 @@ If the session is invalid, a `404 Not Found` response will be returned.
   "mfaActive": true,
   "_links": {
     "refresh": {
-      "href": "https://{yourOktaDomain}.com/api/v1/sessions/101W_juydrDRByB7fUdRyE2JQ/lifecycle/refresh",
+      "href": "https://{yourOktaDomain}/api/v1/sessions/101W_juydrDRByB7fUdRyE2JQ/lifecycle/refresh",
       "hints": {
         "allow": [
           "POST"
@@ -179,7 +179,7 @@ If the session is invalid, a `404 Not Found` response will be returned.
       }
     },
     "self": {
-      "href": "https://{yourOktaDomain}.com/api/v1/sessions/101W_juydrDRByB7fUdRyE2JQ",
+      "href": "https://{yourOktaDomain}/api/v1/sessions/101W_juydrDRByB7fUdRyE2JQ",
       "hints": {
         "allow": [
            "GET",
@@ -189,7 +189,7 @@ If the session is invalid, a `404 Not Found` response will be returned.
     },
     "user": {
       "name": "Isaac Brock",
-      "href": "https://{yourOktaDomain}.com/api/v1/users/00uit00ZK6ELuzPoD0g3",
+      "href": "https://{yourOktaDomain}/api/v1/users/00uit00ZK6ELuzPoD0g3",
       "hints": {
         "allow": [
           "GET"
@@ -234,7 +234,7 @@ curl -v -X PUT \
 -H "Accept: application/json" \
 -H "Content-Type: application/json" \
 -H "Authorization: SSWS ${api_token}" \
-"https://{yourOktaDomain}.com/api/v1/sessions/101W_juydrDRByB7fUdRyE2JQ"
+"https://{yourOktaDomain}/api/v1/sessions/101W_juydrDRByB7fUdRyE2JQ"
 ~~~
 
 ##### Response Example
@@ -259,7 +259,7 @@ curl -v -X PUT \
   "mfaActive": false,
   "_links": {
     "self": {
-      "href": "https://{yourOktaDomain}.com/api/v1/sessions/101W_juydrDRByB7fUdRyE2JQ",
+      "href": "https://{yourOktaDomain}/api/v1/sessions/101W_juydrDRByB7fUdRyE2JQ",
       "hints": {
         "allow": [
           "GET",
@@ -268,7 +268,7 @@ curl -v -X PUT \
       }
     },
     "refresh": {
-      "href": "https://{yourOktaDomain}.com/api/v1/sessions/101W_juydrDRByB7fUdRyE2JQ/lifecycle/refresh",
+      "href": "https://{yourOktaDomain}/api/v1/sessions/101W_juydrDRByB7fUdRyE2JQ/lifecycle/refresh",
       "hints": {
         "allow": [
           "POST"
@@ -277,7 +277,7 @@ curl -v -X PUT \
     },
     "user": {
       "name": "Isaac Brock",
-      "href": "https://{yourOktaDomain}.com/api/v1/users/00uit00ZK6ELuzPoD0g3",
+      "href": "https://{yourOktaDomain}/api/v1/users/00uit00ZK6ELuzPoD0g3",
       "hints": {
         "allow": [
           "GET"
@@ -319,7 +319,7 @@ curl -v -X POST \
 -H "Accept: application/json" \
 -H "Content-Type: application/json" \
 -H "Authorization: SSWS ${api_token}" \
-"https://{yourOktaDomain}.com/api/v1/sessions/101W_juydrDRByB7fUdRyE2JQ/lifecycle/refresh"
+"https://{yourOktaDomain}/api/v1/sessions/101W_juydrDRByB7fUdRyE2JQ/lifecycle/refresh"
 ~~~
 
 ##### Response Example
@@ -344,7 +344,7 @@ curl -v -X POST \
   "mfaActive": false,
   "_links": {
     "self": {
-      "href": "https://{yourOktaDomain}.com/api/v1/sessions/101W_juydrDRByB7fUdRyE2JQ",
+      "href": "https://{yourOktaDomain}/api/v1/sessions/101W_juydrDRByB7fUdRyE2JQ",
       "hints": {
         "allow": [
           "GET",
@@ -353,7 +353,7 @@ curl -v -X POST \
       }
     },
     "refresh": {
-      "href": "https://{yourOktaDomain}.com/api/v1/sessions/101W_juydrDRByB7fUdRyE2JQ/lifecycle/refresh",
+      "href": "https://{yourOktaDomain}/api/v1/sessions/101W_juydrDRByB7fUdRyE2JQ/lifecycle/refresh",
       "hints": {
         "allow": [
           "POST"
@@ -362,7 +362,7 @@ curl -v -X POST \
     },
     "user": {
       "name": "Isaac Brock",
-      "href": "https://{yourOktaDomain}.com/api/v1/users/00uit00ZK6ELuzPoD0g3",
+      "href": "https://{yourOktaDomain}/api/v1/users/00uit00ZK6ELuzPoD0g3",
       "hints": {
         "allow": [
           "GET"
@@ -404,7 +404,7 @@ curl -v -X DELETE \
 -H "Accept: application/json" \
 -H "Content-Type: application/json" \
 -H "Authorization: SSWS ${api_token}" \
-"https://{yourOktaDomain}.com/api/v1/sessions/101W_juydrDRByB7fUdRyE2JQ"
+"https://{yourOktaDomain}/api/v1/sessions/101W_juydrDRByB7fUdRyE2JQ"
 ~~~
 
 ##### Response Example
@@ -430,7 +430,7 @@ Get session information for the current user. Use this method in a browser based
 curl -v -X GET \
 -H "Accept: application/json" \
 -H "Cookie: ${okta_session_cookie}"
-"https://{yourOktaDomain}.com/api/v1/sessions/me"
+"https://{yourOktaDomain}/api/v1/sessions/me"
 ~~~
 
 ##### Response Examples
@@ -460,7 +460,7 @@ If the session is invalid, a `404 Not Found` response will be returned.
     "mfaActive": true,
     "_links": {
         "refresh": {
-            "href": "https://{yourOktaDomain}.com/api/v1/sessions/me/lifecycle/refresh",
+            "href": "https://{yourOktaDomain}/api/v1/sessions/me/lifecycle/refresh",
             "hints": {
                 "allow": [
                     "POST"
@@ -468,7 +468,7 @@ If the session is invalid, a `404 Not Found` response will be returned.
             }
         },
         "self": {
-            "href": "https://{yourOktaDomain}.com/api/v1/sessions/me",
+            "href": "https://{yourOktaDomain}/api/v1/sessions/me",
             "hints": {
                 "allow": [
                     "GET",
@@ -478,7 +478,7 @@ If the session is invalid, a `404 Not Found` response will be returned.
         },
         "user": {
             "name": "Isaac Brock",
-            "href": "https://{yourOktaDomain}.com/api/v1/users/me",
+            "href": "https://{yourOktaDomain}/api/v1/users/me",
             "hints": {
                 "allow": [
                     "GET"
@@ -506,7 +506,7 @@ curl -v -X POST \
 -H "Accept: application/json" \
 -H "Content-Type: application/json" \
 -H "Cookie: ${okta_session_cookie}" \
-"https://{yourOktaDomain}.com/api/v1/sessions/me/lifecycle/refresh"
+"https://{yourOktaDomain}/api/v1/sessions/me/lifecycle/refresh"
 ~~~
 
 ##### Response Example
@@ -536,7 +536,7 @@ If the session is invalid, a `404 Not Found` response will be returned.
     "mfaActive": true,
     "_links": {
         "refresh": {
-            "href": "https://{yourOktaDomain}.com/api/v1/sessions/me/lifecycle/refresh",
+            "href": "https://{yourOktaDomain}/api/v1/sessions/me/lifecycle/refresh",
             "hints": {
                 "allow": [
                     "POST"
@@ -544,7 +544,7 @@ If the session is invalid, a `404 Not Found` response will be returned.
             }
         },
         "self": {
-            "href": "https://{yourOktaDomain}.com/api/v1/sessions/me",
+            "href": "https://{yourOktaDomain}/api/v1/sessions/me",
             "hints": {
                 "allow": [
                     "GET",
@@ -554,7 +554,7 @@ If the session is invalid, a `404 Not Found` response will be returned.
         },
         "user": {
             "name": "Isaac Brock",
-            "href": "https://{yourOktaDomain}.com/api/v1/users/me",
+            "href": "https://{yourOktaDomain}/api/v1/users/me",
             "hints": {
                 "allow": [
                     "GET"
@@ -575,7 +575,7 @@ curl -v -X POST \
 -H "Content-Type: application/json" \
 -H "Prefer: return=minimal" \
 -H "Authorization: SSWS ${api_token}" \
-"https://{yourOktaDomain}.com/api/v1/sessions/me/refresh"
+"https://{yourOktaDomain}/api/v1/sessions/me/refresh"
 ~~~
 Note: `me` can also be an ID.
 
@@ -601,7 +601,7 @@ Close the session for the currently logged in user. Use this method in a browser
 curl -v -X DELETE \
 -H "Accept: application/json" \
 -H "Cookie: ${okta_session_cookie}" \
-"https://{yourOktaDomain}.com/api/v1/sessions/me"
+"https://{yourOktaDomain}/api/v1/sessions/me"
 ~~~
 
 ##### Response Example
@@ -640,7 +640,7 @@ HTTP/1.1 204 No Content
   "mfaActive": true,
   "_links": {
     "self": {
-      "href": "https://{yourOktaDomain}.com/api/v1/sessions/101W_juydrDRByB7fUdRyE2JQ",
+      "href": "https://{yourOktaDomain}/api/v1/sessions/101W_juydrDRByB7fUdRyE2JQ",
       "hints": {
         "allow": [
           "GET",
@@ -649,7 +649,7 @@ HTTP/1.1 204 No Content
       }
     },
     "refresh": {
-      "href": "https://{yourOktaDomain}.com/api/v1/sessions/101W_juydrDRByB7fUdRyE2JQ/lifecycle/refresh",
+      "href": "https://{yourOktaDomain}/api/v1/sessions/101W_juydrDRByB7fUdRyE2JQ/lifecycle/refresh",
       "hints": {
         "allow": [
           "POST"
@@ -658,7 +658,7 @@ HTTP/1.1 204 No Content
     },
     "user": {
       "name": "Isaac Brock",
-      "href": "https://{yourOktaDomain}.com/api/v1/users/00uit00ZK6ELuzPoD0g3",
+      "href": "https://{yourOktaDomain}/api/v1/users/00uit00ZK6ELuzPoD0g3",
       "hints": {
         "allow": [
           "GET"

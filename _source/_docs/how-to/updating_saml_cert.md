@@ -181,7 +181,7 @@ curl -v -X PUT \
     }
   }
  }
-}' "https://{yourOktaDomain}.com/api/v1/apps/${aid}"
+}' "https://{yourOktaDomain}/api/v1/apps/${aid}"
 
 ~~~
 

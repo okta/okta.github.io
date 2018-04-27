@@ -83,7 +83,7 @@ The code that initializes the Widget looks like this:
 <div id="widget-container"></div>
 
 <script>
-  var signIn = new OktaSignIn({baseUrl: 'https://{yourOktaDomain}.com'});
+  var signIn = new OktaSignIn({baseUrl: 'https://{yourOktaDomain}'});
   signIn.renderEl({
     el: '#widget-container'
   }, function success(res) {
@@ -119,7 +119,7 @@ In this case, you would like to use the Widget to sign in to the default Okta da
 ~~~javascript
 function success(res) {
   if (res.status === 'SUCCESS') {
-    res.session.setCookieAndRedirect('https://{yourOktaDomain}.com/app/UserHome');
+    res.session.setCookieAndRedirect('https://{yourOktaDomain}/app/UserHome');
   }
 }
 ~~~
@@ -146,7 +146,7 @@ If you'd like to use the Widget to sign in to your own application instead of Ok
 
 ~~~javascript
 var signIn = new OktaSignIn({
-  baseUrl: 'https://{yourOktaDomain}.com',
+  baseUrl: 'https://{yourOktaDomain}',
   clientId: '${clientId}',
   redirectUri: '${redirectUri configured in OIDC app}',
   authParams: {
@@ -435,7 +435,7 @@ lang: {
 
 ~~~javascript
 var config = {
-  baseUrl: 'https://{yourOktaDomain}.com',
+  baseUrl: 'https://{yourOktaDomain}',
   ...
   i18n: {
     'en': {

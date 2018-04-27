@@ -778,7 +778,7 @@ import { OAuthService, JwksValidationHandler } from 'angular-oauth2-oidc';
     this.oauthService.redirectUri = window.location.origin;
     this.oauthService.clientId = '{clientId}';
     this.oauthService.scope = 'openid profile email';
-    this.oauthService.issuer = 'https://{yourOktaDomain}.com/oauth2/default';
+    this.oauthService.issuer = 'https://{yourOktaDomain}/oauth2/default';
     this.oauthService.tokenValidationHandler = new JwksValidationHandler();
 
     // Load Discovery Document and then try to login the user
@@ -957,7 +957,7 @@ export class OktaAuthWrapper {
 
   constructor(private oauthService: OAuthService) {
     this.authClient = new OktaAuth({
-      url: 'https://{yourOktaDomain}.com',
+      url: 'https://{yourOktaDomain}',
       issuer: 'default'
     });
   }

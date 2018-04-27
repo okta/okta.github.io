@@ -51,7 +51,7 @@ services.AddAuthentication(sharedOptions =>
 {
     options.ClientId = "{clientId}";
     options.ClientSecret = "{clientSecret}";
-    options.Authority = "https://{yourOktaDomain}.com/oauth2/default";
+    options.Authority = "https://{yourOktaDomain}/oauth2/default";
     options.CallbackPath = "/authorization-code/callback";
     options.ResponseType = "code";
     options.SaveTokens = true;

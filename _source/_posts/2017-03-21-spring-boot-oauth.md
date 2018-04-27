@@ -114,13 +114,13 @@ security:
       clientId: {yourClientId}
       clientSecret: {yourClientSecret}
       # From Authorization Server's metadata
-      accessTokenUri: https://{yourOktaDomain}.com/oauth2/default/v1/token	
-      userAuthorizationUri: https://{yourOktaDomain}.com/oauth2/default/v1/authorize 
+      accessTokenUri: https://{yourOktaDomain}/oauth2/default/v1/token	
+      userAuthorizationUri: https://{yourOktaDomain}/oauth2/default/v1/authorize 
       clientAuthenticationScheme: form
       scope: openid profile email
     resource:
       # from your Auth Server's metadata, check .well-known/openid-configuration if not in .well-known/oauth-authorization-server
-      userInfoUri: https://{yourOktaDomain}.com/oauth2/default/v1/userinfo
+      userInfoUri: https://{yourOktaDomain}/oauth2/default/v1/userinfo
 ```
 
 Start your app with `spring run helloOAuth.groovy` and navigate to `http://localhost:8080`. You'll be redirected to Okta to login. 

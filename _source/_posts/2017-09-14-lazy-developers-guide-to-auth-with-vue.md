@@ -304,7 +304,7 @@ Replace the code in `auth.js` with the following code that uses the Auth SDK to 
 ```javascript
 /* globals localStorage */
 const OktaAuth = require('@okta/okta-auth-js')
-const authClient = new OktaAuth({url: 'https://{yourOktaDomain}.com', issuer: 'default'})
+const authClient = new OktaAuth({url: 'https://{yourOktaDomain}', issuer: 'default'})
 
 export default {
   login (email, pass, cb) {

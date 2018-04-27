@@ -167,7 +167,7 @@ Open the `Web.config` file and add these keys to the `<appSettings>` section:
 <!-- 1. Replace these values with your Okta configuration -->
 <add key="okta:ClientId" value="{clientId}" />
 <add key="okta:ClientSecret" value="{clientSecret}" />
-<add key="okta:OrgUri" value="https://{yourOktaDomain}.com/oauth2/default" />
+<add key="okta:OrgUri" value="https://{yourOktaDomain}/oauth2/default" />
 
 <!-- 2. Update the Okta application with these values -->
 <add key="okta:RedirectUri" value="http://localhost:8080/authorization-code/callback" />

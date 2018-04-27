@@ -473,7 +473,7 @@ import { Router } from '@angular/router';
 export class OktaAuthService {
 
   signIn = new OktaSignIn({
-    baseUrl: 'https://{yourOktaDomain}.com',
+    baseUrl: 'https://{yourOktaDomain}',
     clientId: '{client-id}',
     redirectUri: 'http://localhost:4200',
     authParams: {

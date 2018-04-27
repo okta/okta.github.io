@@ -158,7 +158,7 @@ While you're editing `application.properties`, add properties for the issuer and
 Copy the app’s `clientId` into `application.properties` and change `{yourOktaDomain}` to match your account. These properties will allow the client to pass an access token to the server and validate it.
 
 ```properties
-okta.oauth2.issuer=https://{yourOktaDomain}.com/oauth2/default
+okta.oauth2.issuer=https://{yourOktaDomain}/oauth2/default
 okta.oauth2.clientId={yourClientId}
 ```
 

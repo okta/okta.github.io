@@ -75,7 +75,7 @@ To set up the Spring Boot resource server, clone that sample's repository and ru
 ```bash
 git clone https://github.com/okta/samples-java-spring.git
 cd samples-java-spring/resource-server
-./mvnw -Dokta.oauth2.issuer=https://{yourOktaDomain}.com/oauth2/default
+./mvnw -Dokta.oauth2.issuer=https://{yourOktaDomain}/oauth2/default
 ```
 
 {% img blog/samples-and-quickstarts/react-sample-messages.png alt:"React Sample - Messages" width:"800" %}{: .center-image }

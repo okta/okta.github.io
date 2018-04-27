@@ -62,7 +62,7 @@ In your application's `App.js` file, import the following objects and pass in yo
 import { Security, ImplicitCallback } from '@okta/okta-react';
 
 const config = {
-  issuer: 'https://{yourOktaDomain}.com/oauth2/default',
+  issuer: 'https://{yourOktaDomain}/oauth2/default',
   redirect_uri: window.location.origin + '/implicit/callback',
   client_id: '{clientId}'
 }
@@ -139,7 +139,7 @@ import { Security, ImplicitCallback } from '@okta/okta-react';
 import Home from './Home';
 
 const config = {
-  issuer: 'https://{yourOktaDomain}.com/oauth2/default',
+  issuer: 'https://{yourOktaDomain}/oauth2/default',
   redirect_uri: window.location.origin + '/implicit/callback',
   client_id: '{clientId}'
 }
