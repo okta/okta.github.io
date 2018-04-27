@@ -56,7 +56,7 @@ The requests and responses vary depending on the application type, and whether a
 * [Primary Authentication with Public Application](#primary-authentication-with-public-application)&mdash;[Request Example](#request-example-for-primary-authentication-with-public-application)
 * [Primary Authentication with Trusted Application](#primary-authentication-with-trusted-application)&mdash;[Request Example](#request-example-for-trusted-application)
 * [Primary Authentication with Activation Token](#primary-authentication-with-activation-token)&mdash;[Request Example](#request-example-for-activation-token)
-*[Primary Authentication] with Device Fingerprinting](#primary-authentication-with-device-fingerprinting)&mdash;[Request Example](#request-example-for-device-fingerprinting)
+* [Primary Authentication with Device Fingerprinting](#primary-authentication-with-device-fingerprinting)&mdash;[Request Example](#request-example-for-device-fingerprinting)
 * [Primary Authentication with Password Expiration Warning](#primary-authentication-with-password-expiration-warning)&mdash;[Request Example](#request-example-for-password-expiration-warning)
 
 > You must first enable MFA factors and assign a valid **Sign-On Policy** to a user to enroll and/or verify a MFA factor during authentication.
@@ -870,12 +870,15 @@ Content-Type: application/json
 
 Authenticates a user via a [trusted application](#trusted-application) or proxy that overrides the [client request context](/docs/api/getting_started/design_principles#client-request-context).
 
+Include the `Device-Fingerprint` header to supply a device fingerprint.
+
 Note:
 
 * Specifying your own `deviceToken` or device fingerprint is a highly privileged operation limited to trusted web applications and requires making authentication requests with a valid *API token*.
-* The **public IP address** of your [trusted application](#trusted-application) must be [whitelisted as a gateway IP address](/docs/api/getting_started/design_principles#ip-address) to forward the user agent's original IP address with the `X-Forwarded-For` HTTP header
+* The **public IP address** of your [trusted application](#trusted-application) must be [whitelisted as a gateway IP address](/docs/api/getting_started/design_principles#ip-address) to forward the user agent's original IP address with the `X-Forwarded-For` HTTP header.
+* For more information about the unknown-device email notification feature, see the [Beta documentation](https://support.okta.com/help/blogdetail?id=a67F0000000L2MkIAK). For more information about security behavior detection, see the [EA documentation](https://help.okta.com/en/prod/Content/Topics/Security/proc-security-behavior-detection.htm?).
 
-##### Request Example for Device Token
+##### Request Example for Device Fingerprinting
 {:.api .api-request .api-request-example}
 
 ~~~sh
@@ -885,10 +888,11 @@ curl -X POST \
   -H 'Cache-Control: no-cache' \
   -H 'Content-Type: application/json' \
   -H 'X-Fowarded-For: 23.235.46.133' \
+  -H "User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/537.36" \
   -H 'X-Device-Fingerprint: ${device_fingerprint}' \
   -d '{
   "username": "${username}",
-  "password" : "${password",
+  "password" : "${password}",
   "relayState": "http://example.com",
   "context": {
     "deviceToken": "${device_token}"
@@ -896,7 +900,7 @@ curl -X POST \
 }  ' https://${yourOktaDomain}.com/api/v1/authn \
 ~~~
 
-##### Response Example for Device Token (Success - User with Password, no MFA)
+##### Response Example for Device Fingerprinting
 {:.api .api-response .api-response-example}
 
 ~~~json
@@ -918,31 +922,6 @@ curl -X POST \
             }
         }
     }
-}
-~~~
-
-##### Response Example for Device Token (Success - User with Password and Configured MFA)
-{:.api .api-response .api-response-example}
-
-~~~json
-tbd
-~~~
-
-##### Response Example for Device Token (Success - User Without Password)
-{:.api .api-response .api-response-example}
-
-In the case where the user was created without credentials the response will trigger the workflow to [set the user's password](#change-password). After the password is configured, depending on the MFA setting, the workflow continues with MFA enrollment or a successful authentication completes.
-
-~~~json
-{
- tbd
-~~~
-
-##### Response Example for Device Token (Failure - Invalid or Expired Token)
-{:.api .api-response .api-response-example}
-
-~~~http
-tbd
 }
 ~~~
 
