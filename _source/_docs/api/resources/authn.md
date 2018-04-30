@@ -870,13 +870,14 @@ Content-Type: application/json
 
 Authenticates a user via a [trusted application](#trusted-application) or proxy that overrides the [client request context](/docs/api/getting_started/design_principles#client-request-context).
 
-Include the `Device-Fingerprint` header to supply a device fingerprint.
+Include the `X-Device-Fingerprint` header to supply a device fingerprint.
 
 Note:
 
 * Specifying your own `deviceToken` or device fingerprint is a highly privileged operation limited to trusted web applications and requires making authentication requests with a valid *API token*.
 * The **public IP address** of your [trusted application](#trusted-application) must be [whitelisted as a gateway IP address](/docs/api/getting_started/design_principles#ip-address) to forward the user agent's original IP address with the `X-Forwarded-For` HTTP header.
-* For more information about the unknown-device email notification feature, see the [Beta documentation](https://support.okta.com/help/blogdetail?id=a67F0000000L2MkIAK). For more information about security behavior detection, see the [EA documentation](https://help.okta.com/en/prod/Content/Topics/Security/proc-security-behavior-detection.htm?).
+* To use device fingerprinting for the unknown-device email notification feature, include the `User-Agent` header in the request. For more information, see the [Beta documentation](https://support.okta.com/help/blogdetail?id=a67F0000000L2MkIAK). 
+* For more information about security behavior detection, see the [EA documentation](https://help.okta.com/en/prod/Content/Topics/Security/proc-security-behavior-detection.htm?).
 
 ##### Request Example for Device Fingerprinting
 {:.api .api-request .api-request-example}
