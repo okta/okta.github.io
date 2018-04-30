@@ -302,7 +302,7 @@ var config = {
         href: 'https://example.com'
       }
     ]
-      },
+  },
   ...
 };
 ~~~
@@ -445,6 +445,9 @@ var config = {
       'primaryauth.title': 'Iniciar sesión en ExampleApp'
     },
     'zh-cn': {
+      'primaryauth.title': '登录 ExampleApp'
+    },
+    'zh-hk': {
       'primaryauth.title': '登錄入 ExampleApp'
     }
   },
