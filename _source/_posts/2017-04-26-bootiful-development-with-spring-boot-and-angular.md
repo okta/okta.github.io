@@ -18,7 +18,7 @@ This post shows how you can have the best of both worlds where the UI and the AP
 If you don’t want to code along, feel free to grab the [source code from GitHub](https://github.com/oktadeveloper/spring-boot-angular-example)! You can also watch a video of this tutorial below.
 
 <div style="text-align: center">
-<iframe width="560" height="315" style="max-width: 100%" src="https://www.youtube.com/embed/2kIQHevHjv0" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+<iframe width="560" height="315" style="max-width: 100%" src="https://www.youtube.com/embed/GhBwKT7EJsY" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
 </div>
 
 ## Build an API with Spring Boot
