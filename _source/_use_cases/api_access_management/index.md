@@ -125,13 +125,13 @@ Okta provides the API Access Management Administrator role to make managing auth
 
 #### Authorization Server
 
-* Assign an authorization server to specific OAuth 2.0 clients. Use the **All Clients** option only if no other solution is possible.
-
 * Assign one authorization server per API Product. Doing so allows teams to maintain separate authorization policies and token expiration times while eliminating scope name collisions. Authorization servers often reflect use cases at the orchestration layer, not individual endpoints. For example, a banking institution may use one authorization server with a short-lived access token for money transfers but a separate authorization server with a long-lived access token for read-only transaction sync to QuickBooks.
 
 * Make the authorization server audience (the `aud` claim) specific to the API to reduce the risk of inappropriate access token reuse. A single global audience is rarely acceptable. For example: Instead of using `api.company.com` for the audience, a better approach is specifying `api.company.com/product1` and `api.company.com/product2`.
 
 * Define scopes within authorization servers that are granular and specific to the permissions required. A generic administrator scope is rarely appropriate. Java-style namespacing such as `com.okta.product1.admin` or Google’s URL-based style such as `https://company.com/scopes/product1.admin` are common and scalable approaches.
+
+* Assign an authorization server policy to specific OAuth 2.0 clients. Use the **All Clients** option only if no other solution is possible.
 
 * Authorization policies and rules are treated as a case or switch statement. Therefore, when a matching rule is found, it is applied and the result is immediately returned. No further rules are executed.
 
