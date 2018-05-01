@@ -46,11 +46,11 @@ When reading the following tables, remember that a more specific limit is consid
 | All other actions | `/api/v1/`                                                              |  1200 |
 
 ### Okta API Endpoints and Per-User Limits
-Two org-wide rate limits for API endpoints are on a per user, per-second basis to prevent brute force attacks:
+API endpoints that take username and password credentials, including the [Authentication API](/docs/api/resources/authn) and the [OAuth 2.0 resource owner password flow](/authentication-guide/implementing-authentication/password), have a per-username rate limit to prevent brute force attacks with the user's password:
 
 | Action | Okta API Endpoint                           | Per Second Limit |
 |:-------- | :----------------------------------------------------------|-------:|
-| Generate or refresh an OAuth 2.0 token | `/oauth2/v1/token`    |      4 |
+| Generate or refresh an OAuth 2.0 token for the resource owner password flow | `/oauth2/v1/token`    |      4 |
 | Authenticate the same user | `/api/v1/authn/`           |      4 |
 
 ### Okta Rate Limits for All Other Endpoints

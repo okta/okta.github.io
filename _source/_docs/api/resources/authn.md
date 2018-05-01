@@ -55,7 +55,8 @@ The requests and responses vary depending on the application type, and whether a
 
 * [Primary Authentication with Public Application](#primary-authentication-with-public-application)&mdash;[Request Example](#request-example-for-primary-authentication-with-public-application)
 * [Primary Authentication with Trusted Application](#primary-authentication-with-trusted-application)&mdash;[Request Example](#request-example-for-trusted-application)
-* [Primary Authentication with activationToken](#primary-authentication-with-activation-token)&mdash;[Request Example](#request-example-for-activation-token)
+* [Primary Authentication with Activation Token](#primary-authentication-with-activation-token)&mdash;[Request Example](#request-example-for-activation-token)
+* [Primary Authentication with Device Fingerprinting](#primary-authentication-with-device-fingerprinting)&mdash;[Request Example](#request-example-for-device-fingerprinting)
 * [Primary Authentication with Password Expiration Warning](#primary-authentication-with-password-expiration-warning)&mdash;[Request Example](#request-example-for-password-expiration-warning)
 
 > You must first enable MFA factors and assign a valid **Sign-On Policy** to a user to enroll and/or verify a MFA factor during authentication.
@@ -605,7 +606,7 @@ curl -v -X POST \
 
 #### Primary Authentication with Activation Token
 
-Authenticates a user via a [trusted application](#trusted-application) or proxy that overrides [client request context](/docs/api/getting_started/design_principles#client-request-context).
+Authenticates a user via a [trusted application](#trusted-application) or proxy that overrides the [client request context](/docs/api/getting_started/design_principles#client-request-context).
 
 Note:
 
@@ -862,6 +863,66 @@ Content-Type: application/json
   "errorLink": "E0000004",
   "errorId": "oae2fYYJmkuTg-NyozqBkb3sw",
   "errorCauses": []
+}
+~~~
+
+#### Primary Authentication with Device Fingerprinting
+
+Authenticates a user via a [trusted application](#trusted-application) or proxy that overrides the [client request context](/docs/api/getting_started/design_principles#client-request-context).
+
+Include the `X-Device-Fingerprint` header to supply a device fingerprint.
+
+Note:
+
+* Specifying your own `deviceToken` or device fingerprint is a highly privileged operation limited to trusted web applications and requires making authentication requests with a valid *API token*.
+* The **public IP address** of your [trusted application](#trusted-application) must be [whitelisted as a gateway IP address](/docs/api/getting_started/design_principles#ip-address) to forward the user agent's original IP address with the `X-Forwarded-For` HTTP header.
+* To use device fingerprinting for the unknown-device email notification feature, include the `User-Agent` header in the request. For more information, see the [Beta documentation](https://support.okta.com/help/blogdetail?id=a67F0000000L2MkIAK). 
+* For more information about security behavior detection, see the [EA documentation](https://help.okta.com/en/prod/Content/Topics/Security/proc-security-behavior-detection.htm?).
+
+##### Request Example for Device Fingerprinting
+{:.api .api-request .api-request-example}
+
+~~~sh
+curl -X POST \
+  -H 'Accept: application/json' \
+  -H 'Authorization: SSWS ${api_token}' \
+  -H 'Cache-Control: no-cache' \
+  -H 'Content-Type: application/json' \
+  -H 'X-Fowarded-For: 23.235.46.133' \
+  -H "User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/537.36" \
+  -H 'X-Device-Fingerprint: ${device_fingerprint}' \
+  -d '{
+  "username": "${username}",
+  "password" : "${password}",
+  "relayState": "http://example.com",
+  "context": {
+    "deviceToken": "${device_token}"
+  }
+}  ' https://${yourOktaDomain}.com/api/v1/authn \
+~~~
+
+##### Response Example for Device Fingerprinting
+{:.api .api-response .api-response-example}
+
+~~~json
+{
+    "expiresAt": "2018-04-26T17:14:17.000Z",
+    "status": "SUCCESS",
+    "relayState": "/my/uri",
+    "sessionToken": "20111Il76Eaub0eKNkLGwMUDg5D7dBSN9d_FO-0o7eHKQMyqV7VoqzZ",
+    "_embedded": {
+        "user": {
+            "id": "00ue5f54sbR7dFr9i0h7",
+            "passwordChanged": "2018-04-26T17:06:07.000Z",
+            "profile": {
+                "login": "saml.jackson@stark.com",
+                "firstName": "Saml",
+                "lastName": "Jackson",
+                "locale": "en",
+                "timeZone": "America/Los_Angeles"
+            }
+        }
+    }
 }
 ~~~
 

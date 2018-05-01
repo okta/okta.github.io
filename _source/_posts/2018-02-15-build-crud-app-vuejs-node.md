@@ -42,7 +42,7 @@ You will use JWT-based authentication when making requests from the web app and 
 
 ## Create Your Vue.js App
 
-To get your project off the ground quickly you can leverage the scaffolding functionality from [vue-cli](https://github.com/vuejs/vue-cli). For this tutorial, you are going to use the [progressive web app (PWA) template](https://github.com/vuejs-templates/pwa) that includes a handful of features including [webpack](https://github.com/webpack/webpack), [hot reloading](https://vue-loader.vuejs.org/en/features/hot-reload), CSS extraction, and unit testing.
+To get your project off the ground quickly you can leverage the scaffolding functionality from [vue-cli](https://github.com/vuejs/vue-cli). For this tutorial, you are going to use the [progressive web app (PWA) template](https://github.com/vuejs-templates/pwa) that includes a handful of features including [webpack](https://github.com/webpack/webpack), [hot reloading](https://vue-loader.vuejs.org/guide/hot-reload.html), CSS extraction, and unit testing.
 
 > If you're not familiar with the tenets of PWA, check out our [ultimate guide to progressive web applications](/blog/2017/07/20/the-ultimate-guide-to-progressive-web-applications).
 
