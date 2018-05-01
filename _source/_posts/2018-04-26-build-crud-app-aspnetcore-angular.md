@@ -1,6 +1,6 @@
 ---
 layout: blog_post
-title: "Build a CRUD app with ASP.NET Core and Angular"
+title: "Build a CRUD App with ASP.NET Core and Angular"
 author: team_okta
 description: "ASP.NET Core and Angular are powerful frameworks for backend and frontend development. Learn how to put them together to build a modern web app, and secure it with Okta."
 tags: [asp.net, aspnetcore, angular]
@@ -533,7 +533,7 @@ Next, build the HTML that will display the actual data on screen. You can add a 
 ```
 {% endraw %}
 
-The `{{handlebars}}` are just a placeholder for data populated by Angular. You can also do some basic calculations in there. 
+The {% raw %}`{{handlebars}}`{% endraw %} are just a placeholder for data populated by Angular. You can also do some basic calculations in there. 
 
 `*ngFor` is an Angular directive that makes this particular block repeat itself for every array member of `joggingData`. In each iteration, the current object will be referenced as `joggingInfo`. So, we are just printing a row of a table with data for each array member. 
 
