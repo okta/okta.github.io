@@ -18,7 +18,7 @@ describe('table of contents navigation spec', () => {
     expect(tocPage.level2ItemsContain(expectedLevel2Items)).toBe(true);
   });
 
-  util.itNoHeadless('has table of contents with multi level items', () => {
+  it('has table of contents with multi level items', () => {
     const expectedLevel3Items = ['Sub Section 1', 'Sub Section 2'];
     expect(tocPage.level3ItemsVisible(expectedLevel3Items)).toBe(false);
 
@@ -33,7 +33,7 @@ describe('table of contents navigation spec', () => {
     expect(tocPage.level4ItemsVisible(expectedLevel4Items)).toBe(true);
 
     expect(tocPage.isTopOfPageLinkDisplayed()).toBe(true);
-    
+
     tocPage.gotoTopOfPage();
     expect(tocPage.level3ItemsVisible(expectedLevel3Items)).toBe(false);
   });
