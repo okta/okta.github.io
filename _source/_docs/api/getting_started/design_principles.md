@@ -98,6 +98,10 @@ The **public IP address** of your application will be automatically used as the 
 
 The `Accept-Language` HTTP header advertises which languages the client is able to understand, for example `Accept-Language: en-US'. Include it if it is available.
 
+### Device Fingerprint
+
+The `X-Device-Fingerprint` HTTP header supplies the device fingerprint used in an authentication request. 
+
 ## Errors
 
 > JSON responses, including errors, may contain user input. To help prevent potential cross-site scripting attacks, make sure to properly escape all values before use in a browser or any HTML context.
