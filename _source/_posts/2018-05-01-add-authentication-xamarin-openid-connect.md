@@ -32,13 +32,13 @@ Okta is an API service that allows developers to create, edit, and securely stor
 - Secure your application with [multi-factor authentication](https://developer.okta.com/use_cases/mfa/)
 - And much more! Check out our [Product Documentation](https://developer.okta.com/documentation/)
 
-In short: we make [user account management](/product/user-management/) a lot easier, more secure, and more scalable than what you're probably used to.
+In short: we make [user account management](https://developer.okta.com/product/user-management/) a lot easier, more secure, and more scalable than what you're probably used to.
 
 This blog post focuses on developing a Xamarin.Forms mobile app, with authentication via Okta, OpenID Connect, and AppAuth. If you aren't familiar with Xamarin, check out our [post about building a simple app to learn the basics](/blog/2018/01/10/build-app-for-ios-android-with-xamarin).
 
 Since the app will run on both iOS and Android, we'll need to write our Xamarin authentication code for both platforms, and this can be hard to do from scratch. As you'll see, OpenID Connect and Okta make this easy! Although we'll develop a Xamarin.Forms solution that uses Okta, the authentication code can be easily copy-pasted into a traditional (non-Forms) Xamarin app, too.
 
-Ready to get started? [Register for a free developer account!](/signup/)
+Ready to get started? [Register for a free developer account!](https://developer.okta.com/signup/)
 
 ## Get Started with Xamarin Forms: Add Okta for Authentication
 
