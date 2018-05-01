@@ -26,11 +26,11 @@ Let's get started. First, you'll need to create an Okta developer account to sto
 
 Okta is an API service that allows developers to create, edit, and securely store user accounts and user account data, and connect them with one or multiple applications. Our API enables you to:
 
-- [Authenticate](/product/authentication/) and [authorize](/product/authorization/) your users
+- [Authenticate](https://developer.okta.com/product/authentication/) and [authorize](https://developer.okta.com/product/authorization/) your users
 - Store data about your users
-- Perform password-based and [social login](/authentication-guide/social-login/)
-- Secure your application with [multi-factor authentication](/use_cases/mfa/)
-- And much more! Check out our [Product Documentation](/documentation/)
+- Perform password-based and [social login](https://developer.okta.com/authentication-guide/social-login/)
+- Secure your application with [multi-factor authentication](https://developer.okta.com/use_cases/mfa/)
+- And much more! Check out our [Product Documentation](https://developer.okta.com/documentation/)
 
 In short: we make [user account management](/product/user-management/) a lot easier, more secure, and more scalable than what you're probably used to.
 
