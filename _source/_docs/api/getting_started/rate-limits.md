@@ -32,6 +32,7 @@ When reading the following tables, remember that a more specific limit is consid
 | Action | Okta API Endpoint                                             | Per Minute Limit |
 |:---------|:--------------------------------------------------------------|-----------------------:|
 | Create or list applications | `/api/v1/apps`                                        |   100 |
+| Application user operations | `/api/v1/apps/{id}/users`  | 100 |
 | Get, update, or delete an application | `/api/v1/apps/{id}`                |   500 |
 | Authenticate different end users | `/api/v1/authn`                             |   500 |
 | Creating or listing groups | `/api/v1/groups`                                     |   500 |
