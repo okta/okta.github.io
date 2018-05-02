@@ -1572,7 +1572,7 @@ This is an administrative operation.  For operations that validate credentials r
 {:.api .api-request .api-request-example}
 
 ~~~sh
-curl -v -X POST \
+curl -v -X PUT \
 -H "Accept: application/json" \
 -H "Content-Type: application/json" \
 -H "Authorization: SSWS ${api_token}" \
@@ -1650,16 +1650,16 @@ This is an administrative operation. For an operation that requires validation, 
 {:.api .api-request .api-request-example}
 
 ~~~sh
-curl -v -X POST \
+curl -v -X PUT \
 -H "Accept: application/json" \
 -H "Content-Type: application/json" \
 -H "Authorization: SSWS ${api_token}" \
 -d '{
   "credentials": {
     "recovery_question": {
-      "question": "How many roads must a man walk down?",
-      "answer": "forty two"
-    }
+      "question": "How many roads must a man walk down?"
+      "answer": "forty-two"
+    },
   }
 }' "https://{yourOktaDomain}.com/api/v1/users/00ub0oNGTSWTBKOLGLNR"
 ~~~
@@ -1687,7 +1687,7 @@ curl -v -X POST \
   "credentials": {
     "password": {},
     "recovery_question": {
-      "question": "I have a new recovery question?"
+      "question": "How many roads must a man walk down?"
     },
     "provider": {
       "type": "OKTA",
@@ -2551,7 +2551,9 @@ recovery_question | Answer to user's current recovery question | Body       | [R
 ##### Response Parameters
 {:.api .api-response .api-response-params}
 
-[Credentials](#credentials-object) of the user
+For the specified user:
+
+[Credentials Object](#credentials-object)
 
 This operation does not affect the status of the user.
 
@@ -2574,15 +2576,13 @@ curl -v -X POST \
 
 ~~~json
 {
-  "credentials": {
-    "password": {},
-    "recovery_question": {
-      "question": "Who's a major player in the cowboy scene?"
-    },
-    "provider": {
-      "type": "OKTA",
-      "name": "OKTA"
-    }
+  "password": {},
+  "recovery_question": {
+    "question": "Who's a major player in the cowboy scene?"
+  },
+  "provider": {
+    "type": "OKTA",
+    "name": "OKTA"
   }
 }
 ~~~
@@ -2609,7 +2609,9 @@ newPassword | New password for user                                  | Body     
 ##### Response Parameters
 {:.api .api-response .api-response-params}
 
-[Credentials](#credentials-object) of the user
+For the specified user:
+
+[Credentials Object](#credentials-object)
 
 The user transitions to `ACTIVE` status when successfully invoked in `RECOVERY` status.
 
@@ -2632,15 +2634,13 @@ curl -v -X POST \
 
 ~~~json
 {
-  "credentials": {
-    "password": {},
-    "recovery_question": {
-      "question": "Who's a major player in the cowboy scene?"
-    },
-    "provider": {
-      "type": "OKTA",
-      "name": "OKTA"
-    }
+  "password": {},
+  "recovery_question": {
+    "question": "Who's a major player in the cowboy scene?"
+  },
+  "provider": {
+    "type": "OKTA",
+    "name": "OKTA"
   }
 }
 ~~~
@@ -2666,7 +2666,9 @@ recovery_question | New recovery question & answer for user | Body       | [Reco
 ##### Response Parameters
 {:.api .api-response .api-response-params}
 
-[Credentials](#credentials-object) of the user
+For the specified user:
+
+[Credentials Object](#credentials-object)
 
 > This operation does not affect the status of the user.
 
@@ -2682,7 +2684,7 @@ curl -v -X POST \
   "password": { "value": "tlpWENT2m" },
   "recovery_question": {
     "question": "How many roads must a man walk down?",
-    "answer": "forty two"
+    "answer": "forty-two"
   }
 }' "https://{yourOktaDomain}.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/credentials/change_recovery_question"
 ~~~
@@ -2692,15 +2694,13 @@ curl -v -X POST \
 
 ~~~json
 {
-  "credentials": {
-    "password": {},
-    "recovery_question": {
-      "question": "How many roads must a man walk down?"
-    },
-    "provider": {
-      "type": "OKTA",
-      "name": "OKTA"
-    }
+  "password": {},
+  "recovery_question": {
+    "question": "How many roads must a man walk down?"
+  },
+  "provider": {
+    "type": "OKTA",
+    "name": "OKTA"
   }
 }
 ~~~
@@ -4041,18 +4041,16 @@ Specifies primary authentication and recovery credentials for a user.  Credentia
 
 ~~~json
 {
-  "credentials": {
-    "password": {
-      "value": "tlpWENT2m"
-    },
-    "recovery_question": {
-      "question": "Who's a major player in the cowboy scene?",
-      "answer": "Annie Oakley"
-    },
-    "provider": {
-      "type": "OKTA",
-      "name": "OKTA"
-    }
+  "password": {
+    "value": "tlpWENT2m"
+  },
+  "recovery_question": {
+    "question": "Who's a major player in the cowboy scene?",
+    "answer": "Annie Oakley"
+  },
+  "provider": {
+    "type": "OKTA",
+    "name": "OKTA"
   }
 }
 ~~~
