@@ -138,13 +138,13 @@ Use the postMessage() data model to help you when working with the `okta_post_me
 
 `message`:
 
-| Parameter         | Description                                                                                                                                                                                                                                                                                                   | DataType |
-|:------------------|:--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|:---------|
-| access_token      | An [access token](#access-token). This is returned if the `response_type` included a token.                                   | String   |
-| error             | The error-code string providing information if anything goes wrong.                                                                                                                                                                                                                                           | String   |
-| error_description | Additional description of the error (if relevant).                                                                                                                                                                                                                                                                          | String   |
-| id_token          | The ID token JWT contains the details of the authentication event and the claims corresponding to the requested scopes. This is returned if the `response_type` includes `id_token`.                                                                                                                          | String   |
-| state             | If the request contained a `state` parameter, then the same unmodified value is returned back in the response.                                                                                                                                                                                                | String   |
+| Parameter         | Description                                                                                                       | DataType |
+|:------------------|:------------------------------------------------------------------------------------------------------------------|:---------|
+| access_token      | An [access token](#access-token). This is returned if the `response_type` included a token.                       | String   |
+| error             | The error-code string providing information if anything goes wrong.                                               | String   |
+| error_description | Additional description of the error (if relevant).                                                                | String   |
+| id_token          | An [ID token](#id-token). This is returned if the `response_type` includes `id_token`.                            | String   |
+| state             | If the request contained a `state` parameter, then the same unmodified value is returned back in the response.    | String   |
 
 `targetOrigin`:
 
@@ -156,17 +156,17 @@ specified by the client. This is crucial to prevent the sensitive token data fro
 
 Irrespective of the response type, the contents of the response are as described in the table.
 
-| Property         | Description                                                                                                                                                                                                                                                          | DataType |
-|:------------------|:---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|:---------|
-| access_token      | An [access token](#access-token). This is returned if `response_type` includes `token`.                                     | String   |
-| code              | An opaque value that can be used to redeem tokens from the [token endpoint](#token). `code` is returned if the `response_type` includes `code`. The code has a lifetime of 60 seconds.                                                                       | String   |
-| error             | Error-code (if something went wrong).                                                                                                                                                                                                                                | String   |
-| error_description | Description of the error.                                                                                                                                                                                                                                            | String   |
-| expires_in        | Number of seconds until the `access_token` expires. This is only returned if the response included an `access_token`.                                                                                                                                                | String   |
-| id_token          | JWT that contains the details of the authentication event and the claims corresponding to the requested scopes. This is returned if the `response_type` includes `id_token`.                                                                                         | String   |
-| scope             | Scopes specified in the `access_token`. Returned only if the response includes an `access_token`.                                                                                                                                                                    | String   |
-| state             | The unmodified `state` value from the request.                                                                                                                                                                                                                       | String   |
-| token_type        | The token type is always `Bearer` and is returned only when `token` is specified as a `response_type`.                                                                                                                                                               | String   |
+| Property         | Description                                                                                                                                                                             | DataType |
+|:------------------|:---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|:---------|
+| access_token      | An [access token](#access-token). This is returned if `response_type` includes `token`.                                                                                                | String   |
+| code              | An opaque value that can be used to redeem tokens from the [token endpoint](#token). `code` is returned if the `response_type` includes `code`. The code has a lifetime of 60 seconds. | String   |
+| error             | Error-code (if something went wrong).                                                                                                                                                  | String   |
+| error_description | Description of the error.                                                                                                                                                              | String   |
+| expires_in        | Number of seconds until the `access_token` expires. This is only returned if the response included an `access_token`.                                                                  | String   |
+| id_token          | An [ID token](#id-token).  This is returned if the `response_type` includes `id_token`.                                                                                                | String   |
+| scope             | Scopes specified in the `access_token`. Returned only if the response includes an `access_token`.                                                                                      | String   |
+| state             | The unmodified `state` value from the request.                                                                                                                                         | String   |
+| token_type        | The token type is always `Bearer` and is returned only when `token` is specified as a `response_type`.                                                                                 | String   |
 
 ##### Possible Errors
 
@@ -271,22 +271,17 @@ The following parameters can be posted as a part of the URL-encoded form values 
 
 #### Response Properties
 
-Based on the `grant_type` and sometimes `scope`, the response contains different token sets.
-Generally speaking, the scopes specified in a request are included in the access tokens in the response.
+Based on the scopes requested. Generally speaking, the scopes specified in a request are included in the access token in the response.
 
-| Requested grant type | Requested scope                                     | Response tokens                                                   |
-|:---------------------|:----------------------------------------------------|:------------------------------------------------------------------|
-| authorization_code   | None, or any scopes except `offline_access` or `openid` | Access token. Contains scopes requested via the `/authorize` endpoint. |
-| authorization_code   | Any scopes plus `offline_access`              | Access token, refresh token                                       |
-| authorization_code   | Any  scopes plus `openid`                     | Access token, ID token                                            |
-| authorization_code   | Any scopes plus `offline_access` and `openid` | Access token, ID token, refresh token                             |
-| refresh_token        | None                                          | Access token, refresh token. Contains scopes used to generate the refresh token. If no scopes are requested in the refresh request, will include the scopes from the original authorization request. |
-| refresh_token        | Any scopes except `offline_access`            | Access token                                                      |
-| refresh_token        | Any scopes plus `offline_access`              | Access token, refresh token                                       |
-| password             | Any scopes except `offline_access`            | Access token                                                      |
-| password             | Any scopes plus `offline_access`              | Access token, refresh token                                       |
-| password             | Any scopes plus `openid`                      | Access token, ID token                                            |
-| password             | Any scopes plus `offline_access` and `openid` | Access token, ID token, refresh token                             |
+| Property      | Description                                                                           | Type    |
+|:--------------|:--------------------------------------------------------------------------------------|:--------|
+| access_token  | An [access token](#access-token).                                                     | String  |
+| token_type    | The audience of the token.                                                            | String  |
+| expires_in    | The expiration time of the access token in seconds.                                   | Integer |
+| scope         | The scopes contianed in the access token.                                             | String  |
+| refresh_token | An opaque refresh token. This is returned if the `offline_access` scope is granted.   | String  |
+| id_token      | An [ID token](#id-token). This is returned if the `openid` scope is granted.          | String  |
+
 
 #### List of Errors
 
