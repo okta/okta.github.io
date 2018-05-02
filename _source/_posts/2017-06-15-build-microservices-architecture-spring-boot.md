@@ -615,8 +615,8 @@ synchronous protocol and can be a limiting factor in high-traffic systems.
 
 Spring Boot isn't the only framework to implement embedded servlet containers or make it easy to develop microservices. 
 In Javaland, there's [Dropwizard](http://www.dropwizard.io/), [MicroProfile](https://microprofile.io/) for Java EE, 
-[Lagom](https://www.lightbend.com/platform/development/lagom-framework), [Vert.x](http://vertx.io/), and 
-[Tribestream](http://www.tomitribe.com/products/).
+[Lagom](https://www.lightbend.com/platform/development/lagom-framework), and [Vert.x](http://vertx.io/), and
+[Tribestream](http://tribestream.io/).
 
 You can find the source code for this article's applications on GitHub at <https://github.com/oktadeveloper/spring-boot-microservices-example>.
 
