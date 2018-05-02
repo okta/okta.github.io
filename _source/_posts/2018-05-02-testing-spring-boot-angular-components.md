@@ -28,10 +28,11 @@ In this tutorial, you'll see how to implement many aspects of testing a modern a
 
 I like to call this a hitchhiker's guide because you can jump into any section of this guide and learn how to test those particular components. If you have any suggestions for improving a specific part, please let us know so we can improve it! We try to keep our blog posts up-to-date as much as possible.
 
-To begin, you'll want to clone the GitHub repository that contains the Ionic PWA and Spring Boot API.
+To begin, you'll want to clone the GitHub repository that contains the Ionic PWA and Spring Boot API and check out the `testing-start` branch.
 
 ```bash
 git clone https://github.com/oktadeveloper/okta-ionic-crypto-java-sdk-example.git
+cd okta-ionic-crypto-java-sdk-example && git checkout testing-start
 ```
 
 The instructions below assume you're operating from the `okta-ionic-crypto-java-sdk-example` directory of this cloned project.
