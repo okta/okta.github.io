@@ -422,7 +422,7 @@ I think you'll find the following blog posts useful too!
 
 If you love Java too, [follow @oktadev](https://twitter.com/oktadev) on Twitter and let us know if you have any issues with this tutorial. You can also post your questions to the [Okta Developer Forums](https://devforum.okta.com/) or simply leave a comment on this post.
 
-<!-- **Update:** To learn how to test this application, see [The Hitchhiker's Guide to Testing Spring Boot APIs and Angular Components with WireMock, Jest, Protractor, and Travis CI](/blog/2018/05/02/testing-spring-boot-angular-components). -->
+**Update:** To learn how to test this application, see [The Hitchhiker's Guide to Testing Spring Boot APIs and Angular Components with WireMock, Jest, Protractor, and Travis CI](/blog/2018/05/02/testing-spring-boot-angular-components).
 
 **Changelog:**
 
