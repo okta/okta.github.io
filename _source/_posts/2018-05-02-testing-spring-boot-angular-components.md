@@ -31,8 +31,7 @@ I like to call this a hitchhiker's guide because you can jump into any section o
 To begin, you'll want to clone the GitHub repository that contains the Ionic PWA and Spring Boot API and check out the `testing-start` branch.
 
 ```bash
-git clone https://github.com/oktadeveloper/okta-ionic-crypto-java-sdk-example.git
-cd okta-ionic-crypto-java-sdk-example && git checkout testing-start
+git clone -b testing-start https://github.com/oktadeveloper/okta-ionic-crypto-java-sdk-example.git
 ```
 
 The instructions below assume you're operating from the `okta-ionic-crypto-java-sdk-example` directory of this cloned project.
