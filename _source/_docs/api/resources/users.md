@@ -4053,7 +4053,6 @@ Specifies primary authentication and recovery credentials for a user.  Credentia
     "name": "OKTA"
   }
 }
-
 ~~~
 
 #### Password Object
