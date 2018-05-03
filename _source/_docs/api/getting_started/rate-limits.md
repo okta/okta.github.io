@@ -29,7 +29,7 @@ When reading the following tables, remember that a more specific limit is consid
 
 ### Okta API Endpoints and Per Minute Limits
 
-Extensions to the base URLs listed below are included in the specified limit, unless the URL is followed by "only." For example, `/api/v1/apps/{id}` has a per-minute rate limit of 500 as listed in the second line in the table. However, `/api/v1/apps/{id}/users` falls under the more general first line of the table. This pattern applies to all the URLs
+Extensions to the base URLs listed below are included in the specified limit, unless the URL is followed by "only." For example, `/api/v1/apps/{id}` has a per-minute rate limit of 500 as listed in the second line in the table. However, `/api/v1/apps/{id}/users` falls under the more general first line of the table. This pattern applies to all the URLs.
 
 | Action | Okta API Endpoint                                             | Per Minute Limit |
 |:---------|:--------------------------------------------------------------|-----------------------:|
