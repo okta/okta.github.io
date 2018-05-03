@@ -44,7 +44,7 @@ First off, what is Okta? Simply put, we’re an API service that allows develope
 * Store and maintain all your users in one place
 * Perform password-based and [social login](https://developer.okta.com/authentication-guide/social-login/)
 * Secure your application with [multi-factor authentication](https://developer.okta.com/use_cases/mfa/)
-* And much more! Check out our [Product Documentation](https://developer.okta.com/documentation/)
+* And much more! Check out our [product documentation](https://developer.okta.com/documentation/)
 
 In short: we make [user account management](https://developer.okta.com/product/user-management/) a lot easier, more secure, and more scalable than what you’re probably used to.
 
@@ -1016,7 +1016,7 @@ Setup a basic e2e test of your application's homepage with the following steps:
 To execute Protractor tests, run `ionic serve` in one terminal and `npm run e2e` in another. The (silent) video below shows what should happen.
 
 <div style="width: 600px; margin: 0 auto">
-<object width="600" height="338"><param name="movie" value="https://www.youtube.com/v/MO_ZWxI7Yi4&hl=en&fs=1"></param><param name="allowFullScreen" value="true"></param><embed src="https://www.youtube.com/v/MO_ZWxI7Yi4&hl=en&fs=1" type="application/x-shockwave-flash" allowfullscreen="true" width="600" height="338"></embed></object>
+  <iframe width="600" height="338" src="https://www.youtube.com/embed/MO_ZWxI7Yi4" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
 </div>
 
 You can also configure Protractor to launch its own web server. To do this, add a devDependency on [serve](https://www.npmjs.com/package/serve):
