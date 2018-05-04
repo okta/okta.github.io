@@ -42,6 +42,8 @@ If you don't have one yet, [create a forever-free Okta Developer account](https:
 
 Take note of the clientId and client secret values as you'll need these to configure your Spring Boot apps.
 
+You need to add a `roles` claim to your ID Token, so your groups in Okta are translated to Spring Security authorities. In your Okta developer console, navigate to **API** > **Authorization Servers**, click the **Authorization Servers** tab and edit the default one. Click the **Claims** tab and **Add Claim**. Name it "roles" and include it in the ID Token. Set the value type to "Groups" and set the filter to be a Regex of `.*`.
+
 ## Add Spring Security OAuth to the Edge Service Application
 
 The **edge-service** application handles the communication with the `beer-catalog-service`, so it's the best place to start integrating OAuth. In `edge-service/pom.xml`, add dependencies for Spring Security, its OAuth support, and its JWT support.

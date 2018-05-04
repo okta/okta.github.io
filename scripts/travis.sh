@@ -13,27 +13,18 @@ fold npm_install npm install
 # Build site and Run tests
 fold npm_test npm test
 
-# Copy assets and previous history into dist
-fold npm_postbuild_prod npm run postbuild-prod
-
-# Run Lint checker
-fold npm_lint npm run post-build-lint
-
-ASSUME_EXTENSION=true
-
-# (Weekly Only) Update file extensions and create redirects
-if [ $TRAVIS_BRANCH == 'weekly' ]; then
-  if ! removeHTMLExtensions;
+# Run External Link Check ONLY on Travis Cron Jobs
+if [ "$TRAVIS_EVENT_TYPE" == "cron" ];
+then
+  if ! bundle exec ./scripts/htmlproofer.rb;
   then
-    echo "Failed removing .html extensions"
+    echo "Failed HTML link validation."
     exit 1;
   else
-    echo -e "\xE2\x9C\x94 Removed .html extensions and setup redirects"
-    ASSUME_EXTENSION=false
+    echo -e "\xE2\x9C\x94 No broken internal/external links!"
+    exit 0;
   fi
 fi
 
-# Run htmlproofer to validate links, scripts, and images
-#   -  Passing in the argument 'true' to automatically add the '.html' extension to
-#      extension-less files. 
-fold bundle_exec_htmlproofer bundle exec ./scripts/htmlproofer.rb $ASSUME_EXTENSION
+# Run Lint checker
+fold npm_lint npm run post-build-lint

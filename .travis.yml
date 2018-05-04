@@ -23,11 +23,6 @@ env:
   - SAUCE_PLATFORM_NAME=""
   - secure: RW99TW7YvGgWt/P8fQQziPbxNITaJMO/4q2iCX72u/PtTu2dkeaCqUiRUi7qyV8jIIk7U4oruxJRFQpTaCIX5+JWZsSwLskoTsspOI9aTzyPdhVNckM1vpA5VfwstdyQTkX7zzKPLdvXK0xj0ZzQ+ACH/SobQNYKiAMvW7FVkIc=
   - secure: gFSORYQLSBNIK8peGgUOhd0Yj6GzE18HA0GLrmp0PMtobe003poalkNgLsPy2W2QFZbG3bCjbqFMmCbUh5uRnX8eCy/whe+lwXeQsv5uh0EIGWgxVxhk79dCx5cakERusoj2BUgJJ432R7nRXjEW5v2AK9QAOeCG2Dvwdb8WSes=
-deploy:
-  provider: script
-  script: scripts/gh-pages-publish.sh
-  on:
-    branch: source
 notifications:
   slack:
     on_pull_requests: false

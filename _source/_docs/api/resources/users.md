@@ -2574,15 +2574,13 @@ curl -v -X POST \
 
 ~~~json
 {
-  "credentials": {
-    "password": {},
-    "recovery_question": {
-      "question": "Who's a major player in the cowboy scene?"
-    },
-    "provider": {
-      "type": "OKTA",
-      "name": "OKTA"
-    }
+  "password": {},
+  "recovery_question": {
+    "question": "Who's a major player in the cowboy scene?"
+  },
+  "provider": {
+    "type": "OKTA",
+    "name": "OKTA"
   }
 }
 ~~~
@@ -2632,15 +2630,13 @@ curl -v -X POST \
 
 ~~~json
 {
-  "credentials": {
-    "password": {},
-    "recovery_question": {
-      "question": "Who's a major player in the cowboy scene?"
-    },
-    "provider": {
-      "type": "OKTA",
-      "name": "OKTA"
-    }
+  "password": {},
+  "recovery_question": {
+    "question": "Who's a major player in the cowboy scene?"
+  },
+  "provider": {
+    "type": "OKTA",
+    "name": "OKTA"
   }
 }
 ~~~
@@ -2692,15 +2688,13 @@ curl -v -X POST \
 
 ~~~json
 {
-  "credentials": {
-    "password": {},
-    "recovery_question": {
-      "question": "How many roads must a man walk down?"
-    },
-    "provider": {
-      "type": "OKTA",
-      "name": "OKTA"
-    }
+  "password": {},
+  "recovery_question": {
+    "question": "How many roads must a man walk down?"
+  },
+  "provider": {
+    "type": "OKTA",
+    "name": "OKTA"
   }
 }
 ~~~
@@ -4041,18 +4035,16 @@ Specifies primary authentication and recovery credentials for a user.  Credentia
 
 ~~~json
 {
-  "credentials": {
-    "password": {
-      "value": "tlpWENT2m"
-    },
-    "recovery_question": {
-      "question": "Who's a major player in the cowboy scene?",
-      "answer": "Annie Oakley"
-    },
-    "provider": {
-      "type": "OKTA",
-      "name": "OKTA"
-    }
+  "password": {
+    "value": "tlpWENT2m"
+  },
+  "recovery_question": {
+    "question": "Who's a major player in the cowboy scene?",
+    "answer": "Annie Oakley"
+  },
+  "provider": {
+    "type": "OKTA",
+    "name": "OKTA"
   }
 }
 ~~~

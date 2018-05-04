@@ -10,7 +10,6 @@
     "pregenerate": "npm run clean",
     "generate": "cross-env PID_FINDER=okta_github_io JEKYLL_ENV=production bundle exec jekyll",
     "build-prod": "npm run generate build -- --verbose",
-    "postbuild-prod": "bash scripts/post-build-prod.sh",
     "start": "npm run generate serve -- --incremental",
     "test-only": "protractor tests/selenium/conf.js",
     "stop": "if-env CI=true && exit 0 || (pkill -f 'okta_github_io|webdriver-manager/selenium')",

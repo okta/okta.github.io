@@ -328,7 +328,7 @@ In a [future tutorial](/blog/2018/01/23/replace-local-storage-with-okta-profile-
 
 For now, I hope you’ve enjoyed this brief look at Ionic, PWAs, and Okta. PWAs are more straightforward to distribute than mobile apps, and cloud services like Okta and Firebase make things even simpler.
 
-You can see the complete source code for this project [on GitHub](https://github.com/oktadeveloper/okta-ionic-crypto-pwa). Please contact me on Twitter [@mraible](https://twitter.com/mraible), via [Okta's Developer Forums](https://devforum.okta.com/), or in the comments below if you have any questions.
+You can see the complete source code for this project [on GitHub](https://github.com/oktadeveloper/okta-ionic-crypto-pwa-example). Please contact me on Twitter [@mraible](https://twitter.com/mraible), via [Okta's Developer Forums](https://devforum.okta.com/), or in the comments below if you have any questions.
 
 To learn more about Ionic and PWAs, check out the following resources:
 
