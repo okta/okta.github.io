@@ -25,7 +25,7 @@ git clone https://github.com/mraible/ng-demo.git
 * About 20 minutes
 * A favorite text editor or IDE. I recommend [IntelliJ IDEA](https://www.jetbrains.com/idea/)
 * [Node.js](https://nodejs.org) and npm installed. I recommend using [nvm](https://github.com/creationix/nvm)
-* [Angular CLI](https://cli.angular.io/) installed. If you don’t have Angular CLI installed, install it using `npm install -g @angular/cli`
+* [Angular CLI](https://cli.angular.io/) installed. If you don’t have Angular CLI installed, install it using `npm install -g @angular/cli@1.7.3`
 
 Create a new project using the `ng new` command:
 
