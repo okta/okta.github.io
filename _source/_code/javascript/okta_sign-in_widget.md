@@ -444,10 +444,10 @@ var config = {
     'es': {
       'primaryauth.title': 'Iniciar sesión en ExampleApp'
     },
-    'zh-cn': {
+    'zh-CN': {
       'primaryauth.title': '登录 ExampleApp'
     },
-    'zh-hk': {
+    'zh-TW': {
       'primaryauth.title': '登錄入 ExampleApp'
     }
   },

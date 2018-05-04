@@ -2784,6 +2784,15 @@ curl -v -X POST \
 
 Enrolls a user with a U2F factor.  The enrollment process starts with getting an `appId` and `nonce` from Okta and using those to get registration information from the U2F key using the U2F javascript API.
 
+Note: 
+
+The `appId` property in Okta U2F enroll/verify API response is the [origin](https://www.ietf.org/rfc/rfc6454.txt) of
+the web page that triggers the API request (assuming the origin has been configured to be trusted by Okta). According to
+[FIDO
+spec](https://fidoalliance.org/specs/fido-u2f-v1.2-ps-20170411/fido-appid-and-facets-v1.2-ps-20170411.html#h2_the-appid-and-facetid-assertions),
+enroll and verify U2F device with `appId`s in different DNS zone is not allowed. For
+example, if a user enrolled a U2F device via Okta Sign-in widget that is hosted at `https://login.company.com`, while the user can verify the U2F factor from `https://login.company.com`, the user would not be able to verify it from Okta portal `https://company.okta.com`, U2F device would return error code 4 - `DEVICE_INELIGIBLE`.
+
 ##### Enroll U2F Request Example
 {:.api .api-request .api-request-example}
 
@@ -4491,6 +4500,15 @@ curl -v -X POST \
 
 {% api_operation post /api/v1/authn/factors/${factorId}/verify %}
 
+Note: 
+
+The `appId` property in Okta U2F enroll/verify API response is the [origin](https://www.ietf.org/rfc/rfc6454.txt) of
+the web page that triggers the API request (assuming the origin has been configured to be trusted by Okta). According to
+[FIDO
+spec](https://fidoalliance.org/specs/fido-u2f-v1.2-ps-20170411/fido-appid-and-facets-v1.2-ps-20170411.html#h2_the-appid-and-facetid-assertions),
+enroll and verify U2F device with `appId`s in different DNS zone is not allowed. For
+example, if a user enrolled a U2F device via Okta Sign-in widget that is hosted at `https://login.company.com`, while the user can verify the U2F factor from `https://login.company.com`, the user would not be able to verify it from Okta portal `https://company.okta.com`, U2F device would return error code 4 - `DEVICE_INELIGIBLE`.
+
 ##### Request Parameters for Verify U2F Factor
 {:.api .api-request .api-request-params}
 
@@ -4667,7 +4685,6 @@ curl -v -X POST \
     }
 }
 ~~~
-
 
 #### Verify Call Factor
 {:.api .api-operation}

@@ -8,7 +8,6 @@ The Okta developer site ([developer.okta.com](https://developer.okta.com)) is bu
 
 See a problem or want to contribute? Read [Contributing to the site](#contributing-to-the-site) below.
 
-
 ## Getting help
 
 If you have questions or need help with Okta's APIs or SDKs, visit the [Dev Forum](https://devforum.okta.com/) or ask a question on [Stack Overflow](https://stackoverflow.com/questions/tagged/okta). You can also email developers@okta.com to create a support ticket.
@@ -18,7 +17,6 @@ If you have questions or need help with Okta's APIs or SDKs, visit the [Dev Foru
 - [SDK Reference and Sample Code](https://developer.okta.com/documentation/)
 - [Authentication Quickstarts](https://developer.okta.com/quickstart/)
 - [Developer Blog](https://developer.okta.com/blog/)
-
 
 ## Contributing to the site
 

@@ -23,7 +23,7 @@ Angular 4 was [recently released](http://angularjs.blogspot.com/2017/03/angular-
 **NOTE:** This post has been updated to use [Angular 5](https://blog.angular.io/version-5-0-0-of-angular-now-available-37e414935ced) and [Angular CLI 1.5.5](https://github.com/angular/angular-cli/releases/tag/v1.5.5).
 
 ```bash
-npm install -g @angular/cli
+npm install -g @angular/cli@1.5.5
 ```
 
 After this command completes, you can create a new application.
