@@ -348,10 +348,10 @@ I hope you’ve enjoyed this quick tour of Kotlin and saw how its concise syntax
 Install Angular CLI using [Facebook’s Yarn](https://yarnpkg.com).
 
 ```bash
-yarn add global @angular/cli
+yarn add global @angular/cli@1.5.5
 ```
 
-Or using npm (`npm install -g @angular/cli`).
+Or using npm (`npm install -g @angular/cli@1.5.5`).
 
 Then create a new project using its `ng` command.
 

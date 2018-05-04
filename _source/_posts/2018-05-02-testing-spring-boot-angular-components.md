@@ -28,10 +28,10 @@ In this tutorial, you'll see how to implement many aspects of testing a modern a
 
 I like to call this a hitchhiker's guide because you can jump into any section of this guide and learn how to test those particular components. If you have any suggestions for improving a specific part, please let us know so we can improve it! We try to keep our blog posts up-to-date as much as possible.
 
-To begin, you'll want to clone the GitHub repository that contains the Ionic PWA and Spring Boot API.
+To begin, you'll want to clone the GitHub repository that contains the Ionic PWA and Spring Boot API and check out the `testing-start` branch.
 
 ```bash
-git clone https://github.com/oktadeveloper/okta-ionic-crypto-java-sdk-example.git
+git clone -b testing-start https://github.com/oktadeveloper/okta-ionic-crypto-java-sdk-example.git
 ```
 
 The instructions below assume you're operating from the `okta-ionic-crypto-java-sdk-example` directory of this cloned project.
@@ -44,7 +44,7 @@ First off, what is Okta? Simply put, we’re an API service that allows develope
 * Store and maintain all your users in one place
 * Perform password-based and [social login](https://developer.okta.com/authentication-guide/social-login/)
 * Secure your application with [multi-factor authentication](https://developer.okta.com/use_cases/mfa/)
-* And much more! Check out our [Product Documentation](https://developer.okta.com/documentation/)
+* And much more! Check out our [product documentation](https://developer.okta.com/documentation/)
 
 In short: we make [user account management](https://developer.okta.com/product/user-management/) a lot easier, more secure, and more scalable than what you’re probably used to.
 
@@ -1016,7 +1016,7 @@ Setup a basic e2e test of your application's homepage with the following steps:
 To execute Protractor tests, run `ionic serve` in one terminal and `npm run e2e` in another. The (silent) video below shows what should happen.
 
 <div style="width: 600px; margin: 0 auto">
-<object width="600" height="338"><param name="movie" value="https://www.youtube.com/v/MO_ZWxI7Yi4&hl=en&fs=1"></param><param name="allowFullScreen" value="true"></param><embed src="https://www.youtube.com/v/MO_ZWxI7Yi4&hl=en&fs=1" type="application/x-shockwave-flash" allowfullscreen="true" width="600" height="338"></embed></object>
+  <iframe width="600" height="338" src="https://www.youtube.com/embed/MO_ZWxI7Yi4" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
 </div>
 
 You can also configure Protractor to launch its own web server. To do this, add a devDependency on [serve](https://www.npmjs.com/package/serve):

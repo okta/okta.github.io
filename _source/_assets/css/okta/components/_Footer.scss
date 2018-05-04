@@ -19,8 +19,13 @@
     &--github,
     &--twitter,
     &--forum,
-    &--rss {
-      margin-bottom: 20px;
+    &--rss,
+    &--youtube {
+      margin-bottom: 10px;
+    }
+
+    &:last-child {
+      margin-bottom: 0;
     }
   }
 
