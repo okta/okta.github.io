@@ -9,11 +9,11 @@ tweets:
   - "Like what you see in #Angular 6 and want to upgrade? This article explains steps to upgrade your apps."
 ---
 
-Angular 6 has been released and it's not a drop-in replacement for Angular 5. If you've been developing with Angular since Angular 2, you likely remember that it wasn't too difficult to upgrade to Angular 4 or Angular 5. In most projects, you could change the version numbers in your `package.json` and you were on your way.
+Angular 6 is now available it's not a drop-in replacement for Angular 5. If you've been developing with Angular since Angular 2, you likely remember that it wasn't too difficult to upgrade to Angular 4 or Angular 5. In most projects, you could change the version numbers in your `package.json` and you were on your way.
 
-In fact, the biggest change I remember in the last couple years was the introduction of `HttpClient`, which happened in Angular 4.3. And it wasn't removed in Angular 5, it was merely deprecated. There was also the move from `<template>` to `<ng-template>`. There were some APIs removed in Angular 5, but I wasn't using them in any of my projects.
+In fact, the most significant change I remember in the last couple years was the introduction of `HttpClient`, which happened in Angular 4.3. And it wasn't removed in Angular 5; it was merely deprecated. There was also the move from `<template>` to `<ng-template>`. There were some APIs removed in Angular 5, but I wasn't using them in any of my projects.
 
-This brings us to Angular 6, where there are breaking changes. The biggest change that I've found is not in Angular itself, but in [RxJS](http://reactivex.io/rxjs/).
+This brings us to Angular 6, where there are breaking changes. The most prominent difference that I've found is not in Angular itself but in [RxJS](http://reactivex.io/rxjs/).
 
 ## Upgrading to RxJS 6
 
@@ -57,7 +57,7 @@ search(q: string): Observable<any> {
 
 The [RxJS v5.x to v6 Update Guide](https://github.com/ReactiveX/rxjs/blob/master/MIGRATION.md) has many more tips for upgrading, including:
 
-1. If you depend on a library that uses RxJS v5.x, or don't want to modify your code, you can install [rxjs-compat](https://www.npmjs.com/package/rxjs-compat):
+1. If you depend on a library that uses RxJS v5.x or don't want to modify your code, you can install [rxjs-compat](https://www.npmjs.com/package/rxjs-compat):
 
     ```
     npm install rxjs@6 rxjs-compat@6 --save
@@ -74,7 +74,7 @@ The [RxJS v5.x to v6 Update Guide](https://github.com/ReactiveX/rxjs/blob/master
 
 ## Dependency Injection Simplified
 
-One of the changes I really like in Angular 6 is your services can now register themselves. In previous versions, when you annotated a class with `@Injectable()`, you had to register it as a provider in a module or component to use it. In Angular 6, you can specify `providedIn` and it will auto-register itself when the app bootstraps.
+One of the changes I like in Angular 6 is your services can now register themselves. In previous versions, when you annotated a class with `@Injectable()`, you had to register it as a provider in a module or component to use it. In Angular 6, you can specify `providedIn` and it will auto-register itself when the app bootstraps.
 
 ```ts
 @Injectable({
@@ -82,7 +82,7 @@ One of the changes I really like in Angular 6 is your services can now register 
 })
 ```
 
-You can still use the old way and things will work. You can also target a specific module for your service.
+You can still use the old way, and things will work. You can also target a specific module for your service.
 
 ```
 @Injectable({
@@ -96,12 +96,12 @@ See Angular's [Dependency Injection Guide](https://angular.io/guide/dependency-i
 
 ## Angular CLI Changes
 
-Angular CLI has updated its version number to match Angular's, going from 1.7.4 to 6.0.0. The two biggest changes I noticed are:
+Angular CLI has updated its version number to match Angular's, going from 1.7.4 to 6.0.0. The two most significant changes I noticed are:
 
 1. Running `ng test` no longer watches files for changes. It executes each test, then exits. If you want to watch your files for changes, you can run `ng test --watch=true`.
 2. Running `ng build` no longer produces a production build by default. To do a production build, you can run `ng build --prod`. In Angular 5 and below, the flag was `-prod`, with a single dash.
 
-There's [many more](https://github.com/angular/angular-cli/releases) changes, but these where the ones that had the biggest impact on my workflow.
+There are [many more](https://github.com/angular/angular-cli/releases) changes, but these where the ones that had the biggest impact on my workflow.
 
 ## What's New in Angular 6
 
@@ -135,18 +135,18 @@ I also upgraded two of the version first Angular tutorials I wrote for Okta last
 * [Build an Angular App with Okta's Sign-In Widget in 15 Minutes](/blog/2017/03/27/angular-okta-sign-in-widget)
 * [Angular Authentication with OpenID Connect and Okta in 20 Minutes](/blog/2017/04/17/angular-authentication-with-oidc)
 
-See the changelog at the bottom of each post to see exactly what changed. There's links to both the article changes and the code changes.
+See the changelog at the bottom of each post to see exactly what changed. There are links to both the article changes and the code changes.
 
 For each project I updated, I performed the following steps:
 
 1. Created a new project from scratch using `ng new`
-2. Went through the tutorial steps, adjusting code as necessary
+2. Went through the tutorial steps, adjusting the code as necessary
 3. In the existing project, created a branch, ran `rm -rf *`, then copied the code from the completed tutorial
 4. Copied/deleted dot files that didn't get deleted or moved
 
-For the many other Angular tutorials on this blog, I believe it's possible to upgrade them, but also very time consuming. For that reason, I've changed all tutorials to specify the version of Angular CLI to install, as well as the version of Angular Material.
+For the many other Angular tutorials on this blog, I believe it's possible to upgrade them, but also very time-consuming. For that reason, I've changed all tutorials to specify the version of Angular CLI to install, as well as the version of Angular Material.
 
-If you want to try upgrading any of them, and succeed, please send a pull request! I'll be happy to update its matching blog post.
+If you want to try upgrading any of them and succeed, please send a pull request! I'll be happy to update its matching blog post.
 
 Here's a list of the Angular posts that haven't been upgraded (yet):
 
@@ -166,8 +166,8 @@ Here's a list of the Angular posts that haven't been upgraded (yet):
 
 ## Learn More about Upgrading to Angular 6
 
-I hope this post has helped you learn how to upgrade to Angular 6. All the applications I upgraded in the last several days were small and didn't contain a whole lot of functionality. I imagine upgrading a larger project might be more difficult.
+I hope this post has helped you learn how to upgrade to Angular 6. All the applications I updated in the last several days were small and didn't contain a whole lot of functionality. I imagine upgrading a more substantial project might be more difficult.
 
-A good example of a large-project-by-default is one created by [JHipster](https://www.jhipster.tech). [William Marques](https://twitter.com/wylmarq) recently created a [pull request for upgrading to Angular 6](https://github.com/jhipster/generator-jhipster/pull/7582), which might serve as a guide for those not using Angular CLI.
+An excellent example of a large-project-by-default is one created by [JHipster](https://www.jhipster.tech). [William Marques](https://twitter.com/wylmarq) recently created a [pull request for upgrading to Angular 6](https://github.com/jhipster/generator-jhipster/pull/7582), which might serve as a guide for those not using Angular CLI.
 
 If you have any questions about Angular 6 or related projects, please leave a comment. I'm always happy to try and help!
