@@ -1078,6 +1078,9 @@ curl -v -X POST \
           "https://example.com/oauth2/callback",
           "myapp://callback"
         ],
+        "post_logout_redirect_uris": [
+        "https://example.com/oauth2/postLogoutRedirectUri"
+        ],
         "response_types": [
           "token",
           "id_token",
