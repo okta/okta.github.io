@@ -9,7 +9,7 @@ tweets:
   - "Like what you see in #Angular 6 and want to upgrade? This article explains steps to upgrade your apps."
 ---
 
-Angular 6 is now available it's not a drop-in replacement for Angular 5. If you've been developing with Angular since Angular 2, you likely remember that it wasn't too difficult to upgrade to Angular 4 or Angular 5. In most projects, you could change the version numbers in your `package.json` and you were on your way.
+Angular 6 is now available and it's not a drop-in replacement for Angular 5. If you've been developing with Angular since Angular 2, you likely remember that it wasn't too difficult to upgrade to Angular 4 or Angular 5. In most projects, you could change the version numbers in your `package.json` and you were on your way.
 
 In fact, the most significant change I remember in the last couple years was the introduction of `HttpClient`, which happened in Angular 4.3. And it wasn't removed in Angular 5; it was merely deprecated. There was also the move from `<template>` to `<ng-template>`. There were some APIs removed in Angular 5, but I wasn't using them in any of my projects.
 
@@ -130,7 +130,7 @@ This tutorial has branches for Angular Material, Bootstrap, and OIDC authenticat
 
 Upgrading the `okta` branch to use Angular 6 wasn't too difficult. That branch uses Manfred Steyer's [angular-oauth2-oidc](https://github.com/manfredsteyer/angular-oauth2-oidc) v3.1.4, which depends on RxJS v5.x, so I did have to install rxjs-compat to make things work.
 
-I also upgraded two of the version first Angular tutorials I wrote for Okta last year:
+I also upgraded two of the very first Angular tutorials I wrote for Okta last year:
 
 * [Build an Angular App with Okta's Sign-In Widget in 15 Minutes](/blog/2017/03/27/angular-okta-sign-in-widget)
 * [Angular Authentication with OpenID Connect and Okta in 20 Minutes](/blog/2017/04/17/angular-authentication-with-oidc)
@@ -147,6 +147,7 @@ For each project I updated, I performed the following steps:
 For the many other Angular tutorials on this blog, I believe it's possible to upgrade them, but also very time-consuming. For that reason, I've changed all tutorials to specify the version of Angular CLI to install, as well as the version of Angular Material.
 
 If you want to try upgrading any of them and succeed, please send a pull request! I'll be happy to update its matching blog post.
+
 ## Learn More about Upgrading to Angular 6
 
 I hope this post has helped you learn how to upgrade to Angular 6. All the applications I updated in the last several days were small and didn't contain a whole lot of functionality. I imagine upgrading a more substantial project might be more difficult.
