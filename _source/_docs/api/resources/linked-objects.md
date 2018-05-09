@@ -22,7 +22,12 @@ For each relationship:
 For details, see the [Linked Object Model](#linked-object-model).
 
 The Expression Language function for [linked objects](/reference/okta_expression_language/#linked-object-function) provides access to the details about a linked user.
-<!-- Hiding this until the collection is ready, hopefully GA  ## Getting Started Explore the Linked Objects API: [![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/create-collection-from-jira) (link doesn't work yet) -->
+
+## Getting Started 
+
+Explore the Linked Objects API:
+
+[![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/ed4c5606d25d1014b7ea){:target="_blank"}
 
 ## Link Definition Operations
 
