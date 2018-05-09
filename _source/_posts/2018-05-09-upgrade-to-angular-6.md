@@ -1,6 +1,6 @@
 ---
 layout: blog_post
-title: "What's New in and How to Upgrade to Angular 6"
+title: "Angular 6: What's New, and Why Upgrade"
 author: mraible
 description: "This post explains what's new in Angular 6 and how to upgrade your Angular 5 apps."
 tags: [angular, angular5, angular6, rxjs, typescript]
@@ -13,11 +13,11 @@ Angular 6 is now available it's not a drop-in replacement for Angular 5. If you'
 
 In fact, the most significant change I remember in the last couple years was the introduction of `HttpClient`, which happened in Angular 4.3. And it wasn't removed in Angular 5; it was merely deprecated. There was also the move from `<template>` to `<ng-template>`. There were some APIs removed in Angular 5, but I wasn't using them in any of my projects.
 
-This brings us to Angular 6, where there are breaking changes. The most prominent difference that I've found is not in Angular itself but in [RxJS](http://reactivex.io/rxjs/).
+This brings us to Angular 6, where there are breaking changes. The most prominent difference that I've found is not in Angular itself but in [RxJS](http://reactivex.io/rxjs/). In this post, I’ll walk you through these breaking changes so you can stay on the happy path while upgrading.
 
 ## Upgrading to RxJS 6
 
-In RxJS v6, it changed many of its class locations (affecting your imports) and the syntax you use to manipulate data from an `HttpClient` request.
+In RxJS v6, many of the class locations changed (affecting your imports) as did the syntax you use to manipulate data from an `HttpClient` request.
 
 With RxJS v5.x, your imports look as follows:
 
@@ -72,7 +72,7 @@ The [RxJS v5.x to v6 Update Guide](https://github.com/ReactiveX/rxjs/blob/master
     rxjs-5-to-6-migrate -p [path/to/tsconfig.json]
     ```
 
-## Dependency Injection Simplified
+## Dependency Injection Simplified in Angular 6
 
 One of the changes I like in Angular 6 is your services can now register themselves. In previous versions, when you annotated a class with `@Injectable()`, you had to register it as a provider in a module or component to use it. In Angular 6, you can specify `providedIn` and it will auto-register itself when the app bootstraps.
 
@@ -98,12 +98,12 @@ See Angular's [Dependency Injection Guide](https://angular.io/guide/dependency-i
 
 Angular CLI has updated its version number to match Angular's, going from 1.7.4 to 6.0.0. The two most significant changes I noticed are:
 
-1. Running `ng test` no longer watches files for changes. It executes each test, then exits. If you want to watch your files for changes, you can run `ng test --watch=true`.
+1. Running `ng test` no longer watches files for changes. It executes each test, then exits. If you want to watch your files for changes, you can run `ng test --watch=true`
 2. Running `ng build` no longer produces a production build by default. To do a production build, you can run `ng build --prod`. In Angular 5 and below, the flag was `-prod`, with a single dash.
 
-There are [many more](https://github.com/angular/angular-cli/releases) changes, but these where the ones that had the biggest impact on my workflow.
+There are [many more](https://github.com/angular/angular-cli/releases) changes, but these were the ones that had the biggest impact on my workflow.
 
-## What's New in Angular 6
+## What Else is New in Angular 6?
 
 Stephen Fluin announced that [Angular 6 is available](https://blog.angular.io/version-6-of-angular-now-available-cc56b0efa7a4) last week. He notes the significant changes:
 
@@ -117,7 +117,7 @@ Stephen Fluin announced that [Angular 6 is available](https://blog.angular.io/ve
 * CLI workspaces: you can now have multiple Angular projects
 * Library support: component libraries can be generated with `ng generate library {name}`
 
-## Angular 6 Tutorials
+## Tutorials Updated for Angular 6
 
 I updated a number of tutorials from Angular 5 to 6 since the release last Friday. I started with my [Angular and Angular CLI Tutorial](http://gist.asciidoctor.org/?github-mraible/ng-demo//README.adoc).
 
@@ -135,7 +135,7 @@ I also upgraded two of the version first Angular tutorials I wrote for Okta last
 * [Build an Angular App with Okta's Sign-In Widget in 15 Minutes](/blog/2017/03/27/angular-okta-sign-in-widget)
 * [Angular Authentication with OpenID Connect and Okta in 20 Minutes](/blog/2017/04/17/angular-authentication-with-oidc)
 
-See the changelog at the bottom of each post to see exactly what changed. There are links to both the article changes and the code changes.
+We all know authentication is an important component of most apps, so I thought it would be helpful to get these posts updated, in case you are ready to make the switch to Angular 6. You can see the changelog at the bottom of each post to review exactly what changed. There are links to both the post changes and the code changes.
 
 For each project I updated, I performed the following steps:
 
@@ -147,23 +147,6 @@ For each project I updated, I performed the following steps:
 For the many other Angular tutorials on this blog, I believe it's possible to upgrade them, but also very time-consuming. For that reason, I've changed all tutorials to specify the version of Angular CLI to install, as well as the version of Angular Material.
 
 If you want to try upgrading any of them and succeed, please send a pull request! I'll be happy to update its matching blog post.
-
-Here's a list of the Angular posts that haven't been upgraded (yet):
-
-* [Bootiful Development with Spring Boot and Angular](/blog/2017/04/26/bootiful-development-with-spring-boot-and-angular)
-* [Build Your First Progressive Web Application with Angular and Spring Boot](/blog/2017/05/09/progressive-web-applications-with-angular-and-spring-boot)
-* [Tutorial: Develop a Mobile App With Ionic and Spring Boot](/blog/2017/05/17/develop-a-mobile-app-with-ionic-and-spring-boot)
-* [Add Authentication to Your Angular PWA](/blog/2017/06/13/add-authentication-angular-pwa)
-* [The Ultimate Guide to Progressive Web Applications](/blog/2017/07/20/the-ultimate-guide-to-progressive-web-applications)
-* [Build an Ionic App with User Authentication](/blog/2017/08/22/build-an-ionic-app-with-user-authentication)
-* [Build a Secure Notes Application with Kotlin, TypeScript, and Okta](/blog/2017/09/19/build-a-secure-notes-application-with-kotlin-typescript-and-okta)
-* [Build a Basic CRUD App with Angular 5.0 and Spring Boot 2.0](/blog/2017/12/04/basic-crud-angular-and-spring-boot)
-* [Protect Your Cryptocurrency Wealth Tracking PWA with Okta](/blog/2018/01/18/cryptocurrency-pwa-secured-by-okta)
-* [Use Okta (Instead of Local Storage) to Store Your User’s Data Securely](/blog/2018/01/23/replace-local-storage-with-okta-profile-attributes)
-* [The Hitchhiker's Guide to Testing Spring Boot APIs and Angular Components with WireMock, Jest, Protractor, and Travis CI](/blog/2018/05/02/testing-spring-boot-angular-components)
-
-*That last one is the favorite title I've ever had on a blog post! So long, and yet so good for SEO.* 😉
-
 ## Learn More about Upgrading to Angular 6
 
 I hope this post has helped you learn how to upgrade to Angular 6. All the applications I updated in the last several days were small and didn't contain a whole lot of functionality. I imagine upgrading a more substantial project might be more difficult.
