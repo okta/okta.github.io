@@ -11,7 +11,7 @@ tweets:
 
 Angular 6 is now available and it's not a drop-in replacement for Angular 5. If you've been developing with Angular since Angular 2, you likely remember that it wasn't too difficult to upgrade to Angular 4 or Angular 5. In most projects, you could change the version numbers in your `package.json` and you were on your way.
 
-In fact, the most significant change I remember in the last couple years was the introduction of `HttpClient`, which happened in Angular 4.3. And it wasn't removed in Angular 5; it was merely deprecated. There was also the move from `<template>` to `<ng-template>`. There were some APIs removed in Angular 5, but I wasn't using them in any of my projects.
+In fact, the most significant change I remember in the last couple of years was the introduction of `HttpClient`, which happened in Angular 4.3. And it wasn't removed in Angular 5; it was merely deprecated. There was also the move from `<template>` to `<ng-template>`. There were some APIs removed in Angular 5, but I wasn't using them in any of my projects.
 
 This brings us to Angular 6, where there are breaking changes. The most prominent difference that I've found is not in Angular itself but in [RxJS](http://reactivex.io/rxjs/). In this post, I’ll walk you through these breaking changes so you can stay on the happy path while upgrading.
 
