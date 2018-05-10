@@ -248,13 +248,13 @@ Use this function to retrieve properties about the user identified with the spec
     * Example: `user.getLinkedObject("manager").appuser("Salesforce").lastName
     * Example Result: `Benioff`
 
-### Time Functions
+### Date and Time Functions
 
 | Function | Input Parameter Signature | Return Type | Example  | Output  |
 | :----------- | :--------------------------| :--------------- |:-----|:---|
 | `Time.now`                  | (String timeZoneId, String format) | String                                   | `Time.now()`                                                                                                       | 2015-07-31T17:18:37.979Z (Current time, UTC format)                                                     |
-|                             |                                    | `Time.now("EST")`                        | 2015-07-31T13:30:49.964-04:00 (Specified time zone)                                                                |                                                                                                         |
-|                             |                                    | `Time.now("EST", "YYYY-MM-dd HH:mm:ss")` | 2015-07-31 13:36:48 (Specified time zone and format, military time)                                                |                                                                                                         |
+|                             |                                    |                                          | `Time.now("EST")`                                                                                                  | 2015-07-31T13:30:49.964-04:00 (Specified time zone)                                                     |
+|                             |                                    |                                          | `Time.now("EST", "YYYY-MM-dd HH:mm:ss")`                                                                           | 2015-07-31 13:36:48 (Specified time zone and format, military time)                                     |
 | `Time.fromWindowsToIso8601` | (String time)                      | String                                   | Windows timestamp time as a string (Windows/LDAP timestamp doc)                                                    | The passed-in time expressed in ISO 8601 format (specifically the RFC 3339 subset of the ISO standard). |
 | `Time.fromUnixToIso8601`    | (String time)                      | String                                   | Unix timestamp time as a string (Unix timestamp reference)                                                         | The passed-in time expressed in ISO 8601 format (specifically the RFC 3339 subset of the ISO standard). |
 | `Time.fromStringToIso8601`  | (String time, String format)       | String                                   | Timestamp time in a human-readable yet machine-parseable arbitrary format format (as defined by Joda time pattern) | The passed-in time expressed in ISO 8601 format (specifically the RFC 3339 subset of the ISO standard). |
