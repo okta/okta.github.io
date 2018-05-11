@@ -365,7 +365,7 @@ Then the new bourbon view in the `Views` folder.
 
 ### Check Your Work
 
-Now when you fire up the application, log in as a user who has a "bourbon.com" email address, and navigate to the bourbon route, you will be granted access to the bourbon.. page. For users that _don't_ have the right email address domain, you are routed to an access denied route. You could send them to a special unauthorized page that gives them more choices to log out and log in with a user with the proper privileges.
+Now when you fire up the application, log in as a user who has a "bourbon.com" email address, and navigate to the bourbon route, you will be granted access to the bourbon... page. For users that _don't_ have the right email address domain, you are routed to an access denied route. You could send them to a special unauthorized page that gives them more choices to log out and log in with a user with the proper privileges.
 
 {% img blog/policy-based-authz-core/bourbon-is-life.png alt:"Application running on restricted page" width:"800" %}{: .center-image }
 
