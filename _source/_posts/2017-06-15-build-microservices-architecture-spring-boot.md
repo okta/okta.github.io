@@ -122,6 +122,12 @@ Enter `eureka-service` as an artifact name and select `Eureka Server` as a depen
 
 Click the **Generate Project** button and expand `eureka-service.zip` into the `spring-boot-microservices-example` directory.
 
+> **TIP:** You could also create your project using start.spring.io's API. The following [HTTPie](https://httpie.org/) command will create the same app as the steps above:
+> ```
+> http https://start.spring.io/starter.zip artifactId==eureka-service \
+>    name==eureka-service dependencies==cloud-eureka-server baseDir==eureka-service | tar -xzvf -
+> ```
+
 Modify `eureka-service/src/main/resources/application.properties` to add a port number and disable registration.
 
 ```
@@ -175,6 +181,13 @@ artifact name and add the following dependencies:
 Click the **Generate Project** button and expand `beer-catalog-service.zip` into `spring-boot-microservices-example` and 
 open the project in your favorite IDE. I recommend [IntelliJ IDEA](https://www.jetbrains.com/idea/) because it's great for 
 Java and web development.
+
+> **TIP:** To create this same project using start.spring.io's API, run the following:
+> ```
+> http https://start.spring.io/starter.zip artifactId==beer-catalog-service \
+>   name==beer-catalog-service dependencies==actuator,cloud-eureka,data-jpa,h2,data-rest,web,devtools,lombok \
+>   baseDir==beer-catalog-service | tar -xzvf -
+> ```
 
 Create a `Beer` entity, a `JpaRepository` for it, and a `CommandLineRunner` to populate the database with default data. 
 You can add this code to `BeerCatalogServiceApplication.java`, or create separate files for each class. The code below 
@@ -321,7 +334,14 @@ Navigate to [start.spring.io](https://start.spring.io) and create an `edge-servi
 {% img blog/microservices-spring-boot/edge-service.png alt:"Edge Service" width:"800" %}{: .center-image }
 
 Click the **Generate Project** button and expand `edge-service.zip` into `spring-boot-microservices-example` and open 
-the project in your favorite IDE. 
+the project in your favorite IDE.
+
+> **TIP:** To create this same project using start.spring.io's API, run the following:
+> ```
+> http https://start.spring.io/starter.zip artifactId==edge-service \
+>   name==edge-service  dependencies==cloud-eureka,cloud-feign,cloud-zuul,data-rest,web,cloud-hystrix,lombok \
+>   baseDir==edge-service | tar -xzvf -
+> ```
 
 Since the `beer-catalog-service` is running on port 8080, you'll need to configure this application to run on a different 
 port. Modify `edge-service/src/main/resources/application.properties` to set the port to 8081 and set an application name.
@@ -637,5 +657,6 @@ or [create an issue on GitHub](https://github.com/oktadeveloper/spring-boot-micr
 
 **Changelog:**
 
+* May 11, 2018: Updated to use use Spring Boot 2.0.2. See the code changes in the [example app on GitHub](https://github.com/oktadeveloper/spring-boot-microservices-example/pull/18). Changes to this article can be viewed [in this pull request](https://github.com/okta/okta.github.io/pull/2046).
 * Feb 8, 2018: Updated to use use Spring Boot 1.5.10, Angular CLI 1.6.7, and Angular 5.2.0. See the code changes in the [example app on GitHub](https://github.com/oktadeveloper/spring-boot-microservices-example/pull/10). Changes to this article can be viewed [in this pull request](https://github.com/okta/okta.github.io/pull/1739).
 * Jan 17, 2018: Updated to use latest client from [Build Your First Progressive Web Application with Angular and Spring Boot](/blog/2017/05/09/progressive-web-applications-with-angular-and-spring-boot). See the code changes in the [example app on GitHub](https://github.com/oktadeveloper/spring-boot-microservices-example/pull/6). Changes to this article can be viewed [in this pull request](https://github.com/okta/okta.github.io/pull/1637).
