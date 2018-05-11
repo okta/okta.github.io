@@ -28,7 +28,7 @@ In this tutorial, you'll build a microservices architecture with Spring Boot and
 To begin, you'll need to clone the aforementioned article's completed project.
 
 ```bash
-git clone https://github.com/oktadeveloper/spring-boot-microservices-example.git
+git clone -b v1.0 https://github.com/oktadeveloper/spring-boot-microservices-example.git
 ```
 
 [Create an Okta Developer account](https://developer.okta.com/signup/), and [create a "Native" application that works with the Stormpath Spring Boot Starter](https://github.com/stormpath/stormpath-sdk-java/blob/okta/OktaGettingStarted.md). Here's an abbreviated list of steps:
