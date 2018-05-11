@@ -4039,6 +4039,7 @@ curl -v -X GET \
 {
   "id": "0oa1k5d68qR2954hb0g4",
   "type": "SAML2",
+  "issuerMode": "ORG_URL",
   "name": "Example IdP",
   "status": "ACTIVE",
   "created": "2015-03-05T20:24:09.000Z",
@@ -4159,21 +4160,31 @@ curl -v -X GET \
 All Identity Providers have the following properties:
 
 |-------------- | ------------------------------------------------------------ | -------------------------------------------------------------- | ---------|--------|----------|-----------|---------- | -----------|
-| Property      | Description                                                  | DataType                                                       | Nullable | Unique | Readonly | MinLength | MaxLength | Validation |
-| ------------- | ------------------------------------------------------------ | -------------------------------------------------------------- | -------- | ------ | -------- | --------- | --------- | ---------- |
-| id            | Unique key for the IdP                                       | String                                                         | FALSE    | TRUE   | TRUE     |           |           |            |
-| type          | Type of IdP                                                  | [Identity Provider Type](#identity-provider-type)              | FALSE    | FALSE  | FALSE    |           |           |            |
-| name          | Unique name for the IdP                                      | String                                                         | FALSE    | TRUE   | FALSE    | 1         | 100       |            |
-| status        | Status of the IdP                                            | `ACTIVE` or `INACTIVE`                                         | FALSE    | FALSE  | TRUE     |           |           |            |
-| created       | Timestamp when IdP was created                               | Date                                                           | FALSE    | FALSE  | TRUE     |           |           |            |
-| lastUpdated   | Timestamp when IdP was last updated                          | Date                                                           | FALSE    | FALSE  | TRUE     |           |           |            |
-| protocol      | Protocol settings for IdP `type`                             | [Protocol Object](#identity-provider-type)                     | FALSE    | FALSE  | FALSE    |           |           |            |
-| policy        | Policy settings for IdP `type`                               | [Policy Object](#identity-provider-type)                       | FALSE    | FALSE  | FALSE    |           |           |            |
-| _links        | [Discoverable resources](#links-object) related to the IdP   | [JSON HAL](http://tools.ietf.org/html/draft-kelly-json-hal-06) | TRUE     | FALSE  | TRUE     |           |           |            |
-| _embedded     | Embedded resources related to the IdP                        | [JSON HAL](http://tools.ietf.org/html/draft-kelly-json-hal-06) | TRUE     | FALSE  | TRUE     |           |           |            |
-|-------------- | ------------------------------------------------------------ | -------------------------------------------------------------- | ---------|--------|----------|-----------|---------- | -----------|
+| Property      | Description                                                  | DataType                                                       | Nullable | Unique | Readonly | MinLength | MaxLength |
+| ------------- | ------------------------------------------------------------ | -------------------------------------------------------------- | -------- | ------ | -------- | --------- | --------- |
+| id            | Unique key for the IdP                                       | String                                                         | FALSE    | TRUE   | TRUE     |           |           |
+| type          | Type of IdP                                                  | [Identity Provider Type](#identity-provider-type)              | FALSE    | FALSE  | FALSE    |           |           |
+| issuerMode {% api_lifecycle ea %}  | Indicates whether Okta uses the original Okta org domain URL, or a custom domain URL in the request to the social IdP.  | FALSE | FALSE | FALSE |   |
+| name          | Unique name for the IdP                                      | String                                                         | FALSE    | TRUE   | FALSE    | 1         | 100       |
+| status        | Status of the IdP                                            | `ACTIVE` or `INACTIVE`                                         | FALSE    | FALSE  | TRUE     |           |           |
+| created       | Timestamp when IdP was created                               | Date                                                           | FALSE    | FALSE  | TRUE     |           |           |
+| lastUpdated   | Timestamp when IdP was last updated                          | Date                                                           | FALSE    | FALSE  | TRUE     |           |           |
+| protocol      | Protocol settings for IdP `type`                             | [Protocol Object](#identity-provider-type)                     | FALSE    | FALSE  | FALSE    |           |           |
+| policy        | Policy settings for IdP `type`                               | [Policy Object](#identity-provider-type)                       | FALSE    | FALSE  | FALSE    |           |           |
+| _links        | [Discoverable resources](#links-object) related to the IdP   | [JSON HAL](http://tools.ietf.org/html/draft-kelly-json-hal-06) | TRUE     | FALSE  | TRUE     |           |           |
+| _embedded     | Embedded resources related to the IdP                        | [JSON HAL](http://tools.ietf.org/html/draft-kelly-json-hal-06) | TRUE     | FALSE  | TRUE     |           |           |
 
-The properties `id`, `created`, `lastUpdated`, and `_links` are available after an IdP is created.
+#### Property Details
+
+* The properties `id`, `created`, `lastUpdated`, and `_links` are available after an IdP is created.
+
+* `issuerMode` is visible if you have the Custom URL Domain feature enabled. If the feature is enabled, you can set a custom domain URL in custom an identity provider setting, and this property is returned in the appropriate responses. To enable the Custom URL Domain feature, {{site.contact_support_lc}}. 
+
+    * If set to `ORG_URL`, then in the authorize request to the social IdP, Okta uses the Okta org's original domain URL, `https://{yourOktaDomain}.com`, as the domain in the `redirect_uri`. This is the default value for social IdPs created before the Custom URL Domain feature is enabled.
+
+    * If set to `CUSTOM_URL_DOMAIN`, then in the authorize request to the social IdP, Okta uses the custom domain URL as the domain in `redirect_uri`. This is the default value for social IdPs created after the Custom URL Domain feature is enabled.
+
+  After you enable the Custom URL Domain feature, all new social IdPs use `CUSTOM_URL_DOMAIN` by default. All existing social IdPs continue to use `ORG_URL`, so that existing integrations with the social IdP continue to work after the feature is enabled. You can change this value in any social IdP via the API or administrator UI.
 
 ### Identity Provider Type
 

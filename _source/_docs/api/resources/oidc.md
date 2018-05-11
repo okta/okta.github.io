@@ -278,7 +278,7 @@ Based on the scopes requested. Generally speaking, the scopes specified in a req
 | access_token  | An [access token](#access-token).                                                     | String  |
 | token_type    | The audience of the token.                                                            | String  |
 | expires_in    | The expiration time of the access token in seconds.                                   | Integer |
-| scope         | The scopes contianed in the access token.                                             | String  |
+| scope         | The scopes contained in the access token.                                             | String  |
 | refresh_token | An opaque refresh token. This is returned if the `offline_access` scope is granted.   | String  |
 | id_token      | An [ID token](#id-token). This is returned if the `openid` scope is granted.          | String  |
 

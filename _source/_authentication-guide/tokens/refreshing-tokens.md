@@ -53,8 +53,6 @@ grant_type=password
 
 You would then get back an ID token alongside your access and refresh tokens.
 
-> NOTE: Although you requested access, refresh, and ID tokens, the refresh token can only be used to get a new access token. An ID token cannot be refreshed.
-
 For more information see the [Okta OAuth 2.0 reference page](/docs/api/resources/oidc#response-properties).
 
 ## Get a Refresh Token Silently for Your SPA
