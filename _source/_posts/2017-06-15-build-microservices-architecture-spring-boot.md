@@ -267,7 +267,7 @@ Start the beer-catalog-service with Maven (`mvn spring-boot:run`) or your IDE.
 At this point, you should be able to use [HTTPie](https://httpie.org/) to see the list of beers from the catalog service.
 
 ```bash
-http localhost:8080/beers
+http :8080/beers
 ```
 
 {% img blog/microservices-spring-boot/httpie-beers.png alt:"HTTPie Beers" width:"800" %}{: .center-image }
@@ -460,12 +460,11 @@ Start the `edge-service` application with Maven or your IDE and verify it regist
 You should be able to invoke the `/good-beers` endpoint as well.
 
 ```bash
-$ http localhost:8081/good-beers
+$ http :8081/good-beers
 HTTP/1.1 200
 Content-Type: application/json;charset=UTF-8
-Date: Wed, 07 Feb 2018 16:50:51 GMT
+Date: Fri, 11 May 2018 17:28:55 GMT
 Transfer-Encoding: chunked
-X-Application-Context: edge-service:8081
 ```
 ```json
 [
@@ -487,22 +486,20 @@ X-Application-Context: edge-service:8081
 This is cool, but if you shut down the `beer-catalog-service` application, you'll get a 500 internal server error.
 
 ```bash
-$ http localhost:8081/good-beers
+$ http :8081/good-beers
 HTTP/1.1 500
 Connection: close
 Content-Type: application/json;charset=UTF-8
-Date: Wed, 07 Feb 2018 16:51:38 GMT
+Date: Fri, 11 May 2018 17:35:39 GMT
 Transfer-Encoding: chunked
-X-Application-Context: edge-service:8081
 ```
 ```json
 {
     "error": "Internal Server Error",
-    "exception": "feign.RetryableException",
     "message": "connect timed out executing GET http://beer-catalog-service/beers",
     "path": "/good-beers",
     "status": 500,
-    "timestamp": 1518022298072
+    "timestamp": "2018-05-11T17:35:39.201+0000"
 }
 ```
 
@@ -523,12 +520,11 @@ public Collection<Beer> goodBeers() {
 Restart the `edge-service` and you should see an empty list returned.
 
 ```bash
-$ http localhost:8081/good-beers
+$ http :8081/good-beers
 HTTP/1.1 200
 Content-Type: application/json;charset=UTF-8
-Date: Wed, 07 Feb 2018 16:52:59 GMT
+Date: Fri, 11 May 2018 17:38:18 GMT
 Transfer-Encoding: chunked
-X-Application-Context: edge-service:8081
 ```
 ```json
 []
@@ -657,6 +653,6 @@ or [create an issue on GitHub](https://github.com/oktadeveloper/spring-boot-micr
 
 **Changelog:**
 
-* May 11, 2018: Updated to use use Spring Boot 2.0.2. See the code changes in the [example app on GitHub](https://github.com/oktadeveloper/spring-boot-microservices-example/pull/18). Changes to this article can be viewed [in this pull request](https://github.com/okta/okta.github.io/pull/2046).
+* May 11, 2018: Updated to use use Spring Boot 2.0.2. See the example app changes in [spring-boot-microservices-example#18](https://github.com/oktadeveloper/spring-boot-microservices-example/pull/18); changes to this post can be viewed in [okta.github.io#2046](https://github.com/okta/okta.github.io/pull/2046).
 * Feb 8, 2018: Updated to use use Spring Boot 1.5.10, Angular CLI 1.6.7, and Angular 5.2.0. See the code changes in the [example app on GitHub](https://github.com/oktadeveloper/spring-boot-microservices-example/pull/10). Changes to this article can be viewed [in this pull request](https://github.com/okta/okta.github.io/pull/1739).
 * Jan 17, 2018: Updated to use latest client from [Build Your First Progressive Web Application with Angular and Spring Boot](/blog/2017/05/09/progressive-web-applications-with-angular-and-spring-boot). See the code changes in the [example app on GitHub](https://github.com/oktadeveloper/spring-boot-microservices-example/pull/6). Changes to this article can be viewed [in this pull request](https://github.com/okta/okta.github.io/pull/1637).
