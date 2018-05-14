@@ -10,8 +10,7 @@
     { name: 'java', label: 'Java' },
     { name: 'dotnet', label: '.NET' },
     { name: 'nodejs', label: 'Node.js' },
-    { name: 'php', label: 'PHP' },
-    { name: 'python', label: 'Python' }
+    { name: 'php', label: 'PHP' }
   ];
 
   function renderCodeLinks() {
