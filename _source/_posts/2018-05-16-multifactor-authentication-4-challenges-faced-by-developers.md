@@ -13,11 +13,12 @@ MFA is rapidly gaining in adoption, and more and more organizations are interest
 ## What is Okta?
 
 Okta is a cloud service that allows developers to create, edit, and securely store user accounts and user account data, and connect them with one or multiple applications. Our API enables you to:
-[Authenticate](https://developer.okta.com/product/authentication/) and [authorize](https://developer.okta.com/product/authorization/) your users
-Store data about your users
-Perform password-based and [social login](https://developer.okta.com/authentication-guide/social-login/)
-Secure your application with (multi-factor authentication](https://developer.okta.com/use_cases/mfa/)
-And much more! Check out our [Product Documentation](https://developer.okta.com/documentation/)
+
+* [Authenticate](https://developer.okta.com/product/authentication/) and [authorize](https://developer.okta.com/product/authorization/) your users
+* Store data about your users
+* Perform password-based and [social login](https://developer.okta.com/authentication-guide/social-login/)
+* Secure your application with [multi-factor authentication](https://developer.okta.com/use_cases/mfa/)
+* And much more! Check out our [Product Documentation](https://developer.okta.com/documentation/)
 
 In short: we make [user account management](https://developer.okta.com/product/user-management/) a lot easier, more secure, and more scalable than what you’re probably used to.
 
@@ -26,6 +27,7 @@ Sound amazing? [Register for a free developer account](https://developer.okta.co
 ## 1. Multi-Factor Authentication is Hard to Secure
 
 Let’s assume we’re stuck with passwords as our first factor (for now anyway!), let’s examine the possibilities for additional factors when authenticating. The most popular and consumer-accessible types of MFA fall into three categories (listed least secure to most secure):
+
 1. SMS (text messages) one-time use tokens
 2. Time-based tokens
 3. Hardware token devices
@@ -37,6 +39,7 @@ Let’s assume we’re stuck with passwords as our first factor (for now anyway!
 Perhaps the most common today, and also the easiest to implement is text message-based MFA.
 
 The flow works like this:
+
 1. You log in to an application with your username and password
 2. You see is a text field asking you to input a code sent via SMS
 3. You receive an SMS with a one-time use code
@@ -55,6 +58,7 @@ In that example, we assume an attacker has already gained access to your desktop
 Another common, more secure, but more challenging to implement approach is called Time-Based One-Time Password algorithm or [TOTP](https://tools.ietf.org/html/rfc6238). This approach uses a secret shared between the server and the client (typically a mobile app) in conjunction with the current time to generate a one-time use code. The client knows the code by running the shared secret through the algorithm and the server can verify the posted code by running the same secret through the algorithm. The code is only valid for a set amount of time, usually 30 seconds.
 
 The flow looks like this:
+
 1. You log into an application with your username and password
 2. You see is a text field asking you to input the latest code
 3. You launch your TOTP client on your mobile phone and see the current code
@@ -70,20 +74,24 @@ This is the most sophisticated, secure and hardest to implement approach. This a
 Then, along came the Fast IDentity Online Alliance ([FIDO](https://fidoalliance.org/)). It has produced a device-centric standard making the ability of companies to implement hardware-based multi-factor authentication much more accessible.
 
 The flow can work in a variety of ways, but here are two examples:
-*Passwordless*
-You launch an application on your smartphone
-You see a screen waiting for your fingerprint
-You touch your finger to the fingerprint reader
-You are authenticated and enter the app
+
+**Passwordless**
+
+1.  You launch an application on your smartphone
+2. You see a screen waiting for your fingerprint
+3. You touch your finger to the fingerprint reader
+4. You are authenticated and enter the app
 
 Note: This mode has a good separation of concerns in that the app has no access to your fingerprint data. The hardware in the phone responds to the app with success or failure.
-*Second Factor*
-You log in to an application with your username and password
-You see an indicator, such as a spinner, waiting for input from your hardware device
-You touch the thumb-pad on your hardware device connected to your computer
-You proceed on to the application
 
-[Yubikeys](https://www.yubico.com/products/yubikey-hardware/fido-u2f-security-key/) are a good example of this mode. It’s a physical device that connects to your computer’s USB port and has a touch sensitive area to respond to an authentication request. 
+**Second Factor**
+
+1. You log in to an application with your username and password
+2. You see an indicator, such as a spinner, waiting for input from your hardware device
+3. You touch the thumb-pad on your hardware device connected to your computer
+4. You proceed on to the application
+
+[Yubikeys](https://www.yubico.com/products/yubikey-hardware/fido-u2f-security-key/) are a good example of this mode. It’s a physical device that connects to your computer’s USB port and has a touch sensitive area to respond to an authentication request.
 
 ## 2. Multi-Factor Authentication is Hard to Develop
 
@@ -93,7 +101,7 @@ There are a number of considerations when adding MFA to your application. For in
 
 ## 3. Multi-Factor Authentication is Hard to Test
 
-Integration testing of MFA presents a few not-insignificant challenges. In the case of SMS, user interaction is required. That is, a device is going to receive a real SMS message containing a code that needs to be entered on the challenge for validation. 
+Integration testing of MFA presents a few not-insignificant challenges. In the case of SMS, user interaction is required. That is, a device is going to receive a real SMS message containing a code that needs to be entered on the challenge for validation.
 
 Google Authenticator integration tests are run for every build and release. How is this possible given that Google Authenticator also requires entering in a code that changes every 30 seconds? The answer lies in the underpinnings and strength of TOTP: its codes are algorithmically generated.
 
@@ -124,6 +132,6 @@ In this post, we’ve covered some of the approaches to multi-factor authenticat
 Happily, multi-factor authentication is at the very core of Okta’s business: providing the identity layer for companies, applications, and people. With just a few lines of code, you can add support for SMS, Google Authenticator, Okta Verify and many others to your application today. If you use the [Okta Sign-In Widget](https://github.com/okta/okta-signin-widget), no additional coding for MFA support is needed!
 
 To learn more about MFA with Okta, check out these resources:
-* [Our MFA Product Documentation](https://developer.okta.com/use_cases/mfa/)
+* [Our MFA product documentation](https://developer.okta.com/use_cases/mfa/)
 * [Set Up and Enforce Multi-Factor Authentication with the Okta API](https://developer.okta.com/blog/2018/02/08/set-up-and-enforce-multi-factor-auth-with-okta)
 * [Biometrics for Authentication: The Risks and Potential Rewards](https://www.okta.com/security-blog/2018/05/biometrics-for-authentication-the-risks-and-potential-rewards/)
