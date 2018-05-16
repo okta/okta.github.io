@@ -735,7 +735,7 @@ curl -v -X POST \
 {:.api .api-operation}
 
 Customize (and optionally localize) the SMS message sent to the user on enrollment.
-* If the request has an `Accept_Language` header and the template contains a translation for that language, the SMS message is sent using the translated template.
+* If the request has an `Accept-Language` header and the template contains a translation for that language, the SMS message is sent using the translated template.
 * If the language provided in the `Accept-Language` header doesn't exist, the SMS message is sent using the template text.
 * If the provided <em>templateId</em> doesn't match the existing template, the SMS message is sent using the default template.
 
