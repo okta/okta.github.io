@@ -40,7 +40,7 @@ If you're using Spring Boot 1.x, I encourage you to try Spring Boot 2.x. The thr
 
 It's not too hard, so I'll break it down for you:
 
-1. Create a `Web` application in Okta with your [developer account](https://developer.okta.com/signup).
+1. Create a `Web` application in Okta with your [developer account](https://developer.okta.com/signup/).
 2. Update a file or two to use your client ID/secret instead of mine, or set environment variables that match Spring Security's property names.
 3. Run the apps and rejoice!
 
