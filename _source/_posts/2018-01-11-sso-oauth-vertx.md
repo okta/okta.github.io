@@ -71,7 +71,7 @@ Create a file called `src/main/application.json` and add the following content:
 {
    "clientId": "{okta-client-id}",
    "clientSecret": "{okta-client-secret}",
-   "issuer": "https://{yourOktaDomain}/oauth2/default",
+   "issuer": "https://{yourOktaDomain}.com/oauth2/default",
    "callbackUrl": "http://localhost:8080/login",
    "port": 8080
 }

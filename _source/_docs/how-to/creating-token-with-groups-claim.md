@@ -219,7 +219,7 @@ Example Payload Data for ID Token:
 {
   "sub": "00u5t60iloOHN9pBi0h7",
   "ver": 1,
-  "iss": "https://${yourOktaDomain}.com",
+  "iss": "https://{yourOktaDomain}.com",
   "aud": "0oabskvc6442nkvQO0h7",
   "iat": 1514497781,
   "exp": 1514501381,
@@ -429,7 +429,7 @@ To obtain a token with the configured groups claim, send a request for an ID tok
 
 ~~~sh
  curl -X GET \
-  'https://${yourOktaDomain}.com/oauth2/ausain6z9zIedDCxB0h7/v1/authorize?client_id=0oabskvc6442nkvQO0h7
+  'https://{yourOktaDomain}.com/oauth2/ausain6z9zIedDCxB0h7/v1/authorize?client_id=0oabskvc6442nkvQO0h7
     &response_type=id_token
     &response_mode=fragment
     &scope=groups%20openid

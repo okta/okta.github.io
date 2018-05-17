@@ -102,7 +102,7 @@ In this case, the client of the API is the ASP.NET MVC application. Open the `ap
     }
   },
   "Okta": { 
-    "TokenUrl": "https://{yourOktaDomain}/oauth2/default/v1/token", 
+    "TokenUrl": "https://{yourOktaDomain}.com/oauth2/default/v1/token", 
     "ClientId": "{yourClientId}", 
     "ClientSecret": "{yourClientSecret}" 
   }
@@ -481,7 +481,7 @@ services.AddAuthentication(options =>
 })
 .AddJwtBearer(options =>
 {
-	options.Authority = "https://{yourOktaDomain}/oauth2/default";
+	options.Authority = "https://{yourOktaDomain}.com/oauth2/default";
 	options.Audience = "api://default";
 	options.RequireHttpsMetadata = false;
 });
