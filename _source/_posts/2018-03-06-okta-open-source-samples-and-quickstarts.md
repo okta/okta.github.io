@@ -24,8 +24,6 @@ If you [search for "-sample"](https://github.com/okta?utf8=%E2%9C%93&q=-sample&t
 * [samples-js-angular-1](https://github.com/okta/samples-js-angular-1)
 * [samples-js-react](https://github.com/okta/samples-js-react)
 * [samples-nodejs-express-4](https://github.com/okta/samples-nodejs-express-4)
-* [samples-python-django](https://github.com/okta/samples-python-django)
-* [samples-python-flask](https://github.com/okta/samples-python-flask)
 * [samples-js-vue](https://github.com/okta/samples-js-vue)
 
 ## Try the Okta Framework Samples
