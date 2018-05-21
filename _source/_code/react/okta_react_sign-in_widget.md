@@ -122,7 +122,7 @@ export default withAuth(class Home extends Component {
     const button = this.state.authenticated ?
       <button onClick={this.props.auth.logout}>Logout</button> :
       <button onClick={this.props.auth.login}>Login</button>;
-    
+
     return (
       <div>
         <Link to='/'>Home</Link><br/>
@@ -184,15 +184,36 @@ export default withAuth(class Login extends Component {
   }
 
   onSuccess(res) {
-    return this.props.auth.redirect({
-      sessionToken: res.session.token
-    });
+    // For full documentation of the response see:
+    // https://github.com/okta/okta-signin-widget#rendereloptions-success-error
+
+    // The user has started the password recovery flow, and is on the confirmation
+    // screen letting them know that an email is on the way.
+    if (res.status === 'FORGOT_PASSWORD_EMAIL_SENT') {
+      // Any followup action you want to take,
+      return;
+    }
+
+    // The user has started the unlock account flow, and is on the confirmation
+    // screen letting them know that an email is on the way.
+    if (res.status === 'UNLOCK_ACCOUNT_EMAIL_SENT') {
+      // Any followup action you want to take
+      return;
+    }
+
+    // The user has successfully completed the authentication flow
+    // and got a session token in the response.
+    if (res.status === 'SUCCESS' && res.type === 'SESSION_SSO') {
+      return this.props.auth.redirect({
+        sessionToken: res.session.token
+      });
+    }
   }
 
   onError(err) {
     console.log('error logging in', err);
   }
-  
+
   render() {
     if (this.state.authenticated === null) return null;
     return this.state.authenticated ?
@@ -259,5 +280,5 @@ You have now successfully authenticated with Okta! Now what? With a user's `id_t
 
 Want to learn how to use the user's `access_token`? Check out our <a href='/quickstart/#/react/nodejs/generic' data-proofer-ignore>React Quickstart integrations</a> to learn about protecting routes on your server, validating the `access_token`, and more!
 
-## Support 
+## Support
 Have a question or see a bug? Post your question on [Okta Developer Forums](https://devforum.okta.com/).
