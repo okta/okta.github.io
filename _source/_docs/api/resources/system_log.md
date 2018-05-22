@@ -9,10 +9,10 @@ title: System Log
 
 The Okta System Log records system events related to your organization in order to provide an audit trail that can be used to understand platform activity and to diagnose problems.
 
-The Okta System Log API provides near real-time read-only access to your organization's system log and is the programmatic counterpart of the [System Log UI](https://help.okta.com/en/prod/Content/Topics/Reports/Reports_SysLog.htm).
+The Okta System Log API provides near real-time read-only access to your organization's system log and is the programmatic counterpart of the [System Log UI](https://help.okta.com/en/prod/Content/Topics/Reports/Reports_SysLog.htm). 
 
-Often the terms "event" and "log event" are used interchangeably. In the context of this API, an "event" is an occurrence of interest within the system and "log" or "log event" is the recorded fact.
-
+Often the terms "event" and "log event" are used interchangeably. In the context of this API, an "event" is an occurrence of interest within the system and "log" or "log event" is the recorded fact.  
+ 
 Notes on the System Log API:
 
 * It contains much more [structured data](#logevent-object) than the [Events API](/docs/api/resources/events#event-model).
@@ -22,7 +22,7 @@ Notes on the System Log API:
   * System monitoring.
   * Development debugging.
   * Event introspection and audit.
-* It is not intended to be used as a Database as a Service (DBaaS), or otherwise directly serve data to downstream consumers without an intermediate data store.
+* It is not intended to be used as a Database as a Service (DBaaS), or otherwise directly serve data to downstream consumers without an intermediate data store. 
 
 ## Getting Started
 
@@ -32,7 +32,7 @@ The System Log API has one endpoint:
 
 [![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/9cfb0dd661a5432a77c6){:target="_blank"}
 
-This collection resource is backed by a [LogEvent object](#logevent-object) model and associated [event types](#event-types).
+This collection resource is backed by a [LogEvent object](#logevent-object) model and associated [event types](#event-types). 
 
 See [Examples](#examples) for ways you can use the System Log API. For common use cases see [Useful System Log Queries](https://support.okta.com/help/Documentation/Knowledge_Article/Useful-System-Log-Queries).
 
@@ -518,19 +518,6 @@ The following sections outline the major event types captured by the system log.
 * `policy.evaluate_sign_on` provides context on the values used and evaluated in the context of the Okta sign on policy. For example, you can determine which network zones were matched for this event.
 * For `policy.lifecycle` and `policy.rule` events, the corresponding policy is listed in the target object.
 
-### System Events
-
-| Event              | Description                         |
-|:-------------------|:------------------------------------|
-| system.org.rate_limit.warning | An endpoint is near its [rate limit](/docs/api/getting_started/rate-limits).  |
-| system.org.rate_limit.violation | An endpoint has exceeded its [rate limit](/docs/api/getting_started/rate-limits). |
-
-Rate limit warnings are sent at different times, depending on the org type. For One App and Enterprise orgs, the warning is sent when the org is at 60% of its limit.
-
-> Note: For orgs created before 2018-05-17, the warning is sent at 90%.
-
-Rate limit violations are sent when a rate limit is exceeded.
-
 ### User Events
 
 | Event                     | Description                                               |
@@ -607,7 +594,7 @@ The table below summarizes the supported query parameters:
 
 ###### Expression Filter
 
-An expression filter is useful for performing structured queries where constraints on LogEvent attribute values can be explicitly targeted.
+An expression filter is useful for performing structured queries where constraints on LogEvent attribute values can be explicitly targeted.  
 
 The following expressions are supported for events with the `filter` query parameter:
 
@@ -825,4 +812,4 @@ curl -v -X GET \
 
 and retrieve the next page of events through the [`Link` response header](/docs/api/getting_started/design_principles#link-header) value with the `next` link relation. Continue this process until no events are returned.
 
-> Do not attempt to transfer data by manually paginating using `since` and `until` as this may lead to skipped or duplicated events. Instead, always follow the `next` links.
+> Do not attempt to transfer data by manually paginating using `since` and `until` as this may lead to skipped or duplicated events. Instead, always follow the `next` links. 
