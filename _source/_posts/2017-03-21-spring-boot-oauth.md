@@ -89,6 +89,10 @@ Create a `helloOAuth.groovy` file that uses Spring Security and its [OAuth 2.0 s
 
 ```groovy
 @Grab('spring-boot-starter-security')
+@Grab('org.springframework.security.oauth.boot:spring-security-oauth2-autoconfigure:2.0.1.RELEASE')
+
+import org.springframework.boot.autoconfigure.security.oauth2.client.EnableOAuth2Sso
+
 @RestController
 @EnableOAuth2Sso
 class Application {
@@ -150,6 +154,7 @@ In a [future tutorial](/blog/2017/09/19/build-a-secure-notes-application-with-ko
 
 **Changelog:**
 
+* May 24, 2018: Added `spring-security-oauth2-autoconfigure` dependency, which is necessary for Spring Boot 2.0. You can see the changes in this article in [this pull request], and changes in the example app in [okta-spring-boot-oauth-example#4](https://github.com/oktadeveloper/okta-spring-boot-oauth-example/pull/4).
 * Feb 2, 2018: Added more information to `application.yml` so it's easier to copy and paste.
 * Oct 20, 2017: Added missing `scope: openid profile email` to `application.yaml`. 
 * Oct 11, 2017: Updated instructions for the [Okta Developer Console](/blog/2017/09/25/all-new-developer-console).
