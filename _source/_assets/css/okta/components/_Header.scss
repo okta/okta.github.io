@@ -6,4 +6,50 @@
       fill: get-color('white');
     }
   }
+
+  &-media-assets {
+	box-shadow: rgba(0, 0, 0, 0.1) 0 0 35px;
+	background: #fff;
+	display: none;
+	position:absolute;
+	padding: 2em;
+	top: 90px;
+	left: 25px;
+	width: 300px;
+	opacity: 0;
+	transition: 0.4s opacity;
+
+	h4 {
+		color: $dark-cerulean;
+		font-size: 20px;
+	}
+
+	p {
+		color: $dark-cerulean;
+	}
+
+	.Button--red {
+		padding: 0 10px;
+		letter-spacing: 1px;
+	}
+
+	&:before {
+		border: solid transparent;
+		border-bottom-color: #fff;
+		border-width: 0 15px 15px 15px;
+		top: -25px;
+		content: '';
+		display: block;
+		left: 20%;
+		opacity: 1;
+		position: absolute;
+		transform: translate(-50%, 100%);
+
+	}
+
+	&.is-active{
+		opacity: 1;
+		display: block;
+	}
+  }
 }
