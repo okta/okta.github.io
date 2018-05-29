@@ -22,10 +22,16 @@
 	h4 {
 		color: $dark-cerulean;
 		font-size: 20px;
+		margin: 0;
 	}
 
 	p {
 		color: $dark-cerulean;
+		margin: 10px 0 20px;
+	}
+
+	p:last-of-type{
+		margin-bottom: 10px;
 	}
 
 	.Button--red {
