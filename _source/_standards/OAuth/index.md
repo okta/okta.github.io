@@ -179,7 +179,7 @@ The header only includes the following reserved claims:
 
 | Property     | Description                                                                      | DataType     | Example    |
 | :----------- | :------------------------------------------------------------------------------- | :----------- | :----------|
-| alg          | Identifies the digital signature algorithm used. This is always be RS256.        | String       | "RS256"    |
+| alg          | Identifies the digital signature algorithm used. This is always RS256.           | String       | "RS256"    |
 | kid          | Identifies the `public-key` used to sign the `access_token`. The corresponding `public-key` can be found as a part of the [metadata](/docs/api/resources/oidc#well-knownoauth-authorization-server) `jwks_uri` value. | String       | "a5dfwef1a-0ead3f5223_w1e" |
 
 #### Reserved claims in the payload section
