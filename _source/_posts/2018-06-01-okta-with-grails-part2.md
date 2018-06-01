@@ -2,11 +2,11 @@
 layout: blog_post
 title: "Build a Basic CRUD Application with Grails and Okta"
 author: moksamedia
-description: "This is a quick tutorial demonstrating how to add authentication to a Grails application with Okta."
+description: "This tutorial adds secure controllers with Grails, OAuth 2.0, and Okta"
 tags: [java, groovy, grails, spring, spring-boot, OIDC, OpenID Connect]
 tweets:
-    - "Add single sign on to your Grails application using Okta"
-    - "Use OAuth2 to connect your Grails app with Okta"
+    - "Add role based authorization to Grails application using Okta"
+    - "OAuth2 and role based authorization with Grails and Okta"
 ---
 
 Grails and Groovy can be a great alternative to Spring Boot, in some specific use cases. In this post, we’ll start with that basic Grails app that already has secure authentication via Okta, and add some additional features. In this tutorial you will:
@@ -26,17 +26,17 @@ If you’ve built a web or mobile app before, you know that all the user managem
 
 Okta is an API service that allows developers to create, edit, and securely store user accounts and user account data, and connect them with one or multiple applications. Our API enables you to:
 
-* [Authenticate](https://developer.okta.com/product/authentication/) and [authorize](https://developer.okta.com/product/authorization/) your users
+* [Authenticate](/product/authentication/) and [authorize](/product/authorization/) your users
 * Store data about your users
-* Perform password-based and [social login](https://developer.okta.com/authentication-guide/social-login/)
-* Secure your application with [multi-factor authentication](https://developer.okta.com/use_cases/mfa/)
-* And much more! Check out our [Product Documentation](https://developer.okta.com/documentation/)
+* Perform password-based and [social login](/authentication-guide/social-login/)
+* Secure your application with [multi-factor authentication](/use_cases/mfa/)
+* And much more! Check out our [Product Documentation](/documentation/)
 
-In short: we make [user account management](https://developer.okta.com/product/user-management/) a lot easier, more secure, and more scalable than what you’re probably used to.
+In short: we make [user account management](/product/user-management/) a lot easier, more secure, and more scalable than what you’re probably used to.
 
 This blog post focuses on developing a Grails app, with authentication via Okta, OpenID Connect, and OAuth 2.0. If you aren’t familiar with Grails, check out our [post about building a simple app to learn the basics](/blog/2018/04/19/okta-with-grails).
 
-Ready to get started? [Register for a free developer account](https://developer.okta.com/signup/)!
+Ready to get started? [Register for a free developer account](/signup/)!
 
 Before we dive into the meat of this tutorial and get started adding classes, I'd like to comment a little on the Object Oriented paradigm used by Grails, and after that, introduce GORM.
 
@@ -395,10 +395,10 @@ Congratulations!
 ## Learn More About Authentication with Okta
 
 So, you loved working with OAuth 2.0 and OpenID Connect in Grails, and you’re ready to see what else you can do with Okta, right? Well that’s great news as we have a ton of resources ready and waiting for you:
-* [Build Server Side Authentication in Grails with OAuth 2.0 and Okta](https://developer.okta.com/blog/2018/04/19/okta-with-grails)
-* [WebAuthn: A Developer’s Guide to What’s on the Horizon](https://developer.okta.com/blog/2018/04/17/webauthn-developers-guide-to-whats-on-the-horizon)
-* [Secure Server-to-Server Communication with Spring Boot and OAuth 2.0](https://developer.okta.com/blog/2018/04/02/client-creds-with-spring-boot)
-* [Secure a Spring Microservices Architecture with Spring Security and OAuth 2.0](https://developer.okta.com/blog/2018/04/02/client-creds-with-spring-boot)
-* [The Hitchhiker’s Guide to Testing Spring Boot APIs and Angular Components with Wiremock, Jest, Protractor, and Travis CI](https://developer.okta.com/blog/2018/05/02/testing-spring-boot-angular-components)
+* [Build Server Side Authentication in Grails with OAuth 2.0 and Okta](/blog/2018/04/19/okta-with-grails)
+* [WebAuthn: A Developer’s Guide to What’s on the Horizon](/blog/2018/04/17/webauthn-developers-guide-to-whats-on-the-horizon)
+* [Secure Server-to-Server Communication with Spring Boot and OAuth 2.0](/blog/2018/04/02/client-creds-with-spring-boot)
+* [Secure a Spring Microservices Architecture with Spring Security and OAuth 2.0](/blog/2018/04/02/client-creds-with-spring-boot)
+* [The Hitchhiker’s Guide to Testing Spring Boot APIs and Angular Components with Wiremock, Jest, Protractor, and Travis CI](/blog/2018/05/02/testing-spring-boot-angular-components)
 
 And as always, we’d love to know how this tutorial worked for you! Hit us up in the comments below, or on Twitter [@oktadev](https://twitter.com/oktadev).
