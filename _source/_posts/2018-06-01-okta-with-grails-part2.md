@@ -26,17 +26,17 @@ If you’ve built a web or mobile app before, you know that all the user managem
 
 Okta is an API service that allows developers to create, edit, and securely store user accounts and user account data, and connect them with one or multiple applications. Our API enables you to:
 
-* [Authenticate](/product/authentication/) and [authorize](/product/authorization/) your users
+* [Authenticate](https://developer.okta.com/product/authentication/) and [authorize](https://developer.okta.com/product/authorization/) your users
 * Store data about your users
 * Perform password-based and [social login](/authentication-guide/social-login/)
 * Secure your application with [multi-factor authentication](/use_cases/mfa/)
 * And much more! Check out our [Product Documentation](/documentation/)
 
-In short: we make [user account management](/product/user-management/) a lot easier, more secure, and more scalable than what you’re probably used to.
+In short: we make [user account management](https://developer.okta.com/product/user-management/) a lot easier, more secure, and more scalable than what you’re probably used to.
 
 This blog post focuses on developing a Grails app, with authentication via Okta, OpenID Connect, and OAuth 2.0. If you aren’t familiar with Grails, check out our [post about building a simple app to learn the basics](/blog/2018/04/19/okta-with-grails).
 
-Ready to get started? [Register for a free developer account](/signup/)!
+Ready to get started? [Register for a free developer account](https://developer.okta.com/signup/)!
 
 Before we dive into the meat of this tutorial and get started adding classes, I'd like to comment a little on the Object Oriented paradigm used by Grails, and after that, introduce GORM.
 
