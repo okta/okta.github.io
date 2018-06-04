@@ -15,6 +15,8 @@ What is Grails, what is Groovy, and why would we choose them over Spring Boot? I
 
 [Groovy](http://groovy-lang.org/) is a superset of Java that compiles down to JVM bytecode and interoperable with pure Java, but adds tons of great meta-programming and functional programming features, while also slashing the ceremony code that can plague pure java.
 
+**Update:** See [part two](/blog/2018/06/04/okta-with-grails-part2) of this series which flushes which adds additional controllers and authorization. 
+
 ## Why Use Grails Over Spring Boot?
 
 If Grails is built on Spring Boot, why not just use that? Good question! The answer depends on your goals and your background (ie, do you already know and love Spring?).
@@ -253,9 +255,9 @@ grails:
                     okta:
                         api_key: '<Okta Client ID>'         
                         api_secret: '<Okta Client Secret>'
-                        userInfoUrl: 'https://{yourOktaDomain}.com/oauth2/v1/userinfo'
-                        authorizeUrl: 'https://{yourOktaDomain}.com/oauth2/v1/authorize'
-                        tokenUrl: 'https://{yourOktaDomain}.com/oauth2/v1/token'
+                        userInfoUrl: 'https://{yourOktaDomain}.com/oauth2/default/v1/userinfo'
+                        authorizeUrl: 'https://{yourOktaDomain}.com/oauth2/default/v1/authorize'
+                        tokenUrl: 'https://{yourOktaDomain}.com/oauth2/default/v1/token'
                         scopes: 'email profile openid'
 ```
 
