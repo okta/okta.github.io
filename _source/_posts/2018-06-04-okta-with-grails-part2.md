@@ -343,7 +343,7 @@ And if you go to the list view, it will show the new accessory, with the associa
 
 The main logging config file is located at `grails-app/conf/logback.groovy`. 
 
-Logback a Java/Groovy logging framework that was created as an alternative to Log4j, and implements a whole host of stability and performance improvements. It also uses a Groovy file for configuration instead of an XML file.
+Logback is a Java/Groovy logging framework that was created as an alternative to Log4j, and implements a whole host of stability and performance improvements. It also uses a Groovy file for configuration instead of an XML file.
 
 To write log statements in the classes you can use the auto-injected `log` property, such as `log.info "hello world`.
 
