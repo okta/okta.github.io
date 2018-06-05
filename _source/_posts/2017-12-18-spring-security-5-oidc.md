@@ -337,7 +337,7 @@ Create a Thymeleaf index page at `src/main/resources/templates/index.html`. You 
 </html>
 ```
 
-Create another template at `src/main/resources/userinfo.html` to display the user's attributes.
+Create another template at `src/main/resources/templates/userinfo.html` to display the user's attributes.
 
 ```html
 <!DOCTYPE html>
