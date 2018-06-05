@@ -35,7 +35,7 @@ Now, let’s dive in!
 
 ## Your Project: Secure Authentication for Vanilla JavaScript
 
-You are going to create a calorie counter app using just JavaScript DOM APIs and a simple REST server. The goal is to create a web interface to track meals and display a running total of calories.  For the backend, you are going to use Express to your server static files and expose a few REST methods to manage meals.
+You are going to create a calorie counter app using just JavaScript DOM APIs and a simple REST server. The goal is to create a web interface to track meals and display a running total of calories.  For the backend, you are going to use Express to serve your static files and expose a few REST methods to manage meals.
 
 It's inevitable at some point you will have to integrate an external library or dependency in an app. And since every app needs authentication, I'll show you how to integrate [Okta's Sign-In Widget](https://developer.okta.com/code/javascript/okta_sign-in_widget) to authenticate a user and verify REST API requests are coming from an authenticated user.
 
@@ -173,7 +173,7 @@ There are other ways you can remove nodes with the DOM like `parent.removeChild(
 
 It's common for web apps to render items inside a loop.  Since you will be doing this in your app for rendering individual meals, I wanted to step you through a few ways you can accomplish this and showcase some hidden drawbacks to each approach.
 
-**Example 1:** Concat each list element to the parents `innerHTML` property:
+**Example 1:** Concat each list element to the parent's `innerHTML` property:
 
 ```js
 render () {
@@ -206,7 +206,7 @@ render () {
 }
 ```
 
-By using `appendChild()` we can achieve this which cuts down significantly on the processing. But, there is one minor drawback to this approach when rendering larger lists: reflows. Reflow is the technical term of the web browser process that computes the layout of the page. For every loop iteration, the browser has to recalculate the position of each appended element.
+Using `appendChild()` cuts down significantly on the processing. But, there is one minor drawback to this approach when rendering larger lists: reflows. Reflow is the technical term of the web browser process that computes the layout of the page. For every loop iteration, the browser has to recalculate the position of each appended element.
 
 A better way would be to batch all the new items into one operation, so the reflow only occurs a single time.
 
@@ -578,7 +578,7 @@ request (method, url, data = null) {
 
 With ES6, `async/await` brings you added control over asynchronous programming by leveraging promises but in a synchronous way. You can use `async/await` to make your code cleaner while still maintaining non-blocking operations.
 
-To illustrate this, I'll briefly show you how the evolution of asynchronous programming.
+To illustrate this, I'll briefly show you the evolution of asynchronous programming.
 
 To start, I call two asynchronous methods: `getUser` and `getPostsByUserId`.  Then I display the number of posts to the console.
 
