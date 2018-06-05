@@ -63,7 +63,7 @@ One of the most significant additions in Spring Boot 2.0 is a new reactive web f
 All of the examples above are written with Spring MVC, not WebFlux. This was primarily because I believe Spring MVC is the right choice for most developers that are just starting out. It's also because Spring Security's OAuth support didn't work with Spring WebFlux. That is, until last week!
 
 <div style="max-width: 500px; margin: 0 auto">
-<blockquote class="twitter-tweet" data-lang="en"><p lang="en" dir="ltr">Stayed up a little too late tonight, but I think <a href="https://twitter.com/starbuxman?ref_src=twsrc%5Etfw">@starbuxman</a> and <a href="https://twitter.com/mraible?ref_src=twsrc%5Etfw">@mraible</a> will approve. Spring Security now has WebFlux + OAuth2 log in <a href="https://t.co/42f11y979n">https://t.co/42f11y979n</a></p>&mdash; Rob Winch (@rob_winch) <a href="https://twitter.com/rob_winch/status/994871039669792768?ref_src=twsrc%5Etfw">May 11, 2018</a></blockquote>
+<blockquote class="twitter-tweet" data-lang="en"><p lang="en" dir="ltr">Stayed up a little too late tonight, but I think <a href="https://twitter.com/starbuxman?ref_src=twsrc%5Etfw">@starbuxman</a> and <a href="https://twitter.com/mraible?ref_src=twsrc%5Etfw">@mraible</a> will approve. Spring Security now has WebFlux + OAuth2 log in <a href="https://github.com/spring-projects/spring-security/tree/master/samples/boot/oauth2/oauth2login-webflux">https://t.co/42f11y979n</a></p>&mdash; Rob Winch (@rob_winch) <a href="https://twitter.com/rob_winch/status/994871039669792768?ref_src=twsrc%5Etfw">May 11, 2018</a></blockquote>
 <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
 </div>
 

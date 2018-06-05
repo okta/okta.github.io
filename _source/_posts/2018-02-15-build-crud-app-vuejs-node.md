@@ -188,7 +188,7 @@ The final step of Okta's authentication flow is redirecting the user back to you
 }
 ```
 
-You also need to lock down protected routes from being access by unauthenticated users. This is accomplished by implementing a [navigation guard](https://router.vuejs.org/en/advanced/navigation-guards). As the name suggests, [navigation guards](https://router.vuejs.org/en/advanced/navigation-guards) are primarily used to guard navigations either by redirecting or canceling.
+You also need to lock down protected routes from being access by unauthenticated users. This is accomplished by implementing a [navigation guard](https://router.vuejs.org/guide/advanced/navigation-guards.html). As the name suggests, navigation guards are primarily used to guard navigations either by redirecting or canceling.
 
 The SDK comes with the method `auth.authRedirectGuard()` that checks matched routes' metadata for the key `requiresAuth` and redirects the user to the authentication flow if they are not authenticated.
 
