@@ -5,8 +5,8 @@ author: bkelley
 description: "This article shows how to secure a Node API with an OAuth 2.0 client credentials flow."
 tags: [node, jwt, express, javascript, authentication]
 tweets:
- - "OAuth 2.0's Client Credentials flow makes it possible to securely communicate between applications. Learn how to use it in a @nodejs architecture today! #oauth2 #nodejs #expressjs"
- - "Node + @expressjs are a match made in heaven! Did you know you can securely communicate between @nodejs apps using #oauth2 and client credentials? Learn how today in this excellent tutorial. #nodejs #expressjs"
+ - "OAuth 2.0's Client Credentials flow makes it possible to securely communicate between applications. Learn how to use it in a @nodejs architecture today! #oauth2 #expressjs"
+ - "Node + @expressjs are a match made in heaven! Did you know you can securely communicate between @nodejs apps using #oauth2 and client credentials? Learn how today in this excellent tutorial."
 ---
 
 Securing server-to-server API services can be tricky. OAuth 2.0 is an excellent way to offload user authentication to another service, but what if there is no user to authenticate? In this article, I'll show you how you can use OAuth 2.0 outside the context of a user, in what is also known as the Client Credentials Flow.
@@ -295,7 +295,7 @@ app.get('/register/:label', async (req, res) => {
 })
 ```
 
-You can now go to <http://localhost:3000/register/Awesome+App+Name> (in your browser is fine) to create a new client. The first time you go there, it should give you a client id and secret, and remind you where to request a token. You can replace the client id and secret from before with this new one in `.env` and re-run `test.js` to see that this client also works now.
+You can now go to `http://localhost:3000/register/Awesome+App+Name` (in your browser is fine) to create a new client. The first time you go there, it should give you a client id and secret, and remind you where to request a token. You can replace the client id and secret from before with this new one in `.env` and re-run `test.js` to see that this client also works now.
 
 If you sign back into your Okta Developer Console, you'll see that "Awesome App Name" has been added as an Application.
 
