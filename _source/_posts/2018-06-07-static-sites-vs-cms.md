@@ -34,15 +34,15 @@ This is **much** faster and simpler.
 
 ## Static Sites are Secure
 
-CMS systems (especially those built on PHP like Wordpress and Drupal) have abysmal security records. The quality of their codebase is so low (I'm generalizing here, but please bear with me), and the size of their projects is so large, that there are often many security issues associated with running these CMS systems.
+CMS systems (especially those built on PHP like Wordpress and Drupal) have abysmal security records. It can be incredibly difficult to maintain a CMS, keep it up-to-date, and constantly apply security patches to ensure it won't be easily abused by attackers. Unless you're an expert in the CMS and spend all your time managing it, security issues are bound to crop up.
 
 Google "Drupal hack" or "Wordpress hack" to see what I mean. Millions of Drupal and Wordpress sites are compromised *all the time*. Here are some examples:
 
-Millions of Websites Hit by Drupal Hack (BBC)
-Drupal Patches Critical Password Reset Vulnerability
-Drupal SQL Injection Vulnerability Leave Millions of Websites Open to Hackers
-Your Drupal site got hacked. Now what?
-etc...
+- Millions of Websites Hit by Drupal Hack (BBC)
+- Drupal Patches Critical Password Reset Vulnerability
+- Drupal SQL Injection Vulnerability Leave Millions of Websites Open to Hackers
+- Your Drupal site got hacked. Now what?
+- Etc...
 
 There are hundreds of tools that anyone can easily download and run which attempt to compromise existing Wordpress and Drupal sites automatically, by trying all previously known vulnerabilities against the CMS systems, looking for holes.
 
@@ -67,10 +67,10 @@ Most developers enjoy working with static site generators, and are much happier 
 
 For more info: google "Drupal sucks" and "Wordpress sucks". Here are some examples:
 
-Top 6 Reasons Drupal Sucks
-Why a Drupal Developer Stopped Using Drupal
-Why I Hate Drupal
-Etc…
+- Top 6 Reasons Drupal Sucks
+- Why a Drupal Developer Stopped Using Drupal
+- Why I Hate Drupal
+- Etc…
 
 **PS**: Don’t even bother looking at [HackerNews](https://news.ycombinator.com/) comments about Drupal. They are savage.
 
@@ -80,9 +80,9 @@ CMS systems like Wordpress and Drupal have their own permission systems. You can
 
 This is also true regarding static site generators if they are built use Git and GitHub, which has a very sophisticated security model that allows very specific controls around who can do what, and when.  You can have project admins with unlimited powers, read-only editors who can submit suggested changes to articles pending review, and editors who can review and release changes to the website. Furthermore, most companies already use GitHub to manage employee access to projects, so this fits perfectly into existing workflows.
 
-This model works well in terms of editing privileges for any large editorial team. Furthermore, this process has been used successfully even for **enormous** websites and teams. For instance: healthcare.gov (the website that powers all health plan selections and receives millions of visitors all the time) is built 100% with Jekyll with tremendous success: https://developmentseed.org/blog/2013/10/24/its-called-jekyll/
+This model works well in terms of editing privileges for any large editorial team. Furthermore, this process has been used successfully even for **enormous** websites and teams. For instance: healthcare.gov (the website that powers all health plan selections and receives millions of visitors all the time) is built 100% with Jekyll with tremendous success: [https://developmentseed.org/blog/2013/10/24/its-called-jekyll/](https://developmentseed.org/blog/2013/10/24/its-called-jekyll/).
 
-**Fun Fact**: Remember how much backlash heathcare.gov got when it first came out? The main reason for the really poor initial launch was that they used a CMS system which was unable to withstand user demand and caused a majority of their issues. See: http://www.newsweek.com/inside-healthcaregovs-failure-1449
+**Fun Fact**: Remember how much backlash heathcare.gov got when it first came out? The main reason for the really poor initial launch was that they used a CMS system which was unable to withstand user demand and caused a majority of their issues. See: [http://www.newsweek.com/inside-healthcaregovs-failure-1449](http://www.newsweek.com/inside-healthcaregovs-failure-1449).
 
 After saving the healthcare.gov project by switching to Jekyll, the new standards group inside the government team started rolling out Jekyll as a new standard for modern, secure, government websites.
 
@@ -173,12 +173,12 @@ Another huge part of customization is SEO. This is always a concern. For instanc
 
 These things are significantly more powerful using static sites as you can automate these items and codify rules around them. You don’t need to install third-party plugins and learn new flows: you can codify this behavior and instantly enforce it across the entire project.
 
-In regards to more advanced SEO editing (for instance, using HTML5 medata (which Google includes in their search algorithm rankings): a static site generator is your only choice. CMS systems like Wordpress and Drupal don’t support this level of customization at all (uinless you're willing to manually edit each and every article's raw HTML), because you’re essentially controlling the output of the program directly. With static site generators, however, there are numerous ways to accomplish this, to ensure that things like:
+In regards to more advanced SEO editing (for instance, using HTML5 medata which Google includes in their search algorithm rankings): a static site generator is your only choice. CMS systems like Wordpress and Drupal don’t support this level of customization at all (unless you're willing to manually edit each and every article's raw HTML), because you’re essentially controlling the output of the program directly. With static site generators, however, there are numerous ways to accomplish this, to ensure that things like:
 
-Dates are correctly formatted and marked up with HTML5.
-Time ranges are correctly formatted and marked up with HTML5.
-Assets that need to be preloaded or prefetched can be included to speed up rendering of complex code samples / media.
-Etc.
+- Dates are correctly formatted and marked up with HTML5.
+- Time ranges are correctly formatted and marked up with HTML5.
+- Assets that need to be preloaded or prefetched can be included to speed up rendering of complex code samples / media.
+- Etc.
 
 Overall: there is nothing more customizable / powerful than a static site generator for contributors or editors to use.
 
@@ -210,9 +210,9 @@ Compare this with static site generators like Jekyll and Hugo: your content is s
 
 One of the major reasons companies prefer static site generators is reliability. Using a static site generator like Jekyll or Hugo allows you do things like:
 
-Automatically test articles for broken URLs.
-Automatically find broken images and image links.
-Look for broken style rules and obvious UI errors.
+- Automatically test articles for broken URLs.
+- Automatically find broken images and image links.
+- Look for broken style rules and obvious UI errors.
 
 Doing these things with a CMS system requires heavy customization and is very brittle.
 
@@ -234,14 +234,8 @@ Using a static site generator provides numerous benefits over what any CMS can p
 - The enable anyone in the organization to contribute to the website, blog, documentation. You can leverage this to more easily expand contribution efforts.
 - If you decide to move to another platform in the future, migrating away from a static site generator is *much* easier than anything else
 
-If this post was helpful, you might really enjoy taking a look at our service,
-Okta: https://developer.okta.com/
+If this post was helpful, you might really enjoy taking a look at our service, Okta: [https://developer.okta.com](/).
 
-We're an API company that stores user accounts and handles things like
-authentication, authorization, social login, single sign-on, etc. It's easy to
-get started and we have an **epic** free plan for developers (like you). If you want
-to give it a go, you can create a free account here: https://developer.okta.com/signup/
+We're an API company that stores user accounts and handles things like authentication, authorization, social login, single sign-on, etc. It's easy to get started and we have an **epic** free plan for developers (like you). If you want to give it a go, you can create a free account here: [https://developer.okta.com/signup](https://developer.okta.com/signup). 
 
-And just in case you're wondering, the answer is **yes**. The blog you're
-currently reading is powered by a static site generator (and open source on
-GitHub). We're currently built using Jekyll but are transitioning to Hugo =)
+And just in case you're wondering, the answer is **yes**. The blog you're currently reading is powered by a static site generator (and open source on GitHub). We're currently built using Jekyll but are transitioning to Hugo. =)
