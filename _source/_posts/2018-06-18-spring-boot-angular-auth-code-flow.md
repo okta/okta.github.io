@@ -1058,7 +1058,7 @@ Now when you start the app from your the command line, or your IDE, you'll see t
 Run your app with `mvn -Pprod` and you'll see that "prod" is used instead. If you build your app with the production profile, you can still override the active profile property too. For example:
 
 ```
-java -jar target/*.jar --spring-active-profile=dev
+java -jar -Dspring.profiles.active=dev target/*.jar
 ```
 
 ## Push to Production on Cloud Foundry
