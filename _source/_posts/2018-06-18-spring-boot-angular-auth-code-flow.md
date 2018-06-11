@@ -438,9 +438,19 @@ security:
             user-authorization-uri: https://{yourOktaDomain}.com/oauth2/default/v1/authorize
             client-id: {yourClientId}
             client-secret: {yourClientSecret}
-            scope: openid profile email
         resource:
             user-info-uri: https://{yourOktaDomain}.com/oauth2/default/v1/userinfo
+```
+
+```
+okta.client.token=XXX
+okta.client.orgUrl=https://{yourOktaDomain}.com
+security.oauth2.client.access-token-uri: https://{yourOktaDomain}.com/oauth2/default/v1/token
+security.oauth2.client.user-authorization-uri: https://{yourOktaDomain}.com/oauth2/default/v1/authorize
+security.oauth2.client.client-id: {yourClientId}
+security.oauth2.client.client-secret: {yourClientSecret}
+security.oauth2.client.scope: openid profile email
+security.oauth2.resource.user-info-uri: https://{yourOktaDomain}.com/oauth2/default/v1/userinfo
 ```
 
 You'll notice there's variables that need to be substituted for everything to work. That's where Okta comes in!
@@ -808,7 +818,7 @@ public class OAuth2Configuration {
                     String referrer = request.getHeader("referer");
                     if (!StringUtils.isEmpty(referrer) &&
                         request.getSession().getAttribute(SAVED_LOGIN_ORIGIN_URI) == null) {
-                        log.debug("Saving login origin URI: {}", referrer);
+                        log.info("Saving login origin URI: {}", referrer);
                         request.getSession().setAttribute(SAVED_LOGIN_ORIGIN_URI, referrer);
                     }
                 }
@@ -915,7 +925,7 @@ public class OAuth2AuthenticationSuccessHandler implements AuthenticationSuccess
         Object savedReferrer = request.getSession().getAttribute(SAVED_LOGIN_ORIGIN_URI);
         if (savedReferrer != null) {
             String savedLoginOrigin = request.getSession().getAttribute(SAVED_LOGIN_ORIGIN_URI).toString();
-            log.debug("Redirecting to saved login origin URI: {}", savedLoginOrigin);
+            log.info("Redirecting to saved login origin URI: {}", savedLoginOrigin);
             request.getSession().removeAttribute(SAVED_LOGIN_ORIGIN_URI);
             return savedLoginOrigin;
         } else {
@@ -931,6 +941,124 @@ public class OAuth2AuthenticationSuccessHandler implements AuthenticationSuccess
         session.removeAttribute(WebAttributes.AUTHENTICATION_EXCEPTION);
     }
 }
+```
+
+### Make Spring Profiles work with Maven
+
+To make Spring profiles (a runtime configuration) work with Maven profiles (a build time configuration), you need to add the currently configured profile as a key and replaceable value in `application.yml`:
+
+```yaml
+spring:
+  profiles:
+    active: @spring.profiles.active@
+```
+
+Then add the Maven Resources Plugin in `<build>` section of your `pom.xml` to filter when copying, which will replace the value.
+
+```
+<plugin>
+    <artifactId>maven-resources-plugin</artifactId>
+    <executions>
+        <execution>
+            <id>default-resources</id>
+            <phase>validate</phase>
+            <goals>
+                <goal>copy-resources</goal>
+            </goals>
+            <configuration>
+                <outputDirectory>target/classes</outputDirectory>
+                <resources>
+                    <resource>
+                        <directory>src/main/resources</directory>
+                        <filtering>true</filtering>
+                    </resource>
+                </resources>
+            </configuration>
+        </execution>
+    </executions>
+</plugin>
+```
+
+To make the "dev" profile the default, you can update `HoldingsApiController` with the following code. Hat tip to JHipster, who uses a similar configuration to print out URLs and profiles.
+
+```java
+package com.okta.developer.holdingsapi;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.core.env.Environment;
+
+import java.net.InetAddress;
+import java.util.HashMap;
+import java.util.Map;
+
+@SpringBootApplication
+public class HoldingsApiApplication {
+    private static final Logger log = LoggerFactory.getLogger(HoldingsApiApplication.class);
+
+    public static void main(String[] args) {
+        SpringApplication app = new SpringApplication(HoldingsApiApplication.class);
+        addDefaultProfile(app);
+        Environment env = app.run(args).getEnvironment();
+        String protocol = "http";
+        if (env.getProperty("server.ssl.key-store") != null) {
+            protocol = "https";
+        }
+        String hostAddress = "localhost";
+        try {
+            hostAddress = InetAddress.getLocalHost().getHostAddress();
+        } catch (Exception e) {
+            log.warn("The host name could not be determined, using `localhost` as fallback");
+        }
+        log.info("\n----------------------------------------------------------\n\t" +
+                        "Application '{}' is running! Access URLs:\n\t" +
+                        "Local: \t\t{}://localhost:{}\n\t" +
+                        "External: \t{}://{}:{}\n\t" +
+                        "Profile(s): \t{}\n----------------------------------------------------------",
+                env.getProperty("spring.application.name", "Crypto Wealth Tracker"),
+                protocol,
+                env.getProperty("server.port", "8080"),
+                protocol,
+                hostAddress,
+                env.getProperty("server.port", "8080"),
+                env.getActiveProfiles());
+    }
+
+    /**
+     * Set a default to use when no profile is configured.
+     *
+     * @param app the Spring application
+     */
+    private static void addDefaultProfile(SpringApplication app) {
+        Map<String, Object> defProperties = new HashMap<>();
+        /*
+         * The default profile to use when no other profiles are defined
+         * This cannot be set in the <code>application.yml</code> file.
+         * See https://github.com/spring-projects/spring-boot/issues/1219
+         */
+        defProperties.put("spring.profiles.default", "dev");
+        app.setDefaultProperties(defProperties);
+    }
+}
+```
+
+Now when you start the app from your the command line, or your IDE, you'll see that "dev" is the default.
+
+```
+----------------------------------------------------------
+	Application 'Crypto Wealth Tracker' is running! Access URLs:
+	Local: 		http://localhost:8080
+	External: 	http://198.105.254.104:8080
+	Profile(s): [dev]
+----------------------------------------------------------
+```
+
+Run your app with `mvn -Pprod` and you'll see that "prod" is used instead. If you build your app with the production profile, you can still override the active profile property too. For example:
+
+```
+java -jar target/*.jar --spring-active-profile=dev
 ```
 
 ## Push to Production on Cloud Foundry
@@ -950,7 +1078,11 @@ Run `cf apps` to see the URL for the app after you deploy it. You might have to 
 
 **NOTE:** You **will** need to update your Okta app to add a redirect URI for the deployed URL (e.g. `https://holdings-app.cfapps.io/login`).
 
-If you still have `XXX` for your API token in `application.yml`, you'll need to set an environment variable for that using `cf set-env holdings-app OKTA_CLIENT_TOKEN "$OKTA_CLIENT_TOKEN"`.
+If you still have `XXX` for your API token in `application.yml`, you'll need to set an environment variable for that:
+
+```
+cf set-env holdings-app OKTA_CLIENT_TOKEN "$OKTA_CLIENT_TOKEN"
+```
 
 If you want to force HTTPS on this app, you can change your `SecurityConfiguration` to require a secure channel when the `x-forwarded-proto` header exists. Thanks for [the tip](https://stackoverflow.com/a/50304752/65681) [Stefan Falk](https://stackoverflow.com/users/826983/stefan-falk)!
 
