@@ -2,11 +2,11 @@
 layout: blog_post
 title: "Secure Your Spring Boot Application with Multi-Factor Authentication"
 author: moksamedia
-description: "This post walks through creating a Spring Boot app and enables multi-factor authentication with Okta."
+description: "This post walks through creating a Spring Boot app and enabling multi-factor authentication with Okta."
 tags: [java, spring, spring-boot, OIDC, OpenID Connect, mfa]
 tweets:
  - "Add Multi-Factor Authentication to your Spring Boot app with Okta, no code needed:"
- - "Enable Multi-Factor Authentication for your Spring Boot app with OAuth 2.0 and Okta:"
+ - "Don't let hackers steal your credentials! Enable MFA for your Spring Boot app with OAuth 2.0 and Okta:"
 ---
 
 OAuth 2.0 has quickly become an industry standard for third party authentication for web applications. It's a super secure strategy, when implemented properly, but getting it right can be hard. Fortunately, you don't have to go it alone. Okta has done it for you. This is one place where it's definitely not worth re-inventing the wheel. 
@@ -19,7 +19,7 @@ In this tutorial, we are going to show you how easy Okta makes setting up a Spri
 
 ## Why Okta?
 
-Well, we’re biased, we know… But, we think Okta makes [identity management](https://developer.okta.com/product/user-management/) easier, more secure, and more scalable than what you’re used to. Okta is an API service that allows you to create, edit, and securely store user accounts and user account data, and connect them with one or more applications. Our API enables you to:
+Well, we’re biased, we know... But, we think Okta makes [identity management](https://developer.okta.com/product/user-management/) easier, more secure, and more scalable than what you’re used to. Okta is an API service that allows you to create, edit, and securely store user accounts and user account data, and connect them with one or more applications. Our API enables you to:
 
 * [Authenticate](https://developer.okta.com/product/authentication/) and [authorize](https://developer.okta.com/product/authorization/) your users
 * Store data about your users
@@ -33,7 +33,7 @@ Well, we’re biased, we know… But, we think Okta makes [identity management](
 
 Spring used to have a reputation among developers for being obscure, complex, and incredibly powerful. Wandering into its depths was a bit like peering into the opening of a dark cave, wondering what pitfalls and dead ends awaited you as you valiantly fought to extract its many rewards from its labyrinthine depths. Occasionally you ran into seasoned Spring developers that, armed with their hard-won wisdom, gave you bits of wisdom and put you on the right path, saving you from wandering amid the ruins of dependency management and conflicting versions and annotations and XML syntax forever.
 
-Obviously, that wasn't ideal. Over the past few years, Spring has really worked hard to make life easier for developers. They moved to YML files and gradle as alternatives to Maven and XML. They created the Spring Boot framework, a web application framework that gets a server up and running in only a few lines of code. They also created things like the Spring Boot CLI and a handy Spring Initializer website.
+Obviously, that wasn't ideal. Over the past few years, Spring has really worked hard to make life easier for developers. They moved to YAML files and Gradle as alternatives to Maven and XML. They created the Spring Boot framework, a web application framework that gets a server up and running in only a few lines of code. They also created things like the Spring Boot CLI and a handy Spring Initializer website.
 
 The Spring Boot CLI is great, and Okta already has a fantastic tutorial showing how that works. Check out Matt Raible's [tutorial](/blog/2017/03/21/spring-boot-oauth).
 
@@ -41,17 +41,15 @@ In this tutorial, as an alternative to the CLI, we're going to use the [Spring I
 
 Open the Spring Initializer link and do the following:
 * Change **Maven Project** to **Gradle Project**
-* Change the **Group** to "com.okta.springmfa"
-* Change the **Artifact** to "spring-mfa"
-* Add two dependencies: "Security" and "Web"
+* Change the **Group** to `com.okta.springmfa`
+* Change the **Artifact** to `spring-mfa`
+* Add two dependencies: `Security` and `Web`
 
 {% img blog/mfa-in-spring-boot/spring-initializer.png alt:"Create a project with Spring Initializer" width:"600" %}{: .center-image }
 
-Click **Generate Project** and download the tutorial. Copy the folder to your preferred location and open it in your IDE or editor of choice.
+Click **Generate Project** and download the project. Copy the folder to your preferred location and open it in your IDE or editor of choice.
 
-If you want to, you can go ahead and run the app from the command line now. From the project directory, use the command `./gradlew bootRun`. 
-
-This will launch the application at `http://localhost:8080`
+If you want to, you can go ahead and run the app from the command line now. From the project directory, use the command `./gradlew bootRun`. This will launch the application at `http://localhost:8080`.
 
 If you do this, you will see a very basic login screen. The username for this defaults to "user" and the password will be buried in the terminal output. Look for a line like the following:
 
@@ -95,19 +93,19 @@ Hello user
 
 Pretty exciting, I know. 
 
-If you had any idea how much work it used to take to get a servlet up and running, you'd be excited. We had to code uphill both ways in the rain and snow and wade through endless fields of XML just to get tomcat running.
+If you had any idea how much work it used to take to get a servlet up and running, you'd be excited. We had to code uphill both ways in the rain and snow and wade through endless fields of XML just to get Tomcat running.
 
 ## Add Okta OAuth 2.0 Support to Your Spring Boot App
 
 Here's the exciting part. Now we're going to add Okta Auth 2.0 support. It's unlikely you've ever had to implement the OAuth spec manually - but if you had, you're realize how freaking easy and cool Okta makes it.
 
-To do this, we first need to configure out Okta application and  then we'll need to update our application.
+To do this, we first need to configure out Okta application and then we'll need to update our application.
 
-This tutorial assumes that you already have a free `developer.okta.com` account. If not, please [sign up for one!](https://developer.okta.com/signup/)
+This tutorial assumes that you already have a free developer.okta.com account. If not, please [sign up for one!](https://developer.okta.com/signup/)
 
 ## Get the Default Authorization Server Settings
 
-You will need your default authorization server settings. From the top menu in the `developer.okta.com` dashboard, go to **API** -> **Authorization Servers** and click on the **default** server.
+You will need your default authorization server settings. From the top menu in the developer.okta.com dashboard, go to **API** -> **Authorization Servers** and click on the **default** server.
 
 {% img blog/mfa-in-spring-boot/authorization-server.png alt:"Authorization Server screenshot" width:"600" %}{: .center-image }
 
@@ -171,7 +169,6 @@ security:
             # From Authorization Server's metadata  
             accessTokenUri: https://{yourOktaDomain}.com/oauth2/default/v1/token
             userAuthorizationUri: https://{yourOktaDomain}.com/oauth2/default/v1/authorize
-            clientAuthenticationScheme: form
             scope: openid profile email
         resource:
             # from your Auth Server's metadata, check .well-known/openid-configuration if not in .well-known/oauth-authorization-server
@@ -188,13 +185,13 @@ At this point, you should be able to go to `http://localhost:8080` and log in us
 Hello <Your Name>
 ```
 
-If you want to see the whole flow in action, sign out of the Okta dashboard and try again. You will be redirected to the Okta login screen before being sent back to the root mapping in the `MFARestController`
+If you want to see the whole flow in action, sign out of the Okta dashboard (or use an incognito window) and try again. You will be redirected to the Okta login screen before being sent back to the root mapping in the `MFARestController`
 
 ## Add SMS-Based Multi-Factor Authentication
 
 Now for the really exciting part! Let's add a second factor to our authentication.
 
-Sign back into your `developer.okta.com` dashboard. The MFA options are only available in the Classic UI (for free accounts). Switch to the Classic UI by hovering over the **Developer Console** menu in the upper left corner and click on the **Classic UI** button.
+Sign back into your developer.okta.com dashboard. The MFA options are only available in the Classic UI (for free accounts). Switch to the Classic UI by hovering over the **Developer Console** menu in the upper left corner and click on the **Classic UI** button.
 
 {% img blog/mfa-in-spring-boot/select-classic-ui.png alt:"Switch to classic UI" width:"600" %}{: .center-image }
 
@@ -214,7 +211,7 @@ We need to add a rule that tells Okta when to use MFA. Click **Add Rule**. Give 
 
 ## Give Your New Spring Boot App a Whirl!
 
-That's it. Log out of `developer.okta.com` and restart your Spring Boot app from the command line if it's still running.
+That's it. Log out of developer.okta.com and restart your Spring Boot app from the command line if it's still running.
 
 This time when you go to `http://localhost:8080` you'll be directed to the Okta SMS Authentication page!
 
