@@ -1528,4 +1528,4 @@ If you'd like to learn more about topics like Spring Boot, Angular, React, and J
 
 **Changelog:**
 
-* Jun 13, 2018: Updated to use replace [serve](https://www.npmjs.com/package/serve) with node-http-server and fixed typo in Travis script. See the code changes in the [example app on GitHub](https://github.com/oktadeveloper/okta-ionic-crypto-java-sdk-example/pull/12). You can see changes to this article in [okta/okta.github.io#1794](https://github.com/okta/okta.github.io/pull/1794).
+* Jun 13, 2018: Updated to use replace [serve](https://www.npmjs.com/package/serve) with node-http-server and fixed typo in Travis script. See the code changes in the [example app on GitHub](https://github.com/oktadeveloper/okta-ionic-crypto-java-sdk-example/pull/12). You can see changes to this article in [okta/okta.github.io#2123](https://github.com/okta/okta.github.io/pull/2123).
