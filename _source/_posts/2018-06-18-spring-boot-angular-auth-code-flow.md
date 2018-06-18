@@ -1,6 +1,6 @@
 ---
 layout: blog_post
-title: "Deploy Your Secure Spring Boot and Angular PWA as a Single Artifact"
+title: "Deploy Your Secure Spring Boot + Angular PWA as a Single Artifact"
 author: mraible
 description: "This post shows you how to package your Spring Boot and Angular app into a single JAR artifact. It also shows how to switch from using OAuth's implicit flow to authorization code flow."
 tags: [spring-boot, angular, oauth, authorization code flow]
@@ -9,21 +9,19 @@ tweets:
  - "Building an @angular SPA and authentication with @oauth_2's implicit flow is cool, but it's even cooler (and more secure) to use authorization code flow. Learn how in this post from @mraible →"
 ---
 
-I've written several posts on this blog that show you how to develop a SPA (single-page application) that talks to a Spring Boot API. In almost all of them, I've used OAuth's implicit flow and built, tested, and deployed them as separate applications. IMHO, this is the way many applications (outside of the Java world) are built and deployed.
+I've written several posts on this blog that show you how to develop an Angular SPA (single-page application) that talks to a Spring Boot API. In almost all of them, I've used OAuth 2.0's implicit flow and built, tested, and deployed them as separate applications. IMHO, this is the way many applications (outside of the Java world) are built and deployed.
 
-What if you could combine the two applications for production, and still get all the benefits of separate applications during development? That's what I'm here to show you today! You'll learn how to take an existing Angular PWA (progressive web app) and a Spring Boot API, combine them with the Maven Frontend Plugin and switch from using OAuth's implicit flow to its gold standard: authorization code flow.
+What if you could combine the two applications for production, and still get all the benefits of separate applications during development? That's what I'm here to show you today! You'll learn how to take an existing Angular PWA (progressive web app) and a Spring Boot API, combine them with the Maven Frontend Plugin and switch from using OAuth 2.0's implicit flow to its gold standard: authorization code flow.
 
-I've written many posts on this blog that show how to add authentication to a SPA (single-page application). In most cases, these examples use OAuth's implicit flow. This works great for SPAs that don't have a backend, but if you have a backend, authorization code flow can be much more secure.
-
+I've written many posts on this blog that show how to add authentication to a SPA (single-page application). In most cases, these examples use OAuth 2.0's implicit flow. This works great for SPAs that don't have a backend, but if you have a backend, authorization code flow can be much more secure.
 ## Get the Source for Angular PWA and Spring Boot API
-
 To begin, please clone the following project to your hard drive.
 
 ```
 git clone https://github.com/oktadeveloper/okta-ionic-crypto-java-sdk-example.git
 ```
 
-This project was featured in [The Hitchhiker's Guide to Testing Spring Boot APIs and Angular Components with WireMock, Jest, Protractor, and Travis CI](/blog/2018/05/02/testing-spring-boot-angular-components). It contains an Ionic/Angular frontend and a Spring Boot API that allows you to track your Crypto Currency Holdings. You enter in your cryptocurrency holdings, pricing data is fetched from [Cryptonator](https://api.cryptonator.com/api), and data is stored in Okta's custom profile attributes. You can read how everything was developed and secured in the following blog posts:
+This project was featured in [The Hitchhiker's Guide to Testing Spring Boot APIs and Angular Components with WireMock, Jest, Protractor, and Travis CI](/blog/2018/05/02/testing-spring-boot-angular-components). It contains an Ionic/Angular frontend and a Spring Boot API that allows you to track your cryptocurrency holdings. You enter in your cryptocurrency holdings, pricing data is fetched from [Cryptonator](https://api.cryptonator.com/api), and data is stored in Okta's custom profile attributes. You can read how everything was developed and secured in the following blog posts:
 
 * [Protect Your Cryptocurrency Wealth Tracking PWA with Okta](/blog/2018/01/18/cryptocurrency-pwa-secured-by-okta)
 * [Use Okta (Instead of Local Storage) to Store Your User’s Data Securely](/blog/2018/01/23/replace-local-storage-with-okta-profile-attributes)
@@ -40,7 +38,7 @@ To begin, open the cloned project in your favorite IDE and get ready to rip out 
 
 This dependency has an `OAuthModule` and an `OAuthService` that are used in the client to 1) authenticate the user, and 2) determine if the user is authenticated. You'll replace this with a `UserProvider` that handles login and determining authenticated status.
 
-Create `UserProvider` by running `ionic g provider user`, then populate `crypto-pwa/src/providers/user/user.ts` with the following code. You might notice the `login()` method redirects to the server for authentication now. The server will not only perform an authorization code flow, but it will also establish a session (tracked with cookies), send a CSRF cookie in the header (that Angular will handle automatically), and redirect back to the client URL.
+Create `UserProvider` by running `ionic g provider user` (in the `crypto-pwa` directory), then populate `crypto-pwa/src/providers/user/user.ts` with the following code. You might notice the `login()` method redirects to the server for authentication now. The server will not only perform an authorization code flow, but it will also establish a session (tracked with cookies), send a CSRF cookie in the header (that Angular will handle automatically), and redirect back to the client URL.
 
 ```ts
 import { HttpClient } from '@angular/common/http';
@@ -120,8 +118,6 @@ export class MyApp {
     userProvider.getUser().subscribe((user) => {
       if (user == null) {
         this.rootPage = 'LoginPage';
-      } else {
-        this.rootPage = 'HomePage';
       }
     });
   }
@@ -339,7 +335,7 @@ Then update `crypto-pwa/src/pages/login/login.ts` to use `UserProvider` to log i
 
 ```ts
 import { Component } from '@angular/core';
-import { IonicPage } from 'ionic-angular';
+import { App, IonicPage } from 'ionic-angular';
 import { UserProvider } from '../../providers/user/user';
 
 @IonicPage({
@@ -351,7 +347,12 @@ import { UserProvider } from '../../providers/user/user';
 })
 export class LoginPage {
 
-  constructor(private userProvider: UserProvider) {
+  constructor(private userProvider: UserProvider, private app: App) {
+    userProvider.getUser().subscribe((user) => {
+      if (user !== null) {
+        this.app.getRootNavs()[0].setRoot('HomePage');
+      }
+    });
   }
 
   login() {
@@ -360,7 +361,7 @@ export class LoginPage {
 }
 ```
 
-The last step to modifying the client is to update `crypto-pwa/ionic.config.json` to have proxy information for the API.
+To make it so you can talk to the API when using `ionic serve` modify `crypto-pwa/ionic.config.json` to have proxy information for the API.
 
 ```json
 {
@@ -377,9 +378,22 @@ The last step to modifying the client is to update `crypto-pwa/ionic.config.json
 }
 ```
 
-Then run `npm i` to install all the dependencies required by the client.
+The last -- **important** -- step is to change `crypto-pwa/src/service-worker.js` so it checks the network before its local cache for `/login` and calls to `/api`.
 
-## Configure Spring Boot API to use Spring Security OAuth
+```js
+// attempt to use network for /login and /api calls
+self.toolbox.router.any('/login', self.toolbox.networkFirst);
+self.toolbox.router.any('/api/*', self.toolbox.networkFirst);
+
+// dynamically cache any other local assets
+self.toolbox.router.any('/*', self.toolbox.fastest);
+```
+
+If you forget this step, you'll get an error when logging in every-so-often. You can recognize it because it'll have something like `/error?code=vNA4kwBK8D-pEqOeAGSJ&state=Qg5wPe` in the URL.
+
+Before updating the API project, run `npm i` to install all the dependencies required by the client.
+
+## Upgrade Spring Boot API to use Spring Boot 2.0
 
 This first thing you'll want to do to the API project is the upgrade to Spring Boot 2.0. Open `holdings-api/pom.xml` and change its parent to use version `2.0.2.RELEASE`.
 
@@ -398,7 +412,17 @@ Change the Okta version property to use the latest `0.5.0` release too:
 <okta.version>0.5.0</okta.version>
 ```
 
-Spring Boot 2.0 uses a new [autoconfiguration](https://github.com/spring-projects/spring-security-oauth2-boot) module; you'll need to remove the one that works with Spring Boot 1.x. Remove the `dependencyManagement` section:
+Spring Boot 2.0 uses a new [autoconfiguration](https://github.com/spring-projects/spring-security-oauth2-boot) module; add it to the dependencies section.
+
+```xml
+<dependency>
+    <groupId>org.springframework.security.oauth.boot</groupId>
+    <artifactId>spring-security-oauth2-autoconfigure</artifactId>
+    <version>2.0.1.RELEASE</version>
+</dependency>
+```
+
+You can remove the `dependencyManagement` section since Spring Boot 2.0 doesn't need it.
 
 ```xml
 <dependencyManagement>
@@ -410,16 +434,6 @@ Spring Boot 2.0 uses a new [autoconfiguration](https://github.com/spring-project
         </dependency>
     </dependencies>
 </dependencyManagement>
-```
-
-And add the autoconfigure dependency:
-
-```xml
-<dependency>
-    <groupId>org.springframework.security.oauth.boot</groupId>
-    <artifactId>spring-security-oauth2-autoconfigure</artifactId>
-    <version>2.0.1.RELEASE</version>
-</dependency>
 ```
 
 Due to a [bug in Okta's Spring Boot Starter](https://github.com/okta/okta-spring-boot/issues/66) where the `Principal` doesn't resolve with Spring Boot 2.0, you'll need to change your configuration to use Spring Security's properties instead of Okta's.
@@ -442,17 +456,6 @@ security:
             user-info-uri: https://{yourOktaDomain}.com/oauth2/default/v1/userinfo
 ```
 
-```
-okta.client.token=XXX
-okta.client.orgUrl=https://{yourOktaDomain}.com
-security.oauth2.client.access-token-uri: https://{yourOktaDomain}.com/oauth2/default/v1/token
-security.oauth2.client.user-authorization-uri: https://{yourOktaDomain}.com/oauth2/default/v1/authorize
-security.oauth2.client.client-id: {yourClientId}
-security.oauth2.client.client-secret: {yourClientSecret}
-security.oauth2.client.scope: openid profile email
-security.oauth2.resource.user-info-uri: https://{yourOktaDomain}.com/oauth2/default/v1/userinfo
-```
-
 You'll notice there are variables that need to be substituted for everything to work. That's where Okta comes in!
 
 ## What is Okta?
@@ -467,7 +470,7 @@ In short, we make [identity management](https://developer.okta.com/product/user-
 
 Are you sold? [Register for a forever-free developer account](https://developer.okta.com/signup/), and when you’re done, come on back so we can learn more about building a secure app with Angular and Spring Boot 2.0!
 
-## Create a Web Application in Okta
+## Create a Web Application in Okta for Your Spring Boot + Angular PWA
 
 After you've completed the setup process, log in to your account and navigate to **Applications** > **Add Application**. Click **Web** and **Next**. On the next page, enter the following values and click **Done**.
 
@@ -477,13 +480,16 @@ After you've completed the setup process, log in to your account and navigate to
 
 Take note of the clientId and client secret values as you'll need these to configure your Spring Boot apps.
 
-You need to add a `roles` claim to your ID Token, so your groups in Okta are translated to Spring Security authorities. In your Okta developer console, navigate to **API** > **Authorization Servers**, click the **Authorization Servers** tab and edit the default one. Click the **Claims** tab and **Add Claim**. Name it "roles" and include it in the ID Token. Set the value type to "Groups" and set the filter to be a Regex of `.*`.
+You need to add a `roles` claim to your ID token, if you want your groups in Okta to be translated to Spring Security authorities. In your Okta developer console, navigate to **API** > **Authorization Servers**, and  click the default one. Click the **Claims** tab and **Add Claim**. Name it "groups" and include it in the ID token. Set the value type to "Groups" and set the filter to be a Regex of `.*`.
 
 ## Adjust Java Code to Resolve Principal
 
-I mentioned earlier that there's a bug in Okta's Spring Boot Starter. The proble is that it doesn't resolve `java.security.Principal` like it does for Spring Boot 1.5.x. To fix this, you'll need to update `HoldingsController.java` to extract the `sub` to call Okta's API. Add a `getUser(Principal principal)` method to this class.
+I mentioned earlier that there's [a bug](https://github.com/okta/okta-spring-boot/issues/66) in Okta's Spring Boot Starter. The problem is that it doesn't resolve `java.security.Principal` the same way does for Spring Boot 1.5.x. Until our team can squash this one, there’s a simple fix you can deploy: Just update `HoldingsController.java` to extract the `sub` to call Okta's API. Add a `getUser(Principal principal)` method to this class.
 
 ```java
+import org.springframework.security.oauth2.provider.OAuth2Authentication;
+...
+
 @SuppressWarnings("unchecked")
 private User getUser(Principal principal) {
     if (principal instanceof OAuth2Authentication) {
@@ -498,7 +504,7 @@ private User getUser(Principal principal) {
 
 Then change the two instances of `client.getUser(principal.getName())` to be `getUser(principal)`.
 
-## Create a UserController
+## Create a UserController for Your Spring Boot + Angular PWA
 
 Create a `UserController.java` file in the same package as `HoldingsController.java`. Populate it with the code below to return an empty string when the user isn't authenticated, and to allow tests to pass still.
 
@@ -572,7 +578,10 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @RunWith(SpringRunner.class)
-@SpringBootTest(classes = HoldingsApiApplication.class)
+@SpringBootTest(classes = HoldingsApiApplication.class,
+                properties = {
+                    "okta.client.token=FAKE_TEST_TOKEN",
+                    "okta.client.orgUrl=https://example.com/not-used"})
 public class UserControllerTest {
 
     private MockMvc restUserMockMvc;
@@ -627,7 +636,7 @@ public class UserControllerTest {
 
 Previously, the Spring Boot API was a resource server. Now it acts as the gateway to our Angular app. Remove `@EnableResourceServer` and the `simpleCorsFilter` bean from `HoldingsApiApplication`.
 
-Create a `SpringConfiguration.java` file in the same directory. This configuration enables OAuth login, allows CSRF to be read from cookies (for Angular), and makes `/api/user` public.
+Create a `SecurityConfiguration.java` file in the same directory. This configuration enables OAuth login, allows CSRF to be read from cookies (for Angular), and makes `/api/user` public.
 
 ```java
 package com.okta.developer.holdingsapi;
@@ -646,7 +655,7 @@ import org.springframework.security.web.csrf.CookieCsrfTokenRepository;
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     @Override
-    public void configure(WebSecurity web) throws Exception {
+    public void configure(WebSecurity web) {
         web.ignoring().antMatchers("/**/*.{js,html,css}");
     }
 
@@ -765,9 +774,9 @@ Then add `dev` and `prod` profiles where `dev` is the default. The prod profile 
 </profiles>
 ```
 
-## Enable Redirect Back to Client
+## Enable Redirect in Spring Boot Back to Your Angular Client
 
-The one missing piece at this point is the server will not redirect back to the client when you're running `ionic serve` and try to log in. To fix that, create an `OAuth2Configuration.java` class (alongside the rest). This class grabs the referrer header (yes, it's spelled wrong), saves it as a session variable, then uses a success handler to redirect back to the referrer. You'll notice that this class only activates when using the "dev" profile (triggered by `@Profile("dev")`).
+The one missing piece at this point is the server will not redirect back to the client when you're running `ionic serve` and try to log in. To fix that, create an `OAuth2Configuration.java` class (alongside the other classes you created). This class grabs the `referer` header (yes, it's spelled wrong), saves it as a session variable, then uses a success handler to redirect back to the referrer. You'll notice that this class only activates when using the "dev" profile (triggered by `@Profile("dev")`).
 
 ```java
 package com.okta.developer.holdingsapi;
@@ -953,9 +962,9 @@ spring:
     active: @spring.profiles.active@
 ```
 
-Then add the Maven Resources Plugin in `<build>` section of your `pom.xml` to filter when copying, which will replace the value.
+Then add the Maven Resources Plugin in the main `<build>` section of your `pom.xml` to filter when copying, which will replace the value.
 
-```
+```xml
 <plugin>
     <artifactId>maven-resources-plugin</artifactId>
     <executions>
@@ -979,7 +988,7 @@ Then add the Maven Resources Plugin in `<build>` section of your `pom.xml` to fi
 </plugin>
 ```
 
-To make the "dev" profile the default, you can update `HoldingsApiController` with the following code. Hat tip to JHipster, who uses a similar configuration to print out URLs and profiles.
+To make the "dev" profile the default, you can update `HoldingsApiController` with the following code. Hat tip to [JHipster](https://www.jhipster.tech/), who uses a similar configuration to print out URLs and profiles.
 
 ```java
 package com.okta.developer.holdingsapi;
@@ -1049,9 +1058,9 @@ Now when you start the app from your the command line, or your IDE, you'll see t
 ```
 ----------------------------------------------------------
     Application 'Crypto Wealth Tracker' is running! Access URLs:
-    Local:         http://localhost:8080
+    Local:        http://localhost:8080
     External:     http://198.105.254.104:8080
-    Profile(s): [dev]
+    Profile(s):   [dev]
 ----------------------------------------------------------
 ```
 
@@ -1061,13 +1070,27 @@ Run your app with `mvn -Pprod`, and you'll see that "prod" is used instead. If y
 java -jar -Dspring.profiles.active=dev target/*.jar
 ```
 
-## Push to Production on Cloud Foundry
+To make sure everything works on your machine, run the following command in the `holdings-api` directory.
 
-After making all these changes, you can build your application using `mvn package -Pprod` and deploy it as a single artifact! You can still develop as you did before, starting the Spring Boot app and the Ionic client separately.
+```
+./mvnw
+```
+
+Then in the `crypto-pwa` directory, run:
+
+```
+ionic serve
+```
+
+You should be able to log in and add/view cryptocurrency holdings.
+
+## Push Your Spring Boot + Angular App to Production on Cloud Foundry
+
+After making all these changes, you can build your application using `mvn package -Pprod` and deploy it as a single artifact! As shown above, can still develop as you did before, starting the Spring Boot app and the Ionic client separately.
 
 Let’s look at how to deploy it on Cloud Foundry with [Pivotal Web Services](http://run.pivotal.io/). The instructions below assume you have an account and have logged in (using `cf login`).
 
-It's rather simple really:
+It's rather simple really. In the `holdings-api` directory, run:
 
 ```
 mvn package -Pprod
@@ -1084,7 +1107,7 @@ If you still have `XXX` for your API token in `application.yml`, you'll need to 
 cf set-env holdings-app OKTA_CLIENT_TOKEN "$OKTA_CLIENT_TOKEN"
 ```
 
-If you want to force HTTPS on this app, you can change your `SecurityConfiguration` to require a secure channel when the `x-forwarded-proto` header exists. Thanks for [the tip](https://stackoverflow.com/a/50304752/65681) [Stefan Falk](https://stackoverflow.com/users/826983/stefan-falk)!
+If you want to force HTTPS on this app, you can update your `SecurityConfiguration` to require a secure channel when the `x-forwarded-proto` header exists. Thanks for [the tip](https://stackoverflow.com/a/50304752/65681) [Stefan Falk](https://stackoverflow.com/users/826983/stefan-falk)!
 
 ```java
 @Override
@@ -1102,15 +1125,18 @@ protected void configure(HttpSecurity http) throws Exception {
 }
 ```
 
-That's it! Witness the glory of your awesome Angular app and Spring Boot API that uses OAuth's more secure flow: authorization code flow.
+That's it! Witness the glory of your awesome Angular app and Spring Boot API that uses OAuth 2.0's more secure flow: authorization code flow.
 
 {% img blog/spring-boot-angular-auth-code-flow/login-with-okta.png alt:"Login with Okta" width:"800" %}{: .center-image }
 
 {% img blog/spring-boot-angular-auth-code-flow/okta-sign-in.png alt:"Okta Sign-In" width:"800" %}{: .center-image }
 
+
 {% img blog/spring-boot-angular-auth-code-flow/welcome.png alt:"Welcome" width:"800" %}{: .center-image }
 
-### Verify PWA with Lighthouse
+**NOTE:** This app supports logout, but it only logs out from Spring Security, not from Okta. This is normal. If you sign in to a website with Facebook or Google, you don't expect to be logged out of them when you logout of the app. When I first implemented this in JHipster, there was [a lot of debate](https://github.com/jhipster/generator-jhipster/issues/6555).
+
+### Verify Your Angular PWA with Lighthouse
 
 After deploying this app, I used [Lighthouse](https://developers.google.com/web/tools/lighthouse/) to see what the PWA score was. Unfortunately, it dropped from 100 (in my [previous post](/blog/2018/01/18/cryptocurrency-pwa-secured-by-okta)) to 91.
 
@@ -1120,15 +1146,128 @@ The reason from the report: your page loads too slowly and is not interactive wi
 
 I imagine performance could be improved if you rendered the Angular app server-side initially. This should be possible with Simon Wächter's [Angular Universal for Java](https://github.com/swaechter/angularj-universal). I haven't tried it myself.
 
+## Logout with Okta
+
+I mentioned earlier that invalidating the session in Spring Boot does not log you out from Okta. I decided to try and fix this and found some interesting information. First of all, I discovered that Okta doesn't support [backchannel logout](http://openid.net/specs/openid-connect-backchannel-1_0.html), which is an OIDC spec that's still in draft form. It **does** have a [logout API](https://developer.okta.com/docs/api/resources/oidc#logout) though.
+
+To implement it, modify `UserController.java` and its `logout()` method to send a logout URL and the ID token back to the client.
+
+```java
+package com.okta.developer.holdingsapi;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.autoconfigure.security.oauth2.resource.UserInfoRestTemplateFactory;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.oauth2.client.OAuth2RestTemplate;
+import org.springframework.security.oauth2.provider.OAuth2Authentication;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import javax.servlet.http.HttpServletRequest;
+import java.security.Principal;
+import java.util.HashMap;
+import java.util.Map;
+
+@RestController
+public class UserController {
+    private final UserInfoRestTemplateFactory templateFactory;
+
+    @Value("${security.oauth2.client.access-token-uri}")
+    String accessTokenUri;
+
+    public UserController(UserInfoRestTemplateFactory templateFactory) {
+        this.templateFactory = templateFactory;
+    }
+
+    @GetMapping("/api/user")
+    @SuppressWarnings("unchecked")
+    public ResponseEntity<?> getUser(Principal principal) {
+        if (principal == null) {
+            return new ResponseEntity<>("", HttpStatus.OK);
+        }
+        if (principal instanceof OAuth2Authentication) {
+            OAuth2Authentication authentication = (OAuth2Authentication) principal;
+            Map<String, Object> details = (Map<String, Object>) authentication.getUserAuthentication().getDetails();
+            return ResponseEntity.ok().body(details);
+        } else {
+            return ResponseEntity.ok().body(principal.getName());
+        }
+    }
+
+    @PostMapping("/api/logout")
+    public ResponseEntity<?> logout(HttpServletRequest request, Authentication authentication) {
+        // send logout URL to client so they can initiate logout - doesn't work from the server side
+
+        OAuth2RestTemplate oauth2RestTemplate = this.templateFactory.getUserInfoRestTemplate();
+        String idToken = (String) oauth2RestTemplate.getAccessToken().getAdditionalInformation().get("id_token");
+
+        // logout URI can be derived from accessTokenUri
+        String logoutUrl = accessTokenUri.replace("token", "logout");
+
+        Map<String, String> logoutDetails = new HashMap<>();
+        logoutDetails.put("logoutUrl", logoutUrl);
+        logoutDetails.put("idToken", idToken);
+        request.getSession(false).invalidate();
+        return ResponseEntity.ok().body(logoutDetails);
+    }
+}
+```
+
+Then replace the `logout()` method in `crypto-pwa/src/pages/home/home.ts` with the following:
+
+```ts
+ logout() {
+    this.userProvider.logout().subscribe((response: any) => {
+      if (response.logoutUrl) {
+        location.href = response.logoutUrl + "?id_token_hint=" + response.idToken + "&post_logout_redirect_uri=" + window.location.origin;
+      } else {
+        this.app.getRootNavs()[0].setRoot('LoginPage')
+      }
+    });
+  }
+```
+
+You'll need to add `App` as a constructor dependency for everything to compile.
+
+```ts
+import { NavController, IonicPage, App } from 'ionic-angular';
+...
+constructor(private navCtrl: NavController, private holdingsProvider: HoldingsProvider,
+            private userProvider: UserProvider, private app: App) {
+}
+```
+
+You'll also need to add `http://localhost:8100` and `http://localhost:8080` to your Okta app's **Logout redirect URIs** in order for this to work.
+
+### Fix Travis Tests
+
+Changing from implicit flow and a resource server to authorization code flow broke a lot of the tests that Brian Demers and I wrote for the [Hitchhiker's Guide to Testing](https://developer.okta.com/blog/2018/05/02/testing-spring-boot-angular-components). We spent many hours fixing them and finally got everything to pass.
+
+I won't bore you with the details, but you can look at the pull requests we created for the Angular client and the Spring Boot API.
+
+* [Fix Protractor tests](https://github.com/oktadeveloper/okta-spring-boot-angular-auth-code-flow-example/pull/4)
+* [Fix Java integration tests](https://github.com/oktadeveloper/okta-spring-boot-angular-auth-code-flow-example/pull/5)
+
+I would like to point out that the [combined PR](https://github.com/oktadeveloper/okta-spring-boot-angular-auth-code-flow-example/pull/7) had 42 commits! Sometimes things are just meant to be. 😁
+
 ## Learn More about Spring Boot and Angular
 
-I hope you've enjoyed this (lengthy) tour of how to switch from using OAuth's implicit flow with Angular to authorization code flow with Spring Security and Spring Boot.
+I hope you've enjoyed this (lengthy) tour of how to switch from using OAuth 2.0's implicit flow with Angular to authorization code flow with Spring Security and Spring Boot.
 
-[JHipster](https://www.jhipster.tech) uses this same setup for its OAuth/OIDC support. I helped write it, that's how I know! I especially like how Spring Boot and Spring Security allow you to switch OAuth providers simply by overriding environment variables.
+You can find the source code for this completed application on GitHub at https://github.com/oktadeveloper/okta-spring-boot-angular-auth-code-flow-example.
 
-If you want to learn more about Spring Boot and Angular, as well as OAuth, check out the following posts.
+[JHipster](https://www.jhipster.tech) uses this same setup for its OAuth 2.0/OIDC support. I [helped write it](/blog/2017/10/20/oidc-with-jhipster), that's how I know! I especially like how Spring Boot and Spring Security allow you to switch OAuth providers simply by overriding environment variables.
 
-* [Angular 6: What's New, and Why Upgrade](/blog/2018/05/09/upgrade-to-angular-6)
+If you want to learn more about Spring Boot and Angular, as well as OAuth 2.0, check out the following posts.
+
+* [Protect Your Cryptocurrency Wealth Tracking PWA with Okta](/blog/2018/01/18/cryptocurrency-pwa-secured-by-okta)
+* [Use Okta (Instead of Local Storage) to Store Your User’s Data Securely](/blog/2018/01/23/replace-local-storage-with-okta-profile-attributes)
+* [The Hitchhiker's Guide to Testing Spring Boot APIs and Angular Components with WireMock, Jest, Protractor, and Travis CI](/blog/2018/05/02/testing-spring-boot-angular-components)
 * [Build a Basic CRUD App with Angular 5.0 and Spring Boot 2.0](/blog/2017/12/04/basic-crud-angular-and-spring-boot)
 * [What is the OAuth 2.0 Implicit Grant Type?](/blog/2018/05/24/what-is-the-oauth2-implicit-grant-type)
 
