@@ -997,13 +997,20 @@ Note that policy settings are included only for those factors which have been en
 
 Parameter | Description | Data Type | Required
 | --- | --- | --- | ---
+duo | Duo Security | <a href="#PolicyFactorObject">Policy MFA Factor Object</a> | No
+fido_u2f | FIDO U2F | <a href="#PolicyFactorObject">Policy MFA Factor Object</a> | No
+fido_webauthn | Windows Hello | <a href="#PolicyFactorObject">Policy MFA Factor Object</a> | No
 google_otp | Google Authenticator | <a href="#PolicyFactorObject">Policy MFA Factor Object</a> | No
+okta_call | Okta Voice Call | <a href="#PolicyFactorObject">Policy MFA Factor Object</a> | No
+okta_email | Okta Email | <a href="#PolicyFactorObject">Policy MFA Factor Object</a> | No
 okta_otp | Okta Verify TOTP | <a href="#PolicyFactorObject">Policy MFA Factor Object</a> | No
+okta_password | Okta Password | <a href="#PolicyFactorObject">Policy MFA Factor Object</a> | No
 okta_push | Okta Verify Push | <a href="#PolicyFactorObject">Policy MFA Factor Object</a> | No
 okta_question | Okta Security Question | <a href="#PolicyFactorObject">Policy MFA Factor Object</a> | No
 okta_sms | Okta SMS | <a href="#PolicyFactorObject">Policy MFA Factor Object</a> | No
 rsa_token | RSA Token | <a href="#PolicyFactorObject">Policy MFA Factor Object</a> | No
-symantec_vip | Symantic VIP | <a href="#PolicyFactorObject">Policy MFA Factor Object</a> | No
+symantec_vip | Symantec VIP | <a href="#PolicyFactorObject">Policy MFA Factor Object</a> | No
+yubikey_token | Yubikey Token | <a href="#PolicyFactorObject">Policy MFA Factor Object</a> | No
 
 #### Policy MFA Factor Object
 {: #PolicyFactorObject }

@@ -1177,7 +1177,7 @@ curl -v -X POST \
       "application_type": "native",
       "tos_uri": "https://example.com/client/tos",
       "policy_uri":"https://example.com/client/policy",
-      "consent_method": "REQUIRED"
+      "consent_method": "TRUSTED"
     }
   },
   "_links": {

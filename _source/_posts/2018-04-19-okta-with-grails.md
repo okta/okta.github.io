@@ -175,7 +175,7 @@ You’ll need to copy your Client ID and Client Secret to a safe place for later
 
 {% img blog/okta-with-grails/client-credentials.png alt:"Remember your credentials" width:"600" %}{: .center-image }
 
-That's it for Okta setup for our purposes. You can certainly dig MUCH deeper into the OAuth rabbit hole with tons of configuration options. [Take a look here to get started](https://developer.okta.com/standards/OAuth/).
+That's it for Okta setup for our purposes. You can certainly dig MUCH deeper into the OAuth rabbit hole with tons of configuration options. [Take a look here to get started](https://developer.okta.com/authentication-guide/implementing-authentication/).
 
 ## Dive Back Into Grails!
 

@@ -29,14 +29,14 @@ You set up your OpenID Connect application inside the Okta Developer Console:
 
 ### 2. Using the Authorization Code Flow with PKCE
 
-Just like with the regular authorization code flow, you start by making a request to your authorization server’s `/authorize` endpoint. However, in this instance you will also have to pass along a code challenge.
+Just like with the regular authorization code flow, you start by making a request to your authorization server's `/authorize` endpoint. However, in this instance you will also have to pass along a code challenge.
 
 Your first step is to generate a code verifier and challenge:
 
 * Code verifier: Random URL-safe string with a minimum length of 43 characters.
 * Code challenge: Base64 URL-encoded SHA-256 hash of the code verifier.
 
-You’ll need to add code in your native app to create the code verifier and code challenge. For examples of code that handles this, see [below](#examples).
+You'll need to add code in your native app to create the code verifier and code challenge. For examples of code that handles this, see [below](#examples).
 
 The PKCE generator code will create output like this:
 
@@ -47,7 +47,7 @@ The PKCE generator code will create output like this:
 }
 ```
 
-The `code_challenge` is a Base64-URL-encoded string of the SHA256 hash of the `code_verifier`. Your app will save the `code_verifier` for later, and send the `code_challenge` along with the authorization request to your authorization server’s `/authorize` URL.
+The `code_challenge` is a Base64-URL-encoded string of the SHA256 hash of the `code_verifier`. Your app will save the `code_verifier` for later, and send the `code_challenge` along with the authorization request to your authorization server's `/authorize` URL.
 
 If you are using the default Okta authorization server, then your request URL would look something like this:
 
@@ -62,7 +62,7 @@ Note the parameters that are being passed:
 
 - `client_id` matches the Client ID of your Okta OAuth application that you created above. You can find it at the bottom of your application's General tab.
 - `response_type` is `code`, indicating that we are using the authorization code grant type.
-- `scope` is `openid`, which means that the `/token` endpoint will return an ID token. For more information about scopes, see [here](/standards/OIDC/#scopes).
+- `scope` is `openid`, which means that the `/token` endpoint will return an ID token. For more information about scopes, see [here](/docs/api/resources/oidc#scopes).
 - `redirect_uri` is the callback location where the user-agent will be directed to along with the `code`. This must match one of the "Login redirect URIs" you specified when you were creating your Okta application in Step 1.
 - `state` is an arbitrary alphanumeric string that the authorization server will reproduce when redirecting the user-agent back to the client. This is used to help prevent cross-site request forgery.
 - `code_challenge_method` is the hash method used to generate the challenge, which will always be `S256`.
@@ -103,7 +103,7 @@ Note the parameters that are being passed:
 - `code` is the authorization code that you got from the `/authorize` endpoint.
 - `code_verifier` is the PKCE code verifier that your app generated at the beginning of this flow.
 
-For more information on these parameters, see the [OAuth 2.0 API reference](/docs/api/resources/oidc#token).
+For more information on these parameters, see the [OIDC & OAuth 2.0 API reference](/docs/api/resources/oidc#token).
 
 If the code is still valid, and the code verifier matches, your application will receive back access and ID tokens:
 

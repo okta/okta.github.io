@@ -19,6 +19,7 @@ class DocsPage extends BasePage {
     this.$$getLabel = $$('.api-uri-get');
     this.$$postLabel = $$('.api-uri-post');
     this.$$deleteLabel = $$('.api-uri-delete');
+    this.$$promoBannerLabel = $$('.DocsPromoBanner');
 
     this.setPageLoad(this.$pageLoad);
   }
@@ -74,6 +75,10 @@ class DocsPage extends BasePage {
 
   hasDeleteTags() {
     return this.hasElements(this.$$deleteLabel);
+  }
+
+  hasPromoBanner() {
+    return this.hasElements(this.$$promoBannerLabel);
   }
 }
 

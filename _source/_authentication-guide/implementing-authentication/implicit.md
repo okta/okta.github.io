@@ -42,7 +42,7 @@ Note the parameters that are being passed:
 
 - `client_id` matches the Client ID of your Okta OAuth application that you created above. You can find it at the bottom of your application's General tab.
 - `response_type` is `token`. It could also be `id_token` or both.
-- `scope` is `openid` which is required, though additional scopes can be requested. For more information about scopes, see [here](/standards/OIDC/#scopes).
+- `scope` is `openid` which is required, though additional scopes can be requested. For more information about scopes, see [here](/docs/api/resources/oidc#scopes).
 - `redirect_uri` is the callback location where the user-agent will be directed to along with the `access_token`. This must match one of the "Login redirect URIs" you specified when you were creating your Okta application in Step 1.
 - `state` is an arbitrary alphanumeric string that the authorization server will reproduce when redirecting the user-agent back to the client. This is used to help prevent cross-site request forgery.
 

@@ -357,7 +357,7 @@ I'll walk you through them briefly:
   determine what data about your user is returned to you once the user has been
   signed in. The values here provide basic user information for your website. To
   view a complete list of available scopes, check out [this
-  page](/standards/OIDC/#scope-dependent-claims-not-always-returned).
+  page](/docs/api/resources/oidc#scope-dependent-claims-not-always-returned).
 
 Now that you've configured OIDC for your website, it's time to hook up the
 routes:

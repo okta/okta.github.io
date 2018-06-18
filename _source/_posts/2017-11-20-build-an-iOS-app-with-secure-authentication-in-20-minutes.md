@@ -18,7 +18,7 @@ In essence:
 
 Once completed, the real challenge begins – retaining those users. Mostly that means getting users to log in to your app easily, and then never have to do it again. With Okta, you can effortlessly integrate authentication into your iOS application with the [Okta AppAuth SDK](https://github.com/okta/okta-sdk-appauth-ios).
 
-This post will show you how to add [OpenID Connect](https://developer.okta.com/standards/OIDC/) for user Authentication into your native iOS application, using Swift.
+This post will show you how to add [OpenID Connect](https://developer.okta.com/docs/api/resources/oidc) for user Authentication into your native iOS application, using Swift.
 
 This post also assumes you have the latest version of [XCode](https://itunes.apple.com/us/app/xcode/id497799835?mt=12), along with Swift 3.x+.
 

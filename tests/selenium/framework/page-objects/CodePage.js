@@ -9,6 +9,7 @@ class CodePage extends BasePage {
     this.$pageLoad = $('.Row');
     this.$quickStart = element(by.cssContainingText('span', 'Authentication Quick Start Guide'));
     this.$sampleApp = element(by.cssContainingText('span', 'Sample App'));
+    this.$$promoBannerLabel = $$('.DocsPromoBanner');
     this.setPageLoad(this.$pageLoad);
   }
 
@@ -18,6 +19,10 @@ class CodePage extends BasePage {
 
   hasSampleApp() {
     return this.$sampleApp.isPresent();
+  }
+
+  hasPromoBanner() {
+    return this.hasElements(this.$$promoBannerLabel);
   }
 }
 module.exports = CodePage;

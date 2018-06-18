@@ -6,7 +6,7 @@ category: management
 
 # Authorization Servers
 
-Authorization Servers generate OAuth 2.0 and OpenID Connect tokens, including access tokens and ID tokens. The Okta Management API gives you the ability to configure and manage authorization servers and the security policies that are attached to them. The following configuration operations can be found on this page:
+Authorization Servers generate OAuth 2.0 and OpenID Connect tokens, including access tokens and ID tokens. The Okta Management API gives you the ability to configure and manage authorization servers and the security policies that are attached to them. The following configuration operations can be found on this page: 
 
 * [Authorization Server Operations](#authorization-server-operations)
 * [Policy Operations](#policy-operations)
@@ -544,7 +544,8 @@ curl -v -X POST \
 -H "Authorization: SSWS ${api_token}" \
 -d '{
   "description": "Drive car",
-  "name": "car:drive"
+  "name": "car:drive",
+  "consent": "REQUIRED"
 }' "https://{yourOktaDomain}.com/api/v1/authorizationServers/ausnsopoM6vBRB3PD0g3/scopes"
 ~~~
 
@@ -579,6 +580,7 @@ curl -v -X PUT \
 -d '{
   "description": "Order car",
   "name": "car:order",
+  "consent": "REQUIRED",
   "metadataPublish": "ALL_CLIENTS"
 }' "https://{yourOktaDomain}.com/api/v1/authorizationServers/ausnsopoM6vBRB3PD0g3/scopes/scpanemfdtktNn7w10h7"
 ~~~
@@ -763,7 +765,7 @@ curl -v -X PUT \
      "system": "false",
      "conditions": {
        "scopes": [
-         "car:drive"
+          "car:drive"
          ]
        }
     }'
@@ -1346,7 +1348,7 @@ Token limits:
 
 | Property                            | Description                                                                                           | Type    | Default      | Required for create or update |
 |:-------------------------------------|:------------------------------------------------------------------------------------------------------|:--------|:-------------|:------------------------------|
-| consent {% api_lifecycle ea %}     | Indicates whether a consent dialog is needed for the scope. Valid values: `REQUIRED`, `IMPLICIT`.      | Enum    | `IMPLICIT`   | False                         |
+| consent {% api_lifecycle ea %}     | Indicates whether a consent dialog is needed for the scope. Valid values: `REQUIRED`, `IMPLICIT`.      | Enum    | `IMPLICIT`   | True unless this EA feature is not enabled |
 | default                              | Whether test the scope is a default scope                                                              | Boolean |              | False                         |
 | description                          | Description of the scope                                                                               | String  |              | False                         |
 | displayName {% api_lifecycle ea %} | Name of the end user displayed in a consent dialog                                                     | String  |              | False                         |

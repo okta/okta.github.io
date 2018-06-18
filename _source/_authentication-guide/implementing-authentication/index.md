@@ -18,11 +18,10 @@ Once you have an authorization server, you can then implement an OAuth 2.0 flow.
 The table below shows you which OAuth 2.0 flow to use for the type of application that you are building. If you'd like more information on which flow to use, see [Choosing an OAuth 2.0 flow](/authentication-guide/auth-overview/#choosing-an-oauth-20-flow).
 
 
-
-| Type of Application     | OAuth 2.0 Flow|
-|-----------------------------|----------------------------------------|
-| Server-side (AKA Web)    | [Authorization Code Flow](auth-code)|
-| Single-Page Application   | [Implicit Flow](implicit)|
-| Native                | [Authorization Code Flow with PKCE](auth-code-pkce)|
-| Trusted               | [Resource Owner Password Flow](password)|
-| Service               | [Client Credentials](client-creds)|
+| Type of Application     | OAuth 2.0 Flow                                      |
+| ----------------------- | --------------------------------------------------- |
+| Server-side (AKA Web)   | [Authorization Code Flow](auth-code)                |
+| Single-Page Application | [Implicit Flow](implicit)                           |
+| Native                  | [Authorization Code Flow with PKCE](auth-code-pkce) |
+| Trusted                 | [Resource Owner Password Flow](password)            |
+| Service                 | [Client Credentials](client-creds)                  |

@@ -39,7 +39,7 @@ Set-Cookie: sid=lGj4FPxaG63Wm89TpJnaDF6; Path=/
 Location: https://your-app.example.com?id_token=S4sx3uixdsalasd&state=Af0ifjslDkj&nonce=n-0S6_WzA2Mj
 ~~~
 
-The response also includes an [ID Token](/standards/OIDC/#id-token) that describes the authenticated user and can contain additional claims such as user profile attributes or email.
+The response also includes an [ID Token](/docs/api/resources/oidc#id-token) that describes the authenticated user and can contain additional claims such as user profile attributes or email.
 
 The [Okta Sign-In Widget](/docs/guides/okta_sign-in_widget) uses this flow. This flow can also be used by Single Page Applications with the [`okta_post_messsage`](/docs/api/resources/oidc#parameter-details) response type, which doesn't require a browser redirect.
 

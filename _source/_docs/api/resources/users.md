@@ -3972,7 +3972,7 @@ The default user profile is based on the [System for Cross-Domain Identity Manag
 
 | Property          | Description                                                                                                                        | DataType | Nullable | Unique | Readonly | MinLength | MaxLength | Validation                                                                                                       |
 |:------------------|:-----------------------------------------------------------------------------------------------------------------------------------|:---------|:---------|:-------|:---------|:----------|:----------|:-----------------------------------------------------------------------------------------------------------------|
-| login             | unique identifier for the user (`username`)                                                                                        | String   | FALSE    | TRUE   | FALSE    | 5         | 100       | [RFC 6531 Section 3.3](http://tools.ietf.org/html/rfc6531#section-3.3)                                           |
+| login             | unique identifier for the user (`username`)                                                                                        | String   | FALSE    | TRUE   | FALSE    | 5         | 100       | [pattern](schemas#login-pattern-validation)                                           |
 | email             | primary email address of user                                                                                                      | String   | FALSE    | TRUE   | FALSE    | 5         | 100       | [RFC 5322 Section 3.2.3](http://tools.ietf.org/html/rfc5322#section-3.2.3)                                       |
 | secondEmail       | secondary email address of user typically used for account recovery                                                                | String   | TRUE     | TRUE   | FALSE    | 5         | 100       | [RFC 5322 Section 3.2.3](http://tools.ietf.org/html/rfc5322#section-3.2.3)                                       |
 | firstName         | given name of the user (`givenName`)                                                                                               | String   | FALSE (default)    | FALSE  | FALSE    | 1         | 50        |                                                                                                                  |
@@ -4010,13 +4010,13 @@ The default user profile is based on the [System for Cross-Domain Identity Manag
 
 Every user within your Okta organization must have a unique identifier for a login.  This constraint applies to all users you import from other systems or applications such as Active Directory.  Your organization is the top-level namespace to mix and match logins from all your connected applications or directories.  Careful consideration of naming conventions for your login identifier will make it easier to onboard new applications in the future.
 
-Okta has a default ambiguous name resolution policy for logins.  Users can login with their non-qualified short name (e.g. `isaac.brock` with login *isaac.brock@example.com*) as long as the shortname is still unique within the organization.
+Okta has a default ambiguous name resolution policy for logins that include @-signs.  (By default, logins must be formatted as email addresses and thus always include @-signs.  That restriction can be removed using either the administrator UI or the [Schemas API](schemas).)  Users can login with their non-qualified short name (e.g. `isaac.brock` with login *isaac.brock@example.com*) as long as the short name is still unique within the organization.
 
 > Hint: Don't use a `login` with a `/` character.  Although `/` is a valid character according to [RFC 6531 section 3.3](http://tools.ietf.org/html/rfc6531#section-3.3), a user with this character in their `login` can't be fetched by `login` due to security risks with escaping this character in URI paths.
 For more information about `login`, see [Get User by ID](#get-user-with-id).
 
 ##### Modifying Default Profile Properties
-The only permitted customization of the default profile is changing whether the `firstName` and `lastName` properties are nullable.  You can use the Profile Editor in the administrator UI or the [Schemas API](schemas) to make schema modifications.
+The only permitted customization of the default profile is to update permissions, to change whether the `firstName` and `lastName` properties are nullable, or to specify a [pattern](schemas#login-pattern-validation) for `login`.  You can use the Profile Editor in the administrator UI or the [Schemas API](schemas) to make schema modifications.
 
 #### Custom Profile Properties
 
@@ -4130,7 +4130,7 @@ Because the plain text password is not specified when a hashed password is provi
 
 #### Recovery Question Object
 
-Specifies a secret question and answer that is validated when a user forgets their password or unlocks their account.  The answer property is **write-only**.
+Specifies a secret question and answer that is validated (case insensitive) when a user forgets their password or unlocks their account.  The answer property is **write-only**.
 
 | Property  | DataType | Nullable | Unique | Readonly | MinLength | MaxLength |
 | --------- | -------- | -------- | ------ | -------- | --------- | --------- |

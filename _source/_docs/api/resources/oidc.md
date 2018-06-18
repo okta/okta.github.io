@@ -7,6 +7,8 @@ excerpt: Control user access to your applications.
 redirect_from:
     - "/docs/api/resources/oauth2"
     - "/docs/how-to/beta-auth-service/api-access-management-troubleshooting"
+    - "/standards/OIDC/"
+    - "/standards/OAuth/"
 ---
 
 # OpenID Connect & OAuth 2.0 API
@@ -15,7 +17,7 @@ Okta is a standards-compliant [OAuth 2.0](http://oauth.net/documentation) author
 
 OpenID Connect extends OAuth 2.0. The OAuth 2.0 protocol provides API security via scoped access tokens, and OpenID Connect provides user authentication and single sign-on (SSO) functionality.
 
-This page contains detailed information about the OAuth 2.0 / OpenID Connect endpoints that Okta exposes on its authorization servers. For higher-level information about how to use this endpoints, see the [Okta Authentication Guide](/authentication-guide/).
+This page contains detailed information about the OAuth 2.0 and OpenID Connect endpoints that Okta exposes on its authorization servers. For higher-level information about how to use these endpoints, see the [Okta Authentication Guide](/authentication-guide/).
 
 ## Endpoints
 
@@ -704,7 +706,7 @@ See [Scope-Dependent Claims](#scope-dependent-claims-not-always-returned) for mo
 {:.api .api-response .api-response-example}
 ~~~http
 HTTP 401 Unauthorized
-WWW-Authenticate: Bearer error="invalid_token", error_description="The access token is invalid"​
+WWW-Authenticate: Bearer error="invalid_token", error_description="The access token is invalid"
 ~~~
 
 #### Response Example (Error)
@@ -737,28 +739,28 @@ curl -X GET \
 #### Response Properties
 {:.api .api-response .api-response-example}
 
-| Property  | Description                                                                                                   | Type    |
-|:-----------|:-------------------------------------------------------------------------------------------------------------|:--------|
-| issuer     | The complete URL for a Custom Authorization Server. This becomes the `iss` claim in an access token. In the context of this document, this is your authorization server's [base URL](#composing-your-base-url). | String |
-| authorization endpoint | URL of the authorization server's [authorization endpoint](#authorize). | String |
-| token_endpoint | URL of the authorization server's [token endpoint](#token).| String |
-| registration_endpoint | URL of the authorization server's [Dynamic Client Registration endpoint](/docs/api/resources/oauth-clients.html#register-new-client). | String |
-| jwks_uri | URL of the authorization server's [JSON Web Key Set](/docs/api/resources/authorization-servers#certificate-json-web-key-object) document. | String |
-| response_types_supported | JSON array containing a list of the `response_type` values that this authorization server supports. | Array |
-| response_modes_supported | JSON array containing a list of the `response_mode` values that this authorization server supports. More information [here](#parameter-details). | Array |
-| grant_types_supported | JSON array containing a list of the `grant_type` values that this authorization server supports. | Array |
-| subject_types_supported | JSON array containing a list of the Subject Identifier types that this OP supports. Valid values are `pairwise` and `public`. More info [here](https://openid.net/specs/openid-connect-core-1_0.html#SubjectIDTypes). | Array |
-| scopes_supported | JSON array containing a list of the `scope` values that this authorization server supports. | Array |
-| token_endpoint_auth_methods_supported | JSON array containing a list of client authentication methods supported by this token endpoint. | Array |
-| claims_supported | A list of the claims supported by this authorization server. | Array |
-| code_challenge_methods_supported| JSON array containing a list of [PKCE code challenge](/authentication-guide/implementing-authentication/auth-code-pkce) methods supported by this authorization server. | Array |
-| introspection_endpoint | URL of the authorization server's [introspection endpoint](#introspect). | String |
-| introspection_endpoint_auth_methods_supported | JSON array containing a list of client authentication methods supported by this introspection endpoint. More info [here](https://www.iana.org/assignments/oauth-parameters/oauth-parameters.xhtml#token-introspection-response). | Array |
-| revocation_endpoint | URL of the authorization server's [revocation endpoint](#revoke). | String |
-| revocation_endpoint_auth_methods_supported | JSON array containing a list of client authentication methods supported by this revocation endpoint. More info [here](https://www.iana.org/assignments/oauth-parameters/oauth-parameters.xhtml#token-introspection-response). | Array |
-| end_session_endpoint | URL of the authorization server's [logout endpoint](#logout). | String |
-| request_parameter_supported | Indicates if [Request Parameters](#parameter-details) are supported by this authorization server. | Boolean |
-| request_object_signing_alg_values_supported | The signing algorithms that this authorization server supports for signed requests. | Array |
+| Property                                      | Description                                                                                                                                                                                                                      | Type    |
+| --------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------- |
+| issuer                                        | The complete URL for a Custom Authorization Server. This becomes the `iss` claim in an access token. In the context of this document, this is your authorization server's [base URL](#composing-your-base-url).                  | String  |
+| authorization endpoint                        | URL of the authorization server's [authorization endpoint](#authorize).                                                                                                                                                          | String  |
+| token_endpoint                                | URL of the authorization server's [token endpoint](#token).                                                                                                                                                                      | String  |
+| registration_endpoint                         | URL of the authorization server's [Dynamic Client Registration endpoint](/docs/api/resources/oauth-clients.html#register-new-client).                                                                                            | String  |
+| jwks_uri                                      | URL of the authorization server's [JSON Web Key Set](/docs/api/resources/authorization-servers#certificate-json-web-key-object) document.                                                                                        | String  |
+| response_types_supported                      | JSON array containing a list of the `response_type` values that this authorization server supports.                                                                                                                              | Array   |
+| response_modes_supported                      | JSON array containing a list of the `response_mode` values that this authorization server supports. More information [here](#parameter-details).                                                                                 | Array   |
+| grant_types_supported                         | JSON array containing a list of the `grant_type` values that this authorization server supports.                                                                                                                                 | Array   |
+| subject_types_supported                       | JSON array containing a list of the Subject Identifier types that this OP supports. Valid values are `pairwise` and `public`. More info [here](https://openid.net/specs/openid-connect-core-1_0.html#SubjectIDTypes).            | Array   |
+| scopes_supported                              | JSON array containing a list of the `scope` values that this authorization server supports.                                                                                                                                      | Array   |
+| token_endpoint_auth_methods_supported         | JSON array containing a list of client authentication methods supported by this token endpoint.                                                                                                                                  | Array   |
+| claims_supported                              | A list of the claims supported by this authorization server.                                                                                                                                                                     | Array   |
+| code_challenge_methods_supported              | JSON array containing a list of [PKCE code challenge](/authentication-guide/implementing-authentication/auth-code-pkce) methods supported by this authorization server.                                                          | Array   |
+| introspection_endpoint                        | URL of the authorization server's [introspection endpoint](#introspect).                                                                                                                                                         | String  |
+| introspection_endpoint_auth_methods_supported | JSON array containing a list of client authentication methods supported by this introspection endpoint. More info [here](https://www.iana.org/assignments/oauth-parameters/oauth-parameters.xhtml#token-introspection-response). | Array   |
+| revocation_endpoint                           | URL of the authorization server's [revocation endpoint](#revoke).                                                                                                                                                                | String  |
+| revocation_endpoint_auth_methods_supported    | JSON array containing a list of client authentication methods supported by this revocation endpoint. More info [here](https://www.iana.org/assignments/oauth-parameters/oauth-parameters.xhtml#token-introspection-response).    | Array   |
+| end_session_endpoint                          | URL of the authorization server's [logout endpoint](#logout).                                                                                                                                                                    | String  |
+| request_parameter_supported                   | Indicates if [Request Parameters](#parameter-details) are supported by this authorization server.                                                                                                                                | Boolean |
+| request_object_signing_alg_values_supported   | The signing algorithms that this authorization server supports for signed requests.                                                                                                                                              | Array   |
 
 
 #### Response Example (Success)
@@ -877,28 +879,28 @@ curl -X GET \
 #### Response Properties
 {:.api .api-response .api-response-example}
 
-| Property  | Description                                                                                                   | Type    |
-|:-----------|:-------------------------------------------------------------------------------------------------------------|:--------|
-| authorization_endpoint | URL of the authorization server's [authorization endpoint](#authorize). | String |
-| claims_supported | A list of the claims supported by this authorization server. | Array |
-| code_challenge_methods_supported| JSON array containing a list of [PKCE code challenge](/authentication-guide/implementing-authentication/auth-code-pkce) methods supported by this authorization server. | Array |
-| end_session_endpoint | URL of the authorization server's [logout endpoint](#logout). | String |
-| grant_types_supported | JSON array containing a list of the grant type values that this authorization server supports. | Array |
-| introspection_endpoint | URL of the authorization server's [introspection endpoint](#introspect). | String |
-| introspection_endpoint_auth_methods_supported | JSON array containing a list of client authentication methods supported by this introspection endpoint. | Array |
-| issuer | The authorization server's issuer identifier. In the context of this document, this is your authorization server's [base URL](#composing-your-base-uRL). | String |
-| jwks_uri | URL of the authorization server's JSON Web Key Set document. | String |
-| registration_endpoint | URL of the authorization server's [Dynamic Client Registration endpoint](/docs/api/resources/oauth-clients.html#register-new-client) | String |
-| request_object_signing_alg_values_supported | The signing algorithms that this authorization server supports for signed requests. | Array |
-| request_parameter_supported | Indicates if [Request Parameters](#parameter-details) are supported by this authorization server. | Boolean |
-| response_modes_supported | JSON array containing a list of the `response_mode` values that this authorization server supports. More information [here](#parameter-details). | Array |
-| response_types_supported | JSON array containing a list of the `response_type` values that this authorization server supports. Can be a combination of `code`, `token`, and `id_token`. | Array |
-| revocation_endpoint | URL of the authorization server's [revocation endpoint](#revoke). | String |
-| revocation_endpoint_auth_methods_supported | JSON array containing a list of client authentication methods supported by this revocation endpoint. | Array |
-| scopes_supported | JSON array containing a list of the `scope` values that this authorization server supports. | Array |
-| subject_types_supported | JSON array containing a list of the Subject Identifier types that this authorization server supports. Valid types include `pairwise` and `public`. More info [here](https://openid.net/specs/openid-connect-core-1_0.html#SubjectIDTypes). | Array |
-| token_endpoint | URL of the authorization server's [token endpoint](#token).| String |
-| token_endpoint_auth_methods_supported | JSON array containing a list of client authentication methods supported by this token endpoint. | Array |
+| Property                                      | Description                                                                                                                                                                                                                                | Type    |
+| --------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------- |
+| authorization_endpoint                        | URL of the authorization server's [authorization endpoint](#authorize).                                                                                                                                                                    | String  |
+| claims_supported                              | A list of the claims supported by this authorization server.                                                                                                                                                                               | Array   |
+| code_challenge_methods_supported              | JSON array containing a list of [PKCE code challenge](/authentication-guide/implementing-authentication/auth-code-pkce) methods supported by this authorization server.                                                                    | Array   |
+| end_session_endpoint                          | URL of the authorization server's [logout endpoint](#logout).                                                                                                                                                                              | String  |
+| grant_types_supported                         | JSON array containing a list of the grant type values that this authorization server supports.                                                                                                                                             | Array   |
+| introspection_endpoint                        | URL of the authorization server's [introspection endpoint](#introspect).                                                                                                                                                                   | String  |
+| introspection_endpoint_auth_methods_supported | JSON array containing a list of client authentication methods supported by this introspection endpoint.                                                                                                                                    | Array   |
+| issuer                                        | The authorization server's issuer identifier. In the context of this document, this is your authorization server's [base URL](#composing-your-base-uRL).                                                                                   | String  |
+| jwks_uri                                      | URL of the authorization server's JSON Web Key Set document.                                                                                                                                                                               | String  |
+| registration_endpoint                         | URL of the authorization server's [Dynamic Client Registration endpoint](/docs/api/resources/oauth-clients.html#register-new-client)                                                                                                       | String  |
+| request_object_signing_alg_values_supported   | The signing algorithms that this authorization server supports for signed requests.                                                                                                                                                        | Array   |
+| request_parameter_supported                   | Indicates if [Request Parameters](#parameter-details) are supported by this authorization server.                                                                                                                                          | Boolean |
+| response_modes_supported                      | JSON array containing a list of the `response_mode` values that this authorization server supports. More information [here](#parameter-details).                                                                                           | Array   |
+| response_types_supported                      | JSON array containing a list of the `response_type` values that this authorization server supports. Can be a combination of `code`, `token`, and `id_token`.                                                                               | Array   |
+| revocation_endpoint                           | URL of the authorization server's [revocation endpoint](#revoke).                                                                                                                                                                          | String  |
+| revocation_endpoint_auth_methods_supported    | JSON array containing a list of client authentication methods supported by this revocation endpoint.                                                                                                                                       | Array   |
+| scopes_supported                              | JSON array containing a list of the `scope` values that this authorization server supports.                                                                                                                                                | Array   |
+| subject_types_supported                       | JSON array containing a list of the Subject Identifier types that this authorization server supports. Valid types include `pairwise` and `public`. More info [here](https://openid.net/specs/openid-connect-core-1_0.html#SubjectIDTypes). | Array   |
+| token_endpoint                                | URL of the authorization server's [token endpoint](#token).                                                                                                                                                                                | String  |
+| token_endpoint_auth_methods_supported         | JSON array containing a list of client authentication methods supported by this token endpoint.                                                                                                                                            | Array   |
 
 #### Response Example (Success)
 {:.api .api-response .api-response-example}
@@ -1023,12 +1025,45 @@ HTTP 404 Not Found
 }
 ~~~
 
-## Tokens
+## Scopes
 
-This section contains detailed information about access and ID tokens.
+OpenID Connect uses scope values to specify what access privileges are being requested for access tokens.
+The scopes associated with access tokens determine which claims are available when they are used
+to access the OIDC `/userinfo` [endpoint](/docs/api/resources/oidc#userinfo). The following scopes are supported:
+
+| -------------  | -------------------------------------------------------------------------------                               | -------------- |
+| Property       | Description                                                                                                   | Required       |
+|:---------------|:--------------------------------------------------------------------------------------------------------------|:---------------|
+| openid         | Identifies the request as an OpenID Connect request.                                                          | Yes            |
+| profile        | Requests access to the end user's default profile claims.                                               | No             |
+| email          | Requests access to the `email` and `email_verified` claims.                                                   | No             |
+| phone          | Requests access to the `phone_number` and `phone_number_verified` claims.                                     | No             |
+| address        | Requests access to the `address` claim.                                                                       | No             |
+| groups         | Requests access to the `groups` claim.                                                                        | No             |
+| offline_access | Requests a refresh token, used to obtain more access tokens without re-prompting the user for authentication. | No             |
+
+### Scope Values
+
+* `openid` is required for any OpenID request connect flow. If the `openid` scope value is not present, the request may be a valid OAuth 2.0 request, but it's not an OpenID Connect request.
+* `profile` requests access to these default profile claims: `name`, `family_name`, `given_name`, `middle_name`, `nickname`, `preferred_username`, `profile`, `picture`, `website`, `gender`, `birthdate`, `zoneinfo`,`locale`, and `updated_at`.
+* `offline_access` can only be requested in combination with a `response_type` containing `code`. If the `response_type` does not contain `code`, `offline_access` will be ignored.
+* For more information about `offline_access`, see the [OIDC spec](http://openid.net/specs/openid-connect-core-1_0.html#OfflineAccess).
+
+
+## Tokens and Claims
+
+This section contains some general information about claims, as well as detailed information about access and ID tokens.
 
 * [Access Token](#access-token)
 * [ID Token](#id-token)
+* [Refresh Token](#refresh-token)
+
+
+### Claims
+
+Tokens issued by Okta contain claims, which are statements about a subject (user). For example, the claim can be about a name, identity, key, group, or privilege. The claims in a security token are dependent upon the type of token, the type of credential used to authenticate the user, and the application configuration.
+
+The claims requested by the `profile`, `email`, `address`, and `phone` scope values are returned from the `/userinfo` [endpoint](#userinfo) when a `response_type` value is used that results in an access token being issued. However, when no access token is issued (which is the case for the `response_type` value `id_token`), the resulting Claims are returned in the ID token.
 
 ### Access Token
 
@@ -1101,27 +1136,27 @@ All of these scopes except `groups` are defined in the OpenID Connect specificat
 
 The header only includes the following reserved claims:
 
-| Property     | Description                                                                      | DataType     |
-| :----------- | :------------------------------------------------------------------------------- | :----------- |
-| alg          | Identifies the digital signature algorithm used. This will always be `RS256`.        | String       |
-| kid          | Identifies the `public-key` used to sign the `access_token`. The corresponding `public-key` can be found via the JWKS in the [discovery document](#well-knownoauth-authorization-server). | String       |
+| Property | Description                                                                                                                                                                               | DataType |
+| -------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------- |
+| alg      | Identifies the digital signature algorithm used. This will always be `RS256`.                                                                                                             | String   |
+| kid      | Identifies the `public-key` used to sign the `access_token`. The corresponding `public-key` can be found via the JWKS in the [discovery document](#well-knownoauth-authorization-server). | String   |
 
 ###### Reserved claims in the payload section
 
 The payload includes the following reserved claims:
 
-| Property     | Description                                                                      | DataType     |
-| :----------- | :------------------------------------------------------------------------------- | :----------- |
-| aud     | Identifies the audience (resource URI or server) that this access token is intended for. | String    |
-| cid     | Client ID of the client that requested the access token.  | String    |
-| exp     | The time the access token expires, represented in Unix time (seconds).   | Integer    |
-| iat     | The time the access token was issued, represented in Unix time (seconds).   | Integer    |
-| iss     | The Issuer Identifier of the response. This value will be the unique identifier for the Authorization Server instance.   | String    |
-| jti     | A unique identifier for this access token for debugging and revocation purposes.   | String    |
-| scp     | Array of scopes that are granted to this access token.   | Array    |
-| sub     | The subject. A name for the user or a unique identifier for the client.  | String    |
-| uid     | A unique identifier for the user. It will not be included in the access token if there is no user bound to it.  | String    |
-| ver     | The semantic version of the access token.   |  Integer   |
+| Property | Description                                                                                                            | DataType |
+| -------- | ---------------------------------------------------------------------------------------------------------------------- | -------- |
+| aud      | Identifies the audience (resource URI or server) that this access token is intended for.                               | String   |
+| cid      | Client ID of the client that requested the access token.                                                               | String   |
+| exp      | The time the access token expires, represented in Unix time (seconds).                                                 | Integer  |
+| iat      | The time the access token was issued, represented in Unix time (seconds).                                              | Integer  |
+| iss      | The Issuer Identifier of the response. This value will be the unique identifier for the Authorization Server instance. | String   |
+| jti      | A unique identifier for this access token for debugging and revocation purposes.                                       | String   |
+| scp      | Array of scopes that are granted to this access token.                                                                 | Array    |
+| sub      | The subject. A name for the user or a unique identifier for the client.                                                | String   |
+| uid      | A unique identifier for the user. It will not be included in the access token if there is no user bound to it.         | String   |
+| ver      | The semantic version of the access token.                                                                              | Integer  |
 
 ##### Custom Scopes and Claims
 
@@ -1292,6 +1327,10 @@ For more information about configuring an app for OpenID Connect, including grou
     | `code` `id_token` `token` | `email` if email scope is requested; `name` and `preferred_username` if profile scope is requested | Claims associated with the requested scopes |
 
 * The full set of claims for the requested scopes is available via the [/oauth2/v1/userinfo](#userinfo) endpoint. Call this endpoint using the access token.
+
+### Refresh Token
+
+Refresh tokens are opaque. More information about using them can be found in the [Authentication Guide](/authentication-guide/tokens/refreshing-tokens).
 
 ## Token Authentication Methods
 

@@ -53,7 +53,7 @@ Interested in some data that you don’t see here?  Reach out and let us know!
 
 ### New Application Creation Wizard
 
-Okta is powerful, and with that power comes a lot of options :) If you’ve tried to build a custom application against Okta, you likely ran into some questions about which application type to create.  The new developer experience is focused around our [Open ID Connect solutions](https://developer.okta.com/standards/OIDC/), and we’ve built a new application creation wizard that helps you navigate this.  Simply select the type of application you’re building and we’ll help you on your way!  Need multiple types of applications?  Not a problem!  Okta is built for that.
+Okta is powerful, and with that power comes a lot of options :) If you’ve tried to build a custom application against Okta, you likely ran into some questions about which application type to create.  The new developer experience is focused around our [Open ID Connect solutions](https://developer.okta.com/docs/api/resources/oidc), and we’ve built a new application creation wizard that helps you navigate this.  Simply select the type of application you’re building and we’ll help you on your way!  Need multiple types of applications?  Not a problem!  Okta is built for that.
 
 {% img blog/new-dev-console/app-wizard.png alt:"Default AS" %}{: .center-image }
 
