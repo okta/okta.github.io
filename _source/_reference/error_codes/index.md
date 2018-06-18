@@ -36,7 +36,7 @@ This document provides further information about the errors that the Okta API re
 |<a name="E0000018"></a>E0000018|Bad request. Accept and/or Content-Type headers are likely not set.|400|
 |<a name="E0000019"></a>E0000019|Bad request. Accept and/or Content-Type headers likely do not match supported values.|400|
 |<a name="E0000020"></a>E0000020|Bad request.|400|
-|<a name="E0000021"></a>E0000021|Bad request. Accept and/or Content-Type headers likely do not match supported values.|400|
+|<a name="E0000021"></a>E0000021|Bad request. Accept and/or Content-Type headers likely do not match supported values.|400|
 |<a name="E0000022"></a>E0000022|The endpoint does not support the provided HTTP method.|404|
 |<a name="E0000023"></a>E0000023|Operation failed because user profile is mastered under another system.|403|
 |<a name="E0000024"></a>E0000024|Bad request. This operation on app metadata is not yet supported.|400|
@@ -95,7 +95,7 @@ This document provides further information about the errors that the Okta API re
 <tr><td>E0000018</td><td>Bad request. Accept and/or Content-Type headers are likely not set.</td></tr>
 <tr><td>E0000019</td><td>Bad request. Accept and/or Content-Type headers likely do not match supported values.</td></tr>
 <tr><td>E0000020</td><td>Bad request.</td></tr>
-<tr><td>E0000021</td><td>Bad request. Accept and/or Content-Type headers likely do not match supported values.</td></tr>
+<tr><td>E0000021</td><td>Bad request. Accept and/or Content-Type headers likely do not match supported values.</td></tr>
 <tr><td>E0000024</td><td>Bad request. This operation on app metadata is not yet supported.</td></tr>
 <tr><td>E0000025</td><td>App version assignment failed.</td></tr>
 <tr><td>E0000027</td><td>Bad group push request.</td></tr>

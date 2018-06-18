@@ -106,7 +106,7 @@ curl -v -H "Authorization:SSWS <API token>" \
  -H "Accept:application/json" \
  -H "Content-type:application/json" \
  -X POST https://{yourOktaDomain}.com/api/v1/orgs \
- -d ‘{
+ -d '{
         "subdomain": "mycompany",
         "name": "MyCompany Inc",
         "website": "https://www.mycompany.com",
@@ -132,7 +132,7 @@ curl -v -H "Authorization:SSWS <API token>" \
                 }
             }
         }
-    }’
+    }'
 ```
 
 Some additional parameters are needed in the request beyond the input from your UI discussed earlier.

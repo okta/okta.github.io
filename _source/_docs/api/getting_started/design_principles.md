@@ -137,7 +137,7 @@ See [Error Codes](error_codes) for a list of API error codes.
 
 The Okta API currently requires the custom HTTP authentication scheme `SSWS` for authentication. All requests must have a valid API key specified in the HTTP `Authorization` header with the `SSWS` scheme.
 
-    Authorization: SSWS 00QCjAl4MlV-WPXM…0HmjFx-vbGua
+    Authorization: SSWS 00QCjAl4MlV-WPXM...0HmjFx-vbGua
 
 > See [Obtaining a token](getting_a_token) for instructions on how to get an API key for your organization.
 

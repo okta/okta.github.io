@@ -598,7 +598,7 @@ JWKS properties can be found [here](/docs/api/resources/authorization-servers#ke
 
 ~~~http
 HTTP 200 OK
-Cache-Control → max-age=3832304, must-revalidate
+Cache-Control: max-age=3832304, must-revalidate
 Content-Type: application/json;charset=UTF-8
 ~~~
 ~~~json

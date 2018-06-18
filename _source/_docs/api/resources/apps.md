@@ -5177,10 +5177,10 @@ Specifies properties for a VPN notification
 
 There are four choices for the `connection` property.
 
- - `DISABLED` – The default state. Retain this setting for apps that do not require a VPN connection.
- - `ANYWHERE` – Displays VPN connection information regardless of the browser's client IP. The notification appears before the end user can access the app.
- - `ON_NETWORK` – Displays VPN connection information only when a browser's client IP matches the configured Pubic Gateway IPs. The notification appears before the end user can access the app.
- - `OFF_NETWORK` – Displays VPN connection information only when the browser's client IP does not match the configured Pubic Gateway IPs. The notification appears before the end user can access the app.
+ - `DISABLED`: The default state. Retain this setting for apps that do not require a VPN connection.
+ - `ANYWHERE`: Displays VPN connection information regardless of the browser's client IP. The notification appears before the end user can access the app.
+ - `ON_NETWORK`: Displays VPN connection information only when a browser's client IP matches the configured Pubic Gateway IPs. The notification appears before the end user can access the app.
+ - `OFF_NETWORK`: Displays VPN connection information only when the browser's client IP does not match the configured Pubic Gateway IPs. The notification appears before the end user can access the app.
 
 #### Attribute Statements Object
 

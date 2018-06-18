@@ -359,7 +359,7 @@ indicates that a single web request with requestId `Wn4f-0RQ8D8lTSLkAmkKdQAADqo`
 | ---------- | -------------------------------------------------------------- | --------------- | -------- |
 | id         | Id of the transaction Object. When the `type` is `WEB`, this field will contain the requestId of the web request. | String | TRUE |
 | type       | Type of transaction. When the transaction is initiated from a single web request, this value is `WEB`. For jobs, this value is `JOB` | String | TRUE |
-| detail     | Details about the transaction                                  | Map[String → Object] | TRUE |
+| detail     | Details about the transaction                                  | Map[String, Object] | TRUE |
 |------------+----------------------------------------------------------------+-----------------+----------|
 
 ### DebugContext Object
