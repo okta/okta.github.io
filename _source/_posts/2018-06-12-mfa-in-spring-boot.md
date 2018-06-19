@@ -9,9 +9,9 @@ tweets:
  - "Don't let hackers steal your credentials! Enable MFA for your Spring Boot app with OAuth 2.0 and Okta:"
 ---
 
-OAuth 2.0 has quickly become an industry standard for third party authentication for web applications. It's a super secure strategy, when implemented properly, but getting it right can be hard. Fortunately, you don't have to go it alone. Okta has done it for you. This is one place where it's definitely not worth re-inventing the wheel. 
+OAuth 2.0 has quickly become an industry standard for third party authentication for web applications. It's a super secure strategy, when implemented properly, but getting it right can be hard. Fortunately, you don't have to go it alone. Okta has done it for you. This is one place where it's definitely not worth re-inventing the wheel.
 
-And further, with all of the cybersecurity attacks today, just using a password, even a hard password, is not always enough. To truly secure your data and accounts, you need to use multi-factor authentication (or MFA). 
+And further, with all of the cybersecurity attacks today, just using a password, even a hard password, is not always enough. To truly secure your data and accounts, you need to use multi-factor authentication (or MFA).
 
 The most common factor used in MFA is an email or a text (SMS). This type of MFA is also called two-factor authentication, a subtype of MFA, because it uses two factors: a password and an email or an SMS.
 
@@ -57,7 +57,7 @@ If you do this, you will see a very basic login screen. The username for this de
 
 {% img blog/mfa-in-spring-boot/app-start.png alt:"Start Spring Boot Application" width:"600" %}{: .center-image }
 
-If you enter these credentials at this point, you'll be taken to an error page because there are no mappings or endpoints specified yet. 
+If you enter these credentials at this point, you'll be taken to an error page because there are no mappings or endpoints specified yet.
 
 {% img blog/mfa-in-spring-boot/default-404-error.png alt:"Default Spring 404 error page" width:"600" %}{: .center-image }
 
@@ -71,10 +71,10 @@ Create a file called "MFARestController" in the `src/main/java/com/okta/springmf
 
 ```java
 package com.okta.springmfa.springmfa;
-   
-import org.springframework.web.bind.annotation.RequestMapping;  
+
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-  
+
 @RestController
 class MFARestController {
 
@@ -91,7 +91,7 @@ Use `./gradlew bootRun` to run the application. This time, if you enter the defa
 Hello user
 ```
 
-Pretty exciting, I know. 
+Pretty exciting, I know.
 
 If you had any idea how much work it used to take to get a servlet up and running, you'd be excited. We had to code uphill both ways in the rain and snow and wade through endless fields of XML just to get Tomcat running.
 
@@ -133,11 +133,11 @@ Your `MFARestController` should now look like this:
 
 ```java
 package com.okta.springmfa.springmfa;
-  
-import org.springframework.boot.autoconfigure.security.oauth2.client.EnableOAuth2Sso;  
-import org.springframework.web.bind.annotation.RequestMapping;  
+
+import org.springframework.boot.autoconfigure.security.oauth2.client.EnableOAuth2Sso;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-  
+
 @EnableOAuth2Sso
 @RestController
 class MFARestController {
@@ -160,19 +160,19 @@ compile ('org.springframework.security.oauth.boot:spring-security-oauth2-autocon
 Now we need to update our `application.properties` file. The first update is to change it to an `application.yml` file. Then you need to fill in the OAuth settings. Remember all those things I said you'd need "in a moment?" Well, the moment has come.
 
 ```yml
-security:  
-    oauth2: 
-        client:  
-            # From Okta application  
-            clientId: < your client ID >  
-            clientSecret: < your client secret >  
-            # From Authorization Server's metadata  
-            accessTokenUri: https://{yourOktaDomain}.com/oauth2/default/v1/token
-            userAuthorizationUri: https://{yourOktaDomain}.com/oauth2/default/v1/authorize
+security:
+    oauth2:
+        client:
+            # From Okta application
+            clientId: < your client ID >
+            clientSecret: < your client secret >
+            # From Authorization Server's metadata
+            accessTokenUri: https://{yourOktaDomain}/oauth2/default/v1/token
+            userAuthorizationUri: https://{yourOktaDomain}/oauth2/default/v1/authorize
             scope: openid profile email
         resource:
             # from your Auth Server's metadata, check .well-known/openid-configuration if not in .well-known/oauth-authorization-server
-            userInfoUri: https://{yourOktaDomain}.com/oauth2/default/v1/userinfo
+            userInfoUri: https://{yourOktaDomain}/oauth2/default/v1/userinfo
         sso:
             loginPath: /authorization-code/callback
 ```
@@ -196,7 +196,7 @@ Sign back into your developer.okta.com dashboard. The MFA options are only avail
 {% img blog/mfa-in-spring-boot/select-classic-ui.png alt:"Switch to classic UI" width:"600" %}{: .center-image }
 
 From the top menu, go to **Security** -> **Multifactor**. Click **Edit** and then click the checkbox for **SMS Authentication.**
- 
+
 **Notice that there are a TON of factors that you can select.**
 
 {% img blog/mfa-in-spring-boot/mfa-in-menu.png alt:"Select MFA in menu" width:"600" %}{: .center-image }

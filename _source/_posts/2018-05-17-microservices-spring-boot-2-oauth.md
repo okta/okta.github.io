@@ -92,10 +92,10 @@ spring:
             client-secret: {yourClientSecret}
         provider:
           okta:
-            authorization-uri: https://{yourOktaDomain}.com/oauth2/v1/authorize
-            token-uri: https://{yourOktaDomain}.com/oauth2/v1/token
-            user-info-uri: https://{yourOktaDomain}.com/oauth2/v1/userinfo
-            jwk-set-uri: https://{yourOktaDomain}.com/oauth2/v1/keys
+            authorization-uri: https://{yourOktaDomain}/oauth2/v1/authorize
+            token-uri: https://{yourOktaDomain}/oauth2/v1/token
+            user-info-uri: https://{yourOktaDomain}/oauth2/v1/userinfo
+            jwk-set-uri: https://{yourOktaDomain}/oauth2/v1/keys
 ```
 
 You'll need to modify your `pom.xml` to add dependencies and upgrade Spring Security.

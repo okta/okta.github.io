@@ -1056,7 +1056,7 @@ Content-Type: application/json;charset=UTF-8
   "name": "Sample Authorization Server",
   "description": "Authorization Server Description",
   "audiences": "https://api.resource.com",
-  "issuer": "https://{yourOktaDomain}.com/oauth2/ausain6z9zIedDCxB0h7",
+  "issuer": "https://{yourOktaDomain}/oauth2/ausain6z9zIedDCxB0h7",
   "issuerMode": "ORG_URL",
   "status": "ACTIVE",
   "created": "2017-05-17T22:25:57.000Z",
@@ -1096,7 +1096,7 @@ Content-Type: application/json;charset=UTF-8
       }
     },
     "self": {
-      "href": "https:{yourOktaDomain}.com/api/v1/authorizationServers/ausain6z9zIedDCxB0h7",
+      "href": "https:{yourOktaDomain}/api/v1/authorizationServers/ausain6z9zIedDCxB0h7",
       "hints": {
         "allow": [
           "GET",
@@ -1108,7 +1108,7 @@ Content-Type: application/json;charset=UTF-8
     "metadata": [
       {
         "name": "oauth-authorization-server",
-        "href": "https:{yourOktaDomain}.com/oauth2/ausain6z9zIedDCxB0h7/.well-known/oauth-authorization-server",
+        "href": "https://{yourOktaDomain}/oauth2/ausain6z9zIedDCxB0h7/.well-known/oauth-authorization-server",
         "hints": {
           "allow": [
             "GET"
@@ -1117,7 +1117,7 @@ Content-Type: application/json;charset=UTF-8
       },
       {
         "name": "openid-configuration",
-        "href": "{yourOktaDomain}.com/oauth2/ausain6z9zIedDCxB0h7/.well-known/openid-configuration",
+        "href": "https://{yourOktaDomain}/oauth2/ausain6z9zIedDCxB0h7/.well-known/openid-configuration",
         "hints": {
           "allow": [
             "GET"
@@ -1162,7 +1162,7 @@ Content-Type: application/json;charset=UTF-8
 
 `issuerMode` is visible if you have the Custom URL Domain feature enabled. If the feature is enabled, you can set a custom domain URL in a Custom Authorization Server, and this property is returned in the appropriate responses. To enable the Custom URL Domain feature, {{site.contact_support_lc}}.
 
-* If set to `ORG_URL`, then in responses, `issuer` is the Okta org's original domain URL: `https://{yourOktaDomain}.com`.
+* If set to `ORG_URL`, then in responses, `issuer` is the Okta org's original domain URL: `https://{yourOktaDomain}`.
 
 * If set to `CUSTOM_URL_DOMAIN`, then in responses, `issuer` is the custom domain URL configured in the administration user interface.
 
@@ -1190,7 +1190,7 @@ After you enable the Custom URL Domain feature, all new Custom Authorization Ser
     "lastUpdated": "2017-06-07T15:28:17.000Z",
     "_links": {
       "self": {
-        "href": "{yourOktaDomain}.com/api/v1/authorizationServers/ausain6z9zIedDCxB0h7/policies/00palyaappA22DPkj0h7",
+        "href": "https://{yourOktaDomain}/api/v1/authorizationServers/ausain6z9zIedDCxB0h7/policies/00palyaappA22DPkj0h7",
         "hints": {
           "allow": [
             "GET",
@@ -1200,7 +1200,7 @@ After you enable the Custom URL Domain feature, all new Custom Authorization Ser
         }
       },
       "deactivate": {
-        "href": "{yourOktaDomain}.com/api/v1/authorizationServers/ausain6z9zIedDCxB0h7/policies/00palyaappA22DPkj0h7/lifecycle/deactivate",
+        "href": "https://{yourOktaDomain}/api/v1/authorizationServers/ausain6z9zIedDCxB0h7/policies/00palyaappA22DPkj0h7/lifecycle/deactivate",
         "hints": {
           "allow": [
             "POST"

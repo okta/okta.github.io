@@ -901,7 +901,7 @@ curl -X POST \
   "context": {
     "deviceToken": "${device_token}"
   }
-}  ' https://${yourOktaDomain}.com/api/v1/authn \
+}  ' https://{yourOktaDomain}/api/v1/authn \
 ~~~
 
 ##### Response Example for Device Fingerprinting
@@ -1057,7 +1057,7 @@ curl -v -X POST \
 }' "https://{yourOktaDomain}/api/v1/authn"
 ~~~
 
-##### Response Example for Step-up Authentication Without Okta Session  
+##### Response Example for Step-up Authentication Without Okta Session
 {:.api .api-response .api-response-example}
 
 ~~~json
@@ -1292,20 +1292,20 @@ User is assigned to a Sign-On Policy or App Sign-On Policy that requires additio
          }
       },
       "factors":[
-         {  
+         {
             "id":"opf1cla0gggOBWxuC1d8",
             "factorType":"push",
             "provider":"OKTA",
             "vendorName":"OKTA",
-            "profile":{  
+            "profile":{
                "credentialId":"abcd@okta.com",
                "deviceType":"SmartPhone_Android",
-               "keys":[  
-                  {  
+               "keys":[
+                  {
                      "kty":"PKIX",
                      "use":"sig",
                      "kid":"default",
-                     "x5c":[  
+                     "x5c":[
                         "Mdkkdfjkdjf"
                      ]
                   }
@@ -1314,11 +1314,11 @@ User is assigned to a Sign-On Policy or App Sign-On Policy that requires additio
                "platform":"ANDROID",
                "version":"21"
             },
-            "_links":{  
-               "verify":{  
+            "_links":{
+               "verify":{
                   "href":"https://{yourOktaDomain}/api/v1/authn/factors/opf1cla0yyvOBWxuC1d8/verify",
-                  "hints":{  
-                     "allow":[  
+                  "hints":{
+                     "allow":[
                         "POST"
                      ]
                   }
@@ -4047,7 +4047,7 @@ autoPush       | user's decision to send push to device automatically | URL | Bo
 
 **Okta Verify Push Details Pertaining to Auto-Push**
 
-* You don't need to pass the `autoPush` flag to Okta unless you have a custom sign-in flow that does not use the Okta sign-in widget, but want Okta to keep track of this preference.  The custom sign-in flow must still handle the logic to actually send the Auto-Push, since this param only deals with the Auto-Push setting.  
+* You don't need to pass the `autoPush` flag to Okta unless you have a custom sign-in flow that does not use the Okta sign-in widget, but want Okta to keep track of this preference.  The custom sign-in flow must still handle the logic to actually send the Auto-Push, since this param only deals with the Auto-Push setting.
 * If you pass the `autoPush` query param when verifying an Okta Verify Push factor, Okta saves this value as the user's preference to have the push notification sent automatically if the verification is successful (the user presses "Approve" on their phone).
 * If there is already a saved Auto-Push preference, the successful verify call overrides the current preference if it is different from the value of `autoPush`.
 * This saved Auto-Push preference is always returned in the `/api/v1/authn/` response's `autoPushEnabled` field if the user is enrolled for the Okta Verify Push factor [example here](#response-example-for-factor-challenge-for-step-up-authentication-with-okta-session).  If the user's Auto-Push preference has not explicitly been set before, `autoPushEnabled` has a value of false.
@@ -6614,7 +6614,7 @@ A subset of policy settings of the Sign-On Policy or App Sign-On Policy publishe
 
 ##### When policy is not based on time or device
 ~~~json
-{  
+{
    "allowRememberDevice":false,
    "rememberDeviceByDefault":false,
    "rememberDeviceLifetimeInMinutes":0

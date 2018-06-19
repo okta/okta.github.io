@@ -12,14 +12,14 @@ redirect_from:
 
 Okta supports authentication with an external SAML Identity Provider (IdP). The SAML IdP redirects you to Okta or your application, also called Inbound SAML. You can also include an OpenID Connect ID token with this redirect. Thus, you can use Okta to proxy between SAML-only Identity Providers and OpenID Connect-only applications that normally are incompatible.
 
-The SAML flow is initiated with the Service Provider (SP), in this case Okta, who then redirects the user to the IdP for authentication. On successful authentication, a user is created inside Okta, and the user is redirected back to the URL you specified along with an ID token. 
+The SAML flow is initiated with the Service Provider (SP), in this case Okta, who then redirects the user to the IdP for authentication. On successful authentication, a user is created inside Okta, and the user is redirected back to the URL you specified along with an ID token.
 
 ## Prerequisites
 
 * A SAML IdP that supports SP-initiated SAML
 * Settings for the SAML IdP which you'll specify in Okta
 * An Okta org
-* An Okta OpenID Connect client application in the Okta org. If you don't have one already, you can add a client app using [the OpenID Connect Application Wizard](https://help.okta.com/en/prev/Content/Topics/Apps/Apps_App_Integration_Wizard.htm). 
+* An Okta OpenID Connect client application in the Okta org. If you don't have one already, you can add a client app using [the OpenID Connect Application Wizard](https://help.okta.com/en/prev/Content/Topics/Apps/Apps_App_Integration_Wizard.htm).
 
 ## Configuration Tasks
 
@@ -38,7 +38,7 @@ The configuration information for an external IdP is stored in Okta. Create the 
 
 ### Configure the OpenID Connect Client Application
 
-Look in your Okta org for the OpenID Connect client app you identified or created in the Prerequisites section. Users that sign in for the first time are created in Okta and associated with this application. 
+Look in your Okta org for the OpenID Connect client app you identified or created in the Prerequisites section. Users that sign in for the first time are created in Okta and associated with this application.
 
 1. Assign the app to everyone (the default on creation) or a particular group that you'd like your new SAML users to be associated with. If you want to change the default assignment from **Everyone**, modify the app assignment from the Developer Console:
 
@@ -62,7 +62,7 @@ For example:
 
 `https://{yourOktaDomain}/oauth2/v1/authorize?idp=0oab8rlwfoo5Atqv60h7&client_id=0oab8om4bars6Y80Z0h7&response_type=id_token&response_mode=fragment&scope=openid&redirect_uri=http%3A%2F%2Flocalhost%3A8080&state=WM6D&nonce=YsG76j`
 
-In this URL, replace `{yourOktaDomain}.com` with your org's base URL, and replace the following values:
+In this URL, replace `{yourOktaDomain}` with your org's base URL, and replace the following values:
 
 * `idp`: the value of your SAML IdP's `id` from Step 1.
 * `client_id`: the OpenID Connect client App's client ID (`client_id`) from Step 2.
@@ -72,7 +72,7 @@ In this URL, replace `{yourOktaDomain}.com` with your org's base URL, and replac
 ## Test the Authorization
 
 To test your authorization, enter the complete authorization URL in a browser.
-Do this in your browser's privacy or incognito mode to avoid false positive or negative results. 
+Do this in your browser's privacy or incognito mode to avoid false positive or negative results.
 
 If everything has been configured properly:
 

@@ -28,7 +28,7 @@ For readability simplified versions of the API transactions are illustrated belo
 + In syntax statements introducing each endpoint, the base URL is omitted.
 + Replacement values will be noted in italicized braces _{}_
 + Examples:
-  + `{yourOktaDomain}.com` = Base URL of the Okta org (e.g. _`https://acme.okta.com`_ ) 
+  + `{yourOktaDomain}` = Base URL of the Okta org (e.g. _`https://acme.okta.com`_ )
         If you are logged in, your Okta domain name appears instead of the placeholder.
   + `{user_id}` = Opaque and Immutable Okta ID for a user (e.g. _`00u1ae58uup0y5Qkg1d8`_)
   + `{group_id}` = Opaque and Immutable Okta ID for a group (e.g. _`00g1at1k0dzmV839P1d8`_)

@@ -579,7 +579,7 @@ import MoviesList from './components/MoviesList.vue';
 import Auth from '@okta/okta-vue'
 
 Vue.use(Auth, {
-  issuer: 'https://{yourOktaDomain}.com/oauth2/default',
+  issuer: 'https://{yourOktaDomain}/oauth2/default',
   client_id: '{YOUR_CLIENT_ID}',
   redirect_uri: 'http://localhost:8080/implicit/callback',
   scope: 'openid profile email'
@@ -724,7 +724,7 @@ public function isAuthorized(): bool
                         ->setAdaptor(new \Okta\JwtVerifier\Adaptors\SpomkyLabsJose())
                         ->setAudience('api://default')
                         ->setClientId('{YOUR_CLIENT_ID}')
-                        ->setIssuer('https://{yourOktaDomain}.com/oauth2/default')
+                        ->setIssuer('https://{yourOktaDomain}/oauth2/default')
                         ->build();
 
         // Verify the JWT from the Authorization Header.

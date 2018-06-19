@@ -763,7 +763,7 @@ class App {
       })
     })
     this.signIn = new OktaSignIn({
-      baseUrl: 'https://{yourOktaDomain}.com',
+      baseUrl: 'https://{yourOktaDomain}',
       clientId: '{yourClientId}',
       redirectUri: window.location.origin,
       authParams: {
@@ -888,7 +888,7 @@ To initialize the widget you instantiate a new `OktaSignIn` object.  Remember to
 
 ```js
 new OktaSignIn({
-  baseUrl: 'https://{yourOktaDomain}.com',
+  baseUrl: 'https://{yourOktaDomain}',
   clientId: '{yourClientId}',
   redirectUri: window.location.origin,
   authParams: {
@@ -927,7 +927,7 @@ const bodyParser = require('body-parser')
 const OktaJwtVerifier = require('@okta/jwt-verifier')
 
 const oktaJwtVerifier = new OktaJwtVerifier({
-  issuer: 'https://{yourOktaDomain}.com/oauth2/default'
+  issuer: 'https://{yourOktaDomain}/oauth2/default'
 })
 
 const authenticationRequired = (req, res, next) => {

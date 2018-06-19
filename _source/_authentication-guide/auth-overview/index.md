@@ -289,8 +289,8 @@ Use a Custom Authorization Server to secure your APIs. Custom Authorization Serv
 
 Okta provides a pre-configured Custom Authorization with the name `default`. It includes a basic access policy and rule to get you started quickly. To use the `default` Custom Authorization Server, use `default` as the authorization server ID:
 
-`https://{yourOktaDomain}.com/api/v1/authorizationServers/${authServerId}` becomes
-`https://{yourOktaDomain}.com/api/v1/authorizationServers/default`
+`https://{yourOktaDomain}/api/v1/authorizationServers/${authServerId}` becomes
+`https://{yourOktaDomain}/api/v1/authorizationServers/default`
 
 For Custom Authorization Servers you create yourself, `${authServerId}` will be a random ID like `aus9o8wzkhckw9TLa0h7z`.
 

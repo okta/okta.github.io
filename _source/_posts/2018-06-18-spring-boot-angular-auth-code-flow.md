@@ -443,17 +443,17 @@ Rename `holdings-api/src/main/resources/application.properties` to `application.
 ```yaml
 okta:
   client:
-    orgUrl: https://{yourOktaDomain}.com
+    orgUrl: https://{yourOktaDomain}
     token: XXX
 security:
     oauth2:
         client:
-            access-token-uri: https://{yourOktaDomain}.com/oauth2/default/v1/token
-            user-authorization-uri: https://{yourOktaDomain}.com/oauth2/default/v1/authorize
+            access-token-uri: https://{yourOktaDomain}/oauth2/default/v1/token
+            user-authorization-uri: https://{yourOktaDomain}/oauth2/default/v1/authorize
             client-id: {yourClientId}
             client-secret: {yourClientSecret}
         resource:
-            user-info-uri: https://{yourOktaDomain}.com/oauth2/default/v1/userinfo
+            user-info-uri: https://{yourOktaDomain}/oauth2/default/v1/userinfo
 ```
 
 You'll notice there are variables that need to be substituted for everything to work. That's where Okta comes in!

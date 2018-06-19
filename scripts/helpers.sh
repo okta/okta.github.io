@@ -171,7 +171,7 @@ function check_sample_code_orgs() {
     local yourDomainUrls=$(grep -EoR "(http|https)://your-domain.okta*" --include="*.md" $dir --exclude-dir={node_modules,scripts,tests,dist} | sort | uniq)
     local jspUrls=$(grep -EoR "(http|https)://.*{org}.okta*" --include="*.md" $dir --exclude-dir={node_modules,scripts,tests,dist,s} | sort | uniq)
     local oktaPreviewUrls=$(grep -EoR "(http|https)://.*oktapreview.com*" --include="*.md" $dir --exclude-dir={node_modules,scripts,tests,dist,_posts,getting_started,rest,SCIM} | sort | uniq)
-    local yourOktaDomainCom=$(grep -EoR "(http|https)://{yourOktaDomain}.com/" --include="*.md" $dir --exclude-dir={node_modules,scripts,tests,dist,_posts,getting_started} | sort | uniq)
+    local yourOktaDomainCom=$(grep -EoR "(http|https)://.*{yourOktaDomain}.com/" --include="*.md" $dir --exclude-dir={node_modules,scripts,tests,dist,_posts,getting_started} | sort | uniq)
 
     if [ "$yourOrgUrls" ];
     then

@@ -73,7 +73,7 @@ Open `holdings-api/src/main/resources/application.properties` and add your API t
 **NOTE:** The value of `{yourOktaDomain}` should be something like `dev-123456.oktapreview`. Make sure you don't include `-admin` in the value!
 
 ```properties
-okta.oauth2.issuer=https://{yourOktaDomain}.com/oauth2/default
+okta.oauth2.issuer=https://{yourOktaDomain}/oauth2/default
 okta.oauth2.clientId={yourClientId}
 okta.client.token=XXX
 ```
@@ -86,7 +86,7 @@ For the client, set the `issuer` and copy the `clientId` into `crypto-pwa/src/pa
 
 ```typescript
 const config = {
- issuer: 'https://{yourOktaDomain}.com/oauth2/default',
+ issuer: 'https://{yourOktaDomain}/oauth2/default',
  redirectUri: window.location.origin + '/implicit/callback',
  clientId: '{clientId}'
 };

@@ -1,4 +1,4 @@
-(function($) {    
+(function($) {
   $(function() {
     var iframe = $('<iframe id="myOktaIFrame" src="https://login.okta.com" style="display:none"></iframe>');
 
@@ -32,4 +32,4 @@
     // the last used oktapreview account: 'https://dev-{number}.oktapreview.com
     $('.okta-preview-domain').text(previewOrg);
   }
-})(jQuery); 
+})(jQuery);

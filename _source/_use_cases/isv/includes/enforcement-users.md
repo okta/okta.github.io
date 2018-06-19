@@ -144,7 +144,7 @@ Response (Okta returns link)
 
 ```json
 {
-  "resetPasswordUrl": "{yourOktaDomain}.com/reset_password/XE6wE17zmphl3KqAPFxO"
+  "resetPasswordUrl": "{yourOktaDomain}/reset_password/XE6wE17zmphl3KqAPFxO"
 }
 ```
 

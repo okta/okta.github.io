@@ -1517,14 +1517,14 @@ curl -v -X POST \
 -d '{
   "factorType": "u2f",
   "provider": "FIDO"
-  }' "https://{yourOktaDomain}.com/api/v1/users/00u15s1KDETTQMQYABRL/factors"
+  }' "https://{yourOktaDomain}/api/v1/users/00u15s1KDETTQMQYABRL/factors"
 ~~~
 
 ##### Enroll U2F Response Example
 {:.api .api-response .api-response-example}
 
 ~~~json
-{  
+{
   "id":"fuf2rovRxogXJ0nDy0g4",
   "factorType":"u2f",
   "provider":"FIDO",
@@ -1532,34 +1532,34 @@ curl -v -X POST \
   "status":"PENDING_ACTIVATION",
   "created":"2018-05-24T20:43:19.000Z",
   "lastUpdated":"2018-05-24T20:43:19.000Z",
-  "_links":{  
-    "activate":{  
-      "href":"https://{yourOktaDomain}.com/api/v1/users/00u15s1KDETTQMQYABRL/factors/fuf2rovRxogXJ0nDy0g4/lifecycle/activate",
-      "hints":{  
-        "allow":[  
+  "_links":{
+    "activate":{
+      "href":"https://{yourOktaDomain}/api/v1/users/00u15s1KDETTQMQYABRL/factors/fuf2rovRxogXJ0nDy0g4/lifecycle/activate",
+      "hints":{
+        "allow":[
           "POST"
         ]
       }
     },
-    "self":{  
-      "href":"https://{yourOktaDomain}.com/api/v1/users/00u15s1KDETTQMQYABRL/factors/fuf2rovRxogXJ0nDy0g4",
-      "hints":{  
-        "allow":[  
+    "self":{
+      "href":"https://{yourOktaDomain}/api/v1/users/00u15s1KDETTQMQYABRL/factors/fuf2rovRxogXJ0nDy0g4",
+      "hints":{
+        "allow":[
           "GET"
         ]
       }
     },
-    "user":{  
-      "href":"https://{yourOktaDomain}.com/api/v1/users/00u15s1KDETTQMQYABRL",
-      "hints":{  
-        "allow":[  
+    "user":{
+      "href":"https://{yourOktaDomain}/api/v1/users/00u15s1KDETTQMQYABRL",
+      "hints":{
+        "allow":[
           "GET"
         ]
       }
     }
   },
-  "_embedded":{  
-    "activation":{  
+  "_embedded":{
+    "activation":{
       "version":"U2F_V2",
       "nonce":"9DmGJDLvaU6KWxJbfrZ0",
       "timeoutSeconds":20
@@ -2016,9 +2016,9 @@ Activates an `email` factor by verifying the OTP.
 
 Parameter    | Description                                         | Param Type | DataType | Required
 ------------ | --------------------------------------------------- | ---------- | -------- | --------
-userId          | `id` of a user                                        | URL        | String   | TRUE     
-factorId          | `id` of a factor returned from enrollment             | URL        | String   | TRUE     
-passCode     | OTP sent to email                           | Body       | String   | TRUE     
+userId          | `id` of a user                                        | URL        | String   | TRUE
+factorId          | `id` of a factor returned from enrollment             | URL        | String   | TRUE
+passCode     | OTP sent to email                           | Body       | String   | TRUE
 
 ##### Response Parameters
 {:.api .api-response .api-response-params}
@@ -2143,17 +2143,17 @@ curl -v -X POST \
 -H "Accept: application/json" \
 -H "Content-Type: application/json" \
 -H "Authorization: SSWS ${api_token}" \
--d '{  
+-d '{
       "registrationData":"BQTEMUyOM8h1TiZG4DL-RdMr-tYgTYSf62Y52AmwEFTiSYWIRVO5L-MwWdRJOthmV3J3JrqpmGfmFb820-awx1YIQFlTvkMhxItHlpkzahEqicpw7SIH9yMfTn2kaDcC6JaLKPfV5ds0vzuxF1JJj3gCM01bRC-HWI4nCVgc-zaaoRgwggEcMIHDoAMCAQICCwD52fCSMoNczORdMAoGCCqGSM49BAMCMBUxEzARBgNVBAMTClUyRiBJc3N1ZXIwGhcLMDAwMTAxMDAwMFoXCzAwMDEwMTAwMDBaMBUxEzARBgNVBAMTClUyRiBEZXZpY2UwWTATBgcqhkjOPQIBBggqhkjOPQMBBwNCAAQFKJupuUgPQcRHUphaW5JPfLvkkwlEwlHKk_ntSp7MS4aTHJyGnpziqncrjiTC_oUVtb-wN-y_t_IMIjueGkhxMAoGCCqGSM49BAMCA0gAMEUCIQDBo6aOLxanIUYnBX9iu3KMngPnobpi0EZSTkVtLC8_cwIgC1945RGqGBKfbyNtkhMifZK05n7fU-gW37Bdnci5D94wRQIhAJv3VvclbRkHAQhaUR8rr8qFTg9iF-GtHoXU95vWaQdyAiAbEr-440U4dQAZF-Sj8G2fxgh5DkgkkWpyUHZhz7N9ew",
       "clientData":"eyJ0eXAiOiJuYXZpZ2F0b3IuaWQuZmluaXNoRW5yb2xsbWVudCIsImNoYWxsZW5nZSI6IlhxR0h0RTBoUkxuVEoxYUF5U1oyIiwib3JpZ2luIjoiaHR0cHM6Ly9sb2NhbGhvc3Q6MzAwMCIsImNpZF9wdWJrZXkiOiJ1bnVzZWQifQ"
-}' "https://{yourOktaDomain}.com/api/v1/users/users/00u15s1KDETTQMQYABRL/factors/fuf2rovRxogXJ0nDy0g4/lifecycle/activate"
+}' "https://{yourOktaDomain}/api/v1/users/users/00u15s1KDETTQMQYABRL/factors/fuf2rovRxogXJ0nDy0g4/lifecycle/activate"
 ~~~
 
 ##### Activate U2F Response Parameters
 {:.api .api-response .api-response-params}
 
 ~~~json
-{  
+{
   "id":"fuf2rovRxogXJ0nDy0g4",
   "factorType":"u2f",
   "provider":"FIDO",
@@ -2161,32 +2161,32 @@ curl -v -X POST \
   "status":"ACTIVE",
   "created":"2018-05-24T20:43:19.000Z",
   "lastUpdated":"2018-05-24T21:43:32.000Z",
-  "profile":{  
+  "profile":{
     "credentialId":"WVO-QyHEi0eWmTNqESqJynDtIgf3Ix9OfaRoNwLoloso99Xl2zS_O7EXUkmPeAIzTVtEL4dYjicJWBz7NpqhGA",
     "version":"U2F_V2"
   },
-  "_links":{  
-    "self":{  
-      "href":"https://{yourOktaDomain}.com/api/v1/users/00u15s1KDETTQMQYABRL/factors/fuf2rovRxogXJ0nDy0g4",
-      "hints":{  
-        "allow":[  
+  "_links":{
+    "self":{
+      "href":"https://{yourOktaDomain}/api/v1/users/00u15s1KDETTQMQYABRL/factors/fuf2rovRxogXJ0nDy0g4",
+      "hints":{
+        "allow":[
           "GET",
           "DELETE"
         ]
       }
     },
-    "verify":{  
-      "href":"https://{yourOktaDomain}.com/api/v1/users/00u15s1KDETTQMQYABRL/factors/fuf2rovRxogXJ0nDy0g4/verify",
-      "hints":{  
-        "allow":[  
+    "verify":{
+      "href":"https://{yourOktaDomain}/api/v1/users/00u15s1KDETTQMQYABRL/factors/fuf2rovRxogXJ0nDy0g4/verify",
+      "hints":{
+        "allow":[
           "POST"
         ]
       }
     },
-    "user":{  
-      "href":"https://{yourOktaDomain}.com/api/v1/users/00u15s1KDETTQMQYABRL",
-      "hints":{  
-        "allow":[  
+    "user":{
+      "href":"https://{yourOktaDomain}/api/v1/users/00u15s1KDETTQMQYABRL",
+      "hints":{
+        "allow":[
           "GET"
         ]
       }
@@ -2871,7 +2871,7 @@ curl -v -X POST \
 
 <span class="api-uri-template api-uri-post"><span class="api-label">POST</span> /api/v1/users/${userId}/factors/${factorId}/verify</span>
 
-Note: 
+Note:
 
 According to
 [FIDO
@@ -2890,40 +2890,40 @@ curl -v -X POST \
 -H "Accept: application/json" \
 -H "Content-Type: application/json" \
 -H "Authorization: SSWS ${api_token}" \
-"https://{yourOktaDomain}.com/api/v1/users/00u15s1KDETTQMQYABRL/factors/fuf2rovRxogXJ0nDy0g4/verify"
+"https://{yourOktaDomain}/api/v1/users/00u15s1KDETTQMQYABRL/factors/fuf2rovRxogXJ0nDy0g4/verify"
 ~~~
 
 ##### Response Example for Verify U2F Factor
 {:.api .api-response .api-response-example}
 
 ~~~json
-{  
+{
   "factorResult":"CHALLENGE",
-  "profile":{  
+  "profile":{
     "credentialId":"GAiiLsVab2m3-zL1Fi3bVtNrM9G6_MntUITHKjxkV24ktGKjLSCRnz72wCEdHCe18IvC69Aia0sE4UpsO0HpFQ",
     "version":"U2F_V2"
   },
-  "_links":{  
-    "verify":{  
-      "href":"https://{yourOktaDomain}.com/api/v1/users/00u15s1KDETTQMQYABRL/factors/fuf2rovRxogXJ0nDy0g4/verify",
-      "hints":{  
-        "allow":[  
+  "_links":{
+    "verify":{
+      "href":"https://{yourOktaDomain}/api/v1/users/00u15s1KDETTQMQYABRL/factors/fuf2rovRxogXJ0nDy0g4/verify",
+      "hints":{
+        "allow":[
           "POST"
         ]
       }
     },
-    "factor":{  
-      "href":"https://{yourOktaDomain}.com/api/v1/users/00u15s1KDETTQMQYABRL/factors/fuf2rovRxogXJ0nDy0g4",
-      "hints":{  
-        "allow":[  
+    "factor":{
+      "href":"https://{yourOktaDomain}/api/v1/users/00u15s1KDETTQMQYABRL/factors/fuf2rovRxogXJ0nDy0g4",
+      "hints":{
+        "allow":[
           "GET",
           "DELETE"
         ]
       }
     }
   },
-  "_embedded":{  
-    "challenge":{  
+  "_embedded":{
+    "challenge":{
       "nonce":"vQFwTt6zKzMV7HFPzjS2",
       "timeoutSeconds":20
     }
@@ -2977,19 +2977,19 @@ curl -v -X POST \
 -H "Accept: application/json" \
 -H "Content-Type: application/json" \
 -H "Authorization: SSWS ${api_token}" \
--d '{  
+-d '{
   "clientData":"eyJ0eXAiOiJuYXZpZ2F0b3IuaWQuZ2V0QXNzZXJ0aW9uIiwiY2hhbGxlbmdlIjoiS2NCLXRqUFU0NDY0ZThuVFBudXIiLCJvcmlnaW4iOiJodHRwczovL2xvY2FsaG9zdDozMDAwIiwiY2lkX3B1YmtleSI6InVudXNlZCJ9",
   "signatureData":"AQAAACYwRgIhAKPktdpH0T5mlPSm_9uGW5w-VaUy-LhI9tIacexpgItkAiEAncRVZURVPOq7zDwIw-OM5LtSkdAxOkfv0ZDVUx3UFHc"
-}' "https://{yourOktaDomain}.com/api/v1/users/00u15s1KDETTQMQYABRL/factors/fuf2rovRxogXJ0nDy0g4/verify"
+}' "https://{yourOktaDomain}/api/v1/users/00u15s1KDETTQMQYABRL/factors/fuf2rovRxogXJ0nDy0g4/verify"
 ~~~
 
 ##### Response of U2F Verification Example
 {:.api .api-response .api-response-example}
 
 ~~~json
-{  
+{
   "factorResult":"SUCCESS",
-  "profile":{  
+  "profile":{
     "credentialId":"h1bFwJFU9wnelYkexJuQfoUHZ5lX3CgQMTZk4H3I8kM9Nn6XALiQ-BIab4P5EE0GQrA7VD-kAwgnG950aXkhBw",
     "version":"U2F_V2"
   }

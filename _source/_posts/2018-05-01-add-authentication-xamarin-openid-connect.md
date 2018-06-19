@@ -141,7 +141,7 @@ public class Constants
 
     public const string ClientId = "{clientId}";
     public const string RedirectUri = "{redirectUri}";
-    public const string OrgUrl = "https://{yourOktaDomain}.com";
+    public const string OrgUrl = "https://{yourOktaDomain}";
     public const string AuthorizationServerId = "default";
 
     public static readonly string DiscoveryEndpoint =
