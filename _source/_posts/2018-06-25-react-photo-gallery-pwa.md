@@ -293,7 +293,7 @@ jhipster import-jdl gallery.jh
 
 When prompted, type `a` to allow overwriting of existing files.
 
-This process will create [Liquibase](liquibase) changelog files (to create your database tables), entities, repositories, Spring MVC controllers, and all the React code that's necessary to create, read, update, and delete your data objects. It'll even generate Jest unit tests and Protractor end-to-end tests!
+This process will create [Liquibase](https://www.liquibase.org/) changelog files (to create your database tables), entities, repositories, Spring MVC controllers, and all the React code that's necessary to create, read, update, and delete your data objects. It'll even generate Jest unit tests and Protractor end-to-end tests!
 
 After the process completes, you can restart your app (Ctrl+C the `./mvnw` process and restart it) and run `yarn e2e` again to see a fast confirmation that everything generated correctly.
 
