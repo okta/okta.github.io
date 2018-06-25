@@ -2,30 +2,30 @@
 layout: blog_post
 title: "Build a Photo Gallery PWA with React, Spring Boot, and JHipster"
 author: mraible
-description: "This post shows you how to build a photo gallery progressive web app with Spring Boot, React, and JHipster 5. It uses OAuth's authorization code for for authorization and OIDC for authentication. It extracts EXIF metadata from images, and displays them on the UI in a flexible grid format like Flickr does."
+description: "This post shows you how to build a photo gallery progressive web app with Spring Boot, React, and JHipster 5. It uses OAuth's authorization code for authorization and OIDC for authentication. It extracts EXIF metadata from images, and displays them on the UI in a flexible grid format like Flickr does."
 tags: [spring-boot, react, pwa, jhipster, oauth, oidc, authorization code flow, photo gallery]
 tweets:
 - "Have you ever wanted to build a photo gallery app like Flickr with @springboot and @reactjs? You're in luck! This tutorial shows you how to do image upload, metadata parsing, and much more! #pwa"
 - "We ❤️ Flickr! Don't you? Learn how to build a Flickr clone with @reactjs, @springboot, and @java_hipster! That expression on your face will go from 😳 to 😃 in 30 minutes!"
 ---
 
-At its core, React is just a UI toolkit, ala GWT, but it has a _very_ healthy ecosystem around it that provides everything you need to build a kick-ass progressive web app (PWA). PWAs are cool because if they're done right, they can offer a native-like experience for your users, allowing them to install your app, and use it when its offline.
+At its core, React is just a UI toolkit, ala GWT, but it has a _very_ healthy ecosystem around it that provides everything you need to build a kick-ass progressive web app (PWA). PWAs are cool because if they're done right, they can offer a native-like experience for your users, allowing them to install your app, and use it when it's offline.
 
 But, “why React?” is what you’re probably asking yourself right now, right? Well, you might've heard that Angular can be a gateway drug for Java developers wanting to learn JavaScript. If you're an experienced Java developer that knows Angular, chances are you started with AngularJS. AngularJS has similar concepts to Java MVC frameworks, like controllers, services, and directives (which I believe are similar to JSP tags IMHO). If you're still doing Angular development, you probably learned TypeScript along the way. You like TypeScript because it has types like Java, and it's a pretty nice language too!
 
-I’m betting that if you already know Angular, you might want to learn about React, its main competitor. There's always going to be several ways to write web apps, and React provides a totally different way to do it, and you can use TypeScript with it too!
+I’m betting that if you already know Angular, you might want to learn about React, its main competitor. There's always going to be several ways to write web apps, and React provides an entirely different way to do it, and you can use TypeScript with it too!
 
 In this post, I'll show you how to build a secure PWA that uploads and processes images, displays them in a Flickr-like grid, and uses Spring Boot for its backend.
 
 ## Get Started with React and Spring Boot
 
-One of the easiest way to get started with React is by using [Create React App](https://github.com/facebookincubator/create-react-app) (CRA). You install it locally, then run `create-react-app $projectName` to generate a skeleton React application with minimal dependencies. It uses webpack under-the-covers to build the project, launch a web server, and run its tests.
+One of the easiest ways to get started with React is by using [Create React App](https://github.com/facebookincubator/create-react-app) (CRA). You install it locally, then run `create-react-app $projectName` to generate a skeleton React application with minimal dependencies. It uses webpack under-the-covers to build the project, launch a web server, and run its tests.
 
 Spring Boot has a similar tool, called [Spring Initializr](https://start.spring.io). Spring Initializer is a bit different than CRA because its a website (and API) that you use to create applications with.
 
 Both tools are worth looking into, and you can learn how to create a basic app with them by reading my [Bootiful Development with Spring Boot and React](/blog/2017/12/06/bootiful-development-with-spring-boot-and-react) tutorial.
 
-Today, I'll show you how to build a CRUD app for photos with React and Spring Boot. However, I'm going to cheat. Rather than building everything from scratch, I'm going to use [JHipster](https://www.jhipster.tech). JHipster is an application generator that originally only supported Angular and Spring Boot. In its version 5.0 release, it added support for React, webpack 4, and Spring Boot 2.
+Today, I'll show you how to build a CRUD app for photos with React and Spring Boot. However, I'm going to cheat. Rather than building everything from scratch, I'm going to use [JHipster](https://www.jhipster.tech). JHipster is an application generator that initially only supported Angular and Spring Boot. In its version 5.0 release, it added support for React, webpack 4, and Spring Boot 2.
 
 <div style="max-width: 500px; margin: 0 auto">
 <blockquote class="twitter-tweet" data-lang="en"><p lang="en" dir="ltr">JHipster v5.0.0 released, the day before <a href="https://twitter.com/jhipsterconf?ref_src=twsrc%5Etfw">@jhipsterconf</a> :-)<br>Features Angular 6, React, Webpack 4, Spring Boot 2 and just too many things to list in a single tweet!<a href="https://t.co/DB9yPGHk2K">https://t.co/DB9yPGHk2K</a></p>&mdash; JHipster (@java_hipster) <a href="https://twitter.com/java_hipster/status/1009409634430484481?ref_src=twsrc%5Etfw">June 20, 2018</a></blockquote>
@@ -36,7 +36,7 @@ JHipster ships with a number of features that every application needs, including
 
 ## Get Started with JHipster 5
 
-To get started with JHipster, you'll need to have an internet connect and [Node.js](https://nodejs.org/) installed. The project recommends you use the latest LTS (Long Term Support) version, which is 8.3.11 at the time of this writing. You can use npm, but JHipster will use [Yarn](https://yarnpkg.org/) if you have it installed. To run the app, you'll need to have [Java 8](http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html) installed. If you have Git installed, JHipster will auto-commit your project after creating it, and will allow you to upgrade between versions.
+To get started with JHipster, you'll need to have an internet connection and [Node.js](https://nodejs.org/) installed. The project recommends you use the latest LTS (Long Term Support) version, which is 8.3.11 at the time of this writing. You can use npm, but JHipster will use [Yarn](https://yarnpkg.org/) if you have it installed. To run the app, you'll need to have [Java 8](http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html) installed. If you have Git installed, JHipster will auto-commit your project after creating it and will allow you to upgrade between versions.
 
 Run the following command to install JHipster:
 
@@ -113,7 +113,7 @@ You can verify everything works from the get-go by starting the app in one termi
 ./mvnw
 ```
 
-Then running all the Protractor tests in another terminal:
+Then run all the Protractor tests in another terminal:
 
 ```bash
 yarn e2e
@@ -129,7 +129,6 @@ $ protractor src/test/javascript/protractor.conf.js
 [15:36:33] I/launcher - Running 1 instances of WebDriver
 [15:36:33] I/direct - Using ChromeDriver directly...
 
-
   Account
     ✓ should fail to login with bad password
     ✓ should login with admin account (2720ms)
@@ -140,7 +139,6 @@ $ protractor src/test/javascript/protractor.conf.js
     ✓ should load configuration
     ✓ should load audits
     ✓ should load logs
-
 
   7 passing (10s)
 
@@ -175,7 +173,7 @@ This feature allows you to create relationships with the `User` entity. The only
 
 ## Change your Identity Provider to Okta
 
-JHipster leverages Spring Security's OAuth 2.0 support for configuring which IdP it should get user information from. When using Spring Security with Spring Boot, you can configure most configuration settings in properties files. You can even override properties with environment variables.
+JHipster leverages Spring Security's OAuth 2.0 support for configuring which IdP it should get user information from. When using Spring Security with Spring Boot, you can configure most configurationsettings in a properties files. You can even override properties with environment variables.
 
 To switch from Keycloak to Okta (or any other IdP), you can override the default properties (for Spring Security OAuth).
 
@@ -231,7 +229,7 @@ To enable self-service registration in Okta, you'll need to navigate to the Clas
 
 Then navigate to **Directory** > **Self-Registration** and click **Enable Registration**. Set the default group to `ROLE_USER`, the **Default redirect** to a Custom URL with `http://localhost:8080` as its value, and click **Save**.
 
-**NOTE:** If you get an error that says `'http://localhost:8080' is not a valid redirect URI`, it's because you need to add `http://localhost:8080` as a trusted redirect under **Security** > **API** > **Trusted Origins**. After making this change, navigate to **Directory** > **Self-Service Registration** and edit the settings to configure the custom URL again. It should work work this time.
+**NOTE:** If you get an error that says `'http://localhost:8080' is not a valid redirect URI`, it's because you need to add `http://localhost:8080` as a trusted redirect under **Security** > **API** > **Trusted Origins**. After making this change, navigate to **Directory** > **Self-Service Registration** and edit the settings to configure the custom URL again. It should work this time.
 
 {% img blog/react-photo-gallery-pwa/registration-settings.png alt:"Okta Self-Service Registration Settings" width:"800" %}{: .center-image }
 
@@ -241,13 +239,13 @@ Then navigate to **Directory** > **Self-Registration** and click **Enable Regist
 
 In addition to allowing self-registration, Okta also allows you to customize the look and feel of its login screen, as well as use custom domains and emails. You can read more about this in our [Sign-In Widget Guide](https://developer.okta.com/code/javascript/okta_sign-in_widget).
 
-You can also try customizing the widget in real-time using our handy dandy [live widget](https://developer.okta.com/live-widget/) page.
+You can also try customizing the widget in real-time using our handy-dandy [live widget](https://developer.okta.com/live-widget/) page.
 
 ## Create Entities to allow CRUD on Your Photo Gallery
 
 I've spent a lot of time talking about how to secure your application, now let's actually build it! JHipster has a JDL (JHipster Domain Language) feature that allows you to model the data in your app, and generate entities from it. You can use its [JDL Studio](https://start.jhipster.tech/jdl-studio/) feature to do this online and save it locally once you've finished.
 
-I created a data model for this app that has an `Album`, `Photo`, and `Tag` entities and setup relationships between them. Below is a screenshot of what it looks like in JDL Studio.
+I created a data model for this app that has an `Album`, `Photo`, and `Tag` entities and set up relationships between them. Below is a screenshot of what it looks like in JDL Studio.
 
 {% img blog/react-photo-gallery-pwa/photo-gallery-jdl-studio.png alt:"Photo Gallery JDL in JDL Studio" width:"800" %}{: .center-image }
 
@@ -509,7 +507,7 @@ Stop your Maven process, run `yarn webpack:build`, start Maven again and then ru
 
 ## Add React Photo Gallery to Your React PWA
 
-You've added metadata extraction to your backend, but your photos still display in a list rather than in a grid like Flickr's. To fix that, you can use [React Photo Gallery](https://github.com/neptunian/react-photo-gallery) component. Install it using Yarn:
+You've added metadata extraction to your backend, but your photos still display in a list rather than in a grid (like Flickr). To fix that, you can use [React Photo Gallery](https://github.com/neptunian/react-photo-gallery) component. Install it using Yarn:
 
 ```bash
 yarn add react-photo-gallery@6.0.28
@@ -608,7 +606,7 @@ The final feature &mdash; a webapp manifest &mdash; is included at `src/main/web
 
 To deploy your app to Heroku, you'll first need to install the [Heroku CLI](https://devcenter.heroku.com/articles/heroku-cli). You can confirm its installed by running `heroku --version`.
 
-> If you don't have a Heroku account, go to [heroku.com](https://www.heroku.com/) and sign up. Don't worry, it's free and chances are you'll love the experience.
+> If you don't have a Heroku account, go to [heroku.com](https://www.heroku.com/) and sign up. Don't worry, it's free, and chances are you'll love the experience.
 
 Run `heroku login` to log in to your account, then start the deployment process with JHipster:
 
@@ -616,7 +614,7 @@ Run `heroku login` to log in to your account, then start the deployment process 
 jhipster heroku
 ```
 
-This will start the [Heroku sub-generator](https://www.jhipster.tech/heroku/) that asks you a couple questions about your app: what you want to name it and whether you want to deploy it to a US region or EU. Then it'll prompt you to choose between building locally or with Git on Heroku's servers. Choose Git so you don't have to upload a fat JAR, and the deployment process will begin.
+This will start the [Heroku sub-generator](https://www.jhipster.tech/heroku/) that asks you a couple questions about your app: what you want to name it and whether you want to deploy it to a US region or EU. Then it'll prompt you to choose between building locally or with Git on Heroku's servers. Choose Git, so you don't have to upload a fat JAR, and the deployment process will begin.
 
 If you have a stable and fast internet connection, your app should be live on the internet in around six minutes!
 
@@ -632,16 +630,16 @@ To https://git.heroku.com/gallery-pwa.git
  * [new branch]      HEAD -> master
 
 Your app should now be live. To view it run
-	heroku open
+    heroku open
 And you can view the logs with this command
-	heroku logs --tail
+    heroku logs --tail
 After application modification, redeploy it with
-	jhipster heroku
+    jhipster heroku
 Congratulations, JHipster execution is complete!
 Execution time: 5 min. 31 s. sec
 ```
 
-### Configure Your React + Sping Boot App for Okta and Analyze Your PWA Score with Lighthouse
+### Configure Your React + Spring Boot App for Okta and Analyze Your PWA Score with Lighthouse
 
 To configure your app to work with Okta on Heroku, run the following command to transfer your local Okta-related environment variables to Heroku.
 
