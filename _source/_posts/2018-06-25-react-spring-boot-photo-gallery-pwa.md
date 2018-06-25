@@ -5,15 +5,15 @@ author: mraible
 description: "This post shows you how to build a photo gallery progressive web app with Spring Boot, React, and JHipster 5. It uses OAuth's authorization code for for authorization and OIDC for authentication. It extracts EXIF metadata from images, and displays them on the UI in a flexible grid format like Flickr does."
 tags: [spring-boot, react, pwa, jhipster, oauth, oidc, authorization code flow, photo gallery]
 tweets:
-- "Have you ever wanted to build a photo gallery app like Flickr with @springboot and @reactjs? You're in luck! This tutorial shows you how to do image upload, metadata parsing, and much more! #reactjs #springboot #jhipster"
+- "Have you ever wanted to build a photo gallery app like Flickr with @springboot and @reactjs? You're in luck! This tutorial shows you how to do image upload, metadata parsing, and much more! #pwa"
 - "We ❤️ Flickr! Don't you? Learn how to build a Flickr clone with @reactjs, @springboot, and @java_hipster! That expression on your face will go from 😳 to 😃 in 30 minutes!"
 ---
 
-Angular can be a gateway drug for Java developers wanting to learn JavaScript. If you're an experienced Java developer that knows Angular, chances are you started with AngularJS. AngularJS has similar concepts to Java MVC frameworks, like controllers, services, and directives (which I believe are similar to JSP tags IMHO). If you're still doing Angular development, you probably learned TypeScript along the way. You like TypeScript because it has types like Java, and it's a pretty nice language too!
-
-If you already know Angular, you might as well learn about React, it's main competitor. There's always going to be several ways to write web apps, and React provides a totally different way to do it, and you can use TypeScript with it too!
-
 At its core, React is just a UI toolkit, ala GWT, but it has a _very_ healthy ecosystem around it that provides everything you need to build a kick-ass progressive web app (PWA). PWAs are cool because if they're done right, they can offer a native-like experience for your users, allowing them to install your app, and use it when its offline.
+
+But, “why React?” is what you’re probably asking yourself right now, right? Well, you might've heard that Angular can be a gateway drug for Java developers wanting to learn JavaScript. If you're an experienced Java developer that knows Angular, chances are you started with AngularJS. AngularJS has similar concepts to Java MVC frameworks, like controllers, services, and directives (which I believe are similar to JSP tags IMHO). If you're still doing Angular development, you probably learned TypeScript along the way. You like TypeScript because it has types like Java, and it's a pretty nice language too!
+
+I’m betting that if you already know Angular, you might want to learn about React, its main competitor. There's always going to be several ways to write web apps, and React provides a totally different way to do it, and you can use TypeScript with it too!
 
 In this post, I'll show you how to build a secure PWA that uploads and processes images, displays them in a Flickr-like grid, and uses Spring Boot for its backend.
 
@@ -78,7 +78,7 @@ JHipster asks many questions about the type of application you want to create an
 
 After you've answered all these questions, JHipster will create a plethora of files in your current directory and run `yarn` (or `npm install`) to install all the dependencies specified in `package.json`.
 
-### Verify Everything works with Protractor and Keycloak
+### Verify Everything Works with Protractor and Keycloak
 
 When you choose OAuth 2.0 and OIDC for authentication, the users are stored outside of the application, rather than in it. This means you need to have an identity provider (IdP) that stores your users and allows your app to retrieve information about them. By default, JHipster ships with a [Keycloak](https://keycloak.org) file for Docker Compose. A default set of users and groups is imported at startup, and it has a client registered for your JHipster app.
 
@@ -149,7 +149,7 @@ $ protractor src/test/javascript/protractor.conf.js
 ✨  Done in 13.67s.
 ```
 
-### Enable User Registration in Keycloak
+### Enable User Registration for Your React + Spring Boot App in Keycloak
 
 One of the features that seems to be missing when you use OIDC authentication with JHipster is user registration. If you use session or JWT authentication, there's a link on the homepage to signup. With OIDC, you need to enable it in your IdP. For Keycloak, you can do this by navigating to `http://localhost:9080` and click on **Administration Console**. Login with `admin/admin` and click on the **Login** tab. This screen allows you to enable forgot password, remember me, and verify by email as well.
 
@@ -175,9 +175,15 @@ This feature allows you to create relationships with the `User` entity. The only
 
 ## Change your Identity Provider to Okta
 
-JHipster leverages Spring Security's OAuth support for configuring which IdP it should get user information from. When using Spring Security with Spring Boot, you can configure most configuration settings in properties files. You can even override properties with environment variables.
+JHipster leverages Spring Security's OAuth 2.0 support for configuring which IdP it should get user information from. When using Spring Security with Spring Boot, you can configure most configuration settings in properties files. You can even override properties with environment variables.
 
-To switch from Keycloak to Okta (or any other IdP), you can override the default properties (for Spring Security OAuth). To see how it works, create a `~/.okta.env` file with the following properties:
+To switch from Keycloak to Okta (or any other IdP), you can override the default properties (for Spring Security OAuth).
+
+> **Why Okta instead of Keycloak?**
+>
+> Keycloak works great in development, and Okta has free multi-factor authentication, email support, and excellent performance for production. You can see other free features and our transparent pricing at [developer.okta.com/pricing](https://developer.okta.com/pricing/).
+
+To see how it works, create a `~/.okta.env` file with the following properties:
 
 ```bash
 #!/bin/bash
@@ -203,7 +209,7 @@ In case you don’t know how to set up an OIDC app on Okta, here’s a quick sum
 
 [Log in](https://login.okta.com/?SAMLRequest=fc%2B7CsJAEAXQXvAflu1NNJUMeZBGELTx1a%2FrYILJTtyZGD%2FfSBRiYzlw77lMnD3rSj3Qc0ku0YtgrhU6S5fSXRN9PKxmS52l00nMpq6iBvJWCrfDe4ss6vStRe9aDzmGIZfo1jsgwyWDMzUyiIV9vt1AH4XGk5ClSvewUgMNa%2BYW%2FVj5jxhm9NLP67QQaSAMu64L6CYmsFSHlnzT4ZlLwTgcL6Sf8%2FeX9AU%3Dhttps://login.okta.com/?SAMLRequest=fc%2B7CsJAEAXQXvAflu1NNJUMeZBGELTx1a%2FrYILJTtyZGD%2FfSBRiYzlw77lMnD3rSj3Qc0ku0YtgrhU6S5fSXRN9PKxmS52l00nMpq6iBvJWCrfDe4ss6vStRe9aDzmGIZfo1jsgwyWDMzUyiIV9vt1AH4XGk5ClSvewUgMNa%2BYW%2FVj5jxhm9NLP67QQaSAMu64L6CYmsFSHlnzT4ZlLwTgcL6Sf8%2FeX9AU%3D) to your Okta Developer account (or [sign up](https://developer.okta.com/signup/) if you don’t have an account) and navigate to **Applications** > **Add Application**. Click **Web** and click **Next**. Give the app a name you’ll remember, and specify `http://localhost:8080/login` as a Login Redirect URI. Click **Done** and note the client ID and secret. You'll need to copy/paste them into a file in a minute.
 
-Create a `ROLE_ADMIN` and `ROLE_USER` group (**Users** > **Groups** > **Add Group**) and add users to them. I recommend adding the account you signed up with to `ROLE_ADMIN` and create a new user (**Users** > **Add Person**) to add to `ROLE_USER`. 
+Create a `ROLE_ADMIN` and `ROLE_USER` group (**Users** > **Groups** > **Add Group**) and add users to them. I recommend adding the account you signed up with to `ROLE_ADMIN` and create a new user (**Users** > **Add Person**) to add to `ROLE_USER`.
 
 Navigate to **API** > **Authorization Servers** and click the one named **default** to edit it. Click the **Claims** tab and **Add Claim**. Name it "roles", and include it in the ID Token. Set the value type to "Groups" and set the filter to be a Regex of `.*`. Click **Create** to complete the process.
 
@@ -219,21 +225,17 @@ In short, we make [identity management](https://developer.okta.com/product/user-
 
 Want a thousand users a month for free? [Register for a free developer account](https://developer.okta.com/signup/), and when you’re done, come on back so you can learn more about building a React PWA with Spring Boot 2.0 and JHipster!
 
-### Why Okta instead of Keycloak
-
-Keycloak works great in development, and Okta has free multi-factor authentication, email support, and excellent performance for production. You can see other free features and our transparent pricing at [developer.okta.com/pricing](https://developer.okta.com/pricing/). 
-
 ### Enable Self-Service Registration in Okta
 
 To enable self-service registration in Okta, you'll need to navigate to the Classic UI from the Okta Developer Dashboard. There's a link to toggle between the two in the top left corner of your screen.
 
-[screenshot of toggle link]
+{% img blog/react-photo-gallery-pwa/classic-ui-toggle.png alt:"Classic UI Toggle" width:"800" %}{: .center-image }
 
 Then navigate to **Directory** > **Self-Registration** and click **Enable Registration**. Set the default group to `ROLE_USER`, the **Default redirect** to a Custom URL with `http://localhost:8080` as its value, and click **Save**.
 
 **NOTE:** If you get an error that says `'http://localhost:8080' is not a valid redirect URI`, it's because you need to add `http://localhost:8080` as a trusted redirect under **Security** > **API** > **Trusted Origins**. After making this change, navigate to **Directory** > **Self-Service Registration** and edit the settings to configure the custom URL again. It'll work now.
 
-[screenshot of self-registration settings]
+{% img blog/react-photo-gallery-pwa/registration-settings.png alt:"Okta Self-Service Registration Settings" width:"800" %}{: .center-image }
 
 ### Okta Customization Options
 
@@ -557,7 +559,7 @@ Log in and navigate to **Entities** > **Photos** in the top nav bar. You should 
 
 You can also add a "lightbox" feature to the grid so you can click on photos and zoom in. The [React Photo Gallery docs](https://neptunian.github.io/react-photo-gallery/) show how to do this. I've integrated it into the example for this post, but I won't show the code here for the sake of brevity. You can see the [final `photo.tsx` with Lightbox added on GitHub](https://github.com/oktadeveloper/okta-react-photo-gallery-example/blob/master/src/main/webapp/app/entities/photo/photo.tsx) or a [diff of the changes necessary](https://github.com/oktadeveloper/okta-react-photo-gallery-example/commit/47f9ceab2b00f1d7f41d286686c9159f79decc11).
 
-## Make Your React App into a PWA
+## Make Your React + Spring Boot App into a PWA
 
 To be a PWA requires three features:
 
@@ -602,9 +604,9 @@ To register a service worker, open `src/main/webapp/index.html` and uncomment th
 
 The final feature &mdash; a webapp manifest &mdash; is included at `src/main/webapp/manifest.webapp`. It defines an app name, colors, and icons. You might want to adjust these to fit your app.
 
-## Deploy to Heroku
+## Deploy Your React + Spring Boot App to Heroku
 
-To deploy your app to Heroku, you'll first need to install the [Heroku CLI](https://devcenter.heroku.com/articles/heroku-cli).
+To deploy your app to Heroku, you'll first need to install the [Heroku CLI](https://devcenter.heroku.com/articles/heroku-cli). You can confirm its installed by running `heroku --version`.
 
 > If you don't have a Heroku account, go to [https://www.heroku.com/] and sign up. Don't worry, it's free and chances are you'll love the experience.
 
@@ -614,11 +616,32 @@ Run `heroku login` to log in to your account, then start the deployment process 
 jhipster heroku
 ```
 
-This will start the [Heroku sub-generator](https://www.jhipster.tech/heroku/) that asks you some questions about your app and where you want to deploy it. Then it'll allow you to choose between building locally or with Git on Heroku's servers. Choose Git so you don't have to upload a fat JAR, and the deployment process will begin.
+This will start the [Heroku sub-generator](https://www.jhipster.tech/heroku/) that asks you a couple questions about your app: what you want to name it and whether you want to deploy it to a US region or EU. Then it'll prompt you to choose between building locally or with Git on Heroku's servers. Choose Git so you don't have to upload a fat JAR, and the deployment process will begin.
 
-If you have a stable and fast internet connection, your app should be live on the internet in about six minutes!
+If you have a stable and fast internet connection, your app should be live on the internet in around six minutes!
 
-### Configure for Okta and Analyze Your PWA Score with Lighthouse
+```
+remote: -----> Compressing...
+remote:        Done: 134.5M
+remote: -----> Launching...
+remote:        Released v5
+remote:        https://gallery-pwa.herokuapp.com/ deployed to Heroku
+remote:
+remote: Verifying deploy... done.
+To https://git.heroku.com/gallery-pwa.git
+ * [new branch]      HEAD -> master
+
+Your app should now be live. To view it run
+	heroku open
+And you can view the logs with this command
+	heroku logs --tail
+After application modification, redeploy it with
+	jhipster heroku
+Congratulations, JHipster execution is complete!
+Execution time: 5 min. 31 s. sec
+```
+
+### Configure Your React + Sping Boot App for Okta and Analyze Your PWA Score with Lighthouse
 
 To configure your app to work with Okta on Heroku, run the following command to transfer your local Okta-related environment variables to Heroku.
 
@@ -631,17 +654,19 @@ heroku config:set \
   SECURITY_OAUTH2_CLIENT_CLIENT_SECRET="$SECURITY_OAUTH2_CLIENT_CLIENT_SECRET"
 ```
 
-After everything restarts, test it with Lighthouse. Looks great, eh?
+After Heroku restarts your app, log in, then test it with Lighthouse. Looks pretty good, eh?! 💯
+
+{% img blog/react-photo-gallery-pwa/lighthouse-score.png alt:"Lighthouse Score 💯" width:"800" %}{: .center-image }
 
 ## Learn More about React, Spring Boot, JHipster, and OAuth
 
-This tutorial has shown you how to develop a photo gallery PWA with Spring Boot, React, JHipster, and OIDC. It showed you some useful open source libraries to simplify the implementation and even generated tests. 
+This tutorial has shown you how to develop a photo gallery PWA with Spring Boot, React, JHipster, and OIDC. It showed you some useful open source libraries to simplify the implementation and even generated tests.
 
-If you'd like to learn more about React, Spring Boot, or OAuth, I'd suggest checking out the following resources:
+If you'd like to learn more about React, Spring Boot, or OAuth 2.0, I'd suggest checking out the following resources:
 
 - [Bootiful Development with Spring Boot and React](/blog/2017/12/06/bootiful-development-with-spring-boot-and-react)
 - [Use OpenID Connect Support with JHipster](https://developer.okta.com/blog/2017/10/20/oidc-with-jhipster)
-- [What is the OAuth 2.0 Authorizatoin Code Grant Type?](/blog/2018/04/10/oauth-authorization-code-grant-type)
+- [What is the OAuth 2.0 Authorization Code Grant Type?](/blog/2018/04/10/oauth-authorization-code-grant-type)
 - [Using React (with Redux) from the JHipster Docs](https://www.jhipster.tech/using-react/)
 - [Developer a Microservices Architecture with OAuth 2.0 and JHipster](https://developer.okta.com/blog/2018/03/01/develop-microservices-jhipster-oauth)
 
