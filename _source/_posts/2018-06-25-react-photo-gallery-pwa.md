@@ -23,20 +23,20 @@ One of the easiest way to get started with React is by using [Create React App](
 
 Spring Boot has a similar tool, called [Spring Initializr](https://start.spring.io). Spring Initializer is a bit different than CRA because its a website (and API) that you use to create applications with.
 
-Both tools are worth looking into, and you can learn how to create a bootiful app with them by reading my [Bootiful Development with Spring Boot and React](/blog/2017/12/06/bootiful-development-with-spring-boot-and-react) tutorial.
+Both tools are worth looking into, and you can learn how to create a basic app with them by reading my [Bootiful Development with Spring Boot and React](/blog/2017/12/06/bootiful-development-with-spring-boot-and-react) tutorial.
 
-Today, I'll show you how to build a CRUD app for photos with React and Spring Boot. However, I'm going to cheat. Rather than building everything from scratch, I'm going to use [JHipster](https://www.jhipster.tech). JHipster is an application generator that originally only supported Angular and Spring Boot. In its version 5.0 release, it added support for React, along with a number of other features.
+Today, I'll show you how to build a CRUD app for photos with React and Spring Boot. However, I'm going to cheat. Rather than building everything from scratch, I'm going to use [JHipster](https://www.jhipster.tech). JHipster is an application generator that originally only supported Angular and Spring Boot. In its version 5.0 release, it added support for React, webpack 4, and Spring Boot 2.
 
-<p style="max-width: 500px; margin: 0 auto">
+<div style="max-width: 500px; margin: 0 auto">
 <blockquote class="twitter-tweet" data-lang="en"><p lang="en" dir="ltr">JHipster v5.0.0 released, the day before <a href="https://twitter.com/jhipsterconf?ref_src=twsrc%5Etfw">@jhipsterconf</a> :-)<br>Features Angular 6, React, Webpack 4, Spring Boot 2 and just too many things to list in a single tweet!<a href="https://t.co/DB9yPGHk2K">https://t.co/DB9yPGHk2K</a></p>&mdash; JHipster (@java_hipster) <a href="https://twitter.com/java_hipster/status/1009409634430484481?ref_src=twsrc%5Etfw">June 20, 2018</a></blockquote>
 <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
-</p>
+</div>
 
 JHipster ships with a number of features that every application needs, including authentication/authorization, unit and end-to-end testing support, and tools to make it easy to deploy to the cloud.
 
 ## Get Started with JHipster 5
 
-To get started with JHipster, you'll need to have an internet connect and [Node.js](https://nodejs.org/) installed. The project recommends you use the latest LTS (Long Term Support) version, which is 8.3.11 at the time of this writing. You can use npm, but JHipster will use [Yarn](https://yarnpkg.org/) if you have it installed. To run the app, you'll need to have [Java 8] installed. If you have Git installed, JHipster will auto-commit your project after creating it, and will allow you to upgrade between versions.
+To get started with JHipster, you'll need to have an internet connect and [Node.js](https://nodejs.org/) installed. The project recommends you use the latest LTS (Long Term Support) version, which is 8.3.11 at the time of this writing. You can use npm, but JHipster will use [Yarn](https://yarnpkg.org/) if you have it installed. To run the app, you'll need to have [Java 8](http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html) installed. If you have Git installed, JHipster will auto-commit your project after creating it, and will allow you to upgrade between versions.
 
 Run the following command to install JHipster:
 
@@ -237,9 +237,9 @@ Then navigate to **Directory** > **Self-Registration** and click **Enable Regist
 
 ### Okta Customization Options
 
-In addition to allowing self-registration, Okta also allows you to customize the look and feel of its login screen, as well as use custom domains and emails. You can read more about this in our [Sign-In Widget's documentation].
+In addition to allowing self-registration, Okta also allows you to customize the look and feel of its login screen, as well as use custom domains and emails. You can read more about this in our [Sign-In Widget Guide](https://developer.okta.com/code/javascript/okta_sign-in_widget).
 
-You can also try customizing the widget in real-time using our handy dandy [live widget](https://developer.okta.com/live-widget/).
+You can also try customizing the widget in real-time using our handy dandy [live widget](https://developer.okta.com/live-widget/) page.
 
 ## Create Entities to allow CRUD on Your Photo Gallery
 
@@ -555,7 +555,7 @@ Log in and navigate to **Entities** > **Photos** in the top nav bar. You should 
 
 {% img blog/react-photo-gallery-pwa/photo-gallery.png alt:"Gallery with Photos" width:"800" %}{: .center-image }
 
-You can also add a "lightbox" feature to the grid so you can click on photos and zoom in. The [React Photo Gallery docs](https://neptunian.github.io/react-photo-gallery/) show how to do this. I've integrated it into the example for this post, but I won't show the code here for the sake of brevity. You can see the [final `photo.tsx` with Lightbox added on GitHub](https://github.com/oktadeveloper/okta-react-photo-gallery-example/blob/master/src/main/webapp/app/entities/photo/photo.tsx).
+You can also add a "lightbox" feature to the grid so you can click on photos and zoom in. The [React Photo Gallery docs](https://neptunian.github.io/react-photo-gallery/) show how to do this. I've integrated it into the example for this post, but I won't show the code here for the sake of brevity. You can see the [final `photo.tsx` with Lightbox added on GitHub](https://github.com/oktadeveloper/okta-react-photo-gallery-example/blob/master/src/main/webapp/app/entities/photo/photo.tsx) or a [diff of the changes necessary](https://github.com/oktadeveloper/okta-react-photo-gallery-example/commit/47f9ceab2b00f1d7f41d286686c9159f79decc11).
 
 ## Make Your React App into a PWA
 
