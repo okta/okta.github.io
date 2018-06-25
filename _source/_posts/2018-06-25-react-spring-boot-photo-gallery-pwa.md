@@ -113,7 +113,7 @@ You can verify everything works from the get-go by starting the app in one termi
 ./mvnw
 ```
 
-Then running all the Protractor tests:
+Then running all the Protractor tests in another terminal:
 
 ```bash
 yarn e2e
@@ -186,8 +186,6 @@ To switch from Keycloak to Okta (or any other IdP), you can override the default
 To see how it works, create a `~/.okta.env` file with the following properties:
 
 ```bash
-#!/bin/bash
-
 export SECURITY_OAUTH2_CLIENT_ACCESS_TOKEN_URI="https://{yourOktaDomain}/oauth2/default/v1/token"
 export SECURITY_OAUTH2_CLIENT_USER_AUTHORIZATION_URI="https://{yourOktaDomain}/oauth2/default/v1/authorize"
 export SECURITY_OAUTH2_RESOURCE_USER_INFO_URI="https://{yourOktaDomain}/oauth2/default/v1/userinfo"
@@ -209,7 +207,7 @@ In case you don’t know how to set up an OIDC app on Okta, here’s a quick sum
 
 [Log in](https://login.okta.com/?SAMLRequest=fc%2B7CsJAEAXQXvAflu1NNJUMeZBGELTx1a%2FrYILJTtyZGD%2FfSBRiYzlw77lMnD3rSj3Qc0ku0YtgrhU6S5fSXRN9PKxmS52l00nMpq6iBvJWCrfDe4ss6vStRe9aDzmGIZfo1jsgwyWDMzUyiIV9vt1AH4XGk5ClSvewUgMNa%2BYW%2FVj5jxhm9NLP67QQaSAMu64L6CYmsFSHlnzT4ZlLwTgcL6Sf8%2FeX9AU%3Dhttps://login.okta.com/?SAMLRequest=fc%2B7CsJAEAXQXvAflu1NNJUMeZBGELTx1a%2FrYILJTtyZGD%2FfSBRiYzlw77lMnD3rSj3Qc0ku0YtgrhU6S5fSXRN9PKxmS52l00nMpq6iBvJWCrfDe4ss6vStRe9aDzmGIZfo1jsgwyWDMzUyiIV9vt1AH4XGk5ClSvewUgMNa%2BYW%2FVj5jxhm9NLP67QQaSAMu64L6CYmsFSHlnzT4ZlLwTgcL6Sf8%2FeX9AU%3D) to your Okta Developer account (or [sign up](https://developer.okta.com/signup/) if you don’t have an account) and navigate to **Applications** > **Add Application**. Click **Web** and click **Next**. Give the app a name you’ll remember, and specify `http://localhost:8080/login` as a Login Redirect URI. Click **Done** and note the client ID and secret. You'll need to copy/paste them into a file in a minute.
 
-Create a `ROLE_ADMIN` and `ROLE_USER` group (**Users** > **Groups** > **Add Group**) and add users to them. I recommend adding the account you signed up with to `ROLE_ADMIN` and create a new user (**Users** > **Add Person**) to add to `ROLE_USER`.
+Create a `ROLE_ADMIN` and `ROLE_USER` group (**Users** > **Groups** > **Add Group**) and add users to them. I recommend adding the account you signed up with to `ROLE_ADMIN` and creating a new user (**Users** > **Add Person**) to add to `ROLE_USER`.
 
 Navigate to **API** > **Authorization Servers** and click the one named **default** to edit it. Click the **Claims** tab and **Add Claim**. Name it "roles", and include it in the ID Token. Set the value type to "Groups" and set the filter to be a Regex of `.*`. Click **Create** to complete the process.
 
@@ -233,9 +231,11 @@ To enable self-service registration in Okta, you'll need to navigate to the Clas
 
 Then navigate to **Directory** > **Self-Registration** and click **Enable Registration**. Set the default group to `ROLE_USER`, the **Default redirect** to a Custom URL with `http://localhost:8080` as its value, and click **Save**.
 
-**NOTE:** If you get an error that says `'http://localhost:8080' is not a valid redirect URI`, it's because you need to add `http://localhost:8080` as a trusted redirect under **Security** > **API** > **Trusted Origins**. After making this change, navigate to **Directory** > **Self-Service Registration** and edit the settings to configure the custom URL again. It'll work now.
+**NOTE:** If you get an error that says `'http://localhost:8080' is not a valid redirect URI`, it's because you need to add `http://localhost:8080` as a trusted redirect under **Security** > **API** > **Trusted Origins**. After making this change, navigate to **Directory** > **Self-Service Registration** and edit the settings to configure the custom URL again. It should work work this time.
 
 {% img blog/react-photo-gallery-pwa/registration-settings.png alt:"Okta Self-Service Registration Settings" width:"800" %}{: .center-image }
+
+**TIP:** You'll want to change the **Default redirect** to your production URL after you've deployed your app.
 
 ### Okta Customization Options
 
@@ -299,7 +299,7 @@ This process will create [Liquibase](https://www.liquibase.org/) changelog files
 
 After the process completes, you can restart your app (Ctrl+C the `./mvnw` process and restart it) and run `yarn e2e` again to see a fast confirmation that everything generated correctly.
 
-By now, you can see that JHipster is pretty powerful. It recognized that you had an `image` property of `ImageBlob` type and automatically created the plumbing you need to upload and store images in your database! Huzzah!
+By now, you can see that JHipster is pretty powerful. It recognized that you had an `image` property of `ImageBlob` type and automatically created the plumbing you need to upload and store images in your database! _Huzzah!_
 
 ## Add Image EXIF Processing in Your Spring Boot API
 
@@ -608,7 +608,7 @@ The final feature &mdash; a webapp manifest &mdash; is included at `src/main/web
 
 To deploy your app to Heroku, you'll first need to install the [Heroku CLI](https://devcenter.heroku.com/articles/heroku-cli). You can confirm its installed by running `heroku --version`.
 
-> If you don't have a Heroku account, go to [https://www.heroku.com/] and sign up. Don't worry, it's free and chances are you'll love the experience.
+> If you don't have a Heroku account, go to [heroku.com](https://www.heroku.com/) and sign up. Don't worry, it's free and chances are you'll love the experience.
 
 Run `heroku login` to log in to your account, then start the deployment process with JHipster:
 
