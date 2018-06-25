@@ -67,6 +67,7 @@ Each application may choose different methods for deactivating a user’s access
 
 For audit purposes, Okta users are never deleted; they are deactivated instead.
 Because of this, Okta doesn't make delete requests to the user APIs in downstream applications.
+// ^^^ Okta does now support deleting users. Can we reword this? 
 
 #### Sync Password
 
@@ -1378,6 +1379,7 @@ Okta users are never **deleted**; they are **deactivated**
 instead. Because of this, Okta never makes an HTTP DELETE
 request to a user resource on your SCIM API. Instead, Okta makes
 an HTTP PATCH request to set the `active` setting to `false`.
+// ^^^ Okta does now support deleting users. Can we reword this? 
 
 #### Querying with POST
 
@@ -1821,6 +1823,7 @@ Yes, the you must return these fields in an array, which is specified in the SCI
 **Why doesn't Okta support DELETE /Users?**
 
 Okta users are never deleted for compliance and audit purposes; they are deactivated instead. Because of this, Okta never makes an HTTP DELETE request to a user resource on your SCIM API. Instead, Okta makes an HTTP PATCH request to set the active setting to false. You’ll need to support the concept of an “active” and “inactive” user in your app.
+// ^^^ Okta does now support deleting users. Can we reword this? 
 
 **Will Okta be supporting the /groups SCIM endpoint? When?**
 
