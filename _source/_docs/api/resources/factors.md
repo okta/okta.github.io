@@ -917,7 +917,7 @@ A `400 Bad Request` status code may be returned if you attempt to enroll with a 
     "errorId": "oaeneEaQF8qQrepOWHSkdoejw",
     "errorCauses": [
        {
-          "errorSummary": "Factor already exists."
+          "errorSummary": "A factor of this type is already set up."
        }
     ]
 }
