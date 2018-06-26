@@ -660,7 +660,7 @@ After Heroku restarts your app, log in, then test it with Lighthouse. Looks pret
 
 This tutorial has shown you how to develop a photo gallery PWA with Spring Boot, React, JHipster, and OIDC. It showed you some useful open source libraries to simplify the implementation and even generated tests.
 
-You can find the source code for the example created in this post in the [oktadeveloper/okta-react-photo-gallery-example repo on GitHub](https://github.com/oktadeveloper/okta-react-photo-gallery-example). I recorded a screencast to walk through creating it all too. Watch the embedded version below, or [on YouTube](https://youtu.be/GlJWUqy1SJM).
+You can find the source code for the example created in this post in the [oktadeveloper/okta-react-photo-gallery-example repo on GitHub](https://github.com/oktadeveloper/okta-react-photo-gallery-example). I recorded a screencast to walk through creating it all too. Watch the embedded video below, or [on YouTube](https://youtu.be/GlJWUqy1SJM).
 
 <div style="text-align: center">
 <iframe width="700" height="394" style="max-width: 100%" src="https://www.youtube.com/embed/GlJWUqy1SJM" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
