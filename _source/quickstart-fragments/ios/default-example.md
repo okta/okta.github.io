@@ -58,7 +58,7 @@ Create a new `Okta.plist` file in your application's bundle with the following f
 <plist version="1.0">
 <dict>
   <key>issuer</key>
-  <string>https://{yourOktaDomain}.com/oauth2/default</string>
+  <string>https://{yourOktaDomain}/oauth2/default</string>
   <key>clientId</key>
   <string>{clientIdValue}</string>
   <key>redirectUri</key>

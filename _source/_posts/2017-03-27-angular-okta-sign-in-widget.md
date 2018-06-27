@@ -102,7 +102,7 @@ export class Okta {
 
   constructor() {
     this.widget = new OktaSignIn({
-      baseUrl: 'https://{yourOktaDomain}.com',
+      baseUrl: 'https://{yourOktaDomain}',
       clientId: '{clientId}',
       redirectUri: 'http://localhost:4200',
       authParams: {

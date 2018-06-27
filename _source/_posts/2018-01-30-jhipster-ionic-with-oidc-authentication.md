@@ -120,16 +120,16 @@ security:
         enabled: false
     oauth2:
         client:
-            access-token-uri: https://{yourOktaDomain}.com/oauth2/default/v1/token
-            user-authorization-uri: https://{yourOktaDomain}.com/oauth2/default/v1/authorize
+            access-token-uri: https://{yourOktaDomain}/oauth2/default/v1/token
+            user-authorization-uri: https://{yourOktaDomain}/oauth2/default/v1/authorize
             client-id: {yourClientId}
             client-secret: {yourClientSecret}
             client-authentication-scheme: form
             scope: openid profile email
         resource:
             filter-order: 3
-            user-info-uri: https://{yourOktaDomain}.com/oauth2/default/v1/userinfo
-            token-info-uri: https://{yourOktaDomain}.com/oauth2/default/v1/introspect
+            user-info-uri: https://{yourOktaDomain}/oauth2/default/v1/userinfo
+            token-info-uri: https://{yourOktaDomain}/oauth2/default/v1/introspect
             prefer-token-info: false
 ```
 

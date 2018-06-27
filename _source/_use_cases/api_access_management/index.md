@@ -70,7 +70,7 @@ Okta helps you manage ID Tokens (OpenID Connect) and Access Tokens (OAuth 2.0).
 
 ## Custom Claims
 
-The JWT extension to the OAuth Framework lets you include custom claims in ID and Access Tokens.
+The JWT specification we use with the OAuth Framework lets you include custom claims in ID and Access Tokens.
 You can design tokens to disclose the information you want to share depending on the client and the scope of the tokens.
 For example, a shopping site might have one set of claims for customers while they browse, but another claim for administrator functions
 like changing their personal information.

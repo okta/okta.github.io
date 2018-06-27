@@ -1,5 +1,5 @@
 {% assign active_documentation = '' %}
-{% assign documentation_dirs = "code,documentation,docs,standards,use_cases,reference" | split:"," %}
+{% assign documentation_dirs = "code,documentation,docs,standards,use_cases,reference,quickstart,authentication-guide" | split:"," %}
 
 {% for dir in documentation_dirs %}
   {% if page.url contains dir %}
@@ -83,3 +83,5 @@
   </div>
 
 </header>
+
+<!-- START Promo banner -->{% include promo_banner.html %}<!-- END Promo banner -->

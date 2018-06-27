@@ -140,7 +140,7 @@ class Auth {
     this.handleAuthentication = this.handleAuthentication.bind(this);
 
     this.widget = new OktaSignIn({
-      baseUrl: 'https://{yourOktaDomain}.com/',
+      baseUrl: 'https://{yourOktaDomain}/',
       clientId: '{clientId}',
       redirectUri: 'http://localhost:8080',
       authParams: {

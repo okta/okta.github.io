@@ -347,7 +347,7 @@ play {
 
 baseUrl = "http://localhost:9000"
 
-oidc.discoveryUri = "https://{yourOktaDomain}.com/oauth2/default/.well-known/openid-configuration"
+oidc.discoveryUri = "https://{yourOktaDomain}/oauth2/default/.well-known/openid-configuration"
 oidc.clientId = "{clientId}"
 oidc.clientSecret = "{clientSecret}"
 ```

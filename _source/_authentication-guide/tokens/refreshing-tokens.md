@@ -42,7 +42,7 @@ The following combinations of grant type and scope, when sent to `/token` endpoi
 This table only shows the minimum requirements. For example, with the `password` grant type you can also include an `openid` scope alongside the `offline_access` scope:
 
 ```
-POST https://{yourOktaDomain}.com/oauth2/default/v1/token
+POST https://{yourOktaDomain}/oauth2/default/v1/token
 
 grant_type=password
  &redirect_uri=http%3A%2F%2Flocalhost%3A8080
@@ -66,7 +66,7 @@ For more information on the `/authorize` endpoint, see the [Authentication Reque
 To refresh your access token, you send a token request with a `grant_type` of `refresh_token`.
 
 ```
-http --form POST https://{yourOktaDomain}.com/oauth2/default/v1/token \
+http --form POST https://{yourOktaDomain}/oauth2/default/v1/token \
   accept:application/json \
   authorization:'Basic MG9hYmg3M...' \
   cache-control:no-cache \

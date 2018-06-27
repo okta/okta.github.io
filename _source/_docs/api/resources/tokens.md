@@ -21,7 +21,7 @@ Create a token.  This API does not require any token-based authentication to acc
 ~~~ shell
 curl -v -H "Content-type:application/json" \
 -H "Accept:application/json" \
--X POST https://{yourOktaDomain}.com/api/v1/tokens/ \
+-X POST https://{yourOktaDomain}/api/v1/tokens/ \
 -d \
 '{
   "username": "user8u3VOJBREVQHBTAS@asdf.com",
@@ -52,5 +52,5 @@ Revokes the token that is being used to authenticate to the API.
 curl -v -H "Content-type:application/json" \
 -H "Authorization:SSWS 00F-MBcxD2SC8tzXDCDZm2a04qtXLcFqtlrrPu6eVtxRs" \
 -H "Accept:application/json" \
--X DELETE https://{yourOktaDomain}.com/api/v1/tokens/
+-X DELETE https://{yourOktaDomain}/api/v1/tokens/
 ~~~

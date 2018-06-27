@@ -194,7 +194,7 @@ Now you included everything you'll need to get the login function to authenticat
 constructor() {
   this.authClient = new OktaAuth({
     clientId: '{yourClientId}',
-    url: 'https://{yourOktaDomain}.com',
+    url: 'https://{yourOktaDomain}',
     issuer: 'default'
   });
 }

@@ -17,7 +17,7 @@ Request
 {:.api .api-request .api-request-example}
 
 ```sh
-POST https://{yourOktaDomain}.com/api/v1/users/{user_id}/lifecycle/suspend
+POST https://{yourOktaDomain}/api/v1/users/{user_id}/lifecycle/suspend
 ```
 
 Response
@@ -35,7 +35,7 @@ Request
 {:.api .api-request .api-request-example}
 
 ```sh
-POST https://{yourOktaDomain}.com/api/v1/users/{user_id}/lifecycle/unsuspend
+POST https://{yourOktaDomain}/api/v1/users/{user_id}/lifecycle/unsuspend
 ```
 
 Response
@@ -57,7 +57,7 @@ Request
 {:.api .api-request .api-request-example}
 
 ```sh
-DELETE https://{yourOktaDomain}.com/api/v1/users/{user_id}/sessions
+DELETE https://{yourOktaDomain}/api/v1/users/{user_id}/sessions
 ```
 
 Response
@@ -83,7 +83,7 @@ Request
 {:.api .api-request .api-request-example}
 
 ```sh
-POST https://{yourOktaDomain}.com/api/v1/users/{user_id}/lifecycle/expire_password
+POST https://{yourOktaDomain}/api/v1/users/{user_id}/lifecycle/expire_password
 ```
 
 Response
@@ -111,7 +111,7 @@ Request
 {:.api .api-request .api-request-example}
 
 ```sh
-POST https://{yourOktaDomain}.com/api/v1/users/{user_id}/lifecycle/expire_password?tempPassword=True
+POST https://{yourOktaDomain}/api/v1/users/{user_id}/lifecycle/expire_password?tempPassword=True
 ```
 
 Response
@@ -136,7 +136,7 @@ Request (Okta returns link)
 
 ```sh
 #have the password reset link returned
-POST https://{yourOktaDomain}.com/api/v1/users/{user_id}/lifecycle/reset_password?sendEmail=False
+POST https://{yourOktaDomain}/api/v1/users/{user_id}/lifecycle/reset_password?sendEmail=False
 ```
 
 Response (Okta returns link)
@@ -144,7 +144,7 @@ Response (Okta returns link)
 
 ```json
 {
-  "resetPasswordUrl": "{yourOktaDomain}.com/reset_password/XE6wE17zmphl3KqAPFxO"
+  "resetPasswordUrl": "{yourOktaDomain}/reset_password/XE6wE17zmphl3KqAPFxO"
 }
 ```
 
@@ -153,7 +153,7 @@ Request (Okta sends link)
 
 ```sh
 #have Okta send the email
-POST https://{yourOktaDomain}.com/api/v1/users/{user_id}/lifecycle/reset_password?sendEmail=True
+POST https://{yourOktaDomain}/api/v1/users/{user_id}/lifecycle/reset_password?sendEmail=True
 ```
 
 Response (Okta sends link)
@@ -200,7 +200,7 @@ Request
 {:.api .api-request .api-request-example}
 
 ```sh
-POST https://{yourOktaDomain}.com/api/v1/users/{user_id}
+POST https://{yourOktaDomain}/api/v1/users/{user_id}
 "{
   "profile":
   {

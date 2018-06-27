@@ -41,17 +41,17 @@ All of the endpoints on this page start with an authorization server, however th
 
 This is for the use case where your users are all part of your Okta organization and you would just like to offer them single sign-on with an ID token. In this case Okta is your authorization server, which we refer to as the "Okta Org Authorization Server" and your full URL looks like this:
 
-`https://{yourOktaDomain}.com/oauth2/v1/authorize`
+`https://{yourOktaDomain}/oauth2/v1/authorize`
 
 #### 2. Okta as the identity platform for your app or API
 
 This is for use cases where Okta is the identity and authorization platform for your application or API, so your users will be logging in to something other than Okta. In this case you are using a Custom Authorization Server inside Okta, and your full URL looks like this:
 
-`https://{yourOktaDomain}.com/oauth2/${authServerId}/v1/authorize`
+`https://{yourOktaDomain}/oauth2/${authServerId}/v1/authorize`
 
 If you have a developer account, you can use the `default` authorization server that was created along with your account, in which case the full URL looks like this:
 
-`https://{yourOktaDomain}.com/oauth2/default/v1/authorize`
+`https://{yourOktaDomain}/oauth2/default/v1/authorize`
 
 ### /authorize
 {:.api .api-operation}
@@ -204,7 +204,7 @@ These APIs are compliant with the OpenID Connect and OAuth 2.0 spec with some Ok
 This request initiates the authorization code flow, as signaled by `response_type=code`. The request returns an authorization code that you can use as the `code` parameter in a token request.
 
 ~~~
-https://{yourOktaDomain}.com/oauth2/default/v1/authorize?client_id=0oabucvy
+https://{yourOktaDomain}/oauth2/default/v1/authorize?client_id=0oabucvy
 c38HLL1ef0h7&response_type=code&scope=openid&redirect_uri=http%3A%2F%2Flocal
 host%3A8080&state=state-296bc9a0-a2a2-4a57-be1a-d0e2fd9bb601&nonce=g5ly497e8ps'
 ~~~
@@ -212,14 +212,14 @@ host%3A8080&state=state-296bc9a0-a2a2-4a57-be1a-d0e2fd9bb601&nonce=g5ly497e8ps'
 This request does the same thing, but uses the `request` parameter to deliver a signed (HS256) JWT that contains all the query parameters:
 
 ~~~
-https://{yourOktaDomain}.com/oauth2/default/v1/authorize?
+https://{yourOktaDomain}/oauth2/default/v1/authorize?
   request=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJPa3RhIiwiaWF0IjoxNTEyNTE2MjIxLCJleHAiOjE1NDQwNTIyMjEsImF1ZCI6Ind3dy5leGFtcGxlLmNvbSIsInN1YiI6InNqYWNrc29uQGV4YW1wbGUuY29tIiwiRW1haWwiOiJzamFja3NvbkBleGFtcGxlLmNvbSIsInJlc3BvbnNlX3R5cGUiOiJjb2RlIiwicmVzcG9uc2VfbW9kZSI6ImZvcm1fcG9zdCIsInJlZGlyZWN0X3VyaSI6Im15UmVkaXJlY3RVUkkuY29tIiwic3RhdGUiOiJteVN0YXRlIiwibm9uY2UiOiJteU5vbmNlIiwic2NvcGUiOiJvcGVuaWQgb2ZmbGluZV9hY2Nlc3MifQ.TjPy2_nUerULClavBNHcpnO_Pd1DxNEjQCeSW45ALJg"
 ~~~
 
 This request initiates the implicit flow, which gets an ID token and access token from the authorization server without the code exchange step. We use the same request as the first example, but with `response_type=id_token token`:
 
 ~~~
-https://{yourOktaDomain}.com/oauth2/default/v1/authorize?client_id=0oabv6kx4qq6
+https://{yourOktaDomain}/oauth2/default/v1/authorize?client_id=0oabv6kx4qq6
 h1U5l0h7&response_type=id_token token&scope=openid&redirect_uri=http%3A%2F%2Flocalhost%3
 A8080&state=state-296bc9a0-a2a2-4a57-be1a-d0e2fd9bb601&nonce=foo'
 ~~~
@@ -404,8 +404,8 @@ Based on the type of token and whether it is active or not, the returned JSON co
     "exp" : 1451606400,
     "iat" : 1451602800,
     "sub" : "john.doe@example.com",
-    "aud" : "https://{yourOktaDomain}.com",
-    "iss" : "https://{yourOktaDomain}.com/oauth2/orsmsg0aWLdnF3spV0g3",
+    "aud" : "https://{yourOktaDomain}",
+    "iss" : "https://{yourOktaDomain}/oauth2/orsmsg0aWLdnF3spV0g3",
     "jti" : "AT.7P4KlczBYVcWLkxduEuKeZfeiNYkZIC9uGJ28Cc-YaI",
     "uid" : "00uid4BxXw6I6TV4m0g3"
 }
@@ -733,7 +733,7 @@ Returns OAuth 2.0 metadata related to your custom authorization server. This inf
 
 ~~~sh
 curl -X GET \
-  "https://{yourOktaDomain}.com/oauth2/${authServerId}/.well-known/oauth-authorization-server?client_id=0oabzljih3rnr6aGt0h7" \
+  "https://{yourOktaDomain}/oauth2/${authServerId}/.well-known/oauth-authorization-server?client_id=0oabzljih3rnr6aGt0h7" \
 ~~~
 
 #### Response Properties
@@ -768,11 +768,11 @@ curl -X GET \
 
 ~~~json
 {
-    "issuer": "https://{yourOktaDomain}.com/oauth2/${authServerId}",
-    "authorization_endpoint": "https://{yourOktaDomain}.com/oauth2/${authServerId}/v1/authorize",
-    "token_endpoint": "https://{yourOktaDomain}.com/oauth2/${authServerId}/v1/token",
+    "issuer": "https://{yourOktaDomain}/oauth2/${authServerId}",
+    "authorization_endpoint": "https://{yourOktaDomain}/oauth2/${authServerId}/v1/authorize",
+    "token_endpoint": "https://{yourOktaDomain}/oauth2/${authServerId}/v1/token",
     "registration_endpoint": "https://{baseUrl}/clients",
-    "jwks_uri": "https://{yourOktaDomain}.com/oauth2/${authServerId}/v1/keys",
+    "jwks_uri": "https://{yourOktaDomain}/oauth2/${authServerId}/v1/keys",
     "response_types_supported": [
         "code",
         "token",
@@ -818,21 +818,21 @@ curl -X GET \
     "code_challenge_methods_supported": [
         "S256"
     ],
-    "introspection_endpoint": "https://{yourOktaDomain}.com/oauth2/${authServerId}/v1/introspect",
+    "introspection_endpoint": "https://{yourOktaDomain}/oauth2/${authServerId}/v1/introspect",
     "introspection_endpoint_auth_methods_supported": [
         "client_secret_basic",
         "client_secret_post",
         "client_secret_jwt",
         "none"
     ],
-    "revocation_endpoint": "https://{yourOktaDomain}.com/oauth2/${authServerId}/v1/revoke",
+    "revocation_endpoint": "https://{yourOktaDomain}/oauth2/${authServerId}/v1/revoke",
     "revocation_endpoint_auth_methods_supported": [
         "client_secret_basic",
         "client_secret_post",
         "client_secret_jwt",
         "none"
     ],
-    "end_session_endpoint": "https://{yourOktaDomain}.com/oauth2/${authServerId}/v1/logout",
+    "end_session_endpoint": "https://{yourOktaDomain}/oauth2/${authServerId}/v1/logout",
     "request_parameter_supported": true,
     "request_object_signing_alg_values_supported": [
         "HS256",
@@ -858,9 +858,9 @@ HTTP 404 Not Found
 ### /.well-known/openid-configuration
 {:.api .api-operation}
 
-{% api_operation get https://{yourOktaDomain}.com/.well-known/openid-configuration %}
+{% api_operation get https://{yourOktaDomain}/.well-known/openid-configuration %}
 
-{% api_operation get https://{yourOktaDomain}.com/oauth2/${authServerId}/.well-known/openid-configuration %}
+{% api_operation get https://{yourOktaDomain}/oauth2/${authServerId}/.well-known/openid-configuration %}
 
 > This endpoint's base URL will vary depending on whether you are using a custom authorization server or not. The custom authorization server URL specifies an `authServerId`. For example, the custom Authorization Server automatically created for you by Okta has an `authServerId` value of `default`.
 
@@ -873,7 +873,7 @@ This API doesn't require any authentication.
 
 ~~~sh
 curl -X GET \
-  "https://{yourOktaDomain}.com/oauth2/${authServerId}/.well-known/openid-configuration?client_id=0oabzljih3rnr6aGt0h7" \
+  "https://{yourOktaDomain}/oauth2/${authServerId}/.well-known/openid-configuration?client_id=0oabzljih3rnr6aGt0h7" \
 ~~~
 
 #### Response Properties
@@ -907,7 +907,7 @@ curl -X GET \
 
 ~~~json
 {
-    "issuer": "https://{yourOktaDomain}.com",
+    "issuer": "https://{yourOktaDomain}",
     "authorization_endpoint": "https://{baseUrl}/authorize",
     "token_endpoint": "https://{baseUrl}/token",
     "userinfo_endpoint": "https://{baseUrl}/userinfo",
@@ -1090,7 +1090,7 @@ client does not make the token valid again.
 {
   "ver": 1,
   "jti": "AT.0mP4JKAZX1iACIT4vbEDF7LpvDVjxypPMf0D7uX39RE",
-  "iss": "https://{yourOktaDomain}.com/oauth2/0oacqf8qaJw56czJi0g4",
+  "iss": "https://{yourOktaDomain}/oauth2/0oacqf8qaJw56czJi0g4",
   "aud": "https://api.example.com",
   "sub": "00ujmkLgagxeRrAg20g3",
   "iat": 1467145094,
@@ -1284,7 +1284,7 @@ Claims in the payload are either base claims, independent of scope (always retur
 | exp           | The time the ID token expires, represented in Unix time (seconds).                                                                                                         | Integer   | 1311280970                                          |
 | iat           | The time the ID token was issued, represented in Unix time (seconds).                                                                                                      | Integer   | 1311280970                                          |
 | idp           | The Okta org ID, or the ID of an [Identity Provider](/docs/api/resources/idps.html) if this authentication used Social Authentication or Inbound SAML.                     | String    | "00ok1u7AsAkrwdZL3z0g3"                             |
-| iss           | The URL of the authorization server that issued this ID token                                                                                                              | String    | "https://{yourOktaDomain}.com"                         |
+| iss           | The URL of the authorization server that issued this ID token                                                                                                              | String    | "https://{yourOktaDomain}"                         |
 | jti           | A unique identifier for this ID token for debugging and revocation purposes.                                                                                               | String    | "Tlenfse93dgkaksginv"                               |
 | sub           | The subject. A unique identifier for the user.                                                                                                                             | String    | "00uk1u7AsAk6dZL3z0g3"                              |
 | ver           | The semantic version of the ID token.                                                                                                                                      | Integer   | 1                                                   |

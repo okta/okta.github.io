@@ -78,7 +78,7 @@ curl -X POST \
         "description": "Subordinate link property",
         "type": "USER"
     }
-}' "https://{yourOktaDomain}.com/api/v1/meta/schemas/user/default/linkedObjects"
+}' "https://{yourOktaDomain}/api/v1/meta/schemas/user/default/linkedObjects"
 ~~~
 
 ##### Response Example
@@ -101,7 +101,7 @@ HTTP/1.1 201 Created
     },
     "_links": {
         "self": {
-            "href": "https://{yourOktaDomain}.com/api/v1/meta/schemas/user/default/linkedObjects/manager"
+            "href": "https://{yourOktaDomain}/api/v1/meta/schemas/user/default/linkedObjects/manager"
         }
     }
 }
@@ -136,7 +136,7 @@ curl -X POST \
   -H 'Accept: application/json' \
   -H 'Authorization: SSWS ${api_token}' \
   -H 'Content-Type: application/json' \
-  -d "https://{yourOktaDomain}.com/api/v1/meta/schemas/user/default/linkedObjects/manager"
+  -d "https://{yourOktaDomain}/api/v1/meta/schemas/user/default/linkedObjects/manager"
 ~~~
 
 ##### Response Example
@@ -160,7 +160,7 @@ HTTP/1.1 200 OK
     },
     "_links": {
         "self": {
-            "href": "https://{yourOktaDomain}.com/api/v1/meta/schemas/user/default/linkedObjects/manager"
+            "href": "https://{yourOktaDomain}/api/v1/meta/schemas/user/default/linkedObjects/manager"
         }
     }
 }
@@ -192,7 +192,7 @@ curl -v -X GET \
 -H "Accept: application/json" \
 -H "Content-Type: application/json" \
 -H "Authorization: SSWS ${api_token}" \
-"https://{yourOktaDomain}.com/api/v1/meta/schemas/user/default/linkedObjects"
+"https://{yourOktaDomain}/api/v1/meta/schemas/user/default/linkedObjects"
 ~~~
 
 ##### Response Example
@@ -215,7 +215,7 @@ curl -v -X GET \
         },
         "_links": {
             "self": {
-                "href": "https://{yourOktaDomain}.com/api/v1/meta/schemas/user/default/linkedObjects/manager"
+                "href": "https://{yourOktaDomain}/api/v1/meta/schemas/user/default/linkedObjects/manager"
             }
         }
     },
@@ -234,7 +234,7 @@ curl -v -X GET \
         },
         "_links": {
             "self": {
-                "href": "https://{yourOktaDomain}.com/api/v1/meta/schemas/user/default/linkedObjects/mother"
+                "href": "https://{yourOktaDomain}/api/v1/meta/schemas/user/default/linkedObjects/mother"
             }
         }
     }
@@ -268,7 +268,7 @@ curl -v -X DELETE \
 -H "Accept: application/json" \
 -H "Content-Type: application/json" \
 -H "Authorization: SSWS ${api_token}" \
-"https://{yourOktaDomain}.com/api/v1/meta/schemas/user/default/linkedObjects/mother"
+"https://{yourOktaDomain}/api/v1/meta/schemas/user/default/linkedObjects/mother"
 ~~~
 
 ##### Response Example
@@ -316,7 +316,7 @@ curl -v -X PUT \
 -H "Accept: application/json" \
 -H "Content-Type: application/json" \
 -H "Authorization: SSWS ${api_token}" \
-"https://{yourOktaDomain}.com/api/v1/users/${associated.userId}/linkedObjects/${primary.name}/${primary.userId}"
+"https://{yourOktaDomain}/api/v1/users/${associated.userId}/linkedObjects/${primary.name}/${primary.userId}"
 ~~~
 
 ##### Response Example
@@ -355,7 +355,7 @@ curl -v -X GET \
 -H "Accept: application/json" \
 -H "Content-Type: application/json" \
 -H "Authorization: SSWS ${api_token}" \
-"https://{yourOktaDomain}.com/api/v1/users/00u5zex6ztMbOZhF50h7/linkedObjects/manager"
+"https://{yourOktaDomain}/api/v1/users/00u5zex6ztMbOZhF50h7/linkedObjects/manager"
 ~~~
 
 ##### Response Example
@@ -366,7 +366,7 @@ curl -v -X GET \
     {
         "_links": {
             "self": {
-                "href": "https://{yourOktaDomain}.com/api/v1/users/00u5t60iloOHN9pBi0h7"
+                "href": "https://{yourOktaDomain}/api/v1/users/00u5t60iloOHN9pBi0h7"
             }
         }
     }
@@ -402,7 +402,7 @@ curl -v -X GET \
 -H "Accept: application/json" \
 -H "Content-Type: application/json" \
 -H "Authorization: SSWS ${api_token}" \
-"https://{yourOktaDomain}.com/api/v1/users/00u5t60iloOHN9pBi0h7/linkedObjects/subordinate"
+"https://{yourOktaDomain}/api/v1/users/00u5t60iloOHN9pBi0h7/linkedObjects/subordinate"
 ~~~
 
 ##### Response Example
@@ -413,7 +413,7 @@ curl -v -X GET \
     {
         "_links": {
             "self": {
-                "href": "https://{yourOktaDomain}.com/api/v1/users/00u5zex6ztMbOZhF50h7"
+                "href": "https://{yourOktaDomain}/api/v1/users/00u5zex6ztMbOZhF50h7"
             }
         }
     }
@@ -456,7 +456,7 @@ curl -v -X GET \
 -H "Accept: application/json" \
 -H "Content-Type: application/json" \
 -H "Authorization: SSWS ${api_token}" \
-"https://{yourOktaDomain}.com//api/v1/users/00u5t60iloOHN9pBi0h7/linkedObjects/manager"
+"https://{yourOktaDomain}//api/v1/users/00u5t60iloOHN9pBi0h7/linkedObjects/manager"
 ~~~
 
 ##### Response Example
@@ -486,7 +486,7 @@ The following model contains example values for each attribute.
     },
     "_links": {
           "self": {
-               "href": "https://{yourOktaDomain}.com/api/v1/meta/schemas/user/default/linkedObjects/manager"
+               "href": "https://{yourOktaDomain}/api/v1/meta/schemas/user/default/linkedObjects/manager"
           }
     }
 }

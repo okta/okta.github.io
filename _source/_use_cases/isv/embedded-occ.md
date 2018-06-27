@@ -87,14 +87,14 @@ If the administrator wants to use an existing Okta tenant, you should prompt for
 
 ### Create a token
 
-Okta has granted access to a system account (system user) in https://{yourOktaDomain}.com.  You must create an API token for this user, follow the steps in [Getting a token] to perform this action.
+Okta has granted access to a system account (system user) in https://{yourOktaDomain}.  You must create an API token for this user, follow the steps in [Getting a token] to perform this action.
 
 ### Test the Token
 
 To test if the token is valid, you can try the following curl command:
 
 ```sh
-curl -v -H "Authorization:SSWS <API token>" -H "Accept:application/json" -H "Content-type:application/json" -X GET https://{yourOktaDomain}.com/api/v1/users/me
+curl -v -H "Authorization:SSWS <API token>" -H "Accept:application/json" -H "Content-type:application/json" -X GET https://{yourOktaDomain}/api/v1/users/me
 ```
 
 ### Create an Okta Tenant
@@ -105,7 +105,7 @@ The following curl command will create a new Okta tenant.  _If you use a *.okta.
 curl -v -H "Authorization:SSWS <API token>" \
  -H "Accept:application/json" \
  -H "Content-type:application/json" \
- -X POST https://{yourOktaDomain}.com/api/v1/orgs \
+ -X POST https://{yourOktaDomain}/api/v1/orgs \
  -d ‘{
         "subdomain": "mycompany",
         "name": "MyCompany Inc",
@@ -183,16 +183,16 @@ Here is a sample response from a successful call.
     "tokenType": "SSWS",
     "_links": {
         "organization": {
-            "href": "https://{yourOktaDomain}.com/api/v1/orgs/sleedemo1"
+            "href": "https://{yourOktaDomain}/api/v1/orgs/sleedemo1"
         },
         "administrator": {
-            "href": "https://{yourOktaDomain}.com/api/v1/users/00u1abcd1Abcd11a1a1"
+            "href": "https://{yourOktaDomain}/api/v1/users/00u1abcd1Abcd11a1a1"
         },
         "policy": {
-            "href": "https://{yourOktaDomain}.com/api/v1/orgs/sleedemo1/policy"
+            "href": "https://{yourOktaDomain}/api/v1/orgs/sleedemo1/policy"
         },
         "contacts": {
-            "href": "https://{yourOktaDomain}.com/api/v1/orgs/sleedemo1/contacts"
+            "href": "https://{yourOktaDomain}/api/v1/orgs/sleedemo1/contacts"
         }
     }
 }
@@ -211,7 +211,7 @@ Depending on the set of inputs required to set up SAML for your app in Okta, the
 ```sh
 curl -v -H "Authorization:SSWS <API token>" \
  -H "Accept:application/json" -H "Content-type:application/json" \
- -X POST https://{yourOktaDomain}.com/api/v1/apps \
+ -X POST https://{yourOktaDomain}/api/v1/apps \
  -d  '{
         "name": "servicenow_app2",
         "status": "ACTIVE",
@@ -238,7 +238,7 @@ The following curl command will return the SAML IDP metadata (based on an exampl
 curl -v -H "Authorization:SSWS <API Token>" \
  -H "Accept:application/xml" \
  -H "Content-type:application/xml" \
- -X GET https://{yourOktaDomain}.com/api/v1/apps/0oa19jdq4ytHHtfgk1d8/sso/saml/metadata
+ -X GET https://{yourOktaDomain}/api/v1/apps/0oa19jdq4ytHHtfgk1d8/sso/saml/metadata
 ```
 
 Here is a sample response from a successful call:
@@ -258,8 +258,8 @@ Here is a sample response from a successful call:
         </md:KeyDescriptor>
         <md:NameIDFormat>urn:oasis:names:tc:SAML:1.1:nameid-format:emailAddress</md:NameIDFormat>
         <md:NameIDFormat>urn:oasis:names:tc:SAML:1.1:nameid-format:unspecified</md:NameIDFormat>
-        <md:SingleSignOnService Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST" Location="https://{yourOktaDomain}.com/app/servicenow_app2/exk19jdq4yshW8Ru71d8/sso/saml"/>
-        <md:SingleSignOnService Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-Redirect" Location="https://{yourOktaDomain}.com/app/servicenow_app2/exk19jdq4yshW8Ru71d8/sso/saml"/>
+        <md:SingleSignOnService Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST" Location="https://{yourOktaDomain}/app/servicenow_app2/exk19jdq4yshW8Ru71d8/sso/saml"/>
+        <md:SingleSignOnService Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-Redirect" Location="https://{yourOktaDomain}/app/servicenow_app2/exk19jdq4yshW8Ru71d8/sso/saml"/>
     </md:IDPSSODescriptor>
 </md:EntityDescriptor>
 ```

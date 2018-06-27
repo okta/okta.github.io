@@ -52,7 +52,7 @@ The `code_challenge` is a Base64-URL-encoded string of the SHA256 hash of the `c
 If you are using the default Okta authorization server, then your request URL would look something like this:
 
 ```
-https://{yourOktaDomain}.com/oauth2/default/v1/authorize?client_id=0oabygpxgk9l
+https://{yourOktaDomain}/oauth2/default/v1/authorize?client_id=0oabygpxgk9l
 XaMgF0h7&response_type=code&scope=openid&redirect_uri=yourApp%3A%2Fcallback&st
 ate=state-8600b31f-52d1-4dca-987c-386e3d8967e9&code_challenge_method=S256&code_
 challenge=qjrzSW9gMiUgpUvqgEPE4_-8swvyCtfOVvg55o5S_es
@@ -85,7 +85,7 @@ To exchange this code for access and ID tokens, you pass it to your authorizatio
 
 ```
 curl --request POST \
-  --url https://{yourOktaDomain}.com/oauth2/default/v1/token \
+  --url https://{yourOktaDomain}/oauth2/default/v1/token \
   --header 'accept: application/json' \
   --header 'cache-control: no-cache' \
   --header 'content-type: application/x-www-form-urlencoded' \

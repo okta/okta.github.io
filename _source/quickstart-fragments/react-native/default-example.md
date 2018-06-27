@@ -73,7 +73,7 @@ In your application's controller, create a new instance of the `TokenClient`:
 import TokenClient from '@okta/okta-react-native';
 
 const tokenClient = new TokenClient({
-  issuer: 'https://{yourOktaDomain}.com/oauth2/default',
+  issuer: 'https://{yourOktaDomain}/oauth2/default',
   client_id: '{clientId}',
   scope: 'openid profile',
   redirect_uri: __DEV__ ?

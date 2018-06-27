@@ -157,7 +157,7 @@ export class LoginPage {
     oauthService.redirectUri = window.location.origin;
     oauthService.clientId = '{clientId}';
     oauthService.scope = 'openid profile email';
-    oauthService.issuer = 'https://{yourOktaDomain}.com/oauth2/default';
+    oauthService.issuer = 'https://{yourOktaDomain}/oauth2/default';
     oauthService.tokenValidationHandler = new JwksValidationHandler();
     
     // Load Discovery Document and then try to login the user

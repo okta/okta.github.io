@@ -67,7 +67,7 @@ import {
 } from '@okta/okta-angular';
 
 const config = {
-  issuer: 'https://{yourOktaDomain}.com/oauth2/default',
+  issuer: 'https://{yourOktaDomain}/oauth2/default',
   redirectUri: 'http://localhost:{port}/implicit/callback',
   clientId: '{clientId}'
 }

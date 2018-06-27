@@ -228,7 +228,7 @@ these steps, you'll have a working example of connecting Okta to Spring.
 	<bean class="org.opensaml.saml2.metadata.provider.HTTPMetadataProvider">
 	  <!-- URL containing the metadata -->
 	  <constructor-arg>
-		<!-- This URL should look something like this: https://{yourOktaDomain}.com/app/abc0defghijK1lmN23o4/sso/saml/metadata -->
+		<!-- This URL should look something like this: https://{yourOktaDomain}/app/abc0defghijK1lmN23o4/sso/saml/metadata -->
 		<value type="java.lang.String">{metadata-url}</value>
 	  </constructor-arg>
 	  <!-- Timeout for metadata loading in ms -->

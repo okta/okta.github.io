@@ -14,6 +14,8 @@ The Okta Sign-In Widget is a JavaScript library that gives you a fully-featured 
 
 Okta uses the Widget as part of its normal sign-in page. If you would like to customize the Widget, then you will need to host it yourself. This guide will walk you through the [installation process](#installation) for the Widget, as well as [a few common use cases](#use-cases) for the Widget and how to implement them. The full Widget reference can be found [on GitHub](https://github.com/okta/okta-signin-widget#okta-sign-in-widget).
 
+> A version of the Widget that you can edit in real time can be found here: <https://developer.okta.com/live-widget/>
+
 {% img okta-signin.png alt:"Screenshot of basic Okta Sign-In Widget" %}{: .center-image }
 
 
@@ -83,7 +85,7 @@ The code that initializes the Widget looks like this:
 <div id="widget-container"></div>
 
 <script>
-  var signIn = new OktaSignIn({baseUrl: 'https://{yourOktaDomain}.com'});
+  var signIn = new OktaSignIn({baseUrl: 'https://{yourOktaDomain}'});
   signIn.renderEl({
     el: '#widget-container'
   }, function success(res) {
@@ -119,7 +121,7 @@ In this case, you would like to use the Widget to sign in to the default Okta da
 ~~~javascript
 function success(res) {
   if (res.status === 'SUCCESS') {
-    res.session.setCookieAndRedirect('https://{yourOktaDomain}.com/app/UserHome');
+    res.session.setCookieAndRedirect('https://{yourOktaDomain}/app/UserHome');
   }
 }
 ~~~
@@ -146,7 +148,7 @@ If you'd like to use the Widget to sign in to your own application instead of Ok
 
 ~~~javascript
 var signIn = new OktaSignIn({
-  baseUrl: 'https://{yourOktaDomain}.com',
+  baseUrl: 'https://{yourOktaDomain}',
   clientId: '${clientId}',
   redirectUri: '${redirectUri configured in OIDC app}',
   authParams: {
@@ -233,6 +235,8 @@ function error(err) {
 ## Customization
 
 The Okta Sign-In Widget is fully customizable via CSS and JavaScript.
+
+> You can try all these customizations for yourself using our [Live Widget](https://developer.okta.com/live-widget/).
 
 ### Initial Login Screen
 
@@ -435,7 +439,7 @@ lang: {
 
 ~~~javascript
 var config = {
-  baseUrl: 'https://{yourOktaDomain}.com',
+  baseUrl: 'https://{yourOktaDomain}',
   ...
   i18n: {
     'en': {

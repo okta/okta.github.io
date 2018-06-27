@@ -1,4 +1,4 @@
-(function($) {    
+(function($) {
   $(function() {
     var iframe = $('<iframe id="myOktaIFrame" src="https://login.okta.com" style="display:none"></iframe>');
 
@@ -23,13 +23,13 @@
           return accounts[i].origin;
         }
       }
-      return 'https://{yourOktaDomain}.com';
+      return 'https://{yourOktaDomain}';
     }
 
     var previewOrg = findPreviewOrg(event.data);
 
-    // Replace all occurances of 'https://{yourOktaDomain}.com with
+    // Replace all occurances of 'https://{yourOktaDomain}' with
     // the last used oktapreview account: 'https://dev-{number}.oktapreview.com
     $('.okta-preview-domain').text(previewOrg);
   }
-})(jQuery); 
+})(jQuery);

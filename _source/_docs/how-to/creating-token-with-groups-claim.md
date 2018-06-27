@@ -64,7 +64,7 @@ Use this procedure if you have the Okta Authorization Server, not the `default` 
 
 #### Step One: Get the Group IDs
 
-Send a request to `https://{yourOktaDomain}.com/api/v1/groups` and collect the IDs for all the groups you'll want to whitelist.
+Send a request to `https://{yourOktaDomain}/api/v1/groups` and collect the IDs for all the groups you'll want to whitelist.
 
    Request Example:
 
@@ -73,7 +73,7 @@ curl -X GET \
   -H 'accept: application/json' \
   -H 'authorization: SSWS ${api_token}' \
   -H 'content-type: application/json' \
-  "https://{yourOktaDomain}.com/api/v1/groups"
+  "https://{yourOktaDomain}/api/v1/groups"
 ~~~
 
    Response Example:
@@ -107,10 +107,10 @@ curl -X GET \
         }
       ],
       "users": {
-        "href": "https://{yourOktaDomain}.com/api/v1/groups/00gbso71miOMjxHRW0h7/users"
+        "href": "https://{yourOktaDomain}/api/v1/groups/00gbso71miOMjxHRW0h7/users"
       },
       "apps": {
-        "href": "https://{yourOktaDomain}.com/api/v1/groups/00gbso71miOMjxHRW0h7/apps"
+        "href": "https://{yourOktaDomain}/api/v1/groups/00gbso71miOMjxHRW0h7/apps"
       }
     }
   }
@@ -122,14 +122,14 @@ This example uses one `groupId` for simplicity's sake.
 #### Step Two: Add List of Groups to Profile of Client App
 
 If you only have one or two groups to specify, simply add the group IDs to the first parameter of the `getFilteredGroups` function described in the next step.
-However, if you have a lot of groups to whitelist, you can put the group IDs in the client app's profile property bag: `https://{yourOktaDomain}.com/api/v1/apps/${applicationId}`.
+However, if you have a lot of groups to whitelist, you can put the group IDs in the client app's profile property bag: `https://{yourOktaDomain}/api/v1/apps/${applicationId}`.
 The following example names the group whitelist `groupwhitelist`, but you can name it anything.
 
 Request Example:
 
 ~~~sh
 curl -X PUT \
-  https://{yourOktaDomain}.com/api/v1/apps/0oabskvc6442nkvQO0h7 \
+  https://{yourOktaDomain}/api/v1/apps/0oabskvc6442nkvQO0h7 \
   -H 'accept: application/json' \
   -H 'authorization: SSWS ${api_token}' \
   -H 'cache-control: no-cache' \
@@ -192,13 +192,13 @@ For the Okta Authorization Server, you can only create an ID token with a groups
 
 #### Step Four: Send a Test Request
 
-To obtain a token with the configured groups claim, send a request for an ID token that includes the `groups` claim set in step 3.c. as a scope to `https://{yourOktaDomain}.com/oauth2/v1/authorize`, as illustrated in the following example.
+To obtain a token with the configured groups claim, send a request for an ID token that includes the `groups` claim set in step 3.c. as a scope to `https://{yourOktaDomain}/oauth2/v1/authorize`, as illustrated in the following example.
 
 Request Example for Okta Authorization Server:
 
 ~~~sh
 curl -X GET \
-  "https://{yourOktaDomain}.com/oauth2/v1/authorize?client_id=0oabskvc6442nkvQO0h7
+  "https://{yourOktaDomain}/oauth2/v1/authorize?client_id=0oabskvc6442nkvQO0h7
   &response_type=id_token
   &response_mode=fragment&scope=openid%20groups
   &redirect_uri=https%3A%2F%2Fexample.com
@@ -219,7 +219,7 @@ Example Payload Data for ID Token:
 {
   "sub": "00u5t60iloOHN9pBi0h7",
   "ver": 1,
-  "iss": "https://${yourOktaDomain}.com",
+  "iss": "https://{yourOktaDomain}",
   "aud": "0oabskvc6442nkvQO0h7",
   "iat": 1514497781,
   "exp": 1514501381,
@@ -238,7 +238,7 @@ Example Payload Data for ID Token:
 
 The ID token contains the group WestCoastDivision so the audience (`aud`) has access to the group information about the user.
 
-For flows other than implicit, post to the token endpoint `https://{yourOktaDomain}.com/oauth2/v1/token` with the user or client you want. Make sure the user is assigned to the app and to one of the groups from your whitelist.
+For flows other than implicit, post to the token endpoint `https://{yourOktaDomain}/oauth2/v1/token` with the user or client you want. Make sure the user is assigned to the app and to one of the groups from your whitelist.
 
 If the results aren't as expected, start your troubleshooting by inspecting the System Log to see what went wrong. Also, try requesting only an ID token instead of both and ID token and access token.
 
@@ -246,7 +246,7 @@ If the results aren't as expected, start your troubleshooting by inspecting the 
 
 #### Step One: Get the Group IDs
 
-Send a request to `https://{yourOktaDomain}.com/api/v1/groups` and collect the IDs for all the groups you'll want to whitelist.
+Send a request to `https://{yourOktaDomain}/api/v1/groups` and collect the IDs for all the groups you'll want to whitelist.
 
 Request Example:
 
@@ -255,7 +255,7 @@ curl -X GET \
   -H 'accept: application/json' \
   -H 'authorization: SSWS ${api_token}' \
   -H 'content-type: application/json' \
-  "https://{yourOktaDomain}.com/api/v1/groups"
+  "https://{yourOktaDomain}/api/v1/groups"
 ~~~
 
 This example uses one `groupId` for simplicity's sake.
@@ -291,10 +291,10 @@ This example uses one `groupId` for simplicity's sake.
         }
       ],
       "users": {
-        "href": "https://{yourOktaDomain}.com/api/v1/groups/00gbso71miOMjxHRW0h7/users"
+        "href": "https://{yourOktaDomain}/api/v1/groups/00gbso71miOMjxHRW0h7/users"
       },
       "apps": {
-        "href": "https://{yourOktaDomain}.com/api/v1/groups/00gbso71miOMjxHRW0h7/apps"
+        "href": "https://{yourOktaDomain}/api/v1/groups/00gbso71miOMjxHRW0h7/apps"
       }
     }
   }
@@ -304,7 +304,7 @@ This example uses one `groupId` for simplicity's sake.
 #### Step Two:  Add List of Groups to Profile of Client App
 
 If you only have one or two groups to specify, simply add the group IDs to the first parameter of the `getFilteredGroups` function described in the next step.
-However, if you have a lot of groups to whitelist, you can put the group IDs in the client app's profile property bag: `https://{yourOktaDomain}.com/api/v1/apps/${applicationId}`.
+However, if you have a lot of groups to whitelist, you can put the group IDs in the client app's profile property bag: `https://{yourOktaDomain}/api/v1/apps/${applicationId}`.
 
 This example names the group whitelist `groupwhitelist`, but you can name it anything.
 
@@ -312,7 +312,7 @@ Request Example:
 
 ~~~sh
 curl -X POST \
-  https://{yourOktaDomain}.com/api/v1/apps/0oabskvc6442nkvQO0h7 \
+  https://{yourOktaDomain}/api/v1/apps/0oabskvc6442nkvQO0h7 \
   -H 'accept: application/json' \
   -H 'authorization: SSWS ${api_token}' \
   -H 'cache-control: no-cache' \
@@ -377,7 +377,7 @@ In the following two examples for creating the groups claim, the `name` for the 
 
 ~~~sh
 curl -X POST \
-  https://{yourOktaDomain}.com/api/v1/authorizationServers/ausain6z9zIedDCxB0h7/claims \
+  https://{yourOktaDomain}/api/v1/authorizationServers/ausain6z9zIedDCxB0h7/claims \
   -H 'accept: application/json' \
   -H 'authorization: SSWS ${api_token}' \
   -H 'cache-control: no-cache' \
@@ -398,7 +398,7 @@ curl -X POST \
 
 ~~~sh
 curl -X POST \
-  https://{yourOktaDomain}.com/api/v1/authorizationServers/ausain6z9zIedDCxB0h7/claims \
+  https://{yourOktaDomain}/api/v1/authorizationServers/ausain6z9zIedDCxB0h7/claims \
   -H 'accept: application/json' \
   -H 'authorization: SSWS ${api_token}' \
   -H 'cache-control: no-cache' \
@@ -423,13 +423,13 @@ Now when you mint a token, groups in the `groupwhitelist` that also have the use
 
 #### Step Four: Send a Test Request
 
-To obtain a token with the configured groups claim, send a request for an ID token that includes one of the scopes that the claim is associated with: `https://{yourOktaDomain}.com/oauth2/${authServerId}/v1/authorize`.
+To obtain a token with the configured groups claim, send a request for an ID token that includes one of the scopes that the claim is associated with: `https://{yourOktaDomain}/oauth2/${authServerId}/v1/authorize`.
 
 ##### Request Example for Custom Authorization Server:
 
 ~~~sh
  curl -X GET \
-  'https://${yourOktaDomain}.com/oauth2/ausain6z9zIedDCxB0h7/v1/authorize?client_id=0oabskvc6442nkvQO0h7
+  'https://{yourOktaDomain}/oauth2/ausain6z9zIedDCxB0h7/v1/authorize?client_id=0oabskvc6442nkvQO0h7
     &response_type=id_token
     &response_mode=fragment
     &scope=groups%20openid
@@ -455,7 +455,7 @@ eyJraWQiOiJ2U2N0OVJ0R2g5ang5QVFfT05aNEFhM19lZ3YwVlktelJKWTZvbmE5R3o4IiwiYWxnIjoi
 {
   "sub": "00u5t60iloOHN9pBi0h7",
   "ver": 1,
-  "iss": "https://{yourOktaDomain}.com/oauth2/ausain6z9zIedDCxB0h7",
+  "iss": "https://{yourOktaDomain}/oauth2/ausain6z9zIedDCxB0h7",
   "aud": "0oabskvc6442nkvQO0h7",
   "iat": 1514497346,
   "exp": 1514500946,
@@ -493,7 +493,7 @@ eyJraWQiOiJ2U2N0OVJ0R2g5ang5QVFfT05aNEFhM19lZ3YwVlktelJKWTZvbmE5R3o4IiwiYWxnIjoi
 
 The ID token or access token contains the group WestCoastDivision so the audience (`aud`) has access to the group information about the user.
 
-For flows other than implicit, post to the token endpoint `https://{yourOktaDomain}.com/oauth2/${authServerId}/v1/token` with the user or client you want. Make sure the user is assigned to the app and to one of the groups from your whitelist.
+For flows other than implicit, post to the token endpoint `https://{yourOktaDomain}/oauth2/${authServerId}/v1/token` with the user or client you want. Make sure the user is assigned to the app and to one of the groups from your whitelist.
 
 If the results aren't as expected, start your troubleshooting by inspecting the System Log to see what went wrong. Also, try requesting only an ID token instead of both and ID token and access token.
 

@@ -36,7 +36,7 @@ Request
 {:.api .api-request .api-request-example}
 
 ```sh
-GET https://{yourOktaDomain}.com/api/v1/apps?filter=status eq "ACTIVE"
+GET https://{yourOktaDomain}/api/v1/apps?filter=status eq "ACTIVE"
 ```
 
 Response

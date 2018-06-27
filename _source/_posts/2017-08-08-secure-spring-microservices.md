@@ -61,7 +61,7 @@ You'll also need to create an API token:
 After completing these steps, you should have the information you need to set the following environment variables.
 
 ```bash
-export STORMPATH_CLIENT_BASEURL=https://{yourOktaDomain}.com
+export STORMPATH_CLIENT_BASEURL=https://{yourOktaDomain}
 export OKTA_APPLICATION_ID={clientId}
 export OKTA_API_TOKEN={apiToken}
 export OKTA_AUTHORIZATIONSERVER_ID=default
@@ -510,7 +510,7 @@ export class OktaService {
 
   constructor() {
     this.widget = new OktaSignIn({
-      baseUrl: 'https://{yourOktaDomain}.com',
+      baseUrl: 'https://{yourOktaDomain}',
       clientId: '{clientId}',
       authParams: {
         issuer: 'default',

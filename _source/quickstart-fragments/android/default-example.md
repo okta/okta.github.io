@@ -56,7 +56,7 @@ Create a new `okta_app_auth_config.json` file in your application's `res/raw` di
     "profile",
     "offline_access"
   ],
-  "issuer_uri": "https://{yourOktaDomain}.com/oauth2/default"
+  "issuer_uri": "https://{yourOktaDomain}/oauth2/default"
 }
 ```
 **Note**: *To receive a **refresh_token**, you must include the `offline_access` scope.*

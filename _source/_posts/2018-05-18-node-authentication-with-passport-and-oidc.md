@@ -138,10 +138,10 @@ Now you'll configure Passport.js to use Okta as your Identity Provider (IdP). To
 ```js
 // set up passport
 passport.use('oidc', new OidcStrategy({
-  issuer: 'https://{yourOktaDomain}.com/oauth2/default',
-  authorizationURL: 'https://{yourOktaDomain}.com/oauth2/default/v1/authorize',
-  tokenURL: 'https://{yourOktaDomain}.com/oauth2/default/v1/token',
-  userInfoURL: 'https://{yourOktaDomain}.com/oauth2/default/v1/userinfo',
+  issuer: 'https://{yourOktaDomain}/oauth2/default',
+  authorizationURL: 'https://{yourOktaDomain}/oauth2/default/v1/authorize',
+  tokenURL: 'https://{yourOktaDomain}/oauth2/default/v1/token',
+  userInfoURL: 'https://{yourOktaDomain}/oauth2/default/v1/userinfo',
   clientID: '{ClientID}',
   clientSecret: '{ClientSecret}',
   callbackURL: 'http://localhost:3000/authorization-code/callback',
