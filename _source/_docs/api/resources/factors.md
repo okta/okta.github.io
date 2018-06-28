@@ -761,6 +761,29 @@ curl -v -X POST \
 }' "https://{yourOktaDomain}/api/v1/users/${userId}/factors?templateId=${templateId}"
 ~~~
 
+##### Resend SMS as Part of Enrollment
+{:.api .api-operation}
+
+Use the `resend` link to send another OTP if user doesn't receive the original activation SMS OTP.
+
+###### Request Example
+{:.api .api-request .api-request-example}
+
+~~~sh
+curl -v -X POST \
+-H "Accept: application/json" \
+-H "Content-Type: application/json" \
+-H "Authorization: SSWS ${api_token}" \
+-d '{
+  "factorType": "sms",
+  "provider": "OKTA",
+  "profile": {
+    "phoneNumber": "+1-555-415-1337"
+  }
+}' "https://{yourOktaDomain}/api/v1/users/${userId}/factors/${factorId}/resend"
+~~~
+
+
 ##### Resend SMS as Part of Enrollment Using a Custom Template
 {:.api .api-operation}
 
@@ -917,10 +940,32 @@ A `400 Bad Request` status code may be returned if you attempt to enroll with a 
     "errorId": "oaeneEaQF8qQrepOWHSkdoejw",
     "errorCauses": [
        {
-          "errorSummary": "Factor already exists."
+          "errorSummary": "A factor of this type is already set up."
        }
     ]
 }
+~~~
+
+##### Resend Voice Call as Part of Enrollment
+{:.api .api-operation}
+
+Use the `resend` link to send another OTP if user doesn't receive the original activation Voice Call OTP.
+
+###### Request Example
+{:.api .api-request .api-request-example}
+
+~~~sh
+curl -v -X POST \
+-H "Accept: application/json" \
+-H "Content-Type: application/json" \
+-H "Authorization: SSWS ${api_token}" \
+-d '{
+  "factorType": "call",
+  "provider": "OKTA",
+  "profile": {
+    "phoneNumber": "+1-555-415-1337"
+  }
+}' "https://{yourOktaDomain}/api/v1/users/${userId}/factors/${factorId}/resend"
 ~~~
 
 ##### Enroll and Auto-Activate Okta Call Factor

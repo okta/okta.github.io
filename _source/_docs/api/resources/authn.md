@@ -1997,8 +1997,6 @@ curl -v -X POST \
 ##### Response Example for Enroll Okta SMS Factor
 {:.api .api-response .api-response-example}
 
-> Use the `resend` link to send another OTP if user doesn't receive the original activation SMS OTP.
-
 ~~~json
 {
   "stateToken": "007ucIX7PATyn94hsHfOLVaXAmOBkKHWnOOLG43bsb",
@@ -2067,6 +2065,28 @@ curl -v -X POST \
 }
 ~~~
 
+##### Resend SMS as Part of Enrollment
+{:.api .api-operation}
+
+Use the `resend` link to send another OTP if user doesn't receive the original activation SMS OTP.
+
+###### Request Example for Resend SMS
+{:.api .api-request .api-request-example}
+
+~~~sh
+curl -v -X POST \
+-H "Accept: application/json" \
+-H "Content-Type: application/json" \
+-d '{
+  "stateToken": "007ucIX7PATyn94hsHfOLVaXAmOBkKHWnOOLG43bsb",
+  "factorType": "sms",
+  "provider": "OKTA",
+  "profile": {
+    "phoneNumber": "+1-555-415-1337"
+}' "https://{yourOktaDomain}/api/v1/authn/factors/mbl198rKSEWOSKRIVIFT/lifecycle/resend"
+~~~
+
+
 
 #### Enroll Okta Call Factor
 {:.api .api-operation}
@@ -2092,8 +2112,6 @@ curl -v -X POST \
 
 ##### Response Example for Enroll Okta Call Factor
 {:.api .api-response .api-response-example}
-
-> Use the `resend` link to send another OTP if user doesn't receive the original activation Voice Call OTP.
 
 ~~~json
 {
@@ -2162,6 +2180,29 @@ curl -v -X POST \
   }
 }
 ~~~
+
+##### Resend Voice Call as Part of Enrollment
+{:.api .api-operation}
+
+Use the `resend` link to send another OTP if user doesn't receive the original activation Voice Call OTP.
+
+###### Request Example for Resend Voice Call      
+{:.api .api-request .api-request-example}
+
+~~~sh
+curl -v -X POST \
+-H "Accept: application/json" \
+-H "Content-Type: application/json" \
+-d '{
+  "stateToken": "007ucIX7PATyn94hsHfOLVaXAmOBkKHWnOOLG43bsb",
+  "factorType": "call",
+  "provider": "OKTA",
+  "profile": {
+    "phoneNumber": "+1-555-415-1337"
+  }
+}' "https://{yourOktaDomain}/api/v1/authn/factors/clf198rKSEWOSKRIVIFT/lifecycle/resend"
+~~~
+
 
 #### Enroll Okta Verify TOTP Factor
 {:.api .api-operation}
