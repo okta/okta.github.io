@@ -9,7 +9,7 @@ tweets:
 - "In this tutorial, you'll learn how to integrate @reactjs with @graphql and #TypeORM. Learn a bunch today!"
 ---
 
-I think you'll like the story I'm about to tell you. I'm going to show you how to build a GraphQL API with Vesper framework, TypeORM, and MySQL. These are Node frameworks, and I'll use TypeScript for the language. For the client, I'll use React, reactstrap, and Apollo Client to talk to the API. Once you have this environment working, and you add secure user authentication, I believe you'll love the experience! 
+I think you'll like the story I'm about to tell you. I'm going to show you how to build a GraphQL API with Vesper framework, TypeORM, and MySQL. These are Node frameworks, and I'll use TypeScript for the language. For the client, I'll use React, reactstrap, and Apollo Client to talk to the API. Once you have this environment working, and you add secure user authentication, I believe you'll love the experience!
 
 Why focus on secure authentication? Well, aside from the fact that I work for Okta, I think we can all agree that pretty much every application depends upon a secure identity management system. For most developers who are building React apps, there's a decision to be made between rolling your own authentication/authorization or plugging in a service like Okta. Before I dive into building a React app, I want to tell you a bit about Okta, and why I think it's an excellent solution for all JavaScript developers.
 
@@ -49,7 +49,7 @@ I built [21-Points Health](https://www.21-points.com/#/about) to track my health
 npm i -g typeorm@0.2.7
 ```
 
-Create a directory to hold the React client and GraphQL API. 
+Create a directory to hold the React client and GraphQL API.
 
 ```bash
 mkdir health-tracker
@@ -78,7 +78,7 @@ Edit `graphql-api/ormconfig.json` to customize the username, password, and datab
 
 ### Install MySQL
 
-Install MySQL if you don't already have it installed. On Ubuntu, you can use `sudo apt-get install mysql-server`. On macOS, you can use Homebrew and `brew install mysql`. For Windows, you can use the [MySQL Installer](https://dev.mysql.com/downloads/installer/). 
+Install MySQL if you don't already have it installed. On Ubuntu, you can use `sudo apt-get install mysql-server`. On macOS, you can use Homebrew and `brew install mysql`. For Windows, you can use the [MySQL Installer](https://dev.mysql.com/downloads/installer/).
 
 Once you've got MySQL installed and configured with a root password, login and create a `healthpoints` database.
 
@@ -315,7 +315,7 @@ query {
 
 ### Fix Dates
 
-You might notice that the date returned from `pointsSave` and the `points` query is in a format the might be difficult for a JavaScript client to understand. You can fix that, install [graphql-iso-date](https://www.npmjs.com/package/graphql-iso-date). 
+You might notice that the date returned from `pointsSave` and the `points` query is in a format the might be difficult for a JavaScript client to understand. You can fix that, install [graphql-iso-date](https://www.npmjs.com/package/graphql-iso-date).
 
 ```bash
 npm i graphql-iso-date@3.5.0
@@ -372,8 +372,8 @@ Navigate to the directory where you created your GraphQL API and create a React 
 cd health-tracker
 create-react-app react-client
 ```
- 
-Install the dependencies you'll need to talk to integrate [Apollo Client](https://www.apollographql.com/docs/react/essentials/get-started.html) with React, as well as Bootstrap and [reactstrap](https://reactstrap.github.io/). 
+
+Install the dependencies you'll need to talk to integrate [Apollo Client](https://www.apollographql.com/docs/react/essentials/get-started.html) with React, as well as Bootstrap and [reactstrap](https://reactstrap.github.io/).
 
 ```bash
 npm i apollo-boost@0.1.7 react-apollo@2.1.4 graphql-tag@2.9.2 graphql@0.13.2
@@ -381,9 +381,9 @@ npm i apollo-boost@0.1.7 react-apollo@2.1.4 graphql-tag@2.9.2 graphql@0.13.2
 
 ### Configure Apollo Client for Your API
 
-Open `react-client/src/App.js` and import `ApolloClient` from `apollo-boost` and add the endpoint to your GraphQL API. 
+Open `react-client/src/App.js` and import `ApolloClient` from `apollo-boost` and add the endpoint to your GraphQL API.
 
-```js    
+```js
 import ApolloClient from 'apollo-boost';
 
 const client = new ApolloClient({
@@ -502,13 +502,13 @@ class App extends Component {
   render() {
     return (
       <Router>
-        <Security issuer='https://{yourOktaDomain}.com/oauth2/default'
+        <Security issuer='https://{yourOktaDomain}/oauth2/default'
                   client_id='{yourClientId}'
                   redirect_uri={window.location.origin + '/implicit/callback'}
                   onAuthRequired={onAuthRequired}>
           <Route path='/' exact={true} component={Home}/>
           <SecureRoute path='/points' component={Points}/>
-          <Route path='/login' render={() => <Login baseUrl='https://{yourOktaDomain}.com'/>}/>
+          <Route path='/login' render={() => <Login baseUrl='https://{yourOktaDomain}'/>}/>
           <Route path='/implicit/callback' component={ImplicitCallback}/>
         </Security>
       </Router>
@@ -880,7 +880,7 @@ export default withAuth(class Points extends Component {
 ```
 {% endraw %}
 
-This code starts with `refresh()` and `remove()` methods, which I'll get to in a moment. The important part happens in `componentDidMount()`, where the access token is added in an `Authorization` header, and the user's information is stuffed in an `x-forwarded-user` header. An `ApolloClient` is created with this information, a cache is added, and the `connectToDevTools` flag is turned on. This can be useful for debugging with [Apollo Client Developer Tools](https://github.com/apollographql/apollo-client-devtools). 
+This code starts with `refresh()` and `remove()` methods, which I'll get to in a moment. The important part happens in `componentDidMount()`, where the access token is added in an `Authorization` header, and the user's information is stuffed in an `x-forwarded-user` header. An `ApolloClient` is created with this information, a cache is added, and the `connectToDevTools` flag is turned on. This can be useful for debugging with [Apollo Client Developer Tools](https://github.com/apollographql/apollo-client-devtools).
 
 ```js
 componentDidMount() {
@@ -1109,11 +1109,11 @@ Click **Manage Points** to see the points list.
 
 It's cool to see everything working, isn't it?! :D
 
-Your React frontend is secured, but your API is still wide open. Let's fix that. 
+Your React frontend is secured, but your API is still wide open. Let's fix that.
 
 ### Get User Information from JWTs
 
-Navigate to your `graphql-api` project in a terminal window and install Okta's JWT Verifier. 
+Navigate to your `graphql-api` project in a terminal window and install Okta's JWT Verifier.
 
 ```bash
 npm i @okta/jwt-verifier@0.0.12
@@ -1134,8 +1134,8 @@ import * as OktaJwtVerifier from '@okta/jwt-verifier';
 import { CurrentUser } from './CurrentUser';
 
 const oktaJwtVerifier = new OktaJwtVerifier({
-  clientId: '{yourClientId},
-  issuer: 'https://{yourOktaDomain}.com/oauth2/default'
+  clientId: '{yourClientId}',
+  issuer: 'https://{yourOktaDomain}/oauth2/default'
 });
 ```
 
@@ -1143,7 +1143,7 @@ In the bootstrap configuration, define `setupContainer` to require an `authoriza
 
 ```ts
 bootstrap({
-  …
+  ...
   cors: true,
   setupContainer: async (container, action) => {
     const request = action.request;

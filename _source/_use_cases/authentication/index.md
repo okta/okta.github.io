@@ -13,7 +13,7 @@ Authentication is a crucial part of any application development.  Whether you ar
 
 The login experience is perhaps the single most important user experience any app developer needs to consider. To provide a seamless, attractive, yet secure authentication experience is not a trivial task. And typically, the login logic goes hand in hand with other features such as password reset and registration. More importantly, enhanced security in the form of strong and adaptive authentication during login is often critical to many implementations.
 
-Okta provides many options for developers around the authentication experience. The foundation is built on top of the underlying feature set in Okta. Password policies, strong and adaptive authentication policies, password reset workflow, and more can all be configured easily in the administrator UI. Many of these policies can also be controlled through Okta’s API.
+Okta provides many options for developers around the authentication experience. The foundation is built on top of the underlying feature set in Okta. Password policies, strong and adaptive authentication policies, password reset workflow, and more can all be configured easily in the administrator UI. Many of these policies can also be controlled through Okta's API.
 
 Okta provides the OAuth 2.0 and OpenID Connect implementations, the Authentication API, the Sign-in Widget, and the Auth JS SDK:
 

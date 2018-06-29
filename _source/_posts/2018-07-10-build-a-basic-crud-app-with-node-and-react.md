@@ -224,7 +224,7 @@ At this point, your app should look like this:
 
 ## Add Authentication to Your Node + React App with Okta
 
-You would never ship your new app out to the Internet without secure [identity management](https://developer.okta.com/product/user-management/), right? Well, Okta makes that a lot easier and more scalable than what you’re probably used to. Okta is a cloud service that allows developers to create, edit, and securely store user accounts and user account data, and connect them with one or multiple applications. Our API enables you to:
+You would never ship your new app out to the Internet without secure [identity management](https://developer.okta.com/product/user-management/), right? Well, Okta makes that a lot easier and more scalable than what you're probably used to. Okta is a cloud service that allows developers to create, edit, and securely store user accounts and user account data, and connect them with one or multiple applications. Our API enables you to:
 
 * [Authenticate](https://developer.okta.com/product/authentication/) and [authorize](https://developer.okta.com/product/authorization/) your users
 * Store data about your users
@@ -1218,7 +1218,7 @@ Navigate to `http://localhost:3000`. You should be able to add, edit, view, and 
 
 Hopefully you found this article helpful. If you're new to React, maybe you're one step closer to deciding whether you love it or hate it. If you're a React veteran, maybe you found out how easy it can be to add authentication to a new or existing app. Or maybe you learned a bit about Node.
 
-If you’d like to view the source code for the example application in this post, you can find it at [https://github.com/oktadeveloper/okta-react-node-example](https://github.com/oktadeveloper/okta-react-node-example).
+If you'd like to view the source code for the example application in this post, you can find it at [https://github.com/oktadeveloper/okta-react-node-example](https://github.com/oktadeveloper/okta-react-node-example).
 
 If you're still aching for more content, there is a plethora of great posts on the Okta developer blog. This post was not-so-loosely based on [Build a Basic CRUD App with Vue.js and Node](/blog/2018/02/15/build-crud-app-vuejs-node), which I would definitely recommend checking out if you're interested in learning more about Vue.js. Here are some other great articles to check out as well:
 
@@ -1228,5 +1228,5 @@ If you're still aching for more content, there is a plethora of great posts on t
 * [Build a React Native Application and Authenticate with OAuth 2.0](/blog/2018/03/16/build-react-native-authentication-oauth-2)
 * [Tutorial: Build a Basic CRUD App with Node.js](/blog/2018/06/28/tutorial-build-a-basic-crud-app-with-node)
 
-And as always, we’d love to hear from you. Hit us up with questions or feedback in the comments, or on Twitter [@oktadev](https://twitter.com/oktadev).
+And as always, we'd love to hear from you. Hit us up with questions or feedback in the comments, or on Twitter [@oktadev](https://twitter.com/oktadev).
 

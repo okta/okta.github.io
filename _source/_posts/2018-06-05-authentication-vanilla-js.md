@@ -15,7 +15,7 @@ Vanilla JavaScript is a term frequently used to describe ordinary JavaScript lev
 
 There are many reasons you may decide to forgo the framework bloat for vanilla JavaScript. It's raw speed and no complicated build process are among my top reasons. Regardless of your reasons, this article might serve as a refresher on how to leverage the power of JavaScript to create some great user experiences.
 
-Along with a simple build process for your application, I’ll also demonstrate how simple it is to add secure user authentication with Okta. Before we get started, let me tell you what Okta is, and why I think Okta is a no-brainer choice for your next frontend project.
+Along with a simple build process for your application, I'll also demonstrate how simple it is to add secure user authentication with Okta. Before we get started, let me tell you what Okta is, and why I think Okta is a no-brainer choice for your next frontend project.
 
 ## What is Okta?
 
@@ -27,11 +27,11 @@ Okta is a cloud service that allows developers to create, edit, and securely sto
 * Secure your application with [multi-factor authentication](https://developer.okta.com/use_cases/mfa/)
 * And much more! Check out our [product documentation](https://developer.okta.com/documentation/)
 
-In short: we make [authentication and user management](https://developer.okta.com/product/user-management/) a lot easier, more secure, and more scalable than what you’re probably used to.
+In short: we make [authentication and user management](https://developer.okta.com/product/user-management/) a lot easier, more secure, and more scalable than what you're probably used to.
 
-Sound amazing? [Register for a free developer account](https://developer.okta.com/signup/), and when you’re done, come on back so we can learn more about building applications with secure authentication in Vanilla JavaScript.
+Sound amazing? [Register for a free developer account](https://developer.okta.com/signup/), and when you're done, come on back so we can learn more about building applications with secure authentication in Vanilla JavaScript.
 
-Now, let’s dive in!
+Now, let's dive in!
 
 ## Your Project: Secure Authentication for Vanilla JavaScript
 
@@ -189,7 +189,7 @@ render () {
 }
 ```
 
-Although this is the easiest, it’s also pretty bad. For every loop iteration, you are deleting the entire parent element from the DOM and re-inserting it. This might not be an issue with 10 elements, but it will cause the browser to slow to a crawl trying to render longer lists.
+Although this is the easiest, it's also pretty bad. For every loop iteration, you are deleting the entire parent element from the DOM and re-inserting it. This might not be an issue with 10 elements, but it will cause the browser to slow to a crawl trying to render longer lists.
 
 A better way would be to append new elements to the parent element, so the browser doesn't have to reprocess the entire parent element on each iteration.
 
@@ -900,7 +900,7 @@ new OktaSignIn({
 
 ### Authorize API Requests with a Token
 
-After you authenticate with the Sign-in Widget, an access token is stored using the widget’s `tokenManager`.  In the `request()` method you can add the access token to the request, so each AJAX request contains the token.  This token is verified by the server (in the following section).
+After you authenticate with the Sign-in Widget, an access token is stored using the widget's `tokenManager`.  In the `request()` method you can add the access token to the request, so each AJAX request contains the token.  This token is verified by the server (in the following section).
 
 ```js
 const accessToken = this.signIn.tokenManager.get('access_token')

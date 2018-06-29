@@ -10,11 +10,11 @@ tweets:
 - "Just when you thought @java_hipster couldn't get any better, we released an @ionicframework module that allows generating a hybrid mobile app! You should try it; it'll be fun! 😋 "
 ---
 
-We 💙 Ionic, JHipster, and Java here at Okta. Ionic is a framework for building native mobile apps using web technologies. Technically, this is called a “hybrid” app because it’s not using native SDKs. Hybrid mobile apps are distributed just like native apps: they can be installed on mobile devices, and they’re listed in app stores. As an end user, there’s a good chance you can’t tell the difference between a hybrid mobile app and a native mobile app.
+We 💙 Ionic, JHipster, and Java here at Okta. Ionic is a framework for building native mobile apps using web technologies. Technically, this is called a "hybrid" app because it's not using native SDKs. Hybrid mobile apps are distributed just like native apps: they can be installed on mobile devices, and they're listed in app stores. As an end user, there's a good chance you can't tell the difference between a hybrid mobile app and a native mobile app.
 
-JHipster is an application generator for modern web apps. It generates a Spring Boot backend, with an Angular UI. It even supports progressive web apps! In addition to being able to create standalone apps, it can also generate a microservices architecture based on Spring Boot and Spring Cloud. The apps it generates have authentication, monitoring, and management built-in. You can also use its entity generator to build CRUD apps quickly and easily. 
+JHipster is an application generator for modern web apps. It generates a Spring Boot backend, with an Angular UI. It even supports progressive web apps! In addition to being able to create standalone apps, it can also generate a microservices architecture based on Spring Boot and Spring Cloud. The apps it generates have authentication, monitoring, and management built-in. You can also use its entity generator to build CRUD apps quickly and easily.
 
-In this post, you’re going to try out [Ionic for JHipster](https://github.com/oktadeveloper/generator-jhipster-ionic), a JHipster module you can use to generate a hybrid mobile app that runs on your phone. It starts by creating a project with `ionic start` and leveraging the [Ionic JHipster Starter](https://github.com/oktadeveloper/ionic-jhipster-starter) for its files. It supports JWT authentication by default. If you have OAuth 2.0 / OIDC as your authentication mechanism, it installs OIDC support. It even works with a JHipster-generated [microservices architecture](http://www.jhipster.tech/microservices-architecture/)!
+In this post, you're going to try out [Ionic for JHipster](https://github.com/oktadeveloper/generator-jhipster-ionic), a JHipster module you can use to generate a hybrid mobile app that runs on your phone. It starts by creating a project with `ionic start` and leveraging the [Ionic JHipster Starter](https://github.com/oktadeveloper/ionic-jhipster-starter) for its files. It supports JWT authentication by default. If you have OAuth 2.0 / OIDC as your authentication mechanism, it installs OIDC support. It even works with a JHipster-generated [microservices architecture](http://www.jhipster.tech/microservices-architecture/)!
 
 As a project, JHipster's goal is to generate an app that unifies:
 
@@ -51,7 +51,7 @@ To develop a blog application with JHipster, open a terminal window, create a di
 mkdir blog && cd blog && jhipster
 ```
 
-JHipster asks many questions about the type of application you want to create and what features you’d like to include. The table below shows the choices I made to create a blog application with Angular, OAuth 2.0 / OIDC authentication, and Gradle.
+JHipster asks many questions about the type of application you want to create and what features you'd like to include. The table below shows the choices I made to create a blog application with Angular, OAuth 2.0 / OIDC authentication, and Gradle.
 
 | Question | Answer |
 |---|---|
@@ -74,7 +74,7 @@ JHipster asks many questions about the type of application you want to create an
 | Additional testing frameworks? | `<blank>` |
 | Install other generators? | `No` |
 
-The project generation process will take a couple of minutes to run, depending on your internet connection speed. When it’s finished, you should see output like the following.
+The project generation process will take a couple of minutes to run, depending on your internet connection speed. When it's finished, you should see output like the following.
 
 ```
 Server application generated successfully.
@@ -95,17 +95,17 @@ Application successfully committed to Git.
 
 JHipster supports [OAuth 2.0 and OIDC](http://www.jhipster.tech/security/#oauth2) for authentication. [Keycloak](https://keycloak.org/) is the default Identity Provider (IdP)  configured with JHipster. Having Keycloak set by default is nice because you can use it without having an internet connection.
 
-To log into your application, you’ll need to have Keycloak up and running. The JHipster Team has created a Docker container for you that has the default users and roles. Start Keycloak using the following command.
-                                                                           
+To log into your application, you'll need to have Keycloak up and running. The JHipster Team has created a Docker container for you that has the default users and roles. Start Keycloak using the following command.
+
 ```bash
 docker-compose -f src/main/docker/keycloak.yml up
-```                                                                           
+```
 
 Start your application with `./gradlew` (or `./mvnw` if you chose Maven) and you should be able to log in using "admin/admin" for your credentials.
 
 To switch to Okta by default, you'll first need to create an OIDC app. If you don't have an Okta Developer account, [get one today](https://developer.okta.com/signup/)!
 
-Log in to your Okta Developer account and navigate to **Applications** > **Add Application**. Click **Web** and click the **Next** button. Give the app a name you’ll remember, specify `http://localhost:8080` as a Base URI, and the following as a **Login redirect URI** and **Logout redirect URI**.
+Log in to your Okta Developer account and navigate to **Applications** > **Add Application**. Click **Web** and click the **Next** button. Give the app a name you'll remember, specify `http://localhost:8080` as a Base URI, and the following as a **Login redirect URI** and **Logout redirect URI**.
 
 * `http://localhost:8080/login`
 * `http://localhost:8100`
@@ -249,7 +249,7 @@ I want to develop the **best user experience**. Native apps are painful to distr
 
 I've written a thing or two about JHipster and Ionic on this blog. If you'd like to see how to deploy your Ionic app to a mobile device, I recommend reading the [deploy to a mobile device](/blog/2017/05/17/develop-a-mobile-app-with-ionic-and-spring-boot#deploy-to-a-mobile-device) section of [Tutorial: Develop a Mobile App With Ionic and Spring Boot](/blog/2017/05/17/develop-a-mobile-app-with-ionic-and-spring-boot). I showed how to add OIDC authentication to an Ionic app in [Build an Ionic App with User Authentication](https://developer.okta.com/blog/2017/08/22/build-an-ionic-app-with-user-authentication).
 
-You can find the source code for the application developed in this post at <https://github.com/oktadeveloper/okta-ionic-jhipster-example>. 
+You can find the source code for the application developed in this post at <https://github.com/oktadeveloper/okta-ionic-jhipster-example>.
 
 See the following posts for information on building microservices with JHipster and to learn more about its OIDC support.
 

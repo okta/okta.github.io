@@ -13,11 +13,11 @@ Spring Boot has experienced massive adoption over the last several years. For Sp
 
 Spring Boot allows you to create standalone web apps, CLIs, batch processes, and microservices. When you get into microservices, you'll find that Spring Cloud helps autoconfigure the tools you want in your microservices architecture.
 
-As we all know by now, pretty much every application depends upon a secure identity management system. For most developers who are getting started with new Spring Boot 2.0 apps, there’s a decision to be made between rolling your own authentication and authorization system or plugging in a service like Okta. Before we dive into our Spring Boot 2.0 application, I want to tell you a bit about Okta, and why I think it’s an excellent solution for all Java developers.
+As we all know by now, pretty much every application depends upon a secure identity management system. For most developers who are getting started with new Spring Boot 2.0 apps, there's a decision to be made between rolling your own authentication and authorization system or plugging in a service like Okta. Before we dive into our Spring Boot 2.0 application, I want to tell you a bit about Okta, and why I think it's an excellent solution for all Java developers.
 
 ## What is Okta?
 
-In short, we make [identity management](https://developer.okta.com/product/user-management/) a lot easier, more secure, and more scalable than what you’re probably used to. Okta is a cloud service that allows developers to create, edit, and securely store user accounts and user account data, and connect them with one or multiple applications. Our API enables you to:
+In short, we make [identity management](https://developer.okta.com/product/user-management/) a lot easier, more secure, and more scalable than what you're probably used to. Okta is a cloud service that allows developers to create, edit, and securely store user accounts and user account data, and connect them with one or multiple applications. Our API enables you to:
 
 * [Authenticate](https://developer.okta.com/product/authentication/) and [authorize](https://developer.okta.com/product/authorization/) your users
 * Store data about your users
@@ -25,7 +25,7 @@ In short, we make [identity management](https://developer.okta.com/product/user-
 * Secure your application with [multi-factor authentication](https://developer.okta.com/use_cases/mfa/)
 * And much more! Check out our [product documentation](https://developer.okta.com/documentation/)
 
-Are you sold? [Register for a forever-free developer account](https://developer.okta.com/signup/), and when you’re done, come on back so we can learn more about building secure microservices in Spring Boot 2.0!
+Are you sold? [Register for a forever-free developer account](https://developer.okta.com/signup/), and when you're done, come on back so we can learn more about building secure microservices in Spring Boot 2.0!
 
 ## Get Started with Spring Boot 2.0 for Your Microservices Architecture
 

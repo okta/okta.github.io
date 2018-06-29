@@ -5,9 +5,9 @@ author: silas-b
 tags: [sso, dropwizard, spring, java]
 description: "This post will guide you through setting up an a new Dropwizard project and securing it with OAuth!"
 tags: [java, jaxrs, dropwizard, rest, oauth]
-tweets: 
-- “Secure your Dropwizard application with Okta and OAuth 2.0”
-- “Create a secure Dropwizard application with Okta and OAuth 2.0”
+tweets:
+- "Secure your Dropwizard application with Okta and OAuth 2.0"
+- "Create a secure Dropwizard application with Okta and OAuth 2.0"
 ---
 
 Dropwizard is recognized as the pioneer in turn-key Java API frameworks, and rivals Spring Boot for ease of adoption. Whether you're interested in trying it out for the first time, or already have a mature platform built on top of Dropwizard, you can add secure authentication to your site in a matter of minutes. By combining Dropwizard's production-ready essential libraries and Okta's identity platform, you can construct a fully secured internet-facing web service with little effort. Read on to see how!
@@ -16,11 +16,11 @@ This tutorial assumes familiarity with Java, Maven, and basic web service and we
 
 ## Dropwizard vs. Spring Boot
 
-A number of excellent articles and blog posts (notably [Takipi](https://blog.takipi.com/java-bootstrap-dropwizard-vs-spring-boot/) and [Schibsted](https://www.schibsted.pl/blog/spring-boot-and-dropwizard-in-microservices-development/)) provide thorough comparisons of the two frameworks on both a feature-set level and from an architectural perspective. While Spring Boot has been eclipsing Dropwizard lately in popularity, Dropwizard still provides a compelling out-of-the-box distribution. 
+A number of excellent articles and blog posts (notably [Takipi](https://blog.takipi.com/java-bootstrap-dropwizard-vs-spring-boot/) and [Schibsted](https://www.schibsted.pl/blog/spring-boot-and-dropwizard-in-microservices-development/)) provide thorough comparisons of the two frameworks on both a feature-set level and from an architectural perspective. While Spring Boot has been eclipsing Dropwizard lately in popularity, Dropwizard still provides a compelling out-of-the-box distribution.
 
-Most of the differences boil down to what is included by default vs. offered as an add-on library. With no other setup needed, Dropwizard gives you exhaustive API metrics, logging, and a handful of useful libraries and tools such as Jackson, Liquibase, Hibernate, and a few page-templating frameworks. Spring Boot requires that you specify most of these extras, which adds a little more thought, planning, and effort to new server creation. The benefit, however, is greater flexibility and a wider variety of options (such as multiple HTTP server alternatives and less coupling to specific libraries). 
+Most of the differences boil down to what is included by default vs. offered as an add-on library. With no other setup needed, Dropwizard gives you exhaustive API metrics, logging, and a handful of useful libraries and tools such as Jackson, Liquibase, Hibernate, and a few page-templating frameworks. Spring Boot requires that you specify most of these extras, which adds a little more thought, planning, and effort to new server creation. The benefit, however, is greater flexibility and a wider variety of options (such as multiple HTTP server alternatives and less coupling to specific libraries).
 
-Both frameworks provide a well-integrated, mature, production-ready insta-server, and the choice between the two usually falls according to preference of one system's libraries over the other. If you need the Swiss Army knife, or prefer to leave more options open, Spring Boot may be the way to go. If you're a fan of Jetty, Hibernate, Jersey, et al. and just want to start coding immediately, Dropwizard is hard to beat. 
+Both frameworks provide a well-integrated, mature, production-ready insta-server, and the choice between the two usually falls according to preference of one system's libraries over the other. If you need the Swiss Army knife, or prefer to leave more options open, Spring Boot may be the way to go. If you're a fan of Jetty, Hibernate, Jersey, et al. and just want to start coding immediately, Dropwizard is hard to beat.
 
 ## Generate a New Dropwizard Server
 
@@ -77,7 +77,7 @@ Before getting too fancy with the UI, now is a great opportunity to enable singl
 
 ## Integrate With Okta for OAuth 2.0
 
-Since one of Dropwizard’s goals is to make it easy to create RESTful applications, it provides support for creating OAuth 2.0 Resource Server. However, the actual implementation is just a stub and requires you to implement the actual handling of the access token. Okta has created an access token validation library (okta-jwt-verifier) to make it easy to plug this logic into any application.
+Since one of Dropwizard's goals is to make it easy to create RESTful applications, it provides support for creating OAuth 2.0 Resource Server. However, the actual implementation is just a stub and requires you to implement the actual handling of the access token. Okta has created an access token validation library (okta-jwt-verifier) to make it easy to plug this logic into any application.
 
 ### Create an Okta Account and Gather Credentials
 
@@ -97,7 +97,7 @@ oktaOAuth:
   baseUrl: https://{yourOktaDomain}
   issuer: "https://{yourOktaDomain}/oauth2/default"
   clientId: "{yourClientId}"
-  audience: "{yourAudience}"  # defaults to ‘api://default’
+  audience: "{yourAudience}"  # defaults to 'api://default'
 ```
 
 To cut down on boilerplate, this example just adds these fields as publicly accessible members. You may prefer adding getters and setters, or even using [Lombok](ttps://projectlombok.org) to do that for you.
@@ -123,9 +123,9 @@ public class DemoConfiguration extends Configuration {
 
 Now these config values can be easily retrieved in the `DemoApplication` class via its inherited `configuration` member.
 
-### Handle the OAuth 2.0 Access Token 
+### Handle the OAuth 2.0 Access Token
 
-As I mentioned above Dropwizard’s OAuth support still requires you to handle the access token yourself. No worries though, you can do that in a few lines of code with the Okta JWT Verifier.
+As I mentioned above Dropwizard's OAuth support still requires you to handle the access token yourself. No worries though, you can do that in a few lines of code with the Okta JWT Verifier.
 
 First up, add the `dropwizard-auth` and `okta-jwt-verifier` dependencies to your `pom.xml`:
 
@@ -143,7 +143,7 @@ First up, add the `dropwizard-auth` and `okta-jwt-verifier` dependencies to your
 
 #### Create a Principal Implementation
 
-Next up, I need to create a class to hold the user’s information.  Dropwizard expects class to implement `java.security.Principal`. Create a new class `com.example.auth.AccessTokenPrincipal`:
+Next up, I need to create a class to hold the user's information.  Dropwizard expects class to implement `java.security.Principal`. Create a new class `com.example.auth.AccessTokenPrincipal`:
 
 ```java
 public class AccessTokenPrincipal implements Principal {
@@ -195,7 +195,7 @@ That is it, basically two lines of code, one to validate the token another to re
 
 #### Wire it up!
 
-The last step is to wire this all up in our application class, edit `DemoApplication` and create a new method `configureOAuth()`: 
+The last step is to wire this all up in our application class, edit `DemoApplication` and create a new method `configureOAuth()`:
 
 ```java
 private void configureOAuth(final DemoConfiguration configuration, final Environment environment) {
@@ -229,7 +229,7 @@ private void configureOAuth(final DemoConfiguration configuration, final Environ
 
 This method does a couple things: creates a `JwtVerifier` based on the properties in our configuration file, registers the new `OktaOAuthAuthenticator` class, and finally binds the `@Auth` annotation to our new `AccessTokenPrincipal` class.
 
-Don’t forget to update the `run()` method with a call to our new `configureOAuth()` method.
+Don't forget to update the `run()` method with a call to our new `configureOAuth()` method.
 
 ```java
 @Override
@@ -257,11 +257,11 @@ public class HomePageResource {
 }
 ```
 
-You could restart the server and start handling requests!  But... you of course need to get an access token from some place. If you were handling class from another OAuth capable application you could stop here. However, since this is an example I’m going to add simple login page using the Okta Sign-In Widget.
+You could restart the server and start handling requests!  But... you of course need to get an access token from some place. If you were handling class from another OAuth capable application you could stop here. However, since this is an example I'm going to add simple login page using the Okta Sign-In Widget.
 
 ### Add the Okta Sign-In Widget
 
-Adding a login page to our RESTful application does mix concerns a little.  I’m going to do this to simplify the example and at the same time show you a few more cool things with Dropwizard.
+Adding a login page to our RESTful application does mix concerns a little.  I'm going to do this to simplify the example and at the same time show you a few more cool things with Dropwizard.
 
 #### Expose the OAuth Configuration via REST
 
@@ -285,7 +285,7 @@ public class LoginWidgetConfigResource {
 }
 ```
 
-Pretty simple, it’s just a getter with a `@GET` annotation!
+Pretty simple, it's just a getter with a `@GET` annotation!
 
 Back in our `DemoApplication` class you need to register the new resource in the `run` method:
 
@@ -315,7 +315,7 @@ public void initialize(final Bootstrap<DemoConfiguration> bootstrap) {
 
 This configures the application to serve all of the files in `src/main/resources/assets` at the root (`/`) of your application.  It also defines `index.html` as the default welcome file.
 
-This creates a small issue.  If you restart your application now it would throw an exception.  Both our static assets and our resources are being service from the root context.  The easy fix is to serve your API resources at `/api/*` with a single line in your application’s `run` method, the whole method should now look like:
+This creates a small issue.  If you restart your application now it would throw an exception.  Both our static assets and our resources are being service from the root context.  The easy fix is to serve your API resources at `/api/*` with a single line in your application's `run` method, the whole method should now look like:
 
 ```java
 @Override
@@ -334,7 +334,7 @@ public void run(final DemoConfiguration configuration,
 }
 ```
 
-The only thing left to do create a login page.  I’m actually going to create a simple SPA app with a single `index.html` file.  This page will load the widget configuration from `/api/signInConfig`, prompt the user to login, and then display the results from a call to `/api/message`.  I’m not going to dig into the contents of the HTML, if you are interested you should be able to follow the comments.
+The only thing left to do create a login page.  I'm actually going to create a simple SPA app with a single `index.html` file.  This page will load the widget configuration from `/api/signInConfig`, prompt the user to login, and then display the results from a call to `/api/message`.  I'm not going to dig into the contents of the HTML, if you are interested you should be able to follow the comments.
 
 ```html
 <!doctype html>
@@ -480,7 +480,7 @@ The only thing left to do create a login page.  I’m actually going to create a
 
 Whew! You've emerged from the jungle of hand-rolled OIDC clients, and now have authorization in your Dropwizard server! There were quite a few code examples above, so if you need to verify anything you built along the way, you can always access the [complete source for this project](https://github.com/oktadeveloper/okta-dropwizard-oauth-example) on GitHub.
 
-Ok... time to see it in action! You can once again build the project with: 
+Ok... time to see it in action! You can once again build the project with:
 
 ```bash
 mvn clean package
@@ -511,14 +511,14 @@ You probably have noticed the console warnings when starting your application:
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 ```
 
-Dropwizard makes it really easy to add existing health checks or create your own. I’ll leave that as an exercise for you!
+Dropwizard makes it really easy to add existing health checks or create your own. I'll leave that as an exercise for you!
 
 ## Learn More
 
-In this post I’ve created a self contained Dropwizard application with a couple JAX-RS resources and a simple HTML page. Take a look at Dropwizard’s getting started guide or these resources for more info.
+In this post I've created a self contained Dropwizard application with a couple JAX-RS resources and a simple HTML page. Take a look at Dropwizard's getting started guide or these resources for more info.
 
 - [Dropwizard Homepage](http://www.dropwizard.io/)
-- [Let’s Compare: JAX-RS vs Spring for REST Endpoints](/blog/2017/08/09/jax-rs-vs-spring-rest-endpoints)
+- [Let's Compare: JAX-RS vs Spring for REST Endpoints](/blog/2017/08/09/jax-rs-vs-spring-rest-endpoints)
 - [What the Heck is OAuth?](/blog/2017/06/21/what-the-heck-is-oauth)
 
 We hope you've enjoyed this post, and are always eager to hear from you. Leave a comment below, or hit us up on Twitter [@oktadev](https://twitter.com/oktadev)!

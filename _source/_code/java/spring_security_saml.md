@@ -20,8 +20,8 @@ This guide assumes that you are familiar
 with the basics of Java software development: editing text files,
 using the command line, and running Tomcat, Maven or Gradle.
 
-If you’re already familiar with Okta and Spring, you can skip to
-the section titled “Configuring Spring Security SAML to work with Okta”.
+If you're already familiar with Okta and Spring, you can skip to
+the section titled "Configuring Spring Security SAML to work with Okta".
 
 * Will be replaced with the ToC
 {:toc .list-unstyled .toc}
@@ -50,7 +50,7 @@ This section covers what you need to do to install and configure Tomcat from scr
 How to install the Spring Security SAML sample Okta application on Mac OS X:
 
 1. **Installing Tomcat**
-	- If it’s not already installed, install Tomcat with Homebrew using [these directions](https://github.com/mhulse/mhulse.github.io/wiki/Installing-Apache-Tomcat-using-Homebrew-on-OS-X-Yosemite)
+	- If it's not already installed, install Tomcat with Homebrew using [these directions](https://github.com/mhulse/mhulse.github.io/wiki/Installing-Apache-Tomcat-using-Homebrew-on-OS-X-Yosemite)
 
 
 2. **Downloading the Spring SAML Extension**

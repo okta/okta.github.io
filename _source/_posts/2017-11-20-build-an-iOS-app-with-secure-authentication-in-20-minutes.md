@@ -5,7 +5,7 @@ author: jmelberg
 tags: [authentication, oidc, ios, swift, cocoapods, oauth]
 ---
 
-What does it take to build a successful mobile application in today’s ever-changing market? There are (what seems like an infinite) number of design, build, and test cycles performed, just to release your app into the hands of a user.
+What does it take to build a successful mobile application in today's ever-changing market? There are (what seems like an infinite) number of design, build, and test cycles performed, just to release your app into the hands of a user.
 
 In essence:
 
@@ -122,7 +122,7 @@ class ViewController: UIViewController {
             .login()
             .start(self) { response, error in
                 if error != nil { print(error!) }
-                
+
                 // Success
                 if let tokenResponse = response {
                     OktaAuth.tokens?.set(value: tokenResponse.accessToken!, forKey: "accessToken")
@@ -139,7 +139,7 @@ Once your application loads, it will trigger the `OktaAuth.login()` event. [Best
 
 After the user authenticates using the Okta Sign-In Page, some magic happens behind the scenes. Primarily, handling the [Authorization Code Flow with Proof Key for Code Exchange (PKCE)](https://tools.ietf.org/html/rfc7636#section-1.1). This handshake is abstracted from us by the [Okta AppAuth SDK](https://github.com/okta/okta-sdk-appauth-ios), and allows us to securely receive the requested tokens.
 
-If there is a successful login event, our application is bounced back to the main page, where we store the `accessToken` and the `idToken` to the device's [Keychain](https://developer.apple.com/library/content/documentation/Security/Conceptual/keychainServConcepts/02concepts/concepts.html#//apple_ref/doc/uid/TP30000897-CH204-TP9) to ensure the tokens are encrypted. 
+If there is a successful login event, our application is bounced back to the main page, where we store the `accessToken` and the `idToken` to the device's [Keychain](https://developer.apple.com/library/content/documentation/Security/Conceptual/keychainServConcepts/02concepts/concepts.html#//apple_ref/doc/uid/TP30000897-CH204-TP9) to ensure the tokens are encrypted.
 
 Now, let's see it in action!
 
@@ -175,15 +175,15 @@ OktaAuth
     .login()
     .start(self) { response, error in
         if error != nil { print(error!) }
-                
+
         // Success
         if let tokenResponse = response {
             OktaAuth.tokens?.set(value: tokenResponse.accessToken!, forKey: "accessToken")
             OktaAuth.tokens?.set(value: tokenResponse.idToken!, forKey: "idToken")
-                    
+
             OktaAuth.userinfo() { response, error in
                 if error != nil { print("Error: \(error!)") }
-                        
+
                 if let userinfo = response {
                     userinfo.forEach { print("\($0): \($1)") }
                 }

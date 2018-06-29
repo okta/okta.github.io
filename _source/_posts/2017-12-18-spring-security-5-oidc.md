@@ -4,7 +4,7 @@ title: "Get Started with Spring Security 5.0 and OIDC"
 author: mraible
 description: "Learn how to use Spring Security 5.0 and its OAuth 2.0 Login and OIDC support. Spring Security makes authentication with OAuth 2.0 pretty darn easy. It also provides the ability to fetch a user's information via OIDC. Follow this tutorial to learn more!"
 tags: [java, spring-security, spring-boot, springframework, oidc, spring-webflux]
-tweets: 
+tweets:
   - "Did you know that Spring Security 5 supports OpenID Connect out-of-the-box? It's pretty sweet!"
   - "Spring Security 5 supports OAuth 2.0 Login: https://docs.spring.io/spring-security/site/docs/5.0.0.RELEASE/reference/htmlsingle/#jc-oauth2login.\n\nSee how it works with Okta →"
 ---
@@ -54,7 +54,7 @@ Click **Generate Project**, download the zip, expand it on your hard drive, and 
 
 Spring Security 4.x prompts you with basic authentication rather than with a login form, so this is one thing that's different with Spring Security 5.
 
-The Spring Security starter creates a default user with username “user” and a password that changes every time you start the application. You can find this password in your terminal, similar to the one below.
+The Spring Security starter creates a default user with username "user" and a password that changes every time you start the application. You can find this password in your terminal, similar to the one below.
 
 ```
 Using default security password: 103c55b4-2760-4830-9bca-a06a87d384f9
@@ -64,7 +64,7 @@ In the form, enter "user" for the User and the generated password for Password. 
 
 {% img blog/spring-security-5/post-login.png alt:"Post Login" width:"700" %}{: .center-image }
 
-In Spring Boot 1.x, you could change the user’s password, so it’s the same every time by adding the following to `src/main/resources/application.properties`.
+In Spring Boot 1.x, you could change the user's password, so it's the same every time by adding the following to `src/main/resources/application.properties`.
 
 ```
 security.user.password=spring security is ph@!
@@ -146,7 +146,7 @@ In a [previous tutorial](/blog/2017/03/21/spring-boot-oauth), I showed you how t
 
 ### Create an OpenID Connect App
 
-To integrate with Okta, you'll need to [sign up for an account on developer.okta.com](https://developer.okta.com/). After confirming your email and logging in, navigate to **Applications** > **Add Application**. Click **Web** and then click **Next**. Give the app a name you’ll remember, specify `http://localhost:8080` as a Base URI, as well as `http://localhost:8080/login/oauth2/code/okta` for a Login redirect URI.
+To integrate with Okta, you'll need to [sign up for an account on developer.okta.com](https://developer.okta.com/). After confirming your email and logging in, navigate to **Applications** > **Add Application**. Click **Web** and then click **Next**. Give the app a name you'll remember, specify `http://localhost:8080` as a Base URI, as well as `http://localhost:8080/login/oauth2/code/okta` for a Login redirect URI.
 
 Rename `src/main/resources/application.properties` to `src/main/resources/application.yml` and populate it with the following.
 
@@ -378,7 +378,7 @@ These resources provide additional information about Okta and OIDC:
 * [Okta Developer Documentation](/documentation/) and its [OpenID Connect API](/docs/api/resources/oidc)
 * [Identity, Claims, & Tokens – An OpenID Connect Primer, Part 1 of 3](/blog/2017/07/25/oidc-primer-part-1)
 * [OIDC in Action – An OpenID Connect Primer, Part 2 of 3](/blog/2017/07/25/oidc-primer-part-2)
-* [What’s in a Token? – An OpenID Connect Primer, Part 3 of 3](/blog/2017/08/01/oidc-primer-part-3)
+* [What's in a Token? – An OpenID Connect Primer, Part 3 of 3](/blog/2017/08/01/oidc-primer-part-3)
 * [Add Role-Based Access Control to Your App with Spring Security and Thymeleaf](/blog/2017/10/13/okta-groups-spring-security)
 
 If you have any questions about this post, please leave a comment below. You can also post to [Stack Overflow with the okta tag](https://stackoverflow.com/questions/tagged/okta) or use our [developer forums](https://devforum.okta.com/).

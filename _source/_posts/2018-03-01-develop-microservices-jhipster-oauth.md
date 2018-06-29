@@ -52,7 +52,7 @@ To generate an API Gateway with JHipster, open a terminal window, navigate to `o
 mkdir gateway && cd gateway && jhipster
 ```
 
-JHipster asks a multitude of questions about the application you want to create and what features you’d like to include. Use the following answers to generate a gateway with OAuth 2.0 support.
+JHipster asks a multitude of questions about the application you want to create and what features you'd like to include. Use the following answers to generate a gateway with OAuth 2.0 support.
 
 | Question | Answer |
 |---|---|---|
@@ -88,7 +88,7 @@ JHipster ships with [Keycloak](https://keycloak.org) configured for OAuth by def
 
 ### Create an OpenID Connect Application on Okta
 
-Create an OpenID Connect (OIDC) app in Okta to get a client ID and secret. This basically means you're "registering" your application with Okta. Log in to your Okta Developer account and navigate to **Applications** > **Add Application**. Click **Web** and click the **Next** . Give the app a name you’ll remember (e.g., `JHipster Microservices`), and specify `http://localhost:8080` as a Base URI and `http://localhost:8080/login` as a Login Redirect URI. Click **Done** and make a note of your client ID and client secret values.
+Create an OpenID Connect (OIDC) app in Okta to get a client ID and secret. This basically means you're "registering" your application with Okta. Log in to your Okta Developer account and navigate to **Applications** > **Add Application**. Click **Web** and click the **Next** . Give the app a name you'll remember (e.g., `JHipster Microservices`), and specify `http://localhost:8080` as a Base URI and `http://localhost:8080/login` as a Login Redirect URI. Click **Done** and make a note of your client ID and client secret values.
 
 For the roles coming from Okta to match the default roles in JHipster, you'll need to create them. Create a `ROLE_ADMIN` and `ROLE_USER` group (**Users** > **Groups** > **Add Group**) and add users to them. You can use the account you signed up with, or create a new user (**Users** > **Add Person**). Navigate to **API** > **Authorization Servers**, click the **Authorization Servers** tab and edit the default one. Click the **Claims** tab and **Add Claim**. Name it `roles`, and include it in the ID Token. Set the value type to `Groups` and set the filter to be a Regex of `.*`.
 
@@ -126,7 +126,7 @@ export SECURITY_OAUTH2_CLIENT_CLIENT_ID="{clientId}"
 export SECURITY_OAUTH2_CLIENT_CLIENT_SECRET="{clientSecret}"
 ```
 
-**TIP:** If you're using JHipster’s Protractor support, you'll want to add a user to the `ROLE_ADMIN` group on Okta and change the credentials in `src/test/javascript/e2e/account/account.spec.ts` and `src/test/javascript/e2e/admin/administration.spec.ts`.
+**TIP:** If you're using JHipster's Protractor support, you'll want to add a user to the `ROLE_ADMIN` group on Okta and change the credentials in `src/test/javascript/e2e/account/account.spec.ts` and `src/test/javascript/e2e/admin/administration.spec.ts`.
 
 ## Install the JHipster Registry
 
@@ -290,7 +290,7 @@ There's a lot of services to start if you want to see all your applications runn
     ```
     docker-compose -f src/main/docker/mongodb.yml up
     ```
-  
+
 4. Start the store app from the `store` directory by running `mvn`.
 
 Once everything finishes starting, open a browser to `http://localhost:8080` and click **sign in**. You should be redirected to your Okta org to sign-in, then back to the gateway once you've entered valid credentials.
@@ -346,7 +346,7 @@ You'll get a warning saying you need to generate Docker images by running the fo
 
 **NOTE:** Building the gateway will likely fail because of [an issue with JavaScript tests](https://github.com/jhipster/generator-jhipster/issues/7114). To workaround this issue, skip the tests with `mvn package -Pprod -DskipTests dockerfile:build`.
 
-While you're waiting for things to build, edit `docker-compose/docker-compose.yml` and change the Spring Security settings from being hard-coded to being environment variables. Make this change for all applications and make sure to add the client ID and secret default settings don’t include those.
+While you're waiting for things to build, edit `docker-compose/docker-compose.yml` and change the Spring Security settings from being hard-coded to being environment variables. Make this change for all applications and make sure to add the client ID and secret default settings don't include those.
 
 ```yaml
 - SECURITY_OAUTH2_CLIENT_ACCESS_TOKEN_URI=${SECURITY_OAUTH2_CLIENT_ACCESS_TOKEN_URI}
@@ -361,7 +361,7 @@ While you're waiting for things to build, edit `docker-compose/docker-compose.ym
 
 When everything has finished building, run `docker-compose up -d` from the `docker-compose` directory. It can take a while to start all 14 containers, so now might be a good time to take a break, or go on a run. You can use Docker's Kitematic to watch the status of your images as they start.
 
-**TIP:** Before you start everything, make sure you’ve provided adequate CPUs and Memory to Docker. It defaults to one CPU and 2 GB of memory. Not quite enough for 14 containers!
+**TIP:** Before you start everything, make sure you've provided adequate CPUs and Memory to Docker. It defaults to one CPU and 2 GB of memory. Not quite enough for 14 containers!
 
 {% img blog/microservices-jhipster-oauth/kitematic.png alt:"Kitematic" width:"800" %}{: .center-image }
 
@@ -390,7 +390,7 @@ Heroku and JHipster have configured a JHipster Registry for you, so you just nee
 ### Deploy Your Gateway and Apps
 
 Edit `src/main/resources/config/application-prod.yml` in your gateway and apps. Remove `appname` and `instanceId` and add the following `eureka.instance` properties:
-                                                                              
+
 ```yaml
 eureka:
     instance:
@@ -482,7 +482,7 @@ You can find the source code for this example at https://github.com/oktadevelope
 
 I hope you've enjoyed this whirlwind tour of how to create a microservices architecture with JHipster. Just because JHipster makes microservices easy doesn't mean you should use them. In the wise words of [Martin Fowler](https://martinfowler.com/articles/microservices.html) (March 2014):
 
-> “You shouldn't start with a microservices architecture. Instead begin with a monolith, keep it modular, and split it into microservices once the monolith becomes a problem.”
+> "You shouldn't start with a microservices architecture. Instead begin with a monolith, keep it modular, and split it into microservices once the monolith becomes a problem."
 
 Using a microservices architecture is a great way to scale development teams. However, if you don't have a large team, a [Majestic Monolith](https://m.signalvnoise.com/the-majestic-monolith-29166d022228) might work better.
 

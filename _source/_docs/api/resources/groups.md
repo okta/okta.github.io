@@ -243,10 +243,10 @@ Enumerates all groups in your organization.
 
 Reminders about the `limit` query parameter and query timeouts:
 
-* If you don’t specify a value for limit and don’t specify a query, only 200 results are returned for most orgs.
-* If you don’t specify any value for limit and do specify a query, a maximum of 10 results are returned.
+* If you don't specify a value for limit and don't specify a query, only 200 results are returned for most orgs.
+* If you don't specify any value for limit and do specify a query, a maximum of 10 results are returned.
 * The maximum value for limit is 200 for most orgs.
-* Don’t write code that depends on the default or maximum value, as it may change.
+* Don't write code that depends on the default or maximum value, as it may change.
 * If you receive a HTTP 500 status code, you more than likely have exceeded the request timeout.  Retry your request with a smaller `limit` and [page the results](/docs/api/getting_started/design_principles#pagination).
 
 ##### Request Example
@@ -1295,7 +1295,7 @@ curl -v -X POST \
 
 Lists all group rules for your organization.
 
-> If you don’t specify any value for limit, a maximum of 50 results are returned.<br>
+> If you don't specify any value for limit, a maximum of 50 results are returned.<br>
 > The maximum value for limit is 300.
 
 ##### Request Parameters

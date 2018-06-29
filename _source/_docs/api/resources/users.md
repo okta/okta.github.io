@@ -4184,52 +4184,52 @@ For an individual User result, the Links Object contains a full set of link rela
 
 ~~~sh
 {
-    “id”: “oag2n8HU1vTmvCdQ50g3",
-    “status”: “ACTIVE”,
-    “created”: “2017-11-07T21:46:36.000Z”,
-    “lastUpdated”: “2017-11-07T21:46:36.000Z”,
-    “issuerId”: “ausoxdmNlCV4Rw9Ec0g3",
-    “clientId”: “customClientIdNative”,
-    “userId”: “00uol9oQZaWN47WQZ0g3",
-    “scopeId”: “scpp4bmzfCV7dHf8y0g3",
-    “_embedded”: {
-        “scope”: {
-            “name”: “bus:drive”,
-            “displayName”: “test”,
-            “description”: “Drive bus”
+    "id": "oag2n8HU1vTmvCdQ50g3",
+    "status": "ACTIVE",
+    "created": "2017-11-07T21:46:36.000Z",
+    "lastUpdated": "2017-11-07T21:46:36.000Z",
+    "issuerId": "ausoxdmNlCV4Rw9Ec0g3",
+    "clientId": "customClientIdNative",
+    "userId": "00uol9oQZaWN47WQZ0g3",
+    "scopeId": "scpp4bmzfCV7dHf8y0g3",
+    "_embedded": {
+        "scope": {
+            "name": "bus:drive",
+            "displayName": "test",
+            "description": "Drive bus"
         }
     },
-    “_links”: {
-        “app”: {
-            “href”: “https://{yourOktaDomain}:1802/api/v1/apps/0oaozwn7Qlfx0wl280g3“,
-            “title”: “Native client”
+    "_links": {
+        "app": {
+            "href": "https://{yourOktaDomain}:1802/api/v1/apps/0oaozwn7Qlfx0wl280g3",
+            "title": "Native client"
         },
-        “scope”: {
-            “href”: “https://{yourOktaDomain}:1802/api/v1/authorizationServers/ausoxdmNlCV4Rw9Ec0g3/scopes/scpp4bmzfCV7dHf8y0g3”,
-            “title”: “test”
+        "scope": {
+            "href": "https://{yourOktaDomain}:1802/api/v1/authorizationServers/ausoxdmNlCV4Rw9Ec0g3/scopes/scpp4bmzfCV7dHf8y0g3",
+            "title": "test"
         },
-        “self”: {
-            “href”: “https://{yourOktaDomain}:1802/api/v1/users/00uol9oQZaWN47WQZ0g3/grants/oag2n8HU1vTmvCdQ50g3"
+        "self": {
+            "href": "https://{yourOktaDomain}:1802/api/v1/users/00uol9oQZaWN47WQZ0g3/grants/oag2n8HU1vTmvCdQ50g3"
         },
-        “revoke”: {
-            “href”: “https://{yourOktaDomain}:1802/api/v1/users/00uol9oQZaWN47WQZ0g3/grants/oag2n8HU1vTmvCdQ50g3”,
-            “hints”: {
-                “allow”: [
-                    “DELETE”
+        "revoke": {
+            "href": "https://{yourOktaDomain}:1802/api/v1/users/00uol9oQZaWN47WQZ0g3/grants/oag2n8HU1vTmvCdQ50g3",
+            "hints": {
+                "allow": [
+                    "DELETE"
                 ]
             }
         },
-        “client”: {
-            “href”: “https://{yourOktaDomain}:1802/oauth2/v1/clients/customClientIdNative”,
-            “title”: “Native client”
+        "client": {
+            "href": "https://{yourOktaDomain}:1802/oauth2/v1/clients/customClientIdNative",
+            "title": "Native client"
         },
-        “user”: {
-            “href”: “https://{yourOktaDomain}:1802/api/v1/users/00uol9oQZaWN47WQZ0g3",
-            “title”: “Saml Jackson”
+        "user": {
+            "href": "https://{yourOktaDomain}:1802/api/v1/users/00uol9oQZaWN47WQZ0g3",
+            "title": "Saml Jackson"
         },
-        “issuer”: {
-            “href”: “https://{yourOktaDomain}:1802/api/v1/authorizationServers/default”,
-            “title”: “default”
+        "issuer": {
+            "href": "https://{yourOktaDomain}:1802/api/v1/authorizationServers/default",
+            "title": "default"
         },
         "authorizationServer": {
             "href": "https://{yourOktaDomain}/api/v1/authorizationServers/ausain6z9zIedDCxB0h7",
@@ -4265,7 +4265,7 @@ For an individual User result, the Links Object contains a full set of link rela
   "client_id": "0oab57tu2q6C0rYwM0h7",
   "client_name": "AWS Cognito",
   "client_uri": null,
-  "logo_uri": “https://example.com/image/logo.jpg“,
+  "logo_uri": "https://example.com/image/logo.jpg",
   "_links": {
      "grants": {
         "href": "https://{yourOktaDomain}/api/v1/users/00ucmukel4KHsPARU0h7/clients/0oab57tu2q6C0rYwM0h7/grants"

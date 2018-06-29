@@ -6,12 +6,12 @@ description: "Learn how to securely store, update, and display user data in a si
 tags: [node, express, oauth, user management]
 tweets:
  - "New blog live! Simple, secure way to store, update, and display user data in your #Node #ExpressJS app."
- - "Ever wonder how to store and work with user data securely in #expressjs? We’ve got you covered! #node"
+ - "Ever wonder how to store and work with user data securely in #expressjs? We've got you covered! #node"
 ---
 
 If you're building a non-trivial website, chances are you'll want some way to keep track of users. This can be quite complex and require a good deal of infrastructure, but one of the most secure and scalable ways also is one of the easiest. Using an OAuth 2.0 provider allows you to offload these tasks to an external provider, making your life as a developer so much simpler.
 
-When using an OAuth provider, it’s simple to sign up and maintain users securely, but usually the only information you have about your users is their name and email address. This leaves you having to keep a separate database of information about your users, but isn't that part of what you were trying to avoid?
+When using an OAuth provider, it's simple to sign up and maintain users securely, but usually the only information you have about your users is their name and email address. This leaves you having to keep a separate database of information about your users, but isn't that part of what you were trying to avoid?
 
 Luckily, there's a better way! Using Okta, you can not only connect users to your app, you can also store as much extra metadata as you'd like about your users. What site have you logged into recently that doesn't give you the option of changing your profile information (name, date of birth, avatar, etc.)? There aren't many these days.
 
@@ -424,10 +424,10 @@ Okta also provides an API to allow you to manage user profile schemas server-sid
 If you'd like to learn more about Node and Secure User Management with Okta, I'd strongly encourage you to check out some of these articles, or browse the Okta developer blog:
 
 * [Simple Node Authentication](/blog/2018/04/24/simple-node-authentication) (used as a starting point for this tutorial)
-* [Use Okta (Instead of Local Storage) to Store Your User’s Data Securely](/blog/2018/01/23/replace-local-storage-with-okta-profile-attributes)
+* [Use Okta (Instead of Local Storage) to Store Your User's Data Securely](/blog/2018/01/23/replace-local-storage-with-okta-profile-attributes)
 * [Build User Registration with Node, React, and Okta](/blog/2018/02/06/build-user-registration-with-node-react-and-okta)
 * [Build Secure Node Authentication with Passport.js and OpenID Connect](/blog/2018/05/18/node-authentication-with-passport-and-oidc)
 * [Add Authentication to Any Web Page in 10 Minutes](/blog/2018/06/08/add-authentication-to-any-web-page-in-10-minutes)
 
-And as always, we’d love to hear from you. Hit us up with questions or feedback in the comments, or on Twitter [@oktadev](https://twitter.com/oktadev).
+And as always, we'd love to hear from you. Hit us up with questions or feedback in the comments, or on Twitter [@oktadev](https://twitter.com/oktadev).
 

@@ -28,8 +28,8 @@ into the end class.
 
 There are a lot of dependency injection frameworks for Android out
 there: Dagger, RoboGuice, SpringAndroid, Guice, and Transfuse are a
-few. I won’t go into a detailed comparison, but I like Dagger the
-most because it provides compile time injection, and doesn’t
+few. I won't go into a detailed comparison, but I like Dagger the
+most because it provides compile time injection, and doesn't
 influence runtime (specifically startup time) too much.
 
 Again, here there are detailed tutorials at the end of this post and
@@ -130,8 +130,8 @@ my summary is below:
 
 Now, instances of `Foo` and `Bar` are
 automatically injected in the runtime. However, your test will fail
-with NPE, because the Foo class has a Bar dependency which wasn’t
-delivered. I.e., we don’t want it injected by Dagger -— we want mocked
+with NPE, because the Foo class has a Bar dependency which wasn't
+delivered. I.e., we don't want it injected by Dagger -— we want mocked
 dependency, not a real one.
 
 ## Resources

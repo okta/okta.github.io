@@ -11,9 +11,9 @@ tweets:
 
 At its core, React is just a UI toolkit, ala GWT, but it has a _very_ healthy ecosystem around it that provides everything you need to build a kick-ass progressive web app (PWA). PWAs are cool because if they're done right, they can offer a native-like experience for your users, allowing them to install your app, and use it when it's offline.
 
-But, “why React?” is what you’re probably asking yourself right now, right? Well, you might've heard that Angular can be a gateway drug for Java developers wanting to learn JavaScript. If you're an experienced Java developer that knows Angular, chances are you started with AngularJS. AngularJS has similar concepts to Java MVC frameworks, like controllers, services, and directives (which I believe are similar to JSP tags IMHO). If you're still doing Angular development, you probably learned TypeScript along the way. You like TypeScript because it has types like Java, and it's a pretty nice language too!
+But, "why React?" is what you're probably asking yourself right now, right? Well, you might've heard that Angular can be a gateway drug for Java developers wanting to learn JavaScript. If you're an experienced Java developer that knows Angular, chances are you started with AngularJS. AngularJS has similar concepts to Java MVC frameworks, like controllers, services, and directives (which I believe are similar to JSP tags IMHO). If you're still doing Angular development, you probably learned TypeScript along the way. You like TypeScript because it has types like Java, and it's a pretty nice language too!
 
-I’m betting that if you already know Angular, you might want to learn about React, its main competitor. There's always going to be several ways to write web apps, and React provides an entirely different way to do it, and you can use TypeScript with it too!
+I'm betting that if you already know Angular, you might want to learn about React, its main competitor. There's always going to be several ways to write web apps, and React provides an entirely different way to do it, and you can use TypeScript with it too!
 
 In this post, I'll show you how to build a secure PWA that uploads and processes images, displays them in a Flickr-like grid, and uses Spring Boot for its backend.
 
@@ -52,7 +52,7 @@ cd gallery
 jhipster
 ```
 
-JHipster asks many questions about the type of application you want to create and what technologies you’d like to include. The table below shows the choices you'll want to make:
+JHipster asks many questions about the type of application you want to create and what technologies you'd like to include. The table below shows the choices you'll want to make:
 
 | Question | Answer |
 |---|---|
@@ -191,19 +191,19 @@ export SECURITY_OAUTH2_CLIENT_CLIENT_ID="{clientId}"
 export SECURITY_OAUTH2_CLIENT_CLIENT_SECRET="{clientSecret}"
 ```
 
-You’ll need to create a new OIDC client in Okta and fill in the variables before this works. Once you’ve done that, you can run the following command to set these environment variables.
+You'll need to create a new OIDC client in Okta and fill in the variables before this works. Once you've done that, you can run the following command to set these environment variables.
 
 ```bash
 source ~/.okta.env
 ```
 
-Restart your app and *voila* - you’re now using Okta!
+Restart your app and *voila* - you're now using Okta!
 
-In case you don’t know how to set up an OIDC app on Okta, here’s a quick summary.
+In case you don't know how to set up an OIDC app on Okta, here's a quick summary.
 
 ### Set Up an OIDC App on Okta
 
-[Log in](https://login.okta.com/?SAMLRequest=fc%2B7CsJAEAXQXvAflu1NNJUMeZBGELTx1a%2FrYILJTtyZGD%2FfSBRiYzlw77lMnD3rSj3Qc0ku0YtgrhU6S5fSXRN9PKxmS52l00nMpq6iBvJWCrfDe4ss6vStRe9aDzmGIZfo1jsgwyWDMzUyiIV9vt1AH4XGk5ClSvewUgMNa%2BYW%2FVj5jxhm9NLP67QQaSAMu64L6CYmsFSHlnzT4ZlLwTgcL6Sf8%2FeX9AU%3Dhttps://login.okta.com/?SAMLRequest=fc%2B7CsJAEAXQXvAflu1NNJUMeZBGELTx1a%2FrYILJTtyZGD%2FfSBRiYzlw77lMnD3rSj3Qc0ku0YtgrhU6S5fSXRN9PKxmS52l00nMpq6iBvJWCrfDe4ss6vStRe9aDzmGIZfo1jsgwyWDMzUyiIV9vt1AH4XGk5ClSvewUgMNa%2BYW%2FVj5jxhm9NLP67QQaSAMu64L6CYmsFSHlnzT4ZlLwTgcL6Sf8%2FeX9AU%3D) to your Okta Developer account (or [sign up](https://developer.okta.com/signup/) if you don’t have an account) and navigate to **Applications** > **Add Application**. Click **Web** and click **Next**. Give the app a name you’ll remember, and specify `http://localhost:8080/login` as a Login Redirect URI. Click **Done** and note the client ID and secret. You'll need to copy/paste them into a file in a minute.
+[Log in](https://login.okta.com/?SAMLRequest=fc%2B7CsJAEAXQXvAflu1NNJUMeZBGELTx1a%2FrYILJTtyZGD%2FfSBRiYzlw77lMnD3rSj3Qc0ku0YtgrhU6S5fSXRN9PKxmS52l00nMpq6iBvJWCrfDe4ss6vStRe9aDzmGIZfo1jsgwyWDMzUyiIV9vt1AH4XGk5ClSvewUgMNa%2BYW%2FVj5jxhm9NLP67QQaSAMu64L6CYmsFSHlnzT4ZlLwTgcL6Sf8%2FeX9AU%3Dhttps://login.okta.com/?SAMLRequest=fc%2B7CsJAEAXQXvAflu1NNJUMeZBGELTx1a%2FrYILJTtyZGD%2FfSBRiYzlw77lMnD3rSj3Qc0ku0YtgrhU6S5fSXRN9PKxmS52l00nMpq6iBvJWCrfDe4ss6vStRe9aDzmGIZfo1jsgwyWDMzUyiIV9vt1AH4XGk5ClSvewUgMNa%2BYW%2FVj5jxhm9NLP67QQaSAMu64L6CYmsFSHlnzT4ZlLwTgcL6Sf8%2FeX9AU%3D) to your Okta Developer account (or [sign up](https://developer.okta.com/signup/) if you don't have an account) and navigate to **Applications** > **Add Application**. Click **Web** and click **Next**. Give the app a name you'll remember, and specify `http://localhost:8080/login` as a Login Redirect URI. Click **Done** and note the client ID and secret. You'll need to copy/paste them into a file in a minute.
 
 Create a `ROLE_ADMIN` and `ROLE_USER` group (**Users** > **Groups** > **Add Group**) and add users to them. I recommend adding the account you signed up with to `ROLE_ADMIN` and creating a new user (**Users** > **Add Person**) to add to `ROLE_USER`.
 
@@ -211,7 +211,7 @@ Navigate to **API** > **Authorization Servers** and click the one named **defaul
 
 ### What is Okta?
 
-In short, we make [identity management](https://developer.okta.com/product/user-management/) a lot easier, more secure, and more scalable than what you’re probably used to. Okta is a cloud service that allows developers to create, edit, and securely store user accounts and user account data, and connect them with one or multiple applications. Our API enables you to:
+In short, we make [identity management](https://developer.okta.com/product/user-management/) a lot easier, more secure, and more scalable than what you're probably used to. Okta is a cloud service that allows developers to create, edit, and securely store user accounts and user account data, and connect them with one or multiple applications. Our API enables you to:
 
 * [Authenticate](https://developer.okta.com/product/authentication/) and [authorize](https://developer.okta.com/product/authorization/) your users
 * Store data about your users
@@ -219,7 +219,7 @@ In short, we make [identity management](https://developer.okta.com/product/user-
 * Secure your application with [multi-factor authentication](https://developer.okta.com/use_cases/mfa/)
 * And much more! Check out our [product documentation](https://developer.okta.com/documentation/)
 
-Want a thousand users a month for free? [Register for a free developer account](https://developer.okta.com/signup/), and when you’re done, come on back so you can learn more about building a React PWA with Spring Boot 2.0 and JHipster!
+Want a thousand users a month for free? [Register for a free developer account](https://developer.okta.com/signup/), and when you're done, come on back so you can learn more about building a React PWA with Spring Boot 2.0 and JHipster!
 
 ### Enable Self-Service Registration in Okta
 

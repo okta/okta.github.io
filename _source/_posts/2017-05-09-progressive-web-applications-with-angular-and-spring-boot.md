@@ -11,7 +11,7 @@ tags: [spring boot, java, pwa, progressive web app, angular, typescript, angular
 
 An October 2016 DoubleClick report found 53% of visits are abandoned if a mobile site takes more than 3 seconds to load. That same report said the average mobile sites load in 19 seconds. According to Alex Russell in his recent talk on the state of mobile development, one of the biggest problems in mobile today is that developers use powerful laptops and desktops to develop their mobile applications, rather than using a $200 device on a 3G connection. Using this environment is "ground truth" to the majority of web users in the world. It's cool to develop native applications, but people with slow phones and internet don't want to download a 60MB app, they just want to use the web. Progressive web applications, or PWAs, are one of the easiest ways to make web applications faster and easier to use, allowing developers to build a better internet for everyone.
 
-Check out the full video of Alex’s talk to learn more about [Adapting to the Mobile Present](https://www.youtube.com/watch?v=K1SFnrf4jZo&feature=youtu.be).
+Check out the full video of Alex's talk to learn more about [Adapting to the Mobile Present](https://www.youtube.com/watch?v=K1SFnrf4jZo&feature=youtu.be).
 
 PWAs are becoming increasingly popular in web development. Most of the information about PWAs on the web today comes from Google and its network of Google Developer Experts. This isn't surprising as Google is often promoting the latest and greatest web technologies. They also develop their own browser, Chrome, which makes it possible to use many of the new standards in HTML5, JavaScript and beyond.
 
@@ -441,7 +441,7 @@ If you'd like to use these scripts in your project, make sure to revert the chan
 
 You can find the source code associated with this article [on GitHub](https://github.com/oktadeveloper/spring-boot-angular-pwa-example). If you find any bugs, please file an issue, or post a question to Stack Overflow with the "okta" tag. Of course, you can always [ping me on Twitter](https://twitter.com/mraible) too.
 
-In April 2017, I did a talk on Cloud Native PWAs at Devoxx France with Josh Long. The video below is a recording of that talk and shows me writing similar code to what’s listed in this article.
+In April 2017, I did a talk on Cloud Native PWAs at Devoxx France with Josh Long. The video below is a recording of that talk and shows me writing similar code to what's listed in this article.
 
 <div style="max-width: 560px; margin: 0 auto">
 <iframe width="560" height="315" src="https://www.youtube.com/embed/xo7djiUBMpU" frameborder="0" allowfullscreen></iframe>
@@ -457,12 +457,12 @@ I'd like to give a big thanks to all the engineers that've been developing progr
 
 ## Learn More About PWAs
 
-To learn more about progressive web applications, check out [The Ultimate Guide to Progressive Web Applications](/blog/2017/07/20/the-ultimate-guide-to-progressive-web-applications). I’d also recommend visiting the following websites:
+To learn more about progressive web applications, check out [The Ultimate Guide to Progressive Web Applications](/blog/2017/07/20/the-ultimate-guide-to-progressive-web-applications). I'd also recommend visiting the following websites:
 
-* [Google Developer’s Progressive Web Apps Homepage](https://developers.google.com/web/progressive-web-apps/)
+* [Google Developer's Progressive Web Apps Homepage](https://developers.google.com/web/progressive-web-apps/)
 * [Progressive Web Apps Training from Google](https://developers.google.com/web/ilt/pwa/)
 * [PWA Directory](https://pwa-directory.appspot.com/)
-* [Maxim Salnikov’s Angular Mobile Toolkit Workshop](http://bit.ly/pwa-ng-nl)
+* [Maxim Salnikov's Angular Mobile Toolkit Workshop](http://bit.ly/pwa-ng-nl)
 * [Hacker News Readers as Progressive Web Apps](https://github.com/tastejs/hacker-news-pwas)
 
 **Update:** To learn how to add authentication to this application, see [Add Authentication to Your Angular PWA](/blog/2017/06/13/add-authentication-angular-pwa). I also wrote a blog post on [how to develop the backend using a microservices architecture](/blog/2017/06/15/build-microservices-architecture-spring-boot).

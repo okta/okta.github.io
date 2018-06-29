@@ -459,7 +459,7 @@ block content
     .offset-sm-2.col-sm-8
       .body !{post.body}
       p.author Written by #{post.authorName}
-``` 
+```
 
 Now create the file `./views/edit.pug` which contains the blog post editing page markup.
 
@@ -687,7 +687,7 @@ Redirects the now logged-out user to the homepage of the site
 
 Since the application you're building is a blog, the last big piece of functionality you need add is the actual blog route code. This is what will dictate how the blog actually works: how to create posts, edit posts, delete posts, etc.
 
-Open up the `./routes/blog.js` file and copy in the following code. Don’t worry if it looks like a lot all at once - I’ll walk you through each route in detail below.
+Open up the `./routes/blog.js` file and copy in the following code. Don't worry if it looks like a lot all at once - I'll walk you through each route in detail below.
 
 
 ```javascript
@@ -1184,4 +1184,4 @@ If you're interested in learning more about how the underlying authentication co
 
 Finally, please [follow us on Twitter](https://twitter.com/OktaDev) to find more great resources like this, request other topics for us to write about, and follow along with our new open source libraries and projects!
 
-And… If you have any questions, please leave a comment below!
+And... If you have any questions, please leave a comment below!

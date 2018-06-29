@@ -11,10 +11,10 @@ redirect_from:
     - "/blog/2017/11/22/three-developer-tools-im-thankful-for"
 ---
 
-I’ve been writing code since I was 12 years old. When I first got started, I
+I've been writing code since I was 12 years old. When I first got started, I
 was using an old MSDOS computer that was given to my family by a member of our
-church. I’ve always been really thankful that person gave my family a computer,
-as without it, I doubt I’d be the person I am today.
+church. I've always been really thankful that person gave my family a computer,
+as without it, I doubt I'd be the person I am today.
 
 Each year around Thanksgiving time I always try to sit back, relax, and think
 about how thankful I am for everything I have. I have a cool job (thanks
@@ -31,27 +31,27 @@ incredible friends, and some particularly awesome co-workers (shout out!):
 - [@omgitstom](https://twitter.com/omgitstom)
 
 I could probably write an entire essay about all the amazing people I know and
-friends I have, but I’ll save that for another time. Today I wanted to reflect
+friends I have, but I'll save that for another time. Today I wanted to reflect
 on something a little more in line with the theme of this website: my favorite
 developer tools of all time.
 
 These are the tools I use every single day, and have been using for many years.
 A lot of the time I take them for granted since I use them constantly, but
-they’re all essential tools in my development arsenal, and I want to take a
-minute to share just why I’m so thankful for them.
+they're all essential tools in my development arsenal, and I want to take a
+minute to share just why I'm so thankful for them.
 
 
 ## Vim
 
 {% img blog/thankful/vim.png alt:"Vim" width:"600" %}{: .center-image }
 
-If you’ve ever met me in person (or seen me online), you probably know that I’m
+If you've ever met me in person (or seen me online), you probably know that I'm
 pretty old school. I learned how to use [Vim](https://vim.sourceforge.io/)
-sometime around the year 2000, and it just stuck. Over the years I’ve tried
+sometime around the year 2000, and it just stuck. Over the years I've tried
 using new modern IDEs, but they never stick. Vim has always just clicked with
 me. It matches my style: simple and basic, but powerful >:)
 
-I’m a quick typist, and I prefer to keep my hands on the keyboard at all times.
+I'm a quick typist, and I prefer to keep my hands on the keyboard at all times.
 Vim lets me navigate around quickly, performing even complicated tasks without
 moving my hands. Once you get used to Vim motion keys, your editing powers
 become magical.
@@ -103,12 +103,12 @@ you can join me!).
 
 {% img blog/thankful/tmux.png alt:"tmux" width:"600" %}{: .center-image }
 
-I can’t have a conversation about awesome developer tools without mentioning
-[tmux](https://github.com/tmux/tmux). Every single time I open a terminal it’s
+I can't have a conversation about awesome developer tools without mentioning
+[tmux](https://github.com/tmux/tmux). Every single time I open a terminal it's
 the first command I run.
 
-tmux is my absolute favorite terminal multiplexer. If you aren’t familiar with
-terminal multiplexers, they’re command line interfaces that allow you to manage
+tmux is my absolute favorite terminal multiplexer. If you aren't familiar with
+terminal multiplexers, they're command line interfaces that allow you to manage
 multiple terminals in a seamless way.
 
 You can create new terminals, split them in your screen, move them around,
@@ -121,11 +121,11 @@ pleasant, but pleasurable.
 The two most popular multiplexers are [GNU
 Screen](https://www.gnu.org/software/screen/) (which I used to use), and tmux
 (which is relatively newer). I discovered tmux a handful of years ago or so,
-and haven’t looked back. It’s fast, highly customizable, and intuitive to use.
+and haven't looked back. It's fast, highly customizable, and intuitive to use.
 
-I’ve customized my tmux setup quite a bit. The biggest change I’ve made (other
+I've customized my tmux setup quite a bit. The biggest change I've made (other
 than stylistic improvements) was to customize the way that splitting windows
-works: I’m able to use my tmux binding key (ctrl-a) + | to create a vertical
+works: I'm able to use my tmux binding key (ctrl-a) + | to create a vertical
 split (notice how the pipe character looks like a vertical split line), and
 (ctrl-a) + - to create a horizontal split (notice how the dash character looks
 like a horizontal split line). This makes creating complex window arrangements
@@ -137,7 +137,7 @@ any Vim movement key to move seamlessly between windows.
 When combined with Vim, tmux is a beast. It makes editing and working on large,
 complicated projects extremely painless and quick.
 
-If you’d like to check out my tmux dotfiles, you can do so
+If you'd like to check out my tmux dotfiles, you can do so
 [here](https://github.com/rdegges/dot-tmux).
 
 Thank you [Nicholas Marriott](https://github.com/nicm) for developing such a
@@ -166,16 +166,16 @@ like easily search for previously entered commands, quickly launch programs,
 compose chains of programs using simple macros, etc.
 
 Through the course of a day my zsh shortcuts save me many minutes worth of
-typing. Since I’ve been using it for years now, that really adds up!
+typing. Since I've been using it for years now, that really adds up!
 
 If I conservatively estimate that zsh has saved me roughly 10 minutes of typing
-per day (which I’d say is a fair estimate based on the amount of time I spend
-on my computer each day), and assuming I’ve been using zsh for roughly ~6
+per day (which I'd say is a fair estimate based on the amount of time I spend
+on my computer each day), and assuming I've been using zsh for roughly ~6
 years, that adds up to roughly ~15.21 days of saved human time!
 
-That’s pretty incredible!
+That's pretty incredible!
 
-If you’d like to check out my zsh dotfiles, you can do so [here](https://github.com/rdegges/dot-zsh).
+If you'd like to check out my zsh dotfiles, you can do so [here](https://github.com/rdegges/dot-zsh).
 
 Thank you very much Paul for creating zsh, and [Robby](https://twitter.com/robbyrussell)
 for creating oh-my-zsh. You guys are amazing.
@@ -188,7 +188,7 @@ for creating oh-my-zsh. You guys are amazing.
 It was fun taking a few minutes to write about my favorite three developer
 tools.
 
-If you’re wondering why they’re all command-line based: it’s because that’s
+If you're wondering why they're all command-line based: it's because that's
 where I spend 99% of my time.
 
 Regardless of what sort of developer you are, or what sort of tools you use, I

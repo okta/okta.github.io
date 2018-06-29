@@ -22,7 +22,7 @@ To set up the base application, make sure you have these basic tools installed:
 * create-react-app (npm package)
 * express-generator (npm package)
 
-You’ll also need an [Okta developer account](https://developer.okta.com/signup/).
+You'll also need an [Okta developer account](https://developer.okta.com/signup/).
 
 To install Node and npm, you can follow the instructions for your operating system at <https://nodejs.org/en/>.
 
@@ -52,7 +52,7 @@ This will create two folders in the `MembershipSample` folder called `api` and `
 
 To make this next part easier, open two terminals or terminal tabs; one to the express app folder `api` and the other to the React app folder `client`.
 
-By default, the React app and the Node app will both run on port 3000 in development, so you'll need to get the API to run on a different port and then proxy it in the client app. 
+By default, the React app and the Node app will both run on port 3000 in development, so you'll need to get the API to run on a different port and then proxy it in the client app.
 
 In the `api` folder, open the `/bin/www` file and change the port the API will be running on to `3001`.
 
@@ -72,7 +72,7 @@ Then set up the proxy for the API in the client application so that you can stil
 "proxy": "http://localhost:3001"
 ```
 
-Lastly, don’t forget to run `npm install` or `yarn install` for each subfolder (`api` and `client`) to ensure that the dependencies are installed.
+Lastly, don't forget to run `npm install` or `yarn install` for each subfolder (`api` and `client`) to ensure that the dependencies are installed.
 
 You can now run both applications by running `npm start` or `yarn start` in the appropriate folders for the API and the client application.
 
@@ -98,7 +98,7 @@ Once the application has been created, select it from the applications listing, 
 
 {% img blog/build-user-registration-with-node-react-and-okta/general-settings-tab.png alt:"general settings tab" %}{: .center-image }
 
-At the bottom, you will see a **Client ID** setting (yours won't be blurred out, obviously). Copy this to use in your React application. You will also need your Okta organization URL, which you can find at the top left of the dashboard page. It will probably look something like “https://dev-XXXXXX.oktapreview.com”.
+At the bottom, you will see a **Client ID** setting (yours won't be blurred out, obviously). Copy this to use in your React application. You will also need your Okta organization URL, which you can find at the top left of the dashboard page. It will probably look something like "https://dev-XXXXXX.oktapreview.com".
 
 ## Add Authentication to the ReactJS Application
 
@@ -114,7 +114,7 @@ Or, if you're using the [yarn](https://yarnpkg.com) package manager:
 yarn add @okta/okta-react react-router-dom
 ```
 
-Add a file to the `client/src’ folder called `app.config.js`. The contents of the file are:
+Add a file to the `client/src' folder called `app.config.js`. The contents of the file are:
 
 ```js
 export default {
@@ -182,9 +182,9 @@ export default class HomePage extends React.Component{
 
 This is all you really need for the home page at the moment. The most important point is to make the HomePage component a class type. Even though right now it only contains a single `h1` tag, it is meant to be a "page", meaning it will likely contain other components, so it's important that it be a container component.
 
-Next, create an `auth` folder in `components`. This is where all components that have to do with authentication will live. In that folder, create a `LoginForm.js` file. 
+Next, create an `auth` folder in `components`. This is where all components that have to do with authentication will live. In that folder, create a `LoginForm.js` file.
 
-The first thing to note is that you’ll be using the `withAuth` higher-order component from Okta’s React SDK to wrap the entire login form. This adds a prop to the component called `auth`, making it possible to access things like the `isAuthenticated` and `redirect` functions on that higher-order component.
+The first thing to note is that you'll be using the `withAuth` higher-order component from Okta's React SDK to wrap the entire login form. This adds a prop to the component called `auth`, making it possible to access things like the `isAuthenticated` and `redirect` functions on that higher-order component.
 
 
 The code for the `LoginForm` component is as follows:
@@ -240,8 +240,8 @@ export default withAuth(class LoginForm extends React.Component {
       return null;
     }
 
-    const errorMessage = this.state.error ? 
-	<span className="error-message">{this.state.error}</span> : 
+    const errorMessage = this.state.error ?
+	<span className="error-message">{this.state.error}</span> :
 	null;
 
     return (
@@ -356,7 +356,7 @@ The `withAuth` component here gives you access to the `getUser` function. Here, 
 Next, you'll add a registration component. This could be done just like the login form, where there is a `LoginForm` component that is contained in a `LoginPage` component. In order to demonstrate another way to display this, you'll just create a `RegistrationForm` component that will be the main container component. Create a `RegistrationForm.js` file in the `auth` folder with the following content:
 
 ```js
-import React from 'react'; 
+import React from 'react';
 import OktaAuth from '@okta/okta-auth-js';
 import { withAuth } from '@okta/okta-react';
 
@@ -380,7 +380,7 @@ export default withAuth(class RegistrationForm extends React.Component{
     this.handleFirstNameChange = this.handleFirstNameChange.bind(this);
     this.handleLastNameChange = this.handleLastNameChange.bind(this);
     this.handleEmailChange = this.handleEmailChange.bind(this);
-    this.handlePasswordChange = this.handlePasswordChange.bind(this);    
+    this.handlePasswordChange = this.handlePasswordChange.bind(this);
   }
 
   async checkAuthentication() {
@@ -409,8 +409,8 @@ export default withAuth(class RegistrationForm extends React.Component{
 
   handleSubmit(e){
     e.preventDefault();
-    fetch('/api/users', { 
-      method: 'POST', 
+    fetch('/api/users', {
+      method: 'POST',
       headers: {
         'Accept': 'application/json',
         'Content-Type': 'application/json',
@@ -438,22 +438,22 @@ export default withAuth(class RegistrationForm extends React.Component{
       <form onSubmit={this.handleSubmit}>
         <div className="form-element">
           <label>Email:</label>
-          <input type="email" id="email" value={this.state.email} 
+          <input type="email" id="email" value={this.state.email}
 		  onChange={this.handleEmailChange}/>
         </div>
         <div className="form-element">
           <label>First Name:</label>
-          <input type="text" id="firstName" value={this.state.firstName} 
+          <input type="text" id="firstName" value={this.state.firstName}
 		  onChange={this.handleFirstNameChange} />
         </div>
         <div className="form-element">
           <label>Last Name:</label>
-          <input type="text" id="lastName" value={this.state.lastName} 
+          <input type="text" id="lastName" value={this.state.lastName}
 		  onChange={this.handleLastNameChange} />
         </div>
         <div className="form-element">
           <label>Password:</label>
-          <input type="password" id="password" value={this.state.password} 
+          <input type="password" id="password" value={this.state.password}
 		  onChange={this.handlePasswordChange} />
         </div>
         <input type="submit" id="submit" value="Register"/>
@@ -464,15 +464,15 @@ export default withAuth(class RegistrationForm extends React.Component{
 });
 ```
 
-This component looks a lot like the `LoginForm` component with the exception that it calls the Node API (that you’ll build in a moment) that will handle doing the registration. Once the registration is completed by the Node API, the component logs the newly created user in, and the render method (when it sees a session token in the state) redirects the user to the home page of the application.
+This component looks a lot like the `LoginForm` component with the exception that it calls the Node API (that you'll build in a moment) that will handle doing the registration. Once the registration is completed by the Node API, the component logs the newly created user in, and the render method (when it sees a session token in the state) redirects the user to the home page of the application.
 
-You may also notice the `sessionToken` property on the component’s state. This is set by the `handleSubmit()` function for the purpose of handling the login if the registration is successful. Then it is also used by the `render()` method to do the redirect once the login has completed, and a token has been received.
+You may also notice the `sessionToken` property on the component's state. This is set by the `handleSubmit()` function for the purpose of handling the login if the registration is successful. Then it is also used by the `render()` method to do the redirect once the login has completed, and a token has been received.
 
 ## Add Routes to the React App
 
-First, add a navigation component for the routes you’ll be adding. In the `client/src/components` folder, add a folder called `shared`. This will be the place where all components that are used in several places in the application will be located. In that new folder, add a file called `Navigation.js`. The file contains a basic component with links to all the pages in the app.
+First, add a navigation component for the routes you'll be adding. In the `client/src/components` folder, add a folder called `shared`. This will be the place where all components that are used in several places in the application will be located. In that new folder, add a file called `Navigation.js`. The file contains a basic component with links to all the pages in the app.
 
-You’ll need to wrap the navigation component in the `withAuth` higher-order component. That way, you can check to see if there is an authenticated user and display the login or logout button as appropriate.
+You'll need to wrap the navigation component in the `withAuth` higher-order component. That way, you can check to see if there is an authenticated user and display the login or logout button as appropriate.
 
 ```js
 import React from 'react';
@@ -562,7 +562,7 @@ The only other really odd-looking thing here is the route for the login path. In
 
 ## Add API Endpoints to the Node App
 
-You may remember that the Node API is doing the registration, so you'll need to add the endpoint to the Node app to handle that call. To do that, you'll need to add Okta's Node SDK. From the ‘api’ folder run:
+You may remember that the Node API is doing the registration, so you'll need to add the endpoint to the Node app to handle that call. To do that, you'll need to add Okta's Node SDK. From the 'api' folder run:
 
 ```bash
 npm install @okta/okta-sdk-nodejs --save
@@ -646,12 +646,12 @@ Even though the site still needs some serious style love, you will now be able t
 ## Learn More
 
 If you want to learn more about the technologies used in this articles, you can check out the documentation for:
-* Okta's [Node SDK](https://developer.okta.com/okta-sdk-nodejs/jsdocs/index.html) 
-* Okta’s [React SDK](https://developer.okta.com/code/react/).
+* Okta's [Node SDK](https://developer.okta.com/okta-sdk-nodejs/jsdocs/index.html)
+* Okta's [React SDK](https://developer.okta.com/code/react/).
 
 Also, check out other articles using Okta for authentication:
-* Randall Degges’s article on Okta in a [Simple Node Website](https://developer.okta.com/blog/2017/10/19/use-openid-connect-to-build-a-simple-node-website)
+* Randall Degges's article on Okta in a [Simple Node Website](https://developer.okta.com/blog/2017/10/19/use-openid-connect-to-build-a-simple-node-website)
 * My article using the [Okta Sign-In Widget in React](https://developer.okta.com/blog/2017/03/30/react-okta-sign-in-widget)
-* Matt Raible’s Article on [Progressive Web Apps](https://developer.okta.com/blog/2017/07/20/the-ultimate-guide-to-progressive-web-applications)
+* Matt Raible's Article on [Progressive Web Apps](https://developer.okta.com/blog/2017/07/20/the-ultimate-guide-to-progressive-web-applications)
 
 As always, if you have questions, comments, or concerns about the article you can post a comment below, email me at <lee.brandt@okta.com> or post your questions to the [developer forums](https://devforum.okta.com). For more articles and tutorials, follow us on Twitter [@OktaDev](https://twitter.com/oktadev).

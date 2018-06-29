@@ -6,21 +6,21 @@ description: "Play Framework is a key component of Lightbend's Lagom microservic
 tags: [authentication, play, play framework, java, pac4j, play-pac4j, oidc, oauth]
 ---
 
-I’ve fallen in love with Play Framework in the past, but then found a more attractive framework in Spring Boot. I fell in love partly because Play was new and sexy at the time, but also because it’s “live reloading" of Java code was a killer feature I’d been looking for. When it added support for Scala in v2.0, I was very excited to learn Scala and discover the power of functional programming. Part of the reason I fell out of love with Play is that I fell *really hard* for Spring Boot. I’d used Spring for ten years before I found Spring Boot, so I knew how most things worked. With Play, I had to learn a lot of new things, and it was difficult to keep up.
+I've fallen in love with Play Framework in the past, but then found a more attractive framework in Spring Boot. I fell in love partly because Play was new and sexy at the time, but also because it's "live reloading" of Java code was a killer feature I'd been looking for. When it added support for Scala in v2.0, I was very excited to learn Scala and discover the power of functional programming. Part of the reason I fell out of love with Play is that I fell *really hard* for Spring Boot. I'd used Spring for ten years before I found Spring Boot, so I knew how most things worked. With Play, I had to learn a lot of new things, and it was difficult to keep up.
 
-I figured it’d be fun to revisit Play and see how easy it is to integrate a modern authentication mechanism like OpenID Connect. I’m happy to report it’s *really* easy thanks to [pac4j](http://www.pac4j.org/) and its [play-pac4j](https://github.com/pac4j/play-pac4j) integration, so that’s what you’ll be building in this tutorial.
+I figured it'd be fun to revisit Play and see how easy it is to integrate a modern authentication mechanism like OpenID Connect. I'm happy to report it's *really* easy thanks to [pac4j](http://www.pac4j.org/) and its [play-pac4j](https://github.com/pac4j/play-pac4j) integration, so that's what you'll be building in this tutorial.
 
-Play has continued to evolve over the past several years, becoming a [staple framework for services at LinkedIn](https://engineering.linkedin.com/play/play-framework-linkedin) and [increasing productivity at Verizon](https://twitter.com/marcospereira/status/921144001021071362). It’s also a key component of Lightbend’s microservices framework, [Lagom](https://www.lightbend.com/lagom-framework). However, it’s popularity seemed to peak around the time I was learning it. The [tag trends from Stack Overflow provide some evidence](http://sotagtrends.com/?tags=[playframework-2.0,playframework]&relative=true) of this.
+Play has continued to evolve over the past several years, becoming a [staple framework for services at LinkedIn](https://engineering.linkedin.com/play/play-framework-linkedin) and [increasing productivity at Verizon](https://twitter.com/marcospereira/status/921144001021071362). It's also a key component of Lightbend's microservices framework, [Lagom](https://www.lightbend.com/lagom-framework). However, it's popularity seemed to peak around the time I was learning it. The [tag trends from Stack Overflow provide some evidence](http://sotagtrends.com/?tags=[playframework-2.0,playframework]&relative=true) of this.
 
 {% img blog/play-oidc-pac4j/stackoverflow-trends.png alt:"Stack Overflow Tag Trends" width:"600" %}{: .center-image }
 
 ## My Experiences with Play
 
-I first started using the Play framework back in 2011, and have followed it ever since. I spoke about HTML5 with Play Scala, CoffeeScript, and Jade at Devoxx 2011. To create that presentation, I had to learn all these technologies. Not only did I learn them all, but I also created a “Play More" application that helped me figure out many issues with developing an HTML5-based mobile app along the way. You can see the presentation and demo video [on my website](http://raibledesigns.com/rd/entry/my_html5_with_play_scala). 
+I first started using the Play framework back in 2011, and have followed it ever since. I spoke about HTML5 with Play Scala, CoffeeScript, and Jade at Devoxx 2011. To create that presentation, I had to learn all these technologies. Not only did I learn them all, but I also created a "Play More" application that helped me figure out many issues with developing an HTML5-based mobile app along the way. You can see the presentation and demo video [on my website](http://raibledesigns.com/rd/entry/my_html5_with_play_scala).
 
 In February 2012, I updated my app and presentation to cover [Play 2.0 and integrated Secure Socia](http://raibledesigns.com/rd/entry/secure_json_services_with_play). I ended up not upgrading to Play 2.0, but I did learn how to secure my REST API. In the summer of 2012, I finally got my app [upgraded to Play 2](http://raibledesigns.com/rd/entry/migrating_to_play_2_and) and was able to get the Secure Social Module for Play 2 integrated and running in 10 minutes.
 
-I also created a Play vs. Grails Smackdown presentation with James Ward that summer. The [first time we delivered the talk was at ÜberConf](http://raibledesigns.com/rd/entry/play_vs_grails_smackdown_at). James and I did the talk many more times, including at JavaOne 2013 ([SlideShare](https://www.slideshare.net/mraible/play-framework-vs-grails-smackdown-javaone-2013), [YouTube](https://www.youtube.com/watch?v=Yn-0IuKQA7w)).  
+I also created a Play vs. Grails Smackdown presentation with James Ward that summer. The [first time we delivered the talk was at ÜberConf](http://raibledesigns.com/rd/entry/play_vs_grails_smackdown_at). James and I did the talk many more times, including at JavaOne 2013 ([SlideShare](https://www.slideshare.net/mraible/play-framework-vs-grails-smackdown-javaone-2013), [YouTube](https://www.youtube.com/watch?v=Yn-0IuKQA7w)).
 
 ## Get Started with Play Framework
 
@@ -55,7 +55,7 @@ sbt_version [1.0.2]:
 Template applied in ./okta-play-oidc-example
 ```
 
-I proved everything worked by navigating into the project and running `sbt run`. 
+I proved everything worked by navigating into the project and running `sbt run`.
 
 **NOTE:** This process can take a while to run the first time. On my super-beefy Mac Pro, it took 4m28s.
 
@@ -65,16 +65,16 @@ I opened my browser to http://localhost:9000 and was pleased to see everything w
 
 ## Security Options for Play Framework
 
-To figure out which security plugin I should use with Play, I [asked my network on Twitter](https://twitter.com/mraible/status/922142654007197696). 
+To figure out which security plugin I should use with Play, I [asked my network on Twitter](https://twitter.com/mraible/status/922142654007197696).
 
 <div style="max-width: 500px; margin: 0 auto">
 <blockquote class="twitter-tweet" data-lang="en"><p lang="en" dir="ltr">This week, I hope to show how to integrate <a href="https://twitter.com/playframework?ref_src=twsrc%5Etfw">@playframework</a> with <a href="https://twitter.com/okta?ref_src=twsrc%5Etfw">@okta</a> for auth. Should I try to use securesocial, play-pac4j, or deadbolt?</p>&mdash; Matt Raible (@mraible) <a href="https://twitter.com/mraible/status/922142654007197696?ref_src=twsrc%5Etfw">October 22, 2017</a></blockquote>
 <script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
 </div>
 
-From this conversation, I learned that [Play’s built-in OAuth support](https://www.playframework.com/documentation/2.6.x/JavaOAuth) is only for OAuth 1.0. I also learned about [play-zhewbacca](https://github.com/zalando-stups/play-zhewbacca) and [Silhouette](https://www.silhouette.rocks/). Secure Social [hasn’t been worked on for several months](https://github.com/jaliss/securesocial/commits/master), so I decided to pass on it. Silhouette has a pretty website and extensive documentation, but it’s not compatible with Java. I wanted to write a Java app for this example.
+From this conversation, I learned that [Play's built-in OAuth support](https://www.playframework.com/documentation/2.6.x/JavaOAuth) is only for OAuth 1.0. I also learned about [play-zhewbacca](https://github.com/zalando-stups/play-zhewbacca) and [Silhouette](https://www.silhouette.rocks/). Secure Social [hasn't been worked on for several months](https://github.com/jaliss/securesocial/commits/master), so I decided to pass on it. Silhouette has a pretty website and extensive documentation, but it's not compatible with Java. I wanted to write a Java app for this example.
 
-I decided to try [play-pac4j](https://github.com/pac4j/play-pac4j). My reason was simple, I’m a [lazy developer](/blog/2017/09/14/lazy-developers-guide-to-auth-with-vue), and its README shows an OIDC example that looked easy enough to implement. Its [documentation](http://www.pac4j.org/docs/clients/openid-connect.html) confirmed it didn’t require much.
+I decided to try [play-pac4j](https://github.com/pac4j/play-pac4j). My reason was simple, I'm a [lazy developer](/blog/2017/09/14/lazy-developers-guide-to-auth-with-vue), and its README shows an OIDC example that looked easy enough to implement. Its [documentation](http://www.pac4j.org/docs/clients/openid-connect.html) confirmed it didn't require much.
 
 ```java
 final OidcConfiguration oidcConfiguration = new OidcConfiguration();
@@ -87,9 +87,9 @@ oidcClient.addAuthorizationGenerator((ctx, profile) -> { profile.addRole("ROLE_A
 
 ## Integrate pac4j into Play Java Seed
 
-If you’d like to follow along, below are the steps I used to integrate pac4j into my project and authenticate against Okta. Thanks to [Jérôme LELEU](https://www.linkedin.com/in/jleleu/) for creating pac4j and writing a nice [play-pac4j-java-demo](https://github.com/pac4j/play-pac4j-java-demo) project. The code in this project was a goldmine of information.
+If you'd like to follow along, below are the steps I used to integrate pac4j into my project and authenticate against Okta. Thanks to [Jérôme LELEU](https://www.linkedin.com/in/jleleu/) for creating pac4j and writing a nice [play-pac4j-java-demo](https://github.com/pac4j/play-pac4j-java-demo) project. The code in this project was a goldmine of information.
 
-**NOTE:** I used IntelliJ IDEA to write the code in this example and found its SBT/Play support to be excellent. I didn’t even need to install any plugins because I already had the Scala plugin installed. Play has a [plethora of documentation](https://www.playframework.com/documentation/2.6.x/IDE) for Eclipse, IDEA, NetBeans, and Emacs.
+**NOTE:** I used IntelliJ IDEA to write the code in this example and found its SBT/Play support to be excellent. I didn't even need to install any plugins because I already had the Scala plugin installed. Play has a [plethora of documentation](https://www.playframework.com/documentation/2.6.x/IDE) for Eclipse, IDEA, NetBeans, and Emacs.
 
 Add pac4j dependencies to `build.sbt`:
 
@@ -147,9 +147,9 @@ public class SecurityModule extends AbstractModule {
         oidcConfiguration.setSecret(configuration.getString("oidc.clientSecret"));
 
         final OidcClient oidcClient = new OidcClient(oidcConfiguration);
-        oidcClient.addAuthorizationGenerator((ctx, profile) -> { 
-            profile.addRole("ROLE_ADMIN"); 
-            return profile; 
+        oidcClient.addAuthorizationGenerator((ctx, profile) -> {
+            profile.addRole("ROLE_ADMIN");
+            return profile;
         });
 
         final String baseUrl = configuration.getString("baseUrl");
@@ -174,7 +174,7 @@ public class SecurityModule extends AbstractModule {
 }
 ```
 
-Create `app/controllers/SecureHttpActionAdapter.java` to show unauthorized and forbidden messages when user’s don’t have access to an action.
+Create `app/controllers/SecureHttpActionAdapter.java` to show unauthorized and forbidden messages when user's don't have access to an action.
 
 ```java
 package controllers;
@@ -225,7 +225,7 @@ And `app/views/error403.scala.html` to show the forbidden message.
 </html>
 ```
 
-In `app/controllers/HomeController.java` add a method that’s secured by the OIDC client, a method to show the profile information returned from Okta (or any identity provider), and a method to get the profiles. 
+In `app/controllers/HomeController.java` add a method that's secured by the OIDC client, a method to show the profile information returned from Okta (or any identity provider), and a method to get the profiles.
 
 ```java
 package controllers;
@@ -288,7 +288,7 @@ profiles: @profiles
 </p>
 ```
 
-Create `app/controllers/CentralLogoutController.java` to handle the central logout behavior. 
+Create `app/controllers/CentralLogoutController.java` to handle the central logout behavior.
 
 ```java
 package controllers;
@@ -310,9 +310,9 @@ public class CentralLogoutController extends LogoutController {
 }
 ```
 
-**NOTE:** If you want to make it so central logout doesn’t kill local log out, use `setLocalLogout(false);`. 
+**NOTE:** If you want to make it so central logout doesn't kill local log out, use `setLocalLogout(false);`.
 
-Open `conf/routes` and add routes to the new methods you added, as well as pac4j’s controllers.
+Open `conf/routes` and add routes to the new methods you added, as well as pac4j's controllers.
 
 ```scala
 GET     /                           controllers.HomeController.index
@@ -352,12 +352,12 @@ oidc.clientId = "{clientId}"
 oidc.clientSecret = "{clientSecret}"
 ```
 
-You’ll need to create an OIDC App in Okta to get a `{clientId}` and `{clientSecret}`.
+You'll need to create an OIDC App in Okta to get a `{clientId}` and `{clientSecret}`.
 
 ## Create an OIDC App in Okta
 
-Log in to your Okta Developer account (or [sign up](https://developer.okta.com/signup/) if you don’t have an account) and navigate to **Applications** > **Add Application**. Click **Web** and then click **Next**. Give the app a name you’ll remember, specify `http://localhost:9000` as a Base URI, as well as the following values. Note that you won’t be able to enter a Logout redirect URI until after you’ve clicked the **Done** button.
- 
+Log in to your Okta Developer account (or [sign up](https://developer.okta.com/signup/) if you don't have an account) and navigate to **Applications** > **Add Application**. Click **Web** and then click **Next**. Give the app a name you'll remember, specify `http://localhost:9000` as a Base URI, as well as the following values. Note that you won't be able to enter a Logout redirect URI until after you've clicked the **Done** button.
+
  * Login redirect URIs: `http://localhost:9000/callback?client_name=OidcClient`
  * Logout redirect URIs: `http://localhost:9000/?forcepostlogouturlafteridp`
 
@@ -375,7 +375,7 @@ After making these changes, you should be able to refresh your browser and log i
 
 {% img blog/play-oidc-pac4j/oidc-profiles.png alt:"Profiles after login" width:"800" %}{: .center-image }
 
-You might notice (in the bottom right corner) that roles are set to `ROLE_ADMIN`. This value is hardcoded in `SecurityModule`. In the following section, I’ll show you how to map Okta groups to roles.
+You might notice (in the bottom right corner) that roles are set to `ROLE_ADMIN`. This value is hardcoded in `SecurityModule`. In the following section, I'll show you how to map Okta groups to roles.
 
 ## Mapping Okta Groups to Roles
 
@@ -418,19 +418,19 @@ After integrating groups with roles, logging in with a user that belongs to both
 
 ## Source Code
 
-You can see the full source code for the application developed in this tutorial [on GitHub](https://github.com/oktadeveloper/okta-play-oidc-example). 
+You can see the full source code for the application developed in this tutorial [on GitHub](https://github.com/oktadeveloper/okta-play-oidc-example).
 
 ## Have Fun Playing With Play!
 
-I hope you’ve enjoyed this quick tutorial on how to add authentication with OIDC and play-pac4j to your Play application. I was tempted to look at other solutions, and even try Silhouette + Scala, but pac4j made it pretty easy to accomplish my goal. 
+I hope you've enjoyed this quick tutorial on how to add authentication with OIDC and play-pac4j to your Play application. I was tempted to look at other solutions, and even try Silhouette + Scala, but pac4j made it pretty easy to accomplish my goal.
 
-If you have a similar tutorial on using Silhouette or another OIDC library for Play, I’d love to hear about it. Bonus points if it integrates with Okta or Keycloak. You can find me on Twitter [@mraible](https://twitter.com/mraible). 
+If you have a similar tutorial on using Silhouette or another OIDC library for Play, I'd love to hear about it. Bonus points if it integrates with Okta or Keycloak. You can find me on Twitter [@mraible](https://twitter.com/mraible).
 
-If you’re a Java dev who’s interested in reading more about integrating Okta, I’d love to have you check out these resources:
+If you're a Java dev who's interested in reading more about integrating Okta, I'd love to have you check out these resources:
 
 * [My recent post on using OIDC support with JHipster](/blog/2017/10/20/oidc-with-jhipster)
-* [Micah Silverman’s recent post on RBAC with Thymeleaf and Spring Security](/blog/2017/10/13/okta-groups-spring-security)
+* [Micah Silverman's recent post on RBAC with Thymeleaf and Spring Security](/blog/2017/10/13/okta-groups-spring-security)
 * [Identity, Claims, & Tokens – An OpenID Connect Primer, Part 1 of 3](/blog/2017/07/25/oidc-primer-part-1)
 
-And finally, I’d love to have you follow our whole team on Twitter for more awesome content. Check us out [@oktadev](https://twitter.com/OktaDev)!
+And finally, I'd love to have you follow our whole team on Twitter for more awesome content. Check us out [@oktadev](https://twitter.com/OktaDev)!
 

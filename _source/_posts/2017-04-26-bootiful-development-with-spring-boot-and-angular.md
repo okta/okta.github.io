@@ -4,7 +4,7 @@ title: Bootiful Development with Spring Boot and Angular
 author: mraible
 description: "This tutorial shows you how to develop a Spring Boot API and an Angular front-end that displays data from it."
 tags: [spring-boot, start.spring.io, java, angular, typescript, angular-cli]
-tweets: 
+tweets:
   - "Want to see how to develop a Spring Boot API and and Angular 5 UI that talks to it? We have a tutorial for that! "
   - "Bootiful Development with Spring Boot and Angular: two beautiful frameworks, working together in harmony ❤️ "
 ---
@@ -13,9 +13,9 @@ To simplify development and deployment, you want everything in the same artifact
 
 I believe that most frontend developers are used to having their apps standalone and making cross-origin requests to APIs. The beauty of having a client app that can point to a server app is you can point it to *any* server and it makes it easy to test your current client code against other servers (e.g. test, staging, production).
 
-This post shows how you can have the best of both worlds where the UI and the API are separate apps. You’ll learn how to create REST endpoints with Spring Data REST, configure Spring Boot to allow CORS, and create an Angular app to display its data. This app will display a list of beers from the API, then fetch a GIF from [https://giphy.com/](http://giphy.com) that matches the beer’s name.
+This post shows how you can have the best of both worlds where the UI and the API are separate apps. You'll learn how to create REST endpoints with Spring Data REST, configure Spring Boot to allow CORS, and create an Angular app to display its data. This app will display a list of beers from the API, then fetch a GIF from [https://giphy.com/](http://giphy.com) that matches the beer's name.
 
-If you don’t want to code along, feel free to grab the [source code from GitHub](https://github.com/oktadeveloper/spring-boot-angular-example)! You can also watch a video of this tutorial below.
+If you don't want to code along, feel free to grab the [source code from GitHub](https://github.com/oktadeveloper/spring-boot-angular-example)! You can also watch a video of this tutorial below.
 
 <div style="text-align: center">
 <iframe width="560" height="315" style="max-width: 100%" src="https://www.youtube.com/embed/GhBwKT7EJsY" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
@@ -23,7 +23,7 @@ If you don’t want to code along, feel free to grab the [source code from GitHu
 
 ## Build an API with Spring Boot
 
-To get started with Spring Boot, navigate to [start.spring.io](https://start.spring.io). In the “Search for dependencies" field, select the following:
+To get started with Spring Boot, navigate to [start.spring.io](https://start.spring.io). In the "Search for dependencies" field, select the following:
 
 * [DevTools](http://docs.spring.io/spring-boot/docs/current/reference/html/using-boot-devtools.html): Provides auto-reloading of your application when files change
 * [H2](http://www.h2database.com/html/main.html): An in-memory database
@@ -196,7 +196,7 @@ http localhost:8080/good-beers
 
 ## Create a Project with Angular CLI
 
-It’s cool that you created an API to display a list of beers, but APIs aren’t _that_ cool without a UI. In this section, you’ll create a new Angular app, build services to fetch beers/images, and create components to display this data.
+It's cool that you created an API to display a list of beers, but APIs aren't _that_ cool without a UI. In this section, you'll create a new Angular app, build services to fetch beers/images, and create components to display this data.
 
 To create an Angular project, make sure you have [Node.js](https://nodejs.org/) and the latest [Angular CLI installed](https://github.com/angular/angular-cli#updating-angular-cli).
 
@@ -225,13 +225,13 @@ Executed 1 of 1 spec SUCCESS in 0.692 sec.
 [10:31:01] I/launcher - chrome #01 passed
 ```
 
-If you’d rather not use the command line and have [IntelliJ IDEA](https://www.jetbrains.com/idea/) (or [WebStorm](https://www.jetbrains.com/webstorm/)) installed, you can create a new Static Web Project and select Angular CLI.
+If you'd rather not use the command line and have [IntelliJ IDEA](https://www.jetbrains.com/idea/) (or [WebStorm](https://www.jetbrains.com/webstorm/)) installed, you can create a new Static Web Project and select Angular CLI.
 
 {% img blog/angular-spring-boot/intellij-new-static-web-project.png alt:"IntelliJ new Static Web project" width:"800" %}{: .center-image }
 
 ### Create a BeerListComponent and BeerService
 
-Thus far, you’ve created a `good-beers` API and an Angular app, but you haven’t created the UI to display the list of beers from your API. To do this, create a `<beer-list>` component by running Angular CLI’s `generate component` command.
+Thus far, you've created a `good-beers` API and an Angular app, but you haven't created the UI to display the list of beers from your API. To do this, create a `<beer-list>` component by running Angular CLI's `generate component` command.
 
 ```bash
 $ ng generate component beer-list
@@ -265,7 +265,7 @@ Create a `src/app/shared/index.ts` file and export the `BeerService`. The reason
 export * from './beer/beer.service';
 ```
 
-Modify `client/src/app/shared/beer/beer.service.ts` to call the “good-beers" API service.
+Modify `client/src/app/shared/beer/beer.service.ts` to call the "good-beers" API service.
 
 ```typescript
 import { Injectable } from '@angular/core';
@@ -355,7 +355,7 @@ Make sure both apps are started (with `mvn spring-boot:run` in the server direct
 Failed to load http://localhost:8080/good-beers: No 'Access-Control-Allow-Origin' header is present on the requested resource. Origin 'http://localhost:4200' is therefore not allowed access.
 </pre>
 
-To fix this issue, you’ll need to configure Spring Boot to allow cross-domain access from `http://localhost:4200`.
+To fix this issue, you'll need to configure Spring Boot to allow cross-domain access from `http://localhost:4200`.
 
 ### Configure CORS for Spring Boot
 
@@ -456,7 +456,7 @@ The result should look something like the following list of beer names with imag
 
 {% img blog/angular-spring-boot/angular-beer-list-giphy.png alt:"Beer list with Giphy images" width:"800" %}{: .center-image }
 
-You’ve just created an Angular app that talks to a Spring Boot API using cross-domain requests. Congratulations!
+You've just created an Angular app that talks to a Spring Boot API using cross-domain requests. Congratulations!
 
 ## Learn More About Spring Boot and Angular
 
@@ -476,4 +476,4 @@ You can find the source code associated with this article [on GitHub](https://gi
 **Changelog:**
 
 * Feb 7, 2018: Updated to use Spring Boot 1.5.10, Angular 5.2.0, and Angular CLI 1.6.7. See the code changes in the [example app on GitHub](https://github.com/oktadeveloper/spring-boot-microservices-example/pull/6). Changes to this article can be viewed [in this pull request](https://github.com/okta/okta.github.io/pull/1733).
-* Nov 3, 2017: Updated to use Spring Boot 1.5.8, Angular 5.0.0, and Angular CLI 1.5.0. See the code changes in the [example app on GitHub](https://github.com/oktadeveloper/spring-boot-angular-example/pull/5). 
+* Nov 3, 2017: Updated to use Spring Boot 1.5.8, Angular 5.0.0, and Angular CLI 1.5.0. See the code changes in the [example app on GitHub](https://github.com/oktadeveloper/spring-boot-angular-example/pull/5).

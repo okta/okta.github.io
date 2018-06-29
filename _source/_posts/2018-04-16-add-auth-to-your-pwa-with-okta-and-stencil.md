@@ -10,7 +10,7 @@ tweets:
 - "Need a decent PWA with authentication? Checkout @stenciljs and @oktadev together!"
 ---
 
-[Progressive Web Applications](/blog/2017/07/20/the-ultimate-guide-to-progressive-web-applications) (PWAs) are the newest technology on the web dev block and they’ve arrived just in time to solve a growing problem. Many companies are struggling to keep isolated development teams across their organization up-to-date when new features are released. Some companies are even trying to decide if it's worth the cost to develop both a web app *and* a mobile application. Not surprisingly, it's a headache most companies are looking to avoid. PWAs can give companies a lot of the features they need from a mobile app without the need to manage multiple teams and codebases.
+[Progressive Web Applications](/blog/2017/07/20/the-ultimate-guide-to-progressive-web-applications) (PWAs) are the newest technology on the web dev block and they've arrived just in time to solve a growing problem. Many companies are struggling to keep isolated development teams across their organization up-to-date when new features are released. Some companies are even trying to decide if it's worth the cost to develop both a web app *and* a mobile application. Not surprisingly, it's a headache most companies are looking to avoid. PWAs can give companies a lot of the features they need from a mobile app without the need to manage multiple teams and codebases.
 
 A [PWA](https://developers.google.com/web/progressive-web-apps/) performs spectacularly when on a fast connection and still performs well when offline or on Wi-Fi that's not really fast enough to be called Wi-Fi (sometimes called "Lie-Fi"). It does so via caching and a JavaScript "Service Worker" that intercepts server calls and tries to serve the data from cache first, then when the server finally responds, it will replace the cached data with possibly "fresher" data from the server.
 
@@ -44,9 +44,9 @@ Next, add the Okta Auth SDK (via CDN) to the bottom of the `index.html` page, ri
 
 While there is an npm package for Okta's Auth SDK, Stencil has a hard time compiling it. Overall it works better for now if you just use the CDN to include it.
 
-If you’re like me, the next thing you’ll want to do is run `npm start` and check the site with Lighthouse. If you do, you’ll notice that the score is *kind of* low. In particular, it doesn’t register a service worker or return a 200 when offline, That’s because it’s a *development* build, and generally, you don’t want the service worker intercepting server calls and returning cached data in development.
+If you're like me, the next thing you'll want to do is run `npm start` and check the site with Lighthouse. If you do, you'll notice that the score is *kind of* low. In particular, it doesn't register a service worker or return a 200 when offline, That's because it's a *development* build, and generally, you don't want the service worker intercepting server calls and returning cached data in development.
 
-To ensure an accurate depiction of the kind of PWA you get out of the box with Stencil, make sure to run a *production* build using `npm run build`. Once you do, you’ll see a `www` folder and inside that folder, you’ll see a `sw.js` file. That’s your service worker!
+To ensure an accurate depiction of the kind of PWA you get out of the box with Stencil, make sure to run a *production* build using `npm run build`. Once you do, you'll see a `www` folder and inside that folder, you'll see a `sw.js` file. That's your service worker!
 
 ## Set Up Your Okta Application
 
@@ -64,7 +64,7 @@ You will then be taken to the application creation wizard. Choose **Single-Page 
 {% img blog/add-auth-to-stencil/CreateApplicationScreenSPA.png alt:"Create Application Screen SPA" width:"800" %}{: .center-image }
 
 
-On the next screen, you’ll see the default settings provided by the single-page application template. Change the name of the application to something more descriptive, like "Stencil SPA". Also, change the base URIs and the login redirect URIs settings to use port 3333 because that’s where your application will be running. The rest of the default settings are fine.
+On the next screen, you'll see the default settings provided by the single-page application template. Change the name of the application to something more descriptive, like "Stencil SPA". Also, change the base URIs and the login redirect URIs settings to use port 3333 because that's where your application will be running. The rest of the default settings are fine.
 
 {% img blog/add-auth-to-stencil/ApplicationSettingStencil.png alt:"Application Settings Screen" width:"800" %}{: .center-image }
 
@@ -77,7 +77,7 @@ Select your newly created application from the listing, and click on the **Gener
 {% img blog/add-auth-to-stencil/GeneralSettingsClientId.png alt:"General Settings Client Id" width:"800" %}{: .center-image }
 
 
-At the bottom, you’ll see a **Client ID** setting (yours won't be blurred out, obviously). Copy this to use in your Stencil application. You will also need your Okta organization URL, which you can find at the top right of the dashboard page. It will probably look something like “https://dev-XXXXXX.oktapreview.com”. 
+At the bottom, you'll see a **Client ID** setting (yours won't be blurred out, obviously). Copy this to use in your Stencil application. You will also need your Okta organization URL, which you can find at the top right of the dashboard page. It will probably look something like "https://dev-XXXXXX.oktapreview.com".
 
 ## Add the Authentication Component
 
@@ -137,7 +137,7 @@ render() {
 }
 ```
 
-This is just a regular JSX form, but the login button's `onClick` event is currently wired to function that doesn't exist. 
+This is just a regular JSX form, but the login button's `onClick` event is currently wired to function that doesn't exist.
 
 ## Add the Login Method's Dependencies
 
@@ -295,7 +295,7 @@ handleEnter() {
 
 Now that you have a nice login page, update the profile page so that it shows the user's claims once they're logged in.
 
-First, you’ll need a type to put the user’s claims in. So create a new file in the `app-profile` folder called `AppUser.tsx`. The contents are simple, but long. I simply looked at all the claims in the token stored in `localStorage` and created an interface that matched it. So the `AppUser.tsx` file is as follows:
+First, you'll need a type to put the user's claims in. So create a new file in the `app-profile` folder called `AppUser.tsx`. The contents are simple, but long. I simply looked at all the claims in the token stored in `localStorage` and created an interface that matched it. So the `AppUser.tsx` file is as follows:
 
 ```js
 interface AppUser {
@@ -443,7 +443,7 @@ As extra credit, you might want to add some styling to the login form and the pr
 .app-auth .form-actions {
   text-align: right;
 }
-``` 
+```
 
 Finally, in `app-profile.css` just some simple styles to bold the label of each item.
 

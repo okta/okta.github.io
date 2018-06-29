@@ -1,6 +1,6 @@
 ---
 layout: blog_post
-title: "Use Okta (Instead of Local Storage) to Store Your User’s Data Securely"
+title: "Use Okta (Instead of Local Storage) to Store Your User's Data Securely"
 author: mraible
 description: "Using an Okta Developer account will allow you to store your cryptocurrency holdings as custom profile attributes instead of using local storage. While LocalStorage is great for demos, using custom profile attributes will allow you to access your data across different devices."
 tags: [localstorage, cryptocurrency, spring-boot, java, okta-java-sdk]
@@ -9,8 +9,8 @@ tweets:
  - "Did you know that we provide a @java SDK for talking to our REST API? It's pretty slick. This blog post shows you how to use it to manage custom profile attributes."
 ---
 
-Local Storage is a JavaScript API technically known as `localStorage` that arrived with HTML5. It allows you to store information on a user’s browser quickly and easily. There are many debates on the web as to whether it’s better than cookies. Some say it’s faster (because it doesn’t send data with every request like cookies do) and more secure.
-Whether it’s more secure or not is debatable, especially when compared with secure cookies that have an [HttpOnly flag](https://www.owasp.org/index.php/HttpOnly). It does, however, offer the ability to store a lot more data than cookies. Cookies [can hold up to 4KB](http://browsercookielimits.squawky.net/), while local storage [can hold 5MB or more](https://www.html5rocks.com/en/tutorials/offline/quota-research/), depending on your browser.
+Local Storage is a JavaScript API technically known as `localStorage` that arrived with HTML5. It allows you to store information on a user's browser quickly and easily. There are many debates on the web as to whether it's better than cookies. Some say it's faster (because it doesn't send data with every request like cookies do) and more secure.
+Whether it's more secure or not is debatable, especially when compared with secure cookies that have an [HttpOnly flag](https://www.owasp.org/index.php/HttpOnly). It does, however, offer the ability to store a lot more data than cookies. Cookies [can hold up to 4KB](http://browsercookielimits.squawky.net/), while local storage [can hold 5MB or more](https://www.html5rocks.com/en/tutorials/offline/quota-research/), depending on your browser.
 
 ## The Local Storage API
 
@@ -34,7 +34,7 @@ loadHoldings(): void {
 
 ## Switch from Local Storage to Okta Custom Profile Attributes
 
-In [a previous article](/blog/2018/01/18/cryptocurrency-pwa-secured-by-okta), I showed you how to add Okta to an Ionic PWA for authentication. To complete this tutorial, you’ll need to [sign up for a free Okta Developer account](https://developer.okta.com/signup/).
+In [a previous article](/blog/2018/01/18/cryptocurrency-pwa-secured-by-okta), I showed you how to add Okta to an Ionic PWA for authentication. To complete this tutorial, you'll need to [sign up for a free Okta Developer account](https://developer.okta.com/signup/).
 
 Once you have an Okta Developer account, you can leverage our API to store your holdings as custom profile attributes instead of local storage. While LocalStorage is great for demos, using custom profile attributes will allow you to access your holdings across different devices.
 
@@ -50,7 +50,7 @@ The first thing you'll need to do is add a `holdings` attribute to your organiza
 
 {% img blog/cryptocurrency-pwa-java-sdk/holdings-attribute.png alt:"Holdings Attribute" width:"800" %}{: .center-image }
 
-Use the default values for everything else and click **Save**. 
+Use the default values for everything else and click **Save**.
 
 ## Create a Spring Boot App
 
@@ -83,7 +83,7 @@ okta-ionic-crypto-java-sdk
 
 Open the project in your favorite IDE or text editor.
 
-### Add the Okta Spring Boot Starter and Okta’s Java SDK
+### Add the Okta Spring Boot Starter and Okta's Java SDK
 
 Open `holdings-api/pom.xml` and add dependencies for the [Okta Spring Boot Starter](https://github.com/okta/okta-spring-boot) and the [Okta Java SDK](https://github.com/okta/okta-sdk-java).
 
@@ -155,7 +155,7 @@ While you're editing `application.properties`, add properties for the issuer and
   * `https://<name-of-your-choosing>.firebaseapp.com` (for production)
 * Click **Done**.
 
-Copy the app’s `clientId` into `application.properties` and change `{yourOktaDomain}` to match your account. These properties will allow the client to pass an access token to the server and validate it.
+Copy the app's `clientId` into `application.properties` and change `{yourOktaDomain}` to match your account. These properties will allow the client to pass an access token to the server and validate it.
 
 ```properties
 okta.oauth2.issuer=https://{yourOktaDomain}/oauth2/default
@@ -282,7 +282,7 @@ This class has a few things I'd like to point out:
 * Retrieving user profile attributes is done with `user.getProfile().get(ATTRIBUTE_NAME)`
 * Saving user profile attributes is done with `user.getProfile().put(ATTRIBUTE_NAME)`
 
-**NOTE:** The call to `user.getProfile()` returns a [`UserProfile`](https://developer.okta.com/okta-sdk-java/apidocs/com/okta/sdk/resource/user/UserProfile.html). This implements `java.util.Map` and [`PropertyRetriever`](https://developer.okta.com/okta-sdk-java/apidocs/com/okta/sdk/resource/PropertyRetriever.html), which allows for more type-safe operations (`getString()`, `getBoolean()`, etc.). 
+**NOTE:** The call to `user.getProfile()` returns a [`UserProfile`](https://developer.okta.com/okta-sdk-java/apidocs/com/okta/sdk/resource/user/UserProfile.html). This implements `java.util.Map` and [`PropertyRetriever`](https://developer.okta.com/okta-sdk-java/apidocs/com/okta/sdk/resource/PropertyRetriever.html), which allows for more type-safe operations (`getString()`, `getBoolean()`, etc.).
 
 Speaking of `Holding`, you'll need to create a `com.okta.developer.holdingsapi.Holding` class to handle the values coming from (and sending to) the client.
 
@@ -346,26 +346,26 @@ export class HoldingsProvider {
 
   public HOLDINGS_API = 'http://localhost:8080/api/holdings';
   ...
-  
+
   constructor(private http: HttpClient, private oauthService: OAuthService) {
   }
-  
+
   ...
-  
+
   onError(error): void {
     console.error('ERROR: ', error);
   }
-  
+
   getHeaders(): HttpHeaders {
     return new HttpHeaders().set('Authorization', this.oauthService.authorizationHeader())
   }
-  
+
   saveHoldings(): void {
     this.http.post(this.HOLDINGS_API, this.holdings,{headers: this.getHeaders()}).subscribe(data => {
       console.log('holdings', data);
     }, this.onError);
   }
-  
+
   loadHoldings(): void {
     this.http.get(this.HOLDINGS_API,{headers: this.getHeaders()}).subscribe((holdings: Holding[]) => {
       if (holdings !== null) {

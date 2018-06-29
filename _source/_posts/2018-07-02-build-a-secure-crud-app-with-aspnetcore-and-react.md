@@ -10,7 +10,7 @@ tweets:
  - "Interested in #aspnetcore APIs and @reactjs front-ends for secure CRUD apps? Learn it with @leebrandt and @OktaDev! >>"
 ---
 
-These days it’s prevalent to have a “back-end” and a “front-end” allowing two (or more) teams to work on a project. Microsoft’s latest version of the ASP.NET Core framework is cross-platform and performant. Pairing it with the power and flexibility of Facebook’s React framework makes it a pretty stable platform. In this tutorial, I will show you how to build a secure CRUD (Create, Read, Update, and Delete) application using these two powerful technologies.
+These days it's prevalent to have a "back-end" and a "front-end" allowing two (or more) teams to work on a project. Microsoft's latest version of the ASP.NET Core framework is cross-platform and performant. Pairing it with the power and flexibility of Facebook's React framework makes it a pretty stable platform. In this tutorial, I will show you how to build a secure CRUD (Create, Read, Update, and Delete) application using these two powerful technologies.
 
 When conferences need speakers, they sometimes put out a public speaker "Call for Presentations" or CFP. Potential speakers then submit talks that they'd like to give at the conference, and the organizers pick from those submissions which talks they'd like to have presented at their conference.
 
@@ -36,18 +36,18 @@ To get the basic scaffolding for the app in place, start by cloning the basic Re
 git clone git@github.com:oktadeveloper/dotnetcore-react-crud-example
 ```
 
-Then create a new branch we’ll use to turn the shell into a fully CRUD application.
+Then create a new branch we'll use to turn the shell into a fully CRUD application.
 
 ```sh
 git checkout -b crud-app
 ```
 
 ## Set Up Your Okta Application
-Dealing with user authentication in web apps is a massive pain for every developer. This is where Okta shines: it helps you secure your web applications with minimal effort. To get started, you’ll need to create an OpenID Connect application in Okta. Sign up for a forever-free developer account (or log in if you already have one).
+Dealing with user authentication in web apps is a massive pain for every developer. This is where Okta shines: it helps you secure your web applications with minimal effort. To get started, you'll need to create an OpenID Connect application in Okta. Sign up for a forever-free developer account (or log in if you already have one).
 
 {% img blog/crud-aspnet-core-react/okta-signup.png alt:"Okta Signup Screenshot" width:"700" %}{: .center-image }
 
-Once you’ve logged in and landed on the dashboard page, copy down the Org URL pictured below. You will need this later.
+Once you've logged in and landed on the dashboard page, copy down the Org URL pictured below. You will need this later.
 
 {% img blog/crud-aspnet-core-react/okta-org-url.png alt:"Org Url Dashboard Screenshot" width:"700" %}{: .center-image }
 
@@ -69,7 +69,7 @@ You can leave the other values unchanged.
 
 {% img blog/crud-aspnet-core-react/application-settings.png alt:"Application Settings Screenshot" width:"700" %}{: .center-image }
 
-Now that your application has been created, copy down the Client ID and Client secret values on the following page, you’ll need them soon.
+Now that your application has been created, copy down the Client ID and Client secret values on the following page, you'll need them soon.
 
 {% img blog/crud-aspnet-core-react/okta-app-secrets.png alt:"Application Secrets Screenshot" width:"700" %}{: .center-image }
 
@@ -130,7 +130,7 @@ Start by adding a folder for the authentication components you'll be creating. I
 The final `RegisterPage.js` component will look like this:
 
 ```js
-import React from 'react'; 
+import React from 'react';
 import { Redirect} from 'react-router-dom';
 import OktaAuth from '@okta/okta-auth-js';
 import { withAuth } from '@okta/okta-react';
@@ -156,7 +156,7 @@ export default withAuth(class RegisterPage extends React.Component{
     this.handleFirstNameChange = this.handleFirstNameChange.bind(this);
     this.handleLastNameChange = this.handleLastNameChange.bind(this);
     this.handleEmailChange = this.handleEmailChange.bind(this);
-    this.handlePasswordChange = this.handlePasswordChange.bind(this);    
+    this.handlePasswordChange = this.handlePasswordChange.bind(this);
   }
 
   async checkAuthentication() {
@@ -185,8 +185,8 @@ export default withAuth(class RegisterPage extends React.Component{
 
   handleSubmit(e){
     e.preventDefault();
-    fetch('/api/users', { 
-      method: 'POST', 
+    fetch('/api/users', {
+      method: 'POST',
       headers: {
         'Accept': 'application/json',
         'Content-Type': 'application/json',
@@ -212,22 +212,22 @@ export default withAuth(class RegisterPage extends React.Component{
       <form onSubmit={this.handleSubmit} className="registration">
         <div className="form-element">
           <label>Email:</label>
-          <input type="email" id="email" value={this.state.email} 
+          <input type="email" id="email" value={this.state.email}
           onChange={this.handleEmailChange}/>
         </div>
         <div className="form-element">
           <label>First Name:</label>
-          <input type="text" id="firstName" value={this.state.firstName} 
+          <input type="text" id="firstName" value={this.state.firstName}
           onChange={this.handleFirstNameChange} />
         </div>
         <div className="form-element">
           <label>Last Name:</label>
-          <input type="text" id="lastName" value={this.state.lastName} 
+          <input type="text" id="lastName" value={this.state.lastName}
           onChange={this.handleLastNameChange} />
         </div>
         <div className="form-element">
           <label>Password:</label>
-          <input type="password" id="password" value={this.state.password} 
+          <input type="password" id="password" value={this.state.password}
           onChange={this.handlePasswordChange} />
         </div>
         <div className="form-actions">
@@ -365,8 +365,8 @@ export default withAuth(class LoginPage extends React.Component {
       return null;
     }
 
-    const errorMessage = this.state.error ? 
-    <span className="error-message">{this.state.error}</span> : 
+    const errorMessage = this.state.error ?
+    <span className="error-message">{this.state.error}</span> :
     null;
 
     return (
@@ -416,7 +416,7 @@ import { withAuth } from '@okta/okta-react';
 export default withAuth(class ProfilePage extends React.Component {
   constructor(props){
     super(props);
-    this.state = { 
+    this.state = {
       user: null
     };
     this.getCurrentUser = this.getCurrentUser.bind(this);
@@ -495,7 +495,7 @@ const onAuthRequired = ({ history }) => history.push('/login');
 
 This method redirects the user to the login page when authentication is required (like for the `SecureRoute` routes). The `SecureRoute` simply fires that `onAuthRequired()` handler.
 
-The login route looks a little funny. There's no `component` property to let React know what component will be handling that route. However, the `render` property allows you to specify a "quick component", if you will, with just a render method. This render method outputs the `LoginPage` component, but it passes a `baseUrl` property to the props in the component. 
+The login route looks a little funny. There's no `component` property to let React know what component will be handling that route. However, the `render` property allows you to specify a "quick component", if you will, with just a render method. This render method outputs the `LoginPage` component, but it passes a `baseUrl` property to the props in the component.
 
 Lastly, the route for `/implicit/callback` is handled by the `ImplicitCallback` component from Okta's React SDK. Remember setting that up when you configured your application in Okta? This handles getting the authentication responses back from Okta and storing the user's tokens.
 
@@ -826,7 +826,7 @@ render() {
 
 This will pass the currently logged in user's id to the `SessionListing` component you'll create next.
 
-Back in the `/ClientApp/components/sessions` folder create a `SessionListing.js` file. 
+Back in the `/ClientApp/components/sessions` folder create a `SessionListing.js` file.
 
 ```js
 import React from 'react';
@@ -863,9 +863,9 @@ export default withAuth(class SessionListing extends React.Component {
   render() {
     return (
       <ul className="session-list">
-        {this.state.sessions.map(session => 
-          <Session key={session.sessionId} 
-            id={session.sessionId} 
+        {this.state.sessions.map(session =>
+          <Session key={session.sessionId}
+            id={session.sessionId}
             session={session} />)}
       </ul>
     )
@@ -890,7 +890,7 @@ const Session = (props) => {
       <h2>{props.session.title}</h2>
       <div>{props.session.abstract}</div>
     </li>
-  );    
+  );
 }
 
 export default Session;
@@ -907,7 +907,7 @@ Now that the React app can request a list of all a user's sessions, the ASP.NET 
 public IActionResult GetAllSessions()
 {
   var userId = User.Claims.SingleOrDefault(u=>u.Type == "uid")?.Value;
-  var sessions = context.Sessions.Where(x=>x.UserId == userId).ToList(); 
+  var sessions = context.Sessions.Where(x=>x.UserId == userId).ToList();
   return Ok(sessions);
 }
 ```
@@ -1022,7 +1022,7 @@ public IActionResult UpdateSession([FromBody] Session session)
 }
 ```
 
-This action has a specified URL in the `HttpPost` attribute. Just like the action for creating sessions, this pulls the data from the JSON data and maps it to a session object. Unlike the create action, this looks up the session by its `sessionId`. If it doesn't find one, it returns a `NotFound` action result.  
+This action has a specified URL in the `HttpPost` attribute. Just like the action for creating sessions, this pulls the data from the JSON data and maps it to a session object. Unlike the create action, this looks up the session by its `sessionId`. If it doesn't find one, it returns a `NotFound` action result.
 
 The action then checks to see if the currently logged in user is the owner of that session by checking their ID against the session's `UserId` property. If it doesn't match, it returns an `Unauthorized` action result.
 
@@ -1061,11 +1061,11 @@ You also won't want to even give the option to someone who doesn't own that sess
 render() {
   return (
     <ul className="session-list">
-      {this.state.sessions.map(session => 
-        <Session key={session.sessionId} 
+      {this.state.sessions.map(session =>
+        <Session key={session.sessionId}
           id={session.sessionId}
           isOwner={session.userId === this.props.userId}
-          delete={this.deleteSession.bind(this, session)} 
+          delete={this.deleteSession.bind(this, session)}
           session={session} />)}
     </ul>
   )
@@ -1079,15 +1079,15 @@ import React from 'react';
 import {Link} from 'react-router-dom';
 
 const Session = (props) => {
-  const deleteButton = props.isOwner ? 
-    <input type="button" title="Delete This Session" className="btn btn-sm btn-danger" value="X" onClick={props.delete}/> : 
+  const deleteButton = props.isOwner ?
+    <input type="button" title="Delete This Session" className="btn btn-sm btn-danger" value="X" onClick={props.delete}/> :
     null;
   return (
     <li key={props.id} className="session">
       <h2><Link to={`/submission/${props.session.sessionId}`}>{props.session.title}</Link> {deleteButton}</h2>
       <div>{props.session.abstract}} />
     </li>
-  );    
+  );
 }
 
 export default Session;

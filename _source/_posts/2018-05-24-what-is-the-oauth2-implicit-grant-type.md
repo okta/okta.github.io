@@ -5,7 +5,7 @@ author: aaronpk
 description: "The Implicit Grant Type is a way for a single-page JavaScript app to get an access token without an intermediate code exchange step. It was originally created for use by JavaScript apps (which don't have a way to safely store secrets) but is only recommended in specific situations."
 tags: [oauth]
 tweets:
-- "What is the #oauth2 Implicit Grant Type? Read @aaronpk’s article here:"
+- "What is the #oauth2 Implicit Grant Type? Read @aaronpk's article here:"
 - "Ever wondered when you should use the #oauth2 Implicit Grant Type?"
 - "What the heck is the OAuth Implicit Grant Type?"
 - "Thinking about using the OAuth Implicit Grant Type? Read this first:"
@@ -17,19 +17,19 @@ This post is the second in a series where we explore frequently used OAuth 2.0 g
 
 ## What is an OAuth 2.0 Grant Type?
 
-In OAuth 2.0, the term “grant type” refers to the way an application gets an access token. OAuth 2.0 defines several grant types, including the authorization code flow. OAuth 2.0 extensions can also define new grant types.
+In OAuth 2.0, the term "grant type" refers to the way an application gets an access token. OAuth 2.0 defines several grant types, including the authorization code flow. OAuth 2.0 extensions can also define new grant types.
 
-Each grant type is optimized for a particular use case, whether that’s a web app, a native app, a device without the ability to launch a web browser, or server-to-server applications.
+Each grant type is optimized for a particular use case, whether that's a web app, a native app, a device without the ability to launch a web browser, or server-to-server applications.
 
 ## The Implicit Grant
 
 Like the [Authorization Code Grant Type](/blog/2018/04/10/oauth-authorization-code-grant-type), the Implicit Grant starts out by building a link and directing the user's browser to that URL. At a high level, the flow has the following steps:
 
 * The application opens a browser to send the user to the OAuth server
-* The user sees the authorization prompt and approves the app’s request
+* The user sees the authorization prompt and approves the app's request
 * The user is redirected back to the application with an access token in the URL fragment
 
-### Get the User’s Permission
+### Get the User's Permission
 
 OAuth is all about enabling users to grant limited access to applications. The application first needs to decide which permissions it is requesting, then send the user to a browser to get their permission. To begin the Implicit flow, the application constructs a URL like the following and directs the browser to that URL.
 
@@ -42,15 +42,15 @@ https://authorization-server.com/auth
  &state=xcoiv98y3md22vwsuye3kch
 ```
 
-Here’s each query parameter explained:
+Here's each query parameter explained:
 
 * **`response_type=token`** - This tells the authorization server that the application is initiating the Implicit flow. Note the difference from the Authorization Code flow where this value is set to `code`.
 * `client_id` - The public identifier for the application, obtained when the developer first registered the application.
 * `redirect_uri` - Tells the authorization server where to send the user back to after they approve the request.
-* `scope` - One or more space-separated strings indicating which permissions the application is requesting. The specific OAuth API you’re using will define the scopes that it supports.
+* `scope` - One or more space-separated strings indicating which permissions the application is requesting. The specific OAuth API you're using will define the scopes that it supports.
 * `state` - The application generates a random string and includes it in the request. It should then check that the same value is returned after the user authorizes the app. This is used to prevent CSRF attacks.
 
-When the user visits this URL, the authorization server will present them with a prompt asking if they would like to authorize this application’s request.
+When the user visits this URL, the authorization server will present them with a prompt asking if they would like to authorize this application's request.
 
 {% img blog/oauth-authorization-code-grant-type/oauth-prompt.png alt:"OAuth Prompt" width:"500" %}{: .center-image }
 
@@ -105,4 +105,4 @@ You can learn more about OAuth 2.0 on [OAuth.net](https://oauth.net/2/grant-type
 * [Token Authentication in ASP.NET Core 2.0 - A Complete Guide](/blog/2018/03/23/token-authentication-aspnetcore-complete-guide)
 * [Secure your SPA with Spring Boot and OAuth](/blog/2017/10/27/secure-spa-spring-boot-oauth)
 
-Or hit up [Okta’s OIDC/OAuth 2.0 API](/docs/api/resources/oidc) for specific information on how we support OAuth. And as always, follow us on Twitter [@oktadev](https://twitter.com/oktadev) for more great content.
+Or hit up [Okta's OIDC/OAuth 2.0 API](/docs/api/resources/oidc) for specific information on how we support OAuth. And as always, follow us on Twitter [@oktadev](https://twitter.com/oktadev) for more great content.
