@@ -1141,8 +1141,8 @@ You should now be able to run the app and register users, login, create, read, u
 
 If you enjoyed building this ASP.NET Core API with React, check out more full-stack CRUD posts from Okta.
 
-- [Build a Basic CRUD App with Vue.js and Node](/blog/2018/02/15/build-crud-app-vuejs-node)
-- [Build a Basic CRUD App with Symfony 4 and Vue](/blog/2018/06/14/php-crud-app-symfony-vue)
-- [Build a CRUD App with ASP.NET Core and Angular](/blog/2018/04/26/build-crud-app-aspnetcore-angular)
+- [Build a Basic CRUD App with Vue.js and Node](/blog/2018/02/15/build-crud-app-vuejs-node/)
+- [Build a Basic CRUD App with Symfony 4 and Vue](/blog/2018/06/14/php-crud-app-symfony-vue/)
+- [Build a CRUD App with ASP.NET Core and Angular](/blog/2018/04/26/build-crud-app-aspnetcore-angular/)
 
 As always if you have any questions, comments, or concerns about this post feel free to leave a comment below. For other great content from the Okta Dev Team, follow us on Twitter [@OktaDev](https://twitter.com/oktadev), [Facebook](https://www.facebook.com/oktadevelopers/), and watch us on [YouTube](https://www.youtube.com/channel/UC5AMiWqFVFxF1q9Ya1FuZ_Q)!
