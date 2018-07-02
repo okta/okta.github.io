@@ -119,7 +119,7 @@ Now you're ready to get the dependencies set up!
 To take full advantage of Okta for identity management, you'll need Okta's React SDK and the generic JavaScript package it depends on. To install, from the command line run:
 
 ```sh
-npm install @okta/okta-react @okta/okta-auth-js --save
+npm install @okta/okta-react@1.0.2 @okta/okta-auth-js@1.17.0 --save
 ```
 Now you're ready to write some code!
 
