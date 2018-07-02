@@ -5,7 +5,7 @@ author: leebrandt
 description: "This post demonstrates how to build a secure CRUD app using ASP.NET Core API with a React front end."
 tags: [asp.net core, dotnet core, aspnet core, react, crud]
 tweets:
- - "Want to learn the basic of writing secure CRUD apps with #aspnetcore and @reactjs? check out @leebrandt 's new article! >>"
+ - "Want to learn the basic of writing secure CRUD apps with #aspnetcore and @reactjs? Check out @leebrandt's new article! >>"
  - "Learn how to build a secure CRUD app with #aspnetcore and @reactjs from @OktaDev ! <3"
  - "Interested in #aspnetcore APIs and @reactjs front-ends for secure CRUD apps? Learn it with @leebrandt and @OktaDev! >>"
 ---
@@ -26,11 +26,11 @@ There are a few tools you will need to get, develop and run the application.
 - Node and NPM
 - Visual Studio or VS Code
 
-I am developing the application on a Linux laptop. Most of the commands will be the same whether you are on Linux, macOS, or Windows. The only thing that will be different is the home folder where your Okta credentials ge stored for the ASP.NET Core API, and I will put both paths in the examples.
+I am developing the application on a Linux laptop. Most of the commands will be the same whether you are on Linux, macOS, or Windows. The only thing that will be different is the home folder where your Okta credentials are stored for the ASP.NET Core API, and I will put both paths in the examples.
 
 ## Get the Base ASP.NET Core and React Application
 
-To get the basic scaffolding for the app in place, start by cloning the basic React and ASP.NET Core application .
+To get the basic scaffolding for the app in place, start by cloning the basic React and ASP.NET Core application.
 
 ```sh
 git clone git@github.com:oktadeveloper/dotnetcore-react-crud-example
@@ -47,23 +47,17 @@ Dealing with user authentication in web apps is a massive pain for every develop
 
 {% img blog/crud-aspnet-core-react/okta-signup.png alt:"Okta Signup Screenshot" width:"700" %}{: .center-image }
 
-
 Once you’ve logged in and landed on the dashboard page, copy down the Org URL pictured below. You will need this later.
 
 {% img blog/crud-aspnet-core-react/okta-org-url.png alt:"Org Url Dashboard Screenshot" width:"700" %}{: .center-image }
 
-
-Then create a new application by browsing to the Applications tab and clicking Add Application.
+Then create a new application by browsing to the **Applications** tab and clicking **Add Application**.
 
 {% img blog/crud-aspnet-core-react/okta-app-dashboard.png alt:"Application Dashboard Screenshot" width:"700" %}{: .center-image }
-
-
 
 From the wizard, choose the **Single-Page App** option for the React app.
 
 {% img blog/crud-aspnet-core-react/single-page-app.png alt:"App Wizard screenshot with Single Page App Selected" width:"700" %}{: .center-image }
-
-
 
 On the settings page, enter the following values:
 
@@ -75,19 +69,13 @@ You can leave the other values unchanged.
 
 {% img blog/crud-aspnet-core-react/application-settings.png alt:"Application Settings Screenshot" width:"700" %}{: .center-image }
 
-
-
 Now that your application has been created, copy down the Client ID and Client secret values on the following page, you’ll need them soon.
 
 {% img blog/crud-aspnet-core-react/okta-app-secrets.png alt:"Application Secrets Screenshot" width:"700" %}{: .center-image }
 
-
-
 Finally, create a new authentication token. This will allow your app to talk to Okta to retrieve user information, among other things. To do this, click the **API** tab at the top of the page followed by the **Create Token** button. Give your token a name, in this case "Crud API" would be a good name, then click **Create Token**. Copy down this token value as you will need it soon.
 
 {% img blog/crud-aspnet-core-react/create-api-token.png alt:"API Token Creation Screenshot" width:"700" %}{: .center-image }
-
-
 
 Once you've created your new Okta application, you'll want to store the configuration information in your React and ASP.NET Core applications.
 
@@ -95,16 +83,16 @@ For the React application, create a file in the `/ClientApp` folder called `app.
 
 ```js
 export default {
-  url: 'https://{yourOktaOrgUrl}',
-  issuer: 'https://{yourOktaOrgUrl}/oauth2/default',
+  url: 'https://{yourOktaDomain}',
+  issuer: 'https://{yourOktaDomain}/oauth2/default',
   redirect_uri: window.location.origin + '/implicit/callback',
-  client_id: '{yourClientId}'
+  client_id: '{yourClientID}'
 }
 ```
 
 For the ASP.NET Core application, the best thing to do is set up a file in your home folder to store the configuration. Okta's SDK will pick the settings up for you, and you'll never accidentally check them into source control!
 
-In your home directory, create an `.okta` folder and add a file called `okta.yaml`. Your home folder will depend on your operating system. For *nix variants like Linux or macOS it is:
+In your home directory, create an `.okta` folder and add a file called `okta.yaml`. Your home folder will depend on your operating system. For \*nix variants like Linux or macOS it is:
 
 ```sh
 ~/.okta/okta.yaml
@@ -120,7 +108,7 @@ YAML, is just a file format for configuration. The `okta.yaml` file looks like:
 ```yml
 okta:
   client:
-    orgUrl: "https://{yourOktaOrgUrl}/"
+    orgUrl: "https://{yourOktaDomain}/"
     token: "{yourApiToken}"
 ```
 
@@ -255,7 +243,7 @@ export default withAuth(class RegisterPage extends React.Component{
 I know this looks like a lot, but most of it is pretty simple. Let's break it down into categories: state, handlers, and Okta stuff.
 
 ## Handle User State in the React Application
-The state declared in the constructor, has six properties. The `firstName`, `lastName`, `email`, and `password` are the required fields for registering  an account in Okta.. The `sessionToken` property is there to use when checking to see if the user has mistakenly come to the page when they are already logged in. It's checked using the `checkAuthentication()` method that runs from the constructor. The `render()` method checks the value of the `sessionToken`, and if a session token exists, redirectsthe user is redirected to the homepage.
+The state declared in the constructor, has six properties. The `firstName`, `lastName`, `email`, and `password` are the required fields for registering  an account in Okta.. The `sessionToken` property is there to use when checking to see if the user has mistakenly come to the page when they are already logged in. It's checked using the `checkAuthentication()` method that runs from the constructor. The `render()` method checks the value of the `sessionToken`, and if a session token exists, redirects the user is redirected to the homepage.
 
 There are many handler functions in the component: one for each property the user will edit in the form, and one for handling the submission of the registration form. The handlers for each field on the form are simple. They update the state when the fields' values are changed by the user. The form submission handler does exactly what you'd expect; it submits the information in the form to a URL so that the API can handle creating the user in Okta.
 
@@ -585,7 +573,7 @@ export default withAuth(class Navigation extends React.Component {
 
 The only thing _new_ here is the ternary operation inside the `render()` method. It simply makes some JSX menus based on whether or not the user is authenticated, and stores it in a variable. Then in the `return`, it adds that variable as the second, right-side menu.
 
-With that, you should be able to run the application with **F5**,register a user, and log them in.
+With that, you should be able to run the application with **F5**, register a user, and log them in.
 
 ## Add a Talk Submission React Component
 
@@ -676,7 +664,7 @@ export default withAuth(withRouter(SubmissionPage));
 
 You'll see this looks quite a bit like the login and registration pages, with some minor differences. The handlers should be very familiar by now for handling field updates and form submission. The significant difference is in the `handleSubmit()` function and with the higher-order components.
 
-The form submission is doing a POST (like the registration page), but it is adding the `Authorization` header with a value of "Bearer {theUsersAccecssToken}". This is the reason for using the `withAuth` higher-order component, and it is there so that the server side will know who is making the request by sending a [Bearer Token](https://oauth.net/2/bearer-tokens/).
+The form submission is doing a POST (like the registration page), but it is adding the `Authorization` header with a value of "Bearer {theUsersAccessToken}". This is the reason for using the `withAuth` higher-order component, and it is there so that the server side will know who is making the request by sending a [Bearer Token](https://oauth.net/2/bearer-tokens/).
 
 The form submission handler also uses `this.props.history` to redirect the user to back to the profile page once the submission is saved. You'll also notice that the higher-order functions are also wrapping the submission page component at the bottom. What's up with that? When using two wrapping function like the use of the `withAuth` **and** the `withRouter` higher-order components, I think it is more readable to export the component at the bottom. Either syntax for exporting components works.
 
@@ -915,13 +903,13 @@ If you're new to React, this is what is known as a presentational or a "dumb" co
 Now that the React app can request a list of all a user's sessions, the ASP.NET Core API needs a way to respond. In the `SessionsController.cs` file add a new action:
 
 ```cs
-    [HttpGet]
-    public IActionResult GetAllSessions()
-    {
-      var userId = User.Claims.SingleOrDefault(u=>u.Type == "uid")?.Value;
-      var sessions = context.Sessions.Where(x=>x.UserId == userId).ToList(); 
-      return Ok(sessions);
-    }
+[HttpGet]
+public IActionResult GetAllSessions()
+{
+  var userId = User.Claims.SingleOrDefault(u=>u.Type == "uid")?.Value;
+  var sessions = context.Sessions.Where(x=>x.UserId == userId).ToList(); 
+  return Ok(sessions);
+}
 ```
 
 Since this is inside a controller that has the `Authorize` attribute on it, there will be a `User` object to interrogate. Here, the user returns their "uid", which is their user's unique identifier. Then the context searches all the sessions in the data store for the ones belonging to that user and returns them in a 200 OK HTTP status.
@@ -931,7 +919,7 @@ Since this is inside a controller that has the `Authorize` attribute on it, ther
 Now that the users can see their submitted sessions, they'll need to be able to edit them if they've made any mistakes, or want to update the content. To the `Session` component change the return so that it reads:
 
 ```js
- return (
+  return (
     <li key={props.id} className="session">
       <h2><Link to={`/submission/${props.session.sessionId}`}>{props.session.title}</Link></h2>
       <div>{props.session.abstract}</div>
@@ -982,7 +970,7 @@ componentDidMount(){
 }
 ```
 
-Finally, change the `handleSubmit()` method so that it can submit to the add **or** save URL in the API.
+Finally, change the `handleSubmit()` method so that it POSTs to the add **or** save URL in the API depending on whether the user is updating or creating a session. You can determine that based on whether or not a `sessionId` was passed as a route parameter.
 
 ```js
 async handleSubmit(e){
@@ -1134,8 +1122,6 @@ Just like the update action, you'll want to make sure that the session that the 
 You should now be able to run the app and register users, login, create, read, update, and delete session submissions!
 
 {% img blog/crud-aspnet-core-react/crud-app-running.png alt:"Application Running Screenshot" width:"700" %}{: .center-image }
-
-
 
 ## Do More Full Stack!!
 
