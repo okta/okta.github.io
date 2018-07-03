@@ -464,7 +464,7 @@ Finally, make some style changes to `App.vue`
 </style>
 ```
 
-In your terminal, restart the dev server via `npm run dev`. Tab to your browser and open [http://localhost:8080/](http://localhost:8080/).  If you click "Login" or "Go to secure page" (the protected `/secure` route), you should get Okta's authentication flow.
+In your terminal, restart the dev server via `npm run dev`. Tab to your browser and open `http://localhost:8080`.  If you click "Login" or "Go to secure page" (the protected `/secure` route), you should get Okta's authentication flow.
 
 {% img blog/vue-aws/aws-vue-14.png alt:"Okta Sign-In" width:"800" %}{: .center-image }
 
@@ -553,7 +553,7 @@ app.listen(8081, () => {
 })
 ```
 
-Start the server by running `node ./` in your console.  Tab to your browser and open [http://localhost:8081/hello](http://localhost:8081/hello).  You should see our JSON payload.  But, loading [http://localhost:8081/secure-data](http://localhost:8081/secure-data) should result in an error.
+Start the server by running `node ./` in your console.  Tab to your browser and open `http://localhost:8081/hello`.  You should see our JSON payload.  But, loading `http://localhost:8081/secure-data` should result in an error.
 
 ### Call the Secure API Endpoint from Your Vue.js Frontend
 
@@ -613,7 +613,7 @@ export default {
 </style>
 ```
 
-Tab back to your browser and reload your web app.  Navigate to the [http://localhost:8080/secure](http://localhost:8080/secure), and you should see the results from the API call.
+Tab back to your browser and reload your web app.  Navigate to the `http://localhost:8080/secure`, and you should see the results from the API call.
 
 {% img blog/vue-aws/aws-vue-15.png alt:"Results of API call" width:"800" %}{: .center-image }
 
