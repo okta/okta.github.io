@@ -136,6 +136,8 @@ const Post = db.define("post", {
 });
 
 db.sync();
+
+module.exports = { Post };
 ```
 
 This code initializes a new SQLite database that will be used to store the blog data and also defines a model called `Post` which stores blog posts in the database. Each post has a title, a body, an author ID, and a slug field.
@@ -171,7 +173,6 @@ const ExpressOIDC = require("@okta/oidc-middleware").ExpressOIDC;
 
 const blogRouter = require("./routes/blog");
 const usersRouter = require("./routes/users");
-
 
 const app = express();
 const client = new okta.Client({
@@ -698,7 +699,6 @@ const slugify = require("slugify");
 
 const models = require("../models");
 
-
 const client = new okta.Client({
   orgUrl: "{yourOktaOrgUrl}"
   token: "{yourOktaToken}"
@@ -1171,7 +1171,7 @@ If you were able to copy the code properly, you should be able to log in, create
 
 ## Do More With Node!
 
-I hope you enjoyed building a simple CRUD app with Node.js and Express.js. I've found that Express.js has a rich ecosystem of libraries and tools to make web development simple and fun.
+I hope you enjoyed building a simple CRUD app with Node.js and Express.js. I've found that Express.js has a rich ecosystem of libraries and tools to make web development simple and fun. You can find the source code for the example created in this tutorial [on GitHub](https://github.com/rdegges/okta-express-blog).
 
 If you'd like to learn more about building web apps in Node, you might want to check out these other great posts:
 
