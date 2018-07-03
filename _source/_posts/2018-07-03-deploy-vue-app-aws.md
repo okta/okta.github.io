@@ -1,4 +1,3 @@
-
 ---
 layout: blog_post
 title: "Deploy Your Secure Vue.js App to AWS"
@@ -10,7 +9,7 @@ tweets:
 - ""
 ---
 
-Writing a Vue app is intuitive, straightforward, and fast.   With low barriers to entry, component-based approach, and built-in features like hot reloading and webpack, Vue allows you to focus on developing your application rather than worrying about your dev environment and build processes.  But, what happens when you are ready to deploy your app into production?  The choices can be endless and sometimes non intuitive.
+Writing a Vue app is intuitive, straightforward, and fast.  With low barriers to entry, component-based approach, and built-in features like hot reloading and webpack, Vue allows you to focus on developing your application rather than worrying about your dev environment and build processes.  But, what happens when you are ready to deploy your app into production?  The choices can be endless and sometimes unintuitive.
 
 As an AWS Certified Solutions Architect, I am frequently asked how to deploy Vue apps to AWS.  In this tutorial, I will walk you through building a small, secure Vue app and deploy it to Amazon Web Services (AWS).  If you never used AWS, don't worry!  I'll step you through each step of the way starting with creating an AWS account.
 
@@ -46,7 +45,7 @@ Okta is a cloud service that allows developers to manage user authentication and
 
 You are going to build the Vue frontend to your secure app first and deploy it to Amazon S3 and Amazon CloudFront.  Amazon S3 (Simple Storage Service) is a highly redundant, object-based file store that is both powerful and [featureful](https://docs.aws.amazon.com/AmazonS3/latest/dev/Introduction.html#S3Features).   In the scope of this article, we will focus on one of the best features S3 provides: Static website hosting.
 
-To get started quickly, you can use the scaffolding functionality from [vue-cli](#)(https://github.com/vuejs/vue-cli) to get your app up and running quickly.  For this article, you can use the [webpack template](https://github.com/vuejs-templates/webpack) that includes hot reloading, CSS extraction, linting, and integrated build tools.
+To get started quickly, you can use the scaffolding functionality from [vue-cli](https://github.com/vuejs/vue-cli) to get your app up and running quickly.  For this article, you can use the [webpack template](https://github.com/vuejs-templates/webpack) that includes hot reloading, CSS extraction, linting, and integrated build tools.
 
 To install `vue-cli` run:
 
@@ -66,7 +65,7 @@ The init method should also install your app’s dependencies.  If for some reas
 
 {% img blog/vue-aws/aws-vue-2.png alt:"Welcome to Your Vue.js App" width:"800" %}{: .center-image }
 
-### About Single Page Applications
+## About Single Page Applications
 
 When you create an application with Vue, you are developing a Single Page Application (or “SPA”).  SPAs have numerous advantages over traditional multi-page, server-rendered apps.  It’s important to understand the difference between SPAs and multi-page web applications — especially when it comes to deploying.
 
@@ -78,11 +77,11 @@ Conversely, within an SPA there is only an initial request for the static files,
 
 {% img blog/vue-aws/aws-vue-3.png alt:"SPA versus Traditional Web Server" width:"800" %}{: .center-image }
 
-### Vue-router and Creating Additional Routes
+## Vue-router and Creating Additional Routes
 
 The component of an SPA that is required to rewrite the current page dynamically is commonly referred to as a "router".  The router programmatically calculates which parts of the page should mutate based off the path in the URL.
 
-Vue has an official router that is aptly named [vue-router](https://router.vuejs.org/).   Since you used the vue-cli bootstrap, your app has this dependency and a router file defined (`./src/router/index`).  Before we can define additional routes, we need to create the pages (or components) that you want the router to render.  Create the following files in your project:
+Vue has an official router that is aptly named [vue-router](https://router.vuejs.org/).   Since you used the vue-cli bootstrap, your app has this dependency and a router file defined (`./src/router/index.js`).  Before we can define additional routes, we need to create the pages (or components) that you want the router to render.  Create the following files in your project:
 
 Homepage:  `./src/components/home.vue`
 
@@ -138,12 +137,11 @@ let router = new Router({
 })
 
 export default router
-
 ```
 
 Try it out!  Tab back to your browser, and you should see the new home screen.  If you click on the “Go to secure page” link you will notice the page (and URL) change, but no request was sent to a server!
 
-### Explaining Hash History
+## Understand Hash History
 
 As you navigated between the two pages above, you might have seen that the URL looks different than expected (do you noticed the “#/“ at the beginning of the path?)
 
@@ -155,7 +153,7 @@ You can change the mode of vue-router to leverage _history mode_ which will give
 
 `http://localhost:8080/secure`
 
-But, this comes with a significant drawback — especially when you are deploying.  Since your SPA compiles to a static assets, there is just one single entry point  `index.html`.  If you try to access a page direction that is not `index.html` page (i.e.;  ``http://localhost:8080/secure``` ) the web server will return a 404 error.  _Why_?  The browser is sending a GET /secure requests to the server and trying to resolve to the filesystem “/secure” (which the file doesn’t exist).  It does works when you navigate to `/secure` from the homepage because vue-router prevents the default behavior of the browsers and instructs the router instance to fire in any mode.
+But, this comes with a significant drawback — especially when you are deploying.  Since your SPA compiles to a static assets, there is just one single entry point `index.html`.  If you try to access a page direction that is not `index.html` page (i.e.;  `http://localhost:8080/secure`) the web server will return a 404 error.  _Why_? The browser is sending a GET `/secure` request to the server and trying to resolve to the filesystem “/secure” (and the file doesn’t exist).  It does works when you navigate to `/secure` from the homepage because vue-router prevents the default behavior of the browsers and instructs the router instance to fire in any mode.
 
 By using history mode, you have to take additional steps to make sure page refreshes work correctly.  You can read more about [HTML5 History Mode](https://router.vuejs.org/guide/essentials/history-mode.html#html5-history-mode). To keep things easy, I will show you a simple trick to ensure your refreshing works with AWS CloudFront.
 
@@ -167,18 +165,18 @@ let router = new Router({
 })
 ```
 
-**_Note:_**  The dev server (`npm run dev`) automatically rewrites the URL to `index.html` for you.  So the behavior you see locally is how it should work in production.
+**Note:**  The dev server (`npm run dev`) automatically rewrites the URL to `index.html` for you.  So the behavior you see locally is how it should work in production.
 
 ## Building Your Single Page Application
 
 Now that you have a simple, two-page frontend working locally, it’s time to build your app and get it deployed to AWS!
 
-Because you used vue-cli scaffolding, a single call to the included build script is all you need.  From your project root run  `npm run build` and webpack will build your application into the target `./dist` directory.  (If the dev server is still running in your console, you can press CTRL+C or CMD+C)
+Because you used vue-cli scaffolding, a single call to the included build script is all you need.  From your project root run  `npm run build` and webpack will build your application into the target `./dist` directory. If the dev server is still running in your console, you can press CTRL+C or CMD+C.
 
 If you open the `./dist` folder and you should see the results of the build process:
 
-- ./index.html - This is the entry point of your SPA.  It’s minified and HTML document with links to the apps CSS and JS.
-- ./static - This folder contains all your compiled static assets (JS and CSS)
+- `./index.html` - This is the entry point of your SPA.  It’s minified and HTML document with links to the apps CSS and JS.
+- `./static` - This folder contains all your compiled static assets (JS and CSS)
 
 During the build, you might have noticed the following notification: **Tip: built files are meant to be served over an HTTP server. Opening index.html over file:// won't work**.  If you want to test your newly compiled application locally, you can use `serve` (install via `npm install -g serve`).  Run `serve ./dist` and it will output a URL for you to load into your browser.
 
@@ -186,7 +184,7 @@ This also gives you to have a hands-on experience with the major caveat of histo
 
 {% img blog/vue-aws/aws-vue-4.png alt:"404 Error" width:"800" %}{: .center-image }
 
-## Getting started with AWS
+## Getting Started with AWS
 
 You will need an AWS account to continue beyond this point.  If you already have an AWS account, you can skip ahead.  If you don’t, it’s a simple process that only takes a few minutes.
 
@@ -199,7 +197,7 @@ You will need an AWS account to continue beyond this point.  If you already have
 
 *Note:* Amazon requires you to enter a payment method before you can create your account.  All the services discussed in this article are covered under  [AWS Free Tier](https://aws.amazon.com/free/) which gives you 12 months FREE.
 
-### Hosting Your App on Amazon S3
+## Host Your App on Amazon S3
 
 Since your SPA is comprised of only static assets, we can leverage Amazon S3 (Simple Storage Service) to store and serve your files. 
 
@@ -262,7 +260,7 @@ Tab back to your browser and refresh the endpoint.  You should now see a 404 Not
 
 {% img blog/vue-aws/aws-vue-9.png alt:"404 index.html not found" width:"800" %}{: .center-image }
 
-### Deploy using aws-cli
+## Deploy to AWS with aws-cli
 
 Now that you have a bucket created and permissions correctly set, it’s time to upload your static assets.  Although you can do this manually through the interface by using the “Upload” button, I feel using the [aws-cli](https://aws.amazon.com/cli/) is more efficient.
 
@@ -310,7 +308,7 @@ For convenience, add the following script entry to `package.json` so you can run
 ```
 
 
-### Distributing your app with Amazon CloudFront CDN
+## Distribute your App with Amazon CloudFront CDN
 
 Amazon S3 static web hosting has ultra-low latency if you are geographically near the region your bucket is hosted in.  But, you want to make sure all users can access your site quickly regardless of where they are located.  To speed up delivery of your site, you can AWS CloudFront CDN.
 
@@ -349,11 +347,11 @@ You will need to add your CloudFront URL to both Base URI’s and also an Login 
 
 **Note:** Make sure to use HTTPS when entering your CloudFront URL.
 
-{% img blog/vue-aws/aws-vue-13.png alt:"Okta Application Settings" width:"800" %}{: .center-image }
+{% img blog/vue-aws/aws-vue-13.png alt:"Okta Application Settings" width:"710" %}{: .center-image }
 
 Take note of your “Client ID” at the bottom of the “General” tab as you will need it to configure your app.
 
-## Add Secure Authentication to your App
+## Add Secure Authentication to Your App
 
 Okta has a handy Vue component to handle all the heavy lifting of integrating with their services. To install the Okta Vue SDK, run the following command:
 
@@ -361,7 +359,7 @@ Okta has a handy Vue component to handle all the heavy lifting of integrating wi
 $ npm i @okta/okta-vue@1.0.1
 ```
 
-Open `router/index.js` and modify it to look like the following code.  Also, make sure to change `{yourClientId}` and `{yourOktaDomain}` to yours!
+Open `src/router/index.js` and modify it to look like the following code.  Also, make sure to change `{yourClientId}` and `{yourOktaDomain}` to yours!
 
 ```js
 import Vue from 'vue'
@@ -467,13 +465,13 @@ Finally, make some style changes to `App.vue`
 </style>
 ```
 
-In your terminal, start the restart the dev server via `npm run dev` . Tab to your browser and open [http://localhost:8080/](http://localhost:8080/).  If you click “Login” or “Go to secure page” (the protected `/secure` route), you should get Okta’s authentication flow.
+In your terminal, start the restart the dev server via `npm run dev`. Tab to your browser and open [http://localhost:8080/](http://localhost:8080/).  If you click “Login” or “Go to secure page” (the protected `/secure` route), you should get Okta’s authentication flow.
 
 {% img blog/vue-aws/aws-vue-14.png alt:"Okta Sign-In" width:"800" %}{: .center-image }
 
 Authenticating either of these should show you as logged in and you should be able to access the Secure Page.
 
-## Building a Secure Express Rest Server
+## Build a Secure Express Rest Server
 
 Finally, we are going to build an [Express](https://expressjs.com/) server to respond to `/hello` and `/secure-data` requests.  The `/secure-data` will be protected and require an authentication token from the frontend.  This token is available via `$auth.getUser()` thanks to Okta’s Vue SDK.
 
@@ -620,7 +618,7 @@ Tab back to your browser and reload your web app.  Navigate to the [http://local
 
 {% img blog/vue-aws/aws-vue-15.png alt:"Results of API call" width:"800" %}{: .center-image }
 
-### Configure Serverless and Deploy Express API
+## Configure Serverless and Deploy Express API
 
 [Serverless](https://serverless.com/) is an open-source AWS Lambda and API Gateway automation framework that allows you to deploy your app into a serverless infrastructure on AWS.  The term “serverless" (not to be confused with the software Serverless) is used to describe an app running in the cloud that doesn’t require the developer to provision dedicated servers to run the code.
 
@@ -686,7 +684,7 @@ endpoints:
 
 To test it out, navigate to `https://YOUR_END_POINT.amazonaws.com/dev/hello` and you should see our hello world message.  Attempting to go to `https://YOUR_END_POINT.amazonaws.com/dev/secure` should result in an error.
 
-### Change Frontend Vue to use Production API
+### Change Frontend Vue to Use Production API
 
 Up until this point, your frontend app has been configured to call the API hosted locally on `http://localhost:8081`.  For production, you need this to be your Serverless Endpoint.   Open `./src/components/secure.vue` and replace `baseURL` with your endpoint within `mounted()`.
 
@@ -709,7 +707,7 @@ If your CloudFront URL failed to pull the latest version of your web app, you mi
 
 Amazon Web Services is a robust platform that can pretty much do anything.  But, it has a relatively steep learning curve and might not be right for all cloud beginners.  Nonetheless, I encourage you to dig more into what AWS provides and find the right balance for your development needs.
 
-You can find the full source code for this tutorial at: [https://github.com/modernup/okta-secure-vue-aws-client](https://github.com/modernup/okta-secure-vue-aws-client) and [https://github.com/bparise/secure-vue-app](https://github.com/modernup/okta-secure-vue-aws-server).
+You can find the full source code for this tutorial at: [https://github.com/oktadeveloper/okta-secure-vue-aws-client-example](https://github.com/oktadeveloper/okta-secure-vue-aws-client-example) and [https://github.com/oktadeveloper/okta-secure-vue-aws-server-example](https://github.com/oktadeveloper/okta-secure-vue-aws-server-example).
 
 Here are a few other articles I’d recommend to learn more about user authentication with common SPA frameworks.
 
