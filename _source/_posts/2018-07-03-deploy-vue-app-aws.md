@@ -408,6 +408,7 @@ Next is to lock down the `/secure` route to only authenticated users.  Okta's Vu
 
 Finally, make some style changes to `App.vue`
 
+{% raw %}
 ```html
 <template>
   <div id="app">
@@ -463,6 +464,7 @@ Finally, make some style changes to `App.vue`
 }
 </style>
 ```
+{% endraw %}
 
 In your terminal, restart the dev server via `npm run dev`. Tab to your browser and open `http://localhost:8080`.  If you click "Login" or "Go to secure page" (the protected `/secure` route), you should get Okta's authentication flow.
 
@@ -565,6 +567,7 @@ npm i axios
 
 Modify `./src/components/secure.vue` so that it will get the access token from the Okta Vue SDK and send the request to the API.
 
+{% raw %}
 ```html
 <template>
   <div>
@@ -612,6 +615,7 @@ export default {
   }
 </style>
 ```
+{% endraw %}
 
 Tab back to your browser and reload your web app.  Navigate to the `http://localhost:8080/secure`, and you should see the results from the API call.
 
