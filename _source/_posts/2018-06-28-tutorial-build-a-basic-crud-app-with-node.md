@@ -700,7 +700,7 @@ const slugify = require("slugify");
 const models = require("../models");
 
 const client = new okta.Client({
-  orgUrl: "{yourOktaOrgUrl}"
+  orgUrl: "{yourOktaOrgUrl}",
   token: "{yourOktaToken}"
 });
 const router = express.Router();
