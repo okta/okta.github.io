@@ -2,11 +2,11 @@
 layout: blog_post
 title: "Deploy Your Secure Vue.js App to AWS"
 author: bparise
-description: "This article shows you how to create a Vue.js app and deploy it to AWS."
+description: "This article shows you how to create a secure Vue.js app and deploy it to AWS."
 tags: [vue.js, vue, aws, serverless]
 tweets:
-- ""
-- ""
+- "Want to learn how to deploy a secure @vuejs to AWS? This article is for you!"
+- "In this tutorial, you'll learn how to build a @vuejs app that you can easily deploy to AWS and CloudFront. As an added bonus, it leverages a serverless API for its backend."
 ---
 
 Writing a Vue app is intuitive, straightforward, and fast.  With low barriers to entry, component-based approach, and built-in features like hot reloading and webpack, Vue allows you to focus on developing your application rather than worrying about your dev environment and build processes.  But, what happens when you are ready to deploy your app into production?  The choices can be endless and sometimes unintuitive.
