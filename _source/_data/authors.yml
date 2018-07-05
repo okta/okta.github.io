@@ -221,6 +221,13 @@ team_okta:
   email: devrel@okta.com
   github: https://github.com/oktadeveloper
 
+tom_smith:
+  full_name: Tom Smith
+  display_name: Tom Smith
+  avatar: avatar-tom_smith.jpg
+  email: tom.smith@okta.com
+  github: https://github.com/tom-smith-okta
+
 krasimir:
   full_name: Krasimir Hristozov
   display_name: Krasimir Hristozov
