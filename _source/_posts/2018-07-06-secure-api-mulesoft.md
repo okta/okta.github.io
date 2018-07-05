@@ -14,7 +14,7 @@ If you're building or managing an API, you're probably using an API gateway to h
 
 I've worked with a lot of different API gateways and want to provide some guidance and tools to help you get a reference architecture up and running between an authorization server and your API gateways. I'll start with Mulesoft, but will add more gateways on a regular basis. This sample workflow will give you a working example that you can modify to suit your own use-case.
 
-If you want to skip ahead, you can see sample workflow in action here:
+If you want to skip ahead, you can see sample workflow in action [on YouTube](https://youtu.be/n8r-9Gpoods):
 
 <div style="text-align: center">
 <iframe width="700" height="394" style="max-width: 100%" src="https://www.youtube.com/embed/n8r-9Gpoods" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
