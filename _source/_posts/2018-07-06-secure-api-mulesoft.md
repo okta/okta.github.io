@@ -362,6 +362,7 @@ These instructions assume that you are using the Developer Edition of Okta. If y
 
 Also, we're going to use the default authorization server that is built in to the developer edition. If you are using an Enterprise edition of Okta, you will need to set up an authorization server.
 
+<div id="step-by-step-list" markdown="1">
 1. Set up an introspection client: Mulesoft uses a dedicated client to introspect all tokens.
 
     Click "Applications" and then "Add application".
@@ -444,7 +445,14 @@ Also, we're going to use the default authorization server that is built in to th
 7. Follow the steps above to assign the authentication client (created via Mulesoft UI) to Everyone.
 8. Copy the file `/config/templates/app_settings_template.json` to `/config/instances/app_settings.json`. Update the values in `app_settings.json` and save.
 9. Launch the web app!
+</div>
 
 ```bash
 node app.js
 ```
+
+<style>
+#step-by-step-list ol > li {
+  margin-bottom: 1em;
+}
+</style>
