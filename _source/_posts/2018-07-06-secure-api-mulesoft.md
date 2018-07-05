@@ -304,10 +304,9 @@ In your Okta tenant, go to Applications, find your Solar System Auth app, and cl
 
 {% img blog/secure-api-mulesoft/okta_assign_group.png alt:"Okta Assign Group" width:"424" %}{: .center-image }
 
-Click the "Assign" button and then select "Assign to Groups"
+Click the "Assign" button and then select "Assign to Groups".
 
-<!-- todo: this is the same image as above -->
-{% img blog/secure-api-mulesoft/okta_assign_group.png alt:"Okta Assign Group" width:"424" %}{: .center-image }
+{% img blog/secure-api-mulesoft/okta_everyone_group.png alt:"Assign to Everyone Group" width:"800" %}{: .center-image }
 
 Click the Assign button next to the Everyone group, then click Done.
 
@@ -435,16 +434,15 @@ Also, we're going to use the default authorization server that is built in to th
             * openid
         * Click "Create Rule"
 
-    <!-- todo: add image -->
-    ![alt text](okta_add_rule.png)
+    {% img blog/secure-api-mulesoft/okta_add_rule.png alt:"Okta Add Rule" width:"700" %}{: .center-image }
 
-    Your authorization server is now set up so that users in the silver subscribers group who request the "http://myapp.com/scp/silver" scope upon authentication will be granted that scope in their access token. In the API gateway, this scope will give them access to the /planets resource.
+    Your authorization server is now set up so that users in the silver subscribers group who request the `http://myapp.com/scp/silver` scope upon authentication will be granted that scope in their access token. In the API gateway, this scope will give them access to the /planets resource.
     
     The API Center application renders two user authentication/authorization flows: one for a "silver" user (which you've just set up) and one for a "gold" user. If you would like to see the flow for a "gold" user (access to /moons) then go through the steps above (starting with the creation of another new group) using "gold" as the keyword in the place of "silver".
 
 6. Follow the steps above to add your REDIRECT_URI as a Trusted Origin in your Okta tenant
 7. Follow the steps above to assign the authentication client (created via Mulesoft UI) to Everyone.
-8. Copy the file /config/templates/app_settings_template.json to /config/instances/app_settings.json. Update the values in app_settings.json and save.
+8. Copy the file `/config/templates/app_settings_template.json` to `/config/instances/app_settings.json`. Update the values in `app_settings.json` and save.
 9. Launch the web app!
 
 ```bash
