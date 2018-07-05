@@ -57,15 +57,15 @@ The Okta API Center application only needs a few settings configured to launch. 
 You have two approaches to initialize these settings, and more importantly, to set up the policies, rules, scopes, group memberships, etc. on the Okta side:
 
 You can use the Okta bootstrapping tool. That's what I'm going to assume for the bulk of this article.
-You can set up your Okta tenant manually. Instructions are provided at the end of this article.
+You can set up your Okta tenant manually. Instructions are provided at the [end of this article](#step-by-step).
 
 ## Set up the Application Environment
 
 Now let's configure your environment. The Okta API Center uses the [dotenv npm package](https://www.npmjs.com/package/dotenv) to help manage environment variables, so you can add these values to a `.env` file if you wish. There is a `.env_example` file included in the repo for reference, which looks like this:
 
 ```bash
-OKTA_TENANT="https://dev-292102.oktapreview.com"
-OKTA_API_TOKEN="yourAPItoken"
+OKTA_TENANT="https://{yourOktaDomain}"
+OKTA_API_TOKEN="{yourAPItoken}"
 REDIRECT_URI="http://localhost:8080"
 PORT="8080"
 SESSION_SECRET="some random phrase"
@@ -355,7 +355,7 @@ As always, you can follow us on Twitter [@oktadev](https://twitter.com/oktadev) 
 <div style="text-align: center">
 . . .
 </div>
-
+<a name="step-by-step"></a>
 Instructions for those not using the bootstrap tool:
 
 These instructions assume that you are using the Developer Edition of Okta. If you are using the Enterprise version, some of the screen captures and menus may look a little different.
