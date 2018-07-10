@@ -9,21 +9,21 @@ tweets:
 - ""
 ---
 
-A lot has happened in the last five years of software development. What it means to build, deploy, and orchestrate software has changed drastically. There's been a move from hosting software on premise to public cloud, and shift from VMs to containers. Containers are cheaper to run than VMs because they require less resources and is just a process. Moving to containers has reduced costs, but created a problem of how to run containers at scale.
+A lot has happened in the last five years of software development. What it means to build, deploy, and orchestrate software has changed drastically. There's been a move from hosting software on-premise to public cloud and shift from VMs to containers. Containers are cheaper to run than VMs because they require fewer resources and run as single processes. Moving to containers has reduced costs, but created a problem of how to run containers at scale.
 
-On June 6th, 2014, [Kubernetes](https://kubernetes.io/) was released. Google had been using containers for years and used a tool called Borg to manage containers at scale. Kubernetes is the open source version of Borg and has become the de facto standard in the last four years. 
+[Kubernetes](https://kubernetes.io/) was first open-sourced on June 6th, 2014. Google had been using containers for years and used a tool called Borg to manage containers at scale. Kubernetes is the open source version of Borg and has become the de facto standard in the last four years. 
 
 It's journey to becoming a standard was largely facilitated by all the big players jumping on board. Red Hat, IBM, Amazon, Microsoft, Oracle, and Pivotal -- every major public cloud provider has Kubernetes support. 
 
 This is great for developers because it provides a single way to package applications (in a Docker container) and deploy it on any Kubernetes cluster.
 
-## High Performance Development with CI/CD
+## High-Performance Development with CI/CD
 
 High performing teams are all the rage. Continuous integration, continuous deployment (CI/CD), small iterations, and fast feedback are the building blocks. CI/CD can be difficult to setup for your cloud native app. You need to automate everything so developers can spend their precious time delivering actual business value.
 
 How do you become a high performing team using containers, continuous delivery, and Kubernetes? This is where [Jenkins X](https://jenkins-x.io) comes in.
 
-> "The idea of Jenkins X is to give all developers their own nevil seafaring butler than can help you sail the seas of continuous delivery." 
+> "The idea of Jenkins X is to give all developers their own nevil seafaring butler that can help you sail the seas of continuous delivery." 
 > &mdash; [James Strachan](https://twitter.com/jstrachan)
 
 {% img blog/spring-boot-jenkins-x/jenkins-x.svg alt:"Jenkins X Logo" width:"300" %}{: .center-image }
@@ -32,7 +32,7 @@ Jenkins X helps you automate your CI/CD in Kubernetes -- and you don't even have
 
 ## What Does Jenkins X Do?
 
-Jenkins X automates the installation, configuration, and upgrading of Jenkins and other apps (Helm, Skaffold, Nexus, among others) on Kubernetes. It automates CI/CD of your applications using Docker images, Helm charts, and pipelines. It uses [GitOps](https://www.weave.works/blog/gitops-operations-by-pull-request) to manage promotion between environments, and provides lots of feedback by commenting on pull requests as they hit staging and production.
+Jenkins X automates the installation, configuration, and upgrading of Jenkins and other apps (Helm, Skaffold, Nexus, among others) on Kubernetes. It automates CI/CD of your applications using Docker images, Helm charts, and pipelines. It uses [GitOps](https://www.weave.works/blog/gitops-operations-by-pull-request) to manage promotion between environments and provides lots of feedback by commenting on pull requests as they hit staging and production.
 
 ## Get Started with Jenkins X
 
@@ -47,7 +47,7 @@ curl -L https://github.com/jenkins-x/jx/releases/download/v1.3.78/jx-linux-amd64
 sudo mv jx /usr/local/bin
 ```
 
-**NOTE:** Google Cloud shell [terminates any changes made outside your home directory after an hour](https://cloud.google.com/shell/docs/limitations#custom_installed_software_packages_and_persistence), so you might have to run the commands again. The good news is they'll be in your history, so you just need to hit the up arrow and enter. You can also eliminate the `sudo mv` command above and add the following to your `.bashrc` instead.
+**NOTE:** Google Cloud shell [terminates any changes made outside your home directory after an hour](https://cloud.google.com/shell/docs/limitations#custom_installed_software_packages_and_persistence), so you might have to rerun the commands. The good news is they'll be in your history, so you only need to hit the up arrow and enter. You can also eliminate the `sudo mv` command above and add the following to your `.bashrc` instead.
 
 ```bash
 export PATH=$PATH:.
@@ -61,13 +61,13 @@ jx create cluster gke --skip-login
 
 Select `helm` if you're prompted to download it. You will be prompted to select a Google Cloud Zone. I'd suggest picking one close to your location. I chose `us-west1-a` since I live near Denver, Colorado. For Google Cloud Machine Type, I selected `n1-standard-4`, but the default `n-standard1-2` should work just fine. Use the defaults for the min (3) and max (5) number of nodes.
 
-For the GitHub username, select your own (e.g. `mraible`). I tried to use `oktadeveloper` (a GitHub organization) and I was unable to make it work. **NOTE:** GitHub integration will fail if you have two-factor authentication enabled on your account.
+For the GitHub username, select your own (e.g. `mraible`). I tried to use `oktadeveloper` (a GitHub organization), and I was unable to make it work. **NOTE:** GitHub integration will fail if you have two-factor authentication enabled on your account.
 
 When prompted to install an ingress controller, hit **Enter** for **Yes**. Hit **Enter** again to select the default domain. 
 
-You'll be prompted to create a GitHub API Token. Click on the [provided URL](https://github.com/settings/tokens/new?scopes=repo,read:user,read:org,user:email,write:repo_hook,delete_repo) and name it "Jenkins X". Copy it paste it back into your console.
+You'll be prompted to create a GitHub API Token. Click on the [provided URL](https://github.com/settings/tokens/new?scopes=repo,read:user,read:org,user:email,write:repo_hook,delete_repo) and name it "Jenkins X". Copy and paste the token's value back into your console.
 
-Grab a coffee, an adult beverage, or do some pushups while your install finishes. It can take several minutes.
+_Grab a coffee, an adult beverage, or do some pushups while your install finishes. It can take several minutes._
 
 The last step will be to copy the API token from Jenkins to your console. Follow the provided instructions in your console.
 
@@ -97,11 +97,11 @@ jx get activity -f okta-spring-boot-jenkinsx-example -w
 
 {% img blog/spring-boot-jenkins-x/jx-get-activity.png alt:"jx get activity" width:"800" %}{: .center-image }
 
-Run `jx console`, click the resulting link, and navigate to you project if you'd like a more visually rich view.
+Run `jx console`, click the resulting link, and navigate to your project if you'd like a more visually rich view.
 
 {% img blog/spring-boot-jenkins-x/jx-console.png alt:"jx console" width:"800" %}{: .center-image }
 
-This process will perform a number of tasks:
+This process will perform a few tasks:
  
 1. Create a [release](https://github.com/oktadeveloper/okta-spring-boot-jenkinsx-example/releases/tag/v0.0.1) for your project.
 2. Create a [pull request](https://github.com/mraible/environment-scorpionthunder-staging/pull/1) for your staging environment project.
@@ -122,9 +122,9 @@ By default, Jenkins X will only auto-deploy to staging. You can manually [promot
 jx promote okta-spring-boot-jenkinsx-example --version 0.0.1 --env production
 ```
 
-You can change your production environment to use auto-deploy using [`jx edit environnment`](https://jenkins-x.io/commands/jx_edit_environment/).
+You can change your production environment to use auto-deploy using [`jx edit environment`](https://jenkins-x.io/commands/jx_edit_environment/).
 
-Now that you know how to use Jenkins X with a bare-bones Spring Boot app, let's see how to make it work with a more real-world example.
+Now that you know how to use Jenkins X with a bare-bones Spring Boot app let's see how to make it work with a more real-world example.
 
 ## Secure Your Spring Boot App and Add an Angular PWA
 
@@ -135,7 +135,7 @@ Over the last several months, I've written a series of blog posts about building
 3. [The Hitchhiker's Guide to Testing Spring Boot APIs and Angular Components with WireMock, Jest, Protractor, and Travis CI](/blog/2018/05/02/testing-spring-boot-angular-components)
 4. [Deploy Your Secure Spring Boot + Angular PWA as a Single Artifact](blog/2018/06/18/spring-boot-angular-auth-code-flow)
 
-This is the final blog post in the series. I believe this is a good example of a real-world app because it has numerous unit and integration tests, including end-to-end tests with Protractor. Let's see how to automate its path to production with Jenkins X and Kubernetes!
+This is the final blog post in the series. I believe this is an excellent example of a real-world app because it has numerous unit and integration tests, including end-to-end tests with Protractor. Let's see how to automate its path to production with Jenkins X and Kubernetes!
 
 Clone the Spring Boot project you just created from GitHub (make sure to change `{yourUsername}` in the URL):
 
@@ -240,7 +240,7 @@ Add the Actuator starter as a dependency to `holdings-api/pom.xml`:
 </dependency>
 ```
 
-You'll also need to allow access to its health check endpoint. Jenkins X will deploy your app behind an Nginx server, so you'll want to turn off forcing HTTPS as well, or you won't be able to reach your app. Modify `holdings-api/src/main/java/com/okta/developer/holdingsapi/SecurityConfiguration.java` to have these changes.
+You'll also need to allow access to its health check endpoint. Jenkins X will deploy your app behind a Nginx server, so you'll want to turn off forcing HTTPS as well, or you won't be able to reach your app. Modify `holdings-api/src/main/java/com/okta/developer/holdingsapi/SecurityConfiguration.java` to have these changes.
 
 ```java
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
@@ -306,7 +306,7 @@ dir ('./holdings-api') {
 }
 ```
 
-This should be enough to make this app work with Jenkins X. However, you won't be able to log into it unless you have an Okta account, and configure it accordingly.
+This should be enough to make this app work with Jenkins X. However, you won't be able to log into it unless you have an Okta account and configure it accordingly.
 
 ### What is Okta?
 
@@ -318,7 +318,7 @@ In short, we make [identity management](https://developer.okta.com/product/user-
 * Secure your application with [multi-factor authentication](https://developer.okta.com/use_cases/mfa/)
 * And much more! Check out our [product documentation](https://developer.okta.com/documentation/)
 
-Are you sold? [Register for a forever-free developer account](https://developer.okta.com/signup/), and when you’re done, come on back so we can learn more about CI/CD with Spring Boot and Jenkins X!
+Are you sold? [Register for a forever-free developer account](https://developer.okta.com/signup/), and when you’ve finished, come on back so we can learn more about CI/CD with Spring Boot and Jenkins X!
 
 ## Create a Web Application in Okta
 
@@ -369,12 +369,12 @@ Storing environment variables locally is pretty straightforward. But how do you 
 1. Run `jx console` on Google Cloud to get your Jenkins X URL
 2. Click on the link and click **Administration** at the top
 3. Click on **Credentials** > **(global)** > **Add Credentials** (on the left)
-4. Select **Secret text** from the dropdown and enter `OKTA_CLIENT_TOKEN` for the ID
+4. Select **Secret text** from the drop-down and enter `OKTA_CLIENT_TOKEN` for the ID
 5. Copy/paste your Okta API token into the **Secret** field
 
 While you're in there, add a few more secrets: `OKTA_APP_ID`, `E2E_USERNAME`, and `E2E_PASSWORD`. The first is the ID of the `Jenkins X` app you created. You can get its value from navigating to your app on Okta and copying the value from the URL. The `E2E-*` secrets should be credentials you want to use to run end-to-end (Protractor) tests. You might want to create a new user for this. 
 
-You can access these values in your `Jenkinsfile` by adding them in the `environment` section near the top.
+You can access these values in your `Jenkinsfile` by adding them to the `environment` section near the top.
 
 ```groovy
 environment {
@@ -390,7 +390,7 @@ environment {
 
 ### Transferring Environment Variables to Docker Containers
 
-To transfer the `OKTA_CLIENT_TOKEN` environment variable to the Docker container when it's built, look for:
+To transfer the `OKTA_CLIENT_TOKEN` environment variable to the Docker container, look for:
 
 ```groovy
 sh "make preview"
@@ -428,7 +428,7 @@ If you try to log in, you'll likely get an error from Okta that the redirect URI
 
 ### Automate Adding Redirect URIs in Okta
 
-When you create apps in Okta and run them locally, it's easy to know what the redirect URIs for your app will be. For this particular app, they'll be `http://localhost:8080/login` for login, and `http://localhost:8080` for logout. When you go to production, the URLs are generally well-known as well. However, with Jenkins X, the URLs are dynamic, and created on-the-fly based on your pull request number.
+When you create apps in Okta and run them locally, it's easy to know what the redirect URIs for your app will be. For this particular app, they'll be `http://localhost:8080/login` for login, and `http://localhost:8080` for logout. When you go to production, the URLs are generally well-known as well. However, with Jenkins X, the URLs are dynamic and created on-the-fly based on your pull request number.
 
 To make this work with Okta, you can create a Java class that talks to the Okta API and dynamically adds URIs. Create `holdings-api/src/test/java/com/okta/developer/cli/AppRedirectUriManager.java` and populate it with the following code.
 
@@ -665,7 +665,7 @@ When I first tried this in Jenkins X, I discovered that the `jenkins-maven` agen
 [21:51:08] E/launcher - unknown error: DevToolsActivePort file doesn't exist
 ```
 
-Google led me to find this is a [Chrome on Linux issue](https://github.com/GoogleChrome/puppeteer/issues/1834). I figured out the workaround is to specify `--disable-dev-shm-usage` in `chromeOptions` for Protractor. I also added some additional flags that seem to be recommended. I particularly like `--headless` when running locally so a browser doesn't popup and get in my way. If I want to see the process happening in real-time, I can easily remove the option.
+Google led me to find this is a [Chrome on Linux issue](https://github.com/GoogleChrome/puppeteer/issues/1834). I figured out the workaround is to specify `--disable-dev-shm-usage` in `chromeOptions` for Protractor. I also added some additional flags that seem to be recommended. I particularly like `--headless` when running locally so a browser doesn't pop up and get in my way. If I want to see the process happening in real-time, I can quickly remove the option.
 
 If you'd like to see your project's Protractor tests running on Jenkins X, you'll need to modify `crypto-pwa/test/protractor.conf.js` to specify the following `chromeOptions`:
 
@@ -727,7 +727,7 @@ You can find the source code for the completed application in this example [on G
 
 If you're running your production apps on Kubernetes, I'd recommend looking into Jenkins X. It provides a way to do CI/CD on the same environment, quickly iterate, and deliver business value &mdash; faster &mdash; to your customers. 
 
-Jenkins X also includes a [DevPods](https://jenkins.io/blog/2018/06/21/jenkins-x-devpods/) feature that can auto-deploy-on-save when developing on your laptop. I'm not sure DevPods will work well for JavaScript apps that need to have a transpile-for-production step. I'd rather have webpack and Browsersync refresh my local browser in seconds, rather than waiting minutes for a Docker image to be created and deployed to Kubernetes.
+Jenkins X also includes a [DevPods](https://jenkins.io/blog/2018/06/21/jenkins-x-devpods/) feature that can auto-deploy-on-save when developing on your laptop. I'm not sure DevPods will work well for JavaScript apps that need to have a transpile-for-production step. I'd rather have webpack, and Browsersync refresh my local browser in seconds, rather than waiting minutes for a Docker image to be created and deployed to Kubernetes.
 
 To get an excellent overview and demo of Jenkins X, watch [James Strachan's](https://twitter.com/jstrachan) [Jenkins X: Continuous Delivery for Kubernetes](https://youtu.be/53AtxQGXnMk) from the June 2018 [Virtual JUG](https://virtualjug.com/) meetup.
 
@@ -742,5 +742,3 @@ To learn more about Jenkins X and Kubernetes, check out the following resources:
 * [The Kubernetes Oligopoly and Jenkins X](https://www.cloudbees.com/blog/kubernetes-oligopoly-and-jenkins-x)
 
 If you have any questions, please add a comment below, hit [me up on Twitter](https://twitter.com/mraible), or post a question to our [Developer Forums](https://devforum.okta.com). To be notified of future blog posts and developer wisdom, you can follow [my whole team on Twitter](https://twitter.com/oktadev).
-
-
