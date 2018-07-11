@@ -16,7 +16,6 @@ This guide will walk you through integrating authentication into an iOS (Swift) 
 At the end of the iOS instructions you can choose your server type to learn more about post-authentication workflows, such as verifying tokens that your iOS application can send to your server.
 
 ## Prerequisites
-If you do not already have a **Developer Edition Account**, you can create one at [https://developer.okta.com/signup/](https://developer.okta.com/signup/).
 
 ### Add an OpenID Connect Client
 * Log into the Okta Developer Dashboard, click **Applications** then **Add Application**.

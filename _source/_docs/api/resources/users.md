@@ -915,13 +915,13 @@ The first three parameters correspond to different types of lists:
 - [List All Users](#list-all-users) (no parameters)
 - [Find Users](#find-users) (`q`)
 - [List Users with a Filter](#list-users-with-a-filter) (`filter`)
-- [List Users with Search](#list-users-with-search) (`search`)
+- [List Users with Search](#list-users-with-search) (`search`) {% api_lifecycle ea %}
 
 | Parameter | Description                                                                                                                                  | Param Type | DataType | Required |
 |:----------|:---------------------------------------------------------------------------------------------------------------------------------------------|:-----------|:---------|:---------|
 | q         | Finds a user that matches `firstName`, `lastName`, and `email` properties                                                                    | Query      | String   | FALSE    |
 | filter    | [Filters](/docs/api/getting_started/design_principles#filtering) users with a supported expression for a subset of properties           | Query      | String   | FALSE    |
-| search    | Searches for users with a supported [filtering](/docs/api/getting_started/design_principles#filtering)  expression for most properties  | Query      | String   | FALSE    |
+| search    | Searches for users with a supported [filtering](/docs/api/getting_started/design_principles#filtering) expression for most properties {% api_lifecycle ea %} | Query      | String   | FALSE    |
 | limit     | Specifies the number of results returned                                                                                                     | Query      | Number   | FALSE    |
 | after     | Specifies the pagination cursor for the next page of users (default is 200)                                                                  | Query      | String   | FALSE    |
 

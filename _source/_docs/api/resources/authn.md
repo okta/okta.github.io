@@ -2925,7 +2925,7 @@ The `sms`,`call` and `token:software:totp` [factor types](factors#factor-type) r
 * [Activate SMS Factor](#activate-sms-factor)
 * [Activate Call Factor](#activate-call-factor)
 * [Activate Push Factor](#activate-push-factor)
-* [Activate U2F Factor](#activate-u2f-factor) {% api_lifecycle ea %}
+* [Activate U2F Factor](#activate-u2f-factor)
 
 #### Activate TOTP Factor
 {:.api .api-operation}
@@ -4535,8 +4535,6 @@ curl -v -X POST \
 
 #### Verify U2F Factor
 {:.api .api-operation}
-
-> Verifying a U2F factor is [an {% api_lifecycle ea %} feature](/docs/api/getting_started/releases-at-okta).
 
 {% api_operation post /api/v1/authn/factors/${factorId}/verify %}
 
