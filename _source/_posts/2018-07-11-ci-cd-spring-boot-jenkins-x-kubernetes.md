@@ -101,8 +101,6 @@ Select all the defaults for the git user name, initializing git, and the commit 
 jx get activity -f okta-spring-boot-jx-example -w
 ```
 
-{% img blog/spring-boot-jenkins-x/jx-get-activity.png alt:"jx get activity" width:"800" %}{: .center-image }
-
 Run `jx console`, click the resulting link, and navigate to your project if you'd like a more visually rich view.
 
 {% img blog/spring-boot-jenkins-x/jx-console.png alt:"jx console" width:"800" %}{: .center-image }
