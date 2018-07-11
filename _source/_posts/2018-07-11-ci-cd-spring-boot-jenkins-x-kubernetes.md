@@ -13,7 +13,7 @@ A lot has happened in the last five years of software development. What it means
 
 Kubernetes was first open-sourced on June 6th, 2014. Google had been using containers for years and used a tool called Borg to manage containers at scale. Kubernetes is the open source version of Borg and has become the de facto standard in the last four years.
 
-It's journey to becoming a standard was largely facilitated by all the big players jumping on board. Red Hat, IBM, Amazon, Microsoft, Oracle, and Pivotal -- every major public cloud provider has Kubernetes support.
+Its journey to becoming a standard was largely facilitated by all the big players jumping on board. Red Hat, IBM, Amazon, Microsoft, Oracle, and Pivotal -- every major public cloud provider has Kubernetes support.
 
 This is great for developers because it provides a single way to package applications (in a Docker container) and deploy it on any Kubernetes cluster.
 
@@ -683,7 +683,7 @@ capabilities: {
 },
 ```
 
-Then add a new **Run e2e tests** stage to `Jenkinsfile` that sits between the "CI Build" and "Build Release" stages. If it helps, you can see the [final Jenkinsfile]().
+Then add a new **Run e2e tests** stage to `Jenkinsfile` that sits between the "CI Build" and "Build Release" stages. If it helps, you can see the [final Jenkinsfile](https://github.com/oktadeveloper/okta-spring-jx-example/blob/master/Jenkinsfile).
 
 ```groovy
 stage('Run e2e tests') {
