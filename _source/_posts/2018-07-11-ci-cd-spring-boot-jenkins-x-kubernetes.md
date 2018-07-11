@@ -9,17 +9,17 @@ tweets:
 - "Wanna try something new and cool? @jenkinsxio is a way to do CI / CD on Kubernetes with auto-deployment to staging environments. It's pretty slick!"
 ---
 
-A lot has happened in the last five years of software development. What it means to build, deploy, and orchestrate software has changed drastically. There's been a move from hosting software on-premise to public cloud and shift from VMs to containers. Containers are cheaper to run than VMs because they require fewer resources and run as single processes. Moving to containers has reduced costs, but created a problem of how to run containers at scale.
+A lot has happened in the last five years of software development. What it means to build, deploy, and orchestrate software has changed drastically. There's been a move from hosting software on-premise to public cloud and shift from virtual machines (VMs) to containers. Containers are cheaper to run than VMs because they require fewer resources and run as single processes. Moving to containers has reduced costs, but created the problem of how to run containers at scale.
 
-[Kubernetes](https://kubernetes.io/) was first open-sourced on June 6th, 2014. Google had been using containers for years and used a tool called Borg to manage containers at scale. Kubernetes is the open source version of Borg and has become the de facto standard in the last four years.
+Kubernetes was first open-sourced on June 6th, 2014. Google had been using containers for years and used a tool called Borg to manage containers at scale. Kubernetes is the open source version of Borg and has become the de facto standard in the last four years.
 
 It's journey to becoming a standard was largely facilitated by all the big players jumping on board. Red Hat, IBM, Amazon, Microsoft, Oracle, and Pivotal -- every major public cloud provider has Kubernetes support.
 
 This is great for developers because it provides a single way to package applications (in a Docker container) and deploy it on any Kubernetes cluster.
 
-## High-Performance Development with CI/CD
+## High-Performance Development with CI/CD, Kubernetes, and Jenkins X
 
-High performing teams are all the rage. Continuous integration, continuous deployment (CI/CD), small iterations, and fast feedback are the building blocks. CI/CD can be difficult to setup for your cloud native app. You need to automate everything so developers can spend their precious time delivering actual business value.
+High performing teams are almost always a requirement for success in technology and continuous integration, continuous deployment (CI/CD), small iterations, plus fast feedback are the building blocks. CI/CD can be difficult to set up for your cloud native app. By automating everything, developers can spend their precious time delivering actual business value.
 
 How do you become a high performing team using containers, continuous delivery, and Kubernetes? This is where [Jenkins X](https://jenkins-x.io) comes in.
 
@@ -38,7 +38,7 @@ Jenkins X automates the installation, configuration, and upgrading of Jenkins an
 
 To get installed with Jenkins X, you first need to install the `jx` binary on your machine, or cloud provider. You can get $300 in credits for Google Cloud, so I decided to start there.
 
-### Install on Google Cloud and Create Cluster
+### Install Jenkins X on Google Cloud and Create a Cluster
 
 Navigate to [cloud.google.com](https://cloud.google.com) and log in. If you don't have an account, sign up for a free trial. Go to the console (there's a link in the top right corner) and activate Google Cloud shell. Copy and paste the following commands into the shell.
 
@@ -91,14 +91,14 @@ This command uses [Spring Initializr](https://start.spring.io), so you'll be pro
 |---|---|
 | Language | `java` |
 | Group | `com.okta.developer` |
-| Artifact | `okta-spring-boot-jx-example` |
+| Artifact | `okta-spring-jx-example` |
 
 **TIP:** Picking a short name for your artifact name will save you pain. Jenkins X has a 53 character limit for release names and `oktadeveloper/okta-spring-boot-jenkinsx-example` will cause it to be exceeded by two characters.
 
 Select all the defaults for the git user name, initializing git, and the commit message. You can select an organization to use if you don't want to use your personal account. Run the following command to watch the CI/CD pipeline of your app.
 
 ```
-jx get activity -f okta-spring-boot-jx-example -w
+jx get activity -f okta-spring-jx-example -w
 ```
 
 Run `jx console`, click the resulting link, and navigate to your project if you'd like a more visually rich view.
@@ -107,23 +107,23 @@ Run `jx console`, click the resulting link, and navigate to your project if you'
 
 This process will perform a few tasks:
 
-1. Create a [release](https://github.com/oktadeveloper/okta-spring-boot-jx-example/releases/tag/v0.0.1) for your project.
+1. Create a [release](https://github.com/oktadeveloper/okta-spring-jx-example/releases/tag/v0.0.1) for your project.
 2. Create a [pull request](https://github.com/mraible/environment-marespring-staging/pull/1) for your staging environment project.
 3. Auto-deploy it to staging environment so you can see it in action.
 
 ```bash
 Merge status checks all passed so the promotion worked!
-Application is available at: http://okta-spring-boot-jx-example.jx-staging.35.230.106.169.nip.io
+Application is available at: http://okta-spring-jx-example.jx-staging.35.230.106.169.nip.io
 ```
 
 **NOTE:** Since Spring Boot doesn't provide a welcome page by default, you will get a 404 when you open the URL above.
 
-### Deploy to Production
+### Deploy Your Spring Boot App to Production with Jenkins X
 
 By default, Jenkins X will only auto-deploy to staging. You can manually [promote from staging to production](http://jenkins-x.io/developing/promote/) using:
 
 ```bash
-jx promote okta-spring-boot-jx-example --version 0.0.1 --env production
+jx promote okta-spring-jx-example --version 0.0.1 --env production
 ```
 
 You can change your production environment to use auto-deploy using [`jx edit environment`](https://jenkins-x.io/commands/jx_edit_environment/).
@@ -144,7 +144,7 @@ This is the final blog post in the series. I believe this is an excellent exampl
 Clone the Spring Boot project you just created from GitHub (make sure to change `{yourUsername}` in the URL):
 
 ```bash
-git clone https://github.com/{yourUsername}/okta-spring-boot-jx-example.git okta-jenkinsx
+git clone https://github.com/{yourUsername}/okta-spring-jx-example.git okta-jenkinsx
 ```
 
 In an adjacent directory, clone the project created that has Spring Boot + Angular as a single artifact:
@@ -166,7 +166,7 @@ The result should be a directory structure with the following files:
 $ tree .
 .
 ├── charts
-│   ├── okta-spring-boot-jenkinsx-example
+│   ├── okta-spring-jx-example
 │   │   ├── Chart.yaml
 │   │   ├── Makefile
 │   │   ├── README.md
@@ -314,7 +314,7 @@ dir ('./holdings-api') {
 
 This should be enough to make this app work with Jenkins X. However, you won't be able to log into it unless you have an Okta account and configure it accordingly.
 
-### What is Okta?
+### Why Okta?
 
 In short, we make [identity management](https://developer.okta.com/product/user-management/) a lot easier, more secure, and more scalable than what you’re probably used to. Okta is a cloud service that allows developers to create, edit, and securely store user accounts and user account data, and connect them with one or multiple applications. Our API enables you to:
 
@@ -326,7 +326,7 @@ In short, we make [identity management](https://developer.okta.com/product/user-
 
 Are you sold? [Register for a forever-free developer account](https://developer.okta.com/signup/), and when you’ve finished, come on back so we can learn more about CI/CD with Spring Boot and Jenkins X!
 
-## Create a Web Application in Okta
+## Create a Web Application in Okta for Your Spring Boot App
 
 After you've completed the setup process, log in to your account and navigate to **Applications** > **Add Application**. Click **Web** and **Next**. On the next page, enter the following values and click **Done** (you will have to click Done, then Edit to modify Logout redirect URIs).
 
@@ -389,7 +389,7 @@ You can access these values in your `Jenkinsfile` by adding them to the `environ
 ```groovy
 environment {
   ORG               = 'mraible'
-  APP_NAME          = 'okta-spring-boot-jx-example'
+  APP_NAME          = 'okta-spring-jx-example'
   CHARTMUSEUM_CREDS = credentials('jenkins-x-chartmuseum')
   OKTA_CLIENT_TOKEN = credentials('OKTA_CLIENT_TOKEN')
   OKTA_APP_ID       = credentials('OKTA_APP_ID')
@@ -409,14 +409,13 @@ sh "make preview"
 And change it to:
 
 ```groovy
-sh "make $OKTA_CLIENT_TOKEN=\$OKTA_CLIENT_TOKEN preview"
+sh "make OKTA_CLIENT_TOKEN=\$OKTA_CLIENT_TOKEN preview"
 ```
-
-You can add more environment variables as you need them.
 
 At this point, you can create a branch, commit your changes, and verify everything works in Jenkins X.
 
 ```bash
+cd ..
 git checkout -b add-secure-app
 git add .
 git commit -m "Add Bootiful PWA"
@@ -552,38 +551,36 @@ Then update `Jenkinsfile` to add a block that runs `mvn exec:java` after it buil
 
 ```groovy
 dir ('./charts/preview') {
- container('maven') {
-   sh "make preview"
-   sh "make $OKTA_CLIENT_TOKEN=\$OKTA_CLIENT_TOKEN preview"
-   sh "jx preview --app $APP_NAME --dir ../.."
- }
+  container('maven') {
+    sh "make preview"
+    sh "make OKTA_CLIENT_TOKEN=\$OKTA_CLIENT_TOKEN preview"
+    sh "jx preview --app $APP_NAME --dir ../.."
+  }
 }
 
 // Add redirect URI in Okta
 dir ('./holdings-api') {
- container('maven') {
+  container('maven') {
     sh '''
       yum install -y jq
       previewURL=$(jx get preview -o json|jq  -r ".items[].spec | select (.previewGitInfo.name==\\"$CHANGE_ID\\") | .previewGitInfo.applicationURL")
       mvn exec:java@add-redirect -DappId=$OKTA_APP_ID -DredirectUri=$previewURL
     '''
- }
+  }
 }
 ```
 
 Check in and push your changes, and your app should be updated with a redirect URI for `http://{yourPreviewURL}/login`. You'll need to manually add a logout redirect URI for `http://{yourPreviewURL}` since this is [not currently supported by Okta's Java SDK](https://github.com/okta/openapi/issues/132).
 
-[screenshot of app settings]
+{% img blog/spring-boot-jenkins-x/okta-settings-with-redirect-uris.png alt:"Okta app with URI settings" width:"700" %}{: .center-image }
 
-To promote your passing pull request to a staging environment, merge it and your PR will be updated with a comment once it's ready.
-
-[screenshot of comment on PR]
-
-// todo: what about redirect URI for staging env?
+To promote your passing pull request to a staging environment, merge it and the master branch will be promoted to staging. Unfortunately, you won't be able to log in. That's because there's no process that registers the staging site's redirect URIs with your Okta app. If you add the URIs manually, everything should work.
 
 ### Running Protractor Tests in Jenkins X
 
-Figuring how to run end-to-end tests in Jenkins X was the hardest part for me to figure out. I started by adding a new Maven profile that would allow me to run the tests with Maven, rather than npm.
+Figuring how to run end-to-end tests in Jenkins X was the hardest thing for me to figure out. I started by adding a new Maven profile that would allow me to run the tests with Maven, rather than npm.
+
+**NOTE:** For this profile to work, you will need to add `http://localhost:8000/login` as a login redirect URI to your app, and `http://localhost:8000` as a logout redirect URI.
 
 ```xml
 <profile>
@@ -673,16 +670,16 @@ When I first tried this in Jenkins X, I discovered that the `jenkins-maven` agen
 [21:51:08] E/launcher - unknown error: DevToolsActivePort file doesn't exist
 ```
 
-Google led me to find this is a [Chrome on Linux issue](https://github.com/GoogleChrome/puppeteer/issues/1834). I figured out the workaround is to specify `--disable-dev-shm-usage` in `chromeOptions` for Protractor. I also added some additional flags that seem to be recommended. I particularly like `--headless` when running locally so a browser doesn't pop up and get in my way. If I want to see the process happening in real-time, I can quickly remove the option.
+Google led me to find this error is caused by a [Chrome on Linux issue](https://github.com/GoogleChrome/puppeteer/issues/1834). I figured out the workaround is to specify `--disable-dev-shm-usage` in `chromeOptions` for Protractor. I also added some additional flags that seem to be recommended. I particularly like `--headless` when running locally so a browser doesn't pop up and get in my way. If I want to see the process happening in real-time, I can quickly remove the option.
 
 If you'd like to see your project's Protractor tests running on Jenkins X, you'll need to modify `crypto-pwa/test/protractor.conf.js` to specify the following `chromeOptions`:
 
 ```js
 capabilities: {
- 'browserName': 'chrome',
- 'chromeOptions': {
-   'args': ['--disable-gpu', '--no-sandbox', '--disable-extensions', '--disable-dev-shm-usage']
- }
+  'browserName': 'chrome',
+  'chromeOptions': {
+    'args': ['--headless', ''--disable-gpu', '--no-sandbox', '--disable-extensions', '--disable-dev-shm-usage']
+  }
 },
 ```
 
@@ -708,15 +705,7 @@ stage('Run e2e tests') {
 }
 ```
 
-I did have to make a few additional adjustments to get all the Protractor tests to pass:
-
-1. In `crypto-pwa/e2e/spec/login.e2e-spec.ts`, I was unable to get the `should show a login button` test to pass, so I ignored it by changing `it(...)` to `xit(...)`.
-2. In this same file, I changed the 2000ms timeouts to 5000ms and 5000ms timeouts to 30000ms.
-3. In `crypto-pwa/test/protractor.conf.js`, I changed `defaultTimeoutInterval` to `600000`.
-
-//todo: confirm these are necessary
-
-After making all these changes, create a new branch, and check them in.
+After making all these changes, create a new branch, check in your changes, and create a pull request on GitHub.
 
 ```bash
 git checkout -b enable-e2e-tests
@@ -725,13 +714,26 @@ git commit -m "Add stage for end-to-end tests"
 git push origin enable-e2e-tests
 ```
 
-Your tests will likely fail on the first run because the logout redirect URI is not configured for the new preview environment. Update your Okta app's logout redirect URIs to match your PR's preview environment URI and everything should pass!
+I did have to make a few additional adjustments to get all the Protractor tests to pass:
 
-[screenshot of Jenkins X and e2e passing]
+1. In `crypto-pwa/e2e/spec/login.e2e-spec.ts`, I was unable to get the `should show a login button` test to pass, so I ignored it by changing `it(...)` to `xit(...)`.
+2. In this same file, I changed the 2000ms timeouts to 5000ms and 5000ms timeouts to 30000ms.
+3. In `crypto-pwa/test/protractor.conf.js`, I changed `defaultTimeoutInterval` to `600000`.
 
-You can find the source code for the completed application in this example [on GitHub]().
+The tests will likely fail on the first run because the logout redirect URI is not configured for the new preview environment. Update your Okta app's logout redirect URIs to match your PR's preview environment URI, replay the pull request tests, and everything should pass!
 
-## Learn More About Jenkins X and Kubernetes
+{% img blog/spring-boot-jenkins-x/jenkinsx-everything-is-awesome.png alt:"Jenkins X: Everything is Awesome!" width:"800" %}{: .center-image }
+
+You can find the source code for the completed application in this example [on GitHub](https://github.com/oktadeveloper/okta-spring-jx-example).
+
+## Learn More About Jenkins X,  Kubernetes, and Spring Boot
+
+To learn more about Spring Boot, Jenkins X, and Kubernetes, check out the following resources:
+
+* [Deploy Your Secure Spring Boot + Angular PWA as a Single Artifact](/blog/2018/06/18/spring-boot-angular-auth-code-flow)
+* [Build a Basic CRUD App with Angular 5.0 and Spring Boot 2.0](/blog/2017/12/04/basic-crud-angular-and-spring-boot)
+* [Introducing Jenkins X: a CI/CD solution for modern cloud applications on Kubernetes](https://jenkins.io/blog/2018/03/19/introducing-jenkins-x/)
+* [Kubernetes The Hard Way](https://github.com/kelseyhightower/kubernetes-the-hard-way) by [Kelsey Hightower](https://twitter.com/kelseyhightower)
 
 If you're running your production apps on Kubernetes, I'd recommend looking into Jenkins X. It provides a way to do CI/CD on the same environment, quickly iterate, and deliver business value &mdash; faster &mdash; to your customers.
 
@@ -742,11 +744,5 @@ To get an excellent overview and demo of Jenkins X, watch [James Strachan's](htt
 <div style="text-align: center">
 <iframe width="700" height="400" style="max-width: 100%" src="https://www.youtube.com/embed/53AtxQGXnMk" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
 </div>
-
-To learn more about Jenkins X and Kubernetes, check out the following resources:
-
-* [Kubernetes The Hard Way](https://github.com/kelseyhightower/kubernetes-the-hard-way) by [Kelsey Hightower](https://twitter.com/kelseyhightower)
-* [Introducing Jenkins X: a CI/CD solution for modern cloud applications on Kubernetes](https://jenkins.io/blog/2018/03/19/introducing-jenkins-x/)
-* [The Kubernetes Oligopoly and Jenkins X](https://www.cloudbees.com/blog/kubernetes-oligopoly-and-jenkins-x)
 
 If you have any questions, please add a comment below, hit [me up on Twitter](https://twitter.com/mraible), or post a question to our [Developer Forums](https://devforum.okta.com). To be notified of future blog posts and developer wisdom, you can follow [my whole team on Twitter](https://twitter.com/oktadev).
