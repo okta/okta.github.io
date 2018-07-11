@@ -43,10 +43,10 @@ Create a directory called `spring-boot-react-example`, with a `server` directory
 
 Open the “server" project in your favorite IDE and run `DemoApplication` or start it from the command line using `./mvnw spring-boot:run`.
 
-Create a `com.example.demo.beer` package and a `Beer.java` file in it. This class will be the entity that holds your data.
+Create a `com.okta.developer.demo.beer` package and a `Beer.java` file in it. This class will be the entity that holds your data.
 
 ```java
-package com.example.demo.beer;
+package com.okta.developer.demo.beer;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -95,7 +95,7 @@ public class Beer {
 Add a `BeerRepository` class that leverages Spring Data to do CRUD on this entity.
 
 ```java
-package com.example.demo.beer;
+package com.okta.developer.demo.beer;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
@@ -106,7 +106,7 @@ interface BeerRepository extends JpaRepository<Beer, Long> {
 Add a `BeerCommandLineRunner` that uses this repository and creates a default set of data.
 
 ```java
-package com.example.demo.beer;
+package com.okta.developer.demo.beer;
 
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
@@ -151,7 +151,7 @@ interface BeerRepository extends JpaRepository<Beer, Long> {
 Add a `BeerController` class to create an endpoint that filters out less-than-great beers.
 
 ```java
-package com.example.demo.beer;
+package com.okta.developer.demo.beer;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -188,7 +188,7 @@ Re-build your application and navigate to `http://localhost:8080/good-beers`. Yo
 
 {% img blog/react-spring-boot/good-beers-json.png alt:"Good Beers JSON" width:"600" %}{: .center-image }
 
-You should also see this same result in your terminal window when using HTTPie.
+You should also see this same result in your terminal wstart.spring.io.pngindow when using HTTPie.
 
 ```bash
 http localhost:8080/good-beers
@@ -289,6 +289,24 @@ render() {
 }
 ```
 
+At this point, you'll likely get a message in your browser that says something like the following:
+
+```
+/Users/mraible/spring-boot-react-example/client/src/App.tsx
+(6,11): interface name must start with a capitalized I
+```
+
+As a Java developer, I'm not a fan of prefixing interfaces with "I". There's also a few other tslint warnings I don't agree with. To complete this tutorial with a set of sensible rules, modify `client/tslint.json` to have the following rules:
+
+```json
+"rules": {
+  "interface-name": [true, "never-prefix"],
+  "no-empty-interface": false,
+  "array-type": [true, "generic"],
+  "member-access": [true, "no-public"]
+}
+```
+
 If you look at `http://localhost:3000` in your browser, you'll see a "Loading..." message. If you look in your browser's console, you'll likely see an issue about CORS.
 
 <pre style="color: red">
@@ -299,7 +317,7 @@ To fix this issue, you’ll need to configure Spring Boot to allow cross-domain 
 
 ### Configure CORS for Spring Boot
 
-In the server project, open `server/src/main/java/com/example/demo/beer/BeerController.java` and add a `@CrossOrigin` annotation to enable cross-origin resource sharing (CORS) from the client (`http://localhost:3000`).
+In the server project, open `server/src/main/java/.../demo/beer/BeerController.java` and add a `@CrossOrigin` annotation to enable cross-origin resource sharing (CORS) from the client (`http://localhost:3000`).
 
 ```java
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -311,7 +329,7 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 
 After making these changes, restart the server, refresh your browser, and you should be able to see a list of beers from your Spring Boot API.
 
-{% img blog/react-spring-boot/react-beer-list.png alt:"Beer List in Angular" width:"800" %}{: .center-image }
+{% img blog/react-spring-boot/react-beer-list.png alt:"Beer List in React" width:"800" %}{: .center-image }
 
 ### Create a BeerList Component
 
@@ -382,7 +400,7 @@ import * as React from 'react';
 import './App.css';
 import BeerList from './BeerList';
 
-const logo = require('./logo.svg');
+import logo from './logo.svg';
 
 class App extends React.Component<{}, any> {
   render() {
@@ -506,19 +524,17 @@ You may serve it with a static server:
   serve -s build
 ```
 
-Run the suggested commands, and you should be able to open your browser to view `http://localhost:5000`. Your browser will likely show a CORS error in its console, so crack open `BeerController.java` again and adjust its allowed origins to permit port 5000.
+Install serve and run `serve -s build -p 3000`. You should be able to open your browser to view `http://localhost:3000`. 
 
-```java
-@CrossOrigin(origins = {"http://localhost:3000", "http://localhost:5000"})
-```
-
-Restart your server, and `http://localhost:5000` should load with beer names and images.
-
-I ran a [Lighthouse](https://developers.google.com/web/tools/lighthouse/) audit in Chrome and found that this app only scores a 73/100 at this point.
+I ran a [Lighthouse](https://developers.google.com/web/tools/lighthouse/) audit in Chrome and found that this app only scores a 64/100 at this point.
 
 {% img blog/react-spring-boot/lighthouse-first.png alt:"Lighthouse Score from first audit" width:"800" %}{: .center-image }
 
-You'll notice in the screenshot above that "Manifest does not have icons at least 512px". This one sounds easy enough to fix. You can download a 512-pixel free beer icon from [this page](https://www.flaticon.com/free-icon/beer_168557#term=beer&page=1&position=29). 
+In the PWA section of the report, it'll tell you that you need at least 192px and 512px icons.
+
+{% img blog/react-spring-boot/pwa-64.png alt:"Progressive Web App Score: 64" width:"800" %}{: .center-image }
+
+You can download a 512-pixel free beer icon from [this page](https://www.flaticon.com/free-icon/beer_168557#term=beer&page=1&position=29). 
 
 **NOTE:** This icon is made by <a href="http://www.freepik.com" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a>. It's licensed by <a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0" target="_blank">CC 3.0 BY</a>.
 
@@ -557,7 +573,7 @@ To read the scripts I used to deploy everything, see [`cloudfoundry.sh`](https:/
 
 ## Add Authentication with Okta
 
-You might be thinking, "this is pretty cool, it's easy to see why people fall in love with React." There's another tool you might fall in love with after you've tried it: Authentication with Okta! Why Okta? Because you can get [7,000 active monthly users for free](https://developer.okta.com/pricing/)! It's worth a try, especially when you see how easy it is to add auth to Spring Boot and React with Okta.
+You might be thinking, "this is pretty cool, it's easy to see why people fall in love with React." There's another tool you might fall in love with after you've tried it: Authentication with Okta! Why Okta? Because you can get [1,000 active monthly users for free](https://developer.okta.com/pricing/)! It's worth a try, especially when you see how easy it is to add auth to Spring Boot and React with Okta.
 
 ### Okta Spring Boot Starter
 
@@ -567,7 +583,7 @@ To lock down the backend, you can use [Okta's Spring Boot Starter](https://githu
 <dependency>
     <groupId>com.okta.spring</groupId>
     <artifactId>okta-spring-boot-starter</artifactId>
-    <version>0.4.0</version>
+    <version>0.6.0</version>
 </dependency>
 ```
 
@@ -677,7 +693,7 @@ import BeerList from './BeerList';
 import { withAuth } from '@okta/okta-react';
 import { Auth } from './App';
 
-const logo = require('./logo.svg');
+import logo from './logo.svg';
 
 interface HomeProps {
   auth: Auth;
@@ -817,7 +833,7 @@ When you click the button to log in, enter the email and password you used to cr
 This error happens because Spring's `@CrossOrigin` doesn't play well with Spring Security. To solve this problem, add a `simpleCorsFilter` bean to the body of `DemoApplication.java`.
 
 ```java
-package com.example.demo;
+package com.okta.developer.demo;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
