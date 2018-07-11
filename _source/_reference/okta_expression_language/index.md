@@ -164,6 +164,74 @@ Function  | Return Type | Example |
 
 For an example using group functions and for more information on using group functions for dynamic and static whitelists, see [Create an ID Token or Access Token Containing a Groups Claim](/docs/how-to/creating-token-with-groups-claim).
 
+##### Using Group Functions for Dynamic Group Whitelists
+Three Group functions help you use dynamic group whitelists:  `contains`, `startsWith`, and `endsWith`.
+
+These functions return all the groups that match the specified criteria. Use this function to get a list of groups that include the current user is as a member.
+
+You can use this function anywhere to get a list of groups of which the current user is a member, including both user groups and app groups that originate from sources outside Okta, such as from Active Directory and Workday. Additionally, you can use this combined, custom-formatted list for customizable claims into Access and ID Tokens that drive authorization flows. All three functions have the same parameters:
+
+| Parameter | Description | Nullable | Example Values |
+| :------------- | :-------------- | :---------- | :--------------------- |
+| app | Application type or App ID | FALSE | `"OKTA"`, `"0oa13c5hnZFqZsoS00g4"`, `"active_directory"` |
+| pattern | Search term | FALSE | `"Eastern-Region"`, `"Eastern"`, `"-Region"` |
+| limit | Maximum number of groups returned. Must be a valid EL expression and evaluate to a value from 1 to 100. | FALSE | `1`, `50`, `100` |
+
+To use these functions to create a token using a dynamic group whitelist, create a Groups claim on an app:
+
+1. In the administrator UI, navigate to the Sign On tab of the client application you are configuring, and click  **Edit** in the Open ID Connect ID Token section.
+
+2. In **Groups claim type**, choose **Expression**.
+
+3. In **Group claims filter**, leave the default name **groups** or change it if you wish.
+
+4. In Groups claim expression, add one of the three functions with the criteria for your dynamic group whitelist:
+
+    `Groups.startsWith("active_directory", "myGroup", 10)`
+
+  Notes:
+  * The syntax for these three functions is different from `getFilteredGroups`.
+  * You can also create a claim directly in a Custom Authorization Server instead of on the OpenID Connect or OAuth 2.0 app.
+
+
+
+##### Using Groups Functions for Static Group Whitelists
+
+The `getFilteredGroups` group function helps you use a static group whitelist.
+
+`getFilteredGroups` returns all groups contained in a specified list, the whitelist, of which the user is a member. The groups are returned in a format specified by the `group_expression` parameter. You must specify the maximum number of groups to return. The format of this EL function is `getFilteredGroups( whitelist, group_expression, limit)`.
+
+You can use this function anywhere to get a list of groups of which the current user is a member, including both user groups and app groups that originate from sources outside Okta, such as from Active Directory and Workday. Additionally, you can use this combined, custom-formatted list for customizable claims into Access and ID Tokens that drive authorization flows.
+
+This function takes Okta EL expressions for all parameters that evaluate to the correct data type. With these expressions you can create complex definitions for the whitelist, the group format, and for the number of groups to return that can include `if` logic and customized formatting.
+
+| Parameter        | Description                                                                                                                            | Nullable |
+|:-----------------|:---------------------------------------------------------------------------------------------------------------------------------------|:---------|
+| whitelist        | Valid Okta EL expression that evaluates to a string array of group ids                                                                 | FALSE    |
+| group_expression | Valid Okta EL expression that evaluates to a string to use to evaluate the group. This string must also be a valid Okta EL expression. | FALSE    |
+| limit            | Valid Okta EL expression that evaluates to an integer between 1 and 100, inclusive to indicate the maximum number of groups to return  | FALSE    |
+
+All parameters must be valid Okta EL expressions that evaluate as described above. Okta EL expressions can be comprised of strings, integers, arrays, etc.
+
+The string produced by the `group_expression` parameter usually contains attributes and objects from the [Groups API](/docs/api/resources/groups), although it is not limited to those attributes and objects. Attributes and objects listed in the [Group Attributes](/docs/api/resources/groups#group-attributes) section of the Groups API can be any of the following: `id`, `status`, `name`, `description`, `objectClass`, and the `profile` object that contains the `groupType`, `samAccountName`, `objectSid`, `groupScope`, `windowsDomainQualifiedName`, `dn`, and `externalID` attributes for groups that come from apps such as Active Directory.
+
+The `whitelist` parameter must evaluate to a list of group ids that is returned from the [Groups API](/docs/api/resources/groups). If the user is not member of a group in the whitelist, the group is ignored.
+
+**Parameter Examples**
+
+* whitelist
+  * Array: `{"00gn335BVurvavwEEL0g3", "00gnfg5BVurvavAAEL0g3"}`<br />
+  * Array variable: `app.profile.groups.whitelist`
+* group_expression
+  * Attribute name: `"group.id"`
+  * Okta EL string containing an if condition: `"(group.objectClass[0] == 'okta:windows_security_principal') ? 'AD: ' + group.profile.windowsDomainQualifiedName : 'Okta: ' + group.name"`
+      If *okta:windows_security_principal* is true for
+      a group, the function returns the `windowsDomainQualifiedName` prefixed with `AD:`; otherwise, the function returns the group name prefixed with `Okta:`.
+* limit
+   * Integer between 1 and 100, inclusive; for example: `50`.
+   * Okta EL expression containing a condition that evaluates to an integer: `app.profile.maxLimit < 100 ? app.profile.maxLimit : 100`.
+    If the maximum group limit in the profile is less than 100, return that number of groups; otherwise, return a maximum of 100 groups. If there are more groups returned than the specified limit, an error is returned.
+
 ### Linked Object Function
 
 {% api_lifecycle ea %}
