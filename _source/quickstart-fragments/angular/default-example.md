@@ -18,8 +18,7 @@ At the end of the Angular instructions you can choose your server type to learn 
 
 ## Prerequisites
 
-* If you do not already have a **Developer Edition Account**, you can create one at [https://developer.okta.com/signup/](https://developer.okta.com/signup/).
-* If you don't have an Angular app, or are new to Angular, please start with [Angular's documentation](https://angular.io/guide/quickstart). It will walk you through the creation of an Angular app, creating routes, and other application development essentials.
+If you don't have an Angular app, or are new to Angular, please start with [Angular's documentation](https://angular.io/guide/quickstart). It will walk you through the creation of an Angular app, creating routes, and other application development essentials.
 
 ## Add an OpenID Connect Client in Okta
 
