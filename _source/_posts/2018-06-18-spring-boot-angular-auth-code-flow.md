@@ -482,6 +482,17 @@ Take note of the clientId and client secret values as you'll need these to confi
 
 You need to add a `roles` claim to your ID token, if you want your groups in Okta to be translated to Spring Security authorities. In your Okta developer console, navigate to **API** > **Authorization Servers**, and  click the default one. Click the **Claims** tab and **Add Claim**. Name it "groups" and include it in the ID token. Set the value type to "Groups" and set the filter to be a Regex of `.*`.
 
+You’ll need to add a `holdings` attribute to your organization's user profiles to store your cryptocurrency holdings in Okta. Navigate to **Users** > **Profile Editor**. Click on **Profile** for the first profile in the table. You can identify it by its Okta logo. Click **Add Attribute** and use the following values:
+
+* Display name: `Holdings`
+* Variable name: `holdings`
+* Description: `Cryptocurrency Holdings`
+
+For the Okta Java SDK to talk to Okta's API (to store your cryptocurrency holdings), you'll need to create an API token. 
+
+2. Navigate to **API** > **Tokens** and click **Create Token**
+3. Give your token a name, then set its value as an `OKTA_CLIENT_TOKEN` environment variable.
+
 ## Adjust Java Code to Resolve Principal
 
 I mentioned earlier that there's [a bug](https://github.com/okta/okta-spring-boot/issues/66) in Okta's Spring Boot Starter. The problem is that it doesn't resolve `java.security.Principal` the same way does for Spring Boot 1.5.x. Until our team can squash this one, there’s a simple fix you can deploy: Just update `HoldingsController.java` to extract the `sub` to call Okta's API. Add a `getUser(Principal principal)` method to this class.

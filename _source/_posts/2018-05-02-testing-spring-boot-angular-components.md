@@ -1502,6 +1502,7 @@ You can [configure Codecov](https://github.com/apps/codecov) to report on your G
 See [okta-ionic-crypto-java-sdk-example#6](https://github.com/oktadeveloper/okta-ionic-crypto-java-sdk-example/pull/6) for a pull request that adds code coverage.
 
 ## Learn More about Testing in Spring Boot and TypeScript Apps
+
 We hope you've enjoyed this hitchhiker's guide to testing Java APIs and Ionic/Angular applications. It's an excellent feeling when your codebase has high test coverage, and you're able to refactor by tweaking your code and adjusting your tests.
 
 You can find the code used in this guide on GitHub: https://github.com/oktadeveloper/okta-ionic-crypto-java-sdk-example.
@@ -1525,6 +1526,8 @@ Speaking of complicated builds, JHipster's [main build](https://github.com/jhips
 If you're looking for a Spring Boot + Angular (or React) example app with lots of tests, look no further than JHipster. It even has a [continuous integration sub-generator](https://www.jhipster.tech/setting-up-ci/) that supports Jenkins, Travis, CircleCI, and GitLab CI/CD.
 
 If you'd like to learn more about topics like Spring Boot, Angular, React, and JHipster, give us a follow [@oktadev](https://twitter.com/oktadev). If you have any questions about this post, please leave a comment below.
+
+**Update:** To see how to change this app to use OAuth 2.0's authorization code flow and package as a JAR, see [Deploy Your Secure Spring Boot + Angular PWA as a Single Artifact](/blog/2018/06/18/spring-boot-angular-auth-code-flow).
 
 **Changelog:**
 
