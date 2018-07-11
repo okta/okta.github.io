@@ -19,7 +19,7 @@ This is great for developers because it provides a single way to package applica
 
 ## High-Performance Development with CI/CD, Kubernetes, and Jenkins X
 
-High performing teams are almost always a requirement for success in technology and continuous integration, continuous deployment (CI/CD), small iterations, plus fast feedback are the building blocks. CI/CD can be difficult to set up for your cloud native app. By automating everything, developers can spend their precious time delivering actual business value.
+High performing teams are almost always a requirement for success in technology, and continuous integration, continuous deployment (CI/CD), small iterations, plus fast feedback are the building blocks. CI/CD can be difficult to set up for your cloud native app. By automating everything, developers can spend their precious time delivering actual business value.
 
 How do you become a high performing team using containers, continuous delivery, and Kubernetes? This is where [Jenkins X](https://jenkins-x.io) comes in.
 
@@ -570,11 +570,11 @@ dir ('./holdings-api') {
 }
 ```
 
-Check in and push your changes, and your app should be updated with a redirect URI for `http://{yourPreviewURL}/login`. You'll need to manually add a logout redirect URI for `http://{yourPreviewURL}` since this is [not currently supported by Okta's Java SDK](https://github.com/okta/openapi/issues/132).
+Commit and push your changes, and your app should be updated with a redirect URI for `http://{yourPreviewURL}/login`. You'll need to manually add a logout redirect URI for `http://{yourPreviewURL}` since this is [not currently supported by Okta's Java SDK](https://github.com/okta/openapi/issues/132).
 
 {% img blog/spring-boot-jenkins-x/okta-settings-with-redirect-uris.png alt:"Okta app with URI settings" width:"700" %}{: .center-image }
 
-To promote your passing pull request to a staging environment, merge it and the master branch will be promoted to staging. Unfortunately, you won't be able to log in. That's because there's no process that registers the staging site's redirect URIs with your Okta app. If you add the URIs manually, everything should work.
+To promote your passing pull request to a staging environment, merge it, and the master branch will be pushed to staging. Unfortunately, you won't be able to log in. That's because no process registers the staging site's redirect URIs with your Okta app. If you add the URIs manually, everything should work.
 
 ### Running Protractor Tests in Jenkins X
 
@@ -670,7 +670,7 @@ When I first tried this in Jenkins X, I discovered that the `jenkins-maven` agen
 [21:51:08] E/launcher - unknown error: DevToolsActivePort file doesn't exist
 ```
 
-Google led me to find this error is caused by a [Chrome on Linux issue](https://github.com/GoogleChrome/puppeteer/issues/1834). I figured out the workaround is to specify `--disable-dev-shm-usage` in `chromeOptions` for Protractor. I also added some additional flags that seem to be recommended. I particularly like `--headless` when running locally so a browser doesn't pop up and get in my way. If I want to see the process happening in real-time, I can quickly remove the option.
+This error is caused by a [Chrome on Linux issue](https://github.com/GoogleChrome/puppeteer/issues/1834). I figured out the workaround is to specify `--disable-dev-shm-usage` in `chromeOptions` for Protractor. I also added some additional flags that seem to be recommended. I particularly like `--headless` when running locally, so a browser doesn't pop up and get in my way. If I want to see the process happening in real-time, I can quickly remove the option.
 
 If you'd like to see your project's Protractor tests running on Jenkins X, you'll need to modify `crypto-pwa/test/protractor.conf.js` to specify the following `chromeOptions`:
 
