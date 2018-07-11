@@ -1,12 +1,21 @@
-Build a Health Tracking App with React, GraphQL, and User Authentication
+---
+layout: blog_post
+title: "Build a Health Tracking App with React, GraphQL, and User Authentication"
+author: mraible
+description: "This article shows you how to build a health tracking app with React, GraphQL, TypeORM, and User Authentication."
+tags: [health, react, graphql, typeorm, javascript, typescript, authentication]
+tweets:
+- "Want to see how to integrate @reactjs with @graphql? This tutorial is for you!"
+- "In this tutorial, you'll learn how to integrate @reactjs with @graphql and #TypeORM. Learn a bunch today!"
+---
 
-I think you’ll like the story I’m about to tell you. I’m going to show you how to build a GraphQL API with Vesper framework, TypeORM, and MySQL. These are Node frameworks, and I’ll use TypeScript for the language. For the client, I’ll use React, reactstrap, and Apollo Client to talk to the API. Once you have this environment working, and you add secure user authentication, I believe you’ll love the experience! 
+I think you'll like the story I'm about to tell you. I'm going to show you how to build a GraphQL API with Vesper framework, TypeORM, and MySQL. These are Node frameworks, and I'll use TypeScript for the language. For the client, I'll use React, reactstrap, and Apollo Client to talk to the API. Once you have this environment working, and you add secure user authentication, I believe you'll love the experience! 
 
-Why focus on secure authentication? Well, aside from the fact that I work for Okta, I think we can all agree that pretty much every application depends upon a secure identity management system. For most developers who are building React apps, there’s a decision to be made between rolling your own authentication/authorization or plugging in a service like Okta. Before I dive into building a React app, I want to tell you a bit about Okta, and why I think it’s an excellent solution for all JavaScript developers.
+Why focus on secure authentication? Well, aside from the fact that I work for Okta, I think we can all agree that pretty much every application depends upon a secure identity management system. For most developers who are building React apps, there's a decision to be made between rolling your own authentication/authorization or plugging in a service like Okta. Before I dive into building a React app, I want to tell you a bit about Okta, and why I think it's an excellent solution for all JavaScript developers.
 
 ## What is Okta?
 
-In short, we make [identity management](https://developer.okta.com/product/user-management/) a lot easier, more secure, and more scalable than what you’re used to. Okta is a cloud service that allows developers to create, edit, and securely store user accounts and user account data, and connect them with one or multiple applications. Our API enables you to:
+In short, we make [identity management](https://developer.okta.com/product/user-management/) a lot easier, more secure, and more scalable than what you're used to. Okta is a cloud service that allows developers to create, edit, and securely store user accounts and user account data, and connect them with one or multiple applications. Our API enables you to:
 
 * [Authenticate](https://developer.okta.com/product/authentication/) and [authorize](https://developer.okta.com/product/authorization/) your users
 * Store data about your users
@@ -14,7 +23,7 @@ In short, we make [identity management](https://developer.okta.com/product/user-
 * Secure your application with [multi-factor authentication](https://developer.okta.com/use_cases/mfa/)
 * And much more! Check out our [product documentation](https://developer.okta.com/documentation/)
 
-Are you sold? [Register for a forever-free developer account](https://developer.okta.com/signup/), and when you’re done, come on back so we can learn more about building secure apps in React!
+Are you sold? [Register for a forever-free developer account](https://developer.okta.com/signup/), and when you're done, come on back so we can learn more about building secure apps in React!
 
 ## Why a Health Tracking App?
 
@@ -31,23 +40,25 @@ I was surprised to find I got eight points the first week I used this system. Du
 My goal is to earn 15 points per week. I find that if I get more, I'll likely lose weight and have good blood pressure. If I get fewer than 15, I risk getting sick. I've been tracking my health like this since September 2014. I've lost weight, and my blood pressure has returned to and maintained normal levels. I haven't had good blood pressure since my early 20s, so this has been a life changer for me.
 
 I built [21-Points Health](https://www.21-points.com/#/about) to track my health. I figured it'd be fun to recreate a small slice of that app, just tracking daily points.
-## Building an API with TypeORM, GraphQL, and Vesper
-[TypeORM](http://typeorm.io/) is a nifty ORM (object-relational mapper) framework that can run in most JavaScript platforms, including Node, a browser, Cordova, React Native, and Electron. It’s heavily influenced by Hibernate, Doctrine, and Entity Framework. Install TypeORM globally to begin creating your API.
 
-```
+## Building an API with TypeORM, GraphQL, and Vesper
+
+[TypeORM](http://typeorm.io/) is a nifty ORM (object-relational mapper) framework that can run in most JavaScript platforms, including Node, a browser, Cordova, React Native, and Electron. It's heavily influenced by Hibernate, Doctrine, and Entity Framework. Install TypeORM globally to begin creating your API.
+
+```bash
 npm i -g typeorm@0.2.7
 ```
 
 Create a directory to hold the React client and GraphQL API. 
 
-```
+```bash
 mkdir health-tracker
 cd health-tracker
 ```
 
 Create a new project with MySQL using the following command:
 
-```
+```bash
 typeorm init --name graphql-api --database mysql
 ```
 
@@ -64,11 +75,12 @@ Edit `graphql-api/ormconfig.json` to customize the username, password, and datab
 ```
 
 **TIP:** To see the queries being executed against MySQL, change the "logging" value in this file to be "all". Many [other logging options](https://github.com/typeorm/typeorm/blob/master/docs/logging.md) are available too.
+
 ### Install MySQL
 
-Install MySQL if you don’t already have it installed. On Ubuntu, you can use `sudo apt-get install mysql-server`. On macOS, you can use Homebrew and `brew install mysql`. For Windows, you can use the [MySQL Installer](https://dev.mysql.com/downloads/installer/). 
+Install MySQL if you don't already have it installed. On Ubuntu, you can use `sudo apt-get install mysql-server`. On macOS, you can use Homebrew and `brew install mysql`. For Windows, you can use the [MySQL Installer](https://dev.mysql.com/downloads/installer/). 
 
-Once you’ve got MySQL installed and configured with a root password, login and create a `healthpoints` database.
+Once you've got MySQL installed and configured with a root password, login and create a `healthpoints` database.
 
 ```bash
 mysql -u root -p
@@ -77,9 +89,9 @@ use healthpoints;
 grant all privileges on *.* to 'health'@'localhost' identified by 'points';
 ```
 
-Navigate to your `graphql-api` project in a terminal window, install the project’s dependencies, then start it to ensure you can connect to MySQL.
+Navigate to your `graphql-api` project in a terminal window, install the project's dependencies, then start it to ensure you can connect to MySQL.
 
-```
+```bash
 cd graphql-api
 npm i
 npm start
@@ -87,7 +99,7 @@ npm start
 
 You should see the following output:
 
-```
+```bash
 Inserting a new user into the database...
 Saved a new user with id: 1
 Loading users from the database...
@@ -99,7 +111,7 @@ Here you can setup and run express/koa/any other framework.
 
 [Vesper](http://vesper-framework.com/) is a Node framework that integrates TypeORM and GraphQL. To install it, use good ol' npm.
 
-```
+```bash
 npm i vesper@0.1.9
 ```
 
@@ -107,7 +119,7 @@ Now it's time to create some GraphQL models (that define what your data looks li
 
 Create `graphql-api/src/schema/model/Points.graphql`:
 
-```
+```graphql
 type Points {
   id: Int
   date: Date
@@ -121,7 +133,7 @@ type Points {
 
 Create `graphql-api/src/schema/model/User.graphql`:
 
-```
+```graphql
 type User {
   id: String
   firstName: String
@@ -132,7 +144,7 @@ type User {
 
 Next, create a `graphql-api/src/schema/controller/PointsController.graphql` with queries and mutations:
 
-```
+```graphql
 type Query {
   points: [Points]
   pointsGet(id: Int): Points
@@ -305,7 +317,7 @@ query {
 
 You might notice that the date returned from `pointsSave` and the `points` query is in a format the might be difficult for a JavaScript client to understand. You can fix that, install [graphql-iso-date](https://www.npmjs.com/package/graphql-iso-date). 
 
-```
+```bash
 npm i graphql-iso-date@3.5.0
 ```
 
@@ -457,16 +469,18 @@ export default App;
 ```
 
 You've built a GraphQL API and a React UI that talks to it - excellent work! However, there's still more to do. In the next sections, I'll show you how to add authentication to React, verify JWTs with Vesper, and add CRUD functionality to the UI. CRUD functionality already exists in the API thanks to the mutations you wrote earlier.
+
 ## Add Authentication for React with OpenID Connect
+
 You'll need to configure React to use Okta for authentication. You'll need to create an OIDC app in Okta for that.
 
-Log in to your Okta Developer account (or [sign up](https://developer.okta.com/signup/) if you don’t have an account) and navigate to **Applications** > **Add Application**. Click **Single-Page App**, click **Next**, and give the app a name you’ll remember. Change all instances of `localhost:8080` to `localhost:3000` and click **Done**. Your settings should be similar to the screenshot below.
+Log in to your Okta Developer account (or [sign up](https://developer.okta.com/signup/) if you don't have an account) and navigate to **Applications** > **Add Application**. Click **Single-Page App**, click **Next**, and give the app a name you'll remember. Change all instances of `localhost:8080` to `localhost:3000` and click **Done**. Your settings should be similar to the screenshot below.
 
-{% img blog/react-graphql-api/oidc-app-settings.png alt:"OIDC App Settings" width:"800" %}{: .center-image }
+{% img blog/react-graphql-api/oidc-app-settings.png alt:"OIDC App Settings" width:"700" %}{: .center-image }
 
 Okta's React SDK allows you to integrate OIDC into a React application. To install, run the following commands:
 
-```
+```bash
 npm i @okta/okta-react@1.0.2 react-router-dom@4.2.2
 ```
 
@@ -595,7 +609,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 
 You might notice there's a `<AppNavbar/>` in the `Home` component's `render()` method. Create `src/AppNavbar.js` so you can use a common header between components.
 
-```
+```jsx
 import React, { Component } from 'react';
 import { Collapse, Nav, Navbar, NavbarBrand, NavbarToggler, NavItem, NavLink } from 'reactstrap';
 import { Link } from 'react-router-dom';
@@ -641,6 +655,7 @@ npm i @okta/okta-signin-widget@2.9.0
 
 Create `src/Login.js` and add the following code to it.
 
+{% raw %}
 ```jsx
 import React, { Component } from 'react';
 import { Redirect } from 'react-router-dom';
@@ -690,6 +705,7 @@ export default withAuth(class Login extends Component {
   }
 });
 ```
+{% endraw %}
 
 The `Login` component has a reference to `OktaSignInWidget`. Create `src/OktaSignInWidget.js`:
 
@@ -722,6 +738,7 @@ export default class OktaSignInWidget extends Component {
 
 Create `src/Points.js` to render the list of points from your API.
 
+{% raw %}
 ```jsx
 import React, { Component } from 'react';
 import { ApolloClient } from 'apollo-client';
@@ -780,7 +797,6 @@ export default withAuth(class Points extends Component {
   }
 
   componentDidMount() {
-
     const authLink = setContext(async (_, {headers}) => {
       const token = await this.props.auth.getAccessToken();
       const user = await this.props.auth.getUser();
@@ -862,6 +878,7 @@ export default withAuth(class Points extends Component {
   }
 })
 ```
+{% endraw %}
 
 This code starts with `refresh()` and `remove()` methods, which I'll get to in a moment. The important part happens in `componentDidMount()`, where the access token is added in an `Authorization` header, and the user's information is stuffed in an `x-forwarded-user` header. An `ApolloClient` is created with this information, a cache is added, and the `connectToDevTools` flag is turned on. This can be useful for debugging with [Apollo Client Developer Tools](https://github.com/apollographql/apollo-client-devtools). 
 
@@ -898,7 +915,7 @@ npm apollo-link-context@1.0.8 apollo-link-http@1.5.4
 
 In the JSX of the page, there is a delete button that calls the `remove()` method in `Points`. There's also '<PointsModal/>` component. This is referenced for each item, as well as at the bottom. You'll notice both of these reference the `refresh()` method, which updates the list.
 
-```
+```html
 <PointsModal item={p} callback={this.refresh}/>
 <PointsModal callback={this.refresh}/>
 ```
@@ -927,7 +944,6 @@ export default withAuth(class PointsModal extends Component {
     alcohol: 1,
     notes: ''
   };
-
 
   constructor(props) {
     super(props);
@@ -1099,7 +1115,7 @@ Your React frontend is secured, but your API is still wide open. Let's fix that.
 
 Navigate to your `graphql-api` project in a terminal window and install Okta's JWT Verifier. 
 
-```
+```bash
 npm i @okta/jwt-verifier@0.0.12
 ```
 
@@ -1221,10 +1237,10 @@ This article showed you how to build a secure React app with GraphQL, TypeORM, a
 
 At Okta, we care about making authentication with React and Node easy to implement. We have several blog posts on the topic, and documentation too! I encourage you to check out the following links:
 
-* [Build a Basic CRUD App with Node and React](/blog/2018/07/10/build-a-basic-crud-app-with-node-and-react)
-* [Build a React Application with User Authentication in 15 Minutes](/blog/2017/03/30/react-okta-sign-in-widget)
-* [Build a React Native App and Authenticate with OAuth 2.0](/blog/2018/03/16/build-react-native-authentication-oauth-2)
+* [Build User Registration with Node, React, and Okta](https://scotch.io/tutorials/add-user-registration-to-your-site-with-node-react-and-okta)
+* [Build a React Application with User Authentication in 15 Minutes](https://developer.okta.com/blog/2017/03/30/react-okta-sign-in-widget)
+* [Build a React Native App and Authenticate with OAuth 2.0](https://scotch.io/tutorials/build-a-react-native-app-and-authenticate-with-oauth-20)
 * [Add Okta Authentication to Your React app](https://developer.okta.com/code/react/okta_react)
-* [Build a Basic CRUD App with Vue.js and Node](/blog/2018/02/15/build-crud-app-vuejs-node)
+* [Build a Basic CRUD App with Vue.js and Node](https://developer.okta.com/blog/2018/02/15/build-crud-app-vuejs-node)
 
 I hope you have an excellent experience building apps with React and GraphQL. If you have any questions, please [hit me up on Twitter](https://twitter.com/mraible) or my whole kick-ass team on [@oktadev](https://twitter.com/oktadev). Our DMs are wide open! :)
