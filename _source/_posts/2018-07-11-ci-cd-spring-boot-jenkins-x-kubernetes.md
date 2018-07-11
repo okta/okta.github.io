@@ -5,15 +5,15 @@ author: mraible
 description: "This post shows you how to implement continuous integration and deployment (CI/CD) with Jenkins X and Kubernetes on Google Cloud."
 tags: [spring-boot, jenkins x, kubernetes, angular, pwa, ionic, okta java sdk]
 tweets:
-- ""
-- ""
+- "Are you running your apps in production with @kubernetesio? If so, you can automate your CI / CD with @jenkinsxio and go even faster!"
+- "Wanna try something new and cool? @jenkinsxio is a way to do CI / CD on Kubernetes with auto-deployment to staging environments. It's pretty slick!"
 ---
 
 A lot has happened in the last five years of software development. What it means to build, deploy, and orchestrate software has changed drastically. There's been a move from hosting software on-premise to public cloud and shift from VMs to containers. Containers are cheaper to run than VMs because they require fewer resources and run as single processes. Moving to containers has reduced costs, but created a problem of how to run containers at scale.
 
-[Kubernetes](https://kubernetes.io/) was first open-sourced on June 6th, 2014. Google had been using containers for years and used a tool called Borg to manage containers at scale. Kubernetes is the open source version of Borg and has become the de facto standard in the last four years. 
+[Kubernetes](https://kubernetes.io/) was first open-sourced on June 6th, 2014. Google had been using containers for years and used a tool called Borg to manage containers at scale. Kubernetes is the open source version of Borg and has become the de facto standard in the last four years.
 
-It's journey to becoming a standard was largely facilitated by all the big players jumping on board. Red Hat, IBM, Amazon, Microsoft, Oracle, and Pivotal -- every major public cloud provider has Kubernetes support. 
+It's journey to becoming a standard was largely facilitated by all the big players jumping on board. Red Hat, IBM, Amazon, Microsoft, Oracle, and Pivotal -- every major public cloud provider has Kubernetes support.
 
 This is great for developers because it provides a single way to package applications (in a Docker container) and deploy it on any Kubernetes cluster.
 
@@ -23,7 +23,7 @@ High performing teams are all the rage. Continuous integration, continuous deplo
 
 How do you become a high performing team using containers, continuous delivery, and Kubernetes? This is where [Jenkins X](https://jenkins-x.io) comes in.
 
-> "The idea of Jenkins X is to give all developers their own nevil seafaring butler that can help you sail the seas of continuous delivery." 
+> "The idea of Jenkins X is to give all developers their own nevil seafaring butler that can help you sail the seas of continuous delivery."
 > &mdash; [James Strachan](https://twitter.com/jstrachan)
 
 {% img blog/spring-boot-jenkins-x/jenkins-x.svg alt:"Jenkins X Logo" width:"300" %}{: .center-image }
@@ -36,18 +36,18 @@ Jenkins X automates the installation, configuration, and upgrading of Jenkins an
 
 ## Get Started with Jenkins X
 
-To get installed with Jenkins X, you first need to install the `jx` binary on your machine, or cloud provider. You can get $300 in credits for Google Cloud, so I decided to start there. 
+To get installed with Jenkins X, you first need to install the `jx` binary on your machine, or cloud provider. You can get $300 in credits for Google Cloud, so I decided to start there.
 
 ### Install on Google Cloud and Create Cluster
 
-Navigate to [cloud.google.com](https://cloud.google.com) and log in. If you don't have an account, sign up for a free trial. Go to the console (there's a link in the top right corner) and activate Google Cloud shell. Copy and paste the following command into the shell.
+Navigate to [cloud.google.com](https://cloud.google.com) and log in. If you don't have an account, sign up for a free trial. Go to the console (there's a link in the top right corner) and activate Google Cloud shell. Copy and paste the following commands into the shell.
 
 ```bash
-curl -L https://github.com/jenkins-x/jx/releases/download/v1.3.78/jx-linux-amd64.tar.gz | tar xzv 
+curl -L https://github.com/jenkins-x/jx/releases/download/v1.3.79/jx-linux-amd64.tar.gz | tar xzv
 sudo mv jx /usr/local/bin
 ```
 
-**NOTE:** Google Cloud shell [terminates any changes made outside your home directory after an hour](https://cloud.google.com/shell/docs/limitations#custom_installed_software_packages_and_persistence), so you might have to rerun the commands. The good news is they'll be in your history, so you only need to hit the up arrow and enter. You can also eliminate the `sudo mv` command above and add the following to your `.bashrc` instead.
+**NOTE:** Google Cloud Shell [terminates any changes made outside your home directory after an hour](https://cloud.google.com/shell/docs/limitations#custom_installed_software_packages_and_persistence), so you might have to rerun the commands. The good news is they'll be in your history, so you only need to hit the up arrow and enter. You can also eliminate the `sudo mv` command above and add the following to your `.bashrc` instead.
 
 ```bash
 export PATH=$PATH:.
@@ -59,23 +59,27 @@ Create a cluster on GKE (Google Kubernetes Engine) using the following command. 
 jx create cluster gke --skip-login
 ```
 
-Select `helm` if you're prompted to download it. You will be prompted to select a Google Cloud Zone. I'd suggest picking one close to your location. I chose `us-west1-a` since I live near Denver, Colorado. For Google Cloud Machine Type, I selected `n1-standard-4`, but the default `n-standard1-2` should work just fine. Use the defaults for the min (3) and max (5) number of nodes.
+Confirm you want to install `helm` if you're prompted to download it. You will be prompted to select a Google Cloud Zone. I'd suggest picking one close to your location. I chose `us-west1-a` since I live near Denver, Colorado. For Google Cloud Machine Type, I selected `n1-standard-2`, and used the defaults for the min (3) and max (5) number of nodes.
 
-For the GitHub username, select your own (e.g. `mraible`). I tried to use `oktadeveloper` (a GitHub organization), and I was unable to make it work. **NOTE:** GitHub integration will fail if you have two-factor authentication enabled on your account.
+For the GitHub name, type your own (e.g., `mraible`) and an email you have registered with GitHub (e.g., `matt.raible@okta.com`). I tried to use `oktadeveloper` (a GitHub organization), and I was unable to make it work. 
 
-When prompted to install an ingress controller, hit **Enter** for **Yes**. Hit **Enter** again to select the default domain. 
+**NOTE:** GitHub integration will fail if you have two-factor authentication enabled on your account. You'll need to disable it on GitHub if you want the process to complete successfully. :-/
+
+When prompted to install an ingress controller, hit **Enter** for **Yes**. Hit **Enter** again to select the default domain.
 
 You'll be prompted to create a GitHub API Token. Click on the [provided URL](https://github.com/settings/tokens/new?scopes=repo,read:user,read:org,user:email,write:repo_hook,delete_repo) and name it "Jenkins X". Copy and paste the token's value back into your console.
 
 _Grab a coffee, an adult beverage, or do some pushups while your install finishes. It can take several minutes._
 
-The last step will be to copy the API token from Jenkins to your console. Follow the provided instructions in your console.
+The next step will be to copy the API token from Jenkins to your console. Follow the provided instructions in your console. 
+
+When you're finished with that, run `jx console` and click on the link to log in to your Jenkins instance. Click on **Administration** and upgrade Jenkins, as well as all its plugins (Plugin Manager > scroll to the bottom and select all). If you fail to perform this step, you won't be able to navigate from your GitHub pull request to your Jenkins X CI process for it.
 
 ### Create a Spring Boot App
 
 When I first started using Jenkins X, I tried to import an existing project. Even though my app used Spring Boot, it didn't have a `pom.xml` in the root directory, so Jenkins X thought it was a Node.js app. For this reason, I suggest creating a blank Spring Boot app first to confirm Jenkins X is set up correctly.
 
-Run the following command from Cloud Shell:
+Create a bare-bones Spring Boot app from Cloud Shell:
 
 ```bash
 jx create spring -d web -d actuator
@@ -87,12 +91,14 @@ This command uses [Spring Initializr](https://start.spring.io), so you'll be pro
 |---|---|
 | Language | `java` |
 | Group | `com.okta.developer` |
-| Artifact | `okta-spring-boot-jenkinsx-example` |
+| Artifact | `okta-spring-boot-jx-example` |
+
+**TIP:** Picking a short name for your artifact name will save you pain. Jenkins X has a 53 character limit for release names and `oktadeveloper/okta-spring-boot-jenkinsx-example` will cause it to be exceeded by two characters.
 
 Select all the defaults for the git user name, initializing git, and the commit message. You can select an organization to use if you don't want to use your personal account. Run the following command to watch the CI/CD pipeline of your app.
 
 ```
-jx get activity -f okta-spring-boot-jenkinsx-example -w
+jx get activity -f okta-spring-boot-jx-example -w
 ```
 
 {% img blog/spring-boot-jenkins-x/jx-get-activity.png alt:"jx get activity" width:"800" %}{: .center-image }
@@ -102,24 +108,24 @@ Run `jx console`, click the resulting link, and navigate to your project if you'
 {% img blog/spring-boot-jenkins-x/jx-console.png alt:"jx console" width:"800" %}{: .center-image }
 
 This process will perform a few tasks:
- 
-1. Create a [release](https://github.com/oktadeveloper/okta-spring-boot-jenkinsx-example/releases/tag/v0.0.1) for your project.
-2. Create a [pull request](https://github.com/mraible/environment-scorpionthunder-staging/pull/1) for your staging environment project.
+
+1. Create a [release](https://github.com/oktadeveloper/okta-spring-boot-jx-example/releases/tag/v0.0.1) for your project.
+2. Create a [pull request](https://github.com/mraible/environment-marespring-staging/pull/1) for your staging environment project.
 3. Auto-deploy it to staging environment so you can see it in action.
 
 ```bash
 Merge status checks all passed so the promotion worked!
-Application is available at: http://okta-spring-boot-jenkinsx-example.jx-staging.35.230.111.241.nip.io
+Application is available at: http://okta-spring-boot-jx-example.jx-staging.35.230.106.169.nip.io
 ```
 
-**NOTE:** Since Spring Boot doesn't provide a welcome page by default, you will get a 404 when you open your staging URL.
+**NOTE:** Since Spring Boot doesn't provide a welcome page by default, you will get a 404 when you open the URL above.
 
 ### Deploy to Production
 
 By default, Jenkins X will only auto-deploy to staging. You can manually [promote from staging to production](http://jenkins-x.io/developing/promote/) using:
 
 ```bash
-jx promote okta-spring-boot-jenkinsx-example --version 0.0.1 --env production
+jx promote okta-spring-boot-jx-example --version 0.0.1 --env production
 ```
 
 You can change your production environment to use auto-deploy using [`jx edit environment`](https://jenkins-x.io/commands/jx_edit_environment/).
@@ -128,7 +134,7 @@ Now that you know how to use Jenkins X with a bare-bones Spring Boot app let's s
 
 ## Secure Your Spring Boot App and Add an Angular PWA
 
-Over the last several months, I've written a series of blog posts about building a PWA (progressive web app) with Ionic/Angular and Spring Boot. 
+Over the last several months, I've written a series of blog posts about building a PWA (progressive web app) with Ionic/Angular and Spring Boot.
 
 1. [Protect Your Cryptocurrency Wealth Tracking PWA with Okta](/blog/2018/01/18/cryptocurrency-pwa-secured-by-okta)
 2. [Use Okta (Instead of Local Storage) to Store Your User’s Data Securely](/blog/2018/01/23/replace-local-storage-with-okta-profile-attributes)
@@ -140,7 +146,7 @@ This is the final blog post in the series. I believe this is an excellent exampl
 Clone the Spring Boot project you just created from GitHub (make sure to change `{yourUsername}` in the URL):
 
 ```bash
-git clone https://github.com/{yourUsername}/okta-spring-boot-jenkinsx-example.git okta-jenkinsx
+git clone https://github.com/{yourUsername}/okta-spring-boot-jx-example.git okta-jenkinsx
 ```
 
 In an adjacent directory, clone the project created that has Spring Boot + Angular as a single artifact:
@@ -162,21 +168,21 @@ The result should be a directory structure with the following files:
 $ tree .
 .
 ├── charts
-│   ├── okta-spring-boot-jenkinsx-example
-│   │   ├── Chart.yaml
-│   │   ├── Makefile
-│   │   ├── README.md
-│   │   ├── templates
-│   │   │   ├── deployment.yaml
-│   │   │   ├── _helpers.tpl
-│   │   │   ├── NOTES.txt
-│   │   │   └── service.yaml
-│   │   └── values.yaml
-│   └── preview
-│       ├── Chart.yaml
-│       ├── Makefile
-│       ├── requirements.yaml
-│       └── values.yaml
+│   ├── okta-spring-boot-jenkinsx-example
+│   │   ├── Chart.yaml
+│   │   ├── Makefile
+│   │   ├── README.md
+│   │   ├── templates
+│   │   │   ├── deployment.yaml
+│   │   │   ├── _helpers.tpl
+│   │   │   ├── NOTES.txt
+│   │   │   └── service.yaml
+│   │   └── values.yaml
+│   └── preview
+│       ├── Chart.yaml
+│       ├── Makefile
+│       ├── requirements.yaml
+│       └── values.yaml
 ├── Dockerfile
 ├── Jenkinsfile
 └── skaffold.yaml
@@ -187,41 +193,43 @@ $ tree .
 Copy all the files from `spring-boot-angular` into `okta-jenkinsx`.
 
 ```bash
-cp -r spring-boot-angular/* okta-jenkinsx/.
+cp -r ../spring-boot-angular/* .
 ```
 
-When using Travis CI to test this app, I ran `npm install` as part of the process. With Jenkins X, it's easier to everything with one container (e.g. `maven` or `nodejs`), so add an execution to the frontend-maven-plugin (in `holdings-api/pom.xml`) to run `npm install`.
+When using Travis CI to test this app, I ran `npm install` as part of the process. With Jenkins X, it's easier to everything with one container (e.g. `maven` or `nodejs`), so add an execution to the frontend-maven-plugin (in `holdings-api/pom.xml`) to run `npm install` (hint: you need to add the execution with id=='npm install' to the existing pom.xml). 
+
+Now is a great time to open the `okta-jenkinsx` directory as a project in an IDE like IntelliJ IDEA, Eclipse, Netbeans, or VS Code! :)
 
 ```xml
 <plugin>
-    <groupId>com.github.eirslett</groupId>
-    <artifactId>frontend-maven-plugin</artifactId>
-    <version>${frontend-maven-plugin.version}</version>
-    <configuration>
-        <workingDirectory>../crypto-pwa</workingDirectory>
-    </configuration>
-    <executions>
-        <execution>
-            <id>install node and npm</id>
-            <goals>
-                <goal>install-node-and-npm</goal>
-            </goals>
-            <configuration>
-                <nodeVersion>${node.version}</nodeVersion>
-            </configuration>
-        </execution>
-        <execution>
-            <id>npm install</id>
-            <goals>
-                <goal>npm</goal>
-            </goals>
-            <phase>generate-resources</phase>
-            <configuration>
-                <arguments>install --unsafe-perm</arguments>
-            </configuration>
-        </execution>
-        ...
-    </executions>
+   <groupId>com.github.eirslett</groupId>
+   <artifactId>frontend-maven-plugin</artifactId>
+   <version>${frontend-maven-plugin.version}</version>
+   <configuration>
+       <workingDirectory>../crypto-pwa</workingDirectory>
+   </configuration>
+   <executions>
+       <execution>
+           <id>install node and npm</id>
+           <goals>
+               <goal>install-node-and-npm</goal>
+           </goals>
+           <configuration>
+               <nodeVersion>${node.version}</nodeVersion>
+           </configuration>
+       </execution>
+       <execution>
+           <id>npm install</id>
+           <goals>
+               <goal>npm</goal>
+           </goals>
+           <phase>generate-resources</phase>
+           <configuration>
+               <arguments>install --unsafe-perm</arguments>
+           </configuration>
+       </execution>
+       ...
+   </executions>
 </plugin>
 ```
 
@@ -235,30 +243,30 @@ Add the Actuator starter as a dependency to `holdings-api/pom.xml`:
 
 ```xml
 <dependency>
-    <groupId>org.springframework.boot</groupId>
-    <artifactId>spring-boot-starter-actuator</artifactId>
+   <groupId>org.springframework.boot</groupId>
+   <artifactId>spring-boot-starter-actuator</artifactId>
 </dependency>
 ```
 
-You'll also need to allow access to its health check endpoint. Jenkins X will deploy your app behind a Nginx server, so you'll want to turn off forcing HTTPS as well, or you won't be able to reach your app. Modify `holdings-api/src/main/java/com/okta/developer/holdingsapi/SecurityConfiguration.java` to have these changes.
+You'll also need to allow access to its health check endpoint. Jenkins X will deploy your app behind a Nginx server, so you'll want to turn off forcing HTTPS as well, or you won't be able to reach your app. Modify `holdings-api/src/main/java/.../SecurityConfiguration.java` to allow `/actuator/health` and to remove `requiresSecure()`.
 
 ```java
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
-    @Override
-    public void configure(WebSecurity web) throws Exception {
-        web.ignoring().antMatchers("/**/*.{js,html,css}");
-    }
+   @Override
+   public void configure(WebSecurity web) throws Exception {
+       web.ignoring().antMatchers("/**/*.{js,html,css}");
+   }
 
-    @Override
-    protected void configure(HttpSecurity http) throws Exception {
-        http
-                .csrf().csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse())
-            .and()
-                .authorizeRequests()
-                .antMatchers("/", "/home", "/api/user", "/actuator/health").permitAll()
-                .anyRequest().authenticated();
-    }
+   @Override
+   protected void configure(HttpSecurity http) throws Exception {
+       http
+               .csrf().csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse())
+           .and()
+               .authorizeRequests()
+               .antMatchers("/", "/home", "/api/user", "/actuator/health").permitAll()
+               .anyRequest().authenticated();
+   }
 }
 ```
 
@@ -283,18 +291,18 @@ WORKDIR /opt
 CMD ["java", "-jar", "app.jar"]
 ```
 
-You'll also need to update `Jenkinsfile` so it runs any `mvn` commands in the `holdings-api` directory. For example:
+You'll also need to update `Jenkinsfile` so it runs any `mvn` commands in the `holdings-api` directory. Add the `-Pprod` profile too. For example:
 
 ```groovy
 // in the 'CI Build and push snapshot' stage
 steps {
-  container('maven') {
-    dir ('./holdings-api') {
-      sh "mvn versions:set -DnewVersion=$PREVIEW_VERSION"
-      sh "mvn install -Pprod"
-    }
-  }
-  ...
+ container('maven') {
+   dir ('./holdings-api') {
+     sh "mvn versions:set -DnewVersion=$PREVIEW_VERSION"
+     sh "mvn install -Pprod"
+   }
+ }
+ ...
 }
 // in the 'Build Release' stage
 dir ('./holdings-api') {
@@ -333,21 +341,24 @@ Open `holdings-api/src/main/resources/application.yml` and paste the values from
 
 ```yaml
 okta:
-  client:
-    orgUrl: https://{yourOktaDomain}
-    token: XXX
+ client:
+   orgUrl: https://{yourOktaDomain}
+   token: XXX
 security:
-    oauth2:
-      client:
-        access-token-uri: https://{yourOktaDomain}/oauth2/default/v1/token
-        user-authorization-uri: https://{yourOktaDomain}/oauth2/default/v1/authorize
-        client-id: {yourClientId}
-        client-secret: {yourClientSecret}
-      resource:
-        user-info-uri: https://{yourOktaDomain}/oauth2/default/v1/userinfo
+   oauth2:
+     client:
+       access-token-uri: https://{yourOktaDomain}/oauth2/default/v1/token
+       user-authorization-uri: https://{yourOktaDomain}/oauth2/default/v1/authorize
+       client-id: {yourClientId}
+       client-secret: {yourClientSecret}
+     resource:
+       user-info-uri: https://{yourOktaDomain}/oauth2/default/v1/userinfo
 ```
 
-You'll notice I haven't defined a `token` value. This is because I prefer to read it from an environment variable rather than being checked into source control. You'll likely want to do this for your client secret as well, but I'm only doing one property for brevity.
+You'll notice the `token` value is `XXX`. This is because I prefer to read it from an environment variable rather than being checked into source control. You'll likely want to do this for your client secret as well, but I'm only doing one property for brevity. To create an API token:
+
+1. Navigate to **API** > **Tokens** and click **Create Token**
+2. Give your token a name (e.g. "Jenkins X"), then set its value as an `OKTA_CLIENT_TOKEN` environment variable.
 
 You’ll need to add a `holdings` attribute to your organization's user profiles to store your cryptocurrency holdings in Okta. Navigate to **Users** > **Profile Editor**. Click on **Profile** for the first profile in the table. You can identify it by its Okta logo. Click **Add Attribute** and use the following values:
 
@@ -355,31 +366,32 @@ You’ll need to add a `holdings` attribute to your organization's user profiles
 * Variable name: `holdings`
 * Description: `Cryptocurrency Holdings`
 
-For the Okta Java SDK to talk to Okta's API (to store your cryptocurrency holdings), you'll need to create an API token. 
+After performing these steps, you should be able to navigate to `http://localhost:8080` and log in after running the following commands:
 
-2. Navigate to **API** > **Tokens** and click **Create Token**
-3. Give your token a name (e.g. "Jenkins X"), then set its value as an `OKTA_CLIENT_TOKEN` environment variable.
-
-After performing these steps, you should be able to run `holdings-api/mvnw -Pprod` and log in.
+```
+cd holdings-api
+./mvnw -Pprod package
+java -jar target/*.jar
+```
 
 ### Storing Secrets in Jenkins X
 
 Storing environment variables locally is pretty straightforward. But how do you do it in Jenkins X? Look no further than its [credentials feature](https://jenkins.io/doc/book/using/using-credentials/). Here's how to use it:
 
-1. Run `jx console` on Google Cloud to get your Jenkins X URL
-2. Click on the link and click **Administration** at the top
+1. Run `jx console` on Google Cloud Shell to get your Jenkins X URL
+2. Click on the link, log in, and click **Administration** at the top
 3. Click on **Credentials** > **(global)** > **Add Credentials** (on the left)
 4. Select **Secret text** from the drop-down and enter `OKTA_CLIENT_TOKEN` for the ID
 5. Copy/paste your Okta API token into the **Secret** field
 
-While you're in there, add a few more secrets: `OKTA_APP_ID`, `E2E_USERNAME`, and `E2E_PASSWORD`. The first is the ID of the `Jenkins X` app you created. You can get its value from navigating to your app on Okta and copying the value from the URL. The `E2E-*` secrets should be credentials you want to use to run end-to-end (Protractor) tests. You might want to create a new user for this. 
+While you're in there, add a few more secrets: `OKTA_APP_ID`, `E2E_USERNAME`, and `E2E_PASSWORD`. The first is the ID of the `Jenkins X` OIDC app you created. You can get its value from navigating to your app on Okta and copying the value from the URL. The `E2E-*` secrets should be credentials you want to use to run end-to-end (Protractor) tests. You might want to create a new user for this.
 
 You can access these values in your `Jenkinsfile` by adding them to the `environment` section near the top.
 
 ```groovy
 environment {
   ORG               = 'mraible'
-  APP_NAME          = 'okta-spring-boot-jenkinsx-example'
+  APP_NAME          = 'okta-spring-boot-jx-example'
   CHARTMUSEUM_CREDS = credentials('jenkins-x-chartmuseum')
   OKTA_CLIENT_TOKEN = credentials('OKTA_CLIENT_TOKEN')
   OKTA_APP_ID       = credentials('OKTA_APP_ID')
@@ -404,37 +416,34 @@ sh "make $OKTA_CLIENT_TOKEN=\$OKTA_CLIENT_TOKEN preview"
 
 You can add more environment variables as you need them.
 
-At this point, you can create a branch, commit your changes, and verify everything works in Jenkins X. 
+At this point, you can create a branch, commit your changes, and verify everything works in Jenkins X.
 
 ```bash
-cd okta-jenkinsx
 git checkout -b add-secure-app
 git add .
 git commit -m "Add Bootiful PWA"
 git push origin add-secure-app
 ```
 
-Open your browser and navigate to your repository on GitHub and create a pull request. It should look like the following after creating it. 
+Open your browser and navigate to your repository on GitHub and create a pull request. It should look like the following after creating it.
 
-[img]
-
-**TIP**: If the continuous integration URLs on your pull request don't map back to your Jenkins instance, I'd recommend upgrading Jenkins and its plugins. This resolved the issue for me.
+{% img blog/spring-boot-jenkins-x/pr-bootiful-pwa.png alt:"Add Bootiful PWA Pull Request" width:"800" %}{: .center-image }
 
 If the tests pass for your pull request, you should see some greenery and a comment from Jenkins X that your app is available in a preview environment.
 
-[PR success screenshot]
+{% img blog/spring-boot-jenkins-x/pr-bootiful-pwa-success.png alt:"PR Success!" width:"800" %}{: .center-image }
 
-If you try to log in, you'll likely get an error from Okta that the redirect URI hasn't been whitelisted.
+If you click on the **here** link and try to log in, you'll likely get an error from Okta that the redirect URI hasn't been whitelisted.
 
 ### Automate Adding Redirect URIs in Okta
 
 When you create apps in Okta and run them locally, it's easy to know what the redirect URIs for your app will be. For this particular app, they'll be `http://localhost:8080/login` for login, and `http://localhost:8080` for logout. When you go to production, the URLs are generally well-known as well. However, with Jenkins X, the URLs are dynamic and created on-the-fly based on your pull request number.
 
-To make this work with Okta, you can create a Java class that talks to the Okta API and dynamically adds URIs. Create `holdings-api/src/test/java/com/okta/developer/cli/AppRedirectUriManager.java` and populate it with the following code.
+To make this work with Okta, you can create a Java class that talks to the Okta API and dynamically adds URIs. Create `holdings-api/src/test/java/.../cli/AppRedirectUriManager.java` and populate it with the following code.
 
 ```java
 package com.okta.developer.cli;
- 
+
 import com.okta.sdk.client.Client;
 import com.okta.sdk.lang.Collections;
 import com.okta.sdk.resource.application.OpenIdConnectApplication;
@@ -445,57 +454,57 @@ import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
- 
+
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
- 
+
 @SpringBootApplication
 public class AppRedirectUriManager implements ApplicationRunner {
-    private static final Logger log = LoggerFactory.getLogger(AppRedirectUriManager.class);
- 
-    private final Client client;
- 
-    @Value("${appId}")
-    private String appId;
- 
-    @Value("${redirectUri}")
-    private String redirectUri;
- 
-    @Value("${operation:add}")
-    private String operation;
- 
-    public AppRedirectUriManager(Client client) {
-        this.client = client;
-    }
- 
-    public static void main(String[] args) {
-        SpringApplication.run(AppRedirectUriManager.class, args);
-    }
- 
-    @Override
-    public void run(ApplicationArguments args) {
-        log.info("Adjusting Okta settings: {appId: {}, redirectUri: {}, operation: {}}", appId, redirectUri, operation);
-        OpenIdConnectApplication app = (OpenIdConnectApplication) client.getApplication(appId);
- 
-        String loginRedirectUri = redirectUri + "/login";
- 
-        // update redirect URIs
-        List<String> redirectUris = app.getSettings().getOAuthClient().getRedirectUris();
-        // use a set so values are unique
-        Set<String> updatedRedirectUris = new LinkedHashSet<>(redirectUris);
-        if (operation.equalsIgnoreCase("add")) {
-            updatedRedirectUris.add(loginRedirectUri);
-        } else if (operation.equalsIgnoreCase("remove")) {
-            updatedRedirectUris.remove(loginRedirectUri);
-        }
- 
-        // todo: update logout redirect URIs with redirectUri (not currently available in Java SDK)
-        // https://github.com/okta/openapi/issues/132
-        app.getSettings().getOAuthClient().setRedirectUris(Collections.toList(updatedRedirectUris));
-        app.update();
-        System.exit(0);
-    }
+   private static final Logger log = LoggerFactory.getLogger(AppRedirectUriManager.class);
+
+   private final Client client;
+
+   @Value("${appId}")
+   private String appId;
+
+   @Value("${redirectUri}")
+   private String redirectUri;
+
+   @Value("${operation:add}")
+   private String operation;
+
+   public AppRedirectUriManager(Client client) {
+       this.client = client;
+   }
+
+   public static void main(String[] args) {
+       SpringApplication.run(AppRedirectUriManager.class, args);
+   }
+
+   @Override
+   public void run(ApplicationArguments args) {
+       log.info("Adjusting Okta settings: {appId: {}, redirectUri: {}, operation: {}}", appId, redirectUri, operation);
+       OpenIdConnectApplication app = (OpenIdConnectApplication) client.getApplication(appId);
+
+       String loginRedirectUri = redirectUri + "/login";
+
+       // update redirect URIs
+       List<String> redirectUris = app.getSettings().getOAuthClient().getRedirectUris();
+       // use a set so values are unique
+       Set<String> updatedRedirectUris = new LinkedHashSet<>(redirectUris);
+       if (operation.equalsIgnoreCase("add")) {
+           updatedRedirectUris.add(loginRedirectUri);
+       } else if (operation.equalsIgnoreCase("remove")) {
+           updatedRedirectUris.remove(loginRedirectUri);
+       }
+
+       // todo: update logout redirect URIs with redirectUri (not currently available in Java SDK)
+       // https://github.com/okta/openapi/issues/132
+       app.getSettings().getOAuthClient().setRedirectUris(Collections.toList(updatedRedirectUris));
+       app.update();
+       System.exit(0);
+   }
 }
 ```
 
@@ -504,39 +513,40 @@ This class uses Spring Boot's CLI (command-line interface) support, which makes 
 ```xml
 
 <properties>
-    <exec-maven-plugin.version>1.6.0</exec-maven-plugin.version>
-    <appId>default</appId>
-    <redirectUri>override-me</redirectUri>
+    ...
+   <exec-maven-plugin.version>1.6.0</exec-maven-plugin.version>
+   <appId>default</appId>
+   <redirectUri>override-me</redirectUri>
 </properties>
 
 <!-- dependencies -->
 
 <build>
-    <defaultGoal>spring-boot:run</defaultGoal>
-    <finalName>holdings-app-${project.version}</finalName>
-    <plugins>
-        <!-- existing plugins -->
-        <plugin>
-            <groupId>org.codehaus.mojo</groupId>
-            <artifactId>exec-maven-plugin</artifactId>
-            <version>${exec-maven-plugin.version}</version>
-            <executions>
-                <execution>
-                    <id>add-redirect</id>
-                    <goals>
-                        <goal>java</goal>
-                    </goals>
-                </execution>
-            </executions>
-            <configuration>
-                <mainClass>com.okta.developer.cli.AppRedirectUriManager</mainClass>
-                <classpathScope>test</classpathScope>
-                <arguments>
-                    <argument>appId ${appId} redirectUri ${redirectUri}</argument>
-                </arguments>
-            </configuration>
-        </plugin>
-    </plugins>
+   <defaultGoal>spring-boot:run</defaultGoal>
+   <finalName>holdings-app-${project.version}</finalName>
+   <plugins>
+       <!-- existing plugins -->
+       <plugin>
+           <groupId>org.codehaus.mojo</groupId>
+           <artifactId>exec-maven-plugin</artifactId>
+           <version>${exec-maven-plugin.version}</version>
+           <executions>
+               <execution>
+                   <id>add-redirect</id>
+                   <goals>
+                       <goal>java</goal>
+                   </goals>
+               </execution>
+           </executions>
+           <configuration>
+               <mainClass>com.okta.developer.cli.AppRedirectUriManager</mainClass>
+               <classpathScope>test</classpathScope>
+               <arguments>
+                   <argument>appId ${appId} redirectUri ${redirectUri}</argument>
+               </arguments>
+           </configuration>
+       </plugin>
+   </plugins>
 </build>
 ```
 
@@ -544,26 +554,26 @@ Then update `Jenkinsfile` to add a block that runs `mvn exec:java` after it buil
 
 ```groovy
 dir ('./charts/preview') {
-  container('maven') {
-    sh "make preview"
-    sh "make $OKTA_CLIENT_TOKEN=\$OKTA_CLIENT_TOKEN preview"
-    sh "jx preview --app $APP_NAME --dir ../.."
-  }
+ container('maven') {
+   sh "make preview"
+   sh "make $OKTA_CLIENT_TOKEN=\$OKTA_CLIENT_TOKEN preview"
+   sh "jx preview --app $APP_NAME --dir ../.."
+ }
 }
 
 // Add redirect URI in Okta
 dir ('./holdings-api') {
-  container('maven') {
+ container('maven') {
     sh '''
       yum install -y jq
       previewURL=$(jx get preview -o json|jq  -r ".items[].spec | select (.previewGitInfo.name==\\"$CHANGE_ID\\") | .previewGitInfo.applicationURL")
       mvn exec:java@add-redirect -DappId=$OKTA_APP_ID -DredirectUri=$previewURL
     '''
-  }
+ }
 }
 ```
 
-If you re-run the build, your app should be updated with a redirect URI for `http://{yourPreviewURL}/login`. You'll need to manually add a logout redirect URI for `http://{yourPreviewURL}` since this is [not currently supported by our SDKs](https://github.com/okta/openapi/issues/132).
+Check in and push your changes, and your app should be updated with a redirect URI for `http://{yourPreviewURL}/login`. You'll need to manually add a logout redirect URI for `http://{yourPreviewURL}` since this is [not currently supported by Okta's Java SDK](https://github.com/okta/openapi/issues/132).
 
 [screenshot of app settings]
 
@@ -579,73 +589,73 @@ Figuring how to run end-to-end tests in Jenkins X was the hardest part for me to
 
 ```xml
 <profile>
-    <id>e2e</id>
-    <properties>
-        <!-- Hard-code port instead of using build-helper-maven-plugin. -->
-        <!-- This way, you don't need to add a redirectUri to Okta app. -->
-        <http.port>8000</http.port>
-    </properties>
-    <build>
-        <plugins>
-            <plugin>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-maven-plugin</artifactId>
-                <executions>
-                    <execution>
-                        <id>pre-integration-test</id>
-                        <goals>
-                            <goal>start</goal>
-                        </goals>
-                        <configuration>
-                            <arguments>
-                                <argument>--server.port=${http.port}</argument>
-                            </arguments>
-                        </configuration>
-                    </execution>
-                    <execution>
-                        <id>post-integration-test</id>
-                        <goals>
-                            <goal>stop</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>
-            <plugin>
-                <groupId>com.github.eirslett</groupId>
-                <artifactId>frontend-maven-plugin</artifactId>
-                <version>${frontend-maven-plugin.version}</version>
-                <configuration>
-                    <workingDirectory>../crypto-pwa</workingDirectory>
-                </configuration>
-                <executions>
-                    <execution>
-                        <id>webdriver update</id>
-                        <goals>
-                            <goal>npm</goal>
-                        </goals>
-                        <phase>pre-integration-test</phase>
-                        <configuration>
-                            <arguments>run e2e-update</arguments>
-                        </configuration>
-                    </execution>
-                    <execution>
-                        <id>ionic e2e</id>
-                        <goals>
-                            <goal>npm</goal>
-                        </goals>
-                        <phase>integration-test</phase>
-                        <configuration>
-                            <environmentVariables>
-                                <PORT>${http.port}</PORT>
-                                <CI>true</CI>
-                            </environmentVariables>
-                            <arguments>run e2e-test</arguments>
-                        </configuration>
-                    </execution>
-                </executions>
-            </plugin>
-        </plugins>
-    </build>
+   <id>e2e</id>
+   <properties>
+       <!-- Hard-code port instead of using build-helper-maven-plugin. -->
+       <!-- This way, you don't need to add a redirectUri to Okta app. -->
+       <http.port>8000</http.port>
+   </properties>
+   <build>
+       <plugins>
+           <plugin>
+               <groupId>org.springframework.boot</groupId>
+               <artifactId>spring-boot-maven-plugin</artifactId>
+               <executions>
+                   <execution>
+                       <id>pre-integration-test</id>
+                       <goals>
+                           <goal>start</goal>
+                       </goals>
+                       <configuration>
+                           <arguments>
+                               <argument>--server.port=${http.port}</argument>
+                           </arguments>
+                       </configuration>
+                   </execution>
+                   <execution>
+                       <id>post-integration-test</id>
+                       <goals>
+                           <goal>stop</goal>
+                       </goals>
+                   </execution>
+               </executions>
+           </plugin>
+           <plugin>
+               <groupId>com.github.eirslett</groupId>
+               <artifactId>frontend-maven-plugin</artifactId>
+               <version>${frontend-maven-plugin.version}</version>
+               <configuration>
+                   <workingDirectory>../crypto-pwa</workingDirectory>
+               </configuration>
+               <executions>
+                   <execution>
+                       <id>webdriver update</id>
+                       <goals>
+                           <goal>npm</goal>
+                       </goals>
+                       <phase>pre-integration-test</phase>
+                       <configuration>
+                           <arguments>run e2e-update</arguments>
+                       </configuration>
+                   </execution>
+                   <execution>
+                       <id>ionic e2e</id>
+                       <goals>
+                           <goal>npm</goal>
+                       </goals>
+                       <phase>integration-test</phase>
+                       <configuration>
+                           <environmentVariables>
+                               <PORT>${http.port}</PORT>
+                               <CI>true</CI>
+                           </environmentVariables>
+                           <arguments>run e2e-test</arguments>
+                       </configuration>
+                   </execution>
+               </executions>
+           </plugin>
+       </plugins>
+   </build>
 </profile>
 ```
 
@@ -671,10 +681,10 @@ If you'd like to see your project's Protractor tests running on Jenkins X, you'l
 
 ```js
 capabilities: {
-  'browserName': 'chrome',
-  'chromeOptions': {
-    'args': ['--disable-gpu', '--no-sandbox', '--disable-extensions', '--disable-dev-shm-usage']
-  }
+ 'browserName': 'chrome',
+ 'chromeOptions': {
+   'args': ['--disable-gpu', '--no-sandbox', '--disable-extensions', '--disable-dev-shm-usage']
+ }
 },
 ```
 
@@ -682,21 +692,21 @@ Then add a new **Run e2e tests** stage to `Jenkinsfile` that sits between the "C
 
 ```groovy
 stage('Run e2e tests') {
-  agent {
-    label "jenkins-nodejs"
-  }
-  steps {
-    container('nodejs') {
-      sh '''
-        yum install -y jq
-        previewURL=$(jx get preview -o json|jq  -r ".items[].spec | select (.previewGitInfo.name==\\"$CHANGE_ID\\") | .previewGitInfo.applicationURL")
-        cd crypto-pwa && npm install --unsafe-perm && npm run e2e-update
-        Xvfb :99 &
-        sleep 60s
-        DISPLAY=:99 npm run e2e-test -- --baseUrl=$previewURL
-      '''
-    }
-  }
+ agent {
+   label "jenkins-nodejs"
+ }
+ steps {
+   container('nodejs') {
+     sh '''
+       yum install -y jq
+       previewURL=$(jx get preview -o json|jq  -r ".items[].spec | select (.previewGitInfo.name==\\"$CHANGE_ID\\") | .previewGitInfo.applicationURL")
+       cd crypto-pwa && npm install --unsafe-perm && npm run e2e-update
+       Xvfb :99 &
+       sleep 60s
+       DISPLAY=:99 npm run e2e-test -- --baseUrl=$previewURL
+     '''
+   }
+ }
 }
 ```
 
@@ -725,7 +735,7 @@ You can find the source code for the completed application in this example [on G
 
 ## Learn More About Jenkins X and Kubernetes
 
-If you're running your production apps on Kubernetes, I'd recommend looking into Jenkins X. It provides a way to do CI/CD on the same environment, quickly iterate, and deliver business value &mdash; faster &mdash; to your customers. 
+If you're running your production apps on Kubernetes, I'd recommend looking into Jenkins X. It provides a way to do CI/CD on the same environment, quickly iterate, and deliver business value &mdash; faster &mdash; to your customers.
 
 Jenkins X also includes a [DevPods](https://jenkins.io/blog/2018/06/21/jenkins-x-devpods/) feature that can auto-deploy-on-save when developing on your laptop. I'm not sure DevPods will work well for JavaScript apps that need to have a transpile-for-production step. I'd rather have webpack, and Browsersync refresh my local browser in seconds, rather than waiting minutes for a Docker image to be created and deployed to Kubernetes.
 
