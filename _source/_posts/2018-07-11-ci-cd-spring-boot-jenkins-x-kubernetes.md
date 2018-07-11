@@ -137,7 +137,7 @@ Over the last several months, I've written a series of blog posts about building
 1. [Protect Your Cryptocurrency Wealth Tracking PWA with Okta](/blog/2018/01/18/cryptocurrency-pwa-secured-by-okta)
 2. [Use Okta (Instead of Local Storage) to Store Your User’s Data Securely](/blog/2018/01/23/replace-local-storage-with-okta-profile-attributes)
 3. [The Hitchhiker's Guide to Testing Spring Boot APIs and Angular Components with WireMock, Jest, Protractor, and Travis CI](/blog/2018/05/02/testing-spring-boot-angular-components)
-4. [Deploy Your Secure Spring Boot + Angular PWA as a Single Artifact](blog/2018/06/18/spring-boot-angular-auth-code-flow)
+4. [Deploy Your Secure Spring Boot + Angular PWA as a Single Artifact](/blog/2018/06/18/spring-boot-angular-auth-code-flow)
 
 This is the final blog post in the series. I believe this is an excellent example of a real-world app because it has numerous unit and integration tests, including end-to-end tests with Protractor. Let's see how to automate its path to production with Jenkins X and Kubernetes!
 

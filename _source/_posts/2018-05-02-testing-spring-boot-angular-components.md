@@ -1527,7 +1527,7 @@ If you're looking for a Spring Boot + Angular (or React) example app with lots o
 
 If you'd like to learn more about topics like Spring Boot, Angular, React, and JHipster, give us a follow [@oktadev](https://twitter.com/oktadev). If you have any questions about this post, please leave a comment below.
 
-**Update:** To see how to change this app to use OAuth 2.0's authorization code flow and package as a JAR, see [Deploy Your Secure Spring Boot + Angular PWA as a Single Artifact](/blog/2018/07/11/blog/2018/06/18/spring-boot-angular-auth-code-flow).
+**Update:** To see how to change this app to use OAuth 2.0's authorization code flow and package as a JAR, see [Deploy Your Secure Spring Boot + Angular PWA as a Single Artifact](/blog/2018/06/18/spring-boot-angular-auth-code-flow).
 
 **Changelog:**
 
