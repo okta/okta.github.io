@@ -954,7 +954,7 @@ To learn more about React, Spring Boot, or Okta, check out the following resourc
 You can find the source code associated with this article [on GitHub](https://github.com/oktadeveloper/spring-boot-react-example). The primary example (without authentication) is in the `master` branch, while the Okta integration is in the `okta` branch. To check out the Okta branch on your local machine, run the following commands.
 
 ```bash
-git clone -b okta git@github.com:oktadeveloper/spring-boot-react-example.git
+git clone -b okta https://github.com/oktadeveloper/spring-boot-react-example.git
 ```
 
 If you find any issues, please add a comment below, and I'll do my best to help. If you liked this tutorial, I’d love to have you [follow me on Twitter](https://twitter.com/mraible). To be notified of more articles like this one, follow [@oktadev](https://twitter.com/oktadev).
