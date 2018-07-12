@@ -322,7 +322,7 @@ Next, go ahead and place the following code into the `templates/dashboard.html` 
 ```
 {% endraw %}
 
-This template works is the same way, except it also outputs some variables. For instance, the `{{ g.user.id }}` value will output that ID value into the HTML template directly. These variables will eventually be available once we hook up the OpenID Connect library.
+This template works in the same way, except it also outputs some variables. For instance, the {% raw %}`{{ g.user.id }}`{% endraw %} value will output that ID value into the HTML template directly. These variables will eventually be available once we hook up the OpenID Connect library.
 
 The last thing you need to do before testing things is add a bit of CSS to make things look nicer.
 
