@@ -62,9 +62,9 @@ import * as OktaAuth from '@okta/okta-auth-js';
 export class OktaAuthService {
 
   oktaAuth = new OktaAuth({
-    url: 'https://{yourOktaDomain}.com',
+    url: 'https://{yourOktaDomain}',
     clientId: '{clientId}',
-    issuer: 'https://{yourOktaDomain}.com/oauth2/{authServerId}',
+    issuer: 'https://{yourOktaDomain}/oauth2/{authServerId}',
     redirectUri: 'http://localhost:4200/callback',
   });
 

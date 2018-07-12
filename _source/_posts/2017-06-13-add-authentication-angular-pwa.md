@@ -76,7 +76,7 @@ Log in to your Okta Developer account and navigate to **Applications** > **Add A
 Copy the client ID into your `server/src/main/resources/application.properties` file. While you're in there, add a `okta.oauth2.issuer` property that matches your Okta domain. For example:
 
 ```properties
-okta.oauth2.issuer=https://{yourOktaDomain}.com/oauth2/default
+okta.oauth2.issuer=https://{yourOktaDomain}/oauth2/default
 okta.oauth2.clientId={clientId}
 ```
 
@@ -211,7 +211,7 @@ import { JwksValidationHandler, OAuthService } from 'angular-oauth2-oidc';
     this.oauthService.clientId = '{clientId}';
     this.oauthService.scope = 'openid profile email';
     this.oauthService.oidc = true;
-    this.oauthService.issuer = 'https://{yourOktaDomain}.com/oauth2/default';
+    this.oauthService.issuer = 'https://{yourOktaDomain}/oauth2/default';
     this.oauthService.tokenValidationHandler = new JwksValidationHandler();
 
     this.oauthService.loadDiscoveryDocumentAndTryLogin();
@@ -483,7 +483,7 @@ export class HomeComponent {
   loginWithPassword() {
     this.oauthService.createAndSaveNonce().then(nonce => {
       const authClient = new OktaAuth({
-        url: 'https://{yourOktaDomain}.com',
+        url: 'https://{yourOktaDomain}',
         issuer: 'default'
       });
       return authClient.signIn({

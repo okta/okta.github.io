@@ -9,7 +9,7 @@ redirect_from: "/docs/api/rest/events.html"
 
 The Okta Events API provides read access to your organization's system log. [Export event data](https://support.okta.com/help/Documentation/Knowledge_Article/Exporting-Okta-Log-Data) as a batch job from your organization to another system for reporting or analysis.
 
-> The [System Log API](/docs/api/resources/system_log) will eventually replace the Events API and contains much more [structured data](/docs/api/resources/system_log#logevent-object).
+> Important: the [System Log API](/docs/api/resources/system_log) will eventually replace the Events API and contains much more [structured data](/docs/api/resources/system_log#logevent-object). Developers of new projects are strongly recommended to use the System Log API in lieu of the Events API.
 
 ## Getting Started
 
@@ -121,7 +121,7 @@ curl -v -X GET \
 -H "Accept: application/json" \
 -H "Content-Type: application/json" \
 -H "Authorization: SSWS ${api_token}" \
-"https://{yourOktaDomain}.com/api/v1/events?startDate=2013-07-15T16%3A00%3A00.000Z\&limit=3"
+"https://{yourOktaDomain}/api/v1/events?startDate=2013-07-15T16%3A00%3A00.000Z\&limit=3"
 ~~~
 
 ##### Response Example
@@ -130,8 +130,8 @@ curl -v -X GET \
 ~~~http
 HTTP/1.1 200 OK
 Content-Type: application/json
-Link: <https://{yourOktaDomain}.com/api/v1/events?startDate=2017-09-15T16%3A00%3A00.000Z&limit=3>; rel="self"
-Link: <https://{yourOktaDomain}.com/api/v1/events?after=tevZxTo4IyHR9yUHIFdU0-f0w1373905100000&limit=3>; rel="next"
+Link: <https://{yourOktaDomain}/api/v1/events?startDate=2017-09-15T16%3A00%3A00.000Z&limit=3>; rel="self"
+Link: <https://{yourOktaDomain}/api/v1/events?after=tevZxTo4IyHR9yUHIFdU0-f0w1373905100000&limit=3>; rel="next"
 
 [
     {

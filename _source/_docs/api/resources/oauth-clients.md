@@ -41,7 +41,7 @@ Adds a new client application to your organization
 
 The [OAuth Client](#client-application-model) created by the request
 
-> {% api_lifecycle beta %} Note: Apps created on `/api/v1/apps` default to `consent_method=TRUSTED`, while those created on `/api/v1/clients` default to `consent_method=REQUIRED`.
+> {% api_lifecycle ea %} Note: Apps created on `/api/v1/apps` default to `consent_method=TRUSTED`, while those created on `/api/v1/clients` default to `consent_method=REQUIRED`.
 
 ##### Request Example
 {:.api .api-request .api-request-example}
@@ -72,7 +72,7 @@ curl -v -X POST \
       ],
       "token_endpoint_auth_method": "client_secret_post",
       "initiate_login_uri": "https://www.example-application.com/oauth2/login"
-    }' "https://{yourOktaDomain}.com/oauth2/v1/clients"
+    }' "https://{yourOktaDomain}/oauth2/v1/clients"
 ~~~
 
 ##### Response Example
@@ -157,7 +157,7 @@ curl -v -X GET \
 -H "Accept: application/json" \
 -H "Content-Type: application/json" \
 -H "Authorization: SSWS ${api_token}" \
-"https://{yourOktaDomain}.com/oauth2/v1/clients"
+"https://{yourOktaDomain}/oauth2/v1/clients"
 ~~~
 
 ##### Response Example
@@ -170,8 +170,8 @@ Content-Type: application/json;charset=UTF-8
 Header links for pagination:
 
 ~~~http
-<https://{yourOktaDomain}.com/oauth2/v1/clients?limit=20>; rel="self"
-<https://{yourOktaDomain}.com/oauth2/v1/clients?after=xfnIflwIn2TkbpNBs6JQ&limit=20>; rel="next"
+<https://{yourOktaDomain}/oauth2/v1/clients?limit=20>; rel="self"
+<https://{yourOktaDomain}/oauth2/v1/clients?after=xfnIflwIn2TkbpNBs6JQ&limit=20>; rel="next"
 ~~~
 
 Response body:
@@ -292,7 +292,7 @@ curl -v -X GET \
 -H "Accept: application/json" \
 -H "Content-Type: application/json" \
 -H "Authorization: SSWS ${api_token}" \
-"https://{yourOktaDomain}.com/oauth2/v1/clients?q=web&limit=1"
+"https://{yourOktaDomain}/oauth2/v1/clients?q=web&limit=1"
 ~~~
 
 ##### Response Example
@@ -305,8 +305,8 @@ Content-Type: application/json;charset=UTF-8
 Header links for pagination:
 
 ~~~http
-<https://{yourOktaDomain}.com/oauth2/v1/clients?limit=20>; rel="self"
-<https://{yourOktaDomain}.com/oauth2/v1/clients?after=xfnIflwIn2TkbpNBs6JQ&limit=1>; rel="next"
+<https://{yourOktaDomain}/oauth2/v1/clients?limit=20>; rel="self"
+<https://{yourOktaDomain}/oauth2/v1/clients?after=xfnIflwIn2TkbpNBs6JQ&limit=1>; rel="next"
 ~~~
 
 Response body:
@@ -366,7 +366,7 @@ curl -v -X GET \
 -H "Accept: application/json" \
 -H "Content-Type: application/json" \
 -H "Authorization: SSWS ${api_token}" \
-"https://{yourOktaDomain}.com/oauth2/v1/clients/0jrabyQWm4B9zVJPbotY"
+"https://{yourOktaDomain}/oauth2/v1/clients/0jrabyQWm4B9zVJPbotY"
 ~~~
 
 ##### Response Example
@@ -468,7 +468,7 @@ curl -v -X PUT \
       ],
       "token_endpoint_auth_method": "client_secret_post",
       "initiate_login_uri": "https://www.example-application.com/oauth2/login"
-    }' "https://{yourOktaDomain}.com/oauth2/v1/clients/0jrabyQWm4B9zVJPbotY"
+    }' "https://{yourOktaDomain}/oauth2/v1/clients/0jrabyQWm4B9zVJPbotY"
 ~~~
 
 ##### Response Example
@@ -550,7 +550,7 @@ curl -v -X POST \
 -H "Accept: application/json" \
 -H "Content-Type: application/json" \
 -H "Authorization: SSWS ${api_token}" \
- "https://{yourOktaDomain}.com/oauth2/v1/clients/0jrabyQWm4B9zVJPbotY/lifecycle/newSecret"
+ "https://{yourOktaDomain}/oauth2/v1/clients/0jrabyQWm4B9zVJPbotY/lifecycle/newSecret"
 ~~~
 
 ##### Response Example
@@ -633,7 +633,7 @@ curl -v -X DELETE \
 -H "Accept: application/json" \
 -H "Content-Type: application/json" \
 -H "Authorization: SSWS ${api_token}" \
-"https://{yourOktaDomain}.com/oauth2/v1/clients/0jrabyQWm4B9zVJPbotY"
+"https://{yourOktaDomain}/oauth2/v1/clients/0jrabyQWm4B9zVJPbotY"
 ~~~
 
 
@@ -712,8 +712,8 @@ Client applications have the following properties:
 | grant_types                         | Array of OAuth 2.0 grant type strings. Default value: `authorization_code`                                                 | Array of `authorization_code`, `implicit`, `password`, `refresh_token`, `client_credentials` | TRUE     | FALSE  | FALSE     |
 | token_endpoint_auth_method          | requested authentication method for the token endpoint. Default value: `client_secret_basic`                               | `none`, `client_secret_post`, `client_secret_basic`, or `client_secret_jwt`                  | TRUE     | FALSE  | FALSE     |
 | initiate_login_uri                  | URL that a third party can use to initiate a login by the client                                                           | String                                                                                       | TRUE     | FALSE  | FALSE     |
-| tos_uri {% api_lifecycle beta %}    | URL string of a web page providing the client's terms of service document                                                                                         | URL                                                                                          | TRUE     | FALSE  | FALSE     |
-| policy_uri {% api_lifecycle beta %} | URL string of a web page providing the client's policy document                                                                                                   | URL                                                                                          | TRUE     | FALSE  | FALSE     |
+| tos_uri {% api_lifecycle ea %}    | URL string of a web page providing the client's terms of service document                                                                                         | URL                                                                                          | TRUE     | FALSE  | FALSE     |
+| policy_uri {% api_lifecycle ea %} | URL string of a web page providing the client's policy document                                                                                                   | URL                                                                                          | TRUE     | FALSE  | FALSE     |
 
 Property Details
 

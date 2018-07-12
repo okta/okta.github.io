@@ -73,7 +73,7 @@ Open `holdings-api/src/main/resources/application.properties` and add your API t
 **NOTE:** The value of `{yourOktaDomain}` should be something like `dev-123456.oktapreview`. Make sure you don't include `-admin` in the value!
 
 ```properties
-okta.oauth2.issuer=https://{yourOktaDomain}.com/oauth2/default
+okta.oauth2.issuer=https://{yourOktaDomain}/oauth2/default
 okta.oauth2.clientId={yourClientId}
 okta.client.token=XXX
 ```
@@ -86,7 +86,7 @@ For the client, set the `issuer` and copy the `clientId` into `crypto-pwa/src/pa
 
 ```typescript
 const config = {
- issuer: 'https://{yourOktaDomain}.com/oauth2/default',
+ issuer: 'https://{yourOktaDomain}/oauth2/default',
  redirectUri: window.location.origin + '/implicit/callback',
  clientId: '{clientId}'
 };
@@ -983,7 +983,7 @@ Setup a basic e2e test of your application's homepage with the following steps:
 
     ```ts
     import { Page } from '../pages/app.po';
-    import { browser, protractor } from 'protractor';
+    import { browser, ExpectedConditions as ec } from 'protractor';
 
     describe('App', () => {
       let page: Page;
@@ -998,8 +998,7 @@ Setup a basic e2e test of your application's homepage with the following steps:
         });
 
         it('should redirect to login', () => {
-          const EC = protractor.ExpectedConditions;
-          browser.wait(EC.urlContains('/#/login'), 5000);
+          browser.wait(ec.urlContains('/#/login'), 5000);
         });
 
         it('should have the correct title', () => {
@@ -1019,17 +1018,16 @@ To execute Protractor tests, run `ionic serve` in one terminal and `npm run e2e`
   <iframe width="600" height="338" src="https://www.youtube.com/embed/MO_ZWxI7Yi4" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
 </div>
 
-You can also configure Protractor to launch its own web server. To do this, add a devDependency on [serve](https://www.npmjs.com/package/serve):
+You can also configure Protractor to launch its own web server. To do this, add a devDependency on [node-http-server](https://www.npmjs.com/package/node-http-server):
 
 ```
-npm i -D serve
+npm i -D node-http-server@8.1.2
 ```
 
-Then modify `crypto-pwa/test/protractor.conf.js` to serve up the `www` directory on port 8100. It's also a good idea to shut down any processes you start. Hence the `server.stop()` in `onComplete()`.
+Then modify `crypto-pwa/test/protractor.conf.js` to serve up the `www` directory on port 8100.
 
 ```js
-const serve = require('serve');
-let server;
+const server = require('node-http-server');
 
 exports.config = {
   ...
@@ -1037,11 +1035,8 @@ exports.config = {
     require('ts-node').register({
       project: 'e2e/tsconfig.e2e.json'
     });
-    server = serve('www', {port: 8100});
+    server.deploy({port: 8100, root: 'www'});
     jasmine.getEnv().addReporter(new SpecReporter({ spec: { displayStacktrace: true } }));
-  },
-  onComplete() {
-    server.stop();
   }
 };
 ```
@@ -1115,7 +1110,7 @@ export class LoginPage extends Page {
 Then create `crypto-pwa/e2e/spec/login.e2e-spec.ts` with tests that ensure a login button exists, that invalid credentials results in an error, valid credentials shows a welcome message, and that you can log out successfully.
 
 ```ts
-import { browser, element, by, protractor, ExpectedConditions as ec } from 'protractor';
+import { browser, element, by, ExpectedConditions as ec } from 'protractor';
 import { LoginPage } from '../pages/login.po';
 
 describe('Login', () => {
@@ -1231,7 +1226,7 @@ export class HomePage extends Page {
 Now that you have these page objects in place, you can add a new e2e test that logs in, adds three Bitcoins in USD, and then deletes the holding. The hardest part in writing this test was figuring out how to swipe left with Protractor, so I’d recommend making note of how that’s done.
 
 ```ts
-import { browser, element, by, protractor, ExpectedConditions as ec, $ } from 'protractor';
+import { browser, by, element, ExpectedConditions as ec } from 'protractor';
 import { LoginPage } from '../pages/login.po';
 import { AddHoldingPage } from '../pages/add-holding.po';
 import { HomePage } from '../pages/home.po';
@@ -1343,7 +1338,7 @@ If you've checked your project into [GitHub](https://github.com/), you can use T
       - chmod +x holdings-api/mvnw
       - cd holdings-api && ./mvnw -q clean verify
       - cd ../crypto-pwa && npm i && npm test
-      - cd ../holdings-api/mvnw -q spring-boot:run &
+      - cd ../holdings-api && mvnw -q spring-boot:run &
       - cd ../crypto-pwa && npm run build --prod
       - npm run e2e
     notifications:
@@ -1378,8 +1373,6 @@ This happens because the `E2E_USERNAME` and `E2E_PASSWORD` environment variables
 You can see a successful build in the screenshot below.
 
 [{% img blog/cryptocurrency-pwa-java-sdk-testing/travis-success.png alt:"Travis success" width:"800" %}{: .center-image }](https://travis-ci.org/oktadeveloper/okta-ionic-crypto-java-sdk-example/builds/371729753)
-
-
 
 See [okta-ionic-crypto-java-sdk-example#4](https://github.com/oktadeveloper/okta-ionic-crypto-java-sdk-example/pull/4) for a pull request that adds Travis configuration.
 
@@ -1509,6 +1502,7 @@ You can [configure Codecov](https://github.com/apps/codecov) to report on your G
 See [okta-ionic-crypto-java-sdk-example#6](https://github.com/oktadeveloper/okta-ionic-crypto-java-sdk-example/pull/6) for a pull request that adds code coverage.
 
 ## Learn More about Testing in Spring Boot and TypeScript Apps
+
 We hope you've enjoyed this hitchhiker's guide to testing Java APIs and Ionic/Angular applications. It's an excellent feeling when your codebase has high test coverage, and you're able to refactor by tweaking your code and adjusting your tests.
 
 You can find the code used in this guide on GitHub: https://github.com/oktadeveloper/okta-ionic-crypto-java-sdk-example.
@@ -1532,3 +1526,9 @@ Speaking of complicated builds, JHipster's [main build](https://github.com/jhips
 If you're looking for a Spring Boot + Angular (or React) example app with lots of tests, look no further than JHipster. It even has a [continuous integration sub-generator](https://www.jhipster.tech/setting-up-ci/) that supports Jenkins, Travis, CircleCI, and GitLab CI/CD.
 
 If you'd like to learn more about topics like Spring Boot, Angular, React, and JHipster, give us a follow [@oktadev](https://twitter.com/oktadev). If you have any questions about this post, please leave a comment below.
+
+**Update:** To see how to change this app to use OAuth 2.0's authorization code flow and package as a JAR, see [Deploy Your Secure Spring Boot + Angular PWA as a Single Artifact](/blog/2018/06/18/spring-boot-angular-auth-code-flow).
+
+**Changelog:**
+
+* Jun 13, 2018: Updated to replace [serve](https://www.npmjs.com/package/serve) with node-http-server and fixed typo in Travis script. See the code changes in [oktadeveloper/okta-ionic-crypto-java-sdk-example#12](https://github.com/oktadeveloper/okta-ionic-crypto-java-sdk-example/pull/12). You can see changes to this article in [okta/okta.github.io#2123](https://github.com/okta/okta.github.io/pull/2123).

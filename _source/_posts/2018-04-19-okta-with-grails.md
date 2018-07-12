@@ -15,7 +15,7 @@ What is Grails, what is Groovy, and why would we choose them over Spring Boot? I
 
 [Groovy](http://groovy-lang.org/) is a superset of Java that compiles down to JVM bytecode and interoperable with pure Java, but adds tons of great meta-programming and functional programming features, while also slashing the ceremony code that can plague pure java.
 
-**Update:** See [part two](/blog/2018/06/04/okta-with-grails-part2) of this series which flushes which adds additional controllers and authorization. 
+**Update:** See [part two](/blog/2018/06/04/okta-with-grails-part2) of this series which flushes which adds additional controllers and authorization.
 
 ## Why Use Grails Over Spring Boot?
 
@@ -33,11 +33,11 @@ Let’s look at Spring:
 * Spring Boot is great for simple REST API services
 * Spring Data is super powerful but correspondingly complicated
 * Templating in Spring is pretty old-fashioned these days
-* Spring has a HUGE community and massive enterprise support. 
+* Spring has a HUGE community and massive enterprise support.
 * Spring also has easy JSON conversion and TDD
 * The larger Spring architecture is incredibly powerful once you wrap your head around it
 
-So what's the verdict? My suggestions are: 
+So what's the verdict? My suggestions are:
 * If you're not already into Spring, and you want to develop a web application quickly, go with Grails. It's easy and developer friendly by design.
 * For simple REST services, Spring Boot or Apache Jersey + Shiro might be good alternatives. There's really no point in using Grails if you're not going to use the ORM and/or templating capabilities.
 * If you're building a large enterprise app or API system and require a guarantee of long term support (many years), or are already deep into Spring, then Spring Boot may be your best bet.
@@ -52,7 +52,7 @@ Install SDKMAN:
 # follow instructions to install SDKMAN!
 curl -s get.sdkman.io | bash
 ```
-    
+
 Load SDKMAN into your shell:
 
 ```bash
@@ -129,7 +129,7 @@ import ../../../../../../app/module/resources/blah.js
 ```
 ### Don't Forget About Gradle
 
-What's with all the "G"s? Yep. There's a lot of them: Groovy, Grails, Gradle. It's been scientifically proven that alliteration increases the performance of programming toolkits at developer conferences. 
+What's with all the "G"s? Yep. There's a lot of them: Groovy, Grails, Gradle. It's been scientifically proven that alliteration increases the performance of programming toolkits at developer conferences.
 
 Gradle is a super powerful build system that "eclipsed" Maven as the build tool of choice in the JVM world. It's built on Groovy and uses a Domain Specific Language that makes it infinitely powerful. If the universe had been built with Maven, the earth would not be revolving around the sun because we'd still be resolving dependencies. Fortunately, Gradle was invented, and all is well.
 
@@ -143,7 +143,7 @@ Now, you may be tempted to think: "Hey! Grails is just Spring Boot with some bel
 
 Spring Security does a funny thing and uses thrown exceptions to handle the OAuth redirects. These are supposed to propagate up to the Spring servlet context, where they are caught and handled. Unfortunately, Grails has it's own custom `GrailsDispatcherServlet` that overrides this behavior, catching the exceptions before they can be handled by the Spring filters. You could potentially create a subclass of the `GrailsDispatcherServlet` that checks for the OAuth exceptions and re-throws them, but Grails 3.0 made this more complicated – and anyway the whole scheme starts to feel pretty "hacky" fighting the framework instead of doing it the "right" way.
 
-### Okta Provider Plugin for Grails Spring Security OAuth 2.0 
+### Okta Provider Plugin for Grails Spring Security OAuth 2.0
 
 What’s the "right" way? Writing a provider plugin for the Grails [spring-security-oauth2 plugin](http://plugins.grails.org/plugin/matrixcrawler/spring-security-oauth2) that tells Grails how to "talk" to Okta as an OAuth 2.0 provider.
 
@@ -175,7 +175,7 @@ You’ll need to copy your Client ID and Client Secret to a safe place for later
 
 {% img blog/okta-with-grails/client-credentials.png alt:"Remember your credentials" width:"600" %}{: .center-image }
 
-That's it for Okta setup for our purposes. You can certainly dig MUCH deeper into the OAuth rabbit hole with tons of configuration options. [Take a look here to get started](https://developer.okta.com/standards/OAuth/).
+That's it for Okta setup for our purposes. You can certainly dig MUCH deeper into the OAuth rabbit hole with tons of configuration options. [Take a look here to get started](https://developer.okta.com/authentication-guide/implementing-authentication/).
 
 ## Dive Back Into Grails!
 
@@ -189,9 +189,9 @@ Edit your `build.gradle` file, adding the new Maven repository and the three com
 ```groovy
 repositories {
    ...
-    maven {  
+    maven {
         url  "https://dl.bintray.com/moksamedia/plugins"
-    }  
+    }
 }
 
 dependencies {
@@ -201,7 +201,7 @@ dependencies {
     ...
 }
 ```
-  
+
 {% img blog/okta-with-grails/build-config.png alt:"build configuration" width:"600" %}{: .center-image }
 
 The plugins come with a quickstart script that we need to run to generate some domain files and set up some configurations.
@@ -233,17 +233,17 @@ We also need to edit the `UserRole.groovy` class slightly. Find the create metho
 
 ```groovy
 static UserRole create(User user, Role role, boolean flush = true)
-{  
-    def instance = new UserRole(user: user, role: role)  
-    instance.save(flush: flush) 
-    instance 
+{
+    def instance = new UserRole(user: user, role: role)
+    instance.save(flush: flush)
+    instance
 }
 ```
 
 Finally, we need to add some configuration to the application.yml file. You need to fill in your Client ID for the `api_key` and your Client Secret for the `api_secret`, as well as your Okta URL in the three URLs.
 
 ```yml
-grails: 
+grails:
     ### other grails config settings ###
     plugin:
         springsecurity:
@@ -253,11 +253,11 @@ grails:
                     roleNames: ['ROLE_USER']
                 providers:
                     okta:
-                        api_key: '<Okta Client ID>'         
+                        api_key: '<Okta Client ID>'
                         api_secret: '<Okta Client Secret>'
-                        userInfoUrl: 'https://{yourOktaDomain}.com/oauth2/default/v1/userinfo'
-                        authorizeUrl: 'https://{yourOktaDomain}.com/oauth2/default/v1/authorize'
-                        tokenUrl: 'https://{yourOktaDomain}.com/oauth2/default/v1/token'
+                        userInfoUrl: 'https://{yourOktaDomain}/oauth2/default/v1/userinfo'
+                        authorizeUrl: 'https://{yourOktaDomain}/oauth2/default/v1/authorize'
+                        tokenUrl: 'https://{yourOktaDomain}/oauth2/default/v1/token'
                         scopes: 'email profile openid'
 ```
 
@@ -280,12 +280,12 @@ Open the `HomeController.groovy` file and edit it to match the following. We nee
 ```groovy
 import grails.plugin.springsecurity.annotation.Secured
 
-class HomeController {  
-    @Secured('ROLE_USER')  
-    def index() {  
+class HomeController {
+    @Secured('ROLE_USER')
+    def index() {
         render "Success!!!"
-    }  
-}  
+    }
+}
 ```
 
 If you re-start the app and navigate to `http://localhost:8080` now you should see the Home controller listed below the authentication related controllers.
@@ -294,7 +294,7 @@ If you re-start the app and navigate to `http://localhost:8080` now you should s
 
 If you click on the `oktacamerakit.HomeController` link at the bottom of the screen, you'll be taken to a login page. Currently this is a "local" login based on the User domain objects. Since there are no local users, there's no way to authenticate.
 
-To fix this, one option would be to add a "Login with Okta" link to the bottom of the login page. This is pretty simple and would require creating a custom login page template and adding the link. We might get back to this in Part II of this tutorial. 
+To fix this, one option would be to add a "Login with Okta" link to the bottom of the login page. This is pretty simple and would require creating a custom login page template and adding the link. We might get back to this in Part II of this tutorial.
 
 For the moment, we're going to configure Okta to always redirect to the Okta login page when a user needs to log in. Add the following to you `application.groovy` file:
 
@@ -304,9 +304,9 @@ grails.plugin.springsecurity.auth.loginFormUrl = '/springSecurityOAuth2/authenti
 
 ## Give Your New App a Whirl!
 
-That's it! You should be all set. 
+That's it! You should be all set.
 
-Go ahead and log into your developer.okta.com admin panel and sign out. This will force you to log in again through the Grails app instead of automatically being authenticated via OAuth. 
+Go ahead and log into your developer.okta.com admin panel and sign out. This will force you to log in again through the Grails app instead of automatically being authenticated via OAuth.
 
 Re-start the app, using `grails run-app`, and this time navigate to `http://localhost:8080/home/index`.
 
@@ -330,7 +330,7 @@ Obviously there's a lot we can do from here. We'll look at building out the app 
 
 If you’d like to learn more about Grails to get ready for Part 2 check out the [documentation](http://docs.grails.org/snapshot/guide/single.html) and [Groovy Language Documentation](http://groovy-lang.org/documentation.html).
 
-While you’re in the Grails docs, make sure to familiarize yourself with the [basic folder structure of the Grails application](http://docs.grails.org/snapshot/guide/single.html#conventionOverConfiguration). As we saw, it can be touchy. 
+While you’re in the Grails docs, make sure to familiarize yourself with the [basic folder structure of the Grails application](http://docs.grails.org/snapshot/guide/single.html#conventionOverConfiguration). As we saw, it can be touchy.
 
 You may also want to take a look at [Understanding Controllers and Actions](http://docs.grails.org/latest/guide/theWebLayer.html#understandingControllersAndActions).
 

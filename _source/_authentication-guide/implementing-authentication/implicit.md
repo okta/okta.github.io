@@ -33,7 +33,7 @@ Kicking off this flow is very similar to the [authorization code flow](/authenti
 Your browser makes a request to your authorization server's `/authorize` endpoint. If you are using the default Okta authorization server, then your request URL would look something like this:
 
 ```
-https://{yourOktaDomain}.com/oauth2/default/v1/authorize?client_id=0oabv6kx4qq6
+https://{yourOktaDomain}/oauth2/default/v1/authorize?client_id=0oabv6kx4qq6
 h1U5l0h7&response_type=token&scope=openid&redirect_uri=http%3A%2F%2Flocalhost%3
 A8080&state=state-296bc9a0-a2a2-4a57-be1a-d0e2fd9bb601&nonce=foo'
 ```
@@ -42,7 +42,7 @@ Note the parameters that are being passed:
 
 - `client_id` matches the Client ID of your Okta OAuth application that you created above. You can find it at the bottom of your application's General tab.
 - `response_type` is `token`. It could also be `id_token` or both.
-- `scope` is `openid` which is required, though additional scopes can be requested. For more information about scopes, see [here](/standards/OIDC/#scopes).
+- `scope` is `openid` which is required, though additional scopes can be requested. For more information about scopes, see [here](/docs/api/resources/oidc#scopes).
 - `redirect_uri` is the callback location where the user-agent will be directed to along with the `access_token`. This must match one of the "Login redirect URIs" you specified when you were creating your Okta application in Step 1.
 - `state` is an arbitrary alphanumeric string that the authorization server will reproduce when redirecting the user-agent back to the client. This is used to help prevent cross-site request forgery.
 

@@ -572,6 +572,10 @@
   content: $cross;
   color: $icon-color-danger;
 }
+.cir-arrow-16::before {
+  content: $cir-arrow;
+  color: $icon-color-light;
+}
 .checkbox-16::before {
   content: $task-2;
   color: $icon-color-info;

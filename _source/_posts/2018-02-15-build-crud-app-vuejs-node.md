@@ -132,7 +132,7 @@ import PostsManager from '@/components/PostsManager'
 import Auth from '@okta/okta-vue'
 
 Vue.use(Auth, {
-  issuer: 'https://{yourOktaDomain}.com/oauth2/default',
+  issuer: 'https://{yourOktaDomain}/oauth2/default',
   client_id: '{yourClientId}',
   redirect_uri: 'http://localhost:8080/implicit/callback',
   scope: 'openid profile email'
@@ -172,7 +172,7 @@ You'll need to replace `{yourOktaDomain}` and `{yourClientId}` which can be foun
 
 ```javascript
 Vue.use(Auth, {
-  issuer: 'https://{yourOktaDomain}.com/oauth2/default',
+  issuer: 'https://{yourOktaDomain}/oauth2/default',
   client_id: '{yourClientId}',
   redirect_uri: 'http://localhost:8080/implicit/callback',
   scope: 'openid profile email'
@@ -367,7 +367,7 @@ const OktaJwtVerifier = require('@okta/jwt-verifier')
 
 const oktaJwtVerifier = new OktaJwtVerifier({
   clientId: '{yourClientId}',
-  issuer: 'https://{yourOktaDomain}.com/oauth2/default'
+  issuer: 'https://{yourOktaDomain}/oauth2/default'
 })
 
 let app = express()

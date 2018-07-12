@@ -580,7 +580,7 @@ git checkout okta
 Modify `spring-boot-react-example/server/src/main/resources/application.properties` to set the `issuer` and `clientId`.
 
 ```properties
-okta.oauth2.issuer=https://{yourOktaDomain}.com/oauth2/default
+okta.oauth2.issuer=https://{yourOktaDomain}/oauth2/default
 okta.oauth2.clientId={clientId}
 ```
 

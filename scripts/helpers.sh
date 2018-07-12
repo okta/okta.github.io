@@ -161,7 +161,7 @@ function header_checker() {
 
 function check_sample_code_orgs() {
     # Sample code URLS should be in the following format:
-    # Currently: https://{yourOktaDomain}.com
+    # Currently: https://{yourOktaDomain}
 
     local dir=$(pwd)
     local yourOrgUrls=$(grep -EoR "(http|https)://your-org.okta*" --include="*.md" $dir --exclude-dir={node_modules,scripts,tests,dist} | sort | uniq)
@@ -171,7 +171,7 @@ function check_sample_code_orgs() {
     local yourDomainUrls=$(grep -EoR "(http|https)://your-domain.okta*" --include="*.md" $dir --exclude-dir={node_modules,scripts,tests,dist} | sort | uniq)
     local jspUrls=$(grep -EoR "(http|https)://.*{org}.okta*" --include="*.md" $dir --exclude-dir={node_modules,scripts,tests,dist,s} | sort | uniq)
     local oktaPreviewUrls=$(grep -EoR "(http|https)://.*oktapreview.com*" --include="*.md" $dir --exclude-dir={node_modules,scripts,tests,dist,_posts,getting_started,rest,SCIM} | sort | uniq)
-    local yourOktaDomainPartial=$(grep -EoR "(http|https)://{yourOktaDomain}/" --include="*.md" $dir --exclude-dir={node_modules,scripts,tests,dist,_posts,getting_started} | sort | uniq)
+    local yourOktaDomainCom=$(grep -EoR "(http|https)://.*{yourOktaDomain}.com/" --include="*.md" $dir --exclude-dir={node_modules,scripts,tests,dist,_posts,getting_started} | sort | uniq)
 
     if [ "$yourOrgUrls" ];
     then
@@ -222,11 +222,11 @@ function check_sample_code_orgs() {
         return 1
     fi
 
-    if [ "$yourOktaDomainPartial" ];
+    if [ "$yourOktaDomainCom" ];
     then
-        echo "$yourOktaDomainPartial"
-        echo "Files contain invalid URL reference -> https://{yourOktaDomain}/"
-        echo "Please add '.com'"
+        echo "$yourOktaDomainCom"
+        echo "Files contain invalid URL reference -> https://{yourOktaDomain}.com/"
+        echo "Please remove '.com'"
         return 1
     fi
 }

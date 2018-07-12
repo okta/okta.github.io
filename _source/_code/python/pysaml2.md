@@ -122,7 +122,7 @@ the following steps, you will have a working example of connecting Okta to a sam
     "[Setting up a SAML application in Okta](/docs/guides/setting_up_a_saml_application_in_okta)"
     instructions that you followed above!
 
-    Note: The contents of `${metadata_url}` should look similar to: `https://{yourOktaDomain}.com/app/a0b1c2deFGHIJKLMNOPQ/sso/saml/metadata`
+    Note: The contents of `${metadata_url}` should look similar to: `https://{yourOktaDomain}/app/a0b1c2deFGHIJKLMNOPQ/sso/saml/metadata`
 
 6.  Install the dependencies; for example, {{ page.programming_language }} SAML SP:
 

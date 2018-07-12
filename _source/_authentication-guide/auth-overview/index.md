@@ -66,8 +66,8 @@ The usual OAuth 2.0 grant flow looks like this:
 At the core of both OAuth 2.0 and its OpenID Connect extension is the authorization server. An authorization server is simply an OAuth 2.0 token minting engine. Each authorization server has a unique issuer URI and its own signing key for tokens in order to keep a proper boundary between security domains. In the context of this guide, Okta is your authorization server.
 
 The authorization server also acts as an OpenID Connect Provider,
-which means you can request [ID tokens](/standards/OIDC/#id-token)
-in addition to [access tokens](/standards/OAuth/#access-token) from the authorization server endpoints.
+which means you can request [ID tokens](/docs/api/resources/oidc#id-token)
+in addition to [access tokens](/docs/api/resources/oidc#access-token) from the authorization server endpoints.
 
 ### OpenID Connect
 
@@ -272,3 +272,26 @@ app -> client: Response
 -->
 
 For information how to set up your application to use this flow, see [Implement the Client Credentials Flow](/authentication-guide/implementing-authentication/client-creds).
+
+## Authorization Servers
+
+At its core, an authorization server is simply an engine for minting OpenID Connect or OAuth 2.0 tokens. You can't mix tokens between different authorization servers. By design, authorization servers don't have trust relationships with each other.
+
+Okta provides two types of authorization servers:
+
+**Okta Authorization Server**
+
+Use the Okta Authorization Server to perform Single Sign-On with Okta, or get an access token for Okta. The Okta Authorization Server can't be customized. Access tokens issued by the Okta Authorization Server can only be consumed and validated by Okta. The token audience is Okta-specific, so the token can't be used or validated by your own applications.
+
+**Custom Authorization Server**
+
+Use a Custom Authorization Server to secure your APIs. Custom Authorization Servers are hosted on Okta, and created and configured by an org administrator. An access token minted by a Custom Authorization Server is consumed by your APIs. Custom scopes can be configured to support authorization for your APIs.
+
+Okta provides a pre-configured Custom Authorization with the name `default`. It includes a basic access policy and rule to get you started quickly. To use the `default` Custom Authorization Server, use `default` as the authorization server ID:
+
+`https://{yourOktaDomain}/api/v1/authorizationServers/${authServerId}` becomes
+`https://{yourOktaDomain}/api/v1/authorizationServers/default`
+
+For Custom Authorization Servers you create yourself, `${authServerId}` will be a random ID like `aus9o8wzkhckw9TLa0h7z`.
+
+

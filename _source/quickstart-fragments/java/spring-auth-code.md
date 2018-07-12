@@ -29,7 +29,7 @@ You can configure your applications properties with environment variables, syste
 An example `application.properties` file would look like:
 
 ```properties
-okta.oauth2.issuer=https://{yourOktaDomain}.com/oauth2/default
+okta.oauth2.issuer=https://{yourOktaDomain}/oauth2/default
 okta.oauth2.clientId={yourClientId}
 okta.oauth2.clientSecret={yourClientSecret}
 # Configure the callback URL to match the previous section

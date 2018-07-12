@@ -94,8 +94,8 @@ Dropwizard's configuration mechanism is quite easy to work with. All that's need
 
 ```yaml
 oktaOAuth:
-  baseUrl: https://{yourOktaDomain}.com
-  issuer: "https://{yourOktaDomain}.com/oauth2/default"
+  baseUrl: https://{yourOktaDomain}
+  issuer: "https://{yourOktaDomain}/oauth2/default"
   clientId: "{yourClientId}"
   audience: "{yourAudience}"  # defaults to ‘api://default’
 ```

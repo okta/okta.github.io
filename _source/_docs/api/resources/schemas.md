@@ -42,7 +42,7 @@ curl -v -X GET \
 -H "Accept: application/json" \
 -H "Content-Type: application/json" \
 -H "Authorization: SSWS ${api_token}" \
-"https://{yourOktaDomain}.com/api/v1/meta/schemas/user/default"
+"https://{yourOktaDomain}/api/v1/meta/schemas/user/default"
 ~~~
 
 ##### Response Example
@@ -52,7 +52,7 @@ curl -v -X GET \
 
 ~~~json
 {
-    "id": "https://{yourOktaDomain}.com/meta/schemas/user/default",
+    "id": "https://{yourOktaDomain}/meta/schemas/user/default",
     "$schema": "http://json-schema.org/draft-04/schema#",
     "name": "user",
     "title": "Default Okta User",
@@ -197,7 +197,7 @@ curl -v -X POST \
         "required": []
       }
     }
-}' "https://{yourOktaDomain}.com/api/v1/meta/schemas/user/default"
+}' "https://{yourOktaDomain}/api/v1/meta/schemas/user/default"
 ~~~
 
 ##### Response Example
@@ -207,7 +207,7 @@ curl -v -X POST \
 
 ~~~json
 {
-    "id": "https://{yourOktaDomain}.com/meta/schemas/user/default",
+    "id": "https://{yourOktaDomain}/meta/schemas/user/default",
     "$schema": "http://json-schema.org/draft-04/schema#",
     "name": "user",
     "title": "Default Okta User",
@@ -388,7 +388,7 @@ curl -v -X POST \
       }
     }
   }
-}' "https://{yourOktaDomain}.com/api/v1/meta/schemas/user/default"
+}' "https://{yourOktaDomain}/api/v1/meta/schemas/user/default"
 ~~~
 
 ##### Response Example
@@ -398,7 +398,7 @@ curl -v -X POST \
 
 ~~~json
 {
-    "id": "https://{yourOktaDomain}.com/meta/schemas/user/default",
+    "id": "https://{yourOktaDomain}/meta/schemas/user/default",
     "$schema": "http://json-schema.org/draft-04/schema#",
     "name": "user",
     "title": "Default Okta User",
@@ -549,7 +549,7 @@ curl -v -X POST \
       }
     }
   }
-}' "https://{yourOktaDomain}.com/api/v1/meta/schemas/user/default"
+}' "https://{yourOktaDomain}/api/v1/meta/schemas/user/default"
 ~~~
 
 ##### Response Example
@@ -559,7 +559,7 @@ curl -v -X POST \
 
 ~~~json
 {
-    "id": "https://{yourOktaDomain}.com/meta/schemas/user/default",
+    "id": "https://{yourOktaDomain}/meta/schemas/user/default",
     "$schema": "http://json-schema.org/draft-04/schema#",
     "name": "user",
     "title": "Default Okta User",
@@ -683,7 +683,7 @@ curl -v -X GET \
 -H "Accept: application/json" \
 -H "Content-Type: application/json" \
 -H "Authorization: SSWS ${api_token}" \
-"https://{yourOktaDomain}.com/api/v1/meta/schemas/apps/{instanceId}/default"
+"https://{yourOktaDomain}/api/v1/meta/schemas/apps/{instanceId}/default"
 ~~~
 
 ##### Response Example
@@ -691,7 +691,7 @@ curl -v -X GET \
 
 ~~~json
 {
-  "id": "https://{yourOktaDomain}.com/meta/schemas/apps/0oa25gejWwdXNnFH90g4/default",
+  "id": "https://{yourOktaDomain}/meta/schemas/apps/0oa25gejWwdXNnFH90g4/default",
   "$schema": "http://json-schema.org/draft-04/schema#",
   "name": "Example App",
   "title": "Example App User",
@@ -786,7 +786,7 @@ curl -v -X POST \
       }
     }
   }
-}' "https://{yourOktaDomain}.com/api/v1/meta/schemas/apps/{instanceId}/default"
+}' "https://{yourOktaDomain}/api/v1/meta/schemas/apps/{instanceId}/default"
 ~~~
 
 ##### Response Example
@@ -794,7 +794,7 @@ curl -v -X POST \
 
 ~~~json
 {
-  "id": "https://{yourOktaDomain}.com/meta/schemas/apps/0oa25gejWwdXNnFH90g4/default",
+  "id": "https://{yourOktaDomain}/meta/schemas/apps/0oa25gejWwdXNnFH90g4/default",
   "$schema": "http://json-schema.org/draft-04/schema#",
   "name": "Example App",
   "title": "Example App User",
@@ -897,7 +897,7 @@ curl -v -X POST \
       }
     }
   }
-}' "https://{yourOktaDomain}.com/api/v1/meta/schemas/apps/{instanceId}/default"
+}' "https://{yourOktaDomain}/api/v1/meta/schemas/apps/{instanceId}/default"
 ~~~
 
 ##### Response Example
@@ -905,7 +905,7 @@ curl -v -X POST \
 
 ~~~json
 {
-  "id": "https://{yourOktaDomain}.com/meta/schemas/apps/0oa25gejWwdXNnFH90g4/default",
+  "id": "https://{yourOktaDomain}/meta/schemas/apps/0oa25gejWwdXNnFH90g4/default",
   "$schema": "http://json-schema.org/draft-04/schema#",
   "name": "Example App",
   "title": "Example App User",
@@ -1003,7 +1003,7 @@ curl -v -X POST \
       }
     }
   }
-}' "https://{yourOktaDomain}.com/api/v1/meta/schemas/apps/{instanceId}/default"
+}' "https://{yourOktaDomain}/api/v1/meta/schemas/apps/{instanceId}/default"
 ~~~
 
 ##### Response Example
@@ -1011,7 +1011,7 @@ curl -v -X POST \
 
 ~~~json
 {
-  "id": "https://{yourOktaDomain}.com/meta/schemas/apps/0oa25gejWwdXNnFH90g4/default",
+  "id": "https://{yourOktaDomain}/meta/schemas/apps/0oa25gejWwdXNnFH90g4/default",
   "$schema": "http://json-schema.org/draft-04/schema#",
   "name": "Example App",
   "title": "Example App User",
@@ -1066,7 +1066,7 @@ The [User Model](users#user-model) schema is defined using [JSON Schema Draft 4]
 
 ~~~json
 {
-    "id": "https://{yourOktaDomain}.com/meta/schemas/user/default",
+    "id": "https://{yourOktaDomain}/meta/schemas/user/default",
     "$schema": "http://json-schema.org/draft-04/schema#",
     "name": "user",
     "title": "Default Okta User",
@@ -1233,13 +1233,13 @@ Custom property names for the [profile object](users#profile-object) must be uni
 
 #### User Profile Base Subschema
 
-All Okta defined profile properties are defined in a profile sub-schema with the resolution scope `#base`.  These properties cannot be modified, except to update permissions or change the nullability of `firstName` and `lastName`.  They cannot be removed.
+All Okta defined profile properties are defined in a profile sub-schema with the resolution scope `#base`.  These properties cannot be modified, except to update permissions, to change the nullability of `firstName` and `lastName`, or to specify a [pattern](#login-pattern-validation) for `login`.  They cannot be removed.
 
 The base user profile is based on the [System for Cross-Domain Identity Management: Core Schema](https://tools.ietf.org/html/draft-ietf-scim-core-schema-22#section-4.1.1) and has following standard properties:
 
 | Property          | Description                                                                                                                        | DataType | Nullable | Unique | Readonly | MinLength | MaxLength | Validation                                                                                                        |
 | ----------------- | ---------------------------------------------------------------------------------------------------------------------------------- | -------- | -------- | ------ | -------- | --------- | --------- | ----------------------------------------------------------------------------------------------------------------- |
-| login             | unique identifier for the user (`username`)                                                                                        | String   | FALSE    | TRUE   | FALSE    | 5         | 100       | [RFC 6531 Section 3.3](http://tools.ietf.org/html/rfc6531#section-3.3)                                            |
+| login             | unique identifier for the user (`username`)                                                                                        | String   | FALSE    | TRUE   | FALSE    | 5         | 100       | [pattern](#login-pattern-validation)                                            |
 | email             | primary email address of user                                                                                                      | String   | FALSE    | TRUE   | FALSE    | 5         | 100       | [RFC 5322 Section 3.2.3](http://tools.ietf.org/html/rfc5322#section-3.2.3)                                        |
 | secondEmail       | secondary email address of user typically used for account recovery                                                                | String   | TRUE     | TRUE   | FALSE    | 5         | 100       | [RFC 5322 Section 3.2.3](http://tools.ietf.org/html/rfc5322#section-3.2.3)                                        |
 | firstName         | given name of the user (`givenName`)                                                                                               | String   | FALSE (default)    | FALSE  | FALSE    | 1         | 50        |                                                                                                                   |
@@ -1272,6 +1272,14 @@ The base user profile is based on the [System for Cross-Domain Identity Manageme
 | manager           | displayName of the user's manager                                                                                            | String   | TRUE     | FALSE  | FALSE    |           |           |                                                                                                                   |
 
 > Note: A locale value is a concatenation of the ISO 639-1 two letter language code, an underscore, and the ISO 3166-1 2 letter country code; e.g., 'en_US' specifies the language English and country US. [Okta Support Doc for ISO compliant Locale values](https://support.okta.com/help/articles/Knowledge_Article/Universal-Directory-enforcement-of-ISO-compliant-Locale-values)
+
+##### Login Pattern Validation
+
+The `login` property is validated according to its `pattern` attribute, which is a String.  By default the attribute is null, in which case the username is required to be formatted as an email address as defined by [RFC 6531 Section 3.3](http://tools.ietf.org/html/rfc6531#section-3.3).  The pattern can be set via the API to one of the following forms.  (The administrator UI provides access to the same forms.)
+
+A login pattern of `".+"` indicates there is no restriction on usernames; any non-empty, unique value is permitted.  (The minimum length of 5 is not enforced.)  In this case, usernames do not need to include the `@` character.  If a name does include `@`, the portion ahead of the `@` can be used for logging in, provided it identifies a unique user within the org.
+
+A login pattern of the form `"[...]+"` indicates usernames must only contain characters from the set given between the brackets.  The enclosing brackets and final `+` are required for this form.  Character ranges can be indicated using hyphens; to include hyphen itself in the allowed set, the hyphen must appear first.  Any characters in the set except hyphen, a-z, A-Z, and 0-9 must be preceded by a backslash (`\`).  For example, `"[a-z13579\.]+"` would restrict usernames to lowercase letters, odd digits, and periods, while `"[-a-zA-Z0-9]+"` would allow basic alphanumeric characters and hyphens.
 
 #### User Profile Custom Subschema
 
@@ -1411,7 +1419,7 @@ The [App User Model](apps#application-user-model) schema is defined using [JSON 
 
 ~~~json
 {
-  "id": "https://{yourOktaDomain}.com/meta/schemas/apps/0oa25gejWwdXNnFH90g4/default",
+  "id": "https://{yourOktaDomain}/meta/schemas/apps/0oa25gejWwdXNnFH90g4/default",
   "$schema": "http://json-schema.org/draft-04/schema#",
   "name": "Example App",
   "title": "Example App User",

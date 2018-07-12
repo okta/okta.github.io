@@ -9,8 +9,8 @@ class BlogPage extends BasePage {
     this.$blog = $('.Blog.is-index');
     this.$$blogPost = $$('.BlogPost.is-excerpt');
     this.$pagination = $('.Blog-pagination');
-    this.$nextLink = element(by.partialLinkText('Next'));
-    this.$prevLink = element(by.partialLinkText('Prev'));
+    this.$nextLink = element(by.partialLinkText('Next »'));
+    this.$prevLink = element(by.linkText('« Prev'));
     this.setPageLoad(this.$blog);
   }
 

@@ -18,8 +18,7 @@ At the end of the React instructions you can choose your server type to learn mo
 
 ## Prerequisites
 
-* If you do not already have a **Developer Edition Account**, you can create one at [https://developer.okta.com/signup/](https://developer.okta.com/signup/).
-* If you don't have a React app, or are new to React, please start with [React's documentation](https://facebook.github.io/react/docs/installation.html#creating-a-new-application). It will walk you through the creation of a React app, creating routes, and other application development essentials.
+If you don't have a React app, or are new to React, please start with [React's documentation](https://facebook.github.io/react/docs/installation.html#creating-a-new-application). It will walk you through the creation of a React app, creating routes, and other application development essentials.
 
 ## Add an OpenID Connect Client in Okta
 
@@ -62,7 +61,7 @@ In your application's `App.js` file, import the following objects and pass in yo
 import { Security, ImplicitCallback } from '@okta/okta-react';
 
 const config = {
-  issuer: 'https://{yourOktaDomain}.com/oauth2/default',
+  issuer: 'https://{yourOktaDomain}/oauth2/default',
   redirect_uri: window.location.origin + '/implicit/callback',
   client_id: '{clientId}'
 }
@@ -139,7 +138,7 @@ import { Security, ImplicitCallback } from '@okta/okta-react';
 import Home from './Home';
 
 const config = {
-  issuer: 'https://{yourOktaDomain}.com/oauth2/default',
+  issuer: 'https://{yourOktaDomain}/oauth2/default',
   redirect_uri: window.location.origin + '/implicit/callback',
   client_id: '{clientId}'
 }

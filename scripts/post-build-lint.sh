@@ -4,7 +4,7 @@ source "${0%/*}/helpers.sh"
 
 if ! check_sample_code_orgs ;
 then
-    echo "Failed URL consistency check. Please use https://{yourOktaDomain}.com"
+    echo "Failed URL consistency check. Please use https://{yourOktaDomain}"
     exit 1;
 else
     echo -e "\xE2\x9C\x94 Passed check_sample_code_orgs"

@@ -753,13 +753,13 @@ Create `server/src/main/resources/application.yml` and copy the client ID into i
 security:
     oauth2:
         client:
-            access-token-uri: https://{yourOktaDomain}.com/oauth2/default/v1/token
-            user-authorization-uri: https://{yourOktaDomain}.com/oauth2/default/v1/authorize
+            access-token-uri: https://{yourOktaDomain}/oauth2/default/v1/token
+            user-authorization-uri: https://{yourOktaDomain}/oauth2/default/v1/authorize
             client-id: {clientId}
             scope: openid profile email
         resource:
-            user-info-uri: https://{yourOktaDomain}.com/oauth2/default/v1/userinfo
-            token-info-uri: https://{yourOktaDomain}.com/oauth2/default/v1/introspect
+            user-info-uri: https://{yourOktaDomain}/oauth2/default/v1/userinfo
+            token-info-uri: https://{yourOktaDomain}/oauth2/default/v1/introspect
             prefer-token-info: false
 ```
 
@@ -794,7 +794,7 @@ In `client/src/app/app.module.ts`, add a `config` variable with the settings for
 
 ```typescript
 const config = {
-  issuer: 'https://{yourOktaDomain}.com/oauth2/default',
+  issuer: 'https://{yourOktaDomain}/oauth2/default',
   redirectUri: 'http://localhost:4200/implicit/callback',
   clientId: '{clientId}'
 };

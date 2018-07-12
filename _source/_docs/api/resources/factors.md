@@ -47,7 +47,7 @@ curl -v -X GET \
 -H "Accept: application/json" \
 -H "Content-Type: application/json" \
 -H "Authorization: SSWS ${api_token}" \
-"https://{yourOktaDomain}.com/api/v1/users/00u15s1KDETTQMQYABRL/factors/ufs2bysphxKODSZKWVCT"
+"https://{yourOktaDomain}/api/v1/users/00u15s1KDETTQMQYABRL/factors/ufs2bysphxKODSZKWVCT"
 ~~~
 
 #### Response Example
@@ -66,7 +66,7 @@ curl -v -X GET \
   },
   "_links": {
     "verify": {
-      "href": "https://{yourOktaDomain}.com/api/v1/users/00u15s1KDETTQMQYABRL/factors/sms2gt8gzgEBPUWBIFHN/verify",
+      "href": "https://{yourOktaDomain}/api/v1/users/00u15s1KDETTQMQYABRL/factors/sms2gt8gzgEBPUWBIFHN/verify",
       "hints": {
         "allow": [
           "POST"
@@ -74,7 +74,7 @@ curl -v -X GET \
       }
     },
     "self": {
-      "href": "https://{yourOktaDomain}.com/api/v1/users/00u15s1KDETTQMQYABRL/factors/sms2gt8gzgEBPUWBIFHN",
+      "href": "https://{yourOktaDomain}/api/v1/users/00u15s1KDETTQMQYABRL/factors/sms2gt8gzgEBPUWBIFHN",
       "hints": {
         "allow": [
           "GET",
@@ -83,7 +83,7 @@ curl -v -X GET \
       }
     },
     "user": {
-      "href": "https://{yourOktaDomain}.com/api/v1/users/00u15s1KDETTQMQYABRL",
+      "href": "https://{yourOktaDomain}/api/v1/users/00u15s1KDETTQMQYABRL",
       "hints": {
         "allow": [
           "GET"
@@ -121,7 +121,7 @@ curl -v -X GET \
 -H "Accept: application/json" \
 -H "Content-Type: application/json" \
 -H "Authorization: SSWS ${api_token}" \
-"https://{yourOktaDomain}.com/api/v1/users/00u15s1KDETTQMQYABRL/factors"
+"https://{yourOktaDomain}/api/v1/users/00u15s1KDETTQMQYABRL/factors"
 ~~~
 
 #### Response Example
@@ -142,7 +142,7 @@ curl -v -X GET \
     },
     "_links": {
       "questions": {
-        "href": "https://{yourOktaDomain}.com/api/v1/users/00u15s1KDETTQMQYABRL/factors/questions",
+        "href": "https://{yourOktaDomain}/api/v1/users/00u15s1KDETTQMQYABRL/factors/questions",
         "hints": {
           "allow": [
             "GET"
@@ -150,7 +150,7 @@ curl -v -X GET \
         }
       },
       "self": {
-        "href": "https://{yourOktaDomain}.com/api/v1/users/00u15s1KDETTQMQYABRL/factors/ufs2bysphxKODSZKWVCT",
+        "href": "https://{yourOktaDomain}/api/v1/users/00u15s1KDETTQMQYABRL/factors/ufs2bysphxKODSZKWVCT",
         "hints": {
           "allow": [
             "GET",
@@ -159,7 +159,7 @@ curl -v -X GET \
         }
       },
       "user": {
-        "href": "https://{yourOktaDomain}.com/api/v1/users/00u15s1KDETTQMQYABRL",
+        "href": "https://{yourOktaDomain}/api/v1/users/00u15s1KDETTQMQYABRL",
         "hints": {
           "allow": [
             "GET"
@@ -181,7 +181,7 @@ curl -v -X GET \
     "_links": {
       "next": {
         "name": "activate",
-        "href": "https://{yourOktaDomain}.com/api/v1/users/00u15s1KDETTQMQYABRL/factors/ostf2gsyictRQDSGTDZE/lifecycle/activate",
+        "href": "https://{yourOktaDomain}/api/v1/users/00u15s1KDETTQMQYABRL/factors/ostf2gsyictRQDSGTDZE/lifecycle/activate",
         "hints": {
           "allow": [
             "POST"
@@ -189,7 +189,7 @@ curl -v -X GET \
         }
       },
       "self": {
-        "href": "https://{yourOktaDomain}.com/api/v1/users/00u15s1KDETTQMQYABRL/factors/ostf2gsyictRQDSGTDZE",
+        "href": "https://{yourOktaDomain}/api/v1/users/00u15s1KDETTQMQYABRL/factors/ostf2gsyictRQDSGTDZE",
         "hints": {
           "allow": [
             "GET"
@@ -197,7 +197,7 @@ curl -v -X GET \
         }
       },
       "user": {
-        "href": "https://{yourOktaDomain}.com/api/v1/users/00u15s1KDETTQMQYABRL",
+        "href": "https://{yourOktaDomain}/api/v1/users/00u15s1KDETTQMQYABRL",
         "hints": {
           "allow": [
             "GET"
@@ -226,7 +226,7 @@ curl -v -X GET \
     },
     "_links": {
       "verify": {
-        "href": "https://{yourOktaDomain}.com/api/v1/users/00u15s1KDETTQMQYABRL/factors/sms2gt8gzgEBPUWBIFHN/verify",
+        "href": "https://{yourOktaDomain}/api/v1/users/00u15s1KDETTQMQYABRL/factors/sms2gt8gzgEBPUWBIFHN/verify",
         "hints": {
           "allow": [
             "POST"
@@ -234,7 +234,7 @@ curl -v -X GET \
         }
       },
       "self": {
-        "href": "https://{yourOktaDomain}.com/api/v1/users/00u15s1KDETTQMQYABRL/factors/sms2gt8gzgEBPUWBIFHN",
+        "href": "https://{yourOktaDomain}/api/v1/users/00u15s1KDETTQMQYABRL/factors/sms2gt8gzgEBPUWBIFHN",
         "hints": {
           "allow": [
             "GET",
@@ -243,7 +243,7 @@ curl -v -X GET \
         }
       },
       "user": {
-        "href": "https://{yourOktaDomain}.com/api/v1/users/00u15s1KDETTQMQYABRL",
+        "href": "https://{yourOktaDomain}/api/v1/users/00u15s1KDETTQMQYABRL",
         "hints": {
           "allow": [
             "GET"
@@ -282,7 +282,7 @@ curl -v -X GET \
 -H "Accept: application/json" \
 -H "Content-Type: application/json" \
 -H "Authorization: SSWS ${api_token}" \
-"https://{yourOktaDomain}.com/api/v1/users/00u15s1KDETTQMQYABRL/factors/catalog"
+"https://{yourOktaDomain}/api/v1/users/00u15s1KDETTQMQYABRL/factors/catalog"
 ~~~
 
 #### Response Example
@@ -295,7 +295,7 @@ curl -v -X GET \
     "provider": "OKTA",
     "_links": {
       "questions": {
-        "href": "https://{yourOktaDomain}.com/api/v1/users/00u15s1KDETTQMQYABRL/factors/questions",
+        "href": "https://{yourOktaDomain}/api/v1/users/00u15s1KDETTQMQYABRL/factors/questions",
         "hints": {
           "allow": [
             "GET"
@@ -303,7 +303,7 @@ curl -v -X GET \
         }
       },
       "enroll": {
-        "href": "https://{yourOktaDomain}.com/api/v1/users/00u15s1KDETTQMQYABRL/factors",
+        "href": "https://{yourOktaDomain}/api/v1/users/00u15s1KDETTQMQYABRL/factors",
         "hints": {
           "allow": [
             "POST"
@@ -317,7 +317,7 @@ curl -v -X GET \
     "provider": "OKTA",
     "_links": {
       "enroll": {
-        "href": "https://{yourOktaDomain}.com/api/v1/users/00u15s1KDETTQMQYABRL/factors",
+        "href": "https://{yourOktaDomain}/api/v1/users/00u15s1KDETTQMQYABRL/factors",
         "hints": {
           "allow": [
             "POST"
@@ -331,7 +331,7 @@ curl -v -X GET \
     "provider": "GOOGLE",
     "_links": {
       "enroll": {
-        "href": "https://{yourOktaDomain}.com/api/v1/users/00u15s1KDETTQMQYABRL/factors",
+        "href": "https://{yourOktaDomain}/api/v1/users/00u15s1KDETTQMQYABRL/factors",
         "hints": {
           "allow": [
             "POST"
@@ -345,7 +345,7 @@ curl -v -X GET \
     "provider": "OKTA",
     "_links": {
       "enroll": {
-        "href": "https://{yourOktaDomain}.com/api/v1/users/00u15s1KDETTQMQYABRL/factors",
+        "href": "https://{yourOktaDomain}/api/v1/users/00u15s1KDETTQMQYABRL/factors",
         "hints": {
           "allow": [
             "POST"
@@ -370,7 +370,7 @@ curl -v -X GET \
       "provider": "OKTA",
       "_links": {
         "enroll": {
-          "href": "https://{yourOktaDomain}.com/api/v1/users/00u15s1KDETTQMQYABRL/factors",
+          "href": "https://{yourOktaDomain}/api/v1/users/00u15s1KDETTQMQYABRL/factors",
           "hints": {
             "allow": [
               "POST"
@@ -384,7 +384,7 @@ curl -v -X GET \
     "provider": "RSA",
     "_links": {
       "enroll": {
-        "href": "https://{yourOktaDomain}.com/api/v1/users/00u15s1KDETTQMQYABRL/factors",
+        "href": "https://{yourOktaDomain}/api/v1/users/00u15s1KDETTQMQYABRL/factors",
         "hints": {
           "allow": [
             "POST"
@@ -398,7 +398,7 @@ curl -v -X GET \
     "provider": "SYMANTEC",
     "_links": {
       "enroll": {
-        "href": "https://{yourOktaDomain}.com/api/v1/users/00u15s1KDETTQMQYABRL/factors",
+        "href": "https://{yourOktaDomain}/api/v1/users/00u15s1KDETTQMQYABRL/factors",
         "hints": {
           "allow": [
             "POST"
@@ -447,7 +447,7 @@ curl -v -X GET \
 -H "Accept: application/json" \
 -H "Content-Type: application/json" \
 -H "Authorization: SSWS ${api_token}" \
-"https://{yourOktaDomain}.com/api/v1/users/00u15s1KDETTQMQYABRL/factors/questions"
+"https://{yourOktaDomain}/api/v1/users/00u15s1KDETTQMQYABRL/factors/questions"
 ~~~
 
 #### Response Example
@@ -529,7 +529,7 @@ curl -v -X POST \
     "question": "disliked_food",
     "answer": "mayonnaise"
   }
-}' "https://{yourOktaDomain}.com/api/v1/users/00u15s1KDETTQMQYABRL/factors"
+}' "https://{yourOktaDomain}/api/v1/users/00u15s1KDETTQMQYABRL/factors"
 ~~~
 
 ##### Response Example
@@ -549,7 +549,7 @@ curl -v -X POST \
   },
   "_links": {
     "questions": {
-      "href": "https://{yourOktaDomain}.com/api/v1/users/00u15s1KDETTQMQYABRL/factors/questions",
+      "href": "https://{yourOktaDomain}/api/v1/users/00u15s1KDETTQMQYABRL/factors/questions",
       "hints": {
         "allow": [
           "GET"
@@ -557,7 +557,7 @@ curl -v -X POST \
       }
     },
     "self": {
-      "href": "https://{yourOktaDomain}.com/api/v1/users/00u15s1KDETTQMQYABRL/factors/ufs1o01OTMGHLAJPVHDZ",
+      "href": "https://{yourOktaDomain}/api/v1/users/00u15s1KDETTQMQYABRL/factors/ufs1o01OTMGHLAJPVHDZ",
       "hints": {
         "allow": [
           "GET",
@@ -566,7 +566,7 @@ curl -v -X POST \
       }
     },
     "user": {
-      "href": "https://{yourOktaDomain}.com/api/v1/users/00u15s1KDETTQMQYABRL",
+      "href": "https://{yourOktaDomain}/api/v1/users/00u15s1KDETTQMQYABRL",
       "hints": {
         "allow": [
           "GET"
@@ -596,7 +596,7 @@ curl -v -X POST \
   "profile": {
     "phoneNumber": "+1-555-415-1337"
   }
-}' "https://{yourOktaDomain}.com/api/v1/users/00u15s1KDETTQMQYABRL/factors"
+}' "https://{yourOktaDomain}/api/v1/users/00u15s1KDETTQMQYABRL/factors"
 ~~~
 
 ##### Response Example
@@ -615,7 +615,7 @@ curl -v -X POST \
   },
   "_links": {
     "activate": {
-      "href": "https://{yourOktaDomain}.com/api/v1/users/00u15s1KDETTQMQYABRL/factors/mbl1nz9JHJGHWRKMTLHP/lifecycle/activate",
+      "href": "https://{yourOktaDomain}/api/v1/users/00u15s1KDETTQMQYABRL/factors/mbl1nz9JHJGHWRKMTLHP/lifecycle/activate",
       "hints": {
         "allow": [
           "POST"
@@ -625,7 +625,7 @@ curl -v -X POST \
     "resend": [
       {
         "name": "sms",
-        "href": "https://{yourOktaDomain}.com/api/v1/users/00u15s1KDETTQMQYABRL/factors/mbl1nz9JHJGHWRKMTLHP/resend",
+        "href": "https://{yourOktaDomain}/api/v1/users/00u15s1KDETTQMQYABRL/factors/mbl1nz9JHJGHWRKMTLHP/resend",
         "hints": {
           "allow": [
             "POST"
@@ -634,7 +634,7 @@ curl -v -X POST \
       }
     ],
     "self": {
-      "href": "https://{yourOktaDomain}.com/api/v1/users/00u15s1KDETTQMQYABRL/factors/mbl1nz9JHJGHWRKMTLHP",
+      "href": "https://{yourOktaDomain}/api/v1/users/00u15s1KDETTQMQYABRL/factors/mbl1nz9JHJGHWRKMTLHP",
       "hints": {
         "allow": [
           "GET"
@@ -642,7 +642,7 @@ curl -v -X POST \
       }
     },
     "user": {
-      "href": "https://{yourOktaDomain}.com/api/v1/users/00u15s1KDETTQMQYABRL",
+      "href": "https://{yourOktaDomain}/api/v1/users/00u15s1KDETTQMQYABRL",
       "hints": {
         "allow": [
           "GET"
@@ -710,7 +710,7 @@ curl -v -X POST \
   "profile": {
     "phoneNumber": "+1-555-415-1337"
   }
-}' "https://{yourOktaDomain}.com/api/v1/users/${userId}/factors?updatePhone=true"
+}' "https://{yourOktaDomain}/api/v1/users/${userId}/factors?updatePhone=true"
 ~~~
 
 ##### Enroll Okta SMS Factor by Using Existing Phone Number
@@ -730,7 +730,7 @@ curl -v -X POST \
 -d '{
   "factorType": "sms",
   "provider": "OKTA"
-}' "https://{yourOktaDomain}.com/api/v1/users/${userId}/factors"
+}' "https://{yourOktaDomain}/api/v1/users/${userId}/factors"
 ~~~
 
 ##### Enroll Okta SMS Factor Using Custom Template
@@ -758,8 +758,31 @@ curl -v -X POST \
   "profile": {
     "phoneNumber": "+1-555-415-1337"
   }
-}' "https://{yourOktaDomain}.com/api/v1/users/${userId}/factors?templateId=${templateId}"
+}' "https://{yourOktaDomain}/api/v1/users/${userId}/factors?templateId=${templateId}"
 ~~~
+
+##### Resend SMS as Part of Enrollment
+{:.api .api-operation}
+
+Use the `resend` link to send another OTP if user doesn't receive the original activation SMS OTP.
+
+###### Request Example
+{:.api .api-request .api-request-example}
+
+~~~sh
+curl -v -X POST \
+-H "Accept: application/json" \
+-H "Content-Type: application/json" \
+-H "Authorization: SSWS ${api_token}" \
+-d '{
+  "factorType": "sms",
+  "provider": "OKTA",
+  "profile": {
+    "phoneNumber": "+1-555-415-1337"
+  }
+}' "https://{yourOktaDomain}/api/v1/users/${userId}/factors/${factorId}/resend"
+~~~
+
 
 ##### Resend SMS as Part of Enrollment Using a Custom Template
 {:.api .api-operation}
@@ -784,7 +807,7 @@ curl -v -X POST \
   "profile": {
     "phoneNumber": "+1-555-415-1337"
   }
-}' "https://{yourOktaDomain}.com/api/v1/users/${userId}/factors/${factorId}/resend?templateId=${templateId}"
+}' "https://{yourOktaDomain}/api/v1/users/${userId}/factors/${factorId}/resend?templateId=${templateId}"
 ~~~
 
 ##### Enroll and Auto-Activate Okta SMS Factor
@@ -806,7 +829,7 @@ curl -v -X POST \
   "profile": {
     "phoneNumber": "+1-555-415-1337"
   }
-}' "https://{yourOktaDomain}.com/api/v1/users/${userId}/factors?activate=true"
+}' "https://{yourOktaDomain}/api/v1/users/${userId}/factors?activate=true"
 ~~~
 
 #### Enroll Okta Call Factor
@@ -829,7 +852,7 @@ curl -v -X POST \
     "phoneNumber": "+1-555-415-1337",
     "phoneExtension": "1234"
   }
-}' "https://{yourOktaDomain}.com/api/v1/users/00u15s1KDETTQMQYABRL/factors"
+}' "https://{yourOktaDomain}/api/v1/users/00u15s1KDETTQMQYABRL/factors"
 ~~~
 
 ##### Response Example
@@ -849,7 +872,7 @@ curl -v -X POST \
   },
   "_links": {
     "activate": {
-      "href": "https://{yourOktaDomain}.com/api/v1/users/00u15s1KDETTQMQYABRL/factors/clf1nz9JHJGHWRKMTLHP/lifecycle/activate",
+      "href": "https://{yourOktaDomain}/api/v1/users/00u15s1KDETTQMQYABRL/factors/clf1nz9JHJGHWRKMTLHP/lifecycle/activate",
       "hints": {
         "allow": [
           "POST"
@@ -859,7 +882,7 @@ curl -v -X POST \
     "resend": [
       {
         "name": "call",
-        "href": "https://{yourOktaDomain}.com/api/v1/users/00u15s1KDETTQMQYABRL/factors/clf1nz9JHJGHWRKMTLHP/resend",
+        "href": "https://{yourOktaDomain}/api/v1/users/00u15s1KDETTQMQYABRL/factors/clf1nz9JHJGHWRKMTLHP/resend",
         "hints": {
           "allow": [
             "POST"
@@ -868,7 +891,7 @@ curl -v -X POST \
       }
     ],
     "self": {
-      "href": "https://{yourOktaDomain}.com/api/v1/users/00u15s1KDETTQMQYABRL/factors/clf1nz9JHJGHWRKMTLHP",
+      "href": "https://{yourOktaDomain}/api/v1/users/00u15s1KDETTQMQYABRL/factors/clf1nz9JHJGHWRKMTLHP",
       "hints": {
         "allow": [
           "GET"
@@ -876,7 +899,7 @@ curl -v -X POST \
       }
     },
     "user": {
-      "href": "https://{yourOktaDomain}.com/api/v1/users/00u15s1KDETTQMQYABRL",
+      "href": "https://{yourOktaDomain}/api/v1/users/00u15s1KDETTQMQYABRL",
       "hints": {
         "allow": [
           "GET"
@@ -917,10 +940,32 @@ A `400 Bad Request` status code may be returned if you attempt to enroll with a 
     "errorId": "oaeneEaQF8qQrepOWHSkdoejw",
     "errorCauses": [
        {
-          "errorSummary": "Factor already exists."
+          "errorSummary": "A factor of this type is already set up."
        }
     ]
 }
+~~~
+
+##### Resend Voice Call as Part of Enrollment
+{:.api .api-operation}
+
+Use the `resend` link to send another OTP if user doesn't receive the original activation Voice Call OTP.
+
+###### Request Example
+{:.api .api-request .api-request-example}
+
+~~~sh
+curl -v -X POST \
+-H "Accept: application/json" \
+-H "Content-Type: application/json" \
+-H "Authorization: SSWS ${api_token}" \
+-d '{
+  "factorType": "call",
+  "provider": "OKTA",
+  "profile": {
+    "phoneNumber": "+1-555-415-1337"
+  }
+}' "https://{yourOktaDomain}/api/v1/users/${userId}/factors/${factorId}/resend"
 ~~~
 
 ##### Enroll and Auto-Activate Okta Call Factor
@@ -943,7 +988,7 @@ curl -v -X POST \
     "phoneNumber": "+1-555-415-1337",
     "phoneExtension": "1234"
   }
-}' "https://{yourOktaDomain}.com/api/v1/users/00u15s1KDETTQMQYABRL/factors?activate=true"
+}' "https://{yourOktaDomain}/api/v1/users/00u15s1KDETTQMQYABRL/factors?activate=true"
 ~~~
 
 #### Enroll Okta Verify TOTP Factor
@@ -962,7 +1007,7 @@ curl -v -X POST \
 -d '{
   "factorType": "token:software:totp",
   "provider": "OKTA"
-}' "https://{yourOktaDomain}.com/api/v1/users/00u15s1KDETTQMQYABRL/factors"
+}' "https://{yourOktaDomain}/api/v1/users/00u15s1KDETTQMQYABRL/factors"
 ~~~
 
 ##### Response Example
@@ -981,7 +1026,7 @@ curl -v -X POST \
   },
   "_links": {
     "activate": {
-      "href": "https://{yourOktaDomain}.com/api/v1/users/00u15s1KDETTQMQYABRL/factors/ostf1fmaMGJLMNGNLIVG/lifecycle/activate",
+      "href": "https://{yourOktaDomain}/api/v1/users/00u15s1KDETTQMQYABRL/factors/ostf1fmaMGJLMNGNLIVG/lifecycle/activate",
       "hints": {
         "allow": [
           "POST"
@@ -989,7 +1034,7 @@ curl -v -X POST \
       }
     },
     "self": {
-      "href": "https://{yourOktaDomain}.com/api/v1/users/00u15s1KDETTQMQYABRL/factors/ostf1fmaMGJLMNGNLIVG",
+      "href": "https://{yourOktaDomain}/api/v1/users/00u15s1KDETTQMQYABRL/factors/ostf1fmaMGJLMNGNLIVG",
       "hints": {
         "allow": [
           "GET"
@@ -997,7 +1042,7 @@ curl -v -X POST \
       }
     },
     "user": {
-      "href": "https://{yourOktaDomain}.com/api/v1/users/00u15s1KDETTQMQYABRL",
+      "href": "https://{yourOktaDomain}/api/v1/users/00u15s1KDETTQMQYABRL",
       "hints": {
         "allow": [
           "GET"
@@ -1014,7 +1059,7 @@ curl -v -X POST \
     },
     "_links": {
       "qrcode": {
-        "href": "https://{yourOktaDomain}.com/api/v1/users/00u15s1KDETTQMQYABRL/factors/ostf1fmaMGJLMNGNLIVG/qr/00fukNElRS_Tz6k-CFhg3pH4KO2dj2guhmaapXWbc4",
+        "href": "https://{yourOktaDomain}/api/v1/users/00u15s1KDETTQMQYABRL/factors/ostf1fmaMGJLMNGNLIVG/qr/00fukNElRS_Tz6k-CFhg3pH4KO2dj2guhmaapXWbc4",
         "type": "image/png"
       }
     }
@@ -1040,7 +1085,7 @@ curl -v -X POST \
 -d '{
   "factorType": "push",
   "provider": "OKTA",
-}' "https://{yourOktaDomain}.com/api/v1/users/00u15s1KDETTQMQYABRL/factors"
+}' "https://{yourOktaDomain}/api/v1/users/00u15s1KDETTQMQYABRL/factors"
 ~~~
 
 ##### Response Example
@@ -1056,7 +1101,7 @@ curl -v -X POST \
   "lastUpdated": "2015-11-13T07:34:22.000Z",
   "_links": {
     "poll": {
-      "href": "https://{yourOktaDomain}.com/api/v1/users/00u15s1KDETTQMQYABRL/factors/opfbtzzrjgwauUsxO0g4/lifecycle/activate/poll",
+      "href": "https://{yourOktaDomain}/api/v1/users/00u15s1KDETTQMQYABRL/factors/opfbtzzrjgwauUsxO0g4/lifecycle/activate/poll",
       "hints": {
         "allow": [
           "POST"
@@ -1064,7 +1109,7 @@ curl -v -X POST \
       }
     },
     "self": {
-      "href": "https://{yourOktaDomain}.com/api/v1/users/00u15s1KDETTQMQYABRL/factors/opfbtzzrjgwauUsxO0g4",
+      "href": "https://{yourOktaDomain}/api/v1/users/00u15s1KDETTQMQYABRL/factors/opfbtzzrjgwauUsxO0g4",
       "hints": {
         "allow": [
           "GET"
@@ -1072,7 +1117,7 @@ curl -v -X POST \
       }
     },
     "user": {
-      "href": "https://{yourOktaDomain}.com/api/v1/users/00u15s1KDETTQMQYABRL",
+      "href": "https://{yourOktaDomain}/api/v1/users/00u15s1KDETTQMQYABRL",
       "hints": {
         "allow": [
           "GET"
@@ -1088,7 +1133,7 @@ curl -v -X POST \
         "send": [
           {
             "name": "email",
-            "href": "https://{yourOktaDomain}.com/api/v1/users/00u15s1KDETTQMQYABRL/factors/opfbtzzrjgwauUsxO0g4/lifecycle/activate/email",
+            "href": "https://{yourOktaDomain}/api/v1/users/00u15s1KDETTQMQYABRL/factors/opfbtzzrjgwauUsxO0g4/lifecycle/activate/email",
             "hints": {
               "allow": [
                 "POST"
@@ -1097,7 +1142,7 @@ curl -v -X POST \
           },
           {
             "name": "sms",
-            "href": "https://{yourOktaDomain}.com/api/v1/users/00u15s1KDETTQMQYABRL/factors/opfbtzzrjgwauUsxO0g4/lifecycle/activate/sms",
+            "href": "https://{yourOktaDomain}/api/v1/users/00u15s1KDETTQMQYABRL/factors/opfbtzzrjgwauUsxO0g4/lifecycle/activate/sms",
             "hints": {
               "allow": [
                 "POST"
@@ -1106,7 +1151,7 @@ curl -v -X POST \
           }
         ],
         "qrcode": {
-          "href": "https://{yourOktaDomain}.com/api/v1/users/00u15s1KDETTQMQYABRL/factors/opfbtzzrjgwauUsxO0g4/qr/00Ji8qVBNJD4LmjYy1WZO2VbNqvvPdaCVua-1qjypa",
+          "href": "https://{yourOktaDomain}/api/v1/users/00u15s1KDETTQMQYABRL/factors/opfbtzzrjgwauUsxO0g4/qr/00Ji8qVBNJD4LmjYy1WZO2VbNqvvPdaCVua-1qjypa",
           "type": "image/png"
         }
       }
@@ -1131,7 +1176,7 @@ curl -v -X POST \
 -d '{
   "factorType": "token:software:totp",
   "provider": "GOOGLE"
-}' "https://{yourOktaDomain}.com/api/v1/users/00u15s1KDETTQMQYABRL/factors"
+}' "https://{yourOktaDomain}/api/v1/users/00u15s1KDETTQMQYABRL/factors"
 ~~~
 
 ##### Response Example
@@ -1150,7 +1195,7 @@ curl -v -X POST \
   },
   "_links": {
     "activate": {
-      "href": "https://{yourOktaDomain}.com/api/v1/users/00u15s1KDETTQMQYABRL/factors/ostf1fmaMGJLMNGNLIVG/lifecycle/activate",
+      "href": "https://{yourOktaDomain}/api/v1/users/00u15s1KDETTQMQYABRL/factors/ostf1fmaMGJLMNGNLIVG/lifecycle/activate",
       "hints": {
         "allow": [
           "POST"
@@ -1158,7 +1203,7 @@ curl -v -X POST \
       }
     },
     "self": {
-      "href": "https://{yourOktaDomain}.com/api/v1/users/00u15s1KDETTQMQYABRL/factors/ostf1fmaMGJLMNGNLIVG",
+      "href": "https://{yourOktaDomain}/api/v1/users/00u15s1KDETTQMQYABRL/factors/ostf1fmaMGJLMNGNLIVG",
       "hints": {
         "allow": [
           "GET"
@@ -1166,7 +1211,7 @@ curl -v -X POST \
       }
     },
     "user": {
-      "href": "https://{yourOktaDomain}.com/api/v1/users/00u15s1KDETTQMQYABRL",
+      "href": "https://{yourOktaDomain}/api/v1/users/00u15s1KDETTQMQYABRL",
       "hints": {
         "allow": [
           "GET"
@@ -1182,7 +1227,7 @@ curl -v -X POST \
       "keyLength": 16,
       "_links": {
         "qrcode": {
-          "href": "https://{yourOktaDomain}.com/api/v1/users/00u15s1KDETTQMQYABRL/factors/ostf1fmaMGJLMNGNLIVG/qr/00fukNElRS_Tz6k-CFhg3pH4KO2dj2guhmaapXWbc4",
+          "href": "https://{yourOktaDomain}/api/v1/users/00u15s1KDETTQMQYABRL/factors/ostf1fmaMGJLMNGNLIVG/qr/00fukNElRS_Tz6k-CFhg3pH4KO2dj2guhmaapXWbc4",
           "type": "image/png"
         }
       }
@@ -1213,7 +1258,7 @@ curl -v -X POST \
   "verify": {
     "passCode": "5275875498",
   }
-}' "https://{yourOktaDomain}.com/api/v1/users/00u15s1KDETTQMQYABRL/factors"
+}' "https://{yourOktaDomain}/api/v1/users/00u15s1KDETTQMQYABRL/factors"
 ~~~
 
 ##### Response Example
@@ -1232,7 +1277,7 @@ curl -v -X POST \
   },
   "_links": {
     "verify": {
-      "href": "https://{yourOktaDomain}.com/api/v1/users/00u15s1KDETTQMQYABRL/factors/rsabtznMn6cp94ez20g4/verify",
+      "href": "https://{yourOktaDomain}/api/v1/users/00u15s1KDETTQMQYABRL/factors/rsabtznMn6cp94ez20g4/verify",
       "hints": {
         "allow": [
           "POST"
@@ -1240,7 +1285,7 @@ curl -v -X POST \
       }
     },
     "self": {
-      "href": "https://{yourOktaDomain}.com/api/v1/users/00u15s1KDETTQMQYABRL/factors/rsabtznMn6cp94ez20g4",
+      "href": "https://{yourOktaDomain}/api/v1/users/00u15s1KDETTQMQYABRL/factors/rsabtznMn6cp94ez20g4",
       "hints": {
         "allow": [
           "GET",
@@ -1249,7 +1294,7 @@ curl -v -X POST \
       }
     },
     "user": {
-      "href": "https://{yourOktaDomain}.com/api/v1/users/00u15s1KDETTQMQYABRL",
+      "href": "https://{yourOktaDomain}/api/v1/users/00u15s1KDETTQMQYABRL",
       "hints": {
         "allow": [
           "GET"
@@ -1283,7 +1328,7 @@ curl -v -X POST \
     "passCode": "875498",
     "nextPassCode": "678195"
   }
-}' "https://{yourOktaDomain}.com/api/v1/users/00u15s1KDETTQMQYABRL/factors"
+}' "https://{yourOktaDomain}/api/v1/users/00u15s1KDETTQMQYABRL/factors"
 ~~~
 
 ##### Response Example
@@ -1302,7 +1347,7 @@ curl -v -X POST \
   },
   "_links": {
     "verify": {
-      "href": "https://{yourOktaDomain}.com/api/v1/users/00u15s1KDETTQMQYABRL/factors/ufvbtzgkYaA7zTKdQ0g4/verify",
+      "href": "https://{yourOktaDomain}/api/v1/users/00u15s1KDETTQMQYABRL/factors/ufvbtzgkYaA7zTKdQ0g4/verify",
       "hints": {
         "allow": [
           "POST"
@@ -1310,7 +1355,7 @@ curl -v -X POST \
       }
     },
     "self": {
-      "href": "https://{yourOktaDomain}.com/api/v1/users/00u15s1KDETTQMQYABRL/factors/ufvbtzgkYaA7zTKdQ0g4",
+      "href": "https://{yourOktaDomain}/api/v1/users/00u15s1KDETTQMQYABRL/factors/ufvbtzgkYaA7zTKdQ0g4",
       "hints": {
         "allow": [
           "GET",
@@ -1319,7 +1364,7 @@ curl -v -X POST \
       }
     },
     "user": {
-      "href": "https://{yourOktaDomain}.com/api/v1/users/00u15s1KDETTQMQYABRL",
+      "href": "https://{yourOktaDomain}/api/v1/users/00u15s1KDETTQMQYABRL",
       "hints": {
         "allow": [
           "GET"
@@ -1349,7 +1394,7 @@ curl -v -X POST \
   "verify": {
     "passCode": "cccccceukngdfgkukfctkcvfidnetljjiknckkcjulji"
   }
-}' "https://{yourOktaDomain}.com/api/v1/users/00u15s1KDETTQMQYABRL/factors"
+}' "https://{yourOktaDomain}/api/v1/users/00u15s1KDETTQMQYABRL/factors"
 ~~~
 
 ##### Response Example
@@ -1368,7 +1413,7 @@ curl -v -X POST \
   },
   "_links": {
     "verify": {
-      "href": "https://{yourOktaDomain}.com/api/v1/users/00u15s1KDETTQMQYABRL/factors/ykfbty3BJeBgUi3750g4/verify",
+      "href": "https://{yourOktaDomain}/api/v1/users/00u15s1KDETTQMQYABRL/factors/ykfbty3BJeBgUi3750g4/verify",
       "hints": {
         "allow": [
           "POST"
@@ -1376,7 +1421,7 @@ curl -v -X POST \
       }
     },
     "self": {
-      "href": "hhttps://{yourOktaDomain}.com/api/v1/users/00u15s1KDETTQMQYABRL/factors/ykfbty3BJeBgUi3750g4",
+      "href": "hhttps://{yourOktaDomain}/api/v1/users/00u15s1KDETTQMQYABRL/factors/ykfbty3BJeBgUi3750g4",
       "hints": {
         "allow": [
           "GET",
@@ -1385,7 +1430,7 @@ curl -v -X POST \
       }
     },
     "user": {
-      "href": "https://{yourOktaDomain}.com/api/v1/users/00u15s1KDETTQMQYABRL",
+      "href": "https://{yourOktaDomain}/api/v1/users/00u15s1KDETTQMQYABRL",
       "hints": {
         "allow": [
           "GET"
@@ -1416,7 +1461,7 @@ curl -v -X POST \
     "profile": {
         "email": "test@gmail.com"
     }
-  }' "https://{yourOktaDomain}.com/api/v1/users/00u15s1KDETTQMQYABRL/factors?tokenLifetimeSeconds=600"
+  }' "https://{yourOktaDomain}/api/v1/users/00u15s1KDETTQMQYABRL/factors?tokenLifetimeSeconds=600"
 ~~~
 
 ##### Response Example
@@ -1431,7 +1476,7 @@ curl -v -X POST \
     "status": "PENDING_ACTIVATION",
     "_links": {
         "activate": {
-            "href": "https://{yourOktaDomain}.com/api/v1/users/00umvfJKwXOQ1mEL50g3/factors/emfnf3gSScB8xXoXK0g3/lifecycle/activate",
+            "href": "https://{yourOktaDomain}/api/v1/users/00umvfJKwXOQ1mEL50g3/factors/emfnf3gSScB8xXoXK0g3/lifecycle/activate",
             "hints": {
                 "allow": [
                     "POST"
@@ -1441,7 +1486,7 @@ curl -v -X POST \
         "resend": [
             {
                 "name": "email",
-                "href": "https://{yourOktaDomain}.com/api/v1/users/00umvfJKwXOQ1mEL50g3/factors/emfnf3gSScB8xXoXK0g3/resend",
+                "href": "https://{yourOktaDomain}/api/v1/users/00umvfJKwXOQ1mEL50g3/factors/emfnf3gSScB8xXoXK0g3/resend",
                 "hints": {
                     "allow": [
                         "POST"
@@ -1450,7 +1495,7 @@ curl -v -X POST \
             }
         ],
         "self": {
-            "href": "https://{yourOktaDomain}.com/api/v1/users/00umvfJKwXOQ1mEL50g3/factors/emfnf3gSScB8xXoXK0g3",
+            "href": "https://{yourOktaDomain}/api/v1/users/00umvfJKwXOQ1mEL50g3/factors/emfnf3gSScB8xXoXK0g3",
             "hints": {
                 "allow": [
                     "GET"
@@ -1458,7 +1503,7 @@ curl -v -X POST \
             }
         },
         "user": {
-            "href": "https://{yourOktaDomain}.com/api/v1/users/00umvfJKwXOQ1mEL50g3",
+            "href": "https://{yourOktaDomain}/api/v1/users/00umvfJKwXOQ1mEL50g3",
             "hints": {
                 "allow": [
                     "GET"
@@ -1497,7 +1542,7 @@ curl -v -X POST \
     "profile": {
         "email": "test@gmail.com"
     }
-  }' "https://{yourOktaDomain}.com/api/v1/users/00u15s1KDETTQMQYABRL/factors?activate=true"
+  }' "https://{yourOktaDomain}/api/v1/users/00u15s1KDETTQMQYABRL/factors?activate=true"
 ~~~
 
 #### Enroll U2F Factor
@@ -1517,14 +1562,14 @@ curl -v -X POST \
 -d '{
   "factorType": "u2f",
   "provider": "FIDO"
-  }' "https://{yourOktaDomain}.com/api/v1/users/00u15s1KDETTQMQYABRL/factors"
+  }' "https://{yourOktaDomain}/api/v1/users/00u15s1KDETTQMQYABRL/factors"
 ~~~
 
 ##### Enroll U2F Response Example
 {:.api .api-response .api-response-example}
 
 ~~~json
-{  
+{
   "id":"fuf2rovRxogXJ0nDy0g4",
   "factorType":"u2f",
   "provider":"FIDO",
@@ -1532,34 +1577,34 @@ curl -v -X POST \
   "status":"PENDING_ACTIVATION",
   "created":"2018-05-24T20:43:19.000Z",
   "lastUpdated":"2018-05-24T20:43:19.000Z",
-  "_links":{  
-    "activate":{  
-      "href":"https://{yourOktaDomain}.com/api/v1/users/00u15s1KDETTQMQYABRL/factors/fuf2rovRxogXJ0nDy0g4/lifecycle/activate",
-      "hints":{  
-        "allow":[  
+  "_links":{
+    "activate":{
+      "href":"https://{yourOktaDomain}/api/v1/users/00u15s1KDETTQMQYABRL/factors/fuf2rovRxogXJ0nDy0g4/lifecycle/activate",
+      "hints":{
+        "allow":[
           "POST"
         ]
       }
     },
-    "self":{  
-      "href":"https://{yourOktaDomain}.com/api/v1/users/00u15s1KDETTQMQYABRL/factors/fuf2rovRxogXJ0nDy0g4",
-      "hints":{  
-        "allow":[  
+    "self":{
+      "href":"https://{yourOktaDomain}/api/v1/users/00u15s1KDETTQMQYABRL/factors/fuf2rovRxogXJ0nDy0g4",
+      "hints":{
+        "allow":[
           "GET"
         ]
       }
     },
-    "user":{  
-      "href":"https://{yourOktaDomain}.com/api/v1/users/00u15s1KDETTQMQYABRL",
-      "hints":{  
-        "allow":[  
+    "user":{
+      "href":"https://{yourOktaDomain}/api/v1/users/00u15s1KDETTQMQYABRL",
+      "hints":{
+        "allow":[
           "GET"
         ]
       }
     }
   },
-  "_embedded":{  
-    "activation":{  
+  "_embedded":{
+    "activation":{
       "version":"U2F_V2",
       "nonce":"9DmGJDLvaU6KWxJbfrZ0",
       "timeoutSeconds":20
@@ -1629,7 +1674,7 @@ curl -v -X POST \
 -H "Authorization: SSWS ${api_token}" \
 -d '{
   "passCode": "123456"
-}' "https://{yourOktaDomain}.com/api/v1/users/00u15s1KDETTQMQYABRL/factors/ostf1fmaMGJLMNGNLIVG/lifecycle/activate"
+}' "https://{yourOktaDomain}/api/v1/users/00u15s1KDETTQMQYABRL/factors/ostf1fmaMGJLMNGNLIVG/lifecycle/activate"
 ~~~
 
 #### Response Example
@@ -1648,7 +1693,7 @@ curl -v -X POST \
   },
   "_links": {
     "verify": {
-      "href": "https://{yourOktaDomain}.com/api/v1/users/00u15s1KDETTQMQYABRL/factors/ostf1fmaMGJLMNGNLIVG/verify",
+      "href": "https://{yourOktaDomain}/api/v1/users/00u15s1KDETTQMQYABRL/factors/ostf1fmaMGJLMNGNLIVG/verify",
       "hints": {
         "allow": [
           "POST"
@@ -1656,7 +1701,7 @@ curl -v -X POST \
       }
     },
     "self": {
-      "href": "https://{yourOktaDomain}.com/api/v1/users/00u15s1KDETTQMQYABRL/factors/ostf1fmaMGJLMNGNLIVG",
+      "href": "https://{yourOktaDomain}/api/v1/users/00u15s1KDETTQMQYABRL/factors/ostf1fmaMGJLMNGNLIVG",
       "hints": {
         "allow": [
           "GET",
@@ -1665,7 +1710,7 @@ curl -v -X POST \
       }
     },
     "user": {
-      "href": "https://{yourOktaDomain}.com/api/v1/users/00u15s1KDETTQMQYABRL",
+      "href": "https://{yourOktaDomain}/api/v1/users/00u15s1KDETTQMQYABRL",
       "hints": {
         "allow": [
           "GET"
@@ -1721,7 +1766,7 @@ curl -v -X POST \
 -H "Authorization: SSWS ${api_token}" \
 -d '{
   "passCode": "123456"
-}' "https://{yourOktaDomain}.com/api/v1/users/00u15s1KDETTQMQYABRL/factors/sms1o51EADOTFXHHBXBP/lifecycle/activate"
+}' "https://{yourOktaDomain}/api/v1/users/00u15s1KDETTQMQYABRL/factors/sms1o51EADOTFXHHBXBP/lifecycle/activate"
 ~~~
 
 ##### Response Example
@@ -1740,7 +1785,7 @@ curl -v -X POST \
   },
   "_links": {
     "verify": {
-      "href": "https://{yourOktaDomain}.com/api/v1/users/00u15s1KDETTQMQYABRL/factors/sms1o51EADOTFXHHBXBP/verify",
+      "href": "https://{yourOktaDomain}/api/v1/users/00u15s1KDETTQMQYABRL/factors/sms1o51EADOTFXHHBXBP/verify",
       "hints": {
         "allow": [
           "POST"
@@ -1748,7 +1793,7 @@ curl -v -X POST \
       }
     },
     "self": {
-      "href": "https://{yourOktaDomain}.com/api/v1/users/00u15s1KDETTQMQYABRL/factors/sms1o51EADOTFXHHBXBP",
+      "href": "https://{yourOktaDomain}/api/v1/users/00u15s1KDETTQMQYABRL/factors/sms1o51EADOTFXHHBXBP",
       "hints": {
         "allow": [
           "GET",
@@ -1757,7 +1802,7 @@ curl -v -X POST \
       }
     },
     "user": {
-      "href": "https://{yourOktaDomain}.com/api/v1/users/00u15s1KDETTQMQYABRL",
+      "href": "https://{yourOktaDomain}/api/v1/users/00u15s1KDETTQMQYABRL",
       "hints": {
         "allow": [
           "GET"
@@ -1813,7 +1858,7 @@ curl -v -X POST \
 -H "Authorization: SSWS ${api_token}" \
 -d '{
   "passCode": "12345"
-}' "https://{yourOktaDomain}.com/api/v1/users/00u15s1KDETTQMQYABRL/factors/clf1o51EADOTFXHHBXBP/lifecycle/activate"
+}' "https://{yourOktaDomain}/api/v1/users/00u15s1KDETTQMQYABRL/factors/clf1o51EADOTFXHHBXBP/lifecycle/activate"
 ~~~
 
 ##### Response Example
@@ -1833,7 +1878,7 @@ curl -v -X POST \
   },
   "_links": {
     "verify": {
-      "href": "https://{yourOktaDomain}.com/api/v1/users/00u15s1KDETTQMQYABRL/factors/clf1o51EADOTFXHHBXBP/verify",
+      "href": "https://{yourOktaDomain}/api/v1/users/00u15s1KDETTQMQYABRL/factors/clf1o51EADOTFXHHBXBP/verify",
       "hints": {
         "allow": [
           "POST"
@@ -1841,7 +1886,7 @@ curl -v -X POST \
       }
     },
     "self": {
-      "href": "https://{yourOktaDomain}.com/api/v1/users/00u15s1KDETTQMQYABRL/factors/clf1o51EADOTFXHHBXBP",
+      "href": "https://{yourOktaDomain}/api/v1/users/00u15s1KDETTQMQYABRL/factors/clf1o51EADOTFXHHBXBP",
       "hints": {
         "allow": [
           "GET",
@@ -1850,7 +1895,7 @@ curl -v -X POST \
       }
     },
     "user": {
-      "href": "https://{yourOktaDomain}.com/api/v1/users/00u15s1KDETTQMQYABRL",
+      "href": "https://{yourOktaDomain}/api/v1/users/00u15s1KDETTQMQYABRL",
       "hints": {
         "allow": [
           "GET"
@@ -1891,7 +1936,7 @@ curl -v -X POST \
 -H "Accept: application/json" \
 -H "Content-Type: application/json" \
 -H "Authorization: SSWS ${api_token}" \
-"https://{yourOktaDomain}.com/api/v1/users/00u15s1KDETTQMQYABRL/factors/opf3hkfocI4JTLAju0g4/lifecycle/activate"
+"https://{yourOktaDomain}/api/v1/users/00u15s1KDETTQMQYABRL/factors/opf3hkfocI4JTLAju0g4/lifecycle/activate"
 ~~~
 
 #### Response Example (Waiting)
@@ -1903,7 +1948,7 @@ curl -v -X POST \
   "factorResult": "WAITING",
   "_links": {
     "poll": {
-      "href": "https://{yourOktaDomain}.com/api/v1/users/00u15s1KDETTQMQYABRL/factors/opf3hkfocI4JTLAju0g4/lifecycle/activate",
+      "href": "https://{yourOktaDomain}/api/v1/users/00u15s1KDETTQMQYABRL/factors/opf3hkfocI4JTLAju0g4/lifecycle/activate",
       "hints": {
         "allow": [
           "POST"
@@ -1911,13 +1956,13 @@ curl -v -X POST \
       }
     },
     "qrcode": {
-      "href": "https://{yourOktaDomain}.com/api/v1/users/00u15s1KDETTQMQYABRL/factors/opf3hkfocI4JTLAju0g4/qr/00fukNElRS_Tz6k-CFhg3pH4KO2dj2guhmaapXWbc4",
+      "href": "https://{yourOktaDomain}/api/v1/users/00u15s1KDETTQMQYABRL/factors/opf3hkfocI4JTLAju0g4/qr/00fukNElRS_Tz6k-CFhg3pH4KO2dj2guhmaapXWbc4",
       "type": "image/png"
     },
     "send": [
       {
         "name": "email",
-        "href": "https://{yourOktaDomain}.com/api/v1/users/00u15s1KDETTQMQYABRL/factors/opf3hkfocI4JTLAju0g4/lifecycle/activate/email",
+        "href": "https://{yourOktaDomain}/api/v1/users/00u15s1KDETTQMQYABRL/factors/opf3hkfocI4JTLAju0g4/lifecycle/activate/email",
         "hints": {
           "allow": [
             "POST"
@@ -1926,7 +1971,7 @@ curl -v -X POST \
       },
       {
         "name": "sms",
-        "href": "https://{yourOktaDomain}.com/api/v1/users/00u15s1KDETTQMQYABRL/factors/opf3hkfocI4JTLAju0g4/lifecycle/activate/sms",
+        "href": "https://{yourOktaDomain}/api/v1/users/00u15s1KDETTQMQYABRL/factors/opf3hkfocI4JTLAju0g4/lifecycle/activate/sms",
         "hints": {
           "allow": [
             "POST"
@@ -1946,7 +1991,7 @@ curl -v -X POST \
     "factorResult": "TIMEOUT",
     "_links": {
         "activate": {
-            "href": "https://{yourOktaDomain}.com/api/v1/users/00u15s1KDETTQMQYABRL/factors/opf3hkfocI4JTLAju0g4/lifecycle/activate",
+            "href": "https://{yourOktaDomain}/api/v1/users/00u15s1KDETTQMQYABRL/factors/opf3hkfocI4JTLAju0g4/lifecycle/activate",
             "hints": {
                 "allow": [
                     "POST"
@@ -1977,7 +2022,7 @@ curl -v -X POST \
     },
     "_links": {
         "verify": {
-            "href": "https://{yourOktaDomain}.com/api/v1/users/00u15s1KDETTQMQYABRL/factors/opf3hkfocI4JTLAju0g4/verify",
+            "href": "https://{yourOktaDomain}/api/v1/users/00u15s1KDETTQMQYABRL/factors/opf3hkfocI4JTLAju0g4/verify",
             "hints": {
                 "allow": [
                     "POST"
@@ -1985,7 +2030,7 @@ curl -v -X POST \
             }
         },
         "self": {
-            "href": "https://{yourOktaDomain}.com/api/v1/users/00u15s1KDETTQMQYABRL/factors/opf3hkfocI4JTLAju0g4",
+            "href": "https://{yourOktaDomain}/api/v1/users/00u15s1KDETTQMQYABRL/factors/opf3hkfocI4JTLAju0g4",
             "hints": {
                 "allow": [
                     "GET",
@@ -1994,7 +2039,7 @@ curl -v -X POST \
             }
         },
         "user": {
-            "href": "https://{yourOktaDomain}.com/api/v1/users/00u15s1KDETTQMQYABRL",
+            "href": "https://{yourOktaDomain}/api/v1/users/00u15s1KDETTQMQYABRL",
             "hints": {
                 "allow": [
                     "GET"
@@ -2016,9 +2061,9 @@ Activates an `email` factor by verifying the OTP.
 
 Parameter    | Description                                         | Param Type | DataType | Required
 ------------ | --------------------------------------------------- | ---------- | -------- | --------
-userId          | `id` of a user                                        | URL        | String   | TRUE     
-factorId          | `id` of a factor returned from enrollment             | URL        | String   | TRUE     
-passCode     | OTP sent to email                           | Body       | String   | TRUE     
+userId          | `id` of a user                                        | URL        | String   | TRUE
+factorId          | `id` of a factor returned from enrollment             | URL        | String   | TRUE
+passCode     | OTP sent to email                           | Body       | String   | TRUE
 
 ##### Response Parameters
 {:.api .api-response .api-response-params}
@@ -2051,7 +2096,7 @@ curl -v -X POST \
 -H "Authorization: SSWS ${api_token}" \
 -d '{
   "passCode": "123456"
-}' "https://{yourOktaDomain}.com/api/v1/users/users/00u15s1KDETTQMQYABRL/factors/emfnf3gSScB8xXoXK0g3/lifecycle/activate"
+}' "https://{yourOktaDomain}/api/v1/users/users/00u15s1KDETTQMQYABRL/factors/emfnf3gSScB8xXoXK0g3/lifecycle/activate"
 ~~~
 
 #### Response Example (Activated)
@@ -2069,7 +2114,7 @@ curl -v -X POST \
     },
     "_links": {
         "verify": {
-            "href": "https://{yourOktaDomain}.com/api/v1/users/00umvfJKwXOQ1mEL50g3/factors/emfnf3gSScB8xXoXK0g3/verify",
+            "href": "https://{yourOktaDomain}/api/v1/users/00umvfJKwXOQ1mEL50g3/factors/emfnf3gSScB8xXoXK0g3/verify",
             "hints": {
                 "allow": [
                     "POST"
@@ -2077,7 +2122,7 @@ curl -v -X POST \
             }
         },
         "self": {
-            "href": "https://{yourOktaDomain}.com/api/v1/users/00umvfJKwXOQ1mEL50g3/factors/emfnf3gSScB8xXoXK0g3",
+            "href": "https://{yourOktaDomain}/api/v1/users/00umvfJKwXOQ1mEL50g3/factors/emfnf3gSScB8xXoXK0g3",
             "hints": {
                 "allow": [
                     "GET",
@@ -2086,7 +2131,7 @@ curl -v -X POST \
             }
         },
         "user": {
-            "href": "https://{yourOktaDomain}.com/api/v1/users/00umvfJKwXOQ1mEL50g3",
+            "href": "https://{yourOktaDomain}/api/v1/users/00umvfJKwXOQ1mEL50g3",
             "hints": {
                 "allow": [
                     "GET"
@@ -2143,17 +2188,17 @@ curl -v -X POST \
 -H "Accept: application/json" \
 -H "Content-Type: application/json" \
 -H "Authorization: SSWS ${api_token}" \
--d '{  
+-d '{
       "registrationData":"BQTEMUyOM8h1TiZG4DL-RdMr-tYgTYSf62Y52AmwEFTiSYWIRVO5L-MwWdRJOthmV3J3JrqpmGfmFb820-awx1YIQFlTvkMhxItHlpkzahEqicpw7SIH9yMfTn2kaDcC6JaLKPfV5ds0vzuxF1JJj3gCM01bRC-HWI4nCVgc-zaaoRgwggEcMIHDoAMCAQICCwD52fCSMoNczORdMAoGCCqGSM49BAMCMBUxEzARBgNVBAMTClUyRiBJc3N1ZXIwGhcLMDAwMTAxMDAwMFoXCzAwMDEwMTAwMDBaMBUxEzARBgNVBAMTClUyRiBEZXZpY2UwWTATBgcqhkjOPQIBBggqhkjOPQMBBwNCAAQFKJupuUgPQcRHUphaW5JPfLvkkwlEwlHKk_ntSp7MS4aTHJyGnpziqncrjiTC_oUVtb-wN-y_t_IMIjueGkhxMAoGCCqGSM49BAMCA0gAMEUCIQDBo6aOLxanIUYnBX9iu3KMngPnobpi0EZSTkVtLC8_cwIgC1945RGqGBKfbyNtkhMifZK05n7fU-gW37Bdnci5D94wRQIhAJv3VvclbRkHAQhaUR8rr8qFTg9iF-GtHoXU95vWaQdyAiAbEr-440U4dQAZF-Sj8G2fxgh5DkgkkWpyUHZhz7N9ew",
       "clientData":"eyJ0eXAiOiJuYXZpZ2F0b3IuaWQuZmluaXNoRW5yb2xsbWVudCIsImNoYWxsZW5nZSI6IlhxR0h0RTBoUkxuVEoxYUF5U1oyIiwib3JpZ2luIjoiaHR0cHM6Ly9sb2NhbGhvc3Q6MzAwMCIsImNpZF9wdWJrZXkiOiJ1bnVzZWQifQ"
-}' "https://{yourOktaDomain}.com/api/v1/users/users/00u15s1KDETTQMQYABRL/factors/fuf2rovRxogXJ0nDy0g4/lifecycle/activate"
+}' "https://{yourOktaDomain}/api/v1/users/users/00u15s1KDETTQMQYABRL/factors/fuf2rovRxogXJ0nDy0g4/lifecycle/activate"
 ~~~
 
 ##### Activate U2F Response Parameters
 {:.api .api-response .api-response-params}
 
 ~~~json
-{  
+{
   "id":"fuf2rovRxogXJ0nDy0g4",
   "factorType":"u2f",
   "provider":"FIDO",
@@ -2161,32 +2206,32 @@ curl -v -X POST \
   "status":"ACTIVE",
   "created":"2018-05-24T20:43:19.000Z",
   "lastUpdated":"2018-05-24T21:43:32.000Z",
-  "profile":{  
+  "profile":{
     "credentialId":"WVO-QyHEi0eWmTNqESqJynDtIgf3Ix9OfaRoNwLoloso99Xl2zS_O7EXUkmPeAIzTVtEL4dYjicJWBz7NpqhGA",
     "version":"U2F_V2"
   },
-  "_links":{  
-    "self":{  
-      "href":"https://{yourOktaDomain}.com/api/v1/users/00u15s1KDETTQMQYABRL/factors/fuf2rovRxogXJ0nDy0g4",
-      "hints":{  
-        "allow":[  
+  "_links":{
+    "self":{
+      "href":"https://{yourOktaDomain}/api/v1/users/00u15s1KDETTQMQYABRL/factors/fuf2rovRxogXJ0nDy0g4",
+      "hints":{
+        "allow":[
           "GET",
           "DELETE"
         ]
       }
     },
-    "verify":{  
-      "href":"https://{yourOktaDomain}.com/api/v1/users/00u15s1KDETTQMQYABRL/factors/fuf2rovRxogXJ0nDy0g4/verify",
-      "hints":{  
-        "allow":[  
+    "verify":{
+      "href":"https://{yourOktaDomain}/api/v1/users/00u15s1KDETTQMQYABRL/factors/fuf2rovRxogXJ0nDy0g4/verify",
+      "hints":{
+        "allow":[
           "POST"
         ]
       }
     },
-    "user":{  
-      "href":"https://{yourOktaDomain}.com/api/v1/users/00u15s1KDETTQMQYABRL",
-      "hints":{  
-        "allow":[  
+    "user":{
+      "href":"https://{yourOktaDomain}/api/v1/users/00u15s1KDETTQMQYABRL",
+      "hints":{
+        "allow":[
           "GET"
         ]
       }
@@ -2223,7 +2268,7 @@ curl -v -X DELETE \
 -H "Accept: application/json" \
 -H "Content-Type: application/json" \
 -H "Authorization: SSWS ${api_token}" \
-"https://{yourOktaDomain}.com/api/v1/users/00u15s1KDETTQMQYABRL/factors/ufs1o01OTMGHLAJPVHDZ"
+"https://{yourOktaDomain}/api/v1/users/00u15s1KDETTQMQYABRL/factors/ufs1o01OTMGHLAJPVHDZ"
 ~~~
 
 #### Response Example
@@ -2282,7 +2327,7 @@ curl -v -X POST \
 -H "Authorization: SSWS ${api_token}" \
 -d '{
   "answer": "mayonnaise"
-}' "https://{yourOktaDomain}.com/api/v1/users/00u15s1KDETTQMQYABRL/factors/ufs1pe3ISGKGPYKXRBKK/verify"
+}' "https://{yourOktaDomain}/api/v1/users/00u15s1KDETTQMQYABRL/factors/ufs1pe3ISGKGPYKXRBKK/verify"
 ~~~
 
 #### Response Example
@@ -2363,7 +2408,7 @@ curl -v -X POST \
 -H "Authorization: SSWS ${api_token}" \
 -d '{
   "passCode": "123456"
-}' "https://{yourOktaDomain}.com/api/v1/users/00u15s1KDETTQMQYABRL/factors/ostf17zuKEUMYQAQGCOV/verify"
+}' "https://{yourOktaDomain}/api/v1/users/00u15s1KDETTQMQYABRL/factors/ostf17zuKEUMYQAQGCOV/verify"
 ~~~
 
 #### Response Example
@@ -2398,7 +2443,7 @@ curl -v -X POST \
 -H "Authorization: SSWS ${api_token}" \
 -d '{
   }
-}' "https://{yourOktaDomain}.com/api/v1/users/${userId}/factors/${factorId}/verify?templateId=${templateId}"
+}' "https://{yourOktaDomain}/api/v1/users/${userId}/factors/${factorId}/verify?templateId=${templateId}"
 ~~~
 
 ### Verify Call Factor
@@ -2466,7 +2511,7 @@ curl -v -X POST \
 -H "Authorization: SSWS ${api_token}" \
 -d '{
   "passCode": "123456"
-}' "https://{yourOktaDomain}.com/api/v1/users/00u15s1KDETTQMQYABRL/factors/clff17zuKEUMYQAQGCOV/verify"
+}' "https://{yourOktaDomain}/api/v1/users/00u15s1KDETTQMQYABRL/factors/clff17zuKEUMYQAQGCOV/verify"
 ~~~
 
 #### Response Example
@@ -2527,7 +2572,7 @@ curl -v -X POST \
 -H "Authorization: SSWS ${api_token}" \
 -d '{
   "passCode": "123456"
-}' "https://{yourOktaDomain}.com/api/v1/users/00u15s1KDETTQMQYABRL/factors/ostf17zuKEUMYQAQGCOV/verify"
+}' "https://{yourOktaDomain}/api/v1/users/00u15s1KDETTQMQYABRL/factors/ostf17zuKEUMYQAQGCOV/verify"
 ~~~
 
 #### Response Example
@@ -2577,7 +2622,7 @@ curl -v -X POST \
 -H "Authorization: SSWS ${api_token}" \
 -H "User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/537.36" \
 -H "X-Forwarded-For: 23.235.46.133" \
-"https://{yourOktaDomain}.com/api/v1/users/00u15s1KDETTQMQYABRL/factors/opf3hkfocI4JTLAju0g4/verify"
+"https://{yourOktaDomain}/api/v1/users/00u15s1KDETTQMQYABRL/factors/opf3hkfocI4JTLAju0g4/verify"
 ~~~
 
 #### Response Example
@@ -2589,7 +2634,7 @@ curl -v -X POST \
   "factorResult": "WAITING",
   "_links": {
     "poll": {
-      "href": "https://{yourOktaDomain}.com/api/v1/users/00u15s1KDETTQMQYABRL/factors/opfh52xcuft3J4uZc0g3/transactions/mst1eiHghhPxf0yhp0g",
+      "href": "https://{yourOktaDomain}/api/v1/users/00u15s1KDETTQMQYABRL/factors/opfh52xcuft3J4uZc0g3/transactions/mst1eiHghhPxf0yhp0g",
       "hints": {
         "allow": [
           "GET"
@@ -2597,7 +2642,7 @@ curl -v -X POST \
       }
     },
     "cancel": {
-      "href": "https://{yourOktaDomain}.com/api/v1/users/00u15s1KDETTQMQYABRL/factors/opfh52xcuft3J4uZc0g3/transactions/mst1eiHghhPxf0yhp0g",
+      "href": "https://{yourOktaDomain}/api/v1/users/00u15s1KDETTQMQYABRL/factors/opfh52xcuft3J4uZc0g3/transactions/mst1eiHghhPxf0yhp0g",
       "hints": {
         "allow": [
           "DELETE"
@@ -2642,7 +2687,7 @@ factorResult | verification result | Body       | [Factor Verify Result](#factor
   "factorResult": "WAITING",
   "_links": {
     "poll": {
-      "href": "https://{yourOktaDomain}.com/api/v1/users/00u15s1KDETTQMQYABRL/factors/opfh52xcuft3J4uZc0g3/transactions/mst1eiHghhPxf0yhp0g",
+      "href": "https://{yourOktaDomain}/api/v1/users/00u15s1KDETTQMQYABRL/factors/opfh52xcuft3J4uZc0g3/transactions/mst1eiHghhPxf0yhp0g",
       "hints": {
         "allow": [
           "GET"
@@ -2650,7 +2695,7 @@ factorResult | verification result | Body       | [Factor Verify Result](#factor
       }
     },
     "cancel": {
-      "href": "https://{yourOktaDomain}.com/api/v1/users/00u15s1KDETTQMQYABRL/factors/opfh52xcuft3J4uZc0g3/transactions/mst1eiHghhPxf0yhp0g",
+      "href": "https://{yourOktaDomain}/api/v1/users/00u15s1KDETTQMQYABRL/factors/opfh52xcuft3J4uZc0g3/transactions/mst1eiHghhPxf0yhp0g",
       "hints": {
         "allow": [
           "DELETE"
@@ -2678,7 +2723,7 @@ factorResult | verification result | Body       | [Factor Verify Result](#factor
   "factorResult": "REJECTED",
   "_links": {
     "verify": {
-      "href": "https://{yourOktaDomain}.com/api/v1/users/00u15s1KDETTQMQYABRL/factors/opfh52xcuft3J4uZc0g3/verify",
+      "href": "https://{yourOktaDomain}/api/v1/users/00u15s1KDETTQMQYABRL/factors/opfh52xcuft3J4uZc0g3/verify",
       "hints": {
         "allow": [
           "POST"
@@ -2686,7 +2731,7 @@ factorResult | verification result | Body       | [Factor Verify Result](#factor
       }
     },
     "factor": {
-      "href": "https://{yourOktaDomain}.com/api/v1/users/00u15s1KDETTQMQYABRL/factors/opfh52xcuft3J4uZc0g3",
+      "href": "https://{yourOktaDomain}/api/v1/users/00u15s1KDETTQMQYABRL/factors/opfh52xcuft3J4uZc0g3",
       "hints": {
         "allow": [
           "GET",
@@ -2706,7 +2751,7 @@ factorResult | verification result | Body       | [Factor Verify Result](#factor
   "factorResult": "TIMEOUT",
   "_links": {
     "verify": {
-      "href": "https://{yourOktaDomain}.com/api/v1/users/00u15s1KDETTQMQYABRL/factors/opfh52xcuft3J4uZc0g3/verify",
+      "href": "https://{yourOktaDomain}/api/v1/users/00u15s1KDETTQMQYABRL/factors/opfh52xcuft3J4uZc0g3/verify",
       "hints": {
         "allow": [
           "POST"
@@ -2714,7 +2759,7 @@ factorResult | verification result | Body       | [Factor Verify Result](#factor
       }
     },
     "factor": {
-      "href": "https://{yourOktaDomain}.com/api/v1/users/00u15s1KDETTQMQYABRL/factors/opfh52xcuft3J4uZc0g3",
+      "href": "https://{yourOktaDomain}/api/v1/users/00u15s1KDETTQMQYABRL/factors/opfh52xcuft3J4uZc0g3",
       "hints": {
         "allow": [
           "GET",
@@ -2775,7 +2820,7 @@ curl -v -X POST \
 -H "Authorization: SSWS ${api_token}" \
 -d '{
   "passCode": "123456"
-}' "https://{yourOktaDomain}.com/api/v1/users/00u15s1KDETTQMQYABRL/factors/ostf17zuKEUMYQAQGCOV/verify"
+}' "https://{yourOktaDomain}/api/v1/users/00u15s1KDETTQMQYABRL/factors/ostf17zuKEUMYQAQGCOV/verify"
 ~~~
 
 #### Response Example
@@ -2854,7 +2899,7 @@ curl -v -X POST \
 -H "Authorization: SSWS ${api_token}" \
 -d '{
   "passCode": "123456"
-}' "https://{yourOktaDomain}.com/api/v1/users/00u15s1KDETTQMQYABRL/factors/emfnf3gSScB8xXoXK0g3/verify?tokenLifetimeSeconds=600"
+}' "https://{yourOktaDomain}/api/v1/users/00u15s1KDETTQMQYABRL/factors/emfnf3gSScB8xXoXK0g3/verify?tokenLifetimeSeconds=600"
 ~~~
 
 #### Response Example
@@ -2871,7 +2916,7 @@ curl -v -X POST \
 
 <span class="api-uri-template api-uri-post"><span class="api-label">POST</span> /api/v1/users/${userId}/factors/${factorId}/verify</span>
 
-Note: 
+Note:
 
 According to
 [FIDO
@@ -2890,40 +2935,40 @@ curl -v -X POST \
 -H "Accept: application/json" \
 -H "Content-Type: application/json" \
 -H "Authorization: SSWS ${api_token}" \
-"https://{yourOktaDomain}.com/api/v1/users/00u15s1KDETTQMQYABRL/factors/fuf2rovRxogXJ0nDy0g4/verify"
+"https://{yourOktaDomain}/api/v1/users/00u15s1KDETTQMQYABRL/factors/fuf2rovRxogXJ0nDy0g4/verify"
 ~~~
 
 ##### Response Example for Verify U2F Factor
 {:.api .api-response .api-response-example}
 
 ~~~json
-{  
+{
   "factorResult":"CHALLENGE",
-  "profile":{  
+  "profile":{
     "credentialId":"GAiiLsVab2m3-zL1Fi3bVtNrM9G6_MntUITHKjxkV24ktGKjLSCRnz72wCEdHCe18IvC69Aia0sE4UpsO0HpFQ",
     "version":"U2F_V2"
   },
-  "_links":{  
-    "verify":{  
-      "href":"https://{yourOktaDomain}.com/api/v1/users/00u15s1KDETTQMQYABRL/factors/fuf2rovRxogXJ0nDy0g4/verify",
-      "hints":{  
-        "allow":[  
+  "_links":{
+    "verify":{
+      "href":"https://{yourOktaDomain}/api/v1/users/00u15s1KDETTQMQYABRL/factors/fuf2rovRxogXJ0nDy0g4/verify",
+      "hints":{
+        "allow":[
           "POST"
         ]
       }
     },
-    "factor":{  
-      "href":"https://{yourOktaDomain}.com/api/v1/users/00u15s1KDETTQMQYABRL/factors/fuf2rovRxogXJ0nDy0g4",
-      "hints":{  
-        "allow":[  
+    "factor":{
+      "href":"https://{yourOktaDomain}/api/v1/users/00u15s1KDETTQMQYABRL/factors/fuf2rovRxogXJ0nDy0g4",
+      "hints":{
+        "allow":[
           "GET",
           "DELETE"
         ]
       }
     }
   },
-  "_embedded":{  
-    "challenge":{  
+  "_embedded":{
+    "challenge":{
       "nonce":"vQFwTt6zKzMV7HFPzjS2",
       "timeoutSeconds":20
     }
@@ -2977,19 +3022,19 @@ curl -v -X POST \
 -H "Accept: application/json" \
 -H "Content-Type: application/json" \
 -H "Authorization: SSWS ${api_token}" \
--d '{  
+-d '{
   "clientData":"eyJ0eXAiOiJuYXZpZ2F0b3IuaWQuZ2V0QXNzZXJ0aW9uIiwiY2hhbGxlbmdlIjoiS2NCLXRqUFU0NDY0ZThuVFBudXIiLCJvcmlnaW4iOiJodHRwczovL2xvY2FsaG9zdDozMDAwIiwiY2lkX3B1YmtleSI6InVudXNlZCJ9",
   "signatureData":"AQAAACYwRgIhAKPktdpH0T5mlPSm_9uGW5w-VaUy-LhI9tIacexpgItkAiEAncRVZURVPOq7zDwIw-OM5LtSkdAxOkfv0ZDVUx3UFHc"
-}' "https://{yourOktaDomain}.com/api/v1/users/00u15s1KDETTQMQYABRL/factors/fuf2rovRxogXJ0nDy0g4/verify"
+}' "https://{yourOktaDomain}/api/v1/users/00u15s1KDETTQMQYABRL/factors/fuf2rovRxogXJ0nDy0g4/verify"
 ~~~
 
 ##### Response of U2F Verification Example
 {:.api .api-response .api-response-example}
 
 ~~~json
-{  
+{
   "factorResult":"SUCCESS",
-  "profile":{  
+  "profile":{
     "credentialId":"h1bFwJFU9wnelYkexJuQfoUHZ5lX3CgQMTZk4H3I8kM9Nn6XALiQ-BIab4P5EE0GQrA7VD-kAwgnG950aXkhBw",
     "version":"U2F_V2"
   }
@@ -3013,7 +3058,7 @@ curl -v -X POST \
   },
   "_links": {
     "verify": {
-      "href": "https://{yourOktaDomain}.com/api/v1/users/00u15s1KDETTQMQYABRL/factors/smsk33ujQ59REImFX0g3/verify",
+      "href": "https://{yourOktaDomain}/api/v1/users/00u15s1KDETTQMQYABRL/factors/smsk33ujQ59REImFX0g3/verify",
       "hints": {
         "allow": [
           "POST"
@@ -3021,7 +3066,7 @@ curl -v -X POST \
       }
     },
     "self": {
-      "href": "https://{yourOktaDomain}.com/api/v1/users/00u15s1KDETTQMQYABRL/factors/smsk33ujQ59REImFX0g3",
+      "href": "https://{yourOktaDomain}/api/v1/users/00u15s1KDETTQMQYABRL/factors/smsk33ujQ59REImFX0g3",
       "hints": {
         "allow": [
           "GET",
@@ -3030,7 +3075,7 @@ curl -v -X POST \
       }
     },
     "user": {
-      "href": "https://{yourOktaDomain}.com/api/v1/users/00u15s1KDETTQMQYABRL",
+      "href": "https://{yourOktaDomain}/api/v1/users/00u15s1KDETTQMQYABRL",
       "hints": {
         "allow": [
           "GET"
@@ -3335,7 +3380,7 @@ Push factors must complete activation on the device by scanning the QR code or v
       "send": [
         {
           "name": "email",
-          "href": "https://{yourOktaDomain}.com/api/v1/users/00u15s1KDETTQMQYABRL/factors/opfbtzzrjgwauUsxO0g4/lifecycle/activate/email",
+          "href": "https://{yourOktaDomain}/api/v1/users/00u15s1KDETTQMQYABRL/factors/opfbtzzrjgwauUsxO0g4/lifecycle/activate/email",
           "hints": {
             "allow": [
               "POST"
@@ -3344,7 +3389,7 @@ Push factors must complete activation on the device by scanning the QR code or v
         },
         {
           "name": "sms",
-          "href": "https://{yourOktaDomain}.com/api/v1/users/00u15s1KDETTQMQYABRL/factors/opfbtzzrjgwauUsxO0g4/lifecycle/activate/sms",
+          "href": "https://{yourOktaDomain}/api/v1/users/00u15s1KDETTQMQYABRL/factors/opfbtzzrjgwauUsxO0g4/lifecycle/activate/sms",
           "hints": {
             "allow": [
               "POST"
@@ -3353,7 +3398,7 @@ Push factors must complete activation on the device by scanning the QR code or v
         }
       ],
       "qrcode": {
-        "href": "https://{yourOktaDomain}.com/api/v1/users/00u15s1KDETTQMQYABRL/factors/opfbtzzrjgwauUsxO0g4/qr/00Ji8qVBNJD4LmjYy1WZO2VbNqvvPdaCVua-1qjypa",
+        "href": "https://{yourOktaDomain}/api/v1/users/00u15s1KDETTQMQYABRL/factors/opfbtzzrjgwauUsxO0g4/qr/00Ji8qVBNJD4LmjYy1WZO2VbNqvvPdaCVua-1qjypa",
         "type": "image/png"
       }
     }

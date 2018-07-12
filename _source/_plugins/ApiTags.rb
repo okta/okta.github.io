@@ -62,7 +62,7 @@ module Okta
 
   Jekyll::Hooks.register [:pages, :posts, :documents], :post_render do |pages|
     # Replaces all occurences of 'yourOktaDomain' with a searchable span
-    pages.output = pages.output.gsub(/https:\/\/{yourOktaDomain}.com/, '<span class="okta-preview-domain">https://{yourOktaDomain}.com</span>')
+    pages.output = pages.output.gsub(/https:\/\/{yourOktaDomain}/, '<span class="okta-preview-domain">https://{yourOktaDomain}</span>')
   end
 end
 

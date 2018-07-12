@@ -24,7 +24,7 @@ Request
 
 ```sh
 #Retrieve all Apps with Embedded appUser objects for given user
-GET https://{yourOktaDomain}.com/api/v1/apps/{app_id}/groups
+GET https://{yourOktaDomain}/api/v1/apps/{app_id}/groups
 ```
 
 Response

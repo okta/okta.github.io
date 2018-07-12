@@ -352,19 +352,27 @@
     applySelectionTupleToLinkSate(initialTuple);
     renderLinks();
     applySelectionTuple(initialTuple);
-    $('#client_setup_link').addClass('active');
+    $('#account_link').addClass('active');
   }
 
   // Used to scroll to the right place without anchors, 150 is to account for our header space
+  window.scrollToAccount = function () {
+    $('html, body').animate({scrollTop: $('#account').offset().top - 150});
+    $('#account_link').addClass('active');
+    $('#client_setup_link').removeClass('active');
+    $('#server_setup_link').removeClass('active');
+  };
   window.scrollToServer = function () {
     $('html, body').animate({scrollTop: $('#server_setup').offset().top - 150});
     $('#server_setup_link').addClass('active');
     $('#client_setup_link').removeClass('active');
+    $('#account_link').removeClass('active');
   };
   window.scrollToClient = function () {
     $('html, body').animate({scrollTop: $('#client_setup').offset().top - 150});
     $('#client_setup_link').addClass('active');
     $('#server_setup_link').removeClass('active');
+    $('#account_link').removeClass('active');
   };
 
   // Load the quickstart partials

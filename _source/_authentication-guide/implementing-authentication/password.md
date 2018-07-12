@@ -33,7 +33,7 @@ Once you have collected the credentials, all that is required is a single API ca
 
 ```
 curl --request POST \
-  --url https://{yourOktaDomain}.com/oauth2/default/v1/token \
+  --url https://{yourOktaDomain}/oauth2/default/v1/token \
   --header 'accept: application/json' \
   --header 'authorization: Basic MG9hYn...' \
   --header 'content-type: application/x-www-form-urlencoded' \

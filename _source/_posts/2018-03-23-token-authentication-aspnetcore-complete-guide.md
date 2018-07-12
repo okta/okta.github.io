@@ -244,7 +244,7 @@ Since the authorization server Okta creates for you has a standard discovery doc
 services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
 .AddJwtBearer(options =>
 {
-    options.Authority = "https://{yourOktaDomain}.com/oauth2/default";
+    options.Authority = "https://{yourOktaDomain}/oauth2/default";
     options.Audience = "api://default";
 });
 ```
