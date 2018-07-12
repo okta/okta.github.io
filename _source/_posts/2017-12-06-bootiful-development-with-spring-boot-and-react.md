@@ -492,7 +492,7 @@ render() {
   return (
     <div>
       <h2>Beer List</h2>
-      {beers.map((beer: any) =>
+      {beers.map((beer: Beer) =>
         <div key={beer.id}>
           {beer.name}<br/>
           <GiphyImage name={beer.name}/>
@@ -577,7 +577,7 @@ You might be thinking, "this is pretty cool, it's easy to see why people fall in
 
 ### Okta Spring Boot Starter
 
-To lock down the backend, you can use [Okta's Spring Boot Starter](https://github.com/okta/okta-spring-boot). To integrate this starter, add the following dependency to `server/pom.xml`:
+To lock down the backend, you can use [Okta's Spring Boot Starter](https://github.com/okta/okta-spring-boot). To integrate this starter, add the following dependencies to `server/pom.xml`:
 
 ```xml
 <dependency>
@@ -585,24 +585,12 @@ To lock down the backend, you can use [Okta's Spring Boot Starter](https://githu
     <artifactId>okta-spring-boot-starter</artifactId>
     <version>0.6.0</version>
 </dependency>
+<dependency>
+    <groupId>org.springframework.security.oauth.boot</groupId>
+    <artifactId>spring-security-oauth2-autoconfigure</artifactId>
+    <version>2.0.1.RELEASE</version>
+</dependency>
 ```
-
-You'll also need to add a `<dependencyManagement>` section to upgrade Spring Security's OAuth support.
-
-```xml
-<dependencyManagement>
-    <dependencies>
-        <dependency>
-            <groupId>org.springframework.security.oauth</groupId>
-            <artifactId>spring-security-oauth2</artifactId>
-            <version>2.3.0.RELEASE</version>
-        </dependency>
-    </dependencies>
-</dependencyManagement>
-
-```
-
-**NOTE:** [There is an issue](https://github.com/okta/okta-spring-boot/issues/22) with Okta's Spring Boot starter where it doesn't work with Spring Boot's DevTools.
 
 Now you need to configure the server to use Okta for authentication. You'll need to create an OIDC app in Okta for that.
 
@@ -619,7 +607,7 @@ okta.oauth2.clientId={clientId}
 
 **NOTE:** The value of `{yourOktaDomain}` should be something like `dev-123456.oktapreview.com`. Make sure you don't include `-admin` in the value!
 
-Update `server/src/main/java/com/okta/developer/demo/DemoApplication.java` to enable it as a resource server.
+Update `server/src/main/java/.../demo/DemoApplication.java` to enable it as a resource server.
 
 ```java
 import org.springframework.security.oauth2.config.annotation.web.configuration.EnableResourceServer;
@@ -637,8 +625,8 @@ After making these changes, you should be able to restart the server and see acc
 Okta's React SDK allows you to integrate OIDC into a React application. You can learn more about Okta's React SDK can be [found on npmjs.com](https://www.npmjs.com/package/@okta/okta-react). To install, run the following commands:
 
 ```
-yarn add @okta/okta-react@1.0.0 react-router-dom@4.2.2
-yarn add -D @types/react-router-dom@4.2.6
+yarn add @okta/okta-react@1.0.2 react-router-dom@4.3.1
+yarn add -D @types/react-router-dom@4.2.7
 ```
 
 Okta's React SDK depends on [react-router](https://www.npmjs.com/package/react-router), hence the reason for installing `react-router-dom`. Configuring routing in `client/src/App.tsx` is a common practice, so replace its code with the TypeScript below that sets up authentication with Okta.
@@ -770,7 +758,7 @@ export default withAuth(class Home extends React.Component<HomeProps, HomeState>
 If you look at your React app in your browser, you'll likely see an error like the following:
 
 <pre>
-(5,44): Could not find a declaration file for module '@okta/okta-react'. '/Users/mraible/dev/okta/spring-boot-react-example/client/node_modules/@okta/okta-react/dist/index.js' implicitly has an 'any' type.
+(5,44): Could not find a declaration file for module '@okta/okta-react'. '/Users/mraible/spring-boot-react-example/client/node_modules/@okta/okta-react/dist/index.js' implicitly has an 'any' type.
   Try `npm install @types/okta__okta-react` if it exists or add a new declaration (.d.ts) file containing `declare module 'okta__okta-react';`
 </pre>
 
@@ -807,6 +795,23 @@ interface BeerListState {
 
 class BeerList extends React.Component<BeerListProps, BeerListState> {
   ...
+}
+```
+
+You'll encounter a couple more TSLint rules I don't agree with at this point.
+
+```bash
+(4,1): Import sources within a group must be alphabetized.
+(10,3): The key 'clientId' is not sorted alphabetically
+```
+
+To turn allow any order for your imports and keys, modify `tslint.json` and disabled ordered-imports.
+
+```json
+"rules": {
+  ...
+  "ordered-imports": false,
+  "object-literal-sort-keys": false
 }
 ```
 
@@ -857,23 +862,22 @@ public class DemoApplication {
     }
 
     @Bean
-    public FilterRegistrationBean simpleCorsFilter() {
+    public FilterRegistrationBean<CorsFilter> simpleCorsFilter() {
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         CorsConfiguration config = new CorsConfiguration();
         config.setAllowCredentials(true);
-        config.setAllowedOrigins(Arrays.asList("http://localhost:3000", "http://localhost:5000"));
+        config.setAllowedOrigins(Arrays.asList("http://localhost:3000"));
         config.setAllowedMethods(Collections.singletonList("*"));
         config.setAllowedHeaders(Collections.singletonList("*"));
         source.registerCorsConfiguration("/**", config);
-        FilterRegistrationBean bean = new FilterRegistrationBean(new CorsFilter(source));
+        FilterRegistrationBean<CorsFilter> bean = new FilterRegistrationBean<>(new CorsFilter(source));
         bean.setOrder(Ordered.HIGHEST_PRECEDENCE);
         return bean;
     }
 }
 ```
 
-To make it all work on the client, modify the `componentDidMount()` method in `client/src/BeerList.tsx` to set an authorization header.
-
+Restart your server after making this change. To make it all work on the client, modify the `componentDidMount()` method in `client/src/BeerList.tsx` to set an authorization header.
 
 ```typescript
 async componentDidMount() {
@@ -959,4 +963,5 @@ If you find any issues, please add a comment below, and I'll do my best to help.
 
 **Changelog:**
 
+* Jul 12, 2018: Updated to use Spring Boot 2.0.3, Okta Spring Boot Starter 0.6.0, and Okta React 1.0.2. You can see the code changes in the example app via pull requests on GitHub: [master-branch#4](https://github.com/oktadeveloper/spring-boot-react-example/pull/4), [okta-branch#5](https://github.com/oktadeveloper/spring-boot-react-example/pull/5). Changes to this article can be viewed in [okta/okta.github.io#2012](https://github.com/okta/okta.github.io/pull/2012).
 * Apr 10, 2018: Updated to use Spring Boot 1.5.12, Okta Spring Boot Starter 0.4.0, and Okta React 1.0.0. You can see the code changes in the example app via pull requests on GitHub: [master#3](https://github.com/oktadeveloper/spring-boot-react-example/pull/3), [okta#2](https://github.com/oktadeveloper/spring-boot-react-example/pull/2). Changes to this article can be viewed in [okta/okta.github.io#1942](https://github.com/okta/okta.github.io/pull/1942).
