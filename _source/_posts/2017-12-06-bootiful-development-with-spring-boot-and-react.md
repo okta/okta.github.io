@@ -23,7 +23,7 @@ Let's get started!
 
 **NOTE:** The instructions below for building a Spring Boot API are the same as the ones in [Bootiful Development with Spring Boot and Angular](/blog/2017/04/26/bootiful-development-with-spring-boot-and-angular). I've copied them below for your convenience.
 
-To get started with Spring Boot, navigate to [start.spring.io](https://start.spring.io) and choose version 1.5.12+. In the “Search for dependencies" field, select the following:
+To get started with Spring Boot, navigate to [start.spring.io](https://start.spring.io) and choose version 2.0.3+. In the "Search for dependencies" field, select the following:
 
 * [H2](http://www.h2database.com/html/main.html): An in-memory database
 * [JPA](http://www.oracle.com/technetwork/java/javaee/tech/persistence-jsp-140049.html): Standard ORM for Java
@@ -41,7 +41,7 @@ dependencies==h2,data-jpa,data-rest,web -d
 
 Create a directory called `spring-boot-react-example`, with a `server` directory inside it. Expand the contents of `demo.zip` into the `server` directory.
 
-Open the “server" project in your favorite IDE and run `DemoApplication` or start it from the command line using `./mvnw spring-boot:run`.
+Open the "server" project in your favorite IDE and run `DemoApplication` or start it from the command line using `./mvnw spring-boot:run`.
 
 Create a `com.okta.developer.demo.beer` package and a `Beer.java` file in it. This class will be the entity that holds your data.
 
