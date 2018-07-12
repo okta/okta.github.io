@@ -186,9 +186,9 @@ public class BeerController {
 
 Re-build your application and navigate to `http://localhost:8080/good-beers`. You should see the list of good beers in your browser.
 
-{% img blog/react-spring-boot/good-beers-json.png alt:"Good Beers JSON" width:"600" %}{: .center-image }
+{% img blog/react-spring-boot/good-beers-json.png alt:"Good Beers JSON" width:"800" %}{: .center-image }
 
-You should also see this same result in your terminal wstart.spring.io.pngindow when using HTTPie.
+You should also see this same result in your terminal window when using HTTPie.
 
 ```bash
 http localhost:8080/good-beers
@@ -278,7 +278,7 @@ render() {
       </header>
       <div>
         <h2>Beer List</h2>
-        {beers.map((beer: any) =>
+        {beers.map((beer: Beer) =>
           <div key={beer.id}>
             {beer.name}
           </div>
@@ -954,8 +954,7 @@ To learn more about React, Spring Boot, or Okta, check out the following resourc
 You can find the source code associated with this article [on GitHub](https://github.com/oktadeveloper/spring-boot-react-example). The primary example (without authentication) is in the `master` branch, while the Okta integration is in the `okta` branch. To check out the Okta branch on your local machine, run the following commands.
 
 ```bash
-git clone git@github.com:oktadeveloper/spring-boot-react-example.git
-git checkout okta
+git clone -b okta git@github.com:oktadeveloper/spring-boot-react-example.git
 ```
 
 If you find any issues, please add a comment below, and I'll do my best to help. If you liked this tutorial, I’d love to have you [follow me on Twitter](https://twitter.com/mraible). To be notified of more articles like this one, follow [@oktadev](https://twitter.com/oktadev).
