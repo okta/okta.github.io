@@ -1,3 +1,3 @@
 ---
-redirect_to: https://developer.okta.com/documentation/
+redirect_to: /documentation/
 ---
