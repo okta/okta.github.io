@@ -913,7 +913,7 @@ componentDidMount() {
 npm apollo-link-context@1.0.8 apollo-link-http@1.5.4
 ```
 
-In the JSX of the page, there is a delete button that calls the `remove()` method in `Points`. There's also `<PointsModal/>` component. This is referenced for each item, as well as at the bottom. You'll notice both of these reference the `refresh()` method, which updates the list.
+In the JSX of the page, there is a delete button that calls the `remove()` method in `Points`. There's also a `<PointsModal/>` component. This is referenced for each item, as well as at the bottom. You'll notice both of these reference the `refresh()` method, which updates the list.
 
 ```html
 <PointsModal item={p} callback={this.refresh}/>
