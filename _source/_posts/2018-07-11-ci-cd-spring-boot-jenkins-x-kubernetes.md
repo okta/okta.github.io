@@ -23,7 +23,7 @@ High performing teams are almost always a requirement for success in technology,
 
 How do you become a high performing team using containers, continuous delivery, and Kubernetes? This is where [Jenkins X](https://jenkins-x.io) comes in.
 
-> "The idea of Jenkins X is to give all developers their own nevil seafaring butler that can help you sail the seas of continuous delivery."
+> "The idea of Jenkins X is to give all developers their own naval seafaring butler that can help you sail the seas of continuous delivery."
 > &mdash; [James Strachan](https://twitter.com/jstrachan)
 
 {% img blog/spring-boot-jenkins-x/jenkins-x.svg alt:"Jenkins X Logo" width:"300" %}{: .center-image }
