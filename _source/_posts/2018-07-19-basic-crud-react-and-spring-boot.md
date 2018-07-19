@@ -153,6 +153,7 @@ public interface GroupRepository extends JpaRepository<Group, Long> {
 
 To load some default data, create an `Initializer.java` class in the `com.okta.developer.jugtours` package.
 
+{% raw %}
 ```java
 package com.okta.developer.jugtours;
 
@@ -194,6 +195,7 @@ class Initializer implements CommandLineRunner {
     }
 }
 ```
+{% endraw %}
 
 If you start your app (using `./mvnw spring-boot:run`) after adding this code, you'll see the list of groups and events displayed in your console.
 
