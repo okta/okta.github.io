@@ -34,6 +34,8 @@ To begin, navigate to [start.spring.io](https://start.spring.io) and make the fo
 
 Click **Generate Project**, expand `jugtours.zip` after downloading, and open the project in your favorite IDE.
 
+**TIP:** If you're using IntelliJ IDEA or Spring Tool Suite, you can also use Spring Initializr when creating a new project.
+
 ### Add a JPA Domain Model
 
 The first thing you'll need to do is to create a domain model that'll hold your data. At a high level, there's a `Group` that represents the JUG, an `Event` that has a many-to-one relationship with `Group`, and a `User` that has a one-to-many relationship with `Group`.
@@ -147,13 +149,11 @@ import java.util.List;
 
 public interface GroupRepository extends JpaRepository<Group, Long> {
     Group findByName(String name);
-    List<Group> findAllByUserId(String id);
 }
 ```
 
 To load some default data, create an `Initializer.java` class in the `com.okta.developer.jugtours` package.
 
-{% raw %}
 ```java
 package com.okta.developer.jugtours;
 
@@ -195,7 +195,8 @@ class Initializer implements CommandLineRunner {
     }
 }
 ```
-{% endraw %}
+
+**TIP:** If you're IDE has issues with `Event.builder()`, it means that you need to turn on annotation processing and/or install the Lombok plugin. I had to uninstall/reinstall the Lombok plugin in IntelliJ IDEA in order to get things to work.
 
 If you start your app (using `./mvnw spring-boot:run`) after adding this code, you'll see the list of groups and events displayed in your console.
 
@@ -273,7 +274,7 @@ class GroupController {
 }
 ```
 
-If you restart your server app and hit `localhost:8080/api/groups` with your browser, or a command-line client, you should see the list of groups.
+If you restart your server app and hit `http://localhost:8080/api/groups` with your browser, or a command-line client, you should see the list of groups.
 
 You can create, read, update, and delete groups with the following [HTTPie](https://httpie.org) commands.
 
@@ -288,26 +289,26 @@ http DELETE :8080/api/group/6
 
 Create React App is a command-line utility that generates React projects for you. It's a convenient tool because it also offers commands that will build and optimize your project for production. It uses webpack under the covers for building. If you want to learn more about webpack, I recommend [webpack.academy](https://webpack.academy).
 
-Install the latest version of Create React App, which is version 1.5.2.
+Create a new project in the `jugtours` directory with Yarn.
 
 ```bash
-yarn add global create-react-app@1.5.2
+yarn create react-app app
 ```
 
-Create a new project in the `jugtours` directory you created.
-
-```bash
-create-react-app app
-```
-
-After the app creation process completes, navigate into its directory and install [Bootstrap](https://getbootstrap.com/), cookie support for React, React Router, and [Reactstrap](https://reactstrap.github.io/).
+After the app creation process completes, navigate into the `app` directory and install [Bootstrap](https://getbootstrap.com/), cookie support for React, React Router, and [Reactstrap](https://reactstrap.github.io/).
 
 ```bash
 cd app
 yarn add bootstrap@4.1.2 react-cookie@2.2.0 react-router-dom@4.3.1 reactstrap@6.3.0
 ```
 
-You'll use Bootstrap's CSS and Reactstrap's components to make the UI look better, especially on mobile phones. If you'd like to learn more about Reactstrap, see <https://reactstrap.github.io/>. It has extensive documentation on its various components and how to use them.
+You'll use Bootstrap's CSS and Reactstrap's components to make the UI look better, especially on mobile phones. If you'd like to learn more about Reactstrap, see <https://reactstrap.github.io>. It has extensive documentation on its various components and how to use them.
+
+Add Bootstrap's CSS file as an import in `app/src/index.js`.
+
+```js
+import 'bootstrap/dist/css/bootstrap.min.css';
+```
 
 ## Call Your Spring Boot API and Display the Results
 
@@ -359,15 +360,16 @@ class App extends Component {
 export default App;
 ```
 
-To proxy from `/api` to `http://localhost:8080/api`, add a proxy key/value to `app/package.json`.
+To proxy from `/api` to `http://localhost:8080/api`, add a proxy setting to `app/package.json`.
 
 ```json
+"scripts": {...},
 "proxy": "http://localhost:8080"
 ```
 
 To learn more about this feature, search for "proxy" in `app/README.md`. Create React App ships with all kinds of documentation in this file, how cool is that?!
 
-Run `yarn start` in your `app` directory, and you should see the list of default groups.
+Make sure Spring Boot is running, then run `yarn start` in your `app` directory. You should see the list of default groups.
 
 {% img blog/spring-boot-2-react/jug-list.png alt:"JUG List" width:"800" %}{: .center-image }
 
@@ -560,6 +562,14 @@ class App extends Component {
 export default App;
 ```
 
+To make your UI a bit more spacious, add a top margin to Bootrap's container classes in `app/src/App.css`.
+
+```css
+.container, .container-fluid {
+  margin-top: 20px
+}  
+```
+
 Your React app should update itself as you make changes and you should see a screen like the following at `http://localhost:3000`.
 
 {% img blog/spring-boot-2-react/home-with-link.png alt:"Home screen with Manage JUG Tour link" width:"800" %}{: .center-image }
@@ -574,7 +584,7 @@ It's great that you can see your Spring Boot's data in your React app, but it's 
 
 ## Add a React GroupEdit Component
 
-Create `app/src/GroupEdit.js` and use its `componentDidMount()` to fetch the group record with the id from the URL.
+Create `app/src/GroupEdit.js` and use its `componentDidMount()` to fetch the group resource with the id from the URL.
 
 ```jsx
 import React, { Component } from 'react';
@@ -718,7 +728,7 @@ Now you should be able to add and edit groups!
 
 ## Add Authentication with Okta
 
-It's pretty cool to build a CRUD app, but it's even cooler to build a _secure_ one. To make it so you have to log in before viewing/modifying groups, you can use Okta's easy-to-use API for OIDC. In short, we make [identity management](https://developer.okta.com/product/user-management/) a lot easier, more secure, and more scalable than what you're used to. Okta is a cloud service that allows developers to create, edit, and securely store user accounts and user account data, and connect them with one or multiple applications. Our API enables you to:
+It's pretty cool to build a CRUD app, but it's even cooler to build a _secure_ one. To make it so you have to log in before viewing/modifying groups, you can use Okta's easy-to-use API for OIDC. Okta makes [identity management](https://developer.okta.com/product/user-management/) a lot easier, more secure, and more scalable than what you're used to. Okta is a cloud service that allows developers to create, edit, and securely store user accounts and user account data, and connect them with one or multiple applications. Our API enables you to:
 
 * [Authenticate](https://developer.okta.com/product/authentication/) and [authorize](https://developer.okta.com/product/authorization/) your users
 * Store data about your users
@@ -770,8 +780,6 @@ Are you sold? [Register for a forever-free developer account](https://developer.
 
     <build...>
 
-    <profiles...>
-
     <pluginRepositories>
         <pluginRepository>
             <id>spring-snapshots</id>
@@ -794,14 +802,12 @@ Are you sold? [Register for a forever-free developer account](https://developer.
 
 ### Create an OIDC App in Okta
 
-[Log in](https://login.okta.com/?SAMLRequest=fc%2B7CsJAEAXQXvAflu1NNJUMeZBGELTx1a%2FrYILJTtyZGD%2FfSBRiYzlw77lMnD3rSj3Qc0ku0YtgrhU6S5fSXRN9PKxmS52l00nMpq6iBvJWCrfDe4ss6vStRe9aDzmGIZfo1jsgwyWDMzUyiIV9vt1AH4XGk5ClSvewUgMNa%2BYW%2FVj5jxhm9NLP67QQaSAMu64L6CYmsFSHlnzT4ZlLwTgcL6Sf8%2FeX9AU%3Dhttps://login.okta.com/?SAMLRequest=fc%2B7CsJAEAXQXvAflu1NNJUMeZBGELTx1a%2FrYILJTtyZGD%2FfSBRiYzlw77lMnD3rSj3Qc0ku0YtgrhU6S5fSXRN9PKxmS52l00nMpq6iBvJWCrfDe4ss6vStRe9aDzmGIZfo1jsgwyWDMzUyiIV9vt1AH4XGk5ClSvewUgMNa%2BYW%2FVj5jxhm9NLP67QQaSAMu64L6CYmsFSHlnzT4ZlLwTgcL6Sf8%2FeX9AU%3D) to your Okta Developer account (or [sign up](https://developer.okta.com/signup/) if you don't have an account) and navigate to **Applications** > **Add Application**. Click **Web** and click **Next**. Give the app a name you'll remember, and specify `http://localhost:8080/login/oauth2/code/okta` as a Login redirect URI. Click **Done**, then click **Edit** to edit General Settings. Add `http://localhost:3000` and `http://localhost:8080` as Logout redirect URIs, then click **Save**. 
+[Log in](https://login.okta.com/?SAMLRequest=fc%2B7CsJAEAXQXvAflu1NNJUMeZBGELTx1a%2FrYILJTtyZGD%2FfSBRiYzlw77lMnD3rSj3Qc0ku0YtgrhU6S5fSXRN9PKxmS52l00nMpq6iBvJWCrfDe4ss6vStRe9aDzmGIZfo1jsgwyWDMzUyiIV9vt1AH4XGk5ClSvewUgMNa%2BYW%2FVj5jxhm9NLP67QQaSAMu64L6CYmsFSHlnzT4ZlLwTgcL6Sf8%2FeX9AU%3Dhttps://login.okta.com/?SAMLRequest=fc%2B7CsJAEAXQXvAflu1NNJUMeZBGELTx1a%2FrYILJTtyZGD%2FfSBRiYzlw77lMnD3rSj3Qc0ku0YtgrhU6S5fSXRN9PKxmS52l00nMpq6iBvJWCrfDe4ss6vStRe9aDzmGIZfo1jsgwyWDMzUyiIV9vt1AH4XGk5ClSvewUgMNa%2BYW%2FVj5jxhm9NLP67QQaSAMu64L6CYmsFSHlnzT4ZlLwTgcL6Sf8%2FeX9AU%3D) to your Okta Developer account (or [sign up](https://developer.okta.com/signup/) if you don't have an account) and navigate to **Applications** > **Add Application**. Click **Web** and click **Next**. Give the app a name you'll remember (e.g., "React CRUD"), and specify `http://localhost:8080/login/oauth2/code/okta` as a Login redirect URI. Click **Done**, then click **Edit** to edit General Settings. Add `http://localhost:3000` and `http://localhost:8080` as Logout redirect URIs, then click **Save**. 
 
-Copy and paste the URI of your default authorization server, client ID, and the client secret into `src/main/resources/application.yml`. Create this file, and you can delete the `application.properties` file in the same directory.
+Copy and paste the URI of your default authorization server, client ID, and the client secret into `src/main/resources/application.yml`. Create this file, and delete the `application.properties` file in the same directory.
 
 ```yaml
 spring:
-  profiles:
-    active: @spring.profiles.active@
   security:
     oauth2:
       client:
@@ -1185,7 +1191,7 @@ class App extends Component {
 }
 ```
 
-Modify `app/src/Home.js` to call `/api/user` to see if the user is logged in. If they're not, show them a `Login` button.
+Modify `app/src/Home.js` to call `/api/user` to see if the user is logged in. If they're not, show a `Login` button.
 
 ```jsx
 import React, { Component } from 'react';
@@ -1268,9 +1274,9 @@ export default withCookies(Home);
 
 There are some things you should be aware of in this component:
 
-1. `withCookies()` wraps the `Home` component at the bottom to give it access to cookies. Then you can use `const {cookies} = props` in the constructor, and fetch cookies with `cookies.get('XSRF-TOKEN')`. 
+1. `withCookies()` wraps the `Home` component at the bottom to give it access to cookies. Then you can use `const {cookies} = props` in the constructor, and fetch a cookie with `cookies.get('XSRF-TOKEN')`. 
 2. When using `fetch()`, you need to include `{credentials: 'include'}` to transfer cookies. You will get a 403 Forbidden if you do not include this option.
-3. The CSRF cookie from Spring Security has a different name than the header you need to send back. The cookie's name is `XSRF-TOKEN`, while the header name is `X-XSRF-TOKEN`. 
+3. The CSRF cookie from Spring Security has a different name than the header you need to send back. The cookie name is `XSRF-TOKEN`, while the header name is `X-XSRF-TOKEN`. 
 
 Update `app/src/GroupList.js` to have similar changes. The good news is you don't need to make any changes to the `render()` method.
 
@@ -1505,9 +1511,20 @@ To build and package your React app with Maven, you can use the [frontend-maven-
 </profiles>
 ```
 
-After adding this, you should be able to run `./mvnw -Pprod` and your app see your app running on `http://localhost:8080`. 
+While you're at it, add the active profile setting to `src/main/resources/application.yml`:
+
+```yaml
+spring:
+  profiles:
+    active: @spring.profiles.active@
+  security:
+```
+
+After adding this, you should be able to run `./mvnw spring-boot:run -Pprod` and your app see your app running on `http://localhost:8080`. 
 
 {% img blog/spring-boot-2-react/localhost-8080.png alt:"App Running with Maven" width:"800" %}{: .center-image }
+
+**NOTE:** If you're unable to log in, you might try opening your app in an incognito window.
 
 ## Spring Security's OAuth vs. OIDC Support
 
@@ -1527,7 +1544,7 @@ I hope you've enjoyed this tutorial on how to do CRUD with React, Spring Boot, a
 
 You can find the example created in this tutorial on GitHub at https://github.com/oktadeveloper/okta-spring-boot-react-crud-example.
 
-We've written some Spring Boot and React tutorials in the past, check them out if you're interested!
+We've written some Spring Boot and React tutorials in the past, check them out if you're interested.
 
 * [Bootiful Development with Spring Boot and React](/blog/2017/12/06/bootiful-development-with-spring-boot-and-react)
 * [Build a React Native Application and Authenticate with OAuth 2.0](/blog/2018/03/16/build-react-native-authentication-oauth-2)
