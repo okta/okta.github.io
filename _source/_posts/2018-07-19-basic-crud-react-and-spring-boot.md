@@ -726,7 +726,7 @@ It's pretty cool to build a CRUD app, but it's even cooler to build a _secure_ o
 * Secure your application with [multi-factor authentication](https://developer.okta.com/use_cases/mfa/)
 * And much more! Check out our [product documentation](https://developer.okta.com/documentation/)
 
-Are you sold? [Register for a forever-free developer account](https://developer.okta.com/signup/), and when you're done, come on back so we can learn more about building secure apps with Spring Boot!
+Are you sold? [Register for a forever-free developer account](https://developer.okta.com/signup/), and when you're done, come on back so you can learn more about building secure apps with Spring Boot!
 
 ### Spring Security + OIDC
 
