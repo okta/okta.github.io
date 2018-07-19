@@ -2,19 +2,19 @@
 layout: blog_post
 title: Get Started with Spring Boot, OAuth 2.0, and Okta
 author: mraible
-description: "In this tutorial you’ll learn how to integrate Spring Security into a Spring Boot application, plus add authentication with OAuth using the Okta API."
+description: "In this tutorial you'll learn how to integrate Spring Security into a Spring Boot application, plus add authentication with OAuth using the Okta API."
 tags: [spring-boot, oauth, okta]
 ---
 
-If you’re building a Spring Boot application, you’ll eventually need to add user authentication. You can do this with OAuth 2.0 (henceforth: OAuth). OAuth is a standard that applications can use to provide client applications with “secure delegated access”. It works over HTTP and authorizes devices, APIs, servers, and applications with access tokens rather than credentials.
+If you're building a Spring Boot application, you'll eventually need to add user authentication. You can do this with OAuth 2.0 (henceforth: OAuth). OAuth is a standard that applications can use to provide client applications with "secure delegated access". It works over HTTP and authorizes devices, APIs, servers, and applications with access tokens rather than credentials.
 
 Very simply, OAuth is a protocol that supports authorization workflows. It gives you a way to ensure that a specific user has specific permission.
 
-OAuth doesn’t validate a user’s identity — that’s taken care of by an authentication service like Okta. Authentication is when you validate a user’s identity (like asking for a username / password to log in), whereas authorization is when you check to see what permissions an existing user already has.
+OAuth doesn't validate a user's identity — that's taken care of by an authentication service like Okta. Authentication is when you validate a user's identity (like asking for a username / password to log in), whereas authorization is when you check to see what permissions an existing user already has.
 
-In this tutorial you’ll build an OAuth client for a Spring Boot application, plus add authentication with the Okta API. You can sign up for a [forever-free Okta developer account here](https://developer.okta.com/signup/).
+In this tutorial you'll build an OAuth client for a Spring Boot application, plus add authentication with the Okta API. You can sign up for a [forever-free Okta developer account here](https://developer.okta.com/signup/).
 
-If you don’t want to code along, feel free to grab the [source code from GitHub](https://github.com/oktadeveloper/okta-spring-boot-oauth-example)! You can also watch a video of this tutorial below.
+If you don't want to code along, feel free to grab the [source code from GitHub](https://github.com/oktadeveloper/okta-spring-boot-oauth-example)! You can also watch a video of this tutorial below.
 
 <div style="text-align: center">
 <iframe width="600" height="338" style="max-width: 100%" src="https://www.youtube.com/embed/TaZqDrwBWwA" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
@@ -77,7 +77,7 @@ The Metadata URI you see in this screenshot will come in handy later when you ne
 
 ## Create an OpenID Connect App in Okta
 
-To get a client id and secret, you need to create a new OpenID Connect (OIDC) app. Navigate to **Applications** and click on **Add Application**. Select **Web** and click **Next**. Give the application a name (e.g. “My OIDC App”) and specify `http://localhost:8080/login` as a Login redirect URI. Click **Done** and admire your handiwork!
+To get a client id and secret, you need to create a new OpenID Connect (OIDC) app. Navigate to **Applications** and click on **Add Application**. Select **Web** and click **Next**. Give the application a name (e.g. "My OIDC App") and specify `http://localhost:8080/login` as a Login redirect URI. Click **Done** and admire your handiwork!
 
 {% img blog/spring-boot-oauth/oidc-settings.png alt:"My OIDC App" width:"700" %}{: .center-image }
 
@@ -114,8 +114,8 @@ security:
       clientId: {yourClientId}
       clientSecret: {yourClientSecret}
       # From Authorization Server's metadata
-      accessTokenUri: https://{yourOktaDomain}/oauth2/default/v1/token	
-      userAuthorizationUri: https://{yourOktaDomain}/oauth2/default/v1/authorize 
+      accessTokenUri: https://{yourOktaDomain}/oauth2/default/v1/token
+      userAuthorizationUri: https://{yourOktaDomain}/oauth2/default/v1/authorize
       clientAuthenticationScheme: form
       scope: openid profile email
     resource:
@@ -123,7 +123,7 @@ security:
       userInfoUri: https://{yourOktaDomain}/oauth2/default/v1/userinfo
 ```
 
-Start your app with `spring run helloOAuth.groovy` and navigate to `http://localhost:8080`. You'll be redirected to Okta to login. 
+Start your app with `spring run helloOAuth.groovy` and navigate to `http://localhost:8080`. You'll be redirected to Okta to login.
 
 {% img blog/spring-boot-oauth/okta-login.png alt:"Okta Login" width:"800" %}{: .center-image }
 
@@ -156,7 +156,7 @@ In a [future tutorial](/blog/2017/09/19/build-a-secure-notes-application-with-ko
 
 * May 24, 2018: Added `spring-security-oauth2-autoconfigure` as a dependency, which is necessary for Spring Boot 2.0. You can see the changes in this article in [this pull request](https://github.com/okta/okta.github.io/pull/2074), and changes in the example app in [okta-spring-boot-oauth-example#4](https://github.com/oktadeveloper/okta-spring-boot-oauth-example/pull/4).
 * Feb 2, 2018: Added more information to `application.yml` so it's easier to copy and paste.
-* Oct 20, 2017: Added missing `scope: openid profile email` to `application.yaml`. 
+* Oct 20, 2017: Added missing `scope: openid profile email` to `application.yaml`.
 * Oct 11, 2017: Updated instructions for the [Okta Developer Console](/blog/2017/09/25/all-new-developer-console).
 
 

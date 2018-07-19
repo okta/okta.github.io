@@ -132,10 +132,10 @@ are now testing just one class at a time.
 
     Now, your tests are:
 
-    -   **fast** — they are executed on a JVM and don’t require going to the network or a persistent layer.
-    -   **repeatable** — they don’t depend on emulator stability or network quality.
+    -   **fast** — they are executed on a JVM and don't require going to the network or a persistent layer.
+    -   **repeatable** — they don't depend on emulator stability or network quality.
     -   (potentially!) **simple** and **consistent** — there is a lot of good information out there on how to write good unit tests.
-    -   **independent** — since the persistent layer isn’t used, one test won’t influence another.
+    -   **independent** — since the persistent layer isn't used, one test won't influence another.
 
     In addition to all of this awesomeness, your code should actually be
     better off, too. Hopefully writing unit tests will force you to

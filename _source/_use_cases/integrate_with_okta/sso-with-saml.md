@@ -18,7 +18,7 @@ Use the following instructions to support single sign-on for your app in the pub
 
 #### 1. Prepare Your Application
 
-Use Okta’s [Single Sign-On with Okta](/docs/guides/saml_guidance) guide for best practices on supporting SAML in your app which includes toolkits and testing tools.
+Use Okta's [Single Sign-On with Okta](/docs/guides/saml_guidance) guide for best practices on supporting SAML in your app which includes toolkits and testing tools.
 
 #### 2. Integrate Your App
 
@@ -30,7 +30,7 @@ If you see a **Developer** prompt in the top left, click it and select **Classic
 * When you are ready, navigate to the Feedback tab of the App Wizard:
     {% img saml-step3.png alt:"Feedback page for App wizard" %}
 
-    1. Select **I'm a software vendor. I'd like to integrate my app with Okta.** if you want your app added to the OIN. Okta won’t contact you until this option is selected.
+    1. Select **I'm a software vendor. I'd like to integrate my app with Okta.** if you want your app added to the OIN. Okta won't contact you until this option is selected.
     2. Click **Submit your app for review.** You are redirected to [the OIN Manager](https://oinmanager.okta.com/).
         {% img oan-manager.png alt:"OIN Manager submission page" %}
     3. In the OIN Manager, click **Start Submission Form,** and enter the requested information in the General Settings tab.
@@ -49,7 +49,7 @@ Get stuck or have questions? See our Okta Integration Network FAQs (below), emai
 
 #### 4. Partner with Okta (Optional)
 
-Already part of the Okta Integration Network but looking for a more “go-to-market” partnership? Email <developers@okta.com> about becoming an [Okta App Partner](https://www.okta.com/partners/). App Partners are fully integrated with Okta and get access to great benefits like marketing support and a free version of Okta for your app.
+Already part of the Okta Integration Network but looking for a more "go-to-market" partnership? Email <developers@okta.com> about becoming an [Okta App Partner](https://www.okta.com/partners/). App Partners are fully integrated with Okta and get access to great benefits like marketing support and a free version of Okta for your app.
 
 Related articles:
 

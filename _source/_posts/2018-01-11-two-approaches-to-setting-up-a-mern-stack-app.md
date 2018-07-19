@@ -8,7 +8,7 @@ tweets:
   - "Two ways to get a MERN stack app set up"
 ---
 
-The trend I’ve seen in web applications is a backend API written in a server-side technology like Node, with a front-end single-page application written in something like React. The problem with these stacks is that it can be hard to run and deploy them as a single unit. The API and UI will need to be started, stopped and deployed separately. That can be a bit of a pain when developing, and if you are writing the API to only be consumed by that single front end, the extra steps can be unnecessary. If this sounds like you, I'll show you the two main paths I found for setting up a MERN (Mongo, Express, React, and Node) stack application to run and deploy as a single code base.
+The trend I've seen in web applications is a backend API written in a server-side technology like Node, with a front-end single-page application written in something like React. The problem with these stacks is that it can be hard to run and deploy them as a single unit. The API and UI will need to be started, stopped and deployed separately. That can be a bit of a pain when developing, and if you are writing the API to only be consumed by that single front end, the extra steps can be unnecessary. If this sounds like you, I'll show you the two main paths I found for setting up a MERN (Mongo, Express, React, and Node) stack application to run and deploy as a single code base.
 
 ## 1. Roll Your Own
 
@@ -52,12 +52,12 @@ That said, there is a lot of semi-advanced stuff in the starter project. If you 
 
 ### The Verdict
 
-This is probably the best solution for those who are creating an enterprise-level application with the MERN stack. Despite being somewhat advanced, the documentation is stellar. The fact that it’s made by Hashnode means you have a direct line to a community of people who can answer questions about it if you run into problems or something you simply don't understand.
+This is probably the best solution for those who are creating an enterprise-level application with the MERN stack. Despite being somewhat advanced, the documentation is stellar. The fact that it's made by Hashnode means you have a direct line to a community of people who can answer questions about it if you run into problems or something you simply don't understand.
 
 ## Which One Is For Me?
 
-As with all things software, it depends. I recommend generating a project with MERN.io and checking out what dependencies and practices are included. Then decide for yourself if it’s right for you. Also, read through the generated project and make sure you understand what’s going on in the code. Make sure you can follow how the packages that are included are being used. It can be a great way to learn how to do things the conventional way. 
-If you want to learn how to set up these different pieces manually, I’d suggest rolling your own. Or, if you know you don’t need all the things that come in the MERN.io generated application, you might consider rolling your own. If you *do* roll your own, I suggest referring to the [MERN.io style and organization](http://mern.io/documentation.html) of the project for guidance on the “proper” way to do things.
+As with all things software, it depends. I recommend generating a project with MERN.io and checking out what dependencies and practices are included. Then decide for yourself if it's right for you. Also, read through the generated project and make sure you understand what's going on in the code. Make sure you can follow how the packages that are included are being used. It can be a great way to learn how to do things the conventional way.
+If you want to learn how to set up these different pieces manually, I'd suggest rolling your own. Or, if you know you don't need all the things that come in the MERN.io generated application, you might consider rolling your own. If you *do* roll your own, I suggest referring to the [MERN.io style and organization](http://mern.io/documentation.html) of the project for guidance on the "proper" way to do things.
 
 ## Learn More
 

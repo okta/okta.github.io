@@ -5,9 +5,9 @@ author: leebrandt
 tags: [react, sign-in widget, okta, es6]
 ---
 
-React has quickly become one of the most favored front-end web frameworks, and is second only to plain old HTML5, [according to JAXenter](https://jaxenter.com/technology-trends-2017-top-frameworks-131993.html). So it’s no surprise that [developers are learning it](https://www.lynda.com/React-js-training-tutorials/7049-0.html), and [employers are asking for it](https://stackoverflow.com/jobs?sort=i&q=ReactJS).
+React has quickly become one of the most favored front-end web frameworks, and is second only to plain old HTML5, [according to JAXenter](https://jaxenter.com/technology-trends-2017-top-frameworks-131993.html). So it's no surprise that [developers are learning it](https://www.lynda.com/React-js-training-tutorials/7049-0.html), and [employers are asking for it](https://stackoverflow.com/jobs?sort=i&q=ReactJS).
 
-In this tutorial, you’ll start with a very simple React app with a couple of pages and some routing built in, and add authentication using [Okta’s Sign-In Widget](/code/javascript/okta_sign-in_widget). The Sign-In Widget is an embeddable Javascript widget that allows developers to use Okta’s secure, scalable architecture with a minimum of effort from within React applications. Let’s get started!
+In this tutorial, you'll start with a very simple React app with a couple of pages and some routing built in, and add authentication using [Okta's Sign-In Widget](/code/javascript/okta_sign-in_widget). The Sign-In Widget is an embeddable Javascript widget that allows developers to use Okta's secure, scalable architecture with a minimum of effort from within React applications. Let's get started!
 ## Get the Simple React Seed Project
 Start by cloning the simple React seed project.
 
@@ -24,7 +24,7 @@ Install the [Okta Sign-In Widget](https://github.com/okta/okta-signin-widget) us
 npm install @okta/okta-signin-widget@2.3.0 --save
 ```
 
-This will add the Okta Sign-In Widget code to your `node_modules` folder. We’ll be using version 2.3.0 of the Sign-In Widget.
+This will add the Okta Sign-In Widget code to your `node_modules` folder. We'll be using version 2.3.0 of the Sign-In Widget.
 
 {% img blog/react-sign-in-widget/Okta-Widget-NPM-Modules-Screener.png alt:"Okta in node_modules" %}
 
@@ -75,7 +75,7 @@ and then add the route inside the main route (the one with the path of "/")
 
 ## Add the OpenID Connect Application in Okta
 
-In order to use Okta as your OpenID Connect provider for authentication, you’ll need to set up an application in the [Okta developer console](https://developer.okta.com).
+In order to use Okta as your OpenID Connect provider for authentication, you'll need to set up an application in the [Okta developer console](https://developer.okta.com).
 
 If you don't have an Okta developer account, [go create one](https://developer.okta.com/signup/)! Once you're logged in, click on **Applications** in the top navbar, then click **Add Application**. Select SPA as the platform and click Next. Change the redirect URI to `http://localhost:3000`, and click Done. The application will be created with the following settings:
 
@@ -116,7 +116,7 @@ Thus far you've imported the `OktaSignIn` function from the [Okta Sign-In Widget
 
 ## Show The Login Widget
 
-Next, you’ll create the code to actually render the Sign-In Widget to the page! You'll need to change your render method to create an HTML element  you can render the widget into. Make sure to get a [reference to the element](https://facebook.github.io/react/docs/refs-and-the-dom.html) that will be rendered. Then, add a `componentDidMount` function to make sure you don't try to render the widget before the HTML element is on the page.
+Next, you'll create the code to actually render the Sign-In Widget to the page! You'll need to change your render method to create an HTML element  you can render the widget into. Make sure to get a [reference to the element](https://facebook.github.io/react/docs/refs-and-the-dom.html) that will be rendered. Then, add a `componentDidMount` function to make sure you don't try to render the widget before the HTML element is on the page.
 
 ```js
 import React from 'react';
@@ -160,7 +160,7 @@ You also added state to your component. If you're using a flux implementation, t
 
 ## Check Whether the User is Logged In
 
-We’re almost there, but you don't necessarily want to render the widget right away. You'll need to add a check to make sure the user isn't already logged in, and move your `renderEl` out to a function called `showLogin`.
+We're almost there, but you don't necessarily want to render the widget right away. You'll need to add a check to make sure the user isn't already logged in, and move your `renderEl` out to a function called `showLogin`.
 
 ```js
  // ...other stuff removed for brevity's sake
@@ -187,7 +187,7 @@ We’re almost there, but you don't necessarily want to render the widget right 
   }
 ```
 
-You might have noticed a weird bit of code in that `showLogin` method. That first line: `Backbone.history.stop()`. The widget itself uses [Backbone.js](http://backbonejs.org/) to navigate between its own screens (login, forgot password, etc.), and when it renders, it starts the `Backbone.history`. Since you've now moved it out into a `showLogin` function, the widget is going to re-render whenever the function is called. So this is just a little trick to tell Backbone to stop the history, because it’s going to restart when the widget is rendered.
+You might have noticed a weird bit of code in that `showLogin` method. That first line: `Backbone.history.stop()`. The widget itself uses [Backbone.js](http://backbonejs.org/) to navigate between its own screens (login, forgot password, etc.), and when it renders, it starts the `Backbone.history`. Since you've now moved it out into a `showLogin` function, the widget is going to re-render whenever the function is called. So this is just a little trick to tell Backbone to stop the history, because it's going to restart when the widget is rendered.
 
 ## The Final LoginPage React Component
 
@@ -293,9 +293,9 @@ If it works - congrats! If it doesn't, please post a question to Stack Overflow 
 
 You can find a completed version of the application created in this blog post [on GitHub](https://github.com/leebrandt/okta-react-widget-sample).
 
-Building authentication in an application is hard. It’s even less fun to build it over and over again in each application you build. Okta does the hard part for you and makes it a lot more fun to be a developer! [Sign up for a forever-free developer account](https://developer.okta.com/signup/) and try Okta today!
+Building authentication in an application is hard. It's even less fun to build it over and over again in each application you build. Okta does the hard part for you and makes it a lot more fun to be a developer! [Sign up for a forever-free developer account](https://developer.okta.com/signup/) and try Okta today!
 
-I hope you’ve enjoyed this quick tour of our React support. If you have questions about Okta’s features, or what we’re building next, please hit me up on Twitter [@leebrandt](https://twitter.com/leebrandt), leave a comment below, or open an issue on GitHub.
+I hope you've enjoyed this quick tour of our React support. If you have questions about Okta's features, or what we're building next, please hit me up on Twitter [@leebrandt](https://twitter.com/leebrandt), leave a comment below, or open an issue on GitHub.
 
 ### Changelog
 

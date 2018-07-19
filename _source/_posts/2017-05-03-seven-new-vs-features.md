@@ -23,7 +23,7 @@ The Manage Visual Studio Performance (under the `Help` menu) allows you to view 
 {% img blog/seven-new-vs-features/vs-perfromance.png alt:"Manage Visual Studio Performance" %}
 
 ## 4. Mobile Development
-With Microsoft's acquisition of Xamarin a few years ago, .NET developers have been enjoying the [Xamarin](https://www.xamarin.com/) for free as [a plugin to Visual Studio 2015](https://marketplace.visualstudio.com/items?itemName=Xamarin.Xamarin). In Visual Studio 2017, it’s now one of the install options when installing Visual Studio! This is a signal that cross-platform, mobile development is now a first-class citizen in your Microsoft development toolbelt!
+With Microsoft's acquisition of Xamarin a few years ago, .NET developers have been enjoying the [Xamarin](https://www.xamarin.com/) for free as [a plugin to Visual Studio 2015](https://marketplace.visualstudio.com/items?itemName=Xamarin.Xamarin). In Visual Studio 2017, it's now one of the install options when installing Visual Studio! This is a signal that cross-platform, mobile development is now a first-class citizen in your Microsoft development toolbelt!
 
 ## 5. Live Unit Testing
 Unit testing has been permeating every development stack over the last decade and Microsoft has followed the trend by making Live Unit Testing available. This means as you change your code, Visual Studio will let you know if your changes will break unit tests, or if they will not be covered by unit tests; in real time.
@@ -39,7 +39,7 @@ Building on that win, Microsoft used the Javascript engine built into VSCode in 
 
 
 ## 7. Docker Support Built-In
-With the adoption of containerization, microservices, and [Microsoft’s own work with Docker](https://www.docker.com/microsoft) to help support [Windows Containers](https://hub.docker.com/search/?isAutomated=0&isOfficial=0&page=1&pullCount=0&q=Microsoft+Windows&starCount=0), it’s no surprise that developers are looking for tighter integration with Docker for their development environments. In Visual Studio 2015 (Update 3), you could install the [Visual Studio Tools For Docker](https://marketplace.visualstudio.com/items?itemName=MicrosoftCloudExplorer.VisualStudioToolsforDocker-Preview) and get integrated support for [Docker](https://www.docker.com/) containers. Visual Studio 2017, builds this feature in and when choosing the application template from the `File -> New` menu, you can choose to turn on Docker support, giving you all the goodness of the plug-in, built in to Visual Studio!
+With the adoption of containerization, microservices, and [Microsoft's own work with Docker](https://www.docker.com/microsoft) to help support [Windows Containers](https://hub.docker.com/search/?isAutomated=0&isOfficial=0&page=1&pullCount=0&q=Microsoft+Windows&starCount=0), it's no surprise that developers are looking for tighter integration with Docker for their development environments. In Visual Studio 2015 (Update 3), you could install the [Visual Studio Tools For Docker](https://marketplace.visualstudio.com/items?itemName=MicrosoftCloudExplorer.VisualStudioToolsforDocker-Preview) and get integrated support for [Docker](https://www.docker.com/) containers. Visual Studio 2017, builds this feature in and when choosing the application template from the `File -> New` menu, you can choose to turn on Docker support, giving you all the goodness of the plug-in, built in to Visual Studio!
 
 {% img blog/seven-new-vs-features/vs-docker-support.png alt:"Visual Studio Docker Support" %}
 

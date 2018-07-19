@@ -7,7 +7,7 @@ excerpt: Tell the world about your Okta integration to accelerate adoption, diff
 
 ## Promoting Your Integration
 
-Once you've completed your integration with Okta and published it on the Okta Integration Network (OIN), it’s time to tell the world!
+Once you've completed your integration with Okta and published it on the Okta Integration Network (OIN), it's time to tell the world!
 Raising awareness for your integration among joint customers and new prospects helps accelerate adoption, differentiate your app from competitors, and drive new business.
 
 Please keep us in the loop with your marketing plans by emailing <partnerdg@okta.com>.
@@ -39,7 +39,7 @@ The initial launch of your integration is the best time to make a splash. Here a
 
 * Help Center Article
 
-    Write a help center article educating admins about your integration’s capabilities and how to enable it.
+    Write a help center article educating admins about your integration's capabilities and how to enable it.
 
     Example article: [Envoy: Okta employee provisioning integration](https://help.envoy.com/okta-employee-provisioning-integration/)
 
@@ -58,23 +58,23 @@ List your integration as a new feature in your product release notes.
 
 #### Okta Launch Support
 
-In addition to amplifying your launch marketing, we’ll alert our thousands of customers to your integration.
+In addition to amplifying your launch marketing, we'll alert our thousands of customers to your integration.
 
 * Quarterly Blog Post
 
-    We’ll highlight your integration as part of our [quarterly OIN round-up](https://www.okta.com/blog/2016/12/seeing-success-in-oktas-scim-provisioning-program/) on the Okta blog.
+    We'll highlight your integration as part of our [quarterly OIN round-up](https://www.okta.com/blog/2016/12/seeing-success-in-oktas-scim-provisioning-program/) on the Okta blog.
 
 * Customer Newsletter
 
-    We’ll feature your integration in the OIN section of our monthly customer newsletter.
+    We'll feature your integration in the OIN section of our monthly customer newsletter.
 
 * Sales Newsletter
 
-    We’ll educate our sales reps about your integration in our monthly sales newsletter.
+    We'll educate our sales reps about your integration in our monthly sales newsletter.
 
 * Product Release Notes
 
-    We’ll include enhancements to your integration in the “Application Update” section of our [Product Release Notes](https://help.okta.com).
+    We'll include enhancements to your integration in the "Application Update" section of our [Product Release Notes](https://help.okta.com).
 
 #### Ongoing Marketing Opportunities
 
@@ -82,7 +82,7 @@ After your initial launch, there are periodic activities that help promote your 
 
 * Joint Customer Case Study
 
-    Ask a joint customer - maybe the one who tested your integration - if they’d be willing to share their experience using your app with Okta.
+    Ask a joint customer - maybe the one who tested your integration - if they'd be willing to share their experience using your app with Okta.
     We can highlight [a great success story on the Okta blog](https://www.okta.com/blog/2016/12/afge-employees-and-members-seamlessly-access-their-applications-and-benefits-with-okta/) or even create [a customer journey video](https://www.okta.com/customers/).
     To discuss, email Partner Marketing at <partnerdg@okta.com>.
 

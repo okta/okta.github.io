@@ -11,20 +11,20 @@ In the [first installment of this OpenID Connect (OIDC) series](https://develope
 
 The token(s) you get back from an OIDC flow and the contents of the `/userinfo` endpoint are a function of the flow type and scopes requested. You can see this live on the [OIDC flow test site](https://okta-oidc-fun.herokuapp.com). Here, you can set different toggles for `scope` and `response_type`, which determines the type of flow for your app.
 
-Your use case will determine which flow to use. Are you building a SPA or mobile app that needs to interact directly with the OpenID Provider (OP)? Do you have middleware, such as Spring Boot or Node.js Express that will interact with the OP? Below, we dig into some of the available flows and when it’s appropriate to use them.
+Your use case will determine which flow to use. Are you building a SPA or mobile app that needs to interact directly with the OpenID Provider (OP)? Do you have middleware, such as Spring Boot or Node.js Express that will interact with the OP? Below, we dig into some of the available flows and when it's appropriate to use them.
 
 ## Authorization Code Flow
 
 The Authorization Code flow is covered in [Section 3.1 of the OIDC spec](http://openid.net/specs/openid-connect-core-1_0.html#CodeFlowAuth). The TL;DR is: a code is returned from the `/authorization` endpoint which can be exchanged for ID and access tokens using the `/token` endpoint.
 
-This is a suitable approach when you have a middleware client connected to an OIDC OP and don’t (necessarily) want tokens to ever come back to an end-user application, such as a browser. It also means the end-user application never needs to know a secret key.
+This is a suitable approach when you have a middleware client connected to an OIDC OP and don't (necessarily) want tokens to ever come back to an end-user application, such as a browser. It also means the end-user application never needs to know a secret key.
 
-Here’s an example of how this flow gets started using Okta:
+Here's an example of how this flow gets started using Okta:
 
 ```
 https://micah.okta.com/oauth2/aus2yrcz7aMrmDAKZ1t7/v1/authorize?client_id=0oa2yrbf35Vcbom491t7&response_type=code&scope=openid&state=little-room-greasy-pie&nonce=b1e7b75d-6248-4fc7-bad0-ac5ae0f2e581&redirect_uri=https%3A%2F%2Fokta-oidc-fun.herokuapp.com%2Fflow_result
 ```
-Let’s break that down:
+Let's break that down:
 
 | Key               | Value                                                   | Description                                                   |
 |-------------------|---------------------------------------------------------|---------------------------------------------------------------|
@@ -58,15 +58,15 @@ The Implicit flow is covered in [Section 3.2 of the OIDC spec](http://openid.net
 
 This is a suitable approach when working with a client (such as a Single Page Application or mobile application) that you want to interact with the OIDC OP directly.
 
-Here’s an example of how this flow gets started using Okta:
+Here's an example of how this flow gets started using Okta:
 
 ```
 https://micah.okta.com/oauth2/aus2yrcz7aMrmDAKZ1t7/v1/authorize?client_id=0oa2yrbf35Vcbom491t7&response_type=id_token+token&scope=openid&state=shrill-word-accessible-iron&nonce=f8c658f0-1eb9-4f8d-8692-5da4e2f24cf0&redirect_uri=https%3A%2F%2Fokta-oidc-fun.herokuapp.com%2Fflow_result
 ```
 
-It’s almost identical to the authorization code flow, except that the `response_type` is either `id_token`, `token` or `id_token+token`. Below, we cover exactly what’s in these tokens and how it’s driven, but remember: an `id_token` encodes identity information and an `access_token` (returned if `token` is specified) is a bearer token used to access resources. Okta also uses JWT for an `access_token`, which enables additional information to be encoded into it.
+It's almost identical to the authorization code flow, except that the `response_type` is either `id_token`, `token` or `id_token+token`. Below, we cover exactly what's in these tokens and how it's driven, but remember: an `id_token` encodes identity information and an `access_token` (returned if `token` is specified) is a bearer token used to access resources. Okta also uses JWT for an `access_token`, which enables additional information to be encoded into it.
 
-Here’s this flow in the browser:
+Here's this flow in the browser:
 
 {% img blog/oidc_primer/implicit_flow_1.png alt:"implicit flow 1" width:"800" %}
 
@@ -82,7 +82,7 @@ The Hybrid flow is covered in [Section 3.3 of the OIDC spec](http://openid.net/s
 
 This is a suitable approach when you want your end-user application to have immediate access to short-lived tokens – such as the `id_token` for identity information, and also want to use a backend service to exchange the authorization code for longer-lived tokens using refresh tokens.
 
-It’s a combination of the authorization code and implicit code flows. You can spot it by looking at the `response_type` it *must* contain `code` and one or both of `id_token` and `token`:
+It's a combination of the authorization code and implicit code flows. You can spot it by looking at the `response_type` it *must* contain `code` and one or both of `id_token` and `token`:
 
 ```
 https://micah.okta.com/oauth2/aus2yrcz7aMrmDAKZ1t7/v1/authorize?client_id=0oa2yrbf35Vcbom491t7&response_type=code+id_token+token&scope=openid&state=shrill-word-accessible-iron&nonce=f8c658f0-1eb9-4f8d-8692-5da4e2f24cf0&redirect_uri=https%3A%2F%2Fokta-oidc-fun.herokuapp.com%2Fflow_result
@@ -121,7 +121,7 @@ Here's the response from the `/userinfo` endpoint using the `access_token` as a 
 
 ## Other OIDC Flows
 
-There are two other flows not covered in this post: [Client Credentials Flow](https://tools.ietf.org/html/rfc6749#section-4.4) and [Resource Owner Password Credentials](https://tools.ietf.org/html/rfc6749#section-4.3). These are both defined in the OAuth 2.0 spec and, as such, are supported by OIDC. Here, we’re focusing on flows that require an external authentication provider, such as Okta or Google, and not the alternative methods that these flows support.
+There are two other flows not covered in this post: [Client Credentials Flow](https://tools.ietf.org/html/rfc6749#section-4.4) and [Resource Owner Password Credentials](https://tools.ietf.org/html/rfc6749#section-4.3). These are both defined in the OAuth 2.0 spec and, as such, are supported by OIDC. Here, we're focusing on flows that require an external authentication provider, such as Okta or Google, and not the alternative methods that these flows support.
 
 What information is encoded in the `id_token`, the `access_token` and what information is returned when hitting the protected `/userinfo` endpoint are a function of the flow type and the scopes requested. In the next post, we dig deeper into this.
 

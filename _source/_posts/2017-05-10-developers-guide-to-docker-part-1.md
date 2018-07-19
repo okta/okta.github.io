@@ -7,7 +7,7 @@ redirect_from:
   - "/blog/2017/08/28/developers-guide-to-docker-part-1"
 ---
 
-*It works on my machine.* We’ve all heard it. Most of us have said it. It’s been impossible to get around it… until now. Not only can adding Docker to your development environment solve that issue, but it can make it drop-dead simple to onboard new developers, keep a team working forward and allow everyone on the team use their desired tools! 
+*It works on my machine.* We've all heard it. Most of us have said it. It's been impossible to get around it... until now. Not only can adding Docker to your development environment solve that issue, but it can make it drop-dead simple to onboard new developers, keep a team working forward and allow everyone on the team use their desired tools!
 
 ## Why Containers?
 "Aren't containers just lightweight Virtual Machines?"
@@ -27,7 +27,7 @@ Containers share the host operating system's kernel. They run just like applicat
 
 I am not a network or operations guy, I am just a developer. So it helps for me to think of containers as just applications, that think they're full machines.
 
-Assuming you have [Docker installed](https://docs.docker.com/engine/installation/), let’s dive in.
+Assuming you have [Docker installed](https://docs.docker.com/engine/installation/), let's dive in.
 
 ## Some Technical Terminology
 To get started, it's important to get your head around two main terms: Images and Containers. Images are saved containers that you can then turn around and use to make other containers. If you've done any object-oriented development, you know that a class is a blueprint for creating an object. Images are like blueprints for creating containers.
@@ -50,7 +50,7 @@ docker pull nginx:latest
 ```
 {% img blog/docker-for-developers/docker-pull.png alt:"Docker Pull" width:"800" %}
 
-You can leave off the `:latest` and Docker will pull the image tagged with latest, but we'll be explicit here. Just remember that `:latest` changes every time the owner of that image uploads a new version. So it’s not a good idea to use latest in production. Generally, the latest image will also have another tag (1.13.0 at the time of this article) that is much better to use for production. It will still be the same image, even if NGINX uploads a new version of the image tomorrow.
+You can leave off the `:latest` and Docker will pull the image tagged with latest, but we'll be explicit here. Just remember that `:latest` changes every time the owner of that image uploads a new version. So it's not a good idea to use latest in production. Generally, the latest image will also have another tag (1.13.0 at the time of this article) that is much better to use for production. It will still be the same image, even if NGINX uploads a new version of the image tomorrow.
 
 ## Running Containers
 
@@ -76,7 +76,7 @@ this should give is a listing like:
 
 You can see the container's ID is: 511b121137ac and at the command line inside the container, I am logged in as `root@511b121137ac`. You can also see the command is `/bin/bash` that is running at PID 1 in the container and the container name is `determined_banach` (it will be different for you). If you don't specify a name for the container, Docker will make one from a list of adjectives and famous computer scientist last names (think `hungry_babbage` or `slippery_bohr`).
 
-Now, if you type `exit` at the command line inside the container, we'll be dropped back into the host machine's command line. If we go to our other terminal (where we listed running containers) and re-run the `docker container list` command, we'll see an empty list. 
+Now, if you type `exit` at the command line inside the container, we'll be dropped back into the host machine's command line. If we go to our other terminal (where we listed running containers) and re-run the `docker container list` command, we'll see an empty list.
 
 But what if you want to see **all** the containers whether they're running or not? You can run the `docker container list` command with the `-a` switch (for all).
 
@@ -89,7 +89,7 @@ docker container list -a
 As you can see the nginx-based container is now stopped and it exited with a code '0', meaning it exited normally.
 
 ### Cleaning Up Your Docker Environment
-Just because the container isn’t running, doesn't mean it's gone. It's still there in a stopped state. If you want to actually delete a container from your host machine you use the `rm` command like so:
+Just because the container isn't running, doesn't mean it's gone. It's still there in a stopped state. If you want to actually delete a container from your host machine you use the `rm` command like so:
 
 ``` bash
 docker rm determined_banach
@@ -100,7 +100,7 @@ If you decide you don't want to build any more containers from a particular imag
 
 ```bash
 docker rmi nginx:latest
-``` 
+```
 
 You don't have to specify `:latest` for the image tag, Docker will assume you're referring to `:latest` if you don't specify, but it's good practice to always use a tagged image. In a production scenario, it's important to **not** use `:latest`, as the `:latest` image is updated whenever a new version of the image is pushed to the repository. So the image you get with the `:latest` tag today maybe **very** different from the one you got yesterday.
 

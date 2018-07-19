@@ -9,13 +9,13 @@ tweets:
   - "This testing guide shows you some techniques for testing your Java and Angular components when using @okta >"
 ---
 
-Writing apps with Spring Boot and Ionic (which is built on Angular) can be fun because both frameworks offer a good developer experience (DX). You change a file, save it, and the app automatically reloads with your changes. This feature is often called hot-reload and it's a blissful way to develop. It’s so nice, it can cause you to forget about automating your tests.
+Writing apps with Spring Boot and Ionic (which is built on Angular) can be fun because both frameworks offer a good developer experience (DX). You change a file, save it, and the app automatically reloads with your changes. This feature is often called hot-reload and it's a blissful way to develop. It's so nice, it can cause you to forget about automating your tests.
 
 I'll admit, writing tests is difficult to do. Writing the test often isn't difficult, it's just code after all. However, writing a *test first* is a habit that's tricky to form. However, if you do test-driven development (TDD), chances are that you'll develop a nicer API. After all, your test will act as a client to your API, and you'll see what code looks like for your users.
 
 A couple of months ago, I wrote posts about developing a [cryptocurrency wealth tracking PWA](/blog/2018/01/18/cryptocurrency-pwa-secured-by-okta) and [storing your holdings as Okta custom profile attributes](/blog/2018/01/23/replace-local-storage-with-okta-profile-attributes). To show you how to write tests for the back-end and front-end components, I recruited [Brian Demers](https://twitter.com/briandemers) to help me. Brian is the lead developer on Okta's Java SDKs and a fun guy to hang out with.
 
-Brian wrote the sections of this article that pertain to the backend code (Java + Spring Boot), while I wrote the sections that pertain to the frontend (TypeScript + Angular). When you see “I” in each section, it’s either Brian or myself, depending on context.
+Brian wrote the sections of this article that pertain to the backend code (Java + Spring Boot), while I wrote the sections that pertain to the frontend (TypeScript + Angular). When you see "I" in each section, it's either Brian or myself, depending on context.
 
 In this tutorial, you'll see how to implement many aspects of testing a modern application:
 
@@ -38,7 +38,7 @@ The instructions below assume you're operating from the `okta-ionic-crypto-java-
 
 ## Set Up Okta
 
-First off, what is Okta? Simply put, we’re an API service that allows developers to create, edit, and securely store user accounts and user account data, and connect them with one or multiple applications. Our API enables you to:
+First off, what is Okta? Simply put, we're an API service that allows developers to create, edit, and securely store user accounts and user account data, and connect them with one or multiple applications. Our API enables you to:
 
 * [Authenticate](https://developer.okta.com/product/authentication/) and [authorize](https://developer.okta.com/product/authorization/) your users
 * Store and maintain all your users in one place
@@ -46,11 +46,11 @@ First off, what is Okta? Simply put, we’re an API service that allows develope
 * Secure your application with [multi-factor authentication](https://developer.okta.com/use_cases/mfa/)
 * And much more! Check out our [product documentation](https://developer.okta.com/documentation/)
 
-In short: we make [user account management](https://developer.okta.com/product/user-management/) a lot easier, more secure, and more scalable than what you’re probably used to.
+In short: we make [user account management](https://developer.okta.com/product/user-management/) a lot easier, more secure, and more scalable than what you're probably used to.
 
-To get started with this tutorial, you’ll first need to log into your forever-free Okta developer account,or [sign up](https://developer.okta.com/signup/) if you don't already have one.
+To get started with this tutorial, you'll first need to log into your forever-free Okta developer account,or [sign up](https://developer.okta.com/signup/) if you don't already have one.
 
-Once you’re signed up and logged in, you’ll need to add a `holdings` attribute to your organization's user profiles. Log in to the Okta Developer Console, then navigate to **Users** > **Profile Editor**. Click on **Profile** for the first profile in the table. You can identify it by its Okta logo. Click **Add Attribute** and use the following values:
+Once you're signed up and logged in, you'll need to add a `holdings` attribute to your organization's user profiles. Log in to the Okta Developer Console, then navigate to **Users** > **Profile Editor**. Click on **Profile** for the first profile in the table. You can identify it by its Okta logo. Click **Add Attribute** and use the following values:
 
 * Display name: `Holdings`
 * Variable name: `holdings`
@@ -124,7 +124,7 @@ public class HoldingsController {
 }
 ```
 
-The differences between the two might may or may not be obvious to you. The second example is just plain ol’ Java code: `Client` field is final, once the object is constructed is it ready to be used, and, to me most significantly, it can be used without a Spring. Constructor injection makes it much easier to write tests; you can test your code in isolation and mock out the behavior you are testing for. You can read on the topic from [Oliver Gierke](http://olivergierke.de/2013/11/why-field-injection-is-evil/).
+The differences between the two might may or may not be obvious to you. The second example is just plain ol' Java code: `Client` field is final, once the object is constructed is it ready to be used, and, to me most significantly, it can be used without a Spring. Constructor injection makes it much easier to write tests; you can test your code in isolation and mock out the behavior you are testing for. You can read on the topic from [Oliver Gierke](http://olivergierke.de/2013/11/why-field-injection-is-evil/).
 
 When given a choice, my preferred testing frameworks are [Mockito](https://site.mockito.org/) and [Hamcrest](http://hamcrest.org/JavaHamcrest/). Mockito makes it easy to stub behavior, and Hamcrest has both excellent default assertion messages, and it helps isolate your test code from the differences between JUnit and TestNG. I usually write tests in Groovy as well to help reduce some of the boilerplate, but I'll stick with Java for today.
 
@@ -375,7 +375,7 @@ It's worth noting that this integration test is more complicated and slower than
 
 As I mentioned above, instead of using WireMock to fake an OAuth response, you can skip the OAuth validation check with a few clever tricks.
 
-I'm not going to go into detail here, if you’re interested you can take a look how I wrote the same test with a [different technique](https://github.com/oktadeveloper/okta-ionic-crypto-java-sdk-example/blob/master/holdings-api/src/test/java/com/okta/developer/its/HoldingsApiWithMockMvcIT.java). The key areas to look at are the:
+I'm not going to go into detail here, if you're interested you can take a look how I wrote the same test with a [different technique](https://github.com/oktadeveloper/okta-ionic-crypto-java-sdk-example/blob/master/holdings-api/src/test/java/com/okta/developer/its/HoldingsApiWithMockMvcIT.java). The key areas to look at are the:
 
   - `TestResourceServerConfiguration` disables stateless configuration for the resource server (NOT recommended for production)
   - `@WithMockUser(username=TEST_USER_ID)` instructs the test framework to create a Spring SecurityContext for you
@@ -1172,7 +1172,7 @@ When everything passes, pat yourself on the back; you're well on your way to bei
 
 **TIP:** Protractor uses Jasmine, which allows you to easily include/exclude specific tests from running. You can add an `f` prefix to your `describe` or `it` functions, so they become `fdescribe` or `fit`. If you want to exclude tests, you can add an `x` prefix to these same code blocks (e.g., `xdescribe` and `xit`).
 
-One of the problems with the e2e tests you’ve written so far is they don’t use the API to save holdings in Okta. To create a test that exercises that functionality, create a `crypto-pwa/e2e/pages/add-holding.po.ts` page object for Add Holding page. This class has convenience methods to fill out the form fields and click the submit button.
+One of the problems with the e2e tests you've written so far is they don't use the API to save holdings in Okta. To create a test that exercises that functionality, create a `crypto-pwa/e2e/pages/add-holding.po.ts` page object for Add Holding page. This class has convenience methods to fill out the form fields and click the submit button.
 
 ```ts
 import { $, by, element } from 'protractor';
@@ -1223,7 +1223,7 @@ export class HomePage extends Page {
 }
 ```
 
-Now that you have these page objects in place, you can add a new e2e test that logs in, adds three Bitcoins in USD, and then deletes the holding. The hardest part in writing this test was figuring out how to swipe left with Protractor, so I’d recommend making note of how that’s done.
+Now that you have these page objects in place, you can add a new e2e test that logs in, adds three Bitcoins in USD, and then deletes the holding. The hardest part in writing this test was figuring out how to swipe left with Protractor, so I'd recommend making note of how that's done.
 
 ```ts
 import { browser, by, element, ExpectedConditions as ec } from 'protractor';
@@ -1304,7 +1304,7 @@ Two of the most popular CI servers are [Travis CI](https://travis-ci.org/) and [
 
 If you've checked your project into [GitHub](https://github.com/), you can use Travis CI.
 
-1. Log in to [Travis CI](https://travis-ci.org/) and enable builds for your project’s GitHub repo.
+1. Log in to [Travis CI](https://travis-ci.org/) and enable builds for your project's GitHub repo.
 2. Add the following `.travis.yml` in your root directory, create a branch for it (e.g., `git branch -b ci`), and `git commit/push` it.
 
     ```yaml
@@ -1466,7 +1466,7 @@ Codecov has [excellent support](https://github.com/codecov/example-node) for Jav
 }
 ```
 
-Of course, you’ll need to configure Travis to install the `codecov` command line tool before you can use it. You can do that with `npm i -g codecov` or you can use `bash <(curl -s https://codecov.io/bash)` like Brian does in his example above.
+Of course, you'll need to configure Travis to install the `codecov` command line tool before you can use it. You can do that with `npm i -g codecov` or you can use `bash <(curl -s https://codecov.io/bash)` like Brian does in his example above.
 
 ```yaml
 install:
@@ -1497,7 +1497,7 @@ The `codecov` command is smart enough to find the `jacoco.xml` files on the Java
 
 **TIP:** Codecov [allows you to add `unittests`, `integration`, and `ui` flags](https://docs.codecov.io/docs/flags) in your code to group types of tests.
 
-You can [configure Codecov](https://github.com/apps/codecov) to report on your GitHub pull requests too! If you don’t see your org listed on the previous page, you should be able to navigate directly to it. For example, this project’s direct link is https://codecov.io/gh/oktadeveloper/okta-ionic-crypto-java-sdk-example.
+You can [configure Codecov](https://github.com/apps/codecov) to report on your GitHub pull requests too! If you don't see your org listed on the previous page, you should be able to navigate directly to it. For example, this project's direct link is https://codecov.io/gh/oktadeveloper/okta-ionic-crypto-java-sdk-example.
 
 See [okta-ionic-crypto-java-sdk-example#6](https://github.com/oktadeveloper/okta-ionic-crypto-java-sdk-example/pull/6) for a pull request that adds code coverage.
 

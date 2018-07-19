@@ -10,7 +10,7 @@ tweets:
  - "Make it easy to get authentication into your @nodejs apps with @passportjs and OpenID Connect! >>"
 ---
 
-Building local or social login in Node can be simple with Passport.js. There are over 500 strategies already built that make it easy to wire up identity providers. But what do you do if your identity provider doesn't already have a pre-built strategy? Do you have to build all that stuff yourself? Absolutely not! You can use generic strategies for Passport.js that make it easy to use your provider of choice without having to write all the plumbing yourself. In this tutorial we’ll walk through how to use my identity provider of choice (Okta) with the generic `passport-openidconnect` package to build secure Node authentication and user management!
+Building local or social login in Node can be simple with Passport.js. There are over 500 strategies already built that make it easy to wire up identity providers. But what do you do if your identity provider doesn't already have a pre-built strategy? Do you have to build all that stuff yourself? Absolutely not! You can use generic strategies for Passport.js that make it easy to use your provider of choice without having to write all the plumbing yourself. In this tutorial we'll walk through how to use my identity provider of choice (Okta) with the generic `passport-openidconnect` package to build secure Node authentication and user management!
 
 Before we get started, let me tell you what Okta is, and why I think Okta is a no-brainer choice for your next Node project.
 
@@ -24,11 +24,11 @@ Okta is a cloud service that allows developers to create, edit, and securely sto
 * Secure your application with [multi-factor authentication](https://developer.okta.com/use_cases/mfa/)
 * And much more! Check out our [product documentation](https://developer.okta.com/documentation/)
 
-In short: we make [user account management](https://developer.okta.com/product/user-management/) a lot easier, more secure, and more scalable than what you’re probably used to.
+In short: we make [user account management](https://developer.okta.com/product/user-management/) a lot easier, more secure, and more scalable than what you're probably used to.
 
-Sound amazing? [Register for a free developer account](https://developer.okta.com/signup/), and when you’re done, come on back so we can learn more about building secure authentication in Node.
+Sound amazing? [Register for a free developer account](https://developer.okta.com/signup/), and when you're done, come on back so we can learn more about building secure authentication in Node.
 
-Now, let’s dive in!
+Now, let's dive in!
 
 ## Use Express to Scaffold the Base Node Authentication Project
 
@@ -121,7 +121,7 @@ app.use(passport.session());
 
 ## Create an Okta Application to Support Node Authentication
 
-If you don't already have an account (and didn’t create one at the start of this tutorial), [it’s time to sign up for one](https://developer.okta.com/signup/)! Once you're logged into your Okta dashboard, click on the **Applications** menu item and click **Add Application**. From the wizard, choose **Web** and click **Next**.
+If you don't already have an account (and didn't create one at the start of this tutorial), [it's time to sign up for one](https://developer.okta.com/signup/)! Once you're logged into your Okta dashboard, click on the **Applications** menu item and click **Add Application**. From the wizard, choose **Web** and click **Next**.
 
 {% img blog/node-passport/create-web-application.png alt:"Create web application" width:"800" %}{: .center-image }
 

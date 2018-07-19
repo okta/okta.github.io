@@ -80,7 +80,7 @@ In this example, I'll use [React Native App Auth](https://github.com/FormidableL
 
 Before you add AppAuth to your React Native application, you'll need an app to authorize against. If you don't have a free-forever Okta Developer account, [get one today](https://developer.okta.com/signup/)!
 
-Log in to your Okta Developer account and navigate to **Applications** > **Add Application**. Click **Native** and click **Next**. Give the app a name you’ll remember (e.g., `React Native`), select `Refresh Token` as a grant type, in addition to the default `Authorization Code`. Copy the **Login redirect URI** (e.g., `com.oktapreview.dev-158606:/callback`) and save it somewhere. You'll need this value when configuring your app.
+Log in to your Okta Developer account and navigate to **Applications** > **Add Application**. Click **Native** and click **Next**. Give the app a name you'll remember (e.g., `React Native`), select `Refresh Token` as a grant type, in addition to the default `Authorization Code`. Copy the **Login redirect URI** (e.g., `com.oktapreview.dev-158606:/callback`) and save it somewhere. You'll need this value when configuring your app.
 
 Click **Done** and you should see a client ID on the next screen. Copy and save this value as well.
 
@@ -268,7 +268,7 @@ export default class App extends Component<{}, State> {
       const authState = await refresh(config, {
         refreshToken: this.state.refreshToken
       });
-              
+
       this.animateState({
         accessToken: authState.accessToken || this.state.accessToken,
         accessTokenExpirationDate:
@@ -650,5 +650,5 @@ If you're interested in seeing how to do regular React development with Okta, I 
 * [Build a React Application with User Authentication in 15 Minutes](/blog/2017/03/30/react-okta-sign-in-widget)
 * [Build a Preact App with Authentication](/blog/2017/10/19/build-a-preact-app-with-authentication)
 * [Bootiful Development with Spring Boot and React](/blog/2017/12/06/bootiful-development-with-spring-boot-and-react)
- 
+
 If you have any questions about this article, please hit me up on Twitter [@mraible](https://twitter.com/mraible).

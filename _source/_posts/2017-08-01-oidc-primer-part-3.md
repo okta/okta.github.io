@@ -1,6 +1,6 @@
 ---
 layout: blog_post
-title: 'What’s in a Token? – An OpenID Connect Primer, Part 3 of 3'
+title: "What's in a Token? – An OpenID Connect Primer, Part 3 of 3"
 author: dogeared
 tags: [oauth, oauth2, oauth2.0, oauth 2.0, OpenID, OpenID Connect, oidc]
 redirect_from:
@@ -10,17 +10,17 @@ redirect_from:
 
 In the previous two installments of this OpenID Connect (OIDC) series, we dug deep into the [OIDC flow types](https://developer.okta.com/blog/2017/07/25/oidc-primer-part-1) and saw [OIDC in action](https://developer.okta.com/blog/2017/07/25/oidc-primer-part-2) using a playground found at: [https://okta-oidc-fun.herokuapp.com/](https://okta-oidc-fun.herokuapp.com/).
 
-In this third and final installment, we’ll look at what’s encoded into the various types of tokens and how to control what gets put in them. JWTs, have the benefit of being able to carry information in them. With this information available to your app you can easily enforce token expiration and reduce the number of API calls. Additionally, since they’re cryptographically signed, you can verify that they have not been tampered with.
+In this third and final installment, we'll look at what's encoded into the various types of tokens and how to control what gets put in them. JWTs, have the benefit of being able to carry information in them. With this information available to your app you can easily enforce token expiration and reduce the number of API calls. Additionally, since they're cryptographically signed, you can verify that they have not been tampered with.
 
 The source code that backs the site can be found at: [https://github.com/oktadeveloper/okta-oidc-flows-example](https://github.com/oktadeveloper/okta-oidc-flows-example).
 
-There are two primary sources for information relating to identity as dictated by the OIDC spec. One source is the information encoded into the `id_token` [JWT](https://tools.ietf.org/html/rfc7519). Another is the response from the `/userinfo` endpoint, accessible using an `access_token` as a bearer token. At Okta, we’ve chosen to make our access tokens JWTs as well, which provides a third source of information. (You’ll see this in many OIDC implementations.)
+There are two primary sources for information relating to identity as dictated by the OIDC spec. One source is the information encoded into the `id_token` [JWT](https://tools.ietf.org/html/rfc7519). Another is the response from the `/userinfo` endpoint, accessible using an `access_token` as a bearer token. At Okta, we've chosen to make our access tokens JWTs as well, which provides a third source of information. (You'll see this in many OIDC implementations.)
 
 There are a lot of combinations of query parameters in the `/authorization` request that determine what information will be encoded into an `id_token`. The two query parameters that impact what will ultimately be found in returned tokens and the `/userinfo` endpoint are `response_type` and `scope`.
 
 ## OIDC Response Types
 
-For the moment, we’ll set aside `scope` and focus on `response_type`. In the following examples, we use only the scopes, `openid` (required) and `email`. We’ll also work with the [implicit flow](http://openid.net/specs/openid-connect-core-1_0.html#ImplicitFlowAuth), since that gives us back tokens immediately.
+For the moment, we'll set aside `scope` and focus on `response_type`. In the following examples, we use only the scopes, `openid` (required) and `email`. We'll also work with the [implicit flow](http://openid.net/specs/openid-connect-core-1_0.html#ImplicitFlowAuth), since that gives us back tokens immediately.
 
 Given this request:
 
@@ -49,7 +49,7 @@ Notice that `response_type=token` will yield us an `access_token`. A particular 
 
 This is mainly *resource* information, including an expiration (`exp`) and a user id (`uid`).
 
-If we want to get *identity* information for the user, we must hit the `/userinfo` endpoint using the `access_token` as a bearer token. Here’s what that looks like using [HTTPie](https://httpie.org):
+If we want to get *identity* information for the user, we must hit the `/userinfo` endpoint using the `access_token` as a bearer token. Here's what that looks like using [HTTPie](https://httpie.org):
 
 ```
 http https://micah.okta.com/oauth2/aus2yrcz7aMrmDAKZ1t7/v1/userinfo Authorization:"Bearer eyJhbGciOiJSUzI1NiIsImtpZCI6Ik93bFNJS3p3Mmt1Wk8zSmpnMW5Dc2RNelJhOEV1elY5emgyREl6X3RVRUkifQ..."
@@ -62,15 +62,15 @@ HTTP/1.1 200 OK
 }
 ```
 
-We get back the `sub`, `email` and `email_verified` claims. This is because of the default `scope=openid+email` from the original request. We’ll look at some more detailed responses in the scopes section.
+We get back the `sub`, `email` and `email_verified` claims. This is because of the default `scope=openid+email` from the original request. We'll look at some more detailed responses in the scopes section.
 
-Let’s try another request:
+Let's try another request:
 
 ```
 https://micah.okta.com/oauth2/aus2yrcz7aMrmDAKZ1t7/v1/authorize?client_id=0oa2yrbf35Vcbom491t7&response_type=id_token&scope=openid+email&state=aboard-insect-fresh-smile&nonce=c96fa468-ca1b-46f0-8974-546f23f9ee6f&redirect_uri=https%3A%2F%2Fokta-oidc-fun.herokuapp.com%2Fflow_result
 ```
 
-This time, I’m asking for an ID token by using `response_type=id_token`.  The response is a JWT (as required by the OIDC spec) with this information encoded into it:
+This time, I'm asking for an ID token by using `response_type=id_token`.  The response is a JWT (as required by the OIDC spec) with this information encoded into it:
 
 ```
 {
@@ -94,7 +94,7 @@ This time, I’m asking for an ID token by using `response_type=id_token`.  The 
 
 Notice that we have the `sub` and `email`claims encoded directly in the JWT. In this type of implicit flow, we have no bearer token to use against the `/userinfo` endpoint, so the identity information is baked right into the JWT.
 
-Finally, let’s look at the last type of implicit flow:
+Finally, let's look at the last type of implicit flow:
 
 ```
 https://micah.okta.com/oauth2/aus2yrcz7aMrmDAKZ1t7/v1/authorize?client_id=0oa2yrbf35Vcbom491t7&response_type=id_token+token&scope=openid+email&state=aboard-insect-fresh-smile&nonce=c96fa468-ca1b-46f0-8974-546f23f9ee6f&redirect_uri=https%3A%2F%2Fokta-oidc-fun.herokuapp.com%2Fflow_result
@@ -124,24 +124,24 @@ Our `access_token` has the same claims as before. The `id_token` has the followi
 }
 ```
 
-Notice that there’s *less* information in the `id_token` this time (in this case, there’s no `email_verified` claim). Because we also requested the `access_token`, it’s expected that we will get the rest of the available identity information (based on scope) from the `/userinfo` endpoint. In this case, it yields the same information as before when we only requested the `access_token`
+Notice that there's *less* information in the `id_token` this time (in this case, there's no `email_verified` claim). Because we also requested the `access_token`, it's expected that we will get the rest of the available identity information (based on scope) from the `/userinfo` endpoint. In this case, it yields the same information as before when we only requested the `access_token`
 
 ## OIDC Scopes
 
-Combining all the available scopes with all the possible response types yields a large set of information to present: 48 combinations, to be exact. First, I’ll enumerate what each scope yields and then we’ll look at a few real world examples combining `request_type` and `scope`.
+Combining all the available scopes with all the possible response types yields a large set of information to present: 48 combinations, to be exact. First, I'll enumerate what each scope yields and then we'll look at a few real world examples combining `request_type` and `scope`.
 
-The first thing to note is that the different scopes have an impact on the information encoded in an `id_token` and returned from the `/userinfo` endpoint. Here’s a table of scopes and resultant claims. More information can be found in [Section 5.4 of the OIDC Spec](http://openid.net/specs/openid-connect-core-1_0.html#ScopeClaims)
+The first thing to note is that the different scopes have an impact on the information encoded in an `id_token` and returned from the `/userinfo` endpoint. Here's a table of scopes and resultant claims. More information can be found in [Section 5.4 of the OIDC Spec](http://openid.net/specs/openid-connect-core-1_0.html#ScopeClaims)
 
 | scope            | resultant claims                                                           |
 |------------------|----------------------------------------------------------------------------|
 | openid           | (required for all OIDC flows)                                              |
 | profile          | name, family_name, given_name, middle_name, nickname, preferred_username   |
-| profile (cont’d) | profile, picture, website, gender, birthdate, zoneinfo, locale, updated_at |
+| profile (cont'd) | profile, picture, website, gender, birthdate, zoneinfo, locale, updated_at |
 | email            | email, email_verified                                                      |
 | address          | address                                                                    |
 | phone            | phone_number, phone_number_verified                                        |
 
-Let’s try each of our implicit flows with *all* the possible (default) scope types.
+Let's try each of our implicit flows with *all* the possible (default) scope types.
 
 ```
 https://micah.okta.com/oauth2/aus2yrcz7aMrmDAKZ1t7/v1/authorize?client_id=0oa2yrbf35Vcbom491t7&response_type=token&scope=openid+profile+email+address+phone&state=aboard-insect-fresh-smile&nonce=c96fa468-ca1b-46f0-8974-546f23f9ee6f&redirect_uri=https%3A%2F%2Fokta-oidc-fun.herokuapp.com%2Fflow_result
@@ -169,15 +169,15 @@ HTTP/1.1 200 OK
 }
 ```
 
-**Note: While it’s not the complete list of claims defined from `profile` scope, it’s all the claims for which my user in Okta has a value.**
+**Note: While it's not the complete list of claims defined from `profile` scope, it's all the claims for which my user in Okta has a value.**
 
-Let’s try just the `id_token` implicit flow (still with all the default scopes):
+Let's try just the `id_token` implicit flow (still with all the default scopes):
 
 ```
 https://micah.okta.com/oauth2/aus2yrcz7aMrmDAKZ1t7/v1/authorize?client_id=0oa2yrbf35Vcbom491t7&response_type=id_token&scope=openid+profile+email+address+phone&state=aboard-insect-fresh-smile&nonce=c96fa468-ca1b-46f0-8974-546f23f9ee6f&redirect_uri=https%3A%2F%2Fokta-oidc-fun.herokuapp.com%2Fflow_result
 ```
 
-Here’s what’s encoded into the `id_token` I get back:
+Here's what's encoded into the `id_token` I get back:
 
 ```
 {
@@ -206,9 +206,9 @@ Here’s what’s encoded into the `id_token` I get back:
 }
 ```
 
-All the (available) identity information is encoded right into the token, since I don’t have a bearer token to hit the `/userinfo` endpoint with.
+All the (available) identity information is encoded right into the token, since I don't have a bearer token to hit the `/userinfo` endpoint with.
 
-Finally, let’s try the last variant of the Implicit Flow: `response_type=id_token+token`:
+Finally, let's try the last variant of the Implicit Flow: `response_type=id_token+token`:
 
 ```
 https://micah.okta.com/oauth2/aus2yrcz7aMrmDAKZ1t7/v1/authorize?client_id=0oa2yrbf35Vcbom491t7&response_type=code+id_token+token&scope=openid+profile+email+address+phone&state=aboard-insect-fresh-smile&nonce=c96fa468-ca1b-46f0-8974-546f23f9ee6f&redirect_uri=https%3A%2F%2Fokta-oidc-fun.herokuapp.com%2Fflow_result
@@ -263,20 +263,20 @@ This rounds out all the identity information that was requested in the scopes.
 
 ## Custom Scopes and Claims
 
-The OIDC spec accommodate custom scopes and claims. The ability to include custom claims in a token (which is cryptographically verifiable) is an important capability for identity providers. Okta’s implementation provides support for this.
+The OIDC spec accommodate custom scopes and claims. The ability to include custom claims in a token (which is cryptographically verifiable) is an important capability for identity providers. Okta's implementation provides support for this.
 
-The screenshot below shows my Authorization Server’s Claims tab:
+The screenshot below shows my Authorization Server's Claims tab:
 
 {% img blog/oidc_primer/custom_claims_before.png alt:"custom claims" width:"800" %}
 
 
 
-Clicking the “Add Claim” button brings up a dialog:
+Clicking the "Add Claim" button brings up a dialog:
 
 {% img blog/oidc_primer/full_name_custom_claim.png alt:"full name" width:"800" %}
 
 
-In the above screenshot, the custom claim is defined using Okta’s [Expression Language](https://developer.okta.com/reference/okta_expression_language/). Unique to Okta, the expression language is a flexible way to describe rules for building a property to include (or not) in custom claims.
+In the above screenshot, the custom claim is defined using Okta's [Expression Language](https://developer.okta.com/reference/okta_expression_language/). Unique to Okta, the expression language is a flexible way to describe rules for building a property to include (or not) in custom claims.
 
 Using the implicit flow with `response_type=id_token` and `scope=openid+profile`, we now get back an `id_token` with these claims encoded in it:
 
@@ -330,7 +330,7 @@ HTTP/1.1 200 OK
 
 ```
 
-Since it requires the OIDC client ID and secret, this operation would typically be done in an application server where it’s safe to have those credentials. You would not want something like an end-user web or mobile application to have access to the OIDC client secret.
+Since it requires the OIDC client ID and secret, this operation would typically be done in an application server where it's safe to have those credentials. You would not want something like an end-user web or mobile application to have access to the OIDC client secret.
 
 If the `token` parameter is invalid or expired, the `/introspect` endpoint returns this:
 
@@ -345,7 +345,7 @@ HTTP/1.1 200 OK
 }
 ```
 
-ID tokens can be verified using the [JWK](https://tools.ietf.org/html/rfc7517) endpoint. JWK is a JSON data structure that represents a crypto key. The JWK endpoint is exposed from the OIDC “well known” endpoint used for API discovery. This returns *a lot* of information. Here’s an excerpt:
+ID tokens can be verified using the [JWK](https://tools.ietf.org/html/rfc7517) endpoint. JWK is a JSON data structure that represents a crypto key. The JWK endpoint is exposed from the OIDC "well known" endpoint used for API discovery. This returns *a lot* of information. Here's an excerpt:
 
 ```
 http https://micah.okta.com/oauth2/aus2yrcz7aMrmDAKZ1t7/.well-known/openid-configuration
@@ -363,7 +363,7 @@ HTTP/1.1 200 OK
 }
 ```
 
-Some of the endpoints, such as `/userinfo` and `/authorize`, should look familiar by now. The one we’re interested in is the `/keys` endpoint shown in `jwks_uri`.
+Some of the endpoints, such as `/userinfo` and `/authorize`, should look familiar by now. The one we're interested in is the `/keys` endpoint shown in `jwks_uri`.
 
 ```
 http https://micah.okta.com/oauth2/aus2yrcz7aMrmDAKZ1t7/v1/keys
@@ -395,7 +395,7 @@ Notice the `kid` claim. It matches the `kid` claim in the header from our `id_to
 
 We can also see that the algorithm used is `RS256`. Using the public key found in the `n` claim along with a security library, we can confirm that the ID token has not been tampered with. All of this can be done safely on an end-user SPA, mobile app, etc.
 
-Here’s a Java example that uses the claims from the `jwks_uri` above to verify an `id_token`: [https://github.com/dogeared/JWKTokenVerifier](https://github.com/dogeared/JWKTokenVerifier)
+Here's a Java example that uses the claims from the `jwks_uri` above to verify an `id_token`: [https://github.com/dogeared/JWKTokenVerifier](https://github.com/dogeared/JWKTokenVerifier)
 
 ```
 java -jar target/jwk-token-verifier-0.0.1-SNAPSHOT-spring-boot.jar \
@@ -431,20 +431,20 @@ If any part of the `id_token` JWT had been tampered with, you would see this ins
 io.jsonwebtoken.SignatureException: JWT signature does not match locally computed signature. JWT validity cannot be asserted and should not be trusted.
 ```
 
-Verifying JWT’s using the `/introspect` endpoint and using JWKs is a powerful component of OIDC. It allows for a high degree of confidence that the token has not been tampered in any way. And, because of that, information contained within – such as expiration – can be safely enforced.
+Verifying JWT's using the `/introspect` endpoint and using JWKs is a powerful component of OIDC. It allows for a high degree of confidence that the token has not been tampered in any way. And, because of that, information contained within – such as expiration – can be safely enforced.
 
 ## How I Learned to Love OpenID Connect
 
-When OIDC was first released and early implementers, such as Google, adopted it, I thought: “I just got used to OAuth 2.0. Why do I have to learn a new thing that rides on top of it?”
+When OIDC was first released and early implementers, such as Google, adopted it, I thought: "I just got used to OAuth 2.0. Why do I have to learn a new thing that rides on top of it?"
 
 It took some time, but here is what I consider to be the important takeaways:
 
 * OIDC formalizes a number of things left open in OAuth 2.0. Things like: specific token formats (id_token) and specific scopes and claims.
-* There’s explicit support for Authentication and Authorization. OAuth 2.0 was always presented purely as an authorization framework, but people would get confused with certain flows that allowed for authentication.
-* There’s a clear separation between identity (`id_token` and `/userinfo`) and access to resources (`access_token`).
+* There's explicit support for Authentication and Authorization. OAuth 2.0 was always presented purely as an authorization framework, but people would get confused with certain flows that allowed for authentication.
+* There's a clear separation between identity (`id_token` and `/userinfo`) and access to resources (`access_token`).
 * The different flows provide clean use case implementations for mobile apps, SPAs, and traditional web apps.
-* It’s inherently flexible. It’s easy to provide custom scopes and claims and to dictate what information should be encoded into tokens beyond the default specification.
+* It's inherently flexible. It's easy to provide custom scopes and claims and to dictate what information should be encoded into tokens beyond the default specification.
 
-All the code used in this series can be found on [github](https://github.com/oktadeveloper/okta-oidc-flows-example). You can use the OIDC sample app to exercise the various flows and scopes discussed throughout these posts. It’s at: [https://okta-oidc-fun.herokuapp.com/](https://okta-oidc-fun.herokuapp.com/). The entire final OIDC spec can be found [here](http://openid.net/specs/openid-connect-core-1_0.html). And you can learn more about OAuth 2.0 at [oauth.com](https://www.oauth.com/).
+All the code used in this series can be found on [github](https://github.com/oktadeveloper/okta-oidc-flows-example). You can use the OIDC sample app to exercise the various flows and scopes discussed throughout these posts. It's at: [https://okta-oidc-fun.herokuapp.com/](https://okta-oidc-fun.herokuapp.com/). The entire final OIDC spec can be found [here](http://openid.net/specs/openid-connect-core-1_0.html). And you can learn more about OAuth 2.0 at [oauth.com](https://www.oauth.com/).
 
 The whole series is live now. Part 1 is [here](https://developer.okta.com/blog/2017/07/25/oidc-primer-part-1). Part 2 is [here](https://developer.okta.com/blog/2017/07/25/oidc-primer-part-2).

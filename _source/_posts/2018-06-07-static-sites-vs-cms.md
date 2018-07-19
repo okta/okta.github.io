@@ -30,7 +30,7 @@ When you use a static site generator like Jekyll or Hugo, however, these tools t
 
 This is **much** faster and simpler.
 
-**Fun Fact**: *Googlebot and all of Google’s search ranking algorithms heavily favor fast websites over slow ones.* When two sites have similar content, but one is faster: the faster one will usually have a higher page rank. See: [https://moz.com/blog/how-website-speed-actually-impacts-search-ranking](https://moz.com/blog/how-website-speed-actually-impacts-search-ranking) for details.
+**Fun Fact**: *Googlebot and all of Google's search ranking algorithms heavily favor fast websites over slow ones.* When two sites have similar content, but one is faster: the faster one will usually have a higher page rank. See: [https://moz.com/blog/how-website-speed-actually-impacts-search-ranking](https://moz.com/blog/how-website-speed-actually-impacts-search-ranking) for details.
 
 ## Static Sites are Secure
 
@@ -70,9 +70,9 @@ For more info: google "Drupal sucks" and "Wordpress sucks". Here are some exampl
 - [Top 6 Reasons Drupal Sucks](https://www.freelock.com/blog/john-locke/2011-10/top-6-reasons-drupal-really-sucks-developer-edition)
 - [The Death of the CMS](https://medium.com/@davide.borsatto/the-death-of-the-cms-cec078a0d1b9)
 - [Why I Hate Drupal](https://www.slideshare.net/owenbrierley/why-i-hate-drupal-with-a-nod-to-james-wagner)
-- [Etc…](https://duckduckgo.com/?q=drupal+sucks&atb=v18&ia=web)
+- [Etc...](https://duckduckgo.com/?q=drupal+sucks&atb=v18&ia=web)
 
-**PS**: Don’t even bother looking at [HackerNews](https://news.ycombinator.com/) comments about Drupal. They're savage.
+**PS**: Don't even bother looking at [HackerNews](https://news.ycombinator.com/) comments about Drupal. They're savage.
 
 ## Static Sites Provide Simple Permissioning
 
@@ -171,9 +171,9 @@ Using a static site generator also enables **anyone** at your company to easily 
 
 Another huge part of customization is SEO. This is always a concern. For instance: having tools that can measure things like keyword density, ensure that titles are the correct length, ensure that meta description tags are the correct length, etc.
 
-These things are significantly more powerful using static sites as you can automate these items and codify rules around them. You don’t need to install third-party plugins and learn new flows: you can codify this behavior and instantly enforce it across the entire project.
+These things are significantly more powerful using static sites as you can automate these items and codify rules around them. You don't need to install third-party plugins and learn new flows: you can codify this behavior and instantly enforce it across the entire project.
 
-In regards to more advanced SEO editing (for instance, using HTML5 metadata which Google includes in their search algorithm rankings): a static site generator is your only choice. CMS systems like Wordpress and Drupal don’t support this level of customization at all (unless you're willing to manually edit each and every article's raw HTML), because you’re essentially controlling the output of the program directly. With static site generators, however, there are numerous ways to accomplish this, to ensure that things like:
+In regards to more advanced SEO editing (for instance, using HTML5 metadata which Google includes in their search algorithm rankings): a static site generator is your only choice. CMS systems like Wordpress and Drupal don't support this level of customization at all (unless you're willing to manually edit each and every article's raw HTML), because you're essentially controlling the output of the program directly. With static site generators, however, there are numerous ways to accomplish this, to ensure that things like:
 
 - Dates are correctly formatted and marked up with HTML5.
 - Time ranges are correctly formatted and marked up with HTML5.
@@ -216,7 +216,7 @@ One of the major reasons companies prefer static site generators is reliability.
 
 Doing these things with a CMS system requires heavy customization and is very brittle.
 
-Using a static site generator gives your organization much more control over the quality of your edits and articles, because you can easily automate testing for them! This reduces the editor’s burden, as well as the burden of the team itself.
+Using a static site generator gives your organization much more control over the quality of your edits and articles, because you can easily automate testing for them! This reduces the editor's burden, as well as the burden of the team itself.
 
 ## Static Sites vs CMS: A Summary
 
@@ -236,6 +236,6 @@ Using a static site generator provides numerous benefits over what any CMS can p
 
 If this post was helpful, you might really enjoy taking a look at our service, Okta: [https://developer.okta.com](/).
 
-We're an API company that stores user accounts and handles things like authentication, authorization, social login, single sign-on, etc. It's easy to get started and we have an **epic** free plan for developers (like you). If you want to give it a go, you can create a free account here: [https://developer.okta.com/signup/](https://developer.okta.com/signup/). 
+We're an API company that stores user accounts and handles things like authentication, authorization, social login, single sign-on, etc. It's easy to get started and we have an **epic** free plan for developers (like you). If you want to give it a go, you can create a free account here: [https://developer.okta.com/signup/](https://developer.okta.com/signup/).
 
 And just in case you're wondering, the answer is **yes**. The blog you're currently reading is powered by a static site generator (and open source on GitHub). We're currently built using Jekyll but are transitioning to Hugo. =)

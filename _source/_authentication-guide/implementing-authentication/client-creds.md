@@ -39,7 +39,7 @@ curl --request POST \
   scope=customScope'
 ```
 
-> NOTE: The Client ID and Secret aren’t included in the POST body, but rather are placed in the HTTP Authorization header following the rules of HTTP Basic Auth.
+> NOTE: The Client ID and Secret aren't included in the POST body, but rather are placed in the HTTP Authorization header following the rules of HTTP Basic Auth.
 
 Note the parameters that are being passed:
 

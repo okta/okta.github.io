@@ -13,18 +13,18 @@ Cryptocurrencies are all the rage. Over the last year, the value of Bitcoin alon
 
 {% img blog/cryptocurrency-pwa/cryptocurrency-so-hot.jpg alt:"So Hot Right Now" width:"620" %}{: .center-image }
 
-In this post, I’ll show you how to add authentication to an Ionic progressive web app (PWA). PWAs are more developer-friendly to distribute than mobile apps. Not only that, but I’ll show you how to use cloud services like Okta and Firebase to make things even simpler.
+In this post, I'll show you how to add authentication to an Ionic progressive web app (PWA). PWAs are more developer-friendly to distribute than mobile apps. Not only that, but I'll show you how to use cloud services like Okta and Firebase to make things even simpler.
 
 Josh Morony is someone I've followed ever since I got into Ionic. After developing my first app using [Ionic](https://ionicframework.com), I bought and read his book on [Building Mobile Apps with Ionic](https://www.joshmorony.com/building-mobile-apps-with-ionic-2/). He's a good marketer, and I've been receiving his newsletter ever since. As a developer, I get a lot of emails, and I usually delete the newsletter emails because most don't provide value. I've never deleted Josh's, and I started receiving it years ago. He does a great job of providing valuable information to developers!
 
 About a month ago, I received an email from Josh advertising his Crypto PWA series of articles, which were excellent (as I expected). I highly recommend you check out Part 1: [Building a Cryptocurrency Price Tracker PWA in Ionic](https://www.joshmorony.com/building-a-cryptocurrency-price-tracker-pwa-in-ionic/).
 
-You can also see his finished app at <https://cryptopwa.com> and find it [on GitHub](https://github.com/joshuamorony/ionic-crypto-pwa). 
+You can also see his finished app at <https://cryptopwa.com> and find it [on GitHub](https://github.com/joshuamorony/ionic-crypto-pwa).
 I thought it'd be fun to add authentication to Josh's app and show you how I did it. It wasn't too hard thanks to the fact that Ionic uses Angular and it has excellent OIDC support &mdash; thanks to [Manfred Steyer's](https://twitter.com/manfredsteyer) awesome [angular-oauth2-oidc](https://github.com/manfredsteyer/angular-oauth2-oidc) library.
 
 ## Setup the Crypto PWA
 
-To begin, clone Josh’s finished repository.
+To begin, clone Josh's finished repository.
 
 ```bash
 git clone https://github.com/joshuamorony/ionic-crypto-pwa.git
@@ -48,7 +48,7 @@ npm install -g ionic
 
 Run the app so you can see its basic functionality before adding authentication.
 
-| [{% img blog/cryptocurrency-pwa/crypto-pwa-home.png alt:"Crypto PWA - Home" width:"280" %}](/assets/blog/cryptocurrency-pwa/crypto-pwa-home-d0a91ea78cd6721c87a451cb3adca75bd114751aa71562d017e809b539047a87.png) | [{% img blog/cryptocurrency-pwa/crypto-pwa-add.png alt:"Crypto PWA - Add" width:"280" %}](/assets/blog/cryptocurrency-pwa/crypto-pwa-add-80d7da9233d958a26ef1b67970f09174944c3d19d20eb712fcbbcf0450e9c94d.png) | [{% img blog/cryptocurrency-pwa/crypto-pwa-home-btc.png alt:"Crypto PWA - Home with BTC" width:"280" %}](/assets/blog/cryptocurrency-pwa/crypto-pwa-home-btc-ca4b31a2243804ea89de4f68650a8ec4b5d684bef382561529917be2220a5a34.png) |  
+| [{% img blog/cryptocurrency-pwa/crypto-pwa-home.png alt:"Crypto PWA - Home" width:"280" %}](/assets/blog/cryptocurrency-pwa/crypto-pwa-home-d0a91ea78cd6721c87a451cb3adca75bd114751aa71562d017e809b539047a87.png) | [{% img blog/cryptocurrency-pwa/crypto-pwa-add.png alt:"Crypto PWA - Add" width:"280" %}](/assets/blog/cryptocurrency-pwa/crypto-pwa-add-80d7da9233d958a26ef1b67970f09174944c3d19d20eb712fcbbcf0450e9c94d.png) | [{% img blog/cryptocurrency-pwa/crypto-pwa-home-btc.png alt:"Crypto PWA - Home with BTC" width:"280" %}](/assets/blog/cryptocurrency-pwa/crypto-pwa-home-btc-ca4b31a2243804ea89de4f68650a8ec4b5d684bef382561529917be2220a5a34.png) |
 
 You can verify it works offline &mdash; like a PWA should &mdash; by toggling offline mode in your browser (in Chrome: Developer Tools > Network > Offline).
 
@@ -68,7 +68,7 @@ Happily, the hardest part of using Okta is [creating a developer account](https:
 
 {% img blog/cryptocurrency-pwa/oidc-settings.png alt:"Okta OIDC Settings" width:"700" %}{: .center-image }
 
-For global logout to work, you’ll need to edit your application and add `http://localhost:8080` (and optionally, your production URI) as a **Logout redirect URI**.
+For global logout to work, you'll need to edit your application and add `http://localhost:8080` (and optionally, your production URI) as a **Logout redirect URI**.
 
 ## Add Angular OIDC Support
 
@@ -326,7 +326,7 @@ Rerunning Lighthouse should give you a perfect PWA score of 100. *Huzzah!*
 
 In a [future tutorial](/blog/2018/01/23/replace-local-storage-with-okta-profile-attributes), I'll show you how to replace this app's local storage implementation with Okta's custom profile attributes. This enhancement will allow you to track your cryptocurrency holdings from any device, with any browser!
 
-For now, I hope you’ve enjoyed this brief look at Ionic, PWAs, and Okta. PWAs are more straightforward to distribute than mobile apps, and cloud services like Okta and Firebase make things even simpler.
+For now, I hope you've enjoyed this brief look at Ionic, PWAs, and Okta. PWAs are more straightforward to distribute than mobile apps, and cloud services like Okta and Firebase make things even simpler.
 
 You can see the complete source code for this project [on GitHub](https://github.com/oktadeveloper/okta-ionic-crypto-pwa-example). Please contact me on Twitter [@mraible](https://twitter.com/mraible), via [Okta's Developer Forums](https://devforum.okta.com/), or in the comments below if you have any questions.
 

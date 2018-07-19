@@ -24,7 +24,7 @@ git clone https://github.com/oktadeveloper/okta-ionic-crypto-java-sdk-example.gi
 This project was featured in [The Hitchhiker's Guide to Testing Spring Boot APIs and Angular Components with WireMock, Jest, Protractor, and Travis CI](/blog/2018/05/02/testing-spring-boot-angular-components). It contains an Ionic/Angular frontend and a Spring Boot API that allows you to track your cryptocurrency holdings. You enter in your cryptocurrency holdings, pricing data is fetched from [Cryptonator](https://api.cryptonator.com/api), and data is stored in Okta's custom profile attributes. You can read how everything was developed and secured in the following blog posts:
 
 * [Protect Your Cryptocurrency Wealth Tracking PWA with Okta](/blog/2018/01/18/cryptocurrency-pwa-secured-by-okta)
-* [Use Okta (Instead of Local Storage) to Store Your User’s Data Securely](/blog/2018/01/23/replace-local-storage-with-okta-profile-attributes)
+* [Use Okta (Instead of Local Storage) to Store Your User's Data Securely](/blog/2018/01/23/replace-local-storage-with-okta-profile-attributes)
 
 If you're not familiar with these posts, it might make sense for you to  look at the [completed project from this tutorial](https://github.com/oktadeveloper/okta-spring-boot-angular-auth-code-flow-example). There is no authentication in the client, it all happens on the server, and cookies are used to track the session and provide CSRF protection.
 
@@ -460,7 +460,7 @@ You'll notice there are variables that need to be substituted for everything to 
 
 ## What is Okta?
 
-In short, we make [identity management](https://developer.okta.com/product/user-management/) a lot easier, more secure, and more scalable than what you’re probably used to. Okta is a cloud service that allows developers to create, edit, and securely store user accounts and user account data, and connect them with one or multiple applications. Our API enables you to:
+In short, we make [identity management](https://developer.okta.com/product/user-management/) a lot easier, more secure, and more scalable than what you're probably used to. Okta is a cloud service that allows developers to create, edit, and securely store user accounts and user account data, and connect them with one or multiple applications. Our API enables you to:
 
 * [Authenticate](https://developer.okta.com/product/authentication/) and [authorize](https://developer.okta.com/product/authorization/) your users
 * Store data about your users
@@ -468,7 +468,7 @@ In short, we make [identity management](https://developer.okta.com/product/user-
 * Secure your application with [multi-factor authentication](https://developer.okta.com/use_cases/mfa/)
 * And much more! Check out our [product documentation](https://developer.okta.com/documentation/)
 
-Are you sold? [Register for a forever-free developer account](https://developer.okta.com/signup/), and when you’re done, come on back so we can learn more about building a secure app with Angular and Spring Boot 2.0!
+Are you sold? [Register for a forever-free developer account](https://developer.okta.com/signup/), and when you're done, come on back so we can learn more about building a secure app with Angular and Spring Boot 2.0!
 
 ## Create a Web Application in Okta for Your Spring Boot + Angular PWA
 
@@ -482,20 +482,20 @@ Take note of the clientId and client secret values as you'll need these to confi
 
 You need to add a `roles` claim to your ID token, if you want your groups in Okta to be translated to Spring Security authorities. In your Okta developer console, navigate to **API** > **Authorization Servers**, and  click the default one. Click the **Claims** tab and **Add Claim**. Name it "groups" and include it in the ID token. Set the value type to "Groups" and set the filter to be a Regex of `.*`.
 
-You’ll need to add a `holdings` attribute to your organization's user profiles to store your cryptocurrency holdings in Okta. Navigate to **Users** > **Profile Editor**. Click on **Profile** for the first profile in the table. You can identify it by its Okta logo. Click **Add Attribute** and use the following values:
+You'll need to add a `holdings` attribute to your organization's user profiles to store your cryptocurrency holdings in Okta. Navigate to **Users** > **Profile Editor**. Click on **Profile** for the first profile in the table. You can identify it by its Okta logo. Click **Add Attribute** and use the following values:
 
 * Display name: `Holdings`
 * Variable name: `holdings`
 * Description: `Cryptocurrency Holdings`
 
-For the Okta Java SDK to talk to Okta's API (to store your cryptocurrency holdings), you'll need to create an API token. 
+For the Okta Java SDK to talk to Okta's API (to store your cryptocurrency holdings), you'll need to create an API token.
 
 2. Navigate to **API** > **Tokens** and click **Create Token**
 3. Give your token a name, then set its value as an `OKTA_CLIENT_TOKEN` environment variable.
 
 ## Adjust Java Code to Resolve Principal
 
-I mentioned earlier that there's [a bug](https://github.com/okta/okta-spring-boot/issues/66) in Okta's Spring Boot Starter. The problem is that it doesn't resolve `java.security.Principal` the same way does for Spring Boot 1.5.x. Until our team can squash this one, there’s a simple fix you can deploy: Just update `HoldingsController.java` to extract the `sub` to call Okta's API. Add a `getUser(Principal principal)` method to this class.
+I mentioned earlier that there's [a bug](https://github.com/okta/okta-spring-boot/issues/66) in Okta's Spring Boot Starter. The problem is that it doesn't resolve `java.security.Principal` the same way does for Spring Boot 1.5.x. Until our team can squash this one, there's a simple fix you can deploy: Just update `HoldingsController.java` to extract the `sub` to call Okta's API. Add a `getUser(Principal principal)` method to this class.
 
 ```java
 import org.springframework.security.oauth2.provider.OAuth2Authentication;
@@ -1099,7 +1099,7 @@ You should be able to log in and add/view cryptocurrency holdings.
 
 After making all these changes, you can build your application using `mvn package -Pprod` and deploy it as a single artifact! As shown above, can still develop as you did before, starting the Spring Boot app and the Ionic client separately.
 
-Let’s look at how to deploy it on Cloud Foundry with [Pivotal Web Services](http://run.pivotal.io/). The instructions below assume you have an account and have logged in (using `cf login`).
+Let's look at how to deploy it on Cloud Foundry with [Pivotal Web Services](http://run.pivotal.io/). The instructions below assume you have an account and have logged in (using `cf login`).
 
 It's rather simple really. In the `holdings-api` directory, run:
 
@@ -1277,7 +1277,7 @@ You can find the source code for this completed application on GitHub at https:/
 If you want to learn more about Spring Boot and Angular, as well as OAuth 2.0, check out the following posts.
 
 * [Protect Your Cryptocurrency Wealth Tracking PWA with Okta](/blog/2018/01/18/cryptocurrency-pwa-secured-by-okta)
-* [Use Okta (Instead of Local Storage) to Store Your User’s Data Securely](/blog/2018/01/23/replace-local-storage-with-okta-profile-attributes)
+* [Use Okta (Instead of Local Storage) to Store Your User's Data Securely](/blog/2018/01/23/replace-local-storage-with-okta-profile-attributes)
 * [The Hitchhiker's Guide to Testing Spring Boot APIs and Angular Components with WireMock, Jest, Protractor, and Travis CI](/blog/2018/05/02/testing-spring-boot-angular-components)
 * [Build a Basic CRUD App with Angular 5.0 and Spring Boot 2.0](/blog/2017/12/04/basic-crud-angular-and-spring-boot)
 * [What is the OAuth 2.0 Implicit Grant Type?](/blog/2018/05/24/what-is-the-oauth2-implicit-grant-type)

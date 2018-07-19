@@ -7,7 +7,7 @@ tags: [oauth, mulesoft, api, api security]
 tweets:
  - "Got an API that needs securing? Check out our new guide to doing just that with @MuleSoft and Okta: "
  - "Our newest tutorial is something a little bit different for us - all about using Okta to secure an API through a gateway (@MuleSoft). Check it out!"
- - "Curious about #API Gateways? We’ve got a new blog focused on configuring @MuleSoft + Okta to secure a pre-built sample app."
+ - "Curious about #API Gateways? We've got a new blog focused on configuring @MuleSoft + Okta to secure a pre-built sample app."
 ---
 
 If you're building or managing an API, you're probably using an API gateway to help you manage it. Hopefully, you're also using OAuth and an identity provider (IdP) like [Okta](https://developer.okta.com/) to secure your API through the gateway. Maybe you've also discovered that getting the "OAuth dance" working properly among the gateway, IdP, and application can be tricky.
@@ -42,7 +42,7 @@ At the end of this setup, you'll have an architecture where:
 
 ## Download and Install the Okta API Center Application
 
-Clone the [Okta API Center](https://github.com/tom-smith-okta/okta-api-center) Node.js application. 
+Clone the [Okta API Center](https://github.com/tom-smith-okta/okta-api-center) Node.js application.
 
 ```
 git clone https://github.com/tom-smith-okta/okta-api-center.git
@@ -438,7 +438,7 @@ Also, we're going to use the default authorization server that is built in to th
     {% img blog/secure-api-mulesoft/okta_add_rule.png alt:"Okta Add Rule" width:"700" %}{: .center-image }
 
     Your authorization server is now set up so that users in the silver subscribers group who request the `http://myapp.com/scp/silver` scope upon authentication will be granted that scope in their access token. In the API gateway, this scope will give them access to the /planets resource.
-    
+
     The API Center application renders two user authentication/authorization flows: one for a "silver" user (which you've just set up) and one for a "gold" user. If you would like to see the flow for a "gold" user (access to /moons) then go through the steps above (starting with the creation of another new group) using "gold" as the keyword in the place of "silver".
 
 6. Follow the steps above to add your REDIRECT_URI as a Trusted Origin in your Okta tenant

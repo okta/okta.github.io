@@ -193,7 +193,7 @@ This is precisely what we do here at [Okta](https://developer.okta.com/) — we 
 
 There's a lot of complexity involved in being proactive about your security, but it's far better to be prepared than unprepared.
 
-**Shameless Plug**: If you haven't checked out our API service, it's free to use and really fun! You can create an account here: [https://developer.okta.com/signup/](https://developer.okta.com/signup/). And… If you do happen to give it a go, I'd love to hear your thoughts, so please [hit me up](mailto:randall.degges@okta.com) with any feedback about Okta, token authentication, or JSON Web Tokens. And finally, please [follow @oktadev Twitter](https://twitter.com/oktadev) — we tweet about a lot of interesting security related topics like this.
+**Shameless Plug**: If you haven't checked out our API service, it's free to use and really fun! You can create an account here: [https://developer.okta.com/signup/](https://developer.okta.com/signup/). And... If you do happen to give it a go, I'd love to hear your thoughts, so please [hit me up](mailto:randall.degges@okta.com) with any feedback about Okta, token authentication, or JSON Web Tokens. And finally, please [follow @oktadev Twitter](https://twitter.com/oktadev) — we tweet about a lot of interesting security related topics like this.
 
 Happy hacking,
 

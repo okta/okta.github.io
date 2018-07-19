@@ -61,7 +61,7 @@ jx create cluster gke --skip-login
 
 Confirm you want to install `helm` if you're prompted to download it. You will be prompted to select a Google Cloud Zone. I'd suggest picking one close to your location. I chose `us-west1-a` since I live near Denver, Colorado. For Google Cloud Machine Type, I selected `n1-standard-2`, and used the defaults for the min (3) and max (5) number of nodes.
 
-For the GitHub name, type your own (e.g., `mraible`) and an email you have registered with GitHub (e.g., `matt.raible@okta.com`). I tried to use `oktadeveloper` (a GitHub organization), and I was unable to make it work. 
+For the GitHub name, type your own (e.g., `mraible`) and an email you have registered with GitHub (e.g., `matt.raible@okta.com`). I tried to use `oktadeveloper` (a GitHub organization), and I was unable to make it work.
 
 **NOTE:** GitHub integration will fail if you have two-factor authentication enabled on your account. You'll need to disable it on GitHub if you want the process to complete successfully. :-/
 
@@ -71,7 +71,7 @@ You'll be prompted to create a GitHub API Token. Click on the [provided URL](htt
 
 _Grab a coffee, an adult beverage, or do some pushups while your install finishes. It can take several minutes._
 
-The next step will be to copy the API token from Jenkins to your console. Follow the provided instructions in your console. 
+The next step will be to copy the API token from Jenkins to your console. Follow the provided instructions in your console.
 
 When you're finished with that, run `jx console` and click on the link to log in to your Jenkins instance. Click on **Administration** and upgrade Jenkins, as well as all its plugins (Plugin Manager > scroll to the bottom and select all). If you fail to perform this step, you won't be able to navigate from your GitHub pull request to your Jenkins X CI process for it.
 
@@ -135,7 +135,7 @@ Now that you know how to use Jenkins X with a bare-bones Spring Boot app let's s
 Over the last several months, I've written a series of blog posts about building a PWA (progressive web app) with Ionic/Angular and Spring Boot.
 
 1. [Protect Your Cryptocurrency Wealth Tracking PWA with Okta](/blog/2018/01/18/cryptocurrency-pwa-secured-by-okta)
-2. [Use Okta (Instead of Local Storage) to Store Your User’s Data Securely](/blog/2018/01/23/replace-local-storage-with-okta-profile-attributes)
+2. [Use Okta (Instead of Local Storage) to Store Your User's Data Securely](/blog/2018/01/23/replace-local-storage-with-okta-profile-attributes)
 3. [The Hitchhiker's Guide to Testing Spring Boot APIs and Angular Components with WireMock, Jest, Protractor, and Travis CI](/blog/2018/05/02/testing-spring-boot-angular-components)
 4. [Deploy Your Secure Spring Boot + Angular PWA as a Single Artifact](/blog/2018/06/18/spring-boot-angular-auth-code-flow)
 
@@ -194,7 +194,7 @@ Copy all the files from `spring-boot-angular` into `okta-jenkinsx`.
 cp -r ../spring-boot-angular/* .
 ```
 
-When using Travis CI to test this app, I ran `npm install` as part of the process. With Jenkins X, it's easier to everything with one container (e.g. `maven` or `nodejs`), so add an execution to the frontend-maven-plugin (in `holdings-api/pom.xml`) to run `npm install` (hint: you need to add the execution with id=='npm install' to the existing pom.xml). 
+When using Travis CI to test this app, I ran `npm install` as part of the process. With Jenkins X, it's easier to everything with one container (e.g. `maven` or `nodejs`), so add an execution to the frontend-maven-plugin (in `holdings-api/pom.xml`) to run `npm install` (hint: you need to add the execution with id=='npm install' to the existing pom.xml).
 
 Now is a great time to open the `okta-jenkinsx` directory as a project in an IDE like IntelliJ IDEA, Eclipse, Netbeans, or VS Code! :)
 
@@ -316,7 +316,7 @@ This should be enough to make this app work with Jenkins X. However, you won't b
 
 ### Why Okta?
 
-In short, we make [identity management](https://developer.okta.com/product/user-management/) a lot easier, more secure, and more scalable than what you’re probably used to. Okta is a cloud service that allows developers to create, edit, and securely store user accounts and user account data, and connect them with one or multiple applications. Our API enables you to:
+In short, we make [identity management](https://developer.okta.com/product/user-management/) a lot easier, more secure, and more scalable than what you're probably used to. Okta is a cloud service that allows developers to create, edit, and securely store user accounts and user account data, and connect them with one or multiple applications. Our API enables you to:
 
 * [Authenticate](https://developer.okta.com/product/authentication/) and [authorize](https://developer.okta.com/product/authorization/) your users
 * Store data about your users
@@ -324,7 +324,7 @@ In short, we make [identity management](https://developer.okta.com/product/user-
 * Secure your application with [multi-factor authentication](https://developer.okta.com/use_cases/mfa/)
 * And much more! Check out our [product documentation](https://developer.okta.com/documentation/)
 
-Are you sold? [Register for a forever-free developer account](https://developer.okta.com/signup/), and when you’ve finished, come on back so we can learn more about CI/CD with Spring Boot and Jenkins X!
+Are you sold? [Register for a forever-free developer account](https://developer.okta.com/signup/), and when you've finished, come on back so we can learn more about CI/CD with Spring Boot and Jenkins X!
 
 ## Create a Web Application in Okta for Your Spring Boot App
 
@@ -358,7 +358,7 @@ You'll notice the `token` value is `XXX`. This is because I prefer to read it fr
 1. Navigate to **API** > **Tokens** and click **Create Token**
 2. Give your token a name (e.g. "Jenkins X"), then set its value as an `OKTA_CLIENT_TOKEN` environment variable.
 
-You’ll need to add a `holdings` attribute to your organization's user profiles to store your cryptocurrency holdings in Okta. Navigate to **Users** > **Profile Editor**. Click on **Profile** for the first profile in the table. You can identify it by its Okta logo. Click **Add Attribute** and use the following values:
+You'll need to add a `holdings` attribute to your organization's user profiles to store your cryptocurrency holdings in Okta. Navigate to **Users** > **Profile Editor**. Click on **Profile** for the first profile in the table. You can identify it by its Okta logo. Click **Add Attribute** and use the following values:
 
 * Display name: `Holdings`
 * Variable name: `holdings`

@@ -10,7 +10,7 @@ tweets:
 - "Look how easy it is to add authentication to a @Symfony app with Okta! #symfony4 #php"
 ---
 
-If you’re a web developer in 2018, then you already know that the expectations are high and the tools are many. Users want progressive web applications and seamless experiences across every device. The focus is shifting from monolithic code to APIs built as microservices and consumed by multiple frontends, and finding our way through the ecosystem of ever-changing tools can be a daunting task even for the most experienced of us.
+If you're a web developer in 2018, then you already know that the expectations are high and the tools are many. Users want progressive web applications and seamless experiences across every device. The focus is shifting from monolithic code to APIs built as microservices and consumed by multiple frontends, and finding our way through the ecosystem of ever-changing tools can be a daunting task even for the most experienced of us.
 
 If you're looking for evidence, go no further than the most popular option for putting a site on the web in the past 15 years: [PHP runs 83.5% of the websites whose server-side programming language we know](https://w3techs.com/technologies/details/pl-php/all/all), and JavaScript is practically everywhere on the frontend. But PHP is not your dad's templating system anymore - it's a modern general-purpose scripting language, and people use it to craft beautiful, fast and optimized code. JavaScript, on the other hand, is changing so dramatically that by the time I finish writing this article a new framework will probably emerge, become fashionable and fade away.
 
@@ -19,7 +19,7 @@ I would like to show you how to set up a 'quick and dirty' modern application us
 We'll use Okta for user authentication and authorization. You'll need a development environment with PHP 7 and Node.js/npm/Yarn. You will also need an [Okta developer account](https://developer.okta.com/).
 
 ## Why Okta?
-Well, we might be biased, but we think Okta makes [identity management](https://developer.okta.com/product/user-management/) easier, more secure, and more scalable than what you’re used to. Okta is an API service that allows you to create, edit, and securely store user accounts and user account data, and connect them with one or more applications. Our API enables you to:
+Well, we might be biased, but we think Okta makes [identity management](https://developer.okta.com/product/user-management/) easier, more secure, and more scalable than what you're used to. Okta is an API service that allows you to create, edit, and securely store user accounts and user account data, and connect them with one or more applications. Our API enables you to:
 
 * [Authenticate](https://developer.okta.com/product/authentication/) and [authorize](https://developer.okta.com/product/authorization/) your users
 * Store data about your users
@@ -27,16 +27,16 @@ Well, we might be biased, but we think Okta makes [identity management](https://
 * Secure your application with [multi-factor authentication](https://developer.okta.com/use_cases/mfa/)
 * And much more! Check out our [product documentation](https://developer.okta.com/documentation/) for more information
 
-[Register for a forever-free developer account](https://developer.okta.com/signup/), and when you’re done, come back to learn more about building a secure CRUD app with Symfony.
+[Register for a forever-free developer account](https://developer.okta.com/signup/), and when you're done, come back to learn more about building a secure CRUD app with Symfony.
 
 ## Get Started with Symfony 4
-Specifically, in this post we’ll build a simple tool for keeping track of the ‘bad puns’ count while watching movies. Here’s what our finished application will look like:
+Specifically, in this post we'll build a simple tool for keeping track of the 'bad puns' count while watching movies. Here's what our finished application will look like:
 
 {% img blog/php-crud-app-symfony-vue/pun-counter.png alt:"Screenshot of list of movies in the pun counter app" width:"600" %}{: .center-image }
 
-You can add a new movie and increase the bad puns count of movies while watching them. You can track something other than bad puns of course if that’s your preference. For example, you can count the number of times the word 'inconceivable' is used in The Princess Bride (spoiler: the answer is 5).
+You can add a new movie and increase the bad puns count of movies while watching them. You can track something other than bad puns of course if that's your preference. For example, you can count the number of times the word 'inconceivable' is used in The Princess Bride (spoiler: the answer is 5).
 
-Let’s get started by inspecting our tools. Symfony 4 is the latest release of the Symfony project which started as a collection of general purpose components for PHP. These components are widely used on their own, and the most popular PHP framework today (Laravel) is largely built upon them. Symfony 2.x/3.x (known as Symfony Standard Edition) was a comprehensive full-stack framework, but Symfony 4 introduces a new way to build web applications and follows the current trend of separating a backend API from the frontend. It provides a new method of creating and evolving applications (Symfony Flex) which starts with a minimum set of dependencies and automates the bundle management. You can start with a skeleton project with a greatly simplified directory structure and add just what you need, when you need it.
+Let's get started by inspecting our tools. Symfony 4 is the latest release of the Symfony project which started as a collection of general purpose components for PHP. These components are widely used on their own, and the most popular PHP framework today (Laravel) is largely built upon them. Symfony 2.x/3.x (known as Symfony Standard Edition) was a comprehensive full-stack framework, but Symfony 4 introduces a new way to build web applications and follows the current trend of separating a backend API from the frontend. It provides a new method of creating and evolving applications (Symfony Flex) which starts with a minimum set of dependencies and automates the bundle management. You can start with a skeleton project with a greatly simplified directory structure and add just what you need, when you need it.
 
 ## Create a new Symfony 4 Project
 
@@ -48,7 +48,7 @@ cd bad-puns-tracker-server
 php -S 127.0.0.1:8000 -t public
 ```
 
-Let’s also create a new Vue.js project using vue-cli (using the default presets):
+Let's also create a new Vue.js project using vue-cli (using the default presets):
 
 ```
 npm install -g @vue/cli
@@ -210,7 +210,7 @@ This looks better. Now we can use the `respond()` method to return a JSON respon
 
 ## Create the Movie Database
 
-Let’s quickly create a MySQL database and user to use for our project (you can of course use a different database engine like PostgreSQL or Sqlite if you prefer):
+Let's quickly create a MySQL database and user to use for our project (you can of course use a different database engine like PostgreSQL or Sqlite if you prefer):
 
 ```
 mysql -uroot -p
@@ -344,7 +344,7 @@ public function respondCreated($data = [])
 }
 ```
 
-Here’s our simplified and not entirely clean API controller (in `src/Controllers/MovieController.php` in the server code repository):
+Here's our simplified and not entirely clean API controller (in `src/Controllers/MovieController.php` in the server code repository):
 
 ```php
 <?php
@@ -558,13 +558,13 @@ It doesn't look very nice, and we should probably extract the MovieList and Movi
 ```
 {% endraw %}
 
-Much better! We won't link the button yet (we’ll replace it with a MovieForm component soon, and we’ll also extract the table with the movies into a MoviesList component on the next step).
+Much better! We won't link the button yet (we'll replace it with a MovieForm component soon, and we'll also extract the table with the movies into a MoviesList component on the next step).
 
 ## Add Authentication to Your Symfony + Vue App with Okta
 
 Let's add some authentication to our app now and make sure that only logged in users can access our movies. We'll use Okta so you will need to [create a developer account here](https://developer.okta.com/signup/) and create an Application. Use the [QuickStart guide](https://developer.okta.com/quickstart/#/okta-sign-in-page/php/generic) and take note of the Client ID, Client Secret, and Org URL - you will need these for the integration.
 
-When done with the prerequisites, we can install the Okta Vue SDK and modify our Dashboard to include a Login or Logout link depending on the authentication state. Don’t forget to replace the Okta parameters with your own data!
+When done with the prerequisites, we can install the Okta Vue SDK and modify our Dashboard to include a Login or Logout link depending on the authentication state. Don't forget to replace the Okta parameters with your own data!
 
 ```
 npm install @okta/okta-vue --save
@@ -686,7 +686,7 @@ export default {
 ```
 {% endraw %}
 
-The next step is to secure the backend API. We'll install the dependencies and then modify our API Controller by adding a method to perform the authorization and return 401 Unauthorized if it fails. Don’t forget to replace the Okta parameters with your own data!
+The next step is to secure the backend API. We'll install the dependencies and then modify our API Controller by adding a method to perform the authorization and return 401 Unauthorized if it fails. Don't forget to replace the Okta parameters with your own data!
 
 ```
 composer require okta/jwt-verifier spomky-labs/jose guzzlehttp/psr7
@@ -739,7 +739,7 @@ public function isAuthorized(): bool
 }
 ```
 
-Now we need to secure our controller methods. Usually, we’d use Symfony’s security firewall and extract our authorization method into a custom provider, or we can use ‘before’ filters to perform the token authentication. However, for now, we’ll simply add a check to all `MovieController` methods that require authorization:
+Now we need to secure our controller methods. Usually, we'd use Symfony's security firewall and extract our authorization method into a custom provider, or we can use 'before' filters to perform the token authentication. However, for now, we'll simply add a check to all `MovieController` methods that require authorization:
 
 ```php
 if (! $this->isAuthorized()) {
@@ -747,7 +747,7 @@ if (! $this->isAuthorized()) {
 }
 ```
 
-This isn't very DRY (obviously) but it’s OK for our demo. Now we'll fix our dashboard so it has a separate Home Page and Movies Page (only showing if we're authorized), and we’ll use a navbar for the top menu.
+This isn't very DRY (obviously) but it's OK for our demo. Now we'll fix our dashboard so it has a separate Home Page and Movies Page (only showing if we're authorized), and we'll use a navbar for the top menu.
 
 Add to routes in `main.js`:
 
@@ -921,15 +921,15 @@ export default {
 </script>
 ```
 
-The application is fully functional at this stage. As a next step, we need to clean up the code as there is a lot of repetition (especially in the handling of AJAX requests at the frontend). However, I’ll leave that for another article.
+The application is fully functional at this stage. As a next step, we need to clean up the code as there is a lot of repetition (especially in the handling of AJAX requests at the frontend). However, I'll leave that for another article.
 
 You can see the full source code on GitHub at [https://github.com/oktadeveloper/okta-php-symfony-vue-crud-example](https://github.com/oktadeveloper/okta-php-symfony-vue-crud-example).
 
 ## Learn More About Secure Authentication in Vue
 * [Our Vue Samples and Quickstarts](https://developer.okta.com/code/vue/)
-* [The Lazy Developer’s Guide to Authentication with Vue.js](/blog/2017/09/14/lazy-developers-guide-to-auth-with-vue)
+* [The Lazy Developer's Guide to Authentication with Vue.js](/blog/2017/09/14/lazy-developers-guide-to-auth-with-vue)
 * [Build a Cryptocurrency Comparison Site with Vue.js](/blog/2017/09/06/build-a-cryptocurrency-comparison-site-with-vuejs)
 * [Build a Basic CRUD App with Vue.js and Node](/blog/2018/02/15/build-crud-app-vuejs-node)
 * [Build a Secure To-Do App with Vue, ASP.NET Core, and Okta](/blog/2018/01/31/build-secure-todo-app-vuejs-aspnetcore)
 
-As always, we’d love to hear from you about this post, or really anything else! Hit us up in the comments, or on Twitter [@oktadev](https://twitter.com/OktaDev)!
+As always, we'd love to hear from you about this post, or really anything else! Hit us up in the comments, or on Twitter [@oktadev](https://twitter.com/OktaDev)!
