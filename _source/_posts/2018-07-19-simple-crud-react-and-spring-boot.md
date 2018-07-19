@@ -196,7 +196,7 @@ class Initializer implements CommandLineRunner {
 }
 ```
 
-**TIP:** If your IDE has issues with `Event.builder()`, it means that you need to turn on annotation processing and/or install the Lombok plugin. I had to uninstall/reinstall the Lombok plugin in IntelliJ IDEA in order to get things to work.
+**TIP:** If your IDE has issues with `Event.builder()`, it means that you need to turn on annotation processing and/or install the Lombok plugin. I had to uninstall/reinstall the Lombok plugin in IntelliJ IDEA to get things to work.
 
 If you start your app (using `./mvnw spring-boot:run`) after adding this code, you'll see the list of groups and events displayed in your console.
 
