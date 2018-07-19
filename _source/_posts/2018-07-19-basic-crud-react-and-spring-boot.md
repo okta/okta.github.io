@@ -1,44 +1,45 @@
 ---
 layout: blog_post
-title: "Build a Basic CRUD App with React and Spring Boot 2.0"
+title: "Build a Basic CRUD App with React and Spring Boot"
 author: mraible
 description: "React is one of the most popular JavaScript frameworks, and Spring Boot is wildly popular in the Java ecosystem. This article shows you how to use them in the same app, and secure it all with Okta."
-tags: [authentication, spring boot, spring boot 2.0, react, reactjs, oidc]
+tags: [authentication, spring boot, spring boot 2.1, react, reactjs, oidc]
 tweets:
 - "React + Spring Boot makes for a nice development experience. Learn how to make them work together with OIDC authentication →"
 - "Spring Boot with @java + React with @javascript == 💙. Learn how to build a @springboot + @reactjs CRUD app today!"
 ---
 
-React was designed to make it painless to create interactive UIs. It's state management is efficient and only updates components when your data changes. Component logic is written in JavaScript, which means you can keep state out of the DOM and create components that are encapsulated.
+React was designed to make it painless to create interactive UIs. Its state management is efficient and only updates components when your data changes. Component logic is written in JavaScript, which means you can keep state out of the DOM and create components that are encapsulated.
 
-Developers like CRUD (create, read, update, and delete) apps because they show a lot of the base functionality that you need when creating an app. Once you have the basics of CRUD figured out, most of the client-server plumbing is finished, and you can move on to implementing the necessary business logic.
+Developers like CRUD (create, read, update, and delete) apps because they show a lot of the base functionality that you need when creating an app. Once you have the basics of CRUD completed in an app, most of the client-server plumbing is finished, and you can move on to implementing the necessary business logic.
 
 Today, I'll show you how to create a basic CRUD app with Spring Boot in React. You might remember a similar article I wrote for Angular last year: [Build a Basic CRUD App with Angular 5.0 and Spring Boot 2.0](/blog/2017/12/04/basic-crud-angular-and-spring-boot). That tutorial uses OAuth 2.0's implicit flow and our [Okta Angular SDK](https://www.npmjs.com/package/@okta/okta-angular). In this tutorial, I'll be using OAuth's Authorization Code flow and packaging the React app in the Spring Boot app for production. At the same time, I'll show you how to keep React's productive workflow for developing locally.
 
 You will need [Java 8](http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html), [Node.js 8](https://nodejs.org/), and [Yarn](https://yarnpkg.com/en/docs/install) installed to complete this tutorial. You can use npm instead of Yarn, but you'll need to translate the Yarn syntax to npm.
 
 ## Create an API App with Spring Boot 2.0
- 
-I'm a frequent speaker at conferences and user groups around the world. My favorite user groups to speak at are Java User Groups (JUGs). I've been a Java developer for almost 20 years, and I love the Java community. One of my good friends, James Ward, said doing a JUG Tour was one of his favorite developer advocate activities back in the day. I recently took his advice and traded overseas conferences for JUG meetups in the US. 
- 
+
+I'm a frequent speaker at conferences and user groups around the world. My favorite user groups to speak at are Java User Groups (JUGs). I've been a Java developer for almost 20 years, and I love the Java community. One of my good friends, James Ward, said doing a JUG Tour was one of his favorite developer advocate activities back in the day. I recently took his advice and traded overseas conferences for JUG meetups in the US.
+
 Why am I telling you this? Because I thought it'd be fun to create a "JUG Tours" app today that allows you to create/edit/delete JUGs, as well as view upcoming events.
- 
+
 To begin, navigate to [start.spring.io](https://start.spring.io) and make the following selections:
- 
- * **Group:** `com.okta.developer`
- * **Artifact:** `jugtours`
- * **Dependencies**: `JPA`, `H2`, `Web`, `Lombok`
- 
+
+* **Group:** `com.okta.developer`
+* **Artifact:** `jugtours`
+* **Dependencies**: `JPA`, `H2`, `Web`, `Lombok`
+
 {% img blog/spring-boot-2-react/spring-initializr.png alt:"Spring Initializr" width:"800" %}{: .center-image }
- 
-Click **Generate Project**, expand `jugtours.zip` after downloading, and open the project in your favorite IDE. 
- 
+
+
+Click **Generate Project**, expand `jugtours.zip` after downloading, and open the project in your favorite IDE.
+
 ### Add a JPA Domain Model
- 
+
 The first thing you'll need to do is to create a domain model that'll hold your data. At a high level, there's a `Group` that represents the JUG, an `Event` that has a many-to-one relationship with `Group`, and a `User` that has a one-to-many relationship with `Group`.
- 
+
 Create a `src/main/java/com/okta/developer/jugtours/model` directory and a `Group.java` class in it.
- 
+
 ```java
 package com.okta.developer.jugtours.model;
 
@@ -134,7 +135,7 @@ public class User {
     private String email;
 }
 ```
- 
+
 Create a `GroupRepository.java` to manage the group entity.
 
 ```java
@@ -210,7 +211,6 @@ package com.okta.developer.jugtours.web;
 
 import com.okta.developer.jugtours.model.Group;
 import com.okta.developer.jugtours.model.GroupRepository;
-import com.okta.developer.jugtours.model.UserRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
@@ -230,7 +230,7 @@ class GroupController {
     private final Logger log = LoggerFactory.getLogger(GroupController.class);
     private GroupRepository groupRepository;
 
-    public GroupController(GroupRepository groupRepository, UserRepository userRepository) {
+    public GroupController(GroupRepository groupRepository) {
         this.groupRepository = groupRepository;
     }
 
@@ -298,7 +298,7 @@ Create a new project in the `jugtours` directory you created.
 create-react-app app
 ```
 
-After the app is created, navigate into its directory and install [Bootstrap](https://getbootstrap.com/), cookie support for React, React Router, and [Reactstrap](https://reactstrap.github.io/).
+After the app creation process completes, navigate into its directory and install [Bootstrap](https://getbootstrap.com/), cookie support for React, React Router, and [Reactstrap](https://reactstrap.github.io/).
 
 ```bash
 cd app
@@ -306,7 +306,7 @@ yarn add bootstrap@4.1.2 react-cookie@2.2.0 react-router-dom@4.3.1 reactstrap@6.
 ```
 
 You'll use Bootstrap's CSS and Reactstrap's components to make the UI look better, especially on mobile phones. If you'd like to learn more about Reactstrap, see <https://reactstrap.github.io/>. It has extensive documentation on its various components and how to use them.
- 
+
 ## Call Your Spring Boot API and Display the Results
 
 Modify `app/src/App.js` to use the following code that calls `/api/groups` and display the list in the UI.
@@ -357,7 +357,15 @@ class App extends Component {
 export default App;
 ```
 
-Run `yarn start` in your `app` directory and you should see the list of default groups.
+To proxy from `/api` to `http://localhost:8080/api`, add a proxy key/value to `app/package.json`.
+
+```json
+"proxy": "http://localhost:8080"
+```
+
+To learn more about this feature, search for "proxy" in `app/README.md`. Create React App ships with all kinds of documentation in this file, how cool is that?!
+
+Run `yarn start` in your `app` directory, and you should see the list of default groups.
 
 {% img blog/spring-boot-2-react/jug-list.png alt:"JUG List" width:"800" %}{: .center-image }
 
@@ -525,7 +533,7 @@ class Home extends Component {
 export default Home;
 ```
 
-And, change `app/src/App.js` to use React Router to navigate between components.
+Also, change `app/src/App.js` to use React Router to navigate between components.
 
 ```jsx
 import React, { Component } from 'react';
@@ -554,12 +562,14 @@ Your React app should update itself as you make changes and you should see a scr
 
 {% img blog/spring-boot-2-react/home-with-link.png alt:"Home screen with Manage JUG Tour link" width:"800" %}{: .center-image }
 
+
 Click on **Manage JUG Tour** and you should see a list of the default groups.
 
 {% img blog/spring-boot-2-react/group-list.png alt:"Group List screen" width:"800" %}{: .center-image }
 
+
 It's great that you can see your Spring Boot's data in your React app, but it's no fun if you can't edit it!
- 
+
 ## Add a React GroupEdit Component
 
 Create `app/src/GroupEdit.js` and use its `componentDidMount()` to fetch the group record with the id from the URL.
@@ -700,33 +710,822 @@ Now you should be able to add and edit groups!
 
 {% img blog/spring-boot-2-react/add-group.png alt:"Add Group screen" width:"800" %}{: .center-image }
 
+
 {% img blog/spring-boot-2-react/edit-group.png alt:"Edit Group screen" width:"800" %}{: .center-image }
- 
+
+
 ## Add Authentication with Okta
- 
+
+It's pretty cool to build a CRUD app, but it's even cooler to build a _secure_ one. To make it so you have to log in before viewing/modifying groups, you can use Okta's easy-to-use API for OIDC. In short, we make [identity management](https://developer.okta.com/product/user-management/) a lot easier, more secure, and more scalable than what you're used to. Okta is a cloud service that allows developers to create, edit, and securely store user accounts and user account data, and connect them with one or multiple applications. Our API enables you to:
+
+* [Authenticate](https://developer.okta.com/product/authentication/) and [authorize](https://developer.okta.com/product/authorization/) your users
+* Store data about your users
+* Perform password-based and [social login](https://developer.okta.com/authentication-guide/social-login/)
+* Secure your application with [multi-factor authentication](https://developer.okta.com/use_cases/mfa/)
+* And much more! Check out our [product documentation](https://developer.okta.com/documentation/)
+
+Are you sold? [Register for a forever-free developer account](https://developer.okta.com/signup/), and when you're done, come on back so we can learn more about building secure apps with Spring Boot!
+
 ### Spring Security + OIDC
- 
+
+[Spring Security added OIDC support in its 5.0 release](/blog/2017/12/18/spring-security-5-oidc). Since then, they've made quite a few improvements and simplified its required configuration. I figured it'd be fun to explore the latest and greatest, so I started by updating `pom.xml` with Spring's snapshot repositories, upgrading Spring Boot and Spring Security to nightly builds, and adding the necessary Spring Security dependencies to do OIDC authentication.
+
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<project>
+    ...
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>2.1.0.BUILD-SNAPSHOT</version>
+        <relativePath/> <!-- lookup parent from repository -->
+    </parent>
+
+    <properties>
+        ...
+        <spring-security.version>5.1.0.BUILD-SNAPSHOT</spring-security.version>
+    </properties>
+
+    <dependencies>
+        ...
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-security</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-config</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-oauth2-client</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-oauth2-jose</artifactId>
+        </dependency>
+    </dependencies>
+
+    <build...>
+
+    <profiles...>
+
+    <pluginRepositories>
+        <pluginRepository>
+            <id>spring-snapshots</id>
+            <name>Spring Snapshots</name>
+            <url>https://repo.spring.io/snapshot</url>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
+        </pluginRepository>
+    </pluginRepositories>
+    <repositories>
+        <repository>
+            <id>spring-snapshots</id>
+            <name>Spring Snapshot</name>
+            <url>http://repo.spring.io/snapshot</url>
+        </repository>
+    </repositories>
+</project>
+```
+
 ### Create an OIDC App in Okta
+
+[Log in](https://login.okta.com/?SAMLRequest=fc%2B7CsJAEAXQXvAflu1NNJUMeZBGELTx1a%2FrYILJTtyZGD%2FfSBRiYzlw77lMnD3rSj3Qc0ku0YtgrhU6S5fSXRN9PKxmS52l00nMpq6iBvJWCrfDe4ss6vStRe9aDzmGIZfo1jsgwyWDMzUyiIV9vt1AH4XGk5ClSvewUgMNa%2BYW%2FVj5jxhm9NLP67QQaSAMu64L6CYmsFSHlnzT4ZlLwTgcL6Sf8%2FeX9AU%3Dhttps://login.okta.com/?SAMLRequest=fc%2B7CsJAEAXQXvAflu1NNJUMeZBGELTx1a%2FrYILJTtyZGD%2FfSBRiYzlw77lMnD3rSj3Qc0ku0YtgrhU6S5fSXRN9PKxmS52l00nMpq6iBvJWCrfDe4ss6vStRe9aDzmGIZfo1jsgwyWDMzUyiIV9vt1AH4XGk5ClSvewUgMNa%2BYW%2FVj5jxhm9NLP67QQaSAMu64L6CYmsFSHlnzT4ZlLwTgcL6Sf8%2FeX9AU%3D) to your Okta Developer account (or [sign up](https://developer.okta.com/signup/) if you don’t have an account) and navigate to **Applications** > **Add Application**. Click **Web** and click **Next**. Give the app a name you’ll remember, and specify `http://localhost:8080/login/oauth2/code/okta` as a Login redirect URI. Click **Done**, then click **Edit** to edit General Settings. Add `http://localhost:3000` and `http://localhost:8080` as Logout redirect URIs, then click **Save**. 
+
+Copy and paste the URI of your default authorization server, client ID, and the client secret into `src/main/resources/application.yml`. Create this file, and you can delete the `application.properties` file in the same directory.
+
+```yaml
+spring:
+  profiles:
+    active: @spring.profiles.active@
+  security:
+    oauth2:
+      client:
+        registration:
+          okta:
+            client-id: {clientId}
+            client-secret: {clientSecret}
+            scope: openid email profile
+        provider:
+          okta:
+            issuer-uri: https://{yourOktaDomain}/oauth2/default
+```
+
+## Configure Spring Security for React and User Identity
+
+To make Spring Security React-friendly, create a `SecurityConfiguration.java` file in `src/main/java/.../jugtours/config`. Create the `config` directory and put this class in it.
+
+```java
+package com.okta.developer.jugtours.config;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Profile;
+import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.web.authentication.LoginUrlAuthenticationEntryPoint;
+import org.springframework.security.web.authentication.SavedRequestAwareAuthenticationSuccessHandler;
+import org.springframework.security.web.csrf.CookieCsrfTokenRepository;
+import org.springframework.security.web.savedrequest.RequestCache;
+import org.springframework.security.web.savedrequest.SavedRequest;
+
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import java.util.Collection;
+import java.util.List;
+import java.util.Locale;
+import java.util.Map;
+
+@Configuration
+public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
+    private final Logger log = LoggerFactory.getLogger(SecurityConfiguration.class);
+
+    @Override
+    protected void configure(HttpSecurity http) throws Exception {
+        RequestCache requestCache = refererRequestCache();
+        SavedRequestAwareAuthenticationSuccessHandler handler = new SavedRequestAwareAuthenticationSuccessHandler();
+        handler.setRequestCache(requestCache);
+        http
+            .exceptionHandling()
+                .authenticationEntryPoint(new LoginUrlAuthenticationEntryPoint("/oauth2/authorization/okta"))
+                .and()
+            .oauth2Login()
+                .successHandler(handler)
+                .and()
+            .csrf()
+                .csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse())
+                .and()
+            .requestCache()
+                .requestCache(requestCache)
+                .and()
+            .authorizeRequests()
+                .antMatchers("/**/*.{js,html,css}").permitAll()
+                .antMatchers("/", "/api/user").permitAll()
+                .anyRequest().authenticated();
+    }
+
+    @Bean
+    public RequestCache refererRequestCache() {
+        return new RequestCache() {
+            private String savedAttrName = getClass().getName().concat(".SAVED");
+
+            @Override
+            public void saveRequest(HttpServletRequest request, HttpServletResponse response) {
+                String referrer = request.getHeader("referer");
+                if (referrer != null) {
+                    request.getSession().setAttribute(this.savedAttrName, referrerRequest(referrer));
+                }
+            }
+
+            @Override
+            public SavedRequest getRequest(HttpServletRequest request, HttpServletResponse response) {
+                HttpSession session = request.getSession(false);
+
+                if (session != null) {
+                    return (SavedRequest) session.getAttribute(this.savedAttrName);
+                }
+
+                return null;
+            }
+
+            @Override
+            public HttpServletRequest getMatchingRequest(HttpServletRequest request, HttpServletResponse response) {
+                return request;
+            }
+
+            @Override
+            public void removeRequest(HttpServletRequest request, HttpServletResponse response) {
+                HttpSession session = request.getSession(false);
+
+                if (session != null) {
+                    log.debug("Removing SavedRequest from session if present");
+                    session.removeAttribute(this.savedAttrName);
+                }
+            }
+        };
+    }
+
+    private SavedRequest referrerRequest(final String referrer) {
+        return new SavedRequest() {
+            @Override
+            public String getRedirectUrl() {
+                return referrer;
+            }
+
+            @Override
+            public List<Cookie> getCookies() {
+                return null;
+            }
+
+            @Override
+            public String getMethod() {
+                return null;
+            }
+
+            @Override
+            public List<String> getHeaderValues(String name) {
+                return null;
+            }
+
+            @Override
+            public Collection<String> getHeaderNames() {
+                return null;
+            }
+
+            @Override
+            public List<Locale> getLocales() {
+                return null;
+            }
+
+            @Override
+            public String[] getParameterValues(String name) {
+                return new String[0];
+            }
+
+            @Override
+            public Map<String, String[]> getParameterMap() {
+                return null;
+            }
+        };
+    }
+}
+```
+
+This class has a lot going on, so let me explain a few things. At the beginning of the `configure()` method, you're setting up a new type of request cache that caches the referrer header (misspelled `referer` in real life), so Spring Security can redirect back to it after authentication. The referrer-based request cache comes in handy when you're developing React on `http://localhost:3000` and want to be redirected back there after logging in.
+
+```java
+@Override
+protected void configure(HttpSecurity http) throws Exception {
+    RequestCache requestCache = refererRequestCache();
+    SavedRequestAwareAuthenticationSuccessHandler handler = new SavedRequestAwareAuthenticationSuccessHandler();
+    handler.setRequestCache(requestCache);
+    http
+        .exceptionHandling()
+            .authenticationEntryPoint(new LoginUrlAuthenticationEntryPoint("/oauth2/authorization/okta"))
+            .and()
+        .oauth2Login()
+            .successHandler(handler)
+            .and()
+        .csrf()
+            .csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse())
+            .and()
+        .requestCache()
+            .requestCache(requestCache)
+            .and()
+        .authorizeRequests()
+            .antMatchers("/**/*.{js,html,css}").permitAll()
+            .antMatchers("/", "/api/user").permitAll()
+            .anyRequest().authenticated();
+}
+```
+
+The `authenticationEntryPoint()` line makes Spring Security redirect to Okta automatically. In Spring Security 5.1.0.RELEASE, this line won't be needed when you only have one OIDC provider configured; it'll redirect automatically.
+
+Configuring CSRF (cross site request forgery) protection with `CookieCsrfTokenRepository.withHttpOnlyFalse()` means that the `XSRF-TOKEN` cookie won't be marked HTTP-only, so React can read it and send it back when it tries to manipulate data. 
+
+The `antMatchers` lines define what URLs are allowed for anonymous users. You will soon configure things so your React app is served up by your Spring Boot app, hence the reason for allowing web files and "/". You might notice there's an exposed `/api/user` path too. Create `src/main/java/.../jugtours/web/UserController.java` and populate it with the following code. This API will be used by React to 1) find out if a user is authenticated, and 2) perform global logout.
+
+```java
+package com.okta.developer.jugtours.web;
+
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.oauth2.core.oidc.OidcIdToken;
+import org.springframework.security.oauth2.core.user.OAuth2User;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import javax.servlet.http.HttpServletRequest;
+import java.util.HashMap;
+import java.util.Map;
+
+@RestController
+public class UserController {
+
+    @Value("${spring.security.oauth2.client.provider.okta.issuer-uri}")
+    String issuerUri;
+
+    @GetMapping("/api/user")
+    public ResponseEntity<?> getUser(@AuthenticationPrincipal OAuth2User user) {
+        if (user == null) {
+            return new ResponseEntity<>("", HttpStatus.OK);
+        } else {
+            return ResponseEntity.ok().body(user.getAttributes());
+        }
+    }
+
+    @PostMapping("/api/logout")
+    public ResponseEntity<?> logout(HttpServletRequest request,
+                                    @AuthenticationPrincipal(expression = "idToken") OidcIdToken idToken) {
+        // send logout URL to client so they can initiate logout - doesn't work from the server side
+        // Make it easier: https://github.com/spring-projects/spring-security/issues/5540
+        String logoutUrl = issuerUri + "/v1/logout";
+
+        Map<String, String> logoutDetails = new HashMap<>();
+        logoutDetails.put("logoutUrl", logoutUrl);
+        logoutDetails.put("idToken", idToken.getTokenValue());
+        request.getSession(false).invalidate();
+        return ResponseEntity.ok().body(logoutDetails);
+    }
+}
+```
+
+You'll also want to add user information when creating groups so that you can filter by _your_ JUG tour. Add a `UserRepository.java` in the same directory as `GroupRepository.java`. 
+
+```java
+package com.okta.developer.jugtours.model;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface UserRepository extends JpaRepository<User, String> {
+}
+```
+
+Add a new `findAllByUserId(String id)` method to `GroupRepository.java`. 
+
+```java
+List<Group> findAllByUserId(String id);
+```
+
+Then inject `UserRepository` into `GroupController.java` and use it to create (or grab an existing user) when adding a new group. While you're there, modify the `groups()` method to filter by user.
+
+```java
+package com.okta.developer.jugtours.web;
+
+import com.okta.developer.jugtours.model.Group;
+import com.okta.developer.jugtours.model.GroupRepository;
+import com.okta.developer.jugtours.model.User;
+import com.okta.developer.jugtours.model.UserRepository;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.oauth2.core.user.OAuth2User;
+import org.springframework.web.bind.annotation.*;
+
+import javax.validation.Valid;
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.security.Principal;
+import java.util.Collection;
+import java.util.Map;
+import java.util.Optional;
+
+@RestController
+@RequestMapping("/api")
+class GroupController {
+
+    private final Logger log = LoggerFactory.getLogger(GroupController.class);
+    private GroupRepository groupRepository;
+    private UserRepository userRepository;
+
+    public GroupController(GroupRepository groupRepository, UserRepository userRepository) {
+        this.groupRepository = groupRepository;
+        this.userRepository = userRepository;
+    }
+
+    @GetMapping("/groups")
+    Collection<Group> groups(Principal principal) {
+        return groupRepository.findAllByUserId(principal.getName());
+    }
+
+    @GetMapping("/group/{id}")
+    ResponseEntity<?> getGroup(@PathVariable Long id) {
+        Optional<Group> group = groupRepository.findById(id);
+        return group.map(response -> ResponseEntity.ok().body(response))
+                .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
+    }
+
+    @PostMapping("/group")
+    ResponseEntity<Group> createGroup(@Valid @RequestBody Group group,
+                                      @AuthenticationPrincipal OAuth2User principal) throws URISyntaxException {
+        log.info("Request to create group: {}", group);
+        Map<String, Object> details = principal.getAttributes();
+        String userId = details.get("sub").toString();
+ 
+        // check to see if user already exists
+        Optional<User> user = userRepository.findById(userId);
+        group.setUser(user.orElse(new User(userId,
+                        details.get("name").toString(), details.get("email").toString())));
+
+        Group result = groupRepository.save(group);
+        return ResponseEntity.created(new URI("/api/group/" + result.getId()))
+                .body(result);
+    }
+
+    @PutMapping("/group")
+    ResponseEntity<Group> updateGroup(@Valid @RequestBody Group group) {
+        log.info("Request to update group: {}", group);
+        Group result = groupRepository.save(group);
+        return ResponseEntity.ok().body(result);
+    }
+
+    @DeleteMapping("/group/{id}")
+    public ResponseEntity<?> deleteGroup(@PathVariable Long id) {
+        log.info("Request to delete group: {}", id);
+        groupRepository.deleteById(id);
+        return ResponseEntity.ok().build();
+    }
+}
+```
+
+To magnify the changes, they're in the `groups()` and `createGroup()` methods. It's pretty slick that Spring JPA will create the `findAllByUserId()` method/query for you and `userRepository.findById()` uses Java 8's [Optional](http://www.baeldung.com/java-optional). 
+
+```java
+@GetMapping("/groups")
+Collection<Group> groups(Principal principal) {
+    return groupRepository.findAllByUserId(principal.getName());
+}
+
+@PostMapping("/group")
+ResponseEntity<Group> createGroup(@Valid @RequestBody Group group,
+                                 @AuthenticationPrincipal OAuth2User principal) throws URISyntaxException {
+    log.info("Request to create group: {}", group);
+    Map<String, Object> details = principal.getAttributes();
+    String userId = details.get("sub").toString();
+
+    // check to see if user already exists
+    Optional<User> user = userRepository.findById(userId);
+    group.setUser(user.orElse(new User(userId,
+                    details.get("name").toString(), details.get("email").toString())));
+
+    Group result = groupRepository.save(group);
+    return ResponseEntity.created(new URI("/api/group/" + result.getId()))
+            .body(result);
+}
+```
+
+## Modify React Handle CSRF and be Identity Aware
+
+You'll need to make a few changes to your React components to make them identity-aware. The first thing you'll want to do is modify `App.js` to wrap everything in a `CookieProvider`. This component allows you to read the CSRF cookie and send it back as a header.
+
+```jsx
+import { CookiesProvider } from 'react-cookie';
+
+class App extends Component {
+  render() {
+    return (
+      <CookiesProvider>
+        <Router...>
+      </CookiesProvider>
+    )
+  }
+}
+```
+
+Modify `app/src/Home.js` to call `/api/user` to see if the user is logged in. If they're not, show them a `Login` button.
+
+```jsx
+import React, { Component } from 'react';
+import './App.css';
+import AppNavbar from './AppNavbar';
+import { Link } from 'react-router-dom';
+import { Button, Container } from 'reactstrap';
+import { withCookies } from 'react-cookie';
+
+class Home extends Component {
+  state = {
+    isLoading: true,
+    isAuthenticated: false,
+    user: undefined
+  };
+
+  constructor(props) {
+    super(props);
+    const {cookies} = props;
+    this.state.csrfToken = cookies.get('XSRF-TOKEN');
+    this.login = this.login.bind(this);
+    this.logout = this.logout.bind(this);
+  }
+
+  async componentDidMount() {
+    const response = await fetch('/api/user', {credentials: 'include'});
+    const body = await response.text();
+    if (body === '') {
+      this.setState(({isAuthenticated: false}))
+    } else {
+      this.setState({isAuthenticated: true, user: JSON.parse(body)})
+    }
+  }
+
+  login() {
+    let port = (window.location.port ? ':' + window.location.port : '');
+    if (port === ':3000') {
+      port = ':8080';
+    }
+    window.location.href = '//' + window.location.hostname + port + '/private';
+  }
+
+  logout() {
+    console.log('logging out...');
+    fetch('/api/logout', {method: 'POST', credentials: 'include',
+      headers: {'X-XSRF-TOKEN': this.state.csrfToken}}).then(res => res.json())
+      .then(response => {
+        window.location.href = response.logoutUrl + "?id_token_hint=" +
+          response.idToken + "&post_logout_redirect_uri=" + window.location.origin;
+      });
+  }
+
+  render() {
+    const message = this.state.user ?
+      <h2>Welcome, {this.state.user.name}!</h2> :
+      <p>Please log in to manage your JUG Tour.</p>;
+
+    const button = this.state.isAuthenticated ?
+      <div>
+        <Button color="link"><Link to="/groups">Manage JUG Tour</Link></Button>
+        <br/>
+        <Button color="link" onClick={this.logout}>Logout</Button>
+      </div> :
+      <Button color="primary" onClick={this.login}>Login</Button>;
+
+    return (
+      <div>
+        <AppNavbar/>
+        <Container fluid>
+          {message}
+          {button}
+        </Container>
+      </div>
+    );
+  }
+}
+
+export default withCookies(Home);
+```
+
+There are some things you should be aware of in this component:
+
+1. `withCookies()` wraps the `Home` component at the bottom to give it access to cookies. Then you can use `const {cookies} = props` in the constructor, and fetch cookies with `cookies.get('XSRF-TOKEN')`. 
+2. When using `fetch()`, you need to include `{credentials: 'include'}` to transfer cookies. You will get a 403 Forbidden if you do not include this option.
+3. The CSRF cookie from Spring Security has a different name than the header you need to send back. The cookie's name is `XSRF-TOKEN`, while the header name is `X-XSRF-TOKEN`. 
+
+Update `app/src/GroupList.js` to have similar changes. The good news is you don't need to make any changes to the `render()` method.
+
+```js
+import { Link, withRouter } from 'react-router-dom';
+import { instanceOf } from 'prop-types';
+import { withCookies, Cookies } from 'react-cookie';
+
+class GroupList extends Component {
+  static propTypes = {
+    cookies: instanceOf(Cookies).isRequired
+  };
+
+  constructor(props) {
+    super(props);
+    const {cookies} = props;
+    this.state = {groups: [], csrfToken: cookies.get('XSRF-TOKEN'), isLoading: true};
+    this.remove = this.remove.bind(this);
+  }
+
+  componentDidMount() {
+    this.setState({isLoading: true});
+
+    fetch('api/groups', {credentials: 'include'})
+      .then(response => response.json())
+      .then(data => this.setState({groups: data, isLoading: false}))
+      .catch(() => this.props.history.push('/'))
+  }
+
+  async remove(id) {
+    await fetch(`/api/group/${id}`, {
+      method: 'DELETE',
+      headers: {
+        'X-XSRF-TOKEN': this.state.csrfToken,
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      credentials: 'include'
+    }).then(() => {
+        let updatedGroups = [...this.state.groups].filter(i => i.id !== id);
+        this.setState({groups: updatedGroups});
+      });
+  }
+
+  render() {...}
+}
+
+export default withCookies(withRouter(GroupList));
+```
+
+Update `GroupEdit.js` too.
+
+```js
+import { instanceOf } from 'prop-types';
+import { Cookies, withCookies } from 'react-cookie';
+
+class GroupEdit extends Component {
+  static propTypes = {
+    cookies: instanceOf(Cookies).isRequired
+  };
+
+  emptyItem = {
+    name: '',
+    address: '',
+    city: '',
+    stateOrProvince: '',
+    country: '',
+    postalCode: ''
+  };
+
+  constructor(props) {
+    super(props);
+    const {cookies} = props;
+    this.state = {
+      item: this.emptyItem,
+      csrfToken: cookies.get('XSRF-TOKEN')
+    };
+    this.handleChange = this.handleChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
+  }
+
+  async componentDidMount() {
+    if (this.props.match.params.id !== 'new') {
+      try {
+        const group = await (await fetch(`/api/group/${this.props.match.params.id}`, {credentials: 'include'})).json();
+        this.setState({item: group});
+      } catch (error) {
+        this.props.history.push('/');
+      }
+    }
+  }
+
+  handleChange(event) {
+    const target = event.target;
+    const value = target.value;
+    const name = target.name;
+    let item = {...this.state.item};
+    item[name] = value;
+    this.setState({item});
+  }
+
+  async handleSubmit(event) {
+    event.preventDefault();
+    const {item, csrfToken} = this.state;
+
+    await fetch('/api/group', {
+      method: (item.id) ? 'PUT' : 'POST',
+      headers: {
+        'X-XSRF-TOKEN': csrfToken,
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(item),
+      credentials: 'include'
+    });
+    this.props.history.push('/groups');
+  }
+
+  render() {...}
+}
+
+export default withCookies(withRouter(GroupEdit));
+```
+
+After all these changes, you should be able to restart both Spring Boot and React and witness the glory of planning your very own JUG Tour!
+
+{% img blog/spring-boot-2-react/react-login.png alt:"React Login" width:"800" %}{: .center-image }
+
+
+{% img blog/spring-boot-2-react/my-jug-tour.png alt:"My JUG Tour" width:"800" %}{: .center-image }
+
+
+## Configure Maven to Build and Package React with Spring Boot
+
+To build and package your React app with Maven, you can use the [frontend-maven-plugin](https://github.com/eirslett/frontend-maven-plugin) and Maven's profiles to activate it. Add properties for versions, and a `<profiles>` section to your `pom.xml`.
+
+```xml
+<properties>
+    ...
+    <frontend-maven-plugin.version>1.6</frontend-maven-plugin.version>
+    <node.version>v10.6.0</node.version>
+    <yarn.version>v1.8.0</yarn.version>
+</properties>
+
+<profiles>
+    <profile>
+        <id>dev</id>
+        <activation>
+            <activeByDefault>true</activeByDefault>
+        </activation>
+        <properties>
+            <spring.profiles.active>dev</spring.profiles.active>
+        </properties>
+    </profile>
+    <profile>
+        <id>prod</id>
+        <build>
+            <plugins>
+                <plugin>
+                    <artifactId>maven-resources-plugin</artifactId>
+                    <executions>
+                        <execution>
+                            <id>copy-resources</id>
+                            <phase>process-classes</phase>
+                            <goals>
+                                <goal>copy-resources</goal>
+                            </goals>
+                            <configuration>
+                                <outputDirectory>${basedir}/target/classes/static</outputDirectory>
+                                <resources>
+                                    <resource>
+                                        <directory>app/build</directory>
+                                    </resource>
+                                </resources>
+                            </configuration>
+                        </execution>
+                    </executions>
+                </plugin>
+                <plugin>
+                    <groupId>com.github.eirslett</groupId>
+                    <artifactId>frontend-maven-plugin</artifactId>
+                    <version>${frontend-maven-plugin.version}</version>
+                    <configuration>
+                        <workingDirectory>app</workingDirectory>
+                    </configuration>
+                    <executions>
+                        <execution>
+                            <id>install node</id>
+                            <goals>
+                                <goal>install-node-and-yarn</goal>
+                            </goals>
+                            <configuration>
+                                <nodeVersion>${node.version}</nodeVersion>
+                                <yarnVersion>${yarn.version}</yarnVersion>
+                            </configuration>
+                        </execution>
+                        <execution>
+                            <id>yarn install</id>
+                            <goals>
+                                <goal>yarn</goal>
+                            </goals>
+                            <phase>generate-resources</phase>
+                        </execution>
+                        <execution>
+                            <id>yarn test</id>
+                            <goals>
+                                <goal>yarn</goal>
+                            </goals>
+                            <phase>test</phase>
+                            <configuration>
+                                <arguments>test</arguments>
+                            </configuration>
+                        </execution>
+                        <execution>
+                            <id>yarn build</id>
+                            <goals>
+                                <goal>yarn</goal>
+                            </goals>
+                            <phase>compile</phase>
+                            <configuration>
+                                <arguments>build</arguments>
+                            </configuration>
+                        </execution>
+                    </executions>
+                </plugin>
+            </plugins>
+        </build>
+        <properties>
+            <spring.profiles.active>prod</spring.profiles.active>
+        </properties>
+    </profile>
+</profiles>
+```
+
+After adding this, you should be able to run `./mvnw -Pprod` and your app see your app running on `http://localhost:8080`. 
+
+{% img blog/spring-boot-2-react/localhost-8080.png alt:"http://localhost:8080" width:"800" %}{: .center-image }
 
 ## Spring Security's OAuth vs. OIDC Support
 
 While working on this post, I collaborated with [Rob Winch](https://twitter.com/rob_winch) (Spring Security Lead) to make sure I used Spring Security efficiently. I started out using Spring Security's OAuth 2.0 support and its `@EnableOAuth2Sso` annotation. Rob encouraged me to use Spring Security's OIDC support instead and was instrumental in making everything work. I thought it might be useful to include a short Q&A with Rob about Spring Security.
 
-**1. Why is it better to use Spring Security's OIDC support, rather than `@EnableOAuth2Sso`?** 
+**1. Why is it better to use Spring Security's OIDC support, rather than `@EnableOAuth2Sso`?**
 
 **2. You're moving SAML and OAuth support back into Spring Security's core, rather than having them as separate projects. Why?**
 
 **3. What is the most challenging thing about maintaining an open source project like Spring Security?**
 
 **4. What makes you smile about open source?**
- 
+
 ## Learn More about Spring Boot and React
 
-I hope you've enjoyed this tutorial on how to do CRUD with React, Spring Boot, and Spring Security. You can see that Spring Security's OIDC support is pretty powerful, and doesn't require a whole lot of configuration. Adding CSRF protection and packaging your Spring Boot + React app as a single artifact is pretty cool too!
+I hope you've enjoyed this tutorial on how to do CRUD with React, Spring Boot, and Spring Security. You can see that Spring Security's OIDC support is pretty robust, and doesn't require a whole lot of configuration. Adding CSRF protection and packaging your Spring Boot + React app as a single artifact is pretty cool too!
 
-You can find the example created in this tutorial on GitHub at https://github.com/oktadeveloper/okta-spring-boot-react-crud-example. 
+You can find the example created in this tutorial on GitHub at https://github.com/oktadeveloper/okta-spring-boot-react-crud-example.
 
-We've written a number of Spring Boot and React tutorials in the past, check them out if you're interested!
+We've written some Spring Boot and React tutorials in the past, check them out if you're interested!
 
 * [Bootiful Development with Spring Boot and React](/blog/2017/12/06/bootiful-development-with-spring-boot-and-react)
 * [Build a React Native Application and Authenticate with OAuth 2.0](/blog/2018/03/16/build-react-native-authentication-oauth-2)
