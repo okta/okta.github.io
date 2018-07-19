@@ -1,6 +1,6 @@
 ---
 layout: blog_post
-title: "Build a Basic CRUD App with React and Spring Boot"
+title: "Use React and Spring Boot to Build a Simple CRUD App"
 author: mraible
 description: "React is one of the most popular JavaScript frameworks, and Spring Boot is wildly popular in the Java ecosystem. This article shows you how to use them in the same app, and secure it all with Okta."
 tags: [authentication, spring boot, spring boot 2.1, react, reactjs, oidc]
@@ -13,7 +13,7 @@ React was designed to make it painless to create interactive UIs. Its state mana
 
 Developers like CRUD (create, read, update, and delete) apps because they show a lot of the base functionality that you need when creating an app. Once you have the basics of CRUD completed in an app, most of the client-server plumbing is finished, and you can move on to implementing the necessary business logic.
 
-Today, I'll show you how to create a basic CRUD app with Spring Boot in React. You might remember a similar article I wrote for Angular last year: [Build a Basic CRUD App with Angular 5.0 and Spring Boot 2.0](/blog/2017/12/04/basic-crud-angular-and-spring-boot). That tutorial uses OAuth 2.0's implicit flow and our [Okta Angular SDK](https://www.npmjs.com/package/@okta/okta-angular). In this tutorial, I'll be using OAuth's Authorization Code flow and packaging the React app in the Spring Boot app for production. At the same time, I'll show you how to keep React's productive workflow for developing locally.
+Today, I'll show you how to create a basic CRUD app with Spring Boot in React. You might remember a similar article I wrote for Angular last year: [Build a Basic CRUD App with Angular 5.0 and Spring Boot 2.0](/blog/2017/12/04/basic-crud-angular-and-spring-boot). That tutorial uses OAuth 2.0's implicit flow and our [Okta Angular SDK](https://www.npmjs.com/package/@okta/okta-angular). In this tutorial, I'll be using the OAuth 2.0 Authorization Code flow and packaging the React app in the Spring Boot app for production. At the same time, I'll show you how to keep React's productive workflow for developing locally.
 
 You will need [Java 8](http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html), [Node.js 8](https://nodejs.org/), and [Yarn](https://yarnpkg.com/en/docs/install) installed to complete this tutorial. You can use npm instead of Yarn, but you'll need to translate the Yarn syntax to npm.
 
@@ -196,7 +196,7 @@ class Initializer implements CommandLineRunner {
 }
 ```
 
-**TIP:** If you're IDE has issues with `Event.builder()`, it means that you need to turn on annotation processing and/or install the Lombok plugin. I had to uninstall/reinstall the Lombok plugin in IntelliJ IDEA in order to get things to work.
+**TIP:** If your IDE has issues with `Event.builder()`, it means that you need to turn on annotation processing and/or install the Lombok plugin. I had to uninstall/reinstall the Lombok plugin in IntelliJ IDEA in order to get things to work.
 
 If you start your app (using `./mvnw spring-boot:run`) after adding this code, you'll see the list of groups and events displayed in your console.
 
@@ -274,7 +274,7 @@ class GroupController {
 }
 ```
 
-If you restart your server app and hit `http://localhost:8080/api/groups` with your browser, or a command-line client, you should see the list of groups.
+If you restart your server app and hit `http://localhost:8080/api/groups` with your browser, or a command line client, you should see the list of groups.
 
 You can create, read, update, and delete groups with the following [HTTPie](https://httpie.org) commands.
 
@@ -287,7 +287,7 @@ http DELETE :8080/api/group/6
 
 ## Create a React UI with Create React App
 
-Create React App is a command-line utility that generates React projects for you. It's a convenient tool because it also offers commands that will build and optimize your project for production. It uses webpack under the covers for building. If you want to learn more about webpack, I recommend [webpack.academy](https://webpack.academy).
+Create React App is a command line utility that generates React projects for you. It's a convenient tool because it also offers commands that will build and optimize your project for production. It uses webpack under the covers for building. If you want to learn more about webpack, I recommend [webpack.academy](https://webpack.academy).
 
 Create a new project in the `jugtours` directory with Yarn.
 
@@ -580,11 +580,11 @@ Click on **Manage JUG Tour** and you should see a list of the default groups.
 {% img blog/spring-boot-2-react/group-list.png alt:"Group List screen" width:"800" %}{: .center-image }
 
 
-It's great that you can see your Spring Boot's data in your React app, but it's no fun if you can't edit it!
+It's great that you can see your Spring Boot API's data in your React app, but it's no fun if you can't edit it!
 
 ## Add a React GroupEdit Component
 
-Create `app/src/GroupEdit.js` and use its `componentDidMount()` to fetch the group resource with the id from the URL.
+Create `app/src/GroupEdit.js` and use its `componentDidMount()` to fetch the group resource with the ID from the URL.
 
 ```jsx
 import React, { Component } from 'react';
@@ -728,7 +728,7 @@ Now you should be able to add and edit groups!
 
 ## Add Authentication with Okta
 
-It's pretty cool to build a CRUD app, but it's even cooler to build a _secure_ one. To make it so you have to log in before viewing/modifying groups, you can use Okta's easy-to-use API for OIDC. Okta makes [identity management](https://developer.okta.com/product/user-management/) a lot easier, more secure, and more scalable than what you're used to. Okta is a cloud service that allows developers to create, edit, and securely store user accounts and user account data, and connect them with one or multiple applications. Our API enables you to:
+It's pretty cool to build a CRUD app, but it's even cooler to build a _secure_ one. To achieve that, you’ll want to add authentication so users have to log in before viewing/modifying groups. To make this simple, you can use Okta's API for OIDC. At Okta, our goal is to make [identity management](https://developer.okta.com/product/user-management/) a lot easier, more secure, and more scalable than what you're used to. Okta is a cloud service that allows developers to create, edit, and securely store user accounts and user account data, and connect them with one or multiple applications. Our API enables you to:
 
 * [Authenticate](https://developer.okta.com/product/authentication/) and [authorize](https://developer.okta.com/product/authorization/) your users
 * Store data about your users
@@ -802,9 +802,9 @@ Are you sold? [Register for a forever-free developer account](https://developer.
 
 ### Create an OIDC App in Okta
 
-[Log in](https://login.okta.com/?SAMLRequest=fc%2B7CsJAEAXQXvAflu1NNJUMeZBGELTx1a%2FrYILJTtyZGD%2FfSBRiYzlw77lMnD3rSj3Qc0ku0YtgrhU6S5fSXRN9PKxmS52l00nMpq6iBvJWCrfDe4ss6vStRe9aDzmGIZfo1jsgwyWDMzUyiIV9vt1AH4XGk5ClSvewUgMNa%2BYW%2FVj5jxhm9NLP67QQaSAMu64L6CYmsFSHlnzT4ZlLwTgcL6Sf8%2FeX9AU%3Dhttps://login.okta.com/?SAMLRequest=fc%2B7CsJAEAXQXvAflu1NNJUMeZBGELTx1a%2FrYILJTtyZGD%2FfSBRiYzlw77lMnD3rSj3Qc0ku0YtgrhU6S5fSXRN9PKxmS52l00nMpq6iBvJWCrfDe4ss6vStRe9aDzmGIZfo1jsgwyWDMzUyiIV9vt1AH4XGk5ClSvewUgMNa%2BYW%2FVj5jxhm9NLP67QQaSAMu64L6CYmsFSHlnzT4ZlLwTgcL6Sf8%2FeX9AU%3D) to your Okta Developer account (or [sign up](https://developer.okta.com/signup/) if you don't have an account) and navigate to **Applications** > **Add Application**. Click **Web** and click **Next**. Give the app a name you'll remember (e.g., "React CRUD"), and specify `http://localhost:8080/login/oauth2/code/okta` as a Login redirect URI. Click **Done**, then click **Edit** to edit General Settings. Add `http://localhost:3000` and `http://localhost:8080` as Logout redirect URIs, then click **Save**. 
+[Log in](https://login.okta.com/?SAMLRequest=fc%2B7CsJAEAXQXvAflu1NNJUMeZBGELTx1a%2FrYILJTtyZGD%2FfSBRiYzlw77lMnD3rSj3Qc0ku0YtgrhU6S5fSXRN9PKxmS52l00nMpq6iBvJWCrfDe4ss6vStRe9aDzmGIZfo1jsgwyWDMzUyiIV9vt1AH4XGk5ClSvewUgMNa%2BYW%2FVj5jxhm9NLP67QQaSAMu64L6CYmsFSHlnzT4ZlLwTgcL6Sf8%2FeX9AU%3Dhttps://login.okta.com/?SAMLRequest=fc%2B7CsJAEAXQXvAflu1NNJUMeZBGELTx1a%2FrYILJTtyZGD%2FfSBRiYzlw77lMnD3rSj3Qc0ku0YtgrhU6S5fSXRN9PKxmS52l00nMpq6iBvJWCrfDe4ss6vStRe9aDzmGIZfo1jsgwyWDMzUyiIV9vt1AH4XGk5ClSvewUgMNa%2BYW%2FVj5jxhm9NLP67QQaSAMu64L6CYmsFSHlnzT4ZlLwTgcL6Sf8%2FeX9AU%3D) to your Okta Developer account (or [sign up](https://developer.okta.com/signup/) if you don’t have an account) and navigate to **Applications** > **Add Application**. Click **Web** and click **Next**. Give the app a name you’ll remember, and specify `http://localhost:8080/login/oauth2/code/okta` as a Login redirect URI. Click **Done**, then click **Edit** to edit General Settings. Add `http://localhost:3000` and `http://localhost:8080` as Logout redirect URIs, then click **Save**. 
 
-Copy and paste the URI of your default authorization server, client ID, and the client secret into `src/main/resources/application.yml`. Create this file, and delete the `application.properties` file in the same directory.
+Copy and paste the URI of your default authorization server, client ID, and the client secret into `src/main/resources/application.yml`. Create this file, and you can delete the `application.properties` file in the same directory.
 
 ```yaml
 spring:
@@ -1405,9 +1405,7 @@ After all these changes, you should be able to restart both Spring Boot and Reac
 
 {% img blog/spring-boot-2-react/react-login.png alt:"React Login" width:"800" %}{: .center-image }
 
-
 {% img blog/spring-boot-2-react/my-jug-tour.png alt:"My JUG Tour" width:"800" %}{: .center-image }
-
 
 ## Configure Maven to Build and Package React with Spring Boot
 
@@ -1526,17 +1524,11 @@ After adding this, you should be able to run `./mvnw spring-boot:run -Pprod` and
 
 **NOTE:** If you're unable to log in, you might try opening your app in an incognito window.
 
-## Spring Security's OAuth vs. OIDC Support
+## Spring Security's OAuth 2.0 vs. OIDC Support
 
-While working on this post, I collaborated with [Rob Winch](https://twitter.com/rob_winch) (Spring Security Lead) to make sure I used Spring Security efficiently. I started out using Spring Security's OAuth 2.0 support and its `@EnableOAuth2Sso` annotation. Rob encouraged me to use Spring Security's OIDC support instead and was instrumental in making everything work. I thought it might be useful to include a short Q&A with Rob about Spring Security.
+While working on this post, I collaborated with [Rob Winch](https://twitter.com/rob_winch) (Spring Security Lead) to make sure I used Spring Security efficiently. I started out using Spring Security's OAuth 2.0 support and its `@EnableOAuth2Sso` annotation. Rob encouraged me to use Spring Security's OIDC support instead and was instrumental in making everything work. 
 
-**1. Why is it better to use Spring Security's OIDC support, rather than `@EnableOAuth2Sso`?**
-
-**2. You're moving SAML and OAuth support back into Spring Security's core, rather than having them as separate projects. Why?**
-
-**3. What is the most challenging thing about maintaining an open source project like Spring Security?**
-
-**4. What makes you smile about open source?**
+As milestones and releases of Spring Boot 2.1 and Spring Security 5.1 are released, I'll update this post to remove code that's no longer necessary.
 
 ## Learn More about Spring Boot and React
 
@@ -1544,11 +1536,11 @@ I hope you've enjoyed this tutorial on how to do CRUD with React, Spring Boot, a
 
 You can find the example created in this tutorial on GitHub at https://github.com/oktadeveloper/okta-spring-boot-react-crud-example.
 
-We've written some Spring Boot and React tutorials in the past, check them out if you're interested.
+We've written some other cool Spring Boot and React tutorials, check them out if you're interested.
 
 * [Bootiful Development with Spring Boot and React](/blog/2017/12/06/bootiful-development-with-spring-boot-and-react)
 * [Build a React Native Application and Authenticate with OAuth 2.0](/blog/2018/03/16/build-react-native-authentication-oauth-2)
 * [Add CI/CD to Your Spring Boot App with Jenkins X and Kubernetes](/blog/2018/07/11/ci-cd-spring-boot-jenkins-x-kubernetes)
 * [Build a React Application with User Authentication in 15 Minutes](/blog/2017/03/30/react-okta-sign-in-widget)
 
-If you have any questions, please don't hesitate to leave a comment below, or ask us on our [Okta Developer Forums](https://devforum.okta.com/). Follow us [on Twitter](https://twitter.com/oktadev) if you want to see more tutorials like this one.
+If you have any questions, please don't hesitate to leave a comment below, or ask us on our [Okta Developer Forums](https://devforum.okta.com/). Follow us [on Twitter](https://twitter.com/oktadev) if you want to see more tutorials like this one!
