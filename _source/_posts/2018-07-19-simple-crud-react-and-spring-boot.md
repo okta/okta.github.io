@@ -31,7 +31,6 @@ To begin, navigate to [start.spring.io](https://start.spring.io) and make the fo
 
 {% img blog/spring-boot-2-react/spring-initializr.png alt:"Spring Initializr" width:"800" %}{: .center-image }
 
-
 Click **Generate Project**, expand `jugtours.zip` after downloading, and open the project in your favorite IDE.
 
 **TIP:** If you're using IntelliJ IDEA or Spring Tool Suite, you can also use Spring Initializr when creating a new project.
@@ -574,11 +573,9 @@ Your React app should update itself as you make changes and you should see a scr
 
 {% img blog/spring-boot-2-react/home-with-link.png alt:"Home screen with Manage JUG Tour link" width:"800" %}{: .center-image }
 
-
 Click on **Manage JUG Tour** and you should see a list of the default groups.
 
 {% img blog/spring-boot-2-react/group-list.png alt:"Group List screen" width:"800" %}{: .center-image }
-
 
 It's great that you can see your Spring Boot API's data in your React app, but it's no fun if you can't edit it!
 
@@ -722,13 +719,11 @@ Now you should be able to add and edit groups!
 
 {% img blog/spring-boot-2-react/add-group.png alt:"Add Group screen" width:"800" %}{: .center-image }
 
-
 {% img blog/spring-boot-2-react/edit-group.png alt:"Edit Group screen" width:"800" %}{: .center-image }
-
 
 ## Add Authentication with Okta
 
-It's pretty cool to build a CRUD app, but it's even cooler to build a _secure_ one. To achieve that, you’ll want to add authentication so users have to log in before viewing/modifying groups. To make this simple, you can use Okta's API for OIDC. At Okta, our goal is to make [identity management](https://developer.okta.com/product/user-management/) a lot easier, more secure, and more scalable than what you're used to. Okta is a cloud service that allows developers to create, edit, and securely store user accounts and user account data, and connect them with one or multiple applications. Our API enables you to:
+It's pretty cool to build a CRUD app, but it's even cooler to build a _secure_ one. To achieve that, you'll want to add authentication so users have to log in before viewing/modifying groups. To make this simple, you can use Okta's API for OIDC. At Okta, our goal is to make [identity management](https://developer.okta.com/product/user-management/) a lot easier, more secure, and more scalable than what you're used to. Okta is a cloud service that allows developers to create, edit, and securely store user accounts and user account data, and connect them with one or multiple applications. Our API enables you to:
 
 * [Authenticate](https://developer.okta.com/product/authentication/) and [authorize](https://developer.okta.com/product/authorization/) your users
 * Store data about your users
@@ -802,7 +797,7 @@ Are you sold? [Register for a forever-free developer account](https://developer.
 
 ### Create an OIDC App in Okta
 
-[Log in](https://login.okta.com/?SAMLRequest=fc%2B7CsJAEAXQXvAflu1NNJUMeZBGELTx1a%2FrYILJTtyZGD%2FfSBRiYzlw77lMnD3rSj3Qc0ku0YtgrhU6S5fSXRN9PKxmS52l00nMpq6iBvJWCrfDe4ss6vStRe9aDzmGIZfo1jsgwyWDMzUyiIV9vt1AH4XGk5ClSvewUgMNa%2BYW%2FVj5jxhm9NLP67QQaSAMu64L6CYmsFSHlnzT4ZlLwTgcL6Sf8%2FeX9AU%3Dhttps://login.okta.com/?SAMLRequest=fc%2B7CsJAEAXQXvAflu1NNJUMeZBGELTx1a%2FrYILJTtyZGD%2FfSBRiYzlw77lMnD3rSj3Qc0ku0YtgrhU6S5fSXRN9PKxmS52l00nMpq6iBvJWCrfDe4ss6vStRe9aDzmGIZfo1jsgwyWDMzUyiIV9vt1AH4XGk5ClSvewUgMNa%2BYW%2FVj5jxhm9NLP67QQaSAMu64L6CYmsFSHlnzT4ZlLwTgcL6Sf8%2FeX9AU%3D) to your Okta Developer account (or [sign up](https://developer.okta.com/signup/) if you don’t have an account) and navigate to **Applications** > **Add Application**. Click **Web** and click **Next**. Give the app a name you’ll remember, and specify `http://localhost:8080/login/oauth2/code/okta` as a Login redirect URI. Click **Done**, then click **Edit** to edit General Settings. Add `http://localhost:3000` and `http://localhost:8080` as Logout redirect URIs, then click **Save**. 
+[Log in](https://login.okta.com/?SAMLRequest=fc%2B7CsJAEAXQXvAflu1NNJUMeZBGELTx1a%2FrYILJTtyZGD%2FfSBRiYzlw77lMnD3rSj3Qc0ku0YtgrhU6S5fSXRN9PKxmS52l00nMpq6iBvJWCrfDe4ss6vStRe9aDzmGIZfo1jsgwyWDMzUyiIV9vt1AH4XGk5ClSvewUgMNa%2BYW%2FVj5jxhm9NLP67QQaSAMu64L6CYmsFSHlnzT4ZlLwTgcL6Sf8%2FeX9AU%3Dhttps://login.okta.com/?SAMLRequest=fc%2B7CsJAEAXQXvAflu1NNJUMeZBGELTx1a%2FrYILJTtyZGD%2FfSBRiYzlw77lMnD3rSj3Qc0ku0YtgrhU6S5fSXRN9PKxmS52l00nMpq6iBvJWCrfDe4ss6vStRe9aDzmGIZfo1jsgwyWDMzUyiIV9vt1AH4XGk5ClSvewUgMNa%2BYW%2FVj5jxhm9NLP67QQaSAMu64L6CYmsFSHlnzT4ZlLwTgcL6Sf8%2FeX9AU%3D) to your Okta Developer account (or [sign up](https://developer.okta.com/signup/) if you don't have an account) and navigate to **Applications** > **Add Application**. Click **Web** and click **Next**. Give the app a name you'll remember, and specify `http://localhost:8080/login/oauth2/code/okta` as a Login redirect URI. Click **Done**, then click **Edit** to edit General Settings. Add `http://localhost:3000` and `http://localhost:8080` as Logout redirect URIs, then click **Save**. 
 
 Copy and paste the URI of your default authorization server, client ID, and the client secret into `src/main/resources/application.yml`. Create this file, and you can delete the `application.properties` file in the same directory.
 
