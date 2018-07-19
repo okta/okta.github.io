@@ -1151,7 +1151,7 @@ Collection<Group> groups(Principal principal) {
 
 @PostMapping("/group")
 ResponseEntity<Group> createGroup(@Valid @RequestBody Group group,
-                                 @AuthenticationPrincipal OAuth2User principal) throws URISyntaxException {
+                                  @AuthenticationPrincipal OAuth2User principal) throws URISyntaxException {
     log.info("Request to create group: {}", group);
     Map<String, Object> details = principal.getAttributes();
     String userId = details.get("sub").toString();
@@ -1507,7 +1507,7 @@ To build and package your React app with Maven, you can use the [frontend-maven-
 
 After adding this, you should be able to run `./mvnw -Pprod` and your app see your app running on `http://localhost:8080`. 
 
-{% img blog/spring-boot-2-react/localhost-8080.png alt:"http://localhost:8080" width:"800" %}{: .center-image }
+{% img blog/spring-boot-2-react/localhost-8080.png alt:"App Running with Maven" width:"800" %}{: .center-image }
 
 ## Spring Security's OAuth vs. OIDC Support
 
