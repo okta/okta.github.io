@@ -31,9 +31,17 @@ then
     exit ${BUILD_FAILURE};
 fi
 
-# Run Lint checker
+# Run markdown lint checker
+if ! npm run markdown-lint;
+then
+    echo "Failed markdown lint"
+    exit ${BUILD_FAILURE}
+fi
+
+# Run /dist lint checker
 if ! npm run post-build-lint;
 then
+    echo "Failed post-build-lint"
     exit ${BUILD_FAILURE}
 fi
 

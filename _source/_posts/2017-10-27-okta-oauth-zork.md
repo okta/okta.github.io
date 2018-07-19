@@ -7,26 +7,26 @@ tags: [oauth, oauth2, oauth2.0, oauth 2.0, OpenID, OpenID Connect, oidc, spring,
 
 {% img blog/okta-oauth-zork/zork.jpg alt:"Default AS" width:"150" align:"right" %}
 
-In the early ‘80s, some of the best “video” games were text-based adventures. These games would print out descriptive text of your surroundings and you would interact with the game using simple, but natural language commands like: “go north” or “take sword”. Fast forward some 30 years and a specification for an authorization framework called [OAuth 2.0](https://oauth.net/2/) was published. This framework allows an application to receive a token from an external party (like [Okta](https://okta.com)) that indicates a user is authorized to use the application. What do these two things have in common? Absolutely nothing. But, I thought it would be fun to mash them together to demonstrate how OAuth works by playing a text-based game.
+In the early '80s, some of the best "video" games were text-based adventures. These games would print out descriptive text of your surroundings and you would interact with the game using simple, but natural language commands like: "go north" or "take sword". Fast forward some 30 years and a specification for an authorization framework called [OAuth 2.0](https://oauth.net/2/) was published. This framework allows an application to receive a token from an external party (like [Okta](https://okta.com)) that indicates a user is authorized to use the application. What do these two things have in common? Absolutely nothing. But, I thought it would be fun to mash them together to demonstrate how OAuth works by playing a text-based game.
 
-[Infocom](http://www.infocom-if.org/company/company.html) was a popular producer of text-based games and they standardized a file format and interpreter for them called [zMachine](https://en.wikipedia.org/wiki/Z_machine). There’s a great [zMachine interpreter written in Java](http://zmpp.sourceforge.net/). I incorporated this into a Spring Boot / Spring Security application that interacts with Okta for OAuth so that you can play [Zork](https://en.wikipedia.org/wiki/Zork) - one of the most iconic of these games. The application is available on the [Okta Developer Github account](https://github.com/oktadeveloper/okta-zork-oauth-example).
+[Infocom](http://www.infocom-if.org/company/company.html) was a popular producer of text-based games and they standardized a file format and interpreter for them called [zMachine](https://en.wikipedia.org/wiki/Z_machine). There's a great [zMachine interpreter written in Java](http://zmpp.sourceforge.net/). I incorporated this into a Spring Boot / Spring Security application that interacts with Okta for OAuth so that you can play [Zork](https://en.wikipedia.org/wiki/Zork) - one of the most iconic of these games. The application is available on the [Okta Developer Github account](https://github.com/oktadeveloper/okta-zork-oauth-example).
 
-Let’s jump right in so you can see it in action and then we’ll break down how everything works.
+Let's jump right in so you can see it in action and then we'll break down how everything works.
 
 ## Play Zork in 3 Clicks
 
 Navigate to: [https://okta-oidc-fun.herokuapp.com](https://okta-oidc-fun.herokuapp.com). Click `token`. Then, click the link at the bottom of the page. (It starts with: `https://micah.okta.com/oauth2/aus2yrcz7aMrmDAKZ1t7/v1/authorize`.)
 
-You should see an `Access Token` and a button that says: `Game With Your Access Token`. Click that. Now, you’ll be at the page where you can play Zork!
+You should see an `Access Token` and a button that says: `Game With Your Access Token`. Click that. Now, you'll be at the page where you can play Zork!
 
 {% img blog/okta-oauth-zork/token.png alt:"Default AS" width:"700" %}{: .center-image }
 
 {% img blog/okta-oauth-zork/zork1.png alt:"Default AS" width:"700" %}{: .center-image }
 
 
-Enter a command in the text field and hit enter to send it. You should see a response from the game in JSON form above it. Try clicking `Use Access Token` and sending a command. You’ll get back a `Unauthorized` message.
+Enter a command in the text field and hit enter to send it. You should see a response from the game in JSON form above it. Try clicking `Use Access Token` and sending a command. You'll get back a `Unauthorized` message.
 
-Without the presence of the access token, the application can’t tell that you’re an authorized game player and rejects the request.
+Without the presence of the access token, the application can't tell that you're an authorized game player and rejects the request.
 
 In the spirit of the game, you can choose your own adventure:
 
@@ -36,13 +36,13 @@ In the spirit of the game, you can choose your own adventure:
 
 ## What the Heck is OAuth?
 
-My colleague at Okta wrote a great in-depth [post that defines what OAuth is and is not](https://developer.okta.com/blog/2017/06/21/what-the-heck-is-oauth). Here, we’ll cover the important points.
+My colleague at Okta wrote a great in-depth [post that defines what OAuth is and is not](https://developer.okta.com/blog/2017/06/21/what-the-heck-is-oauth). Here, we'll cover the important points.
 
-OAuth is a standard that apps can use to provide client applications with “secure delegated access”. It works over HTTPS and authorizes devices, APIs, servers, and applications with access tokens rather than credentials.
+OAuth is a standard that apps can use to provide client applications with "secure delegated access". It works over HTTPS and authorizes devices, APIs, servers, and applications with access tokens rather than credentials.
 
-An application obtains an access token through an interaction that usually involves authentication with an external provider. This is often referred to as *federated identity*. This token then represents you making it so that you don’t have to provide your username and password to the external provider on every request. Tokens used in this way are called `bearer` tokens. This is because all that’s needed to gain access to the application is to present the token. That’s why it’s important that applications safeguard tokens and don’t *leak* them accidentally.
+An application obtains an access token through an interaction that usually involves authentication with an external provider. This is often referred to as *federated identity*. This token then represents you making it so that you don't have to provide your username and password to the external provider on every request. Tokens used in this way are called `bearer` tokens. This is because all that's needed to gain access to the application is to present the token. That's why it's important that applications safeguard tokens and don't *leak* them accidentally.
 
-Note, there are two version of OAuth: [1.0a](https://oauth.net/core/1.0a/) and [2.0](https://oauth.net/2/). Version 2.0 is the most commonly used nowadays. Anywhere throughout this post that you see OAuth, I’m talking about OAuth 2.0.
+Note, there are two version of OAuth: [1.0a](https://oauth.net/core/1.0a/) and [2.0](https://oauth.net/2/). Version 2.0 is the most commonly used nowadays. Anywhere throughout this post that you see OAuth, I'm talking about OAuth 2.0.
 
 Once you establish trust with an external provider and that provider is issuing tokens, you can easily make the leap to single sign-on (SSO). For instance, you can have two applications backed by the same external provider for authentication. Both applications can make use of an access token from the external provider without the user having to reauthenticate.
 
@@ -53,31 +53,31 @@ There are a number of *authorization flows* used in OAuth. This post focuses on 
 3. Upon successful authentication, the user is redirected back to the application with an access token
 4. The application verifies the access token and if valid, allows the user access to the protected resource
 
-This flow is what’s happening in the previous section. You might be saying to yourself, “But, wait - I didn’t have to login”. Well, that’s because in an effort to keep the example super simple, the application establishes a session in the background using a fixed username and password.
+This flow is what's happening in the previous section. You might be saying to yourself, "But, wait - I didn't have to login". Well, that's because in an effort to keep the example super simple, the application establishes a session in the background using a fixed username and password.
 
-Here’s what’s happening behind the scenes as you navigate through the [OIDC Playground](https://okta-oidc-fun.herokuapp.com) above:
+Here's what's happening behind the scenes as you navigate through the [OIDC Playground](https://okta-oidc-fun.herokuapp.com) above:
 
 {% img blog/okta-oauth-zork/okta-oidc-fun-zork.png alt:"Default AS" width:"700" %}{: .center-image }
 
-You may be wondering why the first column in this sequence diagram is labeled with OIDC. That stands for [OpenID Connect](http://openid.net/connect/). The truth is, the application running on Okta is an OIDC application. A full treatment of OIDC is outside the scope of this post. All you need to know for now is that OIDC is a superset of OAuth 2.0. That is, if it’s an OIDC app, OAuth is supported.
+You may be wondering why the first column in this sequence diagram is labeled with OIDC. That stands for [OpenID Connect](http://openid.net/connect/). The truth is, the application running on Okta is an OIDC application. A full treatment of OIDC is outside the scope of this post. All you need to know for now is that OIDC is a superset of OAuth 2.0. That is, if it's an OIDC app, OAuth is supported.
 
-The `/authorize…` line kicks off the OAuth interaction. The user authenticates with Okta and, if successful, Okta redirects back with an access token.
+The `/authorize...` line kicks off the OAuth interaction. The user authenticates with Okta and, if successful, Okta redirects back with an access token.
 
-The `OIDC-FUN` app then makes an [ajax](https://en.wikipedia.org/wiki/Ajax_(programming)) request to the `ZORK-OAUTH` app using the access token to represent the user’s identity. In this way, we are achieving SSO of a sort. The Zork app verifies the token and, if correct, extracts the user identity information and processes the command (if any) that was sent. It also uses the user identity information to save the game state back to Okta.
+The `OIDC-FUN` app then makes an [ajax](https://en.wikipedia.org/wiki/Ajax_(programming)) request to the `ZORK-OAUTH` app using the access token to represent the user's identity. In this way, we are achieving SSO of a sort. The Zork app verifies the token and, if correct, extracts the user identity information and processes the command (if any) that was sent. It also uses the user identity information to save the game state back to Okta.
 
 The `ZORK-OAUTH` app interacts with Okta at startup. Those are the top two lines. Based on your configuration, a [JSON Web Key Set](https://tools.ietf.org/html/rfc7517) is retrieved. The JSON response is an array of available public keys configured in Okta. This enables verifying the cryptographically signed access token (in the form of a JWT) down the line. This is not explicitly part of the OAuth 2.0 specification, but it is part of the [OIDC Discovery](https://openid.net/specs/openid-connect-discovery-1_0.html) specification that Okta has implemented.
 
-Let’s set up your very own Okta Developer Account and deploy the Zork application to it. You can see the OAuth implicit flow fully in action. Then, we’ll dig into the code.
+Let's set up your very own Okta Developer Account and deploy the Zork application to it. You can see the OAuth implicit flow fully in action. Then, we'll dig into the code.
 
 ## Set Up Your Okta Developer Account
-In this section, we’ll get everything set up in Okta so you can deploy the [Okta Zork Auth](https://github.com/oktadeveloper/okta-zork-oauth-example) app. Here’s a summary of the steps:
+In this section, we'll get everything set up in Okta so you can deploy the [Okta Zork Auth](https://github.com/oktadeveloper/okta-zork-oauth-example) app. Here's a summary of the steps:
 
 1. Sign up for a free Okta developer account
 2. Add a web application that supports the OAuth implicit flow
 3. Update the Okta profile schema to support saving game state
 4. Create an API token for saving game state to a user profile
 
-Navigate to [https://developer.okta.com](https://developer.okta.com) to set up your developer account. You’ll receive a confirmation email with a link. Follow the link to finish setup. You’ll then be at your Admin Console.
+Navigate to [https://developer.okta.com](https://developer.okta.com) to set up your developer account. You'll receive a confirmation email with a link. Follow the link to finish setup. You'll then be at your Admin Console.
 
 Click **Applications** along the top menu and click **Add Application**.
 
@@ -89,29 +89,29 @@ Later, you'll be deploying the Zork application to Heroku. Fill in the values fo
 
 {% img blog/okta-oauth-zork/applications-3.png alt:"Default AS" width:"700" %}{: .center-image }
 
-If you scroll to the bottom, you’ll see a **Client ID**. Save this value somewhere as we’ll be using it later to configure Heroku.
+If you scroll to the bottom, you'll see a **Client ID**. Save this value somewhere as we'll be using it later to configure Heroku.
 
-As you make your way through Zork, the application saves your game state. This makes it so that when you come back to the game, you can pick up where you left off. Rather than add another moving part to the application in the form of a database, I took advantage of Okta’s profile schema capability. In short, you can add any number of key/value pairs to the default user profile. In this case, I added `zMachineData`. It’s a string type field and the app will store your game state as a base64-encoded string. To add that profile schema attribute, do the following:
+As you make your way through Zork, the application saves your game state. This makes it so that when you come back to the game, you can pick up where you left off. Rather than add another moving part to the application in the form of a database, I took advantage of Okta's profile schema capability. In short, you can add any number of key/value pairs to the default user profile. In this case, I added `zMachineData`. It's a string type field and the app will store your game state as a base64-encoded string. To add that profile schema attribute, do the following:
 
 Select **Users** -> **Profile Editor** from the main menu of your Admin Console. Click **Profile** next to **User**.
 
 {% img blog/okta-oauth-zork/profile-2.png alt:"Default AS" width:"700" %}{: .center-image }
 
-Click **Add Attribute**. Enter `zMachineData` for the **Display name** and **Variable name** fields. Click **Save**. That’s all there is to it! Now, every user in your tenant has a `zMachineData` attribute on their profile.
+Click **Add Attribute**. Enter `zMachineData` for the **Display name** and **Variable name** fields. Click **Save**. That's all there is to it! Now, every user in your tenant has a `zMachineData` attribute on their profile.
 
-The last thing we need to do is create an API token. This enables the application to save the game state to the authenticated user’s profile.
+The last thing we need to do is create an API token. This enables the application to save the game state to the authenticated user's profile.
 
 Choose **API** -> **Tokens** from the main menu of your Admin Console. Click **Create Token**. Give it a name and click **Create Token**.
 
 {% img blog/okta-oauth-zork/token-4.png alt:"Default AS" width:"700" %}{: .center-image }
 
-Save the token value somewhere. You’ll need it later when you deploy the app to Heroku. The token value is only ever showed once on this screen, so make sure you save it.
+Save the token value somewhere. You'll need it later when you deploy the app to Heroku. The token value is only ever showed once on this screen, so make sure you save it.
 
-Now that you’ve got everything setup on the Okta, side. Let’s deploy the application to your own Heroku instance. After that, we’ll dig into the code.
+Now that you've got everything setup on the Okta, side. Let's deploy the application to your own Heroku instance. After that, we'll dig into the code.
 
 ## Deploy Okta Zork OAuth to Heroku
 
-Heroku makes it exceedingly easy to deploy Spring Boot applications. In fact, they even provide a handy deploy button where all you have to do is log in to Heroku, enter some configuration parameters, and go! If you haven’t already, go and [create a Heroku account](https://www.heroku.com/). It’s free.
+Heroku makes it exceedingly easy to deploy Spring Boot applications. In fact, they even provide a handy deploy button where all you have to do is log in to Heroku, enter some configuration parameters, and go! If you haven't already, go and [create a Heroku account](https://www.heroku.com/). It's free.
 
 Next, click this:
 
@@ -128,7 +128,7 @@ You'll need some information to properly configure the app (you can leave the `O
 | OKTA_AUDIENCE        | api://default          |
 | OKTA_AUTH_SERVER_ID  | default                |
 
-Click **Deploy App**. Once it’s finished deploying, you should be able to browse to: http://<App Name>.herokuapp.com and see the app in action using your own users from your Okta tenant.
+Click **Deploy App**. Once it's finished deploying, you should be able to browse to: http://<App Name>.herokuapp.com and see the app in action using your own users from your Okta tenant.
 
 {% img blog/okta-oauth-zork/zork2.png alt:"Default AS" width:"700" %}{: .center-image }
 
@@ -136,9 +136,9 @@ Click **Deploy App**. Once it’s finished deploying, you should be able to brow
 
 The code for the Zork application is hosted on the [Okta Developer Github](https://github.com/oktadeveloper/okta-zork-oauth-example).
 
-The great thing is that this is just a vanilla Spring Boot with Spring Security app. It uses the Okta Spring Security starter, which hooks into the normal mechanisms of the Spring framework. The end result is that there’s is *no* additional code as relates to authentication. And, there’s only a few lines of Okta-specific code for saving game state. Let’s take a look.
+The great thing is that this is just a vanilla Spring Boot with Spring Security app. It uses the Okta Spring Security starter, which hooks into the normal mechanisms of the Spring framework. The end result is that there's is *no* additional code as relates to authentication. And, there's only a few lines of Okta-specific code for saving game state. Let's take a look.
 
-The home page has a **Zork It Up!** link. Here’s a snippet from `home.html`
+The home page has a **Zork It Up!** link. Here's a snippet from `home.html`
 
 ```html
 <a th:href="@{${userAuthorizationUri}(
@@ -151,13 +151,13 @@ The home page has a **Zork It Up!** link. Here’s a snippet from `home.html`
 )}" class="btn btn-primary">Zork It Up!</a>
 ```
 
-It’s using values pulled out of the model to substitute in for the Thymeleaf template. Thymeleaf has a handy format for specifying a url with query parameters:
+It's using values pulled out of the model to substitute in for the Thymeleaf template. Thymeleaf has a handy format for specifying a url with query parameters:
 
-`<a th:href=”@{URL(param1=value1, param2=value2, ...)}”>...</a>`
+`<a th:href="@{URL(param1=value1, param2=value2, ...)}">...</a>`
 
 This ends up being rendered as:
 
-`<a href=”URL?param1=value1&param2=value2”>...</a>`
+`<a href="URL?param1=value1&param2=value2">...</a>`
 
 And, as you can see above, the URL can be a variable reference.
 
@@ -186,11 +186,11 @@ nonce=e9fad6d6-202a-4f01-a740-8679c4092ec1&
 state=d8c6d98f-d302-4afb-9624-b12500085a12
 ```
 
-This is the “front door” to an OAuth implicit flow. The `response_type` field indicates that an access token will be returned. The `redirect_uri` field indicates where Okta will redirect back to upon successful authentication.
+This is the "front door" to an OAuth implicit flow. The `response_type` field indicates that an access token will be returned. The `redirect_uri` field indicates where Okta will redirect back to upon successful authentication.
 
-Note the `scope` field. It’s set to `openid`. In OIDC a `scope` field is required and at least `openid` must be present as a scope. For more information on OIDC, check out my three-part series on the [Okta Blog](https://developer.okta.com/blog/2017/07/25/oidc-primer-part-1).
+Note the `scope` field. It's set to `openid`. In OIDC a `scope` field is required and at least `openid` must be present as a scope. For more information on OIDC, check out my three-part series on the [Okta Blog](https://developer.okta.com/blog/2017/07/25/oidc-primer-part-1).
 
-Assuming authentication is successful and Okta redirects back to your application, there’s some javascript that takes over to display the access token and a command using [HTTPie](https://httpie.org) to interact with the game.
+Assuming authentication is successful and Okta redirects back to your application, there's some javascript that takes over to display the access token and a command using [HTTPie](https://httpie.org) to interact with the game.
 
 ```javascript
 var showToken = function (token) {
@@ -218,7 +218,7 @@ https://okta-oauth-zork.herokuapp.com/v1/game \
 Authorization:"Bearer eyJhbGciOiJS..." \
 command="look"
 ```
-Give it a try. You’ll see output from the game that’s something like this:
+Give it a try. You'll see output from the game that's something like this:
 
 ```javascript
 {
@@ -260,7 +260,7 @@ HTTP/1.1 401
 }
 ```
 
-This is Spring Security doing its job. Let’s take a look at this code starting with the `GameController`:
+This is Spring Security doing its job. Let's take a look at this code starting with the `GameController`:
 
 ```java
 @RequestMapping(value = VERSION + "/game", method = RequestMethod.POST)
@@ -287,9 +287,9 @@ public @ResponseBody CommandResponse command(
 }
 ```
 
-When a user hits the `/v1/game` endpoint (as we did above), this method is entered. But – hold up there – the method expects an authenticated user in the form of `Principal principal` parameter to the method. What if the user isn’t authenticated? That’s where the beauty of Spring Security comes in. If there is no authenticated user, Spring Security will not allow this method to be entered and will instead set the `401` response with the error message we saw above.
+When a user hits the `/v1/game` endpoint (as we did above), this method is entered. But – hold up there – the method expects an authenticated user in the form of `Principal principal` parameter to the method. What if the user isn't authenticated? That's where the beauty of Spring Security comes in. If there is no authenticated user, Spring Security will not allow this method to be entered and will instead set the `401` response with the error message we saw above.
 
-There’s a `Bean` in `OktaSpringBootOauthExampleApplication` the controls this behavior:
+There's a `Bean` in `OktaSpringBootOauthExampleApplication` the controls this behavior:
 
 ```java
 @Bean
@@ -312,21 +312,21 @@ By default, all paths are locked down in Spring Security. Lines 10 and 11 define
 
 The Okta Spring Security Integration makes it so that an Okta issued access token can be presented as a bearer token with the `Authorization` header and can be processed as an authenticated user.
 
-The upshot of all this is that no Okta-specific auth code is required in the controller! That’s a real bonus.
+The upshot of all this is that no Okta-specific auth code is required in the controller! That's a real bonus.
 
 These lines from `GameController` make use of the configured API Token to work with the Okta user and save the game state to the `zMachineData` profile attribute:
 
 ```java
 Client client = Clients.builder().build();
 User user = client.getUser(principal.getName());
-…
+...
 gameService.saveGameState(user);
 ```
 
 
 
 ## This is Why We Build Framework Integrations
-I initially built this example before the Okta Spring Security integration had been released. Here’s a list of dependencies that I had for the project at that point:
+I initially built this example before the Okta Spring Security integration had been released. Here's a list of dependencies that I had for the project at that point:
 
 1. spring-boot-starter-web
 2. spring-boot-starter-thymeleaf
@@ -339,9 +339,9 @@ I initially built this example before the Okta Spring Security integration had b
 9. okta-sdk-impl
 10. okta-sdk-httpclient
 
-Even with the support of `spring-security-oauth2`, there was a lot of code I needed to implement myself including: retrieval of the [discovery document](https://openid.net/specs/openid-connect-discovery-1_0.html), retrieval of the [JWKS](https://tools.ietf.org/html/rfc7517), parsing and validating the access token ([JWT](https://tools.ietf.org/html/rfc7519)), hooking up the access token to Spring Security’s SecurityContext mechanism.
+Even with the support of `spring-security-oauth2`, there was a lot of code I needed to implement myself including: retrieval of the [discovery document](https://openid.net/specs/openid-connect-discovery-1_0.html), retrieval of the [JWKS](https://tools.ietf.org/html/rfc7517), parsing and validating the access token ([JWT](https://tools.ietf.org/html/rfc7519)), hooking up the access token to Spring Security's SecurityContext mechanism.
 
-I did a major refactor of the code when the Okta Spring Security integration was released. Here’s a list of current dependencies for the project:
+I did a major refactor of the code when the Okta Spring Security integration was released. Here's a list of current dependencies for the project:
 
 1. spring-boot-starter-thymeleaf
 2. okta-spring-security-starter
@@ -361,7 +361,7 @@ This is why [we are working hard](https://www.rdegges.com/2017/authentication-st
 
 ## Put the Canary and the Bauble in the Case
 
-I hope that you’ve enjoyed learning a bit about OAuth by playing a classic text-based adventure game.
+I hope that you've enjoyed learning a bit about OAuth by playing a classic text-based adventure game.
 
 All the code, including the friendly purple deploy button can be found on the [Github repo](https://github.com/oktadeveloper/okta-zork-oauth-example).
 

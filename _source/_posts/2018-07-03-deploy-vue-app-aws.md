@@ -96,7 +96,7 @@ Homepage:  `./src/components/home.vue`
 </template>
 ```
 
-Secure Page (not secured… yet!)  `./src/components/secure.vue`
+Secure Page (not secured... yet!)  `./src/components/secure.vue`
 
 ```html
 <template>
@@ -157,7 +157,7 @@ But, this comes with a significant drawback — especially when you are deployin
 
 By using history mode, you have to take additional steps to make sure page refreshes work correctly.  You can read more about [HTML5 History Mode](https://router.vuejs.org/guide/essentials/history-mode.html#html5-history-mode). To keep things easy, I will show you a simple trick to ensure your refreshing works with AWS CloudFront.
 
-Enable history mode by modifying `./router/index.js` with the following setting. 
+Enable history mode by modifying `./router/index.js` with the following setting.
 
 ```js
 let router = new Router({
@@ -192,14 +192,14 @@ You will need an AWS account to continue beyond this point.  If you already have
 - Click **Sign Up** (or if you have signed into AWS recently choose **Sign In to the Console**)
 - If prompted, you can select "Personal" for account type
 - Complete the required information, add a payment method, and verify your phone number
-- After your account is created, you should receive a confirmation email 
+- After your account is created, you should receive a confirmation email
 - Log in!
 
 *Note:* Amazon requires you to enter a payment method before you can create your account.  All the services discussed in this article are covered under  [AWS Free Tier](https://aws.amazon.com/free/) which gives you 12 months FREE.
 
 ## Host Your App on Amazon S3
 
-Since your SPA is comprised of only static assets, we can leverage Amazon S3 (Simple Storage Service) to store and serve your files. 
+Since your SPA is comprised of only static assets, we can leverage Amazon S3 (Simple Storage Service) to store and serve your files.
 
 To get started, you will need to create a bucket.  Buckets are a logical unit of storage within S3, and you can have up to 100 buckets per AWS account by default (if you are studying for the AWS Certified Solutions Architect exam, you should know this!).  Each bucket can have its own configuration and contain unlimited files and nested folders.
 
@@ -210,7 +210,7 @@ After you log in to your AWS Console, navigate to the S3 console (you can do thi
 
 {% img blog/vue-aws/aws-vue-create-bucket.png alt:"Create S3 Bucket" width:"800" %}{: .center-image }
 
-You should now see your bucket listed.  Next, let's configure it for static website hosting.  
+You should now see your bucket listed.  Next, let's configure it for static website hosting.
 
 - Click your Bucket name and then choose the "Properties" tab.
 - Click on "Static website hosting" box
@@ -226,7 +226,7 @@ At the top of the Static website hosting box, you should see a URL for "Endpoint
 
 Yes, you should see a 403 Forbidden error!  By default, S3 bucket permissions are _deny all_.  To access your bucket's contents, you must explicitly define who can access your bucket.  These bucket permissions are called a Bucket Policy.
 
-To add a Bucket Policy, click on the "Permissions" tab and click "Bucket Policy" button at the top.  The following policy allows anyone to read any file in your bucket.  Make sure to replace "YOUR-BUCKET-NAME" with your actual bucket name.  
+To add a Bucket Policy, click on the "Permissions" tab and click "Bucket Policy" button at the top.  The following policy allows anyone to read any file in your bucket.  Make sure to replace "YOUR-BUCKET-NAME" with your actual bucket name.
 
 ```json
 {
@@ -245,7 +245,7 @@ To add a Bucket Policy, click on the "Permissions" tab and click "Bucket Policy"
 
 Bucket Policies can be quite complex and powerful.  But, the main parts of the policy that you should be aware of are:
 
-- `"Effect": "Allow"` 
+- `"Effect": "Allow"`
 - `"Principal": "*"` - Who the policy covers ("\*" implies everyone)
 - `"Action": "s3:GetObject"` - The action allowed (s3:GetObject allows  read-only access to all objects in your bucket)
 - `"Resource": "arn:aws:s3:::YOUR-BUCKET-NAME/*"` - Which bucket and objects the policy is about.
@@ -254,7 +254,7 @@ Click "Save" on the Bucket Policy editor.  You should notice a new error is disp
 
 {% img blog/vue-aws/aws-vue-8.png alt:"This bucket has public access" width:"800" %}{: .center-image }
 
-This warning is good advice and a rule of thumb for all S3 buckets.  But, since our bucket is exclusively used to host a static website, we don't have to worry about anyone accessing a file within the bucket they shouldn't. 
+This warning is good advice and a rule of thumb for all S3 buckets.  But, since our bucket is exclusively used to host a static website, we don't have to worry about anyone accessing a file within the bucket they shouldn't.
 
 Tab back to your browser and refresh the endpoint.  You should now see a 404 Not Found error.  This error is much easier to resolve because you don't have any files in your bucket yet.
 
@@ -334,7 +334,7 @@ While you wait, you need to configure your distribution to handle vue-router's h
 
 These error page configurations will instruct CloudFront to respond to any 404/403 with `./index.html`.  Voila!
 
-Click on the "General" tab, and you should see an entry for "Domain Name".  The Domain Name is the publicly accessible URL for your distribution.  After the status of your new distribution is Deployed, paste the URL into your browser. 
+Click on the "General" tab, and you should see an entry for "Domain Name".  The Domain Name is the publicly accessible URL for your distribution.  After the status of your new distribution is Deployed, paste the URL into your browser.
 
 Test to make sure the history mode works by navigating to the secure page and refreshing your browser.
 
@@ -653,7 +653,7 @@ functions:
   api:
     handler: handler.handler
     events:
-      - http: 
+      - http:
           path: "{proxy+}"
           method: ANY
           cors: true

@@ -112,7 +112,7 @@ Hover over the **Classic UI** button at the top right of the page and select the
 
 ## Install Python and Flask Dependencies
 
-The first thing you need to do in order to initialize your Flask app is install all of the required dependencies. If you don't have Python installed on your computer already, please go [install it now](https://www.python.org/downloads/). 
+The first thing you need to do in order to initialize your Flask app is install all of the required dependencies. If you don't have Python installed on your computer already, please go [install it now](https://www.python.org/downloads/).
 
 **NOTE**: I also strongly recommend you get familiar with [pipenv](https://docs.pipenv.org/) when you get some time. It's a great tool that makes managing Python dependencies very simple.
 
@@ -256,7 +256,7 @@ Let's take a look at one interesting part of the template.
 ```
 {% endraw %}
 
-Anything in a Jinja2 tag (the {% raw %}`{% … %}`{% endraw %} stuff) will be compiled by Flask before being shown to the user. In the example above, we're basically telling Flask that if the object `g.user` exists, we should render a dashboard and logout link in the navbar, but if no `g.user` object exists, we should show a login button instead.
+Anything in a Jinja2 tag (the {% raw %}`{% ... %}`{% endraw %} stuff) will be compiled by Flask before being shown to the user. In the example above, we're basically telling Flask that if the object `g.user` exists, we should render a dashboard and logout link in the navbar, but if no `g.user` object exists, we should show a login button instead.
 
 We're doing this because eventually we're going to have the user's account accessible via the `g.user` object and we want the navbar to be smart in regards to what the user sees.
 

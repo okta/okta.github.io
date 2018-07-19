@@ -11,11 +11,11 @@ tweets:
 
 Redundancy is a big deal when scaling websites. However, deploying and managing clusters of containers can quickly become untenable. While there are a few container orchestration tools out there like Kubernetes and Mesosphere (DC/OS), Docker has its own called Docker Swarm Mode. Swarm Mode allows you to deploy, scale, and manage clusters of Docker containers from a single command window.
 
-In this tutorial, I’ll show you how to create a swarm, create some virtual machines that will be part of the swarm, deploy containers to the swarm, and scale those containers horizontally. Let’s get started!
+In this tutorial, I'll show you how to create a swarm, create some virtual machines that will be part of the swarm, deploy containers to the swarm, and scale those containers horizontally. Let's get started!
 
 ## Install Docker Dependencies
 
-For this tutorial, you'll need Docker installed. I am using the latest version of Docker tools (17.12.0-ce). To ensure you have it, run `docker -v` in your command shell and you should see a version close to that. If you don’t have Docker installed, you can get download it from the [Docker website](https://www.docker.com/get-docker).
+For this tutorial, you'll need Docker installed. I am using the latest version of Docker tools (17.12.0-ce). To ensure you have it, run `docker -v` in your command shell and you should see a version close to that. If you don't have Docker installed, you can get download it from the [Docker website](https://www.docker.com/get-docker).
 
 You'll also need some sort of virtual machine software. VirtualBox from Oracle is free to download at <https://www.virtualbox.org/wiki/Downloads> and works on most operating systems.
 
@@ -25,7 +25,7 @@ If you are on Windows, make sure you are using Linux containers by right-clickin
 
 To make this a little more realistic, let's use Docker Machine. If you are on Mac or Windows, Docker Machine is installed with Docker. If you are on a Linux machine you may have to install it by following [these instructions](https://docs.docker.com/machine/install-machine/).
 
-Docker Machine is an easy way to create virtual Docker hosts, aka virtual machines with Docker already installed on them. Docker Machine uses whatever virtualization software you have installed to create these VMs. In this case, assuming you’ve installed VirtualBox, that is what Docker Machine will use to provision VMs. You should be able to see you have no virtual machines currently managed by Docker Machine by running `docker-machine ls` at your command prompt. You should see some output like this:
+Docker Machine is an easy way to create virtual Docker hosts, aka virtual machines with Docker already installed on them. Docker Machine uses whatever virtualization software you have installed to create these VMs. In this case, assuming you've installed VirtualBox, that is what Docker Machine will use to provision VMs. You should be able to see you have no virtual machines currently managed by Docker Machine by running `docker-machine ls` at your command prompt. You should see some output like this:
 
 ```bash
 NAME   ACTIVE   DRIVER   STATE   URL   SWARM   DOCKER   ERRORS
@@ -49,8 +49,8 @@ Once that finishes, you can ensure both were created successfully as well as get
 
 ```bash
 NAME   ACTIVE   DRIVER       STATE     URL                         SWARM   DOCKER        ERRORS
-m1     -        virtualbox   Running   tcp://192.168.99.100:2376           v18.01.0-ce   
-w1     -        virtualbox   Running   tcp://192.168.99.101:2376           v18.01.0-ce   
+m1     -        virtualbox   Running   tcp://192.168.99.100:2376           v18.01.0-ce
+w1     -        virtualbox   Running   tcp://192.168.99.101:2376           v18.01.0-ce
 ```
 
 ## Initialize Docker Swarm Mode
@@ -135,7 +135,7 @@ If you are not already, ssh into the "m1" node.
 docker-machine ssh m1
 ```
 
-In order to visualize what Docker Swarm is doing, you'll use a visualizer created by Docker called [docker-swarm-visualizer](https://github.com/dockersamples/docker-swarm-visualizer). From the command line of m1, run: 
+In order to visualize what Docker Swarm is doing, you'll use a visualizer created by Docker called [docker-swarm-visualizer](https://github.com/dockersamples/docker-swarm-visualizer). From the command line of m1, run:
 
 ```bash
  docker run -it -d -p 8080:8080 -v /var/run/docker.sock:/var/run/docker.sock dockersamples/visualizer
@@ -167,7 +167,7 @@ You can see the services starting up in the visualizer. Docker will spread the s
 
 {% img blog/docker-swarm/web-service-scaled.png alt:"Web Service Scaled" %}{: .center-image }
 
-You can scale the service anyway you like: up or down by simply specifying the number of instances of the service you want running. You can check the service by running 
+You can scale the service anyway you like: up or down by simply specifying the number of instances of the service you want running. You can check the service by running
 
 ```bash
 docker service list
@@ -188,7 +188,7 @@ You are now ready to go conquer some of your own Docker Swarms now!
 
 ## Learn More
 
-If you enjoyed this post, I’d encourage you to learn more about  learn more about [Docker Machine](https://docs.docker.com/machine). You can specify other spreading techniques for the swarm, and even specify that Docker only deploy these services to specific nodes in the cluster based on labels. Learn more about Swarm from its [Product Documentation](https://docs.docker.com/swarm). Or, if you’d like to learn more about what you can do with Docker, check out the other posts in this series:
+If you enjoyed this post, I'd encourage you to learn more about  learn more about [Docker Machine](https://docs.docker.com/machine). You can specify other spreading techniques for the swarm, and even specify that Docker only deploy these services to specific nodes in the cluster based on labels. Learn more about Swarm from its [Product Documentation](https://docs.docker.com/swarm). Or, if you'd like to learn more about what you can do with Docker, check out the other posts in this series:
 
   * [A Gentle Introduction](/blog/2017/05/10/developers-guide-to-docker-part-1)
   * [The Dockerfile](/blog/2017/08/28/developers-guide-to-docker-part-2)

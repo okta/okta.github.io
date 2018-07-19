@@ -294,7 +294,7 @@ When you render this page, you'll see the invoice creation form:
 
 {% img blog/node-invoicing-service/crypto-invoicer-form.png alt:"Crypto Invoicer Form" width:"620" %}{: .center-image }
 
-And… If you've generated any past invoices, you'll see them listed below:
+And... If you've generated any past invoices, you'll see them listed below:
 
 {% img blog/node-invoicing-service/crypto-invoicer-list.png alt:"Crypto Invoicer List" width:"620" %}{: .center-image }
 

@@ -9,13 +9,13 @@ tweets:
     - "9 Must-See Talks at @OktaDev's #IterateConf"
 ---
 
-This year on February 27th my team at Okta will host our first ever developer conference, [Iterate](https://www.iterateconf.io/). It will be held in downtown San Francisco at [Bespoke](http://www.bespokesf.co/) and has an incredible lineup of speakers from around the world. I am beyond excited to see some of the things that will be discussed. In this post I’d like to share with you the nine sessions I’m most looking forward to:
+This year on February 27th my team at Okta will host our first ever developer conference, [Iterate](https://www.iterateconf.io/). It will be held in downtown San Francisco at [Bespoke](http://www.bespokesf.co/) and has an incredible lineup of speakers from around the world. I am beyond excited to see some of the things that will be discussed. In this post I'd like to share with you the nine sessions I'm most looking forward to:
 
 ## 1. Our Opening Keynote with Jeff Atwood
 
 I wouldn't miss a chance to see Jeff Atwood talk about building great software. Not only has he developed the single most important tool in my coding arsenal ([Stack Overflow](https://stackoverflow.com/)), but his [blog](https://blog.codinghorror.com/) has been on my reading list for the last 10+ years! I even had a Coding Horror laptop sticker at one point. He's a man of outspoken opinions. Even though I don't agree with all of them, I respect his opinion and will definitely be fighting for one of the front-row seats to his talk!
 
-Along with the opening keynote, Iterate will have two tracks, Build and Evolve. Build is all about, you guessed it, building stuff, and Evolve is about being the best programmer and productive human you can be. In our Build track, these are the sessions I’m excited for:
+Along with the opening keynote, Iterate will have two tracks, Build and Evolve. Build is all about, you guessed it, building stuff, and Evolve is about being the best programmer and productive human you can be. In our Build track, these are the sessions I'm excited for:
 
 ## 2. API Throwdown: RPC vs. REST vs. GraphQL
 
@@ -33,7 +33,7 @@ Charity Majors is a Parse alum as well as the founder, coder, and CEO of [Honeyc
 
 Founder and CEO at [Tomitribe](http://www.tomitribe.com/) as well as a hardcore Java developer, David Blevins is going to talk about OAuth 2.0, JWTs, and bleeding-edge security for REST services. Now I work for a security company, so this is right up my alley, but I am also a bit of an API freak (and REST fanboy) so I will *definitely* not miss this talk!
 
-Huh… That’s actually all of the sessions in the Build track. I guess that means it’s 100% worth checking out! Now, let’s walk through the sessions in the Evolve track that seem the most awesome:
+Huh... That's actually all of the sessions in the Build track. I guess that means it's 100% worth checking out! Now, let's walk through the sessions in the Evolve track that seem the most awesome:
 
 ## 6. How to Be a Passionate Programmer
 
@@ -56,6 +56,6 @@ Craig Kerstiens is a Heroku alum, Python developer, Postgres expert (*cough* fan
 
 I sometimes feel like not such a productive person. I get distracted easily and it can be hard to get back on track. But the bigger problem is: how can I measure my productivity and efficacy? On the days I *do* feel productive, there nothing really definitively saying I was more productive. Even if I got *more things done*, were they smaller or easier? That's what Mahdi Yusuf is going to talk about. How to measure your efficiency, so you can use that measurement to improve. I'm so there!
 
-So, those are the nine tracks that I will **not** be missing at our inaugural [Iterate Conference](https://www.iterateconf.io/)! It’s possible that they’re also all of the sessions at Iterate. Thank goodness we’ll have the video up on our [YouTube channel](https://www.youtube.com/channel/UC5AMiWqFVFxF1q9Ya1FuZ_Q) immediately after the event!
+So, those are the nine tracks that I will **not** be missing at our inaugural [Iterate Conference](https://www.iterateconf.io/)! It's possible that they're also all of the sessions at Iterate. Thank goodness we'll have the video up on our [YouTube channel](https://www.youtube.com/channel/UC5AMiWqFVFxF1q9Ya1FuZ_Q) immediately after the event!
 
-And, now that I’ve shared mine, I have to know, what talks are on **your** list? Reply in the comments, or hit me up on Twitter [@leebrandt](https://twitter.com/leebrandt). You should also follow my team [@oktadev](https://twitter.com/OktaDev) for some day-of goodness.
+And, now that I've shared mine, I have to know, what talks are on **your** list? Reply in the comments, or hit me up on Twitter [@leebrandt](https://twitter.com/leebrandt). You should also follow my team [@oktadev](https://twitter.com/OktaDev) for some day-of goodness.

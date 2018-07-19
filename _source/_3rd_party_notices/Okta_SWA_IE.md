@@ -372,7 +372,7 @@ _Mechanize_
 
   |VERSION (IF ANY):||
   |-
-  |BRIEF DESCRIPTION:|   Stateful programmatic web browsing in Python, after Andy Lester’s Perl module.|
+  |BRIEF DESCRIPTION:|   Stateful programmatic web browsing in Python, after Andy Lester's Perl module.|
   |LICENSE:|             ZPL 2.1 or BSD 3-Clause, BSD 3-Clause selected|
 
 Copyright (c) 2002-2010 John J. Lee <jjl@pobox.com>.

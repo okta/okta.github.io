@@ -8,7 +8,7 @@ book_chapter: "about-the-authors"
 
 ## Lee Brandt
 
-**Lee Brandt** has spent two decades writing software professionally (and a few years unprofessionally before that), and he continues to learn every day. He has led teams in small and large companies and always manages to keep the business needs at the forefront of software development efforts and is currently a developer advocate at Okta. He speaks internationally about software development, from both a technical and business perspective, and loves to teach others what he learns. Lee writes software in Objective-C, JavaScript, and C#… mostly. He is a Microsoft Most Valuable Professional in Visual Studio and Development Technologies and one of the directors of the Kansas City Developer Conference (KCDC). Lee is also a decorated Gulf War veteran, a husband, a proud pet parent, and loves to play the drums whenever he gets any spare time.
+**Lee Brandt** has spent two decades writing software professionally (and a few years unprofessionally before that), and he continues to learn every day. He has led teams in small and large companies and always manages to keep the business needs at the forefront of software development efforts and is currently a developer advocate at Okta. He speaks internationally about software development, from both a technical and business perspective, and loves to teach others what he learns. Lee writes software in Objective-C, JavaScript, and C#... mostly. He is a Microsoft Most Valuable Professional in Visual Studio and Development Technologies and one of the directors of the Kansas City Developer Conference (KCDC). Lee is also a decorated Gulf War veteran, a husband, a proud pet parent, and loves to play the drums whenever he gets any spare time.
 
 ## Keith Casey
 
@@ -32,7 +32,7 @@ book_chapter: "about-the-authors"
 
 ## Sai Maddali
 
-**Sai Maddali** is a product manager on Okta’s directories team where he is helping build the platform for customers to connect to Okta from various sources. He’s spent his entire career in the identity space, coming to Okta from Stormpath where he worked as an engineer supporting developer success, and helped onboard developers to Stormpath’s API and SDKs. Sai has a BS in Computer Engineering from Georgia Tech and is passionate about all things identity and user experience. He spends his free time doing street photography centered around people and their identities. You can find Sai on <a href="https://medium.com/@saimaddali" class="url">Medium</a> and Twitter as <a href="https://twitter.com/saimaddali" class="url">@saimaddali</a>.
+**Sai Maddali** is a product manager on Okta's directories team where he is helping build the platform for customers to connect to Okta from various sources. He's spent his entire career in the identity space, coming to Okta from Stormpath where he worked as an engineer supporting developer success, and helped onboard developers to Stormpath's API and SDKs. Sai has a BS in Computer Engineering from Georgia Tech and is passionate about all things identity and user experience. He spends his free time doing street photography centered around people and their identities. You can find Sai on <a href="https://medium.com/@saimaddali" class="url">Medium</a> and Twitter as <a href="https://twitter.com/saimaddali" class="url">@saimaddali</a>.
 
 ## Matt Raible
 

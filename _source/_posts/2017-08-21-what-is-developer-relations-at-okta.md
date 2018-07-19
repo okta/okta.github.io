@@ -38,7 +38,7 @@ The DevRel team at Okta is made up of four individual contributors, each with ou
 
 {% img avatar-leebrandt.jpg alt:"Lee Brandt" class:"BlogPost-avatar pull-left img-100px" %}
 
-**[Lee](https://twitter.com/leebrandt)** also specializes in .NET and JavaScript. He's a long-time Microsoft MVP and the founder of KCDC (Kansas City Developers Conference). [KCDC](http://www.kcdc.info/) is one of the region's largest developer conferences and h numerous languages and communities represented. Lee is a rockstar in .NET, Angular, and React, so hit him up if you have issues with these frameworks and Okta.
+**[Lee](https://twitter.com/leebrandt)** also specializes in .NET and JavaScript. He's a long-time Microsoft MVP and the founder of KCDC (Kansas City Developers Conference). [KCDC](http://www.kcdc.info/) is one of the region's largest developer conferences and has numerous languages and communities represented. Lee is a rockstar in .NET, Angular, and React, so hit him up if you have issues with these frameworks and Okta.
 
 #### Matt Raible
 

@@ -75,7 +75,7 @@ PROJECT LICENSE
 
 Copyright (c) 2007-2011 the original author or authors.
 
-Licensed under the Apache License, Version 2.0 (the “License”); you may
+Licensed under the Apache License, Version 2.0 (the "License"); you may
 not use this file except in compliance with the License.
 
 You may obtain a copy of the License at
@@ -83,7 +83,7 @@ You may obtain a copy of the License at
 http://www.apache.org/licenses/LICENSE-2.0
 
 Unless required by applicable law or agreed to in writing, software
-distributed under the License is distributed on an “AS IS” BASIS,
+distributed under the License is distributed on an "AS IS" BASIS,
 WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
@@ -438,7 +438,7 @@ TECHNOLOGY, (C) FOR ANY LOST PROFITS OR REVENUES, OR FOR ANY INDIRECT,
 SPECIAL, INCIDENTAL, CONSEQUENTIAL OR PUNITIVE DAMAGES, WHETHER OR NOT A
 OKTA HAS BEEN ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-IN NO EVENT WILL OKTA NOR ITS SUPPLIER’S AGGREGATE AND CUMULATIVE
+IN NO EVENT WILL OKTA NOR ITS SUPPLIER'S AGGREGATE AND CUMULATIVE
 LIABILITY FOR ANY CLAIMS ARISING OUT OF OR RELATED TO OPEN SOURCE
 SOFTWARE EXCEED ONE HUNDRED DOLLARS ($100).
 

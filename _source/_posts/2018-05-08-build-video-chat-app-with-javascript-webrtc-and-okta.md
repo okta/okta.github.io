@@ -95,88 +95,88 @@ If you open this page up in your browser, you'll notice that it looks pretty bad
 Next, you'll want to create a folder called `static`, which contains another folder named `css`. Then, you'll need to copy the following CSS into a new `style.css` file inside that folder:
 
 ```css
-body {                                                                                                                        
-  font-family: 'Raleway', sans-serif;                                                                                         
-}                                                                                                                             
-                                                                                                                              
-footer {                                                                                                                      
-  text-align: center;                                                                                                         
-  margin-top: 2em;                                                                                                            
-}                                                                                                                             
-                                                                                                                              
-h2 {                                                                                                                          
-  font-style: italic;                                                                                                         
-}                                                                                                                             
-                                                                                                                              
-header {                                                                                                                      
-  text-align: center;                                                                                                         
-  margin: 4em;                                                                                                                
-}                                                                                                                             
-                                                                                                                              
-header h1, header h2 {         
-  display: inline;             
-}                              
-
-header h1 a, header h2 a, header h1 a:hover, header h2 a:hover {                                                              
-  color: inherit;              
-  text-decoration: none;       
-}                              
-
-header h2 {                    
-  font-size: 24px;             
-  padding-left: .5em;          
-}                              
-
-#remotes {                     
-  visibility: hidden;          
-}                              
-
-#url {                         
-  text-align: center;          
-  display: none;               
-}                              
-
-#login {                       
-  display: none;               
-}                              
-
-#roomIntro {                   
-  font-weight: bold;           
+body {
+  font-family: 'Raleway', sans-serif;
 }
 
-.videoContainer {              
-  object-fit: cover;           
-  margin: 0 auto;              
-  padding: 0;                  
-}                              
+footer {
+  text-align: center;
+  margin-top: 2em;
+}
 
-.videoContainer video {        
-  width: 100%;                 
-  height: 100%;                
-  border-radius: 10px;         
-  border: 5px double #f2f2f2;  
-}                              
+h2 {
+  font-style: italic;
+}
 
-.volume {                      
-  position: absolute;          
-  left: 15%;                   
-  width: 70%;                  
-  bottom: 20px;                
-  height: 10px;                
-  display: none;               
-}                              
+header {
+  text-align: center;
+  margin: 4em;
+}
 
-.connectionstate {             
-  position: absolute;          
-  top: 10px;                   
-  width: 100%;                 
-  text-align: center;          
-  color: #fff                  
-}                              
+header h1, header h2 {
+  display: inline;
+}
 
-.col-md-6 {                    
-  margin-bottom: 1em;          
-} 
+header h1 a, header h2 a, header h1 a:hover, header h2 a:hover {
+  color: inherit;
+  text-decoration: none;
+}
+
+header h2 {
+  font-size: 24px;
+  padding-left: .5em;
+}
+
+#remotes {
+  visibility: hidden;
+}
+
+#url {
+  text-align: center;
+  display: none;
+}
+
+#login {
+  display: none;
+}
+
+#roomIntro {
+  font-weight: bold;
+}
+
+.videoContainer {
+  object-fit: cover;
+  margin: 0 auto;
+  padding: 0;
+}
+
+.videoContainer video {
+  width: 100%;
+  height: 100%;
+  border-radius: 10px;
+  border: 5px double #f2f2f2;
+}
+
+.volume {
+  position: absolute;
+  left: 15%;
+  width: 70%;
+  bottom: 20px;
+  height: 10px;
+  display: none;
+}
+
+.connectionstate {
+  position: absolute;
+  top: 10px;
+  width: 100%;
+  text-align: center;
+  color: #fff
+}
+
+.col-md-6 {
+  margin-bottom: 1em;
+}
 ```
 
 I won't go into detail explaining each CSS rule (*as I won't want to bore you to death*), but if you add your newly created stylesheet into your `index.html` page, you'll notice that the web app now looks a lot nicer:
@@ -244,18 +244,18 @@ Now that you have the necessary credentials, let's get started plugging the widg
 ```html
 <!-- snip -->
 
-<head>                       
+<head>
   <title>vchat - a simple video chat app</title>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn53
 84xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
   <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
   <script src="https://ok1static.oktacdn.com/assets/js/sdk/okta-signin-widget/2.6.0/js/okta-sign-in.min.js" type="text/javas
-cript"></script>                                               
+cript"></script>
   <link href="https://ok1static.oktacdn.com/assets/js/sdk/okta-signin-widget/2.6.0/css/okta-sign-in.min.css" type="text/css"
- rel="stylesheet"/>                                            
+ rel="stylesheet"/>
   <link href="https://ok1static.oktacdn.com/assets/js/sdk/okta-signin-widget/2.6.0/css/okta-theme.css" type="text/css" rel="
-stylesheet"/>                                                  
-  <link rel="stylesheet" href="/static/css/style.css">       
+stylesheet"/>
+  <link rel="stylesheet" href="/static/css/style.css">
 </head>
 
 <!-- snip -->
@@ -330,7 +330,7 @@ Now that you've got the widget hooked up to your app, if you view your app in a 
 
 {% img blog/vchat-app/vchat-test-okta-login.gif alt:"vchat test Okta login" width:"800" %}{: .center-image }
 
-## Configure State Management 
+## Configure State Management
 
 The next thing you will need to do is configure state management for the app. But before we dive into that, let's talk about how the app is going to work.
 
@@ -1082,7 +1082,7 @@ Here's what this process looks like for me:
 
 In just a few short seconds I'm able to sync my GitHub repo with Netlify so that it auto-deploys my website live to its CDN (over SSL) — pretty amazing, right? From this point forward, each time you push a new commit to your repo (depending on how you've configured Netlify) it will automatically deploy your static site to its CDN.
 
-And… once you've gotten your site all setup in Netlify, the next thing you'll want to do is optimize it! Netlify has some great functionality that will automatically optimize your images, CSS, HTML, etc. each time you push new code.
+And... once you've gotten your site all setup in Netlify, the next thing you'll want to do is optimize it! Netlify has some great functionality that will automatically optimize your images, CSS, HTML, etc. each time you push new code.
 
 To enable this functionality you can visit the **Site settings** -> **Build & deploy** menu:
 

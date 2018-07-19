@@ -10,7 +10,7 @@ book_section: "authn-api-authentication-options"
 
 ## API Authentication Options {#authn-api-authentication-options}
 
-The first type of API authentication I’ll talk about is HTTP Basic Authentication.
+The first type of API authentication I'll talk about is HTTP Basic Authentication.
 
 HTTP Basic Authentication is defined by [RFC 7617](https://tools.ietf.org/html/rfc7617). This document was created in September 2015 by the internet standards body known as The Internet Engineering Task Force (IETF). It replaces [RFC 2617](https://tools.ietf.org/html/rfc2617), which was created in 1999 and defined both basic and digest authentication.
 
@@ -22,7 +22,7 @@ Basic authentication works as follows:
 
 1. When a client sends a request to the server, the server returns a `401 Unauthorized` response status and provides information on how to authenticate with a <code style="word-break: keep-all">WWW-Authenticate</code> response header.
 1. If the client is a browser, a built-in browser dialog will prompt the user for a username and password. A programmer has no control over what this dialog looks like.
-1. When a browser sends the user’s credentials to the server, the username and password are combined with a colon separator (`username:password`), base64-encoded, then added to the `Authorization` header like so:
+1. When a browser sends the user's credentials to the server, the username and password are combined with a colon separator (`username:password`), base64-encoded, then added to the `Authorization` header like so:
 
 ```
 Authorization: Basic base64(username:password)
@@ -30,7 +30,7 @@ Authorization: Basic base64(username:password)
 
 The server will receive this request, decode the authorization header, split on the colon, and use the credentials to validate the user has access to perform the operation.
 
-When using HTTP Basic Authentication to secure APIs, its recommended the username and password be long, random strings rather than easy-to-remember names. Entropy means a “lack of order and predictability” and is very important for passwords, especially if you’re generating them. The more random your password generation process is, the better. One important aspect is that the API username and password must not be the same username and password as the account’s username and password. Not only are their security implications of using the same credentials but something as simple as clicking “forgot password” can knock your applications offline.
+When using HTTP Basic Authentication to secure APIs, its recommended the username and password be long, random strings rather than easy-to-remember names. Entropy means a "lack of order and predictability" and is very important for passwords, especially if you're generating them. The more random your password generation process is, the better. One important aspect is that the API username and password must not be the same username and password as the account's username and password. Not only are their security implications of using the same credentials but something as simple as clicking "forgot password" can knock your applications offline.
 
 While basic auth is perfectly fine to use, one of its issues is that your username+password are sent over the network on every request. This increases the likelihood that they could be leaked, logged, or reused in other applications.
 
@@ -50,4 +50,4 @@ Several authentication schemes use the HTTP authentication framework. Schemes ca
 * Mutual (Mutual Authentication Protocol, draft)
 * Signature (HTTP Signatures and AWS4-HMAC-SHA256)
 
-Basic authentication is easy to implement for APIs, but it’s not often used in web applications because the login form can’t be customized and “logging out” requires closing the browser.
+Basic authentication is easy to implement for APIs, but it's not often used in web applications because the login form can't be customized and "logging out" requires closing the browser.

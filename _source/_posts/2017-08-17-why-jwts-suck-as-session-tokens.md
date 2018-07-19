@@ -56,18 +56,18 @@ actually came from you.
 ## How do JWTs Work?
 
 JWTs are JSON data, encoded as a string, and cryptographically signed. I know
-that sounds fancy, but it really isn’t.
+that sounds fancy, but it really isn't.
 
 {% img blog/why-jwts-suck-as-session-tokens/jwt-formula.png alt:"JSON Web Token Formula" %}
 
-The core of any JWT is claims. Claims are the JSON data inside the JWT. It’s the
-data you care about, and want to pass along securely to someone else. I’m not
+The core of any JWT is claims. Claims are the JSON data inside the JWT. It's the
+data you care about, and want to pass along securely to someone else. I'm not
 going into the details here, but just know that JWTs hold JSON data.
 
 How do JWTs make it so that you know whether or not they can be trusted?
 Cryptographic signatures.
 
-Let’s say I write a letter. When I sign that letter, I’m "signing" it. This
+Let's say I write a letter. When I sign that letter, I'm "signing" it. This
 means that anyone who reads that letter will know that I wrote it. And, because
 my signature is unique, there will be no question of its authenticity.
 
@@ -78,8 +78,8 @@ are commonly used, and provide the same guarantees of authenticity.
 
 ### JWTs in a Nutshell
 
-JWTs aren’t magic–they’re just blobs of JSON that have been cryptographically
-signed. Regardless of whether they’re symmetrically or asymmetrically signed,
+JWTs aren't magic–they're just blobs of JSON that have been cryptographically
+signed. Regardless of whether they're symmetrically or asymmetrically signed,
 they provide the same guarantees: you can trust that a JWT is valid and created
 by someone you have faith in.
 
@@ -96,7 +96,7 @@ One final note I want to make about JWTs before moving on: their contents (the
 JSON data inside of them) are usually **not** encrypted. This means that anyone can
 view the data inside the JWT, even without a key.
 
-JWTs don’t try to encrypt your data so nobody else can see it, they simply help
+JWTs don't try to encrypt your data so nobody else can see it, they simply help
 you verify that it was created by someone you trust.
 
 Now, if you *do* want to encrypt your JWTs you can do so by using [JWE][], but this is
@@ -110,7 +110,7 @@ The most common use case for JWTs is authentication. There are tons of web
 security libraries which use JWTs as session tokens, API tokens, etc.
 
 The idea is that when someone authenticates to a website/API, the server will
-generate a JWT that contains the user’s ID, as well as some other critical
+generate a JWT that contains the user's ID, as well as some other critical
 information, and then send it to the browser/API/etc. to store as a session
 token.
 
@@ -118,7 +118,7 @@ token.
 
 When that user visits another page on the website, for instance, their browser
 will automatically send that JWT to the server, which will validate the JWT to
-make sure that it’s the same token it created originally, then let the user do
+make sure that it's the same token it created originally, then let the user do
 stuff.
 
 In theory, this sounds nice because:
@@ -151,10 +151,10 @@ embedding extra user information in your tokens as well!
 
 {% img blog/why-jwts-suck-as-session-tokens/rage-face.jpg alt:"Rage Face" width:"200" %}
 
-Now that we’ve seen how JWTs are used for authentication purposes, let’s get
+Now that we've seen how JWTs are used for authentication purposes, let's get
 into my favorite subject of all: why JWTs are not good session tokens.
 
-I often argue with coworkers, colleagues, and friends about this, so it’s nice
+I often argue with coworkers, colleagues, and friends about this, so it's nice
 to finally get all my thoughts on the subject down in bytes.
 
 In particular, I plan to explain to you why normal old sessions are superior to
@@ -171,31 +171,31 @@ Most websites that developers build are relatively simple:
 - A user registers for the website
 - A user signs into the website
 - A user clicks around and does stuff
-- The website uses the user’s information to create, update, and delete
+- The website uses the user's information to create, update, and delete
   information
 
 99.9% of all websites match the criteria above.
 
-For these types of websites, what’s important to know is that almost every page
-a user interacts with contains some sort of dynamic data. Odds are, if you’re
-running a website that requires a user to sign in to use it, you’re going to be
+For these types of websites, what's important to know is that almost every page
+a user interacts with contains some sort of dynamic data. Odds are, if you're
+running a website that requires a user to sign in to use it, you're going to be
 doing things with that user in your database often:
 
 - Recording the actions a user is taking
 - Adding some data for the user to the database
-- Checking a user’s permissions to see if they can do something
+- Checking a user's permissions to see if they can do something
 - Etc.
 
 The important thing to remember is that most sites require user information for
 nearly every operation.
 
-With that out of the way, let’s get into the reasons why JWTs suck. First up?
+With that out of the way, let's get into the reasons why JWTs suck. First up?
 Size.
 
 
 ### Size
 
-Let’s take a look at two scenarios:
+Let's take a look at two scenarios:
 
 - Storing a user ID (abc123) in a cookie
 - Storing a user ID (abc123) in a JWT
@@ -222,9 +222,9 @@ For reference, here were the JWT claims I used to get that number:
 }
 ```
 
-Let’s say that your website gets roughly 100k page views per month. That means
-you’d be consuming an additional ~24MB of bandwidth each month. That doesn’t
-sound like a lot, but when you’re consistently bloating every single page
+Let's say that your website gets roughly 100k page views per month. That means
+you'd be consuming an additional ~24MB of bandwidth each month. That doesn't
+sound like a lot, but when you're consistently bloating every single page
 request, all the little things start to add up.
 
 Also: this example was using the smallest possible amount of information encoded
@@ -246,34 +246,34 @@ because one of the following situations are occurring:
 - A mission critical user check needs to run (eg: does this user have enough
   money in their account to complete the transaction?)
 - A database write needs to occur to persist information (if this information is
-  related to the user, it’s likely that the full user object must also be
+  related to the user, it's likely that the full user object must also be
   retrieved from the database)
 - The full user object must be pulled out of the cache / database so that the
   website can properly generate its dynamic page content
 
 Think about the websites you build. Do they often manipulate user data? Do they
 frequently use various fields on the user account to work? If so, your site
-falls into this category, and you’ll likely be talking to the cache server /
-database regardless of whether or not you’ve got a JWT.
+falls into this category, and you'll likely be talking to the cache server /
+database regardless of whether or not you've got a JWT.
 
 This means that on most websites, the stateless benefits of a JWT are not being
 taken advantage of.
 
 To compound this issue, since JWTs are larger (in bytes) and also require CPU to
-compute cryptographic signatures, they’re actually significantly slower than
+compute cryptographic signatures, they're actually significantly slower than
 traditional sessions when used in this manner.
 
 Almost every web framework loads the user on every incoming request. This
-includes frameworks like Django, Rails, Express.js (if you’re using an
+includes frameworks like Django, Rails, Express.js (if you're using an
 authentication library), etc. This means that even for sites that are primarily
-stateless, the web framework you’re using is still loading the user object
+stateless, the web framework you're using is still loading the user object
 regardless.
 
-Finally: if you’re storing your user information in a modern cache like
-memcached/redis, it’s not uncommon over a VPC to achieve cache GET times of 5ms
-or below, which is *extremely* fast. I’ve personally used DynamoDB on Amazon in
+Finally: if you're storing your user information in a modern cache like
+memcached/redis, it's not uncommon over a VPC to achieve cache GET times of 5ms
+or below, which is *extremely* fast. I've personally used DynamoDB on Amazon in
 the past as a session store, and consistently achieved 1ms cache retrieval
-times. Because caching systems are so fast, there’s very little performance
+times. Because caching systems are so fast, there's very little performance
 overhead when retrieving users in this manner.
 
 
@@ -283,7 +283,7 @@ One of the main selling points of JWTs are cryptographic signatures. Because
 JWTs are cryptographically signed, a receiving party can verify that the JWT is
 valid, and trusted.
 
-But… what would you say if I told you that in pretty much every single web
+But... what would you say if I told you that in pretty much every single web
 framework created over the last 20 years, you could also get the benefits of
 cryptographic signatures when using plain old session cookies?
 
@@ -298,7 +298,7 @@ cookie anyways, meaning that there are now two levels of signing. One on the
 cookie itself, and one on the JWT.
 
 While having two levels of signing may sound like a good idea, it is not. You
-get no security benefits, and you’ve now got to spend twice as long on CPU
+get no security benefits, and you've now got to spend twice as long on CPU
 cycles to validate both signatures. Not really ideal for web environments where
 milliseconds are important. This is especially true in single threaded
 environments (cough cough *nodejs*) where number crunching can block your main
@@ -307,11 +307,11 @@ event loop.
 
 ## What's a Better Solution?
 
-If JWTs suck, then what’s a better solution? Plain old sessions!
+If JWTs suck, then what's a better solution? Plain old sessions!
 
 {% img blog/why-jwts-suck-as-session-tokens/sessionid-vs-jwt.png alt:"SessionID vs JWT" %}
 
-If you’re building a simple website like the ones described above, then your
+If you're building a simple website like the ones described above, then your
 best bet is to stick with boring, simple, and secure server side sessions.
 Instead of storing a user ID inside of a JWT, then storing a JWT inside of a
 cookie: just store the user ID directly inside of the cookie and be done with
@@ -327,18 +327,18 @@ operate this way.
 
 ## How Should I Use JWTs?
 
-It’s important to note that I don’t hate JWTs. I just think they’re useless for
+It's important to note that I don't hate JWTs. I just think they're useless for
 a majority of websites. With that said, however, there are several cases in
 which JWTs can be useful.
 
-If you’re building API services that need to support server-to-server or
+If you're building API services that need to support server-to-server or
 client-to-server (like a mobile app or single page app (SPA)) communication,
 using JWTs as your API tokens is a very smart idea. In this scenario:
 
 - You will have an authentication API which clients authenticate against, and
   get back a JWT
 - Clients then use this JWT to send authenticated requests to other API services
-- These other API services use the client’s JWT to validate the client is
+- These other API services use the client's JWT to validate the client is
   trusted and can perform some action without needing to perform a network
   validation
 
@@ -348,25 +348,25 @@ For these types of API services, JWTs make perfect sense because clients will be
 making requests frequently, with limited scope, and usually authentication data
 can be persisted in a stateless way without too much dependence on user data.
 
-If you’re building any type of service where you need three or more parties
+If you're building any type of service where you need three or more parties
 involved in a request, JWTs can also be useful. In this case the requesting
 party will have a token to prove their identity, and can forward it to the third
 (or 4th ... nth) service without needing to incur a real-time validation each
 and every time.
 
-Finally: if you’re using user federation (things like single sign-on and OpenID
-Connect), JWTs become important because you need a way to validate a user’s
+Finally: if you're using user federation (things like single sign-on and OpenID
+Connect), JWTs become important because you need a way to validate a user's
 identity via a third party. Thanks to cryptographic signing, JWTs make a
 valuable addition to federated user protocols.
 
 
 ## Wrap Up
 
-When you start building your next website, just rely on your web framework’s
+When you start building your next website, just rely on your web framework's
 default authentication libraries and tools, and stop trying to shove JWTs into
 the mix unnecessarily.
 
-Finally, if you’re interested in web security and all sorts of other interesting
+Finally, if you're interested in web security and all sorts of other interesting
 problems in the authentication space, you should consider signing up for an [Okta
 Developer Account][]. Our API service stores user accounts for your web apps,
 mobile apps, and API services, and makes web security fun again.

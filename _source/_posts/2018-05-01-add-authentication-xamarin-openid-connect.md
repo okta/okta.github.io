@@ -456,7 +456,7 @@ On iOS, you'll start by modifying the `AppDelegate` class. You need to add a pro
 
 
         public override bool FinishedLaunching(UIApplication app, NSDictionary options)
-        // … (existing code
+        // ... (existing code
 
         public override bool OpenUrl(
             UIApplication application, NSUrl url,

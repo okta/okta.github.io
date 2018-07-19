@@ -9,7 +9,7 @@ tweets:
     - "Use OAuth2 to connect your Grails app with Okta"
 ---
 
-What is Grails, what is Groovy, and why would we choose them over Spring Boot? In this post I’ll walk you through implementing server-side authentication in Grails using OAuth 2.0 and Okta. Before we dive in, however, I want to talk a little bit about why you’d be using Grails + Groovy in the first place, and how it can make your life easier in specific situations.
+What is Grails, what is Groovy, and why would we choose them over Spring Boot? In this post I'll walk you through implementing server-side authentication in Grails using OAuth 2.0 and Okta. Before we dive in, however, I want to talk a little bit about why you'd be using Grails + Groovy in the first place, and how it can make your life easier in specific situations.
 
 [Grails](https://grails.org/) is an open source "convention over configuration" web application framework built on Groovy. It's essentially a JVM version of Ruby on Rails. It's opinionated and full-featured and has a strong emphasis on ORM, templating, and plugins. Grails is built on Spring Boot.
 
@@ -29,7 +29,7 @@ Let's look at Grails + Groovy:
 * Groovy is a super awesome language that's a pleasure to develop in
 * Grails may be waning in popularity. The upgrade from 2.x to 3.x was bumpy and caused a lot of grumbling in the community.
 
-Let’s look at Spring:
+Let's look at Spring:
 * Spring Boot is great for simple REST API services
 * Spring Data is super powerful but correspondingly complicated
 * Templating in Spring is pretty old-fashioned these days
@@ -139,17 +139,17 @@ We are going to use the Spring Security Core Plugin and the Spring Security OAut
 
 Because we will be using a purely server-side authentication flow, we can't use the authentication filter method implemented in the Spring Boot Starter.
 
-Now, you may be tempted to think: "Hey! Grails is just Spring Boot with some bells and whistles. Why can't I just use Spring authentication, [like in this great Okta tutorial](/blog/2017/11/20/add-sso-spring-boot-15-min)?" I know I did. That was what I tried first. Let me save you some time, it doesn’t work.
+Now, you may be tempted to think: "Hey! Grails is just Spring Boot with some bells and whistles. Why can't I just use Spring authentication, [like in this great Okta tutorial](/blog/2017/11/20/add-sso-spring-boot-15-min)?" I know I did. That was what I tried first. Let me save you some time, it doesn't work.
 
 Spring Security does a funny thing and uses thrown exceptions to handle the OAuth redirects. These are supposed to propagate up to the Spring servlet context, where they are caught and handled. Unfortunately, Grails has it's own custom `GrailsDispatcherServlet` that overrides this behavior, catching the exceptions before they can be handled by the Spring filters. You could potentially create a subclass of the `GrailsDispatcherServlet` that checks for the OAuth exceptions and re-throws them, but Grails 3.0 made this more complicated – and anyway the whole scheme starts to feel pretty "hacky" fighting the framework instead of doing it the "right" way.
 
 ### Okta Provider Plugin for Grails Spring Security OAuth 2.0
 
-What’s the "right" way? Writing a provider plugin for the Grails [spring-security-oauth2 plugin](http://plugins.grails.org/plugin/matrixcrawler/spring-security-oauth2) that tells Grails how to "talk" to Okta as an OAuth 2.0 provider.
+What's the "right" way? Writing a provider plugin for the Grails [spring-security-oauth2 plugin](http://plugins.grails.org/plugin/matrixcrawler/spring-security-oauth2) that tells Grails how to "talk" to Okta as an OAuth 2.0 provider.
 
 Fortunately for you, [I've already done this](https://github.com/moksamedia/okta-oauth2-service).
 
-If you don’t already have an account with Okta, now would be a great time to sign up for a [free developer account](https://developer.okta.com/).
+If you don't already have an account with Okta, now would be a great time to sign up for a [free developer account](https://developer.okta.com/).
 
 Don't forget to note your Okta URL as we'll need it in a minute.
 
@@ -171,7 +171,7 @@ Next, we need to update the "Login redirect URIs". OAuth 2.0 requires a whitelis
 
 {% img blog/okta-with-grails/add-application.jpeg alt:"Add Okta application" width:"600" %}{: .center-image }
 
-You’ll need to copy your Client ID and Client Secret to a safe place for later.
+You'll need to copy your Client ID and Client Secret to a safe place for later.
 
 {% img blog/okta-with-grails/client-credentials.png alt:"Remember your credentials" width:"600" %}{: .center-image }
 
@@ -328,15 +328,15 @@ Obviously there's a lot we can do from here. We'll look at building out the app 
 
 ## Learn More about Grails, Gradle, Groovy, and Okta
 
-If you’d like to learn more about Grails to get ready for Part 2 check out the [documentation](http://docs.grails.org/snapshot/guide/single.html) and [Groovy Language Documentation](http://groovy-lang.org/documentation.html).
+If you'd like to learn more about Grails to get ready for Part 2 check out the [documentation](http://docs.grails.org/snapshot/guide/single.html) and [Groovy Language Documentation](http://groovy-lang.org/documentation.html).
 
-While you’re in the Grails docs, make sure to familiarize yourself with the [basic folder structure of the Grails application](http://docs.grails.org/snapshot/guide/single.html#conventionOverConfiguration). As we saw, it can be touchy.
+While you're in the Grails docs, make sure to familiarize yourself with the [basic folder structure of the Grails application](http://docs.grails.org/snapshot/guide/single.html#conventionOverConfiguration). As we saw, it can be touchy.
 
 You may also want to take a look at [Understanding Controllers and Actions](http://docs.grails.org/latest/guide/theWebLayer.html#understandingControllersAndActions).
 
 And finally, you can [check out the Gradle docs](https://docs.gradle.org/4.6/userguide/userguide.html).
 
-If you’d like to learn more about Okta, you should definitely be following our team on Twitter [@oktadev](https://twitter.com/oktadev). You can also check out these other cool Java posts:
+If you'd like to learn more about Okta, you should definitely be following our team on Twitter [@oktadev](https://twitter.com/oktadev). You can also check out these other cool Java posts:
 
 * [Add Single Sign-On to Your Spring Boot Web App in 15 Minutes](/blog/2017/11/20/add-sso-spring-boot-15-min)
 * [Develop a Microservices Architecture with OAuth 2.0 and JHipster](/blog/2018/03/01/develop-microservices-jhipster-oauth)

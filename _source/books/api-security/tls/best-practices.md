@@ -10,13 +10,13 @@ book_section: "tls-best-practices"
 
 ## Best Practices {#tls-best-practices}
 
-Hopefully this chapter has convinced you of the ease and importance of implementing SSL/TLS into your public internet application infrastructure. However, even when using SSL/TLS, organizations can be subject to compromise if best practices are not followed. Let’s go over a few of the big ones:
+Hopefully this chapter has convinced you of the ease and importance of implementing SSL/TLS into your public internet application infrastructure. However, even when using SSL/TLS, organizations can be subject to compromise if best practices are not followed. Let's go over a few of the big ones:
 
 ### 1. Use TLS Everywhere
-Having certain pages served over SSL/TLS and some served unencrypted can expose data, such as unencrypted session IDs, to attackers. Similarly, don’t allow TLS content to be exposed via non-TLS pages and don’t mix TLS and non-TLS content on the same page.
+Having certain pages served over SSL/TLS and some served unencrypted can expose data, such as unencrypted session IDs, to attackers. Similarly, don't allow TLS content to be exposed via non-TLS pages and don't mix TLS and non-TLS content on the same page.
 
 ### 2. Keep Sensitive Data out of the URL and Cache
-URLs can be cached in a client’s browser history or application logs and sent to another HTTPS site if the user clicks on a link. Setting TLS pages to be uncacheable prevents information leakage from the client cache.
+URLs can be cached in a client's browser history or application logs and sent to another HTTPS site if the user clicks on a link. Setting TLS pages to be uncacheable prevents information leakage from the client cache.
 
 ### 3. Prevent Exposed Data over SSL/TLS
 Ensure browsers and applications only access your site via HTTPS by enacting HTTP Strict Transport Security (HSTS). Servers utilizing HSTS send an HTTPS header in their response specifying that requests to their domain should only use HTTPS. An HSTS-complaint client should then make all future requests to that domain over HTTPS, even if HTTP is specified. This helps protect clients from man-in-the-middle and eavesdropping attacks that could be initiated by the client sending sensitive information by making an unsecure HTTP request. For more information, see <a href="https://www.owasp.org/index.php/HTTP_Strict_Transport_Security_Cheat_Sheet" class="url">https://www.owasp.org/index.php/HTTP_Strict_Transport_Security_Cheat_Sheet</a>.

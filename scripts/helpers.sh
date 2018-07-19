@@ -123,30 +123,6 @@ function require_env_var() {
     fi
 }
 
-# Verify for occurences of localhost have been removed
-function check_for_all_localhost_links() {
-    local dir=$(pwd)/dist
-    local links=$(grep -EoR "href=\"(http|https)://localhost"  --include="*.html" $dir)
-    if [ "$links" ];
-    then
-        echo $links
-        echo "Links contain localhost!"
-        return 1
-    fi
-}
-
-# Verify for occurences of 'index' contain .html
-function check_index_links() {
-    local dir=$(pwd)/_source
-    local links=$(grep -EoR "index#"  --include="*.md" $dir --exclude={README.md,package.json} | sort | uniq )
-    if [ "$links" ];
-    then
-        echo $links
-        echo "A link contains index without the filetype!"
-        return 1
-    fi
-}
-
 # Check for broken markdown headers
 function header_checker() {
     local dir=$(pwd)
@@ -155,78 +131,6 @@ function header_checker() {
     then
         echo $allheaders
         echo "Files contain broken headers."
-        return 1
-    fi
-}
-
-function check_sample_code_orgs() {
-    # Sample code URLS should be in the following format:
-    # Currently: https://{yourOktaDomain}
-
-    local dir=$(pwd)
-    local yourOrgUrls=$(grep -EoR "(http|https)://your-org.okta*" --include="*.md" $dir --exclude-dir={node_modules,scripts,tests,dist} | sort | uniq)
-    local yourExampleUrls=$(grep -EoR "(http|https)://example.okta*" --include="*.md" $dir --exclude-dir={node_modules,scripts,tests,dist} | sort | uniq)
-    local rainUrls=$(grep -EoR "http://rain.okta1.com:1802*" --include="*.md" $dir --exclude-dir={node_modules,scripts,tests,dist,SCIM} | sort | uniq)
-    local subdomainUrls=$(grep -EoR "(http|https)://your-subdomain.okta*" --include="*.md" $dir --exclude-dir={node_modules,scripts,tests,dist} | sort | uniq)
-    local yourDomainUrls=$(grep -EoR "(http|https)://your-domain.okta*" --include="*.md" $dir --exclude-dir={node_modules,scripts,tests,dist} | sort | uniq)
-    local jspUrls=$(grep -EoR "(http|https)://.*{org}.okta*" --include="*.md" $dir --exclude-dir={node_modules,scripts,tests,dist,s} | sort | uniq)
-    local oktaPreviewUrls=$(grep -EoR "(http|https)://.*oktapreview.com*" --include="*.md" $dir --exclude-dir={node_modules,scripts,tests,dist,_posts,getting_started,rest,SCIM} | sort | uniq)
-    local yourOktaDomainCom=$(grep -EoR "(http|https)://.*{yourOktaDomain}.com/" --include="*.md" $dir --exclude-dir={node_modules,scripts,tests,dist,_posts,getting_started} | sort | uniq)
-
-    if [ "$yourOrgUrls" ];
-    then
-        echo "$yourOrgUrls"
-        echo "Files contain old URL reference -> https://your-org.okta{preview}.com"
-        return 1
-    fi
-
-    if [ "$yourExampleUrls" ];
-    then
-        echo "$yourExampleUrls"
-        echo "Files contain old URL reference -> https://example.okta{preview}.com"
-        return 1
-    fi
-
-    if [ "$rainUrls" ];
-    then
-        echo "$rainUrls"
-        echo "Files contain old URL reference -> http://rain.okta1.com:1802"
-        return 1
-    fi
-
-    if [ "$subdomainUrls" ];
-    then
-        echo "$subdomainUrls"
-        echo "Files contain old URL reference -> https://subdomain.okta{preview}.com"
-        return 1
-    fi
-
-    if [ "$yourDomainUrls" ];
-    then
-        echo "$yourDomainUrls"
-        echo "Files contain old URL reference -> https://your-domain.okta{preview}.com"
-        return 1
-    fi
-
-    if [ "$jspUrls" ];
-    then
-        echo "$jspUrls"
-        echo "Files contain old URL reference -> https://\${org}.okta{preview}.com"
-        return 1
-    fi
-
-    if [ "$oktaPreviewUrls" ];
-    then
-        echo "$oktaPreviewUrls"
-        echo "Files contain old URL reference -> oktapreview.com"
-        return 1
-    fi
-
-    if [ "$yourOktaDomainCom" ];
-    then
-        echo "$yourOktaDomainCom"
-        echo "Files contain invalid URL reference -> https://{yourOktaDomain}.com/"
-        echo "Please remove '.com'"
         return 1
     fi
 }

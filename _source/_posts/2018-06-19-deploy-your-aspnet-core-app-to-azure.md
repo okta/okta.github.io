@@ -11,14 +11,14 @@ tweets:
 ---
 
 
-One of the scariest features of Visual Studio is without a doubt right-click to publish. There are very few instances in which you’d actually want to make use of this “feature” and so many more in which it’s a terrible idea. In this post I’ll walk you through the right way to secure and deploy your new ASP.NET Core app to Azure. My method might not be as fast as right clicking to publish, but it’ll keep you, and your users, safe! (And if you’re embracing the cross-platform nature of ASP.NET Core, like I am on my Linux laptop with VS Code, right-click to publish isn’t even an option for you.)
+One of the scariest features of Visual Studio is without a doubt right-click to publish. There are very few instances in which you'd actually want to make use of this "feature" and so many more in which it's a terrible idea. In this post I'll walk you through the right way to secure and deploy your new ASP.NET Core app to Azure. My method might not be as fast as right clicking to publish, but it'll keep you, and your users, safe! (And if you're embracing the cross-platform nature of ASP.NET Core, like I am on my Linux laptop with VS Code, right-click to publish isn't even an option for you.)
 
-So, let’s dive in. In this tutorial we’ll add secure identity management to your ASP.NET Core app with Okta, and then deploy to Azure.
+So, let's dive in. In this tutorial we'll add secure identity management to your ASP.NET Core app with Okta, and then deploy to Azure.
 
 
 ## What is Okta?
 
-Why does Okta matter if this post is all about deploying my .NET app to Azure? Well, you wouldn’t mail a letter without sealing the envelope, would you? Similarly, you shouldn't ship your new app out to the Internet without secure [identity management](https://developer.okta.com/product/user-management/), and Okta makes that a lot easier and more scalable than what you’re probably used to. Okta is a cloud service that allows developers to create, edit, and securely store user accounts and user account data, and connect them with one or multiple applications. Our API enables you to:
+Why does Okta matter if this post is all about deploying my .NET app to Azure? Well, you wouldn't mail a letter without sealing the envelope, would you? Similarly, you shouldn't ship your new app out to the Internet without secure [identity management](https://developer.okta.com/product/user-management/), and Okta makes that a lot easier and more scalable than what you're probably used to. Okta is a cloud service that allows developers to create, edit, and securely store user accounts and user account data, and connect them with one or multiple applications. Our API enables you to:
 
 * [Authenticate](https://developer.okta.com/product/authentication/) and [authorize](https://developer.okta.com/product/authorization/) your users
 * Store data about your users
@@ -26,7 +26,7 @@ Why does Okta matter if this post is all about deploying my .NET app to Azure? W
 * Secure your application with [multi-factor authentication](https://developer.okta.com/use_cases/mfa/)
 * And much more! Check out our [product documentation](https://developer.okta.com/documentation/)
 
-Are you sold? [Register for a forever-free developer account](https://developer.okta.com/signup/), and when you’re done, come on back so we can get on with our deployment!
+Are you sold? [Register for a forever-free developer account](https://developer.okta.com/signup/), and when you're done, come on back so we can get on with our deployment!
 
 
 ## Get the ASP.NET Core Starter App
@@ -83,7 +83,7 @@ From the new application wizard page, choose the **Web** button and click next. 
 
 Once done, you will go to the application's **General** tab. If you scroll down to the bottom, you'll see a section with your Client ID and Client secret. Copy these to a file for use in your application.
 
-You'll also need to create an API token so that the sample app can make calls to the API to get the profile page. To get that, hover over the **API** menu item and choose the **Tokens** menu item. Then click on the **Create Token** button at the top and give your new token a name. Click on **Create Token** and copy the API token into a file to use later. Once you've got this successfully copied into your file, click the **OK, got it** button. 
+You'll also need to create an API token so that the sample app can make calls to the API to get the profile page. To get that, hover over the **API** menu item and choose the **Tokens** menu item. Then click on the **Create Token** button at the top and give your new token a name. Click on **Create Token** and copy the API token into a file to use later. Once you've got this successfully copied into your file, click the **OK, got it** button.
 
 
 {% img blog/deploy-azure/CreateApiTokenScreener.png alt:"Screenshot of the Okta screen for creating an API token." width:"800" %}{: .center-image }
@@ -94,7 +94,7 @@ You'll also need to create an API token so that the sample app can make calls to
 
 ## Secure Your Secrets in ASP.NET Core 2.0
 
-There are several ways to store configuration secrets in ASP.NET Core. The `appsettings.json` file is the easiest, and you'll notice in the sample app you cloned from GitHub, that there is a section in the `appsettings.json` file that already has these placeholders set up. Using application settings is not the most secure way to store these secrets. First, you'll be checking this file in so that your teammates can clone the repo and run the code. Checking in the secrets is a classic security anti-pattern, and anybody cloning that repository can now get access to your application's users. 
+There are several ways to store configuration secrets in ASP.NET Core. The `appsettings.json` file is the easiest, and you'll notice in the sample app you cloned from GitHub, that there is a section in the `appsettings.json` file that already has these placeholders set up. Using application settings is not the most secure way to store these secrets. First, you'll be checking this file in so that your teammates can clone the repo and run the code. Checking in the secrets is a classic security anti-pattern, and anybody cloning that repository can now get access to your application's users.
 
 Another, more secure way, is to store those secrets in environment variables. Luckily, Azure and ASP.NET Core make this pretty simple. First of all, ASP.NET Core 2.0 is already set up to use environment variables and override settings in the `appsettings.json` file. To learn more about what the configuration builder is doing in ASP.NET Core 2.0, you can read Shawn Wildermuth's excellent [blog post on the subject](https://wildermuth.com/2017/07/06/Program-cs-in-ASP-NET-Core-2-0).
 
@@ -177,13 +177,13 @@ git commit -am "Added development creds"
 
 ## Create an Azure Web App
 
-In the Azure portal, click on the **App Services** menu item on the left, then click the **Add** button on that page to create a new app service, and click **Create** on the right-hand pop-out. The page to create a web app will open up. 
+In the Azure portal, click on the **App Services** menu item on the left, then click the **Add** button on that page to create a new app service, and click **Create** on the right-hand pop-out. The page to create a web app will open up.
 
 
 {% img blog/deploy-azure/CreateAzureWebAppScreener.png alt:"Screenshot of the Azure portal create web app screen." width:"800" %}{: .center-image }
 
 
-Choose a name for your application, choose Windows as the **OS** setting (even if you're developing on macOS or Linux). Check the **Pin to Dashboard** checkbox and click **Create**. 
+Choose a name for your application, choose Windows as the **OS** setting (even if you're developing on macOS or Linux). Check the **Pin to Dashboard** checkbox and click **Create**.
 
 You'll be redirected to the dashboard. It may take a bit to create the web application. When it is done, go to the information tab for the newly created app and copy the URL for the app. Then go to the Okta dashboard and to your application and add it to the **Login redirect URIs** list, keeping the `/authorization-code/callback` part of the localhost URI. Then add it to the **Logout redirect URIs** keeping the `signout-callback-oidc` portion in the **General Settings** tab of your Okta application.
 

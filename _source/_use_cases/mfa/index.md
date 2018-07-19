@@ -19,7 +19,7 @@ and 2fa</p>&mdash; Chris Rohlf (@chrisrohlf) March 8, 2015
 </blockquote>
 <script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
 
-In this guide, we’ll show you how to add multi-factor authentication
+In this guide, we'll show you how to add multi-factor authentication
 to your app with Okta.
 
 Okta gives you the flexibility to deploy our built-in
@@ -27,7 +27,7 @@ factors, or integrate with existing tokens. Native factors include
 SMS, and the Okta Verify app for iOS and Android. Integrations include
 Google Authenticator, RSA SecurID, Symantec VIP, and Duo Security.
 
-Let’s get started!
+Let's get started!
 
 <iframe src="https://player.vimeo.com/video/123445568" width="500" height="281" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
 
@@ -36,7 +36,7 @@ Let’s get started!
 To follow along with this guide, you will need to have your own Okta Developer Edition org and have Postman configured to make API requests to that account.
 
 1.  Creating your Okta Developer Edition org
-    If you don’t already have one, create your own Okta Developer
+    If you don't already have one, create your own Okta Developer
     Edition org by visiting: <https://developer.okta.com/signup/>
     and following the instructions.
 2.  Setting up the Postman API client

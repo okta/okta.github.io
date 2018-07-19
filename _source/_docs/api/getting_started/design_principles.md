@@ -137,7 +137,7 @@ See [Error Codes](error_codes) for a list of API error codes.
 
 The Okta API currently requires the custom HTTP authentication scheme `SSWS` for authentication. All requests must have a valid API key specified in the HTTP `Authorization` header with the `SSWS` scheme.
 
-    Authorization: SSWS 00QCjAl4MlV-WPXM…0HmjFx-vbGua
+    Authorization: SSWS 00QCjAl4MlV-WPXM...0HmjFx-vbGua
 
 > See [Obtaining a token](getting_a_token) for instructions on how to get an API key for your organization.
 
@@ -308,7 +308,7 @@ In Okta, CORS allows JavaScript hosted on your websites to make an XHR to the Ok
 
 ### API Support
 
-The Okta API supports CORS on an API by API basis. If you’re building an application that needs CORS, please check that the specific operation supports CORS for your use case. APIs that support CORS are marked with the following icon <span class="api-label api-label-small api-label-cors"><i class="fa fa-cloud-download"></i> CORS</span>.
+The Okta API supports CORS on an API by API basis. If you're building an application that needs CORS, please check that the specific operation supports CORS for your use case. APIs that support CORS are marked with the following icon <span class="api-label api-label-small api-label-cors"><i class="fa fa-cloud-download"></i> CORS</span>.
 
 ## Additional Help
 

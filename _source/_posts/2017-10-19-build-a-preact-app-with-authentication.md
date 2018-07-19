@@ -34,7 +34,7 @@ preact create default okta-preact-example
 ```
 
 This command will chug along for a few minutes scaffolding a basic Preact app
-and installing all the dependencies. Once it’s done, you should see a bunch of
+and installing all the dependencies. Once it's done, you should see a bunch of
 information on the command line informing you of what you can do next.
 
 Change into the application directory.
@@ -72,15 +72,15 @@ Helpers](https://github.com/developit/preact-cli/blob/HEAD/docs/webpack-helpers.
 and exporting functions to change the way Webpack behaves.
 
 Even though the PreactCLI says the application is running at
-`http://0.0.0.0:8080`, use `http://localhost:8080`. It’s the same thing and when
-you set up your application in the Okta dashboard, you’ll set
+`http://0.0.0.0:8080`, use `http://localhost:8080`. It's the same thing and when
+you set up your application in the Okta dashboard, you'll set
 `http://localhost:8080` as your base URL and callback URL, so this just makes
 sure that you can call the Okta APIs.
 
 
 ## Create Your Okta Application
 
-Now that you have the basic shell of an application, it’s time to add user
+Now that you have the basic shell of an application, it's time to add user
 authentication. If you don't already have one, create a free (forever) account
 at [Okta](https://developer.okta.com/signup/).
 
@@ -109,7 +109,7 @@ to log in to your Okta account (the admin user)._
 
 The easiest way to get Okta's authentication into your new Preact application
 will be to use Okta's [Sign-In
-Widget](https://github.com/okta/okta-signin-widget). You’ll install it with npm
+Widget](https://github.com/okta/okta-signin-widget). You'll install it with npm
 using:
 
 ```bash
@@ -187,7 +187,7 @@ export const withAuth = WrappedComponent => props =>
   <WrappedComponent auth={auth} {...props} />;
 ```
 
-In the first line of code, you can tell something’s different. The `h` module in
+In the first line of code, you can tell something's different. The `h` module in
 Preact is what turns
 [JSX](https://facebook.github.io/react/docs/introducing-jsx.html) into [DOM
 elements](https://developer.mozilla.org/en-US/docs/Web/API/Document_Object_Model/Introduction).
@@ -214,7 +214,7 @@ You'll also want to change the `redirectUri` property to `http://localhost:8080`
 because the Preact uses port `8080` instead of `3000` for normal React apps.
 
 The `login` function simply routes the user to the login page, while the
-`logout` function clears the tokens saved in the widget’s token manager, calls
+`logout` function clears the tokens saved in the widget's token manager, calls
 `signOut` on the widget, and redirects the user to the root of the application.
 
 Finally, a singleton of the `Auth` class is created to be shared by all the
@@ -250,7 +250,7 @@ Here, the `componentDidMount` method renders the Okta Sign-In Widget to the
 `div` in your render method and the `componentWillUnmount` function removes the
 widget.
 
-In the `render` method, there’s some strange-looking code. This allows you to
+In the `render` method, there's some strange-looking code. This allows you to
 set a reference to the current element into a variable called `widgetContainer`
 and then use it in the `componentDidMount` as `this.widgetContainer`. Neat, huh?
 Thanks to [Matt Raible](https://twitter.com/mraible) for showing me that trick!
@@ -473,8 +473,8 @@ export default withAuth(class Profile extends Component {
 You've added the authentication protection at the `Component` level in the
 `componentWillMount` function of the component. If the user is authenticated, it
 calls the `getCurrentUser` function on the higher-order component and adds the
-user to the component’s state. In the `render` function, you simply output the
-user’s name and email.
+user to the component's state. In the `render` function, you simply output the
+user's name and email.
 
 
 ## Update the Header Component
@@ -514,8 +514,8 @@ export default withAuth(class Header extends Component {
 })
 ```
 
-This will show the “Login” button if the user is not logged in and the “Logout”
-button if they are. It will also only show the “Profile” menu item to those
+This will show the "Login" button if the user is not logged in and the "Logout"
+button if they are. It will also only show the "Profile" menu item to those
 users who are logged in.
 
 
@@ -594,10 +594,10 @@ the code, Preact or Okta, feel free to reach out to me via
 [email](mailto:lee.brandt@okta.com), or hit me up in the comments or via Twitter
 [@leebrandt](https://twitter.com/leebrandt).
 
-If you’re interested in learning more about authentication using the Okta
-Sign-In Widget with Angular, you can follow Matt Raible’s posts at
+If you're interested in learning more about authentication using the Okta
+Sign-In Widget with Angular, you can follow Matt Raible's posts at
 <https://developer.okta.com/blog/2017/03/27/angular-okta-sign-in-widget> or
 <https://developer.okta.com/blog/2017/06/13/add-authentication-angular-pwa>, and
-If you want to know more about Okta’s Identity Platform, read Randall Degges
+If you want to know more about Okta's Identity Platform, read Randall Degges
 post at
 <https://developer.okta.com/blog/2017/08/29/meet-the-new-okta-identity-platform>.

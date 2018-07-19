@@ -1,15 +1,15 @@
 ---
 layout: blog_post
-title: 'Let’s Compare: JAX-RS vs Spring for REST Endpoints'
+title: "Let's Compare: JAX-RS vs Spring for REST Endpoints"
 author: bdemers
 tags: [spring, jaxrs, java, rest, stormtrooper]
 ---
 
-Need to decouple your web service and client? You’re probably using REST endpoints, and if you’re a Java shop you’ve probably tried out JAX-RS, Spring REST, or both. But is one better than the other? In this post I’ll go over the the differences between the two using basically the same code for an apples to apples comparison. In future posts I’ll show you how easy it is to secure these REST endpoints using Apache Shiro and Okta.
+Need to decouple your web service and client? You're probably using REST endpoints, and if you're a Java shop you've probably tried out JAX-RS, Spring REST, or both. But is one better than the other? In this post I'll go over the the differences between the two using basically the same code for an apples to apples comparison. In future posts I'll show you how easy it is to secure these REST endpoints using Apache Shiro and Okta.
 
 ## Lay Down the Foundation – Model and DAO
 
-To keep things focused, I’ll leave the Maven dependencies out of this post. You can browse the full source on [Github](http://github.com/oktadeveloper/jaxrs-spring-blog-example), the pom files should be self explanatory: one for JAX-RS, another for Spring.
+To keep things focused, I'll leave the Maven dependencies out of this post. You can browse the full source on [Github](http://github.com/oktadeveloper/jaxrs-spring-blog-example), the pom files should be self explanatory: one for JAX-RS, another for Spring.
 
 First up, we need to get the common bits out of the way. A simple model and DAO (Data Access Object) will be used in all of the examples to register and manage `Stormtrooper` objects.
 
@@ -59,7 +59,7 @@ The actual implementation of the `StormtrooperDao` is not important for these ex
 
 ## Try Spring
 
-Now that we have the common bits out of the way, we can get into the meat of our Spring example. A basic Spring Boot app doesn’t get much easier than this:
+Now that we have the common bits out of the way, we can get into the meat of our Spring example. A basic Spring Boot app doesn't get much easier than this:
 
 ```java
 @SpringBootApplication
@@ -157,9 +157,9 @@ The `PostMapping` is an POST alias for the `@RequestMapping` annotation which ha
 
 Method parameters annotated with `@RequestBody` will be deserialize from the HTTP request before getting passed into the method. Return values are directly serialized to HTTP response using the `@ResponseBody` annotation (or simply by using `@RestController`), which will also bypass any MCV templates.
 
-In this code block the `updateTrooper()` method accepts HTTP `POST` requests made to `/trooper/{id}` and contain a serialized `Stormtrooper` (JSON). If the request path was `/troopers/FN-2187`, the `id` portion of the path would be assigned to the method’s `id` parameter. An updated `Stormtrooper` object is returned and serialized to the HTTP response.
+In this code block the `updateTrooper()` method accepts HTTP `POST` requests made to `/trooper/{id}` and contain a serialized `Stormtrooper` (JSON). If the request path was `/troopers/FN-2187`, the `id` portion of the path would be assigned to the method's `id` parameter. An updated `Stormtrooper` object is returned and serialized to the HTTP response.
 
-In the example above we are simply using a `POST` for both the create and update methods. To keep the example short and sweet, the DAO implementation doesn’t actually do partial updates, so this should actually be a `PUT`. Take a look at this blog post to read more about when to use [PUT vs POST](https://stormpath.com/blog/put-or-post).
+In the example above we are simply using a `POST` for both the create and update methods. To keep the example short and sweet, the DAO implementation doesn't actually do partial updates, so this should actually be a `PUT`. Take a look at this blog post to read more about when to use [PUT vs POST](https://stormpath.com/blog/put-or-post).
 ### Run the Spring Example
 
 To run this example, grab the [source](https://github.com/oktadeveloper/jaxrs-spring-blog-example), change to the `spring-boot` directory, start the application using `mvn spring-boot:run`, make requests to the server.
@@ -220,11 +220,11 @@ Pretty easy, right? Now you can stop the server with a `Ctrl-C` and move on to t
 
 ## Rinse and Repeat – JAX-RS
 
-We’ll use the same model and DAO for the JAX-RS example, all we’re going to change is the annotations on the `StormtroooperController` class.
+We'll use the same model and DAO for the JAX-RS example, all we're going to change is the annotations on the `StormtroooperController` class.
 
-Since JAX-RS is an API spec you need to pick an implementation, we will use [Jersey](https://jersey.java.net/) for this example. While it’s possible to create a JAX-RS application with no direct dependencies on a specific JAX-RS implementation, it would make for a more verbose example.
+Since JAX-RS is an API spec you need to pick an implementation, we will use [Jersey](https://jersey.java.net/) for this example. While it's possible to create a JAX-RS application with no direct dependencies on a specific JAX-RS implementation, it would make for a more verbose example.
 
-I picked Jersey for a couple reasons, mostly though it was because I already knew how get simple dependency injection working without jumping through any hoops, we are comparing this to Spring after all. Apache Shiro has an [example](https://github.com/apache/shiro/blob/master/samples/jaxrs/) that runs the same code on [Jersey](https://jersey.java.net/), [RestEasy](http://resteasy.jboss.org/), and [Apache CXF](https://cxf.apache.org/), if you’re interested in seeing a portable example.
+I picked Jersey for a couple reasons, mostly though it was because I already knew how get simple dependency injection working without jumping through any hoops, we are comparing this to Spring after all. Apache Shiro has an [example](https://github.com/apache/shiro/blob/master/samples/jaxrs/) that runs the same code on [Jersey](https://jersey.java.net/), [RestEasy](http://resteasy.jboss.org/), and [Apache CXF](https://cxf.apache.org/), if you're interested in seeing a portable example.
 
 This example also differs a bit from the Spring Boot one in that this example is packaged as a WAR, and Spring Boot was a single JAR. Packing this example in an executable jar is possible, but outside the scope of this post
 
@@ -389,7 +389,7 @@ Server: Jetty(9.3.12.v20160915)
 }
 ```
 
-Now we have seen basically the same code run in both Spring and JAX-RS applications by simply changing the annotations. I like the JAX-RS annotations better, they’re more concise. That said, why choose between the two? Jersey and RestEasy both support Spring (along with Guice and CDI/Weld). Let’s create a third example combining the two
+Now we have seen basically the same code run in both Spring and JAX-RS applications by simply changing the annotations. I like the JAX-RS annotations better, they're more concise. That said, why choose between the two? Jersey and RestEasy both support Spring (along with Guice and CDI/Weld). Let's create a third example combining the two
 
 ## JAX-RS and Spring – So Happy Together
 
@@ -436,9 +436,9 @@ To help you navigate between the world of Spring and JAX-RS here is a quick chea
 
 In my opinion it breaks down like this:
 
-If you’re already a Spring shop, just use Spring. If you’re creating an object JSON / XML REST layer, JAX-RS resources backed by the DI framework of your choice (Spring, Guice, etc.) might be the way to go. Rendering pages server side is not part of the JAX-RS spec (though it is supported with extensions). I hacked up a [Thymeleaf](http://www.thymeleaf.org/) view for Jersey once, but I think Spring MVC takes the cake here.
+If you're already a Spring shop, just use Spring. If you're creating an object JSON / XML REST layer, JAX-RS resources backed by the DI framework of your choice (Spring, Guice, etc.) might be the way to go. Rendering pages server side is not part of the JAX-RS spec (though it is supported with extensions). I hacked up a [Thymeleaf](http://www.thymeleaf.org/) view for Jersey once, but I think Spring MVC takes the cake here.
 
-Now, comparing a Spring Boot application and an WAR packaged application, isn’t exactly comparing apples to apples. Dropwizard (which uses an embedded Jetty container and Jersey) is probably the closest thing to a Spring Boot app. Hopefully this post gave you a bit more background so you can do your own comparison. If you have any questions hit me up on Twitter [@briandemers](https://twitter.com/briandemers)!
+Now, comparing a Spring Boot application and an WAR packaged application, isn't exactly comparing apples to apples. Dropwizard (which uses an embedded Jetty container and Jersey) is probably the closest thing to a Spring Boot app. Hopefully this post gave you a bit more background so you can do your own comparison. If you have any questions hit me up on Twitter [@briandemers](https://twitter.com/briandemers)!
 
 Want to learn more about securing your Spring or JAX-RS applications, Apache Shiro, or REST fundamentals? Take a look at these posts:
 

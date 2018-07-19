@@ -87,6 +87,7 @@ async function run(dir) {
   const files = await getFiles(path.resolve(dir));
   const badFiles = [];
   header(`Found ${files.filesToCheck.length} files to check in ${dir}`);
+
   for (let file of files.filesToCheck) {
     const links = findBadLinks(file, files.fileMap);
     if (links.length > 0) {
