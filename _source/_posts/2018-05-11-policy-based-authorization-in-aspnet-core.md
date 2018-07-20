@@ -209,7 +209,7 @@ This approach is better than the role-based approach because the security code i
 
 It's also more flexible, as you can easily change what the minimum age required is because the logic is encapsulated in a single place. You can go further, and make a separated library with your company requirements and reuse it in all the applications of the company. Also, you can write your unit tests for your different handlers. Isn't it awesome?!
 
-> Check out the [unit tests written by the ASP.NET Core Team](https://github.com/aspnet/Security/tree/dev/test/Microsoft.AspNetCore.Authorization.Test).
+> Check out the [unit tests written by the ASP.NET Core Team](https://github.com/aspnet/Security/blob/master/test/Microsoft.AspNetCore.Authorization.Test/Microsoft.AspNetCore.Authorization.Test.csproj).
 
 ## Policy-Based Authorization in ASP.NET Core with Okta
 

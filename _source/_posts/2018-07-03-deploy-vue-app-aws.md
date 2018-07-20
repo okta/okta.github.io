@@ -17,7 +17,7 @@ As an AWS Certified Solutions Architect, I am frequently asked how to deploy Vue
 
 Amazon Web Services (AWS) is a cloud platform that provides numerous [on-demand cloud services](https://aws.amazon.com/products/).  These services include cloud computing, file storage, relational databases, a content distribution network, and many, many more.   AWS came into existence not as a retail offering, but rather Amazon's internal answer to the growing complexity of the infrastructure that was responsible for powering Amazon.com and their e-commerce operations.  Amazon quickly realized their cloud-based infrastructure was a compelling, cost-effective solution and opened it to the public in 2006.
 
-At the time of writing this article, AWS is worth an estimated [$250B](https://seekingalpha.com/article/4140036-much-amazon-web-services-worth-now) (yes, that's a B for BILLION) and used by thousands of companies and developers worldwide.
+At the time of writing this article, AWS is worth an estimated <a href="https://seekingalpha.com/article/4140036-much-amazon-web-services-worth-now" data-proofer-ignore>$250B</a> (yes, that's a B for BILLION) and used by thousands of companies and developers worldwide.
 
 {% img blog/vue-aws/aws-vue-aws-services.png alt:"AWS Products" width:"800" %}{: .center-image }
 

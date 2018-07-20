@@ -497,7 +497,6 @@ public class AppRedirectUriManager implements ApplicationRunner {
        }
 
        // todo: update logout redirect URIs with redirectUri (not currently available in Java SDK)
-       // https://github.com/okta/openapi/issues/132
        app.getSettings().getOAuthClient().setRedirectUris(Collections.toList(updatedRedirectUris));
        app.update();
        System.exit(0);
@@ -570,7 +569,7 @@ dir ('./holdings-api') {
 }
 ```
 
-Commit and push your changes, and your app should be updated with a redirect URI for `http://{yourPreviewURL}/login`. You'll need to manually add a logout redirect URI for `http://{yourPreviewURL}` since this is [not currently supported by Okta's Java SDK](https://github.com/okta/openapi/issues/132).
+Commit and push your changes, and your app should be updated with a redirect URI for `http://{yourPreviewURL}/login`. You'll need to manually add a logout redirect URI for `http://{yourPreviewURL}` since this is [not currently supported by Okta's Java SDK](https://github.com/okta/okta-sdk-java/issues/207).
 
 {% img blog/spring-boot-jenkins-x/okta-settings-with-redirect-uris.png alt:"Okta app with URI settings" width:"700" %}{: .center-image }
 
