@@ -1,9 +1,9 @@
 ---
 layout: blog_post
-title: "Add Social Login Your Spring Boot 2 App"
+title: "Add Social Login Your Spring Boot 2.0 App"
 author: moksamedia
 description: "The primary benefits of social login are ease of use and security. It's easier for your users to log into your app if they can use credentials they've already created on a a service they trust."
-tags: [authentication, spring boot, oidc, social]
+tags: [authentication, spring boot, oidc, social login]
 tweets:
 - "Spring Boot + Okta + Social Auth in minutes! →"
 - "Enable Social Auth for you Spring Boot app with Okta"
@@ -46,11 +46,11 @@ You'll need the following:
 
 You'll want to check your Okta OIDC Application's configuration. It should match the following photo. This is also where you'll get your client ID and client secret. **Note that under "Allowed grant types" the "Implicit (Hybrid)" checkbox is checked (it's not checked by default).**
 
-{% img blog/social-spring-boot/enable-implcit.png alt:"Enable Implicit Flow" width:"600" %}{: .center-image }
+{% img blog/social-spring-boot/enable-implicit.png alt:"Enable Implicit Flow" width:"600" %}{: .center-image }
 
 You should be able to run `./mvnw` from the terminal to run the app (you only need to type `./mvnw` because the `pom.xml` specifies a default goal of `spring-boot:run`, so typing `./mvnw` is the same as typing `./mvnw spring-boot:run`). 
 
-To test the app, **log out of your developer.okta.com account** and go to `http://localhost:8080` (Or open an incognito window).
+To test the app, **log out of your developer.okta.com account** and go to `http://localhost:8080` (or open an incognito window).
 
 If all goes well, you'll be redirected to the example app welcome screen that says: "Social Login, Custom Login, and Spring Boot Example".
 
@@ -122,7 +122,7 @@ Your Okta Identity Providers page should now look like the following. Note the t
 
 The final step is to update the Okta Sign-in Widget on your customized sign-in page. This part is ridiculously easy.  You'll need the IdP IDs from above. 
 
-Open the `src/main/resources/templates/login.html` file and take a look at the javascript block at the bottom of the page. You configure the identity providers in the Okta Sign In widget's config using the `idps` property. 
+Open the `src/main/resources/templates/login.html` file and take a look at the JavaScript block at the bottom of the page. You configure the identity providers in the Okta Sign-In Widget's config using the `idps` property. 
 
 See the commented section of code below.
 
@@ -160,7 +160,7 @@ new OktaSignIn(config).renderEl(
 
 That's it! Pretty cool, huh?
 
-The Okta Sign-In Widget has a lot of great configuration options, and you can check out the docs for them [on the Github page](https://github.com/okta/okta-signin-widget).
+The Okta Sign-In Widget has a lot of great configuration options, and you can check out the docs for them [on the GitHub page](https://github.com/okta/okta-signin-widget).
 
 ## Try Out Your New Spring Boot App with Social Login
 
