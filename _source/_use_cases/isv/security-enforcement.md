@@ -12,7 +12,7 @@ excerpt: Close the Loop with the power of identity context to resolve or mitgate
 
 Building from the foundation laid in our [Security Analytics] guide
 
-To resolve an incident or mitigate a perceived threat, an external system may want to affect a user’s state, modify authentication policies or reduce application availability. This document will describe how and when a system might take these actions.
+To resolve an incident or mitigate a perceived threat, an external system may want to affect a user's state, modify authentication policies or reduce application availability. This document will describe how and when a system might take these actions.
 
 ### Information About Examples
 

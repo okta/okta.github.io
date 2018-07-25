@@ -1,5 +1,5 @@
 
-Like the [User object](#users) discussed previously the appUser object is an extensible and information rich data source.  The appUser object is a representation of a user’s profile specific to the associated application or directory and can include profile data, role, license information and more depending on the containing application.
+Like the [User object](#users) discussed previously the appUser object is an extensible and information rich data source.  The appUser object is a representation of a user's profile specific to the associated application or directory and can include profile data, role, license information and more depending on the containing application.
 
 #### Best Practices appUsers
 

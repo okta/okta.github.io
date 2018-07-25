@@ -226,7 +226,7 @@ Response
 }
 ~~~
 
-> A successful IdP-initiated Sign On into an app called “Workplace by Facebook”:
+> A successful IdP-initiated Sign On into an app called "Workplace by Facebook":
 
 Note the `target[1].alternateId` is different than the `actor.alternateId`
 

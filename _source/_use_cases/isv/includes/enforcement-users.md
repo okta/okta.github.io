@@ -1,5 +1,5 @@
 
-An individual user’s
+An individual user's
  [state](security-enforcement#user---change-state),
  [sessions](security-enforcement#user---clear-sessions),
  [credentials](security-enforcement#user---credentials) and
@@ -7,7 +7,7 @@ An individual user’s
 
 #### User - Change State
 
-A user’s state can be toggled according to a prescribed [state machine](/docs/api/resources/users#user-status)
+A user's state can be toggled according to a prescribed [state machine](/docs/api/resources/users#user-status)
 
 Suspending a user is a non-destructive operation that will leave a user profile, credentials, enrolled factors, groups membership and assigned applications intact while still preventing the user from signing into Okta or any subordinate application. *The act of suspending a user will destroy any existing Okta session for that user.*
 
@@ -69,9 +69,9 @@ HTTP/1.1 204 NO CONTENT
 
 #### User - Credentials
 
-In certain situations, expiring or changing a user’s password might also be prudent. Okta provides a consistent mechanism for expiring and changing passwords for users regardless of password authority. For example, when integrated with an on premise Active Directory (AD) expiring or resetting passwords will propagate through Okta to AD with no changes required to the calling client.
+In certain situations, expiring or changing a user's password might also be prudent. Okta provides a consistent mechanism for expiring and changing passwords for users regardless of password authority. For example, when integrated with an on premise Active Directory (AD) expiring or resetting passwords will propagate through Okta to AD with no changes required to the calling client.
 
-While there are more operations you can perform against a user’s credentials we will focus on expiring and changing passwords. *Changing or expiring a password does not clear existing sessions for that user*.
+While there are more operations you can perform against a user's credentials we will focus on expiring and changing passwords. *Changing or expiring a password does not clear existing sessions for that user*.
 
 ##### User - Expire Password
 

@@ -5,7 +5,7 @@ Groups are a first-class citizen in the Okta environment. They serve purposes in
 + Application Role
 + Policy Assignment
 
-With that in mind, the simple manipulation of group membership can have far reaching effects to strengthen your customer’s security posture.\\
+With that in mind, the simple manipulation of group membership can have far reaching effects to strengthen your customer's security posture.\\
 For example
 
 + Adding a user to a group could enforce a restrictive authentication policy with short session lifetimes that always require MFA policy
