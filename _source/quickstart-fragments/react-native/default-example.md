@@ -65,6 +65,7 @@ Assuming you're using an app created with `create-react-native-app`, modify your
 ```
 
 In your application's controller, create a new instance of the `TokenClient`:
+{% include domain-admin-warning.html %}
 
 ```javascript
 // App.js
