@@ -1,0 +1,27 @@
+<!doctype html>
+<html class="no-js" lang="en" dir="ltr">
+{% include head.html %}
+<body>
+<div class="Page Page--docs-page">
+    <!-- START Header -->
+    {% include header.html %}
+    <!-- END Header -->
+    <!-- START Page Center w/Sub Nav & Content -->
+    <section class="PageContent">
+        <!-- START Page Content -->
+        <div class="PageContent-main language-content">
+            <a href="/documentation/" class="breadcrumb">Docs</a>
+            {{ content }}
+        </div>
+        <!-- END Page Content -->
+    </section>
+    <!-- END Page Center w/Sub Nav & Content -->
+    <!-- START Footer -->
+    {% include footer.html %}
+    <!-- END Footer -->
+</div>
+<!-- START Post Footer -->
+{% include_cached post-footer.html %}
+<!-- END Post Footer -->
+</body>
+</html>

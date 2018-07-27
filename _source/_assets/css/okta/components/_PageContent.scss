@@ -1,3 +1,9 @@
+.page {
+	&-content {
+		overflow-x: hidden;
+	}
+}
+
 .Page {
 	background: get-color('white');
 }

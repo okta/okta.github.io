@@ -47,4 +47,17 @@ ul.code-list {
       color: $white;
     }
   }
+
+  &.highlighted {
+    background: $cerise;
+    border: $cerise;
+
+    .code-icon::before {
+      color: $white;
+    }
+
+    &:link, &:active, &:visited {
+      color: $white;
+    }
+  }
 }
