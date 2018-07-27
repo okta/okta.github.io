@@ -10,17 +10,17 @@ integration: client
 <ul class='language-tabs'>
     <li>
         <a href='#'>
-            <i class='icon docsPage code-java-32'></i><span>Lorem</span>
+            <i class='icon code-java-32'></i><span>Lorem</span>
         </a>
     </li>
     <li class="active">
         <a href='#'>
-            <i class='icon docsPage code-php-32'></i><span>Ipsum</span>
+            <i class='icon code-php-32'></i><span>Ipsum</span>
         </a>
     </li>
     <li>
         <a href='#'>
-            <i class='icon docsPage code-android-32'></i><span>Dolor</span>
+            <i class='icon code-android-32'></i><span>Dolor</span>
         </a>
     </li>
 </ul>

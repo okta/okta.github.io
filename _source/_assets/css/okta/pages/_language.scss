@@ -57,19 +57,15 @@
 			display: inline-block;
 			margin: 0;
 			padding: 0;
-			margin-left: get-spacing('small');
+			margin-right: get-spacing('small');
 			margin-top: get-spacing('xx-small');
 			margin-bottom: -#{get-spacing('xx-small')} !important;
 			border-bottom: solid 2px $midnight;
 			transition: 0.2s all;
 			vertical-align: middle;
 
-			&:first-child {
-				margin-left: 0;
-			}
-
 			a {
-				@include font-size('button');
+				@include font-size('base');
 				@include font-weight('semibold');
 				display: block;
 				color: $periglacial-blue;
@@ -243,7 +239,6 @@
 		&-tabs {
 			li {
 				width: 100%;
-				margin-left: 0;
 				margin-bottom: get-spacing('x-small') !important;
 			}
 		}
