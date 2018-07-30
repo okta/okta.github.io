@@ -15,9 +15,6 @@ if [[ -z "${SUCCESS}" ]]; then
     export SUCCESS=0
 fi
 
-# Use latest version of Node
-setup_service node v10.7.0
-
 # Install required dependencies
 npm install -g @okta/ci-update-package
 npm install -g @okta/ci-pkginfo
