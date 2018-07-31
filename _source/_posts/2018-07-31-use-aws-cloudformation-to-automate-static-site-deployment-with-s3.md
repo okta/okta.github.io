@@ -57,7 +57,11 @@ The easiest option is to put your Template and required code in an S3 bucket and
 
 Before you read the instructions on how to do this, you can try running the CloudFormation Stack if you have already activated your Amazon AWS Account. Just click the link below:
 
-Launch this CloudFormation Template: `https://console.aws.amazon.com/cloudformation/home?region=us-east-1#/stacks/new?stackName=HTMLtoS3&templateURL=https://s3.amazonaws.com/htmlformation/s3template.yml`
+Launch this CloudFormation Template:
+
+```
+https://console.aws.amazon.com/cloudformation/home?region=us-east-1#/stacks/new?stackName=HTMLtoS3&templateURL=https://s3.amazonaws.com/htmlformation/s3template.yml
+```
 
 [Click here to do this.](https://console.aws.amazon.com/cloudformation/home?region=us-east-1#/stacks/new?stackName=ttmltoS3&templateURL=https://s3.amazonaws.com/htmlformation/s3template.yml)
 
