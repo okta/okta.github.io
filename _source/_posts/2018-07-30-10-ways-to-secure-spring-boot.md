@@ -128,7 +128,7 @@ X-Frame-Options: DENY
 X-XSS-Protection: 1; mode=block
 ```
 
-Spring Security \*_does not add_ a CSP by default. You can enable the CSP header in your Spring Boot app using the configuration below.
+Spring Security _does not add_ a CSP by default. You can enable the CSP header in your Spring Boot app using the configuration below.
 
 ```java
 @EnableWebSecurity
