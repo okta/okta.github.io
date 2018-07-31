@@ -29,7 +29,7 @@ To force HTTPS in your Spring Boot app, you can extend `WebSecurityConfigurerAda
 
 ```java
 @Configuration
-public class WebSecurityConfigurerAdapter extends WebSecurityConfigurerAdapter {
+public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
@@ -42,7 +42,7 @@ This configuration will also force HTTPS in development, which can be a pain bec
 
 ```java
 @Configuration
-public class WebSecurityConfigurerAdapter extends WebSecurityConfigurerAdapter {
+public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
@@ -61,7 +61,7 @@ Another important thing to do is to use HTTP Strict Transport Security (HSTS). H
 
 There's a good chance you don't know how many direct dependencies your application uses. It's extremely likely you don't know how many transitive dependencies your application uses. This is often true, despite dependencies making up the majority of your overall application. Attackers target open source dependencies more and more, as their reuse provides many victims for a malicious hacker. It's important to ensure there are no known vulnerabilities in the entire dependency tree of your application.
 
-Snyk tests your application build artifacts, flagging those dependencies that have known vulnerabilities. It provides you with a list of vulnerabilities that exist in the packages you're using in your application as a dashboard.
+[Snyk](http://snyk.io) tests your application build artifacts, flagging those dependencies that have known vulnerabilities. It provides you with a list of vulnerabilities that exist in the packages you're using in your application as a dashboard.
 
 {% img blog/spring-boot-10-ways-to-secure/snyk-vulnerabilities.png alt:"Snyk Vulnerabilities Report" width:"700" %}{: .center-image }
 
@@ -71,7 +71,7 @@ New vulnerabilities are found in existing projects and libraries every day, so i
 
 Snyk is available via a web UI as well as a CLI, so you can easily integrate it with your CI environment, and configure it to break your build when vulnerabilities exist with a severity beyond your set threshold.
 
-You can use Snyk for free for open source projects or for private projects with a limited number of monthly tests.
+You can use [Snyk for free](https://snyk.io/signup) for open source projects or for private projects with a limited number of monthly tests.
 
 ## 3. Upgrade To Latest Releases
 
