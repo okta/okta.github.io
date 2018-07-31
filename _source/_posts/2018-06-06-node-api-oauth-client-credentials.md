@@ -11,7 +11,7 @@ tweets:
 
 Securing server-to-server API services can be tricky. OAuth 2.0 is an excellent way to offload user authentication to another service, but what if there is no user to authenticate? In this article, I'll show you how you can use OAuth 2.0 outside the context of a user, in what is also known as the Client Credentials Flow.
 
-Instead of storing and managing API keys for your clients (other servers), you can use a third-party service to manage authorization for you. The way this works is that an API client sends a request to an OAuth server asking for an API token. That token is then sent from the API client to your API service along with their request. Once you have the client's token, you can verify its validity without needing to store any information about the client..
+Instead of storing and managing API keys for your clients (other servers), you can use a third-party service to manage authorization for you. The way this works is that an API client sends a request to an OAuth server asking for an API token. That token is then sent from the API client to your API service along with their request. Once you have the client's token, you can verify its validity without needing to store any information about the client.
 
 {% img blog/node-client-credentials/client-credentials-flow.png alt:"Client Credentials Flow" width:"600" %}{: .center-image }
 
