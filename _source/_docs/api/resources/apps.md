@@ -2763,6 +2763,53 @@ curl -v -X PUT \
 }
 ~~~
 
+#### Set Self-Service Application Assignment
+{:.api .api-operation}
+
+Enable or disable self-service application assignment by modifying the `accessibility.selfService` property.
+
+##### Request Example
+
+~~~sh
+curl -v -X PUT \
+-H "Accept: application/json" \
+-H "Content-Type: application/json" \
+-H "Authorization: SSWS ${api_token}" \
+-d '{
+  "name": "testorgone_examplecustomsaml20app_1",
+  "label": "Example Custom SAML 2.0 App",
+  "signOnMode": "SAML_2_0",
+  "accessibility": {
+    "selfService": true,
+    "errorRedirectUrl": null,
+    "loginRedirectUrl": null
+  }
+}' "https://{yourOktaDomain}/api/v1/apps/0oainmLkOL329Jcju0g3"
+~~~
+
+##### Response Example
+
+[Application](#application-model) with updated [Accessibility Object](#accessibility-object).
+
+##### Response Example (Self-Service Application Assignment Not Available)
+If you encounter the following error when enabling self-service, you can read about [username overrides](https://help.okta.com/en/prod/Content/Topics/Directory/Directory_Profile_Editor.htm#Expressions) with profile mappings (Universal Directory) and how to [update user permissions](https://help.okta.com/en/prod/Content/Topics/Directory/Directory_Profile_Editor.htm#createcustomattrib) on properties in the user profile to secure your app before enabling self-service.
+
+~~~ http
+HTTP/1.1 403 Forbidden
+Content-Type: application/json
+
+{
+  "errorCode": "E0000044",
+  "errorSummary": "Self service application assignment is not supported.",
+  "errorLink": "E0000044",
+  "errorCauses": [
+      {
+          "errorSummary": "Self service is not available because the instance : Example Custom SAML 2.0 App has username set to use read-write property and that would create a security risk."
+      }
+  ]
+}
+~~~
+
 ### Delete Application
 {:.api .api-operation}
 
