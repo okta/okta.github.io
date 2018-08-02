@@ -735,7 +735,7 @@ Are you sold? [Register for a forever-free developer account](https://developer.
 
 ### Spring Security + OIDC
 
-[Spring Security added OIDC support in its 5.0 release](/blog/2017/12/18/spring-security-5-oidc). Since then, they've made quite a few improvements and simplified its required configuration. I figured it'd be fun to explore the latest and greatest, so I started by updating `pom.xml` with Spring's snapshot repositories, upgrading Spring Boot and Spring Security to nightly builds, and adding the necessary Spring Security dependencies to do OIDC authentication.
+[Spring Security added OIDC support in its 5.0 release](/blog/2017/12/18/spring-security-5-oidc). Since then, they've made quite a few improvements and simplified its required configuration. I figured it'd be fun to explore the latest and greatest, so I started by updating `pom.xml` with Spring's lib-snapshot repositories, upgrading Spring Boot to [2.1 M1](https://spring.io/blog/2018/07/30/spring-boot-2-1-m1) (which includes [Spring Security 5.1 M2](https://spring.io/blog/2018/07/30/spring-security-5-1-0-m2-released)), and adding the necessary Spring Security dependencies to do OIDC authentication.
 
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
@@ -744,14 +744,9 @@ Are you sold? [Register for a forever-free developer account](https://developer.
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>2.1.0.BUILD-SNAPSHOT</version>
+        <version>2.1.0.M1</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
-
-    <properties>
-        ...
-        <spring-security.version>5.1.0.BUILD-SNAPSHOT</spring-security.version>
-    </properties>
 
     <dependencies>
         ...
@@ -779,7 +774,7 @@ Are you sold? [Register for a forever-free developer account](https://developer.
         <pluginRepository>
             <id>spring-snapshots</id>
             <name>Spring Snapshots</name>
-            <url>https://repo.spring.io/snapshot</url>
+            <url>https://repo.spring.io/libs-snapshot</url>
             <snapshots>
                 <enabled>true</enabled>
             </snapshots>
@@ -789,7 +784,7 @@ Are you sold? [Register for a forever-free developer account](https://developer.
         <repository>
             <id>spring-snapshots</id>
             <name>Spring Snapshot</name>
-            <url>http://repo.spring.io/snapshot</url>
+            <url>https://repo.spring.io/libs-snapshot</url>
         </repository>
     </repositories>
 </project>
@@ -823,49 +818,28 @@ To make Spring Security React-friendly, create a `SecurityConfiguration.java` fi
 ```java
 package com.okta.developer.jugtours.config;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.security.web.authentication.LoginUrlAuthenticationEntryPoint;
-import org.springframework.security.web.authentication.SavedRequestAwareAuthenticationSuccessHandler;
 import org.springframework.security.web.csrf.CookieCsrfTokenRepository;
+import org.springframework.security.web.savedrequest.HttpSessionRequestCache;
 import org.springframework.security.web.savedrequest.RequestCache;
-import org.springframework.security.web.savedrequest.SavedRequest;
+import org.springframework.security.web.savedrequest.SimpleSavedRequest;
 
-import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-import java.util.Collection;
-import java.util.List;
-import java.util.Locale;
-import java.util.Map;
 
 @Configuration
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
-    private final Logger log = LoggerFactory.getLogger(SecurityConfiguration.class);
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        RequestCache requestCache = refererRequestCache();
-        SavedRequestAwareAuthenticationSuccessHandler handler = new SavedRequestAwareAuthenticationSuccessHandler();
-        handler.setRequestCache(requestCache);
         http
-            .exceptionHandling()
-                .authenticationEntryPoint(new LoginUrlAuthenticationEntryPoint("/oauth2/authorization/okta"))
-                .and()
-            .oauth2Login()
-                .successHandler(handler)
-                .and()
+            .oauth2Login().and()
             .csrf()
                 .csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse())
-                .and()
-            .requestCache()
-                .requestCache(requestCache)
                 .and()
             .authorizeRequests()
                 .antMatchers("/**/*.{js,html,css}").permitAll()
@@ -874,121 +848,38 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     }
 
     @Bean
+    @Profile("dev")
     public RequestCache refererRequestCache() {
-        return new RequestCache() {
-            private String savedAttrName = getClass().getName().concat(".SAVED");
-
+        return new HttpSessionRequestCache() {
             @Override
             public void saveRequest(HttpServletRequest request, HttpServletResponse response) {
                 String referrer = request.getHeader("referer");
                 if (referrer != null) {
-                    request.getSession().setAttribute(this.savedAttrName, referrerRequest(referrer));
+                    request.getSession().setAttribute("SPRING_SECURITY_SAVED_REQUEST", new SimpleSavedRequest(referrer));
                 }
-            }
-
-            @Override
-            public SavedRequest getRequest(HttpServletRequest request, HttpServletResponse response) {
-                HttpSession session = request.getSession(false);
-
-                if (session != null) {
-                    return (SavedRequest) session.getAttribute(this.savedAttrName);
-                }
-
-                return null;
-            }
-
-            @Override
-            public HttpServletRequest getMatchingRequest(HttpServletRequest request, HttpServletResponse response) {
-                return request;
-            }
-
-            @Override
-            public void removeRequest(HttpServletRequest request, HttpServletResponse response) {
-                HttpSession session = request.getSession(false);
-
-                if (session != null) {
-                    log.debug("Removing SavedRequest from session if present");
-                    session.removeAttribute(this.savedAttrName);
-                }
-            }
-        };
-    }
-
-    private SavedRequest referrerRequest(final String referrer) {
-        return new SavedRequest() {
-            @Override
-            public String getRedirectUrl() {
-                return referrer;
-            }
-
-            @Override
-            public List<Cookie> getCookies() {
-                return null;
-            }
-
-            @Override
-            public String getMethod() {
-                return null;
-            }
-
-            @Override
-            public List<String> getHeaderValues(String name) {
-                return null;
-            }
-
-            @Override
-            public Collection<String> getHeaderNames() {
-                return null;
-            }
-
-            @Override
-            public List<Locale> getLocales() {
-                return null;
-            }
-
-            @Override
-            public String[] getParameterValues(String name) {
-                return new String[0];
-            }
-
-            @Override
-            public Map<String, String[]> getParameterMap() {
-                return null;
             }
         };
     }
 }
 ```
 
-This class has a lot going on, so let me explain a few things. At the beginning of the `configure()` method, you're setting up a new type of request cache that caches the referrer header (misspelled `referer` in real life), so Spring Security can redirect back to it after authentication. The referrer-based request cache comes in handy when you're developing React on `http://localhost:3000` and want to be redirected back there after logging in.
+This class has a lot going on, so let me explain a few things. The `RequestCache` bean overrides the default request cache. It saves the referrer header (misspelled `referer` in real life), so Spring Security can redirect back to it after authentication. The referrer-based request cache comes in handy when you're developing React on `http://localhost:3000` and want to be redirected back there after logging in. This bean is only activated in development, because it's not necessary in production when everything is running on the same port.
 
 ```java
-@Override
-protected void configure(HttpSecurity http) throws Exception {
-    RequestCache requestCache = refererRequestCache();
-    SavedRequestAwareAuthenticationSuccessHandler handler = new SavedRequestAwareAuthenticationSuccessHandler();
-    handler.setRequestCache(requestCache);
-    http
-        .exceptionHandling()
-            .authenticationEntryPoint(new LoginUrlAuthenticationEntryPoint("/oauth2/authorization/okta"))
-            .and()
-        .oauth2Login()
-            .successHandler(handler)
-            .and()
-        .csrf()
-            .csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse())
-            .and()
-        .requestCache()
-            .requestCache(requestCache)
-            .and()
-        .authorizeRequests()
-            .antMatchers("/**/*.{js,html,css}").permitAll()
-            .antMatchers("/", "/api/user").permitAll()
-            .anyRequest().authenticated();
+@Bean
+@Profile("dev")
+public RequestCache refererRequestCache() {
+    return new HttpSessionRequestCache() {
+        @Override
+        public void saveRequest(HttpServletRequest request, HttpServletResponse response) {
+            String referrer = request.getHeader("referer");
+            if (referrer != null) {
+                request.getSession().setAttribute("SPRING_SECURITY_SAVED_REQUEST", new SimpleSavedRequest(referrer));
+            }
+        }
+    };
 }
 ```
-
-The `authenticationEntryPoint()` line makes Spring Security redirect to Okta automatically. In Spring Security 5.1.0.RELEASE, this line won't be needed when you only have one OIDC provider configured; it'll redirect automatically.
 
 Configuring CSRF (cross site request forgery) protection with `CookieCsrfTokenRepository.withHttpOnlyFalse()` means that the `XSRF-TOKEN` cookie won't be marked HTTP-only, so React can read it and send it back when it tries to manipulate data. 
 
@@ -1539,3 +1430,7 @@ We've written some other cool Spring Boot and React tutorials, check them out if
 * [Build a React Application with User Authentication in 15 Minutes](/blog/2017/03/30/react-okta-sign-in-widget)
 
 If you have any questions, please don't hesitate to leave a comment below, or ask us on our [Okta Developer Forums](https://devforum.okta.com/). Follow us [on Twitter](https://twitter.com/oktadev) if you want to see more tutorials like this one!
+
+**Changelog:**
+
+* Jul 31, 2018: Updated to use Spring Boot 2.1.0 M1 and Spring Security 5.1.0 M2. You can see the example app changes in [okta-spring-boot-react-crud-example#6](https://github.com/oktadeveloper/okta-spring-boot-react-crud-example/pull/6); changes to this post can be viewed in [okta.github.io#2222](https://github.com/okta/okta.github.io/pull/2222).
