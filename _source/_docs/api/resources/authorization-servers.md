@@ -1591,17 +1591,21 @@ curl -v -X GET \
 
 ## OAuth 2.0 Token Management Operations
 
-* [List OAuth 2.0 Tokens for Authorization Server and Client](#list-oauth-20-tokens-for-authorization-server-and-client)
-* [Get OAuth 2.0 Token for Authorization Server and Client](#get-oauth-20-token-for-authorization-server-and-client)
-* [Revoke OAuth 2.0 Tokens for Authorization Server and Client](#revoke-oauth-20-tokens-for-authorization-server-and-client)
-* [Revoke OAuth 2.0 Token for Authorization Server and Client](#revoke-oauth-20-token-for-authorization-server-and-client)
+These endpoints allow you to manage tokens issued by Okta at an Authorization Server and Client level (for example, revoking all tokens issued by an Authorization Server for a specific Client all at once). You can also [revoke specific tokens](/authentication-guide/tokens/revoking-tokens) or [manage tokens at the User level](/docs/api/resources/users#user-oauth-20-token-operations).
 
-### List OAuth 2.0 Tokens for Authorization Server and Client
+Read [Working With Tokens](/authentication-guide/tokens/) to understand more about how OAuth 2.0 tokens work.
+
+* [List OAuth 2.0 Refresh Tokens for Authorization Server and Client](#list-oauth-20-refresh-tokens-for-authorization-server-and-client)
+* [Get OAuth 2.0 Refresh Token for Authorization Server and Client](#get-oauth-20-refresh-token-for-authorization-server-and-client)
+* [Revoke OAuth 2.0 Refresh Tokens for Authorization Server and Client](#revoke-oauth-20-refresh-tokens-for-authorization-server-and-client)
+* [Revoke OAuth 2.0 Refresh Token for Authorization Server and Client](#revoke-oauth-20-refresh-token-for-authorization-server-and-client)
+
+### List OAuth 2.0 Refresh Tokens for Authorization Server and Client
 {:.api .api-operation}
 
 {% api_operation get /api/v1/authorizationServers/${authorizationServerId}/clients/${clientId}/tokens %}
 
-Lists all tokens for the authorization server and client.
+Lists all refresh tokens issued by an Authorization Server for a specific Client.
 
 #### Request Parameters
 {:.api .api-request .api-request-params}
@@ -1611,10 +1615,8 @@ Lists all tokens for the authorization server and client.
 | authorizationServerId | ID of the authorization server                                                               | URL        | String   | TRUE     |         |
 | clientId              | ID of the client                                                                             | URL        | String   | TRUE     |         |
 | expand                | Valid value: `scope`. If specified, scope details are included in the `_embedded` attribute. | Query      | String   | FALSE    |         |
-| limit                 | The maximum number of tokens to return                                                       | Query      | Number   | FALSE    | 20      |
+| limit                 | The maximum number of tokens to return (maximum 200)                                         | Query      | Number   | FALSE    | 20      |
 | after                 | Specifies the pagination cursor for the next page of tokens                                  | Query      | String   | FALSE    |         |
-
-* The maximum value for `limit` is 200.
 
 #### Request Example
 {:.api .api-request .api-request-example}
@@ -1678,12 +1680,12 @@ curl -v -X GET \
 ~~~
 
 
-### Get OAuth 2.0 Token for Authorization Server and Client
+### Get OAuth 2.0 Refresh Token for Authorization Server and Client
 {:.api .api-operation}
 
 {% api_operation get /api/v1/authorizationServers/${authorizationServerId}/clients/${clientId}/tokens/${tokenId} %}
 
-Gets a token for the specified authorization server and client
+Gets a refresh token issued by an Authorization Server for the specified Client.
 
 #### Request Parameters
 {:.api .api-request .api-request-params}
@@ -1781,14 +1783,14 @@ curl -v -X GET \
 }
 ~~~
 
-### Revoke OAuth 2.0 Tokens for Authorization Server and Client
+### Revoke OAuth 2.0 Refresh Tokens for Authorization Server and Client
 {:.api .api-operation}
 
 {% api_lifecycle ea %}
 
 {% api_operation delete /api/v1/authorizationServers/${authorizationServerId}/clients/${clientId}/tokens %}
 
-Revokes all tokens for the specified authorization server and client
+Revokes all refresh tokens issued by an Authorization Server for the specified Client.
 
 #### Request Parameters
 {:.api .api-request .api-request-params}
@@ -1823,7 +1825,7 @@ HTTP/1.1 204 No Content
 
 {% api_operation delete /api/v1/authorizationServers/${authServerId}/clients/${clientId}/tokens/${tokenId} %}
 
-Revokes the specified token for the specified authorization server and client
+Revokes the specified refresh token.
 
 #### Request Parameters
 {:.api .api-request .api-request-params}

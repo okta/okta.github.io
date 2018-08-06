@@ -3074,14 +3074,14 @@ HTTP/1.1 204 No Content
 
 {% api_lifecycle ea %}
 
-### List OAuth 2.0 Tokens for User and Client
+### List OAuth 2.0 Refresh Tokens for User and Client
 {:.api .api-operation}
 
 {% api_lifecycle ea %}
 
 {% api_operation get /api/v1/users/${userId}/clients/${clientId}/tokens %}
 
-Lists all tokens for the specified user and client
+Lists all refresh tokens issued for the specified User and Client.
 
 #### Request Parameters
 {:.api .api-request .api-request-params}
@@ -3159,14 +3159,14 @@ curl -v -X GET \
 ]
 ~~~
 
-### Get OAuth 2.0 Token for User and Client
+### Get OAuth 2.0 Refresh Token for User and Client
 {:.api .api-operation}
 
 {% api_lifecycle ea %}
 
 {% api_operation get /api/v1/users/${userId}/clients/${clientId}/tokens/${tokenId} %}
 
-Gets a token for the specified user and client
+Gets a refresh token issued for the specified User and Client.
 
 #### Request Parameters
 {:.api .api-request .api-request-params}
@@ -3270,14 +3270,14 @@ curl -v -X GET \
 }
 ~~~
 
-### Revoke OAuth 2.0 Tokens for User and Client
+### Revoke OAuth 2.0 Refresh Tokens for User and Client
 {:.api .api-operation}
 
 {% api_lifecycle ea %}
 
 {% api_operation delete /api/v1/users/${userId}/clients/${clientId}/tokens %}
 
-Revokes all tokens for the specified user and client
+Revokes all refresh tokens issued for the specified User and Client.
 
 #### Request Parameters
 {:.api .api-request .api-request-params}
@@ -3305,14 +3305,14 @@ curl -v -X DELETE \
 HTTP/1.1 204 No Content
 ~~~
 
-### Revoke OAuth 2.0 Token for User and Client
+### Revoke OAuth 2.0 Refresh Token for User and Client
 {:.api .api-operation}
 
 {% api_lifecycle ea %}
 
 {% api_operation delete /api/v1/users/${userId}/clients/${clientId}/tokens/${tokenId} %}
 
-Revokes the specified token for the specified user and client
+Revokes the specified refresh token.
 
 #### Request Parameters
 {:.api .api-request .api-request-params}
