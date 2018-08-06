@@ -21,8 +21,6 @@ function oktaCustomRenderFunction(document_type, item) {
 
 (function($) {
 
-  
-
   function highlightHeader() {
     if ($(document).scrollTop() > 0) {
       $('.Page--docs-page').addClass('scrolling');
@@ -33,30 +31,29 @@ function oktaCustomRenderFunction(document_type, item) {
   };
 
   
-    $(".Header .Wrap .Logo").contextmenu(function(e) {
-          e.preventDefault();
-
-          $( ".Header-media-assets" ).toggleClass( "is-active" );
-
-          $("body, .Header-nav ul li a").one('click', function (e) {
-            if(!$(e.target).is('.Header-media-assets')) {
-              $( ".Header-media-assets" ).removeClass( "is-active" );
-            }
-        });
-
-        $(".PrimaryNav ul.menu a").hover(function(e){
-          $( ".Header-media-assets" ).removeClass( "is-active" );
-        });
+  $(".Header .Wrap .Logo").contextmenu(function(e) {
+    e.preventDefault();
+    $( ".Header-media-assets" ).toggleClass( "is-active" );
+    
+    $("body, .Header-nav ul li a").one('click', function (e) {
+      if(!$(e.target).is('.Header-media-assets')) {
+        $( ".Header-media-assets" ).removeClass( "is-active" );
+      }
     });
+    
+    $(".PrimaryNav ul.menu a").hover(function(e){
+      $( ".Header-media-assets" ).removeClass( "is-active" );
+    });
+  });
 
 
   var scrollTimeout;
   $(window).scroll(function () {
     if (scrollTimeout) {
       clearTimeout(scrollTimeout);
-  }
+    }
 
-  scrollTimeout = setTimeout(highlightHeader, 100);
+  	scrollTimeout = setTimeout(highlightHeader, 100);
   });
 
   $('.scrollTo, .PrimaryNav > ul.menu a').click(function(e) {
@@ -64,8 +61,8 @@ function oktaCustomRenderFunction(document_type, item) {
       e.preventDefault()
       $('html, body').animate({
         scrollTop: $(this.hash).offset().top - 80
-    }, 500);
-  }
+      }, 500);
+    }
   });
 
   $('.Header nav .SearchIcon').on('click', function(e) {
@@ -75,7 +72,7 @@ function oktaCustomRenderFunction(document_type, item) {
 
     if ($('.Header').hasClass('search-active')) {
       $('.Header nav #st-search-input-auto').focus();
-  }
+    }
   });
 
   $('.PrimaryNav-toggle').on('click', function(e){
