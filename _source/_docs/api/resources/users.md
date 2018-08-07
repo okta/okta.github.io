@@ -1726,7 +1726,10 @@ curl -v -X POST \
 ### Get Assigned App Links
 {:.api .api-operation}
 
-{% api_operation get /api/v1/users/${userId}/appLinks %} {% api_cors %}
+{% api_operation get /api/v1/users/${userId}/appLinks %} 
+
+{% api_cors %}
+This endpoint supports CORS, which means you can call it either from your backend server code, or from the browser. If you call it from the browser, use `me` as the user ID to retrieve the current user's assigned app links. If there is no active Okta session in the browser, the request will fail.
 
 Fetches appLinks for all direct or indirect (via group membership) assigned applications
 
