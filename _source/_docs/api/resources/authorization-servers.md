@@ -1790,7 +1790,7 @@ curl -v -X GET \
 
 {% api_operation delete /api/v1/authorizationServers/${authorizationServerId}/clients/${clientId}/tokens %}
 
-Revokes all refresh tokens issued by an Authorization Server for the specified Client.
+Revokes all refresh tokens issued by an Authorization Server for the specified Client. Any access tokens issued with these refresh tokens will also be revoked, but access tokens issued without a refresh token will not be affected.
 
 #### Request Parameters
 {:.api .api-request .api-request-params}
@@ -1825,7 +1825,7 @@ HTTP/1.1 204 No Content
 
 {% api_operation delete /api/v1/authorizationServers/${authServerId}/clients/${clientId}/tokens/${tokenId} %}
 
-Revokes the specified refresh token.
+Revokes the specified refresh token. If an access token was issued with this refresh token, it will also be revoked.
 
 #### Request Parameters
 {:.api .api-request .api-request-params}
