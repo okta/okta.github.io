@@ -3070,11 +3070,20 @@ curl -v -X DELETE \
 HTTP/1.1 204 No Content
 ~~~
 
-## User OAuth 2.0 Token Operations
+## User OAuth 2.0 Token Management Operations
+
+* [List Refresh Tokens](#list-refresh-tokens)
+* [Get Refresh Token](#get-refresh-token)
+* [Revoke All Refresh Tokens](#revoke-all-refresh-tokens)
+* [Revoke Refresh Token](#revoke-refresh-token)
+
+These endpoints allow you to manage tokens issued by an Authorization Server for a particular User and Client. For example, you could revoke every active refresh token for a User in the context of a specific Client. You can also [revoke specific tokens](/authentication-guide/tokens/revoking-tokens) or [manage tokens at the Authorization Server level](/docs/api/resources/authorization-servers#oauth-20-token-operations).
+
+Read [Working With Tokens](/authentication-guide/tokens/) to understand more about how OAuth 2.0 tokens work.
 
 {% api_lifecycle ea %}
 
-### List OAuth 2.0 Refresh Tokens for User and Client
+### List Refresh Tokens
 {:.api .api-operation}
 
 {% api_lifecycle ea %}
@@ -3159,7 +3168,7 @@ curl -v -X GET \
 ]
 ~~~
 
-### Get OAuth 2.0 Refresh Token for User and Client
+### Get Refresh Token
 {:.api .api-operation}
 
 {% api_lifecycle ea %}
@@ -3270,7 +3279,7 @@ curl -v -X GET \
 }
 ~~~
 
-### Revoke OAuth 2.0 Refresh Tokens for User and Client
+### Revoke All Refresh Tokens
 {:.api .api-operation}
 
 {% api_lifecycle ea %}
@@ -3305,7 +3314,7 @@ curl -v -X DELETE \
 HTTP/1.1 204 No Content
 ~~~
 
-### Revoke OAuth 2.0 Refresh Token for User and Client
+### Revoke Refresh Token
 {:.api .api-operation}
 
 {% api_lifecycle ea %}

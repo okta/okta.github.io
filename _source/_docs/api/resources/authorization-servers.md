@@ -1591,16 +1591,16 @@ curl -v -X GET \
 
 ## OAuth 2.0 Token Management Operations
 
-These endpoints allow you to manage tokens issued by Okta at an Authorization Server and Client level (for example, revoking all tokens issued by an Authorization Server for a specific Client all at once). You can also [revoke specific tokens](/authentication-guide/tokens/revoking-tokens) or [manage tokens at the User level](/docs/api/resources/users#user-oauth-20-token-operations).
+* [List Refresh Tokens](#list-refresh-tokens)
+* [Get Refresh Token](#get-refresh-token)
+* [Revoke All Refresh Tokens](#revoke-all-refresh-tokens)
+* [Revoke Refresh Token](#revoke-refresh-token)
+
+These endpoints allow you to manage tokens issued by an Authorization Server for a particular Client. For example, you could revoke every active refresh token for a specific Client. You can also [revoke specific tokens](/authentication-guide/tokens/revoking-tokens) or [manage tokens at the User level](/docs/api/resources/users#user-oauth-20-token-management-operations).
 
 Read [Working With Tokens](/authentication-guide/tokens/) to understand more about how OAuth 2.0 tokens work.
 
-* [List OAuth 2.0 Refresh Tokens for Authorization Server and Client](#list-oauth-20-refresh-tokens-for-authorization-server-and-client)
-* [Get OAuth 2.0 Refresh Token for Authorization Server and Client](#get-oauth-20-refresh-token-for-authorization-server-and-client)
-* [Revoke OAuth 2.0 Refresh Tokens for Authorization Server and Client](#revoke-oauth-20-refresh-tokens-for-authorization-server-and-client)
-* [Revoke OAuth 2.0 Refresh Token for Authorization Server and Client](#revoke-oauth-20-refresh-token-for-authorization-server-and-client)
-
-### List OAuth 2.0 Refresh Tokens for Authorization Server and Client
+### List Refresh Tokens
 {:.api .api-operation}
 
 {% api_operation get /api/v1/authorizationServers/${authorizationServerId}/clients/${clientId}/tokens %}
@@ -1680,7 +1680,7 @@ curl -v -X GET \
 ~~~
 
 
-### Get OAuth 2.0 Refresh Token for Authorization Server and Client
+### Get Refresh Token
 {:.api .api-operation}
 
 {% api_operation get /api/v1/authorizationServers/${authorizationServerId}/clients/${clientId}/tokens/${tokenId} %}
@@ -1783,7 +1783,7 @@ curl -v -X GET \
 }
 ~~~
 
-### Revoke OAuth 2.0 Refresh Tokens for Authorization Server and Client
+### Revoke All Refresh Tokens
 {:.api .api-operation}
 
 {% api_lifecycle ea %}
@@ -1818,7 +1818,7 @@ curl -v -X DELETE \
 HTTP/1.1 204 No Content
 ~~~
 
-### Revoke OAuth 2.0 Token for Authorization Server and Client
+### Revoke Refresh Token
 {:.api .api-operation}
 
 {% api_lifecycle ea %}
