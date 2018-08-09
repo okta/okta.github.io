@@ -533,6 +533,12 @@ Rate limit warnings are sent at different times, depending on the org type. For 
 
 Rate limit violations are sent when a rate limit is exceeded.
 
+### Security Events
+
+| Event              | Description                         |
+|:-------------------|:------------------------------------|
+| security.request.blocked | A request was blocked due to a blacklist rule (such as a IP network zone or location rule). |
+
 ### User Events
 
 | Event                     | Description                                               |
