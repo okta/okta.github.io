@@ -127,7 +127,7 @@ You'll need a service discovery server installed before you can start the gatewa
 
 Download the WAR and put it alongside your `gateway` application. Start it so your apps can register with it.
 
-```java
+```bash
 java -jar jhipster-registry-4.0.0.war --spring.profiles.active=prod
 ```
 
@@ -135,13 +135,13 @@ java -jar jhipster-registry-4.0.0.war --spring.profiles.active=prod
 
 The aforementioned command will start the JHipster Registry with JWT for authentication. If you'd like to use OAuth 2.0 instead, you can start the registry with the `oauth2` profile activated.
 
-```java
+```bash
 java -jar jhipster-registry-4.0.0.war --spring.profiles.active=oauth2,prod
 ```
 
 Another option is to use the pre-defined Docker Compose file to run the registry. To use this option, you'll need to modify `gateway/src/main/docker/jhipster-registry.yml` and change the default Keycloak settings to use your Okta settings, or environment variables (recommended).
 
-```bash
+```yaml
 - SECURITY_OAUTH2_CLIENT_ACCESS_TOKEN_URI=${SECURITY_OAUTH2_CLIENT_ACCESS_TOKEN_URI}
 - SECURITY_OAUTH2_CLIENT_USER_AUTHORIZATION_URI=${SECURITY_OAUTH2_CLIENT_USER_AUTHORIZATION_URI}
 - SECURITY_OAUTH2_CLIENT_CLIENT_ID=${SECURITY_OAUTH2_CLIENT_CLIENT_ID}
@@ -312,7 +312,7 @@ There's a lot of services to start if you want to see all your applications runn
 
 **NOTE:** If you're hard-coding your Okta settings in `application.yml`, make sure you update your settings in the blog and store apps. If you're using environment variable, you don't need to make any changes. 
 
-1. Restart the gateway app since you added new entity management pages to it.   
+1. Restart the gateway app since you added new entity management pages to it.
 2. Start the blog app from the `blog` directory by running `mvn`.
 3. Start a Docker container for MongoDB from the `store` directory by running:
 
@@ -352,7 +352,7 @@ Rather than starting all your services individually, you can also start them all
 
 Create a `docker-compose` directory in the parent directory of your applications and run JHipster's Docker Compose sub-generator.
 
-```
+```bash
 mkdir docker-compose
 cd docker-compose
 jhipster docker-compose
