@@ -306,7 +306,7 @@ We'll also add some additional methods to our ApiController:
 ```php
 use Symfony\Component\HttpFoundation\Request;
 
-…
+...
 
 /**
  * Returns a 422 Unprocessable Entity
@@ -873,7 +873,7 @@ export class MovieListComponent implements OnInit {
     ...
     isLoading: boolean = true;
 
-    …
+    ...
     getMovies() {
         this.movieService
             .getMovies()
