@@ -502,7 +502,7 @@ public function isAuthorized(): bool
                         ->setAdaptor(new \Okta\JwtVerifier\Adaptors\SpomkyLabsJose())
                         ->setAudience('api://default')
                         ->setClientId('{yourClientId}')
-                        ->setIssuer('https://{yourOktaDomain}.com/oauth2/default')
+                        ->setIssuer('https://{yourOktaDomain}/oauth2/default')
                         ->build();
 
         // Verify the JWT from the Authorization Header.
@@ -1062,8 +1062,8 @@ You can see the full source code on GitHub at [https://github.com/oktadeveloper/
 
 Interested in digging in deeper with Symfony, Angular, or Okta? We've got you covered. Check out the following resources for more cool projects:
 
-* [Add Authentication to Your Angular PWA](https://developer.okta.com/blog/2017/06/13/add-authentication-angular-pwa)
-* [Build a Basic CRUD App with Symfony 4 and Vue](https://developer.okta.com/blog/2018/06/14/php-crud-app-symfony-vue)
-* [Angular 6: What's New and Why Upgrade?](https://developer.okta.com/blog/2018/05/09/upgrade-to-angular-6)
+* [Add Authentication to Your Angular PWA](/blog/2017/06/13/add-authentication-angular-pwa)
+* [Build a Basic CRUD App with Symfony 4 and Vue](/blog/2018/06/14/php-crud-app-symfony-vue)
+* [Angular 6: What's New and Why Upgrade?](/blog/2018/05/09/upgrade-to-angular-6)
 * And as always, we'd love to connect! Leave us a comment below, check out our [developer forum](https://devforum.okta.com/), or hit us up on Twitter [@oktadev](https://twitter.com/OktaDev)!
 
