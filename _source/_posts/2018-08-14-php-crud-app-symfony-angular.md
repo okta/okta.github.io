@@ -36,7 +36,7 @@ Well, we might be biased, but we think Okta makes [identity management](https://
 
 ## What Will We Build?
 
-We'll build a small application that allows you to keep track of the ‘bad puns' count while watching movies (you can track anything else you'd like of course). Here's what the finished tool will look like:
+We'll build a small application that allows you to keep track of the 'bad puns' count while watching movies (you can track anything else you'd like of course). Here's what the finished tool will look like:
 
 {% img blog/php-crud-app-symfony-angular/pun-counter.png alt:"Screenshot of list of movies in the pun counter app" width:"571" %}{: .center-image }
 
@@ -517,7 +517,7 @@ public function isAuthorized(): bool
 }
 ```
 
-We need to secure our controller methods now. Instead of using the security firewall of Symfony and extracting our authorization code into a custom provider, or using ‘before' filters for token authentication, we'll simply add a check to all `MoviesController` methods that require authorization (we only have a few of them after all):
+We need to secure our controller methods now. Instead of using the security firewall of Symfony and extracting our authorization code into a custom provider, or using 'before' filters for token authentication, we'll simply add a check to all `MoviesController` methods that require authorization (we only have a few of them after all):
 
 ```php
 if (! $this->isAuthorized()) {
