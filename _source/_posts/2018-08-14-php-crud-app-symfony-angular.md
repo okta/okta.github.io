@@ -28,9 +28,9 @@ Well, we might be biased, but we think Okta makes [identity management](https://
 
 * [Authenticate](https://developer.okta.com/product/authentication/) and [authorize](https://developer.okta.com/product/authorization/) your users
 * Store data about your users
-* Perform password-based and [social login](https://developer.okta.com/authentication-guide/social-login/)
-* Secure your application with [multi-factor authentication](https://developer.okta.com/use_cases/mfa/)
-* And much more! Check out our [product documentation](https://developer.okta.com/documentation/) for more information
+* Perform password-based and [social login](/authentication-guide/social-login/)
+* Secure your application with [multi-factor authentication](/use_cases/mfa/)
+* And much more! Check out our [product documentation](/documentation/) for more information
 
 [Register for a forever-free developer account](https://developer.okta.com/signup/), and when you're done, come back to learn more about building a secure CRUD app with Symfony and Angular.
 
