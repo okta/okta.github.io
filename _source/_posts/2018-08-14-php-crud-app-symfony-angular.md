@@ -501,7 +501,7 @@ public function isAuthorized(): bool
         $jwtVerifier = (new \Okta\JwtVerifier\JwtVerifierBuilder())
                         ->setAdaptor(new \Okta\JwtVerifier\Adaptors\SpomkyLabsJose())
                         ->setAudience('api://default')
-                        ->setClientId('{YOUR_CLIENT_ID}')
+                        ->setClientId('{yourClientId}')
                         ->setIssuer('https://{yourOktaDomain}.com/oauth2/default')
                         ->build();
 
@@ -651,7 +651,7 @@ const oktaConfig = {
 };
 ```
 
-Don't forget to replace your URL and Client Id!
+Don't forget to replace your URL and Client ID!
 
 ```ts
 src/app/app.module.ts
