@@ -111,14 +111,14 @@ Open up the project in your favorite IDE or editor. The screenshots below are fr
 
 Make a copy of the `application.yml.sample` file and name it `application.yml`
 
-Update the values with the information you saved earlier. My settings are shown below:
+Update the values with the information you saved earlier. For example:
 
 | Name        | Value                                             |
 | ----------- | ------------------------------------------------- |
-| baseUrl     | https://dev-237330.oktapreview.com                |
-| issuer      | https://dev-237330.oktapreview.com/oauth2/default |
+| baseUrl     | https://{yourOktaDomain}                          |
+| issuer      | https://{yourOktaDomain}/oauth2/default           |
 | audience    | api://default                                     |
-| clientId    | 0oacdldhkydGGruON0h7                              |
+| clientId    | {clientId}                                        |
 | rolesClaim  | groups                                            |
 | redirectUri | http://localhost:8080/                            |
 

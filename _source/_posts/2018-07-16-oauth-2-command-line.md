@@ -27,8 +27,8 @@ Click **Done** and you'll be taken to the next screen where you can get your new
 
 ```php
 <?php
-$client_id = '{yourClientId}';
-$client_secret = '{yourClientSecret}';
+$client_id = '{clientId}';
+$client_secret = '{clientSecret}';
 ```
 
 We also need to find the authorization server metadata URL. From the top menu, choose **API** -> **Authorization Servers**. You should see one authorization server in the list, `default`. Click that and fill in the Metadata URI into your PHP file like the below:

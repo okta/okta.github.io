@@ -122,8 +122,8 @@ security:
         client:
             access-token-uri: https://{yourOktaDomain}/oauth2/default/v1/token
             user-authorization-uri: https://{yourOktaDomain}/oauth2/default/v1/authorize
-            client-id: {yourClientId}
-            client-secret: {yourClientSecret}
+            client-id: {clientId}
+            client-secret: {clientSecret}
             client-authentication-scheme: form
             scope: openid profile email
         resource:

@@ -116,7 +116,7 @@ That's it! To start it, type `npm run dev` in a terminal window. You can leave t
 
 Now to secure the app. This is where you need to set up an OAuth 2.0 service. Okta is a cloud-based service that allows developers to easily and securely store OAuth 2.0 tokens, user accounts, and user data, then connect them with one or multiple applications. Okta also provides libraries for many languages, including Node, to make their API very easy for a developer to integrate into a huge variety of apps.
 
-You can use Okta to quickly and easily set up server-to-server authentication. If you don't already have an account, [sign up for a free Okta Developer account](https://developer.okta.com/signup/). Once you register, you'll be given a unique Okta Org URL that looks similar to `https://dev-123456.oktapreview.com`.
+You can use Okta to quickly and easily set up server-to-server authentication. If you don't already have an account, [sign up for a free Okta Developer account](https://developer.okta.com/signup/). Once you register, you'll be given a unique Okta Org URL (e.g. `https://{yourOktaDomain}`) and an email to activate your new account.
 
 You'll need two parts in order to make client-to-server authentication work: an authorization server, and a test client/application.
 
@@ -154,7 +154,7 @@ Go ahead and create a `.env` file containing the issuer from your authorization 
 
 **.env**
 ```bash
-ISSUER=https://dev-123456.oktapreview.com/oauth2/abcdefg1234567
+ISSUER=https://{yourOktaDomain}/oauth2/abcdefg1234567
 DEFAULT_SCOPE=such_scope
 TEST_CLIENT_ID=client-id
 TEST_CLIENT_SECRET=client-secret

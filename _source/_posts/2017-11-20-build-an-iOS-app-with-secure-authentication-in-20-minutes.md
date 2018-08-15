@@ -83,12 +83,12 @@ The SDK uses a **Property List** (`.plist`) file to bootstrap the login flow. We
 ```
 ### OpenID Connect Terminology
 
-| Setting                       | Value                              |   Description  |
-| -------------------- | ----------------------- |    -----------  |
-| `issuer`     | https://{yourOktaDomain}/oauth2/default | Your organization's URL, appended with your `default` authorization server. |
-| `clientId` | `0oac123..` | Client ID copied from the **Client Credentials** section on your Okta Application's page. |
-| `redirectUri`            | `com.oktapreview.{yourOktaOrg}:/callback` | Login redirect URI copied from the **General Settings** section on your Okta Application's page. |
-| `scopes` | `offline_access`, `openid`, and `profile` | Enables your application to receive basic user information via an [ID Token](http://openid.net/specs/openid-connect-core-1_0.html#IDToken). |
+| Setting       | Value                                     | Description                                                                                                                                 |
+| ------------- | ----------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------- |
+| `issuer`      | https://{yourOktaDomain}/oauth2/default   | Your organization's URL, appended with your `default` authorization server.                                                                 |
+| `clientId`    | `0oac123..`                               | Client ID copied from the **Client Credentials** section on your Okta Application's page.                                                   |
+| `redirectUri` | `{yourOktaScheme}:/callback`              | Login redirect URI copied from the **General Settings** section on your Okta Application's page.                                            |
+| `scopes`      | `offline_access`, `openid`, and `profile` | Enables your application to receive basic user information via an [ID Token](http://openid.net/specs/openid-connect-core-1_0.html#IDToken). |
 
 ### Update the Private-use URI Scheme
 

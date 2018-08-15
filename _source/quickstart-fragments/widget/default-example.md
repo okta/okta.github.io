@@ -82,7 +82,7 @@ Then copy this widget configuration into your front-end application:
 <script type="text/javascript">
   var oktaSignIn = new OktaSignIn({
     baseUrl: "https://{yourOktaDomain}",
-    clientId: "{yourClientId}",
+    clientId: "{clientId}",
     authParams: {
       issuer: "https://{yourOktaDomain}/oauth2/default",
       responseType: ['token', 'id_token'],

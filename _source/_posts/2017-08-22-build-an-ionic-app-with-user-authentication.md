@@ -263,7 +263,7 @@ login(): void {
     const authClient = new OktaAuth({
       clientId: this.oauthService.clientId,
       redirectUri: this.oauthService.redirectUri,
-      url: 'https://{yourOktaDomain}.oktapreview.com',
+      url: 'https://{yourOktaDomain}',
       issuer: 'default'
     });
     return authClient.signIn({

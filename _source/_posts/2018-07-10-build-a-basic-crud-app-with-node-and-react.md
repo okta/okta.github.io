@@ -243,7 +243,7 @@ Click **Done** to save your app, then copy your **Client ID** and paste it as a 
 
 **.env.local**
 ```bash
-REACT_APP_OKTA_CLIENT_ID={yourClientId}
+REACT_APP_OKTA_CLIENT_ID={clientId}
 REACT_APP_OKTA_ORG_URL=https://{yourOktaDomain}
 ```
 

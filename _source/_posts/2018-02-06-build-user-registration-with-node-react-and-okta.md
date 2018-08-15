@@ -98,7 +98,7 @@ Once the application has been created, select it from the applications listing, 
 
 {% img blog/build-user-registration-with-node-react-and-okta/general-settings-tab.png alt:"general settings tab" %}{: .center-image }
 
-At the bottom, you will see a **Client ID** setting (yours won't be blurred out, obviously). Copy this to use in your React application. You will also need your Okta organization URL, which you can find at the top left of the dashboard page. It will probably look something like "https://dev-XXXXXX.oktapreview.com".
+At the bottom, you will see a **Client ID** setting (yours won't be blurred out, obviously). Copy this to use in your React application. You will also need your Okta organization URL, which you can find at the top right of the Dashboard page.
 
 ## Add Authentication to the ReactJS Application
 
@@ -118,10 +118,10 @@ Add a file to the `client/src' folder called `app.config.js`. The contents of th
 
 ```js
 export default {
-  url: '{yourOktaDomain}',
-  issuer: '{yourOktaOrgUrl}/oauth2/default',
+  url: 'https://{yourOktaDomain}',
+  issuer: 'https://{yourOktaDomain}/oauth2/default',
   redirect_uri: window.location.origin + '/implicit/callback',
-  client_id: '{yourClientID}'
+  client_id: '{clientId}'
 }
 ```
 

@@ -93,7 +93,7 @@ export default class LoginPage extends React.Component{
   constructor(){
     super();
     this.widget = new OktaSignIn({
-      baseUrl: 'https://{oktaOrgUrl}',
+      baseUrl: 'https://{yourOktaDomain}',
       clientId: '{clientId}',
       redirectUri: 'http://localhost:3000',
       authParams: {
@@ -110,7 +110,7 @@ export default class LoginPage extends React.Component{
 }
 ```
 
-Copy the Client ID generated from your application's settings page and paste it over `{clientId}`. Make sure you also replace `{oktaOrgUrl}` with your Okta organization URL, which you can find by going back to the main Dashboard page in the developer console. Usually it will look like: `https://dev-12345.oktapreview.com`.
+Copy the Client ID generated from your application's settings page and paste it over `{clientId}`. Make sure you also replace `{yourOktaDomain}` with your Okta organization URL, which you can find by going back to the main Dashboard page in the developer console. It will look like: `https://{yourOktaDomain}`.
 
 Thus far you've imported the `OktaSignIn` function from the [Okta Sign-In Widget](https://github.com/okta/okta-signin-widget) `npm` module you installed earlier. Next, in the constructor of the component, you initialized an instance of `OktaSignIn` with the configuration for the application. This way, the application code will be able to talk to Okta and Okta will recognize that this is the app you just created.
 

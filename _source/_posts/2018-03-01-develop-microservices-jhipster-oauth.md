@@ -86,7 +86,7 @@ While you're waiting, you can get started with setting up OAuth with Okta.
 
 The OAuth implementation in JHipster leverages Spring Boot and its OAuth 2.0 support (an `@EnableOAuthSso` annotation). If you're not sure what OAuth and OpenID Connect (OIDC) are, please see [What the Heck is OAuth?](/blog/2017/06/21/what-the-heck-is-oauth). It provides single sign-on (SSO) to JHipster applications. [Secure a Spring Microservices Architecture with Spring Security and OAuth 2.0](/blog/2018/02/13/secure-spring-microservices-with-oauth) shows a bare-bones Spring microservices architecture using OAuth. JHipster uses the same setup internally.
 
-JHipster ships with [Keycloak](https://keycloak.org) configured for OAuth by default. To configure your apps to work with Okta, you'll first need to [create a free developer account](https://developer.okta.com/signup/). After doing so, you'll get your own Okta domain, which has a name like `https://dev-123456.oktapreview.com`.
+JHipster ships with [Keycloak](https://keycloak.org) configured for OAuth by default. To configure your apps to work with Okta, you'll first need to [create a free developer account](https://developer.okta.com/signup/). After doing so, you'll get your own Okta domain, which looks like `https://{yourOktaDomain}`.
 
 ### Create an OpenID Connect Application on Okta
 

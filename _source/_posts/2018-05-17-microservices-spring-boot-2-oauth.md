@@ -88,8 +88,8 @@ spring:
       client:
         registration:
           okta:
-            client-id: {yourClientId}
-            client-secret: {yourClientSecret}
+            client-id: {clientId}
+            client-secret: {clientSecret}
         provider:
           okta:
             authorization-uri: https://{yourOktaDomain}/oauth2/v1/authorize

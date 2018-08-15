@@ -299,7 +299,7 @@ To replace the fake, hard-coded authentication in `src/auth.js`, start by instal
 npm install @okta/okta-auth-js --save
 ```
 
-Replace the code in `auth.js` with the following code that uses the Auth SDK to log in and save a session token as the token. If you don't have an Okta Developer account, [create one](https://developer.okta.com/signup/). Then replace `{yourOktaDomain}` in the code below with your information (for example, `dev-123456.oktapreview`).
+Replace the code in `auth.js` with the following code that uses the Auth SDK to log in and save a session token as the token. If you don't have an Okta Developer account, [create one](https://developer.okta.com/signup/). Then replace `{yourOktaDomain}` in the code below with your Okta domain, which you can find on the Dashboard page in the Developer Console.
 
 ```javascript
 /* globals localStorage */

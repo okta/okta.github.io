@@ -188,7 +188,7 @@ The Express generator created a skeleton for you to get started. Now, let's add 
 
 Luckily, Okta makes this really easy by offloading authentication and letting you focus on what makes your app unique. To get started [sign up for a free Okta Developer account](https://developer.okta.com/signup/).
 
-You'll get a link to your own Okta Org URL which you'll use to sign in from now on, so you should save it for later. It'll look something like `https://dev-123456.oktapreview.com`. In order to log in, check your email for a temporary password.
+You'll get a link to your own Okta org URL (e.g. `https://{yourOktaDomain}`). In order to log in, check your email for a temporary password.
 
 After logging into the dev console, click on the **Applications** tab, then click **Add Application**. For this example, you should use the **Web** option.
 
@@ -276,7 +276,7 @@ You might be wondering where all the `process.env` variables are coming from. It
 For now, install the package with `npm i dotenv`, then create a `.env` file in the root of the project.
 
 ```bash
-ORG_URL=https://dev-123456.oktapreview.com
+ORG_URL=https://{yourOktaDomain}
 HOST_URL=http://localhost:3000
 CLIENT_ID=okta-application-client-id
 CLIENT_SECRET=okta-application-client-secret

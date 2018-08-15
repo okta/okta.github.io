@@ -364,7 +364,7 @@ Log in to your Okta Developer account (or [sign up](https://developer.okta.com/s
 Copy the client ID and secret into your `application.conf` file. While you're in there, modify the `oidc.discoveryUri` to match your Okta domain. For example:
 
 ```properties
-oidc.discoveryUri = "https://dev-158606.oktapreview.com/oauth2/default/.well-known/openid-configuration"
+oidc.discoveryUri = "https://{yourOktaDomain}/oauth2/default/.well-known/openid-configuration"
 ```
 
 After making these changes, you should be able to refresh your browser and log in. Play handles recompiling any new/changed files when you reload – a very slick feature!

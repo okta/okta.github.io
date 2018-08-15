@@ -134,16 +134,9 @@ Now that your **Client ID**, **Client Secret**, and **Issuer URI** are stashed s
 Next you'll add three values to: `src/main/resources/application.properties`
 
 ```properties
-okta.oauth2.issuer=(your **Issuer URI**)
-okta.oauth2.clientId=(your **Client ID**)
-okta.oauth2.clientSecret=(your **Client Secret**)
-```
-Like so:
-
-```properties
-okta.oauth2.issuer=https://dev-279161.oktapreview.com/oauth2/default
-okta.oauth2.clientId=0oacqif7do3e0hD0h7
-okta.oauth2.clientSecret=(your **Client Secret**)
+okta.oauth2.issuer=https://{yourOktaDomain}/oauth2/default
+okta.oauth2.clientId={clientId}
+okta.oauth2.clientSecret={clientSecret}
 ```
 
 One last bit to do before reaping all that Okta can offer – use it on your server! For this post, the goal is to add single sign-on authentication, so that only users that have registered with you will be able to log into your server and interact with it. The main application class needs to tell the Okta client library to enable single sign-on, and that's done by adding the following annotation to the main application class at: `src/main/java/com/example/demo/DemoApplication.java`

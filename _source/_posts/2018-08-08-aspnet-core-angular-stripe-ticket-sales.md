@@ -514,7 +514,7 @@ Now add a configuration variable right below the import statements:
 const config = {
   issuer: 'https://{yourOktaDomain}/oauth2/default',
   redirectUri: 'http://localhost:5000/implicit/callback',
-  clientId: '{yourClientId}'
+  clientId: '{clientId}'
 };
 ```
 
@@ -555,7 +555,7 @@ YAML is just a file format for configuration. The okta.yaml file looks like:
 ```yaml
 okta:
   client:
-    orgUrl: "https://dev-846291.oktapreview.com/"
+    orgUrl: "https://{yourOktaDomain}"
     token: "{yourApiToken}"
 ```
 

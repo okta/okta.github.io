@@ -58,7 +58,7 @@ One thing you will need in your `.env` file is an application secret, which shou
 echo "APP_SECRET=`openssl rand -base64 32`" >> .env
 ```
 
-For the next step, you need to [sign up for a free Okta Developer account](https://developer.okta.com/signup/), if you haven't already. Once you sign up, you'll be given a unique Okta Org URL that looks similar to `https://dev-123456.oktapreview.com`. This is how you'll sign in to your account to make admin changes, so make sure to save it. You'll also need to save this in your `.env` file. Each line should have a separate environment variable with syntax like `ORG_URL=https://dev-123456.oktapreview.com`.
+For the next step, you need to [sign up for a free Okta Developer account](https://developer.okta.com/signup/), if you haven't already. Once you sign up, you'll be given a unique Okta Org URL. You'll need to save this in your `.env` file. Each line should have a separate environment variable with syntax like `ORG_URL=https://{yourOktaDomain}`.
 
 After logging into your dev console, click the **Applications** tab, click **Add Application**, then select the **Web** option. You can keep all these settings at their default for now, and just change the name. If you already know the URI(s) where you will be hosting your application, this is where you would add them. You can always come back here later.
 
@@ -68,7 +68,7 @@ Once you create the application, you will get a **Client ID** and **Client Secre
 
 ```bash
 APP_SECRET=super-secret-string
-ORG_URL=https://dev-123456.oktapreview.com
+ORG_URL=https://{yourOktaDomain}
 HOST_URL=http://localhost:8080
 CLIENT_ID=your-client-id
 CLIENT_SECRET=your-client-secret

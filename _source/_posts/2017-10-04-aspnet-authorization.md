@@ -49,7 +49,7 @@ namespace AspnetOkta.Domain.Authorization
     public GroupsToRolesTransformer()
     {
         client = new OktaClient(new OktaClientConfiguration{
-            OrgUrl = "https://{Your Okta Org Url}",
+            OrgUrl = "https://{yourOktaDomain}",
             Token = "JiBBerJabbER"
         });
     }
@@ -74,7 +74,7 @@ namespace AspnetOkta.Domain.Authorization
 }
 ```
 
-As you can see here, in the constructor, you are creating an `OktaClient` object to be stored in a class-level variable called client. You'll need your `OrgUrl` from Okta (probably something like dev-1234.oktapreview.com) and an API token which you can get from the Okta Developer Dashboard under `API` > `Tokens`.
+As you can see here, in the constructor, you are creating an `OktaClient` object to be stored in a class-level variable called client. You'll need your org URL from Okta and an API token which you can get from the Okta Developer Dashboard under API > Tokens.
 
 {% img blog/aspnet-authz/tokens.png alt:"API Token Page" width:"800" %}
 
