@@ -225,6 +225,7 @@ You'll notice that there isn't really much to it, beyond the POJO classes and re
 
 Most of this should be pretty self-explanatory at this point. I'll simply point out that our Query class (the query resolver) is a bit of a quick and dirty hack to avoid having to setup an actual database data source. We're just generating the `Post`s and `Comment`s on the fly based on their ID number. In the real implementation, you'd be adding some more business layer logic here, such as authorization, and looking up the data in your data source.
 
+{% raw %}
 ```java
 class Query implements GraphQLQueryResolver {  
   
@@ -248,6 +249,7 @@ class Query implements GraphQLQueryResolver {
     }
 }
 ```
+{% endraw %}
 
 ## Run Your First GraphQL Query
 
@@ -317,7 +319,7 @@ The client ID and client secret can be found in the general settings for your ap
 In the OktaGraphQL project, create a `gradle.properties` file and fill in the following properties:
 
 ```properties
-oktaClientId=<your client ID>
+oktaClientId={yourClientId}
 oktaBaseUrl=https://{yourOktaDomain}
 ```
 
@@ -390,9 +392,9 @@ To access our protected GraphQL server now, we need an Okta access token. Typica
 In the OktaShowToken project, create a `gradle.properties` file and fill in the following properties:
 
 ```properties
-oktaClientId=<your client ID>
-oktaClientSecret=<your client secret>
-oktaBaseUrl=<your Okta base URL>
+oktaClientId={yourClientId}
+oktaClientSecret={yourClientSecret}
+oktaBaseUrl=https://{yourOktaDomain}
 ```
 
 Open a terminal, go to the OktaShowToken project root, and run `./gradlew bootRun`.
@@ -410,7 +412,7 @@ After logging in, you'll see a page of text that contains your access token. Lea
 First lets store the token value in a temporary shell variable:
 
 ```bash
-TOKEN=<your token value>
+TOKEN={accessTokenValue}
 ```
 
 Then let's run the request again setting the authorization header. You'll need to run the following command from the `OktaGraphQL` directory.
