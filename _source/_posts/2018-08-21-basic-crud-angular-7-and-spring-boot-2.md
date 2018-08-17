@@ -1,9 +1,9 @@
 ---
 layout: blog_post
-title: 'Build a Basic CRUD App with Angular 6.0 and Spring Boot 2.0'
+title: 'Build a Basic CRUD App with Angular 7.0 and Spring Boot 2.1'
 author: mraible
 description: "Angular and Spring Boot are arguably the two most popular frameworks in all of web development. Matt Raible shows you how to use them together in the same app, and how to secure it all with Okta."
-tags: [authentication, spring boot, spring boot 2.0, angular, angular 6, okta, oidc]
+tags: [authentication, spring boot, spring boot 2, angular, angular 7, okta, oidc]
 tweets:
   - "Angular + Spring Boot makes for a nice development experience. Learn how to make them work together with OIDC authentication →"
   - "Spring Boot with @java + Angular with @typescriptlang = ❤️. Learn how to build a @springboot + @angular CRUD app today!"
@@ -11,7 +11,7 @@ tweets:
 
 Technology moves fast these days. It can be challenging to keep up with the latest trends as well as new releases of your favorite projects. I'm here to help! Spring Boot and Angular are two of my favorite projects, so I figured I'd write y'all a guide to show you how to build and secure a basic app using their latest and greatest releases.
 
-In Spring Boot, the most significant change in 2.0 is its new web framework: Spring WebFlux. In Angular 6.0, the biggest change is upgrading to RxJS vX and having to change a bit of code. I wrote about how to integrate Spring Boot 2.0 and Angular 5.0 last December. This post was extremely popular on the Okta Developer blog and became an inspiration for many future blog posts. When [Angular 6 was released](), I was reluctant to update it because it has "Angular 5.0" in its title, and you don't change a title because SEO.
+In Spring Boot, the most significant change in 2.0 is its new web framework: Spring WebFlux. In Angular 7.0, the biggest change is upgrading to RxJS vX and having to change a bit of code. I wrote about how to integrate Spring Boot 2.0 and Angular 5.0 last December. This post was extremely popular on the Okta Developer blog and became an inspiration for many future blog posts. When [Angular 6 was released](), I was reluctant to update it because it has "Angular 5.0" in its title, and you don't change a title because SEO.
 
 // summary of what's changed, angular vs react, etc.
 
@@ -19,17 +19,17 @@ This article describes how to build a simple CRUD application that displays a li
 
 You will need [Java 8](http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html) and [Node.js 8](https://nodejs.org/) installed to complete this tutorial.
 
-## Build an API with Spring Boot 2.0
+## Build an API with Spring Boot 2.1
 
-To get started with [Spring Boot](https://projects.spring.io/spring-boot/) 2.0, head on over to [start.spring.io](https://start.spring.io) and create a new project that uses Java, Spring Boot version 2.0.4, and options to create a simple API: JPA, H2, Rest Repositories, Lombok, and Web. In this example, I've added Actuator as well, since it's a [very cool feature](https://dzone.com/articles/spring-boot-actuator-a-complete-guide) of Spring Boot.
+To get started with [Spring Boot](https://projects.spring.io/spring-boot/) 2.1, head on over to [start.spring.io](https://start.spring.io) and create a new project that uses Java, Spring Boot version 2.1.0 M1, and options to create a simple API: JPA, H2, Rest Repositories, Lombok, and Web. In this example, I've added Actuator as well, since it's a [very cool feature](https://dzone.com/articles/spring-boot-actuator-a-complete-guide) of Spring Boot.
 
-{% img blog/spring-boot-2-angular-6/start.spring.io.png alt:"Spring Initializr" width:"800" %}{: .center-image }
+{% img blog/spring-boot-2-angular-7/start.spring.io.png alt:"Spring Initializr" width:"800" %}{: .center-image }
 
-Create a directory to hold your server and client applications. I called mine `kick-ass-apps`, but you can call yours whatever you like. If you'd rather just see the app running than write code, you can [see the example on GitHub](https://github.com/oktadeveloper/okta-spring-boot-2-angular-6-example), or clone and run locally using the commands below.
+Create a directory to hold your server and client applications. I called mine `okta-spring-boot-2-angular-7-example`, but you can call yours whatever you like. If you'd rather just see the app running than write code, you can [see the example on GitHub](https://github.com/oktadeveloper/okta-spring-boot-2-angular-7-example), or clone and run locally using the commands below.
 
 ```bash
-git clone https://github.com/oktadeveloper/okta-spring-boot-2-angular-6-example.git
-cd okta-spring-boot-2-angular-6-example/client
+git clone https://github.com/oktadeveloper/okta-spring-boot-2-angular-7-example.git
+cd okta-spring-boot-2-angular-7-example/client
 npm install
 ng serve &
 cd ../server
@@ -151,13 +151,13 @@ class CoolCarController {
 }
 ```
 
-If you restart your server app and hit `localhost:8080/cool-cars` with your browser, or a command-line client, you should see the filtered list of cars.
+If you restart your server app and hit `http://localhost:8080/cool-cars` with your browser, or a command-line client, you should see the filtered list of cars.
 
 ```bash
-http localhost:8080/cool-cars
-HTTP/1.1 200
+$ http localhost:8080/cool-cars
+HTTP/1.1 200 
 Content-Type: application/json;charset=UTF-8
-Date: Mon, 05 Mar 2018 12:31:32 GMT
+Date: Fri, 17 Aug 2018 15:10:33 GMT
 Transfer-Encoding: chunked
 ```
 ```json
@@ -189,39 +189,44 @@ Transfer-Encoding: chunked
 
 Angular CLI is a command-line utility that can generate an Angular project for you. Not only can it create new projects, but it can also generate code. It's a convenient tool because it also offers commands that will build and optimize your project for production. It uses webpack under the covers for building. If you want to learn more about webpack, I recommend [webpack.academy](https://webpack.academy).
 
-You can learn the basics of Angular CLI at <https://cli.angular.io>.
+You can learn the basics of Angular CLI at [cli.angular.io](https://cli.angular.io).
 
-{% img blog/spring-boot-2-angular-6/cli.angular.io.png alt:"Angular CLI Homepage" width:"800" %}{: .center-image }
+{% img blog/spring-boot-2-angular-7/cli.angular.io.png alt:"Angular CLI Homepage" width:"800" %}{: .center-image }
 
-Install the latest version of Angular CLI, which is version 6.1.4.
+Install the latest version of Angular CLI, which is version 6.2.0-beta.3 at the time of this writing.
 
 ```bash
-npm install -g @angular/cli@6.1.4
+npm install -g @angular/cli@v6.2.0-beta.3
 ```
 
-Create a new project in the umbrella directory you created. Again, mine is named `okta-spring-boot-2-angular-6-example`.
+Create a new project in the umbrella directory you created. Again, mine is named `okta-spring-boot-2-angular-7-example`.
 
 ```bash
 ng new client
 ```
 
-After the client is created, navigate into its directory and install Angular Material.
+After the client is created, navigate into its directory, remove its Git configuration, and install Angular Material.
 
 ```bash
 cd client
-npm install --save-exact @angular/material@6.4.5 @angular/cdk@6.4.5
+npm install @angular/material@6.4.5 @angular/cdk@6.4.5
 ```
 
 Run `npm audit fix --force` to fix outdated dependencies.
 
 ```bash
-➜  client git:(master) ✗ npm audit fix --force
+$ npm audit fix --force
 npm WARN using --force I sure hope you know what you are doing.
+...
 ```
 
-You'll use Angular Material's components to make the UI look better, especially on mobile phones. If you'd like to learn more about Angular Material, see <https://material.angular.io>. It has extensive documentation on its various components and how to use them.
+Edit `package.json` and change all instances of `^6.1.0` to `^7.0.0-beta.2` to upgrade to Angular 7. 
 
-{% img blog/spring-boot-2-angular-6/material.angular.io.png alt:"Angular Material Homepage" width:"800" %}{: .center-image }
+**NOTE:** If a Angular 7.0 is out and this post hasn't been updated, please leave a comment and remind me to update it. 
+
+You'll use Angular Material's components to make the UI look better, especially on mobile phones. If you'd like to learn more about Angular Material, see [material.angular.io](https://material.angular.io). It has extensive documentation on its various components and how to use them. The paint bucket in the top right corner will allow you to preview available theme colors.
+
+{% img blog/spring-boot-2-angular-7/material.angular.io.png alt:"Angular Material Homepage" width:"800" %}{: .center-image }
 
 ## Build a Car List Page
 
@@ -243,9 +248,9 @@ Update the code in `car.service.ts` to fetch the list of cars from the server.
 ```typescript
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs/Observable';
+import { Observable } from 'rxjs';
 
-@Injectable()
+@Injectable({providedIn: 'root'})
 export class CarService {
 
   constructor(private http: HttpClient) {
@@ -257,10 +262,11 @@ export class CarService {
 }
 ```
 
-Add this service as a provider in `src/app/app.module.ts`. While you're in there, import `HttpClientModule` too.
+One of the changes I like in Angular 6+ is your services can now register themselves. In previous versions, when you annotated a class with `@Injectable()`, you had to register it as a provider in a module or component to use it. In Angular 6, you can specify `providedIn` and it will auto-register itself when the app bootstraps.
+
+Open `src/app/app.module.ts`, and add `HttpClientModule` as an import.
 
 ```typescript
-import { CarService } from './shared/car/car.service';
 import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
@@ -271,7 +277,7 @@ import { HttpClientModule } from '@angular/common/http';
     BrowserModule,
     HttpClientModule
   ],
-  providers: [CarService],
+  providers: [],
   bootstrap: [AppComponent]
 })
 ```
@@ -285,8 +291,14 @@ ng g c car-list
 Update `client/src/app/car-list/car-list.component.ts` to use the `CarService` to fetch the list and set the values in a local `cars` variable.
 
 ```typescript
+import { Component, OnInit } from '@angular/core';
 import { CarService } from '../shared/car/car.service';
 
+@Component({
+  selector: 'app-car-list',
+  templateUrl: './car-list.component.html',
+  styleUrls: ['./car-list.component.css']
+})
 export class CarListComponent implements OnInit {
   cars: Array<any>;
 
@@ -327,7 +339,7 @@ Update `client/src/app/app.component.html` to have the `app-car-list` element.
 Start the client application using `ng serve`. Open your favorite browser to http://localhost:4200. You won't see the
 car list just yet, and if you open your developer console, you'll see why.
 
-{% img blog/spring-boot-2-angular-6/cors-error.png alt:"CORS Error" width:"800" %}{: .center-image }
+{% img blog/spring-boot-2-angular-7/cors-error.png alt:"CORS Error" width:"800" %}{: .center-image }
 
 This error happens because you haven't enabled CORS (Cross-Origin Resource Sharing) on the server.
 
@@ -426,7 +438,7 @@ body {
 
 If you run your client with `ng serve` and navigate to http://localhost:4200, you'll see the list of cars, but no images associated with them.
 
-{% img blog/spring-boot-2-angular-6/car-list-no-images.png alt:"Car List without images" width:"800" %}{: .center-image }
+{% img blog/spring-boot-2-angular-7/car-list-no-images.png alt:"Car List without images" width:"800" %}{: .center-image }
 
 ## Add Animated GIFs with Giphy
 
@@ -494,7 +506,7 @@ export class CarListComponent implements OnInit {
 
 Now your browser should show you the list of car names, along with an avatar image beside them.
 
-{% img blog/spring-boot-2-angular-6/car-list-giphy-images.png alt:"Car List with Giphy avatars" width:"800" %}{: .center-image }
+{% img blog/spring-boot-2-angular-7/car-list-giphy-images.png alt:"Car List with Giphy avatars" width:"800" %}{: .center-image }
 
 ## Add an Edit Feature
 
@@ -722,11 +734,11 @@ Modify `client/src/app/app.component.html` and replace `<app-car-list></app-car-
 
 After you make all these changes, you should be able to add, edit, or delete any cars. Below is a screenshot that shows the list with the add button.
 
-{% img blog/spring-boot-2-angular-6/car-list-add-btn.png alt:"Car List with Add button" width:"800" %}{: .center-image }
+{% img blog/spring-boot-2-angular-7/car-list-add-btn.png alt:"Car List with Add button" width:"800" %}{: .center-image }
 
 The following screenshot shows what it looks like to edit a car that you've added.
 
-{% img blog/spring-boot-2-angular-6/car-edit.png alt:"Car Edit Component" width:"800" %}{: .center-image }
+{% img blog/spring-boot-2-angular-7/car-edit.png alt:"Car Edit Component" width:"800" %}{: .center-image }
 
 ## Add Authentication with Okta
 
@@ -781,7 +793,7 @@ import org.springframework.security.oauth2.config.annotation.web.configuration.E
 
 After making these changes, you should be able to restart your app and see access denied when you try to navigate to http://localhost:8080.
 
-{% img blog/spring-boot-2-angular-6/access-denied.png alt:"Access Denied" width:"800" %}{: .center-image }
+{% img blog/spring-boot-2-angular-7/access-denied.png alt:"Access Denied" width:"800" %}{: .center-image }
 
 It's nice that your server is locked down, but now you need to configure your client to talk to it. This is where Okta's Angular support comes in handy.
 
@@ -789,7 +801,7 @@ It's nice that your server is locked down, but now you need to configure your cl
 
 The Okta Angular SDK is a wrapper around [Okta Auth JS](https://github.com/okta/okta-auth-js), which builds on top of OIDC. More information about Okta's Angular library can be [found on npmjs.com](https://www.npmjs.com/package/@okta/okta-angular).
 
-{% img blog/spring-boot-2-angular-6/okta-angular.png alt:"Okta Angular" width:"800" %}{: .center-image }
+{% img blog/spring-boot-2-angular-7/okta-angular.png alt:"Okta Angular" width:"800" %}{: .center-image }
 
 To install it, run the following command in the `client` directory:
 
@@ -948,7 +960,7 @@ export class AppComponent implements OnInit {
 
 Now if you restart your client, you should see a login button.
 
-{% img blog/spring-boot-2-angular-6/login-button.png alt:"Login Button" width:"800" %}{: .center-image }
+{% img blog/spring-boot-2-angular-7/login-button.png alt:"Login Button" width:"800" %}{: .center-image }
 
 Notice that this shows elements from the car-list component. To fix this, you can create a home component and make it the default route.
 
@@ -1025,7 +1037,7 @@ Update `client/src/app/app.component.html`, so the Logout button redirects back 
 
 Now you should be able to open your browser to http://localhost:4200 and click on the Login button. If you've configured everything correctly, you'll be redirected to Okta to log in.
 
-{% img blog/spring-boot-2-angular-6/okta-login.png alt:"Okta Login" width:"800" %}{: .center-image }
+{% img blog/spring-boot-2-angular-7/okta-login.png alt:"Okta Login" width:"800" %}{: .center-image }
 
 Enter the credentials you used to sign up for an account, and you should be redirected back to your app. However, your
 list of cars won't load because of a CORS error. This happens because Spring's `@CrossOrigin` doesn't work well with
@@ -1061,9 +1073,9 @@ public FilterRegistrationBean simpleCorsFilter() {
 
 Restart your server and celebrate when it all works! 🎉
 
-{% img blog/spring-boot-2-angular-6/success-at-last.png alt:"Success!" width:"800" %}{: .center-image }
+{% img blog/spring-boot-2-angular-7/success-at-last.png alt:"Success!" width:"800" %}{: .center-image }
 
-You can see the full source code for the application developed in this tutorial on GitHub at [https://github.com/oktadeveloper/okta-spring-boot-2-angular-6-example](https://github.com/oktadeveloper/okta-spring-boot-2-angular-6-example).
+You can see the full source code for the application developed in this tutorial on GitHub at [https://github.com/oktadeveloper/okta-spring-boot-2-angular-7-example](https://github.com/oktadeveloper/okta-spring-boot-2-angular-7-example).
 
 ## Learn More about Spring Boot and Angular
 
@@ -1080,5 +1092,5 @@ If you have any questions, please don't hesitate to leave a comment below, or as
 
 **Changelog:**
 
-* Apr 9, 2018: Updated to use Okta Angular 1.0.0, Spring Boot 2.0.1, and Angular CLI 1.7.4 (with Angular 5.2.9). See the code changes in the [example app on GitHub](https://github.com/oktadeveloper/okta-spring-boot-2-angular-6-example/pull/5). Changes to this article can be viewed in [okta/okta.github.io#1938](https://github.com/okta/okta.github.io/pull/1938).
-* Mar 5, 2018: Updated to use Spring Boot 2.0 and Angular CLI 1.7.2 (with Angular 5.2.7). See the code changes in the [example app on GitHub](https://github.com/oktadeveloper/okta-spring-boot-2-angular-6-example/pull/2). Changes to this article can be viewed in [okta/okta.github.io#1806](https://github.com/okta/okta.github.io/pull/1806).
+* Apr 9, 2018: Updated to use Okta Angular 1.0.0, Spring Boot 2.0.1, and Angular CLI 1.7.4 (with Angular 5.2.9). See the code changes in the [example app on GitHub](https://github.com/oktadeveloper/okta-spring-boot-2-angular-7-example/pull/5). Changes to this article can be viewed in [okta/okta.github.io#1938](https://github.com/okta/okta.github.io/pull/1938).
+* Mar 5, 2018: Updated to use Spring Boot 2.0 and Angular CLI 1.7.2 (with Angular 5.2.7). See the code changes in the [example app on GitHub](https://github.com/oktadeveloper/okta-spring-boot-2-angular-7-example/pull/2). Changes to this article can be viewed in [okta/okta.github.io#1806](https://github.com/okta/okta.github.io/pull/1806).
