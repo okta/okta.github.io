@@ -11,13 +11,13 @@ tweets:
 
 Technology moves fast these days. It can be challenging to keep up with the latest trends as well as new releases of your favorite projects. I'm here to help! Spring Boot and Angular are two of my favorite projects, so I figured I'd write y'all a guide to show you how to build and secure a basic app using their latest and greatest releases.
 
-In Spring Boot, the most significant change in 2.0 is its new web framework: Spring WebFlux. In Angular 7.0, the biggest change is upgrading to RxJS vX and having to change a bit of code. I wrote about how to integrate Spring Boot 2.0 and Angular 5.0 last December. This post was extremely popular on the Okta Developer blog and became an inspiration for many future blog posts. When [Angular 6 was released](), I was reluctant to update it because it has "Angular 5.0" in its title, and you don't change a title because SEO.
+In Spring Boot, the most significant change in 2.0 is its new web framework: Spring WebFlux. Spring Boot 2.1 is a minor release, so there shouldn't be any major changes, just incremental improvements. In Angular 7.0, the biggest change is upgrading to RxJS v6 and there's rumors that a new, faster renderer will be included (code named: [Ivy Renderer](http://ivy.angular.io/)). For specific changes, see [Spring Boot 2.1 Release Notes(https://github.com/spring-projects/spring-boot/wiki/Spring-Boot-2.1-Release-Notes), and the [Angular changelog](https://github.com/angular/angular/blob/master/CHANGELOG.md).
 
-// summary of what's changed, angular vs react, etc.
+I wrote about how to integrate Spring Boot 2.0 and Angular 5.0 last December. This post was extremely popular on the Okta Developer blog and became an inspiration for many future blog posts. When [Angular 6 was released](/blog/2018/05/09/upgrade-to-angular-6), I was reluctant to update it because it has "Angular 5.0" in its title, and you don't change a title because SEO.
 
 This article describes how to build a simple CRUD application that displays a list of cool cars. It'll allow you to edit the list, and it'll show an animated gif from [GIPHY](http://giphy.com) that matches the car's name. You'll also learn how to secure your application using Okta's Spring Boot starter and Angular SDK.
 
-You will need [Java 8](http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html) and [Node.js 8](https://nodejs.org/) installed to complete this tutorial.
+You will need [Java 8](http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html) and [Node.js 8+](https://nodejs.org/) installed to complete this tutorial. For Java 10, you'll need to change the `java.version` property and `jaxb-api` as a dependency. Hat tip to Josh Long's [spring-boot-and-java-10](https://github.com/joshlong/spring-boot-and-java-10) project on GitHub.
 
 ## Build an API with Spring Boot 2.1
 
@@ -427,7 +427,7 @@ Update `client/src/app/car-list/car-list.component.html` to use the card layout 
 Modify `client/src/styles.css` to specify the theme and icons.
 
 ```css
-@import "~@angular/material/prebuilt-themes/pink-bluegrey.css";
+@import "~@angular/material/prebuilt-themes/indigo-pink.css";
 @import 'https://fonts.googleapis.com/icon?family=Material+Icons';
 
 body {
@@ -447,9 +447,10 @@ To add a `giphyUrl` property to cars, create `client/src/app/shared/giphy/giphy.
 ```typescript
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import 'rxjs/add/operator/map';
+import { map } from 'rxjs/operators';
 
-@Injectable()
+@Injectable({providedIn: 'root'})
+// http://tutorials.pluralsight.com/front-end-javascript/getting-started-with-angular-2-by-building-a-giphy-search-application
 export class GiphyService {
 
   // Public beta key: https://github.com/Giphy/GiphyAPI#public-beta-key
@@ -460,27 +461,15 @@ export class GiphyService {
 
   get(searchTerm) {
     const apiLink = this.giphyApi + searchTerm;
-    return this.http.get(apiLink).map((response: any) => {
+    return this.http.get(apiLink).pipe(map((response: any) => {
       if (response.data.length > 0) {
         return response.data[0].images.original.url;
       } else {
         return 'https://media.giphy.com/media/YaOxRsmrv9IeA/giphy.gif'; // dancing cat for 404
       }
-    });
+    }));
   }
 }
-```
-
-Add `GiphyService` as a provider in `client/src/app/app.module.ts`.
-
-```typescript
-import { GiphyService } from './shared/giphy/giphy.service';
-
-@NgModule({
-  ...
-  providers: [CarService, GiphyService],
-  bootstrap: [AppComponent]
-})
 ```
 
 Update the code in `client/src/app/car-list/car-list.component.ts` to set the `giphyUrl` property on each car.
@@ -522,9 +511,9 @@ talk to the endpoints provided by the `CarRepository` and the `@RepositoryRestRe
 ```typescript
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs/Observable';
+import { Observable } from 'rxjs';
 
-@Injectable()
+@Injectable({providedIn: 'root'})
 export class CarService {
   public API = '//localhost:8080';
   public CAR_API = this.API + '/cars';
@@ -579,7 +568,7 @@ to add a new car.
 ```
 {% endraw %}
 
-In `client/src/app/app.module.ts`, add routes and import the `FormsModule`.
+In `client/src/app/app.module.ts`, add routes, import the `FormsModule`, and import `RouterModule`.
 
 ```typescript
 import { FormsModule } from '@angular/forms';
@@ -612,12 +601,11 @@ const appRoutes: Routes = [
 })
 ```
 
-Modify `client/src/app/car-edit/car-edit.component.ts` to fetch a car's information from the id passed on the URL, and to add
-methods for saving and deleting.
+Modify `client/src/app/car-edit/car-edit.component.ts` to fetch a car's information from the id passed on the URL, and to add methods for saving and deleting.
 
 ```typescript
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { Subscription } from 'rxjs/Subscription';
+import { Subscription } from 'rxjs';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CarService } from '../shared/car/car.service';
 import { GiphyService } from '../shared/giphy/giphy.service';
@@ -746,17 +734,18 @@ Add authentication with Okta is a nifty feature you can add to this application.
 
 ### Spring Security + OAuth 2.0
 
-On the server side, you can lock things down with Spring Security and its OAuth 2.0 support. Open `server/pom.xml` and add the following dependencies.
+On the server side, you can lock things down with Okta's Spring Boot Starter, which leverages Spring Security and its OAuth 2.0 support. Open `server/pom.xml` and add the following dependencies.
 
 ```xml
 <dependency>
-    <groupId>org.springframework.boot</groupId>
-    <artifactId>spring-boot-starter-security</artifactId>
+    <groupId>com.okta.spring</groupId>
+    <artifactId>okta-spring-boot-starter</artifactId>
+    <version>0.6.0</version>
 </dependency>
 <dependency>
     <groupId>org.springframework.security.oauth.boot</groupId>
     <artifactId>spring-security-oauth2-autoconfigure</artifactId>
-    <version>2.0.0.RELEASE</version>
+    <version>2.0.3.RELEASE</version>
 </dependency>
 ```
 
@@ -766,20 +755,13 @@ Now you need to configure the server to use Okta for authentication. You'll need
 
 Log in to your Okta Developer account (or [sign up](https://developer.okta.com/signup/) if you don't have an account) and navigate to **Applications** > **Add Application**. Click **Single-Page App**, click **Next**, and give the app a name you'll remember. Change all instances of `localhost:8080` to `localhost:4200` and click **Done**.
 
-Create `server/src/main/resources/application.yml` and copy the client ID into it. While you're in there, fill in the rest of the necessary values to match your Okta domain.
+Create `server/src/main/resources/application.yml` and copy the client ID into it. While you're in there, change the `issuer` to match your Okta domain. 
 
 ```yaml
-security:
-    oauth2:
-        client:
-            access-token-uri: https://{yourOktaDomain}/oauth2/default/v1/token
-            user-authorization-uri: https://{yourOktaDomain}/oauth2/default/v1/authorize
-            client-id: {clientId}
-            scope: openid profile email
-        resource:
-            user-info-uri: https://{yourOktaDomain}/oauth2/default/v1/userinfo
-            token-info-uri: https://{yourOktaDomain}/oauth2/default/v1/introspect
-            prefer-token-info: false
+okta:
+  oauth2:
+    client-id: {clientId}
+    issuer: https://{yourOktaDomain}/oauth2/default
 ```
 
 Update `server/src/main/java/com/okta/developer/demo/DemoApplication.java` to enable it as a resource server.
@@ -806,7 +788,7 @@ The Okta Angular SDK is a wrapper around [Okta Auth JS](https://github.com/okta/
 To install it, run the following command in the `client` directory:
 
 ```
-npm install @okta/okta-angular@1.0.0
+npm install @okta/okta-angular@1.0.3
 ```
 
 In `client/src/app/app.module.ts`, add a `config` variable with the settings for your OIDC app.
@@ -854,8 +836,7 @@ Create `client/src/app/shared/okta/auth.interceptor.ts` and add the following co
 ```typescript
 import { Injectable } from '@angular/core';
 import { HttpEvent, HttpHandler, HttpInterceptor, HttpRequest } from '@angular/common/http';
-import { Observable } from 'rxjs/Observable';
-import 'rxjs/add/observable/fromPromise';
+import { Observable, from } from 'rxjs';
 import { OktaAuthService } from '@okta/okta-angular';
 
 @Injectable()
@@ -865,7 +846,7 @@ export class AuthInterceptor implements HttpInterceptor {
   }
 
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-    return Observable.fromPromise(this.handleAccess(request, next));
+    return from(this.handleAccess(request, next));
   }
 
   private async handleAccess(request: HttpRequest<any>, next: HttpHandler): Promise<HttpEvent<any>> {
@@ -892,8 +873,7 @@ import { AuthInterceptor } from './shared/okta/auth.interceptor';
 
 @NgModule({
   ...
-  providers: [CarService, GiphyService,
-    {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true}],
+  providers: [{provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true}],
   ...
 })
 ```
@@ -942,10 +922,10 @@ import { OktaAuthService } from '@okta/okta-angular';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit {
-  title = 'app';
+  title = 'client';
   isAuthenticated: boolean;
 
-  constructor(private oktaAuth: OktaAuthService) {
+  constructor(public oktaAuth: OktaAuthService) {
   }
 
   async ngOnInit() {
@@ -1001,8 +981,14 @@ Move the HTML for the Login button from `app.component.html` to `client/src/app/
 Add `oktaAuth` as a dependency in `client/src/app/home/home.component.ts` and set it up to initialize/change the `isAuthenticated` variable.
 
 ```typescript
+import { Component, OnInit } from '@angular/core';
 import { OktaAuthService } from '@okta/okta-angular';
 
+@Component({
+  selector: 'app-home',
+  templateUrl: './home.component.html',
+  styleUrls: ['./home.component.css']
+})
 export class HomeComponent implements OnInit {
   isAuthenticated: boolean;
 
@@ -1017,6 +1003,7 @@ export class HomeComponent implements OnInit {
     );
   }
 }
+
 ```
 
 Update `client/src/app/app.component.html`, so the Logout button redirects back to home when it's clicked.
@@ -1056,8 +1043,7 @@ import java.util.Collections;
 ...
 
 @Bean
-@SuppressWarnings("unchecked")
-public FilterRegistrationBean simpleCorsFilter() {
+public FilterRegistrationBean<CorsFilter> simpleCorsFilter() {
     UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
     CorsConfiguration config = new CorsConfiguration();
     config.setAllowCredentials(true);
@@ -1065,7 +1051,7 @@ public FilterRegistrationBean simpleCorsFilter() {
     config.setAllowedMethods(Collections.singletonList("*"));
     config.setAllowedHeaders(Collections.singletonList("*"));
     source.registerCorsConfiguration("/**", config);
-    FilterRegistrationBean bean = new FilterRegistrationBean(new CorsFilter(source));
+    FilterRegistrationBean<CorsFilter> bean = new FilterRegistrationBean<>(new CorsFilter(source));
     bean.setOrder(Ordered.HIGHEST_PRECEDENCE);
     return bean;
 }
@@ -1079,18 +1065,18 @@ You can see the full source code for the application developed in this tutorial 
 
 ## Learn More about Spring Boot and Angular
 
-This article uses Okta's Angular SDK, which is something we haven't written about on this blog before. To learn more about this project, see [https://www.npmjs.com/package/@okta/okta-angular](https://www.npmjs.com/package/@okta/okta-angular) or [check it out on GitHub](https://github.com/okta/okta-oidc-js/tree/master/packages/okta-angular).
+It can be tough to keep up with fast moving frameworks like Spring Boot and Angular. This article is meant to give you a jump start on the latest releases, but it will likely be outdated within a few months. I'll do my best to update it to keep in sync with the title (Spring 2.1 and Angular 7). When Angular 8 comes out, I'll likely write a new post and add a note to this one.
 
-I've written a number of Spring Boot and Angular tutorials in the past, and I've recently updated them for Angular 5.
+This article uses [Okta's Angular SDK]((https://www.npmjs.com/package/@okta/okta-angular). To learn more about this project, or help improve it, [see its GitHub project](https://github.com/okta/okta-oidc-js/tree/master/packages/okta-angular). I'd love to make it even easier to use!
 
-* [Bootiful Development with Spring Boot and Angular](/blog/2017/04/26/bootiful-development-with-spring-boot-and-angular)
-* [Build a Secure Notes Application with Kotlin, TypeScript, and Okta](/blog/2017/09/19/build-a-secure-notes-application-with-kotlin-typescript-and-okta)
+This blog has a plethora of Spring Boot and Angular tutorials. Here's some of my favorites:
+
+I've written a number of Spring Boot and Angular tutorials in the past, please .
+
+* [Deploy Your Secure Spring Boot + Angular PWA as a Single Artifact](/blog/2018/06/18/spring-boot-angular-auth-code-flow)
+* [Build and Secure Microservices with Spring Boot 2.0 and OAuth 2.0](/blog/2018/05/17/microservices-spring-boot-2-oauth)
+* [Angular 6: What's New, and Why Upgrade](/blog/2018/05/09/upgrade-to-angular-6)
 * [Angular Authentication with OpenID Connect and Okta in 20 Minutes](/blog/2017/04/17/angular-authentication-with-oidc)
 * [Build an Angular App with Okta's Sign-In Widget in 15 Minutes](/blog/2017/03/27/angular-okta-sign-in-widget)
 
-If you have any questions, please don't hesitate to leave a comment below, or ask us on our [Okta Developer Forums](https://devforum.okta.com/). Follow us [on Twitter](https://twitter.com/oktadev) if you want to be notified when we publish new blog posts.
-
-**Changelog:**
-
-* Apr 9, 2018: Updated to use Okta Angular 1.0.0, Spring Boot 2.0.1, and Angular CLI 1.7.4 (with Angular 5.2.9). See the code changes in the [example app on GitHub](https://github.com/oktadeveloper/okta-spring-boot-2-angular-7-example/pull/5). Changes to this article can be viewed in [okta/okta.github.io#1938](https://github.com/okta/okta.github.io/pull/1938).
-* Mar 5, 2018: Updated to use Spring Boot 2.0 and Angular CLI 1.7.2 (with Angular 5.2.7). See the code changes in the [example app on GitHub](https://github.com/oktadeveloper/okta-spring-boot-2-angular-7-example/pull/2). Changes to this article can be viewed in [okta/okta.github.io#1806](https://github.com/okta/okta.github.io/pull/1806).
+If you have any questions, please don't hesitate to leave a comment below, or ask us on our [Okta Developer Forums](https://devforum.okta.com/). Don't forget to follow us [on Twitter](https://twitter.com/oktadev) too! 
