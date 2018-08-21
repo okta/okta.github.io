@@ -11,21 +11,23 @@ tweets:
 
 Technology moves fast these days. It can be challenging to keep up with the latest trends as well as new releases of your favorite projects. I'm here to help! Spring Boot and Angular are two of my favorite projects, so I figured I'd write y'all a guide to show you how to build and secure a basic app using their latest and greatest releases.
 
-In Spring Boot, the most significant change in 2.0 is its new web framework: Spring WebFlux. Spring Boot 2.1 is a minor release, so there shouldn't be any major changes, just incremental improvements. In Angular 7.0, the biggest change is upgrading to RxJS v6 and there's rumors that a new, faster renderer will be included (code named: [Ivy Renderer](http://ivy.angular.io/)). For specific changes, see [Spring Boot 2.1 Release Notes(https://github.com/spring-projects/spring-boot/wiki/Spring-Boot-2.1-Release-Notes), and the [Angular changelog](https://github.com/angular/angular/blob/master/CHANGELOG.md).
+In Spring Boot, the most significant change in 2.0 is its new web framework: Spring WebFlux. Spring Boot 2.1 is a minor release, so there shouldn't be any major changes, just incremental improvements. In Angular 7.0, the most significant change is upgrading to RxJS v6, and there are rumors that a new, faster renderer will be included. 
 
-I wrote about how to integrate Spring Boot 2.0 and Angular 5.0 last December. This post was extremely popular on the Okta Developer blog and became an inspiration for many future blog posts. When [Angular 6 was released](/blog/2018/05/09/upgrade-to-angular-6), I was reluctant to update it because it has "Angular 5.0" in its title, and you don't change a title because SEO.
+I wrote about how to integrate [Spring Boot 2.0 and Angular 5.0 last December](/blog/2017/12/04/basic-crud-angular-and-spring-boot). This post was extremely popular on the Okta Developer blog and became an inspiration for many future blog posts. When [Angular 6 was released](/blog/2018/05/09/upgrade-to-angular-6), I was reluctant to update it because it has "Angular 5.0" in its title, and you don't change a title because of SEO.
 
-This article describes how to build a simple CRUD application that displays a list of cool cars. It'll allow you to edit the list, and it'll show an animated gif from [GIPHY](http://giphy.com) that matches the car's name. You'll also learn how to secure your application using Okta's Spring Boot starter and Angular SDK.
+This article describes how to build a simple CRUD application that displays a list of cool cars. It'll allow you to edit the cars, and it'll show an animated gif from [GIPHY](http://giphy.com) that matches the car's name. You'll also learn how to secure your application using Okta's Spring Boot starter and Angular SDK. Below is a screenshot of the app when it's completed.
 
-You will need [Java 8](http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html) and [Node.js 8+](https://nodejs.org/) installed to complete this tutorial. For Java 10, you'll need to change the `java.version` property and `jaxb-api` as a dependency. Hat tip to Josh Long's [spring-boot-and-java-10](https://github.com/joshlong/spring-boot-and-java-10) project on GitHub.
+{% img blog/spring-boot-2-angular-7/success-at-last.png alt:"Screenshot of completed app" width:"800" %}{: .center-image }
+
+You will need [Java 8](http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html) and [Node.js 8+](https://nodejs.org/) installed to complete this tutorial. For Java 10+, you'll need to change the `java.version` property and `jaxb-api` as a dependency. Hat tip to Josh Long's [spring-boot-and-java-10](https://github.com/joshlong/spring-boot-and-java-10) project on GitHub.
 
 ## Build an API with Spring Boot 2.1
 
-To get started with [Spring Boot](https://projects.spring.io/spring-boot/) 2.1, head on over to [start.spring.io](https://start.spring.io) and create a new project that uses Java, Spring Boot version 2.1.0 M1, and options to create a simple API: JPA, H2, Rest Repositories, Lombok, and Web. In this example, I've added Actuator as well, since it's a [very cool feature](https://dzone.com/articles/spring-boot-actuator-a-complete-guide) of Spring Boot.
+To get started with [Spring Boot](https://projects.spring.io/spring-boot/) 2.1, head on over to [start.spring.io](https://start.spring.io) and create a new project that uses Java, Spring Boot version 2.1.0 M2, and options to create a simple API: JPA, H2, Rest Repositories, Lombok, and Web. In this example, I've added Actuator as well, since it's a [very cool feature](https://dzone.com/articles/spring-boot-actuator-a-complete-guide) of Spring Boot.
 
 {% img blog/spring-boot-2-angular-7/start.spring.io.png alt:"Spring Initializr" width:"800" %}{: .center-image }
 
-Create a directory to hold your server and client applications. I called mine `okta-spring-boot-2-angular-7-example`, but you can call yours whatever you like. If you'd rather just see the app running than write code, you can [see the example on GitHub](https://github.com/oktadeveloper/okta-spring-boot-2-angular-7-example), or clone and run locally using the commands below.
+Create a directory to hold your server and client applications. I called mine `okta-spring-boot-2-angular-7-example`, but you can call yours whatever you like. If you'd rather see the app running than write code, you can [see the example on GitHub](https://github.com/oktadeveloper/okta-spring-boot-2-angular-7-example), or clone and run locally using the commands below.
 
 ```bash
 git clone https://github.com/oktadeveloper/okta-spring-boot-2-angular-7-example.git
@@ -155,7 +157,7 @@ If you restart your server app and hit `http://localhost:8080/cool-cars` with yo
 
 ```bash
 $ http localhost:8080/cool-cars
-HTTP/1.1 200 
+HTTP/1.1 200
 Content-Type: application/json;charset=UTF-8
 Date: Fri, 17 Aug 2018 15:10:33 GMT
 Transfer-Encoding: chunked
@@ -209,7 +211,7 @@ After the client is created, navigate into its directory, remove its Git configu
 
 ```bash
 cd client
-npm install @angular/material@6.4.5 @angular/cdk@6.4.5
+npm install @angular/material@6.4.6 @angular/cdk@6.4.6
 ```
 
 Run `npm audit fix --force` to fix outdated dependencies.
@@ -220,15 +222,15 @@ npm WARN using --force I sure hope you know what you are doing.
 ...
 ```
 
-Edit `package.json` and change all instances of `^6.1.0` to `^7.0.0-beta.2` to upgrade to Angular 7. 
+Edit `package.json` and change all instances of `^6.1.0` to `^7.0.0-beta.2` to upgrade to Angular 7.
 
-**NOTE:** If a Angular 7.0 is out and this post hasn't been updated, please leave a comment and remind me to update it. 
+**NOTE:** If this post isn't updated when Angular 7.0 is out, please leave a comment and remind me to update it.
 
 You'll use Angular Material's components to make the UI look better, especially on mobile phones. If you'd like to learn more about Angular Material, see [material.angular.io](https://material.angular.io). It has extensive documentation on its various components and how to use them. The paint bucket in the top right corner will allow you to preview available theme colors.
 
 {% img blog/spring-boot-2-angular-7/material.angular.io.png alt:"Angular Material Homepage" width:"800" %}{: .center-image }
 
-## Build a Car List Page
+## Build a Car List Page with Angular CLI
 
 Use Angular CLI to generate a car service that can talk to the Cool Cars API.
 
@@ -372,7 +374,7 @@ Restart the server, refresh the client, and you should see the list of cars in y
 
 ## Add Angular Material
 
-You've already installed Angular Material, to use its components, you simply need to import them. Open `client/src/app/app.module.ts` and add imports for animations, and Material's toolbar, buttons, inputs, lists, and card layout.
+You've already installed Angular Material, to use its components, you just need to import them. Open `client/src/app/app.module.ts` and add imports for animations, and Material's toolbar, buttons, inputs, lists, and card layout.
 
 ```typescript
 import { MatButtonModule, MatCardModule, MatInputModule, MatListModule, MatToolbarModule } from '@angular/material';
@@ -431,8 +433,8 @@ Modify `client/src/styles.css` to specify the theme and icons.
 @import 'https://fonts.googleapis.com/icon?family=Material+Icons';
 
 body {
- margin: 0;
- font-family: Roboto, sans-serif;
+  margin: 0;
+  font-family: Roboto, sans-serif;
 }
 ```
 
@@ -495,9 +497,9 @@ export class CarListComponent implements OnInit {
 
 Now your browser should show you the list of car names, along with an avatar image beside them.
 
-{% img blog/spring-boot-2-angular-7/car-list-giphy-images.png alt:"Car List with Giphy avatars" width:"800" %}{: .center-image }
+{% img blog/spring-boot-2-angular-7/car-list-giphy-images.png alt:"Car List with Giphy images" width:"800" %}{: .center-image }
 
-## Add an Edit Feature
+## Add an Edit Feature to Your Angular App
 
 Having a list of car names and images is cool, but it's a lot more fun when you can interact with it! To add an edit feature, start by generating a `car-edit` component.
 
@@ -728,7 +730,7 @@ The following screenshot shows what it looks like to edit a car that you've adde
 
 {% img blog/spring-boot-2-angular-7/car-edit.png alt:"Car Edit Component" width:"800" %}{: .center-image }
 
-## Add Authentication with Okta
+## Add Authentication to Your Spring Boot + Angular App with Okta
 
 Add authentication with Okta is a nifty feature you can add to this application. Knowing who the person is can come in handy if you want to add auditing, or personalize your application (with a rating feature for example).
 
@@ -755,7 +757,7 @@ Now you need to configure the server to use Okta for authentication. You'll need
 
 Log in to your Okta Developer account (or [sign up](https://developer.okta.com/signup/) if you don't have an account) and navigate to **Applications** > **Add Application**. Click **Single-Page App**, click **Next**, and give the app a name you'll remember. Change all instances of `localhost:8080` to `localhost:4200` and click **Done**.
 
-Create `server/src/main/resources/application.yml` and copy the client ID into it. While you're in there, change the `issuer` to match your Okta domain. 
+Create `server/src/main/resources/application.yml` and copy the client ID into it. While you're in there, change the `issuer` to match your Okta domain.
 
 ```yaml
 okta:
@@ -1065,13 +1067,11 @@ You can see the full source code for the application developed in this tutorial 
 
 ## Learn More about Spring Boot and Angular
 
-It can be tough to keep up with fast moving frameworks like Spring Boot and Angular. This article is meant to give you a jump start on the latest releases, but it will likely be outdated within a few months. I'll do my best to update it to keep in sync with the title (Spring 2.1 and Angular 7). When Angular 8 comes out, I'll likely write a new post and add a note to this one.
+It can be tough to keep up with fast-moving frameworks like Spring Boot and Angular. This article is meant to give you a jump start on the latest releases. Angular 7 is rumored to ship with a newer, faster renderer (codenamed: [Ivy Renderer](http://ivy.angular.io/)). For specific changes, see [Angular's changelog](https://github.com/angular/angular/blob/master/CHANGELOG.md). For Spring Boot, see its [2.1 Release Notes(https://github.com/spring-projects/spring-boot/wiki/Spring-Boot-2.1-Release-Notes).
 
 This article uses [Okta's Angular SDK]((https://www.npmjs.com/package/@okta/okta-angular). To learn more about this project, or help improve it, [see its GitHub project](https://github.com/okta/okta-oidc-js/tree/master/packages/okta-angular). I'd love to make it even easier to use!
 
-This blog has a plethora of Spring Boot and Angular tutorials. Here's some of my favorites:
-
-I've written a number of Spring Boot and Angular tutorials in the past, please .
+This blog has a plethora of Spring Boot and Angular tutorials. Here are some of my favorites:
 
 * [Deploy Your Secure Spring Boot + Angular PWA as a Single Artifact](/blog/2018/06/18/spring-boot-angular-auth-code-flow)
 * [Build and Secure Microservices with Spring Boot 2.0 and OAuth 2.0](/blog/2018/05/17/microservices-spring-boot-2-oauth)
@@ -1079,4 +1079,4 @@ I've written a number of Spring Boot and Angular tutorials in the past, please .
 * [Angular Authentication with OpenID Connect and Okta in 20 Minutes](/blog/2017/04/17/angular-authentication-with-oidc)
 * [Build an Angular App with Okta's Sign-In Widget in 15 Minutes](/blog/2017/03/27/angular-okta-sign-in-widget)
 
-If you have any questions, please don't hesitate to leave a comment below, or ask us on our [Okta Developer Forums](https://devforum.okta.com/). Don't forget to follow us [on Twitter](https://twitter.com/oktadev) too! 
+If you have any questions, please don't hesitate to leave a comment below, or ask us on our [Okta Developer Forums](https://devforum.okta.com/). Don't forget to follow us [on Twitter](https://twitter.com/oktadev) too!
