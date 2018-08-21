@@ -879,7 +879,7 @@ Note:
 
 * Specifying your own `deviceToken` or device fingerprint is a highly privileged operation limited to trusted web applications and requires making authentication requests with a valid *API token*.
 * The **public IP address** of your [trusted application](#trusted-application) must be [whitelisted as a gateway IP address](/docs/api/getting_started/design_principles#ip-address) to forward the user agent's original IP address with the `X-Forwarded-For` HTTP header.
-* To use device fingerprinting for the unknown-device email notification feature, include the `User-Agent` header in the request. For more information, see the [Beta documentation](https://support.okta.com/help/blogdetail?id=a67F0000000L2MkIAK).
+* To use device fingerprinting for the unknown-device email notification feature, include the `User-Agent` header in the request. For more information, see the <a href='https://support.okta.com/help/blogdetail?id=a67F0000000L2MkIAK' data-proofer-ignore>Beta documentation</a>.
 * For more information about security behavior detection, see the [EA documentation](https://help.okta.com/en/prod/Content/Topics/Security/proc-security-behavior-detection.htm?).
 
 ##### Request Example for Device Fingerprinting
@@ -2186,7 +2186,7 @@ curl -v -X POST \
 
 Use the `resend` link to send another OTP if user doesn't receive the original activation Voice Call OTP.
 
-###### Request Example for Resend Voice Call      
+###### Request Example for Resend Voice Call
 {:.api .api-request .api-request-example}
 
 ~~~sh
