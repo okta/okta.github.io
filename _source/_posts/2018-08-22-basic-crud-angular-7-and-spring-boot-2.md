@@ -497,7 +497,7 @@ export class CarListComponent implements OnInit {
 
 Now your browser should show you the list of car names, along with an avatar image beside them.
 
-{% img blog/spring-boot-2-angular-7/car-list-giphy-images.png alt:"Car List with Giphy images" width:"800" %}{: .center-image }
+{% img blog/spring-boot-2-angular-7/car-list-giphy-images.png alt:"Car List with Giphy avatars" width:"800" %}{: .center-image }
 
 ## Add an Edit Feature to Your Angular App
 
@@ -944,7 +944,7 @@ Now if you restart your client, you should see a login button.
 
 {% img blog/spring-boot-2-angular-7/login-button.png alt:"Login Button" width:"800" %}{: .center-image }
 
-Notice that this shows elements from the car-list component. To fix this, you can create a home component and make it the default route.
+Notice that this shows elements from the `car-list` component. To fix this, you can create a home component and make it the default route.
 
 ```bash
 ng g c home
@@ -1067,9 +1067,9 @@ You can see the full source code for the application developed in this tutorial 
 
 ## Learn More about Spring Boot and Angular
 
-It can be tough to keep up with fast-moving frameworks like Spring Boot and Angular. This article is meant to give you a jump start on the latest releases. Angular 7 is rumored to ship with a newer, faster renderer (codenamed: [Ivy Renderer](http://ivy.angular.io/)). For specific changes, see [Angular's changelog](https://github.com/angular/angular/blob/master/CHANGELOG.md). For Spring Boot, see its [2.1 Release Notes(https://github.com/spring-projects/spring-boot/wiki/Spring-Boot-2.1-Release-Notes).
+It can be tough to keep up with fast-moving frameworks like Spring Boot and Angular. This article is meant to give you a jump start on the latest releases. Angular 7 is rumored to ship with a newer, faster renderer (codenamed: [Ivy Renderer](http://ivy.angular.io/)). For specific changes, see [Angular's changelog](https://github.com/angular/angular/blob/master/CHANGELOG.md). For Spring Boot, see its [2.1 Release Notes](https://github.com/spring-projects/spring-boot/wiki/Spring-Boot-2.1-Release-Notes).
 
-This article uses [Okta's Angular SDK]((https://www.npmjs.com/package/@okta/okta-angular). To learn more about this project, or help improve it, [see its GitHub project](https://github.com/okta/okta-oidc-js/tree/master/packages/okta-angular). I'd love to make it even easier to use!
+This article uses [Okta's Angular SDK](https://www.npmjs.com/package/@okta/okta-angular). To learn more about this project, or help improve it, [see its GitHub project](https://github.com/okta/okta-oidc-js/tree/master/packages/okta-angular). I'd love to make it even easier to use!
 
 This blog has a plethora of Spring Boot and Angular tutorials. Here are some of my favorites:
 
