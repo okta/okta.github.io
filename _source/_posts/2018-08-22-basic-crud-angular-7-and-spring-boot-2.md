@@ -789,7 +789,7 @@ The Okta Angular SDK is a wrapper around [Okta Auth JS](https://github.com/okta/
 
 To install it, run the following command in the `client` directory:
 
-```
+```bash
 npm install @okta/okta-angular@1.0.3
 ```
 
