@@ -165,6 +165,23 @@
 			border-bottom: 0;
 		}
 
+		/* Classes for outdated banner */
+		.outdated {
+			padding: 10px 20px;
+			background-color: #ebfaf4;
+			color: #12c677;
+			border: 1px solid #12c677;
+			margin-bottom: 10px;
+			border-radius: 5px;
+
+			.title {
+				font-size: 16pt;
+				font-weight: 700;
+			}
+		}
+
+
+
 		/* Same as what docs uses (in _PageContent.scss) */
 		blockquote {
 			margin: 24px 24px;

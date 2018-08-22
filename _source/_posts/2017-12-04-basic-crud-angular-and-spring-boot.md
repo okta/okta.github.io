@@ -9,6 +9,11 @@ tweets:
   - "Spring Boot with @java + Angular with @typescriptlang = ❤️. Learn how to build a @springboot + @angular CRUD app today!"
 ---
 
+<div class="outdated">
+  <p class="title">Heads up... this post is old!</p>
+  <p>For an updated version of this post, see <a href="/blog/2018/08/22/basic-crud-angular-7-and-spring-boot-2">Build a Basic CRUD App with Angular 7.0 and Spring Boot 2.1</a>.</p>
+</div>
+
 Technology moves fast these days. It can be challenging to keep up with the latest trends as well as new releases of your favorite projects. I'm here to help! Spring Boot and Angular are two of my favorite projects, so I figured I'd write y'all a guide to show you how to build and secure a basic app using their latest and greatest releases.
 
 In Spring Boot, the most significant change in 2.0 is its new web framework: Spring WebFlux. In Angular 5.0, we get a new `HttpClient` on the table. This class replaces `Http`, and is a bit easier to use, with less boilerplate code. Today, I'm not going to explore Spring WebFlux, because we still [have some work to do](https://github.com/okta/okta-spring-boot/issues/24) before we can support in with the [Okta Spring Boot Starter](https://github.com/okta/okta-spring-boot).
