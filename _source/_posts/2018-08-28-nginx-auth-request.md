@@ -75,26 +75,26 @@ Add the following to your existing `server` block:
 auth_request /lasso-validate;
 
 location = /lasso-validate {
-	# This address is where Lasso will be listening on
-proxy_pass http://127.0.0.1:9090/validate;
-proxy_pass_request_body off; # no need to send the POST body
+  # This address is where Lasso will be listening on
+  proxy_pass http://127.0.0.1:9090/validate;
+  proxy_pass_request_body off; # no need to send the POST body
 
-proxy_set_header Content-Length "";
-proxy_set_header X-Real-IP $remote_addr;
-proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
-proxy_set_header X-Forwarded-Proto $scheme;
+  proxy_set_header Content-Length "";
+  proxy_set_header X-Real-IP $remote_addr;
+  proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+  proxy_set_header X-Forwarded-Proto $scheme;
 
-# these return values are passed to the @error401 call
-auth_request_set $auth_resp_jwt $upstream_http_x_lasso_jwt;
-auth_request_set $auth_resp_err $upstream_http_x_lasso_err;
-auth_request_set $auth_resp_failcount $upstream_http_x_lasso_failcount;
+  # these return values are passed to the @error401 call
+  auth_request_set $auth_resp_jwt $upstream_http_x_lasso_jwt;
+  auth_request_set $auth_resp_err $upstream_http_x_lasso_err;
+  auth_request_set $auth_resp_failcount $upstream_http_x_lasso_failcount;
 }
 
 error_page 401 = @error401;
 
 # If the user is not logged in, redirect them to Lasso's login URL
 location @error401 {
-return 302 https://login.avocado.lol/login?url=https://$http_host$request_uri&lasso-failcount=$auth_resp_failcount&X-Lasso-Token=$auth_resp_jwt&error=$auth_resp_err;
+  return 302 https://login.avocado.lol/login?url=https://$http_host$request_uri&lasso-failcount=$auth_resp_failcount&X-Lasso-Token=$auth_resp_jwt&error=$auth_resp_err;
 }
 ```
 
@@ -163,7 +163,6 @@ oauth:
     - email
   # Set the callback URL to the domain that Lasso is running on
   callback_url: https://login.avocado.lol/auth
-
 ```
 
 Now you can run Lasso! It will listen on port 9090, which is where you've configured nginx to send the `auth_request` verifications as well as serve traffic from `login.avocado.lol`.
