@@ -21,13 +21,13 @@ In this post, I use the shared secret in a less-convenient but fun way, while st
 
 Well, maybe not perfect. But, fun!
 
-{% img blog/ardu-token-mfa/oktaardutoken.gif alt:"Okta Ardu Token" width:"538" %}{: .center-image }
+{% img blog/ardu-token-mfa/oktaardutoken.gif alt:"Okta Ardu Token" width:"600" %}{: .center-image }
 
 The biggest challenge is that when you turn off an ArduBoy, it's *really* off.  There's no realtime clock that continues to run when the ArduBoy is off. We take this for granted on our computers or mobile devices that either have hardware to keep the clock running, have the ability to automatically set the time over a network on boot or both. Not so with the ArduBoy! In order to really use this as your go-to TOTP device, you need to keep it on and charge it before it dies.
 
 What the application does to mitigate this is use the onboard EEPROM (Electrically Erasable Programmable Read-Only Memory) to (a) save the secret and (b) save the last date and time set. The next time you turn on the ArduBoy, it checks to see if a secret has been set. If so, it goes directly to setting the date and time. On the date and time setting screen, it starts with the last set date and time to make it easier to update.
 
-{% img blog/ardu-token-mfa/ardutoken.png alt:"Ardu Token" width:"600" %}{: .center-image }
+{% img blog/ardu-token-mfa/ardutoken.png alt:"Ardu Token" width:"510" %}{: .center-image }
 
 This is a fun way to learn a little about TOTP and see it working against a real Okta organization.
 
@@ -95,7 +95,7 @@ With a total of 6 buttons, the interface to set the shared secret and the date a
 
 When you first launch that app, you'll see the shared secret setting screen:
 
-{% img blog/ardu-token-mfa/secret.png alt:"Secret setting screen" width:"555" %}{: .center-image }
+{% img blog/ardu-token-mfa/secret.png alt:"Secret setting screen" width:"300" %}{: .center-image }
 
 Okta Verify uses a 16-byte Base32 encoded string for the shared secret. Initially, this is shown as 16 `M`s. You can use the up and down buttons to navigate around the set of capital letters and the numbers from 0 - 9. You can use the left and right buttons to move positions within the available 16 characters.
 
@@ -109,7 +109,7 @@ When the shared secret is set, press the `A` button to move on to the date and t
 
 Once you've saved the shared secret, you'll see the date and time setting screen:
 
-{% img blog/ardu-token-mfa/date.png alt:"Time setting screen" width:"556" %}{: .center-image }
+{% img blog/ardu-token-mfa/date.png alt:"Time setting screen" width:"300" %}{: .center-image }
 
 You can use the up and down arrows to change the numbers for each part of the date and time. You can use the right and left buttons to change positions on the date and time interface. The interface will automatically skip over separators and will automatically wrap around in a similar way to the shared secret interface.
 
@@ -123,7 +123,7 @@ You can press the `B` button to return to the shared secret screen from here.
 
 Once the shared secret and date and time are set, you see the TOTP screen. At the top of the screen, in a large font, you see the current passcode. This passcode changes every 30 seconds. Below the passcode, you see the full date and time which updates every second.
 
-{% img blog/ardu-token-mfa/totp.png alt:"TOTP screen" width:"557" %}{: .center-image }
+{% img blog/ardu-token-mfa/totp.png alt:"TOTP screen" width:"300" %}{: .center-image }
 
 Press the `A` button to return to the set date and time screen. Press the `B` button to return to the set shared secret screen.
 
@@ -210,7 +210,7 @@ You'll then see the Secret Key Field. Turn on your ArduBoy (or use ProjectABE) a
 
 On the Arduboy, press the `A` button and enter in the correct date and time (GMT timezone). Press the `A` button. This will bring you to the TOTP screen.
 
-Click Next on the Setup Okta Verify dialog. Enter in the code displayed on the ArduBoy and click Next.
+Click **Next** on the Setup Okta Verify dialog. Enter in the code displayed on the ArduBoy and click **Next**.
 
 If all goes well, you'll see a screen asking for you to set a security question and answer to finish configuring your account.
 
@@ -218,7 +218,7 @@ You've now completed enrollment in Okta Verify using an ArduBoy as a hardware to
 
 You could logout and login again and you will be prompted to put in a code again which you would get from the ArduBoy.
 
-*Note:* The clock component in ProjectABE is not very accurate and will get behind or ahead very quickly. You can always press the `A` button to set the time once again so that the passcode shown is correct.
+**NOTE:** The clock component in ProjectABE is not very accurate and will get behind or ahead very quickly. You can always press the `A` button to set the time once again so that the passcode shown is correct.
 
 You can also program in the value in the actual Okta Verify app on your mobile device and confirm that the passcode shown is the same as the passcode on the ArduBoy.
 
@@ -287,6 +287,6 @@ If you'd like to learn more about MFA with Okta, check out these posts:
  
 Finally, please [follow us on Twitter](https://twitter.com/OktaDev) to find more great resources like this, request other topics for us to write about, and follow along with our new open source libraries and projects!
  
-**PS**: If you liked this project and want to see the source code in one place, please go checkout and star the [GitHub repository](https://github.com/oktadeveloper/okta-ardu-token-example).
+**P.S.**: If you liked this project and want to see the source code in one place, please go checkout and star its [GitHub repository](https://github.com/oktadeveloper/okta-ardu-token-example).
  
 And... If you have any questions, please leave a comment below!
