@@ -1,6 +1,6 @@
 ---
 layout: blog_post
-title: 'Build a Java EE REST API; Secure it with JWT and OIDC'
+title: 'Build a Java REST API with Java EE and OIDC'
 author: mraible
 description: "Java EE allows you to build REST APIs quickly and easily with JAX-RS and JPA. This article shows you how to build a simple API with Java EE, run it on Apache TomEE, and secure it with JWT and OIDC."
 tags: [java, java ee, rest api, jax-rs, jpa, ejb, jwt, oidc, spring security, pac4j]
@@ -356,11 +356,11 @@ public class BeerBean {
 }
 ```
 
-## Protect Your Java EE REST API with JWT Verifier for Java
+## Protect Your Java REST API with JWT Verifier for Java
 
-## Secure Your Java EE REST API with Spring Security
+## Secure Your REST API with Spring Security
 
-## Secure Your Java EE REST API with Pac4j
+## Use Pac4j to Lock Down Your Java REST API
 
 ## What About Jakarta EE?
 
