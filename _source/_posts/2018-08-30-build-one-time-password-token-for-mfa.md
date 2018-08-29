@@ -21,7 +21,7 @@ In this post, I use the shared secret in a less-convenient but fun way, while st
 
 Well, maybe not perfect. But, fun!
 
-{% img blog/ardu-token-mfa/oktaardutoken.gif alt:"Okta Ardu Token" width:"600" %}{: .center-image }
+<video src="{% asset_path 'blog/ardu-token-mfa/oktaardutoken.mp4' %}" width="360" class="center-image" autoplay controls></video>
 
 The biggest challenge is that when you turn off an ArduBoy, it's *really* off.  There's no realtime clock that continues to run when the ArduBoy is off. We take this for granted on our computers or mobile devices that either have hardware to keep the clock running, have the ability to automatically set the time over a network on boot or both. Not so with the ArduBoy! In order to really use this as your go-to TOTP device, you need to keep it on and charge it before it dies.
 
@@ -224,7 +224,7 @@ You can also program in the value in the actual Okta Verify app on your mobile d
 
 Here's the OktaArduToken side-by-side with the Okta Verify mobile app:
 
-{% img blog/ardu-token-mfa/oktaardusidebyside.gif alt:"OktaArduToken side-by-side with the Okta Verify mobile app" width:"600" %}{: .center-image }
+<video src="{% asset_path 'blog/ardu-token-mfa/oktaardusidebyside.mp4' %}" width="600" class="center-image" autoplay controls></video>
 
 ## A look at the TOTP Arduino Code
 
