@@ -80,7 +80,7 @@ In this example, I'll use [React Native App Auth](https://github.com/FormidableL
 
 Before you add AppAuth to your React Native application, you'll need an app to authorize against. If you don't have a free-forever Okta Developer account, [get one today](https://developer.okta.com/signup/)!
 
-Log in to your Okta Developer account and navigate to **Applications** > **Add Application**. Click **Native** and click **Next**. Give the app a name you'll remember (e.g., `React Native`), select `Refresh Token` as a grant type, in addition to the default `Authorization Code`. Copy the **Login redirect URI** (e.g., `com.oktapreview.dev-158606:/callback`) and save it somewhere. You'll need this value when configuring your app.
+Log in to your Okta Developer account and navigate to **Applications** > **Add Application**. Click **Native** and click **Next**. Give the app a name you'll remember (e.g., `React Native`), select `Refresh Token` as a grant type, in addition to the default `Authorization Code`. Copy the **Login redirect URI** (e.g., `{yourOktaScheme}:/callback`) and save it somewhere. You'll need this value when configuring your app.
 
 Click **Done** and you should see a client ID on the next screen. Copy and save this value as well.
 
@@ -142,7 +142,7 @@ If you intend to support iOS 10 and older, you need to define the supported redi
     <string>$(PRODUCT_BUNDLE_IDENTIFIER)</string>
     <key>CFBundleURLSchemes</key>
     <array>
-      <string>{yourReversedOktaDomain}</string>
+      <string>{yourOktaScheme}</string>
     </array>
   </dict>
 </array>
@@ -160,7 +160,7 @@ Below is what mine looks like after I changed my app identifier and added this k
     <string>$(PRODUCT_BUNDLE_IDENTIFIER)</string>
     <key>CFBundleURLSchemes</key>
     <array>
-      <string>com.oktapreview.dev-158606</string>
+      <string>{yourOktaScheme}</string>
     </array>
   </dict>
 </array>
@@ -222,9 +222,9 @@ type State = {
 };
 
 const config = {
-  issuer: 'https://{yourOktaDomain}.oktapreview.com/oauth2/default',
+  issuer: 'https://{yourOktaDomain}/oauth2/default',
   clientId: '{clientId}',
-  redirectUrl: 'com.{yourReversedOktaDomain}:/callback',
+  redirectUrl: '{yourOktaScheme}:/callback',
   additionalParameters: {},
   scopes: ['openid', 'profile', 'email', 'offline_access']
 };
@@ -330,9 +330,9 @@ Make sure to adjust `config` with your settings.
 
 ```
 const config = {
-  issuer: 'https://{yourOktaDomain}.oktapreview.com/oauth2/default',
+  issuer: 'https://{yourOktaDomain}/oauth2/default',
   clientId: '{clientId}',
-  redirectUrl: 'com.{yourReversedOktaDomain}:/callback',
+  redirectUrl: '{yourOktaScheme}:/callback',
   ...
 };
 ```
@@ -429,7 +429,7 @@ android {
   defaultConfig {
     ...
     manifestPlaceholders = [
-      appAuthRedirectScheme: '{yourReversedOktaDomain}'
+      appAuthRedirectScheme: '{yourOktaScheme}'
     ]
   }
 }
@@ -448,7 +448,7 @@ defaultConfig {
         abiFilters "armeabi-v7a", "x86"
     }
     manifestPlaceholders = [
-        appAuthRedirectScheme: 'com.oktapreview.dev-158606'
+        appAuthRedirectScheme: '{yourOktaScheme}'
     ]
 }
 ```

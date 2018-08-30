@@ -358,7 +358,7 @@ Okta has a handy Vue component to handle all the heavy lifting of integrating wi
 npm i @okta/okta-vue@1.0.1
 ```
 
-Open `src/router/index.js` and modify it to look like the following code.  Also, make sure to change `{yourClientId}` and `{yourOktaDomain}` to yours!
+Open `src/router/index.js` and modify it to look like the following code.  Also, make sure to change `{clientId}` and `{yourOktaDomain}` to yours!
 
 ```js
 import Vue from 'vue'
@@ -369,7 +369,7 @@ import Auth from '@okta/okta-vue'
 
 Vue.use(Auth, {
   issuer: 'https://{yourOktaDomain}/oauth2/default',
-  client_id: '{yourClientId}',
+  client_id: '{clientId}',
   redirect_uri: window.location.origin + '/implicit/callback',
   scope: 'openid profile email'
 })
@@ -490,7 +490,7 @@ Then install the required dependencies.
 npm install -s express cors body-parser @okta/jwt-verifier aws-serverless-express
 ```
 
-Next is to create a file that will define the application.  Copy the following code into `app.js` and change  `{yourClientId}` and `{yourOktaDomain}` to yours.
+Next is to create a file that will define the application.  Copy the following code into `app.js` and change  `{clientId}` and `{yourOktaDomain}` to yours.
 
 ```js
 const express = require('express')
@@ -499,7 +499,7 @@ const bodyParser = require('body-parser')
 const OktaJwtVerifier = require('@okta/jwt-verifier')
 
 const oktaJwtVerifier = new OktaJwtVerifier({
-  clientId: '{yourClientId}',
+  clientId: '{clientId}',
   issuer: 'https://{yourOktaDomain}/oauth2/default'
 })
 

@@ -31,8 +31,8 @@ An example `application.properties` file would look like:
 
 ```properties
 okta.oauth2.issuer=https://{yourOktaDomain}/oauth2/default
-okta.oauth2.clientId={yourClientId}
-okta.oauth2.clientSecret={yourClientSecret}
+okta.oauth2.clientId={clientId}
+okta.oauth2.clientSecret={clientSecret}
 # Configure the callback URL to match the previous section
 security.oauth2.sso.loginPath=/authorization-code/callback
 ```

@@ -24,8 +24,8 @@ At the end of the Android instructions you can choose your server type to learn 
 | Setting             | Value                                               |
 | ------------------- | --------------------------------------------------- |
 | Application Name    | My Android App                                      |
-| Login redirect URIs | com.oktapreview.{orgName}:/callback                 |
-| Logout redirect URIs| com.oktapreview.{orgName}:/logout                   |
+| Login redirect URIs | {yourOktaScheme}:/callback                          |
+| Logout redirect URIs| {yourOktaScheme:/logout                             |
 
 After you have created the application there are two more values you will need to gather:
 

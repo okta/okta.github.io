@@ -898,7 +898,7 @@ const appRoutes: Routes = [
 const config = {
   issuer: 'https://{yourOktaDomain}/oauth2/default',
   redirectUri: 'http://localhost:4200/implicit/callback',
-  clientId: '{yourClientId}'
+  clientId: '{clientId}'
 };
 
 @NgModule({

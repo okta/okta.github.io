@@ -325,14 +325,14 @@ You now should have enough to populate `app/src/main/res/raw/okta_app_auth_confi
 
 ```json
 {
-  "client_id": "{clientIdValue}",
+  "client_id": "{clientId}",
   "redirect_uri": "{redirectUriValue}",
   "scopes": ["openid", "profile", "offline_access"],
-  "issuer_uri": "https://dev-628819.oktapreview.com/oauth2/default"
+  "issuer_uri": "https://{yourOktaDomain}/oauth2/default"
 }
 ```
 
-Change the `appAuthRedirectScheme` field in `app/build.gradle` to the base of your redirect URI, e.g. `"appAuthRedirectScheme": "com.oktapreview.dev-628819"`.
+Change the `appAuthRedirectScheme` field in `app/build.gradle` to the base of your redirect URI, e.g. `"appAuthRedirectScheme": "{yourOktaScheme}"`.
 
 Configuration should now be complete! If you `gradlew installDebug` and do the logcat as before you should no longer be seeing the error when you open the app, and should see a message saying `Warming up browser instance for auth request`.
 

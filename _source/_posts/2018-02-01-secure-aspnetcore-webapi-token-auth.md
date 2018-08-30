@@ -103,8 +103,8 @@ In this case, the client of the API is the ASP.NET MVC application. Open the `ap
   },
   "Okta": {
     "TokenUrl": "https://{yourOktaDomain}/oauth2/default/v1/token",
-    "ClientId": "{yourClientId}",
-    "ClientSecret": "{yourClientSecret}"
+    "ClientId": "{clientId}",
+    "ClientSecret": "{clientSecret}"
   }
 }
 ```

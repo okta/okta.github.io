@@ -15,8 +15,7 @@ I've danced the JavaScript framework shuffle for years starting with jQuery, the
 This tutorial will take you step by step through scaffolding a Vue.js project, offloading secure authentication to [Okta's OpenID Connect API (OIDC)](/docs/api/resources/oidc), locking down protected routes, and performing CRUD operations through a backend REST API server. This tutorial uses the following technologies but doesn't require intimate knowledge to follow along:
 
 - Vue.js with [vue-cli](https://github.com/vuejs/vue-cli), [vue-router](https://github.com/vuejs/vue-router), and [Okta Vue SDK](https://github.com/okta/okta-oidc-js/tree/master/packages/okta-vue)
-- Node with [Express](https://github.com/expressjs/express), [Okta JWT Verifier](https://github.com/okta/okta-auth-js), [Sequelize](https://github.com/sequelize/sequelize), and [Epilogue](https://github.com/dchester/epilogue)
-
+- Node with [Express](https://github.com/expressjs/express), [Okta JWT Verifier](https://github.com/okta/okta-oidc-js/tree/master/packages/jwt-verifier), [Sequelize](https://github.com/sequelize/sequelize), and [Epilogue](https://github.com/dchester/epilogue)
 
 ## About Vue.js
 
@@ -133,7 +132,7 @@ import Auth from '@okta/okta-vue'
 
 Vue.use(Auth, {
   issuer: 'https://{yourOktaDomain}/oauth2/default',
-  client_id: '{yourClientId}',
+  client_id: '{clientId}',
   redirect_uri: 'http://localhost:8080/implicit/callback',
   scope: 'openid profile email'
 })
@@ -168,12 +167,12 @@ router.beforeEach(Vue.prototype.$auth.authRedirectGuard())
 export default router
 ```
 
-You'll need to replace `{yourOktaDomain}` and `{yourClientId}` which can be found on your application overview page in the Okta Developer Console. This will inject an `authClient` object into your Vue instance which can be accessed by calling `this.$auth` anywhere inside your Vue instance.
+You'll need to replace `{yourOktaDomain}` and `{clientId}` which can be found on your application overview page in the Okta Developer Console. This will inject an `authClient` object into your Vue instance which can be accessed by calling `this.$auth` anywhere inside your Vue instance.
 
 ```javascript
 Vue.use(Auth, {
   issuer: 'https://{yourOktaDomain}/oauth2/default',
-  client_id: '{yourClientId}',
+  client_id: '{clientId}',
   redirect_uri: 'http://localhost:8080/implicit/callback',
   scope: 'openid profile email'
 })
@@ -209,7 +208,7 @@ The web app's layout is located in a component `./src/App.vue`.  You can use the
 
 For the main menu, you'll want to change the visibility of certain menu items based on the status of the `activeUser`:
 
-- Not Authenticated: Show only *Login* 
+- Not Authenticated: Show only *Login*
 - Authenticated: Show only *Logout*
 
 You can toggle the visibility of these menu items using the `v-if` directive in Vue.js that checks the existence of `activeUser` on the component.  When the component is loaded (which calls `created()`) or when a route changes we want to refresh the `activeUser`.
@@ -312,7 +311,7 @@ Now that you've added vue-bootstrap, modify `./src/components/Hello.vue` to remo
 ```
 {% endraw %}
 
-At this point you can stub out the Post Manager page to test your authentication flow. Once you confirm authentication works, you'll start to build out the API calls and components required to perform CRUD operations on your Posts model. 
+At this point you can stub out the Post Manager page to test your authentication flow. Once you confirm authentication works, you'll start to build out the API calls and components required to perform CRUD operations on your Posts model.
 
 Create a new file `./src/components/PostsManager.vue` and paste the following code:
 
@@ -366,7 +365,7 @@ const epilogue = require('epilogue')
 const OktaJwtVerifier = require('@okta/jwt-verifier')
 
 const oktaJwtVerifier = new OktaJwtVerifier({
-  clientId: '{yourClientId}',
+  clientId: '{clientId}',
   issuer: 'https://{yourOktaDomain}/oauth2/default'
 })
 
@@ -469,7 +468,7 @@ let userResource = epilogue.resource({
 })
 ```
 
-### Verify Your JWT 
+### Verify Your JWT
 
 This is the most crucial component of your REST API server. Without this middleware any user can perform CRUD operations on our database. If no authorization header is present, or the access token is invalid, the API call will fail and return an error.
 
@@ -500,7 +499,7 @@ Open a new terminal window and run the server with the command `node ./src/serve
 
 ## Complete the Posts Manager Component
 
-Now that the REST API server is complete, you can start wiring up your posts manager to fetch posts, create posts, edit posts, and delete posts. 
+Now that the REST API server is complete, you can start wiring up your posts manager to fetch posts, create posts, edit posts, and delete posts.
 
 I always centralize my API integrations into a single helper module. This keeps the code in components much cleaner and provides single location in case you need to change anything with the API request.
 
@@ -607,7 +606,7 @@ You now have all the components required to wire up your posts manager component
               <td>{{ post.title }}</td>
               <td>{{ post.updatedAt }}</td>
               <td class="text-right">
-                <a href="#" @click.prevent="populatePostToEdit(post)">Edit</a> - 
+                <a href="#" @click.prevent="populatePostToEdit(post)">Edit</a> -
                 <a href="#" @click.prevent="deletePost(post.id)">Delete</a>
               </td>
             </tr>
@@ -777,7 +776,7 @@ To learn more about Vue.js head over to [https://vuejs.org](https://vuejs.org/) 
 - [The Lazy Developer's Guide to Authentication with Vue.js](/blog/2017/09/14/lazy-developers-guide-to-auth-with-vue)
 - [Build a Cryptocurrency Comparison Site with Vue.js](/blog/2017/09/06/build-a-cryptocurrency-comparison-site-with-vuejs)
 
-You can find the source code for the application developed in this post at <https://github.com/oktadeveloper/okta-vue-node-example>. 
+You can find the source code for the application developed in this post at <https://github.com/oktadeveloper/okta-vue-node-example>.
 
 Hit me up in the comments with any questions, and as always, follow [@oktadev](https://twitter.com/OktaDev) on Twitter to see all the cool content our dev team is creating.
 

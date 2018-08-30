@@ -196,8 +196,8 @@ Click **Done** to save your app, then copy your **Client ID**.
 
 Create a new file in your project called `src/environments/.env.js`. In it you should add two variables:
 
-- _oktaOrgURL_: This will be the organization URL you received when you signed up for Okta, which should look similar to `https://dev-123456.oktapreview.com`
-- _oktaClientId_: This is the Client ID you received when creating the new application in your Okta developer console
+- _oktaOrgURL_: This will be the organization URL you received when you signed up for Okta: `https://{yourOktaDomain}`
+- _oktaClientId_: This is the Client ID you received when creating the new application in the Okta Developer Console
 
 You'll also be using this file in the Node server later, which won't be using TypeScript, so make sure this uses `module.exports` instead of the es6 `export` syntax:
 
@@ -206,7 +206,7 @@ You'll also be using this file in the Node server later, which won't be using Ty
 ```javascript
 module.exports = {
   oktaOrgURL: '{yourOktaDomain}',
-  oktaClientId: '{yourClientId}'
+  oktaClientId: '{clientId}'
 };
 ```
 

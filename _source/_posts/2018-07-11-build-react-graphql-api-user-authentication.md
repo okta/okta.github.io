@@ -503,7 +503,7 @@ class App extends Component {
     return (
       <Router>
         <Security issuer='https://{yourOktaDomain}/oauth2/default'
-                  client_id='{yourClientId}'
+                  client_id='{clientId}'
                   redirect_uri={window.location.origin + '/implicit/callback'}
                   onAuthRequired={onAuthRequired}>
           <Route path='/' exact={true} component={Home}/>
@@ -519,7 +519,7 @@ class App extends Component {
 export default App;
 ```
 
-Make sure to replace `{yourOktaDomain}` and `{yourClientId}` in the code above. Your Okta domain should be something like `dev-12345.oktapreview`. Make sure you don't end up with two `.com` values in the URL!
+Make sure to replace `{yourOktaDomain}` and `{clientId}` in the code above. You can find both values in the Okta Developer Console.
 
 The code in `App.js` references two components that don't exist yet: `Home`, `Login`, and `Points`. Create `src/Home.js` with the following code. This component renders the default route, provides a Login button, and links to your points and logout after you've logged in.
 
@@ -1134,7 +1134,7 @@ import * as OktaJwtVerifier from '@okta/jwt-verifier';
 import { CurrentUser } from './CurrentUser';
 
 const oktaJwtVerifier = new OktaJwtVerifier({
-  clientId: '{yourClientId}',
+  clientId: '{clientId}',
   issuer: 'https://{yourOktaDomain}/oauth2/default'
 });
 ```

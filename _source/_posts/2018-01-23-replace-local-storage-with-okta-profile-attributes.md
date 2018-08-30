@@ -159,7 +159,7 @@ Copy the app's `clientId` into `application.properties` and change `{yourOktaDom
 
 ```properties
 okta.oauth2.issuer=https://{yourOktaDomain}/oauth2/default
-okta.oauth2.clientId={yourClientId}
+okta.oauth2.clientId={clientId}
 ```
 
 **NOTE:** The values for `issuer` and `clientId` in `crypto-pwa/src/pages/login/login.ts` should match these values.

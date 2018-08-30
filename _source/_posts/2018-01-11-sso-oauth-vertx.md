@@ -127,7 +127,7 @@ If you don't already have a free Okta account, you can follow [these instruction
 
  - Client Id - e.g.: ***oot9wrjjararhfaa***
  - Client Secret - (keep it secret!)
- - Issuer - e.g.: ***https://dev-123123.oktapreview.com/oauth2/default*** ...be sure to include the ***/oauth2/default*** path!
+ - Issuer - e.g.: ***https://{yourOktaDomain}/oauth2/default*** ...be sure to include the ***/oauth2/default*** path!
  - Callback Url - this will be ***http://localhost:8080/login*** if you followed the instructions above.
 
 These values can now be used in your `src/main/application.json` file.

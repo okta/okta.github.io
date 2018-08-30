@@ -99,10 +99,10 @@ app.UseOpenIdConnectAuthentication(new OpenIdConnectOptions()
 {
   AuthenticationScheme = "oidc",
   SignInScheme = "Cookies",
-  Authority = "https://<your Okta dev subdomain>.oktapreview.com",
+  Authority = "https://{yourOktaDomain}",
   ResponseType = OpenIdConnectResponseType.Code,
-  ClientId = "{Your Client ID from Okta}",
-  ClientSecret = "{Your Client Secret from Okta}",
+  ClientId = "{clientId}",
+  ClientSecret = "{clientSecret}",
   GetClaimsFromUserInfoEndpoint = true,
   TokenValidationParameters = new TokenValidationParameters
   {
@@ -115,7 +115,7 @@ This is the important part, so let's go through it line by line:
 
 * The `AuthenticationScheme` gives out scheme a name, and will be used to build the default callback url (~/signin-oidc).
 * The `SignInScheme` is used to set the sign-in middleware.
-* The `Authority` identifies the authorization endpoint for your Identity Provider. It's discoverable as part of the OpenID specification, and is located at: https://dev-{YOURID}.oktapreview.com/.well-known/openid-configuration.
+* The `Authority` identifies the authorization endpoint for your Identity Provider. It's discoverable as part of the OpenID specification, and is located at: https://{yourOktaDomain}/oauth2/default/.well-known/openid-configuration.
 * The `ResponseType` is also specified in that document under "response_types_supported". This tells the application you want to start an authorization code flow from from the provider.
 * The `ClientId`, and `ClientSecret` are the Client ID and Client Secret you got from the General Settings tab. For production, I would highly suggest [storing these in a secure way](https://stormpath.com/blog/store-protect-sensitive-data-dotnet-core) and referencing them here. They're in line here for demonstration purposes.
 * Setting `GetClaimsFromUserInfoEndpoint = true` tells the provider that if you're successful authenticating, go ahead and make a call to the `userinfo_endpoint` (specified in the configuration document at the same URL you got the `authorization_endpoint` and the `response_types_supported` from). This will get the claims that we're going to display from Okta once the authentication has completed.

@@ -77,7 +77,7 @@ Select your newly created application from the listing, and click on the **Gener
 {% img blog/add-auth-to-stencil/GeneralSettingsClientId.png alt:"General Settings Client Id" width:"800" %}{: .center-image }
 
 
-At the bottom, you'll see a **Client ID** setting (yours won't be blurred out, obviously). Copy this to use in your Stencil application. You will also need your Okta organization URL, which you can find at the top right of the dashboard page. It will probably look something like "https://dev-XXXXXX.oktapreview.com".
+At the bottom, you'll see a **Client ID** setting (yours won't be blurred out, obviously). Copy this to use in your Stencil application. You will also need your Okta organization URL, which you can find at the top right of the Dashboard page.
 
 ## Add the Authentication Component
 
@@ -193,7 +193,7 @@ Now you included everything you'll need to get the login function to authenticat
 ```js
 constructor() {
   this.authClient = new OktaAuth({
-    clientId: '{yourClientId}',
+    clientId: '{clientId}',
     url: 'https://{yourOktaDomain}',
     issuer: 'default'
   });

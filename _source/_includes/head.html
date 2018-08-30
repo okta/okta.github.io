@@ -65,6 +65,20 @@
   <link rel="mask-icon" href="/assets/favicon/safari-pinned-tab.svg" color="#21313a">
   <meta name="msapplication-config" content="/assets/favicon/browserconfig.xml">
   <meta name="theme-color" content="#ffffff">
+  {% if page.layout == "blog_post" %}
+  <meta property="og:type"               content="article" />
+  <meta property="og:url"                content="{{ site.external_domain }}{{ page.url }}" />
+  <meta property="og:title"              content="{{ page.title }}" />
+  <meta property="og:description"        content="{{ page.description }}" />
+  {% if page.image %}
+  <meta property="og:image"              content="{{ site.external_domain }}{% asset_path '{{ page.image }}' %}" />
+  {% endif %}
+  <meta property="og:site_name"          content="{{ site.title }}" />
+  <!-- twitter will use the og: tags to show a preview -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:site" content="@oktadev" />
+  <meta name="twitter:creator" content="@oktadev" />
+  {% endif %}
   <!-- START VWO Tracking -->
   <script type='text/javascript'>
   var _vwo_code=(function(){

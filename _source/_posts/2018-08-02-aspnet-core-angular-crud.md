@@ -151,7 +151,7 @@ Then, right below the import statements, add a config variable that will hold yo
 const config = {
   issuer: 'https://{yourOktaDomain}/oauth/default',
   redirectUri: 'http://localhost:5000/implicit/callback',
-  clientId: '{yourClientId}'
+  clientId: '{clientId}'
 };
 ```
 
@@ -187,7 +187,7 @@ import { ProfileComponent } from './profile/profile.component';
 const config = {
   issuer: 'https://{yourOktaDomain}/oauth/default',
   redirectUri: 'http://localhost:5000/implicit/callback',
-  clientId: '{yourClientId}'
+  clientId: '{clientId}'
 };
 
 @NgModule({
@@ -363,7 +363,7 @@ YAML is just a file format for configuration. The okta.yaml file looks like:
 ```yaml
 okta:
   client:
-    orgUrl: "https://dev-846291.oktapreview.com/"
+    orgUrl: "https://{yourOktaDomain}"
     token: "{yourApiToken}"
 ```
 

@@ -805,10 +805,10 @@ For completeness sake, here's the final version in a single `index.html` file (m
 
     <script>
       var okta = new OktaSignIn({
-        baseUrl: "https://dev-111464.oktapreview.com",
+        baseUrl: "https://{yourOktaDomain}",
         clientId: "0oaejf8gmll1TiDRz0h7",
         authParams: {
-          issuer: "https://dev-111464.oktapreview.com/oauth2/default",
+          issuer: "https://{yourOktaDomain}/oauth2/default",
           responseType: ["token", "id_token"],
           display: "page"
         }

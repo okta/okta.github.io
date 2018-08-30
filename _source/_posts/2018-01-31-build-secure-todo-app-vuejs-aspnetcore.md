@@ -570,9 +570,7 @@ router.beforeEach(Vue.prototype.$auth.authRedirectGuard())
 export default router
 ```
 
-Replace `{yourOktaDomain}` with your Okta Org URL, which usually looks like this: `https://dev-12345.oktapreview.com`. You can find it in the top right corner of the Okta developer dashboard page.
-
-Next, paste the Client ID you copied from the application you created a minute ago into the `client_id` property.
+Replace `{yourOktaDomain}` with your Okta org URL, which you can find on the Dashboard page in the Developer Console. Next, paste the Client ID you copied from the application you created a minute ago into the `client_id` property.
 
 Try it out: run the server with `dotnet run` and try logging in with the email and password you used to sign up for Okta:
 

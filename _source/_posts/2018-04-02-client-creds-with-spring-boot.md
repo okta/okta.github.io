@@ -49,7 +49,7 @@ Enough talk, let's do something! I'm going to show you  _how_ to implement the c
 
 To keep things simple, you'll use Okta to create an OAuth 2.0 authorization server. This will handle all of the client credentials grant stuff mentioned above. Do you need to use Okta? Not at all! You can use any OAuth 2.0 compatible server you want — but because our service is free and simple to use, it speeds this process up.
 
-If you don't already have a free developer account, head over to [developer.okta.com](/) and click sign up. When that's done you'll have two pieces of information, your Okta base URL which looks something like: `dev-123456.oktapreview.com`, and an email with instructions on how to activate your account.
+If you don't already have a free developer account, head over to [developer.okta.com](/) and click sign up. When that's done you'll have two pieces of information, your Okta base URL (e.g. `https://{yourOktaDomain}`), and an email with instructions on how to activate your account.
 
 After activating your account, while you are still in the Okta Developer Console, you then need to create an application and a custom OAuth scope. The application will give you a client ID and secret, while the custom scope will restrict your access token to this example.
 

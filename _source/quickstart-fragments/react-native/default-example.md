@@ -29,7 +29,7 @@ In Okta, applications are OpenID Connect clients that can use Okta Authorization
 | Setting             | Value                                         |
 | ------------------- | --------------------------------------------  |
 | App Name            | My Native App                                 |
-| Login redirect URIs | com.oktapreview.{orgName}:/+expo-auth-session |
+| Login redirect URIs | {yourOktaScheme}:/+expo-auth-session          |
 |                     | exp://localhost:{port}/+expo-auth-session     |
 | Grant Types Allowed | Authorization Code, Refresh Token             |
 
@@ -59,7 +59,7 @@ Assuming you're using an app created with `create-react-native-app`, modify your
 ```javascript
 {
   "expo": {
-    "scheme": "com.oktapreview.{orgName}"
+    "scheme": "{yourOktaScheme}"
   }
 }
 ```
@@ -78,7 +78,7 @@ const tokenClient = new TokenClient({
   scope: 'openid profile',
   redirect_uri: __DEV__ ?
     'exp://localhost:{port}/+expo-auth-session' :
-    'com.oktapreview.{orgName}:/+expo-auth-session'
+    '{yourOktaScheme}:/+expo-auth-session'
 });
 ```
 

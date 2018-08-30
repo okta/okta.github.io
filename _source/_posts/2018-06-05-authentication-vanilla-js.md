@@ -764,7 +764,7 @@ class App {
     })
     this.signIn = new OktaSignIn({
       baseUrl: 'https://{yourOktaDomain}',
-      clientId: '{yourClientId}',
+      clientId: '{clientId}',
       redirectUri: window.location.origin,
       authParams: {
         issuer: 'default',
@@ -884,12 +884,12 @@ app.init()
 
 ### Initialize the Okta Sign-in Widget
 
-To initialize the widget you instantiate a new `OktaSignIn` object.  Remember to change the `{yourOktaDomain}` and `{yourClientId}` to yours.
+To initialize the widget you instantiate a new `OktaSignIn` object.  Remember to change the `{yourOktaDomain}` and `{clientId}` to yours.
 
 ```js
 new OktaSignIn({
   baseUrl: 'https://{yourOktaDomain}',
-  clientId: '{yourClientId}',
+  clientId: '{clientId}',
   redirectUri: window.location.origin,
   authParams: {
     issuer: 'default',
