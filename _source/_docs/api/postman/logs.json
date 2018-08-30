@@ -3,7 +3,7 @@
 	"info": {
 		"name": "System Log (Okta API)",
 		"_postman_id": "2a4fcde1-14fd-8403-b9ca-b773ac0a70fe",
-		"description": "The [Okta System Log API](/docs/api/resources/system_log) provides read access to your organization’s system log. The API is intended to export event data as a batch job from your organization to another system for reporting or analysis.",
+		"description": "The Okta System Log API (https://developer.okta.com/docs/api/resources/system_log) provides read access to your organization's system log. The API is intended to export event data as a batch job from your organization to another system for reporting or analysis.",
 		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
 	},
 	"item": [

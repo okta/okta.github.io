@@ -32,7 +32,7 @@ Once your application is ready for Okta's review, submit it to us via the [OIN M
 
 **Q: Are there any cost associated with joining the Okta Integration Network (OIN)?**
 
-**A:** No, integrating your application with the Okta Integration Network is completely FREE. Also, Okta’s paid customers can utilize all application integrations in the OIN free of charge.
+**A:** No, integrating your application with the Okta Integration Network is completely FREE. Also, Okta's paid customers can utilize all application integrations in the OIN free of charge.
 
 **Q: By following the guidance here, am I building an integration that only works with Okta? What about other identity vendors?**
 
@@ -40,7 +40,7 @@ Once your application is ready for Okta's review, submit it to us via the [OIN M
 
 **Q: My customer is asking for AD (Active Directory) integration. If I integrate with Okta, can I connect to my customer's on-premise directory?**
 
-**A:** Yes. This is one of the key benefits of developing a pre-built integration with Okta — you can leverage our existing integrations with directories so you don’t have to. By integrating with Okta (for single sign-on and provisioning), you effectively have the ability to integrate with your customer’s on-premise AD or LDAP infrastructure for authentication (log into your cloud app with their corporate password), authorization (use details like AD groups to drive access rights), and provisioning policies.
+**A:** Yes. This is one of the key benefits of developing a pre-built integration with Okta — you can leverage our existing integrations with directories so you don't have to. By integrating with Okta (for single sign-on and provisioning), you effectively have the ability to integrate with your customer's on-premise AD or LDAP infrastructure for authentication (log into your cloud app with their corporate password), authorization (use details like AD groups to drive access rights), and provisioning policies.
 
 **Q: What is Secure Web Authentication (SWA)?**
 
@@ -48,11 +48,11 @@ Once your application is ready for Okta's review, submit it to us via the [OIN M
 
 **Q: What is the process after I have submitted my app using the OIN Manager?**
 
-**A:**  Once your submit your app integration, it goes through a review cycle - Okta (OIN Operations team) reviews and tests your integration. We will reach out to you directly if your integration does not pass the review, requires re-submission, or we need additional information from you. Once the review is completed, the integration is promoted to the public Okta Integration Network. Typical review time is two weeks. and you can track the progress of each submission in the OIN Manager. 
+**A:**  Once your submit your app integration, it goes through a review cycle - Okta (OIN Operations team) reviews and tests your integration. We will reach out to you directly if your integration does not pass the review, requires re-submission, or we need additional information from you. Once the review is completed, the integration is promoted to the public Okta Integration Network. Typical review time is two weeks. and you can track the progress of each submission in the OIN Manager.
 
 Have you submitted an app but have not seen a change in review status in the [OIN Manager](https://oinmanager.okta.com)? Email <developers@okta.com>.
 
-**Q: I’m an ISV setting up a SAML 2.0 app using the App Wizard and we have different domains for each customer. How do you manage these types of situations?**
+**Q: I'm an ISV setting up a SAML 2.0 app using the App Wizard and we have different domains for each customer. How do you manage these types of situations?**
 
 **A:** Currently, the App Wizard does not support custom domains, but public facing integrations can still have this functionality. Create an app integration as you normally would using the [App Wizard](https://help.okta.com/en/prod/Content/Topics/Apps/Apps_App_Integration_Wizard.htm). Once you get to the step of submitting your app integration via the [OIN Manager](https://oinmanager.okta.com), you will be asked to fill out a form (see image below); be sure to select "No" and provide all relevant information. We will add the ability for customers to set a custom domain in the customer facing integration.
 
@@ -71,7 +71,7 @@ Have you submitted an app but have not seen a change in review status in the [OI
 **A:** Yes. For more information, see [Using the App Integration Wizard: SAML App Wizard: Advanced Settings](https://help.okta.com/en/prod/Content/Topics/Apps/Apps_App_Integration_Wizard.htm).
 
 
-**Q: Is the IDP session time out a setting that an Okta administrator can change? And if so, can it be changed on a per application basis, or is it a global setting for all of the user’s applications?**
+**Q: Is the IDP session time out a setting that an Okta administrator can change? And if so, can it be changed on a per application basis, or is it a global setting for all of the user's applications?**
 
 **A:** Yes, the session time out default is two hours but the Okta administrator can customized the default by hour or minute. This session time out is an IDP setting and therefore, it is global and applies to all applications in an Okta org.
 
@@ -79,11 +79,11 @@ Have you submitted an app but have not seen a change in review status in the [OI
 
 **A:** Okta creates unique SAML configuration documentation for each application in the OIN so each will be different. For a sample configuration, see our instructions for [How to Configure SAML 2.0 in Salesforce.com](http://saml-doc.okta.com/SAML_Docs/How-to-Configure-SAML-2.0-in-Salesforce.html). See the [Setting up Salesforce in Okta](https://support.okta.com/help/articles/Knowledge_Article/Setting-Up-Salesforce-in-Okta) video for a step-by-step walk through of all the steps an IT administrator would take to configure single sign-on and provisioning for an app.
 
-Also, if you haven’t already done so, sign up for an Okta [developer account](https://developer.okta.com/signup/) and you can test drive the Okta user experience yourself.
+Also, if you haven't already done so, sign up for an Okta [developer account](https://developer.okta.com/signup/) and you can test drive the Okta user experience yourself.
 
 **Q: In general, how can I get familiar with the Okta product?**
 
-**A:** To get started, check out the [Okta Help Center](https://help.okta.com) or [OktaInc on YouTube](https://www.youtube.com/user/OktaInc). App Partners are eligible for live Okta 101 sessions as well. Please email <developers@okta.com> if you are interested. 
+**A:** To get started, check out the [Okta Help Center](https://help.okta.com) or [OktaInc on YouTube](https://www.youtube.com/user/OktaInc). App Partners are eligible for live Okta 101 sessions as well. Please email <developers@okta.com> if you are interested.
 
 See also:
 

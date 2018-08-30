@@ -41,7 +41,7 @@ Note that limits for more specific endpoints override the limits for less specif
 | **Get, update, or delete a group by ID:**<br>`/api/v1/groups/{id}` only                               | 100 | 300 | 300 | 600  |
 | **Create or list users:**<br>Only `GET` or `POST` to `/api/v1/users`                                  | 100 | 300 | 300 | 600  |
 | **Get a user by ID or login:**<br>Only `GET` to `/api/v1/users/{idOrLogin}`                           | 100 | 300 | 300 | 1000 |
-| **Update or delete a user by ID or login:**<br>Only `PUT` or `DELETE` to `/api/v1/users/{idOrLogin}`  | 100 | 300 | 300 | 600  |
+| **Update or delete a user by ID or login:**<br>Only `POST`, `PUT` or `DELETE` to `/api/v1/users/{idOrLogin}`  | 100 | 300 | 300 | 600  |
 | **Get System Log data:**<br>`/api/v1/logs`                                                            | 20  | 25  | 25  | 50   |
 | **Get System Log data:**<br>`/api/v1/events`                                                          | 20  | 25  | 25  | 50   |
 | **Get session information:**<br>`/api/v1/sessions`                                                    | 100 | 300 | 300 | 600  |

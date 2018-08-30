@@ -5,16 +5,16 @@ author: leebrandt
 tags: [asp.net, aspnet core, authz, authorization]
 ---
 
-Authorization is the oft-forgotten piece of identity and access management. The fact is, almost every app needs more than just "are they signed in?" for authorization. Most times, you need to not only know _who_ “they” are, but what access they are supposed to have. For instance, "are they in the administrator group?" or "are they in a group with some special privileges?” Today, you'll learn how to do this with Okta in an ASP.NET Core MVC application.
+Authorization is the oft-forgotten piece of identity and access management. The fact is, almost every app needs more than just "are they signed in?" for authorization. Most times, you need to not only know _who_ "they" are, but what access they are supposed to have. For instance, "are they in the administrator group?" or "are they in a group with some special privileges?" Today, you'll learn how to do this with Okta in an ASP.NET Core MVC application.
 
 In the Okta world, users are separated into `Groups`. By default however, ASP.NET only has handling for the `Authorize` attribute to handle authorization using `Roles`. There are a couple of ways you could go about handling authorization using the `Groups` that come from Okta:
 
 * You can write your own custom `AuthorizeAttribute` and have it looks at groups instead of roles.
-* You can map the `Groups` to `Roles` claims and let the regular ASP.NET `AuthorizeAttribute` handle authorization 
+* You can map the `Groups` to `Roles` claims and let the regular ASP.NET `AuthorizeAttribute` handle authorization
 
 This second approach is far easier to implement, so that's the approach this article will take.
 
-Start by cloning the application at <https://github.com/oktadeveloper/aspnetcore-oidc-okta-example>. This is the base application with authentication covered in [my previous post](https://developer.okta.com/blog/2017/06/29/oidc-user-auth-aspnet-core). You’ll add authorization to this application.
+Start by cloning the application at <https://github.com/oktadeveloper/aspnetcore-oidc-okta-example>. This is the base application with authentication covered in [my previous post](https://developer.okta.com/blog/2017/06/29/oidc-user-auth-aspnet-core). You'll add authorization to this application.
 
 ## Let ASP.NET Know Where Your Roles Are
 In the `startup.cs` file, where the `OpenIdConfigurationOptions` are set, one of the items being set is the `TokenValidationParameters`. In the new `TokenValidationParameters` add a property called `RoleClaimType` with a value of `ClaimTypes.Role`. This is an enumeration in the `System.Security.Claims` namespace that holds the URL that describes the "role" claim type. Ultimately, your `TokenValidationParameters` property should look like this.
@@ -49,7 +49,7 @@ namespace AspnetOkta.Domain.Authorization
     public GroupsToRolesTransformer()
     {
         client = new OktaClient(new OktaClientConfiguration{
-            OrgUrl = "https://{Your Okta Org Url}",
+            OrgUrl = "https://{yourOktaDomain}",
             Token = "JiBBerJabbER"
         });
     }
@@ -74,7 +74,7 @@ namespace AspnetOkta.Domain.Authorization
 }
 ```
 
-As you can see here, in the constructor, you are creating an `OktaClient` object to be stored in a class-level variable called client. You'll need your `OrgUrl` from Okta (probably something like dev-1234.oktapreview.com) and an API token which you can get from the Okta Developer Dashboard under `API` > `Tokens`.
+As you can see here, in the constructor, you are creating an `OktaClient` object to be stored in a class-level variable called client. You'll need your org URL from Okta and an API token which you can get from the Okta Developer Dashboard under API > Tokens.
 
 {% img blog/aspnet-authz/tokens.png alt:"API Token Page" width:"800" %}
 
@@ -139,11 +139,11 @@ _EnthusiastOnly.cshtml_
 
 Now you should be able to run your application, log in as a user in the "Admin" group, and go to the `http://localhost:5000/User/AdminOnly` route successfully. The `EnthusiastOnly` route should return an unauthorized error.
 
-Log back out and log in as a member of the "Enthusiast" group and go to the `http://localhost:5000/User/EnthusiastOnly` URL, and you should be able to get to it. 
+Log back out and log in as a member of the "Enthusiast" group and go to the `http://localhost:5000/User/EnthusiastOnly` URL, and you should be able to get to it.
 
 Congratulations! You just added authorization to you .NET application! Not only can users get into your application, but you can make sure they have access to the data and functionality they need!
 
 ## Learn More
-You can learn more about the .NET  Claims Tranformer at <https://docs.microsoft.com/en-us/aspnet/core/api/microsoft.aspnetcore.authentication.claimstransformer> and the broader spectrum of security in .NET at <https://docs.microsoft.com/en-us/aspnet/core/security/>. 
+You can learn more about the .NET  Claims Tranformer at <https://docs.microsoft.com/en-us/aspnet/core/api/microsoft.aspnetcore.authentication.claimstransformer> and the broader spectrum of security in .NET at <https://docs.microsoft.com/en-us/aspnet/core/security/>.
 
-And don’t forget, [Okta](https://developer.okta.com) can help you make user management simple! Sign up for a free forever developer account at <https://developer.okta.com>! As always, if you have questions about anything here, feel free to reach out on Twitter <https://twitter.com/leebrandt> or email me at <lee.brandt@okta.com>.
+And don't forget, [Okta](https://developer.okta.com) can help you make user management simple! Sign up for a free forever developer account at <https://developer.okta.com>! As always, if you have questions about anything here, feel free to reach out on Twitter <https://twitter.com/leebrandt> or email me at <lee.brandt@okta.com>.

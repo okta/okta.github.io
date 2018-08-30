@@ -5,7 +5,7 @@ author: bdemers
 tags: [java, authentication, auth]
 ---
 
-My favorite thing about Apache Shiro is how easy it makes handling authorization. You can use a role-based access control (RBAC) model of assigning roles to users and then permissions to roles. This makes dealing with the inevitable requirements change simple. Your code does not change, just the permissions associated with the roles. In this post I want to demonstrate just how simple it is, using a Spring Boot application and walking through how I’d handle the following scenario:
+My favorite thing about Apache Shiro is how easy it makes handling authorization. You can use a role-based access control (RBAC) model of assigning roles to users and then permissions to roles. This makes dealing with the inevitable requirements change simple. Your code does not change, just the permissions associated with the roles. In this post I want to demonstrate just how simple it is, using a Spring Boot application and walking through how I'd handle the following scenario:
 
 Your boss (The Supreme Commander) shows up at your desk and tells you the current volunteer (Stormtrooper) registration application needs have different access roles for the  different _types_ of employees.
 
@@ -16,7 +16,7 @@ Your boss (The Supreme Commander) shows up at your desk and tells you the curren
 
 ## Start with a REST Application
 
-To get started, grab this [Spring Boot example](https://github.com/oktadeveloper/shiro-spring-boot-example). It’ll get you started with a set of REST endpoints which expose CRUD operations to manage a list of Stormtroopers. You’ll be adding authentication and authorization using [Apache Shiro](https://shiro.apache.org).  All of the code is up on [Github](https://github.com/bdemers/shiro-spring-boot-example).
+To get started, grab this [Spring Boot example](https://github.com/oktadeveloper/shiro-spring-boot-example). It'll get you started with a set of REST endpoints which expose CRUD operations to manage a list of Stormtroopers. You'll be adding authentication and authorization using [Apache Shiro](https://shiro.apache.org).  All of the code is up on [Github](https://github.com/bdemers/shiro-spring-boot-example).
 
 
 Using the Apache Shiro Spring Boot starter is all you need, just add the dependency to your pom. (where `${shiro.version}` is at least 1.4.0):
@@ -84,9 +84,9 @@ public class StormtrooperController {
 }
 ```
 
-In the code block above you’re using Shiro's `@RequiresRoles` annotation to describe your use-case.  You'll notice the logical `OR` to allow any of these roles access.  This is great, your code is done, it was pretty easy to add, just a single line.
+In the code block above you're using Shiro's `@RequiresRoles` annotation to describe your use-case.  You'll notice the logical `OR` to allow any of these roles access.  This is great, your code is done, it was pretty easy to add, just a single line.
 
-You could stop here but, roles are not that flexible, and if you put them directly in your code you’re now tightly coupled to those names/IDs.
+You could stop here but, roles are not that flexible, and if you put them directly in your code you're now tightly coupled to those names/IDs.
 
 ## Stop Using Roles
 
@@ -120,9 +120,9 @@ public Stormtrooper updateTrooper(@PathVariable("id") String id, @RequestBody St
 public void deleteTrooper(@PathVariable("id") String id)
 ```
 
-After another round of testing the deployment and you’re back in action!
+After another round of testing the deployment and you're back in action!
 
-Wait, take a step back. Roles are great for simple use cases and making a change like this would work fine, but you know this will be changed again. Instead of changing your code every time the requirements change slightly, let’s decouple the roles and what they represent from your code. Instead, use permissions. Your method signatures will look like this:
+Wait, take a step back. Roles are great for simple use cases and making a change like this would work fine, but you know this will be changed again. Instead of changing your code every time the requirements change slightly, let's decouple the roles and what they represent from your code. Instead, use permissions. Your method signatures will look like this:
 
 ``` java
 @GetMapping()
@@ -171,7 +171,7 @@ If the permission syntax looks a little funny to you, take a look at [Apache Shi
 
 ## Apache Shiro and Spring
 
-We’ve already covered the Maven dependencies and the actual REST controller, but our application will also need a `Realm` and error handling.
+We've already covered the Maven dependencies and the actual REST controller, but our application will also need a `Realm` and error handling.
 
 If you take a look at the `SpringBootApp` class you will notice a few things that were NOT in the [original example](https://github.com/stormpath/jaxrs-spring-blog-example/blob/master/spring-boot/src/main/java/com/stormpath/example/springboot/SpringBootApp.java).
 
@@ -203,7 +203,7 @@ public CacheManager cacheManager() {
 
 First you have defined a Shiro `Realm`, a realm  is simply a user-store specific DAO. Shiro supports many different types of Realms out of the box (Active Directory, LDAP, Database, file, etc.).
 
-Next up you have the `ShiroFilterChainDefinition` which you’ve configured to allow BASIC authentication but NOT required it by using the 'permissive' option. This way your annotations configure everything. Instead of using annotations (or in addition to using them) you could define your [permission to URL mappings](https://shiro.apache.org/web.html#default-filters) with Ant-style paths. This example would look something like:
+Next up you have the `ShiroFilterChainDefinition` which you've configured to allow BASIC authentication but NOT required it by using the 'permissive' option. This way your annotations configure everything. Instead of using annotations (or in addition to using them) you could define your [permission to URL mappings](https://shiro.apache.org/web.html#default-filters) with Ant-style paths. This example would look something like:
 
 ``` java
 chainDefinition.addPathDefinition("/troopers/**", "authcBasic, rest[troopers]");
@@ -236,7 +236,7 @@ public @ResponseBody ErrorMessage handleException(NotFoundException e) {
 }
 ```
 
-The first two handle Shiro exceptions and simply set the status to 401 or 403. A 401 for invalid or missing user/passwords, and a 403 for any valid logged in user that does NOT have access to the resource. Lastly, you’ll want to handle any `NotFoundException` with a 404 and return a JSON serialized `ErrorMessage` object.
+The first two handle Shiro exceptions and simply set the status to 401 or 403. A 401 for invalid or missing user/passwords, and a 403 for any valid logged in user that does NOT have access to the resource. Lastly, you'll want to handle any `NotFoundException` with a 404 and return a JSON serialized `ErrorMessage` object.
 
 ## Fire it Up!
 
@@ -298,7 +298,7 @@ Transfer-Encoding: chunked
 
 This example has shown how easy it is to integrate Apache Shiro into a Spring Boot application, how using permissions allow for greater flexibility over roles, and all it takes is a single Annotation in your controller.
 
-At Stormpath we were happy to be able to commit our support to Apache Shiro, and we’ve carried that commitment forward to Okta. Look forward to more Shiro content from our team, including tutorials on using Shiro with Okta and OAuth plus how to add an AngularJS frontend to this _volunteer_ application. Stay tuned, the Empire needs YOU!
+At Stormpath we were happy to be able to commit our support to Apache Shiro, and we've carried that commitment forward to Okta. Look forward to more Shiro content from our team, including tutorials on using Shiro with Okta and OAuth plus how to add an AngularJS frontend to this _volunteer_ application. Stay tuned, the Empire needs YOU!
 
 If you have questions on this example you can send them to [Apache Shiro's user list](http://shiro.apache.org/mailing-lists.html), me on [Twitter](https://twitter.com/briandemers), or just leave them in the comments section below!
 

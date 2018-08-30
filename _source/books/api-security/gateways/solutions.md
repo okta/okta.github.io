@@ -16,6 +16,6 @@ An API management platform handles traffic shaping. Bad actors will misuse and a
 
 An API management platform lets you worry about other problems. Most teams have enough problems designing, building, documenting, demonstrating, and marketing an API. When we can hand off essential components to reliable third parties, we have to consider it so we can do all the tasks unique to us.
 
-Finally, an API management platform is excellent at logging. One of the biggest challenges for both your customers and your team is understanding “what happened?” The gateways will capture everything and most present it in a clear, consistent manner. A good debugger will save developers - both internal and external - hours of effort and frustration.
+Finally, an API management platform is excellent at logging. One of the biggest challenges for both your customers and your team is understanding "what happened?" The gateways will capture everything and most present it in a clear, consistent manner. A good debugger will save developers - both internal and external - hours of effort and frustration.
 
 <div class="break-before"></div>

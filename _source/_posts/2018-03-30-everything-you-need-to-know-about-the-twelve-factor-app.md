@@ -55,7 +55,7 @@ The way two-factor authentication worked was a little more complicated, but far 
 
 This was a great advancement for web security at the time because even if a hacker was able to steal your username and password, they'd also have to steal your phone to be able to actually log in.
 
-But… Not long after two-factor became a popular method of authentication, problems appeared. Hackers found ways to [compromise SMS](https://www.theverge.com/2017/9/18/16328172/sms-two-factor-authentication-hack-password-bitcoin) as a protocol and gain access to text messaging capabilities without ever stealing your phone.
+But... Not long after two-factor became a popular method of authentication, problems appeared. Hackers found ways to [compromise SMS](https://www.theverge.com/2017/9/18/16328172/sms-two-factor-authentication-hack-password-bitcoin) as a protocol and gain access to text messaging capabilities without ever stealing your phone.
 
 And with that the entire security industry was back to square one.
 

@@ -16,7 +16,6 @@ This guide will walk you through integrating authentication into an iOS (Swift) 
 At the end of the iOS instructions you can choose your server type to learn more about post-authentication workflows, such as verifying tokens that your iOS application can send to your server.
 
 ## Prerequisites
-If you do not already have a **Developer Edition Account**, you can create one at [https://developer.okta.com/signup/](https://developer.okta.com/signup/).
 
 ### Add an OpenID Connect Client
 * Log into the Okta Developer Dashboard, click **Applications** then **Add Application**.
@@ -25,8 +24,8 @@ If you do not already have a **Developer Edition Account**, you can create one a
 | Setting             | Value                                               |
 | ------------------- | --------------------------------------------------- |
 | Application Name    | My iOS App                                          |
-| Login redirect URIs | com.oktapreview.{orgName}:/callback                 |
-| Logout redirect URIs| com.oktapreview.{orgName}:/logout                   |
+| Login redirect URIs | {yourOktaScheme}:/callback                          |
+| Logout redirect URIs| {yourOktaScheme}:/logout                            |
 
 After you have created the application there are two more values you will need to gather:
 
@@ -52,6 +51,8 @@ pod install && open project.xcworkspace
 
 ### Configuration
 Create a new `Okta.plist` file in your application's bundle with the following fields:
+{% include domain-admin-warning.html %}
+
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
@@ -62,7 +63,7 @@ Create a new `Okta.plist` file in your application's bundle with the following f
   <key>clientId</key>
   <string>{clientIdValue}</string>
   <key>redirectUri</key>
-  <string>com.oktapreview.{orgName}:/callback</string>
+  <string>{yourOktaScheme}:/callback</string>
   <key>scopes</key>
   <array>
 	<string>offline_access</string>
@@ -75,7 +76,7 @@ Create a new `Okta.plist` file in your application's bundle with the following f
 **Note**: *To receive a **refresh_token**, you must include the `offline_access` scope.*
 
 ### Update the Private-use URI Scheme
-In order to redirect back to your application from a web browser, you must specify a unique URI to your app. To do this, open `Info.plist` in your application bundle and set a **URL Scheme** to the scheme of the login redirect URI.
+In order to redirect back to your application from a web browser, you must specify a unique URI to your app. To do this, open `Info.plist` in your application bundle and set a **URL Scheme** to the scheme of the login redirect URI (e.g., `{yourOktaScheme}`)
 
 For example, if your **Login Redirect URI** is `com.okta.example:/callback`, the **URL Scheme** will be `com.okta.example`.
 

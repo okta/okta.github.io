@@ -2,18 +2,18 @@
 layout: blog_post
 title: Angular Authentication with OpenID Connect and Okta in 20 Minutes
 author: mraible
-description: "In this article, you’ll see how build a simple web application with Angular CLI, a tool for Angular development. You’ll also create an application with search and edit features, then add authentication."
+description: "In this article, you'll see how build a simple web application with Angular CLI, a tool for Angular development. You'll also create an application with search and edit features, then add authentication."
 tags: [angular, authentication, oidc, openid connect, okta, typescript, angular-cli]
 tweets:
   - "Build a simple Angular 6 app and add authentication with @oktadev!"
   - "Have you heard about OpenID Connect (OIDC) and how you can use it for authentication with @oktadev? This tutorial shows you how to do it in a 20 minutes →"
 ---
 
-Angular (formerly called Angular 2.0) is quickly becoming one of the most powerful ways to build a modern single-page app. A core strength is Angular’s focus on building reusable components, which help you decouple the various concerns in your application. Take authentication, for example: it can be painful to build, but once you wrap it in a component, the authentication logic can be reused throughout your application.
+Angular (formerly called Angular 2.0) is quickly becoming one of the most powerful ways to build a modern single-page app. A core strength is Angular's focus on building reusable components, which help you decouple the various concerns in your application. Take authentication, for example: it can be painful to build, but once you wrap it in a component, the authentication logic can be reused throughout your application.
 
-The Angular CLI makes it easy to scaffold new components, and even entire projects. If you haven’t used the Angular CLI to quickly generate Angular code, you’re in for a treat!
+The Angular CLI makes it easy to scaffold new components, and even entire projects. If you haven't used the Angular CLI to quickly generate Angular code, you're in for a treat!
 
-In this example, you’ll build a simple web application with Angular CLI, a tool for Angular development. You’ll create an application with search and edit features, then add authentication.
+In this example, you'll build a simple web application with Angular CLI, a tool for Angular development. You'll create an application with search and edit features, then add authentication.
 
 ## Create an Angular Application
 
@@ -28,7 +28,7 @@ git clone https://github.com/mraible/ng-demo.git
 * About 20 minutes
 * A favorite text editor or IDE. I recommend [IntelliJ IDEA](https://www.jetbrains.com/idea/)
 * [Node.js](https://nodejs.org) and npm installed. I recommend using [nvm](https://github.com/creationix/nvm)
-* [Angular CLI](https://cli.angular.io/) installed. If you don’t have Angular CLI installed, install it using `npm install -g @angular/cli@1.7.3`
+* [Angular CLI](https://cli.angular.io/) installed. If you don't have Angular CLI installed, install it using `npm install -g @angular/cli@1.7.3`
 
 Create a new project using the `ng new` command:
 
@@ -218,7 +218,7 @@ CREATE src/app/search.service.spec.ts (374 bytes)
 CREATE src/app/search.service.ts (135 bytes)
 ```
 
-Move the generated `search.service.ts` and its test to `app/shared/search`. You’ll need to create this directory. 
+Move the generated `search.service.ts` and its test to `app/shared/search`. You'll need to create this directory.
 
 ```bash
 mkdir -p src/app/shared/search
@@ -736,7 +736,7 @@ Now values should display in all fields and `name` should be required.
 
 {% img blog/angular-oidc/edit-form-names.png alt:"Edit form with names and validation" width:"800" %}
 
-If you want to provide your own validation messages instead of relying on the browser’s, complete the following steps:
+If you want to provide your own validation messages instead of relying on the browser's, complete the following steps:
 
 1. Remove `ngNativeValidate` and add `#editForm="ngForm"` to the `<form>` element.
 2. Add `#name="ngModel"` to the `<input id="name">` element.
@@ -757,7 +757,7 @@ OpenID Connect (OIDC) is built on top of the OAuth 2.0 protocol. It allows clien
 
 To integrate [Okta](https://developer.okta.com) for user authentication, you'll first need to [register](https://developer.okta.com/signup/) and create an OIDC application.
 
-Login to your Okta account, or [create one](https://developer.okta.com/signup/) if you don’t have one. Navigate to **Applications** and click on the **Add Application** button. Select **SPA** and click **Next**. On the next page, specify `http://localhost:4200` as a Base URI, Login redirect URI, and Logout redirect URI. Click **Done** and you should see settings like the following.
+Login to your Okta account, or [create one](https://developer.okta.com/signup/) if you don't have one. Navigate to **Applications** and click on the **Add Application** button. Select **SPA** and click **Next**. On the next page, specify `http://localhost:4200` as a Base URI, Login redirect URI, and Logout redirect URI. Click **Done** and you should see settings like the following.
 
 {% img blog/angular-oidc/oidc-settings.png alt:"OIDC App Settings" width:"700" %}{: .center-image }
 
@@ -767,7 +767,7 @@ Install [Manfred Steyer's](https://github.com/manfredsteyer) project to [add OAu
 npm install angular-oauth2-oidc rxjs-compat
 ```
 
-Modify `src/app/app.component.ts` to import `OAuthService` and configure your app to use your Okta application's settings. 
+Modify `src/app/app.component.ts` to import `OAuthService` and configure your app to use your Okta application's settings.
 
 ```typescript
 import { OAuthService, JwksValidationHandler } from 'angular-oauth2-oidc';
@@ -921,7 +921,7 @@ The components in this section use Bootstrap CSS classes. Install Bootstrap 4.
 npm install bootstrap
 ```
 
-Modify `src/styles.css` to add a reference to Bootstrap’s CSS file.
+Modify `src/styles.css` to add a reference to Bootstrap's CSS file.
 
 ```css
 @import "~bootstrap/dist/css/bootstrap.css";
@@ -940,7 +940,7 @@ Update `src/app/app.component.html` to use Bootstrap classes for its navbar and 
 ```
 {% endraw %}
 
-Create `src/app/shared/auth/okta.auth.wrapper.ts` to wrap the Okta Auth SDK and integrate it with `OAuthService`. Its 
+Create `src/app/shared/auth/okta.auth.wrapper.ts` to wrap the Okta Auth SDK and integrate it with `OAuthService`. Its
 `login()` method uses `OktaAuth` to get a session token and exchange it for ID and access tokens.
 
 ```typescript
@@ -995,7 +995,7 @@ export class OktaAuthWrapper {
 }
 ```
 
-In the above code, `oauthService.tryLogin()` parses and stores the `idToken` and `accessToken` so they can be retrieved 
+In the above code, `oauthService.tryLogin()` parses and stores the `idToken` and `accessToken` so they can be retrieved
 using `OAuthService.getIdToken()` and `OAuthService.getAccessToken()`.
 
 Export `OktaAuthWrapper` in `src/shared/index.ts`:
@@ -1079,7 +1079,7 @@ You should be able to sign in using the form, using one of your app's registered
 
 If everything works - congrats! If you encountered issues, please post a question to Stack Overflow with an [okta tag](http://stackoverflow.com/questions/tagged/okta), or hit me up on Twitter [@mraible](https://twitter.com/mraible).
 
-You can find a completed version of the application created in this blog post [on GitHub](https://github.com/oktadeveloper/okta-angular-openid-connect-example). To learn more about security in Angular, see [Angular’s Security documentation](https://angular.io/guide/security). If you’d like to learn more about OpenID Connect, I’d recommend watching the soothing video below.
+You can find a completed version of the application created in this blog post [on GitHub](https://github.com/oktadeveloper/okta-angular-openid-connect-example). To learn more about security in Angular, see [Angular's Security documentation](https://angular.io/guide/security). If you'd like to learn more about OpenID Connect, I'd recommend watching the soothing video below.
 
 <div style="max-width: 560px; margin: 0 auto">
 <iframe width="560" height="315" src="https://www.youtube.com/embed/Kb56GzQ2pSk" frameborder="0" allowfullscreen></iframe>

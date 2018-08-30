@@ -221,7 +221,29 @@ team_okta:
   email: devrel@okta.com
   github: https://github.com/oktadeveloper
 
+tom_smith:
+  full_name: Tom Smith
+  display_name: Tom Smith
+  avatar: avatar-tom_smith.jpg
+  email: tom.smith@okta.com
+  github: https://github.com/tom-smith-okta
+
 krasimir:
   full_name: Krasimir Hristozov
   display_name: Krasimir Hristozov
   avatar: avatar-krasimir.jpg
+
+ibrahim:
+  full_name: Ibrahim Šuta
+  display_name: Ibrahim Šuta
+  avatar: avatar-isuta.png
+
+pmcdowell:
+  full_name: Patrick McDowell
+  display_name: Patrick McDowell
+  avatar: avatar-pmcdowell.jpg
+
+kpenzhorn:
+  full_name: Karl Penzhorn
+  display_name: Karl Penzhorn
+  avatar: avatar-kpenzhorn.jpg

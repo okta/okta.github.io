@@ -336,7 +336,7 @@ This could be a useful dashboard for someone who's considering purchasing
 cryptocurrencies for speculative purposes, as it gives you an idea of how these
 things are valued at any given time.
 
-So… Let's get started!
+So... Let's get started!
 
 **NOTE**: If you'd rather just look at the completed project on Github, you can
 [check it out on Github][].
@@ -715,7 +715,7 @@ Now that we've built some of our data-retrieval methods, we need to actually run
 them. Otherwise: our app will open, but nothing will happen.
 
 In Vue, we can bind actions to certain events that happen on the page. One of
-these lifecycle events is called “created”, and we can use this lifecycle hook
+these lifecycle events is called "created", and we can use this lifecycle hook
 to run our code once the Vue app has been fully initialized in the browser.
 
 Here's what it looks like:

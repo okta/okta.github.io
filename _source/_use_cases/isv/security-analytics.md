@@ -12,7 +12,7 @@ In this guide we will discuss the various types of data that can be retrieved fr
 
 ## What is Okta
 
-Okta is the secure foundation for connections between people and technology. With offerings like Single Sign-on (SSO), Lifecycle Management (LCM), Adaptive Multi-Factor Authentication (MFA), Universal Directory (UD) and API Access Management, Okta is a cloud enabling platform that is paving the way for fast and wide adoption of cloud services in the enterprise. The power of Okta’s core identity services are also available to software developers and integrators through our [developer platform product](http://developer.okta.com/)
+Okta is the secure foundation for connections between people and technology. With offerings like Single Sign-on (SSO), Lifecycle Management (LCM), Adaptive Multi-Factor Authentication (MFA), Universal Directory (UD) and API Access Management, Okta is a cloud enabling platform that is paving the way for fast and wide adoption of cloud services in the enterprise. The power of Okta's core identity services are also available to software developers and integrators through our [developer platform product](http://developer.okta.com/)
 
 ## Common use cases
 
@@ -40,7 +40,7 @@ Build an integration using these guidelines and following the requirements below
 
 ### Get Approved
 
-Submit a request to [Okta’s partner team](mailto:bd-isv@okta.com?subject=Review my integration) to have your integration reviewed
+Submit a request to [Okta's partner team](mailto:bd-isv@okta.com?subject=Review my integration) to have your integration reviewed
 
 + Please provide the following:
   + Configuration guide
@@ -176,7 +176,7 @@ When interacting with Okta there are a variety of different types of data you ca
 
 Building from the foundation laid in this guide
 
-To resolve an incident or mitigate a perceived threat, an external system may want to affect a user’s state, modify authentication policies or reduce application availability. This [Security Enforcement] guide will describe how and when a system might take these actions.
+To resolve an incident or mitigate a perceived threat, an external system may want to affect a user's state, modify authentication policies or reduce application availability. This [Security Enforcement] guide will describe how and when a system might take these actions.
 
 ## Related articles
 

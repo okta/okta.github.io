@@ -17,12 +17,12 @@ In this tutorial, I won't use any state management libraries like Redux or Redux
 
 To set up the base application, make sure you have these basic tools installed:
 
-* Node (8+)
-* npm (5+)
-* create-react-app (npm package)
-* express-generator (npm package)
+- Node (8+)
+- npm (5+)
+- create-react-app (npm package)
+- express-generator (npm package)
 
-You’ll also need an [Okta developer account](https://developer.okta.com/signup/).
+You'll also need an [Okta developer account](https://developer.okta.com/signup/).
 
 To install Node and npm, you can follow the instructions for your operating system at <https://nodejs.org/en/>.
 
@@ -35,6 +35,7 @@ npm i -g create-react-app express-generator
 Now you're ready to set up the basic application structure.
 
 ## Scaffold the Base Application
+
 Go to the folder where you want your application to live and create a new folder for it:
 
 ```bash
@@ -46,13 +47,13 @@ create-react-app client
 
 This will create two folders in the `MembershipSample` folder called `api` and `client`, with a NodeJS and Express application in the `api` folder and a base React application in the `client` folder. So your folder structure will look like:
 
-* MembershipSample
-  * api
-  * client
+- MembershipSample
+  - api
+  - client
 
 To make this next part easier, open two terminals or terminal tabs; one to the express app folder `api` and the other to the React app folder `client`.
 
-By default, the React app and the Node app will both run on port 3000 in development, so you'll need to get the API to run on a different port and then proxy it in the client app. 
+By default, the React app and the Node app will both run on port 3000 in development, so you'll need to get the API to run on a different port and then proxy it in the client app.
 
 In the `api` folder, open the `/bin/www` file and change the port the API will be running on to `3001`.
 
@@ -72,7 +73,7 @@ Then set up the proxy for the API in the client application so that you can stil
 "proxy": "http://localhost:3001"
 ```
 
-Lastly, don’t forget to run `npm install` or `yarn install` for each subfolder (`api` and `client`) to ensure that the dependencies are installed.
+Lastly, don't forget to run `npm install` or `yarn install` for each subfolder (`api` and `client`) to ensure that the dependencies are installed.
 
 You can now run both applications by running `npm start` or `yarn start` in the appropriate folders for the API and the client application.
 
@@ -98,7 +99,7 @@ Once the application has been created, select it from the applications listing, 
 
 {% img blog/build-user-registration-with-node-react-and-okta/general-settings-tab.png alt:"general settings tab" %}{: .center-image }
 
-At the bottom, you will see a **Client ID** setting (yours won't be blurred out, obviously). Copy this to use in your React application. You will also need your Okta organization URL, which you can find at the top left of the dashboard page. It will probably look something like “https://dev-XXXXXX.oktapreview.com”.
+At the bottom, you will see a **Client ID** setting (yours won't be blurred out, obviously). Copy this to use in your React application. You will also need your Okta organization URL, which you can find at the top right of the Dashboard page.
 
 ## Add Authentication to the ReactJS Application
 
@@ -114,15 +115,15 @@ Or, if you're using the [yarn](https://yarnpkg.com) package manager:
 yarn add @okta/okta-react react-router-dom
 ```
 
-Add a file to the `client/src’ folder called `app.config.js`. The contents of the file are:
+Add a file to the `client/src' folder called` app.config.js`. The contents of the file are:
 
 ```js
 export default {
-  url: '{yourOktaDomain}',
-  issuer: '{yourOktaOrgUrl}/oauth2/default',
+  url: 'https://{yourOktaDomain}',
+  issuer: 'https://{yourOktaDomain}/oauth2/default',
   redirect_uri: window.location.origin + '/implicit/callback',
-  client_id: '{yourClientID}'
-}
+  client_id: '{clientId}'
+};
 ```
 
 Then, setup the `index.js` file to use the React Router and Okta's React SDK. When the `index.js` file is complete, it will look like this:
@@ -144,10 +145,12 @@ function onAuthRequired({ history }) {
 
 ReactDOM.render(
   <Router>
-    <Security issuer={config.issuer}
+    <Security
+      issuer={config.issuer}
       client_id={config.client_id}
       redirect_uri={config.redirect_uri}
-      onAuthRequired={onAuthRequired}>
+      onAuthRequired={onAuthRequired}
+    >
       <App />
     </Security>
   </Router>,
@@ -171,21 +174,18 @@ Add a `components` folder to the `client/src` folder. This is where all your com
 ```js
 import React from 'react';
 
-export default class HomePage extends React.Component{
-  render(){
-    return(
-      <h1>Home Page</h1>
-    );
+export default class HomePage extends React.Component {
+  render() {
+    return <h1>Home Page</h1>;
   }
 }
 ```
 
 This is all you really need for the home page at the moment. The most important point is to make the HomePage component a class type. Even though right now it only contains a single `h1` tag, it is meant to be a "page", meaning it will likely contain other components, so it's important that it be a container component.
 
-Next, create an `auth` folder in `components`. This is where all components that have to do with authentication will live. In that folder, create a `LoginForm.js` file. 
+Next, create an `auth` folder in `components`. This is where all components that have to do with authentication will live. In that folder, create a `LoginForm.js` file.
 
-The first thing to note is that you’ll be using the `withAuth` higher-order component from Okta’s React SDK to wrap the entire login form. This adds a prop to the component called `auth`, making it possible to access things like the `isAuthenticated` and `redirect` functions on that higher-order component.
-
+The first thing to note is that you'll be using the `withAuth` higher-order component from Okta's React SDK to wrap the entire login form. This adds a prop to the component called `auth`, making it possible to access things like the `isAuthenticated` and `redirect` functions on that higher-order component.
 
 The code for the `LoginForm` component is as follows:
 
@@ -194,79 +194,88 @@ import React from 'react';
 import OktaAuth from '@okta/okta-auth-js';
 import { withAuth } from '@okta/okta-react';
 
-export default withAuth(class LoginForm extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      sessionToken: null,
-      error: null,
-      username: '',
-      password: ''
+export default withAuth(
+  class LoginForm extends React.Component {
+    constructor(props) {
+      super(props);
+      this.state = {
+        sessionToken: null,
+        error: null,
+        username: '',
+        password: ''
+      };
+
+      this.oktaAuth = new OktaAuth({ url: props.baseUrl });
+
+      this.handleSubmit = this.handleSubmit.bind(this);
+      this.handleUsernameChange = this.handleUsernameChange.bind(this);
+      this.handlePasswordChange = this.handlePasswordChange.bind(this);
     }
 
-    this.oktaAuth = new OktaAuth({ url: props.baseUrl });
-
-    this.handleSubmit = this.handleSubmit.bind(this);
-    this.handleUsernameChange = this.handleUsernameChange.bind(this);
-    this.handlePasswordChange = this.handlePasswordChange.bind(this);
-  }
-
-  handleSubmit(e) {
-    e.preventDefault();
-    this.oktaAuth.signIn({
-      username: this.state.username,
-      password: this.state.password
-    })
-      .then(res => this.setState({
-        sessionToken: res.sessionToken
-      }))
-      .catch(err => {
-        this.setState({error: err.message});
-        console.log(err.statusCode + ' error', err)
-      });
-  }
-
-  handleUsernameChange(e) {
-    this.setState({ username: e.target.value });
-  }
-
-  handlePasswordChange(e) {
-    this.setState({ password: e.target.value });
-  }
-
-  render() {
-    if (this.state.sessionToken) {
-      this.props.auth.redirect({ sessionToken: this.state.sessionToken });
-      return null;
+    handleSubmit(e) {
+      e.preventDefault();
+      this.oktaAuth
+        .signIn({
+          username: this.state.username,
+          password: this.state.password
+        })
+        .then(res =>
+          this.setState({
+            sessionToken: res.sessionToken
+          })
+        )
+        .catch(err => {
+          this.setState({ error: err.message });
+          console.log(err.statusCode + ' error', err);
+        });
     }
 
-    const errorMessage = this.state.error ? 
-	<span className="error-message">{this.state.error}</span> : 
-	null;
+    handleUsernameChange(e) {
+      this.setState({ username: e.target.value });
+    }
 
-    return (
-      <form onSubmit={this.handleSubmit}>
-        {errorMessage}
-        <div className="form-element">
-          <label>Username:</label>
-          <input
-            id="username" type="text"
-            value={this.state.username}
-            onChange={this.handleUsernameChange} />
-        </div>
+    handlePasswordChange(e) {
+      this.setState({ password: e.target.value });
+    }
 
-        <div className="form-element">
-          <label>Password:</label>
-          <input
-            id="password" type="password"
-            value={this.state.password}
-            onChange={this.handlePasswordChange} />
-        </div>
-        <input id="submit" type="submit" value="Submit" />
-      </form>
-    );
+    render() {
+      if (this.state.sessionToken) {
+        this.props.auth.redirect({ sessionToken: this.state.sessionToken });
+        return null;
+      }
+
+      const errorMessage = this.state.error ? (
+        <span className="error-message">{this.state.error}</span>
+      ) : null;
+
+      return (
+        <form onSubmit={this.handleSubmit}>
+          {errorMessage}
+          <div className="form-element">
+            <label>Username:</label>
+            <input
+              id="username"
+              type="text"
+              value={this.state.username}
+              onChange={this.handleUsernameChange}
+            />
+          </div>
+
+          <div className="form-element">
+            <label>Password:</label>
+            <input
+              id="password"
+              type="password"
+              value={this.state.password}
+              onChange={this.handlePasswordChange}
+            />
+          </div>
+          <input id="submit" type="submit" value="Submit" />
+        </form>
+      );
+    }
   }
-});
+);
 ```
 
 The other thing of note here is the `OktaAuth` library being imported. This is the base library for doing things like signing in using the Okta application you created previously. You'll notice an `OktaAuth` object being created in the constructor that gets a property of `baseUrl` passed to it. This is the URL for the issuer that is in your `app.config.js` file. The `LoginForm` component is meant to be contained in another component, so you'll have to create a `LoginPage.js` file to contain this component. You'll use the `withAuth` higher-order component again, to get access to the `isAuthenticated` function. The contents of `LoginPage.js` will be:
@@ -319,36 +328,36 @@ Now create the `ProfilePage.js` component inside the `auth` folder. The contents
 import React from 'react';
 import { withAuth } from '@okta/okta-react';
 
-export default withAuth(class ProfilePage extends React.Component {
-  constructor(props){
-    super(props);
-    this.state = { user: null };
-    this.getCurrentUser = this.getCurrentUser.bind(this);
-  }
+export default withAuth(
+  class ProfilePage extends React.Component {
+    constructor(props) {
+      super(props);
+      this.state = { user: null };
+      this.getCurrentUser = this.getCurrentUser.bind(this);
+    }
 
-  async getCurrentUser(){
-    this.props.auth.getUser()
-      .then(user => this.setState({user}));
-  }
+    async getCurrentUser() {
+      this.props.auth.getUser().then(user => this.setState({ user }));
+    }
 
-  componentDidMount(){
-    this.getCurrentUser();
-  }
+    componentDidMount() {
+      this.getCurrentUser();
+    }
 
-  render() {
-    if(!this.state.user) return null;
-    return (
-      <section className="user-profile">
-        <h1>User Profile</h1>
-        <div>
-          <label>Name:</label>
-          <span>{this.state.user.name}</span>
-        </div>
-      </section>
-
-    )
+    render() {
+      if (!this.state.user) return null;
+      return (
+        <section className="user-profile">
+          <h1>User Profile</h1>
+          <div>
+            <label>Name:</label>
+            <span>{this.state.user.name}</span>
+          </div>
+        </section>
+      );
+    }
   }
-});
+);
 ```
 
 The `withAuth` component here gives you access to the `getUser` function. Here, it's been called from `componentDidMount` which is a common place for pulling data that will be used in the `render` method. The only odd thing you might see is the first line of the `render` method that renders nothing until there is actually a user returned from the `getUser` asynchronous call. Once there is a user in the state, it then renders the profile content, which in this case is just displaying the currently logged in user's name.
@@ -356,169 +365,214 @@ The `withAuth` component here gives you access to the `getUser` function. Here, 
 Next, you'll add a registration component. This could be done just like the login form, where there is a `LoginForm` component that is contained in a `LoginPage` component. In order to demonstrate another way to display this, you'll just create a `RegistrationForm` component that will be the main container component. Create a `RegistrationForm.js` file in the `auth` folder with the following content:
 
 ```js
-import React from 'react'; 
+import React from 'react';
 import OktaAuth from '@okta/okta-auth-js';
 import { withAuth } from '@okta/okta-react';
 
 import config from '../../app.config';
 
-export default withAuth(class RegistrationForm extends React.Component{
-  constructor(props){
-    super(props);
-    this.state = {
-      firstName: '',
-      lastName: '',
-      email: '',
-      password: '',
-      sessionToken: null
-    };
-    this.oktaAuth = new OktaAuth({ url: config.url });
-    this.checkAuthentication = this.checkAuthentication.bind(this);
-    this.checkAuthentication();
+export default withAuth(
+  class RegistrationForm extends React.Component {
+    constructor(props) {
+      super(props);
+      this.state = {
+        firstName: '',
+        lastName: '',
+        email: '',
+        password: '',
+        sessionToken: null
+      };
+      this.oktaAuth = new OktaAuth({ url: config.url });
+      this.checkAuthentication = this.checkAuthentication.bind(this);
+      this.checkAuthentication();
 
-    this.handleSubmit = this.handleSubmit.bind(this);
-    this.handleFirstNameChange = this.handleFirstNameChange.bind(this);
-    this.handleLastNameChange = this.handleLastNameChange.bind(this);
-    this.handleEmailChange = this.handleEmailChange.bind(this);
-    this.handlePasswordChange = this.handlePasswordChange.bind(this);    
-  }
-
-  async checkAuthentication() {
-    const sessionToken = await this.props.auth.getIdToken();
-    if (sessionToken) {
-      this.setState({ sessionToken });
+      this.handleSubmit = this.handleSubmit.bind(this);
+      this.handleFirstNameChange = this.handleFirstNameChange.bind(this);
+      this.handleLastNameChange = this.handleLastNameChange.bind(this);
+      this.handleEmailChange = this.handleEmailChange.bind(this);
+      this.handlePasswordChange = this.handlePasswordChange.bind(this);
     }
-  }
 
-  componentDidUpdate() {
-    this.checkAuthentication();
-  }
+    async checkAuthentication() {
+      const sessionToken = await this.props.auth.getIdToken();
+      if (sessionToken) {
+        this.setState({ sessionToken });
+      }
+    }
 
-  handleFirstNameChange(e){
-    this.setState({firstName:e.target.value});
-  }
-  handleLastNameChange(e) {
-    this.setState({ lastName: e.target.value });
-  }
-  handleEmailChange(e) {
-    this.setState({ email: e.target.value });
-  }
-  handlePasswordChange(e) {
-    this.setState({ password: e.target.value });
-  }
+    componentDidUpdate() {
+      this.checkAuthentication();
+    }
 
-  handleSubmit(e){
-    e.preventDefault();
-    fetch('/api/users', { 
-      method: 'POST', 
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(this.state)
-    }).then(user => {
-      this.oktaAuth.signIn({
-        username: this.state.email,
-        password: this.state.password
+    handleFirstNameChange(e) {
+      this.setState({ firstName: e.target.value });
+    }
+    handleLastNameChange(e) {
+      this.setState({ lastName: e.target.value });
+    }
+    handleEmailChange(e) {
+      this.setState({ email: e.target.value });
+    }
+    handlePasswordChange(e) {
+      this.setState({ password: e.target.value });
+    }
+
+    handleSubmit(e) {
+      e.preventDefault();
+      fetch('/api/users', {
+        method: 'POST',
+        headers: {
+          Accept: 'application/json',
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(this.state)
       })
-      .then(res => this.setState({
-        sessionToken: res.sessionToken
-      }));
-    })
-    .catch(err => console.log);
-  }
-
-  render(){
-    if (this.state.sessionToken) {
-      this.props.auth.redirect({ sessionToken: this.state.sessionToken });
-      return null;
+        .then(user => {
+          this.oktaAuth
+            .signIn({
+              username: this.state.email,
+              password: this.state.password
+            })
+            .then(res =>
+              this.setState({
+                sessionToken: res.sessionToken
+              })
+            );
+        })
+        .catch(err => console.log);
     }
 
-    return(
-      <form onSubmit={this.handleSubmit}>
-        <div className="form-element">
-          <label>Email:</label>
-          <input type="email" id="email" value={this.state.email} 
-		  onChange={this.handleEmailChange}/>
-        </div>
-        <div className="form-element">
-          <label>First Name:</label>
-          <input type="text" id="firstName" value={this.state.firstName} 
-		  onChange={this.handleFirstNameChange} />
-        </div>
-        <div className="form-element">
-          <label>Last Name:</label>
-          <input type="text" id="lastName" value={this.state.lastName} 
-		  onChange={this.handleLastNameChange} />
-        </div>
-        <div className="form-element">
-          <label>Password:</label>
-          <input type="password" id="password" value={this.state.password} 
-		  onChange={this.handlePasswordChange} />
-        </div>
-        <input type="submit" id="submit" value="Register"/>
-      </form>
-    );
-  }
+    render() {
+      if (this.state.sessionToken) {
+        this.props.auth.redirect({ sessionToken: this.state.sessionToken });
+        return null;
+      }
 
-});
+      return (
+        <form onSubmit={this.handleSubmit}>
+          <div className="form-element">
+            <label>Email:</label>
+            <input
+              type="email"
+              id="email"
+              value={this.state.email}
+              onChange={this.handleEmailChange}
+            />
+          </div>
+          <div className="form-element">
+            <label>First Name:</label>
+            <input
+              type="text"
+              id="firstName"
+              value={this.state.firstName}
+              onChange={this.handleFirstNameChange}
+            />
+          </div>
+          <div className="form-element">
+            <label>Last Name:</label>
+            <input
+              type="text"
+              id="lastName"
+              value={this.state.lastName}
+              onChange={this.handleLastNameChange}
+            />
+          </div>
+          <div className="form-element">
+            <label>Password:</label>
+            <input
+              type="password"
+              id="password"
+              value={this.state.password}
+              onChange={this.handlePasswordChange}
+            />
+          </div>
+          <input type="submit" id="submit" value="Register" />
+        </form>
+      );
+    }
+  }
+);
 ```
 
-This component looks a lot like the `LoginForm` component with the exception that it calls the Node API (that you’ll build in a moment) that will handle doing the registration. Once the registration is completed by the Node API, the component logs the newly created user in, and the render method (when it sees a session token in the state) redirects the user to the home page of the application.
+This component looks a lot like the `LoginForm` component with the exception that it calls the Node API (that you'll build in a moment) that will handle doing the registration. Once the registration is completed by the Node API, the component logs the newly created user in, and the render method (when it sees a session token in the state) redirects the user to the home page of the application.
 
-You may also notice the `sessionToken` property on the component’s state. This is set by the `handleSubmit()` function for the purpose of handling the login if the registration is successful. Then it is also used by the `render()` method to do the redirect once the login has completed, and a token has been received.
+You may also notice the `sessionToken` property on the component's state. This is set by the `handleSubmit()` function for the purpose of handling the login if the registration is successful. Then it is also used by the `render()` method to do the redirect once the login has completed, and a token has been received.
 
 ## Add Routes to the React App
 
-First, add a navigation component for the routes you’ll be adding. In the `client/src/components` folder, add a folder called `shared`. This will be the place where all components that are used in several places in the application will be located. In that new folder, add a file called `Navigation.js`. The file contains a basic component with links to all the pages in the app.
+First, add a navigation component for the routes you'll be adding. In the `client/src/components` folder, add a folder called `shared`. This will be the place where all components that are used in several places in the application will be located. In that new folder, add a file called `Navigation.js`. The file contains a basic component with links to all the pages in the app.
 
-You’ll need to wrap the navigation component in the `withAuth` higher-order component. That way, you can check to see if there is an authenticated user and display the login or logout button as appropriate.
+You'll need to wrap the navigation component in the `withAuth` higher-order component. That way, you can check to see if there is an authenticated user and display the login or logout button as appropriate.
 
 ```js
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { withAuth } from '@okta/okta-react';
 
-export default withAuth(class Navigation extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = { authenticated: null };
-    this.checkAuthentication = this.checkAuthentication.bind(this);
-    this.checkAuthentication();
-  }
+export default withAuth(
+  class Navigation extends React.Component {
+    constructor(props) {
+      super(props);
+      this.state = { authenticated: null };
+      this.checkAuthentication = this.checkAuthentication.bind(this);
+      this.checkAuthentication();
+    }
 
-  async checkAuthentication() {
-    const authenticated = await this.props.auth.isAuthenticated();
-    if (authenticated !== this.state.authenticated) {
-      this.setState({ authenticated });
+    async checkAuthentication() {
+      const authenticated = await this.props.auth.isAuthenticated();
+      if (authenticated !== this.state.authenticated) {
+        this.setState({ authenticated });
+      }
+    }
+
+    componentDidUpdate() {
+      this.checkAuthentication();
+    }
+
+    render() {
+      if (this.state.authenticated === null) return null;
+      const authNav = this.state.authenticated ? (
+        <ul className="auth-nav">
+          <li>
+            <a
+              href="javascript:void(0)"
+              onClick={() => this.props.auth.logout()}
+            >
+              Logout
+            </a>
+          </li>
+          <li>
+            <Link to="/profile">Profile</Link>
+          </li>
+        </ul>
+      ) : (
+        <ul className="auth-nav">
+          <li>
+            <a
+              href="javascript:void(0)"
+              onClick={() => this.props.auth.login()}
+            >
+              Login
+            </a>
+          </li>
+          <li>
+            <Link to="/register">Register</Link>
+          </li>
+        </ul>
+      );
+      return (
+        <nav>
+          <ul>
+            <li>
+              <Link to="/">Home</Link>
+            </li>
+            {authNav}
+          </ul>
+        </nav>
+      );
     }
   }
-
-  componentDidUpdate() {
-    this.checkAuthentication();
-  }
-
-  render() {
-    if (this.state.authenticated === null) return null;
-    const authNav = this.state.authenticated ?
-      <ul className="auth-nav">
-        <li><a href="javascript:void(0)" onClick={this.props.auth.logout}>Logout</a></li>
-        <li><Link to="/profile">Profile</Link></li>
-      </ul> :
-      <ul className="auth-nav">
-        <li><a href="javascript:void(0)" onClick={this.props.auth.login}>Login</a></li>
-        <li><Link to="/register">Register</Link></li>
-      </ul>;
-    return (
-      <nav>
-        <ul>
-          <li><Link to="/">Home</Link></li>
-          {authNav}
-        </ul>
-      </nav>
-    )
-  }
-});
+);
 ```
 
 Now that you have components available to handle all the routes, create the routes to go with them. Update the `App.js` file so that the final version looks like:
@@ -543,7 +597,10 @@ export default class App extends Component {
         <Navigation />
         <main>
           <Route path="/" exact component={HomePage} />
-          <Route path="/login" render={() => <LoginPage baseUrl={config.url} />} />
+          <Route
+            path="/login"
+            render={() => <LoginPage baseUrl={config.url} />}
+          />
           <Route path="/implicit/callback" component={ImplicitCallback} />
           <Route path="/register" component={RegistrationForm} />
           <SecureRoute path="/profile" component={ProfilePage} />
@@ -562,7 +619,7 @@ The only other really odd-looking thing here is the route for the login path. In
 
 ## Add API Endpoints to the Node App
 
-You may remember that the Node API is doing the registration, so you'll need to add the endpoint to the Node app to handle that call. To do that, you'll need to add Okta's Node SDK. From the ‘api’ folder run:
+You may remember that the Node API is doing the registration, so you'll need to add the endpoint to the Node app to handle that call. To do that, you'll need to add Okta's Node SDK. From the 'api' folder run:
 
 ```bash
 npm install @okta/okta-sdk-nodejs --save
@@ -591,7 +648,8 @@ router.post('/', (req, res, next) => {
       }
     }
   };
-  oktaClient.createUser(newUser)
+  oktaClient
+    .createUser(newUser)
     .then(user => {
       res.status(201);
       res.send(user);
@@ -599,13 +657,13 @@ router.post('/', (req, res, next) => {
     .catch(err => {
       res.status(400);
       res.send(err);
-    })
+    });
 });
 
 module.exports = router;
 ```
 
-The biggest things of note here are the importing of the `lib/oktaClient` (which you'll add in a moment), the call to the `createUser` function on  `oktaClient`, and the shape of the `newUser` object. The shape of the `newUser` object is documented [in Okta's API documentation](https://developer.okta.com/docs/api/resources/users).
+The biggest things of note here are the importing of the `lib/oktaClient` (which you'll add in a moment), the call to the `createUser` function on `oktaClient`, and the shape of the `newUser` object. The shape of the `newUser` object is documented [in Okta's API documentation](https://developer.okta.com/docs/api/resources/users).
 
 For your Node application to make calls to your Okta application, it will need an API token. To create one, go into your Okta developer dashboard, hover over the API menu option and click on Tokens.
 
@@ -646,12 +704,14 @@ Even though the site still needs some serious style love, you will now be able t
 ## Learn More
 
 If you want to learn more about the technologies used in this articles, you can check out the documentation for:
-* Okta's [Node SDK](https://developer.okta.com/okta-sdk-nodejs/jsdocs/index.html) 
-* Okta’s [React SDK](https://developer.okta.com/code/react/).
+
+- Okta's [Node SDK](https://developer.okta.com/okta-sdk-nodejs/jsdocs/index.html)
+- Okta's [React SDK](https://developer.okta.com/code/react/).
 
 Also, check out other articles using Okta for authentication:
-* Randall Degges’s article on Okta in a [Simple Node Website](https://developer.okta.com/blog/2017/10/19/use-openid-connect-to-build-a-simple-node-website)
-* My article using the [Okta Sign-In Widget in React](https://developer.okta.com/blog/2017/03/30/react-okta-sign-in-widget)
-* Matt Raible’s Article on [Progressive Web Apps](https://developer.okta.com/blog/2017/07/20/the-ultimate-guide-to-progressive-web-applications)
+
+- Randall Degges's article on Okta in a [Simple Node Website](https://developer.okta.com/blog/2017/10/19/use-openid-connect-to-build-a-simple-node-website)
+- My article using the [Okta Sign-In Widget in React](https://developer.okta.com/blog/2017/03/30/react-okta-sign-in-widget)
+- Matt Raible's Article on [Progressive Web Apps](https://developer.okta.com/blog/2017/07/20/the-ultimate-guide-to-progressive-web-applications)
 
 As always, if you have questions, comments, or concerns about the article you can post a comment below, email me at <lee.brandt@okta.com> or post your questions to the [developer forums](https://devforum.okta.com). For more articles and tutorials, follow us on Twitter [@OktaDev](https://twitter.com/oktadev).

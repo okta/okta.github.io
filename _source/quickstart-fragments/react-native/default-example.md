@@ -16,7 +16,6 @@ At the end of the React Native instructions you can choose your server type to l
 
 ## Prerequisites
 
-* If you do not already have a **Developer Edition Account**, you can create one at [https://developer.okta.com/signup/](https://developer.okta.com/signup/).
 * If you don't have a React Native app, or are new to React Native, please start with [React Native's documentation](https://github.com/react-community/create-react-native-app#getting-started). It will walk you through the creation of a React Native app and other application development essentials.
 * If you are developing with an Android device emulator, make sure to check out the [React Native - Android Development](https://facebook.github.io/react-native/docs/getting-started.html#android-development-environment) setup instructions.
 
@@ -30,7 +29,7 @@ In Okta, applications are OpenID Connect clients that can use Okta Authorization
 | Setting             | Value                                         |
 | ------------------- | --------------------------------------------  |
 | App Name            | My Native App                                 |
-| Login redirect URIs | com.oktapreview.{orgName}:/+expo-auth-session |
+| Login redirect URIs | {yourOktaScheme}:/+expo-auth-session          |
 |                     | exp://localhost:{port}/+expo-auth-session     |
 | Grant Types Allowed | Authorization Code, Refresh Token             |
 
@@ -60,12 +59,13 @@ Assuming you're using an app created with `create-react-native-app`, modify your
 ```javascript
 {
   "expo": {
-    "scheme": "com.oktapreview.{orgName}"
+    "scheme": "{yourOktaScheme}"
   }
 }
 ```
 
 In your application's controller, create a new instance of the `TokenClient`:
+{% include domain-admin-warning.html %}
 
 ```javascript
 // App.js
@@ -78,7 +78,7 @@ const tokenClient = new TokenClient({
   scope: 'openid profile',
   redirect_uri: __DEV__ ?
     'exp://localhost:{port}/+expo-auth-session' :
-    'com.oktapreview.{orgName}:/+expo-auth-session'
+    '{yourOktaScheme}:/+expo-auth-session'
 });
 ```
 

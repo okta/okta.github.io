@@ -22,6 +22,7 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 ```
 
 In the `ConfigureServices` method, add this `UseAuthentication` block and configure it using the information from the Okta application you just created:
+{% include domain-admin-warning.html %}
 
 ```csharp
 services.AddAuthentication(sharedOptions =>

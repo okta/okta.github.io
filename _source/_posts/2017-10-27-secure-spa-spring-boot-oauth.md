@@ -3,7 +3,7 @@ layout: blog_post
 title: 'Secure your SPA with Spring Boot and OAuth'
 author: bdemers
 tags: [oauth, oauth2, oauth2.0, oauth 2.0, spring, spring boot, spring security]
---- 
+---
 
 If you have a JavaScript single-page application (SPA) that needs to securely access resources from a Spring Boot application, you likely want to use the OAuth 2.0 implicit flow! With this flow your client will send a bearer token with each request and your server side application will verify the token with an Identity Provider (IdP). This allows your resource server to trust that your client is authorized to make the request. In OAuth terms your SPA is the client and your Spring Boot application is the Resource Server. For a more detailed explanation on the various OAuth flows take a look at our [What the Heck is OAuth](/blog/2017/06/21/what-the-heck-is-oauth) post.
 
@@ -11,7 +11,7 @@ Today you are going to build two small applications that demonstrate these princ
 
 ## Create a Spring Boot Application
 
-**Update:** You must use Spring Boot version 1.5.x. 
+**Update:** You must use Spring Boot version 1.5.x.
 
 If you haven't tried out [start.spring.io](https://start.spring.io) go check it out right now... with a couple of clicks it will get you a basic, runnable Spring Boot Application.
 
@@ -28,7 +28,7 @@ curl https://start.spring.io/starter.tgz \
 
 If you want to download the project from your browser go to: [start.spring.io](https://start.spring.io/#!artifactId=oauth-implicit-example) search for and select the 'security' dependencies then click the big green "Generate Project" button.
 
-Once you have your project unzipped you should be able to start it up on the command line: with `./mvnw spring-boot:run`. This application won’t do anything yet, but this is a good 'so far so good' check. Kill the process with `^C` and let’s start actually writing code!
+Once you have your project unzipped you should be able to start it up on the command line: with `./mvnw spring-boot:run`. This application won't do anything yet, but this is a good 'so far so good' check. Kill the process with `^C` and let's start actually writing code!
 
 ### Write Some Code!
 
@@ -75,9 +75,9 @@ A `401`? Yup, secure by default! Plus, we haven't actually supplied any of the c
 
 ## Get Your OAuth Info Ready
 
-As I mentioned above, you'll be using Okta going forward. You can go sign up for a free (forever) account over at [https://developer.okta.com/](https://developer.okta.com/). Just click the sign up button and fill out the form. When that’s done you’ll have two things, your Okta base URL, which looks something like: `dev-123456.oktapreview.com` and an email with instructions on how to activate your account.
+As I mentioned above, you'll be using Okta going forward. You can go sign up for a free (forever) account over at [https://developer.okta.com/](https://developer.okta.com/). Just click the sign up button and fill out the form. When that's done you'll have two things, your Okta organization URL (e.g. `https://{yourOktaDomain}`), and an email with instructions on how to activate your account.
 
-Activate your account, and while you’re still in the Okta Developer Console you have one last step: create an Okta SPA application. On the top menu bar click on **Applications** then click **Add Application**. Select **SPA** and click **Next**.
+Activate your account, and while you're still in the Okta Developer Console you have one last step: create an Okta SPA application. On the top menu bar click on **Applications** then click **Add Application**. Select **SPA** and click **Next**.
 
 Fill out the form with the following values:
 
@@ -85,7 +85,7 @@ Fill out the form with the following values:
 - Base URIs: http://localhost:8080/
 - Login redirect URIs: http://localhost:8080/
 
-Leave everything else as the defaults and click **Done**. At the bottom of the next page is your `Client ID` which you’ll need in the next step.
+Leave everything else as the defaults and click **Done**. At the bottom of the next page is your `Client ID` which you'll need in the next step.
 ### Configure OAuth for Spring
 
 The generated sample application uses an `application.properties` file. I prefer YAML so I'm going to rename the file to `application.yml`.
@@ -96,7 +96,7 @@ An application resource server only needs to know how to validate an access toke
 security:
  oauth2:
    resource:
-     userInfoUri: https://dev-123456.oktapreview.com/oauth2/default/v1/userinfo
+     userInfoUri: https://{yourOktaDomain}/oauth2/default/v1/userinfo
 ```
 
 At this point you could start up your application and start validating access tokens! But of course you would need an access token to validate...
@@ -141,11 +141,11 @@ Create a new file `src/main/resources/static/index.html` and populate it with th
    // You could statically define your config like if you wanted too:
    /*
    const data = {
-     baseUrl: 'https://dev-123456.oktapreview.com',
+     baseUrl: 'https://{yourOktaDomain}',
      clientId: '00icu81200icu812w0h7',
      redirectUri: 'http://localhost:8080',
      authParams: {
-       issuer: 'https://dev-123456.oktapreview.com/oauth2/default',
+       issuer: 'https://{yourOktaDomain}/oauth2/default',
        responseType: ['id_token', 'token']
      }
    }; */
@@ -287,8 +287,8 @@ Add the corresponding configuration to your `application.yml` file:
 okta:
  oauth2:
    # Client ID from above step
-   clientId: 00ICU81200ICU812
-   issuer: https://dev-123456.oktapreview.com/oauth2/default
+   clientId: {clientId}
+   issuer: https://{yourOktaDomain}/oauth2/default
 ```
 
 The last thing is to allow public access to the `index.html` page and `/sign-in-widget-config`
@@ -318,7 +318,7 @@ Start up your application again with `./mvnw spring-boot:run`, and browse to `ht
 Up until now (with the exception of the login page) you have been using using the out of the box Spring Security OAuth 2.0 support. This just works because: standards! There are a few issues with this approach:
 - Each request to our application requires an unnecessary round trip back to the OAuth IdP
 - We don't know which scopes were used when the access token was created
-- The user’s groups/roles are not available in this context
+- The user's groups/roles are not available in this context
 
 These may or may not be issues for your application, but resolving them is as simple as adding another dependency to your pom file:
 
@@ -335,13 +335,13 @@ You can even trim down your `application.yml` file if you want to, any of the `s
 ```yaml
 okta:
  oauth2:
-   clientId: 00ICU81200ICU812
-   issuer: https://dev-123456.oktapreview.com/oauth2/default
+   clientId: {clientId}
+   issuer: https://{yourOktaDomain}/oauth2/default
 ```
 
 Restart your application and the first two concerns have been taken care of!
 
-The last one requires an extra step, you will have to add extra data to Okta's access token. We have a [whole post on this topic](/blog/2017/10/13/okta-groups-spring-security), but the cliff notes are as follows: 
+The last one requires an extra step, you will have to add extra data to Okta's access token. We have a [whole post on this topic](/blog/2017/10/13/okta-groups-spring-security), but the cliff notes are as follows:
 
 Head back over to the Okta Developer Console, on the menu bar click **API** > **Authorization Server**. In this example we have been using the 'default' authorization server, so click edit, then select the 'Claims' tab. Click 'Add Claim' and fill out the form with the following values:
 

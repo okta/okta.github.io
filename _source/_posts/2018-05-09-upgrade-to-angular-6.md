@@ -13,7 +13,7 @@ Angular 6 is now available and it's not a drop-in replacement for Angular 5. If 
 
 In fact, the most significant change I remember in the last couple of years was the introduction of `HttpClient`, which happened in Angular 4.3. And it wasn't removed in Angular 5; it was merely deprecated. There was also the move from `<template>` to `<ng-template>`. There were some APIs removed in Angular 5, but I wasn't using them in any of my projects.
 
-This brings us to Angular 6, where there are breaking changes. The most prominent difference that I've found is not in Angular itself but in [RxJS](http://reactivex.io/rxjs/). In this post, I’ll walk you through these breaking changes so you can stay on the happy path while upgrading.
+This brings us to Angular 6, where there are breaking changes. The most prominent difference that I've found is not in Angular itself but in [RxJS](http://reactivex.io/rxjs/). In this post, I'll walk you through these breaking changes so you can stay on the happy path while upgrading.
 
 ## Upgrading to RxJS 6
 
@@ -122,7 +122,7 @@ Stephen Fluin announced that [Angular 6 is available](https://blog.angular.io/ve
 I updated a number of tutorials from Angular 5 to 6 since the release last Friday. I started with my [Angular and Angular CLI Tutorial](http://gist.asciidoctor.org/?github-mraible/ng-demo//README.adoc).
 
 <div style="max-width: 500px; margin: 0 auto">
-<blockquote class="twitter-tweet" data-cards="hidden" data-lang="en"><p lang="en" dir="ltr">I spent a couple hours today upgrading my <a href="https://twitter.com/angular?ref_src=twsrc%5Etfw">@angular</a> tutorial to use Angular 6. It wasn’t too difficult, but not that straightforward either. The good news is I learned a lot! <br><br>💻 PR at <a href="https://t.co/jjHTQwP8Li">https://t.co/jjHTQwP8Li</a><br>📘 Updated tutorial at <a href="https://t.co/d08RMTQf8F">https://t.co/d08RMTQf8F</a><a href="https://twitter.com/hashtag/angular?src=hash&amp;ref_src=twsrc%5Etfw">#angular</a> <a href="https://twitter.com/hashtag/bleedingedge?src=hash&amp;ref_src=twsrc%5Etfw">#bleedingedge</a></p>&mdash; Matt Raible (@mraible) <a href="https://twitter.com/mraible/status/992532563917918209?ref_src=twsrc%5Etfw">May 4, 2018</a></blockquote>
+<blockquote class="twitter-tweet" data-cards="hidden" data-lang="en"><p lang="en" dir="ltr">I spent a couple hours today upgrading my <a href="https://twitter.com/angular?ref_src=twsrc%5Etfw">@angular</a> tutorial to use Angular 6. It wasn't too difficult, but not that straightforward either. The good news is I learned a lot! <br><br>💻 PR at <a href="https://t.co/jjHTQwP8Li">https://t.co/jjHTQwP8Li</a><br>📘 Updated tutorial at <a href="https://t.co/d08RMTQf8F">https://t.co/d08RMTQf8F</a><a href="https://twitter.com/hashtag/angular?src=hash&amp;ref_src=twsrc%5Etfw">#angular</a> <a href="https://twitter.com/hashtag/bleedingedge?src=hash&amp;ref_src=twsrc%5Etfw">#bleedingedge</a></p>&mdash; Matt Raible (@mraible) <a href="https://twitter.com/mraible/status/992532563917918209?ref_src=twsrc%5Etfw">May 4, 2018</a></blockquote>
 <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
 </div>
 

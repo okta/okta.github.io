@@ -19,7 +19,7 @@ In this tutorial, we are going to show you how easy Okta makes setting up a Spri
 
 ## Why Okta?
 
-Well, we’re biased, we know... But, we think Okta makes [identity management](https://developer.okta.com/product/user-management/) easier, more secure, and more scalable than what you’re used to. Okta is an API service that allows you to create, edit, and securely store user accounts and user account data, and connect them with one or more applications. Our API enables you to:
+Well, we're biased, we know... But, we think Okta makes [identity management](https://developer.okta.com/product/user-management/) easier, more secure, and more scalable than what you're used to. Okta is an API service that allows you to create, edit, and securely store user accounts and user account data, and connect them with one or more applications. Our API enables you to:
 
 * [Authenticate](https://developer.okta.com/product/authentication/) and [authorize](https://developer.okta.com/product/authorization/) your users
 * Store data about your users
@@ -27,7 +27,7 @@ Well, we’re biased, we know... But, we think Okta makes [identity management](
 * Secure your application with [multi-factor authentication](https://developer.okta.com/use_cases/mfa/)
 * And much more! Check out our [product documentation](/documentation/) for more information
 
-[Register for a forever-free developer account](https://developer.okta.com/signup/), and when you’re done, come back to learn more about building MFA in Spring Boot!
+[Register for a forever-free developer account](https://developer.okta.com/signup/), and when you're done, come back to learn more about building MFA in Spring Boot!
 
 ## Create a Spring Boot Application
 
@@ -223,6 +223,6 @@ Hopefully this post has shown you that setting up SMS-based MFA in your Spring B
 * [Build and Secure Microservices with Spring Boot 2.0 and OAuth 2.0](/blog/2018/05/17/microservices-spring-boot-2-oauth)
 * [Get Started with Spring Boot, OAuth 2.0, and Okta](/blog/2017/03/21/spring-boot-oauth)
 * [Add Authentication to Any Web Page in 10 Minutes](/blog/2018/06/08/add-authentication-to-any-web-page-in-10-minutes)
-* [Okta’s Java product documentation](/code/java/)
+* [Okta's Java product documentation](/code/java/)
 
 As always, you can hit us up in the comments below with feedback or questions, or on Twitter [@oktadev](https://twitter.com/OktaDev). We look forward to hearing from you!

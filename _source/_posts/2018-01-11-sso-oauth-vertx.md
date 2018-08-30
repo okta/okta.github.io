@@ -29,7 +29,7 @@ Let someone else deal with it. To achieve this, a bit of cooperation is required
 
 The above handshake is what will be happening behind the scenes once this example is completed. Vert.x supplies a handy OAuth library to take care of this entire process for you – all you need to do is configure it and register it appropriately.  That's what this tutorial demonstrates.
 
-As a starter guide, this post assumes only basic familiarity with Java and a few Java essentials such as Maven. If you already have a Vert.x server running, feel free to fast forward to the good stuff: you’ll integrate with Okta in the [Configure the Vert.x OAuth Handler](#configure-the-vertx-oauth-handler) section.
+As a starter guide, this post assumes only basic familiarity with Java and a few Java essentials such as Maven. If you already have a Vert.x server running, feel free to fast forward to the good stuff: you'll integrate with Okta in the [Configure the Vert.x OAuth Handler](#configure-the-vertx-oauth-handler) section.
 
 The completed code example, including imports and pom.xml, can be found [on Github](https://github.com/oktadeveloper/OktaBlogs/tree/master/VertxAndOkta).
 
@@ -77,7 +77,7 @@ Create a file called `src/main/application.json` and add the following content:
 }
 ```
 
-You’ll be updating those values shortly. Now in `src/main/java/com/example/demo/MainVerticle.java`, replace the contents of the `start()` method with the following, which will load the config. Notice that when it completes, it calls a method called `startServer()` that doesn’t exist yet. You will add that in the next section.
+You'll be updating those values shortly. Now in `src/main/java/com/example/demo/MainVerticle.java`, replace the contents of the `start()` method with the following, which will load the config. Notice that when it completes, it calls a method called `startServer()` that doesn't exist yet. You will add that in the next section.
 
 ```java
 @Override
@@ -127,7 +127,7 @@ If you don't already have a free Okta account, you can follow [these instruction
 
  - Client Id - e.g.: ***oot9wrjjararhfaa***
  - Client Secret - (keep it secret!)
- - Issuer - e.g.: ***https://dev-123123.oktapreview.com/oauth2/default*** ...be sure to include the ***/oauth2/default*** path!
+ - Issuer - e.g.: ***https://{yourOktaDomain}/oauth2/default*** ...be sure to include the ***/oauth2/default*** path!
  - Callback Url - this will be ***http://localhost:8080/login*** if you followed the instructions above.
 
 These values can now be used in your `src/main/application.json` file.
@@ -180,7 +180,7 @@ public void startServer() {
 
     vertx.createHttpServer()
 		.requestHandler(router::accept)
-		.listen(config().getString(“port”));
+		.listen(config().getString("port"));
 }
 ```
 
@@ -205,7 +205,7 @@ Both the `access_token` and `id_token` are available, but this tutorial will onl
 Map<String, Object> getIdClaims(RoutingContext ctx) {
     try {
         JwtVerifier jwtVerifier = new JwtHelper()
-            .setIssuerUrl(config().getString(“issuer”))
+            .setIssuerUrl(config().getString("issuer"))
             .setAudience("api://default")
             .setClientId(config().getString("clientId"))
             .build();
@@ -236,7 +236,7 @@ void startServer() {
                             claims.get("email"));
     });
 
-    vertx.createHttpServer().requestHandler(router::accept).listen(config().getString(“port”));
+    vertx.createHttpServer().requestHandler(router::accept).listen(config().getString("port"));
 }
 ```
 
@@ -248,7 +248,7 @@ With this final change, restarting your server and once again hitting `http://lo
 
 Congratulations, you now have a high-performance Vert.x server protected by Okta's state-of-the-art security and identity management! Okta provides a [Java SDK](https://github.com/okta/okta-sdk-java) for interacting further with users and accounts, including adding custom data and attributes to your users.
 
-Thanks for reading, and as always, please hit us up in the comments below with questions. We’d love to have you follow us on Twitter [@OktaDev](https://twitter.com/OktaDev), or read on for more great Java content from our blog:
+Thanks for reading, and as always, please hit us up in the comments below with questions. We'd love to have you follow us on Twitter [@OktaDev](https://twitter.com/OktaDev), or read on for more great Java content from our blog:
 * [Get Started with Spring Security 5.0 and OIDC](https://developer.okta.com/blog/2017/12/18/spring-security-5-oidc)
 * [Bootiful Development with Spring Boot and React](https://developer.okta.com/blog/2017/12/06/bootiful-development-with-spring-boot-and-react)
 * [Use Kong Gateway to Centralize Authentication](https://developer.okta.com/blog/2017/12/04/use-kong-gateway-to-centralize-authentication)

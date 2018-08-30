@@ -19,7 +19,7 @@ When using the API to sync group data and group membership information with an e
 
 Tightly tied to the interval used is the idea of doing date bound queries to retrieve delta datasets.  There are two Date fields available to determine changes to a group.
 
-+ `lastUpdated` is the timestamp when a group’s profile was last updated
++ `lastUpdated` is the timestamp when a group's profile was last updated
 + `lastMembershipUpdated` is the timestamp when a user was last added to or removed from that group
 
 These values change independently. Membership changes will not modify the lastUpdated timestamp.
@@ -215,7 +215,7 @@ Response
 
 ##### Groups - Change Membership
 
-Methods of, and reasons to, manipulate Groups and Group membership are discussed in our “Write back to enforce policy in Okta” [Groups](security-enforcement#groups) section below.
+Methods of, and reasons to, manipulate Groups and Group membership are discussed in our "Write back to enforce policy in Okta" [Groups](security-enforcement#groups) section below.
 
 #### Groups More
 

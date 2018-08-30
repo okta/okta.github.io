@@ -9,7 +9,7 @@ tweets:
  - "Developers love to be productive and get stuff done. This post shows how @mraible achieves massive productivity in his role as a Developer Advocate at Okta."
 ---
 
-“Productivity is all about efficiency and planning.” -- Mahdi Yusuf, [Iterate](https://www.iterateconf.io/) 2018
+"Productivity is all about efficiency and planning." -- Mahdi Yusuf, [Iterate](https://www.iterateconf.io/) 2018
 
 Like most developers, I love getting shit done. My best days are when I feel like I've been massively productive. When the Stormpath team joined Okta in February 2018, it was a tough transition at first. I'd started to get into the flow of writing blog posts about Stormpath's SDKs and had a bunch queued up. But Okta didn't have SDKs like Stormpath, that's why they hired us!
 
@@ -61,7 +61,7 @@ If I need to write a new presentation for a speaking engagement, I create a stor
 
 I've written most of my blog posts in Markdown over the last year. For books I've authored, I prefer Asciidoctor. I used to author blog posts in Google Docs, go through the editing process, then create the files for production from that. I've learned it's better (and easier!) to start with the production files, then copy the raw text into Google Docs. This makes it much easier to copy the text back into the production files, review the changes, and commit/push in minutes.
 
-If your editor can't understand Markdown/AsciiDoc, it's time to find a new editor! 
+If your editor can't understand Markdown/AsciiDoc, it's time to find a new editor!
 
 The reason I recommend editing in Google Docs is because it's easy to add/accept suggestions and comments. It's very efficient for editors and writers alike.
 

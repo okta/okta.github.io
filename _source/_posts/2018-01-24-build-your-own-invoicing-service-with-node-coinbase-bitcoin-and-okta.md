@@ -115,7 +115,7 @@ export COINBASE_APIKEY_SECRET=xxx
 
 Substitute your credentials where you see the `xxx` placeholder:
 
-* `OKTA_ISSUER_URI` should be set to the value of the **Org URL** value you copied down earlier, and placed into the URL. The final URL should look something like `https://dev-111464.oktapreview.com/oauth2/default`.
+* `OKTA_ISSUER_URI` should be set to the value of the **org URL** value you copied down earlier, and placed into the URL. The final URL should look like `https://{yourOktaDomain}/oauth2/default`.
 * `OKTA_CLIENT_ID` and `OKTA_CLIENT_SECRET` are the Application credentials you generated when you created your Okta Application previously
 * `REDIRECT_URI` is a hard-coded URL that will be used as part of the authentication flow. More on this later.
 * `PORT` is the HTTP port you'll be running your webserver on. `3000` is standard for Node.js apps
@@ -294,7 +294,7 @@ When you render this page, you'll see the invoice creation form:
 
 {% img blog/node-invoicing-service/crypto-invoicer-form.png alt:"Crypto Invoicer Form" width:"620" %}{: .center-image }
 
-And… If you've generated any past invoices, you'll see them listed below:
+And... If you've generated any past invoices, you'll see them listed below:
 
 {% img blog/node-invoicing-service/crypto-invoicer-list.png alt:"Crypto Invoicer List" width:"620" %}{: .center-image }
 

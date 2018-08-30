@@ -986,29 +986,29 @@ Adds an OAuth 2.0 client application. This application is only available to the 
 ##### Credentials
 {:.api .api-request .api-request-params}
 
-| Parameter                  | Description                                                    | DataType                                                                    | Nullable | Unique | Validation |
-|:---------------------------|:---------------------------------------------------------------|:----------------------------------------------------------------------------|:---------|:-------|:-----------|
-| client_id                  | Unique identifier for the client application                   | String                                                                      | TRUE     | TRUE   | TRUE       |
-| client_secret              | OAuth 2.0 client secret string (used for confidential clients) | String                                                                      | TRUE     | FALSE  | TRUE       |
-| token_endpoint_auth_method | Requested authentication method for the token endpoint         | `none`, `client_secret_post`, `client_secret_basic`, or `client_secret_jwt` | FALSE    | FALSE  | FALSE      |
-| autoKeyRotation            | Requested key rotation mode                                    | Boolean                                                                     | TRUE     | FALSE  | FALSE      |
+| Parameter                  | Description                                                                                                                                       | DataType | Default               |
+|:---------------------------|:--------------------------------------------------------------------------------------------------------------------------------------------------|:---------|:----------------------|
+| client_id                  | Unique identifier for the client application                                                                                                      | String   |                       |
+| client_secret              | OAuth 2.0 client secret string (used for confidential clients)                                                                                    | String   |                       |
+| token_endpoint_auth_method | Requested authentication method for the token endpoint. Valid values: `none`, `client_secret_post`, `client_secret_basic`, or `client_secret_jwt` | String   | `client_secret_basic` |
+| autoKeyRotation            | Requested key rotation mode                                                                                                                       | Boolean  | `true`                |
 
 ##### Settings
 {:.api .api-request .api-request-params}
 
-| Parameter                                 | Description                                                                                 | DataType                                                                                     | Nullable | Unique | Validation | Default   |
-|:------------------------------------------|:--------------------------------------------------------------------------------------------|:---------------------------------------------------------------------------------------------|:---------|:-------|:-----------|:----------|
-| client_uri                                | URL string of a web page providing information about the client                             | String                                                                                       | TRUE     | FALSE  | FALSE      |           |
-| logo_uri                                  | URL string that references a logo for the client. This value is automatically copied from any logo you provide in the App Wizard for **Application logo** but can be changed to a different URI for consent.                                           | URL                                                                                          | TRUE     | FALSE  | FALSE      |           |
-| redirect_uris                             | Array of redirection URI strings for use in redirect-based flows                            | Array                                                                                        | TRUE     | FALSE  | TRUE       |           |
-| response_types                            | Array of OAuth 2.0 response type strings                                                    | Array of `code`, `token`, `id_token`                                                         | TRUE     | FALSE  | TRUE       |           |
-| grant_types                               | Array of OAuth 2.0 grant type strings                                                       | Array of `authorization_code`, `implicit`, `password`, `refresh_token`, `client_credentials` | FALSE    | FALSE  | TRUE       |           |
-| initiate_login_uri                        | URL string that a third party can use to initiate a login by the client                     | String                                                                                       | TRUE     | FALSE  | TRUE       |           |
-| application_type                          | The type of client application                                                              | `web`, `native`, `browser`, or `service`                                                     | TRUE     | FALSE  | TRUE       |           |
-| issuer_mode {% api_lifecycle ea %}  | Indicates whether the Okta Authorization Server uses the original Okta org domain URL or a custom domain URL as the issuer of ID token for this client. | `CUSTOM_URL` or `ORG_URL` | TRUE | FALSE | TRUE | See [Credentials Settings Details](#credentials-settings-details). |
-| tos_uri {% api_lifecycle ea %}          | URL string of a web page providing the client's terms of service document                   | URL                                                                                          | TRUE     | FALSE  | FALSE      |           |
-| policy_uri {% api_lifecycle ea %}       | URL string of a web page providing the client's policy document                             | URL                                                                                          | TRUE     | FALSE  | FALSE      |           |
-| consent_method {% api_lifecycle ea %}  | Indicates whether user consent is required or implicit. Valid values: `REQUIRED`, `TRUSTED` | String                                                                                       | TRUE     | FALSE  | TRUE       | `TRUSTED` |
+| Parameter                                 | Description                                                                                 | DataType                                                                                     | Nullable | Unique | Validation |
+|:------------------------------------------|:--------------------------------------------------------------------------------------------|:---------------------------------------------------------------------------------------------|:---------|:-------|:-----------|
+| client_uri                                | URL string of a web page providing information about the client                             | String                                                                                       | TRUE     | FALSE  | FALSE      |
+| logo_uri                                  | URL string that references a logo for the client. This value is automatically copied from any logo you provide in the App Wizard for **Application logo** but can be changed to a different URI for consent.                                           | URL                                                                                          | TRUE     | FALSE  | FALSE      |
+| redirect_uris                             | Array of redirection URI strings for use in redirect-based flows                            | Array                                                                                        | TRUE     | FALSE  | TRUE       |
+| response_types                            | Array of OAuth 2.0 response type strings                                                    | Array of `code`, `token`, `id_token`                                                         | TRUE     | FALSE  | TRUE       |
+| grant_types                               | Array of OAuth 2.0 grant type strings                                                       | Array of `authorization_code`, `implicit`, `password`, `refresh_token`, `client_credentials` | FALSE    | FALSE  | TRUE       |
+| initiate_login_uri                        | URL string that a third party can use to initiate a login by the client                     | String                                                                                       | TRUE     | FALSE  | TRUE       |
+| application_type                          | The type of client application                                                              | `web`, `native`, `browser`, or `service`                                                     | TRUE     | FALSE  | TRUE       |
+| issuer_mode {% api_lifecycle ea %}  | Indicates whether the Okta Authorization Server uses the original Okta org domain URL or a custom domain URL as the issuer of ID token for this client. See [Credentials Settings Details](#credentials-settings-details). | `CUSTOM_URL` or `ORG_URL` | TRUE | FALSE | TRUE |
+| tos_uri {% api_lifecycle ea %}          | URL string of a web page providing the client's terms of service document                   | URL                                                                                          | TRUE     | FALSE  | FALSE      |
+| policy_uri {% api_lifecycle ea %}       | URL string of a web page providing the client's policy document                             | URL                                                                                          | TRUE     | FALSE  | FALSE      |
+| consent_method {% api_lifecycle ea %}  | Indicates whether user consent is required or implicit. Valid values: `REQUIRED`, `TRUSTED`. Default value is `TRUSTED` | String                                                                                       | TRUE     | FALSE  | TRUE       |
 
 
 ###### Credentials Settings Details
@@ -2760,6 +2760,53 @@ curl -v -X PUT \
       "type": "application/xml"
     }
   }
+}
+~~~
+
+#### Set Self-Service Application Assignment
+{:.api .api-operation}
+
+Enable or disable self-service application assignment by modifying the `accessibility.selfService` property.
+
+##### Request Example
+
+~~~sh
+curl -v -X PUT \
+-H "Accept: application/json" \
+-H "Content-Type: application/json" \
+-H "Authorization: SSWS ${api_token}" \
+-d '{
+  "name": "testorgone_examplecustomsaml20app_1",
+  "label": "Example Custom SAML 2.0 App",
+  "signOnMode": "SAML_2_0",
+  "accessibility": {
+    "selfService": true,
+    "errorRedirectUrl": null,
+    "loginRedirectUrl": null
+  }
+}' "https://{yourOktaDomain}/api/v1/apps/0oainmLkOL329Jcju0g3"
+~~~
+
+##### Response Example
+
+[Application](#application-model) with updated [Accessibility Object](#accessibility-object).
+
+##### Response Example (Self-Service Application Assignment Not Available)
+If you encounter the following error when enabling self-service, you can read about [username overrides](https://help.okta.com/en/prod/Content/Topics/Directory/Directory_Profile_Editor.htm#Expressions) with profile mappings (Universal Directory) and how to [update user permissions](https://help.okta.com/en/prod/Content/Topics/Directory/Directory_Profile_Editor.htm#createcustomattrib) on properties in the user profile to secure your app before enabling self-service.
+
+~~~ http
+HTTP/1.1 403 Forbidden
+Content-Type: application/json
+
+{
+  "errorCode": "E0000044",
+  "errorSummary": "Self service application assignment is not supported.",
+  "errorLink": "E0000044",
+  "errorCauses": [
+      {
+          "errorSummary": "Self service is not available because the instance : Example Custom SAML 2.0 App has username set to use read-write property and that would create a security risk."
+      }
+  ]
 }
 ~~~
 
@@ -4970,7 +5017,7 @@ Specifies credentials and scheme for the application's `signOnMode`.
 | Property         | Description                                                                                                    | DataType                                                  | Nullable | Default         | MinLength | MaxLength | Validation |
 | ---------------- | -------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------- | -------- | --------------- | --------- | --------- | ---------- |
 | scheme           | Determines how credentials are managed for the `signOnMode`                                                    | [Authentication Scheme](#authentication-schemes)          | TRUE     |                 |           |           |            |
-| userNameTemplate | Template used to generate a user’s username when the application is assigned via a group or directly to a user | [UserName Template Object](#username-template-object)     | TRUE     | *Okta UserName* |           |           |            |
+| userNameTemplate | Template used to generate a user's username when the application is assigned via a group or directly to a user | [UserName Template Object](#username-template-object)     | TRUE     | *Okta UserName* |           |           |            |
 | signing          | Signing credential for the `signOnMode`                                                                        | [Signing Credential Object](#signing-credential-object)   | FALSE    |                 |           |           |            |
 | userName         | Shared username for app                                                                                        | String                                                    | TRUE     |                 | 1         | 100       |            |
 | password         | Shared password for app                                                                                        | [Password Object](#password-object)                       | TRUE     |                 |           |           |            |

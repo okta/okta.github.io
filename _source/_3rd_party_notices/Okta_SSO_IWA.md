@@ -387,7 +387,7 @@ this Work and will not be subject to the terms of this License.
 4.  INDEMNITY. You agree to defend, indemnify and hold harmless the
     Author and the Publisher from and against any claims, suits, losses,
     damages, liabilities, costs, and expenses (including reasonable
-    legal or attorneys’ fees) resulting from or relating to any use of
+    legal or attorneys' fees) resulting from or relating to any use of
     the Work by You.
 
 5.  LIMITATION ON LIABILITY. EXCEPT TO THE EXTENT REQUIRED BY APPLICABLE
@@ -479,7 +479,7 @@ TECHNOLOGY, (C) FOR ANY LOST PROFITS OR REVENUES, OR FOR ANY INDIRECT,
 SPECIAL, INCIDENTAL, CONSEQUENTIAL OR PUNITIVE DAMAGES, WHETHER OR NOT A
 OKTA HAS BEEN ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-IN NO EVENT WILL OKTA NOR ITS SUPPLIER’S AGGREGATE AND CUMULATIVE
+IN NO EVENT WILL OKTA NOR ITS SUPPLIER'S AGGREGATE AND CUMULATIVE
 LIABILITY FOR ANY CLAIMS ARISING OUT OF OR RELATED TO OPEN SOURCE
 SOFTWARE EXCEED ONE HUNDRED DOLLARS ($100).
 

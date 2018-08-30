@@ -3,7 +3,7 @@ layout: blog_post
 title: "Build an App for iOS and Android with Xamarin"
 author: nbarbettini
 tags: [native, mobile, ios, android, dotnet, xamarin]
-tweets: 
+tweets:
   - "Learn how to use Xamarin to build iOS and Android apps fast →"
   - "Want to build mobile apps? Start with this short #xamarin tutorial by @nbarbettini →"
 ---
@@ -12,7 +12,7 @@ tweets:
 
 Xamarin is open-source (and free). Under the hood, it uses Mono (a version of the Microsoft .NET runtime), so Xamarin apps are usually written in C#. You can build Xamarin apps on Windows using Visual Studio, or Mac using Visual Studio for Mac. Even though Xamarin apps are not written in Swift (or Java), they still look and feel like real, native apps on the device.
 
-In this tutorial, I’ll show you how to use Xamarin to build a basic app for both iOS and Android, even if you’ve never done any app development before!
+In this tutorial, I'll show you how to use Xamarin to build a basic app for both iOS and Android, even if you've never done any app development before!
 
 ## Set Up Xamarin on Windows
 _Skip to the next section if you have a Mac!_
@@ -57,12 +57,12 @@ In Visual Studio for Mac, choose **File - New Solution**, pick the **Multiplatfo
 Creating the new project may take a few minutes. The Blank App template creates a solution with a few sub-projects:
 
 * **HelloWorldApp**: Contains the XAML and shared code for each platform-specific project.
-* **HelloWorldApp.Android** (or Droid): Android-specific code. For a simple project, you won’t have to change much here.
-* **HelloWorldApp.iOS**: iOS-specific code. You won’t have to change much here, either.
+* **HelloWorldApp.Android** (or Droid): Android-specific code. For a simple project, you won't have to change much here.
+* **HelloWorldApp.iOS**: iOS-specific code. You won't have to change much here, either.
 
 If you picked Windows (UWP) as a platform, your solution will contain an additional project targeting Windows devices.
 
-In this tutorial, you’ll only need to modify the shared code project: HelloWorldApp.
+In this tutorial, you'll only need to modify the shared code project: HelloWorldApp.
 
 ## Add a Page
 UI views are called "pages" in Xamarin.Forms lingo, and your app already contains one called `MainPage` (or `HelloWorldAppPage` in Visual Studio for Mac). Double-click the XAML file in the Solution Explorer, and replace everything within the `<ContentPage>` tags with this markup:
@@ -81,16 +81,16 @@ UI views are called "pages" in Xamarin.Forms lingo, and your app already contain
                 Spacing="15">
         <Label Text="Enter your name" />
         <Entry x:Name="NameEntry" Text="Jane Doe" />
-        <Button x:Name="SayHelloButton" 
+        <Button x:Name="SayHelloButton"
                 Text="Say Hello"
                 Clicked="SayHelloButtonOnClicked" />
     </StackLayout>
 </ContentPage.Content>
 ```
 
-This XAML markup creates a basic layout containing Label, Entry (text box), and Button elements. The element names (specified with `x:Name`) will be used to refer to these elements later in code. These XAML elements are generic and aren't yet tied to a specific platform. Xamarin.Forms will automatically translate the elements in proper `UIButton` or `EditText` views when your app runs on iOS or Android. 
+This XAML markup creates a basic layout containing Label, Entry (text box), and Button elements. The element names (specified with `x:Name`) will be used to refer to these elements later in code. These XAML elements are generic and aren't yet tied to a specific platform. Xamarin.Forms will automatically translate the elements in proper `UIButton` or `EditText` views when your app runs on iOS or Android.
 
-The `Clicked` attribute on the Button element wires up the button click event to a handler called `SayHelloButtonClicked`, which doesn’t exist yet. You'll write that next.
+The `Clicked` attribute on the Button element wires up the button click event to a handler called `SayHelloButtonClicked`, which doesn't exist yet. You'll write that next.
 
 ## Add Code to the Page
 Each XAML file is paired with a C# code file, sometimes called a "code-behind". Open up the code for the `MainPage.xaml` (or `HelloWorldAppPage.xaml`) file by expanding it in the Solution Explorer and selecting the `MainPage.xaml.cs` file.
@@ -115,7 +115,7 @@ using System;
 
 Because it's referenced in the `Clicked` attribute, this method will run when the button is pressed or tapped on the XAML page. First, the value of the textbox is assigned to the `name` variable, and then the `DisplayAlert` method is called to display a modal alert on the device.
 
-That’s it! Your new Xamarin app is ready to go. To test it, you can use a simulator, or you can use Xamarin Live Player to test it on a live device.
+That's it! Your new Xamarin app is ready to go. To test it, you can use a simulator, or you can use Xamarin Live Player to test it on a live device.
 
 ## Test Your Xamarin App on Your Own Device
 The quickest (and coolest) way to test a Xamarin project is with [Xamarin Live Player](https://www.xamarin.com/live), a small app you can download onto your own phone or device. After downloading the app, [pair it with Visual Studio](https://developer.xamarin.com/guides/cross-platform/live/install/). Then, pick Live Player as the device target.

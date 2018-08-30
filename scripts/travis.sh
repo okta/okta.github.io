@@ -10,6 +10,9 @@ fi
 # Run the npm install to pull in test dependencies
 fold npm_install npm install
 
+# Run markdown Lint check
+fold npm_markdown_lint npm run markdown-lint
+
 # Build site and Run tests
 fold npm_test npm test
 
@@ -26,5 +29,5 @@ then
   fi
 fi
 
-# Run Lint checker
-fold npm_lint npm run post-build-lint
+# Run /dist lint checker
+fold npm_post_build_lint npm run post-build-lint

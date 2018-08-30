@@ -9,15 +9,15 @@ tweets:
   - "Don't forget to secure your #aspnetcore #api using token authentication"
 ---
 
-API security can be complex. In many cases, just because you've built an API that you want to make public, it doesn’t mean that you want just anybody accessing it. In most cases, you want fine-grained control over who can access the API, but setting up that kind of user management can be a daunting task: you'd have to create your own authorization service that can create API credentials for your users and have the ability to exchange those API credentials for an access token using OAuth 2.0. I’ve got good news! With just a few lines of code, Okta can handle all the complicated and time-consuming security elements and let you concentrate on creating a stellar API. =)
+API security can be complex. In many cases, just because you've built an API that you want to make public, it doesn't mean that you want just anybody accessing it. In most cases, you want fine-grained control over who can access the API, but setting up that kind of user management can be a daunting task: you'd have to create your own authorization service that can create API credentials for your users and have the ability to exchange those API credentials for an access token using OAuth 2.0. I've got good news! With just a few lines of code, Okta can handle all the complicated and time-consuming security elements and let you concentrate on creating a stellar API. =)
 
 ## Understand the Basic Flow
 
 When handling authentication for a server-to-server API, you really only have two options: HTTP basic auth or OAuth 2.0 client credentials.
 
-Because OAuth 2.0 is the most popular way to secure API services like the one we’ll be building today (and the only one that uses token authentication), we’ll be using that.
+Because OAuth 2.0 is the most popular way to secure API services like the one we'll be building today (and the only one that uses token authentication), we'll be using that.
 
-With OAuth 2.0 client credentials, authenticating a client app is two-step process: first, the client sends its API credentials (a client ID and secret) to an authorization server that returns an access token. Second, the client sends a request to the API with that access token and the API verifies it and either authorizes the call or rejects it with a `401 Unauthorized` response. In this tutorial, you'll use Okta to manage your OAuth 2.0 server and rely on Okta’s default authorization server to create access tokens using API credentials (aka: client credentials) also created by Okta.
+With OAuth 2.0 client credentials, authenticating a client app is two-step process: first, the client sends its API credentials (a client ID and secret) to an authorization server that returns an access token. Second, the client sends a request to the API with that access token and the API verifies it and either authorizes the call or rejects it with a `401 Unauthorized` response. In this tutorial, you'll use Okta to manage your OAuth 2.0 server and rely on Okta's default authorization server to create access tokens using API credentials (aka: client credentials) also created by Okta.
 
 ## Install .NET Core 2.0
 For this tutorial, you'll be using version 2.0 of the .NET Core framework to create a .NET Core MVC application that will be the client, and a .NET core Web API that the client will call. To make sure you have .NET Core 2.0 installed, you can open a command window and run:
@@ -35,7 +35,7 @@ I will be running everything from Visual Studio Code, but it can easily be done 
 In the folder where you want to keep source code, create a folder called `webapi-okta-example` and change into that directory.
 
 ```bash
-mkdir webapi-okta-example 
+mkdir webapi-okta-example
 cd webapi-okta-example
 ```
 
@@ -85,7 +85,7 @@ On the API Sample App's general settings, you will see the Client Credentials bo
 
 {% img blog/webapi-token-auth/ApplicationGeneralSettings.png alt:"General Settings Screen" width:"800" %}{: .center-image }
 
->For each client that you’ll want to have access to the API, you’ll need to create an Okta application for it, and give it the Client ID and Client Secret.
+>For each client that you'll want to have access to the API, you'll need to create an Okta application for it, and give it the Client ID and Client Secret.
 
 ## Set Up Your App To Use Okta Client Credentials
 
@@ -101,10 +101,10 @@ In this case, the client of the API is the ASP.NET MVC application. Open the `ap
       "Microsoft": "Information"
     }
   },
-  "Okta": { 
-    "TokenUrl": "https://{yourOktaDomain}/oauth2/default/v1/token", 
-    "ClientId": "{yourClientId}", 
-    "ClientSecret": "{yourClientSecret}" 
+  "Okta": {
+    "TokenUrl": "https://{yourOktaDomain}/oauth2/default/v1/token",
+    "ClientId": "{clientId}",
+    "ClientSecret": "{clientSecret}"
   }
 }
 ```
@@ -191,7 +191,7 @@ private class OktaToken
 
   [JsonProperty(PropertyName = "expires_in")]
   public int ExpiresIn { get; set; }
-  
+
   public DateTime ExpiresAt { get; set; }
 
   public string Scope { get; set; }
@@ -199,11 +199,11 @@ private class OktaToken
   [JsonProperty(PropertyName = "token_type")]
   public string TokenType { get; set; }
 
-  public bool IsValidAndNotExpiring 
-  { 
-    get 
+  public bool IsValidAndNotExpiring
+  {
+    get
     {
-      return !String.IsNullOrEmpty(this.AccessToken) && 
+      return !String.IsNullOrEmpty(this.AccessToken) &&
 this.ExpiresAt > DateTime.UtcNow.AddSeconds(30);
     }
   }
@@ -224,14 +224,14 @@ private async Task<OktaToken> GetNewAccessToken()
   var client_id = this.oktaSettings.Value.ClientId;
   var client_secret = this.oktaSettings.Value.ClientSecret;
   var clientCreds = System.Text.Encoding.UTF8.GetBytes($"{client_id}:{client_secret}");
-  client.DefaultRequestHeaders.Authorization = 
+  client.DefaultRequestHeaders.Authorization =
   	new AuthenticationHeaderValue("Basic", System.Convert.ToBase64String(clientCreds));
 
   var postMessage = new Dictionary<string, string>();
   postMessage.Add("grant_type", "client_credentials");
   postMessage.Add("scope", "access_token");
   var request = new HttpRequestMessage(HttpMethod.Post, this.oktaSettings.Value.TokenUrl)
-  { 
+  {
     Content = new FormUrlEncodedContent(postMessage)
   };
 
@@ -294,14 +294,14 @@ namespace app.Services
       var client_id = this.oktaSettings.Value.ClientId;
       var client_secret = this.oktaSettings.Value.ClientSecret;
       var clientCreds = System.Text.Encoding.UTF8.GetBytes($"{client_id}:{client_secret}");
-      client.DefaultRequestHeaders.Authorization = 
+      client.DefaultRequestHeaders.Authorization =
       	new AuthenticationHeaderValue("Basic", System.Convert.ToBase64String(clientCreds));
 
       var postMessage = new Dictionary<string, string>();
       postMessage.Add("grant_type", "client_credentials");
       postMessage.Add("scope", "access_token");
       var request = new HttpRequestMessage(HttpMethod.Post, this.oktaSettings.Value.TokenUrl)
-      { 
+      {
         Content = new FormUrlEncodedContent(postMessage)
       };
 
@@ -327,7 +327,7 @@ namespace app.Services
 
       [JsonProperty(PropertyName = "expires_in")]
       public int ExpiresIn { get; set; }
-      
+
       public DateTime ExpiresAt { get; set; }
 
       public string Scope { get; set; }
@@ -335,9 +335,9 @@ namespace app.Services
       [JsonProperty(PropertyName = "token_type")]
       public string TokenType { get; set; }
 
-      public bool IsValidAndNotExpiring 
-      { 
-        get 
+      public bool IsValidAndNotExpiring
+      {
+        get
         {
           return !String.IsNullOrEmpty(this.AccessToken) && t
 his.ExpiresAt > DateTime.UtcNow.AddSeconds(30);
@@ -472,7 +472,7 @@ The API is not receiving or doing anything to validate the access token yet, so 
 
 ## Get the API to Validate the Access Token
 
-There are two main ways to validate the access token: call the Okta API's `introspect` endpoint, or validate the token locally. ASP.NET already has some JWT validation stuff built in. Calling the Okta API has the advantage of being very specific, and most secure way. It does have the disadvantage that you’ll need to make another API call. Using the local JWT validation built in to .NET means you don’t have to call the API, but is less secure. For the purposes of the demo, it’s secure enough, so you that here. In the `ConfigureServices()` method of the API project add the following _before_ the `services.AddMvc();` line.
+There are two main ways to validate the access token: call the Okta API's `introspect` endpoint, or validate the token locally. ASP.NET already has some JWT validation stuff built in. Calling the Okta API has the advantage of being very specific, and most secure way. It does have the disadvantage that you'll need to make another API call. Using the local JWT validation built in to .NET means you don't have to call the API, but is less secure. For the purposes of the demo, it's secure enough, so you that here. In the `ConfigureServices()` method of the API project add the following _before_ the `services.AddMvc();` line.
 
 ```cs
 services.AddAuthentication(options =>

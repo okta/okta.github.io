@@ -6,7 +6,7 @@ description: "This tutorial will show you how to build a Spring Boot API and an 
 tags: [spring boot, java, pwa, progressive web app, ionic, typescript, ios, android]
 ---
 
-You already know that building APIs with Spring Boot is incredibly easy. But, your API isn’t complete without a UI, right? Well, building UIs with Ionic is pretty easy too, especially if you know Angular!
+You already know that building APIs with Spring Boot is incredibly easy. But, your API isn't complete without a UI, right? Well, building UIs with Ionic is pretty easy too, especially if you know Angular!
 
 Ionic is an open source framework designed to help you build mobile applications with web technologies. It started out as a framework based on AngularJS. Ionic 3.0 was recently released, with support for Angular 4, TypeScript 2.2, and lazy loading. When developing an Ionic app, you'll use Angular and have access to native APIs via Ionic Native and Apache Cordova. This means you can develop slick-looking UIs using the technologies you know and love: HTML, CSS, and TypeScript.
 
@@ -356,8 +356,8 @@ Update `beer.html` to display the image retrieved:
 Start the Spring Boot app in one terminal window and run `ionic serve` in another. Open `http://localhost:8100` in your browser. Click on the Beer icon, and you'll likely see an error in your browser.
 
 ```
-Error: Uncaught (in promise): Error: StaticInjectorError[HttpClient]: 
-  StaticInjectorError[HttpClient]: 
+Error: Uncaught (in promise): Error: StaticInjectorError[HttpClient]:
+  StaticInjectorError[HttpClient]:
     NullInjectorError: No provider for HttpClient!
 ```
 
@@ -762,7 +762,7 @@ To emulate or deploy to an Android device, you'll first need to install [Android
 **If you've just installed Android Studio, make sure to open it to complete the installation.**
 
 To deploy to the Android emulator, run `ionic cordova emulate android`. This will install Android support and display an error if you don't have any AVD (Android Virtual Device) images.
- 
+
 ```
 (node:9300) UnhandledPromiseRejectionWarning: CordovaError: No emulator images (avds) found.
 1. Download desired System Image by running: /Users/mraible/Library/Android/sdk/tools/android sdk

@@ -16,7 +16,6 @@ When your application needs to authenticate the user, it will need to redirect t
 To learn more about how this flow works under the hood, please see our [Authentication Guide](/authentication-guide/implementing-authentication/auth-code).
 
 ## Prerequisites
-If you do not already have a **Developer Edition Account**, you can create one at [https://developer.okta.com/signup/](https://developer.okta.com/signup/).
 
 ### Add an OpenID Connect Client
 * Log into the Okta Developer Dashboard, click **Applications** then **Add Application**.

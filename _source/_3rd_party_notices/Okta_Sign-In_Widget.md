@@ -443,7 +443,7 @@ COPYRIGHT © 2015 DAVID DESANDRO
 
 Permission is hereby granted, free of charge, to any person obtaining a
 copy of this software and associated documentation files (the
-“Software”), to deal in the Software without restriction, including
+"Software"), to deal in the Software without restriction, including
 without limitation the rights to use, copy, modify, merge, publish,
 distribute, sublicense, and/or sell copies of the Software, and to
 permit persons to whom the Software is furnished to do so, subject to
@@ -452,7 +452,7 @@ the following conditions:
 The above copyright notice and this permission notice shall be included
 in all copies or substantial portions of the Software.
 
-THE SOFTWARE IS PROVIDED “AS IS”, WITHOUT WARRANTY OF ANY KIND, EXPRESS
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS
 OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
 IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY
@@ -568,7 +568,7 @@ COPYRIGHT © 2015 DAVID DESANDRO
 
 Permission is hereby granted, free of charge, to any person obtaining a
 copy of this software and associated documentation files (the
-“Software”), to deal in the Software without restriction, including
+"Software"), to deal in the Software without restriction, including
 without limitation the rights to use, copy, modify, merge, publish,
 distribute, sublicense, and/or sell copies of the Software, and to
 permit persons to whom the Software is furnished to do so, subject to
@@ -577,7 +577,7 @@ the following conditions:
 The above copyright notice and this permission notice shall be included
 in all copies or substantial portions of the Software.
 
-THE SOFTWARE IS PROVIDED “AS IS”, WITHOUT WARRANTY OF ANY KIND, EXPRESS
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS
 OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
 IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY
@@ -677,7 +677,7 @@ _jQuery.placeholder_
 
   |VERSION (IF ANY):||
   |-
-  |BRIEF DESCRIPTION:|   A jQuery plugin that enables HTML5 placeholder behavior for browsers that aren’t trying hard enough yet.|
+  |BRIEF DESCRIPTION:|   A jQuery plugin that enables HTML5 placeholder behavior for browsers that aren't trying hard enough yet.|
   LICENSE              MIT
 
 COPYRIGHT MATHIAS BYNENS <HTTP://MATHIASBYNENS.BE/>
@@ -735,7 +735,7 @@ _q.js_
 
   |VERSION (IF ANY):||
   |-
-  |BRIEF DESCRIPTION:|   If a function cannot return a value or throw an exception without blocking, it can return a promise instead. A promise is an object that represents the return value or the thrown exception that the function may eventually provide. A promise can also be used as a proxy for a remote object to overcome latency. On the first pass, promises can mitigate the “Pyramid of Doom”: the situation where code marches to the right faster than it marches forward.|
+  |BRIEF DESCRIPTION:|   If a function cannot return a value or throw an exception without blocking, it can return a promise instead. A promise is an object that represents the return value or the thrown exception that the function may eventually provide. A promise can also be used as a proxy for a remote object to overcome latency. On the first pass, promises can mitigate the "Pyramid of Doom": the situation where code marches to the right faster than it marches forward.|
   LICENSE              MIT
 
 COPYRIGHT 2009–2014 KRISTOPHER MICHAEL KOWAL. ALL RIGHTS RESERVED.
@@ -869,7 +869,7 @@ TECHNOLOGY, (C) FOR ANY LOST PROFITS OR REVENUES, OR FOR ANY INDIRECT,
 SPECIAL, INCIDENTAL, CONSEQUENTIAL OR PUNITIVE DAMAGES, WHETHER OR NOT A
 OKTA HAS BEEN ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-IN NO EVENT WILL OKTA NOR ITS SUPPLIER’S AGGREGATE AND CUMULATIVE
+IN NO EVENT WILL OKTA NOR ITS SUPPLIER'S AGGREGATE AND CUMULATIVE
 LIABILITY FOR ANY CLAIMS ARISING OUT OF OR RELATED TO OPEN SOURCE
 SOFTWARE EXCEED ONE HUNDRED DOLLARS ($100).
 

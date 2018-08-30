@@ -6,12 +6,12 @@ description: "Learn how to securely store, update, and display user data in a si
 tags: [node, express, oauth, user management]
 tweets:
  - "New blog live! Simple, secure way to store, update, and display user data in your #Node #ExpressJS app."
- - "Ever wonder how to store and work with user data securely in #expressjs? We’ve got you covered! #node"
+ - "Ever wonder how to store and work with user data securely in #expressjs? We've got you covered! #node"
 ---
 
-If you're building a non-trivial website, chances are you'll want some way to keep track of users. This can be quite complex and require a good deal of infrastructure, but one of the most secure and scalable ways also is one of the easiest. Using an OAuth 2.0 provider allows you to offload these tasks to an external provider, making your life as a developer so much simpler.
+If you're building a non-trivial website, chances are you'll want some way to keep track of users. This can be quite complex and require a good deal of infrastructure, but one of the most secure and scalable ways is also one of the easiest. Using an OAuth 2.0 provider allows you to offload these tasks to an external provider, making your life as a developer so much simpler.
 
-When using an OAuth provider, it’s simple to sign up and maintain users securely, but usually the only information you have about your users is their name and email address. This leaves you having to keep a separate database of information about your users, but isn't that part of what you were trying to avoid?
+When using an OAuth provider, it's simple to sign up and maintain users securely, but usually the only information you have about your users is their name and email address. This leaves you having to keep a separate database of information about your users, but isn't that part of what you were trying to avoid?
 
 Luckily, there's a better way! Using Okta, you can not only connect users to your app, you can also store as much extra metadata as you'd like about your users. What site have you logged into recently that doesn't give you the option of changing your profile information (name, date of birth, avatar, etc.)? There aren't many these days.
 
@@ -21,7 +21,7 @@ In this post, I'll show you how to create an app in Node that provides a dashboa
 
 Okta is a flexible service that makes it super easy for developers to connect users to all kinds of apps. Okta handles login, logout, registration, multi-factor authentication, as well as storing user information. You also get an amazing admin experience that lets you get up and running in a few minutes but can still be configured to your heart's desire! From the developer console, you can disable users, create groups of users, edit user profiles, create admin tokens, require certain regions of users to use multi-factor authentication, and so much more.
 
-I'll be walking you through the few settings you need to get started in Okta, and the code you'll need to get a Node app up and running. If you don't already have an Okta account, the first step is to [sign up for a forever-free developer account](https://developer.okta.com/signup/). Once you have an account you'll get an organization URL that looks something like `https://dev-123456.oktapreview.com`. You'll use that later on in your Node app, and you'll also need it to configure settings for your users.
+I'll be walking you through the few settings you need to get started in Okta, and the code you'll need to get a Node app up and running. If you don't already have an Okta account, the first step is to [sign up for a forever-free developer account](https://developer.okta.com/signup/). Once you have an account you'll get an organization URL (e.g. `https://{yourOktaDomain}`). You'll use that later on in your Node app, and you'll also need it to configure settings for your users.
 
 ## Create a Simple Node Application with Express
 
@@ -52,7 +52,7 @@ If none of the above works for you, you can use [this link](https://github.com/o
 
 ## Collect Environment Variables
 
-The starter app uses Okta for authentication and requires a few environment variables before you can run it, which you'll collect from your Okta Dashboard (the URL from above that looked like `https://dev-123456.oktapreview.com`). I'll also have you create a new API token for fetching and modifying user profiles. If you already have the sample app working (e.g. you followed along on the previous post), then you can [skip ahead to create a new API token](#user_profile_token).
+The starter app uses Okta for authentication and requires a few environment variables before you can run it, which you'll collect from your Okta Dashboard (e.g. `https://{yourOktaDomain}`). I'll also have you create a new API token for fetching and modifying user profiles. If you already have the sample app working (e.g. you followed along on the previous post), then you can [skip ahead to create a new API token](#user_profile_token).
 
 As you collect the variables, you'll need to save them in a file called `.env`, in the following format:
 
@@ -60,8 +60,8 @@ As you collect the variables, you'll need to save them in a file called `.env`, 
 ORG_URL=https://{yourOktaDomain}
 HOST_URL=http://localhost:3000
 APP_SECRET=123abc
-CLIENT_ID={yourClientId}
-CLIENT_SECRET={yourClientSecret}
+CLIENT_ID={clientId}
+CLIENT_SECRET={clientSecret}
 REGISTRATION_TOKEN={yourRegistrationAPIToken}
 USER_PROFILE_TOKEN={yourUserProfileAPIToken}
 ```
@@ -424,10 +424,10 @@ Okta also provides an API to allow you to manage user profile schemas server-sid
 If you'd like to learn more about Node and Secure User Management with Okta, I'd strongly encourage you to check out some of these articles, or browse the Okta developer blog:
 
 * [Simple Node Authentication](/blog/2018/04/24/simple-node-authentication) (used as a starting point for this tutorial)
-* [Use Okta (Instead of Local Storage) to Store Your User’s Data Securely](/blog/2018/01/23/replace-local-storage-with-okta-profile-attributes)
+* [Use Okta (Instead of Local Storage) to Store Your User's Data Securely](/blog/2018/01/23/replace-local-storage-with-okta-profile-attributes)
 * [Build User Registration with Node, React, and Okta](/blog/2018/02/06/build-user-registration-with-node-react-and-okta)
 * [Build Secure Node Authentication with Passport.js and OpenID Connect](/blog/2018/05/18/node-authentication-with-passport-and-oidc)
 * [Add Authentication to Any Web Page in 10 Minutes](/blog/2018/06/08/add-authentication-to-any-web-page-in-10-minutes)
 
-And as always, we’d love to hear from you. Hit us up with questions or feedback in the comments, or on Twitter [@oktadev](https://twitter.com/oktadev).
+And as always, we'd love to hear from you. Hit us up with questions or feedback in the comments, or on Twitter [@oktadev](https://twitter.com/oktadev).
 

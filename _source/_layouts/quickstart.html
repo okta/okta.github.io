@@ -7,12 +7,16 @@ js: quickstart
   <div class="PageContent-main" id="quickstart-body">
     <h1>{{ page.title }}</h1>
 
-    These quickstart instructions will help you integrate Okta into your existing front-end and/or backend application.
-    Please use the menus to pick your client and server technology to see a custom-tailored quickstart for your environment.
+    These quick start instructions will help you integrate Okta into your existing front-end and/or backend application.
+    Please use the menus to pick your client and server technology to see a custom-tailored quick start for your environment.
+
+    <h2 id="account">Create an Okta Account</h2>
+    <p>First things first &ndash; you need an <strong>Okta Developer Edition Account</strong>. Don't have one yet?</p>
+    <a href="https://developer.okta.com/signup/" class="Button--red">Create Free Account</a>
 
     <h2 id="client_setup">Client Setup</h2>
 
-    <p>First, let's add authentication to your client. (Already done? <a onclick="scrollToServer()" style="cursor: pointer;">Skip to server setup</a>)</p>
+    <p>Now, let's add authentication to your client. (Already done? <a onclick="scrollToServer()" style="cursor: pointer;">Skip to server setup</a>)</p>
 
     <div class="code-selector" id="client-selector">
       <h3>Client</h3>
@@ -37,6 +41,7 @@ js: quickstart
   </div>
 
   <div class="TableOfContents TableOfContentsPreload">
+    <a class="TableOfContents-item is-level2" style="display: block;" onclick="scrollToAccount()" id="account_link">Create an Okta Account</a>
      <a class="TableOfContents-item is-level2" style="display: block;" onclick="scrollToClient()" id="client_setup_link">Client Setup</a>
      <a class="TableOfContents-item is-level2" style="display: block;" onclick="scrollToServer()" id="server_setup_link">Server Setup</a>
   </div>

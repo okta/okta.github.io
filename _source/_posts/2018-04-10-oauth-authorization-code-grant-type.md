@@ -5,7 +5,7 @@ author: aaronpk
 description: "The Authorization Code Grant Type is used by both web apps and native apps to get an access token after a user authorizes an app. This post is the first part of a series where we explore the frequently used OAuth 2.0 grant types."
 tags: [oauth]
 tweets:
-- "What is the #oauth2 Authorization Code Grant Type? Read @aaronpk’s article here:"
+- "What is the #oauth2 Authorization Code Grant Type? Read @aaronpk's article here:"
 - "Ever wondered exactly what the #oauth2 Authorization Code Grant Type was for? Now you can stop wondering! ;)"
 ---
 
@@ -41,7 +41,7 @@ https://authorization-server.com/auth
  &state=xcoiv98y2kd22vusuye3kch
 ```
 
-Here’s each query parameter explained:
+Here's each query parameter explained:
 
 * `response_type=code` - This tells the authorization server that the application is initiating the authorization code flow.
 * `client_id` - The public identifier for the application, obtained when the developer first registered the application.
@@ -77,7 +77,7 @@ The application makes a POST request to the service's token endpoint with the fo
 
 * `grant_type=authorization_code` - This tells the token endpoint that the application is using the Authorization Code grant type.
 * `code` - The application includes the authorization code it was given in the redirect.
-* `redirect_uri` - The same redirect URI that was used when requesting the code. Some APIs don’t require this parameter, so you’ll need to double check the documentation of the particular API you’re accessing.
+* `redirect_uri` - The same redirect URI that was used when requesting the code. Some APIs don't require this parameter, so you'll need to double check the documentation of the particular API you're accessing.
 * `client_id` - The application's client ID.
 * `client_secret` - The application's client secret. This ensures that the request to get the access token is made only from the application, and not from a potential attacker that may have intercepted the authorization code.
 
@@ -105,9 +105,9 @@ The Authorization Code flow is complete! The application now has an access token
 
 The Authorization Code flow is best used in web and mobile apps. Since the Authorization Code grant has the extra step of exchanging the authorization code for the access token, it provides an additional layer of security not present in the Implicit grant type.
 
-If you’re using the Authorization Code flow in a mobile app, or any other type of application that can’t store a client secret, then you should also use the [PKCE extension](https://www.oauth.com/oauth2-servers/pkce/), which provides protections against other attacks where the authorization code may be intercepted.
+If you're using the Authorization Code flow in a mobile app, or any other type of application that can't store a client secret, then you should also use the [PKCE extension](https://www.oauth.com/oauth2-servers/pkce/), which provides protections against other attacks where the authorization code may be intercepted.
 
-The code exchange step ensures that an attacker isn’t able to intercept the access token, since the access token is always sent via a secure backchannel between the application and the OAuth server.
+The code exchange step ensures that an attacker isn't able to intercept the access token, since the access token is always sent via a secure backchannel between the application and the OAuth server.
 
 ## Learn More About OAuth and Okta
 
@@ -115,5 +115,5 @@ You can learn more about OAuth 2.0 on [OAuth.com](https://www.oauth.com/), or ch
 * [Get Started with Spring Boot, OAuth 2.0, and Okta](/blog/2017/03/21/spring-boot-oauth)
 * [Token Authentication in ASP.NET Core 2.0 - A Complete Guide](/blog/2018/03/23/token-authentication-aspnetcore-complete-guide)
 * [Secure your SPA with Spring Boot and OAuth](/blog/2017/10/27/secure-spa-spring-boot-oauth)
-Or hit up [Okta’s OIDC/OAuth 2.0 API](/docs/api/resources/oidc) for specific information on how we support OAuth. And as always, follow us on Twitter [@oktadev](https://twitter.com/oktadev) for more great content.
+Or hit up [Okta's OIDC/OAuth 2.0 API](/docs/api/resources/oidc) for specific information on how we support OAuth. And as always, follow us on Twitter [@oktadev](https://twitter.com/oktadev) for more great content.
 

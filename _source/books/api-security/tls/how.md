@@ -12,9 +12,9 @@ book_section: "tls-how"
 
 When an SSL/TLS connection needs to be made between a client (a browser, or an application attempting to access an API) and a server (a web server, for example, or an API endpoint) it follows a number of steps. The TLS spec, published by the IETF Transport Layer Security Working Group, gives an overview of these steps.
 
-In <a href="#fig_tls_sequence_diagram" class="figref"></a> we show a visual representation of how the client or “sender” and server or “receiver” set up an SSL/TLS connection.
+In <a href="#fig_tls_sequence_diagram" class="figref"></a> we show a visual representation of how the client or "sender" and server or "receiver" set up an SSL/TLS connection.
 
-Let’s walk through the steps at a high level:
+Let's walk through the steps at a high level:
 
 **TCP Connection**
 
@@ -31,16 +31,16 @@ The SSL/TLS handshake takes place once a TCP connection is established.
 
 **ClientHello**
 
-The client sends a “ClientHello” message, which lists the versions of SSL/TLS the client is capable of, what ciphersuites it has available, and any compression types available.
+The client sends a "ClientHello" message, which lists the versions of SSL/TLS the client is capable of, what ciphersuites it has available, and any compression types available.
 
 <div class="break-before"></div>
 **ServerHello and Certificate Response**
 
-The server responds with the same information as the client, and sends the server’s certificate back to the client as well.
+The server responds with the same information as the client, and sends the server's certificate back to the client as well.
 
 **Certificate Verification**
 
-The client verifies that the certificate is valid, and also verifies that the server is authentic and not an impersonator conducting a man-in-the-middle attack. For more information about how certificate verification is accomplished, see “SSL/TLS Certificate Verification” later in this chapter.
+The client verifies that the certificate is valid, and also verifies that the server is authentic and not an impersonator conducting a man-in-the-middle attack. For more information about how certificate verification is accomplished, see "SSL/TLS Certificate Verification" later in this chapter.
 
 **ClientKeyExchange**
 

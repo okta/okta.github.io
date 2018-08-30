@@ -11,7 +11,7 @@ tweets:
 
 Securing server-to-server API services can be tricky. OAuth 2.0 is an excellent way to offload user authentication to another service, but what if there is no user to authenticate? In this article, I'll show you how you can use OAuth 2.0 outside the context of a user, in what is also known as the Client Credentials Flow.
 
-Instead of storing and managing API keys for your clients (other servers), you can use a third-party service to manage authorization for you. The way this works is that an API client sends a request to an OAuth server asking for an API token. That token is then sent from the API client to your API service along with their request. Once you have the client's token, you can verify its validity without needing to store any information about the client..
+Instead of storing and managing API keys for your clients (other servers), you can use a third-party service to manage authorization for you. The way this works is that an API client sends a request to an OAuth server asking for an API token. That token is then sent from the API client to your API service along with their request. Once you have the client's token, you can verify its validity without needing to store any information about the client.
 
 {% img blog/node-client-credentials/client-credentials-flow.png alt:"Client Credentials Flow" width:"600" %}{: .center-image }
 
@@ -31,11 +31,11 @@ In a way, this is like a driver's license or a passport. It's quite difficult to
 
 While similar in concept, a valid JWT would actually be far more difficult to forge. Someone with enough skill can create a convincing driver's license, but without the private key it could take a modern computer years to brute force a valid JWT signature. Tokens should also have an expiration. While configurable, a solid default is one hour. This means a client would need to request a new token every 60 minutes if it needs to make a new request to your API server. This is an extra layer of security in case your token is compromised. Who knows? Maybe there's a quantum computer out there that can recreate the signature within a couple hours.
 
-Now that you understand the basics of the OAuth 2.0 client credentials flow works, let’s build a Node API that uses Client Credentials and Okta.
+Now that you understand the basics of the OAuth 2.0 client credentials flow works, let's build a Node API that uses Client Credentials and Okta.
 
 ## What is Okta?
 
-In short, we make [identity management](https://developer.okta.com/product/user-management/) easier, more secure, and more scalable than what you’re used to. Okta is an API service that allows you to create, edit, and securely store user accounts and user account data, and connect them with one or more applications. Our API enables you to:
+In short, we make [identity management](https://developer.okta.com/product/user-management/) easier, more secure, and more scalable than what you're used to. Okta is an API service that allows you to create, edit, and securely store user accounts and user account data, and connect them with one or more applications. Our API enables you to:
 
 * [Authenticate](https://developer.okta.com/product/authentication/) and [authorize](https://developer.okta.com/product/authorization/) your users
 * Store data about your users
@@ -43,7 +43,7 @@ In short, we make [identity management](https://developer.okta.com/product/user-
 * Secure your application with [multi-factor authentication](https://developer.okta.com/use_cases/mfa/)
 * And much more! Check out our [product documentation](https://developer.okta.com/documentation/) for more information
 
-[Register for a forever-free developer account](https://developer.okta.com/signup/), and when you’re done, come back to learn more about building secure APIs in Node!
+[Register for a forever-free developer account](https://developer.okta.com/signup/), and when you're done, come back to learn more about building secure APIs in Node!
 ## Create a Basic Node API
 
 In order to get started, I'll show you how to create a basic API in Node. Node keeps a list of dependencies along with other metadata in a file called `package.json`.
@@ -116,7 +116,7 @@ That's it! To start it, type `npm run dev` in a terminal window. You can leave t
 
 Now to secure the app. This is where you need to set up an OAuth 2.0 service. Okta is a cloud-based service that allows developers to easily and securely store OAuth 2.0 tokens, user accounts, and user data, then connect them with one or multiple applications. Okta also provides libraries for many languages, including Node, to make their API very easy for a developer to integrate into a huge variety of apps.
 
-You can use Okta to quickly and easily set up server-to-server authentication. If you don't already have an account, [sign up for a free Okta Developer account](https://developer.okta.com/signup/). Once you register, you'll be given a unique Okta Org URL that looks similar to `https://dev-123456.oktapreview.com`.
+You can use Okta to quickly and easily set up server-to-server authentication. If you don't already have an account, [sign up for a free Okta Developer account](https://developer.okta.com/signup/). Once you register, you'll be given a unique Okta Org URL (e.g. `https://{yourOktaDomain}`) and an email to activate your new account.
 
 You'll need two parts in order to make client-to-server authentication work: an authorization server, and a test client/application.
 
@@ -154,7 +154,7 @@ Go ahead and create a `.env` file containing the issuer from your authorization 
 
 **.env**
 ```bash
-ISSUER=https://dev-123456.oktapreview.com/oauth2/abcdefg1234567
+ISSUER=https://{yourOktaDomain}/oauth2/abcdefg1234567
 DEFAULT_SCOPE=such_scope
 TEST_CLIENT_ID=client-id
 TEST_CLIENT_SECRET=client-secret

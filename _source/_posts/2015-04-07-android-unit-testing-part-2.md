@@ -1,13 +1,13 @@
 ---
 layout: blog_post
-title: Android Unit Testing Part II&#58; Escaping Dalvik’s Hold
+title: Android Unit Testing Part II&#58; Escaping Dalvik's Hold
 author: victor_ronin
 tags: [android, testing]
 redirect_from:
   - "/blog/2015-04-14-android-unit-testing-part-2"
 ---
 *This is the second of a four part series on Android Unit Testing. In
-these posts, we’ll walk through the key steps engineers should take
+these posts, we'll walk through the key steps engineers should take
 to make Android test fast by running them on JVM (versus running
 them on emulator).*
 
@@ -24,7 +24,7 @@ Virtual Machine, or [Dalvik](http://en.wikipedia.org/wiki/Dalvik_%28software%29)
 I have listed several good tutorials at the end of this post that
 illustrate exactly how this can be done, but they also include some
 details you may not yet need. So, use the tutorial links for details,
-but check out “My Summary” for a short overview of what you need to
+but check out "My Summary" for a short overview of what you need to
 do:
 
 ## My Summary
@@ -41,7 +41,7 @@ do:
     ~~~
 -   Modify the application Gradle file
 
-    Add the following code under `apply plugin: ‘com.android.application'`:
+    Add the following code under `apply plugin: 'com.android.application'`:
 
     ~~~ conf
     apply plugin: 'robolectric'
@@ -137,7 +137,7 @@ do:
 -   Create the configuration
 
     1.  Create a **gradle** configuration.
-    2.  Set “**Tests**” as a name.
+    2.  Set "**Tests**" as a name.
     3.  Choose the top gradle file as a project.
     4.  Type *test* in **Tasks**.
 
@@ -150,7 +150,7 @@ do:
 
     There are alternative ways to run the test on a JVM. For example,
     you can create a **JUnit** task and ensure that all your tests and
-    classes don’t touch any Android specific classes. However, this is
+    classes don't touch any Android specific classes. However, this is
     not easy, as you must design all your code with this restriction in
     mind.
 

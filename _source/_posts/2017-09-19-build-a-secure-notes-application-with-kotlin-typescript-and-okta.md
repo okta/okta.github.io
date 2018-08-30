@@ -6,11 +6,11 @@ description: "In this tutorial, you'll learn how to write a note-taking applicat
 tags: [kotlin, spring boot, typescript, angular, okta, authentication]
 ---
 
-I love my job as a developer advocate at Okta. I get to learn a lot, write interesting blog posts and create example apps with cool technologies like Kotlin, TypeScript, Spring Boot, and Angular, which I’m about to demo. When it comes to writing Hello World apps with authentication, I can whip one out in a few minutes. That isn't because I'm a particularly good programmer, it's because the languages, frameworks, tools, and platforms available to developers are impressive. 
+I love my job as a developer advocate at Okta. I get to learn a lot, write interesting blog posts and create example apps with cool technologies like Kotlin, TypeScript, Spring Boot, and Angular, which I'm about to demo. When it comes to writing Hello World apps with authentication, I can whip one out in a few minutes. That isn't because I'm a particularly good programmer, it's because the languages, frameworks, tools, and platforms available to developers are impressive.
 
-In this tutorial, I'll show you how to write a note-taking application in Kotlin and TypeScript - two of the [fastest growing languages of 2017](http://redmonk.com/sogrady/2017/06/08/language-rankings-6-17/). You'll use two popular frameworks, Spring Boot and Angular, to make development super fast. Along the way, I’ll show you a few tips and tricks from my favorite development IDE, IntelliJ IDEA. Finally, we’ll leverage Angular CLI and start.spring.io to generate application skeletons. 
+In this tutorial, I'll show you how to write a note-taking application in Kotlin and TypeScript - two of the [fastest growing languages of 2017](http://redmonk.com/sogrady/2017/06/08/language-rankings-6-17/). You'll use two popular frameworks, Spring Boot and Angular, to make development super fast. Along the way, I'll show you a few tips and tricks from my favorite development IDE, IntelliJ IDEA. Finally, we'll leverage Angular CLI and start.spring.io to generate application skeletons.
 
-As with any good example app, you’ll want to deploy it securely, so I'll show you how to do that using Okta's Identity APIs and our new Spring Boot starter. The Okta Spring Boot starter allows you to make your API into a resource server that can read and validate access tokens sent to it. The diagram below shows how a resource server fits into an OAuth architecture. 
+As with any good example app, you'll want to deploy it securely, so I'll show you how to do that using Okta's Identity APIs and our new Spring Boot starter. The Okta Spring Boot starter allows you to make your API into a resource server that can read and validate access tokens sent to it. The diagram below shows how a resource server fits into an OAuth architecture.
 
 {% img blog/kotlin-secure-notes/oauth-actors.png alt:"OAuth 2.0 Actors" width:"800" %}{: .center-image }
 
@@ -18,20 +18,20 @@ Phew! That's a lot of buzzwords for one article. Don't worry, I've confirmed it'
 
 ## Build a Notes API with Kotlin and Spring Boot
 
-Start building the API for your application by navigating your favorite browser to [start.spring.io](https://start.spring.io). Select Kotlin as your language, and choose Web, H2, JPA, Rest Repositories, and DevTools. You’ll notice in the screenshot below that I changed the group and artifact names too. Please use these same names, so your package and class names match this tutorial.
+Start building the API for your application by navigating your favorite browser to [start.spring.io](https://start.spring.io). Select Kotlin as your language, and choose Web, H2, JPA, Rest Repositories, and DevTools. You'll notice in the screenshot below that I changed the group and artifact names too. Please use these same names, so your package and class names match this tutorial.
 
 {% img blog/kotlin-secure-notes/start.spring.io.png alt:"start.spring.io" %}{: .center-image }
- 
-Click **Generate Project** and expand the zip file after downloading. If you don’t have IntelliJ IDEA installed, now’s a good time to [try it out](https://www.jetbrains.com/idea/). It’s a great IDE for Java, Kotlin, Groovy, TypeScript, JavaScript, HTML, and Sass/CSS. One of its killer features is the ability to copy/paste Java code into a Kotlin class and have it auto-converted to Kotlin on-the-fly!
 
-You can also turn on automatic-compilation-on-save and reap the benefits of Spring Boot’s DevTools that restart your app when files change.
+Click **Generate Project** and expand the zip file after downloading. If you don't have IntelliJ IDEA installed, now's a good time to [try it out](https://www.jetbrains.com/idea/). It's a great IDE for Java, Kotlin, Groovy, TypeScript, JavaScript, HTML, and Sass/CSS. One of its killer features is the ability to copy/paste Java code into a Kotlin class and have it auto-converted to Kotlin on-the-fly!
+
+You can also turn on automatic-compilation-on-save and reap the benefits of Spring Boot's DevTools that restart your app when files change.
 
 * Go to **Preferences > Build, Execution, Deployment > Compiler** and enable "Build project automatically"
 * Open the Action window:
   * Linux: CTRL+SHIFT+A
   * Mac: SHIFT+COMMAND+A
   * Windows: CTRL+ALT+SHIFT+/
-* Enter **Registry…** and enable `compiler.automake.allow.when.app.running`
+* Enter **Registry...** and enable `compiler.automake.allow.when.app.running`
 
 Start by creating a new `Note` entity in `src/main/kotlin/com/okta/developer/notes/NotesApplication.kt`.
 
@@ -48,7 +48,7 @@ data class Note(@Id @GeneratedValue var id: Long? = null,
                 var text: String? = null, var user: String? = null)
 ```
 
-Kotlin’s [data classes](https://kotlinlang.org/docs/reference/data-classes.html) are built to hold data. By adding the `data` keyword, your class will get `equals()`, `hashCode()`, `toString()`, and a `copy()` function. The `Type? = null` syntax means the arguments are nullable when creating a new instance of the class.
+Kotlin's [data classes](https://kotlinlang.org/docs/reference/data-classes.html) are built to hold data. By adding the `data` keyword, your class will get `equals()`, `hashCode()`, `toString()`, and a `copy()` function. The `Type? = null` syntax means the arguments are nullable when creating a new instance of the class.
 
 Create a `NotesRepository` for persisting the data in your notes. Add the following lines of code just below your `Note` entity.
 
@@ -59,7 +59,7 @@ interface NotesRepository : JpaRepository<Note, Long>
 
 The `extends` syntax differs from Java and is a lot more concise (a colon instead of `extends`).
 
-Create a `DataInitializer` bean that populates the database with some default data on startup. 
+Create a `DataInitializer` bean that populates the database with some default data on startup.
 
 ```kotlin
 @Component
@@ -75,9 +75,9 @@ class DataInitializer(val repository: NotesRepository) : ApplicationRunner {
 }
 ```
 
-This example shows constructor injection, but Kotlin also [supports field injection with `@Autowired`](https://stackoverflow.com/questions/35479631/how-to-use-spring-annotations-like-autowired-in-kotlin). 
+This example shows constructor injection, but Kotlin also [supports field injection with `@Autowired`](https://stackoverflow.com/questions/35479631/how-to-use-spring-annotations-like-autowired-in-kotlin).
 
-Start the app in your IDE using its Spring Boot tooling, or from the command line using `mvnw spring-boot:run`. If you’re on a Mac or Linux, you might need to use `./mvnw spring-boot:run`. 
+Start the app in your IDE using its Spring Boot tooling, or from the command line using `mvnw spring-boot:run`. If you're on a Mac or Linux, you might need to use `./mvnw spring-boot:run`.
 
 You should see the following printed to your console on startup.
 
@@ -87,7 +87,7 @@ Note(id=2, text=Note 2, user=user)
 Note(id=3, text=Note 3, user=user)
 ```
 
-I recommend [installing HTTPie](https://httpie.org/), a command-line HTTP client that is much easier to use than `curl`. Use HTTPie to query the `/notes` endpoint provided by Spring Data REST’s `@RepositoryRestResource`.
+I recommend [installing HTTPie](https://httpie.org/), a command-line HTTP client that is much easier to use than `curl`. Use HTTPie to query the `/notes` endpoint provided by Spring Data REST's `@RepositoryRestResource`.
 
 ```bash
 http localhost:8080/notes
@@ -118,7 +118,7 @@ class HomeController(val repository: NotesRepository) {
 }
 ```
 
-The `findAllByUser()` method doesn’t exist on `NotesRepository`, so you’ll need to add it. Thanks to Spring Data JPA, all you need to do is add the method definition to the interface, and it will handle generating the finder method in the implementation.
+The `findAllByUser()` method doesn't exist on `NotesRepository`, so you'll need to add it. Thanks to Spring Data JPA, all you need to do is add the method definition to the interface, and it will handle generating the finder method in the implementation.
 
 ```kotlin
 interface NotesRepository : JpaRepository<Note, Long> {
@@ -126,11 +126,11 @@ interface NotesRepository : JpaRepository<Note, Long> {
 }
 ```
 
-If you try to access this new endpoint, you’ll get an error that the `Principal` parameter is not defined.
+If you try to access this new endpoint, you'll get an error that the `Principal` parameter is not defined.
 
 ```bash
 $ http localhost:8080
-HTTP/1.1 500 
+HTTP/1.1 500
 Connection: close
 Content-Type: application/json;charset=UTF-8
 Date: Thu, 30 Nov 2017 17:04:01 GMT
@@ -156,7 +156,7 @@ Spring MVC throws a 500 error because it has no knowledge of a logged-in user. A
 </dependency>
 ```
 
-Restart the Maven process to download this new dependency and add it to the classpath. 
+Restart the Maven process to download this new dependency and add it to the classpath.
 
 If you navigate to http://localhost:8080 in your browser, you will see a basic authentication dialog. The command line will yield similar results.
 
@@ -170,19 +170,19 @@ If you navigate to http://localhost:8080 in your browser, you will see a basic a
 }
 ```
 
-The Spring Security starter creates a default user with username “user” and a password that changes every time you start the application. You can find this password in your terminal, similar to the one below.
+The Spring Security starter creates a default user with username "user" and a password that changes every time you start the application. You can find this password in your terminal, similar to the one below.
 
 ```
 Using default security password: 103c55b4-2760-4830-9bca-a06a87d384f9
 ```
 
-Change the user’s password so it’s the same every time by adding the following to `src/main/resources/application.properties`.
+Change the user's password so it's the same every time by adding the following to `src/main/resources/application.properties`.
 
 ```
 security.user.password=kotlin is fun!
 ```
 
-After the change, verify that this HTTPie command works. 
+After the change, verify that this HTTPie command works.
 
 ```bash
 $ http --auth user:'kotlin is fun!' localhost:8080
@@ -215,7 +215,7 @@ X-XSS-Protection: 1; mode=block
 ]
 ```
 
-The reason you don’t see the `user` property in the JSON above is because I added a `@JsonIgnore` annotation to the `Note` class.
+The reason you don't see the `user` property in the JSON above is because I added a `@JsonIgnore` annotation to the `Note` class.
 
 ```kotlin
 import com.fasterxml.jackson.annotation.JsonIgnore
@@ -226,7 +226,7 @@ data class Note(@Id @GeneratedValue var id: Long? = null,
                 @JsonIgnore var user: String? = null)
 ```
 
-To automatically add the username to a note when it’s created, add a `RepositoryEventHandler` that is invoked before creating the record.
+To automatically add the username to a note when it's created, add a `RepositoryEventHandler` that is invoked before creating the record.
 
 ```kotlin
 @Component
@@ -242,7 +242,7 @@ class AddUserToNote {
 }
 ```
 
-After adding the handler, saving your files, and waiting for your API to restart, you’ll be able to run the following commands with wild success. 
+After adding the handler, saving your files, and waiting for your API to restart, you'll be able to run the following commands with wild success.
 
 ```bash
 http --auth user:'kotlin is fun!' POST localhost:8080/notes text='Note 4'
@@ -250,21 +250,21 @@ http --auth user:'kotlin is fun!' PUT localhost:8080/notes/4 text='Remember the 
 http --auth user:'kotlin is fun!' DELETE localhost:8080/notes/4
 ```
 
-Your API works and is locked down, but you still only have one user. Rather than spending time setting up database tables and encrypting passwords, you can use Okta’s APIs to manage, authenticate, and authorize your users securely. To get started with  Okta, [sign up for a  free-forever developer account](https://developer.okta.com/signup/).  
+Your API works and is locked down, but you still only have one user. Rather than spending time setting up database tables and encrypting passwords, you can use Okta's APIs to manage, authenticate, and authorize your users securely. To get started with  Okta, [sign up for a  free-forever developer account](https://developer.okta.com/signup/).
 
 ## The Okta Spring Boot Starter
 
-Okta provides a Spring Boot starter that integrates with Spring Security and its OAuth 2.0 support. Replace the Spring Security starter with the Okta Spring Security starter. 
+Okta provides a Spring Boot starter that integrates with Spring Security and its OAuth 2.0 support. Replace the Spring Security starter with the Okta Spring Security starter.
 
 ```xml
 <dependency>
       <groupId>com.okta.spring</groupId>
       <artifactId>okta-spring-security-starter</artifactId>
       <version>0.1.0</version>
-</dependency>    
+</dependency>
 ```
 
-You’ll also need to upgrade the OAuth library used by Spring Security to the latest version.
+You'll also need to upgrade the OAuth library used by Spring Security to the latest version.
 
 ```xml
 <dependencyManagement>
@@ -301,7 +301,7 @@ The Okta Spring Security starter expects you to have a custom claim called `grou
 
 ### Add an OpenID Connect Application
 
-Navigate to **Applications** and click on **Add Application**. Select Single Page App (SPA) and click **Next**. Give the application a name (e.g. “My OIDC App”) and specify `http://localhost:4200` as a Login redirect URI. Your upcoming Angular client will use this value. Click **Done** and admire your handiwork!
+Navigate to **Applications** and click on **Add Application**. Select Single Page App (SPA) and click **Next**. Give the application a name (e.g. "My OIDC App") and specify `http://localhost:4200` as a Login redirect URI. Your upcoming Angular client will use this value. Click **Done** and admire your handiwork!
 
 {% img blog/kotlin-secure-notes/my-oidc-app.png alt:"My OIDC App" width:"700" %}{: .center-image }
 
@@ -334,18 +334,18 @@ class NotesApplication {
 fun main(args: Array<String>) {
     SpringApplication.run(NotesApplication::class.java, *args)
 }
-…
+...
 ```
 
 You can see the final version of this file [on GitHub](https://github.com/oktadeveloper/okta-kotlin-typescript-notes-example/blob/master/server/src/main/kotlin/com/okta/developer/notes/NotesApplication.kt).
 
-I hope you’ve enjoyed this quick tour of Kotlin and saw how its concise syntax can be a lot of fun. In May 2017, Kotlin was announced as an [officially supported language](https://blog.jetbrains.com/kotlin/2017/05/kotlin-on-android-now-official/) on Android, giving the language quite a bit of attention. You can learn more about Kotlin on [kotlinlang.org](https://kotlinlang.org/).
+I hope you've enjoyed this quick tour of Kotlin and saw how its concise syntax can be a lot of fun. In May 2017, Kotlin was announced as an [officially supported language](https://blog.jetbrains.com/kotlin/2017/05/kotlin-on-android-now-official/) on Android, giving the language quite a bit of attention. You can learn more about Kotlin on [kotlinlang.org](https://kotlinlang.org/).
 
 ## Build an Angular UI with TypeScript and Angular CLI
 
 [Angular CLI](https://cli.angular.io/) is a convenient way to create Angular applications. It generates a project skeleton, installs all the dependencies, and configures Webpack to compile TypeScript and optimize for production.
 
-Install Angular CLI using [Facebook’s Yarn](https://yarnpkg.com).
+Install Angular CLI using [Facebook's Yarn](https://yarnpkg.com).
 
 ```bash
 yarn add global @angular/cli@1.5.5
@@ -359,9 +359,9 @@ Then create a new project using its `ng` command.
 ng new client
 ```
 
-It takes a minute or two to install all the dependencies. After it finishes, cd into the `client` directory. You can run `ng serve` to view the app, or `ng test` to run unit tests. If you want to verify that the end-to-end tests pass, run `ng e2e`. 
+It takes a minute or two to install all the dependencies. After it finishes, cd into the `client` directory. You can run `ng serve` to view the app, or `ng test` to run unit tests. If you want to verify that the end-to-end tests pass, run `ng e2e`.
 
-Create a service and component using the `generate` (alias: `g`) command. You can use `s` as an alias for `service` and `c` as an alias for `component`. 
+Create a service and component using the `generate` (alias: `g`) command. You can use `s` as an alias for `service` and `c` as an alias for `component`.
 
 ```bash
 ng g service note
@@ -377,7 +377,7 @@ mkdir -p src/app/shared/note
 mv src/app/note.service.* src/app/shared/note
 ```
 
-At this point, I’d recommend opening your Angular client in IntelliJ IDEA. It has excellent TypeScript support and will auto-import classes for you, just like it does for Java and Kotlin.
+At this point, I'd recommend opening your Angular client in IntelliJ IDEA. It has excellent TypeScript support and will auto-import classes for you, just like it does for Java and Kotlin.
 
 Add the `NoteService` to the `providers` list in `client/src/app/app.module.ts`. Notice that Angular CLI has already added the generated components to the `declarations` list.
 
@@ -420,9 +420,9 @@ export class NoteService {
 }
 ```
 
-**TIP:** If you’re using IntelliJ IDEA, I recommend you install the [Angular 2 TypeScript Live Templates](https://plugins.jetbrains.com/plugin/8395-angular-2-typescript-live-templates). They drastically reduce the amount of code you have to write with [several code-generation shortcuts](https://github.com/MrZaYaC/ng2-webstorm-snippets/blob/master/README.md#typescript-angular-snippets).
+**TIP:** If you're using IntelliJ IDEA, I recommend you install the [Angular 2 TypeScript Live Templates](https://plugins.jetbrains.com/plugin/8395-angular-2-typescript-live-templates). They drastically reduce the amount of code you have to write with [several code-generation shortcuts](https://github.com/MrZaYaC/ng2-webstorm-snippets/blob/master/README.md#typescript-angular-snippets).
 
-In `client/src/app/notes-list/note-list.component.ts`, add a dependency on `NoteService` and get all the user’s notes when the component loads.
+In `client/src/app/notes-list/note-list.component.ts`, add a dependency on `NoteService` and get all the user's notes when the component loads.
 
 ```typescript
 import { NoteService } from '../shared/note/note.service';
@@ -452,9 +452,9 @@ Replace the HTML in `client/src/app/note-list/note-list.component.html` with a f
 ```
 {% endraw %}
 
-If you try to make things work at this point, you won’t be able to access your API because it expects you to send an access token in an `Authorization` header.
+If you try to make things work at this point, you won't be able to access your API because it expects you to send an access token in an `Authorization` header.
 
-Install the Okta Sign-In Widget to authenticate using the “My OIDC” app you already created and get an access token.
+Install the Okta Sign-In Widget to authenticate using the "My OIDC" app you already created and get an access token.
 
 ```
 yarn add @okta/okta-signin-widget
@@ -550,7 +550,7 @@ export class OktaAuthService {
 
 **NOTE:** I realize this is quite a bit of code to render a sign-in form. The good news is you can simplify things by using the [Okta Angular SDK](https://www.npmjs.com/package/@okta/okta-angular).
 
-Create an `OktaAuthGuard` in `client/src/app/shared/okta/okta.guard.ts`. You’ll use this to  *guard* routes so they can’t be activated if the user isn’t authenticated.
+Create an `OktaAuthGuard` in `client/src/app/shared/okta/okta.guard.ts`. You'll use this to  *guard* routes so they can't be activated if the user isn't authenticated.
 
 ```typescript
 import { Injectable } from '@angular/core';
@@ -688,7 +688,7 @@ In the same directory, update `login.component.html` to have a div for the sign-
 <div id="okta-signin-container"></div>
 ```
 
-Modify `client/src/app/app.component.html` to show the user’s name and add a `<router-outlet>` for rendering all the routes.
+Modify `client/src/app/app.component.html` to show the user's name and add a `<router-outlet>` for rendering all the routes.
 
 {% raw %}
 ```html
@@ -736,7 +736,7 @@ After making all these changes, you should be able to fire up http://localhost:4
 
 {% img blog/kotlin-secure-notes/signin-widget.png alt:"Sign-In Widget" %}{: .center-image }
 
-After signing in, you should see the notes list, but no records in it. 
+After signing in, you should see the notes list, but no records in it.
 
 {% img blog/kotlin-secure-notes/notes-list-plain.png alt:"Empty Notes List" %}{: .center-image }
 
@@ -748,7 +748,7 @@ You can see the results in [the GitHub repository for this article](https://gith
 * [client/src/app/note-detail/note-detail.component.ts](https://github.com/oktadeveloper/okta-kotlin-typescript-notes-example/blob/master/client/src/app/note-detail/note-detail.component.ts)
 * [client/src/app/note-detail/note-detail.component.html](https://github.com/oktadeveloper/okta-kotlin-typescript-notes-example/blob/master/client/src/app/note-detail/note-detail.component.html)
 
-The final [client/src/app/app.module.ts](https://github.com/oktadeveloper/okta-kotlin-typescript-notes-example/blob/master/client/src/app/app.module.ts) shows all the imports needed for Angular Material. Its stylesheets are referenced in [client/src/styles.css](https://github.com/oktadeveloper/okta-kotlin-typescript-notes-example/blob/master/client/src/styles.css#L3). If you copy the code from these files into your project, you’ll have a working notes app with authentication!
+The final [client/src/app/app.module.ts](https://github.com/oktadeveloper/okta-kotlin-typescript-notes-example/blob/master/client/src/app/app.module.ts) shows all the imports needed for Angular Material. Its stylesheets are referenced in [client/src/styles.css](https://github.com/oktadeveloper/okta-kotlin-typescript-notes-example/blob/master/client/src/styles.css#L3). If you copy the code from these files into your project, you'll have a working notes app with authentication!
 
 The screenshots below show the fruits of my labor.
 
@@ -758,21 +758,21 @@ The screenshots below show the fruits of my labor.
 
 {% img blog/kotlin-secure-notes/edit-note.png alt:"Edit Note" width:"600" %}{: .center-image }
 
-**NOTE:** There’s one issue with Okta’s Sign-In Widget I still haven’t fully figured out. Not every time, but everyone once it in a while, it requires me to move my mouse or click on the screen to make the notes list load after logging in. I opened [an issue](https://github.com/okta/okta-signin-widget/issues/268) for this and tried the suggested solution, but it doesn’t work 100% of the time.
+**NOTE:** There's one issue with Okta's Sign-In Widget I still haven't fully figured out. Not every time, but everyone once it in a while, it requires me to move my mouse or click on the screen to make the notes list load after logging in. I opened [an issue](https://github.com/okta/okta-signin-widget/issues/268) for this and tried the suggested solution, but it doesn't work 100% of the time.
 
-You now know how to build an Angular client with TypeScript, using Okta’s Sign-In Widget for authentication. 
+You now know how to build an Angular client with TypeScript, using Okta's Sign-In Widget for authentication.
 
-If you’re ambitious, you could even turn the client into a progressive web app (PWA), enabling offline access and faster load times. There are a couple of posts about developing PWAs on the this blog if you’re interested in learning more. 
+If you're ambitious, you could even turn the client into a progressive web app (PWA), enabling offline access and faster load times. There are a couple of posts about developing PWAs on the this blog if you're interested in learning more.
 
 * [Build Your First Progressive Web Application with Angular and Spring Boot](/blog/2017/05/09/progressive-web-applications-with-angular-and-spring-boot)
 * [Add Authentication to Your Angular PWA](/blog/2017/06/13/add-authentication-angular-pwa)
 * [The Ultimate Guide to Progressive Web Applications](/blog/2017/07/20/the-ultimate-guide-to-progressive-web-applications)
 
-My good buddy [Josh Long](https://twitter.com/starbuxman) and I recently hosted a live-coding session where we developed a Spring Boot microservices architecture on the backend and an Angular PWA on the front-end. The code we wrote is very similar to the code in this article. You can check the video out for reference [on YouTube](https://www.youtube.com/watch?v=yHtSwGn7doc). 
+My good buddy [Josh Long](https://twitter.com/starbuxman) and I recently hosted a live-coding session where we developed a Spring Boot microservices architecture on the backend and an Angular PWA on the front-end. The code we wrote is very similar to the code in this article. You can check the video out for reference [on YouTube](https://www.youtube.com/watch?v=yHtSwGn7doc).
 
 ## Deploy to Production
 
-It's cool to see an application running locally, but it's even better to see it up and running in production. 
+It's cool to see an application running locally, but it's even better to see it up and running in production.
 
 My platform of choice for deployment is Cloud Foundry. To get started, you'll need to [create](https://account.run.pivotal.io/z/uaa/sign-up) an account and install the command line tools.
 
@@ -781,13 +781,13 @@ brew tap cloudfoundry/tap && brew install cf-cli
 cf login -a api.run.pivotal.io
 ```
 
-Before deploying, you’ll need to create a couple of files to build the application artifacts and tell Cloud Foundry where everything lives. Create a `manifest.yml` file in the root directory and specify where the files to upload are. Note that this file expects your apps to be in the same directory, with Spring Boot in a `server` subdirectory and the Angular app in a `client` subdirectory.
+Before deploying, you'll need to create a couple of files to build the application artifacts and tell Cloud Foundry where everything lives. Create a `manifest.yml` file in the root directory and specify where the files to upload are. Note that this file expects your apps to be in the same directory, with Spring Boot in a `server` subdirectory and the Angular app in a `client` subdirectory.
 
 ```yaml
 ---
 applications:
 
-- name: notes-server 
+- name: notes-server
   host: notes-by-kotlin
   path: ./server/target/notes-0.0.1-SNAPSHOT.jar
   env :
@@ -840,11 +840,11 @@ notes-client   started           1/1         1G       1G     notes-with-typescri
 notes-server   started           1/1         1G       1G     notes-by-kotlin.cfapps.io
 ```
 
-When you try to log in, you’ll get a CORS error.
+When you try to log in, you'll get a CORS error.
 
 {% img blog/kotlin-secure-notes/cf-client-login-error.png alt:"Cloud Foundry Login" %}{: .center-image }
 
-To fix this, log in to your Okta dashboard once more and navigate to **API** > **Trusted Origins**. Add `https://notes-with-typescript.cfapps.io` as an Origin URL with CORs support. You’ll also need to add `https://notes-with-typescript.cfapps.io` as a Login Redirect URI to your “My OIDC App”. 
+To fix this, log in to your Okta dashboard once more and navigate to **API** > **Trusted Origins**. Add `https://notes-with-typescript.cfapps.io` as an Origin URL with CORs support. You'll also need to add `https://notes-with-typescript.cfapps.io` as a Login Redirect URI to your "My OIDC App".
 
 You can now log in and add a note.
 
@@ -852,7 +852,7 @@ You can now log in and add a note.
 
 ## Learn More
 
-Congrats! You're well on your way to becoming a Kotlin and TypeScript developer who understands Spring Boot and Angular. All of the code used in this article is [available on GitHub](https://github.com/oktadeveloper/okta-kotlin-typescript-notes-example). 
+Congrats! You're well on your way to becoming a Kotlin and TypeScript developer who understands Spring Boot and Angular. All of the code used in this article is [available on GitHub](https://github.com/oktadeveloper/okta-kotlin-typescript-notes-example).
 
 If you have questions about this code or technologies you want to see in my next post, let me know on Twitter [@mraible](https://twitter.com/mraible)!
 

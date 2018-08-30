@@ -145,7 +145,7 @@ curl -v -X GET \
 "https://{yourOktaDomain}/api/v1/sessions/101W_juydrDRByB7fUdRyE2JQ"
 ~~~
 
-##### Response Examples
+##### Response Example
 {:.api .api-response .api-response-example}
 
 If the session is valid, a [Session Object](#session-model) is returned.
@@ -433,7 +433,7 @@ curl -v -X GET \
 "https://{yourOktaDomain}/api/v1/sessions/me"
 ~~~
 
-##### Response Examples
+##### Response Example
 {:.api .api-response .api-response-example}
 
 If the session is valid, a [Session Object](#session-model) is returned.
@@ -568,7 +568,9 @@ If the session is invalid, a `404 Not Found` response will be returned.
 #### Option: Use the HTTP Header Prefer
 Okta now supports [the HTTP Header `Prefer`](https://tools.ietf.org/html/rfc7240#section-4.2) in [the Sessions API for refreshing sessions](/docs/api/resources/sessions#refresh-current-session). You can extend the session lifetime, but skip any processing work related to building the response body.
 
-##### Example Request
+##### Request Example
+{:.api .api-request .api-request-example}
+
 ~~~sh
 curl -v -X POST \
 -H "Accept: application/json" \
@@ -579,7 +581,9 @@ curl -v -X POST \
 ~~~
 Note: `me` can also be an ID.
 
-##### Example Response
+##### Response Example
+{:.api .api-response .api-response-example}
+
 ~~~http
 HTTP/1.1 204 No Content
 Preference-Applied: return=minimal
@@ -594,8 +598,8 @@ Close the session for the currently logged in user. Use this method in a browser
 
 {% api_operation delete /api/v1/sessions/me %} {% api_cors %}
 
-##### Response Example
-{:.api .api-response .api-response-example}
+##### Request Example
+{:.api .api-request .api-request-example}
 
 ~~~ sh
 curl -v -X DELETE \

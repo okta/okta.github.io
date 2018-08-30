@@ -1,7 +1,7 @@
 {
 	"id": "daf8eed9-444c-8c53-8df8-40441d5bbbf7",
 	"name": "Events (Okta API)",
-	"description": "The [Okta Events API](/docs/api/resources/events) provides read access to your organization’s system log. The API is intended to export event data as a batch job from your organization to another system for reporting or analysis.",
+	"description": "The [Okta Events API](/docs/api/resources/events) provides read access to your organization's system log. The API is intended to export event data as a batch job from your organization to another system for reporting or analysis.",
 	"order": [
 		"2046c848-e447-67be-40a4-17118677fa85",
 		"32481146-038b-e97c-dcf8-c311de0df450",

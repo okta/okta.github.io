@@ -18,8 +18,7 @@ At the end of the React instructions you can choose your server type to learn mo
 
 ## Prerequisites
 
-* If you do not already have a **Developer Edition Account**, you can create one at [https://developer.okta.com/signup/](https://developer.okta.com/signup/).
-* If you don't have a React app, or are new to React, please start with [React's documentation](https://facebook.github.io/react/docs/installation.html#creating-a-new-application). It will walk you through the creation of a React app, creating routes, and other application development essentials.
+If you don't have a React app, or are new to React, please start with [React's documentation](https://facebook.github.io/react/docs/installation.html#creating-a-new-application). It will walk you through the creation of a React app, creating routes, and other application development essentials.
 
 ## Add an OpenID Connect Client in Okta
 
@@ -57,6 +56,7 @@ npm install @okta/okta-react --save
 You will need the values from the OIDC client that you created in the previous step to instantiate the middleware. You will also need to know your Okta org URL, which you can see on the home page of the Okta Developer console. Your Okta org URL + `oauth2/default` will be the `issuer` param.
 
 In your application's `App.js` file, import the following objects and pass in your configuration:
+{% include domain-admin-warning.html %}
 
 ```typescript
 import { Security, ImplicitCallback } from '@okta/okta-react';
@@ -66,7 +66,6 @@ const config = {
   redirect_uri: window.location.origin + '/implicit/callback',
   client_id: '{clientId}'
 }
-
 ```
 
 ## Attach Components to the Secure Router

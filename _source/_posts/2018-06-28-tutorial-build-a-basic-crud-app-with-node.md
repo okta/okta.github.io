@@ -136,6 +136,8 @@ const Post = db.define("post", {
 });
 
 db.sync();
+
+module.exports = { Post };
 ```
 
 This code initializes a new SQLite database that will be used to store the blog data and also defines a model called `Post` which stores blog posts in the database. Each post has a title, a body, an author ID, and a slug field.
@@ -171,7 +173,6 @@ const ExpressOIDC = require("@okta/oidc-middleware").ExpressOIDC;
 
 const blogRouter = require("./routes/blog");
 const usersRouter = require("./routes/users");
-
 
 const app = express();
 const client = new okta.Client({
@@ -458,7 +459,7 @@ block content
     .offset-sm-2.col-sm-8
       .body !{post.body}
       p.author Written by #{post.authorName}
-``` 
+```
 
 Now create the file `./views/edit.pug` which contains the blog post editing page markup.
 
@@ -686,7 +687,7 @@ Redirects the now logged-out user to the homepage of the site
 
 Since the application you're building is a blog, the last big piece of functionality you need add is the actual blog route code. This is what will dictate how the blog actually works: how to create posts, edit posts, delete posts, etc.
 
-Open up the `./routes/blog.js` file and copy in the following code. Don’t worry if it looks like a lot all at once - I’ll walk you through each route in detail below.
+Open up the `./routes/blog.js` file and copy in the following code. Don't worry if it looks like a lot all at once - I'll walk you through each route in detail below.
 
 
 ```javascript
@@ -698,9 +699,8 @@ const slugify = require("slugify");
 
 const models = require("../models");
 
-
 const client = new okta.Client({
-  orgUrl: "{yourOktaOrgUrl}"
+  orgUrl: "{yourOktaOrgUrl}",
   token: "{yourOktaToken}"
 });
 const router = express.Router();
@@ -1171,7 +1171,7 @@ If you were able to copy the code properly, you should be able to log in, create
 
 ## Do More With Node!
 
-I hope you enjoyed building a simple CRUD app with Node.js and Express.js. I've found that Express.js has a rich ecosystem of libraries and tools to make web development simple and fun.
+I hope you enjoyed building a simple CRUD app with Node.js and Express.js. I've found that Express.js has a rich ecosystem of libraries and tools to make web development simple and fun. You can find the source code for the example created in this tutorial [on GitHub](https://github.com/rdegges/okta-express-blog).
 
 If you'd like to learn more about building web apps in Node, you might want to check out these other great posts:
 
@@ -1184,4 +1184,4 @@ If you're interested in learning more about how the underlying authentication co
 
 Finally, please [follow us on Twitter](https://twitter.com/OktaDev) to find more great resources like this, request other topics for us to write about, and follow along with our new open source libraries and projects!
 
-And… If you have any questions, please leave a comment below!
+And... If you have any questions, please leave a comment below!

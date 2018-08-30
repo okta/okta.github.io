@@ -11,17 +11,17 @@ tags: [pwa, progressive web app, angular, typescript, oidc, spring boot, java]
 
 You're developing a Progressive Web Application (PWA), and your service worker and web app manifest are working swimmingly. You've even taken the time to deploy it to a server with HTTPS, and you're feeling pretty good about things. But wait, you don't have any way of knowing who your users are! Don't you want to provide them with an opportunity to authenticate and tell you who they are? Once you know who they are, you can give them all kinds of personalization options, inspire them to ❤️ your app, and maybe even support your work!
 
-In this article, I'll show you how you can lock down a Spring Boot app, then use a modern authentication protocol, in this case, OpenID Connect (OIDC), to authenticate and gain access to its APIs. 
+In this article, I'll show you how you can lock down a Spring Boot app, then use a modern authentication protocol, in this case, OpenID Connect (OIDC), to authenticate and gain access to its APIs.
 
 ## Secure Your Spring Boot App
 
-You might've heard that [Stormpath joined forces with Okta](https://www.okta.com/blog/2017/03/stormpath-welcome-to-Okta/) a few months ago (February 2017). Since the transition, we've been working hard to make the Stormpath SDKs work with Okta's API. The good news is we've made significant progress! 
+You might've heard that [Stormpath joined forces with Okta](https://www.okta.com/blog/2017/03/stormpath-welcome-to-Okta/) a few months ago (February 2017). Since the transition, we've been working hard to make the Stormpath SDKs work with Okta's API. The good news is we've made significant progress!
 
-In this example, you'll use Okta's Spring Boot Starter to add security to a Spring Boot app. Then I'll show you how you can use OIDC and Okta's Angular SDK in an Angular app to log in and get data from the Spring Boot app. 
+In this example, you'll use Okta's Spring Boot Starter to add security to a Spring Boot app. Then I'll show you how you can use OIDC and Okta's Angular SDK in an Angular app to log in and get data from the Spring Boot app.
 
 I recently created a Spring Boot app that provides a list of good beers, based on a pre-populated list. It filters out less-than-great beers and displays them in an Angular UI that displays the first animated GIF (from Giphy) that matches the beer name.
 
-Let's get started! 
+Let's get started!
 
 Rather than building Spring Boot and Angular applications from scratch, you can clone an existing GitHub project to get you going quickly.
 
@@ -62,14 +62,14 @@ In this project's `server/pom.xml` file, you'll need to add the Okta Spring Boot
 
 <a name="create-open-id-connect-app"></a>
 ## Get Started with Okta
- 
+
 To begin, you'll need to create an Okta Developer account. This account is free forever and provides the complete Okta Identity Platform for up to 3 applications and 100 users.
 
 1. Head on over to <https://www.okta.com/developer/signup>
 2. Fill out the signup form, and click "Get Started"
 3. Within a few minutes, you'll get a confirmation email, follow the instructions in the email to finish setting up your account
 
-Log in to your Okta Developer account and navigate to **Applications** > **Add Application**. Click **Single-Page App**, click **Next**, and give the app a name you’ll remember (e.g., "Angular PWA"). Change all instances of `localhost:8080` to `localhost:4200` and click **Done**.
+Log in to your Okta Developer account and navigate to **Applications** > **Add Application**. Click **Single-Page App**, click **Next**, and give the app a name you'll remember (e.g., "Angular PWA"). Change all instances of `localhost:8080` to `localhost:4200` and click **Done**.
 
 **TIP:** Add `http://localhost:4200` as a **Logout redirect URI**, so log out functionality works in your Angular app.
 
@@ -92,7 +92,7 @@ import org.springframework.security.oauth2.config.annotation.web.configuration.E
 Now, start it up...
 
 ```
-cd server 
+cd server
 ./mvnw spring-boot:run
 ```
 
@@ -127,7 +127,7 @@ X-XSS-Protection: 1; mode=block
 
 ## Authenticate with OpenID Connect
 
-Start the Angular application by running the following commands in your project’s root directory.
+Start the Angular application by running the following commands in your project's root directory.
 
 ```bash
 cd client
@@ -191,7 +191,7 @@ public class DemoApplication {
 }
 ```
 
-You can remove the `@CrossOrigin` annotation from `BeerController.java` since it's no longer needed. Make sure to save the files you changed and restart your server. 
+You can remove the `@CrossOrigin` annotation from `BeerController.java` since it's no longer needed. Make sure to save the files you changed and restart your server.
 
 Install [Manfred Steyer's](https://github.com/manfredsteyer) project to [add OAuth 2 and OpenID Connect support](https://github.com/manfredsteyer/angular-oauth2-oidc) to your Angular client.
 
@@ -353,7 +353,7 @@ After making these changes, you should be able to run `ng serve` and see a login
 Click the **Login** button and sign-in with one of the users assigned in your Okta application.
 
 {% img blog/angular-pwa-auth/angular-okta-login.png alt:"Angular Okta Login" width:"800" %}{: .center-image }
- 
+
 You should see a welcome message like the one below.
 
 {% img blog/angular-pwa-auth/angular-welcome.png alt:"Angular Welcome" width:"800" %}{: .center-image }
@@ -463,11 +463,11 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 })
 ```
 
-After making these changes,  run `ng serve` and the `HomeComponent` should render as follows (after you’ve logged out and unchecked "Offline" in the Network tab):
+After making these changes,  run `ng serve` and the `HomeComponent` should render as follows (after you've logged out and unchecked "Offline" in the Network tab):
 
 {% img blog/angular-pwa-auth/angular-login-form.png alt:"Angular Login Form" width:"800" %}{: .center-image }
 
-In `HomeComponent`, import Angular’s `ChangeDetectorRef`, add it as a dependency in the constructor, and add local variables for the `username` and `password` fields. Then implement a `loginWithPassword()` method in `HomeComponent`. This method uses the `OktaAuth` library to get a session token and exchange it for ID and access tokens.
+In `HomeComponent`, import Angular's `ChangeDetectorRef`, add it as a dependency in the constructor, and add local variables for the `username` and `password` fields. Then implement a `loginWithPassword()` method in `HomeComponent`. This method uses the `OktaAuth` library to get a session token and exchange it for ID and access tokens.
 
 ```typescript
 import { ChangeDetectorRef } from '@angular/core';
@@ -527,11 +527,11 @@ You should be able to sign in with the form as one of your app's registered user
 
 ## Deploy to Cloud Foundry
 
-Now it's time for one of the coolest places on the internet - *production!* 
+Now it's time for one of the coolest places on the internet - *production!*
 
 You'll need to modify the `deploy.sh` script in the root directory to replace `http://localhost:4200` in `DemoApplication.java` instead of `BeerController.java`, but that's about it. You can see the [modified deploy.sh on GitHub](https://github.com/oktadeveloper/okta-spring-boot-angular-pwa-example/blob/master/deploy.sh). Copy the contents of this file on top of your existing `deploy.sh`.
 
-[Install the Cloud Foundry CLI](https://docs.cloudfoundry.org/cf-cli/install-go-cli.html), then log into [Pivotal Web Services](http://run.pivotal.io/). 
+[Install the Cloud Foundry CLI](https://docs.cloudfoundry.org/cf-cli/install-go-cli.html), then log into [Pivotal Web Services](http://run.pivotal.io/).
 
 ```
 cf login -a api.run.pivotal.io
@@ -545,11 +545,11 @@ If you navigate to the client's URL after deploying, you'll see an error like th
 Failed to load https://dev-158606.oktapreview.com/oauth2/default/.well-known/openid-configuration: No 'Access-Control-Allow-Origin' header is present on the requested resource. Origin 'https://pwa-client-heartless-supersalesmanship.cfapps.io' is therefore not allowed access.
 </pre>
 
-To fix this, modify the Trusted Origins on Okta (under **API** > **Trusted Origins**) to have your client's URL (e.g. `https://pwa-client-heartless-supersalesmanship.cfapps.io`). 
+To fix this, modify the Trusted Origins on Okta (under **API** > **Trusted Origins**) to have your client's URL (e.g. `https://pwa-client-heartless-supersalesmanship.cfapps.io`).
 
 {% img blog/angular-pwa-auth/add-cf-origin.png alt:"Add Trusted Origin" width:"600" %}{: .center-image }
 
-You'll also need to add this URL to the **Login redirect URI** and **Logout redirect URI** properties for your "Angular PWA" OIDC application. 
+You'll also need to add this URL to the **Login redirect URI** and **Logout redirect URI** properties for your "Angular PWA" OIDC application.
 
 After making these changes, both login techniques should work as expected and you should be able to load the beer list from your Spring Boot app.
 
@@ -570,7 +570,7 @@ This article showed you how to add authentication with Okta to an Angular PWA wi
 
 To learn more about PWAs, check out some recent tutorials I wrote:
 
-* [Build Your First Progressive Web Application with Angular and Spring Boot](/blog/2017/05/09/progressive-web-applications-with-angular-and-spring-boot) 
+* [Build Your First Progressive Web Application with Angular and Spring Boot](/blog/2017/05/09/progressive-web-applications-with-angular-and-spring-boot)
 * [Tutorial: Develop a Mobile App With Ionic and Spring Boot](/blog/2017/05/17/develop-a-mobile-app-with-ionic-and-spring-boot)
 * [The Ultimate Guide to Progressive Web Applications](https://scotch.io/tutorials/the-ultimate-guide-to-progressive-web-applications)
 
@@ -578,7 +578,7 @@ There's also a number of excellent resources by Google and Smashing Magazine:
 
 * Addy Osmani at Google I/O '17: [Production Progressive Web Apps With JavaScript Frameworks](https://youtu.be/aCMbSyngXB4)
 * Google's [Progressive Web Apps](https://developers.google.com/web/progressive-web-apps/) homepage, [step-by-step code lab](https://codelabs.developers.google.com/codelabs/your-first-pwapp/), and [instructor-led PWA training](https://developers.google.com/web/ilt/pwa/).
-* [A Beginner's Guide To Progressive Web Apps](https://www.smashingmagazine.com/2016/08/a-beginners-guide-to-progressive-web-apps/) 
+* [A Beginner's Guide To Progressive Web Apps](https://www.smashingmagazine.com/2016/08/a-beginners-guide-to-progressive-web-apps/)
 
 **Changelog:**
 

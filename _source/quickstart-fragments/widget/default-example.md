@@ -15,7 +15,6 @@ The [Okta Sign-In Widget](https://github.com/okta/okta-signin-widget) is a JavaS
 At the end of this section can choose your server type to learn more about post-authentication workflows, such as using the access tokens (obtained by the Sign-in Widget) to authenticate requests to your server.
 
 ## Prerequisites
-If you do not already have a **Developer Edition Account**, you can create one at [https://developer.okta.com/signup/](https://developer.okta.com/signup/).
 
 > Note: The rest of these instructions assume you are using the developer console. If you already have an Okta org, you can toggle to the developer console by using the drop-down menu in the upper-left of the Okta administrator UI.
 
@@ -83,7 +82,7 @@ Then copy this widget configuration into your front-end application:
 <script type="text/javascript">
   var oktaSignIn = new OktaSignIn({
     baseUrl: "https://{yourOktaDomain}",
-    clientId: "{yourClientId}",
+    clientId: "{clientId}",
     authParams: {
       issuer: "https://{yourOktaDomain}/oauth2/default",
       responseType: ['token', 'id_token'],

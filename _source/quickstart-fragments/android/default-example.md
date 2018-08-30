@@ -16,7 +16,6 @@ This guide will walk you through integrating authentication into an Android app 
 At the end of the Android instructions you can choose your server type to learn more about post-authentication workflows, such as verifying tokens that your Android application can send to your server.
 
 ## Prerequisites
-If you do not already have a **Developer Edition Account**, you can create one at [https://developer.okta.com/signup/](https://developer.okta.com/signup/).
 
 ### Add an OpenID Connect Client
 * Log into the Okta Developer Dashboard, click **Applications** then **Add Application**.
@@ -25,8 +24,8 @@ If you do not already have a **Developer Edition Account**, you can create one a
 | Setting             | Value                                               |
 | ------------------- | --------------------------------------------------- |
 | Application Name    | My Android App                                      |
-| Login redirect URIs | com.oktapreview.{orgName}:/callback                 |
-| Logout redirect URIs| com.oktapreview.{orgName}:/logout                   |
+| Login redirect URIs | {yourOktaScheme}:/callback                          |
+| Logout redirect URIs| {yourOktaScheme:/logout                             |
 
 After you have created the application there are two more values you will need to gather:
 
@@ -47,6 +46,7 @@ compile 'com.okta.android:appauth-android:0.1.0'
 
 ### Configuration
 Create a new `okta_app_auth_config.json` file in your application's `res/raw` directory with the following contents:
+{% include domain-admin-warning.html %}
 ```json
 {
   "client_id": "{clientIdValue}",

@@ -8,9 +8,9 @@ book_chapter: "api-keys"
 
 <div class="chapter-author">By Joël Franusic</div>
 
-A critical part of designing an API is determining how to grant users access to sensitive or important parts of it. While many APIs have publicly accessible endpoints that don’t require authentication, the vast majority of APIs require a user to authenticate before any request can be fulfilled.
+A critical part of designing an API is determining how to grant users access to sensitive or important parts of it. While many APIs have publicly accessible endpoints that don't require authentication, the vast majority of APIs require a user to authenticate before any request can be fulfilled.
 
-You need to authenticate with Stripe to charge a credit card, you have to authenticate with Twilio to send an SMS, and you have to authenticate with SendGrid to send an email. There’s really no way to avoid authentication.
+You need to authenticate with Stripe to charge a credit card, you have to authenticate with Twilio to send an SMS, and you have to authenticate with SendGrid to send an email. There's really no way to avoid authentication.
 
 This chapter will cover two main aspects of managing API tokens:
 

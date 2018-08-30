@@ -18,7 +18,6 @@ At the end of the Vue instructions you can choose your server type to learn more
 
 ## Prerequisites
 
-* If you do not already have a **Developer Edition Account**, you can create one at [https://developer.okta.com/signup/](https://developer.okta.com/signup/).
 * If you don't have a Vue app, or are new to Vue, please start with the [Vue CLI](https://github.com/vuejs/vue-cli) guide. It will walk you through the creation of a Vue app, creating [routers](https://router.vuejs.org/en/essentials/getting-started.html), and other Vue.js development essentials.
 
 ## Add an OpenID Connect Client in Okta
@@ -57,6 +56,7 @@ npm install @okta/okta-vue --save
 You will need the values from the OIDC client that you created in the previous step to instantiate the middleware. You will also need to know your Okta org URL, which you can see on the home page of the Okta Developer console.
 
 In your application's [vue-router](https://router.vuejs.org/en/essentials/getting-started.html) configuration, import the `@okta/okta-vue` plugin and pass it your OpenID Connect client information:
+{% include domain-admin-warning.html %}
 
 ```typescript
 // router/index.js

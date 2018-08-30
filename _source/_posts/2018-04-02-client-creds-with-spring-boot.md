@@ -17,9 +17,9 @@ The OAuth 2 client credentials grant type is exclusively used for scenarios in w
 
 The goal of the [client credentials](https://www.oauth.com/oauth2-servers/access-tokens/client-credentials/) grant is to allow two machines to communicate securely. In this grant type you have a client (think of this as your application) making API requests to another service (this is your resource server).
 
-To help illustrate why this flow is important, let's take a step back and talk about what we did before OAuth 2.0. 
+To help illustrate why this flow is important, let's take a step back and talk about what we did before OAuth 2.0.
 
-**NOTE**: If you’re an OAuth pro, you can skip ahead to the [code examples below](#lets-build-an-oauth-20-client-credentials-app) or check out the example on [GitHub](https://github.com/oktadeveloper/spring-boot-client-credentials-example).
+**NOTE**: If you're an OAuth pro, you can skip ahead to the [code examples below](#lets-build-an-oauth-20-client-credentials-app) or check out the example on [GitHub](https://github.com/oktadeveloper/spring-boot-client-credentials-example).
 
 Before OAuth 2.0 the way developers handled server-to-server authentication was with HTTP Basic Auth. Essentially what this boiled down to was that a developer would send over a server's unique username and password (often referred to as an ID and secret) on each request. The API service would then validate this username and password on every request by connecting to a user store (database, LDAP, etc.) in order to validate the credentials.
 
@@ -49,15 +49,15 @@ Enough talk, let's do something! I'm going to show you  _how_ to implement the c
 
 To keep things simple, you'll use Okta to create an OAuth 2.0 authorization server. This will handle all of the client credentials grant stuff mentioned above. Do you need to use Okta? Not at all! You can use any OAuth 2.0 compatible server you want — but because our service is free and simple to use, it speeds this process up.
 
-If you don't already have a free developer account, head over to [developer.okta.com](/) and click sign up. When that’s done you’ll have two pieces of information, your Okta base URL which looks something like: `dev-123456.oktapreview.com`, and an email with instructions on how to activate your account.
+If you don't already have a free developer account, head over to [developer.okta.com](/) and click sign up. When that's done you'll have two pieces of information, your Okta base URL (e.g. `https://{yourOktaDomain}`), and an email with instructions on how to activate your account.
 
-After activating your account, while you are still in the Okta Developer Console, you then need to create an application and a custom OAuth scope. The application will give you a client ID and secret, while the custom scope will restrict your access token to this example. 
+After activating your account, while you are still in the Okta Developer Console, you then need to create an application and a custom OAuth scope. The application will give you a client ID and secret, while the custom scope will restrict your access token to this example.
 
 Click the **Applications** menu item, then **Add Application**, then **Service** -> **Next**. Change the name to whatever you want (I'm going to use "My MOD App"), then click **Done**.
 
 You will need the **Client ID** and **Client secret** values for the next steps.
 
-Next, create a [custom scope](https://www.oauth.com/oauth2-servers/scope/defining-scopes/) for your application. 
+Next, create a [custom scope](https://www.oauth.com/oauth2-servers/scope/defining-scopes/) for your application.
 
 From the menu bar select **API** -> **Authorization Servers**. Remember the **Issuer URI** value; you will need this for the next steps. Edit the authorization server by clicking on the edit pencil, then click **Scopes** -> **Add Scope**.  Fill out the name field with `custom_mod` and press **Create**.
 
@@ -66,7 +66,7 @@ From the menu bar select **API** -> **Authorization Servers**. Remember the **Is
 Onto the fun stuff!
 ### Create a Resource Server
 
-This resource server (aka: API service) is going to be overly simple and consist of a single `/mod` endpoint. Create a new project using the [Spring Initializer](https://start.spring.io/) on the command line:  
+This resource server (aka: API service) is going to be overly simple and consist of a single `/mod` endpoint. Create a new project using the [Spring Initializer](https://start.spring.io/) on the command line:
 
 ```bash
 curl https://start.spring.io/starter.tgz  \
@@ -126,7 +126,7 @@ public class ServerApplication {
 }
 ```
 
-Now it’s time to configure the application! I renamed my `application.properties` file to `application.yml` and updated it to include:
+Now it's time to configure the application! I renamed my `application.properties` file to `application.yml` and updated it to include:
 
 ```yml
 security:
@@ -138,7 +138,7 @@ security:
       tokenInfoUri: {issuer-uri-from-above}/v1/introspect
 ```
 
-That’s it: a few lines of code and a couple lines of config! Spring Boot will automatically handle the validation of the access tokens, all you need to worry about is your code.  
+That's it: a few lines of code and a couple lines of config! Spring Boot will automatically handle the validation of the access tokens, all you need to worry about is your code.
 
 Start it up and leave it running:
 
@@ -149,7 +149,7 @@ Start it up and leave it running:
 You can try to access `http://localhost:8080/mod` if you want, it will respond with a, `HTTP 401 UNAUTHORIZED`.
 ### Create the OAuth 2.0 Client
 
-Next, you’re going to create a simple command line client (you could easily duplicate this logic in any type of application).  
+Next, you're going to create a simple command line client (you could easily duplicate this logic in any type of application).
 
 Open up a new terminal window and create a second application with the Spring Initializer:
 
@@ -166,7 +166,7 @@ curl https://start.spring.io/starter.tgz  \
 cd creds-example-client
 ```
 
-Same as before, add in the Spring OAuth 2.0 library as a dependency in your `pom.xml`: 
+Same as before, add in the Spring OAuth 2.0 library as a dependency in your `pom.xml`:
 
 ```xml
 <dependency>
@@ -257,13 +257,13 @@ At Okta we use signed JWTs which means you can [validate them locally](/authenti
 
 {% img blog/client-creds-with-spring-boot/client-creds-jwt.png alt:"Client credentials with JWT sequence" width:"800" %}{: .center-image }
 
-We have helper libraries in a [few different languages](https://github.com/okta?q=okta-jwt-) and a [Spring Boot starter](https://github.com/okta/okta-spring-boot) that will handle the local validation for you. 
+We have helper libraries in a [few different languages](https://github.com/okta?q=okta-jwt-) and a [Spring Boot starter](https://github.com/okta/okta-spring-boot) that will handle the local validation for you.
 
 **NOTE:** at the time of this writing `okta-spring-boot` only works with Spring Boot 1.5.x, see an example on [GitHub](https://github.com/okta/samples-java-spring/tree/master/resource-server)
 
 ## Learn More About OAuth 2.0 and Okta
 
-In this post, I've explained the OAuth 2.0 client credentials grant type and created small demo applications that exercised this flow (with very little code, thanks to Spring Boot!). If you have questions, leave them below or ping me ([@briandemers](https://twitter.com/briandemers)) or [@OktaDev](https://twitter.com/oktadev) on Twitter.  
+In this post, I've explained the OAuth 2.0 client credentials grant type and created small demo applications that exercised this flow (with very little code, thanks to Spring Boot!). If you have questions, leave them below or ping me ([@briandemers](https://twitter.com/briandemers)) or [@OktaDev](https://twitter.com/oktadev) on Twitter.
 
 For more info on OAuth 2.0 and Okta check out these resources:
 

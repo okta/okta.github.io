@@ -8,11 +8,11 @@ book_chapter: "sanitizing"
 
 <div class="chapter-author">By Brian Demers</div>
 
-The inputs to your application represent the most significant surface area of attack for any application. Does your API power forms for user input? Do you display data that didn’t originate in your API? Do users upload files through your API?
+The inputs to your application represent the most significant surface area of attack for any application. Does your API power forms for user input? Do you display data that didn't originate in your API? Do users upload files through your API?
 
 Any time data crosses a trust boundary - the boundary between any two systems - it should be validated and handled with care. For example, a trust boundary would be any input from an HTTP request, data returned from a database, or calls to remote APIs.
 
-Let’s start with a simple example: a user submission to the popular internet forum, Reddit.  A user could try to include a malicious string in a comment such as:
+Let's start with a simple example: a user submission to the popular internet forum, Reddit.  A user could try to include a malicious string in a comment such as:
 
 ```html
 <img src onerror='alert("haxor")'>

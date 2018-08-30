@@ -63,10 +63,10 @@ doesn't provide data to a random client.
 
 In our case, the client and server are internal services communicating with each
 other. I won't cover configuring a browser client or other clients that may be
-not under your control. In this post, I’ll give examples for the technology we
+not under your control. In this post, I'll give examples for the technology we
 use at Okta. Specifically, we use [Dropwizard](http://www.dropwizard.io/) as
 the server framework and [Jersey](https://jersey.java.net/) for the client
-framework. We’ll also use Java's
+framework. We'll also use Java's
 [keytool](https://docs.oracle.com/javase/8/docs/technotes/tools/unix/keytool.html)
 for building the key and trust stores in Java KeyStore (JKS) format. The
 examples below use these technologies, but I hope they'll be fairly transferable
@@ -83,7 +83,7 @@ contain certificates. Let's assume we have a layered Certificate Authority (CA)
 structure, like the image above, with a root CA and a subordinate global CA. The
 root CA has its private key stored offline and its certificate is the one we
 want our services to trust. The root certificate is the _only_ certificate we
-want our services to trust on that channel. We don’t even want a certificate
+want our services to trust on that channel. We don't even want a certificate
 issued by a reputable 3rd party CA to be trusted by our service. So our trust
 store will contain only the root certificate, which means the server will only
 establish connections from clients that have a certificate issued by the root CA
@@ -108,7 +108,7 @@ we have a chain of trust. When we create the server's certificate, we'll include
 the chain as well for clients to verify. The [TLS
 standard](http://tools.ietf.org/html/rfc5246#section-7.4.2) specifies that the
 certificate chain does not require the actual root of trust since the endpoints
-will have it already, so we’ll omit it to save bandwidth. Once we have the
+will have it already, so we'll omit it to save bandwidth. Once we have the
 certificate we'll put it in a JKS for our Dropwizard application to use. If
 your client does not have a certificate for service-to-service communication,
 you can follow a similar pattern to create its certificate. But if it does have
@@ -136,7 +136,7 @@ keytool -importkeystore -destkeystore keystore.jks -srckeystore server.p12 -srcs
 
 ### Server Configuration
 
-Now that we have our key and trust stores, let’s configure the server’s
+Now that we have our key and trust stores, let's configure the server's
 Dropwizard application connector.
 
 ~~~ conf
@@ -223,7 +223,7 @@ curl: (35) Server aborted the SSL handshake
 
 ### Client Configuration
 
-Now we’ll configure our client to talk to the server. I’ll use the Jersey 2.X
+Now we'll configure our client to talk to the server. I'll use the Jersey 2.X
 API, but there are equivalents in the 1.X as well as in the Apache HTTP library.
 
 ~~~ java
@@ -277,7 +277,7 @@ Comic is Copyright &copy; [xkcd.com](https://xkcd.com).
 ## Tightening Things Up
 
 Now we are just granting any service with a certificate signed by our root CA to
-talk to our server. Chances are we’d like to trim this down to only clients that
+talk to our server. Chances are we'd like to trim this down to only clients that
 should be talking to the server so we can refuse some other service that has
 no business with our server even though it has a certificate issued by our root
 CA. This is useful for preventing another service we have from accessing our new
@@ -288,7 +288,7 @@ that communication.
 
 To accomplish this, we could change our server's trust store to only contain the
 public key of the client, but this presents problems (and more work) when we try
-to rotate that key pair. So, instead, let’s try having the server check that the
+to rotate that key pair. So, instead, let's try having the server check that the
 hostname of the client is one that it expects to hear from. We can also do this
 in the other direction (client verifying the server).
 
@@ -306,7 +306,7 @@ server:
 
 The HTTPS endpoint identification algorithm will cause Java to do hostname
 verification against your cert. Specifically, this will check the hostname of
-the client that made the request against the DN that is given in the client’s
+the client that made the request against the DN that is given in the client's
 certificate. If they do not match, the connection will be refused. This is a
 great, [standard](http://tools.ietf.org/html/rfc2818#section-3.1) way to solve
 this problem, however it can be tricky to know what the hostnames will be or to
@@ -319,7 +319,7 @@ DNs that we expect in our certificates. This means we no longer have to worry
 about hostnames. So as services move from host to host, they can keep the same
 certificate and everything will Just Work&trade;.
 Additionally, a certificate can belong to a service rather than an individual
-host now so there’s less management that needs to happen. To do this, we just
+host now so there's less management that needs to happen. To do this, we just
 need to set up a filter in our server and configure a regex to match the DN in
 the certificate(s) that are allowed to communicate with our service or else
 return a 403 response.

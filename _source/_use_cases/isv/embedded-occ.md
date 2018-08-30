@@ -10,7 +10,7 @@ title: Embedded Okta Cloud Connect (OCC)
 
 ## Overview
 
-Okta offers Okta Cloud Connect (OCC) program for ISV partners with the need to quickly and easily connect to customer’s AD infrastructure for authentication and lifecycle management support.  For customers, OCC is a free offering for an unlimited time, and for an unlimited number of users to be used with a single ISV application.  To learn more about the OCC program, visit the [Okta Cloud Connect] page.
+Okta offers Okta Cloud Connect (OCC) program for ISV partners with the need to quickly and easily connect to customer's AD infrastructure for authentication and lifecycle management support.  For customers, OCC is a free offering for an unlimited time, and for an unlimited number of users to be used with a single ISV application.  To learn more about the OCC program, visit the [Okta Cloud Connect] page.
 
 Embedded OCC takes this one step further by providing an even more seamless user experience for your customers through the following:
 
@@ -27,7 +27,7 @@ At a high-level, the runtime flow/administrator experience is as follows:
   1. ACME uses the input and calls the Okta tenant creation API (/orgs).  A tenant is created.  API call returns tenant-specific information including an API key for subsequent API access against this newly created Okta tenant.
   1. ACME uses Okta /apps API to instantiate the appropriate app instance to exchange SAML metadata to enable Single Sign-On.  Okta receives SAML SP metadata in the request; ACME receives SAML IDP metadata in the response.
 
-If the customer is an existing Okta customer or already has an Okta tenant, an option should be provided to carry out step 3) only.  In the diagram above, the “User Existing Okta tenant” option should prompt for tenant-specific information for app instantiation only.  More details to follow.
+If the customer is an existing Okta customer or already has an Okta tenant, an option should be provided to carry out step 3) only.  In the diagram above, the "User Existing Okta tenant" option should prompt for tenant-specific information for app instantiation only.  More details to follow.
 
 ## Implementation Steps
 
@@ -57,12 +57,12 @@ You need to prompt for the following:
 
   1. If you allow administrators to choose between *okta.com and *.oktapreview.com (recommended approach), prompt for it
   1. **Okta Subdomain**: this determines the subdomain URL.  The domain name must be unused.
-  1. **Company Name**: this is a “display name” for the customer’s company. (eg. “MyCompany Inc.”)
+  1. **Company Name**: this is a "display name" for the customer's company. (eg. "MyCompany Inc.")
   1. **Admin First Name**: Okta requires first name for all users
   1. **Admin Last Name**: Okta requires last name for all users
   1. **Admin Email**: This needs to be a real email.  Notifications (activation, password reset, etc) will be sent to this email.  This value CAN be defaulted to be the Okta login name as well. However, the API does allow for login name and email to be different as they are two distinct attributes.
   1. **Password**: Password for the Okta administrator account
-      1. Best practice should include a “confirmation” field forcing user to retype the password.
+      1. Best practice should include a "confirmation" field forcing user to retype the password.
       1. The default password policy requires the following and should be displayed in the UI.  **Tenant creation will result in an error if this is not met.**
           1. At least 8 characters
           1. A lowercase letter
@@ -83,7 +83,7 @@ If the administrator wants to use an existing Okta tenant, you should prompt for
 
 ## Tenant Creation API (org api)
 
->Continue with the “ACME” (ISV) and “mycompany” (customer) as an example.
+>Continue with the "ACME" (ISV) and "mycompany" (customer) as an example.
 
 ### Create a token
 
@@ -106,7 +106,7 @@ curl -v -H "Authorization:SSWS <API token>" \
  -H "Accept:application/json" \
  -H "Content-type:application/json" \
  -X POST https://{yourOktaDomain}/api/v1/orgs \
- -d ‘{
+ -d '{
         "subdomain": "mycompany",
         "name": "MyCompany Inc",
         "website": "https://www.mycompany.com",
@@ -132,17 +132,17 @@ curl -v -H "Authorization:SSWS <API token>" \
                 }
             }
         }
-    }’
+    }'
 ```
 
 Some additional parameters are needed in the request beyond the input from your UI discussed earlier.
 
   1. **website**: This is the URL of the website we typically ask during our free trial sign-up.  It is a mandatory attribute and it must be of a URL format.  A suggestion is to hardcode your company URL.
-  1. **edition**: An Okta tenant can be created with different editions/SKUs enabled.  Here, we are creating an OCC tenant for a single app only – by specifying the “DIRECTORY” value.
+  1. **edition**: An Okta tenant can be created with different editions/SKUs enabled.  Here, we are creating an OCC tenant for a single app only – by specifying the "DIRECTORY" value.
   1. **app**: This is an attribute within the licensing object.  This will be the internal Okta app ID of your application in the Okta Application Network.  You can find this out by doing the following:
       1. Log into your Okta instance as an admin
       1. Create a new app instance for your app
-      1. During the configuration wizard, your internal app name is part of the URL.  The example below shows “boxnet” as the internal app id for Box.  If you have trouble figuring out your Okta App ID, contact us.
+      1. During the configuration wizard, your internal app name is part of the URL.  The example below shows "boxnet" as the internal app id for Box.  If you have trouble figuring out your Okta App ID, contact us.
 
 {% img occ_diag3.png alt:"Finding App Name" %}
 
@@ -206,7 +206,7 @@ Now that you have created the Okta tenant, the next API call is to instantiate t
   1. The API token
       1. The API token either comes from the tenant creation response or come from administrator input from the user interface where an existing Okta tenant is being used.
 
-Depending on the set of inputs required to set up SAML for your app in Okta, the input parameters.  An example here is the “servicenow_app2” SAML app instantiation.  The only parameter needed is “loginURL” which is set to the SAML endpoint on the ServiceNow side.
+Depending on the set of inputs required to set up SAML for your app in Okta, the input parameters.  An example here is the "servicenow_app2" SAML app instantiation.  The only parameter needed is "loginURL" which is set to the SAML endpoint on the ServiceNow side.
 
 ```sh
 curl -v -H "Authorization:SSWS <API token>" \
@@ -232,7 +232,7 @@ At this point, the app instance in Okta is created and Okta is now aware of the 
 
 The following curl command will return the SAML IDP metadata (based on an example `_links.metadata.href` value).
 
-> Note the “application/xml” value for both “Accept” and “Content-type”
+> Note the "application/xml" value for both "Accept" and "Content-type"
 
 ```sh
 curl -v -H "Authorization:SSWS <API Token>" \

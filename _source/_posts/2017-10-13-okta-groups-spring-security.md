@@ -7,7 +7,7 @@ tags: [oauth, oauth2, oauth2.0, oauth 2.0, OpenID, OpenID Connect, oidc, spring,
 
 User management functions are required by a wide variety of apps and APIs, and it's a common use-case to partition access to parts of an application according to roles assigned to a user. This is the basis of role-based access control (RBAC). Okta manages these roles with groups. Users can belong to one or more groups. With the Okta Spring Security integration, these groups are automatically mapped to roles that can be called out in your application to grant or deny access. This is all done using common Spring Security annotations as you'll see below.
 
-Okta’s Java dev team is working hard on our next generation SDK and integrations. With Okta’s [integration for Spring Boot and Spring Security](https://github.com/okta/okta-spring-boot) you can wire up your Okta tenant to a Spring Boot application and take advantage of the built in RBAC.
+Okta's Java dev team is working hard on our next generation SDK and integrations. With Okta's [integration for Spring Boot and Spring Security](https://github.com/okta/okta-spring-boot) you can wire up your Okta tenant to a Spring Boot application and take advantage of the built in RBAC.
 
 In this post, you'll walk through a simple example that has some unprotected pages, some pages that can only be accessed by authenticated users and some pages that can only be accessed by users who belong to a particular group.
 
@@ -111,14 +111,14 @@ Open up the project in your favorite IDE or editor. The screenshots below are fr
 
 Make a copy of the `application.yml.sample` file and name it `application.yml`
 
-Update the values with the information you saved earlier. My settings are shown below:
+Update the values with the information you saved earlier. For example:
 
 | Name        | Value                                             |
 | ----------- | ------------------------------------------------- |
-| baseUrl     | https://dev-237330.oktapreview.com                |
-| issuer      | https://dev-237330.oktapreview.com/oauth2/default |
+| baseUrl     | https://{yourOktaDomain}                          |
+| issuer      | https://{yourOktaDomain}/oauth2/default           |
 | audience    | api://default                                     |
-| clientId    | 0oacdldhkydGGruON0h7                              |
+| clientId    | {clientId}                                        |
 | rolesClaim  | groups                                            |
 | redirectUri | http://localhost:8080/                            |
 
@@ -144,9 +144,9 @@ These buttons are connected to the app such that only members of the `users` gro
 
 {% img blog/okta-groups-spring-security/app-3.png alt:"Default AS" width:"700" %}{: .center-image }
 
-Click `Users Only`. You’ll see a page that shows that you’re a member of the `users` group.
+Click `Users Only`. You'll see a page that shows that you're a member of the `users` group.
 
-Click `Back` then `Admins Only`. Notice that you get a `403 Unauthorized` because you’re not a member of the `admins` group.
+Click `Back` then `Admins Only`. Notice that you get a `403 Unauthorized` because you're not a member of the `admins` group.
 
 Click the `Logout` button. Log in again as the user that belongs to the `admins` group that you created before.
 
@@ -249,7 +249,7 @@ function renderWidget() {
 
 Once the widget is rendered on the page, the internal logic takes over based on your settings when the user logs in. In this case, you are using the [implicit](https://tools.ietf.org/html/rfc6749#section-1.3.2) flow and will get back only an access token as specified by the `responseType` parameter of the configuration.
 
-On successful login, you enter the callback function with a `response` object. The response object has your (or in this case, your user’s) access token.
+On successful login, you enter the callback function with a `response` object. The response object has your (or in this case, your user's) access token.
 
 Line 19 sets a cookie with the access token and line 20 sends the (now authenticated) user to the `/authenticated` endpoint.
 
