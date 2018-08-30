@@ -50,7 +50,7 @@ Click **Add** and you should see a success message.
 
 Click **View beers present** to see the full list of beers.
 
-{% img blog/javaee-rest-api/beers-present.png alt:"Beer list" width:"800" %}{: .center-image }
+{% img blog/javaee-rest-api/beers-present.png alt:"Beers present" width:"800" %}{: .center-image }
 
 You can also view the list of good beers in the system at `http://localhost:8080/good-beers`. Below is the output when using [HTTPie](https://httpie.org/).
 
@@ -1300,7 +1300,7 @@ The `oidc/index.xhtml` template uses `WEB-INF/template.xhtml`, so you'll need to
 
 After adding these files, rebuild your project and restart TomEE.
 
-```
+```bash
 mvn clean package tomee:run
 ```
 
@@ -1340,7 +1340,7 @@ Jakarta EE has a [working group](https://www.infoq.com/news/2018/04/jakarta-ee-w
 
 I hope you've enjoyed this tour that showed you how to build and secure a Java EE REST API with JWT and OIDC. If you'd like to see the source code for each completed section, I've put them in branches in the [GitHub repo](https://github.com/oktadeveloper/okta-java-ee-rest-api-example). You can clone the different implementations with the commands below:
 
-```
+```bash
 git clone -b jwt-verifier https://github.com/oktadeveloper/okta-java-ee-rest-api-example.git
 git clone -b spring-security https://github.com/oktadeveloper/okta-java-ee-rest-api-example.git
 git clone -b pac4j https://github.com/oktadeveloper/okta-java-ee-rest-api-example.git
