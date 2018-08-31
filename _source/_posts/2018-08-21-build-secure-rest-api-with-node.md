@@ -711,7 +711,9 @@ $ node client http://localhost:3000/parts | json
 
 ## Learn More About Node and OAuth 2.0 Client Credentials with Okta
 
-Hopefully you've seen how easy it is to create a REST API in Node and secure it from unauthorized users. Now that you've had a chance to make your own sample project, check out some of these other great resources about Node, OAuth 2.0, and Okta. You can also browse the Okta developer blog for other excellent articles.
+Hopefully you've seen how easy it is to create a REST API in Node and secure it from unauthorized users. You can find the code for this example [on GitHub](https://github.com/oktadeveloper/okta-node-rest-api-example).
+
+Now that you've had a chance to make your own sample project, check out some of these other great resources about Node, OAuth 2.0, and Okta. You can also browse the Okta developer blog for other excellent articles.
 
 * [Implementing the Client Credentials Flow](https://developer.okta.com/authentication-guide/implementing-authentication/client-creds)
 * [Validating Access Tokens](https://developer.okta.com/authentication-guide/tokens/validating-access-tokens)
