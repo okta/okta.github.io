@@ -1,10 +1,10 @@
 ---
 layout: docs_page
 weight: 2
-title: Find your Okta domain
+title: Finding Your Okta Domain
 ---
 
-# Find your Okta domain
+# Finding Your Okta Domain
 
 If you're building an application using one of our SDKs or client libraries, you may run into the following message:
 
