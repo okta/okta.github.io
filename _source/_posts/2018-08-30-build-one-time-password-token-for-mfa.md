@@ -37,13 +37,13 @@ In "real life", you'll want to use the Okta Verify mobile app (available on [iOS
 
 The source code (including a pre-built binary) can be found on the [GitHub repository](https://github.com/oktadeveloper/okta-ardu-token-example).
 
-If you have an ArduBoy and want to see the app running, you can install the latest binary `.hex` file directly. 
+If you have an ArduBoy and want to see the app running, you can install the latest binary `.hex` file directly.
 
-You can also drop the `.hex` file right onto the [ProjectABE](https://felipemanga.github.io/ProjectABE/) ArduBoy emulator site to see it in action without having an actual ArduBoy yourself. 
+You can also drop the `.hex` file right onto the [ProjectABE](https://felipemanga.github.io/ProjectABE/) ArduBoy emulator site to see it in action without having an actual ArduBoy yourself.
 
 **NOTE:** ProjectABE does not have the ability to save data to the  [EEPROM](https://www.arduino.cc/en/Reference/EEPROM). So, if you restart the application there, you'll need to re-set both the shared secret and the date and time.
 
-The easiest way to install OktaArduToken onto an actual ArduBoy is to use the 
+The easiest way to install OktaArduToken onto an actual ArduBoy is to use the
 [Arduino IDE](https://www.arduino.cc/en/Main/Software). This allows you to both edit and upload the source as well as providing the command line tool, `avrdude`, to upload binaries.
 
 Here's an example install command using `avrdude` on Mac:
@@ -113,7 +113,7 @@ Once you've saved the shared secret, you'll see the date and time setting screen
 
 You can use the up and down arrows to change the numbers for each part of the date and time. You can use the right and left buttons to change positions on the date and time interface. The interface will automatically skip over separators and will automatically wrap around in a similar way to the shared secret interface.
 
-Once the date and time are set, press the `A` button to move on to the TOTP screen. 
+Once the date and time are set, press the `A` button to move on to the TOTP screen.
 
 **NOTE:** Precision is important, so it is recommended that you set the time ahead by 10 seconds, watch a clock with a seconds counter and hit the `A` button the moment at which the times match. Also, the date and time that you set should always be GMT regardless of your current time zone. Also, There is currently NO error checking of any kind. That is, if you put in an invalid date and/or time, you will get unexpected results.
 
@@ -131,7 +131,7 @@ Press the `A` button to return to the set date and time screen. Press the `B` bu
 
 In Okta, there are two complimentary pieces to MFA: enrollment and enforcement. An MFA enrollment policy drives the conditions under which a user will be required to enroll in MFA and what configured factors they must enroll in. A Signon Policy can be configured to require a second factor after authentication. That's the MFA enforcement part of the policy.
 
-To get started, signup for a free Okta Developer org at <https://developer.okta.com/signup/>
+To get started, signup for a free Okta Developer org at [https://developer.okta.com/signup/](https://developer.okta.com/signup)
 
 Setup an Okta group and a new user to make testing the MFA policies easier.
 
@@ -256,7 +256,7 @@ void writeTotpInfo(TotpInfo totpInfo) {
 
 TotpInfo readTotpInfo() {
   TotpInfo ret = {};
-  
+
   ret.secret = readString(TOTP_SECRET_SAVE_ADDRESS, 16);
   ret.sec = readInt(TOTP_SEC_SAVE_ADDRESS);
   ret.minu = readInt(TOTP_MIN_SAVE_ADDRESS);
@@ -264,7 +264,7 @@ TotpInfo readTotpInfo() {
   ret.day = readInt(TOTP_DAY_SAVE_ADDRESS);
   ret.mon = readInt(TOTP_MON_SAVE_ADDRESS);
   ret.year = readInt(TOTP_YEAR_SAVE_ADDRESS);
-  
+
   return ret;
 }
 ```
@@ -274,19 +274,19 @@ There's a bunch of supporting methods to handle the input interfaces for the sha
 Being a bit of a n00b to Arduino program, I am sure this code could be improved on. [I <3 pull requests](https://github.com/oktadeveloper/okta-ardu-token-example)!
 
 ## Learn More About Okta Verify and Multi-factor Authentication
- 
+
 I hope you enjoyed seeing how authentication with MFA using Okta Verify works along with alternate token devices. The requirements for creating your own token are a programmable microprocessor with a clock and a display
- 
+
 If you'd like to learn more about MFA with Okta, check out these posts:
- 
+
 * [MFA: 4 challenges faced by developers](/blog/2018/05/16/multifactor-authentication-4-challenges-faced-by-developers)
 * [Secure Your Spring Boot Application with Multi-Factor Authentication](/blog/2018/06/12/mfa-in-spring-boot)
 * [Use Multi-factor from the Command Line](/blog/2018/06/22/multi-factor-authentication-command-line)
 * [Simple Multi-factor authentication in Node](/blog/2018/05/22/simple-multifactor-authentication-in-node)
 * [Set Up and Enforce MFA with the Okta API](/blog/2018/02/08/set-up-and-enforce-multi-factor-auth-with-okta)
- 
+
 Finally, please [follow us on Twitter](https://twitter.com/OktaDev) to find more great resources like this, request other topics for us to write about, and follow along with our new open source libraries and projects!
- 
+
 **P.S.**: If you liked this project and want to see the source code in one place, please go checkout and star its [GitHub repository](https://github.com/oktadeveloper/okta-ardu-token-example).
- 
+
 And... If you have any questions, please leave a comment below!
