@@ -1153,6 +1153,8 @@ For more details, see [section 3.5.1](https://tools.ietf.org/html/rfc7644#sectio
 
 {% api_lifecycle beta %}
 
+> **Note:** We recommend retrieving the `id` field for the Group ID from the path itself instead of parsing it from the `value` attribute in the request body. We plan to deprecate the `id` field in the body to be strictly SCIM RFC compliant.
+
 ###### SCIM 1.1
 
 Below is a sample request from Okta to update group details:

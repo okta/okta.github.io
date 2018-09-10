@@ -107,9 +107,9 @@ of the callback response.
 
 `request`:
 
-  * You must sign the JWT using the app's client secret.
+  * You must sign the JWT using either the app's client secret, or a private key whose public key is registered on the app's JWKSet.
   * The JWT can't be encrypted.
-  * Okta supports these signing algorithms: [HS256](https://tools.ietf.org/html/rfc7518#section-5.2.3), [HS384](https://tools.ietf.org/html/rfc7518#section-5.2.4), and [HS512](https://tools.ietf.org/html/rfc7518#section-5.2.5).
+  * Okta supports the [HMAC](https://tools.ietf.org/html/rfc7518#section-3.2), [RSA](https://tools.ietf.org/html/rfc7518#section-3.3) and [ECDSA](https://tools.ietf.org/html/rfc7518#section-3.4) signature algorithms. HMAC signatures require that the client has a `token_endpoint_auth_method` which uses a `client_secret`. RSA and ECDSA signatures requires that the client registers a public key.
   * We recommend you don't duplicate any request parameters in both the JWT and the query URI itself. However, you can do so with `state`, `nonce`, `code_challenge`, and `code_challenge_method`. In those cases, the values in the query URI will override the JWT values.
   * Okta validates the `request` parameter in the following ways:
     1. `iss` is required and must  be the `client_id`.
@@ -1326,7 +1326,7 @@ Refresh tokens are opaque. More information about using them can be found in the
 
 ## Token Authentication Methods
 
-If you authenticate a client with client credentials, provide the [`client_id` and `client_secret`](#request-parameters-1)
+If you configure your client to use a `client_secret` [Client Authentication Method](http://openid.net/specs/openid-connect-core-1_0.html#ClientAuthentication), provide the [`client_id` and `client_secret`](#request-parameters-1)
 using either of the following methods:
 
 * Provide `client_id` and `client_secret`
@@ -1339,11 +1339,16 @@ using either of the following methods:
 * Provide `client_id` in a JWT that you sign with the `client_secret`
   using HMAC algorithms HS256, HS384, or HS512. Specify the JWT in `client_assertion` and the type, `urn:ietf:params:oauth:client-assertion-type:jwt-bearer`, in `client_assertion_type` in the request.
 
+If you configure your client to use `private_key_jwt` [Client Authentication Method](http://openid.net/specs/openid-connect-core-1_0.html#ClientAuthentication) you must provide the `client_id` in a JWT that you sign with your private key.
+* The private key that was used to sign must have the corresponding public key registered in the client's [JWKSet](oauth-clients#json-web-key-set).
+* Sign the JWT with one of the following signature algorithms: RS256, RS384, RS512, ES256, ES384 or ES512.
+* Specify the JWT in `client_assertion` and the type, `urn:ietf:params:oauth:client-assertion-type:jwt-bearer`, in `client_assertion_type` in the request.
+
 Use only one of these methods in a single request or an error will occur.
 
 ### Token Claims for Client Authentication with Client Secret JWT
 
-If you use a JWT for client authentication (`client_secret_jwt`), use the following token claims:
+If you use a JWT for client authentication (`client_secret_jwt` or `private_key_jwt`), use the following token claims:
 
 | Token Claims | Description                                                                           | Type   |
 |:-------------|:--------------------------------------------------------------------------------------|:-------|

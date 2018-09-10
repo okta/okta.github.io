@@ -43,7 +43,7 @@ Each org can create up to 200 definitions, and assign them to an unlimited numbe
 
 {% api_operation post /api/v1/meta/schemas/user/default/linkedObjects %}
 
-Adds a linked object definition to the user profile schema
+Adds a linked object definition to the user profile schema. The `name` field found in both the `primary` and `associated` objects may not start with a digit, and can only contain the following characters: `a-z`, `A-Z`, `0-9`, and `_`.
 
 ##### Request Parameters
 {:.api .api-request .api-request-params}

@@ -210,8 +210,11 @@ Function  | Description | Example
 `getAssistantUser(assistantSource).$attribute` | Gets the assistant's Okta user attribute values. | `getAssistantUser("active_directory").firstName`
 `getAssistantAppUser(assistantSource, attributeSource).$attribute` | Gets the assistant's app user attribute values for the app user of any appinstance. | `getAssistantAppUser("active_directory", "google").firstName`
 
-> Pass the correct **app name** for the *managerSource*, *assistantSource*, and *attributeSource* parameters.<br />
-> Note: At this time, only **active_directory** is supported for *managerSource* and *assistantSource*.
+The following should be noted about these functions:
+
+* Be sure to pass the correct App name for the `managerSource`, `assistantSource`, and `attributeSource` parameters.<br />
+* At this time, `active_directory` is the only supported value for `managerSource` and `assistantSource`.
+* Calling the `getManagerUser("active_directory")` function will not trigger a user profile update after the manager was changed.
 
 ### Directory and Workday Functions
 

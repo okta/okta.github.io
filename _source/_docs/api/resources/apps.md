@@ -3517,10 +3517,11 @@ Removes an assignment for a user from an application.
 ##### Request Parameters
 {:.api .api-request .api-request-params}
 
-Parameter | Description                                     | Param Type | DataType | Required | Default
---------- | ----------------------------------------------- | ---------- | -------- | -------- | -------
-applicationId       | `id` of an [app](#application-model) | URL        | String   | TRUE     |
-uid       | unique key of assigned [User](/docs/api/resources/users)       | URL        | String   | TRUE     |
+Parameter     | Description                                                                           | Param Type | DataType | Required | Default
+------------- | ------------------------------------------------------------------------------------- | ---------- | -------- | -------- | -------
+applicationId | `id` of an [app](#application-model)                                                  | URL        | String   | TRUE     |
+uid           | unique key of assigned [User](/docs/api/resources/users)                              | URL        | String   | TRUE     |
+sendEmail     | Sends a deactivation email to the administrator if `true`.  Default value is `false`. | Query      | Boolean  | FALSE    | FALSE
 
 ##### Response Parameters
 {:.api .api-response .api-response-params}
@@ -3535,7 +3536,7 @@ curl -v -X DELETE \
 -H "Accept: application/json" \
 -H "Content-Type: application/json" \
 -H "Authorization: SSWS ${api_token}" \
-"https://{yourOktaDomain}/api/v1/apps/0oad5lTSBOMUBOBVVQSC/users/00ud4tVDDXYVKPXKVLCO"
+"https://{yourOktaDomain}/api/v1/apps/0oad5lTSBOMUBOBVVQSC/users/00ud4tVDDXYVKPXKVLCO?sendEmail=true"
 ~~~
 
 ##### Response Example

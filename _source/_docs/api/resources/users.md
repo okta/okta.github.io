@@ -922,15 +922,11 @@ The first three parameters correspond to different types of lists:
 | q         | Finds a user that matches `firstName`, `lastName`, and `email` properties                                                                    | Query      | String   | FALSE    |
 | filter    | [Filters](/docs/api/getting_started/design_principles#filtering) users with a supported expression for a subset of properties           | Query      | String   | FALSE    |
 | search    | Searches for users with a supported [filtering](/docs/api/getting_started/design_principles#filtering) expression for most properties {% api_lifecycle ea %} | Query      | String   | FALSE    |
-| limit     | Specifies the number of results returned                                                                                                     | Query      | Number   | FALSE    |
-| after     | Specifies the pagination cursor for the next page of users (default is 200)                                                                  | Query      | String   | FALSE    |
+| limit     | Specifies the number of results returned (maximum 200)                                                                                       | Query      | Number   | FALSE    |
+| after     | Specifies the pagination cursor for the next page of users                                                                                   | Query      | String   | FALSE    |
 
-  * If you don't specify a value for `limit` and don't specify a query, only 200 results are returned for most orgs.
-  * If you don't specify any value for `limit` and do specify a query, a maximum of 10 results are returned.
-  * The maximum value for `limit` is 200 for most orgs.
-  *  Don't write code that depends on the default or maximum value, as it may change.
+  * If you don't specify a value for `limit`, the maximum (200) is used as a default.
   * An HTTP 500 status code usually indicates that you have exceeded the request timeout.  Retry your request with a smaller limit and paginate the results. For more information, see [Pagination](/docs/api/getting_started/design_principles#pagination).
-  * Use `limit` and `after` with all four query types.
   * Treat the `after` cursor as an opaque value and obtain it through the next link relation. See [Pagination](/docs/api/getting_started/design_principles#pagination).
 
 ##### Response Parameters
@@ -2011,9 +2007,10 @@ This operation can only be performed on users that do not have a `DEPROVISIONED`
 ##### Request Parameters
 {:.api .api-request .api-request-params}
 
-Parameter | Description  | Param Type | DataType | Required |
---------- | ------------ | ---------- | -------- | -------- |
-userId    | ID of user   | URL        | String   | TRUE     |
+Parameter | Description                                                                           | Param Type | DataType | Required |
+--------- | ------------------------------------------------------------------------------------- | ---------- | -------- | -------- |
+userId    | ID of user                                                                            | URL        | String   | TRUE     |
+sendEmail | Sends a deactivation email to the administrator if `true`.  Default value is `false`. | Query      | Boolean  | FALSE    |
 
 ##### Response Parameters
 {:.api .api-response .api-response-params}
@@ -2028,7 +2025,7 @@ curl -v -X POST \
 -H "Accept: application/json" \
 -H "Content-Type: application/json" \
 -H "Authorization: SSWS ${api_token}" \
-"https://{yourOktaDomain}/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/deactivate"
+"https://{yourOktaDomain}/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/deactivate?sendEmail=true"
 ~~~
 
 ##### Response Example
@@ -2146,9 +2143,10 @@ is required to delete the user.
 ##### Request Parameters
 {:.api .api-request .api-request-params}
 
-Parameter | Description  | Param Type | DataType | Required | Default
---------- | ------------ | ---------- | -------- | -------- | -------
-id        | `id` of user | URL        | String   | TRUE     |
+Parameter | Description                                                                           | Param Type | DataType | Required | Default |
+--------- | ------------------------------------------------------------------------------------- | ---------- | -------- | -------- | ------- |
+id        | `id` of user                                                                          | URL        | String   | TRUE     |         |
+sendEmail | Sends a deactivation email to the administrator if `true`.  Default value is `false`. | Query      | Boolean  | FALSE    | FALSE   |
 
 ##### Response Parameters
 {:.api .api-response .api-response-params}
@@ -2165,7 +2163,7 @@ curl -v -X DELETE \
 -H "Accept: application/json" \
 -H "Content-Type: application/json" \
 -H "Authorization: SSWS ${api_token}" \
-"https://{yourOktaDomain}/api/v1/users/00ub0oNGTSWTBKOLGLNR"
+"https://{yourOktaDomain}/api/v1/users/00ub0oNGTSWTBKOLGLNR?sendEmail=true"
 ~~~
 
 ##### Response Example
@@ -2726,10 +2724,10 @@ Lists all grants for the specified user
 | userId    | ID of the user for whom you are fetching grants                                              | URL        | String   | TRUE     |         |
 | expand    | Valid value: `scope`. If specified, scope details are included in the `_embedded` attribute. | Query      | String   | FALSE    |         |
 | scopeId   | The scope ID to filter on                                                                    | Query      | String   | FALSE    |         |
-| limit     | The number of grants to return (maximum 200)                                                       | Query      | Number   | FALSE    | 20      |
+| limit     | The number of grants to return (maximum 200)                                                 | Query      | Number   | FALSE    | 20      |
 | after     | Specifies the pagination cursor for the next page of grants                                  | Query      | String   | FALSE    |         |
 
-> Note: `after` should treated as a cursor (an opaque value) and obtained through [the next link relation](/docs/api/getting_started/design_principles#pagination).
+> Note: `after` should be treated as a cursor (an opaque value) and obtained through [the next link relation](/docs/api/getting_started/design_principles#pagination).
 
 
 #### Request Example
@@ -3085,7 +3083,7 @@ Lists all refresh tokens issued for the specified User and Client.
 | limit     | The number of tokens to return (maximum 200)                                                       | Query      | Number   | FALSE    | 20      |
 | after     | Specifies the pagination cursor for the next page of tokens                                  | Query      | String   | FALSE    |         |
 
-> Note: `after` should treated as a cursor (an opaque value) and obtained through [the next link relation](/docs/api/getting_started/design_principles#pagination).
+> Note: `after` should be treated as a cursor (an opaque value) and obtained through [the next link relation](/docs/api/getting_started/design_principles#pagination).
 
 
 #### Request Example
@@ -3171,7 +3169,7 @@ Gets a refresh token issued for the specified User and Client.
 | limit     | The number of grants to return (maximum 200)                                                      | Query      | Number   | FALSE    | 20      |
 | after     | Specifies the pagination cursor for the next page of grants                                  | Query      | String   | FALSE    |         |
 
-> Note: `after` should treated as a cursor (an opaque value) and obtained through [the next link relation](/docs/api/getting_started/design_principles#pagination).
+> Note: `after` should be treated as a cursor (an opaque value) and obtained through [the next link relation](/docs/api/getting_started/design_principles#pagination).
 
 
 #### Request Example
