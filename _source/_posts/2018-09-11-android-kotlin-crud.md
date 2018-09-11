@@ -560,7 +560,7 @@ override fun onCreateOptionsMenu(menu: Menu): Boolean {
 override fun onOptionsItemSelected(item: MenuItem) = when (item.itemId) {
     R.id.refresh -> {
         adapter.refreshMovies()
-        Toast.makeText(this.baseContext, "Refreshed", Toast.LENGTH_LONG).show()
+        Toast.makeText(this.baseContext, "Refreshed", Toast.LENGTH_LONG).show())
         true
     }
     else -> {
