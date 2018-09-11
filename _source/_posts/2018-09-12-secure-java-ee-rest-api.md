@@ -2,35 +2,35 @@
 layout: blog_post
 title: 'Build a Java REST API with Java EE and OIDC'
 author: mraible
-description: "Java EE allows you to build REST APIs quickly and easily with JAX-RS and JPA. This article shows you how to build a simple API with Java EE, run it on Apache TomEE, and secure it with JWT and OIDC."
+description: "This article shows you how to build REST API with Java EE, run it on Apache TomEE, and secure it with JWT and OIDC."
 tags: [java, java ee, rest api, jax-rs, jpa, ejb, jwt, oidc, spring security, pac4j]
 tweets:
-  - "Building a Java EE REST API is pretty easy with JPA, JAX-RS, and @ApacheTomEE. Learn how to 💻 code it 🔒 lock it down with JWT and OIDC →"
-  - "We ❤ @java here @oktadev️. This tutorial shows you how to build a Java EE REST API and secure it with many different options: JWTs, @springsecurity, and Pac4J! #jwt #oidc #rest"
-<!-- todo: image -->
+ - "Building a Java EE REST API is pretty easy with JPA, JAX-RS, and @ApacheTomEE. Learn how to 💻 code it and 🔒 lock it down with JWT and OIDC →"
+ - "We ❤ @java here @oktadev️. This tutorial shows you how to build a Java EE REST API and secure it with many different options: JWTs, @springsecurity, and Pac4J! #jwt #oidc #rest"
+image: blog/javaee-rest-api/javaee+okta=love.png
 ---
 
-Java EE is an umbrella standards specification that describes a number of Java technologies, including EJB, JPA, JAX-RS, and many others. It was originally designed to allow portability between Java application servers, and flourished in the early 2000s. Back then, application servers were all the rage and provided by many well-known companies such as IBM, BEA, and Sun. JBoss was a startup that disrupted the status quo and showed it was possible to develop a Java EE application server as an open source project, and give it away for free. JBoss was bought by RedHat in 2006. 
+Java EE allows you to build Java REST APIs quickly and easily with JAX-RS and JPA. Java EE is an umbrella standards specification that describes a number of Java technologies, including EJB, JPA, JAX-RS, and many others. It was originally designed to allow portability between Java application servers, and flourished in the early 2000s. Back then, application servers were all the rage and provided by many well-known companies such as IBM, BEA, and Sun. JBoss was a startup that disrupted the status quo and showed it was possible to develop a Java EE application server as an open source project, and give it away for free. JBoss was bought by RedHat in 2006.
 
-In the early 2000s, Java developers used servlets and EJBs to develop their server applications. Hibernate and Spring came along in 2002 and 2004, respectively. Both technologies had a huge impact on Java developers everywhere, showing them it was possible to write distributed, robust applications without EJBs. Hibernate's POJO model was eventually adopted as the JPA standard and heavily influenced EJB as well. 
+In the early 2000s, Java developers used servlets and EJBs to develop their server applications. Hibernate and Spring came along in 2002 and 2004, respectively. Both technologies had a huge impact on Java developers everywhere, showing them it was possible to write distributed, robust applications without EJBs. Hibernate's POJO model was eventually adopted as the JPA standard and heavily influenced EJB as well.
 
 Fast forward to 2018, and Java EE certainly doesn't look like it used to! Now, it's mostly POJOs and annotations and far simpler to use.
 
-## Why Not Spring Boot?
+## Why Build a Java REST API with Java EE and Not Spring Boot?
 
-Spring Boot is one of my favorite technologies in the Java ecosystem. It's drastically reduced the configuration necessary in a Spring application and made it possible to whip up REST APIs in just a few lines of code. However, I've had a lot of API security questions lately from developers that *aren't* using Spring Boot. Some of them aren't even using Spring! 
+Spring Boot is one of my favorite technologies in the Java ecosystem. It's drastically reduced the configuration necessary in a Spring application and made it possible to whip up REST APIs in just a few lines of code. However, I've had a lot of API security questions lately from developers that *aren't* using Spring Boot. Some of them aren't even using Spring!
 
-For this reason, I thought it'd be fun to build a Java EE REST API that's the same as a Spring Boot REST API I developed in the past. Namely, the "good-beers" API from my [Bootiful Angular](/blog/2017/04/26/bootiful-development-with-spring-boot-and-angular) and [Bootiful React](/blog/2017/12/06/bootiful-development-with-spring-boot-and-react) posts. 
+For this reason, I thought it'd be fun to build a Java REST API (using Java EE) that's the same as a Spring Boot REST API I developed in the past. Namely, the "good-beers" API from my [Bootiful Angular](/blog/2017/04/26/bootiful-development-with-spring-boot-and-angular) and [Bootiful React](/blog/2017/12/06/bootiful-development-with-spring-boot-and-react) posts.
 
-## Get Started with Java EE 
+## Use Java EE to Build Your Java REST API
 
 To begin, I [asked my network on Twitter](https://twitter.com/mraible/status/1032688466025435137) if any quickstarts existed for Java EE like start.spring.io. I received a few suggestions and started doing some research. [David Blevins](https://twitter.com/dblevins) recommended I look at [tomee-jaxrs-starter-project](https://github.com/tomitribe/tomee-jaxrs-starter-project), so I started there. I also looked into the [TomEE Maven Archetype](http://tomee.apache.org/tomee-mp-getting-started.html), as recommended by [Roberto Cortez](http://twitter.com/radcortez).
 
-I liked the jaxrs-starter project because it showed how to create a REST API with JAX-RS. The TomEE Maven archetype was helpful too, especially since it showed how to use JPA, H2, and JSF. I combined the two to create my own minimal starter that you can use to implement secure Java EE APIs on TomEE. You don't have to use TomEE for these examples, but I haven't tested them on other implementations. 
+I liked the jaxrs-starter project because it showed how to create a REST API with JAX-RS. The TomEE Maven archetype was helpful too, especially since it showed how to use JPA, H2, and JSF. I combined the two to create my own minimal starter that you can use to implement secure Java EE APIs on TomEE. You don't have to use TomEE for these examples, but I haven't tested them on other implementations.
 
 *If you get these examples working on other app servers, please let me know and I'll update this blog post.*
 
-In these examples, I'll be using Java 8 and Java EE 7.0 with TomEE 7.0.5. TomEE 7.x is the EE7 compatible version; a TomEE 8.x branch exists for EE8 compatibility work, but there are no releases yet. I expect you to have [Apache Maven](https://maven.apache.org) installed too.
+In these examples, I'll be using Java 8 and Java EE 7.0 with TomEE 7.1.0. TomEE 7.x is the EE 7 compatible version; a TomEE 8.x branch exists for EE8 compatibility work, but there are no releases yet. I expect you to have [Apache Maven](https://maven.apache.org) installed too.
 
 To begin, clone our Java EE REST API repository to your hard drive, and run it:
 
@@ -147,7 +147,7 @@ The most important XML files is the `pom.xml` that defines dependencies and allo
         <maven.compiler.source>1.8</maven.compiler.source>
         <failOnMissingWebXml>false</failOnMissingWebXml>
         <javaee-api.version>7.0</javaee-api.version>
-        <tomee.version>7.0.5</tomee.version>
+        <tomee.version>7.1.0</tomee.version>
     </properties>
 
     <dependencies>
@@ -174,7 +174,7 @@ The most important XML files is the `pom.xml` that defines dependencies and allo
 </project>
 ```
 
-The main entity is `Beer.java`. 
+The main entity is `Beer.java`.
 
 ```java
 package com.okta.developer;
@@ -240,7 +240,7 @@ The database (a.k.a., datasource) is configured in `src/main/resources/META-INF/
 </persistence>
 ```
 
-The `BeerService.java` class handles reading and saving this entity to the database using JPA's `EntityManager`. 
+The `BeerService.java` class handles reading and saving this entity to the database using JPA's `EntityManager`.
 
 ```java
 package com.okta.developer;
@@ -409,9 +409,9 @@ public class BeerBean {
 }
 ```
 
-You now have a REST API built with Java EE! However, it's not secure. In the following sections, I'll show you how to secure it using Okta's JWT Verifier for Java, Spring Security, and Pac4j. 
+You now have a REST API built with Java EE! However, it's not secure. In the following sections, I'll show you how to secure it using Okta's JWT Verifier for Java, Spring Security, and Pac4j.
 
-## Add OIDC Security with Okta
+## Add OIDC Security with Okta to Your Java REST API
 
 You will need to create an OIDC Application in Okta to verify the security configurations you're about to implement work. To make this effortless, you can use Okta's API for OIDC. At Okta, our goal is to make [identity management](https://developer.okta.com/product/user-management/) a lot easier, more secure, and more scalable than what you're used to. Okta is a cloud service that allows developers to create, edit, and securely store user accounts and user account data, and connect them with one or multiple applications. Our API enables you to:
 
@@ -425,17 +425,18 @@ Are you sold? [Register for a forever-free developer account](https://developer.
 
 1. Log in to your developer account on [developer.okta.com](https://developer.okta.com).
 2. Navigate to **Applications** and click on **Add Application**.
-3. Select **Web** and click **Next**. 
+3. Select **Web** and click **Next**.
 4. Give the application a name (.e.g., `Java EE Secure API`) and add the following as Login redirect URIs:
-    * `http://localhost:8080/login/oauth2/code/okta	`
-    * `http://localhost:8080/callback?client_name=OidcClient`
-4. Click **Done**, then edit the project and enable "Implicit (Hybrid)" as a grant type and click **Save**.
+  * `http://localhost:3000/implicit/callback`
+  * `http://localhost:8080/login/oauth2/code/okta`
+  * `http://localhost:8080/callback?client_name=OidcClient`
+4. Click **Done**, then edit the project and enable "Implicit (Hybrid)" as a grant type (allow ID and access tokens) and click **Save**.
 
 <!-- todo: fix CSS so links in sub-list above have proper margins. Top margin is about 15px, bottom is 0px currently. -->
 
 ## Protect Your Java REST API with JWT Verifier
 
-To validate JWTs from Okta, you'll need to add [Okta JWT Verifier for Java](https://github.com/okta/okta-jwt-verifier-java) to your `pom.xml`. 
+To validate JWTs from Okta, you'll need to add [Okta JWT Verifier for Java](https://github.com/okta/okta-jwt-verifier-java) to your `pom.xml`.
 
 ```xml
 <properties>
@@ -455,7 +456,7 @@ To validate JWTs from Okta, you'll need to add [Okta JWT Verifier for Java](http
 
 Then create a `JwtFilter.java` (in the `src/main/java/com/okta/developer` directory). This filter looks for an `authorization` header with an access token in it. If it exists, it validates it and prints out the user's `sub`, a.k.a. their email address. If it doesn't exist, or is in valid, an access denied status is returned.
 
-Make sure to replace `{yourOktaDomain}` and `{clientId}` with the settings from the app you created. 
+Make sure to replace `{yourOktaDomain}` and `{clientId}` with the settings from the app you created.
 
 ```java
 package com.okta.developer;
@@ -540,7 +541,17 @@ cd bootiful-react/client
 npm install
 ```
 
-Edit this project's `client/src/App.tsx` file and change the `issuer` and `clientId` to match your application. Then start it:
+Edit this project's `client/src/App.tsx` file and change the `issuer` and `clientId` to match your application. 
+
+```ts
+const config = {
+  issuer: 'https://{yourOktaDomain}/oauth2/default',
+  redirectUri: window.location.origin + '/implicit/callback',
+  clientId: '{yourClientId}'
+};
+```
+
+Then start it:
 
 ```
 npm start
@@ -576,7 +587,7 @@ public class CorsFilter implements Filter {
         System.out.println("In CorsFilter, method: " + request.getMethod());
 
         // Authorize (allow) all domains to consume the content
-        response.addHeader("Access-Control-Allow-Origin", "*");
+        response.addHeader("Access-Control-Allow-Origin", "http://localhost:3000");
         response.addHeader("Access-Control-Allow-Methods", "GET");
         response.addHeader("Access-Control-Allow-Headers", "*");
 
@@ -600,7 +611,7 @@ public class CorsFilter implements Filter {
 }
 ```
 
-Both of the filters you've added use `@WebFilter` to register themeselves. This is a convenient annotation, but it doesn't provide any filter ordering capabilities. To workaround this missing feature, modify `JwtFilter` so it doesn't have a `urlPattern` in its `@WebFilter`.
+Both of the filters you've added use `@WebFilter` to register themselves. This is a convenient annotation, but it doesn't provide any filter ordering capabilities. To workaround this missing feature, modify `JwtFilter` so it doesn't have a `urlPattern` in its `@WebFilter`.
 
 ```java
 @WebFilter(filterName = "jwtFilter")
@@ -640,54 +651,70 @@ In JwtFilter, path: /good-beers
 Hello, demo@okta.com
 ```
 
-Using a filter with Okta's JWT Verifier is an easy way to implement a resource server (in OAuth 2.0 nomenclature). However, it doesn't provide you with any information about the user. In the next two sections, I'll show you how you can use Spring Security and Pac4j to implement similar security. As a bonus, you'll be able to get the user's information when using these techniques.
+Using a filter with Okta's JWT Verifier is an easy way to implement a resource server (in OAuth 2.0 nomenclature). However, it doesn't provide you with any information about the user. The `JwtVerifier` interface does have a `decodeIdToken(String idToken, String nonce)` method, but you'd have to pass the ID token in from your client to use it.
 
-## Secure Your REST API with Spring Security
+In the next two sections, I'll show you how you can use Spring Security and Pac4j to implement similar security. As a bonus, I'll show you how to prompt the user to login (when they try to access the API directly) and get the user's information.
 
-Spring Security is one of my favorite frameworks in Javaland. Most of the examples on this blog use Spring Boot when showing how to use Spring Security. I'm going to use the latest version -- 5.1.0.RC1 -- so this tutorial stays up to date for a few months.
+## Secure Your Java REST API with Spring Security
 
-Revert your changes to add JWT Verifier, or simply delete `web.xml` to continue. 
+Spring Security is one of my favorite frameworks in Javaland. Most of the examples on this blog use Spring Boot when showing how to use Spring Security. I'm going to use the latest version -- 5.1.0.RC2 -- so this tutorial stays up to date for a few months.
+
+Revert your changes to add JWT Verifier, or simply delete `web.xml` to continue.
 
 Modify your `pom.xml` to have the necessary dependencies for Spring Security. You'll also need to add Spring's snapshot repositories to get the release candidate.
 
 ```xml
 <properties>
     ...
-    <spring-security.version>5.1.0.RC1</spring-security.version>
+    <spring-security.version>5.1.0.RC2</spring-security.version>
+    <spring.version>5.1.0.RC3</spring.version>
     <jackson.version>2.9.6</jackson.version>
 </properties>
+
+<dependencyManagement>
+    <dependencies>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-framework-bom</artifactId>
+            <version>${spring.version}</version>
+            <scope>import</scope>
+            <type>pom</type>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-bom</artifactId>
+            <version>${spring-security.version}</version>
+            <scope>import</scope>
+            <type>pom</type>
+        </dependency>
+    </dependencies>
+</dependencyManagement>
 
 <dependencies>
     ...
     <dependency>
         <groupId>org.springframework</groupId>
         <artifactId>spring-webmvc</artifactId>
-        <version>${spring-security.version}</version>
     </dependency>
     <dependency>
         <groupId>org.springframework.security</groupId>
         <artifactId>spring-security-web</artifactId>
-        <version>${spring-security.version}</version>
     </dependency>
     <dependency>
         <groupId>org.springframework.security</groupId>
         <artifactId>spring-security-config</artifactId>
-        <version>${spring-security.version}</version>
     </dependency>
     <dependency>
         <groupId>org.springframework.security</groupId>
         <artifactId>spring-security-oauth2-client</artifactId>
-        <version>${spring-security.version}</version>
     </dependency>
     <dependency>
         <groupId>org.springframework.security</groupId>
         <artifactId>spring-security-oauth2-resource-server</artifactId>
-        <version>${spring-security.version}</version>
     </dependency>
     <dependency>
         <groupId>org.springframework.security</groupId>
         <artifactId>spring-security-oauth2-jose</artifactId>
-        <version>${spring-security.version}</version>
     </dependency>
     <dependency>
         <groupId>com.fasterxml.jackson.core</groupId>
@@ -727,12 +754,12 @@ package com.okta.developer;
 
 import org.springframework.security.web.context.*;
 
-public class SecurityWebApplicationInitializer 
-    extends AbstractSecurityWebApplicationInitializer {
+public class SecurityWebApplicationInitializer
+   extends AbstractSecurityWebApplicationInitializer {
 
-    public SecurityWebApplicationInitializer() {
-        super(SecurityConfiguration.class);
-    }
+   public SecurityWebApplicationInitializer() {
+       super(SecurityConfiguration.class);
+   }
 }
 ```
 
@@ -742,106 +769,100 @@ Create a `SecurityConfiguration.java` class in the same directory. This class us
 package com.okta.developer;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
-import org.springframework.core.env.Environment;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.security.config.oauth2.client.CommonOAuth2Provider;
+import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.oauth2.client.InMemoryOAuth2AuthorizedClientService;
 import org.springframework.security.oauth2.client.OAuth2AuthorizedClientService;
 import org.springframework.security.oauth2.client.registration.ClientRegistration;
 import org.springframework.security.oauth2.client.registration.ClientRegistrationRepository;
+import org.springframework.security.oauth2.client.registration.ClientRegistrations;
 import org.springframework.security.oauth2.client.registration.InMemoryClientRegistrationRepository;
 import org.springframework.security.web.csrf.CookieCsrfTokenRepository;
-
-import java.util.Collections;
-import java.util.List;
-import java.util.Objects;
-import java.util.stream.Collectors;
 
 @Configuration
 @EnableWebSecurity
 @PropertySource("classpath:application.properties")
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
-    private static List<String> clients = Collections.singletonList("okta");
-    private final Environment env;
+    private final String clientSecret;
+    private final String clientId;
+    private final String issuerUri;
 
     @Autowired
-    public SecurityConfiguration(Environment env) {
-        this.env = env;
+    public SecurityConfiguration(@Value("${okta.issuer-uri}") String issuerUri,
+            @Value("${okta.client-id}") String clientId,
+            @Value("${okta.client-secret}") String clientSecret) {
+        this.issuerUri = issuerUri;
+        this.clientId = clientId;
+        this.clientSecret = clientSecret;
     }
 
-	@Override
-    protected void configure(HttpSecurity http) throws Exception {
-        http
-            .csrf()
-                .csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse())
+@Override
+   protected void configure(HttpSecurity http) throws Exception {
+      http
+            .sessionManagement()
+                .sessionCreationPolicy(SessionCreationPolicy.ALWAYS)
                 .and()
-            .authorizeRequests()
-                .antMatchers("/**/*.{js,html,css}").permitAll()
-                .anyRequest().authenticated()
-                .and()
-            .oauth2Login()
-                .clientRegistrationRepository(clientRegistrationRepository())
-                .authorizedClientService(authorizedClientService());
-    }
+           .csrf()
+               .csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse())
+               .and()
+           .authorizeRequests()
+               .anyRequest().authenticated()
+               .and()
+           .oauth2Login();
+   }
 
-    @Bean
-    public OAuth2AuthorizedClientService authorizedClientService() {
-        return new InMemoryOAuth2AuthorizedClientService(clientRegistrationRepository());
-    }
+   @Bean
+   public OAuth2AuthorizedClientService authorizedClientService() {
+       return new InMemoryOAuth2AuthorizedClientService(clientRegistrationRepository());
+   }
 
-    @Bean
+   @Bean
+   public ClientRegistrationRepository clientRegistrationRepository() {
+       List<ClientRegistration> registrations = clients.stream()
+               .map(this::getRegistration)
+               .filter(Objects::nonNull)
+               .collect(Collectors.toList());
+
+       return new InMemoryClientRegistrationRepository(registrations);
+   }
+
+   @Bean
     public ClientRegistrationRepository clientRegistrationRepository() {
-        List<ClientRegistration> registrations = clients.stream()
-                .map(this::getRegistration)
-                .filter(Objects::nonNull)
-                .collect(Collectors.toList());
-
-        return new InMemoryClientRegistrationRepository(registrations);
+        ClientRegistration okta = getRegistration();
+        return new InMemoryClientRegistrationRepository(okta);
     }
 
-    private ClientRegistration getRegistration(String client) {
-        String REGISTRATION_KEY = "spring.security.oauth2.client.registration.";
-        String clientId = env.getProperty(REGISTRATION_KEY + client + ".client-id");
-        String clientSecret = env.getProperty(REGISTRATION_KEY + client + ".client-secret");
-
-        String PROVIDER_KEY = "spring.security.oauth2.client.provider.";
-        String authorizationUri = env.getProperty(PROVIDER_KEY + client + ".user-authorization-uri");
-        String tokenUri = env.getProperty(PROVIDER_KEY + client + ".access-token-uri");
-        String userInfoUri = env.getProperty(PROVIDER_KEY + client + ".user-info-uri");
-        String jwkSetUri = env.getProperty(PROVIDER_KEY + client + ".jwk-set-uri");
-
-        if (client.equals("okta")) {
-            return CommonOAuth2Provider.OKTA.getBuilder(client)
-                    .clientId(clientId).clientSecret(clientSecret)
-                    .authorizationUri(authorizationUri)
-                    .tokenUri(tokenUri)
-                    .userInfoUri(userInfoUri)
-                    .jwkSetUri(jwkSetUri).build();
-        }
-        return null;
-    }
+    ClientRegistrations.fromOidcIssuerLocation(Objects.requireNonNull(issuerUri))
+            .registrationId("okta")
+            .clientId(clientId)
+            .clientSecret(clientSecret)
+            .build();
 }
 ```
 
 Create `src/main/resources/application.properties` and fill it with your Okta OIDC app settings.
 
 ```properties
-spring.security.oauth2.client.registration.okta.client-id={clientId}
-spring.security.oauth2.client.registration.okta.client-secret={clientSecret}
-spring.security.oauth2.client.provider.okta.user-authorization-uri=https://{yourOktaDomain}/oauth2/default/v1/authorize
-spring.security.oauth2.client.provider.okta.access-token-uri=https://{yourOktaDomain}/oauth2/default/v1/token
-spring.security.oauth2.client.provider.okta.user-info-uri=https://{yourOktaDomain}/oauth2/default/v1/userinfo
-spring.security.oauth2.client.provider.okta.jwk-set-uri=https://{yourOktaDomain}/oauth2/default/v1/keys
+okta.client-id={clientId}
+okta.client-secret={clientSecret}
+okta.issuer-uri=https://{yourOktaDomain}/oauth2/default
 ```
 
 *Thanks to [Baeldung](https://www.baeldung.com) for the [excellent documentation on Spring Security 5 OAuth](https://www.baeldung.com/spring-security-5-oauth2-login).*
 
-Restart your API (`mvn clean package tomee:run`) and navigate to `http://localhost:8080/good-beers`. You should be redirected to Okta to login.
+Because you enabled CSRF, you have to add the following hidden field for CSRF protection inside any `<h:form>` tags. I added the following to `src/main/webapp/beer.xhtml` and `result.xhtml`. 
+
+```html
+<input type="hidden" value="${_csrf.token}" name="${_csrf.parameterName}"/>
+```
+
+Restart your API (`mvn clean package tomee:run`) and navigate to `http://localhost:8080/good-beers`. You should be redirected to Okta to log in.
 
 {% img blog/javaee-rest-api/okta-login.png alt:"Okta Sign-In" width:"800" %}{: .center-image }
 
@@ -857,31 +878,40 @@ Replace the `configure()` method in `SecurityConfiguration.java` with the follow
 @Override
 protected void configure(HttpSecurity http) throws Exception {
     http
+        .sessionManagement()
+            .sessionCreationPolicy(SessionCreationPolicy.ALWAYS)
+            .and()
         .csrf()
             .csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse())
             .and()
         .cors()
             .and()
         .authorizeRequests()
-            .antMatchers("/**/*.{js,html,css}").permitAll()
             .anyRequest().authenticated()
             .and()
-        .oauth2().resourceServer()
-            .jwt().jwkSetUri("https://dev-737523.oktapreview.com/oauth2/default/v1/keys");
+        .oauth2Login()
+            .and()
+        .oauth2ResourceServer()
+            .jwt();
+}
+
+@Bean
+JwtDecoder jwtDecoder() {
+    return JwtDecoders.fromOidcIssuerLocation(this.issuerUri);
 }
 
 @Bean
 CorsConfigurationSource corsConfigurationSource() {
     CorsConfiguration configuration = new CorsConfiguration();
-    configuration.setAllowedOrigins(Collections.singletonList("*"));
+    configuration.setAllowCredentials(true);
+    configuration.setAllowedOrigins(Collections.singletonList("http://localhost:3000"));
     configuration.setAllowedMethods(Collections.singletonList("GET"));
+    configuration.setAllowedHeaders(Collections.singletonList("*"));
     UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
     source.registerCorsConfiguration("/**", configuration);
     return source;
 }
 ```
-
-<!-- NOTE: This code does not 1) enable CORS or 2) secure the API. Todo: fix it -->
 
 After making these changes, restart your API and verify your React UI can talk to it. Pretty slick, eh?
 
@@ -892,7 +922,14 @@ Spring Security integrates with the Servlet API, so you can use the following me
 * `HttpServletRequest.getRemoteUser()`
 * `HttpServletRequest.getUserPrincipal()`
 
-Please see its [reference documentation](https://docs.spring.io/spring-security/site/docs/current/reference/htmlsingle/#servletapi) for more information.
+Once you have the `Principal`, you can get details about the user, including their roles (a.k.a., authorities).
+
+```java
+OAuth2Authentication authentication = (OAuth2Authentication) principal;
+Map<String, Object> user = (Map<String, Object>) authentication.getUserAuthentication().getDetails();
+```
+
+Please see Spring Security's [reference documentation](https://docs.spring.io/spring-security/site/docs/current/reference/htmlsingle/#servletapi) for more information.
 
 ## Use Pac4j to Lock Down Your Java REST API
 
@@ -960,7 +997,7 @@ public class CorsFilter implements Filter {
         System.out.println("In CorsFilter, method: " + request.getMethod());
 
         // Authorize (allow) all domains to consume the content
-        response.addHeader("Access-Control-Allow-Origin", "*");
+        response.addHeader("Access-Control-Allow-Origin", "http://localhost:3000");
         response.addHeader("Access-Control-Allow-Methods", "GET");
         response.addHeader("Access-Control-Allow-Headers", "*");
 
@@ -1026,7 +1063,7 @@ public class SecurityConfigFactory implements ConfigFactory {
         oidcConfiguration.setUseNonce(true);
         final OidcClient<OidcProfile, OidcConfiguration> oidcClient = new OidcClient<>(oidcConfiguration);
         oidcClient.setAuthorizationGenerator((ctx, profile) -> {
-            profile.addRole("ROLE_ADMIN");
+            profile.addRole("ROLE_USER");
             return profile;
         });
 
@@ -1125,11 +1162,11 @@ Create `src/main/webapp/WEB-INF/web.xml` to map the `CorsFilter`, as well as Pac
 </web-app>
 ```
 
-To visualize the user's information a bit better, you'll need to create a few more files. These JSF-related files are copied from [j2e-pac4j-cdi-demo](https://github.com/pac4j/j2e-pac4j-cdi-demo). 
+To visualize the user's information a bit better, you'll need to create a few more files. These JSF-related files are copied from [j2e-pac4j-cdi-demo](https://github.com/pac4j/j2e-pac4j-cdi-demo).
 
 **NOTE:** I tried to get [j2e-pac4j-cdi-demo](https://github.com/pac4j/j2e-pac4j-cdi-demo) (with no `web.xml`) running on TomEE, but it fails with an error: `Filters cannot be added to context [] as the context has been initialised`. It does work when using the [Payara Maven plugins](https://github.com/pac4j/j2e-pac4j-cdi-demo/blob/master/pom.xml#L144).
 
-Create `src/main/java/com/okta/developer/ProfileView.java`, a JSF managed bean that gather's the user's information.
+Create `src/main/java/com/okta/developer/ProfileView.java`, a JSF managed bean that gathers the user's information.
 
 ```java
 package com.okta.developer;
@@ -1328,15 +1365,15 @@ If you're wondering why the images aren't stacked, it's because I changed the be
 
 ## What About Jakarta EE?
 
-You might've heard that Java EE has become open source (much like [OpenJDK](http://openjdk.java.net) for Java SE) and its new name is [Jakarta EE](https://jakarta.ee/). David Blevins is a good friend and heavily involved in Java EE / Jakarta EE. For proof, see his [Twitter bio](https://twitter.com/dblevins): A founder of the Apache TomEE, OpenEJB and Geronimo projects. Member of Apache, JCP EC, EE4J PMC, Jakarta EE WG, MicroProfile, Eclipse Board. CEO [@Tomitribe](https://twitter.com/Tomitribe). 
+You might've heard that Java EE has become open source (much like [OpenJDK](http://openjdk.java.net) for Java SE) and its new name is [Jakarta EE](https://jakarta.ee/). David Blevins is a good friend and heavily involved in Java EE / Jakarta EE. For proof, see his [Twitter bio](https://twitter.com/dblevins): A founder of the Apache TomEE, OpenEJB and Geronimo projects. Member of Apache, JCP EC, EE4J PMC, Jakarta EE WG, MicroProfile, Eclipse Board. CEO [@Tomitribe](https://twitter.com/Tomitribe).
 
-I asked David when there would be a useable release of Jakarta EE. 
+I asked David when there would be a usable release of Jakarta EE.
 
 > **David:** The main focus right now is to create a version of Jakarta EE that is compatible with Java EE 8. We hope to have that out by the end of the year. After that's released, we'll start working on Jakarta EE 9 and iterating as needed.
 
 Jakarta EE has a [working group](https://www.infoq.com/news/2018/04/jakarta-ee-working-group) that decides the direction of the platform.
 
-## Learn More about Java EE, Jakarta EE, and OIDC
+## Learn More about Secure REST APIs, Java EE, Jakarta EE, and OIDC
 
 I hope you've enjoyed this tour that showed you how to build and secure a Java EE REST API with JWT and OIDC. If you'd like to see the source code for each completed section, I've put them in branches in the [GitHub repo](https://github.com/oktadeveloper/okta-java-ee-rest-api-example). You can clone the different implementations with the commands below:
 
@@ -1346,17 +1383,23 @@ git clone -b spring-security https://github.com/oktadeveloper/okta-java-ee-rest-
 git clone -b pac4j https://github.com/oktadeveloper/okta-java-ee-rest-api-example.git
 ```
 
-As I mentioned previously, most of the Java tutorials we have on this blog show how to use Spring Boot. In case you're interested in learning Spring Boot, here's some tutorials I've written that will show you the gist of things.
+As I mentioned previously, most of the Java tutorials we have on this blog show how to use Spring Boot. In case you're interested in learning Spring Boot, here are some tutorials I've written that will show you the gist of things.
 
 * [Get Started with Spring Boot, OAuth 2.0, and Okta](https://developer.okta.com/blog/2017/03/21/spring-boot-oauth)
 * [Use React and Spring Boot to Build a Simple CRUD App](https://developer.okta.com/blog/2018/07/19/simple-crud-react-and-spring-boot)
 * [Build a Basic CRUD App with Angular 7.0 and Spring Boot 2.1](https://developer.okta.com/blog/2018/08/22/basic-crud-angular-7-and-spring-boot-2)
 
-If you're new to OIDC, I'd recommend you checkout the following posts:
+If you're new to OIDC, I'd recommend you check out the following posts:
 
 * [Get Started with Spring Security 5.0 and OIDC](https://developer.okta.com/blog/2017/12/18/spring-security-5-oidc)
 * [Identity, Claims, & Tokens – An OpenID Connect Primer, Part 1 of 3](https://developer.okta.com/blog/2017/07/25/oidc-primer-part-1)
 * [OIDC in Action – An OpenID Connect Primer, Part 2 of 3](https://developer.okta.com/blog/2017/07/25/oidc-primer-part-2)
 * [What's in a Token? – An OpenID Connect Primer, Part 3 of 3](https://developer.okta.com/blog/2017/08/01/oidc-primer-part-3)
+
+For more about Java REST APIs and TomEE, I recommend these sources:
+
+* [David Blevins – Deconstructing REST Security, Iterate 2018](https://www.youtube.com/watch?v=XuhKdy7UIoY)
+* [Antonio Goncalves – Securing JAX-RS Endpoints with JWT](https://antoniogoncalves.org/2016/10/03/securing-jax-rs-endpoints-with-jwt/)
+* [TomEE: Running with Systemd](https://www.tomitribe.com/blog/2018/08/tomee-running-with-systemd/)
 
 If you've made it this far, I suspect you might be interested in seeing future blog posts. [Follow me](https://twitter.com/mraible) and my [whole team](https://twitter.com/oktadev)) on Twitter, like us [on Facebook](https://www.facebook.com/oktadevelopers), or check out [our YouTube channel](https://www.youtube.com/channel/UC5AMiWqFVFxF1q9Ya1FuZ_Q). For questions, please leave a comment below, or post it to our [Developer Forums](https://devforum.okta.com/).
