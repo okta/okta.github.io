@@ -233,7 +233,7 @@ You can see that it sets the `beers` state with the response data. To initialize
 
 ```typescript
 interface Beer {
-  id: string;
+  id: number;
   name: string;
 }
 
@@ -304,6 +304,8 @@ As a Java developer, I'm not a fan of prefixing interfaces with "I". There's als
   "no-empty-interface": false,
   "array-type": [true, "generic"],
   "member-access": [true, "no-public"]
+  "ordered-imports": false,
+  "object-literal-sort-keys": false
 }
 ```
 
@@ -339,7 +341,7 @@ To make this application easier to maintain, move the beer list fetching and ren
 import * as React from 'react';
 
 interface Beer {
-  id: string;
+  id: number;
   name: string;
 }
 
@@ -588,7 +590,7 @@ To lock down the backend, you can use [Okta's Spring Boot Starter](https://githu
 <dependency>
     <groupId>org.springframework.security.oauth.boot</groupId>
     <artifactId>spring-security-oauth2-autoconfigure</artifactId>
-    <version>2.0.1.RELEASE</version>
+    <version>2.0.4.RELEASE</version>
 </dependency>
 ```
 
@@ -602,7 +604,7 @@ Copy the client ID into your `server/src/main/resources/application.properties` 
 
 ```properties
 okta.oauth2.issuer=https://{yourOktaDomain}/oauth2/default
-okta.oauth2.clientId={clientId}
+okta.oauth2.client-id={clientId}
 ```
 
 Replace `{yourOktaDomain}` with your org URL, which you can find on the Dashboard of the Developer Console. Make sure you don't include `-admin` in the value!
@@ -640,13 +642,13 @@ import { Security, ImplicitCallback } from '@okta/okta-react';
 
 const config = {
   issuer: 'https://{yourOktaDomain}/oauth2/default',
-  redirectUri: window.location.origin + '/implicit/callback',
-  clientId: '{clientId}'
+  redirect_uri: window.location.origin + '/implicit/callback',
+  client_id: '{clientId}'
 };
 
 export interface Auth {
-  login(path: string): {};
-  logout(): {};
+  login(redirectUri: string): {};
+  logout(redirectUri: string): {};
   isAuthenticated(): boolean;
   getAccessToken(): string;
 }
@@ -656,10 +658,7 @@ class App extends React.Component {
   render() {
     return (
       <Router>
-        <Security
-          issuer={config.issuer}
-          client_id={config.clientId}
-          redirect_uri={config.redirectUri}>
+        <Security {...config}>
           <Route path="/" exact={true} component={Home}/>
           <Route path="/implicit/callback" component={ImplicitCallback}/>
         </Security>
@@ -700,10 +699,9 @@ export default withAuth(class Home extends React.Component<HomeProps, HomeState>
   }
 
   async checkAuthentication() {
-    const isAuthenticated = await this.props.auth.isAuthenticated();
-    const {authenticated} = this.state;
-    if (isAuthenticated !== authenticated) {
-      this.setState({authenticated: isAuthenticated});
+    const authenticated = await this.props.auth.isAuthenticated();
+    if (authenticated !== this.state.authenticated) {
+      this.setState({ authenticated });
     }
   }
 
@@ -716,11 +714,11 @@ export default withAuth(class Home extends React.Component<HomeProps, HomeState>
   }
 
   async login() {
-    this.props.auth.login('/');
+    this.props.auth.login('/')
   }
 
   async logout() {
-    this.props.auth.logout();
+    this.props.auth.logout('/');
   }
 
   render() {
@@ -728,24 +726,24 @@ export default withAuth(class Home extends React.Component<HomeProps, HomeState>
     let body = null;
     if (authenticated) {
       body = (
-        <div className="Buttons">
+        <div className='Buttons'>
           <button onClick={this.logout}>Logout</button>
           <BeerList auth={this.props.auth}/>
         </div>
       );
     } else {
       body = (
-        <div className="Buttons">
+        <div className='Buttons'>
           <button onClick={this.login}>Login</button>
         </div>
       );
     }
 
     return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo"/>
-          <h1 className="App-title">Welcome to React</h1>
+      <div className='App'>
+        <header className='App-header'>
+          <img src={logo} className='App-logo' alt='logo'/>
+          <h1 className='App-title'>Welcome to React</h1>
         </header>
         {body}
       </div>
@@ -779,7 +777,7 @@ In `client/src/BeerList.tsx`, add the `auth` property to the `BeerListProps` int
 import { Auth } from './App';
 
 interface Beer {
-  id: string;
+  id: number;
   name: string;
 }
 
@@ -794,23 +792,6 @@ interface BeerListState {
 
 class BeerList extends React.Component<BeerListProps, BeerListState> {
   ...
-}
-```
-
-You'll encounter a couple more TSLint rules I don't agree with at this point.
-
-```bash
-(4,1): Import sources within a group must be alphabetized.
-(10,3): The key 'clientId' is not sorted alphabetically
-```
-
-To turn allow any order for your imports and keys, modify `tslint.json` and disabled ordered-imports.
-
-```json
-"rules": {
-  ...
-  "ordered-imports": false,
-  "object-literal-sort-keys": false
 }
 ```
 
@@ -961,5 +942,6 @@ If you find any issues, please add a comment below, and I'll do my best to help.
 
 **Changelog:**
 
+* Sep 11, 2018: Updated to use Spring Boot 2.0.4 and React 16.5.0. You can see the code changes in the example app via pull requests on GitHub: [master-branch#7](https://github.com/oktadeveloper/spring-boot-react-example/pull/7), [okta-branch#6](https://github.com/oktadeveloper/spring-boot-react-example/pull/6). Changes to this article can be viewed in [okta/okta.github.io#2303](https://github.com/okta/okta.github.io/pull/2303).
 * Jul 12, 2018: Updated to use Spring Boot 2.0.3, Okta Spring Boot Starter 0.6.0, and Okta React 1.0.2. You can see the code changes in the example app via pull requests on GitHub: [master-branch#4](https://github.com/oktadeveloper/spring-boot-react-example/pull/4), [okta-branch#5](https://github.com/oktadeveloper/spring-boot-react-example/pull/5). Changes to this article can be viewed in [okta/okta.github.io#2189](https://github.com/okta/okta.github.io/pull/2189).
 * Apr 10, 2018: Updated to use Spring Boot 1.5.12, Okta Spring Boot Starter 0.4.0, and Okta React 1.0.0. You can see the code changes in the example app via pull requests on GitHub: [master#3](https://github.com/oktadeveloper/spring-boot-react-example/pull/3), [okta#2](https://github.com/oktadeveloper/spring-boot-react-example/pull/2). Changes to this article can be viewed in [okta/okta.github.io#1942](https://github.com/okta/okta.github.io/pull/1942).
