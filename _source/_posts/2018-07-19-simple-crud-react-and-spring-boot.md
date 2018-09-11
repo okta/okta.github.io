@@ -1408,7 +1408,14 @@ After adding this, you should be able to run `./mvnw spring-boot:run -Pprod` and
 
 {% img blog/spring-boot-2-react/localhost-8080.png alt:"App Running with Maven" width:"800" %}{: .center-image }
 
-**NOTE:** If you're unable to log in, you might try opening your app in an incognito window.
+> **NOTE:** If you see a blank page when you try to login, it's caused by the cache-first service worker in React. If you're using Chrome, you can workaround it by opening Developer Tools > **Application** > **Service Workers** and checking **Bypass for network**.
+> 
+> This isn't a great solution because users of your app will need to do this.
+> 
+> I've discovered two options to fix this problem (so far):
+> 
+> 1. Disable PWA support in your app by removing <code>registerServiceWorker()</code> from <code>client/src/index.js</code>
+> 2. <a href="https://stackoverflow.com/a/45356232/65681">Eject the webpack configuration</a> and configure <code>/private</code> to be a network-first URL
 
 ## Spring Security's OAuth 2.0 vs. OIDC Support
 
