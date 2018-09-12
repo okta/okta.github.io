@@ -432,8 +432,6 @@ Are you sold? [Register for a forever-free developer account](https://developer.
   * `http://localhost:8080/callback?client_name=OidcClient`
 4. Click **Done**, then edit the project and enable "Implicit (Hybrid)" as a grant type (allow ID and access tokens) and click **Save**.
 
-<!-- todo: fix CSS so links in sub-list above have proper margins. Top margin is about 15px, bottom is 0px currently. -->
-
 ## Protect Your Java REST API with JWT Verifier
 
 To validate JWTs from Okta, you'll need to add [Okta JWT Verifier for Java](https://github.com/okta/okta-jwt-verifier-java) to your `pom.xml`.
