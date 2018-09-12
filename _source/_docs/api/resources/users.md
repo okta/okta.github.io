@@ -925,7 +925,7 @@ The first three parameters correspond to different types of lists:
 | limit     | Specifies the number of results returned (maximum 200)                                                                                       | Query      | Number   | FALSE    |
 | after     | Specifies the pagination cursor for the next page of users                                                                                   | Query      | String   | FALSE    |
 
-  * If you don't specify a value for `limit`, the maximum (200) is used as a default.
+  * If you don't specify a value for `limit`, the maximum (200) is used as a default.  If you are using a `q` parameter, the default limit is 10.
   * An HTTP 500 status code usually indicates that you have exceeded the request timeout.  Retry your request with a smaller limit and paginate the results. For more information, see [Pagination](/docs/api/getting_started/design_principles#pagination).
   * Treat the `after` cursor as an opaque value and obtain it through the next link relation. See [Pagination](/docs/api/getting_started/design_principles#pagination).
 
