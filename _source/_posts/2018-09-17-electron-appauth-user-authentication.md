@@ -11,7 +11,7 @@ tweets:
 image: 
 ---
 
-Electron is a framework for building cross-platform desktop applications with web technologies like JavaScript, HTML, and CSS. It was created for GitHub's Atom editor and has achieved widespread adoption since. There are several apps that I use daily that are built with Electron: Slack, Kitematic, and Visual Studio Code to name a few.
+Electron is a framework for building cross-platform desktop applications with web technologies like JavaScript, HTML, and CSS. It was created for GitHub's Atom editor and has achieved widespread adoption since. Electron powers several apps that I use on a daily basis: Slack, Kitematic, and Visual Studio Code to name a few.
 
 [Electron](https://electronjs.org/) 2.0 was released in early May 2018, along with changes to the project to adhere to strict semantic versioning. This is good news for developers because it means patch releases will be more stable and new features will come in major versions only. When open source projects use semantic versioning correctly, end users don't see breaking changes as often and tend to be productive.
 
@@ -81,7 +81,7 @@ At this point, you can see that authentication with Google is working. In the ne
 
 ## Why Okta?
 
-You might be asking: why should I use Okta when authentication with Google works? The reason is simple, if you want to manage the users of your app, Okta makes it possible. With Google, anyone with a Google Account can login, but you have no way of revoking access or updating user's permissions because you can't manage your users through Google. Okta lets you manage your users, as well as modify their attributes and permissions. Better yet, you can still use Google as a social login mechanism with Okta!
+You might be asking: why should I use Okta when authentication with Google works? The reason is simple; if you want to manage the users of your app, Okta makes it possible. With Google, anyone with a Google Account can log in, but you have no way of revoking access or updating user's permissions because you can't manage your users through Google. Okta lets you manage your users, as well as modify their attributes and permissions. Better yet, you can still use Google as a social login mechanism with Okta!
 
 ## Use Okta for Authentication with OIDC in Your Electron App
 
@@ -121,7 +121,7 @@ let request =
     });
 ```
 
-If you restart your app and try to login, it will fail because you're not using PKCE. You'll see an error like the following in your launched browser's address bar.
+If you restart your app and try to log in, it will fail because you're not using PKCE. You'll see an error like the following in your launched browser's address bar.
 
 ```
 error=invalid_request&error_description=PKCE+code+challenge+is+required+when+the+token+endpoint+authentication+method+is+%27NONE%27.
@@ -157,7 +157,7 @@ PKCE (pronounced "pixy") is a security extension for OAuth 2.0 for public client
     +~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~+
 ```
 
-To mitigate this attack, PKCE uses a dynamically created cryptographically random key called a "code verifier". A unique code verifier is created for every authorization request, and its transformed value, called "code challenge", is sent to the authorization server to obtain the authorization code.  The authorization code obtained is then sent to the token endpoint with the "code verifier", and the server compares it with the previously received request code so that it can perform the proof of possession of the "code verifier" by the client.  This works as the mitigation since the attacker would not know this one-time key, since it is sent over TLS and cannot be intercepted.
+To mitigate this attack, PKCE uses a dynamically created cryptographically random key called a "code verifier". A unique code verifier is created for every authorization request, and its transformed value, called "code challenge", is sent to the authorization server to obtain the authorization code.  The authorization code obtained is then sent to the token endpoint with the "code verifier", and the server compares it with the previously received request code so that it can perform the proof of possession of the "code verifier" by the client.  This works as the mitigation since the attacker would not know this one-time key since it is sent over TLS and cannot be intercepted.
 
 The diagram below shows how PKCE works.
 
@@ -250,7 +250,7 @@ let request = new TokenRequest(
 );
 ```
 
-After making these changes, you should be able to login. However, when you click on **USER INFO**, you won't see your user's name or avatar. Open Chrome Developer Tools with **View** > **Toggle Developer Tools** to see why.
+After making these changes, you should be able to log in. However, when you click on **USER INFO**, you won't see your user's name or avatar. Open Chrome Developer Tools with **View** > **Toggle Developer Tools** to see why.
 
 {% img blog/electron-react-appauth-js/developer-tools.png alt:"Electron's Developer Tools" width:"800" %}{: .center-image }
 
@@ -268,7 +268,7 @@ Refresh your app (Command+R on Mac, Ctrl+R on Windows/Linux), and now you should
 
 ### Add an Avatar in Okta
 
-You might notice that an avatar is not returned from the user info endpoint. The code in `app.ts` sets the avatar based on a `picture` attribute.
+You might notice that the user info endpoint doesn't return an avatar. The code in `app.ts` sets the avatar based on a `picture` attribute.
 
 ```ts
 private updateUi() {
@@ -284,7 +284,7 @@ private updateUi() {
 }
 ```
 
-*You can delete `?sz=96` in the above code since it's not used in this example.*
+*You can delete `?sz=96` in the above code since this example doesn't use it.*
 
 To add a `picture` attribute to your user, log in to your Okta dashboard and navigate to **Users** > **Profile Editor**. Click on the first "user" and add a `picture` attribute. Click **Save**.
 
@@ -304,7 +304,7 @@ Now if you click on the user info link, you should see an avatar associated with
 
 {% img blog/electron-react-appauth-js/userinfo-picture.png alt:"User Info Picture" width:"800" %}{: .center-image }
 
-**TIP:** If you're going to use this in production, I'd recommend you use a smaller image for the picture (e.g. with 150x150 dimensions). You can also [base64 encode](https://www.base64-image.de/) an image and use its value for your picture. 
+**TIP:** If you're going to use this in production, I'd recommend you use a smaller image for the picture (e.g., with 150x150 dimensions). You can also [base64 encode](https://www.base64-image.de/) an image and use its value for your picture. 
 
 Below is a screenshot that shows this app with some additional polish and a base64 image value for my account.
 
@@ -344,9 +344,9 @@ Then add `pack`, `dist`, and `postinstall` scripts.
 To package your app for production, use the following commands: 
 
 * `npm run pack` will generate the package directory without really packaging it. This is useful for testing purposes.
-* `npm run dist` will package in a distributable format (e.g. dmg, Windows installer, deb package).
+* `npm run dist` will package in a distributable format (e.g., dmg, Windows installer, deb package).
 
-**NOTE:** If the app doesn't start after packaging, it's likely because you don't have [code signing](https://www.electron.build/code-signing) configured. To disable Code Signing when building for macOS, run `export CSC_IDENTITY_AUTO_DISCOVERY=false`. If you have an Apple Developer Account, open Xcode, go to **Preferences** > **Accounts** and make sure you're logged in and your development certificates are downloaded.
+**NOTE:** If the app doesn't start after packaging, it's likely because you don't have [code signing](https://www.electron.build/code-signing) configured. To disable Code Signing when building for macOS, run `export CSC_IDENTITY_AUTO_DISCOVERY=false`. If you have an Apple Developer Account, open Xcode, go to **Preferences** > **Accounts** and make sure you're logged in, and your development certificates are downloaded.
 
 ## Source Code
 
@@ -356,7 +356,7 @@ I made some minor adjustments (e.g., optimizing imports, changing double quotes 
 
 ## Learn More About Electron, AppAuth, and OIDC
 
-Developing desktop applications with web technologies is an appealing notion. [This tweet](https://twitter.com/gerardsans/status/1026040566868529152) from Gerard Sans really nails it in my opinion:
+Developing desktop applications with web technologies is an appealing notion. [This tweet](https://twitter.com/gerardsans/status/1026040566868529152) from Gerard Sans nails it in my opinion:
 
 > People always ask what's the best framework. What they should be asking is what skills they need to be productive using framework X? The issue is usually their lack of skills not which framework they use. 
 
