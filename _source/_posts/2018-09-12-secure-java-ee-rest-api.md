@@ -929,7 +929,7 @@ OAuth2Authentication authentication = (OAuth2Authentication) principal;
 Map<String, Object> user = (Map<String, Object>) authentication.getUserAuthentication().getDetails();
 ```
 
-Please see Spring Security's [reference documentation](https://docs.spring.io/spring-security/site/docs/current/reference/htmlsingle/#servletapi) for more information.
+Please see [Spring Security's Servlet API integration documentation](https://docs.spring.io/spring-security/site/docs/current/reference/htmlsingle/#servletapi) for more information.
 
 ## Use Pac4j to Lock Down Your Java REST API
 
@@ -1402,4 +1402,4 @@ For more about Java REST APIs and TomEE, I recommend these sources:
 * [Antonio Goncalves – Securing JAX-RS Endpoints with JWT](https://antoniogoncalves.org/2016/10/03/securing-jax-rs-endpoints-with-jwt/)
 * [TomEE: Running with Systemd](https://www.tomitribe.com/blog/2018/08/tomee-running-with-systemd/)
 
-If you've made it this far, I suspect you might be interested in seeing future blog posts. [Follow me](https://twitter.com/mraible) and my [whole team](https://twitter.com/oktadev)) on Twitter, like us [on Facebook](https://www.facebook.com/oktadevelopers), or check out [our YouTube channel](https://www.youtube.com/channel/UC5AMiWqFVFxF1q9Ya1FuZ_Q). For questions, please leave a comment below, or post it to our [Developer Forums](https://devforum.okta.com/).
+If you've made it this far, I suspect you might be interested in seeing future blog posts. [Follow me](https://twitter.com/mraible) and my [whole team](https://twitter.com/oktadev) on Twitter, like us [on Facebook](https://www.facebook.com/oktadevelopers), or check out [our YouTube channel](https://www.youtube.com/channel/UC5AMiWqFVFxF1q9Ya1FuZ_Q). For questions, please leave a comment below, or post it to our [Developer Forums](https://devforum.okta.com/).
