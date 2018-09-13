@@ -1346,7 +1346,7 @@ If you configure your client to use `private_key_jwt` [Client Authentication Met
 
 Use only one of these methods in a single request or an error will occur.
 
-### Token Claims for Client Authentication with Client Secret JWT
+### Token Claims for Client Authentication with Client Secret or Private Key JWT
 
 If you use a JWT for client authentication (`client_secret_jwt` or `private_key_jwt`), use the following token claims:
 
