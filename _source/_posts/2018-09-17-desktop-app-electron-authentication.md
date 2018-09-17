@@ -362,9 +362,9 @@ To learn more about Electron, AppAuth, React, and OIDC, check out the following 
 
 * [Writing Your First Electron App](https://electronjs.org/docs/tutorial/first-app)
 * [Build a Basic CRUD App in Android with Kotlin](/blog/2018/09/11/android-kotlin-crud)
-* [Build a Health Tracking App with React, GraphQL, and User Authentication](blog/2018/07/11/build-react-graphql-api-user-authentication)
+* [Build a Health Tracking App with React, GraphQL, and User Authentication](/blog/2018/07/11/build-react-graphql-api-user-authentication)
 * [Identity, Claims, & Tokens – An OpenID Connect Primer, Part 1 of 3](/blog/2017/07/25/oidc-primer-part-1)
 
-Got questions? Please leave a comment below, [ping me on Twitter](https:/twitter.com/mraible), or ask it on our [Developer Forums](https://devforum.okta.com/).
+Got questions? Please leave a comment below, [ping me on Twitter](https://twitter.com/mraible), or ask it on our [Developer Forums](https://devforum.okta.com/).
 
 Like what you learned here? Follow [@oktadev](https://twitter.com/oktadev), like us [on Facebook](https://www.facebook.com/oktadevelopers/), follow us [on LinkedIn](https://www.linkedin.com/company/oktadev/), or [watch our videos on YouTube](https://www.youtube.com/channel/UC5AMiWqFVFxF1q9Ya1FuZ_Q).
