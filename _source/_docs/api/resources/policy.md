@@ -612,7 +612,7 @@ Parameter | Description | Data Type | Required | Default
 id | Identifier of the policy | String | No | Assigned
 type | Specifies the [type of policy](#policy-types). Valid values: `OKTA_SIGN_ON`, `PASSWORD`, `MFA_ENROLL`, `OAUTH_AUTHORIZATION_POLICY` | String | Yes |
 name | Name of the policy | String | Yes |
-system | This is set to `true` on system policies, which cannot be deleted. | String | No | `false`
+system | This is set to `true` on system policies, which cannot be deleted. | Boolean | No | `false`
 description | Description of the policy. | String | No | Null
 priority | Priority of the policy | Int | No | Last / Lowest Priority
 status | Status of the policy: ACTIVE or INACTIVE | String | No | "ACTIVE"

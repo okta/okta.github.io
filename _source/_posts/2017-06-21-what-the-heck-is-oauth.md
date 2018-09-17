@@ -23,9 +23,9 @@ Which one is more popular? *Great question!* Nowadays, OAuth 2.0 is the most wid
 
 ## Why OAuth?
 
-OAuth was created as response to the direct authentication pattern. This pattern was made famous by HTTP Basic Authentication, where the user is prompted for a username and password. Basic Authentication is still used as a primitive form of API authentication for server side applications: instead of sending a username and password to the server with each request, the user sends an API key ID and secret. Before OAuth, sites would prompt you to enter your username and password directly into a form and they would login to your data (e.g. your Gmail account) as you. This is often called [the password anti-pattern](https://arstechnica.com/information-technology/2010/01/oauth-and-oauth-wrap-defeating-the-password-anti-pattern/).
+OAuth was created as a response to the direct authentication pattern. This pattern was made famous by HTTP Basic Authentication, where the user is prompted for a username and password. Basic Authentication is still used as a primitive form of API authentication for server-side applications: instead of sending a username and password to the server with each request, the user sends an API key ID and secret. Before OAuth, sites would prompt you to enter your username and password directly into a form and they would login to your data (e.g. your Gmail account) as you. This is often called [the password anti-pattern](https://arstechnica.com/information-technology/2010/01/oauth-and-oauth-wrap-defeating-the-password-anti-pattern/).
 
-To create a better system for the web, federated identity was created for single sign-on (SSO). In this scenario, an end user talks to their identity provider, and the identity provider generates a  cryptographically signed token which it hands off to the application to authenticate the user. The application trusts the identity provider. As long as that trust relationship works with the signed assertion, you're good to go. The diagram below show how this works.
+To create a better system for the web, federated identity was created for single sign-on (SSO). In this scenario, an end user talks to their identity provider, and the identity provider generates a  cryptographically signed token which it hands off to the application to authenticate the user. The application trusts the identity provider. As long as that trust relationship works with the signed assertion, you're good to go. The diagram below shows how this works.
 
 {% img browser_spa_implicit_flow alt:"Browser Implicit Flow" width:"600" %}{: .center-image }
 
@@ -35,7 +35,7 @@ Federated identity was made famous by SAML 2.0, an OASIS Standard released on Ma
 
 SAML is basically a session cookie in your browser that gives you access to webapps. It's limited in the kinds of device profiles and scenarios you might want to do outside of a web browser.
 
-When SAML 2.0 was launched in 2005, it made sense. However, a lot has changed since then. Now we have modern web and native application development platforms. There's Single Page Applications (SPAs) like Gmail/Google Inbox, Facebook, and Twitter. They have different behaviors than your traditional web application, because they make AJAX (background HTTP calls) to APIs. Mobile phones make API calls too, as do TVs, gaming consoles, and IoT devices. SAML SSO isn't particularly good at any of this.
+When SAML 2.0 was launched in 2005, it made sense. However, a lot has changed since then. Now we have modern web and native application development platforms. There are Single Page Applications (SPAs) like Gmail/Google Inbox, Facebook, and Twitter. They have different behaviors than your traditional web application, because they make AJAX (background HTTP calls) to APIs. Mobile phones make API calls too, as do TVs, gaming consoles, and IoT devices. SAML SSO isn't particularly good at any of this.
 
 ### OAuth and APIs
 
@@ -81,7 +81,7 @@ Scopes are what you see on the authorization screens when an app requests permis
 
 Scopes decouple authorization policy decisions from enforcement. This is the first key aspect of OAuth. The permissions are front and center. They're not hidden behind the app layer that you have to reverse engineer. They're often listed in the API docs: here are the scopes that this app requires.
 
-You have to capture this consent. This is called trusting on first use. It's a pretty significant user experience change on the web. Most people before OAuth were just used to name and password dialog boxes. Now you have this new screen that comes up and you have to train users to use. Retraining the internet population is difficult. There's all kinds of users from the tech-savvy young folk to grandparents that aren't familiar with this flow. It's a new concept on the web that's now front and center. Now you have to authorize and bring consent.
+You have to capture this consent. This is called trusting on first use. It's a pretty significant user experience change on the web. Most people before OAuth were just used to name and password dialog boxes. Now you have this new screen that comes up and you have to train users to use. Retraining the internet population is difficult. There are all kinds of users from the tech-savvy young folk to grandparents that aren't familiar with this flow. It's a new concept on the web that's now front and center. Now you have to authorize and bring consent.
 
 The consent can vary based on the application. It can be a time-sensitive range (day, weeks, months), but not all platforms allow you to choose the duration. One thing to watch for when you consent is that the app can do stuff on your behalf - e.g. LinkedIn spamming everyone in your network.
 
@@ -106,7 +106,7 @@ Public clients are browsers, mobile apps, and IoT devices.
 
 {% img blog/oauth/oauth-clients.png alt:"OAuth Clients" width:"800" %}{: .center-image }
 
-Client registration also a key component of OAuth. It's like the DMV of OAuth. You need to get a license plate for your application. This is how your app's logo shows up in an authorization dialog.
+Client registration is also a key component of OAuth. It's like the DMV of OAuth. You need to get a license plate for your application. This is how your app's logo shows up in an authorization dialog.
 
 ### OAuth Tokens
 
@@ -126,7 +126,7 @@ You can use the access token to get access to APIs. Once it expires, you'll have
 
 The downside is this causes a lot of developer friction. One of the biggest pain points of OAuth for developers is you having to manage the refresh tokens. You push state management onto each client developer. You get the benefits of key rotation, but you've just created a lot of pain for developers. That's why developers love API keys. They can just copy/paste them, slap them in a text file, and be done with them. API keys are very convenient for the developer, but very bad for security.
 
-There's a pay to play problem here. Getting developers to do OAuth flows increases security, but there's more friction. There's opportunities for toolkits and platforms to simplify things and help with token management. Luckily, OAuth is pretty mature these days, and chances are your favorite language or framework has tools available to simplify things.
+There's a pay to play problem here. Getting developers to do OAuth flows increases security, but there's more friction. There are opportunities for toolkits and platforms to simplify things and help with token management. Luckily, OAuth is pretty mature these days, and chances are your favorite language or framework has tools available to simplify things.
 
 We've talked a bit about the client types, the token types, and the endpoints of the authorization server and how we can pass that to a resource server. I mentioned two different flows: getting the authorization and getting the tokens. Those don't have to happen on the same channel. The front channel is what goes over the browser. The browser redirected the user to the authorization server, the user gave consent. This happens on the user's browser. Once the user takes that authorization grant and hands that to the application, the client application no longer needs to use the browser to complete the OAuth flow to get the tokens.
 
@@ -138,7 +138,7 @@ For example, a Front Channel Flow where you authorize via user agent might look 
 
 1. Resource Owner starts flow to delegate access to protected resource
 2. Client sends authorization request with desired scopes via browser redirect to the Authorize Endpoint on the Authorization Server
-3. Authorization Server returns a consent dialog saying "do you allow this application to have access to these scopes?" Of course, you'll need to authenticate to the application, so if you're not authenticated to your Resource Server, it'll ask you to login. If you already have a cached session cookie, you'll just see the consent dialog box. View the the consent dialog, and agree.
+3. Authorization Server returns a consent dialog saying "do you allow this application to have access to these scopes?" Of course, you'll need to authenticate to the application, so if you're not authenticated to your Resource Server, it'll ask you to login. If you already have a cached session cookie, you'll just see the consent dialog box. View the consent dialog, and agree.
 4. The authorization grant is passed back to the application via browser redirect. This all happens on the front channel.
 
 {% img blog/oauth/front-channel-flow.png alt:"Front Channel Flow" width:"400" %}{: .center-image }
@@ -235,7 +235,7 @@ The very first flow is what we call the **Implicit Flow**. The reason it's calle
 Implicit flow is optimized for browser-only public clients. An access token is returned directly from the authorization request (front channel only). It typically does not support refresh tokens. It assumes the Resource Owner and Public Client are on the same device. Since everything happens on the browser, it's the most vulnerable to security threats.
 
 The gold standard is the **Authorization Code Flow**, aka 3 Legged, that uses both the front channel and the back channel. This is what we've been talking about the most in this article. The front channel flow is used by the client application to obtain an authorization code grant. The back channel is used by the client application to exchange the authorization code grant for an access token (and optionally a refresh token). It assumes the Resource Owner and Client Application are on separate devices. It's the most secure flow because you can authenticate the client to redeem the authorization grant, and tokens are never passed through a user-agent.
-There's not just Implicit and Authorization Code flows, there's additional flows you can do with OAuth. Again, OAuth is more of a framework.
+There's not just Implicit and Authorization Code flows, there are additional flows you can do with OAuth. Again, OAuth is more of a framework.
 
 For server-to-server scenarios, you might want to use a **Client Credential Flow**. In this scenario, the client application is a confidential client that's acting on its own, not on behalf of the user. It's more of a service account type of scenario. All you need is the client's credentials to do the whole flow. It's a back channel only flow to obtain an access token using the client's credentials. It supports shared secrets or assertions as client credentials signed with either symmetric or asymmetric keys.
 
@@ -380,7 +380,7 @@ An Open ID Connect flow involves the following steps:
 
 See [Okta's OIDC/OAuth 2.0 API](http://developer.okta.com/docs/api/resources/oidc) for specific information on how we support OAuth.
 
-SAML is implement by Okta with its SSO chiclets. If you're an Okta customer, like me, you likely interact with most apps using something like https://okta.okta.com/app/UserHome. When you click on a chiclet, we send a message, we sign the assertion, inside the assertion it says who the user is, and that it came from Okta. Slap on a digital signature on it and you're good to go.
+SAML is implemented by Okta with its SSO chiclets. If you're an Okta customer, like me, you likely interact with most apps using something like https://okta.okta.com/app/UserHome. When you click on a chiclet, we send a message, we sign the assertion, inside the assertion it says who the user is, and that it came from Okta. Slap on a digital signature on it and you're good to go.
 
 If you'd rather watch a video to learn about OAuth, please see the presentation below from [Karl McGuinness](https://twitter.com/jankytweet), Senior Director of Identity at Okta.
 

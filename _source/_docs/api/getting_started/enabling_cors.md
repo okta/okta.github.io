@@ -10,9 +10,9 @@ js: cors
 
 # Overview
 
-[Cross-Origin Resource Sharing (CORS)](http://en.wikipedia.org/wiki/Cross-Origin_Resource_Sharing) is a mechanism that allows a web page to make an AJAX call using [XMLHttpRequest (XHR)](http://en.wikipedia.org/wiki/XMLHttpRequest) to a domain that is  different from the one from where the script was loaded.  Such "cross-domain" requests would otherwise be forbidden by web browsers, per the [same origin security policy](http://en.wikipedia.org/wiki/Same_origin_policy).  CORS defines a [standardized](http://www.w3.org/TR/cors/) way in which the browser and the server can interact to determine whether or not to allow the cross-origin request
+[Cross-Origin Resource Sharing (CORS)](http://en.wikipedia.org/wiki/Cross-Origin_Resource_Sharing) is a mechanism that allows a web page to make an AJAX call using [XMLHttpRequest (XHR)](http://en.wikipedia.org/wiki/XMLHttpRequest) to a domain that is  different from the one from where the script was loaded.  Such "cross-domain" requests would otherwise be forbidden by web browsers, per the [same origin security policy](http://en.wikipedia.org/wiki/Same_origin_policy). CORS defines a [standardized](http://www.w3.org/TR/cors/) way in which the browser and the server can interact to determine whether or not to allow the cross-origin request
 
-In Okta, CORS allows JavaScript hosted on your websites to make an XHR to the Okta API with the Okta session cookie. Every website origin must be explicitly permitted via the administrator UI for CORS.
+In Okta, CORS allows JavaScript hosted on your websites to make an XHR to the Okta API with the Okta session cookie. Every website origin must be explicitly permitted via the administrator UI as a "Trusted Origin".
 
 > **Caution:** Only grant access to specific origins (websites) that you control and trust to access the Okta API.
 
@@ -30,17 +30,17 @@ Not all browsers supports CORS.  The following table describes which browsers su
 
 ## Granting Cross-Origin Access to Websites
 
-You can enable CORS for websites that need cross-origin requests to the
-Okta API on the developer console. Select **API** > **Trusted Origins** to see
-the screen shown below.
+You can enable CORS for websites that need cross-origin requests to the Okta API on the developer console. Select **API** > **Trusted Origins** to see the screen shown below.
 
 {% img okta-admin-ui-cors-dev.png "CORS Settings UI" alt:"CORS Settings UI" %}
 
-> Select **Add Origin** to specify the base URL of website you want to allow cross-origin requests. 
+Select **Add Origin** to specify the base URL of the website that you want to allow cross-origin requests from, then make sure **CORS** is selected.
+
+> Note: If you do not enable CORS, or disable it at a later date, the list of websites is retained.
 
 {% img okta-admin-ui-cors-new-dev.png "Add CORS Origin" alt: "Add CORS Origin" %}
 
-**Note: If you do not enable CORS, or disable it at a later date, the list of websites is retained.**
+You can also enable the **Redirect** setting, which allows for redirection to this Trusted Origin after signing in or out.
 
 ## Testing
 
