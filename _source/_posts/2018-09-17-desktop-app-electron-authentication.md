@@ -176,34 +176,13 @@ The PKCE working group provides an excellent explanation I've included below. Yo
 
 "To mitigate this attack, PKCE uses a dynamically created cryptographically random key called a "code verifier". A unique code verifier is created for every authorization request, and its transformed value, called "code challenge", is sent to the authorization server to obtain the authorization code.  The authorization code obtained is then sent to the token endpoint with the "code verifier", and the server compares it with the previously received request code so that it can perform the proof of possession of the "code verifier" by the client.  This works as the mitigation since the attacker would not know this one-time key since it is sent over TLS and cannot be intercepted."
 
-The diagram below shows how PKCE works.
+The diagram below shows how PKCE works with your app and Okta.
 
-```
-                                                +-------------------+
-                                                |   Authz Server    |
-      +--------+                                | +---------------+ |
-      |        |--(A)- Authorization Request ---->|               | |
-      |        |       + t(code_verifier), t_m  | | Authorization | |
-      |        |                                | |    Endpoint   | |
-      |        |<-(B)---- Authorization Code -----|               | |
-      |        |                                | +---------------+ |
-      | Client |                                |                   |
-      |        |                                | +---------------+ |
-      |        |--(C)-- Access Token Request ---->|               | |
-      |        |          + code_verifier       | |    Token      | |
-      |        |                                | |   Endpoint    | |
-      |        |<-(D)------ Access Token ---------|               | |
-      +--------+                                | +---------------+ |
-                                                +-------------------+
-```
-
-Authorization code flow with PKCE is the best way to make native desktop app secure with Okta.
-
-{% img oauth_auth_code_flow_pkce.png alt:"Auth Code Flow with PKCE" width:"800px" %}
+{% img oauth_auth_code_flow_pkce.png alt:"Auth Code Flow with PKCE" width:"800px" %}{: .center-image }
 
 <!-- copied from _source/_authentication-guide/auth-overview/index.md -->
 
-In `flow.ts`, add a `challengePair` variable for PKCE as a member variable of the `AuthFlow` class.
+Now you'll add PKCE to your Electron app! In `flow.ts`, add a `challengePair` variable for PKCE as a member variable of the `AuthFlow` class.
 
 ```ts
 private challengePair: { verifier: string, challenge: string };
