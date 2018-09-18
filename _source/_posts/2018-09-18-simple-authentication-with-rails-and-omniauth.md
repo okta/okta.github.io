@@ -45,7 +45,13 @@ Next, create a `config/application.yaml` file to populate all necessary environm
 bundle exec figaro install
  ```
 
-If you don't already have an Okta account, go create one now: <https://developer.okta.com/signup/>. Okta is a free-to-use API service that stores user accounts and handles user authentication and authorization.
+If you don't already have an Okta account, go create one now: <https://developer.okta.com/signup/>. Okta is a free-to-use API service that stores user accounts and handles user authentication and authorization. Okta makes [identity management](https://developer.okta.com/product/user-management/) a lot easier, more secure, and more scalable than what you're used to. Okta is a cloud service that allows developers to create, edit, and securely store user accounts and user account data, and connect them with one or multiple applications. Our API enables you to:
+
+* [Authenticate](https://developer.okta.com/product/authentication/) and [authorize](https://developer.okta.com/product/authorization/) your users
+* Store data about your users
+* Perform password-based and [social login](https://developer.okta.com/authentication-guide/social-login/)
+* Secure your application with [multi-factor authentication](https://developer.okta.com/use_cases/mfa/)
+* And much more! Check out our [product documentation](https://developer.okta.com/documentation/)
 
 Once your Okta account has been created, you'll need to copy some Okta values into environment variables for Rails to use. Edit the newly generated `config/application.yml` and add the following values from your Okta tenant.
 ```
