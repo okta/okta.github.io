@@ -23,6 +23,10 @@ The policy API supports the following **rule operations**:
 * Create, read, update, and delete a rule for a policy
 * Activate and deactivate a rule
 
+## Getting Started
+
+Explore the Policy API: [![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/0dfd99e544a12ea3db5b)
+
 ## Policy API Operations
 
 ### Get a Policy
@@ -608,7 +612,7 @@ Parameter | Description | Data Type | Required | Default
 id | Identifier of the policy | String | No | Assigned
 type | Specifies the [type of policy](#policy-types). Valid values: `OKTA_SIGN_ON`, `PASSWORD`, `MFA_ENROLL`, `OAUTH_AUTHORIZATION_POLICY` | String | Yes |
 name | Name of the policy | String | Yes |
-system | This is set to `true` on system policies, which cannot be deleted. | String | No | `false`
+system | This is set to `true` on system policies, which cannot be deleted. | Boolean | No | `false`
 description | Description of the policy. | String | No | Null
 priority | Priority of the policy | Int | No | Last / Lowest Priority
 status | Status of the policy: ACTIVE or INACTIVE | String | No | "ACTIVE"
@@ -1083,7 +1087,9 @@ The following conditions may be applied to the rules associated with MFA Enrollm
 ## Password Policy
 {: #GroupPasswordPolicy }
 
-Password policy controls settings that determine a user's password length and complexity, as well as the frequency with which a password can be changed.  This policy also governs the recovery operations that may be performed by the user, including change password, reset (forgot) password and self-service password unlock.
+The Password policy determines the requirements for a user's password length and complexity, as well as the frequency with which a password must be changed. This policy also governs the recovery operations that may be performed by the user, including change password, reset (forgot) password and self-service password unlock.
+
+> **NOTE:** Password policies are enforced only for Okta and AD-mastered users. For AD-mastered users, ensure that your Active Directory policies don't conflict with the Okta policies.
 
 #### Policy Settings Example
 

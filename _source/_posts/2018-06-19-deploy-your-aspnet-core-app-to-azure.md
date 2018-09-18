@@ -116,8 +116,8 @@ First, move the settings for Okta in your `appsettings.json` file to the `appset
     }
   },
   "OKTA_ORG_URL": "https://{yourOktaDomain}",
-  "OKTA_CLIENT_ID": "{yourClientId}",
-  "OKTA_CLIENT_SECRET": "{yourClientSecret}",
+  "OKTA_CLIENT_ID": "{clientId}",
+  "OKTA_CLIENT_SECRET": "{clientSecret}",
   "OKTA_API_TOKEN": "{yourApiToken}",
   "OKTA_ISSUER": "https://{yourOktaDomain}"
 }

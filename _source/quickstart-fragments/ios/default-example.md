@@ -24,15 +24,15 @@ At the end of the iOS instructions you can choose your server type to learn more
 | Setting             | Value                                               |
 | ------------------- | --------------------------------------------------- |
 | Application Name    | My iOS App                                          |
-| Login redirect URIs | com.oktapreview.{orgName}:/callback                 |
-| Logout redirect URIs| com.oktapreview.{orgName}:/logout                   |
+| Login redirect URIs | {yourOktaScheme}:/callback                          |
+| Logout redirect URIs| {yourOktaScheme}:/logout                            |
 
 After you have created the application there are two more values you will need to gather:
 
 | Setting       | Where to Find                                                                  |
 | ------------- | ------------------------------------------------------------------------------ |
 | Client ID     | In the applications list, or on the "General" tab of a specific application.    |
-| Org URL       | On the home screen of the developer dashboard, in the upper right.             |
+| Org URL       | <span class="is-signed-in">`https://{yourOktaDomain}` <br></span>On the home screen of the developer dashboard, in the upper right.             |
 
 
 These values will be used in your iOS application to setup the OpenID Connect flow with Okta.
@@ -51,6 +51,8 @@ pod install && open project.xcworkspace
 
 ### Configuration
 Create a new `Okta.plist` file in your application's bundle with the following fields:
+{% include domain-admin-warning.html %}
+
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
@@ -61,7 +63,7 @@ Create a new `Okta.plist` file in your application's bundle with the following f
   <key>clientId</key>
   <string>{clientIdValue}</string>
   <key>redirectUri</key>
-  <string>com.oktapreview.{orgName}:/callback</string>
+  <string>{yourOktaScheme}:/callback</string>
   <key>scopes</key>
   <array>
 	<string>offline_access</string>
@@ -74,7 +76,7 @@ Create a new `Okta.plist` file in your application's bundle with the following f
 **Note**: *To receive a **refresh_token**, you must include the `offline_access` scope.*
 
 ### Update the Private-use URI Scheme
-In order to redirect back to your application from a web browser, you must specify a unique URI to your app. To do this, open `Info.plist` in your application bundle and set a **URL Scheme** to the scheme of the login redirect URI.
+In order to redirect back to your application from a web browser, you must specify a unique URI to your app. To do this, open `Info.plist` in your application bundle and set a **URL Scheme** to the scheme of the login redirect URI (e.g., `{yourOktaScheme}`)
 
 For example, if your **Login Redirect URI** is `com.okta.example:/callback`, the **URL Scheme** will be `com.okta.example`.
 

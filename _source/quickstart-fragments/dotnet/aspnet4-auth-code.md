@@ -1,13 +1,11 @@
 ---
 layout: quickstart_partial
-exampleDescription: ASP.NET 4.x MVC authorization code example
+exampleDescription: ASP.NET 4.x authorization code example
 ---
 
-## Okta ASP.NET 4.x MVC Quickstart
+## Okta ASP.NET 4.x Quickstart
 
-Now that your users can sign in, let's add authentication to your server.
-
-> If you would prefer to download a complete sample application instead, please visit [ASP.NET MVC Example](https://github.com/oktadeveloper/okta-aspnet-mvc-example) and follow those instructions.
+If you want a full, working example, head over to the [ASP.NET examples GitHub] and follow the `README` instructions.
 
 ### Create a new project
 
@@ -15,10 +13,9 @@ If you don't already have an ASP.NET project, create one using the ASP.NET Web A
 
 Install these packages in the new project:
 
-* [Microsoft.Owin.Host.SystemWeb](https://www.nuget.org/packages/Microsoft.Owin.Host.SystemWeb) 4.0.0 or higher
-* [Microsoft.Owin.Security.Cookies](https://www.nuget.org/packages/Microsoft.Owin.Security.Cookies) 4.0.0 or higher
-* [Microsoft.Owin.Security.OpenIdConnect](https://www.nuget.org/packages/Microsoft.Owin.Security.OpenIdConnect) 4.0.0 or higher
-* [IdentityModel](https://www.nuget.org/packages/IdentityModel) 3.3.1 or higher
+* [Microsoft.Owin.Security.Cookies] 4.0.0 or higher
+* [Microsot.Owin.Host.SystemWeb] 4.0.0 or higher
+* [Okta.AspNet]
 
 
 ### Add a Startup class
@@ -30,86 +27,24 @@ Paste this code into the new class:
 ```csharp
 public class Startup
 {
-    // These values are stored in Web.config. Make sure you update them!
-    private readonly string clientId = ConfigurationManager.AppSettings["okta:ClientId"];
-    private readonly string redirectUri = ConfigurationManager.AppSettings["okta:RedirectUri"];
-    private readonly string authority = ConfigurationManager.AppSettings["okta:OrgUri"];
-    private readonly string clientSecret = ConfigurationManager.AppSettings["okta:ClientSecret"];
-    private readonly string postLogoutRedirectUri = ConfigurationManager.AppSettings["okta:PostLogoutRedirectUri"];
-
-    /// <summary>
-    /// Configure OWIN to use OpenID Connect to log in with Okta.
-    /// </summary>
-    /// <param name="app"></param>
     public void Configuration(IAppBuilder app)
     {
         app.SetDefaultSignInAsAuthenticationType(CookieAuthenticationDefaults.AuthenticationType);
 
         app.UseCookieAuthentication(new CookieAuthenticationOptions());
 
-        app.UseOpenIdConnectAuthentication(new OpenIdConnectAuthenticationOptions
+        app.UseOktaMvc(new OktaMvcOptions()
         {
-            ClientId = clientId,
-            ClientSecret = clientSecret,
-            Authority = authority,
-            RedirectUri = redirectUri,
-            ResponseType = OpenIdConnectResponseType.CodeIdToken,
-            Scope = OpenIdConnectScope.OpenIdProfile,
-            PostLogoutRedirectUri = postLogoutRedirectUri,
-            TokenValidationParameters = new TokenValidationParameters
-            {
-                NameClaimType = "name"
-            },
-
-            Notifications = new OpenIdConnectAuthenticationNotifications
-            {
-                AuthorizationCodeReceived = async n =>
-                {
-                    // Exchange code for access and ID tokens
-                    var tokenClient = new TokenClient(authority + "/v1/token", clientId, clientSecret);
-                    var tokenResponse = await tokenClient.RequestAuthorizationCodeAsync(n.Code, redirectUri);
-
-                    if (tokenResponse.IsError)
-                    {
-                        throw new Exception(tokenResponse.Error);
-                    }
-
-                    var userInfoClient = new UserInfoClient(authority + "/v1/userinfo");
-                    var userInfoResponse = await userInfoClient.GetAsync(tokenResponse.AccessToken);
-                    var claims = new List<Claim>();
-                    claims.AddRange(userInfoResponse.Claims);
-                    claims.Add(new Claim("id_token", tokenResponse.IdentityToken));
-                    claims.Add(new Claim("access_token", tokenResponse.AccessToken));
-
-                    if (!string.IsNullOrEmpty(tokenResponse.RefreshToken))
-                    {
-                        claims.Add(new Claim("refresh_token", tokenResponse.RefreshToken));
-                    }
-
-                    n.AuthenticationTicket.Identity.AddClaims(claims);
-
-                    return;
-                },
-
-                RedirectToIdentityProvider = n =>
-                {
-                    // If signing out, add the id_token_hint
-                    if (n.ProtocolMessage.RequestType == OpenIdConnectRequestType.Logout)
-                    {
-                        var idTokenClaim = n.OwinContext.Authentication.User.FindFirst("id_token");
-
-                        if (idTokenClaim != null)
-                        {
-                            n.ProtocolMessage.IdTokenHint = idTokenClaim.Value;
-                        }
-
-                    }
-
-                    return Task.CompletedTask;
-                }
-            },
+            OktaDomain = ConfigurationManager.AppSettings["okta:OktaDomain"],
+            ClientId = ConfigurationManager.AppSettings["okta:ClientId"],
+            ClientSecret = ConfigurationManager.AppSettings["okta:ClientSecret"],
+            RedirectUri = ConfigurationManager.AppSettings["okta:RedirectUri"],
+            PostLogoutRedirectUri = ConfigurationManager.AppSettings["okta:PostLogoutRedirectUri"],
+            GetClaimsFromUserInfoEndpoint = true,
+            Scope = new List<string> {"openid", "profile", "email"},
         });
     }
+    
 }
 ```
 
@@ -123,20 +58,18 @@ ServicePointManager.SecurityProtocol |= SecurityProtocolType.Tls12;
 Add these using statements at the top of the file:
 
 ```csharp
+using System.Collections.Generic;
+using System.Configuration;
 using Microsoft.Owin;
-using Owin;
 using Microsoft.Owin.Security;
 using Microsoft.Owin.Security.Cookies;
-using Microsoft.Owin.Security.OpenIdConnect;
-using System.Threading.Tasks;
-using Microsoft.IdentityModel.Protocols.OpenIdConnect;
-using System.Configuration;
-using System.Security.Claims;
-using IdentityModel.Client;
-using System;
-using System.Collections.Generic;
-using Microsoft.IdentityModel.Tokens;
+using Okta.AspNet;
+using Owin;
 ```
+
+### Additional middleware configuration
+
+The `OktaMvcOptions` class configures the Okta middleware. You can see all the available options in the [Okta ASP.NET middleware GitHub].
 
 ### Configure the application in Okta
 
@@ -161,22 +94,9 @@ If you want to use a different port update the URIs in Okta and in `Web.config` 
 
 ### Configure the project
 
-Open the `Web.config` file and add these keys to the `<appSettings>` section:
+Open the `Web.config` file and add your Okta configuration to the `<appSettings>` section.
 
-```xml
-<!-- 1. Replace these values with your Okta configuration -->
-<add key="okta:ClientId" value="{clientId}" />
-<add key="okta:ClientSecret" value="{clientSecret}" />
-<add key="okta:OrgUri" value="https://{yourOktaDomain}/oauth2/default" />
-
-<!-- 2. Update the Okta application with these values -->
-<add key="okta:RedirectUri" value="http://localhost:8080/authorization-code/callback" />
-<add key="okta:PostLogoutRedirectUri" value="http://localhost:8080/Account/PostLogout" />
-```
-
-Copy the client ID and client secret from your Okta application into the appropriate keys in `Web.config`, and replace `{yourOktaDomain}` with your Okta domain name. You can find your Okta domain name in the top-right corner of the Dashboard page.
-
-**Note**: The value of `{yourOktaDomain}` should be something like `dev-123456.oktapreview.com`. Make sure you don't include `-admin` in the value!
+Check out the [Okta ASP.NET middleware GitHub] to see more details about this step.
 
 ### Secure your application
 
@@ -201,7 +121,7 @@ public class AccountController : Controller
         if (!HttpContext.User.Identity.IsAuthenticated)
         {
             HttpContext.GetOwinContext().Authentication.Challenge(
-                OpenIdConnectAuthenticationDefaults.AuthenticationType);
+                OktaDefaults.MvcAuthenticationType);
             return new HttpUnauthorizedResult();
         }
 
@@ -215,7 +135,7 @@ public class AccountController : Controller
         {
             HttpContext.GetOwinContext().Authentication.SignOut(
                 CookieAuthenticationDefaults.AuthenticationType,
-                OpenIdConnectAuthenticationDefaults.AuthenticationType);
+                OktaDefaults.MvcAuthenticationType);
         }
 
         return RedirectToAction("Index", "Home");
@@ -231,10 +151,11 @@ public class AccountController : Controller
 Add these using statements at the top of the `AccountController.cs` file:
 
 ```csharp
-using System.Web;
-using System.Web.Mvc;
 using Microsoft.Owin.Security.Cookies;
 using Microsoft.Owin.Security.OpenIdConnect;
+using Okta.AspNet;
+using System.Web;
+using System.Web.Mvc;
 ```
 
 You can also update your views to show whether the user is logged in. Add this code to `_Layout.cshtml`:
@@ -275,6 +196,14 @@ Start the project in Visual Studio and try logging in or navigating to a route t
 
 ASP.NET automatically populates `HttpContext.User` with the information Okta sends back about the user. You can check whether the user is logged in with `User.Identity.IsAuthenticated` in your actions or views.
 
-The [full example project](https://github.com/oktadeveloper/okta-aspnet-mvc-example) has more examples of authenticating and interacting with the user's information (claims).
+The [ASP.NET examples GitHub] has more examples of authenticating and interacting with the user's information (claims).
 
-If you want to do more with the user, you can use the [Okta .NET SDK](https://github.com/okta/okta-sdk-dotnet) to get or update the user's details stored in Okta.
+If you want to do more with the user, you can use the [Okta .NET SDK] to get or update the user's details stored in Okta.
+
+
+[ASP.NET examples GitHub]: https://github.com/okta/samples-aspnet
+[Microsoft.Owin.Security.Cookies]: https://www.nuget.org/packages/Microsoft.Owin.Security.Cookies
+[Okta.AspNet]: https://nuget.org/packages/Okta.AspNet
+[Microsot.Owin.Host.SystemWeb]: https://www.nuget.org/packages/Microsoft.Owin.Host.SystemWeb
+[Okta ASP.NET middleware GitHub]: https://github.com/okta/okta-aspnet/blob/master/README.md
+[Okta .NET SDK]: https://github.com/okta/okta-sdk-dotnet

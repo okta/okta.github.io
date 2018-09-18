@@ -9,7 +9,7 @@ tweets:
  - "Ever wonder how to store and work with user data securely in #expressjs? We've got you covered! #node"
 ---
 
-If you're building a non-trivial website, chances are you'll want some way to keep track of users. This can be quite complex and require a good deal of infrastructure, but one of the most secure and scalable ways also is one of the easiest. Using an OAuth 2.0 provider allows you to offload these tasks to an external provider, making your life as a developer so much simpler.
+If you're building a non-trivial website, chances are you'll want some way to keep track of users. This can be quite complex and require a good deal of infrastructure, but one of the most secure and scalable ways is also one of the easiest. Using an OAuth 2.0 provider allows you to offload these tasks to an external provider, making your life as a developer so much simpler.
 
 When using an OAuth provider, it's simple to sign up and maintain users securely, but usually the only information you have about your users is their name and email address. This leaves you having to keep a separate database of information about your users, but isn't that part of what you were trying to avoid?
 
@@ -21,7 +21,7 @@ In this post, I'll show you how to create an app in Node that provides a dashboa
 
 Okta is a flexible service that makes it super easy for developers to connect users to all kinds of apps. Okta handles login, logout, registration, multi-factor authentication, as well as storing user information. You also get an amazing admin experience that lets you get up and running in a few minutes but can still be configured to your heart's desire! From the developer console, you can disable users, create groups of users, edit user profiles, create admin tokens, require certain regions of users to use multi-factor authentication, and so much more.
 
-I'll be walking you through the few settings you need to get started in Okta, and the code you'll need to get a Node app up and running. If you don't already have an Okta account, the first step is to [sign up for a forever-free developer account](https://developer.okta.com/signup/). Once you have an account you'll get an organization URL that looks something like `https://dev-123456.oktapreview.com`. You'll use that later on in your Node app, and you'll also need it to configure settings for your users.
+I'll be walking you through the few settings you need to get started in Okta, and the code you'll need to get a Node app up and running. If you don't already have an Okta account, the first step is to [sign up for a forever-free developer account](https://developer.okta.com/signup/). Once you have an account you'll get an organization URL (e.g. `https://{yourOktaDomain}`). You'll use that later on in your Node app, and you'll also need it to configure settings for your users.
 
 ## Create a Simple Node Application with Express
 
@@ -52,7 +52,7 @@ If none of the above works for you, you can use [this link](https://github.com/o
 
 ## Collect Environment Variables
 
-The starter app uses Okta for authentication and requires a few environment variables before you can run it, which you'll collect from your Okta Dashboard (the URL from above that looked like `https://dev-123456.oktapreview.com`). I'll also have you create a new API token for fetching and modifying user profiles. If you already have the sample app working (e.g. you followed along on the previous post), then you can [skip ahead to create a new API token](#user_profile_token).
+The starter app uses Okta for authentication and requires a few environment variables before you can run it, which you'll collect from your Okta Dashboard (e.g. `https://{yourOktaDomain}`). I'll also have you create a new API token for fetching and modifying user profiles. If you already have the sample app working (e.g. you followed along on the previous post), then you can [skip ahead to create a new API token](#user_profile_token).
 
 As you collect the variables, you'll need to save them in a file called `.env`, in the following format:
 
@@ -60,8 +60,8 @@ As you collect the variables, you'll need to save them in a file called `.env`, 
 ORG_URL=https://{yourOktaDomain}
 HOST_URL=http://localhost:3000
 APP_SECRET=123abc
-CLIENT_ID={yourClientId}
-CLIENT_SECRET={yourClientSecret}
+CLIENT_ID={clientId}
+CLIENT_SECRET={clientSecret}
 REGISTRATION_TOKEN={yourRegistrationAPIToken}
 USER_PROFILE_TOKEN={yourUserProfileAPIToken}
 ```

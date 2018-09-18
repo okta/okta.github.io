@@ -165,6 +165,11 @@
 			border-bottom: 0;
 		}
 
+		/* Fix margin around sub-lists */
+		ol li > ul, ol li > ol {
+			margin: 5px;
+		}
+
 		/* Same as what docs uses (in _PageContent.scss) */
 		blockquote {
 			margin: 24px 24px;

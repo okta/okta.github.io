@@ -450,8 +450,8 @@ security:
         client:
             access-token-uri: https://{yourOktaDomain}/oauth2/default/v1/token
             user-authorization-uri: https://{yourOktaDomain}/oauth2/default/v1/authorize
-            client-id: {yourClientId}
-            client-secret: {yourClientSecret}
+            client-id: {clientId}
+            client-secret: {clientSecret}
         resource:
             user-info-uri: https://{yourOktaDomain}/oauth2/default/v1/userinfo
 ```

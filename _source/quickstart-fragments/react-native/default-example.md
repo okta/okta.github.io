@@ -29,7 +29,7 @@ In Okta, applications are OpenID Connect clients that can use Okta Authorization
 | Setting             | Value                                         |
 | ------------------- | --------------------------------------------  |
 | App Name            | My Native App                                 |
-| Login redirect URIs | com.oktapreview.{orgName}:/+expo-auth-session |
+| Login redirect URIs | {yourOktaScheme}:/+expo-auth-session          |
 |                     | exp://localhost:{port}/+expo-auth-session     |
 | Grant Types Allowed | Authorization Code, Refresh Token             |
 
@@ -38,7 +38,7 @@ After you have created the application there are two more values you will need t
 | Setting       | Where to Find                                                                  |
 | ------------- | ------------------------------------------------------------------------------ |
 | Client ID     | In the applications list, or on the "General" tab of a specific application.   |
-| Org URL       | On the home screen of the developer dashboard, in the upper right.             |
+| Org URL       | <span class="is-signed-in">`https://{yourOktaDomain}` <br></span>On the home screen of the developer dashboard, in the upper right.             |
 
 These values will be used in your React Native application to setup the OpenID Connect flow with Okta.
 
@@ -59,12 +59,13 @@ Assuming you're using an app created with `create-react-native-app`, modify your
 ```javascript
 {
   "expo": {
-    "scheme": "com.oktapreview.{orgName}"
+    "scheme": "{yourOktaScheme}"
   }
 }
 ```
 
 In your application's controller, create a new instance of the `TokenClient`:
+{% include domain-admin-warning.html %}
 
 ```javascript
 // App.js
@@ -77,7 +78,7 @@ const tokenClient = new TokenClient({
   scope: 'openid profile',
   redirect_uri: __DEV__ ?
     'exp://localhost:{port}/+expo-auth-session' :
-    'com.oktapreview.{orgName}:/+expo-auth-session'
+    '{yourOktaScheme}:/+expo-auth-session'
 });
 ```
 

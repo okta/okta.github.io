@@ -36,7 +36,7 @@ After you have created the application there are two more values you will need t
 | Setting       | Where to Find                                                                                 |
 | ------------- | --------------------------------------------------------------------------------------------- |
 | Client ID     | On the "General" tab of the application you just created, or the parent list of applications. |
-| Org URL       | On the home screen of the developer dashboard, in the upper right.                            |
+| Org URL       | <span class="is-signed-in">`https://{yourOktaDomain}` <br></span>On the home screen of the developer dashboard, in the upper right.                            |
 
 ## Add Sign-In Widget Assets To Your Project
 
@@ -82,7 +82,7 @@ Then copy this widget configuration into your front-end application:
 <script type="text/javascript">
   var oktaSignIn = new OktaSignIn({
     baseUrl: "https://{yourOktaDomain}",
-    clientId: "{yourClientId}",
+    clientId: "{clientId}",
     authParams: {
       issuer: "https://{yourOktaDomain}/oauth2/default",
       responseType: ['token', 'id_token'],

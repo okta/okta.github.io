@@ -22,7 +22,7 @@ The architecture for the application will be a React front-end application fed d
 There are a few tools you will need to get, develop and run the application.
 
 - A Git command line
-- The .NET Framework 2+
+- .NET Core 2+
 - Node and NPM
 - Visual Studio or VS Code
 
@@ -86,7 +86,7 @@ export default {
   url: 'https://{yourOktaDomain}',
   issuer: 'https://{yourOktaDomain}/oauth2/default',
   redirect_uri: window.location.origin + '/implicit/callback',
-  client_id: '{yourClientID}'
+  client_id: '{clientId}'
 }
 ```
 

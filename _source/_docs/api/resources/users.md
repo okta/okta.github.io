@@ -922,15 +922,11 @@ The first three parameters correspond to different types of lists:
 | q         | Finds a user that matches `firstName`, `lastName`, and `email` properties                                                                    | Query      | String   | FALSE    |
 | filter    | [Filters](/docs/api/getting_started/design_principles#filtering) users with a supported expression for a subset of properties           | Query      | String   | FALSE    |
 | search    | Searches for users with a supported [filtering](/docs/api/getting_started/design_principles#filtering) expression for most properties {% api_lifecycle ea %} | Query      | String   | FALSE    |
-| limit     | Specifies the number of results returned                                                                                                     | Query      | Number   | FALSE    |
-| after     | Specifies the pagination cursor for the next page of users (default is 200)                                                                  | Query      | String   | FALSE    |
+| limit     | Specifies the number of results returned (maximum 200)                                                                                       | Query      | Number   | FALSE    |
+| after     | Specifies the pagination cursor for the next page of users                                                                                   | Query      | String   | FALSE    |
 
-  * If you don't specify a value for `limit` and don't specify a query, only 200 results are returned for most orgs.
-  * If you don't specify any value for `limit` and do specify a query, a maximum of 10 results are returned.
-  * The maximum value for `limit` is 200 for most orgs.
-  *  Don't write code that depends on the default or maximum value, as it may change.
+  * If you don't specify a value for `limit`, the maximum (200) is used as a default.  If you are using a `q` parameter, the default limit is 10.
   * An HTTP 500 status code usually indicates that you have exceeded the request timeout.  Retry your request with a smaller limit and paginate the results. For more information, see [Pagination](/docs/api/getting_started/design_principles#pagination).
-  * Use `limit` and `after` with all four query types.
   * Treat the `after` cursor as an opaque value and obtain it through the next link relation. See [Pagination](/docs/api/getting_started/design_principles#pagination).
 
 ##### Response Parameters
@@ -2011,9 +2007,10 @@ This operation can only be performed on users that do not have a `DEPROVISIONED`
 ##### Request Parameters
 {:.api .api-request .api-request-params}
 
-Parameter | Description  | Param Type | DataType | Required |
---------- | ------------ | ---------- | -------- | -------- |
-userId    | ID of user   | URL        | String   | TRUE     |
+Parameter | Description                                                                           | Param Type | DataType | Required |
+--------- | ------------------------------------------------------------------------------------- | ---------- | -------- | -------- |
+userId    | ID of user                                                                            | URL        | String   | TRUE     |
+sendEmail | Sends a deactivation email to the administrator if `true`.  Default value is `false`. | Query      | Boolean  | FALSE    |
 
 ##### Response Parameters
 {:.api .api-response .api-response-params}
@@ -2028,7 +2025,7 @@ curl -v -X POST \
 -H "Accept: application/json" \
 -H "Content-Type: application/json" \
 -H "Authorization: SSWS ${api_token}" \
-"https://{yourOktaDomain}/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/deactivate"
+"https://{yourOktaDomain}/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/deactivate?sendEmail=true"
 ~~~
 
 ##### Response Example
@@ -2146,9 +2143,10 @@ is required to delete the user.
 ##### Request Parameters
 {:.api .api-request .api-request-params}
 
-Parameter | Description  | Param Type | DataType | Required | Default
---------- | ------------ | ---------- | -------- | -------- | -------
-id        | `id` of user | URL        | String   | TRUE     |
+Parameter | Description                                                                           | Param Type | DataType | Required | Default |
+--------- | ------------------------------------------------------------------------------------- | ---------- | -------- | -------- | ------- |
+id        | `id` of user                                                                          | URL        | String   | TRUE     |         |
+sendEmail | Sends a deactivation email to the administrator if `true`.  Default value is `false`. | Query      | Boolean  | FALSE    | FALSE   |
 
 ##### Response Parameters
 {:.api .api-response .api-response-params}
@@ -2165,7 +2163,7 @@ curl -v -X DELETE \
 -H "Accept: application/json" \
 -H "Content-Type: application/json" \
 -H "Authorization: SSWS ${api_token}" \
-"https://{yourOktaDomain}/api/v1/users/00ub0oNGTSWTBKOLGLNR"
+"https://{yourOktaDomain}/api/v1/users/00ub0oNGTSWTBKOLGLNR?sendEmail=true"
 ~~~
 
 ##### Response Example
@@ -2726,12 +2724,11 @@ Lists all grants for the specified user
 | userId    | ID of the user for whom you are fetching grants                                              | URL        | String   | TRUE     |         |
 | expand    | Valid value: `scope`. If specified, scope details are included in the `_embedded` attribute. | Query      | String   | FALSE    |         |
 | scopeId   | The scope ID to filter on                                                                    | Query      | String   | FALSE    |         |
-| limit     | The maximum number of grants to return                                                       | Query      | Number   | FALSE    | 20      |
+| limit     | The number of grants to return (maximum 200)                                                 | Query      | Number   | FALSE    | 20      |
 | after     | Specifies the pagination cursor for the next page of grants                                  | Query      | String   | FALSE    |         |
 
-> Note: The after cursor should treated as an opaque value and obtained through [the next link relation](/docs/api/getting_started/design_principles#pagination).
+> Note: `after` should be treated as a cursor (an opaque value) and obtained through [the next link relation](/docs/api/getting_started/design_principles#pagination).
 
-* The maximum value for `limit` is 200.
 
 #### Request Example
 {:.api .api-request .api-request-example}
@@ -2754,19 +2751,11 @@ curl -v -X GET \
         "status": "ACTIVE",
         "created": "2017-10-30T22:06:53.000Z",
         "lastUpdated": "2017-10-30T22:06:53.000Z",
-        "issuerId": "ausain6z9zIedDCxB0h7",
+        "issuer": "https://{yourOktaDomain}/oauth2/ausain6z9zIedDCxB0h7",
         "clientId": "0oabskvc6442nkvQO0h7",
         "userId": "00u5t60iloOHN9pBi0h7",
         "scopeId": "scpCmCCV1DpxVkCaye2X",
         "_links": {
-            "revoke": {
-                "href": "https://{yourOktaDomain}/api/v1/users/00u5t60iloOHN9pBi0h7/grants/oag3ih1zrm1cBFOiq0h6",
-                "hints": {
-                    "allow": [
-                        "DELETE"
-                    ]
-                }
-            },
             "app": {
                 "href": "https://{yourOktaDomain}/api/v1/apps/0oabskvc6442nkvQO0h7",
                 "title": "My App"
@@ -2779,12 +2768,14 @@ curl -v -X GET \
                 "href": "https://{yourOktaDomain}/oauth2/v1/clients/0oabskvc6442nkvQO0h7",
                 "title": "My App"
             },
-            "issuer": {
-                "href": "https://{yourOktaDomain}/api/v1/authorizationServers/ausain6z9zIedDCxB0h7",
-                "title": "My Custom Authorization Server"
-            },
             "self": {
-                "href": "https://{yourOktaDomain}/api/v1/users/00u5t60iloOHN9pBi0h7/grants/oag3ih1zrm1cBFOiq0h6"
+                "href": "https://{yourOktaDomain}/api/v1/users/00u5t60iloOHN9pBi0h7/grants/oag3ih1zrm1cBFOiq0h6",
+                "hints": {
+                    "allow": [
+                        "GET",
+                        "DELETE"
+                    ]
+                }
             },
             "user": {
                 "href": "https://{yourOktaDomain}/api/v1/users/00u5t60iloOHN9pBi0h7",
@@ -2837,19 +2828,11 @@ curl -v -X GET \
     "status": "ACTIVE",
     "created": "2017-10-30T22:06:53.000Z",
     "lastUpdated": "2017-10-30T22:06:53.000Z",
-    "issuerId": "ausain6z9zIedDCxB0h7",
+    "issuer": "https://{yourOktaDomain}/oauth2/ausain6z9zIedDCxB0h7",
     "clientId": "0oabskvc6442nkvQO0h7",
     "userId": "00u5t60iloOHN9pBi0h7",
     "scopeId": "scpCmCCV1DpxVkCaye2X",
     "_links": {
-        "revoke": {
-            "href": "https://{yourOktaDomain}/api/v1/users/00u5t60iloOHN9pBi0h7/grants/oag3ih1zrm1cBFOiq0h6",
-            "hints": {
-                "allow": [
-                    "DELETE"
-                ]
-            }
-        },
         "app": {
             "href": "https://{yourOktaDomain}/api/v1/apps/0oabskvc6442nkvQO0h7",
             "title": "My App"
@@ -2862,12 +2845,14 @@ curl -v -X GET \
             "href": "https://{yourOktaDomain}/oauth2/v1/clients/0oabskvc6442nkvQO0h7",
             "title": "My App"
         },
-        "issuer": {
-            "href": "https://{yourOktaDomain}/api/v1/authorizationServers/ausain6z9zIedDCxB0h7",
-            "title": "My Custom Authorization Server"
-        },
         "self": {
-            "href": "https://{yourOktaDomain}/api/v1/users/00u5t60iloOHN9pBi0h7/grants/oag3ih1zrm1cBFOiq0h6"
+            "href": "https://{yourOktaDomain}/api/v1/users/00u5t60iloOHN9pBi0h7/grants/oag3ih1zrm1cBFOiq0h6",
+            "hints": {
+                "allow": [
+                    "GET",
+                    "DELETE"
+                ]
+            }
         },
         "user": {
             "href": "https://{yourOktaDomain}/api/v1/users/00u5t60iloOHN9pBi0h7",
@@ -2898,10 +2883,8 @@ Lists all grants for a specified user and client
 | userId    | ID of the user whose grants you are listing for the specified `clientId`                     | URL            | String   | TRUE     |         |
 | clientId  | ID of the client whose grants you are listing for the specified `userId`                     | URL            | String   | TRUE     |         |
 | expand    | Valid value: `scope`. If specified, scope details are included in the `_embedded` attribute. | Query          | String   | FALSE    |         |
-| limit     | The maximum number of tokens to return                                                       | Query          | Number   | FALSE    | 20      |
+| limit     | The number of tokens to return (maximum 200)                                                       | Query          | Number   | FALSE    | 20      |
 | after     | Specifies the pagination cursor for the next page of tokens                                  | Query          | String   | FALSE    |         |
-
-* The maximum value for `limit` is 200.
 
 #### Request Example
 {:.api .api-request .api-request-example}
@@ -2924,7 +2907,7 @@ curl -v -X GET \
         "status": "ACTIVE",
         "created": "2017-11-03T03:34:17.000Z",
         "lastUpdated": "2017-11-03T03:34:17.000Z",
-        "issuerId": "ausain6z9zIedDCxB0h7",
+        "issuer": "https://{yourOktaDomain}/oauth2/ausain6z9zIedDCxB0h7",
         "clientId": "0oabskvc6442nkvQO0h7",
         "userId": "00u5t60iloOHN9pBi0h7",
         "scopeId": "scpCmCCV1DpxVkCaye2X",
@@ -2938,12 +2921,10 @@ curl -v -X GET \
                 "title": "Your phone"
             },
             "self": {
-                "href": "https://{yourOktaDomain}/api/v1/users/00u5t60iloOHN9pBi0h7/grants/oag3j3j33ILN7OFqP0h6"
-            },
-            "revoke": {
                 "href": "https://{yourOktaDomain}/api/v1/users/00u5t60iloOHN9pBi0h7/grants/oag3j3j33ILN7OFqP0h6",
                 "hints": {
                     "allow": [
+                        "GET",
                         "DELETE"
                     ]
                 }
@@ -2955,10 +2936,6 @@ curl -v -X GET \
             "user": {
                 "href": "https://{yourOktaDomain}/api/v1/users/00u5t60iloOHN9pBi0h7",
                 "title": "Saml Jackson"
-            },
-            "issuer": {
-                "href": "https://{yourOktaDomain}/api/v1/authorizationServers/ausain6z9zIedDCxB0h7",
-                "title": "Example Authorization Server"
             },
             "authorizationServer": {
                 "href": "https://{yourOktaDomain}/api/v1/authorizationServers/ausain6z9zIedDCxB0h7",
@@ -3073,18 +3050,27 @@ curl -v -X DELETE \
 HTTP/1.1 204 No Content
 ~~~
 
-## User OAuth 2.0 Token Operations
+## User OAuth 2.0 Token Management Operations
+
+* [List Refresh Tokens](#list-refresh-tokens)
+* [Get Refresh Token](#get-refresh-token)
+* [Revoke All Refresh Tokens](#revoke-all-refresh-tokens)
+* [Revoke Refresh Token](#revoke-refresh-token)
+
+These endpoints allow you to manage tokens issued by an Authorization Server for a particular User and Client. For example, you could revoke every active refresh token for a User in the context of a specific Client. You can also [revoke specific tokens](/authentication-guide/tokens/revoking-tokens) or [manage tokens at the Authorization Server level](/docs/api/resources/authorization-servers#oauth-20-token-management-operations).
+
+Read [Working With Tokens](/authentication-guide/tokens/) to understand more about how OAuth 2.0 tokens work.
 
 {% api_lifecycle ea %}
 
-### List OAuth 2.0 Tokens for User and Client
+### List Refresh Tokens
 {:.api .api-operation}
 
 {% api_lifecycle ea %}
 
 {% api_operation get /api/v1/users/${userId}/clients/${clientId}/tokens %}
 
-Lists all tokens for the specified user and client
+Lists all refresh tokens issued for the specified User and Client.
 
 #### Request Parameters
 {:.api .api-request .api-request-params}
@@ -3094,12 +3080,11 @@ Lists all tokens for the specified user and client
 | userId    | ID of the user for whom you are fetching tokens                                              | URL        | String   | TRUE     |         |
 | clientId  | ID of the client                                                                             | URL        | String   | TRUE     |         |
 | expand    | Valid value: `scope`. If specified, scope details are included in the `_embedded` attribute. | Query      | String   | FALSE    |         |
-| limit     | The maximum number of tokens to return                                                       | Query      | Number   | FALSE    | 20      |
+| limit     | The number of tokens to return (maximum 200)                                                       | Query      | Number   | FALSE    | 20      |
 | after     | Specifies the pagination cursor for the next page of tokens                                  | Query      | String   | FALSE    |         |
 
-> Note: The after cursor should treated as an opaque value and obtained through [the next link relation](/docs/api/getting_started/design_principles#pagination).
+> Note: `after` should be treated as a cursor (an opaque value) and obtained through [the next link relation](/docs/api/getting_started/design_principles#pagination).
 
-* The maximum value for `limit` is 200.
 
 #### Request Example
 {:.api .api-request .api-request-example}
@@ -3163,14 +3148,14 @@ curl -v -X GET \
 ]
 ~~~
 
-### Get OAuth 2.0 Token for User and Client
+### Get Refresh Token
 {:.api .api-operation}
 
 {% api_lifecycle ea %}
 
 {% api_operation get /api/v1/users/${userId}/clients/${clientId}/tokens/${tokenId} %}
 
-Gets a token for the specified user and client
+Gets a refresh token issued for the specified User and Client.
 
 #### Request Parameters
 {:.api .api-request .api-request-params}
@@ -3181,12 +3166,11 @@ Gets a token for the specified user and client
 | clientId  | ID of the client                                                                             | URL        | String   | TRUE     |         |
 | tokenId   | ID of the token                                                                             | URL        | String   | TRUE     |         |
 | expand    | Valid value: `scope`. If specified, scope details are included in the `_embedded` attribute. | Query      | String   | FALSE    |         |
-| limit     | The maximum number of grants to return                                                       | Query      | Number   | FALSE    | 20      |
+| limit     | The number of grants to return (maximum 200)                                                      | Query      | Number   | FALSE    | 20      |
 | after     | Specifies the pagination cursor for the next page of grants                                  | Query      | String   | FALSE    |         |
 
-> Note: The after cursor should treated as an opaque value and obtained through [the next link relation](/docs/api/getting_started/design_principles#pagination).
+> Note: `after` should be treated as a cursor (an opaque value) and obtained through [the next link relation](/docs/api/getting_started/design_principles#pagination).
 
-* The maximum value for `limit` is 200.
 
 #### Request Example
 {:.api .api-request .api-request-example}
@@ -3275,14 +3259,14 @@ curl -v -X GET \
 }
 ~~~
 
-### Revoke OAuth 2.0 Tokens for User and Client
+### Revoke All Refresh Tokens
 {:.api .api-operation}
 
 {% api_lifecycle ea %}
 
 {% api_operation delete /api/v1/users/${userId}/clients/${clientId}/tokens %}
 
-Revokes all tokens for the specified user and client
+Revokes all refresh tokens issued for the specified User and Client. Any access tokens issued with these refresh tokens will also be revoked, but access tokens issued without a refresh token will not be affected.
 
 #### Request Parameters
 {:.api .api-request .api-request-params}
@@ -3310,14 +3294,14 @@ curl -v -X DELETE \
 HTTP/1.1 204 No Content
 ~~~
 
-### Revoke OAuth 2.0 Token for User and Client
+### Revoke Refresh Token
 {:.api .api-operation}
 
 {% api_lifecycle ea %}
 
 {% api_operation delete /api/v1/users/${userId}/clients/${clientId}/tokens/${tokenId} %}
 
-Revokes the specified token for the specified user and client
+Revokes the specified refresh token. If an access token was issued with this refresh token, it will also be revoked.
 
 #### Request Parameters
 {:.api .api-request .api-request-params}
@@ -4156,27 +4140,28 @@ Specifies the authentication provider that validates the user's password credent
 
 ### Links Object
 
-Specifies link relations (See [Web Linking](http://tools.ietf.org/html/rfc5988)) available for the current status of a user.  The Links Object is used for dynamic discovery of relaed resources and lifecycle or credential operations.  The Links Object is **read-only**.
+Specifies link relations (See [Web Linking](http://tools.ietf.org/html/rfc5988)) available for the current status of a user.  The Links object is used for dynamic discovery of related resources, lifecycle operations, and credential operations.  The Links object is read-only.
 
-#### Individual Users vs Collection of Users
+#### Individual Users vs. Collection of Users
 
-For an individual User result, the Links Object contains a full set of link relations available for that User as determined by Policy. For a collection of Users, the Links Object contains only the self link. Operations that return a collection of Users include [List Users](#list-users) and [List Group Members](groups#list-group-members).
+For an individual User result, the Links object contains a full set of link relations available for that User as determined by your policies. For a collection of Users, the Links object contains only the `self` link. Operations that return a collection of Users include [List Users](#list-users) and [List Group Members](groups#list-group-members).
 
+Here are some links that may be available on a User, as determined by your policies:
 
-| Link Relation Type     | Description                                                                                                                                           |
-|:-----------------------|:------------------------------------------------------------------------------------------------------------------------------------------------------|
-| self                   | The actual user                                                                                                                                       |
-| activate               | [Lifecycle action](#activate-user) to transition user to `ACTIVE` status                                                                              |
-| deactivate             | [Lifecycle action](#deactivate-user) to transition user to `DEPROVISIONED` status                                                                     |
-| suspend                | [Lifecycle action](#suspend-user) to transition user to `SUSPENDED` status                                                                            |
-| unsuspend              | [Lifecycle action](#unsuspend-user) to return a user to `ACTIVE` status when their current status is `SUSPENDED`                                      |
-| resetPassword          | [Lifecycle action](#reset-password) to transition user to `RECOVERY` status                                                                           |
-| expirePassword         | [Lifecycle action](#expire-password) to transition user to `PASSWORD_EXPIRED` status                                                                  |
-| resetFactors           | [Lifecycle action](#reset-factors) to reset all the MFA factors for the user                                                                          |
-| unlock                 | [Lifecycle action](#unlock-user) to return a user to `ACTIVE` status when their current status is `LOCKED_OUT` due to exceeding failed login attempts |
-| forgotPassword         | [Resets a user&#8217;s password](#forgot-password) by validating the user&#8217;s recovery credential.                                                |
-| changePassword         | [Changes a user&#8217;s password](#change-password) validating the user&#8217;s current password                                                      |
-| changeRecoveryQuestion | [Changes a user&#8217;s recovery credential](#change-recovery-question) by validating the user&#8217;s current password                               |
+| Link Relation Type     | Description                                                                                                           |
+|:-----------------------|:----------------------------------------------------------------------------------------------------------------------|
+| self                   | A self-referential link to this user                                                                                  |
+| activate               | Lifecycle action to [activate the user](#activate-user)                                                               |
+| deactivate             | Lifecycle action to [deactivate the user](#deactivate-user)                                                           |
+| suspend                | Lifecycle action to [suspend the user](#suspend-user)                                                                 |
+| unsuspend              | Lifecycle action to [unsuspend the user](#unsuspend-user)                                                             |
+| resetPassword          | Lifecycle action to [trigger a password reset](#reset-password)                                                       |
+| expirePassword         | Lifecycle action to [expire the user's password](#expire-password)                                                    |
+| resetFactors           | Lifecycle action to [reset all MFA factors](#reset-factors)                                                           |
+| unlock                 | Lifecycle action to [unlock a locked-out user](#unlock-user)                                                          |
+| forgotPassword         | [Resets a user's password](#forgot-password) by validating the user's recovery credential.                            |
+| changePassword         | [Changes a user's password](#change-password) validating the user's current password                                  |
+| changeRecoveryQuestion | [Changes a user's recovery credential](#change-recovery-question) by validating the user's current password           |
 
 ### User-Consent Grant Object
 
@@ -4188,7 +4173,7 @@ For an individual User result, the Links Object contains a full set of link rela
     "status": "ACTIVE",
     "created": "2017-11-07T21:46:36.000Z",
     "lastUpdated": "2017-11-07T21:46:36.000Z",
-    "issuerId": "ausoxdmNlCV4Rw9Ec0g3",
+    "issuer": "https://{yourOktaDomain}/oauth2/ausain6z9zIedDCxB0h7",
     "clientId": "customClientIdNative",
     "userId": "00uol9oQZaWN47WQZ0g3",
     "scopeId": "scpp4bmzfCV7dHf8y0g3",
@@ -4209,12 +4194,10 @@ For an individual User result, the Links Object contains a full set of link rela
             "title": "test"
         },
         "self": {
-            "href": "https://{yourOktaDomain}:1802/api/v1/users/00uol9oQZaWN47WQZ0g3/grants/oag2n8HU1vTmvCdQ50g3"
-        },
-        "revoke": {
             "href": "https://{yourOktaDomain}:1802/api/v1/users/00uol9oQZaWN47WQZ0g3/grants/oag2n8HU1vTmvCdQ50g3",
             "hints": {
                 "allow": [
+                    "GET",
                     "DELETE"
                 ]
             }
@@ -4226,10 +4209,6 @@ For an individual User result, the Links Object contains a full set of link rela
         "user": {
             "href": "https://{yourOktaDomain}:1802/api/v1/users/00uol9oQZaWN47WQZ0g3",
             "title": "Saml Jackson"
-        },
-        "issuer": {
-            "href": "https://{yourOktaDomain}:1802/api/v1/authorizationServers/default",
-            "title": "default"
         },
         "authorizationServer": {
             "href": "https://{yourOktaDomain}/api/v1/authorizationServers/ausain6z9zIedDCxB0h7",
@@ -4249,7 +4228,7 @@ For an individual User result, the Links Object contains a full set of link rela
 | status      | Status of the grant. Valid values: `ACTIVE`, `REVOKED` or `EXPIRED`                                                            | String                                                          |
 | created     | Timestamp when the grant was created                                                                                           | Date                                                            |
 | lastUpdated | Timestamp when the grant was last updated                                                                                      | Date                                                            |
-| issuerId    | ID of the authorization server for this grant                                                                                  | String                                                          |
+| issuer      | The complete URL of the authorization server for this grant                                                                    | String                                                          |
 | clientId    | ID of the client for this grant                                                                                                | String                                                          |
 | userId      | ID of the user who consented to this grant                                                                                     | String                                                          |
 | scopeId     | ID of the scope to which this grant applies                                                                                    | String                                                          |

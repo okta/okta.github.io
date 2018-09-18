@@ -250,6 +250,8 @@ export class CarService {
 }
 ```
 
+> **TIP:** If you're using using Angular 6+, you can make this code work by installing [rxjs-compat](https://www.npmjs.com/package/rxjs-compat) with `npm i rxjs-compat`.
+
 Add this service as a provider in `src/app/app.module.ts`. While you're in there, import `HttpClientModule` too.
 
 ```typescript
@@ -1064,6 +1066,7 @@ This article uses Okta's Angular SDK, which is something we haven't written abou
 
 I've written a number of Spring Boot and Angular tutorials in the past, and I've recently updated them for Angular 5.
 
+* [Build a Basic CRUD App with Angular 7.0 and Spring Boot 2.1](/blog/2018/08/22/basic-crud-angular-7-and-spring-boot-2)
 * [Bootiful Development with Spring Boot and Angular](/blog/2017/04/26/bootiful-development-with-spring-boot-and-angular)
 * [Build a Secure Notes Application with Kotlin, TypeScript, and Okta](/blog/2017/09/19/build-a-secure-notes-application-with-kotlin-typescript-and-okta)
 * [Angular Authentication with OpenID Connect and Okta in 20 Minutes](/blog/2017/04/17/angular-authentication-with-oidc)

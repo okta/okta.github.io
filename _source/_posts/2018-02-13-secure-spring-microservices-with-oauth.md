@@ -83,8 +83,8 @@ public class EdgeServiceApplication {
 Adding `@EnableOAuth2Sso` causes Spring Security to look for a number of properties. Add the following properties to `edge-service/src/main/resources/application.properties`.
 
 ```properties
-security.oauth2.client.client-id={yourClientId}
-security.oauth2.client.client-secret={yourClientSecret}
+security.oauth2.client.client-id={clientId}
+security.oauth2.client.client-secret={clientSecret}
 security.oauth2.client.access-token-uri=https://{yourOktaDomain}/oauth2/default/v1/token
 security.oauth2.client.user-authorization-uri=https://{yourOktaDomain}/oauth2/default/v1/authorize
 security.oauth2.client.scope=openid profile email
@@ -145,8 +145,8 @@ In `beer-catalog-service/pom.xml`, add the same dependencies you added to the Ed
 Add the same properties to `beer-catalog-service/src/main/resources/application.properties`.
 
 ```properties
-security.oauth2.client.client-id={yourClientId}
-security.oauth2.client.client-secret={yourClientSecret}
+security.oauth2.client.client-id={clientId}
+security.oauth2.client.client-secret={clientSecret}
 security.oauth2.client.access-token-uri=https://{yourOktaDomain}/oauth2/default/v1/token
 security.oauth2.client.user-authorization-uri=https://{yourOktaDomain}/oauth2/default/v1/authorize
 security.oauth2.client.scope=openid profile email
@@ -466,7 +466,7 @@ export class OktaService {
   constructor() {
     this.widget = new OktaSignIn({
       baseUrl: 'https://{yourOktaDomain}',
-      clientId: '{yourClientId}',
+      clientId: '{clientId}',
       authParams: {
         issuer: 'default',
         responseType: ['id_token', 'token'],

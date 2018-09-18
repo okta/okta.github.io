@@ -20,28 +20,26 @@ To use these collections, you'll need to set up your local environment and impor
 
 ## Sign Up for Okta
 
-You'll need a free Okta developer organization to get started. If you don't have one already, [sign up](https://developer.okta.com/signup/){:target="_blank"} to create one.
-
-When you create a new Okta organization, it will be assigned a base URL like `dev-12345.oktapreview.com`. This is your unique subdomain in Okta. `oktapreview.com` orgs are production-ready and can be used for development work or full-fledged apps, but they don't include SLAs.
-
-If you need organizations with guaranteed SLAs or enterprise features, [let us know](https://developer.okta.com/contact/). These orgs use a different domain, like `your-org.okta.com`. Regardless of the domain or base URL style, you can use the following instructions to send requests to the Okta API.
+You'll need a free Okta developer organization to get started. If you don't have one already, [sign up](https://developer.okta.com/signup/){:target="_blank"} to create one. When you create a new Okta organization, it will be assigned a base URL like `dev-12345.okta.com`. This is your unique subdomain in Okta.
 
 ## Set Up Your Environment
 
 1. [Create an API token](/docs/api/getting_started/getting_a_token){:target="_blank"} for your org.
-1. [Install the Postman app](https://www.getpostman.com/apps){:target="_blank"}.
-1. Launch Postman and click the **Import** button. Select **Import From Link**, and paste this link into the textbox: `https://developer.okta.com/docs/api/postman/example.oktapreview.com.environment`
+2. [Install the Postman app](https://www.getpostman.com/apps){:target="_blank"}.
+3. Launch Postman and click the **Import** button. Select **Import From Link**, and paste this link into the textbox: `https://developer.okta.com/docs/api/postman/example.oktapreview.com.environment`
     {% img import_enviro.png alt:"Importing the Okta Example Environment" %}
 
-1. Once it's imported, make sure the `example.oktapreview.com` environment is selected.
+4. Once it's imported, make sure the `example.oktapreview.com` environment is selected.
     {% img postman_example_start.png alt:"Postman app with collections" %}
 
-1. Click the eye icon next to `example.oktapreview.com` and select **Edit** to replace or add these values:
+5. Click the eye icon next to `example.oktapreview.com` and select **Edit** to replace or add these values:
     * Rename your environment to something you'll recognize. For example, `My Org`.
-    * `url`: Replace the example value with your org's full URL. For example, `https://dev-{id}.oktapreview.com`. (Make sure you don't include `-admin` in the subdomain!)
+    * `url`: Replace the example value with your org's full URL: . For example, `https://{yourOktaDomain}`. (Make sure you don't include `-admin` in the subdomain!)
     * `apikey`: Enter the API token you created earlier, for example `00LzMWxMq_0sdErHy9Jf1sijEGexYZlsdGr9a4QjkS`.
 
-1. Click **Update** to save your changes.
+6. Click **Update** to save your changes.
+
+{% include domain-admin-warning.html %}
 
 ## Import a Collection
 
@@ -63,7 +61,7 @@ Once you've imported the Users API collection, and added your Okta org informati
 To make sure everything works, send a request to list all the users in your org:
 
 1. Select the **Collections** tab in Postman and open the **Users (Okta API)** collection. Open the **List Users** folder, and select **(GET) List Users**. This loads the List Users request into Postman, ready to send.
-1. Click **Send**. The result pane automatically displays the results of your request:
+2. Click **Send**. The result pane automatically displays the results of your request:
     {% img postman_response.png alt:"GET List Users" %}
 
 If you receive an error, it's likely that one of the values in the environment isn't set correctly. Check the values and try again.

@@ -75,7 +75,7 @@ A `401`? Yup, secure by default! Plus, we haven't actually supplied any of the c
 
 ## Get Your OAuth Info Ready
 
-As I mentioned above, you'll be using Okta going forward. You can go sign up for a free (forever) account over at [https://developer.okta.com/](https://developer.okta.com/). Just click the sign up button and fill out the form. When that's done you'll have two things, your Okta base URL, which looks something like: `dev-123456.oktapreview.com` and an email with instructions on how to activate your account.
+As I mentioned above, you'll be using Okta going forward. You can go sign up for a free (forever) account over at [https://developer.okta.com/](https://developer.okta.com/). Just click the sign up button and fill out the form. When that's done you'll have two things, your Okta organization URL (e.g. `https://{yourOktaDomain}`), and an email with instructions on how to activate your account.
 
 Activate your account, and while you're still in the Okta Developer Console you have one last step: create an Okta SPA application. On the top menu bar click on **Applications** then click **Add Application**. Select **SPA** and click **Next**.
 
@@ -96,7 +96,7 @@ An application resource server only needs to know how to validate an access toke
 security:
  oauth2:
    resource:
-     userInfoUri: https://dev-123456.oktapreview.com/oauth2/default/v1/userinfo
+     userInfoUri: https://{yourOktaDomain}/oauth2/default/v1/userinfo
 ```
 
 At this point you could start up your application and start validating access tokens! But of course you would need an access token to validate...
@@ -141,11 +141,11 @@ Create a new file `src/main/resources/static/index.html` and populate it with th
    // You could statically define your config like if you wanted too:
    /*
    const data = {
-     baseUrl: 'https://dev-123456.oktapreview.com',
+     baseUrl: 'https://{yourOktaDomain}',
      clientId: '00icu81200icu812w0h7',
      redirectUri: 'http://localhost:8080',
      authParams: {
-       issuer: 'https://dev-123456.oktapreview.com/oauth2/default',
+       issuer: 'https://{yourOktaDomain}/oauth2/default',
        responseType: ['id_token', 'token']
      }
    }; */
@@ -287,8 +287,8 @@ Add the corresponding configuration to your `application.yml` file:
 okta:
  oauth2:
    # Client ID from above step
-   clientId: 00ICU81200ICU812
-   issuer: https://dev-123456.oktapreview.com/oauth2/default
+   clientId: {clientId}
+   issuer: https://{yourOktaDomain}/oauth2/default
 ```
 
 The last thing is to allow public access to the `index.html` page and `/sign-in-widget-config`
@@ -335,8 +335,8 @@ You can even trim down your `application.yml` file if you want to, any of the `s
 ```yaml
 okta:
  oauth2:
-   clientId: 00ICU81200ICU812
-   issuer: https://dev-123456.oktapreview.com/oauth2/default
+   clientId: {clientId}
+   issuer: https://{yourOktaDomain}/oauth2/default
 ```
 
 Restart your application and the first two concerns have been taken care of!

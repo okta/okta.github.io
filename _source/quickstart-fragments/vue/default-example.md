@@ -39,7 +39,7 @@ After you have created the application there are two more values you will need t
 | Setting       | Where to Find                                                                  |
 | ------------- | ------------------------------------------------------------------------------ |
 | Client ID     | In the applications list, or on the "General" tab of a specific application.   |
-| Org URL       | On the home screen of the developer dashboard, in the upper right.             |
+| Org URL       | <span class="is-signed-in">`https://{yourOktaDomain}` <br></span>On the home screen of the developer dashboard, in the upper right.             |
 
 These values will be used in your Vue application to setup the OpenID Connect flow with Okta.
 
@@ -56,6 +56,7 @@ npm install @okta/okta-vue --save
 You will need the values from the OIDC client that you created in the previous step to instantiate the middleware. You will also need to know your Okta org URL, which you can see on the home page of the Okta Developer console.
 
 In your application's [vue-router](https://router.vuejs.org/en/essentials/getting-started.html) configuration, import the `@okta/okta-vue` plugin and pass it your OpenID Connect client information:
+{% include domain-admin-warning.html %}
 
 ```typescript
 // router/index.js

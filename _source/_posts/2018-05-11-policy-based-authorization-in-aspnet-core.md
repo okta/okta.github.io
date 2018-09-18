@@ -235,7 +235,7 @@ You'll also need to set up your application in Okta. Start by creating a [foreve
 
 Change the `appsettings.json` file in the cloned project to add your:
 
-* Okta domain (https://dev-XXXXXX.oktapreview.com)
+* Okta domain (e.g. `https://{yourOktaDomain}`)
 * Client ID for your application
 * Client secret for your application
 * API Token for your application

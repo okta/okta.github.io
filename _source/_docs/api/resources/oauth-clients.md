@@ -712,8 +712,10 @@ Client applications have the following properties:
 | grant_types                         | Array of OAuth 2.0 grant type strings. Default value: `authorization_code`                                                 | Array of `authorization_code`, `implicit`, `password`, `refresh_token`, `client_credentials` | TRUE     | FALSE  | FALSE     |
 | token_endpoint_auth_method          | requested authentication method for the token endpoint. Default value: `client_secret_basic`                               | `none`, `client_secret_post`, `client_secret_basic`, or `client_secret_jwt`                  | TRUE     | FALSE  | FALSE     |
 | initiate_login_uri                  | URL that a third party can use to initiate a login by the client                                                           | String                                                                                       | TRUE     | FALSE  | FALSE     |
+| jwks                                | A [JSON Web Key Set](https://tools.ietf.org/html/rfc7517#section-5) for validating JWTs presented to Okta.                 | [JSON Web Key Set](#json-web-key-set)                                                        | TRUE     | FALSE  | FALSE     |
 | tos_uri {% api_lifecycle ea %}    | URL string of a web page providing the client's terms of service document                                                                                         | URL                                                                                          | TRUE     | FALSE  | FALSE     |
 | policy_uri {% api_lifecycle ea %} | URL string of a web page providing the client's policy document                                                                                                   | URL                                                                                          | TRUE     | FALSE  | FALSE     |
+
 
 Property Details
 
@@ -747,3 +749,27 @@ Property Details
     available to a client influence the `response_types` that the client is allowed to use, and vice versa. For instance, a `grant_types`
     value that includes `authorization_code` implies a `response_types` value that includes `code`, as both values are defined as part of
     the OAuth 2.0 authorization code grant.
+
+## JSON Web Key Set
+
+The JSON Web Key Set (`jwks`) is a set of public keys registered for the client to use for client authentication.
+
+The `jwks` object has precisely one attribute: `keys`, which is an array of JSON Web Key.
+
+| Property   | DataType                      | Nullable | Unique | Readonly  |
+|------------|:----------------------------- |:-------- |:------ |:--------- |
+| keys       | An array of JSON Web Keys     | TRUE     | FALSE  | FALSE     |
+
+## JSON Web Key
+
+A [JSON Web Key (JWK)](https://tools.ietf.org/html/rfc7517) is a JSON representation of a cryptographic key. Okta can use these keys to verify the signature of a JWT when provided for the `private_key_jwt` client authentication method, or for a signed authorize request object.
+Okta supports both RSA and Elliptic Curve (EC) keys.
+
+| Property   | Description                                          | DataType      | Nullable                              | Unique                | Readonly  |
+|------------|:---------------------------------------------------- |:------------- |:------------------------------------- |:--------------------- |:--------- |
+| kty        | The type of public key this is                       | `RSA` or `EC` | FALSE                                 | FALSE                 | FALSE     |
+| kid        | The unique identifier of the key                     | String        | TRUE, if only one key in the JWKS     | TRUE, within the JWKS | FALSE     |
+| e          | The key exponent of a RSA key                        | String        | TRUE, unless the kty is `RSA`         | FALSE                 | FALSE     |
+| n          | The modulus of a RSA key                             | String        | TRUE, unless the kty is `RSA`         | FALSE                 | FALSE     |
+| x          | The public x coordinate for the elliptic curve point | String        | TRUE, unless the kty is `EC`          | FALSE                 | FALSE     |
+| y          | The public y coordinate for the elliptic curve point | String        | TRUE, unless the kty is `EC`          | FALSE                 | FALSE     |

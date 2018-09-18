@@ -169,7 +169,7 @@ spring:
            jwk-set-uri: https://{yourOktaDomain}/oauth2/default/v1/keys
 ```
 
-Copy the client ID and secret from your OIDC app into your `application.yml` file. For `{yourOktaDomain}`, use the value of your domain (e.g. `dev-158606.oktapreview.com`). Make sure it does *not* include `-admin` in it.
+Copy the client ID and secret from your OIDC app into your `application.yml` file. Replace `{yourOktaDomain}` with your Okta org URL, which you can find on the Dashboard of the Developer Console. Make sure it does *not* include `-admin` in it.
 
 You'll need to add some dependencies to your `pom.xml` for Spring Security 5's OAuth configuration to initialize correctly.
 

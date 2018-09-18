@@ -107,9 +107,9 @@ of the callback response.
 
 `request`:
 
-  * You must sign the JWT using the app's client secret.
+  * You must sign the JWT using either the app's client secret, or a private key whose public key is registered on the app's JWKSet.
   * The JWT can't be encrypted.
-  * Okta supports these signing algorithms: [HS256](https://tools.ietf.org/html/rfc7518#section-5.2.3), [HS384](https://tools.ietf.org/html/rfc7518#section-5.2.4), and [HS512](https://tools.ietf.org/html/rfc7518#section-5.2.5).
+  * Okta supports the [HMAC](https://tools.ietf.org/html/rfc7518#section-3.2), [RSA](https://tools.ietf.org/html/rfc7518#section-3.3) and [ECDSA](https://tools.ietf.org/html/rfc7518#section-3.4) signature algorithms. HMAC signatures require that the client has a `token_endpoint_auth_method` which uses a `client_secret`. RSA and ECDSA signatures requires that the client registers a public key.
   * We recommend you don't duplicate any request parameters in both the JWT and the query URI itself. However, you can do so with `state`, `nonce`, `code_challenge`, and `code_challenge_method`. In those cases, the values in the query URI will override the JWT values.
   * Okta validates the `request` parameter in the following ways:
     1. `iss` is required and must  be the `client_id`.
@@ -496,8 +496,8 @@ HTTP 200 OK
 HTTP 401 Unauthorized
 Content-Type: application/json;charset=UTF-8
 {
-    "error" : "invalid_client",
-    "error_description" : "No client credentials found."
+    "error": "invalid_client",
+    "error_description": "No client credentials found."
 }
 ~~~
 
@@ -508,36 +508,35 @@ Content-Type: application/json;charset=UTF-8
 
 > This endpoint's base URL will vary depending on whether you are using a custom authorization server or not. For more information, see [Composing Your Base URL](#composing-your-base-url).
 
-The API takes an ID token and logs the user out of the Okta session if the subject matches the current Okta session. A `post_logout_redirect_uri` may be specified to redirect the User after the logout has been performed. Otherwise, the user is redirected to the Okta login page.
-
 Use this operation to log out a user by removing their Okta browser session.
+
+This endpoint takes an ID token and logs the user out of Okta if the subject matches the current Okta session. A `post_logout_redirect_uri` may be specified to redirect the browser after the logout has been performed. Otherwise, the browser is redirected to the Okta login page.
+
+If no Okta session exists, this endpoint has no effect and the browser is redirected immediately to the Okta login page or the `post_logout_redirect_uri` (if specified).
 
 #### Request Parameters
 
-The following parameters can be posted as a part of the URL-encoded form values to the API.
+The following parameters can be included in the query string of the request:
 
-| Parameter                | Description                                                                                                                                     | Type   | Required |
-|:-------------------------|:------------------------------------------------------------------------------------------------------------------------------------------------|:-------|:---------|
-| id_token_hint            | A valid ID token with a subject matching the current session.                                                                                   | String | TRUE     |
-| post_logout_redirect_uri | Callback location to redirect to after the logout has been performed. It must match the value preregistered in Okta during client registration. | String | FALSE    |
-| state                    | If the request contained a `state` parameter, then the same unmodified value is returned back in the response.                                  | String | FALSE    |
+| Parameter                | Description                                                                                                                              | Type   | Required
+|:-------------------------|:-----------------------------------------------------------------------------------------------------------------------------------------|:-------|:--------
+| id_token_hint            | A valid ID token with a subject matching the current session.                                                                            | String | TRUE
+| post_logout_redirect_uri | Location to redirect to after the logout has been performed. It must match the value preregistered in Okta during client registration.   | String | FALSE
+| state                    | An optional value that is returned as a query parameter during the redirect to the `post_logout_redirect_uri`.                           | String | FALSE
 
 #### Request Examples
 
-This request initiates a logout and will redirect to the Okta login page on success.
+This request initiates a logout and will redirect to the Okta login page.
 
 ~~~sh
-curl -v -X GET \
-"https://{baseUrl}/logout?
-  id_token_hint=${id_token_hint}
+GET https://{baseUrl}/logout?id_token_hint=${id_token}
 ~~~
 
-This request initiates a logout and will redirect to the `post_logout_redirect_uri` on success.
+This request initiates a logout and will redirect to the `post_logout_redirect_uri`.
 
 ~~~sh
-curl -v -X GET \
-"https://{baseUrl}/logout?
-  id_token_hint=${id_token_hint}&
+GET https://{baseUrl}/logout?
+  id_token_hint=${id_token}&
   post_logout_redirect_uri=${post_logout_redirect_uri}&
   state=${state}
 ~~~
@@ -545,24 +544,17 @@ curl -v -X GET \
 #### Response Example (Success)
 
 ~~~http
-HTTP 302 FOUND
+HTTP 302 Found
+Location: https://example.com/post_logout/redirect&state=${state}
 ~~~
 
-Followed by either a redirect to your org's login URL, or (if applicable) the specified logout redirect URI.
+This will redirect the browser to either the Okta login page or the specified logout redirect URI.
 
-#### Response Example (Error)
+#### Error Conditions
 
-~~~http
-HTTP 403 Forbidden
-Content-Type: application/json;charset=UTF-8
-{
-    "errorCode": "E0000005",
-    "errorSummary": "Invalid session",
-    "errorLink": "E0000005",
-    "errorId": "oae4uSVaLVbRTOoRB_EsrXMWw",
-    "errorCauses": []
-}
-~~~
+If the Okta session has expired (or does not exist), a logout request will simply redirect to the Okta login page or the `post_logout_redirect_uri` (if specified).
+
+If the ID token passed via `id_token_hint` is invalid or expired, the browser will be redirected to an error page.
 
 ### /keys
 {:.api .api-operation}
@@ -1334,7 +1326,7 @@ Refresh tokens are opaque. More information about using them can be found in the
 
 ## Token Authentication Methods
 
-If you authenticate a client with client credentials, provide the [`client_id` and `client_secret`](#request-parameters-1)
+If you configure your client to use a `client_secret` [Client Authentication Method](http://openid.net/specs/openid-connect-core-1_0.html#ClientAuthentication), provide the [`client_id` and `client_secret`](#request-parameters-1)
 using either of the following methods:
 
 * Provide `client_id` and `client_secret`
@@ -1347,11 +1339,16 @@ using either of the following methods:
 * Provide `client_id` in a JWT that you sign with the `client_secret`
   using HMAC algorithms HS256, HS384, or HS512. Specify the JWT in `client_assertion` and the type, `urn:ietf:params:oauth:client-assertion-type:jwt-bearer`, in `client_assertion_type` in the request.
 
+If you configure your client to use `private_key_jwt` [Client Authentication Method](http://openid.net/specs/openid-connect-core-1_0.html#ClientAuthentication) you must provide the `client_id` in a JWT that you sign with your private key.
+* The private key that was used to sign must have the corresponding public key registered in the client's [JWKSet](oauth-clients#json-web-key-set).
+* Sign the JWT with one of the following signature algorithms: RS256, RS384, RS512, ES256, ES384 or ES512.
+* Specify the JWT in `client_assertion` and the type, `urn:ietf:params:oauth:client-assertion-type:jwt-bearer`, in `client_assertion_type` in the request.
+
 Use only one of these methods in a single request or an error will occur.
 
-### Token Claims for Client Authentication with Client Secret JWT
+### Token Claims for Client Authentication with Client Secret or Private Key JWT
 
-If you use a JWT for client authentication (`client_secret_jwt`), use the following token claims:
+If you use a JWT for client authentication (`client_secret_jwt` or `private_key_jwt`), use the following token claims:
 
 | Token Claims | Description                                                                           | Type   |
 |:-------------|:--------------------------------------------------------------------------------------|:-------|

@@ -41,7 +41,7 @@ The first thing you'll want to do is to **copy the `src/main/resources/applicati
 You'll need the following:
  - Okta application client ID
  - Okta application client secret
- - Your Okta preview URL. Something like: `dev-123456.oktapreview.com`
+ - Your Okta org URL, e.g. `https://{yourOktaDomain}`
  - Your Okta issuer URL. From the Okta dashboard, select **API** in the top menu and then click **Authorization Servers**, and you'll see the **Issuer URI** for the default authorization server
 
 You'll want to check your Okta OIDC Application's configuration. It should match the following photo. This is also where you'll get your client ID and client secret. **Note that under "Allowed grant types" the "Implicit (Hybrid)" checkbox is checked (it's not checked by default).**
@@ -77,7 +77,7 @@ Here are the steps you need to follow to configure Facebook for Okta social logi
 * Once you've created your facebook app, go to the app dashboard, click the **Settings** link on the left-hand side, and select the **Basic** submenu.
 * Save the **App ID** and **App Secret** values. You'll need them later.
 * You'll also need to add a **Facebook Login** product. From the left menu, click the **+** sign next to products and add a **Facebook Login** product.
-* Configure the **Valid OAuth Redirect URIs** to include your redirect URI with your okta preview domain. Mine was: `https://dev-533919.oktapreview.com/oauth2/v1/authorize/callback`
+* Configure the **Valid OAuth Redirect URIs** to include your redirect URI with your Okta org URL: `https://{yourOktaDomain}/oauth2/v1/authorize/callback`
 * Save changes
 
 {% img blog/social-spring-boot/create-facebook-app.png alt:"Create Facebook login app" width:"800" %}{: .center-image }

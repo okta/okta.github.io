@@ -111,8 +111,8 @@ security:
   oauth2:
     client:
       # From OIDC app
-      clientId: {yourClientId}
-      clientSecret: {yourClientSecret}
+      clientId: {clientId}
+      clientSecret: {clientSecret}
       # From Authorization Server's metadata
       accessTokenUri: https://{yourOktaDomain}/oauth2/default/v1/token
       userAuthorizationUri: https://{yourOktaDomain}/oauth2/default/v1/authorize

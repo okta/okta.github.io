@@ -237,3 +237,37 @@ ibrahim:
   full_name: Ibrahim Šuta
   display_name: Ibrahim Šuta
   avatar: avatar-isuta.png
+
+pmcdowell:
+  full_name: Patrick McDowell
+  display_name: Patrick McDowell
+  avatar: avatar-pmcdowell.jpg
+
+kpenzhorn:
+  full_name: Karl Penzhorn
+  display_name: Karl Penzhorn
+  avatar: avatar-kpenzhorn.jpg
+
+reverentgeek:
+  full_name: David Neal
+  display_name: David Neal
+  avatar: avatar-reverentgeek.jpg
+  web: https://reverentgeek.com
+  twitter: https://twitter.com/reverentgeek
+  github: https://github.com/reverentgeek
+
+cgilsenan:
+  full_name: Conor Gilsenan
+  display_name: Conor Gilsenan
+  avatar: avatar-cgilsenan.jpg
+  web: https://www.allthingsauth.com/
+  twitter: https://twitter.com/conorgil
+  github: https://github.com/conorgil
+
+avanbeek:
+  full_name: Andrew Van Beek
+  display_name: Andrew Van Beek
+  avatar: avatar-avanbeek.jpg
+  web: https://videogame-resume.herokuapp.com/
+  twitter: https://twitter.com/andrewvanbeek1
+  github: https://github.com/andrewvanbeek-okta

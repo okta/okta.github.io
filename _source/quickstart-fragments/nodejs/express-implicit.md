@@ -11,6 +11,8 @@ To learn more about validating Okta access tokens, please see [Validating Access
 
 > If you would prefer to download a complete sample application instead, please visit [Express Sample Applications for Okta][] and follow those instructions.
 
+{% include domain-admin-warning.html %}
+
 ```javascript
 const express = require('express');
 const OktaJwtVerifier = require('@okta/jwt-verifier');

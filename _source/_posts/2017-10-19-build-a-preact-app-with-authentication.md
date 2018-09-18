@@ -203,7 +203,7 @@ that the `Auth` class is just a regular function and does not extend
 
 Then enter your Okta organization URL and client ID to the Okta Sign-In Widget
 configuration. Your Organization URL will be the URL you use when you log into
-your Okta account (e.g. http://dev-12345.oktapreview.com) and you can get your
+your Okta account (e.g. `http://{yourOktaDomain}`) and you can get your
 client ID from the application's property page in the administrative dashboard
 on the "General" tab for your application (obviously, yours won't be blurred
 out):

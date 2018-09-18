@@ -100,6 +100,8 @@ The code that initializes the Widget looks like this:
 </script>
 ~~~
 
+{% include domain-admin-warning.html %}
+
 #### Mobile Consideration
 
 To ensure that the Widget renders properly on mobile, include the `viewport` metatag in your `head`:
