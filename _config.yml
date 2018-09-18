@@ -15,6 +15,7 @@ plugins:
   - jekyll-assets
   - jekyll-include-cache
   - jekyll-asciidoc
+  - asciidoctor-rouge
 
 source: _source
 destination: dist
@@ -131,5 +132,6 @@ contact_support_uc: Contact <a href="https://support.okta.com/help/open_case" ta
 # AsciiDoc settings - only applies to blog. Can be removed when we move to Hugo for the blog.
 asciidoctor:
   attributes:
-    source-highlighter: coderay
+    source-highlighter: rouge
+    icons: font
   base_dir: :_source
