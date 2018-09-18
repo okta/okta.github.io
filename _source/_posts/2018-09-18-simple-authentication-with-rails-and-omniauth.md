@@ -15,7 +15,7 @@ Today I'm going to show you how to authenticate users into your Rails applicatio
 
 To make this all work, you'll be using one of the most popular gems in the Rails world: [OmniAuth](https://github.com/omniauth/omniauth). Additionally, you'll be using the fabulous [devise](https://github.com/plataformatec/devise) gem to make plugging user authentication into our app simple.
 
-{% img blog/omniauth/omniauth-diagram.png alt:"OmniAuth diagram" width:"600" %}{: .center-image }
+{% img blog/omniauth/omniauth-diagram.png alt:"OmniAuth diagram" width:"419" %}{: .center-image }
 
 The core of what you're building is powered by [OmniAuth Gem](https://github.com/omniauth/omniauth), which will help our Rails app handle [OAuth](/blog/2017/06/21/what-the-heck-is-oauth) and OpenID Connect flows. What OmniAuth does is ask an identity provider (Okta, in this case) for access to user information in the form [JSON Web Tokens](/authentication-guide/tokens/validating-access-tokens). OmniAuth then provides a very simple hash in the form of `request.env['omniauth.auth']` which contains all the logged-in user's information which you can then easily pass to [Active Record](https://guides.rubyonrails.org/active_record_basics.html) to store in a database. **Cool, right?!**
 
@@ -45,7 +45,7 @@ Next, create a `config/application.yaml` file to populate all necessary environm
 bundle exec figaro install
  ```
 
-If you don't already have an Okta account, go create one now: <https://developer.okta.com/signup/>. Okta is a free-to-use API service that stores user accounts and handles user authentication and authorization. Okta makes [identity management](https://developer.okta.com/product/user-management/) a lot easier, more secure, and more scalable than what you're used to. Okta is a cloud service that allows developers to create, edit, and securely store user accounts and user account data, and connect them with one or multiple applications. Our API enables you to:
+If you don't already have an Okta account, go create one now: <https://developer.okta.com/signup>. Okta is a free-to-use API service that stores user accounts and handles user authentication and authorization. Okta makes [identity management](https://developer.okta.com/product/user-management/) a lot easier, more secure, and more scalable than what you're used to. Okta is a cloud service that allows developers to create, edit, and securely store user accounts and user account data, and connect them with one or multiple applications. Our API enables you to:
 
 * [Authenticate](https://developer.okta.com/product/authentication/) and [authorize](https://developer.okta.com/product/authorization/) your users
 * Store data about your users
@@ -106,8 +106,8 @@ Be sure to click around, sign up, sign in, and see how OmniAuth + [Okta](https:/
 
 As you can see, getting your Rails app setup to handle user authentication with OpenID Connect doesn't have to be hard. By using OmniAuth and Okta, you're able to quickly spin up user management.
 
-If you'd like to see how this app works in more detail, go check out the screencast below. It walks through the process of adding Okta and OmniAuth to an existing Rails application.
+If you'd like to see how this app works in more detail, check out the screencast below. It walks through the process of adding Okta and OmniAuth to an existing Rails application.
 
-<div style="margin: 0 auth; text-align: center;"><iframe width="560" height="315" src="https://www.youtube.com/embed/8_Yt4U2lJJM" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe></div>
+<div style="text-align: center;"><iframe width="560" height="315" src="https://www.youtube.com/embed/8_Yt4U2lJJM" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen style="max-width: 100%"></iframe></div>
 
 If you're interested in learning more about web security, please [follow us on Twitter](https://twitter.com/oktadev) -- we publish lots of interested articles on the topic. And if you have any questions, please leave a comment below and I'll do my best to get back to you.
