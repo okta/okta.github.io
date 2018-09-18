@@ -30,16 +30,16 @@ import java.util.function.Consumer;
 @Log4j2
 class Synchronous implements Reader {
 
-		@Override
-		public void read(File file, Consumer<BytesPayload> consumer) throws IOException {
-				try (FileInputStream in = new FileInputStream(file)) { // <1>
-						byte[] data = new byte[FileCopyUtils.BUFFER_SIZE];
-						int res;
-						while ((res = in.read(data, 0, data.length)) != -1) { // <2>
-								consumer.accept(BytesPayload.from(data, res)); //<3>
-						}
-				}
-		}
+    @Override
+    public void read(File file, Consumer<BytesPayload> consumer) throws IOException {
+        try (FileInputStream in = new FileInputStream(file)) { // <1>
+            byte[] data = new byte[FileCopyUtils.BUFFER_SIZE];
+            int res;
+            while ((res = in.read(data, 0, data.length)) != -1) { // <2>
+                    consumer.accept(BytesPayload.from(data, res)); //<3>
+            }
+        }
+    }
 }
 ----
 <1> source the file using a regular `java.io.File`
@@ -81,51 +81,51 @@ import java.util.function.Consumer;
 @Log4j2
 class Asynchronous implements Reader, CompletionHandler<Integer, ByteBuffer> {
 
-		private int bytesRead;
-		private long position;
-		private AsynchronousFileChannel fileChannel;
-		private Consumer<BytesPayload> consumer;
-		private final ExecutorService executorService = Executors.newFixedThreadPool(10);
+    private int bytesRead;
+    private long position;
+    private AsynchronousFileChannel fileChannel;
+    private Consumer<BytesPayload> consumer;
+    private final ExecutorService executorService = Executors.newFixedThreadPool(10);
 
-		public void read(File file, Consumer<BytesPayload> c) throws IOException {
-				this.consumer = c;
-				Path path = file.toPath(); // <1>
-				this.fileChannel = AsynchronousFileChannel.open(path,
-					Collections.singleton(StandardOpenOption.READ), this.executorService); // <2>
-				ByteBuffer buffer = ByteBuffer.allocate(FileCopyUtils.BUFFER_SIZE);
-				this.fileChannel.read(buffer, position, buffer, this); // <3>
-				while (this.bytesRead > 0) {
-						this.position = this.position + this.bytesRead;
-						this.fileChannel.read(buffer, this.position, buffer, this);
-				}
-		}
+    public void read(File file, Consumer<BytesPayload> c) throws IOException {
+        this.consumer = c;
+        Path path = file.toPath(); // <1>
+        this.fileChannel = AsynchronousFileChannel.open(path,
+            Collections.singleton(StandardOpenOption.READ), this.executorService); // <2>
+        ByteBuffer buffer = ByteBuffer.allocate(FileCopyUtils.BUFFER_SIZE);
+        this.fileChannel.read(buffer, position, buffer, this); // <3>
+        while (this.bytesRead > 0) {
+                this.position = this.position + this.bytesRead;
+                this.fileChannel.read(buffer, this.position, buffer, this);
+        }
+    }
 
-		@Override
-		public void completed(Integer result, ByteBuffer buffer) {
-				// <4>
-				this.bytesRead = result;
+    @Override
+    public void completed(Integer result, ByteBuffer buffer) {
+        // <4>
+        this.bytesRead = result;
 
-				if (this.bytesRead < 0)
-						return;
+        if (this.bytesRead < 0)
+                return;
 
-				buffer.flip();
+        buffer.flip();
 
-				byte[] data = new byte[buffer.limit()];
-				buffer.get(data);
+        byte[] data = new byte[buffer.limit()];
+        buffer.get(data);
 
-				// <5>
-				consumer.accept(BytesPayload.from(data, data.length));
+        // <5>
+        consumer.accept(BytesPayload.from(data, data.length));
 
-				buffer.clear();
+        buffer.clear();
 
-				this.position = this.position + this.bytesRead;
-				this.fileChannel.read(buffer, this.position, buffer, this);
-		}
+        this.position = this.position + this.bytesRead;
+        this.fileChannel.read(buffer, this.position, buffer, this);
+    }
 
-		@Override
-		public void failed(Throwable exc, ByteBuffer attachment) {
-				log.error(exc);
-		}
+    @Override
+    public void failed(Throwable exc, ByteBuffer attachment) {
+        log.error(exc);
+    }
 }
 ----
 <1> this time, we adapt the `java.io.File` into a Java NIO `java.nio.file.Path`
@@ -384,9 +384,9 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @SpringBootApplication
 public class DemoApplication {
 
-		public static void main(String[] args) {
-				SpringApplication.run(DemoApplication.class, args);
-		}
+    public static void main(String[] args) {
+        SpringApplication.run(DemoApplication.class, args);
+    }
 }
 ----
 ====
@@ -416,17 +416,17 @@ import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-@Document 	// <1>
+@Document // <1>
 @Data // <2>
 @AllArgsConstructor
 @NoArgsConstructor
 class Profile {
 
-		@Id // <3>
-		private String id;
+    @Id // <3>
+    private String id;
 
-		// <4>
-		private String email;
+    // <4>
+    private String email;
 }
 ----
 <1> `@Document` identifies the entity as a document to be persisted in MongoDB
@@ -475,15 +475,15 @@ import org.springframework.data.repository.reactive.ReactiveSortingRepository;
 @NoRepositoryBean
 public interface ReactiveMongoRepository<T, ID> extends ReactiveSortingRepository<T, ID>, ReactiveQueryByExampleExecutor<T> {
 
-	<S extends T> Mono<S> insert(S entity);
+    <S extends T> Mono<S> insert(S entity);
 
-	<S extends T> Flux<S> insert(Iterable<S> entities);
+    <S extends T> Flux<S> insert(Iterable<S> entities);
 
-	<S extends T> Flux<S> insert(Publisher<S> entities);
+    <S extends T> Flux<S> insert(Publisher<S> entities);
 
-	<S extends T> Flux<S> findAll(Example<S> example);
+    <S extends T> Flux<S> findAll(Example<S> example);
 
-	<S extends T> Flux<S> findAll(Example<S> example, Sort sort);
+    <S extends T> Flux<S> findAll(Example<S> example, Sort sort);
 
 }
 ----
@@ -513,28 +513,27 @@ import java.util.UUID;
 @Component
 @org.springframework.context.annotation.Profile("demo")// <2>
 class SampleDataInitializer
-	implements ApplicationListener<ApplicationReadyEvent> {
+    implements ApplicationListener<ApplicationReadyEvent> {
 
-		private final ProfileRepository repository; // <3>
+    private final ProfileRepository repository; // <3>
 
-		public SampleDataInitializer(ProfileRepository repository) {
-				this.repository = repository;
-		}
+    public SampleDataInitializer(ProfileRepository repository) {
+        this.repository = repository;
+    }
 
-		@Override
-		public void onApplicationEvent(ApplicationReadyEvent event) {
-
-				repository
-					.deleteAll() // <4>
-					.thenMany(
-						Flux
-							.just("A", "B", "C", "D")//<5>
-							.map(name -> new Profile(UUID.randomUUID().toString(), name + "@email.com")) //<6>
-							.flatMap(repository::save) // <7>
-					)
-					.thenMany(repository.findAll()) // <8>
-					.subscribe(profile -> log.info("saving " + profile.toString())); // <9>
-		}
+    @Override
+    public void onApplicationEvent(ApplicationReadyEvent event) {
+        repository
+            .deleteAll() // <4>
+            .thenMany(
+                Flux
+                    .just("A", "B", "C", "D")//<5>
+                    .map(name -> new Profile(UUID.randomUUID().toString(), name + "@email.com")) //<6>
+                    .flatMap(repository::save) // <7>
+            )
+            .thenMany(repository.findAll()) // <8>
+            .subscribe(profile -> log.info("saving " + profile.toString())); // <9>
+    }
 }
 ----
 <1> a Lombok annotation that results in the creation of a `log` field that is a Log4J logger being added to the class
@@ -577,41 +576,40 @@ import reactor.core.publisher.Mono;
 @Service
 class ProfileService {
 
-		private final ApplicationEventPublisher publisher; // <2>
-		private final ProfileRepository profileRepository; // <3>
+    private final ApplicationEventPublisher publisher; // <2>
+    private final ProfileRepository profileRepository; // <3>
 
-		ProfileService(ApplicationEventPublisher publisher, ProfileRepository profileRepository) {
-				this.publisher = publisher;
-				this.profileRepository = profileRepository;
-		}
+    ProfileService(ApplicationEventPublisher publisher, ProfileRepository profileRepository) {
+            this.publisher = publisher;
+            this.profileRepository = profileRepository;
+    }
 
-		public Flux<Profile> all() { // <4>
-				return this.profileRepository.findAll();
-		}
+    public Flux<Profile> all() { // <4>
+            return this.profileRepository.findAll();
+    }
 
-		public Mono<Profile> get(String id) { //<5>
-				return this.profileRepository.findById(id);
-		}
+    public Mono<Profile> get(String id) { //<5>
+            return this.profileRepository.findById(id);
+    }
 
-		public Mono<Profile> update(String id, String email) { //<6>
-				return this.profileRepository
-					.findById(id)
-					.map(p -> new Profile(p.getId(), email))
-					.flatMap(this.profileRepository::save);
-		}
+    public Mono<Profile> update(String id, String email) { //<6>
+            return this.profileRepository
+                .findById(id)
+                .map(p -> new Profile(p.getId(), email))
+                .flatMap(this.profileRepository::save);
+    }
 
-		public Mono<Profile> delete(String id) {//<7>
-				return this.profileRepository
-					.findById(id)
-					.flatMap(p -> this.profileRepository.deleteById(p.getId()).thenReturn(p));
-		}
+    public Mono<Profile> delete(String id) {//<7>
+            return this.profileRepository
+                .findById(id)
+                .flatMap(p -> this.profileRepository.deleteById(p.getId()).thenReturn(p));
+    }
 
-		public Mono<Profile> create(String email) {//<8>
-				return this.profileRepository
-					.save(new Profile(null, email))
-					.doOnSuccess(profile -> this.publisher.publishEvent(new ProfileCreatedEvent(profile)));
-		}
-
+    public Mono<Profile> create(String email) {//<8>
+            return this.profileRepository
+                .save(new Profile(null, email))
+                .doOnSuccess(profile -> this.publisher.publishEvent(new ProfileCreatedEvent(profile)));
+    }
 }
 ----
 <1> This tells Lombok to create a `log` field that is a Log4J logger.
@@ -636,9 +634,9 @@ import org.springframework.context.ApplicationEvent;
 
 public class ProfileCreatedEvent extends ApplicationEvent {
 
-		public ProfileCreatedEvent(Profile source) {
-				super(source);
-		}
+    public ProfileCreatedEvent(Profile source) {
+        super(source);
+    }
 }
 ----
 ====
@@ -687,75 +685,74 @@ import java.util.function.Predicate;
 @ExtendWith(SpringExtension.class)  //<3>
 public class ProfileServiceTest {
 
-		private final ProfileService service;
-		private final ProfileRepository repository;
+    private final ProfileService service;
+    private final ProfileRepository repository;
 
-		public ProfileServiceTest(@Autowired ProfileService service, // <4>
-															@Autowired ProfileRepository repository) {
-				this.service = service;
-				this.repository = repository;
-		}
+    public ProfileServiceTest(@Autowired ProfileService service, // <4>
+                                                        @Autowired ProfileRepository repository) {
+        this.service = service;
+        this.repository = repository;
+    }
 
-		@Test // <5>
-		public void getAll() {
+    @Test // <5>
+    public void getAll() {
+        Flux<Profile> saved = repository.saveAll(Flux.just(new Profile(null, "Josh"), new Profile(null, "Matt"), new Profile(null, "Jane")));
 
-				Flux<Profile> saved = repository.saveAll(Flux.just(new Profile(null, "Josh"), new Profile(null, "Matt"), new Profile(null, "Jane")));
+        Flux<Profile> composite = service.all().thenMany(saved);
 
-				Flux<Profile> composite = service.all().thenMany(saved);
+        Predicate<Profile> match = profile -> saved.any(saveItem -> saveItem.equals(profile)).block();
 
-				Predicate<Profile> match = profile -> saved.any(saveItem -> saveItem.equals(profile)).block();
+        StepVerifier
+            .create(composite) // <6>
+            .expectNextMatches(match)  //<7>
+            .expectNextMatches(match)
+            .expectNextMatches(match)
+            .verifyComplete(); //<8>
+    }
 
-				StepVerifier
-					.create(composite) // <6>
-					.expectNextMatches(match)  //<7>
-					.expectNextMatches(match)
-					.expectNextMatches(match)
-					.verifyComplete(); //<8>
-		}
+    @Test
+    public void save() {
+        Mono<Profile> profileMono = this.service.create("email@email.com");
+        StepVerifier
+            .create(profileMono)
+            .expectNextMatches(saved -> StringUtils.hasText(saved.getId()))
+            .verifyComplete();
+    }
 
-		@Test
-		public void save() {
-				Mono<Profile> profileMono = this.service.create("email@email.com");
-				StepVerifier
-					.create(profileMono)
-					.expectNextMatches(saved -> StringUtils.hasText(saved.getId()))
-					.verifyComplete();
-		}
+    @Test
+    public void delete() {
+        String test = "test";
+        Mono<Profile> deleted = this.service
+            .create(test)
+            .flatMap(saved -> this.service.delete(saved.getId()));
+        StepVerifier
+            .create(deleted)
+            .expectNextMatches(profile -> profile.getEmail().equalsIgnoreCase(test))
+            .verifyComplete();
+    }
 
-		@Test
-		public void delete() {
-				String test = "test";
-				Mono<Profile> deleted = this.service
-					.create(test)
-					.flatMap(saved -> this.service.delete(saved.getId()));
-				StepVerifier
-					.create(deleted)
-					.expectNextMatches(profile -> profile.getEmail().equalsIgnoreCase(test))
-					.verifyComplete();
-		}
+    @Test
+    public void update() throws Exception {
+        Mono<Profile> saved = this.service
+            .create("test")
+            .flatMap(p -> this.service.update(p.getId(), "test1"));
+        StepVerifier
+            .create(saved)
+            .expectNextMatches(p -> p.getEmail().equalsIgnoreCase("test1"))
+            .verifyComplete();
+    }
 
-		@Test
-		public void update() throws Exception {
-				Mono<Profile> saved = this.service
-					.create("test")
-					.flatMap(p -> this.service.update(p.getId(), "test1"));
-				StepVerifier
-					.create(saved)
-					.expectNextMatches(p -> p.getEmail().equalsIgnoreCase("test1"))
-					.verifyComplete();
-		}
-
-		@Test
-		public void getById() {
-				String test = UUID.randomUUID().toString();
-				Mono<Profile> deleted = this.service
-					.create(test)
-					.flatMap(saved -> this.service.get(saved.getId()));
-				StepVerifier
-					.create(deleted)
-					.expectNextMatches(profile -> StringUtils.hasText(profile.getId()) && test.equalsIgnoreCase(profile.getEmail()))
-					.verifyComplete();
-		}
+    @Test
+    public void getById() {
+        String test = UUID.randomUUID().toString();
+        Mono<Profile> deleted = this.service
+            .create(test)
+            .flatMap(saved -> this.service.get(saved.getId()));
+        StepVerifier
+            .create(deleted)
+            .expectNextMatches(profile -> StringUtils.hasText(profile.getId()) && test.equalsIgnoreCase(profile.getEmail()))
+            .verifyComplete();
+    }
 }
 ----
 <1> the Spring Boot test slice for MongoDB testing
@@ -801,50 +798,50 @@ import java.net.URI;
 @org.springframework.context.annotation.Profile("classic")
 class ProfileRestController {
 
-		private final MediaType mediaType = MediaType.APPLICATION_JSON_UTF8;
-		private final ProfileService profileRepository;
+    private final MediaType mediaType = MediaType.APPLICATION_JSON_UTF8;
+    private final ProfileService profileRepository;
 
-		ProfileRestController(ProfileService profileRepository) {
-				this.profileRepository = profileRepository;
-		}
+    ProfileRestController(ProfileService profileRepository) {
+        this.profileRepository = profileRepository;
+    }
 
-		//<3>
-		@GetMapping
-		Publisher<Profile> getAll() {
-				return this.profileRepository.all();
-		}
+    //<3>
+    @GetMapping
+    Publisher<Profile> getAll() {
+        return this.profileRepository.all();
+    }
 
-		//<4>
-		@GetMapping("/{id}")
-		Publisher<Profile> getById(@PathVariable("id") String id) {
-				return this.profileRepository.get(id);
-		}
+    //<4>
+    @GetMapping("/{id}")
+    Publisher<Profile> getById(@PathVariable("id") String id) {
+        return this.profileRepository.get(id);
+    }
 
-		// <5>
-		@PostMapping
-		Publisher<ResponseEntity<Profile>> create(@RequestBody Profile profile) {
-				return this.profileRepository
-					.create(profile.getEmail())
-					.map(p -> ResponseEntity.created(URI.create("/profiles/" + p.getId()))
-						.contentType(mediaType)
-						.build());
-		}
+    // <5>
+    @PostMapping
+    Publisher<ResponseEntity<Profile>> create(@RequestBody Profile profile) {
+        return this.profileRepository
+            .create(profile.getEmail())
+            .map(p -> ResponseEntity.created(URI.create("/profiles/" + p.getId()))
+                .contentType(mediaType)
+                .build());
+    }
 
-		@DeleteMapping("/{id}")
-		Publisher<Profile> deleteById(@PathVariable String id) {
-				return this.profileRepository.delete(id);
-		}
+    @DeleteMapping("/{id}")
+    Publisher<Profile> deleteById(@PathVariable String id) {
+        return this.profileRepository.delete(id);
+    }
 
-		@PutMapping("/{id}")
-		Publisher<ResponseEntity<Profile>> updateById(@PathVariable String id, @RequestBody Profile profile) {
-				return Mono
-					.just(profile)
-					.flatMap(p -> this.profileRepository.update(id, p.getEmail()))
-					.map(p -> ResponseEntity
-						.ok()
-						.contentType(this.mediaType)
-						.build());
-		}
+    @PutMapping("/{id}")
+    Publisher<ResponseEntity<Profile>> updateById(@PathVariable String id, @RequestBody Profile profile) {
+        return Mono
+            .just(profile)
+            .flatMap(p -> this.profileRepository.update(id, p.getEmail()))
+            .map(p -> ResponseEntity
+                .ok()
+                .contentType(this.mediaType)
+                .build());
+    }
 }
 ----
 <1> this is yet another stereotype annotation that tells Spring WebFlux that this class provides HTTP handler methods
@@ -880,19 +877,19 @@ import static org.springframework.web.reactive.function.server.RouterFunctions.r
 @Configuration
 class ProfileEndpointConfiguration {
 
-		@Bean
-		RouterFunction<ServerResponse> routes(ProfileHandler handler) { // <1>
-				return route(i(GET("/profiles")), handler::all) //<2>
-					.andRoute(i(GET("/profiles/{id}")), handler::getById)
-					.andRoute(i(DELETE("/profiles/{id}")), handler::deleteById) //<3>
-					.andRoute(i(POST("/profiles")), handler::create)
-					.andRoute(i(PUT("/profiles/{id}")), handler::updateById);
-		}
+    @Bean
+    RouterFunction<ServerResponse> routes(ProfileHandler handler) { // <1>
+        return route(i(GET("/profiles")), handler::all) //<2>
+            .andRoute(i(GET("/profiles/{id}")), handler::getById)
+            .andRoute(i(DELETE("/profiles/{id}")), handler::deleteById) //<3>
+            .andRoute(i(POST("/profiles")), handler::create)
+            .andRoute(i(PUT("/profiles/{id}")), handler::updateById);
+    }
 
-		// <4>
-		private static RequestPredicate i(RequestPredicate target) {
-				return new CaseInsensitiveRequestPredicate(target);
-		}
+    // <4>
+    private static RequestPredicate i(RequestPredicate target) {
+        return new CaseInsensitiveRequestPredicate(target);
+    }
 }
 ----
 <1> this is a Spring bean that describes routes and their handlers to the framework. The handler methods themselves are Java 8 references to methods on another injected bean. They could just as easily have been inline lambdas.
@@ -920,44 +917,44 @@ import java.net.URI;
 
 public class CaseInsensitiveRequestPredicate implements RequestPredicate {
 
-		private final RequestPredicate target;
+    private final RequestPredicate target;
 
-		CaseInsensitiveRequestPredicate(RequestPredicate target) {
-				this.target = target;
-		}
+    CaseInsensitiveRequestPredicate(RequestPredicate target) {
+        this.target = target;
+    }
 
-		@Override
-		public boolean test(ServerRequest request) { //<1>
-				return this.target.test(new LowerCaseUriServerRequestWrapper(request));
-		}
+    @Override
+    public boolean test(ServerRequest request) { //<1>
+        return this.target.test(new LowerCaseUriServerRequestWrapper(request));
+    }
 
-		@Override
-		public String toString() {
-				return this.target.toString();
-		}
+    @Override
+    public String toString() {
+        return this.target.toString();
+    }
 }
 
 // <2>
 class LowerCaseUriServerRequestWrapper extends ServerRequestWrapper {
 
-		LowerCaseUriServerRequestWrapper(ServerRequest delegate) {
-				super(delegate);
-		}
+    LowerCaseUriServerRequestWrapper(ServerRequest delegate) {
+        super(delegate);
+    }
 
-		@Override
-		public URI uri() {
-				return URI.create(super.uri().toString().toLowerCase());
-		}
+    @Override
+    public URI uri() {
+        return URI.create(super.uri().toString().toLowerCase());
+    }
 
-		@Override
-		public String path() {
-				return uri().getRawPath();
-		}
+    @Override
+    public String path() {
+        return uri().getRawPath();
+    }
 
-		@Override
-		public PathContainer pathContainer() {
-				return PathContainer.parsePath(path());
-		}
+    @Override
+    public PathContainer pathContainer() {
+        return PathContainer.parsePath(path());
+    }
 }
 ----
 <1> The meat of a  `RequestPredicate` implementation is in the `test(ServerRequest)` method.
@@ -985,61 +982,61 @@ import java.net.URI;
 @Component
 class ProfileHandler {
 
-		// <1>
-		private final ProfileService profileService;
+    // <1>
+    private final ProfileService profileService;
 
-		ProfileHandler(ProfileService profileService) {
-				this.profileService = profileService;
-		}
+    ProfileHandler(ProfileService profileService) {
+        this.profileService = profileService;
+    }
 
-		// <2>
-		Mono<ServerResponse> getById(ServerRequest r) {
-				return defaultReadResponse(this.profileService.get(id(r)));
-		}
+    // <2>
+    Mono<ServerResponse> getById(ServerRequest r) {
+        return defaultReadResponse(this.profileService.get(id(r)));
+    }
 
-		Mono<ServerResponse> all(ServerRequest r) {
-				return defaultReadResponse(this.profileService.all());
-		}
+    Mono<ServerResponse> all(ServerRequest r) {
+        return defaultReadResponse(this.profileService.all());
+    }
 
-		Mono<ServerResponse> deleteById(ServerRequest r) {
-				return defaultReadResponse(this.profileService.delete(id(r)));
-		}
+    Mono<ServerResponse> deleteById(ServerRequest r) {
+        return defaultReadResponse(this.profileService.delete(id(r)));
+    }
 
-		Mono<ServerResponse> updateById(ServerRequest r) {
-				Flux<Profile> id = r.bodyToFlux(Profile.class)
-					.flatMap(p -> this.profileService.update(id(r), p.getEmail()));
-				return defaultReadResponse(id);
-		}
+    Mono<ServerResponse> updateById(ServerRequest r) {
+        Flux<Profile> id = r.bodyToFlux(Profile.class)
+            .flatMap(p -> this.profileService.update(id(r), p.getEmail()));
+        return defaultReadResponse(id);
+    }
 
-		Mono<ServerResponse> create(ServerRequest request) {
-				Flux<Profile> flux = request
-					.bodyToFlux(Profile.class)
-					.flatMap(toWrite -> this.profileService.create(toWrite.getEmail()));
-				return defaultWriteResponse(flux);
-		}
+    Mono<ServerResponse> create(ServerRequest request) {
+        Flux<Profile> flux = request
+            .bodyToFlux(Profile.class)
+            .flatMap(toWrite -> this.profileService.create(toWrite.getEmail()));
+        return defaultWriteResponse(flux);
+    }
 
-		// <3>
-		private static Mono<ServerResponse> defaultWriteResponse(Publisher<Profile> profiles) {
-				return Mono
-					.from(profiles)
-					.flatMap(p -> ServerResponse
-						.created(URI.create("/profiles/" + p.getId()))
-						.contentType(MediaType.APPLICATION_JSON_UTF8)
-						.build()
-					);
-		}
+    // <3>
+    private static Mono<ServerResponse> defaultWriteResponse(Publisher<Profile> profiles) {
+        return Mono
+            .from(profiles)
+            .flatMap(p -> ServerResponse
+                .created(URI.create("/profiles/" + p.getId()))
+                .contentType(MediaType.APPLICATION_JSON_UTF8)
+                .build()
+            );
+    }
 
-		// <4>
-		private static Mono<ServerResponse> defaultReadResponse(Publisher<Profile> profiles) {
-				return ServerResponse
-					.ok()
-					.contentType(MediaType.APPLICATION_JSON_UTF8)
-					.body(profiles, Profile.class);
-		}
+    // <4>
+    private static Mono<ServerResponse> defaultReadResponse(Publisher<Profile> profiles) {
+        return ServerResponse
+            .ok()
+            .contentType(MediaType.APPLICATION_JSON_UTF8)
+            .body(profiles, Profile.class);
+    }
 
-		private static String id(ServerRequest r) {
-				return r.pathVariable("id");
-		}
+    private static String id(ServerRequest r) {
+        return r.pathVariable("id");
+    }
 }
 ----
 <1> as before, we're going to make use of our `ProfileService` to do the heavy lifting
@@ -1084,117 +1081,117 @@ import java.util.UUID;
 @ExtendWith(SpringExtension.class)
 public abstract class ProfileEndpointsBaseClass {
 
-		private final WebTestClient client; // <2>
+    private final WebTestClient client; // <2>
 
-		@MockBean  // <3>
-		private ProfileRepository repository;
+    @MockBean  // <3>
+    private ProfileRepository repository;
 
-		public ProfileEndpointsBaseClass(WebTestClient client) {
-				this.client = client;
-		}
+    public ProfileEndpointsBaseClass(WebTestClient client) {
+        this.client = client;
+    }
 
-		@Test
-		public void getAll() {
+    @Test
+    public void getAll() {
 
-				log.info("running  " + this.getClass().getName());
+        log.info("running  " + this.getClass().getName());
 
-				// <4>
-				Mockito
-					.when(this.repository.findAll())
-					.thenReturn(Flux.just(new Profile("1", "A"), new Profile("2", "B")));
+        // <4>
+        Mockito
+            .when(this.repository.findAll())
+            .thenReturn(Flux.just(new Profile("1", "A"), new Profile("2", "B")));
 
-				// <5>
-				this.client
-					.get()
-					.uri("/profiles")
-					.accept(MediaType.APPLICATION_JSON_UTF8)
-					.exchange()
-					.expectStatus().isOk()
-					.expectHeader().contentType(MediaType.APPLICATION_JSON_UTF8)
-					.expectBody()
-					.jsonPath("$.[0].id").isEqualTo("1")
-					.jsonPath("$.[0].email").isEqualTo("A")
-					.jsonPath("$.[1].id").isEqualTo("2")
-					.jsonPath("$.[1].email").isEqualTo("B");
-		}
+        // <5>
+        this.client
+            .get()
+            .uri("/profiles")
+            .accept(MediaType.APPLICATION_JSON_UTF8)
+            .exchange()
+            .expectStatus().isOk()
+            .expectHeader().contentType(MediaType.APPLICATION_JSON_UTF8)
+            .expectBody()
+            .jsonPath("$.[0].id").isEqualTo("1")
+            .jsonPath("$.[0].email").isEqualTo("A")
+            .jsonPath("$.[1].id").isEqualTo("2")
+            .jsonPath("$.[1].email").isEqualTo("B");
+    }
 
-		@Test
-		public void save() {
-				Profile data = new Profile("123", UUID.randomUUID().toString() + "@email.com");
-				Mockito
-					.when(this.repository.save(Mockito.any(Profile.class)))
-					.thenReturn(Mono.just(data));
-				MediaType jsonUtf8 = MediaType.APPLICATION_JSON_UTF8;
-				this
-					.client
-					.post()
-					.uri("/profiles")
-					.contentType(jsonUtf8)
-					.body(Mono.just(data), Profile.class)
-					.exchange()
-					.expectStatus().isCreated()
-					.expectHeader().contentType(jsonUtf8);
-		}
+    @Test
+    public void save() {
+        Profile data = new Profile("123", UUID.randomUUID().toString() + "@email.com");
+        Mockito
+            .when(this.repository.save(Mockito.any(Profile.class)))
+            .thenReturn(Mono.just(data));
+        MediaType jsonUtf8 = MediaType.APPLICATION_JSON_UTF8;
+        this
+            .client
+            .post()
+            .uri("/profiles")
+            .contentType(jsonUtf8)
+            .body(Mono.just(data), Profile.class)
+            .exchange()
+            .expectStatus().isCreated()
+            .expectHeader().contentType(jsonUtf8);
+    }
 
-		@Test
-		public void delete() {
-				Profile data = new Profile("123", UUID.randomUUID().toString() + "@email.com");
-				Mockito
-					.when(this.repository.findById(data.getId()))
-					.thenReturn(Mono.just(data));
-				Mockito
-					.when(this.repository.deleteById(data.getId()))
-					.thenReturn(Mono.empty());
-				this
-					.client
-					.delete()
-					.uri("/profiles/" + data.getId())
-					.exchange()
-					.expectStatus().isOk();
-		}
+    @Test
+    public void delete() {
+        Profile data = new Profile("123", UUID.randomUUID().toString() + "@email.com");
+        Mockito
+            .when(this.repository.findById(data.getId()))
+            .thenReturn(Mono.just(data));
+        Mockito
+            .when(this.repository.deleteById(data.getId()))
+            .thenReturn(Mono.empty());
+        this
+            .client
+            .delete()
+            .uri("/profiles/" + data.getId())
+            .exchange()
+            .expectStatus().isOk();
+    }
 
-		@Test
-		public void update() {
-				Profile data = new Profile("123", UUID.randomUUID().toString() + "@email.com");
+    @Test
+    public void update() {
+        Profile data = new Profile("123", UUID.randomUUID().toString() + "@email.com");
 
-				Mockito
-					.when(this.repository.findById(data.getId()))
-					.thenReturn(Mono.just(data));
+        Mockito
+            .when(this.repository.findById(data.getId()))
+            .thenReturn(Mono.just(data));
 
-				Mockito
-					.when(this.repository.save(data))
-					.thenReturn(Mono.just(data));
+        Mockito
+            .when(this.repository.save(data))
+            .thenReturn(Mono.just(data));
 
-				this
-					.client
-					.put()
-					.uri("/profiles/" + data.getId())
-					.contentType(MediaType.APPLICATION_JSON_UTF8)
-					.body(Mono.just(data), Profile.class)
-					.exchange()
-					.expectStatus().isOk();
-		}
+        this
+            .client
+            .put()
+            .uri("/profiles/" + data.getId())
+            .contentType(MediaType.APPLICATION_JSON_UTF8)
+            .body(Mono.just(data), Profile.class)
+            .exchange()
+            .expectStatus().isOk();
+    }
 
-		@Test
-		public void getById() {
+    @Test
+    public void getById() {
 
-				Profile data = new Profile("1", "A");
+        Profile data = new Profile("1", "A");
 
-				Mockito
-					.when(this.repository.findById(data.getId()))
-					.thenReturn(Mono.just(data));
+        Mockito
+            .when(this.repository.findById(data.getId()))
+            .thenReturn(Mono.just(data));
 
-				this.client
-					.get()
-					.uri("/profiles/" + data.getId())
-					.accept(MediaType.APPLICATION_JSON_UTF8)
-					.exchange()
-					.expectStatus().isOk()
-					.expectHeader().contentType(MediaType.APPLICATION_JSON_UTF8)
-					.expectBody()
-					.jsonPath("$.id").isEqualTo(data.getId())
-					.jsonPath("$.email").isEqualTo(data.getEmail());
-		}
+        this.client
+            .get()
+            .uri("/profiles/" + data.getId())
+            .accept(MediaType.APPLICATION_JSON_UTF8)
+            .exchange()
+            .expectStatus().isOk()
+            .expectHeader().contentType(MediaType.APPLICATION_JSON_UTF8)
+            .expectBody()
+            .jsonPath("$.id").isEqualTo(data.getId())
+            .jsonPath("$.email").isEqualTo(data.getEmail());
+    }
 }
 ----
 <1> this is a another test slice. This one will test only the web tier, ignoring all the data tier functionality.
@@ -1252,60 +1249,60 @@ import java.util.concurrent.Executors;
 @Configuration
 class WebSocketConfiguration {
 
-		// <1>
-		@Bean
-		Executor executor() {
-				return Executors.newSingleThreadExecutor();
-		}
+    // <1>
+    @Bean
+    Executor executor() {
+        return Executors.newSingleThreadExecutor();
+    }
 
-		// <2>
-		@Bean
-		HandlerMapping handlerMapping(WebSocketHandler wsh) {
-				return new SimpleUrlHandlerMapping() {
-						{
-								// <3>
-								setUrlMap(Collections.singletonMap("/ws/profiles", wsh));
-								setOrder(10);
-						}
-				};
-		}
+    // <2>
+    @Bean
+    HandlerMapping handlerMapping(WebSocketHandler wsh) {
+        return new SimpleUrlHandlerMapping() {
+                {
+                        // <3>
+                        setUrlMap(Collections.singletonMap("/ws/profiles", wsh));
+                        setOrder(10);
+                }
+        };
+    }
 
-		// <4>
-		@Bean
-		WebSocketHandlerAdapter webSocketHandlerAdapter() {
-				return new WebSocketHandlerAdapter();
-		}
+    // <4>
+    @Bean
+    WebSocketHandlerAdapter webSocketHandlerAdapter() {
+        return new WebSocketHandlerAdapter();
+    }
 
-		@Bean
-		WebSocketHandler webSocketHandler(
-			ObjectMapper objectMapper, // <5>
-			ProfileCreatedEventPublisher eventPublisher //<6>
-		) {
+    @Bean
+    WebSocketHandler webSocketHandler(
+        ObjectMapper objectMapper, // <5>
+        ProfileCreatedEventPublisher eventPublisher //<6>
+    ) {
 
-				Flux<ProfileCreatedEvent> publish = Flux
-					.create(eventPublisher)
-					.share(); // <7>
+        Flux<ProfileCreatedEvent> publish = Flux
+            .create(eventPublisher)
+            .share(); // <7>
 
-				return session -> {
+        return session -> {
 
-						Flux<WebSocketMessage> messageFlux = publish
-							.map(evt -> {
-									try {
-											// <8>
-											return objectMapper.writeValueAsString(evt.getSource());
-									}
-									catch (JsonProcessingException e) {
-											throw new RuntimeException(e);
-									}
-							})
-							.map(str -> {
-									log.info("sending " + str);
-									return session.textMessage(str);
-							});
+                Flux<WebSocketMessage> messageFlux = publish
+                    .map(evt -> {
+                            try {
+                                    // <8>
+                                    return objectMapper.writeValueAsString(evt.getSource());
+                            }
+                            catch (JsonProcessingException e) {
+                                    throw new RuntimeException(e);
+                            }
+                    })
+                    .map(str -> {
+                            log.info("sending " + str);
+                            return session.textMessage(str);
+                    });
 
-						return session.send(messageFlux); // <9>
-				};
-		}
+                return session.send(messageFlux); // <9>
+        };
+    }
 
 }
 ----
@@ -1341,36 +1338,36 @@ import java.util.function.Consumer;
 
 @Component
 class ProfileCreatedEventPublisher implements
-	ApplicationListener<ProfileCreatedEvent>, // <1>
-	Consumer<FluxSink<ProfileCreatedEvent>> { //<2>
+    ApplicationListener<ProfileCreatedEvent>, // <1>
+    Consumer<FluxSink<ProfileCreatedEvent>> { //<2>
 
-		private final Executor executor;
-		private final BlockingQueue<ProfileCreatedEvent> queue =
-			new LinkedBlockingQueue<>(); // <3>
+    private final Executor executor;
+    private final BlockingQueue<ProfileCreatedEvent> queue =
+        new LinkedBlockingQueue<>(); // <3>
 
-		ProfileCreatedEventPublisher(Executor executor) {
-				this.executor = executor;
-		}
+    ProfileCreatedEventPublisher(Executor executor) {
+        this.executor = executor;
+    }
 
-		// <4>
-		@Override
-		public void onApplicationEvent(ProfileCreatedEvent event) {
-				this.queue.offer(event);
-		}
+    // <4>
+    @Override
+    public void onApplicationEvent(ProfileCreatedEvent event) {
+        this.queue.offer(event);
+    }
 
- 		@Override
-		public void accept(FluxSink<ProfileCreatedEvent> sink) {
-				this.executor.execute(() -> {
-						while (true)
-								try {
-										ProfileCreatedEvent event = queue.take(); // <5>
-										sink.next(event); // <6>
-								}
-								catch (InterruptedException e) {
-										ReflectionUtils.rethrowRuntimeException(e);
-								}
-				});
-		}
+     @Override
+    public void accept(FluxSink<ProfileCreatedEvent> sink) {
+        this.executor.execute(() -> {
+                while (true)
+                        try {
+                                ProfileCreatedEvent event = queue.take(); // <5>
+                                sink.next(event); // <6>
+                        }
+                        catch (InterruptedException e) {
+                                ReflectionUtils.rethrowRuntimeException(e);
+                        }
+        });
+    }
 }
 ----
 <1> The `ApplicationListener<ApplicationEvent>` interface is a Spring Framework construction. It tells the framework that we want to be notified, via the  `onApplicationEvent(ProfileCreatedEvent)` method, of any new events published when a new `Profile` is created.
@@ -1468,66 +1465,66 @@ import java.util.concurrent.atomic.AtomicLong;
 @ExtendWith(SpringExtension.class)
 class WebSocketConfigurationTest {
 
-		// <2>
-		private final WebSocketClient socketClient = new ReactorNettyWebSocketClient();
+    // <2>
+    private final WebSocketClient socketClient = new ReactorNettyWebSocketClient();
 
-		// <3>
-		private final WebClient webClient = WebClient.builder().build();
+    // <3>
+    private final WebClient webClient = WebClient.builder().build();
 
-		// <4>
-		private Profile generateRandomProfile() {
-				return new Profile(UUID.randomUUID().toString(), UUID.randomUUID().toString() + "@email.com");
-		}
+    // <4>
+    private Profile generateRandomProfile() {
+        return new Profile(UUID.randomUUID().toString(), UUID.randomUUID().toString() + "@email.com");
+    }
 
-		@Test
-		public void testNotificationsOnUpdates() throws Exception {
+    @Test
+    public void testNotificationsOnUpdates() throws Exception {
 
-				int count = 10; // <5>
-				AtomicLong counter = new AtomicLong(); //<6>
-				URI uri = URI.create("ws://localhost:8080/ws/profiles"); //<7>
+        int count = 10; // <5>
+        AtomicLong counter = new AtomicLong(); //<6>
+        URI uri = URI.create("ws://localhost:8080/ws/profiles"); //<7>
 
-				// <8>
-				socketClient.execute(uri, (WebSocketSession session) -> {
+        // <8>
+        socketClient.execute(uri, (WebSocketSession session) -> {
 
-						// <9>
-						Mono<WebSocketMessage> out = Mono.just(session.textMessage("test"));
+                // <9>
+                Mono<WebSocketMessage> out = Mono.just(session.textMessage("test"));
 
-						// <10>
-						Flux<String> in = session
-							.receive()
-							.map(WebSocketMessage::getPayloadAsText);
+                // <10>
+                Flux<String> in = session
+                    .receive()
+                    .map(WebSocketMessage::getPayloadAsText);
 
-						// <11>
-						return session
-							.send(out)
-							.thenMany(in)
-							.doOnNext(str -> counter.incrementAndGet())
-							.then();
+                // <11>
+                return session
+                    .send(out)
+                    .thenMany(in)
+                    .doOnNext(str -> counter.incrementAndGet())
+                    .then();
 
-				}).subscribe();
+        }).subscribe();
 
-				// <12>
-				Flux
-					.<Profile>generate(sink -> sink.next(generateRandomProfile()))
-					.take(count)
-					.flatMap(this::write)
-					.blockLast();
+        // <12>
+        Flux
+            .<Profile>generate(sink -> sink.next(generateRandomProfile()))
+            .take(count)
+            .flatMap(this::write)
+            .blockLast();
 
-				Thread.sleep(1000);
+        Thread.sleep(1000);
 
-				Assertions.assertThat(counter.get()).isEqualTo(count); // <13>
-		}
+        Assertions.assertThat(counter.get()).isEqualTo(count); // <13>
+    }
 
-		private Publisher<Profile> write(Profile p) {
-				return
-					this.webClient
-						.post()
-						.uri("http://localhost:8080/profiles")
-						.body(BodyInserters.fromObject(p))
-						.retrieve()
-						.bodyToMono(String.class)
-						.thenReturn(p);
-		}
+    private Publisher<Profile> write(Profile p) {
+        return
+            this.webClient
+                .post()
+                .uri("http://localhost:8080/profiles")
+                .body(BodyInserters.fromObject(p))
+                .retrieve()
+                .bodyToMono(String.class)
+                .thenReturn(p);
+    }
 }
 ----
 <1>  There are no slices in this test. We're starting up the whole application. Spring Boot lets us still exercise some control over things like the port to which the application binds when it starts.
