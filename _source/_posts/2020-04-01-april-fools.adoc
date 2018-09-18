@@ -12,8 +12,9 @@ tags: [asciidoc, asciidoctor]
 This is a sample page composed in AsciiDoc.
 Jekyll converts it to HTML using {uri-asciidoctor}[Asciidoctor].
 
-[source,ruby]
-puts "Hello, World!"
+Reactive programming is an approach to writing software that embraces asynchronous IO. Asynchronous I/O is a small idea that portends big changes for software. The idea is simple: alleviate inefficient resource utilization by reclaiming resources that would otherwise be idle as they waited for I/O activity. Asynchronous IO inverts the normal design of IO processing: the clients are notified of new data instead of asking for it; this frees the client to do other things while waiting for new notifications. Let's look at an example that compares and contrasts asynchronous IO to synchronous IO.
+
+Let's build a simple program that reads data from a source (a `java.io.File` reference, specifically). First up, an implementation that uses a trusty 'ol `java.io.InputStream` implementation:
 
 .Read data from a file _synchronously_
 ====
