@@ -1,4 +1,10 @@
-= Going Reactive with WebFlux
+---
+layout: blog_post
+title: 'Going Reactive with WebFlux'
+author: mraible
+description: "Reactive programming is an approach to writing software that embraces asynchronous IO. It's pretty awesome."
+tags: [reactive, programming, josh long]
+---
 
 == I/O, I/O, It's Off to Work We Go...
 
@@ -9,7 +15,7 @@ Let's build a simple program that reads data from a source (a `java.io.File` ref
 
 .Read data from a file _synchronously_
 ====
-[source,java,indent=0]
+[source,java]
 ----
 package com.example.io;
 
@@ -53,7 +59,7 @@ In that example, the bulk of the work is in the reading - there's not much else 
 
 .Read data from a file _asynchronously_
 ====
-[source,java,indent=0]
+[source,java]
 ----
 package com.example.io;
 
@@ -151,7 +157,7 @@ The `Publisher<T>` is a producer of values that may eventually arrive. A `Publis
 
 .the Reactive Streams `Publisher<T>`.
 ====
-[source,java,indent=0]
+[source,java]
 ----
 package org.reactivestreams;
 
@@ -167,7 +173,7 @@ The `Subscriber` subscribes to a `Publisher<T>`, receiving notifications on any 
 
 .the Reactive Streams `Subscriber<T>`.
 ====
-[source,java,indent=0]
+[source,java]
 ----
 package org.reactivestreams;
 
@@ -188,7 +194,7 @@ When a `Subscriber` first connects to a `Publisher`, it is given a `Subscription
 
 .The Reactive Streams `Subscription<T>`.
 ====
-[source,java,indent=0]
+[source,java]
 ----
 package org.reactivestreams;
 
@@ -205,7 +211,7 @@ The Reactive Streams specification provides _one_ more useful, albeit obvious, t
 
 .The Reactive Streams `Processor<T>`.
 ====
-[source,java,indent=0]
+[source,java]
 ----
 package org.reactivestreams;
 
@@ -242,7 +248,7 @@ This will give you a new project with the following layout.
 
 .The generated project structure.
 ====
-[source,java,indent=0]
+[source,java]
 ----
 .
 ├── mvnw
@@ -272,7 +278,7 @@ Our Maven build file, `pom.xml`, is pretty plain, but it assumes we're going to 
 
 .`pom.xml`
 ====
-[source,java,indent=0]
+[source,xml]
 ----
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
@@ -368,7 +374,7 @@ This is a stock-standard Spring Boot application with a `public static void main
 
 .`src/main/java/com/example/demo/DemoApplication.java`
 ====
-[source,java,indent=0]
+[source,java]
 ----
 package com.example.demo;
 
@@ -400,7 +406,7 @@ Our application will support manipulating `Profile` objects. We're going to pers
 
 .`src/main/java/com/example/demo/Profile.java`
 ====
-[source,java,indent=0]
+[source,java]
 ----
 package com.example.demo;
 
@@ -436,7 +442,7 @@ Let's look at our trivial Spring Data repisitory, `src/main/java/com/example/dem
 
 .`src/main/java/com/example/demo/ProfileRepository.java`
 ====
-[source,java,indent=0]
+[source,java]
 ----
 package com.example.demo;
 
@@ -452,7 +458,7 @@ Our repository extends the Spring Data-provided `ReactiveMongoRepository` interf
 
 .`org.springframework.data.mongodb.repository.ReactiveMongoRepository`
 ====
-[source,java,indent=0]
+[source,java]
 ----
 package org.springframework.data.mongodb.repository;
 
@@ -491,7 +497,7 @@ This is a sample application, of course, so we need some sample data with which 
 
 .`src/main/java/com/example/demo/SampleDataInitializer.java`
 ====
-[source,java,indent=0]
+[source,java]
 ----
 package com.example.demo;
 
@@ -557,7 +563,7 @@ We're going to use the repository to implement a service that will contain any c
 
 .`src/main/java/com/example/demo/ProfileService.java`
 ====
-[source,java,indent=0]
+[source,java]
 ----
 package com.example.demo;
 
@@ -622,7 +628,7 @@ The `ProfileCreatedEvent` is just like any other Spring `ApplicationEvent`.
 
 .`src/main/java/com/example/demo/ProfileCreatedEvent.java`
 ====
-[source,java,indent=0]
+[source,java]
 ----
 package com.example.demo;
 
@@ -656,7 +662,7 @@ Test slices can also contribute _new_ auto-configuration supporting tests, speci
 
 .`src/test/java/com/example/demo/ProfileServiceTest.java`
 ====
-[source,java,indent=0]
+[source,java]
 ----
 package com.example.demo;
 
@@ -777,7 +783,7 @@ Let's look at a classic Spring MVC style controller that supports manipulating o
 
 .`src/main/java/com/example/demo/GreetingsRestController.java`
 ====
-[source,java,indent=0]
+[source,java]
 ----
 package com.example.demo;
 
@@ -858,7 +864,7 @@ Spring Framework 5 changes things, though. Spring Framework 5 assumes a Java 8 b
 
 .`src/main/java/com/example/demo/ProfileEndpointConfiguration.java`
 ====
-[source,java,indent=0]
+[source,java]
 ----
 package com.example.demo;
 
@@ -901,7 +907,7 @@ Spring WebFlux provides a DSL for describing how to match incoming requests.  `G
 
 .`src/main/java/com/example/demo/CaseInsensitiveRequestPredicate.java`
 ====
-[source,java,indent=0]
+[source,java]
 ----
 package com.example.demo;
 
@@ -962,7 +968,7 @@ Once a request is matched, the `HandlerFunction<ServerResponse>` is invoked to p
 
 .`src/main/java/com/example/demo/ProfileHandler.java`
 ====
-[source,java,indent=0]
+[source,java]
 ----
 package com.example.demo;
 
@@ -1055,7 +1061,7 @@ First, let's look at the base class, which contains the most important aspects o
 
 .`src/test/java/com/example/demo/ProfileEndpointsBaseClass.java`
 ====
-[source,java,indent=0]
+[source,java]
 ----
 package com.example.demo;
 
@@ -1222,7 +1228,7 @@ Let's look at the skeletal configuration in a configuration class, `WebSocketCon
 
 .`src/main/java/com/example/demo/WebSocketConfiguration.java`
 ====
-[source,java,indent=0]
+[source,java]
 ----
 package com.example.demo;
 
@@ -1319,7 +1325,7 @@ All that was fairly straightforward, one hopes. Let's look at the most important
 
 .`src/main/java/com/example/demo/ProfileCreatedEventPublisher.java`
 ====
-[source,java,indent=0]
+[source,java]
 ----
 package com.example.demo;
 
@@ -1383,7 +1389,7 @@ You don't really need much JavaScript to connect an HTML 5 client to a browser. 
 
 .`src/main/resources/static/ws.html`
 ====
-[source,html,indent=0]
+[source,html]
 ----
 <!DOCTYPE html>
 <html lang="en">
@@ -1413,7 +1419,7 @@ Couldn't be simpler! You can drive new results into the system using the followi
 
 .`create.sh`
 ====
-[source,shell,indent=0]
+[source,shell]
 ----
 #!/bin/bash
 port=${1:-8080}
@@ -1431,7 +1437,7 @@ We just did an end-to-end test. And that's satisfying! But, it's not substitute 
 
 .`src/test/java/com/example/demo/WebSocketConfigurationTest.java`
 ====
-[source,java,indent=0]
+[source,java]
 ----
 package com.example.demo;
 
