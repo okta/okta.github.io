@@ -127,3 +127,10 @@ external_domain: https://developer.okta.com
 
 contact_support_lc: contact <a href="https://support.okta.com/help/open_case" target="_blank">Support</a>
 contact_support_uc: Contact <a href="https://support.okta.com/help/open_case" target="_blank">Support</a>
+
+# AsciiDoc settings - only applies to blog. Can be removed when we move to Hugo for the blog.
+asciidoctor:
+  attributes:
+    idprefix: _
+    source-highlighter: coderay
+  base_dir: :_source
