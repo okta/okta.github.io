@@ -8,6 +8,8 @@ gem 'html-proofer', '3.7.2'
 gem 'tzinfo-data', '1.2017.2'
 gem 'wdm', '~> 0.1.0' if Gem.win_platform?
 
+# This is only used for the blog and can be removed after it moves to Hugo
 group :jekyll_plugins do
   gem 'jekyll-asciidoc'
 end
+gem 'coderay'

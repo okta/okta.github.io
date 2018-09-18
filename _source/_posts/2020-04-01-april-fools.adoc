@@ -8,6 +8,7 @@ tags: [asciidoc, asciidoctor]
 
 = Sample Page
 :uri-asciidoctor: http://asciidoctor.org
+:page-liquid:
 
 This is a sample page composed in AsciiDoc.
 Jekyll converts it to HTML using {uri-asciidoctor}[Asciidoctor].

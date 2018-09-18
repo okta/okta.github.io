@@ -131,6 +131,5 @@ contact_support_uc: Contact <a href="https://support.okta.com/help/open_case" ta
 # AsciiDoc settings - only applies to blog. Can be removed when we move to Hugo for the blog.
 asciidoctor:
   attributes:
-    idprefix: _
     source-highlighter: coderay
   base_dir: :_source

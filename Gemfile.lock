@@ -9,6 +9,7 @@ GEM
     addressable (2.5.2)
       public_suffix (>= 2.0.2, < 4.0)
     asciidoctor (1.5.7.1)
+    coderay (1.1.2)
     coffee-script (2.4.1)
       coffee-script-source
       execjs
@@ -271,6 +272,7 @@ PLATFORMS
   x64-mingw32
 
 DEPENDENCIES
+  coderay
   github-pages
   html-proofer (= 3.7.2)
   jekyll-asciidoc
