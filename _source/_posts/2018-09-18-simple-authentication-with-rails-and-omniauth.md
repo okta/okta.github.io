@@ -19,7 +19,7 @@ To make this all work, you'll be using one of the most popular gems in the Rails
 
 The core of what you're building is powered by [OmniAuth Gem](https://github.com/omniauth/omniauth), which will help our Rails app handle [OAuth](/blog/2017/06/21/what-the-heck-is-oauth) and OpenID Connect flows. What OmniAuth does is ask an identity provider (Okta, in this case) for access to user information in the form [JSON Web Tokens](/authentication-guide/tokens/validating-access-tokens). OmniAuth then provides a very simple hash in the form of `request.env['omniauth.auth']` which contains all the logged-in user's information which you can then easily pass to [Active Record](https://guides.rubyonrails.org/active_record_basics.html) to store in a database. **Cool, right?!**
 
-## Jump Into the Project
+## Build Authentication in Rails
 
 ```bash
 git clone https://github.com/andrewvanbeek-okta/oktaOmniAuthDeviseSample.git
@@ -67,7 +67,7 @@ OKTA_REDIRECT_URI: "http://localhost:5000/users/auth/oktaoauth/callback"
 
 Now you might be wondering: where do these values come from? These values can all be retrieved from the Okta dashboard. Go to Okta and log in, then follow the steps below to retrieve these values. These values are standard OAuth configs which OmniAuth uses to communicate with Okta -- the setup will be similar for other OAuth providers.
 
-### Create an App with Okta
+### Create an App with Okta and Add Authentication for Rails
 
 From the dashboard, click the **Applications** menu item, then click the **Add Application** button. From there, select the **Web** option and click **Next**.
 
@@ -87,7 +87,7 @@ To get the `OKTA_ISSUER` value, use `OKTA_ISSUER/oauth2/default`, substituting y
 
 Finally, for `OKTA_AUTH_SERVER_ID`, use the value `default`.
 
-## Test Out Your Rails App
+## Test Out Authentication in Your Rails App
 
 Now that you've configured the necessary environment variables, let's test it out!
 
