@@ -17,7 +17,7 @@ To make this all work, you'll be using one of the most popular gems in the Rails
 
 {% img blog/omniauth/omniauth-diagram.png alt:"OmniAuth diagram" width:"600" %}{: .center-image }
 
-The core of what you're building is powered by [OmniAuth Gem](https://github.com/omniauth/omniauth), which will help our Rails app handle [OAuth](/blog/2017/06/21/what-the-heck-is-oauth) and OpenID Connect flows. What OmniAuth does is ask an identity provider (Okta, in this case) for access to user information in the form [JSON Web Tokens](/authentication-guide/tokens/validating-access-tokens). OmniAuth then provides a very simple hash in the form of `request.env[‘omniauth.auth’]` which contains all the logged-in user's information which you can then easily pass to [Active Record](https://guides.rubyonrails.org/active_record_basics.html) to store in a database. **Cool, right?!**
+The core of what you're building is powered by [OmniAuth Gem](https://github.com/omniauth/omniauth), which will help our Rails app handle [OAuth](/blog/2017/06/21/what-the-heck-is-oauth) and OpenID Connect flows. What OmniAuth does is ask an identity provider (Okta, in this case) for access to user information in the form [JSON Web Tokens](/authentication-guide/tokens/validating-access-tokens). OmniAuth then provides a very simple hash in the form of `request.env['omniauth.auth']` which contains all the logged-in user's information which you can then easily pass to [Active Record](https://guides.rubyonrails.org/active_record_basics.html) to store in a database. **Cool, right?!**
 
 ## Jump Into the Project
 
