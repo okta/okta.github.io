@@ -11,13 +11,14 @@ tweets:
 image: blog/omniauth/app.png
 ---
 
-Today I'm going to show you how to authenticate users into your Rails applications using the latest best-practices and a hosted authentication/authorization provider which makes managing users simple. Specifically, you'll learn how to integrate Rails and [Okta](https://developer.okta.com/) to create, manage, and secure users with [OpenID Connect](https://developer.okta.com/blog/2017/07/25/oidc-primer-part-1).
+Today I'm going to show you how to authenticate users into your Rails applications using the latest best-practices and a hosted authentication/authorization provider which makes managing users simple. Specifically, you'll learn how to integrate Rails and [Okta](https://developer.okta.com/) to create, manage, and secure users with [OpenID Connect](/blog/2017/07/25/oidc-primer-part-1).
 
-To make this all work, we'll be using one of the most popular gems in the Rails world: [OmniAuth](https://github.com/omniauth/omniauth). Additionally, we'll be using the fabulous [devise](https://github.com/plataformatec/devise) gem to make plugging user authentication into our app simple.
+To make this all work, you'll be using one of the most popular gems in the Rails world: [OmniAuth](https://github.com/omniauth/omniauth). Additionally, you'll be using the fabulous [devise](https://github.com/plataformatec/devise) gem to make plugging user authentication into our app simple.
 
 {% img blog/omniauth/omniauth-diagram.png alt:"OmniAuth diagram" width:"600" %}{: .center-image }
 
-The core of what we're building is powered by [OmniAuth Gem](https://github.com/omniauth/omniauth), which will help our Rails app handle [OAuth](https://developer.okta.com/blog/2017/06/21/what-the-heck-is-oauth) and OpenID Connect flows. What OmniAuth does is ask an identity provider (Okta, in this case) for access to user information in the form [JSON Web Tokens](https://developer.okta.com/authentication-guide/tokens/validating-access-tokens). OmniAuth then provides a very simple hash in the form of `request.env[‘omniauth.auth’]` which contains all the logged-in user's information which we can then easily pass to [Active Record](https://guides.rubyonrails.org/active_record_basics.html) to store in a database. **Cool, right?!**
+The core of what you're building is powered by [OmniAuth Gem](https://github.com/omniauth/omniauth), which will help our Rails app handle [OAuth](/blog/2017/06/21/what-the-heck-is-oauth) and OpenID Connect flows. What OmniAuth does is ask an identity provider (Okta, in this case) for access to user information in the form [JSON Web Tokens](/authentication-guide/tokens/validating-access-tokens). OmniAuth then provides a very simple hash in the form of `request.env[‘omniauth.auth’]` which contains all the logged-in user's information which you can then easily pass to [Active Record](https://guides.rubyonrails.org/active_record_basics.html) to store in a database. **Cool, right?!**
+
 ## Jump Into the Project
 
 ```bash
@@ -31,13 +32,14 @@ Now install all of the project's dependencies using [Bundler](https://bundler.io
 bundle install
  ```
 
-Next, create a database using the `rake` command.
+Next, create a database using the `rake` command. This will create a local
+database using [SQLite3](https://www.sqlite.org/index.html).
 
 ```bash
 rake db:create
 ```
 
-Next, create an `application.yaml` file to populate all necessary environment variables.
+Next, create a `config/application.yaml` file to populate all necessary environment variables.
 
 ```
 bundle exec figaro install
@@ -50,7 +52,7 @@ Once your Okta account has been created, you'll need to copy some Okta values in
 OKTA_CLIENT_ID: "YOUR-CLIENT-ID"
 OKTA_CLIENT_SECRET: "YOUR-CLIENT-SECRET"
 OKTA_ORG: "YOUR-OKTA-ORG"
-OKTA_DOMAIN: "okta"
+OKTA_DOMAIN: "oktapreview"
 OKTA_URL: "YOUR-OKTA-ORG-URL"
 OKTA_ISSUER: "YOUR-OKTA-ISSUER-URL"
 OKTA_AUTH_SERVER_ID: "YOUR-AUTH-SERVER-ID"
@@ -77,7 +79,7 @@ To get your `OKTA_URL` value, visit the Okta dashboard main page and copy the **
 
 To get the `OKTA_ISSUER` value, use `OKTA_ISSUER/oauth2/default`, substituting your issuer URL in.
 
-Finally, for `OKTA_AUTH_SERVER_ID`, use the value `default`. 
+Finally, for `OKTA_AUTH_SERVER_ID`, use the value `default`.
 
 ## Test Out Your Rails App
 
@@ -94,6 +96,12 @@ rails s
 
 Be sure to click around, sign up, sign in, and see how OmniAuth + [Okta](https://developer.okta.com/signup/) make the authentication process painless.
 
-Interested in learning more? I recorded a screencast which walks through adding Okta to existing devise-based applications. Give it a watch or leave a comment below.
+## Learn More
+
+As you can see, getting your Rails app setup to handle user authentication with OpenID Connect doesn't have to be hard. By using OmniAuth and Okta, you're able to quickly spin up user management.
+
+If you'd like to see how this app works in more detail, go check out the screencast below. It walks through the process of adding Okta and OmniAuth to an existing Rails application.
 
 <div style="margin: 0 auth; text-align: center;"><iframe width="560" height="315" src="https://www.youtube.com/embed/8_Yt4U2lJJM" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe></div>
+
+If you're interested in learning more about web security, please [follow us on Twitter](https://twitter.com/oktadev) -- we publish lots of interested articles on the topic. And if you have any questions, please leave a comment below and I'll do my best to get back to you.
