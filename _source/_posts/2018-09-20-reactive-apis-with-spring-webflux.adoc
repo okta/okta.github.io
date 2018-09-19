@@ -1,17 +1,39 @@
 ---
 layout: blog_post
-title: 'Going Reactive with WebFlux'
+title: 'Build Reactive APIs with Spring WebFlux'
 author: mraible
 description: "Reactive programming is an approach to writing software that embraces asynchronous IO. It's pretty awesome."
-tags: [reactive, programming, josh long]
+tags: [reactive, reactive api, reactive programming, josh long, springframework spring boot, spring security, oidc]
+tweets:
+- "Learn all about reactive programming and how to use it in your @springboot apps with Spring WebFlux! →"
+- "Build a xxx"
+- "One more tweet here"
 ---
+//image: blog/spring-webflux-apis/we-need-something-good-here.png
+:page-liquid:
+:uri-okta-login: https://login.okta.com/?SAMLRequest=fc%2B7CsJAEAXQXvAflu1NNJUMeZBGELTx1a%2FrYILJTtyZGD%2FfSBRiYzlw77lMnD3rSj3Qc0ku0YtgrhU6S5fSXRN9PKxmS52l00nMpq6iBvJWCrfDe4ss6vStRe9aDzmGIZfo1jsgwyWDMzUyiIV9vt1AH4XGk5ClSvewUgMNa%2BYW%2FVj5jxhm9NLP67QQaSAMu64L6CYmsFSHlnzT4ZlLwTgcL6Sf8%2FeX9AU%3Dhttps://login.okta.com/?SAMLRequest=fc%2B7CsJAEAXQXvAflu1NNJUMeZBGELTx1a%2FrYILJTtyZGD%2FfSBRiYzlw77lMnD3rSj3Qc0ku0YtgrhU6S5fSXRN9PKxmS52l00nMpq6iBvJWCrfDe4ss6vStRe9aDzmGIZfo1jsgwyWDMzUyiIV9vt1AH4XGk5ClSvewUgMNa%2BYW%2FVj5jxhm9NLP67QQaSAMu64L6CYmsFSHlnzT4ZlLwTgcL6Sf8%2FeX9AU%3D
+
+Spring Boot 2.0 was a long-awaited release from the good folks at Pivotal. One of its new features is reactive web programming support with Spring WebFlux. Spring WebFlux is a web framework that's built on top of Project Reactor, to give you asyncronous I/O, and allow your application to perform better. If you're familiar with Spring MVC and building REST APIs, you'll enjoy Spring WebFlux. There's just a few basic concepts that are different. Once you know these, you'll be well on your way to building reactive APIs!
+
+// we should reference this at the end https://spring.io/blog/2018/03/01/spring-boot-2-0-goes-ga
+Reactive web programming is great for applications that have streaming data, and clients that consume it and stream it to their users. It ain't great for developing CRUD apps. If you want to develop a CRUD API, stick with Spring MVC and be happy about it.
+
+However, if you're developing the next Facebook or Twitter with lots of data, a reactive API might be just what you're looking for.
+
+Spring Boot 2.1 is just around the corner, and with it comes Spring Security 5.1 (released this week!). There's excellent OpenID Connect (OIDC) support in Spring Security 5.1, so we'll highlight how to use it near the end of this article.
+
+// Facebook or Twitter - would Instagram and Snapchat be better to appeal to the millenials?
+
+// todo: figure out img tag for asciidoc, this spits out escaped HTML
+{% raw %}{% img blog/spring-webflux-apis/starbuxman.jpg alt:"Josh Long" class:"BlogPost-avatar pull-right img-100px" %}{% endraw %} I collaborated on this post with https://twitter.com/starbuxman[Josh Long], fellow Java Champion, Spring Developer Advocate and all around great guy at Pivotal. I've been a longtime user of Spring, and Josh was the one who first showed me Spring Boot, at a Devoxx Belgium many moons ago. We've been good friends for a while now, sharing the same passion for Java, developers, and building awesome applications.
+
+Most of the words in this post are from Josh (a.k.a. https://twitter.com/starbuxman[@starbuxman]). I added the part about securing your API with OIDC. Even though I show how to do it with Okta, it should work with any OIDC provider.
 
 == I/O, I/O, It's Off to Work We Go...
 
 Reactive programming is an approach to writing software that embraces asynchronous IO. Asynchronous I/O is a small idea that portends big changes for software. The idea is simple: alleviate inefficient resource utilization by reclaiming resources that would otherwise be idle as they waited for I/O activity. Asynchronous IO inverts the normal design of IO processing: the clients are notified of new data instead of asking for it; this frees the client to do other things while waiting for new notifications. Let's look at an example that compares and contrasts asynchronous IO to synchronous IO.
 
 Let's build a simple program that reads data from a source (a `java.io.File` reference, specifically). First up, an implementation that uses a trusty 'ol `java.io.InputStream` implementation:
-
 
 .Read data from a file _synchronously_
 ====
@@ -137,17 +159,15 @@ class Asynchronous implements Reader, CompletionHandler<Integer, ByteBuffer> {
 
 First thing's first: this code's _waaaay_ more complicated! There's a ton of things going on here and it can seem overwhelming, but indulge me, for a moment... This code  reads data from a Java NIO `Channel` and processes that data, asynchronously, on a separate thread in a callback handler. The thread on which the read was started isn't monopolized. We return virtually instantly after we call `.read(..)`, and when there is finally data available, our callback is invoked, and on a different thread. If there is latency between `.read()` calls, then we can move on and do other things with our thread. The duration of the asynchronous read, from the first byte to the last, is at best as short as the duration of the synchronous read. It's likely a tiny bit longer. But, for that complexity, we can be more efficient with our threads. We can handle more work, multiplexing I/O across a finite thread pool.
 
-I work for a cloud computing company. We'd  _love_ it if you solved your scale-out problems by buying more application instances! Of course I'm being a bit tongue-in-cheek  here. Asynchronous IO __does_ make things a bit more complicated, but hopefully this example highlights the ultimate benefit of reactive code: we can handle more requests, and do more work, using asynchronous I/O on the same hardware _if_ our work is IO bound. If it's CPU-bound  (e.g.: fibonacci, bitcoin mining, or cryptography) then reactive programming won't buy us anything.
+I work for a cloud computing company. We'd _love_ it if you solved your scale-out problems by buying more application instances! Of course I'm being a bit tongue-in-cheek  here. Asynchronous IO __does_ make things a bit more complicated, but hopefully this example highlights the ultimate benefit of reactive code: we can handle more requests, and do more work, using asynchronous I/O on the same hardware _if_ our work is IO bound. If it's CPU-bound  (e.g.: fibonacci, bitcoin mining, or cryptography) then reactive programming won't buy us anything.
 
 Now, most of us don't work with `Channel` _or_ `InputStream` implementations for their day-to-day work! They think about things in terms of higher order abstractions. Things like the arrays, or, more likely, the `java.util.Collection` hierarchy. A `java.util.Collection` maps very nicely to an `InputStream`: they both   assume that you'll be able to work with all the data, near instantly. You expect to be able to finish reading from most `InputStreams` sooner rather than later.  Collection types start to become a bit awkward when you move to larger sums of data; what happens when you're dealing with something potentially infinite - unbounded - like websockets, or server-sent events? What happens when there's latency between records? One record arrives now and another not for another minute or hour  such as with a chat, or when the network suffers a failure?
-
 
 We need a better way to describe these kinds of data. We're describing something asynchronous - something that will _eventually_ happen. This might seem a good fit for a `Future<T>` or a `CompletableFuture<T>`, but that only describes _one_ eventual thing. Not a whole stream of potentially unlimited things. Java hasn't really offered an appropriate metaphor by which to describe this kind of data.  Both `Iterator` and Java 8 `Stream` types can be unbounded, but they are both pull-centric; you ask for the next record instead of having the type call your code back. One assumes that if they did support push-based processing, which lets you do more with your threads, that the APIs would also expose threading and scheduling control. `Iterator` implementations say nothing about threading and Java 8 streams _all_ share the same fork-join pool.
 
 If `Iterator` and `Stream` did support push-based processing, then we'd run into another problem that really only becomes an issue in the context of IO: we'd need some way to  _push back_!  As a consumer of data being produced asynchronously, we have no idea when or how much data might be in the pipeline. We don't know if one byte will be produced in the next callback or a if terabyte will be produced! When you pull data off of an `InputStream`, you read as much data as you're prepared to handle, and no more. In the examples above we read into a `byte[]`  buffer of a fixed and known length. In an asynchronous world, we need someway to communicate to the producer how much data we're prepared to handle.
 
 Yep. We're _definitely_ missing something.
-
 
 == The Missing Metaphor
 
@@ -169,7 +189,6 @@ public interface Publisher<T> {
 ====
 
 The `Subscriber` subscribes to a `Publisher<T>`, receiving notifications on any new values of type `T` through its `onNext(T)` method. If there are any errors, its `onError(Throwable)` method is called. When processing has completed normally, the subscriber's `onComplete` method is called.
-
 
 .the Reactive Streams `Subscriber<T>`.
 ====
@@ -240,9 +259,8 @@ Spring Framework 5.0 was released in September 2017. It builds on Reactor and th
 
 Let's build something! We'll begin our journey, as usual, at my second http://start.Spring.io[favorite place on the internet, the Spring Initializr -  start.Spring.io]. The goal here is to build a new reactive web application that supports reactive data access, and then secure it (reactively!). Select the following dependencies either by using the combo box on the bottom right of the page or by selecting "Switch to the Full Version" and then choosing `DevTools`, `Reactive Web`, `Reactive MongoDB`. and `Lombok`.
 
-
 .Selections on the Spring Initializr for a new, reactive application.
-image::./images/the-spring-initializr.png[alt=the Spring Initializr,width=1000]
+{% img blog/spring-webflux-apis/the-spring-initializr.png alt:"the Spring Initializr" width:"800" %}{: .center-image }
 
 This will give you a new project with the following layout.
 
@@ -301,14 +319,11 @@ Our Maven build file, `pom.xml`, is pretty plain, but it assumes we're going to 
     </parent>
 
     <properties>
-
         <maven-failsafe-plugin.version>2.22.0</maven-failsafe-plugin.version>
         <maven-surefire-plugin.version>2.22.0</maven-surefire-plugin.version>
-
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <java.version>1.8</java.version>
-
     </properties>
 
     <dependencies>
@@ -399,10 +414,9 @@ We're ready to get started! Let's turn to the first concern, data access.
 
 We want to talk to a natively reactive data store. That is, the driver for the database needs to itself support asynchronous IO, otherwise we won't be able to scale out reads without scaling out threads, which defeats the point. Spring Data, an umbrella data access framework, supports a number of reactive data access options including reactive Cassandra, reactive MongoDB, reactive Couchbase and reactive Redis. We've chosen MongoDB, so make sure you have a MongoDB database instance running on your local machine on the default host, port, and accessible with the default username and password. If you're on a Mac, you can use `brew install mongodb`.
 
-MongoDB is a document database, so the unit of interaction is a sparse document - think of it as a JSON stanza that gets persistd and is retreivable by a key, the document ID.
+MongoDB is a document database, so the unit of interaction is a sparse document - think of it as a JSON stanza that gets persisted and is retrievable by a key, the document ID.
 
 Our application will support manipulating `Profile` objects. We're going to persist `Profile` entities (reactively) using a reactive Spring Data repository, as documents in MongoDB. Let's first look at the entity definition. It's got one field, `email`, that will be persisted in MongoDB, and another field that will act as the document ID.
-
 
 .`src/main/java/com/example/demo/Profile.java`
 ====
@@ -435,7 +449,6 @@ class Profile {
 <4> ..and finally, this field `email` is the thing that we want to store and retreive later.
 ====
 
-
 In order to persist documents of type `Profile`, we declaratively define a repository. A repository, a design pattern from Eric Evans' seminal tome, _Domain Driven Design_, is a way of encapsulating  object persistence. Repositories are responsible for persisting entities and value types. They present clients with a simple model for obtaining persistent objects and managing their life cycle. They decouple application and domain design from persistence technology and strategy choices. They also communicate design decision sabout object access. And, finally, they allow easy substitiion of implementation with a dummy implemenetation, ideal in testing. Spring Data's repositories support all these goals with interface definitions whose implementation are satisfied by the framework at startup time.
 
 Let's look at our trivial Spring Data repisitory, `src/main/java/com/example/demo/ProfileRepository.java`.
@@ -452,7 +465,6 @@ interface ProfileRepository extends ReactiveMongoRepository<Profile, String> {
 }
 ----
 ====
-
 
 Our repository extends the Spring Data-provided `ReactiveMongoRepository` interface which in turn provides a number of data access methods supporting reads, writes, deletes and searches, almost all in terms of method signatures accepting or returning `Publisher<T>` types.
 
@@ -547,18 +559,13 @@ class SampleDataInitializer
 <9> If we'd stopped at the previous line, the `save` operation, and run this program then we would see.. nothing! `Publisher<T>`  instances are _lazy_ - you need to `subscribe()` to them to trigger their execution. This last line is where the rubber meets the road. In this case, we're using the `subscribe(Consumer<T>)` variant that lets us visit every record returned from the `repository.findAll()` operation and print out the record.
 ====
 
-
-
 > TIP: You can activate a Spring profile with a command line switch, `-Dspring.profiles.active=foo` where `foo` is the name of the profile you'd like to activate. You can also set an environment variable, `export SPRING_PROFILES_ACTIVE=foo` before running the `java` process for your Spring Boot application.
-
-
 
 You'll note that in the previous example we use two methods, `map(T)` and `flatMap(T)`. Map should be familiar if you've ever used the Java 8 `Stream` API. Map visits each record in a publisher and passes it through a lambda function which must transform it. The output of that transformation is then returned and accumulated into a new `Publisher`. So, the intermediate type after we return from our `map` operation is a `Publisher<Profile>`. In the next line we then call `flatMap`. `flatMap` is just like `map`, except that it unpacks the return value of the lambda given if the value is itself contained in a `Publisher<T>`. In our case, the `repository.save(T)` method returns a `Mono<T>`. If we'd used `.map` instead of `flatMap(T)`, we'd have a `Flux<Mono<T>>`, when what we really want is a `Flux<T>`. We can cleanly solve this problem usig `flatMap`.
 
 == A Reactive Service
 
 We're going to use the repository to implement a service that will contain any course grained business logic. In the beginning a lot of the business logic will be pass through logic delegating to the repository, but we can add things like validation and integration with other systems at this layer. Let's look at a simple service.
-
 
 .`src/main/java/com/example/demo/ProfileService.java`
 ====
@@ -580,35 +587,35 @@ class ProfileService {
     private final ProfileRepository profileRepository; // <3>
 
     ProfileService(ApplicationEventPublisher publisher, ProfileRepository profileRepository) {
-            this.publisher = publisher;
-            this.profileRepository = profileRepository;
+        this.publisher = publisher;
+        this.profileRepository = profileRepository;
     }
 
     public Flux<Profile> all() { // <4>
-            return this.profileRepository.findAll();
+        return this.profileRepository.findAll();
     }
 
     public Mono<Profile> get(String id) { //<5>
-            return this.profileRepository.findById(id);
+        return this.profileRepository.findById(id);
     }
 
     public Mono<Profile> update(String id, String email) { //<6>
-            return this.profileRepository
-                .findById(id)
-                .map(p -> new Profile(p.getId(), email))
-                .flatMap(this.profileRepository::save);
+        return this.profileRepository
+            .findById(id)
+            .map(p -> new Profile(p.getId(), email))
+            .flatMap(this.profileRepository::save);
     }
 
     public Mono<Profile> delete(String id) {//<7>
-            return this.profileRepository
-                .findById(id)
-                .flatMap(p -> this.profileRepository.deleteById(p.getId()).thenReturn(p));
+        return this.profileRepository
+            .findById(id)
+            .flatMap(p -> this.profileRepository.deleteById(p.getId()).thenReturn(p));
     }
 
     public Mono<Profile> create(String email) {//<8>
-            return this.profileRepository
-                .save(new Profile(null, email))
-                .doOnSuccess(profile -> this.publisher.publishEvent(new ProfileCreatedEvent(profile)));
+        return this.profileRepository
+            .save(new Profile(null, email))
+            .doOnSuccess(profile -> this.publisher.publishEvent(new ProfileCreatedEvent(profile)));
     }
 }
 ----
@@ -657,7 +664,6 @@ We only need the machinery related to  MongoDB and our `ProfileService`, in isol
 
 Test slices can also contribute _new_ auto-configuration supporting tests, specifically. The `@DataMongoTest` does this. It can even run an _embedded_ MongoDB instance using the Flapdoodle library! Let's take advantage of this. Add the following to your Maven build `de.flapdoodle.embed` : `de.flapdoodle.embed.mongo` with scope `test`. There's no need to specify a version; Spring Boot will manage that for us.
 
-
 .`src/test/java/com/example/demo/ProfileServiceTest.java`
 ====
 [source,java]
@@ -689,7 +695,7 @@ public class ProfileServiceTest {
     private final ProfileRepository repository;
 
     public ProfileServiceTest(@Autowired ProfileService service, // <4>
-                                                        @Autowired ProfileRepository repository) {
+                              @Autowired ProfileRepository repository) {
         this.service = service;
         this.repository = repository;
     }
@@ -765,8 +771,7 @@ public class ProfileServiceTest {
 <8> Make sure to call `verifyComplete`! Otherwise, nothing'll happen.. and that makes me sad.
 ====
 
-
-We only annotated one test because the rest are unremarkable and similiar.
+We only annotated one test because the rest are unremarkable and similar.
 
 The `StepVerifier` is central to testing all things reactive. It gives us a way to assert that what we think is going to come next in the publisher is in fact going to come next in the publisher. The `StepVerifier` provides several variants on the `expect*` theme. Think of this as the reactive equivalent to `Assert*`.
 
@@ -791,7 +796,6 @@ import org.springframework.web.bind.annotation.*;
 import reactor.core.publisher.Mono;
 
 import java.net.URI;
-
 
 @RestController // <1>
 @RequestMapping(value = "/profiles", produces = MediaType.APPLICATION_JSON_VALUE)  // <2>
@@ -851,13 +855,11 @@ class ProfileRestController {
 <5> this method supports creating a new `Profile` with an HTTP `POST` action. In this handler method we expect incoming requests to have a JSON body that the framework then marhsals into a Java object, `Profile`.  This happens automtically based on the content-type of the incoming request and the configured, acceptable, convertable payloads supported by Spring WebFlux
 ====
 
-
 This approach is great if you have a lot of related endpoints that share common dependencies. You can collocate, for example, the `GET`, `PUT`, `POST`, etc., handler logic for a particular resource in one controller class so they can all use the same injected service or validation logic.  The controller approach is not new; Java web frameworks have been using something like it for _decades_ now. The older among us will remember using Apache Struts in the dawn of the 00's. This approach works well if you have a finite set of HTTP endopoints whose configuration is known a priori. It works well if you want to collocate related endpoints. It also works well if the request matching logic can be described declaratively using Spring's various annotations.
 
 This approach is also likely to be a perennial favorite for those coming from Spring MVC, as its familiar. Those annotations are exactly the same annotations from Spring MVC. But, this is _not_ Spring MVC. And this isn't, at least by default, the Servlet API. It's a brand new web runtime, Spring WebFlux, running - in this instance  -  on Netty.
 
 Spring Framework 5 changes things, though. Spring Framework 5 assumes a Java 8 baseline and with it   lambdas and endless, functional, possibilities! A lot of what we're doing in a reactive web application lends itself to the functional programming style. Spring Framework 5 debuts a new functional reactive programming model that mirrors the controller-style programming model in Spring WebFlux. This new programming model is available exclusively in Spring WebFlux. Let's look at an example.
-
 
 .`src/main/java/com/example/demo/ProfileEndpointConfiguration.java`
 ====
@@ -900,7 +902,6 @@ class ProfileEndpointConfiguration {
 We make judicious use of static imports in this example to make things as concise as possible. `RouterFunction<ServerResponse>` is a builder API. You can store the result of each call to `route` or `andRoute` in an intermediate variable if you like. You could loop through records in a for-loop from records in a database and contribute new endpoints dynamically, if you wanted.
 
 Spring WebFlux provides a DSL for describing how to match incoming requests.  `GET("/profiles")` results in a `RequestPredicate` that matches incoming HTTP `GET`-method requests that are routed to the URI `/profiles`. You can compose `RequestPredicate` instances using `.and(RequestPredicate)`, `.not(RequestPredicate)`, or `.or(RequestPredicate)`. In this example, I also provide a fairly trivial adapter -  `CaseInsensitiveRequestPredicate` - that lower-cases all incoming URLs and matches it against the configured (and lower-cased) URI in the `RequestPredicate`. The result is that if you type `http://localhost:8080/profiles` or `http://localhost:8080/PROfiLEs` they'll both work.
-
 
 .`src/main/java/com/example/demo/CaseInsensitiveRequestPredicate.java`
 ====
@@ -1045,16 +1046,13 @@ class ProfileHandler {
 <4> this method centralizes all configuration for replies to read requests (for instance, those coming from `GET` verbs)
 ====
 
-
 Straightforward, right? I like this approach - the handler object centralizes processing for related resources into a single class, just like with the controller-style arrangement. We're also able to centralize routing logic in the `@Configuration` class. This means it's easier to see at a glance what routes have been configured. It's easier to refactor routing. Routing is also now more dynamic. We can change how requests are matched, and we can dynamically contribute endpoints. The only drawback to this style is that your code is inextricably tied to the Spring WebFlux component model. Your handler methods in the `ProfileHandler` are, no question at all, tied to Spring WebFlux. From where I sit, that's OK. A controller is supposed to be a thin adapter layer on top of your service. Most of the business logic lives in the service layer, or below. As we've already seen, we can easily unit test my service. And anyway, testing my HTTP endpoints requires something altogether different...
 
-
-=== Testing the HTTTP Endpoints
+=== Testing the HTTP Endpoints
 
 We've seen two implementations of the same HTTP endpoints in this application. The classic endpoints are annotated with `@Profile("classic")`  where as the functional reactive endpoints are annotated with `@Profile("default")`. If no other profile is active, any bean tagged with the `default` profile will be active. So, if you _don't_ specify `classic`, the `default` bean will activate. We should test both, even if they're just for demonstration purposes. I've extracted all the tests into a base class that I'll extend twice, activating each of the two profiles to test in isolation each of the HTTP endpoint styles.
 
 First, let's look at the base class, which contains the most important aspects of testing our HTTP endpoints. This base class is `abstract` -
-
 
 .`src/test/java/com/example/demo/ProfileEndpointsBaseClass.java`
 ====
@@ -1203,6 +1201,7 @@ public abstract class ProfileEndpointsBaseClass {
 
 The `WebTestClient` is quite powerful. It's a test-centric alternative to the reactive `WebClient` in Spring WebFlux which is an honest-to-goodness reactive HTTP client. In this  example, we make an HTTP request to an endpoint, confirm that the returned status code and headers line up with expectations, and then use  JSON Path  to poke at the structure of the returned result.
 
+// todo: fix tip icon
 > TIP: https://github.com/json-path/JsonPath[JSON Path] is like XPath, a query language for declaratively traversing nodes in an XML document. It allows easy traversal of JSON stanzas. It also provides a predicate language which we can use to match.
 
 HTTP is great for a request-reply centric interaction with a service. It makes it easy to interrogate the HTTP service and get a response. But what if we're interested in listening to events? We don't want to constantly poll - we'd rather the service tell us when something is happening. Our service supports creating and updating records. As a client to such a service, it'd be nice to have a firehose endpoint - but don't tell Twitter that! We could subscribe to such an endpoint and update the client state whenever there's a new record. We need a fully duplexed protocol to maintain a connection to the client and push data to the client from the service...
@@ -1259,11 +1258,11 @@ class WebSocketConfiguration {
     @Bean
     HandlerMapping handlerMapping(WebSocketHandler wsh) {
         return new SimpleUrlHandlerMapping() {
-                {
-                        // <3>
-                        setUrlMap(Collections.singletonMap("/ws/profiles", wsh));
-                        setOrder(10);
-                }
+            {
+                // <3>
+                setUrlMap(Collections.singletonMap("/ws/profiles", wsh));
+                setOrder(10);
+            }
         };
     }
 
@@ -1276,7 +1275,7 @@ class WebSocketConfiguration {
     @Bean
     WebSocketHandler webSocketHandler(
         ObjectMapper objectMapper, // <5>
-        ProfileCreatedEventPublisher eventPublisher //<6>
+        ProfileCreatedEventPublisher eventPublisher // <6>
     ) {
 
         Flux<ProfileCreatedEvent> publish = Flux
@@ -1285,22 +1284,22 @@ class WebSocketConfiguration {
 
         return session -> {
 
-                Flux<WebSocketMessage> messageFlux = publish
-                    .map(evt -> {
-                            try {
-                                    // <8>
-                                    return objectMapper.writeValueAsString(evt.getSource());
-                            }
-                            catch (JsonProcessingException e) {
-                                    throw new RuntimeException(e);
-                            }
-                    })
-                    .map(str -> {
-                            log.info("sending " + str);
-                            return session.textMessage(str);
-                    });
+            Flux<WebSocketMessage> messageFlux = publish
+                .map(evt -> {
+                    try {
+                        // <8>
+                        return objectMapper.writeValueAsString(evt.getSource());
+                    }
+                    catch (JsonProcessingException e) {
+                        throw new RuntimeException(e);
+                    }
+                })
+                .map(str -> {
+                    log.info("sending " + str);
+                    return session.textMessage(str);
+                });
 
-                return session.send(messageFlux); // <9>
+            return session.send(messageFlux); // <9>
         };
     }
 
@@ -1317,8 +1316,9 @@ class WebSocketConfiguration {
 <9> Don't forget to call `session.send(Publisher<WebSocketMessage)`! Otherwise none of this will work. :-) Or at least, that's what I'm told. :cough: Not saying it happened to me, or anything.. 'course not..
 ====
 
-All that was fairly straightforward, one hopes. Let's look at the most important bit - the `ProfileCreatedEventPublisher`. This code was harder for me to write than it is for you to read. This component needs to act as a bridge; it needs to consume `ProfileCreatedEvent` events and then put them in an in-memory `BlockingQueue<ProfileCreatedEvent>` which our `Publisher<WebSocketMessage>` will drain in another thread.  There's really not that much to it; what you need to understand is the `java.util.concurrent.BlockingQueue<T>` collection, more than anything. A `BlockingQueue<T>` is an interesting beast. If a consumer tries to drain an item from the queue, but the queue is empty, the queue will block until such time as a new item has been offered to the queue. This means we can simply loop forever, waiting for the next item to be added to the queue, and when it's available our code will return and we can publish the event on the `FluxSink<ProfileCreatedEvent> sink` pointer we've been given when the `Flux` is first created. The `Consumer<T>.accept(FluxSink<ProfileCreatedEvent> sink)` method, in this case, is only called once when the application starts up and we try to create the `Flux` for the first time. In that callback we begin the while loop that will constantly try to drain the `BlockingQueue<T>`. This infinite, and un-ending while-loop _blocks_! Naturally. That's the whole point. So, we manage that ourselves using the previously configured `java.util.concurrent.Executor` instance.
+All that was fairly straightforward, one hopes. Let's look at the most important bit - the `ProfileCreatedEventPublisher`. This code was harder for me to write than it is for you to read. This component needs to act as a bridge; it needs to consume `ProfileCreatedEvent` events and then put them in an in-memory `BlockingQueue<ProfileCreatedEvent>` which our `Publisher<WebSocketMessage>` will drain in another thread.  There's really not that much to it; what you need to understand is the `java.util.concurrent.BlockingQueue<T>` collection, more than anything. A `BlockingQueue<T>` is an interesting beast.
 
+If a consumer tries to drain an item from the queue, but the queue is empty, the queue will block until such time as a new item has been offered to the queue. This means we can simply loop forever, waiting for the next item to be added to the queue, and when it's available our code will return and we can publish the event on the `FluxSink<ProfileCreatedEvent> sink` pointer we've been given when the `Flux` is first created. The `Consumer<T>.accept(FluxSink<ProfileCreatedEvent> sink)` method, in this case, is only called once when the application starts up and we try to create the `Flux` for the first time. In that callback we begin the while loop that will constantly try to drain the `BlockingQueue<T>`. This infinite, and un-ending while-loop _blocks_! Naturally. That's the whole point. So, we manage that ourselves using the previously configured `java.util.concurrent.Executor` instance.
 
 .`src/main/java/com/example/demo/ProfileCreatedEventPublisher.java`
 ====
@@ -1358,14 +1358,14 @@ class ProfileCreatedEventPublisher implements
      @Override
     public void accept(FluxSink<ProfileCreatedEvent> sink) {
         this.executor.execute(() -> {
-                while (true)
-                        try {
-                                ProfileCreatedEvent event = queue.take(); // <5>
-                                sink.next(event); // <6>
-                        }
-                        catch (InterruptedException e) {
-                                ReflectionUtils.rethrowRuntimeException(e);
-                        }
+            while (true)
+                try {
+                    ProfileCreatedEvent event = queue.take(); // <5>
+                    sink.next(event); // <6>
+                }
+                catch (InterruptedException e) {
+                    ReflectionUtils.rethrowRuntimeException(e);
+                }
         });
     }
 }
@@ -1378,11 +1378,9 @@ class ProfileCreatedEventPublisher implements
 <6> ..and as soon as they are, we tell our reactive stream about them by calling `FluxSink<T>.next(T)`
 ====
 
-
 Whew! There are a few moving pieces here, but ultimately all we're trying to do is get the `Publisher<T>` lined up in such a way that Spring WebFlux can connect it to the websocket protocol and to our clients. Speaking of..
 
 You don't really need much JavaScript to connect an HTML 5 client to a browser. As a stopgap, just to prove that things are working, let's create the simplest of possible clients, a static `ws.html` page with some barebones JavaScript code.
-
 
 .`src/main/resources/static/ws.html`
 ====
@@ -1411,7 +1409,6 @@ You don't really need much JavaScript to connect an HTML 5 client to a browser. 
 <2> ..and whenever a new message arrives we show the JSON in a alert dialog
 ====
 
-
 Couldn't be simpler! You can drive new results into the system using the following `curl` incantation:
 
 .`create.sh`
@@ -1421,12 +1418,12 @@ Couldn't be simpler! You can drive new results into the system using the followi
 #!/bin/bash
 port=${1:-8080}
 
-curl -H"content-type: application/json" -d'{"email":"random"}' http://localhost:${port}/profiles
+curl -H"content-type: application/json" -d'{"email":"random"}' http://localhost:${port}/profiles # <1>
 ----
 <1>  this will `POST` a new record into the API which will then trigger a websocket notification if you have the browser client open.
 ====
 
-Open the `ws.htlm` page in the browser and then run that `create.sh` in your shell. I'm assuming you have `curl`. This is a trivial end-to-end and it's satisfying to see it all come together. That said, we should definitely test this. You know. Just in case..
+Open the `ws.html` page in the browser and then run that `create.sh` in your shell. I'm assuming you have `curl`. This is a trivial end-to-end and it's satisfying to see it all come together. That said, we should definitely test this. You know. Just in case..
 
 === Testing WebSockets
 
@@ -1486,20 +1483,20 @@ class WebSocketConfigurationTest {
         // <8>
         socketClient.execute(uri, (WebSocketSession session) -> {
 
-                // <9>
-                Mono<WebSocketMessage> out = Mono.just(session.textMessage("test"));
+            // <9>
+            Mono<WebSocketMessage> out = Mono.just(session.textMessage("test"));
 
-                // <10>
-                Flux<String> in = session
-                    .receive()
-                    .map(WebSocketMessage::getPayloadAsText);
+            // <10>
+            Flux<String> in = session
+                .receive()
+                .map(WebSocketMessage::getPayloadAsText);
 
-                // <11>
-                return session
-                    .send(out)
-                    .thenMany(in)
-                    .doOnNext(str -> counter.incrementAndGet())
-                    .then();
+            // <11>
+            return session
+                .send(out)
+                .thenMany(in)
+                .doOnNext(str -> counter.incrementAndGet())
+                .then();
 
         }).subscribe();
 
@@ -1546,8 +1543,120 @@ All green! Nothing better than a green test suite, I always say. It looks like t
 
 == Next Steps
 
-In our brief time together we've looked at the need for asynchronous IO, the missing computational metaphor, the reactive streams specification, Pivotal's Reactor project, Spring's new reactive groove, Spring Data Kay and reactive MongoDB, Spring MVC-style HTTP endpoints, functional programming with Java 8 and functional reactive HTTP endpoints, reactive websockets, integration with non-reactive event sources and - through it all - testing! But this is just the beginning. We're missing security and a slick HTML client, after all..
+In our brief time together we've looked at the need for asynchronous IO, the missing computational metaphor, the reactive streams specification, Pivotal's Reactor project, Spring's new reactive groove, Spring Data Kay and reactive MongoDB, Spring MVC-style HTTP endpoints, functional programming with Java 8 and functional reactive HTTP endpoints, reactive websockets, integration with non-reactive event sources and - through it all - testing! But this is just the beginning. We're missing security and a slick HTML client, after all...
 
+== Secure Your Reactive API with OIDC
 
+OIDC is an extension on top of OAuth 2.0 that allows you to have authentication as part of your flow. If you use OAuth 2.0 without OIDC, you will only know that a person is allowed to access your API. You won't know who they are. OIDC adds a ID Token in addition to an access token, and it also provides a number of other niceties that make it easier to use OAuth 2.0.
 
+Using OIDC to secure your Spring WebFlux API is as simple as adding the Spring Security starter and a few of its friends. While you're at it, upgrade to the latest Spring Boot 2.1.0 milestone release.
 
+// are we already using Spring Boot 2.1? If not, we should so it's easy to update this post when it comes out.
+
+[source,xml]
+----
+<?xml version="1.0" encoding="UTF-8"?>
+<project>
+    ...
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>2.1.0.M3</version>
+        <relativePath/> <!-- lookup parent from repository -->
+    </parent>
+
+    <dependencies>
+        ...
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-security</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-config</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-oauth2-client</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-oauth2-jose</artifactId>
+        </dependency>
+    </dependencies>
+
+    <build...>
+
+    <pluginRepositories>
+        <pluginRepository>
+            <id>spring-snapshots</id>
+            <name>Spring Snapshots</name>
+            <url>https://repo.spring.io/libs-snapshot</url>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
+        </pluginRepository>
+    </pluginRepositories>
+    <repositories>
+        <repository>
+            <id>spring-snapshots</id>
+            <name>Spring Snapshot</name>
+            <url>https://repo.spring.io/libs-snapshot</url>
+        </repository>
+    </repositories>
+</project>
+----
+
+== Add Authentication with Okta
+
+OIDC requires an identity provider (or IdP). You can use many well-known ones like Google or Facebook, but those services don't allow you to manage your users like you would in Active Directory. Okta allows this, _and_ you can use Okta's API for OIDC.
+
+At Okta, our goal is to make https://developer.okta.com/product/user-management/[identity management] a lot easier, more secure, and more scalable than what you're used to. Okta is a cloud service that allows developers to create, edit, and securely store user accounts and user account data, and connect them with one or multiple applications. Our API enables you to:
+
+* https://developer.okta.com/product/authentication/[Authenticate] and https://developer.okta.com/product/authorization/[authorize] your users
+* Store data about your users
+* Perform password-based and https://developer.okta.com/authentication-guide/social-login/[social login]
+* Secure your application with https://developer.okta.com/use_cases/mfa/[multi-factor authentication]
+* And much more! Check out our https://developer.okta.com/documentation/[product documentation]
+
+Giddyup! [Register for a forever-free developer account](https://developer.okta.com/signup/), and when you're done, come on back so you can learn more about how to secure your reactive API!
+
+=== Create an OIDC App in Okta
+
+{uri-okta-login}[Log in] to your Okta Developer account (or https://developer.okta.com/signup/[sign up] if you don't one). Navigate to **Applications** > **Add Application**. Click **Web** and click **Next**. Give the app a name you'll remember, and specify `http://localhost:8080/login/oauth2/code/okta` as a Login redirect URI. Click **Done**, then click **Edit** to edit General Settings. Add `http://localhost:8080` as Logout redirect URIs, then click **Save**.
+
+Copy and paste the URI of your default authorization server, client ID, and the client secret into `src/main/resources/application.yml`. Create this file, and you can delete the `application.properties` file in the same directory.
+
+```yaml
+spring:
+  security:
+    oauth2:
+      client:
+        registration:
+          okta:
+            client-id: {clientId}
+            client-secret: {clientSecret}
+            scope: openid email profile
+        provider:
+          okta:
+            issuer-uri: https://{yourOktaDomain}/oauth2/default
+```
+
+Restart your Spring Boot app, and try to access `http://localhost:8080`. You'll be redirected to Okta to login, then you'll be able to see your data.
+
+// todo: show how to generate an access token, and access using curl or httpie
+
+== Learn More About Reactive Programming, Spring WebFlux, and OIDC
+
+This article showed you how to develop a reactive API with Spring WebFlux and secure it using Spring Security's excellent OIDC support. In a future post, we'll show you how to create a React UI for this API and provide you with techniques for handling streaming data on the client side.
+
+In the meantime, here's some good articles you can read on reactive programming, Spring WebFlux, and OIDC.
+
+* reactive programming (the manifesto?)
+* Spring WebFlux stuff (got a video or screencast?)
+* https://developer.okta.com/blog/2018/07/19/simple-crud-react-and-spring-boot[Use React and Spring Boot to Build a Simple CRUD App]
+// todo: why no paragraph break after this list?
+
+Have questions? Please leave a comment below, hit up https://twitter.com/starbuxman[@starbuxman] or https://twitter.com/mraible[@mraible] on Twitter, or post a question on our https://devforum.okta.com/[Developer Forums].
+
+Like what you learned today? Follow https://twitter.com/oktadev[@oktadev], like us https://www.facebook.com/oktadevelopers/[on Facebook], follow us https://www.linkedin.com/company/oktadev/[on LinkedIn], and https://www.youtube.com/channel/UC5AMiWqFVFxF1q9Ya1FuZ_Q[subscribe to our YouTube channel]. We publish lots of interesting information for developers!
