@@ -50,3 +50,13 @@ class Synchronous implements Reader {
 <2> _pull_ the results out of the source one line at a time..
 <3> I've written this code to accept a `Consumer<BytesPayload>` that gets called when there's new data
 ====
+
+Image tests:
+
+++++
+{% img blog/electron-react-appauth-js/developer-tools.png alt:"Electron's Developer Tools" width:"800" class:"center-image" %}
+++++
+
+asset path: {% asset_path 'blog/electron-react-appauth-js/developer-tools.png' %}
+
+image::{% asset_path 'blog/electron-react-appauth-js/developer-tools.png' %}[alt=Electron's Developer Tools,width=800,align=center]
