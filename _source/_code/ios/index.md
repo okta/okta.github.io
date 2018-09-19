@@ -34,8 +34,8 @@ New to Okta? Our quickstart will walk you through adding user authentication to 
 
 The Okta AppAuth iOS SDK is a wrapper around the AppAuth-iOS SDK for communicating with OAuth 2.0 and OpenID Connect (OIDC) providers.
 
-<a href='https://cocoapods.org/pods/OktaAuth'>
-	<span class='fa fa-download'></span> <span>OktaAuth on CocoaPods</span>
+<a href='https://cocoapods.org/pods/OktaAuth' class="language-reference">
+	<span class='icon download-16'></span> <span>OktaAuth on CocoaPods</span>
 </a>
 
 <a href='https://github.com/okta/okta-sdk-appauth-ios'>

@@ -33,8 +33,8 @@ New to Okta? Our quickstart will walk you through adding user authentication to 
 The Okta Vue SDK is a wrapper around the Okta Auth SDK for communicating with OAuth 2.0 and OpenID Connect (OIDC) providers.
 
 
-<a href='https://www.npmjs.com/package/@okta/okta-vue'>
-	<span class='fa fa-download'></span> 
+<a href='https://www.npmjs.com/package/@okta/okta-vue' class="language-reference">
+	<span class='icon download-16'></span> 
 	<span>okta-vue on npm</span>
 </a>
 

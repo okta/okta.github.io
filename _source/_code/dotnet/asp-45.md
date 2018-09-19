@@ -43,8 +43,8 @@ integration: back-end
 
 Okta's integration with ASP.NET makes it easy to add sign-in to your ASP.NET MVC applications and Web APIs.
 
-<a href='https://www.nuget.org/packages/Okta.AspNet'>
-	<span class='fa fa-download'></span> 
+<a href='https://www.nuget.org/packages/Okta.AspNet' class="language-reference">
+	<span class='icon download-16'></span> 
 	<span>Okta.AspNet on NuGet</span>
 </a>
 

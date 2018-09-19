@@ -28,8 +28,8 @@ New to Okta? Our Go resources will help you add user authentication to your Go a
 The Okta management SDK for Go can be used in your server-side code to create and update users, groups, applications, and more.
 
 
-<a href='https://github.com/okta/okta-sdk-golang'>
-	<span class='fa fa-download'></span> 
+<a href='https://github.com/okta/okta-sdk-golang' class="language-reference">
+	<span class='icon download-16'></span> 
 	<span>Go Get</span>
 </a>
 

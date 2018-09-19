@@ -1805,8 +1805,15 @@ h1 {
 
 .code-go::after,
 .code-go-32::after {
-  content: $code-rest;
-  color: #375EAB;
+  content: $code-go;
+  color: #7BC6EF;
+  position: relative;
+}
+
+.code-spring::after,
+.code-spring-32::after {
+  content: $code-spring;
+  color: #84DD72;
   position: relative;
 }
 
@@ -1857,9 +1864,11 @@ h1 {
 .code-xamarin-32::before,
 .code-react::before,
 .code-react-32::before,
-.code-rest::before,
 .code-go::before,
 .code-go-32::before,
+.code-spring::before,
+.code-spring-32::before,
+.code-rest::before,
 .code-rest-32::before {
   content: $code-background;
   color: #fff;

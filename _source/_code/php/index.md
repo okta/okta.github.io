@@ -32,8 +32,8 @@ New to Okta? Our quickstart will walk you through adding user authentication to 
 
 The Okta PHP SDK can be used in your server-side code to create and update users.
 
-<a href='http://packagist.org/packages/okta/sdk'>
-	<span class='fa fa-download'></span> <span>okta/sdk on Packagist</span>
+<a href='http://packagist.org/packages/okta/sdk' class="language-reference">
+	<span class='icon download-16'></span> <span>okta/sdk on Packagist</span>
 </a>
 
 <p class="language-reference">

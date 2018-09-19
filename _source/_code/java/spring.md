@@ -5,7 +5,7 @@ language: Java
 integration: back-end
 ---
 
-# <i class='icon-48 docsPage code-java'></i> Add Identity Mangement to Your Spring App
+# <i class='icon-48 docsPage code-spring'></i> Add Identity Mangement to Your Spring App
 
 <ul class='language-tabs'>
 	<li>

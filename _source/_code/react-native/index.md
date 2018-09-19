@@ -32,8 +32,8 @@ New to Okta? Our quickstart will walk you through adding user authentication to 
 
 The Okta React Native client makes it easy to add authentication to your React Native app with Okta's OpenID Connect API.
 
-<a href='https://www.npmjs.com/package/@okta/okta-react-native'>
-	<span class='fa fa-download'></span> <span>okta-react-native on npm</span>
+<a href='https://www.npmjs.com/package/@okta/okta-react-native' class="language-reference">
+	<span class='icon download-16'></span> <span>okta-react-native on npm</span>
 </a>
 
 <a href='https://github.com/okta/okta-oidc-js/tree/master/packages/okta-react-native'>

@@ -32,8 +32,8 @@ New to Okta? Our quickstart will walk you through adding user authentication to 
 
 Auth.js is a library wrapper for the Okta Authentication API. Use it when you need complete control of your sign in experience, or use the Okta Sign-In Widget for a pre-built, customizable experience.
 
-<a href='https://www.npmjs.com/package/@okta/okta-auth-js'>
-	<span class='fa fa-download'></span> <span>okta-auth-js on npm</span>
+<a href='https://www.npmjs.com/package/@okta/okta-auth-js' class="language-reference">
+	<span class='icon download-16'></span> <span>okta-auth-js on npm</span>
 </a>
 
 <a href='https://github.com/okta/okta-auth-js'>

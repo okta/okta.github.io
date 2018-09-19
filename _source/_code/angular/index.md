@@ -32,8 +32,8 @@ New to Okta? Our quickstart will walk you through adding user authentication to 
 
 The Okta Angular SDK builds on top of the Okta OpenID Connect API to help you create a fully-branded sign-experience.
 
-<a href='https://www.npmjs.com/package/@okta/okta-angular'>
-	<span class='fa fa-download'></span> <span>Okta-angular on npm</span>
+<a href='https://www.npmjs.com/package/@okta/okta-angular' class="language-reference">
+	<span class='icon download-16'></span> <span>Okta-angular on npm</span>
 </a>
 
 <a href='https://github.com/okta/okta-oidc-js/tree/master/packages/okta-angular'>

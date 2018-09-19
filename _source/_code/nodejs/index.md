@@ -32,8 +32,8 @@ New to Okta? Our quickstart will walk you through adding user authentication to 
 
 The Okta Node.js SDK can be used in your server-side code to create and update users and groups.
 
-<a href='https://www.npmjs.com/package/@okta/okta-sdk-nodejs'>
-	<span class='fa fa-download'></span> <span>okta-sdk-nodejs on npm</span>
+<a href='https://www.npmjs.com/package/@okta/okta-sdk-nodejs' class="language-reference">
+	<span class='icon download-16'></span> <span>okta-sdk-nodejs on npm</span>
 </a>
 
 <p class="language-reference">
