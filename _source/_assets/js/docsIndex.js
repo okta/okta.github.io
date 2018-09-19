@@ -8,6 +8,7 @@
     { name: 'javascript', label: 'JavaScript' },
     { name: 'vue', label: 'Vue.js' },
     { name: 'java', label: 'Java' },
+    { name: 'go', label: 'Go' },
     { name: 'dotnet', label: '.NET' },
     { name: 'nodejs', label: 'Node.js' },
     { name: 'php', label: 'PHP' },
