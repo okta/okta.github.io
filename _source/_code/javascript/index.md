@@ -1,45 +1,96 @@
 ---
-layout: software
+layout: language
 title: Add Okta authentication to your JavaScript app
 language: JavaScript
-integration: client
+integration: front-end
 ---
 
-# Add Okta authentication to your JavaScript app
+# <i class='icon-48 docsPage code-javascript'></i> Add Identity Mangement to Your JavaScript App
 
-New to Okta? Our Quick Start Guide will walk you through adding user authentication to your JavaScript application in minutes.
+<ul class='language-tabs'>
+    <li >
+        <a href='/code/angular/'>
+            <i class='icon code-angular-32'></i><span>Angular</span>
+        </a>
+    </li>
+    <li class="active">
+        <a href='/code/javascript/'>
+            <i class='icon code-javascript-32'></i><span>Vanilla JS</span>
+        </a>
+    </li>
+    <li>
+        <a href='/code/react/'>
+            <i class='icon code-react-32'></i><span>React</span>
+        </a>
+    </li>
+    <li>
+        <a href='/code/vue/'>
+            <i class='icon code-vue-32'></i><span>Vue.JS</span>
+        </a>
+    </li>
+</ul>
 
-<ul class='code-list'>
+## Get Started with JavaScript + Okta
+
+New to Okta? Our quickstart will walk you through adding user authentication to your JavaScript app in minutes.
+
+<ul class='language-ctas'>
   <li>
-    <a href='/quickstart/#/okta-sign-in-page/nodejs/express' class='code-button inverse' data-proofer-ignore>
-      <span class='code-icon launch-16'></span><span>Authentication Quick Start Guide</span>
+    <a href='/signup/' class='code-button highlighted' data-proofer-ignore>
+      <span>Create Free Account</span>
     </a>
   </li>
   <li>
-    <a href='https://github.com/okta/samples-nodejs-express-4' class='code-button'>
-      <span class='fa fa-github'></span><span>JavaScript Sample App</span>
+    <a href='/quickstart/#/widget' class='code-button inverse' data-proofer-ignore>
+      <span>Javascript Quick Start</span>
     </a>
   </li>
 </ul>
 
-## Okta Auth SDK
+<a href='https://github.com/oktadeveloper/okta-vanilla-js-example'>
+  <span class='fa fa-github'></span> <span>JavaScript Sample App</span>
+</a>
 
-The Auth SDK builds on top of our Authentication API and OAuth 2.0 API to enable you to create a fully branded sign-in experience using JavaScript.  This SDK is meant to be used in front-end applications.
+## Okta JavaScript Authentication SDK
 
-<ul class='code-list'>
-  <li><span class='code-icon launch-16'></span> <a href='/code/javascript/okta_auth_sdk'>Okta Auth SDK Guide</a></li>
-  <li><span class='code-icon expression-16'></span> <a href='https://github.com/okta/okta-auth-js'>Okta Auth SDK Source &amp; API Reference</a></li>
+Auth.js is a library wrapper for the Okta Authentication API. Use it when you need complete control of your sign in experience, or use the Okta Sign-In Widget for a pre-built, customizable experience.
+
+<p class="language-reference">
+  <a href='https://www.npmjs.com/package/@okta/okta-auth-js' class="language-reference">
+    <span class='icon expression-16'></span> 
+    <span>okta-auth-js on npm</span>
+  </a>
+</p>
+
+<a href='https://github.com/okta/okta-auth-js'>
+  <span class='fa fa-github'></span> <span>JavaScript SDK Source</span>
+</a>
+
+## JavaScript Libraries
+
+<ul class="language-libraries">
+	<li>
+		<a href="https://github.com/okta/okta-signin-widget">
+			<span class='fa fa-github'></span> <span>Okta Sign-In Widget</span>
+		</a>
+	</li>
 </ul>
 
-## Okta Sign-In Widget
+## Recommended Guides
 
-The Okta Sign-In Widget is a JavaScript library that gives you a pre-built, customizable login experience which can be used to authenticate users on any website.
-
-<ul class='code-list'>
-  <li>
-    <span class='code-icon expression-16'></span> <a href='/code/javascript/okta_sign-in_widget'>Okta Sign-In Widget Guide</a>
-  </li>
-  <li>
-    <span class='fa fa-github'></span> <a href='https://github.com/okta/okta-signin-widget'>Okta Sign-In Widget Source &amp; API Reference</a>
-  </li>
+<ul class="language-list">
+	<li><a href="https://developer.okta.com/code/javascript/okta_auth_sdk">Okta Auth SDK Guide</a></li>
+	<li><a href="https://developer.okta.com/code/javascript/okta_sign-in_widget">Okta Sign-In Widget Guide</a></li>
+	<li><a href="https://developer.okta.com/authentication-guide/implementing-authentication/implicit">Implementing the Implicit Flow</a></li>
+	<li><a href="https://developer.okta.com/authentication-guide/social-login/">Social Login</a></li>
+	<li><a href="https://developer.okta.com/authentication-guide/tokens/">Working With OAuth 2.0 Tokens</a></li>
 </ul>
+
+## Related Blog Posts
+
+<ul class="language-list">
+	<li><a href="https://developer.okta.com/blog/2018/06/05/authentication-vanilla-js">Add Authentication to Your Vanilla JavaScript App in 20 Minutes</a></li>
+	<li><a href="https://developer.okta.com/blog/2018/05/08/build-video-chat-app-with-javascript-webrtc-and-okta">Build a Video Chat Service with JavaScript, WebRTC, and Okta</a></li>
+</ul>
+
+

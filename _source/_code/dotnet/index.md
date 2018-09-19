@@ -1,13 +1,11 @@
 ---
-layout: software
+layout: language
 title: Add Okta to your .NET app
 language: .NET
-integration: server
+integration: back-end
 ---
 
-# Add Okta authentication to your .NET app
-
-New to Okta? Our Quick Start Guide will walk you through adding user authentication to your .NET application in minutes.
+# <i class='icon-48 docsPage code-dotnet'></i> Add Identity Mangement to Your .Net App
 
 <ul class='code-list'>
   <li>

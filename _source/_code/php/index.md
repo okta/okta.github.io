@@ -1,11 +1,11 @@
 ---
-layout: software
+layout: language
 title: Add Okta authentication to your PHP app
 language: PHP
-integration: server
+integration: back-end
 ---
 
-# Add Okta authentication to your PHP app
+# <i class='icon-48 docsPage code-php'></i> Add Okta authentication to your PHP app
 
 New to Okta? Our Quick Start Guide will walk you through adding user authentication to your PHP application in minutes.
 

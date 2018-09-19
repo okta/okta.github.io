@@ -1,28 +1,89 @@
 ---
-layout: software
+layout: language
 title: Add Okta authentication to your React app
 language: React
-integration: client
+integration: front-end
 ---
 
-# Add Okta authentication to your React app
+# <i class='icon-48 docsPage code-react'></i> Add Identity Mangement to Your React App
 
-New to Okta? Our Quick Start Guide will walk you through adding user authentication to your React application in minutes, or download a complete sample application to see our recommended usage.
+<ul class='language-tabs'>
+    <li >
+        <a href='/code/angular/'>
+            <i class='icon code-angular-32'></i><span>Angular</span>
+        </a>
+    </li>
+    <li>
+        <a href='/code/javascript/'>
+            <i class='icon code-javascript-32'></i><span>Vanilla JS</span>
+        </a>
+    </li>
+    <li class="active">
+        <a href='/code/react/'>
+            <i class='icon code-react-32'></i><span>React</span>
+        </a>
+    </li>
+    <li>
+        <a href='/code/vue/'>
+            <i class='icon code-vue-32'></i><span>Vue.JS</span>
+        </a>
+    </li>
+</ul>
 
-<ul class='code-list'>
+## Get Started with React + Okta
+
+New to Okta? Our quickstart will walk you through adding user authentication to your React app in minutes.
+
+<ul class='language-ctas'>
   <li>
-    <a href='/quickstart/#/react/nodejs/generic' class='code-button inverse' data-proofer-ignore>
-      <span class='code-icon launch-16'></span><span>Authentication Quick Start Guide</span>
+    <a href='/signup/' class='code-button highlighted' data-proofer-ignore>
+      <span>Create Free Account</span>
     </a>
   </li>
   <li>
-    <a href='https://github.com/okta/samples-js-react' class='code-button'>
-      <span class='fa fa-github'></span><span>React Sample Applications</span>
+    <a href='/quickstart/#/react' class='code-button inverse' data-proofer-ignore>
+      <span>React Quick Start</span>
     </a>
   </li>
 </ul>
 
-## Guides
+<a href='https://github.com/okta/samples-js-react'>
+  <span class='fa fa-github'></span> <span>React Sample App</span>
+</a>
 
-<p><a href='okta_react_sign-in_widget'>Adding a custom login page to your React application</a></p>
-<p><a href='okta_react'>Using the Auth JS SDK in your React application</a></p>
+## Okta React SDK
+
+The Okta React SDK makes it easy to integrate react-router with Okta's OpenID Connect API to authenticate your users.
+
+<p class="language-reference">
+  <a href='https://www.npmjs.com/package/@okta/okta-react' class="language-reference">
+    <span class='icon expression-16'></span> 
+    <span>okta-react on npm</span>
+  </a>
+</p>
+
+<a href='https://github.com/okta/okta-oidc-js/tree/master/packages/okta-react'>
+  <span class='fa fa-github'></span> <span>React SDK Source</span>
+</a>
+
+## Recommended Guides
+
+<ul class="language-list">
+	<li><a href="https://developer.okta.com/code/react/okta_react"></a></li>
+	<li><a href="https://developer.okta.com/authentication-guide/implementing-authentication/implicit">Implementing the Implicit Flow</a></li>
+	<li><a href="https://developer.okta.com/authentication-guide/social-login/">Social Login</a></li>
+	<li><a href="https://developer.okta.com/authentication-guide/tokens/">Working With OAuth 2.0 Tokens</a></li>
+</ul>
+
+https://developer.okta.com/code/react/okta_react_sign-in_widget
+
+https://developer.okta.com/authentication-guide/implementing-authentication/implicit
+https://developer.okta.com/authentication-guide/social-login/
+https://developer.okta.com/authentication-guide/tokens/
+
+## Related Blog Posts
+
+<ul class="language-list">
+	<li><a href="https://developer.okta.com/blog/2018/06/05/authentication-vanilla-js">Add Authentication to Your Vanilla JavaScript App in 20 Minutes</a></li>
+	<li><a href="https://developer.okta.com/blog/2018/05/08/build-video-chat-app-with-javascript-webrtc-and-okta">Build a Video Chat Service with JavaScript, WebRTC, and Okta</a></li>
+</ul>

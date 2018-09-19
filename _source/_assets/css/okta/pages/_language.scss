@@ -30,6 +30,13 @@
 		h1 {
 			margin-top: get-spacing('small');
 			margin-bottom: get-spacing('medium');
+			padding-left: 60px;
+		    position: relative;
+
+		    .icon-48 {
+				position: absolute;
+			    left: 0px;
+		    }
 		}
 
 		h2 {

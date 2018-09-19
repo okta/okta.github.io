@@ -1,48 +1,116 @@
 ---
-layout: software
+layout: language
 title: Add Okta authentication to your Java app
 language: Java
-integration: server
+integration: back-end
 ---
 
-# Add Okta authentication to your Java app
+# <i class='icon-48 docsPage code-java'></i> Add Identity Mangement to Your Java App
 
-New to Okta? Our Quick Start Guide will walk you through adding user authentication to your Java application in minutes.
+<ul class='language-tabs'>
+    <li >
+        <a href='/code/go/'>
+            <i class='icon code-go-32'></i><span>Go</span>
+        </a>
+    </li>
+    <li class="active">
+        <a href='/code/java/'>
+            <i class='icon code-java-32'></i><span>Java</span>
+        </a>
+    </li>
+    <li>
+        <a href='/code/dotnet/'>
+            <i class='icon code-dotnet-32'></i><span>.Net</span>
+        </a>
+    </li>
+    <li>
+        <a href='/code/nodeje/'>
+            <i class='icon code-nodejs-32'></i><span>Node.js</span>
+        </a>
+    </li>
+    <li>
+        <a href='/code/php/'>
+            <i class='icon code-php-32'></i><span>PHP</span>
+        </a>
+    </li>
+    <li>
+        <a href='/code/rest/'>
+            <i class='icon code-rest-32'></i><span>Rest</span>
+        </a>
+    </li>
+</ul>
 
-<ul class='code-list'>
+## Get Started with Java + Okta
+
+New to Okta? Our Java resources will help you add user authentication to your Java app.
+
+<ul class='language-ctas'>
   <li>
-    <a href='/quickstart/#/okta-sign-in-page/java/spring' class='code-button inverse' data-proofer-ignore>
-      <span class='code-icon launch-16'></span><span>Authentication Quick Start Guide</span>
-    </a>
-  </li>
-  <li>
-    <a href='https://github.com/okta/samples-java-spring-mvc' class='code-button'>
-      <span class='fa fa-github'></span><span>Java Sample App</span>
+    <a href='/signup/' class='code-button highlighted' data-proofer-ignore>
+      <span>Create Free Account</span>
     </a>
   </li>
 </ul>
 
-## Java Management SDK
+## Okta Management SDK for Java
 
-Once your users can sign in to your app, use Okta's Management API and SDKs to configure resources and manage your users.
+The Okta Java SDK can be used in your server-side code to create and update users, groups, and more.
 
-<ul class='code-list'>
-  <li>
-    <span class='code-icon expression-16'></span> <a href='https://developer.okta.com/okta-sdk-java/apidocs/'>Java SDK Reference</a>
-  </li>
-  <li>
-    <span class='fa fa-github'></span> <a href='https://github.com/okta/okta-sdk-java'>Java SDK Source</a>
-  </li>
-</ul>
+<p class="language-reference">
+  <a href='https://developer.okta.com/okta-sdk-java/apidocs/' class="language-reference">
+    <span class='icon expression-16'></span> 
+    <span>Okta Java SDK</span>
+  </a>
+</p>
+
+<a href='https://github.com/okta/okta-sdk-java'>
+  <span class='fa fa-github'></span> <span>Java SDK Source</span>
+</a>
 
 ## Java Libraries
 
-<ul class='code-list'>
-  <li>
-    <span class='fa fa-github'></span> <a href='https://github.com/okta/okta-jwt-verifier-java'>Okta JWT Verifier for Java</a>
-  </li>
+<ul class="language-libraries">
+	<li>
+		<a href="https://github.com/okta/okta-auth-java">
+			<span class='fa fa-github'></span> <span>Okta Java Authentication SDK</span>
+		</a>
+	</li>
+	<li>
+		<a href="https://github.com/okta/okta-jwt-verifier-java">
+			<span class='fa fa-github'></span> <span>Okta JWT Verifier for Java</span>
+		</a>
+	</li>
 </ul>
 
-## Guides
+## Recommended Guides
 
-<p><a href='spring_security_saml'>Using Spring Security to add SAML support for Okta</a></p>
+<ul class="language-list">
+	<li><a href="https://developer.okta.com/authentication-guide/implementing-authentication/auth-code">Implement the Authorization Code Flow</a></li>
+	<li><a href="https://developer.okta.com/authentication-guide/social-login/">Social Login</a></li>
+	<li><a href="https://developer.okta.com/authentication-guide/tokens/">Working With OAuth 2.0 Tokens</a></li>
+</ul>
+
+## Related Blog Posts
+
+<ul class="language-list">
+	<li>
+		<a href="https://developer.okta.com/blog/2017/08/23/five-java-tips">5 Tips for Building your Java API</a>
+	</li>
+	<li>
+		<a href="https://developer.okta.com/blog/2017/09/08/nosql-options-for-java-developers">NoSQL Options for Java Developers</a>
+	</li>
+	<li>
+		<a href="https://developer.okta.com/blog/2015/12/02/tls-client-authentication-for-services">TLS Client Authentication for Internal Services</a>
+	</li>
+	<li>
+		<a href="https://developer.okta.com/blog/2017/10/31/add-authentication-to-play-framework-with-oidc">Add Authentication to Play Framework with OIDC and Okta</a>
+	</li>
+	<li>
+		<a href="https://developer.okta.com/blog/2018/04/19/okta-with-grails">Build Server Side Authentication in Grails with OAuth 2.0 and Okta</a>
+	</li>
+</ul>
+
+
+
+
+

@@ -1803,6 +1803,13 @@ h1 {
   position: relative;
 }
 
+.code-go::after,
+.code-go-32::after {
+  content: $code-rest;
+  color: #375EAB;
+  position: relative;
+}
+
 .code-widget::after,
 .code-widget-32::after {
   content: $aura;
@@ -1851,6 +1858,8 @@ h1 {
 .code-react::before,
 .code-react-32::before,
 .code-rest::before,
+.code-go::before,
+.code-go-32::before,
 .code-rest-32::before {
   content: $code-background;
   color: #fff;

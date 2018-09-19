@@ -1,11 +1,11 @@
 ---
-layout: software
+layout: language
 title: Add Okta authentication to your Node.js app
 language: Node.js
-integration: server
+integration: back-end
 ---
 
-# Add Okta authentication to your Node.js app
+# <i class='icon-48 docsPage code-nodejs'></i> Add Okta authentication to your Node.js app
 
 New to Okta? Our Quick Start Guide will walk you through adding user authentication to your Node.js application in minutes.
 

@@ -5,7 +5,7 @@ language: Lorem Ipsum
 integration: client
 ---
 
-# <i class='icon-48 docsPage code-java'></i> Add Okta to your Lorem Ipsum App
+# <i class='icon-48 docsPage code-java'></i> Add Identity Mangement to your Lorem Ipsum App
 
 <ul class='language-tabs'>
     <li>
@@ -18,7 +18,7 @@ integration: client
             <i class='icon code-php-32'></i><span>Ipsum</span>
         </a>
     </li>
-    <li>
+    <li class="active">
         <a href='#'>
             <i class='icon code-android-32'></i><span>Dolor</span>
         </a>
