@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html class="no-js" lang="en" dir="ltr">
+<html class="no-js {% unless page.toc %}no-toc{% endunless %}" lang="en" dir="ltr">
 {% include head.html %}
 <body>
   <div class="Page {{ page.title | slugify: 'pretty' }} {% if layout.variant == 'docs_base' %}Page--docs-page{% endif %}">
