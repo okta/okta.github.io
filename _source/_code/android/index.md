@@ -19,7 +19,7 @@ New to Okta? Our quickstart will walk you through adding user authentication to 
 	</li>
 	<li>
 		<a href='/quickstart/#/widget' class='code-button inverse' data-proofer-ignore>
-			<span>Javascript Quick Start</span>
+			<span>Android Quick Start</span>
 		</a>
 	</li>
 </ul>
