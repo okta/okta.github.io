@@ -78,9 +78,22 @@
     .Sidebar {
       background: get-color('ebony-clay');
 
+    	&.no-promo {
+			margin-top: 20px;
+		}
+
+
       &-location {
         color: get-color('white');
       }
     }
+  }
+
+  @include media('<860px') {
+	.Sidebar {
+		&.no-promo {
+			margin-top: 0;
+		}
+	}
   }
 }

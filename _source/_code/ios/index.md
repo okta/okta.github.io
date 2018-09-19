@@ -4,63 +4,42 @@ title: Add Okta authentication to your Swift app
 language: iOS
 integration: mobile
 redirect_from:
-  - '/code/swift/'
+- '/code/swift/'
 ---
 
 # <i class='icon-48 docsPage code-ios'></i> Add Identity Mangement to Your iOS App
-
-<ul class='language-tabs'>
-    <li>
-        <a href='/code/android/'>
-            <i class='icon code-android-32'></i><span>Android</span>
-        </a>
-    </li>
-    <li class="active">
-        <a href='/code/ios/'>
-            <i class='icon code-ios-32'></i><span>iOS</span>
-        </a>
-    </li>
-    <li>
-        <a href='/code/react-native/'>
-            <i class='icon code-react-32'></i><span>React Native</span>
-        </a>
-    </li>
-</ul>
 
 ## Get Started with iOS + Okta
 
 New to Okta? Our quickstart will walk you through adding user authentication to your iOS app in minutes.
 
 <ul class='language-ctas'>
-  <li>
-    <a href='/signup/' class='code-button highlighted' data-proofer-ignore>
-      <span>Create Free Account</span>
-    </a>
-  </li>
-  <li>
-    <a href='/quickstart/#/ios' class='code-button inverse' data-proofer-ignore>
-      <span>iOS Quick Start</span>
-    </a>
-  </li>
+	<li>
+		<a href='https://developer.okta.com/signup/' class='code-button highlighted' data-proofer-ignore>
+			<span>Create Free Account</span>
+		</a>
+	</li>
+	<li>
+		<a href='/quickstart/#/ios' class='code-button inverse' data-proofer-ignore>
+			<span>iOS Quick Start</span>
+		</a>
+	</li>
 </ul>
 
 <a href='https://github.com/okta/okta-sdk-appauth-ios'>
-  <span class='fa fa-github'></span> <span>iOS Sample App</span>
+	<span class='fa fa-github'></span> <span>iOS Sample App</span>
 </a>
 
 ## Okta iOS SDK
 
 The Okta AppAuth iOS SDK is a wrapper around the AppAuth-iOS SDK for communicating with OAuth 2.0 and OpenID Connect (OIDC) providers.
 
-<p class="language-reference">
-  <a href='https://cocoapods.org/pods/OktaAuth' class="language-reference">
-    <span class='icon expression-16'></span> 
-    <span>OktaAuth on CocoaPods</span>
-  </a>
-</p>
+<a href='https://cocoapods.org/pods/OktaAuth'>
+	<span class='fa fa-download'></span> <span>OktaAuth on CocoaPods</span>
+</a>
 
 <a href='https://github.com/okta/okta-sdk-appauth-ios'>
-  <span class='fa fa-github'></span> <span>iOS SDK Source</span>
+	<span class='fa fa-github'></span> <span>iOS SDK Source</span>
 </a>
 
 ## iOS Libraries
@@ -92,4 +71,3 @@ The Okta AppAuth iOS SDK is a wrapper around the AppAuth-iOS SDK for communicati
 	<li><a href="https://developer.okta.com/blog/2018/01/30/jhipster-ionic-with-oidc-authentication">Use Ionic for JHipster to Create Mobile Apps with OIDC Authentication</a></li>
 	<li><a href="https://developer.okta.com/blog/2018/05/01/add-authentication-xamarin-openid-connect">Add Authentication to Your Xamarin App with OpenID Connect</a></li>
 </ul>
-	

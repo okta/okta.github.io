@@ -8,36 +8,16 @@ integration: back-end
 # <i class='icon-48 docsPage code-java'></i> Add Identity Mangement to Your Java App
 
 <ul class='language-tabs'>
-    <li >
-        <a href='/code/go/'>
-            <i class='icon code-go-32'></i><span>Go</span>
-        </a>
-    </li>
-    <li class="active">
-        <a href='/code/java/'>
-            <i class='icon code-java-32'></i><span>Java</span>
-        </a>
-    </li>
-    <li>
-        <a href='/code/dotnet/'>
-            <i class='icon code-dotnet-32'></i><span>.Net</span>
-        </a>
-    </li>
-    <li>
-        <a href='/code/nodeje/'>
-            <i class='icon code-nodejs-32'></i><span>Node.js</span>
-        </a>
-    </li>
-    <li>
-        <a href='/code/php/'>
-            <i class='icon code-php-32'></i><span>PHP</span>
-        </a>
-    </li>
-    <li>
-        <a href='/code/rest/'>
-            <i class='icon code-rest-32'></i><span>Rest</span>
-        </a>
-    </li>
+	<li class="active">
+		<a href='/code/java/'>
+			<i class='icon code-java-32'></i><span>Java</span>
+		</a>
+	</li>
+	<li >
+		<a href='/code/java/spring.html'>
+			<i class='icon code-spring-32'></i><span>Spring</span>
+		</a>
+	</li>
 </ul>
 
 ## Get Started with Java + Okta
@@ -45,11 +25,11 @@ integration: back-end
 New to Okta? Our Java resources will help you add user authentication to your Java app.
 
 <ul class='language-ctas'>
-  <li>
-    <a href='/signup/' class='code-button highlighted' data-proofer-ignore>
-      <span>Create Free Account</span>
-    </a>
-  </li>
+	<li>
+		<a href='https://developer.okta.com/signup/' class='code-button highlighted' data-proofer-ignore>
+			<span>Create Free Account</span>
+		</a>
+	</li>
 </ul>
 
 ## Okta Management SDK for Java
@@ -57,14 +37,14 @@ New to Okta? Our Java resources will help you add user authentication to your Ja
 The Okta Java SDK can be used in your server-side code to create and update users, groups, and more.
 
 <p class="language-reference">
-  <a href='https://developer.okta.com/okta-sdk-java/apidocs/' class="language-reference">
-    <span class='icon expression-16'></span> 
-    <span>Okta Java SDK</span>
-  </a>
+	<a href='https://developer.okta.com/okta-sdk-java/apidocs/' class="language-reference">
+		<span class='icon expression-16'></span> 
+		<span>Okta Java SDK Reference</span>
+	</a>
 </p>
 
 <a href='https://github.com/okta/okta-sdk-java'>
-  <span class='fa fa-github'></span> <span>Java SDK Source</span>
+	<span class='fa fa-github'></span> <span>Java SDK Source</span>
 </a>
 
 ## Java Libraries
@@ -109,8 +89,4 @@ The Okta Java SDK can be used in your server-side code to create and update user
 		<a href="https://developer.okta.com/blog/2018/04/19/okta-with-grails">Build Server Side Authentication in Grails with OAuth 2.0 and Okta</a>
 	</li>
 </ul>
-
-
-
-
 

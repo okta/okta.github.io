@@ -808,6 +808,18 @@
 	}
 }
 
+@include media('<doc-min-toc') {
+	.PageContent {
+		flex-direction: column;
+	}
+}
+
+@include media('<large') {
+	.PageContent {
+		padding-left: 40px;
+	}
+}
+
 @include media('<medium') {
 	.PageContent {
 		 padding-top: 0;
@@ -822,12 +834,6 @@
 @include media('<600px') {
 	.PageContent {
 		padding-top: 75px;
-	}
-}
-
-@include media('<large') {
-	.PageContent {
-		padding-left: 40px;
 	}
 }
 

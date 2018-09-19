@@ -7,63 +7,40 @@ integration: front-end
 
 # <i class='icon-48 docsPage code-vue'></i> Add Identity Mangement to Your Vue.js App
 
-<ul class='language-tabs'>
-    <li >
-        <a href='/code/angular/'>
-            <i class='icon code-angular-32'></i><span>Angular</span>
-        </a>
-    </li>
-    <li>
-        <a href='/code/javascript/'>
-            <i class='icon code-javascript-32'></i><span>Vanilla JS</span>
-        </a>
-    </li>
-    <li>
-        <a href='/code/react/'>
-            <i class='icon code-react-32'></i><span>React</span>
-        </a>
-    </li>
-    <li class="active">
-        <a href='/code/vue/'>
-            <i class='icon code-vue-32'></i><span>Vue.JS</span>
-        </a>
-    </li>
-</ul>
-
 ## Get Started with Vue.js + Okta
 
 New to Okta? Our quickstart will walk you through adding user authentication to your Vue.js app in minutes.
 
 <ul class='language-ctas'>
-  <li>
-    <a href='/signup/' class='code-button highlighted' data-proofer-ignore>
-      <span>Create Free Account</span>
-    </a>
-  </li>
-  <li>
-    <a href='/quickstart/#/vue' class='code-button inverse' data-proofer-ignore>
-      <span>Vue.js Quick Start</span>
-    </a>
-  </li>
+	<li>
+		<a href='https://developer.okta.com/signup/' class='code-button highlighted' data-proofer-ignore>
+			<span>Create Free Account</span>
+		</a>
+	</li>
+	<li>
+		<a href='/quickstart/#/vue' class='code-button inverse' data-proofer-ignore>
+			<span>Vue.js Quick Start</span>
+		</a>
+	</li>
 </ul>
 
 <a href='https://github.com/okta/samples-js-vue'>
-  <span class='fa fa-github'></span> <span>Vue.js Sample App</span>
+	<span class='fa fa-github'></span> <span>Vue.js Sample App</span>
 </a>
 
 ## Okta Vue SDK
 
 The Okta Vue SDK is a wrapper around the Okta Auth SDK for communicating with OAuth 2.0 and OpenID Connect (OIDC) providers.
 
-<p class="language-reference">
-  <a href='https://www.npmjs.com/package/@okta/okta-vue' class="language-reference">
-    <span class='icon expression-16'></span> 
-    <span>okta-vue on npm</span>
-  </a>
-</p>
+
+<a href='https://www.npmjs.com/package/@okta/okta-vue'>
+	<span class='fa fa-download'></span> 
+	<span>okta-vue on npm</span>
+</a>
+
 
 <a href='https://github.com/okta/okta-oidc-js/tree/master/packages/okta-vue'>
-  <span class='fa fa-github'></span> <span>Vue.js SDK Source</span>
+	<span class='fa fa-github'></span> <span>Vue.js SDK Source</span>
 </a>
 
 ## Recommended Guides
