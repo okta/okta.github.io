@@ -24,8 +24,7 @@ Spring Boot 2.1 is just around the corner, and with it comes Spring Security 5.1
 
 // Facebook or Twitter - would Instagram and Snapchat be better to appeal to the millenials?
 
-// todo: figure out img tag for asciidoc, this spits out escaped HTML
-{% raw %}{% img blog/spring-webflux-apis/starbuxman.jpg alt:"Josh Long" class:"BlogPost-avatar pull-right img-100px" %}{% endraw %} I collaborated on this post with https://twitter.com/starbuxman[Josh Long], fellow Java Champion, Spring Developer Advocate and all around great guy at Pivotal. I've been a longtime user of Spring, and Josh was the one who first showed me Spring Boot, at a Devoxx Belgium many moons ago. We've been good friends for a while now, sharing the same passion for Java, developers, and building awesome applications.
+image:{% asset_path 'blog/spring-webflux-apis/starbuxman.jpg' %}[alt=Josh Long,role="BlogPost-avatar pull-right img-100px"] I collaborated on this post with https://twitter.com/starbuxman[Josh Long], fellow Java Champion, Spring Developer Advocate and all around great guy at Pivotal. I've been a longtime user of Spring, and Josh was the one who first showed me Spring Boot, at a Devoxx Belgium many moons ago. We've been good friends for a while now, sharing the same passion for Java, developers, and building awesome applications.
 
 Most of the words in this post are from Josh (a.k.a. https://twitter.com/starbuxman[@starbuxman]). I added the part about securing your API with OIDC. Even though I show how to do it with Okta, it should work with any OIDC provider.
 
@@ -260,7 +259,7 @@ Spring Framework 5.0 was released in September 2017. It builds on Reactor and th
 Let's build something! We'll begin our journey, as usual, at my second http://start.Spring.io[favorite place on the internet, the Spring Initializr -  start.Spring.io]. The goal here is to build a new reactive web application that supports reactive data access, and then secure it (reactively!). Select the following dependencies either by using the combo box on the bottom right of the page or by selecting "Switch to the Full Version" and then choosing `DevTools`, `Reactive Web`, `Reactive MongoDB`. and `Lombok`.
 
 .Selections on the Spring Initializr for a new, reactive application.
-{% img blog/spring-webflux-apis/the-spring-initializr.png alt:"the Spring Initializr" width:"800" %}{: .center-image }
+image::{% asset_path 'blog/spring-webflux-apis/the-spring-initializr.png' %}[alt=the Spring Initializr,width=800,align=center]
 
 This will give you a new project with the following layout.
 
