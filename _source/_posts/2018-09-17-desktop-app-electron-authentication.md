@@ -15,6 +15,8 @@ Electron is a framework for building cross-platform desktop applications with we
 
 Electron 2.0 was released in early May 2018, along with changes to the project to adhere to strict semantic versioning. This is good news for developers because it means patch releases will be more stable and new features will come in major versions only. When open source projects use semantic versioning correctly, end users don't see breaking changes as often and tend to be productive.
 
+Electron 3.0 was released on September 18, 2018 and contains major version bumps and some new features. See the [Electron blog](https://electronjs.org/blog/electron-3-0) for more information.
+
 Developing desktop applications with web technologies is an appealing notion. [This tweet](https://twitter.com/gerardsans/status/1026040566868529152) from Gerard Sans nails it in my opinion:
 
 <div style="max-width: 500px; margin: 0 auto">
@@ -54,18 +56,22 @@ Open the `package.json` in this project and make the following changes.
    },
    "files": [
      "built/**"
-@@ -22,10 +22,10 @@
-     "@openid/appauth": "^0.3.5",
+@@ -19,13 +19,13 @@
+   "author": "rahulrav",
+   "license": "MIT",
+   "dependencies": {
+-    "@openid/appauth": "^0.3.5",
++    "@openid/appauth": "^1.1.1",
      "@types/react": "^16.3.17",
      "@types/react-dom": "^16.0.6",
 -    "electron": "^2.0.2",
      "material-design-lite": "^1.3.0"
    },
    "devDependencies": {
--    "typescript": "^2.9.1"
-+    "electron": "^2.0.2",
-+    "typescript": "^3.0.3"
++    "electron": "^3.0.0",
+     "typescript": "^2.9.1"
    }
+ }
 ```
 
 These changes are not necessary, but they will make things easier. The changes in "scripts" make it so compilation will happen before you run `npm run dev` or `npm start`. You're also moving the `electron` dependencies to be a `devDependency` and upgrading TypeScript to the latest version.
@@ -368,3 +374,7 @@ To learn more about Electron, AppAuth, React, and OIDC, check out the following 
 Got questions? Please leave a comment below, [ping me on Twitter](https://twitter.com/mraible), or ask it on our [Developer Forums](https://devforum.okta.com/).
 
 Like what you learned here? Follow [@oktadev](https://twitter.com/oktadev), like us [on Facebook](https://www.facebook.com/oktadevelopers/), follow us [on LinkedIn](https://www.linkedin.com/company/oktadev/), or [watch our videos on YouTube](https://www.youtube.com/channel/UC5AMiWqFVFxF1q9Ya1FuZ_Q).
+
+**Changelog:**
+
+* Sep 19, 2018: Updated to use Electron 3.0.0 and AppAuth 1.1.1. See the example app changes in [okta-appauth-js-electron-example#1](https://github.com/oktadeveloper/okta-appauth-js-electron-example/pull/1); changes to this post can be viewed in [okta.github.io#2327](https://github.com/okta/okta.github.io/pull/2327).
