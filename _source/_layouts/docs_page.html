@@ -11,6 +11,7 @@ variant: docs_base
         <a id="edit-link" href="{{ site.github_edit_url }}{{ page.relative_path }}" data-proofer-ignore>Edit Page</a>
       {{ content }}
       </div>
+      {% if page.toc %}
       <div class="TableOfContents TableOfContentsPreload">
         <div class="TableOfContents-item is-level1">
           <script>
@@ -19,4 +20,5 @@ variant: docs_base
         </div>
         <div class="TableOfContentsLoader"></div>
       </div><!-- END Page Content -->
+      {% endif %}
     </section><!-- END Page Center w/Sub Nav & Content -->
