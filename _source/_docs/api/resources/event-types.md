@@ -4,8 +4,9 @@
 layout: docs_page
 weight: 2
 title: Event Types
+css: event-types
+js: event-types
 excerpt: Catalogs the event type system for Events API and System Log API
-css: page-event-types
 ---
 
 # Event Types
@@ -19,27 +20,23 @@ This relationship is generally many-to-one, but there are a few exceptions. Note
 
 > **Important:** Going forward the Events API will not be tracking new event types added to the System Log API. For this reason we highly recommend migrating to the System Log API.
 
-<section id="event-type-catalog">
-  <table>
-    <thead>
-      <tr>
-        <th width="50%">ID</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      {%- assign catalog = site.data.event-types.versions[1] -%}
-      {%- for eventType in catalog.eventTypes -%}
-      <tr>
-        <td markdown="span">`{{ eventType.id }}`</td>
-        <td markdown="span">
-        {{ eventType.description }}
-        <br>
-        {%- for mapping in eventType.mappings -%}<span>`{{ mapping }}`</span>{%- endfor -%}
-        </td>
-      </tr>
-      {%- endfor -%}
-    </tbody>
-  </table>
-</section>
+<br>
+{%- assign eventTypes = site.data.event-types.versions[1].eventTypes | sort: "id" -%}
+<input type="text" id="event-type-search" name="filter" autocomplete="off" placeholder="Search event types for...">
+<div id="event-type-count">Found <b>{{ eventTypes.size }}</b> matches</div>
+{% for eventType in eventTypes %}
+<div class="event-type" markdown="block">
+#### {{ eventType.id }}
+{% if eventType.mappings.size > 0 %}
+<div class="mappings">
+  <b>Legacy event types: </b> {{ eventType.mappings | join: ', ' }}
+</div>
+{% endif %}
+{% if eventType.description != "" %}
+{{ eventType.description}}
+{% else %}
+_No description_
+{% endif %}
+</div>
+{% endfor %}
 
