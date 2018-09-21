@@ -1,0 +1,62 @@
+---
+layout: blog_post
+title: 'April Fools!'
+author: mraible
+description: "AsciiDoc rocks!"
+tags: [asciidoc, asciidoctor]
+---
+
+= Sample Page
+:uri-asciidoctor: http://asciidoctor.org
+:page-liquid:
+
+This is a sample page composed in AsciiDoc.
+Jekyll converts it to HTML using {uri-asciidoctor}[Asciidoctor].
+
+Reactive programming is an approach to writing software that embraces asynchronous IO. Asynchronous I/O is a small idea that portends big changes for software. The idea is simple: alleviate inefficient resource utilization by reclaiming resources that would otherwise be idle as they waited for I/O activity. Asynchronous IO inverts the normal design of IO processing: the clients are notified of new data instead of asking for it; this frees the client to do other things while waiting for new notifications. Let's look at an example that compares and contrasts asynchronous IO to synchronous IO.
+
+Let's build a simple program that reads data from a source (a `java.io.File` reference, specifically). First up, an implementation that uses a trusty 'ol `java.io.InputStream` implementation:
+
+.Read data from a file _synchronously_
+====
+[source,java,indent=0]
+----
+package com.example.io;
+
+import lombok.extern.log4j.Log4j2;
+import org.springframework.util.FileCopyUtils;
+
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.util.function.Consumer;
+
+@Log4j2
+class Synchronous implements Reader {
+
+    @Override
+    public void read(File file, Consumer<BytesPayload> consumer) throws IOException {
+        try (FileInputStream in = new FileInputStream(file)) { // <1>
+            byte[] data = new byte[FileCopyUtils.BUFFER_SIZE];
+            int res;
+            while ((res = in.read(data, 0, data.length)) != -1) { // <2>
+                    consumer.accept(BytesPayload.from(data, res)); //<3>
+            }
+        }
+    }
+}
+----
+<1> source the file using a regular `java.io.File`
+<2> _pull_ the results out of the source one line at a time..
+<3> I've written this code to accept a `Consumer<BytesPayload>` that gets called when there's new data
+====
+
+Image tests:
+
+++++
+{% img blog/electron-react-appauth-js/developer-tools.png alt:"Electron's Developer Tools" width:"800" class:"center-image" %}
+++++
+
+asset path: {% asset_path 'blog/electron-react-appauth-js/developer-tools.png' %}
+
+image::{% asset_path 'blog/electron-react-appauth-js/developer-tools.png' %}[alt=Electron's Developer Tools,width=800,align=center]
