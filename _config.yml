@@ -99,6 +99,11 @@ defaults:
       collection: reference
     values:
       layout: documentation
+  -
+    scope:
+      collection: docs
+    values:
+      toc: true
 
 sitemap_ignore:
   - sdk
