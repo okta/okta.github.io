@@ -1,6 +1,6 @@
 ---
 layout: language
-title: Add Okta authentication to your Android app
+title: Add Identity Management to Your Android App
 language: Android
 integration: mobile
 ---
@@ -13,12 +13,12 @@ New to Okta? Our quickstart will walk you through adding user authentication to 
 
 <ul class='language-ctas'>
 	<li>
-		<a href='https://developer.okta.com/signup/' class='code-button highlighted' data-proofer-ignore>
+		<a href='https://developer.okta.com/signup/' class='Button--red' data-proofer-ignore>
 			<span>Create Free Account</span>
 		</a>
 	</li>
 	<li>
-		<a href='/quickstart/#/widget' class='code-button inverse' data-proofer-ignore>
+		<a href='/quickstart/#/android' class='Button--blue' data-proofer-ignore>
 			<span>Android Quick Start</span>
 		</a>
 	</li>
@@ -40,8 +40,9 @@ The Okta AppAuth Android SDK is a wrapper around the AppAuth-Android SDK for com
 
 <ul class="language-libraries">
 	<li>
+		<i class='fa fa-github'></i>
 		<a href="https://github.com/okta/okta-jwt-verifier-java">
-			<span class='fa fa-github'></span> <span>Okta JWT Verifier for Java</span>
+			<span>Okta JWT Verifier for Java</span>
 		</a>
 	</li>
 </ul>

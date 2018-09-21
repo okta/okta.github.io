@@ -13,12 +13,12 @@ New to Okta? Our quickstart will walk you through adding user authentication to 
 
 <ul class='language-ctas'>
 	<li>
-		<a href='https://developer.okta.com/signup/' class='code-button highlighted' data-proofer-ignore>
+		<a href='https://developer.okta.com/signup/' class='Button--red' data-proofer-ignore>
 			<span>Create Free Account</span>
 		</a>
 	</li>
 	<li>
-		<a href='/quickstart/#/okta-sign-in-page/nodejs/' class='code-button inverse' data-proofer-ignore>
+		<a href='/quickstart/#/okta-sign-in-page/nodejs/' class='Button--blue' data-proofer-ignore>
 			<span>Node.js Quick Start</span>
 		</a>
 	</li>
@@ -51,8 +51,9 @@ The Okta Node.js SDK can be used in your server-side code to create and update u
 
 <ul class="language-libraries">
 	<li>
+		<i class='fa fa-github'></i>
 		<a href="https://github.com/okta/okta-oidc-js/tree/master/packages/jwt-verifier">
-			<span class='fa fa-github'></span> <span>Okta JWT Verifier for Node.js</span>
+			<span>Okta JWT Verifier for Node.js</span>
 		</a>
 	</li>
 </ul>
@@ -73,7 +74,7 @@ The Okta Node.js SDK can be used in your server-side code to create and update u
 	<li><a href="https://developer.okta.com/blog/2018/06/28/tutorial-build-a-basic-crud-app-with-node">Tutorial: Build a Basic CRUD App with Node.js</a></li>
 	<li><a href="https://developer.okta.com/blog/2018/07/10/build-a-basic-crud-app-with-node-and-react">Build a Basic CRUD App with Node and React</a></li>
 	<li><a href="https://developer.okta.com/blog/2018/02/06/build-user-registration-with-node-react-and-okta">Build User Registration with Node, React, and Okta</a></li>
-	<li><a href="https://developer.okta.com/blog/2018/05/18/node-authentication-with-passport-and-oidc"></a>Build Secure Node Authentication with Passport.js and OpenID Connect</li>
+	<li><a href="https://developer.okta.com/blog/2018/05/18/node-authentication-with-passport-and-oidc">Build Secure Node Authentication with Passport.js and OpenID Connect</a></li>
 	<li><a href="https://developer.okta.com/blog/2018/06/26/securely-manage-users-node-app">How to Securely Manage Users in Your Node App</a></li>
 	<li><a href="https://developer.okta.com/blog/2018/05/22/simple-multifactor-authentication-in-node">Simple Multi-Factor Authentication in Node</a></li>
 </ul>

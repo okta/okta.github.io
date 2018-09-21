@@ -1,6 +1,6 @@
 ---
 layout: language
-title: Add Okta authentication to your Spring app
+title: Add Identity Mangement to Your Spring App
 language: Java
 integration: back-end
 ---
@@ -22,14 +22,16 @@ integration: back-end
 
 ## Get Started with Spring + Okta
 
+New to Okta? Our quickstart will walk you through adding user authentication to your Spring app in minutes.
+
 <ul class='language-ctas'>
 	<li>
-		<a href='https://developer.okta.com/signup/' class='code-button highlighted' data-proofer-ignore>
+		<a href='https://developer.okta.com/signup/' class='Button--red' data-proofer-ignore>
 			<span>Create Free Account</span>
 		</a>
 	</li>
 	<li>
-		<a href='/quickstart/#/okta-sign-in-page/java/spring' class='code-button inverse' data-proofer-ignore>
+		<a href='/quickstart/#/okta-sign-in-page/java/spring' class='Button--blue' data-proofer-ignore>
 			<span>Spring Quick Start</span>
 		</a>
 	</li>
@@ -47,8 +49,9 @@ The Okta Spring Boot Starter can be used to add OAuth 2.0 authorization to Sprin
 
 <ul class="language-libraries">
 	<li>
+		<i class='fa fa-github'></i>
 		<a href="https://github.com/okta/okta-jwt-verifier-java">
-			<span class='fa fa-github'></span> <span>Okta JWT Verifier for Java</span>
+			<span>Okta JWT Verifier for Java</span>
 		</a>
 	</li>
 </ul>

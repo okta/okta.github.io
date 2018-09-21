@@ -1,6 +1,6 @@
 ---
 layout: language
-title: Add Okta authentication to your Java app
+title: Add Identity Mangement to Your Java App
 language: Java
 integration: back-end
 ---
@@ -26,7 +26,7 @@ New to Okta? Our Java resources will help you add user authentication to your Ja
 
 <ul class='language-ctas'>
 	<li>
-		<a href='https://developer.okta.com/signup/' class='code-button highlighted' data-proofer-ignore>
+		<a href='https://developer.okta.com/signup/' class='Button--red' data-proofer-ignore>
 			<span>Create Free Account</span>
 		</a>
 	</li>
@@ -51,13 +51,15 @@ The Okta Java SDK can be used in your server-side code to create and update user
 
 <ul class="language-libraries">
 	<li>
+		<i class='fa fa-github'></i>
 		<a href="https://github.com/okta/okta-auth-java">
-			<span class='fa fa-github'></span> <span>Okta Java Authentication SDK</span>
+			 <span>Okta Java Authentication SDK</span>
 		</a>
 	</li>
 	<li>
+		<i class='fa fa-github'></i>
 		<a href="https://github.com/okta/okta-jwt-verifier-java">
-			<span class='fa fa-github'></span> <span>Okta JWT Verifier for Java</span>
+			 <span>Okta JWT Verifier for Java</span>
 		</a>
 	</li>
 </ul>

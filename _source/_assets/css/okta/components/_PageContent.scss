@@ -5,7 +5,7 @@
 }
 
 .Page {
-	background: get-color('white');
+	background: get-color('gray-lightest');
 }
 .PageContent {
 	@extend %Wrap;
@@ -16,7 +16,7 @@
 	position: relative;
 	width: 100%;
 	z-index: 10;
-	background-color: get-color('white');
+	background-color: get-color('gray-lightest');
 	padding-top: 75px;
 
 	h1 {

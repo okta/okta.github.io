@@ -1,25 +1,5 @@
 .language {
 	&-content {
-		.breadcrumb {
-			@include font-size('button');
-			@include font-weight('bold');
-			text-transform: uppercase;
-			color: $periglacial-blue;
-			text-decoration: none;
-
-			&:after {
-				content: "";
-				position: relative;
-				display: inline-block;
-				width: 0.4em;
-				height: 0.4em;
-				border-right: 0.10em solid $periglacial-blue;
-				border-top: 0.10em solid $periglacial-blue;
-				transform: rotate(45deg);
-				margin-left: 0.5em;
-				top: -0.125rem;
-			}
-		}
 
 		h1,
 		h2 {
@@ -76,7 +56,6 @@
 				@include font-weight('semibold');
 				display: block;
 				color: $periglacial-blue;
-				text-transform: uppercase;
 				height: get-spacing('medium');
 
 				&:hover {
@@ -161,30 +140,42 @@
 			flex: 1;
 			box-shadow: 0 6px 25px rgba(5,5,5,0.3);
 			height: auto;
-			min-height: 250px;
-			width: calc(25% - #{get-spacing('small')});
-			flex-basis: calc(25% - #{get-spacing('small')});
+			border-radius: 3px;
+			min-height: 144px;
+			width: calc(33% - #{get-spacing('medium')});
+			flex-basis: calc(33% - #{get-spacing('medium')});
 			flex-grow: 0;
 			padding: get-spacing('small');
-			margin-right: get-spacing('small');
-			margin-bottom: get-spacing('small') !important;
+			margin-right: get-spacing('medium');
+			margin-bottom: get-spacing('medium') !important;
+			position: relative;
 
 			&:hover {
 				box-shadow: 0 6px 25px rgba(5,5,5,0.6);
 			}
 
+			i {
+				position: absolute;
+				top: 24px;
+				font-size: 18px;
+				color: $navy-blue;
+			}
 
 			a {
 				flex: 1;
 				color: $midnight;
+				padding-left: 22px;
 
 				&:hover {
 					text-decoration: none;
 				}
 
 				span {
-					@include font-size('h6');
+					font-size: 18px;
 					color: $navy-blue;
+				}
+
+				span {
 					margin-bottom: get-spacing('small');
 				}
 
@@ -204,7 +195,7 @@
 		}
 
 		a {
-			@include font-size('h6');
+			font-size: 18px;
 		}
 	}
 }
@@ -213,8 +204,8 @@
 	.language {
 		&-libraries {
 			li {
-				width: calc(33% - #{get-spacing('small')});
-				flex-basis: calc(33% - #{get-spacing('small')});
+				width: calc(33% - #{get-spacing('medium')});
+				flex-basis: calc(33% - #{get-spacing('medium')});
 			}
 		}
 	}
@@ -224,8 +215,8 @@
 	.language {
 		&-libraries {
 			li {
-				width: calc(50% - #{get-spacing('small')});
-				flex-basis: calc(50% - #{get-spacing('small')});
+				width: calc(50% - #{get-spacing('medium')});
+				flex-basis: calc(50% - #{get-spacing('medium')});
 			}
 		}
 	}
@@ -245,7 +236,7 @@
 		}
 		&-tabs {
 			li {
-				width: 100%;
+				// width: 100%;
 				margin-bottom: get-spacing('x-small') !important;
 			}
 		}
@@ -279,6 +270,11 @@
 				width: 100%;
 				flex-basis: 100%;
 				margin-right: 0;
+			}
+		}
+		&-tabs {
+			li {
+				width: 100%;
 			}
 		}
 	}

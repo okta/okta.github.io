@@ -1,6 +1,6 @@
 ---
 layout: language
-title: Add Okta authentication to your JavaScript app
+title: Add Identity Mangement to Your JavaScript App
 language: JavaScript
 integration: front-end
 ---
@@ -13,12 +13,12 @@ New to Okta? Our quickstart will walk you through adding user authentication to 
 
 <ul class='language-ctas'>
 	<li>
-		<a href='https://developer.okta.com/signup/' class='code-button highlighted' data-proofer-ignore>
+		<a href='https://developer.okta.com/signup/' class='Button--red' data-proofer-ignore>
 			<span>Create Free Account</span>
 		</a>
 	</li>
 	<li>
-		<a href='/quickstart/#/widget' class='code-button inverse' data-proofer-ignore>
+		<a href='/quickstart/#/widget' class='Button--blue' data-proofer-ignore>
 			<span>Javascript Quick Start</span>
 		</a>
 	</li>
@@ -44,8 +44,9 @@ Auth.js is a library wrapper for the Okta Authentication API. Use it when you ne
 
 <ul class="language-libraries">
 	<li>
+		<i class='fa fa-github'></i>
 		<a href="https://github.com/okta/okta-signin-widget">
-			<span class='fa fa-github'></span> <span>Okta Sign-In Widget</span>
+			<span>Okta Sign-In Widget</span>
 		</a>
 	</li>
 </ul>

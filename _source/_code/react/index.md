@@ -1,6 +1,6 @@
 ---
 layout: language
-title: Add Okta authentication to your React app
+title: Add Identity Mangement to Your React App
 language: React
 integration: front-end
 ---
@@ -13,12 +13,12 @@ New to Okta? Our quickstart will walk you through adding user authentication to 
 
 <ul class='language-ctas'>
 	<li>
-		<a href='https://developer.okta.com/signup/' class='code-button highlighted' data-proofer-ignore>
+		<a href='https://developer.okta.com/signup/' class='Button--red' data-proofer-ignore>
 			<span>Create Free Account</span>
 		</a>
 	</li>
 	<li>
-		<a href='/quickstart/#/react' class='code-button inverse' data-proofer-ignore>
+		<a href='/quickstart/#/react' class='Button--blue' data-proofer-ignore>
 			<span>React Quick Start</span>
 		</a>
 	</li>
@@ -43,17 +43,12 @@ The Okta React SDK makes it easy to integrate react-router with Okta's OpenID Co
 ## Recommended Guides
 
 <ul class="language-list">
-	<li><a href="https://developer.okta.com/code/react/okta_react"></a></li>
+	<li><a href="https://developer.okta.com/code/react/okta_react">Okta React Overview</a></li>
 	<li><a href="https://developer.okta.com/authentication-guide/implementing-authentication/implicit">Implementing the Implicit Flow</a></li>
 	<li><a href="https://developer.okta.com/authentication-guide/social-login/">Social Login</a></li>
 	<li><a href="https://developer.okta.com/authentication-guide/tokens/">Working With OAuth 2.0 Tokens</a></li>
 </ul>
 
-https://developer.okta.com/code/react/okta_react_sign-in_widget
-
-https://developer.okta.com/authentication-guide/implementing-authentication/implicit
-https://developer.okta.com/authentication-guide/social-login/
-https://developer.okta.com/authentication-guide/tokens/
 
 ## Related Blog Posts
 

@@ -1,6 +1,6 @@
 ---
 layout: language
-title: Add Okta authentication to your Go app
+title: Add Identity Mangement to Your Go App
 language: Go
 integration: back-end
 ---
@@ -13,7 +13,7 @@ New to Okta? Our Go resources will help you add user authentication to your Go a
 
 <ul class='language-ctas'>
 	<li>
-		<a href='https://developer.okta.com/signup/' class='code-button highlighted' data-proofer-ignore>
+		<a href='https://developer.okta.com/signup/' class='Button--red' data-proofer-ignore>
 			<span>Create Free Account</span>
 		</a>
 	</li>
@@ -23,15 +23,13 @@ New to Okta? Our Go resources will help you add user authentication to your Go a
 	<span class='fa fa-github'></span> <span>Go Sample App</span>
 </a>
 
-## Okta management SDK for Go
+## Okta Management SDK for Go
 
-The Okta management SDK for Go can be used in your server-side code to create and update users, groups, applications, and more.
+The Okta Management SDK for Go can be used in your server-side code to create and update users, groups, applications, and more.
 
-
-<a href='https://github.com/okta/okta-sdk-golang' class="language-reference">
-	<span class='icon download-16'></span> 
-	<span>Go Get</span>
-</a>
+```bash
+go get https://github.com/okta/okta-sdk-golang
+```
 
 <a href='https://github.com/okta/okta-sdk-golang'>
 	<span class='fa fa-github'></span> <span>Go SDK Source</span>
@@ -41,8 +39,9 @@ The Okta management SDK for Go can be used in your server-side code to create an
 
 <ul class="language-libraries">
 	<li>
+		<i class='fa fa-github'></i>
 		<a href="https://github.com/okta/okta-jwt-verifier-golang">
-			<span class='fa fa-github'></span> <span>Okta JWT Verifier for Go</span>
+			<span>Okta JWT Verifier for Go</span>
 		</a>
 	</li>
 </ul>

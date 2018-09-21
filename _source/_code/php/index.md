@@ -1,6 +1,6 @@
 ---
 layout: language
-title: Add Okta authentication to your PHP app
+title: Add Identity Mangement to Your PHP App
 language: PHP
 integration: back-end
 ---
@@ -13,12 +13,12 @@ New to Okta? Our quickstart will walk you through adding user authentication to 
 
 <ul class='language-ctas'>
 	<li>
-		<a href='https://developer.okta.com/signup/' class='code-button highlighted' data-proofer-ignore>
+		<a href='https://developer.okta.com/signup/' class='Button--red' data-proofer-ignore>
 			<span>Create Free Account</span>
 		</a>
 	</li>
 	<li>
-		<a href='/quickstart/#/okta-sign-in-page/php/' class='code-button inverse' data-proofer-ignore>
+		<a href='/quickstart/#/okta-sign-in-page/php/' class='Button--blue' data-proofer-ignore>
 			<span>PHP Quick Start</span>
 		</a>
 	</li>
@@ -51,8 +51,9 @@ The Okta PHP SDK can be used in your server-side code to create and update users
 
 <ul class="language-libraries">
 	<li>
+		<i class='fa fa-github'></i> 
 		<a href="https://github.com/okta/okta-jwt-verifier-php">
-			<span class='fa fa-github'></span> <span>Okta JWT Verifier for PHP</span>
+			<span>Okta JWT Verifier for PHP</span>
 		</a>
 	</li>
 </ul>
