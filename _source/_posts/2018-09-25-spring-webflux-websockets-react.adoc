@@ -1,0 +1,83 @@
+// filename/url: 2018-09-25-spring-webflux-websockets-react
+---
+layout: blog_post
+title: 'Full Stack Reactive with Spring WebFlux, WebSockets, and React'
+author: mraible
+description: "This post shows you techniques for talking to your reactive Spring WebFlux API with WebSockets and React."
+tags: [reactive, reactive api, reactive programming, spring webflux, websockets, react]
+tweets:
+- "Learn all about reactive programming, reactive streams, and how @projectreactor helps you create reactive systems! →"
+- "Do you have a lot of data that needs streaming? Reactive programming can help!"
+- "Want to learn about reactive programming with the @springframework and @springboot? @starbuxman and @mraible show how to get started!"
+image: blog/spring-full-stack-reactive/cool-image-here.png
+---
+:page-liquid:
+
+
+== Why React and Spring WebFlux?
+
+You hear reactive a lot when talking about JavaScript frameworks. They’re reacting to events on the client app, not the server. But obviously some of your favorite apps seem like they’re real-time. This is because they contain code that listens for server-sent events. Polling an endpoint is a similar technique for "listening".
+
+== Get Started with Spring WebFlux and WebSockets
+
+Clone
+Disable security
+
+== Create an App with React
+
+=== Create a ProfileList Component
+
+== Techniques for Streaming Data with React
+
+=== WebSockets
+
+=== Server Sent Events (SSE)
+
+=== Polling with Timer
+
+=== Polling with RxJS
+
+== Secure Your React App with OIDC
+
+Enable security on backend
+Install dependencies needed for React
+
+
+== Secure Realtime Communicate with React and Spring WebFlux
+
+You'll notice I don't have WebSockets in the header above. This is because you can't exactly have secure websockets with React and Spring WebFlux, at least not yet. According to [this Stack Overflow answer](), Spring WebFlux does not support socket.io or SockJS. The socket.io-client library has the ability to pass in an `Authorization` header with it's initial request.
+
+// code of what an auth header looks like with socket.io
+
+To me, this seems like it should be possible to lock down the websocket endpoint on the server. However, when I tried to use socket.io-client with Spring WebFlux, I get the following error:
+
+To workaround this issue, you can change the `WebSocketConfiguration.java` class to only return the a profile id.
+
+.reactive-web/src/main/java/com/example/demo/WebSocketConfiguration.java
+====
+[source,java]
+----
+Flux<WebSocketMessage> messageFlux = publish
+    .map(evt -> {
+        try {
+            Profile profile = (Profile) evt.getSource(); // <1>
+            Map<String, String> data = new HashMap<>(); // <2>
+            data.put("id", profile.getId());
+            return objectMapper.writeValueAsString(data);
+        }
+        catch (JsonProcessingException e) {
+            throw new RuntimeException(e);
+        }
+    })
+    .map(str -> {
+        log.info("sending " + str);
+        return session.textMessage(str);
+    });
+
+return session.send(messageFlux);
+----
+====
+
+Then you can change the React code to lookup the details from that ID.
+
+ since socket.io isn't supported by Spring and regular
