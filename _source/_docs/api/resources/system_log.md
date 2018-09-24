@@ -476,9 +476,8 @@ Describes an IP address used in a request.
 
 Event types categorize event instances by action and recorded in a LogEvent's [`eventType`](#attributes) attribute. They are key to navigating the system log via [Expression Filters](#expression-filter).
 
-The following sections outline the major event types captured by the system log.
+The following sections outline the key event types captured by the system log. For a complete listing see the [Event Types catalog](/docs/api/resources/event-types#catalog).
 
-> Note that the listing is not complete and you may see additional event types returned from the API.
 
 ### Application Event
 

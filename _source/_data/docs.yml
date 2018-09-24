@@ -30,6 +30,7 @@
     - apps
     - authorization-servers
     - events
+    - event-types
     - oauth-clients
     - factor_admin
     - factors

@@ -66,6 +66,7 @@ $(function() {
 	$(document).ready(function() {
 
 		var isMobile   = window.getComputedStyle(document.body,':before').content.includes("toc-mobile");
+		var noToc      = $("html").hasClass("no-toc");
 		var offset     = 140;
 		var headerData = [];
 
@@ -77,7 +78,7 @@ $(function() {
 		var $sidebar   = $('.Sidebar');
 		var $content   = $('.PageContent-main');
 		var $headers   = [];
-		var $toc       = ($('.TableOfContents').length > 0) ? $('.TableOfContents') : $('<div>').addClass('TableOfContents').appendTo($page);
+		var $toc       = ($('.TableOfContents').length > 0 || noToc) ? $('.TableOfContents') : $('<div>').addClass('TableOfContents').appendTo($page);
 		var $tocItems  = [];
 		var $indicator = $('<div>').addClass('TableOfContents-indicator').appendTo($toc);
 
@@ -92,6 +93,9 @@ $(function() {
 		}
 
 		var buildTOC = function() {
+			if (noToc) {
+				return;
+			}
 
 			$toc.removeClass('TableOfContentsPreload');
 
