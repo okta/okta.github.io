@@ -1461,7 +1461,7 @@ Using OIDC to secure your Spring WebFlux API is as simple as adding the Spring S
 </project>
 ----
 
-== Add Authentication with Okta to Your Spring WebFlux App
+== Add Authentication with Okta to Spring WebFlux
 
 OIDC requires an identity provider (or IdP). You can use many well-known ones like Google or Facebook, but those services don't allow you to manage your users like you would in Active Directory. Okta allows this, _and_ you can use Okta's API for OIDC.
 
