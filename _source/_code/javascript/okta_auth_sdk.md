@@ -94,7 +94,7 @@ console.log(`hi ${idToken.claims.email}!`);
 
 ### Store the Parsed Token
 
-Once the token has been parsed out of the URL, you can add it to the Token Manager using the `tokenManager.add` method.
+Once the token has been parsed out of the URL, you can add it to the Token Manager using the `tokenManager.add` method:
 
 ~~~ js
 authClient.tokenManager.add('idToken', idToken);
@@ -114,7 +114,7 @@ authClient.token.parseFromUrl()
 
 ### Retrieve the Stored Token
 
-A token that is stored in the Token Manager can be retrieved using the `tokenManager.get` method.
+A token that is stored in the Token Manager can be retrieved using the `tokenManager.get` method:
 
 ~~~ js
 var idToken = authClient.tokenManager.get('idToken');
