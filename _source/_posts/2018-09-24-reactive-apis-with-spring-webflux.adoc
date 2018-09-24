@@ -378,7 +378,7 @@ class SampleDataInitializer
 <9> if we'd stopped at the previous line, the `save` operation, and run this program then we would see... nothing! `Publisher<T>`  instances are _lazy_ -- you need to `subscribe()` to them to trigger their execution. This last line is where the rubber meets the road. In this case, we're using the `subscribe(Consumer<T>)` variant that lets us visit every record returned from the `repository.findAll()` operation and print out the record.
 ====
 
-> TIP: You can activate a Spring profile with a command line switch, `-Dspring.profiles.active=foo` where `foo` is the name of the profile you'd like to activate. You can also set an environment variable, `export SPRING_PROFILES_ACTIVE=foo` before running the `java` process for your Spring Boot application.
+TIP: You can activate a Spring profile with a command line switch, `-Dspring.profiles.active=foo` where `foo` is the name of the profile you'd like to activate. You can also set an environment variable, `export SPRING_PROFILES_ACTIVE=foo` before running the `java` process for your Spring Boot application.
 
 You'll note that in the previous example we use two methods, `map(T)` and `flatMap(T)`. Map should be familiar if you've ever used the Java 8 `Stream` API. Map visits each record in a publisher and passes it through a lambda function which must transform it. The output of that transformation is then returned and accumulated into a new `Publisher`. So, the intermediate type after we return from our `map` operation is a `Publisher<Profile>`. 
 
@@ -1042,7 +1042,7 @@ public abstract class AbstractBaseProfileEndpoints {
 
 The `WebTestClient` is quite powerful. It's a test-centric alternative to the reactive `WebClient` in Spring WebFlux which is an honest-to-goodness reactive HTTP client. In this  example, we make an HTTP request to an endpoint, confirm that the returned status code and headers line up with expectations, and then use JSON Path to poke at the structure of the returned result.
 
-> TIP: https://github.com/json-path/JsonPath[JSON Path] is like XPath, a query language for declaratively traversing nodes in an XML document. It allows easy traversal of JSON stanzas. It also provides a predicate language which we can use to match.
+TIP: https://github.com/json-path/JsonPath[JSON Path] is like XPath, a query language for declaratively traversing nodes in an XML document. It allows easy traversal of JSON stanzas. It also provides a predicate language which we can use to match.
 
 HTTP is great for a request-reply centric interaction with a service. It makes it easy to interrogate the HTTP service and get a response. But what if we're interested in listening to events? 
 
@@ -1467,7 +1467,7 @@ OIDC requires an identity provider (or IdP). You can use many well-known ones li
 
 At Okta, our goal is to make https://developer.okta.com/product/user-management/[identity management] a lot easier, more secure, and more scalable than what you're used to. Okta is a cloud service that allows developers to create, edit, and securely store user accounts and user account data, and connect them with one or multiple applications.
 
-Giddyup! [Register for a forever-free developer account](https://developer.okta.com/signup/), and when you're done, come on back so you can learn more about how to secure your reactive API!
+Giddyup! https://developer.okta.com/signup/[Register for a forever-free developer account], and when you're done, come on back so you can learn more about how to secure your reactive API!
 
 image::{% asset_path 'blog/spring-webflux-apis/okta-signup.png' %}[alt=Register for a free developer account,width=800,align=center]
 

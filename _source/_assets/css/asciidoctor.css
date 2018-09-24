@@ -326,8 +326,6 @@ pre .conum[data-value]{position:relative;top:-.125em}
 b.conum *{color:inherit!important}
 .conum:not([data-value]):empty{display:none}
 dt,th.tableblock,td.content{text-rendering:optimizeLegibility}
-p,td.content{letter-spacing:-.01em}
-p strong,td.content strong{letter-spacing:-.005em}
 p{margin-bottom:1.25rem}
 .sidebarblock p,.sidebarblock dt,.sidebarblock td.content,p.tableblock{font-size:1em}
 .exampleblock>.content{background-color:#fffef7;border-color:#e0e0dc;-webkit-box-shadow:0 1px 4px #e0e0dc;box-shadow:0 1px 4px #e0e0dc}
@@ -365,7 +363,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 .show-for-print{display:inherit!important}}
 
 /* New rules added by mraible */
-.paragraph > p, .sectionbody .ulist {
+.paragraph > p, .sectionbody .ulist, .admonitionblock {
     margin-bottom: 1.25rem;
 }
 
@@ -381,6 +379,12 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 span.icon>.fa {
     cursor: default;
 }
+
+/* unset Okta font */
+.admonitionblock [class^="icon-"]:before, .admonitionblock [class*=" icon-"]:before {
+    font-family: unset;
+}
+
 .admonitionblock td.icon {
     text-align: center;
     width: 80px;
@@ -420,3 +424,13 @@ span.icon>.fa {
 pre .conum[data-value]{position:relative;top:-.125em}
 b.conum *{color:inherit!important}
 .conum:not([data-value]):empty{display:none}
+
+/* top-align callout numbers */
+.colist td {
+    vertical-align: top;
+    padding: .25em 0;
+}
+
+.colist td .conum[data-value] {
+    margin-top: .5em;
+}
