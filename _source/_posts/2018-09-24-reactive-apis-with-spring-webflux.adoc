@@ -1477,7 +1477,6 @@ image::{% asset_path 'blog/spring-webflux-apis/okta-signup.png' %}[alt=Register 
 
 image::{% asset_path 'blog/spring-webflux-apis/reactive-web-app.png' %}[alt=Reactive web app,width=800,align=center]
 
-
 Copy and paste the URI of your default authorization server, client ID, and the client secret into `src/main/resources/application.yml`. Create this file, and you can delete the `application.properties` file in the same directory.
 
 ```yaml
@@ -1519,6 +1518,8 @@ You can get this value from your OIDC configuration `.well-known` endpoint.
 ----
 https://{yourOktaDomain}/oauth2/default/.well-known/openid-configuration
 ----
+
+image::{% asset_path 'blog/spring-webflux-apis/oidcdebugger.png' %}[alt=OIDC Debugger with access token,width=800,align=center]
 
 Once you have an access token, you can modify `create.sh` to use it.
 
