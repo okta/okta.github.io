@@ -210,7 +210,7 @@ We're ready to get started! Let's turn to the first concern, data access.
 
 We want to talk to a natively reactive data store. That is, the driver for the database needs to itself support asynchronous I/O, otherwise we won't be able to scale out reads without scaling out threads, which defeats the point. 
 
-Spring Data, an umbrella data access framework, supports a number of reactive data access options including reactive Cassandra, reactive MongoDB, reactive Couchbase and reactive Redis. We've chosen MongoDB, so make sure you have a MongoDB database instance running on your local machine on the default host, port, and accessible with the default username and password. If you're on a Mac, you can use `brew install mongodb`. If you’re on on Debian-based Linux distributions, you can use `apt install mongodb`.
+Spring Data, an umbrella data access framework, supports a number of reactive data access options including reactive Cassandra, reactive MongoDB, reactive Couchbase and reactive Redis. We've chosen MongoDB, so make sure you have a MongoDB database instance running on your local machine on the default host, port, and accessible with the default username and password. If you're on a Mac, you can use `brew install mongodb`. If you're on on Debian-based Linux distributions, you can use `apt install mongodb`.
 
 On a Mac, you'll need to run the following commands before MongoDB will start.
 
