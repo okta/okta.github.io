@@ -13,26 +13,26 @@ tweets:
 :page-liquid:
 :uri-okta-login: https://login.okta.com/?SAMLRequest=fc%2B7CsJAEAXQXvAflu1NNJUMeZBGELTx1a%2FrYILJTtyZGD%2FfSBRiYzlw77lMnD3rSj3Qc0ku0YtgrhU6S5fSXRN9PKxmS52l00nMpq6iBvJWCrfDe4ss6vStRe9aDzmGIZfo1jsgwyWDMzUyiIV9vt1AH4XGk5ClSvewUgMNa%2BYW%2FVj5jxhm9NLP67QQaSAMu64L6CYmsFSHlnzT4ZlLwTgcL6Sf8%2FeX9AU%3Dhttps://login.okta.com/?SAMLRequest=fc%2B7CsJAEAXQXvAflu1NNJUMeZBGELTx1a%2FrYILJTtyZGD%2FfSBRiYzlw77lMnD3rSj3Qc0ku0YtgrhU6S5fSXRN9PKxmS52l00nMpq6iBvJWCrfDe4ss6vStRe9aDzmGIZfo1jsgwyWDMzUyiIV9vt1AH4XGk5ClSvewUgMNa%2BYW%2FVj5jxhm9NLP67QQaSAMu64L6CYmsFSHlnzT4ZlLwTgcL6Sf8%2FeX9AU%3D
 
-Spring WebFlux can be used to create a REST API with streaming data. Spring WebFlux can also be integrated with WebSockets to provide notifications that clients can listen to. Combining the two is a powerful way to provide real-time data streaming to JavaScript or mobile clients.
+Spring WebFlux can be used to create a REST API with streaming data. Spring WebFlux can also be integrated with WebSockets to provide notifications that clients can listen to. Combining the two is a powerful way to provide real-time data streaming to JavaScript or mobile clients. Add React to the mix and you have an excellent foundation for a full-stack reactive architecture.
 
 React is a UI toolkit (similar to GWT) that lets you build components with JavaScript (or TypeScript) and JSX. JSX is how you define elements in React and it looks very similar to XML. React's API and JSX are the core of the framework; everything else is an add-on. I won't go into nitty-gritty details about React, we'll assume you've heard of it and are eager to learn how to make it even _more_ reactive!
 
 image:{% asset_path 'blog/spring-webflux-apis/starbuxman.jpg' %}[alt=Josh Long,role="BlogPost-avatar pull-right img-100px"] I teamed up with https://twitter.com/starbuxman[Josh Long] to write this post. Josh is a fellow Java Champion, Spring Developer Advocate, and all around excellent guy at Pivotal. Josh and I've been good friends for a while now, sharing the same passion for Java, developers, and building bleeding-edge applications. We hope you like this series!
 
-Today, we'll show you how to build a _full-stack_ application using Spring WebFlux for the API, WebSockets for notifications, and React for the UI. This article is the third in a three part series about reactive programming and Spring WebFlux. The first two are listed below.
+Today, we'll show you how to build a _full-stack_ application using Spring WebFlux for the API, WebSockets for notifications, and React for the UI. This article is the third in a three-part series about reactive programming and Spring WebFlux. The first two are listed below.
 
 . link:/blog/2018/09/21/reactive-programming-with-spring[Get Started with Reactive Programming in Spring]
 . link:/blog/2018/09/24/reactive-apis-with-spring-webflux[Build Reactive APIs with Spring WebFlux]
 
 == Reactiveness in Spring WebFlux and React
 
-You hear might hear the term _reactive_ a lot when you read about JavaScript frameworks. When you hear this term in the Java community, it usually refers to asyncronous I/O and non-blocking processes. Spring WebFlux provides an implementation of the reactive streams specification, which standard for asynchronous stream processing with non-blocking back pressure.
+You hear might hear the term _reactive_ a lot when you read about JavaScript frameworks. When you hear this term in the Java community, it usually refers to asynchronous I/O and non-blocking processes. Spring WebFlux provides an implementation of the reactive streams specification, which standard for asynchronous stream processing with non-blocking back pressure.
 
-The term "reactive" is a bit different in the JavaScript community. It typically refers to how a UI _reacts_ to events happening in other parts of the app. JavaScript does asyncronous processing by default and this can be very useful on the client so as to prevent the browser from locking up.
+The term "reactive" is a bit different in the JavaScript community. It typically refers to how a UI _reacts_ to events happening in other parts of the app. JavaScript does asynchronous processing by default and this can be very useful on the client so as to prevent the browser from locking up.
 
 So how do you go *full-stack reactive* and create an architecture that can handle streaming data from the server, and constantly update the client? You can use many techniques, and I'll show you a few today.
 
-Some of your favorite webapps probably seem like they do real-time processing. They're constantly sending notifications and updating the UI based on events. This is because they contain code that listens (or polls) for server-side events.
+Some of your favorite web apps probably seem like they do real-time processing. They're constantly sending notifications and updating the UI based on events. This is because they contain code that listens (or polls) for server-side events.
 
 == Get Started with Spring WebFlux and WebSockets
 
@@ -68,7 +68,7 @@ Rather than messing with security right away, you can disable Spring Security by
 </dependency>-->
 ----
 
-You'll need to have a MongoDB database instance running on your local machine on the default host, port, and accessible with the default username and password. If you're on a Mac, you can install it using `brew install mongodb`. If you're on on Debian-based Linux distributions, you can use `apt install mongodb`.
+You'll need to have a MongoDB database instance running on your local machine on the default host, port, and accessible with the default username and password. If you're on a Mac, you can install it using `brew install mongodb`. If you're on Debian-based Linux distributions, you can use `apt install mongodb`.
 
 You can start the application using `./mvnw spring-boot:run`. If you hit its `/profiles` endpoint with https://httpie.org/[HTTPie], you'll see there's no data.
 
@@ -138,7 +138,7 @@ Now let's see how you can handle this data with React.
 I recently did a poll to see what my Twitter followers preferred when developing React apps: JavaScript or TypeScript.
 
 ++++
-<div style="max-width: 500px; margin: 0 auto">
+<div style="max-width: 500px; margin: 0 auto; margin-bottom: 1.25rem">
 <blockquote class="twitter-tweet" data-lang="en"><p lang="en" dir="ltr">For those of you developing with <a href="https://twitter.com/reactjs?ref_src=twsrc%5Etfw">@reactjs</a>, do you prefer to use JavaScript or TypeScript?</p>&mdash; Matt Raible (@mraible) <a href="https://twitter.com/mraible/status/1043539841831456768?ref_src=twsrc%5Etfw">September 22, 2018</a></blockquote>
 <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
 </div>
@@ -173,7 +173,7 @@ After modifying this file (and turning off public methods, because that's the de
 
 Create a `react-app/src/ProfileList.tsx` component that fetches data from the `/profiles` endpoint.
 
-[source,typescript]
+[source,tsx]
 ----
 import * as React from 'react';
 
@@ -201,16 +201,12 @@ class ProfileList extends React.Component<ProfileListProps, ProfileListState> {
     };
   }
 
-  async fetchData() {
+  async componentDidMount() {
     this.setState({isLoading: true});
 
     const response = await fetch('http://localhost:3000/profiles');
     const data = await response.json();
     this.setState({profiles: data, isLoading: false});
-  }
-
-  async componentDidMount() {
-    this.fetchData();
   }
 
   render() {
@@ -238,7 +234,7 @@ export default ProfileList;
 
 To make this component render when your app loads, add it to `App.tsx`.
 
-[source,typescript]
+[source,tsx]
 ----
 import * as React from 'react';
 import './App.css';
@@ -276,7 +272,7 @@ image::{% asset_path 'blog/spring-full-stack-reactive/profile-list.png' %}[alt=P
 
 == Techniques for Streaming Data with React
 
-Displaying data from your reactive API is cool, but wouldn't it be cooler if your UI was updated when new profiles were added? There's several ways you can implement this behavior, and I'll show you a few options today. It's possible this change if y'all send us some better ideas. ;)
+Displaying data from your reactive API is cool, but wouldn't it be cooler if your UI was updated when new profiles were added? There are several ways you can implement this behavior, and I'll show you a few options today. It's possible this could change if y'all send us some better ideas. ;)
 
 === Polling with Interval
 
@@ -284,7 +280,7 @@ The easiest, and most costly, technique you can implement is to poll the server 
 
 .Polling With Interval
 ====
-[source,typescript]
+[source,tsx]
 ----
 import * as React from 'react';
 
@@ -322,7 +318,7 @@ class ProfileList extends React.Component<ProfileListProps, ProfileListState> {
   }
 
   async componentDidMount() {
-    this.fetchData(); // <2>
+    await this.fetchData(); // <2>
     this.interval = setInterval(() => this.fetchData(), 1000); // <3>
   }
 
@@ -427,15 +423,15 @@ class ProfileList extends React.Component<ProfileListProps, ProfileListState> {
 export default ProfileList;
 ----
 <1> Start an `interval` Observable, running every one second.
-<2> `startWith` indicates that it should fetch right away, which makes it so you don't need an intitial data fetch.
-<3> `switchMap` has a cancelling effect, which is different from other flattening operators. On each emission the previous inner observable (the result of `fetch()`) is cancelled and the new observable is subscribed. Use `mergeMap` if you need every request to complete.
+<2> `startWith` indicates that it should fetch right away, which makes it so you don't need an initial data fetch.
+<3> `switchMap` has a canceling effect, which is different from other flattening operators. On each emission, the previous inner observable (the result of `fetch()`) is canceled and the new observable is subscribed. Use `mergeMap` if you need every request to complete.
 ====
 
 Restart your server to start with default data again, run `create-stream.sh`, and open your browser to `http://localhost:3000`. You'll notice the profiles are updating, and there's no flicker in the page.
 
 Fetching new data every few seconds is expensive and silly. Wouldn't it be cooler to take advantage of the WebSocket endpoint that notifies when new data arrives?!
 
-=== WebSockets
+=== Real-time Data with WebSockets
 
 You don't need to install anything to use WebSockets. They're supported by most modern browsers. Below is a report from https://caniuse.com/#search=websocket[caniuse.com].
 
@@ -495,7 +491,7 @@ You will also need to modify `package.json` so it proxies WebSocket requests.
 
 WebSockets make it easy to get notifications from a WebFlux API, don't they?!
 
-=== Server-Sent Events (SSE)
+=== Listening for Server-Sent Events (SSE)
 
 One last technique I'd like to show you is server-sent events (SSE). With SSE, it's possible for a send new data to a web client at any time, by pushing messages. Create a `ServerSentEventController.java` class and fill it with the following Java code.
 
@@ -576,7 +572,7 @@ class ProfileList extends React.Component<ProfileListProps, ProfileListState> {
 export default ProfileList;
 ----
 <1> Create a new `EventSource`, using port 8080 since you can't proxy server-sent events.
-<2> Log when the channel is open. This was helpful to discover the issue with proxies, because it was called, but `onmessage()` was not.
+<2> Log when the channel is open. This was helpful to discover the issue with proxies because it was called, but `onmessage()` was not.
 <3> Parse `event.data`, then grab the `source` from that.
 <4> Remember to use `setState()` to update your UI!
 ====
@@ -584,14 +580,14 @@ export default ProfileList;
 If you restart your server, add some streaming data with `create-stream.sh`, you should see the screen constantly updating.
 
 ++++
-<video src="{% asset_path 'blog/spring-full-stack-reactive/eventsource.mp4' %}" width="700" class="center-image" autoplay controls style="margin-bottom: 1.25rem"></video>
+<video src="{% asset_path 'blog/spring-full-stack-reactive/eventsource.mp4' %}" width="700" height="394" class="center-image" autoplay controls style="margin-bottom: 1.25rem"></video>
 ++++
 
 You've learned how to add real-time streaming abilities to your React app, but what about security? A system that broadcasts to everyone that's listening isn't going to work well, especially if we start adding sensitive data!
 
-== Secure Your React App with OIDC
+== Secure Your React App with OpenID Connect (OIDC)
 
-OIDC requires an identity provider (or IdP). You can use many well-known ones like Google or Facebook, but those services don't allow you to manage your users like you would in Active Directory. Okta allows this, _and_ you can use Okta's API for OIDC.
+OIDC requires an identity provider (or IdP). You can use many well-known ones like Google or Facebook, but those services don't allow you to manage your users as you would in Active Directory. Okta allows this, _and_ you can use Okta's API for OIDC.
 
 I'd encourage you to https://developer.okta.com/signup/[signup for an Okta developer account], so you can learn how to secure your full stack reactive app. If you already have an account, great! Just follow the steps below to create a new OIDC app.
 
@@ -655,7 +651,7 @@ npm i -D @types/react-router-dom@4.3.1
 
 Modify `react-app/src/App.tsx` to add your Okta configuration and security-related React components.
 
-[source,typescript]
+[source,tsx]
 ----
 import * as React from 'react';
 import Home from './Home';
@@ -694,7 +690,7 @@ Create `react-app/src/Home.tsx` and use it as your landing page, showing login a
 
 .Home.tsx
 ====
-[source,typescript]
+[source,tsx]
 ----
 import * as React from 'react';
 import './App.css';
@@ -782,7 +778,7 @@ export default withAuth(Home);
 
 You'll need to update `ProfileList.tsx` to add `auth` to its required props (a.k.a., inputs) and to add an `authorization` header to server requests. While you're at it, change from using port 3000 to using port 8080.
 
-[source,typescript]
+[source,tsx]
 ----
 import * as React from 'react';
 import { Auth } from './App';
@@ -812,7 +808,7 @@ class ProfileList extends React.Component<ProfileListProps, ProfileListState> {
     };
   }
 
-  async fetchData() {
+  async componentDidMount() {
     this.setState({isLoading: true});
 
     const response = await fetch('http://localhost:8080/profiles', {
@@ -824,28 +820,24 @@ class ProfileList extends React.Component<ProfileListProps, ProfileListState> {
     this.setState({profiles: data, isLoading: false});
   }
 
-  async componentDidMount() {
-    this.fetchData();
-  }
+ render() {
+   const {profiles, isLoading} = this.state;
 
-  render() {
-    const {profiles, isLoading} = this.state;
+   if (isLoading) {
+     return <p>Loading...</p>;
+   }
 
-    if (isLoading) {
-      return <p>Loading...</p>;
-    }
-
-    return (
-      <div>
-        <h2>Profile List</h2>
-        {profiles.map((profile: Profile) =>
-          <div key={profile.id}>
-            {profile.email}<br/>
-          </div>
-        )}
-      </div>
-    );
-  }
+   return (
+     <div>
+       <h2>Profile List</h2>
+       {profiles.map((profile: Profile) =>
+         <div key={profile.id}>
+           {profile.email}<br/>
+         </div>
+       )}
+     </div>
+   );
+ }
 }
 
 export default ProfileList;
@@ -878,7 +870,7 @@ spring:
           issuer-uri: ${oidc.issuer-uri}
 ----
 
-Then create a `SecurityConfiguration.java` class to configure the resource server, and CORS.
+Then create a `SecurityConfiguration.java` class to configure the resource server and enable CORS.
 
 .Spring Security Configuration for OIDC Login and a Resource Server
 ====
@@ -937,28 +929,39 @@ public class SecurityConfiguration {
 <2> Enable `@PreAuthorize` and other method-level security annotations.
 <3> Unlike Spring MVC, where you override a method, you create a `SecurityWebFilterChain` bean with WebFlux.
 <4> CSRF is enabled in this app, but we don't enable sending the CSRF header back because we're not manipulating data. If you want to POST, PUT, or DELETE, you will need to grab the `XSRF-TOKEN` cookie's value and send it back as a `X-XSRF-TOKEN` header.
-<5> WebSockets can't be secured. There are WebSocket libraries (e.g., Socket.IO) that allow sending an authorizaton header, but Spring WebFlux doesn't support them.
+<5> WebSockets can't be secured. There are WebSocket libraries (e.g., Socket.IO) that allow sending an authorization header, but Spring WebFlux doesn't support them.
 <6> Define a `CorsConfigurationSource` bean and CORS will be enabled for your API.
 ====
 
 Restart and you should be able to log in and view data from your React app!
 
-== Secure Realtime Communicate with React and Spring WebFlux
+You might ask if you can deploy your React and Spring WebFlux app as a single artifact. Yes, this is possible, and you can see how to do it with the frontend-maven-plugin in link:/blog/2018/07/19/simple-crud-react-and-spring-boot[Use React and Spring Boot to Build a Simple CRUD App]. In this example, they're separate apps because this is what most of my followers seem to prefer.
 
-Adding an authorization header to any `fetch()` requests will work for the interval and RxJS examples I showed. Ideally, it'd work for and EventSource and WebSockets too.
+++++
+<div style="max-width: 500px; margin: 0 auto; margin-bottom: 1.25rem">
+<blockquote class="twitter-tweet" data-lang="en"><p lang="en" dir="ltr">I write a lot of Java API + JavaScript App tutorials. If you’ve read them, thanks! <br><br>I’m curious to know which deployment model you prefer. Results may influence future tutorials/talks. 😉<br><br>Do you prefer:</p>&mdash; Matt Raible (@mraible) <a href="https://twitter.com/mraible/status/1032353786713391104?ref_src=twsrc%5Etfw">August 22, 2018</a></blockquote>
+<script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+</div>
+++++
 
-Unfortunately, neither of the raw APIs have support for passing additional headers. For EventSource, I found https://github.com/Yaffle/EventSource/[Yaffle/EventSource] which is supposed to support additional headers. I also found a fork of it, https://github.com/AlexGalays/EventSource[AlexGalays/EventSource], that has TypeScript support and better support. Unfortunately, I was unable to get either library to work.
+== Secure Real-time Communication with React, Spring WebFlux, and WebSockets
 
-You might notice my comment above that you can't secure WebSockets. What I meant to say is they can't be secured when using WebFlux. When I tried to use https://socket.io/[socket.io] and it's `socket.io-client`, I ran into a "Invalid 'Upgrade' header:" error. Shortly after, I found https://stackoverflow.com/a/51600936[a Stack Overflow Q & A], asking about support for Socket.IO and SockJS.
+Adding an authorization header to any `fetch()` requests will work for the interval and RxJS examples I showed. Ideally, it'd work for an EventSource and WebSockets too.
 
-// todo: Fix CSS for blockquotes, or use a different formatting technique
-> The Spring Framework team is not considering this feature right now in WebFlux. Because of the back-pressure support in reactive streams, the team is considering protocols that would leverage that information.
->
-> For example, rsocket support would fit that space and much more. See https://jira.spring.io/browse/SPR-16751[SPR-16751].
+Unfortunately, neither of the raw EventSource or WebSocket APIs have support for passing additional headers. For EventSource, I found https://github.com/Yaffle/EventSource/[Yaffle/EventSource] which is supposed to support additional headers. I also found a fork of it, https://github.com/AlexGalays/EventSource[AlexGalays/EventSource], that has TypeScript support and better support. Unfortunately, I was unable to get either library to work.
+
+You might notice my comment above that you can't secure WebSockets. What I meant to say is they can't be secured when using WebFlux. When I tried to use https://socket.io/[socket.io] and it's `socket.io-client`, I ran into an "Invalid 'Upgrade' header:" error. Shortly after, I found https://stackoverflow.com/a/51600936[a Stack Overflow Q & A], asking about support for Socket.IO and SockJS.
+
+[quote, 'https://twitter.com/bclozel[Brian Clozel]']
+____
+The Spring Framework team is not considering this feature right now in WebFlux. Because of the back-pressure support in reactive streams, the team is considering protocols that would leverage that information.
+
+For example, rsocket support would fit that space and much more. See https://jira.spring.io/browse/SPR-16751[SPR-16751].
+____
 
 I https://github.com/rsocket/rsocket-js/issues/21[tried rsocket-js], but quickly realized Spring WebFlux was lacking the support I needed. _Duh! SPR-16751 is still open._
 
-Josh and I put our heads together and decided the best workaround would be to modify the WebSocket endpoint so it only sends IDs. That way, no sensitive data is propogated. To do this, you'll need to modify `WebSocketConfiguration.java` to just send the ID, not the whole `Profile`.
+Josh and I put our heads together and decided the best workaround would be to modify the WebSocket endpoint so it only sends IDs. That way, no sensitive data is propagated. To do this, you'll need to modify `WebSocketConfiguration.java` to just send the ID, not the whole `Profile`.
 
 .WebSocket with ID only
 ====
@@ -987,7 +990,8 @@ return session.send(messageFlux);
 <2> Create a map and stuff the id into it.
 <3> Return the map as JSON.
 ====
-// todo: why is the text so far from the numbers in this callout?
+
+NOTE: You could use a similar technique with server-sent events in the `ServerSentEventController`. The advantage of using WebSocket over EventSource is EventSource is read-only. WebSocket connections can both send data to the browser and receive data from the browser.
 
 Then you can modify the code in `ProfileList.tsx` to fetch the profile securely.
 
@@ -1024,17 +1028,17 @@ After making these changes, you should have an app that gets real-time updates f
 
 Congrats, you've now gone full-stack reactive!
 
-== Learn More about Spring WebFlux, Reactive Programming, and React
+== Learn More about Spring WebFlux, WebSockets, Reactive Programming, and React
 
 I hope you've enjoyed this whirlwind tour of techniques for building reactive APIs and communicating with them from React. I realize there's a lot more (e.g., React's "Flux" architecture and Redux), but I figured this post was already long enough.
 
-You can find the source code used in this post https://github.com/oktadeveloper/okta-spring-webflux-react-example/tree/react-app[on GitHub]. You can clone it and checkout the `react-app` branch:
+You can find the source code used in this post https://github.com/oktadeveloper/okta-spring-webflux-react-example/tree/react-app[on GitHub]. You can clone it and check out the `react-app` branch:
 
 ----
 git clone -b react-app https://github.com/oktadeveloper/okta-spring-webflux-react-example.git
 ----
 
-To learn more about Spring WebFlux, Reactive Programming, and React, I invite you to checkout some of our other blog posts.
+To learn more about Spring WebFlux, Reactive Programming, and React, I invite you to check out some of our other blog posts.
 
 * link:/blog/2018/09/21/reactive-programming-with-spring[Get Started with Reactive Programming in Spring]
 * link:/blog/2018/09/24/reactive-apis-with-spring-webflux[Build Reactive APIs with Spring WebFlux]
