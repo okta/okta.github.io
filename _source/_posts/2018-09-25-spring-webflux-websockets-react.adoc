@@ -497,7 +497,7 @@ WebSockets make it easy to get notifications from a WebFlux API, don't they?!
 
 === Server-Sent Events (SSE)
 
-One last technique I'd like to show you is server-sent events (SSE). Create a `ServerSentEventController.java` class and fill it with the following Java code.
+One last technique I'd like to show you is server-sent events (SSE). With SSE, it's possible for a send new data to a web client at any time, by pushing messages. Create a `ServerSentEventController.java` class and fill it with the following Java code.
 
 .`reactive-web/src/main/java/com/example/demo/ServerSentEventController.java`
 ====
@@ -508,6 +508,7 @@ package com.example.demo;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.http.MediaType;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 import reactor.core.publisher.Flux;
@@ -523,10 +524,11 @@ public class ServerSentEventController {
     }
 
     @GetMapping(path = "/sse/profiles", produces = MediaType.TEXT_EVENT_STREAM_VALUE) // <2>
+    @CrossOrigin(origins = "http://localhost:3000") // <3>
     public Flux<String> profiles() {
         return this.events.map(pce -> {
             try {
-                return objectMapper.writeValueAsString(pce); // <3>
+                return objectMapper.writeValueAsString(pce); // <4>
             } catch (JsonProcessingException e) {
                 throw new RuntimeException(e);
             }
@@ -536,28 +538,426 @@ public class ServerSentEventController {
 ---
 <1> The `.share()` method is important to allow multiple clients to consume your data.
 <2> You must use `MediaType.TEXT_EVENT_STREAM_VALUE` to indicate you'll be sending streaming text.
-<3> Return the `ProfileCreatedEvent` as a JSON string.
+<3> You have to allow access from the React app's origin because https://github.com/facebook/create-react-app/issues/3391[Create React App's proxy doesn't support SSE].
+<4> Return the `ProfileCreatedEvent` as a JSON string.
 ====
 
+On the React side of things, you can use https://developer.mozilla.org/en-US/docs/Web/API/EventSource[`EventSource`] to listen for new profiles. Change your `ProfileList` component to use `EventSource` as follows.
 
+.Server-Sent Events and EventSource
+====
+[source,typescript]
+----
+// imports
+
+class ProfileList extends React.Component<ProfileListProps, ProfileListState> {
+
+  // constructor()
+
+  async componentDidMount() {
+      this.setState({isLoading: true});
+      const response = await fetch('http://localhost:3000/profiles');
+      const data = await response.json();
+      this.setState({profiles: data, isLoading: false});
+
+      const eventSource = new EventSource('http://localhost:8080/sse/profiles'); // <1>
+      eventSource.onopen = (event: any) => console.log('open', event); // <2>
+      eventSource.onmessage = (event: any) => {
+        const profile = JSON.parse(event.data).source; // <3>
+        this.state.profiles.push(profile);
+        this.setState({profiles: this.state.profiles}); // <4>
+      };
+      eventSource.onerror = (event: any) => console.log('error', event);
+    }
+
+  // render()
+}
+
+export default ProfileList;
+----
+<1> Create a new `EventSource`, using port 8080 since you can't proxy server-sent events.
+<2> Log when the channel is open. This was helpful to discover the issue with proxies, because it was called, but `onmessage()` was not.
+<3> Parse `event.data`, then grab the `source` from that.
+<4> Remember to use `setState()` to update your UI!
+====
+
+If you restart your server, add some streaming data with `create-stream.sh`, you should see the screen constantly updating.
+
+<video src="{% asset_path 'blog/spring-full-stack-reactive/eventsource.mp4' %}" width="360" class="center-image" autoplay controls></video>
+
+You've learned how to add real-time streaming abilities to your React app, but what about security? A system that broadcasts to everyone that's listening isn't going to work well, especially if we start adding sensitive data!
 
 == Secure Your React App with OIDC
 
-Enable security on backend
-Install dependencies needed for React
+OIDC requires an identity provider (or IdP). You can use many well-known ones like Google or Facebook, but those services don't allow you to manage your users like you would in Active Directory. Okta allows this, _and_ you can use Okta's API for OIDC.
 
+I'd encourage you to https://developer.okta.com/signup/[signup for an Okta developer account], so you can learn how to secure your full stack reactive app. If you already have an account, great! Just follow the steps below to create a new OIDC app.
+
+image::{% asset_path 'blog/spring-webflux-apis/okta-signup.png' %}[alt=Register for a free developer account,width=800,align=center]
+
+=== Create an OIDC App in Okta
+
+{uri-okta-login}[Log in] to your Okta Developer account and navigate to **Applications** > **Add Application**. Click **Web** and click **Next**. Give the app a name you'll remember, and specify `http://localhost:8080/login/oauth2/code/okta` as a Login redirect URI. Click **Done**, then edit the project and enable "Implicit (Hybrid)" as a grant type (allow ID and access tokens) and click **Save**.
+
+Copy and paste the URI of your default authorization server, client ID, and the client secret into `reactive-web/src/main/resources/application.yml`.
+
+[source,yaml]
+----
+spring:
+  security:
+    oauth2:
+      client:
+        provider:
+          okta:
+            issuer-uri: https://{yourOktaDomain}/oauth2/default
+        registration:
+          login:
+            okta:
+              client-id: {clientId}
+              client-secret: {clientSecret}
+              scope: openid email profile
+----
+
+In the previous post, you locked down the backend with Spring Security and OIDC. Uncomment the Spring Security dependencies in your `pom.xml`.
+
+[source,xml]
+----
+<dependency>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-starter-security</artifactId>
+</dependency>
+<dependency>
+    <groupId>org.springframework.security</groupId>
+    <artifactId>spring-security-config</artifactId>
+</dependency>
+<dependency>
+    <groupId>org.springframework.security</groupId>
+    <artifactId>spring-security-oauth2-client</artifactId>
+</dependency>
+<dependency>
+    <groupId>org.springframework.security</groupId>
+    <artifactId>spring-security-oauth2-resource-server</artifactId>
+</dependency>
+<dependency>
+    <groupId>org.springframework.security</groupId>
+    <artifactId>spring-security-oauth2-jose</artifactId>
+</dependency>
+----
+
+To secure your front-end, you'll need to install Okta's React SDK, as well as react-router-dom.
+
+----
+npm i @okta/okta-react@1.1.1 react-router-dom@4.3.1
+npm i -D @types/react-router-dom@4.3.1
+----
+
+Modify `react-app/src/App.tsx` to add your Okta configuration and security-related React components.
+
+[source,typescript]
+----
+import * as React from 'react';
+import Home from './Home';
+import { BrowserRouter as Router, Route } from 'react-router-dom';
+import { Security, ImplicitCallback } from '@okta/okta-react';
+
+const config = {
+  issuer: 'https://{yourOktaDomain}/oauth2/default',
+  redirect_uri: window.location.origin + '/implicit/callback',
+  client_id: '{clientId}'
+};
+
+export interface Auth {
+  login(redirectUri: string): {};
+  logout(redirectUri: string): {};
+  isAuthenticated(): boolean;
+  getAccessToken(): string;
+}
+
+class App extends React.Component {
+
+  render() {
+    return (
+      <Router>
+        <Security {...config}>
+          <Route path="/" exact={true} component={Home}/>
+          <Route path="/implicit/callback" component={ImplicitCallback}/>
+        </Security>
+      </Router>
+    );
+  }
+}
+----
+
+Create `react-app/src/Home.tsx` and use it as your landing page, showing login and logout buttons based on the person's authenticated status.
+
+.Home.tsx
+====
+[source,typescript]
+----
+import * as React from 'react';
+import './App.css';
+import { withAuth } from '@okta/okta-react';
+import { Auth } from './App';
+import logo from './logo.svg';
+import ProfileList from './ProfileList';
+
+interface HomeProps {
+  auth: Auth;
+}
+
+interface HomeState {
+  authenticated: boolean;
+}
+
+class Home extends React.Component<HomeProps, HomeState> {
+  constructor(props: HomeProps) {
+    super(props);
+    this.state = {authenticated: false};
+    this.checkAuthentication = this.checkAuthentication.bind(this);
+    this.login = this.login.bind(this);
+    this.logout = this.logout.bind(this);
+  }
+
+  async checkAuthentication() {
+    const authenticated = await this.props.auth.isAuthenticated();
+    if (authenticated !== this.state.authenticated) {
+      this.setState({authenticated});
+    }
+  }
+
+  async componentDidMount() {
+    await this.checkAuthentication();
+  }
+
+  async componentDidUpdate() {
+    await this.checkAuthentication();
+  }
+
+  async login() {
+    this.props.auth.login('/')
+  }
+
+  async logout() {
+    this.props.auth.logout('/');
+  }
+
+  render() {
+    const {authenticated} = this.state;
+    let body = null;
+    if (authenticated) {
+      body = (
+        <div className="Buttons">
+          <button onClick={this.logout}>Logout</button>
+          <p>
+            <ProfileList auth={this.props.auth}/> // <1>
+          </p>
+        </div>
+      );
+    } else {
+      body = (
+        <div className="Buttons">
+          <button onClick={this.login}>Login</button>
+        </div>
+      );
+    }
+
+    return (
+      <div className="App">
+        <header className="App-header">
+          <img src={logo} className="App-logo" alt="logo"/>
+          <h1 className="App-title">Welcome to React</h1>
+        </header>
+        {body}
+      </div>
+    );
+  }
+}
+
+export default withAuth(Home);
+----
+<1> The `ProfileList` component will need to access `props.auth` to get an access token, so pass it in.
+====
+
+You'll need to update `ProfileList.tsx` to add `auth` to its required props (a.k.a., inputs) and to add an `authorization` header to server requests. While you're at it, change from using port 3000 to using port 8080.
+
+[source,typescript]
+----
+import * as React from 'react';
+import { Auth } from './App';
+
+interface Profile {
+  id: number;
+  email: string;
+}
+
+interface ProfileListProps {
+  auth: Auth;
+}
+
+interface ProfileListState {
+  profiles: Array<Profile>;
+  isLoading: boolean;
+}
+
+class ProfileList extends React.Component<ProfileListProps, ProfileListState> {
+
+  constructor(props: ProfileListProps) {
+    super(props);
+
+    this.state = {
+      profiles: [],
+      isLoading: false
+    };
+  }
+
+  async fetchData() {
+    this.setState({isLoading: true});
+
+    const response = await fetch('http://localhost:8080/profiles', {
+      headers: {
+        Authorization: 'Bearer ' + await this.props.auth.getAccessToken()
+      }
+    });
+    const data = await response.json();
+    this.setState({profiles: data, isLoading: false});
+  }
+
+  async componentDidMount() {
+    this.fetchData();
+  }
+
+  render() {
+    const {profiles, isLoading} = this.state;
+
+    if (isLoading) {
+      return <p>Loading...</p>;
+    }
+
+    return (
+      <div>
+        <h2>Profile List</h2>
+        {profiles.map((profile: Profile) =>
+          <div key={profile.id}>
+            {profile.email}<br/>
+          </div>
+        )}
+      </div>
+    );
+  }
+}
+
+export default ProfileList;
+----
+
+If you try to make requests to the backend with its current configuration, it'll fail because it will try to redirect to log in. To fix that, you have to configure Spring Security to have a resource server. Modify your `application.yml` to look as follows:
+
+[source,yaml]
+----
+oidc:
+  issuer-uri: https://{yourOktaDomain}/oauth2/default
+  client-id: {clientId}
+  client-secret: {clientSecret}
+
+spring:
+  security:
+    oauth2:
+      client:
+        provider:
+          okta:
+            issuer-uri: ${oidc.issuer-uri}
+        registration:
+          login:
+            okta:
+              client-id: ${oidc.client-id}
+              client-secret: ${oidc.client-secret}
+              scope: openid email profile
+      resourceserver:
+        jwt:
+          issuer-uri: ${oidc.issuer-uri}
+----
+
+Then create a `SecurityConfiguration.java` class to configure the resource server, and CORS.
+
+.Spring Security Configuration for OIDC Login and a Resource Server
+====
+[source,java]
+----
+package com.example.demo;
+
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.security.config.annotation.method.configuration.EnableReactiveMethodSecurity;
+import org.springframework.security.config.annotation.web.reactive.EnableWebFluxSecurity;
+import org.springframework.security.config.web.server.ServerHttpSecurity;
+import org.springframework.security.web.server.SecurityWebFilterChain;
+import org.springframework.security.web.server.csrf.CookieServerCsrfTokenRepository;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.reactive.CorsConfigurationSource;
+import org.springframework.web.cors.reactive.UrlBasedCorsConfigurationSource;
+
+import java.util.Collections;
+
+@Configuration
+@EnableWebFluxSecurity // <1>
+@EnableReactiveMethodSecurity // <2>
+public class SecurityConfiguration {
+
+    @Bean // <3>
+    public SecurityWebFilterChain securityWebFilterChain(ServerHttpSecurity http) {
+        return http
+            .csrf()
+                .csrfTokenRepository(CookieServerCsrfTokenRepository.withHttpOnlyFalse()) // <4>
+                .and()
+            .authorizeExchange()
+                .pathMatchers("/ws/**").permitAll() // <5>
+                .anyExchange().authenticated()
+                .and()
+            .oauth2Login()
+                .and()
+            .oauth2ResourceServer()
+                .jwt().and().and().build();
+    }
+
+    @Bean // <6>
+    CorsConfigurationSource corsConfigurationSource() {
+        CorsConfiguration configuration = new CorsConfiguration();
+        configuration.setAllowCredentials(true);
+        configuration.setAllowedOrigins(Collections.singletonList("http://localhost:3000"));
+        configuration.setAllowedMethods(Collections.singletonList("GET"));
+        configuration.setAllowedHeaders(Collections.singletonList("*"));
+        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+        source.registerCorsConfiguration("/**", configuration);
+        return source;
+    }
+}
+----
+<1> Use `@EnableWebFluxSecurity` when using Spring WebFlux and Spring Security.
+<2> Enable `@PreAuthorize` and other method-level security annotations.
+<3> Unlike Spring MVC, where you override a method, you create a `SecurityWebFilterChain` bean with WebFlux.
+<4> CSRF is enabled in this app, but we don't enable sending the CSRF header back because we're not manipulating data. If you want to POST, PUT, or DELETE, you will need to grab the `XSRF-TOKEN` cookie's value and send it back as a `X-XSRF-TOKEN` header.
+<5> WebSockets can't be secured. There are WebSocket libraries (e.g., Socket.IO) that allow sending an authorizaton header, but Spring WebFlux doesn't support them.
+<6> Define a `CorsConfigurationSource` bean and CORS will be enabled for your API.
+====
+
+Restart and you should be able to log in and view data from your React app!
 
 == Secure Realtime Communicate with React and Spring WebFlux
 
-You'll notice I don't have WebSockets in the header above. This is because you can't exactly have secure websockets with React and Spring WebFlux, at least not yet. According to [this Stack Overflow answer](), Spring WebFlux does not support socket.io or SockJS. The socket.io-client library has the ability to pass in an `Authorization` header with it's initial request.
+Adding an authorization header to any `fetch()` requests will work for the interval and RxJS examples I showed. Ideally, it'd work for and EventSource and WebSockets too.
 
-// code of what an auth header looks like with socket.io
+Unfortunately, neither of the raw APIs have support for passing additional headers. For EventSource, I found https://github.com/Yaffle/EventSource/[Yaffle/EventSource] which is supposed to support additional headers. I also found a fork of it, https://github.com/AlexGalays/EventSource[AlexGalays/EventSource], that has TypeScript support and better support. Unfortunately, I was unable to get either library to work.
 
-To me, this seems like it should be possible to lock down the websocket endpoint on the server. However, when I tried to use socket.io-client with Spring WebFlux, I get the following error:
+You might notice my comment above that you can't secure WebSockets. What I meant to say is they can't be secured when using WebFlux. When I tried to use https://socket.io/[socket.io] and it's `socket.io-client`, I ran into a "Invalid 'Upgrade' header:" error. Shortly after, I found https://stackoverflow.com/a/51600936[a Stack Overflow Q & A], asking about support for Socket.IO and SockJS.
 
-To workaround this issue, you can change the `WebSocketConfiguration.java` class to only return the a profile id.
+> The Spring Framework team is not considering this feature right now in WebFlux. Because of the back-pressure support in reactive streams, the team is considering protocols that would leverage that information.
+>
+> For example, rsocket support would fit that space and much more. See https://jira.spring.io/browse/SPR-16751[SPR-16751].
 
-.reactive-web/src/main/java/com/example/demo/WebSocketConfiguration.java
+I https://github.com/rsocket/rsocket-js/issues/21[tried rsocket-js], but quickly realized Spring WebFlux was lacking the support I needed. _Duh! SPR-16751 is still open._
+
+Josh and I put our heads together and decided the best workaround would be to modify the WebSocket endpoint so it only sends IDs. That way, no sensitive data is propogated. To do this, you'll need to modify `WebSocketConfiguration.java` to just send the ID, not the whole `Profile`.
+
+.WebSocket with ID only
 ====
 [source,java]
 ----
@@ -567,7 +967,7 @@ Flux<WebSocketMessage> messageFlux = publish
             Profile profile = (Profile) evt.getSource(); // <1>
             Map<String, String> data = new HashMap<>(); // <2>
             data.put("id", profile.getId());
-            return objectMapper.writeValueAsString(data);
+            return objectMapper.writeValueAsString(data); // <3>
         }
         catch (JsonProcessingException e) {
             throw new RuntimeException(e);
@@ -580,18 +980,60 @@ Flux<WebSocketMessage> messageFlux = publish
 
 return session.send(messageFlux);
 ----
+<1> Get the profile from the event.
+<2> Create a map and stuff the id into it.
+<3> Return the map as JSON.
 ====
 
-Then you can change the React code to lookup the details from that ID.
+Then you can modify the code in `ProfileList.tsx` to fetch the profile securely.
 
- since socket.io isn't supported by Spring and regular
+.WebSockets in React
+====
+[source,typescript]
+----
+async componentDidMount() {
+  this.setState({isLoading: true});
+  const headers = {
+    headers: {Authorization: 'Bearer ' + await this.props.auth.getAccessToken()} // <1>
+  };
 
+  const response = await fetch('http://localhost:8080/profiles', headers); // <2>
+  const data = await response.json();
+  this.setState({profiles: data, isLoading: false});
 
- Install react-router-dom and its types package so you can add routing to your React app.
+  const socket = new WebSocket('ws://localhost:8080/ws/profiles');
+  socket.addEventListener('message', async (event: any) => {
+    const message = JSON.parse(event.data);
+    const request = await fetch(`http://localhost:8080/profiles/${message.id}`, headers); // <3>
+    const profile = await request.json();
+    this.state.profiles.push(profile);
+    this.setState({profiles: this.state.profiles});
+  });
+}
+----
+<1> Get the access token from Okta's React SDK.
+<2> Make a secure request to get the initial profiles.
+<3> When an event is received from the WebSocket connection, fetch the profile with the ID.
+====
 
- ----
- npm i react-router-dom@4.3.1
- npm i -D @types/react-router-dom@4.3.1
- ----
+Congrats, you've now gone full-stack reactive!
 
- Modify `App
+== Learn More about Spring WebFlux, Reactive Programming, and React
+
+I hope you've enjoyed this whirlwind tour of techniques for building reactive APIs and communicating with them from React. I realize there's a lot more (e.g., React's "Flux" architecture and Redux), but I figured this post was already long enough.
+
+You can find the source code used in this post [on GitHub](https://github.com/oktadeveloper/okta-spring-webflux-react-example/tree/react-app). You can clone it and checkout the `react-app` branch:
+
+----
+git clone -b react-app https://github.com/oktadeveloper/okta-spring-webflux-react-example.git
+----
+
+To learn more about Spring WebFlux, Reactive Programming, and React, I invite you to checkout some of our other blog posts.
+
+* link:/blog/2018/09/21/reactive-programming-with-spring[Get Started with Reactive Programming in Spring]
+* link:/blog/2018/09/24/reactive-apis-with-spring-webflux[Build Reactive APIs with Spring WebFlux]
+* link:/blog/2017/12/06/bootiful-development-with-spring-boot-and-react[Bootiful Development with Spring Boot and React] (uses TypeScript)
+* link:/blog/2018/07/19/simple-crud-react-and-spring-boot[Use React and Spring Boot to Build a Simple CRUD App] (uses JavaScript)
+* https://spring.io/guides/tutorials/react-and-spring-data-rest/[React.js and Spring Data REST]
+
+If you have any questions, please leave a comment below, ask us on Twitter (https://twitter.com/starbuxman[@starbuxman] and https://twitter.com/mraible[@mraible], or post a question https://stackoverflow.com/[on Stack Overflow]. If you tag your question with "okta" and "webflux", there's a good chance we'll see them!
