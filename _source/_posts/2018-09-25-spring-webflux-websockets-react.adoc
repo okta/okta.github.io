@@ -3,11 +3,11 @@ layout: blog_post
 title: 'Full Stack Reactive with Spring WebFlux, WebSockets, and React'
 author: mraible
 description: "This post shows you techniques for talking to your reactive Spring WebFlux API with WebSockets and React."
-tags: [reactive, reactive api, reactive programming, spring webflux, websockets, react]
+tags: [reactive, reactive api, reactive programming, spring webflux, spring boot, websockets, sse, react, oidc]
 tweets:
-- "Learn all about reactive programming, reactive streams, and how @projectreactor helps you create reactive systems! →"
-- "Do you have a lot of data that needs streaming? Reactive programming can help!"
-- "Want to learn about reactive programming with the @springframework and @springboot? @starbuxman and @mraible show how to get started!"
+- "Spring WebFlux can be used to create a REST API with streaming data. This post shows you how to build a React app that talks to this API using WebSockets and other techniques."
+- "Spring WebFlux, WebSockets, and Server-sent Events! Learn how to build a React app that responds to real-time data from your reactive API."
+- "Want to learn how to go full-stack reactive with Spring WebFlux, WebSockets, and React? We've got a tutorial just for you!"
 image: blog/spring-full-stack-reactive/websockets-in-react.png
 ---
 :page-liquid:
