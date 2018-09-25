@@ -1263,11 +1263,11 @@ curl -v -X GET \
 
 > Listing users with search is an {% api_lifecycle ea %} feature and should not be used as a part of any critical flows, like authentication.
 
-Searches for user by the properties specified in the search parameter (case insensitive)
+Searches for users based on the properties specified in the search parameter (case insensitive)
 
 This operation:
 
-* Supports pagination.
+* Supports pagination (to a maximum of 50000 results; see note below).
 * Requires [URL encoding](http://en.wikipedia.org/wiki/Percent-encoding).
 For example, `search=profile.department eq "Engineering"` is encoded as `search=profile.department%20eq%20%22Engineering%22`.
 Examples use cURL-style escaping instead of URL encoding to make them easier to read.
@@ -1286,6 +1286,8 @@ Use an ID lookup for records that you update to ensure your results contain the 
     | `profile.department eq "Engineering"`         | Users that have a `department` of `Engineering` |
     | `profile.occupation eq "Leader"`              | Users that have an `occupation` of `Leader`     |
     | `profile.lastName sw "Sm" `                   | Users whose `lastName` starts with "Sm"         |
+
+> When paginating a search result set (see [Pagination](/docs/api/getting_started/design_principles#pagination)), the result set is limited to a total of 50,000 results.  Attempting to follow the `next` link from the last page will yield an error.
 
 ##### Search Examples
 
