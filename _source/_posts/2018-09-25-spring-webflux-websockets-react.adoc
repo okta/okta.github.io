@@ -1,4 +1,3 @@
-// filename/url: 2018-09-25-spring-webflux-websockets-react
 ---
 layout: blog_post
 title: 'Full Stack Reactive with Spring WebFlux, WebSockets, and React'
@@ -9,15 +8,16 @@ tweets:
 - "Learn all about reactive programming, reactive streams, and how @projectreactor helps you create reactive systems! →"
 - "Do you have a lot of data that needs streaming? Reactive programming can help!"
 - "Want to learn about reactive programming with the @springframework and @springboot? @starbuxman and @mraible show how to get started!"
-image: blog/spring-full-stack-reactive/cool-image-here.png
+// image: blog/spring-full-stack-reactive/cool-image-here.png
 ---
 :page-liquid:
+:uri-okta-login: https://login.okta.com/?SAMLRequest=fc%2B7CsJAEAXQXvAflu1NNJUMeZBGELTx1a%2FrYILJTtyZGD%2FfSBRiYzlw77lMnD3rSj3Qc0ku0YtgrhU6S5fSXRN9PKxmS52l00nMpq6iBvJWCrfDe4ss6vStRe9aDzmGIZfo1jsgwyWDMzUyiIV9vt1AH4XGk5ClSvewUgMNa%2BYW%2FVj5jxhm9NLP67QQaSAMu64L6CYmsFSHlnzT4ZlLwTgcL6Sf8%2FeX9AU%3Dhttps://login.okta.com/?SAMLRequest=fc%2B7CsJAEAXQXvAflu1NNJUMeZBGELTx1a%2FrYILJTtyZGD%2FfSBRiYzlw77lMnD3rSj3Qc0ku0YtgrhU6S5fSXRN9PKxmS52l00nMpq6iBvJWCrfDe4ss6vStRe9aDzmGIZfo1jsgwyWDMzUyiIV9vt1AH4XGk5ClSvewUgMNa%2BYW%2FVj5jxhm9NLP67QQaSAMu64L6CYmsFSHlnzT4ZlLwTgcL6Sf8%2FeX9AU%3D
 
 Spring WebFlux can be used to create a REST API with streaming data. Spring WebFlux can also be integrated with WebSockets to provide notifications that clients can listen to. Combining the two is a powerful way to provide real-time data streaming to JavaScript or mobile clients.
 
 React is a UI toolkit (similar to GWT) that lets you build components with JavaScript (or TypeScript) and JSX. JSX is how you define elements in React and it looks very similar to XML. React's API and JSX are the core of the framework; everything else is an add-on. I won't go into nitty-gritty details about React, we'll assume you've heard of it and are eager to learn how to make it even _more_ reactive!
 
-image:{% asset_path 'blog/spring-webflux-apis/starbuxman.jpg' %}[alt=Josh Long,role="BlogPost-avatar pull-right img-100px"] I teamed up with Josh Long to write this post. Josh is a fellow Java Champion, Spring Developer Advocate, and all around excellent guy at Pivotal. Josh and I've been good friends for a while now, sharing the same passion for Java, developers, and building bleeding-edge applications. We hope you like this series!
+image:{% asset_path 'blog/spring-webflux-apis/starbuxman.jpg' %}[alt=Josh Long,role="BlogPost-avatar pull-right img-100px"] I teamed up with https://twitter.com/starbuxman[Josh Long] to write this post. Josh is a fellow Java Champion, Spring Developer Advocate, and all around excellent guy at Pivotal. Josh and I've been good friends for a while now, sharing the same passion for Java, developers, and building bleeding-edge applications. We hope you like this series!
 
 Today, we'll show you how to build a _full-stack_ application using Spring WebFlux for the API, WebSockets for notifications, and React for the UI. This article is the third in a three part series about reactive programming and Spring WebFlux. The first two are listed below.
 
@@ -138,7 +138,7 @@ Now let's see how you can handle this data with React.
 I recently did a poll to see what my Twitter followers preferred when developing React apps: JavaScript or TypeScript.
 
 ++++
-<div style="max-width: 500px; margin 0 auto">
+<div style="max-width: 500px; margin: 0 auto">
 <blockquote class="twitter-tweet" data-lang="en"><p lang="en" dir="ltr">For those of you developing with <a href="https://twitter.com/reactjs?ref_src=twsrc%5Etfw">@reactjs</a>, do you prefer to use JavaScript or TypeScript?</p>&mdash; Matt Raible (@mraible) <a href="https://twitter.com/mraible/status/1043539841831456768?ref_src=twsrc%5Etfw">September 22, 2018</a></blockquote>
 <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
 </div>
@@ -426,7 +426,7 @@ class ProfileList extends React.Component<ProfileListProps, ProfileListState> {
 
 export default ProfileList;
 ----
-<1> Start an interval Observable, running every one second.
+<1> Start an `interval` Observable, running every one second.
 <2> `startWith` indicates that it should fetch right away, which makes it so you don't need an intitial data fetch.
 <3> `switchMap` has a cancelling effect, which is different from other flattening operators. On each emission the previous inner observable (the result of `fetch()`) is cancelled and the new observable is subscribed. Use `mergeMap` if you need every request to complete.
 ====
@@ -535,7 +535,7 @@ public class ServerSentEventController {
         });
     }
 }
----
+----
 <1> The `.share()` method is important to allow multiple clients to consume your data.
 <2> You must use `MediaType.TEXT_EVENT_STREAM_VALUE` to indicate you'll be sending streaming text.
 <3> You have to allow access from the React app's origin because https://github.com/facebook/create-react-app/issues/3391[Create React App's proxy doesn't support SSE].
@@ -583,7 +583,9 @@ export default ProfileList;
 
 If you restart your server, add some streaming data with `create-stream.sh`, you should see the screen constantly updating.
 
-<video src="{% asset_path 'blog/spring-full-stack-reactive/eventsource.mp4' %}" width="360" class="center-image" autoplay controls></video>
+++++
+<video src="{% asset_path 'blog/spring-full-stack-reactive/eventsource.mp4' %}" width="700" class="center-image" autoplay controls style="margin-bottom: 1.25rem"></video>
+++++
 
 You've learned how to add real-time streaming abilities to your React app, but what about security? A system that broadcasts to everyone that's listening isn't going to work well, especially if we start adding sensitive data!
 
@@ -949,6 +951,7 @@ Unfortunately, neither of the raw APIs have support for passing additional heade
 
 You might notice my comment above that you can't secure WebSockets. What I meant to say is they can't be secured when using WebFlux. When I tried to use https://socket.io/[socket.io] and it's `socket.io-client`, I ran into a "Invalid 'Upgrade' header:" error. Shortly after, I found https://stackoverflow.com/a/51600936[a Stack Overflow Q & A], asking about support for Socket.IO and SockJS.
 
+// todo: Fix CSS for blockquotes, or use a different formatting technique
 > The Spring Framework team is not considering this feature right now in WebFlux. Because of the back-pressure support in reactive streams, the team is considering protocols that would leverage that information.
 >
 > For example, rsocket support would fit that space and much more. See https://jira.spring.io/browse/SPR-16751[SPR-16751].
@@ -984,6 +987,7 @@ return session.send(messageFlux);
 <2> Create a map and stuff the id into it.
 <3> Return the map as JSON.
 ====
+// todo: why is the text so far from the numbers in this callout?
 
 Then you can modify the code in `ProfileList.tsx` to fetch the profile securely.
 
@@ -1016,13 +1020,15 @@ async componentDidMount() {
 <3> When an event is received from the WebSocket connection, fetch the profile with the ID.
 ====
 
+After making these changes, you should have an app that gets real-time updates from Spring WebFlux when new profiles are added.
+
 Congrats, you've now gone full-stack reactive!
 
 == Learn More about Spring WebFlux, Reactive Programming, and React
 
 I hope you've enjoyed this whirlwind tour of techniques for building reactive APIs and communicating with them from React. I realize there's a lot more (e.g., React's "Flux" architecture and Redux), but I figured this post was already long enough.
 
-You can find the source code used in this post [on GitHub](https://github.com/oktadeveloper/okta-spring-webflux-react-example/tree/react-app). You can clone it and checkout the `react-app` branch:
+You can find the source code used in this post https://github.com/oktadeveloper/okta-spring-webflux-react-example/tree/react-app[on GitHub]. You can clone it and checkout the `react-app` branch:
 
 ----
 git clone -b react-app https://github.com/oktadeveloper/okta-spring-webflux-react-example.git
@@ -1036,4 +1042,4 @@ To learn more about Spring WebFlux, Reactive Programming, and React, I invite yo
 * link:/blog/2018/07/19/simple-crud-react-and-spring-boot[Use React and Spring Boot to Build a Simple CRUD App] (uses JavaScript)
 * https://spring.io/guides/tutorials/react-and-spring-data-rest/[React.js and Spring Data REST]
 
-If you have any questions, please leave a comment below, ask us on Twitter (https://twitter.com/starbuxman[@starbuxman] and https://twitter.com/mraible[@mraible], or post a question https://stackoverflow.com/[on Stack Overflow]. If you tag your question with "okta" and "webflux", there's a good chance we'll see them!
+If you have any questions, please leave a comment below, ask us on Twitter (https://twitter.com/starbuxman[@starbuxman] and https://twitter.com/mraible[@mraible]), or post a question https://stackoverflow.com/[on Stack Overflow]. If you tag your question with "okta" and "webflux", there's a good chance we'll see them!
