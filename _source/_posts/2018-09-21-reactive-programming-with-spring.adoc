@@ -256,7 +256,7 @@ Spring WebFlux does not depend on or require the Servlet APIs to work. It ships 
 
 == Learn More about Reactive Programming and Spring
 
-In a future post, we'll show you how to develop a Reactive API with Spring WebFlux and friends from the Spring ecosystem. Then we'll add a React client that's capable of handling streaming data. In the meantime, check out these interesting resources on reactive programming and Spring.
+In a future post, we'll show you https://developer.okta.com/blog/2018/09/24/reactive-apis-with-spring-webflux[how to develop a Reactive API with Spring WebFlux] and friends from the Spring ecosystem. Then we'll add a React client that's capable of handling streaming data. In the meantime, check out these interesting resources on reactive programming and Spring.
 
 * https://www.reactivemanifesto.org/[The Reactive Manifesto]
 * https://spring.io/blog/2018/03/01/spring-boot-2-0-goes-ga[Spring Boot 2.0 goes GA]
