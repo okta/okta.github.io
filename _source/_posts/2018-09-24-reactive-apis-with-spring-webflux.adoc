@@ -15,9 +15,9 @@ image: blog/spring-webflux-apis/the-spring-initializr.png
 
 Spring Boot 2.0 was a long-awaited release from the good folks at Pivotal. One of its new features is reactive web programming support with Spring WebFlux. Spring WebFlux is a web framework that's built on top of Project Reactor, to give you asynchronous I/O, and allow your application to perform better. If you're familiar with Spring MVC and building REST APIs, you'll enjoy Spring WebFlux. There's just a few basic concepts that are different. Once you know these, you'll be well on your way to building reactive APIs!
 
-Reactive web programming is great for applications that have streaming data, and clients that consume it and stream it to their users. It ain't great for developing CRUD apps. If you want to develop a CRUD API, stick with Spring MVC and be happy about it.
+Reactive web programming is great for applications that have streaming data, and clients that consume it and stream it to their users. It ain't great for developing CRUD apps. If you want to develop a CRUD API, stick with Spring MVC and be happy about it. However, if you're developing the next Facebook or Twitter with lots of data, a reactive API might be just what you're looking for.
 
-However, if you're developing the next Facebook or Twitter with lots of data, a reactive API might be just what you're looking for.
+If you're not familiar with reactive programming, or just want to see how you can use it with Spring, see the first post in this series: link:/blog/2018/09/21/reactive-programming-with-spring[Get Started with Reactive Programming in Spring].
 
 Spring Boot 2.1 is just around the corner, and with it comes Spring Security 5.1 (released this week!). There's excellent OpenID Connect (OIDC) support in Spring Security 5.1, so we'll highlight how to use it near the end of this article.
 
@@ -1541,11 +1541,11 @@ This article showed you how to develop a reactive API with Spring WebFlux and se
 
 In the meantime, here's some good articles you can read on reactive programming, Spring WebFlux, and OIDC.
 
-* https://developer.okta.com/blog/2018/09/21/reactive-programming-with-spring[Get Started with Reactive Programming in Spring]
+* link:/blog/2018/09/21/reactive-programming-with-spring[Get Started with Reactive Programming in Spring]
 * https://www.baeldung.com/spring-webflux[Guide to Spring 5 WebFlux]
-* https://developer.okta.com/blog/2018/07/19/simple-crud-react-and-spring-boot[Use React and Spring Boot to Build a Simple CRUD App]
-* https://developer.okta.com/blog/2017/12/18/spring-security-5-oidc[Get Started with Spring Security 5.0 and OIDC]
-* https://developer.okta.com/blog/2017/08/01/oidc-primer-part-3[What's in a Token? – An OpenID Connect Primer, Part 3 of 3]
+* link:/blog/2018/07/19/simple-crud-react-and-spring-boot[Use React and Spring Boot to Build a Simple CRUD App]
+* link:/blog/2017/12/18/spring-security-5-oidc[Get Started with Spring Security 5.0 and OIDC]
+* link:/blog/2017/08/01/oidc-primer-part-3[What's in a Token? – An OpenID Connect Primer, Part 3 of 3]
 
 The source code contained in this post is available in the https://github.com/oktadeveloper/okta-spring-webflux-react-example[okta-spring-webflux-react-example repo on GitHub].
 

@@ -6319,7 +6319,7 @@
     }, {
       "id" : "core.user_auth.self_service.account_unlock.issued_recovery_token",
       "category" : "authn",
-      "description" : "Issued recovery token for self-service account unlock=.",
+      "description" : "Issued recovery token for self-service account unlock.",
       "tags" : [ "user" ],
       "mappings" : [ "user.account.unlock_token" ]
     }, {
@@ -6481,25 +6481,25 @@
     }, {
       "id" : "cvd.scheduled_action.user_suspension.canceled",
       "category" : "lca",
-      "description" : "Canceled scheduled user suspension",
+      "description" : "Canceled scheduled user suspension.",
       "tags" : [ "scheduled-action" ],
       "mappings" : [ "scheduled_action.user_suspension.canceled" ]
     }, {
       "id" : "cvd.scheduled_action.user_suspension.completed",
       "category" : "lca",
-      "description" : "Completed scheduled user suspension",
+      "description" : "Completed scheduled user suspension.",
       "tags" : [ "scheduled-action" ],
       "mappings" : [ "scheduled_action.user_suspension.completed" ]
     }, {
       "id" : "cvd.scheduled_action.user_suspension.scheduled",
       "category" : "lca",
-      "description" : "Scheduled user suspension",
+      "description" : "Scheduled user suspension.",
       "tags" : [ "scheduled-action" ],
       "mappings" : [ "scheduled_action.user_suspension.scheduled" ]
     }, {
       "id" : "cvd.scheduled_action.user_suspension.updated",
       "category" : "lca",
-      "description" : "Updated scheduled user suspension",
+      "description" : "Updated scheduled user suspension.",
       "tags" : [ "scheduled-action" ],
       "mappings" : [ "scheduled_action.user_suspension.updated" ]
     }, {
@@ -6941,6 +6941,18 @@
       "tags" : [ "callback" ],
       "mappings" : [ "callback.modify" ]
     }, {
+      "id" : "platform.callback.response.processed.failure",
+      "category" : "extensibility",
+      "description" : "Failure processing callback response.",
+      "tags" : [ "callback" ],
+      "mappings" : [ "callback.response.processed" ]
+    }, {
+      "id" : "platform.callback.response.processed.success",
+      "category" : "extensibility",
+      "description" : "Sucessfully processed callback response.",
+      "tags" : [ "callback" ],
+      "mappings" : [ "callback.response.processed" ]
+    }, {
       "id" : "platform.callback.verify",
       "category" : "extensibility",
       "description" : "Callback has been verified.",
@@ -7366,7 +7378,7 @@
     }, {
       "id" : "app.audit_report.download",
       "category" : "lca",
-      "description" : "",
+      "description" : "Application access report downloaded.",
       "tags" : [ "app" ],
       "mappings" : [ "app.audit_report.download" ]
     }, {
@@ -7408,13 +7420,13 @@
     }, {
       "id" : "app.kerberos_rich_client.instance_not_found",
       "category" : "directories",
-      "description" : "Kerberos based rich client authentication failed - Unknown app instance id.",
+      "description" : "Kerberos based rich client authentication failed: Unknown app instance id.",
       "tags" : [ "app", "kerberos-rich-client" ],
       "mappings" : [ "app.kerberos_rich_client.instance_not_found" ]
     }, {
       "id" : "app.kerberos_rich_client.invalid_org",
       "category" : "directories",
-      "description" : "",
+      "description" : "Kerberos based rich client authentication failed: Invalid org for app instance id",
       "tags" : [ "app", "kerberos-rich-client" ],
       "mappings" : [ "app.kerberos_rich_client.invalid_org" ]
     }, {
@@ -7480,7 +7492,7 @@
     }, {
       "id" : "app.oauth2.as.authorize.scope_denied",
       "category" : "federation",
-      "description" : "",
+      "description" : "Some of the requested scopes were denied by the policy",
       "tags" : [ "oauth2", "oauth2-as-runtime", "oauth2-custom-as" ],
       "mappings" : [ "app.oauth2.as.authorize.scope_denied_failure" ]
     }, {
@@ -7894,7 +7906,7 @@
     }, {
       "id" : "app.office365.api.error.revoke.refresh.token",
       "category" : "msft-apps",
-      "description" : "",
+      "description" : "Failed to revoke refresh tokens for user.",
       "tags" : [ "app", "office365-app" ],
       "mappings" : [ "app.office365.api.error.revoke.refresh.token" ]
     }, {
@@ -8398,7 +8410,7 @@
     }, {
       "id" : "app.user_management",
       "category" : "sync",
-      "description" : "",
+      "description" : "Imported new or deleted existing member of an application group.",
       "tags" : [ "app-user-management" ],
       "mappings" : [ "app.user_management.app_group_member_import.delete_failure", "app.user_management.app_group_member_import.delete_success", "app.user_management.app_group_member_import.insert_failure", "app.user_management.app_group_member_import.insert_success" ]
     }, {
@@ -8680,13 +8692,13 @@
     }, {
       "id" : "application.provision.group_push.activate_mapping",
       "category" : "sync",
-      "description" : "",
+      "description" : "Group push activated mappings.",
       "tags" : [ "app" ],
       "mappings" : [ "platform.group_push.activate_mapping" ]
     }, {
       "id" : "application.provision.group_push.delete_appgroup",
       "category" : "sync",
-      "description" : "",
+      "description" : "Group push deleted application group.",
       "tags" : [ "app" ],
       "mappings" : [ "platform.group_push.delete_appgroup" ]
     }, {
@@ -8758,7 +8770,7 @@
     }, {
       "id" : "application.provision.group_push.push_memberships",
       "category" : "sync",
-      "description" : "",
+      "description" : "Group push pushed memberships.",
       "tags" : [ "app" ],
       "mappings" : [ "platform.group_push.push_memberships" ]
     }, {
@@ -8920,13 +8932,13 @@
     }, {
       "id" : "application.user_membership.restore",
       "category" : "lca",
-      "description" : "",
+      "description" : "Restore user assignment to an application",
       "tags" : [ "app" ],
       "mappings" : [ "app.generic.reversibility.individual.app.recovery", "app.generic.reversibility.personal.app.recovery" ]
     }, {
       "id" : "application.user_membership.restore_password",
       "category" : "lca",
-      "description" : "",
+      "description" : "Restore user's password for an application",
       "tags" : [ "app" ],
       "mappings" : [ "app.generic.reversibility.credentials.recovery" ]
     }, {
@@ -8938,7 +8950,7 @@
     }, {
       "id" : "application.user_membership.show_password",
       "category" : "lca",
-      "description" : "",
+      "description" : "Show user's password for application",
       "tags" : [ "app" ],
       "mappings" : [ "app.generic.show.password" ]
     }, {
@@ -8971,6 +8983,12 @@
       "description" : "Callback modified.",
       "tags" : [ "callback" ],
       "mappings" : [ "platform.callback.modify" ]
+    }, {
+      "id" : "callback.response.processed",
+      "category" : "extensibility",
+      "description" : "Finished processing callback response",
+      "tags" : [ "callback" ],
+      "mappings" : [ "platform.callback.response.processed.failure", "platform.callback.response.processed.success" ]
     }, {
       "id" : "callback.verify",
       "category" : "extensibility",
@@ -9100,7 +9118,7 @@
     }, {
       "id" : "master_application.user_membership.add",
       "category" : "sync",
-      "description" : "",
+      "description" : "User provisioned to app.",
       "tags" : [ "uncategorized" ],
       "mappings" : [ "app.generic.provision.assign_user_to_app" ]
     }, {
@@ -9382,7 +9400,7 @@
     }, {
       "id" : "policy.execute.user.start",
       "category" : "lca",
-      "description" : "",
+      "description" : "Start execution of policy for user.",
       "tags" : [ "policy" ],
       "mappings" : [ "policy.execute.user.start" ]
     }, {
@@ -9424,7 +9442,7 @@
     }, {
       "id" : "policy.rule.action.execute",
       "category" : "lca",
-      "description" : "",
+      "description" : "Scheduled execution of policy rule action.",
       "tags" : [ "policy" ],
       "mappings" : [ "policy.rule.action.execute" ]
     }, {
@@ -9466,31 +9484,31 @@
     }, {
       "id" : "policy.scheduled.execute",
       "category" : "lca",
-      "description" : "",
+      "description" : "Scheduled execution of policy.",
       "tags" : [ "policy" ],
       "mappings" : [ "policy.scheduled.execute" ]
     }, {
       "id" : "scheduled_action.user_suspension.canceled",
       "category" : "lca",
-      "description" : "",
+      "description" : "Canceled scheduled user suspension.",
       "tags" : [ "uncategorized" ],
       "mappings" : [ "cvd.scheduled_action.user_suspension.canceled" ]
     }, {
       "id" : "scheduled_action.user_suspension.completed",
       "category" : "lca",
-      "description" : "",
+      "description" : "Completed scheduled user suspension.",
       "tags" : [ "uncategorized" ],
       "mappings" : [ "cvd.scheduled_action.user_suspension.completed" ]
     }, {
       "id" : "scheduled_action.user_suspension.scheduled",
       "category" : "lca",
-      "description" : "",
+      "description" : "Scheduled user suspension.",
       "tags" : [ "uncategorized" ],
       "mappings" : [ "cvd.scheduled_action.user_suspension.scheduled" ]
     }, {
       "id" : "scheduled_action.user_suspension.updated",
       "category" : "lca",
-      "description" : "",
+      "description" : "Updated scheduled user suspension.",
       "tags" : [ "uncategorized" ],
       "mappings" : [ "cvd.scheduled_action.user_suspension.updated" ]
     }, {
@@ -9514,8 +9532,8 @@
     }, {
       "id" : "security.request.blocked",
       "category" : "adaptive",
-      "description" : null,
-      "tags" : [ ],
+      "description" : "Security request blocked.",
+      "tags" : [ "security" ],
       "mappings" : [ "security.zone.request.blocked" ]
     }, {
       "id" : "security.session.detect_client_roaming",
@@ -9538,13 +9556,13 @@
     }, {
       "id" : "self_service.disabled",
       "category" : "lca",
-      "description" : "",
+      "description" : "Self-service disabled for app.",
       "tags" : [ "self-service" ],
       "mappings" : [ "app.self_service.disabled" ]
     }, {
       "id" : "self_service.enabled",
       "category" : "lca",
-      "description" : "",
+      "description" : "Self-service enabled for app.",
       "tags" : [ "self-service" ],
       "mappings" : [ "app.self_service.enabled" ]
     }, {
@@ -9658,7 +9676,7 @@
     }, {
       "id" : "system.agent.ad.update_user",
       "category" : "directories",
-      "description" : "",
+      "description" : "User Auth and Update",
       "tags" : [ "ad-agent" ],
       "mappings" : [ "app.ad.agent.user-auth-and-update" ]
     }, {
@@ -9730,13 +9748,13 @@
     }, {
       "id" : "system.agent.ldap.reset_user_password",
       "category" : "directories",
-      "description" : "",
+      "description" : "LDAP agent performed a password reset.",
       "tags" : [ "ldap-app" ],
       "mappings" : [ "app.ldap.agent.password_reset", "app.ldap.agent.password_reset.error", "app.ldap.agent.password_reset.timeout", "app.ldap.password.reset.constraint.error", "app.ldap.password.reset.failed", "app.ldap.password.reset.invalid.old.password", "app.ldap.password.reset.succeeded", "app.ldap.password.reset.systemic.error", "app.ldap.password_reset.attribs_not_set", "app.ldap.password_reset.new_confirm_password_empty", "app.ldap.password_reset.new_password_empty", "app.ldap.password_reset.old_new_passwords_equal", "app.ldap.password_reset.old_password_empty", "app.ldap.password_reset.passwords_do_not_match", "app.ldap.password_reset.restriction.error" ]
     }, {
       "id" : "system.agent.ldap.unlock_user_account",
       "category" : "directories",
-      "description" : "",
+      "description" : "LDAP agent performed account unlock for User.",
       "tags" : [ "ldap-app" ],
       "mappings" : [ "app.ldap.unlock.account.failed", "app.ldap.unlock.account.succeeded" ]
     }, {
@@ -10000,13 +10018,13 @@
     }, {
       "id" : "system.iwa_agentless.auth",
       "category" : "directories",
-      "description" : "",
+      "description" : "Agentless IWA authentication.",
       "tags" : [ "iwa", "system" ],
       "mappings" : [ "iwa.agentless.auth.failure", "iwa.agentless.auth.success" ]
     }, {
       "id" : "system.iwa_agentless.update",
       "category" : "directories",
-      "description" : "",
+      "description" : "Update to agentless IWA.",
       "tags" : [ "iwa", "system" ],
       "mappings" : [ "iwa.agentless.update.failure", "iwa.agentless.update.success" ]
     }, {
@@ -10114,43 +10132,43 @@
     }, {
       "id" : "task.lifecycle.activate",
       "category" : "lca",
-      "description" : "",
+      "description" : "Activated system task.",
       "tags" : [ "task" ],
       "mappings" : [ "platform.task.lifecycle.activate" ]
     }, {
       "id" : "task.lifecycle.create",
       "category" : "lca",
-      "description" : "",
+      "description" : "Created system task.",
       "tags" : [ "task" ],
       "mappings" : [ "platform.task.lifecycle.create" ]
     }, {
       "id" : "task.lifecycle.deactivate",
       "category" : "lca",
-      "description" : "",
+      "description" : "Deactivated system task.",
       "tags" : [ "task" ],
       "mappings" : [ "platform.task.lifecycle.deactivate" ]
     }, {
       "id" : "task.lifecycle.delete",
       "category" : "lca",
-      "description" : "",
+      "description" : "Deleted system task.",
       "tags" : [ "task" ],
       "mappings" : [ "platform.task.lifecycle.delete" ]
     }, {
       "id" : "task.lifecycle.update",
       "category" : "lca",
-      "description" : "",
+      "description" : "Updated system task.",
       "tags" : [ "task" ],
       "mappings" : [ "platform.task.lifecycle.update" ]
     }, {
       "id" : "tokens.transform.process",
       "category" : "federation",
-      "description" : "",
+      "description" : "Processed SAML transform command",
       "tags" : [ "token", "tokens-transform" ],
       "mappings" : [ "platform.tokens.transform.process.failure" ]
     }, {
       "id" : "tokens.transform.response",
       "category" : "federation",
-      "description" : "",
+      "description" : "Received response from SAML callback.",
       "tags" : [ "token", "tokens-transform" ],
       "mappings" : [ "platform.tokens.transform.response", "platform.tokens.transform.response.failure" ]
     }, {
@@ -10264,7 +10282,7 @@
     }, {
       "id" : "user.authentication.auth_via_inbound_SAML",
       "category" : "federation",
-      "description" : "",
+      "description" : "Authenticate user via inbound SAML.",
       "tags" : [ "user" ],
       "mappings" : [ "core.user_auth.saml2.inbound_saml_login_failed" ]
     }, {
@@ -10306,7 +10324,7 @@
     }, {
       "id" : "user.authentication.authenticate",
       "category" : "mobile-device-trust",
-      "description" : "",
+      "description" : "Authentication via device trust certificate.",
       "tags" : [ "device-trust-authentication", "user" ],
       "mappings" : [ "core.user_auth.authentication.auth_via_3rd_party_failure", "core.user_auth.authentication.auth_via_3rd_party_success", "core.user_auth.authentication.auth_via_okta_mobile_failure", "core.user_auth.authentication.auth_via_okta_mobile_success", "core.user_auth.authentication.auth_via_omm_failure", "core.user_auth.authentication.auth_via_omm_success", "core.user_auth.authentication.authenticate" ]
     }, {
@@ -10330,7 +10348,7 @@
     }, {
       "id" : "user.credential.enroll",
       "category" : "mobile-device-trust",
-      "description" : "",
+      "description" : "Device Trust certificate enrollment.",
       "tags" : [ "device-trust-cert-distribution-and-binding", "user" ],
       "mappings" : [ "core.user_auth.credential.enroll" ]
     }, {
@@ -10366,7 +10384,7 @@
     }, {
       "id" : "user.lifecycle.jit.error.read_only",
       "category" : "authn",
-      "description" : "",
+      "description" : "Failed to JIT create user.",
       "tags" : [ "user" ],
       "mappings" : [ "core.user.jit.error.read_only" ]
     }, {
