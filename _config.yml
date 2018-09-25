@@ -104,6 +104,11 @@ defaults:
       collection: docs
     values:
       toc: true
+  - 
+    scope:
+      collection: use_cases
+    values:
+      hidden: false
 
 sitemap_ignore:
   - sdk
