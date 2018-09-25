@@ -210,7 +210,7 @@ We're ready to get started! Let's turn to the first concern, data access.
 
 We want to talk to a natively reactive data store. That is, the driver for the database needs to itself support asynchronous I/O, otherwise we won't be able to scale out reads without scaling out threads, which defeats the point. 
 
-Spring Data, an umbrella data access framework, supports a number of reactive data access options including reactive Cassandra, reactive MongoDB, reactive Couchbase and reactive Redis. We've chosen MongoDB, so make sure you have a MongoDB database instance running on your local machine on the default host, port, and accessible with the default username and password. If you're on a Mac, you can use `brew install mongodb`. If you're on on Debian-based Linux distributions, you can use `apt install mongodb`.
+Spring Data, an umbrella data access framework, supports a number of reactive data access options including reactive Cassandra, reactive MongoDB, reactive Couchbase and reactive Redis. We've chosen MongoDB, so make sure you have a MongoDB database instance running on your local machine on the default host, port, and accessible with the default username and password. If you're on a Mac, you can use `brew install mongodb`. If you're on Debian-based Linux distributions, you can use `apt install mongodb`.
 
 On a Mac, you'll need to run the following commands before MongoDB will start.
 
@@ -1479,7 +1479,8 @@ image::{% asset_path 'blog/spring-webflux-apis/reactive-web-app.png' %}[alt=Reac
 
 Copy and paste the URI of your default authorization server, client ID, and the client secret into `src/main/resources/application.yml`. Create this file, and you can delete the `application.properties` file in the same directory.
 
-```yaml
+[source,yaml]
+----
 spring:
   security:
     oauth2:
@@ -1493,7 +1494,7 @@ spring:
               client-id: {clientId}
               client-secret: {clientSecret}
               scope: openid email profile
-```
+----
 
 Restart your Spring Boot app, and try to access `http://localhost:8080/profiles`. You'll be redirected to Okta to login.
 
@@ -1537,7 +1538,7 @@ curl -H"content-type: application/json" -H"authorization: Bearer ${accessToken}"
 
 == Learn More About Reactive Programming, Spring WebFlux, and OIDC
 
-This article showed you how to develop a reactive API with Spring WebFlux and secure it using Spring Security's excellent OIDC support. In a future post, we'll show you how to create a React UI for this API and provide you with techniques for handling streaming data on the client side.
+This article showed you how to develop a reactive API with Spring WebFlux and secure it using Spring Security's excellent OIDC support. In a future post, we'll show you link:/blog/2018/09/24/reactive-apis-with-spring-webflux[how to create a React UI for this API] and provide you with techniques for handling streaming data in your browser.
 
 In the meantime, here's some good articles you can read on reactive programming, Spring WebFlux, and OIDC.
 
