@@ -595,7 +595,7 @@ image::{% asset_path 'blog/spring-webflux-apis/okta-signup.png' %}[alt=Register 
 
 === Create an OIDC App in Okta
 
-{uri-okta-login}[Log in] to your Okta Developer account and navigate to **Applications** > **Add Application**. Click **Web** and click **Next**. Give the app a name you'll remember, and specify `http://localhost:8080/login/oauth2/code/okta` as a Login redirect URI. Click **Done**, then edit the project and enable "Implicit (Hybrid)" as a grant type (allow ID and access tokens) and click **Save**.
+{uri-okta-login}[Log in] to your Okta Developer account and navigate to **Applications** > **Add Application**. Click **Web** and click **Next**. Give the app a name you'll remember, specify `http://localhost:8080/login/oauth2/code/okta` and `http://localhost:3000` as Login redirect URIs and click **Done**. Then edit the project and enable "Implicit (Hybrid)" as a grant type (allow ID and access tokens) and click **Save**.
 
 Copy and paste the URI of your default authorization server, client ID, and the client secret into `reactive-web/src/main/resources/application.yml`.
 
