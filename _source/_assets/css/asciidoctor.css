@@ -363,7 +363,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 .show-for-print{display:inherit!important}}
 
 /* New rules added by mraible */
-.paragraph > p, .sectionbody .ulist, .admonitionblock {
+.paragraph > p, .sectionbody .ulist, .admonitionblock, .quoteblock blockquote p:last-child {
     margin-bottom: 1.25rem;
 }
 
@@ -373,6 +373,25 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 
 .sect1 > h2 {
     margin-top: 60px !important;
+}
+
+.quoteblock {
+    border-radius: 4px;
+    background-color: #fffef7;
+    border: 1px solid #e0e0dc;
+}
+
+.quoteblock blockquote {
+    margin: 10px;
+    padding: 10px 30px;
+    background: unset;
+}
+
+.quoteblock .attribution {
+    margin-top: -1em;
+    margin-right: 1em;
+    text-align: right;
+    margin-bottom: .5em;
 }
 
 /* Integrating with Font Awesome */
@@ -424,6 +443,11 @@ span.icon>.fa {
 pre .conum[data-value]{position:relative;top:-.125em}
 b.conum *{color:inherit!important}
 .conum:not([data-value]):empty{display:none}
+
+/* make it so tables don't stretch in callouts */
+.colist table {
+    width: auto;
+}
 
 /* top-align callout numbers */
 .colist td {
