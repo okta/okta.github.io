@@ -13,29 +13,533 @@ image: blog/spring-full-stack-reactive/cool-image-here.png
 ---
 :page-liquid:
 
+Spring WebFlux can be used to create a REST API with streaming data. Spring WebFlux can also be integrated with WebSockets to provide notifications that clients can listen to. Combining the two is a powerful way to provide real-time data streaming to JavaScript or mobile clients.
 
-== Why React and Spring WebFlux?
+React is a UI toolkit (similar to GWT) that lets you build components with JavaScript (or TypeScript) and JSX. JSX is how you define elements in React and it looks very similar to XML. React's API and JSX are the core of the framework; everything else is an add-on. I won't go into nitty-gritty details about React, we'll assume you've heard of it and are eager to learn how to make it even _more_ reactive!
 
-You hear reactive a lot when talking about JavaScript frameworks. They’re reacting to events on the client app, not the server. But obviously some of your favorite apps seem like they’re real-time. This is because they contain code that listens for server-sent events. Polling an endpoint is a similar technique for "listening".
+image:{% asset_path 'blog/spring-webflux-apis/starbuxman.jpg' %}[alt=Josh Long,role="BlogPost-avatar pull-right img-100px"] I teamed up with Josh Long to write this post. Josh is a fellow Java Champion, Spring Developer Advocate, and all around excellent guy at Pivotal. Josh and I've been good friends for a while now, sharing the same passion for Java, developers, and building bleeding-edge applications. We hope you like this series!
+
+Today, we'll show you how to build a _full-stack_ application using Spring WebFlux for the API, WebSockets for notifications, and React for the UI. This article is the third in a three part series about reactive programming and Spring WebFlux. The first two are listed below.
+
+. link:/blog/2018/09/21/reactive-programming-with-spring[Get Started with Reactive Programming in Spring]
+. link:/blog/2018/09/24/reactive-apis-with-spring-webflux[Build Reactive APIs with Spring WebFlux]
+
+== Reactiveness in Spring WebFlux and React
+
+You hear might hear the term _reactive_ a lot when you read about JavaScript frameworks. When you hear this term in the Java community, it usually refers to asyncronous I/O and non-blocking processes. Spring WebFlux provides an implementation of the reactive streams specification, which standard for asynchronous stream processing with non-blocking back pressure.
+
+The term "reactive" is a bit different in the JavaScript community. It typically refers to how a UI _reacts_ to events happening in other parts of the app. JavaScript does asyncronous processing by default and this can be very useful on the client so as to prevent the browser from locking up.
+
+So how do you go *full-stack reactive* and create an architecture that can handle streaming data from the server, and constantly update the client? You can use many techniques, and I'll show you a few today.
+
+Some of your favorite webapps probably seem like they do real-time processing. They're constantly sending notifications and updating the UI based on events. This is because they contain code that listens (or polls) for server-side events.
 
 == Get Started with Spring WebFlux and WebSockets
 
-Clone
-Disable security
+In the link:/blog/2018/09/24/reactive-apis-with-spring-webflux[last post] from this series, we built a `/profiles` endpoint and a `/ws/profiles` WebSocket endpoint. To begin, clone the repository from GitHub:
+
+----
+git clone git@github.com:oktadeveloper/okta-spring-webflux-react-example.git full-stack-reactive
+----
+
+Rather than messing with security right away, you can disable Spring Security by commenting out its dependencies in `reactive-web/pom.xml`:
+
+[source,xml]
+----
+<!--<dependency>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-starter-security</artifactId>
+</dependency>
+<dependency>
+    <groupId>org.springframework.security</groupId>
+    <artifactId>spring-security-config</artifactId>
+</dependency>
+<dependency>
+    <groupId>org.springframework.security</groupId>
+    <artifactId>spring-security-oauth2-client</artifactId>
+</dependency>
+<dependency>
+    <groupId>org.springframework.security</groupId>
+    <artifactId>spring-security-oauth2-resource-server</artifactId>
+</dependency>
+<dependency>
+    <groupId>org.springframework.security</groupId>
+    <artifactId>spring-security-oauth2-jose</artifactId>
+</dependency>-->
+----
+
+You'll need to have a MongoDB database instance running on your local machine on the default host, port, and accessible with the default username and password. If you're on a Mac, you can install it using `brew install mongodb`. If you're on on Debian-based Linux distributions, you can use `apt install mongodb`.
+
+You can start the application using `./mvnw spring-boot:run`. If you hit its `/profiles` endpoint with https://httpie.org/[HTTPie], you'll see there's no data.
+
+[source,shell]
+----
+$ http :8080/profiles
+HTTP/1.1 200 OK
+Content-Type: application/json;charset=UTF-8
+transfer-encoding: chunked
+
+[]
+----
+
+To run this API with demo data, run `SPRING_PROFILES_ACTIVE=demo ./mvnw`. This will cause the https://github.com/oktadeveloper/okta-spring-webflux-react-example/blob/master/reactive-web/src/main/java/com/example/demo/SampleDataInitializer.java[`SampleDataInitializer`] to create a few generic profiles in MongoDB.
+
+[source,shell]
+----
+$ http :8080/profiles
+HTTP/1.1 200 OK
+Content-Type: application/json;charset=UTF-8
+transfer-encoding: chunked
+----
+[source,json]
+----
+[
+    {
+        "email": "A@email.com",
+        "id": "21f458fd-f718-4bcb-807d-b54d730433b9"
+    },
+    {
+        "email": "C@email.com",
+        "id": "6f470aef-a04b-4bf8-bd66-44d29c724c0b"
+    },
+    {
+        "email": "B@email.com",
+        "id": "84bab375-e8e3-4c86-b3d0-f4fc65987767"
+    },
+    {
+        "email": "D@email.com",
+        "id": "111249b2-e85b-4772-a610-f5ac5e496705"
+    }
+]
+----
+
+Open your browser to `http://localhost:8080/ws.html` and you'll be greeted with a blank page. This page contains a WebSocket listener that produces alerts when new profiles are added.
+
+[source,html]
+----
+<script>
+  var socket = new WebSocket('ws://localhost:8080/ws/profiles');
+  socket.addEventListener('message', function (event) {
+    window.alert('message from server: ' + event.data);
+  });
+</script>
+----
+
+There's a `create.sh` script you can run to create new profiles. When you run it, you'll see alerts in your browser.
+
+image::{% asset_path 'blog/spring-full-stack-reactive/create-profile.png' %}[alt=Create profile,width=800,align=center]
+
+Pretty slick, eh? You have an API that provides a REST endpoint in a non-blocking fashion, _and_ it notifies you when new data arrives!
+
+Now let's see how you can handle this data with React.
 
 == Create an App with React
 
-=== Create a ProfileList Component
+I recently did a poll to see what my Twitter followers preferred when developing React apps: JavaScript or TypeScript.
+
+++++
+<div style="max-width: 500px; margin 0 auto">
+<blockquote class="twitter-tweet" data-lang="en"><p lang="en" dir="ltr">For those of you developing with <a href="https://twitter.com/reactjs?ref_src=twsrc%5Etfw">@reactjs</a>, do you prefer to use JavaScript or TypeScript?</p>&mdash; Matt Raible (@mraible) <a href="https://twitter.com/mraible/status/1043539841831456768?ref_src=twsrc%5Etfw">September 22, 2018</a></blockquote>
+<script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+</div>
+++++
+
+Since most people voted for TypeScript, and we happen to like it ourselves, we'll show you how to create a React app with Create React App and TypeScript.
+
+Open a terminal window, navigate to the `full-stack-reactive` directory, and run the following command. This will install create-react-app, create a `react-app` directory and files, and install all of its dependencies.
+
+----
+npx create-react-app react-app --scripts-version=react-scripts-ts
+----
+
+When this process finishes, open `react-app/tslist.json` and add the following rules to turn off some annoying ones.
+
+[source,json]
+----
+"rules": {
+  "interface-name": [true, "never-prefix"],
+  "no-empty-interface": false,
+  "array-type": [true, "generic"],
+  "member-access": [true, "no-public"],
+  "ordered-imports": false,
+  "object-literal-sort-keys": false,
+  "no-console": false
+}
+----
+
+After modifying this file (and turning off public methods, because that's the default), you'll need to modify `react-app/src/App.tsx` and remove the `public` keyword. In other words, change `public render(...)` to `render()`.
+
+=== Create a ProfileList Component to Fetch Data from Your Spring WebFlux API
+
+Create a `react-app/src/ProfileList.tsx` component that fetches data from the `/profiles` endpoint.
+
+[source,typescript]
+----
+import * as React from 'react';
+
+interface Profile {
+  id: number;
+  email: string;
+}
+
+interface ProfileListProps {
+}
+
+interface ProfileListState {
+  profiles: Array<Profile>;
+  isLoading: boolean;
+}
+
+class ProfileList extends React.Component<ProfileListProps, ProfileListState> {
+
+  constructor(props: ProfileListProps) {
+    super(props);
+
+    this.state = {
+      profiles: [],
+      isLoading: false
+    };
+  }
+
+  async fetchData() {
+    this.setState({isLoading: true});
+
+    const response = await fetch('http://localhost:3000/profiles');
+    const data = await response.json();
+    this.setState({profiles: data, isLoading: false});
+  }
+
+  async componentDidMount() {
+    this.fetchData();
+  }
+
+  render() {
+    const {profiles, isLoading} = this.state;
+
+    if (isLoading) {
+      return <p>Loading...</p>;
+    }
+
+    return (
+      <div>
+        <h2>Profile List</h2>
+        {profiles.map((profile: Profile) =>
+          <div key={profile.id}>
+            {profile.email}<br/>
+          </div>
+        )}
+      </div>
+    );
+  }
+}
+
+export default ProfileList;
+----
+
+To make this component render when your app loads, add it to `App.tsx`.
+
+[source,typescript]
+----
+import * as React from 'react';
+import './App.css';
+
+import logo from './logo.svg';
+import ProfileList from './ProfileList';
+
+class App extends React.Component {
+  render() {
+    return (
+      <div className="App">
+        <header className="App-header">
+          <img src={logo} className="App-logo" alt="logo" />
+          <h1 className="App-title">Welcome to React</h1>
+        </header>
+        <ProfileList/>
+      </div>
+    );
+  }
+}
+
+export default App;
+----
+
+Before your React app can talk to your API, you'll need to proxy the requests from `http://localhost:3000/profiles` to `http://localhost:8080/profiles`. You can do this by adding a proxy setting to `react-app/package.json`.
+
+[source,json]
+----
+"proxy": "http://localhost:8080"
+----
+
+Restart your Spring Boot app and start your React app with `npm start`. You should see a list of profiles at `http://localhost:3000`.
+
+image::{% asset_path 'blog/spring-full-stack-reactive/profile-list.png' %}[alt=Profile List,width=800,align=center]
 
 == Techniques for Streaming Data with React
 
-=== WebSockets
+Displaying data from your reactive API is cool, but wouldn't it be cooler if your UI was updated when new profiles were added? There's several ways you can implement this behavior, and I'll show you a few options today. It's possible this change if y'all send us some better ideas. ;)
 
-=== Server Sent Events (SSE)
+=== Polling with Interval
 
-=== Polling with Timer
+The easiest, and most costly, technique you can implement is to poll the server for new data every few seconds. The code below explains how this works.
+
+.Polling With Interval
+====
+[source,typescript]
+----
+import * as React from 'react';
+
+interface Profile {
+  id: number;
+  email: string;
+}
+
+interface ProfileListProps {
+}
+
+interface ProfileListState {
+  profiles: Array<Profile>;
+  isLoading: boolean;
+}
+
+class ProfileList extends React.Component<ProfileListProps, ProfileListState> {
+  private interval: any; <1>
+
+  constructor(props: ProfileListProps) {
+    super(props);
+
+    this.state = {
+      profiles: [],
+      isLoading: false
+    };
+  }
+
+  async fetchData() {
+    this.setState({isLoading: true});
+
+    const response = await fetch('http://localhost:8080/profiles');
+    const data = await response.json();
+    this.setState({profiles: data, isLoading: false});
+  }
+
+  async componentDidMount() {
+    this.fetchData(); // <2>
+    this.interval = setInterval(() => this.fetchData(), 1000); // <3>
+  }
+
+  componentWillUnmount() {
+    clearInterval(this.interval);
+  }
+
+  render() {
+    const {profiles, isLoading} = this.state;
+
+    if (isLoading) {
+      return <p>Loading...</p>;
+    }
+
+    return (
+      <div>
+        <h2>Profile List</h2>
+        {profiles.map((profile: Profile) =>
+          <div key={profile.id}>
+            {profile.email}<br/>
+          </div>
+        )}
+        <a href="/">Home</a>
+      </div>
+    );
+  }
+}
+
+export default ProfileList;
+----
+<1> Define a local `interval` variable so fetching will stop when the component is unmounted.
+<2> Call `fetchData()` to get the initial set of data when component is mounted.
+<3> Call `fetchData()` every 1000 milliseconds, or 1 second.
+====
+
+To test that this works, replace the code in `ProfileList.tsx` with the code above. Then add a `create-stream.sh` file to your `react-app` directory and populate it with the following:
+
+[source,shell]
+----
+#!/bin/bash
+port=${1:-8080}
+count=0
+
+profile () {
+  ((count++))
+  echo "posting #${count}"
+  http POST http://localhost:${port}/profiles email="random${count}"
+  if [ $count -gt 120 ]
+  then
+    echo "count is $count, ending..."
+    break
+  fi
+}
+
+while sleep 1; do profile; done
+----
+
+This creates a new profile record every one second, for 120 seconds. You will need to install https://httpie.org/[HTTPie] before running this script. Run it, open `http://localhost:3000`, and you should see the list getting refreshed as new data is added.
+
+You'll probably notice it's a jarring experience because the list flickers as more data is added.
 
 === Polling with RxJS
+
+A better way to do polling is with RxJS. You can install it using npm.
+
+----
+npm i rxjs@6.3.2
+----
+
+You can replace the `fetchData()`, `componentDidMount()`, and `componentWillUnmount()` with a single `componentDidMount()` method.
+
+.Polling with RxJS
+====
+[source,typescript]
+----
+import { interval } from 'rxjs';
+import { startWith, switchMap } from 'rxjs/operators';
+// other imports
+
+class ProfileList extends React.Component<ProfileListProps, ProfileListState> {
+
+  // constructor()
+
+  async componentDidMount() {
+    this.setState({isLoading: true});
+
+    const request = interval(1000).pipe( // <1>
+      startWith(0), // <2>
+      switchMap(() => // <3>
+        fetch('http://localhost:3000/profiles')
+          .then((response) => response.json())
+      ));
+
+    request.subscribe(data => { // <4>
+      this.setState({profiles: data, isLoading: false});
+    })
+  }
+
+  // render()
+}
+
+export default ProfileList;
+----
+<1> Start an interval Observable, running every one second.
+<2> `startWith` indicates that it should fetch right away, which makes it so you don't need an intitial data fetch.
+<3> `switchMap` has a cancelling effect, which is different from other flattening operators. On each emission the previous inner observable (the result of `fetch()`) is cancelled and the new observable is subscribed. Use `mergeMap` if you need every request to complete.
+====
+
+Restart your server to start with default data again, run `create-stream.sh`, and open your browser to `http://localhost:3000`. You'll notice the profiles are updating, and there's no flicker in the page.
+
+Fetching new data every few seconds is expensive and silly. Wouldn't it be cooler to take advantage of the WebSocket endpoint that notifies when new data arrives?!
+
+=== WebSockets
+
+You don't need to install anything to use WebSockets. They're supported by most modern browsers. Below is a report from https://caniuse.com/#search=websocket[caniuse.com].
+
+image::{% asset_path 'blog/spring-full-stack-reactive/caniuse-websocket.png' %}[alt=Can I use WebSocket,width=800,align=center]
+
+With WebSockets, you just need a single `componentDidMount()` and no additional imports.
+
+.WebSockets
+====
+[source,typescript]
+----
+// imports
+
+class ProfileList extends React.Component<ProfileListProps, ProfileListState> {
+
+  // constructor()
+
+  async componentDidMount() {
+    this.setState({isLoading: true});
+
+    const response = await fetch('http://localhost:3000/profiles');
+    const data = await response.json();
+    this.setState({profiles: data, isLoading: false});
+
+    const socket = new WebSocket('ws://localhost:3000/ws/profiles'); // <1>
+    socket.addEventListener('message', async (event: any) => { // <2>
+      const profile = JSON.parse(event.data);
+      this.state.profiles.push(profile);
+      this.setState({profiles: this.state.profiles}); // <3>
+    });
+  }
+
+  // render()
+}
+
+export default ProfileList;
+----
+<1> Create a new `WebSocket`.
+<2> Listen for new profiles.
+<3> Update the profiles using `setState()`. Without this line, the UI won't be updated.
+====
+
+You will also need to modify `package.json` so it proxies WebSocket requests.
+
+[source,json]
+----
+"proxy": {
+  "/ws": {
+    "target": "http://localhost:8080/ws",
+    "ws": true
+  },
+  "/": {
+    "target": "http://localhost:8080"
+  }
+}
+----
+
+WebSockets make it easy to get notifications from a WebFlux API, don't they?!
+
+=== Server-Sent Events (SSE)
+
+One last technique I'd like to show you is server-sent events (SSE). Create a `ServerSentEventController.java` class and fill it with the following Java code.
+
+.`reactive-web/src/main/java/com/example/demo/ServerSentEventController.java`
+====
+[source,java]
+----
+package com.example.demo;
+
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import org.springframework.http.MediaType;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RestController;
+import reactor.core.publisher.Flux;
+
+@RestController
+public class ServerSentEventController {
+    private final Flux<ProfileCreatedEvent> events;
+    private final ObjectMapper objectMapper;
+
+    public ServerSentEventController(ProfileCreatedEventPublisher eventPublisher, ObjectMapper objectMapper) {
+        this.events = Flux.create(eventPublisher).share(); // <1>
+        this.objectMapper = objectMapper;
+    }
+
+    @GetMapping(path = "/sse/profiles", produces = MediaType.TEXT_EVENT_STREAM_VALUE) // <2>
+    public Flux<String> profiles() {
+        return this.events.map(pce -> {
+            try {
+                return objectMapper.writeValueAsString(pce); // <3>
+            } catch (JsonProcessingException e) {
+                throw new RuntimeException(e);
+            }
+        });
+    }
+}
+---
+<1> The `.share()` method is important to allow multiple clients to consume your data.
+<2> You must use `MediaType.TEXT_EVENT_STREAM_VALUE` to indicate you'll be sending streaming text.
+<3> Return the `ProfileCreatedEvent` as a JSON string.
+====
+
+
 
 == Secure Your React App with OIDC
 
@@ -81,3 +585,13 @@ return session.send(messageFlux);
 Then you can change the React code to lookup the details from that ID.
 
  since socket.io isn't supported by Spring and regular
+
+
+ Install react-router-dom and its types package so you can add routing to your React app.
+
+ ----
+ npm i react-router-dom@4.3.1
+ npm i -D @types/react-router-dom@4.3.1
+ ----
+
+ Modify `App
