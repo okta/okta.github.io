@@ -474,9 +474,9 @@ You made some real progress here. You saw how to create a simple Spring Boot app
 
 And finally, you've seen how to create groups and users on Okta, how to tie those into your Spring Boot app, and how to use the `@PreAuthorize` annotation to configure authorization based on group membership.
 
-If you’d like to check out this complete project, you can find the repo on Github at: <https://github.com/moksamedia/okta-spring-simple-app>.
+If you'd like to check out this complete project, you can find the repo on Github at: <https://github.com/moksamedia/okta-spring-simple-app>.
 
-If you’d like to learn more about Spring Boot, Spring Security, or Okta, check out any of these great tutorials:
+If you'd like to learn more about Spring Boot, Spring Security, or Okta, check out any of these great tutorials:
 - [Get Started with Spring Boot, OAuth 2.0, and Okta](/blog/2017/03/21/spring-boot-oauth)
 - [Add Single Sign-On to Your Spring Boot Web App in 15 Minutes](/blog/2017/11/20/add-sso-spring-boot-15-min)
 - [Secure Your Spring Boot Application with Multi-Factor Authentication](/blog/2018/06/12/mfa-in-spring-boot)
