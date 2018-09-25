@@ -1538,7 +1538,7 @@ curl -H"content-type: application/json" -H"authorization: Bearer ${accessToken}"
 
 == Learn More About Reactive Programming, Spring WebFlux, and OIDC
 
-This article showed you how to develop a reactive API with Spring WebFlux and secure it using Spring Security's excellent OIDC support. In a future post, we'll show you how to create a React UI for this API and provide you with techniques for handling streaming data on the client side.
+This article showed you how to develop a reactive API with Spring WebFlux and secure it using Spring Security's excellent OIDC support. In a future post, we'll show you link:/blog/2018/09/24/reactive-apis-with-spring-webflux[how to create a React UI for this API] and provide you with techniques for handling streaming data in your browser.
 
 In the meantime, here's some good articles you can read on reactive programming, Spring WebFlux, and OIDC.
 
