@@ -7,6 +7,7 @@ tags: [authentication, spring boot, oidc, oauth2.0]
 tweets:
 - "Spring Boot + OAuth 2.0 + Okta = ❤️"
 - "Spring Boot Web apps are easy to secure with OAuth 2.0 & Okta!"
+image: blog/build-a-spring-boot-webapp/security-config.png
 ---
 
 Developers know that securing web apps can be a pain. Doing it right is tough. The worst part is that "right" is a moving target. Security protocols change. Vulnerabilities are found in dependencies and patches are released. Tons of often complex boilerplate code has to be generated. The software-as-service paradigm has proliferated over the last decade, and while I love reinventing the wheel as much as the next developer (because, clearly, I'm gonna write it better than the yahoo *they* hired), security is an area where I'm happy to offload this work to specialists. Enter Okta.
