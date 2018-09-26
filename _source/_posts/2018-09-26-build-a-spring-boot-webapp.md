@@ -27,7 +27,7 @@ The next thing will be to download the example project for this tutorial [from G
 git clone https://github.com/oktadeveloper/okta-spring-simple-app-example.git spring-app
 ```
 
-This project uses Gradle, as our build tool, and the Thymeleaf templating system.
+This project uses Gradle, as the build tool, and the Thymeleaf templating system.
 
 ## Run the Initial Web App
 
@@ -134,7 +134,7 @@ public class SpringSecurityWebAppConfig extends WebSecurityConfigurerAdapter {
 }
 ```
 
-The `@Configuration` annotation tells Spring that we are using the class as a source of programmatic configuration, allowing us to override the `configure` method.
+The `@Configuration` annotation tells Spring that we are using the class as a source of programmatic configuration, allowing us to override the `configure()` method.
 
 The last Java class, `SimpleAppController`, is our only controller object. Controllers in a Spring Boot web application are where URL requests are mapped to Java code. The `@Controller` annotation tells Spring that this class is a controller. 
 
@@ -482,6 +482,6 @@ If you'd like to learn more about Spring Boot, Spring Security, or Okta, check o
 - [Secure Your Spring Boot Application with Multi-Factor Authentication](/blog/2018/06/12/mfa-in-spring-boot)
 - [Build a Secure API with Spring Boot and GraphQL](/blog/2018/08/16/secure-api-spring-boot-graphql)
 
-If you want to dive deeper, take a look at the [Okta Spring Boot Stater GitHub page](https://github.com/okta/okta-spring-boot).
+If you want to dive deeper, take a look at the [Okta Spring Boot Starter GitHub page](https://github.com/okta/okta-spring-boot).
 
 If you have any questions about this post, please add a comment below. For more awesome content, follow [@oktadev](https://twitter.com/oktadev) on Twitter, like us [on Facebook](https://www.facebook.com/oktadevelopers/), or subscribe to [our YouTube channel](https://www.youtube.com/channel/UC5AMiWqFVFxF1q9Ya1FuZ_Q).
