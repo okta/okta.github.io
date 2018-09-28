@@ -27,20 +27,25 @@ The relationship between System Log API and Events API event types is generally 
 <div id="event-type-count">Found <b>{{ eventTypes.size }}</b> matches</div>
 {% for eventType in eventTypes %}
 <div class="event-type" markdown="block">
-#### {{ eventType.id }}
-{% if eventType.mappings.size > 0 %}
-<div class="event-type-mappings">
-  <b>Legacy event type(s): </b> {{ eventType.mappings | join: ', ' }}
-</div>
-{% endif %}
-{: .event-type-description }
-{% if eventType.description != "" %}
-{{ eventType.description}}
-{% else %}
-_No description_
-{% endif %}
-<div class="event-type-tags">
-{% for tag in eventType.tags%}<code class="event-type-tag">{{ tag }}</code>{% endfor %}
-</div>
+{%- assign parts = eventType.id | split: '.' -%}
+{%- capture id -%}{%- for part in parts -%}{%- if forloop.first == true -%}<b>{{ part }}</b>{%- else -%}.{{ part }}{%- endif -%}{%- endfor -%}{%- endcapture -%}
+#### {{ id }}
+  {% if eventType.mappings.size > 0 %}
+  <div class="event-type-mappings">
+    <b>Legacy event types: </b> {{ eventType.mappings | join: ', ' }}
+  </div>
+  {% endif %}
+  {: .event-type-description }
+  {% if eventType.description != "" %}
+  {{ eventType.description}}
+  {% else %}
+  _No description_
+  {% endif %}
+  <div class="event-type-tags">
+  {% for tag in eventType.tags%}<code class="event-type-tag">{{ tag }}</code>{% endfor %}
+  </div>
+  <div class="event-type-release">
+  Since: <a href="/docs/change-log/">{{ eventType.info.release }}</a>
+  </div>
 </div>
 {% endfor %}
