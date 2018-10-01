@@ -3,7 +3,6 @@
   message(s), which should be descriptive and informative.
 
 ### Resolves:
-* [Issue #X](#X)
-<!-- Required for Okta-generated PRs -->
+
 * [OKTA-XXXXXX](https://oktainc.atlassian.net/browse/OKTA-XXXXXX)
 

@@ -110,7 +110,7 @@ of the callback response.
   * You must sign the JWT using either the app's client secret, or a private key whose public key is registered on the app's JWKSet.
   * The JWT can't be encrypted.
   * Okta supports the [HMAC](https://tools.ietf.org/html/rfc7518#section-3.2), [RSA](https://tools.ietf.org/html/rfc7518#section-3.3) and [ECDSA](https://tools.ietf.org/html/rfc7518#section-3.4) signature algorithms. HMAC signatures require that the client has a `token_endpoint_auth_method` which uses a `client_secret`. RSA and ECDSA signatures requires that the client registers a public key.
-  * We recommend you don't duplicate any request parameters in both the JWT and the query URI itself. However, you can do so with `state`, `nonce`, `code_challenge`, and `code_challenge_method`. In those cases, the values in the query URI will override the JWT values.
+  * We recommend you don't duplicate any request parameters in both the JWT and the query URI itself. However, you can do so with `state`, `nonce`, `code_challenge`, and `code_challenge_method`. In those cases, the values in the JWT will override the query URI values.
   * Okta validates the `request` parameter in the following ways:
     1. `iss` is required and must  be the `client_id`.
     2. `aud` is required and must be same value as the authorization server issuer that mints the ID or access token. This value is published in the metadata for your authorization server.

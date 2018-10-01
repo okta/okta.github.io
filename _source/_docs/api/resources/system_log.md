@@ -23,6 +23,8 @@ Notes on the System Log API:
   * Event introspection and audit.
 * It is not intended to be used as a Database as a Service (DBaaS), or otherwise directly serve data to downstream consumers without an intermediate data store.
 
+For information on migrating from the Events API to the System Log API please see [Events API Migration](/use_cases/events-api-migration/).
+
 ## Getting Started
 
 The System Log API has one endpoint:
