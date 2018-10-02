@@ -14,7 +14,7 @@ integration: back-end
 		</a>
 	</li>
 	<li >
-		<a href='/code/java/spring.html'>
+		<a href='/code/java/spring/'>
 			<i class='icon code-spring-32'></i><span>Spring</span>
 		</a>
 	</li>
