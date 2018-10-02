@@ -258,8 +258,8 @@ Spring WebFlux does not depend on or require the Servlet APIs to work. It ships 
 
 This post is the first in a series on reactive programming, Spring WebFlux, and handling real-time data with React. The next posts in this series can be found below.
 
-* link:/blog/2018/09/25/spring-webflux-websockets-react[Build Reactive APIs with Spring WebFlux]
-* link:/blog/2018/09/24/reactive-apis-with-spring-webflux[Full Stack Reactive with Spring WebFlux, WebSockets, and React]
+* link:/blog/2018/09/24/reactive-apis-with-spring-webflux[Build Reactive APIs with Spring WebFlux]
+* link:/blog/2018/09/25/spring-webflux-websockets-react[Full Stack Reactive with Spring WebFlux, WebSockets, and React]
 
 If you'd like to learn more, check out these interesting resources on reactive programming and Spring.
 
