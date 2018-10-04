@@ -40,20 +40,20 @@ git clone -b start https://github.com/oktadeveloper/okta-spring-boot-app-with-au
 The starting point of the project is a very simple Spring Boot application without any Okta integration (we'll add this later). The important files are:
 
  - Three Java class files in `src/main/java`
-	 - `Application.java`: 
-		 - The entry point for the entire app
-		 - Loads the Spring Boot framework
-	 - `SimpleAppController.java`
-		 - Our basic controller class
-		 - Maps requests to Thymeleaf template files
-	 - `SpringSecurityWebAppConfig.java`
-		 - Subclass of Spring's WebSecurityConfigurerAdapter
-		 - Override point that allows us to customize web application behavior
+     - `Application.java`: 
+         - The entry point for the entire app
+         - Loads the Spring Boot framework
+     - `SimpleAppController.java`
+         - Our basic controller class
+         - Maps requests to Thymeleaf template files
+     - `SpringSecurityWebAppConfig.java`
+         - Subclass of Spring's WebSecurityConfigurerAdapter
+         - Override point that allows us to customize web application behavior
  - Thymeleaf template files in `src/main/resources/templates`
  - `build.gradle` file
-	 - This is the build script that tells Gradle how to build and run the app
+     - This is the build script that tells Gradle how to build and run the app
  - `src/main/resources/application.yml`
-	 - application properties configuration file
+     - application properties configuration file
 
 `src/main/java/Application.java` is the entry point for the entire app, and is super simple. `SpringApplication.run()` bootstraps the Spring application from the Java `main` method. Notice that the Application class is the argument. This class contains the `@SpringBootApplication` annotation, which tells Spring to load the Spring Boot application support structure.
 
@@ -111,12 +111,12 @@ The `home.html` file is here:
             </div>  
   
             <!--/* displayed if account IS NOT null, indicating that the user IS logged in */-->  
-		    <div th:if="${#authorization.expression('isAuthenticated()')}">  
+            <div th:if="${#authorization.expression('isAuthenticated()')}">  
                 <h1 th:inline="text">Hello, <span th:text="${#authentication.name}"></span>!</h1>  
             </div>  
               
             <!--/* displayed if account IS null, indicating that the user IS NOT logged in */-->  
-		    <div th:unless="${#authorization.expression('isAuthenticated()')}">  
+            <div th:unless="${#authorization.expression('isAuthenticated()')}">  
                 <h1>Who are you?</h1>  
             </div>  
   
@@ -135,7 +135,7 @@ For example, these lines includes a check that only displays the `div` element i
 
 ```html
 <div th:if="${#authorization.expression('isAuthenticated()')}">
-	<h1 th:inline="text">Hello, <span th:text="${#authentication.name}"></span>!</h1>
+    <h1 th:inline="text">Hello, <span th:text="${#authentication.name}"></span>!</h1>
 </div>
 ```
 
@@ -263,8 +263,8 @@ Add the `restricted()` method to your `SimpleAppController.java` class file:
 @Controller  
 class SimpleAppController { 
  
-	/* omitted for brevity */
-	
+    /* omitted for brevity */
+    
     @RequestMapping("/restricted")  
     String restricted() {  
         return "restricted";  
@@ -285,8 +285,7 @@ Create a `restricted.html` file in the `src/main/resources/templates` directory:
         <div class="box col-md-6 col-md-offset-3">  
             <div class="okta-header">  
                 <img src="img/logo.png"/>  
-            </div>  
-  
+            </div>
   
             <!--/* displayed if account IS NOT null, indicating that the user IS logged in */-->  
   <div th:if="${#authorization.expression('isAuthenticated()')}">  
@@ -299,7 +298,7 @@ Create a `restricted.html` file in the `src/main/resources/templates` directory:
             </div>  
   
             <a href="/" class="btn btn-primary">Go Home</a>  
-  
+
         </div>  
     </div>  
 </div>  
@@ -370,18 +369,17 @@ The `SpringSecurityWebAppConfig` class code should now look like this:
 public class SpringSecurityWebAppConfig extends WebSecurityConfigurerAdapter {  
   
   @Bean  
-  GrantedAuthorityDefaults grantedAuthorityDefaults() {  
-        return new GrantedAuthorityDefaults(""); // Remove the ROLE_ prefix  
+  GrantedAuthorityDefaults grantedAuthorityDefaults() { 
+      return new GrantedAuthorityDefaults(""); // Remove the ROLE_ prefix  
   }  
       
     @Override  
   protected void configure(HttpSecurity http) throws Exception {  
-        http.authorizeRequests()  
-                .antMatchers("/").permitAll()  
-                .antMatchers("/img/**").permitAll()  
-                .anyRequest().authenticated();  
-  }  
-      
+      http.authorizeRequests()  
+          .antMatchers("/").permitAll()  
+          .antMatchers("/img/**").permitAll()  
+          .anyRequest().authenticated();  
+  }
 }
 ```
 
@@ -422,7 +420,7 @@ Finally, add a new Thymeleaf template file called `admin.html`.
             <h1 th:inline="text">Hello admin!</h1>  
   
             <a href="/" class="btn btn-primary">Go Home</a>  
-  
+
         </div>  
     </div>  
 </div>  
@@ -446,7 +444,7 @@ Name the group "Admin" and give it a description (I put "Administrators", but it
 
 The next thing you'll need to do is add a "groups" claim to the default authorization server.
 
-From the top menu, go to **API** and click on **Authorization Servers**"
+From the top menu, go to **API** and click on **Authorization Servers**.
 
 Click on the  **default** authorization server.
 
@@ -530,7 +528,7 @@ Now try and access the `/admin` endpoint. You won't be able to. Your new user is
 
 Okta and Spring Boot make it super easy to make professional web applications. In this tutorial we demonstrated how to create a basic Spring Boot project, how to quickly add Okta OAuth 2.0 SSO to it, and how to configure Group-based authorization both on Okta and with Spring Security. We also looked at Okta's Self-Service Registration feature that makes it super simple to let users self-register.
 
-This tutorial used an **AdminService** object and an **Roles** class to define the Group-based authorization behavior. This method makes sense for larger projects that require flexibility and programmatic authorization. Simpler projects can use the `@hasAuthority` annotation directly on controller methods. Take a look at this tutorial to see how this is accomplished: # [Build a Web App with Spring Boot and Spring Security in 15 Minutes](/blog/2018/09/26/build-a-spring-boot-webapp#configure-authorization-groups-in-okta).  
+This tutorial used an **AdminService** object and an **Roles** class to define the Group-based authorization behavior. This method makes sense for larger projects that require flexibility and programmatic authorization. Simpler projects can use the `@hasAuthority` annotation directly on controller methods. Take a look at this tutorial to see how this is accomplished: [Build a Web App with Spring Boot and Spring Security in 15 Minutes](/blog/2018/09/26/build-a-spring-boot-webapp#configure-authorization-groups-in-okta).  
 
 If you'd like to learn more about Spring Boot, Spring Security, or Okta, check out any of these great tutorials:
 
