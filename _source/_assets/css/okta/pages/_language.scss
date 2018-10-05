@@ -16,6 +16,10 @@
 		    .icon-48 {
 				position: absolute;
 			    left: 0px;
+			    &:before, &:after{
+			    	margin-right: 0;
+			    	margin-left: 0;
+			    }
 		    }
 		}
 
@@ -25,11 +29,6 @@
 
 		pre {
 			margin: auto;
-		}
-
-		.code-button {
-			height: get-spacing('large') !important;
-			padding: get-spacing('small') !important;
 		}
 	}
 

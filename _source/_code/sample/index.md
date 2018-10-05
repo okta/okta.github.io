@@ -31,12 +31,12 @@ New to Okta? Our Quick Start Guide will walk you through adding user authenticat
 
 <ul class='language-ctas'>
   <li>
-    <a href='/signup/' class='code-button highlighted' data-proofer-ignore>
+    <a href='/signup/' class='Button--red' data-proofer-ignore>
       <span>Create Free Account</span>
     </a>
   </li>
   <li>
-    <a href='/quickstart/#/android/java/generic' class='code-button inverse' data-proofer-ignore>
+    <a href='/quickstart/#/android/java/generic' class='Button--blue' data-proofer-ignore>
       <span>Android Quick Start</span>
     </a>
   </li>
