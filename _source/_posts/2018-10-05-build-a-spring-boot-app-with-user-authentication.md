@@ -66,7 +66,7 @@ public class Application {
 }
 ```
 
-'src/main/java/SpringSecurityWebAppConfig.java` is (at the moment) a trivial subclass of Spring's WebSecurityConfigurerAdapter class. You will use this class to configure some global security options. Right now it's pretty boring.
+`src/main/java/SpringSecurityWebAppConfig.java` is (at the moment) a trivial subclass of Spring's WebSecurityConfigurerAdapter class. You will use this class to configure some global security options. Right now it's pretty boring.
 
 ```java
 @Configuration  
@@ -97,8 +97,7 @@ The `home.html` file is here:
 
 ```html
 <html xmlns:th="http://www.thymeleaf.org"  
-  xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4"  
->  
+  xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">  
 <head>  
     <!--/*/ <th:block th:include="fragments/head :: head"/> /*/-->  
 </head>  
@@ -174,7 +173,7 @@ You will see the following:
 
 {% img blog/spring-boot-user-auth/who-are-you.png alt:"Who are you?" width:"700" %}{: .center-image }
 
-## Configure User Authentication in Your Spring Boot App with OAuth. 2.0
+## Configure User Authentication in Your Spring Boot App with OAuth 2.0
 
 So far we have a super basic "hello world"-ish Spring Boot application without any security configured at all (although we do have the necessary dependencies already in the `build.gradle` file).
 
@@ -367,19 +366,19 @@ The `SpringSecurityWebAppConfig` class code should now look like this:
 @Configuration  
 @EnableGlobalMethodSecurity(prePostEnabled = true)  
 public class SpringSecurityWebAppConfig extends WebSecurityConfigurerAdapter {  
-  
-  @Bean  
-  GrantedAuthorityDefaults grantedAuthorityDefaults() { 
-      return new GrantedAuthorityDefaults(""); // Remove the ROLE_ prefix  
-  }  
-      
+
+    @Bean  
+    GrantedAuthorityDefaults grantedAuthorityDefaults() { 
+        return new GrantedAuthorityDefaults(""); // Remove the ROLE_ prefix  
+    }  
+
     @Override  
-  protected void configure(HttpSecurity http) throws Exception {  
-      http.authorizeRequests()  
-          .antMatchers("/").permitAll()  
-          .antMatchers("/img/**").permitAll()  
-          .anyRequest().authenticated();  
-  }
+    protected void configure(HttpSecurity http) throws Exception {  
+        http.authorizeRequests()  
+            .antMatchers("/").permitAll()  
+            .antMatchers("/img/**").permitAll()  
+            .anyRequest().authenticated();  
+    }
 }
 ```
 
@@ -420,7 +419,6 @@ Finally, add a new Thymeleaf template file called `admin.html`.
             <h1 th:inline="text">Hello admin!</h1>  
   
             <a href="/" class="btn btn-primary">Go Home</a>  
-
         </div>  
     </div>  
 </div>  
