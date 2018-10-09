@@ -185,10 +185,6 @@ HTTP 200:
 
 {% api_operation post /api/v1/policies %}
 
-#### Request Parameters
-
-The policy ID described in the [Policy Object](#PolicyObject) is required.
-
 ##### Request Example
 {:.api .api-request .api-request-example}
 
@@ -734,7 +730,7 @@ The Rules model defines several attributes:
 Parameter | Description | Data Type | Required | Default
 | --- | --- | --- | ---
 id | Identifier of the rule | String | No | Assigned
-type | Rule type. Valid values: `OKTA_SIGN_ON` or `PASSWORD` or `MFA_ENROLL` | String (Enum) | Yes |
+type | Rule type. Valid values: `SIGN_ON` or `PASSWORD` or `MFA_ENROLL` | String (Enum) | Yes |
 status | Status of the rule: `ACTIVE` or `INACTIVE` | String (Enum) | No | ACTIVE
 priority | Priority of the rule | Integer | No | Last / Lowest Priority
 system | This is set to 'true' on system rules, which cannot be deleted. | Boolean | No | false
