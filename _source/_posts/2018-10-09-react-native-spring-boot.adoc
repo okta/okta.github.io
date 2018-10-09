@@ -257,7 +257,7 @@ You can also modify `ios/HealthPoints/Info.plist` if you'd rather not use Xcode.
 
 === Update Files for Android
 
-To make the Android side of things aware of your URL scheme, add it to `android/app/src/main/AndroidManifest.xml`.
+To make the Android side of things aware of your URL scheme, add it to `android/app/src/main/AndroidManifest.xml`. The following XML should go just after the existing `<intent-filter>`.
 
 [source,xml]
 ----
@@ -297,9 +297,37 @@ To fix this, open Android Studio, choose **open existing project**, and select t
 
 To create a new AVD, navigate to **Tools** > **Android** > **AVD Manager**. Create a new Virtual Device and click Play. I chose a Pixel 2 as you can see from my settings below.
 
-image::{% asset_path 'blog/react-native-app-auth/avd-pixel-2.png' %}[alt=AVD Pixel 2,width=800,role=center-image]
+image::{% asset_path 'blog/react-native-spring-boot/avd-pixel-2.png' %}[alt=AVD Pixel 2,width=800,role=center-image]
 
-Run `react-native run-android` again. You should be able to log in just like you did on iOS.
+To make Keycloak and your API work with Android in an emulator, you'll have to change all localhost links to `10.0.2.2`. See https://developer.android.com/studio/run/emulator-networking[Android Emulator networking] for more information.
+
+This means you'll need to update `src/main/resources/config/application.yml` in the JHipster app to the following.
+
+[source,yaml]
+----
+security:
+    oauth2:
+        client:
+            access-token-uri: http://10.0.2.2:9080/auth/realms/jhipster/protocol/openid-connect/token
+            user-authorization-uri: http://10.0.2.2:9080/auth/realms/jhipster/protocol/openid-connect/auth
+            client-id: web_app
+            client-secret: web_app
+            scope: openid profile email
+        resource:
+            user-info-uri: http://10.0.2.2:9080/auth/realms/jhipster/protocol/openid-connect/userinfo
+----
+
+You'll also need to update `apiUrl` in your React Native app's `App/Config/AppConfig.js`.
+
+[source,js]
+----
+export default {
+  apiUrl: 'http://10.0.2.2:8080/',
+  appUrlScheme: 'healthpoints'
+}
+----
+
+Run `react-native run-android` again. You _should_ be able to log in just like you did on iOS. Unfortunately, I https://github.com/ruddell/ignite-jhipster/issues/59[wasn't able to make it work]. Even if I was able to make it work, it'd make it impossible to log in to the React app in the JHipster app because your local server wouldn't know where `10.0.2.2` is. This was a bad developer experience for me. The good news is everything works with Okta (which I'll get to in a minute).
 
 // Define unicode for Apple Command key.
 :commandkey: &#8984;
@@ -319,11 +347,11 @@ ignite generate import-jdl ../app.jh
 
 Run `react-native run-ios`, log in, and click the **Entities** menu item. You should see a screen like the one below.
 
-image::{% asset_path 'blog/react-native-app-auth/ignite-entities.png' %}[alt=Ignite JHipster Entities Screen,width=550,role=center-image]
+image::{% asset_path 'blog/react-native-spring-boot/ignite-entities.png' %}[alt=Ignite JHipster Entities Screen,width=550,role=center-image]
 
 Click on **Points** and you should be able to add points.
 
-image::{% asset_path 'blog/react-native-app-auth/create-points.png' %}[alt=Create Points Screen,width=550,role=center-image]
+image::{% asset_path 'blog/react-native-spring-boot/create-points.png' %}[alt=Create Points Screen,width=550,role=center-image]
 
 == Tweak React Native Points Edit Screen to use Toggles
 
@@ -391,7 +419,7 @@ componentWillMount () {
 
 Refresh your app in Simulator using kbd:[{commandkey} + R]. When you create new points, you should see your new defaults.
 
-image::{% asset_path 'blog/react-native-app-auth/create-points-defaults.png' %}[alt=Create Points with defaults,width=550,role=center-image]
+image::{% asset_path 'blog/react-native-spring-boot/create-points-defaults.png' %}[alt=Create Points with defaults,width=550,role=center-image]
 
 == Tweak React App's Points to use Checkboxes
 
@@ -428,13 +456,13 @@ Since your JHipster app has a React UI as well, it makes sense to change the poi
 
 In the `jhipster-api` directory, run `npm start` (or `yarn start`) and verify your changes exist. The screenshot below shows what it looks like when editing a record entered by the React Native app.
 
-image::{% asset_path 'blog/react-native-app-auth/react-checkboxes.png' %}[alt=checkboxes in React app,width=800,role=center-image]
+image::{% asset_path 'blog/react-native-spring-boot/react-checkboxes.png' %}[alt=checkboxes in React app,width=800,role=center-image]
 
 ==  Switch to Okta for Identity
 
-Switching from Keycload to Okta for identity in a JHipster app is suuuper easy thanks to Spring Boot and Spring Security. First, you'll need an Okta developer account. If you don't have one already, you can signup at https://developer.okta.com/signup[developer.okta.com/signup]. Okta is an OIDC provider like Keycloak, but it's always on, so you don't have to manage it.
+Switching from Keycload to Okta for identity in a JHipster app is suuuper easy thanks to Spring Boot and Spring Security. First, you'll need an Okta developer account. If you don't have one already, you can signup at https://developer.okta.com/signup[developer.okta.com/signup]. Okta is an OIDC provider like Keycloak, but it's always on, so you don't have to manage it. And you don't have to worry about the Android emulator and `localhsot` vs. `10.0.2.2`!
 
-image::{% asset_path 'blog/react-native-app-auth/okta-signup.png' %}[alt=Okta Developer Signup,width=800,role=center-image]
+image::{% asset_path 'blog/react-native-spring-boot/okta-signup.png' %}[alt=Okta Developer Signup,width=800,role=center-image]
 
 Log in to your Okta Developer account and navigate to **Applications** > **Add Application**. Click **Web** and click **Next**. Give the app a name you'll remember, and specify `http://localhost:8080/login` and `healthpoints://authorize` as Login redirect URIs. Click **Done**, then edit it again to select "Implicit (Hybrid)" + allow ID and access tokens. Note the client ID and secret. You'll need to copy/paste them into a file in a minute.
 
@@ -461,29 +489,133 @@ TIP: Make sure your URI variables do not have `-admin` in them. This is a common
 
 In the terminal where your Spring Boot app is running, kill the process, run `source ~/.okta.env` and run `./gradlew` again. You should be able to login at `http://localhost:8080` and in your React Native app (after you refresh or restart it).
 
-image::{% asset_path 'blog/react-native-app-auth/react-native-okta-login.png' %}[alt=Okta Login in React Native,width=550,role=center-image]
+image::{% asset_path 'blog/react-native-spring-boot/react-native-okta-login.png' %}[alt=Okta Login in React Native,width=550,role=center-image]
 
 == Debugging React Native Apps
 
-If you have issues, or just want to see what API calls
+If you have issues, or just want to see what API calls are being made, you can use https://github.com/infinitered/reactotron[Reactotron]. Reactotron is a desktop app for inspecting your React and React Native applications. It should work with iOS without any changes. For Android, you'll need to run `adb reverse tcp:9090 tcp:9090` after your AVD is running.
 
-Reactotron and debug tips
+Once it's running, you can see API calls being made, as well as logging messages.
 
-*
+image::{% asset_path 'blog/react-native-spring-boot/reactotron.png' %}[alt=Reactotron,width=750,role=center-image]
 
-* Update API setting and Deploy to iPhone
-
-
-adb reverse tcp:9090 tcp:9090
+If you'd like to log your own messages to Reactotron, you can use `console.tron.log('debug message')`.
 
 == Packaging Your React Native App for Production
 
-* Deploy API to Cloud Foundry
-* Deploy API to GCP
+The last thing I'd like to show you to deploy your app to production. Since there are many steps to getting your React Native app onto a physical device, I'll defer to React Native's https://facebook.github.io/react-native/docs/running-on-device[Running on Device documentation]. It should be as simple as plugging in your device via USB, configuring code signing, and building/running your app. You'll also need to configure the URL of where your API is located.
 
-https://facebook.github.io/react-native/docs/running-on-device
+Before you try that, follow the instructions below to deploy the API to Pivotal's Cloud Foundry and Kubernetes on Google Cloud Platform. Both Cloud Foundry and Kubernetes have multiple providers, so these instructions should work even if you're not using Pivotal or Google.
 
-== Secrets
+=== Deploy API to Cloud Foundry
+
+JHipster has a https://www.jhipster.tech/cloudfoundry/[Cloud Foundry sub-generator] that makes it simple to deploy to Cloud Foundry. It only requires you run one command. However, you have Elasticsearch configured in your API and the sub-generator doesn't support automatically provisioning an Elasticsearch instance for you. To workaround this limitation, modify `jhipster-api/src/main/resources/config/application-prod.yml` and find the following configuration for Spring Data Jest:
+
+[source,yaml]
+----
+data:
+    jest:
+        uri: http://localhost:9200
+----
+
+Replace it with the following, which will cause Elasticsearch to run in embedded mode.
+
+[source,yaml]
+----
+data:
+    elasticsearch:
+        properties:
+            path:
+                home: /tmp/elasticsearch
+----
+
+To deploy everything on Cloud Foundry with http://run.pivotal.io/[Pivotal Web Services], you'll need to create an account, download/install the https://github.com/cloudfoundry/cli#downloads[Cloud Foundry CLI], and sign-in (using `cf login -a api.run.pivotal.io`).
+
+TIP: You may receive warning after logging in `No space targeted, use 'cf target -s SPACE'`. If you do, login to https://run.pivotal.io in your browser, create a space, then run the command as recommended.
+
+Then run `jhipster cloudfoundry` in the `jhipster-api` directory. You can see the values I chose when prompted below.
+
+----
+CloudFoundry configuration is starting
+? Name to deploy as: health-points
+? Which profile would you like to use? prod
+? What is the name of your database service? elephantsql
+? What is the name of your database plan? turtle
+----
+
+When prompted to overwrite `build.gradle`, type `a`.
+
+https://github.com/jhipster/generator-jhipster/issues/8518
+
+=== Deploy API to Google Cloud Platform using Kubernetes
+
+JHipster also supports deploying your app to the hottest 🔥 thing in production: Kubernetes! To try it out, create a `k8s` directory alongside your `jhipster-api` directory. Then run `jhipster kubernetes` in it. When prompted, specify the following answers:
+
+* Type of application: **Monolithic application**
+* Root directory: **../**
+* Which applications: **jhipster-api**
+* Setup monitoring: **No**
+* Kubernetes namespace: **default**
+* Docker repository name: <your Docker Hub username>
+* Docker command: `docker push`
+* Kubernetes service type: **LoadBalancer**
+
+A number of commands will be printed out that you need to run. Run the following in the `jhipster-api` directory.
+
+[source,bash]
+----
+docker login
+export USERNAME=<your username>
+./gradlew bootWar -Pprod jibDockerBuild
+docker image tag healthpoints $USERNAME/healthpoints
+docker push $USERNAME/healthpoints
+----
+
+Google Cloud is a PaaS that's built on Google's core infrastructure. It's one of the easiest providers to support Kubernetes. Complete the steps below to deploy your JHipster API to Google Cloud.
+
+1. Create a Google Cloud project at https://console.cloud.google.com/[console.cloud.google.com]
+2. Navigate to <https://console.cloud.google.com/kubernetes/list> to initialize the Container Engine for your project
+3. Install https://cloud.google.com/sdk/[Google Cloud SDK] and set project using:
+
+       gcloud config set project <project-name>
+
+4. Create a cluster:
+
+       gcloud container clusters create <cluster-name> --machine-type=n1-standard-2 --scopes cloud-platform --zone us-west1-a
+
+   To see a list of possible zones, run `gcloud compute zones list`.
+
+5. Run `./kubectl-apply.sh` from the `k8s` directory.
+6. Run `kubectl get svc healthpoints` to get the external IP of the blog application on Google Cloud. Open `http://<external-ip>:8080` to view your running application and verify everything works.
+7. Scale your app as needed with `kubectl`:
+
+       kubectl scale --replicas=3 deployment/healthpoints
+
+=== Change the API URI for Different Environments and Storing Secrets
+
+You might think it's a pain that you had to change the API URL for the different environments (local development vs. production). I agree! Luckily, https://github.com/luggit/react-native-config[react-native-config] is already built-in to Ignite JHipster. This project allows you to expose config variables to your JavaScript code in React Native. You can store API keys, URLs, and other sensitive information in a `.env` file.
+
+----
+API_URL=https://production-is-awesome.cfapps.io
+----
+
+To use react-native-config in your application, use the following steps:
+
+1. Copy `.env.example` to `.env` and update `.gitignore` to ignore it.
+2. Add your config variables.
+3. Follow instructions at https://github.com/luggit/react-native-config#setup[luggit/react-native-config#setup].
+4. Change your `AppConfig.js` to the following:
+
+[source,js]
+----
+import Secrets from 'react-native-config'
+
+export default {
+  apiUrl: Secrets.API_URL,
+  appUrlScheme: 'healthpoints'
+}
+----
+
 
 https://github.com/ruddell/IgniteJhipsterSampleApp#closed_lock_with_key-secrets
 
