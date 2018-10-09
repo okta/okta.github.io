@@ -1,0 +1,500 @@
+---
+layout: blog_post
+title: 'Build a Mobile App with React Native and Spring Boot'
+author: mraible
+description: "TBD"
+tags: [react native, spring-boot]
+tweets:
+- "Foo"
+- "Bar"
+- "Baz"
+image: blog/featured/okta-java-skew.jpg
+filename: 2018-10-09-react-native-spring-boot
+---
+:page-liquid:
+
+React Native is a framework for building mobile applications with React. React allows you to use a declarative style of programming to describe how you UI should look. It uses embedded HTML (called JSX) to render buttons, lists, scrollable views, and many other.  components. 
+
+I'm a seasoned Java developer that also likes JavaScript and TypeScript. Some might call me Java hipster. In this post, I'm going to show you how to build a Spring Boot API that talks to a PostgreSQL database. You'll use Elasticsearch to make your data searchable. You'll also learn how to deploy it to Cloud Foundry on Google Cloud Platform.
+
+For the UI, you'll learn how to build a mobile app with React Native. I'll show you how to test it on device emulators and deploy it to your phone.
+
+Let's get started!
+
+== Create a Spring Boot App
+
+In the past, I built an app to help me track and monitor my health. I came up with the idea while writing the JHipster Mini-Book. I was inspired by Spring Boot's Actuator, which helps you monitor the health of your Spring Boot app. The app is called 21-Points Health and you can https://github.com/mraible/21-points[find its source code on GitHub].
+
+21-Points Health uses a 21-point system to see how healthy you are being each week. Its rules are simple: you can earn up to three points per day for the following reasons:
+
+. If you eat healthy, you get a point. Otherwise, zero.
+. If you exercise, you get a point.
+. If you don't drink alcohol, you get a point.
+
+I'm going to cheat a bit in this tutorial. Rather than writing every component line-by-line, I'm going to _generate_ the API and the app using JHipster and Ignite JHipster.
+
+What is JHipster? I'm glad you asked! It's an Apache-licensed open source project that allows you to generate Spring Boot APIs, as well as Angular or React UIs. It includes support for generating CRUD screens and adding all the necessary plumbing. It even generates microservice architectures!
+
+image:{% asset_path 'blog/react-native-spring-boot/ignite-badge.svg' %}[alt=The React Native Starter Kit,role="pull-right img-100px"] Ignite JHipster, on the other hand, is a plug-in for the Ignite project. https://infinite.red/ignite[Ignite] is also open source and MIT licensed. It allows you to generate React Native apps in seconds with a number of components pre-integrated.
+
+To get things moving quickly, I ran `jhipster export-jdl` to export an entity definition from 21-Points Health. After exporting the entity definitions, I used https://start.jhipster.tech/jdl-studio[JDL-Studio] to create an application definition for my project. Then I clicked the download icon to save the file to my hard drive.
+
+image::{% asset_path 'blog/react-native-spring-boot/jdl-studio.png' %}[alt=JDL-Studio,width=800,align=center]
+
+The code you see below is called JDL, or JHipster Domain Language. It was initially designed for JHipster to allow multiple entities and specifying all their attributes, relationships, and pagination features from a single file. It's recently been enhanced to allow generating whole apps from a single file.
+
+----
+application {
+  config {
+    applicationType monolith,
+    baseName HealthPoints
+    packageName com.okta.developer,
+    authenticationType oauth2,
+    prodDatabaseType postgresql,
+    buildTool gradle,
+    searchEngine elasticsearch,
+    testFrameworks [protractor],
+    clientFramework react,
+    useSass true,
+    enableTranslation true,
+    nativeLanguage en,
+    languages [en, es]
+  }
+}
+
+// JDL definition for application 'TwentyOnePoints' generated with command 'jhipster export-jdl'
+
+entity BloodPressure {
+  timestamp ZonedDateTime required,
+  systolic Integer required,
+  diastolic Integer required
+}
+entity Weight {
+  timestamp ZonedDateTime required,
+  weight Double required
+}
+entity Points {
+  date LocalDate required,
+  exercise Integer,
+  meals Integer,
+  alcohol Integer,
+  notes String maxlength(140)
+}
+entity Preferences {
+  weeklyGoal Integer required min(10) max(21),
+  weightUnits Units required
+}
+enum Units {
+  KG,
+  LB
+}
+relationship OneToOne {
+  Preferences{user(login)} to User
+}
+relationship ManyToOne {
+  BloodPressure{user(login)} to User,
+  Weight{user(login)} to User,
+  Points{user(login)} to User
+}
+paginate BloodPressure, Weight with infinite-scroll
+paginate Points with pagination
+----
+
+Create a new directory, with a `jhipster-api` directory inside it.
+
+[source,bash]
+----
+mkdir -p react-native-spring-boot/jhipster-api
+----
+
+Copy the JDL above into an `app.jh` file inside the `react-native-spring-boot` directory. Install JHipster using npm.
+
+[source,bash]
+----
+npm i -g generator-jhipster@5.4.2
+----
+
+Navigate to the `jhipster-api` directory in a terminal window. Run the command below to generate an app with a plethora of useful features out-of-the box.
+
+[source,bash]
+----
+jhipster import-jdl ../app.jh
+----
+
+== Run Your Spring Boot App
+
+This app has a number of technologies and features specified as part of it's application configuration, including OIDC authentication, PostgreSQL, Gradle, Elasticsearch, Protractor for testing its UI, React, and Sass. Not only that, it even has test coverage for most of its code! To make sure everything works, start a few Docker containers for Elasticsearch, Keycloak, PostgreSQL, and Sonar. These commands should be run from the `jhipster-api` directory.
+
+[source,bash]
+----
+docker-compose -f src/main/docker/elasticsearch.yml up -d
+docker-compose -f src/main/docker/keycloak.yml up -d
+docker-compose -f src/main/docker/postgresql.yml up -d
+docker-compose -f src/main/docker/sonar.yml up -d
+----
+
+The containers might take a bit to download, so you might want to grab a coffee of glass of water.
+
+While you're waiting, you can also commit your project to Git. If you have Git installed, JHipster will run `git init` in your `jhipster-api` directory, but it won't check anything in. Since you're putting your Spring Boot app and React Native app in the same repository, remove `.git` from `jhipster-api` and initialize Git in the parent directory.
+
+[source,bash]
+----
+cd jhipster-api
+rm -rf .git
+cd ..
+git init
+git add .
+git commit -m "Generate Spring Boot API"
+----
+
+== Verify High Test Coverage with Sonar
+
+JHipster generates apps with high https://www.jhipster.tech/code-quality/[code quality]. Code quality can be analyzed using https://sonarcloud.io/[SonarCloud], which is automatically configured by JHipster. Once all the Docker containers have finished starting, run the following command to prove it (from the `jhipster-api` directory).
+
+[source,bash]
+----
+./gradlew -Pprod clean test sonarqube
+----
+
+NOTE: If you don't commit your project to Git, the `sonarqube` task https://github.com/jhipster/generator-jhipster/issues/8503[will fail].
+
+Once this process completes, an analysis of your project will be available on the Sonar dashboard at `http://127.0.0.1:9001`. Check it - you have a triple A-rated app! Not bad, eh?
+
+image::{% asset_path 'blog/react-native-spring-boot/sonar.png' %}[alt=Sonar AAA,width=800,align=center]
+
+== Create a React Native App for Your Spring Boot API
+
+You can build a React Native app for your Spring Boot API using https://github.com/ruddell/ignite-jhipster[Ignite JHipster].
+
+image::{% asset_path 'blog/react-native-spring-boot/ignite-jhipster.png' %}[alt=Ignite JHipster,width=369,align=center]
+
+Install Ignite CLI:
+
+[source,bash]
+----
+npm i -g ignite-cli@2.1.2 ignite-jhipster@1.12.1
+----
+
+Make sure you're in the `react-native-spring-boot` directory, then generate a React Native app.
+
+[source,bash]
+----
+ignite new HealthPoints -b ignite-jhipster
+----
+
+When prompted for the path to your JHipster project, enter `jhipster-api`.
+
+When the project is finished generating, rename `HealthPoints` to `react-native-app`, then committed it to Git.
+
+[source,bash]
+----
+mv HealthPoints react-native-app
+rm -rf react-native-app/.git
+git add .
+git commit -m "Add React Native app"
+----
+
+You might notice that two new files were added to your API project.
+
+[source,bash]
+----
+create mode 100644 jhipster-api/src/main/java/com/okta/developer/config/ResourceServerConfiguration.java
+create mode 100644 jhipster-api/src/main/java/com/okta/developer/web/rest/AuthInfoResource.java
+----
+
+These classes configure a resource server for your project (so you can pass in an `Authorization` header with an access token) and expose the OIDC issuer and client ID via a REST endpoint.
+
+== Modify React Native App for OAuth 2.0 / OIDC Login
+
+You will need to https://github.com/ruddell/ignite-jhipster/blob/master/docs/oauth2-oidc.md[make some changes] to your React Native app so OIDC login works.
+
+=== Update Files for iOS
+
+If you'd like to run your app on iOS, you'll need to modify `react-native-app/ios/HealthPoints/AppDelegate.m` to add a `openURL()` method. Add an import at the top.
+
+[source,c]
+----
+#import <React/RCTLinkingManager.h>
+----
+
+Then add the method before the `@end` at the bottom of the file.
+
+[source,c]
+----
+- (BOOL)application:(UIApplication *)application
+            openURL:(NSURL *)url
+            options:(NSDictionary<UIApplicationOpenURLOptionsKey,id> *)options
+{
+  return [RCTLinkingManager application:application openURL:url options:options];
+}
+----
+
+You'll also need to configure your iOS URL scheme. Run `open ios/HealthPoints.xcodeproj` to open the project in Xcode. Navigate to **Project** > **Info** > **URL Types** and specify `healthpoints` like in the screenshot below.
+
+image::{% asset_path 'blog/react-native-spring-boot/xcode-url-scheme.png' %}[alt=Xcode URL Scheme,width=800,align=center]
+
+You can also modify `ios/HealthPoints/Info.plist` if you'd rather not use Xcode.
+
+[source,diff]
+----
+        <key>CFBundleSignature</key>
+        <string>????</string>
++       <key>CFBundleURLTypes</key>
++       <array>
++               <dict>
++                       <key>CFBundleTypeRole</key>
++                       <string>Editor</string>
++                       <key>CFBundleURLName</key>
++                       <string>healthpoints</string>
++                       <key>CFBundleURLSchemes</key>
++                       <array>
++                               <string>healthpoints</string>
++                       </array>
++               </dict>
++       </array>
+        <key>CFBundleVersion</key>
+----
+
+=== Update Files for Android
+
+To make the Android side of things aware of your URL scheme, add it to `android/app/src/main/AndroidManifest.xml`.
+
+[source,xml]
+----
+<intent-filter>
+    <action android:name="android.intent.action.MAIN" />
+    <category android:name="android.intent.category.LAUNCHER" />
+    <data android:scheme="healthpoints" />
+</intent-filter>
+----
+
+=== Update Keycloak's Redirect URI
+
+You will also need to update Keycloak to know your app's URL scheme because it's used as a redirect URI. Open `http://localhost:9080/auth/admin` in your browser and login with admin/admin. Navigate to **Clients** > **web_app** and add `healthpoints://authorize` as a valid redirect URI.
+
+image::{% asset_path 'blog/react-native-spring-boot/valid-redirect-uris.png' %}[alt=Valid Redirect URIs,width=600,align=center]
+
+== Run Your React Native App on iOS
+
+To run your React Native app, you'll need to start your Spring Boot app first. Navigate to the `jhipster-api` directory and run `./gradlew`. In another terminal window, navigate to `react-native-app` and run `react-native run-ios`.
+
+TIP: If you get an error `Print: Entry, ":CFBundleIdentifier", Does Not Exist`, run `rm -rf ~/.rncache` and try again.
+
+Verify you can login by clicking the hamburger menu in the top left corner, then **Login**. Use "admin" for the username and password.
+
+| image::{% asset_path 'blog/react-native-spring-boot/login-menu.png' %}[alt=Login Menu,width=400] | image::{% asset_path 'blog/react-native-spring-boot/ignite-login-menu.png' %}[alt=Login Menu,width=400] |
+|  image::{% asset_path 'blog/react-native-spring-boot/keycloak-login.png' %}[alt=Keycloak Login,width=400] | image::{% asset_path 'blog/react-native-spring-boot/open-healthpoints.png' %}[alt=Open HealthPoints,width=400] |
+
+== Run Your React Native App on Android
+
+To run your app on an Android emulator, run `react-native run-android`. If you don't have a phone plugged in or an Android Virtual Device (AVD) running, you'll see an error:
+
+----
+Could not install the app on the device, read the error above for details.
+----
+
+To fix this, open Android Studio, choose **open existing project**, and select the `android` directory in your project. If you're prompted to "Install Build Tools and sync project," do it.
+
+To create a new AVD, navigate to **Tools** > **Android** > **AVD Manager**. Create a new Virtual Device and click Play. I chose a Pixel 2 as you can see from my settings below.
+
+image::{% asset_path 'blog/react-native-app-auth/avd-pixel-2.png' %}[alt=AVD Pixel 2,width=800,role=center-image]
+
+Run `react-native run-android` again. You should be able to log in just like you did on iOS.
+
+// Define unicode for Apple Command key.
+:commandkey: &#8984;
+
+TIP: To enable live-reloading of code on Android, first click on the emulator, then press kbd:[Ctrl + M] (kbd:[{commandkey} + M] on MacOS) or shake the Android device which has the running app. Then select the **Enable Live Reload** option from the popup.
+
+For the rest of this tutorial, I'm going to show all the examples on iOS, but you should be able to use Android if you prefer.
+
+== Generate CRUD Pages in React Native App
+
+To generate pages for managing entities in your Spring Boot API, run the following command in the `react-native-app` directory.
+
+[source,bash]
+----
+ignite generate import-jdl ../app.jh
+----
+
+Run `react-native run-ios`, log in, and click the **Entities** menu item. You should see a screen like the one below.
+
+image::{% asset_path 'blog/react-native-app-auth/ignite-entities.png' %}[alt=Ignite JHipster Entities Screen,width=550,role=center-image]
+
+Click on **Points** and you should be able to add points.
+
+image::{% asset_path 'blog/react-native-app-auth/create-points.png' %}[alt=Create Points Screen,width=550,role=center-image]
+
+== Tweak React Native Points Edit Screen to use Toggles
+
+The goal of my 21-Points Health app is to count the total number of health points you get in a week, with the max being 21. For this reason, I think it's a good idea to change the integer inputs on exercise, meals, and alcohol to be toggles instead of raw integers. If the user toggles it on, the app should store the value as "1". If they toggle it off, it should record "0".
+
+To make this change to the React Native app, open `App/Containers/PointEntityEditScreen.js` in your favorite editor. Change the `formModel` to use `t.Boolean` for exercise, meals, and alcohol.
+
+[source,js]
+----
+formModel: t.struct({
+  id: t.maybe(t.Number),
+  date: t.Date,
+  exercise: t.maybe(t.Boolean),
+  meals: t.maybe(t.Boolean),
+  alcohol: t.maybe(t.Boolean),
+  notes: t.maybe(t.String),
+  userId: this.getUsers()
+}),
+----
+
+Then change the `entityToFormValue()` and `formValueToEntity()` methods to save 1 or 0, depending on the user's selection.
+
+[source,js]
+----
+entityToFormValue = (value) => {
+  if (!value) {
+    return {}
+  }
+  return {
+    id: value.id || null,
+    date: value.date || null,
+    exercise: value.exercise === 1 ? true : false,
+    meals: value.meals === 1 ? true : false,
+    alcohol: value.alcohol === 1 ? true : false,
+    notes: value.notes || null,
+    userId: (value.user && value.user.id) ? value.user.id : null
+  }
+}
+formValueToEntity = (value) => {
+  return {
+    id: value.id || null,
+    date: value.date || null,
+    exercise: (value.exercise) ? 1 : 0,
+    meals: (value.meals) ? 1 : 0,
+    alcohol: (value.alcohol) ? 1 : 0,
+    notes: value.notes || null,
+    user: value.userId ? { id: value.userId } : null
+  }
+}
+----
+
+While you're at it, you can change the default `Points` entity to have today's date, and `true` for every point by default. You can make this happen by modifying `componentWillMount()` and changing the `formValue`.
+
+[source,js]
+----
+componentWillMount () {
+  if (this.props.entityId) {
+    this.props.getPoint(this.props.entityId)
+  } else {
+    this.setState({formValue: {date: new Date(), exercise: true, meals: true, alcohol: true}})
+  }
+  this.props.getAllUsers()
+}
+----
+
+Refresh your app in Simulator using kbd:[{commandkey} + R]. When you create new points, you should see your new defaults.
+
+image::{% asset_path 'blog/react-native-app-auth/create-points-defaults.png' %}[alt=Create Points with defaults,width=550,role=center-image]
+
+== Tweak React App's Points to use Checkboxes
+
+Since your JHipster app has a React UI as well, it makes sense to change the points input/edit screen to use a similar mechanism: checkboxes. Open `jhipster-api/src/main/webapp/.../points-update.tsx` and replace the TSX (the T is for TypeScript) for the three fields with the following.
+
+.jhipster-api/src/main/webapp/app/entities/points/points-update.tsx
+====
+[source,tsx]
+----
+<AvGroup check>
+  <AvInput id="points-exercise" type="checkbox" className="form-control"
+    name="exercise" trueValue={1} falseValue={0} /> // (1)
+  <Label check id="exerciseLabel" for="exercise">
+    <Translate contentKey="healthPointsApp.points.exercise">Exercise</Translate>
+  </Label>
+</AvGroup>
+<AvGroup check>
+  <AvInput id="points-meals" type="checkbox" className="form-control"
+    name="meals" trueValue={1} falseValue={0} />
+  <Label check id="mealsLabel" for="meals">
+    <Translate contentKey="healthPointsApp.points.meals">Meals</Translate>
+  </Label>
+</AvGroup>
+<AvGroup check>
+  <AvInput id="points-alcohol" type="checkbox" className="form-control"
+    name="alcohol" trueValue={1} falseValue={0} />
+  <Label check id="alcoholLabel" for="alcohol">
+    <Translate contentKey="healthPointsApp.points.alcohol">Alcohol</Translate>
+  </Label>
+</AvGroup>
+----
+<1> The `trueValue` and `falseValue` attributes handle converting checked to true and vise versa.
+====
+
+In the `jhipster-api` directory, run `npm start` (or `yarn start`) and verify your changes exist. The screenshot below shows what it looks like when editing a record entered by the React Native app.
+
+image::{% asset_path 'blog/react-native-app-auth/react-checkboxes.png' %}[alt=checkboxes in React app,width=800,role=center-image]
+
+==  Switch to Okta for Identity
+
+Switching from Keycload to Okta for identity in a JHipster app is suuuper easy thanks to Spring Boot and Spring Security. First, you'll need an Okta developer account. If you don't have one already, you can signup at https://developer.okta.com/signup[developer.okta.com/signup]. Okta is an OIDC provider like Keycloak, but it's always on, so you don't have to manage it.
+
+image::{% asset_path 'blog/react-native-app-auth/okta-signup.png' %}[alt=Okta Developer Signup,width=800,role=center-image]
+
+Log in to your Okta Developer account and navigate to **Applications** > **Add Application**. Click **Web** and click **Next**. Give the app a name you'll remember, and specify `http://localhost:8080/login` and `healthpoints://authorize` as Login redirect URIs. Click **Done**, then edit it again to select "Implicit (Hybrid)" + allow ID and access tokens. Note the client ID and secret. You'll need to copy/paste them into a file in a minute.
+
+Create a `ROLE_ADMIN` and `ROLE_USER` group (**Users** > **Groups** > **Add Group**) and add users to them. I recommend adding the account you signed up with to `ROLE_ADMIN` and creating a new user (**Users** > **Add Person**) to add to `ROLE_USER`.
+
+Navigate to **API** > **Authorization Servers** and click the one named **default** to edit it. Click the **Claims** tab and **Add Claim**. Name it "roles", and include it in the ID Token. Set the value type to "Groups" and set the filter to be a Regex of `.*`. Click **Create** to complete the process.
+
+Create a file on your hard drive called `~/.okta.env` and specify the settings for your app in it.
+
+[source,bash]
+----
+#!/bin/bash
+
+# Okta with JHipster
+
+export SECURITY_OAUTH2_CLIENT_ACCESS_TOKEN_URI="https://{yourOktaDomain}/oauth2/default/v1/token"
+export SECURITY_OAUTH2_CLIENT_USER_AUTHORIZATION_URI="https://{yourOktaDomain}/oauth2/default/v1/authorize"
+export SECURITY_OAUTH2_RESOURCE_USER_INFO_URI="https://{yourOktaDomain}/oauth2/default/v1/userinfo"
+export SECURITY_OAUTH2_CLIENT_CLIENT_ID="{yourClientId}"
+export SECURITY_OAUTH2_CLIENT_CLIENT_SECRET="{yourClientSecret}"
+----
+
+TIP: Make sure your URI variables do not have `-admin` in them. This is a common mistake.
+
+In the terminal where your Spring Boot app is running, kill the process, run `source ~/.okta.env` and run `./gradlew` again. You should be able to login at `http://localhost:8080` and in your React Native app (after you refresh or restart it).
+
+image::{% asset_path 'blog/react-native-app-auth/react-native-okta-login.png' %}[alt=Okta Login in React Native,width=550,role=center-image]
+
+== Debugging React Native Apps
+
+If you have issues, or just want to see what API calls
+
+Reactotron and debug tips
+
+*
+
+* Update API setting and Deploy to iPhone
+
+
+adb reverse tcp:9090 tcp:9090
+
+== Packaging Your React Native App for Production
+
+* Deploy API to Cloud Foundry
+* Deploy API to GCP
+
+https://facebook.github.io/react-native/docs/running-on-device
+
+== Secrets
+
+https://github.com/ruddell/IgniteJhipsterSampleApp#closed_lock_with_key-secrets
+
+Source code can be found at...
+
+This tutorial showed you how to build a secure Spring Boot API with just a couple commands. Then it showed you how to run it and use Docker Compose to run external services.
+
+Then you saw how to build a React Native app, again with just two commands! Heck, even deploying to the cloud only took two commands! 
+
+Don't you feel hip playing with all these best-of-breed technologies? I sure do! :)
+
+Related articles
+
+Follow us. 
