@@ -671,11 +671,11 @@ containers:
   - name: JAVA_OPTS
     value: " -Xmx256m -Xms256m"
   - name: SECURITY_OAUTH2_CLIENT_ACCESS_TOKEN_URI
-    value: "https://d{yourOktaDomain}/oauth2/default/v1/token"
+    value: "https://{yourOktaDomain}/oauth2/default/v1/token"
   - name: SECURITY_OAUTH2_CLIENT_USER_AUTHORIZATION_URI
-    value: "https://d{yourOktaDomain}/oauth2/default/v1/authorize"
+    value: "https://{yourOktaDomain}/oauth2/default/v1/authorize"
   - name: SECURITY_OAUTH2_RESOURCE_USER_INFO_URI
-    value: "https://d{yourOktaDomain}/oauth2/default/v1/userinfo"
+    value: "https://{yourOktaDomain}/oauth2/default/v1/userinfo"
   - name: SECURITY_OAUTH2_CLIENT_CLIENT_ID
     value: "{yourClientId}"
   - name: SECURITY_OAUTH2_CLIENT_CLIENT_SECRET
