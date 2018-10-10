@@ -230,7 +230,7 @@ Given the above events from each API, the following compares each leaf-level att
 |                           | `/client/zone`                                           | New |
 | `/action/requestUri`      | `/debugContext/debugData/requestUri`                     | New |
 | `/action/message`         | `/displayMessage`                                        | Generally less content |
-| `/action/objectType`      | `/eventType`                                             | Generally contains different ids (see /Event Type Mappings(#event-type-mappings)) |
+| `/action/objectType`      | `/eventType`                                             | Generally contains different ids (see [Event Type Mappings](#event-type-mappings)) |
 |                           | `/legacyEventType`                                       | Contains `/action/objectType` as its value |
 |                           | `/outcome/result`                                        | Contains value that is encoded in `/action/objectType` suffix |
 | `/published`              | `/published`                                             | Contains slightly different values |
@@ -312,7 +312,7 @@ Syntactically, filtering between the two APIs is largely unchanged. For example,
 filter=debugContext.debugData.requestUri eq "/login/do-login"
 ```
 
-This opens up many possibilities for selectively retrieving only the data of interest. However, as indicated above `published` is not supported in the `filter` parameter. To perform temporal filtering, `since` and `until` parameters must be used. Please see (Time Range)[#time-range] for details.
+This opens up many possibilities for selectively retrieving only the data of interest. However, as indicated above `published` is not supported in the `filter` parameter. To perform temporal filtering, `since` and `until` parameters must be used. Please see [Time Range](#time-range) for details.
 
 Furthermore, the new API now supports the `co` "contains" operator where the specified value must be a substring of the attribute value.
 
