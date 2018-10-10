@@ -464,7 +464,7 @@ image::{% asset_path 'blog/react-native-spring-boot/react-checkboxes.png' %}[alt
 
 ==  Use Okta's API for Identity
 
-Switching from Keycload to Okta for identity in a JHipster app is suuuper easy thanks to Spring Boot and Spring Security. First, you'll need an Okta developer account. If you don't have one already, you can signup at https://developer.okta.com/signup[developer.okta.com/signup]. Okta is an OIDC provider like Keycloak, but it's always on, so you don't have to manage it.
+Switching from Keycload to Okta for identity in a JHipster app is suuuper easy thanks to Spring Boot and Spring Security. First, you'll need an Okta developer account. If you don't have one already, you can signup at https://developer.okta.com/signup/[developer.okta.com/signup]. Okta is an OIDC provider like Keycloak, but it's always on, so you don't have to manage it.
 
 image::{% asset_path 'blog/react-native-spring-boot/okta-signup.png' %}[alt=Okta Developer Signup,width=800,align=center]
 
