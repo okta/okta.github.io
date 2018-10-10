@@ -363,7 +363,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 .show-for-print{display:inherit!important}}
 
 /* New rules added by mraible */
-.paragraph > p, .sectionbody .ulist, .admonitionblock, .quoteblock blockquote p:last-child {
+.paragraph > p, .sectionbody .ulist, .admonitionblock, .quoteblock blockquote p:last-child, .olist {
     margin-bottom: 1.25rem;
 }
 
@@ -393,6 +393,13 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
     text-align: right;
     margin-bottom: .5em;
 }
+
+/* Allow 2-up images */
+
+.pull-left.m-l-md {
+    margin-left: 90px;
+}
+
 
 /* Integrating with Font Awesome */
 span.icon>.fa {
