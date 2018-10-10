@@ -2,22 +2,22 @@
 layout: blog_post
 title: 'Build a Mobile App with React Native and Spring Boot'
 author: mraible
-description: "TBD"
-tags: [react native, spring-boot]
+description: "In this tutorial, you'll learn how to build a Spring Boot API and a React Native app. You'll also see how to deploy the API to Cloud Foundry and Google Kubernetes Engine."
+tags: [react native, spring boot, spring boot api, java, typescript, javascript, cloud foundry, kubernetes, google cloud, jhipster, ignite jhipster]
 tweets:
-- "Foo"
-- "Bar"
-- "Baz"
+- "You've heard of React Native and how you can use it to develop mobile apps, right? This handy tutorial shows you how to use it with a Spring Boot API."
+- "Did you know that @java_hipster can generate Spring Boot APIs and mobile apps? Get 'yer learn on with React Native and Spring Boot today!"
+- "Learn how to build a @reactnative app that talks to a @springboot API in this quick-n-easy tutorial. It also shows how to deploy to @cloudfoundry + @googlecloud with @kubernetesio!"
 image: blog/featured/okta-java-skew.jpg
-filename: 2018-10-09-react-native-spring-boot
 ---
 :page-liquid:
+:experimental:
 
-React Native is a framework for building mobile applications with React. React allows you to use a declarative style of programming to describe how you UI should look. It uses embedded HTML (called JSX) to render buttons, lists, scrollable views, and many other components.
+React Native is a framework for building mobile applications with React. React allows you to use a declarative style of programming to describe how your UI should look. It uses embedded HTML (called JSX) to render buttons, lists, scrollable views, and many other components.
 
-I'm a seasoned Java/Script developer that likes Spring and TypeScript. Some might call me Java a hipster because I like JavaScript. In this post, I'm going to show you how to build a Spring Boot API that talks to a PostgreSQL database. You'll use Elasticsearch to make your data searchable. You'll also learn how to deploy it to Cloud Foundry, and Google Cloud Platform using Kubernetes.
+I'm a seasoned Java and JavaScript developer that loves Spring and TypeScript. Some might call me a Java hipster because I like JavaScript. In this post, I'm going to show you how to build a Spring Boot API that talks to a PostgreSQL database. You'll use Elasticsearch to make your data searchable. You'll also learn how to deploy it to Cloud Foundry, and Google Cloud Platform using Kubernetes.
 
-You'll also learn how to build a mobile app with React Native. I'll show you how to test it on device emulators and deploy it to your phone. _Giddyup!_
+The _really cool_ part is you'll see how to build a mobile app with React Native. React Native allows you to build mobile apps with the web technologies you know and love: React and JavaScript! I'll show you how to test it on device emulators and deploy it to your phone. _Giddyup!_
 
 == Create a Spring Boot App
 
@@ -28,8 +28,6 @@ In my recent developer life, I built an app to help me track and monitor my heal
 . If you eat healthy, you get a point. Otherwise, zero.
 . If you exercise, you get a point.
 . If you don't drink alcohol, you get a point.
-
-// ol:last-child needs margin-bottom: 10px
 
 I'm going to cheat a bit in this tutorial. Rather than writing every component line-by-line, I'm going to _generate_ the API and the app using JHipster and Ignite JHipster.
 
@@ -62,6 +60,7 @@ application {
     nativeLanguage en,
     languages [en, es]
   }
+  entities Points, BloodPressure, Weight, Preferences
 }
 
 // JDL definition for application 'TwentyOnePoints' generated with command 'jhipster export-jdl'
@@ -86,10 +85,12 @@ entity Preferences {
   weeklyGoal Integer required min(10) max(21),
   weightUnits Units required
 }
+
 enum Units {
   KG,
   LB
 }
+
 relationship OneToOne {
   Preferences{user(login)} to User
 }
@@ -98,6 +99,7 @@ relationship ManyToOne {
   Weight{user(login)} to User,
   Points{user(login)} to User
 }
+
 paginate BloodPressure, Weight with infinite-scroll
 paginate Points with pagination
 ----
@@ -116,7 +118,7 @@ Copy the JDL above into an `app.jh` file inside the `react-native-spring-boot` d
 npm i -g generator-jhipster@5.4.2
 ----
 
-Navigate to the `jhipster-api` directory in a terminal window. Run the command below to generate an app with a plethora of useful features out-of-the box.
+Navigate to the `jhipster-api` directory in a terminal window. Run the command below to generate an app with a plethora of useful features out-of-the-box.
 
 [source,bash]
 ----
@@ -125,7 +127,7 @@ jhipster import-jdl ../app.jh
 
 == Run Your Spring Boot App
 
-This app has a number of technologies and features specified as part of it's application configuration, including OIDC auth, PostgreSQL, Gradle, Elasticsearch, Protractor tests, React, and Sass. Not only that, it even has test coverage for most of its code!
+This app has a number of technologies and features specified as part of its application configuration, including OIDC auth, PostgreSQL, Gradle, Elasticsearch, Protractor tests, React, and Sass. Not only that, it even has test coverage for most of its code!
 
 To make sure your app is functional, start a few Docker containers for Elasticsearch, Keycloak, PostgreSQL, and Sonar. The commands below should be run from the `jhipster-api` directory.
 
@@ -162,7 +164,7 @@ Once all the Docker containers have finished starting, run the following command
 
 NOTE: If you don't commit your project to Git, the `sonarqube` task https://github.com/jhipster/generator-jhipster/issues/8503[might fail].
 
-Once this process completes, an analysis of your project will be available on the Sonar dashboard at `http://127.0.0.1:9001`. Check it - you have a triple A-rated app! Not bad, eh?
+Once this process completes, an analysis of your project will be available on the Sonar dashboard at `http://127.0.0.1:9001`. Check it - you have a triple-A-rated app! Not bad, eh?
 
 image::{% asset_path 'blog/react-native-spring-boot/sonar.png' %}[alt=Sonar AAA,width=800,align=center]
 
@@ -214,7 +216,7 @@ You will need to https://github.com/ruddell/ignite-jhipster/blob/master/docs/oau
 
 === Update Files for iOS
 
-If you'd like to run your app on iOS, you'll need to modify `react-native-app/ios/HealthPoints/AppDelegate.m` to add a `openURL()` method. Add an import at the top.
+If you'd like to run your app on iOS, you'll need to modify `react-native-app/ios/HealthPoints/AppDelegate.m` to add an `openURL()` method and an import at the top.
 
 [source,c]
 ----
@@ -226,10 +228,10 @@ Then add the method before the `@end` at the bottom of the file.
 [source,c]
 ----
 - (BOOL)application:(UIApplication *)application
-            openURL:(NSURL *)url
-            options:(NSDictionary<UIApplicationOpenURLOptionsKey,id> *)options
+           openURL:(NSURL *)url
+           options:(NSDictionary<UIApplicationOpenURLOptionsKey,id> *)options
 {
-  return [RCTLinkingManager application:application openURL:url options:options];
+ return [RCTLinkingManager application:application openURL:url options:options];
 }
 ----
 
@@ -274,7 +276,7 @@ To make the Android side of things aware of your URL scheme, add it to `android/
 
 === Update Keycloak's Redirect URI
 
-You will also need to update Keycloak to know your app's URL scheme because it's used as a redirect URI. Open `http://localhost:9080/auth/admin` in your browser and login with admin/admin. Navigate to **Clients** > **web_app** and add `healthpoints://authorize` as a valid redirect URI.
+You will also need to update Keycloak to know your app's URL scheme because it's used as a redirect URI. Open `http://localhost:9080/auth/admin` in your browser and log in with admin/admin. Navigate to **Clients** > **web_app** and add `healthpoints://authorize` as a valid redirect URI.
 
 image::{% asset_path 'blog/react-native-spring-boot/keycloak-redirect-uris.png' %}[alt=Valid Redirect URIs,width=600,align=center]
 
@@ -284,13 +286,15 @@ To run your React Native app, you'll need to start your Spring Boot app first. N
 
 TIP: If you get an error `Print: Entry, ":CFBundleIdentifier", Does Not Exist`, run `rm -rf ~/.rncache` and try again.
 
-Verify you can login by clicking the hamburger menu in the top left corner, then **Login**. Use "admin" for the username and password.
+Verify you can log in by clicking the hamburger menu in the top left corner, then **Login**. Use "admin" for the username and password.
 
 image::{% asset_path 'blog/react-native-spring-boot/ignite-with-keycloak.png' %}[alt=Ignite JHipster with Keycloak,width=900,align=center]
 
 // image::{% asset_path 'blog/react-native-spring-boot/ignite-login-menu.png' %}[alt=Login Menu,width=300,role=pull-left]
 // image::{% asset_path 'blog/react-native-spring-boot/keycloak-login.png' %}[alt=Keycloak Login,width=300,role=pull-left]
 // image::{% asset_path 'blog/react-native-spring-boot/open-healthpoints.png' %}[alt=Open HealthPoints,width=300,role=pull-left]
+
+TIP: To enable live-reloading of your code in iOS Simulator, first click on the emulator, then press kbd:[{commandkey} + R].
 
 == Run Your React Native App on Android
 
@@ -339,7 +343,7 @@ Run `react-native run-android` again. You _should_ be able to log in just like y
 // Define unicode for Apple Command key.
 :commandkey: &#8984;
 
-TIP: To enable live-reloading of code on Android, first click on the emulator, then press **Ctrl + M** (**[{commandkey} + M** on MacOS) or shake the Android device which has the running app. Then select the **Enable Live Reload** option from the popup.
+TIP: To enable live-reloading of code on Android, first click on the emulator, then press kbd:[Ctrl + M] (kbd:[{commandkey} + M] on MacOS) or shake the Android device which has the running app. Then select the **Enable Live Reload** option from the popup.
 
 For the rest of this tutorial, I'm going to show all the examples on iOS, but you should be able to use Android if you prefer.
 
@@ -410,7 +414,7 @@ formValueToEntity = (value) => {
 }
 ----
 
-While you're at it, you can change the default `Points` entity to have today's date, and `true` for every point by default. You can make this happen by modifying `componentWillMount()` and changing the `formValue`.
+While you're at it, you can change the default `Points` entity to have today's date and `true` for every point by default. You can make this happen by modifying `componentWillMount()` and changing the `formValue`.
 
 [source,js]
 ----
@@ -488,7 +492,7 @@ export SECURITY_OAUTH2_CLIENT_CLIENT_SECRET="{yourClientSecret}"
 
 TIP: Make sure your `*URI` variables do not have `-admin` in them. This is a common mistake.
 
-In the terminal where your Spring Boot app is running, kill the process, run `source ~/.okta.env` and run `./gradlew` again. You should be able to login at `http://localhost:8080` in your React Native app (after you refresh or restart it).
+In the terminal where your Spring Boot app is running, kill the process, run `source ~/.okta.env` and run `./gradlew` again. You should be able to log in at `http://localhost:8080` in your React Native app (after you refresh or restart it).
 
 image::{% asset_path 'blog/react-native-spring-boot/react-native-okta-login.png' %}[alt=Okta Login in React Native,width=400,align=center]
 
@@ -506,7 +510,9 @@ If you'd like to log your own messages to Reactotron, you can use `console.tron.
 
 The last thing I'd like to show you to deploy your app to production. Since there are many steps to getting your React Native app onto a physical device, I'll defer to React Native's https://facebook.github.io/react-native/docs/running-on-device[Running on Device documentation]. It should be as simple as plugging in your device via USB, configuring code signing, and building/running your app. You'll also need to configure the URL of where your API is located.
 
-You know what's awesome about Spring Boot? There's a bunch of cloud providers that support it! Follow the instructions below to deploy your API to Pivotal's Cloud Foundry and Kubernetes on Google Cloud Platform. Both Cloud Foundry and Kubernetes have multiple providers, so these instructions should work even if you're not using Pivotal or Google.
+You know what's awesome about Spring Boot? There's a bunch of cloud providers that support it! If a platform supports Spring Boot, you should be able to run a JHipster app on it!
+
+Follow the instructions below to deploy your API to Pivotal's Cloud Foundry and Google Cloud Platform using Kubernetes. Both Cloud Foundry and Kubernetes have multiple providers, so these instructions should work even if you're not using Pivotal or Google.
 
 === Deploy Your Spring Boot API to Cloud Foundry
 
@@ -530,7 +536,7 @@ data:
                 home: /tmp/elasticsearch
 ----
 
-You'll also need to remove a couple properties, due to an https://github.com/jhipster/generator-jhipster/issues/8518[issue I discovered in JHipster].
+You'll also need to remove a couple of properties, due to an https://github.com/jhipster/generator-jhipster/issues/8518[issue I discovered in JHipster].
 
 [source,diff]
 ----
@@ -554,13 +560,13 @@ You'll also need to remove a couple properties, due to an https://github.com/jhi
 
 To deploy everything on Cloud Foundry with http://run.pivotal.io/[Pivotal Web Services], you'll need to create an account, download/install the https://github.com/cloudfoundry/cli#downloads[Cloud Foundry CLI], and sign-in (using `cf login -a api.run.pivotal.io`).
 
-TIP: You may receive warning after logging in `No space targeted, use 'cf target -s SPACE'`. If you do, login to https://run.pivotal.io in your browser, create a space, then run the command as recommended.
+TIP: You may receive a warning after logging in `No space targeted, use 'cf target -s SPACE'`. If you do, log in to https://run.pivotal.io in your browser, create a space, then run the command as recommended.
 
 Then run `jhipster cloudfoundry` in the `jhipster-api` directory. You can see the values I chose when prompted below.
 
 ----
 CloudFoundry configuration is starting
-? Name to deploy as: healthpoints
+? Name to deploy as? HealthPoints
 ? Which profile would you like to use? prod
 ? What is the name of your database service? elephantsql
 ? What is the name of your database plan? turtle
@@ -585,7 +591,7 @@ cf restage healthpoints
 
 After overriding the default OIDC settings for Spring Security, you'll need to add `https://healthpoints.cfapps.io/login` as a redirect URI in your Okta OIDC application.
 
-Then... you'll be able to login. Voila! 😃
+Then... you'll be able to authenticate. Voila! 😃
 
 image::{% asset_path 'blog/react-native-spring-boot/jhipster-on-cf.png' %}[alt=JHipster API on Cloud Foundry,width=800,align=center]
 
@@ -633,7 +639,7 @@ docker image tag healthpoints $USERNAME/healthpoints
 docker push $USERNAME/healthpoints
 ----
 
-Google Cloud Platform (a.k.a., GCP) is a PaaS (Platform As A Service) that's built on Google's core infrastructure. It's naturally a good provider for Kubernetes in the cloud. Complete the steps below to deploy your JHipster API to Google Cloud.
+Google Cloud Platform (a.k.a., GCP) is a PaaS (Platform As A Service) that is built on Google's core infrastructure. It's naturally a good provider for Kubernetes in the cloud. Complete the steps below to deploy your JHipster API to Google Cloud.
 
 1. Create a Google Cloud project at https://console.cloud.google.com/[console.cloud.google.com].
 2. Navigate to <https://console.cloud.google.com/kubernetes/list> to initialize the Kubernetes Engine for your project. If your project is not auto-selected, select it (in the nav bar) to start GKE initialization in GCP.
@@ -756,11 +762,9 @@ export default {
 
 == Explore React Native, Spring Boot, and JHipster
 
-This tutorial showed you how to build a secure Spring Boot API (powered by JPA, PostgreSQL, and Elasticsearch) with just a couple commands. Then I showed you how to use Docker to run external services, your app, and verify you had high quality code with Sonar. And that was just the beginning!
+This tutorial showed you how to build a secure Spring Boot API (powered by JPA, PostgreSQL, and Elasticsearch) with just a few commands. Then you learned how to use Docker to run external services, your app, and verify you had high-quality code with Sonar. And that was just the beginning!
 
-Then you learned how to build a React Native app, again with just a few commands. Heck, even deploying to the cloud only took a handful of interesting CLI commands.
-
-// WARNING: The commands used in this post could start failing at any time. If they do, let me know. My DMs are wide open https://twitter.com/mraible[on Twitter].
+I showed you how to build a React Native app, again with just a few commands. Heck, even deploying to the cloud only took a handful of interesting CLI commands.
 
 The source code for this tutorial is available on GitHub https://github.com/oktadeveloper/okta-react-native-spring-boot-example[@oktadeveloper/okta-react-native-spring-boot-example].
 
