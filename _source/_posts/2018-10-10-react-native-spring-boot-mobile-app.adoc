@@ -276,6 +276,15 @@ To make the Android side of things aware of your URL scheme, add it to `android/
 </intent-filter>
 ----
 
+You'll also need to add an `android:launchMode` attribute to the main `<application>` element. This is needed for Android to receive the deep link response in the existing `MainActivity` instead of a new one.
+
+[source,xml]
+----
+    <application
+      android:name=".MainApplication"
+      android:launchMode="singleTask"
+----
+
 === Update Keycloak's Redirect URI
 
 You will also need to update Keycloak to know your app's URL scheme because it's used as a redirect URI. Open `http://localhost:9080/auth/admin` in your browser and log in with admin/admin. Navigate to **Clients** > **web_app** and add `healthpoints://authorize` as a valid redirect URI.
@@ -312,7 +321,7 @@ To create a new AVD, navigate to **Tools** > **Android** > **AVD Manager**. Crea
 
 image::{% asset_path 'blog/react-native-spring-boot/avd-pixel-2.png' %}[alt=AVD Pixel 2,width=800,align=center]
 
-To make Keycloak and your API work with Android in an emulator, you'll have to change all localhost links to `10.0.2.2`. See https://developer.android.com/studio/run/emulator-networking[Android Emulator networking] for more information.
+To make Keycloak and your API work with Android in an emulator, you'll have to change all localhost links to your computer's IP address (e.g., `192.168.0.2`).
 
 This means you'll need to update `src/main/resources/config/application.yml` in the JHipster app to the following.
 
@@ -321,13 +330,13 @@ This means you'll need to update `src/main/resources/config/application.yml` in 
 security:
     oauth2:
         client:
-            access-token-uri: http://10.0.2.2:9080/auth/realms/jhipster/protocol/openid-connect/token
-            user-authorization-uri: http://10.0.2.2:9080/auth/realms/jhipster/protocol/openid-connect/auth
+            access-token-uri: http://{yourIPAddress}:9080/auth/realms/jhipster/protocol/openid-connect/token
+            user-authorization-uri: http://{yourIPAddress}:9080/auth/realms/jhipster/protocol/openid-connect/auth
             client-id: web_app
             client-secret: web_app
             scope: openid profile email
         resource:
-            user-info-uri: http://10.0.2.2:9080/auth/realms/jhipster/protocol/openid-connect/userinfo
+            user-info-uri: http://{yourIPAddress}:9080/auth/realms/jhipster/protocol/openid-connect/userinfo
 ----
 
 You'll also need to update `apiUrl` in your React Native app's `App/Config/AppConfig.js`.
@@ -335,12 +344,12 @@ You'll also need to update `apiUrl` in your React Native app's `App/Config/AppCo
 [source,js]
 ----
 export default {
-  apiUrl: 'http://10.0.2.2:8080/',
+  apiUrl: 'http://{yourIPAddress}:8080/',
   appUrlScheme: 'healthpoints'
 }
 ----
 
-Run `react-native run-android` again. You _should_ be able to log in just like you did on iOS. Unfortunately, I https://github.com/ruddell/ignite-jhipster/issues/59[wasn't able to make it work]. Even if I was able to make it work, it'd make it impossible to log in to the React app in the JHipster app because your local server wouldn't know where `10.0.2.2` is. This was a bad developer experience for me. The good news is everything works with Okta (which I'll get to in a minute).
+Run `react-native run-android` again. You should be able to log in just like you did on iOS.
 
 TIP: To enable live-reloading of code on Android, first click on the emulator, then press kbd:[Ctrl + M] (kbd:[{commandkey} + M] on MacOS) or shake the Android device which has the running app. Then select the **Enable Live Reload** option from the popup.
 
@@ -427,7 +436,7 @@ componentWillMount () {
 }
 ----
 
-Refresh your app in Simulator using **{commandkey} + R**. When you create new points, you should see your new defaults.
+Refresh your app in Simulator using kbd:[{commandkey} + M]. When you create new points, you should see your new defaults.
 
 image::{% asset_path 'blog/react-native-spring-boot/create-points-defaults.png' %}[alt=Create Points with defaults,width=400,align=center]
 
