@@ -12,6 +12,8 @@ image: blog/featured/okta-java-skew.jpg
 ---
 :page-liquid:
 :experimental:
+// Define unicode for Apple Command key.
+:commandkey: &#8984;
 
 React Native is a framework for building mobile applications with React. React allows you to use a declarative style of programming to describe how your UI should look. It uses embedded HTML (called JSX) to render buttons, lists, scrollable views, and many other components.
 
@@ -339,9 +341,6 @@ export default {
 ----
 
 Run `react-native run-android` again. You _should_ be able to log in just like you did on iOS. Unfortunately, I https://github.com/ruddell/ignite-jhipster/issues/59[wasn't able to make it work]. Even if I was able to make it work, it'd make it impossible to log in to the React app in the JHipster app because your local server wouldn't know where `10.0.2.2` is. This was a bad developer experience for me. The good news is everything works with Okta (which I'll get to in a minute).
-
-// Define unicode for Apple Command key.
-:commandkey: &#8984;
 
 TIP: To enable live-reloading of code on Android, first click on the emulator, then press kbd:[Ctrl + M] (kbd:[{commandkey} + M] on MacOS) or shake the Android device which has the running app. Then select the **Enable Live Reload** option from the popup.
 
@@ -762,7 +761,7 @@ export default {
 
 == Explore React Native, Spring Boot, and JHipster
 
-This tutorial showed you how to build a secure Spring Boot API (powered by JPA, PostgreSQL, and Elasticsearch) with just a few commands. Then you learned how to use Docker to run external services, your app, and verify you had high-quality code with Sonar. And that was just the beginning!
+This tutorial showed you how to build a secure Spring Boot API (powered by JPA, PostgreSQL, and Elasticsearch) with just a few commands. Then you learned how to run your app with Gradle, use Docker to run external services, and verify you had high-quality code with Sonar. And that was just the beginning!
 
 I showed you how to build a React Native app, again with just a few commands. Heck, even deploying to the cloud only took a handful of interesting CLI commands.
 
