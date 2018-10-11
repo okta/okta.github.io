@@ -500,7 +500,7 @@ export SECURITY_OAUTH2_CLIENT_CLIENT_SECRET="{yourClientSecret}"
 
 TIP: Make sure your `*URI` variables do not have `-admin` in them. This is a common mistake.
 
-In the terminal where your Spring Boot app is running, kill the process, run `source ~/.okta.env` and run `./gradlew` again. You should be able to log in at `http://localhost:8080` in your React Native app (after you refresh or restart it).
+In the terminal where your Spring Boot app is running, kill the process, run `source ~/.okta.env` and run `./gradlew` again. You should be able to log in at `http://localhost:8080` in your browser, and in your React Native app (after you refresh or restart it).
 
 image::{% asset_path 'blog/react-native-spring-boot/react-native-okta-login.png' %}[alt=Okta Login in React Native,width=400,align=center]
 
