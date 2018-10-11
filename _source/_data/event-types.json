@@ -107,211 +107,215 @@
   } ],
   "tags" : [ {
     "id" : "network-zone",
-    "description" : "Network Zone",
+    "description" : "Network Zone.",
     "tags" : [ ]
   }, {
     "id" : "network-zone-rule",
-    "description" : "Network Zone Rule",
+    "description" : "Network Zone Rule.",
+    "tags" : [ ]
+  }, {
+    "id" : "password-spray",
+    "description" : "Password Spray Attack Detection.",
     "tags" : [ ]
   }, {
     "id" : "amazon-aws-client",
-    "description" : "Amazon AWS client",
+    "description" : "Amazon AWS client.",
     "tags" : [ ]
   }, {
     "id" : "api-exception",
-    "description" : "API exception",
+    "description" : "API exception.",
     "tags" : [ ]
   }, {
     "id" : "app-api",
-    "description" : "Application API",
+    "description" : "Application API.",
     "tags" : [ ]
   }, {
     "id" : "big-machines-app",
-    "description" : "BigMachines App",
+    "description" : "BigMachines App.",
     "tags" : [ ]
   }, {
     "id" : "bloomfire-app",
-    "description" : "Bloomfire App",
+    "description" : "Bloomfire App.",
     "tags" : [ ]
   }, {
     "id" : "boxnet-app",
-    "description" : "Box.net App",
+    "description" : "Box.net App.",
     "tags" : [ ]
   }, {
     "id" : "clarizen-app",
-    "description" : "Clarizen App",
+    "description" : "Clarizen App.",
     "tags" : [ ]
   }, {
     "id" : "confluence-app",
-    "description" : "Confluence App",
+    "description" : "Confluence App.",
     "tags" : [ ]
   }, {
     "id" : "cornerstone-app",
-    "description" : "Cornerstone App",
+    "description" : "Cornerstone App.",
     "tags" : [ ]
   }, {
     "id" : "coupa-app",
-    "description" : "Coupa App",
+    "description" : "Coupa App.",
     "tags" : [ ]
   }, {
     "id" : "crash-plan-app",
-    "description" : "CrashPlan App",
+    "description" : "CrashPlan App.",
     "tags" : [ ]
   }, {
     "id" : "docusign-app",
-    "description" : "Docusign App",
+    "description" : "Docusign App.",
     "tags" : [ ]
   }, {
     "id" : "dropbox-app",
-    "description" : "Dropbox App",
+    "description" : "Dropbox App.",
     "tags" : [ ]
   }, {
     "id" : "dropbox-um-app",
-    "description" : "Dropbox UM App",
+    "description" : "Dropbox UM App.",
     "tags" : [ ]
   }, {
     "id" : "echosign-app",
-    "description" : "Echosign App",
+    "description" : "Echosign App.",
     "tags" : [ ]
   }, {
     "id" : "egnyte-app",
-    "description" : "Egnyte App",
+    "description" : "Egnyte App.",
     "tags" : [ ]
   }, {
     "id" : "eq-analyzer-app",
-    "description" : "EqAnalyzer App",
+    "description" : "EqAnalyzer App.",
     "tags" : [ ]
   }, {
     "id" : "evernote-business-app",
-    "description" : "Evernote Business App",
+    "description" : "Evernote Business App.",
     "tags" : [ ]
   }, {
     "id" : "exact-target-app",
-    "description" : "Exact Target App",
+    "description" : "Exact Target App.",
     "tags" : [ ]
   }, {
     "id" : "github-app",
-    "description" : "Github App",
+    "description" : "Github App.",
     "tags" : [ ]
   }, {
     "id" : "good-data-app",
-    "description" : "GoodData App",
+    "description" : "GoodData App.",
     "tags" : [ ]
   }, {
     "id" : "google-app",
-    "description" : "Google App",
+    "description" : "Google App.",
     "tags" : [ ]
   }, {
     "id" : "go-to-meeting-app",
-    "description" : "GoToMeeting App",
+    "description" : "GoToMeeting App.",
     "tags" : [ ]
   }, {
     "id" : "go-to-meeting-rest-app",
-    "description" : "GoToMeeting REST App",
+    "description" : "GoToMeeting REST App.",
     "tags" : [ ]
   }, {
     "id" : "hipchat-app",
-    "description" : "Hipchat App",
+    "description" : "Hipchat App.",
     "tags" : [ ]
   }, {
     "id" : "huddle-app",
-    "description" : "Huddle App",
+    "description" : "Huddle App.",
     "tags" : [ ]
   }, {
     "id" : "jira-app",
-    "description" : "JIRA App",
+    "description" : "JIRA App.",
     "tags" : [ ]
   }, {
     "id" : "litmos-app",
-    "description" : "Litmos App",
+    "description" : "Litmos App.",
     "tags" : [ ]
   }, {
     "id" : "move-it-dmz-app",
-    "description" : "MOVEit DMZ App",
+    "description" : "MOVEit DMZ App.",
     "tags" : [ ]
   }, {
     "id" : "net-suite-app",
-    "description" : "NetSuite App",
+    "description" : "NetSuite App.",
     "tags" : [ ]
   }, {
     "id" : "okta-org2-org-app",
-    "description" : "Okta Org2Org App",
+    "description" : "Okta Org2Org App.",
     "tags" : [ ]
   }, {
     "id" : "pager-duty-app",
-    "description" : "Pager Duty App",
+    "description" : "Pager Duty App.",
     "tags" : [ ]
   }, {
     "id" : "postini-app",
-    "description" : "Postini App",
+    "description" : "Postini App.",
     "tags" : [ ]
   }, {
     "id" : "rightscale-app",
-    "description" : "Rightscale App",
+    "description" : "Rightscale App.",
     "tags" : [ ]
   }, {
     "id" : "roambi-app",
-    "description" : "Roambi App",
+    "description" : "Roambi App.",
     "tags" : [ ]
   }, {
     "id" : "salesforce-app",
-    "description" : "Salesforce App",
+    "description" : "Salesforce App.",
     "tags" : [ ]
   }, {
     "id" : "samanage-app",
-    "description" : "Samanage App",
+    "description" : "Samanage App.",
     "tags" : [ ]
   }, {
     "id" : "sugar-crm-app",
-    "description" : "Sugar CRM App",
+    "description" : "Sugar CRM App.",
     "tags" : [ ]
   }, {
     "id" : "send-word-now-app",
-    "description" : "SendWordNow App",
+    "description" : "SendWordNow App.",
     "tags" : [ ]
   }, {
     "id" : "service-now-app",
-    "description" : "ServiceNow App",
+    "description" : "ServiceNow App.",
     "tags" : [ ]
   }, {
     "id" : "service-now-app2-app",
-    "description" : "ServiceNow App2 App",
+    "description" : "ServiceNow App2 App.",
     "tags" : [ ]
   }, {
     "id" : "veeva-vault-app",
-    "description" : "Veeva Vault App",
+    "description" : "Veeva Vault App.",
     "tags" : [ ]
   }, {
     "id" : "workday-app",
-    "description" : "Workday App",
+    "description" : "Workday App.",
     "tags" : [ ]
   }, {
     "id" : "yammer-app",
-    "description" : "Yammer App",
+    "description" : "Yammer App.",
     "tags" : [ ]
   }, {
     "id" : "zendesk-app",
-    "description" : "Zendesk App",
+    "description" : "Zendesk App.",
     "tags" : [ ]
   }, {
     "id" : "admin",
-    "description" : "Admin",
+    "description" : "Admin.",
     "tags" : [ ]
   }, {
     "id" : "admin-task",
-    "description" : "Admin task",
+    "description" : "Admin task.",
     "tags" : [ "admin" ]
   }, {
     "id" : "billing",
-    "description" : "Billing",
+    "description" : "Billing.",
     "tags" : [ "admin" ]
   }, {
     "id" : "impersonation",
-    "description" : "Impersonation",
+    "description" : "Impersonation.",
     "tags" : [ "admin" ]
   }, {
     "id" : "org",
-    "description" : "Org",
+    "description" : "Org.",
     "tags" : [ "admin" ]
   }, {
     "id" : "field-mapping-rule-modification",
@@ -335,7 +339,7 @@
     "tags" : [ ]
   }, {
     "id" : "delegated-auth",
-    "description" : "Delegated authentication",
+    "description" : "Delegated authentication.",
     "tags" : [ ]
   }, {
     "id" : "email",
@@ -379,11 +383,11 @@
     "tags" : [ ]
   }, {
     "id" : "ad-app",
-    "description" : "Active Directory",
+    "description" : "Active Directory.",
     "tags" : [ ]
   }, {
     "id" : "ad-agent",
-    "description" : "Active Directory agent",
+    "description" : "Active Directory agent.",
     "tags" : [ ]
   }, {
     "id" : "connector-agent",
@@ -407,7 +411,7 @@
     "tags" : [ ]
   }, {
     "id" : "webhook",
-    "description" : "Webhook feature related",
+    "description" : "Webhook feature related.",
     "tags" : [ ]
   }, {
     "id" : "webhook-eligible",
@@ -415,43 +419,43 @@
     "tags" : [ ]
   }, {
     "id" : "idp",
-    "description" : "Identity provider",
+    "description" : "Identity provider.",
     "tags" : [ ]
   }, {
     "id" : "oauth2",
-    "description" : "OAuth2",
+    "description" : "OAuth2.",
     "tags" : [ ]
   }, {
     "id" : "oauth2-claim",
-    "description" : "OAuth2 claim",
+    "description" : "OAuth2 claim.",
     "tags" : [ "oauth2" ]
   }, {
     "id" : "oauth2-scope",
-    "description" : "OAuth2 scope",
+    "description" : "OAuth2 scope.",
     "tags" : [ "oauth2" ]
   }, {
     "id" : "oauth2-client",
-    "description" : "OAuth2 client",
+    "description" : "OAuth2 client.",
     "tags" : [ "oauth2" ]
   }, {
     "id" : "oauth2-client-lifecycle",
-    "description" : "OAuth2 client lifecycle",
+    "description" : "OAuth2 client lifecycle.",
     "tags" : [ "oauth2", "oauth2-client" ]
   }, {
     "id" : "oauth2-as-lifecycle",
-    "description" : "OAuth2 Authorization Server lifecycle",
+    "description" : "OAuth2 Authorization Server lifecycle.",
     "tags" : [ "oauth2" ]
   }, {
     "id" : "oauth2-as-runtime",
-    "description" : "OAuth2 Authorization Server runtime",
+    "description" : "OAuth2 Authorization Server runtime.",
     "tags" : [ "oauth2" ]
   }, {
     "id" : "oauth2-org-as",
-    "description" : "OAuth2 Org Authorization Server",
+    "description" : "OAuth2 Org Authorization Server.",
     "tags" : [ "oauth2", "oauth2-as-runtime" ]
   }, {
     "id" : "oauth2-custom-as",
-    "description" : "OAuth2 Custom Authorization Server",
+    "description" : "OAuth2 Custom Authorization Server.",
     "tags" : [ "oauth2", "oauth2-as-runtime" ]
   }, {
     "id" : "inbound-saml",
@@ -519,7 +523,7 @@
     "tags" : [ ]
   }, {
     "id" : "mfa",
-    "description" : "Multi-factor authentication",
+    "description" : "Multi-factor authentication.",
     "tags" : [ ]
   }, {
     "id" : "user-factor",
@@ -531,11 +535,11 @@
     "tags" : [ ]
   }, {
     "id" : "agent",
-    "description" : "Agent",
+    "description" : "Agent.",
     "tags" : [ ]
   }, {
     "id" : "radius",
-    "description" : "Radius",
+    "description" : "Radius.",
     "tags" : [ ]
   }, {
     "id" : "device-trust-authentication",
@@ -579,19 +583,19 @@
     "tags" : [ ]
   }, {
     "id" : "app",
-    "description" : "Application",
+    "description" : "Application.",
     "tags" : [ ]
   }, {
     "id" : "device",
-    "description" : "Device",
+    "description" : "Device.",
     "tags" : [ ]
   }, {
     "id" : "system",
-    "description" : "System",
+    "description" : "System.",
     "tags" : [ ]
   }, {
     "id" : "group",
-    "description" : "Group",
+    "description" : "Group.",
     "tags" : [ ]
   }, {
     "id" : "concurrency-limit",
@@ -1721,6 +1725,12 @@
       "tags" : [ "bloomfire-app" ],
       "mappings" : [ "application.integration.authentication_failure" ]
     }, {
+      "id" : "app.bloomfire.sso.error.api_key_invalid",
+      "category" : "oin-advanced-apps",
+      "description" : "Valid API Key is required for SignOn request.",
+      "tags" : [ "bloomfire-app" ],
+      "mappings" : [ "application.integration.authentication_failure" ]
+    }, {
       "id" : "app.bloomfire.sso.error.user_not_extracted",
       "category" : "oin-advanced-apps",
       "description" : "Failed to extract user from SignOnRequest.",
@@ -2640,7 +2650,7 @@
       "mappings" : [ "application.user_membership.restore" ]
     }, {
       "id" : "app.generic.show.password",
-      "category" : "up",
+      "category" : "nxt",
       "description" : "Reveal password requested for User App.",
       "tags" : [ "app" ],
       "mappings" : [ "application.user_membership.show_password" ]
@@ -4719,7 +4729,7 @@
       "category" : "sync",
       "description" : "",
       "tags" : [ "scim" ],
-      "mappings" : [ ]
+      "mappings" : [ "application.integration.general_failure" ]
     }, {
       "id" : "app.self_service.disabled",
       "category" : "lca",
@@ -5605,7 +5615,7 @@
     }, {
       "id" : "core.billing.sms_usage_sent",
       "category" : "aelm",
-      "description" : "Indicates that a report for SMS usage was sent to the billing system",
+      "description" : "Indicates that a report for SMS usage was sent to the billing system.",
       "tags" : [ "admin", "billing" ],
       "mappings" : [ "system.billing.sms_usage_sent" ]
     }, {
@@ -7080,13 +7090,13 @@
       "mappings" : [ "webhook.verify" ]
     }, {
       "id" : "plugin.downloaded",
-      "category" : "up",
+      "category" : "plugins",
       "description" : "Plugin downloaded.",
       "tags" : [ "plugin" ],
       "mappings" : [ "plugin.downloaded" ]
     }, {
       "id" : "plugin.script_status",
-      "category" : "up",
+      "category" : "plugins",
       "description" : "Status information from script execution.",
       "tags" : [ "plugin" ],
       "mappings" : [ "plugin.script_status" ]
@@ -7228,6 +7238,12 @@
       "description" : "Temporarily disabling blacklisting.",
       "tags" : [ "security" ],
       "mappings" : [ "security.device.temporarily_disable_blacklisting" ]
+    }, {
+      "id" : "security.password_spray.detected",
+      "category" : "adaptive",
+      "description" : "An invalid Auth attempt was detected as being part of a password spray attack.",
+      "tags" : [ "password-spray" ],
+      "mappings" : [ "security.password_spray.detected" ]
     }, {
       "id" : "security.session.detect_client_roaming",
       "category" : "security",
@@ -7526,7 +7542,7 @@
     }, {
       "id" : "app.kerberos_rich_client.invalid_org",
       "category" : "directories",
-      "description" : "Kerberos based rich client authentication failed: Invalid org for app instance id",
+      "description" : "Kerberos based rich client authentication failed: Invalid org for app instance id.",
       "info" : {
         "created" : "2017-12-04",
         "release" : "2017.50"
@@ -7636,7 +7652,7 @@
     }, {
       "id" : "app.oauth2.as.authorize.scope_denied",
       "category" : "federation",
-      "description" : "Some of the requested scopes were denied by the policy",
+      "description" : "Some of the requested scopes were denied by the policy.",
       "info" : {
         "created" : "2016-04-01",
         "release" : "2016.14"
@@ -9412,17 +9428,17 @@
         "release" : "2017.33"
       },
       "tags" : [ "app-api" ],
-      "mappings" : [ "app.api.error.auth", "app.api.error.oauth.get.token", "app.api.error.oauth.refresh.token", "app.auth_error.INVALID_CREDENTIALS", "app.bigmachines.api.error.connection", "app.bigmachines.api.error.login", "app.bigmachines.api.error.logout", "app.bloomfire.api.error.api.validation", "app.bloomfire.sso.error.api_key_empty", "app.bloomfire.sso.error.user_not_extracted", "app.confluence.api.error.login", "app.confluence.api.error.logout", "app.cornerstone.api.error.api.validation", "app.cornerstone.api.error.init", "app.coupa.api.connection.error", "app.crashplanpro.api.auth.invalid_login_url", "app.crashplanpro.api.invalid_set_of_roles", "app.docusign.api.error.no.accounts", "app.docusign.api.error.not.account.member", "app.dropbox.api.error.validation", "app.echosign.api.error.connection", "app.egnyte.auth.type.validation.failure", "app.egnyte.username.validation.failure", "app.evernote_business.api.error.validation", "app.gotomeeting.user_management.config.failure.api_login_failure", "app.gotomeeting_rest.user_management.config.failure.api_auth_failed", "app.netsuite.api.error.auth", "app.pagerduty.api.auth.error.invalid.admin.role", "app.pagerduty.api.auth.error.invalid.admin.username", "app.pagerduty.api.auth.error.invalid.api.key", "app.postini.user_management.config.failure.api_login_failed", "app.rightscale.api.error.login", "app.salesforce.user_management.failure.api_service_not_available", "app.salesforce.user_management.failure.general_api_login_failure", "app.salesforce.user_management.failure.invalid_api_credentials", "app.salesforce.user_management.failure.password_expired", "app.servicenow.api.error.validation", "app.servicenow_app2.api.error.validation", "app.sugarcrm.api.error.login", "app.sugarcrm.api.error.logout", "app.veeva_vault.api.error.validation", "app.yammer.api.error.validation", "app.zendesk.api.error.validation.error", "github.api.error.empty_oauth_token", "github.api.error.not_a_member_of_the_org", "github.api.error.not_admin_user" ]
+      "mappings" : [ "app.api.error.auth", "app.api.error.oauth.get.token", "app.api.error.oauth.refresh.token", "app.auth_error.INVALID_CREDENTIALS", "app.bigmachines.api.error.connection", "app.bigmachines.api.error.login", "app.bigmachines.api.error.logout", "app.bloomfire.api.error.api.validation", "app.bloomfire.sso.error.api_key_empty", "app.bloomfire.sso.error.api_key_invalid", "app.bloomfire.sso.error.user_not_extracted", "app.confluence.api.error.login", "app.confluence.api.error.logout", "app.cornerstone.api.error.api.validation", "app.cornerstone.api.error.init", "app.coupa.api.connection.error", "app.crashplanpro.api.auth.invalid_login_url", "app.crashplanpro.api.invalid_set_of_roles", "app.docusign.api.error.no.accounts", "app.docusign.api.error.not.account.member", "app.dropbox.api.error.validation", "app.echosign.api.error.connection", "app.egnyte.auth.type.validation.failure", "app.egnyte.username.validation.failure", "app.evernote_business.api.error.validation", "app.gotomeeting.user_management.config.failure.api_login_failure", "app.gotomeeting_rest.user_management.config.failure.api_auth_failed", "app.netsuite.api.error.auth", "app.pagerduty.api.auth.error.invalid.admin.role", "app.pagerduty.api.auth.error.invalid.admin.username", "app.pagerduty.api.auth.error.invalid.api.key", "app.postini.user_management.config.failure.api_login_failed", "app.rightscale.api.error.login", "app.salesforce.user_management.failure.api_service_not_available", "app.salesforce.user_management.failure.general_api_login_failure", "app.salesforce.user_management.failure.invalid_api_credentials", "app.salesforce.user_management.failure.password_expired", "app.servicenow.api.error.validation", "app.servicenow_app2.api.error.validation", "app.sugarcrm.api.error.login", "app.sugarcrm.api.error.logout", "app.veeva_vault.api.error.validation", "app.yammer.api.error.validation", "app.zendesk.api.error.validation.error", "github.api.error.empty_oauth_token", "github.api.error.not_a_member_of_the_org", "github.api.error.not_admin_user" ]
     }, {
       "id" : "application.integration.general_failure",
       "category" : "oin-advanced-apps",
-      "description" : "",
+      "description" : "General error encountered for application integration.",
       "info" : {
         "created" : "2017-09-14",
         "release" : "2017.33"
       },
       "tags" : [ "app-api" ],
-      "mappings" : [ "app.api.error.generic", "app.bloomfire.api.error.generic", "app.coupa.api.error", "app.crashplanpro.api.rest.unexpected_response_status", "app.eqanalyzer.url.encoding", "app.exacttarget.api.error.init", "app.google.sso.failure.domain_not_found", "app.google.sso.failure.invalid_continue_url", "app.google.sso.failure.invalid_domain", "app.google.sso.failure.relay_state_not_found", "app.gotomeeting.user_management.config.failure.api_not_available", "app.gotomeeting.user_management.config.failure.api_url_is_malformed", "app.gotomeeting_rest.user_management.config.failure.api_not_available", "app.rightscale.api.error.idp", "app.sugarcrm.api.error.get.entry.list", "app.sugarcrm.api.error.hash.password", "app.sugarcrm.api.error.set.entry", "app.workday.api.error.bind", "huddle.company_id.validation.failure", "roambi.api.error.auth.empty.account.response", "roambi.api.error.auth.empty.code", "roambi.api.error.auth.unexpected.response" ]
+      "mappings" : [ "app.api.error.generic", "app.bloomfire.api.error.generic", "app.coupa.api.error", "app.crashplanpro.api.rest.unexpected_response_status", "app.eqanalyzer.url.encoding", "app.exacttarget.api.error.init", "app.google.sso.failure.domain_not_found", "app.google.sso.failure.invalid_continue_url", "app.google.sso.failure.invalid_domain", "app.google.sso.failure.relay_state_not_found", "app.gotomeeting.user_management.config.failure.api_not_available", "app.gotomeeting.user_management.config.failure.api_url_is_malformed", "app.gotomeeting_rest.user_management.config.failure.api_not_available", "app.rightscale.api.error.idp", "app.scim.is.api.account.error", "app.sugarcrm.api.error.get.entry.list", "app.sugarcrm.api.error.hash.password", "app.sugarcrm.api.error.set.entry", "app.workday.api.error.bind", "huddle.company_id.validation.failure", "roambi.api.error.auth.empty.account.response", "roambi.api.error.auth.empty.code", "roambi.api.error.auth.unexpected.response" ]
     }, {
       "id" : "application.integration.rate_limit_exceeded",
       "category" : "oin-advanced-apps",
@@ -10036,7 +10052,7 @@
     }, {
       "id" : "application.user_membership.restore",
       "category" : "lca",
-      "description" : "Restore user assignment to an application",
+      "description" : "Restore user assignment to an application.",
       "info" : {
         "created" : "2016-01-08",
         "release" : "2016.02"
@@ -10046,7 +10062,7 @@
     }, {
       "id" : "application.user_membership.restore_password",
       "category" : "lca",
-      "description" : "Restore user's password for an application",
+      "description" : "Restore user's password for an application.",
       "info" : {
         "created" : "2016-01-08",
         "release" : "2016.02"
@@ -10066,7 +10082,7 @@
     }, {
       "id" : "application.user_membership.show_password",
       "category" : "lca",
-      "description" : "Show user's password for application",
+      "description" : "Show user's password for application.",
       "info" : {
         "created" : "2016-01-08",
         "release" : "2016.02"
@@ -10126,7 +10142,7 @@
     }, {
       "id" : "callback.response.processed",
       "category" : "extensibility",
-      "description" : "Finished processing callback response",
+      "description" : "Finished processing callback response.",
       "info" : {
         "created" : "2018-09-24",
         "release" : "2018.40"
@@ -10785,7 +10801,7 @@
       "mappings" : [ "core.user_auth.pki.cert.revoke" ]
     }, {
       "id" : "plugin.downloaded",
-      "category" : "up",
+      "category" : "plugins",
       "description" : "Plugin downloaded.",
       "info" : {
         "created" : "2016-12-02",
@@ -10795,7 +10811,7 @@
       "mappings" : [ "plugin.downloaded" ]
     }, {
       "id" : "plugin.script_status",
-      "category" : "up",
+      "category" : "plugins",
       "description" : "Status information from script execution.",
       "info" : {
         "created" : "2016-12-02",
@@ -11033,6 +11049,16 @@
       },
       "tags" : [ "device", "security" ],
       "mappings" : [ "security.device.temporarily_disable_blacklisting" ]
+    }, {
+      "id" : "security.password_spray.detected",
+      "category" : "adaptive",
+      "description" : "An invalid Auth attempt was detected as being part of a password spray attack.",
+      "info" : {
+        "created" : "2018-09-27",
+        "release" : "2018.40"
+      },
+      "tags" : [ "password-spray" ],
+      "mappings" : [ "security.password_spray.detected" ]
     }, {
       "id" : "security.request.blocked",
       "category" : "adaptive",
@@ -11276,7 +11302,7 @@
     }, {
       "id" : "system.agent.ad.update_user",
       "category" : "directories",
-      "description" : "User Auth and Update",
+      "description" : "User Auth and Update.",
       "info" : {
         "created" : "2016-05-09",
         "release" : "2016.20"
@@ -11456,7 +11482,7 @@
     }, {
       "id" : "system.billing.sms_usage_sent",
       "category" : "aelm",
-      "description" : "Indicates that a report for SMS usage was sent to the billing system",
+      "description" : "Indicates that a report for SMS usage was sent to the billing system.",
       "info" : {
         "created" : "2018-08-30",
         "release" : "2018.36"
@@ -12086,7 +12112,7 @@
     }, {
       "id" : "tokens.transform.process",
       "category" : "federation",
-      "description" : "Processed SAML transform command",
+      "description" : "Processed SAML transform command.",
       "info" : {
         "created" : "2018-07-01",
         "release" : "2018.28"
@@ -12366,7 +12392,7 @@
     }, {
       "id" : "user.authentication.slo",
       "category" : "federation",
-      "description" : "User single sign out from app.",
+      "description" : "User single logout out (SLO) from app.",
       "info" : {
         "created" : "2016-03-08",
         "release" : "2016.11"
@@ -12376,7 +12402,7 @@
     }, {
       "id" : "user.authentication.sso",
       "category" : "authn",
-      "description" : "User single sign on to app.",
+      "description" : "Fired when a user performs a single sign-on (SSO) to an app instance and contains the client details of the user. Can be used to identify when a user attempted to sign into an application for audit or debugging purposes. Note that the event is fired even when the sign-on is unsuccessful.",
       "info" : {
         "created" : "2016-03-08",
         "release" : "2016.11"
