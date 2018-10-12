@@ -166,7 +166,7 @@ security:
             user-info-uri: https://{yourOktaDomain}/oauth2/default/v1/userinfo
 ```
 
-You can also use environment variables to override the default values. Using this technique is recommend because 1) you don't need to modify the values in each microservice application and 2) it prevents you from leaking your client secret in a source code repository. Add the following into `~/.okta.env` and you can run `source ~/.okta.env` to override the default Spring Security settings. If you want to make Okta settings the default, you can add `source ~/.okta.env` to `~/.bashrc` (or `~/.zshrc`).
+You can also use environment variables to override the default values. Using this technique is recommend because 1) you don't need to modify the values in each microservice application and 2) it prevents you from leaking your client secret in a source code repository. Create `~/.okta.env` and copy the `export` commands below into it. With that file in place, you can run `source ~/.okta.env` to override the default Spring Security settings. 
 
 ```bash
 export SECURITY_OAUTH2_CLIENT_ACCESS_TOKEN_URI="https://{yourOktaDomain}/oauth2/default/v1/token"
@@ -175,6 +175,8 @@ export SECURITY_OAUTH2_RESOURCE_USER_INFO_URI="https://{yourOktaDomain}/oauth2/d
 export SECURITY_OAUTH2_CLIENT_CLIENT_ID="{clientId}"
 export SECURITY_OAUTH2_CLIENT_CLIENT_SECRET="{clientSecret}"
 ```
+
+If you want to make Okta settings the default, you can add `source ~/.okta.env` to `~/.bashrc` (or `~/.zshrc`).
 
 If you're hard-coding your Okta settings in `application.yml`, make sure you update your settings in the blog and store apps too. If you're using environment variable, you don't need to make any changes.
 
