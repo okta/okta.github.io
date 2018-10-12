@@ -24,7 +24,7 @@ New to Okta? Our quickstart will walk you through adding user authentication to 
 	</li>
 </ul>
 
-<a href='https://github.com/oktadeveloper/okta-vanilla-js-example'>
+<a href='https://github.com/okta/samples-nodejs-express-4/tree/master/custom-login'>
 	<span class='fa fa-github'></span> <span>JavaScript Sample App</span>
 </a>
 
@@ -37,7 +37,7 @@ Auth.js is a library wrapper for the Okta Authentication API. Use it when you ne
 </a>
 
 <a href='https://github.com/okta/okta-auth-js'>
-	<span class='fa fa-github'></span> <span>JavaScript SDK Source</span>
+	<span class='fa fa-github'></span> <span>JavaScript Auth SDK Source</span>
 </a>
 
 ## JavaScript Libraries
@@ -53,19 +53,16 @@ Auth.js is a library wrapper for the Okta Authentication API. Use it when you ne
 
 ## Recommended Guides
 
-<ul class="language-list">
-	<li><a href="https://developer.okta.com/code/javascript/okta_auth_sdk">Okta Auth SDK Guide</a></li>
-	<li><a href="https://developer.okta.com/code/javascript/okta_sign-in_widget">Okta Sign-In Widget Guide</a></li>
-	<li><a href="https://developer.okta.com/authentication-guide/implementing-authentication/implicit">Implementing the Implicit Flow</a></li>
-	<li><a href="https://developer.okta.com/authentication-guide/social-login/">Social Login</a></li>
-	<li><a href="https://developer.okta.com/authentication-guide/tokens/">Working With OAuth 2.0 Tokens</a></li>
-</ul>
+{: .language-list }
+- [Okta Auth SDK Guide](/code/javascript/okta_auth_sdk)
+- [Okta Sign-In Widget Guide](/code/javascript/okta_sign-in_widget)
+- [Implementing the Implicit Flow](/authentication-guide/implementing-authentication/implicit)
+- [Social Login](/authentication-guide/social-login/)
+- [Working With OAuth 2.0 Tokens](/authentication-guide/tokens/)
 
 ## Related Blog Posts
 
-<ul class="language-list">
-	<li><a href="https://developer.okta.com/blog/2018/06/05/authentication-vanilla-js">Add Authentication to Your Vanilla JavaScript App in 20 Minutes</a></li>
-	<li><a href="https://developer.okta.com/blog/2018/05/08/build-video-chat-app-with-javascript-webrtc-and-okta">Build a Video Chat Service with JavaScript, WebRTC, and Okta</a></li>
-</ul>
-
+{: .language-list }
+- [Add Authentication to Your Vanilla JavaScript App in 20 Minutes](/blog/2018/06/05/authentication-vanilla-js)
+- [Build a Video Chat Service with JavaScript, WebRTC, and Okta](/blog/2018/05/08/build-video-chat-app-with-javascript-webrtc-and-okta)
 

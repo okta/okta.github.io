@@ -48,14 +48,8 @@ go get https://github.com/okta/okta-sdk-golang
 
 ## Recommended Guides
 
-<ul class="language-list">
-	<li><a href="https://developer.okta.com/authentication-guide/implementing-authentication/auth-code">Implement the Authorization Code Flow</a></li>
-	<li><a href="https://developer.okta.com/authentication-guide/social-login/">Social Login</a></li>
-	<li><a href="https://developer.okta.com/authentication-guide/tokens/">Working With OAuth 2.0 Tokens</a></li>
-</ul>
-
-
-
-
-
+{: .language-list }
+- [Implement the Authorization Code Flow](/authentication-guide/implementing-authentication/auth-cod)
+- [Social Login](/authentication-guide/social-login/)
+- [Working With OAuth 2.0 Tokens](/authentication-guide/tokens/)
 

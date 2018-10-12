@@ -67,16 +67,12 @@ Okta's integration with ASP.NET makes it easy to add sign-in to your ASP.NET MVC
 
 ## Recommended Guides
 
-<ul class="language-list">
-	<li><a href="https://developer.okta.com/code/dotnet/jwt-validation">Manual JWT Validation in .NET</a></li>
-	
-</ul>
+{: .language-list }
+- [Manual JWT Validation in .NET](/code/dotnet/jwt-validation)
 
 ## Related Blog Posts
 
-<ul class="language-list">
-	<li><a href="https://developer.okta.com/blog/2018/07/27/build-crud-app-in-aspnet-framework-webapi-and-angular">Build a CRUD App with ASP.NET Framework 4.x Web API and Angular</a></li>
-	<li><a href="https://developer.okta.com/blog/2018/04/18/authorization-in-your-aspnet-mvc-4-application">Use OpenID Connect for Authorization in Your ASP.NET MVC Framework 4.x App</a></li>
-</ul>
-
+{: .language-list }
+- [Build a CRUD App with ASP.NET Framework 4.x Web API and Angular](/blog/2018/07/27/build-crud-app-in-aspnet-framework-webapi-and-angular)
+- [Use OpenID Connect for Authorization in Your ASP.NET MVC Framework 4.x App](/blog/2018/04/18/authorization-in-your-aspnet-mvc-4-application)
 

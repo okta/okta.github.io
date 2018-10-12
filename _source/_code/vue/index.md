@@ -45,20 +45,19 @@ The Okta Vue SDK is a wrapper around the Okta Auth SDK for communicating with OA
 
 ## Recommended Guides
 
-<ul class="language-list">
-	<li><a href="https://developer.okta.com/authentication-guide/implementing-authentication/implicit">Implementing the Implicit Flow</a></li>
-	<li><a href="https://developer.okta.com/authentication-guide/social-login/">Social Login</a></li>
-	<li><a href="https://developer.okta.com/authentication-guide/tokens/">Working With OAuth 2.0 Tokens</a></li>
-</ul>
+{: .language-list }
+- [Implementing the Implicit Flow](https://developer.okta.com/authentication-guide/implementing-authentication/implicit)
+- [Social Login](https://developer.okta.com/authentication-guide/social-login/)
+- [Working With OAuth 2.0 Tokens](https://developer.okta.com/authentication-guide/tokens/)
 
 ## Related Blog Posts
 
-<ul class="language-list">
-	<li><a href="https://developer.okta.com/blog/2017/09/14/lazy-developers-guide-to-auth-with-vue">The Lazy Developer's Guide to Authentication with Vue.js</a></li>
-	<li><a href="https://developer.okta.com/blog/2018/06/14/php-crud-app-symfony-vue">Tutorial: Build a Basic CRUD App with Symfony 4 and Vue</a></li>
-	<li><a href="https://developer.okta.com/blog/2018/07/03/deploy-vue-app-aws">Deploy Your Secure Vue.js App to AWS</a></li>
-	<li><a href="https://developer.okta.com/blog/2018/02/15/build-crud-app-vuejs-node">Build a Basic CRUD App with Vue.js and Node</a></li>
-	<li><a href="https://developer.okta.com/blog/2018/01/31/build-secure-todo-app-vuejs-aspnetcore">Build a Secure To-Do App with Vue, ASP.NET Core, and Okta</a></li>
-	<li><a href="https://developer.okta.com/blog/2017/09/06/build-a-cryptocurrency-comparison-site-with-vuejs">Build a Cryptocurrency Comparison Site with Vue.js</a></li>
-	<li><a href="https://developer.okta.com/blog/2017/07/20/the-ultimate-guide-to-progressive-web-applications">The Ultimate Guide to Progressive Web Applications</a></li>
-</ul>
+{: .language-list }
+- [The Lazy Developer's Guide to Authentication with Vue.js](https://developer.okta.com/blog/2017/09/14/lazy-developers-guide-to-auth-with-vue)
+- [Tutorial: Build a Basic CRUD App with Symfony 4 and Vue](https://developer.okta.com/blog/2018/06/14/php-crud-app-symfony-vu)
+- [Deploy Your Secure Vue.js App to AWS](https://developer.okta.com/blog/2018/07/03/deploy-vue-app-aws)
+- [Build a Basic CRUD App with Vue.js and Node](https://developer.okta.com/blog/2018/02/15/build-crud-app-vuejs-node)
+- [Build a Secure To-Do App with Vue, ASP.NET Core, and Okta](https://developer.okta.com/blog/2018/01/31/build-secure-todo-app-vuejs-aspnetcore)
+- [Build a Cryptocurrency Comparison Site with Vue.js](https://developer.okta.com/blog/2017/09/06/build-a-cryptocurrency-comparison-site-with-vuejs)
+- [The Ultimate Guide to Progressive Web Applications](https://developer.okta.com/blog/2017/07/20/the-ultimate-guide-to-progressive-web-applications)
+

@@ -60,22 +60,21 @@ The Okta Node.js SDK can be used in your server-side code to create and update u
 
 ## Recommended Guides
 
-<ul class="language-list">
-	<li><a href="https://developer.okta.com/authentication-guide/implementing-authentication/auth-code">Implement the Authorization Code Flow</a></li>
-	<li><a href="https://developer.okta.com/authentication-guide/social-login/">Social Login</a></li>
-	<li><a href="https://developer.okta.com/authentication-guide/tokens/">Working With OAuth 2.0 Tokens</a></li>
-</ul>
+{: .language-list }
+- [Implement the Authorization Code Flow](/authentication-guide/implementing-authentication/auth-code)
+- [Social Login](/authentication-guide/social-login/)
+- [Working With OAuth 2.0 Tokens](/authentication-guide/tokens/)
 
 ## Related Blog Posts
 
-<ul class="language-list">
-	<li><a href="https://developer.okta.com/blog/2018/02/15/build-crud-app-vuejs-node">Build a Basic CRUD App with Vue.js and Node</a></li>
-	<li><a href="https://developer.okta.com/blog/2018/08/21/build-secure-rest-api-with-node">Build a Simple REST API with Node and OAuth 2.0</a></li>
-	<li><a href="https://developer.okta.com/blog/2018/06/28/tutorial-build-a-basic-crud-app-with-node">Tutorial: Build a Basic CRUD App with Node.js</a></li>
-	<li><a href="https://developer.okta.com/blog/2018/07/10/build-a-basic-crud-app-with-node-and-react">Build a Basic CRUD App with Node and React</a></li>
-	<li><a href="https://developer.okta.com/blog/2018/02/06/build-user-registration-with-node-react-and-okta">Build User Registration with Node, React, and Okta</a></li>
-	<li><a href="https://developer.okta.com/blog/2018/05/18/node-authentication-with-passport-and-oidc">Build Secure Node Authentication with Passport.js and OpenID Connect</a></li>
-	<li><a href="https://developer.okta.com/blog/2018/06/26/securely-manage-users-node-app">How to Securely Manage Users in Your Node App</a></li>
-	<li><a href="https://developer.okta.com/blog/2018/05/22/simple-multifactor-authentication-in-node">Simple Multi-Factor Authentication in Node</a></li>
-</ul>
+{: .language-list }
+- [Build a Basic CRUD App with Vue.js and Node](/blog/2018/02/15/build-crud-app-vuejs-node)
+- [Build a Simple REST API with Node and OAuth 2.0](/blog/2018/08/21/build-secure-rest-api-with-node)
+- [Tutorial: Build a Basic CRUD App with Node.js](/blog/2018/06/28/tutorial-build-a-basic-crud-app-with-node)
+- [Build a Basic CRUD App with Node and React](/blog/2018/07/10/build-a-basic-crud-app-with-node-and-react)
+- [Build User Registration with Node, React, and Okta](/blog/2018/02/06/build-user-registration-with-node-react-and-okta)
+- [Build Secure Node Authentication with Passport.js and OpenID Connect](/blog/2018/05/18/node-authentication-with-passport-and-oidc)
+- [How to Securely Manage Users in Your Node App](/blog/2018/06/26/securely-manage-users-node-app)
+- [Simple Multi-Factor Authentication in Node](/blog/2018/05/22/simple-multifactor-authentication-in-node)
+
 

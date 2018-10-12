@@ -66,29 +66,17 @@ The Okta Java SDK can be used in your server-side code to create and update user
 
 ## Recommended Guides
 
-<ul class="language-list">
-	<li><a href="https://developer.okta.com/authentication-guide/implementing-authentication/auth-code">Implement the Authorization Code Flow</a></li>
-	<li><a href="https://developer.okta.com/authentication-guide/social-login/">Social Login</a></li>
-	<li><a href="https://developer.okta.com/authentication-guide/tokens/">Working With OAuth 2.0 Tokens</a></li>
-</ul>
+{: .language-list }
+- [Implement the Authorization Code Flow](/authentication-guide/implementing-authentication/auth-code)
+- [Social Login](/authentication-guide/social-login/)
+- [Working With OAuth 2.0 Tokens](/authentication-guide/tokens/)
 
 ## Related Blog Posts
 
-<ul class="language-list">
-	<li>
-		<a href="https://developer.okta.com/blog/2017/08/23/five-java-tips">5 Tips for Building your Java API</a>
-	</li>
-	<li>
-		<a href="https://developer.okta.com/blog/2017/09/08/nosql-options-for-java-developers">NoSQL Options for Java Developers</a>
-	</li>
-	<li>
-		<a href="https://developer.okta.com/blog/2015/12/02/tls-client-authentication-for-services">TLS Client Authentication for Internal Services</a>
-	</li>
-	<li>
-		<a href="https://developer.okta.com/blog/2017/10/31/add-authentication-to-play-framework-with-oidc">Add Authentication to Play Framework with OIDC and Okta</a>
-	</li>
-	<li>
-		<a href="https://developer.okta.com/blog/2018/04/19/okta-with-grails">Build Server Side Authentication in Grails with OAuth 2.0 and Okta</a>
-	</li>
-</ul>
+{: .language-list }
+- [5 Tips for Building your Java API](/blog/2017/08/23/five-java-tips)
+- [NoSQL Options for Java Developers](/blog/2017/09/08/nosql-options-for-java-developers)
+- [TLS Client Authentication for Internal Services](/blog/2015/12/02/tls-client-authentication-for-services)
+- [Add Authentication to Play Framework with OIDC and Okta](/blog/2017/10/31/add-authentication-to-play-framework-with-oidc)
+- [Build Server Side Authentication in Grails with OAuth 2.0 and Okta](/blog/2018/04/19/okta-with-grails)
 

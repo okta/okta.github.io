@@ -55,20 +55,19 @@ The Okta AppAuth iOS SDK is a wrapper around the AppAuth-iOS SDK for communicati
 
 ## Recommended Guides
 
-<ul class="language-list">
-	<li><a href="https://developer.okta.com/authentication-guide/implementing-authentication/auth-code-pkce">Implementing the Authorization Code Flow with PKCE</a></li>
-	<li><a href="https://developer.okta.com/authentication-guide/social-login/">Social Login</a></li>
-	<li><a href="https://developer.okta.com/authentication-guide/tokens/">Working With OAuth 2.0 Tokens</a></li>
-</ul>
+{: .language-list }
+- [Implementing the Authorization Code Flow with PKCE](/authentication-guide/implementing-authentication/auth-code-pkce)
+- [Social Login](/authentication-guide/social-login/)
+- [Working With OAuth 2.0 Tokens](/authentication-guide/tokens/)
 
 ## Related Blog Posts
 
-<ul class="language-list">
-	<li><a href="https://developer.okta.com/blog/2017/05/17/develop-a-mobile-app-with-ionic-and-spring-boot">Tutorial: Develop a Mobile App With Ionic and Spring Boot</a></li>
-	<li><a href="https://developer.okta.com/blog/2017/08/22/build-an-ionic-app-with-user-authentication">Build an Ionic App with User Authentication</a></li>
-	<li><a href="https://developer.okta.com/blog/2018/03/16/build-react-native-authentication-oauth-2">Build a React Native Application and Authenticate with OAuth 2.0</a></li>
-	<li><a href="https://developer.okta.com/blog/2018/01/10/build-app-for-ios-android-with-xamarin">Build an App for iOS and Android with Xamarin</a></li>
-	<li><a href="https://developer.okta.com/blog/2017/11/20/build-an-iOS-app-with-secure-authentication-in-20-minutes">Build an iOS App with Secure Authentication in 20 Minutes</a></li>
-	<li><a href="https://developer.okta.com/blog/2018/01/30/jhipster-ionic-with-oidc-authentication">Use Ionic for JHipster to Create Mobile Apps with OIDC Authentication</a></li>
-	<li><a href="https://developer.okta.com/blog/2018/05/01/add-authentication-xamarin-openid-connect">Add Authentication to Your Xamarin App with OpenID Connect</a></li>
-</ul>
+{: .language-list }
+- [Tutorial: Develop a Mobile App With Ionic and Spring Boot](/blog/2017/05/17/develop-a-mobile-app-with-ionic-and-spring-boot)
+- [Build an Ionic App with User Authentication](/blog/2017/08/22/build-an-ionic-app-with-user-authentication)
+- [Build a React Native Application and Authenticate with OAuth 2.0](/blog/2018/03/16/build-react-native-authentication-oauth-2)
+- [Build an App for iOS and Android with Xamarin](/blog/2018/01/10/build-app-for-ios-android-with-xamarin)
+- [Build an iOS App with Secure Authentication in 20 Minutes](/blog/2017/11/20/build-an-iOS-app-with-secure-authentication-in-20-minutes)
+- [Use Ionic for JHipster to Create Mobile Apps with OIDC Authentication](/blog/2018/01/30/jhipster-ionic-with-oidc-authentication)
+- [Add Authentication to Your Xamarin App with OpenID Connect](/blog/2018/05/01/add-authentication-xamarin-openid-connect)
+

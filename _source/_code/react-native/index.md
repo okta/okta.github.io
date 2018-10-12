@@ -42,15 +42,14 @@ The Okta React Native client makes it easy to add authentication to your React N
 
 ## Recommended Guides
 
-<ul class="language-list">
-	<li><a href="https://developer.okta.com/authentication-guide/implementing-authentication/auth-code-pkce">Implementing the Authorization Code Flow with PKCE</a></li>
-	<li><a href="https://developer.okta.com/authentication-guide/social-login/">Social Login</a></li>
-	<li><a href="https://developer.okta.com/authentication-guide/tokens/">Working With OAuth 2.0 Tokens</a></li>
-</ul>
+{: .language-list }
+- [Implementing the Authorization Code Flow with PKCE](/authentication-guide/implementing-authentication/auth-code-pkce)
+- [Social Login](/authentication-guide/social-login/)
+- [Working With OAuth 2.0 Tokens](/authentication-guide/tokens/)
 
 ## Related Blog Posts
 
-<ul class="language-list">
-	<li><a href="https://developer.okta.com/blog/2018/03/16/build-react-native-authentication-oauth-2">Build a React Native Application and Authenticate with OAuth 2.0</a></li>
-	<li><a href="https://developer.okta.com/blog/2017/03/30/react-okta-sign-in-widget">Build a React Application with User Authentication in 15 Minutes</a></li>
-</ul>
+{: .language-list }
+- [Build a React Native Application and Authenticate with OAuth 2.0](/blog/2018/03/16/build-react-native-authentication-oauth-2)
+- [Build a React Application with User Authentication in 15 Minutes](/blog/2017/03/30/react-okta-sign-in-widget)
+

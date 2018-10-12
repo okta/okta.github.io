@@ -60,17 +60,16 @@ The Okta PHP SDK can be used in your server-side code to create and update users
 
 ## Recommended Guides
 
-<ul class="language-list">
-	<li><a href="https://developer.okta.com/authentication-guide/implementing-authentication/auth-code">Implement the Authorization Code Flow</a></li>
-	<li><a href="https://developer.okta.com/authentication-guide/social-login/">Social Login</a></li>
-	<li><a href="https://developer.okta.com/authentication-guide/tokens/">Working With OAuth 2.0 Tokens</a></li>
-</ul>
+{: .language-list }
+- [Implement the Authorization Code Flow](/authentication-guide/implementing-authentication/auth-code)
+- [Social Login](/authentication-guide/social-login/)
+- [Working With OAuth 2.0 Tokens](/authentication-guide/tokens/)
 
 ## Related Blog Posts
 
-<ul class="language-list">
-	<li><a href="https://developer.okta.com/blog/2018/07/09/five-minute-php-app-auth">Add Authentication to your PHP App in 5 Minutes</a></li>
-	<li><a href="https://developer.okta.com/blog/2018/06/14/php-crud-app-symfony-vue">Tutorial: Build a Basic CRUD App with Symfony 4 and Vue</a></li>
-	<li><a href="https://developer.okta.com/blog/2018/08/14/php-crud-app-symfony-angular">Tutorial: Build Your First CRUD App with Symfony and Angular</a></li>
-	<li><a href="https://developer.okta.com/blog/2018/07/16/oauth-2-command-line">OAuth 2.0 from the Command Line</a></li>
-</ul>
+{: .language-list }
+- [Add Authentication to your PHP App in 5 Minutes](/blog/2018/07/09/five-minute-php-app-auth)
+- [Tutorial: Build a Basic CRUD App with Symfony 4 and Vue](/blog/2018/06/14/php-crud-app-symfony-vue)
+- [Tutorial: Build Your First CRUD App with Symfony and Angular](/blog/2018/08/14/php-crud-app-symfony-angular)
+- [OAuth 2.0 from the Command Line](/blog/2018/07/16/oauth-2-command-line)
+

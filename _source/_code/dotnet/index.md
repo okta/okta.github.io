@@ -69,19 +69,18 @@ Okta's integration with ASP.NET Core makes it easy to add sign-in to your ASP.NE
 
 ## Recommended Guides
 
-<ul class="language-list">
-	<li><a href="https://developer.okta.com/code/dotnet/jwt-validation">Manual JWT Validation in .NET</a></li>
-</ul>
+{: .language-list }
+- [Manual JWT Validation in .NETManual JWT Validation in .NET](/code/dotnet/jwt-validation)
 
 ## Related Blog Posts
 
-<ul class="language-list">
-	<li><a href="https://developer.okta.com/blog/2018/04/26/build-crud-app-aspnetcore-angular">Build a CRUD App with ASP.NET Core and Angular</a></li>
-	<li><a href="https://developer.okta.com/blog/2018/02/01/secure-aspnetcore-webapi-token-auth">How to Secure Your .NET Web API with Token Authentication</a></li>
-	<li><a href="https://developer.okta.com/blog/2018/03/23/token-authentication-aspnetcore-complete-guide">Token Authentication in ASP.NET Core 2.0 - A Complete Guide</a></li>
-	<li><a href="https://developer.okta.com/blog/2018/05/11/policy-based-authorization-in-aspnet-core">Policy-Based Authorization in ASP.NET Core</a></li>
-	<li><a href="https://developer.okta.com/blog/2018/07/02/build-a-secure-crud-app-with-aspnetcore-and-react">Build a Secure CRUD App with ASP.NET Core and React</a></li>
-	<li><a href="https://developer.okta.com/blog/2017/06/29/oidc-user-auth-aspnet-core">OpenID Connect for User Authentication in ASP.NET Core</a></li>
-	<li><a href="https://developer.okta.com/blog/2017/10/04/aspnet-authorization">User Authorization in ASP.NET Core with Okta</a></li>
-	<li><a href="https://developer.okta.com/blog/2018/01/31/build-secure-todo-app-vuejs-aspnetcore">Build a Secure To-Do App with Vue, ASP.NET Core, and Okta</a></li>
-</ul>
+{: .language-list }
+- [Build a CRUD App with ASP.NET Core and Angular](/blog/2018/04/26/build-crud-app-aspnetcore-angular)
+- [How to Secure Your .NET Web API with Token Authentication](/blog/2018/02/01/secure-aspnetcore-webapi-token-auth)
+- [Token Authentication in ASP.NET Core 2.0 - A Complete Guide](/blog/2018/03/23/token-authentication-aspnetcore-complete-guide)
+- [Policy-Based Authorization in ASP.NET Core](/blog/2018/05/11/policy-based-authorization-in-aspnet-core)
+- [Build a Secure CRUD App with ASP.NET Core and React](/blog/2018/07/02/build-a-secure-crud-app-with-aspnetcore-and-react)
+- [OpenID Connect for User Authentication in ASP.NET Core](/blog/2017/06/29/oidc-user-auth-aspnet-core)
+- [User Authorization in ASP.NET Core with Okta](/blog/2017/10/04/aspnet-authorization)
+- [Build a Secure To-Do App with Vue, ASP.NET Core, and Okta](/blog/2018/01/31/build-secure-todo-app-vuejs-aspnetcore)
+

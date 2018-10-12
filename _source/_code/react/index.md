@@ -42,17 +42,15 @@ The Okta React SDK makes it easy to integrate react-router with Okta's OpenID Co
 
 ## Recommended Guides
 
-<ul class="language-list">
-	<li><a href="https://developer.okta.com/code/react/okta_react">Okta React Overview</a></li>
-	<li><a href="https://developer.okta.com/authentication-guide/implementing-authentication/implicit">Implementing the Implicit Flow</a></li>
-	<li><a href="https://developer.okta.com/authentication-guide/social-login/">Social Login</a></li>
-	<li><a href="https://developer.okta.com/authentication-guide/tokens/">Working With OAuth 2.0 Tokens</a></li>
-</ul>
-
+{: .language-list }
+- [Okta React Overview](/code/react/okta_react)
+- [Implementing the Implicit Flow](/authentication-guide/implementing-authentication/implicit)
+- [Social Login](/authentication-guide/social-login/)
+- [Working With OAuth 2.0 Tokens](/authentication-guide/tokens/)
 
 ## Related Blog Posts
 
-<ul class="language-list">
-	<li><a href="https://developer.okta.com/blog/2018/06/05/authentication-vanilla-js">Add Authentication to Your Vanilla JavaScript App in 20 Minutes</a></li>
-	<li><a href="https://developer.okta.com/blog/2018/05/08/build-video-chat-app-with-javascript-webrtc-and-okta">Build a Video Chat Service with JavaScript, WebRTC, and Okta</a></li>
-</ul>
+{: .language-list }
+- [Add Authentication to Your Vanilla JavaScript App in 20 Minutes](/blog/2018/06/05/authentication-vanilla-js)
+- [Build a Video Chat Service with JavaScript, WebRTC, and Okta](/blog/2018/05/08/build-video-chat-app-with-javascript-webrtc-and-okta)
+
