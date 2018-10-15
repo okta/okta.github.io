@@ -177,7 +177,7 @@ Remember:
 
 ## Configure Your Okta OIDC Application for Token Authentication in Java
 
-Soon you’ll be generating and validating JWTs like a pro. But first, you need to head over to [developer.okta.com](https://developer.okta.com) and create an OpenID Connect (OIDC) application. If you haven't already, register for a free developer account. Did I mention it's totally free?
+Soon you'll be generating and validating JWTs like a pro. But first, you need to head over to [developer.okta.com](https://developer.okta.com) and create an OpenID Connect (OIDC) application. If you haven't already, register for a free developer account. Did I mention it's totally free?
 
 Log into your Okta developer dashboard. Go to **Applications** and then click the **Add Application** button.
 
