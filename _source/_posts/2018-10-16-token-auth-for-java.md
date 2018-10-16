@@ -11,17 +11,17 @@ tweets:
 image: blog/featured/okta-java-short-skew.jpg
 ---
 
-JSON Web Tokens have quickly become the standard for securing web applications, superseding older technologies like cookies and sessions. Used properly, they address a range of security concerns, including cross-site scripting attacks (XSS), man-in-the-middle attacks (MITM), and cross-site request forgery (CSRF). They also give us the benefit of inspectable metadata and strong cryptographic signatures. In this post, we'll take a deep dive into JWTs. First, we'll cover some theoretical ground explaining how they work. After that, we'll show you how to configure a Spring Boot app with Okta to use JWT authentication.
+JSON Web Tokens have quickly become the standard for securing web applications, superseding older technologies like cookies and sessions. Used properly, they address a range of security concerns, including cross-site scripting attacks (XSS), man-in-the-middle attacks (MITM), and cross-site request forgery (CSRF). They also give us the benefit of inspectable metadata and strong cryptographic signatures. In this post, I'll take a deep dive into JWTs. First, I'll cover some theoretical ground explaining how they work. After that, I'll show you how to configure a Spring Boot app with Okta to use JWT authentication.
 
 JSON Web Tokens are an open standard, and there are various libraries available that allow the creation, verification, and inspection of JWTs. You're going to be using [Java JWT](https://github.com/jwtk/jjwt) (a.k.a., JJWT), a Java library that provides end-to-end JWT creation and verification. JJWT was created by [Les Hazlewood](https://twitter.com/lhazlewood), lead committer to Apache Shiro, former co-founder and CTO at Stormpath, and currently Okta's very own Senior Architect. It's open source under the Apache 2.0 License.
 
 ## Understand JWTs and their Role in Authentication
 
-Let's first examine what we mean by  `authentication`  and  `token`  in this context.
+Let's first examine what `authentication` and `token` mean in this context.
 
 **Authentication** is proving that a user is who they say they are.
 
-A **token** is a self-contained singular chunk of information. It could have intrinsic value or not. We are going to look at a particular type of token that *does* have intrinsic value and addresses a number of the concerns with session IDs.
+A **token** is a self-contained singular chunk of information. It could have intrinsic value or not. I'll show you a particular type of token that *does* have intrinsic value and addresses a number of the concerns with session IDs.
 
 What is a JSON Web Token? A JWT is an open standard ([RFC 7519](https://tools.ietf.org/html/rfc7519)) for using JSON to transmit information between parties as digitally signed string tokens. They can be signed with the **HMAC** algorithm or using a public/private key pair using **RSA** or **ECDSA**.
 
@@ -31,7 +31,7 @@ Tokens are often thought of as an authorization mechanism, but they can also be 
 
 ## Use JWTs with OAuth 2.0
 
-Many OAuth 2.0 implementations are using JWTs for their access tokens. It should be stated that the OAuth 2.0 and JWT specifications are completely separate from each other and don't have any dependencies on each other. Using JWTs as the token mechanism for OAuth 2.0 affords a lot of benefits as we'll see below.
+Many OAuth 2.0 implementations are using JWTs for their access tokens. It should be stated that the OAuth 2.0 and JWT specifications are completely separate from each other and don't have any dependencies on each other. Using JWTs as the token mechanism for OAuth 2.0 affords a lot of benefits as you'll see below.
 
 Whatever JWT implementation you use, you'll have to store your nifty web token somewhere. Two popular options are cookies and HTML5 web storage. Both options have benefits and potential risks; a discussion of this is beyond the scope of this article, but it's worth reading up on the typical attacks mentioned above: cross-site scripting attacks (XSS), man-in-the-middle attacks (MITM), and cross-site request forgery (CSRF). Okta uses HTML5 web storage. 
 
@@ -61,7 +61,7 @@ eyJpc3MiOiJodHRwOi8vdHJ1c3R5YXBwLmNvbS8iLCJleHAiOjEzMDA4MTkzODAsInN1YiI6InVzZXJz
 
 ## Peek at the Token Header
 
-I know we said some people think JWTs are boring. Opaque, even. But if you know how to talk to them, JWTs are actually pretty interesting. Let's decode the example JWT and see what's inside. 
+I know I said some people think JWTs are boring. Opaque, even. But if you know how to talk to them, JWTs are actually pretty interesting. Let's decode the example JWT and see what's inside. 
 
 The header is simply Base64Url encoded. It tells us the type of token and the hashing algorithms used, typically HMAC SHA256 or RSA.
 
@@ -124,7 +124,7 @@ It is generally accepted practice to store a user identifier in the form of a su
 
 ## Use Java to Create and Verify JWTs
 
-Did we already mention our JJWT project? Check out its [GitHub page](https://github.com/jwtk/jjwt). It's a fully open-source JWT solution for Java.
+Did I already mention our JJWT project? Check out its [GitHub page](https://github.com/jwtk/jjwt). It's a fully open-source JWT solution for Java.
 
 Let's look at an example of using JJWT to create a JWT.
 
@@ -152,7 +152,7 @@ String subject = "HACKER";
 try {  
     Jws jwtClaims = Jwts.parser().setSigningKey(key).parseClaimsJws(jwt);  
     subject = claims.getBody().getSubject();  
-    // OK, we can trust this JWT  
+    // OK, you can trust this JWT  
 } 
 catch (SignatureException e) {  
     // don't trust this JWT!  
@@ -258,7 +258,7 @@ Using the `client_credentials` grant type is really just a convenience. It's a t
 
 According to the [OAuth specs](https://oauth.net/2/grant-types/client-credentials/), "The Client Credentials grant type is used by clients to obtain an access token outside of the context of a user. This is typically used by clients to access resources about themselves rather than to access a user's resources."
 
-When using Okta as a Single Sign-On provider - a more common use case - we would use the [Authorization Code Grant](https://oauth.net/2/grant-types/authorization-code/). This grant type, in which the application allows the user to log in and exchanges an authorization code for an access token, however, requires a series of redirects that would be difficult to manage from a command line client such as HTTPie. As such, this tutorial uses the Client Credentials grant type as a convenience to demonstrate some basic OAuth/JWT features.
+When using Okta as a Single Sign-On provider - a more common use case - you can use the [Authorization Code Grant](https://oauth.net/2/grant-types/authorization-code/). This grant type, in which the application allows the user to log in and exchanges an authorization code for an access token, however, requires a series of redirects that would be difficult to manage from a command line client such as HTTPie. As such, this tutorial uses the Client Credentials grant type as a convenience to demonstrate some basic OAuth/JWT features.
 
 "Great," you're hopefully thinking, "but what about the scope error?"
 
@@ -370,7 +370,7 @@ You're using the `SpringApplication.run()` method to bootstrap the Spring framew
 
 The `@EnableResourceServer` has a couple of implications that are worth pointing out. If you take a look at the [documentation for the annotation](https://docs.spring.io/spring-security/oauth/apidocs/org/springframework/security/oauth2/config/annotation/web/configuration/EnableResourceServer.html), you'll see a couple important points: if you want to configure the resource server, you need to define a `ResourceServerConfigurerAdapter` bean; and a `WebSecurityConfigurerAdapter` bean is added with a hard-coded order of 3.
 
-Why do we care? Because in a more complex web application, you're gonna want to configure the permissions using both a `ResourceServerConfigurerAdapter` and a `WebSecurityConfigurerAdapter`.  This is a change from simply using the `WebSecurityConfigurerAdapter`, as you do when you use the `@EnableOAuth2Sso` annotation, so I thought I'd warn you about it. Typically the resource server endpoints would start with `/api` or something and would be configured and protected by the `ResourceServerConfigurerAdapter` while any other plain HTML endpoints would be configured by the `WebSecurityConfigurerAdapter`. However, you'll need to add `@Order(Ordered.HIGHEST_PRECEDENCE)` to the `WebSecurityConfigurerAdapter`  to have it take precedence over the default one with the hard-coded order.
+Why should you care? Because in a more complex web application, you're gonna want to configure the permissions using both a `ResourceServerConfigurerAdapter` and a `WebSecurityConfigurerAdapter`.  This is a change from simply using the `WebSecurityConfigurerAdapter`, as you do when you use the `@EnableOAuth2Sso` annotation, so I thought I'd warn you about it. Typically the resource server endpoints would start with `/api` or something and would be configured and protected by the `ResourceServerConfigurerAdapter` while any other plain HTML endpoints would be configured by the `WebSecurityConfigurerAdapter`. However, you'll need to add `@Order(Ordered.HIGHEST_PRECEDENCE)` to the `WebSecurityConfigurerAdapter`  to have it take precedence over the default one with the hard-coded order.
 
 Take a look at [the `full-config` branch](https://github.com/oktadeveloper/okta-spring-boot-token-auth-example/tree/full-config) if you want to see a more concrete example of how this is done. You can also take a peek at the Siva Tech article in the links at the end.
 
