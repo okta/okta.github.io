@@ -203,7 +203,7 @@ We're going to use a great command line utility to run a few examples: HTTPie. I
 
 The time has come. I know you're excited. You're finally going to meet your JWT. 
 
-I know you're raring to go, but there's one more preliminary you need to take care of. You need to encode your Client ID and Client Secret from your Okta OIDC application above for use in an HTTP basic authorization header.
+I know you're raring to go, but there's one more preliminary step you need to take care of. You need to encode your Client ID and Client Secret from your Okta OIDC application above for use in an HTTP basic authorization header.
 
 The general format is:
 
