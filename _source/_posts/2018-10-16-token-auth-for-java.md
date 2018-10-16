@@ -13,7 +13,7 @@ image: blog/featured/okta-java-short-skew.jpg
 
 JSON Web Tokens have quickly become the standard for securing web applications, superseding older technologies like cookies and sessions. Used properly, they address a range of security concerns, including cross-site scripting attacks (XSS), man-in-the-middle attacks (MITM), and cross-site request forgery (CSRF). They also give us the benefit of inspectable metadata and strong cryptographic signatures. In this post, I'll take a deep dive into JWTs. First, I'll cover some theoretical ground explaining how they work. After that, I'll show you how to configure a Spring Boot app with Okta to use JWT authentication.
 
-JSON Web Tokens are an open standard, and there are various libraries available that allow the creation, verification, and inspection of JWTs. You're going to be using [Java JWT](https://github.com/jwtk/jjwt) (a.k.a., JJWT), a Java library that provides end-to-end JWT creation and verification. JJWT was created by [Les Hazlewood](https://twitter.com/lhazlewood), lead committer to Apache Shiro, former co-founder and CTO at Stormpath, and currently Okta's very own Senior Architect. It's open source under the Apache 2.0 License.
+JSON Web Tokens are an open standard, and there are various libraries available that allow the creation, verification, and inspection of JWTs. You're going to be using [Java JWT](https://github.com/jwtk/jjwt) (a.k.a., JJWT), a Java library that provides end-to-end JWT creation and verification. JJWT was created by [Les Hazlewood](https://twitter.com/lhazlewood), lead committer to Apache Shiro, former co-founder, and CTO at Stormpath, and currently Okta's very own Senior Architect. It's open source under the Apache 2.0 License.
 
 ## Understand JWTs and their Role in Authentication
 
@@ -61,7 +61,7 @@ eyJpc3MiOiJodHRwOi8vdHJ1c3R5YXBwLmNvbS8iLCJleHAiOjEzMDA4MTkzODAsInN1YiI6InVzZXJz
 
 ## Peek at the Token Header
 
-I know I said some people think JWTs are boring. Opaque, even. But if you know how to talk to them, JWTs are actually pretty interesting. Let's decode the example JWT and see what's inside. 
+I know I said some people think JWTs are boring. Opaque, even. But if you know how to talk to them, JWTs are pretty interesting. Let's decode the example JWT and see what's inside. 
 
 The header is simply Base64Url encoded. It tells us the type of token and the hashing algorithms used, typically HMAC SHA256 or RSA.
 
@@ -102,11 +102,11 @@ In our example above:
 
 The **scope** claim is commonly used to provide authorization information. For example, letting the application know what part of the application the user is authorized to access. This, of course, does not relieve the server of its duty to perform its own authorization checks. A general principle of web application security is redundancy. The client app provides one checkpoint, the server another.
 
-To create the encoded payload, this JSON data is Base64URL encoded. The encoded header and payload are used to create the **signature.**
+The JSON data is Base64URL encoded to create the encoded payload. The encoded header and payload are used to create the **signature.**
 
 ## Inspect the Token Signature
 
-The **signature** is the final part of the JWT structure. It takes the header and the payload adds a secret to the hashing algorithm and spits out a hash that corresponds to the unaltered data in the rest of the JWT. Using the signature the client app and the server can verify that the token they are receiving is the original, unaltered token.
+The **signature** is the final part of the JWT structure. It takes the header, and the payload adds a secret to the hashing algorithm and spits out a hash that corresponds to the unaltered data in the rest of the JWT. Using the signature the client app and the server can verify that the token they are receiving is the original, unaltered token.
 
 ```text
 HMACSHA256( 
@@ -120,7 +120,7 @@ It's super important to understand that this the signature does not provide conf
 
 It is generally accepted practice to store a user identifier in the form of a sub-claim. When a JWT is signed, it's referred to as a JWS. When it's encrypted, it's referred to as a JWE.
 
-**Statelessness** is one of the big benefits of JWTs. The server does not need to store any session data. It can all be stored in the token and is passed back and forth between the app and the server. This may seem like a strange game of e-frisbee, but this model scales really well (so long as the session state is relatively small, which is should be, really). It's far faster and more performant to decode the sessions state from the JWT than it is to have to hit the database on every request just to retrieve some basic user state information from session storage.
+**Statelessness** is one of the big benefits of JWTs. The server does not need to store any session data. It can all be stored in the token and is passed back and forth between the app and the server. This may seem like a strange game of e-frisbee, but this model scales really well (so long as the session state is relatively small, which it should be, really). It's far faster and more performant to decode the sessions state from the JWT than it is to have to hit the database on every request just to retrieve some basic user state information from session storage.
 
 ## Use Java to Create and Verify JWTs
 
@@ -169,7 +169,7 @@ In short, OAuth 2.0 is "the industry-standard protocol for authorization" (from 
 
 That's authentication. 
 
-There is another protocol layer called OpenID Connect, or OIDC, that is often paired with OAuth 2.0 that provides authentication. OIDC is built on top of OAuth 2.0 and provides a way to verify a user's identity, often by having them log in using a username and password, or by using one of the many social login options.  Because OIDC _does_ verify a user's identity, in partnership with OAuth 2.0, together they provide a complete authentication and authorization protocol for web applications and servers.
+There is another protocol layer called OpenID Connect, or OIDC, that is often paired with OAuth 2.0 that provides authentication. OIDC is built on top of OAuth 2.0 and provides a way to verify a user's identity, usually by having them log in using a username and password, or by using one of the many social login options.  Because OIDC _does_ verify a user's identity, in partnership with OAuth 2.0, together they provide a complete authentication and authorization protocol for web applications and servers.
 
 Remember: 
  - OIDC is authentication, or who am I?
@@ -185,7 +185,7 @@ Select the **Web** application type and click **Next**.
 
 {% img blog/java-token-auth/create-new-app.png alt:"Create Okta App" width:"700" %}{: .center-image }
 
-On the next page, you'll need to give the new application a catchy name. Whatever you like. You'll also need to check the **Client Credentials** checkbox. This activates the `client_credentials` grant type that you're going to use in a bit.
+On the next page, you'll need to give your new application a catchy name. You can name it whatever you like. You'll also need to check the **Client Credentials** checkbox. This activates the `client_credentials` grant type that you're going to use in a bit.
 
 {% img blog/java-token-auth/client-credentials.png alt:"App with Client Credentials" width:"600" %}{: .center-image }
 
@@ -201,7 +201,7 @@ We're going to use a great command line utility to run a few examples: HTTPie. I
 
 ## Request a JWT
 
-The time has come. I know you're excited. You're finally gonna meet your JWT. 
+The time has come. I know you're excited. You're finally going to meet your JWT. 
 
 I know you're raring to go, but there's one more preliminary you need to take care of. You need to encode your Client ID and Client Secret from your Okta OIDC application above for use in an HTTP basic authorization header.
 
@@ -239,7 +239,7 @@ What's going on here?
 
 `grant_type=client_credentials` is a form value that tells Okta the grant type we're requesting. More on this in a second.
 
-If you actually run this command - go ahead! - you're going to get an `invalid scope` error.
+If you run this command - go ahead! - you're going to get an `invalid scope` error.
 
 ```bash
 HTTP/1.1 400 Bad Request
@@ -284,7 +284,7 @@ Name the scope "customScope", give it a description, and click **Create**. You'l
 
 ## Run the Token Request Again
 
-Run the request again, this time with the custom scope.
+Rerun the request, this time with the custom scope.
 
 ```bash
 http -f POST https://{yourOktaDomain}/oauth2/default/v1/token \
@@ -327,7 +327,7 @@ Authorization: Bearer eyJraWQiOiJldjFpay1DS3UzYjJXS3QzSVl1MlJZc3...
 
 Are you ready for some Java? I'm ready for some Java.
 
-The first thing you're gonna want to do is clone [our example app from the GitHub repository](https://github.com/oktadeveloper/okta-spring-boot-token-auth-example.git).
+The first thing you're going to want to do is clone [our example app from the GitHub repository](https://github.com/oktadeveloper/okta-spring-boot-token-auth-example.git).
 
 Now check out the `start` branch with the following terminal command:
 
@@ -368,7 +368,7 @@ You'll notice this is where the good-old-fashioned `main()` method lives. Feels 
 
 You're using the `SpringApplication.run()` method to bootstrap the Spring framework, which loads the `Application` class. This picks up the `@EnableResourceServer` and `@SpringBootApplication` annotations. The `@SpringBootApplication` tells Spring to load Spring Boot. The `@EnableResourceServer` configures the Spring Boot app to authenticate requests via an OAuth token (as opposed to, perhaps, OAuth 2.0 Single Sign-On). 
 
-The `@EnableResourceServer` has a couple of implications that are worth pointing out. If you take a look at the [documentation for the annotation](https://docs.spring.io/spring-security/oauth/apidocs/org/springframework/security/oauth2/config/annotation/web/configuration/EnableResourceServer.html), you'll see a couple important points: if you want to configure the resource server, you need to define a `ResourceServerConfigurerAdapter` bean; and a `WebSecurityConfigurerAdapter` bean is added with a hard-coded order of 3.
+The `@EnableResourceServer` has a couple of implications that are worth pointing out. If you take a look at the [documentation for the annotation](https://docs.spring.io/spring-security/oauth/apidocs/org/springframework/security/oauth2/config/annotation/web/configuration/EnableResourceServer.html), you'll see a couple of important points: if you want to configure the resource server, you need to define a `ResourceServerConfigurerAdapter` bean; and a `WebSecurityConfigurerAdapter` bean is added with a hard-coded order of 3.
 
 Why should you care? Because in a more complex web application, you're gonna want to configure the permissions using both a `ResourceServerConfigurerAdapter` and a `WebSecurityConfigurerAdapter`.  This is a change from simply using the `WebSecurityConfigurerAdapter`, as you do when you use the `@EnableOAuth2Sso` annotation, so I thought I'd warn you about it. Typically the resource server endpoints would start with `/api` or something and would be configured and protected by the `ResourceServerConfigurerAdapter` while any other plain HTML endpoints would be configured by the `WebSecurityConfigurerAdapter`. However, you'll need to add `@Order(Ordered.HIGHEST_PRECEDENCE)` to the `WebSecurityConfigurerAdapter`  to have it take precedence over the default one with the hard-coded order.
 
@@ -436,7 +436,7 @@ Content-Type: application/json;charset=UTF-8
 }
 ```
 
-Run it again, this time including your token (depending on how much time has passed, you may need to request a fresh token):
+Rerun it, this time including your token (depending on how much time has passed, you may need to request a fresh token):
 
 ```bash
 http GET :8080 'Authorization: Bearer eyJraWQiOiJldjFpay1DS3UzYjJXS3QzSVl1...'
@@ -458,11 +458,11 @@ Hello 0oag58489amZL0MEN0h7
 
 `0oag58489amZL0MEN0h7` will be your Client ID. 
 
-Remember that you're using the `client_credentials` grant type, and you sent the server your **Client ID** and **Client Secret** as your credentials. Thus the authorization server is sending back your Client ID as your "name". In a different scenario, say using an Authorization Code Grant, this would actually be the user's name (or perhaps their email address or username). 
+Remember that you're using the `client_credentials` grant type, and you sent the server your **Client ID** and **Client Secret** as your credentials. Thus the authorization server is sending back your Client ID as your "name". In a different scenario, say using an Authorization Code Grant, this would be the user's name (or perhaps their email address or username). 
 
 ## Learn More about Token Authentication and Building Secure Apps in Java
 
-Understanding token authentication is central to building modern web applications. There are two main methods used to sign and encrypt tokens: hashing and public/private keys. Both methods are fundamental to security on the internet. Check out the [wikipedia page](https://en.wikipedia.org/wiki/HMAC) on HMACs to continue learning about the hash-based message authentication code (HMAC) used in JWTs. To learn about public/private key encryption, the [Red Hat page has a nice introduction](https://access.redhat.com/documentation/en-US/Red_Hat_Certificate_System/8.1/html/Deploy_and_Install_Guide/Introduction_to_Public_Key_Cryptography.html).
+Understanding token authentication is central to building modern web applications. There are two main methods used to sign and encrypt tokens: hashing and public/private keys. Both methods are fundamental to security on the internet. Check out the [wikipedia page](https://en.wikipedia.org/wiki/HMAC) on HMACs to continue learning about the hash-based message authentication code (HMAC) used in JWTs. To learn about public/private key encryption, [Red Hat has an excellent introduction](https://access.redhat.com/documentation/en-US/Red_Hat_Certificate_System/8.1/html/Deploy_and_Install_Guide/Introduction_to_Public_Key_Cryptography.html).
 
 Once you feel really solid about those two technologies, you can take a look at [this great tutorial on Medium](https://medium.com/vandium-software/5-easy-steps-to-understanding-json-web-tokens-jwt-1164c0adfcec) about JWTs.
   
