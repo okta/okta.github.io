@@ -25,7 +25,7 @@ A **token** is a self-contained singular chunk of information. It could have int
 
 What is a JSON Web Token? A JWT is an open standard ([RFC 7519](https://tools.ietf.org/html/rfc7519)) for using JSON to transmit information between parties as digitally signed string tokens. They can be signed with the **HMAC** algorithm or using a public/private key pair using **RSA** or **ECDSA**.
 
-To say this another way: JWTs are a JSON token that is a URL-safe, compact, and self-contained string. Typically they carry information about a user's verified identity. They are generally encoded and encrypted. They're quickly becoming a de-facto standard for token implementations across the web. URL-safe means that the token string can be used in a URL because all special characters have been encoded as simple alphanumeric characters. JWTs are also considered *opaque* because the string by itself provides no information without decoding or decryption.
+To say this another way: JWTs are a JSON token that is a URL-safe, compact, and self-contained string. Typically they carry information about a user's verified identity. They are generally encoded and encrypted. They're quickly becoming a de facto standard for token implementations across the web. URL-safe means that the token string can be used in a URL because all special characters have been encoded as simple alphanumeric characters. JWTs are also considered *opaque* because the string by itself provides no information without decoding or decryption.
 
 Tokens are often thought of as an authorization mechanism, but they can also be used as a way to securely store and transmit information between a web application and a server, much the same way that session IDs are used.
 
@@ -45,7 +45,7 @@ That was a lot of acronyms. Let's look at a JWT. In the wild, JWTs are shy. Some
 eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vdHJ1c3R5YXBwLmNvbS8iLCJleHAiOjEzMDA4MTkzODAsInN1YiI6InVzZXJzLzg5ODM0NjIiLCJzY29wZSI6InNlbGYgYXBpL2J1eSJ9.43DXvhrwMGeLLlP4P4izjgsBB2yrpo82oiUPhADakLs
 ```
 
-Like most things in life, don't just a JWT by its cover (remember, they're opaque). If you look carefully, you'll see that there are two periods in the string. These delimit different sections of the JWT: 
+Like most things in life, don't judge a JWT by its cover (remember, they're opaque). If you look carefully, you'll see that there are two periods in the string. These delimit different sections of the JWT: 
 
  1. the header
  2. the payload/body (or claims)
@@ -169,7 +169,7 @@ In short, OAuth 2.0 is "the industry-standard protocol for authorization" (from 
 
 That's authentication. 
 
-There is another protocol layer called OpenID Connect, or OIDC, that is often paired with OAuth 2.0 that provides authentication. OIDC is built on top of OAuth 2.0 and provides a way to verify a user's identity, often by having them log in using a username and password, or by using one of the many social login options.  Because OIDC _does_ verify a users identity, in partnership with OAuth 2.0, together they provide a complete authentication and authorization protocol for web applications and servers.
+There is another protocol layer called OpenID Connect, or OIDC, that is often paired with OAuth 2.0 that provides authentication. OIDC is built on top of OAuth 2.0 and provides a way to verify a user's identity, often by having them log in using a username and password, or by using one of the many social login options.  Because OIDC _does_ verify a user's identity, in partnership with OAuth 2.0, together they provide a complete authentication and authorization protocol for web applications and servers.
 
 Remember: 
  - OIDC is authentication, or who am I?
@@ -278,7 +278,7 @@ Click on the **default** server from the list of servers.
 
 Click on the **Scopes** tab, and click the **Add Scope** button.
 
-Name the scope "customScope", give it a description, and click **Create**. You'll  need the name to match, but the description is arbitrary.
+Name the scope "customScope", give it a description, and click **Create**. You'll need the name to match, but the description is arbitrary.
 
 {% img blog/java-token-auth/add-scope.png alt:"Add Custom Scope" width:"700" %}{: .center-image }
 
