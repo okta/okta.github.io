@@ -9,7 +9,7 @@ integration: back-end
 
 <ul class='language-tabs'>
 	<li>
-		<a href='/code/dotnet/'>
+		<a href='/code/dotnet/aspnetcore/'>
 			<i class='icon code-dotnet-32'></i><span>ASP.NET Core</span>
 		</a>
 	</li>

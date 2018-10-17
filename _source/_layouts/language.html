@@ -38,6 +38,7 @@
 					<ul class="Sidebar-nav">
 						{% assign indices = site.code | sort: 'id' %}
 						{% for index in indices %}
+						
 						{% unless index.id contains '/index' %}
 						{% continue %}
 						{% endunless %}
@@ -58,6 +59,28 @@
 					<h3 class="Sidebar-title">Back-end</h3>
 					<ul class="Sidebar-nav">
 						{% assign indices = site.code | sort: 'id' %}
+						
+						{% for index in indices %}
+						{% assign parts = index.id | split: "/" %}
+						{% unless index.integration == 'back-end' %}
+						{% continue %}
+						{% endunless %}
+						{% unless index.language == '.NET' %}
+						{% continue %}
+						{% endunless %}
+						{% unless parts[4] contains 'index' %}
+						{% continue %}
+						{% endunless %}
+						{% assign language = parts[2] %}
+						{% assign framework = parts[3] %}
+						{% assign element = index %}
+						{% if framework == 'aspnetcore' %}
+						<li {% if element.language == page.language and framework == 'aspnet' or framework == 'aspnetcore' %}class="is-active"{% endif %}>
+							<a href="/code/{{ language | prepend: site.baseurl }}/{{ framework }}/">{{ element.language | upcase }}</a>
+						</li>
+						{% endif %}
+						{% endfor %}
+
 						{% for index in indices %}
 						{% unless index.id contains '/index' %}
 						{% continue %}
