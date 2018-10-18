@@ -1,11 +1,11 @@
 ---
 layout: language
-title: Add Identity Mangement to Your PHP App
+title: Add Identity Management to Your PHP App
 language: PHP
 integration: back-end
 ---
 
-# <i class='icon-48 docsPage code-php'></i> Add Identity Mangement to Your PHP App
+# <i class='icon-48 docsPage code-php'></i> Add Identity Management to Your PHP App
 
 ## Get Started with PHP + Okta
 
@@ -19,7 +19,7 @@ New to Okta? Our quickstart will walk you through adding user authentication to 
 	</li>
 	<li>
 		<a href='/quickstart/#/okta-sign-in-page/php/' class='Button--blue' data-proofer-ignore>
-			<span>PHP Quick Start</span>
+			<span>PHP Quickstart</span>
 		</a>
 	</li>
 </ul>

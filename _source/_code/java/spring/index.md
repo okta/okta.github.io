@@ -1,11 +1,11 @@
 ---
 layout: language
-title: Add Identity Mangement to Your Spring App
+title: Add Identity Management to Your Spring App
 language: Java
 integration: back-end
 ---
 
-# <i class='icon-48 docsPage code-spring'></i> Add Identity Mangement to Your Spring App
+# <i class='icon-48 docsPage code-spring'></i> Add Identity Management to Your Spring App
 
 <ul class='language-tabs'>
 	<li>
@@ -32,7 +32,7 @@ New to Okta? Our quickstart will walk you through adding user authentication to 
 	</li>
 	<li>
 		<a href='/quickstart/#/okta-sign-in-page/java/spring' class='Button--blue' data-proofer-ignore>
-			<span>Spring Quick Start</span>
+			<span>Spring Quickstart</span>
 		</a>
 	</li>
 </ul>

@@ -1,13 +1,13 @@
 ---
 layout: language
-title: Add Identity Mangement to Your ASP.NET Core App
+title: Add Identity Management to Your ASP.NET Core App
 language: .NET
 integration: back-end
 redirect_from:
 - '/code/dotnet/'
 ---
 
-# <i class='icon-48 docsPage code-dotnet'></i> Add Identity Mangement to Your ASP.NET Core App
+# <i class='icon-48 docsPage code-dotnet'></i> Add Identity Management to Your ASP.NET Core App
 
 <ul class='language-tabs'>
 	<li class="active">
@@ -34,7 +34,7 @@ New to Okta? Our quickstart will walk you through adding user authentication to 
 	</li>
 	<li>
 		<a href='/quickstart/#/okta-sign-in-page/dotnet/aspnetcore' class='Button--blue' data-proofer-ignore>
-			<span>ASP.NET Core Quick Start</span>
+			<span>ASP.NET Core Quickstart</span>
 		</a>
 	</li>
 </ul>

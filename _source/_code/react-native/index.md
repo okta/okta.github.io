@@ -1,11 +1,11 @@
 ---
 layout: language
-title: Add Identity Mangement to Your React Native App
+title: Add Identity Management to Your React Native App
 language: React Native
 integration: mobile
 ---
 
-# <i class='icon-48 docsPage code-react'></i> Add Identity Mangement to Your React Native App
+# <i class='icon-48 docsPage code-react'></i> Add Identity Management to Your React Native App
 
 ## Get Started with React Native + Okta
 
@@ -19,7 +19,7 @@ New to Okta? Our quickstart will walk you through adding user authentication to 
 	</li>
 	<li>
 		<a href='/quickstart/#/react-native' class='Button--blue' data-proofer-ignore>
-			<span>React Native Quick Start</span>
+			<span>React Native Quickstart</span>
 		</a>
 	</li>
 </ul>

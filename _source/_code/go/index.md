@@ -1,11 +1,11 @@
 ---
 layout: language
-title: Add Identity Mangement to Your Go App
+title: Add Identity Management to Your Go App
 language: Go
 integration: back-end
 ---
 
-# <i class='icon-48 docsPage code-go'></i> Add Identity Mangement to Your Go App
+# <i class='icon-48 docsPage code-go'></i> Add Identity Management to Your Go App
 
 ## Get Started with Go + Okta
 

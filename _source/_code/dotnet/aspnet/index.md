@@ -1,11 +1,11 @@
 ---
 layout: language
-title: Add Identity Mangement to Your ASP.NET App
+title: Add Identity Management to Your ASP.NET App
 language: .NET
 integration: back-end
 ---
 
-# <i class='icon-48 docsPage code-dotnet'></i> Add Identity Mangement to Your ASP.NET App
+# <i class='icon-48 docsPage code-dotnet'></i> Add Identity Management to Your ASP.NET App
 
 <ul class='language-tabs'>
 	<li>
@@ -32,7 +32,7 @@ New to Okta? Our quickstart will walk you through adding user authentication to 
 	</li>
 	<li>
 		<a href='/quickstart/#/okta-sign-in-page/dotnet/aspnet4' class='Button--blue' data-proofer-ignore>
-			<span>ASP.NET Quick Start</span>
+			<span>ASP.NET Quickstart</span>
 		</a>
 	</li>
 </ul>

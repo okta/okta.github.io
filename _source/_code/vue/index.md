@@ -1,11 +1,11 @@
 ---
 layout: language
-title: Add Identity Mangement to Your Vue.js App
+title: Add Identity Management to Your Vue.js App
 language: Vue
 integration: front-end
 ---
 
-# <i class='icon-48 docsPage code-vue'></i> Add Identity Mangement to Your Vue.js App
+# <i class='icon-48 docsPage code-vue'></i> Add Identity Management to Your Vue.js App
 
 ## Get Started with Vue.js + Okta
 
@@ -19,7 +19,7 @@ New to Okta? Our quickstart will walk you through adding user authentication to 
 	</li>
 	<li>
 		<a href='/quickstart/#/vue' class='Button--blue' data-proofer-ignore>
-			<span>Vue.js Quick Start</span>
+			<span>Vue.js Quickstart</span>
 		</a>
 	</li>
 </ul>

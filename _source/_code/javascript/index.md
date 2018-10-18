@@ -1,11 +1,11 @@
 ---
 layout: language
-title: Add Identity Mangement to Your JavaScript App
+title: Add Identity Management to Your JavaScript App
 language: JavaScript
 integration: front-end
 ---
 
-# <i class='icon-48 docsPage code-javascript'></i> Add Identity Mangement to Your JavaScript App
+# <i class='icon-48 docsPage code-javascript'></i> Add Identity Management to Your JavaScript App
 
 ## Get Started with JavaScript + Okta
 
@@ -19,7 +19,7 @@ New to Okta? Our quickstart will walk you through adding user authentication to 
 	</li>
 	<li>
 		<a href='/quickstart/#/widget' class='Button--blue' data-proofer-ignore>
-			<span>Javascript Quick Start</span>
+			<span>Javascript Quickstart</span>
 		</a>
 	</li>
 </ul>

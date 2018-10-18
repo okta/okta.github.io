@@ -19,7 +19,7 @@ New to Okta? Our quickstart will walk you through adding user authentication to 
 	</li>
 	<li>
 		<a href='/quickstart/#/android' class='Button--blue' data-proofer-ignore>
-			<span>Android Quick Start</span>
+			<span>Android Quickstart</span>
 		</a>
 	</li>
 </ul>

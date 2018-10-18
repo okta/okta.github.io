@@ -1,13 +1,13 @@
 ---
 layout: language
-title: Add Identity Mangement to Your iOS App
+title: Add Identity Management to Your iOS App
 language: iOS
 integration: mobile
 redirect_from:
 - '/code/swift/'
 ---
 
-# <i class='icon-48 docsPage code-ios'></i> Add Identity Mangement to Your iOS App
+# <i class='icon-48 docsPage code-ios'></i> Add Identity Management to Your iOS App
 
 ## Get Started with iOS + Okta
 
@@ -21,7 +21,7 @@ New to Okta? Our quickstart will walk you through adding user authentication to 
 	</li>
 	<li>
 		<a href='/quickstart/#/ios' class='Button--blue' data-proofer-ignore>
-			<span>iOS Quick Start</span>
+			<span>iOS Quickstart</span>
 		</a>
 	</li>
 </ul>

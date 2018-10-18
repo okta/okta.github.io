@@ -1,13 +1,13 @@
 ---
 layout: language
-title: Add Identity Mangement to Your Angular App
+title: Add Identity Management to Your Angular App
 language: Angular
 integration: front-end
 ---
 
-# <i class='icon-48 docsPage code-angular'></i> Add Identity Mangement to Your Angular App
+# <i class='icon-48 docsPage code-angular'></i> Add Identity Management to Your Angular App
 
-## Get Started with Android + Okta
+## Get Started with Angular + Okta
 
 New to Okta? Our quickstart will walk you through adding user authentication to your Angular app in minutes.
 
@@ -19,7 +19,7 @@ New to Okta? Our quickstart will walk you through adding user authentication to 
 	</li>
 	<li>
 		<a href='/quickstart/#/angular' class='Button--blue' data-proofer-ignore>
-			<span>Angular Quick Start</span>
+			<span>Angular Quickstart</span>
 		</a>
 	</li>
 </ul>

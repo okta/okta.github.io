@@ -1,11 +1,11 @@
 ---
 layout: language
-title: Add Identity Mangement to Your Java App
+title: Add Identity Management to Your Java App
 language: Java
 integration: back-end
 ---
 
-# <i class='icon-48 docsPage code-java'></i> Add Identity Mangement to Your Java App
+# <i class='icon-48 docsPage code-java'></i> Add Identity Management to Your Java App
 
 <ul class='language-tabs'>
 	<li class="active">

@@ -1,11 +1,11 @@
 ---
 layout: language
-title: Add Identity Mangement to Your React App
+title: Add Identity Management to Your React App
 language: React
 integration: front-end
 ---
 
-# <i class='icon-48 docsPage code-react'></i> Add Identity Mangement to Your React App
+# <i class='icon-48 docsPage code-react'></i> Add Identity Management to Your React App
 
 ## Get Started with React + Okta
 
@@ -19,7 +19,7 @@ New to Okta? Our quickstart will walk you through adding user authentication to 
 	</li>
 	<li>
 		<a href='/quickstart/#/react' class='Button--blue' data-proofer-ignore>
-			<span>React Quick Start</span>
+			<span>React Quickstart</span>
 		</a>
 	</li>
 </ul>
@@ -51,6 +51,12 @@ The Okta React SDK makes it easy to integrate react-router with Okta's OpenID Co
 ## Related Blog Posts
 
 {: .language-list }
-- [Add Authentication to Your Vanilla JavaScript App in 20 Minutes](/blog/2018/06/05/authentication-vanilla-js)
-- [Build a Video Chat Service with JavaScript, WebRTC, and Okta](/blog/2018/05/08/build-video-chat-app-with-javascript-webrtc-and-okta)
+[Build a Health Tracking App with React, GraphQL, and User Authentication](/blog/2018/07/11/build-react-graphql-api-user-authentication)
+[Build User Registration with Node, React, and Okta](/blog/2018/02/06/build-user-registration-with-node-react-and-okta)
+[Build a Secure CRUD App with ASP.NET Core and React](/blog/2018/07/02/build-a-secure-crud-app-with-aspnetcore-and-react)
+[Build a React Native Application and Authenticate with OAuth 2.0](/blog/2018/03/16/build-react-native-authentication-oauth-2)
+[Build a Photo Gallery PWA with React, Spring Boot, and JHipster](/blog/2018/06/25/react-spring-boot-photo-gallery-pwa)
+[Build a Basic CRUD App with Node and React](/blog/2018/07/10/build-a-basic-crud-app-with-node-and-react)
+[Bootiful Development with Spring Boot and React](/blog/2017/12/06/bootiful-development-with-spring-boot-and-react)
+[Use React and Spring Boot to Build a Simple CRUD App](/blog/2018/07/19/simple-crud-react-and-spring-boot)
 

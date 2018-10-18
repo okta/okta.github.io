@@ -5,7 +5,8 @@ language: Node.js
 integration: back-end
 ---
 
-# <i class='icon-48 docsPage code-nodejs'></i> Add Okta authentication to your Node.js app
+{: .no-icon }
+# Add Okta authentication to your Node.js app 
 
 ## Get Started with Node.js + Okta
 
@@ -19,7 +20,7 @@ New to Okta? Our quickstart will walk you through adding user authentication to 
 	</li>
 	<li>
 		<a href='/quickstart/#/okta-sign-in-page/nodejs/' class='Button--blue' data-proofer-ignore>
-			<span>Node.js Quick Start</span>
+			<span>Node.js Quickstart</span>
 		</a>
 	</li>
 </ul>
