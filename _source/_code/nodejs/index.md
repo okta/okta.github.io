@@ -5,8 +5,7 @@ language: Node.js
 integration: back-end
 ---
 
-{: .no-icon }
-# Add Okta authentication to your Node.js app 
+# <i class='icon-48 docsPage code-nodejs'></i> Add Identity Management to Your Node.js App 
 
 ## Get Started with Node.js + Okta
 
