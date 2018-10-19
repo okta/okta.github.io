@@ -6,7 +6,9 @@
 
     <TopNavigation/>
 
-    <Content/>
+    <div class="content custom">
+      This is the 404 page.
+    </div>
 
     <Footer/>
 
@@ -15,23 +17,19 @@
 </template>
 
 <style lang="scss">
-  @import '../styles/okta';
+
 </style>
 
 <script>
 
-  import PromoBanner from '../global-components/PromoBanner'
-  import TopNavigation from '../global-components/TopNavigation'
-  import Footer from '../global-components/Footer'
+  import FooterColumn from '../global-components/FooterColumn'
 
   export default {
 
-    name: 'Layout',
+    name: 'NotFound',
 
     components: {
-      PromoBanner,
-      TopNavigation,
-      Footer,
+      FooterColumn
     },
 
     props: {},

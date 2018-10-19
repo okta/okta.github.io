@@ -1,8 +1,24 @@
 module.exports = {
+  /**
+   * Custom head elements here
+   */
+  head: [
+    ['link', { rel: 'icon', href: '/assets/favicon/logo.png' }]
+  ],
   title: "Okta Developer",
   description: "Secure, scalable, and highly available authentication and user management for any app.",
-
+  /**
+   * Global theme config
+   */
   themeConfig: {
+    /**
+     * Primary Nav (WIP)
+     */
+    nav: [
+      { text: 'Home', link: '/' },
+      { text: 'Documentation', link: '/documentation/' },
+      { text: 'External', link: 'https://developer.okta.com' },
+    ],
     getStarted: {
       languages: [
         {name: "android", link: "/code/android", icon: "code-android-32"},

@@ -2,7 +2,7 @@
 
   <div>
 
-    Top Navigation
+    Sidebar
 
   </div>
 
@@ -16,11 +16,11 @@
 
   export default {
 
-    name: 'TopNavigation',
+    name: 'Sidebar',
 
-    props: {
+    components: {},
 
-    },
+    props: {},
 
     data() {
 
