@@ -2,9 +2,9 @@
 
   <div class="theme-container">
 
-    <PromoBanner/>
-
     <TopNavigation/>
+
+    <PromoBanner/>
 
     <Content/>
 
