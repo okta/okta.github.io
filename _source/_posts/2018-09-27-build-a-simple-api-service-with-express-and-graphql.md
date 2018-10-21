@@ -295,7 +295,7 @@ okta.initializeApp(app)
 To make this all work, you'll also need to install a few new dependencies:
 
 ```bash
-npm i @okta/jwt-verifier@0.0.12 @okta/oidc-middleware@1.0.0 @okta/oidc-sdk-nodejs@1.2.0 dotenv@6.0.0 express-session@1.15.6
+npm i @okta/jwt-verifier@0.0.12 @okta/oidc-middleware@1.0.0 @okta/okta-sdk-nodejs@1.2.0 dotenv@6.0.0 express-session@1.15.6
 ```
 
 You should now be able to go to `http://localhost:4000/access-token` to log in and get an access token. If you were just at your developer console, you'll probably find you're already logged in. You can log out of your developer console to ensure the flow works properly.
