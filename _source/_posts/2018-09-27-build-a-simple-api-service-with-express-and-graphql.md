@@ -190,9 +190,39 @@ initializeData()
 
 Now that you have your queries all set up and some data stubbed in, go back to GraphQL Playground and play around a bit. Try getting all the posts, or get all the authors and posts associated with each one.
 
+```graphql
+query {
+  posts {
+    id
+    author {
+      id
+      firstName
+      lastName
+    }
+    body
+  }
+}
+```
+
 {% img blog/graphql-express/query-all-posts.png alt:"query all posts" width:"600" %}{: .center-image }
 
 Or get weird and get a single post by id, then the author for that post, and all of that author's posts (including the one you just queried).
+
+```graphql
+query {
+  post(id: 2) {
+    id
+    author {
+      firstName
+      posts {
+        id
+        body
+      }
+    }
+    body
+  }
+}
+```
 
 {% img blog/graphql-express/get-weird.png alt:"get weird" width:"600" %}{: .center-image }
 
@@ -401,6 +431,26 @@ You can also get rid of the `initializeData` function now that you have the abil
 
 Try to make a call to the new mutation and create a post. Since you're not authenticated, you should get `null` in response.
 
+```graphql
+mutation {
+  submitPost(input: {
+    body: "Hello, world!"
+  }) {
+    id
+    body
+    author {
+      id
+      firstName
+      lastName
+      posts {
+        id
+        body
+      }
+    }
+  }
+}
+```
+
 {% img blog/graphql-express/cannot-create-post.png alt:"cannot create post" width:"600" %}{: .center-image }
 
 Typically an app of some sort, whether a web app or a native app, will handle the UI for authentication and then seamlessly pass along the `Authorization` header to the API. In this case, since we're just focusing on the API, I had you implement an endpoint for grabbing the auth token manually.
@@ -413,7 +463,7 @@ Head to [http://localhost:4000/access-token](http://localhost:4000/access-token)
 }
 ```
 
-You should now be authenticated, and the same post will return a valid post:
+You should now be authenticated, and the same mutation will return a valid post:
 
 {% img blog/graphql-express/can-create-post.png alt:"authenticated - can create post" width:"600" %}{: .center-image }
 
