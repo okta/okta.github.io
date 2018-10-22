@@ -10,6 +10,7 @@
     <a
       :href="item.link"
       :class="('label ' + item.css)"
+      :target="item.target"
       v-html="item.text"></a>
 
     <ul
