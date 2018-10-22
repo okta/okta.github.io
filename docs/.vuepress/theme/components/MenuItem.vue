@@ -9,11 +9,8 @@
 
     <a
       :href="item.link"
-      :class="('label ' + item.css)">
-
-      {{ item.text }}
-
-    </a>
+      :class="('label ' + item.css)"
+      v-html="item.text"></a>
 
     <ul
       class="menu"

@@ -3,9 +3,8 @@
   <div class="Column--3 Column--medium-12 Column--xSmall-12">
 
     <h4
-      v-if="heading">
-      {{ heading }}
-    </h4>
+      v-if="heading"
+      v-html="heading"></h4>
 
     <ul class="Footer-links">
 
@@ -55,7 +54,6 @@
     data() {
 
       return {
-
         menu_items: null
       }
 
