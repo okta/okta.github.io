@@ -7,10 +7,9 @@ module.exports = {
     ['link', { rel: 'stylesheet', href: 'https://developer.okta.com/sites/all/themes/developer/css/master.css' }],
 
     /**
-     * Header scripts for typekit, GA, GTM, and Heap Analytics
+     * Header scripts for typekit, GA, GTM, and Heap Analytics (WIP)
      */
     ['script', {}, `
-      var searchDomain = 'https://developer.okta.com';
       var isProduction = window.location.hostname === 'developer.okta.com';
       if (isProduction) {
         // TypeKit
