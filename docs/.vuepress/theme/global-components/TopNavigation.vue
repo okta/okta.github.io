@@ -31,7 +31,6 @@
 
           </ul>
 
-
           <a class="PrimaryNav-toggle" href="#">
             <svg width="20px" height="20px" viewBox="0 0 20 20" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
               <g class="MenuIcon" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="round">
@@ -59,11 +58,20 @@
 
           <a
             class="SearchIcon"
-            @click="handleSearchClick"></a>
+            @click="handleSearchClick"
+            v-on-clickaway="handleOffSearchClick"></a>
 
-          <form id="form_search" class="SearchBar Formisimo_clocked_69929" method="get" :action="(external_domain + '/search/')" name="form_search" __bizdiag="-784164280" __biza="WJ__">
+          <form
+            id="form_search"
+            class="SearchBar Formisimo_clocked_69929"
+            method="get"
+            :action="search_url"
+            name="form_search"
+            @submit="handleSearchSubmit">
+
             <input type="text" name="stq" autocomplete="off" id="st-search-input-auto" class="st-search-input" placeholder="Search">
-            <input type="submit" name="submit" value="GO">
+            <input type="submit" name="submit" id="st-search-submit-go" value="GO">
+
           </form>
 
         </nav>
@@ -82,14 +90,22 @@
 
 <script>
 
-  import MenuItem from "../components/MenuItem";
+  import { mixin as clickaway } from 'vue-clickaway'
+  import MenuItem from "../components/MenuItem"
+
   export default {
 
     name: 'TopNavigation',
-    components: {MenuItem},
-    props: {
 
+    components: {
+      MenuItem
     },
+
+    mixins: [
+      clickaway
+    ],
+
+    props: {},
 
     data() {
 
@@ -97,6 +113,7 @@
         search_active: false,
         logo_svg: '',
         external_domain: '',
+        search_url: '',
         menu_items: null,
       }
 
@@ -104,9 +121,37 @@
 
     methods: {
 
+      handleOffSearchClick(event) {
+
+        let ignored_id = [
+          'st-search-submit-go',
+          'st-search-input-auto'
+        ]
+
+        if (!ignored_id.includes(event.target.getAttribute('id'))) {
+          this.search_active = false
+        }
+
+      },
+
       handleSearchClick(event) {
+
         event.preventDefault
         this.search_active = !this.search_active
+
+      },
+
+      handleSearchSubmit(event) {
+
+        event.preventDefault()
+        event.stopPropagation()
+
+        let search_phrase = document.getElementById('st-search-input-auto').value
+
+        if (search_phrase.length > 3) {
+          window.location.href = this.search_url + '#stq=' + search_phrase
+        }
+
       }
 
     },
@@ -125,11 +170,13 @@
         this.menu_items = this.$themeConfig.primary_nav
       }
 
+      if(this.$themeConfig.search_url) {
+        this.search_url = this.$themeConfig.search_url
+      }
+
     },
 
-    mounted() {
-
-    }
+    mounted() {}
 
   }
 

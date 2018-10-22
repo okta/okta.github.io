@@ -7,7 +7,7 @@
       'expanded': (item.children && item.children.length)
     }">
 
-    <a :href="item.text" class="label">
+    <a :href="item.link" class="label">
       {{ item.text }}
     </a>
 
@@ -59,6 +59,11 @@
       item: {
         type: Object,
         default: () => {}
+      },
+
+      css: {
+        type: String,
+        default: ''
       }
       
     },

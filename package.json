@@ -18,6 +18,7 @@
   "devDependencies": {
     "node-sass": "^4.9.4",
     "sass-loader": "^7.1.0",
+    "vue-clickaway": "^2.2.2",
     "vuepress": "^1.0.0-alpha.11"
   }
 }
