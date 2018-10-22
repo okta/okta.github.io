@@ -17,6 +17,7 @@
 
         <FooterColumn
           v-for="(column, index) in footer_columns"
+          :key="index"
           :heading="column.heading"
           :menu="column.menu"/>
 
