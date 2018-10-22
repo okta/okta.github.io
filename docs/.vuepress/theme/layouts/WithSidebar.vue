@@ -6,7 +6,7 @@
 
     <PromoBanner/>
 
-    <Content/>
+    <Content class="PageContent DynamicSidebar has-tableOfContents page-content"/>
 
     <Sidebar/>
 

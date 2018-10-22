@@ -10,7 +10,7 @@
     <div class="Wrap">
 
       <a
-        class="Logo" :href="(external_domain + 'bingo')"
+        class="Logo" :href="home_url"
         v-html="logo_svg">
       </a>
 
@@ -50,8 +50,8 @@
         </a>
 
         <div class="PrimaryNav-cta">
-          <a target="_blank" rel="noopener noreferrer" href="https://login.okta.com/?SAMLRequest=fc%2B7CsJAEAXQXvAflu1NNJUMeZBGELTx1a%2FrYILJTtyZGD%2FfSBRiYzlw77lMnD3rSj3Qc0ku0YtgrhU6S5fSXRN9PKxmS52l00nMpq6iBvJWCrfDe4ss6vStRe9aDzmGIZfo1jsgwyWDMzUyiIV9vt1AH4XGk5ClSvewUgMNa%2BYW%2FVj5jxhm9NLP67QQaSAMu64L6CYmsFSHlnzT4ZlLwTgcL6Sf8%2FeX9AU%3Dhttps://login.okta.com/?SAMLRequest=fc%2B7CsJAEAXQXvAflu1NNJUMeZBGELTx1a%2FrYILJTtyZGD%2FfSBRiYzlw77lMnD3rSj3Qc0ku0YtgrhU6S5fSXRN9PKxmS52l00nMpq6iBvJWCrfDe4ss6vStRe9aDzmGIZfo1jsgwyWDMzUyiIV9vt1AH4XGk5ClSvewUgMNa%2BYW%2FVj5jxhm9NLP67QQaSAMu64L6CYmsFSHlnzT4ZlLwTgcL6Sf8%2FeX9AU%3D" class="Button--redOutline">Login</a>
-          <a :href="(external_domain + '/signup/')" class="Button--red">Sign up</a>
+          <a target="_blank" rel="noopener noreferrer" href="https://login.okta.com/" class="Button--redOutline">Login</a>
+          <a :href="(home_url + '/signup/')" class="Button--red">Sign up</a>
         </div>
 
         <a
@@ -108,7 +108,7 @@
       return {
         search_active: false,
         logo_svg: '',
-        external_domain: '',
+        home_url: '',
         search_url: '',
         menu_items: null,
       }
@@ -154,8 +154,8 @@
 
     created() {
 
-      if(this.$themeConfig.external_domain) {
-        this.external_domain = this.$themeConfig.external_domain
+      if(this.$themeConfig.home_url) {
+        this.home_url = this.$themeConfig.home_url
       }
 
       if(this.$themeConfig.logo_svg) {

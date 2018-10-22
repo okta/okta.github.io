@@ -6,7 +6,7 @@
 
     <PromoBanner/>
 
-    <Content/>
+    <Content class="PageContent page-content"/>
 
     <Footer/>
 
