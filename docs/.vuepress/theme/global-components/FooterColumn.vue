@@ -1,8 +1,22 @@
 <template>
 
-  <div>
+  <div class="Column--3 Column--medium-12 Column--xSmall-12">
 
-    Footer Column
+    <h4
+      v-if="heading">
+      {{ heading }}
+    </h4>
+
+    <ul class="Footer-links">
+
+      <MenuItem
+        v-for="(item, index) in menu"
+        :key="index"
+        :item="item"
+        :index="index"
+        :last="menu.length"></MenuItem>
+
+    </ul>
 
   </div>
 
@@ -14,11 +28,27 @@
 
 <script>
 
+  import MenuItem from '../components/MenuItem'
+
   export default {
 
     name: 'FooterColumn',
 
+    components: {
+      MenuItem
+    },
+
     props: {
+
+      heading: {
+        type: String,
+        default: ''
+      },
+
+      menu: {
+        type: Array,
+        default: () => []
+      },
 
     },
 
@@ -26,21 +56,16 @@
 
       return {
 
+        menu_items: null
       }
 
     },
 
-    methods: {
+    methods: {},
 
-    },
+    created() {},
 
-    created() {
-
-    },
-
-    mounted() {
-
-    }
+    mounted() {}
 
   }
 

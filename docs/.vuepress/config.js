@@ -53,7 +53,7 @@ module.exports = {
    */
   themeConfig: {
     /**
-     * Primary Nav
+     * Primary Nav: Array of MenuItem components to iterate over within TopNavigation component
      */
     primary_nav: [
       { text: 'Product', link: 'https://developer.okta.com/product/',
@@ -80,10 +80,39 @@ module.exports = {
       }
     ],
     /**
-     * Footer Nav (WIP)
+     * Footer Nav: Array of FooterColumn components to iterate over within Footer component
+     * Each column contains a menu array of MenuItem components to iterate over within FooterColumn component
      */
     footer_nav: [
-      []
+      {
+        heading: 'Social',
+        menu: [
+          { text: 'GitHub', link: 'http://github.com/oktadeveloper', target: '_blank', css: 'Footer-links--github' },
+          { text: 'Twitter', link: 'http://twitter.com/OktaDev', target: '_blank', css: 'Footer-links--twitter' },
+          { text: 'Forum', link: 'https://devforum.okta.com/', target: '_blank', css: 'Footer-links--forum' },
+          { text: 'RSS Blog', link: 'http://feeds.feedburner.com/OktaBlog', target: '_blank', css: 'Footer-links--rss' },
+          { text: 'YouTube', link: 'https://www.youtube.com/channel/UC5AMiWqFVFxF1q9Ya1FuZ_Q/featured', target: '_blank', css: 'Footer-links--youtube' },
+        ]
+      },
+      {
+        heading: 'More Info',
+        menu: [
+          { text: 'Integrate With Okta', link: 'https://developer.okta.com/integrate-with-okta/' },
+          { text: 'Blog', link: 'https://developer.okta.com/blog/' },
+          { text: 'Changelog', link: 'https://developer.okta.com/docs/change-log/' },
+          { text: '3rd Party Notices', link: 'https://developer.okta.com/3rd_party_notices/' },
+        ]
+      },
+      {
+        heading: 'Contact & Legal',
+        menu: [
+          { text: 'Contact Our Team', link: 'https://developer.okta.com/contact/' },
+          { text: 'Contact Sales', link: 'https://developer.okta.com/contact-sales-enterprise/' },
+          { text: 'Contact Support', link: 'mailto:developers@okta.com' },
+          { text: 'Terms &amp; Conditions', link: 'https://developer.okta.com/terms/' },
+          { text: 'Privacy Policy', link: 'https://developer.okta.com/privacy/' },
+        ]
+      }
     ],
     getStarted: {
       languages: [

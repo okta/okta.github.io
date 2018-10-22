@@ -7,8 +7,12 @@
       'expanded': (item.children && item.children.length)
     }">
 
-    <a :href="item.link" class="label">
+    <a
+      :href="item.link"
+      :class="('label ' + item.css)">
+
       {{ item.text }}
+
     </a>
 
     <ul
@@ -70,23 +74,15 @@
 
     data() {
 
-      return {
-
-      }
+      return {}
 
     },
 
-    methods: {
+    methods: {},
 
-    },
+    created() {},
 
-    created() {
-
-    },
-
-    mounted() {
-
-    }
+    mounted() {}
 
   }
 
