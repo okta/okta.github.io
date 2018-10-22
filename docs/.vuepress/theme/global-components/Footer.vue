@@ -34,15 +34,11 @@
 
 <script>
 
-  import FooterColumn from '../global-components/FooterColumn'
-
   export default {
 
     name: 'Footer',
 
-    components: {
-      FooterColumn
-    },
+    components: {},
 
     props: {},
 

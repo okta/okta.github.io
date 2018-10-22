@@ -20,41 +20,25 @@
 
 <script>
 
-  import PromoBanner from '../global-components/PromoBanner'
-  import TopNavigation from '../global-components/TopNavigation'
-  import Footer from '../global-components/Footer'
-
   export default {
 
     name: 'Layout',
 
-    components: {
-      PromoBanner,
-      TopNavigation,
-      Footer,
-    },
+    components: {},
 
     props: {},
 
     data() {
 
-      return {
-
-      }
+      return {}
 
     },
 
-    methods: {
+    methods: {},
 
-    },
+    created() {},
 
-    created() {
-
-    },
-
-    mounted() {
-
-    }
+    mounted() {}
 
   }
 

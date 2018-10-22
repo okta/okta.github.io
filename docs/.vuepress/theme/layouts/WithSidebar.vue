@@ -23,21 +23,12 @@
 <script>
 
   import Layout from './Layout'
-  import Sidebar from '../global-components/Sidebar'
-  import PromoBanner from '../global-components/PromoBanner'
-  import TopNavigation from '../global-components/TopNavigation'
-  import Footer from '../global-components/Footer'
 
   export default {
 
     name: 'WithSidebar',
 
-    components: {
-      PromoBanner,
-      TopNavigation,
-      Footer,
-      Sidebar,
-    },
+    components: {},
 
     mixins: {
       Layout
@@ -47,23 +38,15 @@
 
     data() {
 
-      return {
-
-      }
+      return {}
 
     },
 
-    methods: {
+    methods: {},
 
-    },
+    created() {},
 
-    created() {
-
-    },
-
-    mounted() {
-
-    }
+    mounted() {}
 
   }
 
