@@ -2,11 +2,11 @@
 
   <div class="theme-container">
 
-    <PromoBanner/>
-
     <TopNavigation/>
 
-    <div class="content custom">
+    <PromoBanner/>
+
+    <div class="PageContent page-content content custom">
       This is the 404 page.
     </div>
 
