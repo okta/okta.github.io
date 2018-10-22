@@ -17,6 +17,8 @@ In this tutorial, I'll show you how to write a custom GraphQL API using Node and
 
 ## Create the GraphQL API with Express
 
+If you're in a hurry and would rather cut to the chase, you can find the final sample code [on GitHub](https://github.com/oktadeveloper/okta-express-graphql-example). However, if you want to follow along to get more detail and see how the code was put together, keep reading.
+
 To create the API, start by creating a new folder and creating a `package.json` file to manage your dependencies. You'll also need to install a few dependencies to get GraphQL with Express up and running:
 
 ```bash
@@ -190,9 +192,39 @@ initializeData()
 
 Now that you have your queries all set up and some data stubbed in, go back to GraphQL Playground and play around a bit. Try getting all the posts, or get all the authors and posts associated with each one.
 
+```graphql
+query {
+  posts {
+    id
+    author {
+      id
+      firstName
+      lastName
+    }
+    body
+  }
+}
+```
+
 {% img blog/graphql-express/query-all-posts.png alt:"query all posts" width:"600" %}{: .center-image }
 
 Or get weird and get a single post by id, then the author for that post, and all of that author's posts (including the one you just queried).
+
+```graphql
+query {
+  post(id: 2) {
+    id
+    author {
+      firstName
+      posts {
+        id
+        body
+      }
+    }
+    body
+  }
+}
+```
 
 {% img blog/graphql-express/get-weird.png alt:"get weird" width:"600" %}{: .center-image }
 
@@ -401,6 +433,26 @@ You can also get rid of the `initializeData` function now that you have the abil
 
 Try to make a call to the new mutation and create a post. Since you're not authenticated, you should get `null` in response.
 
+```graphql
+mutation {
+  submitPost(input: {
+    body: "Hello, world!"
+  }) {
+    id
+    body
+    author {
+      id
+      firstName
+      lastName
+      posts {
+        id
+        body
+      }
+    }
+  }
+}
+```
+
 {% img blog/graphql-express/cannot-create-post.png alt:"cannot create post" width:"600" %}{: .center-image }
 
 Typically an app of some sort, whether a web app or a native app, will handle the UI for authentication and then seamlessly pass along the `Authorization` header to the API. In this case, since we're just focusing on the API, I had you implement an endpoint for grabbing the auth token manually.
@@ -413,7 +465,7 @@ Head to [http://localhost:4000/access-token](http://localhost:4000/access-token)
 }
 ```
 
-You should now be authenticated, and the same post will return a valid post:
+You should now be authenticated, and the same mutation will return a valid post:
 
 {% img blog/graphql-express/can-create-post.png alt:"authenticated - can create post" width:"600" %}{: .center-image }
 
@@ -425,7 +477,7 @@ If you want to mess around with other users, you can add people from the develop
 
 Try playing around with the API a bit and see what fun stuff you can do with it. I think you'll quickly see what can make GraphQL so much more powerful than a traditional REST API, and how it can be fun to work with even if you're just using the Playground. See if you can come up data points to connect, or get data from external sources. Since resolvers are simply `async` functions, you could just as easily fetch data from an external API or from a database. Your imagination is the limit.
 
-If you want to see the final sample code, you can find it [on github](https://github.com/oktadeveloper/okta-express-graphql-example).
+If you want to see the final sample code, you can find it [on GitHub](https://github.com/oktadeveloper/okta-express-graphql-example).
 
 If you'd like to learn more about GraphQL or Express, check out some of these other posts on the Okta developer blog:
 
