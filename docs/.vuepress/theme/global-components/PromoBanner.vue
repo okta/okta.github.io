@@ -50,8 +50,6 @@
 
     name: 'PromoBanner',
 
-    props: {},
-
     data() {
 
       return {
@@ -63,37 +61,36 @@
 
     },
 
-    methods: {
-
-    },
-
     created() {
 
       /**
        * Allow for page front matter to selectively override global config
        */
-      if(typeof this.$page.frontmatter.promo_banner.show === 'boolean') {
+
+      let has_front_matter_promo = typeof this.$page.frontmatter.promo_banner !== 'undefined'
+
+      if(has_front_matter_promo && typeof this.$page.frontmatter.promo_banner.show !== 'boolean') {
         this.show = this.$page.frontmatter.promo_banner.show
       }
-      else if(typeof this.$themeConfig.promo_banner.show === 'boolean') {
+      else if(typeof this.$themeConfig.promo_banner.show) {
         this.show = this.$themeConfig.promo_banner.show
       }
 
-      if(this.$page.frontmatter.promo_banner.promo_url) {
+      if(has_front_matter_promo && typeof this.$page.frontmatter.promo_banner.promo_url !== 'undefined') {
         this.promo_url = this.$page.frontmatter.promo_banner.promo_url
       }
       else if(this.$themeConfig.promo_banner.promo_url) {
         this.promo_url = this.$themeConfig.promo_banner.promo_url
       }
 
-      if(this.$page.frontmatter.promo_banner.promo_text) {
+      if(has_front_matter_promo && typeof this.$page.frontmatter.promo_banner.promo_text !== 'undefined') {
         this.promo_text = this.$page.frontmatter.promo_banner.promo_text
       }
       else if(this.$themeConfig.promo_banner.promo_text) {
         this.promo_text = this.$themeConfig.promo_banner.promo_text
       }
 
-      if(this.$page.frontmatter.promo_banner.cta_text) {
+      if(has_front_matter_promo && typeof this.$page.frontmatter.promo_banner.cta_text !== 'undefined') {
         this.cta_text = this.$page.frontmatter.promo_banner.cta_text
       }
       else if(this.$themeConfig.promo_banner.cta_text) {
@@ -101,8 +98,6 @@
       }
 
     },
-
-    mounted() {}
 
   }
 

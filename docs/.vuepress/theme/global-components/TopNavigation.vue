@@ -101,8 +101,6 @@
       clickaway
     ],
 
-    props: {},
-
     data() {
 
       return {
@@ -171,8 +169,6 @@
       }
 
     },
-
-    mounted() {}
 
   }
 

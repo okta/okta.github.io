@@ -39,10 +39,6 @@
 
     name: 'Footer',
 
-    components: {},
-
-    props: {},
-
     data() {
 
       return {
@@ -51,8 +47,6 @@
 
     },
 
-    methods: {},
-
     created() {
 
       if(this.$themeConfig.footer_nav) {
@@ -60,8 +54,6 @@
       }
 
     },
-
-    mounted() {}
 
   }
 

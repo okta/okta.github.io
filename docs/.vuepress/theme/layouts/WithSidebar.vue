@@ -30,25 +30,9 @@
 
     name: 'WithSidebar',
 
-    components: {},
-
     mixins: {
       Layout
     },
-
-    props: {},
-
-    data() {
-
-      return {}
-
-    },
-
-    methods: {},
-
-    created() {},
-
-    mounted() {}
 
   }
 

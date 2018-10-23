@@ -59,12 +59,6 @@
 
     },
 
-    methods: {},
-
-    created() {},
-
-    mounted() {}
-
   }
 
 </script>

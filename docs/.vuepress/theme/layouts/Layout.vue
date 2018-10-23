@@ -26,24 +26,6 @@
 
     name: 'Layout',
 
-    components: {},
-
-    props: {},
-
-    data() {
-
-      return {}
-
-    },
-
-    methods: {},
-
-    created() {
-
-    },
-
-    mounted() {}
-
   }
 
 </script>

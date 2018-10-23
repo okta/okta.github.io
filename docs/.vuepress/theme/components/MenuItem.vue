@@ -70,18 +70,6 @@
       
     },
 
-    data() {
-
-      return {}
-
-    },
-
-    methods: {},
-
-    created() {},
-
-    mounted() {}
-
   }
 
 </script>
