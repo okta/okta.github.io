@@ -239,10 +239,11 @@ HOST_URL=http://localhost:4000
 OKTA_ORG_URL=https://{yourOktaOrgUrl}
 ```
 
-You will also need a random string to use as an App Secret for sessions. You can generate this with the following command:
+You will also need a random string to use as an App Secret for sessions. You can generate this with the following commands:
 
 ```bash
-echo "APP_SECRET=`openssl rand -base64 32`" >> .env
+npm install -g uuid-cli
+echo "APP_SECRET=`uuid`" >> .env
 ```
 
 Next, log in to your developer console, navigate to **Applications**, then click **Add Application**. Select **Web**, then click **Next**.
