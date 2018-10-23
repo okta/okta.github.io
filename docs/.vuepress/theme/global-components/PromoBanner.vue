@@ -69,19 +69,34 @@
 
     created() {
 
-      if(this.$themeConfig.promo_banner.show) {
+      /**
+       * Allow for page front matter to selectively override global config
+       */
+      if(typeof this.$page.frontmatter.promo_banner.show === 'boolean') {
+        this.show = this.$page.frontmatter.promo_banner.show
+      }
+      else if(typeof this.$themeConfig.promo_banner.show === 'boolean') {
         this.show = this.$themeConfig.promo_banner.show
       }
 
-      if(this.$themeConfig.promo_banner.promo_url) {
+      if(this.$page.frontmatter.promo_banner.promo_url) {
+        this.promo_url = this.$page.frontmatter.promo_banner.promo_url
+      }
+      else if(this.$themeConfig.promo_banner.promo_url) {
         this.promo_url = this.$themeConfig.promo_banner.promo_url
       }
 
-      if(this.$themeConfig.promo_banner.promo_text) {
+      if(this.$page.frontmatter.promo_banner.promo_text) {
+        this.promo_text = this.$page.frontmatter.promo_banner.promo_text
+      }
+      else if(this.$themeConfig.promo_banner.promo_text) {
         this.promo_text = this.$themeConfig.promo_banner.promo_text
       }
 
-      if(this.$themeConfig.promo_banner.cta_text) {
+      if(this.$page.frontmatter.promo_banner.cta_text) {
+        this.cta_text = this.$page.frontmatter.promo_banner.cta_text
+      }
+      else if(this.$themeConfig.promo_banner.cta_text) {
         this.cta_text = this.$themeConfig.promo_banner.cta_text
       }
 

@@ -38,7 +38,9 @@
 
     methods: {},
 
-    created() {},
+    created() {
+
+    },
 
     mounted() {}
 
