@@ -4,7 +4,8 @@
   "description": "NPM dependencies for testing and building developer.okta.com",
   "scripts": {
     "dev": "vuepress dev docs",
-    "build": "vuepress build docs"
+    "build": "npm run changelog && vuepress build docs",
+    "changelog": "node ./scripts/change-log.js"
   },
   "repository": {
     "type": "git",
