@@ -18,7 +18,8 @@
     "posttest": "npm run stop",
     "markdown-lint": "node scripts/lint",
     "find-missing-slashes": "node scripts/find-missing-slashes",
-    "post-build-lint": "bash scripts/post-build-lint.sh"
+    "post-build-lint": "bash scripts/post-build-lint.sh",
+    "update-event-types": "bash scripts/update-event-types.sh"
   },
   "repository": {
     "type": "git",

@@ -51,7 +51,7 @@ The only open question is "what's a good access token lifetime?" My general rule
 
 ## It's not OAuth's Fault
 
-As much as we'd like to blame our tools or the technology, it's not their fault. Odds are, we skimmed the spec or read a great howto without really understanding the incantations precautions required.
+As much as we'd like to blame our tools or the technology, it's not their fault. Odds are, we skimmed the spec or read a great howto without really understanding the ~~incantations~~ precautions required.
 
 ***We only decided that we could. We never asked if we should.***
 
