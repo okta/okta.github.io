@@ -102,7 +102,7 @@ If you want to do more with the user, you can use the [Okta .NET SDK] to get or 
 > Note: If your client application is running on a different server (or port) than your ASP.NET Core server, you'll need to add [CORS middleware](https://docs.microsoft.com/en-us/aspnet/core/security/cors) to the pipeline as well.
 
 
-[example-repo]: https://github.com/okta/samples-aspnetcore/resource-server
+[example-repo]: https://github.com/okta/samples-aspnetcore/
 [Microsoft.AspNetCore.All]: https://www.nuget.org/packages/Microsoft.AspNetCore.All 
 [Okta.AspNetCore]: https://www.nuget.org/packages/Okta.AspNetCore
 [Okta .NET SDK]: https://github.com/okta/okta-sdk-dotnet

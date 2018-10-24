@@ -14,6 +14,8 @@ plugins:
   - jekyll-paginate
   - jekyll-assets
   - jekyll-include-cache
+  - jekyll-asciidoc
+  - asciidoctor-rouge
 
 source: _source
 destination: dist
@@ -97,6 +99,16 @@ defaults:
       collection: reference
     values:
       layout: documentation
+  -
+    scope:
+      collection: docs
+    values:
+      toc: true
+  - 
+    scope:
+      collection: use_cases
+    values:
+      hidden: false
 
 sitemap_ignore:
   - sdk
@@ -112,8 +124,6 @@ versions:
   spring_boot_starter: 0.5.0
   okta_signin_widget: 2.6.0
 
-signup_error_email_address: "BD-ISV@okta.com"
-
 # Bug: 37458
 # Add Discourse link
 dev_forum:  https://devforum.okta.com/
@@ -126,3 +136,10 @@ external_domain: https://developer.okta.com
 
 contact_support_lc: contact <a href="https://support.okta.com/help/open_case" target="_blank">Support</a>
 contact_support_uc: Contact <a href="https://support.okta.com/help/open_case" target="_blank">Support</a>
+
+# AsciiDoc settings - only applies to blog. Can be removed when we move to Hugo for the blog.
+asciidoctor:
+  attributes:
+    source-highlighter: rouge
+    icons: font
+  base_dir: :_source

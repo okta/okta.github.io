@@ -929,7 +929,7 @@ Rotates the current [keys](#certificate-json-web-key-object) for a Custom Author
 
 | Parameter | Description                                             | Type   | Required |
 |:----------|:--------------------------------------------------------|:-------|:---------|
-| use       | Acceptable usage of the certificate. Can be only `sig`. | String | False    |
+| use       | Purpose of the certificate. The only supported value is `sig`. | String | True    |
 
 ##### Request Example
 {:.api .api-request .api-request-example}

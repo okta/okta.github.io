@@ -137,7 +137,7 @@ curl -v -X POST \
 
 Creates a user without a [password](#password-object)
 
-When the user is activated, an email is sent to the user with an activation token that the can be used to complete the activation process.
+When the user is activated, an email is sent to the user with an activation token that can be used to complete the activation process.
 This flow is useful if migrating users from an existing user store.
 
 ##### Request Example
@@ -498,7 +498,7 @@ curl -v -X POST \
 
 Creates a user that is immediately added to the specified groups upon creation
 
-Use this in conjunction with other create operations for a Group Administrator that is scoped to only create users in specified groups.
+Use this in conjunction with other create operations for a Group Administrator that is scoped to create users only in specified groups.  The request may specify up to 20 group ids.  (This limit applies only when creating a user.  The user may later be added to more groups.)
 
 ##### Request Example
 {:.api .api-request .api-request-example}
@@ -1263,11 +1263,11 @@ curl -v -X GET \
 
 > Listing users with search is an {% api_lifecycle ea %} feature and should not be used as a part of any critical flows, like authentication.
 
-Searches for user by the properties specified in the search parameter (case insensitive)
+Searches for users based on the properties specified in the search parameter (case insensitive)
 
 This operation:
 
-* Supports pagination.
+* Supports pagination (to a maximum of 50000 results; see note below).
 * Requires [URL encoding](http://en.wikipedia.org/wiki/Percent-encoding).
 For example, `search=profile.department eq "Engineering"` is encoded as `search=profile.department%20eq%20%22Engineering%22`.
 Examples use cURL-style escaping instead of URL encoding to make them easier to read.
@@ -1286,6 +1286,8 @@ Use an ID lookup for records that you update to ensure your results contain the 
     | `profile.department eq "Engineering"`         | Users that have a `department` of `Engineering` |
     | `profile.occupation eq "Leader"`              | Users that have an `occupation` of `Leader`     |
     | `profile.lastName sw "Sm" `                   | Users whose `lastName` starts with "Sm"         |
+
+> When paginating a search result set (see [Pagination](/docs/api/getting_started/design_principles#pagination)), the result set is limited to a total of 50,000 results.  Attempting to follow the `next` link from the last page will yield an error.
 
 ##### Search Examples
 
@@ -4073,8 +4075,8 @@ A hashed password may be specified in a Password Object when creating or updatin
 | Property   | DataType | Description                                                                                                 | Required                           | Min Value          | Max Value          |
 |:-----------|:---------|:------------------------------------------------------------------------------------------------------------|:-----------------------------------|:-------------------|:-------------------|
 | algorithm  | String   | The algorithm used to hash the password. Must be set to `BCRYPT` or `SHA-256`                               | TRUE                               | N/A                | N/A                |
-| value      | String   | The actual base64-encoded hashed password                                                                   | TRUE                               | N/A                | N/A                |
-| salt       | String   | Specifies the password salt used to generate the hash                                                       | TRUE                               | 22 (only for `BCRYPT` algorithm) | 22 (only for `BCRYPT` algorithm) |
+| value      | String   | For `SHA-256`: This is the actual base64-encoded hashed password. For `BCRYPT`: This is the actual radix64-encoded hashed password.                                                                   | TRUE                               | N/A                | N/A                |
+| salt       | String   | For `SHA-256`: Specifies the base64-encoded password salt used to generate the hash. For `BCRYPT`: Specifies the radix64-encoded password salt used to generate the hash.                                                       | TRUE                               | 22 (only for `BCRYPT` algorithm) | 22 (only for `BCRYPT` algorithm) |
 | workFactor | Integer  | Governs the strength of the hash, and the time required to compute it. Only relevant for `BCRYPT` algorithm | Only for `BCRYPT` algorithm        | 1                  | 20                 |
 | saltOrder  | String   | Specifies whether salt was pre- or postfixed to password before hashing. Only relevant for `SHA-256` algorithm. Must be set to `PREFIX` or `POSTFIX` | Only for `SHA-256` algorithm      | N/A                | N/A                |
 

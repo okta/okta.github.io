@@ -52,32 +52,54 @@ Then follow through the [README](https://github.com/tom-smith-okta/okta-api-cent
 
 ## Configure the Node.js Application
 
-The Okta API Center application only needs a few settings configured to launch. If you want to take a peek now, these settings can be found in the `./config/templates/app_settings_template.json` file.
+The Okta API Center application only needs a few settings configured to launch.
 
 You have two approaches to initialize these settings, and more importantly, to set up the policies, rules, scopes, group memberships, etc. on the Okta side:
 
-You can use the Okta bootstrapping tool. That's what I'm going to assume for the bulk of this article.
-You can set up your Okta tenant manually. Instructions are provided at the [end of this article](#step-by-step).
+You can use the Okta bootstrapping tool. That's what I'm going to assume for the bulk of this article. Or, you can set up your Okta tenant manually. Instructions are provided at the [end of this article](#step-by-step).
 
 ## Set up the Application Environment
 
 Now let's configure your environment. The Okta API Center uses the [dotenv npm package](https://www.npmjs.com/package/dotenv) to help manage environment variables, so you can add these values to a `.env` file if you wish. There is a `.env_example` file included in the repo for reference, which looks like this:
 
 ```bash
-OKTA_TENANT="https://{yourOktaDomain}"
-OKTA_API_TOKEN="{yourAPItoken}"
-REDIRECT_URI="http://localhost:8080"
+# Okta settings
+
+# example: https://dev-511902.oktapreview.com
+OKTA_TENANT=""
+
+OKTA_API_TOKEN=""
+AUTHN_CLIENT_ID=""
+AUTHN_CLIENT_SECRET=""
+
+# example: https://dev-511902.oktapreview.com/oauth2/ausfqw42xrkmpfDHI0h7
+OKTA_AZ_SERVER_ISSUER=""
+
+# Gateway/Proxy base url
+# example: http://52.14.100.89:8080/solar-system
+PROXY_URI=""
+
+# App settings
 PORT="8080"
+REDIRECT_URI="http://localhost:8080"
+SILVER_USERNAME=""
+SILVER_PASSWORD=""
+GOLD_USERNAME=""
+GOLD_PASSWORD=""
 SESSION_SECRET="some random phrase"
 SESSION_MAX_AGE=60000
 
-# Update these values later
-AUTHN_CLIENT_ID=""
-AUTHN_CLIENT_SECRET=""
-PROXY_URI=""
+# Supported values: aws, kong, mulesoft, swag, tyk
+# swag = Software AG
+GATEWAY=""
 ```
 
-There are a few values that are not available to you yet; you'll add those later.
+Update the following values in the .env file now:
+* `OKTA_TENANT`
+* `OKTA_API_TOKEN`
+* `REDIRECT_URI`
+* `PORT`
+* `GATEWAY`
 
 **NOTE:** The value for `PORT` should be the same value from `REDIRECT_URI`.
 
@@ -90,15 +112,15 @@ To set up your Okta tenant with all of the components needed for this example su
 The first bootstrap script will configure a number of objects in your Okta tenant. The objects we need right away are an authorization server and an introspection client so that we can set up Okta as an external identity provider in Mulesoft.
 
 ```bash
-node okta_bootstrap.js --mulesoft_idp
+node okta_bootstrap.js --mulesoft
 ```
 
 The Okta bootstrap tool will find an input file, which contains the inputs required for initial setup.
 
 ```bash
-node okta_bootstrap --mulesoft_idp
+node okta_bootstrap --mulesoft
 
-Found a valid input file at ./okta_bootstrap/input/mulesoft_idp.json
+Found a valid input file at ./okta_bootstrap/input/mulesoft.json
 sending a request to Okta to test the api token...
 the token works
 
@@ -140,7 +162,7 @@ Click on "advanced settings" to expose the Authorization Header field.
 You can retrieve the values needed for this screen with the following command:
 
 ```bash
-node update_settings --mulesoft
+node get_settings --mulesoft_introspect
 ```
 
 Paste the values into the form. Note: For the authorization header field, use this value: `SSWS OKTA_API_TOKEN` and replace `OKTA_API_TOKEN` with your actual token.
@@ -199,7 +221,7 @@ Path: /
 
 {% img blog/secure-api-mulesoft/mulesoft_manage_api_from_exchange.png alt:"Mulesoft Manage API from Exchange" width:"778" %}{: .center-image }
 
-You now have a Settings screen for your API. Next, go to the Deployment Configuration section,  choose a runtime version (3.9.x works well), and enter a unique name for your cloudhub deployment. Make sure you save this url now.
+You now have a Settings screen for your API. Next, go to the Deployment Configuration section, choose a runtime version (3.9.x works well), and enter a unique name for your cloudhub deployment. Make sure you save this url now.
 
 {% img blog/secure-api-mulesoft/mulesoft_deployment_config.png alt:"Mulesoft Deployment Config" width:"800" %}{: .center-image }
 
@@ -282,7 +304,7 @@ And, while you have the .env file open, copy your Mulesoft Cloudhub url to the `
 
 ## Configure your Okta Account (Part 2)
 
-We can now set up our policies and rules in the Okta tenant. To do so, run the following bootstrap script:
+Now that we have our authentication client_id and secret, we can set up our policies and rules in the Okta tenant. To do so, run the following bootstrap script:
 
 ```bash
 node okta_bootstrap.js --mulesoft_policy
@@ -315,10 +337,10 @@ Click the Assign button next to the Everyone group, then click Done.
 If you've been using the Okta bootstrap tool, run a script to gather the settings that the app will need:
 
 ```bash
-node update_settings.js --app
+node get_settings.js --mulesoft
 ```
 
-Otherwise, you can supply the values in `./config/instances/app_settings.json` manually.
+Use these settings to update your `.env` file.
 
 You can now launch your app:
 
@@ -443,7 +465,7 @@ Also, we're going to use the default authorization server that is built in to th
 
 6. Follow the steps above to add your REDIRECT_URI as a Trusted Origin in your Okta tenant
 7. Follow the steps above to assign the authentication client (created via Mulesoft UI) to Everyone.
-8. Copy the file `/config/templates/app_settings_template.json` to `/config/instances/app_settings.json`. Update the values in `app_settings.json` and save.
+8. Copy the '.env_example' file to `.env`. Update the values in `.env` and save.
 9. Launch the web app!
 </div>
 

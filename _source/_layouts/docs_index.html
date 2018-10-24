@@ -17,7 +17,7 @@ js: docsIndex
                 <h2>Use Cases</h2>
                 <!-- START Subpages Grid -->
                 <div class="Row">
-                    {% assign documents = site.use_cases | sort:'weight' %}
+                    {% assign documents = site.use_cases | where:'hidden', 'false' | sort:'weight' %}
                     {% for document in documents %}
                     {% unless document.id contains '/index' %}
                     {% continue %}

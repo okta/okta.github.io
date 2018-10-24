@@ -5,9 +5,9 @@ author: dogeared
 description: "Learn about the time-based one-time password algorithm using a credit-card-sized, Arduino-based game device and Okta Verify for MFA."
 tags: [auth, mfa, verify, authentication, 2fa, two factor]
 tweets:
-- "Wanna learn about MFA and have some fun? Read this post to turn an ArduBoy into an Okta Verify token."
+- "Wanna learn about MFA and have some fun? Read this post to turn an ArduBoy into a token."
 - "Like tinkering with hardware? Dig security? Get your fix with @afitnerd's post on building an Arduino based TOTP token with Okta."
-- "Check out @afitnerd's new tutorial on turning an ArduBoy game device into an Okta Verify token for MFA."
+- "Check out @afitnerd's new tutorial on turning an ArduBoy game device into a token for MFA."
 image: blog/ardu-token-mfa/sharedsecret.png
 ---
 
