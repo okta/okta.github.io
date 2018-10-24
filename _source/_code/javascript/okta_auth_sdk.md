@@ -35,7 +35,7 @@ You will need the following things for this guide:
 Include the following script tag in your target web page:
 
 ~~~ html
-<script src="https://ok1static.oktacdn.com/assets/js/sdk/okta-auth-js/1.8.0/okta-auth-js.min.js" type="text/javascript"></script>
+<script src="https://ok1static.oktacdn.com/assets/js/sdk/okta-auth-js/2.0.1/okta-auth-js.min.js" type="text/javascript"></script>
 ~~~
 
 ## Part 1: Retrieve and Store an OpenID Connect Token
