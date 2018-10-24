@@ -117,7 +117,14 @@ authClient.token.parseFromUrl()
 A token that is stored in the Token Manager can be retrieved using the `tokenManager.get` method:
 
 ~~~ js
-var idToken = authClient.tokenManager.get('idToken');
+authClient.tokenManager.get('idToken')
+.then(function(token) {
+  if (token) {
+    // Token is valid
+  } else {
+    // Token has expired
+  }
+})
 ~~~
 
 [Read more about tokenManager.get in the Auth SDK Reference][authjs-reference-tokenmanager-get].
@@ -142,27 +149,29 @@ Putting it all together, the final example looks like this:
       redirectUri: 'http://localhost:3333'
     });
     // Attempt to retrieve ID Token from Token Manager
-    var idToken = authClient.tokenManager.get('idToken');
-    // If ID Token exists, return it in console.log
-    if (idToken) {
-      console.log(`hi ${idToken.claims.email}!`);
-    // If ID Token isn't found, try to parse it from the current URL
-    }
-    else if (location.hash) {
-      authClient.token.parseFromUrl()
-      .then(idToken => {
+    var idToken = authClient.tokenManager.get('idToken')
+    .then(idToken => {
+      // If ID Token exists, return it in console.log
+      if (idToken) {
         console.log(`hi ${idToken.claims.email}!`);
-        // Store parsed token in Token Manager
-        authClient.tokenManager.add('idToken', idToken);
-        console.log(idToken);
-      });
-    }
-    else {
- // You're not logged in, you need a sessionToken
-      authClient.token.getWithRedirect({
-        responseType: 'id_token'
-      });
-    }
+      // If ID Token isn't found, try to parse it from the current URL
+      }
+      else if (location.hash) {
+        authClient.token.parseFromUrl()
+        .then(idToken => {
+          console.log(`hi ${idToken.claims.email}!`);
+          // Store parsed token in Token Manager
+          authClient.tokenManager.add('idToken', idToken);
+          console.log(idToken);
+        });
+      }
+      else {
+        // You're not logged in, you need a sessionToken
+        authClient.token.getWithRedirect({
+          responseType: 'id_token'
+        });
+      }
+    });
   </script>
 </body>
 
@@ -212,34 +221,36 @@ else {
       redirectUri: 'http://localhost:3333'
     });
     // Attempt to retrieve ID Token from Token Manager
-    var idToken = authClient.tokenManager.get('idToken');
-    // If ID Token exists, return it in console.log
-    if (idToken) {
-      console.log(`hi ${idToken.claims.email}!`);
-    // If ID Token isn't found, try to parse it from the current URL
-    } else if (location.hash) {
-      authClient.token.parseFromUrl()
-      .then(idToken => {
+    var idToken = authClient.tokenManager.get('idToken')
+    .then(idToken => {
+      // If ID Token exists, return it in console.log
+      if (idToken) {
         console.log(`hi ${idToken.claims.email}!`);
-        // Store parsed token in Token Manager
-        authClient.tokenManager.add('idToken', idToken);
-        console.log(idToken);
-      });
-    } else {
-      // You're not logged in, you need a sessionToken
-      var username = prompt('What is your username?');
-      var password = prompt('What is your password?');
+      // If ID Token isn't found, try to parse it from the current URL
+      } else if (location.hash) {
+        authClient.token.parseFromUrl()
+        .then(idToken => {
+          console.log(`hi ${idToken.claims.email}!`);
+          // Store parsed token in Token Manager
+          authClient.tokenManager.add('idToken', idToken);
+          console.log(idToken);
+        });
+      } else {
+        // You're not logged in, you need a sessionToken
+        var username = prompt('What is your username?');
+        var password = prompt('What is your password?');
 
-      authClient.signIn({username, password})
-      .then(res => {
-        if (res.status === 'SUCCESS') {
-          authClient.token.getWithRedirect({
-            sessionToken: res.sessionToken,
-            responseType: 'id_token'
-          });
-        }
-      });
-    }
+        authClient.signIn({username, password})
+        .then(res => {
+          if (res.status === 'SUCCESS') {
+            authClient.token.getWithRedirect({
+              sessionToken: res.sessionToken,
+              responseType: 'id_token'
+            });
+          }
+        });
+      }
+    });
   </script>
 </body>
 ~~~
