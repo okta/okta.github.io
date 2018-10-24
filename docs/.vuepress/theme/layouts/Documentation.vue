@@ -2,6 +2,8 @@
     <div class="page-content">
       <TopNavigation/>
 
+      <PromoBanner/>
+
       <section class="Docs">
           <div class="Hero Hero--docs u-Justify u-alignCenter">
               <h1 class="Docs-title Hero-title">Get started in minutes</h1>
