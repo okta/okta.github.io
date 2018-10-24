@@ -135,7 +135,7 @@ Putting it all together, the final example looks like this:
 
 ~~~ html
 
-<script src="https://ok1static.oktacdn.com/assets/js/sdk/okta-auth-js/1.8.0/okta-auth-js.min.js" type="text/javascript"></script>
+<script src="https://ok1static.oktacdn.com/assets/js/sdk/okta-auth-js/{{ site.versions.okta_auth_js }}/okta-auth-js.min.js" type="text/javascript"></script>
 
 <body>
   <script>
@@ -207,7 +207,7 @@ else {
 
 ~~~ html
 
-<script src="https://ok1static.oktacdn.com/assets/js/sdk/okta-auth-js/1.8.0/okta-auth-js.min.js" type="text/javascript"></script>
+<script src="https://ok1static.oktacdn.com/assets/js/sdk/okta-auth-js/{{ site.versions.okta_auth_js }}/okta-auth-js.min.js" type="text/javascript"></script>
 
 <body>
   <script>
