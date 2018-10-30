@@ -45,7 +45,12 @@ For this tutorial, we're using an existing JWT library. [Java JWT](https://githu
 
 ## Generate a Token in Java
 
-This parts super easy. Let's look at some code. Download [the simple example app from the GitHub page](https://github.com/oktadeveloper/okta-create-and-verify-jwts).
+This parts super easy. Let's look at some code. Clone the [GitHub repo](https://github.com/oktadeveloper/okta-java-jwt-example):
+
+```bash
+ git clone https://github.com/oktadeveloper/okta-java-jwt-example.git 
+ cd okta-java-jwt-example
+ ```
 
 This example is pretty basic, and contains a `src/main/java/JWTDemo.java` class file with two static methods: `createJWT()` and `decodeJWT()`. Cunningly enough, these two methods create a JWT and decode a JWT. Take a look at the first method below.
 
