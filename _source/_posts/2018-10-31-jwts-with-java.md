@@ -30,7 +30,7 @@ In practice, this information is often about two things: authorization and sessi
 
 JWTs are often also used to store state-dependent user data for a web session. Because the JWT is passed back and forth between the client app and the server, it means that state data does not have to be stored in a database somewhere (and subsequently retrieved on every request); because of this, it scales well.
 
-Let's take a look at an example JWT (taken from [jsonwebtoken.io][https://www.jsonwebtoken.io/]) 
+Let's take a look at an example JWT (taken from [jsonwebtoken.io](https://www.jsonwebtoken.io/)) 
 
 {% img blog/jwts-with-java/jwt-decoded-screenshot.png alt:"Screenshot containing decoded JWT header and payload" width:"600" %}{: .center-image }
 
