@@ -5,7 +5,6 @@ audio,canvas,video{display:inline-block}
 audio:not([controls]){display:none;height:0}
 [hidden],template{display:none}
 script{display:none!important}
-html{font-family:sans-serif;-ms-text-size-adjust:100%;-webkit-text-size-adjust:100%}
 body{margin:0}
 h1{font-size:2em;margin:.67em 0}
 abbr[title]{border-bottom:1px dotted}
