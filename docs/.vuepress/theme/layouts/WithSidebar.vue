@@ -6,11 +6,14 @@
 
     <PromoBanner/>
 
+    <section class="PageContent DynamicSidebar has-tableOfContents">
+    <Sidebar/>
+
     <div class="PageContent page-content">
       <Content class="PageContent DynamicSidebar has-tableOfContents page-content"/>
     </div>
 
-    <Sidebar/>
+    </section>
 
     <Footer/>
 
