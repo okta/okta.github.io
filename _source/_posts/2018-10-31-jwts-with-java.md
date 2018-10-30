@@ -41,7 +41,7 @@ There's a lot of detail we're not going to go into here regarding how tokens are
 **Don't forget:** cryptographic signatures do not provide confidentiality; they are simply a way of detecting tampering with a JWT, and unless a JWT is specifically encrypted, they are publicly visible. The signature simply provides a secure way of verifying the contents.
 
 Great. Got it? Now you need to make a token with JJWT!
-For this tutorial we're using an existing JWT library. [Java JWT](https://github.com/jwtk/jjwt) (a.k.a., JJWT). was created by [Les Hazlewood](https://twitter.com/lhazlewood) (lead committer to Apache Shiro, former co-founder and CTO at Stormpath, and currently Okta's very own Senior Architect), JJWT is a Java library that simplifies JWT creation and verification. It is based exclusively on the [JWT](https://tools.ietf.org/html/rfc7519), [JWS](https://tools.ietf.org/html/rfc7515), [JWE](https://tools.ietf.org/html/rfc7516), [JWK](https://tools.ietf.org/html/rfc7517) and [JWA](https://tools.ietf.org/html/rfc7518) RFC specifications and open source under the terms of the [Apache 2.0 License](http://www.apache.org/licenses/LICENSE-2.0). The library also adds some nice features to the spec, such as JWT compression and claims enforcement.
+For this tutorial, we're using an existing JWT library. [Java JWT](https://github.com/jwtk/jjwt) (a.k.a., JJWT) was created by [Les Hazlewood](https://twitter.com/lhazlewood) (lead committer to Apache Shiro, former co-founder and CTO at Stormpath, and currently Okta’s very own Senior Architect), JJWT is a Java library that simplifies JWT creation and verification. It is based exclusively on the [JWT](https://tools.ietf.org/html/rfc7519), [JWS](https://tools.ietf.org/html/rfc7515), [JWE](https://tools.ietf.org/html/rfc7516), [JWK](https://tools.ietf.org/html/rfc7517) and [JWA](https://tools.ietf.org/html/rfc7518) RFC specifications and open source under the terms of the [Apache 2.0 License](http://www.apache.org/licenses/LICENSE-2.0). The library also adds some nice features to the spec, such as JWT compression and claims enforcement.
 
 ## Generate a Token in Java
 
@@ -50,34 +50,34 @@ This parts super easy. Let's look at some code. Download [the simple example app
 This example is pretty basic, and contains a `src/main/java/JWTDemo.java` class file with two static methods: `createJWT()` and `decodeJWT()`. Cunningly enough, these two methods create a JWT and decode a JWT. Take a look at the first method below.
 
 ```java
-public static String createJWT(String id, String issuer, String subject, long ttlMillis) {  
+public static String createJWT(String id, String issuer, String subject, long ttlMillis) {
   
-    //The JWT signature algorithm we will be using to sign the token  
-    SignatureAlgorithm signatureAlgorithm = SignatureAlgorithm.HS256;  
+    //The JWT signature algorithm we will be using to sign the token
+    SignatureAlgorithm signatureAlgorithm = SignatureAlgorithm.HS256;
+
+    long nowMillis = System.currentTimeMillis();
+    Date now = new Date(nowMillis);
+
+    //We will sign our JWT with our ApiKey secret
+    byte[] apiKeySecretBytes = DatatypeConverter.parseBase64Binary(SECRET_KEY);
+    Key signingKey = new SecretKeySpec(apiKeySecretBytes, signatureAlgorithm.getJcaName());
+
+    //Let's set the JWT Claims
+    JwtBuilder builder = Jwts.builder().setId(id)
+            .setIssuedAt(now)
+            .setSubject(subject)
+            .setIssuer(issuer)
+            .signWith(signatureAlgorithm, signingKey);
   
-    long nowMillis = System.currentTimeMillis();  
-    Date now = new Date(nowMillis);  
-  
-    //We will sign our JWT with our ApiKey secret  
-    byte[] apiKeySecretBytes = DatatypeConverter.parseBase64Binary(SECRET_KEY);  
-    Key signingKey = new SecretKeySpec(apiKeySecretBytes, signatureAlgorithm.getJcaName());  
-  
-    //Let's set the JWT Claims  
-    JwtBuilder builder = Jwts.builder().setId(id)  
-            .setIssuedAt(now)  
-            .setSubject(subject)  
-            .setIssuer(issuer)  
-            .signWith(signatureAlgorithm, signingKey);  
-  
-    //if it has been specified, let's add the expiration  
-    if (ttlMillis > 0) {  
-        long expMillis = nowMillis + ttlMillis;  
-        Date exp = new Date(expMillis);  
-        builder.setExpiration(exp);  
+    //if it has been specified, let's add the expiration
+    if (ttlMillis > 0) {
+        long expMillis = nowMillis + ttlMillis;
+        Date exp = new Date(expMillis);
+        builder.setExpiration(exp);
     }  
   
-    //Builds the JWT and serializes it to a compact, URL-safe string  
-    return builder.compact();  
+    //Builds the JWT and serializes it to a compact, URL-safe string
+    return builder.compact();
 }
 ```
 
@@ -95,12 +95,12 @@ This could be customized to your needs. If, for example, you wanted to add diffe
 Now take a look at the even simpler `decodeJWT()` method.
 
 ```java
-public static Claims decodeJWT(String jwt) {  
-    //This line will throw an exception if it is not a signed JWS (as expected)  
-    Claims claims = Jwts.parser()  
-            .setSigningKey(DatatypeConverter.parseBase64Binary(SECRET_KEY))  
-            .parseClaimsJws(jwt).getBody();  
-    return claims;  
+public static Claims decodeJWT(String jwt) {
+    //This line will throw an exception if it is not a signed JWS (as expected)
+    Claims claims = Jwts.parser()
+            .setSigningKey(DatatypeConverter.parseBase64Binary(SECRET_KEY))
+            .parseClaimsJws(jwt).getBody();
+    return claims;
 }
 ```
 
@@ -113,7 +113,10 @@ That's pretty much it!
  For extra credit, you can run the JUnit tests in the example project. There are three tests, and they demonstrate some basic features on the JJWT library. The first test shows the happy path, creating and successfully decoding a valid JWT. The second test shows how the JJWT library will fail when you attempt to decode a totally bogus string as a JWT. The last test shows how a tampered-with JJWT will cause the `decodeJWT()` method to throw a `SignatureException`. 
 
 You can run these tests from the command line using:
-`./gradlew test -i`
+
+```bash
+./gradlew test -i
+```
 
 The `-i` is to set Gradle's log level to `Info` so that we see the simple logging output from the tests.
 
@@ -129,11 +132,11 @@ Baeldung has a [pretty good in depth tutorial on Java and JWTs](https://www.bael
 
 Also, here are some more links from the Okta blog to keep you going:
 
--   [Simple Token Authentication for Java Apps](https://developer.okta.com/blog/2018/10/16/token-auth-for-java)
--   [Get Started with Spring Boot, OAuth 2.0, and Okta](https://developer.okta.com/blog/2017/03/21/spring-boot-oauth)
--   [10 Excellent Ways to Secure Your Spring Boot Application](https://developer.okta.com/blog/2018/07/30/10-ways-to-secure-spring-boot)
--   [What Happens If Your JWT Is Stolen?](https://developer.okta.com/blog/2018/06/20/what-happens-if-your-jwt-is-stolen)
+- [Simple Token Authentication for Java Apps](/blog/2018/10/16/token-auth-for-java)
+- [Get Started with Spring Boot, OAuth 2.0, and Okta](/blog/2017/03/21/spring-boot-oauth)
+- [10 Excellent Ways to Secure Your Spring Boot Application](/blog/2018/07/30/10-ways-to-secure-spring-boot)
+- [What Happens If Your JWT Is Stolen?](/blog/2018/06/20/what-happens-if-your-jwt-is-stolen)
 - [JWT Analyzer & Inspector Chrom Plugin](https://chrome.google.com/webstore/detail/jwt-analyzer-inspector/henclmbnehmcpbjgipaajbggekefngob?hl=en)
 - [Encode or Decode JWTs online](https://www.jsonwebtoken.io/)
 
-If you have any questions about this post, please add a comment below. For more awesome content, follow  [@oktadev](https://twitter.com/oktadev)  on Twitter, like us  [on Facebook](https://www.facebook.com/oktadevelopers/), or subscribe to  [our YouTube channel](https://www.youtube.com/channel/UC5AMiWqFVFxF1q9Ya1FuZ_Q). 
+If you have any questions about this post, please add a comment below. For more awesome content, follow [@oktadev](https://twitter.com/oktadev) on Twitter, like us [on Facebook](https://www.facebook.com/oktadevelopers/), or subscribe to [our YouTube channel](https://www.youtube.com/channel/UC5AMiWqFVFxF1q9Ya1FuZ_Q). 
