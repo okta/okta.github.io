@@ -13,7 +13,7 @@ layout: null
           <title>{{ tweet | xml_escape }}</title>
           <pubDate>{{ post.date | date: "%a, %d %b %Y %H:%M:%S %z" }}</pubDate>
           <link>{{ site.url }}{{ post.url }}</link>
-          <guid isPermaLink="true">{{ site.url }}{{ post.url }}</guid>
+          <guid isPermaLink="true">{{ site.url }}{{ post.url }}?tweet={{ forloop.index }}</guid>
         </item>
       {% endfor %}
     {% endfor %}
