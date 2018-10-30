@@ -36,7 +36,7 @@ Let's take a look at an example JWT (taken from [jsonwebtoken.io](https://www.js
 
 JWTs have three parts: a header, a body, and a signature. The header contains info on how the JWT is encoded. The body is the *meat* of the token (where the **claims** live). The signature provides the security. 
  
-There's a lot of detail we're not going to go into here regarding how tokens are encoded and how information is stored in the body. Check out [the previously mentioned tutorial](https://developer.okta.com/blog/2018/10/16/token-auth-for-java) if you want. 
+There's a lot of detail we're not going to go into here regarding how tokens are encoded and how information is stored in the body. Check out [the previously mentioned tutorial](/blog/2018/10/16/token-auth-for-java) if you want. 
 
 **Don't forget:** cryptographic signatures do not provide confidentiality; they are simply a way of detecting tampering with a JWT, and unless a JWT is specifically encrypted, they are publicly visible. The signature simply provides a secure way of verifying the contents.
 
