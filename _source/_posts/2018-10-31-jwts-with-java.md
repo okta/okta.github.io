@@ -18,7 +18,7 @@ This tutorial will show you how to use an existing JWT library to do two things:
  1. Generate a JWT
  2. Decode and verify a JWT
 
-You'll notice the tutorial is pretty short. That's because it's that easy. If you'd like to dig deeper, take a look at the [JWT Spec](https://tools.ietf.org/html/rfc7519) or dive into [this longer post](https://developer.okta.com/blog/2018/10/16/token-auth-for-java) about using JWTs for token authentication in Spring Boot apps.
+You'll notice the tutorial is pretty short. That's because it's that easy. If you'd like to dig deeper, take a look at the [JWT Spec](https://tools.ietf.org/html/rfc7519) or dive into [this longer post](/blog/2018/10/16/token-auth-for-java) about using JWTs for token authentication in Spring Boot apps.
 
 ## What are JWTs?
 
