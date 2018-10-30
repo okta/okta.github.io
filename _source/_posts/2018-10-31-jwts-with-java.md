@@ -119,7 +119,7 @@ The `-i` is to set Gradle's log level to `Info` so that we see the simple loggin
 
 ## Learn More About Working with JWTs in Your Java Apps
 
-The JJWT library makes it super easy to create and verify JWTs. Just specify a secret key and some claims, and you've got a JJWT. Later, use the same secret key to decode the JJWT and verify it's contents. 
+The JJWT library makes it super easy to create and verify JWTs. Just specify a secret key and some claims, and you've got a JJWT. Later, use the same secret key to decode the JJWT and verify its contents. 
 
 Creating and using JJWTs is now so easy, why aren't you using them?
 
