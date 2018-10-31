@@ -1452,5 +1452,5 @@ If you have any questions, please don't hesitate to leave a comment below, or as
 
 **Changelog:**
 
-* Oct 31, 2018: Updated to use Create React App 2.1.0, Spring Boot 2.1.0, and Spring Security 5.1.1. You can see the example app changes in [okta-spring-boot-react-crud-example#8](https://github.com/oktadeveloper/okta-spring-boot-react-crud-example/pull/8); changes to this post can be viewed in [okta.github.io#2222](https://github.com/okta/okta.github.io/pull/2222).
+* Oct 31, 2018: Updated to use Create React App 2.1.0, Spring Boot 2.1.0, and Spring Security 5.1.1. You can see the example app changes in [okta-spring-boot-react-crud-example#8](https://github.com/oktadeveloper/okta-spring-boot-react-crud-example/pull/8); changes to this post can be viewed in [okta.github.io#2450](https://github.com/okta/okta.github.io/pull/2450).
 * Jul 31, 2018: Updated to use Spring Boot 2.1.0 M1 and Spring Security 5.1.0 M2. You can see the example app changes in [okta-spring-boot-react-crud-example#6](https://github.com/oktadeveloper/okta-spring-boot-react-crud-example/pull/6); changes to this post can be viewed in [okta.github.io#2222](https://github.com/okta/okta.github.io/pull/2222).
