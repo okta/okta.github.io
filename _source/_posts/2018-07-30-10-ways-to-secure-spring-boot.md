@@ -108,7 +108,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 }
 ```
 
-If you're using Angular, this is all you need to do. If you're using React, you'll need to [read the `XSRF-TOKEN` cookie and send it back as an `X-XSRF-TOKEN` header](/blog/2018/07/19/simple-crud-react-and-spring-boot#modify-react-handle-csrf-and-be-identity-aware).
+If you're using Angular, this is all you need to do. If you're using React, you'll need to [read the `XSRF-TOKEN` cookie and send it back as an `X-XSRF-TOKEN` header](/blog/2018/07/19/simple-crud-react-and-spring-boot#modify-react-to-handle-csrf-and-be-identity-aware).
 
 Spring Security automatically adds a `secure` flag to the `XSRF-TOKEN` cookie when the request happens over HTTPS. Spring Security doesn't use the `SameSite=strict` flag for CSRF cookies, but it does when using Spring Session or WebFlux session handling. It makes sense for session cookies since it's being used to identify the user. It doesn't provide much value for CSRF cookies since the CSRF token needs to be in the request too.
 
