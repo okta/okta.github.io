@@ -10,7 +10,7 @@
     <Sidebar/>
 
     <div class="PageContent page-content">
-      <Content class="PageContent DynamicSidebar has-tableOfContents page-content"/>
+      <Content class="PageContent-main DynamicSidebar has-tableOfContents page-content"/>
     </div>
 
     </section>

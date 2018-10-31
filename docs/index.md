@@ -7,3 +7,7 @@ meta:
 layout: WithSidebar
 ---
 
+
+<ApiOperation method="get" url="/api/v1/events"/>
+
+<ApiOperation method="post" url="/api/v1/events"/>
