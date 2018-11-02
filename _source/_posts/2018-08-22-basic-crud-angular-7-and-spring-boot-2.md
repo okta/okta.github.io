@@ -1099,3 +1099,7 @@ This blog has a plethora of Spring Boot and Angular tutorials. Here are some of 
 * [Build an Angular App with Okta's Sign-In Widget in 15 Minutes](/blog/2017/03/27/angular-okta-sign-in-widget)
 
 If you have any questions, please don't hesitate to leave a comment below, or ask us on our [Okta Developer Forums](https://devforum.okta.com/). Don't forget to follow us [on Twitter](https://twitter.com/oktadev) and [YouTube](https://www.youtube.com/channel/UC5AMiWqFVFxF1q9Ya1FuZ_Q) too!
+
+**Changelog:**
+
+* Nov 2, 2018: Updated to use Angular 7.0 and Spring Boot 2.1 GA releases. You can see the example app changes in [okta-spring-boot-2-angular-7-example#5](https://github.com/oktadeveloper/okta-spring-boot-2-angular-7-example/pull/5); changes to this post can be viewed in [okta.github.io#2456](https://github.com/okta/okta.github.io/pull/2456).
