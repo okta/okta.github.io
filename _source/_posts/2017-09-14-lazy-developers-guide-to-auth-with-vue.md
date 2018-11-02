@@ -4,6 +4,10 @@ title: "The Lazy Developer's Guide to Authentication with Vue.js"
 author: mraible
 description: "This article shows you how to add authentication to a Vue.js application using the Okta Auth SDK and Okta API."
 tags: [authentication, auth, vue.js, vue, oidc, lazy developer]
+tweets:
+- "Are you a lazy developer that loves @vuejs? Cool! Check out our lazy developer's guide to authentication with Vue.js > "
+- "Learn how to build a PWA with @vuejs and add authentication in this quick and easy tutorial →"
+image: blog/featured/okta-vue-tile-books-mouse.jpg
 ---
 
 I'll happily admit that like many of you, I'm a lazy developer. I tend to look for solutions someone else has already built before I try to build them myself. In the "old days" of the early 2000s, I used to spend a lot more time coding solutions myself. But today many solutions to coding problems are just a keyword search away. In that spirit, I approached this tutorial using keywords – looking for existing solutions first, then fitting my favorite solution on top of it. I think you'll like the results!
@@ -17,7 +21,7 @@ Every web app that has mobile users should add PWA support so the app loads fast
 I installed [Vue CLI](https://github.com/vuejs/vue-cli) and went to work.
 
 ```
-npm install -g vue-cli
+npm install -g vue-cli@2.9.6
 vue init pwa okta-vue-auth-example
 cd okta-vue-auth-example
 npm i
@@ -275,7 +279,32 @@ function requireAuth (to, from, next) {
 }
 ```
 
-After making these changes, you should be able to run `npm start` and authenticate with the hard coded values from `auth.js` (joe@example.com / password1).
+After making these changes, run `npm start`. You'll likely see the following error:
+
+```
+ERROR  Failed to compile with 1 errors
+
+error  in ./src/auth.js
+
+  ✘  https://google.com/#q=standard%2Fno-callback-literal  Unexpected literal in error position of callback  
+  src/auth.js:7:15
+        if (cb) cb(true)
+
+```
+
+The easiest way to fix this is to update `.eslintrc.js` to allow callback literals.
+
+```js
+'rules': {
+  ...
+  // allow callback literals
+  'standard/no-callback-literal': 0
+}
+```
+
+_Thanks to [nikivancic](https://developer.okta.com/blog/2017/09/14/lazy-developers-guide-to-auth-with-vue#comment-4167385661) for this tip in the comments!_
+
+After making this change, you should be able to run `npm start` and authenticate with the hard coded values from `auth.js`.
 
 If you open your browser to `http://localhost:8080`, you should see a screen that resembles the one below.
 
@@ -296,8 +325,10 @@ If you open Chrome Developer Tools, you'll see a message that recommends install
 To replace the fake, hard-coded authentication in `src/auth.js`, start by installing the [Okta Auth SDK](https://developer.okta.com/code/javascript/okta_auth_sdk)
 
 ```bash
-npm install @okta/okta-auth-js --save
+npm install @okta/okta-auth-js@2.0.1
 ```
+
+And while you're at it, run `npm audit fix --force` to fix vulnerable dependencies.
 
 Replace the code in `auth.js` with the following code that uses the Auth SDK to log in and save a session token as the token. If you don't have an Okta Developer account, [create one](https://developer.okta.com/signup/). Then replace `{yourOktaDomain}` in the code below with your Okta domain, which you can find on the Dashboard page in the Developer Console.
 
@@ -336,6 +367,7 @@ export default {
 
   logout (cb) {
     delete localStorage.token
+    delete localStorage.idToken
     if (cb) cb()
     this.onChange(false)
     return authClient.signOut()
@@ -423,7 +455,7 @@ Vue.directive('focus', {
 
 Authenticating your users against cloud APIs is cool, but you know what's even cooler!? Fetching access tokens and showing your users that you know who they are! To do this, you can use the Okta Auth SDK's OpenID Connect (OIDC) features. Instead of storing the session token in `localStorage`, you can fetch an access token too. This can be useful when calling APIs that act as resource servers.
 
-> You can see how to create a resource server using Spring Boot and Okta in [Build a Secure Notes Application with Kotlin, TypeScript, and Okta](https://scotch.io/tutorials/build-a-secure-notes-application-with-kotlin-typescript-and-okta).
+> You can see how to create a resource server using Spring Boot and Okta in [Build a Secure Notes Application with Kotlin, TypeScript, and Okta](/blog/2017/09/19/build-a-secure-notes-application-with-kotlin-typescript-and-okta).
 
 The Okta Auth SDK supports exchanging your session token for an access token. Replace the success callback on `authClient.signIn()` (in `src/auth.js`) with the following.
 
@@ -438,7 +470,7 @@ return authClient.signIn({
       responseType: ['id_token', 'token'],
       scopes: ['openid', 'email', 'profile'],
       sessionToken: response.sessionToken,
-      redirectUri: 'http://localhost:8080'
+      redirectUri: window.location.origin
     }).then(tokens => {
       localStorage.token = tokens[1].accessToken
       localStorage.idToken = tokens[0].idToken
@@ -456,7 +488,7 @@ Click **Done** and you'll be shown a screen with this information as well as a C
 
 You'll notice the new callback saves the access token as `token` in `localStorage`. It also saves the `idToken` so it can parse the JWT and retrieve the user's name. You have to add `profile` to the list of scopes (`['openid', 'email']` is the default) to get the authenticated user's name.
 
-Once you have the `idToken`, you can fetch the user's name from it. Even better, you can use the [JWT Inspector](https://jwtinspector.io/) Chrome plugin to view JWT values and print them to the JavaScript console.
+Once you have the `idToken`, you can fetch the user's name from it. Even better, you can use the [JWT Inspector](https://chrome.google.com/webstore/detail/jwt-analyzer-inspector/henclmbnehmcpbjgipaajbggekefngob) Chrome plugin to view JWT values and print them to the JavaScript console.
 
 To see this in action, add the following two methods to `src/auth.js` to get a person's name from a decoded JWT. Thanks to Stack Overflow for the [decoding JWTs in JavaScript code](https://stackoverflow.com/a/38552302/65681).
 
@@ -517,12 +549,11 @@ If you run Lighthouse on your app at `http://localhost:8080`, you should see sim
 
 {% img blog/vue-auth-sdk/lighthouse-localhost.png alt:"Lighthouse Audits on localhost" %}{: .center-image }
 
-Because I like to see what the max possible score is, I deployed this app to Pivotal's Cloud Foundry. I created a `deploy.sh` script that replaces the `redirectUri` (you could also remove it for the same effect) and deploys using `cf push`.
+Because I like to see what the max possible score is, I deployed this app to Pivotal's Cloud Foundry. I created a `deploy.sh` script that deploys using `cf push`.
 
 For this to work, you will have to update Okta to add `https://vue-auth-pwa.cfapps.io` as a Login Redirect URI (in your OIDC app) and as a Trusted Origin (**API** > **Trusted Origins**).
 
 ```bash
-sed -i -e "s|http://localhost:8080|https://vue-auth-pwa.cfapps.io|g" src/auth.js
 npm run build
 cd dist
 touch Staticfile
@@ -532,7 +563,7 @@ cf set-env vue-auth-pwa FORCE_HTTPS true
 cf start vue-auth-pwa
 ```
 
-Running Lighthouse on https://vue-auth-pwa.cfapps.io yields some pretty good numbers across the board!
+Running Lighthouse on <https://vue-auth-pwa.cfapps.io> yields some pretty good numbers across the board!
 
 {% img blog/vue-auth-sdk/lighthouse-cloudfoundry.png alt:"Lighthouse Audits on Cloud Foundry" %}{: .center-image }
 
@@ -540,9 +571,16 @@ Running Lighthouse on https://vue-auth-pwa.cfapps.io yields some pretty good num
 
 I hope you've enjoyed this tour of authentication for the incredibly popular Vue.js. Kudos to [Evan You](https://twitter.com/youyuxi) for creating it and making it light and fast (perfect for PWAs!).
 
-If you're intrigued by Vue.js, follow [@vuejs](https://twitter.com/vuejs) and [@nuxt_js](https://twitter.com/nuxt_js) on Twitter. Stay up-to-date with our Okta Auth adventures by following [@OktaDev](https://twitter.com/oktadev).
+If you're intrigued by Vue.js, follow [@vuejs](https://twitter.com/vuejs) and [@nuxt_js](https://twitter.com/nuxt_js) on Twitter. Stay up-to-date with our Okta Auth adventures by following [@OktaDev](https://twitter.com/oktadev) or subscribing to our [YouTube channel](https://www.youtube.com/channel/UC5AMiWqFVFxF1q9Ya1FuZ_Q).
 
-You can see the code this lazy developer created for this article [on GitHub](https://github.com/oktadeveloper/okta-vue-auth-example). You can also check out some other articles I wrote on PWAs.
+You can see the code this lazy developer created for this article [on GitHub](https://github.com/oktadeveloper/okta-vue-auth-example). You can also check out some other articles we have on PWAs and Vue.
 
 * [Build Your First Progressive Web Application with Angular and Spring Boot](/blog/2017/05/09/progressive-web-applications-with-angular-and-spring-boot)
 * [The Ultimate Guide to Progressive Web Applications](/blog/2017/07/20/the-ultimate-guide-to-progressive-web-applications)
+* [Build a Basic CRUD App with Vue.js and Node](/blog/2018/02/15/build-crud-app-vuejs-node)
+* [Tutorial: Build a Basic CRUD App with Symfony 4 and Vue](/blog/2018/06/14/php-crud-app-symfony-vue)
+* [Build a Single-Page App with Go and Vue](/blog/2018/10/23/build-a-single-page-app-with-go-and-vue)
+
+**Changelog:**
+
+* Nov 1, 2018: Updated to use Vue CLI 2.9.6, Vue 2.5.2, and Vue Okta Auth SDK 2.1. You can see the example app changes in [okta-vue-auth-example#4](https://github.com/oktadeveloper/okta-vue-auth-example/pull/4); changes to this post can be viewed in [okta.github.io#2453](https://github.com/okta/okta.github.io/pull/2453).

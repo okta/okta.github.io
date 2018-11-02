@@ -27,7 +27,7 @@ Let's build some data. Your application will store data about your workouts, spe
 
 So, create a folder called Models, and in there build a Workout class in a file called `Workout.cs`:
 
-```csharp
+```cs
 public class Workout
  {
      public int Id { get; set; }
@@ -46,7 +46,7 @@ Next, let's add a controller. Right click the "Controllers" folder, choose "Add"
 ### Check the Database Context
 A Data folder has been created, and in it a file called `WorkoutContext.cs`. It's contents are:
 
-```csharp
+```cs
 public class WorkoutContext : DbContext
     {
         public WorkoutContext (DbContextOptions<WorkoutContext> options)
@@ -62,7 +62,7 @@ It has created a database context, and added a database set of type Workout to t
 ### Add a Workout Controller
 In the Controllers folder Visual Studio has created a `WorkoutController.cs` with the following code:
 
-```csharp
+```cs
 namespace Backend.Controllers
 {
     [Produces("application/json")]
@@ -197,9 +197,9 @@ For a large application, you'll want to avoid using the database context directl
 Now that you've created a controller, you can delete the sample `ValuesController` that was added to the project initially.
 
 ### Configure the Database Connection on Startup
-Another thing the controller scaffold did was alter the ```appsettings.json``` file which holds the settings. Specifically, it added this section:
+Another thing the controller scaffold did was alter the `appsettings.json` file which holds the settings. Specifically, it added this section:
 
-```javascript 
+```js 
 "ConnectionStrings": {
     "WorkoutContext": "Server=(localdb)\\mssqllocaldb;Database=WorkoutContext-96b0f43c-71bb-4887-b9e3-cf768e432412;Trusted_Connection=True;MultipleActiveResultSets=true"
   }
@@ -207,9 +207,9 @@ Another thing the controller scaffold did was alter the ```appsettings.json``` f
 
 This says that the `WorkoutContext` will connect to a database server and a specific database that is provided here. By default, it uses a local database on your machine called [SQL Server LocalDB](https://docs.microsoft.com/en-us/aspnet/core/tutorials/first-mvc-app/working-with-sql?tabs=aspnetcore2x). You can change this to any database you like. If you need help building connection strings, you can use a [connection string generator tool](https://www.developerfusion.com/tools/sql-connection-string/). 
 
-Also, if you open ```Startup.cs```, in the `ConfigureServices` method you'll notice this line has been added:
+Also, if you open `Startup.cs`, in the `ConfigureServices` method you'll notice this line has been added:
 
-```csharp
+```cs
 services.AddDbContext<WorkoutContext>(options =>
   options.UseSqlServer(Configuration.GetConnectionString("WorkoutContext")));
 ```
@@ -221,20 +221,24 @@ In the `WorkoutContext` you have defined what the tables should look like. You n
 
 Use the command:
 
-```Add-Migration Initial```
+```sh
+Add-Migration Initial
+```
 
 This will create a `Migrations` folder in your solution and add a file called something like `2180401145609_Initial.cs`. If you open it, you will notice it has the `Up` and `Down` methods. The `Up` method contains the code used to upgrade the database to the next version, while the `Down` method contains the code to downgrade to the previous version. At this point you have no database, so the goal is to upgrade from nothing to the current version. In the Package Manager Console use the command:
 
-```Update-Database```
+```sh
+Update-Database
+```
 
 This has now created the database with the Workout table in it. You will need to add a new migration and run a database update in this way each time you change something that changes the database structure. 
 
 ### Enable CORS
 In order to call an API from JavaScript, you need to enable [CORS](https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS) on the API server. Since you're building an API that will be called by an Angular app, you need CORS. 
 
-To enable CORS on your API, edit the ```Startup.cs```. In the `ConfigureServices` method add CORS and a default policy:
+To enable CORS on your API, edit the `Startup.cs`. In the `ConfigureServices` method add CORS and a default policy:
 
-```csharp
+```cs
 services.AddCors(options =>
 {
     options.AddPolicy("CorsPolicy",
@@ -247,7 +251,7 @@ services.AddCors(options =>
 
 In the `Configure` method tell the application to use the `CorsPolicy` on all requests. This must be placed **before** the `UseMvc()` statement:
 
-```csharp
+```cs
 app.UseCors("CorsPolicy");
 app.UseMvc();
 ```
@@ -266,9 +270,9 @@ You can use a tool like [Fiddler](https://www.telerik.com/fiddler) or [Postman](
 So as of now, your project works, right? Sort of. It works as long as the right data is submitted. However, you shouldn't assume that will always be the case.
 
 ### Validate Incoming Data
-Adding a record with empty data (e.g. ```'timeInSeconds' : ''```) would work. But from a user point of view it's wrong. Let's assume that we need the Date and the TimeInSeconds to be mandatory. We can easily do this by adding data annotations in the Workout model:
+Adding a record with empty data (e.g. `'timeInSeconds' : ''`) would work. But from a user point of view it's wrong. Let's assume that we need the Date and the TimeInSeconds to be mandatory. We can easily do this by adding data annotations in the Workout model:
 
-```csharp
+```cs
 public class Workout
     {
         public int Id { get; set; }
@@ -285,7 +289,7 @@ public class Workout
 ```
 
 Note that in the controller each method has a section like:
-```csharp
+```cs
 if (!ModelState.IsValid)
 {
     return BadRequest(ModelState);
@@ -301,19 +305,19 @@ In order to create a new Angular 5 client side application, use Angular CLI. Ang
 
 {% img blog/build-crud-app-aspnetcore-angular/angular-home.jpg alt:"Angular CLI home page" width:"600" %}{: .center-image }
 
-You can find install instructions and learn the basics of Angular CLI at [https://cli.angular.io](https://cli.angular.io). To check if it installed correctly, you can use the ```ng --version``` command in your command prompt. The version used for this tutorial is version 1.7.3.
+You can find install instructions and learn the basics of Angular CLI at [https://cli.angular.io](https://cli.angular.io). To check if it installed correctly, you can use the `ng --version` command in your command prompt. The version used for this tutorial is version 1.7.3.
 
 {% img blog/build-crud-app-aspnetcore-angular/angular-cli.jpg alt:"Angular CLI version output" width:"600" %}{: .center-image }
 
 In order to build the client side application, create a new folder called **Frontend** next to the **Backend** folder. Move to the Frontend folder and use the command:
 
-```
+```sh
 ng new JoggingDiary
 ```
 
 This will create a folder called JoggingDiary and everything you need for an Angular 5 app. For the look and feel we will just use Bootstrap. Simply add the bootstrap package using npm:
 
-```
+```sh
 cd JoggingDiary
 npm install bootstrap --save
 ```
@@ -325,7 +329,8 @@ And add it to the ```styles.css``` file:
 ```
 
 You can run the application directly by running the command:
-```
+
+```sh
 ng serve
 ```
 
@@ -334,7 +339,7 @@ and visiting **http://localhost:4200** in your web browser. You should see the b
 {% img blog/build-crud-app-aspnetcore-angular/angular-initial-project.png alt:"Initial Angular project template" width:"600" %}{: .center-image }
 
 
-If you take a look at the ```index.html``` file, you will notice that everything looks like classic HTML:
+If you take a look at the `index.html` file, you will notice that everything looks like classic HTML:
 
 ```html
 <!doctype html>
@@ -353,7 +358,7 @@ If you take a look at the ```index.html``` file, you will notice that everything
 </html>
 ```
 
-Except the ```<app-root>``` tag. This one is not in the HTML specification, and is in fact a part of Angular 5.
+Except the `<app-root>` tag. This one is not in the HTML specification, and is in fact a part of Angular 5.
 
 There are some Angular 5 building blocks you should understand before we go any further:
 
@@ -371,14 +376,15 @@ In your application you will have a few components, which you'll need to add:
 
 Components can easily be added again by using angular-cli and the `ng generate component` command. Move into the JoggingDiary folder and and add some components:
 
-```
+```sh
 ng generate component Home
 ng generate component GridJogging
 ng generate component AddOrUpdateJogging
 ```
 
-Add routing to your application in the ```app.module.ts``` file:
-```javascript
+Add routing to your application in the `app.module.ts` file:
+
+```js
 import { RouterModule, Routes } from '@angular/router';
 
 
@@ -401,7 +407,7 @@ const appRoutes: Routes = [
 
 For more details on Angular routing you can check their official documentation. For our purposes, just know that whenever a user comes to the base URL(`path == ''`), the router will load the `HomeComponent`.
 
-The root component is always loaded. However, the components defined in the router are loaded into a special placeholder that is in the root component HTML, defined by the ```<router-outlet>```. Change the ```app.component.html``` file to:
+The root component is always loaded. However, the components defined in the router are loaded into a special placeholder that is in the root component HTML, defined by the `<router-outlet>`. Change the `app.component.html` file to:
 
 ```html
 <div class="container">
@@ -411,11 +417,11 @@ The root component is always loaded. However, the components defined in the rout
 <router-outlet></router-outlet>
 ```
 
-This will make sure that the header and the horizontal rule are shown in every screen, and the ```<router-outlet></router-outlet>``` placeholder will be replaced by the content of the active view.
+This will make sure that the header and the horizontal rule are shown in every screen, and the `<router-outlet></router-outlet>` placeholder will be replaced by the content of the active view.
 
 Let's start with the GridJogging component first. Initially it looks like this:
 
-```javascript
+```js
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -441,9 +447,9 @@ Your components will display data from the backend, and also send changes about 
 ng generate service Workout
 ```
 
-This generates the ```workout.service.ts``` file and ```workout.service.spec.ts``` file. Change the ```workout.service.ts``` to:
+This generates the `workout.service.ts` file and `workout.service.spec.ts` file. Change the `workout.service.ts` to:
 
-```javascript
+```js
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 
@@ -479,7 +485,7 @@ Note that we are importing `HttpClient` and `HttpHeaders` from `@angular/common/
 
 We also need to update the `app.module.ts` to include the HttpClient module and the WorkoutService:
 
-```javascript
+```js
 // ...
 import { WorkoutService } from './workout.service';
 import { HttpClientModule } from '@angular/common/http';
@@ -502,7 +508,7 @@ import { HttpClientModule } from '@angular/common/http';
 export class AppModule { }
 ```
 
-Next, build the HTML that will display the actual data on screen. You can add a column that will display average speed. Edit the template of the GridJogging component (```grid-jogging-component.html```):
+Next, build the HTML that will display the actual data on screen. You can add a column that will display average speed. Edit the template of the GridJogging component (`grid-jogging-component.html`):
 
 {% raw %}
 ```html
@@ -540,14 +546,14 @@ The {% raw %}`{{handlebars}}`{% endraw %} are just a placeholder for data popula
 Filters were added for data formatting. You can read more about the [date filter](https://angular.io/api/common/DatePipe) and the [number filter](https://angular.io/api/common/DecimalPipe) in the Angular docs.
 
 Do note we need to include Pipes in the `app.module.ts`:
-```javascript
+```js
 import { DecimalPipe } from '@angular/common';
 import { DatePipe } from '@angular/common';
 ```
 
 It is necessary to have the Home component get the actual data from the `WorkoutService`. In the `home.component.ts` add the service:
 
-```javascript
+```js
 import { WorkoutService } from '../workout.service'
 
 // ...
@@ -584,7 +590,7 @@ Now all that's left is to edit the template of our Home component and add the Gr
 <app-grid-jogging [joggingData]="joggingData"></app-grid-jogging>
 ```
 
-Note how the input parameter ```[joggingData]``` which is defined in the GridJogging component will get the value of the `joggingData` variable defined in the Home component. You can edit the styling of just this component without affecting the styling of any other component. Simply add some code to the ```grid-jogging.component.css``` file:
+Note how the input parameter `[joggingData]` which is defined in the GridJogging component will get the value of the `joggingData` variable defined in the Home component. You can edit the styling of just this component without affecting the styling of any other component. Simply add some code to the `grid-jogging.component.css` file:
 
 ```css
 table {
@@ -624,7 +630,7 @@ You will notice the `[(ngModel)]` tag. This indicates a two-way binding between 
 
 For this to work, in the `app.module.ts` we need to import the Forms module:
 
-```javascript
+```js
 import { FormsModule } from '@angular/forms';
 
 //...
@@ -639,7 +645,7 @@ import { FormsModule } from '@angular/forms';
 
 In Angular, in order to raise an event (and don't think of these events as classic Javascript events) we need to have an output parameter. This output parameter will return an EventEmitter. Also, you'll need a function that will emit the new data when "Save" is clicked. You'll also need an input parameter `joggingInfo` because you'll use the same component for adding and updating. So if the parameter passed here has an ID, then you are dealing with an update operation, otherwise it is a create operation. In this component code add:
 
-```javascript
+```js
 import { Component, EventEmitter, Input, Output, OnInit } from '@angular/core';
 
 // ...
@@ -690,7 +696,7 @@ When adding this component to your home component's HTML change the `home.compon
 
 Now add a public function `createOrUpdateJogging` to the `home.component.ts` that subscribes to the `workoutService`. Also, add a method that creates an empty jogging record and initialize the `currentJogging` property in the constructor:
 
-```javascript
+```js
 constructor ( public oktaAuth: OktaAuthService, private workoutService: WorkoutService) {
   //...
   this.currentJogging = this.setInitialValuesForJoggingData();
@@ -729,13 +735,13 @@ This code checks if the record passed to the function exists in the `joggingData
 
 To simplify, I'm using [Lodash](https://lodash.com/) through `npm`:
 
-```
+```sh
 npm install --save lodash
 ```
 
-You need to add Lodash both in ```app.module.ts``` and ```home.component.ts```:
+You need to add Lodash both in `app.module.ts` and `home.component.ts`:
 
-```javascript
+```js
 import * as _ from 'lodash';
 ```
 
@@ -747,7 +753,7 @@ Update the `AddOrUpdateJoggingComponent` to change the title based on whether a 
 ```
 
 So, from your grid component there are a few more things missing. The "New" button does not do anything, nor do the links for Edit and Delete. To solve for this, add these functions:
-```javascript
+```js
 import { Component, EventEmitter, Input, Output, OnInit } from '@angular/core';
 
 // ...
@@ -777,7 +783,7 @@ export class GridJoggingComponent implements OnInit {
 
 And now we just connect it to the AddOrUpdateComponent and `workoutService` inside the Home component, like we did earlier:
 
-```javascript
+```js
 // ...
 
 public editClicked = function(record) {
@@ -817,16 +823,17 @@ Log in to your Okta account, or create one if you don't have one. Navigate to Ap
 {% img blog/build-crud-app-aspnetcore-angular/okta-app-settings.jpg alt:"Okta Application settings" width:"600" %}{: .center-image }
 
 After creating the application, your client ID will be displayed on the General tab. You'll need this client ID in a moment, so be sure to make note of it.
+
 ### Connect Okta to Your Angular Application
 Next, you want to add the Okta Angular SDK:
 
-```
+```sh
 npm install --save @okta/okta-angular
 ```
 
 You need to provide the data form your application set up in Okta into your root module. Add a config object like this:
 
-```javascript
+```js
 const config = {
   issuer: 'https://{yourOktaDomain}/oauth2/default',
   redirectUri: 'http://localhost:4200/implicit/callback',
@@ -837,7 +844,7 @@ const config = {
 
 Notice you are redirecting a successful login to the `http://localhost:4200/implicit/callback` route. This route does not exist yet, so you'll need to add it along with `OktaAuthModule` and the `OktaCallbackComponent` to your `app.module.ts`:
 
-```javascript
+```js
 // ...
 
 import {
@@ -874,7 +881,7 @@ And that's it! Your Angular application is using Okta for authentication and aut
 
 When you are authenticated with Okta (as with any OpenID Connect provider), you need to send your token in an authorization header on each HTTP request. In order to avoid adding code to every HTTP request in every service, you can create an HTTP interceptor. This will "intercept" every HTTP request and add the authorization header to it. Create a `/src/app/auth.interceptor.ts` file:
 
-```javascript
+```js
 import { Injectable } from '@angular/core';
 import { HttpRequest, HttpHandler, HttpEvent, HttpInterceptor } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
@@ -917,13 +924,11 @@ export class AuthInterceptor implements HttpInterceptor {
     return Observable.fromPromise(this.oktaAuth.getAccessToken());
   }
 }
-
-
 ```
 
 Make sure to import this interceptor in `app.module.ts`:
 
-```javascript
+```js
 // ...
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AuthInterceptor } from './auth.interceptor';
@@ -941,7 +946,7 @@ import { AuthInterceptor } from './auth.interceptor';
 })
 ```
 
-In order for the authentication to work, we will make the Home component display a message with a "Log in" button if you are not authenticated, and add a "Logout" button if you are. Update the `home.component.html`:
+In order for the authentication to work, we will make the Home component display a message with a **Log in** button if you are not authenticated, and add a **Logout** button if you are. Update the `home.component.html`:
 
 ```html
 <div class="container" *ngIf="!isAuthenticated">
@@ -974,7 +979,7 @@ In order for the authentication to work, we will make the Home component display
 
 In the Home component we need to import `OktaAuth` service. OktaAuth has a `isAuthenticated()` method which returns an observable. So, inside the component you need to get the initial value and subscribe to the changes. This is done in the constructor. The result of these operations will be exposed to the template through a `public isAuthenticated` property:
 
-```javascript
+```js
 import { OktaAuthService } from '@okta/okta-angular';
 
 // ...
@@ -1001,11 +1006,11 @@ export class HomeComponent {
 
 ```
 
-When you open the app and are not logged in, you'll see the demo text and the "Log in" button:
+When you open the app and are not logged in, you'll see the demo text and the **Log in** button:
 
 {% img blog/build-crud-app-aspnetcore-angular/app-with-login.png alt:"App running with login button" width:"600" %}{: .center-image }
 
-When you click "Login" you should get to an Okta login interface:
+When you click **Log in** you should get to an Okta login interface:
 
 {% img blog/build-crud-app-aspnetcore-angular/okta-login.jpg alt:"Okta login screen" width:"600" %}{: .center-image }
 
@@ -1018,7 +1023,7 @@ You want to make sure that your API can only be accessed by a user that was auth
 
 Add the `JwtBearer` authentication in `Startup.cs`.
 
-```csharp
+```cs
 services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     .AddJwtBearer(options =>
     {
@@ -1029,7 +1034,7 @@ services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
 
 In the configure method of the same file we need to add a `app.UseAuthentication();` command to tell our server application that authentication will be used. Note that this should come before `app.UseMvc();`:
 
-```csharp
+```cs
 app.UseCors("CorsPolicy");
 
 app.UseAuthentication();
@@ -1039,7 +1044,7 @@ app.UseMvc();
 
 And thus, you have secured your API. Now you can add the `[Authorize]` attribute to any controller or method you wish to make unavailable to unauthorized users.
 
-```csharp
+```cs
 [Produces("application/json")]
 [Route("api/Workouts")]
 [Authorize]
@@ -1053,21 +1058,21 @@ So, let's recap. You've now built an application that has user authentication an
 
 The only thing left is to make sure is that the logged in user only has access to their own records. Expand the model in `Workout.cs` by adding an additional property `UserId`. The Angular application does not need this property, so we will add a [JsonIgnore] data annotation so it is not sent to the client.
 
-```csharp
+```cs
 [JsonIgnore]
 public string UserId { get; set; }
 ```
 
 This information needs to be stored in the database, so add another migration using the Package Manager Console, and update the database:
 
-```
+```sh
 Add-Migration AddedUserIdToWorkout
 Update-Database
 ```
 
 Update the controller to make sure that all checks around the user's ID are carried out properly.
 
-```csharp
+```cs
 // GET: api/Workouts
 [HttpGet]
 public async Task<IEnumerable<Workout>> GetWorkout()

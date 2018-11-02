@@ -7,6 +7,7 @@ tags: [spring boot, security, snyk, https, hsts, csrf, xss, csp, content securit
 tweets:
 - "Spring Boot is an excellent way to build Java applications with the @springframework. Want to learn how to secure them? @mraible and @sjmaple give you some advice in 10 Excellent Ways to Secure your Spring Boot Application →"
 - "10 Excellent Ways to Secure Your Spring Boot Application, by @Java_Champions @sjmaple and @mraible. Thanks to @rob_winch and @rdegges for reviewing and helping with this post!"
+image: blog/featured/okta-java-skew.jpg
 ---
 
 Spring Boot has dramatically simplified the development of Spring applications. Its autoconfiguration and starter dependencies reduce the amount of code and configuration you need to begin an app. If you were used to Spring and lots of XML back in the day, Spring Boot is a breath of fresh air.
@@ -108,7 +109,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 }
 ```
 
-If you're using Angular, this is all you need to do. If you're using React, you'll need to [read the `XSRF-TOKEN` cookie and send it back as an `X-XSRF-TOKEN` header](/blog/2018/07/19/simple-crud-react-and-spring-boot#modify-react-handle-csrf-and-be-identity-aware).
+If you're using Angular, this is all you need to do. If you're using React, you'll need to [read the `XSRF-TOKEN` cookie and send it back as an `X-XSRF-TOKEN` header](/blog/2018/07/19/simple-crud-react-and-spring-boot#modify-react-to-handle-csrf-and-be-identity-aware).
 
 Spring Security automatically adds a `secure` flag to the `XSRF-TOKEN` cookie when the request happens over HTTPS. Spring Security doesn't use the `SameSite=strict` flag for CSRF cookies, but it does when using Spring Session or WebFlux session handling. It makes sense for session cookies since it's being used to identify the user. It doesn't provide much value for CSRF cookies since the CSRF token needs to be in the request too.
 
