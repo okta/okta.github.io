@@ -188,11 +188,8 @@ This class has a test at `src/test/java/com/example/demo/DemoApplicationTests.ja
 package com.example.demo;
 
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.junit.jupiter.SpringExtension;
 
-@ExtendWith(SpringExtension.class)
 @SpringBootTest
 public class DemoApplicationTests {
 
@@ -501,11 +498,9 @@ package com.example.demo;
 
 import lombok.extern.log4j.Log4j2;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.data.mongo.DataMongoTest;
 import org.springframework.context.annotation.Import;
-import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.util.StringUtils;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
@@ -517,19 +512,18 @@ import java.util.function.Predicate;
 @Log4j2
 @DataMongoTest // <1>
 @Import(ProfileService.class) // <2>
-@ExtendWith(SpringExtension.class)  // <3>
 public class ProfileServiceTest {
 
     private final ProfileService service;
     private final ProfileRepository repository;
 
-    public ProfileServiceTest(@Autowired ProfileService service, // <4>
+    public ProfileServiceTest(@Autowired ProfileService service, // <3>
                               @Autowired ProfileRepository repository) {
         this.service = service;
         this.repository = repository;
     }
 
-    @Test // <5>
+    @Test // <4>
     public void getAll() {
         Flux<Profile> saved = repository.saveAll(Flux.just(new Profile(null, "Josh"), new Profile(null, "Matt"), new Profile(null, "Jane")));
 
@@ -538,11 +532,11 @@ public class ProfileServiceTest {
         Predicate<Profile> match = profile -> saved.any(saveItem -> saveItem.equals(profile)).block();
 
         StepVerifier
-            .create(composite) // <6>
-            .expectNextMatches(match)  // <7>
+            .create(composite) // <5>
+            .expectNextMatches(match)  // <6>
             .expectNextMatches(match)
             .expectNextMatches(match)
-            .verifyComplete(); // <8>
+            .verifyComplete(); // <7>
     }
 
     @Test
@@ -592,12 +586,11 @@ public class ProfileServiceTest {
 ----
 <1> the Spring Boot test slice for MongoDB testing
 <2> we want to add, in addition to all the MongoDB functionality, our custom service for testing
-<3> This annotation tells JUnit 5 to involve the `SpringExtension` class when running this test. `SpringExtension` in turn manages instances of the class under test. We can easily inject dependencies from Spring into our test classes. We can even inject them into the constructor! The extension is what integrates Spring with JUnit 5.
-<4> Look ma! Constructor injection in a unit test!
-<5> Make sure you're using the new `org.junit.jupiter.api.Test` annotation from JUnit 5.
-<6> In this unit test we setup state in one publisher (`saved`).
-<7> ...and then assert things about that state in the various `expectNextMatches` calls
-<8> Make sure to call `verifyComplete`! Otherwise, nothing will happen... and that makes me sad.
+<3> Look ma! Constructor injection in a unit test!
+<4> Make sure you're using the new `org.junit.jupiter.api.Test` annotation from JUnit 5.
+<5> In this unit test we setup state in one publisher (`saved`).
+<6> ...and then assert things about that state in the various `expectNextMatches` calls
+<7> Make sure to call `verifyComplete`! Otherwise, nothing will happen... and that makes me sad.
 ====
 
 We only walked through one test because the rest are unremarkable and similar. You can run `mvn test` to confirm that the tests work as expected.
@@ -904,12 +897,10 @@ package com.example.demo;
 
 import lombok.extern.log4j.Log4j2;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mockito;
 import org.springframework.boot.test.autoconfigure.web.reactive.WebFluxTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
-import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.reactive.server.WebTestClient;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
@@ -918,7 +909,6 @@ import java.util.UUID;
 
 @Log4j2
 @WebFluxTest // <1>
-@ExtendWith(SpringExtension.class)
 public abstract class AbstractBaseProfileEndpoints {
 
     private final WebTestClient client; // <2>
@@ -1293,10 +1283,8 @@ package com.example.demo;
 import lombok.extern.log4j.Log4j2;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
 import org.reactivestreams.Publisher;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.web.reactive.function.BodyInserters;
 import org.springframework.web.reactive.function.client.WebClient;
 import org.springframework.web.reactive.socket.WebSocketMessage;
@@ -1308,13 +1296,10 @@ import reactor.core.publisher.Mono;
 
 import java.net.URI;
 import java.util.UUID;
-import java.util.concurrent.Executor;
-import java.util.concurrent.Executors;
 import java.util.concurrent.atomic.AtomicLong;
 
 @Log4j2
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.DEFINED_PORT) // <1>
-@ExtendWith(SpringExtension.class)
 class WebSocketConfigurationTest {
 
     // <2>
@@ -1587,4 +1572,5 @@ Like what you learned today? Follow https://twitter.com/oktadev[@oktadev], like 
 
 **Changelog:**
 
+* Nov 6, 2018: Updated to remove `@ExtendWith(SpringExtension.class)` annotation. It's no longer necessary if you're a Spring Boot testing annotation. You can see the example app changes in https://github.com/oktadeveloper/okta-spring-webflux-react-example/pull/6[okta-spring-webflux-react-example#6]; changes to this post can be viewed in https://github.com/okta/okta.github.io/pull/2460[okta.github.io#2460].
 * Nov 5, 2018: Updated to use Spring Boot 2.1 GA release. You can see the example app changes in https://github.com/oktadeveloper/okta-spring-webflux-react-example/pull/5[okta-spring-webflux-react-example#5]; changes to this post can be viewed in https://github.com/okta/okta.github.io/pull/2458[okta.github.io#2458].
