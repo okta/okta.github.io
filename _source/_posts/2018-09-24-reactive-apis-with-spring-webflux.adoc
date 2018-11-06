@@ -1572,5 +1572,5 @@ Like what you learned today? Follow https://twitter.com/oktadev[@oktadev], like 
 
 **Changelog:**
 
-* Nov 6, 2018: Updated to remove `@ExtendWith(SpringExtension.class)` annotation. It's no longer necessary if you're a Spring Boot testing annotation. You can see the example app changes in https://github.com/oktadeveloper/okta-spring-webflux-react-example/pull/7[okta-spring-webflux-react-example#7]; changes to this post can be viewed in https://github.com/okta/okta.github.io/pull/2463[okta.github.io#2463].
+* Nov 6, 2018: Updated to remove the `@ExtendWith(SpringExtension.class)` annotation. It's no longer necessary if you're a Spring Boot testing annotation. You can see the example app changes in https://github.com/oktadeveloper/okta-spring-webflux-react-example/pull/7[okta-spring-webflux-react-example#7]; changes to this post can be viewed in https://github.com/okta/okta.github.io/pull/2463[okta.github.io#2463].
 * Nov 5, 2018: Updated to use Spring Boot 2.1 GA release. You can see the example app changes in https://github.com/oktadeveloper/okta-spring-webflux-react-example/pull/5[okta-spring-webflux-react-example#5]; changes to this post can be viewed in https://github.com/okta/okta.github.io/pull/2458[okta.github.io#2458].
