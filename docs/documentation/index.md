@@ -1,10 +1,9 @@
 ---
+component: Documentation
 title: Documentation | Okta Developer
-layout: Documentation
 meta:
   - name: description
-    content: Documentation homepage
-
+    content: Secure, scalable, and highly available authentication and user management for any app.
 languages:
   - name: android
     link: /code/android
@@ -24,6 +23,9 @@ languages:
   - name: vue.js
     link: /code/vue
     icon: code-vue-32
+  - name: Go
+    link: /code/go
+    icon: code-go-32
   - name: java
     link: /code/java
     icon: code-java-32
@@ -84,7 +86,7 @@ sections:
       links:
        - title: API Products Change Log
          description: See what's new in API Products releases.
-         link: /docs/change-log
+         link: /docs/change-log/
 
     - title: How-To
       links:
@@ -107,17 +109,15 @@ sections:
     - title: Standards
       links:
         - title: SAML
-          description: Enable SCIM-based provisioning from Okta to your application.
+          description: Enable SSO for your web and mobile applications with SAML.
           link: /standards/SAML/
         - title: SCIM Provisioning with Lifecycle Management
-          description: Enable SSO for your web and mobile applications with SAML.
+          description: Enable SCIM-based provisioning from Okta to your application.
           link: /standards/SCIM/
-promo_banner: 
+promo_banner:
   show: true
   promo_url: https://okta.com
   promo_text: From the front matter!
   cta_text: Click Me
 ---
-
-This is the documentation page, it overrides the global promo banner with front matter.
 
