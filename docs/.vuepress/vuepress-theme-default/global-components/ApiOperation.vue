@@ -1,7 +1,7 @@
 <template>
   <p>
     <span
-      :class="('api-uri-template api-uri-' + method )">
+      :class="('api-uri-template api-uri-' + method.toLowerCase() )">
        <span class="api-label">
         {{ method | uppercase }}
       </span>
