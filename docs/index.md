@@ -11,7 +11,7 @@ Explore the Apps API: [![Run in Postman](https://run.pstmn.io/button.svg)](https
 ### Add Application
 {:.api .api-operation}
 
-{% api_operation post /api/v1/apps %}
+<ApiOperation method="post" url="/api/v1/apps" />
 
 Adds a new application to your Okta organization.
 

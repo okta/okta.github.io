@@ -4,7 +4,8 @@
   "description": "NPM dependencies for testing and building developer.okta.com",
   "scripts": {
     "dev": "vuepress dev docs",
-    "build": "vuepress build docs"
+    "build": "vuepress build docs",
+    "setup-link": "cd docs/.vuepress/vuepress-theme-default && yarn link"
   },
   "repository": {
     "type": "git",

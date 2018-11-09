@@ -1,0 +1,33 @@
+<template>
+  <p>
+    <span
+      :class="('api-uri-template api-uri-' + method )">
+       <span class="api-label">
+        {{ method | uppercase }}
+      </span>
+       {{ url }}
+     </span>
+  </p>
+</template>
+<style lang="scss">
+</style>
+<script>
+  export default {
+    name: 'ApiOperation',
+    props: {
+      method: {
+        type: String,
+        default: 'get'
+      },
+      url: {
+        type: String,
+        default: '',
+      }
+    },
+    filters: {
+      uppercase: function (value) {
+        return value.toUpperCase()
+      }
+    }
+  }
+</script>
