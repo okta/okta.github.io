@@ -24,7 +24,7 @@ You will need [Java 8](http://www.oracle.com/technetwork/java/javase/downloads/j
 
 ## Build an API with Spring Boot 2.1
 
-To get started with [Spring Boot](https://projects.spring.io/spring-boot/) 2.1, head on over to [start.spring.io](https://start.spring.io) and create a new project that uses Java, Spring Boot version 2.1.0 M2, and options to create a simple API: JPA, H2, Rest Repositories, Lombok, and Web. In this example, I've added Actuator as well, since it's a [very cool feature](https://dzone.com/articles/spring-boot-actuator-a-complete-guide) of Spring Boot.
+To get started with [Spring Boot](https://projects.spring.io/spring-boot/) 2.1, head on over to [start.spring.io](https://start.spring.io) and create a new project that uses Java, Spring Boot version 2.1.0, and options to create a simple API: JPA, H2, Rest Repositories, Lombok, and Web. In this example, I've added Actuator as well, since it's a [very cool feature](https://dzone.com/articles/spring-boot-actuator-a-complete-guide) of Spring Boot.
 
 {% img blog/spring-boot-2-angular-7/start.spring.io.png alt:"Spring Initializr" width:"800" %}{: .center-image }
 
@@ -160,7 +160,7 @@ If you restart your server app and hit `http://localhost:8080/cool-cars` with yo
 $ http localhost:8080/cool-cars
 HTTP/1.1 200
 Content-Type: application/json;charset=UTF-8
-Date: Fri, 17 Aug 2018 15:10:33 GMT
+Date: Fri, 02 Nov 2018 10:36:51 GMT
 Transfer-Encoding: chunked
 ```
 ```json
@@ -196,10 +196,10 @@ You can learn the basics of Angular CLI at [cli.angular.io](https://cli.angular.
 
 {% img blog/spring-boot-2-angular-7/cli.angular.io.png alt:"Angular CLI Homepage" width:"800" %}{: .center-image }
 
-Install the latest version of Angular CLI, which is version 6.2.0-beta.3 at the time of this writing.
+Install the latest version of Angular CLI, which is version 7.0.4 at the time of this writing.
 
 ```bash
-npm install -g @angular/cli@v6.2.0-beta.3
+npm install -g @angular/cli@7.0.4
 ```
 
 Create a new project in the umbrella directory you created. Again, mine is named `okta-spring-boot-2-angular-7-example`.
@@ -208,24 +208,15 @@ Create a new project in the umbrella directory you created. Again, mine is named
 ng new client
 ```
 
+When prompted to install Angular routing, type "Y". For the stylesheet format, choose "CSS" (the default).
+
 After the client is created, navigate into its directory, remove its Git configuration, and install Angular Material.
 
 ```bash
 cd client
-npm install @angular/material@6.4.6 @angular/cdk@6.4.6
+rm -rf .git
+npm install @angular/material@7.0.2 @angular/cdk@7.0.2
 ```
-
-Run `npm audit fix --force` to fix outdated dependencies.
-
-```bash
-$ npm audit fix --force
-npm WARN using --force I sure hope you know what you are doing.
-...
-```
-
-Edit `package.json` and change all instances of `^6.1.0` to `^7.0.0-beta.2` to upgrade to Angular 7.
-
-**NOTE:** If this post isn't updated when Angular 7.0 is out, please leave a comment and remind me to update it.
 
 You'll use Angular Material's components to make the UI look better, especially on mobile phones. If you'd like to learn more about Angular Material, see [material.angular.io](https://material.angular.io). It has extensive documentation on its various components and how to use them. The paint bucket in the top right corner will allow you to preview available theme colors.
 
@@ -236,14 +227,7 @@ You'll use Angular Material's components to make the UI look better, especially 
 Use Angular CLI to generate a car service that can talk to the Cool Cars API.
 
 ```bash
-ng g s car
-```
-
-Move the generated files into the `client/src/app/shared/car` directory.
-
-```bash
-mkdir -p src/app/shared/car
-mv src/app/car.service.* src/app/shared/car/.
+ng g s shared/car/car
 ```
 
 Update the code in `car.service.ts` to fetch the list of cars from the server.
@@ -265,7 +249,7 @@ export class CarService {
 }
 ```
 
-One of the changes I like in Angular 6+ is your services can now register themselves. In previous versions, when you annotated a class with `@Injectable()`, you had to register it as a provider in a module or component to use it. In Angular 6, you can specify `providedIn` and it will auto-register itself when the app bootstraps.
+One of the changes I like in Angular 6+ is your services can now register themselves. In previous versions, when you annotated a class with `@Injectable()`, you had to register it as a provider in a module or component to use it. In Angular 6+, you can specify `providedIn` and it will auto-register itself when the app bootstraps.
 
 Open `src/app/app.module.ts`, and add `HttpClientModule` as an import.
 
@@ -278,6 +262,7 @@ import { HttpClientModule } from '@angular/common/http';
   ],
   imports: [
     BrowserModule,
+    AppRoutingModule,
     HttpClientModule
   ],
   providers: [],
@@ -332,10 +317,13 @@ Update `client/src/app/app.component.html` to have the `app-car-list` element.
 {% raw %}
 ```html
 <div style="text-align:center">
-  <h1>Welcome to {{title}}!</h1>
+  <h1>
+    Welcome to {{ title }}!
+  </h1>
 </div>
 
 <app-car-list></app-car-list>
+<router-outlet></router-outlet>
 ```
 {% endraw %}
 
@@ -385,6 +373,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
   ...
   imports: [
     BrowserModule,
+    AppRoutingModule,
     HttpClientModule,
     BrowserAnimationsModule,
     MatButtonModule,
@@ -406,6 +395,7 @@ Update `client/src/app/app.component.html` to use the toolbar component.
 </mat-toolbar>
 
 <app-car-list></app-car-list>
+<router-outlet></router-outlet>
 ```
 {% endraw %}
 
@@ -414,7 +404,7 @@ Update `client/src/app/car-list/car-list.component.html` to use the card layout 
 {% raw %}
 ```html
 <mat-card>
-  <mat-card-header>Car List</mat-card-header>
+  <mat-card-title>Car List</mat-card-title>
   <mat-card-content>
     <mat-list>
       <mat-list-item *ngFor="let car of cars">
@@ -554,7 +544,7 @@ to add a new car.
 {% raw %}
 ```html
 <mat-card>
-  <mat-card-header>Car List</mat-card-header>
+  <mat-card-title>Car List</mat-card-title>
   <mat-card-content>
     <mat-list>
       <mat-list-item *ngFor="let car of cars">
@@ -571,13 +561,30 @@ to add a new car.
 ```
 {% endraw %}
 
-In `client/src/app/app.module.ts`, add routes, import the `FormsModule`, and import `RouterModule`.
+In `client/src/app/app.module.ts`, import the `FormsModule`.
 
 ```typescript
 import { FormsModule } from '@angular/forms';
-import { RouterModule, Routes } from '@angular/router';
 
-const appRoutes: Routes = [
+@NgModule({
+  ...
+  imports: [
+    ...
+    FormsModule
+  ],
+  ...
+})
+```
+
+In `client/src/app/app-routing.module.ts`, add routes for the `CarListComponent` and `CarEditComponent`.
+
+```typescript
+import { NgModule } from '@angular/core';
+import { Routes, RouterModule } from '@angular/router';
+import { CarListComponent } from './car-list/car-list.component';
+import { CarEditComponent } from './car-edit/car-edit.component';
+
+const routes: Routes = [
   { path: '', redirectTo: '/car-list', pathMatch: 'full' },
   {
     path: 'car-list',
@@ -594,14 +601,10 @@ const appRoutes: Routes = [
 ];
 
 @NgModule({
-  ...
-  imports: [
-    ...
-    FormsModule,
-    RouterModule.forRoot(appRoutes)
-  ],
-  ...
+  imports: [RouterModule.forRoot(routes)],
+  exports: [RouterModule]
 })
+export class AppRoutingModule { }
 ```
 
 Modify `client/src/app/car-edit/car-edit.component.ts` to fetch a car's information from the id passed on the URL, and to add methods for saving and deleting.
@@ -711,7 +714,7 @@ Put a little padding around the image by adding the following CSS to `client/src
 }
 ```
 
-Modify `client/src/app/app.component.html` and replace `<app-car-list></app-car-list>` with `<router-outlet></router-outlet>`. This change is necessary or routing between components won't work.
+Modify `client/src/app/app.component.html` and remove `<app-car-list></app-car-list>`.
 
 {% raw %}
 ```html
@@ -743,12 +746,12 @@ On the server side, you can lock things down with Okta's Spring Boot Starter, wh
 <dependency>
     <groupId>com.okta.spring</groupId>
     <artifactId>okta-spring-boot-starter</artifactId>
-    <version>0.6.0</version>
+    <version>0.6.1</version>
 </dependency>
 <dependency>
     <groupId>org.springframework.security.oauth.boot</groupId>
     <artifactId>spring-security-oauth2-autoconfigure</artifactId>
-    <version>2.0.3.RELEASE</version>
+    <version>2.1.0.RELEASE</version>
 </dependency>
 ```
 
@@ -791,7 +794,7 @@ The Okta Angular SDK is a wrapper around [Okta Auth JS](https://github.com/okta/
 To install it, run the following command in the `client` directory:
 
 ```bash
-npm install @okta/okta-angular@1.0.3
+npm install @okta/okta-angular@1.0.7
 ```
 
 In `client/src/app/app.module.ts`, add a `config` variable with the settings for your OIDC app.
@@ -804,23 +807,11 @@ const config = {
 };
 ```
 
-In this same file, you'll also need to add a new route for the `redirectUri` that points to the `OktaCallbackComponent`.
-
-```typescript
-import { OktaCallbackComponent, OktaAuthModule } from '@okta/okta-angular';
-
-const appRoutes: Routes = [
-  ...
-  {
-    path: 'implicit/callback',
-    component: OktaCallbackComponent
-  }
-];
-```
-
 Next, initialize and import the `OktaAuthModule`.
 
 ```typescript
+import { OktaAuthModule } from '@okta/okta-angular';
+
 @NgModule({
   ...
   imports: [
@@ -829,6 +820,20 @@ Next, initialize and import the `OktaAuthModule`.
   ],
   ...
 })
+```
+
+In `client/src/app/app-routing.module.ts`, you'll also need to add a new route for the `redirectUri` that points to the `OktaCallbackComponent`.
+
+```typescript
+import { OktaCallbackComponent } from '@okta/okta-angular';
+
+const routes: Routes = [
+  ...
+  {
+    path: 'implicit/callback',
+    component: OktaCallbackComponent
+  }
+];
 ```
 
 These are the three steps you need to set up an Angular app to use Okta. To make it easy to add a bearer token to HTTP
@@ -871,7 +876,7 @@ export class AuthInterceptor implements HttpInterceptor {
 To register this interceptor, add it as a provider in `client/src/app/app.module.ts`.
 
 ```typescript
-import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { AuthInterceptor } from './shared/okta/auth.interceptor';
 
 @NgModule({
@@ -951,10 +956,12 @@ Notice that this shows elements from the `car-list` component. To fix this, you 
 ng g c home
 ```
 
-Modify `client/src/app/app.module.ts` to update the routes.
+Modify `client/src/app/app-routing.module.ts` to update the routes.
 
 ```typescript
-const appRoutes: Routes = [
+import { HomeComponent } from './home/home.component';
+
+const routes: Routes = [
   {path: '', redirectTo: '/home', pathMatch: 'full'},
   {
     path: 'home',
@@ -1006,7 +1013,6 @@ export class HomeComponent implements OnInit {
     );
   }
 }
-
 ```
 
 Update `client/src/app/app.component.html`, so the Logout button redirects back to home when it's clicked.
@@ -1024,6 +1030,14 @@ Update `client/src/app/app.component.html`, so the Logout button redirects back 
 <router-outlet></router-outlet>
 ```
 {% endraw %}
+
+To make it so there's not a bottom border at the bottom of your content, make the `<mat-card>` element fill the screen by adding the following to `client/src/styles.css`.
+
+```css
+mat-card {
+  height: 100vh;
+}
+```
 
 Now you should be able to open your browser to http://localhost:4200 and click on the Login button. If you've configured everything correctly, you'll be redirected to Okta to log in.
 
@@ -1045,18 +1059,22 @@ import java.util.Collections;
 
 ...
 
-@Bean
-public FilterRegistrationBean<CorsFilter> simpleCorsFilter() {
-    UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
-    CorsConfiguration config = new CorsConfiguration();
-    config.setAllowCredentials(true);
-    config.setAllowedOrigins(Collections.singletonList("http://localhost:4200"));
-    config.setAllowedMethods(Collections.singletonList("*"));
-    config.setAllowedHeaders(Collections.singletonList("*"));
-    source.registerCorsConfiguration("/**", config);
-    FilterRegistrationBean<CorsFilter> bean = new FilterRegistrationBean<>(new CorsFilter(source));
-    bean.setOrder(Ordered.HIGHEST_PRECEDENCE);
-    return bean;
+public class DemoApplication {
+    // main() and init() methods
+    
+    @Bean
+    public FilterRegistrationBean<CorsFilter> simpleCorsFilter() {
+        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+        CorsConfiguration config = new CorsConfiguration();
+        config.setAllowCredentials(true);
+        config.setAllowedOrigins(Collections.singletonList("http://localhost:4200"));
+        config.setAllowedMethods(Collections.singletonList("*"));
+        config.setAllowedHeaders(Collections.singletonList("*"));
+        source.registerCorsConfiguration("/**", config);
+        FilterRegistrationBean<CorsFilter> bean = new FilterRegistrationBean<>(new CorsFilter(source));
+        bean.setOrder(Ordered.HIGHEST_PRECEDENCE);
+        return bean;
+    }
 }
 ```
 
@@ -1068,7 +1086,7 @@ You can see the full source code for the application developed in this tutorial 
 
 ## Learn More about Spring Boot and Angular
 
-It can be tough to keep up with fast-moving frameworks like Spring Boot and Angular. This article is meant to give you a jump start on the latest releases. Angular 7 is rumored to ship with a newer, faster renderer (codenamed: [Ivy Renderer](http://ivy.angular.io/)). For specific changes, see [Angular's changelog](https://github.com/angular/angular/blob/master/CHANGELOG.md). For Spring Boot, see its [2.1 Release Notes](https://github.com/spring-projects/spring-boot/wiki/Spring-Boot-2.1-Release-Notes).
+It can be tough to keep up with fast-moving frameworks like Spring Boot and Angular. This article is meant to give you a jump start on the latest releases. For specific changes in Angular 7, see [its changelog](https://github.com/angular/angular/blob/master/CHANGELOG.md). For Spring Boot, see its [2.1 Release Notes](https://github.com/spring-projects/spring-boot/wiki/Spring-Boot-2.1-Release-Notes).
 
 This article uses [Okta's Angular SDK](https://www.npmjs.com/package/@okta/okta-angular). To learn more about this project, or help improve it, [see its GitHub project](https://github.com/okta/okta-oidc-js/tree/master/packages/okta-angular). I'd love to make it even easier to use!
 
@@ -1080,4 +1098,8 @@ This blog has a plethora of Spring Boot and Angular tutorials. Here are some of 
 * [Angular Authentication with OpenID Connect and Okta in 20 Minutes](/blog/2017/04/17/angular-authentication-with-oidc)
 * [Build an Angular App with Okta's Sign-In Widget in 15 Minutes](/blog/2017/03/27/angular-okta-sign-in-widget)
 
-If you have any questions, please don't hesitate to leave a comment below, or ask us on our [Okta Developer Forums](https://devforum.okta.com/). Don't forget to follow us [on Twitter](https://twitter.com/oktadev) too!
+If you have any questions, please don't hesitate to leave a comment below, or ask us on our [Okta Developer Forums](https://devforum.okta.com/). Don't forget to follow us [on Twitter](https://twitter.com/oktadev) and [YouTube](https://www.youtube.com/channel/UC5AMiWqFVFxF1q9Ya1FuZ_Q) too!
+
+**Changelog:**
+
+* Nov 2, 2018: Updated to use Angular 7.0 and Spring Boot 2.1 GA releases. You can see the example app changes in [okta-spring-boot-2-angular-7-example#5](https://github.com/oktadeveloper/okta-spring-boot-2-angular-7-example/pull/5); changes to this post can be viewed in [okta.github.io#2456](https://github.com/okta/okta.github.io/pull/2456).

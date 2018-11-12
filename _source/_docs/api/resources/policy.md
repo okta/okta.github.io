@@ -185,10 +185,6 @@ HTTP 200:
 
 {% api_operation post /api/v1/policies %}
 
-#### Request Parameters
-
-The policy ID described in the [Policy Object](#PolicyObject) is required.
-
 ##### Request Example
 {:.api .api-request .api-request-example}
 
@@ -318,7 +314,7 @@ curl -v -X POST \
 -H "Content-Type: application/json" \
 -H "Authorization: SSWS ${api_token}" \
 -d '{
-  "type": "PASSWORD",
+  "type": "SIGN_ON",
   "name": "New Policy Rule",
   "conditions": {
     "people": {
@@ -340,7 +336,8 @@ curl -v -X POST \
     "signon": {
       "access": "ALLOW"
     }
-  }' \
+  }
+}' \
 "https://{yourOktaDomain}/api/v1/policies/{policyId}/rules"
 ~~~
 
@@ -731,18 +728,19 @@ This occurs because, even though requests coming from anywhere would match the A
 
 The Rules model defines several attributes:
 
-Parameter | Description | Data Type | Required | Default
-| --- | --- | --- | ---
-id | Identifier of the rule | String | No | Assigned
-type | Rule type. Valid values: `OKTA_SIGN_ON` or `PASSWORD` or `MFA_ENROLL` | String (Enum) | Yes |
-status | Status of the rule: `ACTIVE` or `INACTIVE` | String (Enum) | No | ACTIVE
-priority | Priority of the rule | Integer | No | Last / Lowest Priority
-system | This is set to 'true' on system rules, which cannot be deleted. | Boolean | No | false
-created | Timestamp when the rule was created | Date | No | Assigned
-lastUpdated | Timestamp when the rule was last modified | Date | No | Assigned
-conditions | Conditions for rule | <a href="#RuleConditionsObject">Conditions Object</a> | No |
-actions | Actions for rule | <a href="#RulesActionsObject">Rules Actions Objects</a> | No |
-_links | Hyperlinks | <a href="#RulesLinksObject">Links Object</a> | No |
+| Parameter   | Description                                                      | Data Type                                               | Required | Default                |
+|:------------|:-----------------------------------------------------------------|:--------------------------------------------------------|:---------|:-----------------------|
+| id          | Identifier of the rule                                           | String                                                  | No       | Assigned               |
+| type        | Rule type. Valid values: `SIGN_ON` or `PASSWORD` or `MFA_ENROLL` | String (Enum)                                           | Yes      |                        |
+| name        | Name of the rule                                                 | String                                                  | Yes      |                        |
+| status      | Status of the rule: `ACTIVE` or `INACTIVE`                       | String (Enum)                                           | No       | ACTIVE                 |
+| priority    | Priority of the rule                                             | Integer                                                 | No       | Last / Lowest Priority |
+| system      | This is set to 'true' on system rules, which cannot be deleted.  | Boolean                                                 | No       | false                  |
+| created     | Timestamp when the rule was created                              | Date                                                    | No       | Assigned               |
+| lastUpdated | Timestamp when the rule was last modified                        | Date                                                    | No       | Assigned               |
+| conditions  | Conditions for rule                                              | <a href="#RuleConditionsObject">Conditions Object</a>   | No       |                        |
+| actions     | Actions for rule                                                 | <a href="#RulesActionsObject">Rules Actions Objects</a> | No       |                        |
+| _links      | Hyperlinks                                                       | <a href="#RulesLinksObject">Links Object</a>            | No       |                        |
 
 ### Actions Objects
 {: #RulesActionsObject }

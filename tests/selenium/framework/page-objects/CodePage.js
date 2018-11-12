@@ -7,8 +7,9 @@ class CodePage extends BasePage {
   constructor(url) {
     super(url);
     this.$pageLoad = $('.Row');
-    this.$quickStart = element(by.cssContainingText('span', 'Authentication Quick Start Guide'));
-    this.$sampleApp = element(by.cssContainingText('span', 'Sample App'));
+    this.$quickStart = element(by.cssContainingText('span', 'Spring Quickstart'));
+    this.$sampleApp = element(by.cssContainingText('span', 'Okta Spring Boot Starter'));
+    this.$createAccountButton = element(by.cssContainingText('span', 'Create Free Account'));
     this.$$promoBannerLabel = $$('.DocsPromoBanner');
     this.setPageLoad(this.$pageLoad);
   }
@@ -19,6 +20,10 @@ class CodePage extends BasePage {
 
   hasSampleApp() {
     return this.$sampleApp.isPresent();
+  }
+
+  hasCreateAccountButton() {
+    return this.$createAccountButton.isPresent();
   }
 
   hasPromoBanner() {

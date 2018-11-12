@@ -5,8 +5,9 @@ author: mraible
 description: "This article shows you how to build a microservices architecture with Spring Boot, Netflix Eureka, Feign, and Hystrix."
 tags: [microservices, spring boot, spring cloud, netflix eureka, java]
 tweets:
-  - "Want to see how to build a microservices architecture with Spring Boot, Netflix Eureka, Feign, and Hystrix? We have just the 🎟 → "
-  - "Do you like good 🍺? If so, you'll 💙 this tutorial that shows you how to build a microservices architecture for microbrews! "
+  - "Want to see how to build a microservices architecture with Spring Boot, Netflix Eureka, Feign, and Hystrix? We have just the 🎟!"
+  - "Do you like good 🍺? If so, you'll 💙 this tutorial that shows you how to build a microservices architecture for microbrews!"
+image: blog/microservices-spring-boot/httpie-beers.png
 ---
 Adopting a microservice architecture provides unique opportunities to add failover and resiliency to your systems, so
 your components can handle load spikes and errors gracefully. Microservices make change less expensive too. It can also
@@ -196,7 +197,6 @@ assumes you're putting all classes in the same file.
 ```java
 @Data
 @AllArgsConstructor
-@NoArgsConstructor
 @Entity
 class Beer {
 
@@ -239,7 +239,6 @@ If you're using an editor that doesn't auto-import classes, here's the list of i
 ```java
 import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -653,6 +652,7 @@ or [create an issue on GitHub](https://github.com/oktadeveloper/spring-boot-micr
 
 **Changelog:**
 
+* Oct 11, 2018: Updated to use Spring Boot 2.0.5 and Spring Cloud Finchley SR1. See the example app changes in [spring-boot-microservices-example#20](https://github.com/oktadeveloper/spring-boot-microservices-example/pull/20); changes to this post can be viewed in [okta.github.io#2389](https://github.com/okta/okta.github.io/pull/2389).
 * May 11, 2018: Updated to use Spring Boot 2.0. See the example app changes in [spring-boot-microservices-example#18](https://github.com/oktadeveloper/spring-boot-microservices-example/pull/18); changes to this post can be viewed in [okta.github.io#2046](https://github.com/okta/okta.github.io/pull/2046).
 * Feb 8, 2018: Updated to use use Spring Boot 1.5.10, Angular CLI 1.6.7, and Angular 5.2.0. See the code changes in the [example app on GitHub](https://github.com/oktadeveloper/spring-boot-microservices-example/pull/10). Changes to this article can be viewed [in this pull request](https://github.com/okta/okta.github.io/pull/1739).
 * Jan 17, 2018: Updated to use latest client from [Build Your First Progressive Web Application with Angular and Spring Boot](/blog/2017/05/09/progressive-web-applications-with-angular-and-spring-boot). See the code changes in the [example app on GitHub](https://github.com/oktadeveloper/spring-boot-microservices-example/pull/6). Changes to this article can be viewed [in this pull request](https://github.com/okta/okta.github.io/pull/1637).

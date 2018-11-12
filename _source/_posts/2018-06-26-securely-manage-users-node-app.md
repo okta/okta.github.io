@@ -76,10 +76,11 @@ This is where the app is hosted. For now, just use `http://localhost:3000`. You 
 
 ### APP\_SECRET
 
-This just needs to be something random. The following command will generate some random text and add it to your `.env` file as the `APP_SECRET` variable.
+This just needs to be something random. The following commands will generate some random text and add it to your `.env` file as the `APP_SECRET` variable.
 
 ```bash
-echo "APP_SECRET=`openssl rand -base64 32`" >> .env
+npm install -g uuid-cli
+echo "APP_SECRET=`uuid`" >> .env
 ```
 
 ### CLIENT\_ID and CLIENT\_SECRET

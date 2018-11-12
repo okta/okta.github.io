@@ -10,7 +10,7 @@
     "pregenerate": "npm run clean",
     "generate": "cross-env PID_FINDER=okta_github_io JEKYLL_ENV=production bundle exec jekyll",
     "build-prod": "npm run generate build -- --verbose",
-    "start": "npm run generate serve -- --incremental",
+    "start": "npm run generate serve -- --incremental --future",
     "test-only": "protractor tests/selenium/conf.js",
     "stop": "if-env CI=true && exit 0 || (pkill -f 'okta_github_io|webdriver-manager/selenium')",
     "pretest": "npm run generate serve -- --no-watch & wait-on http://localhost:4000 && webdriver-manager update --gecko false",
@@ -18,7 +18,8 @@
     "posttest": "npm run stop",
     "markdown-lint": "node scripts/lint",
     "find-missing-slashes": "node scripts/find-missing-slashes",
-    "post-build-lint": "bash scripts/post-build-lint.sh"
+    "post-build-lint": "bash scripts/post-build-lint.sh",
+    "update-event-types": "bash scripts/update-event-types.sh"
   },
   "repository": {
     "type": "git",

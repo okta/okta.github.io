@@ -15,7 +15,7 @@ JavaScript can also be used outside the context of a browser, for anything from 
 
 Today, I'll show you how to create a REST API using Node.js, and secure it with OAuth 2.0 to prevent unwarranted requests. REST APIs are all over the web, but without the proper tools require a ton of boilerplate code. I'll show you how to use a couple of amazing tools that make it all a breeze, including Okta to implement the Client Credentials Flow, which securely connects two machines together without the context of a user.
 
-## Build Your Node Server
+## Build a RESTful Node API Server
 
 Setting up a web server in Node is quite simple using the [Express JavaScript library](https://expressjs.com/). Make a new folder that will contain your server.
 
@@ -163,7 +163,7 @@ $ curl localhost:3000 -i
 curl: (7) Failed to connect to localhost port 3000: Connection refused
 ```
 
-## Build Your REST API with Express, Sequelize, and Epilogue
+## Build Your REST API with Node, Express, Sequelize, and Epilogue
 
 Now that you have a working Express server, you can add a REST API. This is actually much simpler than you might think. The easiest way I've seen is by using [Sequelize](http://docs.sequelizejs.com/) to define your database schema, and [Epilogue](https://github.com/dchester/epilogue) to create some REST API endpoints with near-zero boilerplate.
 
@@ -278,7 +278,7 @@ $ curl localhost:3000/parts -s0 | json
 ]
 ```
 
-### What's Going On Here?
+### How the Node API Works
 
 Feel free to skip this section if you followed along with all that, but I did promise an explanation.
 

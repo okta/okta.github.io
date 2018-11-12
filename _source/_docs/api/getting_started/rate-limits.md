@@ -1,13 +1,13 @@
 ---
 layout: docs_page
-title: Rate Limiting at Okta
+title: Rate Limits at Okta
 weight: 4
 redirect_from:
   - "/docs/getting_started/design_principles"
 excerpt: Understand rate limits at Okta and learn how to design for efficient use of resources
 ---
 
-# Rate Limiting at Okta
+# Rate Limits at Okta
 
 The number of API requests for an organization is limited for all APIs in order to protect the service for all users.
 
@@ -26,6 +26,8 @@ If an org-wide rate limit is exceeded, an HTTP 429 status code is returned.
 You can anticipate hitting the rate limit by checking [Okta's rate limiting headers](#check-your-rate-limits-with-oktas-rate-limit-headers).
 
 Rate limits differ depending on the level of service you have purchased from Okta. See the [pricing page](https://developer.okta.com/pricing/) for more details.
+
+> If you have a One App or Enterprise organization, the admin console will display a banner and you will receive an email notification when your org reaches its rate limit.
 
 ### Okta API Endpoints and Per Minute Limits
 

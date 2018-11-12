@@ -23,6 +23,8 @@ Notes on the System Log API:
   * Event introspection and audit.
 * It is not intended to be used as a Database as a Service (DBaaS), or otherwise directly serve data to downstream consumers without an intermediate data store.
 
+For information on migrating from the Events API to the System Log API please see [Events API Migration](/use_cases/events-api-migration/).
+
 ## Getting Started
 
 The System Log API has one endpoint:
@@ -163,7 +165,7 @@ Each LogEvent object describes a single logged action or "event" performed by a 
      "authenticationProvider": String one of OKTA_AUTHENTICATION_PROVIDER, ACTIVE_DIRECTORY, LDAP, FEDERATION,
             SOCIAL, FACTOR_PROVIDER, Optional
           "credentialProvider": String one of OKTA_CREDENTIAL_PROVIDER, RSA, SYMANTEC, GOOGLE, DUO, YUBIKEY, Optional
-          "credentialType": String one of OTP, SMS, PASSWORD, ASSERTION, IWA, EMAIL, OAUTH2, JWT, Optional
+          "credentialType": String one of OTP, SMS, PASSWORD, ASSERTION, IWA, EMAIL, OAUTH2, JWT, CERTIFICATE, PRE_SHARED_SYMMETRIC_KEY, OKTA_CLIENT_SESSION, DEVICE_UDID, Optional
           "issuer": Object, Optional {
                "id": String, Optional
                "type": String Optional
@@ -431,7 +433,7 @@ Some of the fields listed above have a finite set of possible values.
 | ---------------------- | ----------------------------------------------------------------------------------------------------- |
 | authenticationProvider | `OKTA_AUTHENTICATION_PROVIDER`, `ACTIVE_DIRECTORY`, `LDAP`, `FEDERATION`, `SOCIAL`, `FACTOR_PROVIDER` |
 | credentialProvider     | `OKTA_CREDENTIAL_PROVIDER`, `RSA`, `SYMANTEC`, `GOOGLE`, `DUO`, `YUBIKEY`                             |
-| credentialType         | `OTP`, `SMS`, `PASSWORD`, `ASSERTION`, `IWA`, `EMAIL`, `OAUTH2`, `JWT`                                |
+| credentialType         | `OTP`, `SMS`, `PASSWORD`, `ASSERTION`, `IWA`, `EMAIL`, `OAUTH2`, `JWT`, `CERTIFICATE`, `PRE_SHARED_SYMMETRIC_KEY`, `OKTA_CLIENT_SESSION`, `DEVICE_UDID`                                |
 |------------------------+-------------------------------------------------------------------------------------------------------|
 
 ### Issuer Object

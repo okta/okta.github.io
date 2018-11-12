@@ -166,7 +166,7 @@
 		}
 
 		/* Fix margin around sub-lists */
-		ol li > ul, ol li > ol {
+		ol li > ul, ol li > ol, ul li > ul {
 			margin: 5px;
 		}
 

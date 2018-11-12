@@ -271,3 +271,27 @@ avanbeek:
   web: https://videogame-resume.herokuapp.com/
   twitter: https://twitter.com/andrewvanbeek1
   github: https://github.com/andrewvanbeek-okta
+
+keith_casey:
+  full_name: Keith Casey
+  display_name: Keith Casey
+  avatar: avatar-keith-casey.jpg
+  github: https://github.com/caseysoftware
+  twitter: https://twitter.com/caseysoftware
+  web: http://caseysoftware.com/
+
+kcorreia:
+  full_name: Kleber Correia
+  display_name: Kleber Correia
+  avatar: avatar-kcorreia.jpg
+  github: https://github.com/klebervirgilio
+  twitter: https://twitter.com/klebervirgilio
+  web: https://medium.com/@klebervirgilio
+
+holgerschmitz:
+  full_name: Holger Schmitz
+  display_name: Holger Schmitz
+  avatar: avatar-holger_schmitz.jpg
+  email: holger@notjustphysics.com
+  web: http://notjustphysics.com
+  github: https://github.com/holgerschmitz

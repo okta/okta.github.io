@@ -51,16 +51,16 @@ If you require authentication for certain routes, add the `oidc.ensureAuthentica
 
 ```javascript
 app.get('/protected', oidc.ensureAuthenticated(), (req, res) => {
-  res.send(JSON.stringify(req.userinfo));
+  res.send(JSON.stringify(req.userContext.userinfo));
 });
 ```
 
-If you want a page to always be accessible, but change its contents if the user is logged in, you can do a truthy check on `req.userinfo` to know if the user is authenticated or not:
+If you want a page to always be accessible, but change its contents if the user is logged in, you can do a truthy check on `req.userContext.userinfo` to know if the user is authenticated or not:
 
 ```javascript
 app.get('/', (req, res) => {
-  if (req.userinfo) {
-    res.send(`Hi ${req.userinfo.name}!`);
+  if (req.userContext.userinfo) {
+    res.send(`Hi ${req.userContext.userinfo.name}!`);
   } else {
     res.send('Hi!');
   }

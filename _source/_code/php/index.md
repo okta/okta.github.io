@@ -1,48 +1,75 @@
 ---
-layout: software
-title: Add Okta authentication to your PHP app
+layout: language
+title: Add Identity Management to Your PHP App
 language: PHP
-integration: server
+integration: back-end
 ---
 
-# Add Okta authentication to your PHP app
+# <i class='icon-48 docsPage code-php'></i> Add Identity Management to Your PHP App
 
-New to Okta? Our Quick Start Guide will walk you through adding user authentication to your PHP application in minutes.
+## Get Started with PHP + Okta
 
-<ul class='code-list'>
-  <li>
-    <a href='/quickstart/#/okta-sign-in-page/php/generic' class='code-button inverse' data-proofer-ignore>
-      <span class='code-icon launch-16'></span><span>Authentication Quick Start Guide</span>
-    </a>
-  </li>
-  <li>
-    <a href='https://github.com/okta/samples-php' class='code-button'>
-      <span class='fa fa-github'></span><span>PHP Sample Applications</span>
-    </a>
-  </li>
+New to Okta? Our quickstart will walk you through adding user authentication to your PHP app in minutes.
+
+<ul class='language-ctas'>
+	<li>
+		<a href='https://developer.okta.com/signup/' class='Button--red' data-proofer-ignore>
+			<span>Create Free Account</span>
+		</a>
+	</li>
+	<li>
+		<a href='/quickstart/#/okta-sign-in-page/php/' class='Button--blue' data-proofer-ignore>
+			<span>PHP Quickstart</span>
+		</a>
+	</li>
 </ul>
 
-## PHP Management SDK
+<a href='https://github.com/okta/samples-php'>
+	<span class='fa fa-github'></span> <span>PHP Sample App</span>
+</a>
 
-Once your users can sign in to your app, use Okta's Management API and SDKs to configure resources and manage your users.
+## Okta Management SDK for PHP
 
-<ul class='code-list'>
-  <li>
-    <span class='code-icon expression-16'></span> <a href='https://developer.okta.com/okta-sdk-php/'>PHP SDK Reference</a>
-  </li>
-  <li>
-    <span class='fa fa-github'></span> <a href='https://github.com/okta/okta-sdk-php'>PHP SDK Source</a>
-  </li>
-</ul>
+The Okta PHP SDK can be used in your server-side code to create and update users.
+
+<a href='http://packagist.org/packages/okta/sdk' class="language-reference">
+	<span class='icon download-16'></span> <span>okta/sdk on Packagist</span>
+</a>
+
+<p class="language-reference">
+	<a href='https://developer.okta.com/okta-sdk-php/' class="language-reference">
+		<span class='icon expression-16'></span> 
+		<span>PHP SDK Reference</span>
+	</a>
+</p>
+
+<a href='https://github.com/okta/okta-sdk-php'>
+	<span class='fa fa-github'></span> <span>PHP SDK Source</span>
+</a>
 
 ## PHP Libraries
 
-<ul class='code-list'>
-  <li>
-    <span class='fa fa-github'></span> <a href='https://github.com/okta/okta-jwt-verifier-php'>Okta JWT Verifier for PHP</a>
-  </li>
+<ul class="language-libraries">
+	<li>
+		<i class='fa fa-github'></i> 
+		<a href="https://github.com/okta/okta-jwt-verifier-php">
+			<span>Okta JWT Verifier for PHP</span>
+		</a>
+	</li>
 </ul>
 
-## Guides
+## Recommended Guides
 
-<p><a href="simplesamlphp">Using SimpleSAMLphp to add support for Okta (via SAML)</a></p>
+{: .language-list }
+- [Implement the Authorization Code Flow](/authentication-guide/implementing-authentication/auth-code)
+- [Social Login](/authentication-guide/social-login/)
+- [Working With OAuth 2.0 Tokens](/authentication-guide/tokens/)
+
+## Related Blog Posts
+
+{: .language-list }
+- [Add Authentication to your PHP App in 5 Minutes](/blog/2018/07/09/five-minute-php-app-auth)
+- [Tutorial: Build a Basic CRUD App with Symfony 4 and Vue](/blog/2018/06/14/php-crud-app-symfony-vue)
+- [Tutorial: Build Your First CRUD App with Symfony and Angular](/blog/2018/08/14/php-crud-app-symfony-angular)
+- [OAuth 2.0 from the Command Line](/blog/2018/07/16/oauth-2-command-line)
+

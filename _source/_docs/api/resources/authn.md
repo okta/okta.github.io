@@ -2528,7 +2528,7 @@ curl -v -X POST \
 }' "https://{yourOktaDomain}/api/v1/users/00u15s1KDETTQMQYABRL/factors"
 ~~~
 
-##### Response Example for Enroll RSA SeurID Factor
+##### Response Example for Enroll RSA SecurID Factor
 {:.api .api-response .api-response-example}
 
 ~~~json

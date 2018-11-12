@@ -4,11 +4,11 @@
 	@include font-weight('button');
 	@include transition(normal background, normal border, normal color);
 	border: 2px solid transparent;
-	border-radius: 5px;
+	border-radius: 3px;
 	cursor: pointer;
 	display: inline-block;
-	height: 34px;
-	line-height: 30px;
+	height: 45px;
+	line-height: 45px;
 	padding: 0 20px;
 	text-decoration: none;
 
@@ -62,14 +62,14 @@
 
 .Button--blue {
 	@extend %Button;
-	background-color: get-color('blue-bright');
-	border-color: get-color('blue-bright');
+	background-color: $navy-blue;
+	border-color: $navy-blue;
 	color: get-color('white');
 
 	&:active,
 	&:hover {
-		background-color: get-color('blue-bright-hover');
-		border-color: get-color('blue-bright-hover');
+		background-color: $navy-blue;
+		border-color: $navy-blue;
 		color: get-color('white');
 	}
 }

@@ -282,10 +282,11 @@ CLIENT_ID=okta-application-client-id
 CLIENT_SECRET=okta-application-client-secret
 ```
 
-For `APP_SECRET` we just need something random, which can be generated with this command:
+For `APP_SECRET` we just need something random, which can be generated with these commands:
 
 ```bash
-echo "APP_SECRET=`openssl rand -base64 32`" >> .env
+npm install -g uuid-cli
+echo "APP_SECRET=`uuid`" >> .env
 ```
 
 You still need to tell your code to use environment variables via `dotenv`, and change the way you start the server to work with Okta's middleware. You need the `dotenv` import to be the first code your app comes across to make sure the environment variables are set up properly.

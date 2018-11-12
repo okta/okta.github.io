@@ -1,8 +1,8 @@
 ---
-layout: software
+layout: language
 title: Get Started with the Okta REST APIs
 language: rest
-integration: server
+integration: back-end
 redirect_from:
   - "/docs/getting_started/api_test_client.html"
   - "/docs/api/getting_started/api_test_client.html"
@@ -10,7 +10,7 @@ redirect_from:
   - "/docs/api/getting_started/"
 ---
 
-# Get Started with the Okta REST APIs
+# <i class='icon-48 docsPage code-rest'></i> Get Started with the Okta REST APIs
 
 A great way to learn an API is to issue requests and inspect the responses. You can easily use our Postman collections to do just that.
 

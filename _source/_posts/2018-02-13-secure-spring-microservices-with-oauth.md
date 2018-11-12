@@ -5,9 +5,10 @@ author: mraible
 description: "Secure a Spring microservices architecture with Spring Security and OAuth + this tutorial. No Okta SDKs required!"
 tags: [spring, spring boot, microservices, oauth 2.0, spring security, java]
 tweets:
-- "Did you know you can secure your @springboot microservices using OAuth and Okta? → "
-- "Feel the heat? A lot of the 🔥 in the #Java ecosystem is coming from Spring Boot. Learn how to 🔒 it down with @SpringSecurity, OAuth, and Okta!"
+- "Did you know you can secure your @springboot microservices using OAuth 2.0 and Okta? This tutorial gives you the low-down."
+- "Feel the heat? A lot of the 🔥 in the #Java ecosystem is coming from Spring Boot. Learn how to 🔒 it down with @SpringSecurity, OAuth 2.0, and Okta!"
 - "Spring Boot Microservices + @SpringSecurity + @oauth_2 + @okta = 😀!"
+image: blog/featured/okta-java-bottle-headphones.jpg
 ---
 
 Building a microservices architecture with Spring Boot and Spring Cloud can allow your team to scale and develop software faster. It can add resilience and elasticity to your architecture that will enable it to fail gracefully and scale infinitely. All this is great, but you need continuous deployment and excellent security to ensure your system stays up-to-date, healthy, and safe for years to come.
@@ -56,7 +57,7 @@ The **edge-service** application handles the communication with the `beer-catalo
 <dependency>
     <groupId>org.springframework.security.oauth.boot</groupId>
     <artifactId>spring-security-oauth2-autoconfigure</artifactId>
-    <version>2.0.1.RELEASE</version>
+    <version>2.0.5.RELEASE</version>
 </dependency>
 ```
 
@@ -68,6 +69,8 @@ zuul.routes.beer-catalog-service.url=http://localhost:8080
 
 zuul.routes.home.path=/home
 zuul.routes.home.url=http://localhost:8080
+
+zuul.sensitive-headers=Cookie,Set-Cookie
 ```
 
 Open `edge-service/src/main/java/com/example/edgeservice/EdgeServiceApplication.java` and add `@EnableOAuth2Sso` to enable authentication with OAuth.
@@ -89,8 +92,6 @@ security.oauth2.client.access-token-uri=https://{yourOktaDomain}/oauth2/default/
 security.oauth2.client.user-authorization-uri=https://{yourOktaDomain}/oauth2/default/v1/authorize
 security.oauth2.client.scope=openid profile email
 security.oauth2.resource.user-info-uri=https://{yourOktaDomain}/oauth2/default/v1/userinfo
-security.oauth2.resource.token-info-uri=https://{yourOktaDomain}/oauth2/default/v1/introspect
-security.oauth2.resource.prefer-token-info=false
 ```
 
 **TIP:** If you see `{yourOktaDomain}` in the above code snippet, log in to your Okta account and refresh this page. It will replace this value with your domain.
@@ -134,7 +135,7 @@ In `beer-catalog-service/pom.xml`, add the same dependencies you added to the Ed
 <dependency>
     <groupId>org.springframework.security.oauth.boot</groupId>
     <artifactId>spring-security-oauth2-autoconfigure</artifactId>
-    <version>2.0.1.RELEASE</version>
+    <version>2.0.5.RELEASE</version>
 </dependency>
 <dependency>
     <groupId>org.springframework.boot</groupId>
@@ -151,8 +152,6 @@ security.oauth2.client.access-token-uri=https://{yourOktaDomain}/oauth2/default/
 security.oauth2.client.user-authorization-uri=https://{yourOktaDomain}/oauth2/default/v1/authorize
 security.oauth2.client.scope=openid profile email
 security.oauth2.resource.user-info-uri=https://{yourOktaDomain}/oauth2/default/v1/userinfo
-security.oauth2.resource.token-info-uri=https://{yourOktaDomain}/oauth2/default/v1/introspect
-security.oauth2.resource.prefer-token-info=false
 ```
 
 **TIP:** An alternative to adding these properties is to use environment variables. For example, `SECURITY_OAUTH2_CLIENT_CLIENT_ID` would be the environment variable to specify `security.oauth2.client.client-id`. Using environment variables would allow you to change the settings for both apps from one location.
@@ -386,6 +385,8 @@ Restart your Edge Server application, navigate to `http://localhost:8081/home` a
 
 {% img blog/microservices-spring-oauth/user-details.png alt:"Okta User Details" width:"800" %}{: .center-image }
 
+**NOTE:** I was unable to get the logout button to work due to a 403 error. I tried adding `csrf().requireCsrfProtectionMatcher(r -> false)` to the `ResourceServerConfig` in the Edge Service app, but it didn't help. I sent an email to the Spring Security team asking if they had any advice.
+
 ### Protecting Downstream Services in Spring Boot 2.0
 
 With Spring Boot 1.5.x, including Actuator as a dependency would trigger [Actuator Security](https://docs.spring.io/spring-boot/docs/2.0.2.RELEASE/reference/htmlsingle/#boot-features-security-actuator) and make it so the `http://localhost:8080` is protected. In Spring Boot 2.x, having a `WebSecurityConfigurerAdapter` causes Actuator security to back off. In the Beer Catalog Service app, the `ResourceServerConfig` causes this behavior.
@@ -425,8 +426,6 @@ After making these changes, restart the `beer-catalog-service` and witness its p
 
 {% img blog/microservices-spring-secure/beer-catalog-protected.png alt:"Protected Beer Catalog Service" width:"800" %}{: .center-image }
 
-**NOTE:** I was unable to get the logout button to work due to a 403 error. I tried adding `csrf().requireCsrfProtectionMatcher(r -> false)` to the `ResourceServerConfig` in the Edge Service app, but it didn't help. I sent an email to the Spring Security team asking if they had any advice.
-
 ## Add Okta's Sign-In Widget to the Angular Client
 
 To use Okta's Sign-In Widget, you'll need to modify your app in Okta to enable the *Implicit* grant type. Log in to your account, navigate to **Applications** > **Spring OAuth** > **General** tab and click **Edit**. Enable **Implicit (Hybrid)** under **Allowed grant types** and select both checkboxes below it. Add `http://localhost:4200` under **Login redirect URIs** and click **Save**.
@@ -443,7 +442,7 @@ npm install
 Install [Okta's Sign-In Widget](https://developer.okta.com/code/javascript/okta_sign-in_widget) to make it possible to communicate with the secured server.
 
 ```bash
-npm install @okta/okta-signin-widget --save
+npm install @okta/okta-signin-widget@2.13.0 --save
 ```
 
 Add the widget's CSS to `client/src/styles.css`:
@@ -698,8 +697,7 @@ public class EdgeServiceApplication {
         return new UserFeignClientInterceptor();
     }
 
-    @Bean
-    public FilterRegistrationBean simpleCorsFilter() {
+    public FilterRegistrationBean<CorsFilter> simpleCorsFilter() {
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         CorsConfiguration config = new CorsConfiguration();
         config.setAllowCredentials(true);
@@ -707,7 +705,7 @@ public class EdgeServiceApplication {
         config.setAllowedMethods(Collections.singletonList("*"));
         config.setAllowedHeaders(Collections.singletonList("*"));
         source.registerCorsConfiguration("/**", config);
-        FilterRegistrationBean bean = new FilterRegistrationBean(new CorsFilter(source));
+        FilterRegistrationBean<CorsFilter> bean = new FilterRegistrationBean<>(new CorsFilter(source));
         bean.setOrder(Ordered.HIGHEST_PRECEDENCE);
         return bean;
     }
@@ -749,9 +747,11 @@ Also, JHipster uses this same setup with its [OAuth support](http://www.jhipster
 
 * [Develop a Microservices Architecture with OAuth 2.0 and JHipster](/blog/2018/03/01/develop-microservices-jhipster-oauth)
 * [Use Ionic for JHipster to Create Mobile Apps with OIDC Authentication](/blog/2018/01/30/jhipster-ionic-with-oidc-authentication)
+* [Build a Mobile App with React Native and Spring Boot](/blog/2018/10/10/react-native-spring-boot-mobile-app)
 
 Learn more about Okta and its APIs at [developer.okta.com/product](https://developer.okta.com/product/). If you have questions about this tutorial, please leave a comment below or hit me up on Twitter [@mraible](https://twitter.com/mraible).
 
 **Changelog:**
 
+* Oct 11, 2018: Updated to use Spring Boot 2.0.5, Spring Cloud Finchley SR1, and Okta Sign-In Widget 2.13.0. See the example app changes in [spring-boot-microservices-example#21](https://github.com/oktadeveloper/spring-boot-microservices-example/pull/21); changes to this post can be viewed in [okta.github.io#2390](https://github.com/okta/okta.github.io/pull/2390).
 * May 11, 2018: Updated to use Spring Boot 2.0 and Okta Sign-In Widget 2.0.8. See the example app changes in [spring-boot-microservices-example#17](https://github.com/oktadeveloper/spring-boot-microservices-example/pull/17); changes to this post can be viewed in [okta.github.io#2049](https://github.com/okta/okta.github.io/pull/2049).

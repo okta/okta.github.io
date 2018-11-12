@@ -7,6 +7,7 @@ tags: [authentication, spring boot, spring boot 2.1, react, reactjs, oidc]
 tweets:
 - "React + Spring Boot makes for a nice development experience. Learn how to make them work together with OIDC authentication →"
 - "Spring Boot with @java + React with @javascript == 💙. Learn how to build a @springboot + @reactjs CRUD app today!"
+image: blog/featured/okta-react-bottle-headphones.jpg
 ---
 
 React was designed to make it painless to create interactive UIs. Its state management is efficient and only updates components when your data changes. Component logic is written in JavaScript, which means you can keep state out of the DOM and create components that are encapsulated.
@@ -298,7 +299,7 @@ After the app creation process completes, navigate into the `app` directory and 
 
 ```bash
 cd app
-yarn add bootstrap@4.1.2 react-cookie@2.2.0 react-router-dom@4.3.1 reactstrap@6.3.0
+yarn add bootstrap@4.1.3 react-cookie@3.0.4 react-router-dom@4.3.1 reactstrap@6.5.0
 ```
 
 You'll use Bootstrap's CSS and Reactstrap's components to make the UI look better, especially on mobile phones. If you'd like to learn more about Reactstrap, see <https://reactstrap.github.io>. It has extensive documentation on its various components and how to use them.
@@ -341,16 +342,15 @@ class App extends Component {
       <div className="App">
         <header className="App-header">
           <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">Welcome to React</h1>
+          <div className="App-intro">
+            <h2>JUG List</h2>
+            {groups.map(group =>
+              <div key={group.id}>
+                {group.name}
+              </div>
+            )}
+          </div>
         </header>
-        <div className="App-intro">
-          <h2>JUG List</h2>
-          {groups.map(group =>
-            <div key={group.id}>
-              {group.name}
-            </div>
-          )}
-        </div>
       </div>
     );
   }
@@ -363,12 +363,12 @@ To proxy from `/api` to `http://localhost:8080/api`, add a proxy setting to `app
 
 ```json
 "scripts": {...},
-"proxy": "http://localhost:8080"
+"proxy": "http://localhost:8080",
 ```
 
-To learn more about this feature, search for "proxy" in `app/README.md`. Create React App ships with all kinds of documentation in this file, how cool is that?!
+To learn more about proxying API requests, see Create React App's [documentation](https://facebook.github.io/create-react-app/docs/proxying-api-requests-in-development#docsNav). 
 
-Make sure Spring Boot is running, then run `yarn start` in your `app` directory. You should see the list of default groups.
+Make sure Spring Boot is running, then run `yarn start` in your `app` directory. You should see the list of default groups. You might have to scroll down to see this list. 
 
 {% img blog/spring-boot-2-react/jug-list.png alt:"JUG List" width:"800" %}{: .center-image }
 
@@ -565,7 +565,7 @@ To make your UI a bit more spacious, add a top margin to Bootrap's container cla
 
 ```css
 .container, .container-fluid {
-  margin-top: 20px
+  margin-top: 20px;
 }  
 ```
 
@@ -735,7 +735,7 @@ Are you sold? [Register for a forever-free developer account](https://developer.
 
 ### Spring Security + OIDC
 
-[Spring Security added OIDC support in its 5.0 release](/blog/2017/12/18/spring-security-5-oidc). Since then, they've made quite a few improvements and simplified its required configuration. I figured it'd be fun to explore the latest and greatest, so I started by updating `pom.xml` with Spring's lib-snapshot repositories, upgrading Spring Boot to [2.1 M1](https://spring.io/blog/2018/07/30/spring-boot-2-1-m1) (which includes [Spring Security 5.1 M2](https://spring.io/blog/2018/07/30/spring-security-5-1-0-m2-released)), and adding the necessary Spring Security dependencies to do OIDC authentication.
+[Spring Security added OIDC support in its 5.0 release](/blog/2017/12/18/spring-security-5-oidc). Since then, they've made quite a few improvements and simplified its required configuration. I figured it'd be fun to explore the latest and greatest, so I started by upgrading Spring Boot to [2.1.0](https://spring.io/blog/2018/10/30/spring-boot-2-1-0) (which includes [Spring Security 5.1](https://spring.io/blog/2018/09/27/spring-security-5-1-goes-ga)), and adding the necessary Spring Security dependencies to do OIDC authentication.
 
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
@@ -744,7 +744,7 @@ Are you sold? [Register for a forever-free developer account](https://developer.
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>2.1.0.M1</version>
+        <version>2.1.0.RELEASE</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
 
@@ -770,23 +770,6 @@ Are you sold? [Register for a forever-free developer account](https://developer.
 
     <build...>
 
-    <pluginRepositories>
-        <pluginRepository>
-            <id>spring-snapshots</id>
-            <name>Spring Snapshots</name>
-            <url>https://repo.spring.io/libs-snapshot</url>
-            <snapshots>
-                <enabled>true</enabled>
-            </snapshots>
-        </pluginRepository>
-    </pluginRepositories>
-    <repositories>
-        <repository>
-            <id>spring-snapshots</id>
-            <name>Spring Snapshot</name>
-            <url>https://repo.spring.io/libs-snapshot</url>
-        </repository>
-    </repositories>
 </project>
 ```
 
@@ -805,7 +788,7 @@ spring:
           okta:
             client-id: {clientId}
             client-secret: {clientSecret}
-            scope: openid email profile
+            scope: openid, email, profile
         provider:
           okta:
             issuer-uri: https://{yourOktaDomain}/oauth2/default
@@ -819,9 +802,8 @@ To make Spring Security React-friendly, create a `SecurityConfiguration.java` fi
 package com.okta.developer.jugtours.config;
 
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Profile;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.web.csrf.CookieCsrfTokenRepository;
 import org.springframework.security.web.savedrequest.HttpSessionRequestCache;
@@ -831,7 +813,7 @@ import org.springframework.security.web.savedrequest.SimpleSavedRequest;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@Configuration
+@EnableWebSecurity
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     @Override
@@ -848,7 +830,6 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     }
 
     @Bean
-    @Profile("dev")
     public RequestCache refererRequestCache() {
         return new HttpSessionRequestCache() {
             @Override
@@ -863,11 +844,10 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 }
 ```
 
-This class has a lot going on, so let me explain a few things. The `RequestCache` bean overrides the default request cache. It saves the referrer header (misspelled `referer` in real life), so Spring Security can redirect back to it after authentication. The referrer-based request cache comes in handy when you're developing React on `http://localhost:3000` and want to be redirected back there after logging in. This bean is only activated in development, because it's not necessary in production when everything is running on the same port.
+This class has a lot going on, so let me explain a few things. The `RequestCache` bean overrides the default request cache. It saves the referrer header (misspelled `referer` in real life), so Spring Security can redirect back to it after authentication. The referrer-based request cache comes in handy when you're developing React on `http://localhost:3000` and want to be redirected back there after logging in. 
 
 ```java
 @Bean
-@Profile("dev")
 public RequestCache refererRequestCache() {
     return new HttpSessionRequestCache() {
         @Override
@@ -888,10 +868,11 @@ The `antMatchers` lines define what URLs are allowed for anonymous users. You wi
 ```java
 package com.okta.developer.jugtours.web;
 
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.oauth2.client.registration.ClientRegistration;
+import org.springframework.security.oauth2.client.registration.ClientRegistrationRepository;
 import org.springframework.security.oauth2.core.oidc.OidcIdToken;
 import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -904,9 +885,11 @@ import java.util.Map;
 
 @RestController
 public class UserController {
+    private ClientRegistration registration;
 
-    @Value("${spring.security.oauth2.client.provider.okta.issuer-uri}")
-    String issuerUri;
+    public UserController(ClientRegistrationRepository registrations) {
+        this.registration = registrations.findByRegistrationId("okta");
+    }
 
     @GetMapping("/api/user")
     public ResponseEntity<?> getUser(@AuthenticationPrincipal OAuth2User user) {
@@ -920,9 +903,9 @@ public class UserController {
     @PostMapping("/api/logout")
     public ResponseEntity<?> logout(HttpServletRequest request,
                                     @AuthenticationPrincipal(expression = "idToken") OidcIdToken idToken) {
-        // send logout URL to client so they can initiate logout - doesn't work from the server side
-        // Make it easier: https://github.com/spring-projects/spring-security/issues/5540
-        String logoutUrl = issuerUri + "/v1/logout";
+        // send logout URL to client so they can initiate logout
+        String logoutUrl = this.registration.getProviderDetails()
+                .getConfigurationMetadata().get("end_session_endpoint").toString();
 
         Map<String, String> logoutDetails = new HashMap<>();
         logoutDetails.put("logoutUrl", logoutUrl);
@@ -1059,7 +1042,7 @@ ResponseEntity<Group> createGroup(@Valid @RequestBody Group group,
 }
 ```
 
-## Modify React Handle CSRF and be Identity Aware
+## Modify React to Handle CSRF and be Identity Aware
 
 You'll need to make a few changes to your React components to make them identity-aware. The first thing you'll want to do is modify `App.js` to wrap everything in a `CookieProvider`. This component allows you to read the CSRF cookie and send it back as a header.
 
@@ -1121,7 +1104,6 @@ class Home extends Component {
   }
 
   logout() {
-    console.log('logging out...');
     fetch('/api/logout', {method: 'POST', credentials: 'include',
       headers: {'X-XSRF-TOKEN': this.state.csrfToken}}).then(res => res.json())
       .then(response => {
@@ -1189,7 +1171,7 @@ class GroupList extends Component {
     fetch('api/groups', {credentials: 'include'})
       .then(response => response.json())
       .then(data => this.setState({groups: data, isLoading: false}))
-      .catch(() => this.props.history.push('/'))
+      .catch(() => this.props.history.push('/'));
   }
 
   async remove(id) {
@@ -1301,8 +1283,8 @@ To build and package your React app with Maven, you can use the [frontend-maven-
 <properties>
     ...
     <frontend-maven-plugin.version>1.6</frontend-maven-plugin.version>
-    <node.version>v10.6.0</node.version>
-    <yarn.version>v1.8.0</yarn.version>
+    <node.version>v10.13.0</node.version>
+    <yarn.version>v1.12.1</yarn.version>
 </properties>
 
 <profiles>
@@ -1404,24 +1386,55 @@ spring:
   security:
 ```
 
+### Fix Redirect After Login in Prod Profile
+
+The `RequestCache` bean in the `SecurityConfiguration.java` class is useful for redirecting back to `http://localhost:3000` in development, but it doesn't work when everything is running in the same app. The error that happens is as follows:
+
+```
+2018-10-31 12:47:01.206  WARN 37083 --- [io-8080-exec-10] .w.s.m.s.DefaultHandlerExceptionResolver : Resolved
+ [org.springframework.web.HttpRequestMethodNotSupportedException: Request method 'null' not supported]
+```
+
+To fix this, add `@Profile("dev")` to this bean.
+
+```java
+import org.springframework.context.annotation.Profile;
+...
+public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
+    
+    @Bean
+    @Profile("dev")
+    public RequestCache refererRequestCache() {...}
+}
+```
+
+You might've noticed that `Home.js` makes a request to `/private` when you click the **Login** button. When running with the "prod" profile, Spring Security will redirect to this endpoint after authentication. To make it redirect back to the React app, create a `RedirectController.java` in the `com.okta.developer.jugtours.web` package.
+
+```java
+package com.okta.developer.jugtours.web;
+
+import org.springframework.context.annotation.Profile;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+
+@Controller
+@Profile("prod")
+public class RedirectController {
+
+    @GetMapping("/private")
+    public String redirectToRoot() {
+        return "redirect:/";
+    }
+}
+```
+
 After adding this, you should be able to run `./mvnw spring-boot:run -Pprod` and your app see your app running on `http://localhost:8080`. 
 
 {% img blog/spring-boot-2-react/localhost-8080.png alt:"App Running with Maven" width:"800" %}{: .center-image }
 
-> **NOTE:** If you see a blank page when you try to login, it's caused by the cache-first service worker in React. If you're using Chrome, you can workaround it by opening Developer Tools > **Application** > **Service Workers** and checking **Bypass for network**.
-> 
-> This isn't a great solution because users of your app will need to do this.
-> 
-> I've discovered two options to fix this problem (so far):
-> 
-> 1. Disable PWA support in your app by removing <code>registerServiceWorker()</code> from <code>client/src/index.js</code>
-> 2. <a href="https://stackoverflow.com/a/45356232/65681">Eject the webpack configuration</a> and configure <code>/private</code> to be a network-first URL
-
 ## Spring Security's OAuth 2.0 vs. OIDC Support
 
 While working on this post, I collaborated with [Rob Winch](https://twitter.com/rob_winch) (Spring Security Lead) to make sure I used Spring Security efficiently. I started out using Spring Security's OAuth 2.0 support and its `@EnableOAuth2Sso` annotation. Rob encouraged me to use Spring Security's OIDC support instead and was instrumental in making everything work. 
-
-As milestones and releases of Spring Boot 2.1 and Spring Security 5.1 are released, I'll update this post to remove code that's no longer necessary.
 
 ## Learn More about Spring Boot and React
 
@@ -1440,4 +1453,5 @@ If you have any questions, please don't hesitate to leave a comment below, or as
 
 **Changelog:**
 
+* Oct 31, 2018: Updated to use Create React App 2.1.0, Spring Boot 2.1.0, and Spring Security 5.1.1. You can see the example app changes in [okta-spring-boot-react-crud-example#8](https://github.com/oktadeveloper/okta-spring-boot-react-crud-example/pull/8); changes to this post can be viewed in [okta.github.io#2450](https://github.com/okta/okta.github.io/pull/2450).
 * Jul 31, 2018: Updated to use Spring Boot 2.1.0 M1 and Spring Security 5.1.0 M2. You can see the example app changes in [okta-spring-boot-react-crud-example#6](https://github.com/oktadeveloper/okta-spring-boot-react-crud-example/pull/6); changes to this post can be viewed in [okta.github.io#2222](https://github.com/okta/okta.github.io/pull/2222).

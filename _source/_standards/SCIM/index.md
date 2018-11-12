@@ -1648,7 +1648,7 @@ following:
   1. From your application to Okta.
   2. From Okta to your application.
 
-#### Run the Second Set of Runscope Tests: Okta SCIM 2.0 CRUD Test
+#### Run the Second Set of Runscope Tests: Okta SCIM 1.1 CRUD Test or Okta SCIM 2.0 CRUD Test 
 
 This is an important test that needs to be run in order to check if the Application
 can handle the **CR**eate, **U**pdate and **D**eactivate (CRUD) users functionality from Okta.
@@ -1671,9 +1671,10 @@ The test follows this pattern:
 If you are already familiar with Runscope, then import the
 [OKTA SCIM 2.0 CRUD](SCIMFiles/Initial_Script_CRUD.txt) Test and configure the `SCIM Base
   URL` variable to point at the base URL for your SCIM server, for
-example: `https://example.com/scim/v2`.
+example: `https://example.com/scim/v1` or `https://example.com/scim/v2`
 
 * [Okta SCIM 2.0 CRUD Test JSON](SCIMFiles/Okta-SCIM-CRUD-Test.json)
+* [Okta SCIM 1.1 CRUD Test JSON](SCIMFiles/Okta-SCIM-1.1-CRUD-Test.json)
 
 If you are not familiar with Runscope, follow [the detailed
 instructions](#set-up-runscope) to get started with using Runscope to test your

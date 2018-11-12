@@ -87,7 +87,7 @@
     </ul>
 
     <h3 class="Sidebar-title">Use Cases</h3>
-    <ul class="Sidebar-nav">{% assign documents = site.use_cases | sort: 'weight' %}{% for document in documents %}{% unless document.id contains '/index' %}{% continue %}{% endunless %}
+    <ul class="Sidebar-nav">{% assign documents = site.use_cases | where:'hidden', 'false' | sort: 'weight' %}{% for document in documents %}{% unless document.id contains '/index' %}{% continue %}{% endunless %}
       <li{% if document.url == page.url%} class="is-active"{% endif %}>
         <a href="{{ document.url | remove: '/index' | append: '/'}}">{{ document.title }}</a>
       </li>{% endfor %}

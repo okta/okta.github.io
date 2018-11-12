@@ -1,5 +1,11 @@
+.page {
+	&-content {
+		overflow-x: hidden;
+	}
+}
+
 .Page {
-	background: get-color('white');
+	background: get-color('gray-lightest');
 }
 .PageContent {
 	@extend %Wrap;
@@ -10,7 +16,7 @@
 	position: relative;
 	width: 100%;
 	z-index: 10;
-	background-color: get-color('white');
+	background-color: get-color('gray-lightest');
 	padding-top: 75px;
 
 	h1 {
@@ -802,6 +808,18 @@
 	}
 }
 
+@include media('<doc-min-toc') {
+	.PageContent {
+		flex-direction: column;
+	}
+}
+
+@include media('<large') {
+	.PageContent {
+		padding-left: 40px;
+	}
+}
+
 @include media('<medium') {
 	.PageContent {
 		 padding-top: 0;
@@ -816,12 +834,6 @@
 @include media('<600px') {
 	.PageContent {
 		padding-top: 75px;
-	}
-}
-
-@include media('<large') {
-	.PageContent {
-		padding-left: 40px;
 	}
 }
 

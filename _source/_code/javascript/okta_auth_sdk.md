@@ -35,7 +35,7 @@ You will need the following things for this guide:
 Include the following script tag in your target web page:
 
 ~~~ html
-<script src="https://ok1static.oktacdn.com/assets/js/sdk/okta-auth-js/1.8.0/okta-auth-js.min.js" type="text/javascript"></script>
+<script src="https://ok1static.oktacdn.com/assets/js/sdk/okta-auth-js/{{ site.versions.okta_auth_js }}/okta-auth-js.min.js" type="text/javascript"></script>
 ~~~
 
 ## Part 1: Retrieve and Store an OpenID Connect Token
@@ -94,7 +94,7 @@ console.log(`hi ${idToken.claims.email}!`);
 
 ### Store the Parsed Token
 
-Once the token has been parsed out of the URL, you can add it to the Token Manager using the `tokenManager.add` method.
+Once the token has been parsed out of the URL, you can add it to the Token Manager using the `tokenManager.add` method:
 
 ~~~ js
 authClient.tokenManager.add('idToken', idToken);
@@ -114,10 +114,17 @@ authClient.token.parseFromUrl()
 
 ### Retrieve the Stored Token
 
-A token that is stored in the Token Manager can be retrieved using the `tokenManager.get` method.
+A token that is stored in the Token Manager can be retrieved using the `tokenManager.get` method:
 
 ~~~ js
-var idToken = authClient.tokenManager.get('idToken');
+authClient.tokenManager.get('idToken')
+.then(function(token) {
+  if (token) {
+    // Token is valid
+  } else {
+    // Token has expired
+  }
+})
 ~~~
 
 [Read more about tokenManager.get in the Auth SDK Reference][authjs-reference-tokenmanager-get].
@@ -128,7 +135,7 @@ Putting it all together, the final example looks like this:
 
 ~~~ html
 
-<script src="https://ok1static.oktacdn.com/assets/js/sdk/okta-auth-js/1.8.0/okta-auth-js.min.js" type="text/javascript"></script>
+<script src="https://ok1static.oktacdn.com/assets/js/sdk/okta-auth-js/{{ site.versions.okta_auth_js }}/okta-auth-js.min.js" type="text/javascript"></script>
 
 <body>
   <script>
@@ -142,27 +149,29 @@ Putting it all together, the final example looks like this:
       redirectUri: 'http://localhost:3333'
     });
     // Attempt to retrieve ID Token from Token Manager
-    var idToken = authClient.tokenManager.get('idToken');
-    // If ID Token exists, return it in console.log
-    if (idToken) {
-      console.log(`hi ${idToken.claims.email}!`);
-    // If ID Token isn't found, try to parse it from the current URL
-    }
-    else if (location.hash) {
-      authClient.token.parseFromUrl()
-      .then(idToken => {
+    var idToken = authClient.tokenManager.get('idToken')
+    .then(idToken => {
+      // If ID Token exists, output it to the console
+      if (idToken) {
         console.log(`hi ${idToken.claims.email}!`);
-        // Store parsed token in Token Manager
-        authClient.tokenManager.add('idToken', idToken);
-        console.log(idToken);
-      });
-    }
-    else {
- // You're not logged in, you need a sessionToken
-      authClient.token.getWithRedirect({
-        responseType: 'id_token'
-      });
-    }
+      // If ID Token isn't found, try to parse it from the current URL
+      }
+      else if (location.hash) {
+        authClient.token.parseFromUrl()
+        .then(idToken => {
+          console.log(`hi ${idToken.claims.email}!`);
+          // Store parsed token in Token Manager
+          authClient.tokenManager.add('idToken', idToken);
+          console.log(idToken);
+        });
+      }
+      else {
+        // You're not logged in, you need a sessionToken
+        authClient.token.getWithRedirect({
+          responseType: 'id_token'
+        });
+      }
+    });
   </script>
 </body>
 
@@ -198,7 +207,7 @@ else {
 
 ~~~ html
 
-<script src="https://ok1static.oktacdn.com/assets/js/sdk/okta-auth-js/1.8.0/okta-auth-js.min.js" type="text/javascript"></script>
+<script src="https://ok1static.oktacdn.com/assets/js/sdk/okta-auth-js/{{ site.versions.okta_auth_js }}/okta-auth-js.min.js" type="text/javascript"></script>
 
 <body>
   <script>
@@ -212,34 +221,36 @@ else {
       redirectUri: 'http://localhost:3333'
     });
     // Attempt to retrieve ID Token from Token Manager
-    var idToken = authClient.tokenManager.get('idToken');
-    // If ID Token exists, return it in console.log
-    if (idToken) {
-      console.log(`hi ${idToken.claims.email}!`);
-    // If ID Token isn't found, try to parse it from the current URL
-    } else if (location.hash) {
-      authClient.token.parseFromUrl()
-      .then(idToken => {
+    var idToken = authClient.tokenManager.get('idToken')
+    .then(idToken => {
+      // If ID Token exists, output it to the console
+      if (idToken) {
         console.log(`hi ${idToken.claims.email}!`);
-        // Store parsed token in Token Manager
-        authClient.tokenManager.add('idToken', idToken);
-        console.log(idToken);
-      });
-    } else {
-      // You're not logged in, you need a sessionToken
-      var username = prompt('What is your username?');
-      var password = prompt('What is your password?');
+      // If ID Token isn't found, try to parse it from the current URL
+      } else if (location.hash) {
+        authClient.token.parseFromUrl()
+        .then(idToken => {
+          console.log(`hi ${idToken.claims.email}!`);
+          // Store parsed token in Token Manager
+          authClient.tokenManager.add('idToken', idToken);
+          console.log(idToken);
+        });
+      } else {
+        // You're not logged in, you need a sessionToken
+        var username = prompt('What is your username?');
+        var password = prompt('What is your password?');
 
-      authClient.signIn({username, password})
-      .then(res => {
-        if (res.status === 'SUCCESS') {
-          authClient.token.getWithRedirect({
-            sessionToken: res.sessionToken,
-            responseType: 'id_token'
-          });
-        }
-      });
-    }
+        authClient.signIn({username, password})
+        .then(res => {
+          if (res.status === 'SUCCESS') {
+            authClient.token.getWithRedirect({
+              sessionToken: res.sessionToken,
+              responseType: 'id_token'
+            });
+          }
+        });
+      }
+    });
   </script>
 </body>
 ~~~

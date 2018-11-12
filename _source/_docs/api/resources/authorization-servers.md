@@ -922,14 +922,14 @@ curl -v -X GET \
 
 Rotates the current [keys](#certificate-json-web-key-object) for a Custom Authorization Server. If you rotate keys, the `ACTIVE` key becomes the `EXPIRED` key, the `NEXT` key becomes the `ACTIVE` key, and the Custom Authorization Server immediately begins using the new active key to sign tokens.
 
->NOTE: Authorization server keys can be rotated in both `MANUAL` and `AUTO` mode, however, it is recommended to rotate keys manually only when the authorization server is in `MANUAL` mode. If keys are rotated manually, any intermediate cache should be invalidated and keys should be fetched again using the [keys](#get-authorization-server-keys) endpoint.
+>NOTE: Okta rotates your keys automatically in `AUTO` mode. You can rotate keys yourself in either mode. If keys are rotated manually, any intermediate cache should be invalidated and keys should be fetched again using the [keys](#get-authorization-server-keys) endpoint.
 
 ##### Request Parameters
 {:.api .api-request .api-request-params}
 
 | Parameter | Description                                             | Type   | Required |
 |:----------|:--------------------------------------------------------|:-------|:---------|
-| use       | Acceptable usage of the certificate. Can be only `sig`. | String | False    |
+| use       | Purpose of the certificate. The only supported value is `sig`. | String | True    |
 
 ##### Request Example
 {:.api .api-request .api-request-example}
@@ -1221,19 +1221,19 @@ After you enable the Custom URL Domain feature, all new Custom Authorization Ser
 
 #### Policy Properties
 
-| Property   | Description                                                                                                         | Type                                      | Required for create or update            |
-|:------------|:--------------------------------------------------------------------------------------------------------------------|:------------------------------------------|:-----------------------------------------|
-| created     | Timestamp when the policy was created                                                                               | DateTime                                  | System                                   |
-| conditions  | Specifies the clients that the policy will be applied to.                                                           |[Condition Object](#condition-object) | False                                    |
-| description | Description of the policy                                                                                           | String                                    | True                                     |
-| id          | ID of the policy                                                                                                    | String                                    | True except for create or get all claims |
-| lastUpdated | Timestamp when the policy was last updated                                                                          | DateTime                                  | System                                   |
-| name        | Name of the policy                                                                                                  | String                                    | True                                     |
-| priority    | Specifies the order in which this policy is evaluated in relation to the other policies in a Custom Authorization Server              | Integer                                   | True                                     |
-| status      | Specifies whether requests have access to this policy. Valid values: `ACTIVE` or `INACTIVE`                         | Enum                                    | True                                     |
-| system      | Specifies whether Okta created this policy (`true`) or not (`false`).                                               | Boolean                                   | True                                     |
-| type        | Indicates that the policy is an authorization server policy (`OAUTH_AUTHORIZATION_POLICY`)                          | String                                    | False                                    |
-| _links      | List of discoverable resources related to the policy                                                                | Links                                     | System                                   |
+| Property    | Description                                                                                                              | Type                                  | Required for create or update |
+|:------------|:-------------------------------------------------------------------------------------------------------------------------|:--------------------------------------|:------------------------------|
+| created     | Timestamp when the policy was created                                                                                    | DateTime                              | System                        |
+| conditions  | Specifies the clients that the policy will be applied to.                                                                | [Condition Object](#condition-object) | False                         |
+| description | Description of the policy                                                                                                | String                                | True                          |
+| id          | ID of the policy                                                                                                         | String                                | True except for create        |
+| lastUpdated | Timestamp when the policy was last updated                                                                               | DateTime                              | System                        |
+| name        | Name of the policy                                                                                                       | String                                | True                          |
+| priority    | Specifies the order in which this policy is evaluated in relation to the other policies in a Custom Authorization Server | Integer                               | True                          |
+| status      | Specifies whether requests have access to this policy. Valid values: `ACTIVE` or `INACTIVE`                              | Enum                                  | True                          |
+| system      | Specifies whether Okta created this policy (`true`) or not (`false`).                                                    | Boolean                               | True                          |
+| type        | Indicates that the policy is an authorization server policy (`OAUTH_AUTHORIZATION_POLICY`)                               | String                                | False                         |
+| _links      | List of discoverable resources related to the policy                                                                     | Links                                 | System                        |
 
 ### Rule Object
 
@@ -1312,14 +1312,14 @@ After you enable the Custom URL Domain feature, all new Custom Authorization Ser
 
 #### Rule Properties
 
-| Property  | Description                                                                                   | Type                                     | Required for create or update            |
-|:-----------|:----------------------------------------------------------------------------------------------|:-----------------------------------------|:-----------------------------------------|
-| conditions | Specifies the people, groups, grant types and scopes the rule will be applied to              |[Condition Object](#condition-object)  | False                                    |
-| id         | ID of the rule                                                                                | String                                   | True except for create or get all claims |
-| name       | Name of the rule                                                                              | String                                   | True                                     |
-| status     | Specifies whether requests have access to this claim. Valid values: `ACTIVE` or `INACTIVE`    | Enum                                     | True                                     |
-| system     | Specifies whether the rule was created by Okta or not                                         | Boolean                                  | True                                     |
-| actions    | An object that contains the `tokens` array, which shows lifetime durations for the tokens                                             | Object                                  | System generated                         |
+| Property   | Description                                                                                | Type                                  | Required for create | Required for update |
+|:-----------|:-------------------------------------------------------------------------------------------|:--------------------------------------|:--------------------|:--------------------|
+| conditions | Specifies the people, groups, grant types and scopes the rule will be applied to           | [Condition Object](#condition-object) | False               | False               |
+| id         | ID of the rule                                                                             | String                                | False               | True                |
+| name       | Name of the rule                                                                           | String                                | True                | True                |
+| status     | Specifies whether requests have access to this claim. Valid values: `ACTIVE` or `INACTIVE` | Enum                                  | True                | True                |
+| system     | Specifies whether the rule was created by Okta or not                                      | Boolean                               | True                | True                |
+| actions    | An object that contains the `tokens` array, which shows lifetime durations for the tokens  | Object                                | System generated    | System generated    |
 
 Token limits:
 

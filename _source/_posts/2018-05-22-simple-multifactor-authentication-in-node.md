@@ -52,10 +52,11 @@ The last command, `npm start`, starts the application. You can now go to `http:/
 ## Create an Okta Application to Support Adding Multi-Factor Authentication to Your Node App
 In order to add authentication, your app will need a few configuration variables. To keep these private, store them in a file named `.env` in the root of your project. The `.gitignore` file created earlier already says to ignore this file from git, so these won't end up in source control (this is especially important on an open source project where you wouldn't want people to have full access to your configuration settings).
 
-One thing you will need in your `.env` file is an application secret, which should be random. One way to do this is with the following command:
+One thing you will need in your `.env` file is an application secret, which should be random. One way to do this is with the following commands:
 
 ```bash
-echo "APP_SECRET=`openssl rand -base64 32`" >> .env
+npm install -g uuid-cli
+echo "APP_SECRET=`uuid`" >> .env
 ```
 
 For the next step, you need to [sign up for a free Okta Developer account](https://developer.okta.com/signup/), if you haven't already. Once you sign up, you'll be given a unique Okta Org URL. You'll need to save this in your `.env` file. Each line should have a separate environment variable with syntax like `ORG_URL=https://{yourOktaDomain}`.
