@@ -563,7 +563,7 @@ cf set-env vue-auth-pwa FORCE_HTTPS true
 cf start vue-auth-pwa
 ```
 
-Running Lighthouse on <https://vue-auth-pwa.cfapps.io> yields some pretty good numbers across the board!
+Running Lighthouse on `https://vue-auth-pwa.cfapps.io` yields some pretty good numbers across the board!
 
 {% img blog/vue-auth-sdk/lighthouse-cloudfoundry.png alt:"Lighthouse Audits on Cloud Foundry" %}{: .center-image }
 
