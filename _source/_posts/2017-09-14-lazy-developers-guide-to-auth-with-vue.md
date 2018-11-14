@@ -551,7 +551,7 @@ If you run Lighthouse on your app at `http://localhost:8080`, you should see sim
 
 Because I like to see what the max possible score is, I deployed this app to Pivotal's Cloud Foundry. I created a `deploy.sh` script that deploys using `cf push`.
 
-For this to work, you will have to update Okta to add `https://vue-auth-pwa.cfapps.io` as a Login Redirect URI (in your OIDC app) and as a Trusted Origin (**API** > **Trusted Origins**).
+For this to work, you will have to update Okta to add your `cfapps.io` URL as a Login Redirect URI (in your OIDC app) and as a Trusted Origin (**API** > **Trusted Origins**).
 
 ```bash
 npm run build
@@ -563,7 +563,7 @@ cf set-env vue-auth-pwa FORCE_HTTPS true
 cf start vue-auth-pwa
 ```
 
-Running Lighthouse on `https://vue-auth-pwa.cfapps.io` yields some pretty good numbers across the board!
+Running Lighthouse on my Cloud Foundry app yields some pretty good numbers across the board!
 
 {% img blog/vue-auth-sdk/lighthouse-cloudfoundry.png alt:"Lighthouse Audits on Cloud Foundry" %}{: .center-image }
 

@@ -28,7 +28,7 @@ TokenValidationParameters = new TokenValidationParameters
 ```
 
 ## Add a Claims Transformer
-The [Claims Tranformer](https://docs.microsoft.com/en-us/aspnet/core/api/microsoft.aspnetcore.authentication.claimstransformer) is a way to manipulate the [ClaimsPrincipal](https://msdn.microsoft.com/en-us/library/system.security.claims.claimsprincipal(v=vs.110).aspx), which is the main user in your ASP.NET application, once the user is authenticated.
+The [Claims Tranformer](https://docs.microsoft.com/en-us/dotnet/api/microsoft.aspnetcore.authentication.iclaimstransformation) is a way to manipulate the [ClaimsPrincipal](https://msdn.microsoft.com/en-us/library/system.security.claims.claimsprincipal(v=vs.110).aspx), which is the main user in your ASP.NET application, once the user is authenticated.
 
 Add a folder inside the `Domain` folder called `Authorization`. Then add a class called `GroupsToRolesTransformer`. The contents of the transformer should be:
 
