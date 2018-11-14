@@ -28,7 +28,8 @@ options = {
         /python_api_sdk/,
         /javadoc/,
         /csharp_api_sdk/,
-        /books/
+        /books/,
+        /blog/
     ],
     :url_ignore => [
         /linkedin.com/, # linked in doesn't play nice with site crawlers
