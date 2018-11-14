@@ -376,9 +376,6 @@ The following are a collection of informational articles that dive into specific
 
 - [About the System Log](https://support.okta.com/help/Documentation/Knowledge_Article/About-the-System-Log-651903282)
 - [Exporting Okta Log Data](https://support.okta.com/help/Documentation/Knowledge_Article/Exporting-Okta-Log-Data)
-- [Okta's Enhanced System Log Report - Part I](https://support.okta.com/help/blogdetail?id=a67F0000000L2aNIAS)
-- [Okta's Enhanced System Log Report - Part II](https://support.okta.com/help/blogdetail?id=a67F0000000L2aSIAS)
-- [Okta's Enhanced System Log Report - Part III (FAQ)](https://support.okta.com/help/blogdetail?id=a67F0000000L2aXIAS)
 - [Using Session and Request ID Fields in the System Log](https://support.okta.com/help/Documentation/Knowledge_Article/65532538-Using-Session-and-Request-ID-Fields-in-the-System-Log)
 - [Useful System Log Queries](https://support.okta.com/help/Documentation/Knowledge_Article/Useful-System-Log-Queries)
 
