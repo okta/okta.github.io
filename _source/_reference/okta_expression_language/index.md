@@ -265,6 +265,12 @@ The format for conditional expressions is
 
 **Note:** Use the double equals sign, <code>==</code>, to check for equality.
 
+The following functions are not supported in conditions:
+
+- Convert
+- Array
+- Time
+
 ### Samples
 
 For these samples, assume that *user* has following attributes in Okta.
