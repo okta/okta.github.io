@@ -152,17 +152,6 @@
       {% endfor %}
     </ul>
 
-    <h3 class="Sidebar-title">Standards</h3>
-    <ul class="Sidebar-nav">
-      {% assign elements = site.standards %}
-      {% for element in elements %}
-      {% unless element.id contains '/index' %}{% continue %}{% endunless %}
-      <li{% if element.title == page.title%} class="is-active"{% endif %}>
-        <a href="{{ element.url | remove: '/index' | append: '/' }}">{{ element.title }}</a>
-      </li>
-      {% endfor %}
-    </ul>
-
     <script>
       if (document.querySelectorAll("#Sidebar_Resources .is-active").length) {
         document.getElementById('Sidebar_Resources').classList.remove('Sidebar-hide');
