@@ -409,6 +409,7 @@ new Vue({
 
 Replace `src/App.vue` with the following:
 
+{% raw %}
 ```html
 <template>
   <div id="app">
@@ -443,11 +444,13 @@ Replace `src/App.vue` with the following:
   [v-cloak] { display: none; }
 </style>
 ```
+{% endraw %}
 
 Delete the `src/components/HelloWorld.vue` module. You can also delete the `src/assets` folder, if you want, as you won't need it.
 
 Create a new Vue component called `src/components/Todos.vue`:
 
+{% raw %}
 ```html
 <template>
   <div>
@@ -665,14 +668,17 @@ Create a new Vue component called `src/components/Todos.vue`:
   [v-cloak] { display: none; }
 </style>
 ```
+{% endraw %}
 
 Finally, add a stylesheet called `public/style.css` and copy and paste the styles from [the stylesheet in our GitHub repository.](https://raw.githubusercontent.com/moksamedia/okta-spring-boot-vue/master/client/public/style.css).
 
 In the `public/index.html`, add the following line at the bottom of the `<head></head>` block: incognito window.
 
+{% raw %}
 ```html
 <link rel="stylesheet" type="text/css" href="<%= BASE_URL %>style.css">
 ```
+{% endraw %}
 
 If you do this now, you'll see a functioning todo application, but the data doesn't persist. The todos are simply saved as an array in the Vue module. You're going to modify this to send and receive data from your Spring Boot resource server. 
 
@@ -944,6 +950,7 @@ new Vue({
 
 Next, update the `src/App.vue` module to match the following:
 
+{% raw %}
 ```html
 <template>  
   <div id="app">  
@@ -998,6 +1005,7 @@ export default app
   [v-cloak] { display: none; }  
 </style>
 ```
+{% endraw %}
 
 These changes demonstrate a couple things. First, the code creates and updates a property, `activeUser`, that passes information to the Todos module about the current active user (if there is one, or null, if there isn't). It also adds a logout button to the footer.
 
