@@ -2,7 +2,7 @@
 layout: blog_post
 title: "Build a Simple CRUD App with Spring Boot and Vue.js"
 author: moksamedia
-description: "Create an example application using Spring Boot and Vue.js."
+description: "Create a CRUD (create, read, update, and delete) application using Spring Boot and Vue.js."
 tags: [java, spring, spring boot, vue, crud, tutorial]
 tweets:
 - "Build a Spring Boot + Vue.js app!"
