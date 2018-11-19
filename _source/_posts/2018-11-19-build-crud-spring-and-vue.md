@@ -855,8 +855,7 @@ Go ahead and run it using `yarn serve`. Make sure your Spring Boot resource serv
 
 ## Integrate Okta and Add User Authentication
 
-Okta makes user authentication really easy. The first step is to sign up for a free [
-](https://developer.okta.com) account. Next, you need to create an OpenID Connect (OIDC) application. Once you've logged in, click on the **Application** top-menu item, and then on the **Add Application** button.
+Okta makes user authentication really easy. The first step is to sign up for a free [developer.okta.com](https://developer.okta.com) account. Next, you need to create an OpenID Connect (OIDC) application. Once you've logged in, click on the **Application** top-menu item, and then on the **Add Application** button.
 
 {% img blog/build-crud-spring-and-vue/okta-list-apps.png alt:"Create a new Okta Application" width:"800" %}{: .center-image }
 
