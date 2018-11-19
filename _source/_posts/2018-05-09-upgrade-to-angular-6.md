@@ -119,7 +119,7 @@ Stephen Fluin announced that [Angular 6 is available](https://blog.angular.io/ve
 
 ## Tutorials Updated for Angular 6
 
-I updated a number of tutorials from Angular 5 to 6 since the release last Friday. I started with my [Angular and Angular CLI Tutorial](https://github.com/mraible/ng-demo/blob/41d9526dbc0a35131118f7f101938dfe75a0e212/README.adoc).
+I updated a number of tutorials from Angular 5 to 6 since the release last Friday. I started with my [Angular and Angular CLI Tutorial](http://gist.asciidoctor.org/?github-mraible%2Fng-demo%2F41d9526dbc0a35131118f7f101938dfe75a0e212%2F%2FREADME.adoc).
 
 <div style="max-width: 500px; margin: 0 auto">
 <blockquote class="twitter-tweet" data-cards="hidden" data-lang="en"><p lang="en" dir="ltr">I spent a couple hours today upgrading my <a href="https://twitter.com/angular?ref_src=twsrc%5Etfw">@angular</a> tutorial to use Angular 6. It wasn't too difficult, but not that straightforward either. The good news is I learned a lot! <br><br>💻 PR at <a href="https://t.co/jjHTQwP8Li">https://t.co/jjHTQwP8Li</a><br>📘 Updated tutorial at <a href="https://t.co/d08RMTQf8F">https://t.co/d08RMTQf8F</a><a href="https://twitter.com/hashtag/angular?src=hash&amp;ref_src=twsrc%5Etfw">#angular</a> <a href="https://twitter.com/hashtag/bleedingedge?src=hash&amp;ref_src=twsrc%5Etfw">#bleedingedge</a></p>&mdash; Matt Raible (@mraible) <a href="https://twitter.com/mraible/status/992532563917918209?ref_src=twsrc%5Etfw">May 4, 2018</a></blockquote>
