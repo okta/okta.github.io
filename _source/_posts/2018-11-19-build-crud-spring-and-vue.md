@@ -1121,7 +1121,7 @@ And that's it! You now have a fully functioning Vue client and Spring Boot REST 
 
 This tutorial did quite a lot. You built a Vue.js client application and a Spring Boot REST service, using them to demonstrate a fully functioning CRUD application. You also added authentication using Okta and the Okta Vue SDK. 
 
-If you'd like to dig a little deeper, take a look at [the Okta Vue SDK project page](https://github.com/okta/okta-oidc-js/tree/master/packages/okta-vue).
+If you'd like to dig a little deeper, take a look at [the Okta Vue SDK project](https://github.com/okta/okta-oidc-js/tree/master/packages/okta-vue).
 
 The Spring Boot REST service used Spring Data's JPA implementation to persist data based on a Java class. Spring Data and JPA is a super deep area, and [the Spring docs on it](https://docs.spring.io/spring-data/jpa/docs/current/reference/html/) are a great place to learn more.
 
