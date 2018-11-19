@@ -334,13 +334,13 @@ On to the client app!
 
 This tutorial assumes that you have Node and Yarn installed. If you don't, install them now. 
 
-Yarn can be installed using `brew install yarn`, or if you’re not on a mac, take a look at ([their website](https://yarnpkg.com/lang/en/docs/install/)). 
+Yarn can be installed using `brew install yarn`, or if you're not on a mac, take a look at ([their website](https://yarnpkg.com/lang/en/docs/install/)). 
 
 There are lots of ways to install Node.js. You can download a version from [their website](https://nodejs.org/en/download/releases/). I'm currently on version 8.12.0. Another option is the `n` package manager. Get it from [their GitHub page](https://github.com/tj/n).
 
 ## Create Vue.js App
 
-You’re going to use the Vue CLI 3 to create a project from scratch. Vue CLI is a great project that makes building a Vue app nice and easy. If you’re not familiar with it, take a look at [their website](https://cli.vuejs.org/).
+You're going to use the Vue CLI 3 to create a project from scratch. Vue CLI is a great project that makes building a Vue app nice and easy. If you're not familiar with it, take a look at [their website](https://cli.vuejs.org/).
 
 Install the Vue CLI 3 using yarn:
 
@@ -348,20 +348,20 @@ Install the Vue CLI 3 using yarn:
 yarn global add @vue/cli
 ```
 
-Once that’s finished, make sure you’re in your root project directory `SpringBootVueApplication` and run the following command:
+Once that's finished, make sure you're in your root project directory `SpringBootVueApplication` and run the following command:
 
 ```bash
 vue create -d client
 ```
 
-This creates the default Vue application named **client** in the `client` subdirectory. Without the `-d` option, the Vue CLI has a pretty neat interface that allows you to choose which options to include. It’s worth checking out another time.
-The project we’re going to build is based on [the Vue TodoMVC example project](https://vuejs.org/v2/examples/todomvc.html) by Evan You. The difference is that this project will persist the todos using a Spring Boot server instead of browser local storage.
+This creates the default Vue application named **client** in the `client` subdirectory. Without the `-d` option, the Vue CLI has a pretty neat interface that allows you to choose which options to include. It's worth checking out another time.
+The project we're going to build is based on [the Vue TodoMVC example project](https://vuejs.org/v2/examples/todomvc.html) by Evan You. The difference is that this project will persist the todos using a Spring Boot server instead of browser local storage.
 
 `cd` into the `SpringBootVueApplication/client` directory.
 
 The project can be run with `yarn serve`.
 
-Right now, all you’ll see is the standard “Welcome to Your Vue.js App” screen. 
+Right now, all you'll see is the standard "Welcome to Your Vue.js App" screen. 
 
 Add a couple dependencies:
 
@@ -369,7 +369,7 @@ Add a couple dependencies:
 yarn add axios vuejs-logger
 ```
 
-**axios** is the package you’ll use to make HTTP requests to your server. **vuejs-logger** is a logging framework, because you’re not still using `console.log()`, right?
+**axios** is the package you'll use to make HTTP requests to your server. **vuejs-logger** is a logging framework, because you're not still using `console.log()`, right?
 
 Add a Vue config file `client/vue.config.js`:
 
@@ -446,7 +446,7 @@ Replace `src/App.vue` with the following:
 </style>
 ```
 
-Delete the `src/components/HelloWorld.vue` module. You can also delete the `src/assets` folder, if you want, as we won’t need it.
+Delete the `src/components/HelloWorld.vue` module. You can also delete the `src/assets` folder, if you want, as we won't need it.
 
 Create a new Vue component called `src/components/Todos.vue`:
 
@@ -1085,7 +1085,7 @@ Also add the following to the bottom of the build.gradle file. This resolves a l
 
 ```groovy
 configurations.all {  
-  exclude group: 'org.springframework.boot', module: 'spring-boot-starter-logging'  
+  exclude group: 'org.springframework.boot', module: 'spring-boot-starter-logging'
   exclude group: 'org.springframework.boot', module: 'logback-classic'  
 }
 ```
@@ -1120,9 +1120,9 @@ And that's it! You now have a fully functioning Vue client and Spring Boot rest 
 
 This tutorial did quite a lot. you built a Vue.js client application and a Spring Boot rest service, using them to demonstrate a fully functioning CRUD application. You also added authentication using Okta and the Okta Vue SDK. 
 
-If you’d like to dig a little deeper, take a look at [the Okta Vue SDK project page](https://github.com/okta/okta-oidc-js/tree/master/packages/okta-vue).
+If you'd like to dig a little deeper, take a look at [the Okta Vue SDK project page](https://github.com/okta/okta-oidc-js/tree/master/packages/okta-vue).
 
-The Spring Boot rest service used Spring Data’s JPA implementation to persist data based on a Java class. Spring Data and JPA is a super deep area, and [the Spring docs on it](https://docs.spring.io/spring-data/jpa/docs/current/reference/html/) are a great place to learn more.
+The Spring Boot rest service used Spring Data's JPA implementation to persist data based on a Java class. Spring Data and JPA is a super deep area, and [the Spring docs on it](https://docs.spring.io/spring-data/jpa/docs/current/reference/html/) are a great place to learn more.
 
 Okta also has a number of other great related tutorials.
 [Build a Basic CRUD App with Angular 5.0 and Spring Boot 2.0](/blog/2017/12/04/basic-crud-angular-and-spring-boot)
