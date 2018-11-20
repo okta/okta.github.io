@@ -1,0 +1,161 @@
+---
+layout: blog_post
+title: 'Spring Boot 2.1: What's New and Noteworthy'
+author: mraible
+description: "In guide, you'll learn about new features in Spring Boot 2.1. You'll also learn about Spring Security and its excellent OIDC / OAuth 2.0 support."
+tags: [spring boot, spring boot 2, spring framework, spring security, oidc, oauth2]
+tweets:
+- "Spring Boot 2.1 - what's new and noteworthy > "
+- "We 💚 @springboot here at @okta. Learn about its new features and refinements in this handy blog post."
+- "Learn how to use Spring Boot 2.1 with @angular, @reactjs, and @webflux in this action-packed article!"
+image: blog/featured/okta-java-skew.jpg
+---
+:page-liquid:
+:experimental:
+// Define unicode for Apple Command key.
+:commandkey: &#8984;
+
+Spring Boot is a Java framework that makes it possible to build applications quickly, with very little Java code. It ships with a number of starters and tools that allow you to create secure web applications in just a few lines of code.
+
+[more intro - what keywords should we target? spring oauth2, spring oidc, spring boot oidc, spring security oauth, spring sso are some ideas]
+
+== What's New in Spring Boot 2.1
+
+https://rieckpil.de/review-whats-new-in-spring-boot-2-1/
+https://github.com/spring-projects/spring-boot/wiki/Spring-Boot-2.1-Release-Notes
+
+== Create a Secure Spring Boot Application
+
+You can create a Spring Boot application quickly with the Spring CLI. It allows you to write Groovy scripts that get rid of the boilerplate Java and build file configuration. This allows you, the developer, to focus on the necessary code. Refer to the https://docs.spring.io/spring-boot/docs/current/reference/html/getting-started-installing-spring-boot.html#getting-started-installing-the-cli[project's documentation for installation instructions]. To install Spring CLI, I recommend using https://docs.spring.io/spring-boot/docs/current/reference/html/getting-started-installing-spring-boot.html#getting-started-sdkman-cli-installation[SDKMAN!]:
+
+[source,bash]
+----
+sdk install springboot
+----
+
+Or you can use https://docs.spring.io/spring-boot/docs/current/reference/html/getting-started-installing-spring-boot.html#getting-started-homebrew-cli-installation[Homebrew] if you're on a Mac.
+
+[source,bash]
+----
+brew tap pivotal/tap
+brew install springboot
+----
+
+Create a `helloWorld.groovy` file that has the following code:
+
+[source,groovy]
+----
+@Grab('spring-boot-starter-security')
+@RestController
+class Application {
+
+  @RequestMapping('/')
+  String home() {
+    'Hello World'
+  }
+}
+----
+
+The `@Grab` annotation invokes [Grape](http://docs.groovy-lang.org/latest/html/documentation/grape.html) to download dependencies. Because Spring Security is in the classpath, its default security rules will be used. That is, protect everything, allow a user with the username `user`, and generate a random password on startup for that user.
+
+Run this app with the following command:
+
+[source,bash]
+----
+spring run helloWorld.groovy
+----
+
+Navigate to `http://localhost:8080` and you'll be prompted to login with your browser's basic authentication dialog. Enter `user` for the username and copy/paste the generated password from your terminal. If you copied and pasted the password successfully, you'll see `Hello World` in your browser.
+
+== Add Identity and Authentication with OIDC
+
+Using the same username and password for all your users is silly. Since friends don't let friends write authentication, I'll show you how to use Okta for auth with just a few lines of code.
+
+OIDC requires an identity provider (or IdP). There are many well-known IdPs like Google, Twitter, and Facebook, but those services don't allow you to manage your users like you would in Active Directory. Okta allows this, _and_ you can use Okta's API for OIDC.
+
+https://developer.okta.com/signup/[Register for a forever-free developer account], and when you're done, come on back so you can learn more about how to secure your Spring Boot app!
+
+image::{% asset_path 'blog/spring-boot-2.1/okta-signup.png' %}[alt=Register for a free developer account,width=800,align=center]
+
+=== Create an OIDC App in Okta
+
+Log in to your Okta Developer account and navigate to **Applications** > **Add Application**. Click **Web** and click **Next**. Give the app a name you'll remember, and specify `http://localhost:8080/login/oauth2/code/okta` as a Login redirect URI. Click **Done**. The result should look something like the screenshot below.
+
+image::{% asset_path 'blog/spring-boot-2.1/okta-oidc-app.png' %}[alt=Okta OIDC App,width=700,align=center]
+
+Copy and paste the URI of your default authorization server, client ID, and the client secret into `application.yml` (you'll need to create this file).
+
+[source,yaml]
+----
+spring:
+  security:
+    oauth2:
+      client:
+        provider:
+          okta:
+            issuer-uri: https://{yourOktaDomain}/oauth2/default
+        registration:
+          okta:
+            client-id: {clientId}
+            client-secret: {clientSecret}
+----
+
+Create a `helloOAuth.groovy` file that uses Spring Security and its OIDC support.
+
+[source,groovy]
+----
+@Grab('spring-boot-starter-security')
+@Grab('spring-security-oauth2-client')
+@Grab('spring-security-oauth2-jose')
+
+@RestController
+class Application {
+
+  @GetMapping('/')
+  String home(java.security.Principal user) {
+    'Hello ' + user.name
+  }
+}
+----
+
+Restart your Spring Boot app, and try to access `http://localhost:8080`. You'll be redirected to Okta to log in.
+
+In the near future, you'll be able to use https://github.com/okta/okta-spring-boot[Okta's Spring Boot starter] and make it even simpler:
+
+[source,yaml]
+.application.yml
+----
+okta:
+  oauth2:
+    issuer: https://{yourOktaDomain}/oauth2/default
+    client-id: {clientId}
+    client-secret: {clientSecret}
+----
+
+[source,groovy]
+.helloWorld.groovy
+----
+@Grab('okta-spring-boot-starter')
+
+@RestController
+class Application {
+
+  @GetMapping('/')
+  String home(java.security.Principal user) {
+    'Hello ' + user.name
+  }
+}
+----
+
+Watch the project's https://github.com/okta/okta-spring-boot/pull/99[issue #99] to see when our Spring Boot 2.1 support is ready for prime-time.
+
+== Angular, React, and WebFlux - Oh My!
+
+I updated a few tutorials recently.
+
+WebFlux is fun. here's a video
+
+[screencast]
+
+== Learn More About Spring Boot and Spring Security
+
