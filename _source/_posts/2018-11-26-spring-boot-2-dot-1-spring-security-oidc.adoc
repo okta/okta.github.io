@@ -1,6 +1,6 @@
 ---
 layout: blog_post
-title: 'Spring Boot 2.1: What's New and Noteworthy'
+title: "Spring Boot 2.1: What's New and Noteworthy"
 author: mraible
 description: "In guide, you'll learn about new features in Spring Boot 2.1. You'll also learn about Spring Security and its excellent OIDC / OAuth 2.0 support."
 tags: [spring boot, spring boot 2, spring framework, spring security, oidc, oauth2]
@@ -30,12 +30,12 @@ I think https://twitter.com/rieckpil[Philip Riecks] does a great job of summariz
 
 There's some other useful security-related features in the https://github.com/spring-projects/spring-boot/wiki/Spring-Boot-2.1-Release-Notes[official Spring Boot 2.1 release notes]:
 
-- ``@WebMvcTest` and ``@WebFluxTest` security configuration is now automatically included with web slice tests. ``@WebMvcTest` looks for a `WebSecurityConfigurer` bean while ``@WebFluxTest` looks for a `ServerHttpSecurity` bean.
+- `@WebMvcTest` and `@WebFluxTest` security configuration is now automatically included with web slice tests. `@WebMvcTest` looks for a `WebSecurityConfigurer` bean while `@WebFluxTest` looks for a `ServerHttpSecurity` bean.
 - OAuth 2.0 client configuration has a single `spring.security.oauth2.client.registration` tree. The `authorizationcode` and `clientcredentials` keys have been removed.
 - Thymeleaf Spring Security Extras has changed its auto-configuration coordinates to `thymeleaf-extras-springsecurity5`. Update your build files!
-- OAuth 2.0 login has been added to WebFlux, along with resource server support. _I like to call it OIDC login since linktoyoutube[OAuth is not for authentication]._
+- OAuth 2.0 login has been added to WebFlux, along with resource server support. _I like to call it **OIDC login** since https://www.youtube.com/watch?v=iGFy1xHGGx4[OAuth is not for authentication]._
 
-Another new feature that looks interesting: Elasticsearch REST client support. I integrated [Spring Data Jest] into JHipster, so this development intrigues me. Especially its description: an alternative option to Jest, [it provides] auto-configurations for `RestClient` and `RestHighLevelClient` are provided with configurable options from the `spring.elasticsearch.rest.*` namespace.
+Another new feature that looks interesting: Elasticsearch REST client support. I integrated https://github.com/VanRoy/spring-data-jest[Spring Data Jest] into JHipster, so this development intrigues me. Especially its description: an alternative option to Jest, auto-configurations for `RestClient` and `RestHighLevelClient` are provided with configurable options from the `spring.elasticsearch.rest.*` namespace.
 
 == Create a Secure Spring Boot Application
 
@@ -54,7 +54,15 @@ brew tap pivotal/tap
 brew install springboot
 ----
 
-Create a `helloWorld.groovy` file that has the following code:
+Make sure you're using the 2.1.0 version by running `spring --version`.
+
+[source,bash]
+----
+$ spring --version
+Spring CLI v2.1.0.RELEASE
+----
+
+Create a `hello.groovy` file that has the following code:
 
 [source,groovy]
 ----
@@ -69,16 +77,16 @@ class Application {
 }
 ----
 
-The `@Grab` annotation invokes [Grape](http://docs.groovy-lang.org/latest/html/documentation/grape.html) to download dependencies. Because Spring Security is in the classpath, its default security rules will be used. That is, protect everything, allow a user with the username `user`, and generate a random password on startup for that user.
+The `@Grab` annotation invokes http://docs.groovy-lang.org/latest/html/documentation/grape.html[Grape] to download dependencies. Because Spring Security is in the classpath, its default security rules will be used. That is, protect everything, allow a user with the username `user`, and generate a random password on startup for that user.
 
 Run this app with the following command:
 
 [source,bash]
 ----
-spring run helloWorld.groovy
+spring run hello.groovy
 ----
 
-Navigate to `http://localhost:8080` and you'll be prompted to login with your browser's basic authentication dialog. Enter `user` for the username and copy/paste the generated password from your terminal. If you copied and pasted the password successfully, you'll see `Hello World` in your browser.
+Open your browser to `http://localhost:8080` and you'll be greeted with a login form. Enter `user` for the username and copy/paste the generated password from your terminal. If you copied and pasted the password successfully, you'll see `Hello World` in your browser.
 
 == Add Identity and Authentication with OIDC
 
@@ -113,7 +121,9 @@ spring:
             client-secret: {clientSecret}
 ----
 
-Create a `helloOAuth.groovy` file that uses Spring Security and its OIDC support.
+TIP: The `{}` brackets are just placeholders to show variables, you'll want to remove these so they don't surround your app's values.
+
+Create a `helloOIDC.groovy` file that uses Spring Security and its OIDC support.
 
 [source,groovy]
 ----
@@ -131,7 +141,7 @@ class Application {
 }
 ----
 
-Restart your Spring Boot app, and try to access `http://localhost:8080`. You'll be redirected to Okta to log in.
+Run this file using `spring run helloOIDC.groovy` and try to access `http://localhost:8080`. You'll be redirected to Okta to log in, or just shown `Hello {sub claim}` if you're already logged in.
 
 In the near future, you'll be able to use https://github.com/okta/okta-spring-boot[Okta's Spring Boot starter] and make it even simpler:
 
@@ -146,9 +156,9 @@ okta:
 ----
 
 [source,groovy]
-.helloWorld.groovy
+.helloOkta.groovy
 ----
-@Grab('okta-spring-boot-starter')
+@Grab('com.okta.spring:okta-spring-boot-starter:1.0.0-SNAPSHOT')
 
 @RestController
 class Application {
@@ -164,15 +174,35 @@ Watch the project's https://github.com/okta/okta-spring-boot/pull/99[issue #99] 
 
 == Angular, React, and WebFlux - Oh My!
 
-I updated a few tutorials recently.
+I updated a few of my favorite tutorials on this blog to use Spring Boot 2.1 recently.
 
-WebFlux is fun. here's a video
+* link:/blog/2018/07/19/simple-crud-react-and-spring-boot[Use React and Spring Boot to Build a Simple CRUD App] - uses authorization code flow and packages everything in a single JAR.
+* link:/blog/2018/08/22/basic-crud-angular-7-and-spring-boot-2[Build a Basic CRUD App with Angular 7.0 and Spring Boot 2.1] - uses implicit flow, Okta's Angular SDK, and a Spring Security resource server.
+* link:/blog/2018/09/25/spring-webflux-websockets-react[Full Stack Reactive with Spring WebFlux, WebSockets, and React] - uses implicit flow, along with Spring Security OIDC login and resource server.
 
-[screencast]
+I enjoyed writing the full stack reactive tutorial so much, I turned it into a screencast! _A keen eye will notice I'm using Java 11 **and** Node 11 in this video._
+
+++++
+<div style="text-align: center">
+<iframe width="560" height="315" style="max-width: 100%" src="https://www.youtube.com/embed/1xpwYe154Ys" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+</div>
+++++
 
 == JHipster and Spring Boot 2.1
 
-Speaking of JHipster, we're working on
+Earlier I mentioned https://www.jhipster.tech[JHipster]. The JHipster team is actively working on upgrading its baseline to Spring Boot 2.1. You can watch progress by following https://github.com/jhipster/generator-jhipster/issues/8683[issue #8683].
+
+If you've never heard of JHipster before, you should download the https://www.infoq.com/minibooks/jhipster-mini-book-5[free JHipster Mini-Book] from InfoQ! It's a guide I wrote to help you get started with hip technologies today: Angular, Bootstrap and Spring Boot. The 5.0 version was http://www.jhipster-book.com/#!/news/entry/jhipster-mini-book-v5-now-available[just released last week].
 
 == Learn More About Spring Boot and Spring Security
 
+I've only touched on the tip of the iceberg regarding the capabilities of Spring Boot and Spring Security. You can use them to link:/blog/2018/02/13/secure-spring-microservices-with-oauth[build and secure microservices] too!
+
+Here's some related posts that show the power of using OAuth 2.0 and OIDC to secure your Spring Boot APIs.
+
+* link:/blog/2018/10/16/token-auth-for-java[Simple Token Authentication for Java Apps]
+* link:/blog/2018/09/26/build-a-spring-boot-webapp[Build a Web App with Spring Boot and Spring Security in 15 Minutes]
+* link:/blog/2018/04/02/client-creds-with-spring-boot[Secure Server-to-Server Communication with Spring Boot and OAuth 2.0]
+* link:/blog/2018/11/20/build-crud-spring-and-vue[Build a Simple CRUD App with Spring Boot and Vue.js]
+
+If you enjoyed this post, follow us on social media {https://twitter.com/oktadev[Twitter], https://www.facebook.com/oktadevelopers[Facebook], https://www.linkedin.com/company/oktadev/[LinkedIn], https://www.youtube.com/channel/UC5AMiWqFVFxF1q9Ya1FuZ_Q[YouTube]} to know when we've posted ones like it.
