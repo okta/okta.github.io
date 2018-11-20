@@ -18,7 +18,7 @@ I ❤️ Thanksgiving. It's one of my favorite holidays. I love it because it's 
 
 I'm also very thankful for my awesome job at https://twitter.com/oktadev[@oktadev]. I get to write example apps with open source software, publish them as https://github.com/oktadeveloper[open source projects], and help developers understand how to use Okta's https://developer.okta.com/reference/[developer APIs] for authentication and authorization.
 
-If you've been a software developer for any length of time, you probably know what makes it a fun lifestyle: the opportunity to learn new stuff, to have an impact on the company's business, and to have a great boss. I'm _very_ thankful I have all three. Add to that my fantastic team (https://twitter.com/rdegges[@rdegges], https://twitter.com/leebrandt[@leebrandt], https://twitter.com/aaronpk[@aaronpk], https://twitter.com/reverentgeek[@reverentgeek], https://twitter.com/LindsayB610[@LindsayB610], and https://twitter.com/kaifubrent[@kaifubrent]) &mdash; and I've got a metric shit-ton to be thankful for!
+If you've been a software developer for any length of time, you probably know what makes it a fun lifestyle: the opportunity to learn new stuff, to have an impact on the company's business, and to have a great boss. I'm _very_ thankful I have all three. Add to that my fantastic team (https://twitter.com/rdegges[@rdegges], https://twitter.com/leebrandt[@leebrandt], https://twitter.com/aaronpk[@aaronpk], https://twitter.com/reverentgeek[@reverentgeek], https://twitter.com/LindsayB610[@LindsayB610], and https://twitter.com/kaifubrent[@kaifubrent]) &mdash; and I've got a ton to be thankful for!
 
 Enough of the "I have cool co-workers" talk, you're here to find out about my favorite tools.
 
@@ -28,7 +28,7 @@ https://www.jetbrains.com/idea/[IntelliJ IDEA] is an Integrated Developer Enviro
 
 image::{% asset_path 'blog/thankful-2018/idea-2018.2.png' %}[alt=IntelliJ IDEA,width=600,align=center]
 
-The first languages I learned to program in were HTML, CSS, and JavaScript, way back in the mid-90s. I started learning Java in the late 90s. At that time, my favorite IDE was HomeSite. Back then, I used to write Java code and search/copy/paste the imports into my code. _Such pain!_
+The first languages I learned to program in were HTML, CSS, and JavaScript, way back in the mid-90s. I started learning Java in the late 90s. At that time, my favorite IDE was HomeSite. Back then, I used to write Java code and search/copy/paste the imports into my code. _Such a pain!_
 
 It wasn't until the early 2000s that I found an IDE that wasn't painful to use. I fell in love with Eclipse for a few years, back in the Struts 1.0/Spring 1.0 days. In the mid-2000s, I migrated my AppFuse project from Ant to Maven and ended up moving to IDEA because its Maven support was so much better. Then I moved back to the area I adore -- UI development -- and found that IDEA had excellent support for HTML, CSS, and JavaScript. I haven't looked back since.
 
