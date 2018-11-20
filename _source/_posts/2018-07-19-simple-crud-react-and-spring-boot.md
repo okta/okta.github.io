@@ -257,9 +257,8 @@ class GroupController {
                 .body(result);
     }
 
-    @PutMapping("/group/{id}")
-    ResponseEntity<Group> updateGroup(@PathVariable Long id, @Valid @RequestBody Group group) {
-        group.setId(id);
+    @PutMapping("/group")
+    ResponseEntity<Group> updateGroup(@Valid @RequestBody Group group) {
         log.info("Request to update group: {}", group);
         Group result = groupRepository.save(group);
         return ResponseEntity.ok().body(result);
