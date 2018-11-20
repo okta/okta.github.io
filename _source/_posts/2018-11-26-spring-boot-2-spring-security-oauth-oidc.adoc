@@ -21,8 +21,21 @@ Spring Boot is a Java framework that makes it possible to build applications qui
 
 == What's New in Spring Boot 2.1
 
-https://rieckpil.de/review-whats-new-in-spring-boot-2-1/
-https://github.com/spring-projects/spring-boot/wiki/Spring-Boot-2.1-Release-Notes
+I think https://twitter.com/rieckpil[Philip Riecks] does a great job of summarizing the highlights of https://rieckpil.de/review-whats-new-in-spring-boot-2-1/[What's new in Spring Boot 2.1]:
+
+- **Java 11 Support**: just add `<java.version>11</java.version>` to your `pom.xml`!
+- **Logging Groups**: group logging categories using `logging.group.{groupName}={first},{second}` (`logging.group.web` and `logging.group.sql` are already defined).
+- **Lazy JPA startup**: specify `spring.data.jpa.repositories.bootstrap-mode=lazy` to turn it on.
+- **JUnit 5 improvements**: no more `@ExtendWith(SpringExtension.class)` necessary!
+
+There's some other useful security-related features in the https://github.com/spring-projects/spring-boot/wiki/Spring-Boot-2.1-Release-Notes[official Spring Boot 2.1 release notes]:
+
+- ``@WebMvcTest` and ``@WebFluxTest` security configuration is now automatically included with web slice tests. ``@WebMvcTest` looks for a `WebSecurityConfigurer` bean while ``@WebFluxTest` looks for a `ServerHttpSecurity` bean.
+- OAuth 2.0 client configuration has a single `spring.security.oauth2.client.registration` tree. The `authorizationcode` and `clientcredentials` keys have been removed.
+- Thymeleaf Spring Security Extras has changed its auto-configuration coordinates to `thymeleaf-extras-springsecurity5`. Update your build files!
+- OAuth 2.0 login has been added to WebFlux, along with resource server support. _I like to call it OIDC login since linktoyoutube[OAuth is not for authentication]._
+
+Another new feature that looks interesting: Elasticsearch REST client support. I integrated [Spring Data Jest] into JHipster, so this development intrigues me. Especially its description: an alternative option to Jest, [it provides] auto-configurations for `RestClient` and `RestHighLevelClient` are provided with configurable options from the `spring.elasticsearch.rest.*` namespace.
 
 == Create a Secure Spring Boot Application
 
@@ -156,6 +169,10 @@ I updated a few tutorials recently.
 WebFlux is fun. here's a video
 
 [screencast]
+
+== JHipster and Spring Boot 2.1
+
+Speaking of JHipster, we're working on
 
 == Learn More About Spring Boot and Spring Security
 
