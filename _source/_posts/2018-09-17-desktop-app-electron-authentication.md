@@ -76,7 +76,7 @@ Open the `package.json` in this project and make the following changes.
 
 These changes are not necessary, but they will make things easier. The changes in "scripts" make it so compilation will happen before you run `npm run dev` or `npm start`. You're also moving the `electron` dependencies to be a `devDependency` and upgrading TypeScript to the latest version.
 
-You'll also need to make some changes to `flow.ts` since you're upgrading to AppAuth-JS 1.1.1. The upgrade allows for PKCE and a couple constructors changed to take in objects instead of arguments. It might be cumbersome to pick through the changes below. You can [copy this file](https://github.com/googlesamples/appauth-js-electron-sample/blob/50d98d888ca9299708f71e8bce00101048389260/flow.ts) instead.
+You'll also need to make some changes to `flow.ts` since you're upgrading to AppAuth 1.1.1. The upgrade allows for PKCE and a couple constructors changed to take in objects instead of arguments. It might be cumbersome to pick through the changes below. You can [copy this file](https://github.com/googlesamples/appauth-js-electron-sample/blob/50d98d888ca9299708f71e8bce00101048389260/flow.ts) instead.
 
 **NOTE:** If the changes below are already in this file, it's likely [this pull request](https://github.com/googlesamples/appauth-js-electron-sample/pull/3) was merged and you can skip this part.
 
@@ -280,7 +280,7 @@ The diagram below shows how PKCE works with your app and Okta.
 
 <!-- copied from _source/_authentication-guide/auth-overview/index.md -->
 
-You don't need to change any code in your Electron app to add PKCE. That was done when you upgraded `flow.ts` to use AppAuth-JS 1.1.1.
+You don't need to change any code in your Electron app to add PKCE. That was done when you upgraded `flow.ts` to use AppAuth 1.1.1.
 
 Start your app with `npm start`, and try to login. You should be able to. However, when you click on **USER INFO**, you won't see your user's name or avatar. Open Chrome Developer Tools with **View** > **Toggle Developer Tools** to see why.
 
