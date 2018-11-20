@@ -401,5 +401,5 @@ Like what you learned here? Follow [@oktadev](https://twitter.com/oktadev), like
 
 **Changelog:**
 
-* Nov 20, 2018: Updated `flow.ts` for AppAuth 1.1.1 and added PKCE support. See the example app changes in [okta-appauth-js-electron-example#3](https://github.com/oktadeveloper/okta-appauth-js-electron-example/pull/3); changes to this post can be viewed in [okta.github.io#2493](https://github.com/okta/okta.github.io/pull/2493).
+* Nov 20, 2018: Updated `flow.ts` for AppAuth 1.1.1 and added PKCE support. See the example app changes in [okta-appauth-js-electron-example#3](https://github.com/oktadeveloper/okta-appauth-js-electron-example/pull/3); changes to this post can be viewed in [okta.github.io#2495](https://github.com/okta/okta.github.io/pull/2495).
 * Sep 19, 2018: Updated to use Electron 3.0.0 and AppAuth 1.1.1. See the example app changes in [okta-appauth-js-electron-example#1](https://github.com/oktadeveloper/okta-appauth-js-electron-example/pull/1); changes to this post can be viewed in [okta.github.io#2327](https://github.com/okta/okta.github.io/pull/2327).
