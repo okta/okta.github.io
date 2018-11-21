@@ -20,7 +20,7 @@ In this example, you'll build a simple web application with Angular CLI, a tool 
 *TIP: If you'd like to skip building the Angular application and get right to adding authentication, you can clone my `ng-demo` project, then skip to the [Create an OpenID Connect App in Okta](#create-an-openid-connect-app-in-okta) section.*
 
 ```bash
-git clone https://github.com/mraible/ng-demo.git
+git clone -b v6.0 https://github.com/mraible/ng-demo.git --depth 1
 ```
 
 ### What You'll Need

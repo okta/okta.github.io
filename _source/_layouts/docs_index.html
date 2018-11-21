@@ -79,24 +79,6 @@ js: docsIndex
                 {% endfor %}
                 </div>
                 <!-- END Subpages Grid -->
-
-                <h2>Standards</h2>
-                <!-- START Subpages Grid -->
-                <div class="Row">
-                {% assign documents = site.standards | sort:'weight' %}
-                {% for document in documents %}
-                  {% unless document.id contains '/index' %}
-                    {% continue %}
-                  {% endunless %}
-                    <div class="Column--4 Column--small-12">
-                        <a href="{{ document.url | remove: '/index' | append: '/' }}">
-                            <h3 class="h4">{{ document.title }}</h3>
-                        </a>
-                        <p>{{ document.excerpt }}</p>
-                    </div>
-                    {% endfor %}
-                </div>
-                <!-- END Subpages Grid -->
             </div>
         </div>
     </div>

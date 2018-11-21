@@ -284,7 +284,7 @@ firebase deploy
 
 **NOTE:** You will need to install the `firebase-tools` package globally with `npm install -g firebase-tools` for the `firebase deploy` command to work.
 
-I deployed mine to <https://cryptopwa-oidc.firebaseapp.com> and received a [Lighthouse](https://developers.google.com/web/tools/lighthouse/) score of 91. Lighthouse is an automated tool for auditing the quality of web pages. You can run it against any web page to see audits for performance, accessibility, progressive web apps, and more.
+I deployed mine to `https://cryptopwa-oidc.firebaseapp.com` and received a [Lighthouse](https://developers.google.com/web/tools/lighthouse/) score of 91. Lighthouse is an automated tool for auditing the quality of web pages. You can run it against any web page to see audits for performance, accessibility, progressive web apps, and more.
 
 {% img blog/cryptocurrency-pwa/lighthouse-score-okta1.png alt:"Lighthouse Score: 91" width:"800" %}{: .center-image }
 

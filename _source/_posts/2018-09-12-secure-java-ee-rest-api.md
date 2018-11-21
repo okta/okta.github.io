@@ -927,7 +927,7 @@ OAuth2Authentication authentication = (OAuth2Authentication) principal;
 Map<String, Object> user = (Map<String, Object>) authentication.getUserAuthentication().getDetails();
 ```
 
-Please see [Spring Security's Servlet API integration documentation](https://docs.spring.io/spring-security/site/docs/current/reference/htmlsingle/#servletapi) for more information.
+Please see [Spring Security's Servlet API integration documentation](https://docs.spring.io/spring-security/site/docs/5.0.x/reference/htmlsingle/#servletapi) for more information.
 
 ## Use Pac4j to Lock Down Your Java REST API
 
