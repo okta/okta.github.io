@@ -74,9 +74,9 @@ Open the `package.json` in this project and make the following changes.
  }
 ```
 
-These changes are not necessary, but they will make things easier. The changes in "scripts" make it so compilation will happen before you run `npm run dev` or `npm start`. You're also moving the `electron` dependencies to be a `devDependency` and upgrading TypeScript to the latest version.
+The changes in the "scripts" are not necessary, but they make compilation happen before you run `npm run dev` or `npm start`. You're also moving the `electron` dependencies to be a `devDependency` and upgrading TypeScript to the latest version.
 
-You'll also need to make some changes to `flow.ts` since you're upgrading to AppAuth 1.1.1. The upgrade allows for PKCE, and a couple constructors changed to take in objects instead of arguments. It might be cumbersome to pick through the changes below. You can [copy this file](https://github.com/googlesamples/appauth-js-electron-sample/blob/50d98d888ca9299708f71e8bce00101048389260/flow.ts) instead.
+In addition, you'll need to make some changes to `flow.ts` since you just upgraded to AppAuth 1.1.1. The upgrade allows for PKCE (Proof Key for Code Exchange), and a couple constructors need to be changed to take in objects instead of arguments. It might be cumbersome to pick through the changes below. You can [copy this file](https://github.com/googlesamples/appauth-js-electron-sample/blob/50d98d888ca9299708f71e8bce00101048389260/flow.ts) instead.
 
 **NOTE:** If the changes below are already in this file, it's likely [this pull request](https://github.com/googlesamples/appauth-js-electron-sample/pull/3) was merged and you can skip this part.
 
@@ -401,5 +401,5 @@ Like what you learned here? Follow [@oktadev](https://twitter.com/oktadev), like
 
 **Changelog:**
 
-* Nov 20, 2018: Updated `flow.ts` for AppAuth 1.1.1 and added PKCE support. See the example app changes in [okta-appauth-js-electron-example#3](https://github.com/oktadeveloper/okta-appauth-js-electron-example/pull/3); changes to this post can be viewed in [okta.github.io#2495](https://github.com/okta/okta.github.io/pull/2495).
+* Nov 20, 2018: Updated `flow.ts` for AppAuth 1.1.1 and changed to use its PKCE support. See the example app changes in [okta-appauth-js-electron-example#3](https://github.com/oktadeveloper/okta-appauth-js-electron-example/pull/3); changes to this post can be viewed in [okta.github.io#2495](https://github.com/okta/okta.github.io/pull/2495).
 * Sep 19, 2018: Updated to use Electron 3.0.0 and AppAuth 1.1.1. See the example app changes in [okta-appauth-js-electron-example#1](https://github.com/oktadeveloper/okta-appauth-js-electron-example/pull/1); changes to this post can be viewed in [okta.github.io#2327](https://github.com/okta/okta.github.io/pull/2327).
