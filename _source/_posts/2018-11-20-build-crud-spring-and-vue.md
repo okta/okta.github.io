@@ -346,7 +346,7 @@ On to the client app!
 
 This tutorial assumes that you have Node and Yarn installed. If you don't, install them now. 
 
-Yarn can be installed using `brew install yarn`, or if you're not on a mac, take a look at ([their website](https://yarnpkg.com/lang/en/docs/install/)). 
+Yarn can be installed using `brew install yarn`, or if you're not on a Mac, take a look at [their website](https://yarnpkg.com/lang/en/docs/install/). 
 
 There are lots of ways to install Node.js. You can download a version from [their website](https://nodejs.org/en/download/releases/). I'm currently on version 8.12.0. Another option is the `n` package manager. Get it from [their GitHub page](https://github.com/tj/n).
 
@@ -686,7 +686,7 @@ Create a new Vue component called `src/components/Todos.vue`:
 
 Finally, add a stylesheet called `public/style.css` and copy and paste the styles from [the stylesheet in our GitHub repository.](https://raw.githubusercontent.com/moksamedia/okta-spring-boot-vue/master/client/public/style.css).
 
-In the `public/index.html`, add the following line at the bottom of the `<head></head>` block: incognito window.
+In the `public/index.html`, add the following line at the bottom of the `<head></head>` block.
 
 {% raw %}
 ```html
@@ -700,7 +700,7 @@ If you do this now, you'll see a functioning todo application, but the data does
 
 ## Add Client Logic to Handle API Requests
 
-Under the `client/src` directory, add a file name `Api.js` with the following contents:
+Under the `client/src` directory, add a file named `Api.js` with the following contents:
 
 ```js
 import axios from 'axios'  
@@ -1083,7 +1083,7 @@ Run the app using `yarn serve`. Now you'll be able to log in using Okta. And whe
 
 **NOTE:** to see the login screen you may have to log out of developer.okta.com first. Or you can just use an incognito window.
 
-{% img blog/build-crud-spring-and-vue/login-prompt.png alt:"Okta Login screenshot" width:"600" %}{: .center-image }
+{% img blog/build-crud-spring-and-vue/login-prompt.png alt:"Okta Login screenshot" width:"400" %}{: .center-image }
 
 {% img blog/build-crud-spring-and-vue/todo-app-screenshot-auth.png alt:"" width:"800" %}{: .center-http :9000/todosimage }
 
