@@ -75,9 +75,13 @@ and this would render as:
 <img src=".github/images/api-operations-rendered.png" width="150px"/>
 
 Method value is used in the class to determine the background color.
+
 get => $islamic-green (Green)
+
 post => $sea-buckthorn (Orange)
+
 put => $cerulean-5 (Blue)
+
 delete => $valencia (Red)
 
 ### What About Building the Site Before Committing?
