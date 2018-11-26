@@ -71,7 +71,8 @@ In the markdown, you can add
 <ApiOperation method="delete" url="/api/v1/apps" />
 ```
 and this would render as:
-<img src=".github/images/api-operations-rendered.png" align="left" width="50px"/>
+
+<img src=".github/images/api-operations-rendered.png" width="50px"/>
 
 Method value is used in the class to determine the background color.
 get => $islamic-green (Green)
