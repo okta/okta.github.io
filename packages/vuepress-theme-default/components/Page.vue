@@ -15,7 +15,7 @@
 </template>
 
 <script>
-import { resolveHeaders } from '../util/index'
+import { resolveHeaders } from '../util/'
 export default {
   components: {
     TableOfContents: () => import('./TableOfContents.vue'),
