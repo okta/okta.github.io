@@ -132,9 +132,7 @@ Create a `helloOIDC.groovy` file that uses Spring Security and its OIDC support.
 
 [source,groovy]
 ----
-@Grab('spring-boot-starter-security')
-@Grab('spring-security-oauth2-client')
-@Grab('spring-security-oauth2-jose')
+@Grab('spring-boot-starter-oauth2-client')
 
 @RestController
 class Application {
