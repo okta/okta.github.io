@@ -50,3 +50,5 @@ tmp
 # Ignore node packages added for tests added via npm
 node_modules/*
 npm-debug.log*
+
+_source/
