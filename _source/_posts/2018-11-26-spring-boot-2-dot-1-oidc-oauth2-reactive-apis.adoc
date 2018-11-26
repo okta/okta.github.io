@@ -11,9 +11,6 @@ tweets:
 image: blog/featured/okta-java-skew.jpg
 ---
 :page-liquid:
-:experimental:
-// Define unicode for Apple Command key.
-:commandkey: &#8984;
 
 Spring Boot 2.1 was recently released, eight months after the huge launch of Spring Boot 2.0. The reason I'm most excited about Spring Boot 2.1 to me is its improved performance and OpenID Connect (OIDC) support (from Spring Security 5.1). The combination of Spring Boot and Spring Security has provided excellent OAuth 2.0 support for years, and making OIDC a first-class citizen simplifies its configuration quite a bit.
 
