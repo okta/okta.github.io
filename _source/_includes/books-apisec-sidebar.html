@@ -1,0 +1,185 @@
+<aside class="Sidebar">
+  <h2 class="Sidebar-location Sidebar-toggle h6">Navigation</h2>
+  <div class="Sidebar-close Sidebar-toggle"></div>
+  <div>
+    <h3 class="Sidebar-title"><a href="/books/api-security/">API Security</a></h3>
+    <ul class="Sidebar-nav">
+              <li{% if "acknowledgments" == page.book_chapter %} class="is-active"{% endif %}>
+          <a href="/books/api-security/acknowledgments/">Acknowledgments</a>
+                  </li>
+              <li{% if "foreword" == page.book_chapter %} class="is-active"{% endif %}>
+          <a href="/books/api-security/foreword/">Foreword</a>
+                  </li>
+              <li{% if "tls" == page.book_chapter %} class="is-active"{% endif %}>
+          <a href="/books/api-security/tls/">Transport Layer Security</a>
+                      {% if 'tls' == page.book_chapter %}
+              <ul>
+                                  <li{% if "tls-history" == page.book_section %} class="is-active"{% endif %}>
+                    <a href="/books/api-security/tls/history">A Brief History of Secure Data Transport</a>
+                  </li>
+                                  <li{% if "tls-key-exchange" == page.book_section %} class="is-active"{% endif %}>
+                    <a href="/books/api-security/tls/key-exchange">How Key Exchange Works Today</a>
+                  </li>
+                                  <li{% if "tls-acronyms" == page.book_section %} class="is-active"{% endif %}>
+                    <a href="/books/api-security/tls/acronyms">Acronym Party: HTTPS/SSL/TLS</a>
+                  </li>
+                                  <li{% if "tls-how" == page.book_section %} class="is-active"{% endif %}>
+                    <a href="/books/api-security/tls/how">Establishing a SSL/TLS Session</a>
+                  </li>
+                                  <li{% if "tls-exposed-data" == page.book_section %} class="is-active"{% endif %}>
+                    <a href="/books/api-security/tls/exposed-data">Exposed Data over SSL/TLS</a>
+                  </li>
+                                  <li{% if "tls-server-certificates" == page.book_section %} class="is-active"{% endif %}>
+                    <a href="/books/api-security/tls/server-certificates">Server Certificates</a>
+                  </li>
+                                  <li{% if "tls-certificate-verification" == page.book_section %} class="is-active"{% endif %}>
+                    <a href="/books/api-security/tls/certificate-verification">Certificate Verification</a>
+                  </li>
+                                  <li{% if "tls-best-practices" == page.book_section %} class="is-active"{% endif %}>
+                    <a href="/books/api-security/tls/best-practices">Best Practices</a>
+                  </li>
+                                  <li{% if "tls-ssl-rating" == page.book_section %} class="is-active"{% endif %}>
+                    <a href="/books/api-security/tls/ssl-rating">SSL Rating</a>
+                  </li>
+                                </ul>
+            {% endif %}
+                  </li>
+              <li{% if "dos" == page.book_chapter %} class="is-active"{% endif %}>
+          <a href="/books/api-security/dos/">DOS Mitigation Strategies</a>
+                      {% if 'dos' == page.book_chapter %}
+              <ul>
+                                  <li{% if "dos-what-is" == page.book_section %} class="is-active"{% endif %}>
+                    <a href="/books/api-security/dos/what-is">What Is a DoS Attack?</a>
+                  </li>
+                                  <li{% if "dos-why" == page.book_section %} class="is-active"{% endif %}>
+                    <a href="/books/api-security/dos/why">Why are DoS Attacks So Prevalent?</a>
+                  </li>
+                                  <li{% if "dos-what" == page.book_section %} class="is-active"{% endif %}>
+                    <a href="/books/api-security/dos/what">Types of Denial of Service Attacks</a>
+                  </li>
+                                  <li{% if "dos-how" == page.book_section %} class="is-active"{% endif %}>
+                    <a href="/books/api-security/dos/how">How to Mitigate DoS Attacks</a>
+                  </li>
+                                  <li{% if "dos-parting" == page.book_section %} class="is-active"{% endif %}>
+                    <a href="/books/api-security/dos/parting">Parting Shots</a>
+                  </li>
+                                </ul>
+            {% endif %}
+                  </li>
+              <li{% if "sanitizing" == page.book_chapter %} class="is-active"{% endif %}>
+          <a href="/books/api-security/sanitizing/">Sanitizing Data</a>
+                      {% if 'sanitizing' == page.book_chapter %}
+              <ul>
+                                  <li{% if "sanitizing-accept-good" == page.book_section %} class="is-active"{% endif %}>
+                    <a href="/books/api-security/sanitizing/accept-good">Accept Known Good</a>
+                  </li>
+                                  <li{% if "sanitizing-reject-bad" == page.book_section %} class="is-active"{% endif %}>
+                    <a href="/books/api-security/sanitizing/reject-bad">Reject Bad Inputs</a>
+                  </li>
+                                  <li{% if "sanitize-inputs" == page.book_section %} class="is-active"{% endif %}>
+                    <a href="/books/api-security/sanitizing/sanitize-inputs">Sanitize Inputs</a>
+                  </li>
+                                  <li{% if "sanitizing-common-attacks" == page.book_section %} class="is-active"{% endif %}>
+                    <a href="/books/api-security/sanitizing/common-attacks">Common Attacks</a>
+                  </li>
+                                  <li{% if "sanitizing-attack-vectors" == page.book_section %} class="is-active"{% endif %}>
+                    <a href="/books/api-security/sanitizing/attack-vectors">Look For Other Attack Vectors</a>
+                  </li>
+                                  <li{% if "sanitizing-best-practices" == page.book_section %} class="is-active"{% endif %}>
+                    <a href="/books/api-security/sanitizing/best-practices">Best Practices for Secure Data</a>
+                  </li>
+                                </ul>
+            {% endif %}
+                  </li>
+              <li{% if "api-keys" == page.book_chapter %} class="is-active"{% endif %}>
+          <a href="/books/api-security/api-keys/">Managing API Credentials</a>
+                      {% if 'api-keys' == page.book_chapter %}
+              <ul>
+                                  <li{% if "api-keys-keep-keys-private" == page.book_section %} class="is-active"{% endif %}>
+                    <a href="/books/api-security/api-keys/keep-keys-private">Keep Your Credentials Private</a>
+                  </li>
+                                  <li{% if "api-keys-choosing-a-type" == page.book_section %} class="is-active"{% endif %}>
+                    <a href="/books/api-security/api-keys/choosing-a-type">Choosing a Type of API Token</a>
+                  </li>
+                                  <li{% if "api-keys-other-options" == page.book_section %} class="is-active"{% endif %}>
+                    <a href="/books/api-security/api-keys/other-options">Other Options for Authentication to Your API Service</a>
+                  </li>
+                                  <li{% if "api-keys-advanced" == page.book_section %} class="is-active"{% endif %}>
+                    <a href="/books/api-security/api-keys/advanced">Advanced API Token Considerations</a>
+                  </li>
+                                  <li{% if "api-keys-takeaways" == page.book_section %} class="is-active"{% endif %}>
+                    <a href="/books/api-security/api-keys/takeaways">Key Takeaways for Managing API Credentials</a>
+                  </li>
+                                </ul>
+            {% endif %}
+                  </li>
+              <li{% if "authn" == page.book_chapter %} class="is-active"{% endif %}>
+          <a href="/books/api-security/authn/">Authentication</a>
+                      {% if 'authn' == page.book_chapter %}
+              <ul>
+                                  <li{% if "authn-api-authentication-options" == page.book_section %} class="is-active"{% endif %}>
+                    <a href="/books/api-security/authn/api-authentication-options">API Authentication Options</a>
+                  </li>
+                                  <li{% if "authn-federated" == page.book_section %} class="is-active"{% endif %}>
+                    <a href="/books/api-security/authn/federated">Federated Identity</a>
+                  </li>
+                                  <li{% if "authn-best-practices" == page.book_section %} class="is-active"{% endif %}>
+                    <a href="/books/api-security/authn/best-practices">Recommended Best Practices for Authentication</a>
+                  </li>
+                                </ul>
+            {% endif %}
+                  </li>
+              <li{% if "authz" == page.book_chapter %} class="is-active"{% endif %}>
+          <a href="/books/api-security/authz/">Authorization</a>
+                      {% if 'authz' == page.book_chapter %}
+              <ul>
+                                  <li{% if "authz-hierarchical" == page.book_section %} class="is-active"{% endif %}>
+                    <a href="/books/api-security/authz/hierarchical">Hierarchical</a>
+                  </li>
+                                  <li{% if "authz-role-based" == page.book_section %} class="is-active"{% endif %}>
+                    <a href="/books/api-security/authz/role-based">Role-Based Access Control</a>
+                  </li>
+                                  <li{% if "authz-attribute-based" == page.book_section %} class="is-active"{% endif %}>
+                    <a href="/books/api-security/authz/attribute-based">Attribute-Based Access Control</a>
+                  </li>
+                                  <li{% if "authz-takeaways" == page.book_section %} class="is-active"{% endif %}>
+                    <a href="/books/api-security/authz/takeaways">Key Takeaways</a>
+                  </li>
+                                </ul>
+            {% endif %}
+                  </li>
+              <li{% if "gateways" == page.book_chapter %} class="is-active"{% endif %}>
+          <a href="/books/api-security/gateways/">API Gateways</a>
+                      {% if 'gateways' == page.book_chapter %}
+              <ul>
+                                  <li{% if "gateways-management-platform" == page.book_section %} class="is-active"{% endif %}>
+                    <a href="/books/api-security/gateways/management-platform">The Role of an API Management Platform</a>
+                  </li>
+                                  <li{% if "gateways-solutions" == page.book_section %} class="is-active"{% endif %}>
+                    <a href="/books/api-security/gateways/solutions">Solutions Provided by an API Management Platform</a>
+                  </li>
+                                  <li{% if "gateways-problems-they-will-not-solve" == page.book_section %} class="is-active"{% endif %}>
+                    <a href="/books/api-security/gateways/problems-they-will-not-solve">Problems Your API Management Platform Won't Solve</a>
+                  </li>
+                                  <li{% if "gateways-comparison" == page.book_section %} class="is-active"{% endif %}>
+                    <a href="/books/api-security/gateways/comparison">API Management Platform Comparison</a>
+                  </li>
+                                </ul>
+            {% endif %}
+                  </li>
+              <li{% if "about-the-authors" == page.book_chapter %} class="is-active"{% endif %}>
+          <a href="/books/api-security/about-the-authors/">About the Authors</a>
+                  </li>
+          </ul>
+
+    <script>
+      if (document.querySelectorAll("#Sidebar_Resources .is-active").length) {
+        document.getElementById('Sidebar_Resources').classList.remove('Sidebar-hide');
+      }
+
+      if (document.querySelectorAll("#Sidebar_References .is-active").length) {
+        document.getElementById('Sidebar_References').classList.remove('Sidebar-hide');
+      }
+    </script>
+  </div>
+</aside>

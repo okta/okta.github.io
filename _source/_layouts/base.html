@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html class="no-js {% unless page.toc %}no-toc{% endunless %}" lang="en" dir="ltr">
+{% include head.html %}
+<body>
+  <div class="Page {{ page.title | slugify: 'pretty' }} {% if layout.variant == 'docs_base' %}Page--docs-page{% endif %}">
+    <!-- START Header -->
+    {% include header.html %}
+    <!-- END Header -->
+    {{ content }}
+    <!-- START Footer -->
+    {% include footer.html %}
+    <!-- END Footer -->
+  </div>
+  <!-- START Post Footer -->
+  {% include_cached post-footer.html %}
+  <!-- END Post Footer -->
+</body>
+</html>
