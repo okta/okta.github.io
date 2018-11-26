@@ -3,15 +3,15 @@
 The Okta Application API provides operations to manage applications and/or assignments to users or groups for your organization.
 
 ## Getting Started
-
+[bad link](/bad-link)
 Explore the Apps API: [![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/4857222012c11cf5e8cd)
 
 ## Application Operations
 
 ### Add Application
-{:.api .api-operation}
+{.api .api-operation}
 
-<ApiOperation method="post" url="/api/v1/apps" />
+<ApiOperation method="Delete" url="/api/v1/apps" />
 
 Adds a new application to your Okta organization.
 
@@ -32,6 +32,7 @@ All responses return the created [Application](#application-model).
 {:.api .api-operation}
 
 Adds an new bookmark application to your organization.
+
 
 ##### Settings
 {:.api .api-request .api-request-params}

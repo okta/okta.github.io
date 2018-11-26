@@ -1,5 +1,5 @@
 <template>
-  <section class="PageContent DynamicSidebar has-tableOfContents">
+  <section class="PageContent DynamicSidebar" :class="{'has-tableOfContents': showToc}">
     <!-- Begin Sidebar -->
     <Sidebar />
     <!-- End Sidebar -->
@@ -9,7 +9,7 @@
     <!-- End Content -->
 
     <!-- Begin Table Of Contents -->
-    <TableOfContents class="TableOfContents" :items="tableOfContentsItems"></TableOfContents>
+    <TableOfContents v-if="showToc" class="TableOfContents" :items="tableOfContentsItems"></TableOfContents>
     <!-- End Table Of Contents -->
   </section>
 </template>
@@ -23,9 +23,22 @@ export default {
   },
   computed: {
     tableOfContentsItems () {
-      return resolveHeaders(
-        this.$page
-      )
+      if (this.showToc) {
+        return resolveHeaders(
+          this.$page
+        )
+      }
+    },
+    showToc () {
+      if (this.$page.frontmatter.showToc === false) {
+        return false;
+      }
+
+      if (this.$page.path.includes('/code/')) {
+        return false;
+      }
+
+      return true;
     }
   }
 }

@@ -9,8 +9,13 @@
      </span>
   </p>
 </template>
-<style lang="scss">
+
+<style scoped lang="scss">
+  p {
+    font-weight: bold;
+  }
 </style>
+
 <script>
   export default {
     name: 'ApiOperation',

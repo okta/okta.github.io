@@ -54,6 +54,8 @@ module.exports = {
    * Global theme config
    */
   themeConfig: {
+
+    headerAnchorSelector: ".test",
     /**
      * Primary Nav: Array of MenuItem components to iterate over within TopNavigation component
      */

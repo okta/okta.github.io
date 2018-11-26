@@ -2,9 +2,9 @@
 # yarn lockfile v1
 
 
-"@vuepress/plugin-active-header-links@^1.0.0-alpha.18":
-  version "1.0.0-alpha.18"
-  resolved "https://registry.yarnpkg.com/@vuepress/plugin-active-header-links/-/plugin-active-header-links-1.0.0-alpha.18.tgz#dbc87c3ea297adc6774d74ce3f9322d5fa437bcc"
+"@vuepress/plugin-active-header-links@^1.0.0-alpha.20":
+  version "1.0.0-alpha.20"
+  resolved "https://registry.yarnpkg.com/@vuepress/plugin-active-header-links/-/plugin-active-header-links-1.0.0-alpha.20.tgz#b780f783afa14a1f2d3ebf2340dd77857967fa40"
   dependencies:
     lodash.throttle "^4.1.1"
 
