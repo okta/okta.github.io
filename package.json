@@ -5,7 +5,7 @@
   "scripts": {
     "dev": "vuepress dev docs",
     "build": "vuepress build docs",
-    "setup-link": "cd docs/.vuepress/vuepress-theme-default && yarn link"
+    "setup-link": "cd docs/.vuepress/vuepress-theme-default && yarn link && cd ../../.. && yarn link ‘@okta/vuepress-theme-default"
   },
   "repository": {
     "type": "git",
