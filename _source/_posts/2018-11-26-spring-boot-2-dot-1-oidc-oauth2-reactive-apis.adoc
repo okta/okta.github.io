@@ -12,9 +12,9 @@ image: blog/featured/okta-java-skew.jpg
 ---
 :page-liquid:
 
-Spring Boot 2.1 was recently released, eight months after the huge launch of Spring Boot 2.0. The reason I'm most excited about Spring Boot 2.1 to me is its improved performance and OpenID Connect (OIDC) support (from Spring Security 5.1). The combination of Spring Boot and Spring Security has provided excellent OAuth 2.0 support for years, and making OIDC a first-class citizen simplifies its configuration quite a bit.
+Spring Boot 2.1 was recently released, eight months after the huge launch of Spring Boot 2.0. The reason I'm most excited about Spring Boot 2.1 to me is its improved performance and OpenID Connect (OIDC) support from Spring Security 5.1. The combination of Spring Boot and Spring Security has provided excellent OAuth 2.0 support for years, and making OIDC a first-class citizen simplifies its configuration quite a bit.
 
-For those that aren't aware, OIDC is just a thin-layer on top of OAuth 2.0 that provides the user's identity with an ID token. Spring Security automatically translates this token into a Java `Principal` so you can easily retrieve a user's information using dependency injection. In addition to the ID token, OIDC adds:
+For those that aren't aware, OIDC is just a thin-layer on top of OAuth 2.0 that provides the user's identity with an ID token. Spring Security automatically translates this token into a Java `Principal` so you can easily retrieve a user's information using dependency injection. In addition to an ID token, OIDC adds:
 
 * A UserInfo endpoint for getting more user information
 * A standard set of scopes
@@ -26,7 +26,7 @@ Before I dive into showing you how to add authentication to a Spring Boot app wi
 
 == What's New in Spring Boot 2.1
 
-I think https://twitter.com/rieckpil[Philip Riecks] does a great job of summarizing the highlights of https://rieckpil.de/review-whats-new-in-spring-boot-2-1/[What's new in Spring Boot 2.1]:
+I think https://twitter.com/rieckpil[Philip Riecks] does a great job of summarizing the highlights in https://rieckpil.de/review-whats-new-in-spring-boot-2-1/[What's new in Spring Boot 2.1]:
 
 - **Java 11 Support**: just add `<java.version>11</java.version>` to your `pom.xml`!
 - **Logging Groups**: group logging categories using `logging.group.{groupName}={first},{second}` (`logging.group.web` and `logging.group.sql` are already defined).
