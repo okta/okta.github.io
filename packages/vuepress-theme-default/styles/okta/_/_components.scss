@@ -1,14 +1,7 @@
 // scss-lint:disable Indentation, TrailingSemicolon
-
-@import
-	
-	'base/functions',
-	'base/mixins',
-	
-	'base/variables',
-	
-	'base/include-media'
-
+@import 'layout',
+'typography',
+'forms',
+'components/icons'
 ;
-
 // scss-lint:enable Indentation, TrailingSemicolon

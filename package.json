@@ -1,25 +1,10 @@
 {
-  "name": "@okta/okta.github.io",
-  "version": "1.0.0-alpha.1",
-  "description": "NPM dependencies for testing and building developer.okta.com",
+  "private": true,
+  "workspaces": {
+    "packages": ["packages/*"]
+  },
   "scripts": {
-    "dev": "vuepress dev docs",
-    "build": "vuepress build docs",
-    "setup-link": "cd docs/.vuepress/vuepress-theme-default && yarn link && cd ../../.. && yarn link ‘@okta/vuepress-theme-default"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/okta/okta.github.io.git"
-  },
-  "author": "{OKTA} <developer@okta.com>",
-  "license": "Apache-2.0",
-  "bugs": {
-    "url": "https://github.com/okta/okta.github.io/issues"
-  },
-  "dependencies": {
-    "node-sass": "^4.9.4",
-    "sass-loader": "^7.1.0",
-    "vue-clickaway": "^2.2.2",
-    "vuepress": "^1.0.0-alpha.11"
+    "dev": "yarn workspace docs dev",
+    "build": "yarn workspace docs build"
   }
 }

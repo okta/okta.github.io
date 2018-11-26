@@ -17,7 +17,7 @@
 <script>
 export default {
   components: {
-    TableOfContents: () => import('../components/TableOfContents.vue')
+    TableOfContents: () => import('./TableOfContents.vue')
   },
   computed: {
     tableOfContentsItems () {

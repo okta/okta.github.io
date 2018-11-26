@@ -24,6 +24,9 @@
   "homepage": "https://github.com/okta/okta.github.io",
   "dependencies": {
     "@vuepress/plugin-active-header-links": "^1.0.0-alpha.20",
-    "lodash": "^4.17.11"
+    "lodash": "^4.17.11",
+    "node-sass": "^4.9.4",
+    "sass-loader": "^7.1.0",
+    "vuepress": "^1.0.0-alpha.11"
   }
 }
