@@ -382,8 +382,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 class MovieController extends ApiController
 {
     /**
-    * @Route("/movies")
-    * @Method("GET")
+    * @Route("/movies", methods="GET")
     */
     public function index(MovieRepository $movieRepository)
     {
@@ -393,25 +392,7 @@ class MovieController extends ApiController
     }
 
     /**
-     * @Route("/movies/{id}")
-     * @Method("GET")
-     */
-    public function show($id, MovieRepository $movieRepository)
-    {
-        $movie = $movieRepository->find($id);
-
-        if (! $movie) {
-            return $this->respondNotFound();
-        }
-
-        $movie = $movieRepository->transform($movie);
-
-        return $this->respond($movie);
-    }
-
-    /**
-    * @Route("/movies")
-    * @Method("POST")
+    * @Route("/movies", methods="POST")
     */
     public function create(Request $request, MovieRepository $movieRepository, EntityManagerInterface $em)
     {
@@ -437,8 +418,7 @@ class MovieController extends ApiController
     }
 
     /**
-    * @Route("/movies/{id}/count")
-    * @Method("POST")
+    * @Route("/movies/{id}/count", methods="POST")
     */
     public function increaseCount($id, EntityManagerInterface $em, MovieRepository $movieRepository)
     {
@@ -462,6 +442,20 @@ class MovieController extends ApiController
 ```
 
 ## Secure the Symfony API with Okta
+
+Before you proceed, you need to log into your Okta account (or [create a new one for free](https://developer.okta.com/signup/)) and set up a new OIDC app. You'll mostly use the default settings. Make sure to take note of your Okta domain and the Client ID generated for the app.
+
+Here are the step-by-step instructions:
+
+Go to the Applications menu item and click **Add Application**:
+
+{% img blog/symfony-react-php-crud-app/okta-add-app-btn.png alt:"Add Application button" width:"232" %}{: .center-image }
+
+Select **Single Page Application** and click **Next**.
+
+{% img blog/symfony-react-php-crud-app/okta-create-app.png alt:"Create a new Single-Page application" width:"800" %}{: .center-image }
+
+Set a descriptive application name, add `http://localhost:3000/login` as a Login redirect URI, and click **Done**. You can leave the rest of the settings as they are.
 
 The next step is to secure the API. We'll install the Okta dependencies and then add a method to our API Controller to perform the authorization and return 401 Unauthorized if it fails. Don't forget to replace the Okta parameters with your own values!
 
@@ -630,7 +624,7 @@ Replace the <nav class="navbar"> section with:
 <router-outlet></router-outlet>
 ```
 
-## Add Okta to the Symfony API
+## Add Okta authentication to the Angular frontend
 
 Now we can move on to the Okta integration so we can setup our Login/Logout links, and hide the Movies link if the user is not logged in.
 
@@ -720,7 +714,7 @@ src/app/app.component.html
 <button class="button is-link" *ngIf="isAuthenticated" (click)="logout()"> Logout </button>
 ```
 
-## Create the Movie Service in Symfony
+## Create the Movie Service in Angular
 
 It's time to connect our backend API. We'll implement a Movie service that will allow us to retrieve the list of movies, add a new movie and increase the bad pun count of a movie.
 
