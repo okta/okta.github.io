@@ -72,7 +72,7 @@ In the markdown, you can add
 ```
 and this would render as:
 
-<img src=".github/images/api-operations-rendered.png" width="50px"/>
+<img src=".github/images/api-operations-rendered.png" width="150px"/>
 
 Method value is used in the class to determine the background color.
 get => $islamic-green (Green)
