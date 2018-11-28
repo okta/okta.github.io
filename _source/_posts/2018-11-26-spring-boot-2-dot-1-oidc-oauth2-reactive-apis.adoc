@@ -205,20 +205,22 @@ Now Spring Security will recognize your groups as authorities and allow you to l
 ----
 @Grab('com.okta.spring:okta-spring-boot-starter:1.0.0-SNAPSHOT')
 
+import org.springframework.security.access.prepost.PreAuthorize
+
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 @RestController
 class Application {
 
- @GetMapping('/')
- String home(java.security.Principal user) {
-   'Hello ' + user.name
- }
+  @GetMapping('/')
+  String home(java.security.Principal user) {
+    'Hello ' + user.name
+  }
 
- @GetMapping('/admin')
- @PreAuthorize('Administrators')
- String home(java.security.Principal user) {
-   'Hello, ' + user.name + '. Would you like to play a game?'
- }
+  @GetMapping('/admin')
+  @PreAuthorize("hasAuthority('Administrators')")
+  String admin(java.security.Principal user) {
+    'Hello, ' + user.name + '. Would you like to play a game?'
+  }
 }
 ----
 
