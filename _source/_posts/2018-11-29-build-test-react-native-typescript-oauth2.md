@@ -13,9 +13,9 @@ image: blog/featured/okta-react-skew.jpg
 
 React Native is one of the most popular ways of creating mobile apps. Building on the success of React, it ties together native components for both Android and iOS using a shared JavaScript code-base. However, JavaScript has come under fire recently for not being type safe which can lead to a loss of developer trust. Enter TypeScript, which allows type annotations to be added to existing JavaScript code.
 
-One requirement of many mobile apps is authentication (aka authn - confirming user identity) and authorization (authz - confirming access rights). Implementing this through the OAuth 2.0 standard allows integration with all the major third-party authn / authz services. It’s also imperative to create automated tests to check that core functionality has not been broken.
+One requirement of many mobile apps is authentication (aka authn - confirming user identity) and authorization (authz - confirming access rights). Implementing this through the OAuth 2.0 standard allows integration with all the major third-party authn / authz services. It's also imperative to create automated tests to check that core functionality has not been broken.
 
-In this tutorial you’ll create an empty React Native project, add OAuth capabilities with [React Native App Auth](https://github.com/FormidableLabs/react-native-app-auth), port the project over to TypeScript, and finally add testing using the [React Test Renderer](https://reactjs.org/docs/test-renderer.html).
+In this tutorial you'll create an empty React Native project, add OAuth capabilities with [React Native App Auth](https://github.com/FormidableLabs/react-native-app-auth), port the project over to TypeScript, and finally add testing using the [React Test Renderer](https://reactjs.org/docs/test-renderer.html).
 
 ## Create a React Native Project
 
@@ -54,13 +54,13 @@ This will build and install the skeleton app on either a connected Android devic
 
 ## Create a Native Application in Okta
 
-To make adding authentication and authorization simple, we’ll use Okta in this tutorial. You can sign-up for a [free Okta developer account here](https://developer.okta.com/signup/). When that’s done, log in and navigate to **Applications** > **Add Application**. Select **Native** and click **Next**. Choose a name, select **Refresh Token** and click **Done**.
+To make adding authentication and authorization simple, we'll use Okta in this tutorial. You can sign-up for a [free Okta developer account here](https://developer.okta.com/signup/). When that's done, log in and navigate to **Applications** > **Add Application**. Select **Native** and click **Next**. Choose a name, select **Refresh Token** and click **Done**.
 
-Note your **Login redirect URI** and the **Client ID** since you’ll be adding them to your app.
+Note your **Login redirect URI** and the **Client ID** since you'll be adding them to your app.
 
 ## Add AppAuth to Your Project
 
-For authentication we’re going to use the [react-native-app-auth](https://github.com/FormidableLabs/react-native-app-auth) library, using their example project as a basis. First clone the repository to a local directory.
+For authentication we're going to use the [react-native-app-auth](https://github.com/FormidableLabs/react-native-app-auth) library, using their example project as a basis. First clone the repository to a local directory.
 
 ```bash
 git clone https://github.com/FormidableLabs/react-native-app-auth
@@ -101,7 +101,7 @@ Lastly, modify the `config` section of your `App.js` to include your Okta app in
 const config = {
   issuer: 'https://{yourOktaDomain}'/oauth2/default,
   clientId: '{clientId}',
-  redirectUrl: '{redirectUrl}’,
+  redirectUrl: '{redirectUrl}',
   additionalParameters: {prompt: 'login'},
   scopes: ['openid', 'profile', 'email', 'offline_access']
 };
@@ -245,15 +245,15 @@ Now running `npm test` should check that the `Page`, `Form` and `Heading` compon
 
 {% img blog/react-native-testing/console-test.png alt:"Output from running npm test" width:"590" %}{: .center-image }
 
-In these tests, you are just checking whether certain components render correctly. Ideally, you’d want to check that authentication works using something like the [Detox end-to-end testing framework](https://github.com/wix/Detox). However, there is currently [an issue with the latest Android](https://github.com/wix/detox/issues/608). Hopefully, this will be fixed soon.
+In these tests, you are just checking whether certain components render correctly. Ideally, you'd want to check that authentication works using something like the [Detox end-to-end testing framework](https://github.com/wix/Detox). However, there is currently [an issue with the latest Android](https://github.com/wix/detox/issues/608). Hopefully, this will be fixed soon.
 
 ## React Native + TypeScript = Win!
 
-Congrats! You’ve created a React Native app with TypeScript from scratch, with authentication and authorization (through Okta), and automated tests!
+Congrats! You've created a React Native app with TypeScript from scratch, with authentication and authorization (through Okta), and automated tests!
 
 You can find the source code for this tutorial at <https://github.com/oktadeveloper/okta-react-native-typescript-example>.
 
-If you’re interested to know more about TypeScript, React Native or secure user management with Okta, check out the following resources:
+If you're interested to know more about TypeScript, React Native or secure user management with Okta, check out the following resources:
 
 * [Use TypeScript to Build a Node API with Express](/blog/2018/11/15/node-express-typescript)
 * [Build a Secure Notes App with Kotlin, Typescript, and Okta](/blog/2017/09/19/build-a-secure-notes-application-with-kotlin-typescript-and-okta)
