@@ -1,0 +1,396 @@
+---
+layout: blog_post
+title: "Bootiful Development with Spring Boot and Vue"
+author: mraible
+description: "Vue is a lean and mean JavaScript framework. It has a smalling learning curve and is great for mobile apps. Learn how to build a Spring Boot API with Java, a Vue UI with TypeScript, and secure it all with OIDC."
+tags: [authentication, spring boot, spring boot 2.1, vuejs, vue, oidc]
+tweets:
+- "Vue.js + Spring Boot makes for a nice development experience. Learn how to make them work together with OIDC authentication →"
+- "Spring Boot with @java + Vue with @typescriptlang == 💚. Learn how to build a @springboot + @vuejs app today!"
+image: blog/featured/okta-vue-bottle-headphones.jpg
+---
+
+[Vue is awesome, explain why.]
+
+[Spring Boot y'all! It's excellent.]
+
+[Why you're writing this blog post.]
+
+Giddyup!
+
+Building a REST API with Spring Boot is so simple, it's silly. You think Node and Express are awesome because it's so easy to create an API and persist data? Java is too! In this tutorial, I'll show you how to build a REST API with Spring Boot, Spring Data, and Lombok in less than 100 lines of your ol' pal Java (11).
+
+== Build a REST API with Spring Boot
+
+To get started with Spring Boot, navigate to [start.spring.io](https://start.spring.io) and choose version 2.1.1+. In the "Search for dependencies" field, select the following:
+
+* [H2](http://www.h2database.com/html/main.html): An in-memory database
+* [Lombok](https://projectlombok.org/): Because no one likes generating (or even worse, writing!) getters and setters
+* [JPA](http://www.oracle.com/technetwork/java/javaee/tech/persistence-jsp-140049.html): Standard ORM for Java
+* [Rest Repositories](http://projects.spring.io/spring-data-rest/): Allows you to expose your JPA repositories as REST endpoints
+* [Web](https://github.com/spring-projects/spring-boot/blob/master/spring-boot-project/spring-boot-starters/spring-boot-starter-web/pom.xml): Spring MVC with Jackson (for JSON), Hibernate Validator, and embedded Tomcat
+
+{% img blog/vue-spring-boot/start.spring.io.png alt:"start.spring.io" width:"800" %}{: .center-image }
+
+If you like the command-line better, install https://httpie.org/[HTTPie] and run the following command to download a `demo.zip`.
+
+[source,bash]
+----
+http https://start.spring.io/starter.zip dependencies==h2,lombok,data-jpa,data-rest,web -d
+----
+
+Create a directory called `spring-boot+vue`. Expand the contents of `demo.zip` into its `server` directory.
+
+[source,bash]
+----
+mkdir spring-boot+vue
+unzip demo.zip -d spring-boot+vue/server
+----
+
+Open the "server" project in your favorite IDE and run `DemoApplication` or start it from the command line using `./mvnw spring-boot:run`.
+
+Create a `com.okta.developer.demo.beer` package and a `Beer.java` file in it. This class will be the entity that holds your data.
+
+[source,java]
+----
+package com.okta.developer.demo.beer;
+
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+
+//todo: needs lombok
+@Entity
+public class Beer {
+
+    @Id
+    @GeneratedValue
+    private Long id;
+    private String name;
+
+    public Beer() {}
+
+    public Beer(String name) {
+        this.name = name;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    @Override
+    public String toString() {
+        return "Beer{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                '}';
+    }
+}
+----
+
+Add a `BeerRepository` class that leverages Spring Data to do CRUD on this entity.
+
+[source,java]
+----
+package com.okta.developer.demo.beer;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+
+interface BeerRepository extends JpaRepository<Beer, Long> {
+}
+----
+
+TIP: Add [`@RepositoryRestResource`](http://docs.spring.io/spring-data/rest/docs/2.6.x/api/org/springframework/data/rest/core/annotation/RepositoryRestResource.html) annotation to `BeerRepository` to expose all its CRUD operations as REST endpoints.
+
+Add a `BeerCommandLineRunner` that uses this repository and creates a default set of data.
+
+[source,java]
+----
+package com.okta.developer.demo.beer;
+
+import org.springframework.boot.CommandLineRunner;
+import org.springframework.stereotype.Component;
+
+import java.util.stream.Stream;
+
+@Component
+public class BeerCommandLineRunner implements CommandLineRunner {
+
+    private final BeerRepository repository;
+
+    public BeerCommandLineRunner(BeerRepository repository) {
+        this.repository = repository;
+    }
+
+    @Override
+    public void run(String... strings) throws Exception {
+        // Top beers from https://www.beeradvocate.com/lists/us, November 2018
+        Stream.of("Kentucky Brunch Brand Stout", "Marshmallow Handjee", "Barrel-Aged Abraxas",
+            "Hunahpu's Imperial Stout", "King Julius", "Heady Topper",
+            "Budweiser", "Coors Light", "PBR").forEach(name ->
+            repository.save(new Beer(name))
+        );
+        repository.findAll().forEach(System.out::println);
+    }
+}
+----
+
+Restart your app, and you should see a list of beers printed in your terminal.
+
+{% img blog/vue-spring-boot/beers-in-terminal.png alt:"Beers printed in terminal" width:"800" %}{: .center-image }
+
+Add a `BeerController` class to create an endpoint that filters out less-than-great beers.
+
+[source,java]
+----
+package com.okta.developer.demo.beer;
+
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.stream.Collectors;
+
+@RestController
+public class BeerController {
+    private BeerRepository repository;
+
+    public BeerController(BeerRepository repository) {
+        this.repository = repository;
+    }
+
+    @GetMapping("/good-beers")
+    public Collection<Beer> goodBeers() {
+        return repository.findAll().stream()
+                .filter(this::isGreat)
+                .collect(Collectors.toList());
+    }
+
+    private boolean isGreat(Beer beer) {
+        return !beer.getName().equals("Budweiser") &&
+                !beer.getName().equals("Coors Light") &&
+                !beer.getName().equals("PBR");
+    }
+}
+----
+
+Re-build your application and navigate to `http://localhost:8080/good-beers`. You should see the list of good beers in your browser.
+
+{% img blog/vue-spring-boot/good-beers-json.png alt:"Good Beers JSON" width:"800" %}{: .center-image }
+
+You should also see the same result in your terminal window when using HTTPie.
+
+[source,bash]
+----
+http localhost:8080/good-beers
+----
+
+== Create a Project with Vue CLI
+
+Creating an API seems to be the easy part these days, thanks in large part to Spring Boot. In this section, I hope to show you that creating a UI with Vue is pretty simple too. If you follow the steps below, you'll create a new Vue app, fetch beer names and images from APIs, and create components to display the data.
+
+To create a Vue project, make sure you have [Node.js](https://nodejs.org/), and [Vue CLI 3](https://cli.vuejs.org/) installed.
+
+[source,bash]
+----
+npm install -g @vue/cli@3.2.1
+----
+
+From a terminal window, cd into the root of the `spring-boot-vue-example` directory and run the following command. This command will create a new Vue application and prompt you for options.
+
+[source,bash]
+----
+vue create client
+----
+
+
+If you look at `http://localhost:8081` in your browser, you'll see a "Loading..." message. If you look in your browser's console, you'll likely see an issue about CORS.
+
+<pre style="color: red">
+Failed to load http://localhost:8080/good-beers: No 'Access-Control-Allow-Origin' header is present on the requested resource. Origin 'http://localhost:8081' is therefore not allowed access.
+</pre>
+
+To fix this issue, you'll need to configure Spring Boot to allow cross-domain access from `http://localhost:8081`.
+
+=== Configure CORS for Spring Boot
+
+In the server project, open `server/src/main/java/.../demo/beer/BeerController.java` and add a `@CrossOrigin` annotation to enable cross-origin resource sharing (CORS) from the client (`http://localhost:8081`).
+
+[source,java]
+----
+import org.springframework.web.bind.annotation.CrossOrigin;
+...
+    @GetMapping("/good-beers")
+    @CrossOrigin(origins = "http://localhost:8081")
+    public Collection<Beer> goodBeers() {
+----
+
+After making these changes, restart the server, refresh your browser, and you should be able to see a list of beers from your Spring Boot API.
+
+{% img blog/vue-spring-boot/vue-beer-list.png alt:"Beer List in Vue" width:"800" %}{: .center-image }
+
+=== Create a BeerList Component
+
+=== Create a GiphyImage Component
+
+To make it look a little better, add a [GIPHY](http://giphy.com) component to fetch images based on the beer's name. Create `client/src/GiphyImage.tsx` and place the following code inside it.
+
+The result should look something like the following list of beer names with images.
+
+{% img blog/vue-spring-boot/vue-beer-list-giphy.png alt:"Beer list with Giphy images" width:"800" %}{: .center-image }
+
+You've just created a Vue app that talks to a Spring Boot API using cross-domain requests. Congratulations!
+
+== Add PWA Support
+
+Create Vue App has support for progressive web applications (PWAs) out-of-the-box. To learn how it's integrated, open `client/README.md` and search for "Making a Progressive Web App".
+
+To see how it works, run `yarn build` in the `client` directory. After this command completes,
+you'll see a message like the following.
+
+----
+The build folder is ready to be deployed.
+You may serve it with a static server:
+
+  yarn global add serve
+  serve -s build
+----
+
+Install serve and run `serve -s build -p 8081`. You should be able to open your browser to view `http://localhost:8081`.
+
+I ran a [Lighthouse](https://developers.google.com/web/tools/lighthouse/) audit in Chrome and found that this app only scores a 64/100 at this point.
+
+{% img blog/vue-spring-boot/lighthouse-first.png alt:"Lighthouse Score from first audit" width:"800" %}{: .center-image }
+
+In the PWA section of the report, it'll tell you that you need at least 192px and 512px icons.
+
+{% img blog/vue-spring-boot/pwa-64.png alt:"Progressive Web App Score: 64" width:"800" %}{: .center-image }
+
+You can download a 512-pixel free beer icon from [this page](https://www.flaticon.com/free-icon/beer_168557#term=beer&page=1&position=29).
+
+**NOTE:** This icon is made by <a href="http://www.freepik.com" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a>. It's licensed by <a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0" target="_blank">CC 3.0 BY</a>.
+
+Copy the downloaded `beer.png` to `client/public`. Modify `client/public/manifest.json` to have a name specific to this app, and to add the 512-pixel icon.
+
+[source,json]
+----
+{
+  "short_name": "Beer",
+  "name": "Good Beer",
+  "icons": [
+    {
+      "src": "favicon.ico",
+      "sizes": "64x64 32x32 24x24 16x16",
+      "type": "image/x-icon"
+    },
+    {
+      "src": "beer.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ],
+  "start_url": "./index.html",
+  "display": "standalone",
+  "theme_color": "#000000",
+  "background_color": "#ffffff"
+}
+----
+
+After making this change, I was able to achieve an 82 Lighthouse score for PWA. The most prominent complaint from this report was that I wasn't using HTTPS. To see how the app would score when it used HTTPS, I deployed it to [Pivotal Cloud Foundry](https://pivotal.io/platform) and [Heroku](https://www.heroku.com/). I was pumped to discover it scored 💯 on both platforms.
+
+{% img blog/vue-spring-boot/lighthouse-cloudfoundry.png alt:"Lighthouse on Cloud Foundry" width:"800" %}{: .center-image }
+
+{% img blog/vue-spring-boot/lighthouse-heroku.png alt:"Lighthouse on Heroku" width:"800" %}{: .center-image }
+
+To read the scripts I used to deploy everything, see [`cloudfoundry.sh`](https://github.com/oktadeveloper/spring-boot-vue-example/blob/master/cloudfoundry.sh) and [`heroku.sh`](https://github.com/oktadeveloper/spring-boot-vue-example/blob/master/heroku.sh) in this article's companion GitHub repository. I owe a big thanks to [@starbuxman](https://twitter.com/starbuxman) and [@codefinger](https://twitter.com/codefinger) for their help creating them!
+
+== Add Authentication with Okta
+
+You might be thinking, "this is pretty cool, it's easy to see why people fall in love with Vue." There's another tool you might fall in love with after you've tried it: Authentication with Okta! Why Okta? Because you can get [1,000 active monthly users for free](https://developer.okta.com/pricing/)! It's worth a try, especially when you see how easy it is to add auth to Spring Boot and Vue with Okta.
+
+=== Okta Spring Boot Starter
+
+To lock down the backend, you can use [Okta's Spring Boot Starter](https://github.com/okta/okta-spring-boot). To integrate this starter, add the following dependencies to `server/pom.xml`:
+
+[source,xml]
+----
+<dependency>
+    <groupId>com.okta.spring</groupId>
+    <artifactId>okta-spring-boot-starter</artifactId>
+    <version>1.0.0</version>
+</dependency>
+----
+
+Now you need to configure the server to use Okta for authentication. You'll need to create an OIDC app in Okta for that.
+
+=== Create an OIDC App in Okta
+
+Log in to your Okta Developer account (or [sign up](https://developer.okta.com/signup/) if you don't have an account) and navigate to **Applications** > **Add Application**. Click **Single-Page App**, click **Next**, and give the app a name you'll remember. Change all instances of `localhost:8080` to `localhost:8081` and click **Done**.
+
+Copy the client ID into your `server/src/main/resources/application.properties` file. While you're in there, add a `okta.oauth2.issuer` property that matches your Okta domain. For example:
+
+----properties
+okta.oauth2.issuer=https://{yourOktaDomain}/oauth2/default
+okta.oauth2.client-id={clientId}
+----
+
+Replace `{yourOktaDomain}` with your org URL, which you can find on the Dashboard of the Developer Console. Make sure you don't include `-admin` in the value!
+
+Update `server/src/main/java/.../demo/DemoApplication.java` to enable it as a resource server.
+
+----java
+import org.springframework.security.oauth2.config.annotation.web.configuration.EnableResourceServer;
+
+@EnableResourceServer
+@SpringBootApplication
+----
+
+After making these changes, you should be able to restart the server and see access denied when you try to navigate to http://localhost:8080.
+
+{% img blog/vue-spring-boot/server-access-denied.png alt:"Access Denied by Okta Spring Boot Starter" width:"800" %}{: .center-image }
+
+=== Okta's Vue Support
+
+Okta's Vue SDK allows you to integrate OIDC into a Vue application. You can learn more about Okta's Vue SDK can be [found on npmjs.com](https://www.npmjs.com/package/@okta/okta-vue). To install, run the following commands:
+
+[source,bash]
+----
+
+----
+
+Now you should be able to see the beer list as an authenticated user.
+
+{% img blog/vue-spring-boot/success.png alt:"Wahoo!" width:"800" %}{: .center-image }
+
+If it works, congratulations!
+
+== Learn More About Spring Boot and Vue
+
+To learn more about Vue, Spring Boot, or Okta, check out the following resources:
+
+*
+*
+*
+*
+
+You can find the source code associated with this article [on GitHub](https://github.com/oktadeveloper/spring-boot-vue-example). The primary example (without authentication) is in the `master` branch, while the Okta integration is in the `okta` branch. To check out the Okta branch on your local machine, run the following commands.
+
+----bash
+git clone -b okta https://github.com/oktadeveloper/spring-boot-vue-example.git
+----
+
+If you find any issues, please add a comment below, and I'll do my best to help. If you liked this tutorial, I'd love to have you [follow my team on Twitter](https://twitter.com/oktadev). We also have a https://www.youtube.com/channel/UC5AMiWqFVFxF1q9Ya1FuZ_Q[YouTube channel] that we publish screencasts too frequently.
