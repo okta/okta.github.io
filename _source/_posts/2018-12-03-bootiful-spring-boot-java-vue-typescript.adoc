@@ -24,11 +24,11 @@ Building a REST API with Spring Boot is so simple, it's silly. You think Node an
 
 To get started with Spring Boot, navigate to [start.spring.io](https://start.spring.io) and choose version 2.1.1+. In the "Search for dependencies" field, select the following:
 
-* [H2](http://www.h2database.com/html/main.html): An in-memory database
-* [Lombok](https://projectlombok.org/): Because no one likes generating (or even worse, writing!) getters and setters
-* [JPA](http://www.oracle.com/technetwork/java/javaee/tech/persistence-jsp-140049.html): Standard ORM for Java
-* [Rest Repositories](http://projects.spring.io/spring-data-rest/): Allows you to expose your JPA repositories as REST endpoints
-* [Web](https://github.com/spring-projects/spring-boot/blob/master/spring-boot-project/spring-boot-starters/spring-boot-starter-web/pom.xml): Spring MVC with Jackson (for JSON), Hibernate Validator, and embedded Tomcat
+* http://www.h2database.com/html/main.html[H2]: An in-memory database
+* https://projectlombok.org/[Lombok]: Because no one likes generating (or even worse, writing!) getters and setters
+* http://hibernate.org/orm/[JPA]: Standard ORM for Java
+* http://projects.spring.io/spring-data-rest/[Rest Repositories]: Allows you to expose your JPA repositories as REST endpoints
+* https://github.com/spring-projects/spring-boot/blob/master/spring-boot-project/spring-boot-starters/spring-boot-starter-web/pom.xml[Web]: Spring MVC with Jackson (for JSON), Hibernate Validator, and embedded Tomcat
 
 image::{% asset_path 'blog/vue-spring-boot/start.spring.io.png' %}[alt=Spring Initializr,width=800,align=center]
 
@@ -789,12 +789,14 @@ If it works, congratulations!
 
 == Learn More About Spring Boot and Vue
 
+This tutorial showed you how to build an app that uses modern frameworks like Spring Boot and Vue. You learned how to add authentication with OIDC and protect routes using Okta's Vue SDK.
+
 To learn more about Vue, Spring Boot, or Okta, check out the following resources:
 
-*
-*
-*
-*
+* link:/blog/2018/11/20/build-crud-spring-and-vue[Build a Simple CRUD App with Spring Boot and Vue.js]
+* link:/blog/2018/02/15/build-crud-app-vuejs-node[Build a Basic CRUD App with Vue.js and Node]
+* link:/blog/2018/10/23/build-a-single-page-app-with-go-and-vue[Build a Single-Page App with Go and Vue]
+* link:/blog/2018/11/26/spring-boot-2-dot-1-oidc-oauth2-reactive-apis[Spring Boot 2.1: Outstanding OIDC, OAuth 2.0, and Reactive API Support]
 
 You can find the source code associated with this article https://github.com/oktadeveloper/spring-boot-vue-example[on GitHub]. The primary example (without authentication) is in the `master` branch, while the Okta integration is in the `okta` branch. To check out the Okta branch on your local machine, run the following command.
 
