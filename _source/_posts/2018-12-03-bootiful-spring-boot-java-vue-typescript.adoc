@@ -9,20 +9,19 @@ tweets:
 - "Spring Boot with @java + Vue with @typescriptlang == 💚. Learn how to build a @springboot + @vuejs app today!"
 image: blog/featured/okta-vue-bottle-headphones.jpg
 ---
+:page-liquid:
 
-[Vue is awesome, explain why.]
+Vue is a web framework that's gotten a lot of attention lately because it's lean and mean. Its baseline framework cost is around 40K and is known as a minimalistic web framework. With all of the recent attention on web performance and mobile-first, mobile-fast, it's no surprise that Vue has become more and more popular. If you spent the time to learn AngularJS back in the day, chances are you'll find an old friend in Vue.js.
 
-[Spring Boot y'all! It's excellent.]
+Spring Boot is one of my favorite frameworks in the Java ecosystem. Yes, I'm biased. I've been a fan of the Spring Framework since way back in 2004. It was neat to be able to write Java webapps with Spring MVC, but most people used XML to configure things. Even though Spring supported JavaConfig, it wasn't until Spring Boot (in 2014) that it really took off. Nowadays, you never see a Spring tutorial that shows you how to configure things with XML. Nice work, Spring Boot team!
 
-[Why you're writing this blog post.]
+I'm writing this tutorial because I'm a big fan of Vue. If you know me, you'll know I'm a web framework aficionado. That is, I'm a big fan of web frameworks. Much like an NBA fan has a few favorite players, I have a few favorite frameworks. Vue has recently become one of those, and I'd like to show you why.
 
-Giddyup!
-
-Building a REST API with Spring Boot is so simple, it's silly. You think Node and Express are awesome because it's so easy to create an API and persist data? Java is too! In this tutorial, I'll show you how to build a REST API with Spring Boot, Spring Data, and Lombok in less than 100 lines of your ol' pal Java (11).
+In this post, I'll show you how to build a Spring Boot API using Spring Data JPA and Hibernate. Then I'll show you how to create a Vue PWA and customize it to display the data from your API. Then you'll add in some animated gifs, a sprinkle of authentication, and have a jolly good time doing it!
 
 == Build a REST API with Spring Boot
 
-To get started with Spring Boot, navigate to [start.spring.io](https://start.spring.io) and choose version 2.1.1+. In the "Search for dependencies" field, select the following:
+To get started with Spring Boot, navigate to https://start.spring.io[start.spring.io] and choose version 2.1.1+. In the "Search for dependencies" field, select the following:
 
 * http://www.h2database.com/html/main.html[H2]: An in-memory database
 * https://projectlombok.org/[Lombok]: Because no one likes generating (or even worse, writing!) getters and setters
@@ -36,7 +35,8 @@ If you like the command-line better, install https://httpie.org/[HTTPie] and run
 
 [source,bash]
 ----
-http https://start.spring.io/starter.zip dependencies==h2,lombok,data-jpa,data-rest,web -d
+http https://start.spring.io/starter.zip dependencies==h2,lombok,data-jpa,data-rest,web \
+  packageName==com.okta.developer.demo -d
 ----
 
 Create a directory called `spring-boot-vue-example`. Expand the contents of `demo.zip` into its `server` directory.
@@ -95,7 +95,7 @@ interface BeerRepository extends JpaRepository<Beer, Long> {
 }
 ----
 
-TIP: Adding the [`@RepositoryRestResource`](http://docs.spring.io/spring-data/rest/docs/2.6.x/api/org/springframework/data/rest/core/annotation/RepositoryRestResource.html) annotation to `BeerRepository` exposes all its CRUD operations as REST endpoints.
+TIP: Adding the http://docs.spring.io/spring-data/rest/docs/2.6.x/api/org/springframework/data/rest/core/annotation/RepositoryRestResource.html[`@RepositoryRestResource`] annotation to `BeerRepository` exposes all its CRUD operations as REST endpoints.
 
 Add a `BeerCommandLineRunner` that uses this repository and creates a default set of data.
 
@@ -184,9 +184,9 @@ http :8080/good-beers
 
 == Create a Project with Vue CLI
 
-Creating an API seems to be the easy part these days, thanks in large part to Spring Boot. In this section, I hope to show you that creating a UI with Vue is pretty simple too. If you follow the steps below, you'll create a new Vue app, fetch beer names and images from APIs, and create components to display the data.
+Creating an API seems to be the easy part these days, thanks in large part to Spring Boot. In this section, I hope to show you that creating a UI with Vue is pretty simple too. I'll also show you how to develop the Vue app with TypeScript. If you follow the steps below, you'll create a new Vue app, fetch beer names and images from APIs, and create components to display their data.
 
-To create a Vue project, make sure you have [Node.js](https://nodejs.org/), and [Vue CLI 3](https://cli.vuejs.org/) installed. I used Node 11.3.0 when I created this tutorial.
+To create a Vue project, make sure you have https://nodejs.org/[Node.js], and https://cli.vuejs.org/[Vue CLI 3] installed. I used Node 11.3.0 when I created this tutorial.
 
 [source,bash]
 ----
@@ -235,7 +235,7 @@ image::{% asset_path 'blog/vue-spring-boot/vue-welcome.png' %}[alt=Vue Welcome,w
 
 === Create a Good Beers UI in Vue
 
-So far, you've created a good-beers API and a Vue app, but you haven't created the UI to display the list of beers from your API. To do this, open `client/views/Home.vue` and add a `created()` method.
+So far, you've created a good beers API and a Vue client, but you haven't created the UI to display the list of beers from your API. To do this, open `client/views/Home.vue` and add a `created()` method.
 
 [source,ts]
 ----
@@ -255,7 +255,7 @@ Vue's component lifecycle will call the `created()` method. You'll need to insta
 npm i axios
 ----
 
-You can see this puts the response data into a local `beers` variable. To properly define this variable, create a `Beer` interface and initialize it to null.
+You can see this puts the response data into a local `beers` variable. To properly define this variable, create a `Beer` interface and initialize the `Home` class's `beers` variable to be an empty array.
 
 [source,ts]
 ----
@@ -324,6 +324,7 @@ image::{% asset_path 'blog/vue-spring-boot/vue-beer-list.png' %}[alt=Beer List i
 
 To make this application easier to maintain, move the beer list logic and rendering to its own `BeerList` component. Create `src/components/BeerList.vue` and populate it with the code from `Home.vue`. Remove the Vue logo, customize the template's main class name, and remove the `HelloWorld` component. It should look as follows when you're done.
 
+{% raw %}
 [source,html]
 ----
 <template>
@@ -358,6 +359,7 @@ export default class BeerList extends Vue {
 }
 </script>
 ----
+{% endraw %}
 
 Then change `src/views/Home.vue` so it only contains the logo and a reference to `<BeerList/>`.
 
@@ -385,7 +387,7 @@ export default class Home extends Vue {}
 
 === Create a GiphyImage Component
 
-To make things look a little better, add a [GIPHY](http://giphy.com) component to fetch images based on the beer's name. Create `client/components/GiphyImage.vue` and place the following code inside it.
+To make things look a little better, add a http://giphy.com[GIPHY] component to fetch images based on the beer's name. Create `client/components/GiphyImage.vue` and place the following code inside it.
 
 [source,html]
 ----
@@ -424,8 +426,9 @@ img {
 </style>
 ----
 
-Change `BeerList.vue` to use this component in its template:
+Change `BeerList.vue` to use the `<GiphyImage/>` component in its template:
 
+{% raw %}
 [source,html]
 ----
 <div v-for="beer in beers">
@@ -433,6 +436,7 @@ Change `BeerList.vue` to use this component in its template:
   <GiphyImage :name="beer.name"/>
 </div>
 ----
+{% endraw %}
 
 And add it to the `components` list in the `<script>` block:
 
@@ -446,7 +450,7 @@ import GiphyImage from '@/components/GiphyImage.vue';
 export default class BeerList extends Vue { ... }
 ----
 
-In this same file, add a `<style>` section at the bottom and use https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Grid_Layout/Auto-placement_in_CSS_Grid_Layout[auto-pacement in CSS Grid layout] to organize the beers in rows.
+In this same file, add a `<style>` section at the bottom and use https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Grid_Layout/Auto-placement_in_CSS_Grid_Layout[CSS Grid layout] to organize the beers in rows.
 
 [source,html]
 ----
@@ -462,6 +466,7 @@ In this same file, add a `<style>` section at the bottom and use https://develop
 
 You'll need to wrap a div around the beer list template for this to have any effect.
 
+{% raw %}
 [source,html]
 ----
 <div class="grid">
@@ -471,12 +476,13 @@ You'll need to wrap a div around the beer list template for this to have any eff
   </div>
 </div>
 ----
+{% endraw %}
 
 After making these changes, your UI should look something like the following list of beer names and matching images.
 
-image::{% asset_path 'blog/vue-spring-boot/vue-beer-list-giphy.gif' %}[alt=Beer List with Giphy images,width=800,align=center]
+image::{% asset_path 'blog/vue-spring-boot/vue-beer-list-giphy.png' %}[alt=Beer List with Giphy images,width=800,align=center]
 
-You just created a Vue app that talks to a Spring Boot API. Congratulations!
+You just created a Vue app that talks to a Spring Boot API. Congratulations! 🎉
 
 == Add PWA Support
 
@@ -521,7 +527,7 @@ After making these changes, rebuild your Vue app for production, refresh your br
 
 === Use Lighthouse to See Your PWA Score
 
-I ran a [Lighthouse](https://developers.google.com/web/tools/lighthouse/) audit in Chrome and found that this app scores a 81/100 at this point. The most prominent complaint from this report was that I wasn't using HTTPS. To see how the app would score when it used HTTPS, I deployed it to https://pivotal.io/platform[Pivotal Cloud Foundry] and https://www.heroku.com/[Heroku]. I was pumped to discover it scored well on both platforms.
+I ran a https://developers.google.com/web/tools/lighthouse/[Lighthouse] audit in Chrome and found that this app scores a 81/100 at this point. The most prominent complaint from this report was that I wasn't using HTTPS. To see how the app would score when it used HTTPS, I deployed it to https://pivotal.io/platform[Pivotal Cloud Foundry] and https://www.heroku.com/[Heroku]. I was pumped to discover it scored high on both platforms.
 
 image::{% asset_path 'blog/vue-spring-boot/lighthouse-heroku.png' %}[alt=Lighthouse score on Heroku,width=800,align=center]
 
@@ -529,17 +535,17 @@ image::{% asset_path 'blog/vue-spring-boot/lighthouse-cloudfoundry.png' %}[alt=L
 
 The reason it scores a 96 is because `The viewport size is 939px, whereas the window size is 412px.` I'm not sure what's causing this issue, maybe it's the CSS Grid layout?
 
-To read the scripts I used to deploy everything, see https://github.com/oktadeveloper/spring-boot-vue-example/blob/master/heroku.sh[`heroku.sh`] and https://github.com/oktadeveloper/spring-boot-vue-example/blob/master/cloudfoundry.sh[`cloudfoundry.sh`] in this posts's companion GitHub repository.
+To see the scripts I used to deploy everything, see https://github.com/oktadeveloper/spring-boot-vue-example/blob/master/heroku.sh[`heroku.sh`] and https://github.com/oktadeveloper/spring-boot-vue-example/blob/master/cloudfoundry.sh[`cloudfoundry.sh`] in this post's companion GitHub repository.
 
 NOTE: You will need to initialize Git before running the deployment scripts. Run `rm -rf client/.git`, followed by `git commit -a "Add project"`.
 
 == Add Authentication with Okta
 
-You might be thinking, "this is pretty cool, it's easy to see why people dig Vue." There's another tool you might dig after you've tried it: Authentication with Okta! Why Okta? Because you can get [1,000 active monthly users for free](https://developer.okta.com/pricing/)! It's worth a try, especially when you see how easy it is to add auth to Spring Boot and Vue with Okta.
+You might be thinking, "this is pretty cool, it's easy to see why people dig Vue." There's another tool you might dig after you've tried it: Authentication with Okta! Why Okta? Because you can get https://developer.okta.com/pricing/[1,000 active monthly users for free]! It's worth a try, especially when you see how easy it is to add auth to Spring Boot and Vue with Okta.
 
 === Okta Spring Boot Starter
 
-To lock down the backend, you can use [Okta's Spring Boot Starter](https://github.com/okta/okta-spring-boot). To integrate this starter, add the following dependencies to `server/pom.xml`:
+To secure your API, you can use https://github.com/okta/okta-spring-boot[Okta's Spring Boot Starter]. To integrate this starter, add the following dependencies to `server/pom.xml`:
 
 [source,xml]
 ----
@@ -559,7 +565,7 @@ Now you need to configure the server to use Okta for authentication. You'll need
 
 === Create an OIDC App in Okta
 
-Log in to your Okta Developer account (or [sign up](https://developer.okta.com/signup/) if you don't have an account) and navigate to **Applications** > **Add Application**. Click **Single-Page App**, click **Next**, and give the app a name you'll remember. Change all instances of `localhost:8080` to `localhost:8081` and click **Done**.
+Log in to your Okta Developer account (or https://developer.okta.com/signup/[sign up] if you don't have an account) and navigate to **Applications** > **Add Application**. Click **Single-Page App**, click **Next**, and give the app a name you'll remember. Change all instances of `localhost:8080` to `localhost:8081` and click **Done**.
 
 Copy the client ID into your `server/src/main/resources/application.properties` file. While you're in there, add a `okta.oauth2.issuer` property that matches your Okta domain. For example:
 
@@ -581,7 +587,7 @@ import org.springframework.security.oauth2.config.annotation.web.configuration.E
 @SpringBootApplication
 ----
 
-After making these changes, you should be able to restart the server and see access denied when you try to navigate to http://localhost:8080.
+After making these changes, you should be able to restart the server and see access denied when you try to navigate to `http://localhost:8080`.
 
 image::{% asset_path 'blog/vue-spring-boot/access-denied-error.png' %}[alt=Access Denied Error,width=800,align=center]
 
@@ -717,11 +723,11 @@ Restart your Vue app and you should see a button to log in.
 
 image::{% asset_path 'blog/vue-spring-boot/login-button.png' %}[alt=Login Button,width=800,align=center]
 
-Click on it and you'll be redirected to Okta. Enter the credentials you used to sign up for Okta and you'll be redirected back to the app. You should see a Logout button and a link to navigate to the beer list.
+Click on it and you'll be redirected to Okta. Enter the credentials you used to sign up for Okta and you'll be redirected back to the app. You should see a Logout button and a link to see some good beers.
 
 image::{% asset_path 'blog/vue-spring-boot/post-login.png' %}[alt=Vue app after authenticating,width=800,align=center]
 
-If you click to see good beers, you'll see the component's header, but no data. If you look at your JavaScript console, you'll see there's a CORS error.
+If you click to on the **Good Beers** link, you'll see the component's header, but no data. If you look at your JavaScript console, you'll see there's a CORS error.
 
 This error happens because Spring's `@CrossOrigin` doesn't play well with Spring Security. To solve this problem, add a `simpleCorsFilter` bean to the body of `DemoApplication.java`.
 
@@ -745,23 +751,23 @@ import java.util.Collections;
 @SpringBootApplication
 public class DemoApplication {
 
-	public static void main(String[] args) {
-		SpringApplication.run(DemoApplication.class, args);
-	}
+    public static void main(String[] args) {
+        SpringApplication.run(DemoApplication.class, args);
+    }
 
-	@Bean
-	public FilterRegistrationBean<CorsFilter> simpleCorsFilter() {
-		UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
-		CorsConfiguration config = new CorsConfiguration();
-		config.setAllowCredentials(true);
-		config.setAllowedOrigins(Collections.singletonList("http://localhost:8081"));
-		config.setAllowedMethods(Collections.singletonList("*"));
-		config.setAllowedHeaders(Collections.singletonList("*"));
-		source.registerCorsConfiguration("/**", config);
-		FilterRegistrationBean<CorsFilter> bean = new FilterRegistrationBean<>(new CorsFilter(source));
-		bean.setOrder(Ordered.HIGHEST_PRECEDENCE);
-		return bean;
-	}
+    @Bean
+    public FilterRegistrationBean<CorsFilter> simpleCorsFilter() {
+        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+        CorsConfiguration config = new CorsConfiguration();
+        config.setAllowCredentials(true);
+        config.setAllowedOrigins(Collections.singletonList("http://localhost:8081"));
+        config.setAllowedMethods(Collections.singletonList("*"));
+        config.setAllowedHeaders(Collections.singletonList("*"));
+        source.registerCorsConfiguration("/**", config);
+        FilterRegistrationBean<CorsFilter> bean = new FilterRegistrationBean<>(new CorsFilter(source));
+        bean.setOrder(Ordered.HIGHEST_PRECEDENCE);
+        return bean;
+    }
 }
 ----
 
@@ -785,11 +791,17 @@ Now you should be able to see the good beer list as an authenticated user.
 
 image::{% asset_path 'blog/vue-spring-boot/success.png' %}[alt=Success at last!,width=800,align=center]
 
-If it works, congratulations!
+If it works, excellent! 👍
 
 == Learn More About Spring Boot and Vue
 
 This tutorial showed you how to build an app that uses modern frameworks like Spring Boot and Vue. You learned how to add authentication with OIDC and protect routes using Okta's Vue SDK.
+
+If you want to learn more about the Vue phenomenon, I have a couple of recommended articles. First of all, I think it's awesome it's not sponsored by a company (like Angular + Google and React + Facebook), and that's it's mostly community driven. https://www.wired.com/story/the-solo-javascript-developer-challenging-google-facebook/[The Solo JavaScript Developer Challenging Google and Facebook] is an article in Wired that explains why this is so amazing.
+
+Regarding JavaScript framework performance, https://blog.uncommon.is/the-baseline-costs-of-javascript-frameworks-f768e2865d4a[The Baseline Costs of JavaScript Frameworks] is an interesting blog post from https://twitter.com/ankurs3thi[Anku Sethi]. I like his motivation for writing it:
+
+> Last week I was curious about how much of a performance impact just including React on a page can have. So I ran some numbers on a cheap Android phone and wrote about it.
 
 To learn more about Vue, Spring Boot, or Okta, check out the following resources:
 
@@ -806,3 +818,5 @@ git clone -b okta https://github.com/oktadeveloper/spring-boot-vue-example.git
 ----
 
 If you find any issues, please add a comment below, and I'll do my best to help. If you liked this tutorial, you should https://twitter.com/oktadev[follow my team on Twitter]. We also have a https://www.youtube.com/channel/UC5AMiWqFVFxF1q9Ya1FuZ_Q[YouTube channel] where we publish screencasts.
+
+TIP: There are link:/blog/2017/04/26/bootiful-development-with-spring-boot-and-angular[Angular] and link:/blog/2017/12/06/bootiful-development-with-spring-boot-and-react[React] versions of this same tutorial.
