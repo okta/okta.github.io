@@ -389,7 +389,7 @@ export default class Home extends Vue {}
 
 === Create a GiphyImage Component
 
-To make things look a little better, add a http://giphy.com[GIPHY] component to fetch images based on the beer's name. Create `client/components/GiphyImage.vue` and place the following code inside it.
+To make things look a little better, add a http://giphy.com[GIPHY] component to fetch images based on the beer's name. Create `client/src/components/GiphyImage.vue` and place the following code inside it.
 
 [source,html]
 ----
