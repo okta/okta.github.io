@@ -299,7 +299,7 @@ module.exports = {
 };
 ----
 
-Modify the template in `client/views/Home.vue` to display the list of good beers from your API.
+Modify the template in `client/src/views/Home.vue` to display the list of good beers from your API.
 
 {% raw %}
 [source,html]
@@ -308,10 +308,8 @@ Modify the template in `client/views/Home.vue` to display the list of good beers
   <div class="home">
     <img alt="Vue logo" src="../assets/logo.png">
     <h1>Beer List</h1>
-    <div class="grid">
-      <div v-for="beer in beers">
-        {{ beer.name }}
-      </div>
+    <div v-for="beer in beers">
+      {{ beer.name }}
     </div>
   </div>
 </template>
@@ -332,10 +330,8 @@ To make this application easier to maintain, move the beer list logic and render
 <template>
   <div class="beer-list">
     <h1>Beer List</h1>
-    <div class="grid">
-      <div v-for="beer in beers">
-        {{ beer.name }}
-      </div>
+    <div v-for="beer in beers">
+      {{ beer.name }}
     </div>
   </div>
 </template>
