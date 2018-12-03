@@ -486,7 +486,7 @@ You just created a Vue app that talks to a Spring Boot API. Congratulations! ðŸŽ
 
 Vue CLI has support for progressive web applications (PWAs) out-of-the-box. When you created your Vue app, you selected PWA as a feature.
 
-PWA features are only enabled in production, because having assets cached in development can be a real pain. Run `npm run build` in the `client` directory to create a build ready for production. Then use [serve] to create a web server and show your app.
+PWA features are only enabled in production, because having assets cached in development can be a real pain. Run `npm run build` in the `client` directory to create a build ready for production. Then use https://www.npmjs.com/package/serve[serve] to create a web server and show your app.
 
 [source,bash]
 ----
@@ -507,6 +507,8 @@ private async created() {
   this.beers = await response.data;
 }
 ----
+
+TIP: If you don't see any changes in your UI after making these changes, it's because your browser has cached your app. Use an incognito window, or clear your cache (in Chrome: **Developer Tools** > **Application** > **Clear storage** > **Clear site data**) to fix this issue.
 
 === Configure CORS for Spring Boot
 
