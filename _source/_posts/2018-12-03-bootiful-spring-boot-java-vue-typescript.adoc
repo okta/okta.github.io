@@ -322,7 +322,7 @@ image::{% asset_path 'blog/vue-spring-boot/vue-beer-list.png' %}[alt=Beer List i
 
 === Create a BeerList Component
 
-To make this application easier to maintain, move the beer list logic and rendering to its own `BeerList` component. Create `src/components/BeerList.vue` and populate it with the code from `Home.vue`. Remove the Vue logo, customize the template's main class name, and remove the `HelloWorld` component. It should look as follows when you're done.
+To make this application easier to maintain, move the beer list logic and rendering to its own `BeerList` component. Create `client/src/components/BeerList.vue` and populate it with the code from `Home.vue`. Remove the Vue logo, customize the template's main class name, and remove the `HelloWorld` component. It should look as follows when you're done.
 
 {% raw %}
 [source,html]
@@ -359,7 +359,7 @@ export default class BeerList extends Vue {
 ----
 {% endraw %}
 
-Then change `src/views/Home.vue` so it only contains the logo and a reference to `<BeerList/>`.
+Then change `client/src/views/Home.vue` so it only contains the logo and a reference to `<BeerList/>`.
 
 [source,html]
 ----
@@ -510,7 +510,7 @@ private async created() {
 
 === Configure CORS for Spring Boot
 
-In the server project, open `server/src/main/java/.../demo/beer/BeerController.java` and add a `@CrossOrigin` annotation to enable cross-origin resource sharing (CORS) from the client (`http://localhost:8081`).
+In the server project, open `src/main/java/.../demo/beer/BeerController.java` and add a `@CrossOrigin` annotation to enable cross-origin resource sharing (CORS) from the client (`http://localhost:8081`).
 
 [source,java]
 ----
@@ -591,7 +591,7 @@ image::{% asset_path 'blog/vue-spring-boot/access-denied-error.png' %}[alt=Acces
 
 === Okta's Vue Support
 
-Okta's Vue SDK allows you to integrate OIDC into a Vue application. You can learn more about Okta's Vue SDK can be https://www.npmjs.com/package/@okta/okta-vue[found on npmjs.com]. To install, run the following commands:
+Okta's Vue SDK allows you to integrate OIDC into a Vue application. You can learn more about Okta's Vue SDK can be https://www.npmjs.com/package/@okta/okta-vue[found on npmjs.com]. To install, run the following commands in the `client` directory:
 
 [source,bash]
 ----
@@ -653,7 +653,7 @@ router.beforeEach(Vue.prototype.$auth.authRedirectGuard());
 export default router;
 ----
 
-Since you have a route for `BeerList` remove it from `src/views/Home.vue`.
+Since you have a route for `BeerList` remove it from `client/src/views/Home.vue`.
 
 [source,html]
 ----
@@ -671,7 +671,7 @@ export default class Home extends Vue {}
 </script>
 ----
 
-Add a link to the `BeerList` in `src/App.vue`. You'll also need to add code that detects if the user is logged in or not. Replace the `<template>` section and add the `<script>` below to your `App.vue`.
+Add a link to the `BeerList` in `client/src/App.vue`. You'll also need to add code that detects if the user is logged in or not. Replace the `<template>` section and add the `<script>` below to your `App.vue`.
 
 [source,html]
 ----
