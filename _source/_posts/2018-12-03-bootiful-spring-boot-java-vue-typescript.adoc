@@ -248,7 +248,11 @@ private async created() {
 }
 ----
 
-Vue's component lifecycle will call the `created()` method. You'll need to install https://www.npmjs.com/package/axios[axios] for this code to compile.
+Vue's component lifecycle will call the `created()` method.
+
+TIP: John Papa's https://johnpapa.net/vue-typescript/[Vue.js with TypeScript] was a big help in figuring out how to use TypeScript with Vue. Vue's https://vuejs.org/v2/guide/typescript.html[TypeScript docs] were also helpful.
+
+You'll need to install https://www.npmjs.com/package/axios[axios] for this code to compile.
 
 [source,bash]
 ----
