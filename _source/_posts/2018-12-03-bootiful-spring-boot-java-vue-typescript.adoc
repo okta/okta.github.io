@@ -53,7 +53,7 @@ Create a `com.okta.developer.demo.beer` package and a `Beer.java` file in it. Th
 
 [source,java]
 ----
-package com.example.demo.beer;
+package com.okta.developer.demo.beer;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -85,7 +85,7 @@ Add a `BeerRepository` class that leverages Spring Data to do CRUD on this entit
 
 [source,java]
 ----
-package com.example.demo.beer;
+package com.okta.developer.demo.beer;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.rest.core.annotation.RepositoryRestResource;
@@ -144,8 +144,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Collection;
-import java.util.HashMap;
-import java.util.Map;
 import java.util.stream.Collectors;
 
 @RestController
@@ -235,7 +233,7 @@ image::{% asset_path 'blog/vue-spring-boot/vue-welcome.png' %}[alt=Vue Welcome,w
 
 === Create a Good Beers UI in Vue
 
-So far, you've created a good beers API and a Vue client, but you haven't created the UI to display the list of beers from your API. To do this, open `client/views/Home.vue` and add a `created()` method.
+So far, you've created a good beers API and a Vue client, but you haven't created the UI to display the list of beers from your API. To do this, open `client/src/views/Home.vue` and add a `created()` method.
 
 [source,ts]
 ----
