@@ -117,7 +117,7 @@ Copy the JDL above into an `app.jh` file inside the `react-native-spring-boot` d
 
 [source,bash]
 ----
-npm i -g generator-jhipster@5.4.2
+npm i -g generator-jhipster@5.7.0
 ----
 
 Navigate to the `jhipster-api` directory in a terminal window. Run the command below to generate an app with a plethora of useful features out-of-the-box.
@@ -180,7 +180,7 @@ Install Ignite CLI:
 
 [source,bash]
 ----
-npm i -g ignite-cli@2.1.2 ignite-jhipster@1.12.1
+npm i -g ignite-cli@2.1.6 ignite-jhipster@2.0.0
 ----
 
 Make sure you're in the `react-native-spring-boot` directory, then generate a React Native app.
@@ -190,7 +190,7 @@ Make sure you're in the `react-native-spring-boot` directory, then generate a Re
 ignite new HealthPoints -b ignite-jhipster
 ----
 
-When prompted for the path to your JHipster project, enter `jhipster-api`.
+When prompted for the path to your JHipster project, enter `jhipster-api`. Answer the other questions about statistics and end-to-end tests however you like.
 
 When the project is finished generating, rename `HealthPoints` to `react-native-app`, then committed it to Git.
 
@@ -212,88 +212,15 @@ create mode 100644 jhipster-api/src/main/java/com/okta/developer/web/rest/AuthIn
 
 These classes configure a resource server for your project (so you can pass in an `Authorization` header with an access token) and expose the OIDC issuer and client ID via a REST endpoint.
 
+Ignite JHipster also adds your app's URL scheme, `healthpoints://*`, to `src/main/docker/realm-config/jhipster-realm.json`.
+
 == Modify React Native App for OAuth 2.0 / OIDC Login
 
-You will need to https://github.com/ruddell/ignite-jhipster/blob/master/docs/oauth2-oidc.md[make some changes] to your React Native app so OIDC login works. I've summarized them below.
-
-=== Update Files for iOS
-
-If you'd like to run your app on iOS, you'll need to modify `react-native-app/ios/HealthPoints/AppDelegate.m` to add an `openURL()` method and an import at the top.
-
-[source,c]
-----
-#import <React/RCTLinkingManager.h>
-----
-
-Then add the method before the `@end` at the bottom of the file.
-
-[source,c]
-----
-- (BOOL)application:(UIApplication *)application
-           openURL:(NSURL *)url
-           options:(NSDictionary<UIApplicationOpenURLOptionsKey,id> *)options
-{
- return [RCTLinkingManager application:application openURL:url options:options];
-}
-----
-
-You'll also need to configure your iOS URL scheme. Run `open ios/HealthPoints.xcodeproj` to open the project in Xcode. Navigate to **Project** > **Info** > **URL Types** and specify `healthpoints` like in the screenshot below.
-
-image::{% asset_path 'blog/react-native-spring-boot/xcode-url-scheme.png' %}[alt=Xcode URL Scheme,width=800,align=center]
-
-You can also modify `ios/HealthPoints/Info.plist` if you'd rather not use Xcode.
-
-[source,diff]
-----
-        <key>CFBundleSignature</key>
-        <string>????</string>
-+       <key>CFBundleURLTypes</key>
-+       <array>
-+               <dict>
-+                       <key>CFBundleTypeRole</key>
-+                       <string>Editor</string>
-+                       <key>CFBundleURLName</key>
-+                       <string>healthpoints</string>
-+                       <key>CFBundleURLSchemes</key>
-+                       <array>
-+                               <string>healthpoints</string>
-+                       </array>
-+               </dict>
-+       </array>
-        <key>CFBundleVersion</key>
-----
-
-=== Update Files for Android
-
-To make the Android side of things aware of your URL scheme, add it to `android/app/src/main/AndroidManifest.xml`. The following XML should go just after the existing `<intent-filter>`.
-
-[source,xml]
-----
-<intent-filter>
-    <action android:name="android.intent.action.MAIN" />
-    <category android:name="android.intent.category.LAUNCHER" />
-    <data android:scheme="healthpoints" />
-</intent-filter>
-----
-
-You'll also need to add an `android:launchMode` attribute to the main `<application>` element. This is needed for Android to receive the deep link response in the existing `MainActivity` instead of a new one.
-
-[source,xml]
-----
-    <application
-      android:name=".MainApplication"
-      android:launchMode="singleTask"
-----
-
-=== Update Keycloak's Redirect URI
-
-You will also need to update Keycloak to know your app's URL scheme because it's used as a redirect URI. Open `http://localhost:9080/auth/admin` in your browser and log in with admin/admin. Navigate to **Clients** > **web_app** and add `healthpoints://authorize` as a valid redirect URI.
-
-image::{% asset_path 'blog/react-native-spring-boot/keycloak-redirect-uris.png' %}[alt=Valid Redirect URIs,width=600,align=center]
+Ignite JHipster automatically configures your React Native app so OIDC login works. You can see the https://github.com/ruddell/ignite-jhipster/blob/master/docs/oauth2-oidc.md[details in its documentation].
 
 == Run Your React Native App on iOS
 
-To run your React Native app, you'll need to start your Spring Boot app first. Navigate to the `jhipster-api` directory and run `./gradlew`. In another terminal window, navigate to `react-native-app` and run `react-native run-ios`.
+To run your React Native app, you'll need to start your Spring Boot app first. Navigate to the `jhipster-api` directory and run `./gradlew`. In another terminal window, navigate to `react-native-app/ios` and run `pod install`. Then navigate up a directory and run `react-native run-ios`.
 
 TIP: If you get an error `Print: Entry, ":CFBundleIdentifier", Does Not Exist`, run `rm -rf ~/.rncache` and try again.
 
@@ -309,7 +236,15 @@ TIP: To enable live-reloading of your code in iOS Simulator, first click on the 
 
 == Run Your React Native App on Android
 
-To run your app on an Android emulator, run `react-native run-android`. If you don't have a phone plugged in or an Android Virtual Device (AVD) running, you'll see an error:
+
+To run your app on an Android emulator, you'll need to run a couple commands to allow it to communicate with your API and Keycloak.
+
+----
+adb reverse tcp:8080 tcp:8080
+adb reverse tcp:9080 tcp:9080
+----
+
+Then run `react-native run-android`. If you don't have a phone plugged in or an Android Virtual Device (AVD) running, you'll see an error:
 
 ----
 Could not install the app on the device, read the error above for details.
@@ -320,34 +255,6 @@ To fix this, open Android Studio, choose **open existing project**, and select t
 To create a new AVD, navigate to **Tools** > **Android** > **AVD Manager**. Create a new Virtual Device and click Play. I chose a Pixel 2 as you can see from my settings below.
 
 image::{% asset_path 'blog/react-native-spring-boot/avd-pixel-2.png' %}[alt=AVD Pixel 2,width=800,align=center]
-
-To make Keycloak and your API work with Android in an emulator, you'll have to change all localhost links to your computer's IP address (e.g., `192.168.0.2`).
-
-This means you'll need to update `src/main/resources/config/application.yml` in the JHipster app to the following.
-
-[source,yaml]
-----
-security:
-    oauth2:
-        client:
-            access-token-uri: http://{yourIPAddress}:9080/auth/realms/jhipster/protocol/openid-connect/token
-            user-authorization-uri: http://{yourIPAddress}:9080/auth/realms/jhipster/protocol/openid-connect/auth
-            client-id: web_app
-            client-secret: web_app
-            scope: openid profile email
-        resource:
-            user-info-uri: http://{yourIPAddress}:9080/auth/realms/jhipster/protocol/openid-connect/userinfo
-----
-
-You'll also need to update `apiUrl` in your React Native app's `App/Config/AppConfig.js`.
-
-[source,js]
-----
-export default {
-  apiUrl: 'http://{yourIPAddress}:8080/',
-  appUrlScheme: 'healthpoints'
-}
-----
 
 Run `react-native run-android` again. You should be able to log in just like you did on iOS.
 
