@@ -180,7 +180,7 @@ Install Ignite CLI:
 
 [source,bash]
 ----
-npm i -g ignite-cli@2.1.6 ignite-jhipster@2.0.0
+npm i -g ignite-cli@2.1.6 ignite-jhipster@2.0.2
 ----
 
 Make sure you're in the `react-native-spring-boot` directory, then generate a React Native app.
@@ -190,7 +190,7 @@ Make sure you're in the `react-native-spring-boot` directory, then generate a Re
 ignite new HealthPoints -b ignite-jhipster
 ----
 
-When prompted for the path to your JHipster project, enter `jhipster-api`. Answer the other questions about statistics and end-to-end tests however you like.
+When prompted for the path to your JHipster project, enter `jhipster-api`. Accept the default answers for end-to-end tests with Detox and statistics (if prompted).
 
 When the project is finished generating, rename `HealthPoints` to `react-native-app`, then committed it to Git.
 
@@ -212,11 +212,15 @@ create mode 100644 jhipster-api/src/main/java/com/okta/developer/web/rest/AuthIn
 
 These classes configure a resource server for your project (so you can pass in an `Authorization` header with an access token) and expose the OIDC issuer and client ID via a REST endpoint.
 
-Ignite JHipster also adds your app's URL scheme, `healthpoints://*`, to `src/main/docker/realm-config/jhipster-realm.json`.
+Ignite JHipster also adds your app's URL scheme, `healthpoints://*`, to `src/main/docker/realm-config/jhipster-realm.json`. This configures Keycloak so it will allow access from your app.
 
 == Modify React Native App for OAuth 2.0 / OIDC Login
 
-Ignite JHipster automatically configures your React Native app so OIDC login works. You can see the https://github.com/ruddell/ignite-jhipster/blob/master/docs/oauth2-oidc.md[details in its documentation].
+Ignite JHipster automatically configures your React Native app so OIDC login works. You can see the https://github.com/ruddell/ignite-jhipster/blob/master/docs/oauth2-oidc.md[details in its documentation]. You will need to restart Keycloak for this configuration to take effect.
+
+----
+docker-compose -f jhipster-api/src/main/docker/keycloak.yml restart
+----
 
 == Run Your React Native App on iOS
 
@@ -235,7 +239,6 @@ image::{% asset_path 'blog/react-native-spring-boot/ignite-with-keycloak.png' %}
 TIP: To enable live-reloading of your code in iOS Simulator, first click on the emulator, then press kbd:[{commandkey} + R].
 
 == Run Your React Native App on Android
-
 
 To run your app on an Android emulator, you'll need to run a couple commands to allow it to communicate with your API and Keycloak.
 
@@ -256,7 +259,29 @@ To create a new AVD, navigate to **Tools** > **Android** > **AVD Manager**. Crea
 
 image::{% asset_path 'blog/react-native-spring-boot/avd-pixel-2.png' %}[alt=AVD Pixel 2,width=800,align=center]
 
-Run `react-native run-android` again. You should be able to log in just like you did on iOS.
+Run `react-native run-android` again. You might receive the following error:
+
+----
+Could not find com.android.tools:common:25.3.3
+----
+
+To fix this, open `node_modules/react-native-vector-icons/android/build.gradle` and change the `buildscript` block to be as follows.
+
+[source,groovy]
+----
+buildscript {
+  repositories {
+    google()
+    jcenter()
+  }
+
+  dependencies {
+    classpath 'com.android.tools.build:gradle:3.2.1'
+  }
+}
+----
+
+Now you should be able to log in just like you did on iOS.
 
 TIP: To enable live-reloading of code on Android, first click on the emulator, then press kbd:[Ctrl + M] (kbd:[{commandkey} + M] on MacOS) or shake the Android device which has the running app. Then select the **Enable Live Reload** option from the popup.
 
@@ -275,7 +300,7 @@ Run `react-native run-ios`, log in, and click the **Entities** menu item. You sh
 
 image::{% asset_path 'blog/react-native-spring-boot/ignite-entities.png' %}[alt=Ignite JHipster Entities Screen,width=400,align=center]
 
-Click on **Points** and you should be able to add points.
+Click on the **Point** button, then click **Create** in the top right corner, and you should be able to add points.
 
 image::{% asset_path 'blog/react-native-spring-boot/create-points.png' %}[alt=Create Points Screen,width=400,align=center]
 
@@ -283,7 +308,7 @@ image::{% asset_path 'blog/react-native-spring-boot/create-points.png' %}[alt=Cr
 
 The goal of my 21-Points Health app is to count the total number of health points you get in a week, with the max being 21. For this reason, I think it's a good idea to change the integer inputs on exercise, meals, and alcohol to be toggles instead of raw integers. If the user toggles it on, the app should store the value as "1". If they toggle it off, it should record "0".
 
-To make this change to the React Native app, open `App/Containers/PointEntityEditScreen.js` in your favorite editor. Change the `formModel` to use `t.Boolean` for exercise, meals, and alcohol.
+To make this change to the React Native app, open `app/modules/entities/points/points-entity-edit-screen.js` in your favorite editor. Change the `formModel` to use `t.Boolean` for exercise, meals, and alcohol.
 
 [source,js]
 ----
@@ -309,9 +334,9 @@ entityToFormValue = (value) => {
   return {
     id: value.id || null,
     date: value.date || null,
-    exercise: value.exercise === 1 ? true : false,
-    meals: value.meals === 1 ? true : false,
-    alcohol: value.alcohol === 1 ? true : false,
+    exercise: value.exercise === 1,
+    meals: value.meals === 1,
+    alcohol: value.alcohol === 1,
     notes: value.notes || null,
     userId: (value.user && value.user.id) ? value.user.id : null
   }
@@ -334,16 +359,24 @@ While you're at it, you can change the default `Points` entity to have today's d
 [source,js]
 ----
 componentWillMount () {
-  if (this.props.entityId) {
-    this.props.getPoint(this.props.entityId)
+  if (this.props.data.entityId) {
+    this.props.getPoint(this.props.data.entityId)
   } else {
-    this.setState({formValue: {date: new Date(), exercise: true, meals: true, alcohol: true}})
+    this.setState({
+      formValue: {
+        id: null,
+        date: new Date(),
+        exercise: true,
+        meals: true,
+        alcohol: true
+      }
+    })
   }
   this.props.getAllUsers()
 }
 ----
 
-Refresh your app in Simulator using kbd:[{commandkey} + M]. When you create new points, you should see your new defaults.
+Refresh your app in Simulator using kbd:[{commandkey} + R]. When you create new points, you should see your new defaults.
 
 image::{% asset_path 'blog/react-native-spring-boot/create-points-defaults.png' %}[alt=Create Points with defaults,width=400,align=center]
 
@@ -356,7 +389,7 @@ Since your JHipster app has a React UI as well, it makes sense to change the poi
 ----
 <AvGroup check>
   <AvInput id="points-exercise" type="checkbox" className="form-control"
-    name="exercise" trueValue={1} falseValue={0} /> // (1)
+    name="exercise" trueValue={1} falseValue={0} />
   <Label check id="exerciseLabel" for="exercise">
     <Translate contentKey="healthPointsApp.points.exercise">Exercise</Translate>
   </Label>
@@ -387,11 +420,11 @@ Switching from Keycload to Okta for identity in a JHipster app is suuuper easy t
 
 image::{% asset_path 'blog/react-native-spring-boot/okta-signup.png' %}[alt=Okta Developer Signup,width=800,align=center]
 
-Log in to your Okta Developer account and navigate to **Applications** > **Add Application**. Click **Web** and click **Next**. Give the app a name you'll remember, and specify `http://localhost:8080/login` and `healthpoints://authorize` as Login redirect URIs. Click **Done**, then edit it again to select "Implicit (Hybrid)" + allow ID and access tokens. Note the client ID and secret, you'll need to copy/paste them into a file in a minute.
+Log in to your Okta Developer account and navigate to **Applications** > **Add Application**. Click **Web** and click **Next**. Give the app a name you'll remember, and specify `http://localhost:8080/login` as a Login redirect URI and click **Done**. Note the client ID and secret, you'll need to copy/paste them into a file in a minute.
 
 Create a `ROLE_ADMIN` and `ROLE_USER` group (**Users** > **Groups** > **Add Group**) and add users to them. I recommend adding the account you signed up with to `ROLE_ADMIN` and creating a new user (**Users** > **Add Person**) to add to `ROLE_USER`.
 
-Navigate to **API** > **Authorization Servers** and click the one named **default** to edit it. Click the **Claims** tab and **Add Claim**. Name it "roles", and include it in the ID Token. Set the value type to "Groups" and set the filter to be a Regex of `.*`. Click **Create** to complete the process.
+Navigate to **API** > **Authorization Servers** and click the one named **default** to edit it. Click the **Claims** tab and **Add Claim**. Name it "groups", and include it in the ID Token. Set the value type to "Groups" and set the filter to be a Regex of `.*`. Click **Create** to complete the process.
 
 Create a file on your hard drive called `~/.okta.env` and specify the settings for your app in it.
 
@@ -407,7 +440,28 @@ export SECURITY_OAUTH2_CLIENT_CLIENT_SECRET="{yourClientSecret}"
 
 TIP: Make sure your `*URI` variables do not have `-admin` in them. This is a common mistake.
 
-In the terminal where your Spring Boot app is running, kill the process, run `source ~/.okta.env` and run `./gradlew` again. You should be able to log in at `http://localhost:8080` in your browser, and in your React Native app (after you refresh or restart it).
+In the terminal where your Spring Boot app is running, kill the process, run `source ~/.okta.env` and run `./gradlew` again. You should be able to log in at `http://localhost:8080` in your browser.
+
+=== Create a Native App with PKCE
+
+Ignite JHipster leverages https://github.com/FormidableLabs/react-native-app-auth[React Native AppAuth], an SDK for communicating with OAuth 2.0 providers. It supports PKCE instead of a client secret, which is a more secure configuration. To use PKCE, you'll need to create a new Native application on Okta.
+
+Log in to your Okta Developer account and navigate to **Applications** > **Add Application**. Click **Native** and click **Next**. Give the app a name you'll remember (e.g., `React Native`), select `Refresh Token` as a grant type, in addition to the default `Authorization Code`. Change the **Login redirect URI** to be `healthpoints://authorize`) and click **Done**.
+
+Modify `react-native-app/app/modules/login/login.sagas.js` to use the generated clientId.
+
+[source,js]
+----
+const { issuer, scope } = authInfo.data
+const config = {
+  issuer,
+  clientId: '{yourClientId}',
+  scopes: scope.split(' '),
+  redirectUrl: `${AppConfig.appUrlScheme}://authorize`
+}
+----
+
+After making these changes, refresh or restart your React Native app and you should be able to log in.
 
 image::{% asset_path 'blog/react-native-spring-boot/react-native-okta-login.png' %}[alt=Okta Login in React Native,width=400,align=center]
 
@@ -451,28 +505,6 @@ data:
                 home: /tmp/elasticsearch
 ----
 
-You'll also need to remove a couple of properties, due to an https://github.com/jhipster/generator-jhipster/issues/8518[issue I discovered in JHipster].
-
-[source,diff]
-----
-@@ -30,15 +30,12 @@ spring:
-         url: jdbc:postgresql://localhost:5432/HealthPoints
-         username: HealthPoints
-         password:
--        hikari:
--            auto-commit: false
-     jpa:
-         database-platform: io.github.jhipster.domain.util.FixedPostgreSQL82Dialect
-         database: POSTGRESQL
-         show-sql: false
-         properties:
-             hibernate.id.new_generator_mappings: true
--            hibernate.connection.provider_disables_autocommit: true
-             hibernate.cache.use_second_level_cache: true
-             hibernate.cache.use_query_cache: false
-             hibernate.generate_statistics: false
-----
-
 To deploy everything on Cloud Foundry with http://run.pivotal.io/[Pivotal Web Services], you'll need to create an account, download/install the https://github.com/cloudfoundry/cli#downloads[Cloud Foundry CLI], and sign-in (using `cf login -a api.run.pivotal.io`).
 
 TIP: You may receive a warning after logging in `No space targeted, use 'cf target -s SPACE'`. If you do, log in to https://run.pivotal.io in your browser, create a space, then run the command as recommended.
@@ -487,9 +519,7 @@ CloudFoundry configuration is starting
 ? What is the name of your database plan? turtle
 ----
 
-When prompted to overwrite `build.gradle`, type `a`.
-
-NOTE: The first time I ran `jhipster cloudfoundry`, it didn't work. Running it a second time succeeded.
+After you've successfully deployed your app, run the following commands so it uses Okta for OIDC.
 
 [source,bash]
 ----
@@ -510,7 +540,7 @@ Then... you'll be able to authenticate. Voila! 😃
 
 image::{% asset_path 'blog/react-native-spring-boot/jhipster-on-cf.png' %}[alt=JHipster API on Cloud Foundry,width=800,align=center]
 
-Modify your React Native application's `apiUrl` (in `App/Config/AppConfig.js`) to be `https://healthpoints.cfapps.io/` and deploy it to your phone. Hint: use the "running on device" docs I mentioned earlier.
+Modify your React Native application's `apiUrl` (in `app/config/app-config.js`) to be `https://healthpoints.cfapps.io/` and deploy it to your phone. Hint: use the "running on device" docs I mentioned earlier.
 
 [source,js]
 ----
@@ -638,7 +668,7 @@ image::{% asset_path 'blog/react-native-spring-boot/jhipster-on-gke.png' %}[alt=
 
 === React Native + Spring Boot on GCP
 
-To make your React Native app work with your GCP instance, you just need to modify its `AppConfig.js` file to point to its URI, then package and deploy.
+To make your React Native app work with your GCP instance, you just need to modify its `app-config.js` file to point to its URI, then package and deploy.
 
 [source,js]
 ----
