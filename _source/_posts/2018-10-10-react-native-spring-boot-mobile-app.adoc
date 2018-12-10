@@ -164,8 +164,6 @@ Once all the Docker containers have finished starting, run the following command
 ./gradlew -Pprod clean test sonarqube
 ----
 
-NOTE: If you don't commit your project to Git, the `sonarqube` task https://github.com/jhipster/generator-jhipster/issues/8503[might fail].
-
 Once this process completes, an analysis of your project will be available on the Sonar dashboard at `http://127.0.0.1:9001`. Check it - you have a triple-A-rated app! Not bad, eh?
 
 image::{% asset_path 'blog/react-native-spring-boot/sonar.png' %}[alt=Sonar AAA,width=800,align=center]
@@ -226,62 +224,38 @@ docker-compose -f jhipster-api/src/main/docker/keycloak.yml restart
 
 To run your React Native app, you'll need to start your Spring Boot app first. Navigate to the `jhipster-api` directory and run `./gradlew`. In another terminal window, navigate to `react-native-app/ios` and run `pod install`. Then navigate up a directory and run `react-native run-ios`.
 
-TIP: If you get an error `Print: Entry, ":CFBundleIdentifier", Does Not Exist`, run `rm -rf ~/.rncache` and try again.
+Verify you can log in by clicking the hamburger menu in the top left corner, then **Login**. Use "admin" for the username and password. You'll know you logged in successfully if you click on the menu again and see **Entities** and **Logout** options.
 
-Verify you can log in by clicking the hamburger menu in the top left corner, then **Login**. Use "admin" for the username and password.
-
-image::{% asset_path 'blog/react-native-spring-boot/ignite-with-keycloak.png' %}[alt=Ignite JHipster with Keycloak,width=900,align=center]
+image::{% asset_path 'blog/react-native-spring-boot/ignite-with-keycloak.png' %}[alt=Ignite JHipster with Keycloak,width=889,align=center]
 
 // image::{% asset_path 'blog/react-native-spring-boot/ignite-login-menu.png' %}[alt=Login Menu,width=300,role=pull-left]
 // image::{% asset_path 'blog/react-native-spring-boot/keycloak-login.png' %}[alt=Keycloak Login,width=300,role=pull-left]
-// image::{% asset_path 'blog/react-native-spring-boot/open-healthpoints.png' %}[alt=Open HealthPoints,width=300,role=pull-left]
+// image::{% asset_path 'blog/react-native-spring-boot/menu-with-entities.png' %}[alt=Menu with Entities,width=300,role=pull-left]
 
 TIP: To enable live-reloading of your code in iOS Simulator, first click on the emulator, then press kbd:[{commandkey} + R].
 
 == Run Your React Native App on Android
 
-To run your app on an Android emulator, you'll need to run a couple commands to allow it to communicate with your API and Keycloak.
+To run your app on an Android emulator, run `react-native run-android`. If you don't have a phone plugged in or an Android Virtual Device (AVD) running, you'll see an error:
+
+----
+> com.android.builder.testing.api.DeviceException: No connected devices!
+----
+
+To fix this, open Android Studio, choose **open existing project**, and select the `android` directory in your project. If you're prompted to update the Android Gradle Plugin or "Install Build Tools and sync project," do it.
+
+To create a new AVD, navigate to **Tools** > **AVD Manager**. Create a new Virtual Device and click Play. I chose a Pixel 2 as you can see from my settings below.
+
+image::{% asset_path 'blog/react-native-spring-boot/avd-pixel-2.png' %}[alt=AVD Pixel 2,width=800,align=center]
+
+You'll need to run a couple commands to allow the emulator to communicate with your API and Keycloak.
 
 ----
 adb reverse tcp:8080 tcp:8080
 adb reverse tcp:9080 tcp:9080
 ----
 
-Then run `react-native run-android`. If you don't have a phone plugged in or an Android Virtual Device (AVD) running, you'll see an error:
-
-----
-Could not install the app on the device, read the error above for details.
-----
-
-To fix this, open Android Studio, choose **open existing project**, and select the `android` directory in your project. If you're prompted to "Install Build Tools and sync project," do it.
-
-To create a new AVD, navigate to **Tools** > **Android** > **AVD Manager**. Create a new Virtual Device and click Play. I chose a Pixel 2 as you can see from my settings below.
-
-image::{% asset_path 'blog/react-native-spring-boot/avd-pixel-2.png' %}[alt=AVD Pixel 2,width=800,align=center]
-
-Run `react-native run-android` again. You might receive the following error:
-
-----
-Could not find com.android.tools:common:25.3.3
-----
-
-To fix this, open `node_modules/react-native-vector-icons/android/build.gradle` and change the `buildscript` block to be as follows.
-
-[source,groovy]
-----
-buildscript {
-  repositories {
-    google()
-    jcenter()
-  }
-
-  dependencies {
-    classpath 'com.android.tools.build:gradle:3.2.1'
-  }
-}
-----
-
-Now you should be able to log in just like you did on iOS.
+Run `react-native run-android` again. Now you should be able to log in just like you did on iOS.
 
 TIP: To enable live-reloading of code on Android, first click on the emulator, then press kbd:[Ctrl + M] (kbd:[{commandkey} + M] on MacOS) or shake the Android device which has the running app. Then select the **Enable Live Reload** option from the popup.
 
@@ -334,23 +308,26 @@ entityToFormValue = (value) => {
   return {
     id: value.id || null,
     date: value.date || null,
-    exercise: value.exercise === 1,
-    meals: value.meals === 1,
-    alcohol: value.alcohol === 1,
+    exercise: value.exercise || null,
+    meals: value.meals || null,
+    alcohol: value.alcohol || null,
     notes: value.notes || null,
     userId: (value.user && value.user.id) ? value.user.id : null
   }
 }
 formValueToEntity = (value) => {
-  return {
+  const entity = {
     id: value.id || null,
     date: value.date || null,
     exercise: (value.exercise) ? 1 : 0,
     meals: (value.meals) ? 1 : 0,
     alcohol: (value.alcohol) ? 1 : 0,
-    notes: value.notes || null,
-    user: value.userId ? { id: value.userId } : null
+    notes: value.notes || null
   }
+  if (value.userId) {
+    entity.user = { id: value.userId }
+  }
+  return entity
 }
 ----
 
@@ -440,11 +417,11 @@ export SECURITY_OAUTH2_CLIENT_CLIENT_SECRET="{yourClientSecret}"
 
 TIP: Make sure your `*URI` variables do not have `-admin` in them. This is a common mistake.
 
-In the terminal where your Spring Boot app is running, kill the process, run `source ~/.okta.env` and run `./gradlew` again. You should be able to log in at `http://localhost:8080` in your browser.
+In the terminal where your Spring Boot app is running, kill the process, run `source ~/.okta.env` and run `./gradlew` again. You should be able to log in to `http://localhost:8080` with your browser.
 
 === Create a Native App with PKCE
 
-Ignite JHipster leverages https://github.com/FormidableLabs/react-native-app-auth[React Native AppAuth], an SDK for communicating with OAuth 2.0 providers. It supports PKCE instead of a client secret, which is a more secure configuration. To use PKCE, you'll need to create a new Native application on Okta.
+Ignite JHipster leverages https://github.com/FormidableLabs/react-native-app-auth[React Native AppAuth], an SDK for communicating with OAuth 2.0 providers. It supports PKCE instead of a client secret, which is a more secure configuration. To use PKCE, you'll need to create a new Native application in Okta.
 
 Log in to your Okta Developer account and navigate to **Applications** > **Add Application**. Click **Native** and click **Next**. Give the app a name you'll remember (e.g., `React Native`), select `Refresh Token` as a grant type, in addition to the default `Authorization Code`. Change the **Login redirect URI** to be `healthpoints://authorize`) and click **Done**.
 
@@ -455,7 +432,7 @@ Modify `react-native-app/app/modules/login/login.sagas.js` to use the generated 
 const { issuer, scope } = authInfo.data
 const config = {
   issuer,
-  clientId: '{yourClientId}',
+  clientId: '{yourNativeClientId}',
   scopes: scope.split(' '),
   redirectUrl: `${AppConfig.appUrlScheme}://authorize`
 }
@@ -477,7 +454,15 @@ If you'd like to log your own messages to Reactotron, you can use `console.tron.
 
 == Packaging Your React Native App for Production
 
-The last thing I'd like to show you to deploy your app to production. Since there are many steps to getting your React Native app onto a physical device, I'll defer to React Native's https://facebook.github.io/react-native/docs/running-on-device[Running on Device documentation]. It should be as simple as plugging in your device via USB, configuring code signing, and building/running your app. You'll also need to configure the URL of where your API is located.
+The last thing I'd like to show you to deploy your app to production. Since there are many steps to getting your React Native app onto a physical device, I'll defer to React Native's https://facebook.github.io/react-native/docs/running-on-device[Running on Device documentation]. It should be as simple as plugging in your device via USB, configuring code signing in Xcode, and building/running your app. You'll also need to configure the API URL to point to your machine's IP address (in `react-native-app/app/config/app-config.js`). For example:
+
+[source,js]
+----
+export default {
+  apiUrl: 'http://192.168.50.30:8080/',
+  appUrlScheme: 'healthpoints'
+}
+----
 
 You know what's awesome about Spring Boot? There's a bunch of cloud providers that support it! If a platform supports Spring Boot, you should be able to run a JHipster app on it!
 
@@ -550,13 +535,9 @@ export default {
 }
 ----
 
-I used Xcode on my Mac (`open react-native-app/ios/HealthPoints.xcodeproj`) and deployed it to an iPhone X.
+I used Xcode on my Mac (`open react-native-app/ios/HealthPoints.xcworkspace`) and deployed it to an iPhone X. Below are screenshots that show it worked!
 
-TIP: When I encountered build issues in Xcode, I ran `rm -rf ~/.rncache` and it fixed them. I also used a bit of `rm -rf node_modules && yarn`.
-
-Below are screenshots that show it worked!
-
-image::{% asset_path 'blog/react-native-spring-boot/iphone-x-installed.png' %}[alt=Login and Entities on iPhone X,width=600,align=center]
+image::{% asset_path 'blog/react-native-spring-boot/iphone-x-installed.png' %}[alt=Login and Entities on iPhone X,width=900,align=center]
 
 === Deploy Your Spring Boot API to Google Cloud Platform using Kubernetes
 
@@ -725,3 +706,7 @@ https://github.com/ruddell/ignite-jhipster/issues/56[planned integration] for Ig
 * link:/blog/2018/01/30/jhipster-ionic-with-oidc-authentication[Use Ionic for JHipster to Create Mobile Apps with OIDC Authentication] - not into React Native? How about Ionic?
 
 https://twitter.com/oktadev[Follow us], https://www.youtube.com/channel/UC5AMiWqFVFxF1q9Ya1FuZ_Q[watch our videos], and https://www.linkedin.com/company/oktadev/[connect with us] if you'd like to learn more about best-of-breed open source technologies. We're big fans of open source. 💙
+
+**Changelog:**
+
+* Dec 10, 2018: Updated to use Ignite JHipster 2.0.2 and JHipster 5.7.0. You can see the example app changes in [okta-react-native-spring-boot-example#1](https://github.com/oktadeveloper/okta-react-native-spring-boot-example/pull/1); changes to this post can be viewed in [okta.github.io#2600](https://github.com/okta/okta.github.io/pull/2600).
