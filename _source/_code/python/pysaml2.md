@@ -186,7 +186,7 @@ Congratulations on getting Okta working with PySAML2!
 At this point, you should be familiar with setting up a SAML enabled application
 to work with an Okta organization and how to configure PySAML2 to work with Okta.
 
-After you have your Okta organization working with the example {{ page.programming_language}}
+After you have your Okta organization working with the example Python
 application, the next step is to take the example code and move
 it to your production application. The specifics of how this works is
 different depending on how your application is set
