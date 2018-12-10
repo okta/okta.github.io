@@ -3,15 +3,6 @@ layout: software
 title: SAML-enable your Python application
 language: Python
 excerpt: Guidance on how to SAML-enable your Python application using open source PySAML2.
-chiclet_name: PySAML2 Example
-programming_language: Python
-framework: Flask
-framework_url: http://flask.pocoo.org/
-port: 5000
-saml_library: PySAML2
-saml_library_url: https://github.com/rohe/pysaml2
-git_url: git@github.com:jpf/okta-pysaml2-example.git
-github_repo_name: okta-pysaml2-example
 redirect_from:
   - "/docs/examples/pysaml2.html"
   - "/docs/guides/pysaml2.html"
@@ -20,38 +11,38 @@ weight: 2
 
 # Overview
 
-This guide describes how to use [{{ page.saml_library }}]({{ page.saml_library_url }}) to add support
-for Okta (via SAML) to applications written in {{ page.programming_language }}. Please note that while the example in this guide uses
-[{{ page.framework }}]({{ page.framework_url }}), the concepts presented here are general enough to use in other {{ page.programming_language }} frameworks.
+This guide describes how to use [PySAML2](https://github.com/rohe/pysaml2) to add support
+for Okta (via SAML) to applications written in Python. Please note that while the example in this guide uses
+[Flask](http://flask.pocoo.org/), the concepts presented here are general enough to use in other Python frameworks.
 
 This guide describes how to install and configure an example
-application that demonstrates how to use {{ page.saml_library }} in a {{ page.framework }} application.
+application that demonstrates how to use PySAML2 in a Flask application.
 After you have Okta working with the example application,
 adapt the example code for your production environment.
 
 >Note: The library is not Okta's and is not supported by Okta.
 
-This guide assumes that you are familiar with the basics of {{ page.programming_language }}
+This guide assumes that you are familiar with the basics of Python
 software development: using the command line, editing text files,
 using [virtualenv](https://virtualenv.pypa.io/en/latest/), and using
 [pip](https://en.wikipedia.org/wiki/Pip_%28package_manager%29).
 
 If you're already familiar with Okta, you can skip to the
-section titled "Configuring {{ page.saml_library }} to work with Okta."
+section titled "Configuring PySAML2 to work with Okta."
 
 * Will be replaced with the ToC
 {:toc .list-unstyled .toc}
 
-## Configuring Okta to work with {{ page.saml_library }}
+## Configuring Okta to work with PySAML2
 
-Before you can configure your application and {{ page.saml_library }} set up an
-Okta chiclet (application icon) that enables an Okta user to sign in to your to your application with SAML and {{ page.saml_library }}.
+Before you can configure your application and PySAML2 set up an
+Okta chiclet (application icon) that enables an Okta user to sign in to your to your application with SAML and PySAML2.
 
 To set up Okta to connect to your application, follow the
 [setting up a SAML application in Okta](/docs/guides/setting_up_a_saml_application_in_okta)
 guide. As noted in the instructions, there are two steps to change:
 
-* *In step \#6*: Use ***{{ page.chiclet_name }}*** instead of ***Example SAML application*** .
+* *In step \#6*: Use ***PySAML2 Example*** instead of ***Example SAML application*** .
 * *In step \#7*: When entering the URL
 
   ~~~ shell
@@ -61,19 +52,19 @@ guide. As noted in the instructions, there are two steps to change:
   use the following:
 
   ~~~ shell
-  http://localhost:{{ page.port }}/saml/sso/example-okta-com
+  http://localhost:5000/saml/sso/example-okta-com
   ~~~
 
-  **Note:** "{{ page.port }}" is the port that {{ page.framework }} uses by default, if you are using a different port number, change "{{ page.port }}" to the port number you are using.
+  **Note:** "5000" is the port that Flask uses by default, if you are using a different port number, change "5000" to the port number you are using.
 
 
-## Configuring {{ page.saml_library }} to work with Okta
+## Configuring PySAML2 to work with Okta
 
-Now that you have configured the {{ page.chiclet_name }} "chiclet" in your Okta organization, you
-are ready to configure {{ page.saml_library }} to work with your Okta organization. In this
+Now that you have configured the PySAML2 Example "chiclet" in your Okta organization, you
+are ready to configure PySAML2 to work with your Okta organization. In this
 section we use the "Identity Provider metadata" link from the
-section above to configure {{ page.saml_library }}. After completing
-the following steps, you will have a working example of connecting Okta to a sample {{ page.programming_language }} application using {{ page.saml_library }}.
+section above to configure PySAML2. After completing
+the following steps, you will have a working example of connecting Okta to a sample Python application using PySAML2.
 
 0.  Install platform-dependent prerequisites:
 
@@ -91,16 +82,16 @@ the following steps, you will have a working example of connecting Okta to a sam
     sudo yum install libffi-devel xmlsec1 xmlsec1-openssl
     ~~~
 
-1.  Download the example application for {{ page.programming_language }}:
+1.  Download the example application for Python:
 
     ~~~ shell
-    $ git clone {{ page.git_url }}
+    $ git clone git@github.com:jpf/okta-pysaml2-example.git
     ~~~
 
-2.  `cd` to the `{{ page.github_repo_name }}` directory.
+2.  `cd` to the `okta-pysaml2-example` directory.
 
     ~~~ shell
-    $ cd {{ page.github_repo_name }}
+    $ cd okta-pysaml2-example
     ~~~
 
 3.  Open the `app.py` file in your favorite text editor.
@@ -124,7 +115,7 @@ the following steps, you will have a working example of connecting Okta to a sam
 
     Note: The contents of `${metadata_url}` should look similar to: `https://{yourOktaDomain}/app/a0b1c2deFGHIJKLMNOPQ/sso/saml/metadata`
 
-6.  Install the dependencies; for example, {{ page.programming_language }} SAML SP:
+6.  Install the dependencies; for example, Python SAML SP:
 
     ~~~ shell
     $ virtualenv venv
@@ -132,7 +123,7 @@ the following steps, you will have a working example of connecting Okta to a sam
     $ pip install -r requirements.txt
     ~~~
 
-7.  Start the {{ page.programming_language }} example:
+7.  Start the Python example:
 
     ~~~ shell
     $ python app.py
@@ -141,11 +132,11 @@ the following steps, you will have a working example of connecting Okta to a sam
 ## Test the SAML integration
 
 Now that you have set up an application in your Okta organization and have
-configured {{ page.saml_library }} to work with your Okta organization, it is ready to test.
+configured PySAML2 to work with your Okta organization, it is ready to test.
 
 There are two ways to test a SAML application:
 
-1. Starting from the example {{ page.programming_language }} application ("SP initiated").
+1. Starting from the example Python application ("SP initiated").
 2. Starting from Okta ("IdP initiated").
 
 You will use both methods to test your application. In each case, you will know iff the
@@ -154,7 +145,7 @@ test worked when you see a screen that looks like the one below:
 {% img pysaml2-authenticated-user.png alt:"Authenticated user" %}
 
 
-1.  Login from the Okta {{ page.saml_library }} example application (This is
+1.  Login from the Okta PySAML2 example application (This is
     known as an **SP-initiated login**.)
 
     -   Start the example application from the command line:
@@ -165,7 +156,7 @@ test worked when you see a screen that looks like the one below:
 	~~~
 
     -   Open the example application in your browser:
-        `http://localhost:{{ page.port }}/`
+        `http://localhost:5000/`
 
     -   Click on the link for your Okta IdP.
 
@@ -182,18 +173,18 @@ test worked when you see a screen that looks like the one below:
     -   Sign in to your Okta organization.
 
     -   Click the button for the application you created earlier
-        "Configuring Okta to work with {{ page.saml_library }}" section
-        above: {% img pysaml2-example-okta-chiclet.png alt:"{{ page.chiclet_name }}" %}
+        "Configuring Okta to work with PySAML2" section
+        above: {% img pysaml2-example-okta-chiclet.png alt:"PySAML2 Example" %}
 
 If you can to get to the "Logged in" page using both of the
 methods above, the test are successful.
 
-Congratulations on getting Okta working with {{ page.saml_library }}!
+Congratulations on getting Okta working with PySAML2!
 
 ## Next Steps
 
 At this point, you should be familiar with setting up a SAML enabled application
-to work with an Okta organization and how to configure {{ page.saml_library }} to work with Okta.
+to work with an Okta organization and how to configure PySAML2 to work with Okta.
 
 After you have your Okta organization working with the example {{ page.programming_language}}
 application, the next step is to take the example code and move
