@@ -298,6 +298,16 @@ Based on the scopes requested. Generally speaking, the scopes specified in a req
 | invalid_scope          | The scopes list contains an invalid or unsupported value.                                                                                                                                                  |
 | unsupported_grant_type | The `grant_type` isn't `authorization_code`, `refresh_token`, or `password`.                                                                                                                         |
 
+#### Request Example
+{:.api .api-request .api-request-example}
+
+~~~sh
+curl -v -X POST \
+-H "Content-type:application/x-www-form-urlencoded" \
+"https://{yourOktaDomain}/oauth2/default/v1/token" \
+-d "client_id={client_id}&client_secret={client_secret}&grant_type=authorization_code&redirect_uri={redirect_uri}&code={code}"
+~~~
+
 #### Response Example (Success)
 
 ~~~json
