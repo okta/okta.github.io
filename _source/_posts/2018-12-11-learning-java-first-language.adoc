@@ -18,7 +18,7 @@ I experienced a bit of frustration after a few months because I'd find bugs in t
 
 Rather than focusing on my experience, I thought it'd be fun to write a post that provides people with no programming experience how to become Java developers.
 
-At the last JavaOne (in 2017), Oracle leaders said they wanted to make https://www.infoq.com/news/2017/10/javaone-opening[“Java first, Java always.”]
+At the last JavaOne (in 2017), Oracle leaders said they wanted to make https://www.infoq.com/news/2017/10/javaone-opening["Java first, Java always."]
 
 It sounds like a daunting task, but I believe it's possible thanks to easy-to-use frameworks and a thriving open source community.
 
@@ -50,7 +50,7 @@ Ideally, Java code katas would be hosted in a web-based environment like Kotlin 
 
 https://try.kotlinlang.org
 
-I gave a talk at QCon NY this past June along with a developer I work with who hadn't presented publicly before titled “Invest in Your Java Katalogue”. The https://www.infoq.com/presentations/java-katas[video of the talk is now available on InfoQ.com] if you have 45 minutes to spare.
+I gave a talk at QCon NY this past June along with a developer I work with who hadn't presented publicly before titled "Invest in Your Java Katalogue". The https://www.infoq.com/presentations/java-katas[video of the talk is now available on InfoQ.com] if you have 45 minutes to spare.
 
 If you don't have time to watch the video and just want to see the code for the katas, they're https://github.com/BNYMellon/CodeKatas[available on GitHub].
 
@@ -82,7 +82,6 @@ Yes, JShell is cool. Java 11 is pretty cool too -- did you know you can run `.ja
 _Credit: https://twitter.com/NikhilNanivade[Nikhil Nanivadekar]_
 
 You can solve many problems by reaching out to folks via Twitter or email. Most developers and experts are happy and willing to help folks who are facing difficulties, have questions or need a further in-depth explanation. All they have to do is ask (nicely).
-
 
 I am a Mechanical Engineer by education and hadn't written even a "Hello World" in Java until July 3rd, 2012. It is the rich developer ecosystem which has helped me learn, understand, and grow.
 
