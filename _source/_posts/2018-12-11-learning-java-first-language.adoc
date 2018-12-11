@@ -57,7 +57,7 @@ If you don't have time to watch the video and just want to see the code for the 
 
 == 2. Read, code, read, code... rinse and repeat
 
-_Credit: https://twitter.com/henri_tremblay[Henry Tremblay]_
+_Credit: https://twitter.com/henri_tremblay[Henri Tremblay]_
 
 1. Buy https://www.amazon.com/Core-Java-I-Fundamentals-1-11th/dp/0135166306[Core Java volume one]
 2. Read it
@@ -67,7 +67,7 @@ _Credit: https://twitter.com/henri_tremblay[Henry Tremblay]_
 
 == 3. Check out JShell
 
-_Credit: https://twitter.com/karianna[Martjin Verburg] and https://twitter.com/michaelkolling[Michael Kölling]_
+_Credit: https://twitter.com/karianna[Martijn Verburg] and https://twitter.com/michaelkolling[Michael Kölling]_
 
 **Verburg:** JShell can take away a lot of the cognitive load added by IDEs. Sometimes it's simpler to start in a REPL.
 
