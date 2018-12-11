@@ -55,7 +55,7 @@ I gave a talk at QCon NY this past June along with a developer I work with who h
 If you don't have time to watch the video and just want to see the code for the katas, they're https://github.com/BNYMellon/CodeKatas[available on GitHub].
 
 
-== 2. Read, code, read, code… rinse and repeat
+== 2. Read, code, read, code... rinse and repeat
 
 _Credit: https://twitter.com/henri_tremblay[Henry Tremblay]_
 
