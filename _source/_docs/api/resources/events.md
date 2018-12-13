@@ -2,6 +2,7 @@
 layout: docs_page
 title: Events
 category: management
+deprecated: true
 redirect_from: "/docs/api/rest/events.html"
 ---
 

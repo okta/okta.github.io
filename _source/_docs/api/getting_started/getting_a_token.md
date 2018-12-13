@@ -9,21 +9,21 @@ redirect_from: "/docs/getting_started/getting_a_token.html"
 
 1.  Log in to your Okta organization as a user with [administrator
     privileges](https://help.okta.com/en/prod/Content/Topics/Security/Administrators.htm?cshid=Security_Administrators#Security_Administrators). API tokens have the same permissions as the user who creates them,
-    and if the user permissions change, the API token permissions will also change.
+    and if the user permissions change, the API token permissions also change.
 	
 	If you don't have an Okta organization, you can create a free Okta
     Developer Edition organization [at this link](https://developer.okta.com/signup/){:target="_blank"}.
 
-2.  Click on the blue **Admin** button.
+2.  Click the blue **Admin** button.
     {% img okta-admin-ui-button-admin.png alt:"Admin" %}
 
-3.  Click on **Tokens** in the API menu.
+3.  Choose **Tokens** in the API menu.
 	{% img okta-admin-api-token-dev.png alt:"API" %}
 
-4.  Click on the **Create token** button.
+4.  Click **Create Token**.
 	{% img okta-create-api-token-button.png alt:"Create Token" %}
 
-5.  Name your token and click **Create token**.
+5.  Name your token and click **Create Token**.
 
 6.  Make note of your API token, as you will only see it one time.
 
@@ -31,7 +31,7 @@ redirect_from: "/docs/getting_started/getting_a_token.html"
 
 ## Token Expiration
 
-Okta uses a bearer token for API authentication with a sliding scale expiration. Tokens are valid for 30 days and automatically refresh with each API call.  Tokens that are not used for 30 days will expire. The token lifetime is currently fixed and cannot be changed for your organization.
+Okta uses a bearer token for API authentication with a sliding scale expiration. Tokens are valid for 30 days and automatically refresh with each API call.  Tokens that are not used for 30 days expire. The token lifetime is currently fixed and can't be changed for your organization.
 
 ## Token Deactivation
 
