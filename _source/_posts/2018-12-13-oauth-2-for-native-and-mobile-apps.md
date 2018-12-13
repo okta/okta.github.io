@@ -100,31 +100,31 @@ There's an emerging recommendation in the OAuth community to favor this flow ove
 
 ## Demo Time: Authorization Code with PKCE Flow in Action
 
-Okta supports the Auth Code with PKCE Flow for native and mobile apps. You can find the code example for this post here: [https://github.com/oktadeveloper/pkce-cli](https://github.com/oktadeveloper/pkce-cli).
+Okta supports the Auth Code with PKCE Flow for native and mobile apps. You can find the code example for this post at [https://github.com/oktadeveloper/pkce-cli](https://github.com/oktadeveloper/pkce-cli).
 
 This is a [Node.js](https://nodejs.org) native app that runs from the command line. I wanted to keep this example as lean as possible so we could really see the mechanism of the flow in action. As such, it only has 4 dependencies: `commander` for parsing command line switches, `opn` for a platform-independent way to launch a browser from the command line, `request` to make HTTP requests and `restify` to provide a RESTful API endpoint to listen on.
 
-The [AppAuthJS](https://github.com/openid/AppAuth-JS) library is a high quality Javascript library that supports the Auth Code with PKCE Flow and hides away a lot of the details of what's happening during the flow.
+[AppAuth-JS](https://github.com/openid/AppAuth-JS) is a high quality JavaScript library that supports the Auth Code with PKCE Flow and hides away a lot of the details of what's happening during the flow.
 
 ### Add Okta for User Management
 
-Head on over to [https://developer.okta.com](https://developer.okta.com) and create yourself a developer account.
+Head on over to [https://developer.okta.com/signup](https://developer.okta.com/signup/) and create yourself a developer account.
 
-Once you log in to your admin console, it's time to create an app in Okta. Browse to `Applications`. Click `Add Application`. Choose `Native`:
+Once you log in to your admin console, it's time to create an app in Okta. Browse to **Applications**. Click **Add Application**. Choose **Native**:
 
 {% img blog/oauth-2-for-native-and-mobile-apps/create_native_app.png alt:"native app" width:"800" %}{: .center-image }
 
-Click `Next`.
+Click **Next**.
 
-Update the value for `Login redirect URIs` to: `http://localhost:8080/redirect`
+Update the value for **Login redirect URIs** to: `http://localhost:8080/redirect`
 
 {% img blog/oauth-2-for-native-and-mobile-apps/create_native_app_2.png alt:"native app 2" width:"800" %}{: .center-image }
 
-Click `Done`.
+Click **Done**.
 
 Copy the `Client ID` value from the `Client Credentials` section (toward the bottom) of the app summary page.
 
-{% img blog/oauth-2-for-native-and-mobile-apps/client_credentials.png alt:"native app 2" width:"800" %}{: .center-image }
+{% img blog/oauth-2-for-native-and-mobile-apps/client_credentials.png alt:"native app 2" width:"600" %}{: .center-image }
 
 ### Watch PKCE Go
 
@@ -134,11 +134,11 @@ To run the app, do the following:
 cd pkce-cli
 npm install
 ./pkce-cli \
-  --okta_org https://{yourOktaOrg}.oktapreview.com \
+  --okta_org https://{yourOktaDomain} \
   --client_id {yourClientId}
 ```
 
-(You substitute in the values for your Okta org that you captured above)
+(Substitute in the values for your Okta org that you captured above)
 
 Note: Since there's an async part of the flow - that is, waiting for you to authenticate to Okta, the app pauses its processing until you close the browser tab that you authenticated on.
 
