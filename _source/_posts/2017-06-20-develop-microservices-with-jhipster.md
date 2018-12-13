@@ -638,7 +638,7 @@ java.lang.IllegalArgumentException: Authentication object cannot be null
 : Entity processing failed, A new blog cannot already have an ID
 ```
 
-To fix this, you can use Spring Security Test's [`@WithMockUser`](http://docs.spring.io/spring-security/site/docs/current/reference/html/test-method.html#test-method-withmockuser). Open `BlogResourceIntTest.java` and inject  `UserRepository` as a dependency.
+To fix this, you can use Spring Security Test's [`@WithMockUser`](http://docs.spring.io/spring-security/site/docs/5.0.x/reference/html/test-method.html#test-method-withmockuser). Open `BlogResourceIntTest.java` and inject  `UserRepository` as a dependency.
 
 ```java
 @Autowired

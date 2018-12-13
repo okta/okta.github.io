@@ -12,9 +12,10 @@ Import any Okta API collection for Postman from the following list:
 | Collections                       | Click to Run                                                                                                                           |
 |:----------------------------------|:---------------------------------------------------------------------------------------------------------------------------------------|
 | Administrator Roles               | [![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/04f5ec85685ac6f2827e){:target="_blank"} |
-| API Access Management (OAuth 2.0) | [![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/e4d286b1af2294bb14a0){:target="_blank"} |
+| API Access Management (OAuth 2.0) | [![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/52edf1dcddc70269b77d){:target="_blank"} |
 | Apps                              | [![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/4857222012c11cf5e8cd){:target="_blank"} |
 | Authentication                    | [![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/f9684487e584101f25a3){:target="_blank"} |
+| Authorization Server              | [![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/145f5d5fb42a04e22c3e){:target="_blank"} |
 | Client Registration               | [![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/291ba43cde74844dd4a7){:target="_blank"} |
 | Custom SMS Templates              | [![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/d71f7946d8d56ccdaa06){:target="_blank"} |
 | Events                            | [![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/f990a71f061a7a16d0bf){:target="_blank"} |

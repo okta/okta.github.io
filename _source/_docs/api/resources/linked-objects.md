@@ -7,8 +7,6 @@ excerpt: The Linked Objects API helps you create relationships between pairs of 
 
 # Linked Objects API
 
-{% api_lifecycle ea %}
-
 Users have relationships to each other, like manager and subordinate or customer and sales representative. You can create users with relationships by using the Linked Objects API to represent the relationship:
 
 1. Create a linked object definition such as Manager:Subordinate or Case Worker:Client. These pairs are represented by a `primary` attribute and an `associated` attribute.

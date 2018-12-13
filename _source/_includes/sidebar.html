@@ -110,7 +110,7 @@
         <a href="/docs/api/resources/roles">Manage Okta Resources</a>
         {% if page.id contains "docs/api/resources" %}
           <ul id="Sidebar_Resources" class="Sidebar-hide">
-            {% assign api_references = site.docs | where: 'category', 'management' | sort: 'title' %}
+            {% assign api_references = site.docs | where: 'category', 'management' | where_exp: 'item', 'item.deprecated != true' | sort: 'title' %}
             {% for doc in api_references %}
               {% if doc.beta %}{% continue %}{% endif %}
               <li{% if doc.title == page.title%} class="is-active"{% endif %}><a href="{{ doc.url }}">{{ doc.title }}</a></li>
@@ -148,17 +148,6 @@
       {% for element in elements %}{% unless element.id contains "docs/how-to/" %}{% continue %}{% endunless %}
       <li{% if element.title == page.title%} class="is-active"{% endif %}>
         <a href="{{ element.url | remove: '.html' }}">{{ element.title }}</a>
-      </li>
-      {% endfor %}
-    </ul>
-
-    <h3 class="Sidebar-title">Standards</h3>
-    <ul class="Sidebar-nav">
-      {% assign elements = site.standards %}
-      {% for element in elements %}
-      {% unless element.id contains '/index' %}{% continue %}{% endunless %}
-      <li{% if element.title == page.title%} class="is-active"{% endif %}>
-        <a href="{{ element.url | remove: '/index' | append: '/' }}">{{ element.title }}</a>
       </li>
       {% endfor %}
     </ul>

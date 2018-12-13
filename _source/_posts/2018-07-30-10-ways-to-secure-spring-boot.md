@@ -7,6 +7,7 @@ tags: [spring boot, security, snyk, https, hsts, csrf, xss, csp, content securit
 tweets:
 - "Spring Boot is an excellent way to build Java applications with the @springframework. Want to learn how to secure them? @mraible and @sjmaple give you some advice in 10 Excellent Ways to Secure your Spring Boot Application →"
 - "10 Excellent Ways to Secure Your Spring Boot Application, by @Java_Champions @sjmaple and @mraible. Thanks to @rob_winch and @rdegges for reviewing and helping with this post!"
+image: blog/featured/okta-java-skew.jpg
 ---
 
 Spring Boot has dramatically simplified the development of Spring applications. Its autoconfiguration and starter dependencies reduce the amount of code and configuration you need to begin an app. If you were used to Spring and lots of XML back in the day, Spring Boot is a breath of fresh air.
@@ -91,7 +92,7 @@ Ignoring a vulnerability is, of course, an option, but not a good one. Perhaps y
 
 [Cross-Site Request Forgery](<https://www.owasp.org/index.php/Cross-Site_Request_Forgery_(CSRF)>) is an attack that forces a user to execute unwanted actions in an application they're currently logged into. If the user is a normal user, a successful attack can involve state-changing requests like transferring funds or changing their email address. If the user has elevated permissions, a CSRF attack can compromise the entire application.
 
-Spring Security has [excellent CSRF support](https://docs.spring.io/spring-security/site/docs/current/reference/html/csrf.html) that's on by default. If you're using Spring MVC's `<form:form>` tag or Thymeleaf and `@EnableWebSecurity`, the CSRF token will automatically be added as a hidden input field.
+Spring Security has [excellent CSRF support](https://docs.spring.io/spring-security/site/docs/5.0.x/reference/html/csrf.html) that's on by default. If you're using Spring MVC's `<form:form>` tag or Thymeleaf and `@EnableWebSecurity`, the CSRF token will automatically be added as a hidden input field.
 
 If you're using a JavaScript framework like Angular or React, you will need to configure the `CookieCsrfTokenRepository` so JavaScript can read the cookie.
 
@@ -108,7 +109,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 }
 ```
 
-If you're using Angular, this is all you need to do. If you're using React, you'll need to [read the `XSRF-TOKEN` cookie and send it back as an `X-XSRF-TOKEN` header](/blog/2018/07/19/simple-crud-react-and-spring-boot#modify-react-handle-csrf-and-be-identity-aware).
+If you're using Angular, this is all you need to do. If you're using React, you'll need to [read the `XSRF-TOKEN` cookie and send it back as an `X-XSRF-TOKEN` header](/blog/2018/07/19/simple-crud-react-and-spring-boot#modify-react-to-handle-csrf-and-be-identity-aware).
 
 Spring Security automatically adds a `secure` flag to the `XSRF-TOKEN` cookie when the request happens over HTTPS. Spring Security doesn't use the `SameSite=strict` flag for CSRF cookies, but it does when using Spring Session or WebFlux session handling. It makes sense for session cookies since it's being used to identify the user. It doesn't provide much value for CSRF cookies since the CSRF token needs to be in the request too.
 
@@ -116,7 +117,7 @@ Spring Security automatically adds a `secure` flag to the `XSRF-TOKEN` cookie wh
 
 [Content Security Policy](https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP) (CSP) is an added layer of security that helps mitigate [XSS (cross-site scripting)](<https://www.owasp.org/index.php/Cross-site_Scripting_(XSS)>) and data injection attacks. To enable it, you need to configure your app to return a `Content-Security-Policy` header. You can also use a `<meta http-equiv="Content-Security-Policy">` tag in your HTML page.
 
-Spring security provides a number of [security headers by default](https://docs.spring.io/spring-security/site/docs/current/reference/html/headers.html):
+Spring security provides a number of [security headers by default](https://docs.spring.io/spring-security/site/docs/5.0.x/reference/html/headers.html):
 
 ```
 Cache-Control: no-cache, no-store, max-age=0, must-revalidate
@@ -183,7 +184,7 @@ If you want to play with OAuth 2.0, OIDC, and the different flows it allows, see
 
 ## 7. Managing Passwords? Use Password Hashing!
 
-Storing passwords in plain text is one of the worst things you can do for the security of your app. Luckily, Spring Security doesn't allow plain text passwords by default. It also ships with a [crypto module](https://docs.spring.io/spring-security/site/docs/current/reference/html/crypto.html) you can use for symmetric encryption, key generation, and password hashing (a.k.a., password encoding).
+Storing passwords in plain text is one of the worst things you can do for the security of your app. Luckily, Spring Security doesn't allow plain text passwords by default. It also ships with a [crypto module](https://docs.spring.io/spring-security/site/docs/5.0.x/reference/html/crypto.html) you can use for symmetric encryption, key generation, and password hashing (a.k.a., password encoding).
 
 `PasswordEncoder` is the main interface for password hashing in Spring Security and looks as follows:
 
@@ -206,7 +207,7 @@ From [Rob Winch](https://twitter.com/rob_winch), Spring Security Lead:
 
 > "I like BCrypt, but the general advice is one-way adaptive hashes. Some users may need to use PBKDF2 for compliance reasons. There is a [ticket logged](https://github.com/spring-projects/spring-security/issues/5354) for Argon2 support, but there are not any Apache 2 native Java implementations that I have found (if you know of any, please let me know!). Instead, the libraries rely on a binary that they delegate to which isn't ideal from my perspective. We are on the fence about waiting vs. leveraging one of the implementations that delegate to a binary."
 
-For those that want to use SCrypt, there is support in Spring Security through Bouncy Castle in [`SCryptPasswordEncoder`](https://docs.spring.io/spring-security/site/docs/current/reference/htmlsingle/#pe-scpe). Spring Security 5.1 (est. late September 2018) will ship with a [UserDetailsPasswordService API](https://github.com/spring-projects/spring-security/issues/2778) that allows you to upgrade your password storage.
+For those that want to use SCrypt, there is support in Spring Security through Bouncy Castle in [`SCryptPasswordEncoder`](https://docs.spring.io/spring-security/site/docs/5.0.x/reference/htmlsingle/#pe-scpe). Spring Security 5.1 (est. late September 2018) will ship with a [UserDetailsPasswordService API](https://github.com/spring-projects/spring-security/issues/2778) that allows you to upgrade your password storage.
 
 ## 8. Store Secrets Securely
 

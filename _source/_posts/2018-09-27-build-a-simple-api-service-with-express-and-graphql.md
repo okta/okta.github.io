@@ -458,7 +458,7 @@ mutation {
 
 Typically an app of some sort, whether a web app or a native app, will handle the UI for authentication and then seamlessly pass along the `Authorization` header to the API. In this case, since we're just focusing on the API, I had you implement an endpoint for grabbing the auth token manually.
 
-Head to [http://localhost:4000/access-token](http://localhost:4000/access-token) to sign in with Okta and get an access token. Copy the access token, then head back to the GraphQL Playground. At the bottom of the page, there's a link that says `HTTP HEADERS`. When you click that, a section will open up that allows you to add some headers as JSON. Add the following, making sure to add `Bearer` to the front of the token, so it should look something like `Bearer eyJraWQ...xHUOjj_A` (although the real token will be much longer):
+Head to `http://localhost:4000/access-token` to sign in with Okta and get an access token. Copy the access token, then head back to the GraphQL Playground. At the bottom of the page, there's a link that says `HTTP HEADERS`. When you click that, a section will open up that allows you to add some headers as JSON. Add the following, making sure to add `Bearer` to the front of the token, so it should look something like `Bearer eyJraWQ...xHUOjj_A` (although the real token will be much longer):
 
 ```json
 {

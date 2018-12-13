@@ -1,0 +1,470 @@
+---
+layout: blog_post
+title: "Angular 7: What's New and Noteworthy + OIDC Goodness"
+author: mraible
+description: "This post explains what's new in Angular 7 and shows options for adding authentication to an Angular app. You'll also learn about OAuth 2.0, implicit flow, and authorization code flow."
+tags: [angular, angular-oauth2-oidc, oidc, oauth2, pcke]
+tweets:
+- todo
+image: blog/featured/okta-angular-skew.jpg
+---
+:page-liquid:
+
+Angular 7 was released earlier this quarter and I'm pumped about a few of its features. If you've been following Angular since Angular 2, you know that upgrading can sometimes be a pain. There was no Angular 3, but upgrading to Angular 4 wasn't too bad, aside from a bunch of changes in Angular's testing infrastructure. Angular 4 to Angular 5 was painless, and 5 to 6 only required changes to classes that used RxJS.
+
+Before I dive into showing you how to build an Angular app with authn/authz, let's take a look at what's new and noteworthy in this release.
+
+== Upgrade to Angular 7
+
+If you created your app with Angular CLI, chances are you can easily upgrade to the latest release using `ng update`.
+
+[source,bash]
+----
+ng update @angular/cli @angular/core
+----
+
+You can also use the https://update.angular.io/[Angular Update Guide] for complete step-by-step instructions.
+
+image::{% asset_path 'blog/angular-7/update-guide.png' %}[alt=Angular Update Guide,width=800,align=center]
+
+== What's New in Angular 7
+
+There are a few notable features in Angular 7, summarized below:
+
+* **CLI prompts**: this feature has been added to Schematics so you can prompt the user to make choices when running `ng` commands.
+* **Performance enhancements**: the Angular team found many people were using `reflect-metadata` as a dependency (rather than a dev-only dependency). If you update using the aforementioned methods, this dependency will automatically be moved. Angular 7 also adds **bundle budgets** so you'll get warnings when your bundles exceed a particular size.
+* **Angular Material**: Material Design had significant updates in 2018 and Angular Material v7 reflects those updates.
+* **Virtual Scrolling**: this feature allows you to load/unload parts of a list based on visibility.
+* **Drag and Drop**: this feature has been added to the CDK of Angular Material.
+
+Bundle budgets is the feature that excites me the most. I see a lot of Angular apps with large bundle sizes. You want your https://blog.uncommon.is/the-baseline-costs-of-javascript-frameworks-f768e2865d4a[baseline cost] to be minimal, so this feature should help. The following defaults are specified in `angular.json` when you create a new project with Angular CLI.
+
+[source,json]
+----
+"budgets": [{
+  "type": "initial",
+  "maximumWarning": "2mb",
+  "maximumError": "5mb"
+}]
+----
+
+TIP: You can use Chrome's https://support.google.com/chrome/answer/2392284[data saver] extension for maximum awareness of the data your app uses.
+
+For more details on what's new in Angular 7, see the https://blog.angular.io/version-7-of-angular-cli-prompts-virtual-scroll-drag-and-drop-and-more-c594e22e7b8c[Angular blog], https://www.infoq.com/news/2018/11/angular-7[coverage on InfoQ], or the Angular project's https://github.com/angular/angular/blob/master/CHANGELOG.md[changelog].
+
+Now that you know how awesome Angular 7 is, let's take a look at how to create secure applications with it!
+
+== Create a Secure Angular 7 Application
+
+An easy way to create Angular 7 apps is using the https://angular.io/cli[Angular CLI]. To install it, run the following command:
+
+[source,bash]
+----
+npm i -g @angular/cli
+----
+
+The example below uses Angular CLI 7.1.0. To verify you're using the same version, you can run `ng --version`.
+
+[source,bash]
+----
+     _                      _                 ____ _     ___
+    / \   _ __   __ _ _   _| | __ _ _ __     / ___| |   |_ _|
+   / △ \ | '_ \ / _` | | | | |/ _` | '__|   | |   | |    | |
+  / ___ \| | | | (_| | |_| | | (_| | |      | |___| |___ | |
+ /_/   \_\_| |_|\__, |\__,_|_|\__,_|_|       \____|_____|___|
+                |___/
+
+
+Angular CLI: 7.1.0
+Node: 11.1.0
+OS: darwin x64
+Angular:
+...
+
+Package                      Version
+------------------------------------------------------
+@angular-devkit/architect    0.11.0
+@angular-devkit/core         7.1.0
+@angular-devkit/schematics   7.1.0
+@schematics/angular          7.1.0
+@schematics/update           0.11.0
+rxjs                         6.3.3
+typescript                   3.1.6
+----
+
+To create a new app, run `ng new ng-secure`. When prompted for routing, type "**Y**". The stylesheet format is not relevant to this example, so choose whatever you like. I used CSS.
+
+After Angular CLI finishes creating your app, cd into its directory, run `ng new`, and navigate to `http://localhost:4200` to see what it looks like.
+
+image::{% asset_path 'blog/angular-7/ng-secure.png' %}[alt=Default Angular App!,width=800,align=center]
+
+== Add Identity and Authentication to Your Angular 7 App with OIDC
+
+If you're developing apps for a large enterprise, you probably want to code them to use the same set of users. If you're creating new user stores for each of your apps, stop it! There's an easier way. You can use OpenID Connect (OIDC) to add authentication to your apps and allow them all to use the same user store.
+
+OIDC requires an identity provider (or IdP). There are many well-known IdPs like Google, Twitter, and Facebook, but those services don't allow you to manage your users like you would in Active Directory. Okta allows this, _and_ you can use Okta's API for OIDC.
+
+https://developer.okta.com/signup/[Register for a forever-free developer account], and when you're done, come on back so you can learn more about how to secure your Angular app!
+
+image::{% asset_path 'blog/angular-7/okta-signup.png' %}[alt=Free developer account!,width=800,align=center]
+
+Now that you have a developer account, I'll show you several techniques for adding OIDC authentication to you Angular 7 app. But first, you'll need to create a new OIDC app in Okta.
+
+=== Create an OIDC App in Okta
+
+Log in to your Okta Developer account and navigate to **Applications** > **Add Application**. Click **Web** and click **Next**. Give the app a name you'll remember, and specify `http://localhost:4200` as a Login redirect URI. Click **Done**. Edit your app after creating it and specify `http://localhost:4200` as a Logout redirect URI too. The result should look something like the screenshot below.
+
+image::{% asset_path 'blog/angular-7/okta-oidc-app.png' %}[alt=Okta OIDC App,width=700,align=center]
+
+=== Use angular-oauth2-oidc
+
+The https://github.com/manfredsteyer/angular-oauth2-oidc[angular-oauth2-oidc] library provides support for OAuth 2.0 and OIDC. It was originally created by https://twitter.com/manfredsteyer[Manfred Steyer] and includes many community contributions.
+
+Install angular-oauth2-oidc using the following command:
+
+----
+npm i angular-oauth2-oidc@5.0.2
+----
+
+Open `src/app/app.module.ts` and import `OAuthModule` as well as `HttpClientModule`.
+
+[source,typescript]
+----
+import { HttpClientModule } from '@angular/common/http';
+import { OAuthModule } from 'angular-oauth2-oidc';
+
+@NgModule({
+  declarations: [
+    AppComponent
+  ],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    HttpClientModule,
+    OAuthModule.forRoot()
+  ],
+  providers: [],
+  bootstrap: [AppComponent]
+})
+export class AppModule { }
+----
+
+Modify `src/app/app.component.ts` to import `OAuthService` and configure it to use your Okta application settings. Add `login()` and `logout()` methods, as well as a getter for the user's name.
+
+[source,typescript]
+----
+import { Component } from '@angular/core';
+import { OAuthService, JwksValidationHandler, AuthConfig } from 'angular-oauth2-oidc';
+
+export const authConfig: AuthConfig = {
+  issuer: 'https://{yourOktaDomain}/oauth2/default',
+  redirectUri: window.location.origin,
+  clientId: '{yourClientId}'
+};
+
+@Component({
+  selector: 'app-root',
+  templateUrl: './app.component.html',
+  styleUrls: ['./app.component.css']
+})
+export class AppComponent {
+  title = 'ng-secure';
+
+  constructor(private oauthService: OAuthService) {
+    this.oauthService.configure(authConfig);
+    this.oauthService.tokenValidationHandler = new JwksValidationHandler();
+    this.oauthService.loadDiscoveryDocumentAndTryLogin();
+  }
+
+  login() {
+    this.oauthService.initImplicitFlow();
+  }
+
+  logout() {
+    this.oauthService.logOut();
+  }
+
+  get givenName() {
+    const claims = this.oauthService.getIdentityClaims();
+    if (!claims) {
+      return null;
+    }
+    return claims['name'];
+  }
+}
+----
+
+Modify `src/app/app.component.html` to add **Login** and **Logout** buttons.
+
+{% raw %}
+[source,html]
+----
+<h1>Welcome to {{ title }}!</h1>
+
+<div *ngIf="givenName">
+  <h2>Hi, {{givenName}}!</h2>
+  <button (click)="logout()">Logout</button>
+</div>
+
+<div *ngIf="!givenName">
+  <button (click)="login()">Login</button>
+</div>
+
+<router-outlet></router-outlet>
+----
+{% endraw %}
+
+Restart your app and you should see a login button.
+
+image::{% asset_path 'blog/angular-7/login.png' %}[alt=App with Login button,width=800,align=center]
+
+Click the login button, sign in to your Okta account, and you should see your name with a logout button.
+
+image::{% asset_path 'blog/angular-7/hi-with-logout.png' %}[alt=App with name and Logout button,width=800,align=center]
+
+Pretty slick, eh?
+
+=== Okta's Angular SDK
+
+You can also use https://www.npmjs.com/package/@okta/okta-angular[Okta's Angular SDK] to implement the same functionality. You can start by installing it.
+
+----
+npm i @okta/okta-angular@1.0.7
+----
+
+Change `app.module.ts` to configure your Okta settings and import the `OktaAuthModule`.
+
+[source,ts]
+----
+import { BrowserModule } from '@angular/platform-browser';
+import { NgModule } from '@angular/core';
+import { AppRoutingModule } from './app-routing.module';
+import { AppComponent } from './app.component';
+import { OktaAuthModule } from '@okta/okta-angular';
+
+const config = {
+  issuer: 'https://{yourOktaDomain}/oauth2/default',
+  redirectUri: window.location.origin + '/implicit/callback',
+  clientId: '{yourClientId}'
+};
+
+@NgModule({
+  declarations: [
+    AppComponent
+  ],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    OktaAuthModule.initAuth(config)
+  ],
+  providers: [],
+  bootstrap: [AppComponent]
+})
+export class AppModule { }
+----
+
+You might notice the redirect URI is a bit different than the previous one. For this to work, you'll need to modify your Okta app and add `http://localhost:4200/implicit/callback` as a Login redirect URI.
+
+Modify `src/app/app-routing.ts` to have a route for this path.
+
+[source,ts]
+----
+import { OktaCallbackComponent } from '@okta/okta-angular';
+
+const routes: Routes = [
+  {
+    path: 'implicit/callback',
+    component: OktaCallbackComponent
+  }
+];
+----
+
+Change `app.component.ts` to use the `OktaAuthService` to determine if the user is authenticated.
+
+[source,ts]
+----
+import { Component, OnInit } from '@angular/core';
+import { OktaAuthService, UserClaims } from '@okta/okta-angular';
+
+@Component({
+  selector: 'app-root',
+  templateUrl: './app.component.html',
+  styleUrls: ['./app.component.css']
+})
+export class AppComponent implements OnInit {
+  title = 'ng-secure';
+  isAuthenticated: boolean;
+  email: string;
+
+  constructor(public oktaAuth: OktaAuthService) {
+  }
+
+  async ngOnInit() {
+    this.isAuthenticated = await this.oktaAuth.isAuthenticated();
+    this.user = await this.oktaAuth.getUser();
+    // Subscribe to authentication state changes
+    this.oktaAuth.$authenticationState.subscribe( async(isAuthenticated: boolean)  => {
+      this.isAuthenticated = isAuthenticated;
+      this.user = await this.oktaAuth.getUser();
+    });
+  }
+}
+----
+
+Then update `app.component.html` to use `isAuthenticated` and display the user's name.
+
+{% raw %}
+[source,html]
+----
+<h1>Welcome to {{ title }}!</h1>
+
+<div *ngIf="isAuthenticated">
+  <h2>Hi, {{user?.name}}!</h2>
+  <button (click)="oktaAuth.logout()">Logout</button>
+</div>
+
+<div *ngIf="!isAuthenticated">
+  <button (click)="oktaAuth.loginRedirect()">Login</button>
+</div>
+
+<router-outlet></router-outlet>
+----
+{% endraw %}
+
+Restart your app and you should be able to log in to your app using Okta's Angular SDK.
+
+=== Use Authorization Code Flow
+
+There is a new draft specification for OAuth called https://tools.ietf.org/html/draft-parecki-oauth-browser-based-apps[OAuth 2.0 for Browser-Based Apps]. This was created by Okta's own https://twitter.com/aaronpk[Aaron Parecki] and contains https://tools.ietf.org/html/draft-parecki-oauth-browser-based-apps#section-7.8[an interesting clause].
+
+> The OAuth 2.0 Implicit grant authorization flow (defined in Section 4.2 of OAuth 2.0 [RFC6749]) works by receiving an access token in the HTTP redirect (front-channel) immediately without the code exchange step.  The Implicit Flow cannot be protected by PKCE [RFC7636] (which is required according to Section 6), so clients and authorization servers MUST NOT use the Implicit Flow for browser-based apps.
+
+Both angular-oauth2-oidc and Okta's Angular SDK use implicit flow, the accepted practice prior to the recent discussion in Aaron's draft specification. So how do you follow Aaron's recommendation and use authorization code flow with PKCE in your Angular app? There are a couple options:
+
+* There is a fork of angular-oauth2-oidc called https://www.npmjs.com/package/angular-oauth2-oidc-codeflow[angular-oauth2-oidc-codeflow].
+* https://github.com/openid/AppAuth-JS[AppAuth for JS] supports authorization code flow, complete with PKCE support.
+
+I tried using angular-oauth2-oidc-codeflow with Okta. I used the code from my angular-oauth2-oidc example above and found I only needed to change a few things (after installing it with `npm i angular-oauth2-oidc-codeflow`):
+
+. Imports should be from `'angular-oauth2-oidc-codeflow'`
+. The `login()` method in `AppComponent` should be changed to use auth code flow.
+
+    login() {
+      this.oauthService.initAuthorizationCodeFlow();
+    }
+
+After making these changes, I tried to log in to my original SPA app. The error I received was `unsupported_response_type`. I tried creating a new Native app with https://oauth.net/2/pkce/[PKCE], but it failed because angular-oauth2-oidc-codeflow does not send a code challenge.
+
+In my link:/blog/2018/09/17/desktop-app-electron-authentication[Build a Desktop App with Electron and Authentication], I successfully used AppAuth and PKCE. The reason this works is because it's a desktop app and doesn't send an `origin` header. Okta's token endpoint doesn't allow CORS (cross-origin resource sharing), so it won't work in a browser client.
+
+We hope to fix this soon. As the industry evolves, we'll do our best to keep our libraries current with best practices. In the meantime, we recommend you use a CSP (content security policy) to make sure 3rd party scripts don't have access to your Angular app.
+
+TIP: See link:/blog/2018/07/30/10-ways-to-secure-spring-boot[10 Excellent Ways to Secure Your Spring Boot Application] to see how to add a CSP with Spring Boot.
+
+You might also find Micah Silverman's https://github.com/dogeared/pkce-cli[PKCE Command Line] project interesting.
+
+== Limit Access Based on Group for Your Angular 7 App
+
+If you'd like to show/hide components of your app based on a user's group, you'll need to add a "groups" claim to your ID token. Log in to your Okta account, navigate to **API** > **Authorization Servers**, click the **Authorization Servers** tab and edit the default one. Click the **Claims** tab and **Add Claim**. Name it "groups", and include it in the ID Token. Set the value type to "Groups" and set the filter to be a Regex of `.*`.
+
+Now you can create an Angular directive to show/hide elements based on the user's groups. There is currently an https://github.com/okta/okta-oidc-js/issues/36[open issue] that shows how you might go about doing this.
+
+== Control Access to Routes with an AuthGuard
+
+Angular's https://angular.io/guide/router#guard-the-admin-feature[router documentation] includes an example of how to create an `AuthGuard` to protect routes so they're only available to authenticated users.
+
+Okta's Angular SDK ships with an `OktaAuthGuard` that you can use to protect your routes. It verifies there is a valid access token before allowing the user to navigate to the route. Below is an example of how to configure it in `app-routing.module.ts`.
+
+[source,ts]
+----
+import { OktaAuthGuard } from '@okta/okta-angular';
+
+const routes: Routes = [
+  { path: 'secure', component: MySecureComponent, canActivate: [OktaAuthGuard] }
+]
+----
+
+You can implement a similar auth guard for angular-oauth2-oidc as shown in link:/blog/2017/04/17/angular-authentication-with-oidc[Angular Authentication with OpenID Connect and Okta in 20 Minutes].
+
+[source,ts]
+----
+import { Injectable } from '@angular/core';
+import { ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot } from '@angular/router';
+import { OAuthService } from 'angular-oauth2-oidc';
+
+@Injectable({
+  providedIn: 'root'
+})
+export class AuthGuard implements CanActivate {
+
+  constructor(private oauthService: OAuthService, private router: Router) {}
+
+  canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
+    if (this.oauthService.hasValidIdToken()) {
+      return true;
+    }
+
+    this.router.navigate(['/']);
+    return false;
+  }
+}
+----
+
+== Angular 7 CLI Tutorial and Angular 7 CRUD with Spring Boot
+
+Phew, that's a lot of information about authentication with Angular 7! For more straightforward Angular content, I invite you to take a look at a couple tutorials I recently upgraded to Angular 7.
+
+I updated a few of my tutorials to use Angular 7 recently.
+
+* https://github.com/mraible/ng-demo[**Angular 7 and Angular CLI Tutorial**]: a tutorial that shows you to create an app from scratch, as well as test it. Includes sections on how to add Angular Material, Bootstrap, and authentication with Okta.
+* link:/blog/2018/08/22/basic-crud-angular-7-and-spring-boot-2[**Build a Basic CRUD App with Angular 7.0 and Spring Boot 2.1**]: a tutorial that features a Spring Boot backend and an Angular UI.
+
+In fact, I enjoyed playing with Angular 7 so much, I turned the basic CRUD app tutorial into a screencast!
+
+++++
+<div style="text-align: center">
+<iframe width="700" height="394" style="max-width: 100%" src="https://www.youtube.com/embed/HoDzatvGDlI" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+</div>
+++++
+
+== JHipster and Angular 7
+
+I'm a committer on a project called https://www.jhipster.tech[JHipster]. JHipster allows you to generate a Spring Boot app with an Angular UI quickly and easily. The JHipster team upgraded to Angular 7 in its https://www.jhipster.tech/2018/11/02/jhipster-release-5.6.0.html[5.6.0 release]. You can create a JHipster app with Angular using a single JDL file. JDL stands for https://www.jhipster.tech/jdl/[JHipster Domain Language].
+
+To see JHipster in action, install it using `npm i generator-jhipster` and create an `app.jh` file with the following JDL.
+
+----
+application {
+  config {
+    baseName blog,
+    applicationType monolith,
+    packageName com.jhipster.demo.blog,
+    prodDatabaseType mysql,
+    cacheProvider hazelcast,
+    buildTool maven,
+    clientFramework angular,
+    useSass true,
+    testFrameworks [protractor]
+  }
+}
+----
+
+TIP: JHipster uses JWT authentication by default, but you can switch it to use OIDC for authentication pretty easily (hint: just add `authenticationType oauth2` to `app.jh`).
+
+Create a `blog` directory and run `jhipster import-jdl app.jh` inside of it. In a minute or two, you'll have a fully functional (and well-tested) Spring Boot + Angular + Bootstrap app! If you want to add entities to CRUD, see https://github.com/jhipster/jdl-samples/blob/master/blog.jh[this sample JDL].
+
+NOTE: The sample JDL mentioned uses React for its `clientFramework`. Make sure to change it to `angular` to use Angular 7.
+
+If you've never heard of JHipster before, you should download the https://www.infoq.com/minibooks/jhipster-mini-book-5[free JHipster Mini-Book] from InfoQ! It's a book I wrote to help you get started with hip technologies today: Angular, Bootstrap and Spring Boot. The 5.0 version was http://www.jhipster-book.com/#!/news/entry/jhipster-mini-book-v5-now-available[recently released].
+
+== Learn More About Angular 7, JHipster, and OAuth 2.0
+
+I hope you've enjoyed learning about Angular 7 and how to add authn/authz to an Angular app. I've written a lot about Angular on this blog. See the following posts to learn more about this modern web framework.
+
+* link:/blog/2018/08/22/basic-crud-angular-7-and-spring-boot-2[Build a Basic CRUD App with Angular 7.0 and Spring Boot 2.1]
+* link:/blog/2018/06/25/react-spring-boot-photo-gallery-pwa[Build a Photo Gallery PWA with React, Spring Boot, and JHipster]
+* link:/blog/2018/03/01/develop-microservices-jhipster-oauth[Develop a Microservices Architecture with OAuth 2.0 and JHipster]
+* link:/blog/2018/05/24/what-is-the-oauth2-implicit-grant-type[What is the OAuth 2.0 Implicit Grant Type?]
+* link:/blog/2018/04/10/oauth-authorization-code-grant-type[What is the OAuth 2.0 Authorization Code Grant Type?]
+
+If you enjoyed this post, follow us on social media { https://twitter.com/oktadev[Twitter], https://www.facebook.com/oktadevelopers[Facebook], https://www.linkedin.com/company/oktadev/[LinkedIn], https://www.youtube.com/channel/UC5AMiWqFVFxF1q9Ya1FuZ_Q[YouTube] } to know when we've posted other awesome content

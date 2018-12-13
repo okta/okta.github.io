@@ -4,7 +4,7 @@
 	min-width: 250px;
 	position: relative;
 	width: 250px;
-	border-left: solid 1px get-color('gray-lightest');
+	border-left: solid 1px get-color('ebony-clay');
 
 	@include media('>medium') {
 		@include padding(large small large small);
@@ -148,4 +148,3 @@
 	    }
     }
 }
-

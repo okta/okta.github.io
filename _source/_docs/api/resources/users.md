@@ -1094,6 +1094,7 @@ curl -v -X GET \
 ]
 ~~~
 
+> Note: This omits users that have a status of `DEPROVISIONED`. To return all users, use a [filter query](#list-users-with-a-filter) instead.
 
 #### List Users with a Filter
 {:.api .api-operation}

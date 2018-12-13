@@ -74,7 +74,107 @@ Open the `package.json` in this project and make the following changes.
  }
 ```
 
-These changes are not necessary, but they will make things easier. The changes in "scripts" make it so compilation will happen before you run `npm run dev` or `npm start`. You're also moving the `electron` dependencies to be a `devDependency` and upgrading TypeScript to the latest version.
+The changes in the "scripts" are not necessary, but they make compilation happen before you run `npm run dev` or `npm start`. You're also moving the `electron` dependencies to be a `devDependency` and upgrading TypeScript to the latest version.
+
+In addition, you'll need to make some changes to `flow.ts` since you just upgraded to AppAuth 1.1.1. The upgrade allows for PKCE (Proof Key for Code Exchange), and a couple constructors need to be changed to take in objects instead of arguments. It might be cumbersome to pick through the changes below. You can [copy this file](https://github.com/googlesamples/appauth-js-electron-sample/blob/50d98d888ca9299708f71e8bce00101048389260/flow.ts) instead.
+
+**NOTE:** If the changes below are already in this file, it's likely [this pull request](https://github.com/googlesamples/appauth-js-electron-sample/pull/3) was merged and you can skip this part.
+
+```diff
++import { NodeCrypto } from '@openid/appauth/built/node_support/';
+ 
+ export class AuthStateEmitter extends EventEmitter {
+   static ON_TOKEN_RESPONSE = "on_token_response";
+@@ -83,7 +75,11 @@ export class AuthFlow {
+     this.notifier.setAuthorizationListener((request, response, error) => {
+       log("Authorization request complete ", request, response, error);
+       if (response) {
+-        this.makeRefreshTokenRequest(response.code)
++        let codeVerifier: string | undefined;
++        if(request.internal && request.internal.code_verifier) {
++          codeVerifier = request.internal.code_verifier;
++        }
++        this.makeRefreshTokenRequest(response.code, codeVerifier)
+           .then(result => this.performWithFreshTokens())
+           .then(() => {
+             this.authStateEmitter.emit(AuthStateEmitter.ON_TOKEN_RESPONSE);
+@@ -115,14 +111,13 @@ export class AuthFlow {
+     }
+ 
+     // create a request
+-    const request = new AuthorizationRequest(
+-      clientId,
+-      redirectUri,
+-      scope,
+-      AuthorizationRequest.RESPONSE_TYPE_CODE,
+-      undefined /* state */,
+-      extras
+-    );
++    const request = new AuthorizationRequest({
++      client_id: clientId,
++      redirect_uri: redirectUri,
++      scope: scope,
++      response_type: AuthorizationRequest.RESPONSE_TYPE_CODE,
++      extras: extras
++    }, new NodeCrypto());
+ 
+     log("Making authorization request ", this.configuration, request);
+ 
+@@ -132,19 +127,25 @@ export class AuthFlow {
+     );
+   }
+ 
+-  private makeRefreshTokenRequest(code: string): Promise<void> {
++  private makeRefreshTokenRequest(code: string, codeVerifier?: string): Promise<void> {
+     if (!this.configuration) {
+       log("Unknown service configuration");
+       return Promise.resolve();
+     }
++
++    const extras: StringMap = {};
++    if(codeVerifier) {
++      extras.code_verifier = codeVerifier;
++    }
++
+     // use the code to make the token request.
+-    let request = new TokenRequest(
+-      clientId,
+-      redirectUri,
+-      GRANT_TYPE_AUTHORIZATION_CODE,
+-      code,
+-      undefined
+-    );
++    let request = new TokenRequest({
++      client_id: clientId,
++      redirect_uri: redirectUri,
++      grant_type: GRANT_TYPE_AUTHORIZATION_CODE,
++      code: code,
++      extras: extras
++    });
+ 
+     return this.tokenHandler
+       .performTokenRequest(this.configuration, request)
+@@ -179,13 +180,12 @@ export class AuthFlow {
+       // do nothing
+       return Promise.resolve(this.accessTokenResponse.accessToken);
+     }
+-    let request = new TokenRequest(
+-      clientId,
+-      redirectUri,
+-      GRANT_TYPE_REFRESH_TOKEN,
+-      undefined,
+-      this.refreshToken
+-    );
++    let request = new TokenRequest({
++      client_id: clientId,
++      redirect_uri: redirectUri,
++      grant_type: GRANT_TYPE_REFRESH_TOKEN,
++      refresh_token: this.refreshToken
++    });
+     return this.tokenHandler
+       .performTokenRequest(this.configuration, request)
+       .then(response => {
+```
 
 Navigate to the cloned directory, install dependencies with npm, and run the app.
 
@@ -88,17 +188,15 @@ It should start the app and show a Sign-In link.
 
 {% img blog/electron-react-appauth-js/initial-load.png alt:"Electron App: initial load" width:"800" %}{: .center-image }
 
-
 If you have a Google account, click **Sign-In**, log in, and you'll be redirected back to your app. You should see your avatar and name displayed.
 
 {% img blog/electron-react-appauth-js/after-sign-in.png alt:"After Google Sign-In" width:"800" %}{: .center-image }
-
 
 The diagram below shows how this authorization flow happens using OpenID Connect.
 
 {% img blog/electron-react-appauth-js/oidc-flow.png alt:"OIDC Flow" width:"800" %}{: .center-image }
 
-At this point, you can see that authentication with Google is working. In the next sections, I'll show you how to add PKCE support to make this app more secure, and how to use Okta instead of Google.
+At this point, you can see that authentication with Google is working. In the next sections, I'll show you how to use Okta instead of Google.
 
 ## Why Use Okta for Authentication?
 
@@ -142,12 +240,6 @@ let request =
     });
 ```
 
-If you restart your app and try to log in, it will fail because you're not using PKCE. You'll see an error like the following in your launched browser's address bar.
-
-```
-error=invalid_request&error_description=PKCE+code+challenge+is+required+when+the+token+endpoint+authentication+method+is+%27NONE%27.
-```
-
 ## Add PKCE Support to Your Desktop App
 
 PKCE (pronounced "pixy") is a security extension for OAuth 2.0 for public clients on mobile (and desktop) clients. It's designed to prevent interception of the authorization code by a malicious application that runs on the same device. 
@@ -188,75 +280,9 @@ The diagram below shows how PKCE works with your app and Okta.
 
 <!-- copied from _source/_authentication-guide/auth-overview/index.md -->
 
-Now you'll add PKCE to your Electron app! In `flow.ts`, add a `challengePair` variable for PKCE as a member variable of the `AuthFlow` class.
+You don't need to change any code in your Electron app to add PKCE. That was done when you upgraded `flow.ts` to use AppAuth 1.1.1.
 
-```ts
-private challengePair: { verifier: string, challenge: string };
-```
-
-Add a line at the end of the constructor to initialize this variable.
-
-```ts
-this.challengePair = AuthService.getPKCEChallengePair();
-```
-
-Create `pkce.ts` to define the `AuthService` class.
-
-```ts
-const crypto = require('crypto');
-
-export class AuthService {
-
-  static getPKCEChallengePair() {
-    let verifier = AuthService.base64URLEncode(crypto.randomBytes(32));
-    let challenge = AuthService.base64URLEncode(AuthService.sha256(verifier));
-    return {verifier, challenge};
-  }
-
-  static base64URLEncode(str: Buffer) {
-    return str.toString('base64')
-      .replace(/\+/g, '-')
-      .replace(/\//g, '_')
-      .replace(/=/g, '');
-  }
-
-  static sha256(buffer: string) : Buffer {
-    return crypto.createHash('sha256').update(buffer).digest();
-  }
-}
-```
-
-Add an import for this class to `flow.ts`:
-
-```ts
-import { AuthService } from './pkce';
-```
-
-In the `makeAuthorizationRequest()` method, right after the `if (username) {}` logic, add the code challenge and method to the `extras` map.
-
-```ts
-// PKCE
-extras['code_challenge'] = this.challengePair.challenge;
-extras['code_challenge_method'] = 'S256';
-```
-
-In `makeRequestTokenRequest()`, add a `tokenRequestExtras` variable and send it in the request.
-
-```ts
-let tokenRequestExtras = { code_verifier: this.challengePair.verifier };
-
-// use the code to make the token request.
-let request = new TokenRequest(
-  clientId,
-  redirectUri,
-  GRANT_TYPE_AUTHORIZATION_CODE,
-  code,
-  undefined,
-  tokenRequestExtras
-);
-```
-
-After making these changes, you should be able to log in. However, when you click on **USER INFO**, you won't see your user's name or avatar. Open Chrome Developer Tools with **View** > **Toggle Developer Tools** to see why.
+Start your app with `npm start`, and try to login. You should be able to. However, when you click on **USER INFO**, you won't see your user's name or avatar. Open Chrome Developer Tools with **View** > **Toggle Developer Tools** to see why.
 
 {% img blog/electron-react-appauth-js/developer-tools.png alt:"Electron's Developer Tools" width:"800" %}{: .center-image }
 
@@ -266,11 +292,9 @@ To fix this issue, change the `scope` variable in `flow.ts` to include `profile`
 const scope = 'openid profile offline_access';
 ```
 
-Refresh your app (Command+R on Mac, Ctrl+R on Windows/Linux), and now you should see the name when clicking on **USER INFO**.
+Refresh your app (**Command+R** on Mac, **Ctrl+R** on Windows/Linux), and now you should see the name when clicking on **USER INFO**.
 
 {% img blog/electron-react-appauth-js/userinfo-name.png alt:"Name from User Info Endpoint" width:"800" %}{: .center-image }
-
-**NOTE:** I leveraged [these PKCE code samples](https://github.com/openid/AppAuth-JS/issues/28) to make all this work.
 
 ### Add an Avatar in Okta
 
@@ -377,4 +401,5 @@ Like what you learned here? Follow [@oktadev](https://twitter.com/oktadev), like
 
 **Changelog:**
 
+* Nov 20, 2018: Updated `flow.ts` for AppAuth 1.1.1 and changed to use its PKCE support. See the example app changes in [okta-appauth-js-electron-example#3](https://github.com/oktadeveloper/okta-appauth-js-electron-example/pull/3); changes to this post can be viewed in [okta.github.io#2495](https://github.com/okta/okta.github.io/pull/2495).
 * Sep 19, 2018: Updated to use Electron 3.0.0 and AppAuth 1.1.1. See the example app changes in [okta-appauth-js-electron-example#1](https://github.com/oktadeveloper/okta-appauth-js-electron-example/pull/1); changes to this post can be viewed in [okta.github.io#2327](https://github.com/okta/okta.github.io/pull/2327).

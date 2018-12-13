@@ -23,12 +23,11 @@ More user profile attributes are available for matching as an {% api_lifecycle e
 **Account Link Policy:** Determines whether your Application User should be linked to an Okta user.
 
 * Automatic: Link user accounts automatically according to the "Auto-Link Restrictions" and "Match against" settings.
-* Callout: Account linking decisions should be delegated to an external application.
 * Disabled: Do not link existing User accounts. Unless User is already linked, login will fail.
 
 **Auto-Link Restrictions:** Allows you to restrict auto-linking to members of specified groups.
 
-**Provisioning Policy:** Determines whether just-in-time provisioning of users should be automatic, disabled, or delegated to an external application via a callout.
+**Provisioning Policy:** Determines whether just-in-time provisioning of users should be automatic or disabled.
 
 ### JIT Settings
 

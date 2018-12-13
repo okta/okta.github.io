@@ -225,7 +225,7 @@ Open three terminal windows and navigate to each app (`gateway`, `blog`, and `st
 
 Open your browser and go to `http://localhost:8761`. Log in, and you should see a welcome page that shows that the gateway, and both apps have been registered.
 
-{% img blog/microservices-jhipster-oauth/jhipster-registry-with-gateway+apps.png alt:"JHipster Registry with Gateway  + Apps registered" width:"800" %}{: .center-image }
+{% img blog/microservices-jhipster-oauth/jhipster-registry-with-gateway-apps.png alt:"JHipster Registry with Gateway  + Apps registered" width:"800" %}{: .center-image }
 
 Once everything finishes starting, open a browser to `http://localhost:8080` and click **sign in**. You should be redirected to your Okta org to sign-in, then back to the gateway once you've entered valid credentials.
 

@@ -108,12 +108,12 @@ export default withAuth(class Home extends Component {
 
   async login() {
     // Redirect to '/' after login
-    this.props.login('/');
+    this.props.auth.login('/');
   }
 
   async logout() {
     // Redirect to '/' after logout
-    this.props.logout('/');
+    this.props.auth.logout('/');
   }
 
   render() {

@@ -66,7 +66,7 @@ This will give you a new project with the following layout.
 
 The Maven build file, `pom.xml`, is pretty plain, but it assumes we're going to use JUnit 4. Let's upgrade JUnit to use JUnit 5, which is a more modern testing framework that's well supported by Spring Framework 5 and beyond. This owes in no small part to the fact that the lead of JUnit 5, Sam Brennan, is also the lead of the Spring Test framework. 
 
-Add the following dependencies to your new application's build file, `pom.xml`: `org.junit.jupiter`:`junit-jupiter-engine` and give it a `scope` of `test`. Then, exclude the `junit`:`junit` dependency from the `spring-boot-starter-test` dependency.  As of this writing, in September 2018, you _also_ need to manually update the version of the Failsafe and Surefire Maven plugins in your Maven build's `<properties>` stanza. This is the resulting `pom.xml`:
+Add the following dependencies to your new application's build file, `pom.xml`: `org.junit.jupiter:junit-jupiter-engine` and give it a `scope` of `test`. Then, exclude the `junit:junit` dependency from the `spring-boot-starter-test` dependency.  This is the resulting `pom.xml`:
 
 .`pom.xml`
 ====
@@ -82,19 +82,17 @@ Add the following dependencies to your new application's build file, `pom.xml`: 
     <version>0.0.1-SNAPSHOT</version>
     <packaging>jar</packaging>
 
-    <name>reactive-web</name>
+    <name>demo</name>
     <description>Demo project for Spring Boot</description>
 
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>2.0.5.RELEASE</version>
+        <version>2.1.0.RELEASE</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
 
     <properties>
-        <maven-failsafe-plugin.version>2.22.0</maven-failsafe-plugin.version>
-        <maven-surefire-plugin.version>2.22.0</maven-surefire-plugin.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <java.version>1.8</java.version>
@@ -148,6 +146,7 @@ Add the following dependencies to your new application's build file, `pom.xml`: 
     </dependencies>
 
     <build>
+        <defaultGoal>spring-boot:run</defaultGoal>
         <plugins>
             <plugin>
                 <groupId>org.springframework.boot</groupId>
@@ -186,12 +185,11 @@ This class has a test at `src/test/java/com/example/demo/DemoApplicationTests.ja
 ====
 [source,java]
 ----
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.junit.jupiter.SpringExtension;
+package com.example.demo;
 
-@ExtendWith(SpringExtension.class)
+import org.junit.jupiter.api.Test;
+import org.springframework.boot.test.context.SpringBootTest;
+
 @SpringBootTest
 public class DemoApplicationTests {
 
@@ -342,7 +340,7 @@ import java.util.UUID;
 
 @Log4j2 // <1>
 @Component
-@org.springframework.context.annotation.Profile("demo")// <2>
+@org.springframework.context.annotation.Profile("demo") // <2>
 class SampleDataInitializer
     implements ApplicationListener<ApplicationReadyEvent> {
 
@@ -470,7 +468,7 @@ public class ProfileCreatedEvent extends ApplicationEvent {
 
 That wasn't so bad, was it? Our service was pretty straightforward. The only novelty was the publishing of an event. Everything should be working just fine now. But, of course, we can't possibly know that unless we test it.
 
-=== Test our Reactive Service
+=== Test Your Reactive Service
 
 Reactive code presents some subtle issues when testing. Remember, our code is asynchronous. It's possibly concurrent. Each `Subscriber<T>` could execute on a different thread because the pipeline is managed by a `Scheduler`. You can change which scheduler is to be used by calling `(Flux,Mono).subscribeOn(Scheduler)`. There's a convenient factory, `Schedulers.\*`, that lets you build a new `Scheduler` from, for example, a `java.util.concurrent.Executor`. You don't normally need to override the `Scheduler`, though. By default there's one thread per core and the scheduler will just work. You only really need to worry about it when the thing to which you're subscribing could end up blocking. If, for example, you end up making a call to a blocking JDBC datastore in your `Publisher<T>`, then you should scale up interactions with that datastore with more threads using a `Scheduler`.
 
@@ -500,11 +498,9 @@ package com.example.demo;
 
 import lombok.extern.log4j.Log4j2;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.data.mongo.DataMongoTest;
 import org.springframework.context.annotation.Import;
-import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.util.StringUtils;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
@@ -516,19 +512,18 @@ import java.util.function.Predicate;
 @Log4j2
 @DataMongoTest // <1>
 @Import(ProfileService.class) // <2>
-@ExtendWith(SpringExtension.class)  //<3>
 public class ProfileServiceTest {
 
     private final ProfileService service;
     private final ProfileRepository repository;
 
-    public ProfileServiceTest(@Autowired ProfileService service, // <4>
+    public ProfileServiceTest(@Autowired ProfileService service, // <3>
                               @Autowired ProfileRepository repository) {
         this.service = service;
         this.repository = repository;
     }
 
-    @Test // <5>
+    @Test // <4>
     public void getAll() {
         Flux<Profile> saved = repository.saveAll(Flux.just(new Profile(null, "Josh"), new Profile(null, "Matt"), new Profile(null, "Jane")));
 
@@ -537,11 +532,11 @@ public class ProfileServiceTest {
         Predicate<Profile> match = profile -> saved.any(saveItem -> saveItem.equals(profile)).block();
 
         StepVerifier
-            .create(composite) // <6>
-            .expectNextMatches(match)  //<7>
+            .create(composite) // <5>
+            .expectNextMatches(match)  // <6>
             .expectNextMatches(match)
             .expectNextMatches(match)
-            .verifyComplete(); //<8>
+            .verifyComplete(); // <7>
     }
 
     @Test
@@ -591,12 +586,11 @@ public class ProfileServiceTest {
 ----
 <1> the Spring Boot test slice for MongoDB testing
 <2> we want to add, in addition to all the MongoDB functionality, our custom service for testing
-<3> This annotation tells JUnit 5 to involve the `SpringExtension` class when running this test. `SpringExtension` in turn manages instances of the class under test. We can easily inject dependencies from Spring into our test classes. We can even inject them into the constructor! The extension is what integrates Spring with JUnit 5.
-<4> Look ma! Constructor injection in a unit test!
-<5> Make sure you're using the new `org.junit.jupiter.api.Test` annotation from JUnit 5.
-<6> In this unit test we setup state in one publisher (`saved`).
-<7> ...and then assert things about that state in the various `expectNextMatches` calls
-<8> Make sure to call `verifyComplete`! Otherwise, nothing will happen... and that makes me sad.
+<3> Look ma! Constructor injection in a unit test!
+<4> Make sure you're using the new `org.junit.jupiter.api.Test` annotation from JUnit 5.
+<5> In this unit test we setup state in one publisher (`saved`).
+<6> ...and then assert things about that state in the various `expectNextMatches` calls
+<7> Make sure to call `verifyComplete`! Otherwise, nothing will happen... and that makes me sad.
 ====
 
 We only walked through one test because the rest are unremarkable and similar. You can run `mvn test` to confirm that the tests work as expected.
@@ -715,9 +709,9 @@ class ProfileEndpointConfiguration {
 
     @Bean
     RouterFunction<ServerResponse> routes(ProfileHandler handler) { // <1>
-        return route(i(GET("/profiles")), handler::all) //<2>
+        return route(i(GET("/profiles")), handler::all) // <2>
             .andRoute(i(GET("/profiles/{id}")), handler::getById)
-            .andRoute(i(DELETE("/profiles/{id}")), handler::deleteById) //<3>
+            .andRoute(i(DELETE("/profiles/{id}")), handler::deleteById) // <3>
             .andRoute(i(POST("/profiles")), handler::create)
             .andRoute(i(PUT("/profiles/{id}")), handler::updateById);
     }
@@ -759,7 +753,7 @@ public class CaseInsensitiveRequestPredicate implements RequestPredicate {
     }
 
     @Override
-    public boolean test(ServerRequest request) { //<1>
+    public boolean test(ServerRequest request) { // <1>
         return this.target.test(new LowerCaseUriServerRequestWrapper(request));
     }
 
@@ -903,12 +897,10 @@ package com.example.demo;
 
 import lombok.extern.log4j.Log4j2;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mockito;
 import org.springframework.boot.test.autoconfigure.web.reactive.WebFluxTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
-import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.reactive.server.WebTestClient;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
@@ -917,7 +909,6 @@ import java.util.UUID;
 
 @Log4j2
 @WebFluxTest // <1>
-@ExtendWith(SpringExtension.class)
 public abstract class AbstractBaseProfileEndpoints {
 
     private final WebTestClient client; // <2>
@@ -1272,7 +1263,7 @@ Couldn't be simpler! You can drive new results into the system using the followi
 #!/bin/bash
 port=${1:-8080}
 
-curl -H"content-type: application/json" -d'{"email":"random"}' http://localhost:${port}/profiles # <1>
+curl -H "content-type: application/json" -d '{"email":"random"}' http://localhost:${port}/profiles # <1>
 ----
 <1>  this will `POST` a new record into the API which will then trigger a websocket notification if you have the browser client open.
 ====
@@ -1292,10 +1283,8 @@ package com.example.demo;
 import lombok.extern.log4j.Log4j2;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
 import org.reactivestreams.Publisher;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.web.reactive.function.BodyInserters;
 import org.springframework.web.reactive.function.client.WebClient;
 import org.springframework.web.reactive.socket.WebSocketMessage;
@@ -1307,13 +1296,10 @@ import reactor.core.publisher.Mono;
 
 import java.net.URI;
 import java.util.UUID;
-import java.util.concurrent.Executor;
-import java.util.concurrent.Executors;
 import java.util.concurrent.atomic.AtomicLong;
 
 @Log4j2
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.DEFINED_PORT) // <1>
-@ExtendWith(SpringExtension.class)
 class WebSocketConfigurationTest {
 
     // <2>
@@ -1331,8 +1317,8 @@ class WebSocketConfigurationTest {
     public void testNotificationsOnUpdates() throws Exception {
 
         int count = 10; // <5>
-        AtomicLong counter = new AtomicLong(); //<6>
-        URI uri = URI.create("ws://localhost:8080/ws/profiles"); //<7>
+        AtomicLong counter = new AtomicLong(); // <6>
+        URI uri = URI.create("ws://localhost:8080/ws/profiles"); // <7>
 
         // <8>
         socketClient.execute(uri, (WebSocketSession session) -> {
@@ -1405,20 +1391,13 @@ But this is just the beginning. We're missing security and a slick HTML client a
 
 OIDC is an extension on top of OAuth 2.0 that allows you to have authentication as part of your flow. If you use OAuth 2.0 without OIDC, you will only know that a person is allowed to access your API. You won't know who they are. OIDC adds a ID Token in addition to an access token, and it also provides a number of other niceties that make it easier to use OAuth 2.0.
 
-Using OIDC to secure your Spring WebFlux API is as simple as adding the Spring Security starter and a few of its friends. While you're at it, upgrade to the latest Spring Boot 2.1.0 milestone release.
+Using OIDC to secure your Spring WebFlux API is as simple as adding the Spring Security starter and a couple of its friends to your `pom.xml`.
 
 [source,xml]
 ----
 <?xml version="1.0" encoding="UTF-8"?>
 <project>
     ...
-    <parent>
-        <groupId>org.springframework.boot</groupId>
-        <artifactId>spring-boot-starter-parent</artifactId>
-        <version>2.1.0.M3</version>
-        <relativePath/> <!-- lookup parent from repository -->
-    </parent>
-
     <dependencies>
         ...
         <dependency>
@@ -1427,37 +1406,17 @@ Using OIDC to secure your Spring WebFlux API is as simple as adding the Spring S
         </dependency>
         <dependency>
             <groupId>org.springframework.security</groupId>
-            <artifactId>spring-security-config</artifactId>
+            <artifactId>spring-security-oauth2-client</artifactId>
         </dependency>
         <dependency>
             <groupId>org.springframework.security</groupId>
-            <artifactId>spring-security-oauth2-client</artifactId>
+            <artifactId>spring-security-oauth2-resource-server</artifactId>
         </dependency>
         <dependency>
             <groupId>org.springframework.security</groupId>
             <artifactId>spring-security-oauth2-jose</artifactId>
         </dependency>
-    </dependencies>
-
-    <build...>
-
-    <pluginRepositories>
-        <pluginRepository>
-            <id>spring-snapshots</id>
-            <name>Spring Snapshots</name>
-            <url>https://repo.spring.io/libs-snapshot</url>
-            <snapshots>
-                <enabled>true</enabled>
-            </snapshots>
-        </pluginRepository>
-    </pluginRepositories>
-    <repositories>
-        <repository>
-            <id>spring-snapshots</id>
-            <name>Spring Snapshot</name>
-            <url>https://repo.spring.io/libs-snapshot</url>
-        </repository>
-    </repositories>
+    ...
 </project>
 ----
 
@@ -1489,11 +1448,10 @@ spring:
           okta:
             issuer-uri: https://{yourOktaDomain}/oauth2/default
         registration:
-          login:
-            okta:
-              client-id: {clientId}
-              client-secret: {clientSecret}
-              scope: openid email profile
+          okta:
+            client-id: {clientId}
+            client-secret: {clientSecret}
+            scope: openid, email, profile
 ----
 
 Restart your Spring Boot app, and try to access `http://localhost:8080/profiles`. You'll be redirected to Okta to login.
@@ -1506,7 +1464,65 @@ image::{% asset_path 'blog/spring-webflux-apis/profiles-json.png' %}[alt=the Spr
 
 === Call Your Reactive Spring WebFlux API with an Access Token
 
-If you'd like to prove that you can call your application from the command line, you can use https://oidcdebugger.com/[OpenID Connect <debugger/>] to get an access token. This website was written by Okta's own https://twitter.com/nbarbettini[Nate Barbettini]. 
+To turn your API into a resource server, that can be accessed with an access token, you'll need to add a `resourceserver` configuration to your `application.yml`. Modify your `application.yml` to look as follows:
+
+[source,yaml]
+----
+oidc:
+  issuer-uri: https://{yourOktaDomain}/oauth2/default
+  client-id: {clientId}
+  client-secret: {clientSecret}
+
+spring:
+  security:
+    oauth2:
+      client:
+        provider:
+          okta:
+            issuer-uri: ${oidc.issuer-uri}
+        registration:
+          login:
+            okta:
+              client-id: ${oidc.client-id}
+              client-secret: ${oidc.client-secret}
+              scope: openid email profile
+      resourceserver:
+        jwt:
+          issuer-uri: ${oidc.issuer-uri}
+----
+
+Then create a `SecurityConfiguration.java` class to configure the resource server.
+
+.`src/main/java/com/example/demo/SecurityConfiguration.java`
+====
+[source,java]
+----
+package com.example.demo;
+
+import org.springframework.context.annotation.Bean;
+import org.springframework.security.config.annotation.web.reactive.EnableWebFluxSecurity;
+import org.springframework.security.config.web.server.ServerHttpSecurity;
+import org.springframework.security.web.server.SecurityWebFilterChain;
+
+@EnableWebFluxSecurity
+public class SecurityConfiguration {
+
+    @Bean
+    public SecurityWebFilterChain securityWebFilterChain(ServerHttpSecurity http) {
+        return http
+            .authorizeExchange()
+                .anyExchange().authenticated()
+                .and()
+            .oauth2Login()
+                .and()
+            .oauth2ResourceServer()
+                .jwt().and().and().build();
+        }
+}
+----
+====
+
+Now you should be able to call your application from the command line. You can use https://oidcdebugger.com/[OpenID Connect <debugger/>] to get an access token. This website was written by Okta's own https://twitter.com/nbarbettini[Nate Barbettini].
 
 To use it, I had to tweak my application to allow Implicit flow with an access token, add `https://oidcdebugger.com/debug` as a login redirect URI, and manually enter a state variable, but otherwise, it was pretty easy! The screenshot below shows my success. Your authorization URI should look as follows:
 
@@ -1532,13 +1548,13 @@ Once you have an access token, you can modify `create.sh` to use it.
 port=${1:-8080}
 accessToken=<your access token>
 
-curl -H"content-type: application/json" -H"authorization: Bearer ${accessToken}" -d'{"email":"random"}' http://localhost:${port}/profiles
+curl -H "content-type: application/json" -H "authorization: Bearer ${accessToken}" -d '{"email":"random"}' http://localhost:${port}/profiles
 ----
 ====
 
 == Learn More About Reactive Programming, Spring WebFlux, and OIDC
 
-This article showed you how to develop a reactive API with Spring WebFlux and secure it using Spring Security's excellent OIDC support. In a future post, we'll show you link:/blog/2018/09/24/reactive-apis-with-spring-webflux[how to create a React UI for this API] and provide you with techniques for handling streaming data in your browser.
+This article showed you how to develop a reactive API with Spring WebFlux and secure it using Spring Security's excellent OIDC support. In a future post, we'll show you link:/blog/2018/09/25/spring-webflux-websockets-react[how to create a React UI for this API] and provide you with techniques for handling streaming data in your browser.
 
 In the meantime, here's some good articles you can read on reactive programming, Spring WebFlux, and OIDC.
 
@@ -1553,3 +1569,8 @@ The source code contained in this post is available in the https://github.com/ok
 Have questions? Please leave a comment below, hit up https://twitter.com/starbuxman[@starbuxman] or https://twitter.com/mraible[@mraible] on Twitter, or post a question on our https://devforum.okta.com/[Developer Forums].
 
 Like what you learned today? Follow https://twitter.com/oktadev[@oktadev], like us https://www.facebook.com/oktadevelopers/[on Facebook], follow us https://www.linkedin.com/company/oktadev/[on LinkedIn], and https://www.youtube.com/channel/UC5AMiWqFVFxF1q9Ya1FuZ_Q[subscribe to our YouTube channel]. We publish lots of interesting information for developers!
+
+**Changelog:**
+
+* Nov 6, 2018: Updated to remove the `@ExtendWith(SpringExtension.class)` annotation. It's no longer necessary if you're a Spring Boot testing annotation. You can see the example app changes in https://github.com/oktadeveloper/okta-spring-webflux-react-example/pull/7[okta-spring-webflux-react-example#7]; changes to this post can be viewed in https://github.com/okta/okta.github.io/pull/2463[okta.github.io#2463].
+* Nov 5, 2018: Updated to use Spring Boot 2.1 GA release. You can see the example app changes in https://github.com/oktadeveloper/okta-spring-webflux-react-example/pull/5[okta-spring-webflux-react-example#5]; changes to this post can be viewed in https://github.com/okta/okta.github.io/pull/2458[okta.github.io#2458].

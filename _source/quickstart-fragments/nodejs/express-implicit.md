@@ -20,6 +20,7 @@ var cors = require('cors');
 
 const oktaJwtVerifier = new OktaJwtVerifier({
   issuer: 'https://{yourOktaDomain}/oauth2/default',
+  clientId: '{clientId}',
   assertClaims: {
     aud: 'api://default',
   },

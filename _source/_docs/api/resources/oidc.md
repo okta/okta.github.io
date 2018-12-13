@@ -72,7 +72,7 @@ of the callback response.
 | client_id             | Obtained during either manual client registration or via the [Dynamic Client Registration API](oauth-clients.html). It identifies the client and must match the value preregistered in Okta.                                                                                                                                                                                                                        | Query      | String   | TRUE     |
 | code_challenge        | A challenge for [PKCE](/authentication-guide/implementing-authentication/auth-code-pkce). The challenge is verified in the access token request.                                                                                                                                                                                                                                                                                                       | Query      | String   | FALSE    |
 | code_challenge_method | Method used to derive the code challenge for [PKCE](/authentication-guide/implementing-authentication/auth-code-pkce). Valid value: `S256`                                                                                                                                                                                                                                                                                                                                               | Query      | String   | FALSE    |
-| display               | How to display the authentication and [consent](/docs/api/resources/apps#add-oauth-20-client-application) UI. Valid value: `page`                                                                                                                                                                                                                                                                                                                      | Query      | String   | FALSE    |
+| display               | The `display` parameter to be passed to the Social Identity Provider when performing Social Login.                                                                                                                                                                                                                                                                                                                      | Query      | String   | FALSE    |
 | idp_scope             | A space delimited list of scopes to be provided to the Social Identity Provider when performing [Social Login](social_authentication.html). These scopes are used in addition to the scopes already configured on the Identity Provider.                                                                                                                                                                 | Query      | String   | FALSE    |
 | [idp](idps.html)       | Identity provider (default is Okta, unless you are using [Social Login](/authentication-guide/social-login/) or enterprise SAML)                                                                                                                                                                                                                                                                                                                                                                      | Query      | String   | FALSE    |
 | login_hint            | A username to prepopulate if prompting for authentication.                                                                                                                                                                                                                                                                                                                                              | Query      | String   | FALSE    |
@@ -143,13 +143,13 @@ Use the postMessage() data model to help you when working with the `okta_post_me
 
 `message`:
 
-| Parameter         | Description                                                                                                       | DataType |
-|:------------------|:------------------------------------------------------------------------------------------------------------------|:---------|
-| access_token      | An [access token](#access-token). This is returned if the `response_type` included a token.                       | String   |
-| error             | The error-code string providing information if anything goes wrong.                                               | String   |
-| error_description | Additional description of the error (if relevant).                                                                | String   |
-| id_token          | An [ID token](#id-token). This is returned if the `response_type` includes `id_token`.                            | String   |
-| state             | If the request contained a `state` parameter, then the same unmodified value is returned back in the response.    | String   |
+| Parameter         | Description                                                                                 | DataType |
+|:------------------|:--------------------------------------------------------------------------------------------|:---------|
+| access_token      | An [access token](#access-token). This is returned if the `response_type` included `token`. | String   |
+| error             | The error code, if something went wrong.                                                    | String   |
+| error_description | Additional error information (if any).                                                      | String   |
+| id_token          | An [ID token](#id-token). This is returned if the `response_type` included `id_token`.      | String   |
+| state             | The unmodified `state` value from the request.                                              | String   |
 
 `targetOrigin`:
 
@@ -163,12 +163,12 @@ Irrespective of the response type, the contents of the response are as described
 
 | Property         | Description                                                                                                                                                                             | DataType |
 |:------------------|:---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|:---------|
-| access_token      | An [access token](#access-token). This is returned if `response_type` includes `token`.                                                                                                | String   |
+| access_token      | An [access token](#access-token). This is returned if `response_type` included `token`.                                                                                                | String   |
 | code              | An opaque value that can be used to redeem tokens from the [token endpoint](#token). `code` is returned if the `response_type` includes `code`. The code has a lifetime of 60 seconds. | String   |
-| error             | Error-code (if something went wrong).                                                                                                                                                  | String   |
-| error_description | Description of the error.                                                                                                                                                              | String   |
+| error             | The error code, if something went wrong.                                                                                                                                                  | String   |
+| error_description | Additional error information (if any).                                                                                                                                                              | String   |
 | expires_in        | Number of seconds until the `access_token` expires. This is only returned if the response included an `access_token`.                                                                  | String   |
-| id_token          | An [ID token](#id-token).  This is returned if the `response_type` includes `id_token`.                                                                                                | String   |
+| id_token          | An [ID token](#id-token).  This is returned if the `response_type` included `id_token`.                                                                                                | String   |
 | scope             | Scopes specified in the `access_token`. Returned only if the response includes an `access_token`.                                                                                      | String   |
 | state             | The unmodified `state` value from the request.                                                                                                                                         | String   |
 | token_type        | The token type is always `Bearer` and is returned only when `token` is specified as a `response_type`.                                                                                 | String   |
@@ -297,6 +297,16 @@ Based on the scopes requested. Generally speaking, the scopes specified in a req
 | invalid_request        | The request structure was invalid. For example: the basic authentication header is malformed; both header and form parameters were used for authentication; or no authentication information was provided. |
 | invalid_scope          | The scopes list contains an invalid or unsupported value.                                                                                                                                                  |
 | unsupported_grant_type | The `grant_type` isn't `authorization_code`, `refresh_token`, or `password`.                                                                                                                         |
+
+#### Request Example
+{:.api .api-request .api-request-example}
+
+~~~sh
+curl -v -X POST \
+-H "Content-type:application/x-www-form-urlencoded" \
+"https://{yourOktaDomain}/oauth2/default/v1/token" \
+-d "client_id={client_id}&client_secret={client_secret}&grant_type=authorization_code&redirect_uri={redirect_uri}&code={code}"
+~~~
 
 #### Response Example (Success)
 
@@ -738,7 +748,7 @@ curl -X GET \
 | token_endpoint                                | URL of the authorization server's [token endpoint](#token).                                                                                                                                                                      | String  |
 | registration_endpoint                         | URL of the authorization server's [Dynamic Client Registration endpoint](/docs/api/resources/oauth-clients.html#register-new-client).                                                                                            | String  |
 | jwks_uri                                      | URL of the authorization server's [JSON Web Key Set](/docs/api/resources/authorization-servers#certificate-json-web-key-object) document.                                                                                        | String  |
-| response_types_supported                      | JSON array containing a list of the `response_type` values that this authorization server supports.                                                                                                                              | Array   |
+| response_types_supported                      | JSON array containing a list of the `response_type` values that this authorization server supports. Can be a combination of `code`, `token`, and `id_token`.                                                                                                                              | Array   |
 | response_modes_supported                      | JSON array containing a list of the `response_mode` values that this authorization server supports. More information [here](#parameter-details).                                                                                 | Array   |
 | grant_types_supported                         | JSON array containing a list of the `grant_type` values that this authorization server supports.                                                                                                                                 | Array   |
 | subject_types_supported                       | JSON array containing a list of the Subject Identifier types that this OP supports. Valid values are `pairwise` and `public`. More info [here](https://openid.net/specs/openid-connect-core-1_0.html#SubjectIDTypes).            | Array   |
@@ -768,7 +778,11 @@ curl -X GET \
     "response_types_supported": [
         "code",
         "token",
-        "code token"
+        "id_token",
+        "code id_token",
+        "code token",
+        "id_token token",
+        "code id_token token"
     ],
     "response_modes_supported": [
         "query",
@@ -1212,7 +1226,7 @@ The ID Token consists of three period-separated, Base64 URL-encoded JSON segment
 {
   "ver": 1,
   "sub": "00uid4BxXw6I6TV4m0g3",
-  "iss": "https:{yourOktaDomain.com}",
+  "iss": "https://{yourOktaDomain.com}",
   "aud": "uAaunofWkaDJxukCFeBx",
   "iat": 1449624026,
   "exp": 1449627626,

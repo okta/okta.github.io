@@ -33,6 +33,9 @@
     "id" : "directories",
     "name" : "Directories"
   }, {
+    "id" : "end-user-security",
+    "name" : "End User Security"
+  }, {
     "id" : "enterprise-auth",
     "name" : "Enterprise Auth"
   }, {
@@ -41,6 +44,9 @@
   }, {
     "id" : "federation",
     "name" : "Federation"
+  }, {
+    "id" : "hybrid-access",
+    "name" : "Hybrid Access"
   }, {
     "id" : "idx",
     "name" : "Identity Experience"
@@ -59,9 +65,6 @@
   }, {
     "id" : "mfa-platform",
     "name" : "MFA Platform"
-  }, {
-    "id" : "mfa-service",
-    "name" : "MFA Service"
   }, {
     "id" : "mobile-device-trust",
     "name" : "Mobile DeviceTrust"
@@ -643,6 +646,10 @@
     "tags" : [ ]
   }, {
     "id" : "user-config",
+    "description" : "",
+    "tags" : [ ]
+  }, {
+    "id" : "ldapi",
     "description" : "",
     "tags" : [ ]
   }, {
@@ -2492,6 +2499,12 @@
       "description" : "Import removed existing User.",
       "tags" : [ "app" ],
       "mappings" : [ "system.import.user.delete" ]
+    }, {
+      "id" : "app.generic.import.details.match_user",
+      "category" : "sync",
+      "description" : "Import link new User using callback.",
+      "tags" : [ "app" ],
+      "mappings" : [ "system.import.user.match" ]
     }, {
       "id" : "app.generic.import.details.suspend_user",
       "category" : "sync",
@@ -4462,13 +4475,13 @@
       "mappings" : [ "application.provision.user.import" ]
     }, {
       "id" : "app.radius.agent.port_inaccessible",
-      "category" : "mfa-service",
+      "category" : "hybrid-access",
       "description" : "Radius agent failed to listen on port.",
       "tags" : [ "agent" ],
       "mappings" : [ "app.radius.agent.port_inaccessible" ]
     }, {
       "id" : "app.radius.agent.port_reaccessible",
-      "category" : "mfa-service",
+      "category" : "hybrid-access",
       "description" : "Radius agent was able to listen on port again.",
       "tags" : [ "agent" ],
       "mappings" : [ "app.radius.agent.port_reaccessible" ]
@@ -4609,7 +4622,7 @@
       "category" : "app-platform",
       "description" : "Error validating instance configuration.",
       "tags" : [ "rum" ],
-      "mappings" : [ ]
+      "mappings" : [ "app.rum.config.validation.error" ]
     }, {
       "id" : "app.rum.execution.security.exception",
       "category" : "app-platform",
@@ -4633,19 +4646,19 @@
       "category" : "app-platform",
       "description" : "",
       "tags" : [ "rum" ],
-      "mappings" : [ ]
+      "mappings" : [ "app.rum.is.api.account.error" ]
     }, {
       "id" : "app.rum.package.thrown.error",
       "category" : "app-platform",
       "description" : "Errors during execution.",
       "tags" : [ "rum" ],
-      "mappings" : [ ]
+      "mappings" : [ "app.rum.package.thrown.error" ]
     }, {
       "id" : "app.rum.validation.error",
       "category" : "app-platform",
       "description" : "Error during package validation.",
       "tags" : [ "rum" ],
-      "mappings" : [ ]
+      "mappings" : [ "app.rum.validation.error" ]
     }, {
       "id" : "app.salesforce.user_management.failure.add_user_to_public_group",
       "category" : "oin-advanced-apps",
@@ -5613,6 +5626,12 @@
       "tags" : [ "zendesk-app" ],
       "mappings" : [ "application.integration.authentication_failure" ]
     }, {
+      "id" : "application.appuser.mapping.invalid.expression",
+      "category" : "ud-core",
+      "description" : "App user property mapping has invalid expression.",
+      "tags" : [ "app-user-management" ],
+      "mappings" : [ "application.appuser.mapping.invalid.expression" ]
+    }, {
       "id" : "core.billing.sms_usage_sent",
       "category" : "aelm",
       "description" : "Indicates that a report for SMS usage was sent to the billing system.",
@@ -5648,12 +5667,6 @@
       "description" : "",
       "tags" : [ "rate-limit" ],
       "mappings" : [ "system.org.suspicious.ip.rate_time.violation" ]
-    }, {
-      "id" : "core.framework.ratelimit.upcoming_warning",
-      "category" : "performance",
-      "description" : "Upcoming rate limit warning.",
-      "tags" : [ "rate-limit" ],
-      "mappings" : [ "system.org.rate_limit.upcoming_warning" ]
     }, {
       "id" : "core.framework.ratelimit.warning",
       "category" : "performance",
@@ -6292,13 +6305,13 @@
       "mappings" : [ "pki.cert.revoke" ]
     }, {
       "id" : "core.user_auth.radius.login.failed",
-      "category" : "mfa-service",
+      "category" : "hybrid-access",
       "description" : "Login from Radius Agent failed.",
       "tags" : [ "user" ],
       "mappings" : [ "user.authentication.auth_via_radius" ]
     }, {
       "id" : "core.user_auth.radius.login.succeeded",
-      "category" : "mfa-service",
+      "category" : "hybrid-access",
       "description" : "Login from Radius Agent succeeded.",
       "tags" : [ "user" ],
       "mappings" : [ "user.authentication.auth_via_radius" ]
@@ -6477,6 +6490,18 @@
       "tags" : [ "cvd" ],
       "mappings" : [ "directory.app_user_profile.update" ]
     }, {
+      "id" : "cvd.group.user_membership.rule.error",
+      "category" : "lca",
+      "description" : "Group membership rule is in error state.",
+      "tags" : [ "cvd" ],
+      "mappings" : [ "group.user_membership.rule.error" ]
+    }, {
+      "id" : "cvd.group.user_membership.rule.evaluation",
+      "category" : "lca",
+      "description" : "Group membership rule is evaluated.",
+      "tags" : [ "cvd" ],
+      "mappings" : [ "group.user_membership.rule.evaluation" ]
+    }, {
       "id" : "cvd.group_rule_deactivated",
       "category" : "lca",
       "description" : "Group membership rule is deactivated since resource referenced in rule has been deleted.",
@@ -6637,25 +6662,25 @@
       "category" : "app-platform",
       "description" : "",
       "tags" : [ "invalidate-app-list-cache" ],
-      "mappings" : [ ]
+      "mappings" : [ "application.cache.invalidate" ]
     }, {
       "id" : "invalidate_app_list.app.updated",
       "category" : "app-platform",
       "description" : "",
       "tags" : [ "invalidate-app-list-cache" ],
-      "mappings" : [ ]
+      "mappings" : [ "application.cache.invalidate" ]
     }, {
       "id" : "invalidate_app_list.app_details.updated",
       "category" : "app-platform",
       "description" : "",
       "tags" : [ "invalidate-app-list-cache" ],
-      "mappings" : [ ]
+      "mappings" : [ "application.cache.invalidate" ]
     }, {
       "id" : "invalidate_app_list.metadata.changed",
       "category" : "app-platform",
       "description" : "",
       "tags" : [ "invalidate-app-list-cache" ],
-      "mappings" : [ ]
+      "mappings" : [ "application.cache.invalidate" ]
     }, {
       "id" : "iwa.ad_agents_went_offline",
       "category" : "directories",
@@ -6849,6 +6874,36 @@
       "tags" : [ "ios-command" ],
       "mappings" : [ "mim.command.ios.new" ]
     }, {
+      "id" : "mim.createEnrollment.ANDROID",
+      "category" : "mobile-omm",
+      "description" : "",
+      "tags" : [ "mim" ],
+      "mappings" : [ "mim.createEnrollment.ANDROID" ]
+    }, {
+      "id" : "mim.createEnrollment.IOS",
+      "category" : "mobile-omm",
+      "description" : "",
+      "tags" : [ "mim" ],
+      "mappings" : [ "mim.createEnrollment.IOS" ]
+    }, {
+      "id" : "mim.createEnrollment.OSX",
+      "category" : "mobile-omm",
+      "description" : "",
+      "tags" : [ "mim" ],
+      "mappings" : [ "mim.createEnrollment.OSX" ]
+    }, {
+      "id" : "mim.createEnrollment.UNKNOWN",
+      "category" : "mobile-omm",
+      "description" : "",
+      "tags" : [ "mim" ],
+      "mappings" : [ "mim.createEnrollment.UNKNOWN" ]
+    }, {
+      "id" : "mim.createEnrollment.WINDOWS",
+      "category" : "mobile-omm",
+      "description" : "",
+      "tags" : [ "mim" ],
+      "mappings" : [ "mim.createEnrollment.WINDOWS" ]
+    }, {
       "id" : "mim.streamDevicesAppListCSVDownload",
       "category" : "mobile-omm",
       "description" : "",
@@ -6858,7 +6913,7 @@
       "id" : "mim.streamDevicesCSVDownload",
       "category" : "mobile-omm",
       "description" : "",
-      "tags" : [ "omm" ],
+      "tags" : [ "mim" ],
       "mappings" : [ "mim.streamDevicesCSVDownload" ]
     }, {
       "id" : "moveit_dmz.error.too.long.username.or.email",
@@ -6975,7 +7030,13 @@
       "tags" : [ "callback" ],
       "mappings" : [ "callback.response.processed" ]
     }, {
-      "id" : "platform.callback.verify",
+      "id" : "platform.callback.verify.failure",
+      "category" : "extensibility",
+      "description" : "Callback verification failed.",
+      "tags" : [ "callback" ],
+      "mappings" : [ "callback.verify" ]
+    }, {
+      "id" : "platform.callback.verify.success",
       "category" : "extensibility",
       "description" : "Callback has been verified.",
       "tags" : [ "callback" ],
@@ -6985,13 +7046,13 @@
       "category" : "app-platform",
       "description" : "",
       "tags" : [ "field-mapping-rule-modification" ],
-      "mappings" : [ ]
+      "mappings" : [ "application.provision.field_mapping_rule.change" ]
     }, {
       "id" : "platform.field_mapping_rule.import.change",
       "category" : "app-platform",
       "description" : "",
       "tags" : [ "field-mapping-rule-modification" ],
-      "mappings" : [ ]
+      "mappings" : [ "application.provision.field_mapping_rule.change" ]
     }, {
       "id" : "platform.group_push.activate_mapping",
       "category" : "sync",
@@ -7083,7 +7144,13 @@
       "tags" : [ "webhook" ],
       "mappings" : [ "webhook.modify" ]
     }, {
-      "id" : "platform.webhook.verify",
+      "id" : "platform.webhook.verify.failure",
+      "category" : "extensibility",
+      "description" : "Webhook verification failed.",
+      "tags" : [ "webhook" ],
+      "mappings" : [ "webhook.verify" ]
+    }, {
+      "id" : "platform.webhook.verify.success",
       "category" : "extensibility",
       "description" : "Webhook was verified.",
       "tags" : [ "webhook" ],
@@ -7268,6 +7335,36 @@
       "description" : "Event type for requests blacklisted against a blacklisted network zone type, and the value it was blacklisted against.",
       "tags" : [ "network-zone", "security" ],
       "mappings" : [ "security.request.blocked" ]
+    }, {
+      "id" : "system.idp.select",
+      "category" : "idx",
+      "description" : "Event fired when a user has been routed to an IdP.",
+      "tags" : [ "idp" ],
+      "mappings" : [ "system.idp.select" ]
+    }, {
+      "id" : "system.ldapi.bind",
+      "category" : "ud-core",
+      "description" : "LDAP Interface Bind event.",
+      "tags" : [ "ldapi" ],
+      "mappings" : [ "system.ldapi.bind" ]
+    }, {
+      "id" : "system.ldapi.search",
+      "category" : "ud-core",
+      "description" : "LDAP Interface Search events.",
+      "tags" : [ "ldapi" ],
+      "mappings" : [ "system.ldapi.search" ]
+    }, {
+      "id" : "system.ldapi.unbind",
+      "category" : "ud-core",
+      "description" : "LDAP Interface Unbind event.",
+      "tags" : [ "ldapi" ],
+      "mappings" : [ "system.ldapi.unbind" ]
+    }, {
+      "id" : "user.authentication.verify",
+      "category" : "authn",
+      "description" : "Verify user identity.",
+      "tags" : [ "user" ],
+      "mappings" : [ "user.authentication.verify" ]
     }, {
       "id" : "verificationFailed",
       "category" : "oin-advanced-apps",
@@ -9111,7 +9208,7 @@
       "mappings" : [ "app.office365.user.remove.licenses.success" ]
     }, {
       "id" : "app.radius.agent.listener.failed",
-      "category" : "mfa-service",
+      "category" : "hybrid-access",
       "description" : "Radius agent listener failed.",
       "info" : {
         "created" : "2018-02-05",
@@ -9121,7 +9218,7 @@
       "mappings" : [ ]
     }, {
       "id" : "app.radius.agent.listener.succeeded",
-      "category" : "mfa-service",
+      "category" : "hybrid-access",
       "description" : "Radius agent listener succeeded.",
       "info" : {
         "created" : "2018-02-05",
@@ -9131,7 +9228,7 @@
       "mappings" : [ ]
     }, {
       "id" : "app.radius.agent.port_inaccessible",
-      "category" : "mfa-service",
+      "category" : "hybrid-access",
       "description" : "Radius agent failed to listen on port.",
       "info" : {
         "created" : "2018-02-05",
@@ -9141,7 +9238,7 @@
       "mappings" : [ "app.radius.agent.port_inaccessible" ]
     }, {
       "id" : "app.radius.agent.port_reaccessible",
-      "category" : "mfa-service",
+      "category" : "hybrid-access",
       "description" : "Radius agent was able to listen on port again.",
       "info" : {
         "created" : "2018-02-05",
@@ -9179,6 +9276,46 @@
       },
       "tags" : [ "app" ],
       "mappings" : [ "app.realtimesync.import.details.update_user" ]
+    }, {
+      "id" : "app.rum.config.validation.error",
+      "category" : "app-platform",
+      "description" : "Error validating instance configuration. Can be used to identify configuration issues with remote user management.",
+      "info" : {
+        "created" : "2018-10-03",
+        "release" : "2018.42"
+      },
+      "tags" : [ "rum" ],
+      "mappings" : [ "app.rum.config.validation.error" ]
+    }, {
+      "id" : "app.rum.is.api.account.error",
+      "category" : "app-platform",
+      "description" : "RUM API account is not configured or empty. Can be used to identify RUM API account configuration issues.",
+      "info" : {
+        "created" : "2018-10-03",
+        "release" : "2018.42"
+      },
+      "tags" : [ "rum" ],
+      "mappings" : [ "app.rum.is.api.account.error" ]
+    }, {
+      "id" : "app.rum.package.thrown.error",
+      "category" : "app-platform",
+      "description" : "Errors during execution. Can be used to identify any errors during execution of remote user management.",
+      "info" : {
+        "created" : "2018-10-03",
+        "release" : "2018.42"
+      },
+      "tags" : [ "rum" ],
+      "mappings" : [ "app.rum.package.thrown.error" ]
+    }, {
+      "id" : "app.rum.validation.error",
+      "category" : "app-platform",
+      "description" : "Error during package validation. Can be used to identify validation issues with remote user management packages.",
+      "info" : {
+        "created" : "2018-10-03",
+        "release" : "2018.42"
+      },
+      "tags" : [ "rum" ],
+      "mappings" : [ "app.rum.validation.error" ]
     }, {
       "id" : "app.user_management",
       "category" : "sync",
@@ -9310,6 +9447,26 @@
       "tags" : [ "app", "app-user-management" ],
       "mappings" : [ "app.user_management.user_group_import.upsert_success" ]
     }, {
+      "id" : "application.appuser.mapping.invalid.expression",
+      "category" : "ud-core",
+      "description" : "App user property mapping has invalid expressions. Can be used to identify invalid expressions. Note that a single event is fired for all invalid expressions.",
+      "info" : {
+        "created" : "2018-11-11",
+        "release" : "2018.47"
+      },
+      "tags" : [ "app" ],
+      "mappings" : [ "application.appuser.mapping.invalid.expression" ]
+    }, {
+      "id" : "application.cache.invalidate",
+      "category" : "app-platform",
+      "description" : "Event fired when a app list cache is invalidated because a new app is created. Can be used to make sure App List cache is invalidated after a new app is created.",
+      "info" : {
+        "created" : "2018-10-03",
+        "release" : "2018.42"
+      },
+      "tags" : [ "invalidate-app-list-cache" ],
+      "mappings" : [ "invalidate_app_list.app.created", "invalidate_app_list.app.updated", "invalidate_app_list.app_details.updated", "invalidate_app_list.metadata.changed" ]
+    }, {
       "id" : "application.configuration.detect_error",
       "category" : "oin-advanced-apps",
       "description" : "Application configuration error detected.",
@@ -9362,7 +9519,7 @@
     }, {
       "id" : "application.configuration.import_schema",
       "category" : "oin-advanced-apps",
-      "description" : "",
+      "description" : "Okta couldn't download application configuration. Can be used to identify when an app schema couldn't be downloaded from a remote application. Event fired when Okta couldn't download application-specific data from a remote app. This may happen when admin updates provisioning details.",
       "info" : {
         "created" : "2017-09-14",
         "release" : "2017.33"
@@ -9382,7 +9539,7 @@
     }, {
       "id" : "application.configuration.update",
       "category" : "oin-advanced-apps",
-      "description" : "",
+      "description" : "Okta couldn't verify api credentials. Can be used when Okta couldn't check the credentials by execution some custom, application dependent, set of requests. Okta fires this event to notify issues with credentials validation. Could be issues with proper permissions as well.",
       "info" : {
         "created" : "2017-09-14",
         "release" : "2017.33"
@@ -9412,7 +9569,7 @@
     }, {
       "id" : "application.integration.api_query",
       "category" : "oin-advanced-apps",
-      "description" : "",
+      "description" : "Unable to query remote API. Can be used to determine when okta fails to query remote application. Okta fires this event for unspecified events which include remote api response processing.",
       "info" : {
         "created" : "2017-09-14",
         "release" : "2017.33"
@@ -9422,7 +9579,7 @@
     }, {
       "id" : "application.integration.authentication_failure",
       "category" : "oin-advanced-apps",
-      "description" : "",
+      "description" : "Error authenticating. Can be used when Okta couldn't authenticate with the provided credentials to a remote api. Okta fires this event when it couldn't access a remote api with provided credentials.",
       "info" : {
         "created" : "2017-09-14",
         "release" : "2017.33"
@@ -9432,7 +9589,7 @@
     }, {
       "id" : "application.integration.general_failure",
       "category" : "oin-advanced-apps",
-      "description" : "General error encountered for application integration.",
+      "description" : "Generic error occured. Can be used when there is some uncategorized error occurs. Okta fires this event for different unhandled exceptions.",
       "info" : {
         "created" : "2017-09-14",
         "release" : "2017.33"
@@ -9442,7 +9599,7 @@
     }, {
       "id" : "application.integration.rate_limit_exceeded",
       "category" : "oin-advanced-apps",
-      "description" : "",
+      "description" : "API rate limit exceeded. Can be used when Okta reaches api calls/minute rate limit. Okta fires this event when there are too many requests for a specific customer.",
       "info" : {
         "created" : "2017-09-14",
         "release" : "2017.33"
@@ -9452,7 +9609,7 @@
     }, {
       "id" : "application.integration.transfer_files",
       "category" : "oin-advanced-apps",
-      "description" : "",
+      "description" : "Unable to transfer files. Can be used when Okta fails to transfer files from one user to another. Okta fires this event when it fails to process user-to-user file transfers.",
       "info" : {
         "created" : "2017-09-14",
         "release" : "2017.33"
@@ -9550,9 +9707,19 @@
       "tags" : [ "app" ],
       "mappings" : [ "app.app_instance.sign_on_policy.change" ]
     }, {
+      "id" : "application.provision.field_mapping_rule.change",
+      "category" : "app-platform",
+      "description" : "Event fired when field mapping rules modified. Can be used to make sure when custom mapping rules are modified.",
+      "info" : {
+        "created" : "2018-10-03",
+        "release" : "2018.42"
+      },
+      "tags" : [ "field-mapping-rule-modification" ],
+      "mappings" : [ "platform.field_mapping_rule.assign.change", "platform.field_mapping_rule.import.change" ]
+    }, {
       "id" : "application.provision.group.add",
       "category" : "oin-advanced-apps",
-      "description" : "",
+      "description" : "Fired when Okta provisions a new group on a remote application. Can be used to identify when Okta provisions a group on a remote application. Event fired when the group provisioning failed for any reason.",
       "info" : {
         "created" : "2017-09-14",
         "release" : "2017.33"
@@ -9562,7 +9729,7 @@
     }, {
       "id" : "application.provision.group.import",
       "category" : "oin-advanced-apps",
-      "description" : "",
+      "description" : "Fired when Okta downloads a remote group. Can be used to identify when Okta tries to download remote group details. Event fired when Okta fails to reach the group detail from a remote application.",
       "info" : {
         "created" : "2017-09-14",
         "release" : "2017.33"
@@ -9572,7 +9739,7 @@
     }, {
       "id" : "application.provision.group.remove",
       "category" : "oin-advanced-apps",
-      "description" : "",
+      "description" : "Fired when Okta removes a remote group. Can be used to identify when a group has been unassigned. Event fired when Okta failed to delete group from remote application.",
       "info" : {
         "created" : "2017-09-14",
         "release" : "2017.33"
@@ -9582,7 +9749,7 @@
     }, {
       "id" : "application.provision.group.update",
       "category" : "oin-advanced-apps",
-      "description" : "",
+      "description" : "Fired when Okta updates the user group. Can be used to identify when a group has been updated. Event fired when Okta fails to update a remote group for any reason.",
       "info" : {
         "created" : "2017-09-14",
         "release" : "2017.33"
@@ -9592,7 +9759,7 @@
     }, {
       "id" : "application.provision.group.verify_exists",
       "category" : "oin-advanced-apps",
-      "description" : "",
+      "description" : "Fired when group no longer exists on a remote application. Can be used to identify when a group no longer exists on a remote application. Event fired when group push enhancement enabled and there is no group found on update or delete.",
       "info" : {
         "created" : "2017-09-14",
         "release" : "2017.33"
@@ -9602,7 +9769,7 @@
     }, {
       "id" : "application.provision.group_membership.add",
       "category" : "oin-advanced-apps",
-      "description" : "",
+      "description" : "Failed to assign a user to a group. Can be used when Okta failed to assign user to a group on remote application. Okta fires this event if there are any issues while provision a membership to a remote application.",
       "info" : {
         "created" : "2017-09-14",
         "release" : "2017.33"
@@ -9612,7 +9779,7 @@
     }, {
       "id" : "application.provision.group_membership.import",
       "category" : "oin-advanced-apps",
-      "description" : "",
+      "description" : "Error while downloading memberships. Can be used when Okta failed to download users and groups relationships. Okta fires this event if there are any issues while importing a membership from a remote application.",
       "info" : {
         "created" : "2017-09-14",
         "release" : "2017.33"
@@ -9622,7 +9789,7 @@
     }, {
       "id" : "application.provision.group_membership.remove",
       "category" : "oin-advanced-apps",
-      "description" : "",
+      "description" : "Fired when there is an error while removing user(s) from group. Can be used when Okta failed to unassign user from a group on remote application. Okta fires this event when there are any issues while provision a membership to a remote application.",
       "info" : {
         "created" : "2017-09-14",
         "release" : "2017.33"
@@ -9632,7 +9799,7 @@
     }, {
       "id" : "application.provision.group_membership.update",
       "category" : "oin-advanced-apps",
-      "description" : "",
+      "description" : "Fired when there is an error while updating user group membership for group. Can be used when Okta failed to push updated memberships to a remote application. Okta fires this event when couldn't update memberships on a remote application. Could be user removal/addition.",
       "info" : {
         "created" : "2017-09-14",
         "release" : "2017.33"
@@ -9642,7 +9809,7 @@
     }, {
       "id" : "application.provision.group_membership.verify_exists",
       "category" : "oin-advanced-apps",
-      "description" : "",
+      "description" : "Verify group membership exists in a external application. Can be used when Okta failed to verify membership exists on a remote application. There is no actual implementations yet.",
       "info" : {
         "created" : "2017-09-14",
         "release" : "2017.33"
@@ -9987,7 +10154,7 @@
         "created" : "2016-01-08",
         "release" : "2016.02"
       },
-      "tags" : [ "user-provision" ],
+      "tags" : [ "user-provision", "webhook-eligible" ],
       "mappings" : [ "app.generic.provision.assign_user_to_app" ]
     }, {
       "id" : "application.user_membership.approve",
@@ -10007,7 +10174,7 @@
         "created" : "2016-03-08",
         "release" : "2016.11"
       },
-      "tags" : [ "app" ],
+      "tags" : [ "app", "webhook-eligible" ],
       "mappings" : [ "app.generic.config.app_password_update" ]
     }, {
       "id" : "application.user_membership.change_username",
@@ -10047,7 +10214,7 @@
         "created" : "2016-01-08",
         "release" : "2016.02"
       },
-      "tags" : [ "user-provision" ],
+      "tags" : [ "user-provision", "webhook-eligible" ],
       "mappings" : [ "app.generic.provision.deactivate_user_from_app" ]
     }, {
       "id" : "application.user_membership.restore",
@@ -10158,7 +10325,7 @@
         "release" : "2018.14"
       },
       "tags" : [ "callback" ],
-      "mappings" : [ "platform.callback.verify" ]
+      "mappings" : [ "platform.callback.verify.failure", "platform.callback.verify.success" ]
     }, {
       "id" : "core.concurrency.org.limit.violation",
       "category" : "performance",
@@ -10287,7 +10454,7 @@
         "created" : "2016-01-08",
         "release" : "2016.02"
       },
-      "tags" : [ "group" ],
+      "tags" : [ "group", "webhook-eligible" ],
       "mappings" : [ "core.user_group_member.user_add" ]
     }, {
       "id" : "group.user_membership.remove",
@@ -10297,7 +10464,7 @@
         "created" : "2016-01-08",
         "release" : "2016.02"
       },
-      "tags" : [ "group" ],
+      "tags" : [ "group", "webhook-eligible" ],
       "mappings" : [ "core.user_group_member.user_remove" ]
     }, {
       "id" : "group.user_membership.rule.add_exclusion",
@@ -10328,7 +10495,7 @@
         "release" : "2017.51"
       },
       "tags" : [ "group" ],
-      "mappings" : [ ]
+      "mappings" : [ "cvd.group.user_membership.rule.error" ]
     }, {
       "id" : "group.user_membership.rule.evaluation",
       "category" : "lca",
@@ -10338,7 +10505,7 @@
         "release" : "2017.51"
       },
       "tags" : [ "group" ],
-      "mappings" : [ ]
+      "mappings" : [ "cvd.group.user_membership.rule.evaluation" ]
     }, {
       "id" : "group.user_membership.rule.invalidate",
       "category" : "lca",
@@ -10488,7 +10655,7 @@
         "release" : "2016.39"
       },
       "tags" : [ "mim" ],
-      "mappings" : [ ]
+      "mappings" : [ "mim.createEnrollment.ANDROID" ]
     }, {
       "id" : "mim.createEnrollment.IOS",
       "category" : "mobile-omm",
@@ -10498,7 +10665,7 @@
         "release" : "2016.39"
       },
       "tags" : [ "mim" ],
-      "mappings" : [ ]
+      "mappings" : [ "mim.createEnrollment.IOS" ]
     }, {
       "id" : "mim.createEnrollment.OSX",
       "category" : "mobile-omm",
@@ -10508,7 +10675,7 @@
         "release" : "2016.39"
       },
       "tags" : [ "mim" ],
-      "mappings" : [ ]
+      "mappings" : [ "mim.createEnrollment.OSX" ]
     }, {
       "id" : "mim.createEnrollment.UNKNOWN",
       "category" : "mobile-omm",
@@ -10518,7 +10685,7 @@
         "release" : "2016.39"
       },
       "tags" : [ "mim" ],
-      "mappings" : [ ]
+      "mappings" : [ "mim.createEnrollment.UNKNOWN" ]
     }, {
       "id" : "mim.createEnrollment.WINDOWS",
       "category" : "mobile-omm",
@@ -10528,7 +10695,7 @@
         "release" : "2016.39"
       },
       "tags" : [ "mim" ],
-      "mappings" : [ ]
+      "mappings" : [ "mim.createEnrollment.WINDOWS" ]
     }, {
       "id" : "mim.streamDevicesAppListCSVDownload",
       "category" : "mobile-omm",
@@ -10847,7 +11014,7 @@
         "created" : "2016-03-30",
         "release" : "2016.14"
       },
-      "tags" : [ "policy" ],
+      "tags" : [ "policy", "webhook-eligible" ],
       "mappings" : [ "policy.activated" ]
     }, {
       "id" : "policy.lifecycle.create",
@@ -10867,7 +11034,7 @@
         "created" : "2016-03-30",
         "release" : "2016.14"
       },
-      "tags" : [ "policy" ],
+      "tags" : [ "policy", "webhook-eligible" ],
       "mappings" : [ "policy.deactivated" ]
     }, {
       "id" : "policy.lifecycle.delete",
@@ -10897,7 +11064,7 @@
         "created" : "2016-03-30",
         "release" : "2016.14"
       },
-      "tags" : [ "policy" ],
+      "tags" : [ "policy", "webhook-eligible" ],
       "mappings" : [ "policy.updated" ]
     }, {
       "id" : "policy.rule.action.execute",
@@ -11530,6 +11697,16 @@
       "tags" : [ "email" ],
       "mappings" : [ "core.user.email.message_sent.self_service.password_reset" ]
     }, {
+      "id" : "system.idp.select",
+      "category" : "idx",
+      "description" : "Event fired when a user has been routed to an IdP. Can be used to determine which IdP a user was routed to, as well as which IdP Policy rule caused the user to be routed there. We do not have access to the user object at the time this event is fired, so we just log the username in the debug context.",
+      "info" : {
+        "created" : "2018-10-26",
+        "release" : "2018.45"
+      },
+      "tags" : [ "idp" ],
+      "mappings" : [ "system.idp.select" ]
+    }, {
       "id" : "system.import.complete",
       "category" : "sync",
       "description" : "Import process complete.",
@@ -11740,6 +11917,16 @@
       "tags" : [ "import", "system" ],
       "mappings" : [ "app.generic.import.details.delete_user" ]
     }, {
+      "id" : "system.import.user.match",
+      "category" : "sync",
+      "description" : "Assign user triggered by import process with callback. This event can be used to alter the matching result for a given imported user. This event is fired when the matching result is altered by the synchronous callback.",
+      "info" : {
+        "created" : "2018-10-10",
+        "release" : "2018.43"
+      },
+      "tags" : [ "import", "system" ],
+      "mappings" : [ "app.generic.import.details.match_user" ]
+    }, {
       "id" : "system.import.user.start",
       "category" : "sync",
       "description" : "Start importing users triggered import process.",
@@ -11890,6 +12077,36 @@
       "tags" : [ "iwa", "system" ],
       "mappings" : [ "iwa.agentless.update.failure", "iwa.agentless.update.success" ]
     }, {
+      "id" : "system.ldapi.bind",
+      "category" : "ud-core",
+      "description" : "Fired when a user performs a BIND to LDAP Interface. Can be used to identify when a user attempted to perform an LDAP authentication for audit or debugging purposes. Note that the firing of this event is subject to LDAPi event filtering rules.",
+      "info" : {
+        "created" : "2018-10-21",
+        "release" : "2018.10"
+      },
+      "tags" : [ "ldapi" ],
+      "mappings" : [ "system.ldapi.bind" ]
+    }, {
+      "id" : "system.ldapi.search",
+      "category" : "ud-core",
+      "description" : "Fired when a user performs a SEARCH to LDAP Interface. Can be used to identify when a user attempted to perform a search on LDAP Interface for audit or debugging purposes. Note that the firing of this event is subject to LDAPi event filtering rules.",
+      "info" : {
+        "created" : "2016-10-21",
+        "release" : "2018.10"
+      },
+      "tags" : [ "ldapi" ],
+      "mappings" : [ "system.ldapi.search" ]
+    }, {
+      "id" : "system.ldapi.unbind",
+      "category" : "ud-core",
+      "description" : "Fired when a user performs an UNBIND to LDAP Interface. Can be used to identify when a user attempted to end an LDAP Interface session for audit or debugging purposes. Note that the firing of this event is subject to LDAPi event filtering rules.",
+      "info" : {
+        "created" : "2018-10-21",
+        "release" : "2018.10"
+      },
+      "tags" : [ "ldapi" ],
+      "mappings" : [ "system.ldapi.unbind" ]
+    }, {
       "id" : "system.org.lifecycle.create",
       "category" : "aelm",
       "description" : "Org creation.",
@@ -11909,16 +12126,6 @@
       },
       "tags" : [ "system" ],
       "mappings" : [ "core.framework.ratelimit.expiration.warning" ]
-    }, {
-      "id" : "system.org.rate_limit.upcoming_warning",
-      "category" : "performance",
-      "description" : "Upcoming rate limit warning.",
-      "info" : {
-        "created" : "2017-01-04",
-        "release" : "2017.02"
-      },
-      "tags" : [ "system" ],
-      "mappings" : [ "core.framework.ratelimit.upcoming_warning" ]
     }, {
       "id" : "system.org.rate_limit.violation",
       "category" : "performance",
@@ -12177,7 +12384,7 @@
         "created" : "2016-04-01",
         "release" : "2016.15"
       },
-      "tags" : [ "account", "user" ],
+      "tags" : [ "account", "user", "webhook-eligible" ],
       "mappings" : [ "core.user.config.user_status.password_reset", "core.user_auth.self_service.password_reset", "core.user_auth.self_service.password_reset.invalid_recovery_token", "core.user_auth.self_service.password_reset.invalid_security_answer", "core.user_auth.self_service.password_reset.invalid_sms_code", "core.user_auth.self_service.password_reset.invalid_user_state", "core.user_auth.self_service.password_reset.issued_recovery_token", "core.user_auth.self_service.password_reset.shared_email", "core.user_auth.self_service.password_reset.suspended_user", "core.user_auth.self_service.password_reset.unknown_user" ]
     }, {
       "id" : "user.account.unlock",
@@ -12227,7 +12434,7 @@
         "created" : "2016-04-01",
         "release" : "2016.15"
       },
-      "tags" : [ "account", "user" ],
+      "tags" : [ "account", "user", "webhook-eligible" ],
       "mappings" : [ "core.user.config.password_update.failure", "core.user.config.password_update.success" ]
     }, {
       "id" : "user.account.update_primary_email",
@@ -12247,7 +12454,7 @@
         "created" : "2016-01-08",
         "release" : "2016.02"
       },
-      "tags" : [ "account", "user", "user-config" ],
+      "tags" : [ "account", "user", "user-config", "webhook-eligible" ],
       "mappings" : [ "core.user.config.profile_update.success" ]
     }, {
       "id" : "user.account.update_secondary_email",
@@ -12351,7 +12558,7 @@
       "mappings" : [ "core.user.factor.attempt_fail", "core.user.factor.attempt_success", "core.user_auth.duo.disabled_lockout", "core.user_auth.duo.duo_down", "core.user_auth.duo.invalid_integration" ]
     }, {
       "id" : "user.authentication.auth_via_radius",
-      "category" : "mfa-service",
+      "category" : "hybrid-access",
       "description" : "Authentication of user via Radius.",
       "info" : {
         "created" : "2016-04-29",
@@ -12418,7 +12625,7 @@
         "release" : "2017.27"
       },
       "tags" : [ "user" ],
-      "mappings" : [ ]
+      "mappings" : [ "user.authentication.verify" ]
     }, {
       "id" : "user.credential.enroll",
       "category" : "mobile-device-trust",
@@ -12457,7 +12664,7 @@
         "created" : "2016-01-08",
         "release" : "2016.02"
       },
-      "tags" : [ "user" ],
+      "tags" : [ "user", "webhook-eligible" ],
       "mappings" : [ "core.user.config.user_deactivated" ]
     }, {
       "id" : "user.lifecycle.delete.completed",
@@ -12477,7 +12684,7 @@
         "created" : "2016-07-14",
         "release" : "2016.29"
       },
-      "tags" : [ "user" ],
+      "tags" : [ "user", "webhook-eligible" ],
       "mappings" : [ "core.user.config.user_status.delete.initiated" ]
     }, {
       "id" : "user.lifecycle.jit.error.read_only",
@@ -12507,7 +12714,7 @@
         "created" : "2016-03-24",
         "release" : "2016.13"
       },
-      "tags" : [ "user" ],
+      "tags" : [ "user", "webhook-eligible" ],
       "mappings" : [ "core.user.config.user_reactivation.success" ]
     }, {
       "id" : "user.lifecycle.suspend",
@@ -12517,7 +12724,7 @@
         "created" : "2016-03-24",
         "release" : "2016.13"
       },
-      "tags" : [ "user" ],
+      "tags" : [ "user", "webhook-eligible" ],
       "mappings" : [ "core.user.config.user_status.suspended" ]
     }, {
       "id" : "user.lifecycle.unsuspend",
@@ -12527,7 +12734,7 @@
         "created" : "2016-03-24",
         "release" : "2016.13"
       },
-      "tags" : [ "user" ],
+      "tags" : [ "user", "webhook-eligible" ],
       "mappings" : [ "core.user.config.user_status.unsuspended" ]
     }, {
       "id" : "user.mfa.attempt_bypass",
@@ -12738,7 +12945,7 @@
         "release" : "2018.33"
       },
       "tags" : [ "webhook" ],
-      "mappings" : [ "platform.webhook.verify" ]
+      "mappings" : [ "platform.webhook.verify.failure", "platform.webhook.verify.success" ]
     }, {
       "id" : "zone.activate",
       "category" : "adaptive",

@@ -1,5 +1,8 @@
 #!/bin/bash
 
+# Give node a larger heap to prevent tarball PUT failure to registry
+export NODE_OPTIONS=--max_old_space_size=8192
+
 DEPLOY_BRANCH="weekly"
 DEPLOY_ENVIRONMENT=""
 TARGET_S3_BUCKET="s3://developer.okta.com-staging"

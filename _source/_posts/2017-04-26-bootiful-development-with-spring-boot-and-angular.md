@@ -340,6 +340,7 @@ Modify `client/src/app/beer-list/beer-list.component.html` so it renders the lis
 
 Update `app.component.html` to have the `BeerListComponent` below the title, removing the rest of the HTML.
 
+{% raw %}
 ```html
 <div style="text-align:center">
   <h1>
@@ -348,6 +349,7 @@ Update `app.component.html` to have the `BeerListComponent` below the title, rem
 </div>
 <app-beer-list></app-beer-list>
 ```
+{% endraw %}
 
 Make sure both apps are started (with `mvn spring-boot:run` in the server directory, and `ng serve` in the client directory) and navigate to `http://localhost:4200`. You should see an error in your console that you means you have to configure cross-origin resource sharing (CORS) on the server.
 

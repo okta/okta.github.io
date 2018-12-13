@@ -193,7 +193,7 @@ Click **Done**.
 
 Take note of the **Client ID** and **Client Secret** at the bottom of the following page. You'll need these later.
 
-{% img blog/java-token-auth/client-id+secret.png alt:"Client ID and Client Secret" width:"700" %}{: .center-image }
+{% img blog/java-token-auth/client-id-secret.png alt:"Client ID and Client Secret" width:"700" %}{: .center-image }
 
 ## Install HTTPie
 
