@@ -102,7 +102,7 @@ There's an emerging recommendation in the OAuth community to favor this flow ove
 
 Okta supports the Auth Code with PKCE Flow for native and mobile apps. You can find the code example for this post at [https://github.com/oktadeveloper/pkce-cli](https://github.com/oktadeveloper/pkce-cli).
 
-This is a [Node.js](https://nodejs.org) native app that runs from the command line. I wanted to keep this example as lean as possible so we could really see the mechanism of the flow in action. As such, it only has 4 dependencies: `commander` for parsing command line switches, `opn` for a platform-independent way to launch a browser from the command line, `request` to make HTTP requests and `restify` to provide a RESTful API endpoint to listen on.
+This is a [Node.js](https://nodejs.org) native app that runs from the command line. I wanted to keep this example as lean as possible so you can see the mechanism of the flow in action. As such, it only has 4 dependencies: `commander` for parsing command line switches, `opn` for a platform-independent way to launch a browser from the command line, `request` to make HTTP requests and `restify` to provide a RESTful API endpoint to listen on.
 
 [AppAuth-JS](https://github.com/openid/AppAuth-JS) is a high quality JavaScript library that supports the Auth Code with PKCE Flow and hides away a lot of the details of what's happening during the flow.
 
