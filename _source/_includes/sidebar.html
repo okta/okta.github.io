@@ -110,7 +110,7 @@
         <a href="/docs/api/resources/roles">Manage Okta Resources</a>
         {% if page.id contains "docs/api/resources" %}
           <ul id="Sidebar_Resources" class="Sidebar-hide">
-            {% assign api_references = site.docs | where: 'category', 'management' | sort: 'title' %}
+            {% assign api_references = site.docs | where: 'category', 'management' | where_exp: 'item', 'item.deprecated != true' | sort: 'title' %}
             {% for doc in api_references %}
               {% if doc.beta %}{% continue %}{% endif %}
               <li{% if doc.title == page.title%} class="is-active"{% endif %}><a href="{{ doc.url }}">{{ doc.title }}</a></li>

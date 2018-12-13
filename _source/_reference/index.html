@@ -37,7 +37,7 @@ title: API Reference
     <h2>Manage Okta Resources</h2>
     <p>REST endpoints to configure resources such as users, apps, sessions, and factors whenever you need.</p>
     <ul class="list--multicolumn">
-      {% assign api_references = site.docs | where: 'category', 'management' | sort: 'title' %}
+      {% assign api_references = site.docs | where: 'category', 'management' | where_exp: 'item', 'item.deprecated != true' | sort: 'title' %}
       {% for doc in api_references %}
         {% if doc.beta %}{% continue %}{% endif %}
         <li><a href="{{ doc.url }}">{{ doc.title }}</a></li>
