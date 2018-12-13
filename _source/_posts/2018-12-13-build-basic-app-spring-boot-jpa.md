@@ -11,13 +11,11 @@ tweets:
 image: blog/featured/okta-java-short-bottle-headphones.jpg
 ---
 
-# Build a Basic App with Spring Boot and JPA using Postgres
-
-Every non-trivial application needs a way to save and update data: a resource server that is accessible via HTTP. Generally, this data must be secured. Java is a great language with decades of history in professional, enterprise development, and is a great choice for any application’s server stack. Within the Java ecosystem, Spring makes building secure resource servers for your data simple. When coupled with Okta, you get professionally maintained OAuth and JWT technologies easily integrated into Spring Boot using Spring Security.
+Every non-trivial application needs a way to save and update data: a resource server that is accessible via HTTP. Generally, this data must be secured. Java is a great language with decades of history in professional, enterprise development, and is a great choice for any application's server stack. Within the Java ecosystem, Spring makes building secure resource servers for your data simple. When coupled with Okta, you get professionally maintained OAuth and JWT technologies easily integrated into Spring Boot using Spring Security.
 
 In this post, you're going to build a resource server using Spring Boot and Spring Data JPA. On top of that, you're going to implement a group-based authentication and authorization layer using OAuth 2.0. If this sounds complicated - don't worry! It's not. 
 
-Before we dig in, let’s cover some background:
+Before we dig in, let's cover some background:
 
 A **resource server** is a programmatic access point for your server's functions and data (basically the same as an API server and/or possibly REST server). 
 
@@ -137,7 +135,7 @@ It doesn't do much just yet, though. There are no domain models, resource reposi
 
 ## Add a Domain Class with Spring Data and JPA
 
-A domain or model is the programmatic representation of the data you will be storing. The magic of Spring Data and JPA is that Spring can take a Java class and turn it into a database table for you. It will even autogenerate the necessary load and save methods. The best part is that this is (more or less) database independent. 
+A domain or model is the programmatic representation of the data you will be storing. The magic of Spring Data and JPA is that Spring can take a Java class and turn it into a database table for you. It will even autogenerate the necessary load and save methods. The best part is that this is (more or less) database independent.
 
 You're using PostgreSQL in this tutorial, and you could pretty easily switch it to MySQL if you wanted, just by changing a dependency in the `build.gradle` file. And, of course, creating a MySQL database and updating the necessary properties in the `application.yml` file. This is super useful for testing, development, and long-term maintenance.
 
@@ -265,7 +263,7 @@ This method will be run when the application starts. It loads some sample data i
 
 ## Test Your Spring Boot Resource Server
 
-HTTPie is a great command line utility that makes it easy to run requests against the resource server. If you don’t have HTTPie installed, install it using `brew install httpie`. Or head over to [their website](https://httpie.org/) and make it happen. Or just follow along.
+HTTPie is a great command line utility that makes it easy to run requests against the resource server. If you don't have HTTPie installed, install it using `brew install httpie`. Or head over to [their website](https://httpie.org/) and make it happen. Or just follow along.
 
 Make sure your Spring Boot app is running. If it isn't, start it using `./gradlew bootRun`.
 
@@ -443,7 +441,7 @@ A couple things to note. First, notice that *value* is being stored as a binary 
 
 Okta is a software-as-service identity, authentication, and authorization provider. While I have definitely worked on projects where outsourcing everything to SaaS providers created more problems than it promised to solve, authentication and authorization is a place where this model makes total sense. Online security is hard. Vulnerabilities are found and servers must be updated quickly. Standards change and code needs modification. All of these changes have the potential to create new vulnerabilities. Letting Okta handle security means that you can worry about the things that make your application unique.
 
-To show you how easy it is to set up, you’re going integrate Okta OAuth and add token-based authentication to the resource server. If you haven't already, head over to [developer.okta.com](http://developer.okta.com) and sign up for a free account. Once you have an account, open the developer dashboard and create an OpenID Connect (OIDC) application by clicking on the **Application** top-menu item, and then on the **Add Application** button.
+To show you how easy it is to set up, you're going integrate Okta OAuth and add token-based authentication to the resource server. If you haven't already, head over to [developer.okta.com](http://developer.okta.com) and sign up for a free account. Once you have an account, open the developer dashboard and create an OpenID Connect (OIDC) application by clicking on the **Application** top-menu item, and then on the **Add Application** button.
 
 {% img blog/basic-app-spring-boot-jpa/create-app.png alt:"Select OIDC app type" width:"800" %}{: .center-image }
 
@@ -453,7 +451,7 @@ Select **Single-Page App**.
 
 The default application settings are great, except that you need to add a **Login Redirect URI**: `a`. You're going to use this in a moment to retrieve a test token. 
 
-Also, note your **Client ID**, as you’ll need that in a moment.
+Also, note your **Client ID**, as you'll need that in a moment.
 
 {% img blog/basic-app-spring-boot-jpa/general-settings.png alt:"Note your Client ID" width:"800" %}{: .center-image }
 
@@ -692,7 +690,7 @@ Content-Type: application/hal+json;charset=UTF-8
 
 It worked! We don't have any kayaks because we had to remove the `init()` method above, so the `_embedded.kayaks` array is empty.
 
-**TIP:** going forward, if you don’t want to copy and paste the whole enormous token string, you can store it to a shell variable and reuse it like so:
+**TIP:** going forward, if you don't want to copy and paste the whole enormous token string, you can store it to a shell variable and reuse it like so:
 
 ```bash
 TOKEN=eyJraWQiOiJldjFpay1DS3UzYjJXS3QzSVl1MlJZc3VJSzBBYUl3NkU4SDJf...
@@ -854,15 +852,15 @@ public interface CrudRepository<T, ID> extends Repository<T, ID> {
   void deleteAll();
 }
 ``` 
-And that’s it! Pretty cool right? In this tutorial, you set up a PostgreSQL database, created a Spring Boot resource server that used Spring Data and JPA to persist a data model, and then turned this data model into a REST API with shockingly little code. Further, you used Okta to add OIDC authentication and OAuth 2.0 authorization to your server application. And finally, you implemented a simple group-based authorization scheme.  
+And that's it! Pretty cool right? In this tutorial, you set up a PostgreSQL database, created a Spring Boot resource server that used Spring Data and JPA to persist a data model, and then turned this data model into a REST API with shockingly little code. Further, you used Okta to add OIDC authentication and OAuth 2.0 authorization to your server application. And finally, you implemented a simple group-based authorization scheme.  
 
-If you’d like to check out this complete project, you can find the repo on GitHub at: [https://github.com/oktadeveloper/okta-spring-boot-jpa-example](https://github.com/oktadeveloper/okta-spring-boot-jpa-example).
+If you'd like to check out this complete project, you can find the repo on GitHub at: [https://github.com/oktadeveloper/okta-spring-boot-jpa-example](https://github.com/oktadeveloper/okta-spring-boot-jpa-example).
 
 Watch out for our next post in this series that will cover using a NoSQL database (MongoDB) with Spring WebFlux.
 
 ## Learn More about Spring Boot, Spring Security, and Secure Authentication
 
-If you’d like to learn more about Spring Boot, Spring Security, or modern application security, check out any of these great tutorials:
+If you'd like to learn more about Spring Boot, Spring Security, or modern application security, check out any of these great tutorials:
 
 -   [Get Started with Spring Boot, OAuth 2.0, and Okta](/blog/2017/03/21/spring-boot-oauth)
 -   [Add Single Sign-On to Your Spring Boot Web App in 15 Minutes](/blog/2017/11/20/add-sso-spring-boot-15-min)
