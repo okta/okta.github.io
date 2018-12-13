@@ -11,8 +11,6 @@ tweets:
 image: blog/featured/okta-java-short-bottle-headphones.jpg
 ---
 
-# Build a Basic App with Spring Boot and JPA using Postgres
-
 Every non-trivial application needs a way to save and update data: a resource server that is accessible via HTTP. Generally, this data must be secured. Java is a great language with decades of history in professional, enterprise development, and is a great choice for any application’s server stack. Within the Java ecosystem, Spring makes building secure resource servers for your data simple. When coupled with Okta, you get professionally maintained OAuth and JWT technologies easily integrated into Spring Boot using Spring Security.
 
 In this post, you're going to build a resource server using Spring Boot and Spring Data JPA. On top of that, you're going to implement a group-based authentication and authorization layer using OAuth 2.0. If this sounds complicated - don't worry! It's not. 
@@ -221,9 +219,7 @@ import java.text.NumberFormat;
 import java.text.ParseException;
 import java.util.stream.Stream;
 
-
 @SpringBootApplication
-
 public class SpringBootJpaApplication {
 
     public static void main(String[] args) {
@@ -278,8 +274,7 @@ HTTP/1.1 200
 Content-Type: application/hal+json;charset=UTF-8
 Date: Wed, 21 Nov 2018 20:39:11 GMT
 Transfer-Encoding: chunked
-```
-```json
+
 {
     "_embedded": {
         "kayaks": [
@@ -378,8 +373,7 @@ HTTP/1.1 200
 Content-Type: application/hal+json;charset=UTF-8
 Date: Wed, 21 Nov 2018 20:44:22 GMT
 Transfer-Encoding: chunked
-```
-```json
+
 {
     "_embedded": {
         "kayaks": [
@@ -400,7 +394,7 @@ Transfer-Encoding: chunked
             }
         ]
     },
-	...
+    ...
 }
 ```
 
@@ -449,13 +443,13 @@ To show you how easy it is to set up, you’re going integrate Okta OAuth and ad
 
 Select **Single-Page App**.
 
-{% img blog/basic-app-spring-boot-jpa/app-settings.png alt:"Configure OIDC application settings" width:"800" %}{: .center-image }
+{% img blog/basic-app-spring-boot-jpa/app-settings.png alt:"Configure OIDC application settings" width:"700" %}{: .center-image }
 
 The default application settings are great, except that you need to add a **Login Redirect URI**: `a`. You're going to use this in a moment to retrieve a test token. 
 
 Also, note your **Client ID**, as you’ll need that in a moment.
 
-{% img blog/basic-app-spring-boot-jpa/general-settings.png alt:"Note your Client ID" width:"800" %}{: .center-image }
+{% img blog/basic-app-spring-boot-jpa/general-settings.png alt:"Note your Client ID" width:"700" %}{: .center-image }
 
 ## Configure Your Spring Boot Resource Server for Token Authentication
 
@@ -496,10 +490,10 @@ import org.springframework.security.oauth2.config.annotation.web.configuration.E
 @SpringBootApplication  
 public class SpringBootJpaApplication {  
   
-  public static void main(String[] args) {  
-     SpringApplication.run(SpringBootJpaApplication.class, args);  
-  }
-   ...
+    public static void main(String[] args) {  
+        SpringApplication.run(SpringBootJpaApplication.class, args);  
+    }
+    ...
 }
 ```
 
@@ -519,7 +513,7 @@ You'll get a 401/unauthorized.
 HTTP/1.1 401
 Cache-Control: no-store
 Content-Type: application/json;charset=UTF-8
-...
+
 {
     "error": "unauthorized",
     "error_description": "Full authentication is required to access this resource"
@@ -546,11 +540,11 @@ To access the server now, you need a valid access token. You can use **OpenID Co
 
 **Response mode**: `form_post`.
 
-{% img blog/basic-app-spring-boot-jpa/oidc-debugger.png alt:"Generate an Access Token" width:"699" %}{: .center-image }
+{% img blog/basic-app-spring-boot-jpa/oidc-debugger.png alt:"Generate an Access Token" width:"600" %}{: .center-image }
 
 Click **Send Request**. If you are not logged into developer.okta.com, then you'll be required to log in. If you are (as is likely) already logged in, then the token will be generated for your signed-in identity.
 
-{% img blog/basic-app-spring-boot-jpa/access-token-success.png alt:"Access Token success" width:"604" %}{: .center-image }
+{% img blog/basic-app-spring-boot-jpa/access-token-success.png alt:"Access Token success" width:"500" %}{: .center-image }
 
 ## Use the Access Token
 
@@ -655,19 +649,22 @@ Try an unauthenticated GET request: `http :8080/kayaks`.
 HTTP/1.1 401
 Cache-Control: no-store
 Content-Type: application/json;charset=UTF-8
-```
-```json
+
 {
     "error": "unauthorized",
     "error_description": "Full authentication is required to access this resource"
 }
 ```
 
-Try it using your token:
+Try it using your token.
+
+Command:
 
 ```bash
 http :8080/kayaks 'Authorization: Bearer eyJraWQiOiJldjFpay1DS3UzYjJXS3QzSVl1MlJZc3VJSzBBYUl3NkU4SDJf...'
 ```
+
+Reply:
 
 ```bash
 HTTP/1.1 200
@@ -746,8 +743,7 @@ http :8080/kayaks 'Authorization: Bearer eyJraWQiOiJldjFpay1DS3UzYjJX...'
 ```bash
 HTTP/1.1 403
 ...
-```
-```json
+
 {
     "error": "access_denied",
     "error_description": "Access is denied"
@@ -777,8 +773,7 @@ http :8080/kayaks 'Authorization: Bearer eyJraWQiOiJldjFpay1DS3UzYjJX...'
 ```bash
 HTTP/1.1 200
 ...
-```
-```json
+
 {
     "_embedded": {
         "kayaks": []
@@ -817,8 +812,7 @@ HTTP/1.1 201
 Cache-Control: no-cache, no-store, max-age=0, must-revalidate
 Content-Type: application/json;charset=UTF-8
 ...
-```
-```json
+
 {
     "_links": {
         "kayak": {
@@ -856,7 +850,7 @@ public interface CrudRepository<T, ID> extends Repository<T, ID> {
 ``` 
 And that’s it! Pretty cool right? In this tutorial, you set up a PostgreSQL database, created a Spring Boot resource server that used Spring Data and JPA to persist a data model, and then turned this data model into a REST API with shockingly little code. Further, you used Okta to add OIDC authentication and OAuth 2.0 authorization to your server application. And finally, you implemented a simple group-based authorization scheme.  
 
-If you’d like to check out this complete project, you can find the repo on GitHub at: [https://github.com/oktadeveloper/okta-spring-boot-jpa-example](https://github.com/oktadeveloper/okta-spring-boot-jpa-example).
+If you’d like to check out this complete project, you can find the repo on GitHub at [@oktadeveloper/okta-spring-boot-jpa-example](https://github.com/oktadeveloper/okta-spring-boot-jpa-example).
 
 Watch out for our next post in this series that will cover using a NoSQL database (MongoDB) with Spring WebFlux.
 
