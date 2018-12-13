@@ -6,6 +6,20 @@
   ],
   "scripts": {
     "dev": "yarn workspace docs dev",
-    "build": "yarn workspace docs build"
+    "build": "yarn workspace docs build",
+    "pretest": "webdriver-manager update --gecko false",
+    "test": "yarn test-only || (yarn stop && exit 1)",
+    "posttest": "yarn stop",
+    "stop": "if-env CI=true && exit 0 || (pkill -f 'okta_github_io|webdriver-manager/selenium')",
+    "test-only": "protractor tests/selenium/conf.js",
+    "markdown-lint": "node scripts/lint"
+  },
+  "devDependencies": {
+    "cross-env": "^5.0.1",
+    "jasmine-reporters": "^2.2.0",
+    "jasmine-spec-reporter": "^4.1.0",
+    "protractor": "^5.4.0",
+    "recursive-readdir": "^2.2.1",
+    "wait-on": "^2.0.2"
   }
 }

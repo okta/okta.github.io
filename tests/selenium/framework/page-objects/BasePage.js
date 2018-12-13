@@ -2,7 +2,7 @@
 
 const util = require('../shared/util');
 const EC = protractor.ExpectedConditions;
-const baseUrl = 'http://localhost:4000';
+const baseUrl = 'http://localhost:8080';
 
 class BasePage {
   constructor(relativeURL) {
