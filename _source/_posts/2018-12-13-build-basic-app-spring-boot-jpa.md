@@ -11,15 +11,15 @@ tweets:
 image: blog/featured/okta-java-short-bottle-headphones.jpg
 ---
 
-Every non-trivial application needs a way to save and update data: a resource server that is accessible via HTTP. Generally, this data must be secured. Java is a great language with decades of history in professional, enterprise development, and is a great choice for any application’s server stack. Within the Java ecosystem, Spring makes building secure resource servers for your data simple. When coupled with Okta, you get professionally maintained OAuth and JWT technologies easily integrated into Spring Boot using Spring Security.
+Every non-trivial application needs a way to save and update data: a resource server that is accessible via HTTP. Generally, this data must be secured. Java is a great language with decades of history in professional, enterprise development, and is a great choice for any application's server stack. Within the Java ecosystem, Spring makes building secure resource servers for your data simple. When coupled with Okta, you get professionally maintained OAuth and JWT technologies easily integrated into Spring Boot using Spring Security.
 
-In this post, you're going to build a resource server using Spring Boot and Spring Data JPA. On top of that, you're going to implement a group-based authentication and authorization layer using OAuth 2.0. If this sounds complicated - don't worry! It's not. 
+In this post, you're going to build a resource server using Spring Boot and Spring Data JPA. On top of that, you're going to implement a group-based authentication and authorization layer using OAuth 2.0. If this sounds complicated - don't worry! It's not.
 
-Before we dig in, let’s cover some background:
+Before we dig in, let's cover some background:
 
-A **resource server** is a programmatic access point for your server's functions and data (basically the same as an API server and/or possibly REST server). 
+A **resource server** is a programmatic access point for your server's functions and data (basically the same as an API server and/or possibly REST server).
 
- **JPA** is the Java Persistence API, a specification for managing relational databases using Java. It describes an abstraction layer between Java classes and a relational database. 
+ **JPA** is the Java Persistence API, a specification for managing relational databases using Java. It describes an abstraction layer between Java classes and a relational database.
 
 [**Spring Data JPA**](https://spring.io/projects/spring-data-jpa) is a wrapper around JPA providers such as Hibernate. As you'll see, it makes persisting your Java classes as simple as adding some annotations and creating a simple repository interface. No need to actually write persistence or retrieval methods! Another great benefit is that you can change the underlying database implementation transparently without having to change any code. For example, in this tutorial, you'll be using Postgres, but later if you decided you'd rather use MySQL, all you'd have to do is change out some dependencies.
 
@@ -29,7 +29,7 @@ You'll need to have PostgreSQL installed for this tutorial. If you don't already
 
 The next thing you'll need to do is create a Postgres user and database for the project. For this, you can use the Postgres CLI, `psql`.
 
-You should be able to run the following command: `psql -V` and get a response like: 
+You should be able to run the following command: `psql -V` and get a response like:
 
 ```bash
 psql (PostgreSQL) 11.12
@@ -48,7 +48,7 @@ This tutorial uses *jpatutorial* for the username and *springbootjpa* for the da
 
 Type `psql` from the terminal to enter the Postgres shell. Then enter the following command.
 
-**Create a user**
+### Create a user
 
 ```bash
 create user jpatutorial;
@@ -58,7 +58,7 @@ The shell should respond with: `CREATE ROLE`
 
 **Don't forget the semicolon!** I would never, ever do this. I am definitely not speaking from experience. But if you don't type in the semicolon `psql` doesn't process the command and you can lose 20-30 minutes in frustrated confusion wondering what is happening until you *do* enter a semicolon, at which point it tries to process all of your commands.
 
-**Give the user a password**
+### Give the user a password
 
 ```bash
 alter user jpatutorial with encrypted password '<your really secure password>';
@@ -66,7 +66,7 @@ alter user jpatutorial with encrypted password '<your really secure password>';
 
 The shell should respond with:  `ALTER ROLE`.
 
-**Create the database**
+### Create the database
 
 ```bash
 create database springbootjpa;
@@ -74,7 +74,7 @@ create database springbootjpa;
 
 The shell should respond with:  `CREATE DATABASE`.
 
-**Grant privileges**
+### Grant privileges
 
 ```bash
 grant all privileges on database springbootjpa to jpatutorial;
@@ -112,10 +112,10 @@ spring:
 
 The `ddl-auto` property specifies hibernate's behavior upon loading. The options are:
 
- - validate: *validates the schema but makes no changes*
- - update: *updates the schema*
- - create: *creates the schema, destroying any previous data*
- - create-drop: *like create, but also drops the schema when the session closes (useful for testing)*
+- validate: *validates the schema but makes no changes*
+- update: *updates the schema*
+- create: *creates the schema, destroying any previous data*
+- create-drop: *like create, but also drops the schema when the session closes (useful for testing)*
 
 You're using `create`. Each time the program is run, a new database is created, starting with fresh tables and data.
 
@@ -135,7 +135,7 @@ It doesn't do much just yet, though. There are no domain models, resource reposi
 
 ## Add a Domain Class with Spring Data and JPA
 
-A domain or model is the programmatic representation of the data you will be storing. The magic of Spring Data and JPA is that Spring can take a Java class and turn it into a database table for you. It will even autogenerate the necessary load and save methods. The best part is that this is (more or less) database independent. 
+A domain or model is the programmatic representation of the data you will be storing. The magic of Spring Data and JPA is that Spring can take a Java class and turn it into a database table for you. It will even autogenerate the necessary load and save methods. The best part is that this is (more or less) database independent.
 
 You're using PostgreSQL in this tutorial, and you could pretty easily switch it to MySQL if you wanted, just by changing a dependency in the `build.gradle` file. And, of course, creating a MySQL database and updating the necessary properties in the `application.yml` file. This is super useful for testing, development, and long-term maintenance.
 
@@ -176,7 +176,7 @@ public class Kayak {
 
     private String makeModel;
 }
-``` 
+```
 
 This project uses **Lombok** to avoid having to code a bunch of ceremony getters and setters and whatnots. You can check out [their docs](https://projectlombok.org/), or more specifically for [the `@Data` annotation you're using](https://projectlombok.org/features/Data).
 
@@ -188,7 +188,7 @@ Most properties can be mapped automatically. The `id` property, however, is deco
 
 With the domain class defined, Spring knows enough to build the database table, but it doesn't have any controller methods defined. There's no output or input for the data. Spring makes adding a resource server trivial. In fact, it's so trivial, you probably won't believe it.
 
-In the package `com.okta.springbootjpa`, create an interface called `KayakRepository.java`. 
+In the package `com.okta.springbootjpa`, create an interface called `KayakRepository.java`.
 
 ```java
 package com.okta.springbootjpa;
@@ -197,7 +197,7 @@ import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 
 @RepositoryRestResource
-public interface KayakRepository extends CrudRepository<Kayak, Integer> { 
+public interface KayakRepository extends CrudRepository<Kayak, Integer> {
 }
 ```
 
@@ -261,7 +261,7 @@ This method will be run when the application starts. It loads some sample data i
 
 ## Test Your Spring Boot Resource Server
 
-HTTPie is a great command line utility that makes it easy to run requests against the resource server. If you don’t have HTTPie installed, install it using `brew install httpie`. Or head over to [their website](https://httpie.org/) and make it happen. Or just follow along.
+HTTPie is a great command line utility that makes it easy to run requests against the resource server. If you don't have HTTPie installed, install it using `brew install httpie`. Or head over to [their website](https://httpie.org/) and make it happen. Or just follow along.
 
 Make sure your Spring Boot app is running. If it isn't, start it using `./gradlew bootRun`.
 
@@ -400,7 +400,7 @@ Transfer-Encoding: chunked
 
 You can also delete the kayak. Run this command: `http DELETE :8080/kayaks/4` This deletes the kayak with ID = 4, or the kayak we just created. GET the list of kayaks a third time and you'll see that it's gone.
 
-With very minimal code, using Spring Boot you can create a fully functioning resource server. This data is being persisted to your Postgres database. 
+With very minimal code, using Spring Boot you can create a fully functioning resource server. This data is being persisted to your Postgres database.
 
 You can verify this by using the Postgres command shell. At the terminal, type `psql` to enter the shell, then type the following commands.
 
@@ -437,7 +437,7 @@ A couple things to note. First, notice that *value* is being stored as a binary 
 
 Okta is a software-as-service identity, authentication, and authorization provider. While I have definitely worked on projects where outsourcing everything to SaaS providers created more problems than it promised to solve, authentication and authorization is a place where this model makes total sense. Online security is hard. Vulnerabilities are found and servers must be updated quickly. Standards change and code needs modification. All of these changes have the potential to create new vulnerabilities. Letting Okta handle security means that you can worry about the things that make your application unique.
 
-To show you how easy it is to set up, you’re going integrate Okta OAuth and add token-based authentication to the resource server. If you haven't already, head over to [developer.okta.com](http://developer.okta.com) and sign up for a free account. Once you have an account, open the developer dashboard and create an OpenID Connect (OIDC) application by clicking on the **Application** top-menu item, and then on the **Add Application** button.
+To show you how easy it is to set up, you're going integrate Okta OAuth and add token-based authentication to the resource server. If you haven't already, head over to [developer.okta.com](http://developer.okta.com) and sign up for a free account. Once you have an account, open the developer dashboard and create an OpenID Connect (OIDC) application by clicking on the **Application** top-menu item, and then on the **Add Application** button.
 
 {% img blog/basic-app-spring-boot-jpa/create-app.png alt:"Select OIDC app type" width:"800" %}{: .center-image }
 
@@ -445,9 +445,9 @@ Select **Single-Page App**.
 
 {% img blog/basic-app-spring-boot-jpa/app-settings.png alt:"Configure OIDC application settings" width:"700" %}{: .center-image }
 
-The default application settings are great, except that you need to add a **Login Redirect URI**: `a`. You're going to use this in a moment to retrieve a test token. 
+The default application settings are great, except that you need to add a **Login Redirect URI**: `a`. You're going to use this in a moment to retrieve a test token.
 
-Also, note your **Client ID**, as you’ll need that in a moment.
+Also, note your **Client ID**, as you'll need that in a moment.
 
 {% img blog/basic-app-spring-boot-jpa/general-settings.png alt:"Note your Client ID" width:"700" %}{: .center-image }
 
@@ -459,7 +459,7 @@ Add a couple dependencies to your `build.gradle` file.
 
 ```groovy
 compile('org.springframework.security.oauth.boot:spring-security-oauth2-autoconfigure:2.1.0.RELEASE')  
-compile('com.okta.spring:okta-spring-boot-starter:0.6.1') 
+compile('com.okta.spring:okta-spring-boot-starter:0.6.1')
 ```
 
 Add the following to the bottom of the `build.gradle` file (this resolves a logback logging dependency conflict).
@@ -562,7 +562,7 @@ http :8080/kayaks 'Authorization: Bearer eyJraWQiOiJldjFpay1DS3UzYjJXS3QzSVl1...
 
 ## Add Group-based Authorization
 
-Up until now, the authorization scheme has been pretty binary. Does the request carry a valid token or not. Now you're going to add Group-based authentication. Note that despite being used interchangeably sometimes on websites of ill repute, roles and groups are not the same thing, and are different ways of implementing authorization. 
+Up until now, the authorization scheme has been pretty binary. Does the request carry a valid token or not. Now you're going to add Group-based authentication. Note that despite being used interchangeably sometimes on websites of ill repute, roles and groups are not the same thing, and are different ways of implementing authorization.
 
 A **role** is a collection of collection of permissions that a user can inherit. A **group** is a collection of users to which a set of standard permissions are assigned. However, in the scope of tokens and how you're using Spring Security with JPA, the implementation is exactly the same; they're both passed from the OAuth OIDC application as a string "authority" to Spring, so for the moment they're essentially interchangeable. The difference would be in what is protected and how they are defined.
 
@@ -629,7 +629,7 @@ public interface KayakRepository extends CrudRepository<Kayak, Long> {
 }
 ```
 
-Finally, in the `SpringBootJpaApplication`, **delete** the `ApplicationRunner init(KayakRepository repository)` method (or just comment out the `@Bean` annotation). If you skip this step, the build will fail with the following error: 
+Finally, in the `SpringBootJpaApplication`, **delete** the `ApplicationRunner init(KayakRepository repository)` method (or just comment out the `@Bean` annotation). If you skip this step, the build will fail with the following error:
 
 ```bash
  AuthenticationCredentialsNotFoundException: An Authentication object was not found in the SecurityContext
@@ -670,8 +670,7 @@ Reply:
 HTTP/1.1 200
 Cache-Control: no-cache, no-store, max-age=0, must-revalidate
 Content-Type: application/hal+json;charset=UTF-8
-```
-```json
+
 {
     "_embedded": {
         "kayaks": []
@@ -689,7 +688,7 @@ Content-Type: application/hal+json;charset=UTF-8
 
 It worked! We don't have any kayaks because we had to remove the `init()` method above, so the `_embedded.kayaks` array is empty.
 
-**TIP:** going forward, if you don’t want to copy and paste the whole enormous token string, you can store it to a shell variable and reuse it like so:
+**TIP:** going forward, if you don't want to copy and paste the whole enormous token string, you can store it to a shell variable and reuse it like so:
 
 ```bash
 TOKEN=eyJraWQiOiJldjFpay1DS3UzYjJXS3QzSVl1MlJZc3VJSzBBYUl3NkU4SDJf...
@@ -720,7 +719,7 @@ Log out of your Okta developer dashboard.
 
 Return to the [OIDC Debugger](https://oidcdebugger.com) and generate a new token.
 
-This time, log in as your new non-admin user. You'll be asked to choose a security question, after which you'll be redirected to the https://oidcdebugger.com/debug page where your token can be copied.
+This time, log in as your new non-admin user. You'll be asked to choose a security question, after which you'll be redirected to the `https://oidcdebugger.com/debug` page where your token can be copied.
 
 If you like, you can go to [jsonwebtoken.io](https://www.jsonwebtoken.io/) and decode your new token. In the payload, the *sub* claim will show the email/username of the user, and the *groups* claim will show only the *Everyone* group.
 
@@ -799,7 +798,7 @@ http POST :8080/kayaks name="sea2" owner="Andrew" value="500" makeModel="P&H" "A
 
 You'll get another 403. "Saving" is going to equal an HTML POST here.
 
-However, if you use a token generated from your original, admin account, it'll work. 
+However, if you use a token generated from your original, admin account, it'll work.
 
 **NOTE:** It's possible your token will be expired and you'll have to log out of developer.okta.com again and re-generate the token on the [OIDC Debugger](https://oidcdebugger.com/).
 
@@ -847,21 +846,22 @@ public interface CrudRepository<T, ID> extends Repository<T, ID> {
   void deleteAll(Iterable<? extends T> entities);
   void deleteAll();
 }
-``` 
-And that’s it! Pretty cool right? In this tutorial, you set up a PostgreSQL database, created a Spring Boot resource server that used Spring Data and JPA to persist a data model, and then turned this data model into a REST API with shockingly little code. Further, you used Okta to add OIDC authentication and OAuth 2.0 authorization to your server application. And finally, you implemented a simple group-based authorization scheme.  
+```
 
-If you’d like to check out this complete project, you can find the repo on GitHub at [@oktadeveloper/okta-spring-boot-jpa-example](https://github.com/oktadeveloper/okta-spring-boot-jpa-example).
+And that's it! Pretty cool right? In this tutorial, you set up a PostgreSQL database, created a Spring Boot resource server that used Spring Data and JPA to persist a data model, and then turned this data model into a REST API with shockingly little code. Further, you used Okta to add OIDC authentication and OAuth 2.0 authorization to your server application. And finally, you implemented a simple group-based authorization scheme.  
+
+If you'd like to check out this complete project, you can find the repo on GitHub at [@oktadeveloper/okta-spring-boot-jpa-example](https://github.com/oktadeveloper/okta-spring-boot-jpa-example).
 
 Watch out for our next post in this series that will cover using a NoSQL database (MongoDB) with Spring WebFlux.
 
 ## Learn More about Spring Boot, Spring Security, and Secure Authentication
 
-If you’d like to learn more about Spring Boot, Spring Security, or modern application security, check out any of these great tutorials:
+If you'd like to learn more about Spring Boot, Spring Security, or modern application security, check out any of these great tutorials:
 
--   [Get Started with Spring Boot, OAuth 2.0, and Okta](/blog/2017/03/21/spring-boot-oauth)
--   [Add Single Sign-On to Your Spring Boot Web App in 15 Minutes](/blog/2017/11/20/add-sso-spring-boot-15-min)
--   [Secure Your Spring Boot Application with Multi-Factor Authentication](/blog/2018/06/12/mfa-in-spring-boot)
--   [Build a Secure API with Spring Boot and GraphQL](/blog/2018/08/16/secure-api-spring-boot-graphql)
+- [Get Started with Spring Boot, OAuth 2.0, and Okta](/blog/2017/03/21/spring-boot-oauth)
+- [Add Single Sign-On to Your Spring Boot Web App in 15 Minutes](/blog/2017/11/20/add-sso-spring-boot-15-min)
+- [Secure Your Spring Boot Application with Multi-Factor Authentication](/blog/2018/06/12/mfa-in-spring-boot)
+- [Build a Secure API with Spring Boot and GraphQL](/blog/2018/08/16/secure-api-spring-boot-graphql)
 
 If you want to dive deeper, take a look at the [Okta Spring Boot Starter GitHub project](https://github.com/okta/okta-spring-boot).
 
