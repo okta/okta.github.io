@@ -3604,7 +3604,7 @@ curl -v -X GET \
 -H "Accept: application/json" \
 -H "Content-Type: application/json" \
 -H "Authorization: SSWS ${api_token}" \
- "GET https://{yourOktaDomain}/api/v1/idps/0oa4lb6lbtmH355Hx0h7/users"
+"https://{yourOktaDomain}/api/v1/idps/0oa4lb6lbtmH355Hx0h7/users"
 ~~~
 
 ##### Response Example
@@ -3815,7 +3815,7 @@ curl -v -X GET \
 -H "Accept: application/json" \
 -H "Content-Type: application/json" \
 -H "Authorization: SSWS ${api_token}" \
-    'https://{yourOktaDomain}/api/v1/idps/0oa62bfdiumsUndnZ0h7/users/00u5t60iloOHN9pBi0h7' \
+"https://{yourOktaDomain}/api/v1/idps/0oa62bfdiumsUndnZ0h7/users/00u5t60iloOHN9pBi0h7"
 ~~~
 
 ##### Response Example
