@@ -60,9 +60,9 @@ Adds a linked object definition to the user profile schema. The `name` field fou
 
 ~~~sh
 curl -X POST \
--H 'Accept: application/json' \
--H 'Authorization: SSWS ${api_token}' \
--H 'Content-Type: application/json' \
+-H "Accept: application/json" \
+-H "Content-Type: application/json" \
+-H "Authorization: SSWS ${api_token}" \
 -d '{
   "primary": {
     "name": "manager",
@@ -131,9 +131,9 @@ You can specify either the `primary` name or the `associated` name.
 
 ~~~sh
 curl -X POST \
--H 'Accept: application/json' \
--H 'Content-Type: application/json' \
--H 'Authorization: SSWS ${api_token}' \
+-H "Accept: application/json" \
+-H "Content-Type: application/json" \
+-H "Authorization: SSWS ${api_token}" \
 "https://{yourOktaDomain}/api/v1/meta/schemas/user/default/linkedObjects/manager"
 ~~~
 
