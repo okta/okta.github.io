@@ -174,29 +174,29 @@ curl -v -X POST \
 -H "Content-Type: application/json" \
 -H "Authorization: SSWS ${api_token}" \
 -d '{
-    "definitions": {
-      "custom": {
-        "id": "#custom",
-        "type": "object",
-        "properties": {
-          "twitterUserName": {
-            "title": "Twitter username",
-            "description": "Twitter Username",
-            "type": "string",
-            "required": false,
-            "minLength": 1,
-            "maxLength": 20,
-            "permissions": [
-              {
-                "principal": "SELF",
-                "action": "READ_WRITE"
-              }
-            ]
-          }
-        },
-        "required": []
-      }
+  "definitions": {
+    "custom": {
+      "id": "#custom",
+      "type": "object",
+      "properties": {
+        "twitterUserName": {
+          "title": "Twitter username",
+          "description": "Twitter Username",
+          "type": "string",
+          "required": false,
+          "minLength": 1,
+          "maxLength": 20,
+          "permissions": [
+            {
+              "principal": "SELF",
+              "action": "READ_WRITE"
+            }
+          ]
+        }
+      },
+      "required": []
     }
+  }
 }' "https://{yourOktaDomain}/api/v1/meta/schemas/user/default"
 ~~~
 
@@ -343,18 +343,38 @@ curl -v -X POST \
 -H "Content-Type: application/json" \
 -H "Authorization: SSWS ${api_token}" \
 -d '{
-  {
-    "definitions": {
-      "base": {
-        "id": "#base",
-        "type": "object",
-        "properties": {
-          "firstName": {
-          "title": "First name",
+  "definitions": {
+    "base": {
+      "id": "#base",
+      "type": "object",
+      "properties": {
+        "firstName": {
+        "title": "First name",
+        "type": "string",
+        "required": false,
+        "mutability": "READ_WRITE",
+        "scope": "NONE",
+        "permissions": [
+          {
+            "principal": "SELF",
+            "action": "READ_ONLY"
+          }
+        ]
+      }
+    },
+    "required": []
+  },
+    "custom": {
+      "id": "#custom",
+      "type": "object",
+      "properties": {
+        "twitterUserName": {
+          "title": "Twitter username",
+          "description": "User'\''s username for twitter.com",
           "type": "string",
           "required": false,
-          "mutability": "READ_WRITE",
-          "scope": "NONE",
+          "minLength": 1,
+          "maxLength": 10,
           "permissions": [
             {
               "principal": "SELF",
@@ -364,28 +384,6 @@ curl -v -X POST \
         }
       },
       "required": []
-    },
-      "custom": {
-        "id": "#custom",
-        "type": "object",
-        "properties": {
-          "twitterUserName": {
-            "title": "Twitter username",
-            "description": "User'\''s username for twitter.com",
-            "type": "string",
-            "required": false,
-            "minLength": 1,
-            "maxLength": 10,
-            "permissions": [
-              {
-                "principal": "SELF",
-                "action": "READ_ONLY"
-              }
-            ]
-          }
-        },
-        "required": []
-      }
     }
   }
 }' "https://{yourOktaDomain}/api/v1/meta/schemas/user/default"
@@ -537,16 +535,14 @@ curl -v -X POST \
 -H "Content-Type: application/json" \
 -H "Authorization: SSWS ${api_token}" \
 -d '{
-  {
-    "definitions": {
-      "custom": {
-        "id": "#custom",
-        "type": "object",
-        "properties": {
-          "twitterUserName": null
-        },
-        "required": []
-      }
+  "definitions": {
+    "custom": {
+      "id": "#custom",
+      "type": "object",
+      "properties": {
+        "twitterUserName": null
+      },
+      "required": []
     }
   }
 }' "https://{yourOktaDomain}/api/v1/meta/schemas/user/default"
@@ -767,23 +763,21 @@ curl -v -X POST \
 -H "Content-Type: application/json" \
 -H "Authorization: SSWS ${api_token}" \
 -d '{
-  {
-    "definitions": {
-      "custom": {
-        "id": "#custom",
-        "type": "object",
-        "properties": {
-          "twitterUserName": {
-            "title": "Twitter username",
-            "description": "User'\''s username for twitter.com",
-            "type": "string",
-            "required": false,
-            "minLength": 1,
-            "maxLength": 20,
-          }
-        },
-        "required": []
-      }
+  "definitions": {
+    "custom": {
+      "id": "#custom",
+      "type": "object",
+      "properties": {
+        "twitterUserName": {
+          "title": "Twitter username",
+          "description": "User'\''s username for twitter.com",
+          "type": "string",
+          "required": false,
+          "minLength": 1,
+          "maxLength": 20,
+        }
+      },
+      "required": []
     }
   }
 }' "https://{yourOktaDomain}/api/v1/meta/schemas/apps/{instanceId}/default"
@@ -878,23 +872,21 @@ curl -v -X POST \
 -H "Content-Type: application/json" \
 -H "Authorization: SSWS ${api_token}" \
 -d '{
-  {
-    "definitions": {
-      "custom": {
-        "id": "#custom",
-        "type": "object",
-        "properties": {
-          "twitterUserName": {
-            "title": "Twitter username",
-            "description": "User'\''s username for twitter.com",
-            "type": "string",
-            "required": false,
-            "minLength": 1,
-            "maxLength": 10,
-          }
-        },
-        "required": []
-      }
+  "definitions": {
+    "custom": {
+      "id": "#custom",
+      "type": "object",
+      "properties": {
+        "twitterUserName": {
+          "title": "Twitter username",
+          "description": "User'\''s username for twitter.com",
+          "type": "string",
+          "required": false,
+          "minLength": 1,
+          "maxLength": 10,
+        }
+      },
+      "required": []
     }
   }
 }' "https://{yourOktaDomain}/api/v1/meta/schemas/apps/{instanceId}/default"
@@ -991,16 +983,14 @@ curl -v -X POST \
 -H "Content-Type: application/json" \
 -H "Authorization: SSWS ${api_token}" \
 -d '{
-  {
-    "definitions": {
-      "custom": {
-        "id": "#custom",
-        "type": "object",
-        "properties": {
-          "twitterUserName": null
-        },
-        "required": []
-      }
+  "definitions": {
+    "custom": {
+      "id": "#custom",
+      "type": "object",
+      "properties": {
+        "twitterUserName": null
+      },
+      "required": []
     }
   }
 }' "https://{yourOktaDomain}/api/v1/meta/schemas/apps/{instanceId}/default"
