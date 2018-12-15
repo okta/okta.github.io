@@ -69,75 +69,75 @@ curl -v -X POST \
 -H "Content-Type: application/json" \
 -H "Authorization: SSWS ${api_token}" \
 -d '{
-      "type": "SAML2",
-      "name": "Example IdP",
-      "protocol": {
-        "type": "SAML2",
-        "endpoints": {
-          "sso": {
-            "url": "https://idp.example.com",
-            "binding": "HTTP-POST",
-            "destination": "https://idp.example.com"
-          },
-          "acs": {
-            "binding": "HTTP-POST",
-            "type": "INSTANCE"
-          }
-        },
-        "algorithms": {
-          "request": {
-            "signature": {
-              "algorithm": "SHA-256",
-              "scope": "REQUEST"
-            }
-          },
-          "response": {
-            "signature": {
-              "algorithm": "SHA-256",
-              "scope": "ANY"
-            }
-          }
-        },
-        "credentials": {
-          "trust": {
-            "issuer": "https://idp.example.com",
-            "audience": "http://www.okta.com/123",
-            "kid": "your-key-id"
-          }
+  "type": "SAML2",
+  "name": "Example IdP",
+  "protocol": {
+    "type": "SAML2",
+    "endpoints": {
+      "sso": {
+        "url": "https://idp.example.com",
+        "binding": "HTTP-POST",
+        "destination": "https://idp.example.com"
+      },
+      "acs": {
+        "binding": "HTTP-POST",
+        "type": "INSTANCE"
+      }
+    },
+    "algorithms": {
+      "request": {
+        "signature": {
+          "algorithm": "SHA-256",
+          "scope": "REQUEST"
         }
       },
-      "policy": {
-        "provisioning": {
-          "action": "AUTO",
-          "profileMaster": true,
-          "groups": {
-            "action": "NONE"
-          },
-          "conditions": {
-            "deprovisioned": {
-              "action": "NONE"
-            },
-            "suspended": {
-              "action": "NONE"
-            }
-          }
-        },
-        "accountLink": {
-          "filter": null,
-          "action": "AUTO"
-        },
-        "subject": {
-          "userNameTemplate": {
-            "template": "saml.subjectNameId"
-          },
-          "format": [
-              "urn:oasis:names:tc:SAML:1.1:nameid-format:unspecified"
-          ],
-          "filter": "(\\S+@example\\.com)",
-          "matchType": "USERNAME"
+      "response": {
+        "signature": {
+          "algorithm": "SHA-256",
+          "scope": "ANY"
         }
       }
-    }' "https://{yourOktaDomain}/api/v1/idps"
+    },
+    "credentials": {
+      "trust": {
+        "issuer": "https://idp.example.com",
+        "audience": "http://www.okta.com/123",
+        "kid": "your-key-id"
+      }
+    }
+  },
+  "policy": {
+    "provisioning": {
+      "action": "AUTO",
+      "profileMaster": true,
+      "groups": {
+        "action": "NONE"
+      },
+      "conditions": {
+        "deprovisioned": {
+          "action": "NONE"
+        },
+        "suspended": {
+          "action": "NONE"
+        }
+      }
+    },
+    "accountLink": {
+      "filter": null,
+      "action": "AUTO"
+    },
+    "subject": {
+      "userNameTemplate": {
+        "template": "saml.subjectNameId"
+      },
+      "format": [
+          "urn:oasis:names:tc:SAML:1.1:nameid-format:unspecified"
+      ],
+      "filter": "(\\S+@example\\.com)",
+      "matchType": "USERNAME"
+    }
+  }
+}' "https://{yourOktaDomain}/api/v1/idps"
 ~~~
 
 ##### Response Example
@@ -280,52 +280,52 @@ curl -v -X POST \
 -H "Content-Type: application/json" \
 -H "Authorization: SSWS ${api_token}" \
 -d '{
-      "type": "FACEBOOK",
-      "name": "Facebook",
-      "protocol": {
-        "type": "OAUTH2",
-        "scopes": [
-          "public_profile",
-          "email"
-        ],
-        "credentials": {
-          "client": {
-            "client_id": "your-client-id",
-            "client_secret": "your-client-secret"
-          }
-        }
-      },
-      "policy": {
-        "provisioning": {
-          "action": "AUTO",
-          "profileMaster": true,
-          "groups": {
-            "action": "NONE"
-          },
-          "conditions": {
-            "deprovisioned": {
-              "action": "NONE"
-            },
-            "suspended": {
-              "action": "NONE"
-            }
-          }
-        },
-        "accountLink": {
-          "filter": null,
-          "action": "AUTO"
-        },
-        "subject": {
-          "userNameTemplate": {
-            "template": "idpuser.userPrincipalName",
-            "type": null
-          },
-          "filter": null,
-          "matchType": "USERNAME"
-        },
-        "maxClockSkew": 0
+  "type": "FACEBOOK",
+  "name": "Facebook",
+  "protocol": {
+    "type": "OAUTH2",
+    "scopes": [
+      "public_profile",
+      "email"
+    ],
+    "credentials": {
+      "client": {
+        "client_id": "your-client-id",
+        "client_secret": "your-client-secret"
       }
-    }' "https://{yourOktaDomain}/api/v1/idps"
+    }
+  },
+  "policy": {
+    "provisioning": {
+      "action": "AUTO",
+      "profileMaster": true,
+      "groups": {
+        "action": "NONE"
+      },
+      "conditions": {
+        "deprovisioned": {
+          "action": "NONE"
+        },
+        "suspended": {
+          "action": "NONE"
+        }
+      }
+    },
+    "accountLink": {
+      "filter": null,
+      "action": "AUTO"
+    },
+    "subject": {
+      "userNameTemplate": {
+        "template": "idpuser.userPrincipalName",
+        "type": null
+      },
+      "filter": null,
+      "matchType": "USERNAME"
+    },
+    "maxClockSkew": 0
+  }
+}' "https://{yourOktaDomain}/api/v1/idps"
 ~~~
 
 ##### Response Example
@@ -429,53 +429,53 @@ curl -v -X POST \
 -H "Content-Type: application/json" \
 -H "Authorization: SSWS ${api_token}" \
 -d '{
-      "type": "GOOGLE",
-      "name": "Google",
-      "protocol": {
-        "type": "OAUTH2",
-        "scopes": [
-          "profile",
-          "email",
-          "openid"
-        ],
-        "credentials": {
-          "client": {
-            "client_id": "your-client-id",
-            "client_secret": "your-client-secret"
-          }
-        }
-      },
-      "policy": {
-        "provisioning": {
-          "action": "AUTO",
-          "profileMaster": true,
-          "groups": {
-            "action": "NONE"
-          },
-          "conditions": {
-            "deprovisioned": {
-              "action": "NONE"
-            },
-            "suspended": {
-              "action": "NONE"
-            }
-          }
-        },
-        "accountLink": {
-          "filter": null,
-          "action": "AUTO"
-        },
-        "subject": {
-          "userNameTemplate": {
-            "template": "idpuser.userPrincipalName",
-            "type": null
-          },
-          "filter": null,
-          "matchType": "USERNAME"
-        },
-        "maxClockSkew": 0
+  "type": "GOOGLE",
+  "name": "Google",
+  "protocol": {
+    "type": "OAUTH2",
+    "scopes": [
+      "profile",
+      "email",
+      "openid"
+    ],
+    "credentials": {
+      "client": {
+        "client_id": "your-client-id",
+        "client_secret": "your-client-secret"
       }
-    }' "https://{yourOktaDomain}/api/v1/idps"
+    }
+  },
+  "policy": {
+    "provisioning": {
+      "action": "AUTO",
+      "profileMaster": true,
+      "groups": {
+        "action": "NONE"
+      },
+      "conditions": {
+        "deprovisioned": {
+          "action": "NONE"
+        },
+        "suspended": {
+          "action": "NONE"
+        }
+      }
+    },
+    "accountLink": {
+      "filter": null,
+      "action": "AUTO"
+    },
+    "subject": {
+      "userNameTemplate": {
+        "template": "idpuser.userPrincipalName",
+        "type": null
+      },
+      "filter": null,
+      "matchType": "USERNAME"
+    },
+    "maxClockSkew": 0
+  }
+}' "https://{yourOktaDomain}/api/v1/idps"
 ~~~
 
 ##### Response Example
@@ -580,52 +580,52 @@ curl -v -X POST \
 -H "Content-Type: application/json" \
 -H "Authorization: SSWS ${api_token}" \
 -d '{
-      "type": "LINKEDIN",
-      "name": "LinkedIn",
-      "protocol": {
-        "type": "OAUTH2",
-        "scopes": [
-          "r_basicprofile",
-          "r_emailaddress"
-        ],
-        "credentials": {
-          "client": {
-            "client_id": "your-client-id",
-            "client_secret": "your-client-secret"
-          }
-        }
-      },
-      "policy": {
-        "provisioning": {
-          "action": "AUTO",
-          "profileMaster": true,
-          "groups": {
-            "action": "NONE"
-          },
-          "conditions": {
-            "deprovisioned": {
-              "action": "NONE"
-            },
-            "suspended": {
-              "action": "NONE"
-            }
-          }
-        },
-        "accountLink": {
-          "filter": null,
-          "action": "AUTO"
-        },
-        "subject": {
-          "userNameTemplate": {
-            "template": "idpuser.userPrincipalName",
-            "type": null
-          },
-          "filter": null,
-          "matchType": "USERNAME"
-        },
-        "maxClockSkew": 0
+  "type": "LINKEDIN",
+  "name": "LinkedIn",
+  "protocol": {
+    "type": "OAUTH2",
+    "scopes": [
+      "r_basicprofile",
+      "r_emailaddress"
+    ],
+    "credentials": {
+      "client": {
+        "client_id": "your-client-id",
+        "client_secret": "your-client-secret"
       }
-    }' "https://{yourOktaDomain}/api/v1/idps"
+    }
+  },
+  "policy": {
+    "provisioning": {
+      "action": "AUTO",
+      "profileMaster": true,
+      "groups": {
+        "action": "NONE"
+      },
+      "conditions": {
+        "deprovisioned": {
+          "action": "NONE"
+        },
+        "suspended": {
+          "action": "NONE"
+        }
+      }
+    },
+    "accountLink": {
+      "filter": null,
+      "action": "AUTO"
+    },
+    "subject": {
+      "userNameTemplate": {
+        "template": "idpuser.userPrincipalName",
+        "type": null
+      },
+      "filter": null,
+      "matchType": "USERNAME"
+    },
+    "maxClockSkew": 0
+  }
+}' "https://{yourOktaDomain}/api/v1/idps"
 ~~~
 
 ##### Response Example
@@ -729,49 +729,49 @@ curl -v -X POST \
 -H "Content-Type: application/json" \
 -H "Authorization: SSWS ${api_token}" \
 -d '{
-       "type":"MICROSOFT",
-       "name":"Microsoft",
-       "protocol": {
-            "type": "OIDC",
-            "scopes": [ "openid", "email", "profile", "https://graph.microsoft.com/User.Read" ],
-            "credentials": {
-                "client": {
-                    "client_id": "your-client-id",
-                    "client_secret": "your-client-secret"
-                }
-            }
+  "type": "MICROSOFT",
+  "name": "Microsoft",
+  "protocol": {
+    "type": "OIDC",
+    "scopes": ["openid", "email", "profile", "https://graph.microsoft.com/User.Read"],
+    "credentials": {
+      "client": {
+        "client_id": "your-client-id",
+        "client_secret": "your-client-secret"
+      }
+    }
+  },
+  "policy": {
+    "provisioning": {
+      "action": "AUTO",
+      "profileMaster": true,
+      "groups": {
+        "action": "NONE"
+      },
+      "conditions": {
+        "deprovisioned": {
+          "action": "NONE"
         },
-        "policy": {
-            "provisioning": {
-                "action": "AUTO",
-                "profileMaster": true,
-                "groups": {
-                    "action": "NONE"
-                },
-                "conditions": {
-                  "deprovisioned": {
-                    "action": "NONE"
-                  },
-                  "suspended": {
-                    "action": "NONE"
-                  }
-                }
-            },
-            "accountLink": {
-                "filter": null,
-                "action": "AUTO"
-            },
-            "subject": {
-                "userNameTemplate": {
-                    "template": "idpuser.userPrincipalName",
-                    "type": null
-                },
-                "filter": null,
-                "matchType": "USERNAME"
-            },
-            "maxClockSkew": 0
+        "suspended": {
+          "action": "NONE"
         }
-     }
+      }
+    },
+    "accountLink": {
+      "filter": null,
+      "action": "AUTO"
+    },
+    "subject": {
+      "userNameTemplate": {
+        "template": "idpuser.userPrincipalName",
+        "type": null
+      },
+      "filter": null,
+      "matchType": "USERNAME"
+    },
+    "maxClockSkew": 0
+  }
+}' "https://{yourOktaDomain}/api/v1/idps"
 ~~~
 
 ##### Response Example
@@ -890,8 +890,7 @@ curl -v -X GET \
 -H "Accept: application/json" \
 -H "Content-Type: application/json" \
 -H "Authorization: SSWS ${api_token}" \
--d '{
-}' "https://{yourOktaDomain}/api/v1/idps/0oa62bfdjnK55Z5x80h7"
+"https://{yourOktaDomain}/api/v1/idps/0oa62bfdjnK55Z5x80h7"
 ~~~
 
 ##### Response Example
@@ -1025,8 +1024,7 @@ curl -v -X GET \
 -H "Accept: application/json" \
 -H "Content-Type: application/json" \
 -H "Authorization: SSWS ${api_token}" \
--d '{
-}' "https://{yourOktaDomain}/api/v1/idps?limit=20"
+"https://{yourOktaDomain}/api/v1/idps?limit=20"
 ~~~
 
 ##### Response Example
@@ -1408,8 +1406,7 @@ curl -v -X GET \
 -H "Accept: application/json" \
 -H "Content-Type: application/json" \
 -H "Authorization: SSWS ${api_token}" \
--d '{
-}' "https://{yourOktaDomain}/api/v1/idps?q=Example&limit=10"
+"https://{yourOktaDomain}/api/v1/idps?q=Example&limit=10"
 ~~~
 
 ##### Response Example
@@ -1544,8 +1541,7 @@ curl -v -X GET \
 -H "Accept: application/json" \
 -H "Content-Type: application/json" \
 -H "Authorization: SSWS ${api_token}" \
--d '{
-}' "https://{yourOktaDomain}/api/v1/idps?type=SAML2"
+"https://{yourOktaDomain}/api/v1/idps?type=SAML2"
 ~~~
 
 ##### Response Example
@@ -2173,8 +2169,7 @@ curl -v -X GET \
 -H "Accept: application/json" \
 -H "Content-Type: application/json" \
 -H "Authorization: SSWS ${api_token}" \
--d '{
-}' "https://{yourOktaDomain}/api/v1/idps/tx/satvklBYyJmwa6qOg0g3"
+"https://{yourOktaDomain}/api/v1/idps/tx/satvklBYyJmwa6qOg0g3"
 ~~~
 
 ##### Response Example
@@ -2250,8 +2245,7 @@ curl -v -X GET \
 -H "Accept: application/json" \
 -H "Content-Type: application/json" \
 -H "Authorization: SSWS ${api_token}" \
--d '{
-}' "https://{yourOktaDomain}/api/v1/idps/tx/satvklBYyJmwa6qOg0g3/source"
+"https://{yourOktaDomain}/api/v1/idps/tx/satvklBYyJmwa6qOg0g3/source"
 ~~~
 
 ##### Response Example
@@ -2303,8 +2297,7 @@ curl -v -X GET \
 -H "Accept: application/json" \
 -H "Content-Type: application/json" \
 -H "Authorization: SSWS ${api_token}" \
--d '{
-}' "https://{yourOktaDomain}/api/v1/idps/tx/satvklBYyJmwa6qOg0g3/source"
+"https://{yourOktaDomain}/api/v1/idps/tx/satvklBYyJmwa6qOg0g3/source"
 ~~~
 
 ##### Response Example
@@ -2363,8 +2356,7 @@ curl -v -X GET \
 -H "Accept: application/json" \
 -H "Content-Type: application/json" \
 -H "Authorization: SSWS ${api_token}" \
--d '{
-}' "https://{yourOktaDomain}/api/v1/idps/tx/satvklBYyJmwa6qOg0g3/users"
+"https://{yourOktaDomain}/api/v1/idps/tx/satvklBYyJmwa6qOg0g3/users"
 ~~~
 
 ##### Response Example
@@ -2758,8 +2750,7 @@ curl -v -X GET \
 -H "Accept: application/json" \
 -H "Content-Type: application/json" \
 -H "Authorization: SSWS ${api_token}" \
--d '{
-}' "https://{yourOktaDomain}/api/v1/idps/credentials/keys/your-key-id"
+"https://{yourOktaDomain}/api/v1/idps/credentials/keys/your-key-id"
 ~~~
 
 ##### Response Example
@@ -2824,8 +2815,7 @@ curl -v -X GET \
 -H "Accept: application/json" \
 -H "Content-Type: application/json" \
 -H "Authorization: SSWS ${api_token}" \
--d '{
-}' "https://{yourOktaDomain}/api/v1/idps/credentials/keys"
+"https://{yourOktaDomain}/api/v1/idps/credentials/keys"
 ~~~
 
 ##### Response Example
@@ -3007,8 +2997,7 @@ curl -v -X GET \
 -H "Accept: application/json" \
 -H "Content-Type: application/json" \
 -H "Authorization: SSWS ${api_token}" \
--d '{
-}' "https://{yourOktaDomain}/api/v1/idps/0oad5lTSBOMUBOBVVQSC/credentials/keys"
+"https://{yourOktaDomain}/api/v1/idps/0oad5lTSBOMUBOBVVQSC/credentials/keys"
 ~~~
 
 ##### Response Example
@@ -3070,8 +3059,7 @@ curl -v -X GET \
 -H "Accept: application/json" \
 -H "Content-Type: application/json" \
 -H "Authorization: SSWS ${api_token}" \
--d '{
-}' "https://{yourOktaDomain}/api/v1/idps/0oad5lTSBOMUBOBVVQSC/credentials/keys/akm5hvbbevE341ovl0h7"
+"https://{yourOktaDomain}/api/v1/idps/0oad5lTSBOMUBOBVVQSC/credentials/keys/akm5hvbbevE341ovl0h7"
 ~~~
 
 ##### Response Example
@@ -3451,8 +3439,7 @@ curl -v -X GET \
 -H "Accept: application/json" \
 -H "Content-Type: application/json" \
 -H "Authorization: SSWS ${api_token}" \
--d '{
-}' "https://{yourOktaDomain}/api/v1/idps/0oad5lTSBOMUBOBVVQSC/credentials/csrs"
+"https://{yourOktaDomain}/api/v1/idps/0oad5lTSBOMUBOBVVQSC/credentials/csrs"
 ~~~
 
 ##### Response Example
@@ -3541,8 +3528,7 @@ curl -v -X GET \
 -H "Accept: application/json" \
 -H "Content-Type: application/json" \
 -H "Authorization: SSWS ${api_token}" \
--d '{
-}' "https://{yourOktaDomain}/api/v1/idps/0oad5lTSBOMUBOBVVQSC/credentials/csrs/h9zkutaSe7fZX0SwN1GqDApofgD1OW8g2B5l2azha50"
+"https://{yourOktaDomain}/api/v1/idps/0oad5lTSBOMUBOBVVQSC/credentials/csrs/h9zkutaSe7fZX0SwN1GqDApofgD1OW8g2B5l2azha50"
 ~~~
 
 ##### Response Example
@@ -3672,8 +3658,7 @@ curl -v -X GET \
 -H "Accept: application/json" \
 -H "Content-Type: application/json" \
 -H "Authorization: SSWS ${api_token}" \
--d '{
-}' "https://{yourOktaDomain}/api/v1/users/00ub0oNGTSWTBKOLGLNR/idps"
+"https://{yourOktaDomain}/api/v1/users/00ub0oNGTSWTBKOLGLNR/idps"
 ~~~
 
 ##### Response Example
@@ -3902,7 +3887,7 @@ curl -v -X POST \
 -H "Content-Type: application/json" \
 -H "Authorization: SSWS ${api_token}" \
 -d '{
-  "externalId" : "121749775026145"
+  "externalId": "121749775026145"
 }' "https://{yourOktaDomain}/api/v1/idps/0oa62b57p7c8PaGpU0h7/users/00ub0oNGTSWTBKOLGLNR"
 ~~~
 
@@ -3978,7 +3963,7 @@ curl -v -X DELETE \
 -H "Content-Type: application/json" \
 -H "Authorization: SSWS ${api_token}" \
 -d '{
-}' "https://{yourOktaDomain}//api/v1/idps/0oa4lb6lbtmH355Hx0h7/users/00u5cl9lo7nMjHjPr0h7"
+}' "https://{yourOktaDomain}/api/v1/idps/0oa4lb6lbtmH355Hx0h7/users/00u5cl9lo7nMjHjPr0h7"
 ~~~
 
 ##### Response Example
@@ -4016,8 +4001,7 @@ curl -v -X GET \
 -H "Accept: application/json" \
 -H "Content-Type: application/json" \
 -H "Authorization: SSWS ${api_token}" \
--d '{
-}' "https://{yourOktaDomain}/api/v1/idps/0oa62b57p7c8PaGpU0h7/users/00ub0oNGTSWTBKOLGLNR/credentials/tokens"
+"https://{yourOktaDomain}/api/v1/idps/0oa62b57p7c8PaGpU0h7/users/00ub0oNGTSWTBKOLGLNR/credentials/tokens"
 ~~~
 
 ##### Response Example
