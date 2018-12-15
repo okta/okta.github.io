@@ -57,11 +57,12 @@ curl -v -X POST \
 -H "Accept: application/json" \
 -H "Content-Type: application/json" \
 -H "Authorization: SSWS ${api_token}" \
--d '{ "name": "Sample Authorization Server",
-      "description": "Sample Authorization Server description",
-      "audiences": [
-        "api://default"
-      ]
+-d '{
+  "name": "Sample Authorization Server",
+  "description": "Sample Authorization Server description",
+  "audiences": [
+    "api://default"
+  ]
 }' "https://{yourOktaDomain}/api/v1/authorizationServers"
 ~~~
 
@@ -152,16 +153,16 @@ Updates authorization server identified by `authServerId`.
 
 ~~~sh
 curl -X PUT \
-  -H 'Accept: application/json' \
-  -H 'Content-Type: application/json' \
-  -H "Authorization: SSWS ${api_token}" \
-  -d '{
-    "name": "New Authorization Server",
-    "description": "Authorization Server New Description",
-    "audiences": [
-      "api://default"
-    ]
-}'   "https://{yourOktaDomain}/api/v1/authorizationServers/aus1rqsshhhRoat780g7" \
+-H 'Accept: application/json' \
+-H 'Content-Type: application/json' \
+-H "Authorization: SSWS ${api_token}" \
+-d '{
+  "name": "New Authorization Server",
+  "description": "Authorization Server New Description",
+  "audiences": [
+    "api://default"
+  ]
+}' "https://{yourOktaDomain}/api/v1/authorizationServers/aus1rqsshhhRoat780g7"
 ~~~
 
 ##### Response Example
@@ -188,9 +189,9 @@ Deletes the Custom Authorization Server identified by `authServerId`.
 
 ~~~sh
 curl -X DELETE \
-  -H 'Accept: application/json' \
-  -H 'Content-Type: application/json' \
-  -H "Authorization: SSWS ${api_token}" \
+-H 'Accept: application/json' \
+-H 'Content-Type: application/json' \
+-H "Authorization: SSWS ${api_token}" \
 "https://{yourOktaDomain}/api/v1/authorizationServers/aus1rqsshhhRoat780g7" \
 ~~~
 
@@ -352,19 +353,19 @@ curl -v -X POST \
 -H "Accept: application/json" \
 -H "Content-Type: application/json" \
 -H "Authorization: SSWS ${api_token}" \
-  -d '{
-    "type": "OAUTH_AUTHORIZATION_POLICY",
-    "status": "ACTIVE",
-    "name": "Default Policy",
-    "description": "Default policy description",
-    "priority": 1,
-    "conditions": {
-        "clients": {
-            "include": [
-                "ALL_CLIENTS"
-            ]
-        }
+-d '{
+  "type": "OAUTH_AUTHORIZATION_POLICY",
+  "status": "ACTIVE",
+  "name": "Default Policy",
+  "description": "Default policy description",
+  "priority": 1,
+  "conditions": {
+    "clients": {
+      "include": [
+        "ALL_CLIENTS"
+      ]
     }
+  }
 }' "https://{yourOktaDomain}/api/v1/authorizationServers/ausnsopoM6vBRB3PD0g3/policies"
 ~~~
 
@@ -405,12 +406,12 @@ curl -v -X PUT \
   "priority": 1,
   "system": false,
   "conditions": {
-     "clients": {
-       "include": [
-          "ALL_CLIENTS"
-          ]
-       }
-   }
+    "clients": {
+      "include": [
+        "ALL_CLIENTS"
+      ]
+    }
+  }
 }' "https://{yourOktaDomain}/api/v1/authorizationServers/ausnsopoM6vBRB3PD0g3/policies/00p5m9xrrBffPd9ah0g4"
 ~~~
 
@@ -714,17 +715,17 @@ curl -v -X POST \
 -H "Content-Type: application/json" \
 -H "Authorization: SSWS ${api_token}" \
 -d '{
-     "name": "carDriving",
-     "status": "ACTIVE",
-     "claimType": "RESOURCE",
-     "valueType": "EXPRESSION",
-     "value": "\"driving!\"",
-     "conditions": {
-       "scopes": [
-         "car:drive"
-         ]
-       }
-    }' "https://{yourOktaDomain}/api/v1/authorizationServers/ausnsopoM6vBRB3PD0g3/claims"
+  "name": "carDriving",
+  "status": "ACTIVE",
+  "claimType": "RESOURCE",
+  "valueType": "EXPRESSION",
+  "value": "\"driving!\"",
+  "conditions": {
+    "scopes": [
+      "car:drive"
+    ]
+  }
+}' "https://{yourOktaDomain}/api/v1/authorizationServers/ausnsopoM6vBRB3PD0g3/claims"
 ~~~
 
 ##### Response Example
@@ -756,19 +757,18 @@ curl -v -X PUT \
 -H "Content-Type: application/json" \
 -H "Authorization: SSWS ${api_token}" \
 -d '{
-     "name": "carDriving",
-     "status": "ACTIVE",
-     "claimType": "RESOURCE",
-     "valueType": "EXPRESSION",
-     "value": "\"driving!\"",
-     "alwaysIncludeInToken": "true",
-     "system": "false",
-     "conditions": {
-       "scopes": [
-          "car:drive"
-         ]
-       }
-    }'
+  "name": "carDriving",
+  "status": "ACTIVE",
+  "claimType": "RESOURCE",
+  "valueType": "EXPRESSION",
+  "value": "\"driving!\"",
+  "alwaysIncludeInToken": "true",
+  "system": "false",
+  "conditions": {
+    "scopes": [
+      "car:drive"
+    ]
+  }
 }' "https://{yourOktaDomain}/api/v1/authorizationServers/ausnsopoM6vBRB3PD0g3/claims/oclain6za1HQ0noop0h7"
 ~~~
 
