@@ -60,22 +60,22 @@ Adds a linked object definition to the user profile schema. The `name` field fou
 
 ~~~sh
 curl -X POST \
-  -H 'Accept: application/json' \
-  -H 'Authorization: SSWS ${api_token}' \
-  -H 'Content-Type: application/json' \
-  -d '{
-    "primary": {
-        "name": "manager",
-        "title": "Manager",
-        "description": "Manager link property",
-        "type": "USER"
-    },
-    "associated": {
-        "name": "subordinate",
-        "title": "Subordinate",
-        "description": "Subordinate link property",
-        "type": "USER"
-    }
+-H 'Accept: application/json' \
+-H 'Authorization: SSWS ${api_token}' \
+-H 'Content-Type: application/json' \
+-d '{
+  "primary": {
+    "name": "manager",
+    "title": "Manager",
+    "description": "Manager link property",
+    "type": "USER"
+  },
+  "associated": {
+    "name": "subordinate",
+    "title": "Subordinate",
+    "description": "Subordinate link property",
+    "type": "USER"
+  }
 }' "https://{yourOktaDomain}/api/v1/meta/schemas/user/default/linkedObjects"
 ~~~
 
@@ -131,10 +131,10 @@ You can specify either the `primary` name or the `associated` name.
 
 ~~~sh
 curl -X POST \
-  -H 'Accept: application/json' \
-  -H 'Authorization: SSWS ${api_token}' \
-  -H 'Content-Type: application/json' \
-  -d "https://{yourOktaDomain}/api/v1/meta/schemas/user/default/linkedObjects/manager"
+-H 'Accept: application/json' \
+-H 'Content-Type: application/json' \
+-H 'Authorization: SSWS ${api_token}' \
+"https://{yourOktaDomain}/api/v1/meta/schemas/user/default/linkedObjects/manager"
 ~~~
 
 ##### Response Example
@@ -454,7 +454,7 @@ curl -v -X GET \
 -H "Accept: application/json" \
 -H "Content-Type: application/json" \
 -H "Authorization: SSWS ${api_token}" \
-"https://{yourOktaDomain}//api/v1/users/00u5t60iloOHN9pBi0h7/linkedObjects/manager"
+"https://{yourOktaDomain}/api/v1/users/00u5t60iloOHN9pBi0h7/linkedObjects/manager"
 ~~~
 
 ##### Response Example
