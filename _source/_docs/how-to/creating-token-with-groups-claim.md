@@ -70,10 +70,10 @@ Send a request to `https://{yourOktaDomain}/api/v1/groups` and collect the IDs f
 
 ~~~sh
 curl -X GET \
-  -H 'accept: application/json' \
-  -H 'authorization: SSWS ${api_token}' \
-  -H 'content-type: application/json' \
-  "https://{yourOktaDomain}/api/v1/groups"
+-H 'accept: application/json' \
+-H 'authorization: SSWS ${api_token}' \
+-H 'content-type: application/json' \
+"https://{yourOktaDomain}/api/v1/groups"
 ~~~
 
    Response Example:
@@ -129,47 +129,47 @@ Request Example:
 
 ~~~sh
 curl -X PUT \
-  https://{yourOktaDomain}/api/v1/apps/0oabskvc6442nkvQO0h7 \
-  -H 'accept: application/json' \
-  -H 'authorization: SSWS ${api_token}' \
-  -H 'cache-control: no-cache' \
-  -H 'content-type: application/json' \
-  -d '{
-    "name": "oidc_client",
-    "label": "Sample Client",
-    "status": "ACTIVE",
-    "signOnMode": "OPENID_CONNECT",
-    "credentials": {
-      "oauthClient": {
-        "token_endpoint_auth_method": "client_secret_post"
-      }
-    },
-    "settings": {
-      "oauthClient": {
-        "client_uri": "http://localhost:8080",
-        "logo_uri": "http://developer.okta.com/assets/images/logo-new.png",
-        "redirect_uris": [
-          "https://example.com/oauth2/callback",
-          "myapp://callback"
-        ],
-        "response_types": [
-          "token",
-          "id_token",
-          "code"
-        ],
-        "grant_types": [
-          "implicit",
-          "authorization_code"
-        ],
-        "application_type": "native"
-      }
-    },
-    "profile": {
-      "groupwhitelist": [
-        "00gbso71miOMjxHRW0h7"
-      ]
+"https://{yourOktaDomain}/api/v1/apps/0oabskvc6442nkvQO0h7" \
+-H 'accept: application/json' \
+-H 'authorization: SSWS ${api_token}' \
+-H 'cache-control: no-cache' \
+-H 'content-type: application/json' \
+-d '{
+  "name": "oidc_client",
+  "label": "Sample Client",
+  "status": "ACTIVE",
+  "signOnMode": "OPENID_CONNECT",
+  "credentials": {
+    "oauthClient": {
+      "token_endpoint_auth_method": "client_secret_post"
     }
-  }'
+  },
+  "settings": {
+    "oauthClient": {
+      "client_uri": "http://localhost:8080",
+      "logo_uri": "http://developer.okta.com/assets/images/logo-new.png",
+      "redirect_uris": [
+        "https://example.com/oauth2/callback",
+        "myapp://callback"
+      ],
+      "response_types": [
+        "token",
+        "id_token",
+        "code"
+      ],
+      "grant_types": [
+        "implicit",
+        "authorization_code"
+      ],
+      "application_type": "native"
+    }
+  },
+  "profile": {
+    "groupwhitelist": [
+      "00gbso71miOMjxHRW0h7"
+    ]
+  }
+}'
 ~~~
 
 You can add application groups, user groups, or both to the group whitelist, specified as an array of IDs.
@@ -198,11 +198,11 @@ Request Example for Okta Authorization Server:
 
 ~~~sh
 curl -X GET \
-  "https://{yourOktaDomain}/oauth2/v1/authorize?client_id=0oabskvc6442nkvQO0h7
-  &response_type=id_token
-  &response_mode=fragment&scope=openid%20groups
-  &redirect_uri=https%3A%2F%2Fexample.com
-  &state=myState&nonce=${yourNonceValue}' \
+"https://{yourOktaDomain}/oauth2/v1/authorize?client_id=0oabskvc6442nkvQO0h7
+&response_type=id_token
+&response_mode=fragment&scope=openid%20groups
+&redirect_uri=https%3A%2F%2Fexample.com
+&state=myState&nonce=${yourNonceValue}"
 ~~~
 
 #### Step Five: Decode the JWT to Verify
@@ -252,10 +252,10 @@ Request Example:
 
 ~~~sh
 curl -X GET \
-  -H 'accept: application/json' \
-  -H 'authorization: SSWS ${api_token}' \
-  -H 'content-type: application/json' \
-  "https://{yourOktaDomain}/api/v1/groups"
+-H 'accept: application/json' \
+-H 'authorization: SSWS ${api_token}' \
+-H 'content-type: application/json' \
+"https://{yourOktaDomain}/api/v1/groups"
 ~~~
 
 This example uses one `groupId` for simplicity's sake.
@@ -312,47 +312,47 @@ Request Example:
 
 ~~~sh
 curl -X POST \
-  https://{yourOktaDomain}/api/v1/apps/0oabskvc6442nkvQO0h7 \
-  -H 'accept: application/json' \
-  -H 'authorization: SSWS ${api_token}' \
-  -H 'cache-control: no-cache' \
-  -H 'content-type: application/json' \
-  -d '{
-    "name": "oidc_client",
-    "label": "Sample Client",
-    "status": "ACTIVE",
-    "signOnMode": "OPENID_CONNECT",
-    "credentials": {
-      "oauthClient": {
-        "token_endpoint_auth_method": "client_secret_post"
-      }
-    },
-    "settings": {
-      "oauthClient": {
-        "client_uri": "http://localhost:8080",
-        "logo_uri": "http://developer.okta.com/assets/images/logo-new.png",
-        "redirect_uris": [
-          "https://example.com/oauth2/callback",
-          "myapp://callback"
-        ],
-        "response_types": [
-          "token",
-          "id_token",
-          "code"
-        ],
-        "grant_types": [
-          "implicit",
-          "authorization_code"
-        ],
-        "application_type": "native"
-      }
-    },
-    "profile": {
-      "groupwhitelist": [
-        "00gbso71miOMjxHRW0h7"
-      ]
+"https://{yourOktaDomain}/api/v1/apps/0oabskvc6442nkvQO0h7" \
+-H 'accept: application/json' \
+-H 'authorization: SSWS ${api_token}' \
+-H 'cache-control: no-cache' \
+-H 'content-type: application/json' \
+-d '{
+  "name": "oidc_client",
+  "label": "Sample Client",
+  "status": "ACTIVE",
+  "signOnMode": "OPENID_CONNECT",
+  "credentials": {
+    "oauthClient": {
+      "token_endpoint_auth_method": "client_secret_post"
     }
-  }'
+  },
+  "settings": {
+    "oauthClient": {
+      "client_uri": "http://localhost:8080",
+      "logo_uri": "http://developer.okta.com/assets/images/logo-new.png",
+      "redirect_uris": [
+        "https://example.com/oauth2/callback",
+        "myapp://callback"
+      ],
+      "response_types": [
+        "token",
+        "id_token",
+        "code"
+      ],
+      "grant_types": [
+        "implicit",
+        "authorization_code"
+      ],
+      "application_type": "native"
+    }
+  },
+  "profile": {
+    "groupwhitelist": [
+      "00gbso71miOMjxHRW0h7"
+    ]
+  }
+}'
 ~~~
 
 You can add application groups, user groups or both to the group whitelist, specified as an array of IDs.
@@ -377,42 +377,42 @@ In the following two examples for creating the groups claim, the `name` for the 
 
 ~~~sh
 curl -X POST \
-  https://{yourOktaDomain}/api/v1/authorizationServers/ausain6z9zIedDCxB0h7/claims \
-  -H 'accept: application/json' \
-  -H 'authorization: SSWS ${api_token}' \
-  -H 'cache-control: no-cache' \
-  -H 'content-type: application/json' \
-  -d '{
-   "name": "groups",
-   "status": "ACTIVE",
-   "claimType": "RESOURCE",
-   "valueType": "EXPRESSION",
-   "value": "\"getFilteredGroups(app.profile.groupwhitelist, \"group.name\", 40)\"",
-   "conditions": {
-     "scopes": []
-   }
- }'
+"https://{yourOktaDomain}/api/v1/authorizationServers/ausain6z9zIedDCxB0h7/claims" \
+-H 'accept: application/json' \
+-H 'authorization: SSWS ${api_token}' \
+-H 'cache-control: no-cache' \
+-H 'content-type: application/json' \
+-d '{
+  "name": "groups",
+  "status": "ACTIVE",
+  "claimType": "RESOURCE",
+  "valueType": "EXPRESSION",
+  "value": "\"getFilteredGroups(app.profile.groupwhitelist, \"group.name\", 40)\"",
+  "conditions": {
+    "scopes": []
+  }
+}'
 ~~~
 
 ##### Request Example for ID Token
 
 ~~~sh
 curl -X POST \
-  https://{yourOktaDomain}/api/v1/authorizationServers/ausain6z9zIedDCxB0h7/claims \
-  -H 'accept: application/json' \
-  -H 'authorization: SSWS ${api_token}' \
-  -H 'cache-control: no-cache' \
-  -H 'content-type: application/json' \
-  -d '{
-   "name": "groups",
-   "status": "ACTIVE",
-   "claimType": "IDENTITY",
-   "valueType": "EXPRESSION",
-   "value": "\"getFilteredGroups(app.profile.groupwhitelist, \"group.name\", 40)\"",
-   "conditions": {
-     "scopes": []
-   }
- }'
+"https://{yourOktaDomain}/api/v1/authorizationServers/ausain6z9zIedDCxB0h7/claims" \
+-H 'accept: application/json' \
+-H 'authorization: SSWS ${api_token}' \
+-H 'cache-control: no-cache' \
+-H 'content-type: application/json' \
+-d '{
+  "name": "groups",
+  "status": "ACTIVE",
+  "claimType": "IDENTITY",
+  "valueType": "EXPRESSION",
+  "value": "\"getFilteredGroups(app.profile.groupwhitelist, \"group.name\", 40)\"",
+  "conditions": {
+    "scopes": []
+  }
+}'
  ~~~
 
 Be sure that you have a policy and rule set up in your Custom Authorization Server or the request in the next step won't work.
@@ -428,13 +428,13 @@ To obtain a token with the configured groups claim, send a request for an ID tok
 ##### Request Example for Custom Authorization Server:
 
 ~~~sh
- curl -X GET \
-  'https://{yourOktaDomain}/oauth2/ausain6z9zIedDCxB0h7/v1/authorize?client_id=0oabskvc6442nkvQO0h7
-    &response_type=id_token
-    &response_mode=fragment
-    &scope=groups%20openid
-    &redirect_uri=https%3A%2F%2Fexample.com
-    &state=myState&nonce=${myNonceValue}' \
+curl -X GET \
+"https://{yourOktaDomain}/oauth2/ausain6z9zIedDCxB0h7/v1/authorize?client_id=0oabskvc6442nkvQO0h7
+&response_type=id_token
+&response_mode=fragment
+&scope=groups%20openid
+&redirect_uri=https%3A%2F%2Fexample.com
+&state=myState&nonce=${myNonceValue}"
  ~~~
 
 >Note:
