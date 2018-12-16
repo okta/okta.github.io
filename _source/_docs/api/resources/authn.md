@@ -886,15 +886,15 @@ Note:
 {:.api .api-request .api-request-example}
 
 ~~~sh
-curl -X POST \
-  -H 'Accept: application/json' \
-  -H 'Authorization: SSWS ${api_token}' \
-  -H 'Cache-Control: no-cache' \
-  -H 'Content-Type: application/json' \
-  -H 'X-Fowarded-For: 23.235.46.133' \
-  -H "User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/537.36" \
-  -H 'X-Device-Fingerprint: ${device_fingerprint}' \
-  -d '{
+curl -v -X POST \
+-H 'Accept: application/json' \
+-H 'Authorization: SSWS ${api_token}' \
+-H 'Cache-Control: no-cache' \
+-H 'Content-Type: application/json' \
+-H 'X-Fowarded-For: 23.235.46.133' \
+-H "User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/537.36" \
+-H 'X-Device-Fingerprint: ${device_fingerprint}' \
+-d '{
   "username": "${username}",
   "password" : "${password}",
   "relayState": "http://example.com",
@@ -2083,6 +2083,7 @@ curl -v -X POST \
   "provider": "OKTA",
   "profile": {
     "phoneNumber": "+1-555-415-1337"
+  }
 }' "https://{yourOktaDomain}/api/v1/authn/factors/mbl198rKSEWOSKRIVIFT/lifecycle/resend"
 ~~~
 
@@ -3187,7 +3188,7 @@ curl -v -X POST \
 -H "Accept: application/json" \
 -H "Content-Type: application/json" \
 -d '{
-  "stateToken": "007ucIX7PATyn94hsHfOLVaXAmOBkKHWnOOLG43bsb",
+  "stateToken": "007ucIX7PATyn94hsHfOLVaXAmOBkKHWnOOLG43bsb"
 }' "https://{yourOktaDomain}/api/v1/authn/factors/opfh52xcuft3J4uZc0g3/lifecycle/activate"
 ~~~
 
@@ -3531,7 +3532,6 @@ curl -v -X POST \
   }
 }' "https://{yourOktaDomain}/api/v1/authn/factors/opfh52xcuft3J4uZc0g3/lifecycle/activate/sms"
 ~~~
-
 
 ###### Send Activation Links Response Example
 {:.api .api-response .api-response-example}
@@ -4696,7 +4696,7 @@ curl -v -X POST \
 -d '{
   "stateToken": "${stateToken}",
   "clientData":"eyAiY2hhbGxlbmdlIjogIlJ6ZDhQbEJEWUEyQ0VsbXVGcHlMIiwgIm9yaWdpbiI6ICJodHRwczpcL1wvc25hZ2FuZGxhLm9rdGFwcmV2aWV3LmNvbSIsICJ0eXAiOiAibmF2aWdhdG9yLmlkLmdldEFzc2VydGlvbiIgfQ==",
-  "signatureData":"AQAAAAEwRQIgRDEdmXr_jh1bEHtoUs1l7mMd-eUDO0eKqXKkrK5hUi0CIQDaVX030GgxVPr4RX3c4XgugildmHwDLwKRL0aMS3Sbpw==",
+  "signatureData":"AQAAAAEwRQIgRDEdmXr_jh1bEHtoUs1l7mMd-eUDO0eKqXKkrK5hUi0CIQDaVX030GgxVPr4RX3c4XgugildmHwDLwKRL0aMS3Sbpw=="
 }' "https://{yourOktaDomain}/api/v1/authn/factors/${factorId}/verify"
 ~~~
 
