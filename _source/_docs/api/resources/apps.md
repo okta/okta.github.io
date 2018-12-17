@@ -5500,6 +5500,7 @@ All application groups have the following properties:
 | id           | unique key of group                             | String                                                         | FALSE    | TRUE   | TRUE     |           |           |            |
 | lastUpdated  | timestamp when app group was last updated       | Date                                                           | FALSE    | FALSE  | TRUE     |           |           |            |
 | priority     | priority of group assignment                    | Number                                                         | TRUE     | FALSE  | FALSE    | 0         | 100       |            |
+| profile     | Valid JSON schema for specifying properties                    | [JSON](#profile-object)                                                         | TRUE     | FALSE  | FALSE    |          |        |            |
 | _links       | discoverable resources related to the app group | [JSON HAL](http://tools.ietf.org/html/draft-kelly-json-hal-05) | TRUE     | FALSE  | TRUE     |           |           |            |
 | _embedded    | embedded resources related to the app group     | [JSON HAL](http://tools.ietf.org/html/draft-kelly-json-hal-06) | TRUE     | FALSE  | TRUE     |           |           |            |
 |--------------+-------------------------------------------------+----------------------------------------------------------------|----------+--------|----------|-----------|-----------+------------|
