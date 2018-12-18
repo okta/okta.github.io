@@ -429,7 +429,7 @@ Get session information for the current user. Use this method in a browser based
 ~~~ sh
 curl -v -X GET \
 -H "Accept: application/json" \
--H "Cookie: ${okta_session_cookie}"
+-H "Cookie: ${okta_session_cookie}" \
 "https://{yourOktaDomain}/api/v1/sessions/me"
 ~~~
 
