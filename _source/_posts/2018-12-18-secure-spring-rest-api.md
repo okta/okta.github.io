@@ -106,7 +106,7 @@ Click **Next**, type the name of your service, then click **Done**. You will be 
 
 Now, let's code something!
 
-First, edit the `pom.xml` file and add the Spring Security and Okta dependency. They will enable all Spring AND Okta OAuth 2.0 goodness:
+First, edit the `pom.xml` file and add the Spring Security and Okta dependencies. They will enable all Spring AND Okta OAuth 2.0 goodness:
 
 ```xml
 <!-- security - begin -->
