@@ -4,7 +4,7 @@ function convertLayouts(file) {
     return file
   }
 
-  if( 'frontmatter' in file ) {
+  if( 'frontmatter' in file && file.frontmatter != undefined ) {
     delete file.frontmatter.layout
   }
 

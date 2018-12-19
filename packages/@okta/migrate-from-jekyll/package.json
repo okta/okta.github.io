@@ -4,7 +4,9 @@
   "main": "index.js",
   "license": "Apache-2.0",
   "dependencies": {
-    "fs-extra": "^7.0.1"
+    "@vuepress/shared-utils": "^1.0.0-alpha.0",
+    "fs-extra": "^7.0.1",
+    "gray-matter": "^4.0.1"
   },
   "scripts": {
     "migrate": "node index.js run"

@@ -4,7 +4,7 @@ function removeFrontmatterExtra(file) {
     return file
   }
 
-  if( 'frontmatter' in file ) {
+  if( 'frontmatter' in file && file.frontmatter != undefined) {
     if( 'book_chapter' in file.frontmatter) {
       delete file.frontmatter.book_chapter
     }

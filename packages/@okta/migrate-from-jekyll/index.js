@@ -6,6 +6,7 @@ const {parseFile} =  require("./utils/parseFile");
 const fs = require('fs-extra');
 const chalk = require('chalk');
 const { execSync } = require('child_process')
+const matter  = require('gray-matter')
 
 const rootPath = 'okta.github.io';
 const docsRoot = '../../docs';
@@ -32,12 +33,17 @@ const cleanupFileList = [
 // define which files can be processed
 const whitelist = [
   'okta.github.io/_source/_3rd_party_notices',
+  'okta.github.io/_source/_authentication-guide',
   'okta.github.io/_source/_assets',
   'okta.github.io/_source/_change-log',
   'okta.github.io/_source/_code',
   'okta.github.io/_source/_data',
   'okta.github.io/_source/_docs',
-
+  'okta.github.io/_source/_reference',
+  'okta.github.io/_source/_sdk',
+  'okta.github.io/_source/_standards',
+  'okta.github.io/_source/_use_cases',
+  'okta.github.io/_source/books'
 ];
 
 // define which files can not be processed
@@ -102,24 +108,7 @@ function createDestinationPath(finalPath) {
 }
 
 function buildFile(file) {
-  let fmdata = file.frontmatter
-
-  let fileToWrite = '';
-  if(file.origPath.endsWith('.md')) {
-    //build frontmatter
-    let frontmatter = '---\n'
-
-    Object.keys(fmdata).forEach(key => {
-      frontmatter += key + ': ' + fmdata[key] + '\n'
-    })
-
-    frontmatter += '---\n\n'
-
-    fileToWrite += frontmatter
-  }
-  fileToWrite += file.bodyLines.join('\n')
-
-  return fileToWrite
+  return matter.stringify(file.bodyLines.join('\n'), file.frontmatter)
 }
 
 function run() {
@@ -182,6 +171,10 @@ function run() {
         rootPath = docsRoot+'/.vuepress/public/'
       }
 
+    }
+
+    if(file.origPath.includes('books/') && file.origPath.includes('images')) {
+        rootPath = docsRoot+'/.vuepress/public/assets/img/'
     }
 
     if (file.origPath.includes('_change-log')) {

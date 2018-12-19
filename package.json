@@ -6,6 +6,23 @@
   ],
   "scripts": {
     "dev": "yarn workspace docs dev",
-    "build": "yarn workspace docs build"
+    "build": "yarn workspace docs build",
+    "migrate": "yarn workspace @okta/migrate-from-jekyll migrate",
+    "pretest": "yarn dev & wait-on http://localhost:8080 && webdriver-manager update --gecko false",
+    "test": "yarn test-only || (yarn stop && exit 1)",
+    "posttest": "yarn stop",
+    "test-only": "protractor tests/selenium/conf.js",
+    "stop": "if-env CI=true && exit 0 || (pkill -f 'okta_github_io|webdriver-manager/selenium')"
+  },
+  "repository": "git@github.com:okta/okta.github.io",
+  "author": "Brian Retterer <brian.retterer@okta.com>",
+  "license": "Apache-2.0",
+  "devDependencies": {
+    "wait-on": "^2.0.2",
+    "cross-env": "^5.0.1",
+    "if-env": "^1.0.0",
+    "jasmine-reporters": "^2.2.0",
+    "jasmine-spec-reporter": "^4.1.0",
+    "protractor": "^5.4.0"
   }
 }

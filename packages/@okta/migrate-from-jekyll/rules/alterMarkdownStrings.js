@@ -59,15 +59,21 @@ function alterMarkdownStrings(file) {
       line = line.replace(' %>', '}')
     }
 
+    if( line.includes('<script async src="//platform.twitter.com/widgets.js"') ) {
+      line = ""
+    }
+
     // convert image to markdown image
     // ![alt text](image.png "Logo Title Text 1")
     if( line.includes('{% img') && line.includes('%}')) {
-      let lineParts = line.split(' ');
+      let lineParts = line.split('{:')
+      lineParts = lineParts[0].split(' ')
       let inImageTag = false
       let inAltTag = false
       let imageString = ""
       let altTag = []
       let string = ""
+
       lineParts.forEach((item, index) => {
         if(item !== '{%' && !inImageTag) {
           string += item
