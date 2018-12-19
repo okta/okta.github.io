@@ -901,7 +901,7 @@ curl -v -X POST \
   "context": {
     "deviceToken": "${device_token}"
   }
-}  ' https://{yourOktaDomain}/api/v1/authn \
+}' "https://{yourOktaDomain}/api/v1/authn"
 ~~~
 
 ##### Response Example for Device Fingerprinting
