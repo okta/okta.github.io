@@ -45,11 +45,11 @@ Use the following procedure to display the user consent dialog as part of an Ope
 
 5. Test your configuration by sending an authentication or authorization request. For instance, if you set `consent` to `REQUIRED` for the `email` scope:
 
-    ~~~json
+    ~~~sh
     curl -v -X GET \
     -H "Accept: application/json" \
     -H "Content-Type: application/json" \
-    -H "Authorization: SSWS ${api_token} \
+    -H "Authorization: SSWS ${api_token}" \
     "https://{yourOktaDomain}/oauth2/${authenticationServerId}/v1/authorize?client_id=${clientId}&response_type=token&response_mode=fragment&scope=email&redirect_uri=http://localhost:54321&state=myState&nonce=${nonce}"
     ~~~
 
@@ -101,7 +101,7 @@ If you want to verify that you've successfully created a user grant, here are a 
 
 * You can verify that a grant was created by listing the grants given by a specific user:
 
-    ```json
+    ```sh
     curl -v -X GET \
     -H "Accept: application/json" \
     -H "Content-Type: application/json" \

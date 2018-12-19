@@ -284,7 +284,7 @@ test worked when you see a screen that looks like the one below: {% img spring-s
 
 	-   Click the button for the application you created in the
 		"Configuring Okta to work with Spring Security SAML" section
-		above: %{ img spring-security-saml-okta-chiclet.png alt:"Spring Security SAML" %}
+		above: {% img spring-security-saml-okta-chiclet.png alt:"Spring Security SAML" %}
 
 If you're able to get to the "Authenticated User" page using both of the
 methods above, then you're done.
