@@ -382,10 +382,10 @@ See [Okta's OIDC/OAuth 2.0 API](http://developer.okta.com/docs/api/resources/oid
 
 SAML is implemented by Okta with its SSO chiclets. If you're an Okta customer, like me, you likely interact with most apps using something like https://okta.okta.com/app/UserHome. When you click on a chiclet, we send a message, we sign the assertion, inside the assertion it says who the user is, and that it came from Okta. Slap on a digital signature on it and you're good to go.
 
-If you'd rather watch a video to learn about OAuth, please see the presentation below from [Karl McGuinness](https://twitter.com/jankytweet), Senior Director of Identity at Okta.
+If you'd rather watch a video to learn about OAuth, please see the presentation below from [Nate Barbettini](https://twitter.com/nbarbettini), Product Manager at Okta.
 
-<div style="max-width: 560px; margin: 0 auto">
-<iframe width="560" height="315" src="https://www.youtube.com/embed/NnNha_p-iq0" frameborder="0" allowfullscreen></iframe>
+<div style="text-align: center">
+<iframe width="560" height="315" style="max-width: 100%" src="https://www.youtube.com/embed/996OiexHze0" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 </div>
 
 ## Summary

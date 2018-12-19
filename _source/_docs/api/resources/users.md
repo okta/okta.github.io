@@ -3460,9 +3460,10 @@ Lists a user's email
 
 ~~~sh
 curl -v -X GET \
-  -H "Accept: application/json" \
-  -H "Content-Type: application/json" \
-  "https://{yourOktaDomain}/api/api/v1/users/00uzjoiIBruZE06jj0g3/emails"
+-H "Accept: application/json" \
+-H "Content-Type: application/json" \
+-H "Authorization: SSWS ${api_token}" \
+"https://{yourOktaDomain}/api/api/v1/users/00uzjoiIBruZE06jj0g3/emails"
 ~~~
 
 #### Response (Verified Email)
@@ -3567,9 +3568,10 @@ Gets a particular email for a user
 
 ~~~sh
 curl -v -X GET \
-  -H "Accept: application/json" \
-  -H "Content-Type: application/json" \
-  "https://{yourOktaDomain}/api/v1/users/00uzjoiIBruZE06jj0g3/emails/00T196qTp3LIMZQ0L0g3"
+-H "Accept: application/json" \
+-H "Content-Type: application/json" \
+-H "Authorization: SSWS ${api_token}" \
+"https://{yourOktaDomain}/api/v1/users/00uzjoiIBruZE06jj0g3/emails/00T196qTp3LIMZQ0L0g3"
 ~~~
 
 #### Response
@@ -3645,16 +3647,16 @@ The `signOn` property determines whether a user has to sign in after clicking on
 
 ~~~sh
 curl -X POST \
-  -H 'Accept: application/json' \
-  -H 'content-type: application/json' \
-  -d '{
-    "redirectUri": "https://example.com/some/page?state=blah&custom=true",
-    "expiresAt": "2017-06-14T00:17:57.000Z",
-    "actions": {
-     "signOn": "REQUIRED"
-     }
-    }' /
-    'https://{yourOktaDomain}/api/v1/users/00uzjoiIBruZE06jj0g3/emails/00T196qTp3LIMZQ0L0g3/verify'
+-H 'Accept: application/json' \
+-H 'content-type: application/json' \
+-H "Authorization: SSWS ${api_token}" \
+-d '{
+  "redirectUri": "https://example.com/some/page?state=blah&custom=true",
+  "expiresAt": "2017-06-14T00:17:57.000Z",
+  "actions": {
+    "signOn": "REQUIRED"
+  }
+}' "https://{yourOktaDomain}/api/v1/users/00uzjoiIBruZE06jj0g3/emails/00T196qTp3LIMZQ0L0g3/verify"
 ~~~
 
 #### Response
@@ -3727,18 +3729,17 @@ The `signOn` property determines whether a user has to sign in after clicking on
 
 ~~~sh
 curl -X POST \
-  -H 'Accept: application/json' \
-  -H 'Content-Type: application/json' \
-  -d '{
-    "redirectUri": "https://example.com/some/page?state=blah&custom=true",
-    "expiresAt": "2017-06-14T00:17:57.000Z",
-    "value": "update@example.com",
-    "actions": {
-     "signOn": "REQUIRED"
-     }
-    }' \
-    'https://{yourOktaDomain}/api/api/v1/users/00uzjoiIBruZE06jj0g3/emails/00T196qTp3LIMZQ0L0g3/change' \
-
+-H 'Accept: application/json' \
+-H 'Content-Type: application/json' \
+-H "Authorization: SSWS ${api_token}" \
+-d '{
+  "redirectUri": "https://example.com/some/page?state=blah&custom=true",
+  "expiresAt": "2017-06-14T00:17:57.000Z",
+  "value": "update@example.com",
+  "actions": {
+    "signOn": "REQUIRED"
+  }
+}' "https://{yourOktaDomain}/api/api/v1/users/00uzjoiIBruZE06jj0g3/emails/00T196qTp3LIMZQ0L0g3/change"
 ~~~
 
 #### Response
