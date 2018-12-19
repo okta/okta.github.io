@@ -36,7 +36,7 @@ This example uses Okta to handle all authentication process. You can register fo
 I have set up some things so we can get started easily. Please clone the following resource repository and go to `startup` tag, as follows:
 
 ```bash
-git clone -b startup https://github.com/oktadeveloper/okta-secure-secure-spring-rest-api-example secure-spring-rest-api
+git clone -b startup https://github.com/oktadeveloper/okta-secure-spring-rest-api-example secure-spring-rest-api
 cd secure-spring-rest-api
 ```
 
@@ -278,7 +278,7 @@ That's it! If you are in doubt of anything, check the latest repository branch `
 
 In this tutorial, you learned how to use Spring (Boot) to create a resource server and seamlessly integrate it with OAuth 2.0. Both Spring and REST API's are huge topics, with lots to discuss and learn. 
 
-The source code for this tutorial is [available on GitHub](https://github.com/oktadeveloper/okta-secure-secure-spring-rest-api-example). 
+The source code for this tutorial is [available on GitHub](https://github.com/oktadeveloper/okta-secure-spring-rest-api-example). 
 
 Here are some other posts that will help you further your understanding of both Spring and REST API security:
 
