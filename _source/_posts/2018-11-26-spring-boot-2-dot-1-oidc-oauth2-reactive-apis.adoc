@@ -146,7 +146,7 @@ class Application {
 
 Run this file using `spring run helloOIDC.groovy` and try to access `http://localhost:8080`. You'll be redirected to Okta to log in, or just shown `Hello {sub claim}` if you're already logged in.
 
-In the near future, you'll be able to use https://github.com/okta/okta-spring-boot[Okta's Spring Boot starter] and make it even simpler:
+You can also use https://github.com/okta/okta-spring-boot[Okta's Spring Boot starter] and make it even simpler:
 
 [source,yaml]
 .application.yml
@@ -161,7 +161,7 @@ okta:
 [source,groovy]
 .helloOkta.groovy
 ----
-@Grab('com.okta.spring:okta-spring-boot-starter:1.0.0-SNAPSHOT')
+@Grab('com.okta.spring:okta-spring-boot-starter:1.0.0')
 
 @RestController
 class Application {
@@ -172,8 +172,6 @@ class Application {
   }
 }
 ----
-
-Watch the project's https://github.com/okta/okta-spring-boot/pull/99[issue #99] to see when our Spring Boot 2.1 support is ready for prime-time.
 
 == Limiting Access Based on Group
 
@@ -203,7 +201,7 @@ Now Spring Security will recognize your groups as authorities and allow you to l
 [source,groovy]
 .hello.groovy
 ----
-@Grab('com.okta.spring:okta-spring-boot-starter:1.0.0-SNAPSHOT')
+@Grab('com.okta.spring:okta-spring-boot-starter:1.0.0')
 
 import org.springframework.security.access.prepost.PreAuthorize
 
@@ -260,3 +258,7 @@ Below are some related posts that show the power of using OAuth 2.0 and OIDC to 
 * link:/blog/2018/11/20/build-crud-spring-and-vue[Build a Simple CRUD App with Spring Boot and Vue.js]
 
 If you enjoyed this post, follow us on social media { https://twitter.com/oktadev[Twitter], https://www.facebook.com/oktadevelopers[Facebook], https://www.linkedin.com/company/oktadev/[LinkedIn], https://www.youtube.com/channel/UC5AMiWqFVFxF1q9Ya1FuZ_Q[YouTube] } to know when we've posted ones like it.
+
+**Changelog:**
+
+* Dec 19, 2018: Updated to use Okta Spring Boot Starter 1.0.0. You can see the changes to this post in https://github.com/okta/okta.github.io/pull/2590[okta.github.io#2590].
