@@ -130,7 +130,7 @@ android {
 
 dependencies {
     implementation 'com.android.support.constraint:constraint-layout:1.1.2'
-    implementation 'com.android.support:appcompat-v7:253.1'
+    implementation 'com.android.support:appcompat-v7:25.3.1'
 }
 ```
 
@@ -158,7 +158,7 @@ Finally put the following into `app/src/main/AndroidManifest.xml`:
 
     <application
         android:label="Demo App"
-        android:theme="@styles/AppTheme">
+        android:theme="@style/AppTheme">
 
         <activity android:name=".MainActivity">
             <intent-filter>
