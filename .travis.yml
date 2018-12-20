@@ -5,9 +5,7 @@ addons:
   chrome: stable
   sauce_connect: true
 before_install:
-- gem update bundler
-- bundle install
-- nvm install $(cat .nvmrc)
+- yarn install
 script: "./scripts/travis.sh"
 dist: trusty
 env:
