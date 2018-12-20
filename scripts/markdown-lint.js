@@ -23,14 +23,14 @@ const regexValidator = [
   // (Optional) - Pass in a list of files that can be ignored from the check.
   // For global ignores, update the getFiles() method.
   {
-    regex: 'https?:\/\/(your-org|example|rain|your-subdomain|your-domain|{org}).okta*',
+    regex: 'https?://(your-org|example|rain|your-subdomain|your-domain|{org})\\.okta*',
     omitFiles: [
       '/_docs/api/postman/apps.json',
       '/_docs/api/postman/example.oktapreview.com.environment'
     ]
   },
   {
-    regex: 'https?:\/\/{yourOktaDomain}.com*',
+    regex: 'https?://{yourOktaDomain}\\.com*',
     omitFiles: []
   },
   {
@@ -91,6 +91,62 @@ function findWithRegex(file, regexItem) {
     });
 }
 
+function findCurlErrors(file) {
+  if (!file.orig.match("_docs")) {
+    return [];
+  }
+  const contents = fs.readFileSync(file.orig, 'utf8');
+  const errors = [];
+  const endBlock = /(~~~|```)/;
+  const lines = contents.split('\n');
+  let inCurl = false;
+  let inData = false;
+  let data = "";
+  for (let i = 0; i < lines.length; i++) {
+    let line = lines[i];
+    if (line.match(/curl /)) {
+      inCurl = true;
+      inData = false;
+      data = "";
+    }
+    if (inCurl) {
+      if (line.match(endBlock)) {
+        inCurl = false;
+        let matches = data.match(/'({(.|\n)*})'/); // TODO: this regex should be more flexible.
+        if (matches) {
+          let json = matches[1];
+          try {
+            JSON.parse(json);
+          } catch (unused) {
+            errors.push({regex: "curl: Invalid JSON", name: `[line ${i + 1}] ${json}`});
+          }
+        }
+      } else {
+        if (inData && line.match(/'/) && (line.match(/'\\''/) === null)) { // TODO: improve this.
+          data += line + "\n";
+          inData = false;
+        }
+        if (line.match(/-d /)) {
+          inData = true;
+        }
+        if (inData) {
+          data += line + "\n";
+        } else {
+          let cont = line.match(/ \\$/);
+          let nextEndCurl = lines[i + 1].match(endBlock);
+          if (cont && nextEndCurl) {
+            errors.push({regex: "curl: Extra \\", name: `[line ${i + 1}] ${line}`});
+          }
+          if (!cont && !nextEndCurl) {
+            errors.push({regex: "curl: Missing \\", name: `[line ${i + 1}] ${line}`});
+          }
+        }
+      }
+    }
+  }
+  return errors;
+}
+
 async function run(dir) {
   const files = await getFiles(path.resolve(dir));
   const badFiles = [];
@@ -103,6 +159,8 @@ async function run(dir) {
       findings = findings.concat(findWithRegex(file, item))
     });
 
+    findings = findings.concat(findCurlErrors(file));
+    
     if (findings.length > 0) {
       console.log(`  Error in ${file.relative}`);
       findings.forEach(match => console.log(`    └─ Invalid String: ${match.name} using regex: [${match.regex}]`));
@@ -125,7 +183,7 @@ Found ${badFiles.length} files with ${nameCount} invalid substrings and/or chara
 To Fix:
 1. Find the source .md files
 2. Search in the source file for the problem links
-3. Change the invalid substrings and/or charaters based on the regex error:
+3. Change the invalid substrings and/or characters based on the regex error:
   - [http://your-org.okta]
       - use either 'https://{yourOktaDomain}' or 'https://{yourOktaDomain}/oauth2/default'
   - [https://example.okta]
@@ -139,9 +197,15 @@ To Fix:
   - [(“|”)]
       - Malformed character! Replace with (")
   - [(‘|’)]
-      - malformed character! Replace with (')
+      - Malformed character! Replace with (')
   - […]
       - Malformed ellipsis character! Replace with (...)
+  - [curl: Invalid JSON]
+      - Malformed JSON
+  - [curl: Extra \\]
+      - Malformed curl command: last line should not end in \\
+  - [curl: Missing \\]
+      - Malformed curl command: each line other than the last line and -d '{ }' blocks should end in \\
     `);
     process.exit(1);
   } else {
