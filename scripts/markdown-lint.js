@@ -98,6 +98,7 @@ function findCurlErrors(file) {
   const contents = fs.readFileSync(file.orig, 'utf8');
   const errors = [];
   const endBlock = /(~~~|```)/;
+  const squotesInJson = /'\\''/;
   const lines = contents.split('\n');
   let inCurl = false;
   let inData = false;
@@ -114,7 +115,7 @@ function findCurlErrors(file) {
         inCurl = false;
         let matches = data.match(/'({(.|\n)*})'/); // TODO: this regex should be more flexible.
         if (matches) {
-          let json = matches[1];
+          let json = matches[1].replace(squotesInJson, "'");
           try {
             JSON.parse(json);
           } catch (unused) {
@@ -122,7 +123,7 @@ function findCurlErrors(file) {
           }
         }
       } else {
-        if (inData && line.match(/'/) && (line.match(/'\\''/) === null)) { // TODO: improve this.
+        if (inData && line.match(/'/) && (line.match(squotesInJson) === null)) { // TODO: improve this.
           data += line + "\n";
           inData = false;
         }
