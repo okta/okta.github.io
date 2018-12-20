@@ -1190,6 +1190,8 @@ Now run `npm start` and open `http://localhost:8080` in your browser. You should
 
 {% img blog/python-react/final-running-app.gif alt:"final running app" width:"800" %}{: .center-image }
 
+If you want to see what the finished project looks like, you can see the [code on GitHub](https://github.com/oktadeveloper/python-flask-react-crud-example).
+
 ## Learn More About Python, Flask, and React
 As we've seen, React is a powerful and straightforward JavaScript library with phenomenal adoption and community growth. In this tutorial, you learned to build a fully-functional, secure JavaScript with React, Python, and Flask. To learn more about React and other technologies check out these other great resources from the @oktadev team:
 
