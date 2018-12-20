@@ -24,17 +24,17 @@ Note: I'll be doing this on Windows but most instructions should work on other p
 
 This is what Android Studio creates when you start a completely bare project.
 
-{% img blog/build-android-app-without-ide/bare-project.png alt:"Bare project file tree" width:"400" %}{: .center-image }
+{% img blog/build-android-app-without-ide/bare-project.png alt:"Bare project file tree" width:"200" %}{: .center-image }
 
 The first thing to notice is that most files involve Gradle, the system for configuring and executing builds. What do we have without any Gradle files ?
 
-{% img blog/build-android-app-without-ide/bare-project-without-gradle.png alt:"Bare project file tree without Gradle" width:"400" %}{: .center-image }
+{% img blog/build-android-app-without-ide/bare-project-without-gradle.png alt:"Bare project file tree without Gradle" width:"200" %}{: .center-image }
 
 Only three folders and three files. Clearly the main complexity in Android projects is the build system.
 
 Let's look at what files are not included in source control by looking at _.gitignore_.
 
-{% img blog/build-android-app-without-ide/gitignore.png alt:"gitignore file contents" width:"400" %}{: .center-image }
+{% img blog/build-android-app-without-ide/gitignore.png alt:"gitignore file contents" width:"300" %}{: .center-image }
 
 So `MyApplication.iml` isn't important. If you [Google what iml files are for](https://stackoverflow.com/questions/30737082/what-are-iml-files-in-android-studio) you will see they are used by Android Studio and can be regenerated from the configurations in `.idea/`.
 
@@ -66,7 +66,7 @@ To start our project from scratch we initialize a folder using Gradle. First ins
 
 The `gradle` command should now work from your command line. Note: you need to have Java 7 or higher installed as well. Here is what you see when you initialise an empty folder with `gradle init`.
 
-{% img blog/build-android-app-without-ide/gradle-init.png alt:"Gradle init output" width:"800" %}{: .center-image }
+{% img blog/build-android-app-without-ide/gradle-init.png alt:"Gradle init output" width:"500" %}{: .center-image }
 
 See how all these files are in the Android Studio project output ? For a great explanation of what these files are see the [Gradle create build guide](https://guides.gradle.org/creating-new-gradle-builds/).
 
@@ -74,13 +74,13 @@ See how all these files are in the Android Studio project output ? For a great e
 
 Next we need to set up our project to build Android. The first step is to change `settings.gradle` to simply include the app module (which is just a folder).
 
-```
+```groovy
 include ':app'
 ```
 
 Next, put the following into your root `build.gradle`.
 
-```
+```groovy
 buildscript {
 
     repositories {
@@ -108,7 +108,7 @@ This primarily defines where to download our Gradle libraries from.
 
 Next, create the `/app` directory and place the following into `app/build.gradle`.
 
-```
+```groovy
 apply plugin: 'com.android.application'
 
 android {
@@ -175,7 +175,7 @@ This defines the package, label and main activity of our app.
 
 Now when you run `gradlew build` you should see BUILD SUCCESSFUL. And in `app/build/outputs/apk/debug` you should see `app-debug.apk`. You've just set up an Android build from scratch!
 
-To deploy this simply say `gradlew installDebug` with your phone plugged in (and [USB Debugging enabled[(https://www.howtogeek.com/129728/how-to-access-the-developer-options-menu-and-enable-usb-debugging-on-android-4.2/)). You should then see a new app called Demo App. It will crash when you run it because you haven't written any Java code yet!
+To deploy this simply say `gradlew installDebug` with your phone plugged in (and [USB Debugging enabled](https://www.howtogeek.com/129728/how-to-access-the-developer-options-menu-and-enable-usb-debugging-on-android-4.2/)). You should then see a new app called Demo App. It will crash when you run it because you haven't written any Java code yet!
 
 ## Write the Java Application
 
@@ -228,7 +228,7 @@ This just creates a "Hello World!" message center-screen.
 
 Now run `gradlew build` and you should see BUILD SUCCESSFUL again. Use `gradlew installDebug` to install to your phone and you should see the following:
 
-{% img blog/build-android-app-without-ide/hello-world.png alt:"Hello world Android screen" width:"400" %}{: .center-image }
+{% img blog/build-android-app-without-ide/hello-world.png alt:"Hello world Android screen" width:"300" %}{: .center-image }
 
 You've just made a working Android app with nothing but a text editor :).
 
@@ -275,8 +275,7 @@ public class LoginActivity extends Activity {
 
         // Do any of your own setup of the Activity
 
-        mOktaAuth.init(
-            this,
+        mOktaAuth.init(this,
             new OktaAppAuth.OktaAuthListener() {
                 @Override
                 public void onSuccess() {
@@ -297,21 +296,21 @@ This initializes the `OktaAppAuth` object and handles the Success or Failure con
 
 Now add the following to the `defaultConfig` section of `app/build.config`.
 
-```
+```groovy
 android.defaultConfig.manifestPlaceholders = [
-            "appAuthRedirectScheme": "com.okta.example"
-        ]
+    "appAuthRedirectScheme": "com.okta.example"
+]
 ```
 
 Finally, add the following to the same file's dependencies:
 
-```
+```groovy
 implementation 'com.okta.android:appauth-android:0.1.0'
 ```
 
 That should build and deploy. You can use `logcat` to see what is happening in the background. Looking at the [source code for the main library class](https://github.com/okta/okta-sdk-appauth-android/blob/master/library/src/main/java/com/okta/appauth/android/OktaAppAuth.java) we see the tag we need to use is "OktaAppAuth".
 
-{% img blog/build-android-app-without-ide/logcat-output.png alt:"Logcat output" width:"800" %}{: .center-image }
+{% img blog/build-android-app-without-ide/logcat-output.png alt:"Logcat output" width:"700" %}{: .center-image }
 
 Right after trying to create the service we get a `Configuration was invalid` error. We need to connect our app to an Okta account.
 
@@ -388,19 +387,19 @@ Let's add a button and progress bar to our login page. Create app/src/main/res/l
 Initially the button is hidden. We'll show that (and hide the progress bar) once Okta has finished initializing. To do that put the following into the onSuccess() method in `LoginActivity.java`.
 
 ```java
-    findViewById(R.id.auth_button).setVisibility(View.VISIBLE);
-    findViewById(R.id.progress_bar).setVisibility(View.GONE);
+findViewById(R.id.auth_button).setVisibility(View.VISIBLE);
+findViewById(R.id.progress_bar).setVisibility(View.GONE);
 ```
 
 Lastly, before the Okta init set the layout to the XML we just created.
 
 ```java
-    setContentView(R.layout.activity_login);
+setContentView(R.layout.activity_login);
 ```
 
 When you `installDebug` and run the app you should see a title with a login button.
 
-{% img blog/build-android-app-without-ide/main-screen-demo.png alt:"Main screen for Demo App" width:"400" %}{: .center-image }
+{% img blog/build-android-app-without-ide/main-screen-demo.png alt:"Main screen for Demo App" width:"300" %}{: .center-image }
 
 ### Wire Up Login
 
@@ -433,20 +432,17 @@ public class AuthorizedActivity extends Activity {
         setContentView(R.layout.activity_authorized);
 
         Button button = (Button) findViewById(R.id.sign_out);
-        button.setOnClickListener(new View.OnClickListener()
-{
-		@Override
-		public void onClick(View v)
-		{
-			mOktaAuth.logout();
-
-			Intent mainIntent = new Intent(v.getContext(), LoginActivity.class);
-			mainIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-			startActivity(mainIntent);
-			finish();
-		}
-	}
-      );
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+              mOktaAuth.logout();
+            
+              Intent mainIntent = new Intent(v.getContext(), LoginActivity.class);
+              mainIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+              startActivity(mainIntent);
+              finish();
+            }
+        });
     }
 }
 ```
@@ -494,33 +490,30 @@ As with the login page it's just a title with a button. Wire up the login button
 
 ```java
 Button button = (Button) findViewById(R.id.auth_button);
-button.setOnClickListener(new View.OnClickListener()
-    {
-        @Override
-        public void onClick(View v)
-        {
-            Intent completionIntent = new Intent(v.getContext(), AuthorizedActivity.class);
-            Intent cancelIntent = new Intent(v.getContext(), LoginActivity.class);
+button.setOnClickListener(new View.OnClickListener() {
+    @Override
+    public void onClick(View v) {
+        Intent completionIntent = new Intent(v.getContext(), AuthorizedActivity.class);
+        Intent cancelIntent = new Intent(v.getContext(), LoginActivity.class);
 
-            cancelIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        cancelIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 
-            mOktaAuth.login(
-                v.getContext(),
-                PendingIntent.getActivity(v.getContext(), 0, completionIntent, 0),
-                PendingIntent.getActivity(v.getContext(), 0, cancelIntent, 0)
-            );
-        }
+        mOktaAuth.login(
+            v.getContext(),
+            PendingIntent.getActivity(v.getContext(), 0, completionIntent, 0),
+            PendingIntent.getActivity(v.getContext(), 0, cancelIntent, 0)
+        );
     }
-);
+});
 ```
 
 Now when you click the Login button you should see an Okta login page asking for your details.
 
-{% img blog/build-android-app-without-ide/okta-login-screen.png alt:"Okta login screen" width:"400" %}{: .center-image }
+{% img blog/build-android-app-without-ide/okta-login-screen.png alt:"Okta login screen" width:"300" %}{: .center-image }
 
 If you enter in user details which are correct for the Application we made previously (your Okta portal credentials should work) you are taken to an authorized page.
 
-{% img blog/build-android-app-without-ide/authorized-screen.png alt:"Authorized screen" width:"400" %}{: .center-image }
+{% img blog/build-android-app-without-ide/authorized-screen.png alt:"Authorized screen" width:"300" %}{: .center-image }
 
 Clicking the logout button should take you back to our first screen.
 
@@ -530,7 +523,7 @@ Most people think you need Android Studio to make an Android app. In this post, 
 
 ## Learn More about Java and Secure App Development
 
-I hope you've enjoyed this tutorial on how to build a basic Android app without an IDE. You can find the example created in this tutorial on GitHub at https://github.com/oktadeveloper/okta-android-example
+I hope you've enjoyed this tutorial on how to build a basic Android app without an IDE. You can find the example created in this tutorial on GitHub at <https://github.com/oktadeveloper/okta-android-example>.
 
 We've written some other cool Spring Boot and React tutorials, check them out if you're interested.
 
