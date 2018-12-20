@@ -180,7 +180,6 @@ curl -v -X PUT \
       "kid": "w__Yr9AElCftDtLP5CmjzZFMKXndqHtx7B3QPkg9jrI"
     }
   }
- }
 }' "https://{yourOktaDomain}/api/v1/apps/${aid}"
 
 ~~~
