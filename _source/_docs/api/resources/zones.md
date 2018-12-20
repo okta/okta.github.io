@@ -24,8 +24,8 @@ Creates a new IP Zone
 #### Valid Request Example
 {:.api .api-request .api-request-example}
 ~~~sh
-curl -X POST
--H "Accept: application/json"\
+curl -X POST \
+-H "Accept: application/json" \
 -H "Content-Type: application/json" \
 -H "Authorization: SSWS ${api_token}" \
 -d '{
@@ -56,7 +56,7 @@ curl -X POST
       "value": "3.3.4.5/24"
     }
   ]
-}' "https://{yourOktaDomain}/api/v1/zones/"
+}' "https://{yourOktaDomain}/api/v1/zones"
 ~~~
 
 #### Successful Response Example
@@ -116,12 +116,11 @@ curl -X POST
 #### Invalid Request Example
 {:.api .api-request .api-request-example}
 ~~~sh
-curl -X POST
--H "Accept: application/json"\
+curl -X POST \
+-H "Accept: application/json" \
 -H "Content-Type: application/json" \
 -H "Authorization: SSWS ${api_token}" \
--d '
-{
+-d '{
   "type": "IP",
   "id": null,
   "name": "Zone with Invalid IP Range",
@@ -141,8 +140,7 @@ curl -X POST
       "value": "2.2.3.4/24"
     }
   ]
-}
-' "https://{yourOktaDomain}/api/v1/zones"
+}' "https://{yourOktaDomain}/api/v1/zones"
 ~~~
 
 #### Unsuccessful Response Example
@@ -390,7 +388,7 @@ curl -X GET \
 -H "Accept: application/json" \
 -H "Content-Type: application/json" \
 -H "Authorization: SSWS ${api_token}" \
-"https://{yourOktaDomain}/api/v1/zones/?limit=100&filter=%28id+eq+%22nzoul0wf9jyb8xwZm0g3%22+or+id+eq+%22nzoul1MxmGN18NDQT0g3%22%29"
+"https://{yourOktaDomain}/api/v1/zones?limit=100&filter=%28id+eq+%22nzoul0wf9jyb8xwZm0g3%22+or+id+eq+%22nzoul1MxmGN18NDQT0g3%22%29"
 ~~~
 
 ##### Response Example
@@ -545,12 +543,11 @@ The zone ID described in the [Zone Object](#ZoneModel) is required.
 #### Request Example
 {:.api .api-request .api-request-example}
 ~~~sh
-curl -X PUT
--H "Accept: application/json"\
+curl -X PUT \
+-H "Accept: application/json" \
 -H "Content-Type: application/json" \
 -H "Authorization: SSWS ${api_token}" \
--d '
-{
+-d '{
   "type": "IP",
   "id": "nzovw2rFz2YoqmvwZ0g3",
   "name": "UpdatedNetZone",
@@ -614,8 +611,7 @@ curl -X PUT
       }
     }
   }
-}
-' "https://{yourOktaDomain}/api/v1/zones/nzovw2rFz2YoqmvwZ0g3"
+}' "https://{yourOktaDomain}/api/v1/zones/nzovw2rFz2YoqmvwZ0g3"
 ~~~
 
 #### Response Example
