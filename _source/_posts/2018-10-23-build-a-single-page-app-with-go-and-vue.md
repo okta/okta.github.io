@@ -12,7 +12,7 @@ image: blog/go-vue/vue-app.png
 
 Single-Page Applications (SPAs) improve user experience by offering rich UI interactions, fast feedback, and the relief of knowing you don't need to download and install a traditional application. Browsers are now operating systems and websites are apps. While a SPA isn't always the answer, for apps that rely on snappy user interaction they are increasingly common.
 
-To the end user, a well-designed SPA feels like rainbows and unicorns. From the developer perspective, reality can be much the opposite. Tough problems long-since solved on the backend like authentication, routing, state management, data binding, and more become time-consuming frontend challenges. Luckily for us, JavaScript frameworks like Vue, React, and Angular exist to help us craft powerful applications and focus more of our time on critical functionality and not reinventing the wheel.
+To the end user, a well-designed SPA feels like rainbows and unicorns. From the developer perspective, reality can often be the opposite. Tough problems long-since solved on the backend like authentication, routing, state management, data binding, etc. all become time-consuming frontend challenges. Luckily for us, JavaScript frameworks like Vue, React, and Angular exist to help us craft powerful applications and allow us to focus our time on critical functionality and not reinventing the wheel.
 
 ## About Vue.js
 
@@ -23,21 +23,24 @@ Who better to describe Vue than its creator, Evan You?
 Here are some of Vue's benefits:
 
 - A gentle learning curve and low barrier to entry
-- Provides the ability to bootstrap your app with`vue-cli`,saving you the hassle of setting up webpack and complex build pipelines
-- Explosive community growth! Vue now has more stars on GitHub than React and Angular
+- Provides the ability to bootstrap your app with`vue-cli`, saving you the hassle of setting up webpack and complex build pipelines
+- Explosive community growth! Vue now has more stars on GitHub than both React *and* Angular
 - It's flexible enough to adopt at a reasonable pace, component by component
 
 ## Create Your Vue + Go App
 
-In this tutorial, you will create a single-page application that shows love to open source projects on GitHub. For the frontend you'll use Vue and popular tooling like `vuex`, `vue-cli`, `vuetify`, and `vue-router`. On the backend, you'll use Go to write a REST API and persist your data in MongoDB.
+In this tutorial, you'll create a single-page application that allows users to show their love for open source projects on GitHub. For the frontend you'll use Vue and popular tooling like `vuex`, `vue-cli`, `vuetify`, and `vue-router`. On the backend, you'll use Go to build a REST API and persist your data in MongoDB.
 
 Authentication and user management can be a major pain, so you'll use JSON Web Token (JWT) based authentication when making requests from the SPA and [Okta's Go JWT Verifier](https://github.com/okta/okta-jwt-verifier-golang) as a middleware on your backend to validate the user's token on every request.
 
-Once complete, users will be able to authenticate via OpenID Connect (OIDC), search for projects on GitHub, favorite those projects and even add notes where needed!
+Once complete, users will be able to authenticate via OpenID Connect (OIDC), search for projects on GitHub, favorite those projects, and even write notes about their favorite projects!
+
+**PS**: Don't want to follow the tutorial? That's fine! Feel free to check out
+the finished [repository on GitHub](https://github.com/oktadeveloper/okta-go-vue-example).
 
 ### Create the Vue and Go Directory Structure
 
-For the sake of simplicity, let's write the REST API and the SPA in the same project, starting with the project directory in the Go workspace.
+For the sake of simplicity, let's create the REST API and SPA in the same project, starting with a project directory in the Go workspace.
 
 Go projects live inside the directory the environment variable `$GOPATH` points to. In order to find the current `$GOPATH` value, run: `go env GOPATH`. To learn more about GOPATH, including how to set it yourself, refer to the official [Go documentation](https://github.com/golang/go/wiki/SettingGOPATH) on the topic.
 
@@ -45,11 +48,13 @@ If you're totally new to Go, check out [this article](https://golang.org/doc/cod
 
 With the GOPATH defined, you now can create a directory for your project:
 
+{% raw %}
 ```bash
-mkdir -p $GOPATH/src/github.com/{YOUR_GITHUB_USERNAME}/kudo-oos
+mkdir -p $GOPATH/src/github.com/{{ YOUR_GITHUB_USERNAME} }/kudo-oos
 ```
+{% endraw %}
 
-To get your SPA off the ground quickly, leverage the scaffolding functionality from [vue-cli](https://cli.vuejs.org/). The CLI will prompt you with a series of options - pick the technology appropriate for this project: `vue.js`, `vuex`, and, `webpack`.
+To get your SPA off the ground quickly you can leverage the scaffolding functionality of [vue-cli](https://cli.vuejs.org/). The CLI will prompt you with a series of options - pick the technology appropriate for this project: `vue.js`, `vuex`, and, `webpack`.
 
 Install `vue-cli` by running:
 
@@ -57,7 +62,15 @@ Install `vue-cli` by running:
 yarn global add @vue/cli
 ```
 
-Then, create a new Vue project:
+If you aren't familiar with [yarn](https://yarnpkg.com/en/), it's an alternative
+to npm that many developers like. To install `yarn` you can run the command
+below:
+
+```bash
+npm install -g yarn
+```
+
+Next, create a new Vue project:
 
 ```bash
 mkdir -p pkg/http/web
@@ -73,7 +86,6 @@ Congratulations, you have created your Vue.js SPA! Try it out by running:
 
 ```bash
 cd app
-yarn install
 yarn serve
 ```
 
@@ -85,7 +97,7 @@ Next, let's make your SPA modern and responsive using `vuetify`.
 
 ## Add Vuetify
 
-[Vuetify](https://vuetifyjs.com/en/) is a collection of Vue.js components that abstracts [Material Design's](https://material.io/design/) concepts. Vuetify provides out-of-the box features including a grid system, typography, basic layout, and also components like cards, dialogs, chips, tabs, icons and so on. Vuetify will pave your way to a rich UI!
+[Vuetify](https://vuetifyjs.com/en/) is a collection of Vue.js components that abstract [Material Design's](https://material.io/design/) concepts. Vuetify provides out-of-the box features including a grid system, typography, basic layout, and also components like cards, dialogs, chips, tabs, icons and so on. Vuetify will pave your way to a rich UI!
 
 When installing vuetify, you will be prompted with a series of questions. For the sake of simplicity just go with the default choices again.
 
@@ -125,18 +137,36 @@ The default application settings should be the same as those pictured.
 Next, install the Okta Vue SDK by running the following command:
 
 ```bash
-yarn add @okta/okta-vue
+yarn add @okta/okta-vue@1.0.7
 ```
+
+
+## Install Your Vue App Dependencies
+
+You'll also need to install a few dependencies in order to get your project
+running. Run the following command to install them all:
+
+```bash
+yarn add vue-router@3.0.2
+yarn add vuex@3.0.1
+yarn add axios@0.18.0
+```
+
+- [vue-router](https://router.vuejs.org/) is a popular routing tool you'll be using to manage app routes
+- [vuex](https://vuex.vuejs.org/) is what you'll be using to manage page state
+- [axios](https://github.com/axios/axios) is a popular HTTP library that lets you easily make REST calls
 
 ## Create Your Vue App Routes
 
 For this app, you need only 4 routes, all of which require authentication except for the login route.
 
-The root route `/` is our landing page where the login component will be rendered. Once the user has authenticated, we redirect them to the `/me` route where the bulk of the functionality takes place: The user should be able to query for OSS projects via GitHub's REST API, favorite projects returned from the query, see more details about the project, and leave a note describing why the project is important to them.
+The root route `/` is our landing page where the login component will be rendered. Once the user has authenticated, we'll redirect them to the `/me` route where the bulk of the functionality takes place: the user should be able to query for OSS projects via GitHub's REST API, favorite projects returned from the query, see more details about the project, and leave a note describing why the project is important to them.
 
-Take note that both the `/me` and `repo/:id` have a `meta: { requiresAuth: true }` property specifying that the user must be authenticated to access that area of the app. The Okta plugin will use it to redirect the user the the Okta's login page if not authenticated.
+Take note that both the `/me` and `repo/:id` have a `meta: { requiresAuth: true }` property specifying that the user must be authenticated to access that area of the app. The Okta plugin will use it to redirect the user the Okta login page if not authenticated.
 
-First, create `pkg/http/web/app/src/routes.js` and define the following routes:
+First, install the `vue-router` and `vuex` packages.
+
+Now create `pkg/http/web/app/src/routes.js` and define the following routes:
 
 {% raw %}
 ```js
@@ -150,8 +180,8 @@ import GitHubRepoDetails from './components/GithubRepoDetails';
 
 Vue.use(VueRouter);
 Vue.use(Auth, {
-  issuer: {ADD_YOUR_DOMAIN},
-  client_id: {ADD_YOUR_CLIENT_ID},
+  issuer: '{{ OKTA_ORG_URL }}/oauth2/default',
+  client_id: '{{ OKTA_APP_CLIENT_ID }}',
   redirect_uri: 'http://localhost:8080/implicit/callback',
   scope: 'openid profile email'
 })
@@ -168,13 +198,23 @@ export default new VueRouter({
 ```
 {% endraw %}
 
-Make sure to add your `domain` and `client_id` where indicated - these values can be found on the application overview page in the Okta Developer Console. Calling `Vue.use(Auth, ...)` will inject an `authClient` object into your Vue instance which can be accessed by calling `this.$auth` anywhere inside your Vue instance. This is what you'll use to make sure a user is logged in and/or to force the user to identify themself!
+Calling `Vue.use(Auth, ...)` will inject an `authClient` object into your Vue instance which can be accessed by calling `this.$auth` anywhere inside your Vue instance. This is what you'll use to make sure a user is logged in and/or to force the user to identify themself!
 
-## Create Vue Components
+Be sure to replace {% raw %}`{{ OKTA_ORG_URL }}`{% endraw %} with your Okta ORG Url.  This value can be found on the dashboard page of your Okta dashboard (pictured below).
 
-The `vue-router` library contains a number of components to help developers create dynamic and rich UIs. One of them, `router-view, renders the component for the matched route. In our case, when the user accesses the root route  `/`, `vue-router` will render the `Login` component as configured in `routers.js`.
+{% img blog/go-vue/okta-org-url.png alt:"Okta Org URL" width:"600" %}{: .center-image }
 
-Open `./kudo-oos/pkg/http/web/app/src/components/App.vue` and copy in the following code.
+You'll also need to replace {% raw %}`{{ OKTA_APP_CLIENT_ID }}`{% endraw %} with your new Okta app's Client ID. If you navigate back to your newly created application, you should see your Client ID value on the **General** tab (pictured below).
+
+{% img blog/go-vue/okta-app-client-id.png alt:"Okta App Client ID" width:"600" %}{: .center-image }
+
+Also, note the hard-coded value `http://localhost:8080/implicit/callback`. If you later change your app to run in production on a different URL, you'll need to modify this value. A best practice is to store this value in an environment variable so that depending on where you're running your application, the correct value will be used.
+
+## Create the Vue Components
+
+The `vue-router` library contains a number of components to help developers create dynamic and rich UIs. One of them, `router-view`, renders the component for the matched route. In our case, when the user accesses the root route `/`, `vue-router` will render the `Login` component as configured in `routers.js`.
+
+Open `./kudo-oos/pkg/http/web/app/src/App.vue` and copy in the following code.
 
 {% raw %}
 ```js
@@ -199,7 +239,7 @@ export default {
 ```
 {% endraw %}
 
-For every route other than the  matched route component, Vue will  render the `Footer` component. Create `./kudo-oos/pkg/http/web/app/src/components/Footer.vue` and copy in the following code to create that footer component.
+For every route other than the matched route component, Vue will render the `Footer` component. Create `./kudo-oos/pkg/http/web/app/src/components/Footer.vue` and copy in the following code to create that footer component.
 
 {% raw %}
 ```js
@@ -213,61 +253,105 @@ For every route other than the  matched route component, Vue will  render the `F
 ```
 {% endraw %}
 
-Your landing page should now look like this:
+Next, create the `Login` component. Create `./kudo-oos/pkg/http/web/app/src/components/Login.vue` and copy in the following code.
+
+{% raw %}
+```javascript
+<template>
+  <v-app id="inspire">
+    <v-content>
+      <v-container fluid fill-height>
+        <v-layout align-center justify-center>
+          <v-flex xs12 sm8 md4>
+            <v-card class="elevation-12">
+              <v-toolbar dark color="teal">
+                <v-toolbar-title justify-center>Login</v-toolbar-title>
+              </v-toolbar>
+              <v-card-text>
+                <v-btn @click.prevent="login" color="primary">Sign in with Okta</v-btn>
+              </v-card-text>
+            </v-card>
+          </v-flex>
+        </v-layout>
+      </v-container>
+    </v-content>
+  </v-app>
+</template>
+
+<script>
+export default {
+  data() {
+    return {};
+  },
+  async mounted() {
+    const isAuthenticated = await this.$auth.isAuthenticated();
+    isAuthenticated && this.$router.push('/me');
+  },
+  methods: {
+    login () {
+      this.$auth.loginRedirect('/me')
+    }
+  }
+}
+</script>
+```
+{% endraw %}
+
+This Login component will eventually render a "sign in" button on the homepage of the website when a user visits the page who isn't logged in. The home page will eventually look like the following:
 
 {% img blog/go-vue/vue-landing-page.png alt:"Vue landing page" width:"600" %}{: .center-image }
 
-With our login component rendered, the user will be redirected to the login page after clicking the sign in button.
+Once the login component is rendered, the user will be redirected to the login page after clicking the sign in button.
 
 {% img blog/go-vue/okta-sign-in.png alt:"Okta sign-in" width:"600" %}{: .center-image }
 
-And after a successful login, the user is redirected back to your application to the configured route. In our app, that's the `/me` route.
+And after a successful login, the user will be redirected back to your application to the configured route. In our app, that's the `/me` route.
 
 {% img blog/go-vue/vue-app.png alt:"Vue app" width:"600" %}{: .center-image }
 
-The `/me` route was configured to render the `Home` component, which in turn renders the `Sidebar`,the Kudos, and Search `vuetify tabs`. Each tab renders a specific set of `GitHubRepo`s.
+The `/me` route was configured to render the `Home` component, which in turn renders the Sidebar, Kudos, and Search tabs. Each tab renders a specific set of `GitHubRepo`s. Let's create these components now.
 
-Go ahead and create the `./kudo-oos/pkg/http/web/app/src/components/Home.vue` component.
+Create the `./kudo-oos/pkg/http/web/app/src/components/Home.vue` component.
 
 {% raw %}
 ```js
 <template>
- <div>
-   <SearchBar v-on:search-submitted="githubQuery" />
-   <v-container grid-list-md fluid class="grey lighten-4" >
-        <v-tabs
-       slot="extension"
-       v-model="tabs"
-       centered
-       color="teal"
-       text-color="white"
-       slider-color="white"
-     >
-       <v-tab class="white--text" :key="2">
-         KUDOS
-       </v-tab>
-       <v-tab class="white--text" :key="1">
-         SEARCH
-       </v-tab>
-     </v-tabs>
-       <v-tabs-items style="width:100%" v-model="tabs">
-         <v-tab-item :key="2">
-           <v-layout row wrap>
-             <v-flex v-for="kudo in allKudos" :key="kudo.id" md4 >
-               <GitHubRepo :repo="kudo" />
-             </v-flex>
-           </v-layout>
-         </v-tab-item>
-         <v-tab-item :key="1">
-           <v-layout row wrap>
-             <v-flex v-for="repo in repos" :key="repo.id" md4>
-               <GitHubRepo :repo="repo" />
-             </v-flex>
-           </v-layout>
-         </v-tab-item>
-       </v-tabs-items>
-   </v-container>
- </div>
+  <div>
+    <SearchBar defaultQuery='okta' v-on:search-submitted="githubQuery" />
+    <v-container grid-list-md fluid class="grey lighten-4" >
+         <v-tabs
+        slot="extension"
+        v-model="tabs"
+        centered
+        color="teal"
+        text-color="white"
+        slider-color="white"
+      >
+        <v-tab class="white--text" :key="2">
+          KUDOS
+        </v-tab>
+        <v-tab class="white--text" :key="1">
+          SEARCH
+        </v-tab>
+      </v-tabs>
+        <v-tabs-items style="width:100%" v-model="tabs">
+          <v-tab-item :key="2">
+            <v-layout row wrap>
+              <v-flex v-for="kudo in allKudos" :key="kudo.id" md4 >
+                <GitHubRepo :repo="kudo" />
+              </v-flex>
+            </v-layout>
+          </v-tab-item>
+          <v-tab-item :key="1">
+            <v-layout row wrap>
+              <v-flex v-for="repo in repos" :key="repo.id" md4>
+                <GitHubRepo :repo="repo" />
+              </v-flex>
+            </v-layout>
+          </v-tab-item>
+        </v-tabs-items>
+    </v-container>
+  </div>
 </template>
 
 <script>
@@ -277,78 +361,78 @@ import githubClient from '../githubClient'
 import { mapMutations, mapGetters, mapActions } from 'vuex'
 
 export default {
- name: 'Home',
- components: { SearchBar, GitHubRepo },
- data() {
-   return {
-     tabs: 0
-   }
- },
- computed: mapGetters(['allKudos', 'repos']),
- created() {
-   this.getKudos();
- },
- methods: {
-   githubQuery(query) {
-     this.tabs = 1;
-     githubClient
-       .getJSONRepos(query)
-       .then(response => this.resetRepos(response.items) )
-   },
-   ...mapMutations(['resetRepos']),
-   ...mapActions(['getKudos']),
- },
+  name: 'Home',
+  components: { SearchBar, GitHubRepo },
+  data() {
+    return {
+      tabs: 0
+    }
+  },
+  computed: mapGetters(['allKudos', 'repos']),
+  created() {
+    this.getKudos();
+  },
+  methods: {
+    githubQuery(query) {
+      this.tabs = 1;
+      githubClient
+        .getJSONRepos(query)
+        .then(response => this.resetRepos(response.items) )
+    },
+    ...mapMutations(['resetRepos']),
+    ...mapActions(['getKudos']),
+  },
 }
 </script>
 
 <style>
-.v-tabs__content {
-  padding-bottom: 2px;
-}
+ .v-tabs__content {
+   padding-bottom: 2px;
+ }
 </style>
 ```
 {% endraw %}
 
-`SearchBar` is the first component rendered in `Home`. When the user enters a query into the text input in the `Sidebar`, the component triggers a call to the Github API. `SearchBar` simply emits an event to its parent, `Home`, which contains the `githubQuery`.
+`SearchBar` is the first component rendered in `Home`. When the user enters a query into the text input in the `Sidebar`, this component triggers a call to the Github API. `SearchBar` simply emits an event to its parent, `Home`, which contains the `githubQuery`.
 
-`./kudo-oos/pkg/http/web/app/src/components/SearchBar.vue` should look like this:
+Create `./kudo-oos/pkg/http/web/app/src/components/SearchBar.vue` and copy in the following code:
 
 {% raw %}
 ```js
 <template>
-   <v-toolbar dark color="teal">
-     <v-spacer></v-spacer>
-     <v-text-field
-       solo-inverted
-       flat
-       hide-details
-       label="Search for your OOS project on Github + Press Enter"
-       prepend-inner-icon="search"
-       v-model="query"
-       @keyup.enter="onSearchSubmition"
-     ></v-text-field>
-     <v-spacer></v-spacer>
-     <button @click.prevent="logout">Logout</button>
-   </v-toolbar>
+    <v-toolbar dark color="teal">
+      <v-spacer></v-spacer>
+      <v-text-field
+        solo-inverted
+        flat
+        hide-details
+        label="Search for your OOS project on Github + Press Enter"
+        prepend-inner-icon="search"
+        v-model="query"
+        @keyup.enter="onSearchSubmition"
+      ></v-text-field>
+      <v-spacer></v-spacer>
+      <button @click.prevent="logout">Logout</button>
+    </v-toolbar>
 </template>
 
 <script>
 export default {
-   data() {
-     return {
-       query: null,
-     };
-   },
-   props: ['defaultQuery'],
-   methods: {
-     onSearchSubmition() {
-       this.$emit('search-submitted', this.query);
-     },
-     async logout () {
-       await this.$auth.logout()
-       this.$router.push('/')
-   }
- }
+    data() {
+      return {
+        query: null,
+      };
+    },
+    props: ['defaultQuery'],
+    methods: {
+      onSearchSubmition() {
+        this.$emit('search-submitted', this.query);
+      },
+      async logout () {
+        await this.$auth.logout()
+        this.$router.push('/')
+    }
+  }
 }
 </script>
 ```
@@ -358,68 +442,64 @@ Thanks to `@keyup.enter="onSearchSubmition"`, whenever the user hits enter `onSe
 
 The `Sidebar` is also responsible for logging the user out. Okta Vue SDK offers a handy method to clean up the session using the method `this.$auth.logout()`. Whenever the user logs out,  they can be redirected to the login page.
 
-The second component rendered in `Home` is the `GithupRepo`. This component is used inside two tabs: the first tab `Kudos` represents the user's favorites OSS projects and the `Search` tab renders the OSS projects returned from GitHub.
+The second component rendered in `Home` is the `GithubRepo`. This component is used inside two tabs: the first tab `Kudos` represents the user's favorites OSS projects and the `Search` tab renders the OSS projects returned from GitHub.
+
+Create `./kudo-oos/pkg/http/web/app/src/components/GithubRepo.vue` and copy in the following code:
 
 {% raw %}
 ```js
 <template>
- <v-card >
-   <v-card-title primary-title>
-     <div class="repo-card-content">
-       <h3 class="headline mb-0">
-         <router-link :to="{ name: 'repo-details', params: { id: repo.id }}" >{{repo.full_name}}</router-link>
-       </h3>
-       <div>{{repo.description}}</div>
-     </div>
-   </v-card-title>
-   <v-card-actions>
-     <v-chip>
-       {{repo.language}}
-     </v-chip>
-     <v-spacer></v-spacer>
-     <v-btn @click.prevent="toggleKudo(repo)"  flat icon color="pink">
-       <v-icon v-if="isKudo(repo)">favorite</v-icon>
-       <v-icon v-else>favorite_border</v-icon>
-     </v-btn>
-   </v-card-actions>
- </v-card>
+  <v-card >
+    <v-card-title primary-title>
+      <div class="repo-card-content">
+        <h3 class="headline mb-0">
+          <router-link :to="{ name: 'repo-details', params: { id: repo.id }}" >{{repo.full_name}}</router-link>
+        </h3>
+        <div>{{repo.description}}</div>
+      </div>
+    </v-card-title>
+    <v-card-actions>
+      <v-chip>
+        {{repo.language}}
+      </v-chip>
+      <v-spacer></v-spacer>
+      <v-btn @click.prevent="toggleKudo(repo)"  flat icon color="pink">
+        <v-icon v-if="isKudo(repo)">favorite</v-icon>
+        <v-icon v-else>favorite_border</v-icon>
+      </v-btn>
+    </v-card-actions>
+  </v-card>
 </template>
 
 <script>
 import { mapActions } from 'vuex';
 
 export default {
- data() {
-   return {}
- },
- props: ['repo'],
- methods: {
-   isKudo(repo) {
-     return this.$store.getters.isKudo(repo);
-   },
-   ...mapActions(['toggleKudo'])
- }
+  data() {
+    return {}
+  },
+  props: ['repo'],
+  methods: {
+    isKudo(repo) {
+      return this.$store.getters.isKudo(repo);
+    },
+    ...mapActions(['toggleKudo'])
+  }
 }
 </script>
 
 <style>
-.repo-card-content {
-  height: 90px;
-  overflow: scroll;
-}
+ .repo-card-content {
+   height: 90px;
+   overflow: scroll;
+ }
 </style>
 ```
 {% endraw %}
 
-Your SPA uses `vuex` to manage state in one centralized store accessible by all components.  `Vuex` also ensures that access to the store is performed in a predictable fashion respecting a few rules. To read the state, you need to define `getters`, synchronous changes to the state must be done via `mutations`, and asynchronous changes are done via `actions`.
+Your SPA uses `vuex` to manage state in one centralized store accessible by all components. `Vuex` also ensures that access to the store is performed in a predictable fashion respecting a few rules. To read the state, you need to define `getters`, synchronous changes to the state must be done via `mutations`, and asynchronous changes are done via `actions`.
 
-To install vuex, run:
-
-```sh
-yarn add vuex
-```
-
-You now need to create `./kudo-oos/pkg/http/web/app/src/store.js` with  `actions`, `mutations` and `getters`. Your initial data is `{ kudos: {}, repos: [] }`. `kudos` holds all the user's favorites OSS projects asa JavaScript Object where the key is the project id and the value is the project itself. `repos` is an array that holds the search results.
+You now need to create `./kudo-oos/pkg/http/web/app/src/store.js` with `actions`, `mutations` and `getters`. Your initial data is {% raw %}`{ kudos: {}, repos: [] }`{% endraw %}. `kudos` holds all the user's favorites OSS projects as a JavaScript Object where the key is the project id and the value is the project itself. `repos` is an array that holds the search results.
 
 There are two cases in which you may need to mutate state. First, when the user logs in you need to fetch the user's  favorites OSS projects from the Go server and set the `repos` in the store by calling `resetRepos`. Second, when the user favorites or unfavorites an OSS project, you need update the `kudos` in the store by calling `resetKudos` to reflect that change on the server.
 
@@ -427,7 +507,7 @@ There are two cases in which you may need to mutate state. First, when the user 
 
 The `Home` component uses the `getters` `allKudos` and `repos` to render the list of Kudos and SearchResults. In order to know whether a `repo` has been favorited or not, your app needs to call the `isKudo` getter.
 
-Create your `./kudo-oos/pkg/http/web/app/src/store.js` with the code below:
+Create the `./kudo-oos/pkg/http/web/app/src/store.js` file and copy in the code below:
 
 {% raw %}
 ```js
@@ -439,68 +519,68 @@ import APIClient from './apiClient';
 Vue.use(Vuex);
 
 const store = new Vuex.Store({
- state: {
-   kudos: {},
-   repos: [],
- },
- mutations: {
-   resetRepos (state, repos) {
-     state.repos = repos;
-   },
-   resetKudos(state, kudos) {
-     state.kudos = kudos;
-   }
- },
- getters: {
-   allKudos(state) {
-     return Object.values(state.kudos);
-   },
-   kudos(state) {
-     return state.kudos;
-   },
-   repos(state) {
-     return state.repos;
-   },
-   isKudo(state) {
-     return (repo)=> {
-       return !!state.kudos[repo.id];
-     };
-   }
- },
- actions: {
-   getKudos ({commit}) {
-     APIClient.getKudos().then((data) => {
-       commit('resetKudos', data.reduce((acc, kudo) => {
-                              return {[kudo.id]: kudo, ...acc}
-                            }, {}))
-     })
-   },
-   updateKudo({ commit, state }, repo) {
-     const kudos = { ...state.kudos, [repo.id]: repo };
+  state: {
+    kudos: {},
+    repos: [],
+  },
+  mutations: {
+    resetRepos (state, repos) {
+      state.repos = repos;
+    },
+    resetKudos(state, kudos) {
+      state.kudos = kudos;
+    }
+  },
+  getters: {
+    allKudos(state) {
+      return Object.values(state.kudos);
+    },
+    kudos(state) {
+      return state.kudos;
+    },
+    repos(state) {
+      return state.repos;
+    },
+    isKudo(state) {
+      return (repo)=> {
+        return !!state.kudos[repo.id];
+      };
+    }
+  },
+  actions: {
+    getKudos ({commit}) {
+      APIClient.getKudos().then((data) => {
+        commit('resetKudos', data.reduce((acc, kudo) => {
+                               return {[kudo.id]: kudo, ...acc}
+                             }, {}))
+      })
+    },
+    updateKudo({ commit, state }, repo) {
+      const kudos = { ...state.kudos, [repo.id]: repo };
 
-     return APIClient
-       .updateKudo(repo)
-       .then(() => {
-         commit('resetKudos', kudos)
-       });
-   },
-   toggleKudo({ commit, state }, repo) {
-     if (!state.kudos[repo.id]) {
-       return APIClient
-         .createKudo(repo)
-         .then(kudo => commit('resetKudos', { [kudo.id]: kudo, ...state.kudos }))
-     }
+      return APIClient
+        .updateKudo(repo)
+        .then(() => {
+          commit('resetKudos', kudos)
+        });
+    },
+    toggleKudo({ commit, state }, repo) {
+      if (!state.kudos[repo.id]) {
+        return APIClient
+          .createKudo(repo)
+          .then(kudo => commit('resetKudos', { [kudo.id]: kudo, ...state.kudos }))
+      }
 
-     const kudos = Object.entries(state.kudos).reduce((acc, [repoId, kudo]) => {
-                     return (repoId == repo.id) ? acc
-                                                : { [repoId]: kudo, ...acc };
-                   }, {});
+      const kudos = Object.entries(state.kudos).reduce((acc, [repoId, kudo]) => {
+                      return (repoId == repo.id) ? acc
+                                                 : { [repoId]: kudo, ...acc };
+                    }, {});
 
-     return APIClient
-       .deleteKudo(repo)
-       .then(() => commit('resetKudos', kudos));
-   }
- }
+      return APIClient
+        .deleteKudo(repo)
+        .then(() => commit('resetKudos', kudos));
+    }
+  }
 });
 
 export default store;
@@ -509,9 +589,9 @@ export default store;
 
 Inside `actions` you are performing ajax calls to the Go server. Every request made to the server must be authenticated or the server will respond with a client error. When the user logs in, an access token is created and can be accessed by calling: `await Vue.prototype.$auth.getAccessToken()`. This asynchronous function returns an access token required to send authenticated requests to the server.
 
-The Go server exposes a REST API for the `kudo` resource. You will implement methods to make ajax calls in order to create with `createKudo`, update with `updateKudo`, delete with `deleteKudo`, and list all kudos with`getKudos`. Notice that these methods call the `perform` method by passing the endpoint and the HTTP verb. `perform`, in turn, populates the request `Authorization` header with the access token so the Go server can validate the request.
+The Go server exposes a REST API for the `kudo` resource. You will implement methods to make ajax calls in order to create with `createKudo`, update with `updateKudo`, delete with `deleteKudo`, and list all kudos with `getKudos`. Notice that these methods call the `perform` method by passing the endpoint and the HTTP verb. `perform`, in turn, populates the request `Authorization` header with the access token so the Go server can validate the request.
 
-Create your `./kudo-oos/pkg/http/web/app/src/apiClient.js` with the code below.
+Create `./kudo-oos/pkg/http/web/app/src/apiClient.js` and copy in the code below.
 
 {% raw %}
 ```js
@@ -519,7 +599,6 @@ import Vue from 'vue';
 import axios from 'axios';
 
 const BASE_URI = 'http://localhost:4444';
-
 const client = axios.create({
   baseURL: BASE_URI,
   json: true
@@ -565,9 +644,22 @@ export default APIClient;
 ```
 {% endraw %}
 
+Also, create`./kudo-oos/pkg/http/web/app/src/githubClient.js` and copy in the code below. This file contains helper functions used to interact with the GitHub API.
+
+{% raw %}
+```js
+const API_URL = "https://api.github.com/search/repositories"
+export default {
+  getJSONRepos(query) {
+    return fetch(`${API_URL}?q=` + query).then(response => response.json());
+  }
+}
+```
+{% endraw %}
+
 Each `GithubRepo` has a `router-link` to `/repo/:id` that renders the `GithubRepoDetails` component. `GithubRepoDetails` shows details about the OSS project, like how many times the project has been of starred and the amount of open issues. The user can also leave a note describing why the project is special by clicking the Kudo button. The message is sent to Go server button by calling `updateKudo`.
 
-Create your `./kudo-oos/pkg/http/web/app/src/components/GithubRepoDetails.js` with the code below.
+Create the `./kudo-oos/pkg/http/web/app/src/components/GithubRepoDetails.js` file with the code below.
 
 {% raw %}
 ```js
@@ -575,6 +667,12 @@ Create your `./kudo-oos/pkg/http/web/app/src/components/GithubRepoDetails.js` wi
   <v-container grid-list-md fluid class="grey lighten-4" >
     <v-layout align-center justify-space-around wrap>
       <v-flex md6>
+        <!-- <v-img
+          :src="repo.owner.avatar_url"
+          :alt="repo.owner.login"
+          class="grey darken-4"
+          width="200"
+        ></v-img> -->
         <h1 class="primary--text">
           <a :href="repo.html_url">{{repo.full_name}}</a>
         </h1>
@@ -595,7 +693,6 @@ Create your `./kudo-oos/pkg/http/web/app/src/components/GithubRepoDetails.js` wi
           <v-avatar class="teal white--text">O</v-avatar>
           Open Issues: {{repo.open_issues_count}}
         </v-chip>
-
         <v-textarea
           name="input-7-1"
           label="Show some love"
@@ -612,7 +709,6 @@ Create your `./kudo-oos/pkg/http/web/app/src/components/GithubRepoDetails.js` wi
 
 <script>
 import { mapActions, mapGetters } from 'vuex';
-import githubClient from '../githubClient';
 
 export default {
   data() {
@@ -629,8 +725,8 @@ export default {
   },
   methods: {
     fetchData() {
-      githubClient
-        .getJSONRepo(this.$route.params.id)
+      fetch('https://api.github.com/repositories/' + this.$route.params.id)
+        .then(response => response.json())
         .then((response) => {
           this.repo = Object.assign(response, this.kudos[this.$route.params.id])
         })
@@ -639,10 +735,13 @@ export default {
   }
 }
 </script>
+
+<style>
+</style>
 ```
 {% endraw %}
 
-Now that your router, store, and components are in place, go ahead and modify `./kudo-oos/pkg/http/web/app/src/main.js` to properly initialize your SPA.
+Now that your router, store, and components are in place, go ahead and modify `./kudo-oos/pkg/http/web/app/src/main.js` to properly initialize your SPA. Copy in the following code and overwrite whatever is there.
 
 {% raw %}
 ```js
@@ -658,29 +757,26 @@ Vue.config.productionTip = process.env.NODE_ENV == 'production';
 router.beforeEach(Vue.prototype.$auth.authRedirectGuard())
 
 new Vue({
- store,
- router,
- render: h => h(App)
+  store,
+  router,
+  render: h => h(App)
 }).$mount('#app')
 ```
 {% endraw %}
 
-Note that we are calling `router.beforeEach(Vue.prototype.$auth.authRedirectGuard())` to look for routes tagged with `meta: {requiresAuth: true}` and redirect the user to the authentication flow if they are not logged in.
+Note that we are calling `router.beforeEach(Vue.prototype.$auth.authRedirectGuard())` to look for routes tagged with {% raw %}`meta: {requiresAuth: true}`{% endraw %} and redirect the user to the authentication flow if they are not logged in.
 
 ## Create a REST API with Go
 
-Now that users can securely authenticate on the frontend, you need to create a HTTP server written in Go to handle the requests, validate whether the user is authenticated, and perform CRUD operations.
+Now that users can securely authenticate on the frontend, you need to create a HTTP server written in Go to handle the requests, handle user authentication, and perform CRUD operations.
 
-I like using the [dep tool](https://github.com/golang/dep) to manage dependencies, so be sure to install it [from here](https://github.com/golang/dep#installation) before continuing.
+The first code you need to create is a structure to represent a GitHub repository. Start by creating `./kudo-oos/pkg/core/kudo.go`.
 
 ```bash
-dep init
-dep ensure -add github.com/okta/okta-jwt-verifier-golang
-dep ensure -add github.com/rs/cors
-dep ensure -add github.com/globalsign/mgo
+mkdir pkg/core
 ```
 
-You now need a structure to represent a GitHub repository. Start by creating `./kudo-oos/pkg/core/kudo.go` and define the following struct to represent a "kudo" (someone giving kudos to a specific repo).
+Now define the following struct to represent a "kudo" (someone giving kudos to a specific repo). Copy the code below into your newly created file, `./kudo-oos/pkg/core/kudo.go`.
 
 {% raw %}
 ```go
@@ -688,158 +784,164 @@ package core
 
 // Kudo represents a oos kudo.
 type Kudo struct {
-  UserID      string `json:"user_id" bson:"userId"`
-  RepoID      string `json:"id" bson:"repoId"`
-  RepoName    string `json:"full_name" bson:"repoName"`
-  RepoURL     string `json:"html_url" bson:"repoUrl"`
-  Language    string `json:"language" bson:"language"`
-  Description string `json:"description" bson:"description"`
-  Notes       string `json:"notes" bson:"notes"`
+        UserID      string `json:"user_id" bson:"userId"`
+        RepoID      string `json:"id" bson:"repoId"`
+        RepoName    string `json:"full_name" bson:"repoName"`
+        RepoURL     string `json:"html_url" bson:"repoUrl"`
+        Language    string `json:"language" bson:"language"`
+        Description string `json:"description" bson:"description"`
+        Notes       string `json:"notes" bson:"notes"`
 }
 ```
 {% endraw %}
 
-Next, create `./kudo-oos/pkg/core/repository.go` file and add the following interface to represent an API for any persistence layer you might want to use. In this article, we are going to use MongoDB.
+Next, create the `./kudo-oos/pkg/core/repository.go` file and add the following interface to represent an API for any persistence layer you might want to use. In this article, we are going to use MongoDB.
 
 {% raw %}
 ```go
 package core
-// Repository defines the API a repository implementation should follow.
+
+// Repository defines the API repository implementation should follow.
 type Repository interface {
-  Find(id string) (*Kudo, error)
-  FindAll(selector map[string]interface{}) ([]*Kudo, error)
-  Delete(kudo *Kudo) error
-  Update(kudo *Kudo) error
-  Create(kudo ...*Kudo) error
-  Count() (int, error)
+        Find(id string) (*Kudo, error)
+        FindAll(selector map[string]interface{}) ([]*Kudo, error)
+        Delete(kudo *Kudo) error
+        Update(kudo *Kudo) error
+        Create(kudo ...*Kudo) error
+        Count() (int, error)
 }
 ```
 {% endraw %}
 
-Finally, create the MongoDB repository that implements the interface you've just created. Create `./kudo-oos/pkg/storage/mongo.go` and add the following code.
+Finally, create the MongoDB repository that implements the interface you've just created. First, create a new directory to hold this code.
+
+```bash
+mkdir pkg/storage
+```
+
+Then create the file `./kudo-oos/pkg/storage/mongo.go` and add the following code.
 
 {% raw %}
 ```go
 package storage
 
 import (
-  "log"
-  "os"
-
-  "github.com/globalsign/mgo"
-  "github.com/globalsign/mgo/bson"
-  "github.com/{YOUR_GITHUB_USERNAME}/kudo-oos/pkg/core"
+        "log"
+        "os"
+        "github.com/globalsign/mgo"
+        "github.com/globalsign/mgo/bson"
+        "github.com/klebervirgilio/vue-crud-app-with-golang/pkg/core"
 )
 
 const (
-  collectionName = "kudos"
+        collectionName = "kudos"
 )
 
 func GetCollectionName() string {
-  return collectionName
+        return collectionName
 }
 
 type MongoRepository struct {
-  logger  *log.Logger
-  session *mgo.Session
+        logger  *log.Logger
+        session *mgo.Session
 }
 
 // Find fetches a kudo from mongo according to the query criteria provided.
 func (r MongoRepository) Find(repoID string) (*core.Kudo, error) {
-  session := r.session.Copy()
-  defer session.Close()
-  coll := session.DB("").C(collectionName)
+        session := r.session.Copy()
+        defer session.Close()
+        coll := session.DB("").C(collectionName)
 
-  var kudo core.Kudo
-  err := coll.Find(bson.M{"repoId": repoID, "userId": kudo.UserID}).One(&kudo)
-  if err != nil {
-    r.logger.Printf("error: %v\n", err)
-    return nil, err
-  }
-  return &kudo, nil
+        var kudo core.Kudo
+        err := coll.Find(bson.M{"repoId": repoID, "userId": kudo.UserID}).One(&kudo)
+        if err != nil {
+                r.logger.Printf("error: %v\n", err)
+                return nil, err
+        }
+        return &kudo, nil
 }
 
-// FindAll fetches kudos from the database.
+// FindAll fetches all kudos from the database. YES.. ALL! be careful.
 func (r MongoRepository) FindAll(selector map[string]interface{}) ([]*core.Kudo, error) {
-  session := r.session.Copy()
-  defer session.Close()
-  coll := session.DB("").C(collectionName)
+        session := r.session.Copy()
+        defer session.Close()
+        coll := session.DB("").C(collectionName)
 
-  var kudos []*core.Kudo
-  err := coll.Find(selector).All(&kudos)
-  if err != nil {
-    r.logger.Printf("error: %v\n", err)
-    return nil, err
-  }
-  return kudos, nil
+        var kudos []*core.Kudo
+        err := coll.Find(selector).All(&kudos)
+        if err != nil {
+                r.logger.Printf("error: %v\n", err)
+                return nil, err
+        }
+        return kudos, nil
 }
 
 // Delete deletes a kudo from mongo according to the query criteria provided.
 func (r MongoRepository) Delete(kudo *core.Kudo) error {
-  session := r.session.Copy()
-  defer session.Close()
-  coll := session.DB("").C(collectionName)
+        session := r.session.Copy()
+        defer session.Close()
+        coll := session.DB("").C(collectionName)
 
-  return coll.Remove(bson.M{"repoId": kudo.RepoID, "userId": kudo.UserID})
+        return coll.Remove(bson.M{"repoId": kudo.RepoID, "userId": kudo.UserID})
 }
 
 // Update updates an kudo.
 func (r MongoRepository) Update(kudo *core.Kudo) error {
-  session := r.session.Copy()
-  defer session.Close()
-  coll := session.DB("").C(collectionName)
+        session := r.session.Copy()
+        defer session.Close()
+        coll := session.DB("").C(collectionName)
 
-  return coll.Update(bson.M{"repoId": kudo.RepoID, "userId": kudo.UserID}, kudo)
+        return coll.Update(bson.M{"repoId": kudo.RepoID, "userId": kudo.UserID}, kudo)
 }
 
 // Create kudos in the database.
 func (r MongoRepository) Create(kudos ...*core.Kudo) error {
-  session := r.session.Copy()
-  defer session.Close()
-  coll := session.DB("").C(collectionName)
+        session := r.session.Copy()
+        defer session.Close()
+        coll := session.DB("").C(collectionName)
 
-  for _, kudo := range kudos {
-    _, err := coll.Upsert(bson.M{"repoId": kudo.RepoID, "userId": kudo.UserID}, kudo)
-    if err != nil {
-      return err
-    }
-  }
+        for _, kudo := range kudos {
+                _, err := coll.Upsert(bson.M{"repoId": kudo.RepoID, "userId": kudo.UserID}, kudo)
+                if err != nil {
+                        return err
+                }
+        }
 
-  return nil
+        return nil
 }
 
 // Count counts documents for a given collection
 func (r MongoRepository) Count() (int, error) {
-  session := r.session.Copy()
-  defer session.Close()
-  coll := session.DB("").C(collectionName)
-  return coll.Count()
+        session := r.session.Copy()
+        defer session.Close()
+        coll := session.DB("").C(collectionName)
+        return coll.Count()
 }
 
 // NewMongoSession dials mongodb and creates a session.
 func newMongoSession() (*mgo.Session, error) {
-  mongoURL := os.Getenv("MONGO_URL")
-  if mongoURL == "" {
-    log.Fatal("MONGO_URL not provided")
-  }
-  return mgo.Dial(mongoURL)
+        mongoURL := os.Getenv("MONGO_URL")
+        if mongoURL == "" {
+                log.Fatal("MONGO_URL not provided")
+        }
+        return mgo.Dial(mongoURL)
 }
 
 func newMongoRepositoryLogger() *log.Logger {
-  return log.New(os.Stdout, "[mongoDB] ", 0)
+        return log.New(os.Stdout, "[mongoDB] ", 0)
 }
 
 func NewMongoRepository() core.Repository {
-  logger := newMongoRepositoryLogger()
-  session, err := newMongoSession()
-  if err != nil {
-    logger.Fatalf("Could not connect to the database: %v\n", err)
-  }
+        logger := newMongoRepositoryLogger()
+        session, err := newMongoSession()
+        if err != nil {
+                logger.Fatalf("Could not connect to the database: %v\n", err)
+        }
 
-  return MongoRepository{
-    session: session,
-    logger:  logger,
-  }
+        return MongoRepository{
+                session: session,
+                logger:  logger,
+        }
 }
 ```
 {% endraw %}
@@ -848,7 +950,13 @@ func NewMongoRepository() core.Repository {
 
 Before you can create HTTP handlers, you'll need to write code to handle incoming request payloads.
 
-Create `./kudo-oos/pkg/kudo/service.go` and insert the code below.
+First, create the necessary directory:
+
+```bash
+mkdir pkg/kudo
+```
+
+Then, create the file `./kudo-oos/pkg/kudo/service.go` and insert the code below.
 
 {% raw %}
 ```go
@@ -856,8 +964,7 @@ package kudo
 
 import (
   "strconv"
-
-  "github.com/{YOUR_GITHUB_USERNAME}/kudo-oos/pkg/core"
+  "github.com/{{ YOUR_GITHUB_USERNAME }}/kudo-oos/pkg/core"
 )
 
 type GitHubRepo struct {
@@ -933,17 +1040,21 @@ Your REST API exposes the `kudo` resource to support clients like your SPA. A no
 ```
  # Fetches all open source projects favorited by the user
 GET /kudos
+
 # Fetches a favorited open source project by id
 GET /kudos/:id
-# Creates (or favorites)  a open source project for the logged in user
+
+# Creates (or favorites) an open source project for the logged in user
 POST /kudos
-# Updates  a favorited open source project
+
+# Updates a favorited open source project
 PUT /kudos/:id
+
 # Deletes (or unfavorites) a favorited open source project
 DELETE /kudos/:id
 ```
 
-To support this, you need to add new file named `./kudo-oos/pkg/http/handlers.go` and define your HTTP handlers using the fabulous [httprouter library](https://github.com/julienschmidt/httprouter).
+To support this, you need to create a new file named `./kudo-oos/pkg/http/handlers.go` and define your HTTP handlers using the fabulous [httprouter library](https://github.com/julienschmidt/httprouter).
 
 {% raw %}
 ```go
@@ -954,10 +1065,9 @@ import (
   "io/ioutil"
   "net/http"
   "strconv"
-
   "github.com/julienschmidt/httprouter"
-  "github.com/{YOUR_GITHUB_USERNAME}/kudo-oos/pkg/core"
-  "github.com/{YOUR_GITHUB_USERNAME}/kudo-oos/pkg/kudo"
+  "github.com/{{ YOUR_GITHUB_USERNAME }}/kudo-oos/pkg/core"
+  "github.com/{{ YOUR_GITHUB_USERNAME }}/kudo-oos/pkg/kudo"
 )
 
 type Service struct {
@@ -1046,7 +1156,7 @@ func (s Service) Update(w http.ResponseWriter, r *http.Request, params httproute
 
 This is the most crucial component of your REST API server. Without this middleware, any user can perform CRUD operations against the database.
 
-In the event that no valid JWT is provided in the HTTP authorization header, the API call is aborted and an error returned to the client.
+In the event that no valid JWT is provided in the HTTP authorization header, the API call will be aborted and an error will be returned to the client.
 
 Create `./kudo-oos/pkg/http/middlewares.go` and paste in the following code:
 
@@ -1059,7 +1169,6 @@ import (
   "log"
   "net/http"
   "strings"
-
   jwtverifier "github.com/okta/okta-jwt-verifier-golang"
   "github.com/rs/cors"
 )
@@ -1124,7 +1233,13 @@ As you can see, the middleware `OktaAuth` uses [okta-jwt-verifier-golang](https:
 
 ## Define Your Go REST API Entry Point
 
-Open up `./kudo-oos/pkg/cmd/main.go` and add the following code to spin up your Go webserver.
+Now create a new folder to hold the main Go application:
+
+```bash
+mkdir cmd
+```
+
+Then create the file `./kudo-oos/cmd/main.go` and add the following code to spin up your Go web server.
 
 {% raw %}
 ```go
@@ -1134,9 +1249,8 @@ import (
   "log"
   "net/http"
   "os"
-
-  web "github.com/{YOUR_GITHUB_USERNAME}/kudo-oos/pkg/http"
-  "github.com/{YOUR_GITHUB_USERNAME}/kudo-oos/pkg/storage"
+  web "github.com/{{ YOUR_GITHUB_USERNAME }}/kudo-oos/pkg/http"
+  "github.com/{{ YOUR_GITHUB_USERNAME }}/kudo-oos/pkg/storage"
 )
 
 func main() {
@@ -1151,12 +1265,67 @@ func main() {
 ```
 {% endraw %}
 
-## Run the Go +Vue SPA
+Next, create a folder to hold your DB initialization code.
 
-There are many ways to run backend and frontend apps. The simplest way (for development purposes) is to just use good old fashioned [Make](https://www.gnu.org/software/make/manual/html_node/Introduction.html).
+```bash
+mkdir cmd/db
+```
+
+Then create a new file, `./kudo-oos/cmd/db/setup.go` and insert the following code.
+
+{% raw %}
+```go
+package main
+
+import (
+        "log"
+        "os"
+        "github.com/globalsign/mgo"
+)
+
+func main() {
+        var err error
+        mongoURL := os.Getenv("MONGO_URL")
+        if mongoURL == "" {
+                log.Fatal("MONGO_URL not provided")
+        }
+        session, err := mgo.Dial(mongoURL)
+        defer session.Close()
+
+        err = session.DB("").AddUser("mongo_user", "mongo_secret", false)
+
+        info := &mgo.CollectionInfo{}
+        err = session.DB("").C("kudos").Create(info)
+
+        if err != nil {
+                log.Fatal(err)
+        }
+}
+```
+{% endraw %}
+
+## Manage Dependencies
+
+I like using the [dep tool](https://github.com/golang/dep) to manage dependencies, so be sure to [install it](https://github.com/golang/dep#installation) before continuing.
+
+Next, run the following commands to initialize the dep tool and create a
+`Gopkg.lock` and `Gopkg.toml` file (which will hold dependency resolution
+information).
+
+```bash
+dep init
+dep ensure -add github.com/okta/okta-jwt-verifier-golang
+dep ensure -add github.com/rs/cors
+dep ensure -add github.com/globalsign/mgo
+```
+
+## Run the Go + Vue SPA
+
+There are many ways to run back-end and front-end apps. The simplest way (for development purposes) is to just use good old fashioned [Make](https://www.gnu.org/software/make/manual/html_node/Introduction.html).
 
 A Makefile contains build instructions for your website. It's like an old-school version of `gulp`, `grunt`, and the more hip Node tools. To get started, create a file named `Makefile` in the root of your project folder and copy in the following code.
 
+{% raw %}
 ```
 setup: run_services
 	@go run ./cmd/db/setup.go
@@ -1168,13 +1337,17 @@ run_server:
 	@MONGO_URL=mongodb://mongo_user:mongo_secret@0.0.0.0:27017/kudos PORT=:4444 go run cmd/main.go
 
 run_client:
-    @/bin/bash -c "cd $$GOPATH/src/github.com/klebervirgilio/kudo-oos/pkg/http/web/app && yarn serve"
+	@/bin/bash -c "cd $$GOPATH/src/github.com/{{ YOUR_GITHUB_USERNAME }}/kudo-oos/pkg/http/web/app && yarn serve"
 ```
+{% endraw %}
+
 ### Create a Dockerfile
 
 Next, you'll want to create a Dockerfile. This file tells Docker how to run your application and spares you the effort of deploying a real MongoDB instance for testing purposes.
 
-All you need to do here is create a file named `docker-compose.yml` and copy in the following code.
+If you don't already have them installed, go install [docker](https://docs.docker.com/install/) and [docker-compose](https://docs.docker.com/compose/install/#install-compose).
+
+Then create a file named `docker-compose.yml` and copy in the following code.
 
 ```yaml
 version: '3'
@@ -1202,6 +1375,7 @@ Your Go webserver should be listening on `0.0.0.0:4444` and your SPA should be s
 ## Learn More About Go and Vue
 
 Vue.js is a powerful and straightforward framework with phenomenal adoption and community growth. In this tutorial, you learned to build a fully-functional, secure SPA with Vue and Go.
+
 To learn more about Vue.js, head over to <https://vuejs.org> or check out these other great resources from the [@oktadev team](https://twitter.com/oktadev):
 
 - [The Ultimate Guide to Progressive Web Applications](/blog/2017/07/20/the-ultimate-guide-to-progressive-web-applications)
