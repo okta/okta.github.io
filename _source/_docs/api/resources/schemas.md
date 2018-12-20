@@ -774,7 +774,7 @@ curl -v -X POST \
           "type": "string",
           "required": false,
           "minLength": 1,
-          "maxLength": 20,
+          "maxLength": 20
         }
       },
       "required": []
@@ -883,7 +883,7 @@ curl -v -X POST \
           "type": "string",
           "required": false,
           "minLength": 1,
-          "maxLength": 10,
+          "maxLength": 10
         }
       },
       "required": []
