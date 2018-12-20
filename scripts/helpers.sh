@@ -46,53 +46,21 @@ function interject() {
     echo "----- ${1} -----"
 }
 
-function check_for_npm_dependencies() {
-    interject 'Checking NPM dependencies'
-    command -v npm > /dev/null 2>&1 || { echo "This script requires 'npm', which is not installed"; exit 1; }
+function check_for_yarn_dependencies() {
+    interject 'Checking Yarn dependencies'
+    command -v yarn > /dev/null 2>&1 || { echo "This script requires 'yarn', which is not installed"; exit 1; }
     npm install
-    interject 'Done checking NPM dependencies'
+    interject 'Done checking Yarn dependencies'
 }
-
-function check_for_jekyll_dependencies() {
-    interject 'Checking Jekyll dependencies'
-    command -v rvm > /dev/null 2>&1 || { echo "This script requires 'rvm', which is not installed"; exit 1; }
-
-    # The file `.ruby-version` has the current ruby version and is used by rbenv
-    # https://rvm.io/workflow/projects#project-file-ruby-version
-    # For example, this file might contain this line: "ruby-2.0.0-p643"
-    # This version of ruby is needed for the gems that Jekyll requires.
-    ruby_version=`cat .ruby-version`
-    if ! rvm list strings | grep $ruby_version > /dev/null; then
-        interject "Installing the version of Ruby needed by Jekyll (${ruby_version})"
-        rvm install $ruby_version
-        interject "Installed ${ruby_version}"
-    fi
-    # "source" the version of Ruby that we need, so the "gem" and "bundler"
-    # commands use the version of Ruby that we want.
-    # https://rvm.io/rvm/basics#post-install-configuration
-    source $(rvm `cat .ruby-version` do rvm env --path)
-    if ! ((command -v bundler && bundler --version) > /dev/null 2>&1); then
-        interject 'Bundler is not installed, installing now'
-        gem install bundler --version '1.14.6'
-        interject 'Done installing bundler'
-    else
-        interject 'Bundler is installed at:' `command -v bundler`
-    fi
-    interject 'Installing the gems needed for Jekyll'
-    bundle install
-    interject 'Done installing the gems needed for Jekyll'
-    interject 'Done Jekyll checking dependencies'
-}
-
 
 function generate_html() {
     check_for_jekyll_dependencies
 
-    interject 'Using Jekyll to generate HTML'
+    interject 'Building Site'
 
     if [ ! -d $GENERATED_SITE_LOCATION ]; then
-        check_for_npm_dependencies
-        bundle exec jekyll build
+        check_for_yarn_dependencies
+        yarn build
         local status=$?
         interject 'Done generating HTML'
         return $status
@@ -156,21 +124,4 @@ function send_promotion_message() {
       -H "Content-Type: application/json" \
       -X POST -d "[{\"artifactId\":\"$1\",\"repository\":\"npm-okta\",\"artifact\":\"$2\",\"version\":\"$3\",\"promotionType\":\"ARTIFACT\"}]" \
       -k "${APERTURE_BASE_URL}/v1/artifact-promotion/createPromotionEvent"
-}
-
-function removeHTMLExtensions() {
-    # Removing all generated .html files (excludes the main 'index.html' in the dir) and
-    # create 302 redirects to extensionless pages
-    find ./dist -type f ! -iname 'index.html' -name '*.html' -print0 | while read -d $'\0' f
-    do
-
-        if [ -e `echo ${f%.html}` ] ;
-        then
-            # Skip if files have already been updated
-            continue;
-        fi
-        cp "$f" "${f%.html}";
-        path=`echo ${f%.html} | sed "s/.\/dist//g"`
-        sed "s+{{ page.redirect.to | remove: 'index' }}+$path+g" ./_source/_layouts/redirect.html > $f
-    done
 }
