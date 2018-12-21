@@ -2,7 +2,7 @@
 
 
 # Where the generated VuePress site will be placed
-GENERATED_SITE_LOCATION="/packages/docs/.vuepress/dist"
+GENERATED_SITE_LOCATION="../packages/docs/.vuepress/dist"
 
 # Define these ENV vars if they aren't defined already,
 # so these scripts can be run outside of CI

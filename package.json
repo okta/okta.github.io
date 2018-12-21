@@ -6,6 +6,7 @@
   ],
   "scripts": {
     "dev": "yarn workspace docs dev",
-    "build": "yarn workspace docs build"
+    "build": "yarn workspace docs build",
+    "test": "echo \"Tests being migrated in different branch.\" && exit 0"
   }
 }
