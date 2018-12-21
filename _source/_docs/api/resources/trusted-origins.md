@@ -24,22 +24,21 @@ Creates a new trusted origin
 #### Valid Request Example
 {:.api .api-request .api-request-example}
 ~~~sh
-curl -X POST
--H "Accept: application/json"\
+curl -X POST \
+-H "Accept: application/json" \
 -H "Content-Type: application/json" \
 -H "Authorization: SSWS ${api_token}" \
--d '
-{
-    "name": "New Trusted Origin",
-    "origin": "http://example.com",
-    "scopes": [
-        {
-            "type": "CORS"
-        },
-        {
-            "type": "REDIRECT"
-        }
-    ]
+-d '{
+  "name": "New Trusted Origin",
+  "origin": "http://example.com",
+  "scopes": [
+    {
+      "type": "CORS"
+    },
+    {
+      "type": "REDIRECT"
+    }
+  ]
 }' "https://{yourOktaDomain}/api/v1/trustedOrigins"
 ~~~
 
@@ -89,24 +88,22 @@ curl -X POST
 #### Invalid Request Example
 {:.api .api-request .api-request-example}
 ~~~sh
-curl -X POST
--H "Accept: application/json"\
+curl -X POST \
+-H "Accept: application/json" \
 -H "Content-Type: application/json" \
 -H "Authorization: SSWS ${api_token}" \
--d '
-{
-    "name": "Trusted Origin with Invalid Origin Value",
-    "origin": "example.com",
-    "scopes": [
-        {
-            "type": "CORS"
-        },
-        {
-            "type": "REDIRECT"
-        }
-    ]
-}
-' "https://{yourOktaDomain}/api/v1/trustedOrigins"
+-d '{
+  "name": "Trusted Origin with Invalid Origin Value",
+  "origin": "example.com",
+  "scopes": [
+    {
+      "type": "CORS"
+    },
+    {
+      "type": "REDIRECT"
+    }
+  ]
+}' "https://{yourOktaDomain}/api/v1/trustedOrigins"
 ~~~
 
 #### Unsuccessful Response Example
@@ -366,7 +363,7 @@ curl -X GET \
 -H "Accept: application/json" \
 -H "Content-Type: application/json" \
 -H "Authorization: SSWS ${api_token}" \
-"https://{yourOktaDomain}/api/v1/trustedOrigins/?limit=100&filter=%28id+eq+%22tosue7JvguwJ7U6kz0g3%22+or+id+eq+%22tos10hzarOl8zfPM80g4%22%29"
+"https://{yourOktaDomain}/api/v1/trustedOrigins?limit=100&filter=%28id+eq+%22tosue7JvguwJ7U6kz0g3%22+or+id+eq+%22tos10hzarOl8zfPM80g4%22%29"
 ~~~
 
 ##### Response Example
@@ -471,50 +468,48 @@ Parameter         | Description              | Param Type | DataType | Required 
 #### Request Example
 {:.api .api-request .api-request-example}
 ~~~sh
-curl -X PUT
--H "Accept: application/json"\
+curl -X PUT \
+-H "Accept: application/json" \
 -H "Content-Type: application/json" \
 -H "Authorization: SSWS ${api_token}" \
--d '
-{
-    "id": "tosue7JvguwJ7U6kz0g3",
-    "name": "Updated Example Trusted Origin",
-    "origin": "http://updated.example.com",
-    "scopes": [
-        {
-            "type": "CORS"
-        },
-        {
-            "type": "REDIRECT"
-        }
-    ],
-    "status": "ACTIVE",
-    "created": "2017-12-16T05:01:12.000Z",
-    "createdBy": "00ut5t92p6IEOi4bu0g3",
-    "lastUpdated": "2017-12-16T05:01:12.000Z",
-    "lastUpdatedBy": "00ut5t92p6IEOi4bu0g3",
-    "_links": {
-        "self": {
-            "href": "https://{yourOktaDomain}/api/v1/trustedOrigins/tosue7JvguwJ7U6kz0g3",
-            "hints": {
-                "allow": [
-                    "GET",
-                    "PUT",
-                    "DELETE"
-                ]
-            }
-        },
-        "deactivate": {
-            "href": "https://{yourOktaDomain}/api/v1/trustedOrigins/tosue7JvguwJ7U6kz0g3/lifecycle/deactivate",
-            "hints": {
-                "allow": [
-                    "POST"
-                ]
-            }
-        }
+-d '{
+  "id": "tosue7JvguwJ7U6kz0g3",
+  "name": "Updated Example Trusted Origin",
+  "origin": "http://updated.example.com",
+  "scopes": [
+    {
+      "type": "CORS"
+    },
+    {
+      "type": "REDIRECT"
     }
-}
-' "https://{yourOktaDomain}/api/v1/trustedOrigins/tosue7JvguwJ7U6kz0g3"
+  ],
+  "status": "ACTIVE",
+  "created": "2017-12-16T05:01:12.000Z",
+  "createdBy": "00ut5t92p6IEOi4bu0g3",
+  "lastUpdated": "2017-12-16T05:01:12.000Z",
+  "lastUpdatedBy": "00ut5t92p6IEOi4bu0g3",
+  "_links": {
+    "self": {
+      "href": "https://{yourOktaDomain}/api/v1/trustedOrigins/tosue7JvguwJ7U6kz0g3",
+      "hints": {
+        "allow": [
+          "GET",
+          "PUT",
+          "DELETE"
+        ]
+      }
+    },
+    "deactivate": {
+      "href": "https://{yourOktaDomain}/api/v1/trustedOrigins/tosue7JvguwJ7U6kz0g3/lifecycle/deactivate",
+      "hints": {
+        "allow": [
+          "POST"
+        ]
+      }
+    }
+  }
+}' "https://{yourOktaDomain}/api/v1/trustedOrigins/tosue7JvguwJ7U6kz0g3"
 ~~~
 
 #### Response Example
@@ -582,8 +577,8 @@ Parameter         | Description              | Param Type | DataType | Required 
 #### Request Example
 {:.api .api-request .api-request-example}
 ~~~sh
-curl -X POST
--H "Accept: application/json"\
+curl -X POST \
+-H "Accept: application/json" \
 -H "Content-Type: application/json" \
 -H "Authorization: SSWS ${api_token}" \
 "https://{yourOktaDomain}/api/v1/trustedOrigins/tos10hzarOl8zfPM80g4/lifecycle/activate"
@@ -651,8 +646,8 @@ Parameter         | Description              | Param Type | DataType | Required 
 #### Request Example
 {:.api .api-request .api-request-example}
 ~~~sh
-curl -X POST
--H "Accept: application/json"\
+curl -X POST \
+-H "Accept: application/json" \
 -H "Content-Type: application/json" \
 -H "Authorization: SSWS ${api_token}" \
 "https://{yourOktaDomain}/api/v1/trustedOrigins/tos10hzarOl8zfPM80g4/lifecycle/deactivate"
@@ -720,8 +715,8 @@ Parameter         | Description              | Param Type | DataType | Required 
 #### Request Example
 {:.api .api-request .api-request-example}
 ~~~sh
-curl -X DELETE
--H "Accept: application/json"\
+curl -X DELETE \
+-H "Accept: application/json" \
 -H "Content-Type: application/json" \
 -H "Authorization: SSWS ${api_token}" \
 "https://{yourOktaDomain}/api/v1/trustedOrigins/tos10hzarOl8zfPM80g3"
