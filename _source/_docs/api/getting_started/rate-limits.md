@@ -9,12 +9,16 @@ excerpt: Understand rate limits at Okta and learn how to design for efficient us
 
 # Rate Limits at Okta
 
-The number of API requests for an organization is limited for all APIs in order to protect the service for all users.
+The number of API requests for an organization is limited for all APIs in order to protect the service for all users. The number of Okta-generated emails that can be sent also has rate limits.
 
-Okta has two types of rate limits:
+Okta has two types of API rate limits:
 
 * [Org-wide rate limits](#org-wide-rate-limits) that vary by API endpoint. These limits are applied on a per-minute or per-second basis, and some are also applied on a per-user basis. For example, if your org sends a request to list applications more than one hundred times in a minute, the org-wide rate limit is exceeded. These limits protect against denial-of-service attacks, and help ensure that adequate resources are available for all customers.
 * [Concurrent rate limits](#concurrent-rate-limits) on the number of simultaneous transactions regardless of endpoint. For example, if you sent 77 very long-lasting requests to any API endpoint simultaneously, you might exceed the concurrent rate limit.
+
+Okta has one type of email rate limit:
+
+* [Okta-Generated Email Message Rate Limits](#okta-generated-email-message-rate-limits) that vary by email type. Okta enforces rate limits on the number of Okta-generated email messages that are sent to customers and customer users. For example, if the number of emails sent to a given user exceeds the per-minute limit for a given email type, subsequent emails of that type are dropped for that user until that minute elapses.
 
 Rate limits may be changed to protect customers. We provide advance warning of changes when possible.
 
@@ -353,3 +357,10 @@ The following endpoints are used by the Okta home page for authentication and si
 | `/api/plugin/{protocolVersion}/sites`    |   150 |
 | `/bc/fileStoreRecord`                          |    500 |
 | `/bc/globalFileStoreRecord`               |    500 |
+
+
+
+
+## Okta-Generated Email Message Rate Limits
+
+Limits are applied on a per-recipient basis and vary by email-type. The limit for some email types is no more than 30 emails per-recipient, per-minute, while other email types are configured with higher limits. These limits protect your org against denial-of-service attacks and help ensure that adequate resources are available for all customers.
