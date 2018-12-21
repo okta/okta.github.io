@@ -52,27 +52,27 @@ curl -v -X POST \
 -H "Content-Type: application/json" \
 -H "Authorization: SSWS ${api_token}" \
 -d '{
-      "client_name": "Example OAuth Client",
-      "client_uri": "https://www.example-application.com",
-      "logo_uri": "https://www.example-application.com/logo.png",
-      "application_type": "web",
-      "redirect_uris": [
-         "https://www.example-application.com/oauth2/redirectUri"
-      ],
-      "post_logout_redirect_uris": [
-        "https://www.example-application.com/oauth2/postLogoutRedirectUri"
-      ],
-      "response_types": [
-         "code",
-         "id_token"
-      ],
-      "grant_types": [
-         "authorization_code",
-         "refresh_token"
-      ],
-      "token_endpoint_auth_method": "client_secret_post",
-      "initiate_login_uri": "https://www.example-application.com/oauth2/login"
-    }' "https://{yourOktaDomain}/oauth2/v1/clients"
+  "client_name": "Example OAuth Client",
+  "client_uri": "https://www.example-application.com",
+  "logo_uri": "https://www.example-application.com/logo.png",
+  "application_type": "web",
+  "redirect_uris": [
+     "https://www.example-application.com/oauth2/redirectUri"
+  ],
+  "post_logout_redirect_uris": [
+    "https://www.example-application.com/oauth2/postLogoutRedirectUri"
+  ],
+  "response_types": [
+     "code",
+     "id_token"
+  ],
+  "grant_types": [
+     "authorization_code",
+     "refresh_token"
+  ],
+  "token_endpoint_auth_method": "client_secret_post",
+  "initiate_login_uri": "https://www.example-application.com/oauth2/login"
+}' "https://{yourOktaDomain}/oauth2/v1/clients"
 ~~~
 
 ##### Response Example
@@ -448,27 +448,27 @@ curl -v -X PUT \
 -H "Content-Type: application/json" \
 -H "Authorization: SSWS ${api_token}" \
 -d '{
-      "client_id": "0jrabyQWm4B9zVJPbotY",
-      "client_name": "Updated OAuth Client",
-      "client_uri": "https://www.example-application.com",
-      "logo_uri": "https://www.example-application.com/logo.png",
-      "application_type": "web",
-      "redirect_uris": [
-        "https://www.example-application.com/oauth2/redirectUri"
-      ],
-      "post_logout_redirect_uris": [
-        "https://www.example-application.com/oauth2/postLogoutRedirectUri"
-      ],
-      "response_types": [
-        "id_token",
-        "code"
-      ],
-      "grant_types": [
-        "authorization_code"
-      ],
-      "token_endpoint_auth_method": "client_secret_post",
-      "initiate_login_uri": "https://www.example-application.com/oauth2/login"
-    }' "https://{yourOktaDomain}/oauth2/v1/clients/0jrabyQWm4B9zVJPbotY"
+  "client_id": "0jrabyQWm4B9zVJPbotY",
+  "client_name": "Updated OAuth Client",
+  "client_uri": "https://www.example-application.com",
+  "logo_uri": "https://www.example-application.com/logo.png",
+  "application_type": "web",
+  "redirect_uris": [
+    "https://www.example-application.com/oauth2/redirectUri"
+  ],
+  "post_logout_redirect_uris": [
+    "https://www.example-application.com/oauth2/postLogoutRedirectUri"
+  ],
+  "response_types": [
+    "id_token",
+    "code"
+  ],
+  "grant_types": [
+    "authorization_code"
+  ],
+  "token_endpoint_auth_method": "client_secret_post",
+  "initiate_login_uri": "https://www.example-application.com/oauth2/login"
+}' "https://{yourOktaDomain}/oauth2/v1/clients/0jrabyQWm4B9zVJPbotY"
 ~~~
 
 ##### Response Example
@@ -550,7 +550,7 @@ curl -v -X POST \
 -H "Accept: application/json" \
 -H "Content-Type: application/json" \
 -H "Authorization: SSWS ${api_token}" \
- "https://{yourOktaDomain}/oauth2/v1/clients/0jrabyQWm4B9zVJPbotY/lifecycle/newSecret"
+"https://{yourOktaDomain}/oauth2/v1/clients/0jrabyQWm4B9zVJPbotY/lifecycle/newSecret"
 ~~~
 
 ##### Response Example

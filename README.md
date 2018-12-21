@@ -1,4 +1,4 @@
-[<img src="https://devforum.okta.com/uploads/oktadev/original/1X/bf54a16b5fda189e4ad2706fb57cbb7a1e5b8deb.png" align="right" width="256px"/>][doc]
+[<img src="https://devforum.okta.com/uploads/oktadev/original/1X/0c6402653dfb70edc661d4976a43a46f33e5e919.png" align="right" width="256px"/>][doc]
 
 [![Support](https://img.shields.io/badge/support-developer%20forum-blue.svg)][devforum] [![Build Status](https://travis-ci.org/okta/okta.github.io.svg?branch=source)](https://travis-ci.org/okta/okta.github.io)
 
@@ -10,7 +10,7 @@ The [Okta developer site][doc] serves Okta's API documentation and guides, inclu
 - [Authentication quickstarts](https://developer.okta.com/quickstart/)
 - [Developer Blog](https://developer.okta.com/blog/)
 
-If you have questions or need help with Okta's APIs or SDKs, visit the **[Developer Forum][devforum]**. You can also email developers@okta.com to create a support ticket.
+If you have questions or need help with Okta's APIs or SDKs, visit the **[Developer Forum][devforum]**. If you think you've encountered a bug in one of our SDKs, please create a GitHub issue for that SDK.
 
 ## Contributing to the site
 
