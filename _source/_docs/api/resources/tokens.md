@@ -19,16 +19,15 @@ Create a token.  This API does not require any token-based authentication to acc
 #### Request Example
 
 ~~~ shell
-curl -v -H "Content-type:application/json" \
+curl -v -X POST \
+-H "Content-type:application/json" \
 -H "Accept:application/json" \
--X POST https://{yourOktaDomain}/api/v1/tokens/ \
--d \
-'{
+-d '{
   "username": "user8u3VOJBREVQHBTAS@asdf.com",
   "password": "SecretPass",
   "clientAppId": "capalkhfadflkjh",
   "deviceName": "Sample Device Name"
-}'
+}' "https://{yourOktaDomain}/api/v1/tokens"
 ~~~
 
 #### Response Example
@@ -49,8 +48,9 @@ Revokes the token that is being used to authenticate to the API.
 #### Request Example
 
 ~~~ shell
-curl -v -H "Content-type:application/json" \
--H "Authorization:SSWS 00F-MBcxD2SC8tzXDCDZm2a04qtXLcFqtlrrPu6eVtxRs" \
+curl -v -X DELETE \
+-H "Content-type:application/json" \
+-H "Authorization:SSWS ${api_token}" \
 -H "Accept:application/json" \
--X DELETE https://{yourOktaDomain}/api/v1/tokens/
+"https://{yourOktaDomain}/api/v1/tokens"
 ~~~
