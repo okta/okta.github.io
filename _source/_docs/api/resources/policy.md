@@ -156,22 +156,22 @@ curl -v -X PUT \
 -H "Content-Type: application/json" \
 -H "Authorization: SSWS ${api_token}" \
 -d '{
-      "type": "OKTA_SIGN_ON",
-      "id": "00plrilJ7jZ66Gn0X0g3",
-      "status": "ACTIVE",
-      "name": "Default Policy",
-      "description": "The default policy applies in all situations if no other policy applies.",
-      "priority": 1,
-      "conditions": {
-        "people": {
-          "groups": {
-            "include": [
-              "00glr9dY4kWK9k5ZM0g3"
-            ]
-         }
-        }
-     }, \
-"https://{yourOktaDomain}/api/v1/policies/{policyId}"
+  "type": "OKTA_SIGN_ON",
+  "id": "00plrilJ7jZ66Gn0X0g3",
+  "status": "ACTIVE",
+  "name": "Default Policy",
+  "description": "The default policy applies in all situations if no other policy applies.",
+  "priority": 1,
+  "conditions": {
+    "people": {
+      "groups": {
+        "include": [
+          "00glr9dY4kWK9k5ZM0g3"
+        ]
+      }
+    }
+  }
+}' "https://{yourOktaDomain}/api/v1/policies/{policyId}"
 ~~~
 
 ##### Response Types
@@ -194,20 +194,20 @@ curl -v -X POST \
 -H "Content-Type: application/json" \
 -H "Authorization: SSWS ${api_token}" \
 -d '{
-      "type": "OKTA_SIGN_ON",
-      "status": "ACTIVE",
-      "name": "Default Policy",
-      "description": "The default policy applies in all situations if no other policy applies.",
-      "conditions": {
-        "people": {
-          "groups": {
-            "include": [
-              "00glr9dY4kWK9k5ZM0g3"
-            ]
-          }
-        }
-      }, \
-"https://{yourOktaDomain}/api/v1/policies"
+  "type": "OKTA_SIGN_ON",
+  "status": "ACTIVE",
+  "name": "Default Policy",
+  "description": "The default policy applies in all situations if no other policy applies.",
+  "conditions": {
+    "people": {
+      "groups": {
+        "include": [
+          "00glr9dY4kWK9k5ZM0g3"
+        ]
+      }
+    }
+  }
+}' "https://{yourOktaDomain}/api/v1/policies"
 ~~~
 
 ##### Response Types
@@ -337,8 +337,7 @@ curl -v -X POST \
       "access": "ALLOW"
     }
   }
-}' \
-"https://{yourOktaDomain}/api/v1/policies/{policyId}/rules"
+}' "https://{yourOktaDomain}/api/v1/policies/{policyId}/rules"
 ~~~
 
 ##### Response Types
@@ -440,8 +439,7 @@ curl -v -X PUT \
       "access": "DENY"
     }
   }
-}' \
-"https://{yourOktaDomain}/api/v1/policies/{policyId}/rules/{ruleId}"
+}' "https://{yourOktaDomain}/api/v1/policies/{policyId}/rules/{ruleId}"
 ~~~
 
 ##### Response Types
