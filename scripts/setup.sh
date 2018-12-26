@@ -20,6 +20,6 @@ setup_service node v10.7.0
 export PATH="${PATH}:$(yarn global bin)"
 
 # Install required dependencies
-yarn install -g @okta/ci-update-package
-yarn install -g @okta/ci-pkginfo
+yarn global add @okta/ci-update-package
+yarn global add @okta/ci-pkginfo
 
