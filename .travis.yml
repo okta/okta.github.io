@@ -1,6 +1,4 @@
-language: ruby
-rvm:
-- 2.2.4
+language: node
 addons:
   chrome: stable
   sauce_connect: true
