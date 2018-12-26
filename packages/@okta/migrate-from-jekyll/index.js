@@ -7,6 +7,7 @@ const fs = require('fs-extra');
 const chalk = require('chalk');
 const { execSync } = require('child_process')
 const matter  = require('gray-matter')
+const { parseFrontmatterRedirects } = require('./utils/buildRedirects')
 
 const rootPath = 'okta.github.io';
 const docsRoot = '../../docs';
@@ -158,9 +159,12 @@ function run() {
 
   })
 
+  let redirects = []
+
   massagedFiles.forEach((file, index) => {
 
     file = applyRules(file)
+
     // console.log(file)
     let fileData = buildFile(file);
     let rootPath = docsRoot
@@ -184,6 +188,11 @@ function run() {
 
     file['finalPath'] = resolveFinalFileDestination(file, rootPath)
 
+    let fileRedirects = parseFrontmatterRedirects(file)
+    fileRedirects.forEach(redirect => {
+      redirects.push(redirect)
+    })
+
     createDestinationPath(file.finalPath)
 
     if(new RegExp(['.md','.scss'].join("|")).test(file.origPath)) {
@@ -193,8 +202,7 @@ function run() {
     }
 
   })
-
-
+  fs.writeFileSync(docsRoot+'/.vuepress/redirects.json', JSON.stringify(redirects, null, 2))
 }
 
 run()

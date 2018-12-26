@@ -63,6 +63,10 @@ function alterMarkdownStrings(file) {
       line = ""
     }
 
+    if( line.includes('<script>location=') ) {
+      line = ""
+    }
+
     // convert image to markdown image
     // ![alt text](image.png "Logo Title Text 1")
     if( line.includes('{% img') && line.includes('%}')) {
