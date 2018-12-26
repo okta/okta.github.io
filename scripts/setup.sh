@@ -1,9 +1,8 @@
 #!/bin/bash
 
-[[ -s "${HOME}/.rvm/scripts/rvm" ]] && source "${HOME}/.rvm/scripts/rvm"
 
-# Where the generated Jekyll site will be placed
-GENERATED_SITE_LOCATION="dist"
+# Where the generated VuePress site will be placed
+GENERATED_SITE_LOCATION="../packages/docs/.vuepress/dist"
 
 # Define these ENV vars if they aren't defined already,
 # so these scripts can be run outside of CI
@@ -21,6 +20,6 @@ setup_service node v10.7.0
 export PATH="${PATH}:$(yarn global bin)"
 
 # Install required dependencies
-npm install -g @okta/ci-update-package
-npm install -g @okta/ci-pkginfo
+yarn global add @okta/ci-update-package
+yarn global add @okta/ci-pkginfo
 

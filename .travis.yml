@@ -1,13 +1,11 @@
-language: ruby
-rvm:
-- 2.2.4
+language: node_js
+node_js:
+  - "10"
 addons:
   chrome: stable
   sauce_connect: true
 before_install:
-- gem update bundler
-- bundle install
-- nvm install $(cat .nvmrc)
+- yarn install
 script: "./scripts/travis.sh"
 dist: trusty
 env:
