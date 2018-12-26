@@ -12,9 +12,3 @@ fold yarn_install yarn install
 
 # Build site and Run tests
 fold yarn_test yarn test
-
-# Run External Link Check ONLY on Travis Cron Jobs
-if [ "$TRAVIS_EVENT_TYPE" == "cron" ]; then
-
-fi
-
