@@ -8,7 +8,7 @@
     "dev": "yarn workspace docs dev",
     "build": "yarn workspace docs build",
     "migrate": "yarn workspace @okta/migrate-from-jekyll migrate",
-    "test": "echo \"Tests being migrated in different branch.\" && exit 0",
+    "test": "echo \"Tests being migrated in different branch.\" && exit 0"
   },
   "repository": "git@github.com:okta/okta.github.io",
   "author": "Brian Retterer <brian.retterer@okta.com>",
