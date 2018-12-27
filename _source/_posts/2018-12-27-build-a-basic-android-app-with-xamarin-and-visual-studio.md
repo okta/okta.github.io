@@ -4,7 +4,7 @@ title: "Build a Basic Android App with Xamarin and Visual Studio"
 author: jonathan-ray
 description: "This tutorial walks you through how to build a basic Android app using Visual Studio and Xamarin."
 tags: [android, xamarin, visual studio, mobile]
-tweets: 
+tweets:
 - "Wanna learn how to build Android apps with Xamarin in Visual Studio? Check out this post! #android #xamarin"
 - "Learn how to build a basic Android app with Xamarin in Visual Studio. #xamarin #android"
 - "Xamarin + Visual Studio === Android <3"
@@ -131,7 +131,7 @@ public class AuthorizationResult
 }
 ```
 
-Android doesn't have a global state for you to work with, and so if you want to pass simple values between activities, the best way to do this is with the `Extras` functionality on the `Intent` object. An `Intent` is a predefined class in Android and another core concept to understand. It is the abstraction of an operation to be performed (i.e. your 'intentions'), and to navigate forward to another activity you need to create an instance of this class with which activity you 'intend' to go to. The Extras properties on the `Intent` object are in effect just a dictionary of keys to object values and are accessed by `Put` and typed `Get` methods. 
+Android doesn't have a global state for you to work with, and so if you want to pass simple values between activities, the best way to do this is with the `Extras` functionality on the `Intent` object. An `Intent` is a predefined class in Android and another core concept to understand. It is the abstraction of an operation to be performed (i.e. your 'intentions'), and to navigate forward to another activity you need to create an instance of this class with which activity you 'intend' to go to. The Extras properties on the `Intent` object are in effect just a dictionary of keys to object values and are accessed by `Put` and typed `Get` methods.
 
 While these methods keep the usage relatively clear and easy I personally like to keep all access to them within their own class (to be precise, an extensions class), to maintain a better separation of concerns. This is extremely useful as you don't need to access the keys across classes and can assure type safety when putting and getting these values. In your authorization provider you'll be wanting to: store the `AuthState`, be able to check whether it's there, and return it if it is. Create a new folder called `Extensions` in the root of the solution. Then add a new class called `IntentExtensions.cs`. Make the class `public` and `static`, then add the following code inside the class:
 
@@ -431,7 +431,7 @@ private async void OnSignInAttempted()
 }
 ```
 
-When the user is authenticated you should redirect them to the next page of your experience. If you recall earlier each page is represented by an Activity, and so you need to create a new one now. 
+When the user is authenticated you should redirect them to the next page of your experience. If you recall earlier each page is represented by an Activity, and so you need to create a new one now.
 
 To start, within the 'Resources -> layout' folder you'll need to create the new activity layout file "activity_dashboard.axml". The easiest way to do this is by going to the New Item... option in the context menu and selecting the 'Android Layout' template. Within your new layout file add a simple TextView component to display text like this:
 
