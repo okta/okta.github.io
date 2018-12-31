@@ -1,7 +1,9 @@
 #!/bin/bash
 
 source ${OKTA_HOME}/${REPO}/scripts/setup.sh
+interject "REGISTRY URL"
 echo ${REGISTRY}
+intterject "END REGISTRY URL"
 
 if ! yarn build;
 then
