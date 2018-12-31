@@ -1,6 +1,6 @@
 {
   "name": "vuepress-site",
-  "version": "1.0.0-alpha.3",
+  "version": "1.0.0-alpha",
   "description": "NPM dependencies for testing and building developer.okta.com",
   "scripts": {
     "dev": "vuepress dev .",
