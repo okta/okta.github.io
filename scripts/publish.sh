@@ -1,7 +1,7 @@
 #!/bin/bash
 
 source ${OKTA_HOME}/${REPO}/scripts/setup.sh
-
+cd ${OKTA_HOME}/${REPO}/packages/vuepress-site
 REGISTRY="${ARTIFACTORY_URL}/api/npm/npm-okta"
 
 if ! yarn build;
@@ -24,7 +24,9 @@ if ! ci-update-package --branch ${TARGET_BRANCH}; then
   exit ${BUILD_FAILURE}
 fi
 
-if ! npm publish packages/vuepress-site --registry ${REGISTRY}; then
+
+
+if ! npm publish --registry ${REGISTRY}; then
   echo "npm publish failed! Exiting..."
   exit ${BUILD_FAILURE}
 fi
