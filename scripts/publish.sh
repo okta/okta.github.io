@@ -2,7 +2,7 @@
 
 source ${OKTA_HOME}/${REPO}/scripts/setup.sh
 
-if ! yarn workspaces vuepress-site build;
+if ! yarn build;
 then
     echo "Error building site"
     exit ${BUILD_FAILURE}
