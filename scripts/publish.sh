@@ -1,9 +1,6 @@
 #!/bin/bash
 
 source ${OKTA_HOME}/${REPO}/scripts/setup.sh
-interject "REGISTRY URL"
-echo ${REGISTRY}
-intterject "END REGISTRY URL"
 
 if ! yarn build;
 then
@@ -25,7 +22,7 @@ if ! ci-update-package --branch ${TARGET_BRANCH}; then
   exit ${BUILD_FAILURE}
 fi
 
-if ! npm publish packages/vuepress-site --registry ${REGISTRY}; then
+if ! npm publish packages/vuepress-site --registry ${ARTIFACTORY_URL}; then
   echo "npm publish failed! Exiting..."
   exit ${BUILD_FAILURE}
 fi
