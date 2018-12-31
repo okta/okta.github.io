@@ -30,6 +30,7 @@ if ! npm publish packages/vuepress-site --registry ${REGISTRY}; then
 fi
 
 DATALOAD=$(ci-pkginfo -t dataload)
+interject artifactory_curl -X PUT -u ${ARTIFACTORY_CREDS} ${DATALOAD} -v -f
 if ! artifactory_curl -X PUT -u ${ARTIFACTORY_CREDS} ${DATALOAD} -v -f; then
   echo "artifactory_curl failed! Exiting..."
   exit $PUBLISH_ARTIFACTORY_FAILURE
