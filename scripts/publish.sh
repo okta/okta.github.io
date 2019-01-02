@@ -38,4 +38,13 @@ if ! artifactory_curl -X PUT -u ${ARTIFACTORY_CREDS} ${DATALOAD} -v -f; then
   exit $PUBLISH_ARTIFACTORY_FAILURE
 fi
 
+ARTIFACT_FILE="$([[ ${DATALOAD} =~ vuepress-site-(.*)\.tgz ]] && echo ${BASH_REMATCH})"
+DEPLOY_VERSION="$([[ ${ARTIFACT_FILE} =~ vuepress-site-(.*)\.tgz ]] && echo ${BASH_REMATCH[1]})"
+ARTIFACT="@okta/vuepress-site/-/@okta/${ARTIFACT_FILE}"
+
+if ! send_promotion_message "vuepress-site-preprod" "${ARTIFACT}" "${DEPLOY_VERSION}"; then
+  echo "Error sending promotion event to aperture"
+  exit ${BUILD_FAILURE}
+fi
+
 exit ${SUCCESS}
