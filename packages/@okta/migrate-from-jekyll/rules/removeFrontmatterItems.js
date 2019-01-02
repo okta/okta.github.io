@@ -12,6 +12,14 @@ function removeFrontmatterExtra(file) {
     if( 'book_section' in file.frontmatter) {
       delete file.frontmatter.book_section
     }
+
+    if( 'support_email' in file.frontmatter) {
+      delete file.frontmatter.support_email
+    }
+
+    if( 'weight' in file.frontmatter) {
+      delete file.frontmatter.weight
+    }
   }
 
   return file

@@ -95,6 +95,10 @@ function alterMarkdownStrings(file) {
       line = line.replace('<HTTP://MATHIASBYNENS.BE/>', '')
     }
 
+    if( line.includes('{{ page.support_email }}') ) {
+      line = line.replace(/{{ page.support_email }}/g, 'developers@okta.com')
+    }
+
 
     // convert image to markdown image
     // ![alt text](image.png "Logo Title Text 1")

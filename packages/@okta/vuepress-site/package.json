@@ -1,14 +1,12 @@
 {
+  "private": true,
   "name": "@okta/vuepress-site",
   "version": "1.0.0-alpha.1",
   "description": "NPM dependencies for testing and building developer.okta.com",
   "scripts": {
     "dev": "vuepress dev .",
-    "build": "vuepress build"
+    "build": "which vuepress && vuepress -V && vuepress build ."
   },
-  "files": [
-    ".vuepress/dist"
-  ],
   "repository": {
     "type": "git",
     "url": "git+https://github.com/okta/okta.github.io.git"
@@ -18,8 +16,8 @@
   "bugs": {
     "url": "https://github.com/okta/okta.github.io/issues"
   },
-  "dependencies": {
+  "devDependencies": {
     "@okta/vuepress-theme-default": "^0.1.0-alpha.1",
-    "vuepress": "^1.0.0-alpha.24"
+    "vuepress": "^1.0.0-alpha.30"
   }
 }
