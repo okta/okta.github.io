@@ -4,7 +4,7 @@
   "description": "NPM dependencies for testing and building developer.okta.com",
   "scripts": {
     "dev": "vuepress dev .",
-    "build": "vuepress build ."
+    "build": "vuepress build"
   },
   "files": [
     ".vuepress/dist"
