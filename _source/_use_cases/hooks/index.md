@@ -80,6 +80,8 @@ The name of the Authorization header is not fixed: you can set header name, in a
 
 #### JSON Payload Objects
 
+The JSON payload is where Okta provides specific information about the process flow that's being executed, so that your external service can evaluate and respond to the specific situation. Information is encapsulated in JSON objects. The set of objects sent depends on the type of inline hook you are using. Objects are defined in the specific documentation for each kind of inline hook.
+
 The following are some of the objects that can be included in the request, depending on the type of the inline hook:
 
 #### user
@@ -112,7 +114,7 @@ You can include any of the following types of objects in the JSON payload:
 
 ### commands
 
-Lets you return commands to Okta to affect the process flow being executed and to modify values within Okta objects. The available commands differ by inline hook type.
+Lets you return commands to Okta to affect the process flow being executed and to modify values within Okta objects. The available commands differ by inline hook type and are defined in the specific documentation for each inline hook type.
 
 The `commands` object is an array. Each element within the array needs to consist of a pair of `type` and value elements. `type` is the name of a supported command you wish to invoke. `value` is the operand you wish to specify for the command.
 
@@ -120,11 +122,28 @@ The names of commands follow Java-style reverse DNS name format, beginning with 
 
 ### error
 
-Lets you return error messages. How the data you return is used varies by inline hook type. In some hook types, data you return can be displayed to end users.
+Lets you return error messages. How the error data is used by Okta varies by inline hook type. In some hook types, data you return can be displayed to end users.
 
 ### debugContext
 
 Lets you supply any additional information you wish to store in Okta logs for debugging purposes.
+
+## Okta System Log Entries
+
+Currently, unless debugging is enabled for your org, processing of a hook response is not recorded in the Okta System Log. Further, any `debugContext` data your service returns will only be recorded in the Okta system log if debugging is enabled for your org.
+
+Failures are recorded in the System Log inside a `callback.response.processed` event.
+
+## Inline Hook Setup
+
+To set up an inline hook, you need to create your external service, and then tell Okta it exists and that it should be enabled for for a particular process flow:
+
+1. Create an external service.
+
+1. Register your service's endpoint with Okta by making a `POST` request to `<orgUrl>/api/v1/callbacks`. You specify your endpoint's address in the request's JSON payload, in the object `channel.config.uri`.
+
+1. Associate the endpoint with a particular Okta process flow. How to do this varies by inline hook. Usually, options in the Admin Console allow you to specify that an inline hook should be enabled for a particular process flow. 
+
 
 
 
