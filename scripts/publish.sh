@@ -24,7 +24,7 @@ if ! ci-update-package --branch ${TARGET_BRANCH}; then
   exit ${BUILD_FAILURE}
 fi
 
-
+ls -lah .vuepress/dist
 
 if ! npm publish --registry ${REGISTRY}; then
   echo "npm publish failed! Exiting..."
@@ -41,6 +41,7 @@ fi
 ARTIFACT_FILE="$([[ ${DATALOAD} =~ vuepress-site-(.*)\.tgz ]] && echo ${BASH_REMATCH})"
 DEPLOY_VERSION="$([[ ${ARTIFACT_FILE} =~ vuepress-site-(.*)\.tgz ]] && echo ${BASH_REMATCH[1]})"
 ARTIFACT="@okta/vuepress-site/-/@okta/${ARTIFACT_FILE}"
+interject ${ARTIFACT}
 
 if ! send_promotion_message "vuepress-site-preprod" "${ARTIFACT}" "${DEPLOY_VERSION}"; then
   echo "Error sending promotion event to aperture"
