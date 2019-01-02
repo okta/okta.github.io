@@ -1,11 +1,11 @@
 {
   "private": true,
   "name": "@okta/vuepress-site",
-  "version": "1.0.0-alpha.1",
+  "version": "1.0.0-alpha.2",
   "description": "NPM dependencies for testing and building developer.okta.com",
   "scripts": {
     "dev": "vuepress dev .",
-    "build": "which vuepress && vuepress -V && vuepress build ."
+    "build": "vuepress build ."
   },
   "repository": {
     "type": "git",
