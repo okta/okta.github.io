@@ -1,7 +1,7 @@
 #!/bin/bash
 
 source ${OKTA_HOME}/${REPO}/scripts/setup.sh
-cd ${OKTA_HOME}/${REPO}/packages/vuepress-site
+cd ${OKTA_HOME}/${REPO}/packages/@okta/vuepress-site
 REGISTRY="${ARTIFACTORY_URL}/api/npm/npm-okta"
 
 if ! yarn build;
