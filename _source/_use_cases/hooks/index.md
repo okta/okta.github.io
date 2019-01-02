@@ -112,7 +112,7 @@ You need to return an HTTP status code with your response. Typically, your servi
 
 You can include any of the following types of objects in the JSON payload:
 
-### commands
+#### commands
 
 Lets you return commands to Okta to affect the process flow being executed and to modify values within Okta objects. The available commands differ by inline hook type and are defined in the specific documentation for each inline hook type.
 
@@ -120,11 +120,11 @@ The `commands` object is an array, allowing you to return more than one command 
 
 The names of commands follow Java-style reverse DNS name format, beginning with com.okta, followed by an Okta object that the command operates on.
 
-### error
+#### error
 
 Lets you return error messages. How the error data is used varies by inline hook type.
 
-### debugContext
+#### debugContext
 
 Lets you supply any additional information you wish to store in Okta logs for debugging purposes.
 
