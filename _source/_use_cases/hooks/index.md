@@ -124,9 +124,11 @@ The names of commands follow Java-style reverse DNS name format, beginning with 
 
 Lets you return error messages. How the error data is used varies by inline hook type.
 
+Within an `error` object, you need to provide an `errorSummary` property set to a text string. Additionally, you can use an `errorCauses` object to supply more information. A single error object can contain multiple `errorCauses` objects. The fields within errorCauses are: `errorSummary`, `reason`, `locationType`, `location`, and `domain`. 
+
 #### debugContext
 
-Lets you supply any additional information you wish to store in Okta logs for debugging purposes.
+Lets you supply any additional information you wish to store in Okta logs for debugging purposes. You can use this object as you wish, sending any information that would be useful for debugging purposes.
 
 ## Okta System Log Entries
 
