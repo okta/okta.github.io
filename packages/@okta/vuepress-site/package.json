@@ -3,7 +3,7 @@
   "version": "1.0.0-alpha.2",
   "description": "NPM dependencies for testing and building developer.okta.com",
   "files": [
-    ".vuepress/dist"
+    "dist"
   ],
   "scripts": {
     "dev": "vuepress dev .",
