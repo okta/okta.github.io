@@ -76,7 +76,7 @@ This is not an Okta SSWS authorization token, it is simply a text string you dec
 
 The name of the Authorization header is not fixed: you can set header name, in addition to header value, at the time you register your your external service.
 
-#### JSON Payload Objects
+### JSON Payload Objects
 
 The JSON payload is where Okta provides specific information about the process flow that's being executed, so that your external service can evaluate the specific situation. Information is encapsulated in JSON objects. The set of objects sent depends on the type of inline hook you are using. Objects are defined in the specific documentation for each kind of inline hook.
 
