@@ -7,10 +7,9 @@ redirect_from: "/docs/getting_started/getting_a_token.html"
 
 # Create an API Token
 
-1.  Log in to your Okta organization as a user with [administrator
-    privileges](https://help.okta.com/en/prod/Content/Topics/Security/Administrators.htm?cshid=Security_Administrators#Security_Administrators). API tokens have the same permissions as the user who creates them, and if the user permissions change, the API token permissions also change.
-	
-	If you don't have an Okta organization, you can create a free Okta
+1.  Log in to your Okta organization as a user with [administrator privileges](https://help.okta.com/en/prod/Content/Topics/Security/Administrators.htm?cshid=Security_Administrators#Security_Administrators). API tokens have the same permissions as the user who creates them, and if the user permissions change, the API token permissions also change.
+
+If you don't have an Okta organization, you can create a free Okta
     Developer Edition organization [at this link](https://developer.okta.com/signup/){:target="_blank"}.
 
 2.  Access the API page:
