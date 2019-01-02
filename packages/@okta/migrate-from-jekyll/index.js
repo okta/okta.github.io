@@ -10,7 +10,7 @@ const matter  = require('gray-matter')
 const { parseFrontmatterRedirects } = require('./utils/buildRedirects')
 
 const rootPath = 'okta.github.io';
-const docsRoot = '../../docs';
+const docsRoot = '../vuepress-site';
 const themeRoot = '../vuepress-theme-default'
 
 const cleanupFileList = [

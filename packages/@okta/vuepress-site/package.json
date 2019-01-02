@@ -1,5 +1,5 @@
 {
-  "name": "vuepress-site",
+  "name": "@okta/vuepress-site",
   "version": "1.0.0-alpha.1",
   "description": "NPM dependencies for testing and building developer.okta.com",
   "scripts": {

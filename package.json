@@ -1,12 +1,11 @@
 {
   "private": true,
   "workspaces": [
-    "packages/vuepress-site",
     "packages/@okta/*"
   ],
   "scripts": {
-    "dev": "yarn workspace vuepress-site dev",
-    "build": "yarn workspace vuepress-site build",
+    "dev": "yarn workspace @okta/vuepress-site dev",
+    "build": "yarn workspace @okta/vuepress-site build",
     "migrate": "yarn workspace @okta/migrate-from-jekyll migrate",
     "test": "echo \"Tests being migrated in different branch.\" && exit 0"
   },
