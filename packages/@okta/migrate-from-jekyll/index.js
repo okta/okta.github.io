@@ -165,6 +165,9 @@ function run() {
   redirects.push({path: '/use_cases/api_security', redirect: '/use_cases/api_access_management/'})
 
   massagedFiles.forEach((file, index) => {
+    if( file.origPath.includes('_assets/img/blog') ) {
+      return
+    }
 
     file = applyRules(file)
 
