@@ -25,7 +25,7 @@ Okta defines several different types of inline hooks. Each type of inline hook m
 
 ### Extension Points
 
-The points in Okta process flows where inline hooks can be triggered are called extension points, because they are where you can extend Okta functionality with your own custom code. Each type of inline hooks is triggered at a particular extension point in a particular Okta process flow. At an extension point, if you have configured an inline hook, Okta calls your external service, and waits for a response. When the response is received, Okta resumes the process flow.
+The points in Okta process flows where inline hooks can be triggered are called extension points, because they are where you can extend Okta functionality with your own custom code. Each type of inline hook is triggered at a particular extension point in a particular Okta process flow. At an extension point, if you have configured an inline hook, Okta calls your external service, and waits for a response. When the response is received, Okta resumes the process flow.
 
 ### Inline Hook Call within an Okta Process Flow
 
