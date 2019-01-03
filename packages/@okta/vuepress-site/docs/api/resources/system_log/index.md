@@ -28,7 +28,7 @@ For information on migrating from the Events API to the System Log API please se
 
 The System Log API has one endpoint:
 
-{% api_operation get /api/v1/logs %}
+<ApiOperation method="get" url="/api/v1/logs" />
 
 [![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/54def5ab52f04b7e4011){:target="_blank"}
 
@@ -588,7 +588,7 @@ The table below shows 18 events produced from 13 transactions over 6 different s
 |                           | Wij-564YuniRd9yTmWHoaQAAAII | 0cc6f4c8-9b91-4a70-b5c4-09d6ad159d32 | mim.checkOSXAccessEligibility.true          | *blank*                           |
 |                           | Wij-2q4YuniRd9yTmWHjRAAAADA | 92606da8-7eeb-4ad7-8ffb-502dd0ec64cc | user.authentication.sso                     | User single sign on to app        |
 | *null*                    | Wm@-R2s5lEMbNIB03krtvAAACyo | 566671be-ec0b-400d-ad2e-6fc73ed12fb1 | user.session.start                          | User login to Okta                |
-{:.table .table-word-break}
+
 
 As evidenced by the `null` `authenticationContext.externalSessionId` field in the last row, neither `transaction.id` nor `uuid` maintain a many-to-one relationship with `authenticationContext.externalSessionId`. In this particular case, the `null` `authenticationContext.externalSessionId` field can be explained by a failed user login. There was no session granted to the user's client since the login failed.
 
@@ -596,14 +596,14 @@ As evidenced by the `null` `authenticationContext.externalSessionId` field in th
 ## Operations
 
 ### List Events
-{:.api .api-operation}
 
-{% api_operation get /api/v1/logs %}
+
+<ApiOperation method="get" url="/api/v1/logs" />
 
 Fetch a list of ordered log events from your Okta organization's system log.
 
 #### Request Parameters
-{:.api .api-request .api-request-params}
+
 
 The table below summarizes the supported query parameters:
 
@@ -725,7 +725,7 @@ Note that `since` and `after` are mutually exclusive and cannot be specified sim
 The `after` parameter is system generated for use in ["next" links](#next-link-response-header). Users should not attemp to craft requests using this value and rely on the system generated links instead.
 
 ##### Response
-{:.api .api-response .api-response-params}
+
 
 The response contains a JSON array of [LogEvent objects](#logevent-object).
 

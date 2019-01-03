@@ -38,26 +38,26 @@ Link definition operations allow you to manage the creation and removal of the l
 Each org can create up to 200 definitions, and assign them to an unlimited number of users.
 
 ### Add Linked Object Definition to User Profile Schema
-{:.api .api-operation}
 
-{% api_operation post /api/v1/meta/schemas/user/default/linkedObjects %}
+
+<ApiOperation method="post" url="/api/v1/meta/schemas/user/default/linkedObjects" />
 
 Adds a linked object definition to the user profile schema. The `name` field found in both the `primary` and `associated` objects may not start with a digit, and can only contain the following characters: `a-z`, `A-Z`, `0-9`, and `_`.
 
 ##### Request Parameters
-{:.api .api-request .api-request-params}
+
 
 | Parameter | Description | Param Type | DataType  | Required |
 | :------------- | :-------------- | :---------------- | :----------- | :------------ |
 | linkedObject | The linked object definition being created | Body | [Linked Object](#linked-object-model)  | TRUE   |
 
 ##### Response Parameters
-{:.api .api-response .api-response-params}
+
 
 [Linked Object Model](#linked-object-model)
 
 ##### Request Example
-{:.api .api-request .api-request-example}
+
 
 ```bash
 curl -X POST \
@@ -81,7 +81,7 @@ curl -X POST \
 ```
 
 ##### Response Example
-{:.api .api-response .api-response-example}
+
 
 ```bash
 HTTP/1.1 201 Created
@@ -107,7 +107,7 @@ HTTP/1.1 201 Created
 ```
 
 ### Get a Linked Object Definition by Name
-{:.api .api-operation}
+
 
 {% api_operation GET /api/v1/meta/schemas/user/default/linkedObjects/${name} %}
 
@@ -116,19 +116,19 @@ Gets a single linked object definition
 You can specify either the `primary` name or the `associated` name.
 
 ##### Request Parameters
-{:.api .api-request .api-request-params}
+
 
 | Parameter | Description    | DataType     | Required |
 | :------------- | :---------------- | :---------------- |:------------- |
 | name | Case-sensitive API name of the definition you want returned | String | TRUE     |
 
 ##### Response Parameters
-{:.api .api-response .api-response-params}
+
 
 [Linked Object Model](#linked-object-model)
 
 ##### Request Example
-{:.api .api-request .api-request-example}
+
 
 ```bash
 curl -X POST \
@@ -139,7 +139,7 @@ curl -X POST \
 ```
 
 ##### Response Example
-{:.api .api-response .api-response-example}
+
 
 ```json
 HTTP/1.1 200 OK
@@ -167,24 +167,24 @@ HTTP/1.1 200 OK
 > Note: Regardless of whether you specify the `primary` or `associated` name in the request, the resulting link contains the `primary`.
 
 ### Get All Linked Object Definitions
-{:.api .api-operation}
 
-{% api_operation get /api/v1/meta/schemas/user/default/linkedObjects %}
+
+<ApiOperation method="get" url="/api/v1/meta/schemas/user/default/linkedObjects" />
 
 Gets all the linked object definitions for an org
 
 ##### Request Parameters
-{:.api .api-request .api-request-params}
+
 
 None
 
 ##### Response Parameters
-{:.api .api-response .api-response-params}
+
 
 Array of [Linked Object Model](#linked-object-model)
 
 ##### Request Example
-{:.api .api-request .api-request-example}
+
 
 ```bash
 curl -v -X GET \
@@ -195,7 +195,7 @@ curl -v -X GET \
 ```
 
 ##### Response Example
-{:.api .api-response .api-response-example}
+
 
 ```json
 [
@@ -241,26 +241,26 @@ curl -v -X GET \
 ```
 
 ### Remove Linked Object Definition
-{:.api .api-operation}
 
-{% api_operation delete /api/v1/meta/schemas/user/default/linkedObjects/${name} %}
+
+<ApiOperation method="delete" url="/api/v1/meta/schemas/user/default/linkedObjects/${name}" />
 
 Removes the linked object definition specified by either `primary` or `associated` name. The entire definition is removed, regardless of which name you specify
 
 ##### Request Parameters
-{:.api .api-request .api-request-params}
+
 
 | Parameter   | Description    | DataType   | Required |
 | :--------------- | :----------------- | :------------- |:------------ |
 | name | Primary or associated name | String | TRUE  |
 
 ##### Response Parameters
-{:.api .api-response .api-response-params}
+
 
 None
 
 ##### Request Example
-{:.api .api-request .api-request-example}
+
 
 ```bash
 curl -v -X DELETE \
@@ -271,7 +271,7 @@ curl -v -X DELETE \
 ```
 
 ##### Response Example
-{:.api .api-response .api-response-example}
+
 
 ```bash
 HTTP/1.1 204 No Content
@@ -287,14 +287,14 @@ For the following operations, the examples use consistent IDs so you can follow 
 * `subordinate` is the `associated` relationship, and is assigned to `00u5zex6ztMbOZhF50h7`
 
 ### Set Linked Object Value for Primary
-{:.api .api-operation}
 
-{% api_operation put /api/v1/users/${associated.userId}/linkedObjects/${primary.name}/${primary.userId} %}
+
+<ApiOperation method="put" url="/api/v1/users/${associated.userId}/linkedObjects/${primary.name}/${primary.userId}" />
 
 Sets the first user as the `associated` and the second user as the `primary` for the specified relationship. If the first user is already associated with a different `primary` for this relationship, the previous link is removed. A linked object relationship can specify only one primary user for an associated user.
 
 ##### Request Parameters
-{:.api .api-request .api-request-params}
+
 
 | Parameter   | Description    | DataType     | Required |
 | :--------------- | :----------------- |:---------------- |:------------ |
@@ -303,12 +303,12 @@ Sets the first user as the `associated` and the second user as the `primary` for
 | primary.userId | User ID to be assigned to `primary` for the `associated` user in the specified relationship. | String | TRUE   |
 
 ##### Response Parameters
-{:.api .api-response .api-response-params}
+
 
 None
 
 ##### Request Example
-{:.api .api-request .api-request-example}
+
 
 ```bash
 curl -v -X PUT \
@@ -319,35 +319,35 @@ curl -v -X PUT \
 ```
 
 ##### Response Example
-{:.api .api-response .api-response-example}
+
 
 ```bash
 HTTP/1.1 204 No Content
 ```
 
 ### Get Primary Linked Object Value
-{:.api .api-operation}
 
-{% api_operation get /api/v1/users/${id}/linkedObjects/${primary.name} %}
+
+<ApiOperation method="get" url="/api/v1/users/${id}/linkedObjects/${primary.name}" />
 
 For the user specified by ID, returns the `self` link for the `primary` user in the relationship specified by the primary.name. If the user specified is not the `associated` user in any relationship, an empty array is returned.
 
 Use `me` instead of `id` to specify the current session user.
 
 ##### Request Parameters
-{:.api .api-request .api-request-params}
+
 
 | Parameter   | Description    | DataType     | Required |
 | :--------------- | :----------------- |:---------------- |:------------ |
 | id | ID of the user for whom you want to get the `primary` user ID. Can be `me` to represent the current session user. | String | TRUE     |
 
 ##### Response Parameters
-{:.api .api-response .api-response-params}
+
 
 Array containing a link to the `primary` user, or an empty array if the specified user is not yet associated with a `primary` user.
 
 ##### Request Example
-{:.api .api-request .api-request-example}
+
 
 ```bash
 curl -v -X GET \
@@ -358,7 +358,7 @@ curl -v -X GET \
 ```
 
 ##### Response Example
-{:.api .api-response .api-response-example}
+
 
 ```bash
 [
@@ -373,28 +373,28 @@ curl -v -X GET \
 ```
 
 ### Get Associated Linked Object Values
-{:.api .api-operation}
 
-{% api_operation get /api/v1/users/${id}/linkedObjects/${associated.name} %}
+
+<ApiOperation method="get" url="/api/v1/users/${id}/linkedObjects/${associated.name}" />
 
 For the specified user, gets an array of users who are `associated` for the specified relationship. If the specified user isn't assigned a `primary` relationship, an empty array is returned.
 
 Use `me` instead of `id` to specify the current session user.
 
 ##### Request Parameters
-{:.api .api-request .api-request-params}
+
 
 | Parameter   | Description    | DataType     | Required |
 | :--------------- | :----------------- |:---------------- |:------------ |
 | id | ID of the user for whom you want to get the `associated` user IDs. Can be `me` to represent the current session user. | String | TRUE     |
 
 ##### Response Parameters
-{:.api .api-response .api-response-params}
+
 
 Links to all users associated to the specified `primary` user for the specified `associated` relationship.
 
 ##### Request Example
-{:.api .api-request .api-request-example}
+
 
 ```bash
 curl -v -X GET \
@@ -405,7 +405,7 @@ curl -v -X GET \
 ```
 
 ##### Response Example
-{:.api .api-response .api-response-example}
+
 
 ```bash
 [
@@ -420,7 +420,7 @@ curl -v -X GET \
 ```
 
 ### Delete Linked Object Value
-{:.api .api-operation}
+
 
 {% api_operation delete  /api/v1/users/${id}/linkedObjects/${primary.name}
  %}
@@ -428,7 +428,7 @@ curl -v -X GET \
 For the `associated` user specified by ID and the relationship specified by `primary` name, deletes any existing relationship between the `associated` and `primary` user.
 
 ##### Request Parameters
-{:.api .api-request .api-request-params}
+
 
 | Parameter   | Description    | DataType     | Required |
 | :--------------- | :----------------- |:---------------- |:------------ |
@@ -443,12 +443,12 @@ An HTTP 204 message is returned:
 An HTTP 404 is returned if no linked object definition exists with the specified `primary.name`.
 
 ##### Response Parameters
-{:.api .api-response .api-response-params}
+
 
 None
 
 ##### Request Example
-{:.api .api-request .api-request-example}
+
 
 ```bash
 curl -v -X GET \
@@ -459,7 +459,7 @@ curl -v -X GET \
 ```
 
 ##### Response Example
-{:.api .api-response .api-response-example}
+
 
 ```bash
 HTTP/1.1 204 No Content

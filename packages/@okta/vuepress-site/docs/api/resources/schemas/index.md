@@ -17,24 +17,24 @@ Explore the Schemas API: [![Run in Postman](https://run.pstmn.io/button.svg)](ht
 ## User Schema Operations
 
 ### Get User Schema
-{:.api .api-operation}
 
-{% api_operation get /api/v1/meta/schemas/user/default %}
+
+<ApiOperation method="get" url="/api/v1/meta/schemas/user/default" />
 
 Fetches the default schema for a User
 
 ##### Request Parameters
-{:.api .api-request .api-request-params}
+
 
 N/A
 
 ##### Response Parameters
-{:.api .api-response .api-response-params}
+
 
 [User Schema](#user-schema-model)
 
 ##### Request Example
-{:.api .api-request .api-request-example}
+
 
 ```bash
 curl -v -X GET \
@@ -45,7 +45,7 @@ curl -v -X GET \
 ```
 
 ##### Response Example
-{:.api .api-response .api-response-example}
+
 
 *The following response is only a subset of properties for brevity*
 
@@ -146,26 +146,26 @@ curl -v -X GET \
 ```
 
 ### Add Property to User Profile Schema
-{:.api .api-operation}
 
-{% api_operation post /api/v1/meta/schemas/user/default %}
+
+<ApiOperation method="post" url="/api/v1/meta/schemas/user/default" />
 
 Adds one or more [custom user profile properties](#user-profile-schema-property-object) to the user schema
 
 ##### Request Parameters
-{:.api .api-request .api-request-params}
+
 
 | Parameter   | Description                                          | Param Type | DataType                                                         | Required |
 |:------------|:-----------------------------------------------------|:-----------|:-----------------------------------------------------------------|:---------|
 | definitions | Subschema with one or more custom profile properties | Body       | [User Profile Custom Subschema](#user-profile-custom-subschema) | TRUE     |
 
 ##### Response Parameters
-{:.api .api-response .api-response-params}
+
 
 [User Schema](#user-schema-model)
 
 ##### Request Example
-{:.api .api-request .api-request-example}
+
 
 ```bash
 curl -v -X POST \
@@ -200,7 +200,7 @@ curl -v -X POST \
 ```
 
 ##### Response Example
-{:.api .api-response .api-response-example}
+
 
 *The following response is only a subset of properties for brevity*
 
@@ -315,26 +315,26 @@ curl -v -X POST \
 ```
 
 ### Update User Profile Schema Property
-{:.api .api-operation}
 
-{% api_operation post /api/v1/meta/schemas/user/default %}
+
+<ApiOperation method="post" url="/api/v1/meta/schemas/user/default" />
 
 Updates one or more [custom user profile properties](#user-profile-schema-property-object) in the schema, a [permission](#schema-property-permission-object) for a [user profile base property](#user-profile-base-subschema), or the nullability of the `firstName` and `lastName` properties in the [user profile base schema](#user-profile-base-subschema).
 
 ##### Request Parameters
-{:.api .api-request .api-request-params}
+
 
 | Parameter   | Description                                          | Param Type | DataType                                                         | Required |
 |:------------|:-----------------------------------------------------|:-----------|:-----------------------------------------------------------------|:---------|
 | definitions | Subschema with one or more custom profile properties | Body       | [User Profile Custom Subschema](#user-profile-custom-subschema) | TRUE     |
 
 ##### Response Parameters
-{:.api .api-response .api-response-params}
+
 
 [User Schema](#user-schema-model)
 
 ##### Request Example
-{:.api .api-request .api-request-example}
+
 
 ```bash
 curl -v -X POST \
@@ -389,7 +389,7 @@ curl -v -X POST \
 ```
 
 ##### Response Example
-{:.api .api-response .api-response-example}
+
 
 *The following response is only a subset of properties for brevity*
 
@@ -504,15 +504,15 @@ curl -v -X POST \
 ```
 
 ### Remove Property from User Profile Schema
-{:.api .api-operation}
 
-{% api_operation post /api/v1/meta/schemas/user/default %}
+
+<ApiOperation method="post" url="/api/v1/meta/schemas/user/default" />
 
 Removes one or more [custom user profile properties](#user-profile-schema-property-object) from the user schema.
 A property cannot be removed if it is being referenced as a [matchAttribute](./idps#subject-policy-object) in SAML2 IdPs.
 
 ##### Request Parameters
-{:.api .api-request .api-request-params}
+
 
 | Parameter   | Description                                                    | Param Type | DataType                                                         | Required |
 |:------------|:---------------------------------------------------------------|:-----------|:-----------------------------------------------------------------|:---------|
@@ -521,12 +521,12 @@ A property cannot be removed if it is being referenced as a [matchAttribute](./i
 > Properties must be explicitly set to `null` to be removed from schema, otherwise the `POST` will be interpreted as a partial update.
 
 ##### Response Parameters
-{:.api .api-response .api-response-params}
+
 
 [User Schema](#user-schema-model)
 
 ##### Request Example
-{:.api .api-request .api-request-example}
+
 
 ```bash
 curl -v -X POST \
@@ -548,7 +548,7 @@ curl -v -X POST \
 ```
 
 ##### Response Example
-{:.api .api-response .api-response-example}
+
 
 *The following response is only a subset of properties for brevity*
 
@@ -651,14 +651,14 @@ curl -v -X POST \
 ## App User Schema Operations
 
 ### Get App User Schema
-{:.api .api-operation}
 
-{% api_operation get /api/v1/meta/schemas/apps/${instanceId}/default %}
+
+<ApiOperation method="get" url="/api/v1/meta/schemas/apps/${instanceId}/default" />
 
 Fetches the default schema for an App User
 
 ##### Request Parameters
-{:.api .api-request .api-request-params}
+
 
 | Parameter  | Description                       | Param Type | DataType | Required |
 |:-----------|:----------------------------------|:-----------|:---------|:---------|
@@ -666,12 +666,12 @@ Fetches the default schema for an App User
 
 
 ##### Response Parameters
-{:.api .api-response .api-response-params}
+
 
 [App User Schema](#app-user-schema-model)
 
 ##### Request Example
-{:.api .api-request .api-request-example}
+
 
 ```bash
 curl -v -X GET \
@@ -682,7 +682,7 @@ curl -v -X GET \
 ```
 
 ##### Response Example
-{:.api .api-response .api-response-example}
+
 
 ```json
 {
@@ -734,14 +734,14 @@ curl -v -X GET \
 ```
 
 ### Add Property to App User Profile Schema
-{:.api .api-operation}
 
-{% api_operation post /api/v1/meta/schemas/apps/${instanceId}/default %}
+
+<ApiOperation method="post" url="/api/v1/meta/schemas/apps/${instanceId}/default" />
 
 Adds one or more [custom app user profile properties](#app-user-profile-schema-property-object) to the app user schema
 
 ##### Request Parameters
-{:.api .api-request .api-request-params}
+
 
 | Parameter   | Description                                          | Param Type | DataType                                                       | Required | Default |
 | :----------- | :---------------------------------------------------- | :---------- | :-------------------------------------------------------------- | :-------- | :------- |
@@ -749,12 +749,12 @@ Adds one or more [custom app user profile properties](#app-user-profile-schema-p
 | definitions | Subschema with one or more custom profile properties | Body       | [App User Profile Custom Subschema](#app-user-profile-custom-subschema) | TRUE     |
 
 ##### Response Parameters
-{:.api .api-response .api-response-params}
+
 
 [App User Schema](#app-user-schema-model)
 
 ##### Request Example
-{:.api .api-request .api-request-example}
+
 
 ```bash
 curl -v -X POST \
@@ -783,7 +783,7 @@ curl -v -X POST \
 ```
 
 ##### Response Example
-{:.api .api-response .api-response-example}
+
 
 ```json
 {
@@ -843,14 +843,14 @@ curl -v -X POST \
 ```
 
 ### Update App User Profile Schema Property
-{:.api .api-operation}
 
-{% api_operation post /api/v1/meta/schemas/apps/${instanceId}/default %}
+
+<ApiOperation method="post" url="/api/v1/meta/schemas/apps/${instanceId}/default" />
 
 Updates one or more [custom app user profile properties](#app-user-profile-schema-property-object) in the schema, or the nullability of a base property.  (Changing a base property's nullability (i.e., the value of its `required` field) is allowed only if it is nullable in the default predefined schema for the app.)
 
 ##### Request Parameters
-{:.api .api-request .api-request-params}
+
 
 | Parameter   | Description                                          | Param Type | DataType                                                       | Required | Default |
 | :----------- | :---------------------------------------------------- | :---------- | :-------------------------------------------------------------- | :-------- | :------- |
@@ -858,12 +858,12 @@ Updates one or more [custom app user profile properties](#app-user-profile-schem
 | definitions | Subschema with one or more custom profile properties | Body       | [App User Profile Custom Subschema](#app-user-profile-custom-subschema) | TRUE     |
 
 ##### Response Parameters
-{:.api .api-response .api-response-params}
+
 
 [App User Schema](#app-user-schema-model)
 
 ##### Request Example
-{:.api .api-request .api-request-example}
+
 
 ```bash
 curl -v -X POST \
@@ -892,7 +892,7 @@ curl -v -X POST \
 ```
 
 ##### Response Example
-{:.api .api-response .api-response-example}
+
 
 ```json
 {
@@ -952,14 +952,14 @@ curl -v -X POST \
 ```
 
 ### Remove Property from App User Profile Schema
-{:.api .api-operation}
 
-{% api_operation post /api/v1/meta/schemas/apps/${instanceId}/default %}
+
+<ApiOperation method="post" url="/api/v1/meta/schemas/apps/${instanceId}/default" />
 
 Removes one or more [custom app user profile properties](#app-user-profile-schema-property-object) from the user schema.
 
 ##### Request Parameters
-{:.api .api-request .api-request-params}
+
 
 | Parameter   | Description                                                    | Param Type | DataType                                                       | Required | Default |
 | :----------- | :-------------------------------------------------------------- | :---------- | :-------------------------------------------------------------- | :-------- | :------- |
@@ -969,12 +969,12 @@ Removes one or more [custom app user profile properties](#app-user-profile-schem
 > Properties must be explicitly set to `null` to be removed from schema, otherwise the `POST` will be interpreted as a partial update.
 
 ##### Response Parameters
-{:.api .api-response .api-response-params}
+
 
 [App User Schema](#app-user-schema-model)
 
 ##### Request Example
-{:.api .api-request .api-request-example}
+
 
 ```bash
 curl -v -X POST \
@@ -996,7 +996,7 @@ curl -v -X POST \
 ```
 
 ##### Response Example
-{:.api .api-response .api-response-example}
+
 
 ```json
 {

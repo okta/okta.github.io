@@ -14,26 +14,26 @@ Explore the Administrator Roles API:  [![Run in Postman](https://run.pstmn.io/bu
 ## Role Assignment Operations
 
 ### List Roles Assigned to User
-{:.api .api-operation}
 
-{% api_operation get /api/v1/users/${userId}/roles %}
+
+<ApiOperation method="get" url="/api/v1/users/${userId}/roles" />
 
 Lists all roles assigned to a user.
 
 #### Request Parameters
-{:.api .api-request .api-request-params}
+
 
 | Parameter    | Description                                         | Param Type | DataType | Required |
 |:------------ |:--------------------------------------------------- |:---------- |:-------- |:-------- |
 | userId          | `id` of a user                                        | URL        | String   | TRUE     |
 
 #### Response Parameters
-{:.api .api-response .api-response-params}
+
 
 Array of [Role](#role-model)
 
 #### Request Example
-{:.api .api-request .api-request-example}
+
 
 ```bash
 curl -v -X GET \
@@ -44,7 +44,7 @@ curl -v -X GET \
 ```
 
 ##### Response Example
-{:.api .api-response .api-response-example}
+
 
 ```json
 [
@@ -68,14 +68,14 @@ curl -v -X GET \
 ```
 
 ### Assign Role to User
-{:.api .api-operation}
 
-{% api_operation post /api/v1/users/${userId}/roles %}
+
+<ApiOperation method="post" url="/api/v1/users/${userId}/roles" />
 
 Assigns a role to a user.
 
 #### Request Parameters
-{:.api .api-request .api-request-params}
+
 
 | Parameter | Description            | Param Type | DataType                  | Required |
 |:----------|:-----------------------|:-----------|:--------------------------|:---------|
@@ -83,12 +83,12 @@ Assigns a role to a user.
 | type      | type of role to assign | Body       | [Role Type](#role-types)  | TRUE     |
 
 #### Response Parameters
-{:.api .api-response .api-response-params}
+
 
 Assigned [Role](#role-model)
 
 #### Request Example
-{:.api .api-request .api-request-example}
+
 
 ```bash
 curl -v -X POST \
@@ -101,7 +101,7 @@ curl -v -X POST \
 ```
 
 ##### Response Example
-{:.api .api-response .api-response-example}
+
 
 ```json
 {
@@ -115,14 +115,14 @@ curl -v -X POST \
 ```
 
 ### Unassign Role from User
-{:.api .api-operation}
 
-{% api_operation delete /api/v1/users/${userId}/roles/${roleId} %}
+
+<ApiOperation method="delete" url="/api/v1/users/${userId}/roles/${roleId}" />
 
 Unassigns a role from a user.
 
 #### Request Parameters
-{:.api .api-request .api-request-params}
+
 
 | Parameter | Description  | Param Type | DataType | Required |
 |:----------|:-------------|:-----------|:---------|:---------|
@@ -130,14 +130,14 @@ Unassigns a role from a user.
 | roleId       | `id` of a role | URL        | String   | TRUE     |
 
 #### Response Parameters
-{:.api .api-response .api-response-params}
+
 
 ``` http
 HTTP/1.1 204 No Content
 ```
 
 #### Request Example
-{:.api .api-request .api-request-example}
+
 
 ```bash
 curl -v -X DELETE \
@@ -148,7 +148,7 @@ curl -v -X DELETE \
 ```
 
 ##### Response Example
-{:.api .api-response .api-response-example}
+
 
 ``` http
 HTTP/1.1 204 No Content
@@ -159,14 +159,14 @@ HTTP/1.1 204 No Content
 ### Group Administrator Role Group Targets
 
 #### List Group Targets for Group Administrator Role
-{:.api .api-operation}
 
-{% api_operation get /api/v1/users/${userId}/roles/${roleId}/targets/groups %}
+
+<ApiOperation method="get" url="/api/v1/users/${userId}/roles/${roleId}/targets/groups" />
 
 Lists all group targets for a `USER_ADMIN` role assignment.
 
 ##### Request Parameters
-{:.api .api-request .api-request-params}
+
 
 | Parameter | Description                                                  | Param Type | DataType | Required |
 |:----------|:-------------------------------------------------------------|:-----------|:---------|:---------|
@@ -178,14 +178,14 @@ Lists all group targets for a `USER_ADMIN` role assignment.
 Treat the page cursor as an opaque value: obtain it through the next link relation. See [Pagination](/docs/api/getting_started/design_principles#pagination).
 
 ##### Response Parameters
-{:.api .api-response .api-response-params}
+
 
 Array of [Groups](groups)
 
 If the role isn't scoped to specific group targets, an empty array `[]` is returned.
 
 ##### Request Example
-{:.api .api-request .api-request-example}
+
 
 ```bash
 curl -v -X GET \
@@ -196,7 +196,7 @@ curl -v -X GET \
 ```
 
 ##### Response Example
-{:.api .api-response .api-response-example}
+
 
 ```json
 [
@@ -234,16 +234,16 @@ curl -v -X GET \
 ```
 
 #### Add Group Target to Group Administrator Role
-{:.api .api-operation}
 
-{% api_operation put /api/v1/users/${userId}/roles/${roleId}/targets/groups/${groupId} %}
+
+<ApiOperation method="put" url="/api/v1/users/${userId}/roles/${roleId}/targets/groups/${groupId}" />
 
 Adds a group target for a `USER_ADMIN` role assignment.
 
 Adding the first group target changes the scope of the role assignment from applying to all targets to only applying to the specified target.
 
 ##### Request Parameters
-{:.api .api-request .api-request-params}
+
 
 | Parameter | Description                                   | Param Type | DataType | Required |
 |:----------|:----------------------------------------------|:-----------|:---------|:---------|
@@ -252,14 +252,14 @@ Adding the first group target changes the scope of the role assignment from appl
 | groupId      | `id` of group target to scope role assignment | URL        | String   | TRUE     |
 
 ##### Response Parameters
-{:.api .api-response .api-response-params}
+
 
 ``` http
 HTTP/1.1 204 No Content
 ```
 
 ##### Request Example
-{:.api .api-request .api-request-example}
+
 
 ```bash
 curl -v -X PUT \
@@ -270,23 +270,23 @@ curl -v -X PUT \
 ```
 
 ##### Response Example
-{:.api .api-response .api-response-example}
+
 
 ``` http
 HTTP/1.1 204 No Content
 ```
 
 #### Remove Group Target from Group Administrator Role
-{:.api .api-operation}
 
-{% api_operation delete /api/v1/users/${userId}/roles/${roleId}/targets/groups/${groupId} %}
+
+<ApiOperation method="delete" url="/api/v1/users/${userId}/roles/${roleId}/targets/groups/${groupId}" />
 
 Removes a group target from a `USER_ADMIN` role assignment.
 
 Don't remove the last group target from a role assignment, as this causes an exception.  If you need a role assignment that applies to all groups, the API consumer should delete the `USER_ADMIN` role assignment and recreate it.
 
 ##### Request Parameters
-{:.api .api-request .api-request-params}
+
 
 | Parameter | Description                              | Param Type | DataType | Required |
 |:----------|:-----------------------------------------|:-----------|:---------|:---------|
@@ -295,14 +295,14 @@ Don't remove the last group target from a role assignment, as this causes an exc
 | groupId      | `id` of group target for role assignment | URL        | String   | TRUE     |
 
 ##### Response Parameters
-{:.api .api-response .api-response-params}
+
 
 ``` http
 HTTP/1.1 204 No Content
 ```
 
 ##### Request Example
-{:.api .api-request .api-request-example}
+
 
 ```bash
 curl -v -X DELETE \
@@ -313,7 +313,7 @@ curl -v -X DELETE \
 ```
 
 ##### Response Example
-{:.api .api-response .api-response-example}
+
 
 ``` http
 HTTP/1.1 204 No Content
@@ -322,14 +322,14 @@ HTTP/1.1 204 No Content
 ### App Administrator Role App Targets
 
 #### List App Targets for App Administrator Role
-{:.api .api-operation}
 
-{% api_operation get /api/v1/users/${userId}/roles/${roleId}/targets/catalog/apps %}
+
+<ApiOperation method="get" url="/api/v1/users/${userId}/roles/${roleId}/targets/catalog/apps" />
 
 Lists all app targets for an `APP_ADMIN` role assignment.
 
 ##### Request Parameters
-{:.api .api-request .api-request-params}
+
 
 | Parameter | Description                                                  | Param Type | DataType | Required |
 |:----------|:-------------------------------------------------------------|:-----------|:---------|:---------|
@@ -341,14 +341,14 @@ Lists all app targets for an `APP_ADMIN` role assignment.
 Treat the page cursor as an opaque value: obtain it through the next link relation. See [Pagination](/docs/api/getting_started/design_principles#pagination)
 
 ##### Response Parameters
-{:.api .api-response .api-response-params}
+
 
 Array of Catalog Apps
 
 If the role is not scoped to specific apps in the catalog, an empty array `[]` is returned.
 
 ##### Request Example
-{:.api .api-request .api-request-example}
+
 
 ```bash
 curl -v -X GET \
@@ -359,7 +359,7 @@ curl -v -X GET \
 ```
 
 ##### Response Example
-{:.api .api-response .api-response-example}
+
 
 The example shows two applications and two instances. Note the response for instances has an `id` field.
 
@@ -460,9 +460,9 @@ The example shows two applications and two instances. Note the response for inst
 ```
 
 #### Add App Target to App Administrator Role
-{:.api .api-operation}
 
-{% api_operation put /api/v1/users/${userId}/roles/${roleId}/targets/catalog/apps/${appName} %}
+
+<ApiOperation method="put" url="/api/v1/users/${userId}/roles/${roleId}/targets/catalog/apps/${appName}" />
 
 Adds an app target for an `APP_ADMIN` role assignment.
 
@@ -471,7 +471,7 @@ Adding the first app target changes the scope of the role assignment from applyi
 Adding an app target will override any existing instance targets of the app. For example, if someone was assigned to administer a specific Facebook instance, calling this endpoint with `facebook` for `appName`, would make them administrator for all Facebook instances.
 
 ##### Request Parameters
-{:.api .api-request .api-request-params}
+
 
 | Parameter | Description                                                | Param Type | DataType | Required |
 |:----------|:-----------------------------------------------------------|:-----------|:---------|:---------|
@@ -480,14 +480,14 @@ Adding an app target will override any existing instance targets of the app. For
 | appName   | `name` of app target from catalog to scope role assignment | URL        | String   | TRUE     |
 
 ##### Response Parameters
-{:.api .api-response .api-response-params}
+
 
 ``` http
 HTTP/1.1 204 No Content
 ```
 
 ##### Request Example
-{:.api .api-request .api-request-example}
+
 
 ```bash
 curl -v -X PUT \
@@ -498,7 +498,7 @@ curl -v -X PUT \
 ```
 
 ##### Response Example
-{:.api .api-response .api-response-example}
+
 
 ``` http
 HTTP/1.1 204 No Content
@@ -506,9 +506,9 @@ HTTP/1.1 204 No Content
 
 
 #### Add App Instance Target to App Administrator Role
-{:.api .api-operation}
 
-{% api_operation put /api/v1/users/${userId}/roles/${roleId}/targets/catalog/apps/${appName}/${appInstanceId} %}
+
+<ApiOperation method="put" url="/api/v1/users/${userId}/roles/${roleId}/targets/catalog/apps/${appName}/${appInstanceId}" />
 
 Adds an app instance target for an `APP_ADMIN` role assignment
 
@@ -517,7 +517,7 @@ Adding the first app or (app instance) target changes the scope of the role assi
 App Targets and App Instance Targets cannot be mixed for the same app name. For example, you cannot specify that an administrator has access to mange Salesforce (the entire app type) and specific instances of the Salesforce app; it must be one or the other.
 
 ##### Request Parameters
-{:.api .api-request .api-request-params}
+
 
 | Parameter | Description                                                | Param Type | DataType | Required |
 |:----------|:-----------------------------------------------------------|:-----------|:---------|:---------|
@@ -527,14 +527,14 @@ App Targets and App Instance Targets cannot be mixed for the same app name. For 
 | appInstanceId   | `id` of the app instance target to scope role assignment | URL        | String   | TRUE     |
 
 ##### Response Parameters
-{:.api .api-response .api-response-params}
+
 
 ``` http
 HTTP/1.1 204 No Content
 ```
 
 ##### Request Example
-{:.api .api-request .api-request-example}
+
 
 ```bash
 curl -v -X PUT \
@@ -545,23 +545,23 @@ curl -v -X PUT \
 ```
 
 ##### Response Example
-{:.api .api-response .api-response-example}
+
 
 ``` http
 HTTP/1.1 204 No Content
 ```
 
 #### Remove App Target from App Administrator Role
-{:.api .api-operation}
 
-{% api_operation delete /api/v1/users/${userId}/roles/${roleId}/targets/catalog/apps/${appName} %}
+
+<ApiOperation method="delete" url="/api/v1/users/${userId}/roles/${roleId}/targets/catalog/apps/${appName}" />
 
 Removes an app target from an `APP_ADMIN` role assignment
 
 > Note: Don't remove the last app target from a role assignment, as this causes an exception.  If you need a role assignment that applies to all apps, the API consumer should delete the `APP_ADMIN` role assignment and recreate it.
 
 ##### Request Parameters
-{:.api .api-request .api-request-params}
+
 
 | Parameter | Description                              | Param Type | DataType | Required |
 |:----------|:-----------------------------------------|:-----------|:---------|:---------|
@@ -570,14 +570,14 @@ Removes an app target from an `APP_ADMIN` role assignment
 | appName   | `name` of app target for role assignment | URL        | String   | TRUE     |
 
 ##### Response Parameters
-{:.api .api-response .api-response-params}
+
 
 ``` http
 HTTP/1.1 204 No Content
 ```
 
 ##### Request Example
-{:.api .api-request .api-request-example}
+
 
 ```bash
 curl -v -X DELETE \
@@ -588,23 +588,23 @@ curl -v -X DELETE \
 ```
 
 ##### Response Example
-{:.api .api-response .api-response-example}
+
 
 ``` http
 HTTP/1.1 204 No Content
 ```
 
 #### Remove App Instance Target from App Administrator Role
-{:.api .api-operation}
 
-{% api_operation delete /api/v1/users/${userId}/roles/${roleId}/targets/catalog/apps/${appName}/${appInstanceId} %}
+
+<ApiOperation method="delete" url="/api/v1/users/${userId}/roles/${roleId}/targets/catalog/apps/${appName}/${appInstanceId}" />
 
 Removes an app instance target from an `APP_ADMIN` role assignment.
 
 > Note: Don't remove the last app target from a role assignment, as this causes an exception.  If you need a role assignment that applies to all apps, the API consumer should delete the `APP_ADMIN` role assignment and recreate it.
 
 ##### Request Parameters
-{:.api .api-request .api-request-params}
+
 
 | Parameter | Description                              | Param Type | DataType | Required |
 |:----------|:-----------------------------------------|:-----------|:---------|:---------|
@@ -614,14 +614,14 @@ Removes an app instance target from an `APP_ADMIN` role assignment.
 | appInstanceId   | `id` of the app instance target for role assignment | URL        | String   | TRUE     |
 
 ##### Response Parameters
-{:.api .api-response .api-response-params}
+
 
 ``` http
 HTTP/1.1 204 No Content
 ```
 
 ##### Request Example
-{:.api .api-request .api-request-example}
+
 
 ```bash
 curl -v -X DELETE \
@@ -632,7 +632,7 @@ curl -v -X DELETE \
 ```
 
 ##### Response Example
-{:.api .api-response .api-response-example}
+
 
 ``` http
 HTTP/1.1 204 No Content

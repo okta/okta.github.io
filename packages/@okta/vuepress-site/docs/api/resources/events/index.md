@@ -22,14 +22,14 @@ Log data older than 90 days is not returned, in accordance with Okta's [Data Ret
 ## Event Operations
 
 ### List Events
-{:.api .api-operation}
 
-{% api_operation get /api/v1/events %}
+
+<ApiOperation method="get" url="/api/v1/events" />
 
 Fetches a list of events from your Okta organization system log
 
 ##### Request Parameters
-{:.api .api-request .api-request-params}
+
 
 | Parameter | Description                                                                                 | Param Type | DataType | Required | Default |
 |:----------|:--------------------------------------------------------------------------------------------|:-----------|:---------|:---------|:--------|
@@ -109,12 +109,12 @@ Note that using `filter` with a value of `published gt "2017-10-01T00:00:00.000Z
 return the same results. Since `filter` and `startDate` are [mutually exclusive](#request-parameters), `filter` must be used to simultaneously specify both time and additional filter criteria.
 
 ##### Response Parameters
-{:.api .api-response .api-response-params}
+
 
 Array of [Events](#event-model)
 
 ##### Request Example
-{:.api .api-request .api-request-example}
+
 
 ```bash
 curl -v -X GET \
@@ -125,7 +125,7 @@ curl -v -X GET \
 ```
 
 ##### Response Example
-{:.api .api-response .api-response-example}
+
 
 ```http
 HTTP/1.1 200 OK
@@ -407,7 +407,7 @@ The action `objectType` identifies the unique action performed.
 | app.user_management.grouppush.mapping.app.group.renamed                                    | Successfully renamed target application group when source group was renamed                                                                    |
 | app.user_management.grouppush.mapping.app.group.renamed.failed                             | Failed to rename target application group when source group was renamed                                                                        |
 | app.user_management.grouppush.mapping.and.groups.deleted.rule.deleted                      | An existing mapping and its target groups have been deleted because a mapping rule was deleted                                                 |
-{:.table .table-word-break}
+
 
 ##### Delegated Authentication
 

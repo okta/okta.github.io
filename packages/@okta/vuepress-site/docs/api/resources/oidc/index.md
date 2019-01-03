@@ -52,9 +52,9 @@ If you have a developer account, you can use the `default` authorization server 
 `https://{yourOktaDomain}/oauth2/default/v1/authorize`
 
 ### /authorize
-{:.api .api-operation}
 
-{% api_operation get ${baseUrl}/v1/authorize %}
+
+<ApiOperation method="get" url="${baseUrl}/v1/authorize" />
 
 > This endpoint's base URL will vary depending on whether you are using a custom authorization server or not. For more information, see [Composing Your Base URL](#composing-your-base-url).
 
@@ -63,7 +63,7 @@ authenticates the user and returns tokens along with an authorization grant to t
 of the callback response.
 
 #### Request Parameters
-{:.api .api-request .api-request-params}
+
 
 | Parameter             | Description                                                                                                                                                                                                                                                                                                                                                                                             | Param Type | DataType | Required |
 |:----------------------|:--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|:-----------|:---------|:---------
@@ -244,9 +244,9 @@ https://www.example.com/#error=invalid_scope&error_description=The+requested+sco
 ```
 
 ### /token
-{:.api .api-operation}
 
-{% api_operation post ${baseUrl}/v1/token %}
+
+<ApiOperation method="post" url="${baseUrl}/v1/token" />
 
 This endpoint returns access tokens, ID tokens, and refresh tokens, depending on the request parameters. For [password](/authentication-guide/implementing-authentication/password), [client credentials](/authentication-guide/implementing-authentication/client-creds), and [refresh token](/authentication-guide/tokens/refreshing-tokens) flows, calling `/token` is the only step of the flow. For the [authorization code](/authentication-guide/implementing-authentication/auth-code) flow, calling `/token` is the second step of the flow.
 
@@ -297,7 +297,7 @@ Based on the scopes requested. Generally speaking, the scopes specified in a req
 | unsupported_grant_type | The `grant_type` isn't `authorization_code`, `refresh_token`, or `password`.                                                                                                                         |
 
 #### Request Example
-{:.api .api-request .api-request-example}
+
 
 ```bash
 curl -v -X POST \
@@ -346,9 +346,9 @@ Content-Type: application/json;charset=UTF-8
 
 
 ### /introspect
-{:.api .api-operation}
 
-{% api_operation post ${baseUrl}/v1/introspect %}
+
+<ApiOperation method="post" url="${baseUrl}/v1/introspect" />
 
 > This endpoint's base URL will vary depending on whether you are using a custom authorization server or not. For more information, see [Composing Your Base URL](#composing-your-base-url).
 
@@ -454,10 +454,10 @@ Content-Type: application/json;charset=UTF-8
 ```
 
 ### /revoke
-{:.api .api-operation}
 
 
-{% api_operation post ${baseUrl}/v1/revoke %}
+
+<ApiOperation method="post" url="${baseUrl}/v1/revoke" />
 
 > This endpoint's base URL will vary depending on whether you are using a custom authorization server or not. For more information, see [Composing Your Base URL](#composing-your-base-url).
 
@@ -510,9 +510,9 @@ Content-Type: application/json;charset=UTF-8
 ```
 
 ### /logout
-{:.api .api-operation}
 
-{% api_operation get ${baseUrl}/v1/logout %}
+
+<ApiOperation method="get" url="${baseUrl}/v1/logout" />
 
 > This endpoint's base URL will vary depending on whether you are using a custom authorization server or not. For more information, see [Composing Your Base URL](#composing-your-base-url).
 
@@ -565,9 +565,9 @@ If the Okta session has expired (or does not exist), a logout request will simpl
 If the ID token passed via `id_token_hint` is invalid or expired, the browser will be redirected to an error page.
 
 ### /keys
-{:.api .api-operation}
 
-{% api_operation get ${baseUrl}/v1/keys %}
+
+<ApiOperation method="get" url="${baseUrl}/v1/keys" />
 
 > This endpoint's base URL will vary depending on whether you are using a custom authorization server or not. For more information, see [Composing Your Base URL](#composing-your-base-url).
 
@@ -582,7 +582,7 @@ These keys can be used to locally validate JWTs returned by Okta. Standard open-
 >Okta also recommends caching or persisting these keys to improve performance. If you cache signing keys and automatic key rotation is enabled, be aware that verification will fail when Okta rotates the keys automatically. Clients that cache keys should periodically check the JWKS for updated signing keys.
 
 #### Request Parameters
-{:.api .api-request .api-request-params}
+
 
 | Parameter | Description                 | Param Type | DataType | Required | Default |
 |:----------|:----------------------------|:-----------|:---------|:---------|:--------|
@@ -594,7 +594,7 @@ These keys can be used to locally validate JWTs returned by Okta. Standard open-
 JWKS properties can be found [here](/docs/api/resources/authorization-servers#key-properties).
 
 #### Response Example
-{:.api .api-response .api-response-example}
+
 
 ```http
 HTTP 200 OK
@@ -654,9 +654,9 @@ Key rotation behaves differently with Custom Authorization Servers. For more inf
 You can use an [introspection request](#introspect) for validation.
 
 ### /userinfo
-{:.api .api-operation}
 
-{% api_operation get ${baseUrl}/v1/userinfo %}
+
+<ApiOperation method="get" url="${baseUrl}/v1/userinfo" />
 
 > This endpoint's base URL will vary depending on whether you are using a custom authorization server or not. For more information, see [Composing Your Base URL](#composing-your-base-url).
 
@@ -665,7 +665,7 @@ Returns any claims for the currently logged-in user.
 You must include an access token (returned from the [authorization endpoint](#authorize) in the HTTP Authorization header.
 
 #### Request Example
-{:.api .api-request .api-request-example}
+
 
 ```bash
 curl -v -X POST \
@@ -674,12 +674,12 @@ curl -v -X POST \
 ```
 
 #### Response Properties
-{:.api .api-response .api-response-example}
+
 
 Returns a JSON document with claims about the currently authenticated end user.
 
 #### Response Example (Success)
-{:.api .api-response .api-response-example}
+
 ```json
 {
   "sub": "00uid4BxXw6I6TV4m0g3",
@@ -703,14 +703,14 @@ The claims in the response are identical to those returned for the requested sco
 See [Scope-Dependent Claims](#scope-dependent-claims-not-always-returned) for more information about individual claims.
 
 #### Response Example (Error)
-{:.api .api-response .api-response-example}
+
 ```http
 HTTP 401 Unauthorized
 WWW-Authenticate: Bearer error="invalid_token", error_description="The access token is invalid"
 ```
 
 #### Response Example (Error)
-{:.api .api-response .api-response-example}
+
 ```http
 HTTP 403 Forbidden
 Expires: 0
@@ -718,9 +718,9 @@ WWW-Authenticate: Bearer error="insufficient_scope", error_description="The acce
 ```
 
 ### /.well-known/oauth-authorization-server
-{:.api .api-operation}
 
-{% api_operation get /oauth2/${authServerId}/.well-known/oauth-authorization-server %}
+
+<ApiOperation method="get" url="/oauth2/${authServerId}/.well-known/oauth-authorization-server" />
 
 > This endpoint is only available on custom authorization servers, so there are no distinct [base URLs](#composing-your-base-url).
 
@@ -729,7 +729,7 @@ Returns OAuth 2.0 metadata related to your custom authorization server. This inf
 > This API doesn't require any authentication.
 
 #### Request Example
-{:.api .api-request .api-request-example}
+
 
 ```bash
 curl -X GET \
@@ -737,7 +737,7 @@ curl -X GET \
 ```
 
 #### Response Properties
-{:.api .api-response .api-response-example}
+
 
 | Property                                      | Description                                                                                                                                                                                                                      | Type    |
 | --------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------- |
@@ -764,7 +764,7 @@ curl -X GET \
 
 
 #### Response Example (Success)
-{:.api .api-response .api-response-example}
+
 
 ```json
 {
@@ -847,7 +847,7 @@ curl -X GET \
 ```
 
 #### Response Example (Error)
-{:.api .api-response .api-response-example}
+
 ```http
 HTTP 404 Not Found
 {
@@ -860,11 +860,11 @@ HTTP 404 Not Found
 ```
 
 ### /.well-known/openid-configuration
-{:.api .api-operation}
 
-{% api_operation get https://{yourOktaDomain}/.well-known/openid-configuration %}
 
-{% api_operation get https://{yourOktaDomain}/oauth2/${authServerId}/.well-known/openid-configuration %}
+<ApiOperation method="get" url="https://{yourOktaDomain}/.well-known/openid-configuration" />
+
+<ApiOperation method="get" url="https://{yourOktaDomain}/oauth2/${authServerId}/.well-known/openid-configuration" />
 
 > This endpoint's base URL will vary depending on whether you are using a custom authorization server or not. The custom authorization server URL specifies an `authServerId`. For example, the custom Authorization Server automatically created for you by Okta has an `authServerId` value of `default`.
 
@@ -873,7 +873,7 @@ Returns OpenID Connect metadata about your authorization server. This informatio
 This API doesn't require any authentication.
 
 #### Request Example
-{:.api .api-request .api-request-example}
+
 
 ```bash
 curl -X GET \
@@ -881,7 +881,7 @@ curl -X GET \
 ```
 
 #### Response Properties
-{:.api .api-response .api-response-example}
+
 
 | Property                                      | Description                                                                                                                                                                                                                                | Type    |
 | --------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------- |
@@ -907,7 +907,7 @@ curl -X GET \
 | token_endpoint_auth_methods_supported         | JSON array containing a list of client authentication methods supported by this token endpoint.                                                                                                                                            | Array   |
 
 #### Response Example (Success)
-{:.api .api-response .api-response-example}
+
 
 ```json
 {
@@ -1016,7 +1016,7 @@ curl -X GET \
 ```
 
 #### Response Example (Error)
-{:.api .api-response .api-response-example}
+
 ```http
 ```http
 HTTP 404 Not Found

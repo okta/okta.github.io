@@ -15,9 +15,9 @@ Explore the Groups API: [![Run in Postman](https://run.pstmn.io/button.svg)](htt
 ## Group Operations
 
 ### Add Group
-{:.api .api-operation}
 
-{% api_operation post /api/v1/groups %}
+
+<ApiOperation method="post" url="/api/v1/groups" />
 
 Adds a new group with `OKTA_GROUP` type to your organization.
 
@@ -25,18 +25,18 @@ Adds a new group with `OKTA_GROUP` type to your organization.
 > See [Importing Groups into Okta](https://help.okta.com/en/prod/Content/Topics/Directory/Directory_Groups.htm) for more information.
 
 ##### Request Parameters
-{:.api .api-request .api-request-params}
+
 
 Parameter | Description                               | ParamType | DataType                          | Required | Default
 profile   | `okta:user_group` profile for a new group | Body      | [Profile-Object](#profile-object) | TRUE     |
 
 ##### Response Parameters
-{:.api .api-response .api-response-params}
+
 
 The created [Group](#group-model).
 
 ##### Request Example
-{:.api .api-request .api-request-example}
+
 
 ```bash
 curl -v -X POST \
@@ -52,7 +52,7 @@ curl -v -X POST \
 ```
 
 ##### Response Example
-{:.api .api-response .api-response-example}
+
 
 ```json
 {
@@ -92,25 +92,25 @@ curl -v -X POST \
 ```
 
 ### Get Group
-{:.api .api-operation}
 
-{% api_operation get /api/v1/groups/${groupId} %}
+
+<ApiOperation method="get" url="/api/v1/groups/${groupId}" />
 
 Fetches a specific group by `id` from your organization
 
 ##### Request Parameters
-{:.api .api-request .api-request-params}
+
 
 Parameter | Description     | ParamType | DataType | Required | Default
 id        | `id` of a group | URL       | String   | TRUE     |
 
 ##### Response Parameters
-{:.api .api-response .api-response-params}
+
 
 Fetched [Group](#group-model)
 
 ##### Request Example
-{:.api .api-request .api-request-example}
+
 
 ```bash
 curl -v -X GET \
@@ -121,7 +121,7 @@ curl -v -X GET \
 ```
 
 ##### Response Example
-{:.api .api-response .api-response-example}
+
 
 ```json
 {
@@ -161,9 +161,9 @@ curl -v -X GET \
 ```
 
 ### List Groups
-{:.api .api-operation}
 
-{% api_operation get /api/v1/groups %}
+
+<ApiOperation method="get" url="/api/v1/groups" />
 
 Enumerates groups in your organization with pagination. A subset of groups can be returned that match a supported filter expression or query.
 
@@ -175,7 +175,7 @@ Enumerates groups in your organization with pagination. A subset of groups can b
 - [List Groups Updated after Timestamp](#list-groups-updated-after-timestamp)
 
 ##### Request Parameters
-{:.api .api-request .api-request-params}
+
 
 Parameter | Description                                                                                | ParamType | DataType | Required | Default
 q         | Searches the `name` property of groups for matching value                                  | Query     | String   | FALSE    |
@@ -227,12 +227,12 @@ Okta groups with profile or memberships updated after 11/11/2015
 
 
 ##### Response Parameters
-{:.api .api-response .api-response-params}
+
 
 Array of [Groups](#group-model)
 
 #### List Groups with Defaults
-{:.api .api-operation}
+
 
 Enumerates all groups in your organization.
 
@@ -245,7 +245,7 @@ Reminders about the `limit` query parameter and query timeouts:
 * If you receive a HTTP 500 status code, you more than likely have exceeded the request timeout.  Retry your request with a smaller `limit` and [page the results](/docs/api/getting_started/design_principles#pagination).
 
 ##### Request Example
-{:.api .api-request .api-request-example}
+
 
 ```bash
 curl -v -X GET \
@@ -256,7 +256,7 @@ curl -v -X GET \
 ```
 
 ##### Response Example
-{:.api .api-response .api-response-example}
+
 
 ```http
 HTTP/1.1 200 OK
@@ -344,7 +344,7 @@ Link: <https://{yourOktaDomain}/api/v1/groups?after=00garwpuyxHaWOkdV0g4&limit=2
 ```
 
 #### Search Groups
-{:.api .api-operation}
+
 
 Searches for groups by `name` in your organization.
 
@@ -353,7 +353,7 @@ Searches for groups by `name` in your organization.
 > Search currently performs a startsWith match but it should be considered an implementation detail and may change without notice in the future. Exact matches will always be returned before partial matches
 
 ##### Request Example
-{:.api .api-request .api-request-example}
+
 
 ```bash
 curl -v -X GET \
@@ -364,7 +364,7 @@ curl -v -X GET \
 ```
 
 ##### Response Example
-{:.api .api-response .api-response-example}
+
 
 ```json
 [
@@ -406,12 +406,12 @@ curl -v -X GET \
 ```
 
 #### List Groups with Type
-{:.api .api-operation}
+
 
 Enumerates all groups with a [specific type](#group-type).
 
 ##### Request Example
-{:.api .api-request .api-request-example}
+
 
 ```bash
 curl -v -X GET \
@@ -422,7 +422,7 @@ curl -v -X GET \
 ```
 
 ##### Response Example
-{:.api .api-response .api-response-example}
+
 
 ```http
 HTTP/1.1 200 OK
@@ -503,12 +503,12 @@ Link: <https://{yourOktaDomain}/api/v1/groups?after=00gak46y5hydV6NdM0g4&limit=2
 ```
 
 #### List Groups with Profile Updated after Timestamp
-{:.api .api-operation}
+
 
 Enumerates all groups with a profile updated after the specified timestamp.
 
 ##### Request Example
-{:.api .api-request .api-request-example}
+
 
 ```bash
 curl -v -X GET \
@@ -519,7 +519,7 @@ curl -v -X GET \
 ```
 
 ##### Response Example
-{:.api .api-response .api-response-example}
+
 
 ```http
 HTTP/1.1 200 OK
@@ -566,12 +566,12 @@ Link: <https://{yourOktaDomain}/api/v1/groups?after=00g1emaKYZTWRYYRRTSK&limit=2
 ```
 
 #### List Groups with Membership Updated after Timestamp
-{:.api .api-operation}
+
 
 Enumerates all groups with user memberships updated after the specified timestamp.
 
 ##### Request Example
-{:.api .api-request .api-request-example}
+
 
 ```bash
 curl -v -X GET \
@@ -582,7 +582,7 @@ curl -v -X GET \
 ```
 
 ##### Response Example
-{:.api .api-response .api-response-example}
+
 
 ```http
 HTTP/1.1 200 OK
@@ -663,12 +663,12 @@ Link: <https://{yourOktaDomain}/api/v1/groups?after=00g1emaKYZTWRYYRRTSK&limit=2
 ```
 
 #### List Groups Updated after Timestamp
-{:.api .api-operation}
+
 
 Enumerates all groups with profile or user memberships updated after the specified timestamp.
 
 ##### Request Example
-{:.api .api-request .api-request-example}
+
 
 ```bash
 curl -v -X GET \
@@ -679,7 +679,7 @@ curl -v -X GET \
 ```
 
 ##### Response Example
-{:.api .api-response .api-response-example}
+
 
 ```http
 HTTP/1.1 200 OK
@@ -760,9 +760,9 @@ Link: <https://{yourOktaDomain}/api/v1/groups?after=00g1emaKYZTWRYYRRTSK&limit=2
 ```
 
 ### Update Group
-{:.api .api-operation}
 
-{% api_operation put /api/v1/groups/${groupId} %}
+
+<ApiOperation method="put" url="/api/v1/groups/${groupId}" />
 
 Updates the profile for a group with `OKTA_GROUP` type from your organization.
 
@@ -770,7 +770,7 @@ Updates the profile for a group with `OKTA_GROUP` type from your organization.
 > Application imports are responsible for updating group profiles with `APP_GROUP` type such as Active Directory groups.
 
 ##### Request Parameters
-{:.api .api-request .api-request-params}
+
 
 Parameter | Description                   | ParamType | DataType                          | Required | Default
 id        | id of the group to update     | URL       | String                            | TRUE     |
@@ -779,12 +779,12 @@ profile   | Updated profile for the group | Body      | [Profile Object](#profil
 > All profile properties must be specified when updating a groups's profile, **partial updates are not supported!**
 
 ##### Response Parameters
-{:.api .api-response .api-response-params}
+
 
 Updated [Group](#group-model)
 
 ##### Request Example
-{:.api .api-request .api-request-example}
+
 
 ```bash
 curl -v -X PUT \
@@ -800,7 +800,7 @@ curl -v -X PUT \
 ```
 
 ##### Response Example
-{:.api .api-response .api-response-example}
+
 
 ```json
 
@@ -841,9 +841,9 @@ curl -v -X PUT \
 ```
 
 ### Remove Group
-{:.api .api-operation}
 
-{% api_operation delete /api/v1/groups/${groupId} %}
+
+<ApiOperation method="delete" url="/api/v1/groups/${groupId}" />
 
 Removes a group with `OKTA_GROUP` type from your organization.
 
@@ -851,18 +851,18 @@ Removes a group with `OKTA_GROUP` type from your organization.
 > Application imports are responsible for removing groups with `APP_GROUP` type such as Active Directory groups.
 
 ##### Request Parameters
-{:.api .api-request .api-request-params}
+
 
 Parameter | Description                 | ParamType | DataType | Required | Default
 id        | `id` of the group to delete | URL       | String   | TRUE     |
 
 ##### Response Parameters
-{:.api .api-response .api-response-params}
+
 
 N/A
 
 ##### Request Example
-{:.api .api-request .api-request-example}
+
 
 ```bash
 curl -v -X DELETE \
@@ -874,7 +874,7 @@ curl -v -X DELETE \
 
 
 ##### Response Example
-{:.api .api-response .api-response-example}
+
 
 ```http
 HTTP/1.1 204 No Content
@@ -883,14 +883,14 @@ HTTP/1.1 204 No Content
 ## Group Member Operations
 
 ### List Group Members
-{:.api .api-operation}
 
-{% api_operation get /api/v1/groups/${groupId}/users %}
+
+<ApiOperation method="get" url="/api/v1/groups/${groupId}/users" />
 
 Enumerates all [users](/docs/api/resources/users#user-model) that are a member of a group.
 
 ##### Request Parameters
-{:.api .api-request .api-request-params}
+
 
 Parameter | Description                                                | ParamType | DataType | Required | Default
 id        | `id` of the group                                          | URL       | String   | TRUE     |
@@ -904,12 +904,12 @@ The default user limit is set to a very high number due to historical reasons wh
 > If you receive a HTTP 500 status code, you more than likely have exceeded the request timeout.  Retry your request with a smaller `limit` and page the results (See [Pagination](/docs/api/getting_started/design_principles#pagination))
 
 ##### Response Parameters
-{:.api .api-response .api-response-params}
+
 
 Array of [Users](users#user-model)
 
 ##### Request Example
-{:.api .api-request .api-request-example}
+
 
 ```bash
 curl -v -X GET \
@@ -920,7 +920,7 @@ curl -v -X GET \
 ```
 
 ##### Response Example
-{:.api .api-response .api-response-example}
+
 
 ```http
 HTTP/1.1 200 OK
@@ -991,9 +991,9 @@ Link: <https://{yourOktaDomain}/api/v1/groups/00g1fanEFIQHMQQJMHZP/users?after=0
 ```
 
 ### Add User to Group
-{:.api .api-operation}
 
-{% api_operation put /api/v1/groups/${groupId}/users/${userId} %}
+
+<ApiOperation method="put" url="/api/v1/groups/${groupId}/users/${userId}" />
 
 Adds a [user](users#user-model) to a group with `OKTA_GROUP` type.
 
@@ -1001,19 +1001,19 @@ Adds a [user](users#user-model) to a group with `OKTA_GROUP` type.
 > Application imports are responsible for managing group memberships for groups with `APP_GROUP` type such as Active Directory groups.
 
 ##### Request Parameters
-{:.api .api-request .api-request-params}
+
 
 Parameter | Description     | ParamType | DataType | Required | Default
 groupId      | id of the group | URL       | String   | TRUE     |
 userId       | `id` of a user  | URL       | String   | TRUE     |
 
 ##### Response Parameters
-{:.api .api-response .api-response-params}
+
 
 N/A
 
 ##### Request Example
-{:.api .api-request .api-request-example}
+
 
 ```bash
 curl -v -X PUT \
@@ -1024,16 +1024,16 @@ curl -v -X PUT \
 ```
 
 ##### Response Example
-{:.api .api-response .api-response-example}
+
 
 ```http
 HTTP/1.1 204 No Content
 ```
 
 ### Remove User from Group
-{:.api .api-operation}
 
-{% api_operation delete /api/v1/groups/${groupId}/users/${userId} %}
+
+<ApiOperation method="delete" url="/api/v1/groups/${groupId}/users/${userId}" />
 
 Removes a [user](users#user-model) from a group with `OKTA_GROUP` type.
 
@@ -1041,19 +1041,19 @@ Removes a [user](users#user-model) from a group with `OKTA_GROUP` type.
 > Application imports are responsible for managing group memberships for groups with `APP_GROUP` type such as Active Directory groups.
 
 ##### Request Parameters
-{:.api .api-request .api-request-params}
+
 
 Parameter | Description       | ParamType | DataType | Required | Default
 groupId      | `id` of the group | URL       | String   | TRUE     |
 userId       | `id` of a user  | URL       | String   | TRUE     |
 
 ##### Response Parameters
-{:.api .api-response .api-response-params}
+
 
 N/A
 
 ##### Request Example
-{:.api .api-request .api-request-example}
+
 
 ```bash
 curl -v -X DELETE \
@@ -1064,7 +1064,7 @@ curl -v -X DELETE \
 ```
 
 ##### Response Example
-{:.api .api-response .api-response-example}
+
 
 ```http
 HTTP/1.1 204 No Content
@@ -1073,16 +1073,16 @@ HTTP/1.1 204 No Content
 ## Group Rule Operations
 
 ### Create Group Rule
-{:.api .api-operation}
 
-{% api_operation post /api/v1/groups/rules %}
+
+<ApiOperation method="post" url="/api/v1/groups/rules" />
 
 Creates a group rule to dynamically add users to the specified group if they match the condition
 
 > Group rules are created with status='INACTIVE'.
 
 ##### Request Parameters
-{:.api .api-request .api-request-params}
+
 
 Parameter                           | Description                                                                                             | ParamType | DataType                          | Required | Default
 condition.expression.value          | Okta expression which would result in a boolean value                                                   | Body      | String                            | TRUE     |
@@ -1092,12 +1092,12 @@ condition.people.groups.exclude     | is currently not supported                
 actions.assignUserToGroups.groupIds | List of groupIds to which users would be added. Currently we support only one group as target group     | Body      | String                            | TRUE     |
 
 ##### Response Parameters
-{:.api .api-response .api-response-params}
+
 
 Created [Rule](#rule-model)
 
 ##### Request Example
-{:.api .api-request .api-request-example}
+
 
 ```bash
 curl -v -X POST \
@@ -1134,7 +1134,7 @@ curl -v -X POST \
 ```
 
 ##### Response Example
-{:.api .api-response .api-response-example}
+
 
 ```json
 
@@ -1172,9 +1172,9 @@ curl -v -X POST \
 ```
 
 ### Update Group Rule
-{:.api .api-operation}
 
-{% api_operation put /api/v1/groups/rules/${ruleId} %}
+
+<ApiOperation method="put" url="/api/v1/groups/rules/${ruleId}" />
 
 Updates a group rule.
 
@@ -1182,7 +1182,7 @@ Updates a group rule.
 > currently action section is not updatable.
 
 ##### Request Parameters
-{:.api .api-request .api-request-params}
+
 
 Parameter                           | Description                                                                                             | ParamType | DataType                          | Required | Default
 id                                  | id of the rule to be updated                                                                            | Body      | String                            | TRUE     |
@@ -1194,12 +1194,12 @@ condition.people.groups.exclude     | is currently not supported                
 actions.assignUserToGroups.groupIds | List of groupIds to which users would be added. Currently we support only one group as target group     | Body      | String                            | TRUE     |
 
 ##### Response Parameters
-{:.api .api-response .api-response-params}
+
 
 Updated [Rule](#rule-model)
 
 ##### Request Example
-{:.api .api-request .api-request-example}
+
 
 ```bash
 curl -v -X POST \
@@ -1238,7 +1238,7 @@ curl -v -X POST \
 ```
 
 ##### Response Example
-{:.api .api-response .api-response-example}
+
 
 ```json
 {
@@ -1275,9 +1275,9 @@ curl -v -X POST \
 ```
 
 ### List Group Rules
-{:.api .api-operation}
 
-{% api_operation get /api/v1/groups/rules %}
+
+<ApiOperation method="get" url="/api/v1/groups/rules" />
 
 Lists all group rules for your organization.
 
@@ -1285,19 +1285,19 @@ Lists all group rules for your organization.
 > The maximum value for limit is 300.
 
 ##### Request Parameters
-{:.api .api-request .api-request-params}
+
 
 Parameter      | Description                                                  | ParamType  | DataType                          | Required | Default
 limit          | Specifies the number of rule results in a page               | Query      | Number                            | FALSE    | 50
 after          | Specifies the pagination cursor for the next page of rules   | Query      | String                            | FALSE    |
 
 ##### Response Parameters
-{:.api .api-response .api-response-params}
+
 
 Array of [Rules](#rule-model)
 
 ##### Request Example
-{:.api .api-request .api-request-example}
+
 
 ```bash
 curl -v -X GET \
@@ -1308,7 +1308,7 @@ curl -v -X GET \
 ```
 
 ##### Response Example
-{:.api .api-response .api-response-example}
+
 
 ```json
 HTTP/1.1 200 OK
@@ -1393,25 +1393,25 @@ Link: <https://{yourOktaDomain}/api/v1/groups/rules?after=0pr3f7zMZZHPgUoWO0g4&l
 ```
 
 ### Get Group Rule
-{:.api .api-operation}
 
-{% api_operation get /api/v1/groups/rules/${ruleId} %}
+
+<ApiOperation method="get" url="/api/v1/groups/rules/${ruleId}" />
 
 Fetches a specific group rule by id from your organization
 
 ##### Request Parameters
-{:.api .api-request .api-request-params}
+
 
 Parameter      | Description                                                  | ParamType  | DataType                          | Required | Default
 id             | id of a group rule                                           | URL        | String                            | TRUE     |
 
 ##### Response Parameters
-{:.api .api-response .api-response-params}
+
 
 Specified [Rule](#rule-model)
 
 ##### Request Example
-{:.api .api-request .api-request-example}
+
 
 ```bash
 curl -v -X GET \
@@ -1422,7 +1422,7 @@ curl -v -X GET \
 ```
 
 ##### Response Example
-{:.api .api-response .api-response-example}
+
 
 ```json
 {
@@ -1459,25 +1459,25 @@ curl -v -X GET \
 ```
 
 ### Delete a group Rule
-{:.api .api-operation}
 
-{% api_operation delete /api/v1/groups/rules/${ruleId} %}
+
+<ApiOperation method="delete" url="/api/v1/groups/rules/${ruleId}" />
 
 Removes a specific group rule by id from your organization
 
 ##### Request Parameters
-{:.api .api-request .api-request-params}
+
 
 Parameter      | Description                                                  | ParamType  | DataType                          | Required | Default
 id             | id of a group rule                                           | URL        | String                            | TRUE     |
 
 ##### Response Parameters
-{:.api .api-response .api-response-params}
+
 
 N/A
 
 ##### Request Example
-{:.api .api-request .api-request-example}
+
 
 ```bash
 curl -v -X DELETE \
@@ -1488,32 +1488,32 @@ curl -v -X DELETE \
 ```
 
 ##### Response Example
-{:.api .api-response .api-response-example}
+
 
 ```http
 HTTP/1.1 202 No Content
 ```
 
 ### Activate a group Rule
-{:.api .api-operation}
 
-{% api_operation post /api/v1/groups/rules/${ruleId}/lifecycle/activate %}
+
+<ApiOperation method="post" url="/api/v1/groups/rules/${ruleId}/lifecycle/activate" />
 
 Activates a specific group rule by id from your organization
 
 ##### Request Parameters
-{:.api .api-request .api-request-params}
+
 
 Parameter      | Description                                                  | ParamType  | DataType                          | Required | Default
 id             | id of a group rule                                           | URL        | String                            | TRUE     |
 
 ##### Response Parameters
-{:.api .api-response .api-response-params}
+
 
 N/A
 
 ##### Request Example
-{:.api .api-request .api-request-example}
+
 
 ```bash
 curl -v -X POST \
@@ -1524,32 +1524,32 @@ curl -v -X POST \
 ```
 
 ##### Response Example
-{:.api .api-response .api-response-example}
+
 
 ```http
 HTTP/1.1 200 No Content
 ```
 
 ### Deactivate a group Rule
-{:.api .api-operation}
 
-{% api_operation post /api/v1/groups/rules/${ruleId}/lifecycle/deactivate %}
+
+<ApiOperation method="post" url="/api/v1/groups/rules/${ruleId}/lifecycle/deactivate" />
 
 Deactivates a specific group rule by id from your organization
 
 ##### Request Parameters
-{:.api .api-request .api-request-params}
+
 
 Parameter      | Description                                                  | ParamType  | DataType                          | Required | Default
 id             | id of a group rule                                           | URL        | String                            | TRUE     |
 
 ##### Response Parameters
-{:.api .api-response .api-response-params}
+
 
 N/A
 
 ##### Request Example
-{:.api .api-request .api-request-example}
+
 
 ```bash
 curl -v -X POST \
@@ -1560,7 +1560,7 @@ curl -v -X POST \
 ```
 
 ##### Response Example
-{:.api .api-response .api-response-example}
+
 
 ```http
 HTTP/1.1 200 No Content
@@ -1569,14 +1569,14 @@ HTTP/1.1 200 No Content
 ## Related Resources
 
 ### List Assigned Applications
-{:.api .api-operation}
 
-{% api_operation get /api/v1/groups/${groupId}/apps %}
+
+<ApiOperation method="get" url="/api/v1/groups/${groupId}/apps" />
 
 Enumerates all [applications](apps#application-model) that are assigned to a group. See [Application Group Operations](apps#application-group-operations)
 
 ##### Request Parameters
-{:.api .api-request .api-request-params}
+
 
 Parameter | Description                                               | ParamType | DataType | Required | Default
 id        | id of the group                                           | URL       | String   | TRUE     |
@@ -1586,12 +1586,12 @@ after     | Specifies the pagination cursor for the next page of apps | Query   
 > The page cursor should treated as an opaque value and obtained through the next link relation. See [Pagination](/docs/api/getting_started/design_principles#pagination)
 
 ##### Response Parameters
-{:.api .api-response .api-response-params}
+
 
 Array of [Applications](apps#application-model)
 
 ##### Request Example
-{:.api .api-request .api-request-example}
+
 
 ```bash
 curl -v -X GET \
@@ -1602,7 +1602,7 @@ curl -v -X GET \
 ```
 
 ##### Response Example
-{:.api .api-response .api-response-example}
+
 
 ```http
 HTTP/1.1 200 OK

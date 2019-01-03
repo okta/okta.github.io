@@ -24,28 +24,28 @@ Explore the Client Application API: [![Run in Postman](https://run.pstmn.io/butt
 ## Client Application Operations
 
 ### Register New Client
-{:.api .api-operation}
 
-{% api_operation post /oauth2/v1/clients %}
+
+<ApiOperation method="post" url="/oauth2/v1/clients" />
 
 Adds a new client application to your organization
 
 ##### Request Parameters
-{:.api .api-request .api-request-params}
+
 
 | Parameter | Description                        | ParamType | DataType                                      | Required |
 |:----------|:-----------------------------------|:----------|:----------------------------------------------|:---------|
 | settings  | OAuth client registration settings | Body      | [Client Settings](#client-application-model)  | TRUE     |
 
 ##### Response Parameters
-{:.api .api-response .api-response-params}
+
 
 The [OAuth Client](#client-application-model) created by the request
 
 > {% api_lifecycle ea %} Note: Apps created on `/api/v1/apps` default to `consent_method=TRUSTED`, while those created on `/api/v1/clients` default to `consent_method=REQUIRED`.
 
 ##### Request Example
-{:.api .api-request .api-request-example}
+
 
 ```bash
 curl -v -X POST \
@@ -77,7 +77,7 @@ curl -v -X POST \
 ```
 
 ##### Response Example
-{:.api .api-response .api-response-example}
+
 
 ```http
 HTTP/1.1 201 Created
@@ -112,7 +112,7 @@ Content-Type: application/json;charset=UTF-8
 ```
 
 ##### Response Example: Duplicate Client Name
-{:.api .api-response .api-response-example}
+
 
 ```http
 HTTP/1.1 400 Bad Request
@@ -126,14 +126,14 @@ Content-Type: application/json
 ```
 
 ### List Client Applications
-{:.api .api-operation}
 
-{% api_operation get /oauth2/v1/clients %}
+
+<ApiOperation method="get" url="/oauth2/v1/clients" />
 
 Lists all the client applications in your organization (with optional pagination)
 
 ##### Request Parameters
-{:.api .api-request .api-request-params}
+
 
 Parameter | Description                                                                                | ParamType | DataType | Required | Default | Maximum |
 q         | Searches the `client_name` property of clients for matching value                          | Query     | String   | FALSE    |
@@ -145,12 +145,12 @@ after     | Specifies the pagination cursor for the next page of clients        
 * Search currently performs a startsWith match but this is an implementation detail and may change without notice in the future.
 
 ##### Response Parameters
-{:.api .api-response .api-response-params}
+
 
 Array of [OAuth Clients](#client-application-model)
 
 ##### Request Example: List All Clients
-{:.api .api-request .api-request-example}
+
 
 ```bash
 curl -v -X GET \
@@ -161,7 +161,7 @@ curl -v -X GET \
 ```
 
 ##### Response Example
-{:.api .api-response .api-response-example}
+
 
 ```http
 HTTP/1.1 200 OK
@@ -265,14 +265,14 @@ Response body:
 ```
 
 ### List Client Applications Matching a Search Filter
-{:.api .api-operation}
 
-{% api_operation get /oauth2/v1/clients?q=${term} %}
+
+<ApiOperation method="get" url="/oauth2/v1/clients?q=${term}" />
 
 Lists all clients that match a search filter on `client_name`
 
 ##### Request Parameters
-{:.api .api-request .api-request-params}
+
 
 Parameter | Description                                                                                | ParamType | DataType | Required | Default | Maximum |
 q         | Searches the `client_name` property of clients for matching value                          | Query     | String   | FALSE    |
@@ -284,7 +284,7 @@ after     | Specifies the pagination cursor for the next page of clients        
 * Search currently performs a startsWith match but this is an implementation detail and may change without notice in the future.
 
 ##### Request Example
-{:.api .api-request .api-request-example}
+
 
 ```bash
 curl -v -X GET \
@@ -295,7 +295,7 @@ curl -v -X GET \
 ```
 
 ##### Response Example
-{:.api .api-request .api-response-example}
+
 
 ```http
 HTTP/1.1 200 OK
@@ -339,26 +339,26 @@ Response body:
 ```
 
 ### Get OAuth Client
-{:.api .api-operation}
 
-{% api_operation get /oauth2/v1/clients/${clientId} %}
+
+<ApiOperation method="get" url="/oauth2/v1/clients/${clientId}" />
 
 Fetches a specific client by `clientId` from your organization
 
 ##### Request Parameters
-{:.api .api-request .api-request-params}
+
 
 | Parameter | Description                      | ParamType | DataType | Required |
 |:----------|:---------------------------------|:----------|:---------|:---------|
 | clientId| `client_id` of a specific client | URL       | String   | TRUE     |
 
 ##### Response Parameters
-{:.api .api-response .api-response-params}
+
 
 The requested [OAuth Client](#client-application-model)
 
 ##### Request Example
-{:.api .api-request .api-request-example}
+
 
 ```bash
 curl -v -X GET \
@@ -369,7 +369,7 @@ curl -v -X GET \
 ```
 
 ##### Response Example
-{:.api .api-response .api-response-example}
+
 
 ```http
 HTTP/1.1 200 OK
@@ -402,7 +402,7 @@ Content-Type: application/json;charset=UTF-8
 ```
 
 ##### Response Example: Incorrect `client_id`
-{:.api .api-response .api-response-example}
+
 
 ```http
 HTTP/1.1 401 Unauthorized
@@ -417,14 +417,14 @@ Content-Type: application/json
 ```
 
 ### Update Client Application
-{:.api .api-operation}
 
-{% api_operation put /oauth2/v1/clients/${clientId} %}
+
+<ApiOperation method="put" url="/oauth2/v1/clients/${clientId}" />
 
 Updates the settings for a client application from your organization.
 
 ##### Request Parameters
-{:.api .api-request .api-request-params}
+
 
 Parameter | Description                        | ParamType | DataType                               | Required |
 clientId | `client_id` of a specific client    | URL       | String                                 | TRUE     |
@@ -433,12 +433,12 @@ settings  | OAuth client registration settings | Body      | [Client Settings](#
 > All settings must be specified when updating a client application, **partial updates are not supported.** If any settings are missing when updating a client application the update fails. The exceptions are: `client_secret_expires_at`, or `client_id_issued_at` must not be included in the request, and the `client_secret` can be omitted.
 
 ##### Response Parameters
-{:.api .api-response .api-response-params}
+
 
 Updated [OAuth Client](#client-application-model).
 
 ##### Request Example
-{:.api .api-request .api-request-example}
+
 
 ```bash
 curl -v -X PUT \
@@ -470,7 +470,7 @@ curl -v -X PUT \
 ```
 
 ##### Response Example
-{:.api .api-response .api-response-example}
+
 
 ```http
 HTTP/1.1 200 OK
@@ -505,7 +505,7 @@ Content-Type: application/json;charset=UTF-8
 }
 ```
 ##### Response Example: Missing Required Setting `client_name`
-{:.api .api-response .api-response-example}
+
 
 ```http
 HTTP/1.1 400 Bad Request
@@ -520,14 +520,14 @@ Content-Type: application/json;charset=UTF-8
 ```
 
 ### Generate New Client Secret
-{:.api .api-operation}
 
-{% api_operation put /oauth2/v1/clients/${clientId}/lifecycle/newSecret %}
+
+<ApiOperation method="put" url="/oauth2/v1/clients/${clientId}/lifecycle/newSecret" />
 
 Generates a new client secret for the specified client application.
 
 ##### Request Parameters
-{:.api .api-request .api-request-params}
+
 
 Parameter | Description                        | ParamType | DataType                               | Required |
 clientId | `client_id` of a specific client    | URL       | String                                 | TRUE     |
@@ -535,12 +535,12 @@ clientId | `client_id` of a specific client    | URL       | String             
 > This operation only applies to client applications which use the `client_secret_post` or `client_secret_basic` method for token endpoint authorization.
 
 ##### Response Parameters
-{:.api .api-response .api-response-params}
+
 
 Updated [OAuth Client](#client-application-model) with client_secret shown.
 
 ##### Request Example
-{:.api .api-request .api-request-example}
+
 
 ```bash
 curl -v -X POST \
@@ -551,7 +551,7 @@ curl -v -X POST \
 ```
 
 ##### Response Example
-{:.api .api-response .api-response-example}
+
 
 ```http
 HTTP/1.1 200 OK
@@ -586,7 +586,7 @@ Content-Type: application/json;charset=UTF-8
 ```
 
 ##### Response Example: Incorrect `client_id`
-{:.api .api-response .api-response-example}
+
 
 ```http
 HTTP/1.1 404 Not Found
@@ -604,26 +604,26 @@ Content-Type: application/json;charset=UTF-8
 ```
 
 ### Remove Client Application
-{:.api .api-operation}
 
-{% api_operation delete /oauth2/v1/clients/${clientId} %}
+
+<ApiOperation method="delete" url="/oauth2/v1/clients/${clientId}" />
 
 Removes a client application from your organization.
 
 ##### Request Parameters
-{:.api .api-request .api-request-params}
+
 
 | Parameter | Description                      | ParamType | DataType | Required |
 |:----------|:---------------------------------|:----------|:---------|:---------|
 | clientId| `client_id` of a specific client | URL       | String   | TRUE     |
 
 ##### Response Parameters
-{:.api .api-response .api-response-params}
+
 
 N/A
 
 ##### Request Example
-{:.api .api-request .api-request-example}
+
 
 ```bash
 curl -v -X DELETE \
@@ -635,14 +635,14 @@ curl -v -X DELETE \
 
 
 ##### Response Example
-{:.api .api-response .api-response-example}
+
 
 ```http
 HTTP/1.1 204 No Content
 ```
 
 ##### Response Example: Incorrect `client_id`
-{:.api .api-response .api-response-example}
+
 
 ```http
 HTTP/1.1 401 Unauthorized

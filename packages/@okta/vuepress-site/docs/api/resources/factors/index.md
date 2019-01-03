@@ -19,26 +19,26 @@ Explore the Factors API: [![Run in Postman](https://run.pstmn.io/button.svg)](ht
  - **[Verification Operations](#factor-verification-operations)** &ndash; Verify a factor
 
 ### Get Factor
-{:.api .api-operation}
 
-{% api_operation get /api/v1/users/${userId}/factors/${factorId} %}
+
+<ApiOperation method="get" url="/api/v1/users/${userId}/factors/${factorId}" />
 
 Fetches a factor for the specified user
 
 #### Request Parameters
-{:.api .api-request .api-request-params}
+
 
 Parameter    | Description                                         | Param Type | DataType | Required |
 userId          | `id` of a user                                        | URL        | String   | TRUE     |
 factorId          | `id` of a factor                                      | URL        | String   | TRUE     |
 
 #### Response Parameters
-{:.api .api-response .api-response-params}
+
 
 [Factor](#factor-model)
 
 #### Request Example
-{:.api .api-request .api-request-example}
+
 
 ```bash
 curl -v -X GET \
@@ -49,7 +49,7 @@ curl -v -X GET \
 ```
 
 #### Response Example
-{:.api .api-response .api-response-example}
+
 
 ```json
 {
@@ -93,25 +93,25 @@ curl -v -X GET \
 ```
 
 ### List Enrolled Factors
-{:.api .api-operation}
 
-{% api_operation get /api/v1/users/${userId}/factors %}
+
+<ApiOperation method="get" url="/api/v1/users/${userId}/factors" />
 
 Enumerates all the enrolled factors for the specified user
 
 #### Request Parameters
-{:.api .api-request .api-request-params}
+
 
 Parameter    | Description                                         | Param Type | DataType | Required |
 userId          | `id` of a user                                        | URL        | String   | TRUE     |
 
 #### Response Parameters
-{:.api .api-response .api-response-params}
+
 
 Array of [Factors](#factor-model)
 
 #### Request Example
-{:.api .api-request .api-request-example}
+
 
 ```bash
 curl -v -X GET \
@@ -122,7 +122,7 @@ curl -v -X GET \
 ```
 
 #### Response Example
-{:.api .api-response .api-response-example}
+
 
 ```json
 [
@@ -253,25 +253,25 @@ curl -v -X GET \
 ```
 
 ### List Factors to Enroll
-{:.api .api-operation}
 
-{% api_operation get /api/v1/users/${userId}/factors/catalog %}
+
+<ApiOperation method="get" url="/api/v1/users/${userId}/factors/catalog" />
 
 Enumerates all the [supported factors](#supported-factors-for-providers) that can be enrolled for the specified user
 
 #### Request Parameters
-{:.api .api-request .api-request-params}
+
 
 Parameter    | Description                                         | Param Type | DataType | Required |
 userId          | `id` of a user                                        | URL        | String   | TRUE     |
 
 #### Response Parameters
-{:.api .api-response .api-response-params}
+
 
 Array of [Factors](#factor-model)
 
 #### Request Example
-{:.api .api-request .api-request-example}
+
 
 ```bash
 curl -v -X GET \
@@ -282,7 +282,7 @@ curl -v -X GET \
 ```
 
 #### Response Example
-{:.api .api-response .api-response-example}
+
 
 ```json
 [
@@ -410,20 +410,20 @@ curl -v -X GET \
 
 
 ### List Security Questions
-{:.api .api-operation}
 
-{% api_operation get /api/v1/users/${userId}/factors/questions %}
+
+<ApiOperation method="get" url="/api/v1/users/${userId}/factors/questions" />
 
 Enumerates all available security questions for a user's `question` factor
 
 #### Request Parameters
-{:.api .api-request .api-request-params}
+
 
 Parameter    | Description                                         | Param Type | DataType | Required |
 userId          | `id` of a user                                        | URL        | String   | TRUE     |
 
 #### Response Parameters
-{:.api .api-response .api-response-params}
+
 
 Array of Questions
 
@@ -435,7 +435,7 @@ Array of Questions
 |---------------+---------------------------+-----------+----------+--------+----------|
 
 #### Request Example
-{:.api .api-request .api-request-example}
+
 
 ```bash
 curl -v -X GET \
@@ -446,7 +446,7 @@ curl -v -X GET \
 ```
 
 #### Response Example
-{:.api .api-response .api-response-example}
+
 
 ```json
 [
@@ -468,9 +468,9 @@ curl -v -X GET \
 ## Factor Lifecycle Operations
 
 ### Enroll Factor
-{:.api .api-operation}
 
-{% api_operation post /api/v1/users/${userId}/factors %}
+
+<ApiOperation method="post" url="/api/v1/users/${userId}/factors" />
 
 Enrolls a user with a supported [factor](#list-factors-to-enroll)
 
@@ -487,7 +487,7 @@ Enrolls a user with a supported [factor](#list-factors-to-enroll)
 - [Enroll U2F Factor](#enroll-u2f-factor)
 
 ##### Request Parameters
-{:.api .api-request .api-request-params}
+
 
 Parameter    | Description                                   | Param Type  | DataType                | Required |
 id           | `id` of user                                  | URL         | String                  | TRUE     |
@@ -495,21 +495,21 @@ templateId   | `id` of an SMS template (only for SMS factor)    | Query       | 
 factor       | Factor                                        | Body        | [Factor](#factor-model) | TRUE     |
 
 ##### Response Parameters
-{:.api .api-response .api-response-params}
+
 
 All responses return the enrolled [Factor](#factor-model) with a status of either `PENDING_ACTIVATION` or `ACTIVE`.
 
 > Some [factor types](#factor-type) require [activation](#activate-factor) to complete the enrollment process.
 
 #### Enroll Okta Security Question Factor
-{:.api .api-operation}
+
 
 Enrolls a user with the `question` factor and [question profile](#question-profile).
 
 > The Security Question factor does not require activation and is `ACTIVE` after enrollment.
 
 ##### Request Example
-{:.api .api-request .api-request-example}
+
 
 ```bash
 curl -v -X POST \
@@ -527,7 +527,7 @@ curl -v -X POST \
 ```
 
 ##### Response Example
-{:.api .api-response .api-response-example}
+
 
 ```json
 {
@@ -572,12 +572,12 @@ curl -v -X POST \
 ```
 
 #### Enroll Okta SMS Factor
-{:.api .api-operation}
+
 
 Enrolls a user with the Okta `sms` factor and an [SMS profile](#sms-profile).  A text message with an OTP is sent to the device during enrollment and must be [activated](#activate-sms-factor) by following the `activate` link relation to complete the enrollment process.
 
 ##### Request Example
-{:.api .api-request .api-request-example}
+
 
 ```bash
 curl -v -X POST \
@@ -594,7 +594,7 @@ curl -v -X POST \
 ```
 
 ##### Response Example
-{:.api .api-response .api-response-example}
+
 
 ```json
 {
@@ -686,12 +686,12 @@ A `400 Bad Request` status code may be returned if you attempt to enroll with a 
 ```
 
 ##### Enroll Okta SMS Factor by Updating Phone Number
-{:.api .api-operation}
+
 
 If the user wants to use a different phone number (instead of the existing phone number) then the enroll API call needs to supply `updatePhone` option with `true`.
 
 ###### Request Example
-{:.api .api-request .api-request-example}
+
 
 ```bash
 curl -v -X POST \
@@ -708,13 +708,13 @@ curl -v -X POST \
 ```
 
 ##### Enroll Okta SMS Factor by Using Existing Phone Number
-{:.api .api-operation}
+
 
 If the user wants to use the existing phone number then the enroll API doesn't need to pass the phone number.
 Or, you can pass the existing phone number in a profile object.
 
 ###### Request Example
-{:.api .api-request .api-request-example}
+
 
 ```bash
 curl -v -X POST \
@@ -728,7 +728,7 @@ curl -v -X POST \
 ```
 
 ##### Enroll Okta SMS Factor Using Custom Template
-{:.api .api-operation}
+
 
 Customize (and optionally localize) the SMS message sent to the user on enrollment.
 * If the request has an `Accept-Language` header and the template contains a translation for that language, the SMS message is sent using the translated template.
@@ -739,7 +739,7 @@ Customize (and optionally localize) the SMS message sent to the user on enrollme
 
 
 ###### Request Example
-{:.api .api-request .api-request-example}
+
 
 ```bash
 curl -v -X POST \
@@ -756,12 +756,12 @@ curl -v -X POST \
 ```
 
 ##### Resend SMS as Part of Enrollment
-{:.api .api-operation}
+
 
 Use the `resend` link to send another OTP if user doesn't receive the original activation SMS OTP.
 
 ###### Request Example
-{:.api .api-request .api-request-example}
+
 
 ```bash
 curl -v -X POST \
@@ -779,7 +779,7 @@ curl -v -X POST \
 
 
 ##### Resend SMS as Part of Enrollment Using a Custom Template
-{:.api .api-operation}
+
 
 Customize (and optionally localize) the SMS message sent to the user in case Okta needs to resend the message as part of enrollment.
 
@@ -787,7 +787,7 @@ Customize (and optionally localize) the SMS message sent to the user in case Okt
 
 
 ###### Request Example
-{:.api .api-request .api-request-example}
+
 
 ```bash
 curl -v -X POST \
@@ -805,12 +805,12 @@ curl -v -X POST \
 ```
 
 ##### Enroll and Auto-Activate Okta SMS Factor
-{:.api .api-operation}
+
 
 To enroll and immediately activate the Okta `sms` factor, add the `activate` option to the enroll API and set it `true`.  An activation text message will not be sent to the device.
 
 ###### Request Example
-{:.api .api-request .api-request-example}
+
 
 ```bash
 curl -v -X POST \
@@ -827,12 +827,12 @@ curl -v -X POST \
 ```
 
 #### Enroll Okta Call Factor
-{:.api .api-operation}
+
 
 Enrolls a user with the Okta `call` factor and a [Call profile](#call-profile).  A voice call with an OTP is made to the device during enrollment and must be [activated](#activate-call-factor).
 
 ##### Request Example
-{:.api .api-request .api-request-example}
+
 
 ```bash
 curl -v -X POST \
@@ -850,7 +850,7 @@ curl -v -X POST \
 ```
 
 ##### Response Example
-{:.api .api-response .api-response-example}
+
 
 ```json
 {
@@ -941,12 +941,12 @@ A `400 Bad Request` status code may be returned if you attempt to enroll with a 
 ```
 
 ##### Resend Voice Call as Part of Enrollment
-{:.api .api-operation}
+
 
 Use the `resend` link to send another OTP if user doesn't receive the original activation Voice Call OTP.
 
 ###### Request Example
-{:.api .api-request .api-request-example}
+
 
 ```bash
 curl -v -X POST \
@@ -963,12 +963,12 @@ curl -v -X POST \
 ```
 
 ##### Enroll and Auto-Activate Okta Call Factor
-{:.api .api-operation}
+
 
 To enroll and immediately activate the Okta `call` factor, add the `activate` option to the enroll API and set it `true`.  An activation call will not be made to the device.
 
 ##### Request Example
-{:.api .api-request .api-request-example}
+
 
 ```bash
 curl -v -X POST \
@@ -986,12 +986,12 @@ curl -v -X POST \
 ```
 
 #### Enroll Okta Verify TOTP Factor
-{:.api .api-operation}
+
 
 Enrolls a user with an Okta `token:software:totp` factor.  The factor must be [activated](#activate-totp-factor) after enrollment by following the `activate` link relation to complete the enrollment process.
 
 ##### Request Example
-{:.api .api-request .api-request-example}
+
 
 ```bash
 curl -v -X POST \
@@ -1005,7 +1005,7 @@ curl -v -X POST \
 ```
 
 ##### Response Example
-{:.api .api-response .api-response-example}
+
 
 ```json
 {
@@ -1062,14 +1062,14 @@ curl -v -X POST \
 ```
 
 #### Enroll Okta Verify Push Factor
-{:.api .api-operation}
+
 
 Enrolls a user with the Okta verify `push` factor. The factor must be [activated on the device](#activate-push-factor) by scanning the QR code or visiting the activation link sent via email or sms.
 
 > Use the published activation links to embed the QR code or distribute an activation `email` or `sms`.
 
 ##### Request Example
-{:.api .api-request .api-request-example}
+
 
 ```bash
 curl -v -X POST \
@@ -1083,7 +1083,7 @@ curl -v -X POST \
 ```
 
 ##### Response Example
-{:.api .api-response .api-response-example}
+
 
 ```json
 {
@@ -1155,12 +1155,12 @@ curl -v -X POST \
 ```
 
 #### Enroll Google Authenticator Factor
-{:.api .api-operation}
+
 
 Enrolls a user with the Google `token:software:totp` factor.  The factor must be [activated](#activate-totp-factor) after enrollment by following the `activate` link relation to complete the enrollment process.
 
 ##### Request Example
-{:.api .api-request .api-request-example}
+
 
 ```bash
 curl -v -X POST \
@@ -1174,7 +1174,7 @@ curl -v -X POST \
 ```
 
 ##### Response Example
-{:.api .api-response .api-response-example}
+
 
 ```json
 {
@@ -1231,12 +1231,12 @@ curl -v -X POST \
 ```
 
 #### Enroll RSA SecurID Factor
-{:.api .api-operation}
+
 
 Enrolls a user with a RSA SecurID factor and a [token profile](#token-profile).  RSA tokens must be verified with the [current pin+passcode](#factor-verification-object) as part of the enrollment request.
 
 ##### Request Example
-{:.api .api-request .api-request-example}
+
 
 ```bash
 curl -v -X POST \
@@ -1256,7 +1256,7 @@ curl -v -X POST \
 ```
 
 ##### Response Example
-{:.api .api-response .api-response-example}
+
 
 ```json
 {
@@ -1300,12 +1300,12 @@ curl -v -X POST \
 ```
 
 #### Enroll Symantec VIP Factor
-{:.api .api-operation}
+
 
 Enrolls a user with a Symantec VIP factor and a [token profile](#token-profile).  Symantec tokens must be verified with the [current and next passcodes](#factor-verification-object) as part of the enrollment request.
 
 ##### Request Example
-{:.api .api-request .api-request-example}
+
 
 ```bash
 curl -v -X POST \
@@ -1326,7 +1326,7 @@ curl -v -X POST \
 ```
 
 ##### Response Example
-{:.api .api-response .api-response-example}
+
 
 ```json
 {
@@ -1370,12 +1370,12 @@ curl -v -X POST \
 ```
 
 #### Enroll YubiKey Factor
-{:.api .api-operation}
+
 
 Enrolls a user with a YubiCo factor (YubiKey).  YubiKeys must be verified with the [current passcode](#factor-verification-object) as part of the enrollment request.
 
 ##### Request Example
-{:.api .api-request .api-request-example}
+
 
 ```bash
 curl -v -X POST \
@@ -1392,7 +1392,7 @@ curl -v -X POST \
 ```
 
 ##### Response Example
-{:.api .api-response .api-response-example}
+
 
 ```json
 {
@@ -1436,13 +1436,13 @@ curl -v -X POST \
 ```
 
 #### Enroll Okta Email Factor
-{:.api .api-operation}
+
 {% api_lifecycle ea %}
 
 Enrolls a user with an email factor. An email with an OTP is sent to the primary or secondary (depending on which one is enrolled) email address of the user during enrollment. The factor must be [activated](#activate-email-factor) by following the `activate` link relation to complete the enrollment process. An optional `tokenLifetimeSeconds` can be specified as a query parameter to indicate the lifetime of the OTP. The default lifetime is 300 seconds. `tokenLifetimeSeconds` should be in the range 1 to 86400 inclusive.
 
 ##### Request Example
-{:.api .api-request .api-request-example}
+
 
 ```bash
 curl -v -X POST \
@@ -1459,7 +1459,7 @@ curl -v -X POST \
 ```
 
 ##### Response Example
-{:.api .api-response .api-response-example}
+
 
 ```json
 {
@@ -1521,7 +1521,7 @@ curl -v -X POST \
 ```
 
 ##### Enroll and Auto-Activate Okta Email Factor
-{:.api .api-operation}
+
 
 To enroll and immediately activate the Okta `email` factor, add the `activate` option to the enroll API and set it `true`.  An activation email will not be sent to the user.
 
@@ -1540,13 +1540,13 @@ curl -v -X POST \
 ```
 
 #### Enroll U2F Factor
-{:.api .api-operation}
+
 
 Enrolls a user with a U2F factor. The enrollment process starts with getting a nonce from Okta and using that to get registration information from the U2F key using the U2F Javascript API.
 
 
 ##### Enroll U2F Request Example
-{:.api .api-request .api-request-example}
+
 
 ```bash
 curl -v -X POST \
@@ -1560,7 +1560,7 @@ curl -v -X POST \
 ```
 
 ##### Enroll U2F Response Example
-{:.api .api-response .api-response-example}
+
 
 ```json
 {
@@ -1609,9 +1609,9 @@ curl -v -X POST \
 
 
 ### Activate Factor
-{:.api .api-operation}
 
-{% api_operation post /api/v1/users/${userId}/factors/${factorId}/lifecycle/activate %}
+
+<ApiOperation method="post" url="/api/v1/users/${userId}/factors/${factorId}/lifecycle/activate" />
 
 The `sms` and `token:software:totp` [factor types](#factor-type) require activation to complete the enrollment process.
 
@@ -1624,12 +1624,12 @@ The `sms` and `token:software:totp` [factor types](#factor-type) require activat
 
 
 #### Activate TOTP Factor
-{:.api .api-operation}
+
 
 Activates a `token:software:totp` factor by verifying the OTP.
 
 #### Request Parameters
-{:.api .api-request .api-request-params}
+
 
 Parameter    | Description                                         | Param Type | DataType | Required | Default
 userId          | `id` of a user                                        | URL        | String   | TRUE     |
@@ -1637,7 +1637,7 @@ factorId          | `id` of a factor returned from enrollment             | URL 
 passCode     | OTP generated by device                             | Body       | String   | TRUE     |
 
 #### Response Parameters
-{:.api .api-response .api-response-params}
+
 
 If the passcode is correct you will receive the [Factor](#factor-model) with an `ACTIVE` status.
 
@@ -1658,7 +1658,7 @@ If the passcode is invalid you will receive a `403 Forbidden` status code with t
 ```
 
 #### Request Example
-{:.api .api-request .api-request-example}
+
 
 ```bash
 curl -v -X POST \
@@ -1671,7 +1671,7 @@ curl -v -X POST \
 ```
 
 #### Response Example
-{:.api .api-response .api-response-example}
+
 
 ```json
 {
@@ -1715,12 +1715,12 @@ curl -v -X POST \
 ```
 
 #### Activate SMS Factor
-{:.api .api-operation}
+
 
 Activates a `sms` factor by verifying the OTP.  The request/response is identical to [activating a TOTP factor](#activate-totp-factor).
 
 ##### Request Parameters
-{:.api .api-request .api-request-params}
+
 
 Parameter    | Description                                         | Param Type | DataType | Required |
 userId          | `id` of a user                                        | URL        | String   | TRUE     |
@@ -1728,7 +1728,7 @@ factorId          | `id` of a factor returned from enrollment             | URL 
 passCode     | OTP sent to mobile device                           | Body       | String   | TRUE     |
 
 ##### Response Parameters
-{:.api .api-response .api-response-params}
+
 
 If the passcode is correct you will receive the [Factor](#factor-model) with an `ACTIVE` status.
 
@@ -1749,7 +1749,7 @@ If the passcode is invalid you will receive a `403 Forbidden` status code with t
 ```
 
 ##### Request Example
-{:.api .api-request .api-request-example}
+
 
 ```bash
 curl -v -X POST \
@@ -1762,7 +1762,7 @@ curl -v -X POST \
 ```
 
 ##### Response Example
-{:.api .api-response .api-response-example}
+
 
 ```json
 {
@@ -1806,12 +1806,12 @@ curl -v -X POST \
 ```
 
 #### Activate Call Factor
-{:.api .api-operation}
+
 
 Activates a `call` factor by verifying the OTP.  The request/response is identical to [activating a TOTP factor](#activate-totp-factor).
 
 ##### Request Parameters
-{:.api .api-request .api-request-params}
+
 
 Parameter    | Description                                         | Param Type | DataType | Required | Default
 userId          | `id` of a user                                        | URL        | String   | TRUE     |
@@ -1819,7 +1819,7 @@ factorId          | `id` of a factor returned from enrollment             | URL 
 passCode     | OTP sent to mobile device                           | Body       | String   | TRUE     |
 
 ##### Response Parameters
-{:.api .api-response .api-response-params}
+
 
 If the passcode is correct you will receive the [Factor](#factor-model) with an `ACTIVE` status.
 
@@ -1840,7 +1840,7 @@ If the passcode is invalid you will receive a `403 Forbidden` status code with t
 ```
 
 ##### Request Example
-{:.api .api-request .api-request-example}
+
 
 ```bash
 curl -v -X POST \
@@ -1853,7 +1853,7 @@ curl -v -X POST \
 ```
 
 ##### Response Example
-{:.api .api-response .api-response-example}
+
 
 ```json
 {
@@ -1898,27 +1898,27 @@ curl -v -X POST \
 ```
 
 #### Activate Push Factor
-{:.api .api-operation}
+
 
 Activation of `push` factors are asynchronous and must be polled for completion when the `factorResult` returns a `WAITING` status.
 
 Activations have a short lifetime (minutes) and will `TIMEOUT` if they are not completed before the `expireAt` timestamp.  Use the published `activate` link to restart the activation process if the activation is expired.
 
 ##### Request Parameters
-{:.api .api-request .api-request-params}
+
 
 Parameter | Description    | Param Type | DataType | Required | Default
 userId       | `id` of a user   | URL        | String   | TRUE     |
 factorId       | `id` of a factor | URL        | String   | TRUE     |
 
 #### Response Parameters
-{:.api .api-response .api-response-params}
+
 
 Parameter        | Description                    | Param Type | DataType                                                        | Required | Default
 activationResult | asynchronous activation result | Body       | [Push Factor Activation Object](#push-factor-activation-object) | TRUE     |
 
 #### Request Example
-{:.api .api-request .api-request-example}
+
 
 ```bash
 curl -v -X POST \
@@ -1929,7 +1929,7 @@ curl -v -X POST \
 ```
 
 #### Response Example (Waiting)
-{:.api .api-response .api-response-example}
+
 
 ```json
 {
@@ -1973,7 +1973,7 @@ curl -v -X POST \
 ```
 
 #### Response Example (Timeout)
-{:.api .api-response .api-response-example}
+
 
 ```json
 {
@@ -1992,7 +1992,7 @@ curl -v -X POST \
 ```
 
 #### Response Example (Activated)
-{:.api .api-response .api-response-example}
+
 
 ```json
 {
@@ -2040,13 +2040,13 @@ curl -v -X POST \
 ```
 
 #### Activate Email Factor
-{:.api .api-operation}
+
 {% api_lifecycle ea %}
 
 Activates an `email` factor by verifying the OTP.
 
 ##### Request Parameters
-{:.api .api-request .api-request-params}
+
 
 Parameter    | Description                                         | Param Type | DataType | Required
 userId          | `id` of a user                                        | URL        | String   | TRUE
@@ -2054,7 +2054,7 @@ factorId          | `id` of a factor returned from enrollment             | URL 
 passCode     | OTP sent to email                           | Body       | String   | TRUE
 
 ##### Response Parameters
-{:.api .api-response .api-response-params}
+
 
 If the passcode is correct the response contains [Factor](#factor-model) with an `ACTIVE` status.
 
@@ -2075,7 +2075,7 @@ If the passcode is invalid response will be `403 Forbidden` with the following e
 ```
 
 #### Request Example
-{:.api .api-request .api-request-example}
+
 
 ```bash
 curl -v -X POST \
@@ -2088,7 +2088,7 @@ curl -v -X POST \
 ```
 
 #### Response Example (Activated)
-{:.api .api-response .api-response-example}
+
 
 ```json
 {
@@ -2135,7 +2135,7 @@ curl -v -X POST \
 Activation gets the registration information from the U2F token using the API and passes it to Okta.
 
 ##### Get registration information from U2F token by calling the U2F Javascript API
-{:.api .api-response .api-response-example}
+
 
 ```html
 <!-- Get the u2f-api.js from https://github.com/google/u2f-ref-code/tree/master/u2f-gae-demo/war/js -->
@@ -2169,7 +2169,7 @@ Activation gets the registration information from the U2F token using the API an
 Activate a U2F factor by verifying the registration data and client data.
 
 ##### Activate U2F Request Parameters
-{:.api .api-request .api-request-params}
+
 
 ```bash
 curl -v -X POST \
@@ -2183,7 +2183,7 @@ curl -v -X POST \
 ```
 
 ##### Activate U2F Response Parameters
-{:.api .api-response .api-response-params}
+
 
 ```json
 {
@@ -2229,26 +2229,26 @@ curl -v -X POST \
 ```
 
 ### Reset Factor
-{:.api .api-operation}
 
-{% api_operation delete /api/v1/users/${userId}/factors/${factorId} %}
+
+<ApiOperation method="delete" url="/api/v1/users/${userId}/factors/${factorId}" />
 
 Unenrolls an existing factor for the specified user, allowing the user to enroll a new factor.
 
 #### Request Parameters
-{:.api .api-request .api-request-params}
+
 
 Parameter    | Description                                         | Param Type | DataType | Required | Default
 userId          | `id` of a user                                        | URL        | String   | TRUE     |
 factorId          | `id` of the factor to reset                         | URL        | String   | TRUE     |
 
 #### Response Parameters
-{:.api .api-response .api-response-params}
+
 
 `204 No Content`
 
 #### Request Example
-{:.api .api-request .api-request-example}
+
 
 ```bash
 curl -v -X DELETE \
@@ -2259,21 +2259,21 @@ curl -v -X DELETE \
 ```
 
 #### Response Example
-{:.api .api-response .api-response-example}
+
 
 `204 No Content`
 
 ## Factor Verification Operations
 
 ### Verify Security Question Factor
-{:.api .api-operation}
 
-{% api_operation post /api/v1/users/${userId}/factors/${factorId}/verify %}
+
+<ApiOperation method="post" url="/api/v1/users/${userId}/factors/${factorId}/verify" />
 
 Verifies an answer to a `question` factor.
 
 #### Request Parameters
-{:.api .api-request .api-request-params}
+
 
 Parameter    | Description                                         | Param Type | DataType | Required | Default
 userId          | `id` of a user                                        | URL        | String   | TRUE     |
@@ -2281,7 +2281,7 @@ factorId          | `id` of a factor                                      | URL 
 answer       | answer to security question                         | Body       | String   | TRUE     |
 
 #### Response Parameters
-{:.api .api-response .api-response-params}
+
 
 Parameter    | Description                                         | Param Type | DataType                                            | Required | Default
 factorResult | verification result                                 | Body       | [Factor Verify Result](#factor-verify-result-object) | TRUE     |
@@ -2303,7 +2303,7 @@ If the `answer` is invalid you will receive a `403 Forbidden` status code with t
 ```
 
 #### Request Example
-{:.api .api-request .api-request-example}
+
 
 ```bash
 curl -v -X POST \
@@ -2316,7 +2316,7 @@ curl -v -X POST \
 ```
 
 #### Response Example
-{:.api .api-response .api-response-example}
+
 
 ```json
 {
@@ -2326,14 +2326,14 @@ curl -v -X POST \
 
 
 ### Verify SMS Factor
-{:.api .api-operation}
 
-{% api_operation post /api/v1/users/${userId}/factors/${factorId}/verify %}
+
+<ApiOperation method="post" url="/api/v1/users/${userId}/factors/${factorId}/verify" />
 
 Verifies an OTP for a `sms` factor.
 
 #### Request Parameters
-{:.api .api-request .api-request-params}
+
 
 Parameter    | Description                                         | Param Type | DataType | Required |
 userId          | `id` of a user                                        | URL        | String   | TRUE     |
@@ -2344,7 +2344,7 @@ passCode     | OTP sent to device                                  | Body       
 > If you omit `passCode` in the request a new OTP is sent to the device, otherwise the request attempts to verify the `passCode`.
 
 #### Response Parameters
-{:.api .api-response .api-response-params}
+
 
 Parameter    | Description                                         | Param Type | DataType                                            | Required | Default
 factorResult | verification result                                 | Body       | [Factor Verify Result](#factor-verify-result-object) | TRUE     |
@@ -2382,7 +2382,7 @@ If the passcode is invalid you will receive a `403 Forbidden` status code with t
 ```
 
 #### Request Example
-{:.api .api-request .api-request-example}
+
 
 ```bash
 curl -v -X POST \
@@ -2395,7 +2395,7 @@ curl -v -X POST \
 ```
 
 #### Response Example
-{:.api .api-response .api-response-example}
+
 
 ```json
 {
@@ -2404,7 +2404,7 @@ curl -v -X POST \
 ```
 
 #### Verify SMS Factor Using A Custom Template
-{:.api .api-operation}
+
 
 Customize (and optionally localize) the SMS message sent to the user on verification.
 * If the request has an `Accept-Language` header and the template contains translation for that language, the SMS message is sent in that language.
@@ -2414,7 +2414,7 @@ Customize (and optionally localize) the SMS message sent to the user on verifica
 To create custom templates, see [Templates](/docs/api/resources/templates#add-sms-template).
 
 ###### Request Example
-{:.api .api-request .api-request-example}
+
 
 Sends the verification message in German, assuming that the SMS template is configured with a German translation
 
@@ -2429,14 +2429,14 @@ curl -v -X POST \
 ```
 
 ### Verify Call Factor
-{:.api .api-operation}
 
-{% api_operation post /api/v1/users/${userId}/factors/${factorId}/verify %}
+
+<ApiOperation method="post" url="/api/v1/users/${userId}/factors/${factorId}/verify" />
 
 Verifies an OTP for a `call` factor
 
 #### Request Parameters
-{:.api .api-request .api-request-params}
+
 
 Parameter    | Description                                         | Param Type | DataType | Required | Default
 userId          | `id` of a user                                        | URL        | String   | TRUE     |
@@ -2446,7 +2446,7 @@ passCode     | OTP sent to device                                  | Body       
 > If you omit `passCode` in the request a new OTP is sent to the device, otherwise the request attempts to verify the `passCode`.
 
 #### Response Parameters
-{:.api .api-response .api-response-params}
+
 
 Parameter    | Description                                         | Param Type | DataType                                            | Required | Default
 factorResult | verification result                                 | Body       | [Factor Verify Result](#factor-verify-result-object) | TRUE     |
@@ -2482,7 +2482,7 @@ If the passcode is invalid you will receive a `403 Forbidden` status code with t
 ```
 
 #### Request Example
-{:.api .api-request .api-request-example}
+
 
 ```bash
 curl -v -X POST \
@@ -2495,7 +2495,7 @@ curl -v -X POST \
 ```
 
 #### Response Example
-{:.api .api-response .api-response-example}
+
 
 ```json
 {
@@ -2504,14 +2504,14 @@ curl -v -X POST \
 ```
 
 ### Verify TOTP Factor
-{:.api .api-operation}
 
-{% api_operation post /api/v1/users/${userId}/factors/${factorId}/verify %}
+
+<ApiOperation method="post" url="/api/v1/users/${userId}/factors/${factorId}/verify" />
 
 Verifies an OTP for a `token:software:totp` factor
 
 #### Request Parameters
-{:.api .api-request .api-request-params}
+
 
 Parameter    | Description                                         | Param Type | DataType | Required |
 userId          | `id` of a user                                        | URL        | String   | TRUE     |
@@ -2519,7 +2519,7 @@ factorId          | `id` of a factor                                      | URL 
 passCode     | OTP generated by device                             | Body       | String   | TRUE     |
 
 #### Response Parameters
-{:.api .api-response .api-response-params}
+
 
 Parameter    | Description                                         | Param Type | DataType                                            | Required |
 factorResult | verification result                                 | Body       | [Factor Verify Result](#factor-verify-result-object) | TRUE     |
@@ -2541,7 +2541,7 @@ If the passcode is invalid you will receive a `403 Forbidden` status code with t
 ```
 
 #### Request Example
-{:.api .api-request .api-request-example}
+
 
 ```bash
 curl -v -X POST \
@@ -2554,7 +2554,7 @@ curl -v -X POST \
 ```
 
 #### Response Example
-{:.api .api-response .api-response-example}
+
 
 ```json
 {
@@ -2563,16 +2563,16 @@ curl -v -X POST \
 ```
 
 ### Verify Push Factor
-{:.api .api-operation}
 
-{% api_operation post /api/v1/users/${userId}/factors/${factorId}/verify %}
+
+<ApiOperation method="post" url="/api/v1/users/${userId}/factors/${factorId}/verify" />
 
 Creates a new verification transaction and sends an asynchronous push notification to the device for the user to approve or reject.  You must [poll the transaction](#poll-for-verify-transaction-completion) to determine when it completes or expires.
 
 ##### Start new Verify Transaction
 
 #### Request Parameters
-{:.api .api-request .api-request-params}
+
 
 Parameter    | Description                                         | Param Type | DataType | Required | Default
 userId          | `id` of a user                                        | URL        | String   | TRUE     |
@@ -2583,13 +2583,13 @@ factorId          | `id` of a factor                                      | URL 
 > The **public IP address** of your application must be [whitelisted as a gateway IP address](../getting_started/design_principles#ip-address) to forward the user agent's original IP address with the `X-Forwarded-For` HTTP header.
 
 #### Response Parameters
-{:.api .api-response .api-response-params}
+
 
 Parameter    | Description                                                          | Param Type | DataType                                             | Required |
 factorResult | verification result (`WAITING`, `SUCCESS`, `REJECTED`, or `TIMEOUT`) | Body       | [Factor Verify Result](#factor-verify-result-object) | TRUE     |
 
 #### Request Example
-{:.api .api-request .api-request-example}
+
 
 ```bash
 curl -v -X POST \
@@ -2602,7 +2602,7 @@ curl -v -X POST \
 ```
 
 #### Response Example
-{:.api .api-response .api-response-example}
+
 
 ```json
 {
@@ -2630,16 +2630,16 @@ curl -v -X POST \
 ```
 
 #### Poll for Verify Transaction Completion
-{:.api .api-operation}
 
-{% api_operation get /api/v1/users/${userId}/factors/${factorId}/transactions/${transactionId} %}
+
+<ApiOperation method="get" url="/api/v1/users/${userId}/factors/${factorId}/transactions/${transactionId}" />
 
 Polls a push verification transaction for completion.  The transaction result is `WAITING`, `SUCCESS`, `REJECTED`, or `TIMEOUT`.
 
 > You should always use the `poll` link relation and never manually construct your own URL.
 
 ##### Request Parameters
-{:.api .api-request .api-request-params}
+
 
 Parameter    | Description         | Param Type | DataType | Required |
 userId          | `id` of a user        | URL        | String   | TRUE     |
@@ -2647,13 +2647,13 @@ factorId          | `id` of a factor      | URL        | String   | TRUE     |
 transactionId          | `id` of a transaction | URL        | String   | TRUE     |
 
 ##### Response Parameters
-{:.api .api-response .api-response-params}
+
 
 Parameter    | Description         | Param Type | DataType                                             | Required |
 factorResult | verification result | Body       | [Factor Verify Result](#factor-verify-result-object) | TRUE     |
 
 ##### Response Example (Waiting)
-{:.api .api-response .api-response-example}
+
 
 ```json
 {
@@ -2681,7 +2681,7 @@ factorResult | verification result | Body       | [Factor Verify Result](#factor
 ```
 
 #### Response Example (Approved)
-{:.api .api-response .api-response-example}
+
 
 ```json
 {
@@ -2690,7 +2690,7 @@ factorResult | verification result | Body       | [Factor Verify Result](#factor
 ```
 
 #### Response Example (Rejected)
-{:.api .api-response .api-response-example}
+
 
 ```json
 {
@@ -2718,7 +2718,7 @@ factorResult | verification result | Body       | [Factor Verify Result](#factor
 ```
 
 #### Response Example (Timeout)
-{:.api .api-response .api-response-example}
+
 
 ```json
 {
@@ -2746,14 +2746,14 @@ factorResult | verification result | Body       | [Factor Verify Result](#factor
 ```
 
 ### Verify Token Factor
-{:.api .api-operation}
 
-{% api_operation post /api/v1/users/${userId}/factors/${factorId}/verify %}
+
+<ApiOperation method="post" url="/api/v1/users/${userId}/factors/${factorId}/verify" />
 
 Verifies an OTP for a `token` or `token:hardware` factor
 
 #### Request Parameters
-{:.api .api-request .api-request-params}
+
 
 Parameter    | Description                                         | Param Type | DataType | Required |
 userId          | `id` of a user                                        | URL        | String   | TRUE     |
@@ -2761,7 +2761,7 @@ factorId          | `id` of a factor                                      | URL 
 passCode     | OTP generated by device                             | Body       | String   | TRUE     |
 
 #### Response Parameters
-{:.api .api-response .api-response-params}
+
 
 Parameter    | Description                                         | Param Type | DataType                                             | Required |
 factorResult | verification result                                 | Body       | [Factor Verify Result](#factor-verify-result-object) | TRUE     |
@@ -2783,7 +2783,7 @@ If the passcode is invalid you will receive a `403 Forbidden` status code with t
 ```
 
 #### Request Example
-{:.api .api-request .api-request-example}
+
 
 ```bash
 curl -v -X POST \
@@ -2796,7 +2796,7 @@ curl -v -X POST \
 ```
 
 #### Response Example
-{:.api .api-response .api-response-example}
+
 
 ```json
 {
@@ -2805,7 +2805,7 @@ curl -v -X POST \
 ```
 
 ### Verify Email Factor
-{:.api .api-operation}
+
 {% api_lifecycle ea %}
 
 <span class="api-uri-template api-uri-post"><span class="api-label">POST</span> /api/v1/users/${userId}/factors/${factorId}/verify</span>
@@ -2813,7 +2813,7 @@ curl -v -X POST \
 Verifies an OTP for an `email` factor
 
 #### Request Parameters
-{:.api .api-request .api-request-params}
+
 
 Parameter    | Description                                         | Param Type | DataType | Required | Default
 userId          | `id` of a user                                        | URL        | String   | TRUE     |
@@ -2824,7 +2824,7 @@ tokenLifetimeSeconds | Lifetime of the OTP when requesting one                  
 > If you omit `passCode` in the request a new OTP is sent to the email address, otherwise the request attempts to verify the `passCode`.
 
 #### Response Parameters
-{:.api .api-response .api-response-params}
+
 
 Parameter    | Description                                         | Param Type | DataType                                            | Required | Default
 factorResult | verification result                                 | Body       | [Factor Verify Result](#factor-verify-result-object) | TRUE     |
@@ -2860,7 +2860,7 @@ If the passcode is invalid response will be `403 Forbidden` with the following e
 ```
 
 #### Request Example
-{:.api .api-request .api-request-example}
+
 
 ```bash
 curl -v -X POST \
@@ -2873,7 +2873,7 @@ curl -v -X POST \
 ```
 
 #### Response Example
-{:.api .api-response .api-response-example}
+
 
 ```json
 {
@@ -2882,7 +2882,7 @@ curl -v -X POST \
 ```
 
 ### Verify U2F Factor
-{:.api .api-operation}
+
 
 <span class="api-uri-template api-uri-post"><span class="api-label">POST</span> /api/v1/users/${userId}/factors/${factorId}/verify</span>
 
@@ -2898,7 +2898,7 @@ Verification of the U2F factor starts with getting the challenge nonce and U2F t
 JavaScript API to get the signed assertion from the U2F token.
 
 ##### Request Example for Verify U2F Factor
-{:.api .api-request .api-request-example}
+
 
 ```bash
 curl -v -X POST \
@@ -2909,7 +2909,7 @@ curl -v -X POST \
 ```
 
 ##### Response Example for Verify U2F Factor
-{:.api .api-response .api-response-example}
+
 
 ```json
 {
@@ -2947,7 +2947,7 @@ curl -v -X POST \
 ```
 
 ##### Get the Signed Assertion from the U2F Token by calling the U2F Javascript API
-{:.api .api-response .api-response-example}
+
 
 ```html
 <!-- Get the u2f-api.js from https://github.com/google/u2f-ref-code/tree/master/u2f-gae-demo/war/js -->
@@ -2985,7 +2985,7 @@ curl -v -X POST \
 ##### Post the Signed Assertion to Okta to Complete Verification
 
 ##### Request Example for Signed Assertion
-{:.api .api-request .api-request-example}
+
 
 ```bash
 curl -v -X POST \
@@ -2999,7 +2999,7 @@ curl -v -X POST \
 ```
 
 ##### Response of U2F Verification Example
-{:.api .api-response .api-response-example}
+
 
 ```json
 {

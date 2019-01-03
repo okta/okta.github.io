@@ -29,16 +29,16 @@ Explore the Policy API: [![Run in Postman](https://run.pstmn.io/button.svg)](htt
 ## Policy API Operations
 
 ### Get a Policy
-{:.api .api-operation}
 
-{% api_operation get /api/v1/policies/${policyId} %}
+
+<ApiOperation method="get" url="/api/v1/policies/${policyId}" />
 
 #### Request Parameters
 
 The policy ID described in the [Policy Object](#PolicyObject) is required.
 
 ##### Request Example
-{:.api .api-request .api-request-example}
+
 
 ```bash
 curl -v -X GET \
@@ -49,15 +49,15 @@ curl -v -X GET \
 ```
 
 ##### Response Example
-{:.api .api-response .api-response-example}
+
 
 HTTP 200:
 <a href="#PolicyObject">Policy Object</a>
 
 ### Get a Policy with Rules
-{:.api .api-operation}
 
-{% api_operation get /api/v1/policies/${policyId}?expand=rules %}
+
+<ApiOperation method="get" url="/api/v1/policies/${policyId}?expand=rules" />
 
 #### Request Parameters
 
@@ -65,7 +65,7 @@ HTTP 200:
 * The `expand=rules` query parameter returns up to twenty rules for the specified policy. If the policy has more than 20 rules, this request returns an error.
 
 ##### Request Example
-{:.api .api-request .api-request-example}
+
 
 ```bash
 curl -v -X GET \
@@ -76,7 +76,7 @@ curl -v -X GET \
 ```
 
 ##### Response Types
-{:.api .api-response .api-response-example}
+
 
 HTTP 200:
 <a href="#PolicyObject">Policy Object</a>
@@ -84,16 +84,16 @@ HTTP 200:
 Included as embedded objects, one or more <a href="#rules">Policy Rules</a>.
 
 ### Get All Policies by Type
-{:.api .api-operation}
 
-{% api_operation get /api/v1/policies?type=${type} %}
+
+<ApiOperation method="get" url="/api/v1/policies?type=${type}" />
 
 #### Request Parameters
 
 The policy type described in the [Policy Object](#PolicyObject) is required.
 
 ##### Request Example
-{:.api .api-request .api-request-example}
+
 
 ```bash
 curl -v -X GET \
@@ -104,7 +104,7 @@ curl -v -X GET \
 ```
 
 ##### Response Types
-{:.api .api-response .api-response-example}
+
 
 HTTP 200:
 <a href="#PolicyObject">Policy Object</a>
@@ -112,16 +112,16 @@ HTTP 204:
 <a href="#PolicyObject">Policy Object</a>
 
 ### Delete Policy
-{:.api .api-operation}
 
-{% api_operation delete /api/v1/policies/${policyId} %}
+
+<ApiOperation method="delete" url="/api/v1/policies/${policyId}" />
 
 #### Request Parameters
 
 The policy ID described in the [Policy Object](#PolicyObject) is required.
 
 ##### Request Example
-{:.api .api-request .api-request-example}
+
 
 ```bash
 curl -v -X DELETE \
@@ -132,22 +132,22 @@ curl -v -X DELETE \
 ```
 
 ##### Response Types
-{:.api .api-response .api-response-example}
+
 
 HTTP 204:
 *No Content*
 
 ### Update a Policy
-{:.api .api-operation}
 
-{% api_operation put /api/v1/policies/${policyId} %}
+
+<ApiOperation method="put" url="/api/v1/policies/${policyId}" />
 
 #### Request Parameters
 
 The policy ID described in the [Policy Object](#PolicyObject) is required.
 
 ##### Request Example
-{:.api .api-request .api-request-example}
+
 
 ```bash
 curl -v -X PUT \
@@ -174,18 +174,18 @@ curl -v -X PUT \
 ```
 
 ##### Response Types
-{:.api .api-response .api-response-example}
+
 
 HTTP 200:
 <a href="#PolicyObject">Policy Object</a>
 
 ### Create a Policy
-{:.api .api-operation}
 
-{% api_operation post /api/v1/policies %}
+
+<ApiOperation method="post" url="/api/v1/policies" />
 
 ##### Request Example
-{:.api .api-request .api-request-example}
+
 
 ```bash
 curl -v -X POST \
@@ -210,22 +210,22 @@ curl -v -X POST \
 ```
 
 ##### Response Types
-{:.api .api-response .api-response-example}
+
 
 HTTP 204:
 <a href="#PolicyObject">Policy Object</a>
 
 ### Activate a Policy
-{:.api .api-operation}
 
-{% api_operation post /api/v1/policies/${policyId}/lifecycle/activate %}
+
+<ApiOperation method="post" url="/api/v1/policies/${policyId}/lifecycle/activate" />
 
 #### Request Parameters
 
 The policy id described in the [Policy Object](#PolicyObject) is required.
 
 ##### Request Example
-{:.api .api-request .api-request-example}
+
 
 ```bash
 curl -v -X POST \
@@ -236,22 +236,22 @@ curl -v -X POST \
 ```
 
 ##### Response Types
-{:.api .api-response .api-response-example}
+
 
 HTTP 204:
 *No Content is returned when the activation is successful.*
 
 ### Deactivate a Policy
-{:.api .api-operation}
 
-{% api_operation post /api/v1/policies/${policyId}/lifecycle/deactivate %}
+
+<ApiOperation method="post" url="/api/v1/policies/${policyId}/lifecycle/deactivate" />
 
 #### Request Parameters
 
 The policy ID described in the [Policy Object](#PolicyObject) is required.
 
 ##### Request Example
-{:.api .api-request .api-request-example}
+
 
 ```bash
 curl -v -X POST \
@@ -262,7 +262,7 @@ curl -v -X POST \
 ```
 
 ##### Response Types
-{:.api .api-response .api-response-example}
+
 
 HTTP 200:
 *No Content is returned when the deactivation is successful.*
@@ -270,16 +270,16 @@ HTTP 200:
 ## Rules Operations
 
 ### Get Policy Rules
-{:.api .api-operation}
 
-{% api_operation get /api/v1/policies/${policyId}/rules %}
+
+<ApiOperation method="get" url="/api/v1/policies/${policyId}/rules" />
 
 #### Request Parameters
 
 The policy ID described in the [Policy Object](#PolicyObject) is required.
 
 ##### Request Example
-{:.api .api-request .api-request-example}
+
 
 ```bash
 curl -v -X GET \
@@ -290,22 +290,22 @@ curl -v -X GET \
 ```
 
 ##### Response Types
-{:.api .api-response .api-response-example}
+
 
 HTTP 200:
 <a href="#RulesObject">Rules Object</a>
 
 ### Create a rule
-{:.api .api-operation}
 
-{% api_operation post /api/v1/policies/${policyId}/rules %}
+
+<ApiOperation method="post" url="/api/v1/policies/${policyId}/rules" />
 
 #### Request Parameters
 
 The policy ID described in the [Policy Object](#PolicyObject) is required.
 
 ##### Request Example
-{:.api .api-request .api-request-example}
+
 
 ```bash
 curl -v -X POST \
@@ -340,22 +340,22 @@ curl -v -X POST \
 ```
 
 ##### Response Types
-{:.api .api-response .api-response-example}
+
 
 HTTP 200:
 <a href="#RulesObject">Rules Object</a>
 
 ### Delete a rule
-{:.api .api-operation}
 
-{% api_operation delete /api/v1/policies/${policyId}/rules/${ruleId} %}
+
+<ApiOperation method="delete" url="/api/v1/policies/${policyId}/rules/${ruleId}" />
 
 #### Request Parameters
 
 The policy ID described in the [Policy Object](#PolicyObject) is required.
 
 ##### Request Example
-{:.api .api-request .api-request-example}
+
 
 ```bash
 curl -v -X DELETE \
@@ -366,22 +366,22 @@ curl -v -X DELETE \
 ```
 
 ##### Response Types
-{:.api .api-response .api-response-example}
+
 
 HTTP 204:
 *No Content*
 
 ### Get a rule
-{:.api .api-operation}
 
-{% api_operation get /api/v1/policies/${policyId}/rules/${ruleId} %}
+
+<ApiOperation method="get" url="/api/v1/policies/${policyId}/rules/${ruleId}" />
 
 #### Request Parameters
 
 The policy ID described in the [Policy Object](#PolicyObject) is required.
 
 ##### Request Example
-{:.api .api-request .api-request-example}
+
 
 ```bash
 curl -v -X GET \
@@ -392,22 +392,22 @@ curl -v -X GET \
 ```
 
 ##### Response Types
-{:.api .api-response .api-response-example}
+
 
 HTTP 200:
 <a href="#RulesObject">Rules Object</a>
 
 ### Update a rule
-{:.api .api-operation}
 
-{% api_operation put /api/v1/policies/${policyId}/rules/${ruleId} %}
+
+<ApiOperation method="put" url="/api/v1/policies/${policyId}/rules/${ruleId}" />
 
 #### Request Parameters
 
 The policy ID described in the [Policy Object](#PolicyObject) is required.
 
 ##### Request Example
-{:.api .api-request .api-request-example}
+
 
 ```bash
 curl -v -X PUT \
@@ -442,22 +442,22 @@ curl -v -X PUT \
 ```
 
 ##### Response Types
-{:.api .api-response .api-response-example}
+
 
 HTTP 200:
 <a href="#RulesObject">Rules Object</a>
 
 ### Activate A Rule
-{:.api .api-operation}
 
-{% api_operation post /api/v1/policies/${policyId}/rules/${ruleId}/lifecycle/activate %}
+
+<ApiOperation method="post" url="/api/v1/policies/${policyId}/rules/${ruleId}/lifecycle/activate" />
 
 #### Request Parameters
 
 The policy ID described in the [Policy Object](#PolicyObject) is required.
 
 ##### Request Example
-{:.api .api-request .api-request-example}
+
 
 ```bash
 curl -v -X POST \
@@ -468,22 +468,22 @@ curl -v -X POST \
 ```
 
 ##### Response Types
-{:.api .api-response .api-response-example}
+
 
 HTTP 204:
 *No content*
 
 ### Deactivate A Rule
-{:.api .api-operation}
 
-{% api_operation post /api/v1/policies/${policyId}/rules/${ruleId}/lifecycle/deactivate %}
+
+<ApiOperation method="post" url="/api/v1/policies/${policyId}/rules/${ruleId}/lifecycle/deactivate" />
 
 #### Request Parameters
 
 The policy ID described in the [Policy Object](#PolicyObject) is required.
 
 ##### Request Example
-{:.api .api-request .api-request-example}
+
 
 ```bash
 curl -v -X POST \
@@ -494,7 +494,7 @@ curl -v -X POST \
 ```
 
 ##### Response Types
-{:.api .api-response .api-response-example}
+
 
 HTTP 204:
 *No content*

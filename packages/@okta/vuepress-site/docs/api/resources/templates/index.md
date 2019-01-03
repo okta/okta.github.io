@@ -19,25 +19,25 @@ Explore the Custom Templates API: [![Run in Postman](https://run.pstmn.io/button
 ## Template Operations
 
 ### Add SMS Template
-{:.api .api-operation}
 
-{% api_operation post /api/v1/templates/sms %}
+
+<ApiOperation method="post" url="/api/v1/templates/sms" />
 
 Adds a new custom SMS template to your organization.
 
 ##### Request Parameters
-{:.api .api-request .api-request-params}
+
 
 Parameter | Description                               | ParamType | DataType                          | Required |
           | Definition of the new custom SMS template | Body      | [SMS Template](#sms-template-model)   | TRUE     |
 
 ##### Response Parameters
-{:.api .api-response .api-response-params}
+
 
 The created [SMS Template](#sms-template-model).
 
 ##### Request Example
-{:.api .api-request .api-request-example}
+
 
 ```bash
 curl -v -X POST \
@@ -57,7 +57,7 @@ curl -v -X POST \
 ```
 
 ##### Response Example
-{:.api .api-response .api-response-example}
+
 
 ```json
 {
@@ -77,25 +77,25 @@ curl -v -X POST \
 
 
 ### Get SMS Template
-{:.api .api-operation}
 
-{% api_operation get /api/v1/templates/sms/${smsTemplateId} %}
+
+<ApiOperation method="get" url="/api/v1/templates/sms/${smsTemplateId}" />
 
 Fetches a specific template by `id`
 
 ##### Request Parameters
-{:.api .api-request .api-request-params}
+
 
 Parameter |    Description     | ParamType | DataType | Required |
 smsTemplateId        | `id` of a template | URL       | String   | TRUE     |
 
 ##### Response Parameters
-{:.api .api-response .api-response-params}
+
 
 Fetched [SMS Template](#sms-template-model)
 
 ##### Request Example
-{:.api .api-request .api-request-example}
+
 
 ```bash
 curl -v -X GET \
@@ -106,7 +106,7 @@ curl -v -X GET \
 ```
 
 ##### Response Example
-{:.api .api-response .api-response-example}
+
 
 ```json
 {
@@ -125,14 +125,14 @@ curl -v -X GET \
 ```
 
 ### List SMS Templates
-{:.api .api-operation}
 
-{% api_operation get /api/v1/templates/sms %}
+
+<ApiOperation method="get" url="/api/v1/templates/sms" />
 
 Enumerates custom SMS templates in your organization. Optionally, a subset of templates can be returned that match a template type.
 
 ##### Request Parameters
-{:.api .api-request .api-request-params}
+
 
  Parameter     | Description                                                                                | ParamType | DataType | Required | Default |
  templateType  | The type of template that you are searching for. Valid value: `SMS_VERIFY_CODE`            | Query     | String   | FALSE    | N/A |
@@ -140,12 +140,12 @@ Enumerates custom SMS templates in your organization. Optionally, a subset of te
 > Search currently performs an exact match of the type but this is an implementation detail and may change without notice in the future.
 
 ##### Response Parameters
-{:.api .api-response .api-response-params}
+
 
 Array of [SMS Templates](#sms-template-model) of matching type.
 
 ##### Request Example
-{:.api .api-request .api-request-example}
+
 
 ```bash
 curl -v -X GET \
@@ -156,7 +156,7 @@ curl -v -X GET \
 ```
 
 ##### Response Example
-{:.api .api-response .api-response-example}
+
 
 ```json
 [
@@ -177,16 +177,16 @@ curl -v -X GET \
 ```
 
 ### Update SMS Template
-{:.api .api-operation}
 
-{% api_operation put /api/v1/templates/sms/${smsTemplateId} %}
+
+<ApiOperation method="put" url="/api/v1/templates/sms/${smsTemplateId}" />
 
 Updates the SMS template.
 
 > NOTE: The default SMS template can't be updated.
 
 ##### Request Parameters
-{:.api .api-request .api-request-params}
+
 
 Parameter | Description                                 | ParamType | DataType                            | Required |
 smsTemplateId        | `id` of the SMS template to update            | URL       | String                              | TRUE     |
@@ -195,12 +195,12 @@ smsTemplateId        | `id` of the SMS template to update            | URL      
 > All profile properties must be specified when updating an SMS custom template. Partial updates are described [here](#partial-sms-template-update).
 
 ##### Response Parameters
-{:.api .api-response .api-response-params}
+
 
 Updated [SMS Template](#sms-template-model)
 
 ##### Request Example
-{:.api .api-request .api-request-example}
+
 
 ```bash
 curl -v -X PUT \
@@ -220,7 +220,7 @@ curl -v -X PUT \
 ```
 
 ##### Response Example
-{:.api .api-response .api-response-example}
+
 
 ```json
 {
@@ -234,9 +234,9 @@ curl -v -X PUT \
 ```
 
 ### Partial SMS Template Update
-{:.api .api-operation}
 
-{% api_operation post /api/v1/templates/sms/${smsTemplateId} %}
+
+<ApiOperation method="post" url="/api/v1/templates/sms/${smsTemplateId}" />
 
 Updates only some of the SMS template properties:
 
@@ -248,7 +248,7 @@ Updates only some of the SMS template properties:
 > The default SMS template can't be updated.
 
 ##### Request Parameters
-{:.api .api-request .api-request-params}
+
 
 Parameter | Description                                 | ParamType | DataType                            | Required |
 smsTemplateId        | `id` of the SMS template to update            | URL       | String                              | TRUE     |
@@ -257,12 +257,12 @@ smsTemplateId        | `id` of the SMS template to update            | URL      
 > Full SMS template update is described [here](#update-sms-template).
 
 ##### Response Parameters
-{:.api .api-response .api-response-params}
+
 
 Updated [SMS Template](#sms-template-model)
 
 ##### Request Example
-{:.api .api-request .api-request-example}
+
 
 ```bash
 curl -v -X POST \
@@ -277,7 +277,7 @@ curl -v -X POST \
 ```
 
 ##### Response Example
-{:.api .api-response .api-response-example}
+
 
 ```json
 {
@@ -297,27 +297,27 @@ curl -v -X POST \
 ```
 
 ### Remove SMS Template
-{:.api .api-operation}
 
-{% api_operation delete /api/v1/templates/sms/${smsTemplateId} %}
+
+<ApiOperation method="delete" url="/api/v1/templates/sms/${smsTemplateId}" />
 
 Removes an SMS template.
 
 > The default SMS template can't be removed.
 
 ##### Request Parameters
-{:.api .api-request .api-request-params}
+
 
 Parameter | Description                        | ParamType | DataType | Required |
 smsTemplateId        | `id` of the SMS template to delete | URL       | String   | TRUE     |
 
 ##### Response Parameters
-{:.api .api-response .api-response-params}
+
 
 There is no content in the response.
 
 ##### Request Example
-{:.api .api-request .api-request-example}
+
 
 ```bash
 curl -v -X DELETE \
@@ -329,7 +329,7 @@ curl -v -X DELETE \
 
 
 ##### Response Example
-{:.api .api-response .api-response-example}
+
 
 ```http
 HTTP/1.1 204 No Content

@@ -69,26 +69,26 @@ deactivate         | Denies use of this factor for MFA
 ## Factors Administration Operations
 
 ### Get Org Factor
-{:.api .api-operation}
 
-{% api_operation get /api/v1/org/factors %}
+
+<ApiOperation method="get" url="/api/v1/org/factors" />
 
 Lists factors in your organization
 
 #### Request Parameters
-{:.api .api-request .api-request-params}
+
 
 No required parameters.
 
 Optionally, you can add a filter, based on the status. If desired, add the text `filter=status eq 'status_value'` where status_value is one of the following:  `NOT_SETUP`, `PENDING_ACTIVATION`,  `ACTIVE`,  or `INACTIVE`.
 
 #### Response Parameters
-{:.api .api-response .api-response-params}
+
 
 [Factor](#factor-model)
 
 #### Request Example
-{:.api .api-request .api-request-example}
+
 
 ```bash
 curl -v -H "Authorization: SSWS yourtoken" \
@@ -98,7 +98,7 @@ curl -v -H "Authorization: SSWS yourtoken" \
 ```
 
 #### Response Example
-{:.api .api-response .api-response-example}
+
 
 ```json
 {
@@ -248,19 +248,19 @@ curl -v -H "Authorization: SSWS yourtoken" \
 ```
 
 ### Activate SMS
-{:.api .api-operation}
 
-{% api_operation post /api/v1/org/factors/okta_sms/lifecycle/activate %}
+
+<ApiOperation method="post" url="/api/v1/org/factors/okta_sms/lifecycle/activate" />
 
 Allows multi-factor authentication to use an SMS factor.
 
 #### Request Parameters
-{:.api .api-request .api-request-params}
+
 
 None.
 
 #### Request Example
-{:.api .api-request .api-request-example}
+
 
 ```bash
 curl -v -H "Authorization: SSWS yourtoken" \
@@ -270,7 +270,7 @@ curl -v -H "Authorization: SSWS yourtoken" \
 ```
 
 #### Response Example
-{:.api .api-response .api-response-example}
+
 
 ```json
 {
@@ -300,19 +300,19 @@ curl -v -H "Authorization: SSWS yourtoken" \
 ```
 
 ### Deactivate SMS
-{:.api .api-operation}
 
-{% api_operation post /api/v1/org/factors/okta_sms/lifecycle/deactivate %}
+
+<ApiOperation method="post" url="/api/v1/org/factors/okta_sms/lifecycle/deactivate" />
 
 Denies use of an SMS factor for multi-factor authentication.
 
 #### Request Parameters
-{:.api .api-request .api-request-params}
+
 
 None.
 
 #### Request Example
-{:.api .api-request .api-request-example}
+
 
 ```bash
 curl -v -H "Authorization: SSWS yourtoken" \
@@ -322,7 +322,7 @@ curl -v -H "Authorization: SSWS yourtoken" \
 ```
 
 #### Response Example
-{:.api .api-response .api-response-example}
+
 
 ```json
 {
@@ -352,19 +352,19 @@ curl -v -H "Authorization: SSWS yourtoken" \
 ```
 
 ### Activate Okta Verify
-{:.api .api-operation}
 
-{% api_operation post /api/v1/org/factors/okta_otp/lifecycle/activate %}
+
+<ApiOperation method="post" url="/api/v1/org/factors/okta_otp/lifecycle/activate" />
 
 Allows multi-factor authentication to use Okta Verify as a factor.
 
 #### Request Parameters
-{:.api .api-request .api-request-params}
+
 
 None.
 
 #### Request Example
-{:.api .api-request .api-request-example}
+
 
 ```bash
 curl -v -H "Authorization: SSWS yourtoken" \
@@ -374,7 +374,7 @@ curl -v -H "Authorization: SSWS yourtoken" \
 ```
 
 #### Response Example
-{:.api .api-response .api-response-example}
+
 
 ```json
 {
@@ -404,19 +404,19 @@ curl -v -H "Authorization: SSWS yourtoken" \
 ```
 
 ### Deactivate Okta Verify
-{:.api .api-operation}
 
-{% api_operation post /api/v1/org/factors/okta_otp/lifecycle/deactivate %}
+
+<ApiOperation method="post" url="/api/v1/org/factors/okta_otp/lifecycle/deactivate" />
 
 Denies use of Okta Verify for multi-factor authentication.
 
 #### Request Parameters
-{:.api .api-request .api-request-params}
+
 
 None.
 
 #### Request Example
-{:.api .api-request .api-request-example}
+
 
 ```bash
 curl -v -H "Authorization: SSWS yourtoken" \
@@ -426,7 +426,7 @@ curl -v -H "Authorization: SSWS yourtoken" \
 ```
 
 #### Response Example
-{:.api .api-response .api-response-example}
+
 
 ```json
 {

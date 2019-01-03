@@ -31,9 +31,9 @@ Explore the Sessions API: [![Run in Postman](https://run.pstmn.io/button.svg)](h
 ## Session Operations
 
 ### Create Session with Session Token
-{:.api .api-operation}
 
-{% api_operation post /api/v1/sessions %}
+
+<ApiOperation method="post" url="/api/v1/sessions" />
 
 Creates a new session for a user with a valid session token. Use this API if, for example, you want to set the session cookie yourself instead of allowing Okta to set it, or want to hold the session ID in order to delete a session via the API instead of visiting the logout URL.
 
@@ -46,14 +46,14 @@ Creates a new session for a user with a valid session token. Use this API if, fo
 > This operation can be performed anonymously without an API Token.
 
 ##### Request Parameters
-{:.api .request-parameters}
+
 
 Parameter        | Description                                                   | Param Type | DataType                        | Required | Default
 additionalFields | Optional [session properties](#optional-session-properties)   | Query      | String (comma separated values) | FALSE    |
 sessionToken     | Session token obtained via [Authentication API](authn) | Body       | String                          | TRUE     |
 
 ##### Response Parameters
-{:.api .api-response .api-response-params}
+
 
 The response will contain the new [Session](#session-model) for the user if the `sessionToken` was valid.
 
@@ -61,7 +61,7 @@ If an invalid `sessionToken` is provided, a `401 Unauthorized` status code will 
 
 
 ##### Request Example
-{:.api .api-request .api-request-example}
+
 
 ```bash
 curl -v -X POST \
@@ -73,7 +73,7 @@ curl -v -X POST \
 ```
 
 ##### Response Example
-{:.api .api-response .api-response-example}
+
 
 ``` json
 {
@@ -124,16 +124,16 @@ curl -v -X POST \
 ```
 
 #### Get Session
-{:.api .api-operation}
 
-{% api_operation get /api/v1/sessions/${sessionId} %}
+
+<ApiOperation method="get" url="/api/v1/sessions/${sessionId}" />
 
 Get session information for a given session id.
 
 > Note this is an administrator operation and requires an API token.
 
 ##### Request Example
-{:.api .api-request .api-request-example}
+
 
 ```bash
 curl -v -X GET \
@@ -144,7 +144,7 @@ curl -v -X GET \
 ```
 
 ##### Response Example
-{:.api .api-response .api-response-example}
+
 
 If the session is valid, a [Session Object](#session-model) is returned.
 
@@ -200,9 +200,9 @@ If the session is invalid, a `404 Not Found` response will be returned.
 
 
 ### Extend Session
-{:.api .api-operation}
 
-{% api_operation put /api/v1/sessions/${sessionId} %} {% api_lifecycle deprecated %}
+
+<ApiOperation method="put" url="/api/v1/sessions/${sessionId} %} {% api_lifecycle deprecated" />
 
 Extends the lifetime of a user's session.
 
@@ -211,20 +211,20 @@ Extends the lifetime of a user's session.
 > Note this is an administrator operation and requires an API token.
 
 ##### Request Parameters
-{:.api .api-request .api-request-params}
+
 
 Parameter | Description                            | Param Type | DataType | Required | Default
 id        | `id` of a valid session                | URL        | String   | TRUE     |
 
 ##### Response Parameters
-{:.api .api-response .api-response-params}
+
 
 The response will contain the extended [Session](#session-model) with an updated `expiresAt` timestamp for the user if the `id` was valid.
 
 If the session is invalid, a `404 Not Found` response will be returned.
 
 ##### Request Example
-{:.api .api-request .api-request-example}
+
 
 ```bash
 curl -v -X PUT \
@@ -235,7 +235,7 @@ curl -v -X PUT \
 ```
 
 ##### Response Example
-{:.api .api-response .api-response-example}
+
 
 ``` json
 {
@@ -286,29 +286,29 @@ curl -v -X PUT \
 ```
 
 ### Refresh Session
-{:.api .api-request}
+
 
 Refresh an existing session using the `id` for that session. (This is equivalent to the deprecated [Extend Session](#extend-session) operation).
 
 > Note this is an administrator operation and requires an API token.
 
-{% api_operation post /api/v1/sessions/${sessionId}/lifecycle/refresh %}
+<ApiOperation method="post" url="/api/v1/sessions/${sessionId}/lifecycle/refresh" />
 
 ##### Request Parameters
-{:.api .api-request .api-request-params}
+
 
 Parameter | Description             | Param Type | DataType | Required | Default
 id        | `id` of a valid session | URL        | String   | TRUE     |
 
 ##### Response Parameters
-{:.api .api-response .api-response-params}
+
 
 The response will contain the refreshed [Session](#session-model) with an updated `expiresAt` timestamp for the user if the `id` was valid.
 
 If the session is invalid, a `404 Not Found` response will be returned.
 
 ##### Request Example
-{:.api .api-request .api-request-example}
+
 
 ```bash
 curl -v -X POST \
@@ -319,7 +319,7 @@ curl -v -X POST \
 ```
 
 ##### Response Example
-{:.api .api-response .api-response-example}
+
 
 ``` json
 {
@@ -370,29 +370,29 @@ curl -v -X POST \
 ```
 
 ### Close Session
-{:.api .api-operation}
 
-{% api_operation delete /api/v1/sessions/${sessionId} %}
+
+<ApiOperation method="delete" url="/api/v1/sessions/${sessionId}" />
 
 Closes a user's session (logout).
 
 > Note this is an administrator operation and requires an API token.
 
 ##### Request Parameters
-{:.api .api-request .api-request-params}
+
 
 Parameter | Description             | Param Type | DataType | Required | Default
 id        | `id` of a valid session | URL        | String   | TRUE     |
 
 ##### Response Parameters
-{:.api .api-response .api-response-params}
+
 
 If the session was successfully closed, a `204 No Content` response will be returned.
 
 If the session is invalid, a `404 Not Found` response will be returned.
 
 ##### Request Example
-{:.api .api-request .api-request-example}
+
 
 ```bash
 curl -v -X DELETE \
@@ -403,23 +403,23 @@ curl -v -X DELETE \
 ```
 
 ##### Response Example
-{:.api .api-response .api-response-example}
+
 
 ``` http
 HTTP/1.1 204 No Content
 ```
 
 ### Get Current Session
-{:.api .api-operation}
 
-{% api_operation get /api/v1/sessions/me %} {% api_cors %}
+
+<ApiOperation method="get" url="/api/v1/sessions/me %} {% api_cors" />
 
 Get session information for the current user. Use this method in a browser based application to determine if the user is logged in.
 
 > This operation requires a session cookie for the user. API token is not allowed for this operation.
 
 ##### Request Example
-{:.api .api-request .api-request-example}
+
 
 ```bash
 curl -v -X GET \
@@ -429,7 +429,7 @@ curl -v -X GET \
 ```
 
 ##### Response Example
-{:.api .api-response .api-response-example}
+
 
 If the session is valid, a [Session Object](#session-model) is returned.
 
@@ -485,16 +485,16 @@ If the session is invalid, a `404 Not Found` response will be returned.
 ```
 
 ### Refresh Current Session
-{:.api .api-request}
+
 
 Refresh the session for the current user.
 
 > This operation requires a session cookie for the user. API token is not allowed for this operation.
 
-{% api_operation post /api/v1/sessions/me/lifecycle/refresh %} {% api_cors %}
+<ApiOperation method="post" url="/api/v1/sessions/me/lifecycle/refresh %} {% api_cors" />
 
 ##### Request Example
-{:.api .api-request .api-request-example}
+
 
 ```bash
 curl -v -X POST \
@@ -505,7 +505,7 @@ curl -v -X POST \
 ```
 
 ##### Response Example
-{:.api .api-response .api-response-example}
+
 
 If the session is valid, a [Session Object](#session-model) is returned.
 
@@ -564,7 +564,7 @@ If the session is invalid, a `404 Not Found` response will be returned.
 Okta now supports [the HTTP Header `Prefer`](https://tools.ietf.org/html/rfc7240#section-4.2) in [the Sessions API for refreshing sessions](/docs/api/resources/sessions#refresh-current-session). You can extend the session lifetime, but skip any processing work related to building the response body.
 
 ##### Request Example
-{:.api .api-request .api-request-example}
+
 
 ```bash
 curl -v -X POST \
@@ -577,7 +577,7 @@ curl -v -X POST \
 Note: `me` can also be an ID.
 
 ##### Response Example
-{:.api .api-response .api-response-example}
+
 
 ```http
 HTTP/1.1 204 No Content
@@ -585,16 +585,16 @@ Preference-Applied: return=minimal
 ```
 
 ### Close Current Session
-{:.api .api-request}
+
 
 Close the session for the currently logged in user. Use this method in a browser-based application to log a user out.
 
 > This operation requires a session cookie for the user. API token is not allowed for this operation.
 
-{% api_operation delete /api/v1/sessions/me %} {% api_cors %}
+<ApiOperation method="delete" url="/api/v1/sessions/me %} {% api_cors" />
 
 ##### Request Example
-{:.api .api-request .api-request-example}
+
 
 ```bash
 curl -v -X DELETE \
@@ -604,7 +604,7 @@ curl -v -X DELETE \
 ```
 
 ##### Response Example
-{:.api .api-response .api-response-example}
+
 
 If the session was successfully closed, a `204 No Content` response will be returned.
 

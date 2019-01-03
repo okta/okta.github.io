@@ -6,6 +6,7 @@ const removeFrontmatterExtra = require("./removeFrontmatterItems")
 const bookImages = require("./bookImages")
 const updateInlineCss = require("./updateInlineCss")
 const resolveRelativeLinks = require("./resolveRelativeLinks")
+const updateResourceMarkdownStrings = require("./updateResourceMarkdownStrings")
 
 function applyRules(file) {
 
@@ -16,6 +17,8 @@ function applyRules(file) {
   file = removeFrontmatterExtra(file)
   file = bookImages(file)
   file = resolveRelativeLinks(file)
+  file = updateResourceMarkdownStrings
+  (file)
 
 
   return file

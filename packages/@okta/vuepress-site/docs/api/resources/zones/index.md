@@ -14,14 +14,14 @@ IP zones are the only type currently supported by the Zones API. IP zones are us
 ## Zone API Operations
 
 ### Create an IP Zone
-{:.api .api-operation}
 
-{% api_operation post /api/v1/zones %}
+
+<ApiOperation method="post" url="/api/v1/zones" />
 
 Creates a new IP Zone
 
 #### Valid Request Example
-{:.api .api-request .api-request-example}
+
 ```bash
 curl -X POST \
 -H "Accept: application/json" \
@@ -59,7 +59,7 @@ curl -X POST \
 ```
 
 #### Successful Response Example
-{:.api .api-response .api-response-example}
+
 ```json
 {
   "type": "IP",
@@ -113,7 +113,7 @@ curl -X POST \
 ```
 
 #### Invalid Request Example
-{:.api .api-request .api-request-example}
+
 ```bash
 curl -X POST \
 -H "Accept: application/json" \
@@ -143,7 +143,7 @@ curl -X POST \
 ```
 
 #### Unsuccessful Response Example
-{:.api .api-response .api-response-example}
+
 ```json
 {
     "errorCode": "E0000001",
@@ -159,17 +159,17 @@ curl -X POST \
 ```
 
 ### Get an IP Zone
-{% api_operation get /api/v1/zones/${zoneId} %}
+<ApiOperation method="get" url="/api/v1/zones/${zoneId}" />
 
 Gets an IP zone by id
 
 #### Request Parameters
-{:.api .api-request .api-request-params}
+
 
 The zone ID described in the [Zone Object](#ZoneModel) is required.
 
 #### Request Example
-{:.api .api-request .api-request-example}
+
 ```bash
 curl -X GET \
 -H "Accept: application/json" \
@@ -219,14 +219,14 @@ curl -X GET \
 ```
 
 ### List Zones
-{% api_operation get /api/v1/zones %}
+<ApiOperation method="get" url="/api/v1/zones" />
 
 Lists all zones
 
 A subset of zones can be returned that match a supported filter expression or query criteria.
 
 ##### Request Parameters
-{:.api .api-request .api-request-params}
+
 
 - [List All Zones](#list-all-zones) (no parameters)
 - [List Zones with a Filter](#list-zones-with-a-filter) (`filter`)
@@ -237,17 +237,17 @@ A subset of zones can be returned that match a supported filter expression or qu
 | limit      | Specifies the number of results returned                                                                                           | Query      | Integer  |    No    |
 
 ##### Response Parameters
-{:.api .api-response .api-response-params}
+
 
 Array of [Zones](#ZoneModel)
 
 #### List All Zones
-{:.api .api-operation}
+
 
 Returns a list of all zones
 
 ##### Request Example
-{:.api .api-request .api-request-example}
+
 ```bash
 curl -X GET \
 -H "Accept: application/json" \
@@ -257,7 +257,7 @@ curl -X GET \
 ```
 
 ##### Response Example
-{:.api .api-response .api-response-example}
+
 ```json
 [
     {
@@ -372,7 +372,7 @@ curl -X GET \
 ```
 
 #### List Zones with a Filter
-{:.api .api-operation}
+
 
 Lists all zones that match the filter criteria
 
@@ -381,7 +381,7 @@ This operation requires [URL encoding](/docs/api/getting_started/design_principl
 See [Filtering](/docs/api/getting_started/design_principles#filtering) for more information about the expressions used in filtering.
 
 ##### Request Example
-{:.api .api-request .api-request-example}
+
 ```bash
 curl -X GET \
 -H "Accept: application/json" \
@@ -391,7 +391,7 @@ curl -X GET \
 ```
 
 ##### Response Example
-{:.api .api-response .api-response-example}
+
 ```json
 [
   {
@@ -528,19 +528,19 @@ curl -X GET \
 ```
 
 ### Update an IP Zone
-{:.api .api-operation}
 
-{% api_operation put /api/v1/zones/${zoneId} %}
+
+<ApiOperation method="put" url="/api/v1/zones/${zoneId}" />
 
 Updates an existing IP Zone
 
 #### Request Parameters
-{:.api .api-request .api-request-params}
+
 
 The zone ID described in the [Zone Object](#ZoneModel) is required.
 
 #### Request Example
-{:.api .api-request .api-request-example}
+
 ```bash
 curl -X PUT \
 -H "Accept: application/json" \
@@ -614,7 +614,7 @@ curl -X PUT \
 ```
 
 #### Response Example
-{:.api .api-response .api-response-example}
+
 ```json
 {
   "type": "IP",

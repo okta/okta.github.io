@@ -14,14 +14,14 @@ If the origins are not specified, the related operation (redirect or Okta API ac
 ## Trusted Origins API Operations
 
 ### Create Trusted Origin
-{:.api .api-operation}
 
-{% api_operation post /api/v1/trustedOrigins %}
+
+<ApiOperation method="post" url="/api/v1/trustedOrigins" />
 
 Creates a new trusted origin
 
 #### Valid Request Example
-{:.api .api-request .api-request-example}
+
 ```bash
 curl -X POST \
 -H "Accept: application/json" \
@@ -42,7 +42,7 @@ curl -X POST \
 ```
 
 #### Successful Response Example
-{:.api .api-response .api-response-example}
+
 ```json
 {
     "id": "tos10hu7rkbtrFt1M0g4",
@@ -85,7 +85,7 @@ curl -X POST \
 ```
 
 #### Invalid Request Example
-{:.api .api-request .api-request-example}
+
 ```bash
 curl -X POST \
 -H "Accept: application/json" \
@@ -106,7 +106,7 @@ curl -X POST \
 ```
 
 #### Unsuccessful Response Example
-{:.api .api-response .api-response-example}
+
 ```json
 {
     "errorCode": "E0000001",
@@ -122,23 +122,23 @@ curl -X POST \
 ```
 
 ### Get Trusted Origin
-{% api_operation get /api/v1/trustedOrigins/${trustedOriginId} %}
+<ApiOperation method="get" url="/api/v1/trustedOrigins/${trustedOriginId}" />
 
 Gets a trusted origin by ID
 
 #### Request Parameters
-{:.api .api-request .api-request-params}
+
 
 Parameter         | Description              | Param Type | DataType | Required |
 `trustedOriginId` | `id` of a trusted origin | String     | String   | Yes      |
 
 #### Response Parameters
-{:.api .api-response .api-response-params}
+
 
 [Trusted Origin Object](#trusted-origin-model)
 
 #### Request Example
-{:.api .api-request .api-request-example}
+
 ```bash
 curl -X GET \
 -H "Accept: application/json" \
@@ -190,14 +190,14 @@ curl -X GET \
 ```
 
 ### List Trusted Origins
-{% api_operation get /api/v1/trustedOrigins %}
+<ApiOperation method="get" url="/api/v1/trustedOrigins" />
 
 Lists all trusted origins
 
 A subset of trusted origins can be returned that match a supported filter expression or query criteria.
 
 ##### Request Parameters
-{:.api .api-request .api-request-params}
+
 
 - [List All Trusted Origins](#list-all-trusted-origins) (no parameters)
 - [List Trusted Origins with a Filter](#list-trusted-origins-with-a-filter) (`filter`)
@@ -208,17 +208,17 @@ A subset of trusted origins can be returned that match a supported filter expres
 | limit      | Specifies the number of results returned                                                                                                        | Query      | Integer  |    No    |
 
 ##### Response Parameters
-{:.api .api-response .api-response-params}
+
 
 Array of [Trusted Origins](#trusted-origin-model)
 
 #### List All Trusted Origins
-{:.api .api-operation}
+
 
 Returns a list of all trusted origins
 
 ##### Request Example
-{:.api .api-request .api-request-example}
+
 ```bash
 curl -X GET \
 -H "Accept: application/json" \
@@ -228,7 +228,7 @@ curl -X GET \
 ```
 
 ##### Response Example
-{:.api .api-response .api-response-example}
+
 ```json
 [
     {
@@ -346,7 +346,7 @@ curl -X GET \
 ```
 
 #### List Trusted Origins with a Filter
-{:.api .api-operation}
+
 
 Lists all trusted origins that match the filter criteria
 
@@ -355,7 +355,7 @@ This operation requires [URL encoding](/docs/api/getting_started/design_principl
 See [Filtering](/docs/api/getting_started/design_principles#filtering) for more information about the expressions used in filtering.
 
 ##### Request Example
-{:.api .api-request .api-request-example}
+
 ```bash
 curl -X GET \
 -H "Accept: application/json" \
@@ -365,7 +365,7 @@ curl -X GET \
 ```
 
 ##### Response Example
-{:.api .api-response .api-response-example}
+
 ```json
 [
     {
@@ -445,25 +445,25 @@ curl -X GET \
 ```
 
 ### Update Trusted Origin
-{:.api .api-operation}
 
-{% api_operation put /api/v1/trustedOrigins/${trustedOriginId} %}
+
+<ApiOperation method="put" url="/api/v1/trustedOrigins/${trustedOriginId}" />
 
 Updates an existing trusted origin
 
 #### Request Parameters
-{:.api .api-request .api-request-params}
+
 
 Parameter         | Description              | Param Type | DataType | Required |
 `trustedOriginId` | `id` of a trusted origin | String     | String   | Yes      |
 
 #### Response Parameters
-{:.api .api-response .api-response-params}
+
 
 [Trusted Origin Object](#trusted-origin-model)
 
 #### Request Example
-{:.api .api-request .api-request-example}
+
 ```bash
 curl -X PUT \
 -H "Accept: application/json" \
@@ -510,7 +510,7 @@ curl -X PUT \
 ```
 
 #### Response Example
-{:.api .api-response .api-response-example}
+
 ```json
 {
     "id": "tosue7JvguwJ7U6kz0g3",
@@ -553,25 +553,25 @@ curl -X PUT \
 ```
 
 ### Activate Trusted Origin
-{:.api .api-operation}
 
-{% api_operation post /api/v1/trustedOrigins/${trustedOriginId}/lifecycle/activate %}
+
+<ApiOperation method="post" url="/api/v1/trustedOrigins/${trustedOriginId}/lifecycle/activate" />
 
 Activates an existing trusted origin
 
 #### Request Parameters
-{:.api .api-request .api-request-params}
+
 
 Parameter         | Description              | Param Type | DataType | Required |
 `trustedOriginId` | `id` of a trusted origin | String     | String   | Yes      |
 
 #### Response Parameters
-{:.api .api-response .api-response-params}
+
 
 [Trusted Origin Object](#trusted-origin-model)
 
 #### Request Example
-{:.api .api-request .api-request-example}
+
 ```bash
 curl -X POST \
 -H "Accept: application/json" \
@@ -581,7 +581,7 @@ curl -X POST \
 ```
 
 #### Response Example
-{:.api .api-response .api-response-example}
+
 ```json
 {
     "id": "tos10hzarOl8zfPM80g4",
@@ -621,25 +621,25 @@ curl -X POST \
 ```
 
 ### Deactivate Trusted Origin
-{:.api .api-operation}
 
-{% api_operation post /api/v1/trustedOrigins/${trustedOriginId}/lifecycle/deactivate %}
+
+<ApiOperation method="post" url="/api/v1/trustedOrigins/${trustedOriginId}/lifecycle/deactivate" />
 
 Deactivates an existing trusted origin
 
 #### Request Parameters
-{:.api .api-request .api-request-params}
+
 
 Parameter         | Description              | Param Type | DataType | Required |
 `trustedOriginId` | `id` of a trusted origin | String     | String   | Yes      |
 
 #### Response Parameters
-{:.api .api-response .api-response-params}
+
 
 [Trusted Origin Object](#trusted-origin-model)
 
 #### Request Example
-{:.api .api-request .api-request-example}
+
 ```bash
 curl -X POST \
 -H "Accept: application/json" \
@@ -649,7 +649,7 @@ curl -X POST \
 ```
 
 #### Response Example
-{:.api .api-response .api-response-example}
+
 ```json
 {
     "id": "tos10hzarOl8zfPM80g4",
@@ -689,25 +689,25 @@ curl -X POST \
 ```
 
 ### Delete Trusted Origin
-{:.api .api-operation}
 
-{% api_operation delete /api/v1/trustedOrigins/${trustedOriginId} %}
+
+<ApiOperation method="delete" url="/api/v1/trustedOrigins/${trustedOriginId}" />
 
 Deletes an existing trusted origin
 
 #### Request Parameters
-{:.api .api-request .api-request-params}
+
 
 Parameter         | Description              | Param Type | DataType | Required |
 `trustedOriginId` | `id` of a trusted origin | String     | String   | Yes      |
 
 #### Response Parameters
-{:.api .api-response .api-response-params}
+
 
 [Trusted Origin Object](#trusted-origin-model)
 
 #### Request Example
-{:.api .api-request .api-request-example}
+
 ```bash
 curl -X DELETE \
 -H "Accept: application/json" \
@@ -717,7 +717,7 @@ curl -X DELETE \
 ```
 
 #### Response Example
-{:.api .api-response .api-response-example}
+
 
 Returns an empty object.
 

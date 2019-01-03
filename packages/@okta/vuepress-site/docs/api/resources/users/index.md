@@ -19,9 +19,9 @@ Explore the Users API: [![Run in Postman](https://run.pstmn.io/button.svg)](http
 ## User Operations
 
 ### Create User
-{:.api .api-operation}
 
-{% api_operation post /api/v1/users %}
+
+<ApiOperation method="post" url="/api/v1/users" />
 
 Creates a new user in your Okta organization with or without credentials
 
@@ -34,7 +34,7 @@ Creates a new user in your Okta organization with or without credentials
 - [Create User in Group](#create-user-in-group)
 
 ##### Request Parameters
-{:.api .api-request .api-request-params}
+
 
 | Parameter   | Description                                                                                                                                                         | Param Type | DataType                                   | Required | Default |
 |:------------|:--------------------------------------------------------------------------------------------------------------------------------------------------------------------|:-----------|:-------------------------------------------|:---------|:--------|
@@ -46,7 +46,7 @@ Creates a new user in your Okta organization with or without credentials
 | nextLogin   | With `activate=true`, if `nextLogin=changePassword`, a user is created, activated, and the password is set to `EXPIRED`, so user must change it the next time they log in. | Query      | String                                     | FALSE    | FALSE   |
 
 ##### Response Parameters
-{:.api .api-response .api-response-params}
+
 
 All responses return the created [User](#user-model).  Activation of a user is an asynchronous operation.  The system performs group reconciliation during activation and assigns the user to all applications via direct or indirect relationships (group memberships).
 
@@ -71,7 +71,7 @@ The user is emailed a one-time activation token if activated without a password.
 Creating users with a `FEDERATION` or `SOCIAL` provider sets the user status to either `ACTIVE` or `STAGED` based on the `activate` query parameter since these two providers don't support a `password` or `recovery_question` credential.
 
 #### Create User without Credentials
-{:.api .api-operation}
+
 
 Creates a user without a [password](#password-object) or [recovery question & answer](#recovery-question-object)
 
@@ -79,7 +79,7 @@ When the user is activated, an email is sent to the user with an activation toke
 This is the default flow for new user registration using the administrator UI.
 
 ##### Request Example
-{:.api .api-request .api-request-example}
+
 
 ```bash
 curl -v -X POST \
@@ -98,7 +98,7 @@ curl -v -X POST \
 ```
 
 ##### Response Example
-{:.api .api-response .api-response-example}
+
 
 ```json
 {
@@ -132,7 +132,7 @@ curl -v -X POST \
 ```
 
 #### Create User with Recovery Question
-{:.api .api-operation}
+
 
 Creates a user without a [password](#password-object)
 
@@ -140,7 +140,7 @@ When the user is activated, an email is sent to the user with an activation toke
 This flow is useful if migrating users from an existing user store.
 
 ##### Request Example
-{:.api .api-request .api-request-example}
+
 
 ```bash
 curl -v -X POST \
@@ -165,7 +165,7 @@ curl -v -X POST \
 ```
 
 ##### Response Example
-{:.api .api-response .api-response-example}
+
 
 ```json
 {
@@ -202,7 +202,7 @@ curl -v -X POST \
 ```
 
 #### Create User with Password
-{:.api .api-operation}
+
 
 Creates a user without a [recovery question & answer](#recovery-question-object)
 
@@ -212,7 +212,7 @@ This flow is common when developing a custom user registration experience.
 > Important: Do not generate or send a one-time activation token when activating users with an assigned password.  Users should login with their assigned password.
 
 ##### Request Example
-{:.api .api-request .api-request-example}
+
 
 ```bash
 curl -v -X POST \
@@ -234,7 +234,7 @@ curl -v -X POST \
 ```
 
 ##### Response Example
-{:.api .api-response .api-response-example}
+
 
 ```json
 {
@@ -269,7 +269,7 @@ curl -v -X POST \
 ```
 
 #### Create User with Imported Hashed Password
-{:.api .api-operation}
+
 
 > Creating or updating users with an imported hashed password is an {% api_lifecycle ea %} feature.
 
@@ -281,7 +281,7 @@ This flow is common when migrating users from another data store in cases where 
 > Important: Do not generate or send a one-time activation token when activating users with an imported password.  Users should login with their imported password.
 
 ##### Request Example
-{:.api .api-request .api-request-example}
+
 
 ```bash
 curl -v -X POST \
@@ -310,7 +310,7 @@ curl -v -X POST \
 ```
 
 ##### Response Example
-{:.api .api-response .api-response-example}
+
 
 ```json
 {
@@ -345,7 +345,7 @@ curl -v -X POST \
 ```
 
 #### Create User with Password & Recovery Question
-{:.api .api-operation}
+
 
 Creates a new user with a [password](#password-object) and [recovery question & answer](#recovery-question-object)
 
@@ -355,7 +355,7 @@ This flow is common when developing a custom user-registration experience.
 > Important: Don't generate or send a one-time activation token when activating users with an assigned password.  Users should login with their assigned password.
 
 ##### Request Example
-{:.api .api-request .api-request-example}
+
 
 ```bash
 curl -v -X POST \
@@ -381,7 +381,7 @@ curl -v -X POST \
 ```
 
 ##### Response Example
-{:.api .api-response .api-response-example}
+
 
 ```json
 {
@@ -419,12 +419,12 @@ curl -v -X POST \
 ```
 
 #### Create User with Authentication Provider
-{:.api .api-operation}
+
 
 Creates a new passwordless user with a `SOCIAL` or `FEDERATION` [authentication provider](#provider-object) that must be authenticated via a trusted Identity Provider
 
 ##### Request Example
-{:.api .api-request .api-request-example}
+
 
 ```bash
 curl -v -X POST \
@@ -449,7 +449,7 @@ curl -v -X POST \
 ```
 
 ##### Response Example
-{:.api .api-response .api-response-example}
+
 
 ```json
 {
@@ -493,14 +493,14 @@ curl -v -X POST \
 ```
 
 #### Create User in Group
-{:.api .api-operation}
+
 
 Creates a user that is immediately added to the specified groups upon creation
 
 Use this in conjunction with other create operations for a Group Administrator that is scoped to create users only in specified groups.  The request may specify up to 20 group ids.  (This limit applies only when creating a user.  The user may later be added to more groups.)
 
 ##### Request Example
-{:.api .api-request .api-request-example}
+
 
 ```bash
 curl -v -X POST \
@@ -523,7 +523,7 @@ curl -v -X POST \
 ```
 
 ##### Response Example
-{:.api .api-response .api-response-example}
+
 
 ```json
 {
@@ -557,9 +557,9 @@ curl -v -X POST \
 ```
 
 ### Get User
-{:.api .api-operation}
 
-{% api_operation get /api/v1/users/${userId} %} {% api_cors %}
+
+<ApiOperation method="get" url="/api/v1/users/${userId} %} {% api_cors" />
 
 Fetches a user from your Okta organization
 
@@ -569,7 +569,7 @@ Fetches a user from your Okta organization
 - [Get User with Login Shortname](#get-user-with-login-shortname)
 
 ##### Request Parameters
-{:.api .api-request .api-request-params}
+
 
 Fetch a user by `id`, `login`, or `login shortname` if the short name is unambiguous.
 
@@ -581,7 +581,7 @@ id        | `id`, `login`, or *login shortname* (as long as it is unambiguous) |
 >Hint: you can substitute `me` for the `id` to fetch the current user linked to an API token or session cookie.
 
 ##### Response Parameters
-{:.api .api-response .api-response-params}
+
 
 Fetched [User](#user-model)
 
@@ -601,12 +601,12 @@ Content-Type: application/json
 ```
 
 #### Get Current User
-{:.api .api-operation}
+
 
 Fetches the current user linked to API token or session cookie
 
 ##### Request Example
-{:.api .api-request .api-request-example}
+
 
 ```bash
 curl -v -X GET \
@@ -617,7 +617,7 @@ curl -v -X GET \
 ```
 
 ##### Response Example
-{:.api .api-response .api-response-example}
+
 
 ```json
 {
@@ -673,14 +673,14 @@ curl -v -X GET \
 ```
 
 #### Get User with ID
-{:.api .api-operation}
+
 
 Fetches a specific user when you know the user's `id`
 
 > Hint: If you don't know the user `id`, [list the users](#list-users) to find the correct ID.
 
 ##### Request Example
-{:.api .api-request .api-request-example}
+
 
 ```bash
 curl -v -X GET \
@@ -691,7 +691,7 @@ curl -v -X GET \
 ```
 
 ##### Response Example
-{:.api .api-response .api-response-example}
+
 
 ```json
 {
@@ -747,7 +747,7 @@ curl -v -X GET \
 ```
 
 #### Get User with Login
-{:.api .api-operation}
+
 
 Fetches a specific user when you know the user's `login`
 
@@ -755,7 +755,7 @@ When fetching a user by `login`, [URL encode](http://en.wikipedia.org/wiki/Perce
 Logins with a `/` character can only be fetched by `id` due to URL issues with escaping the `/` character.
 
 ##### Request Example
-{:.api .api-request .api-request-example}
+
 
 ```bash
 curl -v -X GET \
@@ -766,7 +766,7 @@ curl -v -X GET \
 ```
 
 ##### Response Example
-{:.api .api-response .api-response-example}
+
 
 ```json
 {
@@ -822,7 +822,7 @@ curl -v -X GET \
 ```
 
 #### Get User with Login Shortname
-{:.api .api-operation}
+
 
 Fetches a specific user when you know the user's `login shortname` and the shortname is unique within the organization
 
@@ -830,7 +830,7 @@ When fetching a user by `login shortname`, [URL encode](http://en.wikipedia.org/
 Logins with a `/` character can only be fetched by `id` due to URL issues with escaping the `/` character.
 
 ##### Request Example
-{:.api .api-request .api-request-example}
+
 
 ```bash
 curl -v -X GET \
@@ -841,7 +841,7 @@ curl -v -X GET \
 ```
 
 ##### Response Example
-{:.api .api-response .api-response-example}
+
 
 ```json
 {
@@ -897,16 +897,16 @@ curl -v -X GET \
 ```
 
 ### List Users
-{:.api .api-operation}
 
-{% api_operation get /api/v1/users %}
+
+<ApiOperation method="get" url="/api/v1/users" />
 
 Lists users in your organization with pagination in most cases
 
 A subset of users can be returned that match a supported filter expression or search criteria.
 
 ##### Request Parameters
-{:.api .api-request .api-request-params}
+
 
 The first three parameters correspond to different types of lists:
 
@@ -928,12 +928,12 @@ The first three parameters correspond to different types of lists:
   * Treat the `after` cursor as an opaque value and obtain it through the next link relation. See [Pagination](/docs/api/getting_started/design_principles#pagination).
 
 ##### Response Parameters
-{:.api .api-response .api-response-params}
+
 
 Array of [User](#user-model)
 
 #### List All Users
-{:.api .api-operation}
+
 
 Returns a list of all users that do not have a status of `DEPROVISIONED`, up to the maximum (200 for most orgs)
 
@@ -941,7 +941,7 @@ Different results are returned depending on specified queries in the request.
 
 
 ##### Request Example
-{:.api .api-request .api-request-example}
+
 
 ```bash
 curl -v -X GET \
@@ -952,7 +952,7 @@ curl -v -X GET \
 ```
 
 ##### Response Example
-{:.api .api-response .api-response-example}
+
 
 ```http
 HTTP/1.1 200 OK
@@ -1026,7 +1026,7 @@ Link: <https://{yourOktaDomain}/api/v1/users?after=00ud4tVDDXYVKPXKVLCO&limit=20
 ```
 
 #### Find Users
-{:.api .api-operation}
+
 
 Finds users who match the specified query
 
@@ -1041,7 +1041,7 @@ This operation:
  * Performs a startsWith match but this is an implementation detail and may change without notice. You don't need to specify `firstName`, `lastName`, or `email`.
 
 ##### Request Example
-{:.api .api-request .api-request-example}
+
 
 ```bash
 curl -v -X GET \
@@ -1052,7 +1052,7 @@ curl -v -X GET \
 ```
 
 ##### Response Example
-{:.api .api-response .api-response-example}
+
 
 ```json
 [
@@ -1095,7 +1095,7 @@ curl -v -X GET \
 > Note: This omits users that have a status of `DEPROVISIONED`. To return all users, use a [filter query](#list-users-with-a-filter) instead.
 
 #### List Users with a Filter
-{:.api .api-operation}
+
 
 Lists all users that match the filter criteria
 
@@ -1149,7 +1149,7 @@ List users updated after 06/01/2013 but with a status of `LOCKED_OUT` or `RECOVE
 
 
 ##### Request Example: Status
-{:.api .api-request .api-request-example}
+
 
 ```bash
 curl -v -X GET \
@@ -1161,7 +1161,7 @@ curl -v -X GET \
 
 
 ##### Response Example
-{:.api .api-response .api-response-example}
+
 
 ```json
 [
@@ -1202,7 +1202,7 @@ curl -v -X GET \
 ```
 
 ##### Request Example: Timestamp
-{:.api .api-request .api-request-example}
+
 
 Lists all users that have been updated since a specific timestamp
 
@@ -1217,7 +1217,7 @@ curl -v -X GET \
 ```
 
 ##### Response Example
-{:.api .api-response .api-response-example}
+
 
 ```json
 [
@@ -1258,7 +1258,7 @@ curl -v -X GET \
 ```
 
 #### List Users with Search
-{:.api .api-operation}
+
 
 > Listing users with search is an {% api_lifecycle ea %} feature and should not be used as a part of any critical flows, like authentication.
 
@@ -1299,7 +1299,7 @@ List users in the department of `Engineering` who were created before `01/01/201
     search=profile.department eq "Engineering" and (created lt "2014-01-01T00:00:00.000Z" or status eq "ACTIVE")
 
 ##### Request Example
-{:.api .api-request .api-request-example}
+
 
 ```bash
 curl -v -X GET \
@@ -1310,7 +1310,7 @@ curl -v -X GET \
 ```
 
 ##### Response Example
-{:.api .api-response .api-response-example}
+
 
 ```json
 [
@@ -1358,7 +1358,7 @@ For examples, see [Request Example for Array](#request-example-for-array) and [R
 * Search for one value at a time when searching arrays. For example, you can't search for users where a string is equal to an attribute in two different arrays.
 
 ##### Request Example for Array
-{:.api .api-request .api-request-example}
+
 
 The following example is for a custom attribute on User, an array of strings named `arrayAttr` that contains values `["arrayAttrVal1", "arrayAttrVal2"...]`.
 
@@ -1371,7 +1371,7 @@ curl -v -X GET \
 ```
 
 ##### Response Example for Array
-{:.api .api-response .api-response-example}
+
 
 ```json
 [
@@ -1428,11 +1428,11 @@ curl -v -X GET \
 ```
 
 ### Update User
-{:.api .api-operation}
+
 
 > Note: Use the `POST` method to make a partial update and the `PUT` method to delete unspecified properties.
 
-{% api_operation put /api/v1/users/${userId} %}
+<ApiOperation method="put" url="/api/v1/users/${userId}" />
 
 Updates a user's profile and/or credentials using strict-update semantics
 
@@ -1442,7 +1442,7 @@ in the request is deleted.
 >Important: Don't use `PUT` method for partial updates.
 
 ##### Request Parameters
-{:.api .api-request .api-request-params}
+
 
 | Parameter   | Description                                                        | Param Type | DataType                                  | Required |
 |:------------|:-------------------------------------------------------------------|:-----------|:------------------------------------------|:---------|
@@ -1454,21 +1454,21 @@ in the request is deleted.
 `profile` and `credentials` can be updated independently or together with a single request.
 
 ##### Response Parameters
-{:.api .api-response .api-response-params}
+
 
 Updated [User](#user-model)
 
 #### Update Profile
-{:.api .api-operation}
 
-{% api_operation post /api/v1/users/${userId} %}
+
+<ApiOperation method="post" url="/api/v1/users/${userId}" />
 
 Updates a user's profile or credentials with partial update semantics
 
 > Important: Use the `POST` method for partial updates. Unspecified properties are set to null with `PUT`.
 
 ##### Request Parameters
-{:.api .api-request .api-request-params}
+
 
 | Parameter   | Description                                                        | Param Type | DataType                                  | Required |
 |:------------|:-------------------------------------------------------------------|:-----------|:------------------------------------------|:---------|
@@ -1480,12 +1480,12 @@ Updates a user's profile or credentials with partial update semantics
 `profile` and `credentials` can be updated independently or with a single request.
 
 ##### Response Parameters
-{:.api .api-response .api-response-params}
+
 
 Updated [User](#user-model)
 
 ##### Request Example
-{:.api .api-request .api-request-example}
+
 
 ```bash
 curl -v -X POST \
@@ -1504,7 +1504,7 @@ curl -v -X POST \
 ```
 
 ##### Response Example
-{:.api .api-response .api-response-example}
+
 
 ```json
 {
@@ -1560,14 +1560,14 @@ curl -v -X POST \
 ```
 
 #### Set Password
-{:.api .api-operation}
+
 
 Sets passwords without validating existing user credentials
 
 This is an administrative operation.  For operations that validate credentials refer to [Reset Password](#reset-password), [Forgot Password](#forgot-password), and [Change Password](#change-password).
 
 ##### Request Example
-{:.api .api-request .api-request-example}
+
 
 ```bash
 curl -v -X POST \
@@ -1582,7 +1582,7 @@ curl -v -X POST \
 ```
 
 ##### Response Example
-{:.api .api-response .api-response-example}
+
 
 ```json
 {
@@ -1638,14 +1638,14 @@ curl -v -X POST \
 ```
 
 #### Set Recovery Question & Answer
-{:.api .api-operation}
+
 
 Sets recovery question and answer without validating existing user credentials
 
 This is an administrative operation. For an operation that requires validation, see [Change Recovery Question](#change-recovery-question).
 
 ##### Request Example
-{:.api .api-request .api-request-example}
+
 
 ```bash
 curl -v -X POST \
@@ -1663,7 +1663,7 @@ curl -v -X POST \
 ```
 
 ##### Response Example
-{:.api .api-response .api-response-example}
+
 
 ```json
 {
@@ -1721,25 +1721,25 @@ curl -v -X POST \
 ## Related Resources
 
 ### Get Assigned App Links
-{:.api .api-operation}
 
-{% api_operation get /api/v1/users/${userId}/appLinks %} {% api_cors %}
+
+<ApiOperation method="get" url="/api/v1/users/${userId}/appLinks %} {% api_cors" />
 
 Fetches appLinks for all direct or indirect (via group membership) assigned applications
 
 ##### Request Parameters
-{:.api .api-request .api-request-params}
+
 
 Parameter | Description  | Param Type | DataType | Required |
 id        | `id` of user | URL        | String   | TRUE     |
 
 ##### Response Parameters
-{:.api .api-response .api-response-params}
+
 
 Array of App Links
 
 ##### Request Example
-{:.api .api-request .api-request-example}
+
 
 ```bash
 curl -v -X GET \
@@ -1750,7 +1750,7 @@ curl -v -X GET \
 ```
 
 ##### Response Example
-{:.api .api-response .api-response-example}
+
 
 ```json
 [
@@ -1806,25 +1806,25 @@ curl -v -X GET \
 ```
 
 ### Get Member Groups
-{:.api .api-operation}
 
-{% api_operation get /api/v1/users/${userId}/groups %} {% api_cors %}
+
+<ApiOperation method="get" url="/api/v1/users/${userId}/groups %} {% api_cors" />
 
 Fetches the groups of which the user is a member
 
 ##### Request Parameters
-{:.api .api-request .api-request-params}
+
 
 Parameter | Description  | Param Type | DataType | Required |
 id        | `id` of user | URL        | String   | TRUE     |
 
 ##### Response Parameters
-{:.api .api-response .api-response-params}
+
 
 Array of [Groups](groups)
 
 ##### Request Example
-{:.api .api-request .api-request-example}
+
 
 ```bash
 curl -v -X GET \
@@ -1835,7 +1835,7 @@ curl -v -X GET \
 ```
 
 ##### Response Example
-{:.api .api-response .api-response-example}
+
 
 ```json
 [
@@ -1863,9 +1863,9 @@ Some operations are asynchronous while others are synchronous. The user's curren
 For example, you can't unlock a user that is `ACTIVE`.
 
 ### Activate User
-{:.api .api-operation}
 
-{% api_operation post /api/v1/users/${userId}/lifecycle/activate %}
+
+<ApiOperation method="post" url="/api/v1/users/${userId}/lifecycle/activate" />
 
 Activates a user
 
@@ -1877,14 +1877,14 @@ This operation can only be performed on users with a `STAGED` status.  Activatio
 Users who don't have a password must complete the welcome flow by visiting the activation link to complete the transition to `ACTIVE` status.
 
 ##### Request Parameters
-{:.api .api-request .api-request-params}
+
 
 Parameter | Description                                     | Param Type | DataType | Required | Default
 id        | `id` of user                                    | URL        | String   | TRUE     |
 sendEmail | Sends an activation email to the user if `true` | Query      | Boolean  | FALSE    | TRUE
 
 ##### Response Parameters
-{:.api .api-response .api-response-params}
+
 
 * Returns empty object by default.
 * If `sendEmail` is `false`, returns an activation link for the user to set up their account. The activation token can be used to create a custom activation link.
@@ -1899,7 +1899,7 @@ sendEmail | Sends an activation email to the user if `true` | Query      | Boole
 If a password was set before the user was activated, then user must login with with their password or the `activationToken` and not the activation link.
 
 ##### Request Example
-{:.api .api-request .api-request-example}
+
 
 ```bash
 curl -v -X POST \
@@ -1910,7 +1910,7 @@ curl -v -X POST \
 ```
 
 ##### Response Example
-{:.api .api-response .api-response-example}
+
 
 ```json
 {
@@ -1920,9 +1920,9 @@ curl -v -X POST \
 ```
 
 ### Reactivate User
-{:.api .api-operation}
 
-{% api_operation post /api/v1/users/${userId}/lifecycle/reactivate %}
+
+<ApiOperation method="post" url="/api/v1/users/${userId}/lifecycle/reactivate" />
 
 Reactivates a user
 
@@ -1931,14 +1931,14 @@ This operation can only be performed on users with a `PROVISIONED` status.  This
 Users that don't have a password must complete the flow by completing [Reset Password](#reset-password) and MFA enrollment steps to transition the user to `ACTIVE` status.
 
 ##### Request Parameters
-{:.api .api-request .api-request-params}
+
 
 Parameter | Description                                                                | Param Type | DataType | Required |
 id        | `id` of user                                                               | URL        | String   | TRUE     |
 sendEmail | Sends an activation email to the user if `true`. Default value is `false`. | Query      | Boolean  | FALSE    |
 
 ##### Response Parameters
-{:.api .api-response .api-response-params}
+
 
 * Returns empty object by default.
 * If `sendEmail` is `false`, returns an activation link for the user to set up their account. The activation token can be used to create a custom activation link.
@@ -1951,7 +1951,7 @@ sendEmail | Sends an activation email to the user if `true`. Default value is `f
 ```
 
 ##### Request Example
-{:.api .api-request .api-request-example}
+
 
 ```bash
 curl -v -X POST \
@@ -1962,7 +1962,7 @@ curl -v -X POST \
 ```
 
 ##### Response Example (Success)
-{:.api .api-response .api-response-example}
+
 
 ```json
 {
@@ -1972,7 +1972,7 @@ curl -v -X POST \
 ```
 
 ##### Response Example (Unexpected user status)
-{:.api .api-response .api-response-example}
+
 
 ```http
 HTTP/1.1 403 Forbidden
@@ -1988,9 +1988,9 @@ Content-Type: application/json
 ```
 
 ### Deactivate User
-{:.api .api-operation}
 
-{% api_operation post /api/v1/users/${userId}/lifecycle/deactivate %}
+
+<ApiOperation method="post" url="/api/v1/users/${userId}/lifecycle/deactivate" />
 
 Deactivates a user
 
@@ -2002,19 +2002,19 @@ This operation can only be performed on users that do not have a `DEPROVISIONED`
 > Important: Deactivating a user is a **destructive** operation.  The user is deprovisioned from all assigned applications which may destroy their data such as email or files.  **This action cannot be recovered!**
 
 ##### Request Parameters
-{:.api .api-request .api-request-params}
+
 
 Parameter | Description                                                                           | Param Type | DataType | Required |
 userId    | ID of user                                                                            | URL        | String   | TRUE     |
 sendEmail | Sends a deactivation email to the administrator if `true`.  Default value is `false`. | Query      | Boolean  | FALSE    |
 
 ##### Response Parameters
-{:.api .api-response .api-response-params}
+
 
 Returns an empty object.
 
 ##### Request Example
-{:.api .api-request .api-request-example}
+
 
 ```bash
 curl -v -X POST \
@@ -2025,7 +2025,7 @@ curl -v -X POST \
 ```
 
 ##### Response Example
-{:.api .api-response .api-response-example}
+
 
 ```http
 HTTP/1.1 200 OK
@@ -2033,9 +2033,9 @@ Content-Type: application/json
 ```
 
 ### Suspend User
-{:.api .api-operation}
 
-{% api_operation post /api/v1/users/${userId}/lifecycle/suspend %}
+
+<ApiOperation method="post" url="/api/v1/users/${userId}/lifecycle/suspend" />
 
 Suspends a user
 
@@ -2047,13 +2047,13 @@ Suspended users:
 * Can only be unsuspended or deactivated.
 
 ##### Request Parameters
-{:.api .api-request .api-request-params}
+
 
 Parameter | Description  | Param Type | DataType | Required |
 id        | `id` of user | URL        | String   | TRUE     |
 
 ##### Response Parameters
-{:.api .api-response .api-response-params}
+
 
 Returns an empty object
 
@@ -2061,7 +2061,7 @@ Returns an empty object
 * Passing an `id` that is not in the `ACTIVE` state returns a `400 Bad Request` status code with error code `E0000001`.
 
 ##### Request Example
-{:.api .api-request .api-request-example}
+
 
 ```bash
 curl -v -X POST \
@@ -2072,7 +2072,7 @@ curl -v -X POST \
 ```
 
 ##### Response Example
-{:.api .api-response .api-response-example}
+
 
 ```http
 HTTP/1.1 200 OK
@@ -2080,9 +2080,9 @@ Content-Type: application/json
 ```
 
 ### Unsuspend User
-{:.api .api-operation}
 
-{% api_operation post /api/v1/users/${userId}/lifecycle/unsuspend %}
+
+<ApiOperation method="post" url="/api/v1/users/${userId}/lifecycle/unsuspend" />
 
 Unsuspends a user and returns them to the `ACTIVE` state
 
@@ -2090,13 +2090,13 @@ This operation can only be performed on users that have a `SUSPENDED` status.
 
 
 ##### Request Parameters
-{:.api .api-request .api-request-params}
+
 
 Parameter | Description  | Param Type | DataType | Required |
 id        | `id` of user | URL        | String   | TRUE     |
 
 ##### Response Parameters
-{:.api .api-response .api-response-params}
+
 
 Returns an empty object.
 
@@ -2104,7 +2104,7 @@ Passing an invalid `id` returns a `404 Not Found` status code with error code `E
 Passing an `id` that is not in the `SUSPENDED` state returns a `400 Bad Request` status code with error code `E0000001`.
 
 ##### Request Example
-{:.api .api-request .api-request-example}
+
 
 ```bash
 curl -v -X POST \
@@ -2115,7 +2115,7 @@ curl -v -X POST \
 ```
 
 ##### Response Example
-{:.api .api-response .api-response-example}
+
 
 ```http
 HTTP/1.1 200 OK
@@ -2125,9 +2125,9 @@ Content-Type: application/json
 > Deleting users is an {% api_lifecycle ea %} feature.
 
 ### Delete User
-{:.api .api-operation}
 
-{% api_operation delete /api/v1/users/${userId} %}
+
+<ApiOperation method="delete" url="/api/v1/users/${userId}" />
 
 Deletes a user permanently.  This operation can only be performed on users that have a `DEPROVISIONED` status.  **This action cannot be recovered!**
 
@@ -2135,21 +2135,21 @@ This operation on a user that hasn't been deactivated causes that user to be dea
 is required to delete the user.
 
 ##### Request Parameters
-{:.api .api-request .api-request-params}
+
 
 Parameter | Description                                                                           | Param Type | DataType | Required | Default |
 id        | `id` of user                                                                          | URL        | String   | TRUE     |         |
 sendEmail | Sends a deactivation email to the administrator if `true`.  Default value is `false`. | Query      | Boolean  | FALSE    | FALSE   |
 
 ##### Response Parameters
-{:.api .api-response .api-response-params}
+
 
 Returns an empty object.
 
 Passing an invalid `id` returns a `404 Not Found` status code with error code `E0000007`.
 
 ##### Request Example
-{:.api .api-request .api-request-example}
+
 
 ```bash
 curl -v -X DELETE \
@@ -2160,7 +2160,7 @@ curl -v -X DELETE \
 ```
 
 ##### Response Example
-{:.api .api-response .api-response-example}
+
 
 ```http
 HTTP/1.1 202 ACCEPTED
@@ -2170,27 +2170,27 @@ Content-Type: application/json
 ```
 
 ### Unlock User
-{:.api .api-operation}
 
-{% api_operation post /api/v1/users/${userId}/lifecycle/unlock %}
+
+<ApiOperation method="post" url="/api/v1/users/${userId}/lifecycle/unlock" />
 
 Unlocks a user with a `LOCKED_OUT` status and returns them to `ACTIVE` status.  Users will be able to login with their current password.
 
 > Note: This operation works with Okta-mastered users. It doesn't support directory-mastered accounts such as Active Directory.
 
 ##### Request Parameters
-{:.api .api-request .api-request-params}
+
 
 Parameter | Description  | Param Type | DataType | Required | Default
 id        | `id` of user | URL        | String   | TRUE     |
 
 ##### Response Parameters
-{:.api .api-response .api-response-params}
+
 
 Returns an empty object
 
 ##### Request Example
-{:.api .api-request .api-request-example}
+
 
 ```bash
 curl -v -X POST \
@@ -2201,7 +2201,7 @@ curl -v -X POST \
 ```
 
 ##### Response Example
-{:.api .api-response .api-response-example}
+
 
 ```http
 HTTP/1.1 200 OK
@@ -2209,9 +2209,9 @@ Content-Type: application/json
 ```
 
 ### Reset Password
-{:.api .api-operation}
 
-{% api_operation post /api/v1/users/${userId}/lifecycle/reset_password %}
+
+<ApiOperation method="post" url="/api/v1/users/${userId}/lifecycle/reset_password" />
 
 Generates a one-time token (OTT) that can be used to reset a user's password.  The OTT link can be automatically emailed to the user or returned to the API caller and distributed using a custom flow.
 
@@ -2220,7 +2220,7 @@ This operation will transition the user to the status of `RECOVERY` and the user
 **Note:** You can also use this API to convert a user with the Okta Credential Provider to a use a Federated Provider. After this conversion, the user cannot directly sign in with password. The second example demonstrates this usage.
 
 ##### Request Parameters
-{:.api .api-request .api-request-params}
+
 
 Parameter | Description                                      | Param Type | DataType | Required | Default
 id        | `id` of user                                     | URL        | String   | TRUE     |
@@ -2232,7 +2232,7 @@ To ensure a successful password recovery lookup if an email address is associate
 * The lookup searches login IDs first, then primary email addresses, and then secondary email addresses.
 
 ##### Response Parameters
-{:.api .api-response .api-response-params}
+
 
 * Returns an empty object by default.
 * If`sendEmail` is `false`, returns a link for the user to reset their password.
@@ -2244,7 +2244,7 @@ To ensure a successful password recovery lookup if an email address is associate
 ```
 
 ##### Request Example
-{:.api .api-request .api-request-example}
+
 
 ```bash
 curl -v -X POST \
@@ -2255,7 +2255,7 @@ curl -v -X POST \
 ```
 
 ##### Response Example
-{:.api .api-response .api-response-example}
+
 
 ```json
 {
@@ -2264,7 +2264,7 @@ curl -v -X POST \
 ```
 
 ##### Request Example (Convert a User to a Federated User)
-{:.api .api-request .api-request-example}
+
 
 To convert a user to a federated user, pass `FEDERATION` as the `provider` in the [Provider Object](#provider-object). The `sendEmail`
 parameter must be false or omitted for this type of conversion.
@@ -2278,16 +2278,16 @@ curl -v -X POST \
 ```
 
 ##### Response Example
-{:.api .api-response .api-response-example}
+
 
 ```json
 {}
 ```
 
 ### Expire Password
-{:.api .api-operation}
 
-{% api_operation post /api/v1/users/${userId}/lifecycle/expire_password %}
+
+<ApiOperation method="post" url="/api/v1/users/${userId}/lifecycle/expire_password" />
 
 This operation transitions the user status to `PASSWORD_EXPIRED` so that the user is required to change their password at their next login.
 If `tempPassword` is included in the request, the user's password is reset to a temporary password that is returned, and then the temporary password is expired.
@@ -2297,14 +2297,14 @@ When the user tries to log in to Okta, delegated authentication finds the passwo
 and the user is presented with the password-expired page where he or she can change the password.
 
 ##### Request Parameters
-{:.api .api-request .api-request-params}
+
 
 Parameter    | Description                                                        | Param Type | DataType | Required | Default
 id           | `id` of user                                                       | URL        | String   | TRUE     |
 tempPassword | Sets the user's password to a temporary password,  if `true` | Query      | Boolean  | FALSE    | FALSE
 
 ##### Response Parameters
-{:.api .api-response .api-response-params}
+
 
 * Returns the complete user object by default
 * If `tempPassword` is `true`, returns the temporary password
@@ -2316,7 +2316,7 @@ tempPassword | Sets the user's password to a temporary password,  if `true` | Qu
 ```
 
 ##### Request Example
-{:.api .api-request .api-request-example}
+
 
 ```bash
 curl -v -X POST \
@@ -2327,7 +2327,7 @@ curl -v -X POST \
 ```
 
 ##### Response Example
-{:.api .api-response .api-response-example}
+
 
 ```json
 {
@@ -2383,25 +2383,25 @@ curl -v -X POST \
 ```
 
 ### Reset Factors
-{:.api .api-operation}
 
-{% api_operation post /api/v1/users/${userId}/lifecycle/reset_factors %}
+
+<ApiOperation method="post" url="/api/v1/users/${userId}/lifecycle/reset_factors" />
 
 This operation resets all factors for the specified user. All MFA factor enrollments returned to the unenrolled state. The user's status remains ACTIVE. This link is present only if the user is currently enrolled in one or more MFA factors.
 
 ##### Request Parameters
-{:.api .api-request .api-request-params}
+
 
 Parameter    | Description                                                  | Param Type | DataType | Required | Default
 id           | `id` of user                                                 | URL        | String   | TRUE     |
 
 ##### Response Parameters
-{:.api .api-response .api-response-params}
+
 
 Returns an empty object by default.
 
 ##### Request Example
-{:.api .api-request .api-request-example}
+
 
 ```bash
 curl -v -X POST \
@@ -2412,7 +2412,7 @@ curl -v -X POST \
 ```
 
 ##### Response Example
-{:.api .api-response .api-response-example}
+
 
 ```http
 HTTP/1.1 200 OK
@@ -2422,28 +2422,28 @@ Content-Type: application/json
 ## User Sessions
 
 ### Clear User Sessions
-{:.api .api-operation}
 
-{% api_operation delete /api/v1/users/${userId}/sessions %}
+
+<ApiOperation method="delete" url="/api/v1/users/${userId}/sessions" />
 
 Removes all active identity provider sessions. This forces the user to authenticate on the next operation. Optionally revokes OpenID Connect and OAuth refresh and access tokens issued to the user.
 
 >Note: This operation doesn't clear the sessions created for web sign in or native applications.
 
 #### Request Parameters
-{:.api .api-request .api-request-params}
+
 
 Parameter    | Description                                                      | Param Type | DataType | Required | Default
 userId          | `id` of a user                                                     | URL        | String   | TRUE     |
 oauthTokens  | Revoke issued OpenID Connect and OAuth refresh and access tokens | Query      | Boolean  | FALSE    | FALSE
 
 #### Response Parameters
-{:.api .api-response .api-response-params}
+
 
 `204 No Content`
 
 #### Request Example
-{:.api .api-request .api-request-example}
+
 
 ```bash
 curl -v -X DELETE \
@@ -2454,7 +2454,7 @@ curl -v -X DELETE \
 ```
 
 #### Response Example
-{:.api .api-response .api-response-example}
+
 
 ```http
 `204 No Content`
@@ -2463,16 +2463,16 @@ curl -v -X DELETE \
 ## Credential Operations
 
 ### Forgot Password
-{:.api .api-operation}
 
-{% api_operation post /api/v1/users/${userId}/credentials/forgot_password %}
+
+<ApiOperation method="post" url="/api/v1/users/${userId}/credentials/forgot_password" />
 
 Generates a one-time token (OTT) that can be used to reset a user's password
 
 The user will be required to validate their security question's answer when visiting the reset link.  This operation can only be performed on users with an `ACTIVE` status and a valid [recovery question credential](#recovery-question-object).
 
 ##### Request Parameters
-{:.api .api-request .api-request-params}
+
 
 Parameter    | Description                                         | Param Type | DataType | Required | Default
 id           | `id` of user                                        | URL        | String   | TRUE     |
@@ -2484,7 +2484,7 @@ To ensure a successful password recovery lookup if an email address is associate
 * The lookup searches login IDs first, then primary email addresses, and then secondary email addresses.
 
 ##### Response Parameters
-{:.api .api-response .api-response-params}
+
 
 * Returns an empty object by default
 * If `sendEmail` is `false`, returns a link for the user to reset their password.
@@ -2498,7 +2498,7 @@ To ensure a successful password recovery lookup if an email address is associate
 This operation does not affect the status of the user.
 
 ##### Request Example
-{:.api .api-request .api-request-example}
+
 
 ```bash
 curl -v -X POST \
@@ -2509,7 +2509,7 @@ curl -v -X POST \
 ```
 
 ##### Response Example
-{:.api .api-response .api-response-example}
+
 
 ```json
 {
@@ -2517,7 +2517,7 @@ curl -v -X POST \
 }
 ```
 
-{% api_operation post /api/v1/users/${userId}/credentials/forgot_password %}
+<ApiOperation method="post" url="/api/v1/users/${userId}/credentials/forgot_password" />
 
 Sets a new password for a user by validating the user's answer to their current recovery question
 
@@ -2526,7 +2526,7 @@ This operation can only be performed on users with an `ACTIVE` status and a vali
 > Important: This operation is intended for applications that need to implement their own forgot password flow.  You are responsible for mitigation of all security risks such as phishing and replay attacks.  The best practice is to generate a short-lived, one-time token (OTT) that is sent to a verified email account.
 
 ##### Request Parameters
-{:.api .api-request .api-request-params}
+
 
 Parameter         | Description                                      | Param Type | DataType                                              | Required |
 id                | `id` of user                                     | URL        | String                                                | TRUE     |
@@ -2534,14 +2534,14 @@ password          | New password for user                            | Body     
 recovery_question | Answer to user's current recovery question | Body       | [Recovery Question Object](#recovery-question-object) | TRUE     |
 
 ##### Response Parameters
-{:.api .api-response .api-response-params}
+
 
 [Credentials](#credentials-object) of the user
 
 This operation does not affect the status of the user.
 
 ##### Request Example
-{:.api .api-request .api-request-example}
+
 
 ```bash
 curl -v -X POST \
@@ -2555,7 +2555,7 @@ curl -v -X POST \
 ```
 
 ##### Response Example
-{:.api .api-response .api-response-example}
+
 
 ```json
 {
@@ -2571,16 +2571,16 @@ curl -v -X POST \
 ```
 
 ### Change Password
-{:.api .api-operation}
 
-{% api_operation post /api/v1/users/${userId}/credentials/change_password %}
+
+<ApiOperation method="post" url="/api/v1/users/${userId}/credentials/change_password" />
 
 Changes a user's password by validating the user's current password
 
 This operation can only be performed on users in `STAGED`, `ACTIVE`, `PASSWORD_EXPIRED`, or `RECOVERY` status that have a valid [password credential](#password-object)
 
 ##### Request Parameters
-{:.api .api-request .api-request-params}
+
 
 Parameter   | Description                                            | Param Type | DataType                            | Required |
 id          | `id` of user                                           | URL        | String                              | TRUE     |
@@ -2589,14 +2589,14 @@ oldPassword | Current password for user                              | Body     
 newPassword | New password for user                                  | Body       | [Password Object](#password-object) | TRUE     |
 
 ##### Response Parameters
-{:.api .api-response .api-response-params}
+
 
 [Credentials](#credentials-object) of the user
 
 The user transitions to `ACTIVE` status when successfully invoked in `RECOVERY` status.
 
 ##### Request Example
-{:.api .api-request .api-request-example}
+
 
 ```bash
 curl -v -X POST \
@@ -2610,7 +2610,7 @@ curl -v -X POST \
 ```
 
 ##### Response Example
-{:.api .api-response .api-response-example}
+
 
 ```json
 {
@@ -2626,16 +2626,16 @@ curl -v -X POST \
 ```
 
 ### Change Recovery Question
-{:.api .api-operation}
 
-{% api_operation post /api/v1/users/${userId}/credentials/change_recovery_question %}
+
+<ApiOperation method="post" url="/api/v1/users/${userId}/credentials/change_recovery_question" />
 
 Changes a user's recovery question & answer credential by validating the user's current password
 
 This operation can only be performed on users in **STAGED**, **ACTIVE** or **RECOVERY** `status` that have a valid [password credential](#password-object)
 
 ##### Request Parameters
-{:.api .api-request .api-request-params}
+
 
 Parameter         | Description                             | Param Type | DataType                                              | Required |
 id                | `id` of user                            | URL        | String                                                | TRUE     |
@@ -2643,14 +2643,14 @@ password          | Current password for user               | Body       | [Pass
 recovery_question | New recovery question & answer for user | Body       | [Recovery Question Object](#recovery-question-object) | TRUE     |
 
 ##### Response Parameters
-{:.api .api-response .api-response-params}
+
 
 [Credentials](#credentials-object) of the user
 
 > This operation does not affect the status of the user.
 
 ##### Request Example
-{:.api .api-request .api-request-example}
+
 
 ```bash
 curl -v -X POST \
@@ -2667,7 +2667,7 @@ curl -v -X POST \
 ```
 
 ##### Response Example
-{:.api .api-response .api-response-example}
+
 
 ```json
 {
@@ -2692,16 +2692,16 @@ Consent grants remain valid until the user manually revokes them, or until the u
 > Hint: For all grant operations, you can use `me` instead of the `userId` in an endpoint that contains `/users`, in an active session with no SSWS token (API token). For example: `https://{yourOktaDomain}/api/v1/users/me/grants` returns all the grants for the active session user.
 
 ### List Grants
-{:.api .api-operation}
+
 
 {% api_lifecycle ea %}
 
-{% api_operation get /api/v1/users/${userId}/grants %}
+<ApiOperation method="get" url="/api/v1/users/${userId}/grants" />
 
 Lists all grants for the specified user
 
 #### Request Parameters
-{:.api .api-request .api-request-params}
+
 
 | Parameter | Description                                                                                  | Param Type | DataType | Required | Default |
 |:----------|:---------------------------------------------------------------------------------------------|:-----------|:---------|:---------|:--------|
@@ -2715,7 +2715,7 @@ Lists all grants for the specified user
 
 
 #### Request Example
-{:.api .api-request .api-request-example}
+
 
 ```bash
 curl -v -X GET \
@@ -2726,7 +2726,7 @@ curl -v -X GET \
 ```
 
 #### Response Example
-{:.api .api-response .api-response-example}
+
 
 ```json
 [
@@ -2775,16 +2775,16 @@ curl -v -X GET \
 ```
 
 ### Get a Grant
-{:.api .api-operation}
+
 
 {% api_lifecycle ea %}
 
-{% api_operation get /api/v1/users/${userId}/grants/${grantId} %}
+<ApiOperation method="get" url="/api/v1/users/${userId}/grants/${grantId}" />
 
 Gets a grant for the specified user
 
 #### Request Parameters
-{:.api .api-request .api-request-params}
+
 
 | Parameter | Description                                                                                  | Param Type | DataType | Required |
 |:----------|:---------------------------------------------------------------------------------------------|:-----------|:---------|:---------|
@@ -2793,7 +2793,7 @@ Gets a grant for the specified user
 | expand    | Valid value: `scope`. If specified, scope details are included in the `_embedded` attribute. | Query      | String   | FALSE    |
 
 #### Request Example
-{:.api .api-request .api-request-example}
+
 
 ```bash
 curl -v -X GET \
@@ -2804,7 +2804,7 @@ curl -v -X GET \
 ```
 
 #### Response Example
-{:.api .api-response .api-response-example}
+
 
 ```json
 {
@@ -2851,16 +2851,16 @@ curl -v -X GET \
 ```
 
 ### List Grants for a User-Client Combination
-{:.api .api-operation}
+
 
 {% api_lifecycle ea %}
 
-{% api_operation get /api/v1/users/${userId}/clients/${clientId}/grants %}
+<ApiOperation method="get" url="/api/v1/users/${userId}/clients/${clientId}/grants" />
 
 Lists all grants for a specified user and client
 
 #### Request Parameters
-{:.api .api-request .api-request-params}
+
 
 | Parameter | Description                                                                                  | Parameter Type | DataType | Required | Default |
 |:----------|:---------------------------------------------------------------------------------------------|:---------------|:---------|:---------|:--------|
@@ -2871,7 +2871,7 @@ Lists all grants for a specified user and client
 | after     | Specifies the pagination cursor for the next page of tokens                                  | Query          | String   | FALSE    |         |
 
 #### Request Example
-{:.api .api-request .api-request-example}
+
 
 ```bash
 curl -v -X GET \
@@ -2882,7 +2882,7 @@ curl -v -X GET \
 ```
 
 #### Response Example
-{:.api .api-response .api-response-example}
+
 
 ```json
 [
@@ -2931,23 +2931,23 @@ curl -v -X GET \
 ```
 
 ### Revoke All Grants for a User
-{:.api .api-operation}
+
 
 {% api_lifecycle ea %}
 
-{% api_operation delete /api/v1/users/${userId}/grants %}
+<ApiOperation method="delete" url="/api/v1/users/${userId}/grants" />
 
 Revokes all grants for a specified user
 
 #### Request Paramters
-{:.api .api-request .api-request-params}
+
 
 | Parameter | Description                                 | Parameter Type | DataType | Required |
 |:----------|:--------------------------------------------|:---------------|:---------|:---------|
 | userId    | ID of the user whose grant is being revoked | URL            | String   | TRUE     |
 
 #### Request Example
-{:.api .api-request .api-request-example}
+
 
 ```bash
 curl -v -X DELETE \
@@ -2958,23 +2958,23 @@ curl -v -X DELETE \
 ```
 
 #### Response Example
-{:.api .api-response .api-response-example}
+
 
 ```bash
 HTTP/1.1 204 No Content
 ```
 
 ### Revoke a Grant for a User
-{:.api .api-operation}
+
 
 {% api_lifecycle ea %}
 
-{% api_operation delete /api/v1/users/${userId}/grants/${grantId} %}
+<ApiOperation method="delete" url="/api/v1/users/${userId}/grants/${grantId}" />
 
 Revokes one grant for a specified user
 
 #### Request Paramters
-{:.api .api-request .api-request-params}
+
 
 | Parameter | Description                                 | Parameter Type | DataType | Required |
 |:----------|:--------------------------------------------|:---------------|:---------|:---------|
@@ -2982,7 +2982,7 @@ Revokes one grant for a specified user
 | grantId   | ID of the grant being revoked               | URL            | String   | TRUE     |
 
 #### Request Example
-{:.api .api-request .api-request-example}
+
 
 ```bash
 curl -v -X DELETE \
@@ -2993,23 +2993,23 @@ curl -v -X DELETE \
 ```
 
 #### Response Example
-{:.api .api-response .api-response-example}
+
 
 ```bash
 HTTP/1.1 204 No Content
 ```
 
 ### Revoke Grants for User and Client
-{:.api .api-operation}
+
 
 {% api_lifecycle ea %}
 
-{% api_operation delete /api/v1/users/${userId}/clients/${clientId}/grants %}
+<ApiOperation method="delete" url="/api/v1/users/${userId}/clients/${clientId}/grants" />
 
 Revokes all grants for the specified user and client
 
 #### Request Parameters
-{:.api .api-request .api-request-params}
+
 
 | Parameter | Description                                                            | Parameter Type | DataType | Required |
 |:----------|:-----------------------------------------------------------------------|:---------------|:---------|:---------|
@@ -3017,7 +3017,7 @@ Revokes all grants for the specified user and client
 | clientId  | ID of the client who was granted consent by the specified user         | URL            | String   | TRUE     |
 
 #### Request Example
-{:.api .api-request .api-request-example}
+
 
 ```bash
 curl -v -X DELETE \
@@ -3028,7 +3028,7 @@ curl -v -X DELETE \
 ```
 
 #### Response Example
-{:.api .api-response .api-response-example}
+
 
 ```bash
 HTTP/1.1 204 No Content
@@ -3048,16 +3048,16 @@ Read [Working With Tokens](/authentication-guide/tokens/) to understand more abo
 {% api_lifecycle ea %}
 
 ### List Refresh Tokens
-{:.api .api-operation}
+
 
 {% api_lifecycle ea %}
 
-{% api_operation get /api/v1/users/${userId}/clients/${clientId}/tokens %}
+<ApiOperation method="get" url="/api/v1/users/${userId}/clients/${clientId}/tokens" />
 
 Lists all refresh tokens issued for the specified User and Client.
 
 #### Request Parameters
-{:.api .api-request .api-request-params}
+
 
 | Parameter | Description                                                                                  | Param Type | DataType | Required | Default |
 |:----------|:---------------------------------------------------------------------------------------------|:-----------|:---------|:---------|:--------|
@@ -3071,7 +3071,7 @@ Lists all refresh tokens issued for the specified User and Client.
 
 
 #### Request Example
-{:.api .api-request .api-request-example}
+
 
 ```bash
 curl -v -X GET \
@@ -3082,7 +3082,7 @@ curl -v -X GET \
 ```
 
 #### Response Example
-{:.api .api-response .api-response-example}
+
 
 ```json
 [
@@ -3133,16 +3133,16 @@ curl -v -X GET \
 ```
 
 ### Get Refresh Token
-{:.api .api-operation}
+
 
 {% api_lifecycle ea %}
 
-{% api_operation get /api/v1/users/${userId}/clients/${clientId}/tokens/${tokenId} %}
+<ApiOperation method="get" url="/api/v1/users/${userId}/clients/${clientId}/tokens/${tokenId}" />
 
 Gets a refresh token issued for the specified User and Client.
 
 #### Request Parameters
-{:.api .api-request .api-request-params}
+
 
 | Parameter | Description                                                                                  | Param Type | DataType | Required | Default |
 |:----------|:---------------------------------------------------------------------------------------------|:-----------|:---------|:---------|:--------|
@@ -3157,7 +3157,7 @@ Gets a refresh token issued for the specified User and Client.
 
 
 #### Request Example
-{:.api .api-request .api-request-example}
+
 
 ```bash
 curl -v -X GET \
@@ -3168,7 +3168,7 @@ curl -v -X GET \
 ```
 
 #### Response Example
-{:.api .api-response .api-response-example}
+
 
 ```json
 {
@@ -3244,16 +3244,16 @@ curl -v -X GET \
 ```
 
 ### Revoke All Refresh Tokens
-{:.api .api-operation}
+
 
 {% api_lifecycle ea %}
 
-{% api_operation delete /api/v1/users/${userId}/clients/${clientId}/tokens %}
+<ApiOperation method="delete" url="/api/v1/users/${userId}/clients/${clientId}/tokens" />
 
 Revokes all refresh tokens issued for the specified User and Client. Any access tokens issued with these refresh tokens will also be revoked, but access tokens issued without a refresh token will not be affected.
 
 #### Request Parameters
-{:.api .api-request .api-request-params}
+
 
 | Parameter | Description                                                            | Parameter Type | DataType | Required |
 |:----------|:-----------------------------------------------------------------------|:---------------|:---------|:---------|
@@ -3261,7 +3261,7 @@ Revokes all refresh tokens issued for the specified User and Client. Any access 
 | clientId  | ID of the client who was granted consent by the specified user         | URL            | String   | TRUE     |
 
 #### Request Example
-{:.api .api-request .api-request-example}
+
 
 ```bash
 curl -v -X DELETE \
@@ -3272,23 +3272,23 @@ curl -v -X DELETE \
 ```
 
 #### Response Example
-{:.api .api-response .api-response-example}
+
 
 ```bash
 HTTP/1.1 204 No Content
 ```
 
 ### Revoke Refresh Token
-{:.api .api-operation}
+
 
 {% api_lifecycle ea %}
 
-{% api_operation delete /api/v1/users/${userId}/clients/${clientId}/tokens/${tokenId} %}
+<ApiOperation method="delete" url="/api/v1/users/${userId}/clients/${clientId}/tokens/${tokenId}" />
 
 Revokes the specified refresh token. If an access token was issued with this refresh token, it will also be revoked.
 
 #### Request Parameters
-{:.api .api-request .api-request-params}
+
 
 | Parameter | Description                                                            | Parameter Type | DataType | Required |
 |:----------|:-----------------------------------------------------------------------|:---------------|:---------|:---------|
@@ -3297,7 +3297,7 @@ Revokes the specified refresh token. If an access token was issued with this ref
 | tokenId   | ID of the token                                                        | URL            | String   | TRUE     |
 
 #### Request Example
-{:.api .api-request .api-request-example}
+
 
 ```bash
 curl -v -X DELETE \
@@ -3308,7 +3308,7 @@ curl -v -X DELETE \
 ```
 
 #### Response Example
-{:.api .api-response .api-response-example}
+
 
 ```bash
 HTTP/1.1 204 No Content
@@ -3319,23 +3319,23 @@ HTTP/1.1 204 No Content
 {% api_lifecycle ea %}
 
 ### List Client Resources for a User
-{:.api .api-operation}
+
 
 {% api_lifecycle ea %}
 
-{% api_operation get /api/v1/users/${userId}/clients %}
+<ApiOperation method="get" url="/api/v1/users/${userId}/clients" />
 
 Lists all client resources for which the specified user has grants or tokens.
 
 #### Request Parameters
-{:.api .api-request .api-request-params}
+
 
 | Parameter | Description                                     | Parameter Type | DataType | Required |
 |:----------|:------------------------------------------------|:---------------|:---------|:---------|
 | userId    | ID of the user                                  | URL            | String   | TRUE     |
 
 #### Request Example
-{:.api .api-request .api-request-example}
+
 
 ```bash
 curl -v -X GET \
@@ -3346,7 +3346,7 @@ curl -v -X GET \
 ```
 
 #### Response Example
-{:.api .api-response .api-response-example}
+
 
 ```json
 [
@@ -3428,16 +3428,16 @@ Example
 ```
 
 ### List Emails
-{:.api .api-operation}
+
 
 {% api_lifecycle beta %}
 
-{% api_operation get /api/v1/users/${userId}/emails %}
+<ApiOperation method="get" url="/api/v1/users/${userId}/emails" />
 
 Lists a user's email
 
 #### Request
-{:.api .api-request .api-request-example}
+
 
 ```bash
 curl -v -X GET \
@@ -3448,7 +3448,7 @@ curl -v -X GET \
 ```
 
 #### Response (Verified Email)
-{:.api .api-response .api-response-example}
+
 
 > Note: Although the email is in `VERIFIED` status, the `verify` operation is still published for completeness.
 
@@ -3497,7 +3497,7 @@ curl -v -X GET \
 ```
 
 #### Response (Unverified Email)
-{:.api .api-response .api-response-example}
+
 
 ```json
 [
@@ -3536,16 +3536,16 @@ curl -v -X GET \
 ```
 
 ### Get Email
-{:.api .api-operation}
+
 
 {% api_lifecycle beta %}
 
-{% api_operation get /api/v1/users/${userId}/emails/${emailId} %}
+<ApiOperation method="get" url="/api/v1/users/${userId}/emails/${emailId}" />
 
 Gets a particular email for a user
 
 #### Request
-{:.api .api-request .api-request-example}
+
 
 ```bash
 curl -v -X GET \
@@ -3556,7 +3556,7 @@ curl -v -X GET \
 ```
 
 #### Response
-{:.api .api-response .api-response-example}
+
 
 ```json
 {
@@ -3593,18 +3593,18 @@ curl -v -X GET \
 ```
 
 ### Verify Email
-{:.api .api-operation}
+
 
 {% api_lifecycle beta %}
 
-{% api_operation post /api/v1/users/${userId}/emails/${emailId}/verify %}
+<ApiOperation method="post" url="/api/v1/users/${userId}/emails/${emailId}/verify" />
 
 Triggers email verification flow for an unverified email
 
 > Verification is idempotent and can be retried at any time.  Issuing a new verification invalidates any previously issued verification tokens.
 
 #### Request Parameters
-{:.api .api-request .api-request-params}
+
 
 | Parameter   | Description                                                               | Param Type | DataType           | Required | Default                     |
 |:----------- | ------------------------------------------------------------------------- | ---------- | ------------------ | -------- | --------------------------- |
@@ -3624,7 +3624,7 @@ Triggers email verification flow for an unverified email
 The `signOn` property determines whether a user has to sign in after clicking on an email verification link to complete the verification process. Thus, if `signOn` is set to `REQUIRED`, an Okta session is granted after the user has signed in.
 
 #### Request
-{:.api .api-request .api-request-example}
+
 
 ```bash
 curl -X POST \
@@ -3641,7 +3641,7 @@ curl -X POST \
 ```
 
 #### Response
-{:.api .api-response .api-response-example}
+
 
 ```bash
 HTTP/1.1 202 Accepted
@@ -3672,11 +3672,11 @@ Content-Type: application/json
 ```
 
 ### Change Email Credential
-{:.api .api-operation}
+
 
 {% api_lifecycle beta %}
 
-{% api_operation post /api/v1/users/${userId}/emails/${emailId}/change %}
+<ApiOperation method="post" url="/api/v1/users/${userId}/emails/${emailId}/change" />
 
 Changes a verified email
 
@@ -3685,7 +3685,7 @@ This operation delays a profile update or profile push until the user has verifi
 > Email changes are idempotent.  Issuing a new change verification replaces any previously issued change verification tokens.
 
 #### Request Parameters
-{:.api .api-request .api-request-params}
+
 
 | Parameter   | Description                                                                | Param Type | DataType           | Required | Default                     |
 |:----------- | -------------------------------------------------------------------------- | ---------- | ------------------ | -------- | --------------------------- |
@@ -3706,7 +3706,7 @@ This operation delays a profile update or profile push until the user has verifi
 The `signOn` property determines whether a user has to sign in after clicking on an email verification link to complete the verification process. Thus, if `signOn` is set to `REQUIRED`, an Okta session is granted after the user has signed in.
 
 #### Request
-{:.api .api-request .api-request-example}
+
 
 ```bash
 curl -X POST \
@@ -3724,7 +3724,7 @@ curl -X POST \
 ```
 
 #### Response
-{:.api .api-response .api-response-example}
+
 
 ```bash
 HTTP/1.1 202 Accepted

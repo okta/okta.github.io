@@ -20,38 +20,38 @@ Explore the Apps API: [![Run in Postman](https://run.pstmn.io/button.svg)](https
 ## Application Operations
 
 ### Add Application
-{:.api .api-operation}
 
-{% api_operation post /api/v1/apps %}
+
+<ApiOperation method="post" url="/api/v1/apps" />
 
 Adds a new application to your Okta organization.
 
 ##### Request Parameters
-{:.api .api-request .api-request-params}
+
 
 Parameter | Description                                                                            | Param Type | DataType                          | Required | Default
 activate  | Executes [activation lifecycle](#activate-application) operation when creating the app | Query      | Boolean                           | FALSE    | TRUE
 app       | App-specific name, signOnMode and settings                                             | Body       | [Application](#application-model) | TRUE     |
 
 ##### Response Parameters
-{:.api .api-response .api-response-params}
+
 
 All responses return the created [Application](#application-model).
 
 #### Add Bookmark Application
-{:.api .api-operation}
+
 
 Adds an new bookmark application to your organization.
 
 ##### Settings
-{:.api .api-request .api-request-params}
+
 
 Parameter          | Description                                             | DataType | Nullable | Unique | Validation
 url                | The URL of the launch page for this app                 | String   | FALSE    | FALSE  | [URL](http://tools.ietf.org/html/rfc3986)
 requestIntegration | Would you like Okta to add an integration for this app? | Boolean  | FALSE    | FALSE  |
 
 ##### Request Example
-{:.api .api-request .api-request-example}
+
 
 ```bash
 curl -v -X POST \
@@ -72,7 +72,7 @@ curl -v -X POST \
 ```
 
 ##### Response Example
-{:.api .api-response .api-response-example}
+
 
 ```json
 {
@@ -135,19 +135,19 @@ curl -v -X POST \
 ```
 
 #### Add Basic Authentication Application
-{:.api .api-operation}
+
 
 Adds an new application that uses HTTP Basic Authentication Scheme and requires a browser plugin.
 
 ##### Settings
-{:.api .api-request .api-request-params}
+
 
 Parameter | Description                                     | DataType | Nullable | Unique | Validation
 url       | The URL of the login page for this app          | String   | FALSE    | FALSE  | [URL](http://tools.ietf.org/html/rfc3986)
 authURL   | The URL of the authenticating site for this app | String   | FALSE    | FALSE  | [URL](http://tools.ietf.org/html/rfc3986)
 
 ##### Request Example
-{:.api .api-request .api-request-example}
+
 
 ```bash
 curl -v -X POST \
@@ -168,7 +168,7 @@ curl -v -X POST \
 ```
 
 ##### Response Example
-{:.api .api-response .api-response-example}
+
 
 ```json
 {
@@ -232,12 +232,12 @@ curl -v -X POST \
 ```
 
 #### Add Plugin SWA Application
-{:.api .api-operation}
+
 
 Adds a SWA application that requires a browser plugin.
 
 ##### Settings
-{:.api .api-request .api-request-params}
+
 
 Parameter     | Description                                           | DataType | Nullable | Unique | Validation
 url           | The URL of the login page for this app                | String   | FALSE    | FALSE  | [URL](http://tools.ietf.org/html/rfc3986)
@@ -247,7 +247,7 @@ buttonField   | CSS selector for the login button in the login form   | String  
 loginUrlRegex     | A regular expression that further restricts `url` to the specified regular expression | String | FALSE | FALSE |
 
 ##### Request Example
-{:.api .api-request .api-request-example}
+
 
 ```bash
 curl -v -X POST \
@@ -271,7 +271,7 @@ curl -v -X POST \
 ```
 
 ##### Response Example
-{:.api .api-response .api-response-example}
+
 
 ```json
 {
@@ -338,12 +338,12 @@ curl -v -X POST \
 ```
 
 #### Add Plugin SWA (3 Field) Application
-{:.api .api-operation}
+
 
 Adds a SWA application that requires a browser plugin and supports 3 CSS selectors for the login form.
 
 ##### Settings
-{:.api .api-request .api-request-params}
+
 
 Parameter          | Description                                           | DataType | Nullable | Unique | Validation
 targetURL                | The URL of the login page for this app                | String   | FALSE    | FALSE  | [URL](http://tools.ietf.org/html/rfc3986)
@@ -355,7 +355,7 @@ extraFieldValue    | Value for extra field form field                      | Str
 loginUrlRegex     | A regular expression that further restricts `targetURL` to the specified regular expression | String | FALSE | FALSE |
 
 ##### Request Example
-{:.api .api-request .api-request-example}
+
 
 ```bash
 curl -v -X POST \
@@ -381,7 +381,7 @@ curl -v -X POST \
 ```
 
 ##### Response Example
-{:.api .api-response .api-response-example}
+
 
 ```json
 {
@@ -450,12 +450,12 @@ curl -v -X POST \
 ```
 
 #### Add SWA Application (No Plugin)
-{:.api .api-operation}
+
 
 Adds a SWA application that uses HTTP POST and does not require a browser plugin
 
 ##### Settings
-{:.api .api-request .api-request-params}
+
 
 Parameter           | Description                                           | DataType  | Nullable | Unique | Validation
 url                 | The URL of the login page for this app                | String    | FALSE    | FALSE  | [URL](http://tools.ietf.org/html/rfc3986)
@@ -470,7 +470,7 @@ optionalField3Value | Name of the optional value in the login form          | St
 
 
 ##### Request Example
-{:.api .api-request .api-request-example}
+
 
 ```bash
 curl -v -X POST \
@@ -498,7 +498,7 @@ curl -v -X POST \
 ```
 
 ##### Response Example
-{:.api .api-response .api-response-example}
+
 
 ```json
 {
@@ -569,19 +569,19 @@ curl -v -X POST \
 ```
 
 #### Add Custom SWA Application
-{:.api .api-operation}
+
 
 Adds a SWA application. This application is only available to the org that creates it.
 
 ##### Settings
-{:.api .api-request .api-request-params}
+
 
 Parameter           | Description                                           | DataType  | Nullable | Unique | Validation
 loginUrl            | Primary URL of the login page for this app            | String    | FALSE    | FALSE  | [URL](http://tools.ietf.org/html/rfc3986)
 redirectUrl         | Secondary URL of the login page for this app          | String    | TRUE     | FALSE  | [URL](http://tools.ietf.org/html/rfc3986)
 
 ##### Request Example
-{:.api .api-request .api-request-example}
+
 
 > [Application](#application-model)'s "signOnMode" must be set to AUTO_LOGIN, the "name" field must be left blank, and "label" field must be defined.
 
@@ -611,7 +611,7 @@ curl -v -X POST \
 ```
 
 ##### Response Example
-{:.api .api-response .api-response-example}
+
 
 ```json
 {
@@ -692,12 +692,12 @@ curl -v -X POST \
 ```
 
 #### Add Custom SAML Application
-{:.api .api-operation}
+
 
 Adds a SAML 2.0 application. This application is only available to the org that creates it.
 
 ##### Settings
-{:.api .api-request .api-request-params}
+
 
 Parameter             | Description                                                                                                       | DataType                                             | Nullable | Unique | Validation
 defaultRelayState     | Identifies a specific application resource in an IDP initiated SSO scenario.                                      | String                                               | TRUE     | FALSE |
@@ -765,7 +765,7 @@ Integrated Windows Authentication  | urn:federation:authentication:windows
 Kerberos                           | oasis:names:tc:SAML:2.0:ac:classes:Kerberos
 
 ##### Request Example
-{:.api .api-request .api-request-example}
+
 
 > [Application](#application-model)'s "signOnMode" must be set to SAML_2_0, the "name" field must be left blank, and "label" field must be defined.
 
@@ -819,7 +819,7 @@ curl -v -X POST \
 ```
 
 ##### Response Example
-{:.api .api-response .api-response-example}
+
 
 ```json
 {
@@ -930,12 +930,12 @@ curl -v -X POST \
 ```
 
 #### Add WS-Federation Application
-{:.api .api-operation}
+
 
 Adds a WS-Federation Passive Requestor Profile application with a SAML 2.0 token
 
 ##### Request Example
-{:.api .api-request .api-request-example}
+
 
 ```bash
 curl -v -X POST \
@@ -966,12 +966,12 @@ curl -v -X POST \
 ```
 
 #### Add OAuth 2.0 Client Application
-{:.api .api-operation}
+
 
 Adds an OAuth 2.0 client application. This application is only available to the org that creates it.
 
 ##### Credentials
-{:.api .api-request .api-request-params}
+
 
 | Parameter                  | Description                                                                                                                                       | DataType | Default               |
 |:---------------------------|:--------------------------------------------------------------------------------------------------------------------------------------------------|:---------|:----------------------|
@@ -981,7 +981,7 @@ Adds an OAuth 2.0 client application. This application is only available to the 
 | autoKeyRotation            | Requested key rotation mode                                                                                                                       | Boolean  | `true`                |
 
 ##### Settings
-{:.api .api-request .api-request-params}
+
 
 | Parameter                                 | Description                                                                                 | DataType                                                                                     | Nullable | Unique | Validation |
 |:------------------------------------------|:--------------------------------------------------------------------------------------------|:---------------------------------------------------------------------------------------------|:---------|:-------|:-----------|
@@ -1043,7 +1043,7 @@ Adds an OAuth 2.0 client application. This application is only available to the 
   * These properties can also be configured in the App Wizard, General tab in the administrator UI: `tos_uri`, `policy_uri`, `logo_uri`, and `consent_method`. They can't be set using [the Dynamic Client Registration API](/docs/api/resources/oauth-clients).
 
 ##### Request Example
-{:.api .api-request .api-request-example}
+
 
 > [Application](#application-model)'s `signOnMode` must be set to OPENID_CONNECT, the `name` field must be "oidc_client", and `label` field must be defined.
 
@@ -1092,7 +1092,7 @@ curl -v -X POST \
 ```
 
 ##### Response Example
-{:.api .api-response .api-response-example}
+
 
 ```json
 {
@@ -1196,25 +1196,25 @@ curl -v -X POST \
 ```
 
 ### Get Application
-{:.api .api-operation}
 
-{% api_operation get /api/v1/apps/${applicationId} %}
+
+<ApiOperation method="get" url="/api/v1/apps/${applicationId}" />
 
 Fetches an application from your Okta organization by `id`.
 
 ##### Request Parameters
-{:.api .api-request .api-request-params}
+
 
 Parameter | Description    | Param Type | DataType | Required | Default
 applicationId       | `id` of an app | URL        | String   | TRUE     |
 
 ##### Response Parameters
-{:.api .api-response .api-response-params}
+
 
 Fetched [Application](#application-model)
 
 ##### Request Example
-{:.api .api-request .api-request-example}
+
 
 ```bash
 curl -v -X GET \
@@ -1225,7 +1225,7 @@ curl -v -X GET \
 ```
 
 ##### Response Example
-{:.api .api-response .api-response-example}
+
 
 ```json
 {
@@ -1327,9 +1327,9 @@ curl -v -X GET \
 ```
 
 ### List Applications
-{:.api .api-operation}
 
-{% api_operation get /api/v1/apps %}
+
+<ApiOperation method="get" url="/api/v1/apps" />
 
 Enumerates apps added to your organization with pagination. A subset of apps can be returned that match a supported filter expression or query.
 
@@ -1339,7 +1339,7 @@ Enumerates apps added to your organization with pagination. A subset of apps can
 - [List Applications Using a Key](#list-applications-using-a-key)
 
 ##### Request Parameters
-{:.api .api-request .api-request-params}
+
 
 Parameter | Description                                                                                                      | Param Type | DataType | Required | Default
 q         | Searches the `name` or `displayName` property of applications                                                    | Query      | String    | FALSE
@@ -1374,17 +1374,17 @@ Expansion    | Description
 
 
 ##### Response Parameters
-{:.api .api-response .api-response-params}
+
 
 Array of [Applications](#application-model)
 
 #### List Applications with Defaults
-{:.api .api-operation}
+
 
 Enumerates all apps added to your organization
 
 ##### Request Example
-{:.api .api-request .api-request-example}
+
 
 ```bash
 curl -v -X GET \
@@ -1395,7 +1395,7 @@ curl -v -X GET \
 ```
 
 ##### Response Example
-{:.api .api-response .api-response-example}
+
 
 ```json
 [
@@ -1559,12 +1559,12 @@ curl -v -X GET \
 ```
 
 #### List Applications Assigned to User
-{:.api .api-operation}
+
 
 Enumerates all applications assigned to a user and optionally embeds their [Application User](#application-user-model) in a single response.
 
 ##### Request Example
-{:.api .api-request .api-request-example}
+
 
 ```bash
 curl -v -X GET \
@@ -1577,7 +1577,7 @@ curl -v -X GET \
 > The `expand=user/:uid` query parameter optionally return the user's [Application User](#application-user-model) information  in the response body's `_embedded` property.
 
 ##### Response Example
-{:.api .api-response .api-response-example}
+
 
 ```json
 [
@@ -1792,12 +1792,12 @@ curl -v -X GET \
 ```
 
 #### List Applications Assigned to Group
-{:.api .api-operation}
+
 
 Enumerates all applications assigned to a group
 
 ##### Request Example
-{:.api .api-request .api-request-example}
+
 
 ```bash
 curl -v -X GET \
@@ -1808,7 +1808,7 @@ curl -v -X GET \
 ```
 
 ##### Response Example
-{:.api .api-response .api-response-example}
+
 
 ```json
 [
@@ -1876,12 +1876,12 @@ curl -v -X GET \
 ```
 
 #### List Applications Using a key
-{:.api .api-operation}
+
 
 Enumerates all applications using a key.
 
 ##### Request Example
-{:.api .api-request .api-request-example}
+
 
 ```bash
 curl -v -X GET \
@@ -1893,7 +1893,7 @@ curl -v -X GET \
 
 
 ##### Response Example
-{:.api .api-response .api-response-example}
+
 
 ```json
 [
@@ -1999,14 +1999,14 @@ curl -v -X GET \
 ```
 
 ### Update Application
-{:.api .api-operation}
 
-{% api_operation put /api/v1/apps/${applicationId} %}
+
+<ApiOperation method="put" url="/api/v1/apps/${applicationId}" />
 
 Updates an application in your organization.
 
 ##### Request Parameters
-{:.api .api-request .api-request-params}
+
 
 Parameter | Description         | Param Type | DataType                          | Required | Default
 applicationId       | `id` of an app to update | URL        | String                            | TRUE     |
@@ -2015,17 +2015,17 @@ app       | Updated app         | Body       | [Application](#application-model)
 > All properties must be specified when updating an app.  **Delta updates are not supported.**
 
 ##### Response Parameters
-{:.api .api-response .api-response-params}
+
 
 Updated [Application](#application-model)
 
 #### Set SWA User-Editable UserName & Password
-{:.api .api-operation}
+
 
 Configures the `EDIT_USERNAME_AND_PASSWORD` scheme for a SWA application with a username template
 
 ##### Request Example
-{:.api .api-request .api-request-example}
+
 
 ```bash
 curl -v -X PUT \
@@ -2071,7 +2071,7 @@ curl -v -X PUT \
 ```
 
 ##### Response Example
-{:.api .api-response .api-response-example}
+
 
 ```json
 {
@@ -2137,12 +2137,12 @@ curl -v -X PUT \
 ```
 
 #### Set SWA Administrator Sets Username and Password
-{:.api .api-operation}
+
 
 Configures the `ADMIN_SETS_CREDENTIALS` scheme for a SWA application with a username template
 
 ##### Request Example
-{:.api .api-request .api-request-example}
+
 
 ```bash
 curl -v -X PUT \
@@ -2188,7 +2188,7 @@ curl -v -X PUT \
 ```
 
 ##### Response Example
-{:.api .api-response .api-response-example}
+
 
 ```json
 {
@@ -2254,12 +2254,12 @@ curl -v -X PUT \
 ```
 
 #### Set SWA User-Editable Password
-{:.api .api-operation}
+
 
 Configures the `EDIT_PASSWORD_ONLY` scheme for a SWA application with a username template
 
 ##### Request Example
-{:.api .api-request .api-request-example}
+
 
 ```bash
 curl -v -X PUT \
@@ -2305,7 +2305,7 @@ curl -v -X PUT \
 ```
 
 ##### Response Example
-{:.api .api-response .api-response-example}
+
 
 ```json
 {
@@ -2371,12 +2371,12 @@ curl -v -X PUT \
 ```
 
 #### Set SWA Okta Password
-{:.api .api-operation}
+
 
 Configures the `EXTERNAL_PASSWORD_SYNC` scheme for a SWA application with a username template
 
 ##### Request Example
-{:.api .api-request .api-request-example}
+
 
 ```bash
 curl -v -X PUT \
@@ -2422,7 +2422,7 @@ curl -v -X PUT \
 ```
 
 ##### Response Example
-{:.api .api-response .api-response-example}
+
 
 ```json
 {
@@ -2488,12 +2488,12 @@ curl -v -X PUT \
 ```
 
 #### Set SWA Shared Credentials
-{:.api .api-operation}
+
 
 Configures the `SHARED_USERNAME_AND_PASSWORD` scheme for a SWA application with a username and password
 
 ##### Request Example
-{:.api .api-request .api-request-example}
+
 
 ```bash
 curl -v -X PUT \
@@ -2543,7 +2543,7 @@ curl -v -X PUT \
 ```
 
 ##### Response Example
-{:.api .reponse}
+
 
 ```json
 {
@@ -2611,24 +2611,24 @@ curl -v -X PUT \
 ```
 
 #### Update Key Credential for Application
-{:.api .api-operation}
+
 
 Update [application key credential](#application-key-credential-model) by `kid`
 
 ##### Request Parameters
-{:.api .api-request .api-request-params}
+
 
 Parameter     | Description                                                             | Param Type | DataType                                      | Required | Default
 applicationId           | `id` of an [app](#application-model)                         | URL        | String                                        | TRUE     |
 app           | app with new key credential kid                                         | Body       | [Application](#application-model)             | FALSE    |
 
 ##### Response Parameters
-{:.api .api-response .api-response-params}
+
 
 [Application](#application-model) with updated `kid`.
 
 ##### Request Example
-{:.api .api-request .api-request-example}
+
 
 ```bash
 curl -v -X PUT \
@@ -2652,7 +2652,7 @@ curl -v -X PUT \
 ```
 
 ##### Response Example
-{:.api .api-response .api-response-example}
+
 
 ```json
 {
@@ -2746,7 +2746,7 @@ curl -v -X PUT \
 ```
 
 #### Set Self-Service Application Assignment
-{:.api .api-operation}
+
 
 Enable or disable self-service application assignment by modifying the `accessibility.selfService` property.
 
@@ -2793,27 +2793,27 @@ Content-Type: application/json
 ```
 
 ### Delete Application
-{:.api .api-operation}
 
-{% api_operation delete /api/v1/apps/${applicationId} %}
+
+<ApiOperation method="delete" url="/api/v1/apps/${applicationId}" />
 
 Removes an inactive application.
 
 > Applications must be deactivated before they can be deleted
 
 ##### Request Parameters
-{:.api .api-request .api-request-params}
+
 
 Parameter | Description         | Param Type | DataType | Required | Default
 applicationId       | `id` of an app to delete | URL        | String   | TRUE     |
 
 ##### Response Parameters
-{:.api .api-response .api-response-params}
+
 
 An empty JSON object `{}`
 
 ##### Request Example
-{:.api .api-request .api-request-example}
+
 
 ```bash
 curl -v -X DELETE \
@@ -2824,7 +2824,7 @@ curl -v -X DELETE \
 ```
 
 ##### Response Example
-{:.api .api-response .api-response-example}
+
 
 ``` http
 HTTP/1.1 204 No Content
@@ -2852,25 +2852,25 @@ Content-Type: application/json
 ## Application Lifecycle Operations
 
 ### Activate Application
-{:.api .api-operation}
 
-{% api_operation post /api/v1/apps/${applicationId}/lifecycle/activate %}
+
+<ApiOperation method="post" url="/api/v1/apps/${applicationId}/lifecycle/activate" />
 
 Activates an inactive application.
 
 ##### Request Parameters
-{:.api .api-request .api-request-params}
+
 
 Parameter | Description           | Param Type | DataType | Required | Default
 applicationId       | `id` of an app to activate | URL        | String   | TRUE     |
 
 ##### Response Parameters
-{:.api .api-response .api-response-params}
+
 
 An empty JSON object `{}`
 
 ##### Request Example
-{:.api .api-request .api-request-example}
+
 
 ```bash
 curl -v -X POST \
@@ -2881,32 +2881,32 @@ curl -v -X POST \
 ```
 
 ##### Response Example
-{:.api .api-response .api-response-example}
+
 
 ```json
 {}
 ```
 
 ### Deactivate Application
-{:.api .api-operation}
 
-{% api_operation post /api/v1/apps/${applicationId}/lifecycle/deactivate %}
+
+<ApiOperation method="post" url="/api/v1/apps/${applicationId}/lifecycle/deactivate" />
 
 Deactivates an active application.
 
 ##### Request Parameters
-{:.api .api-request .api-request-params}
+
 
 Parameter | Description               | Param Type | DataType | Required | Default
 applicationId       | `id` of an app to deactivate   | URL        | String   | TRUE     |
 
 ##### Response Parameters
-{:.api .api-response .api-response-params}
+
 
 An empty JSON object `{}`
 
 ##### Request Example
-{:.api .api-request .api-request-example}
+
 
 ```bash
 curl -v -X POST \
@@ -2917,7 +2917,7 @@ curl -v -X POST \
 ```
 
 ##### Response Example
-{:.api .api-response .api-response-example}
+
 
 ```json
 {}
@@ -2926,14 +2926,14 @@ curl -v -X POST \
 ## Application User Operations
 
 ### Assign User to Application for SSO
-{:.api .api-operation}
 
-{% api_operation post /api/v1/apps/${applicationId}/users %}
+
+<ApiOperation method="post" url="/api/v1/apps/${applicationId}/users" />
 
 Assigns a user without a [profile](#application-user-profile-object) to an application for SSO.
 
 ##### Request Parameters
-{:.api .api-request .api-request-params}
+
 
 Parameter | Description                                                            | Param Type | DataType                                    | Required | Default
 applicationId       | `id` of an [app](#application-model)                        | URL        | String                                      | TRUE     |
@@ -2944,12 +2944,12 @@ appuser   | User's [credentials](#application-user-credentials-object) for the a
 > If your SSO application requires a profile but doesn't have provisioning enabled, you should add a profile to the request and use the [Assign User to Application for SSO & Provisioning](#assign-user-to-application-for-sso--provisioning) operation
 
 ##### Response Parameters
-{:.api .api-response .api-response-params}
+
 
 [Application User](#application-user-model)
 
 ##### Request Example
-{:.api .api-request .api-request-example}
+
 
 ```bash
 curl -v -X POST \
@@ -2969,7 +2969,7 @@ curl -v -X POST \
 ```
 
 ##### Response Example
-{:.api .api-response .api-response-example}
+
 
 ```json
 {
@@ -2999,14 +2999,14 @@ curl -v -X POST \
 ```
 
 ### Assign User to Application for SSO & Provisioning
-{:.api .api-operation}
 
-{% api_operation post /api/v1/apps/${applicationId}/users %}
+
+<ApiOperation method="post" url="/api/v1/apps/${applicationId}/users" />
 
 Assigns an user to an application with [credentials](#application-user-credentials-object) and an app-specific [profile](#application-user-profile-object). Profile mappings defined for the application are first applied before applying any profile properties specified in the request.
 
 ##### Request Parameters
-{:.api .api-request .api-request-params}
+
 
 Parameter | Description                                                                                                            | Param Type | DataType                                    | Required | Default
 applicationId       | `id` of an [app](#application-model)                                                                        | URL        | String                                      | TRUE     |
@@ -3017,7 +3017,7 @@ appuser   | user's [credentials](#application-user-credentials-object) and [prof
 > *You can only specify profile properties that are not defined by profile mappings when Universal Directory is enabled.*
 
 ##### Response Parameters
-{:.api .api-response .api-response-params}
+
 
 [Application User](#application-user-model) with user profile mappings applied
 
@@ -3036,7 +3036,7 @@ Your request is rejected with a `403 Forbidden` status for applications with the
 ```
 
 ##### Request Example
-{:.api .api-request .api-request-example}
+
 
 ```bash
 curl -v -X POST \
@@ -3060,7 +3060,7 @@ curl -v -X POST \
 ```
 
 ##### Response Example
-{:.api .api-response .api-response-example}
+
 
 ```json
 {
@@ -3101,26 +3101,26 @@ curl -v -X POST \
 ```
 
 ### Get Assigned User for Application
-{:.api .api-operation}
 
-{% api_operation get /api/v1/apps/${applicationId}/users/${userId} %}
+
+<ApiOperation method="get" url="/api/v1/apps/${applicationId}/users/${userId}" />
 
 Fetches a specific user assignment for application by `id`.
 
 ##### Request Parameters
-{:.api .api-request .api-request-params}
+
 
 Parameter | Description                                     | Param Type | DataType | Required | Default
 applicationId       | `id` of an [app](#application-model) | URL        | String   | TRUE     |
 uid       | unique key of assigned [User](/docs/api/resources/users)       | URL        | String   | TRUE     |
 
 ##### Response Parameters
-{:.api .api-response .api-response-params}
+
 
 [Application User](#application-user-model)
 
 ##### Request Example
-{:.api .api-request .api-request-example}
+
 
 ```bash
 curl -v -X GET \
@@ -3131,7 +3131,7 @@ curl -v -X GET \
 ```
 
 ##### Response Example
-{:.api .api-response .api-response-example}
+
 
 ```json
 {
@@ -3172,14 +3172,14 @@ curl -v -X GET \
 ```
 
 ### List Users Assigned to Application
-{:.api .api-operation}
 
-{% api_operation get /api/v1/apps/${applicationId}/users %}
+
+<ApiOperation method="get" url="/api/v1/apps/${applicationId}/users" />
 
 Enumerates all assigned [application users](#application-user-model) for an application.
 
 ##### Request Parameters
-{:.api .api-request .api-request-params}
+
 
 Parameter | Description                                                      | Param Type | DataType | Required | Default
 applicationId       | `id` of an [app](#application-model)                  | URL        | String   | TRUE     |
@@ -3189,12 +3189,12 @@ after     | specifies the pagination cursor for the next page of assignments | Q
 > The page cursor should treated as an opaque value and obtained through the next link relation. See [Pagination](/docs/api/getting_started/design_principles#pagination)
 
 ##### Response Parameters
-{:.api .api-response .api-response-params}
+
 
 Array of [Application Users](#application-user-model)
 
 ##### Request Example
-{:.api .api-request .api-request-example}
+
 
 ```bash
 curl -v -X GET \
@@ -3205,7 +3205,7 @@ curl -v -X GET \
 ```
 
 ##### Response Example
-{:.api .api-response .api-response-example}
+
 
 ```json
 [
@@ -3281,14 +3281,14 @@ curl -v -X GET \
 ```
 
 ### Update Application Credentials for Assigned User
-{:.api .api-operation}
 
-{% api_operation post /api/v1/apps/${applicationId}/users/${userId} %}
+
+<ApiOperation method="post" url="/api/v1/apps/${applicationId}/users/${userId}" />
 
 Updates a user's [credentials](#application-user-credentials-object) for an assigned application
 
 ##### Request Parameters
-{:.api .api-request .api-request-params}
+
 
 Parameter | Description                                                        | Param Type | DataType                                    | Required | Default
 applicationId       | `id` of an [app](#application-model)                    | URL        | String                                      | TRUE     |
@@ -3296,7 +3296,7 @@ uid       | unique key of a valid [User](/docs/api/resources/users)            |
 appuser   | user's [credentials](#application-user-credentials-object) for app | Body       | [Application User](#application-user-model) | TRUE     |
 
 ##### Response Parameters
-{:.api .api-response .api-response-params}
+
 
 [Application User](#application-user-model)
 
@@ -3317,7 +3317,7 @@ Your request is rejected with a `400 Bad Request` status if you attempt to assig
 ```
 
 ##### Request Example
-{:.api .api-request .api-request-example}
+
 
 ```bash
 curl -v -X POST \
@@ -3335,7 +3335,7 @@ curl -v -X POST \
 ```
 
 ##### Response Example
-{:.api .api-response .api-response-example}
+
 
 ```json
 {
@@ -3366,14 +3366,14 @@ curl -v -X POST \
 ```
 
 ### Update Application Profile for Assigned User
-{:.api .api-operation}
 
-{% api_operation post /api/v1/apps/${applicationId}/users/${userId} %}
+
+<ApiOperation method="post" url="/api/v1/apps/${applicationId}/users/${userId}" />
 
 Updates a user's profile for an application
 
 ##### Request Parameters
-{:.api .api-request .api-request-params}
+
 
 Parameter | Description                                     | Param Type | DataType                                    | Required | Default
 applicationId       | `id` of an [app](#application-model) | URL        | String                                      | TRUE     |
@@ -3381,7 +3381,7 @@ uid       | unique key of a valid [User](/docs/api/resources/users)        | URL
 appuser   | credentials for app                             | Body       | [Application User](#application-user-model) | FALSE    |
 
 ##### Response Parameters
-{:.api .api-response .api-response-params}
+
 
 [Application User](#application-user-model) with user profile mappings applied
 
@@ -3419,7 +3419,7 @@ Okta does not support uploading images via the Apps API.  All operations in this
 ```
 
 ##### Request Example
-{:.api .api-request .api-request-example}
+
 
 ```bash
 curl -v -X POST \
@@ -3438,7 +3438,7 @@ curl -v -X POST \
 ```
 
 ##### Response Example
-{:.api .api-response .api-response-example}
+
 
 ```json
 {
@@ -3479,16 +3479,16 @@ curl -v -X POST \
 ```
 
 ### Remove User from Application
-{:.api .api-operation}
 
-{% api_operation delete /api/v1/apps/${applicationId}/users/${userId} %}
+
+<ApiOperation method="delete" url="/api/v1/apps/${applicationId}/users/${userId}" />
 
 Removes an assignment for a user from an application.
 
 > This is a destructive operation; you cannot recover the user's app profile.  If the app is enabled for provisioning and configured to deactivate users, the user is also deactivated in the target application.
 
 ##### Request Parameters
-{:.api .api-request .api-request-params}
+
 
 Parameter     | Description                                                                           | Param Type | DataType | Required | Default
 applicationId | `id` of an [app](#application-model)                                                  | URL        | String   | TRUE     |
@@ -3496,12 +3496,12 @@ uid           | unique key of assigned [User](/docs/api/resources/users)        
 sendEmail     | Sends a deactivation email to the administrator if `true`.  Default value is `false`. | Query      | Boolean  | FALSE    | FALSE
 
 ##### Response Parameters
-{:.api .api-response .api-response-params}
+
 
 An empty JSON object `{}`
 
 ##### Request Example
-{:.api .api-request .api-request-example}
+
 
 ```bash
 curl -v -X DELETE \
@@ -3512,7 +3512,7 @@ curl -v -X DELETE \
 ```
 
 ##### Response Example
-{:.api .api-response .api-response-example}
+
 
 ```json
 {}
@@ -3521,14 +3521,14 @@ curl -v -X DELETE \
 ## Application Group Operations
 
 ### Assign Group to Application
-{:.api .api-operation}
 
-{% api_operation put /api/v1/apps/${applicationId}/groups/${groupId} %}
+
+<ApiOperation method="put" url="/api/v1/apps/${applicationId}/groups/${groupId}" />
 
 Assigns a group to an application
 
 ##### Request Parameters
-{:.api .api-request .api-request-params}
+
 
 Parameter | Description                                     | Param Type | DataType                                      | Required | Default
 applicationId       | `id` of an [app](#application-model) | URL        | String                                        | TRUE     |
@@ -3536,12 +3536,12 @@ groupId      | unique key of a valid [Group](groups)      | URL        | String 
 appgroup  | App group                                       | Body       | [Application Group](#application-group-model) | FALSE    |
 
 ##### Response Parameters
-{:.api .api-response .api-response-params}
+
 
 All responses return the assigned [Application Group](#application-group-model).
 
 ##### Request Example
-{:.api .api-request .api-request-example}
+
 
 ```bash
 curl -v -X PUT \
@@ -3553,7 +3553,7 @@ curl -v -X PUT \
 ```
 
 ##### Response Example
-{:.api .api-response .api-response-example}
+
 
 ```json
 {
@@ -3564,26 +3564,26 @@ curl -v -X PUT \
 ```
 
 ### Get Assigned Group for Application
-{:.api .api-operation}
 
-{% api_operation get /api/v1/apps/${applicationId}/groups/${groupId} %}
+
+<ApiOperation method="get" url="/api/v1/apps/${applicationId}/groups/${groupId}" />
 
 Fetches an application group assignment
 
 ##### Request Parameters
-{:.api .api-request .api-request-params}
+
 
 Parameter | Description                                     | Param Type | DataType | Required | Default
 applicationId       | `id` of an [app](#application-model) | URL        | String   | TRUE     |
 groupId      | unique key of an assigned [Group](groups)  | URL        | String   | TRUE     |
 
 ##### Response Parameters
-{:.api .api-response .api-response-params}
+
 
 Fetched [Application Group](#application-group-model)
 
 ##### Request Example
-{:.api .api-request .api-request-example}
+
 
 ```bash
 curl -v -X GET \
@@ -3594,7 +3594,7 @@ curl -v -X GET \
 ```
 
 ##### Response Example
-{:.api .api-response .api-response-example}
+
 
 ```json
 {
@@ -3605,14 +3605,14 @@ curl -v -X GET \
 ```
 
 ### List Groups Assigned to Application
-{:.api .api-operation}
 
-{% api_operation get /api/v1/apps/${applicationId}/groups %}
+
+<ApiOperation method="get" url="/api/v1/apps/${applicationId}/groups" />
 
 Enumerates group assignments for an application.
 
 ##### Request Parameters
-{:.api .api-request .api-request-params}
+
 
 Parameter | Description                                                      | Param Type | DataType | Required | Default
 applicationId       | `id` of an [app](#application-model)                  | URL        | String   | TRUE     |
@@ -3622,12 +3622,12 @@ after     | Specifies the pagination cursor for the next page of assignments | Q
 > The page cursor should treated as an opaque value and obtained through the next link relation. See [Pagination](/docs/api/getting_started/design_principles#pagination)
 
 ##### Response Parameters
-{:.api .api-response .api-response-params}
+
 
 Array of [Application Groups](#application-group-model)
 
 ##### Request Example
-{:.api .api-request .api-request-example}
+
 
 ```bash
 curl -v -X GET \
@@ -3638,7 +3638,7 @@ curl -v -X GET \
 ```
 
 ##### Response Example
-{:.api .api-response .api-response-example}
+
 
 ```json
 [
@@ -3656,26 +3656,26 @@ curl -v -X GET \
 ```
 
 ### Remove Group from Application
-{:.api .api-operation}
 
-{% api_operation delete /api/v1/apps/${applicationId}/groups/${groupId} %}
+
+<ApiOperation method="delete" url="/api/v1/apps/${applicationId}/groups/${groupId}" />
 
 Removes a group assignment from an application.
 
 ##### Request Parameters
-{:.api .api-request .api-request-params}
+
 
 Parameter | Description                                     | Param Type | DataType | Required | Default
 applicationId       | `id` of an [app](#application-model) | URL        | String   | TRUE     |
 groupId      | unique key of an assigned [Group](groups)  | URL        | String   | TRUE     |
 
 ##### Response Parameters
-{:.api .api-response .api-response-params}
+
 
 An empty JSON object `{}`
 
 ##### Request Example
-{:.api .api-request .api-request-example}
+
 
 ```bash
 curl -v -X DELETE \
@@ -3686,7 +3686,7 @@ curl -v -X DELETE \
 ```
 
 ##### Response Example
-{:.api .api-response .api-response-example}
+
 
 ```json
 {}
@@ -3695,28 +3695,28 @@ curl -v -X DELETE \
 ## Application Key Store Operations
 
 ### Generate New Application Key Credential
-{:.api .api-operation}
 
-{% api_operation post /api/v1/apps/${applicationId}/credentials/keys/generate %}
+
+<ApiOperation method="post" url="/api/v1/apps/${applicationId}/credentials/keys/generate" />
 
 Generates a new X.509 certificate for an application key credential
 
 > To update application with the newly generated key credential, see [Update Key Credential](#update-key-credential-for-application)
 
 ##### Request Parameters
-{:.api .api-request .api-request-params}
+
 
 Parameter     | Description                                                                     | Param Type | DataType                                      | Required | Default
 applicationId          | unique key of [Application](#application-model)                                 | URL        | String                                        | TRUE     |
 validityYears | expiry of the [Application Key Credential](#application-key-credential-model)   | Query      | Number                                        | TRUE     |
 
 ##### Response Parameters
-{:.api .api-response .api-response-params}
+
 
 Return the generated [Application Key Credential](#application-key-credential-model).
 
 ##### Request Example
-{:.api .api-request .api-request-example}
+
 
 ```bash
 curl -v -X POST \
@@ -3728,7 +3728,7 @@ curl -v -X POST \
 ```
 
 ##### Response Example
-{:.api .api-response .api-response-example}
+
 
 ```http
 HTTP/1.1 201 Created
@@ -3770,9 +3770,9 @@ Content-Type: application/json
 ```
 
 ### Clone Application Key Credential
-{:.api .api-operation}
 
-{% api_operation post /api/v1/apps/${sourceApplicationId}/credentials/keys/${kid}/clone?targetAid=${targetApplicationId} %}
+
+<ApiOperation method="post" url="/api/v1/apps/${sourceApplicationId}/credentials/keys/${kid}/clone?targetAid=${targetApplicationId}" />
 
 Clones a X.509 certificate for an application key credential from a source application to target application.
 
@@ -3781,7 +3781,7 @@ Clones a X.509 certificate for an application key credential from a source appli
 For step-by-step instructions to clone a credential, see [Share Application Key Credentials Between Apps](/docs/how-to/sharing-cert).
 
 ##### Request Parameters
-{:.api .api-request .api-request-params}
+
 
 Parameter     | Description                                                                     | Param Type | DataType                                      | Required | Default
 sourceApplicationId          | Unique key of the source [Application](#application-properties)                                 | URL        | String                                        | TRUE     |
@@ -3789,12 +3789,12 @@ kid          | Unique key of [Application Key Credential](#application-key-crede
 targetAid |  Unique key of the target [Application](#application-properties)   | Query      | String                                        | TRUE     |
 
 ##### Response Parameters
-{:.api .api-response .api-response-params}
+
 
 Returns the cloned [Application Key Credential](#application-key-credential-model).
 
 ##### Request Example
-{:.api .api-request .api-request-example}
+
 
 ```bash
 curl -v -X POST \
@@ -3806,7 +3806,7 @@ curl -v -X POST \
 ```
 
 ##### Response Example
-{:.api .api-response .api-response-example}
+
 
 ```http
 HTTP/1.1 201 Created
@@ -3848,25 +3848,25 @@ Content-Type: application/json
 ```
 
 ### List Key Credentials for Application
-{:.api .api-operation}
 
-{% api_operation get /api/v1/apps/${applicationId}/credentials/keys %}
+
+<ApiOperation method="get" url="/api/v1/apps/${applicationId}/credentials/keys" />
 
 Enumerates key credentials for an application
 
 ##### Request Parameters
-{:.api .api-request .api-request-params}
+
 
 Parameter     | Description                                     | Param Type | DataType                                      | Required | Default
 applicationId          | unique key of [Application](#application-model) | URL        | String                                        | TRUE     |
 
 ##### Response Parameters
-{:.api .api-response .api-response-params}
+
 
 Array of [Application Key Credential](#application-key-credential-model).
 
 ##### Request Example
-{:.api .api-request .api-request-example}
+
 
 ```bash
 curl -v -X GET \
@@ -3877,7 +3877,7 @@ curl -v -X GET \
 ```
 
 ##### Response Example
-{:.api .api-response .api-response-example}
+
 
 ```json
 [
@@ -3911,26 +3911,26 @@ curl -v -X GET \
 ```
 
 ### Get Key Credential for Application
-{:.api .api-operation}
 
-{% api_operation get /api/v1/apps/${applicationId}/credentials/keys/${kid} %}
+
+<ApiOperation method="get" url="/api/v1/apps/${applicationId}/credentials/keys/${kid}" />
 
 Gets a specific [application key credential](#application-key-credential-model) by `kid`
 
 ##### Request Parameters
-{:.api .api-request .api-request-params}
+
 
 Parameter     | Description                                                                     | Param Type | DataType                                      | Required | Default
 applicationId          | unique key of [Application](#application-model)                                 | URL        | String                                        | TRUE     |
 kid          | unique key of [Application Key Credential](#application-key-credential-model)   | URL        | String                                        | TRUE     |
 
 ##### Response Parameters
-{:.api .api-response .api-response-params}
+
 
 [Application Key Credential](#application-key-credential-model).
 
 ##### Request Example
-{:.api .api-request .api-request-example}
+
 
 ```bash
 curl -v -X GET \
@@ -3941,7 +3941,7 @@ curl -v -X GET \
 ```
 
 ##### Response Example
-{:.api .api-response .api-response-example}
+
 
 ```json
 {
@@ -3960,26 +3960,26 @@ curl -v -X GET \
 ```
 
 ### Preview SAML metadata for Application
-{:.api .api-operation}
 
-{% api_operation get /api/v1/apps/${applicationId}/sso/saml/metadata %}
+
+<ApiOperation method="get" url="/api/v1/apps/${applicationId}/sso/saml/metadata" />
 
 Preview SAML metadata based on a specific key credential for an application
 
 ##### Request Parameters
-{:.api .api-request .api-request-params}
+
 
 Parameter     | Description                                                                     | Param Type | DataType                                      | Required | Default
 applicationId          | unique key of [Application](#application-model)                                 | URL        | String                                        | TRUE     |
 kid          | unique key of [Application Key Credential](#application-key-credential-model)   | Query      | String                                        | TRUE     |
 
 ##### Response Parameters
-{:.api .api-response .api-response-params}
+
 
 SAML metadata in XML
 
 ##### Request Example
-{:.api .api-request .api-request-example}
+
 
 ```bash
 curl -v -X GET \
@@ -3990,7 +3990,7 @@ curl -v -X GET \
 ```
 
 ##### Response Example
-{:.api .api-response .api-response-example}
+
 
 ```
 <?xml version="1.0" encoding="UTF-8"?>
@@ -4028,28 +4028,28 @@ YoEdncuy+GQGzE9yLOhC4HNfHQXpqp2tMPdRlw==</ds:X509Certificate>
 ```
 
 ### Generate CSR for Application
-{:.api .api-operation}
 
-{% api_operation post /api/v1/apps/${applicationId}/credentials/csrs  %}
+
+<ApiOperation method="post" url="/api/v1/apps/${applicationId}/credentials/csrs " />
 
 Generates a new key pair and returns the Certificate Signing Request for it.
 
 > The key pair isn't listed in the [Key Credentials for Application](#list-key-credentials-for-application) until it is published.
 
 ##### Request Parameters
-{:.api .api-request .api-request-params}
+
 
 Parameter     | Description                                                                     | Param Type | DataType                                      | Required | Default
 applicationId          | unique key of [Application](#application-model)                                 | URL        | String                                        | TRUE     |
 metadata      | Metadata for the CSR                                                            | Body       | [CSR Metadata](#csr-metadata-object)                 | TRUE     |
 
 ##### Response Parameters
-{:.api .api-response .api-response-params}
+
 
 Return CSR in PKCS#10 format if the ``Accept`` media type is [application/pkcs10](https://tools.ietf.org/html/rfc5967); or a [CSR model](#application-csr-model) if the ``Accept`` media type is ``application/json``.
 
 ##### Request Example
-{:.api .api-request .api-request-example}
+
 
 Generate a new key pair and return the CSR in PKCS#10 format:
 ```bash
@@ -4093,7 +4093,7 @@ curl -v -X POST \
 }' "https://{yourOktaDomain}/api/v1/apps/0oad5lTSBOMUBOBVVQSC/credentials/csrs/"
 ```
 ##### Response Example
-{:.api .api-response .api-response-example}
+
 
 Return CSR in PKCS#10 format:
 ```http
@@ -4140,16 +4140,16 @@ Content-Type: application/json
 ```
 
 ### Publish CSR for Application
-{:.api .api-operation}
 
-{% api_operation post /api/v1/apps/${applicationId}/credentials/csrs/${csrModelId}/lifecycle/publish  %}
+
+<ApiOperation method="post" url="/api/v1/apps/${applicationId}/credentials/csrs/${csrModelId}/lifecycle/publish " />
 
 Update the CSR with a signed X.509 certificate and add it into the application key credentials.
 
 > Publishing a certificate will complete the lifecycle of the CSR and it will no longer be accessible.
 
 ##### Request Parameters
-{:.api .api-request .api-request-params}
+
 
 Parameter     | Description                                                                     | Param Type | DataType                                      | Required | Default
 applicationId          | Unique key of the [Application](#application-properties)                        | URL        | String                                        | TRUE     |
@@ -4159,12 +4159,12 @@ certificate   | The signed X.509 certificate                                    
 For ``DER`` and ``CER`` formated certificate, the client can either post in binary or in base64 encoded. If the post is base64 encoded, the ``Content-Transfer-Encoding`` header should be set to ``base64``.
 
 ##### Response Parameters
-{:.api .api-response .api-response-params}
+
 
 Returns the new [Application Key Credential](#application-key-credential-model).
 
 ##### Request Example
-{:.api .api-request .api-request-example}
+
 
 Publish with X.509 certificate in base64 encoded ``DER``:
 
@@ -4201,7 +4201,7 @@ curl -v -X POST \
 ```
 
 ##### Response Example
-{:.api .api-response .api-response-example}
+
 
 ```http
 HTTP/1.1 201 Created
@@ -4244,26 +4244,26 @@ Content-Type: application/json
 ```
 
 ### Revoke CSR from Application
-{:.api .api-operation}
 
-{% api_operation delete /api/v1/apps/${applicationId}/credentials/csrs/${csrModelId} %}
+
+<ApiOperation method="delete" url="/api/v1/apps/${applicationId}/credentials/csrs/${csrModelId}" />
 
 Revoke a CSR and delete the key pair from the Application.
 
 ##### Request Parameters
-{:.api .api-request .api-request-params}
+
 
 Parameter | Description                                     | Param Type | DataType | Required | Default
 applicationId       | `id` of an [app](#application-model) | URL        | String   | TRUE     |
 csrid     | unique key of [CSR model](#application-csr-model) | URL      | String   | TRUE     |
 
 ##### Response Parameters
-{:.api .api-response .api-response-params}
+
 
 Empty response.
 
 ##### Request Example
-{:.api .api-request .api-request-example}
+
 
 ```bash
 curl -v -X DELETE \
@@ -4274,32 +4274,32 @@ curl -v -X DELETE \
 ```
 
 ##### Response Example
-{:.api .api-response .api-response-example}
+
 
 ```http
 HTTP/1.1 204 No Content
 ```
 
 ### List CSRs for Application
-{:.api .api-operation}
 
-{% api_operation get /api/v1/apps/${applicationId}/credentials/csrs %}
+
+<ApiOperation method="get" url="/api/v1/apps/${applicationId}/credentials/csrs" />
 
 Enumerates CSRs for an application
 
 ##### Request Parameters
-{:.api .api-request .api-request-params}
+
 
 Parameter     | Description                                     | Param Type | DataType                                      | Required | Default
 applicationId          | unique key of [Application](#application-model) | URL        | String                                        | TRUE     |
 
 ##### Response Parameters
-{:.api .api-response .api-response-params}
+
 
 Array of [CSR models](#application-csr-model)
 
 ##### Request Example
-{:.api .api-request .api-request-example}
+
 
 ```bash
 curl -v -X GET \
@@ -4310,7 +4310,7 @@ curl -v -X GET \
 ```
 
 ##### Response Example
-{:.api .api-response .api-response-example}
+
 
 ```json
 [
@@ -4368,26 +4368,26 @@ curl -v -X GET \
 ```
 
 ### Get CSR for Application
-{:.api .api-operation}
 
-{% api_operation get /api/v1/apps/${applicationId}/credentials/csrs/${csrModelId} %}
+
+<ApiOperation method="get" url="/api/v1/apps/${applicationId}/credentials/csrs/${csrModelId}" />
 
 Gets a specific [CSR model](#application-csr-model) by `csrid`
 
 ##### Request Parameters
-{:.api .api-request .api-request-params}
+
 
 Parameter     | Description                                                                     | Param Type | DataType                                      | Required | Default
 applicationId          | unique key of [Application](#application-model)                                 | URL        | String                                        | TRUE     |
 csrid         | unique key of [CSR model](#application-csr-model)                               | URL        | String                                        | TRUE     |
 
 ##### Response Parameters
-{:.api .api-response .api-response-params}
+
 
 Return base64 encoded CSR in DER format if the ``Accept`` media type is ``application/pkcs10``; or a CSR model if the ``Accept`` media type is ``application/json``.
 
 ##### Request Example
-{:.api .api-request .api-request-example}
+
 
 ```bash
 curl -v -X GET \
@@ -4398,7 +4398,7 @@ curl -v -X GET \
 ```
 
 ##### Response Example
-{:.api .api-response .api-response-example}
+
 
 ```json
 {
@@ -4433,16 +4433,16 @@ curl -v -X GET \
 {% api_lifecycle ea %}
 
 ### List OAuth 2.0 Tokens for Application
-{:.api .api-operation}
+
 
 {% api_lifecycle ea %}
 
-{% api_operation get /api/v1/apps/${applicationId}/tokens %}
+<ApiOperation method="get" url="/api/v1/apps/${applicationId}/tokens" />
 
 Lists all tokens for the application
 
 #### Request Parameters
-{:.api .api-request .api-request-params}
+
 
 | Parameter     | Description                                                                                  | Param Type | DataType | Required | Default |
 |:--------------|:---------------------------------------------------------------------------------------------|:-----------|:---------|:---------|:--------|
@@ -4456,7 +4456,7 @@ Lists all tokens for the application
 * The maximum value for `limit` is 200.
 
 #### Request Example
-{:.api .api-request .api-request-example}
+
 
 ```bash
 curl -v -X GET \
@@ -4467,7 +4467,7 @@ curl -v -X GET \
 ```
 
 #### Response Example
-{:.api .api-response .api-response-example}
+
 
 ```json
 [
@@ -4518,16 +4518,16 @@ curl -v -X GET \
 ```
 
 ### Get OAuth 2.0 Token for Application
-{:.api .api-operation}
+
 
 {% api_lifecycle ea %}
 
-{% api_operation get /api/v1/${applicationId}/tokens/${tokenId} %}
+<ApiOperation method="get" url="/api/v1/${applicationId}/tokens/${tokenId}" />
 
 Gets a token for the specified application
 
 #### Request Parameters
-{:.api .api-request .api-request-params}
+
 
 | Parameter     | Description                                                                                  | Param Type | DataType | Required | Default |
 |:--------------|:---------------------------------------------------------------------------------------------|:-----------|:---------|:---------|:--------|
@@ -4535,7 +4535,7 @@ Gets a token for the specified application
 | tokenId       | ID of the token                                                                              | URL        | String   | TRUE     |         |
 
 #### Request Example
-{:.api .api-request .api-request-example}
+
 
 ```bash
 curl -v -X GET \
@@ -4546,7 +4546,7 @@ curl -v -X GET \
 ```
 
 #### Response Example
-{:.api .api-response .api-response-example}
+
 
 ```json
 {
@@ -4622,23 +4622,23 @@ curl -v -X GET \
 ```
 
 ### Revoke OAuth 2.0 Tokens for Application
-{:.api .api-operation}
+
 
 {% api_lifecycle ea %}
 
-{% api_operation delete /api/v1/apps/${applicationId}/tokens %}
+<ApiOperation method="delete" url="/api/v1/apps/${applicationId}/tokens" />
 
 Revokes all tokens for the specified application
 
 #### Request Parameters
-{:.api .api-request .api-request-params}
+
 
 | Parameter     | Description                              | Parameter Type | DataType | Required |
 |:--------------|:-----------------------------------------|:---------------|:---------|:---------|
 | applicationId | ID of the application                    | URL            | String   | TRUE     |
 
 #### Request Example
-{:.api .api-request .api-request-example}
+
 
 ```bash
 curl -v -X DELETE \
@@ -4649,23 +4649,23 @@ curl -v -X DELETE \
 ```
 
 #### Response Example
-{:.api .api-response .api-response-example}
+
 
 ```bash
 HTTP/1.1 204 No Content
 ```
 
 ### Revoke OAuth 2.0 Token for Applications
-{:.api .api-operation}
+
 
 {% api_lifecycle ea %}
 
-{% api_operation delete /api/v1/apps/${applicationId}/tokens/${tokenId} %}
+<ApiOperation method="delete" url="/api/v1/apps/${applicationId}/tokens/${tokenId}" />
 
 Revokes the specified token for the specified application
 
 #### Request Parameters
-{:.api .api-request .api-request-params}
+
 
 | Parameter     | Description                              | Parameter Type | DataType | Required |
 |:--------------|:-----------------------------------------|:---------------|:---------|:---------|
@@ -4673,7 +4673,7 @@ Revokes the specified token for the specified application
 | tokenId       | ID of the token                          | URL            | String   | TRUE     |
 
 #### Request Example
-{:.api .api-request .api-request-example}
+
 
 ```bash
 curl -v -X DELETE \
@@ -4684,7 +4684,7 @@ curl -v -X DELETE \
 ```
 
 #### Response Example
-{:.api .api-response .api-response-example}
+
 
 ```bash
 HTTP/1.1 204 No Content
@@ -5234,7 +5234,7 @@ Basic           | urn:oasis:names:tc:SAML:2.0:attrname-format:basic
 ```
 
 ### Profile Object
-{:.api .api-operation}
+
 
 Profile object is a container for any valid JSON schema that can be referenced from a request. For example, add an app manager contact email address, or define a whitelist of groups that you can then reference using the [Okta Expression `getFilteredGroups`](/reference/okta_expression_language/#group-functions).
 
