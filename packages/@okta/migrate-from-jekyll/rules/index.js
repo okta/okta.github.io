@@ -17,8 +17,7 @@ function applyRules(file) {
   file = removeFrontmatterExtra(file)
   file = bookImages(file)
   file = resolveRelativeLinks(file)
-  file = updateResourceMarkdownStrings
-  (file)
+  file = updateResourceMarkdownStrings(file)
 
 
   return file
