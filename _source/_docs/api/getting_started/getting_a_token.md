@@ -23,8 +23,6 @@ If you don't have an Okta organization, you can create a free Okta
 
 5.  Make note of your API token, as you only see it one time.
 
-{% img okta-admin-ui-token.png "Okta Administrator Token UI" alt:"Okta Administrator Token UI" %}
-
 ## Token Expiration
 
 Okta uses a bearer token for API authentication with a sliding scale expiration. Tokens are valid for 30 days and automatically refresh with each API call. Tokens that aren't used for 30 days expire. The token lifetime is currently fixed and can't be changed for your organization.
