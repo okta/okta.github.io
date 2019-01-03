@@ -1358,12 +1358,13 @@ Enumerates apps added to your organization with pagination. A subset of apps can
 Parameter | Description                                                                                                      | Param Type | DataType | Required | Default
 --------- | ---------------------------------------------------------------------------------------------------------------- | ---------- | -------- | -------- | -------
 q         | Searches the `name` or `displayName` property of applications                                                    | Query      | String    | FALSE
-limit     | Specifies the number of results for a page                                                                       | Query      | Number   | FALSE    | 20
+limit     | Specifies the number of results per page (maximum 200)                                                           | Query      | Number   | FALSE    | 20
 filter    | Filters apps by `status`, `user.id`, `group.id` or `credentials.signing.kid` expression                          | Query      | String   | FALSE    |
 after     | Specifies the pagination cursor for the next page of apps                                                        | Query      | String   | FALSE    |
 expand    | Traverses `users` link relationship and optionally embeds [Application User](#application-user-model) resource   | Query      | String   | FALSE    |
 
-> The page cursor should treated as an opaque value and obtained through the next link relation. See [Pagination](/docs/api/getting_started/design_principles#pagination)
+The results will be [paginated][pagination] according to the `limit` parameter.
+If there are multiple pages of results, the Link header will contain a `next` link, which should be treated as an opaque value (follow it, don't parse it).
 
 ###### Filters
 
@@ -3208,11 +3209,12 @@ Enumerates all assigned [application users](#application-user-model) for an appl
 
 Parameter | Description                                                      | Param Type | DataType | Required | Default
 --------- | ---------------------------------------------------------------- | ---------- | -------- | -------- | -------
-applicationId       | `id` of an [app](#application-model)                  | URL        | String   | TRUE     |
-limit     | specifies the number of results for a page                       | Query      | Number   | FALSE    | 20
-after     | specifies the pagination cursor for the next page of assignments | Query      | String   | FALSE    |
+applicationId       | `id` of an [app](#application-model)                   | URL        | String   | TRUE     |
+limit     | Specifies the number of results per page (maximum 500)           | Query      | Number   | FALSE    | 50
+after     | Specifies the pagination cursor for the next page of assignments | Query      | String   | FALSE    |
 
-> The page cursor should treated as an opaque value and obtained through the next link relation. See [Pagination](/docs/api/getting_started/design_principles#pagination)
+The results will be [paginated][pagination] according to the `limit` parameter.
+If there are multiple pages of results, the Link header will contain a `next` link, which should be treated as an opaque value (follow it, don't parse it).
 
 ##### Response Parameters
 {:.api .api-response .api-response-params}
@@ -3647,11 +3649,12 @@ Enumerates group assignments for an application.
 
 Parameter | Description                                                      | Param Type | DataType | Required | Default
 --------- | ---------------------------------------------------------------- | ---------- | -------- | -------- | -------
-applicationId       | `id` of an [app](#application-model)                  | URL        | String   | TRUE     |
-limit     | Specifies the number of results for a page                       | Query      | Number   | FALSE    | 20
+applicationId       | `id` of an [app](#application-model)                   | URL        | String   | TRUE     |
+limit     | Specifies the number of results per page (maximum 200)           | Query      | Number   | FALSE    | 20
 after     | Specifies the pagination cursor for the next page of assignments | Query      | String   | FALSE    |
 
-> The page cursor should treated as an opaque value and obtained through the next link relation. See [Pagination](/docs/api/getting_started/design_principles#pagination)
+The results will be [paginated][pagination] according to the `limit` parameter.
+If there are multiple pages of results, the Link header will contain a `next` link, which should be treated as an opaque value (follow it, don't parse it).
 
 ##### Response Parameters
 {:.api .api-response .api-response-params}
@@ -4491,12 +4494,12 @@ Lists all tokens for the application
 |:--------------|:---------------------------------------------------------------------------------------------|:-----------|:---------|:---------|:--------|
 | applicationId | ID of the application                                                                        | URL        | String   | TRUE     |         |
 | expand        | Valid value: `scope`. If specified, scope details are included in the `_embedded` attribute. | Query      | String   | FALSE    |         |
-| limit         | The maximum number of tokens to return                                                       | Query      | Number   | FALSE    | 20      |
+| limit         | Specifies the number of results per page (maximum 200)                                       | Query      | Number   | FALSE    | 20      |
 | after         | Specifies the pagination cursor for the next page of tokens                                  | Query      | String   | FALSE    |         |
 
-> Note: The after cursor should treated as an opaque value and obtained through [the next link relation](/docs/api/getting_started/design_principles#pagination).
+The results will be [paginated][pagination] according to the `limit` parameter.
+If there are multiple pages of results, the Link header will contain a `next` link, which should be treated as an opaque value (follow it, don't parse it).
 
-* The maximum value for `limit` is 200.
 
 #### Request Example
 {:.api .api-request .api-request-example}
@@ -5638,3 +5641,6 @@ The application CSR model defines a certificate signing request for a signature 
 | kty              | cryptographic algorithm family for the CSR's keypair         | String                                                                      | FALSE    | FALSE  | TRUE     |           |           |            |
 | _links           | discoverable resources related to the CSR                    | [JSON HAL](http://tools.ietf.org/html/draft-kelly-json-hal-05)              | TRUE     | FALSE  | TRUE     |           |           |            |
 |------------------+--------------------------------------------------------------+-----------------------------------------------------------------------------|----------|--------|----------|-----------|-----------+------------|
+
+
+[pagination]: /docs/api/getting_started/design_principles#pagination
