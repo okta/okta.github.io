@@ -1,8 +1,6 @@
 ---
 layout: docs_page
-weight: 2
 title: Inline Hooks Overview
-excerpt: Using inline hooks to integrate custom functionality into Okta process flows
 ---
 
 # Inline Hooks Concepts
@@ -13,7 +11,7 @@ excerpt: Using inline hooks to integrate custom functionality into Okta process 
 
 Inline hooks are outbound calls from Okta to your own custom code, triggered at specific points in Okta process flows. They allow you to integrate custom functionality into those Okta process flows.
 
-You implement your custom code as a web service with an Internet-accessible endpoint. It’s your responsibility to arrange hosting of your code on a system external to Okta. Okta defines the REST API contract for the requests it sends to your custom code, as well as for the responses your custom code can send back. 
+You implement your custom code as a web service with an Internet-accessible endpoint. It's your responsibility to arrange hosting of your code on a system external to Okta. Okta defines the REST API contract for the requests it sends to your custom code, as well as for the responses your custom code can send back. 
 
 The outbound call from Okta is called a hook. Your code, which receives the call, is referred to as your external service.
 
@@ -47,7 +45,7 @@ The graphic below illustrates the position of an extension point within an Okta 
 
 ### Request and Response Overview
 
-Okta’s request to your endpoint consists of an HTTPS POST request with a JSON payload. The objects included in the JSON payload provide data relevant to the process flow that triggered the inline hook. The objects included vary depending on the type of inline hook you're using.
+Okta's request to your endpoint consists of an HTTPS POST request with a JSON payload. The objects included in the JSON payload provide data relevant to the process flow that triggered the inline hook. The objects included vary depending on the type of inline hook you're using.
 
 {% img hook-request-response.png "Hook Request and Response" alt:"Hook Request and Response" %}
 
@@ -86,7 +84,7 @@ The following are some of the objects that can be included in the request, depen
 
 #### user
 
-For process flows that involve a specific end user, this object provides the values of attributes in the user’s Okta profile. In the case of a user attempting to register using the Self-Service Registration widget, the values provided are those the user entered in the widget’s fields. Password fields, and any attributes designated sensitive, are not included.
+For process flows that involve a specific end user, this object provides the values of attributes in the user's Okta profile. In the case of a user attempting to register using the Self-Service Registration widget, the values provided are those the user entered in the widget's fields. Password fields, and any attributes designated sensitive, are not included.
 
 #### authentication
 
