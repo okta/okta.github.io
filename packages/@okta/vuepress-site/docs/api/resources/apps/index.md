@@ -4030,7 +4030,7 @@ YoEdncuy+GQGzE9yLOhC4HNfHQXpqp2tMPdRlw==</ds:X509Certificate>
 ### Generate CSR for Application
 
 
-<ApiOperation method="post" url="/api/v1/apps/${applicationId}/credentials/csrs " />
+{% api_operation post /api/v1/apps/${applicationId}/credentials/csrs  %}
 
 Generates a new key pair and returns the Certificate Signing Request for it.
 
@@ -4142,7 +4142,7 @@ Content-Type: application/json
 ### Publish CSR for Application
 
 
-<ApiOperation method="post" url="/api/v1/apps/${applicationId}/credentials/csrs/${csrModelId}/lifecycle/publish " />
+{% api_operation post /api/v1/apps/${applicationId}/credentials/csrs/${csrModelId}/lifecycle/publish  %}
 
 Update the CSR with a signed X.509 certificate and add it into the application key credentials.
 
