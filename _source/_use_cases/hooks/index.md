@@ -1,6 +1,6 @@
 ---
 layout: docs_page
-title: Inline Hooks Overview
+title: Inline Hooks
 excerpt: Integrate custom functionality into Okta process flows.
 ---
 
