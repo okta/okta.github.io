@@ -6028,6 +6028,18 @@
       "tags" : [ "device-trust-authentication" ],
       "mappings" : [ "user.authentication.authenticate" ]
     }, {
+      "id" : "core.user_auth.authentication.auth_via_saml_idp_failure",
+      "category" : "mobile-device-trust",
+      "description" : "Authentication of device failed via SAML Device Identity Provider (3rd-party MDM). Can be used to identify when a device makes a connection through SAML Identity Provider and is not verified as trusted. Note that the event is fired during SAML Identity Provider connect and the device session is not marked as trusted.",
+      "tags" : [ "device-trust-authentication" ],
+      "mappings" : [ "user.authentication.authenticate" ]
+    }, {
+      "id" : "core.user_auth.authentication.auth_via_saml_idp_success",
+      "category" : "mobile-device-trust",
+      "description" : "Authentication of device succeeded via SAML Device Identity Provider (3rd-party MDM). Can be used to identify when a device makes a connection through SAML Identity Provider and is stamped trusted. Note that the event is fired during SAML Identity Provider connect and the device session is marked as trusted.",
+      "tags" : [ "device-trust-authentication" ],
+      "mappings" : [ "user.authentication.authenticate" ]
+    }, {
       "id" : "core.user_auth.authentication.authenticate",
       "category" : "mobile-device-trust",
       "description" : "Authentication via device trust certificate.",
@@ -12595,7 +12607,7 @@
         "release" : "2017.44"
       },
       "tags" : [ "device-trust-authentication", "user" ],
-      "mappings" : [ "core.user_auth.authentication.auth_via_3rd_party_failure", "core.user_auth.authentication.auth_via_3rd_party_success", "core.user_auth.authentication.auth_via_okta_mobile_failure", "core.user_auth.authentication.auth_via_okta_mobile_success", "core.user_auth.authentication.auth_via_omm_failure", "core.user_auth.authentication.auth_via_omm_success", "core.user_auth.authentication.authenticate" ]
+      "mappings" : [ "core.user_auth.authentication.auth_via_3rd_party_failure", "core.user_auth.authentication.auth_via_3rd_party_success", "core.user_auth.authentication.auth_via_okta_mobile_failure", "core.user_auth.authentication.auth_via_okta_mobile_success", "core.user_auth.authentication.auth_via_omm_failure", "core.user_auth.authentication.auth_via_omm_success", "core.user_auth.authentication.auth_via_saml_idp_failure", "core.user_auth.authentication.auth_via_saml_idp_success", "core.user_auth.authentication.authenticate" ]
     }, {
       "id" : "user.authentication.slo",
       "category" : "federation",

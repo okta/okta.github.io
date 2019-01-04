@@ -50,11 +50,10 @@ curl -v -X POST \
   "name": "Custom",
   "type": "SMS_VERIFY_CODE",
   "template": "${org.name}: your verification code is ${code}",
-  "translations":
-  {
-     "es" : "${org.name}: el código de verificación es ${code}",
-     "fr" : "${org.name}: votre code de vérification est ${code}",
-     "it" : "${org.name}: il codice di verifica è ${code}"
+  "translations": {
+    "es" : "${org.name}: el código de verificación es ${code}",
+    "fr" : "${org.name}: votre code de vérification est ${code}",
+    "it" : "${org.name}: il codice di verifica è ${code}"
   }
 }' "https://{yourOktaDomain}/api/v1/templates/sms"
 ~~~
@@ -214,14 +213,14 @@ curl -v -X PUT \
 -H "Content-Type: application/json" \
 -H "Authorization: SSWS ${api_token}" \
 -d '{
-    "name": "Custom",
-    "type": "SMS_ENROLLMENT_CODE",
-    "template": "${org.name}: your enrollment code is ${code}",
-    "translations": {
-      "it": "${org.name}: il codice di iscrizione è ${code}",
-      "es": "${org.name}: su código de inscripción es ${code}",
-      "de": "${org.name}: ihre anmeldung code ist ${code}"
-    }
+  "name": "Custom",
+  "type": "SMS_ENROLLMENT_CODE",
+  "template": "${org.name}: your enrollment code is ${code}",
+  "translations": {
+    "it": "${org.name}: il codice di iscrizione è ${code}",
+    "es": "${org.name}: su código de inscripción es ${code}",
+    "de": "${org.name}: ihre anmeldung code ist ${code}"
+  }
 }' "https://{yourOktaDomain}/api/v1/templates/sms/${templateId}"
 ~~~
 
@@ -277,10 +276,9 @@ curl -v -X POST \
 -H "Content-Type: application/json" \
 -H "Authorization: SSWS ${api_token}" \
 -d '{
-   "translations":
-   {
-      "de" : "${org.name}: ihre bestätigungscode ist ${code}."
-   }
+  "translations": {
+    "de" : "${org.name}: ihre bestätigungscode ist ${code}."
+  }
 }' "https://{yourOktaDomain}/api/v1/templates/sms/${templateId}"
 ~~~
 
