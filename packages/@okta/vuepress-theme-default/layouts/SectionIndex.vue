@@ -9,12 +9,30 @@
 
     <!-- End Promo Banner -->
 
-
+    <div class="page-content">
+      <section class="PageContent SectionIndex">
     <!-- Begin Page Content -->
+        <div class="PageContent-main">
+          <Breadcrumb></Breadcrumb>
+          <h1>{{ $page.title }}</h1>
+          <ul class="list--with-horizontal-icons">
+            <li v-for="link in $page.frontmatter.top_links" :key="link.path">
+              <router-link :to="link.path"><img :src="'/assets/img/'+link.icon"><span>{{link.name}}</span></router-link>
+            </li>
+          </ul>
 
-    <Content class="PageContent-main"/>
+          <div class="Row">
+            <div class="Column--6 Column--small-12">
+              <Content slot-key="left"></Content>
+            </div>
+            <div class="Column--6 Column--small-12">
+              <Content slot-key="right"></Content>
+            </div>
+          </div>
+        </div>
     <!-- End Page Content -->
-
+      </section>
+    </div>
 
     <!-- Begin Footer -->
     <Footer />
