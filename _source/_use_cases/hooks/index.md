@@ -73,7 +73,7 @@ This is not an Okta authorization token, it is simply a text string you decide o
 
 ### JSON Payload Objects
 
-The JSON payload is where Okta provides specific information about the process flow that's being executed, so that your external service can evaluate the specific situation. Information is encapsulated in JSON objects. The set of objects sent depends on the type of inline hook you are using. Objects are defined in the specific documentation for each kind of inline hook.
+The JSON payload is where Okta provides specific information about the process flow that's being executed, so that your external service can evaluate the specific situation. Information is encapsulated in JSON objects. The set of objects sent depends on the type of inline hook you're using. Objects are defined in the specific documentation for each kind of inline hook.
 
 The objects providing this specific information on the process flow are nested within a large object called `data`.
 
@@ -104,9 +104,9 @@ Your service receives the request from Okta and needs to respond to it. The resp
 You need to return an HTTP status code with your response. Typically, your service should return an HTTP status code of 200 (OK). In inline hook types that support empty responses, HTTP status code 204 (No Content) needs to be provided when sending an empty response.
 
 
-#### Do Not Use HTTP Status Code to Return Information
+#### Don't Use HTTP Status Code to Return Information
 
-Do not use the HTTP status code to return information to Okta regarding problems your service has detected in the data; use an error object sent in the JSON payload of the response. HTTP error codes should not be used unless your service could not parse the request from Okta.
+Don't use the HTTP status code to return information to Okta regarding problems your service has detected in the data; use an error object sent in the JSON payload of the response. HTTP error codes should not be used unless your service could not parse the request from Okta.
 
 ### JSON Payload Objects
 
@@ -116,7 +116,7 @@ You can include any of the following types of objects in the JSON payload:
 
 Lets you return commands to Okta to affect the process flow being executed and to modify values within Okta objects. The available commands differ by inline hook type and are defined in the specific documentation for each inline hook type.
 
-The `commands` object is an array, allowing you to return more than one command in your response. Each element within the array needs to consist of a pair of `type` and value elements. Each `type` element needs to be the name of a supported command you wish to invoke. The corresponding `value` element is the operand you wish to specify for the command.
+The `commands` object is an array, allowing you to return more than one command in your response. Each element within the array needs to consist of a pair of `type` and `value` elements. Each `type` element needs to be the name of a supported command you wish to invoke. The corresponding `value` element is the operand you wish to specify for the command.
 
 The names of commands follow Java-style reverse DNS name format, beginning with com.okta, followed by an Okta object that the command operates on.
 
