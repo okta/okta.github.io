@@ -44,11 +44,11 @@ The graphic below illustrates the position of an extension point within an Okta 
 
 ### Request and Response Overview
 
-Okta's request to your external service consists of an HTTPS POST request with a JSON payload. The objects included in the JSON payload provide data relevant to the process flow that triggered the inline hook. The objects included vary depending on the type of inline hook you're using.
+Okta's request to your external service consists of an HTTPS POST request with a JSON payload. The objects included in the JSON payload provide data relevant to the process flow that triggered the inline hook. The set of objects varies depending the type of inline hook you're using.
 
 {% img hook-request-response.png "Hook Request and Response" alt:"Hook Request and Response" %}
 
-Your service needs to handle the inline hook by responding to Okta's request. The JSON payload of your response contains a `commands` object, in which you can send commands to Okta that affect the course of the Okta process flow or modify Okta objects. The commands that are available vary depending on the type of inline hook you're using. 
+Your service needs to handle the inline hook by responding to Okta's request. The JSON payload of your response contains a `commands` object, in which you can send commands to Okta that affect the course of the Okta process flow, as well as modify Okta objects. The commands that are available vary depending on the type of inline hook you're using. 
 
 ## The Request
 
@@ -106,7 +106,7 @@ You need to return an HTTP status code with your response. Typically, your servi
 
 #### Don't Use HTTP Status Code to Return Information
 
-Don't use the HTTP status code to return information to Okta regarding problems your service has detected in the data; use an error object sent in the JSON payload of the response. HTTP error codes should not be used unless your service could not parse the request from Okta.
+Don't use the HTTP status code to return information to Okta regarding problems your service has detected in the data; use an [error](#error) object sent in the JSON payload of the response. HTTP error codes should not be used unless your service could not parse the request from Okta.
 
 ### JSON Payload Objects
 
