@@ -97,7 +97,6 @@ function alterMarkdownStrings(file) {
 
     if( line.includes('{{ page.support_email }}') ) {
       line = line.replace(/{{ page.support_email }}/g, 'developers@okta.com')
-
     }
 
 
