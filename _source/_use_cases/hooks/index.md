@@ -4,7 +4,7 @@ title: Inline Hooks Overview
 excerpt: Integrate custom functionality into Okta process flows.
 ---
 
-# Inline Hooks Concepts
+# Inline Hooks
 
 {% api_lifecycle ea %}
 
