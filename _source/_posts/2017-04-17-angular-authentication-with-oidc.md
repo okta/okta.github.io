@@ -764,7 +764,7 @@ Login to your Okta account, or [create one](https://developer.okta.com/signup/) 
 Install [Manfred Steyer's](https://github.com/manfredsteyer) project to [add OAuth 2 and OpenID Connect support](https://github.com/manfredsteyer/angular-oauth2-oidc) using npm. You'll also need [rxjs-compat](https://www.npmjs.com/package/rxjs-compat) since this library has not been upgraded to RxJS 6.
 
 ```bash
-npm install angular-oauth2-oidc rxjs-compat
+npm install angular-oauth2-oidc@3.1.4 rxjs-compat@6.1.0
 ```
 
 Modify `src/app/app.component.ts` to import `OAuthService` and configure your app to use your Okta application's settings.
@@ -912,13 +912,13 @@ The Okta Auth SDK builds on top of Okta's [Authentication API](/docs/api/resourc
 Install it using npm:
 
 ```bash
-npm install @okta/okta-auth-js
+npm install @okta/okta-auth-js@1.17.0
 ```
 
 The components in this section use Bootstrap CSS classes. Install Bootstrap 4.
 
 ```bash
-npm install bootstrap
+npm install bootstrap@4.1.1
 ```
 
 Modify `src/styles.css` to add a reference to Bootstrap's CSS file.
@@ -1087,11 +1087,8 @@ You can find a completed version of the application created in this blog post [o
 
 **Changelog:**
 
+* Jan 7, 2018: Updated to lock down the version numbers used. See the article changes in [okta.github.io#2030](https://github.com/okta/okta.github.io/pull/2030).
 * May 8, 2018: Updated to use Angular CLI 6.0, Angular 6.0, and Okta Sign-In Widget 2.8.0. See the code changes in [okta-angular-openid-connect-example#5](https://github.com/oktadeveloper/okta-angular-openid-connect-example/pull/5) and the article changes in [okta.github.io#2030](https://github.com/okta/okta.github.io/pull/2030).
 * Nov 30, 2017: Updated to use Angular CLI 1.5.5 and angular-oauth2-oidc 3.0.1. See the code changes in the [example app on GitHub](https://github.com/oktadeveloper/okta-angular-openid-connect-example/pull/3/files). Changes to this article can be viewed [in this pull request](https://github.com/okta/okta.github.io/pull/1517).
 * Sep 28, 2017: Updated "create an OIDC app" instructions for the [Okta Developer Console](/blog/2017/09/25/all-new-developer-console).
 * Aug 31, 2017: Updated to use Angular CLI 1.3.2 and angular-oauth2-oidc 2.0.12. See the code changes in the [example app on GitHub](https://github.com/oktadeveloper/okta-angular-openid-connect-example/pull/2/files).
-
-
-
-
