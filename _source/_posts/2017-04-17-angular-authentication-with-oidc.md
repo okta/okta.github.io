@@ -1079,9 +1079,15 @@ You should be able to sign in using the form, using one of your app's registered
 
 ## Angular + Okta
 
-If everything works - congrats! If you encountered issues, please post a question to Stack Overflow with an [okta tag](http://stackoverflow.com/questions/tagged/okta), or hit me up on Twitter [@mraible](https://twitter.com/mraible).
+If everything works - congrats! If you encountered issues, please post a question to Stack Overflow with an [okta tag](http://stackoverflow.com/questions/tagged/okta), or hit me up on Twitter [@mraible](https://twitter.com/mraible). 
 
-You can find a completed version of the application created in this blog post [on GitHub](https://github.com/oktadeveloper/okta-angular-openid-connect-example). To learn more about security in Angular, see [Angular's Security documentation](https://angular.io/guide/security). If you'd like to learn more about OpenID Connect, I'd recommend watching the soothing video below.
+You can find a completed version of the application created in this blog post [on GitHub](https://github.com/oktadeveloper/okta-angular-openid-connect-example). You might enjoy the following Angular tutorials too:
+
+* [Build a Basic CRUD App with Angular 7.0 and Spring Boot 2.1](/blog/2018/08/22/basic-crud-angular-7-and-spring-boot-2)
+* [Angular 7: What's New and Noteworthy + OIDC Goodness](/blog/2018/12/04/angular-7-oidc-oauth2-pkce)
+* [Build a Basic CRUD App with Angular and Node](/blog/2018/10/30/basic-crud-angular-and-node)
+
+To learn more about security in Angular, see [Angular's Security documentation](https://angular.io/guide/security). If you'd like to learn more about OpenID Connect, I'd recommend watching the soothing video below.
 
 <div style="max-width: 560px; margin: 0 auto">
 <iframe width="560" height="315" src="https://www.youtube.com/embed/Kb56GzQ2pSk" frameborder="0" allowfullscreen></iframe>
@@ -1089,7 +1095,7 @@ You can find a completed version of the application created in this blog post [o
 
 **Changelog:**
 
-* Jan 7, 2018: Updated to lock down the version numbers used and provide a link for those wanting to use Angular 7. See the article changes in [okta.github.io#2628](https://github.com/okta/okta.github.io/pull/2628).
+* Jan 7, 2018: Updated to lock down the version numbers and provide a link for those wanting to use Angular 7. See the article changes in [okta.github.io#2628](https://github.com/okta/okta.github.io/pull/2628).
 * May 8, 2018: Updated to use Angular CLI 6.0, Angular 6.0, and Okta Sign-In Widget 2.8.0. See the code changes in [okta-angular-openid-connect-example#5](https://github.com/oktadeveloper/okta-angular-openid-connect-example/pull/5) and the article changes in [okta.github.io#2030](https://github.com/okta/okta.github.io/pull/2030).
 * Nov 30, 2017: Updated to use Angular CLI 1.5.5 and angular-oauth2-oidc 3.0.1. See the code changes in the [example app on GitHub](https://github.com/oktadeveloper/okta-angular-openid-connect-example/pull/3/files). Changes to this article can be viewed [in this pull request](https://github.com/okta/okta.github.io/pull/1517).
 * Sep 28, 2017: Updated "create an OIDC app" instructions for the [Okta Developer Console](/blog/2017/09/25/all-new-developer-console).
