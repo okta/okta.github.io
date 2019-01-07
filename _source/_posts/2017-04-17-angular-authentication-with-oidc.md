@@ -787,6 +787,8 @@ import { OAuthService, JwksValidationHandler } from 'angular-oauth2-oidc';
 ...
 ```
 
+**TIP:** If you'd like to use angular-oauth2-oidc v5, see [Angular 7: What's New and Noteworthy + OIDC Goodness](/blog/2018/12/04/angular-7-oidc-oauth2-pkce) for instructions. 
+
 Create `src/app/home/home.component.ts` and configure it to have **Login** and **Logout** buttons.
 
 {% raw %}
@@ -1087,7 +1089,7 @@ You can find a completed version of the application created in this blog post [o
 
 **Changelog:**
 
-* Jan 7, 2018: Updated to lock down the version numbers used. See the article changes in [okta.github.io#2030](https://github.com/okta/okta.github.io/pull/2030).
+* Jan 7, 2018: Updated to lock down the version numbers used and provide a link for those wanting to use Angular 7. See the article changes in [okta.github.io#2628](https://github.com/okta/okta.github.io/pull/2628).
 * May 8, 2018: Updated to use Angular CLI 6.0, Angular 6.0, and Okta Sign-In Widget 2.8.0. See the code changes in [okta-angular-openid-connect-example#5](https://github.com/oktadeveloper/okta-angular-openid-connect-example/pull/5) and the article changes in [okta.github.io#2030](https://github.com/okta/okta.github.io/pull/2030).
 * Nov 30, 2017: Updated to use Angular CLI 1.5.5 and angular-oauth2-oidc 3.0.1. See the code changes in the [example app on GitHub](https://github.com/oktadeveloper/okta-angular-openid-connect-example/pull/3/files). Changes to this article can be viewed [in this pull request](https://github.com/okta/okta.github.io/pull/1517).
 * Sep 28, 2017: Updated "create an OIDC app" instructions for the [Okta Developer Console](/blog/2017/09/25/all-new-developer-console).
