@@ -1,0 +1,129 @@
+---
+layout: blog_post
+title: "Which Java SDK Should You Use?"
+author: mraible
+description: "Are you confused about the Java SDK (aka JDK) options available to you in 2019? This article shows you the options available and provides recommendations for development and production usage."
+tags: [java, java sdk, jdk, oralce, openjdk]
+tweets:
+image: blog/which-java-sdk/make-an-image.png
+---
+:page-liquid:
+
+There has been a lot of confusion lately about Java and its available SDKs (Software Development Kits). You might've heard the Java SDK called the JDK. They're one in the same. Java SE (Standard Edition) is a specification that's governed by the JCP (Java Community Process). This process decides what goes into (or gets removed from the JDK). Anyone can implement the Java specification. If they pass the TCK (Test Compatibility Kit), they're considered a viable JDK.
+
+A lot of the confusion started because of two events:
+
+* Java started releasing new versions every six months.
+* Oracle changed their support model for Java.
+
+Trisha Gee explains the second event nicely in https://blog.jetbrains.com/idea/2018/09/using-java-11-in-production-important-things-to-know/[Using Java 11 In Production: Important Things To Know]. Here's a summary:
+
+* Oracle now distributes two JDK builds: Oracle JDK and Oracle OpenJDK.
+* Oracle JDK is free for development and production, but you have to pay for it if you use it in production.
+* Oracle's OpenJDK is free for any environment.
+
+This largely has to do with support contracts. I don't know about you, but I've never paid for a Java support contract in my career. Granted, I've spent most of my developing days as an independent consultant. However, I'm willing to bet that most of you haven't paid for Java support either. My guess is the people who pay for Java support are in charge of companies that've built their business on Java and can't migrate to the latest version. They _need_ support and security fixes for older versions _because_ they can't upgrade.
+
+== Java Is Still Free
+
+When Oracle changed its support model for Java, there was a low roar in the community that Java was no longer free. To help clarify things, the Java Champions group created an [open letter](https://docs.google.com/document/d/1nFGazvrCvHMZJgFstlbzoHjpAVwv5DEdnaBr_5pKuHo/edit) clarifying the available support options. You can read more in InfoQ's [Java Community Leaders Clarify Platform Support Options: "Java Is Still Free"](https://www.infoq.com/news/2018/09/java-support-options-sept18)
+
+== Java SDK Options
+
+Currently, the only source code for the JDK is in the http://openjdk.java.net/projects/jdk/[Open JDK] project. You can checkout the source code for OpenJDK and build it yourself if you like. However, it's not considered "Java SE compatible" unless it passes the TCK. Also, you cannot call it "Java SE" without getting a license from Oracle.
+
+There are many Java SDK options besides Oracle's. Let's take a look at the main ones and when you might want to use them. I've listed them below in alphabetical order.
+
+NOTE: Hat tip to Stephen Colebourne and his https://blog.joda.org/2018/09/time-to-look-beyond-oracles-jdk.html[Time to look beyond Oracle's JDK] blog post for much of this information.
+
+=== AdoptOpenJDK
+
+AdoptOpenJDK is a community and code that builds free OpenJDK binaries. They're published to https://adoptopenjdk.net/[adoptopenjdk.net]. Binaries are published for five years after the version's initial release. Builds are available for OpenJ9 (IBM's JVM) and HotSpot.
+
+NOTE: According to the AdoptOpenJDK website, OpenJ9 is designed for low memory usage and fast start-up time. I have no opinions on HotSpot versus OpenJ9, but OpenJ9 does sound similar to https://www.graalvm.org/[GraalVM] (a newish polyglot VM from Oracle).
+
+=== Amazon Corretto
+
+Amazon is the new vendor on the block that's offering builds of OpenJDK at https://aws.amazon.com/corretto/[aws.amazon.com/corretto]. Amazon Corretto 8 (based on Java 8) is in preview; there is no Java 11 build available. Corretto is unique in that it has no-cost long-term support from Amazon. Java 8 support is currently slated to run through June 2023.
+
+=== Azul Zulu
+
+Azul builds and publishes Zulu at https://www.azul.com/downloads/zulu/[azul.com/downloads/zulu]. It's an OpenJDK build that's passed the TCK, and is fully compliant with the Java SE standard. https://www.azul.com/products/zulu-enterprise/[Zulu Enterprise] is Azul's commercial offering with paid support. It provides long-term support for eight years after the version's initial release.
+
+=== Oracle's OpenJDK
+
+Oracle builds and publishes OpenJDK builds at http://jdk.java.net/[jdk.java.net]. Binaries are only published for the first six months after a major release. The branded, commercial version (that can't be used in production without paying Oracle) is available at http://www.oracle.com/technetwork/java/javase/downloads/[oracle.com/technetwork/java/javase/downloads].
+
+__How will Oracle know if you're using their commercial JDK in production? That's a great question! One that I don't have an answer to.__
+
+=== Red Hat
+
+Red Hat distributes OpenJDK builds via Red Hat Enterprise Linux, a commercial product. It also has an https://icedtea.classpath.org/wiki/Main_Page[IcedTea project] that builds OpenJDK and adds some features. However, it doesn't seem to be very active (there's no Java 11 support) and you hardly hear about it anymore.
+
+=== Which JDK Should You Use?
+
+The JDK I use is largely determined by the tool I use to install Java. I used to download and install Java manually. When I did that, I used Oracle's JDK. These days, I use https://sdkman.io/[SDKMAN!], a command line tool that installs and manages versions for me. SDKMAN determines the distributions I use today.
+
+SDKMAN is all about convenience. The project aims to make it as easy as possible for you to install Java. If you run `sdk install java`, it installs Azul Zulu 8. This is because java.net does not provide an OpenJDK distro for any version less than 9.0.
+
+To see the versions available from SDKMAN, you can run `sdk list java`:
+
+[source]
+----
+================================================================================
+Available Java Versions
+================================================================================
+     13.ea.02-open       1.0.0-rc-9-grl
+     12.ea.26-open       1.0.0-rc-8-grl
+   + 11.ea.26-open
+     11.0.1-zulu
+   * 11.0.1-open
+   + 11.0.0-open
+     10.0.2-zulu
+     10.0.2-open
+     9.0.7-zulu
+     9.0.4-open
+     8.0.192-zulu
+     8.0.191-oracle
+ > + 8.0.181-zulu
+     7.0.181-zulu
+     1.0.0-rc-10-grl
+
+================================================================================
++ - local version
+* - installed
+> - currently in use
+================================================================================
+----
+
+You can see from this list that I have Azul Zulu 8 as my current JDK, and I also have OpenJDK 11 (`11.0.1-open`) installed. Who built the OpenJDK 11 version I'm using? I assume it's the one from http://jdk.java.net/[jdk.java.net], but I don't really care. It works, and I love using it! However, I can only use Java 11 when working on Spring Boot 2.1 projects, so I don't get to use it everyday. I do a lot of maintenance on Spring Boot https://github.com/oktadeveloper?utf8=%E2%9C%93&q=spring-boot+example&type=&language=[examples], and JHipster still uses Spring Boot 2.0. The good news is it'll be upgrading to Spring Boot 2.1 very soon!
+
+**Long story short:** Use whichever JDK SDKMAN gives you, and move on!
+
+== What do other Java Experts Think?
+
+I figured it'd be fun to interview some of the Java experts here at Okta and get their thoughts on which JDK to use.
+
+* https://twitter.com/lhazlewood[**Les Hazlewood**] is a senior architect at Okta. Before Okta, he was Stormpath's co-founder and CTO. He's also the founder and lead developer of the Apache Shiro project.
+* https://twitter.com/briandemers[**Brian Demers**] is the lead Java SDK developer at Okta and a major contributor to Apache Shiro, among other open source projects. By "lead Java SDK developer", I mean that he develops and maintains the https://github.com/okta/okta-sdk-java[Okta Java Management SDK] and the https://github.com/okta/okta-spring-boot[Okta Spring Boot starter].
+* https://twitter.com/afitnerd[**Micah Silverman**] is a technical instructor at Okta. Before Okta, he was Stormpath's lead Java SDK developers.
+
+**First, can you provide everyone some background on your experience with Java?**
+
+**What is your favorite thing about Java?**
+
+**What Java SDK are you using right now?**
+
+**What Java SDK do you recommend for development? For production?**
+
+== Install Java Today!
+
+There you have it. A plethora of opionions about which JDK you should use in development and production. In reality, you might not have an option of what distribution you use in production. If you're using a cloud provider, they might dictate the distribution and version for you.
+
+If you liked this article, you might enjoy some other ones on this blog:
+
+* link:/blog/2018/12/11/learning-java-first-language[Learning Java as a First Language]
+* link:/blog/2018/11/26/spring-boot-2-dot-1-oidc-oauth2-reactive-apis[Spring Boot 2.1: Outstanding OIDC, OAuth 2.0, and Reactive API Support]
+* link:/blog/2018/10/05/build-a-spring-boot-app-with-user-authentication[Add User Authentication to Your Spring Boot App in 15 Minutes]
+
+You can also follow us on social media { https://twitter.com/oktadev[Twitter], https://www.facebook.com/oktadevelopers[Facebook], https://www.linkedin.com/company/oktadev/[LinkedIn], https://www.youtube.com/channel/UC5AMiWqFVFxF1q9Ya1FuZ_Q[YouTube] } to know when we've posted ones like it.
