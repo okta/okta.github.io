@@ -13,7 +13,7 @@ There has been a lot of confusion lately about Java and its available SDKs (Soft
 
 A lot of the confusion started because of two events:
 
-* Java started releasing new versions every six months.
+* Java started releasing new major versions every six months.
 * Oracle changed their support model for Java.
 
 Trisha Gee explains the second event nicely in https://blog.jetbrains.com/idea/2018/09/using-java-11-in-production-important-things-to-know/[Using Java 11 In Production: Important Things To Know]. Here's a summary:
@@ -21,6 +21,10 @@ Trisha Gee explains the second event nicely in https://blog.jetbrains.com/idea/2
 * Oracle now distributes two JDK builds: Oracle JDK and Oracle OpenJDK.
 * Oracle JDK is free for development and production, but you have to pay for it if you use it in production.
 * Oracle's OpenJDK is free for any environment.
+
+To make matters more tensious, Oracle will end public updates for Java 8 this month! This isn't out of the ordinary, it regularly does this for major Java versions after five years of public availability. You can read more about this in Sharat Chander's https://blogs.oracle.com/java-platform-group/oracle-java-se-releases-faq[Oracle Java SE Releases FAQ].
+
+TODO: Send this article to Sharat for review.
 
 This largely has to do with support contracts. I don't know about you, but I've never paid for a Java support contract in my career. Granted, I've spent most of my developing days as an independent consultant. However, I'm willing to bet that most of you haven't paid for Java support either. My guess is the people who pay for Java support are in charge of companies that've built their business on Java and can't migrate to the latest version. They _need_ support and security fixes for older versions _because_ they can't upgrade.
 
@@ -53,6 +57,8 @@ Azul builds and publishes Zulu at https://www.azul.com/downloads/zulu/[azul.com/
 === Oracle's OpenJDK
 
 Oracle builds and publishes OpenJDK builds at http://jdk.java.net/[jdk.java.net]. Binaries are only published for the first six months after a major release. The branded, commercial version (that can't be used in production without paying Oracle) is available at http://www.oracle.com/technetwork/java/javase/downloads/[oracle.com/technetwork/java/javase/downloads].
+
+NOTE: jdk.java.net is where Oracle's OpenJDK builds are published for download, openjdk.java.net is the OpenJDK project itself.
 
 __How will Oracle know if you're using their commercial JDK in production? That's a great question! One that I don't have an answer to.__
 
