@@ -277,7 +277,7 @@ Answer as follows when prompted:
 You'll get a warning saying you need to generate Docker images by running the following command in the `blog`, `gateway`, and `store` directories. Stop all your running processes and build your Docker images before proceeding.
 
 ```
-./mvnw package -Pprod dockerfile:build
+./mvnw package -Pprod jib:dockerBuild
 ```
 
 While you're waiting for things to build, edit `docker-compose/docker-compose.yml` and change the Spring Security settings from being hard-coded to being environment variables. Make this change for all applications.
@@ -446,6 +446,7 @@ If you have any feedback, I'd love to hear it! Please leave a comment below, hit
 
 **Changelog:**
 
+* Jan 8, 2019: Fixed Docker build command [as reported by @nukesz](https://github.com/oktadeveloper/okta-jhipster-microservices-oauth-example/commit/413040de5e3cd4596a4afe02f4e2838f3ba42e87#commitcomment-31883208). See the example app changes in [okta-jhipster-oauth-example#5](https://github.com/oktadeveloper/okta-jhipster-microservices-oauth-example/pull/5); changes to this post can be viewed in [okta.github.io#2692]().
 * Oct 11, 2018: Updated for [JHipster 5.4.2](https://www.jhipster.tech/2018/10/07/jhipster-release-5.4.2.html) and re-generated everything + tested. See the example app changes in [okta-jhipster-microservices-oauth-example#4](https://github.com/oktadeveloper/okta-jhipster-microservices-oauth-example/pull/4); changes to this post can be viewed in [okta.github.io#2392](https://github.com/okta/okta.github.io/pull/2392).
 * Sep 21, 2018: Updated to use JHipster 5.3.4 and its `import-jdl` feature. Added Elasticsearch back in since it now works on Heroku. See the example app changes in [okta-jhipster-microservices-oauth-example#3](https://github.com/oktadeveloper/okta-jhipster-microservices-oauth-example/pull/3); changes to this post can be viewed in [okta.github.io#2336](https://github.com/okta/okta.github.io/pull/2336).
 * Aug 14, 2018: Updated to use JHipster 5.1.0 and Spring Boot 2.0.3. Removed Elasticsearch from blog and store apps since it doesn't work on Heroku. See the example app changes in [okta-jhipster-microservices-oauth-example#2](https://github.com/oktadeveloper/okta-jhipster-microservices-oauth-example/pull/2); changes to this post can be viewed in [okta.github.io#2254](https://github.com/okta/okta.github.io/pull/2254).
