@@ -22,7 +22,7 @@ class SideBarPage extends BasePage {
     this.$$useCasesLinks = this.$useCasesNav.all(By.tagName('li'));
     this.$$referenceLinks = this.$referenceNav.all(By.tagName('li'));
     this.$$standardsLinks = this.$standardsNav.all(By.tagName('li'));
-    this.setPageLoad(this.$sideBar)
+    this.setPageLoadElement(this.$sideBar)
   }
 
   clickAuthenticationReferenceLink() {

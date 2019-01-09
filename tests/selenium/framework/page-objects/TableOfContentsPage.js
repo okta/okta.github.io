@@ -13,7 +13,7 @@ class TableOfContentsPage extends BasePage {
     this.$$level3Item = $$('.TableOfContents-item.is-level3');
     this.$$level4Item = $$('.TableOfContents-item.is-level4');
     this.$topOfPage = element(by.linkText('Top of Page'));
-    this.setPageLoad(this.$tableOfContents);
+    this.setPageLoadElement(this.$tableOfContents);
   }
   
   level1ItemContains(expectedText) {

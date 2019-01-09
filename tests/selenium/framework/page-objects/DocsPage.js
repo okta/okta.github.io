@@ -1,27 +1,72 @@
 'use strict';
 
 const BasePage = require('./BasePage');
-const util = require('../shared/util');
-const EC = protractor.ExpectedConditions;
+
+const tableOfContentsSelector = '.has-tableOfContents';
+const h1Selector = 'h1';
+const h2Selector = 'h2';
+const h3Selector = 'h3';
+const linkHeaderSelector = 'h4 a';
+const deprecatedLabelSelector = '.api-label-deprecated';
+const betaLabelSelector = '.api-label-beta';
+const eaLabelSelector = '.api-label-ea';
+const corsLabelSelector = '.api-label-cors';
+const getLabelSelector = '.api-uri-get';
+const postLabelSelector = '.api-uri-post';
+const deleteLabelSelector = '.api-uri-delete';
+const promoBannerLabelSelector = '.DocsPromoBanner';
 
 class DocsPage extends BasePage {
   constructor(url) {
-    super(url);
-    this.$pageLoad = $('.has-tableOfContents');
-    this.$$h1 = $$('h1');
-    this.$$h2 = $$('h2');
-    this.$$h3 = $$('h3');
+    super(url, DocsPage.getPageLoadElement());
+    browser.waitForAngularEnabled(false);
+  }
 
-    this.$$deprecatedLabel = $$('.api-label-deprecated');
-    this.$$betaLabel = $$('.api-label-beta');
-    this.$$eaLabel = $$('.api-label-ea');
-    this.$$corsLabel = $$('.api-label-cors');
-    this.$$getLabel = $$('.api-uri-get');
-    this.$$postLabel = $$('.api-uri-post');
-    this.$$deleteLabel = $$('.api-uri-delete');
-    this.$$promoBannerLabel = $$('.DocsPromoBanner');
+  navigate(url, pageLoadElement) {
+    if (pageLoadElement) {
+      this.load(url, pageLoadElement);
+    } else {
+      this.load(url, DocsPage.getPageLoadElement());
+    }
+  }
 
-    this.setPageLoad(this.$pageLoad);
+  static getPageLoadElement() {
+    return element(by.css(tableOfContentsSelector));
+  }
+
+  getH1Elements() {
+    return element.all(by.css(h1Selector));
+  }
+  getH2Elements() {
+    return element.all(by.css(h2Selector));
+  }
+  getH3Elements() {
+    return element.all(by.css(h3Selector));
+  }
+
+  getDeprecatedLabels() {
+    return element.all(by.css(deprecatedLabelSelector));
+  }
+  getBetaLabels() {
+    return element.all(by.css(betaLabelSelector));
+  }
+  getEaLabels() {
+    return element.all(by.css(eaLabelSelector));
+  }
+  getCorsLabels() {
+    return element.all(by.css(corsLabelSelector));
+  }
+  getGetLabels() {
+    return element.all(by.css(getLabelSelector));
+  }
+  getPostLabels() {
+    return element.all(by.css(postLabelSelector));
+  }
+  getDeleteLabels() {
+    return element.all(by.css(deleteLabelSelector));
+  }
+  getPromoBannerLabels() {
+    return element.all(by.css(promoBannerLabelSelector));
   }
 
   hasHeader(str) {
@@ -33,52 +78,52 @@ class DocsPage extends BasePage {
   }
 
   h1Contains(strs) {
-    return this.elementsContainText(this.$$h1, strs);
+    return this.elementsContainText(this.getH1Elements(), strs);
   }
 
   h2Contains(strs) {
-    return this.elementsContainText(this.$$h2, strs);
+    return this.elementsContainText(this.getH2Elements(), strs);
   }
 
   h3Contains(strs) {
-    return this.elementsContainText(this.$$h3, strs);
+    return this.elementsContainText(this.getH3Elements(), strs);
   }
 
   clickLinkHeader(str) {
-    const el = element(by.cssContainingText('h4 a', str));
+    const el = element(by.cssContainingText(linkHeaderSelector, str));
     return el.click();
   }
 
   hasDeprecatedTags() {
-    return this.hasElements(this.$$deprecatedLabel);
+    return this.hasElements(this.getDeprecatedLabels());
   }
 
   hasBetaTags() {
-    return this.hasElements(this.$$betaLabel);
+    return this.hasElements(this.getBetaLabels());
   }
 
   hasEATags() {
-    return this.hasElements(this.$$eaLabel);
+    return this.hasElements(this.getEaLabels());
   }
 
   hasCORSTags() {
-    return this.hasElements(this.$$corsLabel);
+    return this.hasElements(this.getCorsLabels());
   }
 
   hasGetTags() {
-    return this.hasElements(this.$$getLabel);
+    return this.hasElements(this.getGetLabels());
   }
 
   hasPostTags() {
-    return this.hasElements(this.$$postLabel);
+    return this.hasElements(this.getPostLabels());
   }
 
   hasDeleteTags() {
-    return this.hasElements(this.$$deleteLabel);
+    return this.hasElements(this.getDeleteLabels());
   }
 
   hasPromoBanner() {
-    return this.hasElements(this.$$promoBannerLabel);
+    return this.hasElements(this.getPromoBannerLabels());
   }
 }
 

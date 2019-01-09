@@ -11,7 +11,7 @@ class CodePage extends BasePage {
     this.$sampleApp = element(by.cssContainingText('span', 'Okta Spring Boot Starter'));
     this.$createAccountButton = element(by.cssContainingText('span', 'Create Free Account'));
     this.$$promoBannerLabel = $$('.DocsPromoBanner');
-    this.setPageLoad(this.$pageLoad);
+    this.setPageLoadElement(this.$pageLoad);
   }
 
   hasQuickStart() {

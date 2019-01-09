@@ -1,27 +1,37 @@
-const JUnitXmlReporter = require('jasmine-reporters').JUnitXmlReporter;
-const SpecReporter = require('jasmine-spec-reporter').SpecReporter;
+// const JUnitXmlReporter = require('jasmine-reporters').JUnitXmlReporter;
+// const SpecReporter = require('jasmine-spec-reporter').SpecReporter;
 
 const config = {
-  framework: 'jasmine2',
+  // framework: 'jasmine2',
+  framework: 'mocha',
 
-  onPrepare() {
-    jasmine.getEnv().addReporter(new JUnitXmlReporter({
-      savePath: 'build2/reports/junit',
-      filePrefix: 'results',
-    }));
-    jasmine.getEnv().addReporter(new SpecReporter({
-      spec: {
-        displayStacktrace: true
-      }
-    }));
+  // onPrepare() {
+  //   jasmine.getEnv().addReporter(new JUnitXmlReporter({
+  //     savePath: 'build2/reports/junit',
+  //     filePrefix: 'results',
+  //   }));
+  //   jasmine.getEnv().addReporter(new SpecReporter({
+  //     spec: {
+  //       displayStacktrace: true
+  //     }
+  //   }));
+  // },
+
+  // jasmineNodeOpts: {
+  //   print: () => {},
+  //   defaultTimeoutInterval: 1 * 60 * 1000 // 1 minute
+  // },
+
+  mochaOpts: {
+    reporter: 'list',
+    timeout: 90000,
+    retries: 4
   },
 
-  jasmineNodeOpts: {
-    print: () => {},
-    defaultTimeoutInterval: 2 * 60 * 1000 // 2 minutes
-  },
-
-  specs: ['spec/*.js'],
+ // specs: ['spec/*.js'],
+  specs: ['spec/api-tags-spec.js', 'spec/blog-page-spec.js', 'spec/quickstarts-spec.js'],
+  // specs: ['spec/blog-page-spec.js'],
+  // specs: ['spec/quickstarts-spec.js'],
   capabilities: {},
   troubleshoot: true
 };

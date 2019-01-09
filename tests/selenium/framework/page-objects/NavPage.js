@@ -16,7 +16,7 @@ class NavPage extends BasePage {
     this.$supportLink = element(by.cssContainingText('span', 'Support'));
     this.$$menus = $$('.menu');
     this.$supportNav = $('.Header-nav. .expanded');
-    this.setPageLoad(this.$header);
+    this.setPageLoadElement(this.$header);
   }
 
   isDesktopNavDisplayed() {
