@@ -11,7 +11,6 @@ const previousLinkText = '« Prev';
 class BlogPage extends BasePage {
   constructor(url) {
     super(url, BlogPage.getPageLoadElement());
-    browser.waitForAngularEnabled(false);
   }
 
   navigate(url, pageLoadElement) {

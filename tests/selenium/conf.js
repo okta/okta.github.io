@@ -28,10 +28,24 @@ const config = {
     retries: 4
   },
 
- // specs: ['spec/*.js'],
-  specs: ['spec/api-tags-spec.js', 'spec/blog-page-spec.js', 'spec/quickstarts-spec.js'],
+ specs: ['spec/*.js'],
+ //  specs: [
+ //    'spec/api-tags-spec.js',
+ //    'spec/blog-page-spec.js',
+ //    'spec/code-layout-spec.js',
+ //    'spec/page-layout-browser-size-spec.js',
+ //    'spec/promo-banner-spec.js',
+ //    'spec/quickstarts-spec.js',
+ //    'spec/side-bar-spec.js',
+ //    'spec/table-of-contents-spec.js',
+ //  ],
   // specs: ['spec/blog-page-spec.js'],
+  // specs: ['spec/code-layout-spec.js'],
+  // specs: ['spec/page-layout-browser-size-spec.js'],
+  // specs: ['spec/promo-banner-spec.js'],
   // specs: ['spec/quickstarts-spec.js'],
+  // specs: ['spec/side-bar-spec.js'],
+  // specs: ['spec/table-of-contents-spec.js'],
   capabilities: {},
   troubleshoot: true
 };

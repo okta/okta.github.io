@@ -19,7 +19,6 @@ const promoBannerLabelSelector = '.DocsPromoBanner';
 class DocsPage extends BasePage {
   constructor(url) {
     super(url, DocsPage.getPageLoadElement());
-    browser.waitForAngularEnabled(false);
   }
 
   navigate(url, pageLoadElement) {

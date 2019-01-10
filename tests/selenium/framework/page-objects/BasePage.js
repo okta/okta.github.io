@@ -14,6 +14,7 @@ class BasePage {
     } else {
       this.url = baseUrl;
     }
+    browser.waitForAngularEnabled(false);
   }
 
   setPageLoadElement(element) {
@@ -74,6 +75,14 @@ class BasePage {
         return textArray.concat(text);
       });
     }, []);
+  }
+
+  getVisibleElements(elements) {
+    return elements.filter(element => {
+      return element.getText().then(text => {
+          return element.isDisplayed();
+      })
+    });
   }
 
   elementsContainText(elements, expectedTextArray) {

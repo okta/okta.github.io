@@ -76,7 +76,6 @@ const dotNetAspCoreUrlLongFragment = 'okta-sign-in-page/dotnet/aspnetcore';
 class QuickStartsPage extends BasePage {
   constructor(url) {
     super(url, QuickStartsPage.getPageLoadElement());
-    browser.waitForAngularEnabled(false);
   }
 
   navigate(url, pageLoadElement) {
