@@ -17,6 +17,8 @@ Electron 2.0 was released in early May 2018, along with changes to the project t
 
 Electron 3.0 was released on September 18, 2018 and contains major version bumps and some new features. See the [Electron blog](https://electronjs.org/blog/electron-3-0) for more information.
 
+Electron 4.0 was released on December 20, 2018 and includes major version bumps for Chromium (v69), Node (v10.11), and V8 (v6.9). It also removes support for OS X Mavericks. See the [Electron blog](https://electronjs.org/blog/electron-4-0) for more information.
+
 Developing desktop applications with web technologies is an appealing notion. [This tweet](https://twitter.com/gerardsans/status/1026040566868529152) from Gerard Sans nails it in my opinion:
 
 <div style="max-width: 500px; margin: 0 auto">
@@ -61,22 +63,23 @@ Open the `package.json` in this project and make the following changes.
    "license": "MIT",
    "dependencies": {
 -    "@openid/appauth": "^0.3.5",
-+    "@openid/appauth": "^1.1.1",
++    "@openid/appauth": "^1.2.0",
      "@types/react": "^16.3.17",
      "@types/react-dom": "^16.0.6",
 -    "electron": "^2.0.2",
      "material-design-lite": "^1.3.0"
    },
    "devDependencies": {
-+    "electron": "^3.0.0",
-     "typescript": "^2.9.1"
+-    "typescript": "^2.9.1"
++    "electron": "^4.0.1",
++    "typescript": "^3.2.0"
    }
  }
 ```
 
-The changes in the "scripts" are not necessary, but they make compilation happen before you run `npm run dev` or `npm start`. You're also moving the `electron` dependencies to be a `devDependency` and upgrading TypeScript to the latest version.
+The changes in the "scripts" are not necessary, but they make compilation happen before you run `npm run dev` or `npm start`. You're also moving the `electron` dependencies to be a `devDependency`, upgrading it, and upgrading TypeScript to the latest version.
 
-In addition, you'll need to make some changes to `flow.ts` since you just upgraded to AppAuth 1.1.1. The upgrade allows for PKCE (Proof Key for Code Exchange), and a couple constructors need to be changed to take in objects instead of arguments. It might be cumbersome to pick through the changes below. You can [copy this file](https://github.com/googlesamples/appauth-js-electron-sample/blob/50d98d888ca9299708f71e8bce00101048389260/flow.ts) instead.
+In addition, you'll need to make some changes to `flow.ts` since you just upgraded to AppAuth 1.2.0. The upgrade allows for PKCE (Proof Key for Code Exchange), and a couple constructors need to be changed to take in objects instead of arguments. It might be cumbersome to pick through the changes below. You can [copy this file](https://github.com/googlesamples/appauth-js-electron-sample/blob/50d98d888ca9299708f71e8bce00101048389260/flow.ts) instead.
 
 **NOTE:** If the changes below are already in this file, it's likely [this pull request](https://github.com/googlesamples/appauth-js-electron-sample/pull/3) was merged and you can skip this part.
 
@@ -181,7 +184,7 @@ Navigate to the cloned directory, install dependencies with npm, and run the app
 ```bash
 cd okta-electron-example
 npm i
-npm run dev
+npm start
 ```
 
 It should start the app and show a Sign-In link.
@@ -280,7 +283,7 @@ The diagram below shows how PKCE works with your app and Okta.
 
 <!-- copied from _source/_authentication-guide/auth-overview/index.md -->
 
-You don't need to change any code in your Electron app to add PKCE. That was done when you upgraded `flow.ts` to use AppAuth 1.1.1.
+You don't need to change any code in your Electron app to add PKCE. That was done when you upgraded `flow.ts` to use AppAuth 1.2.0.
 
 Start your app with `npm start`, and try to login. You should be able to. However, when you click on **USER INFO**, you won't see your user's name or avatar. Open Chrome Developer Tools with **View** > **Toggle Developer Tools** to see why.
 
@@ -345,7 +348,7 @@ Below is a screenshot that shows this app with some additional polish and a base
 To package this app for production distribution, you can use [electron-builder](https://www.electron.build/). Install electron-builder with npm.
 
 ```bash
-npm i -D electron-builder@20.28.4
+npm i -D electron-builder@20.38.4
 ```
 
 Add a `build` section to your `package.json`:
@@ -401,5 +404,6 @@ Like what you learned here? Follow [@oktadev](https://twitter.com/oktadev), like
 
 **Changelog:**
 
+* Jan 11, 2019: Updated to use Electron 4.0.1 and AppAuth 1.2.0. See the example app changes in [okta-appauth-js-electron-example#4](https://github.com/oktadeveloper/okta-appauth-js-electron-example/pull/4); changes to this post can be viewed in [okta.github.io#2327](https://github.com/okta/okta.github.io/pull/2327).
 * Nov 20, 2018: Updated `flow.ts` for AppAuth 1.1.1 and changed to use its PKCE support. See the example app changes in [okta-appauth-js-electron-example#3](https://github.com/oktadeveloper/okta-appauth-js-electron-example/pull/3); changes to this post can be viewed in [okta.github.io#2495](https://github.com/okta/okta.github.io/pull/2495).
 * Sep 19, 2018: Updated to use Electron 3.0.0 and AppAuth 1.1.1. See the example app changes in [okta-appauth-js-electron-example#1](https://github.com/oktadeveloper/okta-appauth-js-electron-example/pull/1); changes to this post can be viewed in [okta.github.io#2327](https://github.com/okta/okta.github.io/pull/2327).
