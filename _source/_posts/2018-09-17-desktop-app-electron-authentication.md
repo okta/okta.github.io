@@ -77,7 +77,7 @@ Open the `package.json` in this project and make the following changes.
  }
 ```
 
-The changes in the "scripts" are not necessary, but they make compilation happen before you run `npm run dev` or `npm start`. You're also moving the `electron` dependencies to be a `devDependency`, upgrading it, and upgrading TypeScript to the latest version.
+The changes in the "scripts" are not necessary, but they make compilation happen before you run `npm run dev` or `npm start`. You're also moving the `electron` dependency to be a `devDependency`, upgrading it, and upgrading TypeScript to the latest version.
 
 In addition, you'll need to make some changes to `flow.ts` since you just upgraded to AppAuth 1.2.0. The upgrade allows for PKCE (Proof Key for Code Exchange), and a couple constructors need to be changed to take in objects instead of arguments. It might be cumbersome to pick through the changes below. You can [copy this file](https://github.com/googlesamples/appauth-js-electron-sample/blob/50d98d888ca9299708f71e8bce00101048389260/flow.ts) instead.
 
