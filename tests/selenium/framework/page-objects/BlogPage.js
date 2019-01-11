@@ -11,6 +11,7 @@ const previousLinkText = '« Prev';
 class BlogPage extends BasePage {
   constructor(url) {
     super(url, BlogPage.getPageLoadElement());
+    browser.waitForAngularEnabled(false);
   }
 
   navigate(url, pageLoadElement) {
@@ -34,8 +35,7 @@ class BlogPage extends BasePage {
   }
 
   getBlogPosts() {
-    var posts = element.all(by.css(blogPostSelector));
-    return posts;
+    return element.all(by.css(blogPostSelector));
   }
 
   getPagination() {
@@ -74,14 +74,14 @@ class BlogPage extends BasePage {
     return this.smartClick(itemLink);
   }
 
-  clickReadMoreOnPost(post) {
+  async clickReadMoreOnPost(post) {
     const blogPost = this.getBlogPosts().get(post);
-    const readMoreLink = blogPost.element(by.linkText('Read more'));
+    const readMoreLink = await blogPost.element(by.linkText('Read more'));
     this.waitForPresence(readMoreLink);
     return readMoreLink.click();
   }
 
-  getBlogLink(post) {
+  getBlogLinkHref(post) {
     const blogPost = this.getBlogPosts().get(post);
     const title = blogPost.element(by.css('h1 a'));
     return title.getAttribute('href');

@@ -21,8 +21,10 @@ describe('blog page spec', () => {
   }));
 
   it('has read more links', util.itHelper (async () => {
+    var blogLinkHref = await blogPage.getBlogLinkHref(1);
     await blogPage.clickReadMoreOnPost(1);
-    expect(await blogPage.getBlogLink(1), 'expects blog link to contain current URL').to.contain(await blogPage.getCurrentURL());
+    blogPage.waitForPresence(blogPage.getFooterElement());
+    expect(blogLinkHref, 'expects blog link href to contain current URL').to.contain(await blogPage.getCurrentURL());
   }));
 
   it('has pagination', util.itHelper(async () => {

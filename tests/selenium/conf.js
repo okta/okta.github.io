@@ -28,7 +28,7 @@ const config = {
     retries: 4
   },
 
- specs: ['spec/*.js'],
+ // specs: ['spec/*.js'],
  //  specs: [
  //    'spec/api-tags-spec.js',
  //    'spec/blog-page-spec.js',
@@ -39,7 +39,7 @@ const config = {
  //    'spec/side-bar-spec.js',
  //    'spec/table-of-contents-spec.js',
  //  ],
-  // specs: ['spec/blog-page-spec.js'],
+  specs: ['spec/blog-page-spec.js'],
   // specs: ['spec/code-layout-spec.js'],
   // specs: ['spec/page-layout-browser-size-spec.js'],
   // specs: ['spec/promo-banner-spec.js'],
