@@ -8,6 +8,14 @@ This page provides reference documentation for:
 
 This information is specific to the ${hook_type} hook, one type of inline hook supported by Okta.
 
+## See Also
+
+For a general introduction Okta inline hooks, see [Inline Hooks](/use_cases/hooks/).
+
+For setup steps for the ${Hook_Type} inline hook, see [${hook_type Setup}](/use_cases/hooks/setup/${Hook_Type}-setup.md).
+
+For information on the API for registering external service endpoints with Okta, see [Callbacks API](/api/resources/callbacks).
+
 ## Objects in the Request from Okta
 
 For ${hook_type}, the outbound call from Okta to your external service will include the following objects in its JSON payload:
@@ -62,19 +70,20 @@ For ${hook_type} hooks, the `commands`, `error`, and `debugContext` objects that
 
 The `commands` object is where you can provide commands to Okta. It is an array, allowing you to include mutlitple commands. In each array element, there needs to be a `type` property and `value` property. The `type` property is where you specify which of the supported commands you wish to execute, and `value` is where you supply an operand for that command.
 
-| Property | Description                                          | Data Type                                                |
-|----------|------------------------------------------------------|----------------------------------------------------------|
-| type     | One of the [supported commands](#supported-commands) | String                                                   |
-| value    | Operand to pass to the command.                      | Data type or, for nested objects, [value](#value) object |
+| Property | Description                                          | Data Type                                                     |
+|----------|------------------------------------------------------|---------------------------------------------------------------|
+| type     | One of the [supported commands](#supported-commands) | String                                                        |
+| value    | Operand to pass to the command.                      | Type or, for a nested object, anchor link to [value](#value). |
 
 #### Supported Commands
 
 The following commands are supported for the ${hook_type} inline hook type:
 
-| Command               | Description |
-|-----------------------|-------------|
-| com.okta.command_name1 | Description |
-| com.okta.command_name2 | Description |
+| Command                | Description  |
+|------------------------|--------------|
+| com.okta.command_name1 | Description  |
+| com.okta.command_name2 | Description  |
+| com.okta.command_name3 | Descrtiption |
 
 #### value
 
@@ -132,11 +141,3 @@ sample listing here
  - data.context.session
  - data.context.user
  - data.context.policy
-
-## See Also
-
-For a general introduction Okta inline hooks, see [Inline Hooks](/use_cases/hooks/).
-
-For setup steps for the ${Hook_Type} inline hook, see [${hook_type Setup}](/use_cases/hooks/setup/${Hook_Type}-setup.md).
-
-For information on the API for registering external service endpoints with Okta, see [Callbacks API](/api/resources/callbacks).
