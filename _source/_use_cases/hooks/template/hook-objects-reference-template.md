@@ -36,11 +36,11 @@ Describe what object1 provides information about.
 
 Describe what object2 provides information about.
 
-| Property | Description | Data Type                                                                                                                               |
-|----------|-------------|-----------------------------------------------------------------------------------------------------------------------------------------|
-| name     | Description | Type or, for a nested object, anchor link to [sub_object](#sub_object), which will be right below and have a description of the object. |
-| name     | description |                                                                                                                                         |
-| name     | description |                                                                                                                                         |
+| Property | Description | Data Type                                                               |
+|----------|-------------|-------------------------------------------------------------------------|
+| name     | Description | Type or, for a nested object, anchor link to [sub_object](#sub_object). |
+| name     | description |                                                                         |
+| name     | description |                                                                         |
 
 #### sub_object
 
@@ -60,13 +60,12 @@ For ${hook_type} hooks, the `commands`, `error`, and `debugContext` objects that
 
 ### commands
 
-The `commands` object is where you can provide commands to Okta. It is an array, allowing you to include mutlitple commands. In each array element, there needs to be a `type` property and `value` property. The `type` property is where you specify which of the supported commands you wish to execute and `value` is where you supply an operand for the command.
+The `commands` object is where you can provide commands to Okta. It is an array, allowing you to include mutlitple commands. In each array element, there needs to be a `type` property and `value` property. The `type` property is where you specify which of the supported commands you wish to execute, and `value` is where you supply an operand for that command.
 
-| Property | Description                                                      | Data Type                                                |
-|----------|------------------------------------------------------------------|----------------------------------------------------------|
-| type     | The name of one of the [supported commands](#supported-commands) | String                                                   |
-| value    | An operand to pass to the command.                               | Data type or, for nested objects, [value](#value) object |
-
+| Property | Description                                          | Data Type                                                |
+|----------|------------------------------------------------------|----------------------------------------------------------|
+| type     | One of the [supported commands](#supported-commands) | String                                                   |
+| value    | Operand to pass to the command.                      | Data type or, for nested objects, [value](#value) object |
 
 #### Supported Commands
 
@@ -74,12 +73,12 @@ The following commands are supported for the ${hook_type} inline hook type:
 
 | Command               | Description |
 |-----------------------|-------------|
-| com.okta.command_name | Description |
-| com.okta.command_name | Description |
+| com.okta.command_name1 | Description |
+| com.okta.command_name2 | Description |
 
 #### value
 
-For hook types which use a nested object as the operand of a command, a description of that object.
+For hook types which use a nested object as the operand of commands, provide a description of that object.
 
 | Property | Description | Data Type |
 |----------|-------------|-----------|
@@ -89,15 +88,15 @@ For hook types which use a nested object as the operand of a command, a descript
 
 ### error
 
-You can return an error object, with the following structure:
+Indicate any errors that have been defined and how they affect the process flow.
 
-(Indicate any errors that have been defined, an how they will affect the process flow.)
+When you return an error object, it should have the following structure:
 
-| Property     | Description | Data Type                   |
-|--------------|-------------|-----------------------------|
-| errorCode    |             |                             |
-| errorSummary |             |                             |
-| errorCauses  |             | [errorCauses](#errorCauses) |
+| Property     | Description                         | Data Type                   |
+|--------------|-------------------------------------|-----------------------------|
+| errorCode    | A unique code                       |                             |
+| errorSummary | Human-readable summary of the error |                             |
+| errorCauses  |                                     | [errorCauses](#errorCauses) |
 
 #### errorCauses
 
