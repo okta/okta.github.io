@@ -18,7 +18,7 @@ For information on the API for registering external service endpoints with Okta,
 
 ## Objects in the Request from Okta
 
-For ${hook_type}, the outbound call from Okta to your external service will include the following objects in its JSON payload:
+For ${hook_type} inline hooks, the outbound call from Okta to your external service will include the following objects in its JSON payload:
 
 ### data.object1
 
@@ -87,7 +87,7 @@ The following commands are supported for the ${hook_type} inline hook type:
 
 #### value
 
-For hook types which use a nested object as the operand of commands, provide a description the `value` object.
+(Include this section for hook types that expect an object for `value`.)
 
 | Property | Description | Data Type |
 |----------|-------------|-----------|
