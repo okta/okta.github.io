@@ -57,20 +57,17 @@ class BlogPage extends BasePage {
 
   clickNext() {
     this.waitForPresence(this.getNextLink());
-    // return this.getNextLink().click();
     return this.smartClick(this.getNextLink());
   }
 
   clickPrevious() {
     this.waitForPresence(this.getPreviousLink());
-    // return this.getPreviousLink().click();
     return this.smartClick(this.getPreviousLink());
   }
 
   clickItem(item) {
     const itemLink = element(by.linkText(item.toString()));
     this.waitForPresence(itemLink);
-    // return itemLink.click();
     return this.smartClick(itemLink);
   }
 

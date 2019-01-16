@@ -1,51 +1,12 @@
-// const JUnitXmlReporter = require('jasmine-reporters').JUnitXmlReporter;
-// const SpecReporter = require('jasmine-spec-reporter').SpecReporter;
-
 const config = {
-  // framework: 'jasmine2',
   framework: 'mocha',
-
-  // onPrepare() {
-  //   jasmine.getEnv().addReporter(new JUnitXmlReporter({
-  //     savePath: 'build2/reports/junit',
-  //     filePrefix: 'results',
-  //   }));
-  //   jasmine.getEnv().addReporter(new SpecReporter({
-  //     spec: {
-  //       displayStacktrace: true
-  //     }
-  //   }));
-  // },
-
-  // jasmineNodeOpts: {
-  //   print: () => {},
-  //   defaultTimeoutInterval: 1 * 60 * 1000 // 1 minute
-  // },
 
   mochaOpts: {
     reporter: 'list',
     timeout: 90000,
     retries: 4
   },
-
- // specs: ['spec/*.js'],
- //  specs: [
- //    'spec/api-tags-spec.js',
- //    'spec/blog-page-spec.js',
- //    'spec/code-layout-spec.js',
- //    'spec/page-layout-browser-size-spec.js',
- //    'spec/promo-banner-spec.js',
- //    'spec/quickstarts-spec.js',
- //    'spec/side-bar-spec.js',
- //    'spec/table-of-contents-spec.js',
- //  ],
   specs: ['spec/blog-page-spec.js'],
-  // specs: ['spec/code-layout-spec.js'],
-  // specs: ['spec/page-layout-browser-size-spec.js'],
-  // specs: ['spec/promo-banner-spec.js'],
-  // specs: ['spec/quickstarts-spec.js'],
-  // specs: ['spec/side-bar-spec.js'],
-  // specs: ['spec/table-of-contents-spec.js'],
   capabilities: {},
   troubleshoot: true
 };
@@ -60,7 +21,7 @@ if (process.env.CHROME_HEADLESS) {
     }
   }
 }
-  
+
 // Run SauceLabs on master branch and internal topic branches
 else if (process.env.TRAVIS) {
   console.log('-- Using SauceLabs --');

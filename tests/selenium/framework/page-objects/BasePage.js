@@ -2,8 +2,6 @@
 
 const util = require('../shared/util');
 const baseUrl = 'http://localhost:4000';
-// const baseUrl = 'https://developer.okta.com';
-// const baseUrl = 'http://vuepress-site.trexcloud.com/documentation/';
 const WAIT_TIMEOUT_MILLISECONDS_DEFAULT = 15 * 1000;
 
 class BasePage {

@@ -34,10 +34,6 @@ class NavPage extends BasePage {
     return element(by.css(headerSelector));
   }
 
-  // getHeader() {
-  //   return element(by.css(headerSelector));
-  // }
-
   getDesktopNav() {
     return element(by.css(desktopNavSelector));
   }
@@ -120,7 +116,7 @@ class NavPage extends BasePage {
   }
 
   hoverSupportLink() {
-  	 browser.actions().mouseMove(this.getSupportNav()).perform();
+    browser.actions().mouseMove(this.getSupportNav()).perform();
   }
 
   isSupportMenuDisplayed() {

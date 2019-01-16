@@ -47,7 +47,6 @@ util.customMatchers = {
           if (!Array.isArray(haystackArray)) {
             haystackArray = [haystackArray];
           }
-          // console.log("Haystack Array: " + haystackArray);
         }
         if (needleArray === undefined) {
           missingNeedles = true;
@@ -56,7 +55,6 @@ util.customMatchers = {
           if (!Array.isArray(needleArray)) {
             needleArray = [needleArray];
           }
-          // console.log("Needle Array: " + needleArray);
         }
         var result = {};
         if (missingHaystack || missingNeedles) {
