@@ -7354,6 +7354,12 @@
       "tags" : [ "idp" ],
       "mappings" : [ "system.idp.select" ]
     }, {
+      "id" : "system.import.clear.unconfirmed.users.summary",
+      "category" : "sync",
+      "description" : "Clear Unconfirmed Imported Users.",
+      "tags" : [ "app" ],
+      "mappings" : [ "system.import.clear.unconfirmed.users.summary" ]
+    }, {
       "id" : "system.ldapi.bind",
       "category" : "ud-core",
       "description" : "LDAP Interface Bind event.",
@@ -11718,6 +11724,16 @@
       },
       "tags" : [ "idp" ],
       "mappings" : [ "system.idp.select" ]
+    }, {
+      "id" : "system.import.clear.unconfirmed.users.summary",
+      "category" : "sync",
+      "description" : "Clear Unconfirmed Imported Users. Can be used for clearing unconfirmed imported users from last import result. Note that a single event is fired for clearing unconfirmed imported users instead of fire delete event on each user.",
+      "info" : {
+        "created" : "2019-01-02",
+        "release" : "2019.01.1"
+      },
+      "tags" : [ "app" ],
+      "mappings" : [ "system.import.clear.unconfirmed.users.summary" ]
     }, {
       "id" : "system.import.complete",
       "category" : "sync",

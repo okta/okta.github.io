@@ -31,28 +31,27 @@ An example `application.properties` file would look like:
 
 ```properties
 okta.oauth2.issuer=https://{yourOktaDomain}/oauth2/default
-okta.oauth2.clientId={clientId}
-okta.oauth2.clientSecret={clientSecret}
+okta.oauth2.client-id={clientId}
+okta.oauth2.client-secret={clientSecret}
 # Configure the callback URL to match the previous section
-security.oauth2.sso.loginPath=/authorization-code/callback
+okta.oauth2.redirect-uri=/authorization-code/callback
 ```
 
-### Annotate your Application
+### Customize the configuration (optional)
 
-Just add a `@EnableOAuth2Sso` annotation to your application, for example:
-
+The OAuth 2.0 behavior can be customized the same way as using Spring Security directly:
 ```java
-@EnableOAuth2Sso
-@SpringBootApplication
-public class ExampleApplication {
-    public static void main(String[] args) {
-        SpringApplication.run(ExampleApplication.class, args);
+@Configuration
+public class WebConfig extends WebSecurityConfigurerAdapter {
+    @Override
+    protected void configure(HttpSecurity http) throws Exception {
+        http.authorizeRequests().anyRequest().authenticated()
+            .and().oauth2Client()
+            .and().oauth2Login();
     }
-
-    ...
 }
 ```
 
 That's it! Open an incognito window (to ensure clean browser cache) and browse to `http://localhost:8080/login` you will be  automatically redirected to the Okta login page.
 
-You can read more about [Spring's OAuth 2 support](http://projects.spring.io/spring-security-oauth/docs/oauth2.html) or take a look at this [blog post](https://developer.okta.com/blog/2017/03/21/spring-boot-oauth) that describes the steps and configuration in detail.
+You can read more about [Spring's OAuth 2.0 support](https://docs.spring.io/spring-security/site/docs/current/reference/html5/#oauth2login) or take a look at this [blog post](https://developer.okta.com/blog/2017/03/21/spring-boot-oauth) that describes the steps and configuration in detail.
