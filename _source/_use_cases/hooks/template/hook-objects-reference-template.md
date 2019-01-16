@@ -68,7 +68,7 @@ For ${hook_type} hooks, the `commands`, `error`, and `debugContext` objects that
 
 ### commands
 
-The `commands` object is where you can provide commands to Okta. It is an array, allowing you to include mutlitple commands. In each array element, there needs to be a `type` property and `value` property. The `type` property is where you specify which of the supported commands you wish to execute, and `value` is where you supply an operand for that command.
+The `commands` object is what you use to send commands to Okta. It is an array, allowing you to include mutlitple commands. In each array element, there needs to be a `type` property and `value` property. The `type` property is where you specify which of the supported commands you wish to execute, and `value` is where you supply an operand for that command.
 
 | Property | Description                                           | Data Type                               |
 |----------|-------------------------------------------------------|-----------------------------------------|
