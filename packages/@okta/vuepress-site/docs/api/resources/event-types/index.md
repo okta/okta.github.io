@@ -3,9 +3,7 @@
 
 weight: 2
 title: Event Types
-toc: false
-css: event-types
-js: event-types
+showToc: false
 excerpt: Catalogs the Okta event type system for System Log API.
 ---
 

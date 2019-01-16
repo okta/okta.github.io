@@ -1,11 +1,11 @@
 <template>
   <div class="event-types">
-    <input type="text" id="event-type-search" name="filter" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" placeholder="Search event types for...">
+    <p>
+    <input type="text" id="event-type-search" name="filter" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" placeholder="Search event types for..." v-model="search"/>
+    </p>
     <div id="event-type-count">Found <b>{{resultCount}}</b> matches</div>
-    <div class="event-type" v-for="eventType in eventTypeJson.versions[1].eventTypes" :key="eventType.id">
-      <h4 id="appaccessrequestapproverapprove">
-        {{eventType.id}}
-      </h4>
+    <div class="event-type" v-for="eventType in filteredEventTypes" :key="eventType.id">
+      <h4 :id="eventType.id | titleAsId" v-html="$options.filters.title(eventType.id)"></h4>
 
       <div class="event-type-mappings" v-if="eventType.mappings.length > 0">
         <b>Legacy event types: </b> {{ eventType.mappings.join(', ') }}
@@ -28,14 +28,44 @@
   import eventTypes from './../../vuepress-site/data/event-types.json'
   export default {
     created() {
-      this.eventTypeJson = eventTypes
+      this.eventTypes = eventTypes.versions[1].eventTypes
     },
     data() {
       return {
-        resultCount: 0,
-        eventTypeJson: null
+        search: '',
+        eventTypes: null
       }
     },
+    computed: {
+      filteredEventTypes:function()
+      {
+        if( this.search == '' ) {
+          return this.eventTypes
+        }
+
+        return this.eventTypes.filter((eventType) => {
+          console.log(this.search.toLowerCase())
+          return eventType.id.toLowerCase().indexOf(this.search.toLowerCase())>=0
+        });
+
+
+      },
+
+      resultCount: function() {
+        return  this.filteredEventTypes.length
+      }
+    },
+    filters: {
+      title: function (value) {
+        const parts = value.split('.')
+        let res = "<b>" + parts[0] + "</b>."
+        parts.shift()
+        return res + parts.join('.')
+      },
+      titleAsId: function (value) {
+        return value.replace(/[\s_.]/g, '');
+      }
+    }
   }
 </script>
 
