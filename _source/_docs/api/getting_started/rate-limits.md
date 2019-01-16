@@ -347,7 +347,7 @@ The following endpoints are used by the Okta home page for authentication and si
 | Okta Home Page Endpoints                 | Per-Minute Limit |
 |:-----------------------------------------|------:|
 | `/app/{app}/{key}/sso/saml`              |   750 |
-| `/app/office365/{key}/sso/wsfed/active`  |  2000 |
+| `/app/office365/{key}/sso/wsfed/active`  |  1000 |
 | `/app/office365/{key}/sso/wsfed/passive` |   250 |
 | `/app/template_saml_2_0/{key}/sso/saml`  |  2500 |
 | `/login/do-login`                        |   200 |

@@ -34,8 +34,7 @@ You can configure your applications properties with environment variables, syste
 | okta.oauth2.issuer     | N/A | [Authorization Server](/docs/how-to/set-up-auth-server) issuer URL, i.e.: `https://{yourOktaDomain}/oauth2/default`. Note that your Okta domain does **not** include `-admin`. |
 | okta.oauth2.clientId   | N/A | The Client Id of your Okta OIDC application |
 | okta.oauth2.audience   | api://default | The audience of your [Authorization Server](/docs/how-to/set-up-auth-server) |
-| okta.oauth2.scopeClaim | scp | The scope claim key in the Access Token's JWT |
-| okta.oauth2.rolesClaim | groups | The claim key in the Access Token's JWT that corresponds to an array of the users groups. |
+| okta.oauth2.groups-claim | groups | The claim key in the Access Token's JWT that corresponds to an array of the users groups. |
 
 ### Create a Controller
 
@@ -52,6 +51,19 @@ class MessagesRestController {
 }
 ```
 
+### Customize the configuration (optional)
+
+The OAuth 2.0 behavior can be customized the same way as using Spring Security directly:
+
+```java
+@Configuration
+public class OktaOAuth2WebSecurityConfigurerAdapter extends WebSecurityConfigurerAdapter {
+    @Override
+    protected void configure(HttpSecurity http) throws Exception {
+        http.oauth2ResourceServer().jwt();
+    }
+}
+```
 ### That's it!
 
 Okta's Spring Security integration will [parse the JWT access token](/blog/2017/06/21/what-the-heck-is-oauth#oauth-flows) from the HTTP request's `Authorization: Bearer` header value.
