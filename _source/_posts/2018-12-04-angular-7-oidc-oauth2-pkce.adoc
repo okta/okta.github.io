@@ -5,7 +5,8 @@ author: mraible
 description: "This post explains what's new in Angular 7 and shows options for adding authentication to an Angular app. You'll also learn about OAuth 2.0, implicit flow, and authorization code flow."
 tags: [angular, angular-oauth2-oidc, oidc, oauth2, pcke]
 tweets:
-- todo
+- "Learn what's new in Angular 7 and how to add authentication to a brand new app."
+- "Get started with Angular 7 today!"
 image: blog/featured/okta-angular-skew.jpg
 ---
 :page-liquid:

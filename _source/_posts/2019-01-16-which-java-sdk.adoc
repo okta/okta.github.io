@@ -5,36 +5,36 @@ author: mraible
 description: "Are you confused about the Java SDK (aka JDK) options available to you in 2019? This article shows you the options available and provides recommendations for development and production usage."
 tags: [java, java sdk, jdk, oracle, openjdk]
 tweets:
-#image: blog/which-java-sdk/make-an-image.png
+- "Confused about which Java SDK you should be using in development and production? This blog post aims to clear the confusion!"
+- "Java offers lots of builds of its SDK. Which one should you use?"
+image: blog/which-java-sdk/duke-which-java-sdk-should-you-use.png
 ---
 :page-liquid:
 
-There has been a lot of confusion lately about Java and its available SDKs (Software Development Kits). You might've heard the Java SDK called the JDK. They're one in the same. Java SE (Standard Edition) is a specification that's governed by the JCP (Java Community Process). This process decides what goes into (or gets removed from the JDK). Anyone can implement the Java specification. If they pass the TCK (Test Compatibility Kit), they're considered a viable JDK.
+There has been a lot of confusion lately about Java and its available SDKs (Software Development Kits). You might've heard the Java SDK called the JDK. They're one and the same. Java SE (Standard Edition) is a specification that's governed by the JCP (Java Community Process). This process decides what goes into (or gets removed from the JDK). Anyone can implement the Java specification. If they pass the TCK (Test Compatibility Kit), they're considered a viable JDK.
 
-A lot of the confusion started because of two events:
+Confusion around the Java SDK started because of two events:
 
-* Java started releasing new major versions every six months.
-* Oracle changed their support model for Java.
+* Java started releasing new major versions every six months
+* Oracle changed their support model for Java
 
-Trisha Gee explains the second event nicely in https://blog.jetbrains.com/idea/2018/09/using-java-11-in-production-important-things-to-know/[Using Java 11 In Production: Important Things To Know]. Here's a summary:
+Here's a quick summary of Oracle's changes:
 
-* Oracle now distributes two JDK builds: Oracle JDK and Oracle OpenJDK.
-* Oracle JDK is free for development and production, but you have to pay for it if you use it in production.
-* Oracle's OpenJDK is free for any environment.
+* Oracle now distributes two JDK builds: Oracle JDK and Oracle OpenJDK
+* Oracle JDK is free for development and testing, but you have to pay for it if you use it in production
+* Oracle's OpenJDK is free for any environment
 
-To make matters more tensious, Oracle will end public updates for Java 8 this month! This isn't out of the ordinary, it regularly does this for major Java versions after five years of public availability. You can read more about this in Sharat Chander's https://blogs.oracle.com/java-platform-group/oracle-java-se-releases-faq[Oracle Java SE Releases FAQ].
+To make matters more contentious, Oracle will end public updates for Java 8 this month! This isn't out of the ordinary, it regularly does this for major Java versions after five years of public availability. Related: public updates for Java 11 will end this March when Java 12 is released.
 
-TODO: Send this article to Sharat for review.
-
-This largely has to do with support contracts. I don't know about you, but I've never paid for a Java support contract in my career. Granted, I've spent most of my developing days as an independent consultant. However, I'm willing to bet that most of you haven't paid for Java support either. My guess is the people who pay for Java support are in charge of companies that've built their business on Java and can't migrate to the latest version. They _need_ support and security fixes for older versions _because_ they can't upgrade.
+This largely has to do with support contracts. I don't know about you, but I've never paid for a Java support contract in my career. Granted, I've spent most of my developing days as an independent consultant. I'm willing to bet that most of you haven't paid for Java support either. My guess is the people who pay for Java support are in charge of companies that built their business on Java and can't migrate to the latest version. They _need_ support and security fixes for older versions _because_ they can't upgrade.
 
 == Java Is Still Free
 
-When Oracle changed its support model for Java, there was a low roar in the community that Java was no longer free. To help clarify things, the Java Champions group created an https://docs.google.com/document/d/1nFGazvrCvHMZJgFstlbzoHjpAVwv5DEdnaBr_5pKuHo/edit[open letter] clarifying the available support options. You can read more in InfoQ's https://www.infoq.com/news/2018/09/java-support-options-sept18[Java Community Leaders Clarify Platform Support Options: "Java Is Still Free"].
+When Oracle changed its support model for Java, there was a low roar in the community that Java was no longer free. To help clarify things, the Java Champions group created an https://docs.google.com/document/d/1nFGazvrCvHMZJgFstlbzoHjpAVwv5DEdnaBr_5pKuHo[open letter] clarifying the available support options. You can read more in InfoQ's https://www.infoq.com/news/2018/09/java-support-options-sept18[Java Community Leaders Clarify Platform Support Options: "Java Is Still Free"].
 
 == Java SDK Options
 
-Currently, the only source code for the JDK is in the http://openjdk.java.net/projects/jdk/[Open JDK] project. You can checkout the source code for OpenJDK and build it yourself if you like. However, it's not considered "Java SE compatible" unless it passes the TCK. Also, you cannot call it "Java SE" without getting a license from Oracle.
+Currently, the only source code for the JDK is in the http://openjdk.java.net/projects/jdk/[Open JDK] project. You can check out the source code for OpenJDK and build it yourself if you like. However, it's not considered "Java SE compatible" unless it passes the TCK. Also, you cannot call it "Java SE" without getting a license from Oracle.
 
 There are many Java SDK options besides Oracle's. Let's take a look at the main ones and when you might want to use them. I've listed them below in alphabetical order.
 
@@ -44,15 +44,21 @@ NOTE: Hat tip to Stephen Colebourne and his https://blog.joda.org/2018/09/time-t
 
 AdoptOpenJDK is a community and code that builds free OpenJDK binaries. They're published to https://adoptopenjdk.net/[adoptopenjdk.net]. Binaries are published for five years after the version's initial release. Builds are available for OpenJ9 (IBM's JVM) and HotSpot.
 
-NOTE: According to the AdoptOpenJDK website, OpenJ9 is designed for low memory usage and fast start-up time. I have no opinions on HotSpot versus OpenJ9, but OpenJ9 does sound similar to https://www.graalvm.org/[GraalVM] (a newish polyglot VM from Oracle).
+**What is OpenJ9?** According to the AdoptOpenJDK website, OpenJ9 is designed for low memory usage and fast start-up time.
+
+AdoptOpenJDK builds are https://adoptopenjdk.net/support.html#jck[not tested with the TCK] due to a disagreement with Oracle. They do test with a suite of functional, integration, and performance tests. They also test popular framework libraries, languages, and applications.
 
 === Amazon Corretto
 
-Amazon is the new vendor on the block that's offering builds of OpenJDK at https://aws.amazon.com/corretto/[aws.amazon.com/corretto]. Amazon Corretto 8 (based on Java 8) is in preview; there is no Java 11 build available. Corretto is unique in that it has no-cost long-term support from Amazon. Java 8 support is currently slated to run through June 2023.
+Amazon is the new vendor on the block that's offering builds of OpenJDK at https://aws.amazon.com/corretto/[aws.amazon.com/corretto]. Amazon Corretto 8 (based on Java 8) is in preview; there is no Java 11 build available. Corretto is unique in that it has no-cost long-term support from Amazon. It's builds have passed the TCK. Java 8 support is currently slated to run through June 2023.
+
+Amazon also offers paid support for Corretto. All AWS instances that run Java use Corretto by default.
 
 === Azul Zulu
 
-Azul builds and publishes Zulu at https://www.azul.com/downloads/zulu/[azul.com/downloads/zulu]. It's an OpenJDK build that's passed the TCK, and is fully compliant with the Java SE standard. https://www.azul.com/products/zulu-enterprise/[Zulu Enterprise] is Azul's commercial offering with paid support. It provides long-term support for eight years after the version's initial release.
+Azul builds and publishes Zulu at https://www.azul.com/downloads/zulu/[azul.com/downloads/zulu]. It's an OpenJDK build that's passed the TCK and is fully compliant with the Java SE standard. https://www.azul.com/products/zulu-enterprise/[Zulu Enterprise] is Azul's commercial offering with paid support. It provides long-term support for eight years after the version's initial release.
+
+Microsoft's Azure platform uses Zulu for its Java support.
 
 === Oracle's OpenJDK
 
@@ -100,7 +106,7 @@ Available Java Versions
 ================================================================================
 ----
 
-You can see from this list that I have Azul Zulu 8 as my current JDK, and I also have OpenJDK 11 (`11.0.1-open`) installed. Who built the OpenJDK 11 version I'm using? I assume it's the one from http://jdk.java.net/[jdk.java.net], but I don't really care. It works, and I love using it! However, I can only use Java 11 when working on Spring Boot 2.1 projects, so I don't get to use it everyday. I do a lot of maintenance on Spring Boot https://github.com/oktadeveloper?utf8=%E2%9C%93&q=spring-boot+example&type=&language=[examples], and JHipster still uses Spring Boot 2.0. The good news is it'll be upgrading to Spring Boot 2.1 very soon!
+You can see from this list that I have Azul Zulu 8 as my current JDK, and I also have OpenJDK 11 (`11.0.1-open`) installed. Who built the OpenJDK 11 version I'm using? I assume it's the one from http://jdk.java.net/[jdk.java.net], but I don't really care. It works, and I love using it! However, I can only use Java 11 when working on Spring Boot 2.1 projects, so I don't get to use it every day. I do a lot of maintenance on Spring Boot https://github.com/oktadeveloper?utf8=%E2%9C%93&q=spring-boot+example&type=&language=[examples], and JHipster still uses Spring Boot 2.0. The good news is it'll be upgrading to Spring Boot 2.1 very soon!
 
 **Long story short:** Use whichever JDK SDKMAN gives you, and move on!
 
@@ -108,17 +114,21 @@ You can see from this list that I have Azul Zulu 8 as my current JDK, and I also
 
 I figured it'd be fun to interview some of the Java experts here at Okta and get their thoughts on which JDK to use.
 
-* https://twitter.com/lhazlewood[**Les Hazlewood**] is a senior architect at Okta. Before Okta, he was Stormpath's co-founder and CTO. He's also the founder and lead developer of the Apache Shiro project.
+* https://twitter.com/lhazlewood[**Les Hazlewood**] is a senior architect at Okta. Before Okta, he was Stormpath's co-founder and CTO. He's also the founder and lead developer of the Apache Shiro and JJWT projects.
 * https://twitter.com/briandemers[**Brian Demers**] is the lead Java SDK developer at Okta and a major contributor to Apache Shiro, among other open source projects. By "lead Java SDK developer", I mean that he develops and maintains the https://github.com/okta/okta-sdk-java[Okta Java Management SDK] and the https://github.com/okta/okta-spring-boot[Okta Spring Boot starter].
-* https://twitter.com/afitnerd[**Micah Silverman**] is a technical instructor at Okta. Before Okta, he was Stormpath's lead Java SDK developers.
+* https://twitter.com/afitnerd[**Micah Silverman**] is a technical instructor at Okta. Before Okta, he was one of Stormpath's lead Java SDK developers.
 
-=== First, can you provide everyone some background on your experience with Java?
+=== First, can you provide everyone with some background on your experience with Java?
 
-**Brian Demers**: I've been using Java since 1.3 the early '00s and remember the days when XML the solution to all problems. My career seems to have lead down the path of build tools and web security. This has also forced me to support using JVMs on a verity of systems. I'm also passionate about the OSS world and contributed projects like Sonatype's Nexus, Apache Maven, and Apache Shiro.
+**Brian Demers**: I've been using Java since 1.3 the early '00s and remember the days when XML the solution to all problems. My career seems to have lead down the path of build tools and web security. This has also forced me to support using JVMs on a variety of systems. I'm also passionate about the OSS world and contributed projects like Sonatype's Nexus, Apache Maven, and Apache Shiro.
+
+**Micah Silverman**: I've been using Java since its initial release in 1995 (AWT anyone?). The first thing I ever wrote was an applet for the SyFy Channel (SciFi back then) that was an online Ouija board where the answers you got were from a dictionary of SF, horror and fantasy terms. I took a sharp turn from there into large banking and insurance companies, all of which became Java shops fast. I taught Enterprise Java at New York University as an adjunct professor and got to co-author a book on EJB 3.0.
 
 === What is your favorite thing about Java?
 
-**Brian Demers**: The community, It's very easy to fine existing quality projects from one of the bigger foundations like the Apache Software Foundation or Eclipse Foundation, as well as finding any number of instructional blog posts.
+**Brian Demers**: The community, It's very easy to find existing quality projects from one of the bigger foundations like the Apache Software Foundation or Eclipse Foundation, as well as finding any number of instructional blog posts.
+
+**Micah Silverman**: I love the way the language and community continue to adapt and evolve over the years. There seems to be an “Is Java dead?” post every year or two since its release. It’s remained a relevant and hugely adopted language (and put my daughter through college) because it hasn’t grown stale or fixed. There was a time when Java was first released for Linux that it only supported “green threads”. These were virtualized threads and the performance was terrible. There were lots of “Java will die” articles during this period. But eventually, the builds supported native threads, the binaries became leaner and faster and now Java is on billions of devices around the world. Even with the bumpy road that it’s been with Sun and now Oracle’s stewardship, the open nature of the language and JVM specification has kept it growing.
 
 === What Java SDK are you using right now?
 
@@ -135,31 +145,51 @@ Recently, I was running GraalVM more or less by accident, I installed it to play
 
 I've been burned by OpenJDK in the past, so I was pretty hesitant to switch, but I haven't run into any problems yet.
 
+**Micah Silverman**: Currently Oracle (I use jenv to manage versions):
+
+```
+$ jenv versions
+  system
+  1.8
+* 1.8.0.151 (set by /Users/micahsilverman/.jenv/version)
+  11.0
+  11.0.1
+  openjdk64-11.0.1
+  oracle64-1.8.0.151
+```
+
+I also have OpenJDK 11 installed.
+
 === What Java SDK do you recommend for development? For production?
 
-**Demers**: This is tricky one, many of us are still going to be supporting a minimum version of Java 8 for a while. Generally, I'd say for development, use what you are using in production, but for things like library development it's definitely time to move to an OpenJDK distro. For production, I suggest starting with what is readily available on your platform (Amazon, Red Hat) and switch later to a different distro later if you need to.
+**Demers**: This is tricky one, many of us are still going to be supporting a minimum version of Java 8 for a while. Generally, I'd say for development, use what you are using in production, but for things like library development, it's definitely time to move to an OpenJDK distro. For production, I suggest starting with what is readily available on your platform (Amazon, Red Hat) and switch later to a different distro later if you need to.
 
-I asked Les Hazlewood about Open JDK versus Oracle. Here's what he had to say:
+**Micah Silverman**: For me today, it’s squarely Java 8 in development and production. That’s because the people I support are primarily using Java 8. That said, I set a goal for myself to update my relevant blog posts and examples as well as the production code I’ve written for my team to Java 11 this year. We’ll see how that goes. I was pissed that while the incorporation of Jigsaw with Java 9 and above is awesome, it essentially broke existing code immediately. I would’ve liked to have seen a “compatibility mode” or some such to ease the transition. But, the route of “pulling the band-aid” is not terrible either. I just haven’t gotten there yet.
 
-"The only time the OpenJDK builds have been a big pain for me is that they were woefully behind Oracle's implementation for TLS cipher suites and version (1.1, 1.2) implementations. However, the open-source projects I work on have a pretty large exposure to diverse crypto algorithms and reverse-proxy types of workloads which leverage these things pretty deeply, so that very likely may not represent the types of issues we might encounter with the monolith when trying OpenJDK. Especially if OpenJDK 11 and later are supposedly more aligned with the Oracle JDK releases.
+I asked Les Hazlewood about OpenJDK versus Oracle. Here's what he had to say:
 
-That said, I am fairly nervous about the ability to receive timely bug fixes and point revision patches over the JDK's lifetime. r With the new Java versioning strategy, the only way to obtain those patches long term without paying would be to upgrade as soon as possible to the latest stable releases (11, then 12, then 13) as soon as they're released. That increases our build/ci/test compatibility burden. However, given that these releases are time-based – and not as much feature-based – the amount of conflicts we'd see from version upgrades after getting to the 11 baseline I would expect would be much, much fewer than what we saw from 7 to 8. So this could be attainable, but definitely increases testing and rollout workload for eng-prod and our operations teams. Not fun but probably doable.
+"The only time the OpenJDK builds have been a big pain for me is that they were woefully behind the Oracle JDK’s implementation for TLS cipher suites and TLS version (1.1, 1.2) implementations. However, the open-source projects I work on have a pretty large exposure to diverse crypto algorithms and reverse-proxy types of workloads which leverage these things pretty deeply, so that very likely may not represent the types of issues others might encounter with standard web apps or microservices when trying OpenJDK. Especially if OpenJDK 11 and later are supposedly more aligned with the Oracle JDK releases.
 
-I also have had some exposure with the Azul guys in the past. It was a while ago, but I was quite impressed with their garbage collectors that came out long before JDK 8's dynamic collector. Azul customers haven't had to deal with PermGen Space Exceptions for almost a decade now, if not longer. Their engineering team at the time I engaged with them was extraordinarily smart, and assuming they're still staffed with such folks, I personally would feel confident using their JDK implementations in production after suitable testing.
+That said, I am fairly nervous about the ability to receive timely bug fixes and point revision patches over OpenJDK's lifetime. With the new Java versioning strategy, the only way to obtain those patches long term without paying would be to upgrade as soon as possible to the latest stable releases (11, then 12, then 13) as soon as they're released. That can potentially significantly increase build/ci/test compatibility burden. However, given that these releases are time-based – and not as much feature-based – the amount of conflicts you might see from version upgrades after getting to the 11 baseline I would expect would be much, much fewer than what most people experienced going from version 7 to 8. So this could be attainable but definitely increases testing and rollout workload for software engineering and operations teams. Not fun but doable.
 
-Given that we can't use JDK 11 or later without paying in prod, my particular take on a pragmatic approach for us would be:
+I also have had some exposure with the Azul guys in the past. It was a while ago, but I was quite impressed with their garbage collectors that came out long before JDK 8's dynamic collector. I think Azul customers haven't had to deal with PermGen Space Exceptions for almost a decade now, if not longer. Their engineering team at the time I engaged with them was extraordinarily smart, and assuming they're still staffed with such folks, I personally would feel confident using their JDK implementations in production after suitable testing.
 
-* Upgrade to OpenJDK 11 as soon as possible. Oracle JDK 9 and 10 are not Long Term Support candidates and 11 is. Regardless of which JVM distribution we use, this will give us the most options with respect to time: if we decide to stick with Oracle, that will give us the longest/safest platform to build and deploy against due to its 11's Long Term support, albeit at a cost.
-* Enable Zulu (Azul's OpenJDK distribution name) JDKs (JDK 11 apis) in our CI environment as soon as possible. These JDKs are free to use in dev and production without paying a license fee. We can decide to pay for 8x5 or 24x7 support if/when it becomes important enough for us to do so.  At least testing this distribution this would give us an idea of the magnitude of what we're up against."
+Given that people can't use JDK 11 or later in production without paying, my particular take on a pragmatic approach for an engineering team would be:
+
+* Upgrade to OpenJDK 11 as soon as possible. Oracle JDK 9 and 10 are not Long Term Support candidates and 11 is. Regardless of which JVM distribution you use, this will give you the most options with respect to time: if you decide to stick with Oracle, that will give you the longest/safest platform to build and deploy against due to 11's Long Term support, albeit at a monetary cost.
+
+* Enable Zulu (Azul's OpenJDK distribution name) JDKs (JDK 11 APIs) in your CI environment as soon as possible. These JDKs are free to use in dev and production without paying a license fee. You can decide to pay for 8x5 or 24x7 support if/when it becomes important enough for you to do so.  At least testing this distribution this would give you an idea of what you’re up against, and it might just go more smoothly than expected.  Assuming smooth testing, I’d be completely comfortable using Zulu in production."
 
 == Install Java Today!
 
-There you have it. A plethora of opionions about which JDK you should use in development and production. In reality, you might not have an option of what distribution you use in production. If you're using a cloud provider, they might dictate the distribution and version for you.
+There you have it. A plethora of opinions about which JDK you should use in development and production. In reality, you might not have an option of what distribution you use in production. If you're using a cloud provider, they might dictate the distribution and version for you.
 
 If you liked this article, you might enjoy some other ones on this blog:
 
 * link:/blog/2018/12/11/learning-java-first-language[Learning Java as a First Language]
+* https://blog.jetbrains.com/idea/2018/09/using-java-11-in-production-important-things-to-know/[Using Java 11 In Production: Important Things To Know]
 * link:/blog/2018/11/26/spring-boot-2-dot-1-oidc-oauth2-reactive-apis[Spring Boot 2.1: Outstanding OIDC, OAuth 2.0, and Reactive API Support]
 * link:/blog/2018/10/05/build-a-spring-boot-app-with-user-authentication[Add User Authentication to Your Spring Boot App in 15 Minutes]
+* https://blogs.oracle.com/java-platform-group/oracle-java-se-releases-faq[Oracle Java SE Releases FAQ]
 
 You can also follow us on social media { https://twitter.com/oktadev[Twitter], https://www.facebook.com/oktadevelopers[Facebook], https://www.linkedin.com/company/oktadev/[LinkedIn], https://www.youtube.com/channel/UC5AMiWqFVFxF1q9Ya1FuZ_Q[YouTube] } to know when we've posted ones like it.
