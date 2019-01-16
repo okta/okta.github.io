@@ -14,7 +14,7 @@ For a general introduction Okta inline hooks, see [Inline Hooks](/use_cases/hook
 
 For setup steps for the ${Hook_Type} inline hook, see [${hook_type} Setup}](/use_cases/hooks/setup/${Hook_Type}-setup.md).
 
-For information on the API for registering external service endpoints with Okta, see [Callbacks API](/api/resources/callbacks).
+For information on the API for registering external service endpoints with Okta, see [Callbacks API](/api/resources/callbacks). <!--This API to be renamed.-->
 
 ## Objects in the Request from Okta
 
@@ -22,7 +22,7 @@ For ${hook_type}, the outbound call from Okta to your external service will incl
 
 ### data.object1
 
-Describe what object1 provides information about.
+(Intro sentence: Describe what object1 provides information about.)
 
 | Property | Description | Data Type                                                               |
 |----------|-------------|-------------------------------------------------------------------------|
@@ -42,7 +42,7 @@ Describe what object1 provides information about.
 
 ### data.object2
 
-Describe what object2 provides information about.
+(Intro sentence: Describe what object2 provides information about.)
 
 | Property | Description | Data Type                                                               |
 |----------|-------------|-------------------------------------------------------------------------|
@@ -87,7 +87,7 @@ The following commands are supported for the ${hook_type} inline hook type:
 
 #### value
 
-For hook types which use a nested object as the operand of commands, provide a description of that object.
+For hook types which use a nested object as the operand of commands, provide a description the `value` object.
 
 | Property | Description | Data Type |
 |----------|-------------|-----------|
@@ -97,7 +97,9 @@ For hook types which use a nested object as the operand of commands, provide a d
 
 ### error
 
-Indicate any errors that have been defined for use and how they affect the process flow.
+(Indicate any errors that have been defined for use and how they affect the process flow.)
+
+(Describe anything that will be done with the text in `error.errorSummary` or `errror.errorCauses.errorSummar`: E.g, will it be displayed to the end-user?)
 
 When you return an error object, it should have the following structure:
 
