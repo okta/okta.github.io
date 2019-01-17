@@ -28,9 +28,6 @@ To make matters more contentious, Oracle will end public updates for Java 8 this
 
 This largely has to do with support contracts. I don't know about you, but I've never paid for a Java support contract in my career. Granted, I've spent most of my developing days as an independent consultant. I'm willing to bet that most of you haven't paid for Java support either. My guess is the people who pay for Java support are in charge of companies that built their business on Java and can't migrate to the latest version. They _need_ support and security fixes for older versions _because_ they can't upgrade.
 
-== Java Is Still Free
-
-When Oracle changed its support model for Java, there was a low roar in the community that Java was no longer free. To help clarify things, the Java Champions group created an https://docs.google.com/document/d/1nFGazvrCvHMZJgFstlbzoHjpAVwv5DEdnaBr_5pKuHo[open letter] clarifying the available support options. You can read more in InfoQ's https://www.infoq.com/news/2018/09/java-support-options-sept18[Java Community Leaders Clarify Platform Support Options: "Java Is Still Free"].
 
 == Java SDK Options
 
@@ -44,15 +41,15 @@ NOTE: Hat tip to Stephen Colebourne and his https://blog.joda.org/2018/09/time-t
 
 AdoptOpenJDK is a community and code that builds free OpenJDK binaries. They're published to https://adoptopenjdk.net/[adoptopenjdk.net]. Binaries are published for five years after the version's initial release. Builds are available for OpenJ9 (IBM's JVM) and HotSpot.
 
-**What is OpenJ9?** According to the AdoptOpenJDK website, OpenJ9 is designed for low memory usage and fast start-up time.
+**What is OpenJ9?** According to the AdoptOpenJDK website, OpenJ9 is a JVM that is designed for low memory usage and fast start-up time. A JVM runs compiled Java bytecode, while the Java language provides a syntax for how to produce that bytecode.
 
-AdoptOpenJDK builds are https://adoptopenjdk.net/support.html#jck[not tested with the TCK] due to a disagreement with Oracle. They do test with a suite of functional, integration, and performance tests. They also test popular framework libraries, languages, and applications.
+AdoptOpenJDK builds are not tested with the TCK due to a disagreement with Oracle. They do test with a suite of functional, integration, and performance tests. They also test popular framework libraries, languages, and applications.
 
 === Amazon Corretto
 
-Amazon is the new vendor on the block that's offering builds of OpenJDK at https://aws.amazon.com/corretto/[aws.amazon.com/corretto]. Amazon Corretto 8 (based on Java 8) is in preview; there is no Java 11 build available. Corretto is unique in that it has no-cost long-term support from Amazon. It's builds have passed the TCK. Java 8 support is currently slated to run through June 2023.
+Amazon is the new vendor on the block that's offering builds of OpenJDK at https://aws.amazon.com/corretto/[aws.amazon.com/corretto]. Amazon Corretto 8 (based on Java 8) is in preview; there is no Java 11 build available. Corretto 11 is scheduled to be released in Q2 2019. GA for Corretto 8 is Q1. Corretto is unique in that it has no-cost long-term support from Amazon. It's builds have passed the TCK. Java 8 support is currently slated to run through June 2023.
 
-Amazon also offers paid support for Corretto. All AWS instances that run Java use Corretto by default.
+All AWS instances that run Java use Corretto by default.
 
 === Azul Zulu
 
@@ -179,6 +176,10 @@ Given that people can't use JDK 11 or later in production without paying, my par
 * Upgrade to OpenJDK 11 as soon as possible. Oracle JDK 9 and 10 are not Long Term Support candidates and 11 is. Regardless of which JVM distribution you use, this will give you the most options with respect to time: if you decide to stick with Oracle, that will give you the longest/safest platform to build and deploy against due to 11's Long Term support, albeit at a monetary cost.
 
 * Enable Zulu (Azul's OpenJDK distribution name) JDKs (JDK 11 APIs) in your CI environment as soon as possible. These JDKs are free to use in dev and production without paying a license fee. You can decide to pay for 8x5 or 24x7 support if/when it becomes important enough for you to do so.  At least testing this distribution this would give you an idea of what you're up against, and it might just go more smoothly than expected.  Assuming smooth testing, I'd be completely comfortable using Zulu in production."
+
+== Java Is Still Free
+
+When Oracle changed its support model for Java, there was a low roar in the community that Java was no longer free. To help clarify things, the Java Champions group created an https://docs.google.com/document/d/1nFGazvrCvHMZJgFstlbzoHjpAVwv5DEdnaBr_5pKuHo[open letter] clarifying the available support options. You can read more in InfoQ's https://www.infoq.com/news/2018/09/java-support-options-sept18[Java Community Leaders Clarify Platform Support Options: "Java Is Still Free"].
 
 == Install Java Today!
 
