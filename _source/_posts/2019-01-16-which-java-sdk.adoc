@@ -31,7 +31,7 @@ This largely has to do with support contracts. I don't know about you, but I've 
 
 == Java SDK Options
 
-Currently, the only source code for the JDK is in the http://openjdk.java.net/projects/jdk/[Open JDK] project. You can check out the source code for OpenJDK and build it yourself if you like. However, it's not considered "Java SE compatible" unless it passes the TCK. Also, you cannot call it "Java SE" without getting a license from Oracle.
+Currently, the only source code for the JDK is in the http://openjdk.java.net/projects/jdk/[OpenJDK] project. You can check out the source code for OpenJDK and build it yourself if you like. However, it's not considered "Java SE compatible" unless it passes the TCK. Also, you cannot call it "Java SE" without getting a license from Oracle.
 
 There are many Java SDK options besides Oracle's. Let's take a look at the main ones and when you might want to use them. I've listed them below in alphabetical order.
 
@@ -47,7 +47,7 @@ AdoptOpenJDK builds are not tested with the TCK due to a disagreement with Oracl
 
 === Amazon Corretto
 
-Amazon is the new vendor on the block that's offering builds of OpenJDK at https://aws.amazon.com/corretto/[aws.amazon.com/corretto]. Amazon Corretto 8 (based on Java 8) is in preview; there is no Java 11 build available. Corretto 11 is scheduled to be released in Q2 2019. GA for Corretto 8 is Q1. Corretto is unique in that it has no-cost long-term support from Amazon. It's builds have passed the TCK. Java 8 support is currently slated to run through June 2023.
+Amazon is the new vendor on the block that's offering builds of OpenJDK at https://aws.amazon.com/corretto/[aws.amazon.com/corretto]. Amazon Corretto 8 (based on Java 8) is in preview; there is no Java 11 build available. Corretto 11 is scheduled to be released in Q2 2019. GA for Corretto 8 is Q1. Corretto is unique in that it has no-cost long-term support from Amazon. Its builds have passed the TCK. Java 8 support is currently slated to run through June 2023.
 
 All AWS instances that run Java use Corretto by default.
 
@@ -123,7 +123,7 @@ I figured it'd be fun to interview some of the Java experts here at Okta and get
 
 === What is your favorite thing about Java?
 
-**Brian Demers**: The community, It's very easy to find existing quality projects from one of the bigger foundations like the Apache Software Foundation or Eclipse Foundation, as well as finding any number of instructional blog posts.
+**Brian Demers**: The community, it's very easy to find existing quality projects from one of the bigger foundations like the Apache Software Foundation or Eclipse Foundation, as well as finding any number of instructional blog posts.
 
 **Micah Silverman**: I love the way the language and community continue to adapt and evolve over the years. There seems to be an "Is Java dead?" post every year or two since its release. It's remained a relevant and hugely adopted language (and put my daughter through college) because it hasn't grown stale or fixed. There was a time when Java was first released for Linux that it only supported "green threads". These were virtualized threads and the performance was terrible. There were lots of "Java will die" articles during this period. But eventually, the builds supported native threads, the binaries became leaner and faster and now Java is on billions of devices around the world. Even with the bumpy road that it's been with Sun and now Oracle's stewardship, the open nature of the language and JVM specification has kept it growing.
 
@@ -159,7 +159,7 @@ I also have OpenJDK 11 installed.
 
 === What Java SDK do you recommend for development? For production?
 
-**Demers**: This is tricky one, many of us are still going to be supporting a minimum version of Java 8 for a while. Generally, I'd say for development, use what you are using in production, but for things like library development, it's definitely time to move to an OpenJDK distro. For production, I suggest starting with what is readily available on your platform (Amazon, Red Hat) and switch later to a different distro later if you need to.
+**Brian Demers**: This is tricky one, many of us are still going to be supporting a minimum version of Java 8 for a while. Generally, I'd say for development, use what you are using in production, but for things like library development, it's definitely time to move to an OpenJDK distro. For production, I suggest starting with what is readily available on your platform (Amazon, Red Hat) and switch later to a different distro later if you need to.
 
 **Micah Silverman**: For me today, it's squarely Java 8 in development and production. That's because the people I support are primarily using Java 8. That said, I set a goal for myself to update my relevant blog posts and examples as well as the production code I've written for my team to Java 11 this year. We'll see how that goes. I was pissed that while the incorporation of Jigsaw with Java 9 and above is awesome, it essentially broke existing code immediately. I would've liked to have seen a "compatibility mode" or some such to ease the transition. But, the route of "pulling the band-aid" is not terrible either. I just haven't gotten there yet.
 
@@ -185,12 +185,15 @@ When Oracle changed its support model for Java, there was a low roar in the comm
 
 There you have it. A plethora of opinions about which JDK you should use in development and production. In reality, you might not have an option of what distribution you use in production. If you're using a cloud provider, they might dictate the distribution and version for you.
 
+I found these blog posts helpful when writing this post:
+
+* https://blog.jetbrains.com/idea/2018/09/using-java-11-in-production-important-things-to-know/[Using Java 11 In Production: Important Things To Know]
+* https://blogs.oracle.com/java-platform-group/oracle-java-se-releases-faq[Oracle Java SE Releases FAQ]
+
 If you liked this article, you might enjoy some other ones on this blog:
 
 * link:/blog/2018/12/11/learning-java-first-language[Learning Java as a First Language]
-* https://blog.jetbrains.com/idea/2018/09/using-java-11-in-production-important-things-to-know/[Using Java 11 In Production: Important Things To Know]
 * link:/blog/2018/11/26/spring-boot-2-dot-1-oidc-oauth2-reactive-apis[Spring Boot 2.1: Outstanding OIDC, OAuth 2.0, and Reactive API Support]
 * link:/blog/2018/10/05/build-a-spring-boot-app-with-user-authentication[Add User Authentication to Your Spring Boot App in 15 Minutes]
-* https://blogs.oracle.com/java-platform-group/oracle-java-se-releases-faq[Oracle Java SE Releases FAQ]
 
 You can also follow us on social media { https://twitter.com/oktadev[Twitter], https://www.facebook.com/oktadevelopers[Facebook], https://www.linkedin.com/company/oktadev/[LinkedIn], https://www.youtube.com/channel/UC5AMiWqFVFxF1q9Ya1FuZ_Q[YouTube] } to know when we've posted ones like it.
