@@ -12,7 +12,7 @@ image: blog/featured/okta-android-skew.jpg
 
 As mobile app usage is expected to continue to grow, now is as good a time as any to get into the market. Android is by far the most popular OS worldwide and the dominant way to get Android apps to phone users is the Google Play Store. In this tutorial, you'll build a React Native app and I'll walk you through everything from how to pick a design, as well as setting up your React Native environment, tips for getting the most out of your editor, and publishing it on Google Play.
 
-This is what the eventual app will look like:
+This is what the eventual app will look like (you can also view it [on the Google Play Store](https://play.google.com/store/apps/details?id=com.prime_components)):
 
 {% img blog/react-native-android-play-store/final.png alt:"Final Result" width:"283" %}{: .center-image }
 
@@ -1087,6 +1087,8 @@ Go to **App release** and click `EDIT RELEASE`. Scroll to the bottom and click `
 
 ## Learn More About Android, React Native, and Secure User Management
 Congrats! You have just finished choosing, designing, and developing an Android app using React Native, as well as publishing it to the Play Store. I hope you found this tutorial enlightening. Go and make something useful and publish it!
+
+The app's source code is [available on GitHub](https://github.com/oktadeveloper/okta-react-native-prime-components-example).
 
 If you're interested in learning more about app design, React Native or secure user management with Okta, check out the following resources:
 
