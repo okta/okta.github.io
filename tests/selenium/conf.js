@@ -1,12 +1,11 @@
 const config = {
   framework: 'mocha',
-
   mochaOpts: {
     reporter: 'list',
     timeout: 90000,
     retries: 4
   },
-  specs: ['spec/blog-page-spec.js'],
+  specs: ['spec/*.js'],
   capabilities: {},
   troubleshoot: true
 };
