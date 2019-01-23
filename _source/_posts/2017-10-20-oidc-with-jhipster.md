@@ -109,6 +109,8 @@ export SECURITY_OAUTH2_CLIENT_CLIENT_ID="{clientId}"
 export SECURITY_OAUTH2_CLIENT_CLIENT_SECRET="{clientSecret}"
 ```
 
+**NOTE:** If you're using JHipster 5.x, you'll need to remove `SECURITY_OAUTH2_RESOURCE_TOKEN_INFO_URI` from your `.okta.env` as it's no longer needed.
+
 Of course, you'll need to create a new OIDC client in Okta and fill in the variables before this works. Once you've done that, you can run the following command to set these environment variables.
 
 ```bash
