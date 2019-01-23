@@ -90,7 +90,6 @@ The point is, once you've shipped something down to a user that contains a strin
 
 At the end of the day, if you've shipped code to the user, in either uncompiled or binary form, it will be possible for them to see what's inside.
 
-
 ## HTTPS requests can be intercepted from mobile apps
 
 Even if you think you've got the most clever obfuscation technique and are sure that nobody could ever extract the secret from your app's binary file, there's another way someone can find out the secret.
@@ -107,7 +106,6 @@ Once you've got your own certificate authority installed on your phone, your new
 
 Of course this is not something that an attacker is going to realistically do to intercept a random user's data in transit, but if someone wanted to find out the secret used by an app, they could do this to their own phone and easily see all the data the app sends over the wire. This means that despite your best efforts of hiding your app secret in the source code, it's still going to be sent over the wire where it can be intercepted.
 
-
 ## How does this relate to OAuth?
 
 Alright, so we've seen two ways that API keys and secrets can be extracted from a mobile app. But how does this relate to OAuth?
@@ -120,15 +118,13 @@ That changed with OAuth 2.0, especially once the PKCE (proof key code exchange) 
 
 OAuth still sends access tokens over the wire where they may be visible to you if you're using something like `mitmproxy`, but the difference is that this token is issued on the fly and is specific to the user who is using it! This way, there are no secrets shipped in the source code, and if someone wants to intercept the traffic from their own device, all they will see is an access token that was issued just to them! They won't get access to anything their app can't already access.
 
-
 ## How to protect secrets in mobile apps
 
 Hopefully you now have an understanding of why it's not safe to ship API keys or other secrets in mobile apps. So what do you do instead? 
 
-OAuth solves this problem by not shipping any secrets in mobile apps, and instead involving the user in the process of getting an access token into the app. These access tokens are unique per user and every time they log in.The [PKCE extension](https://www.oauth.com/oauth2-servers/pkce/) provides a solution for securely doing the OAuth flow on a mobile app even when there is no pre-provisioned secret.
+OAuth solves this problem by not shipping any secrets in mobile apps, and instead involving the user in the process of getting an access token into the app. These access tokens are unique per user and every time they log in. The [PKCE extension](https://www.oauth.com/oauth2-servers/pkce/) provides a solution for securely doing the OAuth flow on a mobile app even when there is no pre-provisioned secret.
 
 If you need to access an API from a mobile app, hopefully it supports OAuth and PKCE! Thankfully most of the hard work of PKCE is handled by SDKs like [AppAuth](https://appauth.io) so you don't have to write all that code yourself. If you're working with an API like Okta, then Okta's own SDKs do PKCE automatically so you don't have to worry about it at all.
-
 
 ## Learn more about OAuth and API security
 
