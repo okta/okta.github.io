@@ -7,6 +7,7 @@ tweets:
   - "Learn how to secure your #aspnetcore API with token authentication"
   - "Got an #aspnetcore #webapi you need to secure?Learn how to use token authentication @oktadev"
   - "Don't forget to secure your #aspnetcore #api using token authentication"
+image: blog/featured/okta-dotnet-half.jpg
 ---
 
 API security can be complex. In many cases, just because you've built an API that you want to make public, it doesn't mean that you want just anybody accessing it. In most cases, you want fine-grained control over who can access the API, but setting up that kind of user management can be a daunting task: you'd have to create your own authorization service that can create API credentials for your users and have the ability to exchange those API credentials for an access token using OAuth 2.0. I've got good news! With just a few lines of code, Okta can handle all the complicated and time-consuming security elements and let you concentrate on creating a stellar API. =)
