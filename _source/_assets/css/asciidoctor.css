@@ -362,7 +362,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 .show-for-print{display:inherit!important}}
 
 /* New rules added by mraible */
-.paragraph > p, .sectionbody .ulist, .admonitionblock, .quoteblock blockquote p:last-child, .olist {
+.paragraph > p, .sectionbody .ulist, .admonitionblock, .quoteblock blockquote p:last-child, .olist, .ulist {
     margin-bottom: 1.25rem;
 }
 

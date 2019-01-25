@@ -1,60 +1,103 @@
 'use strict';
 
 const BasePage = require('./BasePage');
-const util = require('../shared/util');
+
+const sideBarSelector = '.Sidebar';
+const sideBarNavsSelector = '.Sidebar-nav';
+const footerSelector = '.Footer';
+
+const authReferenceLinkText = 'Sign in Your Users';
+const apiReferenceLinkText = 'Manage Okta Resources';
+
+const sideBarReferencesSelector = '#Sidebar_References li.is-active';
+const sideBarResourcesSelector = '#Sidebar_Resources li.is-active';
+
+const authReferenceUrl = '/docs/api/resources/oidc';
+const apiReferenceUrl = '/docs/api/resources/roles';
 
 class SideBarPage extends BasePage {
-  constructor() {
-    const relativeUrl = '/use_cases/authentication/';
-    super(relativeUrl);
-    this.$sideBar = $('.Sidebar');
-    this.$$sideBarNav = $$('.Sidebar-nav');
-    this.$useCasesNav = this.$$sideBarNav.get(0);
-    this.$referenceNav = this.$$sideBarNav.get(1);
-    this.$standardsNav = this.$$sideBarNav.get(2);
-
-    this.$authenticationReferenceLink = element(by.linkText('Sign in Your Users'));
-    this.$apiReferenceLink = element(by.linkText('Manage Okta Resources'));
-
-    this.$$sideBarReferences = $$('#Sidebar_References li.is-active');
-    this.$$sideBarResources = $$('#Sidebar_Resources li.is-active');
-
-    this.$$useCasesLinks = this.$useCasesNav.all(By.tagName('li'));
-    this.$$referenceLinks = this.$referenceNav.all(By.tagName('li'));
-    this.$$standardsLinks = this.$standardsNav.all(By.tagName('li'));
-    this.setPageLoad(this.$sideBar)
+  constructor(url) {
+    super(url, SideBarPage.getPageLoadElement());
   }
+
+  navigate(url, pageLoadElement) {
+    if (pageLoadElement) {
+      this.load(url, pageLoadElement);
+    } else {
+      this.load(url, SideBarPage.getPageLoadElement());
+    }
+  }
+
+  static getPageLoadElement() {
+    return element(by.css(sideBarSelector));
+  }
+
+  getFooter() {
+    return element(by.css(footerSelector));
+  }
+
+  getSideBarNavs() {
+    return element.all(by.css(sideBarNavsSelector));
+  }
+  getUseCasesNav() {
+    return this.getSideBarNavs().get(0);
+  }
+  getReferencesNav() {
+    return this.getSideBarNavs().get(1);
+  }
+  getStandardsNav() {
+    return this.getSideBarNavs().get(2);
+  }
+
+  getAuthReferenceLink() {
+    return element(by.linkText(authReferenceLinkText));
+  }
+
+  getApiReferenceLink() {
+    return element(by.linkText(apiReferenceLinkText));
+  }
+
+  getSideBarReferences() {
+    return element.all(by.css(sideBarReferencesSelector));
+  }
+
+  getSideBarResources() {
+    return element.all(by.css(sideBarResourcesSelector));
+  }
+
 
   clickAuthenticationReferenceLink() {
-    this.$authenticationReferenceLink.click();
+    // this.getAuthReferenceLink().click();
+    this.smartClick(this.getAuthReferenceLink());
   }
 
-  clickAPIReferenceLink() {
-    this.$apiReferenceLink.click();
+  clickApiReferenceLink() {
+    this.getApiReferenceLink().click();
   }
 
-  useCasesHasLinks() {
-    // We check if 'Use Cases' section has at least 1 link. We can enhance this in the future to check for a specific number of links
-    return this.$$useCasesLinks.count().then(count => count > 0);
+  getUseCaseLinkCount() {
+    return this.getUseCasesNav().all(by.tagName('li')).count();
+  }
+  getReferencesLinkCount() {
+    return this.getReferencesNav().all(by.tagName('li')).count();
+  }
+  getStandardsLinkCount() {
+    return this.getStandardsNav().all(by.tagName('li')).count();
+  }
+  getAuthReferenceLinkCount() {
+    return this.getSideBarReferences().count();
+  }
+  getApiReferenceLinkCount() {
+    return this.getSideBarResources().count();
   }
 
-  authenticationReferenceHasLinks() {
-    return this.$$sideBarReferences.count().then(count => count > 0);
+  static getAuthReferenceUrl() {
+    return authReferenceUrl;
+  }
+  static getApiReferenceUrl() {
+    return apiReferenceUrl;
   }
 
-  APIReferenceHasLinks() {
-    return this.$$sideBarResources.count().then(count => count > 0);
-  }
-
-  referenceHasLinks() {
-    // We check if 'References' section has at least 1 link. We can enhance this in the future to check for a specific number of links
-    return this.$$referenceLinks.count().then(count => count > 0);
-  }
-
-  standardsHasLinks() {
-    // We check if 'Standards' section has at least 1 link. We can enhance this in the future to check for a specific number of links
-    return this.$$standardsLinks.count().then(count => count > 0);
-  }
 }
 
 module.exports = SideBarPage;

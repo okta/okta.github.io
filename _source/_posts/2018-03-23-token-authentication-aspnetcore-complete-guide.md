@@ -9,6 +9,7 @@ tweets:
  - "A comprehensive guide to understanding token authentication in #aspnetcore →"
 redirect_from:
  - "/blog/2018/03/27/token-authentication-aspnetcore-complete-guide"
+image: blog/featured/okta-dotnet-bottle-headphones.jpg
 ---
 
 Token authentication has been a popular topic for the past few years, especially as mobile and JavaScript apps have continued to gain mindshare. Widespread adoption of token-based standards like [OAuth 2.0 and OpenID Connect][wthk-oauth] have introduced even more developers to tokens, but the best practices aren't always clear.

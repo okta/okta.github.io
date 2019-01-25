@@ -722,11 +722,12 @@ idpIssuer             | SAML Issuer ID                                          
 subjectNameIdTemplate | Template for app user's username when a user is assigned to the app.                                              | String                                               | FALSE    | FALSE |
 subjectNameIdFormat   | Identifies the SAML processing rules.                                                                             | String                                               | FALSE    | FALSE |
 responseSigned        | Determines whether the SAML authentication response message is digitally signed by the IDP or not                 | Boolean                                              | FALSE    | FALSE |
-assertionSigned       | determines whether the SAML assertion is digitally signed or not                                                  | Boolean                                              | FALSE    | FALSE |
+assertionSigned       | Determines whether the SAML assertion is digitally signed or not                                                  | Boolean                                              | FALSE    | FALSE |
 signatureAlgorithm    | Determines the signing algorithm used to digitally sign the SAML assertion and response                           | String                                               | FALSE    | FALSE |
 digestAlgorithm       | Determines the digest algorithm used to digitally sign the SAML assertion and response                            | String                                               | FALSE    | FALSE |
 honorForceAuthn       | Prompt user to re-authenticate if SP asks for it                                                                  | Boolean                                              | FALSE    | FALSE |
 authnContextClassRef  | Identifies the SAML authentication context class for the assertion's authentication statement                     | String                                               | FALSE    | FALSE |
+requestCompressed     | Determines whether the SAML request is expected to be compressed or not                                           | Boolean                                              | FALSE    | FALSE |
 attributeStatements   | Check [here](http://docs.oasis-open.org/security/saml/Post2.0/sstc-saml-tech-overview-2.0-cd-02.html) for details | [Attribute Statements](#attribute-statements-object) | TRUE    | FALSE |
 
 * Fields that require certificate uploads can't be enabled through the API, such as Single Log Out and Assertion Encryption. These must be updated through the UI.

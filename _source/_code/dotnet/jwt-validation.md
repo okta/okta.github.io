@@ -70,14 +70,16 @@ private static async Task<JwtSecurityToken> ValidateToken(
 
     var validationParameters = new TokenValidationParameters
     {
+        RequireExpirationTime = true,
+        RequireSignedTokens = true,
         ValidateIssuer = true,
         ValidIssuer = issuer,
         ValidateIssuerSigningKey = true,
         IssuerSigningKeys = signingKeys,
         ValidateLifetime = true,
         // Allow for some drift in server time
-        // (a lower value is better; we recommend five minutes or less)
-        ClockSkew = TimeSpan.FromMinutes(5),
+        // (a lower value is better; we recommend two minutes or less)
+        ClockSkew = TimeSpan.FromMinutes(2),
         // See additional validation for aud below
     };
 
@@ -130,19 +132,16 @@ ValidateAudience = true,
 ValidAudience = "MyAwesomeApi",
 ```
 
-You also must verify that the `cid` claim matches the expected Client ID of the current application. You'll have to perform this check after the `ValidateToken` method returns a validated token:
+You also must verify that the `alg` claim matches the expected algorithm which was used to sign the token. You'll have to perform this check after the `ValidateToken` method returns a validated token:
 
 ```csharp
+// Validate alg
 var validatedToken = await ValidateToken(accessToken, issuer, configurationManager);
+var expectedAlg = SecurityAlgorithms.RsaSha256; //Okta uses RS256 
 
-// Validate client ID
-var expectedClientId = "xyz123"; // This Application's Client ID
-var clientIdMatches = validatedToken.Payload.TryGetValue("cid", out var rawCid)
-    && rawCid.ToString() == expectedClientId;
-
-if (!clientIdMatches)
+if (validatedToken.Header?.Alg == null || validatedToken.Header?.Alg != expectedAlg)
 {
-    throw new SecurityTokenValidationException("The cid claim was invalid.");
+    throw new SecurityTokenValidationException("The alg must be RS256.");
 }
 ```
 
@@ -157,10 +156,23 @@ ValidateAudience = true,
 ValidAudience = "xyz123", // This Application's Client ID
 ```
 
+You also must verify that the `alg` claim matches the expected algorithm which was used to sign the token. You'll have to perform this check after the `ValidateToken` method returns a validated token:
+
+```csharp
+// Validate alg
+var validatedToken = await ValidateToken(idToken, issuer, configurationManager);
+var expectedAlg = SecurityAlgorithms.RsaSha256; //Okta uses RS256 
+
+if (validatedToken.Header?.Alg == null || validatedToken.Header?.Alg != expectedAlg)
+{
+    throw new SecurityTokenValidationException("The alg must be RS256.");
+}
+```
+
 If you specified a nonce during the initial code exchange when your application retrieved the ID token, you should verify that the nonce matches:
 
 ```csharp
-var validatedToken = await ValidateToken(accessToken, issuer, configurationManager);
+var validatedToken = await ValidateToken(idToken, issuer, configurationManager);
 
 // Validate nonce
 var expectedNonce = "foobar"; // Retrieve this from a saved cookie or other mechanism

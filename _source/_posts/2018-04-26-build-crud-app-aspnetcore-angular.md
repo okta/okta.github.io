@@ -7,6 +7,7 @@ tags: [asp.net, aspnetcore, angular]
 tweets:
  - "Learn how to put @aspnet and @angular together to build a modern web app with authentication →"
  - "#AspNetCore + #Angular = ❤️! Learn how to use both to build a CRUD app →"
+image: blog/featured/okta-dotnet-tile-mouse.jpg
 ---
 
 A lot of applications today are built with an API on the backend, and then a single page application on the front end. This is a good approach because it allows you a ton of flexibility. For example, if you get a requirement to build a native mobile client later on: it's easy, you already have the server side in place. 
