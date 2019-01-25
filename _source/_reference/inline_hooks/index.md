@@ -77,23 +77,7 @@ The JSON payload is where Okta provides specific information about the process f
 
 The objects providing this specific information on the process flow are nested within a large object called `data`.
 
-The following are some of the objects that can be included in the request, depending on the type of the inline hook:
-
-#### user
-
-For process flows that involve a specific end user, this object provides the values of attributes in the user's Okta profile. In the case of a user attempting to register using the Self-Service Registration widget, the values provided are those the user entered in the widget's fields. Password fields, and any attributes designated sensitive, are not included.
-
-#### authentication
-
-For process flows that involve authentication exchanges between Okta and Service Providers, this object provides a representation of an authentication request made to Okta.
-
-#### policy
-
-For process flows that involve Okta Policy objects, this object provides a representation of the Policy object.
-
-#### context
-
-This object provides information about the original end user request to Okta that started the process flow.
+Also always included is a `data.context` object, providing information about the original end user request to Okta that started the process flow.
 
 ## The Response
 
