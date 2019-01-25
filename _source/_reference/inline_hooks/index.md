@@ -118,7 +118,7 @@ Lets you return commands to Okta to affect the process flow being executed and t
 
 The `commands` object is an array, allowing you to return more than one command in your response. Each element within the array needs to consist of a pair of `type` and `value` elements. Each `type` element needs to be the name of a supported command you wish to invoke. The corresponding `value` element is the operand you wish to specify for the command.
 
-The names of commands follow Java-style reverse DNS name format, beginning with com.okta, followed by an Okta object that the command operates on.
+The names of commands follow Java-style reverse DNS name format, beginning with com.okta, followed by an Okta object that the command operates on, and then an action.
 
 #### error
 
@@ -130,19 +130,13 @@ Within an `error` object, you need to provide an `errorSummary` property set to 
 
 Lets you supply any additional information you wish to store in Okta logs for debugging purposes. You can use this object as you wish, sending any information that would be useful for debugging purposes.
 
-## Okta System Log Entries
-
-Currently, unless debugging is enabled for your org, processing of a hook response is not recorded in the Okta System Log. Further, any `debugContext` data your service returns will only be recorded in the Okta system log if debugging is enabled for your org.
-
-Failures are recorded in the System Log inside a `callback.response.processed` event.
-
 ## Inline Hook Setup
 
 After creating your external service, you need to tell Okta it exists and to enable it for a particular process flow. The steps are:
 
 1. Create an external service.
 
-1. Register your service's endpoint with Okta by making a `POST` request to `/api/v1/callbacks`. You specify your endpoint's address in the request's JSON payload, in the object `channel.config.uri`. <!-- When available, add link to reference documentation for Okta API CRUD operators for registering hook endpoints. -->
+1. Register your service's endpoint with Okta by making a `POST` request to `/api/v1/inlineHook`. You specify your endpoint's address in the request's JSON payload, in the object `channel.config.uri`. See [Inline Hooks Management API](/docs/api/resources/inline-hooks).
 
-1. Associate the endpoint with a particular Okta process flow. How to do this varies by inline hook. Usually, options in the Admin Console allow you to specify that an inline hook should be enabled for a particular process flow. 
+1. Associate the endpoint with a particular Okta process flow. How to do this varies by inline hook.
 
