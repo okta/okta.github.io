@@ -178,7 +178,7 @@ Install Ignite CLI:
 
 [source,bash]
 ----
-npm i -g ignite-cli@2.1.6 ignite-jhipster@2.0.2
+npm i -g ignite-cli@2.2.2 ignite-jhipster@2.0.3
 ----
 
 Make sure you're in the `react-native-spring-boot` directory, then generate a React Native app.
@@ -297,7 +297,7 @@ formModel: t.struct({
 }),
 ----
 
-Then change the `entityToFormValue()` and `formValueToEntity()` methods to save 1 or 0, depending on the user's selection.
+Then change the `entityToFormValue()` to set the toggle on if the value is 1.
 
 [source,js]
 ----
@@ -308,13 +308,19 @@ entityToFormValue = (value) => {
   return {
     id: value.id || null,
     date: value.date || null,
-    exercise: value.exercise || null,
-    meals: value.meals || null,
-    alcohol: value.alcohol || null,
+    exercise: (value.exercise === 1),
+    meals: (value.meals === 1),
+    alcohol: (value.alcohol === 1),
     notes: value.notes || null,
     userId: (value.user && value.user.id) ? value.user.id : null
   }
 }
+----
+
+And change `formValueToEntity()` to save 1 or 0, depending on the user's selection.
+
+[source,js]
+----
 formValueToEntity = (value) => {
   const entity = {
     id: value.id || null,
@@ -709,4 +715,5 @@ https://twitter.com/oktadev[Follow us], https://www.youtube.com/channel/UC5AMiWq
 
 **Changelog:**
 
+* Jan 28, 2019: Updated to use Ignite CLI 2.2.2, Ignite JHipster 2.0.3, and JHipster 5.8.0. You can see the example app changes in https://github.com/oktadeveloper/okta-react-native-spring-boot-example/pull/2[okta-react-native-spring-boot-example#2]; changes to this post can be viewed in https://github.com/okta/okta.github.io/pull/2800[okta.github.io#2800].
 * Dec 10, 2018: Updated to use Ignite JHipster 2.0.2 and JHipster 5.7.0. You can see the example app changes in https://github.com/oktadeveloper/okta-react-native-spring-boot-example/pull/1[okta-react-native-spring-boot-example#1]; changes to this post can be viewed in https://github.com/okta/okta.github.io/pull/2541[okta.github.io#2541].
