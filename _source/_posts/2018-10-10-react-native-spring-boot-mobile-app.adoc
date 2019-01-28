@@ -117,7 +117,7 @@ Copy the JDL above into an `app.jh` file inside the `react-native-spring-boot` d
 
 [source,bash]
 ----
-npm i -g generator-jhipster@5.7.0
+npm i -g generator-jhipster@5.8.0
 ----
 
 Navigate to the `jhipster-api` directory in a terminal window. Run the command below to generate an app with a plethora of useful features out-of-the-box.
@@ -403,7 +403,7 @@ Switching from Keycload to Okta for identity in a JHipster app is suuuper easy t
 
 image::{% asset_path 'blog/react-native-spring-boot/okta-signup.png' %}[alt=Okta Developer Signup,width=800,align=center]
 
-Log in to your Okta Developer account and navigate to **Applications** > **Add Application**. Click **Web** and click **Next**. Give the app a name you'll remember, and specify `http://localhost:8080/login` as a Login redirect URI and click **Done**. Note the client ID and secret, you'll need to copy/paste them into a file in a minute.
+Log in to your Okta Developer account and navigate to **Applications** > **Add Application**. Click **Web** and click **Next**. Give the app a name you'll remember, specify `http://localhost:8080/login` as a Login redirect URI, `http://localhost:8080` as a Logout redirect URI, and click **Done**. Note the client ID and secret, you'll need to copy/paste them into a file in a minute.
 
 Create a `ROLE_ADMIN` and `ROLE_USER` group (**Users** > **Groups** > **Add Group**) and add users to them. I recommend adding the account you signed up with to `ROLE_ADMIN` and creating a new user (**Users** > **Add Person**) to add to `ROLE_USER`.
 
@@ -525,7 +525,7 @@ cf set-env $CF_APP_NAME SECURITY_OAUTH2_CLIENT_CLIENT_SECRET "$SECURITY_OAUTH2_C
 cf restage healthpoints
 ----
 
-After overriding the default OIDC settings for Spring Security, you'll need to add `https://healthpoints.cfapps.io/login` as a redirect URI in your Okta OIDC application.
+After overriding the default OIDC settings for Spring Security, you'll need to add `https://healthpoints.cfapps.io/login` as a Login redirect URI in your Okta OIDC application. You'll also want to add `https://healthpoints.cfapps.io` to your Logout redirect URIs if you want logout to work.
 
 Then... you'll be able to authenticate. Voila! 😃
 
