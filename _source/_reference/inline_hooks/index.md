@@ -48,7 +48,7 @@ Okta's request to your external service consists of an HTTPS POST request with a
 
 {% img hook-request-response.png "Hook Request and Response" alt:"Hook Request and Response" %}
 
-Your service needs to handle the inline hook by responding to Okta's request. The JSON payload of your response contains a `commands` object, in which you can send commands to Okta that affect the course of the Okta process flow, as well as modify Okta objects. The commands that are available vary depending on the type of inline hook you're using. 
+Your service needs to handle the inline hook by responding to Okta's request. The JSON payload of your response contains a `commands` object, in which you can send commands to Okta that affect the course of the Okta process. The commands available vary depending on the type of inline hook you're using. 
 
 ## The Request
 
@@ -67,17 +67,15 @@ Authorization: <key>
 ```
 #### Authorization Header
 
-The Authorization header is a secret string you provide to Okta when you register your external service. This string serves as an API access key for your service, and Okta will provide it in every request, allowing your code to check for its presence as a security measure.
-
-This is not an Okta authorization token, it is simply a text string you decide on.
+The Authorization header is a secret string you provide to Okta when you register your external service. This string serves as an API access key for your service, and Okta will provide it in every request, allowing your code to check for its presence as a security measure. (This is not an Okta authorization token, it is simply a text string you decide on.)
 
 ### JSON Payload Objects
 
 The JSON payload is where Okta provides specific information about the process flow that's being executed, so that your external service can evaluate the specific situation. Information is encapsulated in JSON objects. The set of objects sent depends on the type of inline hook you're using. Objects are defined in the specific documentation for each kind of inline hook.
 
-The objects providing this specific information on the process flow are nested within a large object called `data`.
+The objects providing this information are nested within a large object called `data`.
 
-Also always included is a `data.context` object, providing information about the original end user request to Okta that started the process flow.
+Always included is a `data.context` object, providing context information. In general, `data.context` encapsulates objects that your external service cannot affect, while objects in `data` outside of `data.context` encapsulate objects that your external service will be able to modify by means of commands sent in the response.
 
 ## The Response
 
