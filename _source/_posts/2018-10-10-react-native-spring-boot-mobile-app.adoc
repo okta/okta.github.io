@@ -704,8 +704,7 @@ Don't you feel hip playing with all these best-of-breed technologies? I sure do!
 
 Wanna stay hip? Check out some of our other tutorials on React Native, Spring Boot, and JHipster.
 
-* link:/blog/2018/03/16/build-react-native-authentication-oauth-2[Build a React Native Application and Authenticate with OAuth 2.0] - uses React Native AppAuth, which is a
-https://github.com/ruddell/ignite-jhipster/issues/56[planned integration] for Ignite JHipster.
+* link:/blog/2018/03/16/build-react-native-authentication-oauth-2[Build a React Native Application and Authenticate with OAuth 2.0] - uses React Native AppAuth, just like Ignite JHipster.
 * link:/blog/2018/03/01/develop-microservices-jhipster-oauth[Develop a Microservices Architecture with OAuth 2.0 and JHipster] - includes instructions on how to deploy to Heroku.
 * link:/blog/2018/07/19/simple-crud-react-and-spring-boot[Use React and Spring Boot to Build a Simple CRUD App] - CRUD apps can be cool when you're planning JUG Tours!
 * link:/blog/2018/06/25/react-spring-boot-photo-gallery-pwa[Build a Photo Gallery PWA with React, Spring Boot, and JHipster] - build a Flickr clone with JHipster and React. Make it into a PWA.
