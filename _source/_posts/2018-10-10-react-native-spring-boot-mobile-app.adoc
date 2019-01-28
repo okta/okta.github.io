@@ -525,7 +525,7 @@ cf set-env $CF_APP_NAME SECURITY_OAUTH2_CLIENT_CLIENT_SECRET "$SECURITY_OAUTH2_C
 cf restage healthpoints
 ----
 
-After overriding the default OIDC settings for Spring Security, you'll need to add `https://healthpoints.cfapps.io/login` as a Login redirect URI in your Okta OIDC application. You'll also want to add `https://healthpoints.cfapps.io` to your Logout redirect URIs if you want logout to work.
+After overriding the default OIDC settings for Spring Security, you'll need to add `https://healthpoints.cfapps.io/login` as a Login redirect URI in your Okta OIDC application. You'll also want to add `https://healthpoints.cfapps.io` to your Logout redirect URIs so logout works.
 
 Then... you'll be able to authenticate. Voila! 😃
 
