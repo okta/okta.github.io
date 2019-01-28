@@ -114,7 +114,7 @@ Lets you supply any additional information you wish to store in Okta logs for de
 
 ## Inline Hook Setup
 
-After creating your external service, you need to tell Okta it exists and to enable it for a particular process flow. The steps are:
+After creating your external service, you need to tell Okta it exists, and enable it for a particular process flow. The steps are:
 
 1. Create an external service.
 
