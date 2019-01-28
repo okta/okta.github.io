@@ -150,7 +150,7 @@ export default {
 
         const getLevel = node => {
           const className = Array.from(node.classList).find(cl => cl.match(/is-level/));
-          return className ? className.replace(/^is-level(\d+)$/)[1] : null;
+          return className ? className.match(/^is-level(\d+)$/)[1] : null;
         }
         const siblings = Array.from(this.activeToCItem.parentNode.children);
         const activeLevel = getLevel(this.activeToCItem);
@@ -169,8 +169,8 @@ export default {
         // let nextItem = this.nextAll(this.activeItem.node)
         let toc = document.querySelectorAll('.TableOfContents')[0]
         let scrollTop = toc.scrollTop
-        let firstRect = this.items[0].node.getBoundingClientRect()
-        let activeRect = this.activeItem.node.getBoundingClientRect()
+        let firstRect = document.querySelectorAll('.TableOfContents-item')[0].getBoundingClientRect()
+        let activeRect = this.activeToCItem.getBoundingClientRect()
         let tocRect = toc.getBoundingClientRect()
 
         let tocOffset = scrollTop + activeRect.top - tocRect.top - 60
@@ -180,7 +180,7 @@ export default {
         let scale
         let indicatorOffset = (activeRect.top - firstRect.top)
 
-        if (nextItem.length) {
+        if (nextItem && nextItem.length) {
           nextEle = nextItem
           nextRect = nextEle.getBoundingClientRect()
           scale = (nextRect.top - activeRect.top)
@@ -191,9 +191,6 @@ export default {
         this.indicatorStyle.height = scale+'px'
         this.indicatorStyle.transform = '0, ' + indicatorOffset + 'px'
 
-        if (scrollTop != tocOffset) {
-          toc.scrollTop(tocOffset)
-        }
 
       }
     },
