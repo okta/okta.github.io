@@ -20,6 +20,6 @@
   },
   "devDependencies": {
     "@okta/vuepress-theme-default": "^0.1.0-alpha.1",
-    "vuepress": "^1.0.0-alpha.30"
+    "vuepress": "^1.0.0-alpha.33"
   }
 }
