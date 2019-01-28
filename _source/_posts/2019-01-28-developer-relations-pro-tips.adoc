@@ -6,7 +6,7 @@ description: "Are you in developer advocacy or a frequent conference speaker? Re
 tags: [devrel, protip, protips, developer relations, speaking]
 tweets:
 - "Are you a conference speaker or in Developer Relations? Learn from these experts on how to make your life easier!"
-- "#DevRel Pro Tips from @mraible, "
+- "Check out these #DevRel Pro Tips from @mraible, @aaronpk, @brunoborges, @dblevins, @monkchips, @_JamesWard, @leebrandt, @myfear, @mhartington, @rdegges, @saturnism, and @trisha_gee!"
 image: blog/devrel-protips/devrel-cycle.png
 ---
 :page-liquid:
