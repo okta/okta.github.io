@@ -118,7 +118,7 @@ After creating your external service, you need to tell Okta it exists and to ena
 
 1. Create an external service.
 
-1. Register your service's endpoint with Okta by making a `POST` request to `/api/v1/inlineHook`. You specify your endpoint's address in the request's JSON payload, in the object `channel.config.uri`. See [Inline Hooks Management API](/docs/api/resources/inline-hooks).
+1. Register your service's endpoint with Okta by making a `POST` request to `/api/v1/inlineHooks`. You specify your endpoint's address in the request's JSON payload, in the object `channel.config.uri`. See [Inline Hooks Management API](/docs/api/resources/inline-hooks).
 
 1. Associate the endpoint with a particular Okta process flow. How to do this varies by inline hook.
 
