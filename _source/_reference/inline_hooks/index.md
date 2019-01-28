@@ -75,7 +75,7 @@ The JSON payload is where Okta provides specific information about the process f
 
 The objects providing this information are nested within a large object called `data`.
 
-Always included is a `data.context` object, providing context information. In general, `data.context` encapsulates objects that your external service cannot affect, while objects in `data` outside of `data.context` encapsulate objects that your external service will be able to modify by means of commands sent in the response.
+Always included is a `data.context` object, providing context information. In general, `data.context` encapsulates Okta objects that your external service cannot affect, while objects in `data` outside of `data.context` encapsulate objects that your external service has the ability to affect by means of the commands it sends in its response.
 
 ## The Response
 
