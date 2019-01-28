@@ -29,9 +29,9 @@ export default {
   props: ['items'],
   mounted() {
     window.addEventListener("load", this.buildHeaderData)
+    window.addEventListener("load", this.onScroll)
     window.addEventListener('scroll', this.onScroll)
 
-    this.onScroll()
   },
   data () {
     return {
