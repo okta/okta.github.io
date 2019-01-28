@@ -714,5 +714,5 @@ https://twitter.com/oktadev[Follow us], https://www.youtube.com/channel/UC5AMiWq
 
 **Changelog:**
 
-* Jan 28, 2019: Updated to use Ignite CLI 2.2.2, Ignite JHipster 2.0.3, and JHipster 5.8.0. You can see the example app changes in https://github.com/oktadeveloper/okta-react-native-spring-boot-example/pull/2[okta-react-native-spring-boot-example#2]; changes to this post can be viewed in https://github.com/okta/okta.github.io/pull/2800[okta.github.io#2800].
+* Jan 28, 2019: Updated to use Ignite CLI 2.2.2, Ignite JHipster 2.0.3, and JHipster 5.8.0. You can see the example app changes in https://github.com/oktadeveloper/okta-react-native-spring-boot-example/pull/3[okta-react-native-spring-boot-example#3]; changes to this post can be viewed in https://github.com/okta/okta.github.io/pull/2672[okta.github.io#2672].
 * Dec 10, 2018: Updated to use Ignite JHipster 2.0.2 and JHipster 5.7.0. You can see the example app changes in https://github.com/oktadeveloper/okta-react-native-spring-boot-example/pull/1[okta-react-native-spring-boot-example#1]; changes to this post can be viewed in https://github.com/okta/okta.github.io/pull/2541[okta.github.io#2541].
