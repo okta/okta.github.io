@@ -8,12 +8,12 @@
   "scripts": {
     "clean": "node scripts/clean",
     "pregenerate": "npm run clean",
-    "generate": "cross-env PID_FINDER=okta_github_io JEKYLL_ENV=production bundle exec jekyll",
+    "generate": "cross-env-shell PID_FINDER=okta_github_io JEKYLL_ENV=production bundle exec jekyll",
     "build-prod": "npm run generate build -- --verbose",
     "start": "npm run generate serve -- --incremental --future",
     "test-only": "protractor tests/selenium/conf.js",
-    "stop": "if-env CI=true && exit 0 || (pkill -f 'okta_github_io|webdriver-manager/selenium')",
-    "pretest": "npm run generate serve -- --no-watch & wait-on http://localhost:4000 && webdriver-manager update --gecko false",
+    "stop": "if-env CI=true && exit 0 || (pkill -SIGINT -f 'okta_github_io|webdriver-manager/selenium')",
+    "pretest": "npm run generate serve -- --no-watch & wait-on http://localhost:4000 && ./node_modules/webdriver-manager/bin/webdriver-manager update --gecko false",
     "test": "npm run test-only || (npm stop && exit 1)",
     "posttest": "npm run stop",
     "markdown-lint": "node scripts/lint",
@@ -32,14 +32,18 @@
   },
   "homepage": "https://github.com/okta/okta.github.io#readme",
   "devDependencies": {
+    "chai-as-promised": "*",
+    "chai": "^4.2.0",
     "chalk": "^1.1.3",
-    "cross-env": "^5.0.1",
-    "if-env": "^1.0.0",
-    "jasmine-reporters": "^2.2.0",
-    "jasmine-spec-reporter": "^4.1.0",
-    "protractor": "^5.4.0",
-    "recursive-readdir": "^2.2.1",
+    "cross-env": "^5.2.0",
+    "if-env": "^1.0.4",
+    "mocha": "^5.2.0",
+    "protractor": "^5.4.2",
+    "recursive-readdir": "^2.2.2",
     "remove": "^0.1.5",
-    "wait-on": "^2.0.2"
+    "wait-on": "^2.1.2"
+  },
+  "dependencies": {
+    "webdriver-manager": "^12.1.1"
   }
 }

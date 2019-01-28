@@ -9,6 +9,7 @@ redirect_from:
     - "/docs/how-to/beta-auth-service/api-access-management-troubleshooting"
     - "/standards/OIDC/"
     - "/standards/OAuth/"
+    - "/reference/authentication_reference"
 ---
 
 # OpenID Connect & OAuth 2.0 API

@@ -1086,7 +1086,10 @@ Go to **App release** and click `EDIT RELEASE`. Scroll to the bottom and click `
 **NOTE:** It might be worthwhile using a testing release first to make sure everything works before you release to production, i.e. to everyone!
 
 ## Learn More About Android, React Native, and Secure User Management
+
 Congrats! You have just finished choosing, designing, and developing an Android app using React Native, as well as publishing it to the Play Store. I hope you found this tutorial enlightening. Go and make something useful and publish it!
+
+You can find the app built in this blog post [on the Google Play Store](https://play.google.com/store/apps/details?id=com.prime_components). The app's source code is [available on GitHub](https://github.com/oktadeveloper/okta-react-native-prime-components-example).
 
 If you're interested in learning more about app design, React Native or secure user management with Okta, check out the following resources:
 

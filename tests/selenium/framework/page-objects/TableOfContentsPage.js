@@ -1,70 +1,92 @@
 'use strict';
 
 const BasePage = require('./BasePage');
-const util = require('../shared/util');
+
+const tableOfContentsSelector = '.TableOfContents';
+const level1ItemSelector = '.TableOfContents-item.is-level1';
+const level2ItemsSelector = '.TableOfContents-item.is-level2';
+const level3ItemsSelector = '.TableOfContents-item.is-level3';
+const level4ItemsSelector = '.TableOfContents-item.is-level4';
+
+const topOfPageLinkText = 'Top of Page';
+const subSectionOneLinkText = 'Sub Section 1';
+const lastSectionLinkText = 'Last Section';
+const imageSectionLinkText = 'Image Section';
+const linkSectionLinkText = 'Link Section';
 
 class TableOfContentsPage extends BasePage {
   constructor(url) {
-    const relativeUrl = '/test_page';
-    super(relativeUrl);
-    this.$tableOfContents = $('.TableOfContents');
-    this.$level1Item = $('.TableOfContents-item.is-level1');
-    this.$$level2Item = $$('.TableOfContents-item.is-level2');
-    this.$$level3Item = $$('.TableOfContents-item.is-level3');
-    this.$$level4Item = $$('.TableOfContents-item.is-level4');
-    this.$topOfPage = element(by.linkText('Top of Page'));
-    this.setPageLoad(this.$tableOfContents);
-  }
-  
-  level1ItemContains(expectedText) {
-    return this.$level1Item.getText().then(text => (text == expectedText));
+    super(url, TableOfContentsPage.getPageLoadElement());
   }
 
-  level2ItemsContain(expectedTextArray) {
-    return this.elementsContainText(this.$$level2Item, expectedTextArray);
-  }
-  
-  level3ItemsVisible(expectedTextArray) {
-    return this.$$level3Item.filter(element => {
-      return element.getText().then(text => {
-        for (let i = 0; i < expectedTextArray.length; i++) {
-          if (text == expectedTextArray[i] && element.isDisplayed()) {
-            return true;
-          }
-        }
-      })
-    }).then(elementList => (elementList.length == expectedTextArray.length));
+  navigate(url, pageLoadElement) {
+    if (pageLoadElement) {
+      this.load(url, pageLoadElement);
+    } else {
+      this.load(url, TableOfContentsPage.getPageLoadElement());
+    }
   }
 
-  level4ItemsVisible(expectedTextArray) {
-    return this.$$level4Item.filter(element => {
-      return element.getText().then(text => {
-        for (let i = 0; i < expectedTextArray.length; i++) {
-          if (text == expectedTextArray[i] && element.isDisplayed()) {
-            return true;
-          }
-        }
-      })
-    }).then(elementList => (elementList.length == expectedTextArray.length));
+  static getPageLoadElement() {
+    return element(by.css(tableOfContentsSelector));
   }
-  
-  clickByLinkText(linkText) {
-    const linkItem = this.$tableOfContents.element(by.linkText(linkText));
-    return linkItem.click();
+
+  getLevelOneItem() {
+    return element(by.css(level1ItemSelector));
+  }
+  getLevelTwoItems() {
+    return element.all(by.css(level2ItemsSelector));
+  }
+  getLevelThreeItems() {
+    return element.all(by.css(level3ItemsSelector));
+  }
+  getLevelFourItems() {
+    return element.all(by.css(level4ItemsSelector));
+  }
+
+  getTopOfPageLink() {
+    return element(by.linkText(topOfPageLinkText));
+  }
+  getSubSectionOneLink() {
+    return element(by.linkText(subSectionOneLinkText));
+  }
+  getLastSectionLink() {
+    return element(by.linkText(lastSectionLinkText));
+  }
+  getImageSectionLink() {
+    return element(by.linkText(imageSectionLinkText));
+  }
+  getLinkSectionLink() {
+    return element(by.linkText(linkSectionLinkText));
+  }
+
+  getLevelOneItemText() {
+    return this.getLevelOneItem().getText();
+  }
+  getLevelTwoItemsText() {
+    return this.getElementsText(this.getLevelTwoItems());
+  }
+  getLevelThreeVisibleItemsText() {
+    return this.getElementsText(this.getVisibleElements(this.getLevelThreeItems()));
+  }
+  getLevelFourVisibleItemsText() {
+    return this.getElementsText(this.getVisibleElements(this.getLevelFourItems()));
   }
 
   isTopOfPageLinkDisplayed() {
-    return this.$topOfPage.isDisplayed();
+    return this.getTopOfPageLink().isDisplayed();
   }
 
-  gotoTopOfPage() {
-    return this.$topOfPage.click();
+  goToTopOfPage() {
+    return this.getTopOfPageLink().click();
+  }
+  clickSubSectionOneLink() {
+    return this.getSubSectionOneLink().click();
+  }
+  clickLastSectionLink() {
+    return this.getLastSectionLink().click();
   }
 
-  waitForLinkToBeDisplayed(linkText) {
-    const linkItem = this.$tableOfContents.element(by.linkText(linkText));
-    return util.wait(linkItem);
-  }
 }
 
 module.exports = TableOfContentsPage;

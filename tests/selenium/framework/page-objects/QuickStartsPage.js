@@ -1,223 +1,427 @@
 'use strict';
 
 const BasePage = require('./BasePage');
-const util = require('../shared/util');
+
+const clientSelectorId = 'client-selector';
+const footerSelector = '.Footer';
+const formSearchId = 'form_search';
+const skipToServerSetupLinkText = 'Skip to server setup';
+
+const clientSetupLinkId = 'client_setup_link';
+const cleintContentId = 'client_content';
+const hostedLinkText = 'Okta Sign-In Page';
+const signInWidgetLinkText = 'Okta Sign-In Widget';
+const angularClientLinkText = 'Angular';
+const reactClientLinkText = 'React';
+const vueClientLinkText = 'Vue';
+const androidClientLinkText = 'Android';
+const iosClientLinkText = 'iOS';
+const reactNativeClientLinkText = 'React Native';
+
+const serverSetupLinkId = 'server_setup_link';
+const serverContentId = 'server_content';
+const nodeJsServerLinkText = 'Node JS';
+const expressJsNodeServerLinkText = 'Express.js';
+const genericNodeServerLinkText = 'Generic Node';
+const javaServerLinkText = 'Java';
+const springJavaServerLinkText = 'Spring';
+const genericJavaServerLinkText = 'Generic Java';
+const phpServerLinkText = 'PHP';
+const genericPhpServerLinkText = 'Generic PHP';
+const dotNetServerLinkText = '.NET';
+const aspDotNetCoreServerLinkText = 'ASP.NET Core';
+const aspDotNetFourServerLinkText = 'ASP.NET 4.x';
+
+const activeLinksClass = '.active';
+const frameworkLinksSelector = '#framework-selector a';
+
+const signInPageContentHeaderId = 'okta-sign-in-page-quickstart';
+const signInWidgetContentHeaderId = 'okta-sign-in-widget-quickstart';
+const angularContentHeaderId = 'okta-angular-quickstart';
+const reactContentHeaderId = 'okta-react-quickstart';
+const vueContentHeaderId = 'okta-vuejs-quickstart';
+const androidContentHeaderId = 'okta-android-quickstart';
+const iosContentHeaderId = 'okta-ios-quickstart';
+const reactNativeContentHeaderId = 'okta-react-native-quickstart';
+
+const nodeExpressJsContentHeaderId = 'okta-nodejsexpressjs-quickstart';
+const nodeGenericContentHeaderId = 'okta-nodejs-quickstart';
+const javaSpringContentHeaderId = 'okta-javaspring-quickstart';
+const javaGenericContentHeaderId = 'okta-java-quickstart';
+const phpGenericContentHeaderId = 'okta-php-quickstart';
+const dotNetAspCoreContentHeaderId = 'okta-aspnet-core-mvc-quickstart';
+const dotNetAspFourContentHeaderId = 'okta-aspnet-4x-quickstart';
+
+const signInPageUrlFragment = '/okta-sign-in-page';
+const signInWidgetUrlFragment = '/widget';
+const angularUrlFragment = '/angular';
+const reactUrlFragment = '/react';
+const vueUrlFragment = '/vue';
+const androidUrlFragment = '/android';
+const iosUrlFragment = '/ios';
+const reactNativeUrlFragment = '/react-native';
+
+const nodeExpressJsUrlFragment = '/nodejs/express';
+const nodeGenericUrlFragemnt = '/nodejs/generic';
+const javaSpringUrlFragment = '/java/spring';
+const javaGenericUrlFragment = '/java/generic';
+const phpGenericUrlFragment = '/php/generic';
+const dotNetAspCoreUrlFragment = '/dotnet/aspnetcore';
+const dotNetAspFourUrlFragment = '/dotnet/aspnet4';
+
+const nodeExpressJsUrlLongFragment = 'okta-sign-in-page/nodejs/express';
+const javaSpringUrlLongFragment = 'okta-sign-in-page/java/spring';
+const dotNetAspCoreUrlLongFragment = 'okta-sign-in-page/dotnet/aspnetcore';
 
 class QuickStartsPage extends BasePage {
   constructor(url) {
-    super(url);
-    this.$clientSelector = $('#client-selector');
-    this.$skipToServerSetup = element(by.linkText('Skip to server setup'));
-    this.$clientSetupLink = $('#client_setup_link');
-    this.$serverSetupLink = $('#server_setup_link');
-    this.$androidLink = element(by.linkText('Android'));
-    this.$angularLink = element(by.linkText('Angular'));
-    this.$iOSLink = element(by.linkText('iOS'));
-    this.$reactNativeLink = element(by.linkText('React Native'));
-    this.$vueLink = element(by.linkText('Vue'));
-    this.$siwLink = element(by.linkText('Okta Sign-In Widget'));
-    this.$reactLink = element(by.linkText('React'));
-    this.$hostedLink = element(by.linkText('Okta Sign-In Page'));
-    this.$nodeJSLink = element(by.linkText('Node JS'));
-    this.$javaLink = element(by.linkText('Java'));
-    this.$phpLink = element(by.linkText('PHP'));
-    this.$dotnetLink = element(by.linkText('.NET'));
-    this.$genericNodeLink = element(by.linkText('Generic Node'));
-    this.$expressJSLink = element(by.linkText('Express.js'));
-    this.$genericJavaLink = element(by.linkText('Generic Java'));
-    this.$genericPHPLink = element(by.linkText('Generic PHP'));
-    this.$springLink = element(by.linkText('Spring'));
-    this.$aspCore = element(by.linkText('ASP.NET Core'));
-    this.$aspFour = element(by.linkText('ASP.NET 4.x'));
-    this.$$activeLinks = $$('.active');
-    this.$$frameworkLinks = $$('#framework-selector a');
-    this.$$signInPageContentHeader = element(by.id('okta-sign-in-page-quickstart'));
-    this.$$signInWidgetContentHeader = element(by.id('okta-sign-in-widget-quickstart'));
-    this.$$angularContentHeader = element(by.id('okta-angular-quickstart'));
-    this.$$reactContentHeader = element(by.id('okta-react-quickstart'));
-    this.$$androidContentHeader = element(by.id('okta-android-quickstart'));
-    this.$$iosContentHeader = element(by.id('okta-ios-quickstart'));
-    this.$$nodeGenericContentHeader = element(by.id('okta-nodejs-quickstart'));
-    this.$$nodeExpressContentHeader = element(by.id('okta-nodejsexpressjs-quickstart'));
-    this.$$javaGenericContentHeader = element(by.id('okta-java-quickstart'));
-    this.$$javaSpringExpressContentHeader = element(by.id('okta-javaspring-quickstart'));
-    this.$$phpGenericContentHeader = element(by.id('okta-php-quickstart'));
-    this.$$dotnetAspCoreGenericContentHeader = element(by.id('okta-aspnet-core-mvc-quickstart'));
-    this.$$dotnetAsp4GenericContentHeader = element(by.id('okta-aspnet-4x-quickstart'));
-
-    this.setPageLoad(this.$clientSelector);
+    super(url, QuickStartsPage.getPageLoadElement());
   }
 
-  /**
-   * In order to test default selections, we need to leave the page and then come back.
-   * Why? Because changing the URL fragment in-page will not cause the quickstart app's
-   * main() function to re-run, which is what we want to test.  We want to test when
-   * the app is bootstrapped with specific URL fragments.
-   */
-  leave() {
-    browser.ignoreSynchronization = true;
-    // Remove the quickstart URL, navigate back to the root of the site
-    browser.get(this.url.replace(/\/quickstart\/.*/,'/'));
-    return browser.sleep(1000);
+  navigate(url, pageLoadElement) {
+    if (pageLoadElement) {
+      this.load(url, pageLoadElement);
+    } else {
+      this.load(url, QuickStartsPage.getPageLoadElement());
+    }
   }
 
-  selectClientSetupLink() {
-    return this.$clientSetupLink.click();
+  static getPageLoadElement() {
+    return element(by.css(footerSelector));
+  }
+  getFormSearch() {
+    return element(by.id(formSearchId));
+  }
+  getSkipToServerSetupLink() {
+    return element(by.linkText(skipToServerSetupLinkText));
   }
 
-  selectServerSetupLink() {
-    return this.$serverSetupLink.click();
+  getClientSetupLink() {
+    return element(by.id(clientSetupLinkId));
+  }
+  getClientContent() {
+    return element(by.id(cleintContentId));
+  }
+  getHostedLink() {
+    return element(by.linkText(hostedLinkText));
+  }
+  getSignInWidgetLink() {
+    return element(by.linkText(signInWidgetLinkText));
+  }
+  getAngularClientLink() {
+    return element(by.linkText(angularClientLinkText));
+  }
+  getReactClientLink() {
+    return element(by.linkText(reactClientLinkText));
+  }
+  getVueClientLink() {
+    return element(by.linkText(vueClientLinkText));
+  }
+  getAndroidClientLink() {
+    return element(by.linkText(androidClientLinkText));
+  }
+  getIosClientLink() {
+    return element(by.linkText(iosClientLinkText));
+  }
+  getReactNativeClientLink() {
+    return element(by.linkText(reactNativeClientLinkText));
   }
 
-  getSkipLink() {
-    return this.$skipToServerSetup;
+  getServerSetupLink() {
+    return element(by.id(serverSetupLinkId));
+  }
+  getServerContent() {
+    return element(by.id(serverContentId));
+  }
+  getNodeJsServerLink() {
+    return element(by.linkText(nodeJsServerLinkText));
+  }
+  getExpressJsNodeServerLinkText() {
+    return element(by.linkText(expressJsNodeServerLinkText));
+  }
+  getGenericNodeServerLink() {
+    return element(by.linkText(genericNodeServerLinkText));
+  }
+  getJavaServerLink() {
+    return element(by.linkText(javaServerLinkText));
+  }
+  getSpringJavaServerLink() {
+    return element(by.linkText(springJavaServerLinkText));
+  }
+  getGenericJavaServerLink() {
+    return element(by.linkText(genericJavaServerLinkText));
+  }
+  getPhpServerLink() {
+    return element(by.linkText(phpServerLinkText));
+  }
+  getGenericPhpServerLink() {
+    return element(by.linkText(genericPhpServerLinkText));
+  }
+  getDotNetServerLink() {
+    return element(by.linkText(dotNetServerLinkText));
+  }
+  getAspDotNetCoreServerLink() {
+    return element(by.linkText(aspDotNetCoreServerLinkText));
+  }
+  getAspDotNetFourServerLink() {
+    return element(by.linkText(aspDotNetFourServerLinkText));
   }
 
-  getNodeJSLink() {
-    return this.$nodeJSLink;
+  getActiveLinks() {
+    return element.all(by.css(activeLinksClass));
+  }
+  async getActiveLinkText() {
+    return await this.getElementsText(this.getActiveLinks());
+  }
+  getFrameworkLinks() {
+    return element.all(by.css(frameworkLinksSelector));
+  }
+  async getFrameworkLinkText() {
+    return await this.getElementsText(this.getFrameworkLinks());
   }
 
-  selectSignInWidget() {
-    return this.$siwLink.click();
+  getSignInPageContentHeader() {
+    return element(by.id(signInPageContentHeaderId));
+  }
+  getSignInWidgetContentHeader() {
+    return element(by.id(signInWidgetContentHeaderId));
+  }
+  getAngularContentHeader() {
+    return element(by.id(angularContentHeaderId));
+  }
+  getReactContentHeader() {
+    return element(by.id(reactContentHeaderId));
+  }
+  getVueContentHeader() {
+    return element(by.id(vueContentHeaderId));
+  }
+  getAndroidContentHeader() {
+    return element(by.id(androidContentHeaderId));
+  }
+  getIosContentHeader() {
+    return element(by.id(iosContentHeaderId));
+  }
+  getReactNativeContentHeader() {
+    return element(by.id(reactNativeContentHeaderId));
   }
 
-  selectHosted(){
-    return this.$hostedLink.click();
+  getNodeExpressJsContentHeader() {
+    return element(by.id(nodeExpressJsContentHeaderId));
+  }
+  getNodeGenericContentHeader() {
+    return element(by.id(nodeGenericContentHeaderId));
+  }
+  getJavaSpringContentHeader() {
+    return element(by.id(javaSpringContentHeaderId));
+  }
+  getJavaGenericContentHeader() {
+    return element(by.id(javaGenericContentHeaderId));
+  }
+  getPhpGenericContentHeader() {
+    return element(by.id(phpGenericContentHeaderId));
+  }
+  getDotNetAspCoreContentHeader() {
+    return element(by.id(dotNetAspCoreContentHeaderId));
+  }
+  getDotNetAspFourContentHeader() {
+    return element(by.id(dotNetAspFourContentHeaderId));
   }
 
-  selectAndroidClient() {
-    return this.$androidLink.click();
+  static getSignInPageUrlFragment() {
+    return signInPageUrlFragment;
+  }
+  static getSignInWidgetUrlFragment() {
+    return signInWidgetUrlFragment;
+  }
+  static getAngularUrlFragment() {
+    return angularUrlFragment;
+  }
+  static getReactUrlFragment() {
+    return reactUrlFragment;
+  }
+  static getVueUrlFragment() {
+    return vueUrlFragment;
+  }
+  static getAndroidUrlFragment() {
+    return androidUrlFragment;
+  }
+  static getIosUrlFragment() {
+    return iosUrlFragment;
+  }
+  static getReactNativeUrlFragment() {
+    return reactNativeUrlFragment;
   }
 
-  selectAngularClient() {
-    return this.$angularLink.click();
+  static getNodeExpressJsUrlFragment() {
+    return nodeExpressJsUrlFragment;
+  }
+  static getNodeGenericUrlFragment() {
+    return nodeGenericUrlFragemnt;
+  }
+  static getJavaSpringUrlFragment() {
+    return javaSpringUrlFragment;
+  }
+  static getJavaGenericUrlFragment() {
+    return javaGenericUrlFragment;
+  }
+  static getPhpGenericUrlFragment() {
+    return phpGenericUrlFragment;
+  }
+  static getDotNetAspCoreUrlFragment() {
+    return dotNetAspCoreUrlFragment;
+  }
+  static getDotNetAspFourUrlFragment() {
+    return dotNetAspFourUrlFragment;
   }
 
-  selectiOSClient() {
-    return this.$iOSLink.click();
+  static getNodeExpressJsUrlLongFragment() {
+    return nodeExpressJsUrlLongFragment;
   }
-
-  selectReactNativeClient() {
-    return this.$reactNativeLink.click()
+  static getJavaSpringUrlLongFragment() {
+    return javaSpringUrlLongFragment;
   }
-
-  selectVueClient() {
-    return this.$vueLink.click();
-  }
-
-  selectReactClient() {
-    return this.$reactLink.click();
-  }
-
-  selectNodeJSServer() {
-    return this.$nodeJSLink.click();
-  }
-
-  selectJavaServer() {
-    return this.$javaLink.click();
-  }
-
-  selectPHPServer() {
-    return this.$phpLink.click();
-  }
-
-  selectExpressJS() {
-    this.waitForPresence(this.$expressJSLink);
-    return this.$expressJSLink.click();
-  }
-
-  selectSpring() {
-    this.waitForPresence(this.$springLink);
-    return this.$springLink.click();
-  }
-
-  selectGenericJava() {
-    this.waitForPresence(this.$genericJavaLink);
-    return this.$genericJavaLink.click();
-  }
-
-  selectGenericPHP() {
-    this.waitForPresence(this.$genericPHPLink);
-    return this.$genericPHPLink.click();
-}
-
-  selectGenericNode() {
-    this.waitForPresence(this.$genericNodeLink);
-    return this.$genericNodeLink.click();
-  }
-
-  selectDotNet() {
-    return this.$dotnetLink.click();
-  }
-
-  selectDotNetCore() {
-    this.waitForPresence(this.$aspCore);
-    return this.$aspCore.click();
-  }
-
-  selectDotNetFour() {
-    this.waitForPresence(this.$aspFour);
-    return this.$aspFour.click();
+  static getDotNetAspCoreUrlLongFragment() {
+    return dotNetAspCoreUrlLongFragment;
   }
 
   activeLinksContain(links) {
-    return this.elementsContainText(this.$$activeLinks, links);
+    return this.elementsContainText(this.getActiveLinks(), links);
+  }
+  frameworkLinksContain(links) {
+    return this.elementsContainText(this.getFrameworkLinks(), links);
   }
 
-  frameworkLinksContain(links) {
-    return this.elementsContainText(this.$$frameworkLinks, links);
+  selectClientSetupLink() {
+    return this.getClientSetupLink().click();
+  }
+  selectHostedLink(){
+    return this.getHostedLink().click();
+  }
+  selectSignInWidgetLink() {
+    return this.getSignInWidgetLink().click();
+  }
+  selectAngularClientLink() {
+    return this.getAngularClientLink().click();
+  }
+  selectReactClientLink() {
+    return this.getReactClientLink().click();
+  }
+  selectVueClientLink() {
+    return this.getVueClientLink().click();
+  }
+  selectAndroidClientLink() {
+    return this.getAndroidClientLink().click();
+  }
+  selectIosClientLink() {
+    return this.getIosClientLink().click();
+  }
+  selectReactNativeClientLink() {
+    return this.getReactNativeClientLink().click()
+  }
+
+  selectServerSetupLink() {
+    return this.getServerSetupLink().click();
+  }
+  selectNodeJsServerLink() {
+    return this.getNodeJsServerLink().click();
+  }
+  selectExpressJsNodeServerLink() {
+    this.waitForPresence(this.getNodeJsServerLink());
+    return this.getExpressJsNodeServerLinkText().click();
+  }
+  selectGenericNodeServerLink() {
+    this.waitForPresence(this.getNodeJsServerLink());
+    return this.getGenericNodeServerLink().click();
+  }
+  selectJavaServerLink() {
+    return this.getJavaServerLink().click();
+  }
+  selectSpringJavaServerLink() {
+    this.waitForPresence(this.getSpringJavaServerLink());
+    return this.getSpringJavaServerLink().click();
+  }
+  selectGenericJavaServerLink() {
+    this.waitForPresence(this.getJavaServerLink());
+    return this.getGenericJavaServerLink().click();
+  }
+  selectPhpServerLink() {
+    return this.getPhpServerLink().click();
+  }
+  selectGenericPhpServerLink() {
+    return this.getGenericPhpServerLink().click();
+  }
+  selectDotNetServerLink() {
+    return this.getDotNetServerLink().click();
+  }
+  selectAspDotNetCoreServerLink() {
+    this.waitForPresence(this.getDotNetServerLink());
+    return this.getAspDotNetCoreServerLink().click();
+  }
+  selectAspDotNetFourServerLink() {
+    this.waitForPresence(this.getDotNetServerLink());
+    return this.getAspDotNetFourServerLink().click();
   }
 
   isShowingSignInPageContent() {
-    return this.$$signInPageContentHeader.isPresent();
+    this.waitForPresence(this.getSignInPageContentHeader());
+    return this.getSignInPageContentHeader().isPresent();
   }
-
   isShowingSignInWidgetContent() {
-    return this.$$signInWidgetContentHeader.isPresent();
+    this.waitForPresence(this.getSignInWidgetContentHeader());
+    return this.getSignInWidgetContentHeader().isPresent();
   }
-
   isShowingAngularContent() {
-    return this.$$angularContentHeader.isPresent();
+    this.waitForPresence(this.getAngularContentHeader());
+    return this.getAngularContentHeader().isPresent();
   }
-
   isShowingReactContent() {
-    return this.$$reactContentHeader.isPresent();
+    this.waitForPresence(this.getReactContentHeader());
+    return this.getReactContentHeader().isPresent();
   }
-
+  isShowingVueContent() {
+    this.waitForPresence(this.getVueContentHeader());
+    return this.getVueContentHeader().isPresent();
+  }
   isShowingAndroidContent() {
-    return this.$$androidContentHeader.isPresent();
+    this.waitForPresence(this.getAndroidContentHeader());
+    return this.getAndroidContentHeader().isPresent();
   }
-
   isShowingIosContent() {
-    return this.$$iosContentHeader.isPresent();
+    this.waitForPresence(this.getIosContentHeader());
+    return this.getIosContentHeader().isPresent();
+  }
+  isShowingReactNativeContent() {
+    this.waitForPresence(this.getReactNativeContentHeader());
+    return this.getReactNativeContentHeader().isPresent();
   }
 
+  isShowingNodeExpressJsContent() {
+    this.waitForPresence(this.getNodeExpressJsContentHeader());
+    return this.getNodeExpressJsContentHeader().isPresent();
+  }
   isShowingNodeGenericContent() {
-    return this.$$nodeGenericContentHeader.isPresent();
+    this.waitForPresence(this.getNodeGenericContentHeader());
+    return this.getNodeGenericContentHeader().isPresent();
   }
-
-  isShowingNodeExpressContent() {
-    return this.$$nodeExpressContentHeader.isPresent();
-  }
-
-  isShowingJavaGenericContent() {
-    return this.$$javaGenericContentHeader.isPresent();
-  }
-
   isShowingJavaSpringContent() {
-    return this.$$javaSpringExpressContentHeader.isPresent();
+    this.waitForPresence(this.getJavaSpringContentHeader());
+    return this.getJavaSpringContentHeader().isPresent();
   }
-
+  isShowingJavaGenericContent() {
+    this.waitForPresence(this.getJavaGenericContentHeader());
+    return this.getJavaGenericContentHeader().isPresent();
+  }
   isShowingPhpGenericContent() {
-    return this.$$phpGenericContentHeader.isPresent();
+    this.waitForPresence(this.getPhpGenericContentHeader());
+    return this.getPhpGenericContentHeader().isPresent();
   }
-
-  isShowingDotnetAspCoreContent() {
-    return this.$$dotnetAspCoreGenericContentHeader.isPresent();
+  isShowingDotNetAspCoreContent() {
+    this.waitForPresence(this.getDotNetAspCoreContentHeader());
+    return this.getDotNetAspCoreContentHeader().isPresent();
   }
-
-  isShowingDotnetAsp4Content() {
-    return this.$$dotnetAsp4GenericContentHeader.isPresent();
+  isShowingDotNetAspFourContent() {
+    this.waitForPresence(this.getDotNetAspFourContentHeader());
+    return this.getDotNetAspFourContentHeader().isPresent();
   }
 
 }
