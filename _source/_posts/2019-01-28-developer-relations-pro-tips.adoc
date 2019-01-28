@@ -151,7 +151,7 @@ Social media is great. Being in contact with people from all over the world and 
 * A picture is worth a thousand words
 * Respect cultural differences
 
-Unfortunately, there is no general advice on the content you should tweet about. As this will probably also heavily depend on your own interest and your field of work. But one thing should be kept in mind. There are things you don’t talk about at a dinner table. And this simple rule should absolutely apply to all your public interactions. 
+Unfortunately, there is no general advice on the content you should tweet about. As this will probably also heavily depend on your own interest and your field of work. But one thing should be kept in mind. There are things you don't talk about at a dinner table. And this simple rule should absolutely apply to all your public interactions. 
 
 If you want to learn more, I can only suggest looking at https://www.slideshare.net/myfear/10-golden-social-media-rules-for-developer-relations-manager[this complete presentation] on the topic.
 
