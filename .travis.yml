@@ -3,6 +3,7 @@ rvm:
 - 2.2.4
 addons:
   chrome: stable
+  sauce_connect: $([[ $CUSTOM_SAUCE_CONNECT == true ] && echo false || echo true)
 before_script: "./scripts/start-sauce-connect.sh"
 before_install:
 - gem install bundler -v '< 2'
