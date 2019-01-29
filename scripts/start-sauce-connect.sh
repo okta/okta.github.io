@@ -4,5 +4,5 @@ set -e
 if [[ $TRAVIS_EVENT_TYPE == 'push' ]]
 then
   tar -xvzf sc-4.5.3-linux.tar.gz &&
-  ./sc-4.5.3-linux/bin/sc --doctor
+  ./sc-4.5.3-linux/bin/sc -vv -l sc.log &
 fi
