@@ -31,6 +31,7 @@ if (process.env.SAUCE_CONNECT_DOWNLOAD_ON_INSTALL) {
 
       // Change sauce connect logfile location (optional)
       // logfile: null,
+      logfile: "~/sauce-connect.log",
 
       // Period to log statistics about HTTP traffic in seconds (optional)
       // logStats: null,

@@ -7,6 +7,8 @@ before_install:
 - gem install bundler -v '< 2'
 - bundle install
 - nvm install $(cat .nvmrc)
+after_script:
+  - if [ -e ~/sauce-connect.log ]; then cat ~/sauce-connect.log; fi
 script: "./scripts/travis.sh"
 dist: trusty
 env:
