@@ -1,7 +1,7 @@
 #!/bin/bash
 set -e
 
-if [[ $TRAVIS_EVENT_TYPE == 'push' ]] && [[ $CUSTOM_SAUCE_CONNECT == true ]]
+if [[ $TRAVIS_EVENT_TYPE == 'push' ]] && [[ $USE_DEFAULT_SAUCE_CONNECT != true ]]
 then
   if [ -e ~/sc.log ]
   then
