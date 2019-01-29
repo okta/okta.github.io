@@ -3,12 +3,19 @@ rvm:
 - 2.2.4
 addons:
   chrome: stable
+before_script:
+- if [[ $TRAVIS_EVENT_TYPE != 'push' ]] && [[ ! -z $TRAVIS ]]
+  then
+    tar -xvzf sc-4.5.3-linux.tar.gz
+    ./sc-4.5.3-linux/bin/sc -l sc.log
+  fi
 before_install:
 - gem install bundler -v '< 2'
 - bundle install
 - nvm install $(cat .nvmrc)
 after_script:
-  - if [ -e ~/sauce-connect.log ]; then cat ~/sauce-connect.log; fi
+- pkill -SIGINT -f 'sc'
+- if [ -e ~/sc.log ]; then cat ~/sc.log; fi
 script: "./scripts/travis.sh"
 dist: trusty
 env:

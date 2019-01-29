@@ -42,10 +42,6 @@
     "protractor": "^5.4.2",
     "recursive-readdir": "^2.2.2",
     "remove": "^0.1.5",
-    "sauce-connect-launcher": "^1.2.4",
     "wait-on": "^2.1.2"
-  },
-  "dependencies": {
-    "webdriver-manager": "^12.1.1"
   }
 }

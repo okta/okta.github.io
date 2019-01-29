@@ -1,6 +1,5 @@
 var EC = protractor.ExpectedConditions;
 var util = module.exports = {};
-const sauceConnectLauncher = require('../shared/sauce-connect-launcher');
 
 util.wait = function (elementFinder, timeoutMilliseconds) {
   if (timeoutMilliseconds === undefined) {
@@ -40,6 +39,4 @@ util.itHelper = function(fn) {
         });
     }
 };
-
-util.sauceConnectLauncher = sauceConnectLauncher;
 
