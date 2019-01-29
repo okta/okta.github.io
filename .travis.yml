@@ -3,7 +3,6 @@ rvm:
 - 2.2.4
 addons:
   chrome: stable
-  sauce_connect: true
 before_install:
 - gem install bundler -v '< 2'
 - bundle install

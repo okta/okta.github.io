@@ -3,8 +3,12 @@ set -e
 
 source "${0%/*}/helpers.sh"
 
-if [[ $TRAVIS_EVENT_TYPE != 'push' ]]; then
+if [[ $TRAVIS_EVENT_TYPE != 'push' ]];
+then
   export CHROME_HEADLESS=true
+elif [[ ! -z $TRAVIS ]]
+then
+  export SAUCE_CONNECT_DOWNLOAD_ON_INSTALL=true
 fi
 
 # Run the npm install to pull in test dependencies
