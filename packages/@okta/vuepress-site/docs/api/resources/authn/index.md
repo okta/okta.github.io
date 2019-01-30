@@ -5197,7 +5197,7 @@ username    | User's non-qualified short-name (dade.murphy) or unique fully-qual
 factorType  | Recovery factor to use for primary authentication                                                                | Body       | `EMAIL` or `SMS`                  | FALSE    |            |
 relayState  | Optional state value that is persisted for the lifetime of the recovery transaction                              | Body       | String                            | FALSE    |  2048      |
 
-> A valid `factoryType` is required for requests without an API token with administrator privileges. (See [Unlock Account with Trusted Application](#unlock-account-with-trusted-application))
+> A valid `factorType` is required for requests without an API token with administrator privileges. (See [Unlock Account with Trusted Application](#unlock-account-with-trusted-application))
 
 ##### Response Parameter Public Application for Unlock Account
 

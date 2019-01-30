@@ -60,8 +60,7 @@ const blacklist = [
   'okta.github.io/_source/feed-full.xml',
   'okta.github.io/_source/google',
   'okta.github.io/_source/index.html',
-  'okta.github.io/_source/sitemap.xml',
-  'okta.github.io/_source/test_page'
+  'okta.github.io/_source/sitemap.xml'
 ];
 
 function cloneRepo(gitRepo) {
@@ -114,8 +113,8 @@ function buildFile(file) {
 
 function run() {
   // console.log(`${chalk.bold.green("Migrating from okta.github.io source repo.")}\n`)
-  // execSync(`rm -rf okta.github.io`);
-  // cloneRepo('https://github.com/okta/okta.github.io.git')
+  execSync(`rm -rf okta.github.io`);
+  cloneRepo('https://github.com/okta/okta.github.io.git')
   cleanupFiles()
 
   let getFiles = (directory, filelist) => {

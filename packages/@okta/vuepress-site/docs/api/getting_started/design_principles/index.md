@@ -169,7 +169,6 @@ Link Relation Type | Description
 ------------------ | ------------
 `self`             | Specifies the URL of the current page of results
 `next`             | Specifies the URL of the immediate next page of results.
-`prev`             | Specifies the URL of the immediate previous page of results.
 
 When you first make an API call and get a cursor-paged list of objects, the end of the list will be the point at which you do not receive another `next` link value with the response. This holds true for all but two cases:
 

@@ -721,11 +721,12 @@ idpIssuer             | SAML Issuer ID                                          
 subjectNameIdTemplate | Template for app user's username when a user is assigned to the app.                                              | String                                               | FALSE    | FALSE |
 subjectNameIdFormat   | Identifies the SAML processing rules.                                                                             | String                                               | FALSE    | FALSE |
 responseSigned        | Determines whether the SAML authentication response message is digitally signed by the IDP or not                 | Boolean                                              | FALSE    | FALSE |
-assertionSigned       | determines whether the SAML assertion is digitally signed or not                                                  | Boolean                                              | FALSE    | FALSE |
+assertionSigned       | Determines whether the SAML assertion is digitally signed or not                                                  | Boolean                                              | FALSE    | FALSE |
 signatureAlgorithm    | Determines the signing algorithm used to digitally sign the SAML assertion and response                           | String                                               | FALSE    | FALSE |
 digestAlgorithm       | Determines the digest algorithm used to digitally sign the SAML assertion and response                            | String                                               | FALSE    | FALSE |
 honorForceAuthn       | Prompt user to re-authenticate if SP asks for it                                                                  | Boolean                                              | FALSE    | FALSE |
 authnContextClassRef  | Identifies the SAML authentication context class for the assertion's authentication statement                     | String                                               | FALSE    | FALSE |
+requestCompressed     | Determines whether the SAML request is expected to be compressed or not                                           | Boolean                                              | FALSE    | FALSE |
 attributeStatements   | Check [here](http://docs.oasis-open.org/security/saml/Post2.0/sstc-saml-tech-overview-2.0-cd-02.html) for details | [Attribute Statements](#attribute-statements-object) | TRUE    | FALSE |
 
 * Fields that require certificate uploads can't be enabled through the API, such as Single Log Out and Assertion Encryption. These must be updated through the UI.
@@ -1357,12 +1358,13 @@ Enumerates apps added to your organization with pagination. A subset of apps can
 Parameter | Description                                                                                                      | Param Type | DataType | Required | Default
 --------- | ---------------------------------------------------------------------------------------------------------------- | ---------- | -------- | -------- | -------
 q         | Searches the `name` or `displayName` property of applications                                                    | Query      | String    | FALSE
-limit     | Specifies the number of results for a page                                                                       | Query      | Number   | FALSE    | 20
+limit     | Specifies the number of results per page (maximum 200)                                                           | Query      | Number   | FALSE    | 20
 filter    | Filters apps by `status`, `user.id`, `group.id` or `credentials.signing.kid` expression                          | Query      | String   | FALSE    |
 after     | Specifies the pagination cursor for the next page of apps                                                        | Query      | String   | FALSE    |
 expand    | Traverses `users` link relationship and optionally embeds [Application User](#application-user-model) resource   | Query      | String   | FALSE    |
 
-> The page cursor should treated as an opaque value and obtained through the next link relation. See [Pagination](/docs/api/getting_started/design_principles#pagination)
+The results will be [paginated][pagination] according to the `limit` parameter.
+If there are multiple pages of results, the Link header will contain a `next` link, which should be treated as an opaque value (follow it, don't parse it).
 
 ###### Filters
 
@@ -3207,11 +3209,12 @@ Enumerates all assigned [application users](#application-user-model) for an appl
 
 Parameter | Description                                                      | Param Type | DataType | Required | Default
 --------- | ---------------------------------------------------------------- | ---------- | -------- | -------- | -------
-applicationId       | `id` of an [app](#application-model)                  | URL        | String   | TRUE     |
-limit     | specifies the number of results for a page                       | Query      | Number   | FALSE    | 20
-after     | specifies the pagination cursor for the next page of assignments | Query      | String   | FALSE    |
+applicationId       | `id` of an [app](#application-model)                   | URL        | String   | TRUE     |
+limit     | Specifies the number of results per page (maximum 500)           | Query      | Number   | FALSE    | 50
+after     | Specifies the pagination cursor for the next page of assignments | Query      | String   | FALSE    |
 
-> The page cursor should treated as an opaque value and obtained through the next link relation. See [Pagination](/docs/api/getting_started/design_principles#pagination)
+The results will be [paginated][pagination] according to the `limit` parameter.
+If there are multiple pages of results, the Link header will contain a `next` link, which should be treated as an opaque value (follow it, don't parse it).
 
 ##### Response Parameters
 
@@ -3646,11 +3649,12 @@ Enumerates group assignments for an application.
 
 Parameter | Description                                                      | Param Type | DataType | Required | Default
 --------- | ---------------------------------------------------------------- | ---------- | -------- | -------- | -------
-applicationId       | `id` of an [app](#application-model)                  | URL        | String   | TRUE     |
-limit     | Specifies the number of results for a page                       | Query      | Number   | FALSE    | 20
+applicationId       | `id` of an [app](#application-model)                   | URL        | String   | TRUE     |
+limit     | Specifies the number of results per page (maximum 200)           | Query      | Number   | FALSE    | 20
 after     | Specifies the pagination cursor for the next page of assignments | Query      | String   | FALSE    |
 
-> The page cursor should treated as an opaque value and obtained through the next link relation. See [Pagination](/docs/api/getting_started/design_principles#pagination)
+The results will be [paginated][pagination] according to the `limit` parameter.
+If there are multiple pages of results, the Link header will contain a `next` link, which should be treated as an opaque value (follow it, don't parse it).
 
 ##### Response Parameters
 
@@ -4490,12 +4494,12 @@ Lists all tokens for the application
 |:--------------|:---------------------------------------------------------------------------------------------|:-----------|:---------|:---------|:--------|
 | applicationId | ID of the application                                                                        | URL        | String   | TRUE     |         |
 | expand        | Valid value: `scope`. If specified, scope details are included in the `_embedded` attribute. | Query      | String   | FALSE    |         |
-| limit         | The maximum number of tokens to return                                                       | Query      | Number   | FALSE    | 20      |
+| limit         | Specifies the number of results per page (maximum 200)                                       | Query      | Number   | FALSE    | 20      |
 | after         | Specifies the pagination cursor for the next page of tokens                                  | Query      | String   | FALSE    |         |
 
-> Note: The after cursor should treated as an opaque value and obtained through [the next link relation](/docs/api/getting_started/design_principles#pagination).
+The results will be [paginated][pagination] according to the `limit` parameter.
+If there are multiple pages of results, the Link header will contain a `next` link, which should be treated as an opaque value (follow it, don't parse it).
 
-* The maximum value for `limit` is 200.
 
 #### Request Example
 
@@ -5637,3 +5641,6 @@ The application CSR model defines a certificate signing request for a signature 
 | kty              | cryptographic algorithm family for the CSR's keypair         | String                                                                      | FALSE    | FALSE  | TRUE     |           |           |            |
 | _links           | discoverable resources related to the CSR                    | [JSON HAL](http://tools.ietf.org/html/draft-kelly-json-hal-05)              | TRUE     | FALSE  | TRUE     |           |           |            |
 |------------------+--------------------------------------------------------------+-----------------------------------------------------------------------------|----------|--------|----------|-----------|-----------+------------|
+
+
+[pagination]: /docs/api/getting_started/design_principles#pagination

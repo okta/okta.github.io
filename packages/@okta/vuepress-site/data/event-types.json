@@ -5698,6 +5698,12 @@
       "tags" : [ "security" ],
       "mappings" : [ ]
     }, {
+      "id" : "core.user.account.report_suspicious_activity_by_enduser",
+      "category" : "end-user-security",
+      "description" : "User account suspicious activity reported.",
+      "tags" : [ "user" ],
+      "mappings" : [ "user.account.report_suspicious_activity_by_enduser" ]
+    }, {
       "id" : "core.user.added_to_rule_exclusion",
       "category" : "lca",
       "description" : "User added to exclusion list of group membership rule.",
@@ -5842,9 +5848,21 @@
       "tags" : [ "user" ],
       "mappings" : [ "user.lifecycle.unsuspend" ]
     }, {
+      "id" : "core.user.email.message_sent.mfa_enroll_notification",
+      "category" : "end-user-security",
+      "description" : "MFA enrollment notification email sent.",
+      "tags" : [ "user" ],
+      "mappings" : [ "system.email.mfa_enroll_notification.sent_message" ]
+    }, {
+      "id" : "core.user.email.message_sent.mfa_reset_notification",
+      "category" : "end-user-security",
+      "description" : "MFA reset notification email sent.",
+      "tags" : [ "user" ],
+      "mappings" : [ "system.email.mfa_reset_notification.sent_message" ]
+    }, {
       "id" : "core.user.email.message_sent.new_device_notification",
-      "category" : "authn",
-      "description" : "",
+      "category" : "end-user-security",
+      "description" : "New device signin notification email sent.",
       "tags" : [ "user" ],
       "mappings" : [ "system.email.new_device_notification.sent_message" ]
     }, {
@@ -7353,6 +7371,12 @@
       "description" : "Event fired when a user has been routed to an IdP.",
       "tags" : [ "idp" ],
       "mappings" : [ "system.idp.select" ]
+    }, {
+      "id" : "system.import.clear.unconfirmed.users.summary",
+      "category" : "sync",
+      "description" : "Clear Unconfirmed Imported Users.",
+      "tags" : [ "app" ],
+      "mappings" : [ "system.import.clear.unconfirmed.users.summary" ]
     }, {
       "id" : "system.ldapi.bind",
       "category" : "ud-core",
@@ -11689,9 +11713,29 @@
       "tags" : [ "email" ],
       "mappings" : [ "core.user.email.message_sent.self_service.account_unlock" ]
     }, {
+      "id" : "system.email.mfa_enroll_notification.sent_message",
+      "category" : "end-user-security",
+      "description" : "MFA enrollment notification email sent. Used to notify admins MFA enrollment notification email has been sent.",
+      "info" : {
+        "created" : "2018-12-10",
+        "release" : "2019.04.1"
+      },
+      "tags" : [ "email" ],
+      "mappings" : [ "core.user.email.message_sent.mfa_enroll_notification" ]
+    }, {
+      "id" : "system.email.mfa_reset_notification.sent_message",
+      "category" : "end-user-security",
+      "description" : "MFA reset notification email sent. Used to notify admins MFA reset notification email has been sent.",
+      "info" : {
+        "created" : "2018-12-10",
+        "release" : "2019.04.1"
+      },
+      "tags" : [ "email" ],
+      "mappings" : [ "core.user.email.message_sent.mfa_reset_notification" ]
+    }, {
       "id" : "system.email.new_device_notification.sent_message",
-      "category" : "authn",
-      "description" : "Send new device notification email.",
+      "category" : "end-user-security",
+      "description" : "New device signin notification email sent.",
       "info" : {
         "created" : "2016-03-17",
         "release" : "2016.13"
@@ -11718,6 +11762,16 @@
       },
       "tags" : [ "idp" ],
       "mappings" : [ "system.idp.select" ]
+    }, {
+      "id" : "system.import.clear.unconfirmed.users.summary",
+      "category" : "sync",
+      "description" : "Clear Unconfirmed Imported Users. Can be used for clearing unconfirmed imported users from last import result. Note that a single event is fired for clearing unconfirmed imported users instead of fire delete event on each user.",
+      "info" : {
+        "created" : "2019-01-02",
+        "release" : "2019.01.1"
+      },
+      "tags" : [ "app" ],
+      "mappings" : [ "system.import.clear.unconfirmed.users.summary" ]
     }, {
       "id" : "system.import.complete",
       "category" : "sync",
@@ -12388,6 +12442,16 @@
       },
       "tags" : [ "user" ],
       "mappings" : [ "core.user.admin_privilege.revoked" ]
+    }, {
+      "id" : "user.account.report_suspicious_activity_by_enduser",
+      "category" : "end-user-security",
+      "description" : "User reported suspicious activity. This event is used to identify user account suspicious activity.",
+      "info" : {
+        "created" : "2018-12-07",
+        "release" : "2019.04.1"
+      },
+      "tags" : [ "user", "webhook-eligible" ],
+      "mappings" : [ "core.user.account.report_suspicious_activity_by_enduser" ]
     }, {
       "id" : "user.account.reset_password",
       "category" : "authn",

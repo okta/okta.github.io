@@ -6,7 +6,7 @@ redirect_from: /docs/getting_started/policy.html
 
 # Policy API
 
-The Okta Policy API enables an Administrator to perform policy and policy rule operations.  The policy framework is used by Okta to control rules and settings that govern, among other things, user session lifetime, whether multi-factor authentication is required when logging in, what MFA factors may be employed, password complexity requirements, and what types of self-service operations are permitted under various circumstances.
+The Okta Policy API enables an Administrator to perform policy and policy rule operations.  The policy framework is used by Okta to control rules and settings that govern, among other things, user session lifetime, whether multi-factor authentication is required when logging in, what MFA factors may be employed, password complexity requirements, what types of self-service operations are permitted under various circumstances, and what identity provider to route users to.
 
 Policy settings for a particular policy type, such as Sign On Policy, consist of one or more Policy objects, each of which contains one or more Policy Rules.  Policies and rules contain conditions that determine whether they are applicable to a particular user at a particular time.
 
@@ -517,6 +517,8 @@ Different policy types control settings for different operations.  All policy ty
 
 <a href="#GroupPasswordPolicy">Password Policy</a>
 
+<a href="#IdPDiscoveryPolicy">IdP Discovery Policy</a>
+
 [OAuth Authorization Policy](/docs/api/resources/authorization-servers#policy-object)
 
 ### Policy Priority and Defaults
@@ -604,7 +606,7 @@ The Policy model defines several attributes:
 Parameter | Description | Data Type | Required | Default
 | --- | --- | --- | ---
 id | Identifier of the policy | String | No | Assigned
-type | Specifies the [type of policy](#policy-types). Valid values: `OKTA_SIGN_ON`, `PASSWORD`, `MFA_ENROLL`, `OAUTH_AUTHORIZATION_POLICY` | String | Yes |
+type | Specifies the [type of policy](#policy-types). Valid values: `OKTA_SIGN_ON`, `PASSWORD`, `MFA_ENROLL`, `OAUTH_AUTHORIZATION_POLICY`, `IDP_DISCOVERY` | String | Yes |
 name | Name of the policy | String | Yes |
 system | This is set to `true` on system policies, which cannot be deleted. | Boolean | No | `false`
 description | Description of the policy. | String | No | Null
@@ -627,7 +629,7 @@ The policy settings object contains the policy level settings for the particular
 {: #PolicyConditionsObject }
 
 The Conditions Object(s) specify the conditions that must be met during policy evaluation in order to apply the policy in question.   All policy conditions, as well as conditions for at least one rule must be met in order to apply the settings specified in the policy and the associated rule.  Policies and rules may contain different conditions depending on the policy type.  The conditions which can be used with a particular policy depends on the policy type.
-See <a href="#Conditions">conditions</a>
+See <a href="#conditions">conditions</a>
 
 
 ### Links Object
@@ -879,6 +881,146 @@ include | The AD integrations this policy applies to | Array | No | Include all 
     "provider": "ACTIVE_DIRECTORY",
     "include": [
       "0oaoz0zUsohjfrWZ80g3"
+    ]
+  }
+```
+
+#### User Identifier Condition Object
+{: #UserIdentifierConditionObject }
+
+Specifies a user identifier condition to match on.
+
+Parameter | Description | Data Type | Required |
+| --- | --- | --- | --- |
+patterns | The pattern(s) to match  | Array of [patterns](#patterns-object) objects.  | Yes |
+type | What to match against, either user ID or an attribute in the user's Okta profile. | `IDENTIFIER`, `ATTRIBUTE` | Yes |
+attribute | The name of the profile attribute to match against. Only used when `type` is `ATTRIBUTE`. | String | No |
+
+> Note: When using a regex expression, or when matching against Okta user profile attributes, the `patterns` array can have only one element.
+
+#### Patterns Object
+
+Used in the User Identifier Condition object, specifies the details of the patterns to match against.
+
+Parameter | Description | Data Type | Required |
+| --- | --- | --- | ---
+matchType | The kind of pattern. For regex, use `EXPRESSION`. For simple string matches, options are `EQUALS`, `CONTAINS`, `STARTS_WITH`, `SUFFIX`.  | String | Yes |
+value | The regex expression or simple match string | String | Yes |
+
+#### User Identifier Condition Object Example: Regex on Login
+
+```json
+  "userIdentifier": {
+    "patterns": [ //the array can have only one element for regex matching
+      {
+        "matchType": "EXPRESSION",
+        "value": "^([a-zA-Z0-9_\-\.]+)\.test@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([a-zA-Z0-9\-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$"
+      }
+    ],
+    "type": "IDENTIFIER"
+  }
+```
+
+#### User Identifier Condition Object Example: Domain List on Login
+
+```json
+  "userIdentifier": {
+    "patterns": [ //the array can have multiple elements for non-regex matching
+      {
+        "matchType": "SUFFIX",
+        "value": "gmail.com"
+      },
+      {
+        "matchType": "SUFFIX",
+        "value": "google.com"
+      },
+      //...
+    ],
+    "type": "IDENTIFIER"
+  }
+```
+
+#### User Identifier Condition Object Example: User Attribute
+
+```json
+  "userIdentifier": {
+    "patterns": [ //the array can have only one value for profile attribute matching
+      {
+        "matchType": "STARTS_WITH", //EQUALS, CONTAINS, REGEX
+        "value": "demo"
+      }
+    ],
+    "type": "ATTRIBUTE",
+    "attribute": "customField"
+  }
+```
+
+#### Application and App Instance Condition Object
+{: #AppAndAppInstanceConditionObject }
+
+Specifies either a general application or specific app instance to match on.
+
+Parameter | Description | Data Type | Required
+| --- | --- | --- | ---
+include | The list of applications or app instances to match on  | Array | Yes
+
+#### Application and App Instance Condition Object Example
+
+```json
+  "app": {
+    "include":[
+      {
+        "type": "APP_TYPE",
+        "name":"yahoo_mail"
+      },
+      {
+        "type": "APP",
+        "id":"0oai0y4zt7hd2PSAP0h7"
+      },
+      //...
+    ],
+  }
+```
+
+#### Platform Condition Object
+{: #PlatformConditionObject }
+
+Specifies a particular platform or device to match on.
+
+Parameter | Description | Data Type | Required |
+| --- | --- | --- | ---
+include | The platforms to include | Array | Yes |
+
+#### Platform Condition Object Example
+{: #PlatformConditionObjectExample }
+
+```json
+  "platform": {
+    "include": [
+      {
+        "type": "MOBILE",
+        "os": {
+          "type": "IOS"
+        },
+      },
+      {
+        "type": "MOBILE",
+        "os": {
+          "type": "ANDROID"
+        },
+      },
+      {
+        "type": "DESKTOP",
+        "os": {
+          "type": "WINDOWS"
+        },
+      },
+      {
+        "type": "DESKTOP",
+        "os": {
+          "type": "OSX"
+        },
+      }
     ]
   }
 ```
@@ -1356,3 +1498,48 @@ The following conditions may be applied to the rules associated with Password Po
 <a href="#PeopleObject">People Condition</a>
 
 <a href="#NetworkConditionObject">Network Condition</a>
+
+## IdP Discovery Policy
+{: #IdPDiscoveryPolicy }
+
+The IdP Discovery Policy determines where to route users when they are attempting to log in to your org. Users can be routed to a variety of identity providers (`SAML2`, `IWA`, `AgentlessDSSO`, `X509`, `FACEBOOK`, `GOOGLE`, `LINKEDIN`, `MICROSOFT`, `OIDC`) based on multiple conditions listed below.
+
+> Note: All Okta orgs with `IDP_DISCOVERY` enabled contain one and only one IdP Discovery Policy with an immutable default rule routing to your org's login page.
+
+### Policy Conditions
+The following conditions may be applied to IdP Discovery Policy
+
+<a href="#NetworkConditionObject">Network Condition</a>
+
+<a href="#PlatformConditionObject">Platform Condition</a>
+
+<a href="#UserIdentifierConditionObject">User Identifier Condition</a>
+
+<a href="#AppAndAppInstanceConditionObject">Application and App Instance Condition</a>
+
+### Policy Action Data
+{: #IdPDiscoveryPolicyActionData }
+
+#### Policy Action Object
+{: #IdPDiscoveryPolicyActionObject }
+
+Property | Description | Data Type | Required
+| --- | --- | --- | --- | ---
+providers | List of configured identity providers that a given rule can route to | array | Yes
+
+> Note: Currently, this `providers` list only supports one value. IdP types `OKTA`, `AgentlessDSSO`, and `IWA` do not require an `id`.
+
+#### Policy Action Example
+
+```json
+  "actions": {
+    "idp": {
+      "providers": [ //only supports one value
+        {
+          "type": "SAML2",
+          "id": "0oaoz0zUsohjfrWZ80g3"
+        }
+      ]
+    }
+  }
+```
