@@ -44,7 +44,8 @@ const whitelist = [
   'okta.github.io/_source/_sdk',
   'okta.github.io/_source/_standards',
   'okta.github.io/_source/_use_cases',
-  'okta.github.io/_source/books'
+  'okta.github.io/_source/books',
+  'okta.github.io/_source/test_page'
 ];
 
 // define which files can not be processed
