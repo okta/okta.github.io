@@ -6,7 +6,7 @@ description: "Are you in developer advocacy or a frequent conference speaker? Re
 tags: [devrel, protip, protips, developer relations, speaking]
 tweets:
 - "Are you a conference speaker or in Developer Relations? Learn from these experts on how to make your life easier!"
-- "Check out these #DevRel Pro Tips from @mraible, @aaronpk, @brunoborges, @dblevins, @monkchips, @_JamesWard, @leebrandt, @myfear, @mhartington, @rdegges, @saturnism, and @trisha_gee!"
+- "Check out these #DevRel Pro Tips from @mraible, @aaronpk, @ChloeCondon, @brunoborges, @dblevins, @quorralyne, @monkchips, @_JamesWard, @starbuxman, @leebrandt, @myfear, @mhartington, @rdegges, @saturnism, and @trisha_gee!"
 image: blog/devrel-protips/devrel-cycle.png
 ---
 :page-liquid:
@@ -48,6 +48,15 @@ A second tip is to contact the regional sales field when traveling, to find oppo
 
 Finally, I like to reuse as much material as possible, whether from myself or from others. What matters is presenting something that will be never-heard-of to the audience, doesn't matter if it is something that was created in 2001. To me, advocacy is more about bringing information than "creating information."
 
+=== Chloe Condon, Developer Advocate at Microsoft
+https://twitter.com/ChloeCondon[image:{% asset_path 'blog/devrel-protips/ChloeCondon.jpg' %}[alt=Chloe Condon,role="BlogPost-avatar pull-right img-100px"]]
+
+I’ve always described my role as an “extroverted engineer” (which is a little hilarious, as I myself am an ambivert). Being a Developer Advocate means having a lot of balls in the air at once- from creating content, working with “influencers”, organizing meetups, speaking at conferences, communicating to engineering teams, working on demos, remembering to eat and breathe… it definitely requires an agile brain to keep all the plates spinning at once.
+
+Lately I’ve noticed that one of the coolest parts of job is that I get paid to meet/collaborate/work with some very cool people. I’ve always despised the concept of “networking”, so I’ve just been thinking of it as “friend making” as of late. Though my default-mode is to escape to my hotel room post-conference and hide under a blanket, I’ve found that some of the most valuable connections (or “friendships”) I’ve made have been in person at post-conference happy hours, after meetups, etc.
+
+When it comes to creating content (especially at start-ups), it's easy enough to create a cool demo/video and post it to your company’s internal blog. However, sometimes this can feel like an echo chamber. How often are you visiting other tech start-up tools’ blogs? What is the audience reading it? Will it get any eyes beyond internal folks, potential interview candidates, and folks who read it from a tweet you posted? Working with other “friends” will not only get the content onto other blogs/resources/etc., but it also shows your tools playing well together, and gives fresh perspective and insight from someone outside of your organization. Teamwork makes the dream work! And friendship makes the… spend… lit? Ok, I need to workshop the pun, but you get the idea.
+
 === David Blevins, CEO Tomitribe
 https://twitter.com/dblevins[image:{% asset_path 'blog/devrel-protips/dblevins.png' %}[alt=David Blevins,role="BlogPost-avatar pull-right img-100px"]]
 
@@ -58,6 +67,15 @@ You walk into every talk knowing you can never possibly run short, which brings 
 By nature, every talk you give will contain some seasoned material and experimental material. This is the magical balance that makes a rockstar speaker. Asking questions and engaging is scary for attendees. You need to both be incredibly knowledgeable, but also willing to take a risk and be vulnerable with them.
 
 I have a couple of speaker-hacks I always use, but over time have needed less. First, I eat before every talk, preferably something heavy. You can't get "butterflies in your stomach" if there's no room. The second is I bring a bottle of water to every talk. If you start to lose your breath while talking, just stop and take a drink. You can catch your breath, slow yourself down and no one's the wiser.
+
+=== Heather Downing, Developer Advocate at Okta
+https://twitter.com/quorralyne.png[image:{% asset_path 'blog/devrel-protips/quorralyne.jpg' %}[alt=Heather Downing,role="BlogPost-avatar pull-right img-100px"]]
+
+One of the best tips I ever got, is to structure your presentation with the WHY - or the end result - first. Think about the way television shows have changed their approaches over the years. They used to begin with the credits for the program and then start after that. Nowadays it is much more compelling to drop a viewer right into the action of a story - BEFORE the title sequence. You have less than two minutes to capture an audience's interest in a way that will sustain them through an hour long presentation (or longer for a workshop). Tell them up front why you would use the code you are doing, but also communicate the end result once you do.
+
+Another tip that leveled me up as a technical speaker: recording my screen while coding the solution before the talk. Just go through the typing you will do, and even break it up into small recordings labeled by order and description of what they are. If possible, upload them to a cloud folder for you do download on a separate machine if yours bites the dust. This has saved my skin more times during internet failure and IDEs freezing then I'd care to mention. Besides, this way, you can step out from behind the podium and gesture or point out what you are doing here and why. Most developers can read faster than you can type. Bonus content to use with creating YouTube videos or Twitch streams.
+
+Effective speakers use social media tools to broadcast what you are talking about. Twitter is heavily the favorite here, so find out the day before what the conference handle is and any current year hashtags to use with your posts. Don't forget to post a link to your sample code repository and/or slides on SlideShare for reference immediately after your session ends. That keeps the conversation going!
 
 === James Governor, Redmonk co-founder
 https://twitter.com/monkchips[image:{% asset_path 'blog/devrel-protips/monkchips.png' %}[alt=James Governor,role="BlogPost-avatar pull-right img-100px"]]
@@ -80,6 +98,30 @@ Before you begin presenting code, walk to the back of the room and make sure the
 If an audience size is small for the allotted space, incentivize the attendees to bunch together in the front (perhaps with swag). This creates more positive energy that will help the audience and you to be more engaged.
 
 Leave your bubble. To get a different perspective, seek out opportunities to interact with diverse groups. Go with the salespeople to a briefing in Utah. Lead a workshop in India. Present to college students.
+
+=== Josh Long, Spring Advocate at Pivotal
+https://twitter.com/starbuxman[image:{% asset_path 'blog/devrel-protips/starbuxman.jpg' %}[alt=Josh Long,role="BlogPost-avatar pull-right img-100px"]]
+[%hardbreaks]
+"Je n’ai fait celle-ci plus longue que parce que je n’ai pas eu le loisir de la faire plus courte."
+"I have made this longer than usual because I didn't have the time to make it shorter." -Blaise Pascal
+
+Prefer breadth to depth. As a rule, I do a lot of "first steps in..." type content because the way you grow an audience is by teaching them something they didn't know. I'm not getting too far into the weeds of a given topic in my articles, presentations, etc. It's all shallow-end-of-the-pool type stuff. When I first started I realized that while I might want to write about, say, the cross section of rules engines and enterprise application integration, this wasn't a topic that has hugely broad appeal. In 2010, a better topic might've been "Getting Started with REST." Or something.
+
+Target your audiences. If you are going to do depth-first content - something that takes for granted  the audience's familiarity with the topic -  then make sure to target the content to the right people. I'd put that content on my company's website properties, for example. Or at my company's tentpole conference SpringOne Platform. Or, make it content that people can self-select into. It would be a wasted opportunity with a possible divergent audience if I were to give those sorts of talks at a JavaOne or a Devoxx or a GOTO or a QCon.
+
+A developer advocate isn't necessarily a road warrior. Developer advocacy is _not_ just about presenting at conferences and while killing it at a conference talk in some other country is a satisfying way to spend a day, it's by no means necessarily the most effective way to reach people. If you're going to be at a conference then make sure your talk is recorded and that it will be put online. Otherwise, you're just doing the talk for the people in the room. Hopefully you got a few hundred people, but was that worth the cash expenditure? The time? I try to do big shows with a global reach. Otherwise, blogging, podcasting, screencasting, webinars, and even just Tweet storms can all reach larger audiences. Technical content news portals and aggregators like InfoQ, TheServerSide, Reddit and DZone can even help you get that content to larger audiences, too. Some of the best developer advocates I know are almost never at conferences. The one exception to this user groups. Often, user groups are the only way to reach people who might not be in a large market and might not otherwise be inclined to travel for tech. A good deal of companies are perfectly nice places to work but don't send their people to San Francisco or some other major technology market for training every year. That's the rule, not the exception. A User Group might be the best place to reach these people. Not to mention the intimacy makes these venues an ideal place to test content before you take it to the big shows.
+
+Relax. If you're nervous then how can you expect your audience to be enthusiastic about your tech? Stage fright is a part of our basic fight-or-flight instinct. Our lizard brain kicks in when we're surrounded by large groups of people we don't know. It's innate in each of us to be nervous on stage at first. This will subside with practice and the sooner the better. Practice, practice, practice. It's cliche but you really will improve even if you just give the talk a half dozen times to yourself in front of a mirror or a recording laptop camera. Set a timer and everything. The best orators practice. If you're _still_ nervous, and just generally, it's always a good idea to have a drink on stage. Water. Tea. Coffee. Something to clear a throat, fill in the idle time, stop a coughing fit, or generally keep your body circulating. 
+
+Different strokes for different folks. Do a little of everything. If we agree that the best way to reach people isn't always by being a road warrior, and if we agree that you should stay in the shallow end of the pool and do lots of introductory stuff, then a happy consequence is that you're home and able to focus. Use that idle energy on different mediums. Blogs, articles for magazines or online tech portals, podcasts, Twitter threads, screencasts, webinars, and books are all tools of the developer advocate, in addition to conference talks. Try to do a lot of each every year. I http://spring.io/team/jlong[blog], http://soundcloud.com/a-bootiful-podcast[podcast], http://joshlong.com/books.html[write books], do http://bit.ly/spring-tips-playlist[screencasts], and yes, I spent more than a month and a half in airplanes traveling more than half a million miles last year to hundreds of meetings around the world. The more I do the more I want to do because I learn in the process. A master teaches.
+
+Prefer breadth to depth, part II. Ironically, I want to add some depth to my point about preferring breadth over depth. Nothing worse than an itchy throat or an unyielding cough on stage. If you're doing introductory articles, then there's no reason not to have introductions to lots of different things. Do talks of the form `$YOUR_TECH with $OTHER_TECH`. This has two benefits. It extends your reach to members of the communities of other technologies _and_ it gives you a built-in opportunity to reach out and work with other people in those communities. You're going to do the same talks over and over, so it's nice to keep it interesting and, every now and then, do a tag team talk. I try to do a half dozen big, new, talks with people in other communities every year. I've made friends and learned new things in the process. The more out of your comfort zone, the better! These talks inspire creativity.
+
+Relax, part II. Don't take yourself so seriously! I love having intense, serious soliloquies in my performances because they set the stage for the inevitable comic relief of whatever absurdity I've got planned. It helps disarm people. If somebody wanted to learn about your tech they could read a blog post or a book. But they chose to come watch you explain something. Don't waste people's time with a blog post you've extracted out into bullet points. If you're on stage, you're performing. Take advantage of the medium. Tell stories, jokes, do visual humor, etc. If you want them to remember something, give them something memorable. Visual and spoken humor is a great way to do that. At least, so I'm told... 
+
+Never forget your privilege. Remind yourself every day that you're a _very_ lucky person. You get to be the visible face of a technology on which a good deal many people  besides yourself work while also earning a healthy paycheck, traveling the world and becoming tech-famous. Meanwhile, there are real teachers, who take responsibility for outcomes and put in 8-15 hours a day for months at a time, educating the youth in our society, who would kill to have our bad days. These men and women are heroes and in a fair society they'd be much better rewarded for their efforts. It is _always_ OK to donate https://www.donorschoose.org/blog/5-ways-support-public-school-teachers/[time and money to teachers and students]
+
+Use your platform responsibly. Don't be an ass.
 
 === Lee Brandt, Developer Advocate at Okta
 https://twitter.com/leebrandt[image:{% asset_path 'blog/devrel-protips/leebrandt.png' %}[alt=Lee Brandt,role="BlogPost-avatar pull-right img-100px"]]
