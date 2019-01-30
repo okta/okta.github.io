@@ -3,7 +3,6 @@ node_js:
   - "10"
 addons:
   chrome: stable
-  sauce_connect: true
 before_install:
 - yarn install
 script: "./scripts/travis.sh"

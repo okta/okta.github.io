@@ -3,9 +3,8 @@ set -e
 
 source "${0%/*}/helpers.sh"
 
-if [[ $TRAVIS_EVENT_TYPE != 'push' ]]; then
-  export CHROME_HEADLESS=true
-fi
+
+export CHROME_HEADLESS=true
 
 # Run the npm install to pull in test dependencies
 fold yarn_install yarn install
