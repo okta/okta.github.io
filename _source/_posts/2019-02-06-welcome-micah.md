@@ -117,6 +117,9 @@ You see, there are <span data-tooltip="6) mere-pizzas-calm-grade" data-tooltip-p
 * Text the proper reply to the same number, and your message will be sent to my [LaMetric Digital]() message board.
 * You can tune into this [twitch]() stream to see your message display as well as that of other people
 
+NOTE: you only get to send one message and it only displays for 10 seconds, so
+tune into the twitch stream and then send your message!
+
 My dear friends in Education Services gave me the LaMetric as a parting gift. I
 wanted to discover how it worked, so I made a mashup of the Twilio and LaMetric
 APIs.
