@@ -45,7 +45,10 @@ A **token** is an object that can be used to authenticate a user to a server. To
 JWTs are the most popular type of tokens and are often what people mean when they refer to *"token authentication"* in general.
 
 Here's what a typical JWT might look like in it's compacted, URL-safe form:
-`eyJraWQiOiJ1dURLVTMxZWRvTi0wd0xMUnl1TW1vbmtBdi1OaFEwejZhWmxjdTN5NU8wIiwiYWxnIjoiUlMyNTYifQ.eyJ2ZXIiOjEsImp0aSI6IkFULnVfT094R3pXd1RjRFlseGZwcDVYXzNxdVIwdlJuc25YbXdMZld0TDFjdG8iLCJpc3MiOiJodHRwczovL2Rldi04MTk2MzMub2t0YXByZXZpZXcuY29tL29hdXRoMi9kZWZhdWx0IiwiYXVkIjoiYXBpOi8vZGVmYXVsdCIsImlhdCI6MTU0NjcyNjIyOCwiZXhwIjoxNTQ2NzI5ODI4LCJjaWQiOiIwb2Fpb3g4Ym1zQktWWGt1MzBoNyIsInNjcCI6WyJjdXN0b21TY29wZSJdLCJzdWIiOiIwb2Fpb3g4Ym1zQktWWGt1MzBoNyJ9.fhZRWThFxhiS6Pgrup6hM08oSqDPd1JrZSDIH_blD5S20c2hQQ3D3RZyhNKMnYclyus_mo-H-mS-Ak3YzM8S0JwZ8m3Vid4smW953peBMnmBNotAE--yE0toc2dIUG3BWQR34hah253bKmp17Yh6bWGwH60oQxnuM_NVUpa-NJMBc6-Mu5ra0lKfr60ne9-jKVFcavd9ZnVTLiug_sXFlhxgaQm4V_hhcvcLSwCXTiIcQsJkI0rP7WuVvjYVyK_sPeW3A44_T5qhyDR_E_mk1rHORlkMYGPg34mcwob5iA7alNZOnzN_7ApcbylDbK5KS1umBqqevtghEyjOEWQQmQ`
+
+```
+eyJraWQiOiJ1dURLVTMxZWRvTi0wd0xMUnl1TW1vbmtBdi1OaFEwejZhWmxjdTN5NU8wIiwiYWxnIjoiUlMyNTYifQ.eyJ2ZXIiOjEsImp0aSI6IkFULnVfT094R3pXd1RjRFlseGZwcDVYXzNxdVIwdlJuc25YbXdMZld0TDFjdG8iLCJpc3MiOiJodHRwczovL2Rldi04MTk2MzMub2t0YXByZXZpZXcuY29tL29hdXRoMi9kZWZhdWx0IiwiYXVkIjoiYXBpOi8vZGVmYXVsdCIsImlhdCI6MTU0NjcyNjIyOCwiZXhwIjoxNTQ2NzI5ODI4LCJjaWQiOiIwb2Fpb3g4Ym1zQktWWGt1MzBoNyIsInNjcCI6WyJjdXN0b21TY29wZSJdLCJzdWIiOiIwb2Fpb3g4Ym1zQktWWGt1MzBoNyJ9.fhZRWThFxhiS6Pgrup6hM08oSqDPd1JrZSDIH_blD5S20c2hQQ3D3RZyhNKMnYclyus_mo-H-mS-Ak3YzM8S0JwZ8m3Vid4smW953peBMnmBNotAE--yE0toc2dIUG3BWQR34hah253bKmp17Yh6bWGwH60oQxnuM_NVUpa-NJMBc6-Mu5ra0lKfr60ne9-jKVFcavd9ZnVTLiug_sXFlhxgaQm4V_hhcvcLSwCXTiIcQsJkI0rP7WuVvjYVyK_sPeW3A44_T5qhyDR_E_mk1rHORlkMYGPg34mcwob5iA7alNZOnzN_7ApcbylDbK5KS1umBqqevtghEyjOEWQQmQ
+```
 
 While this may look complicated and unreadable at first glance, it isn't actually all that tricky! JWTs consist of three parts, separated by dots (`.`): `xxxxxx.yyyyyy.zzzzzz`. These sections represent the JWT header, payload, and signature, respectively.
 
@@ -231,18 +234,18 @@ Initialize the project:
 npm init
 ```
 
-Keep hitting enter to accept all default settings.
+Keep hitting enter to accept all the default settings.
 
 Install Express:
 
 ```bash
-npm install express@4.16.4 --save
+npm install express@4.16.4
 ```
 
 Install the [Okta JWT Verifier for Node.js](https://github.com/okta/okta-oidc-js/tree/master/packages/jwt-verifier), which you  can use to validate Okta access tokens (issued by Okta authorization servers).
 
 ```bash
-npm install @okta/jwt-verifier@0.0.14 --save
+npm install @okta/jwt-verifier@0.0.14
 ```
 
 Create an `index.js` file in the folder then copy and paste the following code into the file:
@@ -251,8 +254,8 @@ Create an `index.js` file in the folder then copy and paste the following code i
 const express = require('express');
 const OktaJwtVerifier = require('@okta/jwt-verifier');
 
-const clientId = {yourClientId};
-const oktaDomain = {yourOktaOrgUrl};
+const clientId = "{yourClientId}";
+const oktaDomain = "{yourOktaDomain}";
 
 const oktaJwtVerifier = new OktaJwtVerifier({
   issuer: `${oktaDomain}/oauth2/default`,
@@ -294,8 +297,6 @@ function verifyToken(req, res, next) {
 
 app.listen(port, () => console.log(`My App listening on port ${port}!`))
 ```
-
-Replace `{yourClientId}` and `{yourOktaOrgUrl}` with your Okta **Client ID** and **Org Url** that you obtained in the Okta application set up steps.
 
 Now, let me explain what this code does.
 
@@ -340,7 +341,7 @@ You should now see the response `You are viewing private profile info`:
 
 {% img blog/node-token-auth/token-response.png alt:"token response" width:"700" %}{: .center-image }
 
-And... That's it! Good job! You have built an Express app that serves protected API endpoints using token authentication. You used Okta as your OAuth provider which manages your custom scopes (and claims), your tokens, etc. You also used the JWT validation middleware (okta's JWT verifier library) which handles validating tokens for you automatically.
+And... That's it! Good job! You have built an Express app that serves protected API endpoints using token authentication. You used Okta as your OAuth provider which manages your custom scopes (and claims), your tokens, etc. You also used the JWT validation middleware (Okta's JWT verifier library) which handles validating tokens for you automatically.
 
 ## Learn More About Token Authentication and Node + Express
 
