@@ -5,8 +5,7 @@ author: mngan
 description: "Come learn all about what token authentication is and how to use it in your Node + Express apps."
 tags: [jwt, node, javascript, express, token, authentication]
 tweets:
-  - "Check this out--we just published a new article detailing how token auth
-  works in Node + Express. Let us know what you think!"
+  - "Check this out--we just published a new article detailing how token auth works in Node + Express. Let us know what you think!"
   - "Token auth in Node + Express doesn't have to be hard. Our new guide breaks it down for you step-by-step:"
   - "Token auth. Token Auth? TOKEN AUTH?! Come learn about token auth in @nodejs and Express.js!"
 image: blog/node-token-auth/token-authentication-flow.png
