@@ -1,0 +1,178 @@
+---
+layout: blog_post
+title: "Getting Started with Angular Schematics"
+author: mraible
+description: ""
+tags: []
+tweets:
+image: 
+---
+:page-liquid:
+
+When I first started to learn Angular (it was called Angular 2 at the time), I was appalled by the number of files you needed to create to get a basic "Hello, World" example working. As Angular matured, a lot of this pain went away thanks to Angular CLI. Angular CLI is a command-line tool that generates a basic Angular project for you. In its 7.0 release, it started asking you questions about your application. Based on your responses, it chooses to add routing and determines a stylesheet format. 
+
+Did you know that Angular CLI uses Schematics to generate this code? "What the heck is Schematics?", you might ask. Good question. Schematics is a project that was released by the Angular team a little over a year ago (January 2018). In short, it provides an API that allows you to manipulate files and add new dependencies in Angular projects. It can also work in non-Angular projects, but let's start with Angular.
+
+To see Schematics in action, install Angular CLI:
+
+[source,shell]
+----
+npm install -g @angular/cli
+----
+
+Then create a new Angular project:
+
+[source,shell]
+----
+$ ng new my-cool-app
+? Would you like to add Angular routing? Yes
+? Which stylesheet format would you like to use? (Use arrow keys)
+❯ CSS
+  Sass   [ http://sass-lang.com   ]
+  Less   [ http://lesscss.org     ]
+  Stylus [ http://stylus-lang.com ]
+----
+
+That's it! A Schematic can prompt you with questions, make changes based on your responses, and look good while doing it!
+
+== Angular CLI, Angular Schematics, and Angular DevKit
+
+The Angular CLI can be used to create, manage, build, and test your Angular projects. It's built on DevKit, which resides in the https://github.com/angular/angular-cli[same monorepo on GitHub]. DevKit was built to provide libraries that can be used to manage, develop, deploy, and analyze your code. DevKit has a `schematics-cli` command line tool that you can use to create your own Schematics.
+
+== Create Your First Schematic
+
+To create a Schematics project, first install the Schematics CLI:
+
+[source,shell]
+----
+npm i -g @angular-devkit/schematics-cli
+----
+
+Then run `schematics` to create a new blank project:
+
+----
+schematics blank --name=my-component
+----
+
+This will create a number of files for you. 
+
+[source,shell]
+----
+CREATE /my-component/README.md (639 bytes)
+CREATE /my-component/package.json (539 bytes)
+CREATE /my-component/tsconfig.json (656 bytes)
+CREATE /my-component/.gitignore (191 bytes)
+CREATE /my-component/.npmignore (64 bytes)
+CREATE /my-component/src/collection.json (231 bytes)
+CREATE /my-component/src/my-component/index.ts (318 bytes)
+CREATE /my-component/src/my-component/index_spec.ts (474 bytes)
+----
+
+There's a `package.json` that handles your project's dependencies. There's also a `src/collection.json` that defines the metadata your project. If you look at `collection.json`, you'll see the following:
+
+[source,json]
+----
+{
+  "$schema": "../node_modules/@angular-devkit/schematics/collection-schema.json",
+  "schematics": {
+    "my-component": {
+      "description": "A blank schematic.",
+      "factory": "./my-component/index#myComponent"
+    }
+  }
+}
+----
+
+You can see that the `my-component` schematic points to a factory function in `my-component/index.ts`. Crack that open and you'll see the following:
+
+[source,ts]
+----
+import { Rule, SchematicContext, Tree } from '@angular-devkit/schematics';
+
+export function myComponent(_options: any): Rule {
+  return (tree: Tree, _context: SchematicContext) => {
+    return tree;
+  };
+}
+----
+
+Not only that, but there's a test in `my-component/index_spec.ts` too!
+
+[source,ts]
+----
+import { Tree } from '@angular-devkit/schematics';
+import { SchematicTestRunner } from '@angular-devkit/schematics/testing';
+import * as path from 'path';
+
+const collectionPath = path.join(__dirname, '../collection.json');
+
+describe('my-component', () => {
+  it('works', () => {
+    const runner = new SchematicTestRunner('schematics', collectionPath);
+    const tree = runner.runSchematic('my-component', {}, Tree.empty());
+
+    expect(tree.files).toEqual([]);
+  });
+});
+----
+
+One cool thing about Schematics is they don't perform any direct actions on your filesystem. Instead, you specify what you'd like to do to a `Tree`. The `Tree` is a data structure with a base (a set of files that already exists) and a staging area (a list of changes to be applied to the base). You can see in the code above that nothing is really happening, the test even proves the tree is empty!
+
+=== Add a Hello World Example
+
+Let's do something slightly more interesting than nothing and create a `hello.ts` file. Modify `my-component/index.ts` to have a `tree.create()` command.
+
+[source,ts]
+----
+import { Rule, SchematicContext, Tree } from '@angular-devkit/schematics';
+
+export function myComponent(_options: any): Rule {
+  return (tree: Tree, _context: SchematicContext) => {
+    tree.create('hello.ts', 'console.log("Hello, World"'));
+    return tree;
+  };
+}
+tree.create(options.name || 'hello', 'world');
+----
+
+Then update `my-component/index_spec.ts` to expect this file.
+
+[source,ts]
+----
+describe('my-component', () => {
+  it('works', () => {
+    const runner = new SchematicTestRunner('schematics', collectionPath);
+    const tree = runner.runSchematic('my-component', {}, Tree.empty());
+
+    expect(tree.files).toEqual(['/hello.ts']);
+  });
+});
+----
+
+Run `npm test` and everything should pass. Want to prove it works? Run the following command from the `my-component` directory.
+
+[source,shell]
+----
+schematics .:my-component
+----
+
+This _looks_ like it creates a file, but it does not. This is because `schematics` runs in debug mode by default. You can bypass by adding `--dry-run=false` to the command. Run `schematics .:my-component --dry-run=false` and `hello.ts` will be created on your hard drive. If you try running the command again, it'll fail because the file already exists.
+
+[source,shell]
+----
+schematics .:my-component --dry-run=false
+An error occured:
+Error: Path "/hello.ts" already exist.
+----
+
+When using Schematics, it's unlikely you're going to want to create files and their contents manually. More than likely, you'll want to copy templates, manipulate their contents, and put them in the project you're modifying. Luckily, there's an API for that!
+
+=== Copy and Manipulate Templates
+
+=== Publish Schematics to npm
+
+=== Introducing OktaDev Schematics!
+
+
+https://blog.angular.io/schematics-an-introduction-dc1dfbc2a2b2[Schematics — An Introduction]
+
