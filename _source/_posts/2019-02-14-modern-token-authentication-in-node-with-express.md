@@ -192,7 +192,7 @@ You then need to make a POST API call to your **Org URL** value (you obtained th
 Using HTTPie in the terminal, this will look like:
 
 ```bash
-http -f POST https://{yourOrgUrl}/oauth2/default/v1/token \
+http -f POST https://{yourOktaDomain}/oauth2/default/v1/token \
   'Authorization: Basic MG9haW94OGJtc0JLXhIYjNjMWJITVdxVlhrdTMwaDc6MktxRQ1FaTWVhdXBvbWdCOXZiNkNPOXBtMnFjSw' \
   grant_type=client_credentials scope=customScope
 ```
