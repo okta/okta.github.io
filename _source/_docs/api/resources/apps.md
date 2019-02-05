@@ -3213,6 +3213,7 @@ Parameter | Description                                                      | P
 applicationId       | `id` of an [app](#application-model)                   | URL        | String   | TRUE     |
 limit     | Specifies the number of results per page (maximum 500)           | Query      | Number   | FALSE    | 50
 after     | Specifies the pagination cursor for the next page of assignments | Query      | String   | FALSE    |
+q         | Returns a filtered list of app users. The value of `q` is matched against an application user profile's `userName`, `firstName`, `lastName`, and `email`. **Note:** This operation only supports `startsWith`, which matches what the string starts with to the query. | Query      | String   | FALSE    |
 
 The results will be [paginated][pagination] according to the `limit` parameter.
 If there are multiple pages of results, the Link header will contain a `next` link, which should be treated as an opaque value (follow it, don't parse it).
