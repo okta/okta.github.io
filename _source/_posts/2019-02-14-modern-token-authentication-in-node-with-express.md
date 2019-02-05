@@ -255,7 +255,7 @@ const express = require('express');
 const OktaJwtVerifier = require('@okta/jwt-verifier');
 
 const clientId = "{yourClientId}";
-const oktaDomain = "{yourOktaDomain}";
+const oktaDomain = "https://{yourOktaDomain}";
 
 const oktaJwtVerifier = new OktaJwtVerifier({
   issuer: `${oktaDomain}/oauth2/default`,
