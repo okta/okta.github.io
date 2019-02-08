@@ -1,10 +1,10 @@
 ---
 layout: docs_page
-title: API Access Management Inline Hook
+title: API Access Management Token Inline Hook
 excerpt: Customize tokens returned by Okta API Access Management process flow.
 ---
 
-# API Access Management Inline Hook
+# API Access Management Token Inline Hook
 
 {% api_lifecycle ea %}
 
@@ -22,7 +22,7 @@ For a general introduction to Okta inline hooks, see [Inline Hooks](/use_cases/i
 
 For information on the API for registering external service endpoints with Okta, see [Inline Hooks Management API](/docs/api/resources/inline-hooks).
 
-For steps to enable this inline hook, see below, [Enabling an API Access Management Inline Hook](#enabling-an-api-access-management-inline-hook).
+For steps to enable this inline hook, see below, [Enabling an API Access Management Token Inline Hook](#enabling-an-api-access-management-token-inline-hook).
 
 ## About
 
@@ -36,7 +36,7 @@ You cannot use this inline hook to overwrite claims in tokens, only to add new o
 
 ## Objects in the Request from Okta
 
-For the API Access Management Inline Hook, the outbound call from Okta to your external service will include the following objects in its JSON payload:
+For the API Access Management Token Inline Hook, the outbound call from Okta to your external service will include the following objects in its JSON payload:
 
 ### data.identity
 
@@ -73,7 +73,7 @@ The set of scopes that have been granted. For descriptions of the claims that ca
 
 ## Objects in Response You Send
 
-For the API Access Management Inline hook, the `commands` and `error` objects that you can return in the JSON payload of your response are defined as follows:
+For the API Access Management Token Inline hook, the `commands` and `error` objects that you can return in the JSON payload of your response are defined as follows:
 
 ### commands
 
@@ -81,7 +81,7 @@ The `commands` object is where you can provide commands to Okta. It is where you
 
 The `commands` object is an array, allowing you to send multiple commands. In each array element, there needs to be a `type` property and `value` property. The `type` property is where you specify which of the supported commands you wish to execute, and `value` is where you supply an operand for that command.
 
-In the case of the API Access Management hook type, the `value` property is itself a nested object, in which you specify a particular operation, a path to act on, and a value.
+In the case of the API Access Management Token hook type, the `value` property is itself a nested object, in which you specify a particular operation, a path to act on, and a value.
 
 | Property | Description                                                              | Data Type       |
 |----------|--------------------------------------------------------------------------|-----------------|
@@ -90,7 +90,7 @@ In the case of the API Access Management hook type, the `value` property is itse
 
 #### Supported Commands
 
-The following commands are supported for the API Access Management Inline Hook type:
+The following commands are supported for the API Access Management Token Inline Hook type:
 
 | Command                 | Description             |
 |-------------------------|-------------------------|
@@ -299,7 +299,7 @@ Returning an error object will cause Okta to return an OAuth 2.0 error to the re
     }
 ]}
 ```
-## Enabling an API Access Management Inline Hook
+## Enabling an API Access Management Token Inline Hook
 
 To activate the inline hook, you first need to register your external service endpoint with Okta using the [Inline Hooks Management API](/docs/api/resources/inline-hooks).
 
