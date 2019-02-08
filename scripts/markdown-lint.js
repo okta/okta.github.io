@@ -35,7 +35,9 @@ const regexValidator = [
   },
   {
     regex: 'index#',
-    omitFiles: []
+    omitFiles: [
+      '_source/_posts/2019-02-13-angular-schematics.adoc'
+    ]
   },
   {
     regex: '(“|”)',
