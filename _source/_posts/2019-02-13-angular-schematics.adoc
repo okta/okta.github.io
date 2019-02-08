@@ -95,6 +95,7 @@ CREATE /my-component/src/my-component/index_spec.ts (474 bytes)
 
 There's a `package.json` that handles your project's dependencies. There's also a `src/collection.json` that defines the metadata for your project. If you look at `collection.json`, you'll see the following:
 
+{% raw %}
 [source,json]
 ----
 {
@@ -107,6 +108,7 @@ There's a `package.json` that handles your project's dependencies. There's also 
   }
 }
 ----
+{% endraw %}
 
 You can see that the `my-component` schematic points to a factory function in `my-component/index.ts`. Crack that open and you'll see the following:
 
@@ -266,6 +268,7 @@ In order to define the `name` prompt, create a `schema.json` file in the `src/my
 
 Then update `src/collection.json` to reference this file in a `schema` property.
 
+{% raw %}
 [source,json]
 ----
 {
@@ -279,6 +282,7 @@ Then update `src/collection.json` to reference this file in a `schema` property.
   }
 }
 ----
+{% endraw %}
 
 Modify `src/my-component/index.ts` so you can get your generated project's path, and copy templates.
 
@@ -493,6 +497,7 @@ ng add @angular/material
 
 You can support for `ng add $your-schematic` too! Open `my-component/src/collection.json` and add a new `ng-add` schematic.
 
+{% raw %}
 [source,json]
 ----
 {
@@ -511,6 +516,7 @@ You can support for `ng add $your-schematic` too! Open `my-component/src/collect
   }
 }
 ----
+{% endraw %}
 
 Create `src/ng-add/index.ts` and add the code necessary for it to invoke the `my-component` schematic.
 
