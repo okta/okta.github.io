@@ -93,7 +93,7 @@ I developed an interest in computers right at the beginning of the personal comp
 
 {% img blog/micah_intro/micah_computers.jpg alt:"Micah Computers" width:"800" %}{: .center-image }
 
-After learning what I was doing with my 300 baud modem and phreaking tools, my parents sought a more wholesome outlet for my interests (one that would keep me out of jail, preferably). My father, a dentist, purchased an Osbourne 1 (CP/M for the win!) and had me help him automate his office.
+After learning of what I was doing with my 300 baud modem and phreaking tools, my parents sought a more wholesome outlet for my interests (one that would keep me out of jail, preferably). My father, a dentist, purchased an Osbourne 1 (CP/M for the win!) and had me help him automate his office.
 
 Since then, my love affair with technology has continued to develop and evolve.
 
