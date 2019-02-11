@@ -5,8 +5,8 @@ author: dogeared
 description: "We welcome not exactly newcomer Micah to the team"
 tags: [security, authentication, api]
 tweets: 
-- ""
-- ""
+- "@afitnerd <3 @OktaDev! Psyched to join the DevRel team! Want to play a game?"
+- "I'm psyched to bring my love of APIs, OAuth & OIDC to the @OktaDev DevRel team!"
 image: blog/featured/okta-java-short-bottle-headphones.jpg
 ---
 
@@ -67,7 +67,7 @@ image: blog/featured/okta-java-short-bottle-headphones.jpg
 </style>
 
 My name is <span data-tooltip="(1) neat-advertisement-immune-sign" data-tooltip-position="left">Micah Silverman</span> and I just joined the Developer Advocacy team at 
-Okta.
+Okta. TL;DR - There's some easter eggs in this post. If you want to know what they're all about - jump to the bottom.
 
 {% img blog/micah_intro/micah_hair.jpg alt:"Micah Hair" width:"800" %}{: .center-image }
 
@@ -86,6 +86,24 @@ I've also been a casual contributor to the
 I am very excited now to be an official member of the team. I'll be primarily
 leading workshops around the country (and the world) to talk about OAuth and
 OpenID Connect. I will also be contributing more code and posts.
+
+## About Me
+
+I developed an interest in computers right at the beginning of the personal computer revolution when I was in 6th grade. I first played with CBM PETs in school. My first home computer was a Commodore Vic-20. Then a Commodore 64 and even the rare SX-64 (```LOAD"*",8,1 – anyone?```).
+
+{% img blog/micah_intro/micah_computers.jpg alt:"Micah Computers" width:"800" %}{: .center-image }
+
+After learning what I was doing with my 300 baud modem and phreaking tools, my parents sought a more wholesome outlet for my interests (one that would keep me out of jail, preferably). My father, a dentist, purchased an Osbourne 1 (CP/M for the win!) and had me help him automate his office.
+
+Since then, my love affair with technology has continued to develop and evolve.
+
+I’ve had a wide ranging career working at the Syfy Channel for its first online presence, large banks and insurance companies including JP Morgan Chase and Metlife, and startups.
+
+The primary themes throughout have been my love of APIs, information security and teaching others all about them.
+
+I’m a maker at heart, whether it’s refurbishing a [Dark Tower](http://afitnerd.com/2011/10/16/weekend-project-fix-dark-tower/) game or building out a MAME arcade cabinet.
+
+{% img blog/micah_intro/micah_mame.png alt:"Micah Mame" width:"400" %}{: .center-image }
 
 ## The Love of All Things API
 
@@ -127,17 +145,9 @@ on me to bring the fun with the learning.
 
 Happy Hunting!
 
-## Epilogue
+## Spring Boot + Twilio + LaMetric FTW
 
 The app that drives this ridiculous mashup is written in [Spring Boot](https://start.spring.io). It uses the [Apache Fluent](https://hc.apache.org/httpcomponents-client-ga/tutorial/html/fluent.html) HTTP library to interact with
 the [LaMetric API](). It also uses the [Twilio API](https://developer.lametric.com/) to handle the interaction via SMS.
 
-The source code for this app can be found on [GitHub](https://github.com/dogeared/twilio-lametric)  
-
-Here some articles on this blog that will help you for further understanding:
-
-- [Build a Basic CRUD App with Angular 7.0 and Spring Boot 2.1](/blog/2018/08/22/basic-crud-angular-7-and-spring-boot-2)
-- [Build a Java REST API with Java EE and OIDC](/blog/2018/09/12/secure-java-ee-rest-api)
-- [Create a Secure Spring REST API](/blog/2018/12/18/secure-spring-rest-api)
-
-Like what you learned today? Follow us on [Twitter](https://twitter.com/oktadev), like us on [Facebook](https://www.facebook.com/oktadevelopers), check us out on [LinkedIn](https://www.linkedin.com/company/oktadev/), and subscribe to our [YouTube channel](https://www.youtube.com/channel/UC5AMiWqFVFxF1q9Ya1FuZ_Q) for more awesome content!
+The source code for this app can be found on [GitHub](https://github.com/dogeared/twilio-lametric)
