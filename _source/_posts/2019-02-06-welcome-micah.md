@@ -89,7 +89,7 @@ OpenID Connect. I will also be contributing more code and posts.
 
 ## About Me
 
-I developed an interest in computers right at the beginning of the personal computer revolution when I was in 6th grade. I first played with CBM PETs in school. My first home computer was a Commodore Vic-20. Then a Commodore 64 and even the rare SX-64 (```LOAD"*",8,1 – anyone?```).
+I developed an interest in computers right at the beginning of the personal computer revolution when I was in 6th grade. I first played with CBM PETs in school. My first home computer was a Commodore Vic-20. Then a Commodore 64 and even the rare SX-64 (```LOAD "*",8,1 – anyone?```).
 
 {% img blog/micah_intro/micah_computers.jpg alt:"Micah Computers" width:"800" %}{: .center-image }
 
