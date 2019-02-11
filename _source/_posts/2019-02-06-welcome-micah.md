@@ -97,11 +97,11 @@ After learning of what I was doing with my 300 baud modem and phreaking tools, m
 
 Since then, my love affair with technology has continued to develop and evolve.
 
-I’ve had a wide ranging career working at the Syfy Channel for its first online presence, large banks and insurance companies including JP Morgan Chase and Metlife, and startups.
+I've had a wide ranging career working at the Syfy Channel for its first online presence, large banks and insurance companies including JP Morgan Chase and Metlife, and startups.
 
 The primary themes throughout have been my love of APIs, information security and teaching others all about them.
 
-I’m a maker at heart, whether it’s refurbishing a [Dark Tower](http://afitnerd.com/2011/10/16/weekend-project-fix-dark-tower/) game or building out a MAME arcade cabinet.
+I'm a maker at heart, whether it's refurbishing a [Dark Tower](http://afitnerd.com/2011/10/16/weekend-project-fix-dark-tower/) game or building out a MAME arcade cabinet.
 
 {% img blog/micah_intro/micah_mame.png alt:"Micah Mame" width:"400" %}{: .center-image }
 
