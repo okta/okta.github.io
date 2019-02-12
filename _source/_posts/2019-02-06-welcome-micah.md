@@ -2,7 +2,7 @@
 layout: blog_post
 title: 'Welcome Micah Silverman'
 author: dogeared
-description: "We welcome not exactly newcomer Micah to the team"
+description: "We welcome not exactly newcomer Micah to the team."
 tags: [security, authentication, api]
 tweets: 
 - "@afitnerd <3 @OktaDev! Psyched to join the DevRel team! Want to play a game?"
@@ -67,7 +67,7 @@ image: blog/featured/okta-java-short-bottle-headphones.jpg
 </style>
 
 My name is <span data-tooltip="(1) neat-advertisement-immune-sign" data-tooltip-position="left">Micah Silverman</span> and I just joined the Developer Advocacy team at 
-Okta. TL;DR - There's some easter eggs in this post. If you want to know what they're all about - jump to the bottom.
+Okta. TL;DR - There are some easter eggs in this post. If you want to know what they're all about - jump to the bottom.
 
 {% img blog/micah_intro/micah_hair.jpg alt:"Micah Hair" width:"800" %}{: .center-image }
 
@@ -97,9 +97,9 @@ After learning of what I was doing with my 300 baud modem and phreaking tools, m
 
 Since then, my love affair with technology has continued to develop and evolve.
 
-I've had a wide ranging career working at the Syfy Channel for its first online presence, large banks and insurance companies including JP Morgan Chase and Metlife, and startups.
+I've had a wide-ranging career working at the Syfy Channel for its first online presence, large banks and insurance companies including JP Morgan Chase and Metlife, and startups.
 
-The primary themes throughout have been my love of APIs, information security and teaching others all about them.
+The primary themes have been my love of APIs, information security and teaching others all about them.
 
 I'm a maker at heart, whether it's refurbishing a [Dark Tower](http://afitnerd.com/2011/10/16/weekend-project-fix-dark-tower/) game or building out a MAME arcade cabinet.
 
@@ -116,7 +116,7 @@ accomplish the same thing: showing a random <span data-tooltip="(4) serious-dres
 Maybe not very practical, but it demonstrated some key software development
 patterns (SOLID) using very different APIs.
 
-## Gameification
+## Gamification
 
 I also love <span data-tooltip="(5) gentle-wax-plucky-metal" data-tooltip-position="left">gamifying</span> everything! It's one of the reasons an [early blog post](https://developer.okta.com/blog/2017/10/27/okta-oauth-zork) 
 of mine include playing the text based adventure Zork as a way to learn some of
