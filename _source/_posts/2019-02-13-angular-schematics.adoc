@@ -5,7 +5,7 @@ author: mraible
 description: ""
 tags: []
 tweets:
-image:
+image: blog/angular-schematics/angular-schematics.png
 ---
 :page-liquid:
 
