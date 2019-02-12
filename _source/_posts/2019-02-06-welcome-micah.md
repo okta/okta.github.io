@@ -66,30 +66,19 @@ image: blog/featured/okta-java-short-bottle-headphones.jpg
   }
 </style>
 
-My name is <span data-tooltip="(1) neat-advertisement-immune-sign" data-tooltip-position="left">Micah Silverman</span> and I just joined the Developer Advocacy team at 
-Okta. TL;DR - There are some easter eggs in this post. If you want to know what they're all about - jump to the bottom.
+My name is <span data-tooltip="(1) neat-advertisement-immune-sign" data-tooltip-position="left">Micah Silverman</span> and I just joined the Developer Advocacy team at Okta. TL;DR - There are some easter eggs in this post. If you want to know what they're all about - jump to the bottom.
 
 {% img blog/micah_intro/micah_hair.jpg alt:"Micah Hair" width:"800" %}{: .center-image }
 
-Funny thing is, I've been working for Okta for 2 years now, just on different 
-teams.
+Funny thing is, I've been working for Okta for 2 years now, just on different teams.
 
-Big shoutout and shameless plug for the Education Services team, here at Okta.
-It was in Education Services that I learned all the ins and outs of the Okta
-Developer API, including our support for standards like SAML, OpenID Connect
-and <span data-tooltip="(2) exciting-mark-probable-rate" data-tooltip-position="left">OAuth 2.0</span>. And, I went on to teach our developer courses. Check out our
-[course catalog](https://www.okta.com/services/training/) when you're ready to dig deep into all that Okta has to
-offer.
+It was in the Sales Engineering and Education Services teams that I learned all the ins and outs of the Okta Developer API, including our support for standards like SAML, OpenID Connect and <span data-tooltip="(2) exciting-mark-probable-rate" data-tooltip-position="left">OAuth 2.0</span>. And, I went on to teach our developer courses. Check out our [course catalog](https://www.okta.com/services/training/) when you're ready to dig deep into all that Okta has to offer.
 
-I've also been a casual contributor to the 
-<span data-tooltip="(3) hulking-page-adroit-chance" data-tooltip-position="left">Developer Blog as a guest poster</span>. 
-I am very excited now to be an official member of the team. I'll be primarily
-leading workshops around the country (and the world) to talk about OAuth and
-OpenID Connect. I will also be contributing more code and posts.
+I've also been a casual contributor to the Developer Blog as a guest poster. I am very excited now to be an official member of the team. I'll be primarily leading workshops around the country (and the world) to talk about OAuth and OpenID Connect. I will also be contributing more code and posts.
 
 ## About Me
 
-I developed an interest in computers right at the beginning of the personal computer revolution when I was in 6th grade. I first played with CBM PETs in school. My first home computer was a Commodore Vic-20. Then a Commodore 64 and even the rare SX-64 (```LOAD "*",8,1 – anyone?```).
+I developed an interest in <span data-tooltip="(3) hulking-page-adroit-chance" data-tooltip-position="left">computers</span> right at the beginning of the personal computer revolution when I was in 6th grade. I first played with CBM PETs in school. My first home computer was a Commodore Vic-20. Then a Commodore 64 and even the rare SX-64 (```LOAD "*",8,1 – anyone?```).
 
 {% img blog/micah_intro/micah_computers.jpg alt:"Micah Computers" width:"800" %}{: .center-image }
 
@@ -107,26 +96,20 @@ I'm a maker at heart, whether it's refurbishing a [Dark Tower](http://afitnerd.c
 
 ## The Love of All Things API
 
-I love connecting systems and functionality via APIs. Especially, things that 
-were not necessarily intended to ever go together.
+I love connecting systems and functionality via APIs. Especially, things that were not necessarily intended to ever go together.
 
 I wrote a blog post on efficiently working with the [Twilio and Slack APIs](https://www.twilio.com/blog/2017/11/solid-principles-slack-twilio.html) to
 accomplish the same thing: showing a random <span data-tooltip="(4) serious-dress-smelly-quilt" data-tooltip-position="left">Magic the Gathering</span> game card.
 
-Maybe not very practical, but it demonstrated some key software development
-patterns (SOLID) using very different APIs.
+Maybe not very practical, but it demonstrated some key software development patterns (SOLID) using very different APIs.
 
 ## Gamification
 
-I also love <span data-tooltip="(5) gentle-wax-plucky-metal" data-tooltip-position="left">gamifying</span> everything! It's one of the reasons an [early blog post](https://developer.okta.com/blog/2017/10/27/okta-oauth-zork) 
-of mine include playing the text based adventure Zork as a way to learn some of
-how OAuth 2.0 works.
+I also love <span data-tooltip="(5) gentle-wax-plucky-metal" data-tooltip-position="left">gamifying</span> everything! It's one of the reasons an [early blog post](https://developer.okta.com/blog/2017/10/27/okta-oauth-zork) of mine include playing the text based adventure Zork as a way to learn some of how OAuth 2.0 works.
 
-I'll even make impractical devices or API mashups just to better understand
-concepts and standards and make it fun along the way.
+I'll even make impractical devices or API mashups just to better understand concepts and standards and make it fun along the way.
 
-In fact, this post is an example of that (and the sort of thing you can expect 
-from me).
+In fact, this post is an example of that (and the sort of thing you can expect from me).
 
 You see, there are <span data-tooltip="(6) mere-pizzas-calm-grade" data-tooltip-position="left">easter eggs</span> embedded right in this post! Here's the game:
 
@@ -136,18 +119,15 @@ You see, there are <span data-tooltip="(6) mere-pizzas-calm-grade" data-tooltip-
 * Text the proper reply to the same number, and your message will be sent to my [LaMetric Digital](https://lametric.com/) message board.
 * You can tune into this [twitch](https://www.twitch.tv/afitnerd) stream to see your message display as well as that of other people
 
-My dear friends in Education Services gave me the LaMetric as a parting gift. I
-wanted to discover how it worked, so I made a mashup of the Twilio and LaMetric
+My dear friends in Education Services gave me the LaMetric as a parting gift. I wanted to discover how it worked, so I made a mashup of the Twilio and LaMetric
 APIs.
 
-My focus on the DevRel team at Okta will be OAuth and OIDC and you can count
-on me to bring the fun with the learning.
+My focus on the DevRel team at Okta will be OAuth and OIDC and you can count on me to bring the fun with the learning.
 
 Happy Hunting!
 
 ## Spring Boot + Twilio + LaMetric FTW
 
-The app that drives this ridiculous mashup is written in [Spring Boot](https://start.spring.io). It uses the [Apache Fluent](https://hc.apache.org/httpcomponents-client-ga/tutorial/html/fluent.html) HTTP library to interact with
-the [LaMetric API](https://lametric-documentation.readthedocs.io/en/latest/reference-docs/lametric-time-reference.html). It also uses the [Twilio API](https://developer.lametric.com/) to handle the interaction via SMS.
+The app that drives this ridiculous mashup is written in [Spring Boot](https://start.spring.io). It uses the [Apache Fluent](https://hc.apache.org/httpcomponents-client-ga/tutorial/html/fluent.html) HTTP library to interact with the [LaMetric API](https://lametric-documentation.readthedocs.io/en/latest/reference-docs/lametric-time-reference.html). It also uses the [Twilio API](https://developer.lametric.com/) to handle the interaction via SMS.
 
 The source code for this app [can be found on GitHub](https://github.com/dogeared/twilio-lametric).
