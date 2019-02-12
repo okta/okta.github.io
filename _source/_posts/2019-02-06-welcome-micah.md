@@ -148,6 +148,6 @@ Happy Hunting!
 ## Spring Boot + Twilio + LaMetric FTW
 
 The app that drives this ridiculous mashup is written in [Spring Boot](https://start.spring.io). It uses the [Apache Fluent](https://hc.apache.org/httpcomponents-client-ga/tutorial/html/fluent.html) HTTP library to interact with
-the [LaMetric API](). It also uses the [Twilio API](https://developer.lametric.com/) to handle the interaction via SMS.
+the [LaMetric API](https://lametric-documentation.readthedocs.io/en/latest/reference-docs/lametric-time-reference.html). It also uses the [Twilio API](https://developer.lametric.com/) to handle the interaction via SMS.
 
-The source code for this app can be found on [GitHub](https://github.com/dogeared/twilio-lametric)
+The source code for this app [can be found on GitHub](https://github.com/dogeared/twilio-lametric).
