@@ -238,6 +238,11 @@ ibrahim:
   display_name: Ibrahim Šuta
   avatar: avatar-isuta.png
 
+chrisgreen:
+  full_name: Chris Green
+  display_name: Chris Green
+  avatar: avatar-chrisgreen.jpg
+
 pmcdowell:
   full_name: Patrick McDowell
   display_name: Patrick McDowell
@@ -310,3 +315,11 @@ raphaeldovale:
   avatar: avatar-raphaeldovale.jpg
   email: raphael@dovale.net
   github: https://github.com/raphaeldovale/
+
+quorralyne:
+  full_name: Heather Downing
+  display_name: Heather Downing
+  avatar: avatar-quorralyne.jpg
+  web: https://quorralyne.com
+  twitter: https://twitter.com/quorralyne
+  github: https://github.com/quorralyne
