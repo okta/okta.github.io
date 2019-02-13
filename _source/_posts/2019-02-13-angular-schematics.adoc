@@ -2,9 +2,12 @@
 layout: blog_post
 title: "Get Started with Angular Schematics"
 author: mraible
-description: ""
-tags: []
+description: "Learn what Schematics are and how to create your first one."
+tags: [schematics, angular, authentication]
 tweets:
+- "This tutorial shows you how to create a schematic to modify an Angular project. Check it out!"
+- "Do you love @angular, but find yourself doing the same thing over and over in new projects? Create a schematic to do it for you!"
+- "Angular Schematics are pretty awesome - find out why!"
 image: blog/angular-schematics/angular-schematics.png
 ---
 :page-liquid:
@@ -17,7 +20,7 @@ To see Schematics in action, install Angular CLI:
 
 [source,shell]
 ----
-npm install -g @angular/cli
+npm install -g @angular/cli@7.3.0
 ----
 
 Then create a new Angular project:
@@ -35,14 +38,16 @@ $ ng new my-cool-app
 
 That's it! A Schematic can prompt you with questions, make changes based on your responses, and look good while doing it!
 
-== Use Schematics to add Authn to Your Angular App
+== Use Schematics to add Authentication to Your Angular App
 
-Want to see something even cooler? You can add Okta support to an Angular CLI-generated app with the following command:
+Want to see something even cooler? You can add https://developer.okta.com[Okta] support to an Angular CLI-generated app with the following command:
 
 [source,shell]
 ----
 ng add @oktadev/schematics
 ----
+
+TIP: Make sure you are in an Angular project directory before you run this command. Also, make sure your project is checked into source control before you run it.
 
 This will prompt you for an OIDC issuer and client ID. To get those values, https://developer.okta.com/signup/[create an Okta Developer account].
 
@@ -56,7 +61,21 @@ Copy the **Client ID** from this screen and save it in a temporary file. Click o
 
 image::{% asset_path 'blog/angular-schematics/ng-add-@oktadev-schematics.png' %}[alt="ng add @oktadev/schematics",width=800,align=center]
 
-How sweet is that?! Instead of having to 1) add `@okta/okta-angular` as a dependency, 2) create five files, and 3) update three files - our Schematics does it all for you in less than 30 seconds! 🎉😆
+Now you can run your app with `ng serve`, navigate to `http://localhost:4200`, and you'll see a login button at the bottom. Click on it to authenticate with Okta. When you're redirected back to your app, it'll be replaced with logout button.
+
+image::{% asset_path 'blog/angular-schematics/login-with-arrow.png' %}[alt="Login button",width=800,align=center]
+
+How sweet is that?! Without this schematic, you have to perform the following steps (from link:/blog/2018/08/22/basic-crud-angular-7-and-spring-boot-2#oktas-angular-support[Build a Basic CRUD App with Angular 7.0 and Spring Boot 2.1]):
+
+. Run `npm install @okta/okta-angular`
+. Update `app.module.ts` to add config and initialize
+. Add callback route to `app-routing.module.ts`
+. Add and configure an `HttpInterceptor` to add an `Authorization` header
+. Add login and logout buttons
+. Add authenticated logic to `app.component.ts`
+. Generate `HomeComponent` and configure with authentication
+
+Instead of having to do these seven steps, our Schematics does it all for you in less than 30 seconds! 🎉😆
 
 Now that you've seen the power of Schematics, let's dive in and learn how to create one.
 
@@ -70,7 +89,7 @@ To create a Schematics project, first install the Schematics CLI:
 
 [source,shell]
 ----
-npm i -g @angular-devkit/schematics-cli
+npm i -g @angular-devkit/schematics-cli@0.13.1
 ----
 
 Then run `schematics` to create a new blank project:
@@ -141,11 +160,11 @@ describe('my-component', () => {
 });
 ----
 
-One cool thing about Schematics is they don't perform any direct actions on your filesystem. Instead, you specify what you'd like to do to a `Tree`. The `Tree` is a data structure with a set of files that already exists and a staging area (of files that will contain new/updated code). You can see in the code above that nothing is really happening, the test even proves the tree is empty!
+One cool thing about Schematics is they don't perform any direct actions on your filesystem. Instead, you specify what you'd like to do to a `Tree`. The `Tree` is a data structure with a set of files that already exist and a staging area (of files that will contain new/updated code). You can see in the code above that nothing is really happening, the test even proves the tree is empty!
 
 === Add a Hello World Example
 
-Let's do something slightly more interesting than nothing and create a `hello.ts` file. Modify `my-component/index.ts` to have a `tree.create()` command.
+Let's do something slightly more interesting than making sure it runs and create a `hello.ts` file. Modify `my-component/index.ts` to have a `tree.create()` command.
 
 [source,ts]
 ----
@@ -153,11 +172,10 @@ import { Rule, SchematicContext, Tree } from '@angular-devkit/schematics';
 
 export function myComponent(_options: any): Rule {
   return (tree: Tree, _context: SchematicContext) => {
-    tree.create('hello.ts', 'console.log("Hello, World"'));
+    tree.create('hello.ts', 'console.log("Hello, World")');
     return tree;
   };
 }
-tree.create(options.name || 'hello', 'world');
 ----
 
 Then update `my-component/index_spec.ts` to expect this file.
@@ -194,14 +212,16 @@ When using Schematics, it's unlikely you're going to want to create files and th
 
 === Copy and Manipulate Templates
 
-Create a `files/src/app` directory to hold your templates in the `my-component/src/my-component` directory.
+Create a `src/my-component/files/src/app` directory to hold your templates.
 
 [source,shell]
 ----
-mkdir -p files/src/app
+mkdir -p src/my-component/files/src/app
 ----
 
-Create an `app.component.ts` file in this directory and put the following code in it:
+TIP: If you're on Windows, `mkdir -p` will only work if you're using https://itsfoss.com/install-bash-on-windows/[Bash on Windows]. If you're not using Bash, you'll need to `md` each directory.
+
+Create an `app.component.ts` file in `src/my-component/files/src/app` and put the following code in it:
 
 [source,ts]
 ----
@@ -217,6 +237,8 @@ export class AppComponent {
 }
 ----
 
+NOTE: You can ignore any compilation errors you get in this file. It's just a template and should compile in your target project.
+
 The `<%= name %>` variable is an option you'll pass in when running this Schematic. Create an `app.component.html` file with some HTML that reads the name variable.
 
 {% raw %}
@@ -224,7 +246,7 @@ The `<%= name %>` variable is an option you'll pass in when running this Schemat
 ----
 <div style="text-align:center">
   <h1>
-    Hello, {{ name }}
+   Hello, {{ name }}
   </h1>
 </div>
 
@@ -232,16 +254,18 @@ The `<%= name %>` variable is an option you'll pass in when running this Schemat
 ----
 {% endraw %}
 
-After creating these files, your templates should look as follows.
+After creating these files, your `src/my-component` directory should look as follows.
 
 [source,shell]
 ----
-$ tree src/my-component/files
-src/my-component/files
-└── src
-    └── app
-        ├── app.component.html
-        └── app.component.ts
+src/my-component/
+├── files
+│   └── src
+│       └── app
+│           ├── app.component.html
+│           └── app.component.ts
+├── index.ts
+└── index_spec.ts
 ----
 
 In order to define the `name` prompt, create a `schema.json` file in the `src/my-component` directory.
@@ -326,7 +350,7 @@ export function myComponent(_options: any): Rule {
 
 Want to prove it all works? Write a test for it!
 
-=== Test Your Schematic
+=== Test Your Schematics
 
 To test this that reads from a workspace and gets the project information, you'll need to run a couple external schematics in your test: one to create a workspace, and one to create a project. You'll need to install `@schematics/angular` to make this possible.
 
@@ -396,14 +420,14 @@ Before publishing your Schematics to npm, it's a good idea to do some basic manu
 
 [source,shell]
 ----
-ng new my-cool-app --routing --style css
+ng new my-test-app --routing --style css
 ----
 
 Then run `npm link /path/to/schematics`. I created mine in the same directory as my Schematics project, so the command I ran was:
 
 [source,shell]
 ----
-cd my-cool-app
+cd my-test-app
 npm link ../my-component
 ----
 
@@ -456,7 +480,7 @@ export function myComponent(_options: any): Rule {
 }
 ----
 
-Run the `ng g` command and everything should work this time.
+Run `npm run build` in your `my-component` directory to rebuild your Schematics. Then run the `ng g` command again. Everything should work this time.
 
 [source,shell]
 ----
@@ -476,12 +500,12 @@ It took me https://stackoverflow.com/questions/54356046/why-is-there-different-b
 
 When you're ready to publish your Schematics to npm, run `npm publish`. If you want to remove a published package, you can do it within the first 72 hours:
 
-* Run `npm unpublish <package_name> -f` to remove the entire package thanks to the -f or force flag
+* Run `npm unpublish <package_name> -f` to remove the entire package thanks to the `-f` or force flag
 * Use `npm unpublish <package_name>@<version>` to remove a specific version
 
 You can learn more about the https://docs.npmjs.com/cli/unpublish[`unpublish` command] and the https://www.npmjs.com/policies/unpublish[Unpublish Policy] in npm's documentation.
 
-== Add Support for `ng add`
+== Add Support for `ng add` with Angular CLI
 
 A slick feature of Angular CLI is its `ng add` command. You can use it to invoke schematics and add features like PWA support and Angular Material to your projects. For example:
 
@@ -527,7 +551,7 @@ export default function (options: any): Rule {
 }
 ----
 
-Run `npm build` in your `my-component` project. Now you should be able to run `ng add my-component`. Pretty slick, eh?
+Run `npm run build` in your `my-component` project. Now you should be able to run `ng add my-component` in your `my-test-app` project. Pretty slick, eh?
 
 == Learn More about Angular and Schematics
 
@@ -539,15 +563,17 @@ Have you read this far? Thanks! In case you missed it, you can create a secure A
 ----
 ng new my-secure-app --routing
 cd my-secure-app
-// create a SPA on Okta, copy settings
+// create a SPA app on Okta, copy settings
 ng add @oktadev/schematics
 ----
 
+After you run these commands, you'll have the Okta Angular SDK installed and configured in your project. You can learn all about its features in our https://developer.okta.com/code/angular/[Angular + Okta documentation].
+
 In the coming months, I hope to add more Schematics that allow easy integration with our https://github.com/okta/okta-oidc-js/tree/master/packages/okta-react[React] and https://github.com/okta/okta-oidc-js/tree/master/packages/okta-vue[Vue] SDKs.
 
-You can find the source code for the example schematic in this post on GitHub at https://github.com/oktadeveloper/okta-angular-schematics-example[@oktadeveloper/okta-angular-schematics-example].
+You can find the source code for the example schematic in this post on GitHub at https://github.com/oktadeveloper/okta-angular-schematics-example[oktadeveloper/okta-angular-schematics-example].
 
-We like to write about Angular on this here blog. Here's some of our recent Angular posts:
+We like to write about Angular on this here blog. Here are some of our recent Angular posts:
 
 * link:/blog/2019/01/30/first-angular-pwa[Build Your First PWA with Angular]
 * link:/blog/2018/12/21/build-basic-web-app-with-mvc-angular[Build a Basic Website with ASP.NET MVC and Angular]
