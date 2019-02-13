@@ -1,11 +1,11 @@
 ---
 layout: blog_post
 title: "Create Login and Registration in Your ASP.NET Core MVC App"
-author: ibrahim
+author: chrisgreen
 description: "This tutorial walks you through setting up login and registration with ASP.NET Core MVC and Okta."
 tags: [aspnet, aspnetmvc, aspnetcore, dotnet, angular, mvc]
 tweets:
-- "Need to learn how to set up login and registration in your #aspnetcore MVC app? @ibrahimsuta has you covered!"
+- "Need to learn how to set up login and registration in your #aspnetcore MVC app? Chris has you covered!"
 - "Set up login and registration in your #aspnetcore mvc app! ->"
 - "If you're looking for a quick intro to adding login to your #aspnetcore mvc app, check this out!"
 image: blog/featured/okta-dotnet-mouse-down.jpg
