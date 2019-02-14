@@ -32,14 +32,14 @@ I'm not sure if it was the content of that tweet or the excellent image created 
 
 Because of the positive feedback from that tweet, I figured it'd be fun to talk to friends that do developer relations to get their pro tips for making life easier. Of course, these tips don't just apply to developer advocates. They apply to pretty much anyone that blogs and speaks (for fun or profit).
 
-=== Aaron Parecki, Developer Advocate at Okta
+== Aaron Parecki, Developer Advocate at Okta
 https://twitter.com/aaronpk[image:{% asset_path 'blog/devrel-protips/aaronpk.png' %}[alt=Aaron Parecki,role="BlogPost-avatar pull-right img-100px"]]
 
 Live demos - practice practice practice! Nobody wants to see you muddling through a live demo on stage, forgetting commands or making mistakes.
 
 Never rely on the venue's internet for your demo! If you can, run a local copy of everything on your laptop so that you can do the entire live demo offline! If that's not possible, then at least bring your own wifi hotspot so that you aren't relying on the venue's wifi.
 
-=== Bruno Borges, Developer Advocate at Microsoft
+== Bruno Borges, Developer Advocate at Microsoft
 https://twitter.com/brunoborges[image:{% asset_path 'blog/devrel-protips/brunoborges.png' %}[alt=Bruno Borges,role="BlogPost-avatar pull-right img-100px"]]
 
 One thing I like to do from time to time is what I call a Mashup Presentation. It requires zero content creation but requires demo creation. When I do something like this, it involves simply curating existing content from other presentations (from within the company or 3rd-party authors that allowed you to reuse their material), and then work on a demo that uses most if not all pieces described in the material. It is a good way to compact and connect interesting topics and present to developers, so they don't need to figure out the intrinsic connections between the ideas. Plus, consumes less time.
@@ -48,7 +48,7 @@ A second tip is to contact the regional sales field when traveling, to find oppo
 
 Finally, I like to reuse as much material as possible, whether from myself or from others. What matters is presenting something that will be never-heard-of to the audience, doesn't matter if it is something that was created in 2001. To me, advocacy is more about bringing information than "creating information."
 
-=== Chloe Condon, Developer Advocate at Microsoft
+== Chloe Condon, Developer Advocate at Microsoft
 https://twitter.com/ChloeCondon[image:{% asset_path 'blog/devrel-protips/ChloeCondon.jpg' %}[alt=Chloe Condon,role="BlogPost-avatar pull-right img-100px"]]
 
 I've always described my role as an "extroverted engineer" (which is a little hilarious, as I myself am an ambivert). Being a Developer Advocate means having a lot of balls in the air at once- from creating content, working with "influencers", organizing meetups, speaking at conferences, communicating to engineering teams, working on demos, remembering to eat and breathe... it definitely requires an agile brain to keep all the plates spinning at once.
@@ -57,7 +57,7 @@ Lately I've noticed that one of the coolest parts of job is that I get paid to m
 
 When it comes to creating content (especially at start-ups), it's easy enough to create a cool demo/video and post it to your company's internal blog. However, sometimes this can feel like an echo chamber. How often are you visiting other tech start-up tools' blogs? What is the audience reading it? Will it get any eyes beyond internal folks, potential interview candidates, and folks who read it from a tweet you posted? Working with other "friends" will not only get the content onto other blogs/resources/etc., but it also shows your tools playing well together, and gives fresh perspective and insight from someone outside of your organization. Teamwork makes the dream work! And friendship makes the... spend... lit? Ok, I need to workshop the pun, but you get the idea.
 
-=== David Blevins, CEO Tomitribe
+== David Blevins, CEO Tomitribe
 https://twitter.com/dblevins[image:{% asset_path 'blog/devrel-protips/dblevins.png' %}[alt=David Blevins,role="BlogPost-avatar pull-right img-100px"]]
 
 My number one, career-long tip would be to prepare and maintain an extra 20 minutes of material for any talk.
@@ -68,7 +68,7 @@ By nature, every talk you give will contain some seasoned material and experimen
 
 I have a couple of speaker-hacks I always use, but over time have needed less. First, I eat before every talk, preferably something heavy. You can't get "butterflies in your stomach" if there's no room. The second is I bring a bottle of water to every talk. If you start to lose your breath while talking, just stop and take a drink. You can catch your breath, slow yourself down and no one's the wiser.
 
-=== Heather Downing, Developer Advocate at Okta
+== Heather Downing, Developer Advocate at Okta
 https://twitter.com/quorralyne.png[image:{% asset_path 'blog/devrel-protips/quorralyne.jpg' %}[alt=Heather Downing,role="BlogPost-avatar pull-right img-100px"]]
 
 One of the best tips I ever got, is to structure your presentation with the WHY - or the end result - first. Think about the way television shows have changed their approaches over the years. They used to begin with the credits for the program and then start after that. Nowadays it is much more compelling to drop a viewer right into the action of a story - BEFORE the title sequence. You have less than two minutes to capture an audience's interest in a way that will sustain them through an hour long presentation (or longer for a workshop). Tell them up front why you would use the code you are doing, but also communicate the end result once you do.
@@ -77,7 +77,7 @@ Another tip that leveled me up as a technical speaker: recording my screen while
 
 Effective speakers use social media tools to broadcast what you are talking about. Twitter is heavily the favorite here, so find out the day before what the conference handle is and any current year hashtags to use with your posts. Don't forget to post a link to your sample code repository and/or slides on SlideShare for reference immediately after your session ends. That keeps the conversation going!
 
-=== James Governor, Redmonk co-founder
+== James Governor, Redmonk co-founder
 https://twitter.com/monkchips[image:{% asset_path 'blog/devrel-protips/monkchips.png' %}[alt=James Governor,role="BlogPost-avatar pull-right img-100px"]]
 
 Say no to people &dash; a lot. No is your friend. Your good, decent, faithful friend. It is always there for you. By nature, DevRel folks tend to be eager to please, and love to be helpful. Being rigorous about what opportunities you take on, and those you pass up, is super important, for effectiveness and all round self-care. Say no to conference organizers, so no to your employers, say no to that extra trip that will mean you're on the road three weeks out of four. Say yes to family, say yes to friends, say yes to quiet evenings. Always be saying no.
@@ -86,7 +86,7 @@ Related - you're so money you don't even know how money you are. Is impostor syn
 
 _Editors note: Check out James' https://redmonk.com/jgovernor/2018/11/23/sympathy-for-the-devrel/[Sympathy for the DevRel] blog post for more. I also enjoyed his talk with the same title https://www.youtube.com/watch?v=zx22jW9MXuI[on YouTube]._
 
-=== James Ward, Developer Advocate at Google
+== James Ward, Developer Advocate at Google
 https://twitter.com/_JamesWard[image:{% asset_path 'blog/devrel-protips/_JamesWard.png' %}[alt=James Ward,role="BlogPost-avatar pull-right img-100px"]]
 
 Live code in presentations is more engaging than code on slides. But it takes tons of practice to do well. I often rehearse my live coding segments dozens of times. So much that I could do them in my sleep, or while nervous on stage, and talking to the audience.
@@ -99,7 +99,7 @@ If an audience size is small for the allotted space, incentivize the attendees t
 
 Leave your bubble. To get a different perspective, seek out opportunities to interact with diverse groups. Go with the salespeople to a briefing in Utah. Lead a workshop in India. Present to college students.
 
-=== Josh Long, Spring Advocate at Pivotal
+== Josh Long, Spring Advocate at Pivotal
 https://twitter.com/starbuxman[image:{% asset_path 'blog/devrel-protips/starbuxman.jpg' %}[alt=Josh Long,role="BlogPost-avatar pull-right img-100px"]]
 [%hardbreaks]
 "Je n'ai fait celle-ci plus longue que parce que je n'ai pas eu le loisir de la faire plus courte."
@@ -123,7 +123,7 @@ Never forget your privilege. Remind yourself every day that you're a _very_ luck
 
 Use your platform responsibly. Don't be an ass.
 
-=== Lee Brandt, Developer Advocate at Okta
+== Lee Brandt, Developer Advocate at Okta
 https://twitter.com/leebrandt[image:{% asset_path 'blog/devrel-protips/leebrandt.png' %}[alt=Lee Brandt,role="BlogPost-avatar pull-right img-100px"]]
 
 I recommend giving new talks at user groups first. This helps the user group leaders (who ALWAYS need speakers). It also helps you gauge interest in the topic and get questions/feedback to improve your talk. 
@@ -132,7 +132,7 @@ For ideation, I recommend asking your network. I often do this with a tweet: "Wh
 
 For travel, buy a second set of everything you MUST have on a trip (shampoo, conditioner, belt, razor, etc.) and keep it in your suitcase ready to go. That way, you never forget these things. I used to forget a belt all the time and would end up having to buy one on the road. First thing I do in a hotel room is pull the "laundry" bag from the closet to use for my dirty socks and underwear. That way it stays in my suitcase and not laying on the floor, etc.
 
-=== Markus Eisele, DevRel Lead Lightbend, Inc. 
+== Markus Eisele, DevRel Lead Lightbend, Inc. 
 https://twitter.com/myfear[image:{% asset_path 'blog/devrel-protips/myfear.jpg' %}[alt=Markus Eisele,role="BlogPost-avatar pull-right img-100px"]]
 
 **Social Media and Developer Relations:**
@@ -154,7 +154,7 @@ Unfortunately, there is no general advice on the content you should tweet about 
 
 If you want to learn more, I can only suggest looking at https://www.slideshare.net/myfear/10-golden-social-media-rules-for-developer-relations-manager[this complete presentation] on the topic.
 
-=== Mike Hartington, Developer Advocate for Ionic
+== Mike Hartington, Developer Advocate for Ionic
 https://twitter.com/mhartington[image:{% asset_path 'blog/devrel-protips/mhartington.png' %}[alt=Mike Hartington,role="BlogPost-avatar pull-right img-100px"]]
 
 Prepare to fail. Demos will fail, it's bound to happen. Always have a backup plan like a video.
@@ -163,14 +163,14 @@ Before making a presentation (slides), write down some ideas as bullet points. I
 
 Giving a talk can be nerve-wracking if you don't have a process. Best piece of advice I've ever got is to take some time beforehand and get into "character". Walk around a bit, do some push-ups, listening to some hype music.
 
-=== Randall Degges, Head of Developer Advocacy at Okta
+== Randall Degges, Head of Developer Advocacy at Okta
 https://twitter.com/rdegges[image:{% asset_path 'blog/devrel-protips/rdegges.png' %}[alt=Randall Degges,role="BlogPost-avatar pull-right img-100px"]]
 
 One of the pro-tips that has served me well over the years: be authentic. Don't be afraid to swear, or just generally be yourself when giving presentations, writing, etc. Write like you speak, speak like you're talking to friends, and just be yourself. =)
 
 Secondly, think about whatever it is you can do to have the biggest impact on developers in a positive way, then do that thing. That might be engineering work, marketing work, meetings, but do whatever needs to be done.
 
-=== Ray Tsang, Developer Advocate at Google Cloud Platform
+== Ray Tsang, Developer Advocate at Google Cloud Platform
 https://twitter.com/saturnism[image:{% asset_path 'blog/devrel-protips/saturnism.png' %}[alt=Ray Tsang,role="BlogPost-avatar pull-right img-100px"]]
 
 Rehearse! English is my second language. I rehearse out loud a lot for my presentations to get used to what I say and how I say it. During my rehearsals, I record myself to identify words that I can pronounce more clearly, catch any "uh" or "um" that can cause a distraction, watch for tone, pace, volume, and pauses. When I mess up, I restart from the beginning.
@@ -187,7 +187,7 @@ Prepare to recover from a demo fail. If I'm confident that I can fix it, I'll ta
 
 Always make slides, demo, and source accessible online so that others can try it.
 
-=== Trisha Gee, Developer Advocate at JetBrains
+== Trisha Gee, Developer Advocate at JetBrains
 https://twitter.com/trisha_gee[image:{% asset_path 'blog/devrel-protips/trisha_gee.png' %}[alt=Trisha Gee,role="BlogPost-avatar pull-right img-100px"]]
 
 **Screencasts:**
