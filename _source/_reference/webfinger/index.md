@@ -1,6 +1,7 @@
 ---
 layout: docs_page
 title: WebFinger
+excerpt: Determine the Identity Provider that a user should be routed to.
 ---
 
 # WebFinger
