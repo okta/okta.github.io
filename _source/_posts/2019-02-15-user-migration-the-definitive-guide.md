@@ -249,7 +249,7 @@ Bulk migrations are my preferred method due to their simplicity. If you can affo
 
 The most important factors to consider when determining if you can do a bulk migration are:
 
-- Does your new user management system support the type of password hash that you're using in your current user management system? For example, if your user’s password are currently stored in the bcrypt format, will your new user management system be able to interpret these hashes properly? 
+- Does your new user management system support the type of password hash that you're using in your current user management system? For example, if your user's password are currently stored in the bcrypt format, will your new user management system be able to interpret these hashes properly? 
 - How much time would it take you to migrate all of your users from your old user management system into your new one? What do your tests tell you?
 - How long will it take you to cut a release of a new version of your codebase, so that no code referencing your old user management system is running in production?
 - Can your application afford that much downtime?
@@ -272,7 +272,7 @@ If the user *doesn't* exist in your new user management system, check to see if 
 
 If the user is able to successfully authenticate against your *old* user management system, then before authenticating them, complete the following steps:
 
-1. Grab *all* of the user's information out of the old user management system (username, first name, last name, any other user data you’re storing)
+1. Grab *all* of the user's information out of the old user management system (username, first name, last name, any other user data you're storing)
 2. Grab the user's plain text password from the authentication request body. Because the user is trying to authenticate, you should be able to grab their plain text password from memory. **NOTE**: I've included some information later on about the risks involved with using the plain text password.
 3. Take the user's account data (along with their plain text password) and create a new user in your *new* user management system with this user's information. In this step, you're basically just copying the user over from the old system to the new.
 4. Now that the user has been copied over, go ahead and log them in.
