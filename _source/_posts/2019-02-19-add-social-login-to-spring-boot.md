@@ -1,9 +1,9 @@
 ---
 layout: blog_post
-title: "Add Social Login to Secure Your Spring Boot App"
+title: "Add Social Login to Your JHipster App"
 author: moksamedia
-description: "This post shows you how to add social login to your secure Spring Boot application."
-tags: [spring, spring boot, social login, spring security, jhipster, authentication, jhipster social]
+description: "This post shows you how to add social login to your JHipster applications."
+tags: [spring, spring boot, social login, spring security, jhipster, authentication, jhipster social login]
 tweets:
 - "Want to learn how to add social login to your @springboot app? This tutorial has you covered!"
 - "Learn how to add social login (Facebook and Google) to your @java_hipster app today!"
@@ -206,9 +206,6 @@ Okta [has some great documentation](https://developer.okta.com/authentication-gu
 * Copy the client ID and client secret, as you'll need them later. 
 * Fill in your customized redirect URL in the **Authorized redirect URIs**. It's the same one you used for Facebook and ends with `/oauth2/v1/authorize/callback`.
 * Click **Create**.
-* Click on **Dashboard** on the left-hand side and click **Enable API**.
-* Search for **Google+** and then click on **Google+ API**.
-* On the **Google+ API** page, click **Enable** at the top.
 
 {% img blog/spring-boot-social-login/google-settings.png alt:"Google Settings" width:"800" %}{: .center-image }
 
