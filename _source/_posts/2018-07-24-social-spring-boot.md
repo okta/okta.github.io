@@ -95,9 +95,6 @@ Here are the steps you need to follow to configure Google for Okta social login:
 * Fill in your redirect URL in the **Authorized redirect URIs**. It's the same one you used for Facebook and ends with `/oauth2/v1/authorize/callback`.
 * Click **Create**.
 * Copy the client ID and client secret, as you'll need them later.
-* Click on **Dashboard** on the left-hand side and click **Enable API**.
-* Search for **Google+** and then click on **Google+ API**.
-* On the **Google+ API** page, click **Enable** at the top.
 
 {% img blog/social-spring-boot/create-google-app.png alt:"Create Google login app" width:"800" %}{: .center-image }
 
