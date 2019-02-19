@@ -56,9 +56,10 @@ If all goes well, you'll be redirected to the example app welcome screen that sa
 
 Click the **Login** button and you will be taken to a custom, locally hosted login page.
 
-{% img blog/social-spring-boot/login-page-without-social.png alt:"Default login page screen shot" width:"600" %}{: .center-image }
+{% img blog/social-spring-boot/login-page-without-social.png alt:"Default login page screen shot" width:"500" %}{: .center-image }
 
 Once you log in you'll see a welcome message with your email address and a bit that says:
+
 > You have successfully authenticated against your Okta org...
 
 Now we're ready to configure Google and Facebook for social login!
@@ -104,9 +105,9 @@ Here are the steps you need to follow to configure Google for Okta social login:
 
 Log into your developer.okta.com dashboard. Under the **Users** top menu, select the **Social Identity and Providers** item. 
 
-From the **Add Identity Providers** dropdown, select **Facebook**
+From the **Add Identity Providers** dropdown, select **Facebook**.
 
-{% img blog/social-spring-boot/add-facebook-provider.png alt:"Add Facebook IdP" width:"800" %}{: .center-image }
+{% img blog/social-spring-boot/add-facebook-provider.png alt:"Add Facebook IdP" width:"600" %}{: .center-image }
 
 Give it a name, something clever like "Log in with Facebook", and enter your client ID and client secret values (you did save those, right?). Everything else can stay the same.
 
@@ -172,7 +173,7 @@ You should see the new social login buttons and should be able to log in using G
 
 **NOTE: If your social accounts use an email address different than what you're using for your Okta preview account, you may need to add a user to the Okta application.**
 
-{% img blog/social-spring-boot/login-page-with-social.png alt:"Login page with social buttons" width:"600" %}{: .center-image }
+{% img blog/social-spring-boot/login-page-with-social.png alt:"Login page with social buttons" width:"544" %}{: .center-image }
 
 ## Learn More about Spring Boot and Secure User Management
 
