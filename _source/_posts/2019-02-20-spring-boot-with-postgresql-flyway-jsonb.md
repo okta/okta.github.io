@@ -16,9 +16,9 @@ Let's dig in!
 
 ## Get Started with PostgreSQL via Docker
 
-Initially proposed in the 70s, the RDBMS (Relational Database Management System) has grown in popularity through the years as computing processing power and storage capacity has increased. A critical characteristic of RDBMS is the support for ACID transactions (Atomicity, Consistency, Isolation, Durability) which guarantee data consistency even in a concurrent environment without the developer need to be fully aware.
+Initially proposed in the 70s, the RDBMS (Relational Database Management System) has grown in popularity through the years as computing processing power and storage capacity has increased. A critical characteristic of RDBMS is the support for ACID transactions (Atomicity, Consistency, Isolation, Durability) which guarantee data consistency even in a concurrent environment without the developer needing to be fully aware.
 
-PostgreSQL is one of the most famous RDBMS around. Technically speaking it is also one of the most advanced relational database systems available. Why is that? Postgres means *Post Ingres* or the successor of Ingres, an older database once sold and paved the way to the more famous *Microsoft SQL Server* and other products. 
+PostgreSQL is one of the most famous RDBMS around. Technically speaking it is also one of the most advanced relational database systems available. Why is that? Postgres means *Post Ingres* or the successor of Ingres, an older database that paved the way to the more famous *Microsoft SQL Server* and other products. 
 
 You will need PostgreSQL installed to complete the tutorial. To install and test PostgreSQL, I recommend using Docker:
 
@@ -46,13 +46,13 @@ Configure your project as shown in the image above:
 * **Artifact**: postgresql
 * **Dependencies**: Web, JPA, PostgreSQL
 
-Download the file and unzip it. Then, simply run the command line below:
+Download the file and unzip it. Then, simply run the command below:
 
 ```bash
 ./mvnw spring-boot:run
 ```
 
-**NOTE:** Depending on your operating system, you need to change `./mvnw` to `mvnw` into the command line.
+**NOTE:** Depending on your operating system, you might need to change `./mvnw` to `mvnw`.
 
 Running `mvnw` will download Maven, all dependencies, and run the application goal (`spring-boot:run`). It will likely fail because you do not have a PostgreSQL database configured. Let's fix this.
 
@@ -315,7 +315,7 @@ curl http://localhost:8080/teachers
 
 ## Secure Spring Data REST with OAuth 2.0
 
-You shouldn't expose your database structure without proper authentication. Let's solve this creating an [OAuth 2.0 Resource Server](https://www.oauth.com/oauth2-servers/the-resource-server/). A resource server is a service working in the infrastructure that has no login page, and it is used to server-to-server communications. In other words: it needs credentials but does not handle how they are acquired.
+You shouldn't expose your database structure without proper authentication. Let's solve this by creating an [OAuth 2.0 Resource Server](https://www.oauth.com/oauth2-servers/the-resource-server/). A resource server is a service working in the infrastructure that has no login page, and it is used for server-to-server communications. In other words: it needs credentials but does not handle how they are acquired.
 
 First, you'll need to add a dependency on the Okta Spring Boot starter:
 
@@ -438,7 +438,7 @@ Pretty sweet, eh?!
 
 Hibernate DDL creation is a nice feature for PoCs or small projects. For more significant projects that have a complex deployment workflow and features like version rollback in case of a significant issue, the solution is not sufficient.
 
-There are several tools to handle database migrations, and one of the most popular is [Flyway](https://flywaydb.org/), which works flawlessly with Spring Boot. Briefly, Flyway looks for SQL scripts on your project's resource path and runs all scripts not previously executed in a defined order. Flyway store what files were executed into a particular table called `SCHEMA_VERSION`.
+There are several tools to handle database migrations, and one of the most popular is [Flyway](https://flywaydb.org/), which works flawlessly with Spring Boot. Briefly, Flyway looks for SQL scripts on your project's resource path and runs all scripts not previously executed in a defined order. Flyway stores what files were executed into a particular table called `SCHEMA_VERSION`.
 
 First, add Flyway as a dependency in your `pom.xml`. When Spring Boot detects Flyway on the classpath, it will run it on startup:
 
@@ -567,7 +567,7 @@ In `application.properties` change the `ddl-auto` configuration to `validate`:
 spring.jpa.hibernate.ddl-auto=validate
 ```
 
-This causes Hibernate to validate if the schema to see if it matches with what's defined in Java. If no match is found, the application will not start.
+This causes Hibernate to validate the schema to see if it matches with what's defined in Java. If no match is found, the application will not start.
 
 Delete and create a new PostgreSQL database instance, since the first instance was created using JPA.
 
