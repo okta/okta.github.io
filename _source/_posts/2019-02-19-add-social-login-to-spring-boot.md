@@ -63,6 +63,10 @@ You're also going to need a free developer.okta.com account. If you do not have 
 
 You'll also need an OAuth 2.0 / OpenID Connect application that we can use to configure social login. To create one, log in to your Okta developer account and navigate to **Applications** > **Add Application** > **Web** > **Next**. Select **Authorization Code** and set the Login redirect URI to be `http://localhost:8080/login`. Click **Done** followed by **Edit**. Add `http://localhost:8080` as a Logout redirect URI.
 
+Next, create a `ROLE_ADMIN` and `ROLE_USER` group and add users into them. These are the default authorities that JHipster uses. You'll also need to make sure these groups are available in the ID token.
+
+Navigate to **API** > **Authorization Servers**, click the **Authorization Servers** tab and edit the default one. Click the **Claims** tab and **Add Claim**. Name it "groups", and include it in the ID Token. Set the value type to "Groups" and set the filter to be a Regex of `.*`.
+
 Your Okta OIDC Application's configuration should match the following screenshot. This is also where you'll get your client ID and client secret.
 
 {% img blog/spring-boot-social-login/oidc-app.png alt:"OIDC app on Okta" width:"700" %}{: .center-image }
