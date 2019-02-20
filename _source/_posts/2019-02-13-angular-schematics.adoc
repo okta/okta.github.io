@@ -16,6 +16,14 @@ When I first started to learn Angular (it was called Angular 2 at the time), I w
 
 Did you know that Angular CLI uses Schematics to generate this code? "What the heck is Schematics?", you might ask. Good question. Schematics is a project that was released by the Angular team a little over a year ago (January 2018). In short, it provides an API that allows you to manipulate files and add new dependencies in Angular projects. It can also work in non-Angular projects, but let's start with Angular.
 
+If you'd rather watch a video, I https://youtu.be/ANwZIt3Ni2s[created a screencast of this tutorial].
+
+++++
+<div style="text-align: center; margin-bottom: 1.25rem">
+<iframe width="700" height="394" style="max-width: 100%" src="https://www.youtube.com/embed/ANwZIt3Ni2s" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+</div>
+++++
+
 To see Schematics in action, install Angular CLI:
 
 [source,shell]
