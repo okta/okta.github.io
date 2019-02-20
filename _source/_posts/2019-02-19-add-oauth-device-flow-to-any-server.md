@@ -11,8 +11,6 @@ tweets:
 - "This tutorial from @aaronpk shows you how you can start using the OAuth Device Flow today with any OAuth server!" 
 ---
 
-# Add the OAuth 2.0 Device Flow to any OAuth Server
-
 You may not have heard of the Device Flow before, but you've probably used it if you have an Apple TV, Roku or Amazon FireTV! The OAuth 2.0 Device Flow is used to log in to a device using OAuth when the device doesn't have a browser, or also when the device has limited keyboard input ability.
 
 The Apple TV is a great device, but it's missing a browser, which means it can't do a typical OAuth flow like you'd normally experience logging in to something on a computer or iPhone. What about passwords? Well, you probably wouldn't want everyone else in the living room watching as you slowly type your password on the screen character by character.
