@@ -1,0 +1,80 @@
+---
+layout: blog_post
+title: "Devnexus 2019: Join the &lt;dev/>olution"
+author: mraible
+description: "Devnexus is an awesome developer conference. We hope to see you there!"
+tags: [devnexus, java, javascript, oauth2, oidc]
+tweets:
+image: blog/devnexus-2019/DevNexus-Invite-R3Party.png
+---
+:page-liquid:
+
+Hello, Developers! Have you ever been to the wonderful conference known as Devnexus? I attended for the first time two years ago and had a blast! It's very well organized, is affordable, and has a very diverse and fun crowd.
+
+This year, Okta is sponsoring Devnexus and we have a number of speakers sharing their wisdom. I thought it'd be fun to write a blog post that highlights my team members and what they'll be talking about.
+
+If you'd like to watch, rather than read, we hope you enjoy the video below. 😊
+
+[video here]
+
+== Leadership for the Reluctant Leader by David Neal
+https://twitter.com/reverentgeek[image:{% asset_path 'blog/devnexus-2019/david.jpg' %}[alt=David Neal,role="BlogPost-avatar pull-right img-100px"]]
+
+**When:** Friday, March 8 at 9:00
+**Where:** Exhibition Hall B
+
+**David Neal** is a family man, musician, illustrator, software developer, and Microsoft MVP living in North Georgia. This keynote focuses on leadership for those who don't really wanna do it. Regardless of the technology you know, regardless of the job title you have, you have amazing potential to impact your family, workplace, community, and beyond. In this talk, David will share a few candid stories of his career failures... err... learning opportunities. You'll walk away with some essential leadership skills anyone can develop, and a good dose of encouragement to be more awesome
+
+== JavaScript: Hey y'all, watch this!
+
+**When:** Thursday, March 7 at 10:00
+**Where:** Ballroom E
+
+This is a new talk from the awesome illustrator known as https://twitter.com/reverentgeek[@reverentgeek] (aka David Neal) on Twitter. This talk will be a parade of face-palm JavaScript fails, stupid JavaScript tricks, and bad jokes sure to get an eye-roll from everyone! Along the way, you may even learn a few mistakes to avoid and tips to make your own JavaScript less terrible!
+
+== Useful Cryptography, an Introduction by Randall Degges
+https://twitter.com/rdegges[image:{% asset_path 'blog/devnexus-2019/randall.jpg' %}[alt=Randall Degges,role="BlogPost-avatar pull-right img-100px"]]
+
+**When:** Thursday, March 7 at 14:40
+**Where:** Ballroom C
+
+**Randall Degges** is a happy programmer that lives in California. He's also the head honcho of Developer Relations at Okta. This talk focuses on cryptography, which is often thought of as a scary topic. In his talk, you'll learn about different types of useful cryptography, how they work (without needing a PhD in mathematics), and how to immediately start applying these concepts in your projects.
+
+== OAuth 2.0 and OpenID Connect (In Plain English) by Micah Silverman
+https://twitter.com/afitnerd[image:{% asset_path 'blog/devnexus-2019/micah.jpg' %}[alt=Micah Silverman,role="BlogPost-avatar pull-right img-100px"]]
+
+**When:** Friday, March 8 at 13:20
+**Where:** Ballroom C
+
+**Micah Silverman** is a developer, maker, tinkerer, and movie/TV/gaming nerd. He resides in Long Island, NY. There's no shortage of information out there on OAuth and OpenID Connect. Much of it is not helpful for people not already familiar with the standard. This talk takes you through it all - in plain English.
+
+== Bootiful Development with Spring Boot and Vue.js by Matt Raible
+https://twitter.com/mraible[image:{% asset_path 'blog/devnexus-2019/matt.jpg' %}[alt=Matt Raible,role="BlogPost-avatar pull-right img-100px"]]
+
+**When:** Friday, March 8 at 13:20
+**Where:** 102
+
+Hey, that's me! I'm a hick from the sticks. I grew up in the backwoods of Montana with no electricity and no running water... for 16 years. Now I'm developer, speaker, VW lover, and family man living near beautiful Denver, Colorado. In my talk, there will be lots of live coding with Spring Boot and Vue (+ TypeScript!). You'll learn how to build a Spring Boot API and secure it with Spring Security. You'll also learn how to build a Vue PWA that talks to this API and has fun doing it!
+
+== Open Source R^3 Jam with Your Community!
+
+On Thursday night, there's a https://devnexus.com/presentations/3739/[party to end all parties]: food, beverages, a DJ and fun, fun, fun! Take time with your community to RRR (relax, recharge and reflect). We're super pumped to be sponsoring this event with a who's who of open source technology innovators!
+
+image::{% asset_path 'blog/devnexus-2019/DevNexus-Invite-R3Party.png' %}[alt=Open Source R^3 Jam,width=800,align=center]
+
+To help promote Devnexus and the Open Source R^3 Jam, we're giving away a limited amount of t-shirts beforehand. If you write a blog or publish a video (like we're doing here), you win!
+
+++++
+<div style="max-width: 500px; margin: 0 auto">
+<blockquote class="twitter-tweet" data-lang="en"><p lang="en" dir="ltr">who wants to <a href="https://twitter.com/hashtag/earnTHATshirt?src=hash&amp;ref_src=twsrc%5Etfw">#earnTHATshirt</a> The <a href="https://twitter.com/hashtag/community?src=hash&amp;ref_src=twsrc%5Etfw">#community</a> attending <a href="https://twitter.com/devnexus?ref_src=twsrc%5Etfw">@devnexus</a> has only 2 more weeks to submit a blog/video to secure the coolest swag ever, an <a href="https://twitter.com/hashtag/OpenSource?src=hash&amp;ref_src=twsrc%5Etfw">#OpenSource</a> R³ Jam 👕 shirt! <a href="https://t.co/hXYBeU0jIU">https://t.co/hXYBeU0jIU</a> <a href="https://twitter.com/hashtag/relax?src=hash&amp;ref_src=twsrc%5Etfw">#relax</a> <a href="https://twitter.com/hashtag/recharge?src=hash&amp;ref_src=twsrc%5Etfw">#recharge</a> <a href="https://twitter.com/hashtag/reflect?src=hash&amp;ref_src=twsrc%5Etfw">#reflect</a> <a href="https://twitter.com/hashtag/TOGETHER?src=hash&amp;ref_src=twsrc%5Etfw">#TOGETHER</a> means <a href="https://twitter.com/hashtag/OSSRRR?src=hash&amp;ref_src=twsrc%5Etfw">#OSSRRR</a>💛💙❤️ <a href="https://t.co/09UiuabYyU">pic.twitter.com/09UiuabYyU</a></p>&mdash; devnexus (@devnexus) <a href="https://twitter.com/devnexus/status/1096800676708012033?ref_src=twsrc%5Etfw">February 16, 2019</a></blockquote>
+<script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+</div>
+++++
+
+== Learn More about Devnexus
+
+Devnexus has their https://devnexus.com/schedule[full schedule] listed on their website. Workshops starts on Wednesday (March 6), and regular conference sessions are Thursday and Friday.
+
+Okta will have a booth setup with some cool t-shirts, stickers, and books to give away. We'll have printed versions of the https://www.infoq.com/minibooks/jhipster-mini-book-5[JHipster Mini-Book 5.0] and https://oauth2simplified.com/[OAuth 2.0 Simplified] too! To top it off, we're planning a _programmer challenge_ that allows you to write code to win prizes.
+
+We hope to see you there! Follow us https://twitter.com/oktadev[on Twitter] if you want to see all the fun we're having at Devnexus.
