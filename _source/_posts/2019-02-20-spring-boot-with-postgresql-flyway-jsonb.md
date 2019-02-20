@@ -1,6 +1,6 @@
 ---
 layout: blog_post
-title: "Spring Boot with PostgreSQL"
+title: "Spring Boot with PostgreSQL, Flyway, and JSONB"
 author: raphaeldovale
 description: "This article presents how a developer can integrate Spring Boot and PostgreSQL, using some exclusive property and NoSQL column types."
 tags: [postgresql, sql, nosql, jpa, hibernate, java, spring boot]
@@ -10,25 +10,17 @@ tweets:
 image: blog/featured/okta-java-short-skew.jpg
 ---
 
-In this tutorial, you are going to learn more about [PostgreSQL](https://www.postgresql.org/) and how to integrate it with a [Spring Boot application](https://spring.io/projects/spring-boot).
+In this tutorial, you are going to learn more about PostgreSQL and how to integrate it with a Spring Boot application. You will learn how to install a simple PostgreSQL instance using Docker and how to connect a Spring Boot application to it. After that, you'll create a simple database schema and add some data to it. Next, I'll show you how to create SQL files to deliver database changes, which are more suitable for enterprise applications. To finish, you will learn how to use PostgreSQL JSONB data structure and use PostgreSQL as a NoSQL database.
 
-You will learn how to install a simple PostgreSQL instance using Docker and how to connect a Spring Boot application to it. After that, you'll create a simple database schema and add some data to it. Next, I'll show you how to create SQL files to deliver database changes, which are more suitable for enterprise applications. To finish, you will learn how to use PostgreSQL JSONB data structure and use PostgreSQL as a NoSQL database.
+Let's dig in!
 
-Let's dig into it!
+## Get Started with PostgreSQL via Docker
 
-## Relational Databases and PostgreSQL
+Initially proposed in the 70s, the RDBMS (Relational Database Management System) has grown in popularity through the years as computing processing power and storage capacity has increased. A critical characteristic of RDBMS is the support for ACID transactions (Atomicity, Consistency, Isolation, Durability) which guarantee data consistency even in a concurrent environment without the developer need to be fully aware.
 
-Initially proposed in [the 70's](https://en.wikipedia.org/wiki/Relational_database), RDBMS (*Relational Database Management System*) has grown in popularity over the latest decades as the computing processing power and storage capacity increases. Other databases types such as [Graph Databases](https://en.wikipedia.org/wiki/Graph_database) or [Hierarchical Databases](https://en.wikipedia.org/wiki/Hierarchical_database_model) were introduced by the same time, but they were too complex by its time and helped Relational Databases to _win_ over them into developers preference.
+PostgreSQL is one of the most famous RDBMS around. Technically speaking it is also one of the most advanced relational database systems available. Why is that? Postgres means *Post Ingres* or the successor of Ingres, an older database once sold and paved the way to the more famous *Microsoft SQL Server* and other products. 
 
-Another critical characteristic of RDBMS systems is the support for [ACID transactions](https://en.wikipedia.org/wiki/ACID_(computer_science)) (*Atomicity, Consistency, Isolation, Durability*) which guarantee data consistency even in a concurrent environment without the developer need to be fully aware.
-
-[PostgreSQL](https://en.wikipedia.org/wiki/PostgreSQL) is one of the most famous RDBMS around. Technically speaking it is also one of the most advanced relational database system available (freely or commercial). Why is that? Postgres means *Post Ingres* or the successor of Ingres, an older database once sold and paved the way to the more famous *Microsoft SQL Server* and other products. What do they have in common? Its creator: Michael Stonebraker. If you are interested in history, Wikipedia has an [excellent article](https://en.wikipedia.org/wiki/PostgreSQL) about it.
-
-## Prerequisites
-
-First and foremost, you'll need to clone this post's [GitHub repository](https://github.com/oktadeveloper/okta-postgresql-spring-boot-example) that helps you if you have any doubts. Carefully selected branches are available to help you on each step of this article if you need any assistance.
-
-You will also need PostgreSQL to run the tutorial. To install and test PostgreSQL, I recommend using Docker:
+You will need PostgreSQL installed to complete the tutorial. To install and test PostgreSQL, I recommend using Docker:
 
 ```bash
 docker pull postgres:11
@@ -37,42 +29,34 @@ docker run --name dev-postgres -p 5432:5432 -e POSTGRES_PASSWORD=mysecretpasswor
 docker exec dev-postgres psql -U postgres -c"CREATE DATABASE coursedb" postgres
 ```
 
-The command above should run in any Linux, Windows, or MacOS distribution that has an instance of Docker installed. The first line pulls PostgreSQL version 11; the second line initiates a new instance of it with the name `dev-postgres,` running on port `5432`. The latest line executes a DDL command to create the database `coursedb` into the instance. Keep in mind you are not creating a volume for the storage data so once the container is deleted, all its data will be deleted as well.
+**NOTE:** You will need [Docker installed](https://docs.docker.com/install) for these commands to work.
 
-Please, keep in mind you must have [Docker](https://docs.docker.com/install) installed.
+The command above should run in any Linux, Windows, or MacOS distribution that has an instance of Docker installed. The first line pulls PostgreSQL version 11; the second line initiates a new instance of it with the name `dev-postgres,` running on port `5432`. The last line executes a DDL command to create the database `coursedb` into the instance. Keep in mind, you are not creating a volume for the storage data if the container is deleted, all its data will be deleted as well.
 
-## Create Spring Boot App
+## Create a Spring Boot App with PostgreSQL
 
-**TIP:** If you'd like to skip this section, you can simply clone this post's repo and check out the `start` branch:
-
-```
-git clone -b start https://github.com/oktadeveloper/okta-postgresql-spring-boot-example.git
-```
-
-First, you need to create a new project with needed dependencies. Thankfully, Spring has the right tool for us: [Spring Initialzr](https://start.spring.io/).
+First, you need to create a new project with the required dependencies. You can use [Spring Initialzr](https://start.spring.io/) for this.
 
 {% img blog/postgresql-with-spring-boot/spring-initializr.png alt:"New Spring Application" width:"800" %}{: .center-image }
 
-Configure your project as the image above:
+Configure your project as shown in the image above:
 
 * **Project Type**: Maven Project
 * **Group**: com.okta.developer
 * **Artifact**: postgresql
 * **Dependencies**: Web, JPA, PostgreSQL
 
-Download the file and unzip it. Do you know you can already run this application? Simply run the command line below:
+Download the file and unzip it. Then, simply run the command line below:
 
 ```bash
 ./mvnw spring-boot:run
 ```
 
-> **Note**: depending on your operating system, you need to change `./mvnw` to `mvnw` into the command line. 
+**NOTE:** Depending on your operating system, you need to change `./mvnw` to `mvnw` into the command line.
 
-Running `mvnw` will download Maven, all dependencies, and run the application goal (`spring-boot:run`). It will likely fail because you do not have a PostgreSQL database setup. Let's fix this.
+Running `mvnw` will download Maven, all dependencies, and run the application goal (`spring-boot:run`). It will likely fail because you do not have a PostgreSQL database configured. Let's fix this.
 
-## Add Database Configuration
-
-**TIP:** Use `git checkout database_configuration` to skip this section.
+## Add Database Configuration for PostgreSQL
 
 You now have a system that has database dependencies but does not know where to connect. First, change your main class (probably `com.okta.developer.postgresql.PostgresqlApplication`) and add the annotation `@EnableTransactionManagement` to it, like this:
 
@@ -97,7 +81,7 @@ Configuration annotations in Spring allow you to set up your application using _
 
 Update `src/main/resources/application.properties` to define your database connection properties:
 
-```properties 
+```properties
 spring.datasource.url=jdbc:postgresql://192.168.99.100:5432/coursedb
 spring.datasource.username=postgres
 spring.datasource.password=mysecretpassword
@@ -121,9 +105,7 @@ What happens if you start up the application again?
 
 Now the application starts and you should be able to open `http://localhost:8080` in your browser. Nothing nice happens as you haven't written any code for the UI yet. You may see an error stack on initialization: don't worry, it is simply Hibernate telling the JDBC driver does not support a feature (method `createClob`).
 
-## Create Persistent Entities and DAO's
-
-**TIP:** Use `git checkout entities` to skip this section.
+## Create JPA Entities and Data Access Objects
 
 OK, now let's do some real work.
 
@@ -148,9 +130,9 @@ Before changing the code, add two new dependencies in your `pom.xml` file:
 </dependency>
 ```
 
-Project Lombok adds a series of helpful features that simplify developer's life like getter/setter and constructor autogeneration. If you are using an IDE to develop this tutorial, you must install a [plugin](https://projectlombok.org/setup/overview) to avoid compilation problems.
+Project Lombok adds a series of helpful features that simplify a developer's life like getter/setter and constructor autogeneration. If you are using an IDE to develop this tutorial, you must install a [plugin](https://projectlombok.org/setup/overview) to avoid compilation problems.
 
-Spring Data Rest is a handy dependency that creates an HTTP interface for your repositories. You are going to use the HTTP interface to test your code.
+Spring Data REST is a handy dependency that creates an HTTP interface for your repositories. You are going to use the HTTP interface to test your code.
 
 To help your entities, you'll create a _superclass_ that handles the primary key in the same way for every entity we create. PostgreSQL has support to UUID, so you are going to use it instead of the commonly used auto-increment integer. UUID is helpful to avoid a normal attack in which the hacker tries to increase or decrease an entity ID to discover new information.
 
@@ -261,7 +243,7 @@ import java.util.UUID;
 public interface TeacherDAO extends CrudRepository<Teacher, UUID> {}
 ```
 
-You now have DAOs for each entity. You may be asking where is the implementation for them? Spring Data has some sweet and intelligent ways to handle this. Since your interfaces extend `CrudRepository`, Spring automatically generates the concrete class with all [CRUD](https://en.wikipedia.org/wiki/Create,_read,_update_and_delete) related operations available!
+You now have DAOs for each entity. You may be asking, where is the implementation for them? Spring Data has some intelligent ways to handle this. Since your interfaces extend `CrudRepository`, Spring automatically generates the concrete class with all CRUD-related operations available!
 
 To fill some data, create a new service class called `DataFillerService`. It will be responsible for inserting data in the database as soon as the application starts.
 
@@ -318,26 +300,24 @@ public class DataFillerService {
 
 The method `fillData` is automatically called by Spring Context as soon the application context finishes loading. It uses the `@Transaction` annotations to indicate the entire method must run inside a transaction. That way, if any instruction fails, the entire method will be rolled back. As you can see, `CourseDAO` and `TeacherDAO` has some CRUD methods available.
 
-Now, you can test if your application is working: 
+Now, you can test if your application is working:
 
 ```bash
 ./mvnw spring-boot:run
 ```
 
-The application creates several REST endpoints to access your DAO's method. Try some commands: 
+The application creates several REST endpoints to access your DAO's method. Try some commands:
 
 ```bash
 curl http://localhost:8080/courses
 curl http://localhost:8080/teachers
 ```
 
-## Securing Spring Data Rest with OAuth 2.0
-
-**TIP:** use `git checkout security` to skip this section.
+## Secure Spring Data REST with OAuth 2.0
 
 You shouldn't expose your database structure without proper authentication. Let's solve this creating an [OAuth 2.0 Resource Server](https://www.oauth.com/oauth2-servers/the-resource-server/). A resource server is a service working in the infrastructure that has no login page, and it is used to server-to-server communications. In other words: it needs credentials but does not handle how they are acquired.
 
-First, you'll need to add these dependencies:
+First, you'll need to add a dependency on the Okta Spring Boot starter:
 
 ```xml
 <dependency>
@@ -346,7 +326,8 @@ First, you'll need to add these dependencies:
     <version>1.1.0</version>
 </dependency>
 ```
-The main class will also receive a new security configuration:
+
+Then add a `WebSecurityConfigurerAdapter` to `PostgresqlApplication`:
 
 ```java
 package com.okta.developer.postgresql;
@@ -380,7 +361,7 @@ public class PostgresqlApplication {
 }
 ```
 
-`OktaOAuth2WebSecurityConfigurerAdapter` defines our configuration. 
+The `OktaOAuth2WebSecurityConfigurerAdapter` class defines the security configuration.
 
 * `.authorizeRequests().anyRequest().authenticated()` - tells Spring Security every request **must** be authenticated.
 * `.oauth2ResourceServer().jwt()` - configures the application as a Resource Server that will allows access tokens for authorization.
@@ -392,31 +373,30 @@ okta.oauth2.issuer=https://{yourOktaDomain}/oauth2/default
 okta.oauth2.clientId={yourClientId}
 ```
 
-Where `yourClientID` is provided by Okta's website.
+These properties are going to tell Spring and Okta where to find the OAuth 2.0 issuer and identify the client ID for this application...
 
-These properties are going to tell Spring and Okta where are the OAuth 2.0 issuer and what is the client ID for this application...
+... Issuer, client ID, what am I talking about? To test the application, you need to [create a free-forever account on Okta](https://developer.okta.com/signup/) and set up a few things.
 
-... Issuer, clientId, what am I talking about? To test the application, you need to [create a free-forever account on Okta](https://developer.okta.com/signup/) and set up a few things.
-
-In the Okta dashboard, create an application of type Service it indicates a resource server that does not have a login page or any way to obtain new tokens.
+In the Okta dashboard, create an application of type `Service`, which indicates a resource server that does not have a login page or any way to obtain new tokens.
 
 {% img blog/postgresql-with-spring-boot/create-new-service.png alt:"Create new service" width:"800" %}{: .center-image }
 
-Click **Next**, type the name of your service, then click **Done**. You will be presented with a screen similar to the one below. Copy and paste your _Client ID_ for later. It will be useful when you are starting your application.
 
+Click **Next**, type the name of your service, then click **Done**. You will be presented with a screen similar to the one below. Copy and paste the _Client ID_ in to your `application.properties` file.
+ 
 {% img blog/postgresql-with-spring-boot/service-created.png alt:"Service created" width:"800" %}{: .center-image }
 
-Now, start your application like before:
+Now, start your application as before:
 
 ```bash
 ./mvnw spring-boot:run
 ```
 
-Run again `curl` (the `-v` attribute will return the response headers):
+Run `curl` (the `-v` attribute will return the response headers):
 
 ```bash
 > curl -v http://localhost:8080/courses
-< HTTP/1.1 401 
+< HTTP/1.1 401
 < Set-Cookie: JSESSIONID=6AA0A042FB1D69CC1CB9747820FDF5E1; Path=/; HttpOnly
 < WWW-Authenticate: Bearer
 < X-Content-Type-Options: nosniff
@@ -429,15 +409,15 @@ Run again `curl` (the `-v` attribute will return the response headers):
 < Date: Thu, 20 Dec 2018 04:46:21 GMT
 ```
 
-The server returns a 401 HTTP code, which means you are unauthorized. Now, let's create a valid token. An easy way to achieve a token to generate one using [OpenID Connect <debugger/>](https://oidcdebugger.com/).
+The server returns a 401 HTTP code, which means you are unauthorized. Now, let's create a valid token. An easy way to achieve a token is to generate one using [OpenID Connect <debugger/>](https://oidcdebugger.com/).
 
-First, you'll need to create a new Web application in Okta:
+First, you'll need to create a new web application in Okta to use this service:
 
 {% img blog/postgresql-with-spring-boot/create-new-web-application.png alt:"New web application" width:"800" %}{: .center-image }
 
-Set the _Login redirect URIs_ field to https://oidcdebugger.com/debug and _Grant Type Allowed_ to Hybrid. Click **Done** and copy the client ID for the next step.
+Set the _Login redirect URIs_ field to `https://oidcdebugger.com/debug` and _Grant Type Allowed_ to `Hybrid`. Click **Done** and copy the client ID for the next step.
 
-Now, on the OpenID Connect website, fill the form in like the screenshot below (do not forget to fill in the client ID for your recently created Okta web application):
+Now, on the OpenID Connect Debugger website, fill the form in like the screenshot below (do not forget to fill in the client ID for your recently created Okta web application):
 
 {% img blog/postgresql-with-spring-boot/openid-connect.png alt:"OpenID Connect" width:"700" %}{: .center-image }
 
@@ -452,17 +432,15 @@ export TOKEN={YOUR_TOKEN}
 curl -v -H "Authorization: Bearer ${TOKEN}" http://localhost:8080/teachers
 ```
 
-And it's done!
+Pretty sweet, eh?!
 
-## Versioning and Securing Database Version Changes
-
-**TIP:** Use `git checkout migration` to skip this section.
+## Versioning Schema Changes in PostgreSQL with Flyway
 
 Hibernate DDL creation is a nice feature for PoCs or small projects. For more significant projects that have a complex deployment workflow and features like version rollback in case of a significant issue, the solution is not sufficient.
 
 There are several tools to handle database migrations, and one of the most popular is [Flyway](https://flywaydb.org/), which works flawlessly with Spring Boot. Briefly, Flyway looks for SQL scripts on your project's resource path and runs all scripts not previously executed in a defined order. Flyway store what files were executed into a particular table called `SCHEMA_VERSION`.
 
-First, add Flyway as a dependency in `pom.xml`. When Spring detects Flyway on the classpath, it will run it on startup:
+First, add Flyway as a dependency in your `pom.xml`. When Spring Boot detects Flyway on the classpath, it will run it on startup:
 
 ```xml
 <dependency>
@@ -589,9 +567,9 @@ In `application.properties` change the `ddl-auto` configuration to `validate`:
 spring.jpa.hibernate.ddl-auto=validate
 ```
 
-It means Hibernate validates if the Schema matches with what was defined in Java. If no match is found, the application will not startup.
+This causes Hibernate to validate if the schema to see if it matches with what's defined in Java. If no match is found, the application will not start.
 
-Delete and create a new PostgreSQL database instance, since the first instance was creating using JPA.
+Delete and create a new PostgreSQL database instance, since the first instance was created using JPA.
 
 ```bash
 docker rm -f dev-postgres
@@ -605,7 +583,7 @@ Now, start Spring Boot again:
 ./mvnw spring-boot:run
 ```
 
-You will see the same data exposed, but if you have a look into the logs, will notice Flyway is running database migration:
+You will see the same data exposed, but if you have a look into the logs, will notice Flyway runs the database migration:
 
 ```
 2018-11-25 23:50:12.941  INFO 30256 --- [           main] o.f.core.internal.command.DbValidate     : Successfully validated 2 migrations (execution time 00:00.037s)
@@ -616,11 +594,9 @@ You will see the same data exposed, but if you have a look into the logs, will n
 2018-11-25 23:50:13.066  INFO 30256 --- [           main] o.f.core.internal.command.DbMigrate      : Successfully applied 2 migrations to schema "public" (execution time 00:00.109s)
 ```
 
-## Scratching NoSQL Surface with Spring Boot and PostgreSQL's JSONB Data Structure
+## Scratch the NoSQL Surface with Spring Boot and PostgreSQL's JSONB Data Structure
 
-**TIP:** Use `git checkout jsonb` to skip this section.
-
-[NoSQL databases](https://en.wikipedia.org/wiki/NoSQL) are, as the name says, databases that do not store their data with relationships. There are many types of NoSQL databases: graph databases, key-value stores, document, etc. Generally speaking, one of the most significant advantages of this kind of database is the lack of schema enforcement (you can mix a different kind of data), different levels of data consistency and better performance in some cases.
+NoSQL databases are, as the name says, databases that do not store their data with relationships. There are many types of NoSQL databases: graph databases, key-value stores, document, etc. Generally speaking, one of the most significant advantages of this kind of database is the lack of schema enforcement (you can mix a different kind of data), different levels of data consistency and better performance in some cases.
 
 PostgreSQL adopted some data types to handle JSON data inside its data structures. This datatype is called JSONB, and this section shows how it is possible to use it with Spring Boot and without changing your current schema.
 
@@ -721,7 +697,7 @@ public class Teacher extends EntityWithUUID {
 }
 ```
 
-Now you have set a list of data type `jsonb` but also added a `fetch = LAZY` property. The property tells Hibernate to **NOT** retrieve the attribute value unless asked. Without the property, every call to a teacher instance will process JSON and create review objects. Hibernate needs a Maven plugin to work with lazy attributes properly. Edit the `pom.xml` file and add the following snippet in the `<plugins>` section.
+Now you have set a list of data type `jsonb` but also added a `fetch = LAZY` property. The property tells Hibernate **NOT** to retrieve the attribute value unless asked. Without the property, every call to a teacher instance will process JSON and create review objects. Hibernate needs a Maven plugin to work with lazy attributes properly. Edit the `pom.xml` file and add the following snippet in the `<plugins>` section.
 
 ```xml
 <plugin>
@@ -840,7 +816,7 @@ public class TeacherController {
 }
 ```
 
-In `SimpleTeacherService`, note that there  is an annotation `@Transactional(isolation = Isolation.SERIALIZABLE)`. It means every call to this method runs in the most secure transaction level. In other words, once the code reads the `reviews` JSON value, no other code can read or write on the `reviews` column (it is blocked) until the transaction finishes. Why's that? Since you are manipulating JSON content, if a concurrent transaction updates the column, one of them will have consistency problems.
+In `SimpleTeacherService`, note that there  is an annotation `@Transactional(isolation = Isolation.SERIALIZABLE)`. This means every call to this method runs in the most secure transaction level. In other words, once the code reads the `reviews` JSON value, no other code can read or write on the `reviews` column (it is blocked) until the transaction finishes. Why's that? Since you are manipulating JSON content if a concurrent transaction updates the column, one of them will have consistency problems.
 
 You can now start your app:
 
@@ -848,7 +824,7 @@ You can now start your app:
 ./mvnw spring-boot:run
 ```
 
-Moreover, test the review upload by running CURL:
+And test the review upload by running CURL:
 
 ```bash
 curl -X POST \
@@ -861,15 +837,16 @@ curl -X POST \
   }'
 ```
 
-## Conclusion
+## Learn More about Spring Boot, PostgreSQL, Hibernate, JPA, and Spring Data REST
 
-In this tutorial, we explore the integration with Spring Boot and PostgreSQL and even used some advanced technologies. 
+In this tutorial, you learned how to integrate Spring Boot with PostgreSQL and use some advanced technologies like Flyway and JSONB. You can find the source code for this blog post [on GitHub](https://github.com/oktadeveloper/okta-postgresql-spring-boot-example).
 
-You can find the source code for this blog post [on GitHub](https://github.com/oktadeveloper/okta-postgresql-spring-boot-example).
-
-There is plenty of knowledge to learn about JPA, Hibernate and PostgreSQL. Please refer to the following articles if you are interested in learning more:
+There is plenty more to learn about JPA, Hibernate and PostgreSQL. Please refer to the following posts if you're interested in more knowledge:
 
 * [Create a Secure Spring REST API](/blog/2018/12/18/secure-spring-rest-api#set-up-an-oauth-20-resource-server)
 * [Build a Basic App with Spring Boot and JPA using PostgreSQL](/blog/2018/12/13/build-basic-app-spring-boot-jpa)
 * [Use React and Spring Boot to Build a Simple CRUD App](/blog/2018/07/19/simple-crud-react-and-spring-boot)
 * [Build a Basic CRUD App with Angular 7.0 and Spring Boot 2.1 ](/blog/2018/08/22/basic-crud-angular-7-and-spring-boot-2)
+* [NoSQL Options for Java Developers](/blog/2017/09/08/nosql-options-for-java-developers)
+
+Like what you learned today? Follow us on [Twitter](https://twitter.com/oktadev), and subscribe to our [YouTube channel](https://www.youtube.com/channel/UC5AMiWqFVFxF1q9Ya1FuZ_Q) for more awesome content!
