@@ -11,6 +11,11 @@ excerpt: The Inline Hooks Management API provides a CRUD interface for registeri
 
 The Inline Hooks Management API provides a CRUD interface for registering external inline hook endpoints and updating them, as well as a way to manually trigger invocation of an inline hook for testing purposes. For general information on inline hooks and how to create them, see [Inline Hooks](/use_cases/inline_hooks/).
 
+## Getting Started
+
+Explore the Inline Hooks Management API: [![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/b9651dc833b18e4c4666){:target="_blank"}
+
+
 ## Inline Hook Operations
 
 ### Create Inline Hooks
