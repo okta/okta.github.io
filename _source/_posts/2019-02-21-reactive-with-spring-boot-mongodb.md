@@ -349,21 +349,14 @@ Content-Type: application/json;charset=UTF-8
 
 To access the server now, you need a valid access token. You can use **OpenID Connect Debugger** to help you do this. In another window, open [oidcdebugger.com](https://oidcdebugger.com/).
 
-**Authorize URI**: `https://{yourOktaDomain}/oauth2/default/v1/authorize`
-
-**Redirect URI**: do not change. This is the value you added to your OIDC application above.
-
-**Client ID**: from the OIDC application you just created.
-
-**Scope**: `openid profile email`.
-
-**State**: any value you want to pass through the OAuth redirect process. I set it to `{}`.
-
-**Nonce**: can be left alone. Nonce means "number used once" and is a simple security measure used to prevent the same request being used multiple times.
-
-**Response Type**: `token`.
-
-**Response mode**: `form_post`.
+* **Authorize URI**: `https://{yourOktaDomain}/oauth2/default/v1/authorize`
+* **Redirect URI**: do not change. This is the value you added to your OIDC application above.
+* **Client ID**: from the OIDC application you just created.
+* **Scope**: `openid profile email`.
+* **State**: any value you want to pass through the OAuth redirect process. I set it to `{}`.
+* **Nonce**: can be left alone. Nonce means "number used once" and is a simple security measure used to prevent the same request being used multiple times.
+* **Response Type**: `token`.
+* **Response mode**: `form_post`.
 
 {% img blog/spring-boot-mongodb/oidc-debugger.png alt:"OIDC Debugger" width:"600" %}{: .center-image }
 
