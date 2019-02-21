@@ -347,7 +347,7 @@ Content-Type: application/json;charset=UTF-8
 
 ## Generate an Access Token
 
-To access the server now, you need a valid access token. You can use **OpenID Connect Debugger** to help you do this. In another window, open [oidcdebugger.com](https://oidcdebugger.com/).
+To access the server now, you need a valid access token. You can use **OpenID Connect debugger** to help you do this. In another window, open [oidcdebugger.com](https://oidcdebugger.com/).
 
 * **Authorize URI**: `https://{yourOktaDomain}/oauth2/default/v1/authorize`
 * **Redirect URI**: do not change. This is the value you added to your OIDC application above.
