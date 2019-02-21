@@ -42,7 +42,7 @@ Reactive is another great bit of jargon. It feels like the kind of word that peo
   
 If you take a look at [the Spring WebFlux documentation](https://docs.spring.io/spring/docs/current/spring-framework-reference/web-reactive.html), they give a pretty good overview of what **reactive** means.  
   
-> The term, “reactive,” refers to programming models that are built around reacting to change — network components reacting to I/O events, UI controllers reacting to mouse events, and others. In that sense, non-blocking is reactive, because, instead of being blocked, we are now in the mode of reacting to notifications as operations complete or data becomes available.  
+> The term, "reactive," refers to programming models that are built around reacting to change — network components reacting to I/O events, UI controllers reacting to mouse events, and others. In that sense, non-blocking is reactive, because, instead of being blocked, we are now in the mode of reacting to notifications as operations complete or data becomes available.  
   
 So reactive means: non-blocking, asynchronous, and centered around stream processing.
 
