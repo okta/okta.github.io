@@ -409,8 +409,8 @@
     "description" : "",
     "tags" : [ ]
   }, {
-    "id" : "callback",
-    "description" : "",
+    "id" : "inline-hook",
+    "description" : "Inline Hook.",
     "tags" : [ ]
   }, {
     "id" : "webhook",
@@ -4738,6 +4738,12 @@
       "tags" : [ "samanage-app" ],
       "mappings" : [ "application.provision.group.add" ]
     }, {
+      "id" : "app.saml.sensitive.attribute.update",
+      "category" : "lca",
+      "description" : "SAML assertion updated.",
+      "tags" : [ "cvd" ],
+      "mappings" : [ "app.saml.sensitive.attribute.update" ]
+    }, {
       "id" : "app.scim.is.api.account.error",
       "category" : "sync",
       "description" : "",
@@ -5698,6 +5704,12 @@
       "tags" : [ "security" ],
       "mappings" : [ ]
     }, {
+      "id" : "core.user.account.report_suspicious_activity_by_enduser",
+      "category" : "end-user-security",
+      "description" : "User account suspicious activity reported.",
+      "tags" : [ "user" ],
+      "mappings" : [ "user.account.report_suspicious_activity_by_enduser" ]
+    }, {
       "id" : "core.user.added_to_rule_exclusion",
       "category" : "lca",
       "description" : "User added to exclusion list of group membership rule.",
@@ -5842,9 +5854,21 @@
       "tags" : [ "user" ],
       "mappings" : [ "user.lifecycle.unsuspend" ]
     }, {
+      "id" : "core.user.email.message_sent.mfa_enroll_notification",
+      "category" : "end-user-security",
+      "description" : "MFA enrollment notification email sent.",
+      "tags" : [ "user" ],
+      "mappings" : [ "system.email.mfa_enroll_notification.sent_message" ]
+    }, {
+      "id" : "core.user.email.message_sent.mfa_reset_notification",
+      "category" : "end-user-security",
+      "description" : "MFA reset notification email sent.",
+      "tags" : [ "user" ],
+      "mappings" : [ "system.email.mfa_reset_notification.sent_message" ]
+    }, {
       "id" : "core.user.email.message_sent.new_device_notification",
-      "category" : "authn",
-      "description" : "",
+      "category" : "end-user-security",
+      "description" : "New device signin notification email sent.",
       "tags" : [ "user" ],
       "mappings" : [ "system.email.new_device_notification.sent_message" ]
     }, {
@@ -6025,6 +6049,18 @@
       "id" : "core.user_auth.authentication.auth_via_omm_success",
       "category" : "mobile-device-trust",
       "description" : "Authenticate the device via Okta Mobile (OMM).",
+      "tags" : [ "device-trust-authentication" ],
+      "mappings" : [ "user.authentication.authenticate" ]
+    }, {
+      "id" : "core.user_auth.authentication.auth_via_saml_idp_failure",
+      "category" : "mobile-device-trust",
+      "description" : "Authentication of device failed via SAML Device Identity Provider (3rd-party MDM). Can be used to identify when a device makes a connection through SAML Identity Provider and is not verified as trusted. Note that the event is fired during SAML Identity Provider connect and the device session is not marked as trusted.",
+      "tags" : [ "device-trust-authentication" ],
+      "mappings" : [ "user.authentication.authenticate" ]
+    }, {
+      "id" : "core.user_auth.authentication.auth_via_saml_idp_success",
+      "category" : "mobile-device-trust",
+      "description" : "Authentication of device succeeded via SAML Device Identity Provider (3rd-party MDM). Can be used to identify when a device makes a connection through SAML Identity Provider and is stamped trusted. Note that the event is fired during SAML Identity Provider connect and the device session is marked as trusted.",
       "tags" : [ "device-trust-authentication" ],
       "mappings" : [ "user.authentication.authenticate" ]
     }, {
@@ -6688,6 +6724,18 @@
       "tags" : [ "iwa" ],
       "mappings" : [ "system.iwa.go_offline" ]
     }, {
+      "id" : "iwa.agent.fetch-logs",
+      "category" : "directories",
+      "description" : "IWA agent had logs uploaded.",
+      "tags" : [ "directory" ],
+      "mappings" : [ "system.agent.ad.upload_iwa_log" ]
+    }, {
+      "id" : "iwa.agent.fetch-logs.error",
+      "category" : "directories",
+      "description" : "IWA Agent encountered an error performing a FetchIWALogs action.",
+      "tags" : [ "directory" ],
+      "mappings" : [ "system.agent.ad.upload_iwa_log" ]
+    }, {
       "id" : "iwa.agentless.auth.failure",
       "category" : "directories",
       "description" : "Agentless IWA authentication failure.",
@@ -6988,60 +7036,6 @@
       "tags" : [ "unconfigured-origin-usage" ],
       "mappings" : [ "org.not_configured_origin.redirection.usage" ]
     }, {
-      "id" : "platform.callback.create",
-      "category" : "extensibility",
-      "description" : "A new callback was created.",
-      "tags" : [ "callback" ],
-      "mappings" : [ "callback.create" ]
-    }, {
-      "id" : "platform.callback.delete",
-      "category" : "extensibility",
-      "description" : "Callback has been deleted.",
-      "tags" : [ "callback" ],
-      "mappings" : [ "callback.delete" ]
-    }, {
-      "id" : "platform.callback.execute",
-      "category" : "extensibility",
-      "description" : "Callback executed.",
-      "tags" : [ "callback" ],
-      "mappings" : [ "callback.execute" ]
-    }, {
-      "id" : "platform.callback.failed",
-      "category" : "extensibility",
-      "description" : "",
-      "tags" : [ "callback" ],
-      "mappings" : [ "callback.execute" ]
-    }, {
-      "id" : "platform.callback.modify",
-      "category" : "extensibility",
-      "description" : "Callback was modified.",
-      "tags" : [ "callback" ],
-      "mappings" : [ "callback.modify" ]
-    }, {
-      "id" : "platform.callback.response.processed.failure",
-      "category" : "extensibility",
-      "description" : "Failure processing callback response.",
-      "tags" : [ "callback" ],
-      "mappings" : [ "callback.response.processed" ]
-    }, {
-      "id" : "platform.callback.response.processed.success",
-      "category" : "extensibility",
-      "description" : "Sucessfully processed callback response.",
-      "tags" : [ "callback" ],
-      "mappings" : [ "callback.response.processed" ]
-    }, {
-      "id" : "platform.callback.verify.failure",
-      "category" : "extensibility",
-      "description" : "Callback verification failed.",
-      "tags" : [ "callback" ],
-      "mappings" : [ "callback.verify" ]
-    }, {
-      "id" : "platform.callback.verify.success",
-      "category" : "extensibility",
-      "description" : "Callback has been verified.",
-      "tags" : [ "callback" ],
-      "mappings" : [ "callback.verify" ]
-    }, {
       "id" : "platform.field_mapping_rule.assign.change",
       "category" : "app-platform",
       "description" : "",
@@ -7071,6 +7065,72 @@
       "description" : "Group Push - pushing memberships.",
       "tags" : [ "group-push" ],
       "mappings" : [ "application.provision.group_push.push_memberships" ]
+    }, {
+      "id" : "platform.inline_hook.activated",
+      "category" : "extensibility",
+      "description" : "Inline Hook was activated.",
+      "tags" : [ "inline-hook" ],
+      "mappings" : [ "inline_hook.activated" ]
+    }, {
+      "id" : "platform.inline_hook.created",
+      "category" : "extensibility",
+      "description" : "A new inline hook was created.",
+      "tags" : [ "inline-hook" ],
+      "mappings" : [ "inline_hook.created" ]
+    }, {
+      "id" : "platform.inline_hook.deactivated",
+      "category" : "extensibility",
+      "description" : "Inline Hook was deactivated.",
+      "tags" : [ "inline-hook" ],
+      "mappings" : [ "inline_hook.deactivated" ]
+    }, {
+      "id" : "platform.inline_hook.deleted",
+      "category" : "extensibility",
+      "description" : "Inline Hook has been deleted.",
+      "tags" : [ "inline-hook" ],
+      "mappings" : [ "inline_hook.deleted" ]
+    }, {
+      "id" : "platform.inline_hook.executed.failure",
+      "category" : "extensibility",
+      "description" : "Inline Hook execution failed.",
+      "tags" : [ "inline-hook" ],
+      "mappings" : [ "inline_hook.executed" ]
+    }, {
+      "id" : "platform.inline_hook.executed.success",
+      "category" : "extensibility",
+      "description" : "Inline Hook execution succeeded.",
+      "tags" : [ "inline-hook" ],
+      "mappings" : [ "inline_hook.executed" ]
+    }, {
+      "id" : "platform.inline_hook.response.processed.failure",
+      "category" : "extensibility",
+      "description" : "Failure processing inline hook response.",
+      "tags" : [ "inline-hook" ],
+      "mappings" : [ "inline_hook.response.processed" ]
+    }, {
+      "id" : "platform.inline_hook.response.processed.success",
+      "category" : "extensibility",
+      "description" : "Sucessfully processed inline hook response.",
+      "tags" : [ "inline-hook" ],
+      "mappings" : [ "inline_hook.response.processed" ]
+    }, {
+      "id" : "platform.inline_hook.updated",
+      "category" : "extensibility",
+      "description" : "Inline Hook was updated.",
+      "tags" : [ "inline-hook" ],
+      "mappings" : [ "inline_hook.updated" ]
+    }, {
+      "id" : "platform.inline_hook.verified.failure",
+      "category" : "extensibility",
+      "description" : "Inline Hook verification failed.",
+      "tags" : [ "inline-hook" ],
+      "mappings" : [ "inline_hook.verified" ]
+    }, {
+      "id" : "platform.inline_hook.verified.success",
+      "category" : "extensibility",
+      "description" : "Inline Hook has been verified.",
+      "tags" : [ "inline-hook" ],
+      "mappings" : [ "inline_hook.verified" ]
     }, {
       "id" : "platform.task.lifecycle.activate",
       "category" : "lca",
@@ -7102,23 +7162,47 @@
       "tags" : [ "system-task" ],
       "mappings" : [ "task.lifecycle.update" ]
     }, {
-      "id" : "platform.tokens.transform.process.failure",
+      "id" : "platform.tokens.transform.oauth2.process.failure",
       "category" : "federation",
-      "description" : "Failed to process command.",
+      "description" : "Failed to process OAuth2 command.",
       "tags" : [ "tokens-transform" ],
-      "mappings" : [ "tokens.transform.process" ]
+      "mappings" : [ "oauth2.tokens.transform.process" ]
     }, {
-      "id" : "platform.tokens.transform.response",
+      "id" : "platform.tokens.transform.oauth2.response",
       "category" : "federation",
-      "description" : "Received response from callback.",
+      "description" : "Received response from OAuth2 inline hook.",
       "tags" : [ "tokens-transform" ],
-      "mappings" : [ "tokens.transform.response" ]
+      "mappings" : [ "oauth2.tokens.transform.response" ]
     }, {
-      "id" : "platform.tokens.transform.response.failure",
+      "id" : "platform.tokens.transform.oauth2.response.error",
       "category" : "federation",
-      "description" : "Failed to received response from callback.",
+      "description" : "Received error response from OAuth2 inline hook.",
       "tags" : [ "tokens-transform" ],
-      "mappings" : [ "tokens.transform.response" ]
+      "mappings" : [ "oauth2.tokens.transform.error.response" ]
+    }, {
+      "id" : "platform.tokens.transform.oauth2.response.failure",
+      "category" : "federation",
+      "description" : "Failed to receive response from OAuth2 inline hook.",
+      "tags" : [ "tokens-transform" ],
+      "mappings" : [ "oauth2.tokens.transform.response" ]
+    }, {
+      "id" : "platform.tokens.transform.saml.process.failure",
+      "category" : "federation",
+      "description" : "Failed to process SAML command.",
+      "tags" : [ "tokens-transform" ],
+      "mappings" : [ "saml.tokens.transform.process" ]
+    }, {
+      "id" : "platform.tokens.transform.saml.response",
+      "category" : "federation",
+      "description" : "Received response from SAML callback.",
+      "tags" : [ "tokens-transform" ],
+      "mappings" : [ "saml.tokens.transform.response" ]
+    }, {
+      "id" : "platform.tokens.transform.saml.response.failure",
+      "category" : "federation",
+      "description" : "Failed to receive response from SAML callback.",
+      "tags" : [ "tokens-transform" ],
+      "mappings" : [ "saml.tokens.transform.response" ]
     }, {
       "id" : "platform.union_gaa_failure_event",
       "category" : "sync",
@@ -7341,6 +7425,12 @@
       "description" : "Event fired when a user has been routed to an IdP.",
       "tags" : [ "idp" ],
       "mappings" : [ "system.idp.select" ]
+    }, {
+      "id" : "system.import.clear.unconfirmed.users.summary",
+      "category" : "sync",
+      "description" : "Clear Unconfirmed Imported Users.",
+      "tags" : [ "app" ],
+      "mappings" : [ "system.import.clear.unconfirmed.users.summary" ]
     }, {
       "id" : "system.ldapi.bind",
       "category" : "ud-core",
@@ -9317,6 +9407,16 @@
       "tags" : [ "rum" ],
       "mappings" : [ "app.rum.validation.error" ]
     }, {
+      "id" : "app.saml.sensitive.attribute.update",
+      "category" : "ud-core",
+      "description" : "Fired when a SAML assertion contains a sensitive attribute, and that sensitive attribute has been updated (modified/added/deleted). This event does not fire when non-sensitive SAML attributes are updated. This can be used to audit that a sensitive attribute attached to an outbound SAML assertion has been correctly modified, added, or deleted. When fired, this event contains the specific attributes that have been modified, added, or deleted to/from the SAML assertion. Related events include: application.lifecycle.update.",
+      "info" : {
+        "created" : "2019-01-07",
+        "release" : "2019.01.1"
+      },
+      "tags" : [ "app", "cvd" ],
+      "mappings" : [ "app.saml.sensitive.attribute.update" ]
+    }, {
       "id" : "app.user_management",
       "category" : "sync",
       "description" : "Imported new or deleted existing member of an application group.",
@@ -10267,66 +10367,6 @@
       "tags" : [ "app" ],
       "mappings" : [ "app.generic.config.app_user_property_update" ]
     }, {
-      "id" : "callback.create",
-      "category" : "extensibility",
-      "description" : "Callback created.",
-      "info" : {
-        "created" : "2018-03-29",
-        "release" : "2018.14"
-      },
-      "tags" : [ "callback" ],
-      "mappings" : [ "platform.callback.create" ]
-    }, {
-      "id" : "callback.delete",
-      "category" : "extensibility",
-      "description" : "Callback deleted.",
-      "info" : {
-        "created" : "2018-03-29",
-        "release" : "2018.14"
-      },
-      "tags" : [ "callback" ],
-      "mappings" : [ "platform.callback.delete" ]
-    }, {
-      "id" : "callback.execute",
-      "category" : "extensibility",
-      "description" : "Callback executed.",
-      "info" : {
-        "created" : "2018-03-29",
-        "release" : "2018.14"
-      },
-      "tags" : [ "callback" ],
-      "mappings" : [ "platform.callback.execute", "platform.callback.failed" ]
-    }, {
-      "id" : "callback.modify",
-      "category" : "extensibility",
-      "description" : "Callback modified.",
-      "info" : {
-        "created" : "2018-03-29",
-        "release" : "2018.14"
-      },
-      "tags" : [ "callback" ],
-      "mappings" : [ "platform.callback.modify" ]
-    }, {
-      "id" : "callback.response.processed",
-      "category" : "extensibility",
-      "description" : "Finished processing callback response.",
-      "info" : {
-        "created" : "2018-09-24",
-        "release" : "2018.40"
-      },
-      "tags" : [ "callback" ],
-      "mappings" : [ "platform.callback.response.processed.failure", "platform.callback.response.processed.success" ]
-    }, {
-      "id" : "callback.verify",
-      "category" : "extensibility",
-      "description" : "Callback verified.",
-      "info" : {
-        "created" : "2018-03-29",
-        "release" : "2018.14"
-      },
-      "tags" : [ "callback" ],
-      "mappings" : [ "platform.callback.verify.failure", "platform.callback.verify.success" ]
-    }, {
       "id" : "core.concurrency.org.limit.violation",
       "category" : "performance",
       "description" : "Too many requests in flight.",
@@ -10526,6 +10566,86 @@
       },
       "tags" : [ "group" ],
       "mappings" : [ "cvd.group_rule_triggered" ]
+    }, {
+      "id" : "inline_hook.activated",
+      "category" : "extensibility",
+      "description" : "Triggered when an inline hook in activated. Used to identify when an inline hook lifecycle status was changed to activated.",
+      "info" : {
+        "created" : "2019-01-17",
+        "release" : "2019.01.2"
+      },
+      "tags" : [ "inline-hook" ],
+      "mappings" : [ "platform.inline_hook.activated" ]
+    }, {
+      "id" : "inline_hook.created",
+      "category" : "extensibility",
+      "description" : "Triggered when an inline hook has been created. Used to notify admins that an inline hook has been created.",
+      "info" : {
+        "created" : "2019-01-14",
+        "release" : "2019.01.2"
+      },
+      "tags" : [ "inline-hook" ],
+      "mappings" : [ "platform.inline_hook.created" ]
+    }, {
+      "id" : "inline_hook.deactivated",
+      "category" : "extensibility",
+      "description" : "Triggered when an inline hook is deactivated. Used to identify when an inline hook lifecycle status was changed to deactivated.",
+      "info" : {
+        "created" : "2019-01-17",
+        "release" : "2019.01.2"
+      },
+      "tags" : [ "inline-hook" ],
+      "mappings" : [ "platform.inline_hook.deactivated" ]
+    }, {
+      "id" : "inline_hook.deleted",
+      "category" : "extensibility",
+      "description" : "Triggered when an inline hook has been deleted. Used to notify admins that an inline hook has been deleted.",
+      "info" : {
+        "created" : "2019-01-14",
+        "release" : "2019.01.2"
+      },
+      "tags" : [ "inline-hook" ],
+      "mappings" : [ "platform.inline_hook.deleted" ]
+    }, {
+      "id" : "inline_hook.executed",
+      "category" : "extensibility",
+      "description" : "Triggered when an inline hook has been executed. Used to notify admins about the outcome of execution of an inline hook.",
+      "info" : {
+        "created" : "2019-01-14",
+        "release" : "2019.01.2"
+      },
+      "tags" : [ "inline-hook" ],
+      "mappings" : [ "platform.inline_hook.executed.failure", "platform.inline_hook.executed.success" ]
+    }, {
+      "id" : "inline_hook.response.processed",
+      "category" : "extensibility",
+      "description" : "Triggered after Okta has finished processing response from an inline hook. Used to notify admins about the outcome of processing response from an inline hook.",
+      "info" : {
+        "created" : "2019-01-14",
+        "release" : "2019.01.2"
+      },
+      "tags" : [ "inline-hook" ],
+      "mappings" : [ "platform.inline_hook.response.processed.failure", "platform.inline_hook.response.processed.success" ]
+    }, {
+      "id" : "inline_hook.updated",
+      "category" : "extensibility",
+      "description" : "Triggered when an inline hook has been modified. Used to notify admins that an inline hook has been updated.",
+      "info" : {
+        "created" : "2019-01-14",
+        "release" : "2019.01.2"
+      },
+      "tags" : [ "inline-hook" ],
+      "mappings" : [ "platform.inline_hook.updated" ]
+    }, {
+      "id" : "inline_hook.verified",
+      "category" : "extensibility",
+      "description" : "Triggered when attempting to verify an inline hook. Used to notify admins about the outcome of inline hook endpoint URL verification.",
+      "info" : {
+        "created" : "2019-01-14",
+        "release" : "2019.01.2"
+      },
+      "tags" : [ "inline-hook" ],
+      "mappings" : [ "platform.inline_hook.verified.failure", "platform.inline_hook.verified.success" ]
     }, {
       "id" : "master_application.user_membership.add",
       "category" : "sync",
@@ -10837,6 +10957,36 @@
       "tags" : [ "oauth2", "oauth2-scope" ],
       "mappings" : [ "api.oauth2.scope.updated" ]
     }, {
+      "id" : "oauth2.tokens.transform.error.response",
+      "category" : "federation",
+      "description" : "Fired when Okta's authorization server receives a response from an external service and the response format is valid, but the response contains an error. This can also be used to debug why command response erred. When fired, the event contains information about the error summary. Related events include: oauth2_tokens_transform_response.",
+      "info" : {
+        "created" : "2019-01-25",
+        "release" : "2019.01.3"
+      },
+      "tags" : [ "token", "tokens-transform" ],
+      "mappings" : [ "platform.tokens.transform.oauth2.response.error" ]
+    }, {
+      "id" : "oauth2.tokens.transform.process",
+      "category" : "federation",
+      "description" : "Fired when Okta's authorization server used the command response for token transform, and the token transform failed. This event fires only when the token transform has failed due to the command response from the external server, for example  that the response contained info to transform an access token and an access token was not requested in the request. This can also be used to debug why a token transformation failed. When fired, this event contains information about the entities involved in the inline hook request and response - including the relevant application, user, authorization server, and policy. This event also contains information about why the token transformation failed. Related events include: oauth2_tokens_transform_response.",
+      "info" : {
+        "created" : "2019-01-25",
+        "release" : "2019.01.3"
+      },
+      "tags" : [ "token", "tokens-transform" ],
+      "mappings" : [ "platform.tokens.transform.oauth2.process.failure" ]
+    }, {
+      "id" : "oauth2.tokens.transform.response",
+      "category" : "federation",
+      "description" : "Fired when Okta's authorization server sends an inline hook to an external service. This event fires when the response is successful or when a response is not received. This can be used to audit the details of the entities involved in the inline hook request and response. When fired, this event contains information about the entities involved in the inline hook request and response - including the relevant application, user, authorization server, and policy.",
+      "info" : {
+        "created" : "2019-01-25",
+        "release" : "2019.01.3"
+      },
+      "tags" : [ "token", "tokens-transform" ],
+      "mappings" : [ "platform.tokens.transform.oauth2.response", "platform.tokens.transform.oauth2.response.failure" ]
+    }, {
       "id" : "omm.app.VPN.settings.changed",
       "category" : "mobile-omm",
       "description" : "",
@@ -11146,6 +11296,26 @@
       },
       "tags" : [ "policy" ],
       "mappings" : [ "policy.scheduled.execute" ]
+    }, {
+      "id" : "saml.tokens.transform.process",
+      "category" : "federation",
+      "description" : "Processed SAML transform command.",
+      "info" : {
+        "created" : "2018-07-01",
+        "release" : "2018.28"
+      },
+      "tags" : [ "token", "tokens-transform" ],
+      "mappings" : [ "platform.tokens.transform.saml.process.failure" ]
+    }, {
+      "id" : "saml.tokens.transform.response",
+      "category" : "federation",
+      "description" : "Received response from SAML callback.",
+      "info" : {
+        "created" : "2018-07-01",
+        "release" : "2018.28"
+      },
+      "tags" : [ "token", "tokens-transform" ],
+      "mappings" : [ "platform.tokens.transform.saml.response", "platform.tokens.transform.saml.response.failure" ]
     }, {
       "id" : "scheduled_action.user_suspension.canceled",
       "category" : "lca",
@@ -11487,6 +11657,16 @@
       "tags" : [ "ad-agent" ],
       "mappings" : [ "app.ad.agent.upgrade", "app.ad.agent.upgrade.error" ]
     }, {
+      "id" : "system.agent.ad.upload_iwa_log",
+      "category" : "directories",
+      "description" : "Fired when an AD agent has fetched and uploaded IWA agent log file. This event fires when the log file upload is successful or fails. This can be used to audit that logs files are being fetched successfully, have been uploaded successfully, and troubleshoot why an IWA log upload has failed. When fired, this event indicates whether a log file upload has been successful or failed. This event also indicates whether the event was initiated by the Okta system or a user. Related events: none, all debugging context is included in this event.",
+      "info" : {
+        "created" : "2019-01-28",
+        "release" : "2019.02.1"
+      },
+      "tags" : [ "ad-agent" ],
+      "mappings" : [ "iwa.agent.fetch-logs", "iwa.agent.fetch-logs.error" ]
+    }, {
       "id" : "system.agent.ad.upload_log",
       "category" : "directories",
       "description" : "Upload AD agent log.",
@@ -11677,9 +11857,29 @@
       "tags" : [ "email" ],
       "mappings" : [ "core.user.email.message_sent.self_service.account_unlock" ]
     }, {
+      "id" : "system.email.mfa_enroll_notification.sent_message",
+      "category" : "end-user-security",
+      "description" : "MFA enrollment notification email sent. Used to notify admins MFA enrollment notification email has been sent.",
+      "info" : {
+        "created" : "2018-12-10",
+        "release" : "2019.04.1"
+      },
+      "tags" : [ "email" ],
+      "mappings" : [ "core.user.email.message_sent.mfa_enroll_notification" ]
+    }, {
+      "id" : "system.email.mfa_reset_notification.sent_message",
+      "category" : "end-user-security",
+      "description" : "MFA reset notification email sent. Used to notify admins MFA reset notification email has been sent.",
+      "info" : {
+        "created" : "2018-12-10",
+        "release" : "2019.04.1"
+      },
+      "tags" : [ "email" ],
+      "mappings" : [ "core.user.email.message_sent.mfa_reset_notification" ]
+    }, {
       "id" : "system.email.new_device_notification.sent_message",
-      "category" : "authn",
-      "description" : "Send new device notification email.",
+      "category" : "end-user-security",
+      "description" : "New device signin notification email sent.",
       "info" : {
         "created" : "2016-03-17",
         "release" : "2016.13"
@@ -11706,6 +11906,16 @@
       },
       "tags" : [ "idp" ],
       "mappings" : [ "system.idp.select" ]
+    }, {
+      "id" : "system.import.clear.unconfirmed.users.summary",
+      "category" : "sync",
+      "description" : "Clear Unconfirmed Imported Users. Can be used for clearing unconfirmed imported users from last import result. Note that a single event is fired for clearing unconfirmed imported users instead of fire delete event on each user.",
+      "info" : {
+        "created" : "2019-01-02",
+        "release" : "2019.01.1"
+      },
+      "tags" : [ "app" ],
+      "mappings" : [ "system.import.clear.unconfirmed.users.summary" ]
     }, {
       "id" : "system.import.complete",
       "category" : "sync",
@@ -12317,26 +12527,6 @@
       "tags" : [ "task" ],
       "mappings" : [ "platform.task.lifecycle.update" ]
     }, {
-      "id" : "tokens.transform.process",
-      "category" : "federation",
-      "description" : "Processed SAML transform command.",
-      "info" : {
-        "created" : "2018-07-01",
-        "release" : "2018.28"
-      },
-      "tags" : [ "token", "tokens-transform" ],
-      "mappings" : [ "platform.tokens.transform.process.failure" ]
-    }, {
-      "id" : "tokens.transform.response",
-      "category" : "federation",
-      "description" : "Received response from SAML callback.",
-      "info" : {
-        "created" : "2018-07-01",
-        "release" : "2018.28"
-      },
-      "tags" : [ "token", "tokens-transform" ],
-      "mappings" : [ "platform.tokens.transform.response", "platform.tokens.transform.response.failure" ]
-    }, {
       "id" : "user.account.access_super_user_app",
       "category" : "authn",
       "description" : "Access super user in Okta.",
@@ -12376,6 +12566,16 @@
       },
       "tags" : [ "user" ],
       "mappings" : [ "core.user.admin_privilege.revoked" ]
+    }, {
+      "id" : "user.account.report_suspicious_activity_by_enduser",
+      "category" : "end-user-security",
+      "description" : "User reported suspicious activity. This event is used to identify user account suspicious activity.",
+      "info" : {
+        "created" : "2018-12-07",
+        "release" : "2019.04.1"
+      },
+      "tags" : [ "user", "webhook-eligible" ],
+      "mappings" : [ "core.user.account.report_suspicious_activity_by_enduser" ]
     }, {
       "id" : "user.account.reset_password",
       "category" : "authn",
@@ -12595,7 +12795,7 @@
         "release" : "2017.44"
       },
       "tags" : [ "device-trust-authentication", "user" ],
-      "mappings" : [ "core.user_auth.authentication.auth_via_3rd_party_failure", "core.user_auth.authentication.auth_via_3rd_party_success", "core.user_auth.authentication.auth_via_okta_mobile_failure", "core.user_auth.authentication.auth_via_okta_mobile_success", "core.user_auth.authentication.auth_via_omm_failure", "core.user_auth.authentication.auth_via_omm_success", "core.user_auth.authentication.authenticate" ]
+      "mappings" : [ "core.user_auth.authentication.auth_via_3rd_party_failure", "core.user_auth.authentication.auth_via_3rd_party_success", "core.user_auth.authentication.auth_via_okta_mobile_failure", "core.user_auth.authentication.auth_via_okta_mobile_success", "core.user_auth.authentication.auth_via_omm_failure", "core.user_auth.authentication.auth_via_omm_success", "core.user_auth.authentication.auth_via_saml_idp_failure", "core.user_auth.authentication.auth_via_saml_idp_success", "core.user_auth.authentication.authenticate" ]
     }, {
       "id" : "user.authentication.slo",
       "category" : "federation",

@@ -10,15 +10,15 @@ redirect_from:
 
 # Overview
 
-Expressions allow you to reference, transform and combine attributes before you store them on a user profile or before passing them to an application for authentication or provisioning.  For example, you might use a custom expression to create a username by stripping @company.com from an email address.  Or you might combine `firstName` and `lastName` attributes into a single `displayName` attribute.
+Expressions allow you to reference, transform, and combine attributes before you store them on a user profile or before passing them to an application for authentication or provisioning. For example, you might use a custom expression to create a username by stripping @company.com from an email address. Or, you might combine `firstName` and `lastName` attributes into a single `displayName` attribute.
 
-This document details the features and syntax of Okta's Expression Language which can be used throughout the administrator UI and API. This document will be updated over time as new capabilities are added to the language.  Okta's expression language is based on [SpEL](http://docs.spring.io/spring/docs/3.0.x/reference/expressions.html) and uses a subset of functionalities offered by SpEL.
+This document details the features and syntax of Okta's Expression Language, which can be used throughout the administrator UI and API. This document will be updated over time as new capabilities are added to the language. Okta's expression language is based on [SpEL](http://docs.spring.io/spring/docs/3.0.x/reference/expressions.html) and uses a subset of functionalities offered by SpEL.
 
 ## Referencing User Attributes
 When you create an Okta expression, you can reference any attribute that lives on an Okta user profile or App user profile.
 
 ### Okta user profile
-Every user has an Okta user profile.  The Okta user profile is the central source of truth for a user's core attributes.  To reference an Okta user profile attribute, just reference `user` and specify the attribute variable name.
+Every user has an Okta user profile. The Okta user profile is the central source of truth for a user's core attributes. To reference an Okta user profile attribute, just reference `user` and specify the attribute variable name.
 
 
 Syntax  | Definitions | Examples
@@ -26,7 +26,7 @@ Syntax  | Definitions | Examples
 `user.$attribute` | `user` reference to the Okta user<br>`$attribute` the attribute variable name | user.firstName<br>user.lastName<br>user.username<br>user.email
 
 ### Application user profile
-In addition to an Okta user profile, all users have separate Application user profiles for each of their applications.  The Application user profiles are used to store application specific information about a user, such as application username or user role.  To reference an App user profile attribute, just specify the application variable and the attribute variable in that application's App user profile. In specifying the application you can either name the specific application you're referencing or use an implicit reference to an in-context application.
+In addition to an Okta user profile, all users have separate Application user profile for each of their applications. Application user profiles are used to store application specific information about users, such as application username or user role. To reference an App user profile attribute, just specify the application variable and the attribute variable in that application's App user profile. In specifying the application, you can either name the specific application you're referencing or use an implicit reference to an in-context application.
 
 Syntax  | Definitions | Examples
 -------- | ---------- | ------------
@@ -34,17 +34,17 @@ Syntax  | Definitions | Examples
 `appuser.$attribute` | `appuser` implicit reference to in-context app<br>`$attribute` the attribute variable name | appuser.firstName
 
 ### IdP user profile
-In addition to an Okta user profile, some users have separate IdP user profiles for their external Identity Provider. These IdP user profiles are used to store identity provider specific information about a user, and this data can be used in an EL expression to transform an external user's username into the equivalent Okta username. To reference an IdP user profile attribute, specify the identity provider variable and the corresponding attribute variable for that identity providers IdP user profile. This profile is only available when specifying the username transform used to generate an Okta username for the IdP user.
+In addition to an Okta user profile, some users have separate IdP user profiles for their external Identity Provider. These IdP user profiles are used to store identity provider specific information about a user. This data can be used in an EL expression to transform an external user's username into the equivalent Okta username. To reference an IdP user profile attribute, specify the identity provider variable and the corresponding attribute variable for that identity provider's IdP user profile. This profile is only available when specifying the username transform used to generate an Okta username for the IdP user.
 
 Syntax                | Definitions                                                                                | Examples
 ----------------------|--------------------------------------------------------------------------------------------|------------
 `idpuser.$attribute`  | `idpuser` implicit reference to in-context IdP<br>`$attribute` the attribute variable name | idpuser.firstName
 
 
-> With Universal Directory, there are about 30 attributes in the base Okta profile and any number of custom attributes can be added.  All App user profiles have a username attribute and possibly others depending on the application.   To find a full list of Okta user and App user attributes and their variable names, go to People > Profile Editor.  If you're not yet using Universal Directory, contact your Support or Professional Services team.
+> With Universal Directory, there are about 30 attributes in the base Okta profile and any number of custom attributes can be added.  All App user profiles have a username attribute and possibly others depending on the application. To find a full list of Okta user and App user attributes and their variable names, go to People > Profile Editor. If you're not yet using Universal Directory, contact your Support or Professional Services team.
 
 ## Referencing Application and Organization Properties
-In addition to referencing user attributes, you can also reference App properties, and the properties of your Organization.  To reference a particular attribute, just specify the appropriate binding and the attribute variable name.  Here are some examples:
+In addition to referencing user attributes, you can also reference App properties and the properties of your Organization.  To reference a particular attribute, just specify the appropriate binding and the attribute variable name.  Here are some examples:
 
 ### Application properties
 
@@ -61,7 +61,7 @@ Syntax  | Definitions | Examples
 
 ## Functions
 
-Okta offers a variety of functions to manipulate attributes or properties to generate a desired output.  Functions can be combined and nested inside a single expression.
+Okta offers a variety of functions to manipulate attributes or properties to generate a desired output. You can combine and nest functions inside a single expression.
 
 ### String Functions
 
@@ -74,11 +74,12 @@ Function | Input Parameter Signature | Return Type | Example | Output
 `String.removeSpaces` | (String input) | String | `String.removeSpaces("This is a test")` | Thisisatest
 `String.replace`   | (String input, match, replacement) | String | '`String.replace("This is a test", "is", "at")` | "That at a test"
 `String.replaceFirst`   | (String input, match, replacement) | String | '`String.replaceFirst("This is a test", "is", "at")` | "That is a test"
-`String.stringContains` | (String input, String searchString) | Boolean |`String.stringContains("This is a test", "test")`  | true
+`String.stringContains` | (String input, String searchString) | Boolean |`String.stringContains("This is a test", "test")` | true
  | | | `String.stringContains("This is a test", "doesn'tExist")` | false
 `String.stringSwitch` | (String input, String defaultString, String... keyValuePairs) | String | `String.stringSwitch("This is a test", "default", "key1", "value1")`| default
- | | | `String.stringSwitch("This is a test", "default", "is", "value1")`| value1
- | | | `String.stringSwitch("This is a test", "default", "key1", "value1", "test", "value2")` | value2
+ | | | `String.stringSwitch("This is a test", "default", "test", "value1")`| value1
+ | | | `String.stringSwitch("First match wins", "default", "absent", "value1", "wins", "value2", "match", "value3")` | value2
+ | | | `String.stringSwitch("Substrings count", "default", "ring", "value1")`| value1
 `String.substring `| (String input, int startIndex, int endIndex) | String | `String.substring("This is a test", 2, 9)` | is is a
 `String.substringAfter` | (String input, String searchString) | String | `String.substringAfter("abc@okta.com", "@")` | okta.com
 `String.substringBefore` | (String input, String searchString) | String | `String.substringBefore("abc@okta.com", "@")` | abc
@@ -140,7 +141,7 @@ Function  | Return Type | Example  | Output
 `Iso3166Convert.toNumeric(string)` | String | `Iso3166Convert.toNumeric("USA")` | "840"
 `Iso3166Convert.toName(string)` | String | `Iso3166Convert.toName("IN")` | "India"
 
-**Note:**  All these functions take ISO 3166-1 2-character country codes (Alpha 2), 3-character country codes (Alpha 3), and numeric country codes as input. The function determines the input type and returns the output is in the format specified by the function name.
+**Note:**  All these functions take ISO 3166-1 2-character country codes (Alpha 2), 3-character country codes (Alpha 3), and numeric country codes as input. The function determines the input type and returns the output in the format specified by the function name.
 
 For more information on these codes, see the [ISO 3166-1 online lookup tool](https://www.iso.org/obp/ui/#search/code/).
 
@@ -161,6 +162,8 @@ Function  | Return Type | Example |
 `isMemberOfGroupNameStartsWith` | Boolean | `isMemberOfGroupNameStartsWith("San Fr")` |
 `isMemberOfGroupNameContains` | Boolean | `isMemberOfGroupNameContains("admin")` |
 `isMemberOfGroupNameRegex` | Boolean | `isMemberOfGroupNameRegex("/.*admin.*")` |
+
+**Note:** The **Groups.contains**, **Groups.startsWith**, and **Groups.endsWith** group functions are designed to work only with group claims. You can't use these functions with property mappings.
 
 For an example using group functions and for more information on using group functions for dynamic and static whitelists, see [Create an ID Token or Access Token Containing a Groups Claim](/docs/how-to/creating-token-with-groups-claim).
 
@@ -196,8 +199,7 @@ Use this function to retrieve properties about the user identified with the spec
 | `Time.fromIso8601ToUnix`    | (String time)                      | String                                   | ISO 8601 timestamp time as a string                                                                                | The passed-in time expressed in Unix timestamp format.                                                  |
 | `Time.fromIso8601ToString`  | (String time, String format)       | String                                   | ISO 8601 timestamp time, to convert to format using the same Joda time format semantics as fromStringToIso8601     | The passed-in time expressed informat format.                                                           |
 
->Note: Both input parameters are optional for the Time.now function. The time zone ID supports both new and old style formats, listed below. The third example for
-the Time.now function shows how to specify the military time format.
+>Note: Both input parameters are optional for the Time.now function. The time zone ID supports both new and old style formats, listed below. The third example for the Time.now function shows how to specify the military time format.
 
 Okta supports the use of the time zone IDs and aliases listed in [the Time Zone Codes table](#appendix-time-zone-codes).
 
@@ -214,7 +216,7 @@ The following should be noted about these functions:
 
 * Be sure to pass the correct App name for the `managerSource`, `assistantSource`, and `attributeSource` parameters.<br />
 * At this time, `active_directory` is the only supported value for `managerSource` and `assistantSource`.
-* Calling the `getManagerUser("active_directory")` function will not trigger a user profile update after the manager was changed.
+* Calling the `getManagerUser("active_directory")` function doesn't trigger a user profile update after the manager is changed.
 
 ### Directory and Workday Functions
 
@@ -222,10 +224,10 @@ Function  | Description
 -------- | ---------
 `hasDirectoryUser()` | Checks whether the user has an Active Directory assignment and returns a boolean
 `hasWorkdayUser()` | Checks whether the user has a Workday assignment and returns a boolean
-`findDirectoryUser()` | Finds the Active Directory App user object and returns that object, or null if the user has more than one or no Active Directory assignments
-`findWorkdayUser()` | Finds the Workday App user object and returns that object, or null if the user has more than one or no Active Directory assignments
+`findDirectoryUser()` | Finds the Active Directory App user object and returns that object or null if the user has more than one or no Active Directory assignments
+`findWorkdayUser()` | Finds the Workday App user object and returns that object or null if the user has more than one or no Active Directory assignments
 
-The functions above are often used in tandem to check whether a user has an AD or Workday assignment, and if so return an AD or Workday attribute.  See the 'Popular Expressions' table below for some examples.
+The functions above are often used in tandem to check whether a user has an AD or Workday assignment, and if so, return an AD or Workday attribute.  See the 'Popular Expressions' table below for some examples.
 
 ## Constants and Operators
 
@@ -241,7 +243,7 @@ Ternary operator example:<br>If group code is 123, assign value of Sales, else a
 
 ## Conditional Expressions
 
-You can specify IF...THEN...ELSE statements with the Okta EL. The primary use of these expressions is profile mappings and group rules. Group rules do not usually specificy an ELSE component.
+You can specify IF...THEN...ELSE statements with the Okta EL. The primary use of these expressions is profile mappings and group rules. Group rules do not usually specify an ELSE component.
 
 
 The format for conditional expressions is
@@ -292,16 +294,13 @@ isContractor | Boolean
 
 ##### Samples Using Profile Mapping
 
-The following samples are valid conditional expressions that apply to profile mapping. The attribute *courtesyTitle* is from another system being mapped to Okta.
+The following samples are valid conditional expressions that apply to profile mapping. The attribute `courtesyTitle` is from another system being mapped to Okta.
 
-<p>If the middle initial is not blank, the full name is the first name, middle initial, a period, and the last name; otherwise it is the first name and the last name.<br>
-<code>String.len(middleInitial) > 0 ? String.join(firstName, " ", middleInitial, ". ", lastName) : String.join(firstName, " ", lastName)</code></p>
+If the middle initial is not empty, include it as part of the full name, using just the first character and appending a period.<br>
+`firstName + " " + (String.len(middleInitial) == 0 ? "" : (String.substring(middleInitial, 0, 1) + ". ")) + lastName`
 
-<p>If there is a courtesy title, use it for the honorific prefix.<br>
-<code>courtesyTitle != "" ? courtesyTitle : ""</code></p>
-
-<p>If either email2 or email3 exists, make additionalEmail true; otherwise, make it false.<br>
-<code>String.len(email2) > 0 OR String.len(email3) > 0 ? True : False</code></p>
+Include the honorific prefix in front of the full name, or use the courtesy title instead if it exists. If both are absent, don't use any title.<br>
+`(courtesyTitle != "" ? (courtesyTitle + " ") : honorificPrefix != "" ? (honorificPrefix + " ") : "") + firstName + " " + (String.len(middleInitial) == 0 ? "" : (String.substring(middleInitial, 0, 1) + ". ")) + lastName`
 
 ##### Samples Using Group Rules
 

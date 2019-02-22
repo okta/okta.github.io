@@ -10,7 +10,7 @@ redirect_from: "/docs/api/rest/events.html"
 
 The Okta Events API provides read access to your organization's system log. [Export event data](https://support.okta.com/help/Documentation/Knowledge_Article/Exporting-Okta-Log-Data) as a batch job from your organization to another system for reporting or analysis.
 
-> **Important:** the [System Log API](/docs/api/resources/system_log) will eventually replace the Events API and contains much more [structured data](/docs/api/resources/system_log#logevent-object). Developers of new projects are strongly recommended to use the System Log API in lieu of the Events API. For information on migrating from the Events API to the System Log API please see [Events API Migration](/use_cases/events-api-migration/).
+> **Important:** the [System Log API](/docs/api/resources/system_log) will eventually replace the Events API and contains much more [structured data](/docs/api/resources/system_log#logevent-object). As of Jan 7, 2019 developers of new projects are unable to access the Events API and should use the System Log API. For information on migrating from the Events API to the System Log API please see [Events API Migration](/use_cases/events-api-migration/).
 
 ## Getting Started
 
@@ -122,7 +122,7 @@ curl -v -X GET \
 -H "Accept: application/json" \
 -H "Content-Type: application/json" \
 -H "Authorization: SSWS ${api_token}" \
-"https://{yourOktaDomain}/api/v1/events?startDate=2013-07-15T16%3A00%3A00.000Z\&limit=3"
+"https://{yourOktaDomain}/api/v1/events?startDate=2013-07-15T16%3A00%3A00.000Z&limit=3"
 ~~~
 
 ##### Response Example

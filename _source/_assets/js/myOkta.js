@@ -49,27 +49,21 @@
       return;
     }
 
-    function findPreviewOrg(accounts) {
-      // Extract the first 'oktapreview' domain
-      for (i = 0; i < accounts.length; i++) {
-        if (accounts[i].origin.indexOf('.oktapreview.com') !== -1){
-          var domain = accounts[i].origin;
-          var myOktaAccountFound = new CustomEvent('myOktaAccountFound', {
-            detail: {
-              domain: domain
-            }
-          });
-          window.dispatchEvent(myOktaAccountFound);
-          return domain;
-        }
-      }
-      return 'https://{yourOktaDomain}';
+    var accountsExist = event.data.length;
+    if (!accountsExist) {
+      return;
     }
 
-    var previewOrg = findPreviewOrg(event.data);
+    var domain = event.data[0].origin;
+    var myOktaAccountFound = new CustomEvent('myOktaAccountFound', {
+      detail: {
+        domain: domain
+      }
+    });
+    window.dispatchEvent(myOktaAccountFound);
 
     // Replace all occurances of 'https://{yourOktaDomain}' with
-    // the last used oktapreview account: 'https://dev-{number}.oktapreview.com
-    $('.okta-preview-domain').text(previewOrg);
+    // the last used Okta org
+    $('.okta-preview-domain').text(domain);
   }
 })(jQuery);

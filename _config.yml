@@ -104,7 +104,7 @@ defaults:
       collection: docs
     values:
       toc: true
-  - 
+  -
     scope:
       collection: use_cases
     values:
@@ -121,8 +121,8 @@ sitemap_ignore:
 # Okta Library versions
 versions:
   jwt_validator_java: 0.3.2
-  spring_boot_starter: 0.6.1
-  okta_signin_widget: 2.13.0
+  spring_boot_starter: 1.0.0
+  okta_signin_widget: 2.14.0
   okta_auth_js: 2.0.1
 
 # Bug: 37458

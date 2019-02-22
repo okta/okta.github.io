@@ -3,12 +3,13 @@ rvm:
 - 2.2.4
 addons:
   chrome: stable
-  sauce_connect: true
+before_script: "./scripts/start-sauce-connect.sh"
 before_install:
-- gem update bundler
+- gem install bundler -v '< 2'
 - bundle install
 - nvm install $(cat .nvmrc)
 script: "./scripts/travis.sh"
+after_script: "./scripts/stop-sauce-connect.sh"
 dist: trusty
 env:
   global:

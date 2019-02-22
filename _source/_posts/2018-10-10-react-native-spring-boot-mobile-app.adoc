@@ -117,7 +117,7 @@ Copy the JDL above into an `app.jh` file inside the `react-native-spring-boot` d
 
 [source,bash]
 ----
-npm i -g generator-jhipster@5.7.0
+npm i -g generator-jhipster@5.8.0
 ----
 
 Navigate to the `jhipster-api` directory in a terminal window. Run the command below to generate an app with a plethora of useful features out-of-the-box.
@@ -178,7 +178,7 @@ Install Ignite CLI:
 
 [source,bash]
 ----
-npm i -g ignite-cli@2.1.6 ignite-jhipster@2.0.2
+npm i -g ignite-cli@2.2.2 ignite-jhipster@2.0.3
 ----
 
 Make sure you're in the `react-native-spring-boot` directory, then generate a React Native app.
@@ -297,7 +297,7 @@ formModel: t.struct({
 }),
 ----
 
-Then change the `entityToFormValue()` and `formValueToEntity()` methods to save 1 or 0, depending on the user's selection.
+Then change the `entityToFormValue()` to set the toggle on if the value is 1.
 
 [source,js]
 ----
@@ -308,13 +308,19 @@ entityToFormValue = (value) => {
   return {
     id: value.id || null,
     date: value.date || null,
-    exercise: value.exercise || null,
-    meals: value.meals || null,
-    alcohol: value.alcohol || null,
+    exercise: (value.exercise === 1),
+    meals: (value.meals === 1),
+    alcohol: (value.alcohol === 1),
     notes: value.notes || null,
     userId: (value.user && value.user.id) ? value.user.id : null
   }
 }
+----
+
+And change `formValueToEntity()` to save 1 or 0, depending on the user's selection.
+
+[source,js]
+----
 formValueToEntity = (value) => {
   const entity = {
     id: value.id || null,
@@ -397,7 +403,7 @@ Switching from Keycload to Okta for identity in a JHipster app is suuuper easy t
 
 image::{% asset_path 'blog/react-native-spring-boot/okta-signup.png' %}[alt=Okta Developer Signup,width=800,align=center]
 
-Log in to your Okta Developer account and navigate to **Applications** > **Add Application**. Click **Web** and click **Next**. Give the app a name you'll remember, and specify `http://localhost:8080/login` as a Login redirect URI and click **Done**. Note the client ID and secret, you'll need to copy/paste them into a file in a minute.
+Log in to your Okta Developer account and navigate to **Applications** > **Add Application**. Click **Web** and click **Next**. Give the app a name you'll remember, specify `http://localhost:8080/login` as a Login redirect URI, `http://localhost:8080` as a Logout redirect URI, and click **Done**. Note the client ID and secret, you'll need to copy/paste them into a file in a minute.
 
 Create a `ROLE_ADMIN` and `ROLE_USER` group (**Users** > **Groups** > **Add Group**) and add users to them. I recommend adding the account you signed up with to `ROLE_ADMIN` and creating a new user (**Users** > **Add Person**) to add to `ROLE_USER`.
 
@@ -519,7 +525,7 @@ cf set-env $CF_APP_NAME SECURITY_OAUTH2_CLIENT_CLIENT_SECRET "$SECURITY_OAUTH2_C
 cf restage healthpoints
 ----
 
-After overriding the default OIDC settings for Spring Security, you'll need to add `https://healthpoints.cfapps.io/login` as a redirect URI in your Okta OIDC application.
+After overriding the default OIDC settings for Spring Security, you'll need to add `https://healthpoints.cfapps.io/login` as a Login redirect URI in your Okta OIDC application. You'll also want to add `https://healthpoints.cfapps.io` to your Logout redirect URIs so logout works.
 
 Then... you'll be able to authenticate. Voila! 😃
 
@@ -698,8 +704,7 @@ Don't you feel hip playing with all these best-of-breed technologies? I sure do!
 
 Wanna stay hip? Check out some of our other tutorials on React Native, Spring Boot, and JHipster.
 
-* link:/blog/2018/03/16/build-react-native-authentication-oauth-2[Build a React Native Application and Authenticate with OAuth 2.0] - uses React Native AppAuth, which is a
-https://github.com/ruddell/ignite-jhipster/issues/56[planned integration] for Ignite JHipster.
+* link:/blog/2018/03/16/build-react-native-authentication-oauth-2[Build a React Native Application and Authenticate with OAuth 2.0] - uses React Native AppAuth, just like Ignite JHipster.
 * link:/blog/2018/03/01/develop-microservices-jhipster-oauth[Develop a Microservices Architecture with OAuth 2.0 and JHipster] - includes instructions on how to deploy to Heroku.
 * link:/blog/2018/07/19/simple-crud-react-and-spring-boot[Use React and Spring Boot to Build a Simple CRUD App] - CRUD apps can be cool when you're planning JUG Tours!
 * link:/blog/2018/06/25/react-spring-boot-photo-gallery-pwa[Build a Photo Gallery PWA with React, Spring Boot, and JHipster] - build a Flickr clone with JHipster and React. Make it into a PWA.
@@ -709,4 +714,5 @@ https://twitter.com/oktadev[Follow us], https://www.youtube.com/channel/UC5AMiWq
 
 **Changelog:**
 
+* Jan 28, 2019: Updated to use Ignite CLI 2.2.2, Ignite JHipster 2.0.3, and JHipster 5.8.0. You can see the example app changes in https://github.com/oktadeveloper/okta-react-native-spring-boot-example/pull/3[okta-react-native-spring-boot-example#3]; changes to this post can be viewed in https://github.com/okta/okta.github.io/pull/2672[okta.github.io#2672].
 * Dec 10, 2018: Updated to use Ignite JHipster 2.0.2 and JHipster 5.7.0. You can see the example app changes in https://github.com/oktadeveloper/okta-react-native-spring-boot-example/pull/1[okta-react-native-spring-boot-example#1]; changes to this post can be viewed in https://github.com/okta/okta.github.io/pull/2541[okta.github.io#2541].

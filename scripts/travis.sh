@@ -3,7 +3,8 @@ set -e
 
 source "${0%/*}/helpers.sh"
 
-if [[ $TRAVIS_EVENT_TYPE != 'push' ]]; then
+if [[ $TRAVIS_EVENT_TYPE != 'push' ]] || [[ $SKIP_SAUCELABS == true ]];
+then
   export CHROME_HEADLESS=true
 fi
 

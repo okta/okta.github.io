@@ -367,6 +367,81 @@
       ], 
       "before_scripts": [], 
       "method": "GET"
+    },
+    {
+      "duration": 40, 
+      "skipped": false, 
+      "step_type": "pause"
+    }, 
+    {
+      "body": "", 
+      "skipped": false, 
+      "form": {}, 
+      "url": "{{oktaOrgUrl}}/api/v1/apps/{{oktaAppId}}/users/{{okta_add_userid}}", 
+      "variables": [], 
+      "multipart_form": [], 
+      "step_type": "request", 
+      "auth": {}, 
+      "note": "Removes an assignment for a user in Okta", 
+      "headers": {
+        "Content-Type": [
+          "application/json"
+        ], 
+        "Authorization": [
+          "SSWS {{oktaToken}}"
+        ], 
+        "Accept": [
+          "application/json"
+        ]
+      }, 
+      "assertions": [
+        {
+          "comparison": "equal_number", 
+          "value": "204", 
+          "source": "response_status"
+        }
+      ], 
+      "scripts": [], 
+      "before_scripts": [], 
+      "method": "DELETE"
+    }, 
+    {
+      "duration": 40, 
+      "skipped": false, 
+      "step_type": "pause"
+    }, 
+    {
+      "skipped": false, 
+      "url": "{{SCIMUrl}}/Users/{{scim_id}}", 
+      "variables": [], 
+      "multipart_form": [], 
+      "step_type": "request", 
+      "auth": {}, 
+      "note": "Verify if user is deactivated in SCIM App", 
+      "headers": {
+        "Authorization": [
+          "{{SCIMAuth}}"
+        ], 
+        "Accept": [
+          "application/scim+json"
+        ]
+      }, 
+      "assertions": [
+        {
+          "comparison": "equal_number", 
+          "value": 200, 
+          "source": "response_status"
+        }, 
+        {
+          "comparison": "equal", 
+          "property": "active", 
+          "value": "false", 
+          "source": "response_json"
+        }
+      ], 
+      "scripts": [], 
+      "before_scripts": [], 
+      "method": "GET"
     }
   ], 
   "description": "Basic User Managment tests to see if your SCIM server will work with Okta"

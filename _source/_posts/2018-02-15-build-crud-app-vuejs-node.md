@@ -5,9 +5,10 @@ author: bparise
 description: "This post shows you how to use build a basic CRUD application with Vue.js and Node. You'll also learn how to use Okta's Vue SDK to add authentication using OIDC."
 tags: [vue, vue.js, node, oidc, oauth 2.0, crud]
 tweets:
-- "Learn how to use @vuejs together with @nodejs to create a CRUD application → "
+- "Learn how to use @vuejs together with @nodejs to create a CRUD application →"
 - "Create a CRUD application with Vue.js and Node, then add some authentication love with Okta! #vuejs #nodejs #okta"
-- "Vue.js is the bomb! See how easy it is to integrate it with @nodejs and @okta for a secure, fast, and fun application! 😋 "
+- "Vue.js is the bomb! See how easy it is to integrate it with @nodejs and @okta for a secure, fast, and fun application! 😋"
+image: blog/featured/okta-vue-bottle-headphones.jpg
 ---
 
 I've danced the JavaScript framework shuffle for years starting with jQuery, then on to Angular. After being frustrated with Angular's complexity, I found React and thought I was in the clear. What seemed simple on the surface ended up being a frustrating mess. Then I found Vue.js.  It just felt right. It worked as expected. It was fast. The documentation was incredible. Templating was eloquent. There was a unanimous consensus around how to handle state management, conditional rendering, two-way binding, routing, and more.

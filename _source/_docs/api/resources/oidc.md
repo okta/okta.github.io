@@ -9,6 +9,7 @@ redirect_from:
     - "/docs/how-to/beta-auth-service/api-access-management-troubleshooting"
     - "/standards/OIDC/"
     - "/standards/OAuth/"
+    - "/reference/authentication_reference"
 ---
 
 # OpenID Connect & OAuth 2.0 API
@@ -735,7 +736,7 @@ Returns OAuth 2.0 metadata related to your custom authorization server. This inf
 
 ~~~sh
 curl -X GET \
-  "https://{yourOktaDomain}/oauth2/${authServerId}/.well-known/oauth-authorization-server?client_id=0oabzljih3rnr6aGt0h7" \
+"https://{yourOktaDomain}/oauth2/${authServerId}/.well-known/oauth-authorization-server?client_id=0oabzljih3rnr6aGt0h7"
 ~~~
 
 #### Response Properties
@@ -879,7 +880,7 @@ This API doesn't require any authentication.
 
 ~~~sh
 curl -X GET \
-  "https://{yourOktaDomain}/oauth2/${authServerId}/.well-known/openid-configuration?client_id=0oabzljih3rnr6aGt0h7" \
+"https://{yourOktaDomain}/oauth2/${authServerId}/.well-known/openid-configuration?client_id=0oabzljih3rnr6aGt0h7"
 ~~~
 
 #### Response Properties

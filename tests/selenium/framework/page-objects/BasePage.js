@@ -1,47 +1,86 @@
 'use strict';
 
 const util = require('../shared/util');
-const EC = protractor.ExpectedConditions;
-const baseUrl = 'http://localhost:4000';
+const baseUrl = (!process.env.BASE_URL) ? 'http://localhost:4000' : process.env.BASE_URL;
+const WAIT_TIMEOUT_MILLISECONDS_DEFAULT = 15 * 1000;
 
 class BasePage {
-  constructor(relativeURL) {
-    this.$pageLoad = null;
-    if(relativeURL) {
+  constructor(relativeURL, pageLoadElement) {
+    this.setPageLoadElement(pageLoadElement);
+    if (relativeURL) {
       this.url = baseUrl + relativeURL;
     } else {
       this.url = baseUrl;
     }
+    browser.waitForAngularEnabled(false);
   }
 
-  setPageLoad(element) {
-    this.$pageLoad = element;
+  setPageLoadElement(element) {
+    if (element) {
+      this.$pageLoadElement = element;
+    } else {
+      this.$pageLoadElement = null;
+    }
   }
 
-  load() {
-    browser.ignoreSynchronization = true;
+  load(relativeUrl, pageLoadElement) {
+    browser.waitForAngularEnabled(false);
+    if (relativeUrl) {
+      this.url = baseUrl + relativeUrl;
+    }
     browser.get(this.url);
+    if (pageLoadElement) {
+      this.setPageLoadElement(pageLoadElement);
+    }
     return this.waitForPageLoad();
   }
 
   waitForPageLoad() {
-    return util.wait(this.$pageLoad);
+    return util.wait(this.$pageLoadElement, WAIT_TIMEOUT_MILLISECONDS_DEFAULT);
   }
 
-  waitForPresence(elem) {
-    return util.wait(elem);
+  waitForPresence(elem, timeoutMilliseconds) {
+    if (timeoutMilliseconds === undefined) {
+      return util.wait(elem, WAIT_TIMEOUT_MILLISECONDS_DEFAULT);
+    } else {
+      return util.wait(elem, timeoutMilliseconds);
+    }
   }
 
   setWindowSize(width, height) {
     browser.driver.manage().window().setSize(width, height);
   }
 
-  waitUntilOnScreen(elementFinder) {
-    browser.wait(util.isOnScreen(elementFinder));
+  waitUntilOnScreen(elementFinder, timeoutMilliseconds) {
+    if (timeoutMilliseconds === undefined) {
+      browser.wait(util.isOnScreen(elementFinder), WAIT_TIMEOUT_MILLISECONDS_DEFAULT);
+    } else {
+      browser.wait(util.isOnScreen(elementFinder), timeoutMilliseconds);
+    }
   }
 
-  waitUntilOffScreen(elementFinder) {
-    browser.wait(EC.not(util.isOnScreen(elementFinder)));
+  waitUntilOffScreen(elementFinder, timeoutMilliseconds) {
+    if (timeoutMilliseconds === undefined) {
+      browser.wait(util.EC.not(util.isOnScreen(elementFinder)), WAIT_TIMEOUT_MILLISECONDS_DEFAULT);
+    } else {
+      browser.wait(util.EC.not(util.isOnScreen(elementFinder)), timeoutMilliseconds);
+    }
+  }
+
+  getElementsText(elements) {
+    return elements.reduce(function (textArray, element) {
+      return element.getText().then(text => {
+        return textArray.concat(text);
+      });
+    }, []);
+  }
+
+  getVisibleElements(elements) {
+    return elements.filter(element => {
+      return element.getText().then(text => {
+          return element.isDisplayed();
+      })
+    });
   }
 
   elementsContainText(elements, expectedTextArray) {
@@ -49,16 +88,14 @@ class BasePage {
       expectedTextArray = [expectedTextArray];
     }
     return elements.filter((element, index) => {
-      return element.getText().then((text) => {
-        return expectedTextArray.indexOf(text) > -1;
-      });
-    }).then((elementList) => {
-      return elementList.length == expectedTextArray.length;
+        return element.getText().then(text => expectedTextArray.indexOf(text) > -1);
+    }).then(function (elementList) {
+        return elementList.length == expectedTextArray.length;
     });
   }
 
   urlContains(str) {
-    return EC.urlContains(str)();
+    return util.EC.urlContains(str)();
   }
 
   getCurrentURL() {
@@ -99,5 +136,15 @@ class BasePage {
   refresh() {
     return browser.refresh();
   }
+
+  async smartClick(element) {
+    const ref = await element.getAttribute('href');
+    if (ref == null) {
+      element.click();
+    } else {
+      browser.get(ref);
+    }
+  }
+
 }
 module.exports = BasePage;

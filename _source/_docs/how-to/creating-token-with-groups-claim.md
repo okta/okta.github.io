@@ -4,12 +4,38 @@ title: Create an ID Token or Access Token Containing a Groups Claim
 excerpt: Use the app profile to create an ID token or access token that contains a groups claim
 ---
 
-# Create an ID Token or Access Token Containing a Groups Claim
+# Create an ID Token or Access Token that Contains a Groups Claim
 
-You can add a groups claim for any combination of application groups and user groups into ID tokens to perform SSO using Okta Authorization Server, or ID tokens and access tokens to perform authentication and authorization using Custom Authorization Server (API Access Management required).
-This process optionally uses Okta's flexible app profile, which accepts any JSON-compliant content, to create a whitelist of groups
-that can then easily be referenced. This is especially useful if you have a large number of groups to whitelist or otherwise
-need to set group whitelists on a per-application basis.
+You can add a groups claim for any combination of application groups and user groups into ID tokens to perform SSO using the Okta Authorization Server, or ID tokens and access tokens to perform authentication and authorization using the Custom Authorization Server (API Access Management required). This process optionally uses Okta's flexible app profile, which accepts any JSON-compliant content, to create a whitelist of groups that can then easily be referenced. This is especially useful if you have a large number of groups to whitelist or otherwise need to set group whitelists on a per-application basis.
+
+## Create a Groups Claim for Okta-Mastered Groups
+Do the following to create a Groups claim for Okta-mastered groups on an OpenID Connect client application. This approach is recommended if you are only using Okta-mastered groups.
+
+>These steps require the administrator UI. If you are using the Developer Console, select the drop-down control on the left side of the top banner to switch to the Classic UI.
+
+1. In the administrator UI, from the **Applications** menu, select **Applications**, and then select the OpenID Connect client application that you want to configure.
+
+2. Navigate to the **Sign On** tab and click **Edit** in the **Open ID Connect ID Token** section.
+
+3. In **Groups claim type**, choose either **Filter** or **Expression**.
+
+4. In **Group claims filter**, leave the default name **groups** or change it if you want, and then add the appropriate filter or expression. For example, select **Filter**, and then select **Matches regex** and enter `.*` to return the user's groups. See [Okta Expression Language Group Functions](/reference/okta_expression_language/#group-functions) for more information.
+
+5. Add the groups claim to the scopes in your request. The ID token is returned in the response.
+
+Request Example:
+~~~sh
+cURL -X GET \
+"https://your-okta-domain/oauth2/v1/authorize?client_id=0baiz2v8m6unWCvXM0h7
+&response_type=id_token
+&scope=openid%20groups
+&redirect_uri=http:%2F%2Flocalhost:8080
+&state=myState&nonce=yourNonceValue"
+~~~
+
+Notes:
+* You can also create a claim directly in a Custom Authorization Server instead of on the OpenID Connect or OAuth 2.0 app.
+* The maximum number of groups that you can specify must be less than 100.
 
 ## Create Groups Claims with a Dynamic Whitelist
 
@@ -17,7 +43,7 @@ You can use the [Okta Expression Language Group Functions](/reference/okta_expre
 
 Three Group functions help you use dynamic group whitelists:  `contains`, `startsWith`, and `endsWith`.
 
-These functions return all the groups that match the specified criteria. Use this function to get a list of groups that include the current user is as a member.
+These functions return all the groups that match the specified criteria. Use this function to get a list of groups that include the current user as a member.
 
 You can use this function anywhere to get a list of groups of which the current user is a member, including both user groups and app groups that originate from sources outside Okta, such as from Active Directory and Workday. Additionally, you can use this combined, custom-formatted list for customizable claims into Access and ID Tokens that drive authorization flows. All three functions have the same parameters:
 
@@ -29,15 +55,17 @@ You can use this function anywhere to get a list of groups of which the current 
 
 To use these functions to create a token using a dynamic group whitelist, create a Groups claim on an app:
 
-1. In the administrator UI, navigate to the Sign On tab of the client application you are configuring, and click  **Edit** in the Open ID Connect ID Token section.
+1. In the administrator UI, from the **Applications** menu, select **Applications**, and then select the client application that you want to configure.
 
-2. In **Groups claim type**, choose **Expression**.
+2. Navigate to the **Sign On** tab and click **Edit** in the **Open ID Connect ID Token** section.
 
-3. In **Group claims filter**, leave the default name **groups** or change it if you wish.
+3. In **Groups claim type**, choose **Expression**.
 
-4. In Groups claim expression, add one of the three functions with the criteria for your dynamic group whitelist:
+4. In **Group claims filter**, leave the default name **groups** or change it if you want.
 
-    `Groups.startsWith("active.directory", "myGroup", 10)`
+5. In **Groups claim expression**, add one of the three functions with the criteria for your dynamic group whitelist:
+
+    `Groups.startsWith("active_directory", "myGroup", 10)`
 
   Notes:
   * The syntax for these three functions is different from `getFilteredGroups`.
@@ -45,20 +73,20 @@ To use these functions to create a token using a dynamic group whitelist, create
 
 ## Create Groups Claims with a Static Whitelist
 
-Perform the following two tasks before you start for either Okta Authorization Server or Custom Authorization Server.
+Before you start, perform the following two tasks for either Okta Authorization Server or Custom Authorization Server.
 
  * Create an OAuth 2.0 or OpenID Connect client with the [Apps API](/docs/api/resources/apps#request-example-8). In the instruction examples, the client ID is `0oabskvc6442nkvQO0h7`.
- * Create the groups that you wish to configure in the groups claim. In the instruction examples, we're configuring the `WestCoastDivision` group, and the group ID is `00gbso71miOMjxHRW0h7`.
+ * Create the groups that you want to configure in the groups claim. In the instruction examples, we're configuring the `WestCoastDivision` group, and the group ID is `00gbso71miOMjxHRW0h7`.
 
 Now, use the instructions for your chosen authorization server to create a group claim, assign a group whitelist to your client app, and configure a groups claim that references a whitelist:
 
-* [Create a Token with Groups Claim and Okta Authorization Server](#create-a-token-with-groups-claim-okta-authorization-server)
-* [Create a Token with Groups Claim and Custom Authorization Server](#create-a-token-with-groups-claim-custom-authorization-server)
+* [Create a Token with a Groups Claim with Okta Authorization Server](#create-a-token-with-a-groups-claim-okta-authorization-server)
+* [Create a Token with a Groups Claim with Custom Authorization Server](#create-a-token-with-a-groups-claim-custom-authorization-server)
 
 For examples using [Okta Expression Language Group Functions](/reference/okta_expression_language/#group-functions) in static whitelists, see [Use Group Functions for Static Group Whitelists](#use-group-functions-for-static-group-whitelists).
 
 
-### Create a Token with Groups Claim (Okta Authorization Server)
+### Create a Token with a Groups Claim (Okta Authorization Server)
 
 Use this procedure if you have the Okta Authorization Server, not the `default` or other Custom Authorization Server.
 
@@ -70,10 +98,10 @@ Send a request to `https://{yourOktaDomain}/api/v1/groups` and collect the IDs f
 
 ~~~sh
 curl -X GET \
-  -H 'accept: application/json' \
-  -H 'authorization: SSWS ${api_token}' \
-  -H 'content-type: application/json' \
-  "https://{yourOktaDomain}/api/v1/groups"
+-H 'accept: application/json' \
+-H 'authorization: SSWS ${api_token}' \
+-H 'content-type: application/json' \
+"https://{yourOktaDomain}/api/v1/groups"
 ~~~
 
    Response Example:
@@ -119,7 +147,7 @@ curl -X GET \
 
 This example uses one `groupId` for simplicity's sake.
 
-#### Step Two: Add List of Groups to Profile of Client App
+#### Step Two: Add a List of Groups to the Profile of the Client App
 
 If you only have one or two groups to specify, simply add the group IDs to the first parameter of the `getFilteredGroups` function described in the next step.
 However, if you have a lot of groups to whitelist, you can put the group IDs in the client app's profile property bag: `https://{yourOktaDomain}/api/v1/apps/${applicationId}`.
@@ -129,47 +157,47 @@ Request Example:
 
 ~~~sh
 curl -X PUT \
-  https://{yourOktaDomain}/api/v1/apps/0oabskvc6442nkvQO0h7 \
-  -H 'accept: application/json' \
-  -H 'authorization: SSWS ${api_token}' \
-  -H 'cache-control: no-cache' \
-  -H 'content-type: application/json' \
-  -d '{
-    "name": "oidc_client",
-    "label": "Sample Client",
-    "status": "ACTIVE",
-    "signOnMode": "OPENID_CONNECT",
-    "credentials": {
-      "oauthClient": {
-        "token_endpoint_auth_method": "client_secret_post"
-      }
-    },
-    "settings": {
-      "oauthClient": {
-        "client_uri": "http://localhost:8080",
-        "logo_uri": "http://developer.okta.com/assets/images/logo-new.png",
-        "redirect_uris": [
-          "https://example.com/oauth2/callback",
-          "myapp://callback"
-        ],
-        "response_types": [
-          "token",
-          "id_token",
-          "code"
-        ],
-        "grant_types": [
-          "implicit",
-          "authorization_code"
-        ],
-        "application_type": "native"
-      }
-    },
-    "profile": {
-      "groupwhitelist": [
-        "00gbso71miOMjxHRW0h7"
-      ]
+"https://{yourOktaDomain}/api/v1/apps/0oabskvc6442nkvQO0h7" \
+-H 'accept: application/json' \
+-H 'authorization: SSWS ${api_token}' \
+-H 'cache-control: no-cache' \
+-H 'content-type: application/json' \
+-d '{
+  "name": "oidc_client",
+  "label": "Sample Client",
+  "status": "ACTIVE",
+  "signOnMode": "OPENID_CONNECT",
+  "credentials": {
+    "oauthClient": {
+      "token_endpoint_auth_method": "client_secret_post"
     }
-  }'
+  },
+  "settings": {
+    "oauthClient": {
+      "client_uri": "http://localhost:8080",
+      "logo_uri": "http://developer.okta.com/assets/images/logo-new.png",
+      "redirect_uris": [
+        "https://example.com/oauth2/callback",
+        "myapp://callback"
+      ],
+      "response_types": [
+        "token",
+        "id_token",
+        "code"
+      ],
+      "grant_types": [
+        "implicit",
+        "authorization_code"
+      ],
+      "application_type": "native"
+    }
+  },
+  "profile": {
+    "groupwhitelist": [
+      "00gbso71miOMjxHRW0h7"
+    ]
+  }
+}'
 ~~~
 
 You can add application groups, user groups, or both to the group whitelist, specified as an array of IDs.
@@ -178,31 +206,33 @@ To use the group whitelist for every client that gets this claim in a token, put
 
 #### Step Three: Configure a Custom Claim for Your Groups (Okta Authorization Server)
 
-For the Okta Authorization Server, you can only create an ID token with a groups claim, not an access token.
+For Okta Authorization Server, you can only create an ID token with a groups claim, not an access token.
 
-> This step requires the administrator UI. If you are using the Developer Console, select the drop-down control in the left side of the top banner to switch to Classic UI for Step Three.
+> This step requires the administrator UI. If you are using the Developer Console, select the drop-down control on the left side of the top banner to switch to Classic UI for Step Three.
 
- a. In the administrator UI, navigate to the Sign On tab of the client application you are configuring, and click the **Edit** button in the Open ID Connect ID Token section.
+ a. In the administrator UI, from the **Applications** menu, select **Applications**, and then select the client application that you want to configure.
 
- b. In **Groups claim type**, choose **Expression**.
+ b. Navigate to the **Sign On** tab and click **Edit** in the **Open ID Connect ID Token** section.
 
- c. In **Group claims filter**, leave the default name `groups` or change it if you wish.
+ c. In **Groups claim type**, choose **Expression**.
 
- d. In **Groups claim expression**, add this expression: `getFilteredGroups(app.profile.groupwhitelist, "group.name", 40)`.
+ d. In **Group claims filter**, leave the default name `groups` or change it if you want.
+
+ e. In **Groups claim expression**, add this expression: `getFilteredGroups(app.profile.groupwhitelist, "group.name", 40)`.
 
 #### Step Four: Send a Test Request
 
-To obtain a token with the configured groups claim, send a request for an ID token that includes the `groups` claim set in step 3.c. as a scope to `https://{yourOktaDomain}/oauth2/v1/authorize`, as illustrated in the following example.
+To obtain a token with the configured groups claim, send a request for an ID token that includes the `groups` claim set in Step 3.c. as a scope to `https://{yourOktaDomain}/oauth2/v1/authorize`, as illustrated in the following example.
 
 Request Example for Okta Authorization Server:
 
 ~~~sh
 curl -X GET \
-  "https://{yourOktaDomain}/oauth2/v1/authorize?client_id=0oabskvc6442nkvQO0h7
-  &response_type=id_token
-  &response_mode=fragment&scope=openid%20groups
-  &redirect_uri=https%3A%2F%2Fexample.com
-  &state=myState&nonce=${yourNonceValue}' \
+"https://{yourOktaDomain}/oauth2/v1/authorize?client_id=0oabskvc6442nkvQO0h7
+&response_type=id_token
+&response_mode=fragment&scope=openid%20groups
+&redirect_uri=https%3A%2F%2Fexample.com
+&state=myState&nonce=${yourNonceValue}"
 ~~~
 
 #### Step Five: Decode the JWT to Verify
@@ -213,7 +243,7 @@ Decode the JWT in the response to see that the groups are in the token. For exam
 eyJraWQiOiJiS0U0czM3d01tQWZ5ZzQtVFJQcVg1YW50blE1ajBuNFJKcE9nSl9zT0JVIiwiYWxnIjoiUlMyNTYifQ.eyJzdWIiOiIwMHU1dDYwaWxvT0hOOXBCaTBoNyIsInZlciI6MSwiaXNzIjoiaHR0cHM6Ly9teXN0aWNvcnAub2t0YXByZXZpZXcuY29tIiwiYXVkIjoiMG9hYnNrdmM2NDQybmt2UU8waDciLCJpYXQiOjE1MTQ0OTc3ODEsImV4cCI6MTUxNDUwMTM4MSwianRpIjoiSUQua0FlMWFzU08wM00walp0Y2ZHZGtpWGwwUW9LRHE5aHl3OE1VUU1UNGwtWSIsImFtciI6WyJwd2QiXSwiaWRwIjoiMDBvNXQ2MGlsM1V6eUllNXYwaDciLCJub25jZSI6IjQ1YzExMDJiLTM0MmUtNGZjMC04ZDllLWM0NTY0MmFlOWFkOCIsImF1dGhfdGltZSI6MTUxNDQ5NjM1MCwiZ3JvdXBzIjpbIldlc3RDb2FzdERpdmlzaW9uIl19.ACKbJZ-lbGtgBAQDhamq7K9WJzHS0WySN0R2LXSkBahWWVMU1W-oTh2xDuHmyQv6HZpk-V4epnk-OItRBQb214NsRG8AJGn5n3QGYp5xPWVXXQ_hFZSro4br6Rdn_U8iZebqs6EXpGhxG7tN9VEgB-SkAynHdy2MbQpikGWcxORSA8vQLQhDRt2VZDobienTA8zLeThzOyAmhPjELxHRHFVT1OOrEoCqUV6wlk8LfhATRlxZGm6lrlZQbqxV_PDM8u7zN0l9XV01Rh0WHO7zZ_Oq0PEeQkf-TC9x7Gl_pOuRyRfGEsrqq-ZEL6AZszxotRKQJO1nNahAhfbNESO2mg
 ~~~
 
-Example Payload Data for ID Token:
+Example Payload Data for the ID Token:
 
 ~~~JSON
 {
@@ -236,13 +266,13 @@ Example Payload Data for ID Token:
 }
 ~~~
 
-The ID token contains the group WestCoastDivision so the audience (`aud`) has access to the group information about the user.
+The ID token contains the group `WestCoastDivision` so the audience (`aud`) has access to the group information about the user.
 
-For flows other than implicit, post to the token endpoint `https://{yourOktaDomain}/oauth2/v1/token` with the user or client you want. Make sure the user is assigned to the app and to one of the groups from your whitelist.
+For flows other than implicit, post to the token endpoint `https://{yourOktaDomain}/oauth2/v1/token` with the user or client that you want. Make sure the user is assigned to the app and to one of the groups from your whitelist.
 
-If the results aren't as expected, start your troubleshooting by inspecting the System Log to see what went wrong. Also, try requesting only an ID token instead of both and ID token and access token.
+If the results aren't as expected, start your troubleshooting by inspecting the System Log to see what went wrong. Also, try requesting only an ID token instead of both an ID token and an access token.
 
-### Create a Token with Groups Claim (Custom Authorization Server)
+### Create a Token with a Groups Claim (Custom Authorization Server)
 
 #### Step One: Get the Group IDs
 
@@ -252,10 +282,10 @@ Request Example:
 
 ~~~sh
 curl -X GET \
-  -H 'accept: application/json' \
-  -H 'authorization: SSWS ${api_token}' \
-  -H 'content-type: application/json' \
-  "https://{yourOktaDomain}/api/v1/groups"
+-H 'accept: application/json' \
+-H 'authorization: SSWS ${api_token}' \
+-H 'content-type: application/json' \
+"https://{yourOktaDomain}/api/v1/groups"
 ~~~
 
 This example uses one `groupId` for simplicity's sake.
@@ -301,7 +331,7 @@ This example uses one `groupId` for simplicity's sake.
 ]
 ~~~
 
-#### Step Two:  Add List of Groups to Profile of Client App
+#### Step Two:  Add a List of Groups to the Profile of the Client App
 
 If you only have one or two groups to specify, simply add the group IDs to the first parameter of the `getFilteredGroups` function described in the next step.
 However, if you have a lot of groups to whitelist, you can put the group IDs in the client app's profile property bag: `https://{yourOktaDomain}/api/v1/apps/${applicationId}`.
@@ -312,50 +342,50 @@ Request Example:
 
 ~~~sh
 curl -X POST \
-  https://{yourOktaDomain}/api/v1/apps/0oabskvc6442nkvQO0h7 \
-  -H 'accept: application/json' \
-  -H 'authorization: SSWS ${api_token}' \
-  -H 'cache-control: no-cache' \
-  -H 'content-type: application/json' \
-  -d '{
-    "name": "oidc_client",
-    "label": "Sample Client",
-    "status": "ACTIVE",
-    "signOnMode": "OPENID_CONNECT",
-    "credentials": {
-      "oauthClient": {
-        "token_endpoint_auth_method": "client_secret_post"
-      }
-    },
-    "settings": {
-      "oauthClient": {
-        "client_uri": "http://localhost:8080",
-        "logo_uri": "http://developer.okta.com/assets/images/logo-new.png",
-        "redirect_uris": [
-          "https://example.com/oauth2/callback",
-          "myapp://callback"
-        ],
-        "response_types": [
-          "token",
-          "id_token",
-          "code"
-        ],
-        "grant_types": [
-          "implicit",
-          "authorization_code"
-        ],
-        "application_type": "native"
-      }
-    },
-    "profile": {
-      "groupwhitelist": [
-        "00gbso71miOMjxHRW0h7"
-      ]
+"https://{yourOktaDomain}/api/v1/apps/0oabskvc6442nkvQO0h7" \
+-H 'accept: application/json' \
+-H 'authorization: SSWS ${api_token}' \
+-H 'cache-control: no-cache' \
+-H 'content-type: application/json' \
+-d '{
+  "name": "oidc_client",
+  "label": "Sample Client",
+  "status": "ACTIVE",
+  "signOnMode": "OPENID_CONNECT",
+  "credentials": {
+    "oauthClient": {
+      "token_endpoint_auth_method": "client_secret_post"
     }
-  }'
+  },
+  "settings": {
+    "oauthClient": {
+      "client_uri": "http://localhost:8080",
+      "logo_uri": "http://developer.okta.com/assets/images/logo-new.png",
+      "redirect_uris": [
+        "https://example.com/oauth2/callback",
+        "myapp://callback"
+      ],
+      "response_types": [
+        "token",
+        "id_token",
+        "code"
+      ],
+      "grant_types": [
+        "implicit",
+        "authorization_code"
+      ],
+      "application_type": "native"
+    }
+  },
+  "profile": {
+    "groupwhitelist": [
+      "00gbso71miOMjxHRW0h7"
+    ]
+  }
+}'
 ~~~
 
-You can add application groups, user groups or both to the group whitelist, specified as an array of IDs.
+You can add application groups, user groups, or both to the group whitelist specified as an array of IDs.
 
 To use the group whitelist for every client that gets this claim in a token, put the attribute name of the whitelist in the first parameter of the `getFilteredGroups` function described in the next step.
 
@@ -371,53 +401,53 @@ Add a custom claim for the ID token or access token on a Custom Authorization Se
 
 The maximum number of groups specified must be less than 100.
 
-In the following two examples for creating the groups claim, the `name` for the claim is `groups`, but you can name it whatever you wish.
+In the following two examples for creating the groups claim, the `name` for the claim is `groups`, but you can name it whatever you want.
 
 ##### Request Example for Access Token
 
 ~~~sh
 curl -X POST \
-  https://{yourOktaDomain}/api/v1/authorizationServers/ausain6z9zIedDCxB0h7/claims \
-  -H 'accept: application/json' \
-  -H 'authorization: SSWS ${api_token}' \
-  -H 'cache-control: no-cache' \
-  -H 'content-type: application/json' \
-  -d '{
-   "name": "groups",
-   "status": "ACTIVE",
-   "claimType": "RESOURCE",
-   "valueType": "EXPRESSION",
-   "value": "\"getFilteredGroups(app.profile.groupwhitelist, \"group.name\", 40)\"",
-   "conditions": {
-     "scopes": []
-   }
- }'
+"https://{yourOktaDomain}/api/v1/authorizationServers/ausain6z9zIedDCxB0h7/claims" \
+-H 'accept: application/json' \
+-H 'authorization: SSWS ${api_token}' \
+-H 'cache-control: no-cache' \
+-H 'content-type: application/json' \
+-d '{
+  "name": "groups",
+  "status": "ACTIVE",
+  "claimType": "RESOURCE",
+  "valueType": "EXPRESSION",
+  "value": "\"getFilteredGroups(app.profile.groupwhitelist, \"group.name\", 40)\"",
+  "conditions": {
+    "scopes": []
+  }
+}'
 ~~~
 
 ##### Request Example for ID Token
 
 ~~~sh
 curl -X POST \
-  https://{yourOktaDomain}/api/v1/authorizationServers/ausain6z9zIedDCxB0h7/claims \
-  -H 'accept: application/json' \
-  -H 'authorization: SSWS ${api_token}' \
-  -H 'cache-control: no-cache' \
-  -H 'content-type: application/json' \
-  -d '{
-   "name": "groups",
-   "status": "ACTIVE",
-   "claimType": "IDENTITY",
-   "valueType": "EXPRESSION",
-   "value": "\"getFilteredGroups(app.profile.groupwhitelist, \"group.name\", 40)\"",
-   "conditions": {
-     "scopes": []
-   }
- }'
+"https://{yourOktaDomain}/api/v1/authorizationServers/ausain6z9zIedDCxB0h7/claims" \
+-H 'accept: application/json' \
+-H 'authorization: SSWS ${api_token}' \
+-H 'cache-control: no-cache' \
+-H 'content-type: application/json' \
+-d '{
+  "name": "groups",
+  "status": "ACTIVE",
+  "claimType": "IDENTITY",
+  "valueType": "EXPRESSION",
+  "value": "\"getFilteredGroups(app.profile.groupwhitelist, \"group.name\", 40)\"",
+  "conditions": {
+    "scopes": []
+  }
+}'
  ~~~
 
 Be sure that you have a policy and rule set up in your Custom Authorization Server or the request in the next step won't work.
 
-See [Create Groups Claims with a Dynamic Whitelist](#create-groups-claims-with-a-dynamic-whitelist), above for more information about specifying groups with `getFilteredGroups`.
+See [Create Groups Claims with a Dynamic Whitelist](#create-groups-claims-with-a-dynamic-whitelist) above for more information about specifying groups with `getFilteredGroups`.
 
 Now when you mint a token, groups in the `groupwhitelist` that also have the user as a member are included in the `groups` claim. Test your configuration in the next step.
 
@@ -428,13 +458,13 @@ To obtain a token with the configured groups claim, send a request for an ID tok
 ##### Request Example for Custom Authorization Server:
 
 ~~~sh
- curl -X GET \
-  'https://{yourOktaDomain}/oauth2/ausain6z9zIedDCxB0h7/v1/authorize?client_id=0oabskvc6442nkvQO0h7
-    &response_type=id_token
-    &response_mode=fragment
-    &scope=groups%20openid
-    &redirect_uri=https%3A%2F%2Fexample.com
-    &state=myState&nonce=${myNonceValue}' \
+curl -X GET \
+"https://{yourOktaDomain}/oauth2/ausain6z9zIedDCxB0h7/v1/authorize?client_id=0oabskvc6442nkvQO0h7
+&response_type=id_token
+&response_mode=fragment
+&scope=groups%20openid
+&redirect_uri=https%3A%2F%2Fexample.com
+&state=myState&nonce=${myNonceValue}"
  ~~~
 
 >Note:
@@ -491,11 +521,11 @@ eyJraWQiOiJ2U2N0OVJ0R2g5ang5QVFfT05aNEFhM19lZ3YwVlktelJKWTZvbmE5R3o4IiwiYWxnIjoi
 }
 ~~~
 
-The ID token or access token contains the group WestCoastDivision so the audience (`aud`) has access to the group information about the user.
+The ID token or access token contains the group `WestCoastDivision` so the audience (`aud`) has access to the group information about the user.
 
 For flows other than implicit, post to the token endpoint `https://{yourOktaDomain}/oauth2/${authServerId}/v1/token` with the user or client you want. Make sure the user is assigned to the app and to one of the groups from your whitelist.
 
-If the results aren't as expected, start your troubleshooting by inspecting the System Log to see what went wrong. Also, try requesting only an ID token instead of both and ID token and access token.
+If the results aren't as expected, start your troubleshooting by inspecting the System Log to see what went wrong. Also, try requesting only an ID token instead of both an ID token and an access token.
 
 ### Use Group Functions for Static Group Whitelists
 
@@ -515,9 +545,9 @@ This function takes Okta EL expressions for all parameters that evaluate to the 
 
 All parameters must be valid Okta EL expressions that evaluate as described above. Okta EL expressions can be comprised of strings, integers, arrays, etc.
 
-The string produced by the `group_expression` parameter usually contains attributes and objects from the [Groups API](/docs/api/resources/groups), although it is not limited to those attributes and objects. Attributes and objects listed in the [Group Attributes](/docs/api/resources/groups#group-attributes) section of the Groups API can be any of the following: `id`, `status`, `name`, `description`, `objectClass`, and the `profile` object that contains the `groupType`, `samAccountName`, `objectSid`, `groupScope`, `windowsDomainQualifiedName`, `dn`, and `externalID` attributes for groups that come from apps such as Active Directory.
+The string produced by the `group_expression` parameter usually contains attributes and objects from the [Groups API](/docs/api/resources/groups), although it isn't limited to those attributes and objects. Attributes and objects listed in the [Group Attributes](/docs/api/resources/groups#group-attributes) section of the Groups API can be any of the following: `id`, `status`, `name`, `description`, `objectClass`, and the `profile` object that contains the `groupType`, `samAccountName`, `objectSid`, `groupScope`, `windowsDomainQualifiedName`, `dn`, and `externalID` attributes for groups that come from apps such as Active Directory.
 
-The `whitelist` parameter must evaluate to a list of group ids that is returned from the [Groups API](/docs/api/resources/groups). If the user is not member of a group in the whitelist, the group is ignored.
+The `whitelist` parameter must evaluate to a list of group ids that is returned from the [Groups API](/docs/api/resources/groups). If the user is not a member of a group in the whitelist, the group is ignored.
 
 **Parameter Examples**
 

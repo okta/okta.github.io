@@ -599,23 +599,23 @@ curl -v -X POST \
 -H "Content-Type: application/json" \
 -H "Authorization: SSWS ${api_token}" \
 -d '{
-      "label": "Example Custom SWA App",
-      "visibility": {
-        "autoSubmitToolbar": false,
-        "hide": {
-          "iOS": false,
-          "web": false
-        }
-      },
-      "features": [],
-      "signOnMode": "AUTO_LOGIN",
-      "settings": {
-        "signOn": {
-          "redirectUrl": "http://swasecondaryredirecturl.okta.com",
-          "loginUrl": "http://swaprimaryloginurl.okta.com"
-        }
-      }
-    }' "https://{yourOktaDomain}/api/v1/apps"
+  "label": "Example Custom SWA App",
+  "visibility": {
+    "autoSubmitToolbar": false,
+    "hide": {
+      "iOS": false,
+      "web": false
+    }
+  },
+  "features": [],
+  "signOnMode": "AUTO_LOGIN",
+  "settings": {
+    "signOn": {
+      "redirectUrl": "http://swasecondaryredirecturl.okta.com",
+      "loginUrl": "http://swaprimaryloginurl.okta.com"
+    }
+  }
+}' "https://{yourOktaDomain}/api/v1/apps"
 ~~~
 
 ##### Response Example
@@ -722,11 +722,12 @@ idpIssuer             | SAML Issuer ID                                          
 subjectNameIdTemplate | Template for app user's username when a user is assigned to the app.                                              | String                                               | FALSE    | FALSE |
 subjectNameIdFormat   | Identifies the SAML processing rules.                                                                             | String                                               | FALSE    | FALSE |
 responseSigned        | Determines whether the SAML authentication response message is digitally signed by the IDP or not                 | Boolean                                              | FALSE    | FALSE |
-assertionSigned       | determines whether the SAML assertion is digitally signed or not                                                  | Boolean                                              | FALSE    | FALSE |
+assertionSigned       | Determines whether the SAML assertion is digitally signed or not                                                  | Boolean                                              | FALSE    | FALSE |
 signatureAlgorithm    | Determines the signing algorithm used to digitally sign the SAML assertion and response                           | String                                               | FALSE    | FALSE |
 digestAlgorithm       | Determines the digest algorithm used to digitally sign the SAML assertion and response                            | String                                               | FALSE    | FALSE |
 honorForceAuthn       | Prompt user to re-authenticate if SP asks for it                                                                  | Boolean                                              | FALSE    | FALSE |
 authnContextClassRef  | Identifies the SAML authentication context class for the assertion's authentication statement                     | String                                               | FALSE    | FALSE |
+requestCompressed     | Determines whether the SAML request is expected to be compressed or not                                           | Boolean                                              | FALSE    | FALSE |
 attributeStatements   | Check [here](http://docs.oasis-open.org/security/saml/Post2.0/sstc-saml-tech-overview-2.0-cd-02.html) for details | [Attribute Statements](#attribute-statements-object) | TRUE    | FALSE |
 
 * Fields that require certificate uploads can't be enabled through the API, such as Single Log Out and Assertion Encryption. These must be updated through the UI.
@@ -788,47 +789,47 @@ curl -v -X POST \
 -H "Content-Type: application/json" \
 -H "Authorization: SSWS ${api_token}" \
 -d '{
-      "label": "Example Custom SAML 2.0 App",
-      "visibility": {
-        "autoSubmitToolbar": false,
-        "hide": {
-          "iOS": false,
-          "web": false
-        }
-      },
-      "features": [],
-      "signOnMode": "SAML_2_0",
-      "settings": {
-        "signOn": {
-          "defaultRelayState": "",
-          "ssoAcsUrl": "http://testorgone.okta",
-          "idpIssuer": "http://www.okta.com/${org.externalKey}",
-          "audience": "asdqwe123",
-          "recipient": "http://testorgone.okta",
-          "destination": "http://testorgone.okta",
-          "subjectNameIdTemplate": "${user.userName}",
-          "subjectNameIdFormat": "urn:oasis:names:tc:SAML:1.1:nameid-format:unspecified",
-          "responseSigned": true,
-          "assertionSigned": true,
-          "signatureAlgorithm": "RSA_SHA256",
-          "digestAlgorithm": "SHA256",
-          "honorForceAuthn": true,
-          "authnContextClassRef": "urn:oasis:names:tc:SAML:2.0:ac:classes:PasswordProtectedTransport",
-          "spIssuer": null,
-          "requestCompressed": false,
-          "attributeStatements": [
-            {
-              "type": "EXPRESSION",
-              "name": "Attribute",
-              "namespace": "urn:oasis:names:tc:SAML:2.0:attrname-format:unspecified",
-              "values": [
-                "Value"
-              ]
-            }
+  "label": "Example Custom SAML 2.0 App",
+  "visibility": {
+    "autoSubmitToolbar": false,
+    "hide": {
+      "iOS": false,
+      "web": false
+    }
+  },
+  "features": [],
+  "signOnMode": "SAML_2_0",
+  "settings": {
+    "signOn": {
+      "defaultRelayState": "",
+      "ssoAcsUrl": "http://testorgone.okta",
+      "idpIssuer": "http://www.okta.com/${org.externalKey}",
+      "audience": "asdqwe123",
+      "recipient": "http://testorgone.okta",
+      "destination": "http://testorgone.okta",
+      "subjectNameIdTemplate": "${user.userName}",
+      "subjectNameIdFormat": "urn:oasis:names:tc:SAML:1.1:nameid-format:unspecified",
+      "responseSigned": true,
+      "assertionSigned": true,
+      "signatureAlgorithm": "RSA_SHA256",
+      "digestAlgorithm": "SHA256",
+      "honorForceAuthn": true,
+      "authnContextClassRef": "urn:oasis:names:tc:SAML:2.0:ac:classes:PasswordProtectedTransport",
+      "spIssuer": null,
+      "requestCompressed": false,
+      "attributeStatements": [
+        {
+          "type": "EXPRESSION",
+          "name": "Attribute",
+          "namespace": "urn:oasis:names:tc:SAML:2.0:attrname-format:unspecified",
+          "values": [
+            "Value"
           ]
         }
-      }
-    }' "https://{yourOktaDomain}/api/v1/apps"
+      ]
+    }
+  }
+}' "https://{yourOktaDomain}/api/v1/apps"
 ~~~
 
 ##### Response Example
@@ -1066,42 +1067,42 @@ curl -v -X POST \
 -H "Content-Type: application/json" \
 -H "Authorization: SSWS ${api_token}" \
 -d '{
-    "name": "oidc_client",
-    "label": "Sample Client",
-    "signOnMode": "OPENID_CONNECT",
-    "credentials": {
-      "oauthClient": {
-        "client_id":"0oa1hm4POxgJM6CPu0g4",
-        "autoKeyRotation": true,
-        "token_endpoint_auth_method": "client_secret_post"
-      }
-    },
-    "settings": {
-      "oauthClient": {
-        "client_uri": "https://example.com/client",
-        "logo_uri": "https://example.com/assets/images/logo-new.png",
-        "redirect_uris": [
-          "https://example.com/oauth2/callback",
-          "myapp://callback"
-        ],
-        "post_logout_redirect_uris": [
-        "https://example.com/oauth2/postLogoutRedirectUri"
-        ],
-        "response_types": [
-          "token",
-          "id_token",
-          "code"
-        ],
-        "grant_types": [
-          "implicit",
-          "authorization_code"
-        ],
-        "application_type": "native",
-        "tos_uri":"https://example.com/client/tos",
-        "policy_uri":"https://example.com/client/policy"
-      }
+  "name": "oidc_client",
+  "label": "Sample Client",
+  "signOnMode": "OPENID_CONNECT",
+  "credentials": {
+    "oauthClient": {
+      "client_id":"0oa1hm4POxgJM6CPu0g4",
+      "autoKeyRotation": true,
+      "token_endpoint_auth_method": "client_secret_post"
     }
-    }' "https://{yourOktaDomain}/api/v1/apps"
+  },
+  "settings": {
+    "oauthClient": {
+      "client_uri": "https://example.com/client",
+      "logo_uri": "https://example.com/assets/images/logo-new.png",
+      "redirect_uris": [
+        "https://example.com/oauth2/callback",
+        "myapp://callback"
+      ],
+      "post_logout_redirect_uris": [
+      "https://example.com/oauth2/postLogoutRedirectUri"
+      ],
+      "response_types": [
+        "token",
+        "id_token",
+        "code"
+      ],
+      "grant_types": [
+        "implicit",
+        "authorization_code"
+      ],
+      "application_type": "native",
+      "tos_uri":"https://example.com/client/tos",
+      "policy_uri":"https://example.com/client/policy"
+    }
+  }
+}' "https://{yourOktaDomain}/api/v1/apps"
 ~~~
 
 ##### Response Example
@@ -1357,12 +1358,14 @@ Enumerates apps added to your organization with pagination. A subset of apps can
 
 Parameter | Description                                                                                                      | Param Type | DataType | Required | Default
 --------- | ---------------------------------------------------------------------------------------------------------------- | ---------- | -------- | -------- | -------
-limit     | Specifies the number of results for a page                                                                       | Query      | Number   | FALSE    | 20
-filter    | Filters apps by `status`, `user.id`, `group.id` or `credentials.signing.kid` expression                                                    | Query      | String   | FALSE    |
+q         | Searches the `name` or `displayName` property of applications                                                    | Query      | String    | FALSE
+limit     | Specifies the number of results per page (maximum 200)                                                           | Query      | Number   | FALSE    | 20
+filter    | Filters apps by `status`, `user.id`, `group.id` or `credentials.signing.kid` expression                          | Query      | String   | FALSE    |
 after     | Specifies the pagination cursor for the next page of apps                                                        | Query      | String   | FALSE    |
 expand    | Traverses `users` link relationship and optionally embeds [Application User](#application-user-model) resource   | Query      | String   | FALSE    |
 
-> The page cursor should treated as an opaque value and obtained through the next link relation. See [Pagination](/docs/api/getting_started/design_principles#pagination)
+The results will be [paginated][pagination] according to the `limit` parameter.
+If there are multiple pages of results, the Link header will contain a `next` link, which should be treated as an opaque value (follow it, don't parse it).
 
 ###### Filters
 
@@ -3207,11 +3210,13 @@ Enumerates all assigned [application users](#application-user-model) for an appl
 
 Parameter | Description                                                      | Param Type | DataType | Required | Default
 --------- | ---------------------------------------------------------------- | ---------- | -------- | -------- | -------
-applicationId       | `id` of an [app](#application-model)                  | URL        | String   | TRUE     |
-limit     | specifies the number of results for a page                       | Query      | Number   | FALSE    | 20
-after     | specifies the pagination cursor for the next page of assignments | Query      | String   | FALSE    |
+applicationId       | `id` of an [app](#application-model)                   | URL        | String   | TRUE     |
+limit     | Specifies the number of results per page (maximum 500)           | Query      | Number   | FALSE    | 50
+after     | Specifies the pagination cursor for the next page of assignments | Query      | String   | FALSE    |
+q         | Returns a filtered list of app users. The value of `q` is matched against an application user profile's `userName`, `firstName`, `lastName`, and `email`. **Note:** This operation only supports `startsWith`, which matches what the string starts with to the query. | Query      | String   | FALSE    |
 
-> The page cursor should treated as an opaque value and obtained through the next link relation. See [Pagination](/docs/api/getting_started/design_principles#pagination)
+The results will be [paginated][pagination] according to the `limit` parameter.
+If there are multiple pages of results, the Link header will contain a `next` link, which should be treated as an opaque value (follow it, don't parse it).
 
 ##### Response Parameters
 {:.api .api-response .api-response-params}
@@ -3646,11 +3651,12 @@ Enumerates group assignments for an application.
 
 Parameter | Description                                                      | Param Type | DataType | Required | Default
 --------- | ---------------------------------------------------------------- | ---------- | -------- | -------- | -------
-applicationId       | `id` of an [app](#application-model)                  | URL        | String   | TRUE     |
-limit     | Specifies the number of results for a page                       | Query      | Number   | FALSE    | 20
+applicationId       | `id` of an [app](#application-model)                   | URL        | String   | TRUE     |
+limit     | Specifies the number of results per page (maximum 200)           | Query      | Number   | FALSE    | 20
 after     | Specifies the pagination cursor for the next page of assignments | Query      | String   | FALSE    |
 
-> The page cursor should treated as an opaque value and obtained through the next link relation. See [Pagination](/docs/api/getting_started/design_principles#pagination)
+The results will be [paginated][pagination] according to the `limit` parameter.
+If there are multiple pages of results, the Link header will contain a `next` link, which should be treated as an opaque value (follow it, don't parse it).
 
 ##### Response Parameters
 {:.api .api-response .api-response-params}
@@ -3908,8 +3914,7 @@ curl -v -X GET \
 -H "Accept: application/json" \
 -H "Content-Type: application/json" \
 -H "Authorization: SSWS ${api_token}" \
--d '{
-}' "https://{yourOktaDomain}/api/v1/apps/0oad5lTSBOMUBOBVVQSC/credentials/keys"
+"https://{yourOktaDomain}/api/v1/apps/0oad5lTSBOMUBOBVVQSC/credentials/keys"
 ~~~
 
 ##### Response Example
@@ -3974,8 +3979,7 @@ curl -v -X GET \
 -H "Accept: application/json" \
 -H "Content-Type: application/json" \
 -H "Authorization: SSWS ${api_token}" \
--d '{
-}' "https://{yourOktaDomain}/api/v1/apps/0oad5lTSBOMUBOBVVQSC/credentials/keys/mXtzOtml09Dg1ZCeKxTRBo3KrQuBWFkJ5oxhVagjTzo"
+"https://{yourOktaDomain}/api/v1/apps/0oad5lTSBOMUBOBVVQSC/credentials/keys/mXtzOtml09Dg1ZCeKxTRBo3KrQuBWFkJ5oxhVagjTzo"
 ~~~
 
 ##### Response Example
@@ -4025,8 +4029,7 @@ curl -v -X GET \
 -H "Accept: application/xml" \
 -H "Content-Type: application/json" \
 -H "Authorization: SSWS ${api_token}" \
--d '{
-}' "https://{yourOktaDomain}/api/v1/apps/0oa39sivhvvtqqFbu0h7/sso/saml/metadata?kid=mXtzOtml09Dg1ZCeKxTRBo3KrQuBWFkJ5oxhVagjTzo"
+"https://{yourOktaDomain}/api/v1/apps/0oa39sivhvvtqqFbu0h7/sso/saml/metadata?kid=mXtzOtml09Dg1ZCeKxTRBo3KrQuBWFkJ5oxhVagjTzo"
 ~~~
 
 ##### Response Example
@@ -4350,8 +4353,7 @@ curl -v -X GET \
 -H "Accept: application/json" \
 -H "Content-Type: application/json" \
 -H "Authorization: SSWS ${api_token}" \
--d '{
-}' "https://{yourOktaDomain}/api/v1/apps/0oad5lTSBOMUBOBVVQSC/credentials/csrs"
+"https://{yourOktaDomain}/api/v1/apps/0oad5lTSBOMUBOBVVQSC/credentials/csrs"
 ~~~
 
 ##### Response Example
@@ -4440,8 +4442,7 @@ curl -v -X GET \
 -H "Accept: application/json" \
 -H "Content-Type: application/json" \
 -H "Authorization: SSWS ${api_token}" \
--d '{
-}' "https://{yourOktaDomain}/api/v1/apps/0oad5lTSBOMUBOBVVQSC/credentials/csrs/h9zkutaSe7fZX0SwN1GqDApofgD1OW8g2B5l2azha50"
+"https://{yourOktaDomain}/api/v1/apps/0oad5lTSBOMUBOBVVQSC/credentials/csrs/h9zkutaSe7fZX0SwN1GqDApofgD1OW8g2B5l2azha50"
 ~~~
 
 ##### Response Example
@@ -4495,12 +4496,12 @@ Lists all tokens for the application
 |:--------------|:---------------------------------------------------------------------------------------------|:-----------|:---------|:---------|:--------|
 | applicationId | ID of the application                                                                        | URL        | String   | TRUE     |         |
 | expand        | Valid value: `scope`. If specified, scope details are included in the `_embedded` attribute. | Query      | String   | FALSE    |         |
-| limit         | The maximum number of tokens to return                                                       | Query      | Number   | FALSE    | 20      |
+| limit         | Specifies the number of results per page (maximum 200)                                       | Query      | Number   | FALSE    | 20      |
 | after         | Specifies the pagination cursor for the next page of tokens                                  | Query      | String   | FALSE    |         |
 
-> Note: The after cursor should treated as an opaque value and obtained through [the next link relation](/docs/api/getting_started/design_principles#pagination).
+The results will be [paginated][pagination] according to the `limit` parameter.
+If there are multiple pages of results, the Link header will contain a `next` link, which should be treated as an opaque value (follow it, don't parse it).
 
-* The maximum value for `limit` is 200.
 
 #### Request Example
 {:.api .api-request .api-request-example}
@@ -5643,3 +5644,6 @@ The application CSR model defines a certificate signing request for a signature 
 | kty              | cryptographic algorithm family for the CSR's keypair         | String                                                                      | FALSE    | FALSE  | TRUE     |           |           |            |
 | _links           | discoverable resources related to the CSR                    | [JSON HAL](http://tools.ietf.org/html/draft-kelly-json-hal-05)              | TRUE     | FALSE  | TRUE     |           |           |            |
 |------------------+--------------------------------------------------------------+-----------------------------------------------------------------------------|----------|--------|----------|-----------|-----------+------------|
+
+
+[pagination]: /docs/api/getting_started/design_principles#pagination

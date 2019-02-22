@@ -3,38 +3,58 @@ const TableOfContentsPage = require('../framework/page-objects/TableOfContentsPa
 const SideBarPage = require('../framework/page-objects/SideBarPage');
 const util = require('../framework/shared/util');
 
+var chai = require('chai');
+var chaiAsPromised = require('chai-as-promised');
+
+chai.use(chaiAsPromised);
+var expect = chai.expect;
+
 describe('table of contents navigation spec', () => {
-  const tocPage = new TableOfContentsPage();
+  const tocPage = new TableOfContentsPage('/test_page');
 
   beforeEach(() => {
-    tocPage.load();
+    tocPage.navigate();
     tocPage.resizeXLarge();  // At smaller sizes, table of contents is hidden
   });
 
-  it('has basic table of contents in the test page', () => {
-    expect(tocPage.level1ItemContains('Test Page')).toBe(true);
+  it('has basic table of contents in the test page', util.itHelper(async () => {
+    expect(await tocPage.getLevelOneItemText()).to.equal('Test Page');
+    expect(await tocPage.getLevelTwoItemsText()).to.include.members([
+      'Overview',
+      'First Section',
+      'Second Section',
+      'Third Section',
+      'Last Section'
+    ]);
+  }));
 
-    const expectedLevel2Items = ['Overview', 'First Section', 'Second Section', 'Third Section', 'Last Section'];
-    expect(tocPage.level2ItemsContain(expectedLevel2Items)).toBe(true);
-  });
+  util.itNoHeadless('has table of contents with multi level items', util.itHelper(async () => {
+    expect(await tocPage.getLevelThreeVisibleItemsText()).to.not.contain.members([
+      'Sub Section 1',
+      'Sub Section 2'
+    ]);
 
-  util.itNoHeadless('has table of contents with multi level items', () => {
-    const expectedLevel3Items = ['Sub Section 1', 'Sub Section 2'];
-    expect(tocPage.level3ItemsVisible(expectedLevel3Items)).toBe(false);
+    tocPage.clickLastSectionLink();
+    tocPage.waitForPresence(tocPage.getSubSectionOneLink());
+    expect(await tocPage.getLevelThreeVisibleItemsText()).to.contain.members([
+      'Sub Section 1',
+      'Sub Section 2'
+    ]);
 
-    tocPage.clickByLinkText('Last Section');
-    tocPage.waitForLinkToBeDisplayed('Sub Section 1');
-    expect(tocPage.level3ItemsVisible(expectedLevel3Items)).toBe(true);
+    tocPage.clickSubSectionOneLink();
+    tocPage.waitForPresence(tocPage.getImageSectionLink());
+    tocPage.waitForPresence(tocPage.getLinkSectionLink());
+    expect(await tocPage.getLevelFourVisibleItemsText()).to.contain.members([
+      'Image Section',
+      'Link Section'
+    ]);
 
-    const expectedLevel4Items = ['Image Section', 'Link Section'];
-    tocPage.clickByLinkText('Sub Section 1');
-    tocPage.waitForLinkToBeDisplayed('Image Section');
-    tocPage.waitForLinkToBeDisplayed('Link Section');
-    expect(tocPage.level4ItemsVisible(expectedLevel4Items)).toBe(true);
-
-    expect(tocPage.isTopOfPageLinkDisplayed()).toBe(true);
+    expect(await tocPage.isTopOfPageLinkDisplayed()).to.be.true;
     
-    tocPage.gotoTopOfPage();
-    expect(tocPage.level3ItemsVisible(expectedLevel3Items)).toBe(false);
-  });
+    tocPage.goToTopOfPage();
+    expect(await tocPage.getLevelThreeVisibleItemsText()).to.not.contain.members([
+      'Sub Section 1',
+      'Sub Section 2'
+    ]);
+  }));
 });

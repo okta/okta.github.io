@@ -14,7 +14,9 @@ title: Facebook
 
 1.3. Create a Facebook app. Instructions for creating a Facebook application can be found here: <https://developers.facebook.com/docs/apps/register>.
 
-1.4. On the "Product Setup" page, click the **Dashboard** link on the left-hand side.
+> NOTE: The `public_profile` and `email` OAuth scopes are automatically included by Okta. If your app requires more scopes, request a [Login Review](https://developers.facebook.com/docs/facebook-login/review). For more information on Facebook scopes, see [Permissions](https://developers.facebook.com/docs/facebook-login/permissions).
+
+1.4. On the "Product Setup" page, expand **Settings** on the left-hand side, then click **Basic**.
 
 1.5. Save the App ID and App Secret values so you can add them to the Okta configuration in the next section.
 
@@ -22,41 +24,38 @@ title: Facebook
 
 2.1. Sign in to your Okta org.
 
-2.2. On the main page, click on the **Admin** button in the upper right.
+2.2. On the main page, hover your cursor over **Users** until the menu opens, then click on **Social & Identity Providers**.
 
-2.3. Hover your cursor over **Users** until the menu opens, then click on **Social & Identity Providers**.
-
-2.4. On the Identity Providers page, click on **Add Identity Provider** > **Add Facebook**.
+2.3. On the Identity Providers page, click on **Add Identity Provider** > **Add Facebook**.
 
 * **Name:** We suggest using the name you would expect to see on a button, something like "Log in to Facebook".
-* **IdP Username:** Set to "idpuser.email".
-* **Match against:** Leave set to "Okta Username".
-* **Account Link Policy:** Leave set to "Automatic".
-* **Auto-Link Restrictions:** Leave set to "None".
-* **Provisioning Policy:** Leave set to "Automatic".
-* **Profile Master:** Leave unchecked if you want to be able to edit your user information in Okta, rather than having Facebook be the only source for all user updates.
-* **Group Assignments:** Leave set to "None", or specify a Group that you would like Facebook users to be added to.
 * **Client Id:** Paste in the App ID that you got from Facebook in step 1.5 above.
 * **Client Secret:** Paste in the App Secret that you got from Facebook in step 1.5 above.
 * **Scopes:** Leave set to the default.
 
-> For more information about these, see [Social Identity Provider Settings](social-settings).
+> For more information about these as well as the Advanced Settings, see [Social Identity Provider Settings](social-settings).
 
-2.5. Once you have completed all the fields, click on **Add Identity Provider**. You will be returned to the main "Identity Providers" page.
+2.4. Once you have completed all the fields, click on **Add Identity Provider**. You will be returned to the main "Identity Providers" page.
 
-2.6. Find the Facebook Identity Provider that you just added. Once you have found the entry, copy both the "Authorize URL" and "Redirect URI" (ending in `/authorize/callback`).
+2.5. Find the Facebook Identity Provider that you just added. Once you have found the entry, copy both the "Authorize URL" and "Redirect URI" (ending in `/authorize/callback`).
 
 ##### 3. Add the Okta Redirect URI to Facebook
 
-3.1. In your Facebook app configuration, select **Settings** in the left pane.
+3.1. Go to your main apps page on Facebook: <https://developers.facebook.com/apps/>
 
-3.2. Choose **Add Platform**.
+3.2. Select your app
 
-3.3. Choose **Website**.
+3.3. Scroll down to the "Add a Product" section and choose Choose **Facebook Login**.
 
-3.4. In the Site URL field, enter the Okta "Redirect URI" that you copied in step 2.6.
+3.4. On the first page of the Quickstart, choose **Web**.
 
-3.5. Click **Save Changes**.
+3.5. In the Site URL field, enter the Okta "Redirect URI" that you copied in step 2.5.
+
+3.6. Click **Save**, then click **Continue**.
+
+3.7. On the left-hand side, find "Facebook Login" and click on **Settings**.
+
+3.8. Under your app's "Client OAuth Settings", find the "Valid OAuth Redirect URIs" section and paste your's app's Redirect URI (from step 2.5) into this field.
 
 ##### 4. Register an OpenID Connect Application in Okta
 
@@ -70,7 +69,7 @@ title: Facebook
 
 4.5. Add one or more Redirect URIs. This is where the user will be directed to after they have authenticated with Facebook.
 
-4.6. Assign the group that you chose under "Group Assignments" in Step 2.4 above or assign "Everyone".
+4.6. Assign the group of your choosing (if you [set Group Assignments](social-settings) for your app), or assign "Everyone".
 
 4.7. Under "Grant type allowed", make sure "Implicit" is enabled.
 
@@ -88,15 +87,15 @@ The Okta Identity Provider that you created in section 2 above generated an Auth
 * **response_mode:** Determines how the authorization response should be returned. This should be `fragment`.
 * **state:** Protects against cross-site request forgery (CSRF).
 * **nonce:** A string included in the returned ID Token. Use it to associate a client session with an ID Token, and to mitigate replay attacks.
-* **redirect_uri:** The location where Okta returns a browser after the user has finished authenticating against their social login provider. This URL must start with "https" and must match one of the Redirect URIs that you configured previously in step 4.6.
+* **redirect_uri:** The location where Okta returns a browser after the user has finished authenticating against their social login provider. This URL must start with "https" and must match one of the Redirect URIs that you configured previously in step 4.5.
 
-For a full explanation of all these parameters, see here: [OAuth 2.0 Request parameters](/docs/api/resources/oidc#request-parameters-1).
+For a full explanation of all these parameters, see: [/authorize Request parameters](/docs/api/resources/oidc#request-parameters)
 
 An example of a complete URL looks like this: `https://{yourOktaDomain}/oauth2/v1/authorize?idp=0oaaq9pjc2ujmFZexample&client_id=GkGw4K49N4UEE1example&response_type=id_token&response_mode=fragment&scope=openid&redirect_uri=https%3A%2F%2FyourAppUrlHere.com%2Fsocial_auth&state=WM6D&nonce=YsG76jo`
 
 #### Using Facebook for Login
 
-There are three primary ways to kick off the sign-in with Facebook flow.
+There are four primary ways to kick off the sign-in with Facebook flow.
 
 **HTML Link**
 
@@ -105,6 +104,17 @@ One option is to create a link that the user clicks in order to log in. The HREF
 `<a href="https://{yourOktaDomain}/oauth2/v1/authorize?idp=0oaaq9pjc2ujmFZexample&client_id=GkGw4K49N4UEE1example&response_type=id_token&response_mode=fragment&scope=openid&redirect_uri=https%3A%2F%2FyourAppUrlHere.com%2Fsocial_auth&state=WM6D&nonce=YsG76jo">Login With Facebook</a>`
 
 After clicking this link, the user will be prompted to sign in with the social provider. After they succeed they will be returned to the specified `redirect_uri` along with an ID Token in JWT format.
+
+**Custom Okta-hosted Sign-in Page**
+
+If you have configured an [Custom Okta-hosted Sign-in Page](https://help.okta.com/en/prod/Content/Topics/Settings/custom-okta-hosted-sign-in-page.htm), you can add a "Login with Facebook" button by adding the following code:
+
+```js
+idps: [
+
+{type: 'FACEBOOK', id: '$Your_FB_IDP_ID_Here'}
+]
+```
 
 **Okta Sign-in Widget**
 

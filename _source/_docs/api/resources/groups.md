@@ -800,7 +800,7 @@ curl -v -X PUT \
 -d '{
   "profile": {
     "name": "Ameliorate Name",
-    "description": "Amended description",
+    "description": "Amended description"
   }
 }' "https://{yourOktaDomain}/api/v1/groups/00ub0oNGTSWTBKOLGLNR"
 ~~~
@@ -1116,32 +1116,32 @@ curl -v -X POST \
 -H "Content-Type: application/json" \
 -H "Authorization: SSWS ${api_token}" \
 -d '{
-      "type": "group_rule",
-      "name": "Engineering group rule",
-      "conditions": {
-          "people": {
-            "users": {
-              "exclude": [
-                "00u22w79JPMEeeuLr0g4"
-              ]
-            },
-            "groups": {
-              "exclude": []
-            }
-          },
-          "expression": {
-            "value": "user.role==\"Engineer\"",
-            "type": "urn:okta:expression:1.0"
-          }
-        },
-      "actions": {
-        "assignUserToGroups": {
-          "groupIds": [
-            "00gjitX9HqABSoqTB0g3"
-          ]
-        }
+  "type": "group_rule",
+  "name": "Engineering group rule",
+  "conditions": {
+    "people": {
+      "users": {
+        "exclude": [
+          "00u22w79JPMEeeuLr0g4"
+        ]
+      },
+      "groups": {
+        "exclude": []
       }
-    }' "https://{yourOktaDomain}/api/v1/groups/rules"
+    },
+    "expression": {
+      "value": "user.role==\"Engineer\"",
+      "type": "urn:okta:expression:1.0"
+    }
+  },
+  "actions": {
+    "assignUserToGroups": {
+      "groupIds": [
+        "00gjitX9HqABSoqTB0g3"
+      ]
+    }
+  }
+}' "https://{yourOktaDomain}/api/v1/groups/rules"
 ~~~
 
 ##### Response Example
@@ -1185,7 +1185,7 @@ curl -v -X POST \
 ### Update Group Rule
 {:.api .api-operation}
 
-{% api_operation post /api/v1/groups/rules/${ruleId} %}
+{% api_operation put /api/v1/groups/rules/${ruleId} %}
 
 Updates a group rule.
 
@@ -1219,34 +1219,34 @@ curl -v -X POST \
 -H "Content-Type: application/json" \
 -H "Authorization: SSWS ${api_token}" \
 -d '{
-      "type": "group_rule",
-      "id": "0pr3f7zMZZHPgUoWO0g4",
-      "status": "INACTIVE",
-      "name": "Engineering group rule",
-      "conditions": {
-          "people": {
-            "users": {
-              "exclude": [
-                "00u22w79JPMEeeuLr0g4"
-              ]
-            },
-            "groups": {
-              "exclude": []
-            }
-          },
-          "expression": {
-            "value": "user.role==\"Engineer\"",
-            "type": "urn:okta:expression:1.0"
-          }
-        },
-      "actions": {
-        "assignUserToGroups": {
-          "groupIds": [
-            "00gjitX9HqABSoqTB0g3"
-          ]
-        }
+  "type": "group_rule",
+  "id": "0pr3f7zMZZHPgUoWO0g4",
+  "status": "INACTIVE",
+  "name": "Engineering group rule",
+  "conditions": {
+    "people": {
+      "users": {
+        "exclude": [
+          "00u22w79JPMEeeuLr0g4"
+        ]
+      },
+      "groups": {
+        "exclude": []
       }
-    }' "https://{yourOktaDomain}/api/v1/groups/rules/0pr3f7zMZZHPgUoWO0g4"
+    },
+    "expression": {
+      "value": "user.role==\"Engineer\"",
+      "type": "urn:okta:expression:1.0"
+    }
+  },
+  "actions": {
+    "assignUserToGroups": {
+      "groupIds": [
+        "00gjitX9HqABSoqTB0g3"
+      ]
+    }
+  }
+}' "https://{yourOktaDomain}/api/v1/groups/rules/0pr3f7zMZZHPgUoWO0g4"
 ~~~
 
 ##### Response Example

@@ -25,7 +25,7 @@ image:{% asset_path 'blog/spring-webflux-apis/starbuxman.jpg' %}[alt=Josh Long,r
 
 Josh (a.k.a. https://twitter.com/starbuxman[@starbuxman]) authored the Java code in this post, I added the part about securing your API with OIDC. Even though I show how to do it with Okta, it should work with any OIDC provider.
 
-In this post, we'll show you how to build a REST API using Spring WebFlux. We'll also show you how you can use WebSockets to provide a stream of real time data from your application. 
+In this post, we'll show you how to build a REST API using Spring WebFlux. We'll also show you how you can use WebSockets to provide a stream of real time data from your application.
 
 == Get Started with Reactive Programming and Spring WebFlux
 
@@ -64,7 +64,7 @@ This will give you a new project with the following layout.
 ----
 ====
 
-The Maven build file, `pom.xml`, is pretty plain, but it assumes we're going to use JUnit 4. Let's upgrade JUnit to use JUnit 5, which is a more modern testing framework that's well supported by Spring Framework 5 and beyond. This owes in no small part to the fact that the lead of JUnit 5, Sam Brennan, is also the lead of the Spring Test framework. 
+The Maven build file, `pom.xml`, is pretty plain, but it assumes we're going to use JUnit 4. Let's upgrade JUnit to use JUnit 5, which is a more modern testing framework that's well supported by Spring Framework 5 and beyond. This owes in no small part to the fact that the most prolific committer of JUnit 5, Sam Brannen, is also the lead of the Spring Test framework.
 
 Add the following dependencies to your new application's build file, `pom.xml`: `org.junit.jupiter:junit-jupiter-engine` and give it a `scope` of `test`. Then, exclude the `junit:junit` dependency from the `spring-boot-starter-test` dependency.  This is the resulting `pom.xml`:
 
@@ -206,7 +206,7 @@ We're ready to get started! Let's turn to the first concern, data access.
 
 == Add Reactive Data Access with Spring Data
 
-We want to talk to a natively reactive data store. That is, the driver for the database needs to itself support asynchronous I/O, otherwise we won't be able to scale out reads without scaling out threads, which defeats the point. 
+We want to talk to a natively reactive data store. That is, the driver for the database needs to itself support asynchronous I/O, otherwise we won't be able to scale out reads without scaling out threads, which defeats the point.
 
 Spring Data, an umbrella data access framework, supports a number of reactive data access options including reactive Cassandra, reactive MongoDB, reactive Couchbase and reactive Redis. We've chosen MongoDB, so make sure you have a MongoDB database instance running on your local machine on the default host, port, and accessible with the default username and password. If you're on a Mac, you can use `brew install mongodb`. If you're on Debian-based Linux distributions, you can use `apt install mongodb`.
 
@@ -219,7 +219,7 @@ sudo chown -R `id -un` /data/db
 
 MongoDB is a document database, so the unit of interaction is a sparse document - think of it as a JSON stanza that gets persisted and is retrievable by a key (a.k.a., the document ID).
 
-Our application will support manipulating `Profile` objects. We're going to persist `Profile` entities (reactively) using a reactive Spring Data repository, as documents in MongoDB. 
+Our application will support manipulating `Profile` objects. We're going to persist `Profile` entities (reactively) using a reactive Spring Data repository, as documents in MongoDB.
 
 If you'd rather see the completed code from this tutorial, you can clone its GitHub repo using the following command:
 
@@ -262,7 +262,7 @@ class Profile {
 <4> ...and finally, this field `email` is the thing that we want to store and retrieve later
 ====
 
-In order to persist documents of type `Profile`, we declaratively define a repository. A repository, a design pattern from Eric Evans' seminal tome, _Domain Driven Design_, is a way of encapsulating object persistence. 
+In order to persist documents of type `Profile`, we declaratively define a repository. A repository, a design pattern from Eric Evans' seminal tome, _Domain Driven Design_, is a way of encapsulating object persistence.
 
 Repositories are responsible for persisting entities and value types. They present clients with a simple model for obtaining persistent objects and managing their life cycle. They decouple application and domain design from persistence technology and strategy choices. They also communicate design decisions about object access. And, finally, they allow easy substitution of implementation with a dummy implementation, ideal in testing. Spring Data's repositories support all these goals with interface definitions whose implementations are created by the framework at startup time.
 
@@ -320,7 +320,7 @@ Spring Data will create an object that implements all these methods. It will pro
 
 Spring Data repositories also supports custom queries. We could, for example, define a custom finder method, of the form `Flux<Profile> findByEmail(String email)`, in our `ProfileRepository`. This would result in a method being defined that looks for all documents in MongoDB with a predicate that matches the `email` attribute in the document to the parameter, `email`, in the method name. If you define custom queries, then this might be an appropriate thing to test.
 
-This is a sample application, of course, so we need some sample data with which to work. Let's run some initialization logic when the application starts up. We can define a bean of type `ApplicationListener<ApplicationReadyEvent>` when the application starts us. This will be an enviable opportunity for us to write some sample data into the database once the application's started up. 
+This is a sample application, of course, so we need some sample data with which to work. Let's run some initialization logic when the application starts up. We can define a bean of type `ApplicationListener<ApplicationReadyEvent>` when the application starts us. This will be an enviable opportunity for us to write some sample data into the database once the application's started up.
 
 Create a `SampleDataInitializer.java` class to popular the database on startup.
 
@@ -378,7 +378,7 @@ class SampleDataInitializer
 
 TIP: You can activate a Spring profile with a command line switch, `-Dspring.profiles.active=foo` where `foo` is the name of the profile you'd like to activate. You can also set an environment variable, `export SPRING_PROFILES_ACTIVE=foo` before running the `java` process for your Spring Boot application.
 
-You'll note that in the previous example we use two methods, `map(T)` and `flatMap(T)`. Map should be familiar if you've ever used the Java 8 `Stream` API. Map visits each record in a publisher and passes it through a lambda function which must transform it. The output of that transformation is then returned and accumulated into a new `Publisher`. So, the intermediate type after we return from our `map` operation is a `Publisher<Profile>`. 
+You'll note that in the previous example we use two methods, `map(T)` and `flatMap(T)`. Map should be familiar if you've ever used the Java 8 `Stream` API. Map visits each record in a publisher and passes it through a lambda function which must transform it. The output of that transformation is then returned and accumulated into a new `Publisher`. So, the intermediate type after we return from our `map` operation is a `Publisher<Profile>`.
 
 In the next line we then call `flatMap`. `flatMap` is just like `map`, except that it unpacks the return value of the lambda given if the value is itself contained in a `Publisher<T>`. In our case, the `repository.save(T)` method returns a `Mono<T>`. If we'd used `.map` instead of `flatMap(T)`, we'd have a `Flux<Mono<T>>`, when what we really want is a `Flux<T>`. We can cleanly solve this problem using `flatMap`.
 
@@ -472,21 +472,21 @@ That wasn't so bad, was it? Our service was pretty straightforward. The only nov
 
 Reactive code presents some subtle issues when testing. Remember, our code is asynchronous. It's possibly concurrent. Each `Subscriber<T>` could execute on a different thread because the pipeline is managed by a `Scheduler`. You can change which scheduler is to be used by calling `(Flux,Mono).subscribeOn(Scheduler)`. There's a convenient factory, `Schedulers.\*`, that lets you build a new `Scheduler` from, for example, a `java.util.concurrent.Executor`. You don't normally need to override the `Scheduler`, though. By default there's one thread per core and the scheduler will just work. You only really need to worry about it when the thing to which you're subscribing could end up blocking. If, for example, you end up making a call to a blocking JDBC datastore in your `Publisher<T>`, then you should scale up interactions with that datastore with more threads using a `Scheduler`.
 
-You need to understand that the `Scheduler` is present because it implies asynchronicity. This asynchronicity and concurrency is deterministic if you use the operators in the Reactor API: things  _will_ execute as they should. It's only ever problematic, or inscrutable, when attempting to poke at the state of the reactive pipeline from outside. 
+You need to understand that the `Scheduler` is present because it implies asynchronicity. This asynchronicity and concurrency is deterministic if you use the operators in the Reactor API: things  _will_ execute as they should. It's only ever problematic, or inscrutable, when attempting to poke at the state of the reactive pipeline from outside.
 
 Then things get a bit twisted. Reactor ships with some very convenient testing support that allow you to assert things about reactive `Publisher<T>` instances - what is going to be created and when - without having to worry about the schedulers. Let's look at some tests using the `StepVerifier` facility.
 
-In order for us to appreciate what's happening here, we need to take a moment and step back and revisit _test slices_. Test slices are a feature in Spring Boot that allow the client to load the types in a Spring `ApplicationContext` that are adjacent to the thing under test. 
+In order for us to appreciate what's happening here, we need to take a moment and step back and revisit _test slices_. Test slices are a feature in Spring Boot that allow the client to load the types in a Spring `ApplicationContext` that are adjacent to the thing under test.
 
 In this case, we're interested in testing the data access logic in the service. We are _not_ interested in testing the web functionality. We haven't even written the web functionality yet, for a start! A test slice lets us tell Spring Boot to load nothing by default and then we can bring pieces back in iteratively.
 
 When Spring Boot starts up it runs a slew of auto-configuration classes. Classes that produce objects that Spring in turn manages for us. The objects are provided by default assuming certain conditions are met. These conditions can include all sorts of things, like the presence of certain types on the classpath, properties in Spring's `Environment`, and more. When a Spring Boot application starts up, it is the sum of all the auto-configurations and user configuration given to it. It will be, for our application, database connectivity, object-record mapping (ORM), a webserver, and so much more.
 
-We only need the machinery related to  MongoDB and our `ProfileService`, in isolation. We'll use the  `@DataMongoTest` annotation to tell Spring Boot to autoconfigure all the things that could be implied in our MongoDB logic, while ignoring things like the web server, runtime and web components. 
+We only need the machinery related to  MongoDB and our `ProfileService`, in isolation. We'll use the  `@DataMongoTest` annotation to tell Spring Boot to autoconfigure all the things that could be implied in our MongoDB logic, while ignoring things like the web server, runtime and web components.
 
 This results in focused, faster test code that has the benefit of being easier to reproduce. The `@DataMongoTest` annotation is what's called a _test slice_ in the Spring Boot world. It supports testing a _slice_ of our application's functionality in isolation. There are numerous other test slices and you can easily create your own, too.
 
-Test slices can also contribute _new_ auto-configuration supporting tests, specifically. The `@DataMongoTest` does this. It can even run an _embedded_ MongoDB instance using the Flapdoodle library! 
+Test slices can also contribute _new_ auto-configuration supporting tests, specifically. The `@DataMongoTest` does this. It can even run an _embedded_ MongoDB instance using the Flapdoodle library!
 
 Create `ProfileServiceTest` to test the logic in your `ProfileService`.
 
@@ -601,7 +601,7 @@ JUnit 5 supports the same lifecycle methods and annotations (like `@Before`) as 
 
 === The Web: The Final Frontier
 
-We've got a data tier and a service. Let's stand up RESTful HTTP endpoints to facilitate access to the data. Spring has long had Spring MVC, a web framework that builds upon the Servlet specification. Spring MVC  has this concept of a controller - a class that has logic defined in handler methods that process incoming requests and then stages a response - usually a view or a representation of some server-side resource. 
+We've got a data tier and a service. Let's stand up RESTful HTTP endpoints to facilitate access to the data. Spring has long had Spring MVC, a web framework that builds upon the Servlet specification. Spring MVC  has this concept of a controller - a class that has logic defined in handler methods that process incoming requests and then stages a response - usually a view or a representation of some server-side resource.
 
 In the Spring MVC architecture, requests come in to the web container, they're routed to the right `Servlet` (in this case, the Spring MVC `DispatcherServlet`). The `DispatcherServlet` then forwards the request to the right handler method in the right controller based on any of a number of configuration details. Those details are typically annotations on the handler methods which themselves live on controller object instances.
 
@@ -679,13 +679,13 @@ class ProfileRestController {
 <5> This method supports creating a new `Profile` with an HTTP `POST` action. In this handler method we expect incoming requests to have a JSON body that the framework then marshals into a Java object, `Profile`.  This happens automatically based on the content-type of the incoming request and the configured, acceptable, convertible payloads supported by Spring WebFlux.
 ====
 
-This approach is great if you have a lot of related endpoints that share common dependencies. You can collocate, for example, the `GET`, `PUT`, `POST`, etc., handler logic for a particular resource in one controller class so they can all use the same injected service or validation logic.  
+This approach is great if you have a lot of related endpoints that share common dependencies. You can collocate, for example, the `GET`, `PUT`, `POST`, etc., handler logic for a particular resource in one controller class so they can all use the same injected service or validation logic.
 
 The controller approach is not new; Java web frameworks have been using something like it for _decades_ now. The older among us will remember using Apache Struts in the dawn of the 00's. This approach works well if you have a finite set of HTTP endpoints whose configuration is known a priori. It works well if you want to collocate related endpoints. It also works well if the request matching logic can be described declaratively using Spring's various annotations.
 
 This approach is also likely to be a perennial favorite for those coming from Spring MVC, as its familiar. Those annotations are exactly the same annotations from Spring MVC. But, this is _not_ Spring MVC. And this isn't, at least by default, the Servlet API. It's a brand new web runtime, Spring WebFlux, running - in this instance  -  on Netty.
 
-Spring Framework 5 changes things, though. Spring Framework 5 assumes a Java 8 baseline and with it lambdas and endless, functional, possibilities! 
+Spring Framework 5 changes things, though. Spring Framework 5 assumes a Java 8 baseline and with it lambdas and endless, functional, possibilities!
 
 A lot of what we're doing in a reactive web application lends itself to the functional programming style. Spring Framework 5 debuts a new functional reactive programming model that mirrors the controller-style programming model in Spring WebFlux. This new programming model is available exclusively in Spring WebFlux. Let's see an example.
 
@@ -874,21 +874,21 @@ class ProfileHandler {
 <4> this method centralizes all configuration for replies to read requests (for instance, those coming from `GET` verbs)
 ====
 
-Straightforward, right? I like this approach - the handler object centralizes processing for related resources into a single class, just like with the controller-style arrangement. We're also able to centralize routing logic in the `@Configuration` class. 
+Straightforward, right? I like this approach - the handler object centralizes processing for related resources into a single class, just like with the controller-style arrangement. We're also able to centralize routing logic in the `@Configuration` class.
 
-This means it's easier to see at a glance what routes have been configured. It's easier to refactor routing. Routing is also now more dynamic. We can change how requests are matched, and we can dynamically contribute endpoints. 
+This means it's easier to see at a glance what routes have been configured. It's easier to refactor routing. Routing is also now more dynamic. We can change how requests are matched, and we can dynamically contribute endpoints.
 
-The only drawback to this style is that your code is inextricably tied to the Spring WebFlux component model. Your handler methods in the `ProfileHandler` are, no question at all, tied to Spring WebFlux. From where I sit, that's OK. 
+The only drawback to this style is that your code is inextricably tied to the Spring WebFlux component model. Your handler methods in the `ProfileHandler` are, no question at all, tied to Spring WebFlux. From where I sit, that's OK.
 
 A controller is supposed to be a thin adapter layer on top of your service. Most of the business logic lives in the service layer, or below. As we've already seen, we can easily unit test my service. And anyway, testing my HTTP endpoints requires something altogether different.
 
 === Test the HTTP Endpoints
 
-We've seen two implementations of the same HTTP endpoints in this application. The classic endpoints are annotated with `@Profile("classic")`  where as the functional reactive endpoints are annotated with `@Profile("default")`. If no other profile is active, any bean tagged with the `default` profile will be active. So, if you _don't_ specify `classic`, the `default` bean will activate. 
+We've seen two implementations of the same HTTP endpoints in this application. The classic endpoints are annotated with `@Profile("classic")`  where as the functional reactive endpoints are annotated with `@Profile("default")`. If no other profile is active, any bean tagged with the `default` profile will be active. So, if you _don't_ specify `classic`, the `default` bean will activate.
 
 We should test both, even if they're just for demonstration purposes. I've extracted all the tests into a base class that I'll extend twice, activating each of the two profiles to test in isolation each of the HTTP endpoint styles. See https://github.com/oktadeveloper/okta-spring-webflux-react-example/blob/master/reactive-web/src/test/java/com/example/demo/ClassicProfileEndpointsTest.java[ClassicProfileEndpointsTest.java] and https://github.com/oktadeveloper/okta-spring-webflux-react-example/blob/master/reactive-web/src/test/java/com/example/demo/FunctionalProfileEndpointsTest.java[FunctionalProfileEndpointsTest.java] to see how each profile is activated.
 
-The `abstract` base class contains the most important aspects for testing our HTTP endpoints. 
+The `abstract` base class contains the most important aspects for testing our HTTP endpoints.
 .`src/test/java/com/example/demo/AbstractBaseProfileEndpoints.java`
 ====
 [source,java]
@@ -1035,9 +1035,9 @@ The `WebTestClient` is quite powerful. It's a test-centric alternative to the re
 
 TIP: https://github.com/json-path/JsonPath[JSON Path] is like XPath, a query language for declaratively traversing nodes in an XML document. It allows easy traversal of JSON stanzas. It also provides a predicate language which we can use to match.
 
-HTTP is great for a request-reply centric interaction with a service. It makes it easy to interrogate the HTTP service and get a response. But what if we're interested in listening to events? 
+HTTP is great for a request-reply centric interaction with a service. It makes it easy to interrogate the HTTP service and get a response. But what if we're interested in listening to events?
 
-We don't want to constantly poll - we'd rather the service tell us when something is happening. Our service supports creating and updating records. As a client to such a service, it'd be nice to have a firehose endpoint - but don't tell Twitter that! 
+We don't want to constantly poll - we'd rather the service tell us when something is happening. Our service supports creating and updating records. As a client to such a service, it'd be nice to have a firehose endpoint - but don't tell Twitter that!
 
 We could subscribe to such an endpoint and update the client state whenever there's a new record. We need a fully duplexed protocol to maintain a connection to the client and push data to the client from the service.
 
@@ -1045,15 +1045,15 @@ We could subscribe to such an endpoint and update the client state whenever ther
 
 Remember those `ApplicationEvent` instances that we published when a new record was created? Our goal now is to connect those events to websockets so that whenever a new event is published, a client gets a websocket notification.
 
-https://developer.mozilla.org/en-US/docs/Web/API/WebSockets_API[Websockets] are a  compelling option. They enable two-way communication  - client-to-service and service-to-client - on a connection. The protocol is particularly relevant for our use case because it's well supported in browsers. 
+https://developer.mozilla.org/en-US/docs/Web/API/WebSockets_API[Websockets] are a  compelling option. They enable two-way communication  - client-to-service and service-to-client - on a connection. The protocol is particularly relevant for our use case because it's well supported in browsers.
 
-A client connects to a server, sending an HTTP GET request to upgrade the connection to a WebSocket from a simple HTTP request. This is known as handshaking. Once the handshake is done, clients communicate in an encoded fashion over a different protocol. It's often used in web applications because it implies HTTP to initiate the discussion. 
+A client connects to a server, sending an HTTP GET request to upgrade the connection to a WebSocket from a simple HTTP request. This is known as handshaking. Once the handshake is done, clients communicate in an encoded fashion over a different protocol. It's often used in web applications because it implies HTTP to initiate the discussion.
 
 Modern HTTP browsers like Google Chrome and Mozilla's Firefox also support the protocol well, making it a snap to write a trivial JavaScript client that runs in an HTML page. (We'll get to the HTML client in a bit!)
 
 It's trivial to speak Websockets in Spring. So far, we've used `Publisher<T>` instances to communicate HTTP requests and responses back and forth. When we use websockets, which is an asynchronous, bi-directional protocol - we'll use... (you guessed it!): `Publisher<T>` instances!
 
-This is one of the nice things about Spring WebFlux. It's easy to figure out where to go next and how to do it. When in doubt, use a `Publisher<T>`! If you want to send finite payloads to the client as JSON payloads in a REST endpoint, use a `Publisher<T>`! Want to do asynchronous, server-side push using server-sent events (`text/event-stream`)? Use a `Publisher<T>`! Want to communicate using websockets in a bi-directional fashion? Use a `Publisher<T>`! 
+This is one of the nice things about Spring WebFlux. It's easy to figure out where to go next and how to do it. When in doubt, use a `Publisher<T>`! If you want to send finite payloads to the client as JSON payloads in a REST endpoint, use a `Publisher<T>`! Want to do asynchronous, server-side push using server-sent events (`text/event-stream`)? Use a `Publisher<T>`! Want to communicate using websockets in a bi-directional fashion? Use a `Publisher<T>`!
 
 It's much easier to simulate synchronous and blocking I/O with an asynchronous API like the reactive streams types than it is to simulate asynchronous APIs with synchronous and blocking types. This is why enterprise application integration is typically done in terms of messaging systems, not RPC.
 
@@ -1157,11 +1157,11 @@ class WebSocketConfiguration {
 <9> Don't forget to call `session.send(Publisher<WebSocketMessage)`! Otherwise none of this will work. :-) Or at least, that's what I'm told. :cough: Not saying it happened to me, or anything.. 'course not...
 ====
 
-All that was fairly straightforward, one hopes. Let's look at the most important bit - the `ProfileCreatedEventPublisher`. This code was harder for me to write than it is for you to read. 
+All that was fairly straightforward, one hopes. Let's look at the most important bit - the `ProfileCreatedEventPublisher`. This code was harder for me to write than it is for you to read.
 
 This component needs to act as a bridge; it needs to consume `ProfileCreatedEvent` events and then put them in an in-memory `BlockingQueue<ProfileCreatedEvent>` which our `Publisher<WebSocketMessage>` will drain in another thread. There's really not that much to it; what you need to understand is the `java.util.concurrent.BlockingQueue<T>` collection, more than anything. A `BlockingQueue<T>` is an interesting beast.
 
-If a consumer tries to drain an item from the queue, but the queue is empty, the queue will block until such time as a new item has been offered to the queue. This means we can simply loop forever, waiting for the next item to be added to the queue, and when it's available our code will return and we can publish the event on the `FluxSink<ProfileCreatedEvent> sink` pointer we've been given when the `Flux` is first created. 
+If a consumer tries to drain an item from the queue, but the queue is empty, the queue will block until such time as a new item has been offered to the queue. This means we can simply loop forever, waiting for the next item to be added to the queue, and when it's available our code will return and we can publish the event on the `FluxSink<ProfileCreatedEvent> sink` pointer we've been given when the `Flux` is first created.
 
 The `Consumer<T>.accept(FluxSink<ProfileCreatedEvent> sink)` method, in this case, is only called once when the application starts up and we try to create the `Flux` for the first time. In that callback we begin the while loop that will constantly try to drain the `BlockingQueue<T>`. This infinite, and un-ending while-loop _blocks_! Naturally. That's the whole point. So, we manage that ourselves using the previously configured `java.util.concurrent.Executor` instance.
 
@@ -1383,7 +1383,7 @@ All green! Nothing better than a green test suite, I always say. It looks like t
 
 == Next Steps
 
-We've looked at the need for asynchronous I/O, the missing computational metaphor, the reactive streams specification, Pivotal's Reactor project, Spring's new reactive groove, Spring Data Kay and reactive MongoDB, Spring MVC-style HTTP endpoints, functional programming with Java 8 and functional reactive HTTP endpoints, reactive websockets, integration with non-reactive event sources and - through it all - testing! 
+We've looked at the need for asynchronous I/O, the missing computational metaphor, the reactive streams specification, Pivotal's Reactor project, Spring's new reactive groove, Spring Data Kay and reactive MongoDB, Spring MVC-style HTTP endpoints, functional programming with Java 8 and functional reactive HTTP endpoints, reactive websockets, integration with non-reactive event sources and - through it all - testing!
 
 But this is just the beginning. We're missing security and a slick HTML client and security, after all...
 
