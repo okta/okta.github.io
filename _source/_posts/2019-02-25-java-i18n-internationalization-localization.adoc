@@ -336,9 +336,9 @@ TIP: If you don't have `svn` installed, go https://github.com/okta/samples-java-
 
 === Create an OIDC App on Okta
 
-If you already have an Okta Developer account, log in to it. If you don't, create one at https://developer.okta.com/signup-now/[developer.okta.com/signup]. After you're logged in to your Okta dashboard, complete the following steps:
+If you already have an Okta Developer account, log in to it. If you don't, create one at https://developer.okta.com/signup/[developer.okta.com/signup]. After you're logged in to your Okta dashboard, complete the following steps:
 
-. From the Applications page, choose **Add Application**.
+. From the **Applications** page, choose **Add Application**.
 . On the Create New Application page, select **Web**.
 . Give your app a memorable name, then click **Done**.
 
