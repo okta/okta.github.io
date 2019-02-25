@@ -7,7 +7,7 @@ tags: [java, i18n, l10n, internationalization, localization, spring boot]
 tweets:
 - "You've developed a Java app and you're ready to release it to the world! Is it localized for different languages? No?! We're here to help. Learn how to internationalize your app for different languages in this handy tutorial."
 - "What the heck is i18n and l10n and how do I add it to my Java app? This tutorial answers these questions and more!"
-// image: blog/java-i18n/duke-world.png
+image: blog/java-i18n/duke-world.png
 ---
 :page-liquid:
 
