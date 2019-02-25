@@ -1,6 +1,6 @@
 ---
 layout: blog_post
-title: "Java i18n and Localization (i18n and l10n)"
+title: "i18n in Java 11, Spring Boot, and JavaScript"
 author: mraible
 description: "Learn how to internationalize and localize your Java and Spring Boot apps."
 tags: [java, i18n, l10n, internationalization, localization, spring boot]
@@ -11,23 +11,15 @@ image: blog/java-i18n/duke-world.png
 ---
 :page-liquid:
 
-There are a number of acronyms related to internationalization and localization of an application. Most of them are long words, so their abbreviations are often `{first letter + number of letters + last letter}`. For example:
-
-* i18n: Internationalization
-* l10n: Localization
-* g11n: Globalization
-* i12y: Localizability
-* a11y: Accessibility
-
-The first two are the most important for this article. What is i18n and l18n? Internationalization is the process of making your application _capable_ of rendering its text in multiple languages. Localization means your application has been coded in such a way that it meets language, cultural, or other requirements of a particular locale. These requirements can include formats for date, time, and currency, as well as symbols, icons and colors, among many other things. i18n enables l10n.
+What are i18n and l10n? Internationalization (i18n) is the process of making your application _capable_ of rendering its text in multiple languages. Localization (l10n) means your application has been coded in such a way that it meets language, cultural, or other requirements of a particular locale. These requirements can include formats for date, time, and currency, as well as symbols, icons, and colors, among many other things. i18n enables l10n.
 
 Why is i18n and l10n important? Because you want to make your app accessible to as many users as possible! If you're a native English speaker, you're spoiled because English is currently the language of business, and many apps offer an English translation. Internationalizing your Java app is relatively straightforward, thanks to built-in mechanisms. Same goes for Spring Boot - it's there by default!
 
-This tutorial will show you how to internationalize a simple Java app, a Spring Boot app with Thymeleaf, and a JavaScript Widget.
+This tutorial will show you how to internationalize a simple Java app, in this case a Spring Boot app with Thymeleaf, and a JavaScript Widget.
 
 == Java i18n with Resource Bundles
 
-A _resource bundle_ is a `.properties` file that contains keys and values for specific languages. Using resource bundles allows you to make your code locale independent. To see how this works, create a new directory on your hard drive for this tutorial's exercises. For example, `java-i18n-example`. Navigate to this directory from the command line and create a `Hello.java` file.
+A _resource bundle_ is a `.properties` file that contains keys and values for specific languages. Using resource bundles allows you to make your code locale-independent. To see how this works, create a new directory on your hard drive for this tutorial's exercises. For example, `java-i18n-example`. Navigate to this directory from the command line and create a `Hello.java` file.
 
 [source,java]
 ----
@@ -41,7 +33,7 @@ public class Hello {
 
 Run `java Hello.java` and you should see "Hello, World!" printed to your console.
 
-If you see any error like the one below, it's because you're using a Java version < 11. https://openjdk.java.net/jeps/330[JEP 330] is an enhancement in Java 11 that allows you to run a single file of Java source code, without compiling it.
+If you see any error similar to the one below, it's because you're using a Java version < 11. https://openjdk.java.net/jeps/330[JEP 330] is an enhancement in Java 11 that allows you to run a single file of Java source code, without compiling it.
 
 [source,shell]
 ----
@@ -87,7 +79,7 @@ Available Java Versions
 ================================================================================
 ----
 
-Setup your environment to use the latest version of OpenJDK with the command below:
+Set up your environment to use the latest version of OpenJDK with the command below:
 
 [source,shell]
 ----
@@ -176,9 +168,9 @@ Hola Mundo
 
 Yeehaw! It's pretty cool that Java has i18n built-in, eh?
 
-== i18n with Spring Boot and Thymeleaf
+== Internationalization with Spring Boot and Thymeleaf
 
-Spring Boot has i18n built-in thanks to the Spring Framework and its https://docs.spring.io/spring-framework/docs/current/javadoc-api/org/springframework/context/MessageSource.html[`MessageSource`] implementations. There's a `ResourceBundleMessageSource` that builds on `ResourceBundle`, as well as a https://docs.spring.io/spring-framework/docs/current/javadoc-api/org/springframework/context/support/ReloadableResourceBundleMessageSource.html[`ReloadableResourceBundleMessageSource`] that should be self explanatory.
+Spring Boot has i18n built-in thanks to the Spring Framework and its https://docs.spring.io/spring-framework/docs/current/javadoc-api/org/springframework/context/MessageSource.html[`MessageSource`] implementations. There's a `ResourceBundleMessageSource` that builds on `ResourceBundle`, as well as a https://docs.spring.io/spring-framework/docs/current/javadoc-api/org/springframework/context/support/ReloadableResourceBundleMessageSource.html[`ReloadableResourceBundleMessageSource`] that should be self-explanatory.
 
 Inject `MessageSource` into a Spring bean and call `getMessage(key, args, locale)` to your heart's content! Using `MessageSource` will help you on the server, but what about in your UI? Let's create a quick app to show you how you can add internationalization with Thymeleaf.
 
@@ -186,10 +178,12 @@ Go to https://start.spring.io[start.spring.io] and select **Web** and **Thymelea
 
 [source,shell]
 ----
+mkdir bootiful-i18n
+cd bootiful-i18n
 http https://start.spring.io/starter.zip dependencies==web,thymeleaf -d | tar xvz
 ----
 
-Open the project in your favorite IDE and create `HelloController.java` in `src/main/java/com/example/demo`.
+Open the project in your favorite IDE and create `HomeController.java` in `src/main/java/com/example/demo`.
 
 [source,java]
 ----
@@ -233,7 +227,7 @@ Add a Spanish translation in the same directory, in a `messages_es.properties` f
 [source,properties]
 ----
 title=Bienvenida
-message=¡Hola! Espero que estés teniendo un gran día. 😃
+message=¡Hola! Espero que estas teniendo un gran día. 😃
 ----
 
 Spring Boot uses Spring's https://docs.spring.io/spring-framework/docs/current/javadoc-api/org/springframework/web/servlet/LocaleResolver.html[`LocaleResolver`] and (by default) its https://docs.spring.io/spring-framework/docs/current/javadoc-api/org/springframework/web/servlet/i18n/AcceptHeaderLocaleResolver.html[`AcceptHeaderLocalResolver`] implementation. If your browser sends an `accept-language` header, Spring Boot will try to find messages that match.
@@ -256,7 +250,7 @@ image::{% asset_path 'blog/java-i18n/home-in-spanish.png' %}[alt="Home in Spanis
 
 === Add the Ability to Change Locales with a URL Parameter
 
-This is a nice setup, but you might want to allow users to set their own language. You might've seen this on websites in the wild, where they have a flag that you can click on to change to that country's language. To make this possible in Spring Boot, create a `MvcConfigurer` class alongside your `HelloController`.
+This is a nice setup, but you might want to allow users to set their own language. You might've seen this on websites in the wild, where they have a flag that you can click to change to that country's language. To make this possible in Spring Boot, create a `MvcConfigurer` class alongside your `HomeController`.
 
 [source,java]
 ----
@@ -300,23 +294,33 @@ image::{% asset_path 'blog/java-i18n/override-browser-lang.png' %}[alt="Overridi
 
 Your language preference will be saved in a cookie, so if you navigate back to `http://localhost:8080`, the page will render in English. If you quit your browser and restart, you'll be back to using your browser's language preference.
 
-=== Hot Reloading Thymeleaf Templates and Resource Bundles
+=== Hot Reloading Thymeleaf Templates and Resource Bundles in Spring Boot 2.1
 
-If you'd like to modify your Thymeleaf templates (and message bundles) and see those changes immediately when you refresh your browser, you can add Spring Boot's https://docs.spring.io/spring-boot/docs/current/reference/html/using-boot-devtools.html[Developer Tools] to your `pom.xml`.
+If you'd like to modify your Thymeleaf templates and see those changes immediately when you refresh your browser, you can add Spring Boot's https://docs.spring.io/spring-boot/docs/current/reference/html/using-boot-devtools.html[Developer Tools] to your `pom.xml`.
 
 [source,xml]
 ----
 <dependency>
-  <groupId>org.springframework.boot</groupId>
-  <artifactId>spring-boot-devtools</artifactId>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-devtools</artifactId>
 </dependency>
 ----
 
-This turns off https://docs.spring.io/spring-boot/docs/current/reference/html/using-boot-devtools.html#using-boot-devtools-property-defaults[caching static resources automatically]. Note that changing static files will not restart your server automatically, you need to install a https://docs.spring.io/spring-boot/docs/current/reference/html/using-boot-devtools.html#using-boot-devtools-livereload[LiveReload browser extension] to see changes immediately.
+This is all you need to do if you have your IDE setup to copy resources when you save a file. If you're not using an IDE, you'll need to define a property in your `application.properties`:
 
-// NOTE: This doesn't work, any ideas?
+[source,properties]
+----
+spring.thymeleaf.prefix=file:src/main/resources/templates/
+----
 
-== Customizing the Language used by Okta's Sign-In Widget
+To hot-reload changes to your i18n bundles, you'll need to rebuild your project (for example, by running `./mvnw compile`). If you're using Eclipse, a rebuild and restart should happen automatically for you. If you're using IntelliJ IDEA, you'll need to go to your run configuration and change "On frame deactivation" to be **Update resources**.
+
+image::{% asset_path 'blog/java-i18n/idea-update-resources.png' %}[alt="Update resources in IntelliJ IDEA",width=800,align=center]
+
+
+See https://stackoverflow.com/a/54861291/65681[this Stack Overflow answer] for more information.
+
+== Customize the Language used by Okta's Sign-In Widget
 
 The last example I'd like to show you is a Spring Boot app with Okta's embedded https://developer.okta.com/code/javascript/okta_sign-in_widget[Sign-In Widget]. The Sign-In Widget is smart enough to render the language based on your browser's `accept-language` header.
 
@@ -406,7 +410,7 @@ public class MvcConfigurer implements WebMvcConfigurer {
 }
 ----
 
-Restart the custom-login app and navigate to `http://localhost:8080/?lang=en`. If you click the login button, you'll see that the widget is still rendered in Spanish. To fix this, crack open `LoginController` and add `language` as model attribute. You might noticed this determines the language by injecting `LocaleResolver` in the constructor and using `localeResolver.resolveLocale(request)`.
+Restart the custom-login app and navigate to `http://localhost:8080/?lang=en`. If you click the login button, you'll see that the widget is still rendered in Spanish. To fix this, crack open `LoginController` and add `language` as a model attribute. You might notice this determines the language by injecting `LocaleResolver` in the constructor and using `localeResolver.resolveLocale(request)`.
 
 [source,java]
 ----
@@ -456,7 +460,7 @@ Restart everything, go to `http://localhost:8080/?lang=en`, click the login butt
 
 image::{% asset_path 'blog/java-i18n/sign-in-widget-en.png' %}[alt="Sign-In Widget in English",width=800,align=center]
 
-=== Add i18n Bundles for Thymeleaf
+=== Add Internationalization Bundles for Thymeleaf
 
 To make it a bit more obvious that changing locales is working, create `messages.properties` in `src/main/resources`, and specify English translations for keys.
 
@@ -497,7 +501,7 @@ You gotta admit, this is sah-weet! There's something that tells me it'd be even 
 
 === Use the User's Locale from Okta
 
-To set the locale from the user's information in Okta, create a `OidcLocaleResolver` in the same directory as `MvcConfigurer`.
+To set the locale from the user's information in Okta, create an `OidcLocaleResolver` class in the same directory as `MvcConfigurer`.
 
 [source,java]
 ----
@@ -562,9 +566,9 @@ https://www.jhipster.tech[JHipster] is powered by Spring Boot and includes local
 
 I hope you've enjoyed this whirlwind tour of how to internationalize and localize your Java and Spring Boot applications. If you'd like to see the completed source code, you can https://github.com/oktadeveloper/okta-java-i18n-example[find it on GitHub].
 
-TIP: Baeldung's https://www.baeldung.com/spring-boot-internationalization[Guide to Internationalization in Spring Boot] was a useful resources when writing this post.
+TIP: Baeldung's https://www.baeldung.com/spring-boot-internationalization[Guide to Internationalization in Spring Boot] was a useful resource when writing this post.
 
-We like to write about Java and Spring Boot on this here blog. Here's a few of my favorites:
+We like to write about Java and Spring Boot on this here blog. Here are a few of my favorites:
 
 * link:/blog/2018/09/12/secure-java-ee-rest-api[Build a Java REST API with Java EE and OIDC]
 * link:/blog/2018/11/26/spring-boot-2-dot-1-oidc-oauth2-reactive-apis[Spring Boot 2.1: Outstanding OIDC, OAuth 2.0, and Reactive API Support]
