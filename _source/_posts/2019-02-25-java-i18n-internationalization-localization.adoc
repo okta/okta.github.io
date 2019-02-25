@@ -15,7 +15,7 @@ What are i18n and l10n? Internationalization (i18n) is the process of making you
 
 Why is i18n and l10n important? Because you want to make your app accessible to as many users as possible! If you're a native English speaker, you're spoiled because English is currently the language of business, and many apps offer an English translation. Internationalizing your Java app is relatively straightforward, thanks to built-in mechanisms. Same goes for Spring Boot - it's there by default!
 
-This tutorial will show you how to internationalize a simple Java app, in this case a Spring Boot app with Thymeleaf, and a JavaScript Widget.
+This tutorial will show you how to internationalize a simple Java app, a Spring Boot app with Thymeleaf, and a JavaScript Widget.
 
 == Java i18n with Resource Bundles
 
@@ -332,6 +332,8 @@ To begin, export the custom login example for Spring Boot:
 svn export https://github.com/okta/samples-java-spring/trunk/custom-login
 ----
 
+TIP: If you don't have `svn` installed, go https://github.com/okta/samples-java-spring/tree/master/custom-login[here] and click the **Download** button.
+
 === Create an OIDC App on Okta
 
 If you already have an Okta Developer account, log in to it. If you don't, create one at https://developer.okta.com/signup-now/[developer.okta.com/signup]. After you're logged in to your Okta dashboard, complete the following steps:
@@ -364,7 +366,7 @@ export OKTA_OAUTH2_CLIENT_ID={yourClientID}
 export OKTA_OAUTH2_CLIENT_SECRET={yourClientSecret}
 ----
 
-TIP: I recommend adding the above exports to a `.okta.env` file in the root of your project and adding `*.env` to `.gitignore`. Then run `source .okta.env` before you run your app.
+TIP: I recommend adding the above exports to a `.okta.env` file in the root of your project and adding `*.env` to `.gitignore`. Then run `source .okta.env` before you start your app.
 
 After making these changes, you can start the app using `./mvnw`. Open your browser to `http://localhost:8080`, click **Login** and you should be able to authenticate. If you still have your browser set to use Spanish first, you'll see that the Sign-In Widget automatically renders in Spanish.
 
@@ -552,7 +554,7 @@ image::{% asset_path 'blog/java-i18n/home-en.png' %}[alt="Home page in English",
 
 Yeehaw! Feels like Friday, doesn't it?! 😃
 
-=== i18n in Angular, React, and Vue
+=== i18n in JavaScript with Angular, React, and Vue
 
 In this post, you saw how to internationalize a basic Java program and a Spring Boot app. We barely scratched the service on how to do i18n in JavaScript. The good news is I have an excellent example of i18n for JavaScript apps.
 
