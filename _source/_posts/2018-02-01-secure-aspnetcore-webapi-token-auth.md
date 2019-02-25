@@ -490,6 +490,11 @@ services.AddAuthentication(options =>
 
 The second service tells the app that you want to use JWT-based authentication and the options for the JwtBearer middleware gives the authentication scheme some information it can use to validate the token is authentic. The audience comes from the Authorization Server page in Okta.
 
+Also, don't forget to tell the application to use your new authentication set up. in the `Configure()` function add the line below just before the `app.UseMvc() line.
+
+```cs
+app.UseAuthentication();
+```
 
 Finally, add the `Authorize` attribute to any controller or action you want to protect.
 

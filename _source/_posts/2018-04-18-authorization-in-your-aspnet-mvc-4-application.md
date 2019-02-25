@@ -66,12 +66,12 @@ Select **ID Token** and **Always** from the **Include in token type** setting.
 
 ## Map the OpenID Connect Groups to Roles
 
-Once you've got groups in the token, you'll need to map those to roles, since the authorization attributes in ASP.NET MVC uses roles to restrict access. To do this, open the `Startup.cs` file, and add in the `ConfigureAuth` method, there's a section of the code that sets up the OpenID Connect authentication called `UseOpenIdConnectAuthentication` that takes an argument of type `OpenIdConnectAuthenticationOptions`. Inside the `Notification` property, there is a function for `AuthorizationCodeReceived`. Below the `nameClaim`, add a loop to go through each of the groups in the token and a `RoleType` claim to the `identity` object.
+Once you've got groups in the token, you'll need to map those to roles, since the authorization attributes in ASP.NET MVC uses roles to restrict access. To do this, open the `Startup.cs` file, and add in the `Configuration()` method, there's a section of the code that sets up the OpenID Connect authentication called `UseOpenIdConnectAuthentication` that takes an argument of type `OpenIdConnectAuthenticationOptions`. Inside the `Notification` property, there is a function for `AuthorizationCodeReceived`. Before the `return` statement, add a loop to go through each of the groups in the token and a `RoleType` claim to the `identity` object.
 
 ```cs
 foreach(var group in userInfoResponse.Claims.Where(x => x.Type == "groups"))
 {
-        identity.AddClaim(new Claim(ClaimTypes.Role, group.Value));
+    n.AuthenticationTicket.Identity.AddClaim(new Claim(ClaimTypes.Role, group.Value));
 }
 ```
 Now you can use those roles in the authorize attribute.
