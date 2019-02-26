@@ -575,4 +575,4 @@ Follow us on your favorite social network { https://twitter.com/oktadev[Twitter]
 
 **Changelog:**
 
-* Feb 26, 2019: Fixed Spanish translation and simplified `Locale` resolution in `LoginController`. Thanks to https://twitter.com/danfenz/status/1100322287386062849[Daniel Fernández] and https://twitter.com/sam_brannen/status/1100339463329333250[Sam Brannen] for their help. You can see the example app changes in https://github.com/oktadeveloper/okta-java-i18n-example/pull/1[okta-java-i18n-example#1]; changes to this post can be viewed in https://github.com/okta/okta.github.io/pull/2459[okta.github.io#2459].
+* Feb 26, 2019: Fixed Spanish translation and simplified `Locale` resolution in `LoginController`. Thanks to https://twitter.com/danfenz/status/1100322287386062849[Daniel Fernández] and https://twitter.com/sam_brannen/status/1100339463329333250[Sam Brannen] for their help. You can see the example app changes in https://github.com/oktadeveloper/okta-java-i18n-example/pull/1[okta-java-i18n-example#1]; changes to this post can be viewed in https://github.com/okta/okta.github.io/pull/2740[okta.github.io#2740].
