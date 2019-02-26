@@ -227,7 +227,7 @@ Add a Spanish translation in the same directory, in a `messages_es.properties` f
 [source,properties]
 ----
 title=Bienvenida
-message=¡Hola! Espero que estas teniendo un gran día. 😃
+message=¡Hola! Espero que estés teniendo un gran día. 😃
 ----
 
 Spring Boot uses Spring's https://docs.spring.io/spring-framework/docs/current/javadoc-api/org/springframework/web/servlet/LocaleResolver.html[`LocaleResolver`] and (by default) its https://docs.spring.io/spring-framework/docs/current/javadoc-api/org/springframework/web/servlet/i18n/AcceptHeaderLocaleResolver.html[`AcceptHeaderLocalResolver`] implementation. If your browser sends an `accept-language` header, Spring Boot will try to find messages that match.
@@ -412,14 +412,14 @@ public class MvcConfigurer implements WebMvcConfigurer {
 }
 ----
 
-Restart the custom-login app and navigate to `http://localhost:8080/?lang=en`. If you click the login button, you'll see that the widget is still rendered in Spanish. To fix this, crack open `LoginController` and add `language` as a model attribute. You might notice this determines the language by injecting `LocaleResolver` in the constructor and using `localeResolver.resolveLocale(request)`.
+Restart the custom-login app and navigate to `http://localhost:8080/?lang=en`. If you click the login button, you'll see that the widget is still rendered in Spanish. To fix this, crack open `LoginController`, add `language` as a model attribute, and add a `Locale` parameter to the `login()` method. Spring MVC will resolve the `Locale` automatically with https://docs.spring.io/spring/docs/current/javadoc-api/org/springframework/web/servlet/mvc/method/annotation/ServletRequestMethodArgumentResolver.html[`ServletRequestMethodArgumentResolver`].
 
 [source,java]
 ----
 package com.okta.spring.example.controllers;
 
-import org.springframework.web.servlet.LocaleResolver;
 ...
+import java.util.Locale;
 
 @Controller
 public class LoginController {
@@ -427,21 +427,14 @@ public class LoginController {
     ...
     private static final String LANGUAGE = "language";
 
-    private final OktaOAuth2Properties oktaOAuth2Properties;
-    private final LocaleResolver localeResolver;
-
-    public LoginController(OktaOAuth2Properties oktaOAuth2Properties, LocaleResolver localeResolver) {
-        this.oktaOAuth2Properties = oktaOAuth2Properties;
-        this.localeResolver = localeResolver;
-    }
-
     @GetMapping(value = "/custom-login")
     public ModelAndView login(HttpServletRequest request,
-                              @RequestParam(name = "state", required = false) String state)
+                              @RequestParam(name = "state", required = false) String state,
+                              Locale locale)
                               throws MalformedURLException {
 
         ...
-        mav.addObject(LANGUAGE, localeResolver.resolveLocale(request));
+        mav.addObject(LANGUAGE, locale);
 
         return mav;
     }
@@ -450,7 +443,7 @@ public class LoginController {
 }
 ----
 
-Then modify `src/main/resources/templates/login.html` and add a `config.language` setting that reads this value.
+Then modify `custom-login/src/main/resources/templates/login.html` and add a `config.language` setting that reads this value.
 
 [source,js]
 ----
@@ -464,7 +457,7 @@ image::{% asset_path 'blog/java-i18n/sign-in-widget-en.png' %}[alt="Sign-In Widg
 
 === Add Internationalization Bundles for Thymeleaf
 
-To make it a bit more obvious that changing locales is working, create `messages.properties` in `src/main/resources`, and specify English translations for keys.
+To make it a bit more obvious that changing locales is working, create `messages.properties` in `custom-login/src/main/resources`, and specify English translations for keys.
 
 [source,properties]
 ----
@@ -480,7 +473,7 @@ hello=Hola
 welcome=¡Bienvenido a casa {0}!
 ----
 
-Open `src/main/resources/templates/home.html` and change `<p>Hello!</p>` to the following:
+Open `custom-login/src/main/resources/templates/home.html` and change `<p>Hello!</p>` to the following:
 
 [source,html]
 ----
@@ -579,3 +572,7 @@ We like to write about Java and Spring Boot on this here blog. Here are a few of
 * link:/blog/2018/03/01/develop-microservices-jhipster-oauth[Develop a Microservices Architecture with OAuth 2.0 and JHipster]
 
 Follow us on your favorite social network { https://twitter.com/oktadev[Twitter], https://www.linkedin.com/company/oktadev[LinkedIn], https://www.facebook.com/oktadevelopers/[Facebook], https://www.youtube.com/channel/UC5AMiWqFVFxF1q9Ya1FuZ_Q[YouTube] } to be notified when we publish awesome content in the future.
+
+**Changelog:**
+
+* Feb 26, 2019: Fixed Spanish translation and simplified `Locale` resolution in `LoginController`. Thanks to https://twitter.com/danfenz/status/1100322287386062849[Daniel Fernández] and https://twitter.com/sam_brannen/status/1100339463329333250[Sam Brannen] for their help. You can see the example app changes in https://github.com/oktadeveloper/okta-java-i18n-example/pull/1[okta-java-i18n-example#1]; changes to this post can be viewed in https://github.com/okta/okta.github.io/pull/2459[okta.github.io#2459].
