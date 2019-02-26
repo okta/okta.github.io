@@ -1,0 +1,16 @@
+---
+layout: null
+---
+{%- assign tweetIndex = 0 -%}
+{%- assign posts = site.posts | reverse -%}
+{%- for post in posts -%}
+  {%- assign tags = post.tags | join: ' ' -%}
+  {%- if post.tweets and tags contains "angular" or tags contains "java" or tag contains "spring boot" or tags contains "dotnet" or tags contains "react" or tags contains "aspnet" %}
+{{ post.tweets[tweetIndex] | xml_escape }} {{ site.url }}{{ post.url }} { from the archives }
+    {%- for tag in post.tags -%}
+      {{ tag | remove: ' ' | remove: '-' | prepend: ' #' }}
+    {%- endfor -%}
+  {%- else -%}
+    {%- continue -%}
+  {%- endif -%}
+{%- endfor -%}
