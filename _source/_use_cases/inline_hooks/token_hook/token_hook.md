@@ -2,6 +2,8 @@
 layout: docs_page
 title: Token Inline Hook
 excerpt: Customize tokens returned by the Okta API Access Management process flow.
+redirect_from:
+    - "/use_cases/inline_hooks/api_am_hook/api_am_hook"
 ---
 
 # Token Inline Hook

@@ -29,7 +29,11 @@ You'll receive an email to activate your account and change your temporary passw
 
 At the time of this writing, the easiest way to create a SAML-aware Spring Boot application is to use Spring Security's [SAML DSL project](https://github.com/spring-projects/spring-security-saml-dsl). It contains a sample project that provides [instructions](https://github.com/spring-projects/spring-security-saml-dsl/blob/master/samples/spring-security-saml-dsl-sample/README.md) for configuring Okta as a SAML provider. These instructions will likely work for you if you're an experienced Spring Boot and Okta developer. If you're new to both, this "start from scratch" tutorial might work better for you.
 
-Just like I did, the first thing you'll need to do is create a developer account at [https://developer.okta.com](https://developer.okta.com/signup/). After activating your account, log in to it. If you just created an account, you'll see a screen similar to the one below.
+Just like I did, the first thing you'll need to do is create an Okta account at [okta.com/integrate/signup](https://www.okta.com/integrate/signup/). 
+
+**NOTE:** This is a different signup URL than our normal developer flow, and is specifically for folks building integrations with Okta.
+
+After activating your account, log in to it. If you just created an account, you'll see a screen similar to the one below.
 
 {% img blog/spring-boot-saml/okta-dev-console.png alt:"Okta Dev Console" width:"800" %}{: .center-image }
 
@@ -245,6 +249,7 @@ Have questions or comments? Post your question to Stack Overflow with the "[okta
 
 **Changelog:**
 
+* Feb 28, 2019: Changed signup link to <https://www.okta.com/integrate/signup/>. This is now the place to go for folks integrating apps with Okta (e.g., SSO). For custom apps, [developer.okta.com/signup](https://developer.okta.com/signup/) can be used. Note that developer accounts only support OIDC apps.
 * Feb 14, 2018: Updated to use Spring Boot 1.5.10 and `classpath:saml/keystore.jks` for the keystore path. See the code changes in [oktadeveloper/okta-spring-boot-saml-example#6](https://github.com/oktadeveloper/okta-spring-boot-saml-example/pull/6). Changes to this article can be viewed in [okta/okta.github.io#1760](https://github.com/okta/okta.github.io/pull/1760).
 * Oct 10, 2017: Updated instructions for the [Okta Developer Console](/blog/2017/09/25/all-new-developer-console).
 * Apr 20, 2017: Thanks to [Alexey Soshin](https://github.com/AlexeySoshin) for contributing a [pull request](https://github.com/oktadeveloper/okta-spring-boot-saml-example/pull/2) to make the code in this blog post more bootiful!
