@@ -70,10 +70,10 @@
       {% endif %}
       </li>
       <li{% if page.id contains '/genericoidc' %} class="is-active"{% endif %}>
-      <a href = "/authentication-guide/genericoidc/">Generic OpenID Connect IdP</a>
-      {% if page.id contains "genericoidc" %}
+      <a href = "/authentication-guide/generic-oidc/">Generic OpenID Connect IdP</a>
+      {% if page.id contains "generic-oidc" %}
         <ul>{% assign guides = site.authentication-guide | sort: 'weight' %}
-          {% for guide in guides %}{% unless guide.id contains "genericoidc" %}{% continue %}{% endunless %}
+          {% for guide in guides %}{% unless guide.id contains "generic-oidc" %}{% continue %}{% endunless %}
             {% if guide.id contains "/index" %}{% continue %}{% endif %}
               <li{% if guide.title == page.title %} class="is-active"{% endif %}>
                 <a href="{{ guide.id }}">{{ guide.title }}</a>
