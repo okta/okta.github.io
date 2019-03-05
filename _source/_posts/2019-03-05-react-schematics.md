@@ -80,7 +80,7 @@ describe('rsi', () => {
 });
 ```
 
-One neat thing about Schematics is they don't perform any direct actions on your filesystem. Instead, you specify actions against a `Tree`. The `Tree` is a data structure with a set of files that already exist and a staging area (of files that will contain new/updated code). 
+One neat thing about Schematics is they don't perform any direct actions on your filesystem. Instead, you specify actions against a `Tree`. The `Tree` is a data structure with a set of files that already exist and a staging area (of files that contain new/updated code). 
 
 ## Schematics with React
 
@@ -92,13 +92,8 @@ The [reactstrap docs](https://reactstrap.github.io/) provide installation instru
 These are the steps you will automate with the `rsi` schematic.
 
 1. `npm i bootstrap reactstrap`
-2. Import Bootstrap CSS:
-
-        import 'bootstrap/dist/css/bootstrap.min.css';
-
-3. You can then import and use reactstrap components:
-
-        import { Button } from 'reactstrap';
+2. Import Bootstrap's CSS
+3. Import and use reactstrap components
 
 You can use [Schematics Utilities](https://nitayneeman.github.io/schematics-utilities/) to automate adding dependencies, among other things. Start by opening a terminal window and installing `schematic-utilities` in the `rsi` project you created.
 
