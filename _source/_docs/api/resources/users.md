@@ -913,13 +913,13 @@ The first three parameters correspond to different types of lists:
 - [List All Users](#list-all-users) (no parameters)
 - [Find Users](#find-users) (`q`)
 - [List Users with a Filter](#list-users-with-a-filter) (`filter`)
-- [List Users with Search](#list-users-with-search) (`search`) {% api_lifecycle ea %}
+- [List Users with Search](#list-users-with-search) (`search`)
 
 | Parameter | Description                                                                                                                                  | Param Type | DataType | Required |
 |:----------|:---------------------------------------------------------------------------------------------------------------------------------------------|:-----------|:---------|:---------|
 | q         | Finds a user that matches `firstName`, `lastName`, and `email` properties                                                                    | Query      | String   | FALSE    |
 | filter    | [Filters](/docs/api/getting_started/design_principles#filtering) users with a supported expression for a subset of properties           | Query      | String   | FALSE    |
-| search    | Searches for users with a supported [filtering](/docs/api/getting_started/design_principles#filtering) expression for most properties {% api_lifecycle ea %} | Query      | String   | FALSE    |
+| search    | Searches for users with a supported [filtering](/docs/api/getting_started/design_principles#filtering) expression for most properties  | Query      | String   | FALSE    |
 | limit     | Specifies the number of results returned (maximum 200)                                                                                       | Query      | Number   | FALSE    |
 | after     | Specifies the pagination cursor for the next page of users                                                                                   | Query      | String   | FALSE    |
 
@@ -1260,7 +1260,7 @@ curl -v -X GET \
 #### List Users with Search
 {:.api .api-operation}
 
-> Listing users with search is an {% api_lifecycle ea %} feature and should not be used as a part of any critical flows, like authentication.
+> Listing users with search should not be used as a part of any critical flows, like authentication.
 
 Searches for users based on the properties specified in the search parameter (case insensitive)
 
@@ -4073,8 +4073,8 @@ A hashed password may be specified in a Password Object when creating or updatin
 | Property   | DataType | Description                                                                                                 | Required                           | Min Value          | Max Value          |
 |:-----------|:---------|:------------------------------------------------------------------------------------------------------------|:-----------------------------------|:-------------------|:-------------------|
 | algorithm  | String   | The algorithm used to hash the password. Must be set to `BCRYPT` or `SHA-256`                               | TRUE                               | N/A                | N/A                |
-| value      | String   | For `SHA-256`: This is the actual base64-encoded hashed password. For `BCRYPT`: This is the actual radix64-encoded hashed password.                                                                   | TRUE                               | N/A                | N/A                |
-| salt       | String   | For `SHA-256`: Specifies the base64-encoded password salt used to generate the hash. For `BCRYPT`: Specifies the radix64-encoded password salt used to generate the hash.                                                       | TRUE                               | 22 (only for `BCRYPT` algorithm) | 22 (only for `BCRYPT` algorithm) |
+| value      | String   | For `SHA-256, SHA1, MD5`: This is the actual base64-encoded hashed password. For `BCRYPT`: This is the actual radix64-encoded hashed password.                                                                   | TRUE                               | N/A                | N/A                |
+| salt       | String   | For `SHA-256, SHA-1, MD5`: Specifies the base64-encoded password salt used to generate the hash. For `BCRYPT`: Specifies the radix64-encoded password salt used to generate the hash.                                                       | TRUE                               | 22 (only for `BCRYPT` algorithm) | 22 (only for `BCRYPT` algorithm) |
 | workFactor | Integer  | Governs the strength of the hash, and the time required to compute it. Only relevant for `BCRYPT` algorithm | Only for `BCRYPT` algorithm        | 1                  | 20                 |
 | saltOrder  | String   | Specifies whether salt was pre- or postfixed to password before hashing. Only relevant for `SHA-256` algorithm. Must be set to `PREFIX` or `POSTFIX` | Only for `SHA-256` algorithm      | N/A                | N/A                |
 
