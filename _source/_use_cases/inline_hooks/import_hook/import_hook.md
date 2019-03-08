@@ -27,7 +27,7 @@ For steps to enable this inline hook, see below, [Enabling an Import Inline Hook
 
 ## About
 
-The Import Inline Hook enables you to add custom logic to the process of importing new users into Okta from an app. You can change the values of attributes in the app user profile and Okta user profile, and you can control whether the imported user is treated as a match for an existing user or not.
+The Import Inline Hook enables you to add custom logic to the process of importing new users into Okta from an app. You can resolve conflicts in user name or other profile attributes, modify values of profile attributes, and control whether the imported user is treated as a match for an existing user or not.
 
 ## Objects in the Request from Okta
 
@@ -50,15 +50,15 @@ You can change the values of the attributes by means of the `commands` object yo
 The current default action that Okta will take in the case of the user being imported. The two possible values are:
 
  - `CREATE_USER`: A new Okta user profile will be created for the user.
- - `LINK_USER`: The user will be treated as a match for the existing Okta user indicated in the `data.user` object.
+ - `LINK_USER`: The user will be treated as a match for the existing Okta user identified by the value of `data.user.id`.
  
  You can change the action that will be taken by means of the `commands` object you return.
 
 ### data.context
 
-This object contains a number of sub-objects, each of which provides some time of contextual information. You cannot affect these objects by means of the commands you return. The following sub-objects are included:
+This object contains a number of sub-objects, each of which provides some type of contextual information. You cannot affect these objects by means of the commands you return. The following sub-objects are included:
 
- - `data.context.conflicts`: List of the user attributes that are in conflict.
+ - `data.context.conflicts`: List of user profile attributes that are in conflict.
  - `data.context.application`: Details of the app from which the user is being imported.
  - `data.context.job`: Details of the import job being run.
  - `data.context.matches`: List of Okta users currently matched to the app user based on import matching. There can be more than one match.
@@ -85,7 +85,7 @@ The following commands are supported for the Token Inline Hook type:
 |---------------------------------|---------------------------------------------------------------------------------------------------------------------------|
 | com.okta.appUser.profile.update | Change values of attributes in the user's app user profile.                                                               |
 | com.okta.user.profile.update    | Change values of attributes in the user's Okta user profile.                                                              |
-| com.okta.action.update          | Specify whether to create a new Okta user for the user being imported, or treat them as a match of an existing Okta user. |
+| com.okta.action.update          | Specify whether to create a new Okta user for the user being imported or treat them as a match of an existing Okta user. |
 
 When using the `com.okta.action.update` command to specify that the user should be treated as a match, you need to also provide a `com.okta.user.profile.update` command that serves to specify which Okta user to match to. See [Specifying that the User is a Match](#specifying-that-the-user-is-a-match) below.
 
