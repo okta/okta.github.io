@@ -4072,11 +4072,11 @@ A hashed password may be specified in a Password Object when creating or updatin
 
 | Property   | DataType | Description                                                                                                 | Required                           | Min Value          | Max Value          |
 |:-----------|:---------|:------------------------------------------------------------------------------------------------------------|:-----------------------------------|:-------------------|:-------------------|
-| algorithm  | String   | The algorithm used to hash the password. Must be set to `BCRYPT` or `SHA-256`                               | TRUE                               | N/A                | N/A                |
-| value      | String   | For `SHA-256, SHA1, MD5`: This is the actual base64-encoded hashed password. For `BCRYPT`: This is the actual radix64-encoded hashed password.                                                                   | TRUE                               | N/A                | N/A                |
-| salt       | String   | For `SHA-256, SHA-1, MD5`: Specifies the base64-encoded password salt used to generate the hash. For `BCRYPT`: Specifies the radix64-encoded password salt used to generate the hash.                                                       | TRUE                               | 22 (only for `BCRYPT` algorithm) | 22 (only for `BCRYPT` algorithm) |
+| algorithm  | String   | The algorithm used to hash the password. Must be set to `BCRYPT` or `SHA-256` or `SHA-1` or `MD5`                               | TRUE                               | N/A                | N/A                |
+| value      | String   | For `SHA-256`, `SHA-1`, `MD5`: This is the actual base64-encoded hashed password. For `BCRYPT`: This is the actual radix64-encoded hashed password.                                                                   | TRUE                               | N/A                | N/A                |
+| salt       | String   | For `SHA-256`, `SHA-1`, `MD5`: Specifies the base64-encoded password salt used to generate the hash. For `BCRYPT`: Specifies the radix64-encoded password salt used to generate the hash.                                                       | TRUE                               | 22 (only for `BCRYPT` algorithm) | 22 (only for `BCRYPT` algorithm) |
 | workFactor | Integer  | Governs the strength of the hash, and the time required to compute it. Only relevant for `BCRYPT` algorithm | Only for `BCRYPT` algorithm        | 1                  | 20                 |
-| saltOrder  | String   | Specifies whether salt was pre- or postfixed to password before hashing. Only relevant for `SHA-256` algorithm. Must be set to `PREFIX` or `POSTFIX` | Only for `SHA-256` algorithm      | N/A                | N/A                |
+| saltOrder  | String   | Specifies whether salt was pre- or postfixed to password before hashing. Only relevant for `SHA-256`, `SHA-1`, `MD5` algorithm. Must be set to `PREFIX` or `POSTFIX` | Only for `SHA-256` algorithm      | N/A                | N/A                |
 
 ###### BCRYPT Hashed Password Object Example
 
@@ -4104,9 +4104,35 @@ A hashed password may be specified in a Password Object when creating or updatin
 }
 ~~~
 
+###### SHA-1 Hashed Password Object Example
+
+~~~sh
+"password" : {
+  "hash": {
+    "algorithm": "SHA-1",
+    "salt": "UEO3wsAsgzQ=",
+    "saltOrder": "POSTFIX",
+    "value": "xjrauE6J6kbjcvMjWSSc+PsBBls="
+  }
+}
+~~~
+
+###### MD5 Hashed Password Object Example
+
+~~~sh
+"password" : {
+  "hash": {
+    "algorithm": "MD5",
+    "salt": "TXlTYWx0",
+    "saltOrder": "PREFIX",
+    "value": "jqACjUUFXM1XE6NiLALAbA=="
+  }
+}
+~~~
+
 ##### Hashing Function
 
-Okta supports the `BCRYPT` and `SHA-256` hashing functions for password import, when the feature is enabled.
+Okta supports the `BCRYPT`, `SHA-256`, `SHA-1`, and `MD5` hashing functions for password import.
 
 ##### Default Password Policy
 
