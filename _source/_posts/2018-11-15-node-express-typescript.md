@@ -487,7 +487,7 @@ One of the great features of Okta is allowing users of your application to sign 
 The last step to securing your Node.js application is to configure Express to use the [Okta OpenId Connect (OIDC) middleware](https://www.npmjs.com/package/@okta/oidc-middleware).
 
 ```bash
-npm install @okta/oidc-middleware express-session
+npm install @okta/oidc-middleware@1.0.2 express-session
 npm install --save-dev @types/express-session
 ```
 

@@ -17,7 +17,7 @@ This document details the features and syntax of Okta's Expression Language, whi
 ## Referencing User Attributes
 When you create an Okta expression, you can reference any attribute that lives on an Okta user profile or App user profile.
 
-### Okta user profile
+### Okta User Profile
 Every user has an Okta user profile. The Okta user profile is the central source of truth for a user's core attributes. To reference an Okta user profile attribute, just reference `user` and specify the attribute variable name.
 
 
@@ -25,7 +25,7 @@ Syntax  | Definitions | Examples
 -------- | ---------- | ------------
 `user.$attribute` | `user` reference to the Okta user<br>`$attribute` the attribute variable name | user.firstName<br>user.lastName<br>user.username<br>user.email
 
-### Application user profile
+### Application User Profile
 In addition to an Okta user profile, all users have separate Application user profile for each of their applications. Application user profiles are used to store application specific information about users, such as application username or user role. To reference an App user profile attribute, just specify the application variable and the attribute variable in that application's App user profile. In specifying the application, you can either name the specific application you're referencing or use an implicit reference to an in-context application.
 
 Syntax  | Definitions | Examples
@@ -33,7 +33,7 @@ Syntax  | Definitions | Examples
 `$appuser.$attribute` | `$appuser` explicit reference to specific app<br>`$attribute` the attribute variable name | zendesk.firstName<br>active_directory.managerUpn<br>google_apps.email
 `appuser.$attribute` | `appuser` implicit reference to in-context app<br>`$attribute` the attribute variable name | appuser.firstName
 
-### IdP user profile
+### IdP User Profile
 In addition to an Okta user profile, some users have separate IdP user profiles for their external Identity Provider. These IdP user profiles are used to store identity provider specific information about a user. This data can be used in an EL expression to transform an external user's username into the equivalent Okta username. To reference an IdP user profile attribute, specify the identity provider variable and the corresponding attribute variable for that identity provider's IdP user profile. This profile is only available when specifying the username transform used to generate an Okta username for the IdP user.
 
 Syntax                | Definitions                                                                                | Examples
@@ -46,14 +46,14 @@ Syntax                | Definitions                                             
 ## Referencing Application and Organization Properties
 In addition to referencing user attributes, you can also reference App properties and the properties of your Organization.  To reference a particular attribute, just specify the appropriate binding and the attribute variable name.  Here are some examples:
 
-### Application properties
+### Application Properties
 
 Syntax | Definitions | Examples
 ------ | ---------- | ------------
 `$app.$attribute` | `$app` explicit reference to specific app instance<br>`$attribute` the attribute variable name | google_apps_app.domain<br>zendesk_app.companySubDomain
 `app.$attribute` | `app` implicit reference to in-context app instance<br>`$attribute` the attribute variable name | app.domain<br>app.companySubDomain
 
-### Organization properties
+### Organization Properties
 
 Syntax  | Definitions | Examples
 -------- | ---------- | ------------
@@ -92,8 +92,8 @@ The following {% api_lifecycle deprecated %} functions perform some of the same 
 
 Function  | Example | Input | Output
 -------- | --------- | -------| --------
-`toUppercase(string)` | `toUppercase(source.firstName)` | Alexander | ALEXANDER
-`toLowercase(string)` | `toLowercase(source.firstName)` | AlexANDER | alexander
+`toUpperCase(string)` | `toUpperCase(source.firstName)` | Alexander | ALEXANDER
+`toLowerCase(string)` | `toLowerCase(source.firstName)` | AlexANDER | alexander
 `substringBefore(string, string)` | `substringBefore(user.email, '@')` | alex@okta.com | alex
 `substringAfter(string, string)` | `substringAfter(user.email, '@')` | alex@okta.com | okta.com
 `substring(string, int, int)` | `substring(source.firstName, 1, 4)` | Alexander | lex

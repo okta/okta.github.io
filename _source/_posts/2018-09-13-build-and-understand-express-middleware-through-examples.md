@@ -145,7 +145,7 @@ At Okta, our goal is to make [identity management](https://developer.okta.com/pr
 To install Okta's OIDC middleware for Express, run:
 
 ```sh
-npm install @okta/oidc-middleware --save
+npm install @okta/oidc-middleware@0.1.3 --save
 ```
 
 Then in the `server.js` file, you create an instance if the middleware with some configuration options so that Okta knows how to connect to your Okta application.
