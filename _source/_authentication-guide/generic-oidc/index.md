@@ -175,33 +175,33 @@ If you don't want pre-built views, or need deeper levels of customization, then 
 
 The following fully-tested IdPs are supported. To set up these IdPs, follow the steps outlined in this guide, using that IdP's well-known configuration URL to obtain the appropriate endpoints and the required scopes. To create a client application and obtain the client ID and secret, refer to the relevant IdP's documentation.
 
-IdP: AWS Cognito User Pools<br>
-Well-Known Configuration URL: `https://cognito-idp.{region}.amazonaws.com/{userPoolId}/.well-known/openid-configuration`<br>
-Details: In the URL, replace `{region}` and `{userPoolId}` with the appropriate values.<br>
+**IdP**: AWS Cognito User Pools<br>
+**Well-Known Configuration URL**: `https://cognito-idp.{region}.amazonaws.com/{userPoolId}/.well-known/openid-configuration`<br>
+**Details**: In the URL, replace `{region}` and `{userPoolId}` with the appropriate values.<br>
 
 **IdP**: Intuit<br>
-**Well-Known Configuration URL**: <https://developer.intuit.com/.well-known/openid-configuration/><br>
+**Well-Known Configuration URL**: `https://developer.intuit.com/.well-known/openid-configuration/`<br>
 
 **IdP**: Line<br>
-**Well-Known Configuration URL**: <https://access.line.me/.well-known/openid-configuration><br>
+**Well-Known Configuration URL**: `https://access.line.me/.well-known/openid-configuration`<br>
 
 **IdP**: Microsoft Azure AD<br>
 **Well-Known Configuration URL**: `https://login.microsoftonline.com/{tenant}/v2.0/.well-known/openid-configuration`<br>
 **Details**: In the URL, replace `{tenant}` with the appropriate value.<br>
 
 **IdP:** PayPal<br>
-**Well-Known Configuration URL**: <https://api.sandbox.paypal.com/v1/identity/openidconnect/userinfo/?schema=openid><br>
+**Well-Known Configuration URL**: `https://api.sandbox.paypal.com/v1/identity/openidconnect/userinfo/?schema=openid`<br>
 **Details**: Use the `/userinfo` endpoint, as it returns a well-formatted email for Okta to consume.<br>
 
 **IdP**: Salesforce<br>
-**Well-Known Configuration URL**: <https://github.com/okta/samples-nodejs-express-4><br>
+**Well-Known Configuration URL**: `https://github.com/okta/samples-nodejs-express-4`<br>
 
 **IdP** TrustedKey<br>
-**Well-Known Configuration URL**: <https://github.com/okta/samples-java-spring-mvc><br>
+**Well-Known Configuration URL**: `https://github.com/okta/samples-java-spring-mvc`<br>
 
 **IdP**: Twitch<br>
-**Well-Known Configuration URL**: <https://id.twitch.tv/oauth2/.well-known/openid-configuration><br>
+**Well-Known Configuration URL**: `https://id.twitch.tv/oauth2/.well-known/openid-configuration`<br>
 
 **IdP**: Yahoo<br>
-**Well-Known Configuration URL**: <https://login.yahoo.com/.well-known/openid-configuration><br>
+**Well-Known Configuration URL**: `https://login.yahoo.com/.well-known/openid-configuration`<br>
 **Details**: It is necessary to include the `sddp-w` scope during app creation at `developer.yahoo.com`.<br>
