@@ -13,7 +13,7 @@ image: blog/featured/okta-java-skew.jpg
 
 When building a web application, authentication and authorization is a must. Doing it right, however, is not simple. Computer security is a true specialty. Legions of developers work day and night against equally numerous international hackers creating a continual development cycle of finding vulnerabilities, attacking them, and fixing them. Keeping up with all this solo would be painful (if not impossible).
 
-Fortunately, there's no need. Spring Security and Spring Boot have made implementing a web application using OAuth 2.0 nice and simple. And Okta, a software-as-a-service identity access provider, have built on top of Spring Boot to make the process even easier.
+Fortunately, there's no need. Spring Security and Spring Boot have made implementing a web application using OAuth 2.0 nice and simple. And Okta, a software-as-service identity access provider, have built on top of Spring Boot to make the process even easier.
 
 In this tutorial, you'll first build an OAuth 2.0 web application and authentication server using Spring Boot and Spring Security. After that, you'll use Okta to get rid of your self-hosted authentication server and simplify your Spring Boot application even more.
 
@@ -594,4 +594,4 @@ If you're interested in learning more about Spring Boot, OAuth 2.0, and Spring S
 * [Identity, Claims, & Tokens – An OpenID Connect Primer, Part 1 of 3](/blog/2017/07/25/oidc-primer-part-1)
 * [Build a Secure API with Spring Boot and GraphQL](/blog/2018/08/16/secure-api-spring-boot-graphql)
 
-If you have any questions about this post, please add a comment below. For more awesome content, follow  [@oktadev](https://twitter.com/oktadev)  on Twitter, like us  [on Facebook](https://www.facebook.com/oktadevelopers/), or subscribe to  [our YouTube channel](https://www.youtube.com/channel/UC5AMiWqFVFxF1q9Ya1FuZ_Q)!
+If you have any questions about this post, please add a comment below. For more awesome content, follow  [@oktadev](https://twitter.com/oktadev)  on Twitter, or subscribe to  [our YouTube channel](https://www.youtube.com/channel/UC5AMiWqFVFxF1q9Ya1FuZ_Q)!
