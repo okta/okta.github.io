@@ -23,7 +23,7 @@ Let's get started!
 
 Start by going to the [Spring Initializr](https://start.spring.io/) and creating a new project with the following settings:
 
-* Change project type from **Maven** to **Gradle**.
+* Change project type from Maven to **Gradle**.
 * Change the Group to **com.okta.spring**.
 * Change the Artifact to **AuthorizationServerApplication**.
 * Add one dependency: **Web**.
@@ -38,7 +38,7 @@ You need to add one dependency to the `build.gradle` file:
 implementation 'org.springframework.security.oauth:spring-security-oauth2:2.3.3.RELEASE'
 ```
 
-This adds our OAuth Spring goodness.
+This adds in Spring's OAuth goodness.
 
 Update the `src/main/resources/application.properties` to match:
 
@@ -228,7 +228,7 @@ Back to [Spring Initializr](https://start.spring.io/). Create a new project with
 * Project type should be **Gradle** (not Maven).
 * Group: **com.okta.spring**.
 * Artifact: **SpringBootOAuthClient**.
-* Add four dependencies: **Web**, **Thymeleaf**, **OAuth2 Client**.
+* Add three dependencies: **Web**, **Thymeleaf**, **OAuth2 Client**.
 
 {% img blog/spring-boot-authz-server/start-client.png alt:"Create Client App" width:"800" %}{: .center-image }
 
@@ -333,12 +333,9 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     @Override
     public void configure(HttpSecurity http) throws Exception {
-        http.antMatcher("/**")
-            .authorizeRequests()
-            .antMatchers("/", "/login**")
-            .permitAll()
-            .anyRequest()
-            .authenticated()
+        http.antMatcher("/**").authorizeRequests()
+            .antMatchers("/", "/login**").permitAll()
+            .anyRequest().authenticated()
             .and()
             .oauth2Login();
     }
@@ -425,11 +422,10 @@ You can stop both server and client Spring Boot apps.
 
 ## Create an OpenID Connect Application
 
-Okta is a SaaS (software-as-service) authentication and authorization provider. We provide free accounts to developers so they can develop OIDC apps with no fuss. Head \over to [developer.okta.com](https://developer.okta.com/signup) and sign up for an account. After you've verified your email, log in and perform the following steps:
+Okta is a SaaS (software-as-service) authentication and authorization provider. We provide free accounts to developers so they can develop OIDC apps with no fuss. Head over to [developer.okta.com](https://developer.okta.com/signup/) and sign up for an account. After you've verified your email, log in and perform the following steps:
 
 * Go to **Application** > **Add Application**.
-* Select application type **Web**. 
-* Click **Next**.
+* Select application type **Web** and click **Next**.
 * Give the app a name. I named mine "Spring Boot OAuth".
 * Under **Login redirect URIs** change the value to `http://localhost:8080/login/oauth2/code/okta`. The rest of the default values will work.
 * Click **Done**.
@@ -440,10 +436,10 @@ Leave the page open of take note of the **Client ID** and **Client Secret**. You
 
 Back to the [Spring Initializr](https://start.spring.io/) one more time. Create a new project with the following settings:
 
-* Change project type from **Maven** to **Gradle**.
+* Change project type from Maven to **Gradle**.
 * Change the Group to **com.okta.spring**.
 * Change the Artifact to **OktaOAuthClient**.
-* Add three dependencies: **Web**, **Thymeleaf, **Okta**.
+* Add three dependencies: **Web**, **Thymeleaf**, **Okta**.
 * Click **Generate Project**.
 
 {% img blog/spring-boot-authz-server/okta-oauth2-client.png alt:"Create Okta OAuth App" width:"800" %}{: .center-image }
@@ -550,13 +546,11 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     @Override
     public void configure(HttpSecurity http) throws Exception {
-        http.antMatcher("/**")
-            .authorizeRequests()
-            .antMatchers("/")
-            .permitAll()
-            .anyRequest()
-            .authenticated()
-            .and().oauth2Login();
+        http.antMatcher("/**").authorizeRequests()
+            .antMatchers("/").permitAll()
+            .anyRequest().authenticated()
+            .and()
+            .oauth2Login();
     }
 }
 ```
