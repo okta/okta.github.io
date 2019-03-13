@@ -1228,6 +1228,7 @@ new Vue( { // eslint-disable-line no-new
 
 Add a new file to `client` named `App.vue`. Add the following code to this file.
 
+{% raw %}
 ```html
 <template>
  <div id="app">
@@ -1435,6 +1436,7 @@ export default {
 }
 </style>
 ```
+{% endraw %}
 
 ### Add a Build Process
 
