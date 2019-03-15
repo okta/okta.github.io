@@ -404,7 +404,10 @@ Now create a file named `auth.js` that will export the middleware:
 ```javascript
 const OktaJwtVerifier = require('@okta/jwt-verifier')
 
-const oktaJwtVerifier = new OktaJwtVerifier({ issuer: process.env.ISSUER })
+const oktaJwtVerifier = new OktaJwtVerifier({
+  issuer: process.env.ISSUER,
+  clientId: process.env.CLIENT_ID
+})
 
 module.exports = async (req, res, next) => {
   try {
