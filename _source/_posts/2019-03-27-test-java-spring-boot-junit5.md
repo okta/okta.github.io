@@ -856,7 +856,7 @@ In Eclipse, if you right-click on a folder and select **run as** > **JUnit Test*
 
 The Failsafe Plugin will differentiate the types of tests by the names. By default, it will consider any test that begins or ends with `IT` as an integration test. It also considers tests that end in `ITCase` an integration test.
 
-Once the `pom.xml`  is setup, you can run the  `test` or `verify` goals to test either unit tests or unit and integration tests respectively. From Eclipse, this is done by going to the project and right-clicking and selecting **run as** > **Maven test** for the `test` goal. For the `verify` goal, you must click on **run as** > **Maven build…** and then enter "verify" in the goals textbox and click run. From the command line, this can be done with `mvn test` and `mvn verify`.
+Once the `pom.xml`  is setup, you can run the  `test` or `verify` goals to test either unit tests or unit and integration tests respectively. From Eclipse, this is done by going to the project and right-clicking and selecting **run as** > **Maven test** for the `test` goal. For the `verify` goal, you must click on **run as** > **Maven build...** and then enter "verify" in the goals textbox and click run. From the command line, this can be done with `mvn test` and `mvn verify`.
 
 ## Add Code Coverage to Your Java App with JUnit 5
 
