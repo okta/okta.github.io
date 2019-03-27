@@ -11,23 +11,23 @@ tweets:
 image: blog/featured/okta-java-headphones.jpg
 ---
 
-In this post, you'll walk through how to build a simple Spring Boot application and test it with Junit 5. An application without testing is the proverbial Pandora's Box.  What good is your application if you don't know that it will work under any condition?  Adding a suite of tests builds confidence that your application can handle anything thrown at it.  When building your tests, it is important to use a modern and comprehensive suite of tools.  Using a modern framework ensures that you can keep up with the changes within your language and libraries.  A comprehensive suite of tools ensures that you can adequately test all areas of your application without the burden of writing your own test utilities.  JUnit 5 handles both requirements well.
+In this post, you'll walk through how to build a simple Spring Boot application and test it with Junit 5. An application without testing is the proverbial Pandora's Box. What good is your application if you don't know that it will work under any condition?  Adding a suite of tests builds confidence that your application can handle anything thrown at it. When building your tests, it is important to use a modern and comprehensive suite of tools. Using a modern framework ensures that you can keep up with the changes within your language and libraries. A comprehensive suite of tools ensures that you can adequately test all areas of your application without the burden of writing your own test utilities. JUnit 5 handles both requirements well.
 
 The application used for this post will be a basic REST API with endpoints to calculate a few things about a person's birthday! There are three POST endpoints you will be able to use to determine either the day of the week, the astrological sign, or the Chinese Zodiac sign for a passed in birthday. This REST API will be secured with OAuth 2.0 and Okta. Once we have built the API, we will walk through unit testing the code with JUnit 5 and review the coverage of our JUnit tests.
 
-The main advantage of using the Spring Framework is the ability to inject your dependencies, which makes it much easier to swap out implementations for various purposes, but not least of all for unit testing.  Spring Boot makes it even easier by allowing you to do much of the dependency injection with annotations instead of having to bother with a complicated `applicationContext.xml` file!
+The main advantage of using the Spring Framework is the ability to inject your dependencies, which makes it much easier to swap out implementations for various purposes, but not least of all for unit testing. Spring Boot makes it even easier by allowing you to do much of the dependency injection with annotations instead of having to bother with a complicated `applicationContext.xml` file!
 
-> NOTE: For this post, I will be using Eclipse, as it is my preferred IDE.  If you are using Eclipse as well,  you will need a version of Oxygen or beyond in order to have JUnit 5 (Jupiter) test support included: https://www.eclipse.org/downloads/packages/installer. 
+> NOTE: For this post, I will be using Eclipse, as it is my preferred IDE. If you are using Eclipse as well,  you will need a version of Oxygen or beyond in order to have JUnit 5 (Jupiter) test support included: https://www.eclipse.org/downloads/packages/installer. 
  
 ## Create a Spring Boot App for Testing with JUnit 5
 
-For this tutorial, the structure of the project is as shown below.  I will only discuss the file names, but you can find their path using the below structure, looking through the full source, or paying attention to the package.
+For this tutorial, the structure of the project is as shown below. I will only discuss the file names, but you can find their path using the below structure, looking through the full source, or paying attention to the package.
 
 To get going, you'll create a Spring Boot project from scratch.
  
-**NOTE:** The following steps are for Eclipse.  If you use a different IDE, there are likely equivalent steps. Optionally, you can create your own project directory structure and write the final `pom.xml` file in any text editor you like.
+**NOTE:** The following steps are for Eclipse. If you use a different IDE, there are likely equivalent steps. Optionally, you can create your own project directory structure and write the final `pom.xml` file in any text editor you like.
 
-Create a new Maven Project from **File** > **New** menu.  Select the location of your new project and click next twice and then fill out the group id, artifact id, and version for your application.  For this example, I used the following options:
+Create a new Maven Project from **File** > **New** menu. Select the location of your new project and click next twice and then fill out the group id, artifact id, and version for your application. For this example, I used the following options:
 
 - Group Id: `com.example.joy`
 - Artifact Id: `myFirstSpringBoot`
@@ -115,7 +115,7 @@ Take note that you need to exclude the default JUnit from the spring-boot-starte
 
 ## Create a Java REST API with Spring Boot for Your JUnit 5 Testing
 
-Let's start with the main application file, which is the entry point for starting the Java API.  This is a file called `SpringBootRestApiApplication.java` that looks like this:
+Let's start with the main application file, which is the entry point for starting the Java API. This is a file called `SpringBootRestApiApplication.java` that looks like this:
 
 ```java
 package com.example.joy.myFirstSpringBoot;
@@ -144,7 +144,7 @@ This line launches the REST API application:
 SpringApplication.run(SpringBootRestApiApplication.class, args);
 ```
 
-`BirthdayService.java` is the interface for the birthday service.  It is pretty straight forward, defining that there are four helper functions available.  
+`BirthdayService.java` is the interface for the birthday service. It is pretty straight forward, defining that there are four helper functions available. 
 
 ```java
 package com.example.joy.myFirstSpringBoot.services;
@@ -162,7 +162,7 @@ public interface BirthdayService {
 }
 ```
 
-`BirthdayInfoController.java` handles the three post requests to get birthday information.  It looks like this:
+`BirthdayInfoController.java` handles the three post requests to get birthday information. It looks like this:
 
 ```java
 package com.example.joy.myFirstSpringBoot.controllers;
@@ -223,7 +223,7 @@ public class BirthdayInfoController {
 
 ### Spring MVC Annotations
 
-First, you will notice the following annotations near the top. The `@RestController` annotation tells the system that this file is a "Rest API Controller" which simply means that it contains a collection of API endpoints.  You could also use the `@Controller` annotation, but it means that you would have to add more boilerplate code to convert the responses to an HTTP OK response instead of simply returning the values.  The second line tells it that all of the endpoints have the "/birthday" prefix in the path. I will show a full path for an endpoint later.
+First, you will notice the following annotations near the top. The `@RestController` annotation tells the system that this file is a "Rest API Controller" which simply means that it contains a collection of API endpoints. You could also use the `@Controller` annotation, but it means that you would have to add more boilerplate code to convert the responses to an HTTP OK response instead of simply returning the values. The second line tells it that all of the endpoints have the "/birthday" prefix in the path. I will show a full path for an endpoint later.
     
 ```java
 @RestController
