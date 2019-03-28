@@ -17,7 +17,7 @@ The application used for this post will be a basic REST API with endpoints to ca
 
 The main advantage of using the Spring Framework is the ability to inject your dependencies, which makes it much easier to swap out implementations for various purposes, but not least of all for unit testing. Spring Boot makes it even easier by allowing you to do much of the dependency injection with annotations instead of having to bother with a complicated `applicationContext.xml` file!
 
-> NOTE: For this post, I will be using Eclipse, as it is my preferred IDE. If you are using Eclipse as well,  you will need a version of Oxygen or beyond in order to have JUnit 5 (Jupiter) test support included: https://www.eclipse.org/downloads/packages/installer. 
+> NOTE: For this post, I will be using Eclipse, as it is my preferred IDE. If you are using Eclipse as well, you will need to [install a version of Oxygen](https://www.eclipse.org/downloads/packages/installer) or beyond in order to have JUnit 5 (Jupiter) test support included. 
  
 ## Create a Spring Boot App for Testing with JUnit 5
 
@@ -35,7 +35,7 @@ Create a new Maven Project from **File** > **New** menu. Select the location of 
 
 {% img blog/junit5-spring-boot/new-maven-project.png alt:"New Maven Project" width:"600" %}{: .center-image }
 
-> HINT: If Maven is new to you and it is unclear how to choose your group id, artifact id, or version, please review these conventions: https://maven.apache.org/guides/mini/guide-naming-conventions.html
+> HINT: If Maven is new to you and it's unclear how to choose your group id, artifact id, or version, please review [Maven's naming conventions](https://maven.apache.org/guides/mini/guide-naming-conventions.html).
 
 When done, this will produce a `pom.xml` file that looks like the following:
 
@@ -191,9 +191,7 @@ public class BirthdayInfoController {
     @PostMapping("/dayOfWeek")
     public String getDayOfWeek(@RequestBody String birthdayString) {
         LocalDate birthday = birthdayService.getValidBirthday(birthdayString);
-
         String dow = birthdayService.getBirthDOW(birthday);
-        
         return dow;
     }
 
@@ -201,7 +199,6 @@ public class BirthdayInfoController {
     public String getChineseZodiac(@RequestBody String birthdayString) {
         LocalDate birthday = birthdayService.getValidBirthday(birthdayString);
         String sign = birthdayService.getChineseZodiac(birthday);
-        
         return sign;
     }
 
@@ -209,13 +206,11 @@ public class BirthdayInfoController {
     public String getStarSign(@RequestBody String birthdayString) {
         LocalDate birthday = birthdayService.getValidBirthday(birthdayString);
         String sign = birthdayService.getStarSign(birthday);
-        
         return sign;
     }
     
     @ExceptionHandler(RuntimeException.class)
     public final ResponseEntity<Exception> handleAllExceptions(RuntimeException ex) {
-
         return new ResponseEntity<Exception>(ex, HttpStatus.INTERNAL_SERVER_ERROR);
     }
 }
@@ -237,7 +232,7 @@ Next, you will see a class variable for `birthdayService` (of type `BirthdayServ
 ```java
 private final BirthdayService birthdayService;
 
-BirthdayInfoController(BirthdayService birthdayService){
+public BirthdayInfoController(BirthdayService birthdayService){
     this.birthdayService = birthdayService;
 }
 ```
@@ -264,7 +259,6 @@ Lastly, there is a method for error handling:
 ```java
 @ExceptionHandler(RuntimeException.class)
 public final ResponseEntity<Exception> handleAllExceptions(RuntimeException ex) {
-
     return new ResponseEntity<Exception>(ex, HttpStatus.INTERNAL_SERVER_ERROR);
 }
 ```
