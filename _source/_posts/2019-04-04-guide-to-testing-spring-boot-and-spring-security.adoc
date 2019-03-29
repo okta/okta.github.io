@@ -1,0 +1,685 @@
+---
+layout: blog_post
+title: "Java Testing Guide: JUnit, Spring Boot, and Spring Security"
+title: "Spring Boot + Security Testing Guide"
+title: "Testing Java Apps with JUnit: Lessons learned with JHipster 6"
+title: "Upgrading Spring Security OAuth and Java Tests through the 👀 of a Java Hipster"
+author: mraible
+description: "Learn how to use JUnit to test your Java apps! This is an advanced guide that tells a story about upgrading tests and the super hip testing support in Spring Security and Spring Boot."
+tags: [java, junit, testing, jhipster]
+tweets:
+-
+image:
+---
+:page-liquid:
+
+// targets: `junit java` and `junit 5 spring boot`
+
+Using unit and integration tests to verify your code quality is an excellent way to show you care about your code. I recently did a bunch of work in the popular JHipster open source project to upgrade it to use the latest release of Spring Security.
+
+Spring Security 5.1+ adds OAuth 2.0 and OIDC as first-class citizens that you can configure with its elegant DSL (a.k.a. cool method chaining, a.k.a. the builder pattern). I've been motivated to use it ever since Rob Winch and crew first launched it. It's been fun collaborating with them on a very innovative project. Spring Security makes OAuth awesome!
+
+I added OAuth 2.0 support to JHipster in the fall of 2017. The experience influenced myself greatly. I learned a ton about Keycloak, Docker Compose, and how to switch between identity providers (IdPs).
+
+I spent the last month upgrading https://www.jhipster.tech[JHipster] to use Spring Security 5.1 (the default in Spring Boot 2.1). I experienced some frustrations along the way, shook my fist at Travis CI, and rejoiced when I figured out solutions. I also learned quite a bit in the process. I'm going to share those experiences with you today.
+
+== Logout with OAuth 2.0 and OIDC
+
+Soon after integrating support for Keycloak and Okta in JHipster, the project received a lot of complaints from users that they couldn't logout. JHipster users were familiar with clicking **Logout** (check with latest) and being _completely_ logged out. With the default Spring Security support, users would be logged out of the local app, but not the IdP.
+
+It took me a year, but I finally added https://github.com/jhipster/generator-jhipster/pull/8757[global SSO logout] earlier this year. Both Keycloak and Okta require you to send a GET request to an endpoint with the ID token and the URL to redirect to. Therefore, I created a `LogoutResource` that returns these values.
+
+[source,java]
+----
+@RestController
+public class LogoutResource {
+    private final Logger log = LoggerFactory.getLogger(LogoutResource.class);
+    private final UserInfoRestTemplateFactory templateFactory;
+    private final String accessTokenUri;
+
+    public LogoutResource(UserInfoRestTemplateFactory templateFactory,
+                          @Value("${security.oauth2.client.access-token-uri}") String accessTokenUri) {
+        this.templateFactory = templateFactory;
+        this.accessTokenUri = accessTokenUri;
+    }
+
+    /**
+     * POST  /api/logout : logout the current user
+     *
+     * @return the ResponseEntity with status 200 (OK) and a body with a global logout URL and ID token
+     */
+    @PostMapping("/api/logout")
+    public ResponseEntity<?> logout(HttpServletRequest request, Authentication authentication) {
+        log.debug("REST request to logout User : {}", authentication);
+        OAuth2RestTemplate oauth2RestTemplate = this.templateFactory.getUserInfoRestTemplate();
+        String idToken = (String) oauth2RestTemplate.getAccessToken().getAdditionalInformation().get("id_token");
+
+        String logoutUrl = accessTokenUri.replace("token", "logout");
+        Map<String, String> logoutDetails = new HashMap<>();
+        logoutDetails.put("logoutUrl", logoutUrl);
+        logoutDetails.put("idToken", idToken);
+        request.getSession().invalidate();
+        return ResponseEntity.ok().body(logoutDetails);
+    }
+}
+----
+
+The Angular client calls the `/api/logout` endpoint, and constructs the IdP logout URL.
+
+[source,typescript]
+----
+this.authServerProvider.logout().subscribe(response => {
+  const data = response.body;
+  let logoutUrl = data.logoutUrl;
+  // if Keycloak, uri has protocol/openid-connect/token
+  if (logoutUrl.indexOf('/protocol') > -1) {
+    logoutUrl = logoutUrl + '?redirect_uri=' + window.location.origin;
+  } else {
+    // Okta
+    logoutUrl = logoutUrl + '?id_token_hint=' +
+    data.idToken + '&post_logout_redirect_uri=' + window.location.origin;
+  }
+  window.location.href = logoutUrl;
+});
+----
+
+Testing the `LogoutResource` was pretty straightforward. The bulk of the work involved mocking the `UserInfoRestTemplateFactory` so it returned an ID token.
+
+[source,java]
+----
+@RunWith(SpringRunner.class)
+@SpringBootTest(classes = JhipsterApp.class)
+public class LogoutResourceIntTest {
+
+    @Autowired
+    private MappingJackson2HttpMessageConverter jacksonMessageConverter;
+
+    private final static String ID_TOKEN = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9" +
+        ".eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiYWRtaW4iOnRydWUsIm" +
+        "p0aSI6ImQzNWRmMTRkLTA5ZjYtNDhmZi04YTkzLTdjNmYwMzM5MzE1OSIsImlhdCI6MTU0M" +
+        "Tk3MTU4MywiZXhwIjoxNTQxOTc1MTgzfQ.QaQOarmV8xEUYV7yvWzX3cUE_4W1luMcWCwpr" +
+        "oqqUrg";
+
+    @Value("${security.oauth2.client.access-token-uri}")
+    private String accessTokenUri;
+
+    private MockMvc restLogoutMockMvc;
+
+    @Before
+    public void before() {
+        LogoutResource logoutResource = new LogoutResource(restTemplateFactory(), accessTokenUri);
+        this.restLogoutMockMvc = MockMvcBuilders.standaloneSetup(logoutResource)
+            .setMessageConverters(jacksonMessageConverter).build();
+    }
+
+    @Test
+    public void getLogoutInformation() throws Exception {
+        String logoutUrl = accessTokenUri.replace("token", "logout");
+        restLogoutMockMvc.perform(post("/api/logout"))
+            .andExpect(status().isOk())
+            .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
+            .andExpect(jsonPath("$.logoutUrl").value(logoutUrl))
+            .andExpect(jsonPath("$.idToken").value(ID_TOKEN));
+    }
+
+    private UserInfoRestTemplateFactory restTemplateFactory() {
+        UserInfoRestTemplateFactory factory = mock(UserInfoRestTemplateFactory.class);
+        Map<String, Object> idToken = new HashMap<>();
+        idToken.put("id_token", ID_TOKEN);
+        DefaultOAuth2AccessToken token = new DefaultOAuth2AccessToken("my-fun-token");
+        token.setAdditionalInformation(idToken);
+        when(factory.getUserInfoRestTemplate()).thenReturn(mock(OAuth2RestTemplate.class));
+        when(factory.getUserInfoRestTemplate().getAccessToken()).thenReturn(token);
+        return factory;
+    }
+}
+----
+
+I https://github.com/jhipster/generator-jhipster/pull/8757[merged global logout support] into JHipster's `master` branch in late January, and started upgrading Spring Security's OIDC support a few weeks later.
+
+== Upgrade Spring Security's OIDC Support
+
+I started by creating https://github.com/jhipster/generator-jhipster/issues/9276[issue #9276] to track my goals, motivations, and known issues.
+
+At this point, if you're not intimately familiar with Spring Security, you're probably wondering: **why is upgrading to Spring Security's latest release so cool**? Long story short: they've deprecated annotations, added features, and have made it easier to integrate OAuth 2.0 and OIDC into your applications. Thanks Spring Security team!
+
+NOTE: Using `@EnableOAuth2Sso` and `@EnableResourceServer` is no longer recommended in Spring Boot 2.1+ (a.k.a., Spring Security 5.1+). The reasons for the change can be found in Josh Long's https://itunes.apple.com/us/podcast/a-bootiful-podcast/id1438691771?mt=2[Bootiful Podcast], published on Jan 25, 2019. It's an interview with https://twitter.com/madhurabhave23[Madhura Bhave] and the discussion starts at 21:30.
+
+In addition to converting all the Java code and YAML configuration to use the latest Spring Security bits, I also decided to make every JHipster app https://github.com/jhipster/generator-jhipster/issues/9424[a resource server by default]. Here's the logic from JHipster's https://github.com/mraible/generator-jhipster/blob/master/generators/server/templates/src/main/java/package/config/SecurityConfiguration.java.ejs[`SecurityConfiguration.java.ejs`] template:
+
+[source,java]
+----
+@Override
+public void configure(HttpSecurity http) throws Exception {
+    // @formatter:off
+    http
+        ...
+        <%_ } else if (authenticationType === 'oauth2') { _%>
+            <%_ if (['monolith', 'gateway'].includes(applicationType)) { _%>
+        .and()
+            .oauth2Login()
+            <%_ } _%>
+        .and()
+            .oauth2ResourceServer().jwt();
+        <%_ } _%>
+        // @formatter:on
+  }
+}
+----
+
+To make sure the implementation was OIDC compliant, I overrode the default `JwtDecoder` bean with one that does audience validation.
+
+[source,java]
+----
+@Value("${spring.security.oauth2.client.provider.oidc.issuer-uri}")
+private String issuerUri;
+
+@Bean
+JwtDecoder jwtDecoder() {
+    NimbusJwtDecoderJwkSupport jwtDecoder = (NimbusJwtDecoderJwkSupport)
+        JwtDecoders.fromOidcIssuerLocation(issuerUri);
+
+    OAuth2TokenValidator<Jwt> audienceValidator = new AudienceValidator();
+    OAuth2TokenValidator<Jwt> withIssuer = JwtValidators.createDefaultWithIssuer(issuerUri);
+    OAuth2TokenValidator<Jwt> withAudience = new DelegatingOAuth2TokenValidator<>(withIssuer, audienceValidator);
+
+    jwtDecoder.setJwtValidator(withAudience);
+
+    return jwtDecoder;
+}
+----
+
+After I had all the runtime code working, I moved onto refactoring tests. Tests are the most reliable indicator of refactoring success, especially with a project that has https://arxiv.org/abs/1710.07980[26,000] combinations like JHipster does!
+
+I encountered a number of challenges along the way. Since I learned a lot solving these challenges, I thought it'd be fun to explain them and how I solved them.
+
+== How to Mock an AuthenticatedPrincipal with an ID Token
+
+The first challenge I encountered was with the updated `LogoutResource`. Below is the code after I refactored it to use Spring Security's `ClientRegistrationRepository`.
+
+[source,java]
+----
+@RestController
+public class LogoutResource {
+    private ClientRegistration registration;
+
+    public LogoutResource(ClientRegistrationRepository registrations) {
+        this.registration = registrations.findByRegistrationId("oidc");
+    }
+
+    /**
+     * {@code POST  /api/logout} : logout the current user.
+     *
+     * @param request the {@link HttpServletRequest}.
+     * @param idToken the ID token.
+     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and a body with a global logout URL and ID token.
+     */
+    @PostMapping("/api/logout")
+    public ResponseEntity<?> logout(HttpServletRequest request,
+                                    @AuthenticationPrincipal(expression = "idToken") OidcIdToken idToken) {
+        String logoutUrl = this.registration.getProviderDetails()
+            .getConfigurationMetadata().get("end_session_endpoint").toString();
+
+        Map<String, String> logoutDetails = new HashMap<>();
+        logoutDetails.put("logoutUrl", logoutUrl);
+        logoutDetails.put("idToken", idToken.getTokenValue());
+        request.getSession().invalidate();
+        return ResponseEntity.ok().body(logoutDetails);
+    }
+}
+----
+
+I tried to mock out the `OAuth2AuthenticationToken` in `LogoutResourceIT.java`, thinking this would lead to the `AuthenticationPrincipal` being populated.
+
+[source,java]
+----
+@RunWith(SpringRunner.class)
+@SpringBootTest(classes = JhipsterApp.class)
+public class LogoutResourceIT {
+
+    @Autowired
+    private ClientRegistrationRepository registrations;
+
+    @Autowired
+    private MappingJackson2HttpMessageConverter jacksonMessageConverter;
+
+    private final static String ID_TOKEN = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9" +
+        ".eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiYWRtaW4iOnRydWUsIm" +
+        "p0aSI6ImQzNWRmMTRkLTA5ZjYtNDhmZi04YTkzLTdjNmYwMzM5MzE1OSIsImlhdCI6MTU0M" +
+        "Tk3MTU4MywiZXhwIjoxNTQxOTc1MTgzfQ.QaQOarmV8xEUYV7yvWzX3cUE_4W1luMcWCwpr" +
+        "oqqUrg";
+
+    private MockMvc restLogoutMockMvc;
+
+    @Before
+    public void before() {
+        LogoutResource logoutResource = new LogoutResource(registrations);
+        this.restLogoutMockMvc = MockMvcBuilders.standaloneSetup(logoutResource)
+            .setMessageConverters(jacksonMessageConverter).build();
+    }
+
+    @Test
+    public void getLogoutInformation() throws Exception {
+
+        Map<String, Object> claims = new HashMap<>();
+        claims.put("groups", "ROLE_USER");
+        claims.put("sub", 123);
+        OidcIdToken idToken = new OidcIdToken(ID_TOKEN, Instant.now(),
+            Instant.now().plusSeconds(60), claims);
+
+        String logoutUrl = this.registrations.findByRegistrationId("oidc").getProviderDetails()
+            .getConfigurationMetadata().get("end_session_endpoint").toString();
+        restLogoutMockMvc.perform(post("/api/logout")
+            .with(authentication(createMockOAuth2AuthenticationToken(idToken))))
+            .andExpect(status().isOk())
+            .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
+            .andExpect(jsonPath("$.logoutUrl").value(logoutUrl));
+    }
+
+    private OAuth2AuthenticationToken createMockOAuth2AuthenticationToken(OidcIdToken idToken) {
+        Collection<GrantedAuthority> authorities = new ArrayList<>();
+        authorities.add(new SimpleGrantedAuthority(AuthoritiesConstants.USER));
+        OidcUser user = new DefaultOidcUser(authorities, idToken);
+
+        return new OAuth2AuthenticationToken(user, authorities, "oidc");
+    }
+}
+----
+
+However, this resulted in the following error:
+
+[source]
+----
+Caused by: java.lang.IllegalArgumentException: tokenValue cannot be empty
+    at org.springframework.util.Assert.hasText(Assert.java:284)
+    at org.springframework.security.oauth2.core.AbstractOAuth2Token.<init>(AbstractOAuth2Token.java:55)
+    at org.springframework.security.oauth2.core.oidc.OidcIdToken.<init>(OidcIdToken.java:53)
+    at java.base/jdk.internal.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method)
+    at java.base/jdk.internal.reflect.NativeConstructorAccessorImpl.newInstance(NativeConstructorAccessorImpl.java:62)
+    at java.base/jdk.internal.reflect.DelegatingConstructorAccessorImpl.newInstance(DelegatingConstructorAccessorImpl.java:45)
+    at java.base/java.lang.reflect.Constructor.newInstance(Constructor.java:490)
+    at org.springframework.beans.BeanUtils.instantiateClass(BeanUtils.java:172)
+----
+
+I https://stackoverflow.com/questions/55163989/how-to-test-authenticationprincipal-and-getting-an-id-token-in-spring-security[posted this problem to Stack Overflow] and sent an email to the Spring Security team as well. https://twitter.com/joe_grandja[Joe Grandja] responded with a solution to the problem.
+
+// todo: fix CSS for blockquote and blockquote p
+____
+The `AuthenticationPrincipalArgumentResolver` is not getting registered in your test.
+
+NOTE: It automatically gets registered when the "full" spring-web-mvc is enabled, e.g `@EnableWebMvc`.
+
+However, in your `@Before`, you have:
+
+`MockMvcBuilders.standaloneSetup()` - this does not initialize the full web-mvc infrastructure - only a subset.
+
+Try this instead:
+
+`MockMvcBuilders.webAppContextSetup(this.context)` - this will register `AuthenticationPrincipalArgumentResolver` and your test should resolve the `OidcIdToken`.
+____
+
+Joe was correct. I changed the test to the following and the test passed. ✅
+
+[source,java]
+----
+@RunWith(SpringRunner.class)
+@SpringBootTest(classes = JhipsterApp.class)
+public class LogoutResourceIT {
+
+    @Autowired
+    private ClientRegistrationRepository registrations;
+
+    @Autowired
+    private WebApplicationContext context;
+
+    private final static String ID_TOKEN = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9" +
+        ".eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiYWRtaW4iOnRydWUsIm" +
+        "p0aSI6ImQzNWRmMTRkLTA5ZjYtNDhmZi04YTkzLTdjNmYwMzM5MzE1OSIsImlhdCI6MTU0M" +
+        "Tk3MTU4MywiZXhwIjoxNTQxOTc1MTgzfQ.QaQOarmV8xEUYV7yvWzX3cUE_4W1luMcWCwpr" +
+        "oqqUrg";
+
+    private MockMvc restLogoutMockMvc;
+
+    @Before
+    public void before() throws Exception {
+        Map<String, Object> claims = new HashMap<>();
+        claims.put("groups", "ROLE_USER");
+        claims.put("sub", 123);
+        OidcIdToken idToken = new OidcIdToken(ID_TOKEN, Instant.now(),
+            Instant.now().plusSeconds(60), claims);
+        SecurityContextHolder.getContext().setAuthentication(authenticationToken(idToken));
+        SecurityContextHolderAwareRequestFilter authInjector = new SecurityContextHolderAwareRequestFilter();
+        authInjector.afterPropertiesSet();
+
+        this.restLogoutMockMvc = MockMvcBuilders.webAppContextSetup(this.context).build();
+    }
+
+    @Test
+    public void getLogoutInformation() throws Exception {
+        String logoutUrl = this.registrations.findByRegistrationId("oidc").getProviderDetails()
+            .getConfigurationMetadata().get("end_session_endpoint").toString();
+        restLogoutMockMvc.perform(post("/api/logout"))
+            .andExpect(status().isOk())
+            .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
+            .andExpect(jsonPath("$.logoutUrl").value(logoutUrl))
+            .andExpect(jsonPath("$.idToken").value(ID_TOKEN));
+    }
+
+    private OAuth2AuthenticationToken authenticationToken(OidcIdToken idToken) {
+        Collection<GrantedAuthority> authorities = new ArrayList<>();
+        authorities.add(new SimpleGrantedAuthority(AuthoritiesConstants.USER));
+        OidcUser user = new DefaultOidcUser(authorities, idToken);
+        return new OAuth2AuthenticationToken(user, authorities, "oidc");
+    }
+}
+----
+
+Getting the logout functionality properly tested was a big milestone. I moved on to upgrading JHipster's microservices architecture.
+
+== How to Pass an OAuth 2.0 Access Token to Downstream Microservices with Zuul
+
+JHipster uses Netflix Zuul to proxy requests from the gateway to downstream microservices. I created an `AuthorizationHeaderFilter` to handle access token propogation.
+
+[source,java]
+----
+public class AuthorizationHeaderFilter extends ZuulFilter {
+
+    private final AuthorizationHeaderUtil headerUtil;
+
+    public AuthorizationHeaderFilter(AuthorizationHeaderUtil headerUtil) {
+        this.headerUtil = headerUtil;
+    }
+
+    @Override
+    public String filterType() {
+        return PRE_TYPE;
+    }
+
+    @Override
+    public int filterOrder() {
+        return Ordered.LOWEST_PRECEDENCE;
+    }
+
+    @Override
+    public boolean shouldFilter() {
+        return true;
+    }
+
+    @Override
+    public Object run() {
+        RequestContext ctx = RequestContext.getCurrentContext();
+        Optional<String> authorizationHeader = headerUtil.getAuthorizationHeader();
+        authorizationHeader.ifPresent(s -> ctx.addZuulRequestHeader(TokenRelayRequestInterceptor.AUTHORIZATION, s));
+        return null;
+    }
+}
+----
+
+However, adding this did not result in successful access token propogation. With https://github.com/mraible/jhipster-ms-oidc-improved/pull/1#issuecomment-471328682[help from Jon Ruddell], I discovered this was because JHipster had a `LazyInitBeanFactoryPostProcessor` that caused all beans to be lazy-loaded. The `ZuulFilterInitializer` was included in this logic. Making `ZuulFilterInitializer` an eagerly-loaded bean caused everything to work as it did before.
+
+At this point, I had everything working, so I https://github.com/jhipster/generator-jhipster/pull/9416[created a pull request to upgrade JHipster's templates].
+
+I knew that what I checked in required Keycloak to be running for integration tests to pass. This is because of OIDC discovery and how the endpoints are looked up from `.well-known/openid-configuration`.
+
+== How to Handle OIDC Discovery in Spring Boot Integration Tests
+
+I wasn't too concerned that Keycloak needed to be running for integration tests to pass. Then some of our Azure and Travis builds started to fail. JHipster developers noted they were seeing errors like the following when Keycloak wasn't running.
+
+----
+Factory method 'clientRegistrationRepository' threw exception; nested exception is
+java.lang.IllegalArgumentException: Unable to resolve the OpenID Configuration
+with the provided Issuer of "http://localhost:9080/auth/realms/jhipster"
+----
+
+I did some spelunking through Spring Security's OAuth and OIDC tests and came up with a https://github.com/jhipster/generator-jhipster/pull/9484[solution]. The fix involved adding a `TestSecurityConfiguration` class that overrides the default Spring Security settings and mocks the beans so OIDC discovery doesn't happen.
+
+[source,java]
+----
+@TestConfiguration
+public class TestSecurityConfiguration {
+    private final ClientRegistration clientRegistration;
+
+    public TestSecurityConfiguration() {
+        this.clientRegistration = clientRegistration().build();
+    }
+
+    @Bean
+    ClientRegistrationRepository clientRegistrationRepository() {
+        return new InMemoryClientRegistrationRepository(clientRegistration);
+    }
+
+    private ClientRegistration.Builder clientRegistration() {
+        Map<String, Object> metadata = new HashMap<>();
+        metadata.put("end_session_endpoint", "https://jhipster.org/logout");
+
+        return ClientRegistration.withRegistrationId("oidc")
+            .redirectUriTemplate("{baseUrl}/{action}/oauth2/code/{registrationId}")
+            .clientAuthenticationMethod(ClientAuthenticationMethod.BASIC)
+            .authorizationGrantType(AuthorizationGrantType.AUTHORIZATION_CODE)
+            .scope("read:user")
+            .authorizationUri("https://jhipster.org/login/oauth/authorize")
+            .tokenUri("https://jhipster.org/login/oauth/access_token")
+            .jwkSetUri("https://jhipster.org/oauth/jwk")
+            .userInfoUri("https://api.jhipster.org/user")
+            .providerConfigurationMetadata(metadata)
+            .userNameAttributeName("id")
+            .clientName("Client Name")
+            .clientId("client-id")
+            .clientSecret("client-secret");
+    }
+
+    @Bean
+    JwtDecoder jwtDecoder() {
+        return mock(JwtDecoder.class);
+    }
+
+    @Bean
+    public OAuth2AuthorizedClientService authorizedClientService(ClientRegistrationRepository clientRegistrationRepository) {
+        return new InMemoryOAuth2AuthorizedClientService(clientRegistrationRepository);
+    }
+
+    @Bean
+    public OAuth2AuthorizedClientRepository authorizedClientRepository(OAuth2AuthorizedClientService authorizedClientService) {
+        return new AuthenticatedPrincipalOAuth2AuthorizedClientRepository(authorizedClientService);
+    }
+}
+----
+
+Then in classes that use `@SpringBootTest`, I configured this as a configuration source.
+
+[source,java]
+----
+@SpringBootTest(classes = {MicroApp.class, TestSecurityConfiguration.class})
+----
+
+== Running End-to-End Tests on JHipster Microservices that are Secured with OAuth 2.0
+
+The final issue surfaced shortly after. The https://dev.azure.com/hipster-labs/jhipster-daily-builds/_build/results?buildId=1995[jhipster-daily-builds] (running on Azure DevOps) were failing when they tried to test microservices.
+
+----
+Caused by: java.lang.IllegalArgumentException: Unable to resolve the OpenID Configuration
+ with the provided Issuer of "http://localhost:9080/auth/realms/jhipster"
+----
+
+We don't include Keycloak Docker Compose files for microservices because we don't expect them to be run standalone. They require a gateway to access them, so their OAuth 2.0 settings should match your gateway and the gateway project contains the Keycloak files.
+
+The end-to-end tests that were running on Azure where 1) starting the microservice, and 2) hitting its health endpoint to ensure it started successfully. To fix, https://twitter.com/pascalgrimaud[Pascal Grimaud] https://github.com/hipster-labs/jhipster-daily-builds/commit/5b8f125131a3d39c190e0572dd60fd4c3d7a44d4[disabled starting/testing microservices]. He also created a https://github.com/hipster-labs/jhipster-daily-builds/issues/6[new issue] to improve the process so a full microservices stack is generated using JHipster's JDL.
+
+== Upgrade to Spring Security 5.1 and its First-Class OIDC Support
+
+I hope this list of challenges and fixes has helped you. If you're using the deprecated `@EnableOAuth2Sso` or `@EnableResourceServer`, I encourage you to try upgrading to Spring Security 5.1. The https://github.com/jhipster/generator-jhipster/issues/9276[issue I used to track the upgrade] has links that show all the required code changes.
+
+* https://github.com/mraible/jhipster-oidc-improved/pull/1[Code changes required for a monolith]
+* https://github.com/mraible/jhipster-ms-oidc-improved/pull/1[Code changes required for a microservices architecture]
+
+== Use JHipster 6 to Generate a Spring Boot + React app with OIDC for Auth
+
+JHipster 6 uses the latest and greatest versions of Spring Boot and Spring Security. It supports Angular and React for its front-end. It https://github.com/jhipster/jhipster-vuejs[supports Vue too], it's just not part of the main generator.
+
+If you generate an application with JHipster 6, all of the test features mentioned in this post will be in your application. How do you do that? I'm glad you asked!
+
+JHipster 6 hasn't been released yet, but you can still try it out. Start by cloning the project from GitHub:
+
+[source,shell]
+----
+git clone https://github.com/jhipster/generator-jhipster.git
+----
+
+TIP: If you don't have Git installed, you can https://github.com/jhipster/generator-jhipster/archive/master.zip[download a ZIP file of the master branch].
+
+Next, cd into the project's directory and run `npm link`.
+
+[source,shell]
+----
+cd generator-jhipster
+npm link
+----
+
+NOTE: The `npm` command is part of https://nodejs.org[Node.js]. You'll need Node 10.x to build JHipster and run useful commands.
+
+JHipster 6 supports Java 8, 11, and 12 (thanks to Spring Boot 2.1). I recommend managing your Java SDK with https://sdkman.io/[SDKMAN!] For example, you can install Java 12 and make it the default.
+
+[source,shell]
+----
+sdk install java 12.0.0-open
+sdk default java 12.0.0-open
+----
+
+You can create a JHipster app that uses React and OIDC with just a few commands:
+
+[source,shell]
+----
+mkdir app && cd app
+
+echo "application { config { baseName reactoidc, authenticationType oauth2, clientFramework react } }" >> app.jh
+
+jhipster import-jdl app.jh
+----
+
+Below is a terminal recording that shows the results of these commands.
+
+++++
+<div style="text-align: center">
+<script id="asciicast-237605" src="https://asciinema.org/a/237605.js" async></script>
+</div>
+++++
+
+The configured OIDC provider must be running for a JHipster-generated Spring Boot app to start successfully. You can start Keycloak using Docker Compose:
+
+[source,shell]
+----
+docker-compose -f src/main/docker/keycloak.yml up -d
+----
+
+Then start your application using Maven:
+
+[source,shell]
+----
+./mvnw
+----
+
+When startup completes, open `http://localhost:8080`, and click **sign in**. You'll be redirected to Keycloak, where you can enter `admin/admin` to log in.
+
+=== Why Okta instead of Keycloak?
+
+Keycloak works great, but this is a post on the Okta developer blogs, so let me show you how you can use Okta! Why should you use Okta? That's a great question.
+
+Okta is an always-on identity provider that provides authentication and authorization services for developers. It also allows you to manage your users. I like to call it Users As a Software Service, but UASS isn't a great acronym. User Management as a Software Service (UMASS) rolls off the toungue a bit easier. Anyway, it's a great service and you should give it a try.
+
+=== Register Your Secure Spring Boot Application
+
+To begin, sign up for a https://developer.okta.com/signup/[free Okta developer account] (or sign in to `{yourOktaDomain}` if you already have an account).
+
+Once you're signed in to Okta, register your Spring Boot application.
+
+* In the top menu, click on **Applications**
+* Click on **Add Application**
+* Select **Web** and click **Next**
+* Enter a **Name**
+* Change the Login redirect URI to be `http://localhost:8080/login/oauth2/code/oidc`
+* Click **Done**, then **Edit**, and add `http://localhost:8080` as a Logout redirect URI
+* Click **Save**
+
+Your settings should resemble the screenshot below when you're finished.
+
+image::{% asset_path 'blog/testing-jhipster-6/app-settings.png' %}[alt=OIDC App Settings,width=700,align=center]
+
+Create an `okta.env` file in your project's root directory and replace the `{..}` values with those from your Okta application:
+
+[source,shell]
+----
+export SPRING_SECURITY_OAUTH2_CLIENT_PROVIDER_OIDC_ISSUER_URI=https://{yourOktaDomain}/oauth2/default
+export SPRING_SECURITY_OAUTH2_CLIENT_REGISTRATION_OIDC_CLIENT_ID={clientId}
+export SPRING_SECURITY_OAUTH2_CLIENT_REGISTRATION_OIDC_CLIENT_SECRET={clientSecret}
+----
+
+TIP: Add `*.env` to your `.gitignore` file so this file won't end up on GitHub.
+
+=== Create Groups and Add them as Claims to the ID Token
+
+JHipster is configured by default to work with two types of users: administrators and users. Keycloak is configured with users and groups automatically, but you need to do some one-time configuration for your Okta organization.
+
+Create a `ROLE_ADMIN` and `ROLE_USER` group (**Users** > **Groups** > **Add Group**) and add users to them. You can use the account you signed up with, or create a new user (**Users** > **Add Person**). Navigate to **API** > **Authorization Servers**, and click on the the `default` server. Click the **Claims** tab and **Add Claim**. Name it `groups`, and include it in the ID Token. Set the value type to `Groups` and set the filter to be a Regex of `.*`. Click **Create**.
+
+image::{% asset_path 'blog/testing-jhipster-6/add-claim.png' %}[alt=Add Claim,width=600,align=center]
+
+Start your application with the following commands:
+
+[source,shell]
+----
+source okta.env
+./mvnw
+----
+
+Navigate to `http://localhost:8080` and use your Okta credentials to log in.
+
+image::{% asset_path 'blog/testing-jhipster-6/authenticated-by-okta.png' %}[alt=Authenticated by Okta,width=800,align=center]
+
+Pretty hip, don't you think?! 🤓
+
+== Better Java Testing with JHipster
+
+JHipster generates an app for you that has good test coverage out of the box. Code coverage is analyzed using https://sonarcloud.io/[SonarCloud], which is automatically configured for you. Run the following command to start Sonar in a Docker container.
+
+[source,shell]
+----
+docker-compose -f src/main/docker/sonar.yml up -d
+----
+
+Then run the following Maven command:
+
+[source,shell]
+----
+./mvnw -Pprod clean test sonar:sonar -Dsonar.host.url=http://localhost:9001
+----
+
+Once the process completes, navigate to `http://localhost:9001/projects` and you'll see your project's report.
+
+image::{% asset_path 'blog/testing-jhipster-6/sonar-report.png' %}[alt=Authenticated by Okta,width=800,align=center]
+
+NOTE: The code coverage is much higher than what's shown in this report. We changed many tests to run in the integration test phase recently, and haven't figured out how to report this data to Sonar.
+
+See https://www.jhipster.tech/code-quality/[JHipster's Code Quality documentation] for more information about this feature.
+
+Support for JUnit 5 in JHipster is https://github.com/jhipster/generator-jhipster/issues/9498[also in the works].
+
+== Learn More about Spring Security, Spring Boot, and JHipster
+
+I hope you've enjoyed my story about upgrading JHipster to use Spring Security 5.1 and its stellar OAuth 2.0 + OIDC support. I really like what that Spring Security team has done to simplify its configuration and make OIDC discovery (among other things) just work.
+
+I did not create a GitHub repository for this example since JHipster generated all the code and I didn't need to modify anything.
+
+If you'd like to learn more about JHipster's CRUD generator abilities and PWA support, I encourage you to checkout my blog post on link:/blog/2018/06/25/react-spring-boot-photo-gallery-pwa[how to build a Photo Gallery PWA with React, Spring Boot, and JHipster].
+
+We've also published a number of posts about testing and Spring Security 5.1:
+
+// make sure you linked to previous Java 11 + JHipster somewhere, or add to this list
+
+* link:/blog/2019/03/28/test-java-spring-boot-junit5[Test Your Spring Boot Applications with JUnit 5]
+* link:/blog/2018/05/02/testing-spring-boot-angular-components[The Hitchhiker's Guide to Testing Spring Boot APIs and Angular Components with WireMock, Jest, Protractor, and Travis CI]
+* link:/blog/2019/03/12/oauth2-spring-security-guide[A Quick Guide to OAuth 2.0 with Spring Security]
+* link:/blog/2019/03/05/spring-boot-migration[Migrate Your Spring Boot App to the Latest and Greatest Spring Security and OAuth 2.0]
+
+Want more tech tips? Follow us on social networks { https://twitter.com/oktadev[Twitter], https://www.linkedin.com/company/oktadev[LinkedIn], https://www.facebook.com/oktadevelopers/[Facebook], https://www.youtube.com/channel/UC5AMiWqFVFxF1q9Ya1FuZ_Q[YouTube] } to be notified when we publish new content.
+
+_Have a question about Okta that's unrelated to this post? Please ask it on our https://devforum.okta.com/[developer forums]._
