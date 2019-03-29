@@ -302,8 +302,6 @@ Caused by: java.lang.IllegalArgumentException: tokenValue cannot be empty
 ----
 
 I https://stackoverflow.com/questions/55163989/how-to-test-authenticationprincipal-and-getting-an-id-token-in-spring-security[posted this problem to Stack Overflow] and sent an email to the Spring Security team as well. https://twitter.com/joe_grandja[Joe Grandja] responded with a solution to the problem.
-
-// todo: fix CSS for blockquote and blockquote p
 ____
 The `AuthenticationPrincipalArgumentResolver` is not getting registered in your test.
 
