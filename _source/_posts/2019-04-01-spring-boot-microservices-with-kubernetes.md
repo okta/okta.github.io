@@ -7,7 +7,7 @@ tags: [java, spring boot, microservices, kubernetes, k8s]
 tweets:
 - "Learn how to use Spring Boot to build a microservices architecture, then deploy it to Google Cloud using @kubernetesio!"
 - "Using @kubernetesio to deploy your microservices architecture is all the rage. Check out this post to learn how to do it!"
-- "Spring Boot + Kubernates + @googlecloud = 💙! Learn how to use k8s to deploy your @springboot microservices in this step-by-step tutorial."
+- "Spring Boot + Kubernetes + @googlecloud = 💙! Learn how to use k8s to deploy your @springboot microservices in this step-by-step tutorial."
 image: blog/featured/okta-java-skew.jpg
 ---
 
