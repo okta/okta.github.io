@@ -1,14 +1,13 @@
 ---
 layout: blog_post
-title: "Updated OpenID Connect Support in JHipster 6"
-title: "Use Java 11 (or Java 12) with JHipster 6"
 title: "Better, Faster, Lighter Java with Java 12 and JHipster 6"
 author: mraible
 description: "Stay hip with the latest Java and Spring Boot releases by using JHipster 6! This post shows you how to get started."
 tags: [java, spring boot, java11, java12, jhipster]
 tweets:
--
-image:
+- "Stay up-to-date with @Java and @JavaScript by using JHipster!"
+- "JHipster 6 runs on Java 11 and Java 12! How cool is that? All thanks to the power of @springboot 2.1. 👌"
+- "JHipster 6 integrates @springboot, @springsecurity, and @oauth_2 - a powerful combination!"
 ---
 :page-liquid:
 
@@ -18,15 +17,15 @@ Spring Boot 2.1 added Java 11 support, along with performance improvements, a ne
 
 I was a web developer years before I became a Java developer. I've been developing Java for 20 years, so that's saying a lot! If you're a Java developer, chances are you're baffled by the pace of change in the JavaScript world. If you think Java is hard to keep up with, try keeping up with JavaScript and its ecosystem! The good news is there's an excellent way to keep up with both: just use https://www.jhipster.tech[JHipster].
 
-JHipster 6 uses Spring Boot 2.1 for its backend API, which means you can use Java 11 to develop your JHipster apps!
+JHipster 6 uses Spring Boot 2.1 for its backend API, which means you can use Java 11+ to develop your JHipster apps!
 
-== How does JHipster Make Java and JavaScript Development easier?
+== How Does JHipster Make Java and JavaScript Development Easier?
 
-JHipster is one of the my favorite open source projects on the planet. It's a development platform to generate, develop, and deploy Spring Boot + Angular applications. In addition, it supports React, Vue, and creating microservice architectures with Netflix OSS, the Elastic Stack, and Docker.
+JHipster is one of my favorite open source projects on the planet. It's a development platform to generate, develop, and deploy Spring Boot + Angular applications. In addition, it supports React, Vue, and creating microservice architectures with Netflix OSS, the Elastic Stack, and Docker.
 
 Java developers tend to dislike JavaScript, but many are OK with TypeScript. Guess what? JHipster uses TypeScript for all its UI framework implementations!
 
-JHipster makes Java and JavaScript development easier by configuring everything for you, and using the latest versions of its underlying frameworks. Want to upgrade your app to use the latest versions? Simply run `jhipster upgrade`.
+JHipster makes Java and JavaScript development easier by configuring everything for you and using the latest versions of its underlying frameworks. Want to upgrade your app to use the latest versions? Simply run `jhipster upgrade`.
 
 == Install Java 11 or Java 12
 
@@ -119,15 +118,23 @@ WARNING: Make sure you're not in your home directory! Your project will be gener
 jhipster import-jdl app.jh
 ----
 
-This will create a multitude of files and install dependencies using `npm install`. Your terminal should look similar to the following.
+This will create a multitude of files and install dependencies using `npm install`. Your terminal should look similar to the following when you run this command:
 
 image::{% asset_path 'blog/java-11-jhipster-6/import-jdl.png' %}[alt=Results of import-jdl,width=800,align=center]
+
+If you'd prefer to see what this command looks line in-action, you can watch the recording below.
+
+++++
+<div style="text-align: center">
+<script id="asciicast-238226" src="https://asciinema.org/a/238226.js" async></script>
+</div>
+++++
 
 Since you specified `oauth2` as the authentication type, a Docker Compose configuration will be installed for Keycloak.
 
 https://www.keycloak.org/[Keycloak] is an Apache-licensed open source identity and access management solution. In addition to creating a https://github.com/jhipster/generator-jhipster/blob/master/generators/server/templates/src/main/docker/keycloak.yml.ejs[`src/main/docker/keycloak.yml`] file for Docker Compose, JHipster generates a https://github.com/jhipster/generator-jhipster/tree/master/generators/server/templates/src/main/docker/config/realm-config[`src/main/docker/config/realm-config`] directory with files in it that configure Keycloak to work with JHipster out-of-the-box.
 
-== Run Your JHipster App and Login with Keycloak
+== Run Your JHipster App and Log In with Keycloak
 
 Keycloak must be running for your JHipster app to start successfully. This is because Spring Security 5.1's link:/blog/2019/03/05/spring-boot-migration[first-class OIDC support] is leveraged in JHipster 6.
 
@@ -157,11 +164,11 @@ Pretty slick, eh? You just created a modern single page application (SPA) that u
 
 NOTE: If you're confused by how OAuth 2.0 and OIDC work together, please see my link:/blog/2017/06/21/what-the-heck-is-oauth[What the Heck is OAuth?] post. In short, OIDC is a thin layer on top of OAuth 2.0 that adds identity.
 
-== Use Okta: We're Always On
+== Use Okta: We're Always On!
 
 Keycloak is an excellent project that works great for development and testing. However, if you use it in production, you'll be responsible for maintaining it, updating it to the latest releases, and making sure it's up 24/7. For these reasons, I recommend using Okta in production. After all, we're _always on!_ 😃
 
-=== Create an OIDC Web Application
+=== Create an OpenID Connect Web Application
 
 To begin, sign up for a https://developer.okta.com/signup/[forever-free Okta developer account] (or sign in to `{yourOktaDomain}` if you already have an account).
 
@@ -190,7 +197,7 @@ export SPRING_SECURITY_OAUTH2_CLIENT_REGISTRATION_OIDC_CLIENT_SECRET="{clientSec
 
 TIP: Add `*.env` to your `.gitignore` file so this file won't end up in your source control system.
 
-=== Create Groups and Add them as Claims to the ID Token
+=== Create Groups and Add Them as Claims to the ID Token
 
 JHipster is configured by default to work with two types of users: administrators and users. Keycloak is configured with users and groups automatically, but you need to do some one-time configuration for your Okta organization.
 
@@ -210,7 +217,7 @@ Navigate to `http://localhost:8080` and log in with your Okta credentials.
 
 image::{% asset_path 'blog/java-11-jhipster-6/authenticated-by-okta.png' %}[alt=Authenticated by Okta,width=800,align=center]
 
-Isn't it cool how easy Spring Boot and Spring Security make it to switch OIDC providers?!
+Isn't it cool how Spring Boot and Spring Security make it easy to switch OIDC providers?!
 
 == CRUD with JHipster
 
