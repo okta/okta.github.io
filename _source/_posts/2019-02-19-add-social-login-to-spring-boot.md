@@ -82,7 +82,7 @@ security:
     oauth2:
         client:
             access-token-uri: https://{yourOktaDomain}/oauth2/default/v1/token
-            user-authorization-uri: {yourCustomDomain}
+            user-authorization-uri: https://{yourOktaDomain}/oauth2/default/v1/authorize
             client-id: {yourClientId}
             client-secret: {yourClientSecret}
             scope: openid profile email
@@ -94,7 +94,7 @@ You can also keep your settings outside of your app, and override them with envi
 
 ```bash
 export SECURITY_OAUTH2_CLIENT_ACCESS_TOKEN_URI="https://{yourOktaDomain}/oauth2/default/v1/token"
-export SECURITY_OAUTH2_CLIENT_USER_AUTHORIZATION_URI="{yourCustomDomain}"
+export SECURITY_OAUTH2_CLIENT_USER_AUTHORIZATION_URI="https://{yourOktaDomain}/oauth2/default/v1/authorize"
 export SECURITY_OAUTH2_RESOURCE_USER_INFO_URI="https://{yourOktaDomain}/oauth2/default/v1/userinfo"
 export SECURITY_OAUTH2_CLIENT_CLIENT_ID="{yourClientId}"
 export SECURITY_OAUTH2_CLIENT_CLIENT_SECRET="{yourClientSecret}"
