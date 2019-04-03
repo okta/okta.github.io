@@ -1780,7 +1780,7 @@ Content-Type: application/json
 
 {% api_operation post /api/v1/authn/credentials/change_password %}
 
-This operation changes a user's password by providing the existing password and the new password password for authentication transactions with either the `PASSWORD_EXPIRED` or `PASSWORD_WARN` state.
+This operation changes a user's password by providing the existing password and the new password for authentication transactions with either the `PASSWORD_EXPIRED` or `PASSWORD_WARN` state.
 
 * A user *must* change their expired password for an authentication transaction with `PASSWORD_EXPIRED` status to successfully complete the transaction.
 * A user *may* opt-out of changing their password (skip) when the transaction has a `PASSWORD_WARN` status.

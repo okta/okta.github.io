@@ -98,6 +98,7 @@ Now we're ready to start building the login URL where we can send the user to au
     'client_id' => $client_id,
     'redirect_uri' => $redirect_uri,
     'state' => $_SESSION['state'],
+    'scope' => 'openid',
   ]);
 ```
 

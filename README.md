@@ -1,8 +1,10 @@
 [<img src="https://devforum.okta.com/uploads/oktadev/original/1X/0c6402653dfb70edc661d4976a43a46f33e5e919.png" align="right" width="256px"/>][doc]
 
+> ATTENTION: This repo is now only to be used for the blog (https://developer.okta.com/blog) pages. All content for documentation should be changed at our [new repo](https://github.com/okta/okta-developer-docs)
+
 [![Support](https://img.shields.io/badge/support-developer%20forum-blue.svg)][devforum] [![Build Status](https://travis-ci.org/okta/okta.github.io.svg?branch=source)](https://travis-ci.org/okta/okta.github.io)
 
-# Okta developer site 
+# Okta developer site
 
 The [Okta developer site][doc] serves Okta's API documentation and guides, including:
 - [API references](https://developer.okta.com/docs/api/resources/)

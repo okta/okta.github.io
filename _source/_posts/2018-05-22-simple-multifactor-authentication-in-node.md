@@ -155,7 +155,7 @@ require('dotenv').config()
 Now that you've added the necessary code, you just need to add the new dependencies and start the app again.
 
 ```bash
-npm install @okta/oidc-middleware express-session dotenv
+npm install @okta/oidc-middleware@0.1.1 express-session dotenv
 PORT=8080 npm start
 ```
 

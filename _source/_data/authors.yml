@@ -309,6 +309,12 @@ jonathan-ray:
   web: http://notjustphysics.com
   github: https://github.com/jonathan-ray
 
+joyannefoster:
+  full_name: Joy Foster
+  display_name: Joy Foster
+  avatar: avatar-joyanne-foster.jpg
+  github: https://github.com/joyannefoster
+
 raphaeldovale:
   full_name: Raphael do Vale
   display_name: Raphael do Vale
@@ -330,3 +336,13 @@ quorralyne:
   web: https://quorralyne.com
   twitter: https://twitter.com/quorralyne
   github: https://github.com/quorralyne
+
+ryanfoster:
+  full_name: Ryan Foster
+  display_name: Ryan Foster
+  avatar: avatar-ryanfoster.png
+
+jeffersonhaw:
+  full_name: Jefferson Haw
+  display_name: Jefferson Haw
+  avatar: avatar-jeffhaw.jpeg

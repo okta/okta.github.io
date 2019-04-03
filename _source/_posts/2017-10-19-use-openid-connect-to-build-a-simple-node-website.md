@@ -288,7 +288,7 @@ of the OIDC implementation details for your website
 To install these libraries, run the following command:
 
 ```console
-$ npm install express-session @okta/oidc-middleware
+$ npm install express-session @okta/oidc-middleware@0.0.6
 ```
 
 Next, you'll need to import these libraries in your `server.js` from before:

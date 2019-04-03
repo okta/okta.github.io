@@ -913,13 +913,13 @@ The first three parameters correspond to different types of lists:
 - [List All Users](#list-all-users) (no parameters)
 - [Find Users](#find-users) (`q`)
 - [List Users with a Filter](#list-users-with-a-filter) (`filter`)
-- [List Users with Search](#list-users-with-search) (`search`) {% api_lifecycle ea %}
+- [List Users with Search](#list-users-with-search) (`search`)
 
 | Parameter | Description                                                                                                                                  | Param Type | DataType | Required |
 |:----------|:---------------------------------------------------------------------------------------------------------------------------------------------|:-----------|:---------|:---------|
 | q         | Finds a user that matches `firstName`, `lastName`, and `email` properties                                                                    | Query      | String   | FALSE    |
 | filter    | [Filters](/docs/api/getting_started/design_principles#filtering) users with a supported expression for a subset of properties           | Query      | String   | FALSE    |
-| search    | Searches for users with a supported [filtering](/docs/api/getting_started/design_principles#filtering) expression for most properties {% api_lifecycle ea %} | Query      | String   | FALSE    |
+| search    | Searches for users with a supported [filtering](/docs/api/getting_started/design_principles#filtering) expression for most properties  | Query      | String   | FALSE    |
 | limit     | Specifies the number of results returned (maximum 200)                                                                                       | Query      | Number   | FALSE    |
 | after     | Specifies the pagination cursor for the next page of users                                                                                   | Query      | String   | FALSE    |
 
@@ -1260,7 +1260,7 @@ curl -v -X GET \
 #### List Users with Search
 {:.api .api-operation}
 
-> Listing users with search is an {% api_lifecycle ea %} feature and should not be used as a part of any critical flows, like authentication.
+> Listing users with search should not be used as a part of any critical flows, like authentication.
 
 Searches for users based on the properties specified in the search parameter (case insensitive)
 
@@ -3385,409 +3385,6 @@ curl -v -X GET \
 ~~~
 
 
-## User Email Operations
-
-{% api_lifecycle beta %}
-
-Manage a user's email with the following operations.
-
-### User Email Object
-
-| Property    | Description                                 | Datatype                                                        | Unique |
-|:------------|:--------------------------------------------|:----------------------------------------------------------------|:-------|
-| id          | The ID of the email object                  | String                                                          | TRUE   |
-| status      | Whether the email is verified or not         | String                                                          | FALSE  |
-| value       | The value of the email address              | String                                                          | FALSE  |
-| _links      | Discoverable resources related to the email | [JSON HAL](http://tools.ietf.org/html/draft-kelly-json-hal-06)  | FALSE  |
-
-Example
-
-~~~json
-{
-  "id": "00T196qTp3LIMZQ0L0g3",
-  "status": "UNVERIFIED | VERIFIED",
-  "value": "saml.jackson@example.com",
-  "_links": {
-    "self": {
-      "href": "/api/v1/users/00uzjoiIBruZE06jj0g3/emails/00T196qTp3LIMZQ0L0g3",
-      "hints": {
-        "allow": [
-          "GET"
-        ]
-      }
-    },
-    "verify": {
-      "href": "/api/v1/users/00uzjoiIBruZE06jj0g3/emails/00T196qTp3LIMZQ0L0g3/verify",
-      "hints": {
-        "allow": [
-          "POST"
-        ]
-      }
-    },
-    "change": {
-      "href": "/api/v1/users/00uzjoiIBruZE06jj0g3/emails/00T196qTp3LIMZQ0L0g3/change",
-      "hints": {
-        "allow": [
-          "POST"
-        ]
-      }
-    },
-    "user": {
-      "href": "/api/v1/users/00uzjoiIBruZE06jj0g3",
-      "hints": {
-        "allow": [
-          "GET"
-        ]
-      }
-    }
-  }
-}
-~~~
-
-### List Emails
-{:.api .api-operation}
-
-{% api_lifecycle beta %}
-
-{% api_operation get /api/v1/users/${userId}/emails %}
-
-Lists a user's email
-
-#### Request
-{:.api .api-request .api-request-example}
-
-~~~sh
-curl -v -X GET \
--H "Accept: application/json" \
--H "Content-Type: application/json" \
--H "Authorization: SSWS ${api_token}" \
-"https://{yourOktaDomain}/api/api/v1/users/00uzjoiIBruZE06jj0g3/emails"
-~~~
-
-#### Response (Verified Email)
-{:.api .api-response .api-response-example}
-
-> Note: Although the email is in `VERIFIED` status, the `verify` operation is still published for completeness.
-
-~~~json
-[
-  {
-    "id": "00T196qTp3LIMZQ0L0g3",
-    "status": "VERIFIED",
-    "value": "saml.jackson@example.com",
-    "_links": {
-      "self": {
-        "href": "/api/v1/users/00uzjoiIBruZE06jj0g3/emails/00T196qTp3LIMZQ0L0g3",
-        "hints": {
-          "allow": [
-            "GET"
-          ]
-        }
-      },
-      "verify": {
-        "href": "/api/v1/users/00uzjoiIBruZE06jj0g3/emails/00T196qTp3LIMZQ0L0g3/verify",
-        "hints": {
-          "allow": [
-            "POST"
-          ]
-        }
-      },
-      "change": {
-        "href": "/api/v1/users/00uzjoiIBruZE06jj0g3/emails/00T196qTp3LIMZQ0L0g3/change",
-        "hints": {
-          "allow": [
-            "POST"
-          ]
-        }
-      },
-      "user": {
-        "href": "/api/v1/users/00uzjoiIBruZE06jj0g3",
-        "hints": {
-          "allow": [
-            "GET"
-          ]
-        }
-      }
-    }
-  }
-]
-~~~
-
-#### Response (Unverified Email)
-{:.api .api-response .api-response-example}
-
-~~~json
-[
-  {
-    "id": "00T196qTp3LIMZQ0L0g3",
-    "status": "UNVERIFIED",
-    "value": "saml.jackson@example.com",
-    "_links": {
-      "self": {
-        "href": "/api/v1/users/00uzjoiIBruZE06jj0g3/emails/00T196qTp3LIMZQ0L0g3",
-        "hints": {
-          "allow": [
-            "GET"
-          ]
-        }
-      },
-      "verify": {
-        "href": "/api/v1/users/00uzjoiIBruZE06jj0g3/emails/00T196qTp3LIMZQ0L0g3/verify",
-        "hints": {
-          "allow": [
-            "POST"
-          ]
-        }
-      },
-      "user": {
-        "href": "/api/v1/users/00uzjoiIBruZE06jj0g3",
-        "hints": {
-          "allow": [
-            "GET"
-          ]
-        }
-      }
-    }
-  }
-]
-~~~
-
-### Get Email
-{:.api .api-operation}
-
-{% api_lifecycle beta %}
-
-{% api_operation get /api/v1/users/${userId}/emails/${emailId} %}
-
-Gets a particular email for a user
-
-#### Request
-{:.api .api-request .api-request-example}
-
-~~~sh
-curl -v -X GET \
--H "Accept: application/json" \
--H "Content-Type: application/json" \
--H "Authorization: SSWS ${api_token}" \
-"https://{yourOktaDomain}/api/v1/users/00uzjoiIBruZE06jj0g3/emails/00T196qTp3LIMZQ0L0g3"
-~~~
-
-#### Response
-{:.api .api-response .api-response-example}
-
-~~~json
-{
-  "id": "00T196qTp3LIMZQ0L0g3",
-  "status": "UNVERIFIED",
-  "value": "saml.jackson@example.com",
-  "_links": {
-    "self": {
-      "href": "/api/v1/users/00uzjoiIBruZE06jj0g3/emails/00T196qTp3LIMZQ0L0g3",
-      "hints": {
-        "allow": [
-          "GET"
-        ]
-      }
-    },
-    "verify": {
-      "href": "/api/v1/users/00uzjoiIBruZE06jj0g3/emails/00T196qTp3LIMZQ0L0g3/verify",
-      "hints": {
-        "allow": [
-          "POST"
-        ]
-      }
-    },
-    "user": {
-      "href": "/api/v1/users/00uzjoiIBruZE06jj0g3",
-      "hints": {
-        "allow": [
-          "GET"
-        ]
-      }
-    }
-  }
-}
-~~~
-
-### Verify Email
-{:.api .api-operation}
-
-{% api_lifecycle beta %}
-
-{% api_operation post /api/v1/users/${userId}/emails/${emailId}/verify %}
-
-Triggers email verification flow for an unverified email
-
-> Verification is idempotent and can be retried at any time.  Issuing a new verification invalidates any previously issued verification tokens.
-
-#### Request Parameters
-{:.api .api-request .api-request-params}
-
-| Parameter   | Description                                                               | Param Type | DataType           | Required | Default                     |
-|:----------- | ------------------------------------------------------------------------- | ---------- | ------------------ | -------- | --------------------------- |
-| userId         | `id` of auser                                                              | URL        | String             | TRUE     |                             |
-| emailId        | `id` of email                                                             | URL        | String             | TRUE     |                             |
-| sendEmail   | Sends a verification email to the user if `true`                          | Query      | Boolean            | FALSE    | TRUE                        |
-| redirectUri | Specifies where the end user is redirected after verification             | Body       | String             | FALSE    | `/app/UserHome`             |
-| expiresAt   | Timestamp when the verification token expires                             | Body       | Date               | FALSE    | 5 days |
-| actions     | Extensible actions performed when verification token is validated          | Body       | Actions Object     | FALSE    |                             |
-
-##### Actions Object
-
-| Property      | DataType                         | Nullable | Unique | Readonly | Default          |
-|:--------------|:---------------------------------|:---------|:-------|:---------|:-----------------|
-| signOn        | `NOT_REQUIRED` or `REQUIRED`     | TRUE     | FALSE  | FALSE    | `REQUIRED`       |
-
-The `signOn` property determines whether a user has to sign in after clicking on an email verification link to complete the verification process. Thus, if `signOn` is set to `REQUIRED`, an Okta session is granted after the user has signed in.
-
-#### Request
-{:.api .api-request .api-request-example}
-
-~~~sh
-curl -X POST \
--H 'Accept: application/json' \
--H 'content-type: application/json' \
--H "Authorization: SSWS ${api_token}" \
--d '{
-  "redirectUri": "https://example.com/some/page?state=blah&custom=true",
-  "expiresAt": "2017-06-14T00:17:57.000Z",
-  "actions": {
-    "signOn": "REQUIRED"
-  }
-}' "https://{yourOktaDomain}/api/v1/users/00uzjoiIBruZE06jj0g3/emails/00T196qTp3LIMZQ0L0g3/verify"
-~~~
-
-#### Response
-{:.api .api-response .api-response-example}
-
-~~~sh
-HTTP/1.1 202 Accepted
-Content-Type: application/json
-
-{
-  "verificationToken": "HcjJ03HcEEFEydBk5N8k"
-}
-~~~
-
-##### Errors
-
-~~~sh
-HTTP/1.1 400 Bad Request
-Content-Type: application/json
-
-{
-  "errorCode": "E0000001",
-  "errorSummary": "Api validation failed: expiresAt",
-  "errorLink": "E0000001",
-  "errorId": "oaeWGQKoQHeQmy0u8w8bPwi_Q",
-  "errorCauses": [
-    {
-      "errorSummary": "The verification token must not expire in the past"
-    }
-  ]
-}
-~~~
-
-### Change Email Credential
-{:.api .api-operation}
-
-{% api_lifecycle beta %}
-
-{% api_operation post /api/v1/users/${userId}/emails/${emailId}/change %}
-
-Changes a verified email
-
-This operation delays a profile update or profile push until the user has verified their email address.
-
-> Email changes are idempotent.  Issuing a new change verification replaces any previously issued change verification tokens.
-
-#### Request Parameters
-{:.api .api-request .api-request-params}
-
-| Parameter   | Description                                                                | Param Type | DataType           | Required | Default                     |
-|:----------- | -------------------------------------------------------------------------- | ---------- | ------------------ | -------- | --------------------------- |
-| userId         | `id` of a user                                                               | URL        | String             | TRUE     |                             |
-| emailId        | `id` of email                                                              | URL        | String             | TRUE     |                             |
-| sendEmail   | Sends a verification email to the user if `true`                           | Query      | Boolean            | FALSE    | TRUE                        |
-| value       | Target email address that will replace current email address when verified | Body       | String (RFC Email) | TRUE     |                             |
-| redirectUri | Specifies where the end user is redirected after verification              | Body       | String             | FALSE    | `/app/UserHome`             |
-| expiresAt   | Timestamp when the verification token expires                              | Body       | Date               | FALSE    | 5 days |
-| actions     | Extensible actions peformed when verification token is validated           | Body       | Actions Object     | FALSE    |                             |
-
-##### Actions Object
-
-| Property      | DataType                         | Nullable | Unique | Readonly | Default          |
-|:--------------|:---------------------------------|:---------|:-------|:---------|:-----------------|
-| signOn        | `NOT_REQUIRED` or `REQUIRED`     | TRUE     | FALSE  | FALSE    | `REQUIRED`       |
-
-The `signOn` property determines whether a user has to sign in after clicking on an email verification link to complete the verification process. Thus, if `signOn` is set to `REQUIRED`, an Okta session is granted after the user has signed in.
-
-#### Request
-{:.api .api-request .api-request-example}
-
-~~~sh
-curl -X POST \
--H 'Accept: application/json' \
--H 'Content-Type: application/json' \
--H "Authorization: SSWS ${api_token}" \
--d '{
-  "redirectUri": "https://example.com/some/page?state=blah&custom=true",
-  "expiresAt": "2017-06-14T00:17:57.000Z",
-  "value": "update@example.com",
-  "actions": {
-    "signOn": "REQUIRED"
-  }
-}' "https://{yourOktaDomain}/api/api/v1/users/00uzjoiIBruZE06jj0g3/emails/00T196qTp3LIMZQ0L0g3/change"
-~~~
-
-#### Response
-{:.api .api-response .api-response-example}
-
-~~~sh
-HTTP/1.1 202 Accepted
-Content-Type: application/json
-
-{
-  "verificationToken": "HcjJ03HcEEFEydBk5N8k"
-}
-~~~
-
-##### Errors
-
-~~~sh
-HTTP/1.1 400 Bad Request
-Content-Type: application/json
-
-{
-  "errorCode": "E0000001",
-  "errorSummary": "Api validation failed: expiresAt",
-  "errorLink": "E0000001",
-  "errorId": "oaeWGQKoQHeQmy0u8w8bPwi_Q",
-  "errorCauses": [
-    {
-      "errorSummary": "The verification token must not expire in the past"
-    }
-  ]
-}
-~~~
-
-~~~sh
-HTTP/1.1 400 Bad Request
-Content-Type: application/json
-
-{
-  "errorCode": "E0000001",
-  "errorSummary": "Api validation failed: value",
-  "errorLink": "E0000001",
-  "errorId": "oaeWGQKoQHeQmy0u8w8bPwi_Q",
-  "errorCauses": [
-    {
-      "errorSummary": "The verification token must not expire in the past"
-    }
-  ]
-}
-~~~
-
 ## User Model
 
 ### Example
@@ -4072,11 +3669,11 @@ A hashed password may be specified in a Password Object when creating or updatin
 
 | Property   | DataType | Description                                                                                                 | Required                           | Min Value          | Max Value          |
 |:-----------|:---------|:------------------------------------------------------------------------------------------------------------|:-----------------------------------|:-------------------|:-------------------|
-| algorithm  | String   | The algorithm used to hash the password. Must be set to `BCRYPT` or `SHA-256`                               | TRUE                               | N/A                | N/A                |
-| value      | String   | For `SHA-256`: This is the actual base64-encoded hashed password. For `BCRYPT`: This is the actual radix64-encoded hashed password.                                                                   | TRUE                               | N/A                | N/A                |
-| salt       | String   | For `SHA-256`: Specifies the base64-encoded password salt used to generate the hash. For `BCRYPT`: Specifies the radix64-encoded password salt used to generate the hash.                                                       | TRUE                               | 22 (only for `BCRYPT` algorithm) | 22 (only for `BCRYPT` algorithm) |
+| algorithm  | String   | The algorithm used to hash the password. Must be set to `BCRYPT`, `SHA-256`, `SHA-1` or `MD5`                               | TRUE                               | N/A                | N/A                |
+| value      | String   | For `SHA-256`, `SHA-1`, `MD5`: This is the actual base64-encoded hashed password. For `BCRYPT`: This is the actual radix64-encoded hashed password.                                                                   | TRUE                               | N/A                | N/A                |
+| salt       | String   | For `SHA-256`, `SHA-1`, `MD5`: Specifies the base64-encoded password salt used to generate the hash. For `BCRYPT`: Specifies the radix64-encoded password salt used to generate the hash.                                                       | TRUE                               | 22 (only for `BCRYPT` algorithm) | 22 (only for `BCRYPT` algorithm) |
 | workFactor | Integer  | Governs the strength of the hash, and the time required to compute it. Only relevant for `BCRYPT` algorithm | Only for `BCRYPT` algorithm        | 1                  | 20                 |
-| saltOrder  | String   | Specifies whether salt was pre- or postfixed to password before hashing. Only relevant for `SHA-256` algorithm. Must be set to `PREFIX` or `POSTFIX` | Only for `SHA-256` algorithm      | N/A                | N/A                |
+| saltOrder  | String   | Specifies whether salt was pre- or postfixed to the password before hashing. Only relevant for `SHA-256`, `SHA-1`, `MD5` algorithms. Must be set to `PREFIX` or `POSTFIX`| Only for `SHA-256`, `Salted SHA-1`, `Salted MD5` algorithms                | N/A                | N/A                |
 
 ###### BCRYPT Hashed Password Object Example
 
@@ -4104,9 +3701,35 @@ A hashed password may be specified in a Password Object when creating or updatin
 }
 ~~~
 
+###### SHA-1 Hashed Password Object Example
+
+~~~sh
+"password" : {
+  "hash": {
+    "algorithm": "SHA-1",
+    "salt": "UEO3wsAsgzQ=",
+    "saltOrder": "POSTFIX",
+    "value": "xjrauE6J6kbjcvMjWSSc+PsBBls="
+  }
+}
+~~~
+
+###### MD5 Hashed Password Object Example
+
+~~~sh
+"password" : {
+  "hash": {
+    "algorithm": "MD5",
+    "salt": "TXlTYWx0",
+    "saltOrder": "PREFIX",
+    "value": "jqACjUUFXM1XE6NiLALAbA=="
+  }
+}
+~~~
+
 ##### Hashing Function
 
-Okta supports the `BCRYPT` and `SHA-256` hashing functions for password import, when the feature is enabled.
+Okta supports the `BCRYPT`, `SHA-256`, `SHA-1`, and `MD5` hashing functions for password import.
 
 ##### Default Password Policy
 

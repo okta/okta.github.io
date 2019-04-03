@@ -33,7 +33,7 @@ I am developing the application on a Linux laptop. Most of the commands will be 
 To get the basic scaffolding for the app in place, start by cloning the basic React and ASP.NET Core application.
 
 ```sh
-git clone git@github.com:oktadeveloper/dotnetcore-react-crud-example
+git clone https://github.com/oktadeveloper/okta-dotnetcore-react-example.git
 ```
 
 Then create a new branch we'll use to turn the shell into a fully CRUD application.

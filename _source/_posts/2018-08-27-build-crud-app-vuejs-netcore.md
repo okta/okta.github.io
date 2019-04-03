@@ -478,7 +478,7 @@ With `FoodRecordsApiService` available you can proceed to create a component for
 <template>
   <div class="container-fluid mt-4">
     <h1 class="h1">Food Records</h1>
-    <b-alert : show="loading" variant="info">Loading...</b-alert>
+    <b-alert :show="loading" variant="info">Loading...</b-alert>
     <b-row>
       <b-col>
         <table class="table table-striped">
@@ -492,7 +492,7 @@ With `FoodRecordsApiService` available you can proceed to create a component for
             </tr>
           </thead>
           <tbody>
-            <tr v-for="record in records" : key="record.id">
+            <tr v-for="record in records" :key="record.id">
               <td>{{ record.id }}</td>
               <td>{{ record.name }}</td>
               <td>{{ record.value }}</td>
@@ -506,7 +506,7 @@ With `FoodRecordsApiService` available you can proceed to create a component for
         </table>
       </b-col>
       <b-col lg="3">
-        <b-card : title="(model.id ? 'Edit Food ID#' + model.id : 'New Food Record')">
+        <b-card :title="(model.id ? 'Edit Food ID#' + model.id : 'New Food Record')">
           <form @submit.prevent="createFoodRecord">
             <b-form-group label="Name">
               <b-form-input type="text" v-model="model.name"></b-form-input>
@@ -589,6 +589,14 @@ With `FoodRecordsApiService` available you can proceed to create a component for
 
 Now it's time to add this component to the main menu and make sure our router renders the component once we navigate to `/food-records`. Inside of your Vue application, update the `src/router/index.js` file. Add the following to the list of routes:
 
+First, import the `FoodRecords` component:
+
+```js
+import FoodRecords from '@/components/FoodRecords'
+```
+
+Then add the route to it:
+
 ```js
 {
   path: '/food-records',
@@ -664,7 +672,7 @@ Inside your ASP.NET Core project create a new file `ApplicationDbContext.cs` tha
 ```cs
 using Microsoft.EntityFrameworkCore;
 
-namespace AspNetCore.Controllers {
+namespace AspNetCore {
   public class ApplicationDbContext : DbContext
   {
     public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
@@ -680,6 +688,12 @@ Time to add DbContext to your application. Inside of the`Startup` class, locate 
 ```cs
 var connectionString = Configuration.GetConnectionString("DefaultConnection");
 services.AddDbContext<ApplicationDbContext>(options => options.UseSqlite(connectionString));
+```
+
+You'll also need to import the `Microsoft.EntityFrameworkCore` namespace to your `Startup.cs` file:
+
+```cs
+using Microsoft.EntityFrameworkCore;
 ```
 
 This retrieves the connection string from our configuration (`appsettings.json` file) and adds the DbContext to our ASP.NET Core application, to its DI container. We also make sure to specify the connection string that will be used by our DbContext.
@@ -698,7 +712,7 @@ public void Configure(IApplicationBuilder app, IHostingEnvironment env, Applicat
   }
   
   dbContext.Database.EnsureCreated();
-    
+
   app.UseMvc();
 }
 ```
@@ -709,18 +723,19 @@ public void Configure(IApplicationBuilder app, IHostingEnvironment env, Applicat
 Inside your main project let's make a class `FoodRecord`:
 
 ```cs
-public class FoodRecord
+using System;
+
+namespace AspNetCore
 {
-  public string Id { get; set; }
-
-  public string Name { get; set; }
-
-  public decimal Value { get; set; }
-
-  public DateTime DateTime { get; set; }
+  public class FoodRecord
+  {
+    public string Id { get; set; }
+    public string Name { get; set; }
+    public decimal Value { get; set; }
+    public DateTime DateTime { get; set; }
+  }
 }
 ```
-
 
 ### Enable CORS
 
