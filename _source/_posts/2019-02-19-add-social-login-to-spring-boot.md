@@ -71,7 +71,8 @@ Your Okta OIDC Application's configuration should match the following screenshot
 
 {% img blog/spring-boot-social-login/oidc-app.png alt:"OIDC app on Okta" width:"700" %}{: .center-image }
 
-Finally, you will need a domain name that you can use to set up as custom Okta URL for your sign-in page. You'll need access to the DNS Zone entries to be able to create a CNAME record for a domain or subdomain.
+Finally, you will need a domain name that you can use to set up as custom Okta URL for your sign-in page. You'll need access to the DNS Zone entries to be able to create a CNAME record for a domain or subdomain. The custom domain doesn't actually need to be a subdomain. It can be a plain, old domain just as easily. But for this tutorial, I figure more people have access to setting up a subdomain on a domain name they have already (who doesn't have a few dozen lying around?).
+
 
 ## Configure the OAuth 2.0 Settings for Your Spring Boot App
 
@@ -82,7 +83,7 @@ security:
     oauth2:
         client:
             access-token-uri: https://{yourOktaDomain}/oauth2/default/v1/token
-            user-authorization-uri: {yourCustomDomain}
+            user-authorization-uri: https://{yourOktaDomain}/oauth2/default/v1/authorize
             client-id: {yourClientId}
             client-secret: {yourClientSecret}
             scope: openid profile email
@@ -94,7 +95,7 @@ You can also keep your settings outside of your app, and override them with envi
 
 ```bash
 export SECURITY_OAUTH2_CLIENT_ACCESS_TOKEN_URI="https://{yourOktaDomain}/oauth2/default/v1/token"
-export SECURITY_OAUTH2_CLIENT_USER_AUTHORIZATION_URI="{yourCustomDomain}"
+export SECURITY_OAUTH2_CLIENT_USER_AUTHORIZATION_URI="https://{yourOktaDomain}/oauth2/default/v1/authorize"
 export SECURITY_OAUTH2_RESOURCE_USER_INFO_URI="https://{yourOktaDomain}/oauth2/default/v1/userinfo"
 export SECURITY_OAUTH2_CLIENT_CLIENT_ID="{yourClientId}"
 export SECURITY_OAUTH2_CLIENT_CLIENT_SECRET="{yourClientSecret}"
@@ -107,9 +108,8 @@ If you're using our starter app from the git repo, **make sure you update the `a
  - Okta application client ID
  - Okta application client secret
  - Your Okta URL. Something like: `https://dev-123456.okta.com`
- - Your custom domain. Mine is: `okta.andrewcarterhughes.com`
 
-The `access-token-uri` and `user-info-uri` should contain your Okta URL. The `user-authorization-uri` needs to be your custom domain.
+The `access-token-uri`, `user-authorization-uri`, and `user-info-uri` should contain your Okta URL. In the next section, you'll update `user-authorization-uri` to use your custom domain, but for the moment, you can use your Okta URL.
 
 For example, my `application.yml` looks as follows:
 
@@ -118,15 +118,13 @@ security:
     oauth2:
         client:
             access-token-uri: https://dev-533919.oktapreview.com/oauth2/default/v1/token
-            user-authorization-uri: https://okta.andrewcarterhughes.com/oauth2/default/v1/authorize
+            user-authorization-uri: https://dev-533919.oktapreview.com/oauth2/default/v1/authorize
             client-id: {myClientId}
             client-secret: {myClientSecret}
             scope: openid profile email
         resource:
             user-info-uri: https://dev-533919.oktapreview.com/oauth2/default/v1/userinfo
 ```
-
-The custom domain doesn't actually need to be a subdomain. It can be a plain, old domain just as easily. But for this tutorial, I figure more people have access to setting up a subdomain on a domain name they have already (who doesn't have a few dozen lying around?).
 
 You should be able to run `./gradlew bootRun` from the terminal to run the app.
 
@@ -140,9 +138,26 @@ Once you log in, you'll see a welcome message with your email:
 
 `You are logged in as user "{youremail@domain.com}".`
 
+The app is not configured to use the custom domain at all yet. You're going to do that in the next section.
+
 ## Configure the Custom Domain Name for Your Spring Boot App
 
 Great! So now you have a working Spring Boot app that's already authenticating with Okta using OAuth 2.0, right? The next step is to configure Okta to use your custom domain or subdomain. This is necessary so that we can customize the hosted login form and add the "Login with Google" and "Login with Facebook" buttons.
+
+First, you need to update the `user-authorization-uri` value in your `application.yml` file (or the associated `SECURITY_OAUTH2_CLIENT_USER_AUTHORIZATION_URI` env variable, if you're loading the values from the shell). The value needs to be changed to use your custom domain instead of the Okta preview domain. 
+
+Mine changed to this:
+
+```yml
+security:
+    oauth2:
+        client:
+            ...
+            user-authorization-uri: https://okta.andrewcarterhughes.com/oauth2/default/v1/authorize
+            ...
+```
+
+Next, you need to configure Okta to use the custom domain.
 
 From the top menu of the developer.okta.com dashboard, click on the **Customization** and select **Domain Name**.
 
