@@ -8,6 +8,7 @@ tweets:
 - "Stay up-to-date with @Java and @JavaScript by using JHipster!"
 - "JHipster 6 runs on Java 11 and Java 12! How cool is that? All thanks to the power of @springboot 2.1. 👌"
 - "JHipster 6 integrates @springboot, @springsecurity, and @oauth_2 - a powerful combination!"
+image: blog/java-12-jhipster-6/better-faster-java-with-jhipster.png
 ---
 :page-liquid:
 
@@ -56,24 +57,14 @@ TIP: Azul's Zulu is also available if you use `12.0.0-zulu` for the name.
 
 == Install JHipster 6
 
-At the time of this writing, JHipster 6 has not been released. When it is, I'll update this post to show you how to install it. In the meantime, you can clone the project from GitHub:
+A beta release of JHipster 6 was https://www.jhipster.tech/2019/04/04/jhipster-release-6.0.0-beta.0.html[released today]. You can install it using the command below.
 
 [source,shell]
 ----
-git clone https://github.com/jhipster/generator-jhipster.git
+npm install -g generator-jhipster@beta
 ----
 
-TIP: If you don't have Git installed, you can https://github.com/jhipster/generator-jhipster/archive/master.zip[download a ZIP file of the master branch].
-
-Next, cd into the project's directory in a terminal and run `npm link`.
-
-[source,shell]
-----
-cd generator-jhipster
-npm link
-----
-
-NOTE: The `npm` command is part of https://nodejs.org[Node.js]. You'll need Node 10.x to build JHipster and run useful commands.
+NOTE: The `npm` command is part of https://nodejs.org[Node.js]. You'll need to have Node 10.x to install JHipster and run useful commands.
 
 == Create a Spring Boot + Angular App that runs on Java 11+
 
@@ -120,13 +111,13 @@ jhipster import-jdl app.jh
 
 This will create a multitude of files and install dependencies using `npm install`. Your terminal should look similar to the following when you run this command:
 
-image::{% asset_path 'blog/java-11-jhipster-6/import-jdl.png' %}[alt=Results of import-jdl,width=800,align=center]
+image::{% asset_path 'blog/java-12-jhipster-6/import-jdl.png' %}[alt=Results of import-jdl,width=800,align=center]
 
 If you'd prefer to see what this command looks line in-action, you can watch the recording below.
 
 ++++
 <div style="text-align: center">
-<script id="asciicast-238226" src="https://asciinema.org/a/238226.js" async></script>
+<script id="asciicast-238865" src="https://asciinema.org/a/238865.js" async></script>
 </div>
 ++++
 
@@ -158,11 +149,11 @@ Then start your application using Maven:
 
 When your app is up and running, open `http://localhost:8080` in your favorite browser and click **sign in**. You'll be redirected to Keycloak, where you can enter `admin/admin` to log in.
 
-image::{% asset_path 'blog/java-11-jhipster-6/welcome-java-hipster.png' %}[alt="Welcome, Java Hipster",width=800,align=center]
+image::{% asset_path 'blog/java-12-jhipster-6/welcome-java-hipster.png' %}[alt="Welcome, Java Hipster",width=800,align=center]
 
 Pretty slick, eh? You just created a modern single page application (SPA) that uses the latest released version of Angular! Not only that, but it uses the most secure form of OAuth 2.0 - link:/blog/2018/04/10/oauth-authorization-code-grant-type[authorization code flow].
 
-NOTE: If you're confused by how OAuth 2.0 and OIDC work together, please see my link:/blog/2017/06/21/what-the-heck-is-oauth[What the Heck is OAuth?] post. In short, OIDC is a thin layer on top of OAuth 2.0 that adds identity.
+NOTE: If you're confused by how OAuth 2.0 and OpenID Connect (OIDC) work together, please see link:/blog/2017/06/21/what-the-heck-is-oauth[What the Heck is OAuth?]. In short, OIDC is a thin layer on top of OAuth 2.0 that adds identity.
 
 == Use Okta: We're Always On!
 
@@ -184,7 +175,7 @@ Once you're signed in to Okta, register your client application.
 
 Your settings should resemble the screenshot below when you're finished.
 
-image::{% asset_path 'blog/java-11-jhipster-6/app-settings.png' %}[alt=OIDC App Settings,width=700,align=center]
+image::{% asset_path 'blog/java-12-jhipster-6/app-settings.png' %}[alt=OIDC App Settings,width=700,align=center]
 
 Create an `okta.env` file in your project's root directory and replace the `{..}` values with those from your Okta application:
 
@@ -203,7 +194,7 @@ JHipster is configured by default to work with two types of users: administrator
 
 Create a `ROLE_ADMIN` and `ROLE_USER` group (**Users** > **Groups** > **Add Group**) and add users to them. You can use the account you signed up with, or create a new user (**Users** > **Add Person**). Navigate to **API** > **Authorization Servers**, and click on the the `default` server. Click the **Claims** tab and **Add Claim**. Name it `groups`, and include it in the ID Token. Set the value type to `Groups` and set the filter to be a Regex of `.*`. Click **Create**.
 
-image::{% asset_path 'blog/java-11-jhipster-6/add-claim.png' %}[alt=Add Claim,width=600,align=center]
+image::{% asset_path 'blog/java-12-jhipster-6/add-claim.png' %}[alt=Add Claim,width=600,align=center]
 
 Start your application with the following commands:
 
@@ -215,7 +206,7 @@ source okta.env
 
 Navigate to `http://localhost:8080` and log in with your Okta credentials.
 
-image::{% asset_path 'blog/java-11-jhipster-6/authenticated-by-okta.png' %}[alt=Authenticated by Okta,width=800,align=center]
+image::{% asset_path 'blog/java-12-jhipster-6/authenticated-by-okta.png' %}[alt=Authenticated by Okta,width=800,align=center]
 
 Isn't it cool how Spring Boot and Spring Security make it easy to switch OIDC providers?!
 
