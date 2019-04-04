@@ -153,7 +153,7 @@ image::{% asset_path 'blog/java-12-jhipster-6/welcome-java-hipster.png' %}[alt="
 
 Pretty slick, eh? You just created a modern single page application (SPA) that uses the latest released version of Angular! Not only that, but it uses the most secure form of OAuth 2.0 - link:/blog/2018/04/10/oauth-authorization-code-grant-type[authorization code flow].
 
-NOTE: If you're confused by how OAuth 2.0 and OpenID Connect (OIDC) work together, please see link:/blog/2017/06/21/what-the-heck-is-oauth[What the Heck is OAuth?]. In short, OIDC is a thin layer on top of OAuth 2.0 that adds identity.
+NOTE: If you're confused by how OAuth 2.0 and OpenID Connect (OIDC) work together, please see link:/blog/2017/06/21/what-the-heck-is-oauth[What the Heck is OAuth?] In short, OIDC is a thin layer on top of OAuth 2.0 that adds identity.
 
 == Use Okta: We're Always On!
 
