@@ -13,7 +13,7 @@ image: blog/featured/okta-dotnet-skew.jpg
 
 If you're like me, you love music. Music is always streaming somewhere in my house at all times.  I especially like going to see live music, but it can be hard to know where and when live music is happening. LiveMusicFinder is a web application that allows users to enter when and where some live music is going down. This beta version is **very** rough, but I will show you how I built it with ASP.NET Core 2.2 and Entity Framework Core.
 
-ASP.NET Core 2.2 is a cross-platform version of Microsoft's ASP.NET Framework that run on any platform. For example, I'll be developing this on an Ubuntu laptop using Visual Studio Code. I'll also be using Entity Framework ore for interacting with the data store. Entity Framework Core is the easiest way by far for .NET developers to interact with a database which for expedience sake will be SQLite, a super light-weight database.  Let's get to it!
+ASP.NET Core 2.2 is a cross-platform version of Microsoft's ASP.NET Framework that run on any platform. For example, I'll be developing this on an Ubuntu laptop using Visual Studio Code. I'll also be using Entity Framework Core for interacting with the data store. Entity Framework Core is the easiest way by far for .NET developers to interact with a database which for expedience sake will be SQLite, a super light-weight database.  Let's get to it!
 
 ## Scaffold an ASP.NET Core 2.2 Web Application
 
