@@ -17,14 +17,24 @@ In this post, I'll show you how to use our samples, which leverage our SDKs, and
 
 Our open source projects include a number of sample applications and they've recently been updated to use the latest and greatest frameworks.
 
-If you [search for "-sample"](https://github.com/okta?utf8=%E2%9C%93&q=-sample&type=&language=), you'll see there's nine repositories. In alphabetical order, they are:
+If you [search for "-sample"](https://github.com/okta?utf8=%E2%9C%93&q=-sample&type=&language=), you'll see there's 16 repositories. In alphabetical order, they are:
 
-* [samples-java-spring](https://github.com/okta/samples-java-spring)
-* [samples-js-angular](https://github.com/okta/samples-js-angular)
-* [samples-js-angular-1](https://github.com/okta/samples-js-angular-1)
-* [samples-js-react](https://github.com/okta/samples-js-react)
-* [samples-nodejs-express-4](https://github.com/okta/samples-nodejs-express-4)
-* [samples-js-vue](https://github.com/okta/samples-js-vue)
+1. [samples-android](https://github.com/okta/samples-android)
+1. [samples-aspnet](https://github.com/okta/samples-aspnet)
+1. [samples-aspnetcore](https://github.com/okta/samples-aspnetcore)
+1. [samples-aspnet-webforms](https://github.com/okta/samples-aspnet-webforms)
+1. [samples-golang](https://github.com/okta/samples-golang)
+1. [samples-ios](https://github.com/okta/samples-ios)
+1. [samples-java-servlet](https://github.com/okta/samples-java-servlet)
+1. [samples-java-spring](https://github.com/okta/samples-java-spring)
+1. [samples-js-angular](https://github.com/okta/samples-js-angular)
+1. [samples-js-angular-1](https://github.com/okta/samples-js-angular-1)
+1. [samples-js-react](https://github.com/okta/samples-js-react)
+1. [samples-js-react-native](https://github.com/okta/samples-js-react-native)
+1. [samples-js-vue](https://github.com/okta/samples-js-vue)
+1. [samples-nodejs-express-4](https://github.com/okta/samples-nodejs-express-4)
+1. [samples-php](https://github.com/okta/samples-php)
+1. [samples-python-flask](https://github.com/okta/samples-python-flask)
 
 ## Try the Okta Framework Samples
 
@@ -131,3 +141,7 @@ I thought it'd be fun to ask some questions of [Robert Damphousse](https://twitt
 The Developer Experience team at Okta is developing a plethora of framework-specific SDKs, [documentation](/documentation/), and sample applications. They're doing really great work to make your development life simpler. 
 
 However, there's always room for improvement! If you have ideas for improvement, please create pull requests in our SDKs or samples, or ask your questions on our [DevForums](https://devforum.okta.com/). Of course, we'd be happy to have a [quick chat on Twitter too](https://twitter.com/oktadev)!
+
+**Changelog:**
+
+* Apr 11, 2019: Updated to list new samples. Was 9, now we're up to 16! You can see changes to this article in [okta/okta.github.io#2123](https://github.com/okta/okta.github.io/pull/2123).
