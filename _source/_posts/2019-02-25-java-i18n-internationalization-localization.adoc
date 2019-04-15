@@ -17,6 +17,14 @@ Why is i18n and l10n important? Because you want to make your app accessible to 
 
 This tutorial will show you how to internationalize a simple Java app, a Spring Boot app with Thymeleaf, and a JavaScript Widget.
 
+If you'd rather watch a video, https://youtu.be/nw4X42CefbI[I created a screencast of this tutorial].
+
+++++
+<div style="text-align: center; margin-bottom: 1.25rem">
+<iframe width="700" height="394" style="max-width: 100%" src="https://www.youtube.com/embed/nw4X42CefbI" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+</div>
+++++
+
 == Java i18n with Resource Bundles
 
 A _resource bundle_ is a `.properties` file that contains keys and values for specific languages. Using resource bundles allows you to make your code locale-independent. To see how this works, create a new directory on your hard drive for this tutorial's exercises. For example, `java-i18n-example`. Navigate to this directory from the command line and create a `Hello.java` file.

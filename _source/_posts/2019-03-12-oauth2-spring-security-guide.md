@@ -199,7 +199,7 @@ public class UserController {
 
 This file allows the client apps to find out more about the users that authenticate with the server.
 
-That's your resource server! Not too bad. Spring Boot makes it pretty easy. Four files and a few properties. In a little bit you'll make it even simpler with Okta, but for the moment, move on to creating a client app you can use to test the auth server.
+That's your authorization server! Not too bad. Spring Boot makes it pretty easy. Four files and a few properties. In a little bit you'll make it even simpler with Okta, but for the moment, move on to creating a client app you can use to test the auth server.
 
 Start the authorization server:
 
