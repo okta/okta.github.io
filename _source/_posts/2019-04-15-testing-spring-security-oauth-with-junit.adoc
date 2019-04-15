@@ -1,6 +1,6 @@
 ---
 layout: blog_post
-title: "Upgrading Spring Security OAuth and Java Tests through the 👀 of a Java Hipster"
+title: "Upgrading Spring Security OAuth and JUnit Tests through the 👀 of a Java Hipster"
 author: mraible
 description: "Learn how to use JUnit to test your Java apps! This is an advanced guide that tells a story about upgrading tests and the super hip testing support in Spring Security and Spring Boot."
 tags: [java, junit, testing, jhipster]
@@ -11,8 +11,6 @@ tweets:
 image: blog/testing-jhipster-6/social.png
 ---
 :page-liquid:
-
-// targets: `junit java` and `junit 5 spring boot`
 
 Using unit and integration tests to verify your code quality is an excellent way to show you care about your code. I recently did a bunch of work in the popular JHipster open source project to upgrade it to use the latest release of Spring Security.
 
@@ -538,7 +536,8 @@ You can create a JHipster app that uses React and OIDC with just a few commands:
 ----
 mkdir app && cd app
 
-echo "application { config { baseName reactoidc, authenticationType oauth2, clientFramework react } }" >> app.jh
+echo "application { config { baseName reactoidc, \
+  authenticationType oauth2, clientFramework react } }" >> app.jh
 
 jhipster import-jdl app.jh
 ----
@@ -547,7 +546,7 @@ Below is a terminal recording that shows the results of these commands.
 
 ++++
 <div style="text-align: center">
-<script id="asciicast-240956" src="https://asciinema.org/a/240956.js" async></script>
+<script id="asciicast-240996" src="https://asciinema.org/a/240996.js" async></script>
 </div>
 ++++
 
