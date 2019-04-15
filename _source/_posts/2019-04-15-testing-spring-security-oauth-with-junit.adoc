@@ -574,7 +574,7 @@ Okta is an always-on identity provider that provides authentication and authoriz
 
 === Register Your Secure Spring Boot Application
 
-To begin, sign up for a https://developer.okta.com/signup/[free Okta developer account] (or sign in to `{yourOktaDomain}` if you already have an account).
+To begin, sign up for a https://developer.okta.com/signup/[free Okta developer account] (or sign in if you already have an account).
 
 Once you're signed in to Okta, register your Spring Boot application.
 
