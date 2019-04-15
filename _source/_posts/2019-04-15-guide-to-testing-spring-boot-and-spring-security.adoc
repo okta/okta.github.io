@@ -1,15 +1,14 @@
 ---
 layout: blog_post
-title: "Java Testing Guide: JUnit, Spring Boot, and Spring Security"
-title: "Spring Boot + Security Testing Guide"
-title: "Testing Java Apps with JUnit: Lessons learned with JHipster 6"
 title: "Upgrading Spring Security OAuth and Java Tests through the 👀 of a Java Hipster"
 author: mraible
 description: "Learn how to use JUnit to test your Java apps! This is an advanced guide that tells a story about upgrading tests and the super hip testing support in Spring Security and Spring Boot."
 tags: [java, junit, testing, jhipster]
 tweets:
--
-image:
+- "When you combine @SpringSecurity 5.1, @springboot 2.1, and some good testing practices, you end up with an app you can be proud of. Learn how @mraible improved JHipster 6's OIDC support."
+- "Testing Java Apps with JUnit: Lessons learned with JHipster 6"
+- "Learn how @mraible upgraded JHipster 6 to use Spring Security 5.1's first-class OAuth and OIDC support."
+image: blog/testing-jhipster-6/social.png
 ---
 :page-liquid:
 
@@ -19,13 +18,13 @@ Using unit and integration tests to verify your code quality is an excellent way
 
 Spring Security 5.1+ adds OAuth 2.0 and OIDC as first-class citizens that you can configure with its elegant DSL (a.k.a. cool method chaining, a.k.a. the builder pattern). I've been motivated to use it ever since Rob Winch and crew first launched it. It's been fun collaborating with them on a very innovative project. Spring Security makes OAuth awesome!
 
-I added OAuth 2.0 support to JHipster in the fall of 2017. The experience influenced myself greatly. I learned a ton about Keycloak, Docker Compose, and how to switch between identity providers (IdPs).
+I added OAuth 2.0 support to JHipster in the fall of 2017. The experience influenced me greatly. I learned a ton about Keycloak, Docker Compose, and how to switch between identity providers (IdPs).
 
 I spent the last month upgrading https://www.jhipster.tech[JHipster] to use Spring Security 5.1 (the default in Spring Boot 2.1). I experienced some frustrations along the way, shook my fist at Travis CI, and rejoiced when I figured out solutions. I also learned quite a bit in the process. I'm going to share those experiences with you today.
 
 == Logout with OAuth 2.0 and OIDC
 
-Soon after integrating support for Keycloak and Okta in JHipster, the project received a lot of complaints from users that they couldn't logout. JHipster users were familiar with clicking **Logout** (check with latest) and being _completely_ logged out. With the default Spring Security support, users would be logged out of the local app, but not the IdP.
+Soon after integrating support for Keycloak and Okta in JHipster, the project received a lot of complaints from users that they couldn't log out. JHipster users were familiar with clicking **Logout** (check with latest) and being _completely_ logged out. With the default Spring Security support, users would be logged out of the local app, but not the IdP.
 
 It took me a year, but I finally added https://github.com/jhipster/generator-jhipster/pull/8757[global SSO logout] earlier this year. Both Keycloak and Okta require you to send a GET request to an endpoint with the ID token and the URL to redirect to. Therefore, I created a `LogoutResource` that returns these values.
 
@@ -37,11 +36,11 @@ public class LogoutResource {
     private final UserInfoRestTemplateFactory templateFactory;
     private final String accessTokenUri;
 
-    public LogoutResource(UserInfoRestTemplateFactory templateFactory,
-                          @Value("${security.oauth2.client.access-token-uri}") String accessTokenUri) {
-        this.templateFactory = templateFactory;
-        this.accessTokenUri = accessTokenUri;
-    }
+   public LogoutResource(UserInfoRestTemplateFactory templateFactory,
+                         @Value("${security.oauth2.client.access-token-uri}") String accessTokenUri) {
+       this.templateFactory = templateFactory;
+       this.accessTokenUri = accessTokenUri;
+   }
 
     /**
      * POST  /api/logout : logout the current user
@@ -64,7 +63,7 @@ public class LogoutResource {
 }
 ----
 
-The Angular client calls the `/api/logout` endpoint, and constructs the IdP logout URL.
+The Angular client calls the `/api/logout` endpoint and constructs the IdP logout URL.
 
 [source,typescript]
 ----
@@ -141,7 +140,7 @@ I https://github.com/jhipster/generator-jhipster/pull/8757[merged global logout 
 
 I started by creating https://github.com/jhipster/generator-jhipster/issues/9276[issue #9276] to track my goals, motivations, and known issues.
 
-At this point, if you're not intimately familiar with Spring Security, you're probably wondering: **why is upgrading to Spring Security's latest release so cool**? Long story short: they've deprecated annotations, added features, and have made it easier to integrate OAuth 2.0 and OIDC into your applications. Thanks Spring Security team!
+At this point, if you're not intimately familiar with Spring Security, you're probably wondering: **why is upgrading to Spring Security's latest release so cool**? Long story short: they've deprecated annotations, added features, and have made it easier to integrate OAuth 2.0 and OIDC into your applications. Thanks, Spring Security team!
 
 NOTE: Using `@EnableOAuth2Sso` and `@EnableResourceServer` is no longer recommended in Spring Boot 2.1+ (a.k.a., Spring Security 5.1+). The reasons for the change can be found in Josh Long's https://itunes.apple.com/us/podcast/a-bootiful-podcast/id1438691771?mt=2[Bootiful Podcast], published on Jan 25, 2019. It's an interview with https://twitter.com/madhurabhave23[Madhura Bhave] and the discussion starts at 21:30.
 
@@ -376,7 +375,7 @@ Getting the logout functionality properly tested was a big milestone. I moved on
 
 == How to Pass an OAuth 2.0 Access Token to Downstream Microservices with Zuul
 
-JHipster uses Netflix Zuul to proxy requests from the gateway to downstream microservices. I created an `AuthorizationHeaderFilter` to handle access token propogation.
+JHipster uses Netflix Zuul to proxy requests from the gateway to downstream microservices. I created an `AuthorizationHeaderFilter` to handle access token propagation.
 
 [source,java]
 ----
@@ -413,7 +412,7 @@ public class AuthorizationHeaderFilter extends ZuulFilter {
 }
 ----
 
-However, adding this did not result in successful access token propogation. With https://github.com/mraible/jhipster-ms-oidc-improved/pull/1#issuecomment-471328682[help from Jon Ruddell], I discovered this was because JHipster had a `LazyInitBeanFactoryPostProcessor` that caused all beans to be lazy-loaded. The `ZuulFilterInitializer` was included in this logic. Making `ZuulFilterInitializer` an eagerly-loaded bean caused everything to work as it did before.
+However, adding this did not result in successful access token propagation. With https://github.com/mraible/jhipster-ms-oidc-improved/pull/1#issuecomment-471328682[help from Jon Ruddell], I discovered this was because JHipster had a `LazyInitBeanFactoryPostProcessor` that caused all beans to be lazy-loaded. The `ZuulFilterInitializer` was included in this logic. Making `ZuulFilterInitializer` an eagerly-loaded bean caused everything to work as it did before.
 
 At this point, I had everything working, so I https://github.com/jhipster/generator-jhipster/pull/9416[created a pull request to upgrade JHipster's templates].
 
@@ -516,24 +515,14 @@ JHipster 6 uses the latest and greatest versions of Spring Boot and Spring Secur
 
 If you generate an application with JHipster 6, all of the test features mentioned in this post will be in your application. How do you do that? I'm glad you asked!
 
-JHipster 6 hasn't been released yet, but you can still try it out. Start by cloning the project from GitHub:
+Start by installing a beta of JHipster 6:
 
 [source,shell]
 ----
-git clone https://github.com/jhipster/generator-jhipster.git
+npm install -g generator-jhipster@beta
 ----
 
-TIP: If you don't have Git installed, you can https://github.com/jhipster/generator-jhipster/archive/master.zip[download a ZIP file of the master branch].
-
-Next, cd into the project's directory and run `npm link`.
-
-[source,shell]
-----
-cd generator-jhipster
-npm link
-----
-
-NOTE: The `npm` command is part of https://nodejs.org[Node.js]. You'll need Node 10.x to build JHipster and run useful commands.
+NOTE: The `npm` command is part of https://nodejs.org[Node.js]. You'll need Node 10.x to install JHipster and run useful commands.
 
 JHipster 6 supports Java 8, 11, and 12 (thanks to Spring Boot 2.1). I recommend managing your Java SDK with https://sdkman.io/[SDKMAN!] For example, you can install Java 12 and make it the default.
 
@@ -558,7 +547,7 @@ Below is a terminal recording that shows the results of these commands.
 
 ++++
 <div style="text-align: center">
-<script id="asciicast-237605" src="https://asciinema.org/a/237605.js" async></script>
+<script id="asciicast-240956" src="https://asciinema.org/a/240956.js" async></script>
 </div>
 ++++
 
@@ -582,7 +571,7 @@ When startup completes, open `http://localhost:8080`, and click **sign in**. You
 
 Keycloak works great, but this is a post on the Okta developer blogs, so let me show you how you can use Okta! Why should you use Okta? That's a great question.
 
-Okta is an always-on identity provider that provides authentication and authorization services for developers. It also allows you to manage your users. I like to call it Users As a Software Service, but UASS isn't a great acronym. User Management as a Software Service (UMASS) rolls off the toungue a bit easier. Anyway, it's a great service and you should give it a try.
+Okta is an always-on identity provider that provides authentication and authorization services for developers. It also allows you to manage your users. I like to call it Users As a Software Service, but UASS isn't a great acronym. User Management as a Software Service (UMASS) rolls off the tongue a bit easier. Anyway, it's a great service and you should give it a try.
 
 === Register Your Secure Spring Boot Application
 
@@ -653,7 +642,7 @@ Then run the following Maven command:
 
 Once the process completes, navigate to `http://localhost:9001/projects` and you'll see your project's report.
 
-image::{% asset_path 'blog/testing-jhipster-6/sonar-report.png' %}[alt=Authenticated by Okta,width=800,align=center]
+image::{% asset_path 'blog/testing-jhipster-6/sonar-report.png' %}[alt=Sonar Report,width=800,align=center]
 
 NOTE: The code coverage is much higher than what's shown in this report. We changed many tests to run in the integration test phase recently, and haven't figured out how to report this data to Sonar.
 
@@ -667,11 +656,9 @@ I hope you've enjoyed my story about upgrading JHipster to use Spring Security 5
 
 I did not create a GitHub repository for this example since JHipster generated all the code and I didn't need to modify anything.
 
-If you'd like to learn more about JHipster's CRUD generator abilities and PWA support, I encourage you to checkout my blog post on link:/blog/2018/06/25/react-spring-boot-photo-gallery-pwa[how to build a Photo Gallery PWA with React, Spring Boot, and JHipster].
+If you'd like to learn more about JHipster 6, see link:/blog/2019/04/04/java-11-java-12-jhipster-oidc[Better, Faster, Lighter Java with Java 12 and JHipster 6]. If you're interested in JHipster's CRUD generation abilities and PWA support, I encourage you to check out my blog post on link:/blog/2018/06/25/react-spring-boot-photo-gallery-pwa[how to build a Photo Gallery PWA with React, Spring Boot, and JHipster].
 
 We've also published a number of posts about testing and Spring Security 5.1:
-
-// make sure you linked to previous Java 11 + JHipster somewhere, or add to this list
 
 * link:/blog/2019/03/28/test-java-spring-boot-junit5[Test Your Spring Boot Applications with JUnit 5]
 * link:/blog/2018/05/02/testing-spring-boot-angular-components[The Hitchhiker's Guide to Testing Spring Boot APIs and Angular Components with WireMock, Jest, Protractor, and Travis CI]
