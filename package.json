@@ -13,7 +13,7 @@
     "start": "npm run generate serve -- --incremental --future",
     "pretest": "npm run generate serve -- --no-watch & wait-on http://localhost:4000 && npm run test:update-web-driver",
     "test-only": "protractor tests/selenium/conf.js",
-    "test:update-web-driver": "./node_modules/protractor/bin/webdriver-manager update --versions.chrome 74.0.3729.6 --gecko false",
+    "test:update-web-driver": "./node_modules/protractor/bin/webdriver-manager update --versions.standalone 3.141.59 --versions.chrome 2.45  --gecko false",
     "test": "npm run test-only || (npm run stop && exit 1)",
     "posttest": "npm run stop",
     "stop": "if-env CI=true && exit 0 || (pkill -SIGINT -f 'okta_github_io|webdriver-manager/selenium')",
