@@ -134,7 +134,7 @@ One of the most difficult parts of Developer Relations is keeping track of all o
 
 Keeping track of where all of your teammates are on a remote team (or simply when folks are traveling) is also difficult. I use a web app called "`https://everytimezone.com/[Every Time Zone]`" to help me understand not only when is a good time for a meeting with a far-flung coworker, but also to better understand when to expect to hear a response or see an update to a particular project.
 
-Lastly, https://zapier.com/[Zapier] keeps everything in sync and automated as much as possible for me. Given how many tools it syncs with, I can bookmark articles to read later, send messages to new Slack team members, get alerted when RSS feeds are updated, and more. However, keep an eye out for https://stdlib.com[StdLib's] new beta product… with the capabilities they're introducing, it seems like it might be a far better fit than Zapier for a technically-savvy team!
+Lastly, https://zapier.com/[Zapier] keeps everything in sync and automated as much as possible for me. Given how many tools it syncs with, I can bookmark articles to read later, send messages to new Slack team members, get alerted when RSS feeds are updated, and more. However, keep an eye out for https://stdlib.com[StdLib's] new beta product... with the capabilities they're introducing, it seems like it might be a far better fit than Zapier for a technically-savvy team!
 
 == Simon Maple, Director of Developer Relations, Snyk
 https://twitter.com/sjmaple[image:{% asset_path 'blog/devrel-protips-v2/sjmaple.png' %}[alt=Simon Maple,role="BlogPost-avatar pull-right img-100px"]]
