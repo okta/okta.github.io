@@ -16,7 +16,7 @@
     "test:update-web-driver": "./node_modules/protractor/bin/webdriver-manager update --versions.chrome 74.0.3729.6 --gecko false",
     "test": "npm run test-only || (npm run stop && exit 1)",
     "posttest": "npm run stop",
-    "stop": "if-env CI=true && exit 0",
+    "stop": "if-env CI=true && exit 0 || (pkill -SIGINT -f 'okta_github_io|webdriver-manager/selenium')",
     "markdown-lint": "node scripts/lint",
     "find-missing-slashes": "node scripts/find-missing-slashes",
     "post-build-lint": "bash scripts/post-build-lint.sh",
