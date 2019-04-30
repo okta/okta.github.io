@@ -132,7 +132,7 @@ You can generate your own user IDs to insert into the database, but using a thir
 
 Okta provides hosting for user-identifying data and handles the authentication login process for you - handing off the user ID and making this a painless integration. If you haven't already, go to https://developer.okta.com and create an account to get started, then continue with the following steps.
 
-Visit the **Users** tab and click **Add Person**. Fill out the form for a sample user, be sure to set the Password drop down to "Set by Admin” and fill in a temporary password. Click **Save**. Once you have the user added, you'll notice the status for your newly created user is set to "Password expired”. This is expected for admin-created users and will guide them through their reset password flow during the first login to your site - without any additional work on your part.
+Visit the **Users** tab and click **Add Person**. Fill out the form for a sample user, be sure to set the Password drop down to "Set by Admin" and fill in a temporary password. Click **Save**. Once you have the user added, you'll notice the status for your newly created user is set to "Password expired". This is expected for admin-created users and will guide them through their reset password flow during the first login to your site - without any additional work on your part.
 
 Now that you have your users set up in your database, set up this specific application within Okta. On the Dashboard, click **Applications** in the main menu and on the Application screen, click **Add Application**. Select **Web** and then click **Next**.
 
@@ -167,7 +167,7 @@ Add the Okta account access to your **Web.config** file under the **appSettings*
 <add key="okta:PostLogoutRedirectUri" value="http://localhost:8080/Account/PostLogout" />
 ```
 
-In order to handle OWIN, we need to do that from a Startup class. Right-click on the project and select **Add OWIN Startup class**. Call it "Startup” and click **OK**. Add the following to your usings section:
+In order to handle OWIN, we need to do that from a Startup class. Right-click on the project and select **Add OWIN Startup class**. Call it "Startup" and click **OK**. Add the following to your usings section:
 
 ```csharp
 using Microsoft.Owin.Security;
@@ -205,7 +205,7 @@ Because this is a claims-aware application, we need to indicate where to get use
 using System.Web.Helpers;
 ```
 
-Replace the Application_Start() method with the code below to match the name of claim type - "name” in this case - from the JsonWebToken (JWT) you are receiving from Okta to set your user's identifier.
+Replace the Application_Start() method with the code below to match the name of claim type - "name" in this case - from the JsonWebToken (JWT) you are receiving from Okta to set your user's identifier.
 
 ```csharp
 protected void Application_Start()
