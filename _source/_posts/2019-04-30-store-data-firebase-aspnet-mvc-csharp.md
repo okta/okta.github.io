@@ -130,9 +130,9 @@ Congratulations, you've put non-identifying data into a database with ease!
 
 You can generate your own user IDs to insert into the database, but using a third party auth provider is a more secure way to allow users to be in charge of their own data while you concentrate on your business logic.
 
-Okta provides hosting for user-identifying data and handles the authentication login process for you - handing off the user ID and making this a painless integration. If you haven’t already, go to https://developer.okta.com and create an account to get started, then continue with the following steps.
+Okta provides hosting for user-identifying data and handles the authentication login process for you - handing off the user ID and making this a painless integration. If you haven't already, go to https://developer.okta.com and create an account to get started, then continue with the following steps.
 
-Visit the **Users** tab and click **Add Person**. Fill out the form for a sample user, be sure to set the Password drop down to “Set by Admin” and fill in a temporary password. Click **Save**. Once you have the user added, you’ll notice the status for your newly created user is set to “Password expired”. This is expected for admin-created users and will guide them through their reset password flow during the first login to your site - without any additional work on your part.
+Visit the **Users** tab and click **Add Person**. Fill out the form for a sample user, be sure to set the Password drop down to "Set by Admin” and fill in a temporary password. Click **Save**. Once you have the user added, you'll notice the status for your newly created user is set to "Password expired”. This is expected for admin-created users and will guide them through their reset password flow during the first login to your site - without any additional work on your part.
 
 Now that you have your users set up in your database, set up this specific application within Okta. On the Dashboard, click **Applications** in the main menu and on the Application screen, click **Add Application**. Select **Web** and then click **Next**.
 
@@ -140,13 +140,13 @@ Name the application "FirebaseMVC". Select **Implicit (Hybrid)** in addition to 
 
 {% img blog/firebase-aspnet-mvc/okta-app-general.png alt:"Okta app general settings" width:"800" %}{: .center-image }
 
-Scroll down and you’ll have access to the ClientID and Client Secret. Keep these on hand to add to your application’s Web.config file later on. Now your app is good to go for Okta auth!
+Scroll down and you'll have access to the ClientID and Client Secret. Keep these on hand to add to your application's Web.config file later on. Now your app is good to go for Okta auth!
 
 ## Add Authentication to Your ASP.NET MVC App
 
 It's time to revise your application, hand off the user login and allow Okta to generate the object that will give you the ID to pass to Firebase to save additional data.
 
-Right-click on the project and select **Properties**. Go to the Web tab and set the project URL to reflect the application settings in Okta’s portal (https://localhost:8080). Next, right-click on the project and select **Manage NuGet Packages**. Install the following libraries:
+Right-click on the project and select **Properties**. Go to the Web tab and set the project URL to reflect the application settings in Okta's portal (https://localhost:8080). Next, right-click on the project and select **Manage NuGet Packages**. Install the following libraries:
 
 
 ```csharp
@@ -155,7 +155,7 @@ Microsoft.Owin.Security.Cookies
 Okta.AspNet
 ```
 
-Add the Okta account access to your **Web.config** file under the **appSettings** section. Use the code below, replacing the Okta client ID and secret with your specific app’s Okta credentials you generated in the portal earlier.
+Add the Okta account access to your **Web.config** file under the **appSettings** section. Use the code below, replacing the Okta client ID and secret with your specific app's Okta credentials you generated in the portal earlier.
 
 ```csharp
 <!-- 1. Replace these values with your Okta configuration -->
@@ -167,7 +167,7 @@ Add the Okta account access to your **Web.config** file under the **appSettings*
 <add key="okta:PostLogoutRedirectUri" value="http://localhost:8080/Account/PostLogout" />
 ```
 
-In order to handle OWIN, we need to do that from a Startup class. Right-click on the project and select **Add OWIN Startup class**. Call it “Startup” and click **OK**. Add the following to your usings section:
+In order to handle OWIN, we need to do that from a Startup class. Right-click on the project and select **Add OWIN Startup class**. Call it "Startup” and click **OK**. Add the following to your usings section:
 
 ```csharp
 using Microsoft.Owin.Security;
@@ -205,7 +205,7 @@ Because this is a claims-aware application, we need to indicate where to get use
 using System.Web.Helpers;
 ```
 
-Replace the Application_Start() method with the code below to match the name of claim type - “name” in this case - from the JsonWebToken (JWT) you are receiving from Okta to set your user’s identifier.
+Replace the Application_Start() method with the code below to match the name of claim type - "name” in this case - from the JsonWebToken (JWT) you are receiving from Okta to set your user's identifier.
 
 ```csharp
 protected void Application_Start()
@@ -219,7 +219,7 @@ protected void Application_Start()
 }
 ```
 
-Go to **Views/Shared** and open **_Layout.cshtml**. Beneath the <ul> list of ActionLinks add the code below to display the user’s name and toggle the Login/Logout link button.
+Go to **Views/Shared** and open **_Layout.cshtml**. Beneath the <ul> list of ActionLinks add the code below to display the user's name and toggle the Login/Logout link button.
 
 ```html
 @if (Context.User.Identity.IsAuthenticated)
@@ -359,7 +359,7 @@ The only question left is - what can you make with your Fire(base) power?
 
 ## Learn More About ASP.NET, Firebase, and Secure Authentication
 
-If you’d like to learn more about using secure OAuth and user management in ASP.NET, we’ve also published a number of posts that might interest you:
+If you'd like to learn more about using secure OAuth and user management in ASP.NET, we've also published a number of posts that might interest you:
 
 * [Build a CRUD App with ASP.NET MVC and Entity Framework Authentication](https://developer.okta.com/blog/2019/03/11/build-a-crud-app-with-aspnet-mvc-and-entity-framework)
 * [Build a CRUD App with ASP.NET Framework 4.x Web API and Angular](https://developer.okta.com/blog/2018/07/27/build-crud-app-in-aspnet-framework-webapi-and-angular)
