@@ -652,7 +652,9 @@ You can now start the ASP.NET Core MVC application by running the following in y
 dotnet run
 ```
 
-You can now make journal entries securely!
+Your default browser should now open and show a page like this:
+
+{% img blog/aspnetcore-restapi/app-running.png alt:"Final App Running" width:"800" %}{: .center-image }
 
 ## Learn More About ASP.NET Core, Secure REST APIs, and Authentication
 
