@@ -322,13 +322,13 @@ npm i styled-components@3.4.9
 Then copy the `components` directory into your project's root directory from Formidable's example.
 
 ```bash
-svn export https://github.com/FormidableLabs/react-native-app-auth/trunk/Example/components
+svn export https://github.com/FormidableLabs/react-native-app-auth/trunk/Example/Latest/components
 ```
 
 Grab the background image that's referenced in the `Page.js` component too.
 
 ```bash
-svn export https://github.com/FormidableLabs/react-native-app-auth/trunk/Example/assets
+svn export https://github.com/FormidableLabs/react-native-app-auth/trunk/Example/Latest/assets
 ```
 
 ### Run on iOS Simulator
@@ -592,4 +592,5 @@ If you have any questions about this article, please hit me up on Twitter [@mrai
 
 **Changelog:**
 
+* May 1, 2019: Updated paths to components and assets in Formidable Labs' GitHub repo. See [okta.github.io#2367](https://github.com/okta/okta.github.io/pull/2367) for more information.
 * Sep 28, 2018: Upgraded to React Native 0.57.1, React 16.5.0, and React Native AppAuth 3.1.0. See the example app changes in [okta-react-native-app-auth-example#2](https://github.com/oktadeveloper/okta-react-native-app-auth-example/pull/2); changes to this post can be viewed in [okta.github.io#2367](https://github.com/okta/okta.github.io/pull/2367).
