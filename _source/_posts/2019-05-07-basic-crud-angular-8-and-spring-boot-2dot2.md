@@ -1,23 +1,33 @@
 ---
 layout: blog_post
-title: 'Spring Boot 2.0 + Angular 8: Build a CRUD App Today!'
+title: 'Angular 8 + Spring Boot 2.2: Build a CRUD App Today!'
 // went for a different title since CRUD is not the highlight, spring boot + angular are
 author: mraible
-description: "Angular and Spring Boot are wildly popular frameworks for web development. Matt Raible shows you how to use them together in the same app, and how to secure it all with Okta."
+description: "Angular and Spring Boot are wildly popular frameworks for web development. Matt Raible shows you how to use them together in the same app and how to secure it all with OIDC."
 tags: [angular, spring boot, spring boot 2, angular 8, okta, oidc]
 tweets:
   - "Angular + Spring Boot makes for a fantastic development experience. Learn how to make them work together and add OIDC authentication for user authentication."
   - "Spring Boot with @java + Angular with @typescriptlang = ❤️. Learn how to build a @springboot + @angular CRUD app today!"
-image: blog/spring-boot-2-angular-8/angular+spring-boot+okta=love.jpg
+  - "Are you a @java developer using Spring Boot and want to update your UI skills? This tutorial shows you how to use Angular with Spring Boot to develop a cool cars application."
+image: blog/spring-boot-2-angular-8/angular+spring-boot+security=love.jpg
 ---
 
-// todo: update intro
+If you've been a Java developer for 10+ years, you probably remember when there were a plethora of Java web frameworks. It started with Struts and Webwork. Then Tapestry, Wicket, and JSF came along and championed the idea of component-based frameworks. Spring MVC was released in 2004 (in the same month as Flex 1.0 and JSF 1.0) and became the de-facto standard in Java web frameworks over the next six years. 
 
-Technology moves fast these days. It can be challenging to keep up with the latest trends as well as new releases of your favorite projects. I'm here to help! Spring Boot and Angular are two of my favorite projects, so I figured I'd write y'all a guide to show you how to build and secure a basic app using their latest and greatest releases.
+Then along came AngularJS and everyone started moving their UI architectures to JavaScript. Angular 2 was announced at the same time that Spring Boot was first revealed in 2014, and it took a couple years for it to be released, solidify, and become a viable option. These days, we just call it Angular, with no version number. The last few releases have been pretty darn stable, with smooth upgrade paths between major releases. 
 
-In Spring Boot, the most significant change in 2.0 is its new web framework: Spring WebFlux. Spring Boot 2.1 is a minor release, so there shouldn't be any major changes, just incremental improvements. In Angular 7.0, the most significant change is upgrading to RxJS v6, and there are rumors that a new, faster renderer will be included. 
+Today, I'd like to show you how to build an app with the latest and greatest versions of Angular and Spring Boot. Angular 8 and Spring Boot 2.2 both come with performance improvements to make your developer life better.
 
-I wrote about how to integrate [Spring Boot 2.1 and Angular 7.0 last August](/blog/2018/08/22/basic-crud-angular-7-and-spring-boot-2). This post was extremely popular on the Okta Developer blog and became an inspiration for many future blog posts. When [Angular 6 was released](/blog/2018/05/09/upgrade-to-angular-6), I was reluctant to update it because it has "Angular 5.0" in its title, and you don't change a title because of SEO.
+Angular 8 adds differential blah blah, [Ivy](https://next.angular.io/guide/ivy) and [Bazil]().
+
+// higlights from ng-conf
+
+Spring Boot, feeling some heat from quick-starting frameworks like Micronaut and Quarkus, has made a number of performance improvements as well. 
+
+If you're stuck on older versions of these frameworks, you might want to check out a couple of my previous posts:
+
+* [Build a Basic CRUD App with Angular 7.0 and Spring Boot 2.1](/blog/2018/08/22/basic-crud-angular-7-and-spring-boot-2)
+* [Build a Basic CRUD App with Angular 5.0 and Spring Boot 2.0](/blog/2017/12/04/basic-crud-angular-and-spring-boot)
 
 This article describes how to build a simple CRUD application that displays a list of cool cars. It'll allow you to edit the cars, and it'll show an animated gif from [GIPHY](http://giphy.com) that matches the car's name. You'll also learn how to secure your application using Okta's Spring Boot starter and Angular SDK. Below is a screenshot of the app when it's completed.
 
@@ -27,7 +37,7 @@ You will need [Java 11](https://adoptopenjdk.net/) and [Node.js 10+](https://nod
 
 ## Build an API with Spring Boot 2.2
 
-To get started with [Spring Boot](https://projects.spring.io/spring-boot/) 2.2, head on over to [start.spring.io](https://start.spring.io) and create a new project that uses Java 11 (under more options), Spring Boot version 2.2.0 M2, and dependencies to create a simple API: JPA, H2, Rest Repositories, Lombok, and Web.
+To get started with [Spring Boot](https://projects.spring.io/spring-boot/) 2.2, head on over to [start.spring.io](https://start.spring.io) and create a new project that uses Java 11 (under more options), Spring Boot version 2.2.0 M2, and dependencies to create a secure API: JPA, H2, Rest Repositories, Lombok, Okta, and Web.
 
 {% img blog/spring-boot-2-angular-8/start.spring.io.png alt:"Spring Initializr" width:"800" %}{: .center-image }
 
@@ -42,7 +52,17 @@ cd ../server
 ./mvnw spring-boot:run
 ```
 
-After downloading `demo.zip` from start.spring.io, expand it and copy the `demo` directory to your app-holder directory. Rename `demo` to `server`. Open the project in your favorite IDE and create a `Car.java` class in the `src/main/java/com/okta/developer/demo` directory. You can use Lombok's annotations to reduce boilerplate code.
+After downloading `demo.zip` from start.spring.io, expand it and copy the `demo` directory to your app-holder directory. Rename `demo` to `server`. Open `server/pom.xml` and comment out the dependency on Okta's Spring Boot starter.
+
+```xml
+<!--dependency>
+    <groupId>com.okta.spring</groupId>
+    <artifactId>okta-spring-boot-starter</artifactId>
+    <version>1.1.0</version>
+</dependency-->
+```
+
+Open the project in your favorite IDE and create a `Car.java` class in the `src/main/java/com/okta/developer/demo` directory. You can use Lombok's annotations to reduce boilerplate code.
 
 ```java
 package com.okta.developer.demo;
@@ -123,7 +143,7 @@ Car(id=8, name=Ford Pinto)
 Car(id=9, name=Yugo GV)
 ```
 
-**NOTE:** If you see `Fatal error compiling: invalid target release: 11`, it's because you're using Java 8. If you change to use Java 11, this error will go away. If you're using [SDKMAN](https://sdkman.io/), run `sdk default java 11.0.2-open`.
+**NOTE:** If you see `Fatal error compiling: invalid target release: 11`, it's because you're using Java 8. If you change to use Java 11, this error will go away. If you're using [SDKMAN](https://sdkman.io/), run `sdk install java 11.0.2-open && sdk default java 11.0.2-open`.
 
 Add a `CoolCarController` class (in `src/main/java/com/okta/developer/demo/CoolCarController.java`) that returns a list of cool cars to display in the Angular client.
 
@@ -196,7 +216,7 @@ Transfer-Encoding: chunked
 
 Angular CLI is a command-line utility that can generate an Angular project for you. Not only can it create new projects, but it can also generate code. It's a convenient tool because it also offers commands that will build and optimize your project for production. It uses webpack under the covers for building.
 
-Install the latest version of Angular CLI, which is version v8.0.0-rc.1 at the time of this writing.
+Install the latest version of Angular CLI (which is version v8.0.0-rc.1 at the time of this writing).
 
 ```bash
 npm i -g @angular/cli@v8.0.0-rc.1
@@ -205,7 +225,7 @@ npm i -g @angular/cli@v8.0.0-rc.1
 Create a new project in the umbrella directory you created. Again, mine is named `okta-spring-boot-2-angular-8-example`.
 
 ```bash
-ng new client --routing --style css
+ng new client --routing --style css --enable-ivy
 ```
 
 After the client is created, navigate into its directory, remove its Git configuration, and install Angular Material.
@@ -248,8 +268,6 @@ export class CarService {
   }
 }
 ```
-
-One of the changes in Angular 6+ is your services can now register themselves. In previous versions, when you annotated a class with `@Injectable()`, you had to register it as a provider in a module or component to use it. In Angular 6+, you can specify `providedIn` and it will auto-register itself when the app bootstraps.
 
 Open `src/app/app.module.ts`, and add `HttpClientModule` as an import.
 
@@ -350,7 +368,7 @@ public Collection<Car> coolCars() {
 }
 ```
 
-Also, add it to `CarRepository` so you can communicate with its endpoints when adding/deleting/editing.
+Also, add it to `CarRepository` so you can communicate with its endpoints when adding/deleting/editing from Angular.
 
 ```java
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -418,8 +436,7 @@ Update `client/src/app/car-list/car-list.component.html` to use the card layout 
 ```
 {% endraw %}
 
-
-If you run your client with `ng serve` and navigate to http://localhost:4200, you'll see the list of cars, but no images associated with them.
+If you run your client with `ng serve` and navigate to `http://localhost:4200`, you'll see the list of cars, but no images associated with them.
 
 {% img blog/spring-boot-2-angular-8/car-list-no-images.png alt:"Car List without images" width:"800" %}{: .center-image }
 
@@ -487,8 +504,7 @@ Having a list of car names and images is cool, but it's a lot more fun when you 
 ng g c car-edit
 ```
 
-Update `client/src/app/shared/car/car.service.ts` to have methods for adding, removing, and updating cars. These methods
-talk to the endpoints provided by the `CarRepository` and the `@RepositoryRestResource` annotation.
+Update `client/src/app/shared/car/car.service.ts` to have methods for adding, removing, and updating cars. These methods talk to the endpoints provided by the `CarRepository` and its `@RepositoryRestResource` annotation.
 
 ```typescript
 import { Injectable } from '@angular/core';
@@ -527,8 +543,7 @@ export class CarService {
 }
 ```
 
-In `client/src/app/car-list/car-list.component.html`, add a link to the edit component. Also, add a button at the bottom
-to add a new car.
+In `client/src/app/car-list/car-list.component.html`, add a link to the edit component. Also, add a button at the bottom to add a new car.
 
 {% raw %}
 ```html
@@ -723,13 +738,44 @@ The following screenshot shows what it looks like to edit a car that you've adde
 
 {% img blog/spring-boot-2-angular-8/car-edit.png alt:"Car Edit Component" width:"800" %}{: .center-image }
 
-## Add Authentication to Your Spring Boot + Angular App with Okta
+**NOTE:** There is a [regression in Spring Boot 2.2 M2]() that makes it so the `@CrossOrigin` annotation doesn't work. As a workaround, you can add a `CorsFilter` bean to your `DemoApplication.java`. 
 
-Add authentication with Okta is a nifty feature you can add to this application. Knowing who the person is can come in handy if you want to add auditing, or personalize your application (with a rating feature for example).
+```java
+import org.springframework.boot.web.servlet.FilterRegistrationBean;
+import org.springframework.core.Ordered;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
+import org.springframework.web.filter.CorsFilter;
+import java.util.Collections;
+
+...
+
+public class DemoApplication {
+    // main() and init() methods
+    
+    @Bean
+    public FilterRegistrationBean<CorsFilter> simpleCorsFilter() {
+        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+        CorsConfiguration config = new CorsConfiguration();
+        config.setAllowCredentials(true);
+        config.setAllowedOrigins(Collections.singletonList("http://localhost:4200"));
+        config.setAllowedMethods(Collections.singletonList("*"));
+        config.setAllowedHeaders(Collections.singletonList("*"));
+        source.registerCorsConfiguration("/**", config);
+        FilterRegistrationBean<CorsFilter> bean = new FilterRegistrationBean<>(new CorsFilter(source));
+        bean.setOrder(Ordered.HIGHEST_PRECEDENCE);
+        return bean;
+    }
+}
+```
+
+## Add OIDC Authentication to Your Spring Boot + Angular App
+
+Add authentication with OIDC is a nifty feature you can add to this application. Knowing who the person is can come in handy if you want to add auditing, or personalize your application (with a rating feature for example).
 
 ### Spring Security + OAuth 2.0
 
-On the server side, you can lock things down with Okta's Spring Boot Starter, which leverages Spring Security and its OAuth 2.0 support. Open `server/pom.xml` and add the following dependency.
+On the server side, you can lock things down with Okta's Spring Boot Starter, which leverages Spring Security and its OIDC support. Open `server/pom.xml` and uncomment the Okta Spring Boot starter.
 
 ```xml
 <dependency>
@@ -743,7 +789,7 @@ Now you need to configure the server to use Okta for authentication. You'll need
 
 ### Create an OIDC App in Okta
 
-Log in to your Okta Developer account (or [sign up](https://developer.okta.com/signup/) if you don't have an account) and navigate to **Applications** > **Add Application**. Click **Single-Page App**, click **Next**, and give the app a name you'll remember. Change all instances of `localhost:8080` to `localhost:4200` and click **Done**.
+Log in to your Okta Developer account (or [sign up](/signup/) if you don't have an account) and navigate to **Applications** > **Add Application**. Click **Single-Page App**, click **Next**, and give the app a name you'll remember. Change all instances of `http://localhost:8080` to `http://localhost:4200` and click **Done**.
 
 Create `server/src/main/resources/application.yml` and copy the client ID into it. While you're in there, change the `issuer` to match your Okta domain.
 
@@ -780,17 +826,19 @@ public class DemoApplication {
 }
 ```
 
-After making these changes, you should be able to restart your app and see access denied when you try to navigate to http://localhost:8080.
+After making these changes, you should be able to restart your app and see an error when you try to navigate to `http://localhost:8080`.
+
+// todo: update screenshot
 
 {% img blog/spring-boot-2-angular-8/access-denied.png alt:"Access Denied" width:"800" %}{: .center-image }
 
-It's nice that your server is locked down, but now you need to configure your client to talk to it. This is where Okta's Angular support comes in handy.
+Now that your server is locked down, you need to configure your client to talk to it with an access token. This is where Okta's Angular SDK comes in handy.
 
 ### Okta's Angular Support
 
-The Okta Angular SDK is a wrapper around [Okta Auth JS](https://github.com/okta/okta-auth-js), which builds on top of OIDC. More information about Okta's Angular library can be [found on npmjs.com](https://www.npmjs.com/package/@okta/okta-angular).
+The Okta Angular SDK is a wrapper around [Okta Auth JS](https://github.com/okta/okta-auth-js), which builds on top of OIDC. More information about Okta's Angular library can be [found on GitHub](path/to/okta-angular).
 
-{% img blog/spring-boot-2-angular-8/okta-angular.png alt:"Okta Angular" width:"800" %}{: .center-image }
+To simplify our Angular SDK's installation and configuration, we created an @oktadev/schematics project that does everything for you. 
 
 To install it, run the following command in the `client` directory:
 
@@ -798,7 +846,7 @@ To install it, run the following command in the `client` directory:
 ng add @oktadev/schematics --issuer=https://{yourOktaDomain}/oauth2/default --clientId={yourClientId}
 ```
 
-**TIP:** You can read more about how @oktadev/schematics works in [Use Angular Schematics to Simplify Your Life](https://developer.okta.com/blog/2019/02/13/angular-schematics).
+**TIP:** You can read more about how @oktadev/schematics works in [Use Angular Schematics to Simplify Your Life](/blog/2019/02/13/angular-schematics).
 
 This command will:
 
@@ -808,7 +856,9 @@ This command will:
 * Configure routing with an `/implicit/callback` route
 * Add an `HttpInterceptor` that adds an `Authorization` header with an access token to `localhost` requests
 
-// tell user what they need to revert or copy/paste back into routes
+// tell user what they need to revert or copy/paste back into routes or fix schematics
+
+// todo: everything past here needs updating for Angular
 
 Modify `client/src/app/app.component.html` to have login and logout buttons.
 
@@ -935,56 +985,19 @@ mat-card {
 }
 ```
 
-Now you should be able to open your browser to http://localhost:4200 and click on the Login button. If you've configured everything correctly, you'll be redirected to Okta to log in.
+Now you should be able to open your browser to `http://localhost:4200` and click on the **Login** button. If you've configured everything correctly, you'll be redirected to Okta to log in.
 
 {% img blog/spring-boot-2-angular-8/okta-login.png alt:"Okta Login" width:"800" %}{: .center-image }
 
-Enter the credentials you used to sign up for an account, and you should be redirected back to your app. However, your
-list of cars won't load because of a CORS error. This happens because Spring's `@CrossOrigin` doesn't work well with
-Spring Security.
-
-To fix this, add a bean to `DemoApplication.java` that handles CORS.
-
-```java
-import org.springframework.boot.web.servlet.FilterRegistrationBean;
-import org.springframework.core.Ordered;
-import org.springframework.web.cors.CorsConfiguration;
-import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
-import org.springframework.web.filter.CorsFilter;
-import java.util.Collections;
-
-...
-
-public class DemoApplication {
-    // main() and init() methods + security config
-    
-    @Bean
-    public FilterRegistrationBean<CorsFilter> simpleCorsFilter() {
-        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
-        CorsConfiguration config = new CorsConfiguration();
-        config.setAllowCredentials(true);
-        config.setAllowedOrigins(Collections.singletonList("http://localhost:4200"));
-        config.setAllowedMethods(Collections.singletonList("*"));
-        config.setAllowedHeaders(Collections.singletonList("*"));
-        source.registerCorsConfiguration("/**", config);
-        FilterRegistrationBean<CorsFilter> bean = new FilterRegistrationBean<>(new CorsFilter(source));
-        bean.setOrder(Ordered.HIGHEST_PRECEDENCE);
-        return bean;
-    }
-}
-```
-
-Restart your server and celebrate when it all works! 🎉
+Enter valid credentials, and you should be redirected back to your app. Celebrate when it all works! 🎉
 
 {% img blog/spring-boot-2-angular-8/success-at-last.png alt:"Success!" width:"800" %}{: .center-image }
-
-You can see the full source code for the application developed in this tutorial on GitHub at [https://github.com/oktadeveloper/okta-spring-boot-2-angular-8-example](https://github.com/oktadeveloper/okta-spring-boot-2-angular-8-example).
 
 ## Learn More about Spring Boot and Angular
 
 It can be tough to keep up with fast-moving frameworks like Spring Boot and Angular. This article is meant to give you a jump start on the latest releases. For specific changes in Angular 8, see [its changelog](https://github.com/angular/angular/blob/master/CHANGELOG.md). For Spring Boot, see its [2.2 Release Notes](https://github.com/spring-projects/spring-boot/wiki/Spring-Boot-2.2-Release-Notes).
 
-This article uses [Okta's Angular SDK](https://www.npmjs.com/package/@okta/okta-angular). To learn more about this project, or help improve it, [see its GitHub project](https://github.com/okta/okta-oidc-js/tree/master/packages/okta-angular). We'd love to make it even easier to use!
+You can see the full source code for the application developed in this tutorial on GitHub at [https://github.com/oktadeveloper/okta-spring-boot-2-angular-8-example](https://github.com/oktadeveloper/okta-spring-boot-2-angular-8-example).
 
 This blog has a plethora of Spring Boot and Angular tutorials. Here are some of my favorites:
 
