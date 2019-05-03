@@ -57,11 +57,11 @@ TIP: Azul's Zulu is also available if you use `12.0.0-zulu` for the name.
 
 == Install JHipster 6
 
-A beta of JHipster 6 was https://www.jhipster.tech/2019/04/04/jhipster-release-6.0.0-beta.0.html[released today]. You can install it using the command below.
+JHipster 6 was https://www.jhipster.tech/2019/05/02/jhipster-release-6.0.0.html[released on May 3, 2019]. You can install it using the command below.
 
 [source,shell]
 ----
-npm install -g generator-jhipster@beta
+npm install -g generator-jhipster@6.0.0
 ----
 
 NOTE: The `npm` command is part of https://nodejs.org[Node.js]. You'll need to have Node 10.x to install JHipster and run useful commands.
@@ -117,7 +117,7 @@ If you'd prefer to see what this command looks line in-action, you can watch the
 
 ++++
 <div style="text-align: center">
-<script id="asciicast-238865" src="https://asciinema.org/a/238865.js" async></script>
+<script id="asciicast-244194" src="https://asciinema.org/a/244194.js" async></script>
 </div>
 ++++
 
@@ -250,6 +250,8 @@ Then run `jhipster import-jdl blog.jh` in your project. The https://github.com/j
 I'd like to thank https://twitter.com/joe_grandja[Joe Grandja] and https://twitter.com/rob_winch[Rob Winch] from the Spring Security team. Without their help, JHipster's migration to use Spring Security 5.1 would not have been possible. You guys _rock!!_
 
 I did not create a GitHub repository for this post because all of the code was generated. You can find the source code for https://github.com/jhipster/generator-jhipster[JHipster on GitHub].
+
+If you're interested in how I upgraded JHipster's tests to Spring Security 5.1, see /blog/2019/04/15/testing-spring-security-oauth-with-junit[]Upgrading Spring Security OAuth and JUnit Tests through the 👀 of a Java Hipster].
 
 Thanks JHipster and all its fabulous https://github.com/jhipster/generator-jhipster/graphs/contributors[contributors]. You all do a tremendous amount of work in your free time and it's greatly appreciated.
 
