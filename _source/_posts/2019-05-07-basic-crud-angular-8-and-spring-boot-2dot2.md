@@ -800,7 +800,7 @@ Now you need to configure the server to use Okta for authentication. You'll need
 
 ### Create an OIDC App in Okta
 
-Log in to your Okta Developer account (or [sign up](/signup/) if you don't have an account) and navigate to **Applications** > **Add Application**. Click **Single-Page App**, click **Next**, and give the app a name you'll remember. Change all instances of `http://localhost:8080` to `http://localhost:4200` and click **Done**. 
+Log in to your Okta Developer account (or [sign up](https://developer.okta.com/signup/) if you don't have an account) and navigate to **Applications** > **Add Application**. Click **Single-Page App**, click **Next**, and give the app a name you'll remember. Change all instances of `http://localhost:8080` to `http://localhost:4200` and click **Done**. 
 
 {% img blog/spring-boot-2-angular-8/oidc-settings.png alt:"OIDC App Settings" width:"700" %}{: .center-image }
 
