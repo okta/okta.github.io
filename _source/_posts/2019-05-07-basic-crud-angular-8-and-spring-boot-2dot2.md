@@ -1,7 +1,6 @@
 ---
 layout: blog_post
 title: 'Angular 8 + Spring Boot 2.2: Build a CRUD App Today!'
-// went for a different title since CRUD is not the highlight, spring boot + angular are
 author: mraible
 description: "Angular and Spring Boot are wildly popular frameworks for web development. Matt Raible shows you how to use them together in the same app and how to secure it all with OIDC."
 tags: [angular, spring boot, spring boot 2, angular 8, okta, oidc]
@@ -12,17 +11,25 @@ tweets:
 image: blog/spring-boot-2-angular-8/angular+spring-boot+security=love.jpg
 ---
 
-If you've been a Java developer for 10+ years, you probably remember when there were a plethora of Java web frameworks. It started with Struts and Webwork. Then Tapestry, Wicket, and JSF came along and championed the idea of component-based frameworks. Spring MVC was released in 2004 (in the same month as Flex 1.0 and JSF 1.0) and became the de-facto standard in Java web frameworks over the next six years. 
+// note: I went for a different title since CRUD is not the highlight, spring boot + angular are
 
-Then along came AngularJS and everyone started moving their UI architectures to JavaScript. Angular 2 was announced at the same time that Spring Boot was first revealed in 2014, and it took a couple years for it to be released, solidify, and become a viable option. These days, we just call it Angular, with no version number. The last few releases have been pretty darn stable, with smooth upgrade paths between major releases. 
+If you've been a Java developer for more than 15 years, you probably remember when there were a plethora of Java web frameworks. It started with Struts and WebWork. Then Tapestry, Wicket, and JSF came along and championed the idea of component-based frameworks. Spring MVC was released in 2004 (in the same month as Flex 1.0 and JSF 1.0) and became the de-facto standard in Java web frameworks over the next six years. 
+
+Then along came AngularJS and everyone started moving their UI architectures to JavaScript. Angular 2 was announced at the same time that Spring Boot was first revealed in 2014, and it took a couple of years for it to be released, solidify, and become a viable option. These days, we call it Angular, with no version number. The last few releases have been pretty darn stable, with smooth upgrade paths between major releases. 
 
 Today, I'd like to show you how to build an app with the latest and greatest versions of Angular and Spring Boot. Angular 8 and Spring Boot 2.2 both come with performance improvements to make your developer life better.
 
-Angular 8 adds differential blah blah, [Ivy](https://next.angular.io/guide/ivy) and [Bazil]().
+Angular 8 adds differential loading, an optional Ivy Renderer, and Bazel as a build option. Differential loading is where the CLI builds two separate bundles as part of your deployed application. The modern bundle is served to evergreen browsers, while the legacy bundle contains all the necessary polyfills for older browsers. 
 
-// higlights from ng-conf
+{% img blog/spring-boot-2-angular-8/differential-loading-slide.jpg alt:"Differential Loading" width:"600" %}{: .center-image }
 
-Spring Boot, feeling some heat from quick-starting frameworks like Micronaut and Quarkus, has made a number of performance improvements as well. 
+The Ivy Renderer is smaller, faster, simpler to debug, has improved type checking, and -- most importantly -- is backward compatible.
+
+{% img blog/spring-boot-2-angular-8/ivy-renderer-slide.jpg alt:"Ivy Renderer" width:"600" %}{: .center-image }
+
+_Both of the above slides are from the [Day 1 Keynote at ng-conf 2019](https://docs.google.com/presentation/d/19yTRqHT1v4SQz5kXCL6OrIWvH9M20029s_ri5Eil03Y/edit?usp=sharing)._
+
+Spring Boot, feeling some heat from quick-starting frameworks like Micronaut and Quarkus, has made many performance improvements as well. JMX is now disabled by default, Hibernate's entity scanning is disabled, and lazy initialization of beans is on by default. In addition, startup time and memory usage have been reduced by making use of `proxyBeanMethods=false` in Spring Boot's `@Configuration` classes. See [Spring Boot 2.2 Release Notes](https://github.com/spring-projects/spring-boot/wiki/Spring-Boot-2.2-Release-Notes) for more information.
 
 If you're stuck on older versions of these frameworks, you might want to check out a couple of my previous posts:
 
@@ -41,16 +48,18 @@ To get started with [Spring Boot](https://projects.spring.io/spring-boot/) 2.2, 
 
 {% img blog/spring-boot-2-angular-8/start.spring.io.png alt:"Spring Initializr" width:"800" %}{: .center-image }
 
-Create a directory to hold your server and client applications. I called mine `okta-spring-boot-2-angular-8-example`, but you can call yours whatever you like. If you'd rather see the app running than write code, you can [see the example on GitHub](https://github.com/oktadeveloper/okta-spring-boot-2-angular-8-example), or clone and run locally using the commands below.
+Create a directory to hold your server and client applications. I called mine `okta-spring-boot-2-angular-8-example`, but you can call yours whatever you like. 
 
-```bash
-git clone https://github.com/oktadeveloper/okta-spring-boot-2-angular-8-example.git
-cd okta-spring-boot-2-angular-8-example/client
-npm install
-ng serve &
-cd ../server
-./mvnw spring-boot:run
-```
+> If you'd rather see the app running than write code, you can [see the example on GitHub](https://github.com/oktadeveloper/okta-spring-boot-2-angular-8-example), or clone and run locally using the commands below.
+> 
+> ```bash
+> git clone https://github.com/oktadeveloper/okta-spring-boot-2-angular-8-example.git
+> cd okta-spring-boot-2-angular-8-example/client
+> npm install
+> ng serve &
+> cd ../server
+> ./mvnw spring-boot:run
+> ```
 
 After downloading `demo.zip` from start.spring.io, expand it and copy the `demo` directory to your app-holder directory. Rename `demo` to `server`. Open `server/pom.xml` and comment out the dependency on Okta's Spring Boot starter.
 
@@ -143,9 +152,9 @@ Car(id=8, name=Ford Pinto)
 Car(id=9, name=Yugo GV)
 ```
 
-**NOTE:** If you see `Fatal error compiling: invalid target release: 11`, it's because you're using Java 8. If you change to use Java 11, this error will go away. If you're using [SDKMAN](https://sdkman.io/), run `sdk install java 11.0.2-open && sdk default java 11.0.2-open`.
+**NOTE:** If you see `Fatal error compiling: invalid target release: 11`, it's because you're using Java 8. If you change to use Java 11, this error will go away. If you're using [SDKMAN](https://sdkman.io/), run `sdk install java 11.0.2-open` followed by `sdk default java 11.0.2-open`.
 
-Add a `CoolCarController` class (in `src/main/java/com/okta/developer/demo/CoolCarController.java`) that returns a list of cool cars to display in the Angular client.
+Add a `CoolCarController` class (in `src/main/java/com/okta/developer/demo`) that returns a list of cool cars to display in the Angular client.
 
 ```java
 package com.okta.developer.demo;
@@ -185,7 +194,7 @@ If you restart your server and hit `http://localhost:8080/cool-cars` with your b
 $ http :8080/cool-cars
 HTTP/1.1 200
 Content-Type: application/json;charset=UTF-8
-Date: Mon, 29 Apr 2019 17:40:33 GMT
+Date: Tue, 07 May 2019 18:07:33 GMT
 Transfer-Encoding: chunked
 
 [
@@ -216,10 +225,10 @@ Transfer-Encoding: chunked
 
 Angular CLI is a command-line utility that can generate an Angular project for you. Not only can it create new projects, but it can also generate code. It's a convenient tool because it also offers commands that will build and optimize your project for production. It uses webpack under the covers for building.
 
-Install the latest version of Angular CLI (which is version v8.0.0-rc.1 at the time of this writing).
+Install the latest version of Angular CLI (which is version v8.0.0-rc.2 at the time of this writing).
 
 ```bash
-npm i -g @angular/cli@v8.0.0-rc.1
+npm i -g @angular/cli@v8.0.0-rc.2
 ```
 
 Create a new project in the umbrella directory you created. Again, mine is named `okta-spring-boot-2-angular-8-example`.
@@ -250,14 +259,16 @@ Use Angular CLI to generate a car service that can talk to the Cool Cars API.
 ng g s shared/car/car
 ```
 
-Update the code in `car.service.ts` to fetch the list of cars from the server.
+Update the code in `client/src/app/shared/car/car.service.ts` to fetch the list of cars from the server.
 
 ```typescript
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
-@Injectable({providedIn: 'root'})
+@Injectable({
+  providedIn: 'root'
+})
 export class CarService {
 
   constructor(private http: HttpClient) {
@@ -368,7 +379,7 @@ public Collection<Car> coolCars() {
 }
 ```
 
-Also, add it to `CarRepository` so you can communicate with its endpoints when adding/deleting/editing from Angular.
+In Spring Boot versions 2.1.4 and below, you could also add a `@CrossOrigin` annotation to your `CarRepository`. This would allow you to communicate with its endpoints when adding/deleting/editing from Angular.
 
 ```java
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -379,11 +390,42 @@ interface CarRepository extends JpaRepository<Car, Long> {
 }
 ```
 
+However, this [no longer works in Spring Boot 2.2.0.M2](https://github.com/spring-projects/spring-boot/issues/16683). The good news is there is a workaround. You can add a `CorsFilter` bean to your `DemoApplication.java` class. This is necessary when you integrate Spring Security as well; you're just doing it a bit earlier.
+
+```java
+import org.springframework.boot.web.servlet.FilterRegistrationBean;
+import org.springframework.core.Ordered;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
+import org.springframework.web.filter.CorsFilter;
+import java.util.Collections;
+
+...
+
+public class DemoApplication {
+    // main() and init() methods
+    
+    @Bean
+    public FilterRegistrationBean<CorsFilter> simpleCorsFilter() {
+        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+        CorsConfiguration config = new CorsConfiguration();
+        config.setAllowCredentials(true);
+        config.setAllowedOrigins(Collections.singletonList("http://localhost:4200"));
+        config.setAllowedMethods(Collections.singletonList("*"));
+        config.setAllowedHeaders(Collections.singletonList("*"));
+        source.registerCorsConfiguration("/**", config);
+        FilterRegistrationBean<CorsFilter> bean = new FilterRegistrationBean<>(new CorsFilter(source));
+        bean.setOrder(Ordered.HIGHEST_PRECEDENCE);
+        return bean;
+    }
+}
+```
+
 Restart the server, refresh the client, and you should see the list of cars in your browser.
 
 ## Add Angular Material
 
-You've already installed Angular Material, to use its components, you just need to import them. Open `client/src/app/app.module.ts` and add imports for animations, and Material's toolbar, buttons, inputs, lists, and card layout.
+You've already installed Angular Material, to use its components, you need to import them. Open `client/src/app/app.module.ts` and add imports for animations, and Material's toolbar, buttons, inputs, lists, and card layout.
 
 ```typescript
 import { MatButtonModule, MatCardModule, MatInputModule, MatListModule, MatToolbarModule } from '@angular/material';
@@ -442,7 +484,7 @@ If you run your client with `ng serve` and navigate to `http://localhost:4200`, 
 
 ## Add Animated GIFs with Giphy
 
-To add a `giphyUrl` property to cars, create `client/src/app/shared/giphy/giphy.service.ts` and populate it with the code below.
+To add a `giphyUrl` property to each car, create `client/src/app/shared/giphy/giphy.service.ts` and populate it with the code below.
 
 ```typescript
 import { Injectable } from '@angular/core';
@@ -695,7 +737,7 @@ Update the HTML in `client/src/app/car-edit/car-edit.component.html` to have a f
     </mat-card-content>
     <mat-card-actions>
       <button mat-raised-button color="primary" type="submit"
-              [disabled]="!carForm.form.valid">Save</button>
+              [disabled]="!carForm.valid">Save</button>
       <button mat-raised-button color="secondary" (click)="remove(car.href)"
               *ngIf="car.href" type="button">Delete</button>
       <a mat-button routerLink="/car-list">Cancel</a>
@@ -738,37 +780,6 @@ The following screenshot shows what it looks like to edit a car that you've adde
 
 {% img blog/spring-boot-2-angular-8/car-edit.png alt:"Car Edit Component" width:"800" %}{: .center-image }
 
-**NOTE:** There is a [regression in Spring Boot 2.2 M2]() that makes it so the `@CrossOrigin` annotation doesn't work. As a workaround, you can add a `CorsFilter` bean to your `DemoApplication.java`. 
-
-```java
-import org.springframework.boot.web.servlet.FilterRegistrationBean;
-import org.springframework.core.Ordered;
-import org.springframework.web.cors.CorsConfiguration;
-import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
-import org.springframework.web.filter.CorsFilter;
-import java.util.Collections;
-
-...
-
-public class DemoApplication {
-    // main() and init() methods
-    
-    @Bean
-    public FilterRegistrationBean<CorsFilter> simpleCorsFilter() {
-        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
-        CorsConfiguration config = new CorsConfiguration();
-        config.setAllowCredentials(true);
-        config.setAllowedOrigins(Collections.singletonList("http://localhost:4200"));
-        config.setAllowedMethods(Collections.singletonList("*"));
-        config.setAllowedHeaders(Collections.singletonList("*"));
-        source.registerCorsConfiguration("/**", config);
-        FilterRegistrationBean<CorsFilter> bean = new FilterRegistrationBean<>(new CorsFilter(source));
-        bean.setOrder(Ordered.HIGHEST_PRECEDENCE);
-        return bean;
-    }
-}
-```
-
 ## Add OIDC Authentication to Your Spring Boot + Angular App
 
 Add authentication with OIDC is a nifty feature you can add to this application. Knowing who the person is can come in handy if you want to add auditing, or personalize your application (with a rating feature for example).
@@ -789,123 +800,133 @@ Now you need to configure the server to use Okta for authentication. You'll need
 
 ### Create an OIDC App in Okta
 
-Log in to your Okta Developer account (or [sign up](/signup/) if you don't have an account) and navigate to **Applications** > **Add Application**. Click **Single-Page App**, click **Next**, and give the app a name you'll remember. Change all instances of `http://localhost:8080` to `http://localhost:4200` and click **Done**.
+Log in to your Okta Developer account (or [sign up](/signup/) if you don't have an account) and navigate to **Applications** > **Add Application**. Click **Single-Page App**, click **Next**, and give the app a name you'll remember. Change all instances of `http://localhost:8080` to `http://localhost:4200` and click **Done**. 
 
-Create `server/src/main/resources/application.yml` and copy the client ID into it. While you're in there, change the `issuer` to match your Okta domain.
+{% img blog/spring-boot-2-angular-8/oidc-settings.png alt:"OIDC App Settings" width:"700" %}{: .center-image }
 
-```yaml
-okta:
-  oauth2:
-    client-id: {clientId}
-    issuer: https://{yourOktaDomain}/oauth2/default
+You'll see a client ID at the bottom of the page. Add it and an `issuer` property to `server/src/main/resources/application.properties`.
+
+```properties
+okta.oauth2.client-id={yourClientId}
+okta.oauth2.issuer=https://{yourOktaDomain}/oauth2/default
 ```
 
-Update `server/src/main/java/com/okta/developer/demo/DemoApplication.java` to enable it as a resource server.
+Create `server/src/main/java/com/okta/developer/demo/SecurityConfiguration.java` to configure your Spring Boot app as a resource server.
 
 ```java
-import org.springframework.context.annotation.Configuration;
+package com.okta.developer.demo;
+
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 
-@SpringBootApplication
-public class DemoApplication {
+@EnableWebSecurity
+public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
-	...
-
-	@Configuration
-	static class OktaOAuth2WebSecurityConfigurerAdapter extends WebSecurityConfigurerAdapter {
-
-		@Override
-		protected void configure(HttpSecurity http) throws Exception {
-			http
-				.authorizeRequests().anyRequest().authenticated()
-				.and()
-				.oauth2ResourceServer().jwt();
-		}
-	}
+    @Override
+    protected void configure(HttpSecurity http) throws Exception {
+        http
+            .authorizeRequests().anyRequest().authenticated()
+            .and()
+            .oauth2ResourceServer().jwt();
+    }
 }
 ```
 
 After making these changes, you should be able to restart your app and see an error when you try to navigate to `http://localhost:8080`.
 
-// todo: update screenshot
+{% img blog/spring-boot-2-angular-8/400-error.png alt:"Access Denied" width:"800" %}{: .center-image }
 
-{% img blog/spring-boot-2-angular-8/access-denied.png alt:"Access Denied" width:"800" %}{: .center-image }
+**NOTE:** You could fix this error by adding `http://localhost:8080/login/oauth2/code/okta` as a redirect URI to your app, but it won't solve the problem. If you want to support OIDC Login with Spring Boot, you'll need to register a **Web** app (instead of a SPA) and include a client secret in your `application.properties`. This is not a necessary step in this tutorial.
 
 Now that your server is locked down, you need to configure your client to talk to it with an access token. This is where Okta's Angular SDK comes in handy.
 
 ### Okta's Angular Support
 
-The Okta Angular SDK is a wrapper around [Okta Auth JS](https://github.com/okta/okta-auth-js), which builds on top of OIDC. More information about Okta's Angular library can be [found on GitHub](path/to/okta-angular).
+The Okta Angular SDK is a wrapper around [Okta Auth JS](https://github.com/okta/okta-auth-js), which builds on top of OIDC. More information about Okta's Angular library can be [found on GitHub](https://github.com/okta/okta-oidc-js/tree/master/packages/okta-angular).
 
-To simplify our Angular SDK's installation and configuration, we created an @oktadev/schematics project that does everything for you. 
+To simplify our Angular SDK's installation and configuration, we created an @oktadev/schematics project that does everything for you. You can read more about how @oktadev/schematics works in [Use Angular Schematics to Simplify Your Life](/blog/2019/02/13/angular-schematics).
 
-To install it, run the following command in the `client` directory:
+Before you install it, it's a good idea to check your project into source control. If you don't have Git installed, you can copy your project to another location as a backup. If you do have Git installed, run the following commands from the root directory of your project.
+
+```
+git init
+git add .
+git commit -m "Initialize project"
+```
+
+To install and configure Okta's Angular SDK, run the following command in the `client` directory:
 
 ```bash
 ng add @oktadev/schematics --issuer=https://{yourOktaDomain}/oauth2/default --clientId={yourClientId}
 ```
 
-**TIP:** You can read more about how @oktadev/schematics works in [Use Angular Schematics to Simplify Your Life](/blog/2019/02/13/angular-schematics).
-
 This command will:
 
 * Install `@okta/okta-angular`
 * Configure Okta's Angular SDK for your app in `app.module.ts`
-* Add login and logout buttons to `app.component.html`
-* Configure routing with an `/implicit/callback` route
+* Add `isAuthenticated` logic to `app.component.ts`
+* Add a `HomeComponent` with login and logout buttons
+* Configure routing with a default route to `/home` and an `/implicit/callback` route
 * Add an `HttpInterceptor` that adds an `Authorization` header with an access token to `localhost` requests
 
-// tell user what they need to revert or copy/paste back into routes or fix schematics
+At this point, it just blindly overwrites files instead of trying to insert snippets into existing files. Therefore, you'll need to restore your declarations and imports in `app.module.ts`. It should look as follows when you're finished.
 
-// todo: everything past here needs updating for Angular
-
-Modify `client/src/app/app.component.html` to have login and logout buttons.
-
-{% raw %}
-```html
-<mat-toolbar color="primary">
-  <span>Welcome to {{title}}!</span>
-  <span class="toolbar-spacer"></span>
-  <button mat-raised-button color="accent" *ngIf="isAuthenticated"
-          (click)="oktaAuth.logout()">Logout
-  </button>
-</mat-toolbar>
-
-<mat-card *ngIf="!isAuthenticated">
-  <mat-card-content>
-    <button mat-raised-button color="accent"
-            (click)="oktaAuth.loginRedirect()">Login
-    </button>
-  </mat-card-content>
-</mat-card>
-
-<router-outlet></router-outlet>
-```
-{% endraw %}
-
-You might notice there's a span with a `toolbar-spacer` class. To make that work as expected, update `client/src/app/app.component.css` to have the following class.
-
-```css
-.toolbar-spacer {
-  flex: 1 1 auto;
-}
-```
-
-Now if you restart your client, you should see a login button.
-
-{% img blog/spring-boot-2-angular-8/login-button.png alt:"Login Button" width:"800" %}{: .center-image }
-
-Notice that this shows elements from the `car-list` component. To fix this, you can create a home component and make it the default route.
-
-```bash
-ng g c home
-```
-
-Modify `client/src/app/app-routing.module.ts` to update the routes.
-
-```typescript
+```ts
+import { BrowserModule } from '@angular/platform-browser';
+import { NgModule } from '@angular/core';
+import { AppRoutingModule } from './app-routing.module';
+import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
+import { OKTA_CONFIG, OktaAuthModule } from '@okta/okta-angular';
+import { AuthInterceptor } from './shared/okta/auth.interceptor';
+import { CarListComponent } from './car-list/car-list.component';
+import { CarEditComponent } from './car-edit/car-edit.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatButtonModule, MatCardModule, MatInputModule, MatListModule, MatToolbarModule } from '@angular/material';
+import { FormsModule } from '@angular/forms';
+
+const oktaConfig = {
+  issuer: 'https://{yourOktaDomain}/oauth2/default',
+  redirectUri: window.location.origin + '/implicit/callback',
+  clientId: '{yourClientId}'
+};
+
+@NgModule({
+  declarations: [
+    AppComponent,
+    CarListComponent,
+    CarEditComponent,
+    HomeComponent
+  ],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    BrowserAnimationsModule,
+    HttpClientModule,
+    MatButtonModule,
+    MatCardModule,
+    MatInputModule,
+    MatListModule,
+    MatToolbarModule,
+    FormsModule,
+    OktaAuthModule
+  ],
+  providers: [
+    { provide: OKTA_CONFIG, useValue: oktaConfig },
+    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }
+  ],
+  bootstrap: [AppComponent]
+})
+export class AppModule { }
+```
+
+Update `app-routing.module.ts` to restore the car-related routes as well.
+
+```ts
+import { CarListComponent } from './car-list/car-list.component';
+import { CarEditComponent } from './car-edit/car-edit.component';
 
 const routes: Routes = [
   {path: '', redirectTo: '/home', pathMatch: 'full'},
@@ -913,11 +934,50 @@ const routes: Routes = [
     path: 'home',
     component: HomeComponent
   },
-  ...
+  {
+    path: 'car-list',
+    component: CarListComponent
+  },
+  {
+    path: 'car-add',
+    component: CarEditComponent
+  },
+  {
+    path: 'car-edit/:id',
+    component: CarEditComponent
+  },
+  {
+    path: 'implicit/callback',
+    component: OktaCallbackComponent
+  }
+];
+```
+
+Modify `client/src/app/app.component.html` to have a logout button.
+
+{% raw %}
+```html
+<mat-toolbar color="primary">
+  <span>Welcome to {{title}}!</span>
+  <span class="toolbar-spacer"></span>
+  <button mat-raised-button color="accent" *ngIf="isAuthenticated"
+          (click)="oktaAuth.logout()" [routerLink]="['/home']">Logout
+  </button>
+</mat-toolbar>
+
+<router-outlet></router-outlet>
+```
+{% endraw %}
+
+You might notice there's a span with a `toolbar-spacer` class. To make that work as expected, add a `toolbar-spacer` rule to `client/src/app/app.component.css`.
+
+```css
+.toolbar-spacer {
+  flex: 1 1 auto;
 }
 ```
 
-Move the HTML for the Login button from `app.component.html` to `client/src/app/home/home.component.html`.
+Then update `client/src/app/home/home.component.html` to use Angular Material and link to the Car List.
 
 {% raw %}
 ```html
@@ -934,49 +994,6 @@ Move the HTML for the Login button from `app.component.html` to `client/src/app/
 ```
 {% endraw %}
 
-Add `oktaAuth` as a dependency in `client/src/app/home/home.component.ts` and set it up to initialize/change the `isAuthenticated` variable.
-
-```typescript
-import { Component, OnInit } from '@angular/core';
-import { OktaAuthService } from '@okta/okta-angular';
-
-@Component({
-  selector: 'app-home',
-  templateUrl: './home.component.html',
-  styleUrls: ['./home.component.css']
-})
-export class HomeComponent implements OnInit {
-  isAuthenticated: boolean;
-
-  constructor(private oktaAuth: OktaAuthService) {
-  }
-
-  async ngOnInit() {
-    this.isAuthenticated = await this.oktaAuth.isAuthenticated();
-    // Subscribe to authentication state changes
-    this.oktaAuth.$authenticationState.subscribe(
-      (isAuthenticated: boolean)  => this.isAuthenticated = isAuthenticated
-    );
-  }
-}
-```
-
-Update `client/src/app/app.component.html`, so the Logout button redirects back to home when it's clicked.
-
-{% raw %}
-```html
-<mat-toolbar color="primary">
-  <span>Welcome to {{title}}!</span>
-  <span class="toolbar-spacer"></span>
-  <button mat-raised-button color="accent" *ngIf="isAuthenticated"
-          (click)="oktaAuth.logout()" [routerLink]="['/home']">Logout
-  </button>
-</mat-toolbar>
-
-<router-outlet></router-outlet>
-```
-{% endraw %}
-
 To make it so there's not a bottom border at the bottom of your content, make the `<mat-card>` element fill the screen by adding the following to `client/src/styles.css`.
 
 ```css
@@ -985,7 +1002,19 @@ mat-card {
 }
 ```
 
-Now you should be able to open your browser to `http://localhost:4200` and click on the **Login** button. If you've configured everything correctly, you'll be redirected to Okta to log in.
+Now if you restart your client, everything should work. Unfortunately, it does not because [Ivy does not yet implement CommonJS/UMD support](https://github.com/angular/angular/issues/29564). As a workaround, you can modify `tsconfig.app.json` to disable Ivy.
+
+```json
+"angularCompilerOptions": {
+  "enableIvy": false
+}
+```
+
+Stop and restart the `ng serve` process. Open your browser to `http://localhost:4200`.
+
+{% img blog/spring-boot-2-angular-8/login-button.png alt:"Login Button" width:"800" %}{: .center-image }
+
+Click on the **Login** button. If you've configured everything correctly, you'll be redirected to Okta to log in.
 
 {% img blog/spring-boot-2-angular-8/okta-login.png alt:"Okta Login" width:"800" %}{: .center-image }
 
@@ -995,12 +1024,16 @@ Enter valid credentials, and you should be redirected back to your app. Celebrat
 
 ## Learn More about Spring Boot and Angular
 
-It can be tough to keep up with fast-moving frameworks like Spring Boot and Angular. This article is meant to give you a jump start on the latest releases. For specific changes in Angular 8, see [its changelog](https://github.com/angular/angular/blob/master/CHANGELOG.md). For Spring Boot, see its [2.2 Release Notes](https://github.com/spring-projects/spring-boot/wiki/Spring-Boot-2.2-Release-Notes).
+It can be tough to keep up with fast-moving frameworks like Spring Boot and Angular. This article is meant to give you a jump start on the latest releases. For specific changes in Angular 8, see the Angular Team's [plan for version 8.0 and Ivy](https://blog.angular.io/a-plan-for-version-8-0-and-ivy-b3318dfc19f7). For Spring Boot, see its [2.2 Release Notes](https://github.com/spring-projects/spring-boot/wiki/Spring-Boot-2.2-Release-Notes).
 
-You can see the full source code for the application developed in this tutorial on GitHub at [https://github.com/oktadeveloper/okta-spring-boot-2-angular-8-example](https://github.com/oktadeveloper/okta-spring-boot-2-angular-8-example).
+You can see the full source code for the application developed in this tutorial on GitHub at [oktadeveloper/okta-spring-boot-2-angular-8-example](https://github.com/oktadeveloper/okta-spring-boot-2-angular-8-example).
 
 This blog has a plethora of Spring Boot and Angular tutorials. Here are some of my favorites:
 
-* 
+* [Build a Desktop Application with Angular and Electron](/blog/2019/03/20/build-desktop-app-with-angular-electron)
+* [Migrate Your Spring Boot App to the Latest and Greatest Spring Security and OAuth 2.0](/blog/2019/03/05/spring-boot-migration)
+* [i18n in Java 11, Spring Boot, and JavaScript](/blog/2019/02/25/java-i18n-internationalization-localization)
+* [Build Secure Login for Your Angular App](/blog/2019/02/12/secure-angular-login)
+* [Build Reactive APIs with Spring WebFlux](/blog/2018/09/24/reactive-apis-with-spring-webflux)
 
 If you have any questions, please don't hesitate to leave a comment below, or ask us on our [Okta Developer Forums](https://devforum.okta.com/). Don't forget to follow us [on Twitter](https://twitter.com/oktadev) and [YouTube](https://www.youtube.com/channel/UC5AMiWqFVFxF1q9Ya1FuZ_Q) too!
