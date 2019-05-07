@@ -45,7 +45,7 @@ Specifically, the Authorization Code flow with PKCE does completely protect the 
 
 The best way to securely implement OAuth in a JavaScript app is to keep the token management outside of JavaScript entirely. If you're building a JavaScript app that is served from a dynamic server, such as a [Spring Boot backend with an Angular frontend](/blog/2018/08/22/basic-crud-angular-7-and-spring-boot-2), or an [ASP.NET backend with a React front-end](/blog/2018/07/02/build-a-secure-crud-app-with-aspnetcore-and-react), then you can keep all of the OAuth exchange and token management inside the backend, never exposing it to the JavaScript front-end, and avoid all the risks inherent in managing tokens in JavaScript.
 
-## Start Using the Implicit Flow with PKCE in JavaScript Today
+## Start Using PKCE in JavaScript Today
 
 So you're ready to start writing an app using PKCE in JavaScript? Let's take a look at exactly what that entails.
 
