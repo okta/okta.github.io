@@ -20,7 +20,7 @@ I was a web developer years before I became a Java developer. I've been developi
 
 JHipster 6 uses Spring Boot 2.1 for its backend API, which means you can use Java 11+ to develop your JHipster apps!
 
-If you'd rather watch a video, https://youtu.be/nw4X42CefbI[I created a screencast of this blog post].
+If you'd rather watch a video, https://youtu.be/Ktnvqoouulg[I created a screencast of this blog post].
 
 ++++
 <div style="text-align: center; margin-bottom: 1.25rem">
