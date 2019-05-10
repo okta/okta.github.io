@@ -276,13 +276,13 @@ Below are screenshots of the app running on a Pixel 2 AVD.
 ng add @oktadev/schematics --platform=capacitor
 ```
 
-**NOTE:** This integration uses Ionic's [native HTTP plugin for Cordova](https://ionicframework.com/docs/native/http) because the default HTTP from capacitor uses a `capacitor://localhost` origin header and Okta only supports `http` origins.
+**NOTE:** This integration uses Ionic's [native HTTP plugin for Cordova](https://ionicframework.com/docs/native/http) because the default HTTP from Capacitor uses a `capacitor://localhost` origin header and Okta only supports `http` origins.
 
 ## Bonus: You're Using PKCE in the Browser and on Mobile!
 
-The Ionic 4 AppAuth integration in this example uses PKCE (Proof Key for Code Exchange). PKCE (pronounced “pixy”) is a security extension for OAuth 2.0 for public clients on mobile (and desktop) clients. It's designed to prevent interception of the authorization code by a malicious application that runs on the same device. You can read about why it's awesome in Aaron Parecki's [Is the OAuth 2.0 Implicit Flow Dead?](https://developer.okta.com/blog/2019/05/01/is-the-oauth-implicit-flow-dead)
+The Ionic 4 AppAuth integration in this example uses PKCE (Proof Key for Code Exchange). PKCE (pronounced "pixy") is a security extension for OAuth 2.0 for public clients on mobile (and desktop) clients. It's designed to prevent interception of the authorization code by a malicious application that runs on the same device. You can read about why it's awesome in Aaron Parecki's [Is the OAuth 2.0 Implicit Flow Dead?](https://developer.okta.com/blog/2019/05/01/is-the-oauth-implicit-flow-dead)
 
-## Learn More about Ionic, Schematics, and Angular
+## Learn More About Ionic, Schematics, and Angular
 
 This tutorial showed you how to create an Ionic 4 application and add user login and registration with a handful of commands. If you'd like to see the completed application, you can [find it on GitHub](https://github.com/oktadeveloper/okta-ionic-4-login-example).
 
