@@ -282,4 +282,4 @@ Follow us on https://twitter.com/oktadev[@oktadev] to stay up-to-date with Java 
 
 **Changelog:**
 
-* May 10, 2019: Updated to use JHipster 6.0 GA release and embed screencast. Changes to this post can be viewed in https://github.com/okta/okta.github.io/pull/2456[okta.github.io#2456].
+* May 10, 2019: Updated to use JHipster 6.0 GA release and embed screencast. Changes to this post can be viewed in https://github.com/okta/okta.github.io/pull/2869[okta.github.io#2869].
