@@ -5,21 +5,21 @@ author: mraible
 description: "Angular and Spring Boot are wildly popular frameworks for web development. Matt Raible shows you how to use them together in the same app and how to secure it all with OIDC."
 tags: [angular, spring boot, spring boot 2, angular 8, okta, oidc]
 tweets:
-  - "Angular + Spring Boot makes for a fantastic development experience. Learn how to make them work together and add OIDC authentication for user authentication."
-  - "Spring Boot with @java + Angular with @typescriptlang = ❤️. Learn how to build a @springboot + @angular CRUD app today!"
-  - "Are you a @java developer using Spring Boot and want to update your UI skills? This tutorial shows you how to use Angular with Spring Boot to develop a cool cars application."
+ - "Angular + Spring Boot makes for a fantastic development experience. Learn how to make them work together and add OIDC authentication for user authentication."
+ - "Spring Boot with @java + Angular with @typescriptlang = ❤️. Learn how to build a @springboot + @angular CRUD app today!"
+ - "Are you a @java developer using Spring Boot and want to update your UI skills? This tutorial shows you how to use Angular with Spring Boot to develop a cool cars application."
 image: blog/spring-boot-2-angular-8/angular+spring-boot+security=love.jpg
 ---
 
-// note: I went for a different title since CRUD is not the highlight, spring boot + angular are
+If you've been a Java developer for more than 15 years, you probably remember when there were a plethora of Java web frameworks. It started with Struts and WebWork. Then Tapestry, Wicket, and JSF came along and championed the idea of component-based frameworks. Spring MVC was released in 2004 (in the same month as Flex 1.0 and JSF 1.0) and became the de-facto standard in Java web frameworks over the next six years.
 
-If you've been a Java developer for more than 15 years, you probably remember when there were a plethora of Java web frameworks. It started with Struts and WebWork. Then Tapestry, Wicket, and JSF came along and championed the idea of component-based frameworks. Spring MVC was released in 2004 (in the same month as Flex 1.0 and JSF 1.0) and became the de-facto standard in Java web frameworks over the next six years. 
-
-Then along came AngularJS and everyone started moving their UI architectures to JavaScript. Angular 2 was announced at the same time that Spring Boot was first revealed in 2014, and it took a couple of years for it to be released, solidify, and become a viable option. These days, we call it Angular, with no version number. The last few releases have been pretty darn stable, with smooth upgrade paths between major releases. 
+Then along came AngularJS and everyone started moving their UI architectures to JavaScript. Angular 2 was announced at the same time that Spring Boot was first revealed in 2014, and it took a couple of years for it to be released, solidify, and become a viable option. These days, we call it Angular, with no version number. The last few releases have been pretty darn stable, with smooth upgrade paths between major releases.
 
 Today, I'd like to show you how to build an app with the latest and greatest versions of Angular and Spring Boot. Angular 8 and Spring Boot 2.2 both come with performance improvements to make your developer life better.
 
-Angular 8 adds differential loading, an optional Ivy Renderer, and Bazel as a build option. Differential loading is where the CLI builds two separate bundles as part of your deployed application. The modern bundle is served to evergreen browsers, while the legacy bundle contains all the necessary polyfills for older browsers. 
+## What's New in Angular 8?
+
+Angular 8 adds differential loading, an optional Ivy Renderer, and Bazel as a build option. Differential loading is where the CLI builds two separate bundles as part of your deployed application. The modern bundle is served to evergreen browsers, while the legacy bundle contains all the necessary polyfills for older browsers.
 
 {% img blog/spring-boot-2-angular-8/differential-loading-slide.jpg alt:"Differential Loading" width:"600" %}{: .center-image }
 
@@ -27,7 +27,9 @@ The Ivy Renderer is smaller, faster, simpler to debug, has improved type checkin
 
 {% img blog/spring-boot-2-angular-8/ivy-renderer-slide.jpg alt:"Ivy Renderer" width:"600" %}{: .center-image }
 
-_Both of the above slides are from the [Day 1 Keynote at ng-conf 2019](https://docs.google.com/presentation/d/19yTRqHT1v4SQz5kXCL6OrIWvH9M20029s_ri5Eil03Y/edit?usp=sharing)._
+_Both of the above slides are from the [Day 1 Keynote at ng-conf 2019](https://docs.google.com/presentation/d/19yTRqHT1v4SQz5kXCL6OrIWvH9M20029s_ri5Eil03Y/edit?usp=sharing). You can [watch the keynote on YouTube](https://www.youtube.com/watch?v=O0xx5SvjmnU)._
+
+## What's New in Spring Boot 2.2?
 
 Spring Boot, feeling some heat from quick-starting frameworks like Micronaut and Quarkus, has made many performance improvements as well. JMX is now disabled by default, Hibernate's entity scanning is disabled, and lazy initialization of beans is on by default. In addition, startup time and memory usage have been reduced by making use of `proxyBeanMethods=false` in Spring Boot's `@Configuration` classes. See [Spring Boot 2.2 Release Notes](https://github.com/spring-projects/spring-boot/wiki/Spring-Boot-2.2-Release-Notes) for more information.
 
@@ -36,7 +38,7 @@ If you're stuck on older versions of these frameworks, you might want to check o
 * [Build a Basic CRUD App with Angular 7.0 and Spring Boot 2.1](/blog/2018/08/22/basic-crud-angular-7-and-spring-boot-2)
 * [Build a Basic CRUD App with Angular 5.0 and Spring Boot 2.0](/blog/2017/12/04/basic-crud-angular-and-spring-boot)
 
-This article describes how to build a simple CRUD application that displays a list of cool cars. It'll allow you to edit the cars, and it'll show an animated gif from [GIPHY](http://giphy.com) that matches the car's name. You'll also learn how to secure your application using Okta's Spring Boot starter and Angular SDK. Below is a screenshot of the app when it's completed.
+This post describes how to build a simple CRUD application that displays a list of cool cars. It'll allow you to edit the cars, and it'll show an animated gif from [GIPHY](http://giphy.com) that matches the car's name. You'll also learn how to secure your application using Okta's Spring Boot starter and Angular SDK. Below is a screenshot of the app when it's completed.
 
 {% img blog/spring-boot-2-angular-8/success-at-last.png alt:"Screenshot of completed app" width:"800" %}{: .center-image }
 
@@ -48,10 +50,10 @@ To get started with [Spring Boot](https://projects.spring.io/spring-boot/) 2.2, 
 
 {% img blog/spring-boot-2-angular-8/start.spring.io.png alt:"Spring Initializr" width:"800" %}{: .center-image }
 
-Create a directory to hold your server and client applications. I called mine `okta-spring-boot-2-angular-8-example`, but you can call yours whatever you like. 
+Create a directory to hold your server and client applications. I called mine `okta-spring-boot-2-angular-8-example`, but you can call yours whatever you like.
 
 > If you'd rather see the app running than write code, you can [see the example on GitHub](https://github.com/oktadeveloper/okta-spring-boot-2-angular-8-example), or clone and run locally using the commands below.
-> 
+>
 > ```bash
 > git clone https://github.com/oktadeveloper/okta-spring-boot-2-angular-8-example.git
 > cd okta-spring-boot-2-angular-8-example/client
@@ -784,7 +786,7 @@ The following screenshot shows what it looks like to edit a car that you've adde
 
 Add authentication with OIDC is a nifty feature you can add to this application. Knowing who the person is can come in handy if you want to add auditing, or personalize your application (with a rating feature for example).
 
-### Spring Security + OAuth 2.0
+### Spring Security + OIDC
 
 On the server side, you can lock things down with Okta's Spring Boot Starter, which leverages Spring Security and its OIDC support. Open `server/pom.xml` and uncomment the Okta Spring Boot starter.
 
@@ -864,96 +866,13 @@ ng add @oktadev/schematics --issuer=https://{yourOktaDomain}/oauth2/default --cl
 This command will:
 
 * Install `@okta/okta-angular`
-* Configure Okta's Angular SDK for your app in `app.module.ts`
+* Configure Okta's Angular SDK for your app in `auth-routing.module.ts`
 * Add `isAuthenticated` logic to `app.component.ts`
 * Add a `HomeComponent` with login and logout buttons
 * Configure routing with a default route to `/home` and an `/implicit/callback` route
 * Add an `HttpInterceptor` that adds an `Authorization` header with an access token to `localhost` requests
 
-At this point, it just blindly overwrites files instead of trying to insert snippets into existing files. Therefore, you'll need to restore your declarations and imports in `app.module.ts`. It should look as follows when you're finished.
-
-```ts
-import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
-import { AppRoutingModule } from './app-routing.module';
-import { AppComponent } from './app.component';
-import { HomeComponent } from './home/home.component';
-import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
-import { OKTA_CONFIG, OktaAuthModule } from '@okta/okta-angular';
-import { AuthInterceptor } from './shared/okta/auth.interceptor';
-import { CarListComponent } from './car-list/car-list.component';
-import { CarEditComponent } from './car-edit/car-edit.component';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MatButtonModule, MatCardModule, MatInputModule, MatListModule, MatToolbarModule } from '@angular/material';
-import { FormsModule } from '@angular/forms';
-
-const oktaConfig = {
-  issuer: 'https://{yourOktaDomain}/oauth2/default',
-  redirectUri: window.location.origin + '/implicit/callback',
-  clientId: '{yourClientId}'
-};
-
-@NgModule({
-  declarations: [
-    AppComponent,
-    CarListComponent,
-    CarEditComponent,
-    HomeComponent
-  ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    BrowserAnimationsModule,
-    HttpClientModule,
-    MatButtonModule,
-    MatCardModule,
-    MatInputModule,
-    MatListModule,
-    MatToolbarModule,
-    FormsModule,
-    OktaAuthModule
-  ],
-  providers: [
-    { provide: OKTA_CONFIG, useValue: oktaConfig },
-    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }
-  ],
-  bootstrap: [AppComponent]
-})
-export class AppModule { }
-```
-
-Update `app-routing.module.ts` to restore the car-related routes as well.
-
-```ts
-import { CarListComponent } from './car-list/car-list.component';
-import { CarEditComponent } from './car-edit/car-edit.component';
-
-const routes: Routes = [
-  {path: '', redirectTo: '/home', pathMatch: 'full'},
-  {
-    path: 'home',
-    component: HomeComponent
-  },
-  {
-    path: 'car-list',
-    component: CarListComponent
-  },
-  {
-    path: 'car-add',
-    component: CarEditComponent
-  },
-  {
-    path: 'car-edit/:id',
-    component: CarEditComponent
-  },
-  {
-    path: 'implicit/callback',
-    component: OktaCallbackComponent
-  }
-];
-```
-
-Modify `client/src/app/app.component.html` to have a logout button.
+Modify `client/src/app/app.component.html` to use Material components and to have  a logout button.
 
 {% raw %}
 ```html
@@ -1024,7 +943,7 @@ Enter valid credentials, and you should be redirected back to your app. Celebrat
 
 ## Learn More about Spring Boot and Angular
 
-It can be tough to keep up with fast-moving frameworks like Spring Boot and Angular. This article is meant to give you a jump start on the latest releases. For specific changes in Angular 8, see the Angular Team's [plan for version 8.0 and Ivy](https://blog.angular.io/a-plan-for-version-8-0-and-ivy-b3318dfc19f7). For Spring Boot, see its [2.2 Release Notes](https://github.com/spring-projects/spring-boot/wiki/Spring-Boot-2.2-Release-Notes).
+It can be tough to keep up with fast-moving frameworks like Spring Boot and Angular. This post is meant to give you a jump start on the latest releases. For specific changes in Angular 8, see the Angular Team's [plan for version 8.0 and Ivy](https://blog.angular.io/a-plan-for-version-8-0-and-ivy-b3318dfc19f7). For Spring Boot, see its [2.2 Release Notes](https://github.com/spring-projects/spring-boot/wiki/Spring-Boot-2.2-Release-Notes).
 
 You can see the full source code for the application developed in this tutorial on GitHub at [oktadeveloper/okta-spring-boot-2-angular-8-example](https://github.com/oktadeveloper/okta-spring-boot-2-angular-8-example).
 
