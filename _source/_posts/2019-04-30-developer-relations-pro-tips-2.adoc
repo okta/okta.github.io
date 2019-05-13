@@ -1,0 +1,231 @@
+---
+layout: blog_post
+title: "Pro Tips for Developer Relations, Part 2"
+author: mraible
+description: "Some tips and tricks for being a developer advocate and helping others."
+tags: [devrel, protip, protips, developer relations, speaking]
+tweets:
+- "Learn developer relations pro tips from @ashleymcnamara, @berndruecker, @DaschnerS, @mariogray, @mary_grace, @sjmaple, and @tedneward."
+- "Thanks to @ashleymcnamara, @berndruecker, @DaschnerS, @mariogray, @mary_grace, @sjmaple, and @tedneward for helping create this post on #DevRel #ProTips!"
+- "Is your company marketing to developers? These developer relations protips might help! #devrel #protip"
+image: blog/devrel-protips-v2/devrel-protips-2.png
+---
+:page-liquid:
+
+Being a developer advocate can be a difficult job. Developer advocates are often responsible for writing blog posts, speaking at conferences, and helping developers use their company's products. If there's developer friction, it's an advocate's job to help educate their company about how to reduce it. Advocates are often recognized leaders in their communities, so they have to keep up that persona as well.
+
+Writing, traveling, speaking, educating, and helping can be exhausting. The first year I was a developer advocate, I experienced a lot of stress. Turns out, I was trying to do too much and I needed to _slow down_ and relax a bit more. These days my monthly goals are as follows:
+
+* Write two blog posts per month
+* QA and review four blog posts per month from other folks
+* Speak once per month
+* Create two screencasts per months
+
+We're only a few months into the year, but I've already found these goals challenging. You might remember my last post about this topic: link:/blog/2019/01/28/developer-relations-pro-tips[Pro Tips for Developer Relations]. I gave a brief overview of our content strategy (sample app &rarr; blog post &rarr; demo script &rarr; screencast &rarr; presentation) at OktaDev, and then gathered a number of tips from other developer advocates.
+
+I'm back again with another installment of tips from veteran developer advocates! To spice things up a bit, I asked each person to list their top three developer tools. Some did, some didn't. You can find my favorite developer tools in link:/blog/2018/11/20/three-developer-tools-im-thankful-for[Three Developer Tools I'm Thankful For]. Spoiler: IntelliJ IDEA, Oh My Zsh, and Asciidoctor.
+
+Without further ado, here's round two of developer relations pro tips from link:#ashley-mcnamara-developer-advocate-at-microsoft[Ashley McNamara], link:#bernd-rücker-co-founder-technologist-of-camunda[Bernd Rücker], link:#sebastian-daschner-lead-java-developer-advocate-at-ibm[Sebastian Daschner], link:#mario-gray-ossdeveloper-advocate-at-pivotal[Mario Gray], link:#mary-thengvall-founder-persea-consulting[Mary Thengvall], link:#simon-maple-director-of-developer-relations-snyk[Simon Maple], and link:#ted-neward-computational-philosopher[Ted Neward].
+
+== Ashley McNamara, Developer Advocate at Microsoft
+https://twitter.com/ashleymcnamara[image:{% asset_path 'blog/devrel-protips-v2/ashleymcnamara.png' %}[alt=Ashley McNamara,role="BlogPost-avatar pull-right img-100px"]]
+
+1) Being a developer advocate requires you to be constantly learning but leading a life on the road only allows you to focus on what's in front of you. That OSCON talk isn't going to build itself, right?
+
+In order to keep acquainted with emerging tech, I recommend spending 1-2 hours a day studying current trends in the industry. That can mean spending 2 hours reading articles about serverless, or it could mean building an application that makes use of interesting technology.
+
+Staying relevant is critical to the job. Focusing only on the technologies your company offers can give us a singular point of view which will show in your presentations. While staying current is important, it's also impossible for us to be experts in everything – so, I suggest spending a fair amount of time building your network and leaning on people for help when you're stumped. I find that a lot of developer advocates feel embarrassed when they don't know something and I want you to know, it's okay, but having a list of experts you can refer people to is invaluable.
+
+2) Developer advocacy is a lot of fun, and we're often the first people conference organizers reach out to when they're looking for presenters. I noticed a sort of redundancy across speakers, so to balance the scales I'll often pass some of my invitations to underrepresented people. This way, I avoid burnout while also giving someone a well-deserved platform.
+
+== Bernd Rücker, Co-founder & Technologist of Camunda
+https://twitter.com/berndruecker[image:{% asset_path 'blog/devrel-protips-v2/berndruecker.png' %}[alt=Bernd Rücker,role="BlogPost-avatar pull-right img-100px"]]
+
+For me a proper DevRel person has to love programming as much as they love the product/topic they're advocating for. This is key, as it is really hard to fake true enthusiasm. And this enthusiasm is the top reason people get excited about your stuff as well.
+
+This goes hand-in-hand with another aspect: https://blog.bernd-ruecker.com/developer-relations-at-camunda-2018-recap-cbf85f5abd19#ed3b[DevRel is not marketing]! I cannot emphasize that strongly enough. DevRel folks should not be put into marketing, they should actually be close to engineering. It is definitely a technical role. Otherwise, they will either get too marketing-ish themselves and lose credibility in the community or – more likely – quit.
+
+In terms of tasks DevRel consists of many facets. The most visible is typically speaking at conferences. And this is simply hard work and needs practice, practice, practice. https://blog.bernd-ruecker.com/developer-relations-at-camunda-2018-recap-cbf85f5abd19[I have given around 50 talks all over the world last year], and I would say a typical talks starts to feel right after giving it around 5-10 times. I know very few people who can deliver a perfect talk right away, you always need repetition and practice. And while it helps to do that in front of a mirror at home, it is completely different than standing in front of 20, 50, or 500 people. Personally, I need at least one real-life run to get a story smooth. I typically try to do this as a meetup or user group as people there are more relaxed towards flaws, they give you very direct feedback and the talk is seldom recorded. But this is good news for everybody starting a speaking career: All the Rockstar speakers you might know where not born like that, so you can still become one yourself one day!
+
+On the other hand, DevRel is much more than conference speaking. Often you can reach a larger audience more easily with a proper article, blog post, podcast, screencast, or sometimes a simple tweet. I personally search for synergies, so my most successful talks are based on an article which I could write after giving talks around the core subject a couple of times. And normally all of my talks include code – live coding if possible or walkthroughs otherwise. That means I now have http://berndruecker.io/[some stories backed by slides, recordings, source code and articles] – that's a powerful combination. Having that I am personally convinced that proper live coding is still the most powerful way to get your audience engaged and excited. If I watch good live coders on stage (or on YouTube!) that is kind of entertaining and educational at the same time.
+
+My last comment is that probably the most hard DevRel work gets the least recognition: forum work and helping out users of your software or other developers. In our Camunda forum a lot of questions need to be answered every day which is partly done by DevRel folks. This means answering the same newbie question over and over again, without losing patience and treating every new forum member as welcome. That requires a lot of endurance! But it definitely pays off as you  get a good feeling of typically questions and are recognized as a person caring about your users.
+
+=== Bernd's Favorite Developer Tools
+
+1. GitHub and the ecosystem around it
+2. Trello (to organize everything)
+3. Linux Subsystem on Windows, giving me a proper Ubuntu and bash, but have Windows to connect to projectors (and PowerPoint of course)
+
+== Sebastian Daschner, Lead Java Developer Advocate at IBM
+https://twitter.com/DaschnerS[image:{% asset_path 'blog/devrel-protips-v2/DaschnerS.png' %}[alt=Sebastian Daschner,role="BlogPost-avatar pull-right img-100px"]]
+
+**You're not the hero, they are the hero.**
+
+One thing that helped me a lot, in developer relations in general, but especially in giving presentations is the idea that this is not about you. It is about them.
+
+It's easy to think of conference speakers or anyone who's quite active in sharing content, as someone _famous_, to look up to. And that feeling that you're somewhat important when giving a presentation might be certainly there. However, one of the things that helped me the most was to not care about whether what you do will make you look good, or as if you're important. Don't care whether you look good on stage.
+
+In fact, if you're anxious about embarrassing yourself on stage: it's more than fine to embarrass yourself, to look stupid and make them laugh if that makes them learn something or understand a point.
+
+I live-code on stage quite a lot, actually, most of my presentations include live-coding. The tension whether you'll make a mistake, your demo will fail, your systems will go down, the network will collapse, is certainly present. I remember live-coding a non-trivial Java Stream API statement, including a few filters and transformations, spanning multiple lines, when I made a mistake somewhere which made the compiler complain about just the whole method. I couldn't find the mistake and neither could the audience. My initial response would be to go into panic mode, but instead, I said something like: _"This didn't go quite as planned, but you know what? This is exactly what will happen to you when you dive into that topic yourself; making mistakes is part of the process. But let me show you how I would try to debug and resolve that situation in real-life."_ And after tracing and dividing that nice, huge statement into smaller parts, we could find the careless mistake. Probably didn't show the best impression of my coding skills but I believe at least someone in the audience learned something.
+
+On a few past JavaOne / Oracle Code One conferences, I participated in the Java Community Keynote, performing a parody incl. movie stars, superheroes, programming, and such. Last October, I played Captain America, wearing a costume (incl. the obligatory shield) on stage. I believe that connects well with the initial feeling of standing up on stage: that it makes it easy to think you're supposed to be the hero. But you're not the hero. They are the hero.
+
+You should do your best to enable them, your audience, your readers, your followers, to become the hero. Once you focus on them, not on yourself or how they might perceive you, you immediately relax (_"doesn't matter if I'll look stupid if at least I get my message across"_), and even more, you vastly improve the quality of your content.
+
+=== Sebastian's Favorite Developer Tools
+
+I'm a command line guy, so the first and most helpful one for me is my zsh CLI, including all aliases, and scripts that I've gathered that make my life easier. Besides that, I'm a huge fan of VIM, not really because of the text editor but the VIM way of typing. And, more specific to the Java world, I couldn't live without IntelliJ IDEA anymore, for me that is just a well-engineered tool. I encourage you to check and remember as many refactoring actions and shortcuts as possible!
+
+== Mario Gray, OSS/Developer Advocate at Pivotal
+https://twitter.com/mariogray[image:{% asset_path 'blog/devrel-protips-v2/mariogray.png' %}[alt=Mario Gray,role="BlogPost-avatar pull-right img-100px"]]
+
+**Ask yourself this: "What am I afraid of?"**
+
+Let this question drop deep down inside, and sit with it for several moments with your feelings. Keep sinking down until you feel something - usually fear. What is it you are afraid of? Write this down and work on overcoming it every day. Be patient, things take time but will accelerate your ability to adapt and consume knowledge.
+
+**Be consistent in delivering content.**
+
+Find a technical path that can compliment your core skills, and develop it like it were your own. As a developer advocate, one of your jobs is to bring light to issues that you yourself and your peers have encountered over the lifetime of your developer career. If you can explain something that typically mystifies your peers, do it. Make articles, write programs, and seek those looking for hand as well as those with a higher vantage point.
+
+**Don't be scared of reaching out to strangers at conferences.**
+
+So many of the times at conferences I will just stand around and wait for people to say hi. But that never happens! It turns out that dev advocates have a different 'shine' in the tech community. Don't be scared to reach out to strangers at those conferences just to say 'hi' and shoot the breeze for a little while. You will eventually learn something you didn't, and if you continually do this, you'll begin to pick up a narrative in the issues and stories you hear. This can help with developing new material in the future, so take notes!
+
+**Always be submitting to conferences.**
+
+One thing I have enough challenge with is finding the right venues which are open to my ideas. Again, don't be afraid here and sling your message far and wide. You'll be surprised by the number of organizations, user groups, and conferences that want to hear your message!
+
+**Set up a regimen for giving talks!**
+
+For example, on the day before and of my speakings I tend to stretch, exercise, read, and code. This helps put my mind in the frame for engaging an audience and honing in on the knowledge that will exercise the audience's minds. But it also helps in keeping stamina strong so even nervous energy doest block what I am about to discuss. On the other hand, you're probably expected to socialize during these events; just take it easy and be yourself. There's no real pressure above that which you can endure. Keep a vision in mind that helps you stay calm, knowing that when the time comes you will excel in whatever you set out to accomplish.
+
+**(Optional) Developers are people too - they like controversy!**
+
+Find something trivial to contrast your work with - say things that make them think - even if it's wrong. I wrote this in EMACS - the best editor in the universe! ;P
+
+== Mary Thengvall, Founder, Persea Consulting
+https://twitter.com/mary_grace[image:{% asset_path 'blog/devrel-protips-v2/mary_grace.png' %}[alt=Mary Thengvall,role="BlogPost-avatar pull-right img-100px"]]
+
+Before making any plans or goals, take the time to listen.
+
+**Listen to your company stakeholders.**
+
+What are they expecting of your team? What do they think you should be responsible for? What company pain points can you assist with? What metrics are they accustomed to and what business needs do they care most about?
+
+**Listen to your customer community.**
+
+What are their biggest pain points with your product? Where do they struggle with onboarding? Where does the documentation fail them?
+
+**Listen to the technical audience that your product is geared toward.**
+
+What problems are they trying to solve? What could be done to make their work life easier? Where do they get their content? What technological advances are they most excited about?
+
+Based on all these answers, you can start making your plan. Find the overlapping areas where you can make your product a better fit for the larger technical audience and also make it easier to use for your customers. Figure out what content you can provide that not only answers your community's questions but also solves problems for your company stakeholders. Learn about the areas where your co-workers struggle and see where your strengths can supplement those needs.
+
+Then, and only then, should you make your plan. Where can you have the most impact? What are the areas where you and your team can shine? What is it that only DevRel can do? Build your mission and vision around those items, and then break it down into manageable chunks so that you can see how every task you're doing on a daily basis feeds back into that overarching goal.
+
+When your individual and team goals feed into the company goals and you can point directly to ways that you're assisting other teams as well as furthering stakeholder goals, you've made yourself an incredibly valuable part of the team, which allows you to not only serve your community but your company as well.
+
+=== Mary's Favorite Developer Tools
+
+One of the most difficult parts of Developer Relations is keeping track of all of the moving pieces. Finding a good project management software is key to mitigating this pain! I personally love https://asana.com/[Asana], with its flexible projects, tasks, and sub-tasks, as well as tags and categories, which make it easy to see at a glance who's responsible for which piece of the project, when things are due, and how high of a priority a particular task is.
+
+Keeping track of where all of your teammates are on a remote team (or simply when folks are traveling) is also difficult. I use a web app called "`https://everytimezone.com/[Every Time Zone]`" to help me understand not only when is a good time for a meeting with a far-flung coworker, but also to better understand when to expect to hear a response or see an update to a particular project.
+
+Lastly, https://zapier.com/[Zapier] keeps everything in sync and automated as much as possible for me. Given how many tools it syncs with, I can bookmark articles to read later, send messages to new Slack team members, get alerted when RSS feeds are updated, and more. However, keep an eye out for https://stdlib.com[StdLib's] new beta product... with the capabilities they're introducing, it seems like it might be a far better fit than Zapier for a technically-savvy team!
+
+== Simon Maple, Director of Developer Relations, Snyk
+https://twitter.com/sjmaple[image:{% asset_path 'blog/devrel-protips-v2/sjmaple.png' %}[alt=Simon Maple,role="BlogPost-avatar pull-right img-100px"]]
+
+When promoting content there are two main goals when thinking about the number of page views you get from the post. Firstly create the biggest splash you can by encouraging people from many platforms and communities to visit your content, and secondly to ensure that once your initial content blast has occurred, you continue to get solid hits after the release hype, through natural organic searches. We're going to focus on the activities you can take to promote your content, when you publish it, to help create the biggest splash you can. As a wise man once told me, "If a blog post is published in the woods and nobody was there to watch it fall, did it make a noise?". I'm not sure I totally got it, and a lot may have been lost in translation. Ultimately, there's no point spending days/weeks writing a blog post, only to publish it without promotion and risk it failing because so few people read it and shared it, it didn't reach the masses. Once you've written a high-quality article, consider the following promotion activities:
+
+**Extract some of the key messages from your post, as single-sentence, compelling takeaways.**
+
+To promote your content, you want to tell people quickly why they should read your article, rather than continue watching whatever funny cat-video they ended up on. Once you have a list--usually two or three--you can use these messages to entice people into your article! When you look at the final list, you should even consider using the most interesting and intriguing one as your title!
+
+**Put together a social cadence to share your post.**
+
+You don't want to tweet toooooo much or too frequently about a single post, so try to mix it up with your other content on social platforms. As soon as you launch, be sure to tweet two or three times that day about some of the key takeaways in the post, at different times, so that your followers in Australia and Europe get just as much chance to see it on your timeline as your American friends. You can post on twitter a lot more frequently than LinkedIn or Facebook, which I'd normally recommend you do once a day at most. Continue to tweet for the next few days about your post, perhaps once or twice a day while it's still fresh content. Include images that show how exciting your content is, or failing that, a meme rarely hurts :)
+
+**Look to other communities where your post can be shared.**
+
+Your content can often go viral with a posting on Reddit or Hacker News. People (read, trolls) love to click through and share your content. Note that from a conversion point of view, your expectations here should be low, but from a pageview/awareness point of view, you'll do very well. One piece of advice, particularly if you're not too thick skinned, is not to read the comments, or take them to heart too much. You can't please everyone, and certainly not on Reddit, unless you're on https://reddit.com/r/awww.
+
+**Create a dev.to, Medium and/or DZone post that can help draw traffic to your content or the original post.**
+
+As a follow-up, consider posting a lighter version somewhere you'll likely get a different community of people, such as dev.to. This lighter version might entice people in and encourage them to click through to your site for the full read. If you're more interested in people reading your content, rather than visiting your site, you can, of course, duplicate the content in full, although this may impact your site's SEO for those pages.
+
+**Reach out to influencers with large followings to help promote.**
+
+Use your network! You know, those people you've met all over the world, or perhaps just via your keyboard. They'd most likely be happy to share your content, so ping relevant people as you write so that they can amplify your outreach. You can also do this by tagging people of companies, but be careful how much you do this, as there's a fine line between being relevant and spamming friends!
+
+**Engage with co-authors/reviewers who can help share individually or via their company posts.**
+
+Another way to reach out to influencers is to bring them onboard early on, perhaps co-authoring a post on developer relations tips from some of the well-known dev rel avocados around the world... oh hang on! By doing this, your friendly co-authors can help promote more, as they will feel ownership over the content also, and would typically be pleased to share!
+
+Additionally, there are paid programs that can be used to promote content, but that's a whole other kettle of fish!
+
+=== Simon's Favorite Developer Tools
+
+1. Of course, Snyk goes without saying! It is a very useful security tool that fits into the developer workflow.
+2. Git - not much else to say on this one!
+3. Slack! Unusual choice maybe, but as a remote worker communication is super important and this makes my job a bunch easier!
+
+== Ted Neward, Computational Philosopher
+https://twitter.com/tedneward[image:{% asset_path 'blog/devrel-protips-v2/tedneward.png' %}[alt=Ted Neward,role="BlogPost-avatar pull-right img-100px"]]
+
+**Consider your "reach" carefully.**
+
+Part of the point of developer relations is to connect with developers, and several channels exist to do that: speaking at conferences, webinars, code samples, and so on. Each one, however, has a different impact with its audience, measured in "reach" (how many developers the item can reach for a given amount of work) and "fidelity" (how high a quality of interactive experience each individual developer feels). The highest-reach activity is blogging or a code sample, since once done, it simply rests on the Web waiting to be discovered by any developer wandering by with a browser and a search engine. (You *are* taking the necessary pains to make sure your blog can be found via SEO, right?)
+
+The tradeoff is, of course, that blogs and code samples are the lowest-fidelity; they're not particularly interactive, even given bidirectional comment systems like Disqus or GitHub. Conversely, one of the highest-fidelity interactions is a client/customer visit: go out to the customer site, meet with their people, interact with them directly, answer all their questions, and so on. Which, obviously, doesn't reach a lot of customers and is completely undiscoverable by Google.
+
+Articles on popular developer sites, conference talks, organizing meetup groups, all of these activities can be measured in "reach" and "fidelity", and none maximize for both axes. Thus, as a developer advocate, part of your job is to choose a healthy mix of each, in concert with your management and organization's goals.
+
+**Choose your Live Demo topic deliberately.**
+
+Of all the topics related to developer-focused speaking, none command quite the degree of controversy more than the live demo. Attendees love it when it goes well, but nothing can lose a crowd faster than when a demo bombs and the speaker fumbles and stumbles and desperately tries to recover.
+
+Some presenters have chosen to eschew the live demo entirely, arguing that it's the speaker looking to show off in front of a crowd. In truth, nothing can impress a crowd more than when a speaker skillfully weaves attendee questions together into a live code sample. Clearly this is a high-risk, high-reward topic, and as a result, the technical presenter must choose the live-demo answer carefully.
+
+**Keep it Stupidly Simple when it comes to your Live Demo topic.**
+
+Is the demo one that consists of simple moving parts? Complex demos involving multiple servers all running simultaneously are much more fragile, and much more prone to collapse on-stage. Demos about a programming language or pattern, however, can usually be contained in one file and so long as the installation of the language/platform is stable, resist everything (up to simple syntax errors, which can be mitigated by backups or in-slide examples) that might break the demo.
+
+Presenters must also keep the demo ridiculously simple--resist the urge to jump around to different files to show calls from A to B to C to D then back to B then over to E then.... If the demo code can't be fully displayed on one screen, then the presenter needs to keep the number of "demo shots" (the editor window containing the code) to no more than three or four. Remember, the audience has never seen this code before, and does not have it in their head the way you (the presenter) do. If the code must be spread across six files, consider adding a slide that shows a call-flow diagram through each object/method pair as an overview.
+
+**Be ready to walk away from your Live Demo.**
+
+Trying to debug a demo on-stage is without question the most harrowing, stressful experience in the entire world of technical presenting. Most technical speakers assume they *must* fix the demo, or risk losing all credibility with the crowd. Most technical speakers are wrong: the crowd is more than willing to give you the benefit of the doubt that "the demo should have worked", because everybody in the audience has, at least once, been on stage (or at the front of the room) when a demo failed. We, all of us in every language and platform, know that sometimes the Demo Gods simply must visit their wrath upon the person at the front of the room today, and nothing will placate them.
+
+When a demo fails, fiddle with it for no more than two to three minutes, and if the demo doesn't come back to you, look out at the crowd, ask, "Do you believe me that this should have worked?" When the crowd is done laughing, simply move on, with (perhaps!) a comment that those who want to see the fix required to make the demo work can meet up with you after the session.
+
+**Consider all angles to a presentation topic.**
+
+It never fails: you sit down to create a list of talks, and your brain decides that now, right now, is the perfect time to think about nothing more than empty fields. Nothing but miles and miles and miles of deserted, empty, entirely idea-free fields. Relax; brainstorming is not impossible, and sometimes it just takes a little "seeding" to open the floodgates.
+
+Consider a technical topic--for this example, I'll use Angular. I tend to think of talks along a variety of axes. "What" talks are explanations of what the technology is; "Angular is an open-source Javascript/Typescript single-page application framework that builds on MVC and dependency injection principles."
+
+"Why" talks are more persuasive talks, such as why one answers a problem better than another or why certain decisions were made in the technology; "Angular is a 'strongly-opinionated' framework, because Google felt that it yields a better developer experience if developers can either opt-in or opt-out without trying to muddle along making Angular work in areas it was never intended to do so", or "Angular builds around dependency injection because its founders and maintainers felt that any application must be unit- and end-to-end tested using automated testing tools to be high-quality, and DI makes it much easier to unit- and e2e-test an application."
+
+"When" talks speak of experience, such as what your experience was when using said technology, either in a particular situation or even just getting started; "When our team started using Angular, we ran into a series of potholes that threatened to derail our use of the framework altogether, and in this talk I will go over what we found and how we were able to avoid them." And so on. By pivoting a particular topic around the classic interrogatory words (who, what, where, when, why), a particular topic can yield up a surplus of talk ideas.
+
+In truth, talks will often be a combination of several--most introductions to a technology will be a mix of "what" and "why" with a little "when" thrown in. But for "deeper" talks that aren't as introductory, choosing to focus almost entirely on just one of the interrogatories can yield surprisingly solid results.
+
+== Go Forth and Educate!
+
+I hope you've enjoyed this second round of pro tips from respected developer advocates. To summarize, it's recommended you study current trends to stay relevant, pass on invitations to underrepresented people, practice your presentations and live demos, do live coding, answer forum questions, remember the audience is the hero, be consistent in delivering content, promote it on many platforms, reach out to strangers at conferences, set up a regime for giving talks, listen to developers, use KISS in your demos, and use "what", "why" and "when" to create your presentations.
+
+My team loves being developer advocates at Okta. Here's a sampling of content we've created this year:
+
+* Micah Silverman (https://twitter.com/afitnerd[@afitnerd]): link:/blog/2019/03/05/spring-boot-migration[Migrate Your Spring Boot App to the Latest and Greatest Spring Security and OAuth 2.0]
+* Heather Downing (https://twitter.com/quorralyne[@quorralyne]): link:/blog/2019/03/11/build-a-crud-app-with-aspnet-mvc-and-entity-framework[Build a CRUD App with ASP.NET MVC and Entity Framework]
+* Randall Degges (https://twitter.com/rdegges[@rdegges]): link:/blog/2019/02/15/user-migration-the-definitive-guide[User Migration: The Definitive Guide]
+* David Neal (https://twitter.com/reverentgeek[@reverentgeek]): link:/blog/2019/01/22/whats-new-in-es2019[What's New in JavaScript for 2019]
+* Aaron Parecki (https://twitter.com/aaronpk[@aaronpk]): link:/blog/2019/02/19/add-oauth-device-flow-to-any-server[Add the OAuth 2.0 Device Flow to any OAuth Server]
+* Lee Brandt (https://twitter.com/leebrandt[@leebrandt]): link:/blog/2019/04/03/build-a-crud-app-with-aspnet-22-and-entity-framework[Build a CRUD App with ASP.NET Core 2.2 and Entity Framework Core]
+* Matt Raible (https://twitter.com/mraible[@mraible]): link:/blog/2019/04/04/java-11-java-12-jhipster-oidc[Better, Faster, Lighter Java with Java 12 and JHipster 6]
+
+You can follow our whole team on Twitter https://twitter.com/oktadev[@oktadev] and <https://twitter.com/oktadev/lists/the-oktadev-team>.
