@@ -958,7 +958,7 @@ Enter valid credentials, and you should be redirected back to your app. Celebrat
 
 ## Learn More about Spring Boot and Angular
 
-It can be tough to keep up with fast-moving frameworks like Spring Boot and Angular. This post is meant to give you a jump start on the latest releases. For specific changes in Angular 8, see the Angular Team's [plan for version 8.0 and Ivy](https://blog.angular.io/a-plan-for-version-8-0-and-ivy-b3318dfc19f7). For Spring Boot, see its [2.2 Release Notes](https://github.com/spring-projects/spring-boot/wiki/Spring-Boot-2.2-Release-Notes).
+It can be tough to keep up with fast-moving frameworks like Spring Boot and Angular. This post is meant to give you a jump start on the latest releases. For specific changes in Angular 8, see the Angular team's [plan for version 8.0 and Ivy](https://blog.angular.io/a-plan-for-version-8-0-and-ivy-b3318dfc19f7). For Spring Boot, see its [2.2 Release Notes](https://github.com/spring-projects/spring-boot/wiki/Spring-Boot-2.2-Release-Notes).
 
 You can see the full source code for the application developed in this tutorial on GitHub at [oktadeveloper/okta-spring-boot-2-angular-8-example](https://github.com/oktadeveloper/okta-spring-boot-2-angular-8-example).
 
