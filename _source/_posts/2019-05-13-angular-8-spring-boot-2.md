@@ -48,7 +48,7 @@ You will need [Java 11](https://adoptopenjdk.net/) and [Node.js 10+](https://nod
 
 To get started with [Spring Boot](https://projects.spring.io/spring-boot/) 2.2, head on over to [start.spring.io](https://start.spring.io) and create a new project that uses Java 11 (under more options), Spring Boot version 2.2.0 M2, and dependencies to create a secure API: JPA, H2, Rest Repositories, Lombok, Okta, and Web.
 
-{% img blog/spring-boot-2-angular-8/start.spring.io.png alt:"Spring Initializr" width:"800" %}{: .center-image }
+{% img blog/spring-boot-2-angular-8/start.spring.io.gif alt:"start.spring.io" width:"800" %}{: .center-image }
 
 Create a directory to hold your server and client applications. I called mine `okta-spring-boot-2-angular-8-example`, but you can call yours whatever you like.
 
@@ -227,23 +227,23 @@ Transfer-Encoding: chunked
 
 Angular CLI is a command-line utility that can generate an Angular project for you. Not only can it create new projects, but it can also generate code. It's a convenient tool because it also offers commands that will build and optimize your project for production. It uses webpack under the covers for building.
 
-Install the latest version of Angular CLI (which is version v8.0.0-rc.2 at the time of this writing).
+Install the latest version of Angular CLI (which is version v8.0.0-rc.3 at the time of this writing).
 
 ```bash
-npm i -g @angular/cli@v8.0.0-rc.2
+npm i -g @angular/cli@v8.0.0-rc.3
 ```
 
-Create a new project in the umbrella directory you created. Again, mine is named `okta-spring-boot-2-angular-8-example`.
+Create a new project in the umbrella directory you created.
 
 ```bash
 ng new client --routing --style css --enable-ivy
 ```
 
-After the client is created, navigate into its directory, remove its Git configuration, and install Angular Material.
+After the client is created, navigate into its directory, remove `.git`, and install Angular Material.
 
 ```bash
 cd client
-rm -rf .git
+rm -rf .git # optional: .git won't be created if you don't have Git installed
 ng add @angular/material
 ```
 
@@ -913,6 +913,21 @@ Then update `client/src/app/home/home.component.html` to use Angular Material an
 ```
 {% endraw %}
 
+Since you're using Material components in `HomeComponent`, which is managed by the newly-added `client/src/app/auth-routing.module.ts`, you'll need to import `MatCardModule`.
+
+```ts
+import { MatCardModule } from '@angular/material';
+
+@NgModule({
+  ...
+  imports: [
+    ...
+    MatCardModule
+  ],
+  ...
+})
+```
+
 To make it so there's not a bottom border at the bottom of your content, make the `<mat-card>` element fill the screen by adding the following to `client/src/styles.css`.
 
 ```css
@@ -921,7 +936,7 @@ mat-card {
 }
 ```
 
-Now if you restart your client, everything should work. Unfortunately, it does not because [Ivy does not yet implement CommonJS/UMD support](https://github.com/angular/angular/issues/29564). As a workaround, you can modify `tsconfig.app.json` to disable Ivy.
+Now if you restart your client, everything _should_ work. Unfortunately, it does not because [Ivy does not yet implement CommonJS/UMD support](https://github.com/angular/angular/issues/29564). As a workaround, you can modify `tsconfig.app.json` to disable Ivy.
 
 ```json
 "angularCompilerOptions": {
