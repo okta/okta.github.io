@@ -583,7 +583,7 @@ Log in successfully and you'll see our success page.
 
 At this point, you've brought the `oauth-start` project up to date with the `oauth-github-okta` project folder, and you've seen how easy it is to add multiple OAuth providers to a Spring Boot app.
 
-## Simplify OAuth 2.0 Login With Okta’s Spring Boot Starter
+## Simplify OAuth 2.0 Login With Okta's Spring Boot Starter
 
 The last thing you're going to do in this tutorial is to configure Okta to allow new user registration. Before you do that, however, I want to introduce you to the Okta Spring Boot Starter. The project simplifies integrating Spring Boot and Okta. [The project's README](https://github.com/okta/okta-spring-boot/blob/master/README.md) is a great source for more in-depth info.
 
@@ -657,4 +657,4 @@ Here are some related blog posts that demonstrate how to use Spring Boot and Spr
 - [Create a Secure Spring REST API](/blog/2018/12/18/secure-spring-rest-api)
 - [Build a Simple CRUD App with Spring Boot and Vue.js](/blog/2018/11/20/build-crud-spring-and-vue)
     
-If you enjoyed this post, follow us on social media { [Twitter](https://twitter.com/oktadev), [Facebook](https://www.facebook.com/oktadevelopers), [LinkedIn](https://www.linkedin.com/company/oktadev/), [YouTube](https://www.youtube.com/channel/UC5AMiWqFVFxF1q9Ya1FuZ_Q) } to know when we’ve posted similar ones.
+If you enjoyed this post, follow us on social media { [Twitter](https://twitter.com/oktadev), [Facebook](https://www.facebook.com/oktadevelopers), [LinkedIn](https://www.linkedin.com/company/oktadev/), [YouTube](https://www.youtube.com/channel/UC5AMiWqFVFxF1q9Ya1FuZ_Q) } to know when we've posted similar ones.
