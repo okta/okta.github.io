@@ -84,9 +84,9 @@ id 'org.springframework.boot' version '2.1.4.RELEASE'
 
 The executive summary of all that is that this `build.gradle` file will be loading Spring Boot version 2.1.4 and will be adding the web and security feature modules. A list of all the available starters from Spring [can be found in their docs](https://docs.spring.io/spring-boot/docs/current/reference/htmlsingle/#using-boot-starter).
 
-Other than the `gradle.file`, there are really only three other files of interest, all Java files. Look under `src/main/java/com/okta/springsecurityauth` and you'll see three files:
+Other than the `gradle.file`, there are really only three other files of interest, all Java files. Look under `src/main/java/com/okta/springsecurityauth` and you'll see them:
 
- - `Application.java` (often a trial file that auto-magic's the whole Spring Boot framework in existence)
+ - `Application.java` (the main class that auto-magic's the whole Spring Boot framework into existence)
  - `SecurityConfiguration.java` (configures the security options)
  - `WebController.java` (a very basic HTTP request controller)
 
