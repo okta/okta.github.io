@@ -258,7 +258,7 @@ I've already configured security of this microservices architecture using OAuth 
 
 How did I configure security for all these microservices? I'm glad you asked!
 
-I added Okta’s Spring Boot starter to the `pom.xml` in `api-gateway` and `car-service`:
+I added Okta's Spring Boot starter to the `pom.xml` in `api-gateway` and `car-service`:
 
 [source,xml]
 ----
@@ -273,7 +273,7 @@ Then I created a new OIDC app in Okta, configured with authorization code flow. 
 
 === Create a Web Application in Okta
 
-Log in to your Okta Developer account (or https://developer.okta.com/signup/[sign up] if you don’t have an account).
+Log in to your Okta Developer account (or https://developer.okta.com/signup/[sign up] if you don't have an account).
 
 1. From the **Applications** page, choose **Add Application**.
 2. On the Create New Application page, select **Web**.
@@ -777,11 +777,11 @@ By default, Okta's access tokens expire after one hour. This is expected, and sh
 
 I configured my Okta org so its access tokens expire in 5 minutes. You can do this by going to **API** > **Authorization Servers** > **Access Policies**, click on the **Default Policy**, and edit its rule. Then change the access token lifetime from 1 hour to 5 minutes.
 
-Hit `http://localhost:8080/cool-cars` in your browser and you’ll be redirected to Okta to login. Log in and you should see a JSON string of cars.
+Hit `http://localhost:8080/cool-cars` in your browser and you'll be redirected to Okta to login. Log in and you should see a JSON string of cars.
 
 Go do something else for > 5 minutes.
 
-Come back, refresh your browser and you’ll see `[]` instead of all the cars.
+Come back, refresh your browser and you'll see `[]` instead of all the cars.
 
 I'm still working on a solution to this and will update this post once I find one. If you happen to know of a solution, please let me know!
 ****
@@ -790,7 +790,7 @@ I'm still working on a solution to this and will update this post once I find on
 
 I wrote this post with Java because it's the most popular language in the Java ecosystem. However, https://redmonk.com/sogrady/2019/03/20/language-rankings-1-19/[Kotlin is on the rise], according to RedMonk's programming language rankings from January 2019.
 
-> For this quarter, at least, Kotlin grew substantially while all three of its fellow JVM-based counterparts declined. Kotlin jumped so far, in fact, that it finally broke into the Top 20 at #20 and leapfrogged Clojure (#24) and Groovy (#24) while doing so. It’s still well behind Scala (#13), but Kotlin’s growth has been second only to Swift in this history of these rankings so it will be interesting to see what lies ahead in the next run or two.
+> For this quarter, at least, Kotlin grew substantially while all three of its fellow JVM-based counterparts declined. Kotlin jumped so far, in fact, that it finally broke into the Top 20 at #20 and leapfrogged Clojure (#24) and Groovy (#24) while doing so. It's still well behind Scala (#13), but Kotlin's growth has been second only to Swift in this history of these rankings so it will be interesting to see what lies ahead in the next run or two.
 
 Spring has excellent support for Kotlin, and you can choose it as a language on start.spring.io. Heck, even JHipster has support for Kotlin with its https://github.com/jhipster/jhipster-kotlin[Kotlin Blueprint].
 
