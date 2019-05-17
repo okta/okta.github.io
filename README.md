@@ -21,5 +21,6 @@ The [wiki](https://github.com/okta/okta.github.io/wiki) will show you how to set
 - Build the site and start a development server with `npm start`
 - Visit [localhost:4000](http://localhost:4000) in your browser
 
+[doc]: https://developer.okta.com
 [blog]: https://developer.okta.com/blog
 [devforum]: https://devforum.okta.com
