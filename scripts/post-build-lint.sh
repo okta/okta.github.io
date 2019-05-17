@@ -34,12 +34,12 @@ else
     echo -e "\xE2\x9C\x94 Passed duplicate slug checker"
 fi
 
-if ! npm run find-missing-slashes;
-then
-    exit 1
-else
-    echo -e "\xE2\x9C\x94 Passed missing slashes validation"
-fi
+# if ! npm run find-missing-slashes;
+#then
+#    exit 1
+#else
+#    echo -e "\xE2\x9C\x94 Passed missing slashes validation"
+#fi
 
 if ! bundle exec ./scripts/htmlproofer.rb false;
 then
