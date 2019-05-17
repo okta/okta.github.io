@@ -61,74 +61,16 @@ assets:
     automatic_img_size: false
     automatic_img_alt : true
 
-collections:
-  standards:
-    output: true
-  code:
-    output: true
-  use_cases:
-    output: true
-  authentication-guide:
-    output: true
-  reference:
-    output: true
-  3rd_party_notices:
-    output: true
-  docs:
-    output: true
-  quickstarts:
-    output: true
-  change-log:
-    output: true
-    permalink: /docs/change-log/
-  sdk:
-    output: true
-    permalink: /docs/sdk/:path
-
 paginate: 10
 paginate_path: "/blog/page/:num"
 
-defaults:
-  -
-    scope:
-      collection: code
-    values:
-      layout: software
-  -
-    scope:
-      collection: reference
-    values:
-      layout: documentation
-  -
-    scope:
-      collection: docs
-    values:
-      toc: true
-  -
-    scope:
-      collection: use_cases
-    values:
-      hidden: false
-
 sitemap_ignore:
-  - sdk
-  - change-log
-  - quickstart-fragments
-  - 3rd_party_notices
   # Omit from sitemap.collection traversal
   - posts
-
-# Okta Library versions
-versions:
-  jwt_validator_java: 0.3.2
-  spring_boot_starter: 1.0.0
-  okta_signin_widget: 2.14.0
-  okta_auth_js: 2.0.1
 
 # Bug: 37458
 # Add Discourse link
 dev_forum:  https://devforum.okta.com/
-
 
 # Location of main Drupal site for navigation and shared resources
 external_domain: https://developer.okta.com

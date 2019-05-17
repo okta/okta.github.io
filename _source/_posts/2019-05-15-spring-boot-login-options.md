@@ -106,7 +106,7 @@ public class Application {
     }  
   
 }
-``` 
+```
 
 `WebController.java` is, cleverly enough, your web request controller. It defines request endpoints and determines the responses.
 
