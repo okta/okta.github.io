@@ -5,11 +5,11 @@ author: mraible
 description: "This tutorial shows you how to build a microservices architecture with Spring Boot 2.1 and Spring Cloud Greenwich."
 tags: [java, microservices, spring boot, spring cloud, spring cloud config, jhipster]
 tweets:
-image: blog/java-microservices/tbd.png
+// image: blog/java-microservices/tbd.png
 ---
 :page-liquid:
 
-Java is a great language for developing a microservice architecture with. In fact, some of the biggest names in our industry use it. Have you ever heard of Netflix, Amazon, or Google. What about eBay, Twitter, and LinkedIn? Yes, major companies handling incredible traffic are doing it with Java.
+Java is a great language to use when developing a microservice architecture. In fact, some of the biggest names in our industry use it. Have you ever heard of Netflix, Amazon, or Google. What about eBay, Twitter, and LinkedIn? Yes, major companies handling incredible traffic are doing it with Java.
 
 Implementing a microservices architecture in Java isn't for everyone. For that matter, implementing microservices in general isn't often needed. Most companies do it to scale their people, not their systems. If you're going to scale your people, hiring Java developers is one of the best ways to do it. After all, there's more developers fluent in Java than most other languages - though JavaScript seems to be catching up quickly!
 
@@ -19,7 +19,7 @@ The Java ecosystem has some well-established patterns for developing microservic
 
 In most of my tutorials, I walk you through building everything from scratch. Today I'd like to take a different approach and walk you through a pre-built example. Hopefully this will be a bit shorter and easier to understand.
 
-You can start by cloning my https://github.com/oktadeveloper/java-microservices-examples[java-microservices-examples] repository.
+You can start by cloning the https://github.com/oktadeveloper/java-microservices-examples[@oktadeveloper/java-microservices-examples] repository.
 
 [source,shell]
 ----
@@ -30,7 +30,7 @@ In the `spring-boot+cloud` directory, there are three projects:
 
 * **discovery-service**: a Netflix Eureka server, used for service discovery.
 * **car-service**: a simple Car Service that uses Spring Data REST to serve up a REST API of cars.
-* **api-gateway**: an API gateway that has a `/cool-cars` endpoint that talks to the `car-service` and filters out cars that aren't cool (IMO).
+* **api-gateway**: an API gateway that has a `/cool-cars` endpoint that talks to the `car-service` and filters out cars that aren't cool (in my opinion, of course).
 
 I created all of these applications using https://start.spring.io[start.spring.io's] REST API and https://httpie.org[HTTPie].
 
@@ -161,7 +161,7 @@ interface CarRepository extends JpaRepository<Car, Long> {
 
 https://github.com/OpenFeign/feign[Feign] makes writing Java HTTP clients easier. Spring Cloud makes it possible to create a Feign client with just a few lines of code. https://github.com/Netflix/Hystrix[Hystrix] makes it possible to add failover capabilities to your Feign clients so they're more resilient.
 
-The `api-gateway` uses Feign and Hystrix to talk to the downstream `car-service` and failover to a `fallback()` method if it's unavailable. It also exposes a `/cool-cars` endpoint that filters out cars you might not want to drive.
+The `api-gateway` uses Feign and Hystrix to talk to the downstream `car-service` and failover to a `fallback()` method if it's unavailable. It also exposes a `/cool-cars` endpoint that filters out cars you might not want to own.
 
 [source,java]
 .api-gateway/src/main/java/com/example/apigateway/ApiGatewayApplication.java
@@ -196,7 +196,6 @@ public class ApiGatewayApplication {
     public static void main(String[] args) {
         SpringApplication.run(ApiGatewayApplication.class, args);
     }
-
 }
 
 @Data
@@ -247,7 +246,7 @@ class CoolCarController {
 
 == Run a Java Microservices Architecture
 
-If you run all of these services with `./mvnw` in separate terminal windows, you can navigate to `http://localhost:8761` and see they've all registered with Eureka.
+If you run all of these services with `./mvnw` in separate terminal windows, you can navigate to `http://localhost:8761` and see they've registered with Eureka.
 
 image::{% asset_path 'blog/java-microservices/eureka-server.png' %}[alt=Eureka Server,width=800,align=center]
 
@@ -274,7 +273,7 @@ Then I created a new OIDC app in Okta, configured with authorization code flow. 
 
 === Create a Web Application in Okta
 
-Log in to your Okta Developer account (or [sign up](https://developer.okta.com/signup/) if you don’t have an account).
+Log in to your Okta Developer account (or https://developer.okta.com/signup/[sign up] if you don’t have an account).
 
 1. From the **Applications** page, choose **Add Application**.
 2. On the Create New Application page, select **Web**.
@@ -333,7 +332,7 @@ public FilterRegistrationBean<CorsFilter> simpleCorsFilter() {
 }
 ----
 
-NOTE: If you do add a CORS filter like this one, I recommend you change the origins, methods, and headers to be more specific, increasing security.
+NOTE: If you do use a CORS filter like this one, I recommend you change the origins, methods, and headers to be more specific, increasing security.
 
 The `CarServiceApplication.java` is only configured as a resource server since it's not expected to be accessed directly.
 
@@ -405,7 +404,7 @@ public RequestInterceptor getUserFeignClientInterceptor(OAuth2AuthorizedClientSe
 }
 ----
 
-And I added two properties in `api-gateway/src/main/resources/application.properties` so Feign is Spring Security-aware.
+And, I added two properties in `api-gateway/src/main/resources/application.properties` so Feign is Spring Security-aware.
 
 [source,properties]
 ----
@@ -417,12 +416,7 @@ hystrix.shareSecurityContext=true
 
 Run all of the applications with `./mvnw` in separate terminal windows, or in your IDE if you prefer.
 
-TIP: To make it simpler to run in an IDE, there is an aggregator `pom.xml` in the root directory. If you'd installed https://emmanuelbernard.com/blog/2017/02/27/start-intellij-idea-command-line/[]IntelliJ IDEA's command line launcher], you just need to run:
-
-[source,shell]
-----
-idea pom.xml
-----
+TIP: To make it simpler to run in an IDE, there is an aggregator `pom.xml` in the root directory. If you'd installed https://emmanuelbernard.com/blog/2017/02/27/start-intellij-idea-command-line/[IntelliJ IDEA's command line launcher], you just need to run `idea pom.xml`.
 
 Navigate to `http://localhost:8080/cool-cars` and you'll be redirected to Okta to log in.
 
@@ -434,13 +428,13 @@ image::{% asset_path 'blog/java-microservices/cool-cars.png' %}[alt=Cool Cars,wi
 
 If you made it this far, and got the examples apps running, congratulations! You're super cool! 😎
 
-One of the things you might've noticed in this example is you had to configure the OIDC properties in each application. This could be a real pain if you had 100 microservices. Yes, you could define them as environment variables and this would solve the problem. However, if you have different microservices stacks using different OIDC apps, this won't work.
+One of the things you might've noticed in this example is you had to configure the OIDC properties in each application. This could be a real pain if you had 100 microservices. Yes, you could define them as environment variables and this would solve the problem. However, if you have different microservices stacks using different OIDC client IDs, this approach will be difficult.
 
 https://spring.io/projects/spring-cloud-config[Spring Cloud Config] is a project that provides externalized configuration for distributed systems. Rather than adding it to this example, I've got a much more hip way to demo it.
 
 == Use JHipster to Generate a Java Microservices Architecture with OAuth 2.0
 
-https://www.jhipster.tech/[]JHipster] is a development platform to generate, develop, and deploy Spring Boot + ( Angular || React || Vue ) applications. In addition, it supports creating Spring-based microservice architectures. In fact, if you create microservices projects with "OAuth 2.0 / OIDC" for authentication, you'll be using code that's very similar to the example above.
+https://www.jhipster.tech/[JHipster] is a development platform to generate, develop, and deploy Spring Boot + { Angular or React or Vue } applications. In addition, it supports creating Spring-based microservice architectures. In fact, if you create microservices projects with "OAuth 2.0 / OIDC" for authentication, you'll be using code that's very similar to the example above.
 
 To use JHipster, you'll need to have https://nodejs.org[Node.js] installed. You can also use https://start.jhipster.tech[start.jhipster.tech], which is similar to start.spring.io.
 
@@ -673,7 +667,7 @@ This microservices stack uses Eureka for service discovery, just like the bare-b
 serviceDiscoveryType eureka
 ----
 
-JHipster also https://www.jhipster.tech/consul/[supports Hashicorp Consul].
+INFO: JHipster also https://www.jhipster.tech/consul/[supports Hashicorp Consul].
 
 When you select `eureka` for service discovery, https://github.com/jhipster/jhipster-registry[JHipster Registry] is used. This application is very similar to Eureka Server, except it has an Angular UI and includes https://spring.io/projects/spring-cloud-config[Spring Cloud Config], among other features.
 
@@ -689,7 +683,7 @@ Open your browser and navigate to `http://localhost:8761`. You'll be redirected 
 
 image::{% asset_path 'blog/java-microservices/jhipster-registry.png' %}[alt=JHipster Registry,width=800,align=center]
 
-Navigate to `http://localhost:8080`, click **sign in** and you'll be logged in to the gateway. You can go to **Entities** > **Blog** and add a blog.
+Navigate to `http://localhost:8080`, click **sign in**, and you'll be logged in to the gateway. You can go to **Entities** > **Blog** and add a blog.
 
 image::{% asset_path 'blog/java-microservices/blog-list.png' %}[alt=Blog List,width=800,align=center]
 
@@ -701,7 +695,7 @@ Pretty slick, eh?! 🤓
 
 == Configure JHipster Microservices to Use Okta
 
-One of the problems you saw in the bare-bones Spring Boot + Spring Cloud setup is you have to configure `okta.oauth2.*` properties in every microservice. JHipster doesn't use the Okta Spring Boot starter. It uses `spring-boot-starter-oauth2-client` and `spring-boot-starter-oauth2-resource-server` instead. The configuration for OAuth 2.0 is contained in each app's `src/main/resources/config/application.yml` file.
+One of the problems you saw in the bare-bones Spring Boot + Spring Cloud setup is you have to configure `okta.oauth2.*` properties in every microservice. JHipster doesn't use the Okta Spring Boot starter. It uses `oauth2-client` and `oauth2-resource-server` Spring Boot starters instead. The configuration for OAuth 2.0 is contained in each app's `src/main/resources/config/application.yml` file.
 
 [source,yaml]
 ----
@@ -765,7 +759,7 @@ Then, click **Save**.
 
 JHipster is configured by default to work with two types of users: administrators and users. Keycloak is configured with users and groups automatically, but you need to do some one-time configuration for your Okta organization.
 
-Create a `ROLE_ADMIN` group (**Users** > **Groups** > **Add Group**) and add your user to them. Navigate to **API** > **Authorization Servers**, and click on the the `default` server. Click the **Claims** tab and **Add Claim**. Name it `groups`, and include it in the ID Token. Set the value type to `Groups` and set the filter to be a Regex of `.*`. Click **Create**.
+Create a `ROLE_ADMIN` group (**Users** > **Groups** > **Add Group**) and add your user to it. Navigate to **API** > **Authorization Servers**, and click on the the `default` server. Click the **Claims** tab and **Add Claim**. Name it `groups`, and include it in the ID Token. Set the value type to `Groups` and set the filter to be a Regex of `.*`. Click **Create**.
 
 image::{% asset_path 'blog/java-12-jhipster-6/add-claim.png' %}[alt=Add Claim,width=600,align=center]
 
@@ -796,19 +790,21 @@ I'm still working on a solution to this and will update this post once I find on
 
 I wrote this post with Java because it's the most popular language in the Java ecosystem. However, https://redmonk.com/sogrady/2019/03/20/language-rankings-1-19/[Kotlin is on the rise], according to RedMonk's programming language rankings from January 2019.
 
->  For this quarter, at least, Kotlin grew substantially while all three of its fellow JVM-based counterparts declined. Kotlin jumped so far, in fact, that it finally broke into the Top 20 at #20 and leapfrogged Clojure (#24) and Groovy (#24) while doing so. It’s still well behind Scala (#13), but Kotlin’s growth has been second only to Swift in this history of these rankings so it will be interesting to see what lies ahead in the next run or two.
+> For this quarter, at least, Kotlin grew substantially while all three of its fellow JVM-based counterparts declined. Kotlin jumped so far, in fact, that it finally broke into the Top 20 at #20 and leapfrogged Clojure (#24) and Groovy (#24) while doing so. It’s still well behind Scala (#13), but Kotlin’s growth has been second only to Swift in this history of these rankings so it will be interesting to see what lies ahead in the next run or two.
 
 Spring has excellent support for Kotlin, and you can choose it as a language on start.spring.io. Heck, even JHipster has support for Kotlin with its https://github.com/jhipster/jhipster-kotlin[Kotlin Blueprint].
 
 If you'd like to see us write more posts using Kotlin, please let us know in the comments!
 
-== Have More Fun with Java, Spring Boot, Spring Cloud, and Microservices
+== Have More Fun with Spring Boot, Spring Cloud, and Microservices
 
 I hope you liked this tour of how to build Java microservice architectures with Spring Boot and Spring Cloud. You learned how to build everything with minimal code, the configure it to be secure with Spring Security, OAuth 2.0, and Okta.
 
 Next, you learned how JHipster makes it possible to generate the same architecture that leverages the same frameworks.
 
-We've big fans of Spring Boot, Spring Cloud, and JHipster on this blog. Here's a few other posts you might find interesting:
+You can find all the code shown in this tutorial https://github.com/oktadeveloper/java-microservices-examples[on GitHub].
+
+We're big fans of Spring Boot, Spring Cloud, and JHipster on this blog. Here's a few other posts you might find interesting:
 
 * link:/blog/2019/04/01/spring-boot-microservices-with-kubernetes[Build a Microservice Architecture with Spring Boot and Kubernetes]
 * link:/blog/2019/02/28/spring-microservices-docker[Build Spring Microservices and Dockerize Them for Production]
