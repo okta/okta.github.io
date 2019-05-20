@@ -10,7 +10,9 @@ tweets:
 image: blog/nginx-auth-request/nginx-auth-request-sample.jpg
 ---
 
-Ever found yourself wanting to put an application behind a login form, but dreading writing all that code to deal with OAuth 2.0 or passwords? In this tutorial, I'll show you how to use the nginx `auth_request` module to protect any application running behind your nginx server with OAuth 2.0, without writing any code! Lasso, a microservice written in Go, handles the OAuth dance to any number of different auth providers so you don't have to.
+
+
+Ever found yourself wanting to put an application behind a login form, but dreading writing all that code to deal with OAuth 2.0 or passwords? In this tutorial, I'll show you how to use the nginx `auth_request` module to protect any application running behind your nginx server with OAuth 2.0, without writing any code! Vouch, a microservice written in Go, handles the OAuth dance to any number of different auth providers so you don't have to.
 
 ## Why Authenticate at the Web Server?
 
@@ -45,9 +47,9 @@ Since the nginx `auth_request` module has no concept of users or how to authenti
 
 This server needs to handle an HTTP request and return HTTP 200 or 401 depending on whether the user is logged in. If the user is not logged in, it needs to know how to get them to log in and set a session cookie.
 
-To accomplish this, we'll use the open source project "[Lasso](https://github.com/LassoProject/Lasso)". Lasso is written in Go, so it's super easy to deploy. Everything can be configured via a single YAML file. Lasso can be configured to authenticate users via a variety of OAuth and OpenID Connect backends such as GitHub, Google, Okta or any other custom servers.
+To accomplish this, we'll use the open source project "[Vouch](https://github.com/vouch/vouch-proxy)". Vouch is written in Go, so it's super easy to deploy. Everything can be configured via a single YAML file. Vouch can be configured to authenticate users via a variety of OAuth and OpenID Connect backends such as GitHub, Google, Okta or any other custom servers.
 
-We'll come back to configuring Lasso in a few minutes, but for now, let's continue on to set up your protected server in nginx.
+We'll come back to configuring Vouch in a few minutes, but for now, let's continue on to set up your protected server in nginx.
 
 
 ## Configure Your Protected nginx Host
@@ -72,10 +74,10 @@ Add the following to your existing `server` block:
 
 ```nginx
 # Any request to this server will first be sent to this URL
-auth_request /lasso-validate;
+auth_request /vouch-validate;
 
-location = /lasso-validate {
-  # This address is where Lasso will be listening on
+location = /vouch-validate {
+  # This address is where Vouch will be listening on
   proxy_pass http://127.0.0.1:9090/validate;
   proxy_pass_request_body off; # no need to send the POST body
 
@@ -85,29 +87,29 @@ location = /lasso-validate {
   proxy_set_header X-Forwarded-Proto $scheme;
 
   # these return values are passed to the @error401 call
-  auth_request_set $auth_resp_jwt $upstream_http_x_lasso_jwt;
-  auth_request_set $auth_resp_err $upstream_http_x_lasso_err;
-  auth_request_set $auth_resp_failcount $upstream_http_x_lasso_failcount;
+  auth_request_set $auth_resp_jwt $upstream_http_x_vouch_jwt;
+  auth_request_set $auth_resp_err $upstream_http_x_vouch_err;
+  auth_request_set $auth_resp_failcount $upstream_http_x_vouch_failcount;
 }
 
 error_page 401 = @error401;
 
-# If the user is not logged in, redirect them to Lasso's login URL
+# If the user is not logged in, redirect them to Vouch's login URL
 location @error401 {
-  return 302 https://login.avocado.lol/login?url=https://$http_host$request_uri&lasso-failcount=$auth_resp_failcount&X-Lasso-Token=$auth_resp_jwt&error=$auth_resp_err;
+  return 302 https://login.avocado.lol/login?url=https://$http_host$request_uri&vouch-failcount=$auth_resp_failcount&X-Vouch-Token=$auth_resp_jwt&error=$auth_resp_err;
 }
 ```
 
-Let's look at what's going on here. The first line, `auth_request /lasso-validate;` is what enables this flow. This tells the `auth_request` module to first send any request to this URL before deciding whether it's allowed to continue to the backend server.
+Let's look at what's going on here. The first line, `auth_request /vouch-validate;` is what enables this flow. This tells the `auth_request` module to first send any request to this URL before deciding whether it's allowed to continue to the backend server.
 
-The block `location = /lasso-validate` captures that URL, and proxies it to the Lasso server that will be listening on port 9090. We don't need to send the POST body to Lasso, since all we really care about is the cookie.
+The block `location = /vouch-validate` captures that URL, and proxies it to the Vouch server that will be listening on port 9090. We don't need to send the POST body to Vouch, since all we really care about is the cookie.
 
-The line `error_page 401 = @error401;` tells nginx what to do if Lasso returns an HTTP 401 response, which is to pass it to the block defined by `location @error401`. That block will redirect the user's browser to Lasso's login URL which will kick off the flow to the real authentication backend.
+The line `error_page 401 = @error401;` tells nginx what to do if Vouch returns an HTTP 401 response, which is to pass it to the block defined by `location @error401`. That block will redirect the user's browser to Vouch's login URL which will kick off the flow to the real authentication backend.
 
 
-## Configure a Server Block for Lasso
+## Configure a Server Block for Vouch
 
-Next, configure a new server block for Lasso so that it has a publicly accessible URL like `https://login.avocado.lol`. All this needs to do is proxy the request to the backend Lasso server.
+Next, configure a new server block for Vouch so that it has a publicly accessible URL like `https://login.avocado.lol`. All this needs to do is proxy the request to the backend Vouch server.
 
 ```nginx
 server {
@@ -117,7 +119,7 @@ server {
   ssl_certificate /etc/letsencrypt/live/login.avocado.lol/fullchain.pem;
   ssl_certificate_key /etc/letsencrypt/live/login.avocado.lol/privkey.pem;
 
-  # Proxy to your Lasso instance
+  # Proxy to your Vouch instance
   location / {
     proxy_set_header  Host  login.avocado.lol;
     proxy_set_header  X-Forwarded-Proto https;
@@ -127,21 +129,21 @@ server {
 ```
 
 
-## Configure and Deploy Lasso
+## Configure and Deploy Vouch
 
-You'll need to download [Lasso](https://github.com/LassoProject/lasso) and compile the Go binary for your platform. You can follow the instructions in the project's README file.
+You'll need to download [Vouch](https://github.com/vouch/vouch-proxy) and compile the Go binary for your platform. You can follow the instructions in the project's README file.
 
-Once you've got a binary, you'll need to create the config file to define the way you want Lasso to authenticate users.
+Once you've got a binary, you'll need to create the config file to define the way you want Vouch to authenticate users.
 
 Copy `config/config.yml_example` to `config/config.yml` and read through the settings there. Most of the defaults will be fine, but you'll want to create your own JWT secret string and replace the placeholder value of `your_random_string`. 
 
-The easiest way to configure Lasso is to have it allow any user that can authenticate at the OAuth server be allowed to access the backend. This works great if you're using a private OAuth server like Okta to manage your users. Go ahead and set `allowAllUsers: true` to enable this behavior, and comment out the `domains:` chunk.
+The easiest way to configure Vouch is to have it allow any user that can authenticate at the OAuth server be allowed to access the backend. This works great if you're using a private OAuth server like Okta to manage your users. Go ahead and set `allowAllUsers: true` to enable this behavior, and comment out the `domains:` chunk.
 
 You'll need to choose an OAuth 2.0 provider to use to actually authenticate users. In this example we'll use Okta, since that's the easiest way to have a full OAuth/OpenID Connect server and be able to manage all your user accounts from a single dashboard. Before you can finish filling out the config file, you'll need to sign up for an Okta Developer account at [developer.okta.com/](https://developer.okta.com/). Once you create an account, click **Applications** in the top menu, and create a new application. Choose **Web** as the application platform.
 
 {% img blog/nginx-auth-request/okta-create-app.png alt:"Create a web application with Okta" width:"800" %}{: .center-image }
 
-In the next screen, you'll need to configure the **Base URI** and **Login redirect URI** to match your own server's settings. Lasso's redirect URI ends in `/auth` so your configuration should look like the below screenshot.
+In the next screen, you'll need to configure the **Base URI** and **Login redirect URI** to match your own server's settings. Vouch's redirect URI ends in `/auth` so your configuration should look like the below screenshot.
 
 {% img blog/nginx-auth-request/okta-configure-app.png alt:"Create a web application with Okta" width:"600" %}{: .center-image }
 
@@ -161,11 +163,11 @@ oauth:
   scopes:
     - openid
     - email
-  # Set the callback URL to the domain that Lasso is running on
+  # Set the callback URL to the domain that Vouch is running on
   callback_url: https://login.avocado.lol/auth
 ```
 
-Now you can run Lasso! It will listen on port 9090, which is where you've configured nginx to send the `auth_request` verifications as well as serve traffic from `login.avocado.lol`.
+Now you can run Vouch! It will listen on port 9090, which is where you've configured nginx to send the `auth_request` verifications as well as serve traffic from `login.avocado.lol`.
 
 When you reload the nginx config, all requests to `stats.avocado.lol` will require that you log in via Okta first!
 
@@ -175,15 +177,15 @@ When you reload the nginx config, all requests to `stats.avocado.lol` will requi
 
 If you're putting a dynamic web app behind nginx and you care not only about _whether_ someone was able to log in, but also _who they are_, there is one more trick we can use. 
 
-By default, Lasso will extract a user ID via OpenID Connect (or GitHub or Google if you've configured those as your auth providers), and will include that user ID in an HTTP header that gets passed back up to the main server. 
+By default, Vouch will extract a user ID via OpenID Connect (or GitHub or Google if you've configured those as your auth providers), and will include that user ID in an HTTP header that gets passed back up to the main server. 
 
-In your main server block, just below the line `auth_request /lasso-validate;` which enables the `auth_request` module, add the following:
+In your main server block, just below the line `auth_request /vouch-validate;` which enables the `auth_request` module, add the following:
 
 ```nginx
-auth_request_set $auth_user $upstream_http_x_lasso_user;
+auth_request_set $auth_user $upstream_http_x_vouch_user;
 ```
 
-This will take the HTTP header that Lasso sets, `X-Lasso-User`, and assign it to the nginx variable `$auth_user`. Then, depending on whether you use fastcgi or proxy_pass, include one of the two lines below in your server block:
+This will take the HTTP header that Vouch sets, `X-Vouch-User`, and assign it to the nginx variable `$auth_user`. Then, depending on whether you use fastcgi or proxy_pass, include one of the two lines below in your server block:
 
 ```nginx
 fastcgi_param REMOTE_USER $auth_user;
@@ -208,3 +210,9 @@ For more information and tutorials about OAuth 2.0, check out some of our other 
 * [What is the OAuth 2.0 Implicit Grant Type?](/blog/2018/05/24/what-is-the-oauth2-implicit-grant-type)
 
 As always, we'd love to hear from you about this post, or really anything else! Hit us up in the comments, or on Twitter [@oktadev](https://twitter.com/OktaDev)!
+
+
+**Changelog:**
+
+* May 17, 2019: The Lasso project was renamed to Vouch in 2019, so all references to Lasso in this post have been updated to Vouch
+

@@ -1,6 +1,6 @@
 ---
 layout: blog_post
-title: "Linking your Alexa Skill securely with Okta"
+title: "Linking Your Alexa Skill Securely with Okta"
 author: jeffersonhaw
 description: "This tutorial shows how to link your Alexa skills securely."
 tags: [alexa, auth, alexa skills]
@@ -300,4 +300,3 @@ To do this, you would need additional components like an API gateway to orchestr
 Here is a live demo video on how this is done: `https://okta.box.com/s/tkvzd0958pu2c290c9klgecedp6thsgf`
 
 If you want to know more about this complex use case, feel free to contact me: jefferson.haw@okta.com.
-
