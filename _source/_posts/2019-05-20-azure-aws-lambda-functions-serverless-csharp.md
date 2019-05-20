@@ -100,7 +100,7 @@ From a C# perspective at least, this makes Azure seem like the better choice - e
 
 ## Learn More About ASP.NET, .NET Core, and Serverless
 
-If you’d like to learn more about using secure OAuth 2.0 and user management in ASP.NET, we’ve also published a number of posts that might interest you:
+If you'd like to learn more about using secure OAuth 2.0 and user management in ASP.NET, we've also published a number of posts that might interest you:
 
 * [Build a CRUD App with ASP.NET MVC and Entity Framework Authentication](https://developer.okta.com/blog/2019/03/11/build-a-crud-app-with-aspnet-mvc-and-entity-framework)
 * [Add Login to your ASP.NET Core MVC App](https://developer.okta.com/blog/2018/10/29/add-login-to-you-aspnetcore-app)
