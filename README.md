@@ -10,13 +10,16 @@ If you're having problems running one of the tutorials for a blog post, please c
 
 If you have questions or need help with Okta's APIs or SDKs, please post to our **[developer forums][devforum]**. If you think you've encountered a bug in one of our SDKs, please create a GitHub issue for that SDK.
 
+If you are looking for Okta's developer documentation, that has moved to [@okta/okta-developer-docs](https://github.com/okta/okta-developer-docs)
+
 ## Contributing to the site
 
 This site is built using [Jekyll](http://jekyllrb.com/). Blog post updates, bug fixes, and PRs are all welcome!
 
-The [wiki](https://github.com/okta/okta.github.io/wiki) will show you how to set up your local environment, and also describes our [contribution process](https://github.com/okta/okta.github.io/wiki/Contributing-to-the-Site#you-are-making-a-non-blog-change).
+The wiki will show you how to [set up your local environment](https://github.com/okta/okta.github.io/wiki/Setting-Up-Your-Environment) and how to [deploy the site](https://github.com/okta/okta.github.io/wiki/Deploying-the-Site).
 
 ### Building the site locally
+
 - [Clone and install dependencies](https://github.com/okta/okta.github.io/wiki/Setting-Up-Your-Environment)
 - Build the site and start a development server with `npm start`
 - Visit [localhost:4000](http://localhost:4000) in your browser
