@@ -5,7 +5,10 @@ author: mraible
 description: "This tutorial shows you how to build a microservices architecture with Spring Boot and Spring Cloud."
 tags: [java, microservices, spring boot, spring cloud, spring cloud config, jhipster]
 tweets:
-// image: blog/java-microservices/tbd.png
+- "The Java ecosystem has some well-established patterns for developing microservice architectures. If you're familiar with Spring, you'll feel right at home developing with Spring Boot and Spring Cloud."
+- "Want to learn how to use Java and Spring to develop a microservices architecture? This tutorial from @mraible shows you how!"
+- "Java + Spring Boot + Spring Cloud = 💚 for microservices by @mraible."
+image: blog/java-microservices/java-microservices.jpg
 ---
 :page-liquid:
 
