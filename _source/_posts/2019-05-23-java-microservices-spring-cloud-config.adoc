@@ -5,7 +5,7 @@ author: mraible
 description: "This tutorial shows you how to build a microservices architecture with Spring Boot and Spring Cloud Config using JHipster."
 tags: [java, microservices, spring cloud config, jhipster]
 tweets:
-// image: blog/java-microservices/tbd.png
+image: blog/java-microservices-cloud-config/java-microservices-jhipster.jpg
 ---
 :page-liquid:
 
