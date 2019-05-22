@@ -4,6 +4,10 @@ title: 'What the Heck is OAuth?'
 author: mraible
 description: "OAuth 2.0 is a standard that apps can use to provide client applications with secure delegated access. OAuth works over HTTPS and authorizes devices, APIs, servers, and applications with access tokens rather than credentials. OIDC adds a signed ID token and a UserInfo endpoint."
 tags: [oauth, authorization, security, oidc, openid connect, oauth 2.0, okta]
+tweets:
+- "Do you know what OAuth is? This post attempts to clarify what it does and how OIDC fits into the mix."
+- "OAuth is not an API or a service. It's an open standard for authorization and anyone can implement it. Learn more →"
+- "What are OAuth and OpenID Connect? This post explains their relations and much more!"
 ---
 
 There's a *lot* of confusion around what OAuth *actually is*.
@@ -376,6 +380,7 @@ An Open ID Connect flow involves the following steps:
 {% img blog/oauth/oidc-flow.png alt:"OIDC Flow" width:"800" %}{: .center-image }{: .center-image }
 
 ## OAuth + Okta
+
 [Okta](https://www.okta.com) is best known for its single-sign on services that allow you to seamlessly authenticate to the applications you use on a daily basis. But did you know Okta also has an awesome developer platform? Secure single sign-on often uses SAML as the protocol of choice, but Okta also provides several other options, including a Sign-in Widget, Auth SDK (a JavaScript-based library), Social Login, and an Authentication API for any client. If you're interested in learning about Okta straight from the source, you should attend [Oktane17](https://www.okta.com/oktane17/) in late August. There's a [track dedicated to app development](https://www.okta.com/oktane17/agenda/#AppDev).
 
 See [Okta's OIDC/OAuth 2.0 API](http://developer.okta.com/docs/api/resources/oidc) for specific information on how we support OAuth.
@@ -388,10 +393,22 @@ If you'd rather watch a video to learn about OAuth, please see the presentation 
 <iframe width="560" height="315" style="max-width: 100%" src="https://www.youtube.com/embed/996OiexHze0" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 </div>
 
-## Summary
+## OAuth 2.0 Summary
 
 OAuth 2.0 is an authorization framework for delegated access to APIs. It involves clients that request scopes that Resource Owners authorize/give consent to. Authorization grants are exchanged for access tokens and refresh tokens (depending on flow). There are multiple flows to address varying client and authorization scenarios. JWTs can be used for structured tokens between Authorization Servers and Resource Servers.
 
 OAuth has a very large security surface area. Make sure to use a secure toolkit and validate all inputs!
 
 OAuth is not an authentication protocol. OpenID Connect extends OAuth 2.0 for authentication scenarios and is often called "SAML with curly-braces". If you're looking to dive even deeper into OAuth 2.0, I recommend you check out [OAuth.com](https://www.oauth.com/), take Okta's Auth SDK for a spin, and try out the OAuth flows for yourself.
+
+If you'd like to learn more about OAuth and OIDC, we suggest the following posts:
+
+* [What is the OAuth 2.0 Authorization Code Grant Type?](/blog/2018/04/10/oauth-authorization-code-grant-type)
+* [What is the OAuth 2.0 Implicit Grant Type?](/blog/2018/05/24/what-is-the-oauth2-implicit-grant-type)
+* [What is the OAuth 2.0 Password Grant Type?](/blog/2018/06/29/what-is-the-oauth2-password-grant)
+* [Is the OAuth 2.0 Implicit Flow Dead?](/blog/2019/05/01/is-the-oauth-implicit-flow-dead)
+* [Identity, Claims, & Tokens – An OpenID Connect Primer, Part 1 of 3](/blog/2017/07/25/oidc-primer-part-1)
+* [OIDC in Action – An OpenID Connect Primer, Part 2 of 3](/blog/2017/07/25/oidc-primer-part-2)
+* [What's in a Token? – An OpenID Connect Primer, Part 3 of 3](/blog/2017/08/01/oidc-primer-part-3)
+
+If you're passionate about OAuth 2.0 and OIDC like we are, give us a [follow on Twitter](https://twitter.com/oktadev)!

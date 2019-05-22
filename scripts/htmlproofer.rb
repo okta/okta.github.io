@@ -7,6 +7,7 @@ omit_external = false
 
 file_ignore = [
     /3rd_party_notices/,
+    /search/,
     # generated sdk docs
     /java_api_sdk/,
     /python_api_sdk/,
