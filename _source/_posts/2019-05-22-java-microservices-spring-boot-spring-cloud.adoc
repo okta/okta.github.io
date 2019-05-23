@@ -618,6 +618,8 @@ Come back, refresh your browser and you'll see `[]` instead of all the cars.
 
 I'm still working on a solution to this and will update this post once I find one. If you happen to know of a solution, please let me know!
 
+**Update:** Spring Security 5.1 doesn't yet automatically refresh the OAuth access token. It should be https://github.com/spring-projects/spring-security/issues/6811[available in Spring Security 5.2].
+
 == Have More Fun with Spring Boot, Spring Cloud, and Microservices
 
 I hope you liked this tour of how to build Java microservice architectures with Spring Boot and Spring Cloud. You learned how to build everything with minimal code, then configure it to be secure with Spring Security, OAuth 2.0, and Okta.
