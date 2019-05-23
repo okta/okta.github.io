@@ -594,8 +594,7 @@ image::{% asset_path 'blog/java-microservices/zuul-home.png' %}[alt=Home with Zu
 
 One of the things you might've noticed in this example is you had to configure the OIDC properties in each application. This could be a real pain if you had 500 microservices. Yes, you could define them as environment variables and this would solve the problem. However, if you have different microservices stacks using different OIDC client IDs, this approach will be difficult.
 
-https://spring.io/projects/spring-cloud-config[Spring Cloud Config] is a project that provides externalized configuration for distributed systems. Rather than adding it to this example, I'll cover it in a future tutorial.
-// todo: add link to 'future tutorial'
+https://spring.io/projects/spring-cloud-config[Spring Cloud Config] is a project that provides externalized configuration for distributed systems. Rather than adding it to this example, I'll cover it in a link:/blog/2019/05/23/java-microservices-spring-cloud-config[future tutorial].
 
 == What About Kotlin?
 
@@ -627,6 +626,7 @@ You can find all the code shown in this tutorial https://github.com/oktadevelope
 
 We're big fans of Spring Boot, Spring Cloud, and microservices on this blog. Here are several other posts you might find interesting:
 
+* link:/blog/2019/05/23/java-microservices-spring-cloud-config[Java Microservices with Spring Cloud Config and JHipster]
 * link:/blog/2019/05/13/angular-8-spring-boot-2[Angular 8 + Spring Boot 2.2: Build a CRUD App Today!]
 * link:/blog/2019/05/15/spring-boot-login-options[A Quick Guide to Spring Boot Login Options]
 * link:/blog/2019/04/01/spring-boot-microservices-with-kubernetes[Build a Microservice Architecture with Spring Boot and Kubernetes]
