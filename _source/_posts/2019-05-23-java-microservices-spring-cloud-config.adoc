@@ -16,17 +16,17 @@ Developing a microservice architecture with Java and Spring Boot is quite popula
 
 Spring Boot provided a much-needed spark to the Spring ecosystem when it was first released in 2014. Instead of making Java developers configure all aspects of their Spring beans, it provided "starters" that contained pre-configured beans with the default settings. This led to less Java code, and also provided the ability to override the defaults via an `application.properties` file. Yes, there are many ways to modify the defaults in a Spring Boot application, but I'll skip over that for now.
 
-In a link:/blog/2019/05/21/java-microservices-spring-boot-spring-cloud[previous tutorial on Java Microservices with Spring Boot and Spring Cloud], I showed how you can use OAuth 2.0 and OpenID Connect to secure everything. One of the problems with this example is that you have to configure the OIDC properties in each application. This can be a real pain if you have 100 microservices. Yes, you could define them as environment variables and this would solve the problem. However, if you have different microservices stacks using different OIDC client IDs, this approach will be difficult.
+In a link:/blog/2019/05/21/java-microservices-spring-boot-spring-cloud[previous tutorial on Java Microservices with Spring Boot and Spring Cloud], I showed how you can use OAuth 2.0 and OpenID Connect to secure everything. One of the problems with this example is that you have to configure the OIDC properties in each application. This can be a real pain if you have hundreds of microservices. Yes, you could define them as environment variables and this would solve the problem. However, if you have different microservices stacks using different OIDC client IDs, this approach will be difficult.
 
 == Java Microservices with Spring Cloud Config
 
-https://spring.io/projects/spring-cloud-config[Spring Cloud Config] is a project that provides externalized configuration for distributed systems. Spring Cloud Config has a server and client components. You can configure the server to read its configuration from the file system or a source code repository, like Git. On the client, you configure things in a bootstrap configuration file to get configuration data from the server. In a microservices environment, this provides an elegant way to configure _all_ your microservices from a central location.
+https://spring.io/projects/spring-cloud-config[Spring Cloud Config] is a project that provides externalized configuration for distributed systems. Spring Cloud Config has server and client components. You can configure the server to read its configuration from the file system or a source code repository, like Git. On the client, you configure things in a bootstrap configuration file to get configuration data from the server. In a microservices environment, this provides an elegant way to configure _all_ your microservices from a central location.
 
 Today I'd like to show you how this works and demo it using one of the hippest microservice solutions I've ever worked with.
 
 == Use JHipster to Generate a Java Microservices Architecture
 
-https://www.jhipster.tech/[JHipster] is a development platform to generate, develop, and deploy Spring Boot + { Angular or React or Vue } applications. In addition, it supports creating Spring-based microservice architectures. In fact, if you create microservices projects with "OAuth 2.0 / OIDC" for authentication, you'll be using code that's very similar to the aforementioned example.
+https://www.jhipster.tech/[JHipster] is a development platform to generate, develop, and deploy Spring Boot + { Angular or React or Vue } applications. In addition, it supports creating Spring-based microservice architectures. In fact, if you create microservices projects and choose OAuth 2.0 / OIDC for authentication, you'll be using code that's very similar to the aforementioned example.
 
 To use JHipster, you'll need to have https://nodejs.org[Node.js] installed. You can also use https://start.jhipster.tech[start.jhipster.tech], which is similar to start.spring.io.
 
@@ -46,75 +46,75 @@ Create an `apps.jh` file in this directory and put the following code into it.
 [source,json]
 ----
 application {
- config {
-   baseName gateway,
-   packageName com.okta.developer.gateway,
-   applicationType gateway,
-   authenticationType oauth2,
-   prodDatabaseType postgresql,
-   serviceDiscoveryType eureka,
-   testFrameworks [protractor]
- }
- entities Blog, Post, Tag, Product
+  config {
+    baseName gateway,
+    packageName com.okta.developer.gateway,
+    applicationType gateway,
+    authenticationType oauth2,
+    prodDatabaseType postgresql,
+    serviceDiscoveryType eureka,
+    testFrameworks [protractor]
+  }
+  entities Blog, Post, Tag, Product
 }
 
 application {
- config {
-   baseName blog,
-   packageName com.okta.developer.blog,
-   applicationType microservice,
-   authenticationType oauth2,
-   prodDatabaseType postgresql,
-   serverPort 8081,
-   serviceDiscoveryType eureka
- }
- entities Blog, Post, Tag
+  config {
+    baseName blog,
+    packageName com.okta.developer.blog,
+    applicationType microservice,
+    authenticationType oauth2,
+    prodDatabaseType postgresql,
+    serverPort 8081,
+    serviceDiscoveryType eureka
+  }
+  entities Blog, Post, Tag
 }
 
 application {
- config {
-   baseName store,
-   packageName com.okta.developer.store,
-   applicationType microservice,
-   authenticationType oauth2,
-   databaseType mongodb,
-   devDatabaseType mongodb,
-   prodDatabaseType mongodb,
-   enableHibernateCache false,
-   serverPort 8082,
-   serviceDiscoveryType eureka
- }
- entities Product
+  config {
+    baseName store,
+    packageName com.okta.developer.store,
+    applicationType microservice,
+    authenticationType oauth2,
+    databaseType mongodb,
+    devDatabaseType mongodb,
+    prodDatabaseType mongodb,
+    enableHibernateCache false,
+    serverPort 8082,
+    serviceDiscoveryType eureka
+  }
+  entities Product
 }
 
 entity Blog {
- name String required minlength(3),
- handle String required minlength(2)
+  name String required minlength(3),
+  handle String required minlength(2)
 }
 
 entity Post {
- title String required,
- content TextBlob required,
- date Instant required
+  title String required,
+  content TextBlob required,
+  date Instant required
 }
 
 entity Tag {
- name String required minlength(2)
+  name String required minlength(2)
 }
 
 entity Product {
- title String required,
- price BigDecimal required min(0),
- image ImageBlob
+  title String required,
+  price BigDecimal required min(0),
+  image ImageBlob
 }
 
 relationship ManyToOne {
- Blog{user(login)} to User,
- Post{blog(name)} to Blog
+  Blog{user(login)} to User,
+  Post{blog(name)} to Blog
 }
 
 relationship ManyToMany {
- Post{tag(name)} to Tag{post}
+  Post{tag(name)} to Tag{post}
 }
 
 paginate Post, Tag with infinite-scroll
@@ -125,27 +125,26 @@ microservice Blog, Post, Tag with blog
 
 // will be created under 'docker-compose' folder
 deployment {
- deploymentType docker-compose
- appsFolders [gateway, blog, store]
- dockerRepositoryName "jmicro"
- consoleOptions [zipkin]
+  deploymentType docker-compose
+  appsFolders [gateway, blog, store]
+  dockerRepositoryName "jmicro"
+  consoleOptions [zipkin]
 }
 ----
 
 TIP: You'll want to change the `dockerRepositoryName` in the JDL above to use your https://hub.docker.com/[Docker Hub] username if you want to publish your containers. This is not a necessary step to complete this tutorial.
 
-This code is JDL (JHipster Domain Language) and you can use it to define your app, its entities, and even deployment settings. You can learn more about JDL in https://www.jhipster.tech/jdl/[JHipster's documentation]. Below is a screenshot of JDL Studio, which can be used to edit JDL and see how entities related to each other.
+This code is JDL (JHipster Domain Language) and you can use it to define your app, its entities, and even deployment settings. You can learn more about JDL in https://www.jhipster.tech/jdl/[JHipster's JDL documentation]. Below is a screenshot of JDL Studio, which can be used to edit JDL and see how entities related to each other.
 
 image::{% asset_path 'blog/java-microservices-cloud-config/jdl-studio.png' %}[alt=JDL Studio,width=800,align=center]
-
 
 The JDL you just put in `apps.jh` defines three applications:
 
 * **gateway**: a single entry point to your microservices, that will include the UI components.
-* **blog**: a Blog service that talks to PostgreSQL.
-* **store**: a Store service that uses MongoDB.
+* **blog**: a blog service that talks to PostgreSQL.
+* **store**: a store service that uses MongoDB.
 
-Run the following command to create these projects in your `apps` folder.
+Run the following command to create these projects in your `jhipster` folder.
 
 [source,shell]
 ----
@@ -169,9 +168,9 @@ When the configuration is generated for Docker Compose, a warning is spat out to
 WARNING! Docker Compose configuration generated, but no Jib cache found
 If you forgot to generate the Docker image for this application, please run:
 To generate the missing Docker image(s), please run:
- ./mvnw -Pprod verify jib:dockerBuild in /Users/mraible/java-microservices-examples/jhipster/gateway
- ./mvnw -Pprod verify jib:dockerBuild in /Users/mraible/java-microservices-examples/jhipster/blog
- ./mvnw -Pprod verify jib:dockerBuild in /Users/mraible/java-microservices-examples/jhipster/store
+  ./mvnw -Pprod verify jib:dockerBuild in /Users/mraible/java-microservices-examples/jhipster/gateway
+  ./mvnw -Pprod verify jib:dockerBuild in /Users/mraible/java-microservices-examples/jhipster/blog
+  ./mvnw -Pprod verify jib:dockerBuild in /Users/mraible/java-microservices-examples/jhipster/store
 ----
 
 To make it easier to create Docker images with one command, create an aggregator `pom.xml` in the `jhipster` root directory.
@@ -180,18 +179,18 @@ To make it easier to create Docker images with one command, create an aggregator
 ----
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-   <modelVersion>4.0.0</modelVersion>
-   <groupId>com.okta.developer</groupId>
-   <artifactId>jhipster-parent</artifactId>
-   <version>1.0.0-SNAPSHOT</version>
-   <packaging>pom</packaging>
-   <name>jhipster-parent</name>
-   <modules>
-       <module>gateway</module>
-       <module>blog</module>
-       <module>store</module>
-   </modules>
+    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>com.okta.developer</groupId>
+    <artifactId>jhipster-parent</artifactId>
+    <version>1.0.0-SNAPSHOT</version>
+    <packaging>pom</packaging>
+    <name>jhipster-parent</name>
+    <modules>
+        <module>gateway</module>
+        <module>blog</module>
+        <module>store</module>
+    </modules>
 </project>
 ----
 
@@ -249,7 +248,7 @@ Creating docker-compose_jhipster-registry_1          ... done
 Creating docker-compose_store-app_1                  ... done
 ----
 
-=== JHipster Registry for Service Discovery with JHipster Microservices
+=== JHipster Registry for Service Discovery with Java Microservices
 
 This microservices stack uses Eureka for service discovery, just like the bare-bones Spring Boot + Spring Cloud example. This was determined by the following line for each app in the JDL.
 
@@ -275,16 +274,13 @@ Open your browser and navigate to `http://localhost:8761`. You'll be redirected 
 
 image::{% asset_path 'blog/java-microservices-cloud-config/jhipster-registry.png' %}[alt=JHipster Registry,width=800,align=center]
 
-
 Navigate to `http://localhost:8080`, click **sign in**, and you'll be logged in to the gateway. You can go to **Entities** > **Blog** and add a blog.
 
 image::{% asset_path 'blog/java-microservices-cloud-config/blog-list.png' %}[alt=Blog List,width=800,align=center]
 
-
 Go to **Entities** > **Product** and you can add a product too.
 
 image::{% asset_path 'blog/java-microservices-cloud-config/product-list.png' %}[alt=Product List,width=800,align=center]
-
 
 Pretty slick, don't you think?! 🤓
 
@@ -295,17 +291,17 @@ One of the problems you saw in the bare-bones Spring Boot + Spring Cloud setup i
 [source,yaml]
 ----
 spring:
- ...
- security:
-   oauth2:
-     client:
-       provider:
-         oidc:
-           issuer-uri: http://localhost:9080/auth/realms/jhipster
-       registration:
-         oidc:
-           client-id: internal
-           client-secret: internal
+  ...
+  security:
+    oauth2:
+      client:
+        provider:
+          oidc:
+            issuer-uri: http://localhost:9080/auth/realms/jhipster
+        registration:
+          oidc:
+            client-id: internal
+            client-secret: internal
 ----
 
 === Why Okta?
@@ -330,16 +326,16 @@ The client ID and secret are available on your app settings page. You can find t
 [source,yaml]
 ----
 spring:
- security:
-   oauth2:
-     client:
-       provider:
-         oidc:
-           issuer-uri: https://{yourOktaDomain}/oauth2/default
-       registration:
-         oidc:
-           client-id: {yourClientId}
-           client-secret: {yourClientSecret}
+  security:
+    oauth2:
+      client:
+        provider:
+          oidc:
+            issuer-uri: https://{yourOktaDomain}/oauth2/default
+        registration:
+          oidc:
+            client-id: {yourClientId}
+            client-secret: {yourClientSecret}
 ----
 
 The registry, gateway, blog, and store applications are all configured to read this configuration on startup.
@@ -371,14 +367,11 @@ Create a `ROLE_ADMIN` group (**Users** > **Groups** > **Add Group**) and add you
 
 image::{% asset_path 'blog/java-12-jhipster-6/add-claim.png' %}[alt=Add Claim,width=600,align=center]
 
-
 Now when you hit `http://localhost:8761` or `http://localhost:8080`, you'll be prompted to log in with Okta!
 
 image::{% asset_path 'blog/java-microservices-cloud-config/jhipster-okta-login.png' %}[alt=JHipster Okta Login,width=800,align=center]
 
-
 image::{% asset_path 'blog/java-microservices-cloud-config/jhipster-okta-success.png' %}[alt=JHipster Okta Success,width=800,align=center]
-
 
 It's pretty nifty how you can configure your service registry and all your microservices in one place with Spring Cloud Config, don't you think?! 👌
 
@@ -396,7 +389,7 @@ JHipster Registry and its Spring Cloud Config server support two kinds of config
 # For Keycloak to work, you need to add '127.0.0.1 keycloak' to your hosts file
 ----
 
-You can see the default `application.yml` for Git at https://github.com/jhipster/jhipster-registry/blob/master/central-config/application.yml[@jhipster/jhipster-registry/central-config/application.yml`. You can learn more about application configuration with Spring Cloud Config in https://www.jhipster.tech/jhipster-registry/#-application-configuration-with-spring-cloud-config[JHipster Registry's documentation]. It includes a section on encrypting configuration values.
+You can see the default configuration for Git at https://github.com/jhipster/jhipster-registry/blob/master/central-config/application.yml[@jhipster/jhipster-registry/central-config/application.yml]. You can learn more about application configuration with Spring Cloud Config in https://www.jhipster.tech/jhipster-registry/#-application-configuration-with-spring-cloud-config[JHipster Registry's documentation]. It includes a section on encrypting configuration values.
 
 == What About Kotlin Microservices?
 
@@ -410,7 +403,7 @@ If you'd like to see us write more posts using Kotlin, please let us know in the
 
 == Learn More about Spring Cloud Config, Java Microservices, and JHipster
 
-I hope you enjoyed learning how to build Java microservice architectures with JHipster and configure them with Spring Cloud Config. You learned how to generate everything from a single JDL file, package your apps in Docker containers, run them with Docker Compose, and authenticate with Keycloak and Okta.
+I hope you enjoyed learning how to build Java microservice architectures with JHipster and configure them with Spring Cloud Config. You learned how to generate everything from a single JDL file, package your apps in Docker containers, run them with Docker Compose, and authenticate with OIDC using Keycloak and Okta.
 
 You can find all the code shown in this tutorial https://github.com/oktadeveloper/java-microservices-examples[on GitHub] in the `jhipster` directory.
 
