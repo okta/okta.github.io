@@ -259,7 +259,7 @@ I'd like to thank https://twitter.com/joe_grandja[Joe Grandja] and https://twitt
 
 I did not create a GitHub repository for this post because all of the code was generated. You can find the source code for https://github.com/jhipster/generator-jhipster[JHipster on GitHub].
 
-If you're interested in how I upgraded JHipster's tests to Spring Security 5.1, see link:/blog/2019/04/15/testing-spring-security-oauth-with-junit[Upgrading Spring Security OAuth and JUnit Tests through the 👀 of a Java Hipster].
+If you're interested in how I upgraded JHipster's tests to Spring Security 5.1, see link:/blog/2019/04/15/testing-spring-security-oauth-with-junit[Upgrading Spring Security OAuth and JUnit Tests through the 👀 of a Java Hipster]. If you'd like to learn about developing microservices with JHipster, see link:/blog/2019/05/21/java-microservices-spring-boot-spring-cloud[Java Microservices with Spring Boot and Spring Cloud].
 
 Thanks JHipster and all its fabulous https://github.com/jhipster/generator-jhipster/graphs/contributors[contributors]. You all do a tremendous amount of work in your free time and it's greatly appreciated.
 
