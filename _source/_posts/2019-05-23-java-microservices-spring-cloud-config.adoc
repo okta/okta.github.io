@@ -5,7 +5,7 @@ author: mraible
 description: "This tutorial shows you how to build a microservices architecture with Spring Boot and Spring Cloud Config using JHipster."
 tags: [java, microservices, spring cloud config, jhipster]
 tweets:
-- "Spring Cloud Config allows you to provides externalized configuration for distributed systems. Learn how to use it in this tutorial from @mraible."
+- "Spring Cloud Config allows you to provide externalized configuration for distributed systems. Learn how to use it in this tutorial from @mraible."
 - "Are you interested in building microservices in @java? This post shows you how to do it with @java_hipster and use @springcloud config to provide distributed configuration."
 - "Step 1: develop a microservices architecture with @java and @java_hipster. Step 2: configure with @springcloud config. Step 3: profit!"
 image: blog/java-microservices-cloud-config/java-microservices-jhipster.jpg
@@ -16,7 +16,7 @@ Developing a microservice architecture with Java and Spring Boot is quite popula
 
 Spring Boot provided a much-needed spark to the Spring ecosystem when it was first released in 2014. Instead of making Java developers configure all aspects of their Spring beans, it provided "starters" that contained pre-configured beans with the default settings. This led to less Java code, and also provided the ability to override the defaults via an `application.properties` file. Yes, there are many ways to modify the defaults in a Spring Boot application, but I'll skip over that for now.
 
-In a link:/blog/2019/05/21/java-microservices-spring-boot-spring-cloud[previous tutorial on Java Microservices with Spring Boot and Spring Cloud], I showed how you can use OAuth 2.0 and OpenID Connect to secure everything. One of the problems with this example is that you have to configure the OIDC properties in each application. This can be a real pain if you have hundreds of microservices. Yes, you could define them as environment variables and this would solve the problem. However, if you have different microservices stacks using different OIDC client IDs, this approach will be difficult.
+In a link:/blog/2019/05/22/java-microservices-spring-boot-spring-cloud[previous tutorial on Java Microservices with Spring Boot and Spring Cloud], I showed how you can use OAuth 2.0 and OpenID Connect to secure everything. One of the problems with this example is that you have to configure the OIDC properties in each application. This can be a real pain if you have hundreds of microservices. Yes, you could define them as environment variables and this would solve the problem. However, if you have different microservices stacks using different OIDC client IDs, this approach will be difficult.
 
 == Java Microservices with Spring Cloud Config
 
