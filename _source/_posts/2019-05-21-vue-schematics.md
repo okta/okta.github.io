@@ -390,7 +390,7 @@ I hope you've enjoyed learning how to create Schematics for Vue. I found the API
 
 You can find the example schematic for this tutorial [on GitHub](https://github.com/oktadeveloper/vue-schematics-example).
 
-We've written a few blog posts on Schematics and Vue over on the Okta Developer blog. You might enjoy them too.
+We've written several posts on Schematics and Vue on this blog. You might enjoy them too.
 
 * [Use Angular Schematics to Simplify Your Life](/blog/2019/02/13/angular-schematics)
 * [Use Schematics with React and Add OpenID Connect Authentication in 5 Minutes](/blog/2019/03/05/react-schematics)
