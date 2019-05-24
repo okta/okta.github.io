@@ -43,6 +43,8 @@ Because sometimes you have to go back to basics.
 
 ## Securing Your Java and Spring Apps
 
+Security is what we do, so let us help make your apps more secure!
+
 * [10 Excellent Ways to Secure Your Spring Boot App](/blog/2018/07/30/10-ways-to-secure-spring-boot)
 * [A Quick Guide to Spring Boot Login Options](/blog/2019/05/15/spring-boot-login-options)
 * [A Quick Guide to OAuth 2.0 with Spring Security](/blog/2019/03/12/oauth2-spring-security-guide)
