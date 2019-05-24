@@ -39,7 +39,7 @@ Some of your favorite web apps probably seem like they do real-time processing. 
 In the link:/blog/2018/09/24/reactive-apis-with-spring-webflux[last post] from this series, we built a `/profiles` endpoint and a `/ws/profiles` WebSocket endpoint. To begin, clone the repository from GitHub:
 
 ----
-git clone git@github.com:oktadeveloper/okta-spring-webflux-react-example.git full-stack-reactive
+git clone https://github.com/oktadeveloper/okta-spring-webflux-react-example.git full-stack-reactive
 ----
 
 Rather than messing with security right away, you can disable Spring Security by commenting out its dependencies in `reactive-web/pom.xml`:
@@ -66,7 +66,7 @@ Rather than messing with security right away, you can disable Spring Security by
 
 You'll also need to comment out all the code in `reactive-web/src/main/java/.../SecurityConfiguration.java`.
 
-You'll need to have a MongoDB database instance running on your local machine on the default host, port, and accessible with the default username and password. If you're on a Mac, you can install it using `brew install mongodb`. If you're on Debian-based Linux distributions, you can use `apt install mongodb`.
+You'll need to have a MongoDB database instance running on your local machine on the default host, port, and accessible with the default username and password. If you're on a Mac, you can install it using `brew install mongodb`. If you're on Debian-based Linux distributions, you can use `apt install mongodb`. You can start MongoDB by running `mongod`.
 
 You can start the application using `./mvnw spring-boot:run` in the `reactive-web` directory. If you hit its `/profiles` endpoint with https://httpie.org/[HTTPie], you'll see there's no data.
 
@@ -148,9 +148,7 @@ Open a terminal window, navigate to the `full-stack-reactive` directory, and run
 
 [source,bash]
 ----
-npx create-react-app react-app
-cd react-app
-npm i typescript @types/node @types/react @types/react-dom @types/jest
+npx create-react-app react-app --typescript
 ----
 
 === Create a ProfileList Component to Fetch Data from Your Spring WebFlux API
@@ -1038,7 +1036,7 @@ git clone -b react-app https://github.com/oktadeveloper/okta-spring-webflux-reac
 ----
 
 I also created a screencast of all the code created in this series. Bonus: I used Java 11 _and_ Node 11 while creating it.
- 
+
 ++++
 <div style="text-align: center; margin-bottom: 10px">
 <iframe width="700" height="394" style="max-width: 100%" src="https://www.youtube.com/embed/1xpwYe154Ys" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
