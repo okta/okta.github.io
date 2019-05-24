@@ -581,7 +581,7 @@ Copy and paste the URI of your default authorization server, client ID, and the 
 [source,yaml]
 ----
 oidc:
-  issuer-uri: https://{yourOktaDomain}/default
+  issuer-uri: https://{yourOktaDomain}/oauth2/default
   client-id: {clientId}
   client-secret: {clientSecret}
 
