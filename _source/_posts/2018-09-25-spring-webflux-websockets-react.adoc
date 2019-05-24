@@ -149,6 +149,7 @@ Open a terminal window, navigate to the `full-stack-reactive` directory, and run
 [source,bash]
 ----
 npx create-react-app react-app --typescript
+cd react-app
 ----
 
 === Create a ProfileList Component to Fetch Data from Your Spring WebFlux API
@@ -214,7 +215,7 @@ class ProfileList extends Component<ProfileListProps, ProfileListState> {
 export default ProfileList;
 ----
 
-To make this component render when your app loads, rename `App.js` to `App.tsx` and replace its code with the following.
+To make this component render when your app loads, replace the code in `App.tsx` with the following.
 
 [source,tsx]
 ----
@@ -246,33 +247,13 @@ Before your React app can talk to your API, you'll need to proxy the requests fr
 "proxy": "http://localhost:8080"
 ----
 
-Restart your Spring Boot app and start your React app with `npm start`. You'll likely see the following error in your browser.
-
-----
-Type error: Cannot find global value 'Promise'.  TS2468
-----
-
-To fix this, modify `react-app/tsconfig.json` to specify you want to support ES6. You'll need to update the compiler options to specify a `lib` key and values.
-
-[source,json]
-----
-{
-  "compilerOptions": {
-    ...
-    "lib": ["es6", "dom"],
-    ...
-  },
-  ...
-}
-----
-
-Restart your React app and you should see a list of profiles at `http://localhost:3000`.
+Restart your Spring Boot app and start your React app with `npm start`. You should see a list of profiles at `http://localhost:3000`.
 
 image::{% asset_path 'blog/spring-full-stack-reactive/profile-list.png' %}[alt=Profile List,width=800,align=center]
 
 == Techniques for Streaming Data with React
 
-Displaying data from your reactive API is cool, but wouldn't it be cooler if your UI was updated when new profiles were added? There are several ways you can implement this behavior, and I'll show you a few options today. It's possible this could change if y'all send us some better ideas. ;)
+Displaying data from your reactive API is cool, but wouldn't it be cooler if your UI was updated when new profiles were added? There are several ways you can implement this behavior, and I'll show you a few options today. It's possible this could change if y'all send us some better ideas. 😉
 
 === Polling with Interval
 
@@ -385,7 +366,7 @@ You'll probably notice it's a jarring experience because the list flickers as mo
 A better way to do polling is with RxJS. You can install it using npm.
 
 ----
-npm i rxjs@6.3.3
+npm i rxjs@6.5.2
 ----
 
 You can replace the `fetchData()`, `componentDidMount()`, and `componentWillUnmount()` with a single `componentDidMount()` method.
@@ -485,6 +466,8 @@ module.exports = app => {
 }
 ----
 
+After adding this file, you will need to restart your client for it to take effect.
+
 WebSockets make it easy to get notifications from a WebFlux API, don't they?!
 
 === Listening for Server-Sent Events (SSE)
@@ -547,20 +530,20 @@ class ProfileList extends Component<ProfileListProps, ProfileListState> {
   // constructor()
 
   async componentDidMount() {
-      this.setState({isLoading: true});
-      const response = await fetch('http://localhost:3000/profiles');
-      const data = await response.json();
-      this.setState({profiles: data, isLoading: false});
+    this.setState({isLoading: true});
+    const response = await fetch('http://localhost:3000/profiles');
+    const data = await response.json();
+    this.setState({profiles: data, isLoading: false});
 
-      const eventSource = new EventSource('http://localhost:8080/sse/profiles'); // <1>
-      eventSource.onopen = (event: any) => console.log('open', event); // <2>
-      eventSource.onmessage = (event: any) => {
-        const profile = JSON.parse(event.data).source; // <3>
-        this.state.profiles.push(profile);
-        this.setState({profiles: this.state.profiles}); // <4>
-      };
-      eventSource.onerror = (event: any) => console.log('error', event);
-    }
+    const eventSource = new EventSource('http://localhost:8080/sse/profiles'); // <1>
+    eventSource.onopen = (event: any) => console.log('open', event); // <2>
+    eventSource.onmessage = (event: any) => {
+      const profile = JSON.parse(event.data).source; // <3>
+      this.state.profiles.push(profile);
+      this.setState({profiles: this.state.profiles}); // <4>
+    };
+    eventSource.onerror = (event: any) => console.log('error', event);
+  }
 
   // render()
 }
@@ -591,16 +574,16 @@ image::{% asset_path 'blog/spring-webflux-apis/okta-signup.png' %}[alt=Register 
 
 === Create an OIDC App in Okta
 
-{uri-okta-login}[Log in] to your Okta Developer account and navigate to **Applications** > **Add Application**. Click **Web** and click **Next**. Give the app a name you'll remember, specify `http://localhost:8080/login/oauth2/code/okta` and `http://localhost:3000` as Login redirect URIs and click **Done**. Then edit the project and enable "Implicit (Hybrid)" as a grant type (allow ID and access tokens) and click **Save**.
+{uri-okta-login}[Log in] to your Okta Developer account and navigate to **Applications** > **Add Application**. Click **Web** and click **Next**. Give the app a name you'll remember, specify `http://localhost:8080/login/oauth2/code/okta` and `http://localhost:3000/implicit/callback` as Login redirect URIs and click **Done**. Then edit the project and enable "Implicit (Hybrid)" as a grant type (allow ID and access tokens) and click **Save**.
 
 Copy and paste the URI of your default authorization server, client ID, and the client secret into `reactive-web/src/main/resources/application.yml`.
 
 [source,yaml]
 ----
 oidc:
-  issuer-uri: https://dev-737523.oktapreview.com/oauth2/default
-  client-id: 0oagbqbpk4qmJDpaS0h7
-  client-secret: dagQjCjCJ51Tvqz1jSlelcQ0xSkK5_VwuHmJK7MQ
+  issuer-uri: https://{yourOktaDomain}/default
+  client-id: {clientId}
+  client-secret: {clientSecret}
 
 spring:
   security:
@@ -641,28 +624,24 @@ In the previous post, you locked down the backend with Spring Security and OIDC.
 </dependency>
 ----
 
-To secure your front-end, you'll need to install Okta's React SDK, as well as react-router-dom.
+To secure your front-end, you'll need to install Okta's React SDK, as well as react-router-dom. Using OktaDev Schematics greatly simplifies this process.
 
 ----
-npm i @okta/okta-react@1.1.4 react-router-dom@4.3.1
-npm i -D @types/react-router-dom@4.3.1
+npm i @oktadev/schematics
+npm i -g @angular-devkit/schematics-cli
+schematics @oktadev/schematics:add-auth
 ----
 
-Create `src/okta.d.ts` with the following code so the Okta React SDK will work with TypeScript.
+When prompted, enter the same issuer and clientId you put into your `application.yml`.
 
-[source,typescript]
-----
-declare module '@okta/okta-react';
-----
-
-Modify `react-app/src/App.tsx` to add your Okta configuration and security-related React components.
+The `react-app/src/App.tsx` file will be modified to add your Okta configuration and security-related React components.
 
 [source,tsx]
 ----
 import React, { Component } from 'react';
-import Home from './Home';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 import { Security, ImplicitCallback } from '@okta/okta-react';
+import Home from './Home';
 
 const config = {
   issuer: 'https://{yourOktaDomain}/oauth2/default',
@@ -677,7 +656,7 @@ export interface Auth {
   getAccessToken(): string;
 }
 
-class App extends Component {
+class App extends React.Component {
 
   render() {
     return (
@@ -690,18 +669,22 @@ class App extends Component {
     );
   }
 }
+
+export default App;
+
 ----
 
-Create `react-app/src/Home.tsx` and use it as your landing page, showing login and logout buttons based on the person's authenticated status.
+A `Home` component will be created in `react-app/src/Home.tsx` to serve as your landing page. Search for `{/* Replace me with your root component. */}` and replace it with `<ProfileList auth={this.props.auth}/>`.
 
-.`Home.tsx`
+.`react-app/src/Home.tsx`
 ====
 [source,tsx]
 ----
 import React, { Component } from 'react';
-import './App.css';
 import { withAuth } from '@okta/okta-react';
 import { Auth } from './App';
+
+import './App.css';
 import logo from './logo.svg';
 import ProfileList from './ProfileList';
 
@@ -713,7 +696,7 @@ interface HomeState {
   authenticated: boolean;
 }
 
-class Home extends Component<HomeProps, HomeState> {
+export default withAuth(class Home extends Component<HomeProps, HomeState> {
   constructor(props: HomeProps) {
     super(props);
     this.state = {authenticated: false};
@@ -738,7 +721,7 @@ class Home extends Component<HomeProps, HomeState> {
   }
 
   async login() {
-    this.props.auth.login('/')
+    this.props.auth.login('/');
   }
 
   async logout() {
@@ -752,9 +735,7 @@ class Home extends Component<HomeProps, HomeState> {
       body = (
         <div className="Buttons">
           <button onClick={this.logout}>Logout</button>
-          <p>
-            <ProfileList auth={this.props.auth}/> // <1>
-          </p>
+          <ProfileList auth={this.props.auth}/> // <1>
         </div>
       );
     } else {
@@ -775,9 +756,7 @@ class Home extends Component<HomeProps, HomeState> {
       </div>
     );
   }
-}
-
-export default withAuth(Home);
+});
 ----
 <1> The `ProfileList` component will need to access `props.auth` to get an access token, so pass it in.
 ====
@@ -875,6 +854,7 @@ public class SecurityConfiguration {
 
     @Bean // <3>
     public SecurityWebFilterChain securityWebFilterChain(ServerHttpSecurity http) {
+        // @formatter:off
         return http
             .csrf()
                 .csrfTokenRepository(CookieServerCsrfTokenRepository.withHttpOnlyFalse()) // <4>
@@ -887,6 +867,7 @@ public class SecurityConfiguration {
                 .and()
             .oauth2ResourceServer()
                 .jwt().and().and().build();
+        // @formatter:on
     }
 
     @Bean // <6>
@@ -1000,7 +981,7 @@ async componentDidMount() {
 
 After making these changes, you should have an app that gets real-time updates from Spring WebFlux when new profiles are added.
 
-You can prove this works by creating an access token using https://oidcdebugger.com/[OpenID Connect <debugger/>]. To use this, I had to tweak my application to allow Implicit flow with an access token, add `https://oidcdebugger.com/debug` as a login redirect URI, and manually enter a state variable. Then I was able to modify `create-stream.sh` to use the access token when creating profiles.
+You can prove this works by creating an access token using https://oidcdebugger.com/[OpenID Connect <debugger/>]. To use this, I had to add `https://oidcdebugger.com/debug` as a login redirect URI, and manually enter a state variable. Then I was able to modify `create-stream.sh` to use the access token when creating profiles.
 
 [source,bash]
 ----
@@ -1055,4 +1036,5 @@ If you have any questions, please leave a comment below, ask us on Twitter (http
 
 **Changelog:**
 
+* May 24, 2019: Updated to use Spring Boot 2.1.5 and React 16.8.6. You can see the example app changes in https://github.com/oktadeveloper/okta-spring-webflux-react-example/pull/6[okta-spring-webflux-react-example#6]; changes to this post can be viewed in https://github.com/okta/okta.github.io/pull/2459[okta.github.io#2459].
 * Nov 5, 2018: Updated to use the Spring Boot 2.1 GA release and Create React App 2.1.0. You can see the example app changes in https://github.com/oktadeveloper/okta-spring-webflux-react-example/pull/6[okta-spring-webflux-react-example#6]; changes to this post can be viewed in https://github.com/okta/okta.github.io/pull/2459[okta.github.io#2459].
