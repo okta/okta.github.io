@@ -52,7 +52,11 @@ OAuth (and by extension OIDC) use a number of defined `Flows` to manage the inte
 
 ## Set Up Your Okta Org for OIDC & OAuth 2.0
 
-In this section, you're going to create an OpenID Connect application in Okta. Then, 
+In this section, you're going to create an OpenID Connect application in Okta. Then, you'll exercise the OIDC application by deploying an application to your Heroku account. No coding needed! (That will come later)
+
+- create web app in okta
+    - capture client id and secret
+- deploy heroku app: 
 
 ## Set Up Inline Token Hooks
 
