@@ -11,9 +11,23 @@ tweets:
 image: blog/featured/okta-java-short-skew.jpg
 ---
 
--- openid connect & oauth, Okta, hooks --
+OpenID Connect and OAuth 2.0 are already recognized as the best way to incorporate authentication and authorization into modern web applications.
+
+Okta has enhanced the capabilities of these standards by introducing its Inline Hooks feature. There are a number of different types of inline hooks that Okta supports. In this post, I focus on hooks that allow you to patch information into the tokens you get back from okta via OIDC and OAuth.
+
+You'll first set up an OIDC application in Okta and be able to see the types of tokens you get back. Then, you'll configure a Spring Boot API app that allows you to register you're favorite beers (this is based on [previous post]() from my friend Matt Raible who is really into beers). This Spring Boot app also has API endpoints to register token hooks with Okta and to service token patch requests from Okta. Finally, you'll see that your favorite beers are now included in the payload of a token thanks to the hooks you registered.
+
+To get ready for the hands-on parts of this post, set yourself up with the following:
+
+* Create a free Okta developer org at [https://developer.okta.com/signup/](https://developer.okta.com/signup/)
+* Create a free Heroku account at [https://signup.heroku.com/](https://signup.heroku.com/)
+* Install [HTTPie](https://httpie.org), a modern curl replacement for interacting with API endpoints later
+
+To start, let's take a step back and introduce OIDC and OAuth.
 
 ## Three Minute Overview of OpenID Connect and OAuth 2.0
+
+// TODO - This is copied from a previous post verbatim. Should I change?
 
 In the beginning there were siloed web sites that didn't talk to each other, and it was sad.
 
@@ -38,7 +52,21 @@ OAuth (and by extension OIDC) use a number of defined `Flows` to manage the inte
 
 ## Set Up Your Okta Org for OIDC & OAuth 2.0
 
+In this section, you're going to create an OpenID Connect application in Okta. Then, 
+
 ## Set Up Inline Token Hooks
+
+```
+ngrok http 8080
+```
+
+```
+http \
+    --auth admin@okta.com:wKq83CcoiPbM7TT-jnEPVas9mc6BWEv9SMWm0cVg \
+    localhost:8080/api/hooks/create-hook \
+    oktaOrg=https://oktane19-madly-fear-defeated.oktapreview.com \
+    hookUrl=https://37fd87f0.ngrok.io
+```
 
 ## Get Your Favorite Beers Patched into Your ID Token
 
