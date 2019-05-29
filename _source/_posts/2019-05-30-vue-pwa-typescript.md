@@ -343,7 +343,7 @@ This completes the basic application. To try it out, you can run the command:
 npm run serve
 ```
 
-Open a browser and navigate to `http://localhost:8080`. You can search for a book and click on the eye icon to look at the book’s details.
+Open a browser and navigate to `http://localhost:8080`. You can search for a book and click on the eye icon to look at the book's details.
 
 {% img blog/vue-pwa/book-details.png alt:"Book Details" width:"600" %}{: .center-image }
 
