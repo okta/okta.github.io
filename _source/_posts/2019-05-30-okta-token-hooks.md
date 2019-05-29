@@ -360,12 +360,24 @@ The last step to tie this all together, is to configure your Authorization Serve
 
 Back in your admin console, Click **Classic UI > Developer Console** in the upper left.
 
-Click **API > Authorization Servers** from the top level menu. Click **default**.
+Click **API > Authorization Servers** from the top level menu. Click **default**. Click **Access Policies**. Scroll down and click the pencil icon next to the `Default Policy Rule`.
 
+Select **APIAM Token Hook with DB lookup** from the `Use this inline hook` menu.
 
+{% img blog/token-hooks/auth_server_rule.png alt:"auth server rule" width:"800" %}{: .center-image }
 
+Click **Update Rule**.
 
-https://developer.okta.com/docs/api/resources/inline-hooks/#supported-inline-hook-types
+Open up a browser tab and navigate to `localhost:4040`. This is the ngrok monitoring interface.
+
+Now, you can return to the OIDC playground from before. Close the results tab with the ID Token and Access Token. Click the link once again from the playground page. Click **Validate ID Token** and et voilà - you'll see the `beers` claim with any beers you've added to your favorites.
+
+{% img blog/token-hooks/altered_id_token.png alt:"id tokens" width:"800" %}{: .center-image }
+
+Switch back to the ngrok monitoring tab and you can see the request from okta and the response from the Spring Boot app.
+
+{% img blog/token-hooks/hooks_request.png alt:"id tokens" width:"800" %}{: .center-image }
+{% img blog/token-hooks/hooks_response.png alt:"id tokens" width:"800" %}{: .center-image }
 
 ## Learn More About Secure Single Sign-on, OAuth 2.0, and Spring Boot
 
