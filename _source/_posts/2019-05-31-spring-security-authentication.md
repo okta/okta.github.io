@@ -5,9 +5,9 @@ author: moksamedia
 description: "In this tutorial, you are going to build a very simple Spring Boot app that starts with basic-auth and progresses through form-based authentication, custom form-based authentication, and OAuth 2.0 / OpenID Connect using Okta as the OAuth provider"
 tags: [spring, spring boot, spring security, security]
 tweets:
-- ""
-- ""
-- ""
+- "Go from basic, to form based, to OpenID Connect authentication with Spring Security"
+- "Dig this new post from @moksamedia for @oktadev on Simple Authentication with Spring Security"
+- "@moksamedia explains how to go from basic authentication all the way to OpenID Connect in his new post for @oktadev"
 image: blog/featured/okta-java-bottle-headphones.jpg
 ---
 
@@ -19,7 +19,7 @@ In this tutorial, you are going to build a very simple Spring Boot app that star
 
 This tutorial looks specifically at authentication, leaving authorization for another day. Authentication answers the question: who is making the request. Authorization comes after authentication and answers the question: is the authenticated user allowed to make the specific request?
 
-## Requirements and Assumptions Ïor Authentication with Spring Security
+## Requirements and Assumptions for Authentication with Spring Security
 
 This tutorial assumes a basic familiarity with Java and Spring Boot. The project utilizes the Gradle build system (because I find Groovy DSL endlessly preferable to XML). You do not need Gradle installed, however, since all projects include the Gradle wrapper.
 
