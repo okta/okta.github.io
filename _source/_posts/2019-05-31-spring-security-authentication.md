@@ -38,7 +38,7 @@ Our API enables you to:
 * Secure your application with [multi-factor authentication](https://developer.okta.com/use_cases/mfa/)
 * And much more! Check out our [product documentation](https://developer.okta.com/documentation/) for more information
 
-[Register for a forever-free developer account](https://developer.okta.com/signup/), and when you’re done, come back to learn more about building authentication with Spring Boot and Spring Security.
+[Register for a forever-free developer account](https://developer.okta.com/signup/), and when you're done, come back to learn more about building authentication with Spring Boot and Spring Security.
 
 Other than that, you need a computer and a web browser. And if you didn't have those, well, how would you be here? 
 
@@ -515,7 +515,7 @@ You can also try out the[http://localhost:8080/attributes](http://localhost:8080
 
 In this tutorial, you went through a selection of Spring Boot and Spring Security authentication methods. You started with HTTP basic; moved on to form-based auth with the auto-generated form; and then customized the app to use a Thymeleaf template for the login form. Next, you implemented an OAuth/OIDC single sign-on app using Okta and Spring Boot.
 
-If you’d like to learn more about Spring Boot, Spring Security, or secure authentication, check out any of these great tutorials:
+If you'd like to learn more about Spring Boot, Spring Security, or secure authentication, check out any of these great tutorials:
 
 -   [Get Started with Spring Boot, OAuth 2.0, and Okta](/blog/2017/03/21/spring-boot-oauth)
 -   [Add Single Sign-On to Your Spring Boot Web App in 15 Minutes](/blog/2017/11/20/add-sso-spring-boot-15-min)
