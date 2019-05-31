@@ -144,7 +144,6 @@ public class WebController {
 The web controller file has a little more action. This is where the only HTTP endpoint of the project is defined. This file defines a simple home controller that returns a text string. 
 
 The `@Controller` annotation tells Spring that the file is defining web controller endpoints. The `@RequestMapping` annotation defines the mapping between the HTTP requests and the controller methods. And the `@ResponseBody` annotation tells Spring that the method is going to return the request body directly as a String, as opposed to returning the name of a template file.
-The `@Controller` annotation tells Spring that the file is defining web controller endpoints. The `@RequestMapping` annotation defines the mapping between the HTTP requests and the controller methods. And the `@ResponseBody` annotation tells Spring that the method is going to return the request body directly as a String, as opposed to returning the name of a template file.
 
 The last file is where all of the security is defined. Cleverly it's named `SecurityConfiguration.java`.
 
