@@ -2,12 +2,12 @@
 layout: blog_post
 title: "Simple Authentication with Spring Security"
 author: moksamedia
-description: "In this tutorial, you are going to build a very simple Spring Boot app that starts with basic-auth and progresses through form-based authentication, custom form-based authentication, and OAuth 2.0 / OpenID Connect using Okta as the OAuth provider"
-tags: [spring, spring boot, spring security, security]
+description: "In this tutorial, you'll build a very simple Spring Boot app that uses auth, form-based authentication, and OAuth 2.0 / OpenID Connect."
+tags: [java, spring, spring boot, spring security, security]
 tweets:
-- "Go from basic, to form based, to OpenID Connect authentication with Spring Security"
-- "Dig this new post from @moksamedia for @oktadev on Simple Authentication with Spring Security"
-- "@moksamedia explains how to go from basic authentication all the way to OpenID Connect in his new post for @oktadev"
+- "Go from basic, to form based, to OpenID Connect authentication with @SpringSecurity."
+- "Dig this new post from Andrew on Simple Authentication with @springboot and Spring Security."
+- "Andrew explains how to go from basic authentication all the way to OpenID Connect in his new @springboot tutorial."
 image: blog/featured/okta-java-bottle-headphones.jpg
 ---
 
@@ -15,7 +15,7 @@ Authentication is vital to all but the most basic web applications. Who is makin
 
 Spring Boot with Spring Security is a powerful combination for web application development. With relatively few lines of code, you can implement a variety of authentication systems. These systems are tested, updated, and implemented according to specifications by experts. 
 
-In this tutorial, you are going to build a very simple Spring Boot app that starts with basic-auth and progresses through form-based authentication, custom form-based authentication, and OAuth 2.0 / OpenID Connect using Okta as the OAuth provider. We will also look at SAML auth. The Spring Security SAML spec, however, is currently in transition and not updated to the most current version of Spring Boot.
+In this tutorial, you are going to build a very simple Spring Boot app that starts with basic-auth and progresses through form-based authentication, custom form-based authentication, and OAuth 2.0 / OpenID Connect using Okta as the OAuth provider. We will also look at SAML auth. The Spring Security SAML implementation, however, is currently in transition and not updated to the most current version of Spring Boot.
 
 This tutorial looks specifically at authentication, leaving authorization for another day. Authentication answers the question: who is making the request. Authorization comes after authentication and answers the question: is the authenticated user allowed to make the specific request?
 
@@ -25,13 +25,14 @@ This tutorial assumes a basic familiarity with Java and Spring Boot. The project
 
 You do not need a comprehensive understanding of OAuth 2.0 and OpenID Connect (OIDC) - thankfully, because it's complex, detailed, and sprawling at times. I'm still working to understand many aspects of it. However, a basic understanding would be helpful. If you want to go deeper, there are some links at the end of the article that can help you.
 
-Very (very) briefly, OAuth 2.0 is the second major version of Open Authorization, an open-source authorization specification. From [the OAuth spec committee: "OAuth 2.0 focuses on client developer simplicity while providing specific authorization flows for web applications, desktop applications, mobile phones, and living room devices." Notice two things: 1) it's authorization only, so no authentication; and 2) it's a specification, so there's no implementation. OIDC builds on top of OAuth 2.0 to add an identity layer (authentication) using a well-defined token. 
+Very (very) briefly, OAuth 2.0 is the second major version of Open Authorization, an open-source authorization specification. From [the OAuth spec committee](https://oauth.net/2/): "OAuth 2.0 focuses on client developer simplicity while providing specific authorization flows for web applications, desktop applications, mobile phones, and living room devices." Notice two things: 1) it's authorization only, so no authentication; and 2) it's a specification, so there's no implementation. OIDC builds on top of OAuth 2.0 to add an identity layer (authentication) using a well-defined token. 
 
 ### Spring Security Authentication with Okta
 
 Okta is an identity access and management company that provides a whole host of software-as-service identity products. We have an implementation of OAuth 2.0 and OpenID Connect that makes adding single sign-on (SSO) to a Spring Boot app easy.
 
 Our API enables you to:
+
 * [Authenticate](/product/authentication/) and [authorize](/product/authorization/) your users
 * Store data about your users
 * Perform password-based and [social login](https://developer.okta.com/authentication-guide/social-login/)
@@ -44,7 +45,11 @@ Other than that, you need a computer and a web browser. And if you didn't have t
 
 ## Download the Spring Security Example Apps
 
-Go ahead and download the example apps from the [GitHub repository](https://github.com/oktadeveloper/okta-spring-security-authentication-example). 
+Go ahead and download the example apps from this tutorial's [GitHub repository](https://github.com/oktadeveloper/okta-spring-security-authentication-example).
+
+```shell
+git clone https://github.com/oktadeveloper/okta-spring-security-authentication-example.git
+```
 
 In the project you will see three directories:
 
@@ -65,13 +70,13 @@ plugins {
 }  
   
 apply plugin: 'io.spring.dependency-management'  
-  
+
 group = 'com.okta.springsecurityauth'  
 version = '0.0.1-SNAPSHOT'  
 sourceCompatibility = '1.8'  
   
 repositories {  
-   mavenCentral()  
+  mavenCentral()  
 }  
   
 dependencies {  
@@ -83,11 +88,13 @@ dependencies {
 ```
 
 This line sets the Spring Boot version:
+
 ```groovy
 id 'org.springframework.boot' version '2.1.5.RELEASE'  
 ```
 
-These are the two dependencies that include the Spring Security and Spring Boot Web frameworks.
+These are the two dependencies that include Spring Security and Spring MVC.
+
 ```groovy
 implementation 'org.springframework.boot:spring-boot-starter-security'  
 implementation 'org.springframework.boot:spring-boot-starter-web' 
@@ -96,6 +103,7 @@ implementation 'org.springframework.boot:spring-boot-starter-web'
 The rest is pretty much boilerplate.
 
 Here is the main application file (`src/main/java/com/okta/springsecurityauth/Application.java`).
+
 ```java
 package com.okta.springsecurityauth;  
   
@@ -113,7 +121,7 @@ public class Application {
 
 This is the entry point for the Java application. The main thing to note is how little is there. The `@SpringBootApplication` annotation tells Spring to bootstrap in all of the Spring Boot goodness.
 
-Next take a look at the WebController, `src/main/java/com/okta/springsecurityauth/WebController`.
+Next take a look at the WebController, `src/main/java/com/okta/springsecurityauth/WebController.java`.
 
 ```java
 package com.okta.springsecurityauth;  
@@ -130,14 +138,15 @@ public class WebController {
     public String index() {
         return "Welcome home!";
     }
-
 }
 ```
+
 The web controller file has a little more action. This is where the only HTTP endpoint of the project is defined. This file defines a simple home controller that returns a text string. 
 
 The `@Controller` annotation tells Spring that the file is defining web controller endpoints. The `@RequestMapping` annotation defines the mapping between the HTTP requests and the controller methods. And the `@ResponseBody` annotation tells Spring that the method is going to return the request body directly as a String, as opposed to returning the name of a template file.
+The `@Controller` annotation tells Spring that the file is defining web controller endpoints. The `@RequestMapping` annotation defines the mapping between the HTTP requests and the controller methods. And the `@ResponseBody` annotation tells Spring that the method is going to return the request body directly as a String, as opposed to returning the name of a template file.
 
-The last file is where all of the security is defined. Cleverly its named `SecurityConfiguration,java`.
+The last file is where all of the security is defined. Cleverly it's named `SecurityConfiguration.java`.
 
 Take a look, `src/main/java/com/okta/springsecurityauth/SecurityConfiguration.java`
 
@@ -180,7 +189,7 @@ Let's give it a try! From a terminal, go to the root directory of the project.
 
 Run the project using: `./gradlew bootRun`.
 
-Navigate to http://localhost:8080
+Navigate to `http://localhost:8080`.
 
 You'll see the browser-generated login form. Enter the credentials `user` and `pass`. You'll see the wonderful success page that says, "Welcome home!"
 
@@ -210,7 +219,6 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     }  
 
     ...
-
 }
 ```
 
@@ -220,7 +228,7 @@ Run it using `./gradlew bootRun`.
 
 You'll see the auto-generated Spring Boot login form.
 
-{% img blog/spring-boot-authentication/image1.png alt:"Login Page" width:"400" %}{: .center-image }
+{% img blog/spring-boot-authentication/form-login.png alt:"Form Login" width:"400" %}{: .center-image }
 
 But what if you want to style your own custom form instead of using the Spring-generated one? It's not much more work.
 
@@ -357,11 +365,11 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     }  
 
 ...  
-
 }
 ```
 
 These three lines were added:
+
 ```java
 .loginPage("/login.html")  
 .failureUrl("/login-error.html")  
@@ -374,9 +382,7 @@ Run the app again using `./gradlew bootRun`.
 
 This time you'll see the custom login form.
 
-{% img blog/spring-boot-authentication/image2.png alt:"Custom Login Page" width:"400" %}{: .center-image }
-
-
+{% img blog/spring-boot-authentication/custom-form-login.png alt:"Custom Login Page" width:"450" %}{: .center-image }
 
 ## It's (almost) SAML Time!
 
@@ -384,27 +390,27 @@ The Spring Security SAML extension is currently in flux. There are some unoffici
 
 From [the Spring Security SAML GitHub page](https://github.com/spring-projects/spring-security-saml/tree/develop):
 
-This project is being rewritten. There is a base implementation in the  [develop](https://github.com/spring-projects/spring-security-saml/tree/develop)  including milestone releases in the  [milestone](https://repo.spring.io/milestone/org/springframework/security/extensions/spring-security-saml2-core/)  repository.
-
-In the  [develop-3.0](https://github.com/spring-projects/spring-security-saml/tree/develop)  branch we are creating a solution that builds on top of the milestones and is better aligned with Spring Security. The intent with this branch is to merge it with the  [Spring Security](https://github.com/spring-projects/spring-security)  project and release as part of Spring Security core.
-
-For that reason, we will not be publishing any official releases of the 2.0.0 milestones, but will maintain it until all feature functionality that exists in the milestones are part of Spring Security.
+> This project is being rewritten. There is a base implementation in the  [develop](https://github.com/spring-projects/spring-security-saml/tree/develop)  including milestone releases in the  [milestone](https://repo.spring.io/milestone/org/springframework/security/extensions/spring-security-saml2-core/)  repository.
+> 
+> In the  [develop-3.0](https://github.com/spring-projects/spring-security-saml/tree/develop)  branch we are creating a solution that builds on top of the milestones and is better aligned with Spring Security. The intent with this branch is to merge it with the  [Spring Security](https://github.com/spring-projects/spring-security)  project and release as part of Spring Security core.
+> 
+> For that reason, we will not be publishing any official releases of the 2.0.0 milestones, but will maintain it until all feature functionality that exists in the milestones are part of Spring Security.
  
 If you want to venture into the current state of Spring Boot SAML, the [Spring SAML Extension Docs](https://docs.spring.io/spring-security-saml/docs/1.0.x-SNAPSHOT/reference/htmlsingle/) are a good place to start.
 
-Matt Raible at Okta also has [a great tutorial](https://developer.okta.com/blog/2017/03/16/spring-boot-saml) for implementing SAML with Spring Boot 1.x. 
+Matt Raible at Okta also has [a great tutorial](/blog/2017/03/16/spring-boot-saml) for implementing SAML with Spring Boot 1.x. 
 
 Vincenzo De Notari has [an example Service Provider implementation](https://github.com/vdenotaris/spring-boot-security-saml-sample) using SAML 2.0 and Spring Boot 2.1.3.
 
-Note: If you want to test out SAML with Okta, you'll need to request a trial of [Okta's Enterprise Edition](https://www.okta.com/integrate/signup/).
+**NOTE:** If you want to test out SAML with Okta, you'll need to request a trial of [Okta's Enterprise Edition](https://www.okta.com/integrate/signup/).
 
 ## Add OAuth 2.0 + OpenID Connect Authentication
-Once your in the developer.okta.com dashboard, create an OIDC Application:
+
+Once you're in the [developer.okta.com](https://developer.okta.com) dashboard, create an OIDC Application:
 
  - From top-menu, click on **Applications**
 
-{% img blog/spring-boot-authentication/image3.png alt:"Add OIDC App" width:"600" %}{: .center-image }
-
+{% img blog/spring-boot-authentication/dashboard-applications.png alt:"Add OIDC App" width:"800" %}{: .center-image }
 
  - Click green **Add Applications** button
  - Click **Web** application type, and **Next**
@@ -420,16 +426,16 @@ Open the `oauth-okta` directory from the example repository.
 
 Before you do anything else, you need to update the `src/main/resources/application.yml` file. You need to fill in three values:
 
- 1. Okta preview URL, something like `https://dev-123456.oktapreview.com/oauth2/default`
+ 1. Okta URL, something like `https://dev-123456.okta.com/oauth2/default`
  2. Client ID (from the OIDC app you just created)
  3. Client Secret (also from the OIDC app you just created)
 
 ```yaml
 okta:  
   oauth2:  
-    issuer: https://{{yourOktaPreviewUrl}}/oauth2/default  
-    client-id: {{yourClientID}}  
-    client-secret: {{yourClientSecret}}  
+    issuer: https://{yourOktaDomain}/oauth2/default  
+    client-id: {yourClientID}
+    client-secret: {yourClientSecret} 
 spring:  
   thymeleaf:  
     cache: false
@@ -446,7 +452,7 @@ dependencies {
 }
 ```
 
-You'll notice one new dependency as well as no longer needing spring-boot-starter-security:
+You'll notice one new dependency as well as no longer needing `spring-boot-starter-security`:
 
  - `okta-spring-boot-starter`
  
@@ -495,13 +501,11 @@ You'll notice that there is no `SecurityConfiguration.java` file. In this simple
 
 Great! Now give it a try. Run the app in the `oauth-okta` directory using `./gradlew bootRun`.
 
-Navigate to [http://localhost:8080/](http://localhost:8080/)
+Navigate to `http://localhost:8080/`.
 
 You may need to use an incognito window or log out of the Okta developer dashboard if you want to see Okta's hosted login screen.
 
-{% img blog/spring-boot-authentication/image4.png alt:"OAuth Sign-in" width:"400" %}{: .center-image }
-
-
+{% img blog/spring-boot-authentication/okta-sign-in.png alt:"Okta Sign-In" width:"500" %}{: .center-image }
 
 Log in with your Okta login, and you'll be taken to a screen that says something like:
 
@@ -509,11 +513,13 @@ Log in with your Okta login, and you'll be taken to a screen that says something
 Welcome, Andrew Hughes
 ```
 
-You can also try out the[http://localhost:8080/attributes](http://localhost:8080/attributes) endpoint and the [http://localhost:8080/authorities](http://localhost:8080/authorities) endpoint.
+You can also try out the `http://localhost:8080/attributes` endpoint and the `http://localhost:8080/authorities` endpoint.
 
 ## Finish Up Your Spring Boot + Spring Security App with Authentication
 
 In this tutorial, you went through a selection of Spring Boot and Spring Security authentication methods. You started with HTTP basic; moved on to form-based auth with the auto-generated form; and then customized the app to use a Thymeleaf template for the login form. Next, you implemented an OAuth/OIDC single sign-on app using Okta and Spring Boot.
+
+You can find the source code for all the examples in this tutorial [on GitHub](https://github.com/oktadeveloper/okta-spring-security-authentication-example).
 
 If you'd like to learn more about Spring Boot, Spring Security, or secure authentication, check out any of these great tutorials:
 
@@ -524,4 +530,4 @@ If you'd like to learn more about Spring Boot, Spring Security, or secure authen
 
 If you want to dive deeper, take a look at the  [Okta Spring Boot Starter GitHub page](https://github.com/okta/okta-spring-boot).
 
-If you have any questions about this post, please add a comment below. For more awesome content, follow  [@oktadev](https://twitter.com/oktadev)  on Twitter, like us  [on Facebook](https://www.facebook.com/oktadevelopers/), or subscribe to  [our YouTube channel](https://www.youtube.com/channel/UC5AMiWqFVFxF1q9Ya1FuZ_Q).
+If you have any questions about this post, please add a comment below. For more awesome content, follow  [@oktadev](https://twitter.com/oktadev)  on Twitter, like us [on Facebook](https://www.facebook.com/oktadevelopers/), or subscribe to  [our YouTube channel](https://www.youtube.com/c/oktadev).
