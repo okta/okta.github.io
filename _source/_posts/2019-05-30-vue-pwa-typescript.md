@@ -463,7 +463,7 @@ Then start the server by running:
 http-server-spa dist index.html 8080
 ```
 
-Open the Chrome browser and navigate to `http://127.0.0.1:8080`. You can install the [Lighthouse extension](https://chrome.google.com/webstore/detail/lighthouse/blipmdconlkpinefehnmjammfjpmpbjk?hl=en) or use the **Audits** tab in Chrome Developer Tools to run Lighthouse.
+Open the Chrome browser and navigate to `http://localhost:8080`. You can install the [Lighthouse extension](https://chrome.google.com/webstore/detail/lighthouse/blipmdconlkpinefehnmjammfjpmpbjk?hl=en) or use the **Audits** tab in Chrome Developer Tools to run Lighthouse.
 
 If you have the extension installed, you will notice a little Lighthouse icon in the navigation bar. If you click on it a little panel will open. Select **Generate Report** and Lighthouse will start analyzing your application. There are a number of checks and you should get a score of 92 on the Progressive Web Application score. If you served the application using a secure server through HTTPS protocol you would likely score 100.
 
