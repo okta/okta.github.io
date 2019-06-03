@@ -31,7 +31,7 @@ This installs the global `vue` command. Depending on your system, you might have
 vue create vue-books-pwa
 ```
 
-You will be prompted for a number of choices. In the first question, select `Manually select features`. This is important because you want to include the PWA features that Vue can install into a new application. 
+You will be prompted for a number of choices. In the first question, select **Manually select features**. This is important because you want to include the PWA features that Vue can install into a new application. 
 
 On the following prompt, you are presented with a number of choices. Make sure you select the **Progressive Web App (PWA) Support** and **Router** choices. You will be implementing the client using TypeScript, so you will also need to select the **TypeScript** option. Keep the **Babel** option selected. You may also want to deselect the **Linter** choice for this tutorial. In larger applications, I would suggest keeping the linter switched on to ensure a consistent code style across your application. Altogether the choices should look as follows.
 
@@ -56,9 +56,9 @@ A `.vue` file can contain three sections identified by XML tags: `<template>`, `
 
 * `<template>` - contains the HTML template that is used to render the component
 * `<style>` - contains any CSS that will be applied specifically to that component
-* `<script>` - contains the component's logic implemented in JavaScript code
+* `<script lang="ts">` - contains the component's logic implemented in TypeScript code
 
-Before you start, implementing the components for the Book application, you will need to install some additional libraries that will be using throughout this tutorial. Navigate into the newly created `VueBooksPWA` directory and issue the following command.
+Before you start, implementing the components for the Book application, you will need to install some additional libraries that will be using throughout this tutorial. Navigate into the newly created `vuew-books-pwa` directory and run the following command.
 
 ```bash
 cd vue-books-pwa
@@ -77,7 +77,7 @@ To make use of the Material Design CSS styles and icons, open `/public/index.htm
 <link href="https://fonts.googleapis.com/icon?family=Ubuntu|Material+Icons" rel="stylesheet">
 ```
 
-The `index.html` file contains the application's base HTML container into which Vue will render its output. The contents of the `/public` directory are served as static assets. The directory also contains `favicon.ico` which you might want to change for production.
+The `public/index.html` file contains the application's base HTML container into which Vue will render its output. The contents of the `/public` directory are served as static assets. The directory also contains `favicon.ico` which you might want to change for production.
 
 The remainder of the application is contained in the `/src` directory. This is where all the code of your Vue components, their templates, and styles should be stored. In this directory, `src/main.ts` serves as the main entry point to the Vue application. Open this file and paste the following content into it after the import statements, keeping any default contents.
 
@@ -98,28 +98,28 @@ The main component of the application is defined in `src/App.vue`. This file act
 ```html
 <template>
   <div id="app">
-  <md-toolbar color="primary" class="expanded-toolbar">
-    <span class="branding">
-      <md-button><router-link to="/">{{title}}</router-link></md-button>
-      <md-button><router-link to="/"><md-icon>home</md-icon></router-link></md-button>
-    </span>
-    <md-menu md-direction="bottom-start">
-      <md-button md-menu-trigger><md-icon>menu</md-icon></md-button>
-      <md-menu-content>
-        <md-menu-item><router-link to="/">Home</router-link></md-menu-item>
-        <md-menu-item><router-link to="/search">Search</router-link></md-menu-item>
-      </md-menu-content>
-  </md-menu>
-  </md-toolbar>
-  <router-view/>
+    <md-toolbar color="primary" class="expanded-toolbar">
+      <span class="branding">
+        <md-button><router-link to="/">{{title}}</router-link></md-button>
+        <md-button><router-link to="/"><md-icon>home</md-icon></router-link></md-button>
+      </span>
+      <md-menu md-direction="bottom-start">
+        <md-button md-menu-trigger><md-icon>menu</md-icon></md-button>
+        <md-menu-content>
+          <md-menu-item><router-link to="/">Home</router-link></md-menu-item>
+          <md-menu-item><router-link to="/search">Search</router-link></md-menu-item>
+        </md-menu-content>
+      </md-menu>
+    </md-toolbar>
+    <router-view/>
   </div>
 </template>
 
-<script>
-export default {
-  data: () => ({
-    title: "Vue Books"
-  })
+<script lang="ts">
+import Vue from 'vue'
+
+export default class App extends Vue {
+  title = "Vue Books";
 }
 </script>
 
@@ -144,10 +144,10 @@ The `<md-topbar>` element in the template defines the application's top bar. It 
 
 ```html
 <template>
-<div class="home">
-  <h1>Vue Books PWA</h1>
-  <h2>A simple progressive web application</h2>
-</div>
+  <div class="home">
+    <h1>Vue Books PWA</h1>
+    <h2>A simple progressive web application</h2>
+  </div>
 </template>
 ```
 
@@ -174,7 +174,7 @@ The default application created by `vue-cli` contains the `About.vue` component.
         <md-table-head>Pub. Year</md-table-head>
         <md-table-head>View</md-table-head>
       </md-table-row>
-      <md-table-row v-for="book in books">
+      <md-table-row v-for="book in books" v-bind:key="book.key">
         <md-table-cell>{{book.title}}</md-table-cell>
         <md-table-cell>{{book.author_name && book.author_name.join(', ')}}</md-table-cell>
         <md-table-cell md-numeric>{{book.first_publish_year}}</md-table-cell>
@@ -184,32 +184,28 @@ The default application created by `vue-cli` contains the `About.vue` component.
   </div>
 </template>
 
-<script>
-const baseUrl = 'http://openlibrary.org';
+<script lang="ts">
+import { Component, Vue } from 'vue-property-decorator';
+import axios from 'axios';
 
-const searchData = {
-  books: [],
-  query: ''
-}
+@Component
+export default class Search extends Vue {
+  baseUrl = 'http://openlibrary.org';
+  books = [];
+  query = '';
 
-export default {
-  data: function (){
-    return searchData;
-  },
-  methods: {
-    search() {
-      this.$http.get(baseUrl+'/search.json', {params: {title: this.query}}).then((response) => {
-        this.books = response.data.docs;
-      })
-    },
-    viewDetails(book) {
-      this.$router.push({ path: 'details', query: {
-        title: book.title,
-        authors: book.author_name && book.author_name.join(', '),
-        year: book.first_publish_year,
-        cover_id: book.cover_edition_key
-      }});
-    }
+  async search() {
+    const response = await axios.get(this.baseUrl + `/search.json?title=${this.query}`);
+    this.books = await response.data.docs;
+  }
+
+  viewDetails(book: any) {
+    this.$router.push({ path: 'details', query: {
+      title: book.title,
+      authors: book.author_name && book.author_name.join(', '),
+      year: book.first_publish_year,
+      cover_id: book.cover_edition_key
+    }});
   }
 }
 </script>
@@ -241,7 +237,7 @@ export default {
 
 This file contains quite a lot, so let's discuss each section one by one. The top part contains the HTML template. This consists of a search form followed by a table that will display the results of a search. 
 
-The `<script>` segment of the search component contains the logic. The data is stored in the `searchData` object. This object is stored outside the component. This allows the data to persist when the user navigates away from the search page. It contains the search query and the results of the search in the `books` array. The component contains two methods. The `search` method takes the search terms and performs a `GET` request to the OpenLibrary API. 
+The `<script>` segment of the search component contains the logic. It contains the search query and the results of the search in the `books` array. The component contains two methods. The `search()` method takes the search terms and performs a `GET` request to the OpenLibrary API. 
 
 When the result comes back, the `books` array is filled with the search results. The `viewDetails` method will cause the router to navigate to the `Details` component (which you will implement shortly). Each entry in the table contains a button linked to this method, allowing the user to view the book's details. Finally, the third section in `Search.vue` contains some CSS styling.
 
@@ -250,37 +246,39 @@ The last component that needs implementing shows the book's details. Create a ne
 {% raw %}
 ```html
 <template>
-<div class="details">
-  <h1>Book Details</h1>
-  <div class="content">
-    <md-card class="details-card">
-      <h3>{{book.title}}</h3>
-      <img v-bind:src="getImageSrc()" />
-      <h4>Authors</h4>
-      <p> {{book.authors}} </p>
-      <h4>Published</h4>
-      <p>{{book.year}}</p>
-    </md-card>
+  <div class="details">
+    <h1>Book Details</h1>
+    <div class="content">
+      <md-card class="details-card">
+        <h3>{{book.title}}</h3>
+        <img v-bind:src="getImageSrc()" />
+        <h4>Authors</h4>
+        <p> {{book.authors}} </p>
+        <h4>Published</h4>
+        <p>{{book.year}}</p>
+      </md-card>
+    </div>
   </div>
-</div>
 </template>
 
-<script>
-export default {
-  data: function() {
-    return {
-      book: {
-        title: this.$route.query.title,
-        cover_id: this.$route.query.cover_id,
-        authors: this.$route.query.authors,
-        year: this.$route.query.year,
-      }
-    }
-  },
-  methods: {
-    getImageSrc() {
-      return "http://covers.openlibrary.org/b/OLID/"+this.book.cover_id+"-M.jpg"
-    }
+<script lang="ts">
+import { Component, Vue } from 'vue-property-decorator';
+
+@Component
+export default class Details extends Vue {
+  book: any;
+
+  created() {
+    this.book = {
+      title: this.$route.query.title,
+      cover_id: this.$route.query.cover_id,
+      authors: this.$route.query.authors,
+      year: this.$route.query.year
+    };
+  }
+
+  getImageSrc() {
+    return "http://covers.openlibrary.org/b/OLID/" + this.book.cover_id + "-M.jpg";
   }
 }
 </script>
@@ -313,12 +311,11 @@ In order for a sub-component to be shown, it must be registered with the router.
 import Vue from 'vue'
 import Router from 'vue-router'
 import Home from './views/Home.vue'
-import Search from './views/Search.vue'
-import Details from './views/Details.vue'
 
 Vue.use(Router)
 
 const router = new Router({
+  mode: 'history',
   routes: [
     {
       path: '/',
@@ -328,12 +325,12 @@ const router = new Router({
     {
       path: '/search',
       name: 'search',
-      component: Search,
+      component: () => import(/* webpackChunkName: "search" */ './views/Search.vue')
     },
     {
       path: '/details',
       name: 'details',
-      component: Details,
+      component: () => import(/* webpackChunkName: "details" */ './views/Details.vue')
     }
   ]
 })
@@ -370,28 +367,16 @@ npm i @okta/okta-vue@1.1.0 @types/okta__okta-vue@1.0.2
 This will install the Okta SDK for Vue. To set up Okta with your application, open `src/router.ts`. Add the following lines after the import statements.
 
 ```ts
-import Auth from '@okta/okta-vue'
+import Auth from '@okta/okta-vue';
 
 Vue.use(Auth, {
   issuer: 'https://{yourOktaDomain}/oauth2/default',
   client_id: '{yourClientId}',
-  redirect_uri: 'http://localhost:8080/implicit/callback',
-  scope: 'openid profile email'
+  redirect_uri: window.location.origin + '/implicit/callback',
 });
-
-const authGuard = async function(to: any, from: any, next: any) {
-  console.log(to);
-  const authenticated = await router.app.$auth.isAuthenticated();
-  if (authenticated) {
-    next();
-  } else {
-    router.app.$auth.loginRedirect(to.path);
-    next(false);
-  }
-}
 ```
 
-The `Vue.use(Auth, ...)` statement sets up Okta. You will need to copy the client ID from your Okta developer console as the `client_id` parameter. With this statement, the `$auth` property will be made available on every Vue component. The `authGuard` function will be used to protect selected routes with password authentication. 
+The `Vue.use(Auth, ...)` statement sets up Okta. You will need to copy the client ID from your Okta developer console as the `client_id` parameter. 
 
 In the `routes` array, add the following entry.
 
@@ -402,48 +387,56 @@ In the `routes` array, add the following entry.
 }
 ```
 
-This route will handle the callback from Okta, once the user has logged on. Finally, you have to add the authentication guards. In the router entries for the `/search` and `/details`, add the following property.
+This route will handle the callback from Okta, after the user has logged in. 
+
+Add a `beforeEach()` condition to the router at the bottom that sets up a redirect if authentication is required.
 
 ```ts
-beforeEnter: authGuard
+router.beforeEach(Vue.prototype.$auth.authRedirectGuard());
 ```
 
-With this, your application is protected. If you now try to navigate to the `/search` route, you will be redirected to the Okta login page. In addition to protecting certain routes, the application should also let the user know if the user is logged in and provide a direct link to the Okta login page. Open `src/App.vue`. In the template section add the following into the `<md-toolbar>`.
+Finally, you have to add the authentication guards. In the router entries for the `/search` and `/details`, add the following property.
+
+```ts
+meta: {
+  requiresAuth: true,
+},
+```
+
+With this, your application is protected. If you now try to navigate to the `/search` route, you will be redirected to the Okta login page. In addition to protecting certain routes, the application should also let the user know if the user is logged in and provide a direct link to the Okta login page. Open `src/App.vue`. In the template section add the following into the `<md-toolbar>`, just after `<span class="branding">`.
 
 ```html
 <md-button v-if="authenticated" v-on:click="logout" id="logout-button"> Logout </md-button>
-<md-button v-else v-on:click="login" id="login-button"> Login </md-button>
+<md-button v-else v-on:click="$auth.loginRedirect()" id="login-button"> Login </md-button>
 ```
 
 Replace the contents of the script section with the following.
 
 ```ts
-export default {
-  data: () => ({
-    title: "Vue Books",
-    authenticated: false
-  }),
-  created() {
-    this.authenticated = this.isAuthenticated();
-  },
-  watch: {
-    $route: "isAuthenticated"
-  },
-  methods: {
-    async isAuthenticated() {
-      this.authenticated = await this.$auth.isAuthenticated();
-    },
-    login() {
-      this.$auth.loginRedirect("/");
-    },
-    async logout() {
-      await this.$auth.logout();
-      await this.isAuthenticated();
+import { Component, Vue, Watch } from 'vue-property-decorator';
 
-      this.$router.push({ path: "/" });
-    }
+@Component
+export default class App extends Vue {
+  title = "Vue Books";
+  public authenticated: boolean = false;
+
+  private created() {
+    this.isAuthenticated();
   }
-};
+  
+  @Watch('$route')
+  private async isAuthenticated() {
+    this.authenticated = await this.$auth.isAuthenticated();
+  }
+
+  private async logout() {
+    await this.$auth.logout();
+    await this.isAuthenticated();
+
+    // Navigate back to home
+    this.$router.push({path: '/'});
+  }
+}
 ```
 
 The flag `authenticated` keeps track of the login status. This controls the visibility of the **Login** and **Logout** buttons. This completes the implementation of the Vue Books application.
