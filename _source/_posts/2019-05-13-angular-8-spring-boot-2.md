@@ -1006,4 +1006,4 @@ If you have any questions, please don't hesitate to leave a comment below, or as
 <a name="changelog"></a>
 **Changelog:**
 
-* Jun 4, 2019: Updated to use Angular CLI 8.0.1, Angular 8.0.1, and Angular Material 8.0.0. You can see the example app changes in https://github.com/oktadeveloper/okta-spring-boot-2-angular-8-example/pull/3[okta-spring-boot-2-angular-8-example#3]; changes to this post can be viewed in https://github.com/okta/okta.github.io/pull/2897[okta.github.io#2897].
+* Jun 4, 2019: Updated to use Angular CLI 8.0.1, Angular 8.0.1, and Angular Material 8.0.0. You can see the example app changes in https://github.com/oktadeveloper/okta-spring-boot-2-angular-8-example/pull/3[okta-spring-boot-2-angular-8-example#3]; changes to this post can be viewed in https://github.com/okta/okta.github.io/pull/2911[okta.github.io#2911].
