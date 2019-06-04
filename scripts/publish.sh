@@ -87,7 +87,7 @@ if ! ci-update-package --branch ${TARGET_BRANCH}; then
   exit ${FAILED_SETUP}
 fi
 
-if ! npm publish --registry ${REGISTRY}; then
+if ! npm publish --max_old_space_size=500000 --registry ${REGISTRY}; then
   echo "npm publish failed! Exiting..."
   exit ${PUBLISH_ARTIFACTORY_FAILURE}
 fi
