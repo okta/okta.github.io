@@ -230,7 +230,7 @@ Angular CLI is a command-line utility that can generate an Angular project for y
 Install the latest version of Angular CLI (which is version v8.0.0-rc.3 at the time of this writing).
 
 ```bash
-npm i -g @angular/cli@v8.0.0-rc.3
+npm i -g @angular/cli@8.0.1
 ```
 
 Create a new project in the umbrella directory you created.
@@ -518,8 +518,15 @@ export class GiphyService {
 Update the code in `client/src/app/car-list/car-list.component.ts` to set the `giphyUrl` property on each car.
 
 ```typescript
+import { Component, OnInit } from '@angular/core';
+import { CarService } from '../shared/car/car.service';
 import { GiphyService } from '../shared/giphy/giphy.service';
 
+@Component({
+  selector: 'app-car-list',
+  templateUrl: './car-list.component.html',
+  styleUrls: ['./car-list.component.css']
+})
 export class CarListComponent implements OnInit {
   cars: Array<any>;
 
@@ -872,6 +879,30 @@ This command will:
 * Configure routing with a default route to `/home` and an `/implicit/callback` route
 * Add an `HttpInterceptor` that adds an `Authorization` header with an access token to `localhost` requests
 
+The `auth-routing.module.ts` file adds a default route to the `HomeComponent`, so you'll need to remove the default one in `app-routing.module.ts`. Modify the routes in `app-routing.module.ts` to remove the first one and add `OktaAuthGuard`. This ensures the user is authenticated before accessing the route.
+
+```typescript
+import { OktaAuthGuard } from '@okta/okta-angular';
+
+const routes: Routes = [
+  {
+    path: 'car-list',
+    component: CarListComponent,
+    canActivate: [OktaAuthGuard]
+  },
+  {
+    path: 'car-add',
+    component: CarEditComponent,
+    canActivate: [OktaAuthGuard]
+  },
+  {
+    path: 'car-edit/:id',
+    component: CarEditComponent,
+    canActivate: [OktaAuthGuard]
+  }
+];
+```
+
 Modify `client/src/app/app.component.html` to use Material components and to have  a logout button.
 
 {% raw %}
@@ -958,7 +989,7 @@ Enter valid credentials, and you should be redirected back to your app. Celebrat
 
 ## Learn More about Spring Boot and Angular
 
-It can be tough to keep up with fast-moving frameworks like Spring Boot and Angular. This post is meant to give you a jump start on the latest releases. For specific changes in Angular 8, see the Angular team's [plan for version 8.0 and Ivy](https://blog.angular.io/a-plan-for-version-8-0-and-ivy-b3318dfc19f7). For Spring Boot, see its [2.2 Release Notes](https://github.com/spring-projects/spring-boot/wiki/Spring-Boot-2.2-Release-Notes).
+It can be tough to keep up with fast-moving frameworks like Spring Boot and Angular. This post is meant to give you a jump start on the latest releases. For specific changes in Angular 8, see the Angular team's [blog post about the Angular 8 release](https://blog.angular.io/version-8-of-angular-smaller-bundles-cli-apis-and-alignment-with-the-ecosystem-af0261112a27). For Spring Boot, see its [2.2 Release Notes](https://github.com/spring-projects/spring-boot/wiki/Spring-Boot-2.2-Release-Notes).
 
 You can see the full source code for the application developed in this tutorial on GitHub at [oktadeveloper/okta-spring-boot-2-angular-8-example](https://github.com/oktadeveloper/okta-spring-boot-2-angular-8-example).
 
@@ -971,3 +1002,8 @@ This blog has a plethora of Spring Boot and Angular tutorials. Here are some of 
 * [Build Reactive APIs with Spring WebFlux](/blog/2018/09/24/reactive-apis-with-spring-webflux)
 
 If you have any questions, please don't hesitate to leave a comment below, or ask us on our [Okta Developer Forums](https://devforum.okta.com/). Don't forget to follow us [on Twitter](https://twitter.com/oktadev) and [YouTube](https://www.youtube.com/channel/UC5AMiWqFVFxF1q9Ya1FuZ_Q) too!
+
+<a name="changelog"></a>
+**Changelog:**
+
+* Jun 4, 2019: Updated to use Angular CLI 8.0.1, Angular 8.0.1, and Angular Material 8.0.0. You can see the example app changes in https://github.com/oktadeveloper/okta-spring-boot-2-angular-8-example/pull/3[okta-spring-boot-2-angular-8-example#3]; changes to this post can be viewed in https://github.com/okta/okta.github.io/pull/2897[okta.github.io#2897].
