@@ -227,7 +227,7 @@ Transfer-Encoding: chunked
 
 Angular CLI is a command-line utility that can generate an Angular project for you. Not only can it create new projects, but it can also generate code. It's a convenient tool because it also offers commands that will build and optimize your project for production. It uses webpack under the covers for building.
 
-Install the latest version of Angular CLI (which is version v8.0.0-rc.3 at the time of this writing).
+Install the latest version of Angular CLI (which is version v8.0.1 at the time of this writing).
 
 ```bash
 npm i -g @angular/cli@8.0.1
