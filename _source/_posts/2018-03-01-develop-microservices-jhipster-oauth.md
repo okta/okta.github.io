@@ -442,7 +442,7 @@ To learn more about microservices, authentication, and JHipster, see the followi
 * [Use OpenID Connect Support with JHipster](/blog/2017/10/20/oidc-with-jhipster)
 * [JHipster Security Documentation](http://www.jhipster.tech/security/)
 
-**Update**: To see how to develop a microservices architecture with JHipster 6, please see [Java Microservices with Spring Boot and Spring Cloud](/blog/2019/05/21/java-microservices-spring-boot-spring-cloud).
+**Update**: To see how to develop a microservices architecture with JHipster 6, please see [Java Microservices with Spring Cloud Config and JHipster](/blog/2019/05/23/java-microservices-spring-cloud-config).
 
 If you have any feedback, I'd love to hear it! Please leave a comment below, hit me up on Twitter [@mraible](https://twitter.com/mraible), or post a question in our [Developer Forums](https://devforum.okta.com/).
 

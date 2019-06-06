@@ -159,7 +159,7 @@ ecdsa_key = OpenSSL::PKey::EC.new IO.read key_file
 claims = {
 	'iss' => team_id,
 	'iat' => Time.now.to_i,
-	'exp' => Time.now.to_i + 86400*120,
+	'exp' => Time.now.to_i + 86400*180,
 	'aud' => 'https://appleid.apple.com',
 	'sub' => client_id,
 }
@@ -175,7 +175,7 @@ Now you can run this from the command line and it will output a JWT.
 
 ```bash
 ruby client_secret.rb
-eyJhbGciOiJFUzI1NiJ9.eyJpc3MiOiI3TUM2VVpSMlVWIiwiaWF0IjoxNTU5NjE0MjU2LCJleHAiOjE1Njk5ODIyNTYsImF1ZCI6Imh0dHBzOi8vYXBwbGVpZC5hcHBsZS5jb20iLCJzdWIiOiJsb2wuYXZvY2Fkby5jbGllbnQifQ.t6wIFrSKwuCZsJ9I1TWWBCdxmUMG3g0kNyNnxhkpG3oZAKY2UdXqL5CyRGTa21OYHa6ir1JFWkdBDjTNvt8hYC
+eyJhbGciOiJFUzI1NiJ9.eyJpc3MiOiI3TUM2VVpSMlVWIiwiaWF0IjoxNTU5NjE0MjU2LCJleHAiOjE1NzUxNjYyNTYsImF1ZCI6Imh0dHBzOi8vYXBwbGVpZC5hcHBsZS5jb20iLCJzdWIiOiJsb2wuYXZvY2Fkby5jbGllbnQifQ.t6wIFrSKwuCZsJ9I1TWWBCdxmUMG3g0kNyNnxhkpG3oZAKY2UdXqL5CyRGTa21OYHa6ir1JFWkdBDjTNvt8hYC
 ```
 
 Note: Apple says that the `kid` property is required in the header, but in my testing I didn't find that to be the case. It seemed to work fine without it.
