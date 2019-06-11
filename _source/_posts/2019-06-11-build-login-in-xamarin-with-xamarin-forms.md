@@ -367,7 +367,7 @@ namespace ChuckNorrisFacts.UWP
         public async Task<string> LoginAsync()
         {
             var clientId = "{yourClientId}";
-            var url = "{yourOktaDomain}/oauth2/default/v1/authorize";
+            var url = "https://{yourOktaDomain}/oauth2/default/v1/authorize";
             var state = GetBase64UrlData(32);
             var nonce = GetBase64UrlData(12);
             var codeVerifier = GetBase64UrlData(32);
