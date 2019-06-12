@@ -1,0 +1,49 @@
+---
+layout: plain
+---
+<div class="BlogPostSummaryList">
+{% for post in site.posts %}{% unless post.published == false %}
+  {% assign author = site.data.authors[post.author] %}
+  <div class="BlogPostSummary">
+    <div class="BlogPost-title"><a href="{{ site.production_url }}{{ post.url }}">{{ post.title }}</a></div>
+    <div class="BlogPost-attribution">
+        {% if author.avatar %}
+        {% img '{{ author.avatar }}' alt:'{{ author.avatar }}' class:BlogPost-avatar %}
+        {% endif %}
+        <span class="BlogPost-author">{{ author.full_name }}</span>
+    </div>
+    <div class="BlogPost-tags">
+      <time datetime="{{ post.date | date: '%F'}}">{{ post.date | date: "%B %-d, %Y" }}</time>
+      {%- for tag in post.tags -%}
+        {{ tag | remove: ' ' | remove: '-' | replace: '.', 'dot' | prepend: ' #' }}
+      {%- endfor -%}
+    </div>
+    <div class="BlogPost-url">
+      <a href="{{ site.production_url }}{{ post.url }}">{{ site.production_url }}{{ post.url }}</a>
+    </div>
+  </div>
+{% endunless %}{% endfor %}
+</div>
+
+<style>
+.BlogPostSummary {
+  margin-bottom: 2em;
+}
+.BlogPostSummary .BlogPost-title {
+  font-size: 27px;
+  margin-top: 0;
+  margin-bottom: 0;
+}
+.BlogPostSummary .BlogPost-title a {
+  color: #222;
+}
+.BlogPost-avatar {
+  width: 24px;
+  height: 24px;
+  margin-right: 10px;
+}
+.BlogPost-author {
+  font-size: 17px;
+  font-weight: normal;
+}
+</style>
