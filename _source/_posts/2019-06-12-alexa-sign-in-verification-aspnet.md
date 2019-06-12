@@ -171,7 +171,7 @@ There you have it! Now you made your Alexa skill in ASP.NET just a bit more secu
 
 ## Learn More About ASP.NET and Secure User Management
 
-If you’d like to learn more about using secure OAuth 2.0 and user management in ASP.NET, we’ve also published a number of posts that might interest you:
+If you'd like to learn more about using secure OAuth 2.0 and user management in ASP.NET, we've also published a number of posts that might interest you:
 
 * [How to Secure Your .NET Web API with Token Authentication](/blog/2018/02/01/secure-aspnetcore-webapi-token-auth)
 * [Build a CRUD App with ASP.NET Framework 4.x Web API and Angular](/blog/2018/07/27/build-crud-app-in-aspnet-framework-webapi-and-angular)
