@@ -41,13 +41,13 @@ Log in using your Okta Org URL (should look something like this: https://dev-000
 
 Now you will create a custom claim that will include a **Personal Key** field in the Access Token you can use for user verification. To add that, click on **Claims** and then **Add Claim** and add the following claim:
 
-{% img blog/alexa-sign-in-verification-aspnet/okta-verification-claim.png alt:"Okta personal key claim" width:"800" %}{: .center-image }
+{% img blog/alexa-sign-in-verification-aspnet/okta-verification-claim.png alt:"Okta personal key claim" width:"600" %}{: .center-image }
 
 Great! The field is now included with the Access Token from Okta. Now, we need to create a custom user profile attribute to store the user's personal key. Select **Users** > **Profile Editor**. Click the pencil icon to the right of the Okta logo.
 
 Add a new attribute called **personalKey**. Click **Add Attribute** and enter "personalKey" for the **Display name** and **Variable name**. Fill in a description, set the *Min value* to 4 and the **Max value** to 6 and click **Save**. 
 
-{% img blog/alexa-sign-in-verification-aspnet/okta-verification-attribute.png alt:"Okta personal key attribute" width:"800" %}{: .center-image }
+{% img blog/alexa-sign-in-verification-aspnet/okta-verification-attribute.png alt:"Okta personal key attribute" width:"600" %}{: .center-image }
 
 Now we've added a place to create and update the personal key for a user within your Okta org. Time to add one for a test user! Go to **Users** > **People**, select the test user you created in the [previous tutorial](/blog/2019/04/23/user-account-linking-alexa-aspnet-web-api#beta-test-your-secure-account-linked-alexa-skill), click on **Profile** > **Edit**, scroll down to the bottom and give a 4 to 6 digit numeric code in the Personal Key field and click **Save**.
 
