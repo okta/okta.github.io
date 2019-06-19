@@ -67,7 +67,7 @@ dependencies {
 
 The sample app in its current state doesn't do much. You need to add a controller to define some endpoints and responses.
 
-Add a new file `src/main/java/com/okta/preauthorize/Application/WebController.java`:
+Add a new file `src/main/java/com/okta/preauthorize/application/WebController.java`:
 
 ```java
 package com.okta.preauthorize.application;  
