@@ -74,7 +74,7 @@ Open another terminal and prove all the end-to-end tests (powered by Protractor)
 npm run e2e
 ----
 
-If your environment is setup correctly, you’ll see output like the following:
+If your environment is setup correctly, you'll see output like the following:
 
 // todo
 
@@ -140,7 +140,7 @@ Enter the credentials you used to signup for your account, and you should be red
 
 In this example, I'll show you how to create a photo gallery that you can upload pictures too. Kinda like Flickr, but waaayyyy more primitive.
 
-JHipster has a JDL (JHipster Domain Language) feature that allows you to model the data in your app, and generate entities from it. You can use its https://start.jhipster.tech/jdl-studio/[JDL Studio] feature to do this online and save it locally once you’ve finished.
+JHipster has a JDL (JHipster Domain Language) feature that allows you to model the data in your app, and generate entities from it. You can use its https://start.jhipster.tech/jdl-studio/[JDL Studio] feature to do this online and save it locally once you've finished.
 
 I created a data model for this app that has an `Album`, `Photo`, and `Tag` entities and set up relationships between them. Below is a screenshot of what it looks like in JDL Studio.
 
