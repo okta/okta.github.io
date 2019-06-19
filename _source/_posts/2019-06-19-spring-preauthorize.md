@@ -611,7 +611,7 @@ The important point to remember is that if you want to user `hasRole()`, you nee
 You can also use the `@PreAuthorize` annotation to limit access based on OAuth scopes. From [
 the OAuth 2.0 scopes documentation](https://oauth.net/2/scope/): 
 
->Scope is a mechanism in OAuth 2.0 to limit an application's access to a user's account. An application can request one or more scopes, this information is then presented to the user in the consent screen, and the access token issued to the application will be limited to the scopes granted.
+> Scope is a mechanism in OAuth 2.0 to limit an application's access to a user's account. An application can request one or more scopes, this information is then presented to the user in the consent screen, and the access token issued to the application will be limited to the scopes granted.
 
 If you look at the inspected `User Authorities` returned from the `/user/oauthinfo` endpoint, you'll see three authorities that begin with `SCOPE_`: 
 - SCOPE_email
