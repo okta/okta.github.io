@@ -37,7 +37,7 @@ If you do not already have a free Okta developer account, go to [our website and
 
 ## Start a Sample Project Using Spring Initializr
 
-To get the project started, you're going to use the [Spring Initializr](https://start.spring.io/). However, while it's worth taking a gander at the page, you don't even have to bother going there to create the project. You're going to use the REST API and `curl`. 
+To get the project started, you can use the [Spring Initializr](https://start.spring.io/). However, while it's worth taking a gander at the page, you don't even have to bother going there to create the project. You can use the REST API and `curl`. 
 
 Open a terminal and `cd` to wherever you want the project file .zip to end up. Run the command below, which will download the zipped Spring Boot project. 
 
