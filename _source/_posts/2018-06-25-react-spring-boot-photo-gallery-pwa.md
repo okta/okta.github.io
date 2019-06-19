@@ -174,7 +174,7 @@ This feature allows you to create relationships with the `User` entity. The only
 
 ## Change your Identity Provider to Okta
 
-JHipster leverages Spring Security's OAuth 2.0 support for configuring which IdP it should get user information from. When using Spring Security with Spring Boot, you can configure most configurationsettings in a properties files. You can even override properties with environment variables.
+JHipster leverages Spring Security's OAuth 2.0 support for configuring which IdP it should get user information from. When using Spring Security with Spring Boot, you can configure most configuration settings in a properties files. You can even override properties with environment variables.
 
 To switch from Keycloak to Okta (or any other IdP), you can override the default properties (for Spring Security OAuth).
 

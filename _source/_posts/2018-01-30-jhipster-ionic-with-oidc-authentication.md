@@ -40,7 +40,7 @@ The Ionic team has also recently released an [Ionic PWA Toolkit](https://blog.io
 JHipster requires that you have [Node.js](https://nodejs.org) and [Java 8](http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html) installed. You can install it via [Homebrew](http://brewformulas.org/Jhipster) (`brew install jhipster`), [Chocolatey](https://chocolatey.org/packages/jhipster) (`choco install jhipster`), or with npm.
 
 ```bash
-npm i -g generator-jhipster
+npm i -g generator-jhipster@4.13.3
 ```
 
 ## Develop a Blog App with OIDC Authentication
@@ -183,10 +183,10 @@ Run `jhipster import-jdl blog.jh` to create all the code you'll need to manage y
 
 ## Develop a Mobile App with Ionic
 
-Getting started with Ionic for JHipster is similar to JHipster. You can have to install the Ionic CLI, Yeoman, the module itself, run a command, then profit!
+Getting started with Ionic for JHipster is similar to JHipster. You just have to install the Ionic CLI, Yeoman, the module itself, run a command, then profit!
 
 ```bash
-npm i -g generator-jhipster-ionic ionic yo
+npm i -g generator-jhipster-ionic@3.3.0 ionic@3.20.0 yo
 yo jhipster-ionic
 ```
 
@@ -256,4 +256,4 @@ See the following posts for information on building microservices with JHipster 
 * [Develop and Deploy Microservices with JHipster](/blog/2017/06/20/develop-microservices-with-jhipster)
 * [Use OpenID Connect Support with JHipster](/blog/2017/10/20/oidc-with-jhipster)
 
-Give [@oktadev](https://twitter.com/mraible) a follow on Twitter if you liked this tutorial. If you have any questions, please leave a comment or post your question to [Stack Overflow](https://www.stackoverflow.com) with a `jhipster` tag.
+Give [@oktadev](https://twitter.com/oktadev) a follow on Twitter if you liked this tutorial. If you have any questions, please leave a comment or post your question to [Stack Overflow](https://www.stackoverflow.com) with a `jhipster` tag.
