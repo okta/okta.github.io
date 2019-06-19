@@ -156,7 +156,7 @@ You might initially think you could add `@PreAuthorize("permitAll()")` to the ho
 
 Add the following `SecurityConfig` class, that will achieve both of the above goals.
 
-`src/main/java/com/okta/preauthorize/Application/SecurityConfig.java`
+`src/main/java/com/okta/preauthorize/application/SecurityConfig.java`
 
 ```java
 package com.okta.preauthorize.application;  
