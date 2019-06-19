@@ -1,20 +1,24 @@
 ---
 layout: blog_post
-title: 'Build an Ionic 4 App with User Login and Registration'
+title: 'Tutorial: User Login and Registration in Ionic 4'
 author: mraible
-description: "Ionic is a framework that helps developers build hybrid mobile apps and PWAs. This tutorial shows you how to integrate OpenID Connect (OIDC) into your Ionic app for user authentication and registration."
-tags: [ionic, typescript, angular, authentication, oidc, cordova, capacitor, iphone, android, ios]
+description: "Ionic helps developers build hybrid mobile apps & PWAs. This tutorial shows you how to add user authentication and registration to an Ionic 4 app."
+tags: [ionic, typescript, angular, authentication, oidc, cordova, capacitor, android, ios]
 tweets:
-  - "Ionic 4 is 🔥! Learn how to build an @ionicframework v4 app with user authentication and registration."
-  - "Do you ❤️ Ionic? We do to! This tutorial shows you how you can create an @ionicframework 4 app and add user authentication in just a few commands."
-  - "We recommend using @ionicframework 4 with OIDC to add SSO to your mobile apps. Learn how today!"
+ - "Ionic 4 is 🔥! Learn how to build an @ionicframework v4 app with user authentication and registration."
+ - "Do you ❤️ Ionic? We do too! This tutorial shows you how you can create an @ionicframework 4 app and add user authentication in just a few commands."
+ - "We recommend using @ionicframework 4 with OIDC to add SSO to your mobile apps. Learn how today!"
 ---
 
-// targets: ionic login (can change to "ionic authentication" if you'd prefer, but we already own that via scotch)
-
-Ionic allows you to develop <abbr title="Progressive Web Applications">PWAs</abbr> and hybrid mobile apps. PWAs are web applications that run in a browser and allow for offline capabilities via service workers. They can be installed on desktops and mobile devices, just like you install apps on your smart phone. Hybrid mobile apps are like native mobile apps, except they're built using web technologies.
+Ionic allows you to develop <abbr title="Progressive Web Applications">PWAs</abbr> and hybrid mobile apps. PWAs are web applications that run in a browser and allow for offline capabilities via service workers. They can be installed on desktops and mobile devices, just like you install apps on your smartphone. Hybrid mobile apps are like native mobile apps, except they're built using web technologies.
 
 Ionic 2 was based on AngularJS. Ionic 3 was based on Angular. Ionic 4 allows you to use the most popular JavaScript frameworks available today: Angular, React, or Vue. This article focuses on the Angular version of Ionic 4. I'll show you how to create an Ionic 4 app, add user authentication, and configure things to allow user registration.
+
+If you don't want to code along, feel free to grab the [source code from GitHub](https://github.com/oktadeveloper/okta-ionic-4-login-example)! You can also watch a video of this tutorial below.
+
+<div style="text-align: center">
+<iframe width="600" height="338" style="max-width: 100%" src="https://www.youtube.com/embed/MBAUKQGNx5Y" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+</div>
 
 ## Get Started with Ionic 4
 
@@ -50,7 +54,7 @@ cd ionic-login
 ionic serve
 ```
 
-This command will open your default browser and navigate to `http://localhost:8100`. 
+This command will open your default browser and navigate to `http://localhost:8100`.
 
 {% img blog/ionic-4-login/welcome-to-ionic.png alt:"Welcome to Ionic" width:"800" %}{: .center-image }
 
@@ -68,7 +72,7 @@ Schematics is a library from the Angular CLI project that allows you to manipula
 ng add @oktadev/schematics
 ```
 
-Before you run this command, you'll need to create an OIDC app in Okta. OIDC builds on top of the OAuth 2.0 authorization framework. It allows clients to verify the identity of the user and get their details. 
+Before you run this command, you'll need to create an OpenID Connect (OIDC) app in Okta. OIDC builds on top of the OAuth 2.0 authorization framework. It allows clients to verify the identity of the user and get their details. If you're not familiar with OAuth 2.0 or OIDC, I recommend you read [What the Heck is OAuth?](/blog/2017/06/21/what-the-heck-is-oauth)
 
 ### Create an OpenID Connect App in Okta
 
@@ -98,9 +102,10 @@ Navigate to **API** > **Authorization Servers** and copy your issuer URI.
 
 {% img blog/ionic-4-login/issuer-uri.png alt:"Issuer URI" width:"600" %}{: .center-image }
 
+
 ### Use OktaDev Schematics to Add User Login
 
-Now that you have a client ID and issuer URI, you can install Angular CLI, and add a user login feature using `ng add`. 
+Now that you have a client ID and issuer URI, you can install Angular CLI, and add a user login feature using `ng add`.
 
 ```shell
 npm i -g @angular/cli@7.3.9
@@ -120,6 +125,8 @@ The video below shows how this command performs the following steps:
 <div style="text-align: center">
 <script id="asciicast-245246" src="https://asciinema.org/a/245246.js" async></script>
 </div>
+
+If you'd like to see the source code for the templates that are installed, you can [find them on GitHub](https://github.com/oktadeveloper/schematics/tree/master/src/add-auth/ionic/angular/src/app).
 
 _It's pretty sweet that OktaDev Schematics automates all of this for you, don't you think?!_
 
@@ -181,9 +188,10 @@ open platforms/ios/MyApp.xcworkspace
 
 **NOTE:** If you don't have Xcode installed, you can [download it from Apple](https://developer.apple.com/xcode/).
 
-You'll need to configure code signing in the **General** tab, then you should be able to run in Simulator. Below are screenshots of it running on an emulated iPhone X. 
+You'll need to configure code signing in the **General** tab, then you should be able to run in Simulator. Below are screenshots of it running on an emulated iPhone X.
 
-{% img blog/ionic-4-login/ios-emulator.png alt:"Running on Simulator" width:"800" %}{: .center-image }
+{% img blog/ionic-4-login/ios-emulator.png alt:"Running on iOS" width:"800" %}{: .center-image }
+
 
 ## Run Your Ionic 4 App on Android
 
@@ -193,7 +201,7 @@ The most important thing to know when running your Ionic app on Android is that 
 sdk use java 8.0.202-amzn
 ```
 
-You can then generate an Android project. 
+You can then generate an Android project.
 
 ```shell
 ionic cordova prepare android
@@ -209,17 +217,17 @@ studio platforms/android
 
 ### Running with Android Studio 3.3.2
 
-When I first tried this in Android Studio, I received a Gradle Sync error: 
+When I first tried this in Android Studio, I received a Gradle Sync error:
 
 ```
-The minSdk version should be declared in the android manifest file. 
+The minSdk version should be declared in the android manifest file.
 ```
 
 In the right pane, it offered a link for me to click on to fix the issue. I clicked on it, then clicked **Do Refactor**.
 
 {% img blog/ionic-4-login/android-studio-sync-error.png alt:"Android Studio Sync error" width:"800" %}{: .center-image }
 
-I was prompted to update Gradle, and clicked **Update**.
+I was prompted to update Gradle and clicked **Update**.
 
 {% img blog/ionic-4-login/android-studio-gradle-upgrade-3.3.png alt:"Upgrade Gradle" width:"600" %}{: .center-image }
 
@@ -229,14 +237,14 @@ After these changes, my app showed up in the top toolbar.
 
 ### Running with Android Studio 3.4
 
-When I tried opening the project in Android Studio 3.4, I was prompted to update Gradle again. 
+When I tried opening the project in Android Studio 3.4, I was prompted to update Gradle again.
 
 {% img blog/ionic-4-login/android-studio-gradle-upgrade-3.4.png alt:"Upgrade Gradle" width:"600" %}{: .center-image }
 
 After doing so, I received the following error:
 
 ```
-WARNING: The following project options are deprecated and have been removed: 
+WARNING: The following project options are deprecated and have been removed:
 android.useDeprecatedNdk
 NdkCompile is no longer supported
 ```
@@ -252,25 +260,25 @@ android.useDeprecatedNdk=false
 You need to make one additional change for everything to work properly on Android. You need to set the `launchMode` from `singleTop` to `singleTask` so the URL does not trigger a new instance of the app. Edit `platforms/android/app/src/main/AndroidManifest.xml` to make this change:
 
 ```xml
-<activity android:configChanges="orientation|keyboardHidden|keyboard|screenSize|locale" 
-    android:label="@string/activity_name" 
-    android:launchMode="singleTask" 
-    android:name="MainActivity" 
-    android:theme="@android:style/Theme.DeviceDefault.NoActionBar" 
-    android:windowSoftInputMode="adjustResize">
+<activity android:configChanges="orientation|keyboardHidden|keyboard|screenSize|locale"
+   android:label="@string/activity_name"
+   android:launchMode="singleTask"
+   android:name="MainActivity"
+   android:theme="@android:style/Theme.DeviceDefault.NoActionBar"
+   android:windowSoftInputMode="adjustResize">
 ```
-      
+    
 Now you should be able to click the **play** button in Android Studio to start your app.
 
 You will be prompted to select an existing AVD (Android Virtual Device) or you can plug in your Android phone and use that. If you have neither, click the **Create New Virtual Device Button**.
 
-Below are screenshots of the app running on a Pixel 2 AVD. 
+Below are screenshots of the app running on a Pixel 2 AVD.
 
-{% img blog/ionic-4-login/android-emulator.png alt:"Running on Pixel 2 AVD" width:"800" %}{: .center-image }
+{% img blog/ionic-4-login/android-emulator.png alt:"Running on Android" width:"800" %}{: .center-image }
 
 ## What About Capacitor?
 
-[Capacitor](https://capacitor.ionicframework.com/) is a project from the Ionic folks that offers an alternative to Cordova. It's currently in beta. The OktaDev Schematics project provides support for Capacitor with a `--platform=capacitor` flag. For example:
+[Capacitor](https://capacitor.ionicframework.com/) is a project from the Ionic folks that offers an alternative to Cordova. Capacitor 1.0 was [released last month](https://ionicframework.com/blog/announcing-capacitor-1-0/). The OktaDev Schematics project provides support for Capacitor with a `--platform=capacitor` flag. For example:
 
 ```shell
 ng add @oktadev/schematics --platform=capacitor
@@ -280,7 +288,7 @@ ng add @oktadev/schematics --platform=capacitor
 
 ## Bonus: You're Using PKCE in the Browser and on Mobile!
 
-The Ionic 4 AppAuth integration in this example uses PKCE (Proof Key for Code Exchange). PKCE (pronounced "pixy") is a security extension for OAuth 2.0 for public clients on mobile (and desktop) clients. It's designed to prevent interception of the authorization code by a malicious application that runs on the same device. You can read about why it's awesome in Aaron Parecki's [Is the OAuth 2.0 Implicit Flow Dead?](https://developer.okta.com/blog/2019/05/01/is-the-oauth-implicit-flow-dead)
+The Ionic 4 AppAuth integration in this example uses PKCE (Proof Key for Code Exchange). PKCE (pronounced "pixy") is a security extension for OAuth 2.0 for public clients on mobile (and desktop) clients. It's designed to prevent interception of the authorization code by a malicious application that runs on the same device. You can read about why it's awesome in Aaron Parecki's [Is the OAuth 2.0 Implicit Flow Dead?](/blog/2019/05/01/is-the-oauth-implicit-flow-dead)
 
 ## Learn More About Ionic, Schematics, and Angular
 
@@ -292,18 +300,18 @@ Ionic's support for React and Vue are in beta at the time of this writing. To re
 * [Announcing the Ionic React Beta](https://blog.ionicframework.com/announcing-the-ionic-vue-beta/)
 
 I could have shown you how to create 19 files and update 8 to integrate OIDC login in Ionic 4. However, that seems like a long and cruel tutorial. Instead, I streamlined everything by using OktaDev Schematics. The code that OktaDev Schematics uses is from the Ionic AppAuth project's
-[Cordova](https://github.com/wi3land/ionic-appauth-ng-demo) and [Capacitor](https://github.com/wi3land/ionic-appauth-capacitor-demo) examples. 
+[Cordova](https://github.com/wi3land/ionic-appauth-ng-demo) and [Capacitor](https://github.com/wi3land/ionic-appauth-capacitor-demo) examples.
 
 I've written a few other tutorials on Schematics that might interest you:
 
-* [Use Angular Schematics to Simplify Your Life](https://developer.okta.com/blog/2019/02/13/angular-schematics)
-* [Use Schematics with React and Add OpenID Connect Authentication in 5 Minutes](https://developer.okta.com/blog/2019/03/05/react-schematics)
+* [Use Angular Schematics to Simplify Your Life](/blog/2019/02/13/angular-schematics)
+* [Use Schematics with React and Add OpenID Connect Authentication in 5 Minutes](/blog/2019/03/05/react-schematics)
 * [Schematics: A Plug-in System for JavaScript Projects](https://scotch.io/bar-talk/schematics-a-plug-in-system-for-javascript-projects)
 
 If you're interested in learning more about Angular, the Okta developer blog has some great posts.
 
-* [Angular 8 + Spring Boot 2.2](TBD)
-* [Build Secure Login for Your Angular App](https://developer.okta.com/blog/2019/02/12/secure-angular-login)
-* [Build a Simple Web App with Express, Angular, and GraphQL](https://developer.okta.com/blog/2018/11/30/web-app-with-express-angular-graphql)
+* [Angular 8 + Spring Boot 2.2](/blog/2019/05/13/angular-8-spring-boot-2): Build a CRUD App Today!
+* [Build Secure Login for Your Angular App](/blog/2019/02/12/secure-angular-login)
+* [Build a Simple Web App with Express, Angular, and GraphQL](/blog/2018/11/30/web-app-with-express-angular-graphql)
 
-Enjoyed this tutorial? Follow me on Twitter [@mraible](https://twitter.com/mraible) for more like it!
+Enjoyed this tutorial? Follow us on Twitter [@oktadev](https://twitter.com/oktadev) for more like it!
