@@ -20,6 +20,14 @@ I was a web developer years before I became a Java developer. I've been developi
 
 JHipster 6 uses Spring Boot 2.1 for its backend API, which means you can use Java 11+ to develop your JHipster apps!
 
+If you'd rather watch a video, https://youtu.be/Ktnvqoouulg[I created a screencast of this blog post].
+
+++++
+<div style="text-align: center; margin-bottom: 1.25rem">
+<iframe width="700" height="394" style="max-width: 100%" src="https://www.youtube.com/embed/Ktnvqoouulg" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+</div>
+++++
+
 == How Does JHipster Make Java and JavaScript Development Easier?
 
 JHipster is one of my favorite open source projects on the planet. It's a development platform to generate, develop, and deploy Spring Boot + Angular applications. In addition, it supports React, Vue, and creating microservice architectures with Netflix OSS, the Elastic Stack, and Docker.
@@ -57,11 +65,11 @@ TIP: Azul's Zulu is also available if you use `12.0.0-zulu` for the name.
 
 == Install JHipster 6
 
-A beta of JHipster 6 was https://www.jhipster.tech/2019/04/04/jhipster-release-6.0.0-beta.0.html[released today]. You can install it using the command below.
+JHipster 6 was https://www.jhipster.tech/2019/05/02/jhipster-release-6.0.0.html[released on May 3, 2019]. You can install it using the command below.
 
 [source,shell]
 ----
-npm install -g generator-jhipster@beta
+npm install -g generator-jhipster@6.0.0
 ----
 
 NOTE: The `npm` command is part of https://nodejs.org[Node.js]. You'll need to have Node 10.x to install JHipster and run useful commands.
@@ -117,7 +125,7 @@ If you'd prefer to see what this command looks line in-action, you can watch the
 
 ++++
 <div style="text-align: center">
-<script id="asciicast-238865" src="https://asciinema.org/a/238865.js" async></script>
+<script id="asciicast-244194" src="https://asciinema.org/a/244194.js" async></script>
 </div>
 ++++
 
@@ -161,7 +169,7 @@ Keycloak is an excellent project that works great for development and testing. H
 
 === Create an OpenID Connect Web Application
 
-To begin, sign up for a https://developer.okta.com/signup/[forever-free Okta developer account] (or sign in to `{yourOktaDomain}` if you already have an account).
+To begin, sign up for a https://developer.okta.com/signup/[forever-free Okta developer account].
 
 Once you're signed in to Okta, register your client application.
 
@@ -251,6 +259,8 @@ I'd like to thank https://twitter.com/joe_grandja[Joe Grandja] and https://twitt
 
 I did not create a GitHub repository for this post because all of the code was generated. You can find the source code for https://github.com/jhipster/generator-jhipster[JHipster on GitHub].
 
+If you're interested in how I upgraded JHipster's tests to Spring Security 5.1, see link:/blog/2019/04/15/testing-spring-security-oauth-with-junit[Upgrading Spring Security OAuth and JUnit Tests through the 👀 of a Java Hipster]. If you'd like to learn about developing microservices with JHipster, see link:/blog/2019/05/23/java-microservices-spring-cloud-config[Java Microservices with Spring Cloud Config and JHipster].
+
 Thanks JHipster and all its fabulous https://github.com/jhipster/generator-jhipster/graphs/contributors[contributors]. You all do a tremendous amount of work in your free time and it's greatly appreciated.
 
 Not quite ready to make the leap to JHipster 6 and Java 11+? I've written a few tutorials that use JHipster 5 and Java 8.
@@ -269,3 +279,7 @@ If you'd like to learn more about Spring Security 5.1 and its OIDC support, we'v
 * link:/blog/2018/11/26/spring-boot-2-dot-1-oidc-oauth2-reactive-apis[Spring Boot 2.1: Outstanding OIDC, OAuth 2.0, and Reactive API Support]
 
 Follow us on https://twitter.com/oktadev[@oktadev] to stay up-to-date with Java and the leading JavaScript frameworks.
+
+**Changelog:**
+
+* May 10, 2019: Updated to use JHipster 6.0 GA release and embed screencast. Changes to this post can be viewed in https://github.com/okta/okta.github.io/pull/2869[okta.github.io#2869].

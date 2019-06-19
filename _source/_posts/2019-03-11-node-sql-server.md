@@ -479,7 +479,7 @@ Create a new folder under `src/data` named `events`. Add a new file under `src/d
 
 const utils = require( "../utils" );
 
-const register = async ( { sql, getPool } ) => {
+const register = async ( { sql, getConnection } ) => {
    // read in all the .sql files for this folder
    const sqlQueries = await utils.loadSqlQueries( "events" );
 
@@ -1047,7 +1047,7 @@ Update `src/data/events/index.js` to contain the following code.
 
 const utils = require( "../utils" );
 
-const register = async ( { sql, getPool } ) => {
+const register = async ( { sql, getConnection } ) => {
    // read in all the .sql files for this folder
    const sqlQueries = await utils.loadSqlQueries( "events" );
 
@@ -1066,7 +1066,7 @@ const register = async ( { sql, getPool } ) => {
    };
 
    const addEvent = async ( { userId, title, description, startDate, startTime, endDate, endTime } ) => {
-       const pool = await getPool();
+       const pool = await getConnection();
        const request = await pool.request();
        request.input( "userId", sql.VarChar( 50 ), userId );
        request.input( "title", sql.NVarChar( 200 ), title );
@@ -1079,7 +1079,7 @@ const register = async ( { sql, getPool } ) => {
    };
 
    const updateEvent = async ( { id, userId, title, description, startDate, startTime, endDate, endTime } ) => {
-       const pool = await getPool();
+       const pool = await getConnection();
        const request = await pool.request();
        request.input( "id", sql.Int, id );
        request.input( "userId", sql.VarChar( 50 ), userId );
@@ -1093,7 +1093,7 @@ const register = async ( { sql, getPool } ) => {
    };
 
    const deleteEvent = async ( { id, userId } ) => {
-       const pool = await getPool();
+       const pool = await getConnection();
        const request = await pool.request();
        request.input( "id", sql.Int, id );
        request.input( "userId", sql.VarChar( 50 ), userId );

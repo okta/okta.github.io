@@ -173,6 +173,8 @@ Even if you don't create your next application with JHipster, it's a great way t
 
 I hope you get a chance to get hip with JHipster soon! In the meantime, here are a few related articles about the technologies mentioned in this post:
 
+* [Better, Faster, Lighter Java with Java 12 and JHipster 6](/blog/2019/04/04/java-11-java-12-jhipster-oidc)
+* [Java Microservices with Spring Cloud Config and JHipster](/blog/2019/05/23/java-microservices-spring-cloud-config)
 * [NoSQL Options for Java Developers](/blog/2017/09/08/nosql-options-for-java-developers), and [Part II that includes Q & A with NoSQL Experts](/blog/2017/10/10/nosql-options-for-java-developers-part-ii)
 * [Develop and Deploy Microservices with JHipster](/blog/2017/06/20/develop-microservices-with-jhipster)
 * [The Ultimate Guide to Progressive Web Applications](/blog/2017/07/20/the-ultimate-guide-to-progressive-web-applications)

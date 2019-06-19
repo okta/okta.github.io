@@ -15,6 +15,10 @@ The Implicit Grant Type is a way for a single-page JavaScript app to get an acce
 
 This post is the second in a series where we explore frequently used OAuth 2.0 grant types. Previously we covered the [Authorization Code](/blog/2018/04/10/oauth-authorization-code-grant-type) grant type. If you want to back up a bit and learn more about OAuth 2.0 before we get started, check out [What the Heck is OAuth?](/blog/2017/06/21/what-the-heck-is-oauth), also on the Okta developer blog.
 
+<div style="padding: 18px; border: 1px #007dc1 solid; background: #dbeffb; border-radius: 6px;">
+	Update: <a href="/blog/2019/05/01/is-the-oauth-implicit-flow-dead">Is the OAuth 2.0 Implicit Flow Dead?</a>
+</div>
+
 ## What is an OAuth 2.0 Grant Type?
 
 In OAuth 2.0, the term "grant type" refers to the way an application gets an access token. OAuth 2.0 defines several grant types, including the authorization code flow. OAuth 2.0 extensions can also define new grant types.
@@ -101,6 +105,8 @@ Try out a live demo of the Implicit grant type on the [OAuth Playground](https:/
 
 You can learn more about OAuth 2.0 on [OAuth.net](https://oauth.net/2/grant-types/implicit/), or check out any of these resources to get started building!
 
+* [Is the OAuth 2.0 Implicit Flow Dead?](/blog/2019/05/01/is-the-oauth-implicit-flow-dead)
+* VIDEO: [What's Going On with the Implicit Flow?](https://www.youtube.com/watch?v=CHzERullHe8)
 * [Get Started with Spring Boot, OAuth 2.0, and Okta](/blog/2017/03/21/spring-boot-oauth)
 * [Token Authentication in ASP.NET Core 2.0 - A Complete Guide](/blog/2018/03/23/token-authentication-aspnetcore-complete-guide)
 * [Secure your SPA with Spring Boot and OAuth](/blog/2017/10/27/secure-spa-spring-boot-oauth)

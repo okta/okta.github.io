@@ -364,3 +364,34 @@ amarch:
   github: https://github.com/andymarch
   twitter: https://twitter.com/andymarch
   web: https://andymarch.co.uk
+
+lindsayb:
+  full_name: Lindsay Brunner
+  display_name: Lindsay Brunner
+  avatar: avatar-lindsayb.png
+  email: lindsay.brunner@okta.com
+  github: https://github.com/lindsayb610
+  twitter: https://twitter.com/lindsayb610
+
+peterhimanshu:
+  full_name: Peter Yaworsky and Himanshu Ghai
+  display_name: Peter Yaworsky and Himanshu Ghai
+  avatar: avatar-oktadev.png
+  email: peter.yaworsky@okta.com
+
+charlieholland:
+  full_name: Charlie Holland
+  display_name: Charlie Holland
+  avatar: avatar-charlie-holland.jpeg
+
+laura-rodriguez:
+  full_name: Laura Rodríguez
+  display_name: Laura Rodríguez
+  avatar: avatar-laura-rodriguez.jpg
+  email: laura.rodriguez@okta.com
+
+terje-kolderup:
+  full_name: Terje Kolderup
+  display_name: Terje Kolderup
+  avatar: avatar-terje-kolderup.jpg
+  twitter: https://twitter.com/terjekol

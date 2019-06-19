@@ -16,11 +16,11 @@ if [[ -z "${SUCCESS}" ]]; then
 fi
 
 # Use latest version of Node
-setup_service node v10.7.0
+#setup_service node v12.4.0
 
-export PATH="${PATH}:$(yarn global bin)"
+#export PATH="${PATH}:$(yarn global bin)"
 
 # Install required dependencies
-npm install -g @okta/ci-update-package
-npm install -g @okta/ci-pkginfo
-
+#npm install -g @okta/ci-update-package
+#npm install -g @okta/ci-pkginfo
+#

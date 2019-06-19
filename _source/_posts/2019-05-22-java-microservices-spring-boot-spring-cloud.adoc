@@ -1,0 +1,638 @@
+---
+layout: blog_post
+title: "Java Microservices with Spring Boot and Spring Cloud"
+author: mraible
+description: "This tutorial shows you how to build a microservices architecture with Spring Boot and Spring Cloud."
+tags: [java, microservices, spring boot, spring cloud, spring cloud config, jhipster]
+tweets:
+- "The Java ecosystem has some well-established patterns for developing microservice architectures. If you're familiar with Spring, you'll feel right at home developing with Spring Boot and Spring Cloud."
+- "Want to learn how to use Java and Spring to develop a microservices architecture? This tutorial from @mraible shows you how!"
+- "Java + Spring Boot + Spring Cloud = 💚 for microservices by @mraible."
+image: blog/featured/okta-java-short-skew.jpg
+---
+:page-liquid:
+
+Java is a great language to use when developing a microservice architecture. In fact, some of the biggest names in our industry use it. Have you ever heard of Netflix, Amazon, or Google? What about eBay, Twitter, and LinkedIn? Yes, major companies handling incredible traffic are doing it with Java.
+
+Implementing a microservices architecture in Java isn't for everyone. For that matter, implementing microservices, in general, isn't often needed. Most companies do it to scale their people, not their systems. If you're going to scale your people, hiring Java developers is one of the best ways to do it. After all, there are more developers fluent in Java than most other languages - though JavaScript seems to be catching up quickly!
+
+The Java ecosystem has some well-established patterns for developing microservice architectures. If you're familiar with Spring, you'll feel right at home developing with Spring Boot and Spring Cloud. Since that's one of the quickest ways to get started, I figured I'd walk you through a quick tutorial.
+
+== Create Java Microservices with Spring Cloud and Spring Boot
+
+In most of my tutorials, I show you how to build everything from scratch. Today I'd like to take a different approach and step through a pre-built example with you. Hopefully, this will be a bit shorter and easier to understand.
+
+You can start by cloning the https://github.com/oktadeveloper/java-microservices-examples[@oktadeveloper/java-microservices-examples] repository.
+
+[source,shell]
+----
+git clone https://github.com/oktadeveloper/java-microservices-examples.git
+cd java-microservices-examples/spring-boot+cloud
+----
+
+In the `spring-boot+cloud` directory, there are three projects:
+
+* **discovery-service**: a Netflix Eureka server, used for service discovery.
+* **car-service**: a simple Car Service that uses Spring Data REST to serve up a REST API of cars.
+* **api-gateway**: an API gateway that has a `/cool-cars` endpoint that talks to the `car-service` and filters out cars that aren't cool (in my opinion, of course).
+
+I created all of these applications using https://start.spring.io[start.spring.io's] REST API and https://httpie.org[HTTPie].
+
+[source,shell]
+----
+http https://start.spring.io/starter.zip javaVersion==11 \
+  artifactId==discovery-service name==eureka-service \
+  dependencies==cloud-eureka-server baseDir==discovery-service | tar -xzvf -
+
+http https://start.spring.io/starter.zip \
+  artifactId==car-service name==car-service baseDir==car-service \
+  dependencies==actuator,cloud-eureka,data-jpa,h2,data-rest,web,devtools,lombok | tar -xzvf -
+
+http https://start.spring.io/starter.zip \
+  artifactId==api-gateway name==api-gateway baseDir==api-gateway \
+  dependencies==cloud-eureka,cloud-feign,data-rest,web,cloud-hystrix,lombok | tar -xzvf -
+----
+
+=== Spring Microservices with Java 11+
+
+To make the `discovery-service` run on Java 11, I had to add a dependency on JAXB.
+
+[source,xml]
+----
+<dependency>
+    <groupId>org.glassfish.jaxb</groupId>
+    <artifactId>jaxb-runtime</artifactId>
+</dependency>
+----
+
+The other two applications worked fine out-of-the-box on Java 11 with no changes in dependencies.
+
+== Java Service Discovery with Netflix Eureka
+
+The `discovery-service` is configured the same as you would most Eureka servers. It as an `@EnableEurekaServer` annotation on its main class and properties that set its port and turn off discovery.
+
+[source,properties]
+----
+server.port=8761
+eureka.client.register-with-eureka=false
+----
+
+The `car-service` and `api-gateway` projects are configured in a similar fashion. Both have a unique name defined and `car-service` is configured to run on port `8090` so it doesn't conflict with `8080`.
+
+[source,properties]
+.car-service/src/main/resources/application.properties
+----
+server.port=8090
+spring.application.name=car-service
+----
+
+[source,properties]
+.api-gateway/src/main/resources/application.properties
+----
+spring.application.name=api-gateway
+----
+
+The main class in both projects is annotated with `@EnableDiscoveryClient`.
+
+== Build a Java Microservice with Spring Data REST
+
+The `car-service` provides a REST API that lets you CRUD (Create, Read, Update, and Delete) cars. It creates a default set of cars when the application loads using an `ApplicationRunner` bean.
+
+[source,java]
+.car-service/src/main/java/com/example/carservice/CarServiceApplication.java
+----
+package com.example.carservice;
+
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.NonNull;
+import org.springframework.boot.ApplicationRunner;
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
+import org.springframework.context.annotation.Bean;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.rest.core.annotation.RepositoryRestResource;
+
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import java.util.stream.Stream;
+
+@EnableDiscoveryClient
+@SpringBootApplication
+public class CarServiceApplication {
+
+    public static void main(String[] args) {
+        SpringApplication.run(CarServiceApplication.class, args);
+    }
+
+    @Bean
+    ApplicationRunner init(CarRepository repository) {
+        return args -> {
+            Stream.of("Ferrari", "Jaguar", "Porsche", "Lamborghini", "Bugatti",
+                    "AMC Gremlin", "Triumph Stag", "Ford Pinto", "Yugo GV").forEach(name -> {
+                repository.save(new Car(name));
+            });
+            repository.findAll().forEach(System.out::println);
+        };
+    }
+}
+
+@Data
+@NoArgsConstructor
+@Entity
+class Car {
+
+    public Car(String name) {
+        this.name = name;
+    }
+
+    @Id
+    @GeneratedValue
+    private Long id;
+
+    @NonNull
+    private String name;
+}
+
+@RepositoryRestResource
+interface CarRepository extends JpaRepository<Car, Long> {
+}
+----
+
+=== Spring Cloud + Feign and Hystrix in an API Gateway
+
+https://github.com/OpenFeign/feign[Feign] makes writing Java HTTP clients easier. Spring Cloud makes it possible to create a Feign client with just a few lines of code. https://github.com/Netflix/Hystrix[Hystrix] makes it possible to add failover capabilities to your Feign clients so they're more resilient.
+
+The `api-gateway` uses Feign and Hystrix to talk to the downstream `car-service` and failover to a `fallback()` method if it's unavailable. It also exposes a `/cool-cars` endpoint that filters out cars you might not want to own.
+
+[source,java]
+.api-gateway/src/main/java/com/example/apigateway/ApiGatewayApplication.java
+----
+package com.example.apigateway;
+
+import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
+import lombok.Data;
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.cloud.client.circuitbreaker.EnableCircuitBreaker;
+import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
+import org.springframework.cloud.netflix.zuul.EnableZuulProxy;
+import org.springframework.cloud.openfeign.EnableFeignClients;
+import org.springframework.cloud.openfeign.FeignClient;
+import org.springframework.hateoas.Resources;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.stream.Collectors;
+
+@EnableFeignClients
+@EnableCircuitBreaker
+@EnableDiscoveryClient
+@EnableZuulProxy
+@SpringBootApplication
+public class ApiGatewayApplication {
+
+    public static void main(String[] args) {
+        SpringApplication.run(ApiGatewayApplication.class, args);
+    }
+}
+
+@Data
+class Car {
+    private String name;
+}
+
+@FeignClient("car-service")
+interface CarClient {
+
+    @GetMapping("/cars")
+    @CrossOrigin
+    Resources<Car> readCars();
+}
+
+@RestController
+class CoolCarController {
+
+    private final CarClient carClient;
+
+    public CoolCarController(CarClient carClient) {
+        this.carClient = carClient;
+    }
+
+    private Collection<Car> fallback() {
+        return new ArrayList<>();
+    }
+
+    @GetMapping("/cool-cars")
+    @CrossOrigin
+    @HystrixCommand(fallbackMethod = "fallback")
+    public Collection<Car> goodCars() {
+        return carClient.readCars()
+                .getContent()
+                .stream()
+                .filter(this::isCool)
+                .collect(Collectors.toList());
+    }
+
+    private boolean isCool(Car car) {
+        return !car.getName().equals("AMC Gremlin") &&
+                !car.getName().equals("Triumph Stag") &&
+                !car.getName().equals("Ford Pinto") &&
+                !car.getName().equals("Yugo GV");
+    }
+}
+----
+
+== Run a Java Microservices Architecture
+
+If you run all of these services with `./mvnw` in separate terminal windows, you can navigate to `http://localhost:8761` and see they've registered with Eureka.
+
+image::{% asset_path 'blog/java-microservices/eureka-server.png' %}[alt=Eureka Server,width=800,align=center]
+
+If you navigate to `http://localhost:8080/cool-bars` in your browser, you'll be redirected to Okta. What the?
+
+== Secure Java Microservices with OAuth 2.0 and OIDC
+
+I've already configured security in this microservices architecture using OAuth 2.0 and OIDC. What's the difference between the two? OIDC is an extension to OAuth 2.0 that provides identity. It also provides discovery so all the different OAuth 2.0 endpoints can be discovered from a single URL (called an `issuer`).
+
+How did I configure security for all these microservices? I'm glad you asked!
+
+I added Okta's Spring Boot starter to the `pom.xml` in `api-gateway` and `car-service`:
+
+[source,xml]
+----
+<dependency>
+    <groupId>com.okta.spring</groupId>
+    <artifactId>okta-spring-boot-starter</artifactId>
+    <version>1.2.0</version>
+</dependency>
+----
+
+Then I created a new OIDC app in Okta, configured with authorization code flow. You'll need to complete the following steps if you want to see everything in action.
+
+=== Create a Web Application in Okta
+
+Log in to your Okta Developer account (or https://developer.okta.com/signup/[sign up] if you don't have an account).
+
+1. From the **Applications** page, choose **Add Application**.
+2. On the Create New Application page, select **Web**.
+3. Give your app a memorable name, add `http://localhost:8080/login/oauth2/code/okta` as a Login redirect URI, select **Refresh Token** (in addition to **Authorization Code**), and click **Done**.
+
+Copy the issuer (found under **API** > **Authorization Servers**), client ID, and client secret into `application.properties` for both projects.
+
+[source,properties]
+----
+okta.oauth2.issuer=$issuer
+okta.oauth2.client-id=$clientId
+okta.oauth2.client-secret=$clientSecret
+----
+
+The Java code in the section below already exists, but I figured I'd explain it so you know what's going on.
+
+=== Configure Spring Security for OAuth 2.0 Login and Resource Server
+
+In `ApiGatewayApplication.java`, I added Spring Security configuration to enable OAuth 2.0 login and enable the gateway as a resource server.
+
+[source,java]
+----
+@Configuration
+static class OktaOAuth2WebSecurityConfigurerAdapter extends WebSecurityConfigurerAdapter {
+
+    @Override
+    protected void configure(HttpSecurity http) throws Exception {
+        // @formatter:off
+        http
+            .authorizeRequests().anyRequest().authenticated()
+                .and()
+            .oauth2Login()
+                .and()
+            .oauth2ResourceServer().jwt();
+        // @formatter:on
+    }
+}
+----
+
+The resource server configuration is not used in this example, but I added in case you wanted to hook up a mobile app or SPA to this gateway. If you're using a SPA, you'll also need to add a bean to configure CORS.
+
+[source,java]
+----
+@Bean
+public FilterRegistrationBean<CorsFilter> simpleCorsFilter() {
+    UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+    CorsConfiguration config = new CorsConfiguration();
+    config.setAllowCredentials(true);
+    config.setAllowedOrigins(Collections.singletonList("*"));
+    config.setAllowedMethods(Collections.singletonList("*"));
+    config.setAllowedHeaders(Collections.singletonList("*"));
+    source.registerCorsConfiguration("/**", config);
+    FilterRegistrationBean<CorsFilter> bean = new FilterRegistrationBean<>(new CorsFilter(source));
+    bean.setOrder(Ordered.HIGHEST_PRECEDENCE);
+    return bean;
+}
+----
+
+NOTE: If you do use a CORS filter like this one, I recommend you change the origins, methods, and headers to be more specific, increasing security.
+
+The `CarServiceApplication.java` is only configured as a resource server since it's not expected to be accessed directly.
+
+[source,java]
+----
+@Configuration
+static class OktaOAuth2WebSecurityConfigurerAdapter extends WebSecurityConfigurerAdapter {
+
+    @Override
+    protected void configure(HttpSecurity http) throws Exception {
+        // @formatter:off
+        http
+            .authorizeRequests().anyRequest().authenticated()
+                .and()
+            .oauth2ResourceServer().jwt();
+        // @formatter:on
+    }
+}
+----
+
+To make it possible for the API gateway to access the Car Service, I created a `UserFeignClientInterceptor.java` in the API gateway project.
+
+[source,java]
+.api-gateway/src/main/java/com/example/apigateway/UserFeignClientInterceptor.java
+----
+package com.example.apigateway;
+
+import feign.RequestInterceptor;
+import feign.RequestTemplate;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.oauth2.client.OAuth2AuthorizedClient;
+import org.springframework.security.oauth2.client.OAuth2AuthorizedClientService;
+import org.springframework.security.oauth2.client.authentication.OAuth2AuthenticationToken;
+import org.springframework.security.oauth2.core.OAuth2AccessToken;
+import org.springframework.stereotype.Component;
+
+@Component
+public class UserFeignClientInterceptor implements RequestInterceptor {
+    private static final String AUTHORIZATION_HEADER = "Authorization";
+    private static final String BEARER_TOKEN_TYPE = "Bearer";
+    private final OAuth2AuthorizedClientService clientService;
+
+    public UserFeignClientInterceptor(OAuth2AuthorizedClientService clientService) {
+        this.clientService = clientService;
+    }
+
+    @Override
+    public void apply(RequestTemplate template) {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        OAuth2AuthenticationToken oauthToken = (OAuth2AuthenticationToken) authentication;
+        OAuth2AuthorizedClient client = clientService.loadAuthorizedClient(
+                oauthToken.getAuthorizedClientRegistrationId(),
+                oauthToken.getName());
+
+        OAuth2AccessToken accessToken = client.getAccessToken();
+        template.header(AUTHORIZATION_HEADER, String.format("%s %s", BEARER_TOKEN_TYPE, accessToken.getTokenValue()));
+    }
+}
+----
+
+I configured it as a `RequestInterceptor` in `ApiGatewayApplication.java`:
+
+[source,java]
+----
+@Bean
+public RequestInterceptor getUserFeignClientInterceptor(OAuth2AuthorizedClientService clientService) {
+    return new UserFeignClientInterceptor(clientService);
+}
+----
+
+And, I added two properties in `api-gateway/src/main/resources/application.properties` so Feign is Spring Security-aware.
+
+[source,properties]
+----
+feign.hystrix.enabled=true
+hystrix.shareSecurityContext=true
+----
+
+== See Java Microservices Running with Security Enabled
+
+Run all of the applications with `./mvnw` in separate terminal windows, or in your IDE if you prefer.
+
+TIP: To make it simpler to run in an IDE, there is an aggregator `pom.xml` in the root directory. If you'd installed https://emmanuelbernard.com/blog/2017/02/27/start-intellij-idea-command-line/[IntelliJ IDEA's command line launcher], you just need to run `idea pom.xml`.
+
+Navigate to `http://localhost:8080/cool-cars` and you'll be redirected to Okta to log in.
+
+image::{% asset_path 'blog/java-microservices/okta-login.png' %}[alt=Okta Login,width=800,align=center]
+
+Enter the username and password for your Okta developer account and you should see a list of cool cars.
+
+image::{% asset_path 'blog/java-microservices/cool-cars.png' %}[alt=Cool Cars,width=800,align=center]
+
+If you made it this far and got the examples apps running, congratulations! You're super cool! 😎
+
+== Use Netflix Zuul and Spring Cloud to Proxy Routes
+
+Another handy feature you might like in your microservices architecture is https://github.com/Netflix/zuul[Netflix Zuul]. Zuul is a gateway service that provides dynamic routing, monitoring, resiliency, and more.
+
+To add Zuul, I added it as a dependency to `api-gateway/pom.xml`:
+
+[source,xml]
+----
+<dependency>
+    <groupId>org.springframework.cloud</groupId>
+    <artifactId>spring-cloud-starter-netflix-zuul</artifactId>
+</dependency>
+----
+
+Then I added `@EnableZuulProxy` to the `ApiGatewayApplication` class.
+
+[source,java]
+----
+import org.springframework.cloud.netflix.zuul.EnableZuulProxy;
+
+@EnableZuulProxy
+@SpringBootApplication
+public class ApiGatewayApplication {
+    ...
+}
+----
+
+To pass the access token to proxied routes, I created an `AuthorizationHeaderFilter` class that extends `ZuulFilter`.
+
+[source,java]
+----
+package com.example.apigateway;
+
+import com.netflix.zuul.ZuulFilter;
+import com.netflix.zuul.context.RequestContext;
+import org.springframework.core.Ordered;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.oauth2.client.OAuth2AuthorizedClient;
+import org.springframework.security.oauth2.client.OAuth2AuthorizedClientService;
+import org.springframework.security.oauth2.client.authentication.OAuth2AuthenticationToken;
+import org.springframework.security.oauth2.core.OAuth2AccessToken;
+import org.springframework.security.oauth2.core.oidc.OidcUserInfo;
+
+import java.util.Optional;
+
+import static org.springframework.cloud.netflix.zuul.filters.support.FilterConstants.PRE_TYPE;
+
+public class AuthorizationHeaderFilter extends ZuulFilter {
+
+    private final OAuth2AuthorizedClientService clientService;
+
+    public AuthorizationHeaderFilter(OAuth2AuthorizedClientService clientService) {
+        this.clientService = clientService;
+    }
+
+    @Override
+    public String filterType() {
+        return PRE_TYPE;
+    }
+
+    @Override
+    public int filterOrder() {
+        return Ordered.LOWEST_PRECEDENCE;
+    }
+
+    @Override
+    public boolean shouldFilter() {
+        return true;
+    }
+
+    @Override
+    public Object run() {
+        RequestContext ctx = RequestContext.getCurrentContext();
+        Optional<String> authorizationHeader = getAuthorizationHeader();
+        authorizationHeader.ifPresent(s -> ctx.addZuulRequestHeader("Authorization", s));
+        return null;
+    }
+
+    private Optional<String> getAuthorizationHeader() {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        OAuth2AuthenticationToken oauthToken = (OAuth2AuthenticationToken) authentication;
+        OAuth2AuthorizedClient client = clientService.loadAuthorizedClient(
+                oauthToken.getAuthorizedClientRegistrationId(),
+                oauthToken.getName());
+
+        OAuth2AccessToken accessToken = client.getAccessToken();
+
+        if (accessToken == null) {
+            return Optional.empty();
+        } else {
+            String tokenType = accessToken.getTokenType().getValue();
+            String authorizationHeaderValue = String.format("%s %s", tokenType, accessToken.getTokenValue());
+            return Optional.of(authorizationHeaderValue);
+        }
+    }
+}
+----
+
+NOTE: You might notice that there's code in the `getAuthorizationHeader()` method that's very similar to the code that's in `UserFeignClientInterceptor`. Since it's only a few lines, I opted not to move these to a utility class. The Feign interceptor is for the `@FeignClient`, while the Zuul filter is for Zuul-proxied requests.
+
+To make Spring Boot and Zuul aware of this filter, I registered it as a bean in the main application class.
+
+[source,java]
+----
+public AuthorizationHeaderFilter authHeaderFilter(OAuth2AuthorizedClientService clientService) {
+    return new AuthorizationHeaderFilter(clientService);
+}
+----
+
+To proxy requests from the API Gateway to the Car Service, I added routes to `api-gateway/src/main/resources/application.properties`.
+
+[source,properties]
+----
+zuul.routes.car-service.path=/cars
+zuul.routes.car-service.url=http://localhost:8090
+
+zuul.routes.home.path=/home
+zuul.routes.home.url=http://localhost:8090
+
+zuul.sensitive-headers=Cookie,Set-Cookie
+----
+
+I added a `HomeController` to the `car-service` project for the `/home` route.
+
+[source,java]
+----
+package com.example.carservice;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.security.oauth2.server.resource.authentication.JwtAuthenticationToken;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import java.security.Principal;
+
+@RestController
+public class HomeController {
+
+    private final static Logger log = LoggerFactory.getLogger(HomeController.class);
+
+    @GetMapping("/home")
+    public String howdy(Principal principal) {
+        String username = principal.getName();
+        JwtAuthenticationToken token = (JwtAuthenticationToken) principal;
+        log.info("claims: " + token.getTokenAttributes());
+        return "Hello, " + username;
+    }
+}
+----
+
+=== Confirm Your Zuul Routes Work
+
+Since these changes are already in the project you cloned, you should be able to view `https://localhost:8080/cars` and `http://localhost:8080/home` in your browser.
+
+image::{% asset_path 'blog/java-microservices/zuul-home.png' %}[alt=Home with Zuul,width=800,align=center]
+
+== What About Spring Cloud Config?
+
+One of the things you might've noticed in this example is you had to configure the OIDC properties in each application. This could be a real pain if you had 500 microservices. Yes, you could define them as environment variables and this would solve the problem. However, if you have different microservices stacks using different OIDC client IDs, this approach will be difficult.
+
+https://spring.io/projects/spring-cloud-config[Spring Cloud Config] is a project that provides externalized configuration for distributed systems. Rather than adding it to this example, I'll cover it in a link:/blog/2019/05/23/java-microservices-spring-cloud-config[future tutorial].
+
+== What About Kotlin?
+
+I wrote this post with Java because it's the most popular language in the Java ecosystem. However, https://redmonk.com/sogrady/2019/03/20/language-rankings-1-19/[Kotlin is on the rise], according to RedMonk's programming language rankings from January 2019.
+
+> For this quarter, at least, Kotlin grew substantially while all three of its fellow JVM-based counterparts declined. Kotlin jumped so far, in fact, that it finally broke into the Top 20 at #20 and leapfrogged Clojure (#24) and Groovy (#24) while doing so. It's still well behind Scala (#13), but Kotlin's growth has been second only to Swift in this history of these rankings so it will be interesting to see what lies ahead in the next run or two.
+
+Spring has excellent support for Kotlin, and you can choose it as a language on start.spring.io. If you'd like to see us write more posts using Kotlin, please let us know in the comments!
+
+== Known Issues with Refresh Tokens
+
+By default, Okta's access tokens expire after one hour. This is expected, and short-lived access tokens are recommended when using OAuth 2.0. Refresh tokens typically live a lot longer -- think days or months -- and can be used to get new access tokens. This should happen automatically when using Okta's Spring Boot starter, but it does not.
+
+I configured my Okta org so its access tokens expire in five minutes. You can do this by going to **API** > **Authorization Servers** > **Access Policies**, click on the **Default Policy**, and edit its rule. Then change the access token lifetime from 1 hour to 5 minutes.
+
+Hit `http://localhost:8080/cool-cars` in your browser and you'll be redirected to Okta to login. Log in and you should see a JSON string of cars.
+
+Go do something else for more than 5 minutes.
+
+Come back, refresh your browser and you'll see `[]` instead of all the cars.
+
+I'm still working on a solution to this and will update this post once I find one. If you happen to know of a solution, please let me know!
+
+**Update:** Spring Security 5.1 doesn't yet automatically refresh the OAuth access token. It should be https://github.com/spring-projects/spring-security/issues/6811[available in Spring Security 5.2].
+
+== Have More Fun with Spring Boot, Spring Cloud, and Microservices
+
+I hope you liked this tour of how to build Java microservice architectures with Spring Boot and Spring Cloud. You learned how to build everything with minimal code, then configure it to be secure with Spring Security, OAuth 2.0, and Okta.
+
+You can find all the code shown in this tutorial https://github.com/oktadeveloper/java-microservices-examples[on GitHub].
+
+We're big fans of Spring Boot, Spring Cloud, and microservices on this blog. Here are several other posts you might find interesting:
+
+* link:/blog/2019/05/23/java-microservices-spring-cloud-config[Java Microservices with Spring Cloud Config and JHipster]
+* link:/blog/2019/05/13/angular-8-spring-boot-2[Angular 8 + Spring Boot 2.2: Build a CRUD App Today!]
+* link:/blog/2019/05/15/spring-boot-login-options[A Quick Guide to Spring Boot Login Options]
+* link:/blog/2019/04/01/spring-boot-microservices-with-kubernetes[Build a Microservice Architecture with Spring Boot and Kubernetes]
+* link:/blog/2019/03/07/spring-microservices-https-oauth2[Secure Service-to-Service Spring Microservices with HTTPS and OAuth 2.0]
+* link:/blog/2019/02/28/spring-microservices-docker[Build Spring Microservices and Dockerize Them for Production]
+
+Please follow us https://twitter.com/oktadev[on Twitter @oktadev] and subscribe to https://www.youtube.com/c/oktadev[our YouTube channel] for more Spring Boot and microservices knowledge.
