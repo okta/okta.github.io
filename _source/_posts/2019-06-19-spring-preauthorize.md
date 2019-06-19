@@ -173,7 +173,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 }
 ```
 
-The `@EnableGlobalMethodSecurity(prePostEnabled = true)` annotation is what enables our `@PreAuthorize` annotation. This can be added to any class with the `@Configuration` annotation. I won't go into any depth about them here, but you can also enable `@Secured`, an older Spring Security annotation, and JSR-250 annotations.
+The `@EnableGlobalMethodSecurity(prePostEnabled = true)` annotation is what enables the `@PreAuthorize` annotation. This can be added to any class with the `@Configuration` annotation. I won't go into any depth about them here, but you can also enable `@Secured`, an older Spring Security annotation, and JSR-250 annotations.
 
 The `configure(final HttpSecurity http)` method overrides the default `HttpBuilder` configuration. Because it's empty, it leaves the application without authorization or authentication.
 
