@@ -101,7 +101,7 @@ Go ahead and run the application. From the root project directory, run:
 ./gradlew bootRun
 ```
 
-Once Spring Boot has finished launching, navigate to: `http://localhost:8080`
+Once Spring Boot has finished launching, navigate to `http://localhost:8080`.
 
 You'll notice a login form appears. Whoa! Where did that come from?!
 
