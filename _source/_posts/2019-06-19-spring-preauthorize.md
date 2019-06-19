@@ -703,7 +703,7 @@ You covered a ton of ground! You got a good look at Spring method-level security
 
 Next stop: rocket science!
 
-If you'd like to check out this complete project, you can [find the repo on Github](https://github.com/oktadeveloper/okta-spring-preauthorize-example).
+If you'd like to check out this complete project, you can [find the repo on GithHub](https://github.com/oktadeveloper/okta-spring-preauthorize-example).
 
 If you'd like to learn more about Spring Boot, Spring Security, or secure user management, check out any of these great tutorials:
 
