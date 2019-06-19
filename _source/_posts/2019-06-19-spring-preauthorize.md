@@ -682,7 +682,7 @@ Click the **Add Scope** button.
  
  Click **Create**.
 
-You just added a custom scope (cunningly named `custom`) to the default Okta authorization server.
+You just added a custom scope (cunningly named `custom`) to your default Okta authorization server.
 
 One last time, run the Spring Boot app: `./gradlew bootRun`.
 
