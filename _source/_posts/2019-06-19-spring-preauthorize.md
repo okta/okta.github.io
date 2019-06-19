@@ -7,7 +7,7 @@ tags: [java, spring, spring boot, spring security, security]
 tweets:
 - "Learn how to use method-based security with @SpringSecurity in this tutorial."
 - "Confused on when to use HttpSecurity vs PreAuthorize with @SpringSecurity, check out this post!"
-- "Andrew explains how to secure a SpringBoot app with a couple lines of code."
+- "Andrew explains how to secure a @springboot app with a couple of lines of code."
 image: blog/featured/okta-java-bottle-headphones.jpg
 ---
 
