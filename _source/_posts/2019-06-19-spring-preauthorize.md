@@ -17,7 +17,7 @@ The first authentication method is `HttpSecurity`, which is global and is by def
 
 Method-level security is implemented by placing the `@PreAuthorize` annotation on controller methods (actually one of a set of annotations available, but the most commonly used). This annotation contains a [Spring Expression Language (SpEL)](https://docs.spring.io/spring/docs/current/spring-framework-reference/core.html#expressions) snippet that is assessed to determine if the request should be authenticated. If access is not granted, the method is not executed and an HTTP Unauthorized is returned. In practice, using the `@PreAuthorize` annotation on a controller method is very similar to using `HttpSecurity` pattern matchers on a specific endpoint. There are some differences, however.
 
-## Differentiate Between Spring Security’s @PreAuthorize and HttpSecurity
+## Differentiate Between Spring Security's @PreAuthorize and HttpSecurity
 
 The first difference is subtle, but worth mentioning. `HttpSecurity` method rejects the request earlier, in a web request filter, before controller mapping has occurred. In contrast, the `@PreAuthorize` assessment happens later, directly before the execution of the controller method. This means that configuration in `HttpSecurity` is appied **before** `@PreAuthorize`.
 
@@ -310,7 +310,7 @@ Click **Done**.
 
 {% img blog/spring-preauthorize/new-oidc-app.png alt:"OIDC Application" width:"600" %}{: .center-image }
 
-Take note of the **Client ID** and **Client Secret** at the bottom of the page. You’ll need these in the next section.
+Take note of the **Client ID** and **Client Secret** at the bottom of the page. You'll need these in the next section.
 
 And that's it on the Okta side. 
 
@@ -703,9 +703,9 @@ You covered a ton of ground! You got a good look at Spring method-level security
 
 Next stop: rocket science!
 
-If you’d like to check out this complete project, you can [find the repo on Github](https://github.com/oktadeveloper/okta-spring-preauthorize-example).
+If you'd like to check out this complete project, you can [find the repo on Github](https://github.com/oktadeveloper/okta-spring-preauthorize-example).
 
-If you’d like to learn more about Spring Boot, Spring Security, or secure user management, check out any of these great tutorials:
+If you'd like to learn more about Spring Boot, Spring Security, or secure user management, check out any of these great tutorials:
 
 -   [Get Started with Spring Boot, OAuth 2.0, and Okta](/blog/2017/03/21/spring-boot-oauth)
 -   [Add Single Sign-On to Your Spring Boot Web App in 15 Minutes](/blog/2017/11/20/add-sso-spring-boot-15-min)
