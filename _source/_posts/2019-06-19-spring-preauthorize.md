@@ -1,6 +1,6 @@
 ---
 layout: blog_post
-title: "Spring Method Security with Spring PreAuthorize"
+title: "Method Security with Spring Security and PreAuthorize"
 author: moksamedia
 description: "In this tutorial, you'll secure a Spring Boot app with Spring Security and the PreAuthorize annotation."
 tags: [java, spring, spring boot, spring security, security]
@@ -29,9 +29,9 @@ Before we dive into the project, I want to also mention that Spring also provide
 
 ## Dependencies
 
-The dependencies for this tutorial are pretty simple. You need: 1.) Java 1.8+ installed, and 2.) an Okta developer account. 
+The dependencies for this tutorial are pretty simple. You need: 1) Java 1.8+ installed, and 2) an Okta developer account. 
 
-If you do not have Java installed, go to [the Java homepage on the Oracle website](https://www.java.com/en/download/). On a Mac, you can also use [SDKMAN](https://sdkman.io/).  
+If you do not have Java installed, go to [AdoptOpenJDK](https://adoptopenjdk.net/). On *nix systems, you can also use [SDKMAN](https://sdkman.io/).  
 
 If you do not already have a free Okta developer account, go to [our website and sign up](https://developer.okta.com/signup/).
 
@@ -302,11 +302,11 @@ From your Okta developer dashboard, in the top menu, click on **Applications**.
 
 {% img blog/spring-preauthorize/add-app.png alt:"Okta Dashboard" width:"800" %}{: .center-image }
 
-Click green **Add Application** button
-Click **Web** application type, and **Next**
-Give the app a Name. Any name.
-Set **Login Redirect URIs** to `http://localhost:8080/login/oauth2/code/okta`
-Click **Done**.
+- Click the green **Add Application** button
+- Click **Web** application type, and **Next**
+- Give the app a Name. Any name.
+- Set **Login Redirect URIs** to `http://localhost:8080/login/oauth2/code/okta`
+- Click **Done**.
 
 {% img blog/spring-preauthorize/new-oidc-app.png alt:"OIDC Application" width:"600" %}{: .center-image }
 
@@ -608,8 +608,7 @@ The important point to remember is that if you want to user `hasRole()`, you nee
 
 ## Authorization Based On OAuth 2.0 Scopes with Spring PreAuthorize
 
-You can also use the `@PreAuthorize` annotation to limit access based on OAuth scopes. From [
-the OAuth 2.0 scopes documentation](https://oauth.net/2/scope/): 
+You can also use the `@PreAuthorize` annotation to limit access based on OAuth scopes. From [the OAuth 2.0 scopes documentation](https://oauth.net/2/scope/): 
 
 > Scope is a mechanism in OAuth 2.0 to limit an application's access to a user's account. An application can request one or more scopes, this information is then presented to the user in the consent screen, and the access token issued to the application will be limited to the scopes granted.
 
