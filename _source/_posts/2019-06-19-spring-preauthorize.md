@@ -204,7 +204,7 @@ This time you will be able to navigate to the home page but going to the `/restr
 
 In a production app, you'd need to override this to return a better, custom error page or otherwise handle the error (if you want to create a custom error page, take a look at [the Spring docs on the subject](https://docs.spring.io/spring-boot/docs/2.1.x/reference/html/boot-features-developing-web-applications.html#boot-features-error-handling-custom-error-pages)). But you can see that the app is returning a **403 / Unauthorized**, which is what you want.
 
-Great. Now, instead, change your WebController class to match the following:
+Great. Now, instead, change your `WebController` class to match the following:
 
 ```java
 @Controller
@@ -235,7 +235,7 @@ If you run the app (`./gradlew bootRun`) and try the endpoints, you'll find that
 
 Note that if you added a second, separate web controller, all of its methods would still by-default be open and not require authentication.
 
-A third option (my favorite on most small to medium-sized apps) is to use `HttpBuilder` to require authentication for all requests by default and to explicitly allow any public endpoints. This allows me to use `@PreAuthorize` to refine access control for specific methods based on users or roles or groups but makes it clear that all paths **unless explicitly allowed** will have some basic security applied. It also means that public paths are defined in a central place. Again this works for a certain type of project, but may not be the best structure for all projects. 
+A third option (my favorite on most small to medium-sized apps) is to use `HttpBuilder` to require authentication for all requests by default and to explicitly allow any public endpoints. This allows you to use `@PreAuthorize` to refine access control for specific methods based on users or roles or groups but makes it clear that all paths **unless explicitly allowed** will have some basic security applied. It also means that public paths are defined in a central place. Again this works for a certain type of project, but may not be the best structure for all projects. 
 
 To implement this, change the `WebController` class to this (removing all the `@PreAuthorize` annotations):
 
@@ -278,9 +278,9 @@ What you've done is use `SecurityConfig` class to explicitly permit all requests
 
 Try it! 
 
-Run the app using: `./gradlew bootRun`
+Run the app using: `./gradlew bootRun`.
 
-Navigate to the home endpoint, which is open: `http://localhost:8080`
+Navigate to the home endpoint, which is open: `http://localhost:8080`.
 
 And the restricted endpoint, which requires authentication: `http://localhost:8080/restricted`.
 
@@ -288,11 +288,11 @@ When Spring's login form appears, don't forget you can use the default credentia
 
 ## Advance to OAuth 2.0 Login
 
-Form-based authentication feels pretty creaky and old these days. More and more, users expect to be able to log in using third party sites, and due to increased security threats, there's less motivation to manage user credentials on your own server. Okta is a software-as-service identity and access management company that provides a whole host of services. In this tutorial, you're going to use them to quickly implement a login form using OAuth 2.0 and OIDC (OpenID Connect). 
+Form-based authentication feels pretty creaky and old these days. More and more, users expect to be able to log in using third-party sites, and due to increased security threats, there's less motivation to manage user credentials on your own server. Okta is a software-as-service identity and access management company that provides a whole host of services. In this section, you're going to use them to quickly implement a login form using OAuth 2.0 and OIDC (OpenID Connect). 
 
 Very, very briefly: OAuth 2.0 is an industry-standard authorization protocol and OIDC is another open standard on top of OAuth that adds an identity layer (authentication). Together they provide a structured way for programs to manage authentication and authorization and to communicate across networks and the internet. Neither OAuth nor OIDC, however, provide an implementation. They are just specs or protocols. That's where Okta comes in. Okta has an implementation of the OAuth 2.0 and OIDC specs that allows for programs to use their services to quickly provide login, registration, and single sign-on (or social login) services. In this tutorial, you're just going to be implementing a login function, but at the end of the tutorial, you can find links to other resources to show you how to implement social login and registration.
 
-First, sign up for a free Okta Developer account: [https://developer.okta.com/](https://developer.okta.com/)
+First, sign up for a free Okta Developer account: [https://developer.okta.com/signup/](https://developer.okta.com/signup/).
 
 If this is the first time you've logged in or just registered, you may need to click the **Admin** button to get to the developer console.
 
@@ -318,7 +318,7 @@ Now you need to configure Spring Boot to use Okta as an OAuth 2.0 provider.
 
 ## Configure Your Spring Boot App For OAuth 2.0
 
-Making Spring Boot work with OAuth 2.0 and Okta is remarkably easy. The first step is to add the Okta Spring Boot Starter dependency. It's totally possible to use Okta OAuth 2.0 / OIDC without using their starter; however, the starter simplifies the configuration. It also handles extracting the groups claim from the JSON Web Token and turning it into a Spring Security authority (which will look at in a bit). Take a look at the [Okta Spring Boot Starter GitHub page](https://github.com/okta/okta-spring-boot) for more info.
+Making Spring Boot work with OAuth 2.0 and Okta is remarkably easy. The first step is to add the Okta Spring Boot Starter dependency. It's totally possible to use Okta OAuth 2.0 / OIDC without using our starter; however, the starter simplifies the configuration. It also handles extracting the groups claim from the JSON Web Token and turning it into a Spring Security authority (which will look at in a bit). Take a look at the [Okta Spring Boot Starter GitHub page](https://github.com/okta/okta-spring-boot) for more info.
 
 Update the dependencies section of your `build.gradle` file:
 
@@ -342,7 +342,7 @@ okta:
     client-secret: {yourClientSecret}
 ```
 
-Don't forget to update the **client-id**, **client-secret**, and **issuer** values to match the values from your Okta developer account and OIDC app. Your Okta domainURL will look something like this: `https://dev-123456.okta.com`
+Don't forget to update the **client-id**, **client-secret**, and **issuer** values to match the values from your Okta developer account and OIDC app. Your Okta issuer should look something like `https://dev-123456.okta.com/oauth2/default`.
 
 Finally, update the `SecurityConfiguration.java` file:
 
@@ -376,7 +376,7 @@ Log in with your Okta credentials and you're authenticated!
 
 When developing OAuth applications, I have found it helpful to be able to inspect the information Spring Boot has about the client and the authenticated user. To this end, add a new controller named `UserInfoController.java`.
 
-`src/main/java/com/okta/preauthorize/Application/UserInfoController.java`
+`src/main/java/com/okta/preauthorize/application/UserInfoController.java`
 
 ```java
 package com.okta.preauthorize.application;  
@@ -407,7 +407,7 @@ public class UserInfoController {
     }  
   
     private String prettyPrintAttributes(Map<String, Object> attributes) {  
-        String acc = "User Attributes: <br/><div style=padding-left:20px;>";  
+        String acc = "User Attributes: <br/><div style='padding-left:20px'>";  
         for (String key : attributes.keySet()){  
             Object value = attributes.get(key);  
             acc += "<div>"+key + ":&nbsp" + value.toString() + "</div>";  
@@ -530,7 +530,7 @@ User Attributes:
 
 Notice a new **groups** user attribute (the mapped groups claim). The value, `Everyone`, is the default group mapped to, well, everyone. This gets mapped to the user authority `Everyone`. 
 
-That's the basic idea. It'll get a little more exciting in the next step when we add an Admin group.
+That's the basic idea. It'll get a little more exciting in the next step when you add an Admin group.
 
 ## Create An Admin Group in Okta
 
@@ -596,7 +596,7 @@ User Attributes:
   ...
 ```
 
-And if you navigate to http://localhost:8080/restricted, you'll be allowed access.
+And if you navigate to `http://localhost:8080/restricted`, you'll be allowed access.
 
 ## Compare Spring Security Roles and Authorities
 
