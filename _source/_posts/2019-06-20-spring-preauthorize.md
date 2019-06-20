@@ -1,6 +1,6 @@
 ---
 layout: blog_post
-title: "Method Security with Spring Security and PreAuthorize"
+title: "Spring Method Security with PreAuthorize"
 author: moksamedia
 description: "In this tutorial, you'll secure a Spring Boot app with Spring Security and the PreAuthorize annotation."
 tags: [java, spring, spring boot, spring security, security]
@@ -658,7 +658,7 @@ Try adding a custom scope. Change `okta.oauth2.scopes` property in the `applicat
 ```yml
 okta:  
   oauth2:  
-	... 
+    ... 
     scopes: openid email profile custom
     ...
 ```
