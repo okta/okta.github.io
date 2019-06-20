@@ -29,9 +29,9 @@ Before we dive into the project, I want to also mention that Spring also provide
 
 ## Dependencies
 
-The dependencies for this tutorial are pretty simple. You need: 1) Java 1.8+ installed, and 2) an Okta developer account. 
+The dependencies for this tutorial are pretty simple. You need: 1) Java 8+ installed, and 2) an Okta developer account. 
 
-If you do not have Java installed, go to [AdoptOpenJDK](https://adoptopenjdk.net/). On *nix systems, you can also use [SDKMAN](https://sdkman.io/).  
+If you do not have Java installed, go to [AdoptOpenJDK](https://adoptopenjdk.net/). On \*nix systems, you can also use [SDKMAN](https://sdkman.io/).  
 
 If you do not already have a free Okta developer account, go to [our website and sign up](https://developer.okta.com/signup/).
 
@@ -637,7 +637,7 @@ You can customize the scopes that the client app requests from the Okta authoriz
 ```yml
 okta:  
   oauth2:  
-	... 
+    ... 
     scopes: openid
     ...
 ``` 
