@@ -8,7 +8,9 @@ tweets:
 - "Learn how to use @ionicframework for @java_hipster to create a PWA + mobile app that works uses OIDC for authentication!"
 - "Giddyup with @ionicframework + @springboot to create a PWA that you can deploy to the web, to iOS, or to @android!"
 - "Ionic 4 + JHipster => it's alive! You should try it; it'll be fun! 😋"
+// todo: image
 ---
+:page-liquid:
 
 I'm a big fan of Ionic. I started using it several years ago, with v2 I believe. As a developer, I really liked it because I knew Angular. I found didn't have to learn much more to be a productive developer with Ionic.
 
@@ -20,15 +22,32 @@ Not only that, but Ionic supports PWAs! This means you can deploy the same app t
 
 If you know me, you'll know I'm a big fan of Java, Spring Boot, and JHipster as well. If you don't know what JHipster is, I'm sorry. That's my fault. I've been doing my best to spread the word, but you somehow missed it. It's the best thing ever! If you know me from AppFuse, or you're familiar with Ruby on Rails, it's that times 10. JHipster is an application generator, and platform, for building Java apps with JavaScript frontends.
 
-In this brief tutorial, I'll show you to use [Ionic for JHipster](https://github.com/oktadeveloper/generator-jhipster-ionic) v4 beta with JHipster 6.
+In this brief tutorial, I'll show you to use https://github.com/oktadeveloper/generator-jhipster-ionic[Ionic for JHipster] v4 beta with JHipster 6.
 
 == Create a Spring Boot + Angular App with JHipster
 
-JHipster requires that you have Java 8+ installed before you can create an app. You can install JHipster via [Homebrew](http://brewformulas.org/Jhipster) (`brew install jhipster`) or with npm.
+JHipster requires that you have Java 8+ installed before you can create an app. I recommend installing Node.js as well.
+
+////
+You can install JHipster via http://brewformulas.org/Jhipster[Homebrew] (`brew install jhipster`) or with npm.
 
 [source,shell]
 ----
 npm i -g generator-jhipster@6.1.0
+----
+////
+
+In this tutorial, I'm using some bleeding-edge code, so you'll need to clone a couple JHipster repos first.
+
+[source,shell]
+----
+git clone https://github.com/jhipster/jhipster.git
+cd jhipster
+./mvnw clean install -Dgpg.skip=true
+cd ..
+git clone https://github.com/jhipster/generator-jhipster.git
+cd generator-jhipster
+npm link
 ----
 
 Once you have JHipster installed, you have two choices. There's the quick way to generate an app (which I recommend), and there's the tedious way of picking all your options. I don't care which one you use, but you **must** select **OAuth 2.0 / OIDC** authentication to complete this tutorial successfully.
@@ -39,22 +58,23 @@ Here's the easy way:
 ----
 mkdir app && cd app
 
-echo "application { config { baseName oauth2, authenticationType oauth2, buildTool gradle }" >> app.jh
+echo "application { config { baseName oauth2, authenticationType oauth2, \
+  buildTool gradle, testFrameworks [protractor] }}" >> app.jh
 
 jhipster import-jdl app.jh
 ----
 
-The hard way is you run `jhipster` and answer a number of questions. There's so many choices when you run this option that you might question your sanity. At last count, I remember reading that JHipster allows 25K+ combination. That's ludicrous!
+The hard way is you run `jhipster` and answer a number of questions. There's so many choices when you run this option that you might question your sanity. At last count, I remember reading that JHipster allows 26K+ combinations!
 
-The project generation process will take less than a minute to complete, if you're on fast wifi and have a bad-ass laptop. When it's finished, you should see output like the following.
+The project generation process will take a couple minutes to complete, if you're on fast internet and have a bad-ass laptop. When it's finished, you should see output like the following.
 
-// todo
+image::{% asset_path 'blog/ionic-4-jhipster/create-app.png' %}[alt=Create JHipster App,align=center]
 
 === OIDC with Keycloak and Spring Security
 
 JHipster has several authentication options: JWT, OAuth 2.0 / OIDC, and UAA. With JWT (the default), you store the access token on the client (in local storage). This works, but isn't the most secure. UAA involves using your own OAuth 2.0 authorization server (powered by Spring Security), and OAuth 2.0 / OIDC allows you to use Keycloak or Okta.
 
-Spring Security makes Keycloak and Okta integration so incredibly easy it's silly. Both are called "identity providers" and if you have a similar solution that is OIDC-compliant, I'm confident it'll work with Spring Security and JHipster.
+Spring Security makes Keycloak and Okta integration so incredibly easy it's silly. Keycloak and Okta are called "identity providers" and if you have a similar solution that is OIDC-compliant, I'm confident it'll work with Spring Security and JHipster.
 
 Having Keycloak set by default is nice because you can use it without having an internet connection.
 
@@ -67,7 +87,7 @@ docker-compose -f src/main/docker/keycloak.yml up -d
 
 Start your application with `./gradlew` (or `./mvnw` if you chose Maven) and you should be able to log in using "admin/admin" for your credentials.
 
-Open another terminal and prove all the end-to-end tests (powered by Protractor) pass:
+Open another terminal and prove all the end-to-end tests pass:
 
 [source,shell]
 ----
@@ -76,88 +96,122 @@ npm run e2e
 
 If your environment is setup correctly, you'll see output like the following:
 
-// todo
+[source,shell]
+----
+> oauth-2@0.0.0 e2e /Users/mraible/app
+> protractor src/test/javascript/protractor.conf.js
+
+[16:02:18] W/configParser - pattern ./e2e/entities/**/*.spec.ts did not match any files.
+[16:02:18] I/launcher - Running 1 instances of WebDriver
+[16:02:18] I/direct - Using ChromeDriver directly...
+
+
+  account
+    ✓ should fail to login with bad password
+    ✓ should login successfully with admin account (1754ms)
+
+  administration
+    ✓ should load metrics
+    ✓ should load health
+    ✓ should load configuration
+    ✓ should load audits
+    ✓ should load logs
+
+
+  7 passing (15s)
+
+[16:02:36] I/launcher - 0 instance(s) of WebDriver still running
+[16:02:36] I/launcher - chrome #01 passed
+Execution time: 19 s.
+----
 
 == OIDC with Okta and Spring Security
 
-To switch to Okta, you'll first need to create an OIDC app. If you don't have an Okta Developer account, [now is the time](https://developer.okta.com/signup/)!
+To switch to Okta, you'll first need to create an OIDC app. If you don't have an Okta Developer account, https://developer.okta.com/signup/[now is the time]!
 
 > **Why Okta instead of Keycloak?**
 >
-> Keycloak works great in development, and Okta has free multi-factor authentication, email support, and excellent performance for production. You can see other free features and our transparent pricing at [developer.okta.com/pricing](https://developer.okta.com/pricing/).
+> Keycloak works great in development, and Okta has free multi-factor authentication, email support, and excellent performance for production. You can see other free features and our transparent pricing at https://developer.okta.com/pricing/[developer.okta.com/pricing].
 
 Log in to your Okta Developer account.
 
 * In the top menu, click on **Applications**
 * Click on **Add Application**
 * Select **Web** and click **Next**
-* Enter `Ionic + JHipster FTW!` for the **Name** (this value doesn't matter, so feel free to change it)
+* Enter `JHipster FTW!` for the Name (this value doesn't matter, so feel free to change it)
 * Change the Login redirect URI to be `http://localhost:8080/login/oauth2/code/oidc`
 * Click **Done**, then **Edit** and add `http://localhost:8080` as a Logout redirect URI
 * Click **Save**
 
-These are the steps you'll need to complete for JHipster. While you're configuration Okta, here's the steps you'll need to complete for an Ionic app with Okta. Adjust your app's settings to have the following:
-
-* Login redirect URIs:
-  * `http://localhost:8100/implicit/callback`
-  * `dev.localhost.ionic:/callback`
-* Logout redirect URIs:
-  * `http://localhost:8100/implicit/logout`
-  * `dev.localhost.ionic:/logout`
-
-NOTE: `dev.localhost.ionic` is the default scheme that's used, but you can also use something more traditional like `com.okta.dev-113377` (where `dev-113377.okta.com` is your Okta Org URL).
-
-Click **Done** and you should see a client ID and client secret on the next screen.
-
-Start your JHipster app using a command like the following:
+These are the steps you'll need to complete for JHipster. Start your JHipster app using a command like the following:
 
 [source,shell]
 ----
 SPRING_SECURITY_OAUTH2_CLIENT_PROVIDER_OIDC_ISSUER_URI=https://{yourOktaDomain}/oauth2/default \
   SPRING_SECURITY_OAUTH2_CLIENT_REGISTRATION_OIDC_CLIENT_ID=$clientId \
-  SPRING_SECURITY_OAUTH2_CLIENT_REGISTRATION_OIDC_CLIENT_SECRET=$clientSecret ./mvnw
+  SPRING_SECURITY_OAUTH2_CLIENT_REGISTRATION_OIDC_CLIENT_SECRET=$clientSecret ./gradlew
 ----
 
-The above command can be painful to type, so I encourage you to copy pasta, or set the values as environment variables. You can also configure them in a properties/YAML file in Spring Boot, but you should link:/blog/2018/07/30/10-ways-to-secure-spring-boot#8-store-secrets-securely[never store secrets in source control].
+INFO: The above command can be painful to type, so I encourage you to copy pasta, or set the values as environment variables. You can also configure them in a properties/YAML file in Spring Boot, but you should link:/blog/2018/07/30/10-ways-to-secure-spring-boot#8-store-secrets-securely[never store secrets in source control].
 
-You'll also need to adjust your Okta authorization server to include a `groups` claim.
+=== Create a Native App for Ionic
+
+You'll also need to create a Native app for Ionic. The reason for this is because Ionic for JHipster is configured to use https://oauth.net/2/pkce/[PKCE] (Proof Key for Code Exchange). The current Spring Security OIDC support in JHipster still requires a client secret. PKCE does not.
+
+Go back to the Okta developer console and follow the steps below:
+
+* In the top menu, click on **Applications**
+* Click on **Add Application**
+* Select **Native** and click **Next**
+* Enter `Ionic FTW!` for the Name
+* Add Login redirect URIs: `http://localhost:8100/implicit/callback` and `dev.localhost.ionic:/callback`
+* Click **Done**, then **Edit** and add Logout redirect URIs: `http://localhost:8100/implicit/logout` and `dev.localhost.ionic:/logout`
+* Click **Save**
+
+You'll need the client ID from your Native app, so keep your browser tab open or copy/paste it somewhere.
+
+NOTE: `dev.localhost.ionic` is the default scheme that's used, but you can also use something more traditional like `com.okta.dev-113377` (where `dev-113377.okta.com` is your Okta Org URL).
+
+=== Create Groups and Add Them as Claims to the ID Token
+
+In order to login to your JHipster app, you'll need to adjust your Okta authorization server to include a `groups` claim.
 
 On Okta, navigate to **Users** > **Groups**. Create `ROLE_ADMIN` and `ROLE_USER` groups and add your account to them.
 
-Navigate to **API** > **Authorization Servers**, click the **Authorization Servers** tab and edit the default one. Click the **Claims** tab and **Add Claim**. Name it "groups" or "roles" and include it in the ID Token. Set the value type to "Groups" and set the filter to be a Regex of `.*`. Click **Create**.
+Navigate to **API** > **Authorization Servers**, click the **Authorization Servers** tab and edit the **default** one. Click the **Claims** tab and **Add Claim**. Name it "groups" or "roles" and include it in the ID Token. Set the value type to "Groups" and set the filter to be a Regex of `.*`. Click **Create**.
 
 image::{% asset_path 'blog/java-12-jhipster-6/add-claim.png' %}[alt=Add Claim,width=600,align=center]
 
 Navigate to `http://localhost:8080`, click **sign in** and you'll be redirected to Okta to log in.
 
-{% img blog/jhipster-ionic/okta-login.png alt:"Okta Login" width:"800" %}{: .center-image }
+image::{% asset_path 'blog/ionic-4-jhipster/okta-login.png' %}[alt=Sign In with Okta,width=800,align=center]
 
 Enter the credentials you used to signup for your account, and you should be redirected back to your JHipster app.
 
-{% img blog/jhipster-ionic/jhipster-authenticated.png alt:"JHipster Authenticated" width:"800" %}{: .center-image }
+image::{% asset_path 'blog/ionic-4-jhipster/jhipster-oktafied.png' %}[alt=JHipster Oktafied!,width=800,align=center]
 
-=== Generate Entities for a Photo Gallery
+== Generate Entities for a Photo Gallery
 
-In this example, I'll show you how to create a photo gallery that you can upload pictures too. Kinda like Flickr, but waaayyyy more primitive.
+Let's enhance this example a bit and create a photo gallery that you can upload pictures to. Kinda like Flickr, but waaayyyy more primitive.
 
 JHipster has a JDL (JHipster Domain Language) feature that allows you to model the data in your app, and generate entities from it. You can use its https://start.jhipster.tech/jdl-studio/[JDL Studio] feature to do this online and save it locally once you've finished.
 
 I created a data model for this app that has an `Album`, `Photo`, and `Tag` entities and set up relationships between them. Below is a screenshot of what it looks like in JDL Studio.
 
-image::{% asset_path 'blog/java-microservices-cloud-config/jhipster-okta-login.png' %}[alt=JHipster Okta Login,width=800,align=center]
+image::{% asset_path 'blog/ionic-4-jhipster/photos-jdl.png' %}[alt=JDL Studio,width=800,align=center]
 
 Copy the JDL below and save it in a `photos.jh` file in the root directory of your project.
 
 [source]
 ----
 entity Album {
-	title String required,
-	description TextBlob,
-	created Instant
+  title String required,
+  description TextBlob,
+  created Instant
 }
 
 entity Photo {
-	title String required,
+  title String required,
   description TextBlob,
   image ImageBlob required,
   height Integer,
@@ -167,16 +221,16 @@ entity Photo {
 }
 
 entity Tag {
-	name String required minlength(2)
+  name String required minlength(2)
 }
 
 relationship ManyToOne {
-	Album{user(login)} to User,
-	Photo{album(title)} to Album
+  Album{user(login)} to User,
+  Photo{album(title)} to Album
 }
 
 relationship ManyToMany {
-	Photo{tag(name)} to Tag{photo}
+  Photo{tag(name)} to Tag{photo}
 }
 
 paginate Album with pagination
@@ -190,25 +244,61 @@ You can generate entities and CRUD code (Java for Spring Boot; TypeScript and HT
 jhipster import-jdl photos.jh
 ----
 
+When prompted, type `a` to allow overwriting of existing files.
+
 This process will create https://www.liquibase.org/[Liquibase] changelog files (to create your database tables), entities, repositories, Spring MVC controllers, and all the Angular code that's necessary to create, read, update, and delete your data objects. It'll even generate Jest unit tests and Protractor end-to-end tests!
 
-// todo: verify ^^
+When the process completes, restart your app, and confirm that all your entities exist (and work) under the **Entities** menu.
 
-After the process completes, you can restart your app, and confirm that all your entities exist (and work) under the **Entities** menu.
+////
+NOTE: If you try to upload a photo, you'll likely see an error in your console about a violation of the Content Security Policy. This is https://github.com/jhipster/generator-jhipster/pull/9923[known issue] that will be fixed in the next release. Add `; img-src 'self' data:` to the end of the `contentSecurityPolicy()` line in your `SecurityConfiguration.java` to fix it in your app.
+////
 
-By now, you can see that JHipster is pretty powerful. It recognized that you had an `image` property of `ImageBlob` type and automatically created the code to upload and store images in your database! _Yeehaw!_
-
-== Develop a Mobile App with Ionic
+== Develop a Mobile App with Ionic and Angular
 
 Getting started with Ionic for JHipster is similar to JHipster. You simply have to install the Ionic CLI, Yeoman, the module itself, and run a command to create the app.
 
 [source,shell]
 ----
-npm i -g generator-jhipster-ionic@4.0.0 ionic@5.0.3 yo
+npm i -g generator-jhipster-ionic@beta ionic@5.0.3 yo
 yo jhipster-ionic
 ----
 
-If you have your `app` application at `~/app`, you should run this command from your home directory (`~`). Ionic for JHipster will prompt you for the location of your backend application. Use `mobile` for your app's name and choose "Yes" when asked to integrate with Cordova.
+If you have your `app` application at `~/app`, you should run this command from your home directory (`~`). Ionic for JHipster will prompt you for the location of your backend application. Use `mobile` for your app's name and `app` for the JHipster app's location.
+
+Type `a` when prompted to overwrite `mobile/src/app/app.component.ts`.
+
+Open `src/app/auth/auth.service.ts` in an editor, search for `data.clientId` and replace it with the client ID from your Native app on Okta.
+
+[source,ts]
+----
+// try to get the oauth settings from the server
+this.requestor.xhr({method: 'GET', url: AUTH_CONFIG_URI}).then(async (data: any) => {
+  this.authConfig = {
+    identity_client: '{yourClientId}',
+    identity_server: data.issuer,
+    redirect_url: redirectUri,
+    end_session_redirect_url: logoutRedirectUri,
+    scopes,
+    usePkce: true
+  };
+  ...
+}
+----
+
+NOTE: When using Keycloak, this change is not necessary.
+
+=== Add Claims to Access Token
+
+In order to authentication successfully with your Ionic app, you have to do a bit more configuration in Okta. Since the Ionic client will only send an access token to JHipster, you need to 1) add a `groups` claim to the access token and 2) add a couple more claims so the user's name will be available in JHipster.
+
+Navigate to **API** > **Authorization Servers**, click the **Authorization Servers** tab and edit the **default** one. Click the **Claims** tab and **Add Claim**. Name it "groups" and include it in the Access Token. Set the value type to "Groups" and set the filter to be a Regex of `.*`. Click **Create**.
+
+Add another claim, name it `given_name`, include it in the access token, use `Expression` in the value type, and set the value to `user.firstName`. Optionally, include it in the `profile` scope. Perform the same actions to create a `family_name` claim and use expression `user.lastName`.
+
+When you are finished, your claims should look as follows.
+
+image::{% asset_path 'blog/ionic-4-jhipster/claims.png' %}[alt=Default Authorization Server Claims,width=600,align=center]
 
 Run the following commands to start your Ionic app.
 
@@ -220,28 +310,51 @@ ionic serve
 
 You'll see a screen with a sign-in button. Click on it, and you'll be redirected to Okta to authenticate.
 
-{% img blog/jhipster-ionic/ionic-welcome.png alt:"Ionic Welcome" width:"400" %}
-{% img blog/jhipster-ionic/ionic-okta-login.png alt:"Ionic Authenticated" width:"400" %}
+image::{% asset_path 'blog/ionic-4-jhipster/ionic-home.png' %}[alt=Ionic Home,width=400]
+image::{% asset_path 'blog/ionic-4-jhipster/ionic-okta-login.png' %}[alt=Sign In with Okta,width=400]
 
-Now that you know authentication works, you can use the entity generator to generate Ionic pages for your data model. Run the following commands (in your `~/mobile` directory) to generate screens for your entities.
+Now that you having log in working, you can use the entity generator to generate Ionic pages for your data model. Run the following commands (in your `~/mobile` directory) to generate screens for your entities.
 
 [source,shell]
 ----
 yo jhipster-ionic:entity album
-yo jhipster-ionic:entity photo
-yo jhipster-ionic:entity tag
-[source,shell]
 ----
 
-// todo: spend an hour trying to get import-jdl to work
+When prompted to generate this entity from an existing one, type **Y**. Enter `../app` as the path to your existing application. When prompted to regenerate entities and overwrite files, type **Y**. Enter **a** when asked about conflicting files.
 
-Enter `../app` as the path to your existing application. When prompted to regenerate entities and overwrite files, type "Y".
+Generate code for the other entities using the following commands and the same answers as above.
 
-Restart the blog app, then run the Ionic app with `ionic cordova emulate ios`. You should be able to log in to your Ionic app, tap **Entities** and view the list of blogs.
+[source,shell]
+----
+yo jhipster-ionic:entity photo
+yo jhipster-ionic:entity tag
+----
+
+== Run Your Ionic App on iOS
+
+To generate an iOS project for your Ionic application, run the following command:
+
+[source,shell]
+----
+ionic cordova prepare ios
+----
+
+When prompted to install the `ios` platform, type **Y**. When the process completes, open your project in Xcode:
+
+[source,shell]
+----
+open platforms/ios/MyApp.xcworkspace
+----
+
+NOTE: If you don't have Xcode installed, you can https://developer.apple.com/xcode/[download it from Apple].
+
+You'll need to configure code signing in the **General** tab, then you should be able to run your app in Simulator.
+
+Log in to your Ionic app, tap **Entities** and view the list of photos.
 
 | {% img blog/jhipster-ionic/emulator-welcome.png alt:"Emulator Welcome" width:"300" %} | {% img blog/jhipster-ionic/emulator-entities.png alt:"Emulator Entities" width:"300" %} | {% img blog/jhipster-ionic/emulator-no-blogs.png alt:"Emulator No Blogs" width:"300" %} |
 
-Add an album in the JHipster app at http://localhost:8080.
+Add a photo in the JHipster app at http://localhost:8080.
 
 {% img blog/jhipster-ionic/first-blog.png alt:"First Blog" width:"800" %}{: .center-image }
 
