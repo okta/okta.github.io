@@ -384,7 +384,7 @@ To see this new album in your Ionic app, pull down with your mouse to simulate t
 
 There are some gestures you should know about on this screen. Clicking on the row will take you to a view screen where you can edit or delete the photo. You can also swipe left to expose edit and delete buttons for a shorter path.
 
-image::{% asset_path 'blog/ionic-4-jhipster/ionic-ios-photos.png' %}[alt=New Photo in Ionic App,width=500,align=center]
+image::{% asset_path 'blog/ionic-4-jhipster/ionic-ios-photos.png' %}[alt=New Photo in Ionic App,align=center]
 
 == Run Your Ionic App on Android
 
