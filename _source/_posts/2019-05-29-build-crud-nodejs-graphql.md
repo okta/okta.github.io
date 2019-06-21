@@ -201,6 +201,8 @@ mutation Delete($id: ID!) {
 }
 ```
 
+{% img blog/node-graphql/crud-a-quote.gif alt:"CRUD a Quote" width:"800" %}{: .center-image }
+
 ## Add User Authentication to Your Node.js App
 
 A pretty common flow is to allow anybody to read at least a subset of data, but only allow authenticated users to write to modify the data. You've already implemented the whole CRUD part of the app, but it's pretty simple to add authentication so you can block off certain parts of the app from anonymous users.
