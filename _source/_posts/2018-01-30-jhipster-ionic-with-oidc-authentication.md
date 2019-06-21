@@ -40,7 +40,7 @@ The Ionic team has also recently released an [Ionic PWA Toolkit](https://blog.io
 JHipster requires that you have [Node.js](https://nodejs.org) and [Java 8](http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html) installed. You can install it via [Homebrew](http://brewformulas.org/Jhipster) (`brew install jhipster`), [Chocolatey](https://chocolatey.org/packages/jhipster) (`choco install jhipster`), or with npm.
 
 ```bash
-npm i -g generator-jhipster
+npm i -g generator-jhipster@4.13.3
 ```
 
 ## Develop a Blog App with OIDC Authentication
@@ -186,7 +186,7 @@ Run `jhipster import-jdl blog.jh` to create all the code you'll need to manage y
 Getting started with Ionic for JHipster is similar to JHipster. You can have to install the Ionic CLI, Yeoman, the module itself, run a command, then profit!
 
 ```bash
-npm i -g generator-jhipster-ionic ionic yo
+npm i -g generator-jhipster-ionic@3.3.0 ionic@3.20.1 yo
 yo jhipster-ionic
 ```
 
