@@ -8,6 +8,7 @@ tweets:
  - "Ionic 4 is 🔥! Learn how to build an @ionicframework v4 app with user authentication and registration."
  - "Do you ❤️ Ionic? We do too! This tutorial shows you how you can create an @ionicframework 4 app and add user authentication in just a few commands."
  - "We recommend using @ionicframework 4 with OIDC to add SSO to your mobile apps. Learn how today!"
+image: blog/ionic-4-login/ionic-ios-okta.png
 ---
 
 Ionic allows you to develop <abbr title="Progressive Web Applications">PWAs</abbr> and hybrid mobile apps. PWAs are web applications that run in a browser and allow for offline capabilities via service workers. They can be installed on desktops and mobile devices, just like you install apps on your smartphone. Hybrid mobile apps are like native mobile apps, except they're built using web technologies.
@@ -62,7 +63,7 @@ You can use Chrome's device toolbar to see what the application will look like o
 
 {% img blog/ionic-4-login/welcome-iphone-x.png alt:"Welcome to Ionic on iPhone X" width:"800" %}{: .center-image }
 
-Now let's add a user login feature! Stop the `ionic serve` process using `Ctrl+C` before proceeding to the next step.
+Now let's add a user login feature! Go back to the terminal where you started `ionic serve` and stop the process using `Ctrl+C` before proceeding to the next step.
 
 ## Add User Login
 
@@ -80,7 +81,7 @@ To integrate Okta's Identity Cloud for user authentication, you'll need to [sign
 
 Log in to your Okta developer account and navigate to **Applications > Add Application**.
 
-{% img blog/ionic-4-login/add-application.png alt:"Applications > Add Application" width:"700" %}{: .center-image }
+{% img blog/ionic-4-login/add-application.png alt:"Applications > Add Application" width:"575" %}{: .center-image }
 
 Select **Native** and click **Next**.
 
@@ -101,7 +102,6 @@ Near the bottom of your application's settings, you will find a section titled *
 Navigate to **API** > **Authorization Servers** and copy your issuer URI.
 
 {% img blog/ionic-4-login/issuer-uri.png alt:"Issuer URI" width:"600" %}{: .center-image }
-
 
 ### Use OktaDev Schematics to Add User Login
 
@@ -297,7 +297,7 @@ This tutorial showed you how to create an Ionic 4 application and add user login
 Ionic's support for React and Vue are in beta at the time of this writing. To read more about them, I recommend the following blog posts:
 
 * [Announcing the Ionic React Beta](https://blog.ionicframework.com/announcing-the-ionic-react-beta/)
-* [Announcing the Ionic React Beta](https://blog.ionicframework.com/announcing-the-ionic-vue-beta/)
+* [Announcing the Ionic Vue Beta](https://blog.ionicframework.com/announcing-the-ionic-vue-beta/)
 
 I could have shown you how to create 19 files and update 8 to integrate OIDC login in Ionic 4. However, that seems like a long and cruel tutorial. Instead, I streamlined everything by using OktaDev Schematics. The code that OktaDev Schematics uses is from the Ionic AppAuth project's
 [Cordova](https://github.com/wi3land/ionic-appauth-ng-demo) and [Capacitor](https://github.com/wi3land/ionic-appauth-capacitor-demo) examples.
