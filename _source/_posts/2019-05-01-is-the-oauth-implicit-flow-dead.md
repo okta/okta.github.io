@@ -13,6 +13,8 @@ image: blog/oauth-implicit-flow-dead/oauth-implicit-flow-dead.png
 
 You may have heard some buzz recently about the OAuth 2.0 Implicit flow. The OAuth Working Group has published some new guidance around the Implicit flow and JavaScript-based apps, specifically that the Implicit flow should no longer be used. In this post we'll look at what's changing with the Implicit flow and why.
 
+<iframe width="100%" height="510" src="https://www.youtube.com/embed/CHzERullHe8" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
 ## The Best Practice Around Implicit in OAuth 2.0 is Changing
 
 The Implicit flow in OAuth 2.0 was created nearly 10 years ago, when browsers worked very differently than they do today. The primary reason the Implicit flow was created was because of an old limitation in browsers. It used to be the case that JavaScript could only make requests to the same server that the page was loaded from. However, the standard OAuth Authorization Code flow requires that a POST request is made to the OAuth server's token endpoint, which is often on a different domain than the app. That meant there was previously no way to use this flow from JavaScript. The Implicit flow worked around this limitation by avoiding that POST request, and instead returning the access token immediately in the redirect.

@@ -39,7 +39,7 @@ And enter the two-factor auth code.
 
 Finally, the user will see a prompt confirming that they want to sign in to this application using their Apple ID.
 
-{% img blog/sign-in-with-apple/6-sign-in-confirmation.png alt:"Dialog asking the user to confirm signing in to this app" width:"800" %}{: .center-image }
+{% img blog/sign-in-with-apple/apple-permission-prompt.png alt:"Dialog asking the user to confirm signing in to this app" width:"800" %}{: .center-image }
 
 Clicking "Continue" will take the user back to the app where they will be signed in!
 
@@ -127,6 +127,10 @@ Apple will generate a new private key for you and let you download it only once.
 
 {% img blog/sign-in-with-apple/18-download-your-key.png alt:"Download your key" width:"800" %}{: .center-image }
 
+Lastly, go back and view the key information to find your Key ID which you'll need in the next step.
+
+{% img blog/sign-in-with-apple/find-your-key-id.png alt:"Find your key ID" width:"800" %}{: .center-image }
+
 Alright, that was a lot, but we are now ready to start writing some code! If you ran into any trouble, try checking out [Apple's documentation](https://developer.apple.com/sign-in-with-apple/get-started/) in case anything has changed since the publication of this blog post.
 
 ## Generate the Client Secret
@@ -141,7 +145,7 @@ First, make sure you've got Ruby installed, and then install the JWT gem by runn
 gem install jwt
 ```
 
-Now the `jwt` gem should be available for use. Fill in the missing values at the top of this file, and save it as `client_secret.rb`. You should already have the `client_id` value from the previous step. You'll also need your Apple Team ID. This is displayed in a few places, but the most convenient is in the top right corner of the screen.
+Now the `jwt` gem should be available for use. Fill in the missing values at the top of this file, and save it as `client_secret.rb`. You should already have the `client_id` value from the previous step. You'll also need your Apple Team ID. This is displayed in a few places, but the most convenient is in the top right corner of the screen. Use the Key ID you found in the previous step.
 
 {% img blog/sign-in-with-apple/19-find-team-id.png alt:"Find your team ID in the top right corner" width:"300" %}{: .center-image }
 
@@ -153,8 +157,13 @@ require 'jwt'
 key_file = 'key.txt'
 team_id = ''
 client_id = ''
+key_id = ''
 
 ecdsa_key = OpenSSL::PKey::EC.new IO.read key_file
+
+headers = {
+  'kid' => key_id
+}
 
 claims = {
 	'iss' => team_id,
@@ -164,7 +173,7 @@ claims = {
 	'sub' => client_id,
 }
 
-token = JWT.encode claims, ecdsa_key, 'ES256'
+token = JWT.encode claims, ecdsa_key, 'ES256', headers
 
 puts token
 ```
@@ -175,10 +184,8 @@ Now you can run this from the command line and it will output a JWT.
 
 ```bash
 ruby client_secret.rb
-eyJhbGciOiJFUzI1NiJ9.eyJpc3MiOiI3TUM2VVpSMlVWIiwiaWF0IjoxNTU5NjE0MjU2LCJleHAiOjE1NzUxNjYyNTYsImF1ZCI6Imh0dHBzOi8vYXBwbGVpZC5hcHBsZS5jb20iLCJzdWIiOiJsb2wuYXZvY2Fkby5jbGllbnQifQ.t6wIFrSKwuCZsJ9I1TWWBCdxmUMG3g0kNyNnxhkpG3oZAKY2UdXqL5CyRGTa21OYHa6ir1JFWkdBDjTNvt8hYC
+eyJraWQiOiJGUVVBN0RYUkJGIiwiYWxnIjoiRVMyNTYifQ.eyJpc3MiOiI3TUM2VVpSMlVWIiwiaWF0IjoxNTU5NjE0MjU2LCJleHAiOjE1NzUxNjYyNTYsImF1ZCI6Imh0dHBzOi8vYXBwbGVpZC5hcHBsZS5jb20iLCJzdWIiOiJsb2wuYXZvY2Fkby5jbGllbnQifQ.t6wIFrSKwuCZsJ9I1TWWBCdxmUMG3g0kNyNnxhkpG3oZAKY2UdXqL5CyRGTa21OYHa6ir1JFWkdBDjTNvt8hYC
 ```
-
-Note: Apple says that the `kid` property is required in the header, but in my testing I didn't find that to be the case. It seemed to work fine without it.
 
 This is described in Apple's documentation [Generate and validate tokens](https://developer.apple.com/documentation/signinwithapplerestapi/generate_and_validate_tokens).
 
@@ -211,7 +218,7 @@ $authorize_url = 'https://appleid.apple.com/auth/authorize'.'?'.http_build_query
   'client_id' => $client_id,
   'redirect_uri' => $redirect_uri,
   'state' => $_SESSION['state'],
-  'scope' => 'openid email', // This doesn't seem to be required
+  'scope' => 'name email',
 ]);
 ```
 
@@ -343,7 +350,11 @@ It does seem to prompt for two-factor auth every time you log in to an app, whic
 
 Once you confirm that, you'll see a screen asking if you would like to continue signing in to the app.
 
-{% img blog/sign-in-with-apple/6-sign-in-confirmation.png alt:"Prompt: Would you like to sign in?" width:"800" %}{: .center-image }
+{% img blog/sign-in-with-apple/apple-permission-prompt.png alt:"Prompt: Would you like to sign in?" width:"800" %}{: .center-image }
+
+Note: You will only see this permissions screen the very first time you log in with this App ID. In subsequent logins, you'll see a confirmation prompt like the below.
+
+{% img blog/sign-in-with-apple/6-sign-in-confirmation.png alt:"Dialog asking the user to confirm signing in to this app" width:"800" %}{: .center-image }
 
 Now click **Continue** and you'll be redirected to your redirect URL! If you entered the placeholder `https://example-app.com/redirect` URL then you'll see a message like this.
 
@@ -362,6 +373,11 @@ The only piece of useful data in the claims really is the `sub` value. This is t
 I haven't yet been able to find how or where to get the user's special proxy email address from Apple, but I will update this post when I do! It isn't returned in the ID token even when requesting the `openid email` scopes, and there is no `userinfo` endpoint documented, and the few variations I tried didn't work. I'm hoping Apple updates their documentation soon so we can try that part out!
 
 You can find the [complete code from this tutorial](https://github.com/aaronpk/sign-in-with-apple-example) on GitHub!
+
+### Changelog
+
+* Jun 7, 2019: Updates to the sample code based on some new implementation experience. Added screenshot of the permissions screen asking to hide the email address. You can see the changes to this article in [okta.github.io#2924](https://github.com/okta/okta.github.io/pull/2924).
+* Jun 10, 2019: Fixed typo in `client_secret.rb`
 
 ## Learn More about OAuth 2.0 and OpenID Connect
 

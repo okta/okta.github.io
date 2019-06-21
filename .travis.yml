@@ -7,11 +7,14 @@ addons:
   chrome: stable
 before_script: "./scripts/start-sauce-connect.sh"
 before_install:
+- pip install --user awscli
 - gem install bundler -v '< 2'
 - bundle install
 - nvm install $(cat .nvmrc)
 script: "./scripts/travis.sh"
-after_script: "./scripts/stop-sauce-connect.sh"
+after_script:
+- "./scripts/stop-sauce-connect.sh"
+- "./scripts/publish.sh"
 dist: trusty
 env:
   global:

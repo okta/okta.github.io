@@ -21,6 +21,8 @@ By the time you've gone through this guide, you'll have a much better understand
 
 Let's get started.
 
+{% img blog/vchat-app/chatapp.orig.gif alt:"Chat App Demo" width:"800" %}{: .center-image }
+
 **NOTE**: Want to play around with the chat app in real-time? You can do so here: https://naughty-bhabha-908faa.netlify.com You can also view the source code for the app we'll be building [on GitHub](https://github.com/rdegges/chatapp).
 
 ## Create the Web Page
@@ -198,6 +200,7 @@ Once you've got your Okta account and you're logged into the Okta dashboard, you
 
 To do this, navigate to the **Applications** tab from your dashboard and click the **Add Application** button. Once there, click the **Single-Page App** icon (because you are building a SPA) then click **Next**.
 
+{% img blog/vchat-app/create-okta-app.gif alt:"Okta create app" width:"800" %}{: .center-image }
 
 Once you've reached the **Create New Application** page fill out the **Application Settings** form with the following information:
 
@@ -209,6 +212,7 @@ The next thing you'll need to do is add your local computer as a **Trusted Origi
 
 To do this, click the **API** tab followed by the **Trusted Origins** tab from your Okta dashboard. To create your new origin, now click the **Add Origin** button:
 
+{% img blog/vchat-app/create-okta-trusted-origin.gif alt:"Okta create trusted origin" width:"800" %}{: .center-image }
 
 Once you've reached the **Add Origin** screen, enter the following information which tells Okta to allow you to use the Okta authentication service from your local test environment:
 
@@ -216,6 +220,7 @@ Once you've reached the **Add Origin** screen, enter the following information w
 
 Finally, now that you've configured your Okta Application and all necessary security rules, you should go create some user accounts in Okta that you can log in with later. You can do this by clicking on the **Users** tab followed by the **Add Person** button:
 
+{% img blog/vchat-app/okta-create-user.gif alt:"Okta create user" width:"800" %}{: .center-image }
 
 ## Use Okta to Handle User Authentication
 
@@ -323,6 +328,7 @@ The `handleLogin` function you see above is what controls the session management
 
 Now that you've got the widget hooked up to your app, if you view your app in a browser you'll be able to see the Okta Sign-In Widget in action: it will render a nice looking login form. If you fill in your Okta user login details you'll notice that the appropriate `console.log` message will fire: either you aren't logged in, you just logged in, or you were already logged in.
 
+{% img blog/vchat-app/vchat-test-okta-login.gif alt:"vchat test Okta login" width:"800" %}{: .center-image }
 
 ## Configure State Management
 
@@ -428,6 +434,7 @@ But, there's one tiny thing left to do: you need to make sure that the `login` b
 
 And with that final change, the app's state management is now complete!
 
+{% img blog/vchat-app/vchat-state-management.gif alt:"vchat state management" width:"800" %}{: .center-image }
 
 
 Time to move onto the fun stuff: real-time video with WebRTC.
@@ -737,6 +744,7 @@ function handleLogin() {
 
 By calling `enableVideo` when appropriate above, everything should now be working nicely! You can test this out by opening your page and giving things a go:
 
+{% img blog/vchat-app/vchat-live-test.gif alt:"vchat live test" width:"800" %}{: .center-image }
 
 Not bad, right?
 
@@ -1070,6 +1078,7 @@ Once you've got an account, you'll then need to create a new Netlify app (you ca
 
 Here's what this process looks like for me:
 
+{% img blog/vchat-app/netlify-init.gif alt:"netlify initialization" width:"800" %}{: .center-image }
 
 In just a few short seconds I'm able to sync my GitHub repo with Netlify so that it auto-deploys my website live to its CDN (over SSL) — pretty amazing, right? From this point forward, each time you push a new commit to your repo (depending on how you've configured Netlify) it will automatically deploy your static site to its CDN.
 
@@ -1077,6 +1086,7 @@ And... once you've gotten your site all setup in Netlify, the next thing you'll 
 
 To enable this functionality you can visit the **Site settings** -> **Build & deploy** menu:
 
+{% img blog/vchat-app/netlify-optimize.gif alt:"netlify optimize" width:"800" %}{: .center-image }
 
 With just a few clicks you're able to speed up your site dramatically by compressing all your images, JS, and CSS.
 
