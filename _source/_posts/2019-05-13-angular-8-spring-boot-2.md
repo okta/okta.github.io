@@ -1012,5 +1012,5 @@ If you have any questions, please don't hesitate to leave a comment below, or as
 <a name="changelog"></a>
 **Changelog:**
 
-* Jun 21, 2019: Updated to add a screencast, use Angular CLI 8.0.3, and to use the Okta Spring Boot Starter version 1.2.1. You can see the example app changes in [okta-spring-boot-2-angular-8-example#5](https://github.com/oktadeveloper/okta-spring-boot-2-angular-8-example/pull/5); changes to this post can be viewed in [okta.github.io#2911](https://github.com/okta/okta.github.io/pull/2911).
+* Jun 21, 2019: Updated to add a screencast, use Angular CLI 8.0.3, and to use the Okta Spring Boot Starter version 1.2.1. You can see the example app changes in [okta-spring-boot-2-angular-8-example#5](https://github.com/oktadeveloper/okta-spring-boot-2-angular-8-example/pull/5); changes to this post can be viewed in [okta.github.io#2953](https://github.com/okta/okta.github.io/pull/2953).
 * Jun 4, 2019: Updated to use Angular CLI 8.0.1, Angular 8.0.1, and Angular Material 8.0.0. You can see the example app changes in [okta-spring-boot-2-angular-8-example#3](https://github.com/oktadeveloper/okta-spring-boot-2-angular-8-example/pull/3); changes to this post can be viewed in [okta.github.io#2953](https://github.com/okta/okta.github.io/pull/2953).
