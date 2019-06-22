@@ -42,11 +42,15 @@ This post describes how to build a simple CRUD application that displays a list 
 
 {% img blog/spring-boot-2-angular-8/success-at-last.png alt:"Screenshot of completed app" width:"800" %}{: .center-image }
 
-You will need [Java 11](https://adoptopenjdk.net/) and [Node.js 10+](https://nodejs.org/) installed to complete this tutorial.
+You will need [Java 11](https://adoptopenjdk.net/) and [Node.js 10+](https://nodejs.org/) installed to complete this tutorial. If you'd rather watch a video, [I created a screencast](https://youtu.be/PvdFCjWD4Bw).
+
+<div style="text-align: center">
+<iframe width="700" height="394" style="max-width: 100%" src="https://www.youtube.com/embed/PvdFCjWD4Bw" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+</div>
 
 ## Build an API with Spring Boot 2.2
 
-To get started with [Spring Boot](https://projects.spring.io/spring-boot/) 2.2, head on over to [start.spring.io](https://start.spring.io) and create a new project that uses Java 11 (under more options), Spring Boot version 2.2.0 M2, and dependencies to create a secure API: JPA, H2, Rest Repositories, Lombok, Okta, and Web.
+To get started with [Spring Boot](https://projects.spring.io/spring-boot/) 2.2, head on over to [start.spring.io](https://start.spring.io) and create a new project that uses Java 11 (under more options), Spring Boot version 2.2.0 M4, and dependencies to create a secure API: JPA, H2, Rest Repositories, Lombok, Okta, and Web.
 
 {% img blog/spring-boot-2-angular-8/start.spring.io.gif alt:"start.spring.io" width:"800" %}{: .center-image }
 
@@ -69,14 +73,14 @@ After downloading `demo.zip` from start.spring.io, expand it and copy the `demo`
 <!--dependency>
     <groupId>com.okta.spring</groupId>
     <artifactId>okta-spring-boot-starter</artifactId>
-    <version>1.1.0</version>
+    <version>1.2.1</version>
 </dependency-->
 ```
 
 Open the project in your favorite IDE and create a `Car.java` class in the `src/main/java/com/okta/developer/demo` directory. You can use Lombok's annotations to reduce boilerplate code.
 
 ```java
-package com.okta.developer.demo;
+package com.example.demo;
 
 import lombok.*;
 
@@ -97,7 +101,7 @@ public class Car {
 Create a `CarRepository` class to perform CRUD (create, read, update, and delete) on the `Car` entity.
 
 ```java
-package com.okta.developer.demo;
+package com.example.demo;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.rest.core.annotation.RepositoryRestResource;
@@ -110,7 +114,7 @@ interface CarRepository extends JpaRepository<Car, Long> {
 Add an `ApplicationRunner` bean to the `DemoApplication` class (in `src/main/java/com/okta/developer/demo/DemoApplication.java`) and use it to add some default data to the database.
 
 ```java
-package com.okta.developer.demo;
+package com.example.demo;
 
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.boot.SpringApplication;
@@ -159,7 +163,7 @@ Car(id=9, name=Yugo GV)
 Add a `CoolCarController` class (in `src/main/java/com/okta/developer/demo`) that returns a list of cool cars to display in the Angular client.
 
 ```java
-package com.okta.developer.demo;
+package com.example.demo;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -227,10 +231,10 @@ Transfer-Encoding: chunked
 
 Angular CLI is a command-line utility that can generate an Angular project for you. Not only can it create new projects, but it can also generate code. It's a convenient tool because it also offers commands that will build and optimize your project for production. It uses webpack under the covers for building.
 
-Install the latest version of Angular CLI (which is version 8.0.1 at the time of this writing).
+Install the latest version of Angular CLI (which is version 8.0.3 at the time of this writing).
 
 ```bash
-npm i -g @angular/cli@8.0.1
+npm i -g @angular/cli@8.0.3
 ```
 
 Create a new project in the umbrella directory you created.
@@ -381,7 +385,7 @@ public Collection<Car> coolCars() {
 }
 ```
 
-In Spring Boot versions 2.1.4 and below, you could also add a `@CrossOrigin` annotation to your `CarRepository`. This would allow you to communicate with its endpoints when adding/deleting/editing from Angular.
+In Spring Boot versions 2.1.x, you could also add a `@CrossOrigin` annotation to your `CarRepository`. This would allow you to communicate with its endpoints when adding/deleting/editing from Angular.
 
 ```java
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -392,7 +396,7 @@ interface CarRepository extends JpaRepository<Car, Long> {
 }
 ```
 
-However, this [no longer works in Spring Boot 2.2.0.M2](https://github.com/spring-projects/spring-boot/issues/16683). The good news is there is a workaround. You can add a `CorsFilter` bean to your `DemoApplication.java` class. This is necessary when you integrate Spring Security as well; you're just doing it a bit earlier.
+However, this [no longer works in Spring Boot 2.2.0.M2+](https://github.com/spring-projects/spring-boot/issues/16683). The good news is there is a workaround. You can add a `CorsFilter` bean to your `DemoApplication.java` class. This is necessary when you integrate Spring Security as well; you're just doing it a bit earlier.
 
 ```java
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
@@ -801,7 +805,7 @@ On the server side, you can lock things down with Okta's Spring Boot Starter, wh
 <dependency>
     <groupId>com.okta.spring</groupId>
     <artifactId>okta-spring-boot-starter</artifactId>
-    <version>1.1.0</version>
+    <version>1.2.1</version>
 </dependency>
 ```
 
@@ -823,8 +827,9 @@ okta.oauth2.issuer=https://{yourOktaDomain}/oauth2/default
 Create `server/src/main/java/com/okta/developer/demo/SecurityConfiguration.java` to configure your Spring Boot app as a resource server.
 
 ```java
-package com.okta.developer.demo;
+package com.example.demo;
 
+import com.okta.spring.boot.oauth.Okta;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
@@ -838,15 +843,15 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
             .authorizeRequests().anyRequest().authenticated()
             .and()
             .oauth2ResourceServer().jwt();
+        
+        Okta.configureResourceServer401ResponseBody(http);
     }
 }
 ```
 
-After making these changes, you should be able to restart your app and see an error when you try to navigate to `http://localhost:8080`.
+After making these changes, you should be able to restart your app and see a 401 error when you try to navigate to `http://localhost:8080`.
 
-{% img blog/spring-boot-2-angular-8/400-error.png alt:"Access Denied" width:"800" %}{: .center-image }
-
-**NOTE:** You could fix this error by adding `http://localhost:8080/login/oauth2/code/okta` as a redirect URI to your app, but it won't solve the problem. If you want to support OIDC Login with Spring Boot, you'll need to register a **Web** app (instead of a SPA) and include a client secret in your `application.properties`. This is not a necessary step in this tutorial.
+{% img blog/spring-boot-2-angular-8/401-error.png alt:"401 Unauthorized" width:"800" %}{: .center-image }
 
 Now that your server is locked down, you need to configure your client to talk to it with an access token. This is where Okta's Angular SDK comes in handy.
 
@@ -1007,4 +1012,5 @@ If you have any questions, please don't hesitate to leave a comment below, or as
 <a name="changelog"></a>
 **Changelog:**
 
+* Jun 21, 2019: Updated to add a screencast, use Angular CLI 8.0.3, and to use the Okta Spring Boot Starter version 1.2.1. You can see the example app changes in [okta-spring-boot-2-angular-8-example#5](https://github.com/oktadeveloper/okta-spring-boot-2-angular-8-example/pull/5); changes to this post can be viewed in [okta.github.io#2911](https://github.com/okta/okta.github.io/pull/2911).
 * Jun 4, 2019: Updated to use Angular CLI 8.0.1, Angular 8.0.1, and Angular Material 8.0.0. You can see the example app changes in [okta-spring-boot-2-angular-8-example#3](https://github.com/oktadeveloper/okta-spring-boot-2-angular-8-example/pull/3); changes to this post can be viewed in [okta.github.io#2911](https://github.com/okta/okta.github.io/pull/2911).
