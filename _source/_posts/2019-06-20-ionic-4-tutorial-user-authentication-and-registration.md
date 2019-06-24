@@ -63,7 +63,7 @@ You can use Chrome's device toolbar to see what the application will look like o
 
 {% img blog/ionic-4-login/welcome-iphone-x.png alt:"Welcome to Ionic on iPhone X" width:"800" %}{: .center-image }
 
-Now let's add a user login feature! Stop the `ionic serve` process using `Ctrl+C` before proceeding to the next step.
+Now let's add a user login feature! Go back to the terminal where you started `ionic serve` and stop the process using `Ctrl+C` before proceeding to the next step.
 
 ## Add User Login
 
@@ -297,7 +297,7 @@ This tutorial showed you how to create an Ionic 4 application and add user login
 Ionic's support for React and Vue are in beta at the time of this writing. To read more about them, I recommend the following blog posts:
 
 * [Announcing the Ionic React Beta](https://blog.ionicframework.com/announcing-the-ionic-react-beta/)
-* [Announcing the Ionic React Beta](https://blog.ionicframework.com/announcing-the-ionic-vue-beta/)
+* [Announcing the Ionic Vue Beta](https://blog.ionicframework.com/announcing-the-ionic-vue-beta/)
 
 I could have shown you how to create 19 files and update 8 to integrate OIDC login in Ionic 4. However, that seems like a long and cruel tutorial. Instead, I streamlined everything by using OktaDev Schematics. The code that OktaDev Schematics uses is from the Ionic AppAuth project's
 [Cordova](https://github.com/wi3land/ionic-appauth-ng-demo) and [Capacitor](https://github.com/wi3land/ionic-appauth-capacitor-demo) examples.
