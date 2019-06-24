@@ -6,18 +6,13 @@ description: "Learn how to use Ionic for JHipster to create a bad-ass PWA / mobi
 tags: [ionic, angular, spring boot, java, jhipster, oidc, oauth, cordova, jhipster, ios, android]
 tweets:
 - "Learn how to use @ionicframework for @java_hipster to create a PWA + mobile app that uses JWT and OIDC for authentication!"
-- "Giddyup with @ionicframework + @springboot to create a PWA that you can deploy to the web, to iOS, or to @android!"
+- "Giddyup with @ionicframework + @springboot to create a PWA that you can deploy to the web, to #iOS, or to @android!"
 - "Ionic 4 + JHipster 6 => it's alive! You should try it; it'll be fun! 😋"
 image: blog/ionic-4-jhipster/ionic-jhipster-ios.png
 ---
 :page-liquid:
 
-// _source/_posts/2019/06/24/ionic-4-angular-spring-boot-jhipster
-// keyword target: not sure, we have `ionic tutorial` on the issue, but that seems more appropriate for https://developer.okta.com/blog/2019/06/20/ionic-4-tutorial-user-authentication-and-registration
-// maybe `angular spring boot` or `ionic spring boot` or just `ionic jhipster`?
-// the one this updates targets `ionic jhipster` https://developer.okta.com/blog/2018/01/30/jhipster-ionic-with-oidc-authentication
-
-I'm a big fan of Ionic. I started using it several years ago, when it used AngularJS. As a developer, I really liked it because I knew Angular. I found didn't have to learn much more to be a productive developer with Ionic.
+I'm a big fan of Ionic. I started using it several years ago when it was based on AngularJS. As a developer, I really liked it because I knew Angular. I found didn't have to learn much more to be a productive developer with Ionic.
 
 What is Ionic? I'm glad you asked! Ionic is an open source project that allows you to build mobile apps using web tech.
 
@@ -31,31 +26,16 @@ Spring Boot is the only backend framework currently supported, with .NET and Nod
 
 In this brief tutorial, I'll show you to use https://github.com/oktadeveloper/generator-jhipster-ionic[Ionic for JHipster] v4 with Spring Boot and JHipster 6.
 
-== Create a Spring Boot + Angular App with JHipster
+To complete this tutorial, you'll need to have Java 8+, Node.js 10+, and Docker installed. You'll also need to create an https://developer.okta.com/signup/[Okta developer account].
 
-JHipster requires that you have Java 8+ installed before you can create an app. You'll need to install Node.js as well.
+== Create a Spring Boot + Angular App with JHipster
 
 You can install JHipster via http://brewformulas.org/Jhipster[Homebrew] (`brew install jhipster`) or with npm.
 
 [source,shell]
 ----
-npm i -g generator-jhipster@6.1.1
+npm i -g generator-jhipster@6.1.2
 ----
-
-////
-In this tutorial, I'm using some bleeding-edge code, so you'll need to clone a couple JHipster repos first.
-
-[source,shell]
-----
-git clone https://github.com/jhipster/jhipster.git
-cd jhipster
-./mvnw clean install -Dgpg.skip=true
-cd ..
-git clone https://github.com/jhipster/generator-jhipster.git
-cd generator-jhipster
-npm link
-----
-////
 
 Once you have JHipster installed, you have two choices. There's the quick way to generate an app (which I recommend), and there's the tedious way of picking all your options. I don't care which one you use, but you **must** select **OAuth 2.0 / OIDC** authentication to complete this tutorial successfully.
 
@@ -71,15 +51,15 @@ echo "application { config { baseName oauth2, authenticationType oauth2, \
 jhipster import-jdl app.jh
 ----
 
-The hard way is you run `jhipster` and answer a number of questions. There's so many choices when you run this option that you might question your sanity. At last count, I remember reading that JHipster allows 26K+ combinations!
+The hard way is you run `jhipster` and answer a number of questions. There are so many choices when you run this option that you might question your sanity. At last count, I remember reading that JHipster allows 26K+ combinations!
 
-The project generation process will take a couple minutes to complete, if you're on fast internet and have a bad-ass laptop. When it's finished, you should see output like the following.
+The project generation process will take a couple of minutes to complete if you're on fast internet and have a bad-ass laptop. When it's finished, you should see output like the following.
 
 image::{% asset_path 'blog/ionic-4-jhipster/create-app.png' %}[alt=Create JHipster App,align=center]
 
 === OIDC with Keycloak and Spring Security
 
-JHipster has several authentication options: JWT, OAuth 2.0 / OIDC, and UAA. With JWT (the default), you store the access token on the client (in local storage). This works, but isn't the most secure. UAA involves using your own OAuth 2.0 authorization server (powered by Spring Security), and OAuth 2.0 / OIDC allows you to use Keycloak or Okta.
+JHipster has several authentication options: JWT, OAuth 2.0 / OIDC, and UAA. With JWT (the default), you store the access token on the client (in local storage). This works but isn't the most secure. UAA involves using your own OAuth 2.0 authorization server (powered by Spring Security), and OAuth 2.0 / OIDC allows you to use Keycloak or Okta.
 
 Spring Security makes Keycloak and Okta integration so incredibly easy it's silly. Keycloak and Okta are called "identity providers" and if you have a similar solution that is OIDC-compliant, I'm confident it'll work with Spring Security and JHipster.
 
@@ -159,7 +139,7 @@ SPRING_SECURITY_OAUTH2_CLIENT_PROVIDER_OIDC_ISSUER_URI=https://{yourOktaDomain}/
   SPRING_SECURITY_OAUTH2_CLIENT_REGISTRATION_OIDC_CLIENT_SECRET=$clientSecret ./gradlew
 ----
 
-TIP: The above command can be painful to type, so I encourage you to copy pasta, or set the values as environment variables. You can also configure them in a properties/YAML file in Spring Boot, but you should link:/blog/2018/07/30/10-ways-to-secure-spring-boot#8-store-secrets-securely[never store secrets in source control].
+TIP: The above command can be painful to type, so I encourage you to copy/paste, or set the values as environment variables. You can also configure them in a properties/YAML file in Spring Boot, but you should link:/blog/2018/07/30/10-ways-to-secure-spring-boot#8-store-secrets-securely[never store secrets in source control].
 
 === Create a Native App for Ionic
 
@@ -205,7 +185,7 @@ I created a data model for this app that has an `Album`, `Photo`, and `Tag` enti
 
 image::{% asset_path 'blog/ionic-4-jhipster/photos-jdl.png' %}[alt=JDL Studio,width=800,align=center]
 
-Copy the JDL below and save it in a `photos.jh` file in the root directory of your project.
+Copy the JDL below and save it in a `photos.jdl` file in the root directory of your project.
 
 [source]
 ----
@@ -243,7 +223,7 @@ You can generate entities and CRUD code (Java for Spring Boot; TypeScript and HT
 
 [source,shell]
 ----
-jhipster import-jdl photos.jh
+jhipster import-jdl photos.jdl
 ----
 
 When prompted, type **a** to update existing files.
@@ -254,7 +234,7 @@ When the process completes, restart your app, and confirm that all your entities
 
 image::{% asset_path 'blog/ionic-4-jhipster/photos-list.png' %}[alt=Photos List,width=800,align=center]
 
-You might notice that the entity list screen are pre-loaded with data. This is done by https://github.com/marak/Faker.js/[faker.js]. To turn it off, edit `src/main/resources/config/application-dev.yml`, search for `liquibase` and set its `contexts` value to `dev`. I made this change in this example's code and ran `./gradlew clean` to clear the database.
+You might notice that the entity list screen is pre-loaded with data. This is done by https://github.com/marak/Faker.js/[faker.js]. To turn it off, edit `src/main/resources/config/application-dev.yml`, search for `liquibase` and set its `contexts` value to `dev`. I made this change in this example's code and ran `./gradlew clean` to clear the database.
 
 [source,yaml]
 ----
@@ -269,17 +249,15 @@ Getting started with Ionic for JHipster is similar to JHipster. You simply have 
 
 [source,shell]
 ----
-npm i -g generator-jhipster-ionic@4.0.0-beta.1 ionic@5.0.3 yo
+npm i -g generator-jhipster-ionic@4.0.0 ionic@5.1.0 yo
 yo jhipster-ionic
 ----
-
-// todo: upgrade Ionic for JHipster to JHipster 6.1.1, and test yo jhipster-ionic, then release 4.0.0
 
 If you have your `app` application at `~/app`, you should run this command from your home directory (`~`). Ionic for JHipster will prompt you for the location of your backend application. Use `mobile` for your app's name and `app` for the JHipster app's location.
 
 Type **a** when prompted to overwrite `mobile/src/app/app.component.ts`.
 
-Open `src/app/auth/auth.service.ts` in an editor, search for `data.clientId` and replace it with the client ID from your Native app on Okta.
+Open `mobile/src/app/auth/auth.service.ts` in an editor, search for `data.clientId` and replace it with the client ID from your Native app on Okta.
 
 [source,ts]
 ----
@@ -309,7 +287,7 @@ Add another claim, name it `given_name`, include it in the access token, use `Ex
 
 When you are finished, your claims should look as follows.
 
-image::{% asset_path 'blog/ionic-4-jhipster/claims.png' %}[alt=Default Authorization Server Claims,width=600,align=center]
+image::{% asset_path 'blog/ionic-4-jhipster/claims.png' %}[alt=Default Authorization Server Claims,width=800,align=center]
 
 Run the following commands to start your Ionic app.
 
@@ -332,7 +310,7 @@ yo jhipster-ionic:entity album
 
 When prompted to generate this entity from an existing one, type **Y**. Enter `../app` as the path to your existing application. When prompted to regenerate entities and overwrite files, type **Y**. Enter **a** when asked about conflicting files.
 
-Go back to your browser where your Ionic app is running, click on **Entities** on the bottom, then **Albums**. Click the blue + icon in the bottom corner, and add a new album.
+Go back to your browser where your Ionic app is running (or restart it if you stopped it). Click on **Entities** on the bottom, then **Albums**. Click the blue + icon in the bottom corner, and add a new album.
 
 image::{% asset_path 'blog/ionic-4-jhipster/new-album.png' %}[alt=New Album,width=800,align=center]
 
@@ -382,18 +360,20 @@ image::{% asset_path 'blog/ionic-4-jhipster/jhipster-new-photo.png' %}[alt=Add P
 
 To see this new album in your Ionic app, pull down with your mouse to simulate the pull-to-refresh gesture on a phone. Looky there - it works!
 
-There are some gestures you should know about on this screen. Clicking on the row will take you to a view screen where you can edit or delete the photo. You can also swipe left to expose edit and delete buttons for a shorter path.
+There are some gestures you should know about on this screen. Clicking on the row will take you to a view screen where you can see the photo's details. You can also swipe left to expose edit and delete buttons.
 
-image::{% asset_path 'blog/ionic-4-jhipster/ionic-ios-photos.png' %}[alt=New Photo in Ionic App,align=center]
+image::{% asset_path 'blog/ionic-4-jhipster/ionic-ios-photos.png' %}[alt=New Photo in Ionic App,width=800,align=center]
 
 == Run Your Ionic App on Android
 
 Deploying your app on Android is very similar to iOS. In short:
 
 . Make sure you're using Java 8
-. Run `ionic cordiva prepare android`
+. Run `ionic cordova prepare android`
 . Open `platforms/android` in Android Studio, upgrade Gradle if prompted
 . Set `launchMode` to `singleTask` in `AndroidManifest.xml`
+. Start your app using Android Studio
+. While your app is starting, run `adb reverse tcp:8080 tcp:8080` so the emulator can talk to JHipster
 
 For more thorough instructions, see my link:/blog/2019/06/20/ionic-4-tutorial-user-authentication-and-registration#run-your-ionic-4-app-on-android[Ionic 4 tutorial's Android section].
 
@@ -404,8 +384,6 @@ Ionic is a nice way to leverage your web development skills to build mobile apps
 JHipster supports PWAs too, but I think Ionic apps _look_ like native apps, which is a nice effect. There's a lot more I could cover about JHipster and Ionic, but this should be enough to get you started.
 
 You can find the source code for the application developed in this post on GitHub at https://github.com/oktadeveloper/okta-ionic4-jhipster-example[@oktadeveloper/okta-ionic4-jhipster-example].
-
-// todo: create repo ^^
 
 I've written a few other posts on Ionic, JHipster, and Angular. Check them out if you have a moment.
 
