@@ -104,7 +104,7 @@ This ensures that group membership information is included in the Access Token w
 Clone the [GitHub repo](https://github.com/oktadeveloper/okta-spring-security-roles-example).
 
 ```bash
-git clone https://github.com/okta/okta.github.io.git
+git clone https://github.com/oktadeveloper/okta-spring-security-roles-example.git
 ```
 
 Open up the project in your favorite IDE or editor. The screenshots below are from [IntelliJ IDEA](https://www.jetbrains.com/idea/).

@@ -15,7 +15,51 @@ Developers love to automate things. It's what we do for a living for the most pa
 
 Schematics is a library from the Angular CLI project that allows you to manipulate projects with code. You can create/update files and add dependencies to any project that has a `package.json` file. That's right, Schematics aren't just for Angular projects! 
 
-In this post, I'll show you how to use Schematics to modify a project created with Create React App. Why React? Because it's popular and fun to write apps with (in my experience). Also, Eric Elliot predicts "React Continues to Dominate in 2019" in his [Top JavaScript Frameworks and Topics to Learn in 2019](https://medium.com/javascript-scene/top-javascript-frameworks-and-topics-to-learn-in-2019-b4142f38df20).
+Do you have a minute? I'd love to show you how can use a Schematic I wrote to add authentication to a React app. You'll need Node.js 10+ installed; then run:
+
+```bash
+npx create-react-app rs --typescript
+```
+
+{% img "blog/react-schematics/create-react-app.png" alt:"Create React app with TypeScript" width:"800" %}{: .center-image }
+
+While that process completes, create an OIDC app on Okta.
+
+Why Okta? Because friends don't let friends write authentication! Okta has Authentication and User Management APIs that greatly reduce your development time. Our API and SDKs make it easy for developers to authenticate, manage, and secure users in any application. Not only that, theirs a free level for developers that gets you up to 1000 active user per month.
+
+### Create an OIDC App on Okta
+
+Log in to your Okta Developer account (or [sign up](https://developer.okta.com/signup/) if you don't have an account) and navigate to **Applications** > **Add Application**. Click **Single-Page App** and click **Next**. Give the app a name you'll remember, change the port from `8080` to `3000`, and click **Done**.
+
+The next screen should look similar to the following:
+
+{% img "blog/react-schematics/app-settings.png" alt:"Okta OIDC App Settings" width:"700" %}{: .center-image }
+
+Go back to the terminal window where you created the `rs` app. Navigate into the directory and run the app to make sure it starts on port 3000. 
+
+```shell
+cd rs
+npm start
+```
+
+Stop the process (Ctrl+C) and add OIDC authentication to your app with the following commands:
+
+```shell
+npm i @oktadev/schematics
+schematics @oktadev/schematics:add-auth
+```
+
+When prompted, enter your issuer (it can be found in Okta's dashboard under **API** > **Authorization Servers**) and client ID. When the installation completes, run `npm start` and marvel at your React app with OIDC authentication!
+
+{% img "blog/react-schematics/react-okta.png" alt:"React + Okta = 💙" width:"800" %}{: .center-image }
+
+Click **login**, enter the credentials you used to signup with Okta, and you'll be redirected back to your app. This time, a **logout** button will be displayed. 
+
+## Create a React Schematic
+
+It's neat to see a Schematic in action, and it's fun to write them too! Now I'll show you how to use Schematics to modify a project created with Create React App. 
+
+Why React? Because it's popular and fun to write apps with (in my experience). Also, Eric Elliot predicts "React Continues to Dominate in 2019" in his [Top JavaScript Frameworks and Topics to Learn in 2019](https://medium.com/javascript-scene/top-javascript-frameworks-and-topics-to-learn-in-2019-b4142f38df20).
 
 Bootstrap is a popular CSS framework, and React has support for it via [reactstrap](https://reactstrap.github.io/). In this tutorial, you'll learn how to create a schematic that integrates reactstrap. It's a straightforward example, and I'll include unit and integrating testing tips.
 
@@ -297,10 +341,9 @@ Run `npm install` followed by `npm start` and bask in the glory of your React ap
 
 {% img "blog/react-schematics/reactstrap-installed.png" alt:"reactstrap installed!" width:"800" %}{: .center-image }
 
-
 ## Schematics with Angular 
 
-Angular CLI is based on Schematics, as are its PWA and Angular Material modules. I won't go into Angular-specific Schematics here, you can read [Use Angular Schematics to Simplify Your Life](https://developer.okta.com/blog/2019/02/13/angular-schematics) for that.
+Angular CLI is based on Schematics, as are its PWA and Angular Material modules. I won't go into Angular-specific Schematics here, you can read [Use Angular Schematics to Simplify Your Life](/blog/2019/02/13/angular-schematics) for that.
 
 This tutorial includes information on how to add prompts, how to publish your Schematic, and it references the [OktaDev Schematics](https://github.com/oktadeveloper/schematics) project that I helped develop. This project's continuous integration uses a [`test-app.sh`](https://github.com/oktadeveloper/schematics/blob/master/test-app.sh) script that creates projects with each framework's respective CLI. For example, here's the script that tests creating a new Create React App's project, and installing the schematic.
 
@@ -316,46 +359,6 @@ then
 
 This project has support for TypeScript-enabled React projects as well. 
 
-Do you have a minute? I'd love to show you how to create a React + TypeScript project and add authentication with OIDC and Okta. 
-
-## Use React Schematics to Add Authentication with OIDC 
-
-Run `npx create-react-app rs --typescript`.
-
-{% img "blog/react-schematics/create-react-app.png" alt:"Create React app with TypeScript" width:"800" %}{: .center-image }
-
-While that process completes, create an OIDC app on Okta.
-
-Why Okta? Because friends don't let friends write authentication! Okta has Authentication and User Management APIs that greatly reduce your development time. Our API and SDKs make it easy for developers to authenticate, manage, and secure users in any application.
-
-### Create an OIDC App on Okta
-
-Log in to your Okta Developer account (or [sign up](https://developer.okta.com/signup/) if you don't have an account) and navigate to **Applications** > **Add Application**. Click **Single-Page App** and click **Next**. Give the app a name you'll remember, change the port from `8080` to `3000`, and click **Done**.
-
-The next screen should look similar to the following:
-
-{% img "blog/react-schematics/app-settings.png" alt:"Okta OIDC App Settings" width:"700" %}{: .center-image }
-
-Go back to the terminal window where you created the `rs` app. Navigate into the directory and run the app to make sure it starts on port 3000. 
-
-```shell
-cd rs
-npm start
-```
-
-Stop the process (Ctrl+C) and add OIDC authentication to your app with the following commands:
-
-```shell
-npm i @oktadev/schematics
-schematics @oktadev/schematics:add-auth
-```
-
-When prompted, enter your issuer (it can be found in Okta's dashboard under **API** > **Authorization Servers**) and client ID. When the installation completes, run `npm start` and marvel at your React app with OIDC authentication!
-
-{% img "blog/react-schematics/react-okta.png" alt:"React + Okta = 💙" width:"800" %}{: .center-image }
-
-Click **login**, enter the credentials you used to signup with Okta, and you'll be redirected back to your app. This time, a **logout** button will be displayed. 
-
 ## Learn More about React, Schematics, and Secure Authentication
 
 I hope you've enjoyed learning how to create Schematics for React. I found the API fairly easy to use and was delighted by its testing support too. If you want to learn more about Okta's React SDK, see [its docs](https://github.com/okta/okta-oidc-js/tree/master/packages/okta-react).
@@ -364,10 +367,11 @@ You can find the example schematic for this tutorial [on GitHub](https://github.
 
 We've written a few blog posts on Schematics and React over on the Okta Developer blog. You might enjoy them too.
 
-* [Use Angular Schematics to Simplify Your Life](https://developer.okta.com/blog/2019/02/13/angular-schematics)
-* [Build a Basic CRUD App with Node and React](https://developer.okta.com/blog/2018/07/10/build-a-basic-crud-app-with-node-and-react)
-* [Use React and Spring Boot to Build a Simple CRUD App](https://developer.okta.com/blog/2018/07/19/simple-crud-react-and-spring-boot) 
-* [Bootiful Development with Spring Boot and React](https://developer.okta.com/blog/2017/12/06/bootiful-development-with-spring-boot-and-react)
-* [If It Ain't TypeScript It Ain't Sexy](https://developer.okta.com/blog/2019/02/11/if-it-aint-typescript)
+* [Use Angular Schematics to Simplify Your Life](/blog/2019/02/13/angular-schematics)
+* [Use Schematics with Vue and Add Authentication in 5 Minutes](/blog/2019/05/21/vue-schematics)
+* [Build a Basic CRUD App with Node and React](/blog/2018/07/10/build-a-basic-crud-app-with-node-and-react)
+* [Use React and Spring Boot to Build a Simple CRUD App](/blog/2018/07/19/simple-crud-react-and-spring-boot) 
+* [Bootiful Development with Spring Boot and React](/blog/2017/12/06/bootiful-development-with-spring-boot-and-react)
+* [If It Ain't TypeScript It Ain't Sexy](/blog/2019/02/11/if-it-aint-typescript)
 
 Follow [@oktadev](https://twitter.com/oktadev) on Twitter to learn more about our leading-edge thoughts on Java, .NET, Angular, React, and JavaScript.
