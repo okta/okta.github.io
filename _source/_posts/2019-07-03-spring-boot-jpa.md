@@ -2,7 +2,7 @@
 layout: blog_post
 title: "Use Spring Boot and MySQL to go Beyond Authentication"
 author: joyannefoster
-description: "I"
+description: "persisting identity information after OpenID Connect login is a powerful way to leverage the standard."
 tags: [java, jpa, spring, spring boot, spring security, security]
 tweets:
 - ""
@@ -101,7 +101,7 @@ Click the **Access Policies** tab. Click **Add** Policy. Fill in the fields with
 
 This binds the policy to your OIDC app.
 
-Next click **Add Rule**. Enter: `Beyond Authentication Application` for the **Rule Name** field. Deselect all the grant types except for **Authorization Code**. Click **Create Rule**. This ensures that the request must use the Authorization Code flow in order for Okta to create tokens.
+Next click **Add Rule**. Enter: `Beyond Authentication Application` for the **Rule Name** field. Deselect all the grant types except for **Authorization Code**. Click **Create Rule**. This ensures that the request must use the Authorization Code flow in order for Okta to create tokens. This is the most secure flow of all the available OAuth flows. It ensures that all sensitive information (like tokens) are delivered via a response to a POST request. Check out the references at the end of this post for more on OAuth flows.
 
 Click the **Settings** tab and copy the **Issuer URL**. You'll make use of this value shortly.
 
@@ -412,7 +412,7 @@ public class BeyondAuthenticationApplication{
 ```
 
 
-### Controller Class
+### Create a Controller Class to Route Requests
 Last, but far from least, is the controller class. Create the `HomeController` class. This class does all of the work to read and write from the database. It also prepares the objects needed for the template to render including the list of events to show (all or just the user's) and whether the logged in user is an admin or not.
 
 ```java
