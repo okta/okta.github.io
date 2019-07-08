@@ -2,12 +2,12 @@
 layout: blog_post
 title: "Use Spring Boot and MySQL to go Beyond Authentication"
 author: joyannefoster
-description: "persisting identity information after OpenID Connect login is a powerful way to leverage the standard."
+description: "Persisting identity information after OpenID Connect login is a powerful way to leverage the standard."
 tags: [java, jpa, spring, spring boot, spring security, security]
 tweets:
-- ""
-- ""
-- ""
+- "Want to use Spring Boot and MySQL together? This tutorial shows you how!"
+- "Learn how to use Spring Boot + JPA + MySQL to build @java apps with Okta for authentication."
+- "Spring Boot provides a convenient way to build Java apps. Learn how to use it with JPA and MySQL in this tutorial."
 image: blog/featured/okta-java-bottle-headphones.jpg
 ---
 
@@ -15,17 +15,17 @@ In this post, we will walk through how to build a simple CRUD application using 
 
 The **Java Persistence API (JPA)** provides a specification for persisting, reading, and managing data from your Java object to relational tables in the database. The default implementation of JPA via Spring Boot is **Hibernate**. Hibernate saves you a lot of time writing code to persist data to a database, allowing you to focus on the business logic. 
 
-In this example, we will use MySql for the database.
+In this example, we will use MySQL for the database.
 
-The application you will build will have two main parts. The first is the authentication piece. This will use Okta OIDC SSO  to authenticate admin or ordinary users into the application. The second part will be the management of user events. These events are a record of any time a new token is issued for this application. The event will store the user's name, internal id from Okta,  and store additional information per token issuance including the time of the original login and the time the token was last used within the application to view a page. If you are wondering what the difference is between these three dates/times, here is a cheat-sheet:
+The application you will build will have two main parts. The first is the authentication piece. This will use Okta OIDC SSO to authenticate admin or ordinary users into the application. The second part will be the management of user events. These events are a record of any time a new token is issued for this application. The event will store the user's name, internal id from Okta, and store additional information per token issuance including the time of the original login and the time the token was last used within the application to view a page. If you are wondering what the difference is between these three dates/times, here is a cheat-sheet:
 
 - **Login Date/Time** -  This is the time at which the user actually had to enter their credentials. There can be more than one token issued against the same original login. This could be the time the user logged into this application, the Okta console, or another application tied to the same developer account (since this is an SSO example).
-- **Token Date/Time ** - When the user starts a session with the application described in this post, a new token is issued by Okta. This token is valid for a certain amount of time and is reused across page refreshes until it expires
+- **Token Date/Time** - When the user starts a session with the application described in this post, a new token is issued by Okta. This token is valid for a certain amount of time and is reused across page refreshes until it expires
 - **Last View Date/Time** - This is the last time the application was viewed. If you refresh the page, this time will update, while the *Token Date/Time* and *Login Date/Time* should remain the same.
 
 ## Summary of CRUD actions
 **C**RUD - Create
-When any user visits the application with a new session, they will be issued a new token. When this token is issued, a `userEvent` will be generated and persisted in the MySql database. 
+When any user visits the application with a new session, they will be issued a new token. When this token is issued, a `userEvent` will be generated and persisted in the MySQL database. 
 
 C**R**UD - Read
 Ordinary users will be able to see a list of all of the times they have received a new Okta token for this application. The application will also display the *Login Date/Time* and *Last View Date/Time* for that token (described earlier).
@@ -40,14 +40,14 @@ Admin users will have the option to delete any of the user events in the system.
 Pro Tip: In a production system, you wouldn't want to ever delete a log history, particularly a log regarding authentication or authorization actions.  If this were production code and you had a requirement to *delete* log entries in order to hide them from ordinary users, you would likely want to implement this by setting a `deleted` flag on that record and only displaying records that are not flagged as deleted.
 
 ## Prerequisites
-**MySql** - You must have installed a local instance of MySql or have access to a remote instance of MySql. For this exercise, I recommend that you have a fresh empty database prepared and have the username and password for that database handy. They will be required in the `application.properties` file later.  If you don't have MySql setup locally already, follow the instructions from the [MySql Website](https://dev.mysql.com/doc/mysql-getting-started/en/).
+**MySQL** - You must have installed a local instance of MySQL or have access to a remote instance of MySQL. For this exercise, I recommend that you have a fresh empty database prepared and have the username and password for that database handy. They will be required in the `application.properties` file later.  If you don't have MySQL setup locally already, follow the instructions from the [MySQL Website](https://dev.mysql.com/doc/mysql-getting-started/en/).
 
 ## Setup your Okta OIDC Application, Authorization Server, groups and users
 Before we can dive into the code, we will want to first get our Okta configuration in place. If you haven't already, head on over to [developer.okta.com](https://developer.okta.com/signup) to create yourself a free-forever developer account. Look for the email to complete the initialization of your Okta org.
 
 Once you have your developer account, we will need to set up your web application, authorization server, group, and users!  
 
-### Setup you Okta OIDC Application
+### Setup Your Okta OIDC Application
 Navigate to **Applications** in the admin console and click: **Add Application**. Choose **Web** and click **Next**. Populate the fields with these values:
 
 |Field                  |Value              		                    |
@@ -60,7 +60,7 @@ Navigate to **Applications** in the admin console and click: **Add Application**
 Click **Done**.
 Scroll down and copy the `Client ID` and `Client Secret`. You'll use those values shortly.
 
-### Setup your Okta Authorization Server
+### Setup Your Okta Authorization Server
 Next, you'll set up an Authorization Server with custom claims and access policies. This drives whether or not Okta will issue a token when one is requested. Navigate to **API** > **Authorization Servers**. Click **Add Authorization Server**. Fill in the values as follows:
 
 |Field          |Value              		            |
@@ -105,7 +105,8 @@ Next click **Add Rule**. Enter: `Beyond Authentication Application` for the **Ru
 
 Click the **Settings** tab and copy the **Issuer URL**. You'll make use of this value shortly.
 
-### Create Okta Admin Group for your application
+### Create an Okta Admin Group for Your Spring Boot Application
+
 In order to complete this application, we need to set up an "Admin" group for our application. To do this, within your Okta developer console, click on **Users** > **Groups** and then click on **Add Group**. Enter the following values:
 
 |Field                  |Value              |
@@ -113,7 +114,8 @@ In order to complete this application, we need to set up an "Admin" group for ou
 |**Name**               |Admin              |
 |**Description**  	    |Admin Group        |
 
-### Create Okta Users for your application
+### Create Okta Users for Your Application
+
 Finally, we need to create two users. The first will be an ordinary user and the second will be an admin user. From the developers console, click on **Users** > **People** and then click on **Add Person**. Fill out the form with the information for the ordinary (non-admin) user using the table below.  Repeat this for the Admin user, also using the table below.
 
 |                           | Ordinary User           | Admin User              | Comments                                                                                                                           |
@@ -130,12 +132,13 @@ Finally, we need to create two users. The first will be an ordinary user and the
 
 Take note of the **username** and **password** for each of the two users you created as you will use them to login later on.
 
-## Let's code it
+## Let's code it!
+
 The structure of our project will look like this:
 
 {% img blog/spring-boot-jpa/project_structure.png alt:"project" width:"600" %}{: .center-image }
 
-> NOTE: For this post, I will be using Eclipse, as it is my preferred IDE. However, you can use any IDE or editor you please.
+> **NOTE:** For this post, I will be using Eclipse, as it is my preferred IDE. However, you can use any IDE or editor you please.
 
 ### Dependencies
 
@@ -157,67 +160,65 @@ The file should be set up as follows
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-        xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-        <modelVersion>4.0.0</modelVersion>
-        <parent>
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>2.1.6.RELEASE</version>
+        <relativePath/> <!-- lookup parent from repository -->
+    </parent>
+    <groupId>com.okta.examples.jpa</groupId>
+    <artifactId>demo</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+    <name>BeyondAuthentication</name>
+    <description>Demo project for Spring Boot</description>
+
+    <properties>
+        <java.version>1.8</java.version>
+    </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-jpa</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-thymeleaf</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.okta.spring</groupId>
+            <artifactId>okta-spring-boot-starter</artifactId>
+            <version>1.2.1</version>
+        </dependency>
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <scope>runtime</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
                 <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-starter-parent</artifactId>
-                <version>2.1.6.RELEASE</version>
-                <relativePath/> <!-- lookup parent from repository -->
-        </parent>
-        <groupId>com.okta.examples.jpa</groupId>
-        <artifactId>demo</artifactId>
-        <version>0.0.1-SNAPSHOT</version>
-        <name>BeyondAuthentication</name>
-        <description>Demo project for Spring Boot</description>
-
-        <properties>
-                <java.version>1.8</java.version>
-        </properties>
-
-        <dependencies>
-                <dependency>
-                        <groupId>org.springframework.boot</groupId>
-                        <artifactId>spring-boot-starter-data-jpa</artifactId>
-                </dependency>
-                <dependency>
-                        <groupId>org.springframework.boot</groupId>
-                        <artifactId>spring-boot-starter-thymeleaf</artifactId>
-                </dependency>
-                <dependency>
-                        <groupId>org.springframework.boot</groupId>
-                        <artifactId>spring-boot-starter-web</artifactId>
-                </dependency>
-                <dependency>
-                        <groupId>com.okta.spring</groupId>
-                        <artifactId>okta-spring-boot-starter</artifactId>
-                        <version>1.2.1</version>
-                </dependency>
-           
-                <dependency>
-                        <groupId>mysql</groupId>
-                        <artifactId>mysql-connector-java</artifactId>
-                        <scope>runtime</scope>
-                </dependency>
-                <dependency>
-                        <groupId>org.springframework.boot</groupId>
-                        <artifactId>spring-boot-starter-test</artifactId>
-                        <scope>test</scope>
-                </dependency>
-        </dependencies>
-
-        <build>
-                <plugins>
-                        <plugin>
-                                <groupId>org.springframework.boot</groupId>
-                                <artifactId>spring-boot-maven-plugin</artifactId>
-                        </plugin>
-                </plugins>
-        </build>
-
+                <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
+        </plugins>
+    </build>
 </project>     
 ```
-The dependencies above tell the system that you want to use Thymeleaf for your web templates, MySql for your database, and Hibernate (the default JPA implementation) to persist and retrieve data from MySql.
+The dependencies above tell the system that you want to use Thymeleaf for your web templates, MySQL for your database, and Hibernate (the default JPA implementation) to persist and retrieve data from MySQL.
 
 ### Templates
 Let's also knock out the HTML template now, so you will have an idea what the application is trying to do/show later. Create the `home.html` file in the `src/main/resources/templates` folder.
@@ -280,6 +281,7 @@ Let's also knock out the HTML template now, so you will have an idea what the ap
     </body>
 </html>
 ```
+
 This template is very basic. It shows a list of user events and related fields. If the logged in user is an admin, it will show a delete button by each event. This template doesn't control which events are shown, that will be determined in the controller later.
 
 ### Project Configuration
@@ -303,7 +305,7 @@ spring.jpa.hibernate.ddl-auto=create
 
 The first section of the properties file is the Okta configuration. Earlier, you copied a few items including your Okta Web Application's *client id*, *client secret*, and *authorization server issuer URL*. Paste those values into the `application.properties` file.
 
-The next section is the MySql configuration. Replace the values inside the `{}` with the appropriate database name, user, and password. Note, you will have to replace the whole data source URL if you are not running MySql locally.
+The next section is the MySQL configuration. Replace the values inside the `{}` with the appropriate database name, user, and password. Note, you will have to replace the whole data source URL if you are not running MySQL locally.
 
 The following line in the properties file is very important: `spring.jpa.hibernate.ddl-auto=create`
 
@@ -380,12 +382,13 @@ public class UserEvent {
 
 The `@Entity` notation tells the system that this object will represent a row in a table. It tells Hibernate that this data should be stored in a table called `user_event` (from lowercasing the class name and adding "_" between words that were capitalized). If you want the table named something different, you can use the `@table(name="tbl_something")` annotation. The `@Entity` class also tells Hibernate that all of the non-static fields and/or getter methods should be persisted to the database. It will ignore any fields/methods that have the `@Transient` annotation and it will ignore methods that are a getter for a corresponding field. In this case, the entity will store the following fields in the database: `id`, `name`, `token`, `userId`, `loginAt`, `tokenIssuedAt`, and `lastViewedAt`. In most cases, Hibernate will understand the type of field that the values should be stored as in the database, but there are some times when you need to explicitly tell it what field type to use. In this example, I have used the annotation `Lob` to tell the system that the `token` field should be set to `longtext`. I have also used the `@Temporal(TemporalType.TIMESTAMP)` annotation to specify that three of the fields should be saved as `datetime` values. Lastly, I have used the following annotations to indicate that the id field is the primary key that should be autogenerated by the database:
 
-
 ```java
 @Id
 @GeneratedValue(strategy = GenerationType.AUTO)
 ```
+
 ### Repository
+
 Create the `UserEventRepository` class. This class is a POJO that represents the fields in the `UserEventRepository` object that will expose the ability to read and write from the `user_event` table.
 
 ```java
@@ -484,12 +487,13 @@ The `home` method is annotated with the `@GetMapping("/")` annotation which tell
 The `deleteUser` method is annotated with the `@GetMapping("/delete/{id}")` annotation which tells it to execute this method when a user calls a URL or clicks on a link with the href that passes in the id of the event to delete. The `home.html` template included links with this URL configured for an admin to delete user events. This is the code that will get triggered when the user clicks on the delete button. The code simply finds the user event, deletes it, and then redirects back to the main listing page, where you will see the updated list without the deleted item.
 
 ## Let's Run it!
+
 Let's see it in action!  In Eclipse, just right click on the `BeyondAuthenticationApplication
 ` file, click **run as** > **Java application**, and it will kick it off. You can now test your application!  Type `http://localhost:8080` into your favorite web browser. You should be presented with an Okta login screen:
 
 {% img blog/spring-boot-jpa/okta_login.png alt:"okta login" width:"600" %}{: .center-image }
 
-Note: If you don't see the Okta login screen, it is likely because you recently logged into the dev console and it is recognizing that login as valid for this application (after all, it is SSO). If that is the case, just use a different browser or an incognito browser tab.
+> **NOTE:** If you don't see the Okta login screen, it is likely because you recently logged into the dev console and it is recognizing that login as valid for this application (after all, it is SSO). If that is the case, just use a different browser or an incognito browser tab.
 
 From the login screen, login as your admin user. It will then redirect you back to your application, which should look something like this:
 
@@ -504,26 +508,28 @@ Notice, the delete button is missing. When you refresh your screen for the admin
 Play around with the delete button from the admin's view and try refreshing the page and notice that the last view date/time of the entry will update. If you log in again later on, you will see multiple entries for the user once a new token is issued.
 
 ## Further Reading
-Hope you enjoyed this post. 
+
+I hope you enjoyed reading this post. 
 
 Full source-code is available [on GitHub](https://github.com/oktadeveloper/okta-spring-boot-mysql-example).
 
 To learn more about the Okta OIDC and Single Sign-On (SSO), check out these links:
-* [Easy Single Sign-On with Spring Boot and OAuth 2.0](https://developer.okta.com/blog/2019/05/02/spring-boot-single-sign-on-oauth-2)
+
+* [Easy Single Sign-On with Spring Boot and OAuth 2.0](/blog/2019/05/02/spring-boot-single-sign-on-oauth-2)
 * [OAuth 2.0 and OpenID Connect](https://developer.okta.com/docs/concepts/auth-overview/#authentication-api-vs-oauth-2-0-vs-openid-connect)
 
-To learn more about JPA and Hibernate, check these out
+To learn more about JPA and Hibernate, check these out:
+
 * [Hibernate Community Documentation](https://docs.jboss.org/hibernate/annotations/3.5/reference/en/html/entity.html)
 * [What is JPA? Introduction to the Java Persistence API](https://www.javaworld.com/article/3379043/what-is-jpa-introduction-to-the-java-persistence-api.html)
 
-
 If you'd like to learn more about Spring Boot, Spring Security, or secure user management, check out any of these great tutorials:
 
--   [Get Started with Spring Boot, OAuth 2.0, and Okta](/blog/2017/03/21/spring-boot-oauth)
--   [Add Single Sign-On to Your Spring Boot Web App in 15 Minutes](/blog/2017/11/20/add-sso-spring-boot-15-min)
--   [Secure Your Spring Boot Application with Multi-Factor Authentication](/blog/2018/06/12/mfa-in-spring-boot)
--   [Build a Secure API with Spring Boot and GraphQL](/blog/2018/08/16/secure-api-spring-boot-graphql)
+- [Get Started with Spring Boot, OAuth 2.0, and Okta](/blog/2017/03/21/spring-boot-oauth)
+- [Add Single Sign-On to Your Spring Boot Web App in 15 Minutes](/blog/2017/11/20/add-sso-spring-boot-15-min)
+- [Secure Your Spring Boot Application with Multi-Factor Authentication](/blog/2018/06/12/mfa-in-spring-boot)
+- [Build a Secure API with Spring Boot and GraphQL](/blog/2018/08/16/secure-api-spring-boot-graphql)
 
 If you want to dive deeper, take a look at the [Okta Spring Boot Starter GitHub Project](https://github.com/okta/okta-spring-boot).
 
-If you have any questions about this post, please add a comment below. For more awesome content, follow  [@oktadev](https://twitter.com/oktadev) on Twitter, like us [on Facebook](https://www.facebook.com/oktadevelopers/), or subscribe to [our YouTube channel](https://www.youtube.com/c/oktadev).
+If you have any questions about this post, please add a comment below. For more awesome content, follow [@oktadev](https://twitter.com/oktadev) on Twitter, like us [on Facebook](https://www.facebook.com/oktadevelopers/), or subscribe to [our YouTube channel](https://www.youtube.com/c/oktadev).
