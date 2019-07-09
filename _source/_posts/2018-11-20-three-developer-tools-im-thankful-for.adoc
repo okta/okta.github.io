@@ -56,7 +56,7 @@ I really got into Asciidoctor a few years ago when I authored the first version 
 
 I enjoyed the process so much, I created a https://github.com/mraible/infoq-mini-book[template project for InfoQ mini-books]. Even if you're not writing an InfoQ mini-book, this template can help you self-publish your own book.
 
-When I started writing on this blog (which uses Jekyll, soon to be Hugo), I reluctantly used Markdown to author posts. Fast forward to today, and we've integrated https://github.com/okta/okta.github.io/pull/2321[AsiiDoc support]! I have to thank https://twitter.com/starbuxman[Josh Long] for motivating this integration. He started writing our link:/blog/2018/09/21/reactive-programming-with-spring[Reactive Programming series] with it. The code callouts were so cool, I had to make them work. Below is an example.
+When I started writing on this blog (which uses Jekyll, soon to be Hugo), I reluctantly used Markdown to author posts. Fast forward to today, and we've integrated https://github.com/oktadeveloper/okta.github.io/pull/2321[AsiiDoc support]! I have to thank https://twitter.com/starbuxman[Josh Long] for motivating this integration. He started writing our link:/blog/2018/09/21/reactive-programming-with-spring[Reactive Programming series] with it. The code callouts were so cool, I had to make them work. Below is an example.
 
 .Read data from a file _synchronously_
 ====

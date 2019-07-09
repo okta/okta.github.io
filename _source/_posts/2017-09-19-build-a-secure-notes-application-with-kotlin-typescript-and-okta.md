@@ -858,4 +858,4 @@ If you have questions about this code or technologies you want to see in my next
 
 **Changelog:**
 
-* Nov 30, 2017: Updated to use Spring Boot 1.5.9, Angular 5.0, Angular CLI 1.5.5, Angular Material 5.0.0-rc.2, and Okta Sign-In Widget 2.5.0. See the code changes in the [example app on GitHub](https://github.com/oktadeveloper/okta-kotlin-typescript-notes-example/pull/3/files). Changes to this article can be viewed [in this pull request](https://github.com/okta/okta.github.io/pull/1516).
+* Nov 30, 2017: Updated to use Spring Boot 1.5.9, Angular 5.0, Angular CLI 1.5.5, Angular Material 5.0.0-rc.2, and Okta Sign-In Widget 2.5.0. See the code changes in the [example app on GitHub](https://github.com/oktadeveloper/okta-kotlin-typescript-notes-example/pull/3/files). Changes to this article can be viewed [in this pull request](https://github.com/oktadeveloper/okta.github.io/pull/1516).

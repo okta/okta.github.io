@@ -469,5 +469,5 @@ To learn more about progressive web applications, check out [The Ultimate Guide 
 
 **Changelog:**
 
-* Feb 8, 2017: Updated to use Spring Boot 1.5.10, Angular 5.2.0, and Angular CLI 1.6.7. You can see what changed in this article via [this pull request on GitHub](https://github.com/okta/okta.github.io/pull/1737). For code changes, see [oktadeveloper/spring-boot-angular-pwa-example#3](https://github.com/oktadeveloper/spring-boot-angular-pwa-example/pull/3).
-* Nov 3, 2017: Updated to use Spring Boot 1.5.8, Angular 5.0.0, and Angular CLI 1.5.0. You can see what changed in this article via [this pull request on GitHub](https://github.com/okta/okta.github.io/pull/1453). For code changes, see [oktadeveloper/spring-boot-angular-pwa-example#2](https://github.com/oktadeveloper/spring-boot-angular-pwa-example/pull/2).
+* Feb 8, 2017: Updated to use Spring Boot 1.5.10, Angular 5.2.0, and Angular CLI 1.6.7. You can see what changed in this article via [this pull request on GitHub](https://github.com/oktadeveloper/okta.github.io/pull/1737). For code changes, see [oktadeveloper/spring-boot-angular-pwa-example#3](https://github.com/oktadeveloper/spring-boot-angular-pwa-example/pull/3).
+* Nov 3, 2017: Updated to use Spring Boot 1.5.8, Angular 5.0.0, and Angular CLI 1.5.0. You can see what changed in this article via [this pull request on GitHub](https://github.com/oktadeveloper/okta.github.io/pull/1453). For code changes, see [oktadeveloper/spring-boot-angular-pwa-example#2](https://github.com/oktadeveloper/spring-boot-angular-pwa-example/pull/2).

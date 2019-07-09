@@ -1,5 +1,5 @@
 {
-  "name": "@okta/okta.github.io",
+  "name": "@oktadeveloper/okta.github.io",
   "version": "1.0.0",
   "description": "The Okta Developer Blog",
   "files": [
@@ -27,14 +27,14 @@
   ],
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/okta/okta.github.io.git"
+    "url": "git+https://github.com/oktadeveloper/okta.github.io.git"
   },
   "author": "Joel Franusic <joel.franusic@okta.com>",
   "license": "Apache-2.0",
   "bugs": {
-    "url": "https://github.com/okta/okta.github.io/issues"
+    "url": "https://github.com/oktadeveloper/okta.github.io/issues"
   },
-  "homepage": "https://github.com/okta/okta.github.io#readme",
+  "homepage": "https://github.com/oktadeveloper/okta.github.io#readme",
   "devDependencies": {
     "chai": "4.2.0",
     "chai-as-promised": "*",

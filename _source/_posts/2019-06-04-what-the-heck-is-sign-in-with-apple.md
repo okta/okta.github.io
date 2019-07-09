@@ -376,7 +376,7 @@ You can find the [complete code from this tutorial](https://github.com/aaronpk/s
 
 ### Changelog
 
-* Jun 7, 2019: Updates to the sample code based on some new implementation experience. Added screenshot of the permissions screen asking to hide the email address. You can see the changes to this article in [okta.github.io#2924](https://github.com/okta/okta.github.io/pull/2924).
+* Jun 7, 2019: Updates to the sample code based on some new implementation experience. Added screenshot of the permissions screen asking to hide the email address. You can see the changes to this article in [okta.github.io#2924](https://github.com/oktadeveloper/okta.github.io/pull/2924).
 * Jun 10, 2019: Fixed typo in `client_secret.rb`
 
 ## Learn More about OAuth 2.0 and OpenID Connect

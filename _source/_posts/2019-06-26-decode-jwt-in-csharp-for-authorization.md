@@ -15,7 +15,7 @@ There are two main steps in securing an application: authentication and authoriz
 
 Many modern web apps use JSON Web Tokens (JWTs) during the authentication process. These JWTs can also carry information that can be used for authorization decisions within your applications. In this tutorial, you will learn how to decode JWTs in C# and how to use information from a JWT to make authorization decisions in a .NET Core app.
 
-## TL;DR - How to Decode JWTs in C#
+## TL;DR - How to Decode JWTs in C\#
 
 If you already have a JWT and you just want to know how to decode it in C#, here is the code you need:
 
@@ -133,7 +133,7 @@ services.AddAuthentication(options =>
 
 The code above configures your application to use Okta as an identity provider, using the settings you specified in `appsettings.json`. You will also notice some code that intercepts and decodes the two JWTs provided by Okta's authorization server during the authentication process. The access token is always provided. It only contains essential information that identifies the user and grants access. Because you specified `options.GetClaimsFromUserInfoEndpoint = true;`, an identity token is also requested. This token will contain any additional information (claims) about the user that has been requested. In the example above, we requested the `profile` and `email` scopes, so the `idToken.Claims` collection will contain information such as the name and email address of the authenticated user.
 
-## Use Information in JWT for Authorization in C#
+## Use Information in JWT for Authorization in C\#
 
 Now you'll extract some information from the id token that you can use for authorization decisions.
 
@@ -184,6 +184,7 @@ The `HomeController` should already have an `Admin` method that is decorated wit
 Another way that you could use claims that are populated from a JWT for authorization decisions would be to write a custom authorization policy that contains custom authorization logic based on the information in `context.User.Claims`. I will leave that exercise for you.
 
 ## Learn More About ASP.NET Core CRUD Apps and JWTs
+
 Interested in learning more about ASP.NET Core, JWTs, or building secure applications with Okta? Check out our [Product Documentation](https://developer.okta.com/use_cases/api_access_management/) or any of these great resources:
 
 * [Build a CRUD App with ASP.NET Core and SQL Server](https://developer.okta.com/blog/2019/04/24/crud-app-aspnet-core-sql-server)

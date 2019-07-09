@@ -477,5 +477,5 @@ You can find the source code associated with this article [on GitHub](https://gi
 
 **Changelog:**
 
-* Feb 7, 2018: Updated to use Spring Boot 1.5.10, Angular 5.2.0, and Angular CLI 1.6.7. See the code changes in the [example app on GitHub](https://github.com/oktadeveloper/spring-boot-microservices-example/pull/6). Changes to this article can be viewed [in this pull request](https://github.com/okta/okta.github.io/pull/1733).
+* Feb 7, 2018: Updated to use Spring Boot 1.5.10, Angular 5.2.0, and Angular CLI 1.6.7. See the code changes in the [example app on GitHub](https://github.com/oktadeveloper/spring-boot-microservices-example/pull/6). Changes to this article can be viewed [in this pull request](https://github.com/oktadeveloper/okta.github.io/pull/1733).
 * Nov 3, 2017: Updated to use Spring Boot 1.5.8, Angular 5.0.0, and Angular CLI 1.5.0. See the code changes in the [example app on GitHub](https://github.com/oktadeveloper/spring-boot-angular-example/pull/5).

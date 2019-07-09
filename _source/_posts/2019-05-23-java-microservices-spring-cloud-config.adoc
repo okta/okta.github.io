@@ -314,7 +314,7 @@ Log in to your Okta Developer account (or https://developer.okta.com/signup/[sig
 
 1. From the **Applications** page, choose **Add Application**.
 2. On the Create New Application page, select **Web**.
-3. Give your app a memorable name, add `http://localhost:8080/login/oauth2/code/okta` as a Login redirect URI, select **Refresh Token** (in addition to **Authorization Code**), and click **Done**.
+3. Give your app a memorable name, add `http://localhost:8080/login/oauth2/code/oidc` as a Login redirect URI, select **Refresh Token** (in addition to **Authorization Code**), and click **Done**.
 4. To configure Logout to work in JHipster, **Edit** your app, add `http://localhost:8080` as a Logout redirect URI, then click **Save**.
 
 == Configure Your OpenID Connect Settings with Spring Cloud Config

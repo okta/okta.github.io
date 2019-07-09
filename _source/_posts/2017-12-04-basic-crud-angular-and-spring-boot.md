@@ -1081,5 +1081,5 @@ If you have any questions, please don't hesitate to leave a comment below, or as
 
 **Changelog:**
 
-* Apr 9, 2018: Updated to use Okta Angular 1.0.0, Spring Boot 2.0.1, and Angular CLI 1.7.4 (with Angular 5.2.9). See the code changes in the [example app on GitHub](https://github.com/oktadeveloper/okta-spring-boot-2-angular-5-example/pull/5). Changes to this article can be viewed in [okta/okta.github.io#1938](https://github.com/okta/okta.github.io/pull/1938).
-* Mar 5, 2018: Updated to use Spring Boot 2.0 and Angular CLI 1.7.2 (with Angular 5.2.7). See the code changes in the [example app on GitHub](https://github.com/oktadeveloper/okta-spring-boot-2-angular-5-example/pull/2). Changes to this article can be viewed in [okta/okta.github.io#1806](https://github.com/okta/okta.github.io/pull/1806).
+* Apr 9, 2018: Updated to use Okta Angular 1.0.0, Spring Boot 2.0.1, and Angular CLI 1.7.4 (with Angular 5.2.9). See the code changes in the [example app on GitHub](https://github.com/oktadeveloper/okta-spring-boot-2-angular-5-example/pull/5). Changes to this article can be viewed in [oktadeveloper/okta.github.io#1938](https://github.com/oktadeveloper/okta.github.io/pull/1938).
+* Mar 5, 2018: Updated to use Spring Boot 2.0 and Angular CLI 1.7.2 (with Angular 5.2.7). See the code changes in the [example app on GitHub](https://github.com/oktadeveloper/okta-spring-boot-2-angular-5-example/pull/2). Changes to this article can be viewed in [oktadeveloper/okta.github.io#1806](https://github.com/oktadeveloper/okta.github.io/pull/1806).

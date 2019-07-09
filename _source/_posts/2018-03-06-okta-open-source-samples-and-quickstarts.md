@@ -144,4 +144,4 @@ However, there's always room for improvement! If you have ideas for improvement,
 
 **Changelog:**
 
-* Apr 11, 2019: Updated to list new samples. Was 9, now we're up to 16! You can see changes to this article in [okta/okta.github.io#2843](https://github.com/okta/okta.github.io/pull/2843).
+* Apr 11, 2019: Updated to list new samples. Was 9, now we're up to 16! You can see changes to this article in [oktadeveloper/okta.github.io#2843](https://github.com/oktadeveloper/okta.github.io/pull/2843).

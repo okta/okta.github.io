@@ -426,4 +426,4 @@ If you love Java too, [follow @oktadev](https://twitter.com/oktadev) on Twitter 
 
 **Changelog:**
 
-* Apr 10, 2018: Updated dependencies in the example app to use Okta Spring Boot Starter and Java SDK version 0.4.0. See the code changes in the [example app on GitHub](https://github.com/oktadeveloper/okta-ionic-crypto-java-sdk/pull/2). Changes to this article can be viewed in [okta/okta.github.io#1941](https://github.com/okta/okta.github.io/pull/1941).
+* Apr 10, 2018: Updated dependencies in the example app to use Okta Spring Boot Starter and Java SDK version 0.4.0. See the code changes in the [example app on GitHub](https://github.com/oktadeveloper/okta-ionic-crypto-java-sdk/pull/2). Changes to this article can be viewed in [oktadeveloper/okta.github.io#1941](https://github.com/oktadeveloper/okta.github.io/pull/1941).

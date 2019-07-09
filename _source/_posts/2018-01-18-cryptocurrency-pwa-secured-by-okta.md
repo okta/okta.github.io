@@ -338,4 +338,4 @@ To learn more about Ionic and PWAs, check out the following resources:
 
 **Changelog:**
 
-* Apr 10, 2018: Updated dependencies in the example app to their latest versions using [npm-check-updates](https://www.npmjs.com/package/npm-check-updates). See the code changes in the [example app on GitHub](https://github.com/oktadeveloper/okta-ionic-crypto-pwa/pull/2). Changes to this article can be viewed in [okta/okta.github.io#1940](https://github.com/okta/okta.github.io/pull/1940).
+* Apr 10, 2018: Updated dependencies in the example app to their latest versions using [npm-check-updates](https://www.npmjs.com/package/npm-check-updates). See the code changes in the [example app on GitHub](https://github.com/oktadeveloper/okta-ionic-crypto-pwa/pull/2). Changes to this article can be viewed in [oktadeveloper/okta.github.io#1940](https://github.com/oktadeveloper/okta.github.io/pull/1940).

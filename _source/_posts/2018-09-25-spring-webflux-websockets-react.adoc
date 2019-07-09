@@ -1036,5 +1036,5 @@ If you have any questions, please leave a comment below, ask us on Twitter (http
 
 **Changelog:**
 
-* May 28, 2019: Updated to use Spring Boot 2.1.5 and React 16.8.6. You can see the example app changes in https://github.com/oktadeveloper/okta-spring-webflux-react-example/pull/15[okta-spring-webflux-react-example#15]; changes to this post can be viewed in https://github.com/okta/okta.github.io/pull/2898[okta.github.io#2898].
-* Nov 5, 2018: Updated to use the Spring Boot 2.1 GA release and Create React App 2.1.0. You can see the example app changes in https://github.com/oktadeveloper/okta-spring-webflux-react-example/pull/6[okta-spring-webflux-react-example#6]; changes to this post can be viewed in https://github.com/okta/okta.github.io/pull/2459[okta.github.io#2459].
+* May 28, 2019: Updated to use Spring Boot 2.1.5 and React 16.8.6. You can see the example app changes in https://github.com/oktadeveloper/okta-spring-webflux-react-example/pull/15[okta-spring-webflux-react-example#15]; changes to this post can be viewed in https://github.com/oktadeveloper/okta.github.io/pull/2898[okta.github.io#2898].
+* Nov 5, 2018: Updated to use the Spring Boot 2.1 GA release and Create React App 2.1.0. You can see the example app changes in https://github.com/oktadeveloper/okta-spring-webflux-react-example/pull/6[okta-spring-webflux-react-example#6]; changes to this post can be viewed in https://github.com/oktadeveloper/okta.github.io/pull/2459[okta.github.io#2459].

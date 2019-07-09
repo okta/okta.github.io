@@ -154,7 +154,7 @@ In a [future tutorial](/blog/2017/09/19/build-a-secure-notes-application-with-ko
 
 **Changelog:**
 
-* May 24, 2018: Added `spring-security-oauth2-autoconfigure` as a dependency, which is necessary for Spring Boot 2.0. You can see the changes in this article in [this pull request](https://github.com/okta/okta.github.io/pull/2074), and changes in the example app in [okta-spring-boot-oauth-example#4](https://github.com/oktadeveloper/okta-spring-boot-oauth-example/pull/4).
+* May 24, 2018: Added `spring-security-oauth2-autoconfigure` as a dependency, which is necessary for Spring Boot 2.0. You can see the changes in this article in [this pull request](https://github.com/oktadeveloper/okta.github.io/pull/2074), and changes in the example app in [okta-spring-boot-oauth-example#4](https://github.com/oktadeveloper/okta-spring-boot-oauth-example/pull/4).
 * Feb 2, 2018: Added more information to `application.yml` so it's easier to copy and paste.
 * Oct 20, 2017: Added missing `scope: openid profile email` to `application.yaml`.
 * Oct 11, 2017: Updated instructions for the [Okta Developer Console](/blog/2017/09/25/all-new-developer-console).

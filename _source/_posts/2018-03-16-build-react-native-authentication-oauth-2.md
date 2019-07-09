@@ -592,5 +592,5 @@ If you have any questions about this article, please hit me up on Twitter [@mrai
 
 **Changelog:**
 
-* May 1, 2019: Updated paths to components and assets in Formidable Labs' GitHub repo. See [okta.github.io#2860](https://github.com/okta/okta.github.io/pull/2860) for more information.
-* Sep 28, 2018: Upgraded to React Native 0.57.1, React 16.5.0, and React Native AppAuth 3.1.0. See the example app changes in [okta-react-native-app-auth-example#2](https://github.com/oktadeveloper/okta-react-native-app-auth-example/pull/2); changes to this post can be viewed in [okta.github.io#2367](https://github.com/okta/okta.github.io/pull/2367).
+* May 1, 2019: Updated paths to components and assets in Formidable Labs' GitHub repo. See [okta.github.io#2860](https://github.com/oktadeveloper/okta.github.io/pull/2860) for more information.
+* Sep 28, 2018: Upgraded to React Native 0.57.1, React 16.5.0, and React Native AppAuth 3.1.0. See the example app changes in [okta-react-native-app-auth-example#2](https://github.com/oktadeveloper/okta-react-native-app-auth-example/pull/2); changes to this post can be viewed in [okta.github.io#2367](https://github.com/oktadeveloper/okta.github.io/pull/2367).

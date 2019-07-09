@@ -794,5 +794,5 @@ To learn more about Ionic and Angular, please see the following resources:
 
 **Changelog:**
 
-* Feb 14, 2018: Updated to use the latest versions of Ionic (3.19.1 with Angular 5) and Spring Boot (1.5.10). See the code changes in [oktadeveloper/spring-boot-ionic-example#2](https://github.com/oktadeveloper/spring-boot-ionic-example/pull/2). Changes to this article can be viewed in [okta/okta.github.io#1759](https://github.com/okta/okta.github.io/pull/1759).
+* Feb 14, 2018: Updated to use the latest versions of Ionic (3.19.1 with Angular 5) and Spring Boot (1.5.10). See the code changes in [oktadeveloper/spring-boot-ionic-example#2](https://github.com/oktadeveloper/spring-boot-ionic-example/pull/2). Changes to this article can be viewed in [oktadeveloper/okta.github.io#1759](https://github.com/oktadeveloper/okta.github.io/pull/1759).
 

@@ -582,4 +582,4 @@ There's also a number of excellent resources by Google and Smashing Magazine:
 
 **Changelog:**
 
-* Feb 23, 2018: Updated to use Spring Boot 1.5.10, Angular CLI 1.6.7, and remove Stormpath SDKs. See the code changes in the [example app on GitHub](https://github.com/oktadeveloper/okta-spring-boot-angular-pwa-example/pull/7). You can see changes to this article in [okta/okta.github.io#1794](https://github.com/okta/okta.github.io/pull/1794).
+* Feb 23, 2018: Updated to use Spring Boot 1.5.10, Angular CLI 1.6.7, and remove Stormpath SDKs. See the code changes in the [example app on GitHub](https://github.com/oktadeveloper/okta-spring-boot-angular-pwa-example/pull/7). You can see changes to this article in [oktadeveloper/okta.github.io#1794](https://github.com/oktadeveloper/okta.github.io/pull/1794).

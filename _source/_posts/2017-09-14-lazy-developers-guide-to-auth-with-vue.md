@@ -583,4 +583,4 @@ You can see the code this lazy developer created for this article [on GitHub](ht
 
 **Changelog:**
 
-* Nov 1, 2018: Updated to use Vue CLI 2.9.6, Vue 2.5.2, and Vue Okta Auth SDK 2.1. You can see the example app changes in [okta-vue-auth-example#4](https://github.com/oktadeveloper/okta-vue-auth-example/pull/4); changes to this post can be viewed in [okta.github.io#2453](https://github.com/okta/okta.github.io/pull/2453).
+Nov 1, 2018: Updated to use Vue CLI 2.9.6, Vue 2.5.2, and Vue Okta Auth SDK 2.1. You can see the example app changes in [okta-vue-auth-example#4](https://github.com/oktadeveloper/okta-vue-auth-example/pull/4); changes to this post can be viewed in [okta.github.io#2453](https://github.com/oktadeveloper/okta.github.io/pull/2453).

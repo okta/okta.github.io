@@ -669,4 +669,4 @@ To learn more about Ionic, Angular, or Okta, please see the following resources:
 **Changelog:**
 
 * Mar 7, 2018: Updated instructions for creating an AVD with Android Studio 3.0.
-* Jan 11, 2018: Updated to use Ionic CLI 3.19.0 and angular-oauth2-oidc 3.1.4. See the code changes in the [example app on GitHub](https://github.com/oktadeveloper/okta-ionic-auth-example/pull/6). Changes to this article can be viewed [in this pull request](https://github.com/okta/okta.github.io/pull/1628).
+* Jan 11, 2018: Updated to use Ionic CLI 3.19.0 and angular-oauth2-oidc 3.1.4. See the code changes in the [example app on GitHub](https://github.com/oktadeveloper/okta-ionic-auth-example/pull/6). Changes to this article can be viewed [in this pull request](https://github.com/oktadeveloper/okta.github.io/pull/1628).

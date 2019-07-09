@@ -1103,4 +1103,4 @@ If you have any questions, please don't hesitate to leave a comment below, or as
 
 **Changelog:**
 
-* Nov 2, 2018: Updated to use Angular 7.0 and Spring Boot 2.1 GA releases. You can see the example app changes in [okta-spring-boot-2-angular-7-example#5](https://github.com/oktadeveloper/okta-spring-boot-2-angular-7-example/pull/5); changes to this post can be viewed in [okta.github.io#2456](https://github.com/okta/okta.github.io/pull/2456).
+* Nov 2, 2018: Updated to use Angular 7.0 and Spring Boot 2.1 GA releases. You can see the example app changes in [okta-spring-boot-2-angular-7-example#5](https://github.com/oktadeveloper/okta-spring-boot-2-angular-7-example/pull/5); changes to this post can be viewed in [okta.github.io#2456](https://github.com/oktadeveloper/okta.github.io/pull/2456).

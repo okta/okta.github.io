@@ -753,5 +753,5 @@ Learn more about Okta and its APIs at [developer.okta.com/product](https://devel
 
 **Changelog:**
 
-* Oct 11, 2018: Updated to use Spring Boot 2.0.5, Spring Cloud Finchley SR1, and Okta Sign-In Widget 2.13.0. See the example app changes in [spring-boot-microservices-example#21](https://github.com/oktadeveloper/spring-boot-microservices-example/pull/21); changes to this post can be viewed in [okta.github.io#2390](https://github.com/okta/okta.github.io/pull/2390).
-* May 11, 2018: Updated to use Spring Boot 2.0 and Okta Sign-In Widget 2.0.8. See the example app changes in [spring-boot-microservices-example#17](https://github.com/oktadeveloper/spring-boot-microservices-example/pull/17); changes to this post can be viewed in [okta.github.io#2049](https://github.com/okta/okta.github.io/pull/2049).
+* Oct 11, 2018: Updated to use Spring Boot 2.0.5, Spring Cloud Finchley SR1, and Okta Sign-In Widget 2.13.0. See the example app changes in [spring-boot-microservices-example#21](https://github.com/oktadeveloper/spring-boot-microservices-example/pull/21); changes to this post can be viewed in [okta.github.io#2390](https://github.com/oktadeveloper/okta.github.io/pull/2390).
+* May 11, 2018: Updated to use Spring Boot 2.0 and Okta Sign-In Widget 2.0.8. See the example app changes in [spring-boot-microservices-example#17](https://github.com/oktadeveloper/spring-boot-microservices-example/pull/17); changes to this post can be viewed in [okta.github.io#2049](https://github.com/oktadeveloper/okta.github.io/pull/2049).
