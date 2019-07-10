@@ -424,7 +424,7 @@ X-Powered-By: Servlet/4.0
 andrew.hughes@mail.com: [Everyone, Admin]
 ```
 
-I was unable to get things to work after making these changes. I contacted some MicroProfile experts I know and they suggested configuring a public key location in `src/main/resources/META-INF/microprofile-config.properties`:
+I was unable to get things to work after making these changes. I contacted a MicroProfile expert I know and they suggested configuring a public key location in `src/main/resources/META-INF/microprofile-config.properties`:
 
 ```properties
 mp.jwt.verify.publickey.location=https://{yourOktaDomain}/oauth2/default/v1/keys
