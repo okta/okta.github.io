@@ -226,7 +226,9 @@ That's it! You've now configured Okta as an OAuth 2.0 OIDC provider. Take note o
 
 ## Add Groups and UPN Claims To Default Authorization Server
 
-You need to add two claims mappings to your default authorization server on Okta, to enable role-based authorization and meet MicroProfile's claims requirements. From the top menu of the Okta developer dashboard, go to **API** and select **Authorization Servers**.
+You need to add two claims mappings to your default authorization server on Okta, to enable role-based authorization and meet MicroProfile's claims requirements.
+
+From the top menu of the Okta developer dashboard, go to **API** and select **Authorization Servers**.
 
 Click on the **default** server.
 
