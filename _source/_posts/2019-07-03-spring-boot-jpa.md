@@ -122,8 +122,8 @@ Finally, we need to create two users. The first will be an ordinary user and the
 |---------------------------|-------------------------|-------------------------|------------------------------------------------------------------------------------------------------------------------------------|
 | **First Name**                | Plain                   | Super                   | Can be anything you like                                                                                                           |
 | **Last Name**                 | Jane                    | Admin                   | Can be anything you like                                                                                                           |
-| **Usernqme**                  | plainJane@something.com | plainJane@something.com | Might prefer to test with an email you can actually access                                                                         |
-| **Primary Email**             | plainJane@something.com | plainJane@something.com |                                                                                                                                    |
+| **Username**                  | plainJane@something.com | superAdmin@something.com | Might prefer to test with an email you can actually access                                                                         |
+| **Primary Email**             | plainJane@something.com | superAdmin@something.com |                                                                                                                                    |
 | **Secondary Email**           |                         |                         |                                                                                                                                    |
 | **Groups**                    |                         | Admin                   |                                                                                                                                    |
 | **Password**                  | Set by Admin            | Set by Admin            | This is to simplify the demo. In a production environment, you will likely want this set to "set by user"                          |
@@ -291,7 +291,6 @@ We will configure the project via the `application.properties` file located in `
 okta.oauth2.issuer={authServerUrl}
 okta.oauth2.clientId={clientId}
 okta.oauth2.clientSecret={clientSecret}
-okta.oauth2.scope=openid
 
 ## MySQL
 spring.datasource.url=jdbc:mysql://localhost:3306/{dbName}
