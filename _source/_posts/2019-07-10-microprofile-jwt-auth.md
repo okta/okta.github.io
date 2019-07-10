@@ -28,7 +28,7 @@ Take a look at the [MicroProfile project](https://microprofile.io/) if you want 
 
 ## Authentication and Authorization for MicroProfile with OAuth, OIDC, and JWTs
 
-To authenticate and authorize users to a webapp powered by MicroProfile, we’ll need to use two industry-standard protocols, OAuth and OIDC, to call on an existing identity provider, in this case, Okta. OAuth 2.0 provides authorization only, while OIDC adds an identity layer on top of OAuth 2.0. With both of them, you have a complete authentication (Who is the user?) and authorization (What can the user do?) protocol. 
+To authenticate and authorize users to a webapp powered by MicroProfile, we'll need to use two industry-standard protocols, OAuth and OIDC, to call on an existing identity provider, in this case, Okta. OAuth 2.0 provides authorization only, while OIDC adds an identity layer on top of OAuth 2.0. With both of them, you have a complete authentication (Who is the user?) and authorization (What can the user do?) protocol. 
 
 However, neither OAuth 2.0 nor OIDC provide an identity implementation. To *actually use* them, you either need to implement an identity provider yourself or use a 3rd-party identity service. In this tutorial, you're going to use Okta to create an OAuth 2.0 / OIDC-enabled application that will serve as your authentication and authorization provider. This will allow you (and the other users of the client app) to log into the app via Okta. You can let Okta worry about the intricacies of these various standards and protocols and storing credentials, not to mention keeping up to date on all the rapidly evolving security threats. Using a third-party provider you can trust allows you to concentrate on developing the features specific to your app.
 
@@ -111,7 +111,7 @@ The context root, `DemoAPI`, is automatically configured from the `pom.xml` file
 
 ## Create A REST API
 
-In this tutorial, our focus is on JWT Auth and MicroProfile, but let’s take the API beyond "Hello World." 
+In this tutorial, our focus is on JWT Auth and MicroProfile, but let's take the API beyond "Hello World." 
 
 Add a new `LetterController.java` file in the root package path.
 
@@ -210,7 +210,7 @@ From the top menu, click on the  **Applications** item, and then click  **Add Ap
 
 Select  **Web**  as the platform and click  **Next**.
 
-Give the app a name. I named mine “MicroProfile”, but you can name yours whatever you like.
+Give the app a name. I named mine "MicroProfile", but you can name yours whatever you like.
 
 Under **Login redirect URIs**, add a new URI: `https://oidcdebugger.com/debug`.
 
@@ -226,7 +226,7 @@ That's it! You've now configured Okta as an OAuth 2.0 OIDC provider. Take note o
 
 ## Add Groups and UPN Claims To Default Authorization Server
 
-You need to add two claims mappings to your default authorization server on Okta, to enable role-based authorization and meet MicroProfile’s claims requirements. From the top menu of the Okta developer dashboard, go to **API** and select **Authorization Servers**.
+You need to add two claims mappings to your default authorization server on Okta, to enable role-based authorization and meet MicroProfile's claims requirements. From the top menu of the Okta developer dashboard, go to **API** and select **Authorization Servers**.
 
 Click on the **default** server.
 
