@@ -53,7 +53,7 @@ Let's start by building and running the application. Clone the [vue-data-binding
 
 Switch to the project folder, and run:
 
-```
+```bash
 cd basic
 npm install
 npm run serve
@@ -69,7 +69,7 @@ Let's look at the code that backs the Global tab:
 
 In the `main.js` file, I define the global data object:
 
-```
+```javascript
 export const globalData = {
   state: {
     max: 50,
@@ -84,13 +84,13 @@ Let's take a look at the parts of the `basic/src/components/data-binding-global/
 
 Starting with the `<script>` section first, you can see that the `globalData` object defined in `main.js` is imported into this template.
 
-```
+```javascript
 import { globalData } from '../../main'
 ```
 
 The `data` function binds the `globalData` object to a local variable in this template:
 
-```
+```javascript
 data() {
     return {
         scoreState: globalData.state
@@ -100,7 +100,7 @@ data() {
 
 The `advance` and `reset` functions manipulate the values in the `globalData` object. This is done by using the *local* template reference, which "points" to the object within our data structure. This is what preserves the reactive nature of the data in the template and why we need to nest the data properties in `globalData`.
 
-```
+```javascript
 advance: function () {
     if (this.scoreState.score < this.scoreState.max) {
         this.scoreState.score += 10
@@ -113,7 +113,7 @@ reset: function () {
 
 Tying it all together is the template section. Here's the progress bar:
 
-```
+```html
 <b-progress :max="scoreState.max" class="big-progress" show-progress>
     <b-progress-bar :value="scoreState.score"/>
 </b-progress>
@@ -137,7 +137,7 @@ In this version of the code, you use a centralized data store which includes not
 
 Take a look at the `basic/src/model/scoreStore.js`:
 
-```
+```javascript
 export default {
     state: {
         max: 50,
@@ -161,7 +161,7 @@ There's still a `state` object that contains the internals of the data we want t
 
 Now, take a look at the script section of `basic/src/components/data-binding-storage/One.vue`:
 
-```
+```javascript
 import scoreStore from '../../model/scoreStore'
 
 export default {
@@ -197,7 +197,7 @@ Vuex is inspired by other modern state management frameworks, like [flux](https:
 
 Look at `basic/src/model/scoreStoreVuex.js`:
 
-```
+```javascript
 import Vue from 'vue'
 import Vuex from 'vuex'
 
@@ -226,7 +226,7 @@ This time, you're instantiating a `Vuex` object. Similar to the storage pattern 
 
 You can see how changes to the datastore state are made by looking at `basic/src/components/data-binding-vuex/One.vue`. Take a look at the `script` section:
 
-```
+```javascript
 import scoreStoreVuex from '../../model/scoreStoreVuex'
 
 export default {
@@ -263,7 +263,7 @@ At the top level of your app, you can inject the Vuex store. This will make it a
 
 It looks like this:
 
-```
+```javascript
 const store = new Vuex.Store({
 ...
 })
@@ -282,7 +282,7 @@ Computed fields are a key feature of Vue.js in general. Vuex provides advanced f
 
 The `mapState` is a helper wrapper that can be used for computed fields. It looks like this:
 
-```
+```javascript
 import { mapState } from 'vuex';
 
 computed: mapState([
@@ -292,7 +292,7 @@ computed: mapState([
 
 This is a shorthand for referencing `state.ary` and `state.obj` from the Vuex store. With this setup, you can then reference the computed value in your template:
 
-```
+```html
 {% raw %}<h1>{{ary}}</h1>{% endraw %}
 ```
 
@@ -310,7 +310,7 @@ In the `vuex-advanced` application, you can add and delete elements from both ar
 
 Take a look at the add and del functions in the Vuex store:
 
-```
+```javascript
 const store = new Vuex.Store({
   state: {
     ary: [],
@@ -388,7 +388,7 @@ The [okta-auth-js](https://github.com/okta/okta-auth-js) library includes suppor
 
 You can add it to your Vue.js project like so:
 
-```
+```bash
 npm install @okta/okta-auth-js --save
 ```
 
