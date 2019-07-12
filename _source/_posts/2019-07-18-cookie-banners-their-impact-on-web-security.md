@@ -11,7 +11,7 @@ tweets:
 image: blog/featured/okta-cookie-banner.png
 ---
 
-Troy Hunt is irritated. The Australian security researcher and founder of Have I Been Pwned has had it up to *here* with cookie banners. Developers are including these boilerplate disclaimers on a growing number of sites, warning users that they are being tracked, or that their data is being collected—[and Hunt argues](https://www.troyhunt.com/these-cookie-warning-shenanigans-have-got-to-stop/) that there's no real-world need for them as they don't make a difference to your site's privacy or security capabilities.
+How many times this week have you dealt with an obtrusive, annoying website banner informing you of the site’s cookie policy? Developers are increasingly including boilerplate cookie tracking disclaimers, warning users that they are being tracked, or that their data is being collected. And there’s no real-world need for them as they don’t make a difference to your site’s privacy or security capabilities.
 
 We'll pick apart why these banners are sprouting up now and explain the current legal requirements regarding cookies and consent. We'll also explore whether the banners achieve--well, anything--and whether developers should spend their valuable time implementing them.
 
@@ -23,7 +23,7 @@ Because cookies represent personal data under GDPR, companies technically have t
 
 This isn't the first EU document mandating the use of cookie banners—[Directive 2002/58](https://eur-lex.europa.eu/legal-content/EN/ALL/?uri=CELEX%3A32002L0058) (the ePrivacy Directive) required web sites to get consent for the use of cookies almost 20 years ago. The EU has [proposed](https://ec.europa.eu/digital-single-market/en/news/evaluation-and-review-directive-200258-privacy-and-electronic-communication-sector) a new electronic privacy regulation to simplify the rules around cookies and remove the need for cookie banners. It would enable users to set and forget their cookie preferences once in their browser so that all sites can read them automatically rather than having to ask for consent each time. Unfortunately, this has become [ensnared in bureaucracy](https://eylaw.ey.com/2018/10/04/the-eprivacy-regulation-proposal-a-new-data-protection-framework-for-electronic-communications/) and is still not in force.
 
-Now, as US states implement their own GDPR-like privacy laws, the cookie banner issue is metastasizing. The [California Consumer Privacy Act](https://www.isipp.com/resources/full-text-of-the-california-consumer-privacy-act-of-2018-ccpa/) has similar language around cookies to GDPR's.
+Now, as US states implement their own GDPR-like privacy laws, the cookie banner issue is spreading. The [California Consumer Privacy Act](https://www.isipp.com/resources/full-text-of-the-california-consumer-privacy-act-of-2018-ccpa/) has similar language around cookies to GDPR's.
 
 ## Do Cookie Banners Work?
 
@@ -45,7 +45,7 @@ As soon as you get into other tracking activities, the need for explicit consent
 
 ## How Should Web Developers Handle Cookie Banners and Web Security?
 
-Cookie banners arguably have a negative impact on security. It's just one more annoying button to click before they can get to recipes and cat pictures, increasing background noise and making the next legitimate security alert even less noticeable. But how do you escape them?
+Cookie banners can arguably have a negative impact on security. It's just one more annoying button to click before they can get to recipes and cat pictures, increasing background noise and making the next legitimate security alert even less noticeable. But how do you escape them?
 
 You have three choices.
 
@@ -53,15 +53,15 @@ First, you can try to prove legitimate interest and drop the cookie banner. Unfo
 
 Second, you can play it safe, use a banner, and—there's no getting around this--irritate your visitors. If you take this approach, consider black-boxing this task by entrusting it to a knowledgeable vendor rather than placing yet another burden on your developer team. Google [offers a list](https://www.cookiechoices.org/) of pre-baked solutions configured by experts. Also, provide an opt-out option so that people can withdraw consent. You can also forego more opaque techniques such as fingerprinting and web bugs. Respecting Do Not Track (DNT:1) browser requests would also put you ahead of the privacy curve because [most sites don't](https://gizmodo.com/do-not-track-the-privacy-tool-used-by-millions-of-peop-1828868324).
 
-Your final option is the simplest: just *don't track your users*. While this option isn't always possible, it's 100% foolproof way to avoid using cookie banners. ;)
+Your final option is the simplest: just *don't track your users*.
 
-The worst thing to do would be to assume that a cookie banner somehow frees you from the need to properly secure your web-based applications. You'll be hard pressed to find a company that has put users in danger by not displaying a cookie banner. Far more companies fall foul of poorly-written web apps that can leak user data or compromise user sessions. The Open Web Application Security Project (OWASP) publishes a [list](https://www.owasp.org/images/7/72/OWASP_Top_10-2017_%28en%29.pdf.pdf) of the top ten application vulnerabilities that its partners see on a regular basis. The second most prevalent one is poor user authentication. OWASP explains that relying solely on passwords for authentication is one of the biggest threats to web application security (and therefore, privacy). Constant rotation of passwords encourages users to reuse them, write them down, or use easily-guessable passwords. This leaves them open to dictionary attacks and credential stuffing attacks. OWASP also calls out poorly managed application session timeouts as another common problem in user management.
+The **worst** thing to do would be to assume that a cookie banner absolves you from the need to properly secure your web-based applications. You'll be hard pressed to find a company that has put users in danger by not displaying a cookie banner. Far more companies fall foul of poorly-written web apps that can leak user data or compromise user sessions. The Open Web Application Security Project (OWASP) publishes a [list](https://www.owasp.org/images/7/72/OWASP_Top_10-2017_%28en%29.pdf.pdf) of the top ten application vulnerabilities that its partners see on a regular basis. The second most prevalent one is poor user authentication. OWASP explains that relying solely on passwords for authentication is one of the biggest threats to web application security (and therefore, privacy). Constant rotation of passwords encourages users to reuse them, write them down, or use easily-guessable passwords. This leaves them open to dictionary attacks and credential stuffing attacks. OWASP also calls out poorly managed application session timeouts as another common problem in user management.
 
-It's time to clear up real security problems like these, rather than using cookie banners to tick a box that has no real-world impact. In most cases, it's just a compliance tool to give companies peace of mind should regulators come knocking. Until regulators catch up with modern security and user experience needs, companies are trapped with the best of a set of bad options.
+It's time to clear up real security problems like these, rather than using cookie banners to tick a box. In most cases, it's just a compliance tool to give companies peace of mind should regulators come knocking. Until regulators catch up with modern security and user experience needs, companies are trapped with the best of a set of bad options.
 
 ## Learn More
 
-Looking for more developer content? Check out these blogs for insights into developer privacy and security issues:
+Looking for more developer security content? Check out these blogs for insights into developer privacy and security issues:
 
 - [7 Ways an OAuth Access Token is like a Hotel Key Card](https://developer.okta.com/blog/2019/06/05/seven-ways-an-oauth-access-token-is-like-a-hotel-key-card)
 - [Is the OAuth 2.0 Implicit Flow Dead?](https://developer.okta.com/blog/2019/05/01/is-the-oauth-implicit-flow-dead)
