@@ -167,7 +167,7 @@ In my experience, most of the people that hate Java these days are JavaScript de
 
 > 28 INDUSTRY-LEADING COMPANIES TO ENDORSE JAVASCRIPT AS A COMPLEMENT TO JAVA FOR EASY ONLINE APPLICATION DEVELOPMENT
 
-**Do you recommend using them together?** Yes. JavaScript + Java is like peanut butter jelly. See https://www.jhipster.tech/[JHipster].
+**Do you recommend using them together?** Yes. JavaScript + Java is like peanut butter and jelly. See https://www.jhipster.tech/[JHipster].
 
 == Learn More about Java and JavaScript
 
