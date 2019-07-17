@@ -5,9 +5,9 @@ author: jimena-garbarino
 description: "Spring Boot Actuator provides out-of-the-box monitoring for your app. It's also easily extended for new functionailty."
 tags: [spring boot, actuator, openid connect, oidc]
 tweets:
-- ""
-- ""
-- ""
+- "Ever wanted to see the precise http traffic going through your Spring Boot API? With Actuator and some code, you can!"
+- "Use Spring Boot Actuator for production strength app monitoring."
+- "With Spring Boot's extensible Actuator, you can see everything that's happening in the backround of an OpenID Connect flow."
 image: blog/featured/okta-java-skew.jpg
 ---
 
@@ -19,7 +19,7 @@ Let's get started!
 
 You can use the excellent [**Spring Initializr**](https://start.spring.io/) website or API for creating a sample OIDC application with Okta integration:
 
-```
+```bash
 curl https://start.spring.io/starter.zip \
   dependencies==web,okta \
   packageName==com.okta.developer.demo -d
@@ -33,7 +33,7 @@ You will need the **Issuer** which is the organization URL as well, which you ca
 
 With your Client ID, Client Secret. and the Issuer in place, start your application by passing the credentials through the command line:
 
-```
+```bash
 OKTA_OAUTH2_REDIRECTURI=/authorization-code/callback \
 OKTA_OAUTH2_ISSUER=<issuer>/oauth2 \
 OKTA_OAUTH2_CLIENT_ID=<client id> \
@@ -73,7 +73,7 @@ Enable Spring Boot Actuator by adding the starter Maven dependency to the `pom.x
 
 To enable the httptrace endpoint, edit the `src/main/resources/application.properties` and add the following line:
 
-```
+```properties
 management.endpoints.web.exposure.include=info,health,httptrace
 ```
 
