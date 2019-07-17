@@ -2,7 +2,7 @@
 layout: blog_post
 title: "Monitor Your Java Apps with Spring Boot Actuator"
 author: jimena-garbarino
-description: ""
+description: "Spring Boot Actuator provides out-of-the-box monitoring for your app. It's also easily extended for new functionailty."
 tags: [spring boot, actuator, openid connect, oidc]
 tweets:
 - ""
@@ -304,7 +304,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 }
 ```
 
-## Tracing the Authentication User
+## Tracing the Authenticated User
 
 We're installing the trace filters before the Spring Security filter chain. This means that the Principal is no longer available when the HttpTraceFilter saves the trace. We can restore this trace data with a new filter and the ContentTraceManager.
 
@@ -360,7 +360,7 @@ public class PrincipalTraceFilter extends OncePerRequestFilter {
 
 }
 ```
-Add the missing ContentTraceManager method for updating the principal:
+Add the missing `ContentTraceManager` class for updating the principal:
 
 ```Java
 public class ContentTraceManager {
