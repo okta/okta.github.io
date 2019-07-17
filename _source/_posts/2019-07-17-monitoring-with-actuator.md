@@ -11,9 +11,9 @@ tweets:
 image: blog/featured/okta-java-skew.jpg
 ---
 
-Have you worked with Spring Boot Actuator yet? It’s an immensely helpful library that helps you monitor app health and interactions with the app - perfect for going to production! Spring Boot Actuator includes a built-in endpoint for tracing HTTP calls to your application - very useful for monitoring OpenID Connect (OIDC) requests - but unfortunately the default implementation does not trace body contents. In this post, I'll show you how to extend the httptrace endpoint for capturing contents and tracing the OIDC flow.
+Have you worked with Spring Boot Actuator yet? It's an immensely helpful library that helps you monitor app health and interactions with the app - perfect for going to production! Spring Boot Actuator includes a built-in endpoint for tracing HTTP calls to your application - very useful for monitoring OpenID Connect (OIDC) requests - but unfortunately the default implementation does not trace body contents. In this post, I'll show you how to extend the httptrace endpoint for capturing contents and tracing the OIDC flow.
 
-Let’s get started!
+Let's get started!
 
 ## Create an OpenID Connect App with Spring Initializr and Okta
 
@@ -43,7 +43,7 @@ OKTA_OAUTH2_CLIENT_SECRET=<client secret> \
 
 ## Add Test Controller to the Spring Boot App
 
-It’s a good practice to add a simple controller for testing the authentication flow. By default, access will only be allowed to authenticated users.
+It's a good practice to add a simple controller for testing the authentication flow. By default, access will only be allowed to authenticated users.
 
 ```Java
 @Controller
@@ -592,7 +592,7 @@ You should now see OIDC calls in the trace as well as the request and response c
 
 ## Learn More
 
-That’s all there is to it! You just learned how to configure and extend the `httptrace` actuator endpoint for monitoring your OIDC application. For more insights about Spring Boot Actuator, Spring Boot in general, or user authentication, check out the links below:
+That's all there is to it! You just learned how to configure and extend the `httptrace` actuator endpoint for monitoring your OIDC application. For more insights about Spring Boot Actuator, Spring Boot in general, or user authentication, check out the links below:
 
 * [**Java Microservices with Spring Boot and Spring Cloud**](https://developer.okta.com/blog/2019/05/22/java-microservices-spring-boot-spring-cloud_)
 * [**Spring Boot Actuator Endpoints**](https://docs.spring.io/spring-boot/docs/current/reference/html/production-ready-endpoints.html)
