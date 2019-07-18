@@ -21,9 +21,9 @@ do
 done
 
 # Upload the blog posts to S3
-aws s3 sync --content-type 'text/html' --sse --acl public-read dist/blog s3://developer.okta.com-production/blog
+aws s3 sync --content-type 'text/html' --sse --size-only --acl public-read dist/blog s3://developer.okta.com-production/blog
 
 # Upload all other assets to S3
-aws s3 sync --exclude 'blog' --sse --acl public-read dist s3://developer.okta.com-production
+aws s3 sync --exclude 'blog' --sse --size-only --acl public-read dist s3://developer.okta.com-production
 
 exit 0

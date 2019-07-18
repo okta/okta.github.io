@@ -7,7 +7,7 @@ layout: null
   {%- assign tags = post.tags | join: ' ' -%}
   {%- if post.url != '/blog/2018/04/20/hello-okta-dave'
       and post.tweets and tags contains "angular" or tags contains "java"
-      or tag contains "spring boot" or tags contains "dotnet"
+      or tags contains "spring boot" or tags contains "dotnet"
       or tags contains "react" or tags contains "aspnet" %}
 {{ post.tweets[tweetIndex] }} {{ site.url }}{{ post.url }} { from the archives }
     {%- for tag in post.tags limit:3 -%}
