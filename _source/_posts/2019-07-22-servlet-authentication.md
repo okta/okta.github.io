@@ -2,7 +2,7 @@
 layout: blog_post
 title: "Servlet Authentication with Java"
 author: joyannefoster
-description: "Learn how to use Okta's Authentication API with Servlets"
+description: "Learn how to use Okta's Authentication API with Java Servlets."
 tags: [java, servlets, authentication]
 tweets:
 - "Integrate your Java Servlet based application with Okta's Authentication API"
