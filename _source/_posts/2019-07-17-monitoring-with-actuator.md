@@ -17,7 +17,7 @@ Let's get started!
 
 ## Create an OpenID Connect App with Spring Initializr and Okta
 
-You can use the excellent [**Spring Initializr**](https://start.spring.io/) website or API for creating a sample OIDC application with Okta integration:
+You can use the excellent [Spring Initializr](https://start.spring.io/) website or API for creating a sample OIDC application with Okta integration:
 
 ```bash
 curl https://start.spring.io/starter.zip \
@@ -25,7 +25,7 @@ curl https://start.spring.io/starter.zip \
   packageName==com.okta.developer.demo -d
 ```
 
-Before running your OIDC application however, you will need an Okta account. Okta is a developer service that handles storing user accounts and implementing user management (including OIDC) for you. Go ahead and register for a [**free developer account**](https://developer.okta.com/signup/) to continue.
+Before running your OIDC application however, you will need an Okta account. Okta is a developer service that handles storing user accounts and implementing user management (including OIDC) for you. Go ahead and register for a [free developer account](https://developer.okta.com/signup/) to continue.
 
 Once you login to your Okta account, go to the Dashboard and then to the **Applications** section. Add a new Web application, and then in the General section get the client credentials: **Client ID** and **Client Secret**. 
 
@@ -45,7 +45,7 @@ OKTA_OAUTH2_CLIENT_SECRET=<client secret> \
 
 It's a good practice to add a simple controller for testing the authentication flow. By default, access will only be allowed to authenticated users.
 
-```Java
+```java
 @Controller
 @RequestMapping(value = "/hello")
 public class HelloController {
@@ -58,7 +58,7 @@ public class HelloController {
 }
 ```
 
-You can test this out by restarting the app and browsing to [**/hello/greeting**](http://localhost:8080/hello/greeting)
+You can test this out by restarting the app and browsing to [/hello/greeting](http://localhost:8080/hello/greeting).
 
 ## Add Spring Boot Actuator Dependency
 
@@ -77,12 +77,12 @@ To enable the httptrace endpoint, edit the `src/main/resources/application.prope
 management.endpoints.web.exposure.include=info,health,httptrace
 ```
 
-You can test the out-of-the-box actuator features running the application browsing to [**/hello/greeting**](http://localhost:8080/hello/greeting), and logging in.
+You can test the out-of-the-box actuator features running the application browsing to [/hello/greeting](http://localhost:8080/hello/greeting), and logging in.
 
 
 > Under the auto-configuration, Spring Security filters have higher precedence than filters added by the httptrace actuator.
 
-This means only authenticated calls are traced by default. We are going to change that here soon, but for now, you can see what is traced at [**/actuator/httptrace**](http://localhost:8080/actuator/httptrace). The response should look like this JSON payload:
+This means only authenticated calls are traced by default. We are going to change that here soon, but for now, you can see what is traced at [/actuator/httptrace](http://localhost:8080/actuator/httptrace). The response should look like this JSON payload:
 
 ```json
 {
@@ -113,7 +113,7 @@ This means only authenticated calls are traced by default. We are going to chang
 
 ## Add Custom HTTP Tracing to your Spring Boot App
 
-> HTTP tracing is not very flexible. Andy Wilkinson, the author of the httptrace actuator, suggests [**implementing your own endpoint**](https://github.com/spring-projects/spring-boot/issues/12953) if body tracing is required.
+> HTTP tracing is not very flexible. Andy Wilkinson, the author of the httptrace actuator, suggests [implementing your own endpoint](https://github.com/spring-projects/spring-boot/issues/12953) if body tracing is required.
 
 Alternatively, with some custom filters, we can enhance the base implementation without much work. In the following sections I'll show you how to:
 
@@ -125,11 +125,10 @@ Alternatively, with some custom filters, we can enhance the base implementation 
 
 Next, create a filter for tracing the request and response body contents. This filter will have precedence over the httptrace filter, so the cached body contents are available when the actuator saves the trace.
 
-```Java
+```java
 @Component
 @ConditionalOnProperty(prefix = "management.trace.http", name = "enabled", matchIfMissing = true)
 public class ContentTraceFilter extends OncePerRequestFilter {
-
 
     private ContentTraceManager traceManager;
 
@@ -177,7 +176,7 @@ public class ContentTraceFilter extends OncePerRequestFilter {
 
 Notice the call to a `ContentTraceManager`, a simple `@RequestScope` bean that will store the additional data:
 
-```Java
+```java
 @Component
 @RequestScope
 @ConditionalOnProperty(prefix = "management.trace.http", name = "enabled", matchIfMissing = true)
@@ -248,7 +247,7 @@ public class ContentTraceManager {
 
 For modeling the trace with additional data, compose a custom `ContentTrace` class with the built-in `HttpTrace` information, adding properties for storing the body contents.
 
-```Java	
+```java	
 public class ContentTrace {
 
     protected HttpTrace httpTrace;
@@ -275,12 +274,11 @@ public class ContentTrace {
 For capturing requests to OIDC endpoints in your application, the tracing filters have to sit before Spring Security filters. As long as `ContentTraceFilter` has precedence over `HttpTraceFilter`, both can be placed before or after `SecurityContextPersistenceFilter`, the first one in the Spring Security filter chain.
 
 
-```Java
+```java
 @Configuration
 @ConditionalOnProperty(prefix = "management.trace.http", name = "enabled", matchIfMissing = true)
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
-    
     private HttpTraceFilter httpTraceFilter;
     private ContentTraceFilter contentTraceFilter;
 
@@ -308,15 +306,12 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
 We're installing the trace filters before the Spring Security filter chain. This means that the Principal is no longer available when the HttpTraceFilter saves the trace. We can restore this trace data with a new filter and the ContentTraceManager.
 
-```Java
+```java
 @Component
 @ConditionalOnProperty(prefix = "management.trace.http", name = "enabled", matchIfMissing = true)
 public class PrincipalTraceFilter extends OncePerRequestFilter {
 
-
     private ContentTraceManager traceManager;
-
-
     private HttpTraceProperties traceProperties;
 
     public PrincipalTraceFilter(
@@ -362,26 +357,24 @@ public class PrincipalTraceFilter extends OncePerRequestFilter {
 ```
 Add the missing `ContentTraceManager` class for updating the principal:
 
-```Java
+```java
 public class ContentTraceManager {
 
-  public void updatePrincipal() {
-      Authentication authentication = SecurityContextHolder.getContext()
-              .getAuthentication();
-      if (authentication != null) {
-          getTrace().setPrincipal(authentication);
-      }
+    public void updatePrincipal() {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        if (authentication != null) {
+            getTrace().setPrincipal(authentication);
+        }
   }
 }
 ```
 
 The `PrincipalTraceFilter` must have lower precedence than the Spring Security filter chain, so the authenticated principal is available when requested from the security context. Modify the `WebSecurityConfig` to insert the filter after the `FilterSecurityInterceptor`, the last filter in the security chain.
 
-```Java
+```java
 @Configuration
 @ConditionalOnProperty(prefix = "management.trace.http", name = "enabled", matchIfMissing = true)
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
-
 
     private HttpTraceFilter httpTraceFilter;
     private ContentTraceFilter contentTraceFilter;
@@ -418,7 +411,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 Finally, define the endpoint enhancement using the `@EndpointWebExtension` annotation. Implement a `CustomHttpTraceRepository` to store and retrieve a `ContentTrace` with the additional data.
 
 
-```Java
+```java
 @Component
 @EndpointWebExtension(endpoint = HttpTraceEndpoint.class)
 @ConditionalOnProperty(prefix = "management.trace.http", name = "enabled", matchIfMissing = true)
@@ -441,7 +434,7 @@ public class HttpTraceEndpointExtension {
 
 Redefine a descriptor for the endpoint return type:
 
-```Java
+```java
 public class ContentTraceDescriptor {
 
     protected List<ContentTrace> traces;
@@ -464,13 +457,12 @@ public class ContentTraceDescriptor {
 
 Create the `CustomHttpTraceRepository` implementing the `HttpTraceRepository` interface:
 
-```Java
+```java
 @Component
 @ConditionalOnProperty(prefix = "management.trace.http", name = "enabled", matchIfMissing = true)
 public class CustomHttpTraceRepository implements HttpTraceRepository {
 
     private final List<ContentTrace> contents = new LinkedList<>();
-
 
     private ContentTraceManager traceManager;
 
@@ -596,9 +588,9 @@ All of the code in this post can be found on GitHub in the [okta-spring-boot-cus
 
 That's all there is to it! You just learned how to configure and extend the `httptrace` actuator endpoint for monitoring your OIDC application. For more insights about Spring Boot Actuator, Spring Boot in general, or user authentication, check out the links below:
 
-* [**Java Microservices with Spring Boot and Spring Cloud**](https://developer.okta.com/blog/2019/05/22/java-microservices-spring-boot-spring-cloud_)
-* [**Spring Boot Actuator Endpoints**](https://docs.spring.io/spring-boot/docs/current/reference/html/production-ready-endpoints.html)
-* [**Implementing Custom Endpoints**](https://docs.spring.io/spring-boot/docs/current/reference/html/production-ready-endpoints.html#production-ready-endpoints-custom)
-* [**Okta Authentication Quickstart Guides Java Spring**](https://developer.okta.com/quickstart/#/okta-sign-in-page/java/spring)
+* [Java Microservices with Spring Boot and Spring Cloud](https://developer.okta.com/blog/2019/05/22/java-microservices-spring-boot-spring-cloud_)
+* [Spring Boot Actuator Endpoints](https://docs.spring.io/spring-boot/docs/current/reference/html/production-ready-endpoints.html)
+* [Implementing Custom Endpoints](https://docs.spring.io/spring-boot/docs/current/reference/html/production-ready-endpoints.html#production-ready-endpoints-custom)
+* [Okta Authentication Quickstart Guides Java Spring](https://developer.okta.com/quickstart/#/okta-sign-in-page/java/spring)
 
 As always, if you have any comments or questions about this post, feel free to comment below. Don't miss out on any of our cool content in the future by following us on [Twitter](https://twitter.com/oktadev) and [YouTube](https://www.youtube.com/c/oktadev).
