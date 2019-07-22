@@ -68,7 +68,7 @@ Next, in the `<dependencies>` section, add the following dependencies:
 
 ```xml
 <dependency>
-     <groupId>com.okta.authn.sdk</groupId>
+    <groupId>com.okta.authn.sdk</groupId>
     <artifactId>okta-authn-sdk-api</artifactId>
     <version>${okta.auth.version}</version>
 </dependency>
@@ -174,10 +174,10 @@ Your final `pom.xml` file should look something like this:
 
 Next, we're going to make some config changes that do the following:
 
-Remove the generic JSP servlet
-Add a context parameter for the Okta domain, which is later used by the Context Listener
-Add in a `profile` servlet which will handle viewing the user's profile
-Add in a listener for an authenticated servlet. This will allow us to set up the authentication context via the `AuthenticationServletContextListener` class.
+- Remove the generic JSP servlet
+- Add a context parameter for the Okta domain, which is later used by the Context Listener
+- Add in a `profile` servlet which will handle viewing the user's profile
+- Add in a listener for an authenticated servlet. This will allow us to set up the authentication context via the `AuthenticationServletContextListener` class
 
 Open the `src/main/webapp/WEB-INF/web.xml` file and remove the sections that look like this:
 
