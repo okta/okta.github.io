@@ -1,0 +1,184 @@
+---
+layout: blog_post
+title: "10 Myths About Java in 2019"
+author: mraible
+description: "There are many myths about Java in the programming world. Read about 10 myths of the Java ecosystem and whether or not  they're true."
+tags: [java]
+tweets:
+- "The @java language is heavy, long-winded, and its package and dependency management is confusing. Are these myths true?"
+- "True or false: @java sucks because it's heavy, its IDEs require so much configuration and JAVA_HOME"
+- "10 Myths about @java in 2019: @mraible attempts to play myth buster!"
+image: blog/java-myths-2019/java-myths-2019.png
+---
+
+Java turned *24* years old on May 23, 2019. That's pretty old for a programming language. The fact that it's still widely used and runs many of the world's largest organizations is nothing short of incredible. But it has a unique impression problem among languages in that it means two very distinct things: Java the language and Java the runtime.
+
+Many developers, of course, think Java is _old_ and therefore shouldn't be used. And yet the most popular programming language today - JavaScript - was born fewer than six months after Java! But I digress.
+
+Java the runtime is called the Java Virtual Machine, or JVM, and only rarely do people complain about the JVM. Most developers are impressed by its features, and many popular Java alternative languages like Clojure, Groovy, JRuby, Kotlin, and Scala run on the JVM.
+
+Adding to the confusion, there's both the JDK (Java Development Kit) and the JRE (Java Runtime Environment). The former is used by developers to write and compile Java code and the latter is used to run Java applications. End users shouldn't have to worry about this, yet it's a common problem for developers to set their `JAVA_HOME` to point to the JRE location on their system. The `JAVA_HOME` environment variable should point to your JDK installation, and it's unlikely Java will work well if it's not.
+
+This article dispels some of the most common myths about Java (and hopefully clears up some confusion too). I started by compiling my own list of myths and then asked other Java developers if they thought those myths were fair and accurate. That was interesting enough, but I quickly realized it wasn't really the information I was looking for; I was looking at myths about Java from the wrong perspective. I needed to get the perspectives of non-Java developers.
+
+So I asked the following in a company Slack room full of Java haters:
+
+> For those with a negative opinion of Java, can you tell me why you don't like it?
+
+This question gave me the perspective I wanted! It also sparked a bit of a mini-debate and resulted in a plethora of replies with some good answers. Now let's get on with trying to dispel the myths about Java in 2019.
+
+Below is a list of reasons why my fellow developers have a negative opinion of Java. Below each section header, I've attempted a counter-argument.
+
+== 1. Java is Heavy
+
+To be more precise:  Java is heavy compared to interpreted languages like Python, Ruby, or JavaScript.
+
+I can see how this is a common opinion. If you tried Java anytime before 2014, chances are you had to jump through a lot of hoops to get things set up. You had to install a JDK, a build tool (or IDE), then configure your IDE or build tool to work. The getting started process **was** heavy.
+
+But no more! In 2019, you can create a Spring Boot app with https://start.spring.io/[start.spring.io] in seconds and the build tool is included in your download.
+
+----
+# install SDKMAN
+curl -s "https://get.sdkman.io" | bash
+# install JDK
+sdk install java
+# create app
+curl https://start.spring.io/starter.zip -d dependencies=web -d javaVersion=11 -o demo.zip
+# unzip, then run it
+cd demo && ./mvnw spring-boot:run
+----
+
+As far as the language is concerned, it is... "high ceremony" in that it requires a bit more plumbing to create basic applications. Java 8 reduced a lot of complaints when it added lambdas; some even say lambdas have caused a reduction in enthusiasm for Scala. Urs Peter has a good article on https://www.infoq.com/articles/java-8-vs-scala/[Java 8 vs Scala: a Feature Comparison].
+
+The major gripe I've seen from developers is you have to write getters and setters for POJOs (plain old Java objects). This will soon be eliminated with https://dzone.com/articles/april-2019-update-on-java-records[Java Records]. You can eliminate writing tedious getters and setters now using https://projectlombok.org/[Project Lombok].
+
+Other than that, "heavy" can refer to static typing or EJBs (Enterprise Java Beans). "Java is heavy" makes me think of Java EE, app servers, and EJBs. Yet, the Java I use today feels lightweight - I wait less time for Spring Boot to compile/start than I do for my TypeScript to compile!
+
+Super-fast startup times have become a trend; popularized by https://micronaut.io/[Micronaut] and https://quarkus.io/[Quarkus]. Even Spring Boot has https://www.youtube.com/watch?v=_m4xpHUf55E[been influenced by this movement].
+
+As far as Java EE is concerned, well that's over. https://jakarta.ee/[Jakarta EE] is the 🔥 new thing and https://microprofile.io/[MicroProfile] is leading the charge to standardize Java microservice architectures that are cloud ready. MicroProfile even offers a way to https://microprofile.io/2019/07/08/command-line-interface-for-microprofile-starter-is-available-now/[create applications using the command line], much like Spring Boot.
+
+**Is it true?** In the past, yes. Not in 2019.
+
+== 2. Java Is Long-Winded Compared to C#
+
+I had to ask for clarification on this one: "I remember having to write longer "sentences" in Java". They also mentioned having to use fully qualified references inline.
+
+This is typically not the fault of the language, but rather frameworks. After all, Spring Framework's https://gist.github.com/thom-nic/2c74ed4075569da0f80b[longest class name] is 97 characters long!
+
+----
+HasThisTypePatternTriedToSneakInSomeGenericOrParameterizedTypePatternMatchingStuffAnywhereVisitor
+----
+
+I agree that frameworks can be overly verbose but it's useful for class names to be expressive. Regardless, you can use whatever names you like for your classes. Just link:/blog/2019/06/25/iinterface-considered-harmful[don't use an `I` prefix for your interfaces]. That convention died long ago.
+
+Using fully qualified class names is only a problem when you have the same class name in different packages. I've only run into this a handful of times in projects I've worked on. Adding `import x as y` to the Java language would solve this problem, but it's rarely an issue IMO.
+
+**Is it true?** No. Java isn't long-winded. Some of its popular frameworks are.
+
+== 3. Packaging and Dependency Management Is Confusing
+
+Now that I know the intricacies of Maven and Gradle, I think dependency management works quite well in Java. However, I do remember migrating AppFuse from Ant to Maven back in 2005 took a full year and I had to go to the hospital for burnout at one point. Now that I'm recovered, and Maven hasn't changed much in 10 years, I rarely think about how to use it.
+
+I realize that people new to Java don't feel the same way. When they open a large `pom.xml` or `build.gradle` and they want to add a new dependency, they might not know where to add it. Especially if the project uses profiles and has multiple `<dependency>` blocks.
+
+For Node projects, all you need is a `package.json` project and it's pretty straightforward. Want to add custom behavior? Just add some lines to the `script` block. Want to add a new dependency? Just run `npm i groupId/artifactId`.
+
+TIP: I recommend using `npm i -E groupId/artifactId@version` to lock down the version number. Especially if you're writing tutorials.
+
+I do think it would be cool if Maven and Gradle had something like `mvn add groupId/artifactId`.
+
+I also think dependency resolution is much better in Java than in JavaScript. Maven and Gradle store artifacts in a single location instead of within each project and the convention in Java projects is to lock down the version. JavaScript projects tend to use version ranges and people break semantic versions rules _all the time_. Maven supports version ranges too, but virtually no one uses them in Javaland.
+
+As far as packaging goes, just create a JAR. Nothing else is really necessary. Make JAR, not WAR!
+
+**Is it true?** Yes. While most Java developers would say dependency management is not confusing, the fact people feel like they have to learn Maven and Gradle indicates otherwise. No one has to learn how `package.json` works to be an effective Node developer. As for webpack, that's a whole different ball game! 😅
+
+== 4. The Preference of Objects over Primitives Is Annoying
+
+Java supports primitives like `int` and `boolean`, and object types like `Integer` and `Boolean`. Primitives use less memory and are much faster. So why does Java recommend you use objects? I can think of a couple of reasons:
+
+1. Primitives can't be `null` (the default value for `int` is `0`; `false` for `boolean`)
+2. Primitives can't be used with generics
+
+Baeldung has a good post on https://www.baeldung.com/java-primitives-vs-objects[Java Primitives versus Objects].
+
+**Is it true?** Yes. We prefer objects over primitives for the reasons stated above. You can use lighter and faster primitives but beware of the caveats.
+
+== 5. Strong Typing and the Diamond Operator Sucks
+
+There are many dynamic language aficionados that simply hate static typing. If you're not a fan of static typing, Java probably won't work for you. However, if you want to deploy apps on the JVM, you might like Groovy! It doesn't have static typing by default, but you can add it if you want it.
+
+I'm not sure I understand why non-Java developers think the Diamond Operator sucks. Maybe because you need to type it? My IDE usually handles that code completion for me.
+
+**Is it true?** Yes, Java requires strong typing. And large codebases https://softwareengineering.stackexchange.com/questions/221615/why-do-dynamic-languages-make-it-more-difficult-to-maintain-large-codebases/221658[usually benefit from i]t.
+
+== 6. Java Sucks Because It Relies on XML for Framework Config vs JSON
+
+In the days of J2EE, EJB, and early Spring versions, this was true. However, the default config files for Java apps are properties files, which are pretty tough to mess up. I've rarely misconfigured a properties file; I certainly can't say the same for JSON or YAML.
+
+Spring created XML Hell, forcing developers to create pages and pages of XML to configure their Spring beans. After all, Spring's most popular feature was dependency injection and XML provided a convenient way to do it in 2004.
+
+But the Spring team *also* created a better alternative called Java Config, becoming mainstream in 2014 with Spring Boot. It's pure Java, which enables a much safer config mechanism because you have all the benefits of inspection, autocompletion, and error checking that an IDE will do for you.
+
+**Is it true?** No. Not in 2019.
+
+== 7. You Need to Carefully Tweak Your IDE to Get the Basics
+
+When most people think of Java development, you have to install a JDK, install your IDE, point your IDE to the correct JDK, etc. It's no surprise people think Java IDEs are heavy.
+
+If installing a JDK is a pain for you, use https://sdkman.io/[SDKMAN!] Same goes for managing your `JAVA_HOME` environment variable. SDKMAN has extracted this problem away for me, and it's just no longer a concern.
+
+It's true that if you have more than one JDK installed, you will have to configure your IDE to point to it. I think you'd have the same problem with Node, Ruby, or .NET; this is not a Java-specific problem.
+
+So are Java IDEs heavy? Yep. In fact, when I first started programming in Java (in the late 90s), I used HomeSite because I found it fast to startup and lightweight to use. I didn't use an IDE until Eclipse came along! Eclipse was the first IDE fast enough to be tolerable. These days, I use vi, TextMate, or VS Code when I need a lightweight editor.
+
+**Is it true?** If you only have one JDK installed, I don't think so. Otherwise, yes.
+
+NOTE: I find it funny that VS Code is often considered lightweight. Yet it's based on Electron, which is viewed as heavy. Maybe that's all Slack's fault?
+
+== 8. JAVA_HOME and All the Other Environment Variables Are Really Confusing
+
+Defining `JAVA_HOME` can be required, but not if you use SDKMAN. I ran `export JAVA_HOME=` and was able to run Maven and Gradle just fine.
+
+**Is it true?** Yep. Don't use `JAVA_HOME`.
+
+== 9. Java Is Stupidly Complex Without an IDE
+
+**Stupidly complex** are some awfully strong words. Let's dig in.
+
+When using HomeSite to write Java, I had to look up package names and manually add the imports. Today? With an IDE, the import happens automatically. With an IDE, code completion happens. With an IDE, I'm prompted to refactor code and make it simpler.
+
+Even when writing JavaScript or TypeScript, I prefer an IDE for the auto-imports and code completion.
+
+**Is it true?** Yes. I think development, in general, and no matter the programming language, is complex without an IDE. IDEs can save you thousands of keystrokes in a day and are tremendously helpful when refactoring.
+
+== 10. Java Licensing Is Confusing
+
+I think most Java developers will agree that licensing has been a confusing topic recently. Especially since the JDK became OpenJDK and with so many different distributions.
+
+The funny thing about this particular point is no non-Java developers mentioned it. Even though we as Java developers think it's confusing, no one outside of the Java community is really concerned. Maybe it's because they're no longer interested in Java.
+
+**Is it true?** No. Java licensing is not confusing. If you'd like to download and install a JDK, use https://adoptopenjdk.net/[AdoptOpenJDK]. If you'd rather use something that automates installing Java and switching Java versions, use https://sdkman.io/[SDKMAN!] For more info on this subject, see link:/blog/2019/01/16/which-java-sdk[Which Java SDK Should You Use?]
+
+== Java vs JavaScript
+
+In my experience, most of the people that hate Java these days are JavaScript developers. They love the dynamic nature of JavaScript and how it can now be used on the client and server. Personally, I love the combination of JavaScript on the front end and Java on the backend. You've also got to love that this was the vision for JavaScript from day 1 when it was https://web.archive.org/web/20070916144913/http://wp.netscape.com/newsref/pr/newsrelease67.html[first announced]:
+
+> 28 INDUSTRY-LEADING COMPANIES TO ENDORSE JAVASCRIPT AS A COMPLEMENT TO JAVA FOR EASY ONLINE APPLICATION DEVELOPMENT
+
+**Do you recommend using them together?** Yes. JavaScript + Java is like peanut butter and jelly. See https://www.jhipster.tech/[JHipster].
+
+== Learn More about Java and JavaScript
+
+We're big fans of Java, JavaScript, and many other languages here at Okta. And there are diehard Ruby, Python, C#, Groovy, and Kotlin fans in our midst. While we tend to write about the most popular languages on this blog, at the end of the day we're also curious developers. We like to learn new things and try to keep an open mind.
+
+Do you hear about other Java myths you feel compelled to refute? Did we miss any you agree with? Let us know in the comments!
+
+If you'd like to read some tutorials about using Java and JavaScript, check out these links:
+
+* link:/blog/2019/06/24/ionic-4-angular-spring-boot-jhipster[Build Mobile Apps with Angular, Ionic 4, and Spring Boot]
+* link:/blog/2019/06/18/command-line-app-with-nodejs[Build a Command Line Application with Node.js]
+* link:/blog/2019/05/22/java-microservices-spring-boot-spring-cloud[Java Microservices with Spring Boot and Spring Cloud]
+
+For more fun tech talk, follow us https://twitter.com/oktadev[@oktadev] on Twitter or subscribe to https://www.youtube.com/c/oktadev[our YouTube channel].

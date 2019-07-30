@@ -515,29 +515,7 @@ $ export OKTA_API_KEY="01A_BcDE23fgH4IJKLM5nop_QRstUvwXYZ6aBC78dE"
 
 **IMPORTANT**: The values for `OKTA_ORG_URL` and `OKTA_API_KEY` above are examples. You will need to use the URL for your own Okta org as well as [create an API token](https://developer.okta.com/docs/api/getting_started/getting_a_token) to allow `loghook` to connect to your Okta org.
 
-Now, you'll need to edit the `loghook.csv` file and add entries for where you want to send the webhooks. The [RequestBin](https://requestb.in/) tool is a great resource to use for setting up a quick and temporary webhook endpoint for testing.
-
-I suggest creating a URL with RequestBin, then updating your `loghook.csv` file to look something like this:
-
-```csv
-^example.example,http://example.com
-.*,https://requestb.in/0ab12345
-```
-
-Once you do this, start up `loghook` by running this command:
-
-```console
-./loghook
-```
-
-You'll know it's working if you see output like this:
-
-```console
-$ ./loghook
-INFO[0000] Sending events matching '^example.example' to 'http://example.com'
-INFO[0000] Sending events matching '.*' to 'https://requestb.in/0ab12345'
-INFO[0000] Started polling for events at: https://dev-12345.oktapreview.com
-```
+Now, you'll need to edit the `loghook.csv` file and add entries for where you want to send the webhooks.
 
 I hope that this post has inspired you to think of cool ways you can use webhooks with your own Okta org. I highly suggest checking out [Zapier](https://zapier.com/) and in particular the excellent [Zapier Webhook support](https://zapier.com/blog/how-use-zapier-webhooks/) that Zapier provides. You should also take a look at this post on [the webhooks vs serverless debate](/blog/2017/10/11/why-are-webhooks-better-than-serverless-extensibility) by my friend and colleague Randall Degges.
 
