@@ -1,0 +1,124 @@
+---
+layout: blog_post
+title: "UI Development in a Microservices World with Micro Frontends"
+author: mraible
+description: "Adopting a microservice architecture for your backend can be useful to scale teams of developers. But what about the UI?"
+tags: [microservices, micro frontends, ui, ux, web development]
+tweets:
+image:
+---
+
+
+
+== A Brief History of Web Frameworks
+
+
+== The Microservices Explosion 💥
+
+== UI Development in a Microservices World
+
+=== State of the Art in Java + JavaScript
+
+// jhipster demo video
+
+== ⚡️ Micro Frontends to the Rescue!️
+
+=== Micro Frontend Techniques
+
+
+=== Micro Frontend Frameworks
+
+
+=== Real Developer Stories
+
+
+== Learn More about Micro Frontends and Microservices
+
+
+Microservices have become a very popular way of scaling teams in large companies. Using a microservices architecture allows you to build Services independently as well as deploy them independently. this gives development teams autonomy enthusiasm and a passion for the work. This is often because they feel a sense of control and control their own destiny.
+
+ that microservices Hyatt design to scale applications. well this is partially true and also moves the complexity I'm within an application to being over the network. in the Java world, microservices and microservice architectures require less friction to develop because there's a plethora of frameworks tutorials about how to build them.
+
+What about the UI that talks to a microservice architecture? For the most part, many of us have developed monolithic Eli's that sit on top of that communicate with are microservice back-end. before I jump into Solutions for splitting up front ends that sit on top of microservices let's take a look at a brief history of web Frameworks.
+
+== A Brief History of Web Frameworks
+
+What brand marks have been around for more than 20 years.  Dynamic websites started with CGI and traversed to servlets asp and PHP in the late 90s. in the early 2000, web Frameworks became more and more popular especially in the Java space. Struts one. Oh came out in June 2001, an asp.net one. O was released in early 2002. Java web Frameworks exploded over the next couple years and people made fun of the Java Community for having so many Frameworks.  in 2006 web Frameworks change greatly with the release of Ruby on Rails Jake Weary dojo. this began the explosion of JavaScript Frameworks which has lasted many years until today.
+
+ now people make fun of JavaScript for having so many Frameworks instead of java. however, in my opinion, the dust has settled and there's three main players: angular react and Vue.
+
+ It's true there might be future web framework wars but I think we can agree that there's not a new framework every week like many people joke there is.
+
+the first batch of Frameworks in the early 2000s leveraged MVC and server-side rendering. Then Along came a jacks single-page applications and the mobile Revolution. because single-page applications can be distributed as is single bundle,  they became  popular for mobile weather apps as well.  You're probably heard of Ionic and React Native; both Frameworks allow web developers to use their existing skills to develop native mobile apps.
+
+Both server-side rendering and single-page apps have their place in the world. In fact, server-side rendering has become a recommended practice for the initial load of SPAs.
+
+This brings us to today, where it's commonplace to mix and match your MVC framework with SPAs for more dynamic functionality. If you're going to develop Photoshop as a webapp, you're not going to want to use server-side rendering. You're going to want that as a SPA. Developing something like Wikipedia makes no sense for a SPA, but works well with MVC or with a static site generator.
+
+== The Microservices Explosion
+
+The term microservices was first coined in 2007. Many call it Service Oriented Archicture (SOA) reincarnated, and it kinda is.
+
+Microservices vs. SOA https://www.okta.com/security-blog/2019/07/microservices-vs-soa—whats-the-difference
+
+It blew up in popularity when Martin Fowler and XXX published the article "Microservices". Adrian was a big part of this movement as well because he worked at Netflix and helped pioneer microservices at scale.
+
+This all happened around the same year (2014) that Spring Boot was first released. Spring Cloud 1.0 was released a year later in March 2015 (https://spring.io/blog/2015/03/04/spring-cloud-1-0-0-available-now), bringing many of Netflix's components to the Spring and Java community.
+
+There are many ways to implement microservice architectures. Spring Boot, Spring Cloud, and MicroProfile are some of the most popular ways in the Java ecosystem. Micronaut and Quarkus are two relatively newcomers to the space; proving there's a lot of interest from developers and market share to be had from vendors. Yes, both are open source projects, but they're largely sponsored by software companies (OCI and IBM, respectively).
+
+// todo: anything for microservices in other communities
+
+Microservices are most successful when they're used to scale developers and leverage continuous deployment. They give developers the ability to be autonomous as a team and go from idea to production without requiring help from other teams. A two-pizza team will often contain product people (for ideas), backend folks (including DBAs), UI developers, and DevOps people (that deploy and manage production).
+
+If your organization doesn't allow teams to be formed this way, microservices are probably not for you.
+
+> organizations which design systems ... are constrained to produce designs which are copies of the communication structures of these organizations.
+— M. Conway
+
+If your organization has DBAs, backend developers, UI developers, and DevOps people separated by function, you should change your communication structures before adopting microservices. Organize your teams around products, then think about adopting a microservices architecture.
+
+Once you have communication structures flowing around products and teams owning everything from idea to production monitoring, you can adopt microservices. Until then, a monolith will probably work just fine.
+
+--- tweet https://twitter.com/fintanr/status/1156136718581534720?s=20
+
+Building a monolith UI on top of a microservice architecture can work if your teams agree on the same web framework and develop everything as components. One of the beauties of microservices is you can use different languages and frameworks to develop them. As long as they provide data at a particular endpoint.
+
+Is it possible to use separate frameworks on the front end too? Keep reading.
+
+== UI Development in a Microservices World
+
+I've worked on a few projects that used a microservices architecture. Even though the backend services were split up into separate services, the UI was often a monolith. It used a single web framework and made requests to the backend API gateway. The API gateway served as an aggregation layer that exposed all the various servers at the same base URL.
+
+This works well and is currently state of the art in the Java space, as evidenced by JHipster. If you haven't heard of JHipster, it's a platform for generating Spring Boot monoliths and microservices with a JavaScript frontend. Current frontend options include Angular, React, and Vue.
+
+When you generate a microservices architecture with JHipster, it's composed of a gateway and 1-n microservices. The microservice apps do not have a front-end, they just have REST APIs and persist data to their own database. The gateway serves as the aggregation layer. This is also where the UI code resides. That's right, even though JHipster supports microservices, it only does it on the backend.
+
+Below is a video showing where the frontend code resides in a JHipster-generated microservices architecture.
+
+https://youtu.be/-QCuWgLQmdg
+
+JHipster 6 generates a monolith UI for microservices by default. This works because it doesn't currently allow multiple frameworks on its gateway UI. The gateway UI is the aggregation layer and you'll need something like this if you want to adopt micro frontends.
+
+== Micro Frontends
+
+Recently, there's been a lot of activity around Micro Frontends. Similar to Microservices, https://martinfowler.com/articles/micro-frontends.html[Micro Frontends] was published on Martin Fowler's blog. It's written by Cam Jackson and includes a number of integration approaches. He notes that ThoughtWorks Radar has https://www.thoughtworks.com/radar/techniques/micro-frontends[moved micro frontends from trial to adopt over the last few years]:
+
+November 2016: Assess
+November 2017: Trail
+April 2019: Adopt
+
+Jackson notes that ThoughtWorks has witnessed some key benefits from micro frontends:
+
+* smaller, more cohesive and maintainable codebases
+* more scalable organizations with decoupled, autonomous teams
+* the ability to upgrade, update, or even rewrite parts of the frontend in a more incremental fashion than was previously possible
+
+=== Techniques and Frameworks
+
+=== Real Developer Stories
+
+== Learn More
+
+
+
