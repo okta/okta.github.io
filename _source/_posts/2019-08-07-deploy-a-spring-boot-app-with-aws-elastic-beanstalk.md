@@ -15,7 +15,7 @@ Nearly all applications rely on authentication. Developers, and the companies th
 
 Spring Boot with Spring Security is a fantastic solution for Java-based web development. With relatively little code, developers can implement, test, update, and expand authentication schemes easily and securely.
 
-In this tutorial, you will build a very simple “Hello World” app in Spring Boot with OAuth 2.0 / OpenID Connect and Okta as the OAuth provider. It will use AWS as the cloud provider, deploying through AWS Elastic Beanstalk.
+In this tutorial, you will build a very simple "Hello World" app in Spring Boot with OAuth 2.0 / OpenID Connect and Okta as the OAuth provider. It will use AWS as the cloud provider, deploying through AWS Elastic Beanstalk.
 
 ## Why AWS Elastic Beanstalk?
 
@@ -365,7 +365,7 @@ The last step is to update the application to the latest version. Go inside your
 
 This command generates a JAR file with the current version of your application. Go to the AWS Elastic Beanstalk dashboard, and click on the `Upload and deploy` button. Select the file aven created (such as `hello-word-0.0.1-SNAPSHOT.jar`), and click on the `Deploy` button.
 
-To make sure it is working, click on the AWS Elastic Beanstalk URL. It will redirect you to the Okta's login if you haven’t logged in. When you enter valid credentials, it will redirect you to the Hello World page! In my case, the result will be:
+To make sure it is working, click on the AWS Elastic Beanstalk URL. It will redirect you to the Okta's login if you haven't logged in. When you enter valid credentials, it will redirect you to the Hello World page! In my case, the result will be:
 
 ```
 Hello, Daniel!
