@@ -197,6 +197,7 @@ moksamedia:
   display_name: Andrew Hughes
   avatar: avatar-moksamedia.jpg
   github: https://github.com/moksamedia
+  twitter: https://twitter.com/oktadev
 
 drnugent:
   full_name: Dave Nugent
@@ -213,6 +214,7 @@ bkelley:
   avatar: avatar-bkelley.jpg
   email: braden@coupleofgingers.com
   github: https://github.com/redbmk
+  twitter: https://twitter.com/oktadev
 
 team_okta:
   full_name: Team Okta
@@ -220,6 +222,7 @@ team_okta:
   avatar: avatar-oktadev.png
   email: devrel@okta.com
   github: https://github.com/oktadeveloper
+  twitter: https://twitter.com/oktadev
 
 tom_smith:
   full_name: Tom Smith
@@ -232,6 +235,7 @@ krasimir:
   full_name: Krasimir Hristozov
   display_name: Krasimir Hristozov
   avatar: avatar-krasimir.jpg
+  twitter: https://twitter.com/oktadev
 
 ibrahim:
   full_name: Ibrahim Šuta
@@ -242,6 +246,7 @@ chrisgreen:
   full_name: Chris Green
   display_name: Chris Green
   avatar: avatar-chrisgreen.jpg
+  twitter: https://twitter.com/oktadev
 
 pmcdowell:
   full_name: Patrick McDowell
@@ -300,6 +305,7 @@ holgerschmitz:
   email: holger@notjustphysics.com
   web: http://notjustphysics.com
   github: https://github.com/holgerschmitz
+  twitter: https://twitter.com/oktadev
 
 jonathan-ray:
   full_name: Jonathan Ray
@@ -314,6 +320,7 @@ joyannefoster:
   display_name: Joy Foster
   avatar: avatar-joyanne-foster.jpg
   github: https://github.com/joyannefoster
+  twitter: https://twitter.com/oktadev
 
 raphaeldovale:
   full_name: Raphael do Vale
@@ -341,6 +348,7 @@ ryanfoster:
   full_name: Ryan Foster
   display_name: Ryan Foster
   avatar: avatar-ryanfoster.png
+  twitter: https://twitter.com/oktadev
 
 jeffersonhaw:
   full_name: Jefferson Haw
@@ -394,7 +402,7 @@ terje-kolderup:
   full_name: Terje Kolderup
   display_name: Terje Kolderup
   avatar: avatar-terje-kolderup.jpg
-  twitter: https://twitter.com/terjekol
+  twitter: https://twitter.com/oktadev
 
 vrohilla:
   full_name: Vishal Rohilla
@@ -405,3 +413,10 @@ jimena-garbarino:
   full_name: Jimena Garbarino
   display_name: Jimena Garbarino
   avatar: avatar-jimena.png
+  twitter: https://twitter.com/oktadev
+
+daniel-pereira:
+  full_name: Daniel Pereira
+  display_name: Daniel Pereira
+  avatar: avatar-daniel.jpeg
+

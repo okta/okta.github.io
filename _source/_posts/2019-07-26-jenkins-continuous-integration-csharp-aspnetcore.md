@@ -439,7 +439,7 @@ The final step is to modify your continuous integration pipeline to make use of 
 2. Modify the `Execute Shell` task that you added earlier to:
 
 ```sh
-Dotnet public -c Release -o published
+dotnet publish -c Release -o published
 ```
 
 This change will build and publish your code using the release configuration.
