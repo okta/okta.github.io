@@ -48,7 +48,7 @@ Both server-side rendering and single-page apps have their place in the world. I
 
 As a consultant, I was often hired to help solve performance problems. Clients often thought their issues where in the backend, but  I found more issues in their frontends! Often, these performance issues were easy to fix by turning on gzipping, combining scripts (and CSS), optimizing images, and reducing network requests.
 
-INFO: Combining scripts and reducing network requests https://medium.com/@asyncmax/the-right-way-to-bundle-your-assets-for-faster-sites-over-http-2-437c37efe3ff[is no longer an issue with HTTP/2], but frontend performance problems persist in many ways.
+TIP: Combining scripts and reducing network requests https://medium.com/@asyncmax/the-right-way-to-bundle-your-assets-for-faster-sites-over-http-2-437c37efe3ff[is no longer an issue with HTTP/2], but frontend performance problems persist in many ways.
 
 This brings us to today, where it's commonplace to mix and match your MVC framework with SPAs for more dynamic functionality. If you build the next Photoshop as a web app, you won’t want to use server-side rendering; you’ll want to build it as a SPA. On the flip side, a SPA approach makes no sense if you’re developing something like Wikipedia, where MVC or a static site generator would work well.
 
@@ -58,21 +58,21 @@ The term "microservices" was first coined in 2007. Many call it Service Oriented
 
 NOTE: If you're not familiar with SOA, I suggest you read https://www.okta.com/security-blog/2019/07/microservices-vs-soa—whats-the-difference[Microservices vs. SOA -- What's the Difference?] from the Okta Security blog.
 
-Microservices blew up in popularity when James Lewis and Martin Fowler published the article "https://martinfowler.com/articles/microservices.html[Microservices]". Adrian Cockcroft at Netflix was a big part of this movement as well. He described the architecture as "fine-grained SOA" and helped pioneer microservices at web scale. Adrian is now VP of Cloud Architecture Strategy at AWS (Amazon Web Services).
+Microservices blew up in popularity when James Lewis and Martin Fowler published the article "`https://martinfowler.com/articles/microservices.html[Microservices]`". Adrian Cockcroft at Netflix was a big part of this movement as well. He described the architecture as "fine-grained SOA" and helped pioneer microservices at web scale. Adrian is now VP of Cloud Architecture Strategy at AWS (Amazon Web Services).
 
 This all happened around the same year (2014) that Spring Boot was https://spring.io/blog/2014/04/01/spring-boot-1-0-ga-released[first released]. Spring Cloud 1.0 was https://spring.io/blog/2015/03/04/spring-cloud-1-0-0-available-now[released] a year later in March 2015, bringing many of Netflix's microservices architecture principles to the Spring and Java community.
 
 Spring Boot, Spring Cloud, and MicroProfile are some of the most popular ways to implement microservice architectures in the Java ecosystem. Micronaut and Quarkus - two relative newcomers to the space - prove there's a lot of interest from developers and market share remaining to be won from vendors (both are actually open source projects sponsored by software companies OCI and IBM respectively).
 
-.NET Core has microservices support built-in to the framework, where it's treated as an architecture approach. And PHP has Lumen, a popular microservices-oriented framework.
+The .NET Core framework has microservices support built-in, where it's treated as an architecture approach. And PHP has Lumen, a popular microservices-oriented framework.
 
 Ultimately, microservices are most successful when they're used to scale development teams and leverage continuous deployment. They give developers autonomy and the capacity to go from idea all the way to production without depending on other teams. A two-pizza team (usually 8-10 people or 5 if they’re hungry) will often contain product people, backend folks including DBAs, UI developers, and DevOps engineers that deploy and manage production.
 
 If your organization doesn't allow teams to be formed this way, microservices may not be for you.
 
-[quote, M. Conway, https://www.thoughtworks.com/insights/blog/demystifying-conways-law[Conway's Law]]
+[quote, Melvin Conway, 'https://www.thoughtworks.com/insights/blog/demystifying-conways-law[Conway\'s Law]']
 ____
-organizations which design systems ... are constrained to produce designs which are copies of the communication structures of these organizations.
+Any organization that designs a system (defined more broadly here than just information systems) will inevitably produce a design whose structure is a copy of the organization's communication structure.
 ____
 
 If your organization has DBAs, backend developers, UI developers, and DevOps engineers separated by function, you should change your communication structures first. Organize your teams around products, _then_ think about adopting a microservices architecture.
@@ -109,7 +109,7 @@ JHipster 6 generates a frontend monolith for microservices by default. It also l
 
 == Micro Frontends to the Rescue!️⚡️
 
-This brings us to Micro Frontends - a hot topic with a lot of activity. Like the microservices article that was published on Martin Fowler's blog in 2014,"https://martinfowler.com/articles/micro-frontends.html[Micro Frontends]" was published in June 2019. It's written by https://twitter.com/thecamjackson[Cam Jackson] and includes a number of integration approaches.
+This brings us to Micro Frontends - a hot topic with a lot of activity lately. Like the microservices article that was published on Martin Fowler's blog in 2014, "`https://martinfowler.com/articles/micro-frontends.html[Micro Frontends]`" was published in June 2019. It's written by https://twitter.com/thecamjackson[Cam Jackson] and includes a number of integration approaches.
 
 Cam notes that ThoughtWorks Radar has https://www.thoughtworks.com/radar/techniques/micro-frontends[moved micro frontends from trial to adopt over the last few years]:
 
