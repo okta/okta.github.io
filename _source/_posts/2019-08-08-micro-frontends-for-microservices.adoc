@@ -6,8 +6,8 @@ description: "Adopting a microservice architecture for your backend can be usefu
 tags: [microservices, micro frontends, UI, UX, web development]
 tweets:
 - "How to Win at UI Development in the World of Microservices (spoiler: lazy-loading and micro front ends)"
-- "Web frameworks have been around for 20+ years. How do use them in the world of microservices?"
-- "Let your web developers use the frameworks they ❤️ by adopting micro front ends. @mraible shows you how!"
+- "Web frameworks have been around for 20+ years. How do you use them in the world of microservices?"
+- "Let your UI developers use the frameworks they ❤️ by adopting micro front ends. @mraible shows you how!"
 image: blog/micro-frontends/win-at-ui-development-with-microservices.png
 ---
 :page-liquid:
