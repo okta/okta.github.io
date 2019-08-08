@@ -22,7 +22,7 @@ _Why?_ You might ask.
 
 Because passion is the most important part of any job. When developers are passionate about the application they're developing - and the language they're using (notice language is secondary) - they accomplish great things.
 
-That’s what makes a microservices architecture so beautiful. If it's implemented right, developers can choose to work with the language or framework they're most passionate about. And as long as they have an API that can be aggregated at a gateway layer, it shouldn't matter.
+That's what makes a microservices architecture so beautiful. If it's implemented right, developers can choose to work with the language or framework they're most passionate about. And as long as they have an API that can be aggregated at a gateway layer, it shouldn't matter.
 
 Of course, there are hurdles to clear when adopting a microservices architecture as well. It shifts the complexity to the network and distributed systems are typically harder to maintain and monitor in production. Microservices introduce organizational and decoupling challenges so a change to one service doesn't break another. Standards that document and enforce deployment and monitoring practices across teams are absolutely essential. Continuous integration is necessary to ensure decoupling remains intact. Continuous deployment is required to automate and simplify production pushes. It can be a lot to manage.
 
@@ -50,7 +50,7 @@ As a consultant, I was often hired to help solve performance problems. Clients o
 
 TIP: Combining scripts and reducing network requests https://medium.com/@asyncmax/the-right-way-to-bundle-your-assets-for-faster-sites-over-http-2-437c37efe3ff[is no longer an issue with HTTP/2], but frontend performance problems persist in many ways.
 
-This brings us to today, where it's commonplace to mix and match your MVC framework with SPAs for more dynamic functionality. If you build the next Photoshop as a web app, you won’t want to use server-side rendering; you’ll want to build it as a SPA. On the flip side, a SPA approach makes no sense if you’re developing something like Wikipedia, where MVC or a static site generator would work well.
+This brings us to today, where it's commonplace to mix and match your MVC framework with SPAs for more dynamic functionality. If you build the next Photoshop as a web app, you won't want to use server-side rendering; you'll want to build it as a SPA. On the flip side, a SPA approach makes no sense if you're developing something like Wikipedia, where MVC or a static site generator would work well.
 
 == The Microservices Explosion 💥
 
@@ -66,7 +66,7 @@ Spring Boot, Spring Cloud, and MicroProfile are some of the most popular ways to
 
 The .NET Core framework has microservices support built-in, where it's treated as an architecture approach. And PHP has Lumen, a popular microservices-oriented framework.
 
-Ultimately, microservices are most successful when they're used to scale development teams and leverage continuous deployment. They give developers autonomy and the capacity to go from idea all the way to production without depending on other teams. A two-pizza team (usually 8-10 people or 5 if they’re hungry) will often contain product people, backend folks including DBAs, UI developers, and DevOps engineers that deploy and manage production.
+Ultimately, microservices are most successful when they're used to scale development teams and leverage continuous deployment. They give developers autonomy and the capacity to go from idea all the way to production without depending on other teams. A two-pizza team (usually 8-10 people or 5 if they're hungry) will often contain product people, backend folks including DBAs, UI developers, and DevOps engineers that deploy and manage production.
 
 If your organization doesn't allow teams to be formed this way, microservices may not be for you.
 
