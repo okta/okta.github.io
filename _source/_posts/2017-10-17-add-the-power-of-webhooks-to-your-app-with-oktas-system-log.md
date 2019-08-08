@@ -5,6 +5,10 @@ author: jf
 tags: [webhooks, go]
 ---
 
+> **UPDATE**: Since this article was written we've released official webhook
+> support in Okta! If you'd like to see an easier way to handle webhooks in Okta,
+> please check out [our new docs](/docs/concepts/event-hooks/).
+
 If you've used webhooks before, you probably understand the magical powers they boast. Do you want to build a sleep tracker for your dog? Get notified when it's going to rain? Or maybe have new Eventbrite attendees automatically added to Salesforce? You can do all of those things with webhooks and services like Twilio, Zapier and Workato.
 
 To get webhooks with Okta, this post will show you how to use an underappreciated feature in Okta, the System Log. It's a record of all activity that happens in your Okta org. Examples of the events that get recorded in your System Log are:
