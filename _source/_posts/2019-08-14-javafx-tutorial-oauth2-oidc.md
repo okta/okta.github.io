@@ -15,13 +15,13 @@ JavaFX, a library of user interaction controls, allows Java developers to build 
 
 Implementing an authorization flow with OAuth 2.0 can be tricky with a desktop framework like JavaFX. Typically, OAuth flows require a browser and redirecting to specific URLs. Detecting a redirect in JavaFX's default browser is impossible. The default Java browser (`java.awt.Desktop.browse(URI)`) has no way to communicate with external processes. 
 
-In this tutorial, we'll be using the Microsoft OAuth 2.0 User Agent library. This library’s `InterceptingBrowser` class detects the redirect and intercepts the request to complete the OAuth flow. You can take a look at [the project page](https://github.com/microsoft/oauth2-useragent) to read a little more about it. Besides JavaFX, there's also a Standard Widget Toolkit driver that we won't be using here.
+In this tutorial, we'll be using the Microsoft OAuth 2.0 User Agent library. This library's `InterceptingBrowser` class detects the redirect and intercepts the request to complete the OAuth flow. You can take a look at [the project page](https://github.com/microsoft/oauth2-useragent) to read a little more about it. Besides JavaFX, there's also a Standard Widget Toolkit driver that we won't be using here.
 
 OAuth 2.0 authorization requires an OAuth provider. Fun fact: OAuth stands for **O**pen **Auth**orization. OpenID Connect is an authentication layer built on top of OAuth, which was only designed for authorization. Both are open standards and not implementations, so to actually use OAuth 2.0 and OIDC, you need an implementation. The OAuth server implementation you'll be using in this tutorial is provided by Okta, a software-as-service identity management provider. 
 
 ## Requirements for Your JavaFX Application
 
-There are two requirements for this tutorial. First, you have to use **Oracle Java 8**, not a Java version greater than 8 and not OpenJDK. The Microsoft OAuth 2.0 User Agent library actually has a hard-coded requirement check in its code for this. Why? OpenJDK does not include JavaFX, which the Microsoft User Agent requires, and Oracle JDK only includes JavaFX up to Java 8. (Technically, you could use an earlier version. Don’t.)
+There are two requirements for this tutorial. First, you have to use **Oracle Java 8**, not a Java version greater than 8 and not OpenJDK. The Microsoft OAuth 2.0 User Agent library actually has a hard-coded requirement check in its code for this. Why? OpenJDK does not include JavaFX, which the Microsoft User Agent requires, and Oracle JDK only includes JavaFX up to Java 8. (Technically, you could use an earlier version. Don't.)
 
 You can [download Oracle Java 8 from the Oracle website](https://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html).
 
@@ -225,7 +225,7 @@ _If you've never logged into your account before, you may need to click the **Ad
 
 {% img blog/javafx-tutorial/oidc-app-settings.png alt:"OIDC Application" width:"600" %}{: .center-image }
 
-Take note of the **Client ID** and **Client Secret** at the bottom of the page. You’ll need these in the next section.
+Take note of the **Client ID** and **Client Secret** at the bottom of the page. You'll need these in the next section.
 
 That's it on the Okta side. You just configured an OAuth 2.0 + OIDC identity provider. Congrats!
 
