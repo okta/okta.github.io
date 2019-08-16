@@ -56,7 +56,7 @@ In the first line, replace `password` with a more complex password. The rest of 
 Now you are ready to create the `events` table in the new database by specifying the data schema. 
 
 ```sql
-CREATE TABLE events (
+create table events (
   id INT AUTO_INCREMENT,
   owner VARCHAR(255) NOT NULL,
   name VARCHAR(255) NOT NULL,
