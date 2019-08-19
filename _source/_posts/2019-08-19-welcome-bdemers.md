@@ -9,7 +9,7 @@ tweets:
 image: blog/featured/okta-java-bottle-headphones.jpg
 ---
 
-I'm excited to announce that I've joined Okta's Developer Relations team!  I've been working on Okta's awesome Developers Experience team for the last couple years so I'm not exactly a new face around here. 😉
+I'm excited to announce that I've joined Okta's Developer Relations team!  I've been working on Okta's awesome Developer Experience team for the last couple years so I'm not exactly a new face around here. 😉
 
 ## Who is Brian?
 
