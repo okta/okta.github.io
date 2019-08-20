@@ -254,7 +254,7 @@ If you run all of these services with `./mvnw` in separate terminal windows, you
 
 image::{% asset_path 'blog/java-microservices/eureka-server.png' %}[alt=Eureka Server,width=800,align=center]
 
-If you navigate to `http://localhost:8080/cool-bars` in your browser, you'll be redirected to Okta. What the?
+If you navigate to `http://localhost:8080/cool-cars` in your browser, you'll be redirected to Okta. What the?
 
 == Secure Java Microservices with OAuth 2.0 and OIDC
 
@@ -474,7 +474,6 @@ import org.springframework.security.oauth2.client.OAuth2AuthorizedClient;
 import org.springframework.security.oauth2.client.OAuth2AuthorizedClientService;
 import org.springframework.security.oauth2.client.authentication.OAuth2AuthenticationToken;
 import org.springframework.security.oauth2.core.OAuth2AccessToken;
-import org.springframework.security.oauth2.core.oidc.OidcUserInfo;
 
 import java.util.Optional;
 
@@ -537,6 +536,7 @@ To make Spring Boot and Zuul aware of this filter, I registered it as a bean in 
 
 [source,java]
 ----
+@Bean
 public AuthorizationHeaderFilter authHeaderFilter(OAuth2AuthorizedClientService clientService) {
     return new AuthorizationHeaderFilter(clientService);
 }
