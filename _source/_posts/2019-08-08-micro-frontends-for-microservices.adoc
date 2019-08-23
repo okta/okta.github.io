@@ -1,0 +1,247 @@
+---
+layout: blog_post
+title: "How to Win at UI Development in the World of Microservices"
+author: mraible
+description: "Adopting a microservice architecture for your backend can be useful to scale teams of developers. But what about the UI? Learn about micro frontends and more!"
+tags: [microservices, micro frontends, UI, UX, web development]
+tweets:
+- "How to Win at UI Development in the World of Microservices (spoiler: lazy-loading and micro front ends)"
+- "Web frameworks have been around for 20+ years. How do you use them in the world of microservices?"
+- "Let your UI developers use the frameworks they ❤️ by adopting micro front ends. @mraible shows you how!"
+image: blog/micro-frontends/win-at-ui-development.png
+---
+:page-liquid:
+
+Microservices have become a popular and effective design for scaling development teams in large companies. A microservices architecture enables you to build and deploy services independently, providing developers autonomy, enthusiasm, and a passion for their work. These benefits are realized because they feel a sense of control over their own destiny.
+
+Allow me to demonstrate with a story about my time at LinkedIn. In early 2008, they asked me to do an analysis of Ruby on Rails versus Grails and tell them which one they should use. They had an app written in both frameworks and the CTO didn't want to support both. Both platforms allowed developers to iterate quickly and turbo-charge their productivity.
+
+My Conclusion: **Allow Both**.
+
+_Why?_ You might ask.
+
+Because passion is the most important part of any job. When developers are passionate about the application they're developing - and the language they're using (notice language is secondary) - they accomplish great things.
+
+That's what makes a microservices architecture so beautiful. If it's implemented right, developers can choose to work with the language or framework they're most passionate about. And as long as they have an API that can be aggregated at a gateway layer, it shouldn't matter.
+
+Of course, there are hurdles to clear when adopting a microservices architecture as well. It shifts the complexity to the network and distributed systems are typically harder to maintain and monitor in production. Microservices introduce organizational and decoupling challenges so a change to one service doesn't break another. Standards that document and enforce deployment and monitoring practices across teams are absolutely essential. Continuous integration is necessary to ensure decoupling remains intact. Continuous deployment is required to automate and simplify production pushes. It can be a lot to manage.
+
+And what about the UI that talks to a microservice architecture? Before I jump into solutions for splitting up front ends that talk to microservices, let's take a look at a brief history of web frameworks.
+
+== A Brief History of Web Frameworks
+
+Web frameworks have been around for more than 20 years now! Dynamic websites started with CGI and traversed to servlets, ASP, and PHP in the late 90s. In the early 2000s, they exploded in popularity, particularly in the Java ecosystem.
+
+image::{% asset_path 'blog/micro-frontends/history-of-web-frameworks-timeline.png' %}[alt=History of Web Frameworks Timeline,align=center]
+
+TIP: The source for the timeline above can be https://github.com/mraible/history-of-web-frameworks-timeline[found on GitHub].
+
+Struts 1.0 came out in June 2001 and ASP.NET 1.0 was released in early 2002. Java web frameworks exploded over the next couple years and people laughed at the Java community for having so many frameworks. Then in 2006, Ruby on Rails, jQuery, and Dojo (one of the first JavaScript MVC frameworks) changed the game. Rails showed how easy web development could be, while the others started the JavaScript Renaissance which has lasted many years, until today.
+
+And now? People make fun of JavaScript for having so many web frameworks. In my opinion, though, the dust has settled and there are three main players: Angular, React, and Vue.js.
+
+It's true there might be future web framework wars, but I think we can agree there's not really a new JavaScript framework released every week like many of us joke there is.
+
+That first batch of web frameworks in the early 2000s leveraged MVC and server-side rendering. Then along came Ajax, single-page applications, and the mobile revolution. Because single-page applications can be distributed in a single bundle, they became popular for mobile apps as well. You've probably heard of Ionic and React Native; both frameworks allow web developers to use their existing skills to develop native mobile apps.
+
+Both server-side rendering and single-page apps have their place in the world. In fact, server-side rendering has become a recommended practice for the initial load of SPAs. Static websites generators have become popular as well, as have CDNs (content delivery networks), and front end performance optimization.
+
+As a consultant, I was hired a few times to help solve performance problems. Clients often thought their issues where in the backend, but I found more issues in their frontends! Often, these performance issues were easy to fix by turning on gzipping, adding long-lived expires headers, combining scripts (and CSS), optimizing images, and reducing network requests.
+
+TIP: Combining scripts and reducing network requests https://medium.com/@asyncmax/the-right-way-to-bundle-your-assets-for-faster-sites-over-http-2-437c37efe3ff[is no longer an issue with HTTP/2], but frontend performance problems persist in many ways.
+
+This brings us to today, where it's commonplace to mix and match your MVC framework with SPAs for more dynamic functionality. If you build the next Photoshop as a web app, you won't want to use server-side rendering; you'll want to build it as a SPA. On the flip side, a SPA approach makes no sense if you're developing something like Wikipedia, where MVC or a static site generator would work well.
+
+== The Microservices Explosion 💥
+
+The term "microservices" was first coined in 2007. Many call it Service Oriented Architecture (SOA) reincarnated, and it kinda is.
+
+NOTE: If you're not familiar with SOA, I suggest you read https://www.okta.com/security-blog/2019/07/microservices-vs-soa—whats-the-difference[Microservices vs. SOA -- What's the Difference?] from the Okta Security blog.
+
+Microservices blew up in popularity when James Lewis and Martin Fowler published the article "`https://martinfowler.com/articles/microservices.html[Microservices]`". Adrian Cockcroft at Netflix was a big part of this movement as well. He described the architecture as "fine-grained SOA" and helped pioneer microservices at web scale. Adrian is now VP of Cloud Architecture Strategy at AWS (Amazon Web Services).
+
+This all happened around the same year (2014) that Spring Boot was https://spring.io/blog/2014/04/01/spring-boot-1-0-ga-released[first released]. Spring Cloud 1.0 was https://spring.io/blog/2015/03/04/spring-cloud-1-0-0-available-now[released] a year later in March 2015, bringing many of Netflix's microservices architecture principles to the Spring and Java community.
+
+Spring Boot, Spring Cloud, and MicroProfile are some of the most popular ways to implement microservice architectures in the Java ecosystem. Micronaut and Quarkus - two relative newcomers to the space - prove there's a lot of interest from developers and market share remaining to be won from vendors (both are actually open source projects sponsored by software companies OCI and IBM respectively).
+
+The .NET Core framework has microservices support built-in, where it's treated as an architecture approach. And PHP has Lumen, a popular microservices-oriented framework.
+
+Ultimately, microservices are most successful when they're used to scale development teams and leverage continuous deployment. They give developers autonomy and the capacity to go from idea all the way to production without depending on other teams. A two-pizza team (usually 8-10 people or 5 if they're hungry) will often contain product people, backend folks including DBAs, UI developers, and DevOps engineers that deploy and manage production.
+
+If your organization doesn't allow teams to be formed this way, microservices may not be for you.
+
+[quote, Melvin Conway, 'https://www.thoughtworks.com/insights/blog/demystifying-conways-law[Conway\'s Law]']
+____
+Any organization that designs a system (defined more broadly here than just information systems) will inevitably produce a design whose structure is a copy of the organization's communication structure.
+____
+
+If your organization has DBAs, backend developers, UI developers, and DevOps engineers separated by function, you should change your communication structures first. Organize your teams around products, _then_ think about adopting a microservices architecture.
+
+Once communication structures exist around products and teams own everything from idea to production monitoring, you can benefit from adopting microservices. Until then, a monolith will probably work just fine!
+
+++++
+<div style="max-width: 500px; margin: 0 auto 1.25rem">
+<blockquote class="twitter-tweet"><p lang="en" dir="ltr">(Apparently still) unpopular opinion - monoliths are okay for many, many applications. Not everything needs to, or should, be <a href="https://twitter.com/hashtag/microservices?src=hash&amp;ref_src=twsrc%5Etfw">#microservices</a>. There is a spectrum of applications in every company.</p>&mdash; Fintan Ryan (@fintanr) <a href="https://twitter.com/fintanr/status/1156136718581534720?ref_src=twsrc%5Etfw">July 30, 2019</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+</div>
+++++
+
+== UI Development in a Microservices World
+
+How does UI development work in product-centric teams, and is it possible to use different languages/frameworks on the frontend too? Keep on reading.
+
+I've worked on a few microservices projects. Even though backend services were split up into separate services, the UI was often a monolith built with a single web framework that made requests to the backend API gateway. The API gateway served as an aggregation layer to expose all the various services at the same base URL.
+
+=== State of the Art in Java + JavaScript
+
+This design works well and is currently state of the art in the Java space, as evidenced by JHipster. If you haven't heard of JHipster, it's a platform for generating Spring Boot monoliths and microservices with a JavaScript frontend. Current frontend framework options include Angular, React, and Vue.js.
+
+When you generate a microservices architecture with JHipster, the resulting project is composed of a gateway and 1-n microservices. The microservice apps do not have a frontend, they just have REST APIs and persist data to their own database. The gateway serves as the aggregation layer. This is also where the UI code resides. That's right, even though JHipster supports microservices, it only does it for the backend.
+
+Below is a video showing where the frontend code resides in a JHipster-generated microservices architecture.
+
+++++
+<div style="text-align: center; margin-bottom: 1.25rem">
+<iframe width="700" height="394" style="max-width: 100%" src="https://www.youtube.com/embed/-QCuWgLQmdg" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+</div>
+++++
+
+JHipster 6 generates a frontend monolith for microservices by default. It also leverages lazy-loading for Angular, React, and Vue to make the initial download and render fast (it could be even faster with server-side rendering support, but I digress).
+
+== Micro Frontends to the Rescue!️⚡️
+
+This brings us to Micro Frontends - a hot topic with a lot of activity lately. Like the microservices article that was published on Martin Fowler's blog in 2014, "`https://martinfowler.com/articles/micro-frontends.html[Micro Frontends]`" was published in June 2019. It's written by https://twitter.com/thecamjackson[Cam Jackson] and includes a number of integration approaches.
+
+Cam notes that ThoughtWorks Radar has https://www.thoughtworks.com/radar/techniques/micro-frontends[moved micro frontends from trial to adopt over the last few years]:
+
+- November 2016: Assess
+- November 2017: Trial
+- April 2019: Adopt
+
+He also describes that ThoughtWorks has witnessed some key benefits (for its clients) from micro frontends:
+
+* Smaller, more cohesive and maintainable codebases
+* More scalable organizations with decoupled, autonomous teams
+* The ability to upgrade, update or even rewrite parts of the frontend in a more incremental fashion than was previously possible
+
+https://twitter.com/naltatis[Michael Geers], another micro frontends expert, created https://micro-frontends.org/[micro-frontends.org] way back in March 2017 and his https://github.com/neuland/micro-frontends/commit/138fb9531bf48617778b6520a1c0ac92b7d2c0d7[first commit] shows that the primary motivation for adopting micro frontends is to help scale developers:
+
+----
+frontend integration recipes for composing a website with multiple teams
+----
+
+Michael's website provides a concise description of the idea behind micro frontends:
+
+> The idea behind Micro Frontends is to think about a website or web app as a composition of features which are owned by independent teams. Each team has a distinct area of business or mission it cares about and specializes in. A team is cross-functional and develops its features end-to-end, from the database to the user interface.
+
+=== Techniques and Micro Frontend Frameworks
+
+There are several techniques you can use to implement micro frontends. One of my favorites I learned about from listening to https://www.case-podcast.org/22-micro-frontends-with-gustaf-nilsson-kotte[Micro Frontends with Gustaf Nilsson Kotte] on the "Conversations about Software Engineering" podcast. https://twitter.com/gustaf_nk[Gustaf Nilsson Kotte] is a developer at Jayway and he describes how IKEA leveraged micro frontends with ESI (edge-side includes), web components, and static page generation.
+
+Michael Geers's micro-frontends.org site explains an architecture similar to Gustaf's, except it uses SSI and server-side rendering with Nginx.
+
+image::{% asset_path 'blog/micro-frontends/micro-frontend-verticals.png' %}[alt=Michael Greer: Organization in Verticals,width=800,align=center]
+
+Cam Jackson's article has many more integration approaches, including build-time integration and run-time integration.
+
+image::{% asset_path 'blog/micro-frontends/micro-frontend-ssi.png' %}[alt=Cam Jackson: Each of these servers can be built and deployed to independently,width=700,align=center]
+
+Notice how all three techniques involve:
+
+* Web components as the target output
+* Custom elements to create web components
+* DOM Events to communicate between frontends
+* Server-side rendering and SSI (server-side includes) or ESI (edge-side includes)
+* CDNs and cache-busting as a deployment mechanism
+
+There's also a couple of frameworks you can use to kickstart a micro frontends implementation:
+
+* **https://www.mosaic9.org/[Project Mosaic]**: Mosaic is a set of services libraries together with a specification that defines how its components interact with each other, to support a microservice style architecture for large scale websites.
+* **https://single-spa.js.org/[Single-spa]**: A JavaScript framework for front-end microservices.
+
+Both definitions are taken from their respective websites. Mosaic seems like Spring Cloud for the UI, with lots of sub-projects. It's sponsored by https://zalando.com/[Zalando], which is "an e-commerce company into a multi-service platform for fashion."
+
+Single-spa is sponsored by https://www.canopytax.com/[CanopyTax] (a tax software company) and has a neat https://single-spa.surge.sh/[live demo].
+
+==== What are Developers Using to Implement Micro Frontends?
+
+I did a poll on Twitter last week and Single-spa seems to be the most popular technique/framework among my followers.
+
+++++
+<div style="max-width: 500px; margin: 0 auto 1.25rem">
+<blockquote class="twitter-tweet"><p lang="en" dir="ltr">Have you implemented Micro Frontends (as described in <a href="https://twitter.com/naltatis?ref_src=twsrc%5Etfw">@naltatis</a>&#39;s <a href="https://t.co/UuPCXYQMuv">https://t.co/UuPCXYQMuv</a> and <a href="https://twitter.com/thecamjackson?ref_src=twsrc%5Etfw">@thecamjackson</a>&#39;s <a href="https://t.co/w4yKXSd0Rj">https://t.co/w4yKXSd0Rj</a>)? <br><br>If so, how have you done it?</p>&mdash; Matt Raible (@mraible) <a href="https://twitter.com/mraible/status/1156263974649778176?ref_src=twsrc%5Etfw">July 30, 2019</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+</div>
+++++
+
+You might notice there were only 13 votes. I usually get around 200 responses when I do polls on Twitter which tells me that micro frontends are still pretty bleeding edge!
+
+=== Real Developer Stories
+
+The IKEA implementation uses a combination of static pages, SPAs, and ESI for their architecture. They have ESIs for CSS and individual components and leverage https://github.com/gustafnk/h-include[h-include] for doing includes on the frontend. The cool thing about h-include is it allows them to render components of their pages just-in-time. If the component is below-the-fold, it's not rendered. When the user scrolls to bring it into view, it invokes rendering. Lazy-loading FTW!
+
+Spotify is another company that has https://medium.com/@tomsoderlund/micro-frontends-a-microservice-approach-to-front-end-web-development-f325ebdadc16[implemented micro frontends]. They only have ~2000 employees, but they've been known to be a progressive technology company. Other examples include Klarna, Zalando, Upwork, Allegro, and HelloFresh.
+
+I https://twitter.com/mraible/status/1156641005799530496[asked the internet] for more developer stories and received a great reply from https://twitter.com/atomfrede[Frederik Hahne]. A fellow JHipster committer and a friend, Frederik was gracious enough to answer my questions and give some insight about why and how they've adapted micro frontends for their B2B integration platform https://www.wescale.com/[wescale].
+
+**How many developers does your company have?**
+
+> **Frederik:** Overall we are now 40 (~6 scrum team) developers working on different parts of the platform or related products/services. When we started in 2014 to work on the new platform we were one team of 4 developers.
+
+**Why did you adopt a micro frontend architecture?**
+
+> **Frederik:** We adopted micro frontends for a few reasons:
+> - Teams can work autonomously on different parts of the UI (the most important IMHO, as the ng1 app had a lot of problems, one team changes a bit of style/component it breaks for another)
+> - Teams can release independently different parts of the UI (with ng1 monolith we couldn't release when one team was not ready to release their changes)
+> - Teams can use diverse technologies for different parts of the UI (ng1 was ok, ngX way too heavy. We wanted the teams to use what they are most confident with)
+> - Teams can test more focused and effectively different parts of the UI
+
+**What technique(s) / frameworks(s) did you use?**
+
+> **Frederik:** We use "Server Side Includes + Http Streaming". We have built on Zalando's Project Mosaic and use Tailor as a layout service with a UI gateway (aka reverse proxy + auth etc).
+
+**Is it a better or worse developer experience than before? Why?**
+
+> **Frederik:** It is much better now, but we needed a custom app to provide, as we call it a development shell (side menu, header bar with some stub functions, and faking authentication for example). Having a smaller UI bundle and better tooling helped to decrease the turn around times when developing the UI a lot. So basically, UI development is now fun again!
+
+**What were/are the biggest pain points?**
+
+> **Frederik:** We didn't want to have a big bang release and the ng1 app was already in production so we needed to make the ng1 app a fragment such it would work like micro frontend, so we could migrate parts to a new UI if required. We have replaced some parts, but a lot of the old UI is still in production as the value didn't exceed the effort to replace it.
+>
+> Another pain point was (and is still) the UI consistency. We have one designer who defines how components should look and work. We have a custom UI library based on Bootstrap but still, developers can do what they want (as they are no necessarily e.g. ready to use Vue components).
+
+== OK, So How Do You Win?
+
+The title of this post promises to teach you how to win at UI development in the world of microservices. I believe UI development in a microservices world has two main options:
+
+* A monolith frontend that uses the same framework, components, and lazy-loading
+* A micro frontend architecture that allows any framework, leveraging web components
+
+They both seem like pretty nice options to me. Similar to microservices, a micro frontend will likely require more initial infrastructure but allow you to upgrade a portion of your stack (e.g., moving from AngularJS to React) without doing a big-bang upgrade.
+
+If you have teams that are passionate about a particular framework, it might be just what you're looking for. The Grails and Rails teams I worked with at LinkedIn were _very_ passionate about their framework choices.
+
+Wouldn't you like to be an enabler of developer productivity, team independence, and passion where you work? I sure would!
+
+== Learn More About Micro Frontends and Microservices
+
+This blog post describes what micro frontends are, how they're implemented, and gives some real-world examples of companies using them. It also shows how the current state of the art in the combined Java + JavaScript land is JHipster with a monolithic frontend.
+
+In doing research for this post, I concluded that JHipster's monolithic UI hinders its microservice architecture. The current frontend architecture leads to coupled deployments and each team is coupled to one frontend technology - a good microservice architecture should embrace decoupling. To help improve JHipster's microservice architecture implementation, I created https://github.com/jhipster/generator-jhipster/issues/10189[a feature request] to implement a micro frontends prototype (and added a $500 bounty to it).
+
+If you're interested in learning more about micro frontends, I found several resources in my research:
+
+* https://micro-frontends.org/[Micro Frontends] by Michael Greer
+* https://martinfowler.com/articles/micro-frontends.html[Micro Frontends] by Cam Jackson
+* https://www.case-podcast.org/22-micro-frontends-with-gustaf-nilsson-kotte/[CaSE Podcast: Micro Frontends with Gustaf Nilsson Kotte]
+* http://thoughtworks.libsyn.com/whats-so-cool-about-micro-frontends[ThoughtWorks Podcast: What's so cool about micro frontends?]
+* https://dev.to/parkroolucas/micro-frontends-a-deep-dive-into-the-latest-industry-trend-3i7a[Micro Frontends: a deep dive into the latest industry trend] by Lucas Chen
+* https://medium.com/javascript-in-plain-english/microfrontends-bringing-javascript-frameworks-together-react-angular-vue-etc-5d401cb0072b[Microfrontends — bringing JavaScript frameworks together (React, Angular, Vue, etc)] by Chris Kitson
+
+If you're interested in microservices, we have a number of quality posts on this blog:
+
+* link:/blog/2019/05/22/java-microservices-spring-boot-spring-cloud[Java Microservices with Spring Boot and Spring Cloud]
+* link:/blog/2019/03/21/build-secure-microservices-with-aspnet-core[Build Secure Microservices with AWS Lambda and ASP.NET Core]
+* link:/blog/2019/06/26/build-secure-microservices-in-php[Build Secure Microservices in PHP]
+
+Like what you read here? Follow my team https://twitter.com/oktadev[@oktadev] or subscribe to our https://www.youtube.com/c/oktadev[channel on YouTube]. Until next time, stay awesome!
+
+image::{% asset_path 'blog/micro-frontends/you-dont-need-permission.jpg' %}[alt=You don't need permission to be awesome,width=500,align=center]

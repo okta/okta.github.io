@@ -123,7 +123,7 @@ Click the **Configure** button and select your primary App ID you created earlie
 
 {% img blog/sign-in-with-apple/17-select-app-id.png alt:"Select the primary App ID" width:"800" %}{: .center-image }
 
-Apple will generate a new private key for you and let you download it only once. Make sure you save this file, because you won't be able to get it back again later!
+Apple will generate a new private key for you and let you download it only once. Make sure you save this file, because you won't be able to get it back again later! The file you download will end in `.p8`, but it's just text inside, so rename it to `key.txt` so that it's easier to use in the next steps.
 
 {% img blog/sign-in-with-apple/18-download-your-key.png alt:"Download your key" width:"800" %}{: .center-image }
 
@@ -215,6 +215,7 @@ $_SESSION['state'] = bin2hex(random_bytes(5));
 
 $authorize_url = 'https://appleid.apple.com/auth/authorize'.'?'.http_build_query([
   'response_type' => 'code',
+  'response_mode' => 'form_post',
   'client_id' => $client_id,
   'redirect_uri' => $redirect_uri,
   'state' => $_SESSION['state'],
@@ -247,9 +248,9 @@ Before you click Sign In, you should set up the mechanism for handling the redir
 Add the following code to `index.php` above the line `$_SESSION['state'] = bin2hex(random_bytes(5));`.
 
 ```php
-if(isset($_GET['code'])) {
+if(isset($_POST['code'])) {
 
-  if($_SESSION['state'] != $_GET['state']) {
+  if($_SESSION['state'] != $_POST['state']) {
     die('Authorization server returned an invalid state parameter');
   }
 
@@ -258,7 +259,7 @@ if(isset($_GET['code'])) {
 
   $response = http('https://appleid.apple.com/auth/token', [
     'grant_type' => 'authorization_code',
-    'code' => $_GET['code'],
+    'code' => $_POST['code'],
     'redirect_uri' => $redirect_uri,
     'client_id' => $client_id,
     'client_secret' => $client_secret,
@@ -289,7 +290,7 @@ if(isset($_GET['code'])) {
 
 This is a handful of code, so let's walk through it.
 
-`if(isset($_GET['code']))`
+`if(isset($_POST['code']))`
 
 First, we check for the presence of the authorization code in the query string which indicates that Apple has completed the initial step and sent the user back to the app.
 
@@ -302,7 +303,7 @@ This request is actually documented on Apple's website, although as of this writ
 ```php
   $response = http('https://appleid.apple.com/auth/token', [
     'grant_type' => 'authorization_code',
-    'code' => $_GET['code'],
+    'code' => $_POST['code'],
     'redirect_uri' => $redirect_uri,
     'client_id' => $client_id,
     'client_secret' => $client_secret,
@@ -352,30 +353,37 @@ Once you confirm that, you'll see a screen asking if you would like to continue 
 
 {% img blog/sign-in-with-apple/apple-permission-prompt.png alt:"Prompt: Would you like to sign in?" width:"800" %}{: .center-image }
 
-Note: You will only see this permissions screen the very first time you log in with this App ID. In subsequent logins, you'll see a confirmation prompt like the below.
+Note: You will only see this permissions screen the very first time you log in with this App ID. In subsequent logins, you'll see a confirmation prompt like the below. 
 
 {% img blog/sign-in-with-apple/6-sign-in-confirmation.png alt:"Dialog asking the user to confirm signing in to this app" width:"800" %}{: .center-image }
 
+If you want to reset this so that you see the permissions screen and get the name and email back from Apple, visit your [Apple ID App Security page](https://appleid.apple.com/account/manage) and revoke your application.
+
+{% img blog/sign-in-with-apple/apple-revoke-application.png alt:"Dialog to revoke an application from the app security settings" width:"500" %}{: .center-image }
+
 Now click **Continue** and you'll be redirected to your redirect URL! If you entered the placeholder `https://example-app.com/redirect` URL then you'll see a message like this.
 
-{% img blog/sign-in-with-apple/20-oauth-redirect.png alt:"The sample redirect handler at example-app.com/redirect" width:"800" %}{: .center-image }
+{% img blog/sign-in-with-apple/apple-oauth-redirect.png alt:"The sample redirect handler at example-app.com/redirect" width:"800" %}{: .center-image }
 
-The easy trick for testing here is to go to the browser address bar and replace `https://example-app.com/redirect` with `http://127.0.0.1:8080` and hit enter. This will load your local PHP app with the two values you need in the query string.
+Since Apple sends a POST request to the redirect URL, you'll have to actually set up a redirect handler yourself to catch the values, since the authorization code will likely expire before you can copy it out of this debug screen.
 
-Your app will exchange the authorization code for an access token and ID token, and will show the output on the screen!
+Once you've set up the sample code above and registered your own redirect URL, your app will exchange the authorization code for an access token and ID token, and will show the output on the screen!
 
-{% img blog/sign-in-with-apple/21-apple-sign-in-tokens.png alt:"Tokens retrieved from Apple" width:"600" %}{: .center-image }
+{% img blog/sign-in-with-apple/apple-sign-in-tokens.png alt:"Tokens retrieved from Apple" width:"600" %}{: .center-image }
 
 The last step to getting the user's info is to decode the ID token. Since in this example we used `response_type=code` to get the ID token, the ID token was obtained via the back channel, which means we don't need to worry about validating the JWT signature of the ID token. We can just parse out the middle claims section and read the data directly.
 
-The only piece of useful data in the claims really is the `sub` value. This is the unique identifier for the user. It's notable that this value doesn't mean anything in particular, which is Apple's way of preserving user privacy. You can store this value in your own database now, and use it to determine whether the same user logged back in a second time.
+The `sub` value in the claims is the unique identifier for the user. It's notable that this value doesn't mean anything in particular, which is Apple's way of preserving user privacy. You can store this value in your own database now, and use it to determine whether the same user logged back in a second time.
 
-I haven't yet been able to find how or where to get the user's special proxy email address from Apple, but I will update this post when I do! It isn't returned in the ID token even when requesting the `openid email` scopes, and there is no `userinfo` endpoint documented, and the few variations I tried didn't work. I'm hoping Apple updates their documentation soon so we can try that part out!
+You can also find the user's email or proxy email in the claims as well.
+
+Note: Apple will send the user's name and email in the form post response back to your redirect URL. You should not treat these values as authoritative, because like the [OAuth Implicit flow](/blog/2019/05/01/is-the-oauth-implicit-flow-dead), the data cannot be safely trusted at this point. Unfortunately Apple does not return the user's name in the ID token where it would be safe to trust. Thankfully they do return the user's email address that way, so that's where you should get it from.
 
 You can find the [complete code from this tutorial](https://github.com/aaronpk/sign-in-with-apple-example) on GitHub!
 
 ### Changelog
 
+* August 23, 2019: Updates to the sample code and blog post to adapt to Apple's new requirement of using the `response_mode=form_post` parameter, as well as details on getting the user's name and email address. [okta.github.io#3022](https://github.com/oktadeveloper/okta.github.io/pull/3022).
 * Jun 7, 2019: Updates to the sample code based on some new implementation experience. Added screenshot of the permissions screen asking to hide the email address. You can see the changes to this article in [okta.github.io#2924](https://github.com/oktadeveloper/okta.github.io/pull/2924).
 * Jun 10, 2019: Fixed typo in `client_secret.rb`
 

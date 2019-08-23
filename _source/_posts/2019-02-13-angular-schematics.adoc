@@ -585,7 +585,7 @@ In the coming months, I hope to add more Schematics that allow easy integration 
 
 * link:/blog/2019/05/21/vue-schematics[Use Schematics with Vue and Add Authentication in 5 Minutes]
 * link:/blog/2019/03/05/react-schematics[Use Schematics with React and Add OpenID Connect Authentication in 5 Minutes]
-* https://scotch.io/tutorials/build-an-ionic-4-app-with-user-login-and-registration[Build an Ionic 4 App with User Login and Registration]
+* link:/blog/2019/06/20/ionic-4-tutorial-user-authentication-and-registration[Tutorial: User Login and Registration in Ionic 4]
 
 We like to write about Angular on this here blog. Here are some of our recent Angular posts:
 

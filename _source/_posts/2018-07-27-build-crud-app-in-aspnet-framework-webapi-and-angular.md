@@ -933,7 +933,7 @@ export class AppModule {}
 
 By using Okta to handle authorization we don't need to keep auth state ourselves, which makes building app much simpler.
 
-And now you're done! You have a secure ASP.NET Web API with an Angular frontend to track sugar levels (or whatever else you might want to track!). The complete and working sample that backs this tutorial is available on GitHub as [SugarLevelTracker](https://github.com/Ibro/SugarLevelTracker)
+And now you're done! You have a secure ASP.NET Web API with an Angular frontend to track sugar levels (or whatever else you might want to track!). The complete and working sample that backs this tutorial is available on GitHub as [ASPNET MVC Angular CRUD Example](https://github.com/oktadeveloper/aspnet-mvc-angular-crud-example).
 
 ## Learn More About ASP.NET Core and Angular
 

@@ -18,6 +18,14 @@ Implementing a microservices architecture in Java isn't for everyone. For that m
 
 The Java ecosystem has some well-established patterns for developing microservice architectures. If you're familiar with Spring, you'll feel right at home developing with Spring Boot and Spring Cloud. Since that's one of the quickest ways to get started, I figured I'd walk you through a quick tutorial.
 
+If you'd rather watch a video, https://youtu.be/rH-FnPC_xCA[I created a screencast of this blog post].
+
+++++
+<div style="text-align: center; margin-bottom: 1.25rem">
+<iframe width="700" height="394" style="max-width: 100%" src="https://www.youtube.com/embed/rH-FnPC_xCA" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+</div>
+++++
+
 == Create Java Microservices with Spring Cloud and Spring Boot
 
 In most of my tutorials, I show you how to build everything from scratch. Today I'd like to take a different approach and step through a pre-built example with you. Hopefully, this will be a bit shorter and easier to understand.
@@ -254,7 +262,7 @@ If you run all of these services with `./mvnw` in separate terminal windows, you
 
 image::{% asset_path 'blog/java-microservices/eureka-server.png' %}[alt=Eureka Server,width=800,align=center]
 
-If you navigate to `http://localhost:8080/cool-bars` in your browser, you'll be redirected to Okta. What the?
+If you navigate to `http://localhost:8080/cool-cars` in your browser, you'll be redirected to Okta. What the?
 
 == Secure Java Microservices with OAuth 2.0 and OIDC
 
@@ -474,7 +482,6 @@ import org.springframework.security.oauth2.client.OAuth2AuthorizedClient;
 import org.springframework.security.oauth2.client.OAuth2AuthorizedClientService;
 import org.springframework.security.oauth2.client.authentication.OAuth2AuthenticationToken;
 import org.springframework.security.oauth2.core.OAuth2AccessToken;
-import org.springframework.security.oauth2.core.oidc.OidcUserInfo;
 
 import java.util.Optional;
 
@@ -537,6 +544,7 @@ To make Spring Boot and Zuul aware of this filter, I registered it as a bean in 
 
 [source,java]
 ----
+@Bean
 public AuthorizationHeaderFilter authHeaderFilter(OAuth2AuthorizedClientService clientService) {
     return new AuthorizationHeaderFilter(clientService);
 }
