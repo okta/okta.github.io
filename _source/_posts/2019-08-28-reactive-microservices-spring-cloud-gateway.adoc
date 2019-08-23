@@ -1,0 +1,254 @@
+---
+layout: blog_post
+title: "Build and Test Reactive Microservices with Spring Cloud Gateway"
+author: mraible
+description: "This tutorial shows you how to build a reactive microservices architecture with Spring Cloud Gateway."
+tags: [java, reactive, spring cloud gateway, microservices, spring boot, spring cloud]
+tweets:
+image:
+---
+:page-liquid:
+
+So you wanna go full reactive, eh? Reactive programming is an increasingly popular way to make your applications more efficient. Instead of making a call to a resource and waiting on a response, reactive applications will asynchronously receive a response. This allows them to free up processing power and only perform processing when necessary. It also allows them to scale better.
+
+The Java ecosystem has it's share of reactive frameworks for creating applications: Play framework, Ratpack, Vert.x, and Spring WebFlux are likely familiar names if you've played in this space before. Microservices can help large teams scale, and do it quickly using any of the awesome aforementioned frameworks mentioned above.
+
+Today I'd like to show you how you can build a reactive microservices architecture using Spring Cloud Gateway, Spring Boot, and Spring WebFlux. API gateways are typically important components in a cloud-native microservices architecture. They provide the aggregation layer of all your backend microservice apps.
+
+In https://developer.okta.com/blog/2019/05/22/java-microservices-spring-boot-spring-cloud[Java Microservices with Spring Boot and Spring Cloud], I showed you how to build a similar architecture, except I used Spring MVC and Netflix Zuul. This architecture was not reactive.
+
+This tutorial shows you how to build a microservice with a REST API that returns a list of cars. You'll use service discovery with Eureka and use Spring Cloud Gateway to route requests to your backend.
+
+== Why Spring Cloud Gateway instead of Zuul?
+
+Zuul is Netflix's implementation of an API gateway. It was first released in 2013 and is not reactive. Zuul 2 is a ground-up rewrite to to make it a asynchronous non-blocking framework. Unfortunately, Spring Cloud https://github.com/spring-cloud/spring-cloud-netflix/issues/1498[does not support Zuul 2], and it likely never will.
+
+Spring Cloud Gateway is now the preferred API gateway implementation from the Spring Cloud Team. It's built on Spring 5, Reactor, and Spring WebFlux. Not only that, but it includes Hystrix circuit breaker integration and Eureka discovery. This means it has all the same features as my last example. Not only that, but it's *much* easier to integrate with OAuth 2.0! Let's dig in.
+
+== Create a Spring Cloud Gateway Project
+
+Start by creating a `discovery-service` project that includes Spring Cloud Eureka Server as a dependency.
+
+[source,shell]
+----
+http https://start.spring.io/starter.zip artifactId==discovery-service \
+  name==eureka-service baseDir==discovery-service \
+  dependencies==cloud-eureka-server | tar -xzvf -
+----
+
+TIP: The command above uses https://httpie.org/[HTTPie]. I highly recommend installing it. You can also use `curl`. Run `curl https://start.spring.io` to see the syntax.
+
+Next, create an `api-gateway` project that includes a handful of cloudy dependencies.
+
+[source,shell]
+----
+http https://start.spring.io/starter.zip artifactId==api-gateway \
+  name==api-gateway baseDir==api-gateway \
+  dependencies==actuator,cloud-eureka,cloud-feign,cloud-gateway,cloud-hystrix,webflux,lombok | tar -xzvf -
+----
+
+== Create a Reactive Microservice with Spring WebFlux
+
+The car microservice will contain a good portion of this architecture's code, because it contains a fully-functional REST API that supports CRUD (Create, Read, Update, and Delete).
+
+Create the `car-service` project using start.spring.io:
+
+[source,shell]
+----
+http https://start.spring.io/starter.zip artifactId==car-service \
+  name==car-service baseDir==car-service \
+  dependencies==actuator,cloud-eureka,webflux,data-mongodb-reactive,flapdoodle-mongo,lombok | tar -xzvf -
+----
+
+The dependencies is the interesting argument in this command. You can see that Spring WebFlux is included, as is MongoDB. Spring Data provides reactive drivers for Redis and Cassandra as well.
+
+https://r2dbc.io/[R2DBC] (Reactive Relational Database Connectivity) is an endeavor to bring a reactive programming API to SQL databases. I did not use it in this example because it's not available on start.spring.io.
+
+=== Build a REST API with Spring WebFlux
+
+Add
+
+[source,java]
+----
+import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
+
+@EnableEurekaClient
+----
+
+then data and repo
+
+[source,java]
+----
+@Document
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+class Car {
+    @Id
+    private UUID id;
+    private String name;
+    private LocalDate releaseDate;
+}
+
+interface CarRepository extends ReactiveMongoRepository<Car, UUID> {
+}
+----
+
+and rest controller
+
+[source,java]
+----
+@RestController
+class CarController {
+
+    private CarRepository carRepository;
+
+    public CarController(CarRepository carRepository) {
+        this.carRepository = carRepository;
+    }
+
+    @PostMapping("/cars")
+    @ResponseStatus(HttpStatus.CREATED)
+    public Mono<Car> addCar(@RequestBody Car car) {
+        return carRepository.save(car);
+    }
+
+    @GetMapping("/cars")
+    public Flux<Car> getCars() {
+        return carRepository.findAll();
+    }
+
+    @DeleteMapping("/cars/{id}")
+    public Mono<ResponseEntity<Void>> deleteCar(@PathVariable("id") UUID id) {
+        return carRepository.findById(id)
+                .flatMap(car -> carRepository.delete(car)
+                        .then(Mono.just(new ResponseEntity<Void>(HttpStatus.OK)))
+                )
+                .defaultIfEmpty(new ResponseEntity<>(HttpStatus.NOT_FOUND));
+    }
+}
+----
+
+=== Test Your WebFlux API with WebTestClient
+
+[source,java]
+----
+package com.example.carservice;
+
+import org.junit.Before;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.mockito.Mock;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.context.ApplicationContext;
+import org.springframework.http.MediaType;
+import org.springframework.security.test.context.support.WithMockUser;
+import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.test.web.reactive.server.WebTestClient;
+import reactor.core.publisher.Mono;
+
+import java.time.LocalDate;
+import java.time.Month;
+import java.util.Collections;
+import java.util.UUID;
+
+@RunWith(SpringRunner.class)
+@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
+public class CarServiceApplicationTests {
+
+    @Autowired
+    ApplicationContext context;
+
+    @Autowired
+    CarRepository carRepository;
+
+    WebTestClient webTestClient;
+
+    @Test
+    public void testAddCar() {
+        Car buggy = new Car(UUID.randomUUID(), "ID. BUGGY", LocalDate.of(2022, Month.DECEMBER, 1));
+
+        webTestClient.post().uri("/cars")
+                .contentType(MediaType.APPLICATION_JSON_UTF8)
+                .accept(MediaType.APPLICATION_JSON_UTF8)
+                .body(Mono.just(buggy), Car.class)
+                .exchange()
+                .expectStatus().isCreated()
+                .expectHeader().contentType(MediaType.APPLICATION_JSON_UTF8)
+                .expectBody()
+                .jsonPath("$.id").isNotEmpty()
+                .jsonPath("$.name").isEqualTo("ID. BUGGY");
+    }
+
+    @Test
+    public void testGetAllCars() {
+        webTestClient.get().uri("/cars")
+                .accept(MediaType.APPLICATION_JSON_UTF8)
+                .exchange()
+                .expectStatus().isOk()
+                .expectHeader().contentType(MediaType.APPLICATION_JSON_UTF8)
+                .expectBodyList(Car.class);
+    }
+
+    @Test
+    public void testDeleteCar() {
+        Car buzzCargo = carRepository.save(new Car(UUID.randomUUID(), "ID. BUZZ CARGO",
+                LocalDate.of(2022, Month.DECEMBER, 2))).block();
+
+        webTestClient.delete()
+                .uri("/cars/{id}", Collections.singletonMap("id", buzzCargo.getId()))
+                .exchange()
+                .expectStatus().isOk();
+    }
+}
+
+----
+
+=== Use Spring Cloud Gateway with Your Reactive Microservices
+
+// create pom.xml
+
+[source,xml]
+----
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>com.okta.developer</groupId>
+    <artifactId>reactive-parent</artifactId>
+    <version>1.0.0-SNAPSHOT</version>
+    <packaging>pom</packaging>
+    <name>reactive-parent</name>
+    <modules>
+        <module>discovery-service</module>
+        <module>car-service</module>
+        <module>api-gateway</module>
+    </modules>
+</project>
+----
+
+// setup eureka, properties, etc.
+// run and verify cool-cars works
+// how to (brief) on load balancing, failover, retry
+
+== Secure Spring Cloud Gateway with OAuth 2.0
+
+// add okta boot starter
+// create properties and config
+
+== Secure Gateway to Microservice Communication
+
+// add okta boot starter
+// create properties and config
+// notice I didn't say reactive?
+
+== Spring Security Gateway DSL
+
+// from Josh's example
+
+== Learn More about Spring Cloud Gateway and Reactive Microservices with Spring
+
+
+
