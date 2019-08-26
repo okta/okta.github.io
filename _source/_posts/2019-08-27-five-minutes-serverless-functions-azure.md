@@ -31,15 +31,15 @@ By default, an HTTP trigger returns HTTP 200 OK with an empty body in Functions 
 
 If you don't have an [Azure subscription](https://docs.microsoft.com/en-us/azure/guides/developer/azure-developer-guide#understanding-accounts-subscriptions-and-billing), create an account before you begin. After logging in, select the **Create a resource** button, type **Function App** into the search field then select it.
 
-{% img blog/five-minutes-serverless-azure/new-functions-app.png alt:"Create a new Functions App" width:"600" %}{: .center-image }
+{% img blog/five-minutes-serverless-functions-azure/new-functions-app.png alt:"Create a new Functions App" width:"600" %}{: .center-image }
 
 Enter a name for your function, adjust the rest of the settings as seen in the screenshot below and select **Create**.
 
-{% img blog/five-minutes-serverless-azure/new-functions-app-dialog.png alt:"Fill out new Functions App form" width:"400" %}{: .center-image }
+{% img blog/five-minutes-serverless-functions-azure/new-functions-app-dialog.png alt:"Fill out new Functions App form" width:"400" %}{: .center-image }
 
 Look at the bell icon to check notifications when the provisioning has been completed for your function.
 
-{% img blog/five-minutes-serverless-azure/function-provisioned.png alt:"Verify function provisioned" width:"600" %}{: .center-image }
+{% img blog/five-minutes-serverless-functions-azure/function-provisioned.png alt:"Verify function provisioned" width:"600" %}{: .center-image }
 
 Once it has successfully been deployed, click **Go to resource** to view your new function app. You can also select **Pin to dashboard** to make it easier to return to it from your dashboard for subsequent portal logins.
 
@@ -47,15 +47,15 @@ Once it has successfully been deployed, click **Go to resource** to view your ne
 
 Now it's time to add some code! Click the **+** sign next to **Functions** on the left-hand side menu, select **New Function** and leave the default naming for now. Click **Create** to get started. This function will run whenever it receives an HTTP request.
 
-{% img blog/five-minutes-serverless-azure/function-trigger.png alt:"Setup Function trigger" width:"600" %}{: .center-image }
+{% img blog/five-minutes-serverless-functions-azure/function-trigger.png alt:"Setup Function trigger" width:"600" %}{: .center-image }
 
 Your base function has been generated with some default code.
 
-{% img blog/five-minutes-serverless-azure/default-code.png alt:"Default function code" width:"800" %}{: .center-image }
+{% img blog/five-minutes-serverless-functions-azure/default-code.png alt:"Default function code" width:"800" %}{: .center-image }
 
 In your new function, click **</> Get function URL** at the top right, leave the drop-down set to **default (Function key)** and copy it. Paste the URL in another tab in your browser to test it out. You should see a response asking for a name to be passed in the query string.
 
-{% img blog/five-minutes-serverless-azure/run-function.png alt:"Run the default function" width:"600" %}{: .center-image }
+{% img blog/five-minutes-serverless-functions-azure/run-function.png alt:"Run the default function" width:"600" %}{: .center-image }
 
 ## Secure your Serverless HTTP Trigger by Adding Identity Management
 
@@ -63,13 +63,13 @@ Now that your function has been created, you might not want just anyone accessin
 
 To integrate Okta's Identity Cloud for user authentication, you'll need to [sign-up](https://developer.okta.com/signup/) for a forever-free developer account first. Once logged in, navigate to **Applications** > **Add Application.** Select the **Service** flow for machine-to-machine and click **Next**. 
 
-{% img blog/five-minutes-serverless-azure/create-okta-service.png alt:"Create an Okta service application" width:"600" %}{: .center-image }
+{% img blog/five-minutes-serverless-functions-azure/create-okta-service.png alt:"Create an Okta service application" width:"600" %}{: .center-image }
 
 Name the application "API Sample App" and click **Done**.
 
 On the API Sample App's general settings, you will see the **Client Credentials** box with the client ID and client secret in it. You will use these to authenticate a client wishing to call your API.
 
-{% img blog/five-minutes-serverless-azure/okta-app-created.png alt:"Okta Application created" width:"800" %}{: .center-image }
+{% img blog/five-minutes-serverless-functions-azure/okta-app-created.png alt:"Okta Application created" width:"800" %}{: .center-image }
 
 For each client that you want to have access to the API, you'll need to create an Okta application for it and give it the Client ID and Client Secret. If you are interested in learning more about using ASP.NET Core with client credentials in Okta, check out [this post](https://developer.okta.com/blog/2018/02/01/secure-aspnetcore-webapi-token-auth) on the Okta developer blog.
 
@@ -91,7 +91,7 @@ Lastly, you will need to add a custom scope for the client credential flow. To d
 
 Go to your function and select **Integrate** underneath it. Uncheck the POST checkbox, change the Authorization Level to **Annonymous** and click **Save**.
 
-{% img blog/five-minutes-serverless-azure/update-function-trigger.png alt:"Update function trigger" width:"800" %}{: .center-image }
+{% img blog/five-minutes-serverless-functions-azure/update-function-trigger.png alt:"Update function trigger" width:"800" %}{: .center-image }
 
 You will notice that users will not be prompted to log in because we set the access level to anonymous. Since you will be getting users from a 3rd party identity provider, you will handle the Okta token validation call from within your Azure function code. There are several ways to validate the access token generated by Okta. In this post, you will use the Introspection API endpoint.
 
@@ -161,11 +161,11 @@ Now it's time to test out what you've created from the perspective of someone wh
 
 After you give the client their **client ID** and **client secret**, they would use a testing tool like [Postman](https://www.getpostman.com/) to call Okta's token endpoint to request an access token to use for calling your API. [Okta's documentation](https://developer.okta.com/docs/guides/implement-client-creds/use-flow/) guides the client on how to make that call and quickly retrieve a usable token. Here is an example of a call to get that token using Postman.
 
-{% img blog/five-minutes-serverless-azure/postman-token.png alt:"Get access token with Postman" width:"800" %}{: .center-image }
+{% img blog/five-minutes-serverless-functions-azure/postman-token.png alt:"Get access token with Postman" width:"800" %}{: .center-image }
 
 Then, the client uses that info when calling your endpoint. The **client_id**, **client_secret** and **token** all need to be passed as header values when calling your Azure Function HTTP Trigger. You should see a 200 OK success message.
 
-{% img blog/five-minutes-serverless-azure/postman-call-function.png alt:"Call function with Postman" width:"800" %}{: .center-image }
+{% img blog/five-minutes-serverless-functions-azure/postman-call-function.png alt:"Call function with Postman" width:"800" %}{: .center-image }
 
 That's it! Pretty fast, and no IDE required.
 
