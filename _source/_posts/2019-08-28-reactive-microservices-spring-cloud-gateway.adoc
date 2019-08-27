@@ -213,7 +213,7 @@ class CarController { // <8>
 <10> Return a `Flex` publisher for multiple objects
 ====
 
-NOTE: If you're using an IDE to build your projects, you'll need to setup Lombok for your IDE[https://www.baeldung.com/lombok-ide].
+NOTE: If you're using an IDE to build your projects, you'll need to https://www.baeldung.com/lombok-ide[setup Lombok for your IDE].
 
 You'll also need to modify the `car-service` project's `application.properties` to set its name and port.
 
@@ -304,7 +304,7 @@ public class CarServiceApplicationTests {
 
 To prove it works, run `./mvnw test`. Give yourself a pat on the back when your tests pass!
 
-image::{% asset_path 'blog/spring-cloud-gateway/test-car-service.png' %}[alt=Test Car Service REST API,align=center]
+image::{% asset_path 'blog/spring-cloud-gateway/test-car-service.png' %}[alt=Test Car Service REST API,align=center,width=800]
 
 NOTE: If you're on Windows, use `mvnw test`.
 
@@ -446,6 +446,14 @@ class FaveCarsController {
 }
 ----
 
+Restart your gateway app and you should be able to see the I.D. Buzz is the only one returned.
+
+[screenshot]
+
+In case you're not familiar with the I.D. Buzz, here's a photo https://www.vw.com/electric-concepts/section/id-buzz/[from Volkswagen].
+
+image::{% asset_path 'blog/spring-cloud-gateway/id-buzz.jpg' %}[alt=I.D. Buzz,align=center]
+
 === What about Failover with Hystrix?
 
 Spring Cloud Gateway https://github.com/spring-cloud/spring-cloud-gateway/issues/658[only supports Hystrix] at the time of this writing. Direct support for Hystrix in Spring Cloud has been deprecated in favor of https://spring.io/blog/2019/04/16/introducing-spring-cloud-circuit-breaker[Spring Cloud Circuit Breaker]. Unfortunately, this library hasn't had a GA release yet, so I decided not to use it.
@@ -485,7 +493,7 @@ OAuth 2.0 is an authorization framework for delegated access to APIs. OIDC (or O
 
 You can use OAuth 2.0 and OIDC without having a cloud identity provider, by building your own server or by using an open source implementation. However, wouldn't you rather just use something that's _always on_, like Okta?
 
-If you already have an Okta account, see the **Create a Web Application in Okta** below. Otherwise, we created a new way for you to setup a developer account and an OIDC application (in under a minute!).
+If you already have an Okta account, see the **Create a Web Application in Okta** sidebar below. Otherwise, we created a new way for you to setup a developer account and an OIDC application (in under a minute!).
 
 Add the following plugin repository to your gateway project's `pom.xml`:
 
@@ -502,6 +510,24 @@ Add the following plugin repository to your gateway project's `pom.xml`:
 ----
 
 Then run `./mvnw com.okta:okta-maven-plugin:setup` to create an account and configure your Spring Boot app to work with Okta.
+
+.Create a Web Application in Okta
+****
+Log in to your Okta Developer account (or https://developer.okta.com/signup/[sign up] if you don't have an account).
+
+1. From the **Applications** page, choose **Add Application**.
+2. On the Create New Application page, select **Web**.
+3. Give your app a memorable name, add `http://localhost:8080/login/oauth2/code/okta` as a Login redirect URI, select **Refresh Token** (in addition to **Authorization Code**), and click **Done**.
+
+Copy the issuer (found under **API** > **Authorization Servers**), client ID, and client secret into `application.properties` for both projects.
+
+[source,properties]
+----
+okta.oauth2.issuer=$issuer
+okta.oauth2.client-id=$clientId
+okta.oauth2.client-secret=$clientSecret
+----
+****
 
 Next, add the https://github.com/okta/okta-spring-boot[Okta Spring Boot starter] and Spring Cloud Security to your `pom.xml`:
 
@@ -667,7 +693,7 @@ public class SecurityConfiguration {
 
 That's it! Restart your car service application and you'll be protected from anonymous intruders.
 
-[screen shot]
+[screenshot]
 
 You will need to make one small change for your gateway to talk to this protected service. It's incredibly easy and I ❤️ it!
 
