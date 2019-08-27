@@ -5,7 +5,7 @@ author: mraible
 description: "This tutorial shows you how to build a reactive microservices architecture with Spring Cloud Gateway."
 tags: [java, reactive, spring cloud gateway, microservices, spring boot, spring cloud]
 tweets:
-image:
+image: blog/spring-cloud-gateway/spring-cloud-gateway-social.png
 ---
 :page-liquid:
 
@@ -18,6 +18,8 @@ Today I'd like to show you how you can build a reactive microservices architectu
 In https://developer.okta.com/blog/2019/05/22/java-microservices-spring-boot-spring-cloud[Java Microservices with Spring Boot and Spring Cloud], I showed you how to build a similar architecture, except I used Spring MVC and Netflix Zuul. This architecture was not reactive.
 
 This tutorial shows you how to build a microservice with a REST API that returns a list of new cars. You'll use service discovery with Eureka and use Spring Cloud Gateway to route requests to the microservice. Then you'll see how to integrate Spring Security so only authenticated users can access your API gateway and your microservice.
+
+image::{% asset_path 'blog/spring-cloud-gateway/spring-cloud-gateway-oauth2.png' %}[alt=Spring Cloud Gateway + Reactive Microservices,align=center]
 
 **Prerequisites**: https://httpie.org/[HTTPie] (or cURL), https://adoptopenjdk.net/[Java] 11+, and an internet connection.
 
