@@ -5,33 +5,36 @@ author: mraible
 description: "This tutorial shows you how to build a reactive microservices architecture with Spring Cloud Gateway."
 tags: [java, reactive, spring cloud gateway, microservices, spring boot, spring cloud]
 tweets:
-image:
+- "Reactive programming is 🔥 and so are API Gateways! This tutorial shows how to build a microservices architecture with Spring Cloud Gateway and Spring WebFlux."
+- "Want to learn how to use Java and Spring to develop a reactive microservices architecture with Spring Cloud Gateway? This tutorial from @mraible shows you how!"
+- "Java + Spring Cloud Gateway + Spring WebFlux = ❤️. A tutorial with VWs from @mraible. 😃"
+image: blog/spring-cloud-gateway/spring-cloud-gateway-social.png
 ---
 :page-liquid:
 
-So you wanna go full reactive, eh? Reactive programming is an increasingly popular way to make your applications more efficient. Instead of making a call to a resource and waiting on a response, reactive applications will asynchronously receive a response. This allows them to free up processing power and only perform processing when necessary. It also allows them to scale better.
+So you wanna go full reactive, eh? Great! Reactive programming is an increasingly popular way to make your applications more efficient. Instead of making a call to a resource and waiting on a response, reactive applications asynchronously receive a response. This allows them to free up processing power, only perform processing when necessary, and scale more effectively than other systems.
 
-The Java ecosystem has it's share of reactive frameworks for creating applications: Play Framework, Ratpack, Vert.x, and Spring WebFlux are likely familiar names if you've played in this space before. Microservices can help large teams scale, and do it quickly using any of the awesome aforementioned frameworks mentioned above.
+The Java ecosystem has its fair share of reactive frameworks, including Play Framework, Ratpack, Vert.x, and Spring WebFlux. Like Reactive programming, a microservices architecture can help large teams scale quickly and is possible to build using any of the awesome aforementioned frameworks.
 
-Today I'd like to show you how you can build a reactive microservices architecture using Spring Cloud Gateway, Spring Boot, and Spring WebFlux. API gateways are typically important components in a cloud-native microservices architecture. They provide the aggregation layer of all your backend microservice apps.
+Today I'd like to show you how you can build a reactive microservices architecture using Spring Cloud Gateway, Spring Boot, and Spring WebFlux. We'll leverage Spring Cloud Gateway as API gateways are often important components in a cloud-native microservices architecture, providing the aggregation layer for all your backend microservices.
 
-In https://developer.okta.com/blog/2019/05/22/java-microservices-spring-boot-spring-cloud[Java Microservices with Spring Boot and Spring Cloud], I showed you how to build a similar architecture, except I used Spring MVC and Netflix Zuul. This architecture was not reactive.
+This tutorial shows you how to build a microservice with a REST API that returns a list of new cars. You'll use Eureka for service discovery and Spring Cloud Gateway to route requests to the microservice. Then you'll integrate Spring Security so only authenticated users can access your API gateway and microservice.
 
-This tutorial shows you how to build a microservice with a REST API that returns a list of new cars. You'll use service discovery with Eureka and use Spring Cloud Gateway to route requests to the microservice. Then you'll see how to integrate Spring Security so only authenticated users can access your API gateway and your microservice.
+image::{% asset_path 'blog/spring-cloud-gateway/spring-cloud-gateway-oauth2.png' %}[alt=Spring Cloud Gateway + Reactive Microservices,align=center]
 
 **Prerequisites**: https://httpie.org/[HTTPie] (or cURL), https://adoptopenjdk.net/[Java] 11+, and an internet connection.
 
-== Why Spring Cloud Gateway instead of Zuul?
+== Spring Cloud Gateway vs. Zuul
 
-Zuul is Netflix's implementation of an API gateway. It was first released in 2013 and is not reactive. Zuul 2 is a ground-up rewrite to to make it reactive. Unfortunately, Spring Cloud https://github.com/spring-cloud/spring-cloud-netflix/issues/1498[does not support Zuul 2], and it likely never will.
+Zuul is Netflix's API gateway. First released in 2013, Zuul was not originally reactive, but Zuul 2 is a ground-up rewrite to make it reactive. Unfortunately, Spring Cloud https://github.com/spring-cloud/spring-cloud-netflix/issues/1498[does not support Zuul 2] and it likely never will.
 
-Spring Cloud Gateway is now the preferred API gateway implementation from the Spring Cloud Team. It's built on Spring 5, Reactor, and Spring WebFlux. Not only that, but it includes circuit breaker integration and service discovery with Eureka. This means it has all the same features as my last example. Not only that, but it's *much* easier to integrate with OAuth 2.0!
+Spring Cloud Gateway is now the preferred API gateway implementation from the Spring Cloud Team. It's built on Spring 5, Reactor, and Spring WebFlux. Not only that, it also includes circuit breaker integration, service discovery with Eureka, and is *much* easier to integrate with OAuth 2.0!
 
 Let's dig in.
 
 == Create a Spring Cloud Eureka Server Project
 
-Start by creating a directory to hold all your projects, for example `spring-cloud-gateway`. Navigate to it in a terminal window and create a `discovery-service` project that includes Spring Cloud Eureka Server as a dependency.
+Start by creating a directory to hold all your projects, for example, `spring-cloud-gateway`. Navigate to it in a terminal window and create a `discovery-service` project that includes Spring Cloud Eureka Server as a dependency.
 
 [source,shell]
 ----
@@ -61,8 +64,6 @@ server.port=8761
 eureka.client.register-with-eureka=false
 ----
 
-Start the project using `./mvnw spring-boot:run` or by running it in your IDE.
-
 To make the `discovery-service` run on Java 11+, add a dependency on JAXB.
 
 [source,xml]
@@ -72,6 +73,8 @@ To make the `discovery-service` run on Java 11+, add a dependency on JAXB.
     <artifactId>jaxb-runtime</artifactId>
 </dependency>
 ----
+
+Start the project using `./mvnw spring-boot:run` or by running it in your IDE.
 
 == Create a Spring Cloud Gateway Project
 
@@ -88,7 +91,7 @@ We'll come back to configuring this project in a minute.
 
 == Create a Reactive Microservice with Spring WebFlux
 
-The car microservice will contain a good portion of this architecture's code, because it contains a fully-functional REST API that supports CRUD (Create, Read, Update, and Delete).
+The car microservice will contain a significant portion of this example's code because it contains a fully-functional REST API that supports CRUD (Create, Read, Update, and Delete).
 
 Create the `car-service` project using start.spring.io:
 
@@ -99,19 +102,19 @@ http https://start.spring.io/starter.zip javaVersion==11 artifactId==car-service
   dependencies==actuator,cloud-eureka,webflux,data-mongodb-reactive,flapdoodle-mongo,lombok | tar -xzvf -
 ----
 
-The dependencies is the interesting argument in this command. You can see that Spring WebFlux is included, as is MongoDB. Spring Data provides reactive drivers for Redis and Cassandra as well.
+The `dependencies` argument is interesting in this command. You can see that Spring WebFlux is included, as is MongoDB. Spring Data provides reactive drivers for Redis and Cassandra as well.
 
-https://r2dbc.io/[R2DBC] (Reactive Relational Database Connectivity) is an endeavor to bring a reactive programming API to SQL databases. I did not use it in this example because it's not yet available on start.spring.io.
+You may also be interested in https://r2dbc.io/[R2DBC] (Reactive Relational Database Connectivity) - an endeavor to bring a reactive programming API to SQL databases. I did not use it in this example because it's not yet available on start.spring.io.
 
 == Build a REST API with Spring WebFlux
 
-I'm a big fan of VWs, especially classic ones like the bus and the bug. Did you know that VW has a bunch of electric vehicles coming out in the next few years? I'm really excited by the ID Buzz! It has classic curves, and is all electric. It even has 350+ horsepower!
+I'm a big fan of VWs, especially classic ones like the bus and the bug. Did you know that VW has a bunch of electric vehicles coming out in the next few years? I'm really excited by the ID Buzz! It has classic curves and is all-electric. It even has 350+ horsepower!
 
 In case you're not familiar with the ID Buzz, here's a photo https://www.vw.com/electric-concepts/section/id-buzz/[from Volkswagen].
 
 image::{% asset_path 'blog/spring-cloud-gateway/id-buzz.jpg' %}[alt=I.D. Buzz,align=center]
 
-Let's have some fun with this API example, and use the electric VWs as data. This API will track the various cars names and release dates.
+Let's have some fun with this API example and use the electric VWs for our data set. This API will track the various car names and release dates.
 
 Add Eureka registration, sample data initialization, and a reactive REST API to `src/main/java/.../CarServiceApplication.java`:
 
@@ -264,23 +267,30 @@ brew install mongodb-community@4.2
 mongod
 ----
 
-=== Streaming Data with WebFlux
+Or, use Docker:
 
-This completes everything you need to do to build a REST API with Spring WebFlux?
+[source,shell]
+----
+docker run -d -it -p 27017:27017 mongo
+----
+
+=== Stream Data with WebFlux
+
+This completes everything you need to do to build a REST API with Spring WebFlux.
 
 "But wait!" you might say. "I thought WebFlux was all about streaming data?"
 
 In this particular example, you can still stream data from the `/cars` endpoint, but not in a browser.
 
-A browser has no way to consume a stream other than using Server-Sent Events or WebSockets. Non-browser clients can get a JSON stream by sending an `Accept` header with a value of `application/stream+json`. Thanks to https://www.callicoder.com/reactive-rest-apis-spring-webflux-reactive-mongo/[Rajeev Singh] for the tip.
+A browser has no way to consume a stream other than using Server-Sent Events or WebSockets. Non-browser clients however can get a JSON stream by sending an `Accept` header with a value of `application/stream+json` (thanks to https://www.callicoder.com/reactive-rest-apis-spring-webflux-reactive-mongo/[Rajeev Singh] for the tip).
 
-You could test everything works by firing up your browser and using HTTPie to make requests. However, it's much better to write automated tests!
+You _could_ test everything works at this point by firing up your browser and using HTTPie to make requests. However, it's much better to write automated tests!
 
 === Test Your WebFlux API with WebTestClient
 
-WebClient is part of Spring WebFlux. It can be useful for making reactive requests, receiving responses, and populating objects with the payload. A companion class, WebTestClient, can be used to test your WebFlux API. It contains request methods that are similar to WebClient, as well as methods to check the response body, status, and headers.
+WebClient ships as part of Spring WebFlux and can be useful for making reactive requests, receiving responses, and populating objects with the payload. A companion class, WebTestClient, can be used to test your WebFlux API. It contains request methods that are similar to WebClient, as well as methods to check the response body, status, and headers.
 
-Modify the `src/test/java/.../CarServiceApplicationTests.java` class in the `car-service` project to have the code below.
+Modify the `src/test/java/.../CarServiceApplicationTests.java` class in the `car-service` project to contain the code below.
 
 [source,java]
 ----
@@ -302,7 +312,7 @@ import java.util.UUID;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT,
-		properties = {"spring.cloud.discovery.enabled = false"})
+        properties = {"spring.cloud.discovery.enabled = false"})
 public class CarServiceApplicationTests {
 
     @Autowired
@@ -356,9 +366,9 @@ image::{% asset_path 'blog/spring-cloud-gateway/test-car-service.png' %}[alt=Tes
 
 NOTE: If you're on Windows, use `mvnw test`.
 
-== Use Spring Cloud Gateway with Your Reactive Microservices
+== Use Spring Cloud Gateway with Reactive Microservices
 
-To make editing all three projects in the same IDE window, I've found it useful to create an aggregator `pom.xml`. Create a `pom.xml` file in the parent directory of your projects and copy the XML below into it.
+To edit all three projects in the same IDE window, I find it useful to create an aggregator `pom.xml`. Create a `pom.xml` file in the parent directory of your projects and copy the XML below into it.
 
 [source,xml]
 ----
@@ -379,9 +389,9 @@ To make editing all three projects in the same IDE window, I've found it useful 
 </project>
 ----
 
-After creating this file, you should be able to open it in your IDE as a project, and be able to navigate between projects easily.
+After creating this file, you should be able to open it in your IDE as a project and navigate between projects easily.
 
-In the `api-gateway` project, add `@EnableEurekaClient` to the main class so it's Eureka-aware.
+In the `api-gateway` project, add `@EnableEurekaClient` to the main class to make it Eureka-aware.
 
 [source,java]
 ----
@@ -392,14 +402,14 @@ import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
 public class ApiGatewayApplication {...}
 ----
 
-Then, modify `src/main/resources/application.properties` file to configure the application name.
+Then, modify the `src/main/resources/application.properties` file to configure the application name.
 
 [source,properties]
 ----
 spring.application.name=gateway
 ----
 
-Create a `RouteLocator` bean in `ApiGatewayApplication` to configure routes. You can do configure Spring Cloud Gateway with YAML, but I prefer Java.
+Create a `RouteLocator` bean in `ApiGatewayApplication` to configure routes. You can configure Spring Cloud Gateway with YAML, but I prefer Java.
 
 [source,java]
 ----
@@ -416,17 +426,17 @@ import org.springframework.context.annotation.Bean;
 @SpringBootApplication
 public class ApiGatewayApplication {
 
-	public static void main(String[] args) {
-		SpringApplication.run(ApiGatewayApplication.class, args);
-	}
+    public static void main(String[] args) {
+        SpringApplication.run(ApiGatewayApplication.class, args);
+    }
 
-	@Bean
-	public RouteLocator customRouteLocator(RouteLocatorBuilder builder) {
-		return builder.routes()
-				.route("car-service", r -> r.path("/cars")
-						.uri("lb://car-service/cars"))
-				.build();
-	}
+    @Bean
+    public RouteLocator customRouteLocator(RouteLocatorBuilder builder) {
+        return builder.routes()
+                .route("car-service", r -> r.path("/cars")
+                        .uri("lb://car-service"))
+                .build();
+    }
 }
 ----
 
@@ -463,11 +473,11 @@ transfer-encoding: chunked
 ]
 ----
 
-=== Add a REST API for Retrieving Favorite Cars
+=== Add a REST API to Retrieve Your Favorite Cars
 
 Create a `/fave-cars` endpoint that strips out cars that aren't your favorite.
 
-First, add a `WebClient.Builder` bean that is load balanced.
+First, add a load-balanced `WebClient.Builder` bean.
 
 [source,java]
 ----
@@ -487,7 +497,7 @@ class Car {...}
 class FaveCarsController {...}
 ----
 
-Use WebClient to retrieve the cars, and filter out the ones that aren't loved.
+Use WebClient to retrieve the cars and filter out the ones you don't love.
 
 [source,java]
 ----
@@ -529,13 +539,13 @@ import org.springframework.web.reactive.function.client.WebClient;
 import reactor.core.publisher.Flux;
 ----
 
-Restart your gateway app and you should be able to see the I.D. Buzz is the only one returned from `http://localhost:8080/fave-cars`.
+Restart your gateway app to see the `http://localhost:8080/fave-cars` endpoint only returns the ID Buzz.
 
 image::{% asset_path 'blog/spring-cloud-gateway/fave-cars.png' %}[alt=I.D. Buzz,align=center]
 
 === What about Failover with Hystrix?
 
-Spring Cloud Gateway https://github.com/spring-cloud/spring-cloud-gateway/issues/658[only supports Hystrix] at the time of this writing. Direct support for Hystrix in Spring Cloud has been deprecated in favor of https://spring.io/blog/2019/04/16/introducing-spring-cloud-circuit-breaker[Spring Cloud Circuit Breaker]. Unfortunately, this library hasn't had a GA release yet, so I decided not to use it.
+Spring Cloud Gateway https://github.com/spring-cloud/spring-cloud-gateway/issues/658[only supports Hystrix] at the time of this writing. Spring Cloud deprecated direct support for Hystrix in favor of https://spring.io/blog/2019/04/16/introducing-spring-cloud-circuit-breaker[Spring Cloud Circuit Breaker]. Unfortunately, this library hasn't had a GA release yet, so I decided not to use it.
 
 To use Hystrix with Spring Cloud Gateway, you can add a filter to your `car-service` route, like so:
 
@@ -548,7 +558,7 @@ To use Hystrix with Spring Cloud Gateway, you can add a filter to your `car-serv
 .build();
 ----
 
-Then create a `CarsFallback` controller that handles the `/cars-fallback` route.
+Then create a `CarsFallback` controller to handle the `/cars-fallback` route.
 
 [source,java]
 ----
@@ -562,9 +572,9 @@ class CarsFallback {
 }
 ----
 
-Restart your gateway and confirm `http://localhost:8080/cars` works. Then shut down the car service, try again, and you'll see it returns an empty array. Restart the car service, and you'll see the list populated again.
+First, restart your gateway and confirm `http://localhost:8080/cars` works. Then shut down the car service, try again, and you'll see it now returns an empty array. Restart the car service and you'll see the list populated again.
 
-You've built a reactive microservices architecture with Spring Cloud Gateway and Spring WebFlux, now let's see how to secure it!
+You've built a resilient and reactive microservices architecture with Spring Cloud Gateway and Spring WebFlux. Now let's see how to secure it!
 
 === What about Feign with Spring Cloud Gateway?
 
@@ -574,9 +584,9 @@ If you'd like to use Feign in a WebFlux app, see the https://github.com/kptfh/fe
 
 OAuth 2.0 is an authorization framework for delegated access to APIs. OIDC (or OpenID Connect) is a thin layer on top of OAuth 2.0 that provides authentication. Spring Security has excellent support for both frameworks and so does Okta!
 
-You can use OAuth 2.0 and OIDC without having a cloud identity provider, by building your own server or by using an open source implementation. However, wouldn't you rather just use something that's _always on_, like Okta?
+You can use OAuth 2.0 and OIDC without a cloud identity provider by building your own server or by using an open-source implementation. However, wouldn't you rather just use something that's _always on_, like Okta?
 
-If you already have an Okta account, see the **Create a Web Application in Okta** sidebar below. Otherwise, we created a Maven plugin that configures a developer account + an OIDC app (in under a minute!).
+If you already have an Okta account, see the **Create a Web Application in Okta** sidebar below. Otherwise, we created a Maven plugin that configures a free Okta developer account + an OIDC app (in under a minute!).
 
 To use it, add the following plugin repository to your gateway project's `pom.xml`:
 
@@ -633,13 +643,13 @@ Next, add the https://github.com/okta/okta-spring-boot[Okta Spring Boot starter]
 </dependency>
 ----
 
-This is all you need to do to add OIDC login with Okta! Restart your Gateway app and navigate to `http://localhost:8080/fave-cars` in your browser, you'll be redirected to Okta to authorize the user.
+This is all you need to do to add OIDC login with Okta! Restart your Gateway app and navigate to `http://localhost:8080/fave-cars` in your browser to be redirected to Okta for user authorization.
 
 image::{% asset_path 'blog/spring-cloud-gateway/okta-sign-in.png' %}[alt=Okta Sign In,align=center]
 
 === Make Your Gateway an OAuth 2.0 Resource Server
 
-It's likely you won't be building the UI for your app on the gateway itself. You'll probably use a SPA or mobile app instead. To configure your gateway to operate as a resource server (that looks for an `Authorization` header with a bearer token), add a new `SecurityConfiguration` class in the same directory as your main class.
+You likely won't build the UI for your app on the gateway itself. You'll probably use a SPA or mobile app instead. To configure your gateway to operate as a resource server (that looks for an `Authorization` header with a bearer token), add a new `SecurityConfiguration` class in the same directory as your main class.
 
 [source,java]
 ----
@@ -702,11 +712,11 @@ import org.springframework.web.cors.reactive.CorsWebFilter;
 import org.springframework.web.cors.reactive.UrlBasedCorsConfigurationSource;
 ----
 
-Spring Cloud Gateway's documentation shows you can configure CORS with https://cloud.spring.io/spring-cloud-gateway/multi/multi__cors_configuration.html[YAML] or with https://www.baeldung.com/spring-webflux-cors#global[`WebFluxConfigurer`]. I was unable to get either one to work.
+Spring Cloud Gateway's documentation explains how to configure CORS with https://cloud.spring.io/spring-cloud-gateway/multi/multi__cors_configuration.html[YAML] or with https://www.baeldung.com/spring-webflux-cors#global[`WebFluxConfigurer`]. Unfortunately, I was unable to get either one to work.
 
-== Test Your Secure Gateway with WebClientTest and JWT
+== Test Your Gateway with WebTestClient and JWT
 
-You can add a JWT to the `Authorization` header in WebClientTest and mock the decoding in `ReactiveJwtDecoder`. Replace the code in `ApiGatewayApplicationTests` to prove that CORS is configured properly.
+If you configured CORS in your gateway, you can test it works with WebTestClient. Replace the code in `ApiGatewayApplicationTests` with the following.
 
 ====
 [source,java]
@@ -734,47 +744,46 @@ import static org.mockito.Mockito.when;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT,
-		properties = {"spring.cloud.discovery.enabled = false"})
+        properties = {"spring.cloud.discovery.enabled = false"})
 public class ApiGatewayApplicationTests {
 
-	@Autowired
-	WebTestClient webTestClient;
+    @Autowired
+    WebTestClient webTestClient;
 
-	@MockBean // <1>
-	ReactiveJwtDecoder jwtDecoder;
+    @MockBean // <1>
+    ReactiveJwtDecoder jwtDecoder;
 
-	@Test
-	public void testCorsConfiguration() {
-		Jwt jwt = jwt(); // <2>
-		when(this.jwtDecoder.decode(anyString())).thenReturn(Mono.just(jwt)); // <3>
-		WebTestClient.ResponseSpec response = webTestClient.put()
-				.uri("/")
-				.headers(addJwt(jwt)) // <4>
-				.header("Origin", "http://example.com")
-				.exchange();
+    @Test
+    public void testCorsConfiguration() {
+        Jwt jwt = jwt(); // <2>
+        when(this.jwtDecoder.decode(anyString())).thenReturn(Mono.just(jwt)); // <3>
+        WebTestClient.ResponseSpec response = webTestClient.put().uri("/")
+                .headers(addJwt(jwt)) // <4>
+                .header("Origin", "http://example.com")
+                .exchange();
 
-		response.expectHeader().valueEquals("Access-Control-Allow-Origin", "*");
-	}
+        response.expectHeader().valueEquals("Access-Control-Allow-Origin", "*");
+    }
 
-	private Jwt jwt() {
-		return new Jwt("token", null, null,
-				Map.of("alg", "none"), Map.of("sub", "betsy"));
-	}
+    private Jwt jwt() {
+        return new Jwt("token", null, null,
+                Map.of("alg", "none"), Map.of("sub", "betsy"));
+    }
 
-	private Consumer<HttpHeaders> addJwt(Jwt jwt) {
-		return headers -> headers.setBearerAuth(jwt.getTokenValue());
-	}
+    private Consumer<HttpHeaders> addJwt(Jwt jwt) {
+        return headers -> headers.setBearerAuth(jwt.getTokenValue());
+    }
 }
 ----
 <1> Mock `ReactiveJwtDecoder` so you can set expectations and return mocks when it decodes
 <2> Create a new JWT
 <3> Return the same JWT when it's decoded
-<4> Add the JWT to the `Authorization` header with a `Bearer` prefix.
+<4> Add the JWT to the `Authorization` header with a `Bearer` prefix
 ====
 
-I like how `WebTestClient` allows setting the security headers so easily!
+I like how `WebTestClient` allows you to set the security headers so easily!
 
-You've configured Spring Cloud Gateway to use OIDC login and function as an OAuth 2.0 resource server. However, the car service is still available on port `8081`. Let's fix that so only the gateway can talk to it.
+You've configured Spring Cloud Gateway to use OIDC login and function as an OAuth 2.0 resource server, but the car service is still available on port `8081`. Let's fix that so only the gateway can talk to it.
 
 == Secure Gateway to Microservice Communication
 
@@ -789,7 +798,7 @@ Add the Okta Spring Boot starter to `car-service/pom.xml`:
 </dependency>
 ----
 
-Copy the `okta.*` properties from the gateway's `application.properties` to the car service's. Then create a `SecurityConfiguration` class that makes the app an OAuth 2.0 resource server.
+Copy the `okta.*` properties from the gateway's `application.properties` to the car service's. Then create a `SecurityConfiguration` class to make the app an OAuth 2.0 resource server.
 
 [source,java]
 ----
@@ -824,7 +833,7 @@ public class SecurityConfiguration {
 }
 ----
 
-That's it! Restart your car service application and you'll be protected from anonymous intruders.
+That's it! Restart your car service application and it's now protected from anonymous intruders.
 
 [source,shell]
 ----
@@ -837,7 +846,7 @@ Content-Type: text/plain
 401 Unauthorized
 ----
 
-== Test Your Microservice with WebClientTest and JWT
+== Test Your Microservice with WebTestClient and JWT
 
 The tests you added in the `car-service` project will no longer work now that you've enabled security. Modify the code in `CarServiceApplicationTests.java` to add JWT access tokens to each request.
 
@@ -941,7 +950,7 @@ public class CarServiceApplicationTests {
 }
 ----
 
-Run the test and everything should pass!
+Run the test again and everything should pass!
 
 == Mock JWT Support in Spring Security 5.2
 
@@ -952,13 +961,13 @@ Kudos to https://spring.io/team/jzheaux[Josh Cummings] for his help with JWTs an
 this.webTestClient.mutateWith(jwt()).post(...)
 ----
 
-He also provided an https://github.com/spring-projects/spring-security/blob/master/samples/boot/oauth2resourceserver-webflux/src/test/java/sample/OAuth2ResourceServerControllerTests.java[using mockJwt with a reactive application], which is based on functionality available in 5.2.0.M3.
+Josh also provided an https://github.com/spring-projects/spring-security/blob/master/samples/boot/oauth2resourceserver-webflux/src/test/java/sample/OAuth2ResourceServerControllerTests.java[example test showing how to mock a JWT's subject, scope, and claims]. This code is based on new functionality in Spring Security 5.2.0.M3.
 
 The future is bright for OAuth 2.0 and JWT support in Spring Security land! 😎
 
 == Relay the Access Token: Gateway to Microservice
 
-You will need to make one small change for your gateway to talk to this protected service. It's incredibly easy and I ❤️ it!
+You only need to make one small change for your gateway to talk to this protected service. It's incredibly easy and I ❤️ it!
 
 In `ApiGatewayApplication.java`, add a filter that applies the `TokenRelayGatewayFilterFactory` from Spring Cloud Security.
 
@@ -981,10 +990,7 @@ NOTE: This relay factory does not https://github.com/spring-cloud/spring-cloud-s
 
 Restart your API gateway and you should be able to view `http://localhost:8080/cars` and have everything work as expected.
 
-// todo: why does http://localhost:8080/fave-cars result in:
-// Content type 'text/html' not supported for bodyType=com.example.apigateway.Car
-
-Pretty sweet, don't you think?! This is much easier than the `AuthorizationHeaderFilter` I needed to create for Zuul.
+Pretty sweet, don't you think?!
 
 == Learn More about Spring Cloud Gateway and Reactive Microservices with Spring
 
@@ -1012,4 +1018,3 @@ To learn more about microservices and reactive programming with Java and Spring,
 * link:/blog/2018/09/24/reactive-apis-with-spring-webflux[Build Reactive APIs with Spring WebFlux]
 
 If you liked this tutorial, follows https://twitter.com/oktadev[@oktadev] on Twitter. We also post screencasts to https://youtube.com/c/oktadev[our YouTube channel] on a regular basis.
-
