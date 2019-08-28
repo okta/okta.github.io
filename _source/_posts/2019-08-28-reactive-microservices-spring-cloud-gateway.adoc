@@ -1017,4 +1017,4 @@ To learn more about microservices and reactive programming with Java and Spring,
 * link:/blog/2019/02/28/spring-microservices-docker[Build Spring Microservices and Dockerize Them for Production]
 * link:/blog/2018/09/24/reactive-apis-with-spring-webflux[Build Reactive APIs with Spring WebFlux]
 
-If you liked this tutorial, follows https://twitter.com/oktadev[@oktadev] on Twitter. We also post screencasts to https://youtube.com/c/oktadev[our YouTube channel] on a regular basis.
+If you liked this tutorial, follow https://twitter.com/oktadev[@oktadev] on Twitter. We also publish screencasts to https://youtube.com/c/oktadev[our YouTube channel] on a regular basis.
