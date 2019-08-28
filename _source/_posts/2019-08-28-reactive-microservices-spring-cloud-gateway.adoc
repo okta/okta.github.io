@@ -1,6 +1,6 @@
 ---
 layout: blog_post
-title: "Build and Test Reactive Microservices with Spring Cloud Gateway"
+title: "Secure Reactive Microservices with Spring Cloud Gateway"
 author: mraible
 description: "This tutorial shows you how to build a reactive microservices architecture with Spring Cloud Gateway."
 tags: [java, reactive, spring cloud gateway, microservices, spring boot, spring cloud]
