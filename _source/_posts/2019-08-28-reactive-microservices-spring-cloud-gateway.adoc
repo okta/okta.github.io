@@ -588,21 +588,7 @@ You can use OAuth 2.0 and OIDC without a cloud identity provider by building you
 
 If you already have an Okta account, see the **Create a Web Application in Okta** sidebar below. Otherwise, we created a Maven plugin that configures a free Okta developer account + an OIDC app (in under a minute!).
 
-To use it, add the following plugin repository to your gateway project's `pom.xml`:
-
-[source,xml]
-----
-<pluginRepositories>
-    <pluginRepository>
-        <id>ossrh</id>
-        <releases><enabled>false</enabled></releases>
-        <snapshots><enabled>true</enabled></snapshots>
-        <url>https://oss.sonatype.org/content/repositories/snapshots</url>
-    </pluginRepository>
-</pluginRepositories>
-----
-
-Then run `./mvnw com.okta:okta-maven-plugin:setup` to create an account and configure your Spring Boot app to work with Okta.
+To use it run: `./mvnw com.okta:okta-maven-plugin:setup` to create an account and configure your Spring Boot app to work with Okta.
 
 ++++
 <div style="text-align: center">
