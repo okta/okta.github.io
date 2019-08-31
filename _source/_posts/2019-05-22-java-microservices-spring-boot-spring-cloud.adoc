@@ -77,7 +77,7 @@ The other two applications worked fine out-of-the-box on Java 11 with no changes
 
 == Java Service Discovery with Netflix Eureka
 
-The `discovery-service` is configured the same as you would most Eureka servers. It as an `@EnableEurekaServer` annotation on its main class and properties that set its port and turn off discovery.
+The `discovery-service` is configured the same as you would most Eureka servers. It has an `@EnableEurekaServer` annotation on its main class and properties that set its port and turn off discovery.
 
 [source,properties]
 ----
