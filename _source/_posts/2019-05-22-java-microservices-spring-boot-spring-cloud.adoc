@@ -8,7 +8,7 @@ tweets:
 - "The Java ecosystem has some well-established patterns for developing microservice architectures. If you're familiar with Spring, you'll feel right at home developing with Spring Boot and Spring Cloud."
 - "Want to learn how to use Java and Spring to develop a microservices architecture? This tutorial from @mraible shows you how!"
 - "Java + Spring Boot + Spring Cloud = 💚 for microservices by @mraible."
-image: blog/featured/okta-java-short-skew.jpg
+image: blog/java-microservices/java-microservices.png
 ---
 :page-liquid:
 
@@ -637,6 +637,7 @@ You can find all the code shown in this tutorial https://github.com/oktadevelope
 We're big fans of Spring Boot, Spring Cloud, and microservices on this blog. Here are several other posts you might find interesting:
 
 * link:/blog/2019/05/23/java-microservices-spring-cloud-config[Java Microservices with Spring Cloud Config and JHipster]
+* link:/blog/2019/08/28/reactive-microservices-spring-cloud-gateway[Secure Reactive Microservices with Spring Cloud Gateway]
 * link:/blog/2019/05/13/angular-8-spring-boot-2[Angular 8 + Spring Boot 2.2: Build a CRUD App Today!]
 * link:/blog/2019/05/15/spring-boot-login-options[A Quick Guide to Spring Boot Login Options]
 * link:/blog/2019/04/01/spring-boot-microservices-with-kubernetes[Build a Microservice Architecture with Spring Boot and Kubernetes]

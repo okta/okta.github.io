@@ -410,6 +410,7 @@ You can find all the code shown in this tutorial https://github.com/oktadevelope
 We're big fans of Spring Boot, Spring Cloud, and JHipster on this blog. Here are a few other posts you might find interesting:
 
 * link:/blog/2019/05/22/java-microservices-spring-boot-spring-cloud[Java Microservices with Spring Boot and Spring Cloud]
+* link:/blog/2019/08/28/reactive-microservices-spring-cloud-gateway[Secure Reactive Microservices with Spring Cloud Gateway]
 * link:/blog/2019/04/01/spring-boot-microservices-with-kubernetes[Build a Microservice Architecture with Spring Boot and Kubernetes]
 * link:/blog/2019/02/28/spring-microservices-docker[Build Spring Microservices and Dockerize Them for Production]
 * link:/blog/2019/04/04/java-11-java-12-jhipster-oidc[Better, Faster, Lighter Java with Java 12 and JHipster 6]

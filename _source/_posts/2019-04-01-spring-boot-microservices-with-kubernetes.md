@@ -915,8 +915,10 @@ You can find the source code for this example on GitHub at [oktadeveloper/okta-s
 
 If you're into microservices and Spring Boot, you might like these posts too:
 
+* [Java Microservices with Spring Boot and Spring Cloud](/blog/2019/05/22/java-microservices-spring-boot-spring-cloud)
+* [Java Microservices with Spring Cloud Config and JHipster](/blog/2019/05/23/java-microservices-spring-cloud-config)
+* [Secure Reactive Microservices with Spring Cloud Gateway](/blog/2019/08/28/reactive-microservices-spring-cloud-gateway)
 * [Build Spring Microservices and Dockerize Them for Production](/blog/2019/02/28/spring-microservices-docker)
 * [Secure Service-to-Service Spring Microservices with HTTPS and OAuth 2.0](/blog/2019/03/07/spring-microservices-https-oauth2)
-* [Build and Secure Microservices with Spring Boot 2.0 and OAuth 2.0](/blog/2018/05/17/microservices-spring-boot-2-oauth)
 
 If you have any questions about this post, please add a comment below. For more awesome content, follow [@oktadev](https://twitter.com/oktadev) on Twitter, like us [on Facebook](https://www.facebook.com/oktadevelopers/), or subscribe to [our YouTube channel](https://www.youtube.com/channel/UC5AMiWqFVFxF1q9Ya1FuZ_Q).
