@@ -37,7 +37,7 @@ An alternative form of authentication for REST APIs are tokens. Tokens are typic
 
 OAuth 2 is a secure token-based authentication mechanism that you can use in an API for secure user authentication and authorization. After initially authorizing a requesting party with passwords or API keys, it then issues an access token. A common token architecture you can use along with OAuth 2 is the JSON Web Token (JWT). JWTs are digitally-signed authentication tokens containing JSON-formatted data about the user.
 
-JWTs can hold more data than traditional API keys thanks to a feature called claims, which is a set of key/value pairs. These key/value pairs hold information such as the token's expiry date (`exp`), the issuer (`iss`), the audience for the token (`aud`), and the earliest time and date to use it (`nbf', or not before time). The claims feature is extensible, so you can create custom claims that you agree with other parties.
+JWTs can hold more data than traditional API keys thanks to a feature called claims, which is a set of key/value pairs. These key/value pairs hold information such as the token's expiry date (`exp`), the issuer (`iss`), the audience for the token (`aud`), and the earliest time and date to use it (`nbf`, or not before time). The claims feature is extensible, so you can create custom claims that you agree with other parties.
 
 That's useful when federating identity with JWTs. If another online service trusts yours, it can accept a JWT that you already issued for one of your users without ID verification. Given the propensity for developers to mash up multiple REST APIs in a single application, federation is a neat use case for this token-based system.
 
