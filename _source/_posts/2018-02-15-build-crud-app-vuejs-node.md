@@ -16,11 +16,11 @@ I've danced the JavaScript framework shuffle for years starting with jQuery, the
 This tutorial will take you step by step through scaffolding a Vue.js project, offloading secure authentication to [Okta's OpenID Connect API (OIDC)](/docs/api/resources/oidc), locking down protected routes, and performing CRUD operations through a backend REST API server. This tutorial uses the following technologies but doesn't require intimate knowledge to follow along:
 
 - Vue.js with [vue-cli](https://github.com/vuejs/vue-cli), [vue-router](https://github.com/vuejs/vue-router), and [Okta Vue SDK](https://github.com/okta/okta-oidc-js/tree/master/packages/okta-vue)
-- Node with [Express](https://github.com/expressjs/express), [Okta JWT Verifier](https://github.com/okta/okta-oidc-js/tree/master/packages/jwt-verifier), [Sequelize](https://github.com/sequelize/sequelize), and [Epilogue](https://github.com/dchester/epilogue)
+- Node with [Express](https://github.com/expressjs/express), [Okta JWT Verifier](https://github.com/okta/okta-oidc-js/tree/master/packages/jwt-verifier), [Sequelize](https://github.com/sequelize/sequelize), and [Finale](https://github.com/tommybananas/finale)
 
 ## About Vue.js
 
-Vue.js is a robust but simple Javascript framework. It has one of the lowest barriers to entry of any modern framework while providing all the required features for high performance web applications.
+Vue.js is a robust but simple JavaScript framework. It has one of the lowest barriers to entry of any modern framework while providing all the required features for high performance web applications.
 
 {% img blog/vue-crud-node/vue-homepage.png alt:"Vue.js Homepage" width:"800" %}{: .center-image }
 
@@ -28,7 +28,7 @@ This tutorial covers two primary builds, a frontend web app and backend REST API
 
 [Okta's OpenID Connect (OIDC)](/docs/api/resources/oidc) will handle our web app's authentication through the use of [Okta's Vue SDK](https://github.com/okta/okta-oidc-js/tree/master/packages/okta-vue). If an unauthenticated user navigates to the posts manager, the web app should attempt to authenticate the user.
 
-The server will run [Express](https://www.expressjs.com/) with [Sequelize](http://docs.sequelizejs.com/) and [Epilogue](https://github.com/dchester/epilogue). At a high level, with Sequelize and Epilogue you can quickly generate dynamic REST endpoints with just a few lines of code.
+The server will run [Express](https://www.expressjs.com/) with [Sequelize](http://docs.sequelizejs.com/) and [Finale](https://github.com/tommybananas/finale). At a high level, with Sequelize and Finale you can quickly generate dynamic REST endpoints with just a few lines of code.
 
 You will use JWT-based authentication when making requests from the web app and [Okta's JWT Verifier](https://github.com/okta/okta-oidc-js/tree/master/packages/jwt-verifier) in an Express middleware to validate the token. Your app will expose the following endpoints which all require requests to have a valid access token.
 
@@ -352,7 +352,7 @@ Clicking on **Posts Manager** link should render the protected component.
 Now that users can securely authenticate, you can build the REST API server to perform CRUD operations on a post model. Add the following dependencies to your project:
 
 ```
-npm i express@4.16.3 cors@2.8.4 @okta/jwt-verifier@0.0.11 sequelize@4.37.6 sqlite3@4.0.0 epilogue@0.7.1 axios@0.18.0
+npm i express@4.16.3 cors@2.8.4 @okta/jwt-verifier@0.0.11 sequelize@4.37.6 sqlite3@4.0.0 finale-rest@1.0.6 axios@0.18.0
 ```
 
 Then, create the file  `./src/server.js` and paste the following code.
@@ -362,7 +362,7 @@ const express = require('express')
 const cors = require('cors')
 const bodyParser = require('body-parser')
 const Sequelize = require('sequelize')
-const epilogue = require('epilogue')
+const finale = require('finale-rest')
 const OktaJwtVerifier = require('@okta/jwt-verifier')
 
 const oktaJwtVerifier = new OktaJwtVerifier({
@@ -406,14 +406,14 @@ let Post = database.define('posts', {
   body: Sequelize.TEXT
 })
 
-// Initialize epilogue
-epilogue.initialize({
+// Initialize finale
+finale.initialize({
   app: app,
   sequelize: database
 })
 
 // Create the dynamic REST resource for our Post model
-let userResource = epilogue.resource({
+let userResource = finale.resource({
   model: Post,
   endpoints: ['/posts', '/posts/:id']
 })
@@ -451,19 +451,19 @@ let Post = database.define('posts', {
 })
 ```
 
-## Add Epilogue
+## Add Finale
 
-[Epilogue](https://github.com/dchester/epilogue) creates flexible REST endpoints from Sequelize models within an Express app. If you ever coded REST endpoints you know how much repetition there is. D.R.Y. FTW!
+[Finale](https://github.com/tommybananas/finale) creates flexible REST endpoints from Sequelize models within an Express app. If you ever coded REST endpoints you know how much repetition there is. D.R.Y. FTW!
 
 ```javascript
-// Initialize epilogue
-epilogue.initialize({
+// Initialize finale
+finale.initialize({
   app: app,
   sequelize: database
 })
 
 // Create the dynamic REST resource for our Post model
-let userResource = epilogue.resource({
+let userResource = finale.resource({
   model: Post,
   endpoints: ['/posts', '/posts/:id']
 })
@@ -781,5 +781,6 @@ You can find the source code for the application developed in this post at <http
 
 Hit me up in the comments with any questions, and as always, follow [@oktadev](https://twitter.com/OktaDev) on Twitter to see all the cool content our dev team is creating.
 
+* Sep 6, 2019: Updated to migrate from Epilogue to Finale. [Epilogue is no longer maintained](http://disq.us/p/23uy4x0). Thanks to Chris Roberts for the tip. 
 * Apr 16, 2018: Updated to use the latest dependencies, including Okta's Vue SDK 1.0.0. See the code changes in [oktadeveloper/okta-vue-node-example-example#2](https://github.com/oktadeveloper/okta-vue-node-example/pull/2). Changes to this article can be viewed in [oktadeveloper/okta.github.io#1959](https://github.com/oktadeveloper/okta.github.io/pull/1959).
 * Mar 12, 2018: Updated to use the latest dependencies, including Bootstrap 4.0.0. See the code changes in [oktadeveloper/okta-vue-node-example-example#1](https://github.com/oktadeveloper/okta-vue-node-example/pull/1). Changes to this article can be viewed in [oktadeveloper/okta.github.io#1837](https://github.com/oktadeveloper/okta.github.io/pull/1837).
