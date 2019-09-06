@@ -781,6 +781,6 @@ You can find the source code for the application developed in this post at <http
 
 Hit me up in the comments with any questions, and as always, follow [@oktadev](https://twitter.com/OktaDev) on Twitter to see all the cool content our dev team is creating.
 
-* Sep 6, 2019: Updated to migrate from Epilogue to Finale. [Epilogue is no longer maintained](http://disq.us/p/23uy4x0). Thanks to Chris Roberts for the tip. 
+* Sep 6, 2019: Updated to migrate from Epilogue to Finale. [Epilogue is no longer maintained](http://disq.us/p/23uy4x0). Thanks to Chris Roberts for the tip! See the code changes in [oktadeveloper/okta-vue-node-example-example#3](https://github.com/oktadeveloper/okta-vue-node-example/pull/3). Changes to this article can be viewed in [oktadeveloper/okta.github.io#3040](https://github.com/oktadeveloper/okta.github.io/pull/3040).
 * Apr 16, 2018: Updated to use the latest dependencies, including Okta's Vue SDK 1.0.0. See the code changes in [oktadeveloper/okta-vue-node-example-example#2](https://github.com/oktadeveloper/okta-vue-node-example/pull/2). Changes to this article can be viewed in [oktadeveloper/okta.github.io#1959](https://github.com/oktadeveloper/okta.github.io/pull/1959).
 * Mar 12, 2018: Updated to use the latest dependencies, including Bootstrap 4.0.0. See the code changes in [oktadeveloper/okta-vue-node-example-example#1](https://github.com/oktadeveloper/okta-vue-node-example/pull/1). Changes to this article can be viewed in [oktadeveloper/okta.github.io#1837](https://github.com/oktadeveloper/okta.github.io/pull/1837).
