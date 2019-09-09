@@ -1,0 +1,64 @@
+name: Test & Deploy
+
+on: [push, pull_request]
+jobs:
+  test-and-deploy:
+    name: Test & Deploy
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v1
+
+    - name: Set up node and npm
+      uses: actions/setup-node@v1
+      with:
+        version: 12.9.1
+
+    - name: Install node dependencies
+      run: npm install
+
+    - name: Set up ruby and bundler
+      uses: actions/setup-ruby@v1
+      with:
+        version: 2.6
+
+    - name: Install ruby dependencies
+      run: |
+        gem install bundler
+        bundle install
+
+    - name: Set up python and pip
+      uses: actions/setup-python@v1
+      with:
+        version: 3.7
+        architecture: x64
+
+    - name: Install AWS CLI
+      run: pip install --user awscli
+
+    - name: Build the blog
+      run: npm run build-prod
+
+    - name: Run tests
+      run: |
+        npm run markdown-lint
+        if ! bundle exec ./scripts/htmlproofer.rb;
+        then
+          echo "Failed HTML link validation."
+          exit 1;
+        else
+          echo -e "\xE2\x9C\x94 No broken internal/external links!"
+          exit 0;
+        fi
+
+    - name: Prep for Deploy
+      run: npm run prep-for-deploy
+
+    - name: Deploy
+      env:
+        AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        AWS_S3_BUCKET: ${{ secrets.AWS_S3_BUCKET }}
+      if: success() && github.event_name == 'push' && github.ref == 'refs/heads/source'
+      run: |
+        aws s3 sync --content-type 'text/html' --sse --size-only --acl public-read dist/blog s3://$AWS_S3_BUCKET/blog
+        aws s3 sync --exclude 'blog' --sse --size-only --acl public-read dist s3://$AWS_S3_BUCKET

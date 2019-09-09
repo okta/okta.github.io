@@ -13,7 +13,7 @@ image: blog/best-travel-tips/the-best-travel-tips-for-people-in-tech.png
 
 Here on the Okta Developer Relations team, we travel a lot (like, a lot) and we've learned a few things to make it easy. We've tried out countless suggestions over the years and I've rounded up the very best ones from my team to share with software developers getting their travel groove on. It's all about making the trip less stressful and more enjoyable, and these tips are sure to get you well on your way - wherever your final destination may be. Without further ado, here are the best travel tips for people in tech!
 
-{% img blog/best-travel-tips/oktatraveltips.png alt:"Cruise Ship Internet Diagram" width:"500" %}{: .center-image }
+{% img blog/best-travel-tips/oktatraveltips.png alt:"Travel Tips Leading Graphic" width:"500" %}{: .center-image }
 
 ## Travel Planning Tips
 
@@ -115,7 +115,7 @@ Bonus: You don't have to switch devices as the phone is the primary.
 
 ## Jet, set, go
 
-Got any other travel tips for us? Comment below to share with the rest of us geeks. Happy trails!
+You are well on your way to travel like the pros! Got any other travel tips for us? Comment below to share with the rest of us geeks. Happy trails!
 
 ## Learn More Development Tips from Okta
 

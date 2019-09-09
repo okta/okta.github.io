@@ -885,9 +885,10 @@ You can find the completed source code for this tutorial on GitHub at [oktadevel
 
 If you're interested in learning more about microservices, or modern application development in Spring, I encourage you to check out these resources:
 
-* [Build and Secure Microservices with Spring Boot 2.0 and OAuth 2.0](https://developer.okta.com/blog/2018/05/17/microservices-spring-boot-2-oauth)
-* [Developer a Microservices Architecture with JHipster and OAuth 2.0](https://developer.okta.com/blog/2018/03/01/develop-microservices-jhipster-oauth)
-* [Build a Microservices Architecture for Microbrews with Spring Boot ](https://developer.okta.com/blog/2017/06/15/build-microservices-architecture-spring-boot)
+* [Java Microservices with Spring Boot and Spring Cloud](/blog/2019/05/22/java-microservices-spring-boot-spring-cloud)
+* [Java Microservices with Spring Cloud Config and JHipster](/blog/2019/05/23/java-microservices-spring-cloud-config)
+* [Secure Reactive Microservices with Spring Cloud Gateway](/blog/2019/08/28/reactive-microservices-spring-cloud-gateway)
+* [Build a Microservice Architecture with Spring Boot and Kubernetes](/blog/2019/04/01/spring-boot-microservices-with-kubernetes)
 * [Spring Boot 2.1: Outstanding OIDC, OAuth 2.0, and Reactive API Support](/blog/2018/11/26/spring-boot-2-dot-1-oidc-oauth2-reactive-apis)
 * [Build a Reactive App with Spring Boot and MongoDB](/blog/2019/02/21/reactive-with-spring-boot-mongodb)
 

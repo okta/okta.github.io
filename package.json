@@ -6,23 +6,18 @@
     "dist"
   ],
   "scripts": {
-    "clean": "node scripts/clean",
-    "pregenerate": "npm run clean",
     "generate": "cross-env-shell PID_FINDER=okta_github_io JEKYLL_ENV=production bundle exec jekyll",
     "build-prod": "npm run generate build -- --verbose",
     "start": "npm run generate serve -- --incremental --future",
-    "pretest": "npm run generate serve -- --no-watch & wait-on http://localhost:4000 && npm run test:update-web-driver",
-    "test-only": "protractor tests/selenium/conf.js",
-    "test:update-web-driver": "./node_modules/protractor/bin/webdriver-manager update --versions.standalone 3.141.59 --gecko false",
-    "test": "npm run test-only || (npm run stop && exit 1)",
-    "posttest": "npm run stop",
-    "stop": "if-env CI=true && exit 0 || (pkill -SIGINT -f 'okta_github_io|webdriver-manager/selenium')",
     "markdown-lint": "node scripts/lint",
     "find-missing-slashes": "node scripts/find-missing-slashes",
-    "post-build-lint": "bash scripts/post-build-lint.sh",
-    "update-event-types": "bash scripts/update-event-types.sh"
+    "prep-for-deploy": "bash scripts/prep-for-deploy.sh",
+    "dev": "node scripts/dev-clean && npm run start",
+    "dev-restore": "node scripts/dev-restore",
+    "post": "node scripts/post"
   },
   "pre-push": [
+    "dev-restore",
     "markdown-lint"
   ],
   "repository": {
@@ -36,16 +31,12 @@
   },
   "homepage": "https://github.com/oktadeveloper/okta.github.io#readme",
   "devDependencies": {
-    "chai": "4.2.0",
-    "chai-as-promised": "*",
     "chalk": "2.4.2",
     "cross-env": "5.2.0",
-    "if-env": "1.0.4",
-    "mocha": "6.1.4",
+    "fs-extra": "^8.1.0",
     "pre-push": "0.1.1",
-    "protractor": "5.4.2",
     "recursive-readdir": "2.2.2",
-    "remove": "0.1.5",
-    "wait-on": "3.2.0"
+    "simple-git": "^1.126.0",
+    "yargs": "^14.0.0"
   }
 }
