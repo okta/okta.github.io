@@ -1,7 +1,7 @@
 ---
 layout: null
 ---
-{%- assign tweetIndex = 0 -%}
+{%- assign tweetIndex = 1 -%}
 {%- assign posts = site.posts | reverse -%}
 {%- for post in posts -%}
   {%- assign tags = post.tags | join: ' ' -%}
