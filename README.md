@@ -1,7 +1,3 @@
-[<img src="https://devforum.okta.com/uploads/oktadev/original/1X/0c6402653dfb70edc661d4976a43a46f33e5e919.png" align="right" width="256px"/>][doc]
-
-[![Support](https://img.shields.io/badge/support-developer%20forum-blue.svg)][devforum] [![Build Status](https://travis-ci.org/oktadeveloper/okta.github.io.svg?branch=source)](https://travis-ci.org/oktadeveloper/okta.github.io)
-
 # Okta Developer Blog
 
 The [Okta Developer Blog][blog] is awesome. You should check it out! This is the source code repository for it.
