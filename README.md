@@ -1,10 +1,10 @@
 # Okta Developer Blog
 
-The [Okta Developer Blog][blog] is awesome. You should check it out! This is the source code repository for it.
+The [Okta Developer Blog](https://developer.okta.com/blog) is awesome. You should check it out! This is the source code repository for it.
 
 If you're having problems running one of the tutorials for a blog post, please create an issue in this project, or leave a comment on the blog post.
 
-If you have questions or need help with Okta's APIs or SDKs, please post to our **[developer forums][devforum]**. If you think you've encountered a bug in one of our SDKs, please create a GitHub issue for that SDK.
+If you have questions or need help with Okta's APIs or SDKs, please post to [StackOverflow](https://stackoverflow.com/questions/tagged/okta). If you think you've encountered a bug in one of our SDKs, please create a GitHub issue for that SDK.
 
 If you are looking for Okta's developer documentation, that has moved to [@okta/okta-developer-docs](https://github.com/okta/okta-developer-docs).
 
@@ -20,9 +20,6 @@ The wiki will show you how to [set up your local environment](https://github.com
 - Build the site and start a development server with `npm start`
 - Visit [localhost:4000](http://localhost:4000) in your browser
 
-[doc]: https://developer.okta.com
-[blog]: https://developer.okta.com/blog
-[devforum]: https://devforum.okta.com
 
 ## Post Utilities
 
