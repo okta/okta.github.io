@@ -841,4 +841,4 @@ Now that you're on a roll learning new stuff, keep it going with these other pos
 - [Modern Token Authentication in Node with Express](https://developer.okta.com/blog/2019/02/14/modern-token-authentication-in-node-with-express)
 - [Build a Simple REST API with Node and OAuth 2.0](https://developer.okta.com/blog/2018/08/21/build-secure-rest-api-with-node)
 
-Questions? Requests for a future post? Drop them in the comments! And don't forget to follow [@oktadev on Twitter](https://twitter.com/oktadev) and [subscribe on Youtube](https://www.youtube.com/channel/UC5AMiWqFVFxF1q9Ya1FuZ_Q).
+Questions? Requests for a future post? Drop them in the comments! And don't forget to follow [@oktadev on Twitter](https://twitter.com/oktadev) and [subscribe on Youtube](https://www.youtube.com/channel/UC5AMiWqFVFxF1q9Ya1FuZ_Q). =)
