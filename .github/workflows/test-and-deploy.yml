@@ -58,7 +58,7 @@ jobs:
         AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
         AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         AWS_S3_BUCKET: ${{ secrets.AWS_S3_BUCKET }}
-      if: success() && github.event_name == 'push' && github.ref == 'refs/heads/source'
+      if: success() && github.event_name == 'push' && github.ref == 'refs/heads/master'
       run: |
         aws s3 sync --content-type 'text/html' --sse --size-only --acl public-read dist/blog s3://$AWS_S3_BUCKET/blog
         aws s3 sync --exclude 'blog' --sse --size-only --acl public-read dist s3://$AWS_S3_BUCKET
